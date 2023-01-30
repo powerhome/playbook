@@ -1,8 +1,48 @@
 @import "playbook-ui/dist/tokens/colors";
 @import "playbook-ui/dist/tokens/spacing";
+@import "playbook-ui/dist/tokens/shadows";
+@import url("https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css");
+@import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.css");
+
 
 .pb_map {
   height: 400px;
+
+  .map-zoom-button {
+    position: absolute;
+    right: 10px;
+    top: 170px;
+    margin: 0px auto;
+    width: 20px;
+    height: 15px;
+    padding: 15px;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    background: $white;
+    color: black;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .maplibregl-ctrl-zoom-in,
+  .maplibregl-ctrl-zoom-out,
+  .maplibregl-ctrl-compass,
+  .mapbox-gl-draw_ctrl-draw-btn {
+    svg {
+      fill: $slate !important;
+  }
+    
+    color: $slate;
+
+    &:hover {
+      box-shadow: $shadow-deep;
+      border-color: $slate;
+    }
+  }
 
   .map_popup {
     .maplibregl-popup-content {

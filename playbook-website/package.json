@@ -8,6 +8,7 @@
     "release": "RAILS_ENV=production NODE_ENV=production ./bin/webpack"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-draw": "^1.3.0",
     "@rails/webpacker": "5.2.1",
     "maplibre-gl": "^2.4.0",
     "playbook-ui": ">= 1",
