@@ -17,7 +17,7 @@ import MultiValue from './components/MultiValue'
 import Option from './components/Option'
 import Placeholder from './components/Placeholder'
 import ValueContainer from './components/ValueContainer'
-import { Caption } from '../'
+import Caption from '../pb_caption/_caption'
 
 import { noop } from '../utilities/props'
 
