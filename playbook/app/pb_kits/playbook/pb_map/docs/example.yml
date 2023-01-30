@@ -4,4 +4,5 @@ examples:
   react:
   - map_default: Default
   - map_with_buttons: Map With Buttons
+  - map_custom_buttons: Map With Custom Buttons
   

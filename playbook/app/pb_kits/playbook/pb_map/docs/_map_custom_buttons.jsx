@@ -3,7 +3,7 @@ import Map from '../_map'
 
 import maplibregl from 'maplibre-gl'
 
-const MapDefault = () => {
+const MapCustomButtons = () => {
 
   const mapContainerRef = useRef(null)
 
@@ -28,10 +28,25 @@ const MapDefault = () => {
         //add controls
         map.addControl(new maplibregl.NavigationControl({showCompass: false}))
 
+        //add custom buttons for zoom in and out control
+        map.on('load', function () {
+            const zoomBtn = document.querySelector(".map-custom-buttons-example").querySelector(".maplibregl-ctrl-zoom-in")
+            const zoomOutBtn = document.querySelector(".map-custom-buttons-example").querySelector(".maplibregl-ctrl-zoom-out")
+            const currentSvg = document.querySelector(".map-custom-buttons-example").querySelectorAll(".maplibregl-ctrl-icon")
+            currentSvg.forEach(element => element.remove())
+            const zoomIcon = document.createElement("i")
+            zoomIcon.classList.add("pb_icon_kit", "far", "fa-fw", "fa-plus", "fa-2x", "map-custom-icon")
+            zoomBtn.append(zoomIcon)
+            const zoomOutIcon = document.createElement("i")
+            zoomOutIcon.classList.add("pb_icon_kit", "far", "fa-fw", "fa-minus", "fa-2x", "map-custom-icon")
+            zoomOutBtn.append(zoomOutIcon)
+        })
+
       }
     }, [])
 return ( 
   <Map>
+    <div className="map-custom-buttons-example">
        <div
            ref={mapContainerRef}
            style={{
@@ -42,8 +57,9 @@ return (
               bottom: 0,
            }}
         />
+        </div>
     </Map>
 )
 }
 
-export default MapDefault
+export default MapCustomButtons

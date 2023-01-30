@@ -28,7 +28,7 @@ const MapWithButtons = () => {
         .addTo(map);
 
         //add controls
-        map.addControl(new maplibregl.NavigationControl())
+        map.addControl(new maplibregl.NavigationControl({showCompass: false}))
 
         //add attributioncontrols
         map.addControl(new maplibregl.AttributionControl({

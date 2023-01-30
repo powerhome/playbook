@@ -11,7 +11,7 @@
   .map-zoom-button {
     position: absolute;
     right: 10px;
-    top: 170px;
+    top: 145px;
     margin: 0px auto;
     width: 20px;
     height: 15px;
@@ -41,4 +41,25 @@
       }
     }
   }
+
+
+.map-custom-buttons-example {
+
+  .maplibregl-ctrl-group button {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      box-shadow: $shadow-deep;
+      border-color: $slate;
+    }
+  }
+
+  .map-custom-icon {
+    color: $slate;
+  }
+}
+
 }

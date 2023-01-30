@@ -1,0 +1,1 @@
+The default zoom in and out buttons for MapLibre can also be targeted  with javascript and replaced with Fontawesome Icons that can be styled with a classname.
