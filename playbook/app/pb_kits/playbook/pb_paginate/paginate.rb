@@ -3,9 +3,9 @@
 module Playbook
   module PbPaginate
     class Paginate < ::Playbook::KitBase
-      prop :strategy # Need to add protection
-      prop :model # Need to add protection
-      prop :view # Need to add protection
+      prop :strategy, type: Playbook::Props::String
+      prop :model
+      prop :view
 
       def classname
         generate_classname("pb_paginate")
