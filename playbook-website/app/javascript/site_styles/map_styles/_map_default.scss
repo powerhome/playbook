@@ -28,22 +28,6 @@
   }
 
 
-  .maplibregl-ctrl-zoom-in,
-  .maplibregl-ctrl-zoom-out,
-  .maplibregl-ctrl-compass,
-  .mapbox-gl-draw_ctrl-draw-btn {
-    svg {
-      fill: $slate !important;
-  }
-    
-    color: $slate;
-
-    &:hover {
-      box-shadow: $shadow-deep;
-      border-color: $slate;
-    }
-  }
-
   .map_popup {
     .maplibregl-popup-content {
       padding: $space_sm;
