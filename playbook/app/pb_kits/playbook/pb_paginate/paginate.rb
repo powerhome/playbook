@@ -3,7 +3,6 @@
 module Playbook
   module PbPaginate
     class Paginate < ::Playbook::KitBase
-      prop :strategy, type: Playbook::Props::String
       prop :model
       prop :view
 

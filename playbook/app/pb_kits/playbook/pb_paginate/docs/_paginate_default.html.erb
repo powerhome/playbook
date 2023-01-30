@@ -13,7 +13,7 @@
 <br><br>
 
 <%= pb_rails("title", props: { size: 4, text: "Playbook Kit (Passthrough)"}) %>
-<%= pb_rails("paginate", props: { strategy: "will_paginate", model: @users, view: self }) %>
+<%= pb_rails("paginate", props: { model: @users, view: self }) %>
 <%= pb_rails("body") do %>
   Same...You need to also add: <code>require "playbook/pagination_renderer"</code> in your app to use.
 <% end %>
