@@ -1,77 +1,15 @@
-import React, { useState } from "react"
-import {
-  SandpackProvider,
-  SandpackLayout,
-  SandpackCodeEditor,
-  SandpackPreview,
-} from "@codesandbox/sandpack-react"
+import React from 'react'
 
-import { CircleIconButton, Card, Caption } from "playbook-ui"
+import { Title } from 'playbook-ui'
 
-const code = `import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import "playbook-ui/dist/reset.css";
-import "playbook-ui/dist/playbook.css";
-import "playbook-ui/dist/fonts/fontawesome-min";
-import "playbook-ui/dist/fonts/regular-min";
-const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  rootElement
-);
-`
-
-const KitDocs = ({ kit, source, exampleTitle }) => {
-  const [showCode, setShowCode] = useState(false)
-  const updatedFileContent = source.replace(/\'..\/..\/?\'/g, "'playbook-ui'").replace(/\"..\/..\/?\"/g, "'playbook-ui'")
-  const files = {
-    "/App.js": {
-      code: updatedFileContent,
-    },
-    "/index.js": {
-      code: code,
-      hidden: true,
-    },
-  }
-
+const KitDocs = ({ kit }) => {
   return (
     <>
-      <Card className='pb--doc' padding='none'>
-        <SandpackProvider
-          theme='dark'
-          template='react'
-          files={files}
-          customSetup={{
-            dependencies: {
-              'playbook-ui': 'latest',
-            },
-          }}
-        >
-          <SandpackLayout style={{backgroundColor: 'white', border: 'none'}}>
-            <div style={{ width: '100%'}}>
-              <div className='pb--kit-example'>
-                <Caption text={exampleTitle}></Caption>
-                <SandpackPreview
-                  style={{height: '450px'}}
-                  showOpenInCodeSandbox={false}
-                  showRefreshButton={false}
-                  actionsChildren={
-                    <CircleIconButton
-                      icon='pen'
-                      variant='secondary'
-                      onClick={() => setShowCode(!showCode)}
-                    />
-                  }
-                />
-              </div>
-            </div>
-            { showCode && <SandpackCodeEditor /> }
-          </SandpackLayout>
-        </SandpackProvider>
-      </Card>
+      <Title
+          size={1}
+          tag="h1"
+          text={kit}
+      />
     </>
   )
 }
