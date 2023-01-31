@@ -13,7 +13,7 @@ const MapDefault = () => {
         } else {
          const map = new maplibregl.Map({
             container: mapContainerRef.current,
-            style: 'https://api.maptiler.com/maps/positron/style.json?key=g8IQm57iZcbJ6Ky1HmG4',
+            style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
             center: [-75.379143, 39.831200],
             zoom: 13,
         })

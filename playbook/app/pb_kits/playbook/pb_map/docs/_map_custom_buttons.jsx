@@ -13,7 +13,7 @@ const MapCustomButtons = () => {
         } else {
          const map = new maplibregl.Map({
             container: mapContainerRef.current,
-            style: 'https://api.maptiler.com/maps/positron/style.json?key=g8IQm57iZcbJ6Ky1HmG4',
+            style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
             center: [-75.379143, 39.831200],
             zoom: 13,
         })
@@ -35,10 +35,10 @@ const MapCustomButtons = () => {
             const currentSvg = document.querySelector(".map-custom-buttons-example").querySelectorAll(".maplibregl-ctrl-icon")
             currentSvg.forEach(element => element.remove())
             const zoomIcon = document.createElement("i")
-            zoomIcon.classList.add("pb_icon_kit", "far", "fa-fw", "fa-plus", "fa-2x", "map-custom-icon")
+            zoomIcon.classList.add("pb_icon_kit", "far", "fa-fw", "fa-plus", "map-custom-icon")
             zoomBtn.append(zoomIcon)
             const zoomOutIcon = document.createElement("i")
-            zoomOutIcon.classList.add("pb_icon_kit", "far", "fa-fw", "fa-minus", "fa-2x", "map-custom-icon")
+            zoomOutIcon.classList.add("pb_icon_kit", "far", "fa-fw", "fa-minus", "map-custom-icon")
             zoomOutBtn.append(zoomOutIcon)
         })
 
