@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbPaginate
-    class Paginate < ::Playbook::KitBase
+  module PbPagination
+    class Pagination < ::Playbook::KitBase
       prop :model
       prop :view
 

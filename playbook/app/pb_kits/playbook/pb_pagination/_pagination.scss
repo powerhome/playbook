@@ -24,7 +24,8 @@
   }
   li:last-child > a, li:last-child > span {
     padding: 7px 13px;
-    border-left: $border_rad_lightest solid $border_light;
+    // border-left: $border_rad_lightest solid $border_light;
+    box-shadow: -1px 0 0 $border_light;
     z-index: 2;
   }
   a {

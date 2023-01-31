@@ -2,10 +2,10 @@
 
 require "will_paginate"
 require "playbook/pagination_renderer"
-require_relative "../../../../app/pb_kits/playbook/pb_paginate/paginate"
+require_relative "../../../../app/pb_kits/playbook/pb_pagination/pagination"
 
-RSpec.describe Playbook::PbPaginate::Paginate do
-  subject { Playbook::PbPaginate::Paginate }
+RSpec.describe Playbook::PbPagination::Pagination do
+  subject { Playbook::PbPagination::Pagination }
 
   it { is_expected.to define_prop(:model) }
   it { is_expected.to define_prop(:view) }
