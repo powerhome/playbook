@@ -7,7 +7,7 @@
 
 <div class="kit-show-wrapper">
   <% @examples.each do |example| %>
-    <%= react_component("KitDocs", kit: @kit, source: get_source(example.keys.first), exampleTitle: example.values.first) %>
+    <%= react_component("KitDemo", kit: @kit, source: get_source(example.keys.first), exampleTitle: example.values.first) %>
   <% end %>
 
   <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
