@@ -1,10 +1,9 @@
 /* @flow */
 
-import React from 'react'
+import React, {useRef} from 'react'
 import classnames from 'classnames'
 
-import type { InputCallback } from '../types'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 import {
   buildAriaProps,
   buildCss,
@@ -19,13 +18,13 @@ import Flex from '../pb_flex/_flex'
 import Radio from '../pb_radio/_radio'
 
 type SelectableCardProps = {
-  aria?: object,
-  checked: boolean,
-  children?: array<React.ReactChild>,
+  aria?: { [key: string]: string },
+  checked?: boolean,
+  children?: React.ReactChild[] | React.ReactChild,
   className?: string,
-  customIcon?: SVGElement,
+  customIcon?: {[key: string] :SVGElement},
   dark?: boolean,
-  data: object,
+  data?: { [key: string]: string },
   disabled?: boolean,
   error?: boolean,
   icon?: boolean,
@@ -33,32 +32,31 @@ type SelectableCardProps = {
   inputId?: string,
   multi?: boolean,
   name?: string,
-  onChange: InputCallback<HTMLInputElement>,
+  onChange: (event: React.FormEvent<HTMLInputElement>) => void,
   text?: string,
   value?: string,
   variant?: string,
-}
+} & GlobalProps
 
-const SelectableCard = ({
-  aria = {},
-  checked = false,
-  children,
-  className,
-  customIcon,
-  dark = false,
-  data = {},
-  disabled = false,
-  error = false,
-  icon = false,
-  inputId = null,
-  multi = true,
-  name,
-  onChange = noop,
-  text,
-  value,
-  variant = 'default',
-  ...props
-}: SelectableCardProps) => {
+const SelectableCard = (props: SelectableCardProps) => {
+  const {
+    aria = {},
+    checked = false,
+    className,
+    customIcon,
+    dark = false,
+    data = {},
+    disabled = false,
+    error = false,
+    icon = false,
+    inputId = null,
+    multi = true,
+    name,
+    onChange = noop,
+    text,
+    value,
+    variant = 'default',
+  } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
 
@@ -87,7 +85,7 @@ const SelectableCard = ({
     }
   }
 
-  const inputRef = React.createRef()
+  const inputRef = useRef(null)
   // Delegate clicks to hidden input from visible one
   const handleClick = () => {
     inputRef.current.click()
@@ -96,7 +94,15 @@ const SelectableCard = ({
   const inputType = multi ? 'checkbox' : 'radio'
   const inputIdPresent = inputId !== null ? inputId : name
   const Input = multi ? Checkbox : Radio
-  const labelProps = variant === 'displayInput' ? Object.assign(props, { padding: 'none' }) : props
+
+  const filteredProps = {...props}
+  delete filteredProps?.inputId
+  delete filteredProps?.children
+  delete filteredProps?.icon
+  delete filteredProps?.error
+  delete filteredProps?.dark
+  delete filteredProps?.multi
+  const labelProps: GlobalProps = variant === 'displayInput' ? { ...filteredProps, padding: 'none' } : { ...filteredProps }
 
   return (
     <div
@@ -105,7 +111,6 @@ const SelectableCard = ({
         className={classes}
     >
       <input
-          {...props}
           checked={checked}
           disabled={disabled}
           id={inputIdPresent}
@@ -114,6 +119,7 @@ const SelectableCard = ({
           ref={inputRef}
           type={inputType}
           value={value}
+          {...filteredProps}
       />
 
       <label
@@ -121,8 +127,7 @@ const SelectableCard = ({
           htmlFor={inputIdPresent}
       >
         <div className="buffer">
-          <Choose>
-            <When condition={variant === 'displayInput'}>
+              {variant === 'displayInput' ? 
               <Flex vertical="center">
                 <Flex
                     orientation="column"
@@ -130,7 +135,9 @@ const SelectableCard = ({
                     paddingRight="xs"
                     vertical="center"
                 >
-                  <Input dark={dark}>
+                  <Input
+                      dark={dark}
+                  >
                     <input
                         checked={checked}
                         disabled={disabled}
@@ -146,14 +153,12 @@ const SelectableCard = ({
                     padding="sm"
                     status={error ? 'negative' : null}
                 >
-                  {text || children}
+                  {text ||props.children}
                 </Card.Body>
               </Flex>
-            </When>
-            <Otherwise>
-              {text || children}
-            </Otherwise>
-          </Choose>
+              :
+            text || props.children
+              }
           {displayIcon()}
         </div>
       </label>
