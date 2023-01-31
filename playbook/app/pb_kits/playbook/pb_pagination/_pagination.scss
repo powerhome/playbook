@@ -3,32 +3,35 @@
 @import "../tokens/border_radius";
 @import "../tokens/shadows";
 
+$pagination_padding: 7px 13px 6px 13px;
+$top_bottom_radius: 0px;
+
 .pb_pagination {
   display: inline-block;
   border-radius: $border_rad_light;
   border: $border_rad_lightest solid $border_light;
   background-color: $white;
-  transition: background $transition_default ease, color $transition_default ease;
   padding: $space_xxs 0px;
+  cursor: pointer;
   li {
     display: inline;  
     > a, li > span {
-    padding: 7px 13px 6px 13px;
+    padding: $pagination_padding;
     text-decoration: none;
   }}
   li:first-child > a, li:first-child > span  {
-    padding: 7px 13px 6px 13px;
+    padding: $pagination_padding;
     border-right: $border_rad_lightest solid $border_light;
     z-index: 2;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-top-right-radius: $top_bottom_radius;
+    border-bottom-right-radius: $top_bottom_radius;
   }
   li:last-child > a, li:last-child > span {
-    padding: 7px 13px 6px 13px;
+    padding: $pagination_padding;
     border-left: $border_rad_lightest solid $border_light;
     z-index: 2;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
+    border-top-left-radius: $top_bottom_radius;
+    border-bottom-left-radius: $top_bottom_radius;
   }
   a {
     color: $text_lt_default;
@@ -54,14 +57,14 @@
     background-color: $primary;
     border-radius: $border_rad_light;
     color: #fff;
-    padding: 7px 13px 6px 13px;
+    padding: $pagination_padding;
     border: 0;
     text-decoration: none;
     font-weight: $bold;
     font-size: $text_small;
   }
   .disabled > span {
-    padding: 7px 10px;
+    padding: $pagination_padding;
     font-size: $text_small;
   }
 }
