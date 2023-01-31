@@ -1,0 +1,12 @@
+name: GitHub Actions Alpha Version
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on:
+  issues:
+    types:
+      - labeled
+jobs:
+  Explore-GitHub-Actions:
+    if: github.event.label.name == 'alpha'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 Hello Alpha"
