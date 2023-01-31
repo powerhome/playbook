@@ -16,7 +16,6 @@ import KitSearch from '../components/KitSearch'
 import SnippetToggle from '../components/SnippetToggle'
 import Sidebar from '../components/Sidebar'
 import KitDocs from '../components/KitDocs'
-import KitDemo from '../components/KitDemo'
 
 WebpackerReact.setup({
   DarkModeToggle,
@@ -24,7 +23,6 @@ WebpackerReact.setup({
   SnippetToggle,
   Sidebar,
   KitDocs,
-  KitDemo,
 })
 
 // Produce image assets
