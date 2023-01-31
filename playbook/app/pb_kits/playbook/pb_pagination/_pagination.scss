@@ -8,33 +8,34 @@
   border-radius: $border_rad_light;
   border: $border_rad_lightest solid $border_light;
   background-color: $white;
+  transition: background $transition_default ease, color $transition_default ease;
   padding: $space_xxs 0px;
-  margin: $space_xs 0px;
   li {
     display: inline;  
     > a, li > span {
     padding: 7px 13px 6px 13px;
     text-decoration: none;
-    border: 0;
   }}
   li:first-child > a, li:first-child > span  {
-    padding: 7px 13px;
+    padding: 7px 13px 6px 13px;
     border-right: $border_rad_lightest solid $border_light;
     z-index: 2;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
   li:last-child > a, li:last-child > span {
-    padding: 7px 13px;
-    // border-left: $border_rad_lightest solid $border_light;
-    box-shadow: -1px 0 0 $border_light;
+    padding: 7px 13px 6px 13px;
+    border-left: $border_rad_lightest solid $border_light;
     z-index: 2;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
   }
   a {
     color: $text_lt_default;
     font-size: $text_small;
     font-weight: $regular;
     border: none;
-    margin-left: $border_rad_lightest;
-    margin-right: $border_rad_lightest;
+    transition: all $transition_default ease-out;
 
     &:hover {
       background-color: $active_light;
@@ -42,9 +43,11 @@
       border-radius: $border_rad_light;
     }
 
-    &:focus {
-      outline: $border_rad_lightest solid $primary;
-      border-radius: $border_rad_light;
+    &:focus-visible {
+      outline: 1px solid $primary;
+      border-color: transparent !important;
+      border-radius: $border_rad_light !important;
+      transition: none
     }
   }
   .active > span {
@@ -56,10 +59,6 @@
     text-decoration: none;
     font-weight: $bold;
     font-size: $text_small;
-
-    &:hover {
-      box-shadow: $shadow_deeper;
-    }
   }
   .disabled > span {
     padding: 7px 10px;
