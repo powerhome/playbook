@@ -1,4 +1,4 @@
-name: GitHub Actions Alpha Version
+name: Alpha Version
 run-name: ${{ github.actor }} is creating an Alpha Version 🚀
 on:
   pull_request:
