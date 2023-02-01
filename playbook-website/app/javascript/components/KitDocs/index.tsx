@@ -8,32 +8,12 @@ import {
 
 import { CircleIconButton, Card, Caption } from "playbook-ui"
 
-const code = `import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import "playbook-ui/dist/reset.css";
-import "playbook-ui/dist/playbook.css";
-import "playbook-ui/dist/fonts/fontawesome-min";
-import "playbook-ui/dist/fonts/regular-min";
-const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  rootElement
-);
-`
-
-const KitDocs = ({ kit, source, exampleTitle }) => {
+const KitDocs = ({ source, exampleTitle }) => {
   const [showCode, setShowCode] = useState(false)
   const updatedFileContent = source.replace(/\'..\/..\/?\'/g, "'playbook-ui'").replace(/\"..\/..\/?\"/g, "'playbook-ui'")
   const files = {
     "/App.js": {
       code: updatedFileContent,
-    },
-    "/index.js": {
-      code: code,
-      hidden: true,
     },
   }
 
@@ -48,6 +28,14 @@ const KitDocs = ({ kit, source, exampleTitle }) => {
             dependencies: {
               'playbook-ui': 'latest',
             },
+          }}
+          options={{
+            externalResources: [
+              'https://unpkg.com/playbook-ui@latest/dist/playbook.css',
+              'https://unpkg.com/playbook-ui@latest/dist/reset.css',
+              'https://unpkg.com/playbook-ui@latest/dist/fonts/fontawesome-min',
+              'https://unpkg.com/playbook-ui@latest/dist/fonts/regular-min',
+            ],
           }}
         >
           <SandpackLayout style={{backgroundColor: 'white', border: 'none'}}>
