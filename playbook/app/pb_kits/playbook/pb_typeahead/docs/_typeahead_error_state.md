@@ -1,0 +1,1 @@
+The `error` prop allows you to pass an error message that will be displayed below the typeahead. This is an optional prop and if any value is passed to it, it will display the error message as well as wrapping the typeahead itself with a red border.
