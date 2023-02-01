@@ -115,7 +115,7 @@ const Typeahead = ({
 
   const classes = `pb_typeahead_kit react-select ${globalProps(props)}`
   const inlineClass = selectProps.inline ? 'inline' : null
-  const errorClass = error !== "" ? "error" : null
+  const errorClass = error !== "" ? "error" : ""
 
   return (
     <div {...dataProps}
@@ -128,7 +128,8 @@ const Typeahead = ({
       />
       {error !== "" ? 
         <>
-          <Caption size='xs'
+          <Caption className='typeahead-error-caption'
+              size='xs'
               text={error} 
           />
         </>

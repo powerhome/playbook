@@ -8,6 +8,7 @@ examples:
     - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
     - typeahead_inline: Inline
     - typeahead_multi_kit: Multi Kit Options
+    - typeahead_error_state: Error State
 
   react:
     - typeahead_default: Default
