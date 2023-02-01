@@ -12,9 +12,8 @@ $top_bottom_radius: 0px;
   border: $border_rad_lightest solid $border_light;
   background-color: $white;
   padding: $space_xxs 0px;
-  cursor: pointer;
   li {
-    display: inline;  
+    display: inline;
     > a, li > span {
     padding: $pagination_padding;
     text-decoration: none;
@@ -50,7 +49,7 @@ $top_bottom_radius: 0px;
       outline: 1px solid $primary;
       border-color: transparent !important;
       border-radius: $border_rad_light !important;
-      transition: none
+      transition: none;
     }
   }
   .active > span {
