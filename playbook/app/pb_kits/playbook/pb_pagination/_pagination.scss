@@ -1,0 +1,69 @@
+@import "../tokens/colors";
+@import "../tokens/typography";
+@import "../tokens/border_radius";
+@import "../tokens/shadows";
+
+$pagination_padding: 7px 13px 6px 13px;
+$top_bottom_radius: 0px;
+
+.pb_pagination {
+  display: inline-block;
+  border-radius: $border_rad_light;
+  border: $border_rad_lightest solid $border_light;
+  background-color: $white;
+  padding: $space_xxs 0px;
+  li {
+    display: inline;
+    > a, li > span {
+    padding: $pagination_padding;
+    text-decoration: none;
+  }}
+  li:first-child > a, li:first-child > span  {
+    padding: $pagination_padding;
+    border-right: $border_rad_lightest solid $border_light;
+    z-index: 2;
+    border-top-right-radius: $top_bottom_radius;
+    border-bottom-right-radius: $top_bottom_radius;
+  }
+  li:last-child > a, li:last-child > span {
+    padding: $pagination_padding;
+    border-left: $border_rad_lightest solid $border_light;
+    z-index: 2;
+    border-top-left-radius: $top_bottom_radius;
+    border-bottom-left-radius: $top_bottom_radius;
+  }
+  a {
+    color: $text_lt_default;
+    font-size: $text_small;
+    font-weight: $regular;
+    border: none;
+    transition: all $transition_default ease-out;
+
+    &:hover {
+      background-color: $active_light;
+      color: $primary;
+      border-radius: $border_rad_light;
+    }
+
+    &:focus-visible {
+      outline: 1px solid $primary;
+      border-color: transparent !important;
+      border-radius: $border_rad_light !important;
+      transition: none;
+    }
+  }
+  .active > span {
+    background-color: $primary;
+    border-radius: $border_rad_light;
+    color: #fff;
+    padding: $pagination_padding;
+    border: 0;
+    text-decoration: none;
+    font-weight: $bold;
+    font-size: $text_small;
+  }
+  .disabled > span {
+    padding: $pagination_padding;
+    font-size: $text_small;
+  }
+}
