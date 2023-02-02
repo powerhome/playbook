@@ -17,7 +17,7 @@ import MultiValue from './components/MultiValue'
 import Option from './components/Option'
 import Placeholder from './components/Placeholder'
 import ValueContainer from './components/ValueContainer'
-import Caption from '../pb_caption/_caption'
+import Body from '../pb_body/_body'
 
 import { noop, buildDataProps } from '../utilities/props'
 
@@ -126,14 +126,13 @@ const Typeahead = ({
           onChange={handleOnChange}
           {...selectProps}
       />
-      {error !== "" ? 
-        <>
-          <Caption className='typeahead-error-caption'
-              size='xs'
-              text={error} 
-          />
-        </>
-      : null}
+      {error && <Body
+          className='typeahead-error-caption'
+          status="negative"
+          text={error}
+          variant={null}
+                />
+        }
     </div>
   )
 }
