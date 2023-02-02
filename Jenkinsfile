@@ -15,6 +15,17 @@ app.build(
     files: ["docker-compose.yml", "docker-compose.ci.yml"]
   ) { compose ->
     stage('Image Build') {
+      withCredentials([
+        usernamePassword(
+          credentialsId: 'playbook-ci-build-aws-creds',
+          usernameVariable: 'AWS_ACCESS_KEY_ID',
+          passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+        )
+      ]) {
+        sh "mkdir -p ~/.kube"
+        sh "playbook-website/bin/deployer sops --decrypt --output yarn.secrets.dec.env yarn.secrets.env"
+      }
+
       compose.buildAndPush()
     }
 
