@@ -227,9 +227,11 @@
 				height: 100%;
 				max-height: 100%;
 				max-width: none;
-				.dialog_body {
-					padding-bottom: $space_xl * 2 !important;
-				}	
+				//this empty div only has height when dialog is full height. 
+				//fix for dialog body content disappearing behind sticky footer
+				.dialog-pseudo-footer {
+					height: $space_xl * 2;
+				}
 				.dialog_footer {
 					position:fixed;
 					bottom: 0;
@@ -290,8 +292,10 @@
 			height: 100% !important;
 			max-height: 100% !important;
 			max-width: 100%;
-			.dialog_body {
-				padding-bottom: $space_xl * 2 !important;
+			//this empty div only has height when dialog is full height. 
+			//fix for dialog body content disappearing behind sticky footer
+			.dialog-pseudo-footer {
+				height: $space_xl * 2;
 			}
 			.dialog_footer {
 				position:fixed;
