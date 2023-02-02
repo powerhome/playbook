@@ -9,10 +9,6 @@ require_relative "application_controller"
 # Need Wade's input
 require "will_paginate"
 require "playbook/pagination_renderer"
-# Since we don't require it for clients should we make steps for them...
-# To require it if they want it? Boostrap renderer works this way
-# Nitro Example: https://github.com/powerhome/nitro-web/blob/master/components/nitro_theme/lib/nitro_theme.rb#L8-L10
-
 require "will_paginate/array" # Needed to show a fake pagination example
 
 class PagesController < ApplicationController
@@ -54,6 +50,7 @@ class PagesController < ApplicationController
   def kits
     params[:type] ||= "react"
     @type = params[:type]
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     render layout: "layouts/kits"
   end
 
