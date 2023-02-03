@@ -41,6 +41,8 @@ const DialogFooter = (props: DialogFooterProps) => {
       {separator &&
         <SectionSeparator />
       }
+      <div className="dialog-pseudo-footer">
+      </div>
       <Flex
           className={classnames(footerCSS, footerSpacing, className)}
           spacing={spacing}
