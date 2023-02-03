@@ -3,13 +3,11 @@
 require "yaml"
 require "redcarpet"
 require "rouge"
-
-require_relative "application_controller"
-
-# Need Wade's input
 require "will_paginate"
 require "playbook/pagination_renderer"
 require "will_paginate/array" # Needed to show a fake pagination example
+
+require_relative "application_controller"
 
 class PagesController < ApplicationController
   before_action :set_js, only: %i[visual_guidelines]
