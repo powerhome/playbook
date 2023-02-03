@@ -14,6 +14,7 @@ const TooltipDefaultReact = (props) => {
    >
     <FlexItem>
       <Tooltip 
+          className={"This is a custom className using the className prop"}
           placement='top' 
           text="Whoa. I'm a Tooltip" 
           zIndex={10}
