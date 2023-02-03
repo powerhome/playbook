@@ -3,6 +3,9 @@
 require "yaml"
 require "redcarpet"
 require "rouge"
+require "will_paginate"
+require "playbook/pagination_renderer"
+require "will_paginate/array" # Needed to show a fake pagination example
 
 require_relative "application_controller"
 
@@ -45,6 +48,7 @@ class PagesController < ApplicationController
   def kits
     params[:type] ||= "react"
     @type = params[:type]
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     render layout: "layouts/kits"
   end
 
@@ -66,6 +70,7 @@ class PagesController < ApplicationController
 
   def kit_show_rails
     @type = "rails"
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     render "pages/kit_show", layout: "layouts/kits"
   end
 
