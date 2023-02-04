@@ -60,6 +60,7 @@ kits:
     - badge
     - hashtag
     - pill
+  - pagination
   - popover
   - progress:
     - progress_pills
