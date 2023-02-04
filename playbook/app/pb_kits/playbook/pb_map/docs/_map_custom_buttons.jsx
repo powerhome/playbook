@@ -11,6 +11,7 @@ const MapCustomButtons = () => {
         alert('Your browser does not support MapLibre GL');
         } else {
          const map = new maplibregl.Map({
+            attributionControl: false,
             container: mapContainerRef.current,
             style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
             center: [-75.379143, 39.831200],
@@ -51,9 +52,13 @@ const MapCustomButtons = () => {
                 essential: true
                 });
               
-          })
-             
-          })
+          })  
+        })
+        
+        //add attributioncontrols
+        map.addControl(new maplibregl.AttributionControl({
+          compact: true
+          }));
 
       }
     }, [])
@@ -69,6 +74,7 @@ return (
               right: 0,
               top: 0, 
               bottom: 0,
+              // filter: 'invert(1) hue-rotate(180deg)'
            }}
         />
   </Map>

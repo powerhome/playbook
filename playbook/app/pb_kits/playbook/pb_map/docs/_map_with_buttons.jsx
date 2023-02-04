@@ -12,7 +12,6 @@ const MapWithButtons = () => {
         alert('Your browser does not support MapLibre GL');
         } else {
          const map = new maplibregl.Map({
-            attributionControl: false,
             container: mapContainerRef.current,
             style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
             center: [-75.379143, 39.831200],
@@ -28,11 +27,6 @@ const MapWithButtons = () => {
 
         //add controls
         map.addControl(new maplibregl.NavigationControl({showCompass: false}))
-
-        //add attributioncontrols
-        map.addControl(new maplibregl.AttributionControl({
-            compact: true
-            }));
 
         //Add polygon draw button using map-box-gl-draw plugin
         var draw = new MapboxDraw({
