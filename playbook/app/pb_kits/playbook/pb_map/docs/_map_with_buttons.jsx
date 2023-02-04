@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react'
 import Map from '../_map'
-import { Icon } from '../..'
 import maplibregl from 'maplibre-gl'
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 
@@ -44,29 +43,6 @@ const MapWithButtons = () => {
             }
             });
             map.addControl(draw);
-            
-            
-            //Add Zoom button
-            map.on('load', function () {
-            const button = document.querySelector("#zoom-button")
-            button.addEventListener('click', function () {
-               map.flyTo({
-                  center: [-75.379143, 39.831200],
-                  zoom: 13,
-                  bearing: 0,
-                  curve: 1, // change the speed at which it zooms out
-                  easing: function (t) {
-                  return t;
-                  },
-                  essential: true
-                  });
-                
-            })
-               
-            })
-        
-
-
       }
     }, [])
 
@@ -74,9 +50,6 @@ const MapWithButtons = () => {
     
 return ( 
   <Map>
-    <div className='map-zoom-button'
-        id="zoom-button"
-    ><Icon icon="eye"/></div>
        <div
            ref={mapContainerRef}
            style={{

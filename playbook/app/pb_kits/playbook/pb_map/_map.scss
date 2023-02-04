@@ -1,6 +1,45 @@
 @import "../tokens/typography";
+@import "../tokens/colors"; 
+@import "../tokens/shadows";
 
 .pb_map {
   font-family: $font_family_base !important;
+
+  .custom-nav-control {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+
+    .custom-nav-control-zoom {
+      border-radius: 3px;
+      border: $card_light;
+      box-shadow: $shadow_deep;
+      background: $white;
+    }
+
+    .pb_section_separator_kit_card_horizontal {
+      width: 100%
+    }
+
+    .map-zoom-in-button, 
+    .map-zoom-out-button,
+    .map-flyto-button {
+    padding: 10px;
+    text-align: center;
+    color: $text_lt_light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .map-flyto-button {
+      margin-top: 8px;
+      border-radius: 3px;
+      border: $card_light;
+      box-shadow: $shadow_deep;
+      background: $white;
+    }
+  }
 
 }

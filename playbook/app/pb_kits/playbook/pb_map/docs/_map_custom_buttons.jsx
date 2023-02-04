@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react'
 import Map from '../_map'
-
 import maplibregl from 'maplibre-gl'
 
 const MapCustomButtons = () => {
@@ -25,28 +24,43 @@ const MapCustomButtons = () => {
         .setPopup(new maplibregl.Popup({className: 'map_popup'}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
         .addTo(map);
 
-        //add controls
-        map.addControl(new maplibregl.NavigationControl({showCompass: false}))
-
         //add custom buttons for zoom in and out control
         map.on('load', function () {
-            const zoomBtn = document.querySelector(".map-custom-buttons-example").querySelector(".maplibregl-ctrl-zoom-in")
-            const zoomOutBtn = document.querySelector(".map-custom-buttons-example").querySelector(".maplibregl-ctrl-zoom-out")
-            const currentSvg = document.querySelector(".map-custom-buttons-example").querySelectorAll(".maplibregl-ctrl-icon")
-            currentSvg.forEach(element => element.remove())
-            const zoomIcon = document.createElement("i")
-            zoomIcon.classList.add("pb_icon_kit", "far", "fa-fw", "fa-plus", "map-custom-icon")
-            zoomBtn.append(zoomIcon)
-            const zoomOutIcon = document.createElement("i")
-            zoomOutIcon.classList.add("pb_icon_kit", "far", "fa-fw", "fa-minus", "map-custom-icon")
-            zoomOutBtn.append(zoomOutIcon)
+          const zoomInBtn = document.querySelector("#zoom-in-button")
+          zoomInBtn.addEventListener('click', function () {
+            map.zoomIn({duration: 1000})
+          })
+          const zoomOutBtn = document.querySelector("#zoom-out-button")
+          zoomOutBtn.addEventListener('click', function () {
+            map.zoomOut({duration: 1000})
+          })
         })
+
+        //Add Zoom button
+        map.on('load', function () {
+          const button = document.querySelector("#flyto-button")
+          button.addEventListener('click', function () {
+             map.flyTo({
+                center: [-75.379143, 39.831200],
+                zoom: 13,
+                bearing: 0,
+                curve: 1, // change the speed at which it zooms out
+                easing: function (t) {
+                return t;
+                },
+                essential: true
+                });
+              
+          })
+             
+          })
 
       }
     }, [])
 return ( 
-  <Map>
-    <div className="map-custom-buttons-example">
+  <Map flyTo = "true"
+      zoomBtns="true"
+  >
        <div
            ref={mapContainerRef}
            style={{
@@ -57,8 +71,7 @@ return (
               bottom: 0,
            }}
         />
-        </div>
-    </Map>
+  </Map>
 )
 }
 

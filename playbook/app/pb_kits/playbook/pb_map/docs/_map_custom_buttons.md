@@ -1,1 +1,3 @@
-The default zoom in and out buttons for MapLibre can also be targeted  with javascript and replaced with Fontawesome Icons that can be styled with a classname.
+If `zoomBtns` prop is set to true, the kit will render it's custom zoom control buttons in lieu of MapLibre's default buttons.
+
+If `flyTo` prop is set to true, the kit will render a custom button underneath the zoom control buttons. When clicked, this button will snap focus and zoom back to the originally set values. To see it in action, scroll away from the marker or zoom in or out. Now click the button and watch the map revert to original position. This functionality makes use of the [FlyTo](https://maplibre.org/maplibre-gl-js-docs/api/map/#map#flyto) method provided by Maplibre. 
