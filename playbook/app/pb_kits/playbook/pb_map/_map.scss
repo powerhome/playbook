@@ -42,6 +42,14 @@
     }
   }
 
+  .map_popup {
+    .maplibregl-popup-content {
+      padding: $space_sm;
+      border-radius: $space_sm;
+    }
+  }
+
+
   // .maplibregl-ctrl-attrib-button {
   //   background-image: none;
   // }
