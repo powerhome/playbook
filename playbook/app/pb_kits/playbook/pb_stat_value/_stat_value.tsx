@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -10,10 +8,10 @@ type StatValueProps = {
   className?: string,
   id?: string,
   unit?: string,
-  value: string | number
+  value: string | number,
 }
 
-const StatValue = (props: StatValueProps) => {
+const StatValue = (props: StatValueProps): React.ReactElement => {
   const {
     className,
     id,
@@ -21,7 +19,7 @@ const StatValue = (props: StatValueProps) => {
     value = 0,
   } = props
 
-  const displayValue = function(value) {
+  const displayValue = function(value: string | number) {
     if (value || value === 0) {
       return (
         <Title
@@ -33,7 +31,7 @@ const StatValue = (props: StatValueProps) => {
     }
   }
 
-  const displayUnit = function(unit) {
+  const displayUnit = function(unit: string) {
     if (unit) {
       return (
         <Title
