@@ -108,7 +108,6 @@ const BarGraph = ({
     plotOptions: {
       series: {
         pointStart: pointStart,
-        borderColor: 'transparent',
         events: {},
         dataLabels: {
           enabled: false,
