@@ -51,3 +51,17 @@ test("closes on mouseleave", async () => {
     cleanup();
   })
 });
+
+test("closes on mouseleave", async () => {
+  render(
+    <Tooltip
+        className={"Hello World"}
+        data={{ testid: "className-test" }}
+    />
+  );
+
+  const kit = screen.getByTestId("className-test");
+  expect(kit).toHaveClass("Hello World");
+
+  cleanup();
+});

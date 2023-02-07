@@ -17,6 +17,7 @@ import Flex from "../pb_flex/_flex"
 
 type TooltipProps = {
   aria?: { [key: string]: string },
+  className?: string | string[],
   data?: { [key: string]: string },
   text: string,
   icon?: string,
@@ -26,9 +27,10 @@ type TooltipProps = {
   zIndex?: Pick<GlobalProps, "ZIndex">,
 } & GlobalProps
 
-const Tooltip = (props: TooltipProps) => {
+const Tooltip = (props: TooltipProps): React.ReactElement => {
   const {
     aria = {},
+    className,
     children,
     data = {},
     icon = null,
@@ -42,7 +44,10 @@ const Tooltip = (props: TooltipProps) => {
   const dataProps: { [key: string]: any } = buildDataProps(data)
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
 
-  const css = classnames(globalProps({...rest}))
+  const css = classnames(
+    globalProps({...rest}),
+    className
+  )
   const [open, setOpen] = useState(false)
   const arrowRef = useRef(null)
   const {
@@ -92,44 +97,47 @@ const Tooltip = (props: TooltipProps) => {
   return (
     <>
       <div
-        ref={reference}
-        className={`pb_tooltip_kit ${css}`}
-        style={{ display: "inline-flex" }}
-        role="tooltip_trigger"
-        {...ariaProps}
-        {...dataProps}
+          className={`pb_tooltip_kit ${css}`}
+          ref={reference}
+          role="tooltip_trigger"
+          style={{ display: "inline-flex" }}
+          {...ariaProps}
+          {...dataProps}
       >
         {children}
       </div>
       {open && (
         <div
-          {...getFloatingProps({
-            role: "tooltip",
-            ref: floating,
-            className: `tooltip_tooltip ${placement} visible`,
-            style: {
-              position: strategy,
-              top: y ?? 0,
-              left: x ?? 0,
-              zIndex: zIndex ?? 0,
-            },
-          })}
+            {...getFloatingProps({
+              role: "tooltip",
+              ref: floating,
+              className: `tooltip_tooltip ${placement} visible`,
+              style: {
+                position: strategy,
+                top: y ?? 0,
+                left: x ?? 0,
+                zIndex: zIndex ?? 0,
+              },
+            })}
         >
-          <Flex gap="xs" align="center">
+          <Flex 
+              align="center"
+              gap="xs"
+          >
             {icon && (
             <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
             )}
             {text}
           </Flex>
           <div
-            ref={arrowRef}
-            className="arrow_bg"
-            style={{
-              position: strategy,
-              left: arrowX != null ? `${arrowX}px` : "",
-              top: arrowY != null ? `${arrowY}px` : "",
-              [staticSide]: "-5px",
-            }}
+              className="arrow_bg"
+              ref={arrowRef}
+              style={{
+                position: strategy,
+                left: arrowX != null ? `${arrowX}px` : "",
+                top: arrowY != null ? `${arrowY}px` : "",
+                [staticSide]: "-5px",
+              }}
           />
         </div>
       )}
