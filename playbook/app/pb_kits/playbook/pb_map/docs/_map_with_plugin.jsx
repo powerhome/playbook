@@ -3,7 +3,7 @@ import Map from '../_map'
 import maplibregl from 'maplibre-gl'
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 
-const MapWithButtons = () => {
+const MapWithPlugin = () => {
 
   const mapContainerRef = useRef(null)
 
@@ -58,4 +58,4 @@ return (
 )
 }
 
-export default MapWithButtons
+export default MapWithPlugin

@@ -7,3 +7,5 @@ Basic setup to start using MapLibre:
  or include it as a link in the <head> tag `<link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />`
 - To use Maplibre, you must also set a height on the containing div.
 - You can now use MapLibre within the Map Kit as shown in this example.
+
+__Note__ : The MapLibre Marker allows us to pass it a HEX value as a color prop. In these doc examples we are using our primary color for the Marker.
