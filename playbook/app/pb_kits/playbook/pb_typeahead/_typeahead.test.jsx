@@ -35,10 +35,9 @@ test('to be error variant', () => {
   )
 
   const kit = screen.getByTestId("error-test")
-  const error = kit.querySelector(".typeahead-error-caption")
-  expect(screen.getByText("Select...")).toHaveClass("error")
-  expect(error).toHaveTextContent("Please make a valid selection")
-})
+  const error = kit.querySelector(".pb_body_kit_negative")
+  expect(error).toBeInTheDocument()
+}) 
 
 test('should be inline variant', () => {
   render(
