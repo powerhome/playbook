@@ -12,7 +12,7 @@ const options = [
 ]
 
 const TypeaheadErrorState = (props) => {
-  const [erroState, setErrorState] = useState("Please make a valid selection");
+  const [errorState, setErrorState] = useState("Please make a valid selection");
   const [searchValue, setSearchValue] = useState(null);
   
   const handleOnChange = (value) => setSearchValue(value)
@@ -27,7 +27,7 @@ const TypeaheadErrorState = (props) => {
   
   return (
     <Typeahead
-        error={erroState}
+        error={errorState}
         label="Colors"
         onChange={handleOnChange}
         options={options}

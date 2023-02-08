@@ -17,7 +17,6 @@ import MultiValue from './components/MultiValue'
 import Option from './components/Option'
 import Placeholder from './components/Placeholder'
 import ValueContainer from './components/ValueContainer'
-import Body from '../pb_body/_body'
 
 import { noop, buildDataProps } from '../utilities/props'
 
@@ -115,24 +114,17 @@ const Typeahead = ({
 
   const classes = `pb_typeahead_kit react-select ${globalProps(props)}`
   const inlineClass = selectProps.inline ? 'inline' : null
-  const errorClass = error !== "" ? "error" : ""
 
   return (
     <div {...dataProps}
         className={classnames(classes, inlineClass)}
     >
       <Tag
-          classNamePrefix={errorClass + " " + "typeahead-kit-select"}
-          onChange={handleOnChange}
           {...selectProps}
+          classNamePrefix={"typeahead-kit-select"}
+          error={error}
+          onChange={handleOnChange}
       />
-      {error && <Body
-          className='typeahead-error-caption'
-          status="negative"
-          text={error}
-          variant={null}
-                />
-        }
     </div>
   )
 }

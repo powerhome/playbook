@@ -168,9 +168,6 @@
         color: $text_lt_default;
       }
       &__control {
-        &[class*=error] {
-          border-color: $error;
-        }
         &--is-focused {
           @include pb_textarea_focus;
           @include transition_default;
@@ -211,10 +208,6 @@
         color: transparent;
       }
     }
-  }
-  //this margin is to allow typeahead error state to match text input error state
-  .typeahead-error-caption {
-    margin-top: -12px;
   }
 }
 
