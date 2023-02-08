@@ -19,12 +19,11 @@ $pb_selectable_card_border: 2px;
       display: inherit;
       flex-direction: inherit;
       padding: 1px;
-      transition-property: all;
-      transition-duration: $transition_short;
-      transition-timing-function: $easeIn;
     }
 
     @include pb_card;
+    transition-property: none;
+    transition-duration: 0s;
     background-color: $white;
     padding: $space_sm;
     margin-bottom: $space_sm;
@@ -55,9 +54,6 @@ $pb_selectable_card_border: 2px;
       top: -($pb_selectable_card_indicator_size/2);
       right: -($pb_selectable_card_indicator_size/2);
       opacity: 0;
-      transition-property: opacity;
-      transition-duration: $transition_short;
-      transition-timing-function: $easeIn;
     }
   }
 
@@ -77,6 +73,8 @@ $pb_selectable_card_border: 2px;
 
         position: relative;
         @include pb_card_selected;
+        transition-property: none;
+        transition-duration: 0s;
 
         .pb_selectable_card_circle {
           opacity: $opacity_10;
@@ -127,9 +125,9 @@ $pb_selectable_card_border: 2px;
 
   .separator {
     align-self: stretch;
-    transition-property: all;
-    transition-duration: $transition_short;
-    transition-timing-function: $easeIn;
+    // transition-property: all;
+    // transition-duration: $transition_short;
+    // transition-timing-function: $easeIn;
     width: 1px;
     margin-right: 1px;
     margin-top: -1px;
