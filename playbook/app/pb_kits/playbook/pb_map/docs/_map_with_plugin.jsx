@@ -25,8 +25,11 @@ const MapWithPlugin = () => {
         .setPopup(new maplibregl.Popup({className: 'map_popup', closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
         .addTo(map);
 
-        //add controls
+        //add zoom controls
         map.addControl(new maplibregl.NavigationControl({showCompass: false}))
+
+        // disable map zoom when using scroll
+        map.scrollZoom.disable();
 
         //Add polygon draw button using map-box-gl-draw plugin
         var draw = new MapboxDraw({
