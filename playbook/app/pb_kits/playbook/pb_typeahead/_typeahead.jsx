@@ -120,10 +120,10 @@ const Typeahead = ({
         className={classnames(classes, inlineClass)}
     >
       <Tag
-          {...selectProps}
-          classNamePrefix={"typeahead-kit-select"}
+          classNamePrefix="typeahead-kit-select"
           error={error}
           onChange={handleOnChange}
+          {...selectProps}
       />
     </div>
   )
