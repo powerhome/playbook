@@ -45,4 +45,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "spring", "2.0.2"
   s.add_development_dependency "spring-watcher-listen", "2.0.1"
   s.add_development_dependency "tzinfo-data", "1.2018.9"
+  s.add_development_dependency "will_paginate", "3.3.1"
 end

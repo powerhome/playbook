@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -11,8 +9,8 @@ import Caption from '../pb_caption/_caption'
 
 type TimestampProps = {
   align?: "left" | "center" | "right",
-  aria?: object,
-  className?: string | array<string>,
+  aria?: { [key: string]: string },
+  className?: string | string[],
   dark?: boolean,
   data?: string,
   text: string,
@@ -26,7 +24,7 @@ type TimestampProps = {
   variant?: "default" | "elapsed" | "updated"
 }
 
-const Timestamp = (props: TimestampProps) => {
+const Timestamp = (props: TimestampProps): React.ReactElement => {
   const {
     align = 'left',
     aria = {},
@@ -90,9 +88,9 @@ const Timestamp = (props: TimestampProps) => {
   const captionText = () => {
     switch (variant) {
     case 'updated':
-      return formatUpdatedString(userDisplay, dateTimestamp)
+      return formatUpdatedString()
     case 'elapsed':
-      return formatElapsedString(userDisplay, timeDisplay, updatedText)
+      return formatElapsedString()
     default:
       return showDate ? timestamp ? fullDateDisplay() : text : fullTimeDisplay()
     }

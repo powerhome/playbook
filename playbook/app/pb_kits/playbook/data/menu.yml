@@ -60,6 +60,7 @@ kits:
     - badge
     - hashtag
     - pill
+  - pagination
   - phone_number_input
   - popover
   - progress:

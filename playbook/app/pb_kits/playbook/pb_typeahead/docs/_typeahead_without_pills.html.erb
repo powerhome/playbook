@@ -8,7 +8,7 @@
 %>
 
 <%= pb_rails("typeahead", props: {
-    id: "typeahead-pills-example1",
+    id: "typeahead-without-pills-example1",
     placeholder: "All Colors",
     options: options, 
     label: "Colors",
@@ -19,19 +19,12 @@
 
 <!-- This section is an example of the available JavaScript event hooks -->
 <%= javascript_tag defer: "defer" do %>
-  document.addEventListener("pb-typeahead-kit-typeahead-pills-example1-result-option-select", function(event) {
-    console.log('Option selected')
+  document.addEventListener("pb-typeahead-kit-typeahead-without-pills-example1-result-option-select", function(event) {
+    console.log('Single Option selected')
     console.dir(event.detail)
   })
-  document.addEventListener("pb-typeahead-kit-typeahead-pills-example1-result-option-remove", function(event) {
-    console.log('Option removed')
-    console.dir(event.detail)
-  })
-  document.addEventListener("pb-typeahead-kit-typeahead-pills-example1-result-clear", function() {
+  document.addEventListener("pb-typeahead-kit-typeahead-without-pills-example1-result-clear", function() {
     console.log('All options cleared')
   })
 
-  document.querySelector('#clear-pills').addEventListener('click', function() {
-    document.dispatchEvent(new CustomEvent('pb-typeahead-kit-typeahead-pills-example1:clear'))
-  })
 <% end %>

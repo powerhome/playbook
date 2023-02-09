@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -12,16 +10,16 @@ import Caption from '../pb_caption/_caption'
 
 type TimeStackedProps = {
   align?: 'left' | 'center' | 'right',
-  className?: string | array<string>,
+  className?: string | string[],
   dark?: boolean,
-  data?: object,
+  data?: { [key: string]: string },
   date?: string,
   id?: string,
   time: number | Date,
   timeZone?: string,
 }
 
-const TimeStackedDefault = (props: TimeStackedProps) => {
+const TimeStackedDefault = (props: TimeStackedProps): React.ReactElement => {
   if (props.date) deprecatedProps('Time Stacked', ['date']) //date prop is deprecated, use time instead
 
   const {
