@@ -136,6 +136,8 @@ const highchartsDarkTheme: ThemeProps = {
 
   plotOptions: {
     series: {
+      borderColor: colors.bg_dark_card,
+      borderWidth: 2,
       type: 'area',
       nullColor: colors.text_dk_lighter,
       fillColor: {
