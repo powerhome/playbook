@@ -6,6 +6,7 @@ import {
   SandpackPreview,
 } from "@codesandbox/sandpack-react"
 
+
 import { CircleIconButton, Card, Caption } from "playbook-ui"
 
 const KitDocs = ({ source, exampleTitle }) => {
@@ -15,6 +16,11 @@ const KitDocs = ({ source, exampleTitle }) => {
     "/App.js": {
       code: updatedFileContent,
     },
+
+    "test.js": {
+      code: require("@fortawesome/fontawesome-pro/js/fontawesome.js")
+    }
+ 
   }
 
   return (
@@ -31,10 +37,9 @@ const KitDocs = ({ source, exampleTitle }) => {
           }}
           options={{
             externalResources: [
+         
               'https://unpkg.com/playbook-ui@latest/dist/playbook.css',
               'https://unpkg.com/playbook-ui@latest/dist/reset.css',
-              'https://unpkg.com/playbook-ui@latest/dist/fonts/fontawesome-min',
-              'https://unpkg.com/playbook-ui@latest/dist/fonts/regular-min',
             ],
           }}
         >

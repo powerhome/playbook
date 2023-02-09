@@ -32,8 +32,6 @@ const KitDemo = ({ source, exampleTitle }) => {
             externalResources: [
               'https://unpkg.com/playbook-ui@latest/dist/playbook.css',
               'https://unpkg.com/playbook-ui@latest/dist/reset.css',
-              'https://unpkg.com/playbook-ui@latest/dist/fonts/fontawesome-min',
-              'https://unpkg.com/playbook-ui@latest/dist/fonts/regular-min',
             ],
           }}
         >

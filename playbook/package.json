@@ -34,7 +34,6 @@
   "homepage": "https://github.com/powerhome/playbook#readme",
   "dependencies": {
     "@babel/runtime": "^7.12.1",
-    "@codesandbox/sandpack-react": "^1.18.2",
     "@floating-ui/react-dom": "^1.0.0",
     "@floating-ui/react-dom-interactions": "^0.9.1",
     "@fortawesome/fontawesome-free": "^6.2.1",
@@ -73,6 +72,7 @@
     "@actions/core": "1.10.0",
     "@actions/github": "4.0.0",
     "@babel/preset-typescript": "^7.15.0",
+    "@codesandbox/sandpack-react": "^1.18.2",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "11.2.7",
     "@types/flatpickr": "3.1.2",
