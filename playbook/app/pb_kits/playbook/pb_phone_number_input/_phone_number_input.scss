@@ -1,0 +1,37 @@
+@import "../tokens/colors";
+
+.pb_phone_number_input {
+  input::placeholder {
+    color: $focus_input_light;
+  }
+
+  .iti__country.iti__highlight {
+    background-color: $hover_light;
+
+    .iti__country-name, .iti__dial-code{
+      color: $primary
+    }
+  }
+
+  .iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+    background-color: $focus_input_light;
+  }
+
+  .iti__flag {
+    background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags.png");
+  }
+
+  .iti--separate-dial-code .iti__selected-flag {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .iti__flag-container {
+    //line-height: 1.4;
+  }
+  
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .iti__flag {
+      background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags@2x.png");
+    }
+  }
+}
