@@ -116,6 +116,20 @@
     }
   }
 
+  & > [class^=pb_selectable_card_kit] input[type="checkbox"]:checked ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:checked ~ label {
+    border-color: none;
+    border-width: 2px 1px 2px 2px;
+    outline: $primary solid 2px;
+    outline-offset: -2px;
+  }
+
+  & > [class^=pb_selectable_card_icon_kit] input[type="checkbox"]:checked ~ label {
+    border-color: none;
+    border-width: 2px 1px 2px 2px;
+    outline: $primary solid 2px;
+    outline-offset: -2px;
+  }
+
   & > [class^=pb_typeahead_kit] {
     min-width: 200px;
   }
