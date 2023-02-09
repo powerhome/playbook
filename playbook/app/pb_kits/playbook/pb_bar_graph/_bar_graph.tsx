@@ -13,7 +13,7 @@ import classnames from "classnames";
 type BarGraphProps = {
   align?: "left" | "right" | "center";
   axisTitle: string;
-  dark?: Boolean;
+  dark?: boolean;
   xAxisCategories: [];
   yAxisMin: number;
   yAxisMax: number;
@@ -62,7 +62,7 @@ const BarGraph = ({
   x = 0,
   y = 0,
   ...props
-}: BarGraphProps) => {
+}: BarGraphProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const setupTheme = () => {
@@ -130,14 +130,14 @@ const BarGraph = ({
 
   return (
     <HighchartsReact
-      containerProps={{
-        className: classnames(globalProps(props), className),
-        id: id,
-        ...ariaProps,
-        ...dataProps,
-      }}
-      highcharts={Highcharts}
-      options={options}
+        containerProps={{
+          className: classnames(globalProps(props), className),
+          id: id,
+          ...ariaProps,
+          ...dataProps,
+        }}
+        highcharts={Highcharts}
+        options={options}
     />
   );
 };

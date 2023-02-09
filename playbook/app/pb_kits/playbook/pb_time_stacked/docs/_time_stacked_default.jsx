@@ -1,5 +1,5 @@
 import React from 'react'
-import TimeStacked from '../_time_stacked.jsx'
+import TimeStacked from '../_time_stacked'
 
 const TimeStackedDefault = (props) => {
   return (
