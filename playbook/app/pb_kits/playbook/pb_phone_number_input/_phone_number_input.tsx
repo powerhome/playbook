@@ -24,6 +24,7 @@ type PhoneNumberInputProps = {
   label?: string,
   name?: string,
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void,
+  onlyCountries: string[],
   preferredCountries?: string[],
   value?: string,
 }
@@ -57,6 +58,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     label = '',
     name = '',
     onChange = () => { void 0 },
+    onlyCountries = [],
     preferredCountries = [],
     value = '',
   } = props
@@ -106,6 +108,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
         preferredCountries,
         allowDropdown: !disabled,
         initialCountry,
+        onlyCountries,
       }
     )
     
