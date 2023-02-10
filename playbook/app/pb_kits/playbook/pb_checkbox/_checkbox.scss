@@ -21,7 +21,7 @@ $transition: $transition_cubic;
     border-radius: $border_rad_light;
     height: 22px;
     position: relative;
-    transition: background $transition_default ease, border-color $transition_default ease;
+    transition: background $transition_default ease, box-shadow $transition_default ease;
     width: 22px;
     .check_icon,
     .indeterminate_icon {
@@ -40,11 +40,9 @@ $transition: $transition_cubic;
 
   @media (hover:hover) {
     &:hover input ~ .pb_checkbox_checkmark {
-      border-color: $primary_action;
-      background-color: $bg_light;   
-
+      background-color: $bg_light;
+    }
   }
-}
 
   input {
     cursor: pointer;
@@ -57,12 +55,9 @@ $transition: $transition_cubic;
 
     &:focus ~ .pb_checkbox_checkmark {
         box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
-
-      
         &:hover {
           border-color: $border_light;
         }
-      
     }
     &:checked ~ .pb_checkbox_checkmark,
     & ~ .pb_checkbox_indeterminate {
@@ -84,42 +79,36 @@ $transition: $transition_cubic;
     }
   }
 
-  &[class*=_dark] {
-    input:checked ~ .pb_checkbox_checkmark {
-      background-color: $primary_action;
-      border-color: $primary_action;
-      &:hover {
-        background-color: rgba($white,0.5);
+  &.dark {
+    input {
+      &:focus ~ .pb_checkbox_checkmark {
+        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;      
       }
-
     }
-
+    
     @media (hover:hover) {
       &:hover .pb_checkbox_checkmark {
-        border-color: $primary_action;
+        background-color: rgba($white,.05);
       }
     }
 
-    &.error {
-      > .pb_checkbox_checkmark {
-        border-color: $error_dark;
-      }
-    }
     &.pb_checkbox_kit_error {
       > .pb_checkbox_checkmark {
         border-color: $error_dark;
+        :hover {
+          border-color: $error_dark;
+        }
       }
     }
-  }
+   }
 
-  &.error {
-    > .pb_checkbox_checkmark {
-      border-color: $error;
-    }
-  }
   &.pb_checkbox_kit_error {
     > .pb_checkbox_checkmark {
       border-color: $error;
+
+      :hover {
+        border-color: $error;
+      }
     }
   }
 }
