@@ -6,6 +6,7 @@ const ButtonAccessibility = (props) => (
     <Button
         aria={{ label: 'Go to Google' }}
         link="https://google.com"
+        tabIndex={0}
         tag="a"
         text="Button with ARIA"
         {...props}
