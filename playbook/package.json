@@ -11,7 +11,7 @@
     "test-watch": "jest --watch",
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
-    "watch": "webpack --watch --mode=development",
+    "watch": "NODE_OPTIONS=--max-old-space-size=4096 webpack --watch --mode=development",
     "release": "webpack --mode=production"
   },
   "repository": {
