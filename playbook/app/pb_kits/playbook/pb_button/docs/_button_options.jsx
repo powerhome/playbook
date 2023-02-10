@@ -6,6 +6,7 @@ const ButtonOptions = (props) => (
     <Button
         htmlType="submit"
         onClick={() => alert('Click!')}
+        tabIndex={0}
         text="Button with options"
         value="1234"
         {...props}

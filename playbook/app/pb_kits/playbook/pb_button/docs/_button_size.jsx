@@ -6,6 +6,7 @@ const ButtonSize = (props) => (
     <Button
         marginRight='lg'
         size="sm"
+        tabIndex={0}
         text="Button sm size"
         {...props}
     />
@@ -13,6 +14,7 @@ const ButtonSize = (props) => (
     <Button
         marginRight='lg'
         size="md"
+        tabIndex={0}
         text="Button md size"
         {...props}
     />
@@ -20,6 +22,7 @@ const ButtonSize = (props) => (
     <Button
         marginRight='lg'
         size="lg"
+        tabIndex={0}
         text="Button lg size"
         {...props}
     />

@@ -38,7 +38,7 @@ $pb_button_border_width: 0px;
   padding: $pb_button_v_padding $pb_button_h_padding;
   cursor: pointer;
   outline: none;
-  transition: background $transition_default ease, color $transition_default ease, outline $transition_short ease;
+  transition: background $transition_default ease, color $transition_default ease, box-shadow $transition_default ease;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
@@ -47,6 +47,12 @@ $pb_button_border_width: 0px;
   width: fit-content;
   font-family: $font_family_base;
   white-space: nowrap;
+  
+  @include focus;
+  
+  &[class*=dark] {
+    @include focus-dark
+  }
 
   .loading-icon {
     position: absolute;
@@ -66,8 +72,6 @@ $pb_button_border_width: 0px;
   &:hover {
     outline: none;
   }
-
-  @include focus;
 
   &:active {
     outline: none;

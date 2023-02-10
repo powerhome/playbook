@@ -7,6 +7,7 @@ const ButtonLink = (props) => (
         aria={{ label: 'Link to Google' }}
         link="https://google.com"
         marginRight='lg'
+        tabIndex={0}
         text="A Tag Button"
         {...props}
     />
@@ -16,6 +17,7 @@ const ButtonLink = (props) => (
         link="https://google.com"
         marginRight='lg'
         newWindow
+        tabIndex={0}
         text="Open in New Window"
         {...props}
     />
@@ -25,6 +27,7 @@ const ButtonLink = (props) => (
         disabled
         link="https://google.com"
         marginRight='lg'
+        tabIndex={0}
         text="A Tag Button Disabled"
         {...props}
     />

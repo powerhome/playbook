@@ -7,6 +7,7 @@ const ButtonLoading = (props) => (
         aria={{ label: 'Loading' }}
         loading
         marginRight='lg'
+        
         text="Button Primary"
         {...props}
     />
@@ -15,6 +16,7 @@ const ButtonLoading = (props) => (
         aria={{ label: 'Loading' }}
         loading
         marginRight='lg'
+        tabIndex={0}
         text="Button Secondary"
         variant="secondary"
         {...props}
@@ -24,6 +26,7 @@ const ButtonLoading = (props) => (
         aria={{ label: 'Loading' }}
         loading
         marginRight='lg'
+        tabIndex={0}
         text="A Tag Button Disabled"
         variant="link"
         {...props}
