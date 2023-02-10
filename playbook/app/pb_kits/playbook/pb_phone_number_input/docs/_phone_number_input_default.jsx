@@ -3,7 +3,7 @@ import PhoneNumberInput from '../_phone_number_input'
 
 const PhoneNumberInputDefault = () => (
   <>
-    <PhoneNumberInput id="default" />
+    <PhoneNumberInput />
   </>
 )
 

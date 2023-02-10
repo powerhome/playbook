@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
@@ -7,16 +7,23 @@ import intlTelInput from 'intl-tel-input'
 import 'intl-tel-input/build/css/intlTelInput.css'
 import TextInput from '../pb_text_input/_text_input'
 
+declare global {
+  interface Window {
+    intlTelInputGlobals: any;
+  }
+}
+
 type PhoneNumberInputProps = {
   aria?: { [key: string]: string },
   className?: string,
   data?: { [key: string]: string },
   disabled?: boolean,
-  id: string,
-  isValid?: () => boolean,
+  id?: string,
+  initialCountry?: string,
+  isValid?: (valid: boolean) => void,
   label?: string,
   name?: string,
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void,
+  onChange?: (e: React.FormEvent<HTMLInputElement>) => void,
   preferredCountries?: string[],
   value?: string,
 }
@@ -30,6 +37,14 @@ const formatToGlobalCountryName = (countryName: string) => {
   return countryName.split('(')[0].trim()
 }
 
+const formatAllCountries = () => {
+  let countryData = window.intlTelInputGlobals.getCountryData()
+  for (let i = 0; i < countryData.length; i++) {
+    let country = countryData[i]
+    country.name = formatToGlobalCountryName(country.name)
+  }
+}
+
 const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const {
     aria = {},
@@ -37,11 +52,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     data = {},
     disabled = false,
     id = '',
-    isValid = () => Boolean, // TODO isValidNumber
+    initialCountry = '',
+    isValid = () => {void 0 },
     label = '',
     name = '',
     onChange = () => { void 0 },
-    preferredCountries = ['us', 'br', 'ph', 'gb'],
+    preferredCountries = [],
     value = '',
   } = props
 
@@ -49,36 +65,32 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_phone_number_input'), globalProps(props), className)
 
+  const inputRef = useRef<HTMLInputElement>()
   const [inputValue, setInputValue] = useState(value)
-  const [itiInit, setItiInit] = useState<any>() // FIX type
+  const [itiInit, setItiInit] = useState<any>()
   const [error, setError] = useState('')
 
-  const validateTooLongNumber = (itiInit: any) => { // FIX type
+  const validateTooLongNumber = (itiInit: any) => {
     const error = itiInit.getValidationError();
 
     if (error === ValidationError.TooLong) {
       const countryName = itiInit.getSelectedCountryData().name
-      const globalCountryName = formatToGlobalCountryName(countryName)
-
-      setError(`Invalid ${globalCountryName} phone number (too long)`)
+      setError(`Invalid ${countryName} phone number (too long)`)
     } else {
       setError('')
     }
   }
 
-  const validateTooShortNumber = (itiInit: any) => { // FIX type
+  const validateTooShortNumber = (itiInit: any) => {
     const error = itiInit.getValidationError();
 
     if (error === ValidationError.TooShort) {
       const countryName = itiInit.getSelectedCountryData().name
-      const globalCountryName = formatToGlobalCountryName(countryName)
-
-      setError(`Invalid ${globalCountryName} phone number (too short)`)
+      setError(`Invalid ${countryName} phone number (too short)`)
     }
   }
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(`${itiInit.isValidNumber()}-${itiInit.getValidationError()}`)
     setInputValue(evt.target.value)
     validateTooLongNumber(itiInit)
     onChange(evt)
@@ -86,16 +98,18 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   }
 
   useEffect(() => {
-    const input = document.querySelector(`#${id}`)
-    const itiInit = intlTelInput(input, {
+    formatAllCountries()
+
+    const itiInit = intlTelInput(inputRef.current, {
         utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js',
         separateDialCode: true,
         preferredCountries,
-        allowDropdown: !disabled
+        allowDropdown: !disabled,
+        initialCountry,
       }
     )
-
-    input.addEventListener("countrychange", () => validateTooLongNumber(itiInit));
+    
+    inputRef.current.addEventListener("countrychange", () => validateTooLongNumber(itiInit));
     setItiInit(itiInit)
   }, [])
 
@@ -111,6 +125,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
         name={name}
         onBlur={() => validateTooShortNumber(itiInit)}
         onChange={handleOnChange}
+        ref={inputRef}
         value={inputValue}
         error={error}
         label={label}

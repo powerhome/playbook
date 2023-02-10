@@ -8,13 +8,17 @@
   .iti__country.iti__highlight {
     background-color: $hover_light;
 
-    .iti__country-name, .iti__dial-code{
+    .iti__country-name, .iti__dial-code {
       color: $primary
     }
   }
 
   .iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
     background-color: $focus_input_light;
+
+    .text_input {
+      background-color: $focus_input_light;
+    }
   }
 
   .iti__flag {
@@ -25,8 +29,50 @@
     background-color: rgba(0, 0, 0, 0);
   }
 
-  .iti__flag-container {
-    //line-height: 1.4;
+  .iti__arrow {
+    border-left: unset;
+    border-right: unset;
+    border-top: unset;
+    width: unset;
+    height: unset;
+    margin-bottom: 4px;
+  }
+
+  .iti__arrow--up {
+    border-bottom: unset;
+  }
+
+  .iti__arrow::before {
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font: var(--fa-font-regular);
+    font-size: 0.5em;
+    content: "\f078";
+  }
+
+  .iti__arrow.iti__arrow--up::before {
+    font: var(--fa-font-regular);
+    font-size: 0.5em;
+    content: "\f077";
+  }
+
+  .iti__active::after {
+    float: right;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font: var(--fa-font-regular);
+    content: "\f00c";
+    font-size: 1em;
+    margin-top: 5px;
+  }
+
+  .iti__country-list {
+    min-width: 330px;
+    border-radius: $border_radius_md;
+    border: 1px solid $border_light;
+    //max-height: 260px;
+    box-shadow: $shadow_deep;
   }
   
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
