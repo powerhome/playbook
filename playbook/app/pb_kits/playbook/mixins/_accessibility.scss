@@ -1,6 +1,5 @@
 @mixin focus {
   &:focus-visible {
-    outline: 2px solid $focus_color;
-    outline-offset: 2px;
+    box-shadow: 0px 0px 0 2px white, 0px 0px 0 4px $primary_action;
   }
 }
