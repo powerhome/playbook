@@ -59,9 +59,11 @@ $main_colors: (
 Background colors ------------------*/
 $bg_light:            $silver !default;
 $bg_dark:             #0a0527 !default;
+$bg_dark_card:        #231E3D;
 $background_colors: (
   bg_light:           $bg_light,
-  bg_dark:            $bg_dark
+  bg_dark:            $bg_dark,
+  bg_dark_card:       $bg_dark_card 
 );
 
 /* Card colors ------------------*/
