@@ -53,8 +53,7 @@ $transition: $transition_cubic;
     width: 0;
     left: $offscreen;
     &:focus ~ .pb_checkbox_checkmark {
-        outline: 2px solid $primary;
-        outline-offset: 2px;
+        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
 
       
         &:hover {
