@@ -41,8 +41,8 @@ $transition: $transition_cubic;
   @media (hover:hover) {
     &:hover input ~ .pb_checkbox_checkmark {
       border-color: $primary_action;
-    }
   }
+}
 
   input {
     cursor: pointer;
@@ -53,12 +53,25 @@ $transition: $transition_cubic;
     width: 0;
     left: $offscreen;
     &:focus ~ .pb_checkbox_checkmark {
-      border-color: $primary_action;
+        outline: 2px solid $primary;
+        outline-offset: 2px;
+
+      
+        &:hover {
+          border-color: $border_light;
+          background-color: $bg_light;
+        }
+      
     }
     &:checked ~ .pb_checkbox_checkmark,
     & ~ .pb_checkbox_indeterminate {
       background-color: $primary_action;
       border-color: $primary_action;
+
+      &:hover {
+        background-color: $primary_action;
+        border-color: $primary_action;
+      }
     }
     &:checked ~ .pb_checkbox_checkmark,
     & ~ .pb_checkbox_indeterminate {
@@ -74,11 +87,16 @@ $transition: $transition_cubic;
     input:checked ~ .pb_checkbox_checkmark {
       background-color: $primary_action;
       border-color: $primary_action;
+      &:hover {
+        // border-color: $border_light;
+        background-color: rgba($white,0.5);
+      }
+
     }
 
     @media (hover:hover) {
       &:hover .pb_checkbox_checkmark {
-        border-color: $primary_action;
+        border-color: $primary_action;    
       }
     }
 
