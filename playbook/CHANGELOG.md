@@ -1,5 +1,23 @@
 
 
+## [12.2.0](https://github.com/powerhome/playbook/tree/12.2.0) (2023-02-07)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.1.0...12.2.0)
+
+**Kit Enhancements:**
+
+- Typescript Conversion: TimeStamp [\#2298](https://github.com/powerhome/playbook/pull/2298) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Time Stacked Typescript Conversion [\#2297](https://github.com/powerhome/playbook/pull/2297) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Typescript Conversion Stat Value [\#2294](https://github.com/powerhome/playbook/pull/2294) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Typescript Conversion Stat Change [\#2293](https://github.com/powerhome/playbook/pull/2293) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Fixed Bugs:**
+
+- Bar Graph borders don't match theme [\#2300](https://github.com/powerhome/playbook/pull/2300) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Added ClassName prop to Tooltip Kit [\#2295](https://github.com/powerhome/playbook/pull/2295) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+
+
 ## [12.1.0](https://github.com/powerhome/playbook/tree/12.1.0) (2023-02-02)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.0.0...12.1.0)
