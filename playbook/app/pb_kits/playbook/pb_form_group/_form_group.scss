@@ -92,7 +92,7 @@
   & > [class^=pb_selectable_card_kit]:not(:last-child) label {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
-    border-right-width: 0;
+    // border-right-width: 0;
   }
 
   & > [class^=pb_selectable_card_kit]:not(:first-child) label {
@@ -112,22 +112,24 @@
 
   & > [class^=pb_selectable_card_icon_kit]:not(:last-child) {
     [class^=pb_selectable_card_kit] input[type="checkbox"]:not(:checked) ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:not(:checked)~ label {
-      border-right-width: 0;
+      // border-right-width: 0;
     }
   }
 
   & > [class^=pb_selectable_card_kit] input[type="checkbox"]:checked ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:checked ~ label {
-    border-color: none;
-    border-width: 2px 1px 2px 2px;
-    outline: $primary solid 2px;
-    outline-offset: -2px;
+    // border-color: none;
+    // border-width: 2px 1px 2px 2px;
+    // box-shadow: inset 0 0 0 -1px $primary;
+    // outline: $primary solid 2px;
+    // outline-offset: -2px;
   }
 
   & > [class^=pb_selectable_card_icon_kit] input[type="checkbox"]:checked ~ label {
-    border-color: none;
-    border-width: 2px 1px 2px 2px;
-    outline: $primary solid 2px;
-    outline-offset: -2px;
+    // border-color: none;
+    // border-width: 2px 1px 2px 2px;
+    // box-shadow: inset 0 0 0 -1px $primary;
+    // outline: $primary solid 2px;
+    // outline-offset: -2px;
   }
 
   & > [class^=pb_typeahead_kit] {
