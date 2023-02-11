@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import Map from '../_map'
+import { Map } from '../../'
 import maplibregl from 'maplibre-gl'
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 
