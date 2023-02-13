@@ -44,7 +44,7 @@ test('align variant', () => {
   expect(kit).toHaveClass('pb_title_count_kit_right_sm')
 })
 
-test('renders title correctly', () => {
+test('renders count correctly', () => {
   render(
     <TitleCount
         count={35.78}
@@ -56,7 +56,7 @@ test('renders title correctly', () => {
   expect(kit).toBeTruthy()
 })
 
-test('renders count correctly', () => {
+test('renders title correctly', () => {
   render(
     <TitleCount
         count={35.78}
