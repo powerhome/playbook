@@ -4,8 +4,21 @@ import { render, screen } from '../utilities/test-utils'
 
 import Person from './_person'
 
+test('renders person classname', () => {
+  render(
+    <Person
+        data={{ testid: 'classname-test' }}
+        firstName="Kyle"
+        lastName="Fadigan"
+    />
+  )
 
-test('it renders the component with the value', () => {
+  const kit = screen.getByTestId('classname-test')
+  expect(kit).toHaveClass("pb_person_kit");
+})
+
+
+test('it renders the component with the first name', () => {
   render(
     <Person
         firstName="Kyle"
@@ -17,7 +30,7 @@ test('it renders the component with the value', () => {
   expect(kit).toBeTruthy()
 })
 
-test('it renders the component with the value', () => {
+test('it renders the component with the last name', () => {
   render(
     <Person
         firstName="Kyle"
