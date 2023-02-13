@@ -1,9 +1,9 @@
 import React from 'react'
-import PhoneNumberInput from '../_phone_number_input'
+import { PhoneNumberInput } from '../../'
 
 const PhoneNumberInputSetValue = () => (
   <>
-    <PhoneNumberInput  value={'+447733123456'} />
+    <PhoneNumberInput value={'+447733123456'} />
   </>
 )
 

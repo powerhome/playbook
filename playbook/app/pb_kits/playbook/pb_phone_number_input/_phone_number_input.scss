@@ -15,10 +15,10 @@
 
   .iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
     background-color: $focus_input_light;
+  }
 
-    .text_input {
-      background-color: $focus_input_light;
-    }
+  .iti__flag-container:hover + .text_input {
+    background-color: $focus_input_light;
   }
 
   .iti__flag {

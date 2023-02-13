@@ -1,5 +1,5 @@
 import React from 'react'
-import PhoneNumberInput from '../_phone_number_input'
+import { PhoneNumberInput } from '../../'
 
 const PhoneNumberInputDefault = () => (
   <>
