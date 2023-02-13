@@ -6,6 +6,7 @@ Rails.application.config.content_security_policy do |p|
   p.img_src     :self, :https, :data, :unsafe_inline
   p.object_src  :none
   p.style_src   :self, :https, :unsafe_inline
+  p.worker_src :self, "blob:"
 
   # To allow connections to the webpack-dev-server running in
   # a separate docker container
