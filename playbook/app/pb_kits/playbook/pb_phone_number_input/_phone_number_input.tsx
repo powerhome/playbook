@@ -124,14 +124,14 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     >
       <TextInput
         disabled={disabled}
+        error={error}
         id={id}
+        label={label}
         name={name}
         onBlur={() => validateTooShortNumber(itiInit)}
         onChange={handleOnChange}
         ref={inputRef}
         value={inputValue}
-        error={error}
-        label={label}
       />
     </div>
   )
