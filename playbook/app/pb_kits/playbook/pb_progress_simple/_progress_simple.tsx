@@ -1,16 +1,15 @@
-/* @flow */
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
+import { buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type ProgressSimpleProps = {
   align?: "left" | "center" | "right",
-  className?: string | array<string>,
+  className?: string | string[],
   dark?: boolean,
   data?: string,
   id?: string,
-  max?: string,
+  max?: number,
   muted: boolean,
   percent: string,
   value: number,
@@ -23,6 +22,7 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
     align,
     className,
     dark = false,
+    data ={},
     max,
     muted = false,
     percent = '',
@@ -34,6 +34,7 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
     width: width,
   }
 
+  const dataProps = buildDataProps(data)
   const variantStyle = variant == 'default' ? '' : variant
 
   const valueStyles = {
@@ -52,7 +53,8 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
   )
 
   return (
-    <div className={wrapperClass}>
+    <div {...dataProps}
+      className={wrapperClass}>
       <div
           className={kitClass}
           data-value={value}
