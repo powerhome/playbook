@@ -29,11 +29,6 @@ $pb_button_sizes: (
   }
   &[class*=_link]  {
     @include pb_button_link;
-    @media (hover:hover) {
-      &:hover {
-        color: $text_lt_default;
-      }
-    } 
   }
 
   // Disabled =================

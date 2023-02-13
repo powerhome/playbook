@@ -34,6 +34,7 @@ module Playbook
           disabled: disabled,
           id: id,
           role: "button",
+          tabindex: 0,
           type: type,
           value: value,
           form: form,
@@ -45,6 +46,7 @@ module Playbook
           option[:href] = link
           option[:role] = "link"
           option[:target] = "_blank" if new_window
+          option[:tabindex] = 0
         end
       end
 
