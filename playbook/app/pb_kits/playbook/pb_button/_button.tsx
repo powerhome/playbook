@@ -23,6 +23,7 @@ type ButtonPropTypes = {
   loading?: boolean,
   newWindow?: boolean,
   onClick?: EventHandler,
+  tabIndex?: number,
   size?: 'sm' | 'md' | 'lg',
   text?: string,
   type?: 'inline' | null,
@@ -66,6 +67,7 @@ const Button = (props: ButtonPropTypes) => {
     id,
     loading = false,
     onClick,
+    tabIndex,
     link = null,
     newWindow = false,
     text,
@@ -128,6 +130,7 @@ const Button = (props: ButtonPropTypes) => {
             id={id}
             rel="noreferrer"
             role="link"
+            tabIndex={tabIndex}
             target={newWindow ? '_blank' : null}
         >
           {ifLoading()}
@@ -144,6 +147,7 @@ const Button = (props: ButtonPropTypes) => {
             id={id}
             onClick={onClick}
             role="button"
+            tabIndex={tabIndex}
             type={htmlType}
             value={value}
         >

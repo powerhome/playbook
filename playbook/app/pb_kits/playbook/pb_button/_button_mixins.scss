@@ -5,6 +5,7 @@
 @import "../tokens/spacing";
 @import "../tokens/transition";
 @import "../tokens/typography";
+@import "../mixins/accessibility";
 
 $pb_button_size: 40px;
 $pb_button_v_padding: 7px;
@@ -37,7 +38,7 @@ $pb_button_border_width: 0px;
   padding: $pb_button_v_padding $pb_button_h_padding;
   cursor: pointer;
   outline: none;
-  transition: background $transition_default ease, color $transition_default ease;
+  transition: background $transition_default ease, color $transition_default ease, box-shadow $transition_default ease;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
@@ -46,6 +47,12 @@ $pb_button_border_width: 0px;
   width: fit-content;
   font-family: $font_family_base;
   white-space: nowrap;
+  
+  @include focus;
+  
+  &[class*=dark] {
+    @include focus-dark
+  }
 
   .loading-icon {
     position: absolute;
@@ -62,9 +69,8 @@ $pb_button_border_width: 0px;
     margin-left: $space_xs;
   }
 
-  &:hover, &:focus {
+  &:hover {
     outline: none;
-    
   }
 
   &:active {
@@ -86,6 +92,10 @@ $pb_button_border_width: 0px;
     &:hover {
       @include pb_button_hover;
     }
+    &:active {
+      transition: none;
+      @include pb_button_variant($primary_action);
+    }
   }
 }
 
@@ -97,6 +107,10 @@ $pb_button_border_width: 0px;
     &:hover {
       @include pb_button_hover(rgba($primary_action, $opacity_3));
     }
+    &:active {
+      transition: none;
+      @include pb_button_variant(rgba($primary_action, 0.05), $primary_action);
+    }
   } 
 }
 
@@ -107,6 +121,11 @@ $pb_button_border_width: 0px;
   @media (hover:hover) {
     &:hover {
       @include pb_button_hover($transparent);
+      color: $text_lt_default;
+    }
+    &:active {
+      transition: none;
+      @include pb_button_variant($transparent, $primary_action);
     }
   }
 }
@@ -116,6 +135,9 @@ $pb_button_border_width: 0px;
   $disabled_color: rgba($charcoal, $opacity_5);
   @include pb_button_variant(rgba($slate, $opacity_4), $disabled_color);
   pointer-events: none;
+  &:focus {
+    outline: none;
+  }
 }
 
 // Block =======================
@@ -145,6 +167,10 @@ $pb_button_border_width: 0px;
     &:hover {
       @include pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken));
     }
+    &:active {
+      transition: none;
+      @include pb_button_variant($primary_action);
+    }
   }
 }
 
@@ -156,6 +182,10 @@ $pb_button_border_width: 0px;
     &:hover {
       @include pb_button_hover(rgba($primary_action, $opacity_2));
     }
+    &:active {
+      transition: none;
+      @include pb_button_variant(rgba($white, 0.2), $white);
+    }
   }
 }
 
@@ -166,6 +196,11 @@ $pb_button_border_width: 0px;
   @media (hover:hover) {
     &:hover {
       @include pb_button_hover($transparent);
+      color: rgba($white, $opacity_6)
+    }
+    &:active {
+      transition: none;
+      @include pb_button_variant($transparent, $white);
     }
   }
 }
