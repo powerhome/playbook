@@ -55,9 +55,6 @@ $transition: $transition_cubic;
 
     &:focus ~ .pb_checkbox_checkmark {
         box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
-        &:hover {
-          border-color: $border_light;
-        }
     }
     &:checked ~ .pb_checkbox_checkmark,
     & ~ .pb_checkbox_indeterminate {
@@ -95,20 +92,23 @@ $transition: $transition_cubic;
     &.pb_checkbox_kit_error {
       > .pb_checkbox_checkmark {
         border-color: $error_dark;
-        :hover {
-          border-color: $error_dark;
+       }
+
+       input {
+        &:checked ~ .pb_checkbox_checkmark,
+        & ~ .pb_checkbox_indeterminate {
+          border-color: $primary;
+          &:hover {
+            border-color: $primary;
+          }
         }
       }
     }
-   }
+  }
 
   &.pb_checkbox_kit_error {
     > .pb_checkbox_checkmark {
       border-color: $error;
-
-      :hover {
-        border-color: $error;
-      }
     }
   }
 }
