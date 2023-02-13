@@ -43,3 +43,27 @@ test('align variant', () => {
   const kit = screen.getByTestId('large-test')
   expect(kit).toHaveClass('pb_title_count_kit_right_sm')
 })
+
+test('renders title correctly', () => {
+  render(
+    <TitleCount
+        count={35.78}
+        title="Appointments"
+    />
+  )
+
+  const kit = screen.getByText('35.78')
+  expect(kit).toBeTruthy()
+})
+
+test('renders count correctly', () => {
+  render(
+    <TitleCount
+        count={35.78}
+        title="Appointments"
+    />
+  )
+
+  const kit = screen.getByText('Appointments')
+  expect(kit).toBeTruthy()
+})
