@@ -23,10 +23,34 @@ $pb_button_styles: [
   padding: 0;
 }
 
+@mixin pb_circle_icon_button_active {
+  &:active {
+    transition: none;
+    @include pb_button_variant(rgba($primary_action, 0.05), $primary_action);
+  }
+}
+
+@mixin pb_circle_icon_button_active_dark {
+  &:active {
+    transition: none;
+    @include pb_button_variant(rgba($white, $opacity_2), $white);
+  }
+}
+
 [class^=pb_circle_icon_button_kit] {
   @each $style in $pb_button_styles {
     [class^=pb_button_kit][class*=_#{$style}] {
       @include pb_circle_icon_button;
+    }
+  }
+  :first-child {
+    &[class*=_link]  {
+      @include pb_circle_icon_button_active;
+    }
+    &.dark  {
+      &[class*=_link]  {
+        @include pb_circle_icon_button_active_dark;
+      }
     }
   }
 }
