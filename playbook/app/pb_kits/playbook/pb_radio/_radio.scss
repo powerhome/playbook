@@ -22,7 +22,11 @@
   }
 
   @media (hover:hover) {
-    &:hover, &:focus {
+    &:hover .pb_radio_button {
+      background-color: $bg_light;
+      border-color: $border_light;
+    }
+    &:focus {
       .pb_radio_button {
         border-color: $primary_action;
       }
@@ -62,7 +66,13 @@
     }
 
     @media (hover:hover) {
-      &:hover, &:focus {
+      &:hover {
+        .pb_radio_button {
+          background-color: rgba($white,.10);
+          border-color: $border_dark;
+        }
+      }
+      &:focus {
         .pb_radio_button {
           border-color: $primary_action;
         }
