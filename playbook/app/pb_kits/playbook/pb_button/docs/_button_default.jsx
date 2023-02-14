@@ -6,12 +6,14 @@ const ButtonDefault = (props) => (
     <Button
         marginRight='lg'
         onClick={() => alert("button clicked!")}
+        tabIndex={0}
         text='Button Primary'
         {...props}
     />{" "}
     <Button
         marginRight='lg'
         onClick={() => alert("button clicked!")}
+        tabIndex={0}
         text='Button Secondary'
         variant='secondary'
         {...props}
@@ -19,6 +21,7 @@ const ButtonDefault = (props) => (
     <Button
         marginRight='lg'
         onClick={() => alert("button clicked!")}
+        tabIndex={0}
         text='Button Link'
         variant='link'
         {...props}
@@ -27,6 +30,7 @@ const ButtonDefault = (props) => (
         disabled
         marginRight='lg'
         onClick={() => alert("button clicked!")}
+        tabIndex={0}
         text='Button Disabled'
         {...props}
     />

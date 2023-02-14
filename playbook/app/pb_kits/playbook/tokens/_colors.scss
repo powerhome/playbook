@@ -96,11 +96,13 @@ $hover_colors: (
 );
 
 /* Focus colors -----------------------*/
+$focus_color:         $primary;
 $focus_input_light:   rgba($active_light, $opacity_5);
 $focus_input_dark:    rgba(#144075, $opacity_5);
 $focus_input_colors: (
   focus_input_light:        $focus_input_light,
-  focus_input_dark:         $focus_input_dark
+  focus_input_dark:         $focus_input_dark,
+  focus_color:              $focus_color
 );
 
 /* Border colors ----------------------*/
