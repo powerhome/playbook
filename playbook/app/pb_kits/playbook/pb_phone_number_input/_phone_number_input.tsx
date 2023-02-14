@@ -9,7 +9,7 @@ import TextInput from '../pb_text_input/_text_input'
 
 declare global {
   interface Window {
-    intlTelInputGlobals: any;
+    intlTelInputGlobals: any
   }
 }
 
@@ -32,7 +32,7 @@ type PhoneNumberInputProps = {
 enum ValidationError {
   TooShort = 2,
   TooLong = 3,
-};
+}
 
 const formatToGlobalCountryName = (countryName: string) => {
   return countryName.split('(')[0].trim()
@@ -77,7 +77,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const [error, setError] = useState('')
 
   const validateTooLongNumber = (itiInit: any) => {
-    const error = itiInit.getValidationError();
+    const error = itiInit.getValidationError()
 
     if (error === ValidationError.TooLong) {
       const countryName = itiInit.getSelectedCountryData().name
@@ -88,7 +88,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   }
 
   const validateTooShortNumber = () => {
-    const error = itiInit.getValidationError();
+    const error = itiInit.getValidationError()
 
     if (error === ValidationError.TooShort) {
       const countryName = itiInit.getSelectedCountryData().name
@@ -127,7 +127,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
       }
     )
     
-    inputRef.current.addEventListener("countrychange", () => validateTooLongNumber(itiInit));
+    inputRef.current.addEventListener("countrychange", () => validateTooLongNumber(itiInit))
     setItiInit(itiInit)
   }, [])
 
