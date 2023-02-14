@@ -3,7 +3,9 @@ import { PhoneNumberInput } from '../../'
 
 const PhoneNumberInitialCountry = () => (
   <>
-    <PhoneNumberInput initialCountry='br' />
+    <PhoneNumberInput id='initial'
+        initialCountry='br'
+    />
   </>
 )
 

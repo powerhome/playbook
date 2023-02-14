@@ -9,7 +9,8 @@ import TextInput from '../pb_text_input/_text_input'
 
 declare global {
   interface Window {
-    intlTelInputGlobals: any
+    intlTelInputGlobals: any,
+    intlTelInputUtils: any,
   }
 }
 
@@ -76,6 +77,8 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const [itiInit, setItiInit] = useState<any>()
   const [error, setError] = useState('')
 
+  const [placeholder, setPlaceholder] = useState('')
+
   const validateTooLongNumber = (itiInit: any) => {
     const error = itiInit.getValidationError()
 
@@ -117,7 +120,9 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   useEffect(() => {
     formatAllCountries()
 
-    const itiInit = intlTelInput(inputRef.current, {
+    //let input = document.querySelector(`#${id}`);
+
+    const telInputInit = new intlTelInput(inputRef.current, {
         utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js',
         separateDialCode: true,
         preferredCountries,
@@ -127,8 +132,49 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
       }
     )
     
-    inputRef.current.addEventListener("countrychange", () => validateTooLongNumber(itiInit))
-    setItiInit(itiInit)
+    inputRef.current.addEventListener("countrychange", () => validateTooLongNumber(telInputInit))
+    setItiInit(telInputInit)
+
+    let instance = window.intlTelInputGlobals.getInstance(inputRef.current)
+    console.log(instance)
+
+
+    instance.promise.then(() => {
+      
+      const countryData = instance.selectedCountryData
+
+      const example = window.intlTelInputUtils.getExampleNumber(countryData.iso2, true, window.intlTelInputUtils.numberFormat.INTERNATIONAL)
+      console.log(countryData.iso2)
+      setPlaceholder(example)
+
+      //window.intlTelInputGlobals.loadUtils("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js")
+    });
+
+    // let instance = window.intlTelInputGlobals.getInstance(input).promise.then(function() {
+      
+    //   const countryData = telInputInit.getSelectedCountryData()
+
+    //   const example = window.intlTelInputUtils.getExampleNumber(countryData.iso2, true, window.intlTelInputUtils.numberFormat.INTERNATIONAL)
+    //   console.log(countryData.iso2)
+    //   setPlaceholder(example)
+
+    //   //window.intlTelInputGlobals.loadUtils("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js")
+    // });
+
+    // telInputInit.promise.then(function() {
+    //   const countryData = telInputInit.getSelectedCountryData()
+
+    //   const example = window.intlTelInputUtils.getExampleNumber(countryData.iso2, true, window.intlTelInputUtils.numberFormat.INTERNATIONAL)
+    //   console.log(countryData.iso2)
+    //   setPlaceholder(example)
+
+    //   //window.intlTelInputGlobals.loadUtils("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js")
+    // });
+
+
+    // setTimeout(() => {
+    //   itiInit.setCountry("br")
+    // }, 8000)
   }, [])
 
   return (
@@ -147,6 +193,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
         onChange={handleOnChange}
         ref={inputRef}
         value={inputValue}
+        placeholder={placeholder}
       />
     </div>
   )

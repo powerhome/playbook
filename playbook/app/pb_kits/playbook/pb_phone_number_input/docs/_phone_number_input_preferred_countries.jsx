@@ -3,7 +3,10 @@ import { PhoneNumberInput } from '../../'
 
 const PhoneNumberInputPreferredCountries = () => (
   <>
-    <PhoneNumberInput preferredCountries={['us', 'br', 'ph', 'gb']} />
+    <PhoneNumberInput
+        id='preferred'
+        preferredCountries={['us', 'br', 'ph', 'gb']}
+    />
   </>
 )
 

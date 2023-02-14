@@ -3,7 +3,10 @@ import { PhoneNumberInput } from '../../'
 
 const PhoneNumberInputSetValue = () => (
   <>
-    <PhoneNumberInput value={'+447733123456'} />
+    <PhoneNumberInput
+        id='setvalue'
+        value={'+447733123456'}
+    />
   </>
 )
 
