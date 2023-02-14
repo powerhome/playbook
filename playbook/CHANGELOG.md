@@ -1,5 +1,27 @@
 
 
+## [12.3.0](https://github.com/powerhome/playbook/tree/12.3.0) (2023-02-13)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.2.0...12.3.0)
+
+**Kit Enhancements:**
+
+- Checkbox Pseudo Styles [\#2308](https://github.com/powerhome/playbook/pull/2308) ([nidaqg](https://github.com/nidaqg))
+- TS Conversion of Progress Simple + Jest Tests [\#2306](https://github.com/powerhome/playbook/pull/2306) ([nidaqg](https://github.com/nidaqg))
+- Circle Icon Button Pseudo State [\#2301](https://github.com/powerhome/playbook/pull/2301) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Typeahead Error State [\#2286](https://github.com/powerhome/playbook/pull/2286) ([Israel-Molestina](https://github.com/Israel-Molestina), [nidaqg](https://github.com/nidaqg))
+- Button Pseudo State [\#2281](https://github.com/powerhome/playbook/pull/2281) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Fixed Bugs:**
+
+- Fixed Form Group Bug Where Content Jumped on Select [\#2304](https://github.com/powerhome/playbook/pull/2304) ([nidaqg](https://github.com/nidaqg))
+
+**New Kits:**
+
+- Map Kit [\#2273](https://github.com/powerhome/playbook/pull/2273) ([nidaqg](https://github.com/nidaqg))
+
+
+
 ## [12.2.0](https://github.com/powerhome/playbook/tree/12.2.0) (2023-02-07)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.1.0...12.2.0)

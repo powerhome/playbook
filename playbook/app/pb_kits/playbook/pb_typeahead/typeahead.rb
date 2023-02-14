@@ -5,6 +5,8 @@ module Playbook
     class Typeahead < Playbook::KitBase
       prop :async, type: Playbook::Props::Boolean, default: false
       prop :default_options, type: Playbook::Props::HashArray, default: []
+      prop :error, type: Playbook::Props::String,
+                   default: ""
       prop :get_option_label
       prop :get_option_value
       prop :id
@@ -57,6 +59,7 @@ module Playbook
         base_options = {
           dark: dark,
           defaultValue: default_options,
+          error: error,
           id: id,
           inline: inline,
           isMulti: is_multi,

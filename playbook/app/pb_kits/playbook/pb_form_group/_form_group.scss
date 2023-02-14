@@ -92,7 +92,12 @@
   & > [class^=pb_selectable_card_kit]:not(:last-child) label {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
-    border-right-width: 0;
+    border-right-color: transparent;
+  }
+  & > [class^=pb_selectable_card_kit] input[type="checkbox"]:not(:checked) ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:not(:checked) ~ label {
+    &:hover {
+      border-right-color: $slate;
+    } 
   }
 
   & > [class^=pb_selectable_card_kit]:not(:first-child) label {
@@ -112,7 +117,10 @@
 
   & > [class^=pb_selectable_card_icon_kit]:not(:last-child) {
     [class^=pb_selectable_card_kit] input[type="checkbox"]:not(:checked) ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:not(:checked)~ label {
-      border-right-width: 0;
+      border-right-color: transparent;
+      &:hover {
+        border-right-color: $slate;
+      }
     }
   }
 

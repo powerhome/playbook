@@ -55,6 +55,7 @@ import * as Lightbox from 'pb_lightbox/docs'
 import * as LineGraphDocs from 'pb_line_graph/docs'
 import * as List from 'pb_list/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
+import * as Map from 'pb_map/docs'
 import * as Message from 'pb_message/docs'
 import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
@@ -153,6 +154,7 @@ WebpackerReact.setup({
   ...LineGraphDocs,
   ...List,
   ...LoadingInline,
+  ...Map,
   ...Message,
   ...MultipleUsers,
   ...MultipleUsersStacked,
