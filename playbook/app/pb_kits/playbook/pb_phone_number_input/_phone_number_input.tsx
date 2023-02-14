@@ -46,6 +46,10 @@ const formatAllCountries = () => {
   }
 }
 
+const containOnlyNumbers = (value: string) => {
+  return /^(\++)*(\d+)$/.test(value)
+}
+
 const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const {
     aria = {},
@@ -83,13 +87,24 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     }
   }
 
-  const validateTooShortNumber = (itiInit: any) => {
+  const validateTooShortNumber = () => {
     const error = itiInit.getValidationError();
 
     if (error === ValidationError.TooShort) {
       const countryName = itiInit.getSelectedCountryData().name
       setError(`Invalid ${countryName} phone number (too short)`)
     }
+  }
+
+  const validateOnlyNumbers = () => {
+    if (inputValue && !containOnlyNumbers(inputValue)) {
+      setError('Invalid phone number. Enter numbers only.')
+    }
+  }
+
+  const validateErrors = () => {
+    validateTooShortNumber()
+    validateOnlyNumbers()
   }
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,7 +143,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
         id={id}
         label={label}
         name={name}
-        onBlur={() => validateTooShortNumber(itiInit)}
+        onBlur={() => validateErrors()}
         onChange={handleOnChange}
         ref={inputRef}
         value={inputValue}
