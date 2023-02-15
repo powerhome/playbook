@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../_button'
+import { Button } from '../../'
 
 const ButtonOptions = (props) => (
   <div>

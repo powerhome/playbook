@@ -111,7 +111,23 @@ class PagesController < ApplicationController
   def get_source(example)
     read_kit_file("_#{example}.jsx")
   end
+
+  def read_file(path)
+    # Open the file for reading
+    file = File.open(Playbook::Engine.root.join(path))
+
+    # Read the contents of the file into a string
+    content = file.read
+
+    # Close the file
+    file.close
+
+    # Return the contents of the file
+    content
+  end
+
   helper_method :get_source
+  helper_method :read_file
 
 private
 
@@ -165,7 +181,7 @@ private
   end
 
   def kit_examples
-    pb_doc_kit_examples(params[:name], "rails")
+    pb_doc_kit_examples(params[:name], "react")
   end
 
   def read_kit_file(*args)

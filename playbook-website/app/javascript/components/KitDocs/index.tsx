@@ -2,53 +2,74 @@ import React, { useState } from "react"
 import {
   SandpackProvider,
   SandpackLayout,
-  SandpackCodeEditor,
   SandpackPreview,
+  useSandpack,
+  SandpackCodeEditor,
 } from "@codesandbox/sandpack-react"
 
-
 import { CircleIconButton, Card, Caption } from "playbook-ui"
+import entryPoint from "./entryPoint"
 
-const KitDocs = ({ source, exampleTitle }) => {
+const KitDocs = ({ siteFonts, source, exampleTitle, fa, faReg }) => {
   const [showCode, setShowCode] = useState(false)
-  const updatedFileContent = source.replace(/\'..\/..\/?\'/g, "'playbook-ui'").replace(/\"..\/..\/?\"/g, "'playbook-ui'")
-  const files = {
-    "/App.js": {
-      code: updatedFileContent,
-    },
-
-    "test.js": {
-      code: require("@fortawesome/fontawesome-pro/js/fontawesome.js")
-    }
- 
-  }
+  const code = source
+    .replace(
+      /import (\w+) from ('|")\.\.\/_(\w+)('|")/g,
+      'import { $1 } from "playbook-ui"'
+    )
+    .replace(
+      /import \{ (.*) \} from ('|")\.\.\/(.*)('|")/g,
+      'import { $1 } from "playbook-ui"'
+    )
 
   return (
     <>
       <Card className='pb--doc' padding='none'>
         <SandpackProvider
+          files={{
+            "/style.css": {
+              code: `body { background: white };`,
+              hidden: true,
+            },
+
+            "/App.js": {
+              code: code,
+            },
+            "/index.js": {
+              code: entryPoint,
+              hidden: true,
+            },
+            "/fa.js": {
+              code: fa,
+              hidden: true,
+            },
+            "/faReg.js": {
+              code: faReg,
+              hidden: true,
+            },
+          }}
           theme='dark'
           template='react'
-          files={files}
           customSetup={{
+            entry: "/src/index.js",
             dependencies: {
-              'playbook-ui': 'latest',
+              "playbook-ui": "latest",
             },
           }}
           options={{
             externalResources: [
-         
-              'https://unpkg.com/playbook-ui@latest/dist/playbook.css',
-              'https://unpkg.com/playbook-ui@latest/dist/reset.css',
+              "https://unpkg.com/playbook-ui@latest/dist/playbook.css",
+              "https://unpkg.com/playbook-ui@latest/dist/reset.css",
             ],
           }}
         >
-          <SandpackLayout style={{backgroundColor: 'white', border: 'none'}}>
-            <div style={{ width: '100%'}}>
+          <SandpackLayout style={{ backgroundColor: "white", border: "none" }}>
+            <div style={{ width: "100%" }}>
               <div className='pb--kit-example'>
-                <Caption text={exampleTitle}></Caption>
+                <Caption paddingBottom='md' text={exampleTitle}></Caption>
+                
                 <SandpackPreview
-                  style={{height: '450px'}}
+                  style={{ height: "450px" }}
                   showOpenInCodeSandbox={false}
                   showRefreshButton={false}
                   actionsChildren={
@@ -61,7 +82,7 @@ const KitDocs = ({ source, exampleTitle }) => {
                 />
               </div>
             </div>
-            { showCode && <SandpackCodeEditor /> }
+            {showCode && <SandpackCodeEditor />}
           </SandpackLayout>
         </SandpackProvider>
       </Card>
