@@ -113,7 +113,7 @@ const Icon = (props: IconProps) => {
       )
     else
       return (
-        <div key={icon}>
+        <>
           <i
               {...dataProps}
               className={classes}
@@ -123,7 +123,7 @@ const Icon = (props: IconProps) => {
               {...ariaProps}
               hidden
           />
-        </div>   
+        </>
       )
   }
 
