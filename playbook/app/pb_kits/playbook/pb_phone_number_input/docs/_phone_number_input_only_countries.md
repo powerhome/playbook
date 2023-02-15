@@ -1,1 +1,1 @@
-You can limit the country options, which will remove all countries except your selections from the dropdown. When limited, the country selector dropdown will display your countries in the order you list them, not alphabetically.
+You can limit the country options, which will remove all countries except your selections from the dropdown.
