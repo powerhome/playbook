@@ -1,6 +1,4 @@
 
-/* @flow */
-
 import React from 'react'
 
 import { buildCss } from '../utilities/props'
