@@ -20,7 +20,7 @@ type DateTimeStackedProps = {
   timeZone?: string,
 }
 
-const DateTimeStacked = (props: DateTimeStackedProps) => {
+const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
   if (props.date) deprecatedProps('Date Time Stacked', ['date'])
 
   const {
@@ -34,7 +34,7 @@ const DateTimeStacked = (props: DateTimeStackedProps) => {
 
   return (
     <Flex
-        inline="flex-container"
+        inline={false}
         vertical="stretch"
         {...props}
     >
@@ -44,7 +44,6 @@ const DateTimeStacked = (props: DateTimeStackedProps) => {
             bold
             dark={dark}
             date={date || datetime}
-            timeZone={timeZone}
         />
       </FlexItem>
 
@@ -57,7 +56,6 @@ const DateTimeStacked = (props: DateTimeStackedProps) => {
             className={classes}
             dark={dark}
             date={date || datetime}
-            tag="caption"
             timeZone={timeZone}
         />
       </FlexItem>
