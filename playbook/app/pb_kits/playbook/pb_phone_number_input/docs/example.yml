@@ -2,7 +2,6 @@ examples:
 
   react:
   - phone_number_input_default: Default
-  - phone_number_input_preferred_countries: Preferred Countries 
-  - phone_number_input_set_value: Setting Value
+  - phone_number_input_preferred_countries: Preferred Countries
   - phone_number_input_initial_country: Initial Country
-  - phone_number_input_only_countries: Only Countries
+  - phone_number_input_only_countries: Limited Countries
