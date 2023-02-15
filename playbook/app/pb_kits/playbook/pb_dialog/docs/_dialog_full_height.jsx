@@ -7,6 +7,10 @@ import {
   Flex,
   RichTextEditor,
   Typeahead,
+  Card,
+  Table,
+  DatePicker,
+  FixedConfirmationToast,
 } from "../..";
 
 const useDialog = (visible = false) => {
@@ -17,6 +21,23 @@ const useDialog = (visible = false) => {
 };
 
 const DialogFullHeight = () => {
+  ////testing start
+  const [state, setState] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  })
+
+  const { vertical, horizontal, open } = state
+
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState })
+  }
+
+  const handleClose = () => {
+    setState({ ...state, open: false })
+  }
+/// testing end
   const [headerSeparatorDialogOpened, toggleHeaderSeparatorDialog] =
     useDialog();
   const [footerSeparatorDialogOpened, toggleFooterSeparatorDialog] =
@@ -85,6 +106,191 @@ const DialogFullHeight = () => {
                 {"phone setup, hr"}
               </Caption>
               <Typeahead placeholder="Tags.." />
+              <Button
+                  onClick={handleClick({
+                  horizontal: 'center',
+                  open: true,
+                  vertical: 'top',
+                  })}
+                  text="Top Center"
+                  variant="secondary"
+      />
+      <FixedConfirmationToast
+          closeable
+          horizontal={horizontal}
+          onClose={handleClose}
+          open={open}
+          status="neutral"
+          text={`${vertical} ${horizontal}`}
+          vertical={vertical}
+      />
+      <Card
+          padding="none"
+      >
+        <Card.Header>
+          <Body
+              text="category_1"
+          />
+        </Card.Header>
+        <Card.Body>
+          <Body
+              text="Body"
+          />
+        </Card.Body>
+      </Card>
+
+      <DatePicker
+          pickerId="date-picker-default"
+       />
+
+<Table
+    size="sm"
+>
+      <thead>
+        <tr>
+          <th>{'Column 1'}</th>
+          <th>{'Column 2'}</th>
+          <th>{'Column 3'}</th>
+          <th>{'Column 4'}</th>
+          <th>{'Column 5'}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{'Value 1'}</td>
+          <td>{'Value 2'}</td>
+          <td>{'Value 3'}</td>
+          <td>{'Value 4'}</td>
+          <td>{'Value 5'}</td>
+        </tr>
+        <tr>
+          <td>{'Value 1'}</td>
+          <td>{'Value 2'}</td>
+          <td>{'Value 3'}</td>
+          <td>{'Value 4'}</td>
+          <td>{'Value 5'}</td>
+        </tr>
+        <tr>
+          <td>{'Value 1'}</td>
+          <td>{'Value 2'}</td>
+          <td>{'Value 3'}</td>
+          <td>{'Value 4'}</td>
+          <td>{'Value 5'}</td>
+        </tr>
+      </tbody>
+    </Table>
+    <Card
+        padding="none"
+    >
+        <Card.Header>
+          <Body
+              text="category_1"
+          />
+        </Card.Header>
+        <Card.Body>
+          <Body
+              text="Body"
+          />
+        </Card.Body>
+      </Card>
+
+      <DatePicker
+          pickerId="date-picker-default"
+      />
+
+<Table
+    size="sm"
+>
+      <thead>
+        <tr>
+          <th>{'Column 1'}</th>
+          <th>{'Column 2'}</th>
+          <th>{'Column 3'}</th>
+          <th>{'Column 4'}</th>
+          <th>{'Column 5'}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{'Value 1'}</td>
+          <td>{'Value 2'}</td>
+          <td>{'Value 3'}</td>
+          <td>{'Value 4'}</td>
+          <td>{'Value 5'}</td>
+        </tr>
+        <tr>
+          <td>{'Value 1'}</td>
+          <td>{'Value 2'}</td>
+          <td>{'Value 3'}</td>
+          <td>{'Value 4'}</td>
+          <td>{'Value 5'}</td>
+        </tr>
+        <tr>
+          <td>{'Value 1'}</td>
+          <td>{'Value 2'}</td>
+          <td>{'Value 3'}</td>
+          <td>{'Value 4'}</td>
+          <td>{'Value 5'}</td>
+        </tr>
+      </tbody>
+    </Table>
+    <Card
+        padding="none"
+    >
+        <Card.Header>
+          <Body
+              text="category_1"
+          />
+        </Card.Header>
+        <Card.Body>
+          <Body
+              text="Body"
+          />
+        </Card.Body>
+      </Card>
+
+      <DatePicker
+          pickerId="date-picker-default"
+      />
+
+<Table
+    size="sm"
+>
+      <thead>
+        <tr>
+          <th>{'Column 1'}</th>
+          <th>{'Column 2'}</th>
+          <th>{'Column 3'}</th>
+          <th>{'Column 4'}</th>
+          <th>{'Column 5'}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{'Value 1'}</td>
+          <td>{'Value 2'}</td>
+          <td>{'Value 3'}</td>
+          <td>{'Value 4'}</td>
+          <td>{'Value 5'}</td>
+        </tr>
+        <tr>
+          <td>{'Value 1'}</td>
+          <td>{'Value 2'}</td>
+          <td>{'Value 3'}</td>
+          <td>{'Value 4'}</td>
+          <td>{'Value 5'}</td>
+        </tr>
+        <tr>
+          <td>{'Value 1'}</td>
+          <td>{'Value 2'}</td>
+          <td>{'Value 3'}</td>
+          <td>{'Value 4'}</td>
+          <td>{'Value 5'}</td>
+        </tr>
+      </tbody>
+    </Table>
+
+
             </Dialog.Body>
             <Dialog.Footer>
               <Button onClick={toggle}>{"Send My Issue"}</Button>
