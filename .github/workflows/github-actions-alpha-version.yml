@@ -17,7 +17,7 @@ jobs:
         id: grab-package-version
         run: |
           cd playbook
-          alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version )"
+          alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version ).${{github.ref_slug}}"
           echo "::set-output name=new_alpha_version::$alpha_version" 
       - uses: JS-DevTools/npm-publish@v1
         env: 
@@ -26,4 +26,4 @@ jobs:
           package: ./playbook/package.json
           token: ${{ secrets.NPM_TOKEN }}
           check-version: false 
-          version: ${{ steps.grab-package-version.outputs.new_alpha_version + '.' + github.ref_slug }}
+          version: ${{ steps.grab-package-version.outputs.new_alpha_version }}
