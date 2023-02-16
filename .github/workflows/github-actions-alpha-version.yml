@@ -9,3 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 Hello Alpha"
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 12
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }} 
+          version: "12.3.1-alpha.branchNameHere1"
+
