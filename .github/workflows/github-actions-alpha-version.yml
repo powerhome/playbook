@@ -19,6 +19,7 @@ jobs:
           cd playbook
           alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN}} yarn run version )"
           echo "::set-output name=new_alpha_version::$alpha_version"
+      - run: npm install
       - uses: JS-DevTools/npm-publish@v1
         with:
           package: ./playbook/package.json
