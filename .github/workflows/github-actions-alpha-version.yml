@@ -21,6 +21,8 @@ jobs:
           echo "::set-output name=new_alpha_version::$alpha_version"
       - run: npm install
       - uses: JS-DevTools/npm-publish@v1
+        env: 
+          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN}}
         with:
           package: ./playbook/package.json
           token: ${{ secrets.NPM_TOKEN }}
