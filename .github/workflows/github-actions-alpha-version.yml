@@ -26,4 +26,4 @@ jobs:
           package: ./playbook/package.json
           token: ${{ secrets.NPM_TOKEN }}
           check-version: false 
-          version: '${{ steps.grab-package-version.outputs.new_alpha_version }}.${{github.branch}}'
+          version: '${{ steps.grab-package-version.outputs.new_alpha_version }}.${{releasetest}}'
