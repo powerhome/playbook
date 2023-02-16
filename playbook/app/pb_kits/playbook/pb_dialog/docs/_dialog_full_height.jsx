@@ -11,6 +11,8 @@ import {
   Table,
   DatePicker,
   FixedConfirmationToast,
+  Pill,
+  Select
 } from "../..";
 
 const useDialog = (visible = false) => {
@@ -37,6 +39,21 @@ const DialogFullHeight = () => {
   const handleClose = () => {
     setState({ ...state, open: false })
   }
+  const testoptions = [
+    {
+      value: '1',
+      text: 'Burgers',
+    },
+    {
+      value: '2',
+      text: 'Pizza',
+    },
+    {
+      value: '3',
+      text: 'Tacos',
+    },
+  ]
+
 /// testing end
   const [headerSeparatorDialogOpened, toggleHeaderSeparatorDialog] =
     useDialog();
@@ -95,7 +112,8 @@ const DialogFullHeight = () => {
             <Dialog.Header>
               <Body>{title}</Body>
             </Dialog.Header>
-            <Dialog.Body>
+            <Dialog.Body marginBottom="xl"
+                paddingBottom="xl">
               <Caption marginBottom="xs">{"Description"}</Caption>
               <RichTextEditor />
               <br />
@@ -106,6 +124,44 @@ const DialogFullHeight = () => {
                 {"phone setup, hr"}
               </Caption>
               <Typeahead placeholder="Tags.." />
+              <div>
+                <Select
+                    label="Favorite Food"
+                    name="food"
+                    options={testoptions}
+                />
+              </div>
+              <div>
+                <Pill
+                    text="success"
+                    variant="success"
+                />
+
+                <Pill
+                    text="error"
+                    variant="error"
+                />
+
+                <Pill
+                    text="warning"
+                    variant="warning"
+                />
+
+                <Pill
+                    text="info"
+                    variant="info"
+                />
+
+                <Pill
+                    text="neutral"
+                    variant="neutral"
+                />
+
+                <Pill
+                    text="primary"
+                    variant="primary"
+                />
+              </div>
               <Button
                   onClick={handleClick({
                   horizontal: 'center',
