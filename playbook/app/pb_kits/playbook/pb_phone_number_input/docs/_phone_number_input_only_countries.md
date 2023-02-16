@@ -1,1 +1,1 @@
-You can limit the country options, which will remove all countries except your selections from the dropdown.
+Limiting countries removes all countries from the dropdown except your selections.
