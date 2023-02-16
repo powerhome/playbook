@@ -16,9 +16,8 @@ jobs:
       - name: grab package version
         id: grab-package-version
         run: |
-          alpha_version="$(yarn version)"
+          alpha_version="$(yarn run version)"
           echo "::set-output name=new_alpha_version::$alpha_version"
-      - run: yarn version
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
