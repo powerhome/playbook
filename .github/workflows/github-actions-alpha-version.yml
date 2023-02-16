@@ -16,10 +16,8 @@ jobs:
       - name: grab package version
         id: grab-package-version
         run: |
-          alpha_version="$(yarn run version)"
+          alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN}} yarn run version )"
           echo "::set-output name=new_alpha_version::$alpha_version"
-        with: 
-          token: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN}}
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
