@@ -17,12 +17,12 @@ jobs:
         id: grab-package-version
         run: |
           cd playbook
-          alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN}} yarn run version )"
+          alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version )"
           echo "::set-output name=new_alpha_version::$alpha_version"
-      - run: npm install
+      - run: yarn install
       - uses: JS-DevTools/npm-publish@v1
         env: 
-          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN}}
+          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
         with:
           package: ./playbook/package.json
           token: ${{ secrets.NPM_TOKEN }}
