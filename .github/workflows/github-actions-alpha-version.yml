@@ -8,7 +8,7 @@ jobs:
     if: github.event.label.name == 'alpha'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 Hello ${{ github.ref_slug }}"
+      - run: echo "🎉 Hello ${{ github.ref_name }}"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -17,7 +17,7 @@ jobs:
         id: grab-package-version
         run: |
           cd playbook
-          alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version ).${{github.ref_slug}}"
+          alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version ).${{github.ref_name}}"
           echo "::set-output name=new_alpha_version::$alpha_version" 
       - uses: JS-DevTools/npm-publish@v1
         env: 
