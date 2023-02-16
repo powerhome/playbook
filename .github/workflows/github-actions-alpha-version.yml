@@ -15,6 +15,6 @@ jobs:
           node-version: 12
       - uses: JS-DevTools/npm-publish@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }} 
-          version: "12.3.1-alpha.branchNameHere1"
+          token: ${{ secrets.NPM_TOKEN }}
+          version: 12.3.1-alpha.branchNameHere1
 
