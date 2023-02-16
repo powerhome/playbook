@@ -8,7 +8,7 @@ jobs:
     if: github.event.label.name == 'alpha'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 Hello ${{github.branch_name}}"
+      - run: echo "🎉 Hello ${{ github.ref_slug }}"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -26,4 +26,4 @@ jobs:
           package: ./playbook/package.json
           token: ${{ secrets.NPM_TOKEN }}
           check-version: false 
-          version: "${{ steps.grab-package-version.outputs.new_alpha_version }}.${{github.branch_name}}"
+          version: ${{ steps.grab-package-version.outputs.new_alpha_version + '.' + github.ref_slug }}
