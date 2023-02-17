@@ -7,8 +7,11 @@ jobs:
   Creating-Alpha-Version:
     if: github.event.label.name == 'alpha'
     runs-on: ubuntu-latest
+    env:
+      # Set an environment variable for the branch name
+      BRANCH_NAME: ${{ github.head_ref }}
     steps:
-      - run: echo "🎉 Hello $((FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version ).${{ github.head_ref }})"
+      - run: echo "🎉 Hello $(FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version ).${{ env.BRANCH_NAME }}"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -17,7 +20,7 @@ jobs:
         id: grab-package-version
         run: |
           cd playbook
-          alpha_version="$((FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version ).${{ github.head_ref }})"
+          alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version ).${{ env.BRANCH_NAME }}"
           echo "::set-output name=new_alpha_version::$alpha_version" 
       - uses: JS-DevTools/npm-publish@v1
         env: 
