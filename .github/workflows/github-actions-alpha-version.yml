@@ -20,7 +20,7 @@ jobs:
       - name: grab current yarn version
         run: |
           cd playbook
-          yarn_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ env.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version )"
+          yarn_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ env.FONTAWESOME_NPM_AUTH_TOKEN }} yarn version )"
           echo "${yarn_version}" >> $GITHUB_ENV
       - name: grab package version
         id: grab-package-version
