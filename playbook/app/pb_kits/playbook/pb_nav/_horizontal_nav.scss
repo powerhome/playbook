@@ -83,7 +83,7 @@ $selector: ".pb_nav_list";
       margin: 0;
     }
     [class*=_active] {
-      background-color: $active_light;
+      background-color: $bg_light;
       &[class*=dark] {
         background-color: rgba($white, $opacity_1);
       }

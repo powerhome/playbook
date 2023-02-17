@@ -101,7 +101,7 @@ $selector: ".pb_nav_list";
   // Show Highlight
   &[class*=_highlight] {
     [class*=_active] {
-      background-color: $active_light;
+      background-color: $bg_light;
     }
     &[class*=dark]{
       [class*=_active] {
