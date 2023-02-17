@@ -16,11 +16,17 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 12
+
+      - name: grab current yarn version
+        run: |
+          cd playbook
+          yarn_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ env.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version )"
+          echo "${yarn_version}" >> $GITHUB_ENV
       - name: grab package version
         id: grab-package-version
         run: |
           cd playbook
-          alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ env.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version ).${{ env.BRANCH_NAME }}"
+          alpha_version="${{ env.yarn_version }}.${{ env.BRANCH_NAME }}"
           echo "::set-output name=new_alpha_version::$alpha_version"
       - name: Set output
         run: echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
@@ -29,4 +35,4 @@ jobs:
           package: ./playbook/package.json
           token: ${{ secrets.NPM_TOKEN }}
           check-version: false 
-          version: ${{ steps.grab-package-version.outputs.new_alpha_version }}
+          version: ${{ env.new_alpha_version }}
