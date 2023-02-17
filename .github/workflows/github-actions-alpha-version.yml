@@ -12,10 +12,6 @@ jobs:
       BRANCH_NAME: ${{ github.head_ref }}
       FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
     steps:
-      - name: Say hello
-        run: |
-          cd playbook
-          echo "🎉 Hello $(FONTAWESOME_NPM_AUTH_TOKEN=${{ env.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version ).${{ env.BRANCH_NAME }}"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
