@@ -43,28 +43,36 @@
   }
 
   .iti__arrow::before {
+    border-style: solid;
+    border-width: 0.1em 0.1em 0 0;
+    content: '';
     display: inline-block;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    font: var(--fa-font-regular);
+    height: 0.6em;
+    left: 0.1em;
+    position: relative;
+    vertical-align: top;
+    width: 0.6em;
+    top: 10px;
+    transform: rotate(135deg);
     font-size: 0.5em;
-    content: "\f078";
+    color: $slate;
   }
 
   .iti__arrow.iti__arrow--up::before {
-    font: var(--fa-font-regular);
-    font-size: 0.5em;
-    content: "\f077";
+    transform: rotate(-45deg);
+    top: 12px;
   }
 
   .iti__active::after {
     float: right;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    font: var(--fa-font-regular);
-    content: "\f00c";
-    font-size: 1em;
+    content: "";
     margin-top: 5px;
+    transform: rotate(45deg);
+    height: 12px;
+    width: 6px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+    border-radius: 1px;
   }
 
   .iti__country-list {
