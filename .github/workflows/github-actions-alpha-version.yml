@@ -21,7 +21,9 @@ jobs:
         run: |
           cd playbook
           alpha_version="$(FONTAWESOME_NPM_AUTH_TOKEN=${{ env.FONTAWESOME_NPM_AUTH_TOKEN }} yarn run version ).${{ env.BRANCH_NAME }}"
-          echo "::set-output name=new_alpha_version::$alpha_version" 
+          echo "::set-output name=new_alpha_version::$alpha_version"
+      - name: Set output
+        run: echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
       - uses: JS-DevTools/npm-publish@v1
         with:
           package: ./playbook/package.json
