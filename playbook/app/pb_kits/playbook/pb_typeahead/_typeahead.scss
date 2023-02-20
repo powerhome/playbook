@@ -183,6 +183,10 @@
   }
  
   .typeahead-kit-select__menu {
+    .typeahead-kit-select__menu-list {
+      padding: 0;
+    }
+
     .typeahead-kit-select__option {
       &.typeahead-kit-select__option--is-focused {
         background-color: $hover_light;
