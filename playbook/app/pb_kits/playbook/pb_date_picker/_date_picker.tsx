@@ -51,7 +51,7 @@ const DatePicker = (props: DatePickerProps) => {
   if (props.plugins) deprecatedProps('Date Picker', ['plugins'])
 
   const {
-    allowInput = false,
+    allowInput = true,
     aria = {},
     className,
     dark = false,

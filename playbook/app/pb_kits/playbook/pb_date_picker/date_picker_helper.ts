@@ -112,6 +112,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   flatpickr(`#${pickerId}`, {
+    allowInput,
     closeOnSelect,
     disableMobile: true,
     dateFormat: getDateFormat(),
@@ -236,11 +237,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // if (picker.weekElements[0].parentElement){
   //   return  picker.weekElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
   // }
-
-  // Remove readonly attribute for validation and or text input
-  if (allowInput){
-    picker.input.removeAttribute('readonly')
-  }
   if (required){
     picker.input.removeAttribute('readonly')
     picker.input.addEventListener('keydown', (e: Event) => e.preventDefault())
