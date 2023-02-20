@@ -1,0 +1,102 @@
+@import "../tokens/colors";
+
+.pb_phone_number_input {
+  input::placeholder {
+    color: $focus_input_light;
+  }
+
+  .iti__country {
+    padding: 5px 10px 5px 16px;
+  }
+
+  .iti__selected-flag {
+    padding: 0 6px 0 16px;
+  }
+
+  .iti__country.iti__highlight {
+    background-color: $hover_light;
+
+    .iti__country-name, .iti__dial-code {
+      color: $primary
+    }
+  }
+
+  .iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+    background-color: $focus_input_light;
+  }
+
+  .iti__flag-container:hover + .text_input {
+    background-color: $focus_input_light;
+  }
+
+  .iti__flag {
+    background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags.png");
+  }
+
+  .iti--separate-dial-code .iti__selected-flag {
+    background-color: rgba($white, $opacity_1);
+  }
+
+  .iti__arrow {
+    border-left: unset;
+    border-right: unset;
+    border-top: unset;
+    width: unset;
+    height: unset;
+    margin-bottom: $space_xxs;
+  }
+
+  .iti__arrow--up {
+    border-bottom: unset;
+  }
+
+  .iti__arrow::before {
+    border-style: solid;
+    border-width: 0.1em 0.1em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.6em;
+    left: 0.1em;
+    position: relative;
+    vertical-align: top;
+    width: 0.6em;
+    top: 10px;
+    transform: rotate(135deg);
+    font-size: 0.5em;
+    color: $slate;
+  }
+
+  .iti__arrow.iti__arrow--up::before {
+    transform: rotate(-45deg);
+    top: 12px;
+  }
+
+  .iti__active::after {
+    float: right;
+    content: "";
+    margin-top: 5px;
+    transform: rotate(45deg);
+    height: 12px;
+    width: 6px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+    border-radius: 1px;
+  }
+
+  .iti__country-list {
+    min-width: 340px;
+    border-radius: $border_radius_md;
+    border: 1px solid $border_light;
+    box-shadow: $shadow_deep;
+  }
+
+  .iti__divider {
+    border-bottom: 1px solid $border_light;
+  }
+  
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .iti__flag {
+      background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags@2x.png");
+    }
+  }
+}

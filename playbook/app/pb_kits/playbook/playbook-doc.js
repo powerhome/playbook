@@ -65,6 +65,7 @@ import * as Passphrase from 'pb_passphrase/docs'
 import * as PbReactPopover from 'pb_popover/docs'
 import * as Person from 'pb_person/docs'
 import * as PersonContact from 'pb_person_contact/docs'
+import * as PhoneNumberInput from 'pb_phone_number_input/docs'
 import * as Pill from 'pb_pill/docs'
 import * as ProgressPills from 'pb_progress_pills/docs'
 import * as ProgressSimple from 'pb_progress_simple/docs'
@@ -163,6 +164,7 @@ WebpackerReact.setup({
   ...PbReactPopover,
   ...Person,
   ...PersonContact,
+  ...PhoneNumberInput,
   ...Pill,
   ...ProgressPills,
   ...ProgressSimple,
