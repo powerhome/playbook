@@ -5,6 +5,10 @@
     color: $focus_input_light;
   }
 
+  .text_input {
+    min-width: 284px;
+  }
+
   .iti__country {
     padding: 5px 10px 5px 16px;
   }
@@ -34,7 +38,7 @@
   }
 
   .iti--separate-dial-code .iti__selected-flag {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba($white, $opacity_1);
   }
 
   .iti__arrow {
@@ -43,7 +47,7 @@
     border-top: unset;
     width: unset;
     height: unset;
-    margin-bottom: 4px;
+    margin-bottom: $space_xxs;
   }
 
   .iti__arrow--up {
