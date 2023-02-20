@@ -25,7 +25,7 @@ jobs:
         id: grab-package-version
         run: |
           cd playbook
-          alpha_version="-alpha.${{ env.playbook_version }}.${{ env.BRANCH_NAME }}"
+          alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}"
           echo "::set-output name=new_alpha_version::$alpha_version"
       - name: Set output
         run: echo "new_alpha_version=${{ steps.grab-package-version.outputs.new_alpha_version }}" >> $GITHUB_ENV
