@@ -20,7 +20,7 @@ jobs:
         run: |
           cd playbook
           playbook_version=$(node -pe "require('./package.json').version")
-          ${playbook_version} >> $GITHUB_ENV
+          echo "playbook_version=${playbook_version}" >> $GITHUB_ENV
       - name: grab package version
         id: grab-package-version
         run: |
