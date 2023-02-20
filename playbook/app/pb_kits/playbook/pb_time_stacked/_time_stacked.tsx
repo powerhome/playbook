@@ -15,7 +15,7 @@ type TimeStackedProps = {
   data?: { [key: string]: string },
   date?: string,
   id?: string,
-  time: number | Date,
+  time?: number | Date,
   timeZone?: string,
 }
 
