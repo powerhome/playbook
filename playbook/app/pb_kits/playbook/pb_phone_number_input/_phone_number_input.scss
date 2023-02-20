@@ -5,6 +5,14 @@
     color: $focus_input_light;
   }
 
+  .iti__country {
+    padding: 5px 10px 5px 16px;
+  }
+
+  .iti__selected-flag {
+    padding: 0 6px 0 16px;
+  }
+
   .iti__country.iti__highlight {
     background-color: $hover_light;
 
@@ -80,6 +88,10 @@
     border-radius: $border_radius_md;
     border: 1px solid $border_light;
     box-shadow: $shadow_deep;
+  }
+
+  .iti__divider {
+    border-bottom: 1px solid $border_light;
   }
   
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
