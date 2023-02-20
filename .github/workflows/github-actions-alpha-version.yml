@@ -16,7 +16,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 12
-
       - name: grab current version
         run: |
           cd playbook
@@ -33,6 +32,7 @@ jobs:
       - uses: JS-DevTools/npm-publish@v1
         with:
           package: ./playbook/package.json
+          tag: "alpha"
           token: ${{ secrets.NPM_TOKEN }}
           check-version: false 
           version: ${{ env.new_alpha_version }}
