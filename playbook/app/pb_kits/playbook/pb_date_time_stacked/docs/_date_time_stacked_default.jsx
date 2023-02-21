@@ -10,16 +10,19 @@ const DateTimeStackedDefault = (props) => (
     />
     <br />
     <DateTimeStacked
+        datetime={new Date(2018, 2, 20)}
+        {...props}
+    />
+    <br />
+    <DateTimeStacked
         datetime={new Date()}
         timeZone="Asia/Tokyo"
-
         {...props}
     />
     <br />
     <DateTimeStacked
         datetime={new Date()}
         timeZone="America/Denver"
-
         {...props}
     />
 

@@ -16,16 +16,13 @@
     border-radius: 1000px;
     border: 2px solid $border_light;
     margin-right: $space_xs;
-    transition-property: border-color, border;
-    transition-duration: $transition_short;
-    transition-timing-function: $easeIn;
+    transition: background $transition_default ease, box-shadow $transition_default ease, border-color $transition_default ease;
   }
 
   @media (hover:hover) {
-    &:hover, &:focus {
-      .pb_radio_button {
-        border-color: $primary_action;
-      }
+    &:hover .pb_radio_button {
+      background-color: $bg_light;
+      border-color: $border_light;
     }
   }
 
@@ -33,7 +30,12 @@
     position: relative;
     width: 0;
     left: $offscreen;
-    &:checked, &:focus {
+    &:focus-visible {
+      & ~ .pb_radio_button {
+        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
+      }
+    }
+    &:checked {
       & ~ .pb_radio_button {
         border: 6px solid $primary;
       }
@@ -54,7 +56,12 @@
       border-color: $border_dark;
     }
     input {
-      &:checked, &:focus {
+      &:focus-visible {
+        & ~ .pb_radio_button {
+          box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;
+        }
+      }
+      &:checked {
         & ~ .pb_radio_button {
           border: 6px solid $primary;
         }
@@ -62,9 +69,10 @@
     }
 
     @media (hover:hover) {
-      &:hover, &:focus {
+      &:hover {
         .pb_radio_button {
-          border-color: $primary_action;
+          background-color: rgba($white,.10);
+          border-color: $border_dark;
         }
       }
     }
