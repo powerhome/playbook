@@ -2,21 +2,22 @@ import React, { useRef, useEffect } from 'react'
 import { Map } from '../../'
 
 import maplibregl from 'maplibre-gl'
+import mapTheme from '../pbMapTheme'
 
 const MapDefault = () => {
 
+  
   const mapContainerRef = useRef(null)
 
   //This function should contain all maplibre related code
   const loadMap = ( { target: map }) => {
-
-    const defaultPosition = [-75.379143, 39.831200]
+  const defaultPosition = [-75.379143, 39.831200]
         //set marker/pin
         /* eslint-disable-next-line */
         const marker = new maplibregl.Marker({
-          color: "#0056CF",
+          color: mapTheme.marker,
         }).setLngLat(defaultPosition)
-        .setPopup(new maplibregl.Popup({className: 'map_popup', closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
+        .setPopup(new maplibregl.Popup({closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
         .addTo(map);
 
         // disable map zoom when using scroll

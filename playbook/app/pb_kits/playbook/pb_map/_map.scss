@@ -4,7 +4,7 @@
 @import "../tokens/border_radius";
 
 
-.pb_map {
+[class*=pb_map] {
   font-family: $font_family_base !important;
 
   .custom-nav-control {
@@ -52,6 +52,10 @@
       &:hover {
         background-color: darken($bg_light, 2%);
       }
+
+      &:focus {
+        box-shadow: 0 0 0 1px $primary_action;
+      }
     }
 
     .map-flyto-button {
@@ -63,11 +67,15 @@
     }
   }
 
-  .map_popup {
     .maplibregl-popup-content {
       padding: $space_sm;
       background-color: $card_light;
       box-shadow: $shadow_deeper;
+    }
+
+  &.dark {
+    .map-flyto-button {
+      background-color: black;
     }
   }
 }

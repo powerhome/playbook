@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+
 import Flex  from "../pb_flex/_flex"
 import SectionSeparator from '../pb_section_separator/_section_separator'
 import Icon from '../pb_icon/_icon'
@@ -12,8 +13,8 @@ type MapProps = {
   className?: string,
   data?: { [key: string]: string },
   id?: string,
-  zoomBtns?: boolean
-  flyTo?: boolean
+  zoomBtns?: boolean,
+  flyTo?: boolean,
 }
 
 const Map = (props: MapProps) => {
