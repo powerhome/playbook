@@ -1,8 +1,73 @@
 @import "../tokens/typography";
-@import "../tokens/colors"; 
+@import "../tokens/colors";
 @import "../tokens/shadows";
+@import "../tokens/border_radius";
+
 
 .pb_map {
   font-family: $font_family_base !important;
 
+  .custom-nav-control {
+    position: absolute;
+    right: $space_xs + 2;
+    top: $space_xs + 2;
+    z-index: 2;
+
+    .custom-nav-control-zoom {
+      border-radius: $border_radius_md;
+      border: solid 1px $border_light;
+      box-shadow: $shadow_deep;
+      background: $card_light;
+      .map-zoom-in-button {
+        border-top-right-radius: $border_radius_md;
+        border-top-left-radius: $border_radius_md;
+      }
+      .map-zoom-out-button {
+        border-bottom-right-radius: $border_radius_md;
+        border-bottom-left-radius: $border_radius_md;
+      }
+    }
+
+    .pb_section_separator_kit_card_horizontal {
+      width: 100%;
+    }
+
+    .map-zoom-in-button,
+    .map-zoom-out-button,
+    .map-flyto-button {
+      padding: $space_xs + 2;
+      text-align: center;
+      color: $text_lt_light;
+      background-color: $card_light;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: $space_xs + 4;
+        height: $space_sm;
+      }
+
+      &:hover {
+        background-color: darken($bg_light, 2%);
+      }
+    }
+
+    .map-flyto-button {
+      border-radius: $border_radius_md;
+      margin-top: $space_xs;
+      border: solid 1px $border_light;
+      box-shadow: $shadow_deep;
+      background-color: $card_light;
+    }
+  }
+
+  .map_popup {
+    .maplibregl-popup-content {
+      padding: $space_sm;
+      background-color: $card_light;
+      box-shadow: $shadow_deeper;
+    }
+  }
 }
