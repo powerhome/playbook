@@ -35,6 +35,7 @@
     .map-zoom-in-button,
     .map-zoom-out-button,
     .map-flyto-button {
+      cursor: pointer;
       padding: $space_xs + 2;
       text-align: center;
       color: $text_lt_light;
@@ -74,8 +75,8 @@
     }
 
   &.dark {
-    .map-flyto-button {
-      background-color: black;
+    .maplibregl-canvas {
+      filter: invert(100%) brightness(175%) contrast(80%) sepia(50%) saturate(2) hue-rotate(185deg);
     }
   }
 }

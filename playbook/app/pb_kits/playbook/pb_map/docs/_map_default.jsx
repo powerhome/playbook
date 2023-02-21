@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from 'react'
 import { Map } from '../../'
-
+import "maplibre-gl/dist/maplibre-gl.css"
 import maplibregl from 'maplibre-gl'
 import mapTheme from '../pbMapTheme'
 
-const MapDefault = () => {
+const MapDefault = (props) => {
 
   
   const mapContainerRef = useRef(null)
@@ -48,15 +48,15 @@ const MapDefault = () => {
                 });
           })  
         
-        //add attributioncontrols
-        map.addControl(new maplibregl.AttributionControl({
-          compact: true
-          }));
+        // //add attributioncontrols
+        // map.addControl(new maplibregl.AttributionControl({
+        //   compact: true
+        //   }));
   }
 
     useEffect(() => {
          new maplibregl.Map({
-            attributionControl: false,
+            // attributionControl: false,
             container: mapContainerRef.current,
             style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
             center: [-75.379143, 39.831200],
@@ -67,6 +67,7 @@ const MapDefault = () => {
 return ( 
   <Map flyTo = "true"
       zoomBtns="true"
+      {...props}
   >
        <div
            ref={mapContainerRef}

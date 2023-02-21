@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Flex  from "../pb_flex/_flex"
 import SectionSeparator from '../pb_section_separator/_section_separator'
@@ -15,7 +15,7 @@ type MapProps = {
   id?: string,
   zoomBtns?: boolean,
   flyTo?: boolean,
-}
+} & GlobalProps
 
 const Map = (props: MapProps) => {
   const {
@@ -42,29 +42,29 @@ const Map = (props: MapProps) => {
       {
         zoomBtns ? (
           <Flex className="custom-nav-control" orientation='column'>
-          <div className="custom-nav-control-zoom">
-            <div className='map-zoom-in-button'
-                id="zoom-in-button">
-                  <Icon icon="plus"/>
+            <div className="custom-nav-control-zoom">
+              <div className='map-zoom-in-button'
+                  id="zoom-in-button">
+                    <Icon icon="plus"/>
+              </div>
+              <SectionSeparator />
+              <div className='map-zoom-out-button'
+                  id="zoom-out-button">
+                    <Icon icon="minus"/>
+              </div>
             </div>
-            <SectionSeparator />
-            <div className='map-zoom-out-button'
-                id="zoom-out-button">
-                  <Icon icon="minus"/>
-            </div>
-          </div>
           {
             flyTo ? (
-          <div className='map-flyto-button'
+              <div className='map-flyto-button'
                   id="flyto-button">
                     <Icon icon="eye"/>
               </div>
             ) : null
           }
          
-      </Flex>
+         </Flex>
          ) : null
-        }
+      }
       {children}
     </div>
   )
