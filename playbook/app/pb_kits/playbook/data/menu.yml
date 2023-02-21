@@ -32,6 +32,7 @@ kits:
     - form_group
     - form_pill
     - passphrase
+    - phone_number_input
     - radio
     - rich_text_editor
     - select

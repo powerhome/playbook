@@ -11,17 +11,17 @@ import Title from '../pb_title/_title'
 
 type TitleCountProps = {
   align: "center" | "left" | "right",
-  aria?: object,
+  aria?: { [key: string]: string },
   className?: string,
-  count?: Numeric,
+  count?: number,
   dark?: boolean,
-  data?: object,
+  data?: { [key: string]: string },
   id?: string,
   title?: string,
   size?: "lg" | "sm",
 };
 
-const TitleCount = (props: TitleCountProps) => {
+const TitleCount = (props: TitleCountProps): React.ReactElement => {
   const {
     align = 'left',
     aria = {},
@@ -61,7 +61,9 @@ const TitleCount = (props: TitleCountProps) => {
           color="light"
           dark={dark}
       >
-        <If condition={count}>{formatCount}</If>
+        {count &&
+          formatCount
+        }
       </Body>
 
     </div>

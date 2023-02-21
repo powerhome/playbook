@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -14,15 +12,15 @@ import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
 
 type PersonProps = {
-  aria?: object,
-  className?: string | array<string>,
-  data?: object,
+  aria?: { [key: string]: string },
+  className?: string | string[],
+  data?: { [key: string]: string },
   firstName: string,
   id?: string,
   lastName: string,
 }
 
-const Person = (props: PersonProps) => {
+const Person = (props: PersonProps): React.ReactElement => {
   const {
     aria = {},
     className,
@@ -52,13 +50,13 @@ const Person = (props: PersonProps) => {
       >
         {firstName}
       </Body>
-      <If condition={lastName}>
+      {lastName && 
         <Title
             className="pb_person_first"
             size={4}
             text={` ${lastName}`}
         />
-      </If>
+      }
     </div>
   )
 }
