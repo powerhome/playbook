@@ -1,25 +1,34 @@
 /* @flow */
 
-import React, { Node } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 
-import { globalProps } from '../../utilities/globalProps'
+import { GlobalProps, globalProps } from '../../utilities/globalProps'
 
 import Card from '../../pb_card/_card'
 
-type FilterBackgroundProps = {
+export type FilterBackgroundProps = {
   background: boolean,
   className: string,
-  children: Node,
+  children?: React.ReactChild[] | React.ReactChild,
   dark: boolean,
-}
+} & GlobalProps
 
-const FilterBackground = (props: FilterBackgroundProps) => {
+const FilterBackground = (props: FilterBackgroundProps): React.ReactElement => {
   const { background = true, className, children, dark } = props
 
   return (
     <div className={classnames(`pb_filter_kit ${className}`, globalProps(props))}>
-      <Choose>
+      { background ? 
+          <Card
+              dark={dark}
+              padding="none"
+          >
+            {children}
+          </Card> : 
+          {children}
+      }
+      {/* <Choose>
         <When condition={background}>
           <Card
               dark={dark}
@@ -29,7 +38,7 @@ const FilterBackground = (props: FilterBackgroundProps) => {
           </Card>
         </When>
         <Otherwise>{children}</Otherwise>
-      </Choose>
+      </Choose> */}
     </div>
   )
 }

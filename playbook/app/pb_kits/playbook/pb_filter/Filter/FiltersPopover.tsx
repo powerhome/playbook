@@ -1,12 +1,15 @@
-/* @flow */
-
-import React, { Node, useState } from 'react'
+import React, { useState } from 'react'
 
 import CircleIconButton from '../../pb_circle_icon_button/_circle_icon_button'
 import PbReactPopover from '../../pb_popover/_popover'
 
-const FiltersPopoverProps = { children: Node }
-const FiltersPopover = ({ children, dark, minWidth, placement = "bottom-start" }: FiltersPopoverProps) => {
+type FiltersPopoverProps = { 
+  children?: React.ReactChild[] | React.ReactChild, 
+  dark?: boolean,
+  minWidth?: string,
+  placement?: any,
+}
+const FiltersPopover = ({ children, dark, minWidth, placement = "bottom-start" }: FiltersPopoverProps): React.ReactElement => {
   const [hide, updateHide] = useState(true)
   const toggle = () => updateHide(!hide)
 
@@ -16,7 +19,6 @@ const FiltersPopover = ({ children, dark, minWidth, placement = "bottom-start" }
         icon="filter"
         id="filter"
         onClick={toggle}
-        text="filter"
         variant="secondary"
     />
   )

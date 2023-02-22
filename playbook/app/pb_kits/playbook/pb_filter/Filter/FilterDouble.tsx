@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 
 import CurrentFilters, { FilterDescription } from './CurrentFilters'
@@ -15,8 +13,9 @@ import SortMenu, {
 import Caption from '../../pb_caption/_caption'
 import Flex from '../../pb_flex/_flex'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
+
 export type FilterDoubleProps = {
-  children: Node,
+  children?: React.ReactChild[] | React.ReactChild, 
   filters?: FilterDescription,
   onSortChange: SortingChangeCallback,
   results?: number,
@@ -35,7 +34,7 @@ const FilterDouble = ({
   minWidth,
   placement,
   ...bgProps
-}: FilterDoubleProps) => (
+}: FilterDoubleProps): React.ReactElement => (
   <FilterBackground
       dark={dark}
       {...bgProps}

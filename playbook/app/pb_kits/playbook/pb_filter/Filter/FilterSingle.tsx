@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import { isEmpty } from 'lodash'
 
@@ -16,7 +14,7 @@ import SortMenu, {
 } from './SortMenu'
 
 export type FilterSingleProps = {
-  children?: Node,
+  children?: React.ReactChild[] | React.ReactChild, 
   filters?: FilterDescription,
   onSortChange?: SortingChangeCallback,
   results?: number,
@@ -35,7 +33,7 @@ const FilterSingle = ({
   minWidth,
   placement,
   ...bgProps
-}: FilterSingleProps) => {
+}: FilterSingleProps): React.ReactElement => {
   return (
     <FilterBackground
         dark={dark}
@@ -46,7 +44,22 @@ const FilterSingle = ({
           paddingRight="lg"
           vertical="center"
       >
-        <If condition={children}>
+        { children && 
+          <div>
+            <FiltersPopover
+                dark={dark}
+                minWidth={minWidth}
+                placement={placement}
+            >
+              {children}
+            </FiltersPopover>
+            <CurrentFilters
+                dark={dark}
+                filters={filters}
+            />
+          </div>
+        }
+        {/* <If condition={children}>
           <FiltersPopover
               dark={dark}
               minWidth={minWidth}
@@ -58,19 +71,27 @@ const FilterSingle = ({
               dark={dark}
               filters={filters}
           />
-        </If>
+        </If> */}
         <ResultsCount
             dark={dark}
             results={results}
         />
-        <If condition={!isEmpty(sortOptions)}>
+        { !isEmpty(sortOptions) &&
           <SortMenu
               dark={dark}
               onChange={onSortChange}
               options={sortOptions}
               value={sortValue}
           />
-        </If>
+        }
+        {/* <If condition={!isEmpty(sortOptions)}>
+          <SortMenu
+              dark={dark}
+              onChange={onSortChange}
+              options={sortOptions}
+              value={sortValue}
+          />
+        </If> */}
       </Flex>
     </FilterBackground>
   )
