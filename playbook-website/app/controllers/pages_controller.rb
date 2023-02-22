@@ -181,7 +181,7 @@ private
   end
 
   def kit_examples
-    pb_doc_kit_examples(params[:name], "react")
+    pb_doc_kit_examples(params[:name], "rails")
   end
 
   def read_kit_file(*args)
