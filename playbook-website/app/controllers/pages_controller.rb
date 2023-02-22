@@ -112,22 +112,19 @@ class PagesController < ApplicationController
     read_kit_file("_#{example}.jsx")
   end
 
-  def read_file(path)
-    # Open the file for reading
-    file = File.open(Playbook::Engine.root.join(path))
+  def fontawesome
+    file = File.join(File.dirname(__FILE__), "..", "..", "..", "node_modules", "@fortawesome/fontawesome-pro/js/fontawesome.min.js")
+    File.read(file)
+  end
 
-    # Read the contents of the file into a string
-    content = file.read
-
-    # Close the file
-    file.close
-
-    # Return the contents of the file
-    content
+  def fontawesome_reg
+    file = File.join(File.dirname(__FILE__), "..", "..", "..", "node_modules", "@fortawesome/fontawesome-pro/js/regular.min.js")
+    File.read(file)
   end
 
   helper_method :get_source
-  helper_method :read_file
+  helper_method :fontawesome
+  helper_method :fontawesome_reg
 
 private
 

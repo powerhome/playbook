@@ -3,14 +3,13 @@ import {
   SandpackProvider,
   SandpackLayout,
   SandpackPreview,
-  useSandpack,
   SandpackCodeEditor,
 } from "@codesandbox/sandpack-react"
 
 import { CircleIconButton, Card, Caption } from "playbook-ui"
 import entryPoint from "./entryPoint"
 
-const KitDocs = ({ siteFonts, source, exampleTitle, fa, faReg }) => {
+const KitDocs = ({ source, exampleTitle, fa, faReg }) => {
   const [showCode, setShowCode] = useState(false)
   const code = source
     .replace(
@@ -67,7 +66,7 @@ const KitDocs = ({ siteFonts, source, exampleTitle, fa, faReg }) => {
             <div style={{ width: "100%" }}>
               <div className='pb--kit-example'>
                 <Caption paddingBottom='md' text={exampleTitle}></Caption>
-                
+
                 <SandpackPreview
                   style={{ height: "450px" }}
                   showOpenInCodeSandbox={false}
@@ -82,7 +81,11 @@ const KitDocs = ({ siteFonts, source, exampleTitle, fa, faReg }) => {
                 />
               </div>
             </div>
-            {showCode && <SandpackCodeEditor />}
+            {showCode && (
+              <SandpackCodeEditor
+                style={{ height: "100%", maxHeight: "450px" }}
+              />
+            )}
           </SandpackLayout>
         </SandpackProvider>
       </Card>

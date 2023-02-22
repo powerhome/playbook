@@ -10,8 +10,8 @@
     <% @examples.each do |example| %>
       <%= react_component("KitDocs", 
         kit: @kit, 
-        fa: read_file("../node_modules/@fortawesome/fontawesome-pro/js/fontawesome.min.js"), 
-        faReg: read_file("../node_modules/@fortawesome/fontawesome-pro/js/regular.min.js"),  
+        fa: fontawesome, 
+        faReg: fontawesome_reg,  
         source: get_source(example.keys.first), 
         exampleTitle: example.values.first)
       %>
