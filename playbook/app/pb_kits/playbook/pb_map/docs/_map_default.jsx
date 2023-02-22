@@ -66,7 +66,10 @@ const MapDefault = (props) => {
 
 return ( 
   <Map flyTo = "true"
+      flyToId="flyto-button"
       zoomBtns="true"
+      zoomInId="zoom-in-button"
+      zoomOutId="zoom-out-button"
       {...props}
   >
        <div

@@ -15,6 +15,9 @@ type MapProps = {
   id?: string,
   zoomBtns?: boolean,
   flyTo?: boolean,
+  zoomInId?: string,
+  zoomOutId?: string,
+  flyToId?: string,
 } & GlobalProps
 
 const Map = (props: MapProps) => {
@@ -25,7 +28,10 @@ const Map = (props: MapProps) => {
   data = {},
   id,
   zoomBtns = false,
-  flyTo = false
+  flyTo = false,
+  zoomInId,
+  zoomOutId,
+  flyToId,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -44,19 +50,19 @@ const Map = (props: MapProps) => {
           <Flex className="custom-nav-control" orientation='column'>
             <div className="custom-nav-control-zoom">
               <div className='map-zoom-in-button'
-                  id="zoom-in-button">
+                  id={zoomInId ? zoomInId : "zoominid"}>
                     <Icon icon="plus"/>
               </div>
               <SectionSeparator />
               <div className='map-zoom-out-button'
-                  id="zoom-out-button">
+                  id={zoomOutId ? zoomOutId : "zoomoutbutton"}>
                     <Icon icon="minus"/>
               </div>
             </div>
           {
             flyTo ? (
               <div className='map-flyto-button'
-                  id="flyto-button">
+                  id={flyToId ? flyToId : "flytobutton"}>
                     <Icon icon="eye"/>
               </div>
             ) : null
