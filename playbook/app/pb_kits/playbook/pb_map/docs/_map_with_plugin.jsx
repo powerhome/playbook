@@ -2,25 +2,19 @@ import React, { useRef, useEffect } from 'react'
 import { Map } from '../../'
 import maplibregl from 'maplibre-gl'
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
+import mapTheme from '../pbMapTheme'
 
 const MapWithPlugin = () => {
 
   const mapContainerRef = useRef(null)
 
-    useEffect(() => {
-      if (!maplibregl.supported()) {
-        alert('Your browser does not support MapLibre GL');
-        } else {
-         const map = new maplibregl.Map({
-            container: mapContainerRef.current,
-            style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-            center: [-75.379143, 39.831200],
-            zoom: 13,
-        })
+    //This function should contain all maplibre related code
+    const loadMap = ( { target: map }) => {
         //set marker/pin
         /* eslint-disable-next-line */
         const marker = new maplibregl.Marker({
-          color: "#0056CF",
+          color: mapTheme.marker,
         }).setLngLat([-75.379143, 39.831200])
         .setPopup(new maplibregl.Popup({className: 'map_popup', closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
         .addTo(map);
@@ -40,7 +34,15 @@ const MapWithPlugin = () => {
             }
             });
             map.addControl(draw);
-      }
+    }
+
+    useEffect(() => {
+         new maplibregl.Map({
+            container: mapContainerRef.current,
+            style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+            center: [-75.379143, 39.831200],
+            zoom: 13,
+        }).on('load', loadMap)
     }, [])
 
 
