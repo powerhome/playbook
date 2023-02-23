@@ -90,7 +90,7 @@
       color: $text_dk_default;
     }
 
-    .maplibregl-popup-anchor-bottom {
+    .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip, .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
       border-top-color: $bg_dark;
     }
     .map-zoom-in-button,
