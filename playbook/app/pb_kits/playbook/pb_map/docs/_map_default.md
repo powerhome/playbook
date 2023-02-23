@@ -8,5 +8,6 @@ Basic setup to start using MapLibre:
 - You can now use MapLibre within the Map Kit as shown in this example.
 
 __Notes__ : 
-- The MapLibre Marker allows us to pass it a HEX value as a color prop. In these doc examples we are using our primary color for the Marker.
+- The MapLibre Marker allows us to pass it a HEX value as a color prop but for Playbook styling we recommend importing our `MapTheme` file and passing `mapTheme.marker` to the Marker color prop.
+- To enable custom buttons, set `zoomBtns` and `flyTo` to true and pass in `zoomInClick`, `zoomOutClick` and `flyToClick` as shown in this doc example. 
 - `scrollZoom` has been disabled in these doc examples for page usability
