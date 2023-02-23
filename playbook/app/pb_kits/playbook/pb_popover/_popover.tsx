@@ -1,6 +1,3 @@
-import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
-
 import {
   Popper,
   Manager as PopperManager,
@@ -28,9 +25,9 @@ type PbPopoverProps = {
   offset?: boolean;
   reference: PopperReference & any;
   show?: boolean;
-  shouldClosePopover?: (arg0: boolean) => boolean | boolean;
-} & GlobalProps &
-  PopperProps<any>;
+  shouldClosePopover?: (arg0: boolean) => void;
+} & GlobalProps & Omit<PopperProps<any>, 'children'>
+& { children?: React.ReactChild[] | React.ReactChild }
 
 // Prop enabled default modifiers here
 // https://popper.js.org/docs/v2/modifiers
@@ -116,7 +113,7 @@ const Popover = (props: PbPopoverProps) => {
             style={Object.assign({}, style, zIndexStyle)}
           >
             <div
-              className={classnames(`${buildCss("pb_popover_tooltip")} show`)}
+              className={classnames(${buildCss("pb_popover_tooltip")} show)}
             >
               <div
                 className={classnames(

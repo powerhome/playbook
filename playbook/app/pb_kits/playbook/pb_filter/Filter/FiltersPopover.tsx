@@ -32,11 +32,11 @@ const FiltersPopover = ({ children, dark, minWidth, placement = "bottom-start" }
         shouldClosePopover={updateHide}
         show={!hide}
     >
-      <div className="pb-form">
-        {typeof children === 'function'
-          ? children({ closePopover: () => (updateHide(true)) })
-          : children}
-      </div>
+        <div className="pb-form">
+          {typeof children === 'function'
+            ? children({ closePopover: () => (updateHide(true)) })
+            : children}
+        </div>
     </PbReactPopover>
   )
 }
