@@ -16,6 +16,7 @@ const mapTheme = {
     mapConfig: {
             style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
             zoom: 13,
+            attributionControl: false,
     }
 }
 

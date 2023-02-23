@@ -33,6 +33,11 @@ const MapDefault = (props) => {
         // disable map zoom when using scroll
         map.scrollZoom.disable();
         
+        //add attributioncontrols
+        map.addControl(new maplibregl.AttributionControl({
+          compact: true
+          }));
+
         //set map instance
         setMapInstance(map)
   }
