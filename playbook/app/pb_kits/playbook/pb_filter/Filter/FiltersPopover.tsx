@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 
 import CircleIconButton from '../../pb_circle_icon_button/_circle_icon_button'
 import PbReactPopover from '../../pb_popover/_popover'
 
 type FiltersPopoverProps = { 
-  children?: React.ReactChild[] | React.ReactChild, 
+  children?: React.ReactChild[] | React.ReactChild | (({closePopover}: {closePopover: () => void}) =>  ReactNode), 
   dark?: boolean,
   minWidth?: string,
   placement?: any,

@@ -17,9 +17,9 @@ import SectionSeparator from '../../pb_section_separator/_section_separator'
 export type FilterDoubleProps = {
   children?: React.ReactChild[] | React.ReactChild, 
   filters?: FilterDescription,
-  onSortChange: SortingChangeCallback,
+  onSortChange?: SortingChangeCallback,
   results?: number,
-  sortOptions: SortOptions,
+  sortOptions?: SortOptions,
   sortValue?: SortValue,
 } & FilterBackgroundProps
 
@@ -48,7 +48,7 @@ const FilterDouble = ({
           minWidth={minWidth}
           placement={placement}
       >
-        {children}
+          {children}
       </FiltersPopover>
       <CurrentFilters
           dark={dark}
@@ -79,7 +79,7 @@ const FilterDouble = ({
             dark={dark}
             onChange={onSortChange}
             options={sortOptions}
-            value={sortValue}
+            value={[sortValue]}
         />
       </Flex>
     </Flex>

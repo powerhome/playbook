@@ -22,7 +22,7 @@ const ResultsCount = ({ dark, results, title }: ResultsCountProps): React.ReactE
     )
   }
 
-  const justTitle = () => {
+  const justResults = () => {
     return (
       <Caption
           className="filter-results"
@@ -40,10 +40,10 @@ const ResultsCount = ({ dark, results, title }: ResultsCountProps): React.ReactE
           {resultTitle()}
         </>
       )
-    } else if (title) {
+    } else if (results) {
       return (
         <>
-          {justTitle()}
+          {justResults()}
         </>
       )
     } else {

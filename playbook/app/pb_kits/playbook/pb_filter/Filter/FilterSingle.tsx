@@ -81,7 +81,7 @@ const FilterSingle = ({
               dark={dark}
               onChange={onSortChange}
               options={sortOptions}
-              value={sortValue}
+              value={[sortValue]}
           />
         }
         {/* <If condition={!isEmpty(sortOptions)}>

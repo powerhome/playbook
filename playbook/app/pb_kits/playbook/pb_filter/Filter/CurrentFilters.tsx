@@ -71,28 +71,6 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps): React.ReactElem
                   />
                 </div>    
                 }
-                {/* <Choose>
-                  <When condition={value === true}>
-                    <Title
-                        dark={dark}
-                        size={4}
-                        tag="h4"
-                        text={name}
-                    />
-                  </When>
-                  <Otherwise>
-                    <Caption
-                        dark={dark}
-                        text={name}
-                    />
-                    <Title
-                        dark={dark}
-                        size={4}
-                        tag="h4"
-                        text={value}
-                    />
-                  </Otherwise>
-                </Choose> */}
               </div>
             ))}
           <div className="right_gradient" />

@@ -24,7 +24,9 @@ const FilterBackground = (props: FilterBackgroundProps): React.ReactElement => {
           >
             {children}
           </Card> : 
-          {children}
+          <>
+            {children}
+          </>
       }
       {/* <Choose>
         <When condition={background}>
