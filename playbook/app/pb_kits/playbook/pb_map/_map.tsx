@@ -60,15 +60,15 @@ const Map = (props: MapProps) => {
                     <Icon icon="minus"/>
               </Button>
             </div>
-          {
-            flyTo ? (
-              <Button className='map-flyto-button'
-                 onClick={flyToClick}
-              >
-                    <Icon icon="eye"/>
-              </Button>
-            ) : null
-          }
+            {
+              flyTo ? (
+                <Button className='map-flyto-button'
+                  onClick={flyToClick}
+                >
+                      <Icon icon="eye"/>
+                </Button>
+              ) : null
+            }
          </Flex>
          ) : null
       }
