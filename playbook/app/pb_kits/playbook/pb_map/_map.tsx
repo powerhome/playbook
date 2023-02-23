@@ -4,8 +4,8 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Flex  from "../pb_flex/_flex"
-import SectionSeparator from '../pb_section_separator/_section_separator'
 import Icon from '../pb_icon/_icon'
+import Button from '../pb_button/_button'
 
 type MapProps = {
   aria?: { [key: string]: string },
@@ -14,10 +14,10 @@ type MapProps = {
   data?: { [key: string]: string },
   id?: string,
   zoomBtns?: boolean,
-  flyTo?: boolean,
-  zoomInId?: string,
-  zoomOutId?: string,
-  flyToId?: string,
+  flyTo?: boolean, 
+  zoomInClick?: () => {},
+  zoomOutClick?: () => {},
+  flyToClick?: () => {},
 } & GlobalProps
 
 const Map = (props: MapProps) => {
@@ -29,9 +29,9 @@ const Map = (props: MapProps) => {
   id,
   zoomBtns = false,
   flyTo = false,
-  zoomInId,
-  zoomOutId,
-  flyToId,
+  zoomInClick,
+  zoomOutClick,
+  flyToClick
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -49,25 +49,26 @@ const Map = (props: MapProps) => {
         zoomBtns ? (
           <Flex className="custom-nav-control" orientation='column'>
             <div className="custom-nav-control-zoom">
-              <div className='map-zoom-in-button'
-                  id={zoomInId ? zoomInId : "zoominid"}>
+              <Button className='map-zoom-in-button'
+                  onClick={zoomInClick}
+              >
                     <Icon icon="plus"/>
-              </div>
-              <SectionSeparator />
-              <div className='map-zoom-out-button'
-                  id={zoomOutId ? zoomOutId : "zoomoutbutton"}>
+              </Button>
+              <Button className='map-zoom-out-button'
+                 onClick={zoomOutClick}
+              >
                     <Icon icon="minus"/>
-              </div>
+              </Button>
             </div>
           {
             flyTo ? (
-              <div className='map-flyto-button'
-                  id={flyToId ? flyToId : "flytobutton"}>
+              <Button className='map-flyto-button'
+                 onClick={flyToClick}
+              >
                     <Icon icon="eye"/>
-              </div>
+              </Button>
             ) : null
           }
-         
          </Flex>
          ) : null
       }

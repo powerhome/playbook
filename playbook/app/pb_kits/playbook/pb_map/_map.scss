@@ -15,26 +15,23 @@
 
     .custom-nav-control-zoom {
       border-radius: $border_radius_md;
-      border: solid 1px $border_light;
       box-shadow: $shadow_deep;
       background: $card_light;
       .map-zoom-in-button {
-        border-top-right-radius: $border_radius_md;
-        border-top-left-radius: $border_radius_md;
+        border-bottom-left-radius: unset;
+        border-bottom-right-radius: unset;
+        border-bottom: transparent;
       }
       .map-zoom-out-button {
-        border-bottom-right-radius: $border_radius_md;
-        border-bottom-left-radius: $border_radius_md;
+        border-top-left-radius: unset;
+        border-top-right-radius: unset;
       }
-    }
-
-    .pb_section_separator_kit_card_horizontal {
-      width: 100%;
     }
 
     .map-zoom-in-button,
     .map-zoom-out-button,
     .map-flyto-button {
+      border: solid 1px $border_light;
       cursor: pointer;
       padding: $space_xs + 2;
       text-align: center;
@@ -48,21 +45,22 @@
       svg {
         width: $space_xs + 4;
         height: $space_sm;
+        display: flex;
       }
 
       &:hover {
         background-color: darken($bg_light, 2%);
       }
 
-      &:focus {
-        box-shadow: 0 0 0 1px $primary_action;
+      &:focus-visible {
+        border: solid 1px $primary_action;
+        box-shadow: unset;
       }
     }
 
     .map-flyto-button {
       border-radius: $border_radius_md;
       margin-top: $space_xs;
-      border: solid 1px $border_light;
       box-shadow: $shadow_deep;
       background-color: $card_light;
     }
