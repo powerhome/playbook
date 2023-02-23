@@ -8,26 +8,21 @@ const MapDefault = (props) => {
 
   //set Map instance to access from outside useEffect
   const [mapInstance, setMapInstance] = useState(null)
-
   const mapContainerRef = useRef(null)
 
+  //Set default position
+  const defaultPosition = [-75.379143, 39.831200]
+
   // linking Maplibre methods to PB custom zoom in, zoom out, and fly to buttons
-  const handleZoomIn = (map) => {map.zoomIn({duration:1000})}
-  const handleZoomOut = (map) => {map.zoomOut({duration:1000})}
+  const handleZoomIn = (map) => {map.zoomIn({...mapTheme.zoomConfig})}
+  const handleZoomOut = (map) => {map.zoomOut({...mapTheme.zoomConfig})}
   const handleFlyTo = (map) => {map.flyTo({
-                                center: [-75.379143, 39.831200],
-                                zoom: 13,
-                                bearing: 0,
-                                curve: 1, // change the speed at which it zooms out
-                                easing: function (t) {
-                                return t;
-                                },
-                                essential: true
+                                center: defaultPosition,
+                                ... mapTheme.flyToConfig
                                 });}
 
   //This function is called by the useEffect when map instance first loads
   const loadMap = ( { target: map }) => {
-  const defaultPosition = [-75.379143, 39.831200]
         //set marker/pin
         new maplibregl.Marker({
           color: mapTheme.marker,
@@ -45,9 +40,8 @@ const MapDefault = (props) => {
     useEffect(() => {
          new maplibregl.Map({
             container: mapContainerRef.current,
-            style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-            center: [-75.379143, 39.831200],
-            zoom: 13,
+            center: defaultPosition,
+            ...mapTheme.mapConfig
         }).on('load', loadMap)
 
     }, [])
