@@ -24,7 +24,7 @@ const directionIcon = (dir: Direction) => (
   dir == 'asc' ? 'sort-amount-up' : 'sort-amount-down'
 )
 
-const renderOptions = (options: SortOptions, value: SortValue[], handleChange: (SortValue) => void) => (
+const renderOptions = (options: SortOptions, value: SortValue[], handleChange: (arg0: SortValue) => void) => (
   map(options, (label, name) => {
     const next = nextValue(value, name)
     return (
