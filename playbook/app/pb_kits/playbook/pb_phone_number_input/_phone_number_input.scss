@@ -5,6 +5,10 @@
     color: $focus_input_light;
   }
 
+  .text_input {
+    max-width: 284px;
+  }
+
   .iti__country {
     padding: 5px 10px 5px 16px;
   }
@@ -31,6 +35,10 @@
 
   .iti__flag {
     background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags.png");
+  }
+
+  .iti--separate-dial-code {
+    width: 100%;
   }
 
   .iti--separate-dial-code .iti__selected-flag {
