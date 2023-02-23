@@ -10,8 +10,6 @@
     <% @examples.each do |example| %>
       <%= react_component("KitDocs", 
         kit: @kit, 
-        fa: fontawesome, 
-        faReg: fontawesome_reg,  
         source: get_source(example.keys.first), 
         exampleTitle: example.values.first)
       %>

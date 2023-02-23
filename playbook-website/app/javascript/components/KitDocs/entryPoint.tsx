@@ -3,8 +3,6 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "playbook-ui/dist/reset.css";
 import "playbook-ui/dist/playbook.css";
-import './fa.js';
-import './faReg.js';
 import './style.css';
 
 

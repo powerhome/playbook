@@ -112,19 +112,7 @@ class PagesController < ApplicationController
     read_kit_file("_#{example}.jsx")
   end
 
-  def fontawesome
-    file = File.join(File.dirname(__FILE__), "..", "..", "..", "node_modules", "@fortawesome/fontawesome-pro/js/fontawesome.min.js")
-    File.read(file)
-  end
-
-  def fontawesome_reg
-    file = File.join(File.dirname(__FILE__), "..", "..", "..", "node_modules", "@fortawesome/fontawesome-pro/js/regular.min.js")
-    File.read(file)
-  end
-
   helper_method :get_source
-  helper_method :fontawesome
-  helper_method :fontawesome_reg
 
 private
 

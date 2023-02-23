@@ -9,7 +9,7 @@ import {
 import { CircleIconButton, Card, Caption } from "playbook-ui"
 import entryPoint from "./entryPoint"
 
-const KitDocs = ({ source, exampleTitle, fa, faReg }) => {
+const KitDocs = ({ source, exampleTitle }) => {
   const [showCode, setShowCode] = useState(false)
   const code = source
     .replace(
@@ -30,20 +30,11 @@ const KitDocs = ({ source, exampleTitle, fa, faReg }) => {
               code: `body { background: white };`,
               hidden: true,
             },
-
             "/App.js": {
               code: code,
             },
             "/index.js": {
               code: entryPoint,
-              hidden: true,
-            },
-            "/fa.js": {
-              code: fa,
-              hidden: true,
-            },
-            "/faReg.js": {
-              code: faReg,
               hidden: true,
             },
           }}
@@ -57,6 +48,7 @@ const KitDocs = ({ source, exampleTitle, fa, faReg }) => {
           }}
           options={{
             externalResources: [
+              "https://kit.fontawesome.com/098a1cd4d5.js",
               "https://unpkg.com/playbook-ui@latest/dist/playbook.css",
               "https://unpkg.com/playbook-ui@latest/dist/reset.css",
             ],
