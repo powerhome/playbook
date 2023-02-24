@@ -98,36 +98,3 @@ const FilterSingle = ({
 }
 
 export default FilterSingle
-
-{/* <Flex
-orientation="row"
-paddingRight="lg"
-vertical="center"
->
-{ children && 
-<div>
-  <FiltersPopover
-      dark={dark}
-      minWidth={minWidth}
-      placement={placement}
-  >
-    {children}
-  </FiltersPopover>
-  <CurrentFilters
-      dark={dark}
-      filters={filters}
-  />
-</div>
-}
-<ResultsCount
-  dark={dark}
-  results={results}
-/>
-{ !isEmpty(sortOptions) &&
-<SortMenu
-    dark={dark}
-    onChange={onSortChange}
-    options={sortOptions}
-    value={[sortValue]}
-/>
-} */}
