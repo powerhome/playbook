@@ -77,7 +77,7 @@ $transform-rotate-deg: 135deg;
 
   .iti__arrow.iti__arrow--up::before {
     transform: rotate(-($transform-rotate-deg/3));
-    top: $space_xs + 4x;
+    top: $space_xs + 4px;
   }
 
   .iti__active::after {
@@ -85,7 +85,7 @@ $transform-rotate-deg: 135deg;
     content: "";
     margin-top: $space_xxs + 1px;
     transform: rotate($transform-rotate-deg/3);
-    height: $space_xs + 4x;
+    height: $space_xs + 4px;
     width: $space_xxs + 2px;
     border-bottom: 2px solid;
     border-right: 2px solid;
