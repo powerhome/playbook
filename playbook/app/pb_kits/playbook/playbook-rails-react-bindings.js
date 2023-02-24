@@ -17,6 +17,7 @@ import Passphrase from './pb_passphrase/_passphrase'
 import RichTextEditor from './pb_rich_text_editor/_rich_text_editor'
 import TreemapChart from './pb_treemap_chart/_treemap_chart'
 import Typeahead from './pb_typeahead/_typeahead'
+import PhoneNumberInput from './pb_phone_number_input/_phone_number_input'
 
 WebpackerReact.registerComponents({
   BarGraph,
@@ -33,6 +34,7 @@ WebpackerReact.registerComponents({
   TreemapChart,
   Typeahead,
   Gauge,
+  PhoneNumberInput
 })
 
 ujs.setup(
