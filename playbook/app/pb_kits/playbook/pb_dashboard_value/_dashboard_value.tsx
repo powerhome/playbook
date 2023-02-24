@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -11,22 +9,22 @@ import StatValue from '../pb_stat_value/_stat_value'
 
 type DashboardValueProps = {
   align?: 'left' | 'center' | 'right',
-  aria?: object,
+  aria?: { [key: string]: string },
   className?: string,
-  data?: object,
+  data?: { [key: string]: string },
   id?: string,
   statChange?: {
-    change?: string,
-    value?: string | Number
+    change? : 'increase' | 'decrease' | 'neutral',
+    value?: string | number
   },
   statLabel?: string,
   statValue?: {
     unit?: string,
-    value?: string | Number
+    value?: string | number
   }
 }
 
-const DashboardValue = (props: DashboardValueProps) => {
+const DashboardValue = (props: DashboardValueProps): React.ReactElement => {
   const {
     align = 'left',
     aria = {},
@@ -53,21 +51,21 @@ const DashboardValue = (props: DashboardValueProps) => {
         className={classes}
         id={id}
     >
-      <If condition={statLabel}>
+      { statLabel && 
         <Body color="light">{statLabel}</Body>
-      </If>
-      <If condition={statValue}>
+      }
+      { statValue && 
         <StatValue
             unit={statValue.unit}
             value={statValue.value}
         />
-      </If>
-      <If condition={statChange}>
+      }
+      { statChange && 
         <StatChange
             change={statChange.change}
             value={statChange.value}
         />
-      </If>
+      }
     </div>
   )
 }

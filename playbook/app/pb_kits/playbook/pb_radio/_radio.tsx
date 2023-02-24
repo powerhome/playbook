@@ -78,7 +78,7 @@ const Radio = ({
         status={error ? 'negative' : null}
         text={label}
         variant={null}
-      />
+    />
     </label>
   )
 }

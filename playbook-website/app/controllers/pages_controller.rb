@@ -81,7 +81,14 @@ class PagesController < ApplicationController
 
   def kit_show_new
     @kit = params[:name]
+    @examples = kit_examples
     render "pages/kit_show_new", layout: "layouts/kits"
+  end
+
+  def kit_show_demo
+    @kit = params[:name]
+    @examples = kit_examples
+    render "pages/kit_show_demo", layout: "layouts/kits"
   end
 
   def principles; end
@@ -100,6 +107,12 @@ class PagesController < ApplicationController
     @kit_examples_json = kit_examples
     render "pages/visual_guidelines", layout: "layouts/visual_guidelines"
   end
+
+  def get_source(example)
+    read_kit_file("_#{example}.jsx")
+  end
+
+  helper_method :get_source
 
 private
 
@@ -135,5 +148,29 @@ private
     unless kit_files.present?
       redirect_to action: is_rails_kit ? "kit_show_react" : "kit_show_rails"
     end
+  end
+
+  def pb_doc_kit_path(kit, *args)
+    Playbook.kit_path(kit, "docs", *args)
+  end
+
+  def pb_doc_kit_examples(kit, type)
+    example_file = pb_doc_kit_path(kit, "example.yml")
+    if File.exist?(example_file)
+      examples_list = YAML.load_file(example_file)
+                          .inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
+      examples_list.dig(:examples, type) || []
+    else
+      []
+    end
+  end
+
+  def kit_examples
+    pb_doc_kit_examples(params[:name], "rails")
+  end
+
+  def read_kit_file(*args)
+    path = ::Playbook.kit_path(@kit, "docs", *args)
+    path.exist? ? path.read : ""
   end
 end

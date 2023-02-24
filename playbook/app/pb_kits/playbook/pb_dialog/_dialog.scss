@@ -5,6 +5,7 @@
 @import "../tokens/border_radius";
 @import "../tokens/spacing";
 @import "../tokens/animation-curves";
+@import "../tokens/positioning";
 
 
 
@@ -119,6 +120,7 @@
 	position: sticky;
 	top: 0;
 	background-color: $white;
+	z-index: $z_8;
 	}
 
 	// @include pb_card;
