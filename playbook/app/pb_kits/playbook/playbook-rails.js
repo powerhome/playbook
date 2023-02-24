@@ -37,3 +37,5 @@ import 'flatpickr'
 
 // React-Rendered Rails Kits =====
 import './playbook-rails-react-bindings'
+
+import 'intl-tel-input'
