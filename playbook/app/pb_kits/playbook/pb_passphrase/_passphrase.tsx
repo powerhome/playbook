@@ -23,7 +23,7 @@ type PassphraseProps = {
   id?: string,
   inputProps?: {},
   label?: string,
-  onChange: (arg0: String) => void,
+  onChange: (inputValue: String) => void,
   showTipsBelow?: "always" | "xs" | "sm" | "md" | "lg" | "xl",
   tips?: Array<string>,
   uncontrolled?: boolean,
