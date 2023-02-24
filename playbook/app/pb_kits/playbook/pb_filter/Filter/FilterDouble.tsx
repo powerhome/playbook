@@ -79,7 +79,7 @@ const FilterDouble = ({
             dark={dark}
             onChange={onSortChange}
             options={sortOptions}
-            value={[sortValue]}
+            value={sortValue}
         />
       </Flex>
     </Flex>
