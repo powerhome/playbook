@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Map } from '../../'
-import "maplibre-gl/dist/maplibre-gl.css"
 import maplibregl from 'maplibre-gl'
 import mapTheme from '../pbMapTheme'
 

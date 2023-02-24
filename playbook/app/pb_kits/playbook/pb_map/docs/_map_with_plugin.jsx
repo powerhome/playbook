@@ -2,12 +2,14 @@ import React, { useRef, useEffect } from 'react'
 import { Map } from '../../'
 import maplibregl from 'maplibre-gl'
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
-import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 import mapTheme from '../pbMapTheme'
 
 const MapWithPlugin = (props) => {
+    //set Map instance to access from outside useEffect
+    const mapContainerRef = useRef(null)
 
-  const mapContainerRef = useRef(null)
+      //Set default position
+    const defaultPosition = [-75.379143, 39.831200]
 
     //This function should contain all maplibre related code
     const loadMap = ( { target: map }) => {
@@ -15,11 +17,11 @@ const MapWithPlugin = (props) => {
         /* eslint-disable-next-line */
         const marker = new maplibregl.Marker({
           color: mapTheme.marker,
-        }).setLngLat([-75.379143, 39.831200])
+        }).setLngLat(defaultPosition)
         .setPopup(new maplibregl.Popup({className: 'map_popup', closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
         .addTo(map);
 
-        //add zoom controls
+        //add maplibre default zoom controls
         map.addControl(new maplibregl.NavigationControl({showCompass: false}))
 
         // disable map zoom when using scroll
@@ -39,9 +41,8 @@ const MapWithPlugin = (props) => {
     useEffect(() => {
          new maplibregl.Map({
             container: mapContainerRef.current,
-            style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
             center: [-75.379143, 39.831200],
-            zoom: 13,
+            ...mapTheme.mapConfig
         }).on('load', loadMap)
     }, [])
 
