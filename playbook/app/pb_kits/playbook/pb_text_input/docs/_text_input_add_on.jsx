@@ -51,19 +51,19 @@ const TextInputAddOn = (props) => {
       </div>
       <div>
         <TextInput
-            addOn={{ icon: 'percent', alignment: 'left', border: false }}
-            label="Left-Aligned Add On With No Border"
-            onChange={handleUpdateSecondInput}
-            value={secondInput}
+            addOn={{ icon: 'percent', alignment: 'right', border: false }}
+            label="Right-Aligned Add On With No Border"
+            onChange={handleUpdateThirdInput}
+            value={thirdInput}
             {...props}
         />
       </div>
       <div>
         <TextInput
-            addOn={{ icon: 'percent', alignment: 'right', border: false }}
-            label="Right-Aligned Add On With No Border"
-            onChange={handleUpdateThirdInput}
-            value={thirdInput}
+            addOn={{ icon: 'percent', alignment: 'left', border: false }}
+            label="Left-Aligned Add On With No Border"
+            onChange={handleUpdateSecondInput}
+            value={secondInput}
             {...props}
         />
       </div>
