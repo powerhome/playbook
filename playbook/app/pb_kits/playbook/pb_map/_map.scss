@@ -1,8 +1,120 @@
 @import "../tokens/typography";
-@import "../tokens/colors"; 
+@import "../tokens/colors";
 @import "../tokens/shadows";
+@import "../tokens/border_radius";
 
-.pb_map {
+[class*="pb_map"] {
   font-family: $font_family_base !important;
 
+  .maplibregl-ctrl-attrib-button {
+    &:focus {
+      box-shadow: unset;
+    }
+    &:focus-visible {
+      box-shadow: 0 0 0 1px $primary_action;
+    }
+    &:hover {
+      box-shadow: $shadow_deep;
+    }
+  }
+  .custom-nav-control {
+    position: absolute;
+    right: $space_xs + 2;
+    top: $space_xs + 2;
+    z-index: 2;
+
+    .custom-nav-control-zoom {
+      border-radius: $border_radius_md;
+      box-shadow: $shadow_deep;
+      background: $card_light;
+      .map-zoom-in-button {
+        border-bottom-left-radius: unset;
+        border-bottom-right-radius: unset;
+        border-bottom: transparent;
+      }
+      .map-zoom-out-button {
+        border-top-left-radius: unset;
+        border-top-right-radius: unset;
+      }
+    }
+
+    .map-zoom-in-button,
+    .map-zoom-out-button,
+    .map-flyto-button {
+      border: solid 1px $border_light;
+      cursor: pointer;
+      padding: $space_xs + 2;
+      text-align: center;
+      color: $text_lt_light;
+      background-color: $card_light;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: $space_xs + 4;
+        height: $space_sm;
+        display: flex;
+      }
+
+      &:hover {
+        background-color: darken($bg_light, 2%);
+      }
+
+      &:focus-visible {
+        border: solid 1px $primary_action;
+        box-shadow: unset;
+      }
+    }
+
+    .map-flyto-button {
+      border-radius: $border_radius_md;
+      margin-top: $space_xs;
+      box-shadow: $shadow_deep;
+      background-color: $card_light;
+    }
+  }
+
+  .maplibregl-popup-content {
+    padding: $space_sm;
+    background-color: $card_light;
+    box-shadow: $shadow_deeper;
+  }
+
+  &.dark {
+    .maplibregl-canvas {
+      filter: invert(100%) brightness(175%) contrast(80%) sepia(50%) saturate(2)
+        hue-rotate(185deg);
+    }
+
+    .pb_section_separator_kit_card_horizontal::after {
+      background: $border_dark;
+    }
+    .custom-nav-control-zoom {
+      border: solid 1px #0a0527;
+      background: $bg_dark;
+    }
+
+    .maplibregl-popup-content {
+      background-color: $bg_dark;
+      color: $text_dk_default;
+    }
+
+    .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+    .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+      border-top-color: $bg_dark;
+    }
+    .map-zoom-in-button,
+    .map-zoom-out-button,
+    .map-flyto-button {
+      color: $text_dk_default;
+      background-color: $bg_dark;
+      border-color: $border_dark;
+
+      &:hover {
+        background-color: #221e3d;
+      }
+    }
+  }
 }

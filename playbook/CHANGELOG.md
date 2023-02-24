@@ -1,5 +1,35 @@
 
 
+## [12.5.0](https://github.com/powerhome/playbook/tree/12.5.0) (2023-02-24)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.4.0...12.5.0)
+
+**Breaking changes:**
+
+- Date Picker Hide Input Icon Broken [\#2312](https://github.com/powerhome/playbook/pull/2312) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Kit Enhancements:**
+
+- Converting Passphrase Kit to Typescript [\#2331](https://github.com/powerhome/playbook/pull/2331) ([carloslimasd](https://github.com/carloslimasd))
+- Map Kit Custom Styles [\#2329](https://github.com/powerhome/playbook/pull/2329) ([nidaqg](https://github.com/nidaqg))
+- Converting Loading Inline Kit to Typescrit [\#2328](https://github.com/powerhome/playbook/pull/2328) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Message Kit to Typescript [\#2326](https://github.com/powerhome/playbook/pull/2326) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+
+- Selectable List Kit Active Background Color Fix [\#2325](https://github.com/powerhome/playbook/pull/2325) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Fixing Typeahead off spacing on dropdown [\#2323](https://github.com/powerhome/playbook/pull/2323) ([carloslimasd](https://github.com/carloslimasd))
+
+**New Kits:**
+
+- Phone Number Input Rails [\#2333](https://github.com/powerhome/playbook/pull/2333) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Sandpack [\#2299](https://github.com/powerhome/playbook/pull/2299) ([jasperfurniss](https://github.com/jasperfurniss), [carloslimasd](https://github.com/carloslimasd))
+
+
+
 ## [12.4.0](https://github.com/powerhome/playbook/tree/12.4.0) (2023-02-20)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.3.1...12.4.0)

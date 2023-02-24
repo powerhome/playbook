@@ -27,9 +27,9 @@ type ButtonPropTypes = {
   size?: 'sm' | 'md' | 'lg',
   text?: string,
   type?: 'inline' | null,
-  htmlType: 'submit' | 'reset' | 'button' | undefined,
+  htmlType?: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
-  variant: 'primary' | 'secondary' | 'link',
+  variant?: 'primary' | 'secondary' | 'link',
   wrapperClass?: string,
 } & GlobalProps
 
