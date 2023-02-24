@@ -124,3 +124,6 @@ export { default as PbTextarea } from './pb_textarea'
 export { default as PbTooltip } from './pb_tooltip'
 export { default as PbTypeahead } from './pb_typeahead'
 export { default as dialogHelper } from './pb_dialog/dialogHelper'
+
+//Theming
+export {default as mapTheme} from './pb_map/pbMapTheme'

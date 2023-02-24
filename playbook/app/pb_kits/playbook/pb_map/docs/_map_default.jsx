@@ -1,40 +1,63 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Map } from '../../'
-
 import maplibregl from 'maplibre-gl'
+import mapTheme from '../pbMapTheme'
 
-const MapDefault = () => {
+const MapDefault = (props) => {
 
+  //set Map instance to access from outside useEffect
+  const [mapInstance, setMapInstance] = useState(null)
   const mapContainerRef = useRef(null)
 
-    useEffect(() => {
-      if (!maplibregl.supported()) {
-        alert('Your browser does not support MapLibre GL');
-        } else {
-         const map = new maplibregl.Map({
-            container: mapContainerRef.current,
-            style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-            center: [-75.379143, 39.831200],
-            zoom: 13,
-        })
-        //set marker/pin
-        /* eslint-disable-next-line */
-        const marker = new maplibregl.Marker({
-          color: "#0056CF",
-        }).setLngLat([-75.379143, 39.831200])
-        .setPopup(new maplibregl.Popup({className: 'map_popup', closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
-        .addTo(map);
+  //Set default position
+  const defaultPosition = [-75.379143, 39.831200]
 
-        //add zoom controls
-        map.addControl(new maplibregl.NavigationControl({showCompass: false}))
+  // linking Maplibre methods to PB custom zoom in, zoom out, and fly to buttons
+  const handleZoomIn = (map) => {map.zoomIn({...mapTheme.zoomConfig})}
+  const handleZoomOut = (map) => {map.zoomOut({...mapTheme.zoomConfig})}
+  const handleFlyTo = (map) => {map.flyTo({
+                                center: defaultPosition,
+                                ... mapTheme.flyToConfig
+                                });}
+
+  //This function is called by the useEffect when map instance first loads
+  const loadMap = ( { target: map }) => {
+        //set marker/pin
+        new maplibregl.Marker({
+          color: mapTheme.marker,
+        }).setLngLat(defaultPosition)
+        .setPopup(new maplibregl.Popup({closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
+        .addTo(map);
 
         // disable map zoom when using scroll
         map.scrollZoom.disable();
+        
+        //add attributioncontrols
+        map.addControl(new maplibregl.AttributionControl({
+          compact: true
+          }));
 
-      }
+        //set map instance
+        setMapInstance(map)
+  }
+
+    useEffect(() => {
+         new maplibregl.Map({
+            container: mapContainerRef.current,
+            center: defaultPosition,
+            ...mapTheme.mapConfig
+        }).on('load', loadMap)
+
     }, [])
+
 return ( 
-  <Map>
+  <Map flyTo
+      flyToClick={()=> {handleFlyTo(mapInstance)}}
+      zoomBtns
+      zoomInClick={() => {handleZoomIn(mapInstance)}}
+      zoomOutClick={()=> {handleZoomOut(mapInstance)}}
+      {...props}
+  >
        <div
            ref={mapContainerRef}
            style={{
@@ -44,7 +67,7 @@ return (
               top: 0, 
               bottom: 0,
            }}
-        />
+       />
     </Map>
 )
 }
