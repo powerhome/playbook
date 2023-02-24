@@ -48,7 +48,7 @@ const formatAllCountries = () => {
 }
 
 const containOnlyNumbers = (value: string) => {
-  return /^(\++)*(\d+)$/.test(value)
+  return /^[()+\-\/?~\d]*$/g.test(value)
 }
 
 const PhoneNumberInput = (props: PhoneNumberInputProps) => {
