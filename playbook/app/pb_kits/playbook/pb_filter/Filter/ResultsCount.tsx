@@ -11,6 +11,7 @@ type ResultsCountProps = {
   title?: boolean,
 }
 const ResultsCount = ({ dark, results, title }: ResultsCountProps): React.ReactElement => {
+  
   const resultTitle = () => {
     return (
       <TitleCount
