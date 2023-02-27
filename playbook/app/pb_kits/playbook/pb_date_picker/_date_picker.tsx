@@ -14,7 +14,7 @@ type DatePickerProps = {
   aria?: {[key: string]: string},
   className?: string,
   dark?: boolean,
-  data?: object,
+  data?: { [key: string]: string },
   defaultDate?: string,
   disableDate?: number[],
   disableInput?: boolean,
@@ -27,8 +27,8 @@ type DatePickerProps = {
   hideLabel?: boolean,
   id?: string,
   inLine?: boolean,
-  inputAria?: object,
-  inputData?: object,
+  inputAria?: {[key: string]: string},
+  inputData?: {[key: string]: string},
   inputOnChange?: (arg: string) => void,
   inputValue?: any,
   label?: string,
@@ -47,7 +47,7 @@ type DatePickerProps = {
   yearRange?: number[],
 } & GlobalProps
 
-const DatePicker = (props: DatePickerProps) => {
+const DatePicker = (props: DatePickerProps): React.ReactElement => {
   if (props.plugins) deprecatedProps('Date Picker', ['plugins'])
 
   const {
@@ -67,7 +67,7 @@ const DatePicker = (props: DatePickerProps) => {
     hideIcon = false,
     hideLabel = false,
     id,
-    inLine = true,
+    inLine = false,
     inputAria,
     inputData,
     inputOnChange,
@@ -77,7 +77,7 @@ const DatePicker = (props: DatePickerProps) => {
     minDate,
     mode = 'single',
     name,
-    onChange = () => {},
+    onChange = () => { void 0 },
     pickerId,
     placeholder = 'Select Date',
     plugins = false,
@@ -163,36 +163,40 @@ const DatePicker = (props: DatePickerProps) => {
             value={inputValue}
         />
 
-        {!hideIcon &&
+        { !hideIcon &&
           <div
-          className={iconWrapperClass()}
-          id={`cal-icon-${pickerId}`}
-      >
-        <Icon
-            className="cal_icon"
-            icon="calendar-alt"
-        />
-      </div>
-        }
-          
-
-        { hideIcon && inLine ? <><div
-          className={iconWrapperClass()}
-          id={`${pickerId}-icon-plus`}
-        >
+              className={iconWrapperClass()}
+              id={`cal-icon-${pickerId}`}
+          >
           <Icon
-            className="date-picker-plus-icon"
-            icon="plus" />
-        </div><div
-          className={iconWrapperClass()}
-          id={`${pickerId}-angle-down`}
-        >
-            <Icon
-              className="angle_down_icon"
-              icon="angle-down" />
-          </div></> : null}
-          
+              className="cal_icon"
+              icon="calendar-alt"
+          />
+        </div>
+        }
 
+        { hideIcon && inLine ? 
+          <div>
+            <div
+                className={iconWrapperClass()}
+                id={`${pickerId}-icon-plus`}
+            >
+              <Icon
+                  className="date-picker-plus-icon"
+                  icon="plus"
+              />
+            </div>
+            <div
+                className={iconWrapperClass()}
+                id={`${pickerId}-angle-down`}
+            >
+                <Icon
+                    className="angle_down_icon"
+                    icon="angle-down" 
+                />
+            </div>
+          </div>  
+        : null }
       </div>
     </div>
   )

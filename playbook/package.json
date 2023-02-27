@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "12.4.0",
+  "version": "12.5.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "scripts": {
@@ -74,6 +74,7 @@
     "@babel/preset-flow": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.15.0",
+    "@codesandbox/sandpack-react": "^1.18.2",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "11.2.7",
     "@types/flatpickr": "3.1.2",
