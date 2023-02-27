@@ -106,4 +106,5 @@ kits:
     - title_count
     - title_detail
   - user_badge
-  - walkthrough
+  - walkthrough  
+  - multi_level_select
