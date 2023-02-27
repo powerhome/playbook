@@ -19,7 +19,7 @@ export type FilterSingleProps = {
   onSortChange?: SortingChangeCallback,
   results?: number,
   sortOptions?: SortOptions,
-  sortValue?: SortValue,
+  sortValue?: SortValue[],
 } & FilterBackgroundProps
 
 const FilterSingle = ({
@@ -59,19 +59,6 @@ const FilterSingle = ({
             />
           </>
         }
-        {/* <If condition={children}>
-          <FiltersPopover
-              dark={dark}
-              minWidth={minWidth}
-              placement={placement}
-          >
-            {children}
-          </FiltersPopover>
-          <CurrentFilters
-              dark={dark}
-              filters={filters}
-          />
-        </If> */}
         <ResultsCount
             dark={dark}
             results={results}
@@ -84,14 +71,6 @@ const FilterSingle = ({
                 value={sortValue}
             />
         }
-        {/* <If condition={!isEmpty(sortOptions)}>
-          <SortMenu
-              dark={dark}
-              onChange={onSortChange}
-              options={sortOptions}
-              value={sortValue}
-          />
-        </If> */}
       </Flex>
     </FilterBackground>
   )

@@ -7,7 +7,7 @@ type FiltersPopoverProps = {
   children?: React.ReactChild[] | React.ReactChild | (({closePopover}: {closePopover: () => void}) =>  ReactNode), 
   dark?: boolean,
   minWidth?: string,
-  placement?: any,
+  placement?: "top" | "right" | "bottom" | "left" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "right-start" | "right-end" | "left-start" | "left-end",
 }
 const FiltersPopover = ({ children, dark, minWidth, placement = "bottom-start" }: FiltersPopoverProps): React.ReactElement => {
   const [hide, updateHide] = useState(true)

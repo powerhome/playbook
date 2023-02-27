@@ -20,7 +20,7 @@ export type FilterDoubleProps = {
   onSortChange?: SortingChangeCallback,
   results?: number,
   sortOptions?: SortOptions,
-  sortValue?: SortValue,
+  sortValue?: SortValue[],
 } & FilterBackgroundProps
 
 const FilterDouble = ({

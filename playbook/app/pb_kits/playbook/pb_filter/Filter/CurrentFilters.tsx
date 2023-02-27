@@ -32,17 +32,6 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps): React.ReactElem
         />
       </div>
       }
-      {/* <If condition={isEmpty(filters)}>
-        <div className="filters">
-          <Body
-              color="light"
-              paddingLeft="xs"
-              size={4}
-              tag="h4"
-              text="No Filter Selected"
-          />
-        </div>
-      </If> */}
       { !isEmpty(filters) &&
         <div className="filters">
           <div className="left_gradient" />
@@ -76,41 +65,6 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps): React.ReactElem
           <div className="right_gradient" />
         </div>
       }
-      {/* <If condition={!isEmpty(filters)}>
-        <div className="filters">
-          <div className="left_gradient" />
-          {map(displayableFilters, (value, name) => (
-            <div
-                className="filter"
-                key={`filter-${name}`}
-            >
-              <Choose>
-                <When condition={value === true}>
-                  <Title
-                      dark={dark}
-                      size={4}
-                      tag="h4"
-                      text={name}
-                  />
-                </When>
-                <Otherwise>
-                  <Caption
-                      dark={dark}
-                      text={name}
-                  />
-                  <Title
-                      dark={dark}
-                      size={4}
-                      tag="h4"
-                      text={value}
-                  />
-                </Otherwise>
-              </Choose>
-            </div>
-          ))}
-          <div className="right_gradient" />
-        </div>
-      </If> */}
     </div>
   )
 }

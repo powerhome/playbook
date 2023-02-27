@@ -33,7 +33,7 @@ const FilterDefault = (props) => {
             // eslint-disable-next-line
             manager_name: 'Manager\'s Name',
           }}
-          sortValue={[{ name: 'popularity', dir: 'asc' }]}
+          sortValue={[{ name: 'popularity', dir: 'desc' }]}
           {...props}
       >
       {({ closePopover }) => (

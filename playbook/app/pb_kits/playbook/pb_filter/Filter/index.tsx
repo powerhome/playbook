@@ -12,16 +12,6 @@ const Filter = ({
   double = false,
   ...templateProps
   }: FilterProps): React.ReactElement => {
-    // <Choose>
-    //   <When condition={double}>
-    //     <FilterDouble {...templateProps} />
-    //   </When>
-    //   <Otherwise>
-    //     <FilterSingle {...templateProps} />
-    //   </Otherwise>
-    // </Choose>
-  // )
-
   const displayFilter = () => {
     if (double === true) {
       return (

@@ -59,27 +59,6 @@ const ResultsCount = ({ dark, results, title }: ResultsCountProps): React.ReactE
       {displayResultsCount()}
     </>
   )
-  // <Choose>
-  //   <When condition={results && title}>
-  //     <TitleCount
-  //         align="center"
-  //         count={results}
-  //         dark={dark}
-  //         title={`${resultsText(results)}:`}
-  //     />
-  //   </When>
-  //   <When condition={results}>
-  //     <Caption
-  //         className="filter-results"
-  //         dark={dark}
-  //         size="xs"
-  //         text={`${results} ${resultsText(results)}`}
-  //     />
-  //   </When>
-  //   <Otherwise>
-  //     <div />
-  //   </Otherwise>
-  // </Choose>
 }
 
 export default ResultsCount

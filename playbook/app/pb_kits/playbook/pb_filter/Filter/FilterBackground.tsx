@@ -28,17 +28,6 @@ const FilterBackground = (props: FilterBackgroundProps): React.ReactElement => {
             {children}
           </>
       }
-      {/* <Choose>
-        <When condition={background}>
-          <Card
-              dark={dark}
-              padding="none"
-          >
-            {children}
-          </Card>
-        </When>
-        <Otherwise>{children}</Otherwise>
-      </Choose> */}
     </div>
   )
 }
