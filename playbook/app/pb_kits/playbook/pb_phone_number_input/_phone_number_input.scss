@@ -18,6 +18,10 @@ $transform-rotate-deg: 135deg;
 
   .iti__selected-flag {
     padding: 0 6px 0 16px;
+
+    &[aria-expanded="true"] {
+      color: $primary_action;
+    }
   }
 
   .iti__country.iti__highlight {
@@ -79,6 +83,7 @@ $transform-rotate-deg: 135deg;
   .iti__arrow.iti__arrow--up::before {
     transform: rotate(-($transform-rotate-deg/3));
     top: $space_xs + 4px;
+    color: $primary_action;
   }
 
   .iti__active::after {
