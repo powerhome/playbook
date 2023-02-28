@@ -26,8 +26,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_multi_level_select'), globalProps(props), className)
 
-  const onChange = (currentNode:ReactNode, selectedNodes:ReactNode) => {
+  const onChange = (currentNode:any, selectedNodes:ReactNode) => {
     console.log('onChange:', currentNode, selectedNodes)
+
+    currentNode.checked && currentNode._children && (
+      console.log(currentNode._children)
+    )
   }
   const onAction = (node:ReactNode, action:any) => {
     console.log('onAction:', action, node)

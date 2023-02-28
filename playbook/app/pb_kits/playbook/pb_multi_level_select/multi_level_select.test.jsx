@@ -25,7 +25,8 @@ test('should render custom class', () => {
   render(
       <MultiLevelSelect
           className='custom-class'
-          data={{ testid: testId, data:treeData}}
+          data={{ testid: testId}}
+          treeData={treeData}
       /> 
   ) 
 
