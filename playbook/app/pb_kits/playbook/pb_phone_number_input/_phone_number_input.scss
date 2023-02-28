@@ -1,6 +1,9 @@
 @import "../tokens/colors";
 
 $transform-rotate-deg: 135deg;
+$input-max-width: 284px;
+$dropdown-min-width: 340px;
+$flag-min-resolution: 192dpi;
 
 .pb_phone_number_input {
   input::placeholder {
@@ -8,7 +11,7 @@ $transform-rotate-deg: 135deg;
   }
 
   .text_input {
-    max-width: 284px;
+    max-width: $input-max-width;
   }
 
   .iti__country {
@@ -67,11 +70,11 @@ $transform-rotate-deg: 135deg;
 
   .iti__arrow::before {
     border-style: solid;
-    border-width: 0.5px 0.5px 0 0;
+    border-width: 1px 1px 0 0;
     content: '';
     display: inline-block;
     height: $space_xxs + 1px;
-    left: 0.5px;
+    left: 1px;
     position: relative;
     vertical-align: top;
     width: $space_xxs + 1px;
@@ -99,7 +102,7 @@ $transform-rotate-deg: 135deg;
   }
 
   .iti__country-list {
-    min-width: 340px;
+    min-width: $dropdown-min-width;
     border-radius: $border_radius_md;
     border: 1px solid $border_light;
     box-shadow: $shadow_deep;
@@ -109,7 +112,7 @@ $transform-rotate-deg: 135deg;
     border-bottom: 1px solid $border_light;
   }
   
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: $flag-min-resolution) {
     .iti__flag {
       background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags@2x.png");
     }
