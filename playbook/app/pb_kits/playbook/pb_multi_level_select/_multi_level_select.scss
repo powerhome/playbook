@@ -1,0 +1,24 @@
+@import "../pb_textarea/textarea_mixin";
+
+.pb_multi_level_select {
+  .dropdown {
+    width: 100%;
+    .search {
+      border-bottom: none;
+    }
+  }
+  .dropdown-trigger {
+    width: 100%;
+    @include pb_textarea_light;
+  }
+  .react-dropdown-tree-select .dropdown .dropdown-trigger.arrow.bottom:after {
+    content: none;
+  }
+  .react-dropdown-tree-select .dropdown .dropdown-trigger.arrow.top:after {
+    content: none;
+  }
+
+  .dropdown-content {
+    width: 100%;
+  }
+}

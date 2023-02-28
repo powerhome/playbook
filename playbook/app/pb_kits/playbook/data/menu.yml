@@ -57,6 +57,7 @@ kits:
   - list
   - loading_inline
   - map
+  - multi_level_select
   - nav
   - tags:
     - badge
