@@ -8,6 +8,7 @@ class KitGenerator < Rails::Generators::NamedBase
 
   REACT_EXAMPLES_PATH = "app/pb_kits/playbook/playbook-doc.js"
   REACT_INDEX_PATH = "app/pb_kits/playbook/index.js"
+  MENU = YAML.load_file(Rails.root.join("config/menu.yml"))
 
   def create_templates
     kit_name = name.strip.downcase
@@ -96,7 +97,7 @@ class KitGenerator < Rails::Generators::NamedBase
       `rubocop --safe-auto-correct #{full_kit_directory}`
 
       # Add kit to Playbook menu ==========================
-      open("app/pb_kits/playbook/data/menu.yml", "a") do |f|
+      File.open(MENU, "a") do |f|
         f.puts "  - #{@kit_name_underscore}"
       end
 
