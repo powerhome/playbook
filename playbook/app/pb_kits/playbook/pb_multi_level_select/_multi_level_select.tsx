@@ -10,16 +10,16 @@ type MultiLevelSelectProps = {
   className?: string,
   data?: { [key: string]: string },
   id?: string,
-  treeData?: any[]
+  treeData?: { [key: string]: string }[],
 }
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const {
-    aria = {},
+  aria = {},
   className,
   data = {},
   id,
-  treeData
+  treeData,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -27,13 +27,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const classes = classnames(buildCss('pb_multi_level_select'), globalProps(props), className)
 
   const onChange = (currentNode:ReactNode, selectedNodes:ReactNode) => {
-    console.log('onChange::', currentNode, selectedNodes)
+    console.log('onChange:', currentNode, selectedNodes)
   }
   const onAction = (node:ReactNode, action:any) => {
-    console.log('onAction::', action, node)
+    console.log('onAction:', action, node)
   }
   const onNodeToggle = (currentNode:ReactNode) => {
-    console.log('onNodeToggle::', currentNode)
+    console.log('onNodeToggle:', currentNode)
   }
 
   return (
@@ -45,6 +45,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     >
     <DropdownTreeSelect 
       data={treeData} 
+      id={id}
       onChange={onChange} 
       onAction={onAction} 
       onNodeToggle={onNodeToggle} 

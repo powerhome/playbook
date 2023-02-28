@@ -1,17 +1,35 @@
-import { renderKit } from '../utilities/test-utils'
+import React from 'react'
+import { render, screen } from '../utilities/test-utils'
 
 import { MultiLevelSelect } from '../'
 
-/* See these resources for more testing info:
-  - https://github.com/testing-library/jest-dom#usage for useage and examples
-  - https://jestjs.io/docs/en/using-matchers
-*/
+const treeData = {
+  label: 'search me',
+  value: 'searchme',
+  children: [
+    {
+      label: 'search me too',
+      value: 'searchmetoo',
+      children: [
+        {
+          label: 'No one can get me',
+          value: 'anonymous',
+        },
+      ],
+    },
+  ],
+}
 
-test('generated scaffold test - update me', () => {
-  const props = {
-    data: { testid: 'default' }
-  }
+const testId = "multiselect-test"
+test('should render custom class', () => {
+  render(
+      <MultiLevelSelect
+          className='custom-class'
+          data={{ testid: testId, data:treeData}}
+      /> 
+  ) 
 
-  const kit = renderKit(MultiLevelSelect , props)
-  expect(kit).toBeInTheDocument()
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass('custom-class')
 })
+
