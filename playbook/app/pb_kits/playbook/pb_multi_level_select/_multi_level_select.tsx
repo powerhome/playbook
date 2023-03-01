@@ -77,6 +77,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     <DropdownTreeSelect 
       data={treeData} 
       id={id}
+      keepTreeOnSearch
+      keepChildrenOnSearch
       onChange={onChange} 
       onAction={onAction} 
       onNodeToggle={onNodeToggle} 
