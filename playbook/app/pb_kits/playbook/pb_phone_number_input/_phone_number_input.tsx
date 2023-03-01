@@ -125,6 +125,9 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     onChange(evt)
     isValid(itiInit.isValidNumber())
   }
+
+  // Separating Concerns as React Docs Recommend
+  // This also Fixes things for our react_component rendering on the Rails Side
   useEffect(() => {
     formatAllCountries()
   }, [])
