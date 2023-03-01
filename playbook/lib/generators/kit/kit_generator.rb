@@ -8,7 +8,7 @@ class KitGenerator < Rails::Generators::NamedBase
 
   REACT_EXAMPLES_PATH = "app/pb_kits/playbook/playbook-doc.js"
   REACT_INDEX_PATH = "app/pb_kits/playbook/index.js"
-  MENU = YAML.load_file(Rails.root.join("config/menu.yml"))
+  MENU = File.expand_path("../../../../playbook-website/config/menu.yml", __dir__)
 
   def create_templates
     kit_name = name.strip.downcase
