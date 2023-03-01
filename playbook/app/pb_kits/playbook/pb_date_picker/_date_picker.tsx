@@ -5,13 +5,13 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
 import datePickerHelper from './date_picker_helper'
-
 import Icon from '../pb_icon/_icon'
-import TextInput from '../pb_text_input/_text_input'
+import Caption from '../pb_caption/_caption'
+import Body from '../pb_body/_body'
 
 type DatePickerProps = {
   allowInput?: boolean,
-  aria?: {[key: string]: string},
+  aria?: { [key: string]: string },
   className?: string,
   dark?: boolean,
   data?: { [key: string]: string },
@@ -27,15 +27,15 @@ type DatePickerProps = {
   hideLabel?: boolean,
   id?: string,
   inLine?: boolean,
-  inputAria?: {[key: string]: string},
-  inputData?: {[key: string]: string},
-  inputOnChange?: (arg: string) => void,
+  inputAria?: { [key: string]: string },
+  inputData?: { [key: string]: string },
+  inputOnChange?: (e: React.FormEvent<HTMLInputElement>) => void,
   inputValue?: any,
   label?: string,
   maxDate: string,
   minDate: string,
   name: string,
-  pickerId?: ArrayLike<Node> | Node | string,
+  pickerId?: string,
   placeholder?: string,
   positionElement?: HTMLElement | null,
   scrollContainer?: string,
@@ -51,7 +51,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   if (props.plugins) deprecatedProps('Date Picker', ['plugins'])
 
   const {
-    allowInput = false,
+    allowInput = true,
     aria = {},
     className,
     dark = false,
@@ -68,8 +68,8 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     hideLabel = false,
     id,
     inLine = false,
-    inputAria,
-    inputData,
+    inputAria = {},
+    inputData = {},
     inputOnChange,
     inputValue,
     label = 'Date Picker',
@@ -87,11 +87,14 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     selectionType = '',
     showTimezone = false,
     staticPosition = true,
-    yearRange = [ 1900, 2100 ],
+    yearRange = [1900, 2100],
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const inputAriaProps = buildAriaProps(inputAria)
+  const inputDataProps = buildDataProps(inputData)
+
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
     globalProps(props),
@@ -128,13 +131,13 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
 
   const iconWrapperClass = () => {
     let base = 'cal_icon_wrapper'
-    if (dark){
+    if (dark) {
       base += ' dark'
     }
-    if (hideLabel){
+    if (hideLabel) {
       base += ' no_label_shift'
     }
-    if (error){
+    if (error) {
       base += ' error'
     }
     return base
@@ -142,61 +145,75 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
+      id={id}
     >
-      <div className="input_wrapper">
-        <TextInput
-            aria={inputAria}
+      <div
+        {...inputAriaProps}
+        {...inputDataProps}
+        className="input_wrapper">
+
+        <Caption
+          className="pb_date_picker_kit_label"
+          text={hideLabel ? null : label}
+        />
+
+        <div className="date_picker_input_wrapper">
+          <input
             autoComplete="off"
-            dark={dark}
-            data={inputData}
+            className="date_picker_input"
             disabled={disableInput}
-            error={error}
             id={pickerId}
-            label={hideLabel ? null : label}
             name={name}
             onChange={inputOnChange}
             placeholder={placeholder}
             value={inputValue}
-        />
+          />
 
-        { !hideIcon &&
+          {error && <Body
+            status="negative"
+            text={error}
+            variant={null}
+          />
+          }
+        </div>
+
+        {!hideIcon &&
           <div
-              className={iconWrapperClass()}
-              id={`cal-icon-${pickerId}`}
+            className={iconWrapperClass()}
+            id={`cal-icon-${pickerId}`}
           >
-          <Icon
+            <Icon
               className="cal_icon"
               icon="calendar-alt"
-          />
-        </div>
+            />
+          </div>
         }
 
-        { hideIcon && inLine ? 
+        {hideIcon && inLine ?
           <div>
             <div
-                className={iconWrapperClass()}
-                id={`${pickerId}-icon-plus`}
+              className={iconWrapperClass()}
+              id={`${pickerId}-icon-plus`}
             >
               <Icon
-                  className="date-picker-plus-icon"
-                  icon="plus"
+                className="date-picker-plus-icon"
+                icon="plus"
               />
             </div>
             <div
-                className={iconWrapperClass()}
-                id={`${pickerId}-angle-down`}
+              className={iconWrapperClass()}
+              id={`${pickerId}-angle-down`}
             >
-                <Icon
-                    className="angle_down_icon"
-                    icon="angle-down" 
-                />
+              <Icon
+                className="angle_down_icon"
+                icon="angle-down"
+              />
             </div>
-          </div>  
-        : null }
+          </div>
+          : null}
       </div>
     </div>
   )

@@ -4,7 +4,7 @@ module Playbook
   module PbDatePicker
     class DatePicker < Playbook::KitBase
       prop :allow_input, type: Playbook::Props::Boolean,
-                         default: false
+                         default: true
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
       prop :default_date, type: Playbook::Props::String,
