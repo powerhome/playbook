@@ -5,7 +5,9 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
 import datePickerHelper from './date_picker_helper'
-import { Body, Caption, Icon } from '../'
+import Icon from '../pb_icon/_icon'
+import Caption from '../pb_caption/_caption'
+import Body from '../pb_body/_body'
 
 type DatePickerProps = {
   allowInput?: boolean,
