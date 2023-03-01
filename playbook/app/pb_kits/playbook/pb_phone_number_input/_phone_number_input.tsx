@@ -86,7 +86,6 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const [inputValue, setInputValue] = useState(value)
   const [itiInit, setItiInit] = useState<any>()
   const [error, setError] = useState("")
-  const [countryOptions, setCountryOptions] = useState<any>()
 
   const validateTooLongNumber = (itiInit: any) => {
     const error = itiInit.getValidationError()
