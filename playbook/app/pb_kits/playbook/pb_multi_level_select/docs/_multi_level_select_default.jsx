@@ -3,7 +3,8 @@ import {MultiLevelSelect} from '../../'
 
 const MultiLevelSelectDefault = (props) => {
 
-  const treeData = {
+  const treeData = [
+    {
     label: "Power Home Remodeling",
     value: "Power Home Remodeling",
     expanded: true,
@@ -111,7 +112,8 @@ const MultiLevelSelectDefault = (props) => {
         ]
       }
     ],
-  }
+  },
+]
 
 
   return (
