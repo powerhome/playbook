@@ -72,15 +72,11 @@ type ContainerProps = {
 const findItemById = (items: any, id: any): any => {
   for (const item of items) {
     if (item.id === id) {
-      console.log("item", item)
-
-
       return item
     }
     if (item.children) {
       const found = findItemById(item.children, id)
       if (found) {
-        console.log("found", found)
         return found
       }
     }
@@ -93,26 +89,21 @@ const Container = (props: ContainerProps) => {
   const [formattedData, setFormattedData] = useState(treeData)
 
   const iterateIt = (foundItem: any) => {
-    console.log("foundItem before iteration", foundItem)
     foundItem.children.map((x: any) => {
-      console.log("x", x)
-      x.checked == true ? (x.checked = false) : (x.checked = true)
-      x.children ? iterateIt(x) : null
-      
+      x.checked = !x.checked
+    if (x.children) {
+      iterateIt(x)
+    }
       return x
     })
   }
 
   const onChange = (currentNode: any, selectedNodes: any) => {
-    console.log("currentNode is triggering", currentNode)
     if (currentNode._children) {
       const updatedData = formattedData.filter((item: any) => {
         const foundItem = findItemById(item.children, currentNode._id)
         if (foundItem && foundItem.children) {
-          console.log("foundItem", foundItem)
-          foundItem.checked == true
-            ? (foundItem.checked = false)
-            : (foundItem.checked = true)
+          foundItem.checked = !foundItem.checked
           iterateIt(foundItem)
           return true
         }
