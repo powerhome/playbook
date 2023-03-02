@@ -14,9 +14,7 @@ type MultiLevelSelectProps = {
 }
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
-  
-
-  const { aria = {}, className, data = {}, id, treeData } = props
+  const { aria = {}, className, data = {}, id, treeData, onChange } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -26,21 +24,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     className
   )
 
-  const onChange = (currentNode: any, selectedNodes: ReactNode) => {
-    if (currentNode._children && currentNode.checked) {
-      currentNode._children.forEach(function (child: any) {
-        document.getElementById(child).checked = true
-        onChange(child, selectedNodes)
-      })
-    }
-    console.log(selectedNodes)
-  }
-
-  const onAction = (node: ReactNode, action: any) => {
-    console.log("onAction:", action, node)
-  }
-  const onNodeToggle = (currentNode: ReactNode) => {
-    currentNode
+  const handleChange = () => {
+    onChange()
   }
 
   return (
@@ -51,9 +36,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         keepOpenOnSelect
         keepTreeOnSearch
         keepChildrenOnSearch
-        onChange={onChange}
-        onAction={onAction}
-        onNodeToggle={onNodeToggle}
+        onChange={handleChange}
         texts={{ placeholder: "Select..." }}
         mode='hierarchical'
       />

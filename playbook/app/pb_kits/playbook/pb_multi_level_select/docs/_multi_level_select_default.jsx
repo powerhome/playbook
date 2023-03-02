@@ -1,11 +1,11 @@
 import React from "react"
-import { MultiLevelSelect } from "../../"
+import { Container } from "../_multi_level_select_container"
 import { treeData } from "./data"
 
 const MultiLevelSelectDefault = (props) => {
   return (
     <div>
-      <MultiLevelSelect
+      <Container
           id='multiselect-default'
           treeData={treeData}
           {...props}
