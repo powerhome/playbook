@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React from "react"
 import classnames from "classnames"
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 import { globalProps } from "../utilities/globalProps"
@@ -11,6 +11,8 @@ type MultiLevelSelectProps = {
   data?: { [key: string]: string }
   id?: string
   treeData?: { [key: string]: string }[]
+  onChange?: () => {}
+
 }
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
@@ -24,10 +26,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     className
   )
 
-  const handleChange = () => {
-    onChange()
-  }
-
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
       <DropdownTreeSelect
@@ -36,7 +34,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         keepOpenOnSelect
         keepTreeOnSearch
         keepChildrenOnSearch
-        onChange={handleChange}
+        onChange={onChange}
         texts={{ placeholder: "Select..." }}
         mode='hierarchical'
       />
