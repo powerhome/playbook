@@ -8,21 +8,38 @@ type ContainerProps = {
   onChange?: any
   treeData?: { [key: string]: string }[]
 }
-
 const Container = (props: ContainerProps) => {
   const { treeData } = props
   const [formattedData, setFormattedData] = useState(treeData)
 
-  console.log(formattedData)
+  const iterateIt = (item2:any)=> {
+    item2.children.map((x:any) => {
+      x.checked = true
+      x.children ? (
+        iterateIt(x)
+      ):null
+      return x
+     })   
+
+  }
   const onChange = (currentNode: any, selectedNodes: any) => {
     if (currentNode._children && currentNode.checked) {
-      console.log(currentNode)
-    }
 
+      formattedData.forEach((item:any) => {
+        item.children.map((item2:any) => {
+          item2.id === currentNode._id && (item2.checked = true)
+          item2.id === currentNode._id && item2.children ? (
+            iterateIt(item2)
+           ):null
+           return item2
+          })
+          setFormattedData([item])
+        })             
+    }
     console.log(selectedNodes)
   }
 
-  return <MultiLevelSelect onChange={onChange} {...props} />
+  return <MultiLevelSelect treeData={formattedData} onChange={onChange} {...props} />
 }
 
 export default Container
