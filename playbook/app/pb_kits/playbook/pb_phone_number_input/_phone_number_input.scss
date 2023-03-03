@@ -14,16 +14,31 @@ $flag-min-resolution: 192dpi;
     max-width: $input-max-width;
   }
 
+  .dropdown_open {
+    .text_input {
+      border-color: $primary !important;
+    }
+
+    .iti__selected-flag:focus-visible {
+      outline-style: none;
+    }
+  }
+
   .iti__country {
     padding: 5px 10px 5px 16px;
     transition: $transition_default;
   }
 
   .iti__selected-flag {
-    padding: 0 6px 0 16px;
+    padding: 0 $space_xxs 0 $space_sm;
 
     &[aria-expanded="true"] {
       color: $primary_action;
+    }
+
+    &:focus-visible {
+      outline-style: solid;
+      border-radius: $space_xxs 0px 0px $space_xxs;
     }
   }
 
@@ -45,6 +60,7 @@ $flag-min-resolution: 192dpi;
 
   .iti__flag {
     background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags.png");
+    border-radius: 1px;
   }
 
   .iti--separate-dial-code {
@@ -106,6 +122,7 @@ $flag-min-resolution: 192dpi;
     border-radius: $border_radius_md;
     border: 1px solid $border_light;
     box-shadow: $shadow_deep;
+    margin-top: 1px;
   }
 
   .iti__divider {

@@ -76,6 +76,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const [inputValue, setInputValue] = useState(value)
   const [itiInit, setItiInit] = useState<any>()
   const [error, setError] = useState('')
+  const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
 
   const validateTooLongNumber = (itiInit: any) => {
     const error = itiInit.getValidationError()
@@ -128,6 +129,9 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     )
     
     inputRef.current.addEventListener("countrychange", () => validateTooLongNumber(telInputInit))
+    inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
+    inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
+
     setItiInit(telInputInit)
   }, [])
 
@@ -138,6 +142,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
       className={classes}
     >
       <TextInput
+        className={dropDownIsOpen ? 'dropdown_open' : ''}
         disabled={disabled}
         error={error}
         id={id}
