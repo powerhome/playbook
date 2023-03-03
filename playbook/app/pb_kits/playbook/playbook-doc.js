@@ -57,6 +57,7 @@ import * as List from 'pb_list/docs'
 import * as LoadingInline from 'pb_loading_inline/docs'
 import * as Map from 'pb_map/docs'
 import * as Message from 'pb_message/docs'
+import * as MultiLevelSelect from 'pb_multi_level_select/docs'
 import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
 import * as Nav from 'pb_nav/docs'
@@ -156,6 +157,7 @@ WebpackerReact.setup({
   ...LoadingInline,
   ...Map,
   ...Message,
+  ...MultiLevelSelect,
   ...MultipleUsers,
   ...MultipleUsersStacked,
   ...Nav,

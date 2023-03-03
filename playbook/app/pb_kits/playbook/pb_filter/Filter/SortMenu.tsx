@@ -1,5 +1,3 @@
-/* @flow */
-
 import React, { useState } from 'react'
 import { find, map, partial } from 'lodash'
 
@@ -12,9 +10,9 @@ import PbReactPopover from '../../pb_popover/_popover'
 export type Direction = 'asc' | 'desc'
 export type SortOptions = { [name: string]: string }
 export type SortValue = { name: string, dir: Direction }
-export type SortingChangeCallback = (SortValue[]) => void
+export type SortingChangeCallback = (value: SortValue[]) => void
 
-const nextValue = (value: SortValue[], name: string): Direction => {
+const nextValue = (value: SortValue[], name: string): SortValue => {
   const current = find(value, { name })
   return {
     name,
@@ -26,12 +24,13 @@ const directionIcon = (dir: Direction) => (
   dir == 'asc' ? 'sort-amount-up' : 'sort-amount-down'
 )
 
-const renderOptions = (options: SortOptions, value: SortValue[], handleChange: (SortValue) => void) => (
+const renderOptions = (options: SortOptions, value: SortValue[], handleChange: (arg0: SortValue) => void) => (
   map(options, (label, name) => {
     const next = nextValue(value, name)
     return (
       <ListItem key={`option-${next.name}-${next.dir}`}>
         <Button
+            htmlType={undefined}
             onClick={partial(handleChange, next)}
             text={` ${label}`}
             variant="link"
@@ -47,7 +46,7 @@ export type SortMenuProps = {
   options: SortOptions,
   value?: SortValue[],
 }
-const SortMenu = ({ dark, options, value, onChange }: SortMenuProps) => {
+const SortMenu = ({ dark, options, value, onChange }: SortMenuProps): React.ReactElement => {
   const [hide, updateHide] = useState(true)
   const toggle = () => updateHide(!hide)
   const handleChange = (value: SortValue) => {
@@ -58,6 +57,7 @@ const SortMenu = ({ dark, options, value, onChange }: SortMenuProps) => {
   const sortButton = (
     <Button
         dark={dark}
+        htmlType={undefined}
         id="sort-button"
         onClick={toggle}
         paddingRight="none"

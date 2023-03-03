@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 
 import Caption from '../../pb_caption/_caption'
@@ -9,31 +7,58 @@ const resultsText = (results: number): string => results == 1 ? 'Result' : 'Resu
 
 type ResultsCountProps = {
   dark?: boolean,
-  results?: ?number,
+  results?: number | null,
   title?: boolean,
 }
-const ResultsCount = ({ dark, results, title }: ResultsCountProps) => (
-  <Choose>
-    <When condition={results && title}>
+const ResultsCount = ({ dark, results, title }: ResultsCountProps): React.ReactElement => {
+  
+  const resultTitle = () => {
+    return (
       <TitleCount
           align="center"
           count={results}
           dark={dark}
           title={`${resultsText(results)}:`}
       />
-    </When>
-    <When condition={results}>
+    )
+  }
+
+  const justResults = () => {
+    return (
       <Caption
           className="filter-results"
           dark={dark}
           size="xs"
           text={`${results} ${resultsText(results)}`}
       />
-    </When>
-    <Otherwise>
-      <div />
-    </Otherwise>
-  </Choose>
-)
+    )
+  }
+
+  const displayResultsCount = () => {
+    if (results && title) {
+      return (
+        <>
+          {resultTitle()}
+        </>
+      )
+    } else if (results) {
+      return (
+        <>
+          {justResults()}
+        </>
+      )
+    } else {
+      return (
+        <div />
+      )
+    }
+  }
+  
+  return (
+    <>
+      {displayResultsCount()}
+    </>
+  )
+}
 
 export default ResultsCount
