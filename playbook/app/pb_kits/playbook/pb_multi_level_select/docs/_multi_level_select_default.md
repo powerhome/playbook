@@ -2,16 +2,16 @@ The MultiLevelSelect kit renders a multi leveled select dropdown based on data f
 
 ```
 [{
-  label: a label
-  value: a value
-  id: unique id
+  label: "label",
+  value: "value",
+  id: "uniqueId",
   children: [
-          label: a label
-          value: a value
-          id: unique id
-          children: []
-            ]
-  }]
+    label: "label",
+    value: "value",
+    id: "uniqueId",
+    children: []
+  ]
+}]
 ```
 
 The `onSelect` prop returns an array of all checked items, irrespective of whether it is a parent, child or grandchild. Open the console on this example and check and uncheck checkboxes to see this is action!
