@@ -101,7 +101,7 @@ $pb_button_border_width: 0px;
 
 // Secondary ====================
 @mixin pb_button_secondary {
-  @include pb_button_variant(rgba($primary_action, 0.05), $primary_action);
+  @include pb_button_variant($secondary-action, $primary_action);
 
   @media (hover:hover) {
     &:hover {
@@ -109,7 +109,7 @@ $pb_button_border_width: 0px;
     }
     &:active {
       transition: none;
-      @include pb_button_variant(rgba($primary_action, 0.05), $primary_action);
+      @include pb_button_variant($secondary-action, $primary_action);
     }
   } 
 }
