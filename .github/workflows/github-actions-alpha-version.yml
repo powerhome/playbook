@@ -29,8 +29,9 @@ jobs:
           echo "::set-output name=new_alpha_version::$alpha_version"
       - name: Set output
         run: echo "new_alpha_version=${{ steps.grab-package-version.outputs.new_alpha_version }}" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm version ${{ env.new_alpha_version }}
+        run: npm version ${{ env.new_alpha_version }}
