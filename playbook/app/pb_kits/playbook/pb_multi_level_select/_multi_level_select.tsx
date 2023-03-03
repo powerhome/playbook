@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import classnames from "classnames"
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 import { globalProps } from "../utilities/globalProps"
@@ -27,36 +27,37 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   )
 
   const [formattedData, setFormattedData] = useState(treeData)
-  const [selectedItems, setSelectedItems] =useState()
+  const [selectedItems, setSelectedItems] =useState([])
 
-  const onChange = (currentNode: { [key: string]: any }, selectedNodes: any) => {
-    const updatedData = formattedData.map((item: { [key: string]: any }) => {
+  const onChange = (currentNode: { [key: string]: any }) => {
+    const updatedData = formattedData.map((item: any) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
-          item.checked = true
-          checkIt(item)
+          checkIt(item, selectedItems, setSelectedItems);
         } else {
-          item.checked = false
-          unCheckIt(item)
+          unCheckIt(item, selectedItems, setSelectedItems);
         }
-        
       } else if (item.children) {
-        const foundItem = findItemById(item.children, currentNode._id)
-        if (foundItem && currentNode.checked) {
-          foundItem.checked = true
-          foundItem.expanded = true
-          checkIt(foundItem)
-        } else if ( foundItem && !currentNode.checked) {
-          foundItem.checked = false
-          unCheckIt(foundItem)
+        const foundItem = findItemById(item.children, currentNode._id);
+        if (foundItem) {
+          if (currentNode.checked) {
+            checkIt(foundItem, selectedItems, setSelectedItems);
+          } else {
+            unCheckIt(foundItem, selectedItems, setSelectedItems);
+          }
         }
       }
-      return item
-    })
+  
+      return item;
+    });
+    
     setFormattedData(updatedData)
-    setSelectedItems(selectedNodes)
-    onSelect(selectedItems)
   }
+  
+  useEffect(() => {
+    const selected = selectedItems.filter((item: { [key: string]: any }) => item.checked)
+    onSelect(selected)
+  }, [selectedItems])
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
