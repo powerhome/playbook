@@ -29,10 +29,10 @@ jobs:
           echo "::set-output name=new_alpha_version::$alpha_version"
       - name: Set output
         run: echo "new_alpha_version=${{ steps.grab-package-version.outputs.new_alpha_version }}" >> $GITHUB_ENV
-      - uses: JS-DevTools/npm-publish@v1
+      - uses: actions/setup-node@v3
         with:
-          package: ./playbook/package.json
-          tag: "alpha"
-          token: ${{ secrets.NPM_TOKEN }}
-          check-version: false 
-          version: ${{ env.new_alpha_version }}
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: |
+          cd playbook
+          npm version prerelease --preid=alpha.${{ env.BRANCH_NAME }}
