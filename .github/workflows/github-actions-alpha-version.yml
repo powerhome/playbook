@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 16
       - name: grab current version
         run: |
           cd playbook
@@ -26,8 +26,11 @@ jobs:
         run: |
           cd playbook
           alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}"
-          echo "::set-output name=new_alpha_version::$alpha_version"
+          echo "new_alpha_version=${alpha_version}" >> $GITHUB_OUTPUT"
       - name: Set output
         run: echo "new_alpha_version=${{ steps.grab-package-version.outputs.new_alpha_version }}" >> $GITHUB_ENV
       - name: Update version
         run: npm version ${{ env.new_alpha_version }}
+
+
+
