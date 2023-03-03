@@ -1,9 +1,9 @@
-import React from "react"
+import React, {useState} from "react"
 import classnames from "classnames"
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 import { globalProps } from "../utilities/globalProps"
-import DropdownTreeSelect from "react-dropdown-tree-select"
-import "react-dropdown-tree-select/dist/styles.css"
+import { findItemById, checkIt, unCheckIt } from "./helper_functions"
+import MultiSelectHelper from "./_multi_select_helper"
 
 type MultiLevelSelectProps = {
   aria?: { [key: string]: string }
@@ -11,12 +11,11 @@ type MultiLevelSelectProps = {
   data?: { [key: string]: string }
   id?: string
   treeData?: { [key: string]: string }[]
-  onChange?: () => {}
-
+  onChange?: any
 }
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
-  const { aria = {}, className, data = {}, id, treeData, onChange } = props
+  const { aria = {}, className, data = {}, id, treeData } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -26,17 +25,43 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     className
   )
 
+  const [formattedData, setFormattedData] = useState(treeData)
+
+  const onChange = (currentNode: { [key: string]: any }, selectedNodes: { [key: string]: any }) => {
+    const updatedData = formattedData.map((item: { [key: string]: any }) => {
+      if (item.id === currentNode._id) {
+        if (currentNode.checked) {
+          item.checked = true
+          checkIt(item)
+        } else {
+          item.checked = false
+          unCheckIt(item)
+        }
+        
+      } else if (item.children) {
+        const foundItem = findItemById(item.children, currentNode._id)
+        if (foundItem && currentNode.checked) {
+          foundItem.checked = true
+          checkIt(foundItem)
+        } else if ( foundItem && !currentNode.checked) {
+          foundItem.checked = false
+          unCheckIt(foundItem)
+        }
+      }
+      return item
+    })
+    setFormattedData(updatedData)
+    console.log(selectedNodes)
+  }
+
+
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
-      <DropdownTreeSelect
-        data={treeData}
+      <MultiSelectHelper
+        treeData={formattedData}
         id={id}
-        keepOpenOnSelect
-        keepTreeOnSearch
-        keepChildrenOnSearch
         onChange={onChange}
-        texts={{ placeholder: "Select..." }}
-        mode='hierarchical'
+        {...props}
       />
     </div>
   )
