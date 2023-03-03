@@ -44,6 +44,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         const foundItem = findItemById(item.children, currentNode._id)
         if (foundItem && currentNode.checked) {
           foundItem.checked = true
+          foundItem.expanded = true
           checkIt(foundItem)
         } else if ( foundItem && !currentNode.checked) {
           foundItem.checked = false

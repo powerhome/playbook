@@ -18,6 +18,7 @@ export const checkIt = (foundItem: { [key: string]: any }) => {
     foundItem.children && (
       foundItem.children.map((x: { [key: string]: any }) => {
       x.checked = true
+      x.expanded = true
       x.children && (checkIt(x))
       return x
     })
