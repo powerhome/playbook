@@ -30,6 +30,7 @@ jobs:
       - name: Update version
         run: |
           cd playbook
+          npm install
           npm version ${{ env.new_alpha_version }}
 
 
