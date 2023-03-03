@@ -12,7 +12,7 @@ jobs:
       BRANCH_NAME: ${{ github.head_ref }}
       FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 12
@@ -29,9 +29,5 @@ jobs:
           echo "::set-output name=new_alpha_version::$alpha_version"
       - name: Set output
         run: echo "new_alpha_version=${{ steps.grab-package-version.outputs.new_alpha_version }}" >> $GITHUB_ENV
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
+      - name: Update version
         run: npm version ${{ env.new_alpha_version }}
