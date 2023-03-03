@@ -11,29 +11,25 @@ export const findItemById = (items: { [key: string]: any }[], id: string) :any =
       }
     }
     return null
-  }
+}
   
 
-  export const checkIt = (foundItem: { [key: string]: any }) => {
+export const checkIt = (foundItem: { [key: string]: any }) => {
     foundItem.children && (
       foundItem.children.map((x: { [key: string]: any }) => {
       x.checked = true
-    if (x.children) {
-      checkIt(x)
-    }
+      x.children && (checkIt(x))
       return x
     })
     )
-  }
+}
 
-  export const unCheckIt = (foundItem: { [key: string]: any }) => {
+export const unCheckIt = (foundItem: { [key: string]: any }) => {
     foundItem.children && (
-    foundItem.children.map((x: any) => {
+      foundItem.children.map((x: any) => {
       x.checked = false
-    if (x.children) {
-      unCheckIt(x)
-    }
+      x.children && (unCheckIt(x))
       return x
     })
     )
-  }
+}
