@@ -26,7 +26,7 @@ jobs:
         run: |
           cd playbook
           alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}"
-          echo "new_alpha_version=${alpha_version}" >> $GITHUB_OUTPUT"
+          echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
       - name: Set output
         run: echo "new_alpha_version=${{ steps.grab-package-version.outputs.new_alpha_version }}" >> $GITHUB_ENV
       - name: Update version
