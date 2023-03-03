@@ -33,4 +33,5 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm version prerelease --git-tag=alpha.${{ env.BRANCH_NAME }}
+      - run: npm version "${{ env.new_alpha_version }}
+      
