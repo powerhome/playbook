@@ -1,33 +1,33 @@
-import React, {useState, useEffect} from "react"
-import classnames from "classnames"
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
-import { globalProps } from "../utilities/globalProps"
-import { findItemById, checkIt, unCheckIt } from "./helper_functions"
-import MultiSelectHelper from "./_multi_select_helper"
+import React, { useState, useEffect } from "react";
+import classnames from "classnames";
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { globalProps } from "../utilities/globalProps";
+import { findItemById, checkIt, unCheckIt } from "./helper_functions";
+import MultiSelectHelper from "./_multi_select_helper";
 
 type MultiLevelSelectProps = {
-  aria?: { [key: string]: string }
-  className?: string
-  data?: { [key: string]: string }
-  id?: string
-  treeData?: { [key: string]: string }[]
-  onChange?: any
-  onSelect?: (SelectedNodes:{[key: string]: any;})=>void
-}
+  aria?: { [key: string]: string };
+  className?: string;
+  data?: { [key: string]: string };
+  id?: string;
+  treeData?: { [key: string]: string }[];
+  onChange?: any;
+  onSelect?: (SelectedNodes: { [key: string]: any }) => void;
+};
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
-  const { aria = {}, className, data = {}, id, treeData, onSelect } = props
+  const { aria = {}, className, data = {}, id, treeData, onSelect } = props;
 
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+  const ariaProps = buildAriaProps(aria);
+  const dataProps = buildDataProps(data);
   const classes = classnames(
     buildCss("pb_multi_level_select"),
     globalProps(props),
     className
-  )
+  );
 
-  const [formattedData, setFormattedData] = useState(treeData)
-  const [selectedItems, setSelectedItems] =useState([])
+  const [formattedData, setFormattedData] = useState(treeData);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const onChange = (currentNode: { [key: string]: any }) => {
     const updatedData = formattedData.map((item: any) => {
@@ -47,17 +47,23 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           }
         }
       }
-  
+
       return item;
     });
-    
-    setFormattedData(updatedData)
-  }
-  
+
+    setFormattedData(updatedData);
+  };
+
   useEffect(() => {
-    const selected = selectedItems.filter((item: { [key: string]: any }) => item.checked)
-    onSelect(selected)
-  }, [selectedItems])
+    const selected = selectedItems.filter(
+      (item: { [key: string]: any }) => item.checked
+    );
+    //filter to remove duplicate items
+    const uniqueSelected = selected.filter(
+      (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
+    );
+    onSelect(uniqueSelected);
+  }, [selectedItems]);
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
@@ -69,7 +75,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         {...props}
       />
     </div>
-  )
-}
+  );
+};
 
-export default MultiLevelSelect
+export default MultiLevelSelect;
