@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -17,14 +15,13 @@ type ContactItem = {
 }
 
 type PersonContactProps = {
-  aria?: object,
-  className?: string | array<string>,
-  dark?: boolean,
+  aria?: { [key: string]: string },
+  className?: string | string[],
   data?: object,
   firstName: string,
   id?: string,
   lastName: string,
-  contacts?: array<ContactItem>,
+  contacts?: ContactItem[],
 }
 
 const PersonContact = (props: PersonContactProps) => {
@@ -60,34 +57,34 @@ const PersonContact = (props: PersonContactProps) => {
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
+      id={id}
     >
       <Person
-          firstName={firstName}
-          lastName={lastName}
+        firstName={firstName}
+        lastName={lastName}
       />
       {validContacts().map((contactObject, index) => (
         <Contact
-            contactDetail={contactObject.contactDetail}
-            contactType={contactObject.contactType}
-            contactValue={contactObject.contactValue}
-            key={`valid-contact-${index}`}
+          contactDetail={contactObject.contactDetail}
+          contactType={contactObject.contactType}
+          contactValue={contactObject.contactValue}
+          key={`valid-contact-${index}`}
         />
       ))}
       {wrongContacts().map((contactObject, index) => (
         <div key={`wrong-contact-caption-wrapper-${index}`}>
           <Caption
-              className="wrong_numbers"
-              key={`wrong-contact-caption-${index}`}
-              text="wrong number"
+            className="wrong_numbers"
+            key={`wrong-contact-caption-${index}`}
+            text="wrong number"
           />
           <Contact
-              contactType={contactObject.contactType}
-              contactValue={contactObject.contactValue}
-              key={`wrong-contact-${index}`}
+            contactType={contactObject.contactType}
+            contactValue={contactObject.contactValue}
+            key={`wrong-contact-${index}`}
           />
         </div>
       ))}
