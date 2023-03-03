@@ -33,5 +33,4 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm version "${{ env.new_alpha_version }}
-      
+      - run: npm version ${{ env.new_alpha_version }}
