@@ -1,0 +1,15 @@
+<%= react_component("PhoneNumberInput", object.phone_number_input_options) %>
+
+<script>
+  const formatToGlobalCountryName = () => {
+    return countryName.split('(')[0].trim()
+  }
+  
+  const formatAllCountries = () => {
+    let countryData = window.intlTelInputGlobals.getCountryData()
+    for (let i = 0; i < countryData.length; i++) {
+      let country = countryData[i]
+      country.name = formatToGlobalCountryName(country.name)
+    }
+  }
+  </script>
