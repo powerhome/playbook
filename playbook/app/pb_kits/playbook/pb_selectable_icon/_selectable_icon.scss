@@ -5,6 +5,7 @@
 	text-align: center;
 	cursor: pointer;
 	transition: all $transition_short ease;
+
 	@media (hover:hover) {
 		&:hover * {
 			transition: transform $transition_short ease;
@@ -81,3 +82,5 @@
 		}
  	}
 }
+
+

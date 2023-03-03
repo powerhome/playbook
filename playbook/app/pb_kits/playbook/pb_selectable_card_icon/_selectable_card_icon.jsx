@@ -85,7 +85,7 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
           value={value}
       >
         {
-          <>
+          <div className='pb_card_icon_kit_content'>
             <SelectableIcon
                 customIcon={customIcon}
                 icon={icon}
@@ -98,7 +98,7 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
                 dark={dark}
                 text={bodyText}
             />
-          </>
+          </div>
         }
       </SelectableCard>
     </div>
