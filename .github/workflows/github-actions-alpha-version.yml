@@ -31,8 +31,8 @@ jobs:
         run: echo "new_alpha_version=${{ steps.grab-package-version.outputs.new_alpha_version }}" >> $GITHUB_ENV
       - name: Update version
         run: |
-        cd playbook
-        npm version ${{ env.new_alpha_version }}
+          cd playbook
+          npm version ${{ env.new_alpha_version }}
 
 
 
