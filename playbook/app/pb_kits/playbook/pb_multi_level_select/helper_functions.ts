@@ -15,16 +15,19 @@ export const findItemById = (items: { [key: string]: any }[], id: string) :any =
   
 
   export const checkIt = (foundItem: { [key: string]: any }) => {
-    foundItem.children.map((x: { [key: string]: any }) => {
+    foundItem.children && (
+      foundItem.children.map((x: { [key: string]: any }) => {
       x.checked = true
     if (x.children) {
       checkIt(x)
     }
       return x
     })
+    )
   }
 
   export const unCheckIt = (foundItem: { [key: string]: any }) => {
+    foundItem.children && (
     foundItem.children.map((x: any) => {
       x.checked = false
     if (x.children) {
@@ -32,4 +35,5 @@ export const findItemById = (items: { [key: string]: any }[], id: string) :any =
     }
       return x
     })
+    )
   }
