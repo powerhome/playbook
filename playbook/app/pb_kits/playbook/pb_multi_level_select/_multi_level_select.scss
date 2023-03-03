@@ -11,6 +11,39 @@
       border-bottom: none;
     }
 
+   
+  .toggle.expanded:after {
+    border-style: solid;
+    border-width: 0.1em 0.1em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.6em;
+    left: 0.1em;
+    position: relative;
+    vertical-align: top;
+    width: 0.6em;
+    top: 10px;
+    transform: rotate(135deg);
+    font-size: 0.5em;
+  }
+  .toggle.collapsed:after {
+    border-style: solid;
+    border-width: 0.1em 0.1em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.6em;
+    left: 0.1em;
+    position: relative;
+    vertical-align: top;
+    width: 0.6em;
+    top: 10px;
+    transform: rotate(135deg);
+    font-size: 0.5em;
+
+    transform: rotate(-45deg);
+    top: 12px;
+  }
+
     .tag {
       height: 37px;
       display: inline-flex;

@@ -12,10 +12,11 @@ type MultiLevelSelectProps = {
   id?: string
   treeData?: { [key: string]: string }[]
   onChange?: any
+  onSelect?: (SelectedNodes:{[key: string]: any;})=>void
 }
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
-  const { aria = {}, className, data = {}, id, treeData } = props
+  const { aria = {}, className, data = {}, id, treeData, onSelect } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -26,8 +27,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   )
 
   const [formattedData, setFormattedData] = useState(treeData)
+  const [selectedItems, setSelectedItems] =useState()
 
-  const onChange = (currentNode: { [key: string]: any }, selectedNodes: { [key: string]: any }) => {
+  const onChange = (currentNode: { [key: string]: any }, selectedNodes: any) => {
     const updatedData = formattedData.map((item: { [key: string]: any }) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
@@ -51,9 +53,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       return item
     })
     setFormattedData(updatedData)
-    console.log(selectedNodes)
+    setSelectedItems(selectedNodes)
+    onSelect(selectedItems)
   }
-
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
@@ -61,6 +63,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         treeData={formattedData}
         id={id}
         onChange={onChange}
+        onSelect={onSelect}
         {...props}
       />
     </div>
