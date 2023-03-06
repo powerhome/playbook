@@ -35,9 +35,7 @@ jobs:
       - name: Update version
         run: |
           yarn version --new-version ${{ env.new_alpha_version }}
-          cd ../../playbook
-          ./setup.sh
-          cd playbook
+          bundle
           yarn release
           puts "\nCreating NPM package..."
           npm pack

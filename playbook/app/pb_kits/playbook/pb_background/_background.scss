@@ -22,6 +22,7 @@ $background_colors: map-merge($additional_colors, $merge_kits7);
   max-width: 100%;
   max-height: 100%;
   background-size: cover;
+  background-color: blue !important;
 
   @each $name, $color in $background_colors {
     &.pb_background_color_#{$name} {
