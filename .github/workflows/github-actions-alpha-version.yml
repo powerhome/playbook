@@ -30,8 +30,10 @@ jobs:
       - name: Update version
         run: |
           cd playbook
-          yarn version ${{ env.new_alpha_version }}
+          yarn version --new-version ${{ env.new_alpha_version }}
           yarn release
           puts "\nCreating NPM package..."
           npm pack
+          puts "\nPublishing to NPM..."
+          npm publish playbook-ui-#{npm_version}.tgz --tag alpha
 
