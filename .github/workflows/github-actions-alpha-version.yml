@@ -39,6 +39,7 @@ jobs:
           alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}"
           echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
       - name: Update version
+        uses: actions/setup-python@v2
         run: |
           pwd
           ls
