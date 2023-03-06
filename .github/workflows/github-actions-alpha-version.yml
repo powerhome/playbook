@@ -7,6 +7,9 @@ jobs:
   Creating-Alpha-Version:
     if: github.event.label.name == 'alpha'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./playbook
     env:
       # Set an environment variable for the branch name
       BRANCH_NAME: ${{ github.head_ref }}
@@ -16,7 +19,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      working-directory: ./playbook
       - name: Set Git user info
         run: |
           git config --local user.name "${{ github.actor }}"
