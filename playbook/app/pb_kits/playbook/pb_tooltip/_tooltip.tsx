@@ -1,16 +1,18 @@
 import React, { useRef, useState } from "react"
-import classnames from "classnames"
+
 import {
-  Placement,
-  offset,
-  arrow,
-  shift,
-  useFloating,
+  arrow, 
+  flip, 
+  offset, 
+  Placement, 
+  safePolygon, 
+  shift, 
+  useFloating, 
+  useHover, 
   useInteractions,
-  useHover,
-  flip,
-  safePolygon,
 } from "@floating-ui/react-dom-interactions"
+
+import classnames from "classnames"
 import { GlobalProps, globalProps } from "../utilities/globalProps"
 import { buildAriaProps, buildDataProps } from "../utilities/props"
 import Flex from "../pb_flex/_flex"
@@ -18,13 +20,13 @@ import Flex from "../pb_flex/_flex"
 type TooltipProps = {
   aria?: { [key: string]: string },
   className?: string | string[],
+  children: JSX.Element,
   data?: { [key: string]: string },
-  text: string,
-  icon?: string,
   delay?: number | Partial<{open: number; close: number}>,
+  icon?: string,
   interaction?: boolean,
   placement?: Placement,
-  children: JSX.Element,
+  text: string,
   zIndex?: Pick<GlobalProps, "ZIndex">,
 } & GlobalProps
 
@@ -34,11 +36,11 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     className,
     children,
     data = {},
-    icon = null,
     delay = 0,
+    icon = null,
     interaction = false,
-    text,
     placement: preferredPlacement = "top",
+    text,
     zIndex,
     ...rest
   } = props
@@ -47,54 +49,55 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
 
   const css = classnames(
-    globalProps({...rest}),
-    className
+    className,
+    globalProps({...rest})
   )
   const [open, setOpen] = useState(false)
   const arrowRef = useRef(null)
   const {
+
+    context,
+    floating,
+    middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+    placement,
+    reference,
+    strategy,
     x,
     y,
-    reference,
-    floating,
-    strategy,
-    context,
-    placement,
-    middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
   } = useFloating({
-    placement: preferredPlacement,
-    open,
-    onOpenChange(open) {
-      setOpen(open)
-    },
     middleware: [
-      offset(10),
-      shift(),
+      arrow({
+        element: arrowRef,
+      }),
       flip({
         fallbackPlacements: ["top", "right", "bottom", "left"],
         fallbackStrategy: "initialPlacement",
         flipAlignment: false,
       }),
-      arrow({
-        element: arrowRef,
-      }),
+      offset(10),
+      shift()
     ],
+    open,
+    onOpenChange(open) {
+      setOpen(open)
+    },
+    placement: preferredPlacement
   })
 
   const { getFloatingProps } = useInteractions([
     useHover(context, {
+      delay,
       handleClose: interaction ? safePolygon({
         blockPointerEvents: false
-      }) : null,
-      delay
+      }) : null
     })
   ])
 
   const staticSide = {
-    top: "bottom",
-    right: "left",
     bottom: "top",
     left: "right",
+    right: "left",
+    top: "bottom",
   }[placement.split("-")[0]]
 
   return (
@@ -112,9 +115,9 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
       {open && (
         <div
             {...getFloatingProps({
-              role: "tooltip",
-              ref: floating,
               className: `tooltip_tooltip ${placement} visible`,
+              ref: floating,
+              role: "tooltip",
               style: {
                 position: strategy,
                 top: y ?? 0,
