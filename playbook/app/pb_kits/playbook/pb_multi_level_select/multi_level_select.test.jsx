@@ -29,10 +29,9 @@ test('should render custom class', () => {
       <MultiLevelSelect
           className='custom-class'
           data={{ testid: testId}}
-          onSelect={()=> console.log("hello")}
           treeData={treeData}
       /> 
-  ) 
+  )
 
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveClass('custom-class')

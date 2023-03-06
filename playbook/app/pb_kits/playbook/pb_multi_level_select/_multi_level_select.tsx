@@ -12,11 +12,18 @@ type MultiLevelSelectProps = {
   id?: string;
   treeData?: { [key: string]: string }[];
   onChange?: any;
-  onSelect?: (SelectedNodes: { [key: string]: any }) => void;
+  selectedData?: (prop: { [key: string]: any }) => {};
 };
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
-  const { aria = {}, className, data = {}, id, treeData, onSelect } = props;
+  const { 
+    aria = {}, 
+    className, 
+    data = {}, 
+    id, 
+    treeData, 
+    selectedData =()=>{}
+  } = props;
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -62,7 +69,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const uniqueSelected = selected.filter(
       (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
     );
-    onSelect(uniqueSelected);
+    selectedData(uniqueSelected);
   }, [selectedItems]);
 
   return (
@@ -71,7 +78,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         treeData={formattedData}
         id={id}
         onChange={onChange}
-        onSelect={onSelect}
         {...props}
       />
     </div>
