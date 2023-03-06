@@ -4,7 +4,6 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import intlTelInput from 'intl-tel-input'
-import 'intl-tel-input/build/css/intlTelInput.css'
 import TextInput from '../pb_text_input/_text_input'
 import 'intl-tel-input/build/js/utils.js'
 
