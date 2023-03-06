@@ -13,11 +13,11 @@ import Timestamp from '../pb_timestamp/_timestamp'
 import Title from '../pb_title/_title'
 
 type MessageProps = {
-  aria: object,
+  aria: { [key: string]: string },
   avatarName?: string,
-  avatarStatus?: string,
+  avatarStatus?: "away" | "offline" | "online",
   avatarUrl?: string,
-  children?: array<React.ReactNode> | React.ReactNode,
+  children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   data?: object,
   id?: string,
@@ -61,53 +61,53 @@ const Message = (props: MessageProps) => {
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
+      id={id}
     >
-      <If condition={shouldDisplayAvatar}>
+      {shouldDisplayAvatar &&
         <Avatar
-            imageUrl={avatarUrl}
-            name={avatarName}
-            size="xs"
-            status={avatarStatus}
+          imageUrl={avatarUrl}
+          name={avatarName}
+          size="xs"
+          status={avatarStatus}
         />
-      </If>
+      }
       <div className="content_wrapper">
         <Flex
-            justify={alignTimestamp === 'left' ? 'none' : 'between'}
-            orientation="row"
+          justify={alignTimestamp === 'left' ? 'none' : 'between'}
+          orientation="row"
         >
-          <If condition={label}>
+          {label &&
             <Title
-                className="message_title"
-                size={4}
-                text={label}
+              className="message_title"
+              size={4}
+              text={label}
             />
-          </If>
+          }
           <Timestamp
-              className={`pull-${alignTimestamp} ${timestampObject ? 'message_humanized_time' : null}`}
-              text={timestamp}
-              timezone={timezone}
+            className={`pull-${alignTimestamp} ${timestampObject ? 'message_humanized_time' : null}`}
+            text={timestamp}
+            timestamp={''}
+            timezone={timezone}
           />
-          <If condition={timestampObject}>
+          {timestampObject &&
             <Timestamp
-                className={`pull-${alignTimestamp} message_timestamp`}
-                timestamp={timestampObject}
-                timezone={timezone}
+              className={`pull-${alignTimestamp} message_timestamp`}
+              text={''}
+              timestamp={timestampObject}
+              timezone={timezone}
             />
-          </If>
+          }
         </Flex>
-        <If condition={message}>
+        {message &&
           <Body
-              className="pb_message_body"
-              text={message}
+            className="pb_message_body"
+            text={message}
           />
-        </If>
-        <If condition={children}>
-          { children }
-        </If>
+        }
+        {children}
       </div>
     </div>
   )

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-
 import {
   Popper,
   Manager as PopperManager,
@@ -23,14 +22,14 @@ type PbPopoverProps = {
   aria?: { [key: string]: string };
   className?: string;
   closeOnClick?: "outside" | "inside" | "any";
-  data?: object;
+  data?: { [key: string]: string },
   id?: string;
   offset?: boolean;
   reference: PopperReference & any;
   show?: boolean;
-  shouldClosePopover?: (arg0: boolean) => boolean | boolean;
-} & GlobalProps &
-  PopperProps<any>;
+  shouldClosePopover?: (arg0: boolean) => void;
+} & GlobalProps & Omit<PopperProps<any>, 'children'>
+& { children?: React.ReactChild[] | React.ReactChild }
 
 // Prop enabled default modifiers here
 // https://popper.js.org/docs/v2/modifiers
@@ -100,31 +99,31 @@ const Popover = (props: PbPopoverProps) => {
 
   return (
     <Popper
-      modifiers={popoverModifiers({ modifiers, offset })}
-      placement={placement}
-      referenceElement={referenceElement}
+        modifiers={popoverModifiers({ modifiers, offset })}
+        placement={placement}
+        referenceElement={referenceElement}
     >
       {({ placement, ref, style }) => {
         return (
           <div
-            {...ariaProps}
-            {...dataProps}
-            className={classes}
-            data-placement={placement}
-            id={id}
-            ref={ref}
-            style={Object.assign({}, style, zIndexStyle)}
+              {...ariaProps}
+              {...dataProps}
+              className={classes}
+              data-placement={placement}
+              id={id}
+              ref={ref}
+              style={Object.assign({}, style, zIndexStyle)}
           >
             <div
-              className={classnames(`${buildCss("pb_popover_tooltip")} show`)}
+                className={classnames(`${buildCss("pb_popover_tooltip")} show`)}
             >
               <div
-                className={classnames(
-                  "pb_popover_body",
-                  popoverSpacing,
-                  overflowHandling
-                )}
-                style={widthHeightStyles()}
+                  className={classnames(
+                    "pb_popover_body",
+                    popoverSpacing,
+                    overflowHandling
+                  )}
+                  style={widthHeightStyles()}
               >
                 {children}
               </div>
@@ -192,17 +191,17 @@ const PbReactPopover = (props: PbPopoverProps) => {
 
   const popoverComponent = (
     <Popover
-      className={className}
-      maxHeight={maxHeight}
-      maxWidth={maxWidth}
-      minHeight={minHeight}
-      minWidth={minWidth}
-      modifiers={modifiers}
-      offset={offset}
-      placement={placement}
-      referenceElement={referenceElement}
-      zIndex={zIndex}
-      {...props}
+        className={className}
+        maxHeight={maxHeight}
+        maxWidth={maxWidth}
+        minHeight={minHeight}
+        minWidth={minWidth}
+        modifiers={modifiers}
+        offset={offset}
+        placement={placement}
+        referenceElement={referenceElement}
+        zIndex={zIndex}
+        {...props}
     >
       {children}
     </Popover>
@@ -214,7 +213,9 @@ const PbReactPopover = (props: PbPopoverProps) => {
         {reference && !referenceElement && (
           <PopperReference>
             {({ ref }) => (
-              <span className="pb_popover_reference_wrapper" ref={ref}>
+              <span
+                  className="pb_popover_reference_wrapper"
+                  ref={ref}>
                 <reference.type {...reference.props} />
               </span>
             )}

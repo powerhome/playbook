@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import FilterSingle, { FilterSingleProps } from './FilterSingle'
 import FilterDouble, { FilterDoubleProps } from './FilterDouble'
@@ -10,16 +8,25 @@ type FilterProps =
       double?: boolean,
     })
 
-const Filter = ({ double = false, ...templateProps }: FilterProps) => {
-  return (
-    <Choose>
-      <When condition={double}>
+const Filter = ({ 
+  double = false,
+  ...templateProps
+  }: FilterProps): React.ReactElement => {
+  const displayFilter = () => {
+    if (double === true) {
+      return (
         <FilterDouble {...templateProps} />
-      </When>
-      <Otherwise>
+      )
+    } else {
+      return (
         <FilterSingle {...templateProps} />
-      </Otherwise>
-    </Choose>
+      )
+    }
+  }
+  return (
+    <>
+      {displayFilter()}
+    </>
   )
 }
 
