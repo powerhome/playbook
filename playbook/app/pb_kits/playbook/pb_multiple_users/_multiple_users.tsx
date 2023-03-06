@@ -9,18 +9,18 @@ import { globalProps } from '../utilities/globalProps'
 import Avatar from '../pb_avatar/_avatar'
 
 type MultipleUsersProps = {
-  aria?: object,
+  aria?: { [key: string]: string },
   className?: string,
   dark?: boolean,
-  data?: object,
+  data?: { [key: string]: string },
   id?: string,
   maxDisplayedUsers?: number,
   reverse?: boolean,
-  size?: string,
-  users: array<object>,
+  size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
+  users: Array<{ [key: string]: string }>,
 }
 
-const MultipleUsers = (props: MultipleUsersProps) => {
+const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
   const {
     aria = {},
     className,
@@ -62,18 +62,23 @@ const MultipleUsers = (props: MultipleUsersProps) => {
       {usersToDisplay.map((avatarData, index) => (
         <Avatar
             {...avatarData}
-            className="pb_multiple_users_item"
+            className="pb_multiple_uscdpers_item"
             dark={dark}
             key={index}
             size={size}
         />
       ))}
 
-      <If condition={users.length > maxDisplayedUsers}>
+      { users.length > maxDisplayedUsers && 
         <div className={itemClasses}>
           {`+${users.length - 3}`}
         </div>
-      </If>
+      }
+      {/* <If condition={users.length > maxDisplayedUsers}>
+        <div className={itemClasses}>
+          {`+${users.length - 3}`}
+        </div>
+      </If> */}
     </div>
   )
 }
