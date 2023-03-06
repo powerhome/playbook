@@ -42,6 +42,7 @@ jobs:
           echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
       - name: Update version
         run: |
+          yarn upgrade node-sass
           yarn install
           yarn version --new-version ${{ env.new_alpha_version }}
           bundle
