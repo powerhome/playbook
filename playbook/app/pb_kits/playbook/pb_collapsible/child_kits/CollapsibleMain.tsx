@@ -3,7 +3,7 @@
 import classnames from 'classnames'
 import React, { useContext } from 'react'
 import { buildCss } from '../../utilities/props'
-import { globalProps } from '../../utilities/globalProps'
+import { GlobalProps, globalProps } from '../../utilities/globalProps'
 
 import Flex from '../../pb_flex/_flex'
 import FlexItem from '../../pb_flex/_flex_item'
@@ -37,6 +37,8 @@ type CollapsibleMainProps = {
 }
 type IconColors =  "default" | "light" | "lighter" | "link" | "error" | "success"
 
+type flexMainTypes = "around" | "between" | "evenly" | "none"
+
 type IconProps = {
   collapsed: boolean | (()=> void)
   iconColor?: IconColors
@@ -66,7 +68,7 @@ const CollapsibleMain = ({
   padding = 'md',
   ...props
 }: CollapsibleMainProps): React.ReactElement=> {
-  const context: {[key: string]: IconColors | (() => void)} | boolean |any = useContext(CollapsibleContext)
+  const context: {[key: string]: IconColors | (() => void)} | boolean | GlobalProps | flexMainTypes = useContext(CollapsibleContext)
   const mainCSS = buildCss('pb_collapsible_main_kit')
   const mainSpacing = globalProps(props, { cursor, padding })
 
