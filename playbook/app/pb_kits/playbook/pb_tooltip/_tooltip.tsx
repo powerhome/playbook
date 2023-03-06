@@ -21,6 +21,7 @@ type TooltipProps = {
   data?: { [key: string]: string },
   text: string,
   icon?: string,
+  delay?: number | Partial<{open: number; close: number}>,
   interaction?: boolean,
   placement?: Placement,
   children: JSX.Element,
@@ -34,6 +35,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     children,
     data = {},
     icon = null,
+    delay = 0,
     interaction = false,
     text,
     placement: preferredPlacement = "top",
@@ -84,6 +86,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
       handleClose: interaction ? safePolygon({
         blockPointerEvents: false
       }) : null,
+      delay
     })
   ])
 
