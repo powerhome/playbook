@@ -39,6 +39,7 @@ $flag-min-resolution: 192dpi;
     &:focus-visible {
       outline-style: solid;
       border-radius: $space_xxs 0px 0px $space_xxs;
+      outline-color: $primary;
     }
   }
 
