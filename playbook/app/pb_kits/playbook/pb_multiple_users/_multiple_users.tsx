@@ -62,7 +62,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
       {usersToDisplay.map((avatarData, index) => (
         <Avatar
             {...avatarData}
-            className="pb_multiple_uscdpers_item"
+            className="pb_multiple_users_item"
             dark={dark}
             key={index}
             size={size}
