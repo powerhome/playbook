@@ -24,7 +24,9 @@ jobs:
         with:
           bundler-cache: true
       - name: Python Setup
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4 
+        with: 
+          python-version: '2.7'
       - name: Set Git user info
         run: |
           git config --local user.name "${{ github.actor }}"
@@ -36,19 +38,13 @@ jobs:
       - name: grab package version
         id: grab-package-version
         run: |
-          pwd
-          ls
           alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}"
           echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
       - name: Update version
         run: |
-          pwd
-          ls
           yarn install
           yarn version --new-version ${{ env.new_alpha_version }}
           bundle
-          pwd
-          ls
           yarn release
           puts "\nCreating NPM package..."
           npm pack
