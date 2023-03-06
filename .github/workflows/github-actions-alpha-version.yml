@@ -23,6 +23,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Python Setup
+        uses: actions/setup-python@v2
       - name: Set Git user info
         run: |
           git config --local user.name "${{ github.actor }}"
@@ -39,7 +41,6 @@ jobs:
           alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}"
           echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
       - name: Update version
-        uses: actions/setup-python@v2
         run: |
           pwd
           ls
