@@ -19,6 +19,8 @@ type CollapsibleProps = {
   iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   iconSize?: typeof IconSizes
   id?: string,
+  mainFlex?: "around" | "between" | "evenly" | "none",
+  mainFlexItem?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'none',
   padding?: string,
 }
 
@@ -40,6 +42,8 @@ const Collapsible = ({
   iconColor = 'default',
   iconSize,
   id,
+  mainFlex = "between",
+  mainFlexItem = "none",
   padding = 'md',
   ...props
 }: CollapsibleProps) => {
@@ -64,7 +68,7 @@ const Collapsible = ({
   )
 
   return (
-    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, collapse, iconSize, iconColor }}>
+    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, collapse, iconSize, iconColor, mainFlex, mainFlexItem }}>
       <div
           {...ariaProps}
           {...dataProps}

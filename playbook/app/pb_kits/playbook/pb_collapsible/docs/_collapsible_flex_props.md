@@ -1,0 +1,3 @@
+The `mainFlexItem` prop allows you to pass any of the 'flex' values to the Collapsible which will allow the Collapsible.Main to fill the entire space of the containing div instead of being restricted by the size of it's contents. The default value is 'none'. The first example above sets `mainFlexItem` to '1'.
+
+By default, the Collapisible.Main has the globalProp of 'spacing' set to 'between'. The `mainFlex` prop allows you to change this to 'none', 'around' or 'evenly'. The second example above sets `mainFlex` to 'none'.

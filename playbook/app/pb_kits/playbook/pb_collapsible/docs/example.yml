@@ -4,8 +4,10 @@ examples:
   - collapsible_default: Default
   - collapsible_size: Size
   - collapsible_color: Color
+ 
 
   react:
   - collapsible_default: Default
   - collapsible_size: Size
   - collapsible_color: Color
+  - collapsible_flex_props: Flex Props
