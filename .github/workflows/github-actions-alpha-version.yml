@@ -35,12 +35,6 @@ jobs:
       - name: Update version
         run: |
           yarn version --new-version ${{ env.new_alpha_version }}
-          asdf install
-          asdf plugin add ruby
-          asdf plugin add yarn
-          asdf plugin add nodejs
-          asdf plugin add python
-          asdf install
           yarn install
           yarn prepare
           yarn release
