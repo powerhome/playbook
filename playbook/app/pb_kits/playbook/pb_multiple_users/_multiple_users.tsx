@@ -74,11 +74,6 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
           {`+${users.length - 3}`}
         </div>
       }
-      {/* <If condition={users.length > maxDisplayedUsers}>
-        <div className={itemClasses}>
-          {`+${users.length - 3}`}
-        </div>
-      </If> */}
     </div>
   )
 }
