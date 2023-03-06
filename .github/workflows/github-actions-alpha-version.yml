@@ -14,6 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
+        working-directory: ./playbook
         with:
           node-version: 16
       - name: Set Git user info
@@ -22,20 +23,17 @@ jobs:
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
       - name: grab current version
         run: |
-          cd playbook
           playbook_version=$(node -pe "require('./package.json').version")
           echo "playbook_version=${playbook_version}" >> $GITHUB_ENV
       - name: grab package version
         id: grab-package-version
         run: |
-          cd playbook
           alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}"
           echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
       - name: Update version
         run: |
-          cd playbook
           yarn version --new-version ${{ env.new_alpha_version }}
-          yarn release
+          yarn run webpack --mode=production --config=./webpack.config.js
           puts "\nCreating NPM package..."
           npm pack
           puts "\nPublishing to NPM..."
