@@ -35,7 +35,8 @@ jobs:
       - name: Update version
         run: |
           yarn version --new-version ${{ env.new_alpha_version }}
-          yarn run webpack --mode=production --config=./webpack.config.js
+          yarn install
+          yarn release
           puts "\nCreating NPM package..."
           npm pack
           puts "\nPublishing to NPM..."
