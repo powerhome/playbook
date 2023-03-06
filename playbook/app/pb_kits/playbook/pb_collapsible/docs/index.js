@@ -1,4 +1,5 @@
 export { default as CollapsibleDefault } from './_collapsible_default.jsx'
 export { default as CollapsibleSize } from './_collapsible_size.jsx'
 export { default as CollapsibleColor } from './_collapsible_color.jsx'
-export  {default as CollapsibleFlexProps } from './_collapsible_flex_props.jsx'
+export {default as CollapsibleMainFlex } from './_collapsible_main_flex.jsx'
+export {default as CollapsibleMainFlexItem } from './_collapsible_main_flex_item.jsx'

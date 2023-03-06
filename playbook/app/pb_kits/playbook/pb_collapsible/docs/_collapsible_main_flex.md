@@ -1,0 +1,1 @@
+By default, the Collapisible.Main has the globalProp of 'spacing' set to 'between'. The `mainFlex` prop allows you to change this to 'none', 'around' or 'evenly'. The second example above sets `mainFlex` to 'none'.
