@@ -4,8 +4,8 @@
     class: object.classname,
     aria: object.aria) do %>
 
-    <%= pb_rails("flex", props: {vertical: "center", spacing: "between", cursor: "pointer"}) do %>
-      <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("flex", props: {vertical: "center", spacing:object.main_flex , cursor: "pointer"}) do %>
+      <%= pb_rails("flex/flex_item", props: {flex:object.main_flex_item}) do %>
         <%= content.presence %>
       <% end %>
       <%= pb_rails("flex/flex_item") do %>

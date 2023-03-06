@@ -6,6 +6,13 @@ module Playbook
       prop :color, type: Playbook::Props::Enum,
                    values: %w[default light lighter link success error],
                    default: "default"
+      prop :main_flex, type: Playbook::Props::Enum,
+                       values: %w[around between evenly none],
+                       default: "between",
+                       deprecated: true
+      prop :main_flex_item, type: Playbook::Props::Enum,
+                            values: %w[auto initial 0 1 2 3 4 5 6 7 8 9 10 11 12 none],
+                            default: "none"
       prop :size, type: Playbook::Props::Enum,
                   values: ["lg", "xs", "sm", "1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", nil],
                   default: nil
