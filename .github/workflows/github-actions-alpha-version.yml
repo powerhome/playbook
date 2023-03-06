@@ -42,6 +42,7 @@ jobs:
         run: |
           pwd
           ls
+          yarn install
           yarn version --new-version ${{ env.new_alpha_version }}
           bundle
           pwd
