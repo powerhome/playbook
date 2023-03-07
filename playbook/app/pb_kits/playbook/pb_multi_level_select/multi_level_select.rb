@@ -5,7 +5,6 @@ module Playbook
     class MultiLevelSelect < Playbook::KitBase
       prop :tree_data, type: Playbook::Props::Array,
                        default: []
-      # prop :selected_data
 
       def classname
         generate_classname("pb_multi_level_select")
@@ -15,7 +14,6 @@ module Playbook
         {
           id: id,
           treeData: tree_data,
-          # selectedData: selected_data,
         }
       end
     end
