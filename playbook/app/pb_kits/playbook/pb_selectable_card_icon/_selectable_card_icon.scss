@@ -2,26 +2,26 @@
 
 	text-align: center;
 	user-select: none;
-  
-  .pb_card_icon_kit_content::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-  }
 
-.pb_card_icon_kit_content {
-  @media (hover:hover) {
-    &:hover * {
-      transition: transform $transition_short ease;
-      transform: translateY(-2px);
-    }
-  }
+.buffer > [class*=pb_selectable_icon_kit]::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
-  
+.buffer > [class*=pb_selectable_icon_kit] {
+  @media (hover:hover) {
+    &:hover * {
+          transition: transform $transition_short ease;
+          transform: translateY(-2px);
+        }
+    }
+}
+
+
 	input[type="checkbox"],
 	input[type="radio"] {
 
