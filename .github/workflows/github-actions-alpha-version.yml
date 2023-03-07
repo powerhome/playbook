@@ -40,10 +40,10 @@ jobs:
         run: |
           alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}"
           echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
-      - name: Update version
       - uses: actions/setup-node@v3
         with:
           node-version: 14
+      - name: Update version
         run: |
           yarn install
           yarn version --new-version ${{ env.new_alpha_version }}
