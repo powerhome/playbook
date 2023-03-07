@@ -11,7 +11,7 @@ $teal:                #00C4D7 !default;
 $red:                 #DA0014 !default;
 $red_dark:            #ff4a50 !default;
 $yellow:              #F9BB00 !default;
-$green:               #00CA74 !default;
+$green:               #1CA05C !default;
 $orange:              #FD804C !default;
 $default:             #93a8b8 !default;
 $colors: (
@@ -75,6 +75,8 @@ $card_colors: (
 );
 
 $primary-action:      $primary !default;
+$secondary-action:    rgba($primary_action, 0.05) !default;
+
 $action_colors: (
   primary_action:            $primary-action
 );

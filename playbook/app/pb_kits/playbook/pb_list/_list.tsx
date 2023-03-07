@@ -11,14 +11,14 @@ type ListProps = {
   dark?: boolean;
   data?: object;
   id?: string;
-  layout: "" | "left" | "right";
+  layout?: "" | "left" | "right";
   ordered?: boolean;
   role?: string;
   tabIndex?: number;
   text?: string;
   size?: string;
   variant?: string;
-  xpadding: boolean;
+  xpadding?: boolean;
 };
 
 const List = (props: ListProps) => {
