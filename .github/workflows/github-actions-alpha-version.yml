@@ -41,12 +41,14 @@ jobs:
           alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}"
           echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
       - name: Update version
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
         run: |
           yarn install
           yarn version --new-version ${{ env.new_alpha_version }}
           bundle
           yarn release
-          npm whoami
           npm pack
           npm publish playbook-ui-${{ env.new_alpha_version }}.tgz --tag alpha
         env:
