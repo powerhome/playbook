@@ -46,6 +46,9 @@ jobs:
           yarn version --new-version ${{ env.new_alpha_version }}
           bundle
           yarn release
+          npm whoami
           npm pack
           npm publish playbook-ui-${{ env.new_alpha_version }}.tgz --tag alpha
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
