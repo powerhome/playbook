@@ -4,22 +4,22 @@ on:
   pull_request:
     types: [ labeled ]
 jobs:
-  Creating-Alpha-Version:
-    if: github.event.label.name == 'alpha'
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+  setup:
+    needs: checkout
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./playbook
-    env:
-      # Set an environment variable for the branch name
-      BRANCH_NAME: ${{ github.head_ref }}
-      FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-      - name: Setup Ruby and install gems
+      - name: Ruby Setup
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
@@ -27,24 +27,46 @@ jobs:
         uses: actions/setup-python@v4 
         with: 
           python-version: '2.7'
-      - name: Set Git user info
+      - name: Set Git Config
         run: |
           git config --local user.name "${{ github.actor }}"
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-      - name: grab current version
+
+  grab-version:
+    needs: checkout
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./playbook
+    env:
+      BRANCH_NAME: ${{ github.head_ref }}
+    steps:
+      - name: Grab Current Version
         run: |
           playbook_version=$(node -pe "require('./package.json').version")
           echo "playbook_version=${playbook_version}" >> $GITHUB_ENV
-      - name: grab package version
+      - name: Set New Alpha Version
         id: grab-package-version
         run: |
-          alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}"
+          alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}${{ github.run_number }}"
           echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
+
+  publish:
+    needs: [checkout, grab-version, setup]
+    if: github.event.label.name == 'alpha'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./playbook
+    env:
+      FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
+      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN }}
+    steps:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
           registry-url: 'https://registry.npmjs.org'
-      - name: Update version
+      - name: Version Up, Distribute and Publish
         run: |
           yarn install
           yarn version --new-version ${{ env.new_alpha_version }}
@@ -52,6 +74,3 @@ jobs:
           yarn release
           npm pack
           npm publish playbook-ui-${{ env.new_alpha_version }}.tgz --tag alpha
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
