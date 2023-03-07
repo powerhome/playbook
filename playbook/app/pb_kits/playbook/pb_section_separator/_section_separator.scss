@@ -18,19 +18,21 @@ $section_colors_dark: (
   justify-content: center;
   align-items: center;
   position: relative;
-  @each $color_name, $color_value in $section_colors_light {
-    &[class*=_#{$color_name}] {
-      span {
-        display: inline-block;
-        padding: 0 $space_xs;
-        background: #{$color_value};
-        position: relative;
-        z-index: 1;
-      }
-    }
+  span {
+    padding: 0 $space_xs;
+    display: flex;
+  }
+  &::before {
+    content: "";
+    height: 1px;
+    flex: 1;
+    @include section_separator_horizontal;
   }
   &::after {
-    @include section_separator_horizontal(false);
+    content: "";
+    height: 1px;
+    flex: 1;
+    @include section_separator_horizontal;
   }
   &[class*=_horizontal] {
     justify-content: center;
@@ -46,23 +48,13 @@ $section_colors_dark: (
   // Dark =========================
 
   &.dark {
+    &::before {
+      @include section_separator_horizontal(true);
+    }
     &::after {
       @include section_separator_horizontal(true);
     }
-    @each $color_name, $color_value in $section_colors_dark {
-      &[class*=_#{$color_name}] {
-        span {
-          display: inline-block;
-          padding: 0 $space_xs;
-          background: #{$color_value};
-          position: relative;
-          z-index: 1;
-        }
-      }
-    }
     &[class*=_vertical] {
-      margin-left: $space_xs;
-      margin-right: $space_xs;
       &::after {
         @include section_separator_vertical(true);
       }

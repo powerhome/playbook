@@ -25,6 +25,7 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
     id,
     orientation = 'horizontal',
     text,
+    dark = false,
     variant = 'card',
   } = props
   const ariaProps = buildAriaProps(aria)
@@ -42,7 +43,7 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
       {
         text && (
           <span>
-          <Caption text={text} />
+          <Caption text={text} dark={dark}/>
         </span>
         )
       }
