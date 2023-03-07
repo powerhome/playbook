@@ -47,5 +47,5 @@ jobs:
           bundle
           yarn release
           npm pack
-          npm publish playbook-ui-#{npm_version}.tgz --tag alpha
+          npm publish playbook-ui-${{ env.new_alpha_version }}.tgz --tag alpha
 
