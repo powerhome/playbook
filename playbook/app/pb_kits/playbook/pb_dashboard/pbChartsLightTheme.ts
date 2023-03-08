@@ -225,8 +225,27 @@ const highchartsTheme: ThemeProps = {
         },
       ],
       traverseUpButton: {
-        position: { y: -40 },
-      }
+        position: { y: -50 },
+        theme: {
+          states: {
+            hover: {
+              style: {
+                fill: '#004ebb',
+              },
+            },
+          },
+          style: {
+            fill: '#0056CF',
+            color: '#FFFFFF',
+            fontSize: '14px',
+            fontWeight: '600',
+            fontFamily: '"Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif',
+          },
+          stroke: '#0056CF',
+          height: 24,
+          width: 90,
+        },
+      },
     },
   },
   credits: {

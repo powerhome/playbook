@@ -1,0 +1,18 @@
+@import 'highcharts/css/highcharts.scss';
+
+.pb_treemap_chart {
+  .highcharts-drillup-button {
+    .highcharts-button-box {
+      rx: 4 !important;
+      ry: 4 !important;
+    }
+
+    text {
+      transform: translateX(20px)
+    }
+  }
+
+  .highcharts-tooltip-box {
+    fill: $black;
+  }
+}
