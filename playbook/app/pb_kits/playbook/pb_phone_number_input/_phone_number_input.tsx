@@ -1,11 +1,12 @@
 /* @flow */
-import React, { useEffect, useRef, useState } from "react"
-import classnames from "classnames"
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
-import { globalProps } from "../utilities/globalProps"
-import intlTelInput from "intl-tel-input"
-import "intl-tel-input/build/css/intlTelInput.css"
-import TextInput from "../pb_text_input/_text_input"
+import React, { useEffect, useRef, useState } from 'react'
+import classnames from 'classnames'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
+import intlTelInput from 'intl-tel-input'
+import 'intl-tel-input/build/css/intlTelInput.css'
+import TextInput from '../pb_text_input/_text_input'
+import 'intl-tel-input/build/js/utils.js'
 
 declare global {
   interface Window {
@@ -50,7 +51,7 @@ const formatAllCountries = () => {
 formatAllCountries()
 
 const containOnlyNumbers = (value: string) => {
-  return /^(\++)*(\d+)$/.test(value)
+  return /^[()+\-\ .\d]*$/g.test(value)
 }
 
 const PhoneNumberInput = (props: PhoneNumberInputProps) => {
@@ -85,7 +86,8 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const inputRef = useRef<HTMLInputElement>()
   const [inputValue, setInputValue] = useState(value)
   const [itiInit, setItiInit] = useState<any>()
-  const [error, setError] = useState("")
+  const [error, setError] = useState('')
+  const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
 
   const validateTooLongNumber = (itiInit: any) => {
     const error = itiInit.getValidationError()
@@ -133,18 +135,17 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
 
   useEffect(() => {
     const telInputInit = new intlTelInput(inputRef.current, {
-      utilsScript:
-        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-      separateDialCode: true,
-      preferredCountries,
-      allowDropdown: !disabled,
-      initialCountry,
-      onlyCountries,
-    })
-
-    inputRef.current.addEventListener("countrychange", () =>
-      validateTooLongNumber(telInputInit)
+        separateDialCode: true,
+        preferredCountries,
+        allowDropdown: !disabled,
+        initialCountry,
+        onlyCountries,
+      }
     )
+    
+    inputRef.current.addEventListener("countrychange", () => validateTooLongNumber(telInputInit))
+    inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
+    inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
 
     setItiInit(telInputInit)
   }, [])
@@ -152,6 +153,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   return (
     <div {...ariaProps} {...dataProps} className={classes}>
       <TextInput
+        className={dropDownIsOpen ? 'dropdown_open' : ''}
         disabled={disabled}
         error={error}
         id={id}
