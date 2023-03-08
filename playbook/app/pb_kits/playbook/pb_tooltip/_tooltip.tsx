@@ -49,8 +49,8 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
 
   const css = classnames(
+    globalProps({...rest}),
     className,
-    globalProps({...rest})
   )
   const [open, setOpen] = useState(false)
   const arrowRef = useRef(null)
