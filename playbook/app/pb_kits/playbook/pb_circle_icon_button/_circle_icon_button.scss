@@ -26,7 +26,7 @@ $pb_button_styles: [
 @mixin pb_circle_icon_button_active {
   &:active {
     transition: none;
-    @include pb_button_variant(rgba($primary_action, 0.05), $primary_action);
+    @include pb_button_variant($secondary-action, $primary_action);
   }
 }
 
