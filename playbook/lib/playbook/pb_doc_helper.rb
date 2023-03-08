@@ -45,7 +45,7 @@ module Playbook
 
     # rubocop:disable Naming/AccessorMethodName
     def get_kits
-      menu = YAML.load_file(Rails.root.join("config/menu.yml"))
+      menu = File.expand_path("../../../playbook-website/config/menu.yml", __dir__)
       menu["kits"]
     end
     # rubocop:enable Naming/AccessorMethodName
