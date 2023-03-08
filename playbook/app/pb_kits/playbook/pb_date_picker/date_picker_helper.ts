@@ -112,6 +112,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   flatpickr(`#${pickerId}`, {
+    allowInput,
     closeOnSelect,
     disableMobile: true,
     dateFormat: getDateFormat(),
