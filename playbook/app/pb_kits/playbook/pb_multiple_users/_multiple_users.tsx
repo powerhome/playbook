@@ -64,6 +64,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
             {...avatarData}
             className="pb_multiple_users_item"
             dark={dark}
+            imageAlt={avatarData.name}
             key={index}
             size={size}
         />
