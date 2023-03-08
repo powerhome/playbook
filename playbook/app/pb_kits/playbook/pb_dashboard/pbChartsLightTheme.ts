@@ -5,6 +5,7 @@ import { ThemeProps } from './themeTypes'
 
 import Highcharts from 'highcharts'
 
+const pbButtonHoverColor = '#004ebb'
 const highchartsTheme: ThemeProps = {
   lang: {
     thousandsSep: ',',
@@ -230,18 +231,18 @@ const highchartsTheme: ThemeProps = {
           states: {
             hover: {
               style: {
-                fill: '#004ebb',
+                fill: pbButtonHoverColor,
               },
             },
           },
           style: {
-            fill: '#0056CF',
-            color: '#FFFFFF',
-            fontSize: '14px',
-            fontWeight: '600',
-            fontFamily: '"Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif',
+            fill: colors.royal,
+            color: colors.white,
+            fontSize: `${typography.text_small}`,
+            fontWeight: typography.bold,
+            fontFamily: `${typography.font_family_base}`,
           },
-          stroke: '#0056CF',
+          stroke: colors.royal,
           height: 24,
           width: 90,
         },
