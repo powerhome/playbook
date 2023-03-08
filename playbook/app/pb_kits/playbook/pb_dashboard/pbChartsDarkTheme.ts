@@ -229,6 +229,7 @@ const highchartsDarkTheme: ThemeProps = {
       ],
       traverseUpButton: {
         position: { y: -50 },
+        text: '< Back',
         theme: {
           states: {
             hover: {
