@@ -1,10 +1,12 @@
 @import 'highcharts/css/highcharts.scss';
 
+$back_button_border_radius: 4;
+
 .pb_treemap_chart {
   .highcharts-drillup-button {
     .highcharts-button-box {
-      rx: 4 !important;
-      ry: 4 !important;
+      rx: $back_button_border_radius !important;
+      ry: $back_button_border_radius !important;
     }
 
     text {
