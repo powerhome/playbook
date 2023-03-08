@@ -1,5 +1,6 @@
 examples:
-  
+  rails:
+  - multi_level_select_default: Default
   
   react:
   - multi_level_select_default: Default

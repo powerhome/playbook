@@ -12,11 +12,18 @@ type MultiLevelSelectProps = {
   id?: string;
   treeData?: { [key: string]: string }[];
   onChange?: any;
-  onSelect?: (SelectedNodes: { [key: string]: any }) => void;
+  onSelect?: (prop: { [key: string]: any }) => void;
 };
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
-  const { aria = {}, className, data = {}, id, treeData, onSelect } = props;
+  const {
+    aria = {},
+    className,
+    data = {},
+    id,
+    treeData,
+    onSelect = () => {},
+  } = props;
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -28,6 +35,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   const [formattedData, setFormattedData] = useState(treeData);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [checkedData, setCheckedData] = useState([]);
 
   const onChange = (currentNode: { [key: string]: any }) => {
     const updatedData = formattedData.map((item: any) => {
@@ -62,8 +70,18 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const uniqueSelected = selected.filter(
       (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
     );
-    onSelect(uniqueSelected);
+    setCheckedData(uniqueSelected);
   }, [selectedItems]);
+
+  useEffect(() => {
+    let el = document.getElementById("pb_data_wrapper");
+
+    if (el) {
+      el.setAttribute("data-tree", JSON.stringify(checkedData));
+    }
+
+    onSelect(checkedData);
+  }, [checkedData]);
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
@@ -71,7 +89,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         treeData={formattedData}
         id={id}
         onChange={onChange}
-        onSelect={onSelect}
         {...props}
       />
     </div>

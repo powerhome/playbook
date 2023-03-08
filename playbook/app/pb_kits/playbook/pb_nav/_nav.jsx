@@ -14,6 +14,7 @@ type NavProps = {
   children?: React.Node,
   className?: string | array<string>,
   data?: object,
+  dark?: boolean,
   highlight?: boolean,
   id?: string,
   onClick?: EventHandler,
@@ -29,6 +30,7 @@ const Nav = (props: NavProps) => {
     children,
     className,
     data = {},
+    dark = false,
     highlight = true,
     id,
     link = '#',
@@ -64,6 +66,7 @@ const Nav = (props: NavProps) => {
               onClick={onClick}
           >
             <Caption
+                dark={dark}
                 size="md"
                 text={`${title}`}
             />
