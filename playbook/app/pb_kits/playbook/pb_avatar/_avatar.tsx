@@ -14,8 +14,8 @@ type AvatarProps = {
   dark?: boolean,
   id?: string,
   imageAlt?: string,
-  imageUrl: string,
-  name: string,
+  imageUrl?: string,
+  name?: string,
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
   status?: "away" | "offline" | "online",
 } & GlobalProps
