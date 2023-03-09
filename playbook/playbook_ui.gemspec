@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     "app/pb_kits/playbook/{plugins,tokens,utilities}/**/*",
     "app/pb_kits/playbook/*.{scss,js,rb}",
     "app/assets/images/*",
-    File.expand_path("../playbook-website/config/menu.yml", __dir__),
+    File.expand_path("../../../../../playbook-website/config/menu.yml", __dir__),
     "fonts/**/*",
     "lib/*.rb",
     "lib/playbook/**/*",
