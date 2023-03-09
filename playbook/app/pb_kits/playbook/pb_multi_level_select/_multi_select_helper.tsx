@@ -5,7 +5,7 @@ import "react-dropdown-tree-select/dist/styles.css"
 type HelperProps = {
   id?: string
   treeData?: { [key: string]: string }[]
-  onChange?: () => {}
+  onChange?: (currentNode: { [key: string]: any; }) => void | (()=> {})
 
 }
 

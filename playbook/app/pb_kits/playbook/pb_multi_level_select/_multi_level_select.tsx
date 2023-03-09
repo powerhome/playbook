@@ -10,8 +10,8 @@ type MultiLevelSelectProps = {
   className?: string;
   data?: { [key: string]: string };
   id?: string;
+  parentPersistence?: boolean;
   treeData?: { [key: string]: string }[];
-  onChange?: any;
   onSelect?: (prop: { [key: string]: any }) => void;
 };
 
@@ -21,6 +21,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     className,
     data = {},
     id,
+    parentPersistence = false,
     treeData,
     onSelect = () => {},
   } = props;
