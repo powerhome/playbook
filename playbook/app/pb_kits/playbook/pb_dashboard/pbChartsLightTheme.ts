@@ -229,6 +229,7 @@ const highchartsTheme: ThemeProps = {
         position: { y: -50 },
         text: '< Back',
         theme: {
+          r: 4,
           states: {
             hover: {
               style: {
