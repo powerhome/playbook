@@ -5,12 +5,13 @@ import "react-dropdown-tree-select/dist/styles.css"
 type HelperProps = {
   id?: string
   treeData?: { [key: string]: string }[]
-  onChange?: (currentNode: { [key: string]: any; }) => void | (()=> {})
+  treeMode?: boolean
+  onChange?:  any
 
 }
 
 const MultiSelectHelper = (props: HelperProps) => {
-  const { id, treeData, onChange } = props
+  const { id, treeData, onChange, treeMode } = props
 
 
   return (
@@ -22,7 +23,7 @@ const MultiSelectHelper = (props: HelperProps) => {
         keepChildrenOnSearch
         onChange={onChange}
         texts={{ placeholder: "Select..." }}
-        mode='hierarchical'
+        mode={treeMode ? 'hierarchical' : 'multiSelect'}
       />
   )
 }

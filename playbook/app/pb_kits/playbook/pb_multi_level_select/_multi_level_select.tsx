@@ -38,8 +38,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [checkedData, setCheckedData] = useState([]);
 
-  const onChange = (currentNode: { [key: string]: any }) => {
-    const updatedData = formattedData.map((item: any) => {
+  const onChange = (currentNode: { [key: string]: any }, selectedNodes: { [key: string]: any }[] ) => {
+    if (!parentPersistence) {
+    onSelect(selectedNodes)
+
+    } else {
+      const updatedData = formattedData.map((item: any) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
           checkIt(item, selectedItems, setSelectedItems);
@@ -61,9 +65,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     });
 
     setFormattedData(updatedData);
+  }
+    
   };
 
   useEffect(() => {
+    if(parentPersistence) {
     const selected = selectedItems.filter(
       (item: { [key: string]: any }) => item.checked
     );
@@ -72,22 +79,24 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
     );
     setCheckedData(uniqueSelected);
+    } 
   }, [selectedItems]);
 
   useEffect(() => {
+    if (parentPersistence) {
     let el = document.getElementById("pb_data_wrapper");
-
     if (el) {
       el.setAttribute("data-tree", JSON.stringify(checkedData));
     }
-
     onSelect(checkedData);
+  } 
   }, [checkedData]);
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
       <MultiSelectHelper
         treeData={formattedData}
+        treeMode={parentPersistence}
         id={id}
         onChange={onChange}
         {...props}
