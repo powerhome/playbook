@@ -65,6 +65,4 @@ jobs:
           echo "${the_version}"
           gem build playbook_ui.gemspec
           echo "${{ env.new_ruby_alpha_version }}"
-          gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem
-        env:
-          RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
+          gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{secrets.RUBYGEMS_API_KEY}}
