@@ -61,6 +61,8 @@ jobs:
           yarn version --new-version ${{ env.new_npm_alpha_version }}
           bundle
           yarn release
+          the_version=$(ruby -r ./lib/playbook/version.rb -e "puts Playbook::VERSION")
+          echo "${the_version}"
           gem build playbook_ui.gemspec
           echo "${{ env.new_ruby_alpha_version }}"
           gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem
