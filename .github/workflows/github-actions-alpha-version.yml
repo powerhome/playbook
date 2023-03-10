@@ -3,9 +3,56 @@ run-name: ${{ github.actor }} is creating an Alpha Version 🚀
 on:
   pull_request:
     types: [ labeled ]
+    labels:
+      - alpha
 jobs:
   Creating-Alpha-Version:
-    if: github.event.label.name == 'alpha'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./playbook
+    env:
+      # Set an environment variable for the branch name
+      BRANCH_NAME: ${{ github.head_ref }}
+      FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
     steps:
-      - run: echo "🎉 Hello Alpha"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: Ruby Setup
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Python Setup
+        uses: actions/setup-python@v4 
+        with: 
+          python-version: '2.7'
+      - name: Set Git Config
+        run: |
+          git config --local user.name "${{ github.actor }}"
+          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Grab Current Version
+        run: |
+          playbook_version=$(ruby -r ./lib/playbook/version.rb -e "puts Playbook::VERSION")
+          echo "playbook_version=${playbook_version}" >> $GITHUB_ENV
+
+      - name: Set New Alpha Version
+        id: grab-package-version
+        run: |
+          alpha_version="${{ env.playbook_version }}.pre.alpha.${{ env.BRANCH_NAME }}${{ github.run_number }}"
+          echo "new_alpha_version=${alpha_version}" >> $GITHUB_ENV
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          registry-url: 'https://registry.npmjs.org'
+      # - name: Version Up, Distribute and Publish
+      #   run: |
+      #     yarn install
+      #     yarn version --new-version ${{ env.new_alpha_version }}
+      #     bundle
+      #     yarn release
+      #     npm pack
+      #     npm publish playbook-ui-${{ env.new_alpha_version }}.tgz --tag alpha
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
