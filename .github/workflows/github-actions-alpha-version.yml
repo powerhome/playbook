@@ -41,7 +41,8 @@ jobs:
         id: grab-package-version
         run: |
           npm_alpha_version="${{ env.playbook_version }}-alpha.${{ env.BRANCH_NAME }}${{ github.run_number }}"
-          ruby_alpha_version="${{ env.playbook_version }}.pre.alpha.${{ env.BRANCH_NAME }}${{ github.run_number }}"
+          formatted_branch_gem=$(echo "${{ env.BRANCH_NAME }}" | tr -cd '[:alnum:]')
+          ruby_alpha_version="${{ env.playbook_version }}.pre.alpha.$(formatted_branch_gem)${{ github.run_number }}"
           echo "new_npm_alpha_version=${npm_alpha_version}" >> $GITHUB_ENV
           echo "new_ruby_alpha_version=${ruby_alpha_version}" >> $GITHUB_ENV
       - name: Update Version.rb
