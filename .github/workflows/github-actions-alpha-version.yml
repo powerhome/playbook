@@ -47,6 +47,7 @@ jobs:
       - name: Update Version.rb
         id: update-version-rb
         run: |
+          gem install bundler
           bin/rails pb_release:action new_version=${{env.new_ruby_alpha_version}}
        
       - uses: actions/setup-node@v3
