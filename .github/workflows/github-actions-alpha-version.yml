@@ -67,4 +67,4 @@ jobs:
           echo "${{ env.new_ruby_alpha_version }}"
           gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem
         env:
-          RUBY_AUTH_TOKEN: ${{secrets.RUBYGEMS_API_KEY}}
+          RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
