@@ -55,7 +55,8 @@ jobs:
           bundle
           yarn release
           gem build playbook_ui.gemspec
+          ls -a
           echo "${{ env.new_ruby_alpha_version }}"
-          gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem
+          gem push playbook_ui-12.7.1.pre.alpha.alpha-ruby-release271.gem
         env:
           RUBY_AUTH_TOKEN: ${{secrets.RUBYGEMS_API_KEY}}
