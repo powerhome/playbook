@@ -46,13 +46,13 @@ jobs:
         with:
           node-version: 14
           registry-url: 'https://registry.npmjs.org'
-      # - name: Version Up, Distribute and Publish
-      #   run: |
-      #     yarn install
-      #     yarn version --new-version ${{ env.new_alpha_version }}
-      #     bundle
-      #     yarn release
-      #     npm pack
-      #     npm publish playbook-ui-${{ env.new_alpha_version }}.tgz --tag alpha
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Version Up, Distribute and Publish
+        run: |
+          yarn install
+          yarn version --new-version ${{ env.new_alpha_version }}
+          bundle
+          yarn release
+          gem build playbook_ui.gemspec
+          gem push playbook_ui-${{ env.new_alpha_version }}.gem
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.RUBYGEMS_API_KEY}}
