@@ -41,8 +41,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const onChange = (currentNode: { [key: string]: any }, selectedNodes: { [key: string]: any }[] ) => {
     if (!parentPersistence) {
     onSelect(selectedNodes)
+    console.log("NODES",selectedNodes)
 
-    } else {
+  } else {
       const updatedData = formattedData.map((item: any) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
