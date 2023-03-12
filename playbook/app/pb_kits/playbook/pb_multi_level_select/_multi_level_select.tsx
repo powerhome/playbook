@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -38,13 +38,25 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [checkedData, setCheckedData] = useState([]);
 
-  const onChange = (currentNode: { [key: string]: any }, selectedNodes: { [key: string]: any }[] ) => {
-    if (!parentPersistence) {
-    onSelect(selectedNodes)
-    console.log("NODES",selectedNodes)
+  const onChange = (currentNode: { [key: string]: any }) => {
+    // if (!parentPersistence) {
+    //   const data: { [key: string]: any }[] = []
+    // selectedNodes.map((item:{[key: string]: any})=> {
+    // data.push(item)
+    // })
 
-  } else {
-      const updatedData = formattedData.map((item: any) => {
+    // const selectedChecked = data.filter(
+    //   (item: { [key: string]: any }) => item.checked
+    // );
+    // //filter to remove duplicate items
+    // const uniqueCheckedData = selectedChecked.filter(
+    //   (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
+    // );
+    // onSelect(uniqueCheckedData)
+    // setCheckedData(uniqueCheckedData)
+    // console.log(checkedData)
+
+    const updatedData = formattedData.map((item: any) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
           checkIt(item, selectedItems, setSelectedItems);
@@ -66,42 +78,64 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     });
 
     setFormattedData(updatedData);
-  }
-    
   };
 
   useEffect(() => {
-    if(parentPersistence) {
-    const selected = selectedItems.filter(
-      (item: { [key: string]: any }) => item.checked
-    );
-    //filter to remove duplicate items
-    const uniqueSelected = selected.filter(
-      (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
-    );
-    setCheckedData(uniqueSelected);
-    } 
+    if (parentPersistence) {
+      const selected = selectedItems.filter(
+        (item: { [key: string]: any }) => item.checked
+      );
+      //filter to remove duplicate items
+      const uniqueSelected = selected.filter(
+        (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
+      );
+      setCheckedData(uniqueSelected);
+    }
   }, [selectedItems]);
 
   useEffect(() => {
+    console.log("CHECKED", checkedData);
+
     if (parentPersistence) {
-    let el = document.getElementById("pb_data_wrapper");
-    if (el) {
-      el.setAttribute("data-tree", JSON.stringify(checkedData));
+      let el = document.getElementById("pb_data_wrapper");
+      if (el) {
+        el.setAttribute("data-tree", JSON.stringify(checkedData));
+      }
+      onSelect(checkedData);
     }
-    onSelect(checkedData);
-  } 
   }, [checkedData]);
+
+  const DropDownSelectComponent = useMemo(() => {
+    return (
+      <MultiSelectHelper
+        treeData={formattedData}
+        onChange={(
+          selectedNodes: { [key: string]: any }[],
+          currentNode: any
+        ) => {
+          console.log("CURRENT", currentNode);
+          setCheckedData(currentNode);
+          onSelect(currentNode);
+        }}
+        id={id}
+        {...props}
+      />
+    );
+  }, [formattedData]);
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
-      <MultiSelectHelper
-        treeData={formattedData}
-        treeMode={parentPersistence}
-        id={id}
-        onChange={onChange}
-        {...props}
-      />
+      {parentPersistence ? (
+        <MultiSelectHelper
+          treeData={formattedData}
+          treeMode={parentPersistence}
+          id={id}
+          onChange={onChange}
+          {...props}
+        />
+      ) : (
+        <>{DropDownSelectComponent}</>
+      )}
     </div>
   );
 };
