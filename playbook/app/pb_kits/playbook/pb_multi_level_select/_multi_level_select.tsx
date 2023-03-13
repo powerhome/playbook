@@ -39,22 +39,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [checkedData, setCheckedData] = useState([]);
 
   const onChange = (currentNode: { [key: string]: any }) => {
-    // if (!parentPersistence) {
-    //   const data: { [key: string]: any }[] = []
-    // selectedNodes.map((item:{[key: string]: any})=> {
-    // data.push(item)
-    // })
-
-    // const selectedChecked = data.filter(
-    //   (item: { [key: string]: any }) => item.checked
-    // );
-    // //filter to remove duplicate items
-    // const uniqueCheckedData = selectedChecked.filter(
-    //   (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
-    // );
-    // onSelect(uniqueCheckedData)
-    // setCheckedData(uniqueCheckedData)
-    // console.log(checkedData)
 
     const updatedData = formattedData.map((item: any) => {
       if (item.id === currentNode._id) {
@@ -94,8 +78,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   }, [selectedItems]);
 
   useEffect(() => {
-    console.log("CHECKED", checkedData);
-
     if (parentPersistence) {
       let el = document.getElementById("pb_data_wrapper");
       if (el) {
@@ -111,9 +93,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         treeData={formattedData}
         onChange={(
           selectedNodes: { [key: string]: any }[],
-          currentNode: any
+          currentNode: { [key: string]: any }[]
         ) => {
-          console.log("CURRENT", currentNode);
           setCheckedData(currentNode);
           onSelect(currentNode);
         }}

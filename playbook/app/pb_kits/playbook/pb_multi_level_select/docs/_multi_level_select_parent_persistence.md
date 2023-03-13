@@ -1,0 +1,1 @@
+The `parentPersistence` prop can be used when users want data on all checked nodes from the dropdown, irrespective of whether it is a parent or child node. This variant also does not automatically uncheck child nodes when a parent is unchecked or uncheck the parent when any of the child nodes are unchecked. `parentPersistence` is set to false by default. 
