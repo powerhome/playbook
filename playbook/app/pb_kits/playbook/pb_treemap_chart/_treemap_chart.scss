@@ -1,6 +1,6 @@
-@import 'highcharts/css/highcharts.scss';
-
 .pb_treemap_chart {
+  @import 'highcharts/css/highcharts.scss';
+  
   .highcharts-drillup-button {
     text {
       transform: translateX(25px);
