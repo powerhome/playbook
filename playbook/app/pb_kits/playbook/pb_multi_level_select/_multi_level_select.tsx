@@ -77,7 +77,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   }, [selectedItems]);
 
   useEffect(() => {
-    let el = document.getElementById("pb_data_wrapper");
+    let el = document.getElementById(`pb_data_wrapper_${id}`);
     if (el) {
       el.setAttribute("data-tree", JSON.stringify(checkedData));
     }
