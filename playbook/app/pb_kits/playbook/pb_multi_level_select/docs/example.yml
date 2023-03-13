@@ -1,6 +1,7 @@
 examples:
   rails:
   - multi_level_select_default: Default
+  - multi_level_select_parent_persistence: Parent Persistence
   
   react:
   - multi_level_select_default: Default

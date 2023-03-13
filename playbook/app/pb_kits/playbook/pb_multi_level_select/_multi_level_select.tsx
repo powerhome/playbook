@@ -39,7 +39,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [checkedData, setCheckedData] = useState([]);
 
   const onChange = (currentNode: { [key: string]: any }) => {
-
     const updatedData = formattedData.map((item: any) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
@@ -78,11 +77,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   }, [selectedItems]);
 
   useEffect(() => {
+    let el = document.getElementById("pb_data_wrapper");
+    if (el) {
+      el.setAttribute("data-tree", JSON.stringify(checkedData));
+    }
     if (parentPersistence) {
-      let el = document.getElementById("pb_data_wrapper");
-      if (el) {
-        el.setAttribute("data-tree", JSON.stringify(checkedData));
-      }
       onSelect(checkedData);
     }
   }, [checkedData]);
