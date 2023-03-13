@@ -41,7 +41,6 @@ jobs:
           echo "playbook_npm_version=${playbook_npm_version}" >> $GITHUB_ENV
           playbook_ruby_version=$(ruby -r ./lib/playbook/version.rb -e "puts Playbook::VERSION")
           echo "playbook_ruby_version=${playbook_ruby_version}" >> $GITHUB_ENV
-
       - name: Set New Alpha Version
         id: grab-package-version
         run: |
@@ -67,4 +66,14 @@ jobs:
           gem build playbook_ui.gemspec
           echo "${{ env.new_ruby_alpha_version }}"
           gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
-          
+      - name: Leave PR comment
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUBY_GEM_LINK: https://rubygems.org/gems/your-gem-name/versions/${{env.new_ruby_alpha_version}}.alpha
+          NPM_LINK: https://www.npmjs.com/package/your-npm-package-name/v/${{env.new_npm_alpha_version}}-alpha
+        run: |
+          curl -H "Authorization: token ${GITHUB_TOKEN}" \
+              -X POST \
+              -d '{"body": "🎉 Congratulations! Your Alpha for Ruby Gems is '${RUBY_GEM_LINK}' and your Alpha for NPM is '${NPM_LINK}'. "}' \
+              "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
