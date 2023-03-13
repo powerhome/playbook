@@ -70,8 +70,8 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUBY_GEM_LINK: https://rubygems.org/gems/your-gem-name/versions/${{env.new_ruby_alpha_version}}.alpha
-          NPM_LINK: https://www.npmjs.com/package/your-npm-package-name/v/${{env.new_npm_alpha_version}}-alpha
+          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_alpha_version}}.alpha
+          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_alpha_version}}-alpha
         run: |
           curl -H "Authorization: token ${GITHUB_TOKEN}" \
               -X POST \
