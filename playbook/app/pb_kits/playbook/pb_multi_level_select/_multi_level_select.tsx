@@ -91,7 +91,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       <MultiSelectHelper
         treeData={formattedData}
         onChange={(
-          selectedNodes: { [key: string]: any }[],
+          // @ts-ignore
+          selectedNodes: { [key: string]: any }[], 
           currentNode: { [key: string]: any }[]
         ) => {
           setCheckedData(currentNode);
