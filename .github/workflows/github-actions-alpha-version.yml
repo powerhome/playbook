@@ -22,6 +22,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
+          registry-url: 'https://registry.npmjs.org'
       - name: Ruby Setup
         uses: ruby/setup-ruby@v1
         with:
@@ -55,10 +56,6 @@ jobs:
           gem install bundler
           bundle
           bin/rails pb_release:action[${{env.new_ruby_alpha_version}}]
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 14
-          registry-url: 'https://registry.npmjs.org'
       - name: Version Up, Distribute and Publish
         run: |
           yarn install
