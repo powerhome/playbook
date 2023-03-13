@@ -10,7 +10,7 @@ type MultiLevelSelectProps = {
   className?: string;
   data?: { [key: string]: string };
   id?: string;
-  parentPersistence?: boolean;
+  returnAllSelected?: boolean;
   treeData?: { [key: string]: string }[];
   onSelect?: (prop: { [key: string]: any }) => void;
 };
@@ -21,7 +21,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     className,
     data = {},
     id,
-    parentPersistence = false,
+    returnAllSelected = false,
     treeData,
     onSelect = () => {},
   } = props;
@@ -64,7 +64,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   useEffect(() => {
-    if (parentPersistence) {
+    if (returnAllSelected) {
       const selected = selectedItems.filter(
         (item: { [key: string]: any }) => item.checked
       );
@@ -81,7 +81,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (el) {
       el.setAttribute("data-tree", JSON.stringify(checkedData));
     }
-    if (parentPersistence) {
+    if (returnAllSelected) {
       onSelect(checkedData);
     }
   }, [checkedData]);
@@ -106,10 +106,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
-      {parentPersistence ? (
+      {returnAllSelected ? (
         <MultiSelectHelper
           treeData={formattedData}
-          treeMode={parentPersistence}
+          treeMode={returnAllSelected}
           id={id}
           onChange={onChange}
           {...props}
