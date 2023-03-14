@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -10,8 +10,8 @@ type MultiLevelSelectProps = {
   className?: string;
   data?: { [key: string]: string };
   id?: string;
+  returnAllSelected?: boolean;
   treeData?: { [key: string]: string }[];
-  onChange?: any;
   onSelect?: (prop: { [key: string]: any }) => void;
 };
 
@@ -21,6 +21,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     className,
     data = {},
     id,
+    returnAllSelected = false,
     treeData,
     onSelect = () => {},
   } = props;
@@ -63,34 +64,59 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   useEffect(() => {
-    const selected = selectedItems.filter(
-      (item: { [key: string]: any }) => item.checked
-    );
-    //filter to remove duplicate items
-    const uniqueSelected = selected.filter(
-      (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
-    );
-    setCheckedData(uniqueSelected);
+    if (returnAllSelected) {
+      const selected = selectedItems.filter(
+        (item: { [key: string]: any }) => item.checked
+      );
+      //filter to remove duplicate items
+      const uniqueSelected = selected.filter(
+        (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
+      );
+      setCheckedData(uniqueSelected);
+    }
   }, [selectedItems]);
 
   useEffect(() => {
-    let el = document.getElementById("pb_data_wrapper");
-
+    let el = document.getElementById(`pb_data_wrapper_${id}`);
     if (el) {
       el.setAttribute("data-tree", JSON.stringify(checkedData));
     }
-
-    onSelect(checkedData);
+    if (returnAllSelected) {
+      onSelect(checkedData);
+    }
   }, [checkedData]);
+
+  const DropDownSelectComponent = useMemo(() => {
+    return (
+      <MultiSelectHelper
+        treeData={formattedData}
+        onChange={(
+          // @ts-ignore
+          selectedNodes: { [key: string]: any }[], 
+          currentNode: { [key: string]: any }[]
+        ) => {
+          setCheckedData(currentNode);
+          onSelect(currentNode);
+        }}
+        id={id}
+        {...props}
+      />
+    );
+  }, [formattedData]);
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
-      <MultiSelectHelper
-        treeData={formattedData}
-        id={id}
-        onChange={onChange}
-        {...props}
-      />
+      {returnAllSelected ? (
+        <MultiSelectHelper
+          treeData={formattedData}
+          treeMode={returnAllSelected}
+          id={id}
+          onChange={onChange}
+          {...props}
+        />
+      ) : (
+        <>{DropDownSelectComponent}</>
+      )}
     </div>
   );
 };
