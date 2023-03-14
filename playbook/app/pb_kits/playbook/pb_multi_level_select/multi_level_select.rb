@@ -5,6 +5,8 @@ module Playbook
     class MultiLevelSelect < Playbook::KitBase
       prop :tree_data, type: Playbook::Props::Array,
                        default: []
+      prop :return_all_selected, type: Playbook::Props::Boolean,
+                                 default: false
 
       def classname
         generate_classname("pb_multi_level_select")
@@ -14,6 +16,7 @@ module Playbook
         {
           id: id,
           treeData: tree_data,
+          returnAllSelected: return_all_selected,
         }
       end
     end
