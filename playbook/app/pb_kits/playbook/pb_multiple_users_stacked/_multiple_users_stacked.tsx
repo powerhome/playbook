@@ -1,6 +1,3 @@
-/* @flow */
-/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -11,12 +8,12 @@ import Avatar from '../pb_avatar/_avatar'
 import Badge from '../pb_badge/_badge'
 
 type MultipleUsersStackedProps = {
-  aria?: object,
+  aria?: { [key: string]: string },
   className?: string,
   dark?: boolean,
-  data?: object,
+  data?: { [key: string]: string },
   id?: string,
-  users: array<object>,
+  users: Array<{ [key: string]: string }>,
 }
 
 const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
@@ -44,11 +41,11 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     return users.slice(0, 1).map((userObject, index) => {
       return (
         <Avatar
-            {...userObject}
-            className="pb_multiple_users_stacked_item"
-            dark={dark}
-            key={index}
-            size="xs"
+          {...userObject}
+          className="pb_multiple_users_stacked_item"
+          dark={dark}
+          key={index}
+          size="xs"
         />
       )
     })
@@ -59,11 +56,11 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
       return users.slice(1, 2).map((userObject, index) => {
         return (
           <Avatar
-              {...userObject}
-              className="pb_multiple_users_stacked_item second_item"
-              dark={dark}
-              key={index}
-              size="xs"
+            {...userObject}
+            className="pb_multiple_users_stacked_item second_item"
+            dark={dark}
+            key={index}
+            size="xs"
           />
         )
       })
@@ -74,11 +71,11 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     if (moreThanTwo === true) {
       return (
         <Badge
-            className="pb_multiple_users_stacked_item second_item"
-            dark={dark}
-            rounded
-            text={`+${users.length - displayCount()}`}
-            variant="primary"
+          className="pb_multiple_users_stacked_item second_item"
+          dark={dark}
+          rounded
+          text={`+${users.length - displayCount()}`}
+          variant="primary"
         />
       )
     }
@@ -86,10 +83,10 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
+      id={id}
     >
       {firstUser()}
       {secondUser()}

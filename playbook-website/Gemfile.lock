@@ -1,7 +1,7 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (12.7.1)
+    playbook_ui (12.8.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -153,7 +153,7 @@ GEM
     puma (5.6.4)
       nio4r (~> 2.0)
     racc (1.6.0)
-    rack (2.2.6.2)
+    rack (2.2.6.3)
     rack-proxy (0.7.2)
       rack
     rack-test (1.1.0)

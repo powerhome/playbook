@@ -1,5 +1,30 @@
 
 
+## [12.8.0](https://github.com/powerhome/playbook/tree/12.8.0) (2023-03-14)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.7.1...12.8.0)
+
+**Kit Enhancements:**
+
+- MultiLevelSelect returnAllSelected Prop [\#2365](https://github.com/powerhome/playbook/pull/2365) ([nidaqg](https://github.com/nidaqg))
+- Converting Progress Pills kit to TS [\#2362](https://github.com/powerhome/playbook/pull/2362) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Multiple Users Stacked Kit to TS [\#2360](https://github.com/powerhome/playbook/pull/2360) ([carloslimasd](https://github.com/carloslimasd))
+- Typescript Conversion: Multiple Users Kit [\#2348](https://github.com/powerhome/playbook/pull/2348) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Improvements:**
+
+- Fixing Fontawesome Imports [\#2361](https://github.com/powerhome/playbook/pull/2361) ([carloslimasd](https://github.com/carloslimasd))
+
+**Merged pull requests:**
+
+- Bump rack from 2.2.6.2 to 2.2.6.3 in /playbook-website [\#2359](https://github.com/powerhome/playbook/pull/2359) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.2 to 2.2.6.3 in /examples/rails-react-example [\#2358](https://github.com/powerhome/playbook/pull/2358) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.2 to 2.2.6.3 in /examples/playbook-rails-webpack [\#2357](https://github.com/powerhome/playbook/pull/2357) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.2 to 2.2.6.3 in /examples/playbook-rails [\#2356](https://github.com/powerhome/playbook/pull/2356) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.2 to 2.2.6.3 in /playbook [\#2355](https://github.com/powerhome/playbook/pull/2355) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
 ## [12.7.1](https://github.com/powerhome/playbook/tree/12.7.1) (2023-03-08)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.7.0...12.7.1)
