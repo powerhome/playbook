@@ -1,5 +1,15 @@
 
 
+## [12.7.1](https://github.com/powerhome/playbook/tree/12.7.1) (2023-03-08)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.7.0...12.7.1)
+
+**Fixed Bugs:**
+
+- Fixed className Order in Tooltip [\#2354](https://github.com/powerhome/playbook/pull/2354) ([nidaqg](https://github.com/nidaqg))
+
+
+
 ## [12.7.0](https://github.com/powerhome/playbook/tree/12.7.0) (2023-03-08)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.6.0...12.7.0)
