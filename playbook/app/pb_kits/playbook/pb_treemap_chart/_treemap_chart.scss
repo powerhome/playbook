@@ -1,14 +1,10 @@
 .pb_treemap_chart {
-  @import 'highcharts/css/highcharts.scss';
-  
   .highcharts-drillup-button {
+    @import 'highcharts/css/highcharts.scss';
+
     text {
       transform: translateX(25px);
       fill: $white;
     }
-  }
-
-  .highcharts-tooltip-box {
-    fill: $black;
   }
 }
