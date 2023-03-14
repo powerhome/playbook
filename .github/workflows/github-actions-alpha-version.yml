@@ -77,5 +77,5 @@ jobs:
         run: |
           curl -H "Authorization: token ${GITHUB_TOKEN}" \
               -X POST \
-              -d '{"body": "🎉 Congratulations on creating an Alpha Version! \n\n Your Alpha for Ruby Gems is [${RUBY_GEM_VERSION}](${RUBY_GEM_LINK}) \n\n Your Alpha for NPM is [${NPM_VERSION}](${NPM_LINK}). "}' \
+              -d '{"body": "🎉 Congratulations on creating an Alpha Version! \n\n Your Alpha for Ruby Gems is [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}}) \n\n Your Alpha for NPM is [${{env.NPM_VERSION}}](${{env.NPM_LINK}}). "}' \
                 "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
