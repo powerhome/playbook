@@ -3,10 +3,9 @@ run-name: ${{ github.actor }} is creating an Alpha Version 🚀
 on:
   pull_request:
     types: [ labeled ]
-    labels:
-      - alpha
 jobs:
   Creating-Alpha-Version:
+    if: github.event.label.name == 'alpha'
     runs-on: ubuntu-latest
     defaults:
       run:
