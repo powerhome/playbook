@@ -18,15 +18,45 @@
     }
   }
 
-  .mapboxgl-ctrl-attrib.mapboxgl-compact, .maplibregl-ctrl-attrib.maplibregl-compact {
+  .mapboxgl-ctrl-attrib.mapboxgl-compact,
+  .maplibregl-ctrl-attrib.maplibregl-compact {
     background-color: unset;
   }
-  .mapboxgl-ctrl-attrib.mapboxgl-compact-show, .maplibregl-ctrl-attrib.maplibregl-compact-show {
+  .mapboxgl-ctrl-attrib.mapboxgl-compact-show,
+  .maplibregl-ctrl-attrib.maplibregl-compact-show {
     background-color: $card_light;
     box-shadow: $shadow_deep;
     color: $text_lt_default;
   }
-  
+
+  .mapboxgl-ctrl-group:not(:empty),
+  .maplibregl-ctrl-group:not(:empty) {
+    position: absolute;
+    top: 150px;
+    right: $space_xs + 2;
+    margin: unset;
+    box-shadow: unset;
+    border-radius: $border_radius_md;
+
+    .mapbox-gl-draw_ctrl-draw-btn {
+      width: 36px;
+      height: 40px;
+      box-shadow: $shadow_deep;
+      background: $card_light;
+      border: solid 1px $border_light;
+    }
+
+    .mapbox-gl-draw_polygon {
+      border-top-left-radius: $border_radius_md;
+      border-top-right-radius: $border_radius_md;
+    }
+
+    .mapbox-gl-draw_trash {
+      border-bottom-left-radius: $border_radius_md;
+      border-bottom-right-radius: $border_radius_md;
+    }
+  }
+
   .custom-nav-control {
     position: absolute;
     right: $space_xs + 2;
@@ -130,14 +160,14 @@
     .maplibregl-ctrl-attrib-button {
       background-color: $text_dk_light;
     }
-  .mapboxgl-ctrl-attrib.mapboxgl-compact-show, .maplibregl-ctrl-attrib.maplibregl-compact-show {
-    background-color: $bg_dark;
-    box-shadow: $shadow_deep;
-    color: $text_dk_default;
-    a {
+    .mapboxgl-ctrl-attrib.mapboxgl-compact-show,
+    .maplibregl-ctrl-attrib.maplibregl-compact-show {
+      background-color: $bg_dark;
+      box-shadow: $shadow_deep;
       color: $text_dk_default;
+      a {
+        color: $text_dk_default;
+      }
     }
-  }
-
   }
 }
