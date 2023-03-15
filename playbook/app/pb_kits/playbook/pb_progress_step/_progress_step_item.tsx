@@ -1,29 +1,35 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildCss } from '../utilities/props'
+import { buildCss, buildDataProps } from '../utilities/props'
 
 import Icon from '../pb_icon/_icon'
 
 type ProgressStepItemProps = {
   className?: string,
+  data?: { [key: string]: string },
   status?: "complete" | "active" | "inactive" | "hidden",
-  children?: React.Node,
+  children?: React.ReactChild[] | React.ReactChild,
   icon?: string,
 }
 
-const ProgressStepItem = ({
-  className,
-  status = 'inactive',
-  children,
-  icon = 'check',
-}: ProgressStepItemProps) => {
+const ProgressStepItem = (props: ProgressStepItemProps): React.ReactElement => {
+  const {
+    className,
+    data = {},
+    status = 'inactive',
+    children,
+    icon = 'check',
+  } = props
+
   const progressStepItem = buildCss('pb_progress_step_item', status)
+  const dataProps = buildDataProps(data)
 
   return (
-    <li className={classnames(progressStepItem, className)}>
+    <li 
+        {...dataProps}
+        className={classnames(progressStepItem, className)}
+    >
       <div className="box">
         <div className="circle">
           <Icon icon={icon} />
@@ -33,4 +39,5 @@ const ProgressStepItem = ({
     </li>
   )
 }
+
 export default ProgressStepItem
