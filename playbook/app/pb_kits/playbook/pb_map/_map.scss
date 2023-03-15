@@ -17,6 +17,16 @@
       box-shadow: $shadow_deep;
     }
   }
+
+  .mapboxgl-ctrl-attrib.mapboxgl-compact, .maplibregl-ctrl-attrib.maplibregl-compact {
+    background-color: unset;
+  }
+  .mapboxgl-ctrl-attrib.mapboxgl-compact-show, .maplibregl-ctrl-attrib.maplibregl-compact-show {
+    background-color: $card_light;
+    box-shadow: $shadow_deep;
+    color: $text_lt_default;
+  }
+  
   .custom-nav-control {
     position: absolute;
     right: $space_xs + 2;
@@ -53,7 +63,7 @@
       align-items: center;
 
       svg {
-        width: $space_xs + 4;
+        width: $space_xs + 6;
         height: $space_sm;
         display: flex;
       }
@@ -116,5 +126,18 @@
         background-color: #221e3d;
       }
     }
+
+    .maplibregl-ctrl-attrib-button {
+      background-color: $text_dk_light;
+    }
+  .mapboxgl-ctrl-attrib.mapboxgl-compact-show, .maplibregl-ctrl-attrib.maplibregl-compact-show {
+    background-color: $bg_dark;
+    box-shadow: $shadow_deep;
+    color: $text_dk_default;
+    a {
+      color: $text_dk_default;
+    }
+  }
+
   }
 }
