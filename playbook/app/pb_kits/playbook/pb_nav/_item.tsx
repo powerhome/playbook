@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -11,16 +9,16 @@ import Image from '../pb_image/_image'
 
 type NavItemProps = {
   active?: boolean,
-  aria?: object,
-  children: React.Node,
+  aria?: { [key: string]: string },
+  children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   data?: object,
   iconLeft: string,
   iconRight: string,
   id?: string,
-  imageUrl: String,
+  imageUrl: string,
   link: string,
-  onClick?: EventHandler,
+  onClick?: React.MouseEventHandler<HTMLElement>,
   target?: '_blank' | '_self' | '_parent' | '_top',
   text: string,
 }
@@ -37,12 +35,12 @@ const NavItem = (props: NavItemProps) => {
     id,
     imageUrl,
     link,
-    onClick = () => {},
+    onClick = () => { },
     target = '_self',
     text = '',
   } = props
-  const Tag = link ? 'a' : 'div'
 
+  const Tag = link ? 'a' : 'div'
   const activeClass = active === true ? 'active' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -50,57 +48,61 @@ const NavItem = (props: NavItemProps) => {
 
   return (
     <li
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
+      id={id}
     >
       <Tag
-          className="pb_nav_list_item_link"
-          href={link}
-          onClick={onClick}
-          target={target}
+        className="pb_nav_list_item_link"
+        href={link}
+        onClick={onClick}
+        target={target}
       >
-        <If condition={imageUrl}>
+        {imageUrl &&
           <div
-              className="pb_nav_list_item_icon_section"
-              key={imageUrl}
+            className="pb_nav_list_item_icon_section"
+            key={imageUrl}
           >
             <Image
-                className="pb_nav_img_wrapper"
-                url={imageUrl}
+              className="pb_nav_img_wrapper"
+              url={imageUrl}
             />
           </div>
-        </If>
-        <If condition={iconLeft}>
+        }
+
+        {iconLeft &&
           <div
-              className="pb_nav_list_item_icon_section"
-              key={iconLeft}
+            className="pb_nav_list_item_icon_section"
+            key={iconLeft}
           >
             <Icon
-                className="pb_nav_list_item_icon_left"
-                fixedWidth
-                icon={iconLeft}
+              className="pb_nav_list_item_icon_left"
+              fixedWidth
+              icon={iconLeft}
             />
           </div>
-        </If>
+        }
+
         <span className="pb_nav_list_item_text">
           {text || children}
         </span>
-        <If condition={iconRight}>
+        
+        {iconRight &&
           <div
-              className="pb_nav_list_item_icon_section"
-              key={iconRight}
+            className="pb_nav_list_item_icon_section"
+            key={iconRight}
           >
             <Icon
-                className="pb_nav_list_item_icon_right"
-                fixedWidth
-                icon={iconRight}
+              className="pb_nav_list_item_icon_right"
+              fixedWidth
+              icon={iconRight}
             />
           </div>
-        </If>
+        }
       </Tag>
     </li>
   )
 }
+
 export default NavItem
