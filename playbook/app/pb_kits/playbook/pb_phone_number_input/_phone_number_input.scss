@@ -4,6 +4,7 @@ $transform-rotate-deg: 135deg;
 $input-max-width: 284px;
 $dropdown-min-width: 340px;
 $flag-min-resolution: 192dpi;
+$bg-dark-country-item: #e2eaf4;
 
 .pb_phone_number_input {
   input::placeholder {
@@ -47,7 +48,7 @@ $flag-min-resolution: 192dpi;
     background-color: $hover_light;
 
     .iti__country-name, .iti__dial-code {
-      color: $primary
+      color: $primary;
     }
   }
 
@@ -128,6 +129,66 @@ $flag-min-resolution: 192dpi;
 
   .iti__divider {
     border-bottom: 1px solid $border_light;
+  }
+
+  &.dark {
+    .iti--allow-dropdown .iti__flag-container {
+      background-color: rgba($white, 0);
+
+      &:hover {
+        background-color: rgba($white, 0);
+
+        &+ .text_input {
+          background-color: rgba($white, 0.15);
+        }
+
+        .iti__selected-flag {
+          background-color: rgba($white, 0);
+        }
+      }
+    }
+
+    .iti__selected-flag {
+      background-color: rgba($white, 0);
+      color: $white;
+    }
+
+    .iti__country-list {
+      background-color: $bg_dark; //$card_dark
+      border: 1px solid $border_dark;
+
+      .iti__highlight {
+        background-color: $bg-dark-country-item;
+      }
+    }
+
+    .iti__divider {
+      border-bottom: 1px solid $border_dark;
+    }
+
+    .iti__arrow.iti__arrow--up::before {
+      color: $slate;
+    }
+
+    .iti__country.iti__highlight {  
+      .iti__country-name {
+        color: $text_lt_default;
+      }
+
+      .iti__dial-code {
+        color: $text_lt_light;
+      }
+
+      &.iti__active::after {
+        color: $text_lt_default;
+      }
+    }
+
+    .dropdown_open {
+      .text_input {
+        background-color: rgba($white, 0.025) !important;
+      }
+    }
   }
   
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: $flag-min-resolution) {
