@@ -4,7 +4,6 @@ $transform-rotate-deg: 135deg;
 $input-max-width: 284px;
 $dropdown-min-width: 340px;
 $flag-min-resolution: 192dpi;
-$bg-dark-country-item: #e2eaf4;
 
 .pb_phone_number_input {
   input::placeholder {
@@ -154,11 +153,19 @@ $bg-dark-country-item: #e2eaf4;
     }
 
     .iti__country-list {
-      background-color: $bg_dark; //$card_dark
+      background-color: $bg_dark;
       border: 1px solid $border_dark;
 
       .iti__highlight {
-        background-color: $bg-dark-country-item;
+        background-color: $hover_dark;
+
+        .iti__country-name {
+          color: $text_dk_default;
+        }
+  
+        .iti__dial-code {
+          color: $text_lt_lighter;
+        }
       }
     }
 
@@ -168,20 +175,6 @@ $bg-dark-country-item: #e2eaf4;
 
     .iti__arrow.iti__arrow--up::before {
       color: $slate;
-    }
-
-    .iti__country.iti__highlight {  
-      .iti__country-name {
-        color: $text_lt_default;
-      }
-
-      .iti__dial-code {
-        color: $text_lt_light;
-      }
-
-      &.iti__active::after {
-        color: $text_lt_default;
-      }
     }
 
     .dropdown_open {
