@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Map, mapTheme } from '../../'
+import { Map, mapTheme, Title, IconCircle, Flex } from '../../'
 import maplibregl from 'maplibre-gl'
+import ReactDOM from 'react-dom'
 
 const MapDefault = (props) => {
 
@@ -10,6 +11,24 @@ const MapDefault = (props) => {
 
   //Set default position
   const defaultPosition = [-75.379143, 39.831200]
+
+  const mapPopup = document.createElement("div");
+  ReactDOM.render( 
+    <Flex align="center" 
+        orientation="column"
+    >
+    <Title marginBottom='xs'
+        size={4}
+        text="Hello World!"
+    /> 
+      <IconCircle
+          icon="rocket"
+          size="sm"
+          variant="orange"
+      />
+    </Flex>,
+    mapPopup
+  );
 
   // linking Maplibre methods to PB custom zoom in, zoom out, and fly to buttons
   const handleZoomIn = (map) => {map.zoomIn({...mapTheme.zoomConfig})}
@@ -25,7 +44,7 @@ const MapDefault = (props) => {
         new maplibregl.Marker({
           color: mapTheme.marker,
         }).setLngLat(defaultPosition)
-        .setPopup(new maplibregl.Popup({closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
+        .setPopup(new maplibregl.Popup({closeButton: false}).setDOMContent(mapPopup)) // add popup
         .addTo(map);
 
         // disable map zoom when using scroll

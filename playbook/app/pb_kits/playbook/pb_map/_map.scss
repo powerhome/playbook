@@ -4,9 +4,17 @@
 @import "../tokens/border_radius";
 
 [class*="pb_map"] {
-  font-family: $font_family_base !important;
+  .mapboxgl-map,
+  .maplibregl-map {
+    font-family: $font_family_base !important;
+  }
 
   .maplibregl-ctrl-attrib-button {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='15' height='15' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M8 0C3.5625 0 0 3.59375 0 8C0 12.4375 3.5625 16 8 16C12.4062 16 16 12.4375 16 8C16 3.59375 12.4062 0 8 0ZM8 14.5C4.40625 14.5 1.5 11.5938 1.5 8C1.5 4.4375 4.40625 1.5 8 1.5C11.5625 1.5 14.5 4.4375 14.5 8C14.5 11.5938 11.5625 14.5 8 14.5ZM9.25 10.5H8.75V7.75C8.75 7.34375 8.40625 7 8 7H7C6.5625 7 6.25 7.34375 6.25 7.75C6.25 8.1875 6.5625 8.5 7 8.5H7.25V10.5H6.75C6.3125 10.5 6 10.8438 6 11.25C6 11.6875 6.3125 12 6.75 12H9.25C9.65625 12 10 11.6875 10 11.25C10 10.8438 9.65625 10.5 9.25 10.5ZM8 6C8.53125 6 9 5.5625 9 5C9 4.46875 8.53125 4 8 4C7.4375 4 7 4.46875 7 5C7 5.5625 7.4375 6 8 6Z' fill='black'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: unset !important;
+
     &:focus {
       box-shadow: unset;
     }
@@ -83,10 +91,11 @@
     .map-flyto-button {
       border: solid 1px $border_light;
       cursor: pointer;
-      padding: $space_xs + 2;
+      padding: $space_xs + 1;
       text-align: center;
       color: $text_lt_light;
       background-color: $card_light;
+      min-height: 0;
 
       display: flex;
       justify-content: center;
