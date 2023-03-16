@@ -1,15 +1,14 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type ProgressStepProps = {
+  aria?: { [key: string]: string },
   className?: string,
-  data?: string,
+  data?: { [key: string]: string },
   id?: string,
-  children?: array<React.ReactChild>,
+  children?: React.ReactChild[] | React.ReactChild,
   orientation?: "horizontal" | "vertical",
   icon?: boolean,
   showIcon?: boolean,
@@ -17,16 +16,21 @@ type ProgressStepProps = {
   color?: string,
 }
 
-const ProgressStep = (props: ProgressStepProps) => {
+const ProgressStep = (props: ProgressStepProps): React.ReactElement => {
   const {
+    aria = {},
     className,
     children,
     color,
+    data = {},
     orientation = 'horizontal',
     icon = false,
     showIcon = false,
     variant,
   } = props
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const iconStyle = icon === true || showIcon === true ? 'icon' : ''
   const progressStepCss = buildCss(
     'pb_progress_step_kit',
@@ -37,7 +41,11 @@ const ProgressStep = (props: ProgressStepProps) => {
   )
 
   return (
-    <ul className={classnames(progressStepCss, globalProps(props), className)}>
+    <ul
+        {...ariaProps}
+        {...dataProps}
+        className={classnames(progressStepCss, globalProps(props), className)}
+    >
       {children}
     </ul>
   )
