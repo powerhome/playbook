@@ -1,4 +1,3 @@
-/* @flow */
 import React, { useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -15,19 +14,20 @@ declare global {
 }
 
 type PhoneNumberInputProps = {
-  aria?: { [key: string]: string }
-  className?: string
-  data?: { [key: string]: string }
-  disabled?: boolean
-  id?: string
-  initialCountry?: string
-  isValid?: (valid: boolean) => void
-  label?: string
-  name?: string
-  onChange?: (e: React.FormEvent<HTMLInputElement>) => void
-  onlyCountries: string[]
-  preferredCountries?: string[]
-  value?: string
+  aria?: { [key: string]: string },
+  className?: string,
+  dark?: boolean,
+  data?: { [key: string]: string },
+  disabled?: boolean,
+  id?: string,
+  initialCountry?: string,
+  isValid?: (valid: boolean) => void,
+  label?: string,
+  name?: string,
+  onChange?: (e: React.FormEvent<HTMLInputElement>) => void,
+  onlyCountries: string[],
+  preferredCountries?: string[],
+  value?: string,
 }
 
 enum ValidationError {
@@ -58,6 +58,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const {
     aria = {},
     className,
+    dark = false,
     data = {},
     disabled = false,
     id = "",
@@ -154,6 +155,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     <div {...ariaProps} {...dataProps} className={classes}>
       <TextInput
         className={dropDownIsOpen ? 'dropdown_open' : ''}
+        dark={dark}
         disabled={disabled}
         error={error}
         id={id}
