@@ -1,0 +1,31 @@
+@import "../tokens/typography";
+@import "../tokens/colors";
+@import "../tokens/shadows";
+@import "../tokens/border_radius";
+
+@mixin pb_map_button_states {
+    &:hover {
+        background-color: darken($bg_light, 2%);
+      }
+
+      &:focus-visible {
+        border: solid 1px $primary_action;
+        box-shadow: unset;
+      }
+}
+
+@mixin pb_map_button_mixin {
+
+    @include pb_map_button_states;
+    border: solid 1px $border_light;
+    cursor: pointer;
+    padding: $space_xs + 1;
+    text-align: center;
+    color: $text_lt_light;
+    background-color: $card_light;
+    min-height: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
