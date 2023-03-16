@@ -1,5 +1,35 @@
 
 
+## [12.9.0](https://github.com/powerhome/playbook/tree/12.9.0) (2023-03-16)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.8.0...12.9.0)
+
+**Kit Enhancements:**
+
+- Implementing Phone Number Input Kit Dark Mode [\#2371](https://github.com/powerhome/playbook/pull/2371) ([carloslimasd](https://github.com/carloslimasd))
+- Typescript Conversion: Progress Step Kit [\#2367](https://github.com/powerhome/playbook/pull/2367) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Fixed Bugs:**
+
+- Adding Classname Prop to Typeahead Kit [\#2373](https://github.com/powerhome/playbook/pull/2373) ([carloslimasd](https://github.com/carloslimasd))
+- Styling Treemap Kit Back Button [\#2353](https://github.com/powerhome/playbook/pull/2353) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Bump rack from 2.2.6.3 to 2.2.6.4 in /playbook [\#2387](https://github.com/powerhome/playbook/pull/2387) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.3 to 2.2.6.4 in /playbook-website [\#2386](https://github.com/powerhome/playbook/pull/2386) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.3 to 2.2.6.4 in /examples/rails-react-example [\#2385](https://github.com/powerhome/playbook/pull/2385) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.3 to 2.2.6.4 in /examples/playbook-rails [\#2384](https://github.com/powerhome/playbook/pull/2384) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.3 to 2.2.6.4 in /examples/playbook-rails-webpack [\#2383](https://github.com/powerhome/playbook/pull/2383) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependency spring to v4.1.1 [\#2379](https://github.com/powerhome/playbook/pull/2379) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency puma to v5.6.5 [\#2378](https://github.com/powerhome/playbook/pull/2378) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency psych to v3.3.4 [\#2377](https://github.com/powerhome/playbook/pull/2377) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency faker to v3.1.1 [\#2370](https://github.com/powerhome/playbook/pull/2370) ([renovate[bot]](https://github.com/apps/renovate))
+- NPM + Ruby Gem Alpha Release Github Action [\#2366](https://github.com/powerhome/playbook/pull/2366) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+
+
 ## [12.8.0](https://github.com/powerhome/playbook/tree/12.8.0) (2023-03-14)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.7.1...12.8.0)
