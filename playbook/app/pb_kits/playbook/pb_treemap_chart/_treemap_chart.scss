@@ -1,0 +1,10 @@
+.pb_treemap_chart {
+  .highcharts-drillup-button {
+    @import 'highcharts/css/highcharts.scss';
+
+    text {
+      transform: translateX(25px);
+      fill: $white;
+    }
+  }
+}
