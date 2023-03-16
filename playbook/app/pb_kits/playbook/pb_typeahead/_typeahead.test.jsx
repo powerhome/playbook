@@ -93,3 +93,18 @@ test('typeahead multi select with badges and small pills', () => {
   expect(badge).toBeInTheDocument()
 })
 
+test('should pass className prop', () => {
+  const className = 'custom-class-name'
+  render(
+    <Typeahead
+        className={className}
+        data={{ testid: 'typeahead-test' }}
+        defaultValue={[options[0]]}
+        label="Colors"
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('typeahead-test')
+  expect(kit).toHaveClass(className)
+})

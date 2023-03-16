@@ -29,6 +29,7 @@ import { noop, buildDataProps } from '../utilities/props'
 
 type TypeaheadProps = {
   async?: boolean,
+  className?: string,
   components?: object,
   createable?: boolean,
   dark?: boolean,
@@ -49,6 +50,7 @@ type TypeaheadProps = {
 
 const Typeahead = ({
   async,
+  className,
   components = {},
   createable,
   error = "",
@@ -111,8 +113,12 @@ const Typeahead = ({
   }
 
   const dataProps = buildDataProps(data)
+  const classes = classnames(
+    'pb_typeahead_kit react-select',
+    globalProps(props),
+    className
+  )
 
-  const classes = `pb_typeahead_kit react-select ${globalProps(props)}`
   const inlineClass = selectProps.inline ? 'inline' : null
 
   return (
