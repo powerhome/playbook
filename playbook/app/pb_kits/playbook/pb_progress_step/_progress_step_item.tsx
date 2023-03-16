@@ -9,7 +9,7 @@ type ProgressStepItemProps = {
   className?: string,
   data?: { [key: string]: string },
   status?: "complete" | "active" | "inactive" | "hidden",
-  children?: React.ReactChild[] | React.ReactChild,
+  children?: React.ReactNode | React.ReactNode[],
   icon?: string,
 }
 
