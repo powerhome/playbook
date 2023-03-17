@@ -19,6 +19,7 @@ module Playbook
       prop :vertical, type: Playbook::Props::Enum,
                       values: [nil, "top", "bottom"],
                       default: nil
+      prop :auto_close, type: Playbook::Props::Number
 
       def show_text?
         text.present?
@@ -26,6 +27,10 @@ module Playbook
 
       def close_class
         closeable.present? ? " remove_toast" : ""
+      end
+
+      def auto_close_class
+        auto_close.present? ? " auto_close_#{auto_close}" : ""
       end
 
       def position_class
@@ -50,7 +55,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class
+        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + auto_close_class
       end
     end
   end

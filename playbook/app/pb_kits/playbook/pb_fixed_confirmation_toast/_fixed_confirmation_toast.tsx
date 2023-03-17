@@ -14,6 +14,7 @@ const iconMap = {
 };
 
 type FixedConfirmationToastProps = {
+  autoClose?: number;
   className?: string;
   closeable?: boolean;
   data?: string;
@@ -30,11 +31,12 @@ type FixedConfirmationToastProps = {
 const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const [showToast, toggleToast] = useState(true);
   const {
+    autoClose = 0,
     className,
     closeable = false,
     horizontal,
     multiLine = false,
-    onClose = () => {},
+    onClose = () => { },
     open = true,
     status = "neutral",
     text,
@@ -49,8 +51,18 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   );
   const icon = iconMap[status];
 
+  const autoCloseToast = () => {
+    if (autoClose) {
+      setTimeout(() => {
+        toggleToast(false);
+        onClose();
+      }, autoClose);
+    }
+  }
+
   useEffect(() => {
     toggleToast(open);
+    autoCloseToast();
   }, [open]);
 
   const handleClick = () => {
