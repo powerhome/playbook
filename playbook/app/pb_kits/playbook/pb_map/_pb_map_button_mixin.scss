@@ -14,12 +14,14 @@
   }
   &:active {
     color: $text_lt_default;
+    background-color: $card_light;
   }
 }
 
 @mixin pb_map_button_mixin {
   @include pb_map_button_states;
   border: solid 1px $border_light;
+  border-radius: $border_radius_md;
   cursor: pointer;
   padding: $space_xs + 1;
   text-align: center;
@@ -41,5 +43,6 @@
   }
   &:active {
     color: $text_dk_default;
+    background-color: $bg_dark;
   }
 }

@@ -2,7 +2,7 @@
 @import "../tokens/colors";
 @import "../tokens/shadows";
 @import "../tokens/border_radius";
-@import "./pb_map_button_mixin.scss";
+@import "./_pb_map_button_mixin.scss";
 
 [class*="pb_map"] {
   .mapboxgl-map,
@@ -114,7 +114,6 @@
     }
 
     .map-flyto-button {
-      border-radius: $border_radius_md;
       margin-top: $space_xs;
       box-shadow: $shadow_deep;
     }
