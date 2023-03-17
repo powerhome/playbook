@@ -1,5 +1,15 @@
 
 
+## [12.9.1](https://github.com/powerhome/playbook/tree/12.9.1) (2023-03-17)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.9.0...12.9.1)
+
+**Fixed Bugs:**
+
+- Fix For TreeMap Chart SCSS [\#2394](https://github.com/powerhome/playbook/pull/2394) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+
 ## [12.9.0](https://github.com/powerhome/playbook/tree/12.9.0) (2023-03-16)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.8.0...12.9.0)
