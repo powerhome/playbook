@@ -7,10 +7,12 @@ import intlTelInput from 'intl-tel-input'
 import 'intl-tel-input/build/css/intlTelInput.css'
 import TextInput from '../pb_text_input/_text_input'
 import 'intl-tel-input/build/js/utils.js'
+import { slice } from 'lodash'
 
 declare global {
   interface Window {
     intlTelInputGlobals: any
+    intlTelInputUtils: any
   }
 }
 
@@ -115,7 +117,70 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     }
   }
 
+  const formatTelNum = () => {
+
+    //-------OPTION USING CUSTOM METHOD #2--------//
+
+    const countryData = itiInit.getSelectedCountryData();
+    const countryCode = countryData.iso2
+    const exampleNumber = window.intlTelInputUtils.getExampleNumber(countryCode, true, 0).split("");
+    const nonNumArr: any = []
+    let phoneNum = inputValue
+    
+    exampleNumber.forEach((el: any, i: any) => {
+      if(isNaN(el) || el === " ") {
+        nonNumArr.push([el, i])
+      }
+    })
+
+    for(let i = 0; i < inputValue.length; i++) {
+      nonNumArr.forEach((el: any) => {
+        if(el[1] === i){
+          phoneNum = phoneNum.slice(0,i) + el[0] + phoneNum.slice(i)
+          setInputValue(phoneNum)
+        }
+      })
+    }
+
+    //-------OPTION USING CUSTOM METHOD #2--------//
+
+    //-------OPTION USING CUSTOM METHOD #1--------//
+
+    // const countryData = itiInit.getSelectedCountryData();
+    // const countryCode = countryData.iso2
+    // let phoneNum = inputValue
+    // phoneNum = phoneNum.replace(/\D/g,'').substring(0,11);
+    // const size = phoneNum.length;
+    // if (countryCode === 'br') {
+      //-----------THIS IS FOR BRAZIL PHONE NUMBER----------//
+      // if (size>0) {phoneNum}
+      // if (size>3) {phoneNum=phoneNum.slice(0,2)+" "+phoneNum.slice(2,11)}
+      // if (size>6) {phoneNum=phoneNum.slice(0,8)+"-" +phoneNum.slice(8)}
+      //-----------THIS IS FOR BRAZIL PHONE NUMBER----------//
+    // } else {
+      //-----------THIS IS FOR USA PHONE NUMBER----------//
+      // if (size>0) {phoneNum="("+phoneNum}
+      // if (size>3) {phoneNum=phoneNum.slice(0,4)+") "+phoneNum.slice(4,11)}
+      // if (size>6) {phoneNum=phoneNum.slice(0,9)+"-" +phoneNum.slice(9)}
+      //-----------THIS IS FOR USA PHONE NUMBER----------//
+    // }
+    // setInputValue(phoneNum)
+
+    //-------OPTION USING CUSTOM METHOD #1--------//
+
+    //-------OPTION USING FORMATNUMBER METHOD FROM INTL-TEL-INPUT--------//
+
+    // console.log(phoneNumLength)
+    // const countryData = itiInit.getSelectedCountryData();
+    // const countryCode = countryData.iso2
+    // const formattedNumber = window.intlTelInputUtils.formatNumber(inputValue, countryCode, 1);
+    // setInputValue(formattedNumber)
+
+     //-------OPTION USING FORMATNUMBER METHOD FROM INTL-TEL-INPUT--------//
+  }
+  
   const validateErrors = () => {
+    formatTelNum()
     validateTooShortNumber()
     validateOnlyNumbers()
   }
@@ -153,16 +218,16 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   return (
     <div {...ariaProps} {...dataProps} className={classes}>
       <TextInput
-        className={dropDownIsOpen ? 'dropdown_open' : ''}
-        disabled={disabled}
-        error={error}
-        id={id}
-        label={label}
-        name={name}
-        onBlur={() => validateErrors()}
-        onChange={handleOnChange}
-        ref={inputRef}
-        value={inputValue}
+          className={dropDownIsOpen ? 'dropdown_open' : ''}
+          disabled={disabled}
+          error={error}
+          id={id}
+          label={label}
+          name={name}
+          onBlur={() => validateErrors()}
+          onChange={handleOnChange}
+          ref={inputRef}
+          value={inputValue}
       />
     </div>
   )
