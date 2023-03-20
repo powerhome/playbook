@@ -7,7 +7,6 @@
   &:hover {
     background-color: darken($bg_light, 2%);
   }
-
   &:focus-visible {
     border: solid 1px $primary_action;
     box-shadow: unset;
@@ -15,14 +14,13 @@
   &:active {
     color: $text_lt_default;
     background-color: darken($bg_light, 5%);
-
     &:focus {
       border: solid 1px $border_light;
     }
   }
 }
 
-@mixin pb_map_button_mixin {
+@mixin pb_map_button {
   @include pb_map_button_states;
   border: solid 1px $border_light;
   border-radius: $border_radius_md;
@@ -38,7 +36,7 @@
   align-items: center;
 }
 
-@mixin pb_map_button_dark_mixin {
+@mixin pb_map_button_dark {
   color: $text_dk_light;
   background-color: $bg_dark;
   border-color: $border_dark;

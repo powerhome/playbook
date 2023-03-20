@@ -15,7 +15,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: unset !important;
-
     &:focus {
       box-shadow: unset;
     }
@@ -114,7 +113,7 @@
     .map-zoom-in-button,
     .map-zoom-out-button,
     .map-flyto-button {
-      @include pb_map_button_mixin;
+      @include pb_map_button;
 
       svg {
         width: $space_xs + 6;
@@ -140,6 +139,11 @@
     .maplibregl-canvas {
       filter: invert(100%) brightness(175%) contrast(80%) sepia(50%) saturate(2)
         hue-rotate(185deg);
+    }
+
+    .mapboxgl-marker,
+    .maplibregl-marker svg g:nth-of-type(1) g:nth-of-type(5) circle {
+      fill: $bg_dark;
     }
 
     .maplibregl-ctrl-attrib-button {
@@ -168,7 +172,7 @@
     .map-zoom-in-button,
     .map-zoom-out-button,
     .map-flyto-button {
-      @include pb_map_button_dark_mixin;
+      @include pb_map_button_dark;
     }
 
     .maplibregl-ctrl-attrib-button {
@@ -190,7 +194,7 @@
       background-color: $bg_dark;
 
       .mapbox-gl-draw_ctrl-draw-btn {
-        @include pb_map_button_dark_mixin;
+        @include pb_map_button_dark;
       }
 
       .mapbox-gl-draw_polygon {
