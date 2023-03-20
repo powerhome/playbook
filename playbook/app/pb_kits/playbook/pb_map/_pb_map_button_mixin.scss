@@ -14,7 +14,11 @@
   }
   &:active {
     color: $text_lt_default;
-    background-color: $card_light;
+    background-color: darken($bg_light, 5%);
+
+    &:focus {
+      border: solid 1px $border_light;
+    }
   }
 }
 
@@ -44,5 +48,8 @@
   &:active {
     color: $text_dk_default;
     background-color: $bg_dark;
+    &:focus {
+      border: solid 1px $border_dark;
+    }
   }
 }
