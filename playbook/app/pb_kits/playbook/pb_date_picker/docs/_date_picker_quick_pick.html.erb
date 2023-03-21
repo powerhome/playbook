@@ -1,0 +1,6 @@
+<%= pb_rails("date_picker", props: {
+  default_date: [DateTime.current.utc.iso8601, (DateTime.current + 7.day).utc.iso8601],
+  mode: "range",
+  picker_id: "date-picker-quick-pick",
+  quick_pick: true
+}) %>

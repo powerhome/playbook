@@ -19,6 +19,7 @@ type DatePickerConfig = {
   hideIcon?: boolean;
   inLine?: boolean,
   onChange: (dateStr: string, selectedDates: Date[]) => void,
+  quickPick?: boolean,
   selectionType?: "month" | "week" | "",
   showTimezone?: boolean,
   staticPosition: boolean,
@@ -45,6 +46,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     plugins,
     position = "auto",
     positionElement,
+    quickPick = false,
     required,
     selectionType,
     showTimezone,
@@ -111,62 +113,131 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
 
-  flatpickr(`#${pickerId}`, {
-    allowInput,
-    closeOnSelect,
-    disableMobile: true,
-    dateFormat: getDateFormat(),
-    defaultDate: defaultDateGetter(),
-    disable: disableWeekdays && disableWeekdays.length > 0 ? [
-      (date) => {
-        const weekdayObj: {
-          [day: string]: number
-        } = {
-          Sunday: 0,
-          Monday: 1,
-          Tuesday: 2,
-          Wednesday: 3,
-          Thursday: 4,
-          Friday: 5,
-          Saturday: 6,
-        }
-        return (
-          date.getDay() === weekdayObj[disableWeekdays[0]] ||
-          date.getDay() === weekdayObj[disableWeekdays[1]] ||
-          date.getDay() === weekdayObj[disableWeekdays[2]] ||
-          date.getDay() === weekdayObj[disableWeekdays[3]] ||
-          date.getDay() === weekdayObj[disableWeekdays[4]] ||
-          date.getDay() === weekdayObj[disableWeekdays[5]] ||
-          date.getDay() === weekdayObj[disableWeekdays[6]]
-        )
+  {quickPick ?
+    flatpickr(`#${pickerId}`, {
+      allowInput,
+      closeOnSelect,
+      disableMobile: true,
+      dateFormat: getDateFormat(),
+      defaultDate: defaultDateGetter(),
+      locale: {
+        rangeSeparator: ' → '
       },
-    ] : disabledParser(),
-    enableTime,
-    maxDate,
-    minDate,
-    mode,
-    nextArrow: '<i class="far fa-angle-right"></i>',
-    onOpen: [() => {
-      calendarResizer()
-      window.addEventListener('resize', calendarResizer)
-      if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
-    }],
-    onClose: [() => {
-      window.removeEventListener('resize', calendarResizer)
-      if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
-    }],
-    onChange: [(selectedDates, dateStr) => {
-      onChange(dateStr, selectedDates)
-    }],
-    onYearChange: [() => {
-      yearChangeHook()
-    }],
-    plugins: setPlugins(),
-    position,
-    positionElement: getPositionElement(positionElement),
-    prevArrow: '<i class="far fa-angle-left"></i>',
-    static: staticPosition,
-  })
+      disable: disableWeekdays && disableWeekdays.length > 0 ? [
+        (date) => {
+          const weekdayObj: {
+            [day: string]: number
+          } = {
+            Sunday: 0,
+            Monday: 1,
+            Tuesday: 2,
+            Wednesday: 3,
+            Thursday: 4,
+            Friday: 5,
+            Saturday: 6,
+          }
+          return (
+            date.getDay() === weekdayObj[disableWeekdays[0]] ||
+            date.getDay() === weekdayObj[disableWeekdays[1]] ||
+            date.getDay() === weekdayObj[disableWeekdays[2]] ||
+            date.getDay() === weekdayObj[disableWeekdays[3]] ||
+            date.getDay() === weekdayObj[disableWeekdays[4]] ||
+            date.getDay() === weekdayObj[disableWeekdays[5]] ||
+            date.getDay() === weekdayObj[disableWeekdays[6]]
+          )
+        },
+      ] : disabledParser(),
+      enableTime,
+      maxDate,
+      minDate,
+      mode,
+      nextArrow: '<i class="far fa-angle-right"></i>',
+      onOpen: [() => {
+        calendarResizer()
+        window.addEventListener('resize', calendarResizer)
+        if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
+      }],
+      onClose: [() => {
+        window.removeEventListener('resize', calendarResizer)
+        if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
+      }],
+      onChange: [(selectedDates, dateStr) => {
+        onChange(dateStr, selectedDates)
+      }],
+      onYearChange: [() => {
+        yearChangeHook()
+      }],
+      plugins: setPlugins(),
+      position,
+      positionElement: getPositionElement(positionElement),
+      prevArrow: '<i class="far fa-angle-left"></i>',
+      // ranges: {
+      //   'Today': [new Date(), new Date()],
+      // },
+      static: staticPosition,
+    })
+    : 
+    flatpickr(`#${pickerId}`, {
+      allowInput,
+      closeOnSelect,
+      disableMobile: true,
+      dateFormat: getDateFormat(),
+      defaultDate: defaultDateGetter(),
+      disable: disableWeekdays && disableWeekdays.length > 0 ? [
+        (date) => {
+          const weekdayObj: {
+            [day: string]: number
+          } = {
+            Sunday: 0,
+            Monday: 1,
+            Tuesday: 2,
+            Wednesday: 3,
+            Thursday: 4,
+            Friday: 5,
+            Saturday: 6,
+          }
+          return (
+            date.getDay() === weekdayObj[disableWeekdays[0]] ||
+            date.getDay() === weekdayObj[disableWeekdays[1]] ||
+            date.getDay() === weekdayObj[disableWeekdays[2]] ||
+            date.getDay() === weekdayObj[disableWeekdays[3]] ||
+            date.getDay() === weekdayObj[disableWeekdays[4]] ||
+            date.getDay() === weekdayObj[disableWeekdays[5]] ||
+            date.getDay() === weekdayObj[disableWeekdays[6]]
+          )
+        },
+      ] : disabledParser(),
+      enableTime,
+      maxDate,
+      minDate,
+      mode,
+      nextArrow: '<i class="far fa-angle-right"></i>',
+      onOpen: [() => {
+        calendarResizer()
+        window.addEventListener('resize', calendarResizer)
+        if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
+      }],
+      onClose: [() => {
+        window.removeEventListener('resize', calendarResizer)
+        if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
+      }],
+      onChange: [(selectedDates, dateStr) => {
+        onChange(dateStr, selectedDates)
+      }],
+      onYearChange: [() => {
+        yearChangeHook()
+      }],
+      plugins: setPlugins(),
+      position,
+      positionElement: getPositionElement(positionElement),
+      prevArrow: '<i class="far fa-angle-left"></i>',
+      // ranges: {
+      //   'Today': [new Date(), new Date()],
+      // },
+      static: staticPosition,
+    })
+  }
+
 
   // ===========================================================
   //                 Additional JS Functionality               |

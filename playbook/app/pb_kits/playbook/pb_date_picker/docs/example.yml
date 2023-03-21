@@ -22,6 +22,7 @@ examples:
   - date_picker_time: Time Selection
   - date_picker_positions: Custom Positions
   - date_picker_positions_element: Custom Position (based on element)
+  - date_picker_quick_pick: Quick Pick
 
   react:
   - date_picker_default: Default
@@ -45,3 +46,4 @@ examples:
   - date_picker_time: Time Selection
   - date_picker_positions: Custom Positions
   - date_picker_positions_element: Custom Position (based on element)
+  - date_picker_quick_pick: Quick Pick

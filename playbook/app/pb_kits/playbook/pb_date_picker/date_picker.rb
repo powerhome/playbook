@@ -53,6 +53,8 @@ module Playbook
       prop :selection_type, type: Playbook::Props::Enum,
                             values: %w[week month none],
                             default: "none"
+      prop :quick_pick, type: Playbook::Props::Boolean,
+                        default: false
       prop :show_timezone, type: Playbook::Props::Boolean,
                            default: false
       prop :static_position, type: Playbook::Props::Boolean,
@@ -84,6 +86,7 @@ module Playbook
           plugins: plugins,
           position: position,
           positionElement: position_element,
+          quickPick: quick_pick,
           required: required,
           selectionType: selection_type,
           showTimezone: show_timezone,
