@@ -7,3 +7,4 @@ export { default as RichTextEditorTemplates } from './_rich_text_editor_template
 export { default as RichTextEditorToolbarBottom } from './_rich_text_editor_toolbar_bottom.jsx'
 export { default as RichTextEditorInline } from './_rich_text_editor_inline.jsx'
 export { default as RichTextEditorPreview } from './_rich_text_editor_preview.jsx'
+export { default as RichTextEditorTipTap } from './_rich_text_editor_tip_tap.jsx'

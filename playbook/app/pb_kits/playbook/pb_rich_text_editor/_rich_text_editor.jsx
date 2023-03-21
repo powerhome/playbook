@@ -7,6 +7,7 @@ import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
 import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop } from '../utilities/props'
+import PBTipTapEditor from './_tiptap'
 
 try {
   const Trix = require('trix')
@@ -20,6 +21,7 @@ import { TrixEditor } from "react-trix"
 
 type RichTextEditorProps = {
   aria?: object,
+  advanced?: Boolean,
   toolbarBottom?: Boolean,
   className?: string,
   data?: object,
@@ -38,6 +40,7 @@ type RichTextEditorProps = {
 const RichTextEditor = (props: RichTextEditorProps) => {
   const {
     aria = {},
+    advanced = false,
     toolbarBottom = false,
     className,
     data = {},
@@ -145,14 +148,23 @@ const RichTextEditor = (props: RichTextEditorProps) => {
         {...dataProps}
         className={css}
     >
-      <TrixEditor
-          className=""
-          fileParamName={name}
-          onChange={onChange}
-          onEditorReady={handleOnEditorReady}
-          placeholder={placeholder}
-          value={value}
-      />
+      {
+        advanced ? (
+          <>
+          <PBTipTapEditor/>
+          </>
+        ) : (
+          <TrixEditor
+              className=""
+              fileParamName={name}
+              onChange={onChange}
+              onEditorReady={handleOnEditorReady}
+              placeholder={placeholder}
+              value={value}
+          />
+        )
+      }
+      
     </div>
   )
 }
