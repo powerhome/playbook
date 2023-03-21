@@ -5,6 +5,7 @@ import { ThemeProps } from './themeTypes'
 
 import Highcharts from 'highcharts'
 
+const pbButtonHoverColor = '#004ebb'
 const highchartsTheme: ThemeProps = {
   lang: {
     thousandsSep: ',',
@@ -225,8 +226,29 @@ const highchartsTheme: ThemeProps = {
         },
       ],
       traverseUpButton: {
-        position: { y: -40 },
-      }
+        position: { y: -50 },
+        text: '< Back',
+        theme: {
+          r: 4,
+          states: {
+            hover: {
+              style: {
+                fill: pbButtonHoverColor,
+              },
+            },
+          },
+          style: {
+            fill: colors.royal,
+            color: colors.white,
+            fontSize: `${typography.text_small}`,
+            fontWeight: typography.bold,
+            fontFamily: `${typography.font_family_base}`,
+          },
+          stroke: colors.royal,
+          height: 24,
+          width: 90,
+        },
+      },
     },
   },
   credits: {

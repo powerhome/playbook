@@ -1,11 +1,12 @@
 import React from 'react'
 import { PhoneNumberInput } from '../../'
 
-const PhoneNumberInputPreferredCountries = () => (
+const PhoneNumberInputPreferredCountries = (props) => (
   <>
     <PhoneNumberInput
         id='preferred'
         preferredCountries={['us', 'br', 'ph', 'gb']}
+        {...props} 
     />
   </>
 )
