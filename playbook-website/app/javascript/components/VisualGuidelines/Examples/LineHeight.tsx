@@ -22,11 +22,17 @@ const TOKENS = {
   '$lh_loosest': 'loosest',
 }
 
+const LineHeightDescription = () => (
+  <>
+    Odds are you might want to build or expand upon the text patterns we have provided. If so below is a good reference of the tokens that are available for you and your typography needs. For articles we recommend paring a "medium" width with "loose" line height. See our <a href="https://playbook.powerapp.cloud/kits/body/react" target="_blank">Body Kit</a> for an example.
+  </>
+)
+
 const LineHeight = ({ example, tokensExample }: {example: string, tokensExample?: string}) => (
   <React.Fragment>
     <Example
-        description="Odds are you might want to build or expand upon the text patterns we have provided. If so below is a good reference of the tokens that are available for you and your typography needs."
-        example={example}
+       description={<LineHeightDescription />}
+       example={example}
         globalProps={{
           lineHeight: HEIGHTS,
         }}
