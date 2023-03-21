@@ -23,20 +23,20 @@
 }) %>
 
 <script type="text/javascript">
-  const toasts = document.querySelectorAll(".toast-to-hide")
-  const buttons = document.querySelectorAll("button[data-toast]")
+  const autoCloseToasts = document.querySelectorAll(".toast-to-hide")
+  const autoCloseButtons = document.querySelectorAll("button[data-toast]")
 
-  const hideToasts = () => {
-    toasts.forEach((toast) => {
+  const hideAutoCloseToasts = () => {
+    autoCloseToasts.forEach((toast) => {
       toast.style.display = "none"
     })
   }
 
-  hideToasts()
+  hideAutoCloseToasts()
 
-  buttons.forEach((button) => {
+  autoCloseButtons.forEach((button) => {
     button.onclick = () => {
-      hideToasts()
+      hideAutoCloseToasts()
       let toast = document.querySelector(button.getAttribute("data-toast"))
 
       if (toast) {

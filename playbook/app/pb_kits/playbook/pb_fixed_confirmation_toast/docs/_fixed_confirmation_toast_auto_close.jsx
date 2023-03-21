@@ -15,6 +15,14 @@ const FixedConfirmationToastAutoClose = (props) => {
         setOpenCloseable(true)
     }
 
+    const handleClose = () => {
+        setOpen(false)
+    }
+
+    const handleCloseCloseable = () => {
+        setOpenCloseable(false)
+    }
+
     return (
         <>
             <Button
@@ -34,6 +42,7 @@ const FixedConfirmationToastAutoClose = (props) => {
             <FixedConfirmationToast
                 autoClose={3000}
                 horizontal='center'
+                onClose={handleClose}
                 open={open}
                 status='tip'
                 text='I will disappear in 3 seconds.'
@@ -45,6 +54,7 @@ const FixedConfirmationToastAutoClose = (props) => {
                 autoClose={10000}
                 closeable
                 horizontal='center'
+                onClose={handleCloseCloseable}
                 open={openCloseable}
                 status='tip'
                 text='I will disappear in 10 seconds.'
