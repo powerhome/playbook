@@ -107,11 +107,11 @@ const RichTextEditor = (props: RichTextEditorProps) => {
 
   useEffect(() => {
     if (!element) return
-    element.addEventListener('click', ({ target }) => {
-      const trixEditorContainer = target.closest('.pb_rich_text_editor_kit')
+    element.addEventListener('click', ({ target }: Event) => {
+      const trixEditorContainer = (target as Element).closest('.pb_rich_text_editor_kit')
       if (!trixEditorContainer) return
 
-      const anchorElement = target.closest('a')
+      const anchorElement = (target as Element).closest('a')
       if (!anchorElement) return
 
       if (anchorElement.hasAttribute('href')) window.open(anchorElement.href)
