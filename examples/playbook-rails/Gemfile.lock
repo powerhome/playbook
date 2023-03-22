@@ -254,6 +254,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -264,7 +265,7 @@ DEPENDENCIES
   jbuilder
   playbook_ui
   puma (~> 5.0)
-  rails (~> 7.0.3, >= 7.0.3.1)
+  rails (~> 7.0.4)
   sassc-rails
   selenium-webdriver
   sprockets-rails
