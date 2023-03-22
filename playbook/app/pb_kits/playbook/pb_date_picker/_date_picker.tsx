@@ -38,9 +38,8 @@ type DatePickerProps = {
   pickerId?: string,
   placeholder?: string,
   positionElement?: HTMLElement | null,
-  quickPick?: boolean,
   scrollContainer?: string,
-  selectionType?: "month" | "week",
+  selectionType?: "month" | "week"| "quickpick",
   showTimezone?: boolean,
   staticPosition: boolean,
   timeFormat?: string,
@@ -85,7 +84,6 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     position,
     positionElement,
     scrollContainer,
-    quickPick = false,
     selectionType = '',
     showTimezone = false,
     staticPosition = true,
@@ -123,7 +121,6 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       plugins,
       position,
       positionElement,
-      quickPick,
       selectionType,
       showTimezone,
       staticPosition,
@@ -148,49 +145,49 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
     >
       <div
-        {...inputAriaProps}
-        {...inputDataProps}
-        className="input_wrapper">
+          {...inputAriaProps}
+          {...inputDataProps}
+          className="input_wrapper">
 
         <Caption
-          className="pb_date_picker_kit_label"
-          text={hideLabel ? null : label}
+            className="pb_date_picker_kit_label"
+            text={hideLabel ? null : label}
         />
 
         <div className="date_picker_input_wrapper">
           <input
-            autoComplete="off"
-            className="date_picker_input"
-            disabled={disableInput}
-            id={pickerId}
-            name={name}
-            onChange={inputOnChange}
-            placeholder={placeholder}
-            value={inputValue}
+              autoComplete="off"
+              className="date_picker_input"
+              disabled={disableInput}
+              id={pickerId}
+              name={name}
+              onChange={inputOnChange}
+              placeholder={placeholder}
+              value={inputValue}
           />
 
           {error && <Body
-            status="negative"
-            text={error}
-            variant={null}
+              status="negative"
+              text={error}
+              variant={null}
           />
           }
         </div>
 
         {!hideIcon &&
           <div
-            className={iconWrapperClass()}
-            id={`cal-icon-${pickerId}`}
+              className={iconWrapperClass()}
+              id={`cal-icon-${pickerId}`}
           >
             <Icon
-              className="cal_icon"
-              icon="calendar-alt"
+                className="cal_icon"
+                icon="calendar-alt"
             />
           </div>
         }
@@ -198,21 +195,21 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
         {hideIcon && inLine ?
           <div>
             <div
-              className={iconWrapperClass()}
-              id={`${pickerId}-icon-plus`}
+                className={iconWrapperClass()}
+                id={`${pickerId}-icon-plus`}
             >
               <Icon
-                className="date-picker-plus-icon"
-                icon="plus"
+                  className="date-picker-plus-icon"
+                  icon="plus"
               />
             </div>
             <div
-              className={iconWrapperClass()}
-              id={`${pickerId}-angle-down`}
+                className={iconWrapperClass()}
+                id={`${pickerId}-angle-down`}
             >
               <Icon
-                className="angle_down_icon"
-                icon="angle-down"
+                  className="angle_down_icon"
+                  icon="angle-down"
               />
             </div>
           </div>

@@ -8,7 +8,6 @@ const DatePickerQuickPick = (props) => (
         defaultDate={[new Date(), new Date().fp_incr(7)]}
         mode="range"
         pickerId="date-picker-quick-pick"
-        quickPick
         {...props}
     />
   </div>

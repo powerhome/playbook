@@ -13,16 +13,17 @@ type DatePickerConfig = {
   disableDate?: number[],
   disableRange?: number[],
   disableWeekdays?: number[],
+  endDateElement?: string | number,
   format?: string,
   pickerId?: ArrayLike<Node> | Node | string,
   required: boolean,
   hideIcon?: boolean;
   inLine?: boolean,
   onChange: (dateStr: string, selectedDates: Date[]) => void,
-  quickPick?: boolean,
-  selectionType?: "month" | "week" | "",
+  selectionType?: "month" | "week" | "quickpick" | "",
   showTimezone?: boolean,
   staticPosition: boolean,
+  startDateElement?: string | number,
   timeCaption?: string,
   timeFormat?: string,
   yearRange: number[]
@@ -37,6 +38,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     disableRange,
     disableWeekdays,
     enableTime,
+    endDateElement,
     format,
     maxDate,
     minDate,
@@ -46,11 +48,11 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     plugins,
     position = "auto",
     positionElement,
-    quickPick = false,
     required,
     selectionType,
     showTimezone,
     staticPosition = true,
+    startDateElement,
     timeCaption = 'Select Time',
     timeFormat = 'at h:i K',
     yearRange,
@@ -113,130 +115,65 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
 
-  {quickPick ?
-    flatpickr(`#${pickerId}`, {
-      allowInput,
-      closeOnSelect,
-      disableMobile: true,
-      dateFormat: getDateFormat(),
-      defaultDate: defaultDateGetter(),
-      locale: {
-        rangeSeparator: ' → '
+  flatpickr(`#${pickerId}`, {
+    allowInput,
+    closeOnSelect,
+    disableMobile: true,
+    dateFormat: getDateFormat(),
+    defaultDate: defaultDateGetter(),
+    disable: disableWeekdays && disableWeekdays.length > 0 ? [
+      (date) => {
+        const weekdayObj: {
+          [day: string]: number
+        } = {
+          Sunday: 0,
+          Monday: 1,
+          Tuesday: 2,
+          Wednesday: 3,
+          Thursday: 4,
+          Friday: 5,
+          Saturday: 6,
+        }
+        return (
+          date.getDay() === weekdayObj[disableWeekdays[0]] ||
+          date.getDay() === weekdayObj[disableWeekdays[1]] ||
+          date.getDay() === weekdayObj[disableWeekdays[2]] ||
+          date.getDay() === weekdayObj[disableWeekdays[3]] ||
+          date.getDay() === weekdayObj[disableWeekdays[4]] ||
+          date.getDay() === weekdayObj[disableWeekdays[5]] ||
+          date.getDay() === weekdayObj[disableWeekdays[6]]
+        )
       },
-      disable: disableWeekdays && disableWeekdays.length > 0 ? [
-        (date) => {
-          const weekdayObj: {
-            [day: string]: number
-          } = {
-            Sunday: 0,
-            Monday: 1,
-            Tuesday: 2,
-            Wednesday: 3,
-            Thursday: 4,
-            Friday: 5,
-            Saturday: 6,
-          }
-          return (
-            date.getDay() === weekdayObj[disableWeekdays[0]] ||
-            date.getDay() === weekdayObj[disableWeekdays[1]] ||
-            date.getDay() === weekdayObj[disableWeekdays[2]] ||
-            date.getDay() === weekdayObj[disableWeekdays[3]] ||
-            date.getDay() === weekdayObj[disableWeekdays[4]] ||
-            date.getDay() === weekdayObj[disableWeekdays[5]] ||
-            date.getDay() === weekdayObj[disableWeekdays[6]]
-          )
-        },
-      ] : disabledParser(),
-      enableTime,
-      maxDate,
-      minDate,
-      mode,
-      nextArrow: '<i class="far fa-angle-right"></i>',
-      onOpen: [() => {
-        calendarResizer()
-        window.addEventListener('resize', calendarResizer)
-        if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
-      }],
-      onClose: [() => {
-        window.removeEventListener('resize', calendarResizer)
-        if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
-      }],
-      onChange: [(selectedDates, dateStr) => {
-        onChange(dateStr, selectedDates)
-      }],
-      onYearChange: [() => {
-        yearChangeHook()
-      }],
-      plugins: setPlugins(),
-      position,
-      positionElement: getPositionElement(positionElement),
-      prevArrow: '<i class="far fa-angle-left"></i>',
-      // ranges: {
-      //   'Today': [new Date(), new Date()],
-      // },
-      static: staticPosition,
-    })
-    : 
-    flatpickr(`#${pickerId}`, {
-      allowInput,
-      closeOnSelect,
-      disableMobile: true,
-      dateFormat: getDateFormat(),
-      defaultDate: defaultDateGetter(),
-      disable: disableWeekdays && disableWeekdays.length > 0 ? [
-        (date) => {
-          const weekdayObj: {
-            [day: string]: number
-          } = {
-            Sunday: 0,
-            Monday: 1,
-            Tuesday: 2,
-            Wednesday: 3,
-            Thursday: 4,
-            Friday: 5,
-            Saturday: 6,
-          }
-          return (
-            date.getDay() === weekdayObj[disableWeekdays[0]] ||
-            date.getDay() === weekdayObj[disableWeekdays[1]] ||
-            date.getDay() === weekdayObj[disableWeekdays[2]] ||
-            date.getDay() === weekdayObj[disableWeekdays[3]] ||
-            date.getDay() === weekdayObj[disableWeekdays[4]] ||
-            date.getDay() === weekdayObj[disableWeekdays[5]] ||
-            date.getDay() === weekdayObj[disableWeekdays[6]]
-          )
-        },
-      ] : disabledParser(),
-      enableTime,
-      maxDate,
-      minDate,
-      mode,
-      nextArrow: '<i class="far fa-angle-right"></i>',
-      onOpen: [() => {
-        calendarResizer()
-        window.addEventListener('resize', calendarResizer)
-        if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
-      }],
-      onClose: [() => {
-        window.removeEventListener('resize', calendarResizer)
-        if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
-      }],
-      onChange: [(selectedDates, dateStr) => {
-        onChange(dateStr, selectedDates)
-      }],
-      onYearChange: [() => {
-        yearChangeHook()
-      }],
-      plugins: setPlugins(),
-      position,
-      positionElement: getPositionElement(positionElement),
-      prevArrow: '<i class="far fa-angle-left"></i>',
-      // ranges: {
-      //   'Today': [new Date(), new Date()],
-      // },
-      static: staticPosition,
-    })
-  }
+    ] : disabledParser(),
+    enableTime,
+    maxDate,
+    minDate,
+    mode,
+    nextArrow: '<i class="far fa-angle-right"></i>',
+    onOpen: [() => {
+      calendarResizer()
+      window.addEventListener('resize', calendarResizer)
+      if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
+    }],
+    onClose: [() => {
+      window.removeEventListener('resize', calendarResizer)
+      if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
+    }],
+    onChange: [(selectedDates, dateStr) => {
+      onChange(dateStr, selectedDates)
+    }],
+    onYearChange: [() => {
+      yearChangeHook()
+    }],
+    plugins: setPlugins(),
+    position,
+    positionElement: getPositionElement(positionElement),
+    prevArrow: '<i class="far fa-angle-left"></i>',
+    // ranges: {
+    //   'Today': [new Date(), new Date()],
+    // },
+    static: staticPosition,
+  })
 
 
   // ===========================================================
@@ -277,6 +214,16 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // whenever a new year is selected from dropdown update flatpickr's current year value
   dropdown.addEventListener('input', (e: Event & { target: { value: string}}) => {
     picker.changeYear(Number(e.target.value))
+  })
+
+  // when user picks a quick pick date update flatpickr's input dates
+  const quickPickDropdown = document.querySelector(".date-range-option")
+
+  quickPickDropdown.addEventListener("click", () => {
+    const startDate = quickPickDropdown.getAttribute("data-start-date")
+    const endDate = quickPickDropdown.getAttribute("data-end-date")
+    console.log('clicked')
+    picker.setDate([[startDate, endDate]])
   })
 
   // Reverse month and year dropdown reset on form.reset()
