@@ -9,7 +9,7 @@ import Caption from '../pb_caption/_caption'
 type NavProps = {
   aria?: { [key: string]: string },
   borderless?: boolean,
-  children?: React.ReactChild[] | React.ReactChild,
+  children?: React.ReactNode[] | React.ReactNode,
   className?: string | string[],
   data?: object,
   dark?: boolean,
