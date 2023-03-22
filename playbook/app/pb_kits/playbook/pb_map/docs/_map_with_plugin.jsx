@@ -44,6 +44,11 @@ const MapWithPlugin = (props) => {
             });
             map.addControl(draw);
 
+        //add attributioncontrols
+        map.addControl(new maplibregl.AttributionControl({
+            compact: true
+        }));
+          
         //set map instance
         setMapInstance(map)
     }
