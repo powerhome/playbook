@@ -27,6 +27,7 @@ module Playbook
       def phone_number_input_options
         {
           id: id,
+          dark: dark,
           disabled: disabled,
           initialCountry: initial_country,
           isValid: is_valid,
