@@ -1,6 +1,3 @@
-/* @flow */
-/* eslint-disable react-hooks/rules-of-hooks */
-
 import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 import inlineFocus from './inlineFocus'
@@ -19,10 +16,10 @@ try {
 import { TrixEditor } from "react-trix"
 
 type RichTextEditorProps = {
-  aria?: object,
+  aria?: { [key: string]: string },
   toolbarBottom?: Boolean,
   className?: string,
-  data?: object,
+  data?: { [key: string]: string },
   focus?: boolean,
   id?: string,
   inline?: boolean,
@@ -53,16 +50,16 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   } = props
 
   const ariaProps = buildAriaProps(aria),
-  dataProps = buildDataProps(data),
-  [editor, setEditor] = useState()
+    dataProps = buildDataProps(data),
+    [editor, setEditor] = useState<any>()
 
-  const handleOnEditorReady = (editorInstance) => setEditor(editorInstance),
-  element = editor?.element
+  const handleOnEditorReady = (editorInstance: any) => setEditor(editorInstance),
+    element = editor?.element
 
   // DOM manipulation must wait for editor to be ready
   if (editor) {
     const toolbarElement = element.parentElement.querySelector('trix-toolbar'),
-    blockCodeButton = toolbarElement.querySelector('[data-trix-attribute=code]')
+      blockCodeButton = toolbarElement.querySelector('[data-trix-attribute=code]')
 
     let inlineCodeButton = toolbarElement.querySelector('[data-trix-attribute=inlineCode]')
     if (!inlineCodeButton) inlineCodeButton = blockCodeButton.cloneNode(true)
@@ -93,8 +90,8 @@ const RichTextEditor = (props: RichTextEditorProps) => {
 
     focus
       ? (document.addEventListener('trix-focus', useFocus),
-      document.addEventListener('trix-blur', useFocus),
-      useFocus())
+        document.addEventListener('trix-blur', useFocus),
+        useFocus())
       : null
 
     document.addEventListener('trix-focus', inlineFocus)
@@ -110,7 +107,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
 
   useEffect(() => {
     if (!element) return
-    element.addEventListener('click', ({target}) => {
+    element.addEventListener('click', ({ target }) => {
       const trixEditorContainer = target.closest('.pb_rich_text_editor_kit')
       if (!trixEditorContainer) return
 
@@ -122,11 +119,11 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   }, [element])
 
   const richTextEditorClass = 'pb_rich_text_editor_kit',
-  simpleClass = simple ? 'simple' : '',
-  focusClass = focus ? 'focus-editor-targets' : '',
-  stickyClass = sticky ? 'sticky' : '',
-  inlineClass = inline ? 'inline' : '',
-  toolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
+    simpleClass = simple ? 'simple' : '',
+    focusClass = focus ? 'focus-editor-targets' : '',
+    stickyClass = sticky ? 'sticky' : '',
+    inlineClass = inline ? 'inline' : '',
+    toolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
 
   let css = classnames(globalProps(props), className)
   css = classnames(
@@ -141,17 +138,18 @@ const RichTextEditor = (props: RichTextEditorProps) => {
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={css}
+      {...ariaProps}
+      {...dataProps}
+      className={css}
     >
       <TrixEditor
-          className=""
-          fileParamName={name}
-          onChange={onChange}
-          onEditorReady={handleOnEditorReady}
-          placeholder={placeholder}
-          value={value}
+        className=""
+        fileParamName={name}
+        mergeTags={[]}
+        onChange={onChange}
+        onEditorReady={handleOnEditorReady}
+        placeholder={placeholder}
+        value={value}
       />
     </div>
   )
