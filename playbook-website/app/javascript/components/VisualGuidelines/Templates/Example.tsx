@@ -17,7 +17,7 @@ import PropsValues from './PropsValues'
 type ExampleType = {
   children?: React.ReactChild[] | React.ReactChild,
   customChildren?: boolean,
-  description?: React.ReactChild[] | React.ReactChild,
+  description?: React.ReactChild[] | React.ReactChild | string,
   example?: string,
   globalProps?: { [key: string]: string[] | number[] },
   screenSizes?: { [key: string]: string[] | number[] },
