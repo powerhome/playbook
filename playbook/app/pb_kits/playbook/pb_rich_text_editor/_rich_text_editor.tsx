@@ -15,6 +15,16 @@ try {
 
 import { TrixEditor } from "react-trix"
 
+type Editor = {
+  attributeIsActive?: Function,
+  element?: HTMLElement,
+  getSelectedDocument?: Function,
+  getSelectedRange?: () => Array<number>,
+  insertHTML?: Function,
+  loadHTML?: Function,
+  setSelectedRange?: (range: Array<number>) => void,  
+}
+
 type RichTextEditorProps = {
   aria?: { [key: string]: string },
   toolbarBottom?: Boolean,
@@ -51,18 +61,18 @@ const RichTextEditor = (props: RichTextEditorProps) => {
 
   const ariaProps = buildAriaProps(aria),
     dataProps = buildDataProps(data),
-    [editor, setEditor] = useState<any>()
+    [editor, setEditor] = useState<Editor>()
 
-  const handleOnEditorReady = (editorInstance: any) => setEditor(editorInstance),
+  const handleOnEditorReady = (editorInstance: Editor) => setEditor(editorInstance),
     element = editor?.element
 
   // DOM manipulation must wait for editor to be ready
   if (editor) {
-    const toolbarElement = element.parentElement.querySelector('trix-toolbar'),
-      blockCodeButton = toolbarElement.querySelector('[data-trix-attribute=code]')
+    const toolbarElement = element.parentElement.querySelector('trix-toolbar') as HTMLElement,
+      blockCodeButton = toolbarElement.querySelector('[data-trix-attribute=code]') as HTMLElement
 
-    let inlineCodeButton = toolbarElement.querySelector('[data-trix-attribute=inlineCode]')
-    if (!inlineCodeButton) inlineCodeButton = blockCodeButton.cloneNode(true)
+    let inlineCodeButton = toolbarElement.querySelector('[data-trix-attribute=inlineCode]') as HTMLElement
+    if (!inlineCodeButton) inlineCodeButton = blockCodeButton.cloneNode(true) as HTMLElement
 
     // set button attributes
     inlineCodeButton.dataset.trixAttribute = 'inlineCode'
