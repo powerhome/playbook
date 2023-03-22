@@ -10,7 +10,7 @@ import Image from '../pb_image/_image'
 type NavItemProps = {
   active?: boolean,
   aria?: { [key: string]: string },
-  children?: React.ReactChild[] | React.ReactChild,
+  children?: React.ReactNode[] | React.ReactNode,
   className?: string,
   data?: object,
   iconLeft: string,
