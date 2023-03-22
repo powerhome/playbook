@@ -204,7 +204,6 @@
 
     .mapboxgl-ctrl-group:not(:empty),
     .maplibregl-ctrl-group:not(:empty) {
-      right: $space_xs + 5;
       background-color: $bg_dark;
 
       .mapbox-gl-draw_ctrl-draw-btn {
