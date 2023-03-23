@@ -121,10 +121,15 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     validateOnlyNumbers()
   }
 
+  const getCurrentSelectedData = (itiInit: any, inputValue: string) => {
+    return {...itiInit.getSelectedCountryData(), number: inputValue}
+  }
+
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(evt.target.value)
     validateTooLongNumber(itiInit)
-    onChange(evt)
+    const selectedData = getCurrentSelectedData(itiInit, evt.target.value)
+    onChange(selectedData)
     isValid(itiInit.isValidNumber())
   }
 
@@ -144,7 +149,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
       }
     )
     
-    inputRef.current.addEventListener("countrychange", () => validateTooLongNumber(telInputInit))
+    inputRef.current.addEventListener("countrychange", (evt: Event) => {
+      validateTooLongNumber(telInputInit)
+      const selectedData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
+      onChange(selectedData)
+    })
+
     inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
     inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
 
