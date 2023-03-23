@@ -84,7 +84,6 @@
           <% end %>
           
       <% end %>
-      <p><%= object.end_date_element %></p>
     <% end %>
   </div>
   
@@ -93,14 +92,13 @@
   <%= javascript_tag do %>
     window.addEventListener("DOMContentLoaded", () => {
         datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
-        const startDateElement = <%= object.start_date_element %>
-        const endEateElement = <%= object.end_date_element %>
+
+        const quickPickInput = document.querySelector("#date-picker-quick-pick")
 
         const dateRanges = document.querySelectorAll(".date-range-option")
 
         const setDates = (startDate, endDate) => {
-          startDateElement.value = startDate
-          endEateElement.value = endDate
+        quickPickInput.value = startDate + " → " + endDate 
         }
 
         dateRanges.forEach((dateRange) => {

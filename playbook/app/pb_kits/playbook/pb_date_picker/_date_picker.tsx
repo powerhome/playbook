@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -8,6 +8,9 @@ import datePickerHelper from './date_picker_helper'
 import Icon from '../pb_icon/_icon'
 import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
+import PbReactPopover from '../pb_popover/_popover'
+import Nav from "../pb_nav/_nav"
+import NavItem from "../pb_nav/_item"
 
 type DatePickerProps = {
   allowInput?: boolean,
@@ -95,6 +98,42 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
 
+  const [showPopover, setShowPopover] = useState(false)
+
+  const handleTogglePopover = () => {
+    setShowPopover(!showPopover)
+  }
+
+  const formatDateToday = (date: Date) => {
+    const curr_date = date.getDate();
+    const curr_month = date.getMonth() + 1; //Months are zero based
+    const curr_year = date.getFullYear();
+    return curr_month + "/" + curr_date + "/" + curr_year
+  }
+
+  const formatDateYesterday = (date: Date) => {
+    const curr_date = date.getDate() - 1;
+    const curr_month = date.getMonth() + 1; //Months are zero based
+    const curr_year = date.getFullYear();
+    return curr_month + "/" + curr_date + "/" + curr_year
+  }
+
+  const newDate = new Date();
+
+  const dateRanges = 
+  [
+    {
+      label: "Today",
+      startDate: formatDateToday(newDate),
+      endDate: formatDateToday(newDate),
+    },
+    {
+      label: "Yesterday",
+      startDate: formatDateYesterday(newDate),
+      endDate: formatDateYesterday(newDate),
+    },
+  ]
+
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
     globalProps(props),
@@ -143,6 +182,35 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     return base
   }
 
+  const QuickPickInput = () => {
+    return (
+      <div className="date_picker_input_wrapper">
+          <input
+              autoComplete="off"
+              className="date_picker_input"
+              disabled={disableInput}
+              id={pickerId}
+              name={name}
+              onChange={inputOnChange}
+              onClick={handleTogglePopover}
+              placeholder={placeholder}
+              value={inputValue}
+          />
+
+          {error && 
+          <Body
+              status="negative"
+              text={error}
+              variant={null}
+          />
+          }
+      </div>
+    )
+  }
+  const popOverRef: any = (
+    <QuickPickInput/>
+  )
+
   return (
     <div
         {...ariaProps}
@@ -160,25 +228,28 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
             text={hideLabel ? null : label}
         />
 
-        <div className="date_picker_input_wrapper">
-          <input
-              autoComplete="off"
-              className="date_picker_input"
-              disabled={disableInput}
-              id={pickerId}
-              name={name}
-              onChange={inputOnChange}
-              placeholder={placeholder}
-              value={inputValue}
-          />
+        {selectionType === "quickpick" ? null : 
+          <div className="date_picker_input_wrapper">
+            <input
+                autoComplete="off"
+                className="date_picker_input"
+                disabled={disableInput}
+                id={pickerId}
+                name={name}
+                onChange={inputOnChange}
+                placeholder={placeholder}
+                value={inputValue}
+            />
 
-          {error && <Body
-              status="negative"
-              text={error}
-              variant={null}
-          />
-          }
-        </div>
+            {error && 
+                <Body
+                    status="negative"
+                    text={error}
+                    variant={null}
+                />
+            }
+          </div>
+        }
 
         {!hideIcon &&
           <div
@@ -214,9 +285,36 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
             </div>
           </div>
           : null}
+
+          {/* QuickPick Variant */}
+          {selectionType === "quickpick" &&
+            <PbReactPopover
+                closeOnClick="any"
+                cursor="pointer"
+                padding="none"
+                placement="bottom-start"
+                reference={popOverRef}
+                show={showPopover}
+            >
+              <Nav variant="subtle">
+                {dateRanges.map((dateRange, index) => {
+                  return (
+                    <NavItem
+                        data={ 
+                          {startdate: dateRange.startDate,
+                            enddate: dateRange.endDate
+                          }
+                        }
+                        key={index}
+                        text={dateRange.label}
+                    />
+                  )
+                })}
+              </Nav>
+            </PbReactPopover>
+          }
       </div>
     </div>
   )
 }
-
 export default DatePicker

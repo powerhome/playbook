@@ -29,6 +29,10 @@
   }
 }
 
+.pb_popover_reference_wrapper {
+  display: unset !important
+}
+
 .flatpickr-calendar {
   @import "./sass_partials/day_styles";
   @import "./sass_partials/header_styles";

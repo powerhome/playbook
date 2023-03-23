@@ -61,11 +61,6 @@ module Playbook
                       default: false
       prop :year_range, type: Playbook::Props::Array,
                         default: [1900, 2100]
-      prop :start_date_element, type: Playbook::Props::String,
-                                default: ::Date.current.strftime("%m/%d/%Y")
-
-      prop :end_date_element, type: Playbook::Props::String,
-                              default: ::Date.current.end_of_week.strftime("%m/%d/%Y")
 
       def classname
         generate_classname("pb_date_picker_kit")
@@ -78,7 +73,6 @@ module Playbook
           disableDate: disable_date,
           disableRange: disable_range,
           disableWeekdays: disable_weekdays,
-          endDateElement: end_date_element,
           enableTime: enable_time,
           format: format,
           hideIcon: hide_icon,
@@ -94,7 +88,6 @@ module Playbook
           selectionType: selection_type,
           showTimezone: show_timezone,
           staticPosition: static_position,
-          startDateElement: start_date_element,
           yearRange: year_range,
         }.to_json.html_safe
       end
@@ -111,92 +104,63 @@ module Playbook
         class_string
       end
 
-      def date_ranges
-        [today, yesterday, this_week, this_month, this_quarter, this_year, last_week, last_month, last_quarter, last_year]
-      end
-
       def format_date(date)
         date.strftime("%m/%d/%Y")
       end
 
-      def today
-        {
-          label: "Today",
-          start_date: format_date(::Date.current),
-          end_date: format_date(::Date.current),
-        }
-      end
-
-      def yesterday
-        {
-          label: "Yesterday",
-          start_date: format_date(::Date.current.yesterday),
-          end_date: format_date(::Date.current.yesterday),
-        }
-      end
-
-      def this_week
-        {
-          label: "This Week",
-          start_date: format_date(::Date.current.beginning_of_week),
-          end_date: format_date(::Date.current.end_of_week),
-        }
-      end
-
-      def this_month
-        {
-          label: "This Month",
-          start_date: format_date(::Date.current.beginning_of_month),
-          end_date: format_date(::Date.current),
-        }
-      end
-
-      def this_quarter
-        {
-          label: "This Quarter",
-          start_date: format_date(::Date.current.beginning_of_quarter),
-          end_date: format_date(::Date.current),
-        }
-      end
-
-      def this_year
-        {
-          label: "This Year",
-          start_date: format_date(::Date.current.beginning_of_year),
-          end_date: format_date(::Date.current),
-        }
-      end
-
-      def last_week
-        {
-          label: "Last Week",
-          start_date: format_date(::Date.current.last_week.beginning_of_week),
-          end_date: format_date(::Date.current.last_week.end_of_week),
-        }
-      end
-
-      def last_month
-        {
-          label: "Last Month",
-          start_date: format_date(::Date.current.last_month.beginning_of_month),
-          end_date: format_date(::Date.current.last_month.end_of_month),
-        }
-      end
-
-      def last_quarter
-        {
-          label: "Last Quarter",
-          start_date: format_date(::Date.current.last_quarter.beginning_of_quarter),
-          end_date: format_date(::Date.current.last_quarter.end_of_quarter),
-        }
-      end
-
-      def last_year
-        {
-          label: "Last Year",
-          start_date: format_date(::Date.current.last_year.beginning_of_year),
-          end_date: format_date(::Date.current.last_year.end_of_year),
-        }
+      def date_ranges
+        [
+          {
+            label: "Today",
+            start_date: format_date(::Date.current),
+            end_date: format_date(::Date.current),
+          },
+          {
+            label: "Yesterday",
+            start_date: format_date(::Date.current.yesterday),
+            end_date: format_date(::Date.current.yesterday),
+          },
+          {
+            label: "This Week",
+            start_date: format_date(::Date.current.beginning_of_week),
+            end_date: format_date(::Date.current.end_of_week),
+          },
+          {
+            label: "This Month",
+            start_date: format_date(::Date.current.beginning_of_month),
+            end_date: format_date(::Date.current),
+          },
+          {
+            label: "This Quarter",
+            start_date: format_date(::Date.current.beginning_of_quarter),
+            end_date: format_date(::Date.current),
+          },
+          {
+            label: "This Year",
+            start_date: format_date(::Date.current.beginning_of_year),
+            end_date: format_date(::Date.current),
+          },
+          {
+            label: "Last Week",
+            start_date: format_date(::Date.current.last_week.beginning_of_week),
+            end_date: format_date(::Date.current.last_week.end_of_week),
+          },
+          {
+            label: "Last Month",
+            start_date: format_date(::Date.current.last_month.beginning_of_month),
+            end_date: format_date(::Date.current.last_month.end_of_month),
+          },
+          {
+            label: "Last Quarter",
+            start_date: format_date(::Date.current.last_quarter.beginning_of_quarter),
+            end_date: format_date(::Date.current.last_quarter.end_of_quarter),
+          },
+          {
+            label: "Last Year",
+            start_date: format_date(::Date.current.last_year.beginning_of_year),
+            end_date: format_date(::Date.current.last_year.end_of_year),
+          },
+        ]
       end
     end
   end

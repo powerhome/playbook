@@ -13,7 +13,6 @@ type DatePickerConfig = {
   disableDate?: number[],
   disableRange?: number[],
   disableWeekdays?: number[],
-  endDateElement?: string | number,
   format?: string,
   pickerId?: ArrayLike<Node> | Node | string,
   required: boolean,
@@ -23,7 +22,6 @@ type DatePickerConfig = {
   selectionType?: "month" | "week" | "quickpick" | "",
   showTimezone?: boolean,
   staticPosition: boolean,
-  startDateElement?: string | number,
   timeCaption?: string,
   timeFormat?: string,
   yearRange: number[]
@@ -38,7 +36,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     disableRange,
     disableWeekdays,
     enableTime,
-    endDateElement,
     format,
     maxDate,
     minDate,
@@ -52,7 +49,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     selectionType,
     showTimezone,
     staticPosition = true,
-    startDateElement,
     timeCaption = 'Select Time',
     timeFormat = 'at h:i K',
     yearRange,
@@ -214,16 +210,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // whenever a new year is selected from dropdown update flatpickr's current year value
   dropdown.addEventListener('input', (e: Event & { target: { value: string}}) => {
     picker.changeYear(Number(e.target.value))
-  })
-
-  // when user picks a quick pick date update flatpickr's input dates
-  const quickPickDropdown = document.querySelector(".date-range-option")
-
-  quickPickDropdown.addEventListener("click", () => {
-    const startDate = quickPickDropdown.getAttribute("data-start-date")
-    const endDate = quickPickDropdown.getAttribute("data-end-date")
-    console.log('clicked')
-    picker.setDate([[startDate, endDate]])
   })
 
   // Reverse month and year dropdown reset on form.reset()

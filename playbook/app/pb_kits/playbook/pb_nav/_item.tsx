@@ -13,14 +13,14 @@ type NavItemProps = {
   children?: React.ReactNode[] | React.ReactNode,
   className?: string,
   data?: object,
-  iconLeft: string,
-  iconRight: string,
+  iconLeft?: string,
+  iconRight?: string,
   id?: string,
-  imageUrl: string,
-  link: string,
+  imageUrl?: string,
+  link?: string,
   onClick?: React.MouseEventHandler<HTMLElement>,
   target?: '_blank' | '_self' | '_parent' | '_top',
-  text: string,
+  text?: string,
 }
 
 const NavItem = (props: NavItemProps) => {
