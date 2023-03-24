@@ -52,7 +52,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const icon = iconMap[status];
 
   const autoCloseToast = () => {
-    if (autoClose) {
+    if (autoClose && open) {
       setTimeout(() => {
         toggleToast(false);
         onClose();
