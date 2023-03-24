@@ -6,6 +6,7 @@ examples:
   - text_input_disabled: Disabled
   - text_input_add_on: Add On
   - text_input_inline: Inline
+  - text_input_no_label: No Label
   react:
   - text_input_default: Default
   - text_input_error: With Error
@@ -13,3 +14,4 @@ examples:
   - text_input_disabled: Disabled
   - text_input_add_on: Add On
   - text_input_inline: Inline
+  - text_input_no_label: No Label

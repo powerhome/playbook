@@ -1,5 +1,26 @@
 
 
+## [12.10.0](https://github.com/powerhome/playbook/tree/12.10.0) (2023-03-22)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.9.1...12.10.0)
+
+**Kit Enhancements:**
+
+- Move Menu YML to Playbook Website [\#2395](https://github.com/powerhome/playbook/pull/2395) ([jasperfurniss](https://github.com/jasperfurniss), [Israel-Molestina](https://github.com/Israel-Molestina))
+- Converting Nav Kit to Typescript [\#2376](https://github.com/powerhome/playbook/pull/2376) ([carloslimasd](https://github.com/carloslimasd))
+- Map Kit Style Updates [\#2368](https://github.com/powerhome/playbook/pull/2368) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- \[PLAY-689\] Text Input Spacing Error Without Label [\#2398](https://github.com/powerhome/playbook/pull/2398) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Improvements:**
+
+- Add Articles doc to Body Kit [\#2400](https://github.com/powerhome/playbook/pull/2400) ([carloslimasd](https://github.com/carloslimasd))
+- Update dependency bootsnap to v1.16.0 [\#2389](https://github.com/powerhome/playbook/pull/2389) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
 ## [12.9.1](https://github.com/powerhome/playbook/tree/12.9.1) (2023-03-17)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.9.0...12.9.1)

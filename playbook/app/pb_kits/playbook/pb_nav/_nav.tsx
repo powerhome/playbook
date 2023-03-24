@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -9,20 +7,21 @@ import { globalProps } from '../utilities/globalProps'
 import Caption from '../pb_caption/_caption'
 
 type NavProps = {
-  aria?: object,
+  aria?: { [key: string]: string },
   borderless?: boolean,
-  children?: React.Node,
-  className?: string | array<string>,
+  children?: React.ReactNode[] | React.ReactNode,
+  className?: string | string[],
   data?: object,
   dark?: boolean,
   highlight?: boolean,
   id?: string,
-  onClick?: EventHandler,
+  onClick?: React.MouseEventHandler<HTMLElement>,
   orientation?: "vertical" | "horizontal",
-  link: SVGFESpecularLightingElement,
+  link: string,
   title: string,
   variant?: "normal" | "subtle",
 }
+
 const Nav = (props: NavProps) => {
   const {
     aria = {},
@@ -34,7 +33,7 @@ const Nav = (props: NavProps) => {
     highlight = true,
     id,
     link = '#',
-    onClick = () => {},
+    onClick = () => { },
     orientation = 'vertical',
     title = '',
     variant = 'normal',
@@ -53,26 +52,26 @@ const Nav = (props: NavProps) => {
 
   return (
     <nav
-        {...ariaProps}
-        {...dataProps}
-        className={cardCss}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={cardCss}
+      id={id}
     >
-      <If condition={title}>
+      {title &&
         <div className="pb_nav_list_title">
           <a
-              className="pb_nav_list_item_link_text"
-              href={link}
-              onClick={onClick}
+            className="pb_nav_list_item_link_text"
+            href={link}
+            onClick={onClick}
           >
             <Caption
-                dark={dark}
-                size="md"
-                text={`${title}`}
+              dark={dark}
+              size="md"
+              text={`${title}`}
             />
           </a>
         </div>
-      </If>
+      }
       <ul>{children}</ul>
     </nav>
   )
