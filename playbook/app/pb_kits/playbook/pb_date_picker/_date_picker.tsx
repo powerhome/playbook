@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, 
+  useState 
+} from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -98,24 +100,76 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
 
+  useEffect(() => {
+    {selectionType !== "quickpick" && 
+      datePickerHelper({
+        allowInput,
+        defaultDate,
+        disableDate,
+        disableRange,
+        disableWeekdays,
+        enableTime,
+        format,
+        hideIcon,
+        inLine,
+        maxDate,
+        minDate,
+        mode,
+        onChange,
+        pickerId,
+        plugins,
+        position,
+        positionElement,
+        selectionType,
+        showTimezone,
+        staticPosition,
+        yearRange,
+        required: false,
+      }, scrollContainer)
+    }
+  })
+
+  const classes = classnames(
+    buildCss('pb_date_picker_kit'),
+    globalProps(props),
+    error ? 'error' : null,
+    className
+  )
+
+  const iconWrapperClass = () => {
+    let base = 'cal_icon_wrapper'
+    if (dark) {
+      base += ' dark'
+    }
+    if (hideLabel) {
+      base += ' no_label_shift'
+    }
+    if (error) {
+      base += ' error'
+    }
+    return base
+  }
+
+  //-----QuickPick Variant-------//
   const [showPopover, setShowPopover] = useState(false)
+  const [quickInputValue, setQuickInputValue] = useState("mm/dd/yyyy → mm/dd/yyyy")
 
   const handleTogglePopover = () => {
     setShowPopover(!showPopover)
   }
 
   const formatDateToday = (date: Date) => {
-    const curr_date = date.getDate();
-    const curr_month = date.getMonth() + 1; //Months are zero based
-    const curr_year = date.getFullYear();
-    return curr_month + "/" + curr_date + "/" + curr_year
+    const d = date.getDate();
+    const m = date.getMonth() + 1;
+    const y = date.getFullYear();
+    return (m <= 9 ? '0' + m : m) + "/" + (d <= 9 ? '0' + d : d) + "/" + y
   }
 
   const formatDateYesterday = (date: Date) => {
-    const curr_date = date.getDate() - 1;
-    const curr_month = date.getMonth() + 1; //Months are zero based
-    const curr_year = date.getFullYear();
-    return curr_month + "/" + curr_date + "/" + curr_year
+    const d = date.getDate() - 1;
+    const m = date.getMonth() + 1;
+    const y = date.getFullYear();
+    return (m <= 9 ? '0' + m : m) + "/" + (d <= 9 ? '0' + d : d) + "/" + y
   }
 
   const newDate = new Date();
@@ -134,52 +188,15 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     },
   ]
 
-  const classes = classnames(
-    buildCss('pb_date_picker_kit'),
-    globalProps(props),
-    error ? 'error' : null,
-    className
-  )
 
-  useEffect(() => {
-    datePickerHelper({
-      allowInput,
-      defaultDate,
-      disableDate,
-      disableRange,
-      disableWeekdays,
-      enableTime,
-      format,
-      hideIcon,
-      inLine,
-      maxDate,
-      minDate,
-      mode,
-      onChange,
-      pickerId,
-      plugins,
-      position,
-      positionElement,
-      selectionType,
-      showTimezone,
-      staticPosition,
-      yearRange,
-      required: false,
-    }, scrollContainer)
-  })
-
-  const iconWrapperClass = () => {
-    let base = 'cal_icon_wrapper'
-    if (dark) {
-      base += ' dark'
-    }
-    if (hideLabel) {
-      base += ' no_label_shift'
-    }
-    if (error) {
-      base += ' error'
-    }
-    return base
+  const quickPickOnChange = ({ target }: any) => {
+    setQuickInputValue(target.value)
+  }
+  
+  const handleNavClick = (start: string, end: string) => {
+    setQuickInputValue(start + " → " + end)
+    const quickPickPopOver = document.querySelector("#quickpickPopOver") as HTMLInputElement
+    quickPickPopOver.style.display = 'none'
   }
 
   const QuickPickInput = () => {
@@ -188,13 +205,12 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
           <input
               autoComplete="off"
               className="date_picker_input"
-              disabled={disableInput}
               id={pickerId}
               name={name}
-              onChange={inputOnChange}
+              onChange={quickPickOnChange}
               onClick={handleTogglePopover}
               placeholder={placeholder}
-              value={inputValue}
+              value={quickInputValue}
           />
 
           {error && 
@@ -249,7 +265,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
                 />
             }
           </div>
-        }
+        } 
 
         {!hideIcon &&
           <div
@@ -291,6 +307,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
             <PbReactPopover
                 closeOnClick="any"
                 cursor="pointer"
+                id="quickpickPopOver"
                 padding="none"
                 placement="bottom-start"
                 reference={popOverRef}
@@ -306,6 +323,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
                           }
                         }
                         key={index}
+                        onClick={() => handleNavClick(dateRange.startDate, dateRange.endDate)}
                         text={dateRange.label}
                     />
                   )

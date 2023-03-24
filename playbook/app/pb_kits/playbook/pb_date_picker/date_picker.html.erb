@@ -88,26 +88,31 @@
   </div>
   
 
+  <% if object.selection_type != "quickpick"%>
+    <%= javascript_tag do %>
+      window.addEventListener("DOMContentLoaded", () => {
+          datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
+      })
+    <% end %>
+  <% else %>
+     <%= javascript_tag do %>
+      window.addEventListener("DOMContentLoaded", () => {
+          const quickPickInput = document.querySelector("#date-picker-quick-pick")
 
-  <%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => {
-        datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
+          const dateRanges = document.querySelectorAll(".date-range-option")
 
-        const quickPickInput = document.querySelector("#date-picker-quick-pick")
+          const setDates = (startDate, endDate) => {
+          quickPickInput.value = startDate + " → " + endDate 
+          }
 
-        const dateRanges = document.querySelectorAll(".date-range-option")
-
-        const setDates = (startDate, endDate) => {
-        quickPickInput.value = startDate + " → " + endDate 
-        }
-
-        dateRanges.forEach((dateRange) => {
-          dateRange.addEventListener("click", () => {
-            const startDate = dateRange.getAttribute("data-start-date")
-            const endDate = dateRange.getAttribute("data-end-date")
-            setDates(startDate, endDate)
+          dateRanges.forEach((dateRange) => {
+            dateRange.addEventListener("click", () => {
+              const startDate = dateRange.getAttribute("data-start-date")
+              const endDate = dateRange.getAttribute("data-end-date")
+              setDates(startDate, endDate)
+            })
           })
-        })
-    })
+      })
+    <% end %>
   <% end %>
 <% end %>

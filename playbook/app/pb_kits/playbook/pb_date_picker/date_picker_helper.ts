@@ -111,6 +111,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
 
+  // {selectionType === 'quickpick' ? null : 
   flatpickr(`#${pickerId}`, {
     allowInput,
     closeOnSelect,
@@ -146,6 +147,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     minDate,
     mode,
     nextArrow: '<i class="far fa-angle-right"></i>',
+    // noCalendar: true,
     onOpen: [() => {
       calendarResizer()
       window.addEventListener('resize', calendarResizer)
@@ -170,6 +172,8 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     // },
     static: staticPosition,
   })
+  // }
+  
 
 
   // ===========================================================
