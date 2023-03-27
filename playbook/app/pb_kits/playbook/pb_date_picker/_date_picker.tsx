@@ -13,6 +13,7 @@ import Body from '../pb_body/_body'
 import PbReactPopover from '../pb_popover/_popover'
 import Nav from "../pb_nav/_nav"
 import NavItem from "../pb_nav/_item"
+import TextInput from "../pb_text_input/_text_input"
 
 type DatePickerProps = {
   allowInput?: boolean,
@@ -150,13 +151,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     return base
   }
 
-  //-----QuickPick Variant-------//
-  const [showPopover, setShowPopover] = useState(false)
-  const [quickInputValue, setQuickInputValue] = useState("mm/dd/yyyy → mm/dd/yyyy")
 
-  const handleTogglePopover = () => {
-    setShowPopover(!showPopover)
-  }
 
   const formatDateToday = (date: Date) => {
     const d = date.getDate();
@@ -188,28 +183,39 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     },
   ]
 
+  //-----QuickPick Variant-------//
+  const [showPopover, setShowPopover] = useState(false)
+  const [quickInputValue, setQuickInputValue] = useState('')
 
-  const quickPickOnChange = ({ target }: any) => {
+  const handleTogglePopover = () => {
+    setShowPopover(true)
+  }
+  const handleQuickPickClose = (shouldClosePopover: boolean) => {
+    setShowPopover(!shouldClosePopover)
+  }
+  
+  const handleUpdateFirstInput = ({ target }: any) => {
     setQuickInputValue(target.value)
   }
   
   const handleNavClick = (start: string, end: string) => {
     setQuickInputValue(start + " → " + end)
-    const quickPickPopOver = document.querySelector("#quickpickPopOver") as HTMLInputElement
-    quickPickPopOver.style.display = 'none'
+
+    // const quickPickPopOver = document.querySelector("#quickpickPopOver") as HTMLInputElement
+    // quickPickPopOver.style.display = 'none'
   }
 
   const QuickPickInput = () => {
     return (
       <div className="date_picker_input_wrapper">
-          <input
+
+          <TextInput
+              addOn={{ icon: 'calendar-alt', alignment: 'right', border: true }}
               autoComplete="off"
-              className="date_picker_input"
               id={pickerId}
-              name={name}
-              onChange={quickPickOnChange}
+              onChange={handleUpdateFirstInput}
               onClick={handleTogglePopover}
-              placeholder={placeholder}
+              placeholder={"mm/dd/yyyy → mm/dd/yyyy"}
               value={quickInputValue}
           />
 
@@ -244,93 +250,96 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
             text={hideLabel ? null : label}
         />
 
-        {selectionType === "quickpick" ? null : 
-          <div className="date_picker_input_wrapper">
-            <input
-                autoComplete="off"
-                className="date_picker_input"
-                disabled={disableInput}
-                id={pickerId}
-                name={name}
-                onChange={inputOnChange}
-                placeholder={placeholder}
-                value={inputValue}
-            />
+        {selectionType === "quickpick" ? null :
+          <> 
+            <div className="date_picker_input_wrapper">
+              <input
+                  autoComplete="off"
+                  className="date_picker_input"
+                  disabled={disableInput}
+                  id={pickerId}
+                  name={name}
+                  onChange={inputOnChange}
+                  placeholder={placeholder}
+                  value={inputValue}
+              />
 
-            {error && 
-                <Body
-                    status="negative"
-                    text={error}
-                    variant={null}
+              {error && 
+                  <Body
+                      status="negative"
+                      text={error}
+                      variant={null}
+                  />
+              }
+            </div>
+        
+            {!hideIcon && 
+              <div
+                  className={iconWrapperClass()}
+                  id={`cal-icon-${pickerId}`}
+              >
+                <Icon
+                    className="cal_icon"
+                    icon="calendar-alt"
                 />
+              </div>
             }
-          </div>
-        } 
 
-        {!hideIcon &&
-          <div
-              className={iconWrapperClass()}
-              id={`cal-icon-${pickerId}`}
-          >
-            <Icon
-                className="cal_icon"
-                icon="calendar-alt"
-            />
-          </div>
+            {hideIcon && inLine ?
+              <div>
+                <div
+                    className={iconWrapperClass()}
+                    id={`${pickerId}-icon-plus`}
+                >
+                  <Icon
+                      className="date-picker-plus-icon"
+                      icon="plus"
+                  />
+                </div>
+                <div
+                    className={iconWrapperClass()}
+                    id={`${pickerId}-angle-down`}
+                >
+                  <Icon
+                      className="angle_down_icon"
+                      icon="angle-down"
+                  />
+                </div>
+              </div>
+              : null
+            }
+          </>
         }
-
-        {hideIcon && inLine ?
-          <div>
-            <div
-                className={iconWrapperClass()}
-                id={`${pickerId}-icon-plus`}
-            >
-              <Icon
-                  className="date-picker-plus-icon"
-                  icon="plus"
-              />
-            </div>
-            <div
-                className={iconWrapperClass()}
-                id={`${pickerId}-angle-down`}
-            >
-              <Icon
-                  className="angle_down_icon"
-                  icon="angle-down"
-              />
-            </div>
-          </div>
-          : null}
-
-          {/* QuickPick Variant */}
-          {selectionType === "quickpick" &&
-            <PbReactPopover
-                closeOnClick="any"
-                cursor="pointer"
-                id="quickpickPopOver"
-                padding="none"
-                placement="bottom-start"
-                reference={popOverRef}
-                show={showPopover}
-            >
-              <Nav variant="subtle">
-                {dateRanges.map((dateRange, index) => {
-                  return (
-                    <NavItem
-                        data={ 
-                          {startdate: dateRange.startDate,
-                            enddate: dateRange.endDate
-                          }
+        {/* QuickPick Variant */}
+        {selectionType === "quickpick" &&
+          <PbReactPopover
+              closeOnClick="any"
+              cursor="pointer"
+              id="quickpickPopOver"
+              padding="none"
+              placement="bottom-start"
+              reference={popOverRef}
+              shouldClosePopover={handleQuickPickClose}
+              show={showPopover}
+              >
+            <Nav variant="subtle">
+              {dateRanges.map((dateRange, index) => {
+                return (
+                  <NavItem
+                      data={ 
+                        {startdate: dateRange.startDate,
+                          enddate: dateRange.endDate
                         }
-                        key={index}
-                        onClick={() => handleNavClick(dateRange.startDate, dateRange.endDate)}
-                        text={dateRange.label}
-                    />
-                  )
-                })}
-              </Nav>
-            </PbReactPopover>
-          }
+                      }
+                      key={index}
+                      onClick={() => handleNavClick(dateRange.startDate, dateRange.endDate)}
+                      text={dateRange.label}
+                  />
+                )
+              })}
+            </Nav>
+          </PbReactPopover>
+        }
       </div>
     </div>
   )
