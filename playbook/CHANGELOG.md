@@ -1,5 +1,27 @@
 
 
+## [12.11.0](https://github.com/powerhome/playbook/tree/12.11.0) (2023-03-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.10.0...12.11.0)
+
+**Kit Enhancements:**
+
+- Converting Source kit to Typescript [\#2410](https://github.com/powerhome/playbook/pull/2410) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Selectable Card Icon kit to Typescript [\#2404](https://github.com/powerhome/playbook/pull/2404) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Rich Text Editor kit to Typescript [\#2401](https://github.com/powerhome/playbook/pull/2401) ([carloslimasd](https://github.com/carloslimasd))
+- Creating Fixed Toast auto close Functionality [\#2396](https://github.com/powerhome/playbook/pull/2396) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+
+- Fixed Date Picker Kit Jump on Range Select [\#2408](https://github.com/powerhome/playbook/pull/2408) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Dependency Updates [\#2411](https://github.com/powerhome/playbook/pull/2411) ([jasperfurniss](https://github.com/jasperfurniss))
+- Adding Target Prop to Button Kit [\#2409](https://github.com/powerhome/playbook/pull/2409) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
 ## [12.10.0](https://github.com/powerhome/playbook/tree/12.10.0) (2023-03-22)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.9.1...12.10.0)
@@ -12,7 +34,7 @@
 
 **Fixed Bugs:**
 
-- \[PLAY-689\] Text Input Spacing Error Without Label [\#2398](https://github.com/powerhome/playbook/pull/2398) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Text Input Spacing Error Without Label [\#2398](https://github.com/powerhome/playbook/pull/2398) ([Israel-Molestina](https://github.com/Israel-Molestina))
 
 **Improvements:**
 
