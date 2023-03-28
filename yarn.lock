@@ -6956,9 +6956,7 @@ intersection-observer@^0.10.0:
   integrity sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==
 
 intl-tel-input@^17.0.19:
-  version "17.0.19"
-  resolved "https://registry.yarnpkg.com/intl-tel-input/-/intl-tel-input-17.0.19.tgz#4c277e3bf02069fac2ef3821a62a3d7e8b55740a"
-  integrity sha512-GBNoUT4JVgm2e1N+yFMaBQ24g5EQfZhDznGneCM9IEZwfKsMUAUa1dS+v0wOiKpRAZ5IPNLJMIEEFGgqlCI22A==
+  version "17.0.21"
 
 invariant@^2.2.2:
   version "2.2.4"
