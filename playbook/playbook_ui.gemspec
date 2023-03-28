@@ -17,13 +17,13 @@ Gem::Specification.new do |s|
   s.files = Dir[
     "app/pb_kits/playbook/pb_*/**/*",
     "app/pb_kits/playbook/{plugins,tokens,utilities}/**/*",
-    "app/pb_kits/playbook/data/menu.yml",
     "app/pb_kits/playbook/*.{scss,js,rb}",
     "app/assets/images/*",
     "fonts/**/*",
     "lib/*.rb",
     "lib/playbook/**/*",
-    "dist/reset.css"
+    "dist/reset.css",
+    "dist/menu.yml"
   ] + ["Rakefile"]
 
   s.add_dependency "actionpack", ">= 5.2.4.5"
