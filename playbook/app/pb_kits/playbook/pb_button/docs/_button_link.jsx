@@ -23,22 +23,22 @@ const ButtonLink = (props) => (
     />
     {' '}
     <Button
-        aria={{ label: 'Disabled link to Google' }}
-        disabled
-        link="https://google.com"
-        marginRight='lg'
-        tabIndex={0}
-        text="A Tag Button Disabled"
-        {...props}
-    />
-    {' '}
-    <Button
         aria={{ label: 'Link to Playbook in new window' }}
         link="https://playbook.powerapp.cloud/"
         marginRight='lg'
         tabIndex={0}
         target='child'
         text="Open in a Child Tab"
+        {...props}
+    />
+    {' '}
+    <Button
+        aria={{ label: 'Disabled link to Google' }}
+        disabled
+        link="https://google.com"
+        marginRight='lg'
+        tabIndex={0}
+        text="A Tag Button Disabled"
         {...props}
     />
   </>
