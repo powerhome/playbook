@@ -53,7 +53,7 @@ module Playbook
         elsif type == "rails" && dark
           stringified_code = stringified_code.gsub("props: {", "props: {\n    dark: true,")
         end
-        stringified_code.gsub(" {...props}", "")
+        stringified_code
       end
 
       def read_kit_file(*args)

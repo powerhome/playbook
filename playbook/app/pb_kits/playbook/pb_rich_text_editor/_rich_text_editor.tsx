@@ -26,9 +26,18 @@ type Editor = {
   setSelectedRange?: (range: Array<number>) => void,  
 }
 
+type Editor = {
+  attributeIsActive?: Function,
+  element?: HTMLElement,
+  getSelectedDocument?: Function,
+  getSelectedRange?: () => Array<number>,
+  insertHTML?: Function,
+  loadHTML?: Function,
+  setSelectedRange?: (range: Array<number>) => void,  
+}
+
 type RichTextEditorProps = {
   aria?: { [key: string]: string },
-  advancedEditor?: any,
   toolbarBottom?: Boolean,
   children?: React.ReactNode | React.ReactNode[]
   className?: string,
@@ -159,24 +168,15 @@ const RichTextEditor = (props: RichTextEditorProps) => {
       {...dataProps}
       className={css}
     >
-      {
-        advancedEditor ? (
-          <div className='pb_rich_text_editor_advanced_container'>
-          <EditorToolbar editor={advancedEditor}/>
-          { children }
-          </div>
-        ) : (
-          <TrixEditor
-              className=""
-              fileParamName={name}
-              mergeTags={[]}
-              onChange={onChange}
-              onEditorReady={handleOnEditorReady}
-              placeholder={placeholder}
-              value={value}
-          />
-        )
-      }
+      <TrixEditor
+        className=""
+        fileParamName={name}
+        mergeTags={[]}
+        onChange={onChange}
+        onEditorReady={handleOnEditorReady}
+        placeholder={placeholder}
+        value={value}
+      />
     </div>
   )
 }

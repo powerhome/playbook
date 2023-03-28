@@ -6,16 +6,6 @@ module Playbook
       base.prop :position
     end
 
-    def position_values
-      %w[relative absolute fixed sticky]
-    end
-
-    def position_options
-      {
-        position: "position",
-      }
-    end
-
   private
 
     def position_props
@@ -28,6 +18,16 @@ module Playbook
 
         "position_#{value}"
       end.compact.join(" ")
+    end
+
+    def position_options
+      {
+        position: "position",
+      }
+    end
+
+    def position_values
+      %w[relative absolute fixed sticky]
     end
   end
 end

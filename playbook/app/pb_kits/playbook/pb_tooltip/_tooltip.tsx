@@ -6,7 +6,7 @@ import {
   offset, 
   Placement, 
   safePolygon, 
-  shift, 
+  shift,
   useFloating, 
   useHover, 
   useInteractions,
@@ -29,8 +29,8 @@ type TooltipProps = {
   icon?: string,
   interaction?: boolean,
   placement?: Placement,
+  position: "absolute" | "fixed";
   text: string,
-  zIndex?: Pick<GlobalProps, "ZIndex">,
 } & GlobalProps
 
 const Tooltip = (props: TooltipProps): React.ReactElement => {
@@ -43,6 +43,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     icon = null,
     interaction = false,
     placement: preferredPlacement = "top",
+    position = "absolute",
     text,
     zIndex,
     ...rest
@@ -50,24 +51,26 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
 
   const dataProps: { [key: string]: any } = buildDataProps(data)
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
-
+  
   const css = classnames(
     globalProps({...rest}),
     className,
   )
   const [open, setOpen] = useState(false)
   const arrowRef = useRef(null)
-  const {
 
+
+  const {
     context,
     floating,
-    middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+    middlewareData: { arrow: { x: arrowX, y: arrowY } = {},  },
     placement,
     reference,
     strategy,
     x,
     y,
   } = useFloating({
+    strategy: position,
     middleware: [
       arrow({
         element: arrowRef,
@@ -86,6 +89,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     },
     placement: preferredPlacement
   })
+
 
   const { getFloatingProps } = useInteractions([
     useHover(context, {
@@ -142,7 +146,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
               className="arrow_bg"
               ref={arrowRef}
               style={{
-                position: strategy,
+                position: "absolute",
                 left: arrowX != null ? `${arrowX}px` : "",
                 top: arrowY != null ? `${arrowY}px` : "",
                 [staticSide]: "-5px",
