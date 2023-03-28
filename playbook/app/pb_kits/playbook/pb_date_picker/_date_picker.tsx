@@ -1,6 +1,6 @@
-import React, { useEffect, 
-  useState 
-} from 'react'
+import React, { useEffect, useState, 
+  // useRef
+ } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -14,6 +14,12 @@ import PbReactPopover from '../pb_popover/_popover'
 import Nav from "../pb_nav/_nav"
 import NavItem from "../pb_nav/_item"
 import TextInput from "../pb_text_input/_text_input"
+// const useFocus = () => {
+//   const htmlElRef = useRef(null)
+//   const setFocus = () => {htmlElRef.current &&  htmlElRef.current.focus()}
+
+//   return [ htmlElRef, setFocus ] 
+// }
 
 type DatePickerProps = {
   allowInput?: boolean,
@@ -36,7 +42,7 @@ type DatePickerProps = {
   inputAria?: { [key: string]: string },
   inputData?: { [key: string]: string },
   inputOnChange?: (e: React.FormEvent<HTMLInputElement>) => void,
-  inputValue?: any,
+  inputValue?: string,
   label?: string,
   maxDate: string,
   minDate: string,
@@ -186,15 +192,17 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   //-----QuickPick Variant-------//
   const [showPopover, setShowPopover] = useState(false)
   const [quickInputValue, setQuickInputValue] = useState('')
-
+  // const [inputRef, setInputFocus] = useFocus()
+  
   const handleTogglePopover = () => {
     setShowPopover(true)
+    // setInputFocus
   }
   const handleQuickPickClose = (shouldClosePopover: boolean) => {
     setShowPopover(!shouldClosePopover)
   }
   
-  const handleUpdateFirstInput = ({ target }: any) => {
+  const handleUpdateFirstInput = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setQuickInputValue(target.value)
   }
   
@@ -206,17 +214,15 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const QuickPickInput = () => {
     return (
       <div className="date_picker_input_wrapper">
-
           <TextInput
               addOn={{ icon: 'calendar-alt', alignment: 'right', border: true }}
-              autoComplete="off"
-              id={pickerId}
+              // autoComplete="off"
               onChange={handleUpdateFirstInput}
               onClick={handleTogglePopover}
               placeholder={"mm/dd/yyyy → mm/dd/yyyy"}
+              // ref={inputRef}
               value={quickInputValue}
           />
-
           {error && 
           <Body
               status="negative"
@@ -227,7 +233,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       </div>
     )
   }
-  const popOverRef: any = (
+  const popOverRef: React.ReactElement = (
     <QuickPickInput/>
   )
 
