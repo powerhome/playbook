@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Map } from '../../'
+import { Map, mapTheme } from '../../'
 import maplibregl from 'maplibre-gl'
-import mapTheme from '../pbMapTheme'
 
 const MapDefault = (props) => {
 
