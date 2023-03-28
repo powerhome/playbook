@@ -5,6 +5,8 @@
   "major": {
     "enabled": false
   },
+  "prCreation": "not-pending",
+  "prConcurrentLimit": 2,
   "packageRules": [
     {
       "packageNames": [
