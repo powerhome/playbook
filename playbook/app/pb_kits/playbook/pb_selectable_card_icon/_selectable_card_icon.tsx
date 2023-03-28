@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -15,13 +13,13 @@ import SelectableCard from '../pb_selectable_card/_selectable_card'
 import SelectableIcon from '../pb_selectable_icon/_selectable_icon'
 
 type SelectableCardIconProps = {
-  aria?: Object,
+  aria?: { [key: string]: string },
   checked?: boolean,
   checkmark: boolean,
   className?: string,
-  customIcon?: SVGElement,
+  customIcon?: { [key: string]: SVGElement },
   dark?: boolean,
-  data?: Object,
+  data?: { [key: string]: string },
   disabled?: boolean,
   icon?: string,
   inputId?: string,
@@ -30,7 +28,7 @@ type SelectableCardIconProps = {
   titleText?: string,
   bodyText?: string,
   value?: string,
-  onChange?: (e) => void,
+  onChange?: (event: React.FormEvent<HTMLInputElement>) => void,
 }
 
 const SelectableCardIcon = (props: SelectableCardIconProps) => {
@@ -68,35 +66,35 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
     >
       <SelectableCard
-          checked={checked}
-          customIcon={customIcon}
-          dark={dark}
-          disabled={disabled}
-          icon={checkmark}
-          inputId={inputId}
-          multi={multi}
-          name={name}
-          onChange={onChange}
-          value={value}
+        checked={checked}
+        customIcon={customIcon}
+        dark={dark}
+        disabled={disabled}
+        icon={checkmark}
+        inputId={inputId}
+        multi={multi}
+        name={name}
+        onChange={onChange}
+        value={value}
       >
         {
           <>
             <SelectableIcon
-                customIcon={customIcon}
-                icon={icon}
-                inputs="disabled"
-                size="2x"
-                text={titleText}
-            />
+              customIcon={customIcon}
+              icon={icon}
+              inputId={''}
+              inputs="disabled"
+              name={''}
+              text={titleText} />
             <Body
-                color="light"
-                dark={dark}
-                text={bodyText}
+              color="light"
+              dark={dark}
+              text={bodyText}
             />
           </>
         }
