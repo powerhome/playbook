@@ -102,6 +102,7 @@ const SelectableCard = (props: SelectableCardProps) => {
   delete filteredProps?.error
   delete filteredProps?.dark
   delete filteredProps?.multi
+  delete filteredProps?.customIcon
   const labelProps: GlobalProps = variant === 'displayInput' ? { ...filteredProps, padding: 'none' } : { ...filteredProps }
 
   return (
