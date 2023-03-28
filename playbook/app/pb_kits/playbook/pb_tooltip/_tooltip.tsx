@@ -10,12 +10,15 @@ import {
   useFloating, 
   useHover, 
   useInteractions,
-} from "@floating-ui/react-dom-interactions"
+} from "@floating-ui/react"
 
 import classnames from "classnames"
 import { GlobalProps, globalProps } from "../utilities/globalProps"
 import { buildAriaProps, buildDataProps } from "../utilities/props"
 import Flex from "../pb_flex/_flex"
+
+
+
 
 type TooltipProps = {
   aria?: { [key: string]: string },
