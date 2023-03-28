@@ -18,6 +18,7 @@ module Playbook
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[primary secondary link],
                      default: "primary"
+      prop :target
       prop :text
       prop :type
       prop :value
@@ -41,11 +42,19 @@ module Playbook
         }.compact
       end
 
+      def target_attribute
+        if target && link
+          target
+        elsif new_window
+          "_blank"
+        end
+      end
+
       def link_options
         options.tap do |option|
           option[:href] = link
           option[:role] = "link"
-          option[:target] = "_blank" if new_window
+          option[:target] = target_attribute if target_attribute.present?
           option[:tabindex] = 0
         end
       end

@@ -25,6 +25,7 @@ type ButtonPropTypes = {
   onClick?: EventHandler,
   tabIndex?: number,
   size?: 'sm' | 'md' | 'lg',
+  target?: string,
   text?: string,
   type?: 'inline' | null,
   htmlType?: 'submit' | 'reset' | 'button' | undefined,
@@ -70,6 +71,7 @@ const Button = (props: ButtonPropTypes) => {
     tabIndex,
     link = null,
     newWindow = false,
+    target = '',
     text,
     htmlType = 'button',
     value,
@@ -119,7 +121,17 @@ const Button = (props: ButtonPropTypes) => {
     }
   }
 
-  const displayButton = () => {
+  const getTargetAttribute = () => {
+    if (target && link) {
+      return target
+    } else if (newWindow) {
+      return '_blank'
+    }
+
+    return null
+  }
+
+  const displayButton = () => {    
     if (link)
       return (
         <a
@@ -128,10 +140,10 @@ const Button = (props: ButtonPropTypes) => {
             className={css}
             href={link}
             id={id}
-            rel="noreferrer"
+            rel={target !== 'child' ? 'noreferrer' : null}
             role="link"
             tabIndex={tabIndex}
-            target={newWindow ? '_blank' : null}
+            target={getTargetAttribute()}
         >
           {ifLoading()}
         </a>
