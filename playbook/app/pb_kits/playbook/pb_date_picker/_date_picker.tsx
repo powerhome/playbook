@@ -200,9 +200,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   
   const handleNavClick = (start: string, end: string) => {
     setQuickInputValue(start + " → " + end)
-
-    // const quickPickPopOver = document.querySelector("#quickpickPopOver") as HTMLInputElement
-    // quickPickPopOver.style.display = 'none'
+    setShowPopover(false)
   }
 
   const QuickPickInput = () => {
@@ -313,7 +311,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
         {/* QuickPick Variant */}
         {selectionType === "quickpick" &&
           <PbReactPopover
-              closeOnClick="any"
+              closeOnClick="outside"
               cursor="pointer"
               id="quickpickPopOver"
               padding="none"
