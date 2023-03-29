@@ -9,6 +9,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook')
 const DIST_PATH = path.resolve(__dirname, 'dist')
 const NODE_MODULES_PATH = path.resolve(__dirname, '../node_modules')
+const WEBSITE = path.resolve(__dirname, '../playbook-website')
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
 const CIRCULAR_DEPENDENCY_PLUGIN = new CircularDependencyPlugin({
@@ -23,9 +24,10 @@ const CIRCULAR_DEPENDENCY_PLUGIN = new CircularDependencyPlugin({
   cwd: process.cwd(),
 })
 
-// Copy tokens and fonts to dist
+
 const COPY_PLUGIN = new CopyPlugin({
   patterns: [
+    // Copy tokens and fonts to dist
     {
       from: `${SOURCE_PATH}/tokens`,
       globOptions: {
@@ -36,6 +38,11 @@ const COPY_PLUGIN = new CopyPlugin({
         return targetPath.replace(/^tokens\/_/, 'tokens/')
       },
     },
+    // Copy menu.yml to dist for dev_docs
+    {
+      from: `${WEBSITE}/config/menu.yml`,
+      to:`${DIST_PATH}/`
+    }
   ],
   options: {
     concurrency: 100,

@@ -1,28 +1,35 @@
-import React, { useRef, useEffect } from 'react'
-import { Map } from '../../'
+import React, { useRef, useEffect, useState } from 'react'
+import { Map, mapTheme } from '../../'
 import maplibregl from 'maplibre-gl'
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
-import mapTheme from '../pbMapTheme'
 
 const MapWithPlugin = (props) => {
     //set Map instance to access from outside useEffect
+    const [mapInstance, setMapInstance] = useState(null)
     const mapContainerRef = useRef(null)
 
       //Set default position
     const defaultPosition = [-75.379143, 39.831200]
 
+    // linking Maplibre methods to PB custom zoom in, zoom out, and fly to buttons
+  const handleZoomIn = (map) => {map.zoomIn({...mapTheme.zoomConfig})}
+  const handleZoomOut = (map) => {map.zoomOut({...mapTheme.zoomConfig})}
+  const handleFlyTo = (map) => {map.flyTo({
+                                center: defaultPosition,
+                                ... mapTheme.flyToConfig
+                                });}
+
     //This function should contain all maplibre related code
     const loadMap = ( { target: map }) => {
         //set marker/pin
-        /* eslint-disable-next-line */
-        const marker = new maplibregl.Marker({
+        new maplibregl.Marker({
           color: mapTheme.marker,
         }).setLngLat(defaultPosition)
         .setPopup(new maplibregl.Popup({className: 'map_popup', closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
         .addTo(map);
 
         //add maplibre default zoom controls
-        map.addControl(new maplibregl.NavigationControl({showCompass: false}))
+        // map.addControl(new maplibregl.NavigationControl({showCompass: false}))
 
         // disable map zoom when using scroll
         map.scrollZoom.disable();
@@ -36,12 +43,20 @@ const MapWithPlugin = (props) => {
             }
             });
             map.addControl(draw);
+
+        //add attributioncontrols
+        map.addControl(new maplibregl.AttributionControl({
+            compact: true
+        }));
+          
+        //set map instance
+        setMapInstance(map)
     }
 
     useEffect(() => {
          new maplibregl.Map({
             container: mapContainerRef.current,
-            center: [-75.379143, 39.831200],
+            center: defaultPosition,
             ...mapTheme.mapConfig
         }).on('load', loadMap)
     }, [])
@@ -49,7 +64,13 @@ const MapWithPlugin = (props) => {
 
     
 return ( 
-  <Map {...props} >
+  <Map flyTo
+      flyToClick={()=> {handleFlyTo(mapInstance)}}
+      zoomBtns
+      zoomInClick={() => {handleZoomIn(mapInstance)}}
+      zoomOutClick={()=> {handleZoomOut(mapInstance)}}
+      {...props}
+  >
        <div
            ref={mapContainerRef}
            style={{

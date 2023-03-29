@@ -140,10 +140,12 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         {...dataProps}
         className={css}
     >
-      <Caption
-          className="pb_text_input_kit_label"
-          text={label}
-      />
+      {label && 
+        <Caption
+            className="pb_text_input_kit_label"
+            text={label}
+        />
+      }
       <div className={`${addOnCss} text_input_wrapper`}>
         {render}
 
