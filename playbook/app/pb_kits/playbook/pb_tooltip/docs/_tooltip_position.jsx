@@ -15,7 +15,10 @@ const TooltipPosition = (props) => {
         height: '85px',
         width: '85px'
       }}>
-        <Body text='Scroll down this div and hover the button' />
+        <Body 
+            text='Scroll down this div and hover the button' 
+            {...props}
+        />
         <Tooltip
             placement='bottom'
             position='fixed'
