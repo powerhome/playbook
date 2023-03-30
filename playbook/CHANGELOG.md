@@ -1,5 +1,20 @@
 
 
+## [12.12.0](https://github.com/powerhome/playbook/tree/12.12.0) (2023-03-30)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.11.0...12.12.0)
+
+**Kit Enhancements:**
+
+- Custom Tooltip Prop for Circle Chart [\#2415](https://github.com/powerhome/playbook/pull/2415) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Update dependency slim-rails to v3.6.2 [\#2416](https://github.com/powerhome/playbook/pull/2416) ([renovate[bot]](https://github.com/apps/renovate))
+- Addresses critical security Active Record RCE bug \#86 \#87 [\#2403](https://github.com/powerhome/playbook/pull/2403) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
 ## [12.11.0](https://github.com/powerhome/playbook/tree/12.11.0) (2023-03-28)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.10.0...12.11.0)
