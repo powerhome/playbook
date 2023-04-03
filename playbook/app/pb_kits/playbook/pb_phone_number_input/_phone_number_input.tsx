@@ -129,7 +129,16 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     setInputValue(evt.target.value)
     validateTooLongNumber(itiInit)
     const selectedData = getCurrentSelectedData(itiInit, evt.target.value)
-    onChange(selectedData)
+    
+    // This is a hack to get around the fact that we are using a string for onChange
+    // in the Rails side. We should be able to remove this once we have a better
+    // solution for the Rails side.
+    if (typeof onChange === 'string') {
+      window[onChange](selectedData)
+    } else {
+      onChange(selectedData)
+    }
+
     isValid(itiInit.isValidNumber())
   }
 
