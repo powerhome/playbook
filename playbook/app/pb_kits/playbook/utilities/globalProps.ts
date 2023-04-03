@@ -100,6 +100,10 @@ type Padding = {
   padding?: AllSizes,
 }
 
+type Position = {
+  position?: "relative" | "absolute" | "fixed" | "sticky" | "static",
+}
+
 type Shadow = {
   shadow?: "none" | "deep" | "deeper" | "deepest",
 }
@@ -115,7 +119,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
-  Shadow & ZIndex
+  Position & Shadow & ZIndex
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -283,7 +287,12 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     } else {
       return order ? `flex_order_${order}` : ''
     }
-  }
+  }, 
+  positionProps: ({ position }: Position) => {
+    let css = ''
+    css += position && position !== 'static' ? `${position}_position ` : ''
+    return css
+  },
 }
 
 type DefaultProps = {[key: string]: string} | Record<string, unknown>

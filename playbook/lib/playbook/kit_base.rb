@@ -43,6 +43,7 @@ module Playbook
     include Playbook::FlexGrow
     include Playbook::FlexShrink
     include Playbook::Order
+    include Playbook::Position
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}
