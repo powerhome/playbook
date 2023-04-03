@@ -10,7 +10,7 @@ import SelectableListItem from './_item'
 
 type SelectableListProps = {
   aria?: {[key: string]: string },
-  children?: React.ReactNode[] | Array<any>,
+  children?: React.ReactElement[],
   className?: string,
   data?: object,
   id?: string,
@@ -52,6 +52,7 @@ const SelectableList = (props: SelectableListProps) => {
       )
     })
   }
+
   
   return (
     <div
@@ -60,13 +61,13 @@ const SelectableList = (props: SelectableListProps) => {
         className={classes}
         id={id}
     >
-      <List {...props}>
+      <List variant={props.variant}>
         {selectableListItems}
       </List>
     </div>
   )
 }
-
+ 
 SelectableList.Item = SelectableListItem
 
 export default SelectableList
