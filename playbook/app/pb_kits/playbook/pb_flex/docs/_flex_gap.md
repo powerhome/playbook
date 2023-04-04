@@ -1,6 +1,6 @@
 ##### Prop
 
-*  `gap` | `row_gap` | `rowGap` | `column_gap` | `columnGap` | **Type**: String | **Values**: xs | sm | md | lg | xl | none
+*  `gap` | `row_gap` | `rowGap` | `column_gap` | `columnGap` | **Type**: String | **Values**: xxs | xs | sm | md | lg | xl | none
 
 - Setting the gap prop sets the row_gap || rowGap and the column_gap || columnGap props to the same size and creates equal space within a flex container.
 
