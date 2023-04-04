@@ -19,7 +19,7 @@ type DatePickerConfig = {
   hideIcon?: boolean;
   inLine?: boolean,
   onChange: (dateStr: string, selectedDates: Date[]) => void,
-  onClose: () => {},
+  onClose: (dateStr: Date[] | string, selectedDates: Date[] | string) => void,
   selectionType?: "month" | "week" | "",
   showTimezone?: boolean,
   staticPosition: boolean,
@@ -153,11 +153,10 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       window.addEventListener('resize', calendarResizer)
       if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
     }],
-    onClose: [() => {
+    onClose: [(selectedDates, dateStr) => {
       window.removeEventListener('resize', calendarResizer)
       if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
-      onClose()
-      console.log("hello from the helper")
+      onClose(selectedDates, dateStr)
     }],
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates)
