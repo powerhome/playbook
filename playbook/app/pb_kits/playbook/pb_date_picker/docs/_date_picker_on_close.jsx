@@ -1,27 +1,39 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useState } from 'react'
-import { DatePicker, Body } from '../..'
+import { DatePicker,LabelValue } from '../..'
 
-const DEFAULT_DATE = new Date()
-DEFAULT_DATE.setHours(12)
-DEFAULT_DATE.setMinutes(0)
 
 const DatePickerOnClose = (props) => {
-  const [selectedDateTime, setSelectedDateTime] = useState(DEFAULT_DATE)
+  const today = new Date()
+  const [dateString, setDateString] = useState(today.toLocaleDateString())
+  const [dateObj, setDateObj] = useState([today])
 
-  const handleOnClose = (dateTime) => {
-    setSelectedDateTime(dateTime)
+  const handleOnClose = (selectedDates, dateStr) => {
+    setDateString(dateStr)
+    setDateObj(selectedDates)
   }
+
 
   return (
     <div>
-        <Body marginBottom="md">{selectedDateTime.toString()}</Body>
         <DatePicker
-            defaultDate={DEFAULT_DATE}
+            defaultDate={dateString}
             enableTime
+            marginBottom="lg"
             onClose={handleOnClose}
-            pickerId="date-picker-time"
+            pickerId="date-picker-on-close"
             showTimezone
+            {...props}
+        />
+        <LabelValue
+            label="Date Object"
+            marginBottom="lg"
+            value={dateObj[0] ? dateObj[0].toString() : ''}
+            {...props}
+        />
+        <LabelValue
+            label="Date String"
+            value={dateString}
             {...props}
         />
     </div>
