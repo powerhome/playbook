@@ -14,7 +14,9 @@ module Playbook
 
       selected_props.map do |k|
         value = send(k)
-        "position_#{value}" if position_values.include? value
+        return nil unless position_values.include? value
+
+        "position_#{value}"
       end.compact.join(" ")
     end
 
