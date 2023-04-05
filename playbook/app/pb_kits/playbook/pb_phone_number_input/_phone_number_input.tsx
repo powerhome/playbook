@@ -89,6 +89,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const [itiInit, setItiInit] = useState<any>()
   const [error, setError] = useState('')
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
+  const [selectedData, setSelectedData] = useState()
 
   const validateTooLongNumber = (itiInit: any) => {
     const error = itiInit.getValidationError()
@@ -128,17 +129,9 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(evt.target.value)
     validateTooLongNumber(itiInit)
-    const selectedData = getCurrentSelectedData(itiInit, evt.target.value)
-    
-    // This is a hack to get around the fact that we are using a string for onChange
-    // in the Rails side. We should be able to remove this once we have a better
-    // solution for the Rails side.
-    if (typeof onChange === 'string') {
-      window[onChange](selectedData)
-    } else {
-      onChange(selectedData)
-    }
-
+    const phoneNumberData = getCurrentSelectedData(itiInit, evt.target.value)
+    setSelectedData(phoneNumberData)
+    onChange(phoneNumberData)
     isValid(itiInit.isValidNumber())
   }
 
@@ -160,8 +153,9 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     
     inputRef.current.addEventListener("countrychange", (evt: Event) => {
       validateTooLongNumber(telInputInit)
-      const selectedData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
-      onChange(selectedData)
+      const phoneNumberData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
+      setSelectedData(phoneNumberData)
+      onChange(phoneNumberData)
     })
 
     inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
@@ -175,6 +169,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
       <TextInput
         className={dropDownIsOpen ? 'dropdown_open' : ''}
         dark={dark}
+        data-phone-number={JSON.stringify(selectedData)}
         disabled={disabled}
         error={error}
         id={id}
