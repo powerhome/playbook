@@ -3,7 +3,7 @@ import { BaseOptions } from 'flatpickr/dist/types/options'
 import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
 import weekSelect from "flatpickr/dist/plugins/weekSelect/weekSelect"
 import timeSelectPlugin from './plugins/timeSelect'
-import moment from 'moment'
+import quickPickPlugin from './plugins/quickPick'
 
 const getPositionElement = (element: string | Element) => {
   return (typeof element === 'string') ? document.querySelectorAll(element)[0] : element
@@ -100,118 +100,8 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       pluginList.push(weekSelect())
 
     } else if (selectionType === "quickpick") {
-      
     //------- QUICKPICK VARIANT PLUGIN -------------//
-    const predefinedRanges = function () {
-      // console.log("quickpick")
-      return function (fp: any) {
-
-        // variable that holds the ranges available
-
-       const ranges = {
-          'Today': [new Date(), new Date()],
-          'Yesterday': [moment().subtract(1, 'days').toDate(), moment().subtract(1, 'days').toDate()],
-          'Last 30 Days': [moment().subtract(29, 'days').toDate(), new Date()],
-          'This Month': [moment().startOf('month').toDate(), moment().endOf('month').toDate()],
-          'Last Month': [
-              moment().subtract(1, 'month').startOf('month').toDate(),
-              moment().subtract(1, 'month').endOf('month').toDate()
-          ]
-        }
-        
-        //creating the ul element for the nav dropdown and giving it classnames
-        const rangesNav = document.createElement('ul');
-        // creating the pluginData object that will hold the properties of this plugin
-        const pluginData = {
-          ranges: ranges,
-          // rangesOnly: typeof fp.config.rangesOnly === 'undefined' || fp.config.rangesOnly,
-          // rangesAllowCustom: typeof fp.config.rangesAllowCustom === 'undefined' || fp.config.rangesAllowCustom,
-          // rangesCustomLabel: typeof fp.config.rangesCustomLabel !== 'undefined' ? fp.config.rangesCustomLabel : 'Custom Range',
-          rangesNav: rangesNav,
-          rangesButtons: {},
-        };
-
-      /**
-     *    @param {string} label
-     *    @returns HTML Element
-     */
-
-      //funciton for creating the range buttons in the nav
-      const addRangeButton = function (label: string) {
-
-        // create the button element and add class and text
-        const button = document.createElement('button');
-        button.type = "button";
-        button.className = "nav-link btn btn-link";
-        button.innerText = label;
-
-        // assinging our rangesButton prop to the button created
-        // pluginData.rangesButtons[label] = button;
-
-        // create li elements inside the dropdown
-        const item = document.createElement('li');
-        item.className = "nav-item d-grid";
-
-        // append those items to the buttons we assinged to the rangesbutton prop
-        // item.appendChild(pluginData.rangesButtons[label]);
-        item.appendChild(button);
-
-        // append the buttons to the rangeNav prop
-        pluginData.rangesNav.appendChild(item);
-
-        // return the ranges buton prop
-        // return pluginData.rangesButtons[label];
-        return button;
-      };
-
-        
-        return {
-          onReady() {
-            for (const [label, range] of Object.entries(pluginData.ranges)) {
-              addRangeButton(label).addEventListener('click', function () {
-  
-                  const start = moment(range[0]).toDate();
-                  const end = moment(range[1]).toDate();
-  
-                  if (!start) {
-                    fp.clear();
-                  }
-                  else {
-                    fp.setDate([start, end], true);
-                  }
-  
-                  fp.close();
-                });
-            }
-  
-          // const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
-          // const quickPickInput = document.querySelector(`#${pickerId}`)
-    
-          // const button = document.createElement('li');
-          // button.innerHTML="hello"
-          // button.classList.add("quickPickHello")
-          //   // eslint-disable-next-line no-debugger
-          //   debugger
-          //   button.addEventListener(
-          //     "click", 
-          //     () => {
-          //       const start = new Date(picker.currentYear, picker.currentMonth, 1);
-          //       const end = new Date(picker.currentYear, picker.currentMonth, 8);
-          //       fp.setDate([start, end], false);
-          //     }
-          //   );
-          fp.calendarContainer.prepend(pluginData.rangesNav);
-            // rangesNav.appendChild(button)
-            // then add some children
-            // fp.calendarContainer.appendChild(rangesNav);
-            // quickPickInput.appendChild(pluginData.rangesNav);
-          },
-        };
-      };
-    }
-    
-    pluginList.push(predefinedRanges())
-
+    pluginList.push(quickPickPlugin())
     }
 
     // time selection
