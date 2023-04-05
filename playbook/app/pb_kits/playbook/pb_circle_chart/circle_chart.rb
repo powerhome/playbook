@@ -24,6 +24,9 @@ module Playbook
       prop :use_html, type: Playbook::Props::Boolean, default: false
       prop :legend, type: Playbook::Props::Boolean, default: false
       prop :title, default: ""
+      prop :tooltip_html, default: '<span style="font-weight: bold; color:{point.color};">&#9679; </span>
+                                      {point.name}: ' + '<b>{point.y}
+                                    </b>'
       prop :height
       prop :rounded, type: Playbook::Props::Boolean, default: false
       prop :colors, type: Playbook::Props::Array,

@@ -9,7 +9,8 @@ examples:
   - circle_chart_with_legend_kit: Legend
   - circle_chart_legend_position: Legend Position
   - circle_chart_with_title: Title
-  - circle_chart_inner_sizes: Inner Circle Size Options  
+  - circle_chart_inner_sizes: Inner Circle Size Options
+  - circle_chart_custom_tooltip: Tooltip Customization
 
   react:
   - circle_chart_default: Default Style
@@ -22,5 +23,6 @@ examples:
   - circle_chart_legend_position: Legend Position
   - circle_chart_with_title: Title
   - circle_chart_inner_sizes: Inner Circle Size Options  
+  - circle_chart_custom_tooltip: Tooltip Customization
 
 

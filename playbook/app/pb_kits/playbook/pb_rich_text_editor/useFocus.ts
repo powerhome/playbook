@@ -2,7 +2,7 @@ const useFocus = () => {
   const allTrixEditors = document.querySelectorAll(
     '.focus-editor-targets trix-editor'
   )
-  allTrixEditors.forEach((editorElement) => {
+  allTrixEditors.forEach((editorElement: any) => {
     const toolbarElement = editorElement.toolbarElement
     if (editorElement == document.activeElement) {
       editorElement.classList.add('focused-editor')

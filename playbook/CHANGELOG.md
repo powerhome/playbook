@@ -1,5 +1,58 @@
 
 
+## [12.13.0](https://github.com/powerhome/playbook/tree/12.13.0) (2023-04-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.12.0...12.13.0)
+
+**Kit Enhancements:**
+
+- Adding xxs size to Flex gap, columnGap and rowGap [\#2423](https://github.com/powerhome/playbook/pull/2423) ([nidaqg](https://github.com/nidaqg))
+- Selectable List to Typescript [\#2421](https://github.com/powerhome/playbook/pull/2421) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Updating Sandpack Layout Styles [\#2420](https://github.com/powerhome/playbook/pull/2420) ([carloslimasd](https://github.com/carloslimasd))
+- Update dependency selenium-webdriver to v4.8.6 [\#2417](https://github.com/powerhome/playbook/pull/2417) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [12.12.0](https://github.com/powerhome/playbook/tree/12.12.0) (2023-03-30)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.11.0...12.12.0)
+
+**Kit Enhancements:**
+
+- Custom Tooltip Prop for Circle Chart [\#2415](https://github.com/powerhome/playbook/pull/2415) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Update dependency slim-rails to v3.6.2 [\#2416](https://github.com/powerhome/playbook/pull/2416) ([renovate[bot]](https://github.com/apps/renovate))
+- Addresses critical security Active Record RCE bug \#86 \#87 [\#2403](https://github.com/powerhome/playbook/pull/2403) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
+## [12.11.0](https://github.com/powerhome/playbook/tree/12.11.0) (2023-03-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.10.0...12.11.0)
+
+**Kit Enhancements:**
+
+- Converting Source kit to Typescript [\#2410](https://github.com/powerhome/playbook/pull/2410) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Selectable Card Icon kit to Typescript [\#2404](https://github.com/powerhome/playbook/pull/2404) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Rich Text Editor kit to Typescript [\#2401](https://github.com/powerhome/playbook/pull/2401) ([carloslimasd](https://github.com/carloslimasd))
+- Creating Fixed Toast auto close Functionality [\#2396](https://github.com/powerhome/playbook/pull/2396) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+
+- Fixed Date Picker Kit Jump on Range Select [\#2408](https://github.com/powerhome/playbook/pull/2408) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Dependency Updates [\#2411](https://github.com/powerhome/playbook/pull/2411) ([jasperfurniss](https://github.com/jasperfurniss))
+- Adding Target Prop to Button Kit [\#2409](https://github.com/powerhome/playbook/pull/2409) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
 ## [12.10.0](https://github.com/powerhome/playbook/tree/12.10.0) (2023-03-22)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.9.1...12.10.0)
@@ -12,7 +65,7 @@
 
 **Fixed Bugs:**
 
-- \[PLAY-689\] Text Input Spacing Error Without Label [\#2398](https://github.com/powerhome/playbook/pull/2398) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Text Input Spacing Error Without Label [\#2398](https://github.com/powerhome/playbook/pull/2398) ([Israel-Molestina](https://github.com/Israel-Molestina))
 
 **Improvements:**
 

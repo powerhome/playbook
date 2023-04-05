@@ -32,6 +32,7 @@ type CircleChartProps = {
   startAngle?: number;
   style?: string;
   title?: string;
+  tooltipHtml: string;
   useHtml?: boolean;
   zMin?: number;
   layout?: "horizontal" | "vertical" | "proximate";
@@ -78,6 +79,7 @@ const CircleChart = ({
   startAngle = null,
   style = "pie",
   title,
+  tooltipHtml,
   useHtml = false,
   zMin = null,
   layout = "horizontal",
@@ -100,9 +102,7 @@ const CircleChart = ({
   Highcharts.setOptions({
     tooltip: {
       headerFormat: null,
-      pointFormat:
-        '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
-        "<b>{point.y}</b>",
+      pointFormat: tooltipHtml ? tooltipHtml : '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' + "<b>{point.y}</b>",
       useHTML: useHtml,
     },
   });

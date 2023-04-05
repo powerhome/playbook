@@ -1,28 +1,28 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildDataProps } from '../utilities/props'
+import { buildDataProps, buildAriaProps } from '../utilities/props'
 import { titleize } from '../utilities/text'
 
-import Avatar from '../pb_avatar/_avatar'
+import Avatar, { AvatarProps } from '../pb_avatar/_avatar'
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
 import IconCircle from '../pb_icon_circle/_icon_circle'
 import Title from '../pb_title/_title'
 
 type SourceProps = {
+  aria?: {[key: string]: string},
   className?: string,
-  data?: object,
+  data?: { [key: string]: string },
   hideIcon: boolean,
   id?: string,
   source?: string,
   type: "events" | "inbound" | "outbound" | "prospecting" | "referral" | "retail" | "user",
-  user: object,
+  user: AvatarProps,
 }
 
 const Source = ({
+  aria = {},
   className,
   data = {},
   hideIcon = false,
@@ -32,6 +32,7 @@ const Source = ({
   user = {},
 }: SourceProps) => {
   const dataProps = buildDataProps(data)
+  const ariaProps = buildAriaProps(aria)
 
   const css = classnames([
     'pb_source_kit',
@@ -40,7 +41,7 @@ const Source = ({
 
   const avatar = () => {
     if ((type === 'user' || type === 'referral') && user.name !== undefined) {
-      const avatarProps = { ...user }
+      const avatarProps: AvatarProps = { ...user }
       avatarProps.size = 'sm'
       delete avatarProps.userId
       return avatarProps
@@ -55,7 +56,7 @@ const Source = ({
     }
   }
 
-  const typeIconNames = {
+  const typeIconNames: { [key: string]: string } = {
     events: 'calendar-alt',
     outbound: 'sign-out',
     prospecting: 'binoculars',
@@ -68,47 +69,50 @@ const Source = ({
 
   return (
     <div
-        {...dataProps}
-        className={css}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={css}
+      id={id}
     >
 
       <div className="pb__source_layout">
-        <If condition={hideIcon === false}>
-          <If condition={showIcon()}>
-            <IconCircle
+        {hideIcon === false &&
+          <>
+            {showIcon() &&
+              <IconCircle
                 icon={typeIconNames[type]}
                 size="sm"
-            />
-            <Else />
-            <Avatar
+              />
+            }
+            {!showIcon() &&
+              <Avatar
                 {...avatar()}
-            />
-          </If>
-        </If>
+              />
+            }
+          </>
+        }
 
         <div className="pb__source_content">
           <Title
-              size={4}
-              tag="h4"
-              text={source}
+            size={4}
+            tag="h4"
+            text={source}
           />
 
           <div className="pb__source_value">
             <Body
-                color="light"
-                text={typeText()}
+              color="light"
+              text={typeText()}
             />
 
-            <If condition={user.userId}>
+            {user.userId &&
               <Caption
-                  text={user.userId}
+                text={user.userId}
               />
-            </If>
+            }
           </div>
         </div>
       </div>
-
     </div>
   )
 }

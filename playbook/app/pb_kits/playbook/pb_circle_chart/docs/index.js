@@ -8,3 +8,4 @@ export { default as CircleChartWithLegendKit } from './_circle_chart_with_legend
 export { default as CircleChartLegendPosition } from './_circle_chart_legend_position.jsx'
 export { default as CircleChartWithTitle } from './_circle_chart_with_title.jsx'
 export { default as CircleChartInnerSizes } from './_circle_chart_inner_sizes.jsx'
+export { default as CircleChartCustomTooltip } from "./_circle_chart_custom_tooltip.jsx"

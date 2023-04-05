@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from '../../'
 
 const ButtonLink = (props) => (
-  <div>
+  <>
     <Button
         aria={{ label: 'Link to Google' }}
         link="https://google.com"
@@ -23,6 +23,16 @@ const ButtonLink = (props) => (
     />
     {' '}
     <Button
+        aria={{ label: 'Link to Playbook in new window' }}
+        link="https://playbook.powerapp.cloud/"
+        marginRight='lg'
+        tabIndex={0}
+        target='child'
+        text="Open in a Child Tab"
+        {...props}
+    />
+    {' '}
+    <Button
         aria={{ label: 'Disabled link to Google' }}
         disabled
         link="https://google.com"
@@ -31,7 +41,7 @@ const ButtonLink = (props) => (
         text="A Tag Button Disabled"
         {...props}
     />
-  </div>
+  </>
 )
 
 export default ButtonLink

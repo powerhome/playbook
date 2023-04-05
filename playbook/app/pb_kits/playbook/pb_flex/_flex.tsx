@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildCss, buildDataProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { Sizes } from '../types'
 
 type FlexProps = {
   children: React.ReactChild[] | React.ReactNode,
@@ -16,9 +17,9 @@ type FlexProps = {
   reverse?: boolean,
   vertical?: "top" | "center" | "bottom" | "stretch" | "baseline" | "none",
   align?: "start" | "center" | "end" | "stretch" | "baseline" | "none",
-  gap?: "xs" | "sm" | "md" | "lg" | "xl" | "none",
-  rowGap?: "xs" | "sm" | "md" | "lg" | "xl" | "none",
-  columnGap?: "xs" | "sm" | "md" | "lg" | "xl" | "none",
+  gap?: Sizes | "none",
+  rowGap?: Sizes| "none",
+  columnGap?: Sizes| "none",
   wrap?: boolean,
   alignSelf?: "start" | "end" | "center" | "stretch" | "none"
 } & GlobalProps

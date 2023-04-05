@@ -14,7 +14,7 @@ const FlexGap = (props) => {
     <>
       <div className="flex-doc-example">
         <Flex
-            gap="xs"
+            gap="xxs"
             wrap
             {...props}
         >
