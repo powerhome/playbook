@@ -25,7 +25,7 @@ module Playbook
     end
 
     def position_values
-      %w[relative absolute fixed sticky static]
+      %w[relative absolute fixed sticky]
     end
   end
 end
