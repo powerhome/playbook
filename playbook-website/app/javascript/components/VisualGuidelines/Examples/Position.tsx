@@ -1,13 +1,4 @@
-/* eslint-disable flowtype/no-types-missing-file-annotation */
-
 import React from 'react'
-
-import {
-  Body,
-  Caption,
-  Card
-} from 'playbook-ui'
-
 import Example from '../Templates/Example'
 
 const POSITION = ["relative", "absolute", "fixed", "sticky", "static"]
@@ -32,21 +23,7 @@ const Position = ({ example, tokensExample }: { example: string, tokensExample?:
     <Example
       example={tokensExample}
       tokens={TOKENS}
-    >
-      <div className="position-wrapper">
-        {Object.keys(TOKENS).map((token) => (
-          <Card
-            className="position"
-            key={`token-example-${token}`}
-            shadow="deeper"
-            position={TOKENS[token]}
-          >
-            <Body>{token}</Body>
-            <Caption size="md">{`value: ${TOKENS[token]}`}</Caption>
-          </Card>
-        ))}
-      </div>
-    </Example>
+    />
   </React.Fragment>
 )
 
