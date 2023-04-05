@@ -152,9 +152,6 @@ const Layout = (props: LayoutPropTypes) => {
     (child: React.ReactElement & {type: {displayName: string}}) => child.type?.displayName !== 'Side'
   )
 
-  const filteredProps = {...props}
-  delete filteredProps?.position
-
   return (
     <div
         {...ariaProps}
@@ -164,7 +161,7 @@ const Layout = (props: LayoutPropTypes) => {
         layoutCollapseCss,
         className,
         //@ts-ignore
-        globalProps(filteredProps)
+        globalProps(props)
       )}
     >
       {subComponentTags('Side')}

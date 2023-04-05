@@ -95,13 +95,10 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
 
-  const filteredProps = {...props}
-  delete filteredProps?.position
-
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
     //@ts-ignore
-    globalProps(filteredProps),
+    globalProps(props),
     error ? 'error' : null,
     className
   )
