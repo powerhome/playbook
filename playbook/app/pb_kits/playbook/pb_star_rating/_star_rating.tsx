@@ -1,22 +1,20 @@
-/* @flow */
+import React from "react"
+import classnames from "classnames"
 
-import React from 'react'
-import classnames from 'classnames'
+import { buildAriaProps, buildDataProps } from "../utilities/props"
 
-import { buildAriaProps, buildDataProps } from '../utilities/props'
-
-import Icon from '../pb_icon/_icon'
+import Icon from "../pb_icon/_icon"
 
 type StarRatingProps = {
-  aria?: object,
-  className?: string,
-  data?: object,
-  fixedWidth?: boolean,
-  hideRating: boolean,
-  icon?: string,
-  id?: string,
-  rating: number,
-}
+  aria?: {[key: string]: string};
+  className?: string;
+  data?: object;
+  fixedWidth?: boolean;
+  hideRating: boolean;
+  icon?: string;
+  id?: string;
+  rating: number;
+};
 
 const StarRating = ({
   aria = {},
@@ -29,15 +27,17 @@ const StarRating = ({
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const css = classnames([
-    'pb_star_rating_kit', className,
+    "pb_star_rating_kit", className,
   ])
 
+  console.log(Math.floor(rating));
+  console.log("floor");
   const starCount = () => (
-    [...Array(parseInt(rating))]
+    [...Array(Math.floor(rating))]
   )
 
   const hasHalfStar = () => (
-    parseFloat(rating) % 1 !== 0
+    rating % 1 !== 0
   )
 
   return (
@@ -47,12 +47,11 @@ const StarRating = ({
         className={css}
         id={id}
     >
-      <If condition={!hideRating}>
-        <div className="pb_star_rating_number">
-          {rating}
-        </div>
-      </If>
-
+    {!hideRating && (
+      <div className="pb_star_rating_number">
+        {rating}
+      </div>
+    )}
       <div className="pb_star_rating_wrapper">
         <div className="pb_star_rating_highlight">
           {starCount().map((_, index) => (
@@ -62,13 +61,12 @@ const StarRating = ({
                 key={index}
             />
           ))}
-
-          <If condition={hasHalfStar()}>
+          {hasHalfStar() && (
             <Icon
-                fixedWidth={false}
-                icon="star-half"
+              fixedWidth={false}
+              icon="star-half"
             />
-          </If>
+          )}
         </div>
 
         <div className="pb_star_rating_base">
