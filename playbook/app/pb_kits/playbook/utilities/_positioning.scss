@@ -1,3 +1,23 @@
+.relative_position {
+  position: relative;
+}
+
+.absolute_position {
+  position: absolute;
+}
+
+.fixed_position {
+  position: fixed;
+}
+
+.sticky_position {
+  position: sticky;
+}
+
+.static_position {
+  position: static;
+}
+
 .z_index_1 {
   z-index: 100;
 }

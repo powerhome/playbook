@@ -19,6 +19,7 @@ require "playbook/flex"
 require "playbook/flex_grow"
 require "playbook/flex_shrink"
 require "playbook/order"
+require "playbook/position"
 
 module Playbook
   class KitBase < ViewComponent::Base

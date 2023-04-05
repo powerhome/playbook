@@ -290,7 +290,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   }, 
   positionProps: ({ position }: Position) => {
     let css = ''
-    css += position && position !== 'static' ? `${position}_position ` : ''
+    css += position && position !== 'static' ? `${position}_position` : ''
     return css
   },
 }

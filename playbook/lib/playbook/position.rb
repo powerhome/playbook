@@ -14,7 +14,7 @@ module Playbook
 
       selected_props.map do |k|
         value = send(k)
-        "#{value}_position" if position_values.include? value
+        "#{value}_position" if (position_values.include? value) && (value != "static")
       end.compact.join(" ")
     end
 

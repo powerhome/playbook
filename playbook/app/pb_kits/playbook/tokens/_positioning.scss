@@ -4,11 +4,11 @@ $position_fixed: fixed !default;
 $position_sticky: sticky !default;
 $position_static: static !default;
 $position: (
-  position_relative: $position_relative,
-  position_absolute: $position_absolute,
-  position_fixed: $position_fixed,
-  position_sticky: $position_sticky,
-  position_static: $position_static
+  relative: $position_relative,
+  absolute: $position_absolute,
+  fixed: $position_fixed,
+  sticky: $position_sticky,
+  static: $position_static
 );
 
 // z_index variables
