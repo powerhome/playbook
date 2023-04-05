@@ -14,7 +14,13 @@ type FpTypes = {
   loadedPlugins: string[];
 };
 
-const quickPickPlugin = function () {
+type pluginDataType = {
+  ranges: { [key: string]: Date[] };
+  rangesNav: HTMLUListElement;
+  rangesButtons: [] | any;
+}
+
+const quickPickPlugin = () => {
   // console.log("quickpick")
   return function (fp: FpTypes & any): any {
 
@@ -29,17 +35,16 @@ const quickPickPlugin = function () {
           moment().subtract(1, 'month').endOf('month').toDate()
       ]
     }
-    
     //creating the ul element for the nav dropdown and giving it classnames
     const rangesNav = document.createElement('ul');
     // creating the pluginData object that will hold the properties of this plugin
-    const pluginData = {
+    const pluginData: pluginDataType = {
       ranges: ranges,
       // rangesOnly: typeof fp.config.rangesOnly === 'undefined' || fp.config.rangesOnly,
       // rangesAllowCustom: typeof fp.config.rangesAllowCustom === 'undefined' || fp.config.rangesAllowCustom,
       // rangesCustomLabel: typeof fp.config.rangesCustomLabel !== 'undefined' ? fp.config.rangesCustomLabel : 'Custom Range',
       rangesNav: rangesNav,
-      rangesButtons: {},
+      rangesButtons: [],
     };
 
   /**
@@ -48,7 +53,7 @@ const quickPickPlugin = function () {
  */
 
   //funciton for creating the range buttons in the nav
-  const addRangeButton = function (label: string) {
+  const addRangeButton = (label: string) => {
 
     // create the button element and add class and text
     const button = document.createElement('button');
@@ -60,19 +65,31 @@ const quickPickPlugin = function () {
     const item = document.createElement('li');
     item.className = "nav-item d-grid";
 
+    pluginData.rangesButtons[label] = button;
+
     // append those buttons to the item
-    item.appendChild(button);
+    item.appendChild(pluginData.rangesButtons[label]);
 
     // append the item to the rangeNav prop
     pluginData.rangesNav.appendChild(item);
 
     // return the ranges buton prop
-    return button;
+    return pluginData.rangesButtons[label];
   };
+
+  const selectActiveRangeButton = (selectedDates: Array<string>) => {
+    console.log(selectedDates)
+    let isPredefinedRange = false;
+    const current = pluginData.rangesNav.querySelector('.active');
+
+    if (current) {
+      current.classList.remove('active');
+    }
+  }
 
     
     return {
-      onReady() {
+      onReady(selectedDates: Array<string>) {
         for (const [label, range] of Object.entries(pluginData.ranges)) {
           addRangeButton(label).addEventListener('click', function () {
 
@@ -90,8 +107,36 @@ const quickPickPlugin = function () {
             });
         }
 
-      fp.calendarContainer.prepend(pluginData.rangesNav);
+        if (pluginData.rangesNav.children.length > 0) {
+          // if (pluginData.rangesOnly && pluginData.rangesAllowCustom) {
+          //   const customButton = addRangeButton(pluginData.rangesCustomLabel);
+          //   // set custom range button to acti
+          //   customButton.addEventListener('click', function () {
+          //       const current = pluginData.rangesNav.querySelector('.active');
+          //       if (current) {
+          //         current.classList.remove('active');
+          //       }
+          //       customButton.classList.add('active');
+          //       fp.calendarContainer.classList.remove('flatpickr-predefined-ranges-only');
+          //     });
+          // }
+          fp.calendarContainer.prepend(pluginData.rangesNav);
+          fp.calendarContainer.classList.add('flatpickr-has-predefined-ranges');
+          // make sure the right range button is active for the default value
+          selectActiveRangeButton(selectedDates);
+        }
+
+
+        /**
+         * Make sure the right range button is active when a value is manually entered
+         *
+         * @param {Array} selectedDates
+         */
+        
       },
+      onValueUpdate(selectedDates: Array<string>) {
+        selectActiveRangeButton(selectedDates);
+      }
     };
   };
 }
