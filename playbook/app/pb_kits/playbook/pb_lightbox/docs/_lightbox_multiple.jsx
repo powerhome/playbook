@@ -1,6 +1,6 @@
 /* @flow */
 /* eslint-disable jsx-control-statements/jsx-use-if-tag */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Flex, Image } from '../../'
 import Lightbox from '../_lightbox.tsx'
 
@@ -31,8 +31,12 @@ const LightboxMultiple = (props) => {
   ]
   const [selectedPhoto, setSelectedPhoto] = useState(0)
   const [light, toggleLight] = useState(false)
+  const [current, setCurrent] = useState()
 
-  const handleCloseLightbox = () => {
+  useEffect(()=> {
+console.log("current from state", current)
+  },[current])
+ const handleCloseLightbox = () => {
     toggleLight(!light)
     setSelectedPhoto(null)
   }
@@ -47,13 +51,30 @@ const LightboxMultiple = (props) => {
     overflow: "auto"
   }
 
+const handleCurrent = (i) => {
+  console.log(`current photo index: ${i}`)
+  //so the currentphoto is already being exposed in the onChange, that's what the arg is
+  // What we need is a way to change it. So here I'm just setting the current photo to a state
+  // so we can access it
+  setCurrent(i)
+}
+
+const handleSettingCurrent = (x) => {
+  //This is just testing obviously, this is broken code since it will always set it to 8
+  //no matter what is clicked, but wanted to test if exposing the setActivePhoto function
+  //would let the dev actually change the photo. It does work, but not sure how to leverage this correctly?
+  //Also, entirely not sure this is what we want to do it if I'm even passing the setActivePhoto correctly
+  x(8)
+}
+
   return (
     <div>
       {light ? (
         <Lightbox
+            currentPhoto={(x) => handleSettingCurrent(x)}
             icon="times"
             initialPhoto={selectedPhoto}
-            onChange={(index) => console.log(`current photo index: ${index}`)}
+            onChange={(i) => handleCurrent(i)}
             onClose={handleCloseLightbox}
             photos={photos}
             {...props}
@@ -68,7 +89,7 @@ const LightboxMultiple = (props) => {
               return (
                 <div
                     key={index}
-                    onClick={() => onPhotoClick(index)}
+                    onClick={(index) => onPhotoClick(index)}
                 >
                   <Image
                       cursor="pointer"
