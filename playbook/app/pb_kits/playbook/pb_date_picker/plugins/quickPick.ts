@@ -79,7 +79,7 @@ const quickPickPlugin = () => {
 
   const selectActiveRangeButton = (selectedDates: Array<string>) => {
     console.log(selectedDates)
-    let isPredefinedRange = false;
+    // let isPredefinedRange = false;
     const current = pluginData.rangesNav.querySelector('.active');
 
     if (current) {
