@@ -8,9 +8,6 @@ import datePickerHelper from './date_picker_helper'
 import Icon from '../pb_icon/_icon'
 import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
-import PbReactPopover from '../pb_popover/_popover'
-import Nav from "../pb_nav/_nav"
-import NavItem from "../pb_nav/_item"
 
 type DatePickerProps = {
   allowInput?: boolean,
