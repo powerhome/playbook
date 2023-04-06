@@ -6,14 +6,14 @@ import { buildAriaProps, buildDataProps } from "../utilities/props"
 import Icon from "../pb_icon/_icon"
 
 type StarRatingProps = {
-  aria?: {[key: string]: string};
-  className?: string;
-  data?: object;
-  fixedWidth?: boolean;
-  hideRating: boolean;
-  icon?: string;
-  id?: string;
-  rating: number;
+  aria?: {[key: string]: string},
+  className?: string,
+  data?: object,
+  fixedWidth?: boolean,
+  hideRating: boolean,
+  icon?: string,
+  id?: string,
+  rating: number,
 };
 
 const StarRating = ({
