@@ -1,5 +1,21 @@
 
 
+## [12.13.0](https://github.com/powerhome/playbook/tree/12.13.0) (2023-04-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.12.0...12.13.0)
+
+**Kit Enhancements:**
+
+- Adding xxs size to Flex gap, columnGap and rowGap [\#2423](https://github.com/powerhome/playbook/pull/2423) ([nidaqg](https://github.com/nidaqg))
+- Selectable List to Typescript [\#2421](https://github.com/powerhome/playbook/pull/2421) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Updating Sandpack Layout Styles [\#2420](https://github.com/powerhome/playbook/pull/2420) ([carloslimasd](https://github.com/carloslimasd))
+- Update dependency selenium-webdriver to v4.8.6 [\#2417](https://github.com/powerhome/playbook/pull/2417) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
 ## [12.12.0](https://github.com/powerhome/playbook/tree/12.12.0) (2023-03-30)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.11.0...12.12.0)
