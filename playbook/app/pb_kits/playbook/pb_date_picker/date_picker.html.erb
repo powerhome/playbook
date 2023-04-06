@@ -4,8 +4,6 @@
     data: object.data,
     id: object.id) do %>
   <div class="input_wrapper">
-
-
     <% if content.present? %>
       <%= content %>
     <% else %>
@@ -59,60 +57,11 @@
         }) %>
       </div>
     <% end %>
-    <!-- QuickPick Variant -->
-    <% if object.selection_type === "quickpick"%>
-      <%= pb_rails("popover", props: {
-        close_on_click: "any",
-        position: "bottom-start",
-        trigger_element_id: "date-picker-quick-pick", 
-        tooltip_id: "quickpick-tooltip", 
-        padding: "none"
-      }) do %>
-
-          <%= pb_rails("nav", props: { variant: "subtle" }) do %>
-            <% date_ranges.each do |date_range| %>
-              <%= pb_rails("nav/item", props: {  
-                classname: "date-range-option",
-                cursor: "pointer",
-                text: date_range[:label],
-                data: {
-                  start_date: date_range[:start_date],
-                  end_date: date_range[:end_date],
-                }
-              }) %>
-            <% end %>
-          <% end %>
-          
-      <% end %>
-    <% end %>
   </div>
-  
 
-  <% if object.selection_type != "quickpick"%>
-    <%= javascript_tag do %>
-      window.addEventListener("DOMContentLoaded", () => {
-          datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
-      })
-    <% end %>
-  <% else %>
-     <%= javascript_tag do %>
-      window.addEventListener("DOMContentLoaded", () => {
-          const quickPickInput = document.querySelector("#date-picker-quick-pick")
-
-          const dateRanges = document.querySelectorAll(".date-range-option")
-
-          const setDates = (startDate, endDate) => {
-          quickPickInput.value = startDate + " → " + endDate 
-          }
-
-          dateRanges.forEach((dateRange) => {
-            dateRange.addEventListener("click", () => {
-              const startDate = dateRange.getAttribute("data-start-date")
-              const endDate = dateRange.getAttribute("data-end-date")
-              setDates(startDate, endDate)
-            })
-          })
-      })
-    <% end %>
+  <%= javascript_tag do %>
+    window.addEventListener("DOMContentLoaded", () => {
+        datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
+    })
   <% end %>
 <% end %>

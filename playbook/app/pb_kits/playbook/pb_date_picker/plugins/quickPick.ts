@@ -28,11 +28,25 @@ const quickPickPlugin = () => {
   const ranges = {
       'Today': [new Date(), new Date()],
       'Yesterday': [moment().subtract(1, 'days').toDate(), moment().subtract(1, 'days').toDate()],
-      'Last 30 Days': [moment().subtract(29, 'days').toDate(), new Date()],
-      'This Month': [moment().startOf('month').toDate(), moment().endOf('month').toDate()],
-      'Last Month': [
+      'This week': [moment().startOf('week').toDate(), moment().endOf('week').toDate()],
+      'This month': [moment().startOf('month').toDate(), moment().endOf('month').toDate()],
+      'This quarter': [moment().startOf('quarter').toDate(), moment().endOf('quarter').toDate()],
+      'This year': [moment().startOf('year').toDate(), moment().endOf('year').toDate()],
+      'Last week': [
+          moment().subtract(1, 'week').startOf('week').toDate(),
+          moment().subtract(1, 'week').endOf('week').toDate()
+      ],
+      'Last month': [ 
           moment().subtract(1, 'month').startOf('month').toDate(),
           moment().subtract(1, 'month').endOf('month').toDate()
+      ],
+      'Last quarter': [ 
+          moment().subtract(1, 'quarter').startOf('quarter').toDate(),
+          moment().subtract(1, 'quarter').endOf('quarter').toDate()
+      ],
+      'Last year': [ 
+          moment().subtract(1, 'year').startOf('year').toDate(),
+          moment().subtract(1, 'year').endOf('year').toDate()
       ]
     }
     //creating the ul element for the nav dropdown and giving it classnames
