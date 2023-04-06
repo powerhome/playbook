@@ -21,30 +21,30 @@ const TableSideHighlight = (props) => {
         </thead>
         <tbody>
           <TableRow
-              sideHighlightColor="solar"
+              sideHighlightColor="product_1_highlight"
               {...props}
           >
-            <td>{'Solar'}</td>
+            <td>{'Product 1'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
           <TableRow
-              sideHighlightColor="roofing"
+              sideHighlightColor="product_2_highlight"
               {...props}
           >
-            <td>{'Roofing'}</td>
+            <td>{'Product 2'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
           </TableRow>
           <TableRow
-              sideHighlightColor="gutters"
+              sideHighlightColor="product_3_highlight"
               {...props}
           >
-            <td>{'Gutters'}</td>
+            <td>{'Product 3'}</td>
             <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
