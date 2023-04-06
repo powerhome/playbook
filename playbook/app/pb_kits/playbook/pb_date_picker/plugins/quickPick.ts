@@ -1,23 +1,23 @@
 import moment from 'moment'
 
 type FpTypes = {
-  selectedDates: string | any[];
-  setDate: (arg0: any, arg1: boolean) => void;
-  config: { [key: string]: string };
-  clear: (arg0: boolean, arg1: boolean) => void;
-  close: () => void;
+  selectedDates: string | any[],
+  setDate: (arg0: any, arg1: boolean) => void,
+  config: { [key: string]: string },
+  clear: (arg0: boolean, arg1: boolean) => void,
+  close: () => void,
   calendarContainer?: {
     classList: { add: (arg0: string) => void };
     prepend: (arg0: HTMLDivElement) => void;
     append: (arg0: HTMLDivElement) => void;
-  };
-  loadedPlugins: string[];
+  },
+  loadedPlugins: string[],
 };
 
 type pluginDataType = {
-  ranges: { [key: string]: Date[] };
-  rangesNav: HTMLUListElement;
-  rangesButtons: [] | any;
+  ranges: { [key: string]: Date[] },
+  rangesNav: HTMLUListElement,
+  rangesButtons: [] | any,
 }
 
 const quickPickPlugin = () => {
@@ -37,7 +37,7 @@ const quickPickPlugin = () => {
     }
     //creating the ul element for the nav dropdown and giving it classnames
     const rangesNav = document.createElement('ul');
-    
+
     // creating the pluginData object that will hold the properties of this plugin
     const pluginData: pluginDataType = {
       ranges: ranges,

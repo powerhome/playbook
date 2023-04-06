@@ -153,7 +153,8 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       <div
           {...inputAriaProps}
           {...inputDataProps}
-          className="input_wrapper">
+          className="input_wrapper"
+      >
 
         <Caption
             className="pb_date_picker_kit_label"
