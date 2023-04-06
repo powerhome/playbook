@@ -1,5 +1,23 @@
 
 
+## [12.14.0](https://github.com/powerhome/playbook/tree/12.14.0) (2023-04-06)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.13.0...12.14.0)
+
+**Kit Enhancements:**
+
+- Added New Product Tokens [\#2431](https://github.com/powerhome/playbook/pull/2431) ([jasoncypret](https://github.com/jasoncypret))
+- Datepicker onClose Prop [\#2425](https://github.com/powerhome/playbook/pull/2425) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Fixes Bad Doc Example Code Snippets [\#2432](https://github.com/powerhome/playbook/pull/2432) ([jasperfurniss](https://github.com/jasperfurniss))
+- Update dependency capybara to v3.39.0 [\#2429](https://github.com/powerhome/playbook/pull/2429) ([renovate[bot]](https://github.com/apps/renovate))
+- Changing the Phone Number Input Returned Value Format [\#2427](https://github.com/powerhome/playbook/pull/2427) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Position Global Prop [\#2426](https://github.com/powerhome/playbook/pull/2426) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
 ## [12.13.0](https://github.com/powerhome/playbook/tree/12.13.0) (2023-04-04)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.12.0...12.13.0)
