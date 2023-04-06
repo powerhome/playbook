@@ -119,7 +119,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
 
-  // {selectionType === 'quickpick' ? null : 
   flatpickr(`#${pickerId}`, {
     allowInput,
     closeOnSelect,
@@ -155,7 +154,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     minDate,
     mode,
     nextArrow: '<i class="far fa-angle-right"></i>',
-    // noCalendar: true,
     onOpen: [() => {
       calendarResizer()
       window.addEventListener('resize', calendarResizer)
@@ -175,22 +173,8 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     position,
     positionElement: getPositionElement(positionElement),
     prevArrow: '<i class="far fa-angle-left"></i>',
-    // ranges: {
-    //     'Today': [new Date(), new Date()],
-    //     'Last 30 Days': [moment().subtract(29, 'days').toDate(), new Date()],
-    //     'This Month': [moment().startOf('month').toDate(), moment().endOf('month').toDate()],
-    //     'Last Month': [
-    //         moment().subtract(1, 'month').startOf('month').toDate(),
-    //         moment().subtract(1, 'month').endOf('month').toDate()
-    //     ]
-    // },
-    // rangesOnly: true, // only show the ranges menu unless the custom range button is selected
-    // rangesAllowCustom: true, // adds a Custom Range button to show the calendar
-    // rangesCustomLabel: 'Custom Range' // customize the label for the custom range button
     static: staticPosition,
   })
-  // }
-  
 
 
   // ===========================================================

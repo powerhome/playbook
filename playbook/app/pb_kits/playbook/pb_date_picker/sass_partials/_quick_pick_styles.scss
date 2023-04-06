@@ -1,0 +1,56 @@
+@import "../../tokens/animation-curves";
+@import "../../tokens/colors";
+@import "../../tokens/typography";
+@import "../../tokens/titles";
+
+// used to display dropdown on the left of the calender
+.quick-pick-drop-down {
+  width: auto;
+  display: grid;
+}
+
+.quick-pick-ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.nav-item {
+  list-style: none;
+  border-radius: 6px;
+  border-bottom: 0;
+  margin: 8px 14px;
+}
+
+.nav-item-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 8px 14px;
+  transition-property: color, background-color;
+  transition-duration: 0.15s;
+  transition-timing-function: $bezier;
+  border-radius: 6px;
+  line-height: 1.4;
+  color: $charcoal;
+  font-size: $font_default;
+  font-weight: $regular;
+  &.active {
+    background-color: rgba($primary, 0.03);
+    color: $primary;
+    letter-spacing: normal;
+  }
+  @media (hover:hover) {
+    &:hover {
+      cursor: pointer;
+      background-color: rgba($primary, 0.03);
+      color: $primary;
+    }
+  }
+}
+
+// Hide the calendar
+.flatpickr-months, .flatpickr-innerContainer {
+  display: none;
+}

@@ -9,9 +9,7 @@ const DatePickerQuickPick = (props) => (
         mode="range"
         pickerId="date-picker-quick-pick"
         placeholder="mm/dd/yyyy → mm/dd/yyyy"
-        position="below right"
         selectionType="quickpick"
-        staticPosition={false}
         {...props}
     />
   </div>

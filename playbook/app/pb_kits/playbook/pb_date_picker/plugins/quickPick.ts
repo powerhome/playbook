@@ -37,12 +37,10 @@ const quickPickPlugin = () => {
     }
     //creating the ul element for the nav dropdown and giving it classnames
     const rangesNav = document.createElement('ul');
+    
     // creating the pluginData object that will hold the properties of this plugin
     const pluginData: pluginDataType = {
       ranges: ranges,
-      // rangesOnly: typeof fp.config.rangesOnly === 'undefined' || fp.config.rangesOnly,
-      // rangesAllowCustom: typeof fp.config.rangesAllowCustom === 'undefined' || fp.config.rangesAllowCustom,
-      // rangesCustomLabel: typeof fp.config.rangesCustomLabel !== 'undefined' ? fp.config.rangesCustomLabel : 'Custom Range',
       rangesNav: rangesNav,
       rangesButtons: [],
     };
@@ -56,21 +54,25 @@ const quickPickPlugin = () => {
   const addRangeButton = (label: string) => {
 
     // create the button element and add class and text
-    const button = document.createElement('button');
-    button.type = "button";
-    button.className = "nav-link btn btn-link";
-    button.innerText = label;
+    const button = document.createElement('a');
+    button.className = "nav-item-link";
+    const itemLabel = document.createElement('span')
+    itemLabel.className = "nav-item-text"
+    itemLabel.innerHTML = label;
 
     // create li elements inside the dropdown
     const item = document.createElement('li');
-    item.className = "nav-item d-grid";
+    item.className = "nav-item";
 
     pluginData.rangesButtons[label] = button;
 
-    // append those buttons to the item
+    // append span text to anchor tag
+    pluginData.rangesButtons[label].appendChild(itemLabel)
+
+    // append those anchor tags to the li items
     item.appendChild(pluginData.rangesButtons[label]);
 
-    // append the item to the rangeNav prop
+    // append the li item to the ul rangeNav prop
     pluginData.rangesNav.appendChild(item);
 
     // return the ranges buton prop
@@ -78,18 +80,37 @@ const quickPickPlugin = () => {
   };
 
   const selectActiveRangeButton = (selectedDates: Array<string>) => {
-    console.log(selectedDates)
-    // let isPredefinedRange = false;
+
     const current = pluginData.rangesNav.querySelector('.active');
 
     if (current) {
       current.classList.remove('active');
     }
+      /** conditionaly statment to extract start and end dates from selectedDates, 
+        *   then loop through ranges prop in pluginData
+        *   and check if chosen dates equal to a date in the ranges prop
+        *   if they are equal, add the active class
+        */
+    if (selectedDates.length > 0) {
+
+      const startDate = moment(selectedDates[0]);
+      const endDate = selectedDates.length > 1 ? moment(selectedDates[1]) : startDate;
+
+      for (const [label, range] of Object.entries(pluginData.ranges)) {
+        if (startDate.isSame(moment(range[0]), 'day') && endDate.isSame(moment(range[1]), 'day')) {
+          pluginData.rangesButtons[label].classList.add('active');
+          break;
+        }
+      }
+    }
+
   }
 
     
     return {
+      // onReady is a hook from flatpickr that runs when calender is in a ready state
       onReady(selectedDates: Array<string>) {
+        // loop through the ranges and create an anchor tag for each range and add an event listiner to set the date when user clicks on a date range
         for (const [label, range] of Object.entries(pluginData.ranges)) {
           addRangeButton(label).addEventListener('click', function () {
 
@@ -107,28 +128,18 @@ const quickPickPlugin = () => {
             });
         }
 
+        // conditional to check if there is a dropdown to add it to the calendar container and git it the classes it needs
         if (pluginData.rangesNav.children.length > 0) {
-          // if (pluginData.rangesOnly && pluginData.rangesAllowCustom) {
-          //   const customButton = addRangeButton(pluginData.rangesCustomLabel);
-          //   // set custom range button to acti
-          //   customButton.addEventListener('click', function () {
-          //       const current = pluginData.rangesNav.querySelector('.active');
-          //       if (current) {
-          //         current.classList.remove('active');
-          //       }
-          //       customButton.classList.add('active');
-          //       fp.calendarContainer.classList.remove('flatpickr-predefined-ranges-only');
-          //     });
-          // }
+
           fp.calendarContainer.prepend(pluginData.rangesNav);
-          fp.calendarContainer.classList.add('flatpickr-has-predefined-ranges');
-          // make sure the right range button is active for the default value
+          pluginData.rangesNav.classList.add('quick-pick-ul')
+          fp.calendarContainer.classList.add('quick-pick-drop-down');
+          // funciton to give the active butto the active class
           selectActiveRangeButton(selectedDates);
         }
 
 
         /**
-         * Make sure the right range button is active when a value is manually entered
          *
          * @param {Array} selectedDates
          */
