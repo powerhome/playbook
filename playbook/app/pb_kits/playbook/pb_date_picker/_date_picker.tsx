@@ -96,7 +96,6 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputDataProps = buildDataProps(inputData)
 
   useEffect(() => {
-    // {selectionType !== "quickpick" && 
       datePickerHelper({
         allowInput,
         defaultDate,
@@ -121,7 +120,6 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
         yearRange,
         required: false,
       }, scrollContainer)
-    // }
   })
 
   const classes = classnames(
