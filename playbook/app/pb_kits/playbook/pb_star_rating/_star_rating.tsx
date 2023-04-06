@@ -30,8 +30,6 @@ const StarRating = ({
     "pb_star_rating_kit", className,
   ])
 
-  console.log(Math.floor(rating));
-  console.log("floor");
   const starCount = () => (
     [...Array(Math.floor(rating))]
   )

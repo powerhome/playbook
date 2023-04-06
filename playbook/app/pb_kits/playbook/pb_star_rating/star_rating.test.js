@@ -1,26 +1,65 @@
 import React from "react";
-import { render } from "../utilities/test-utils";
+import { render, screen } from "../utilities/test-utils";
 
 import StarRating from "./_star_rating";
 
+const testId = "star-rating-kit";
+
 describe("Star Rating Kit", () => {
-  test("Displays two highlighted stars", () => {
+  test("Expects to have correct classname", () => {
     render(
-      <StarRating rating={2} />
+      <StarRating
+          data={{ testid: testId }}
+          rating={2}
+      />
     );
 
-    const highlight = document.querySelector(".pb_star_rating_highlight");
+
+    const kit = screen.getByTestId(testId);
+    expect(kit).toHaveClass("pb_star_rating_kit");
+
+  });
+
+  test('should render aria-label', () => {
+    render(
+      <StarRating
+          aria={{ label: testId }}
+          data={{ testid: testId }}
+          rating={2}
+      />
+    );
+
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveAttribute('aria-label', testId)
+  });
+
+  test("Displays two highlighted stars", () => {
+    render(
+      <StarRating
+          data={{ testid: testId }}
+          rating={2}
+      />
+    );
+
+
+    const kit = screen.getByTestId(testId);
+    const highlight = kit.querySelector(".pb_star_rating_highlight");
     const stars = highlight.querySelectorAll(".far.fa-star");
     const count = stars.length;
 
     expect(count).toBe(2);
   });
+
   test("Displays three highlighted stars and a half star", () => {
     render(
-      <StarRating rating={3.5} />
+      <StarRating
+          data={{ testid: testId }}
+          rating={3.5}
+      />
     );
 
-    const highlight = document.querySelector(".pb_star_rating_highlight");
+    const kit = screen.getByTestId(testId);
+    const highlight = kit.querySelector(".pb_star_rating_highlight");
     const stars = highlight.querySelectorAll(".far.fa-star");
     const halfStars = highlight.querySelectorAll(".far.fa-star-half");
     const starCount = stars.length;
