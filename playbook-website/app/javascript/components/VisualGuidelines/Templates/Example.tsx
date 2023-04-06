@@ -20,24 +20,30 @@ type ExampleType = {
   description?: React.ReactChild[] | React.ReactChild | string,
   example?: string,
   globalProps?: { [key: string]: string[] | number[] },
+  globalPropsDescription?: React.ReactElement | React.ReactElement[] | string,
   screenSizes?: { [key: string]: string[] | number[] },
   title?: string,
-  tokens?: { [key: string]: string | number }
+  tokens?: { [key: string]: string | number },
+  tokensDescription?: React.ReactElement | React.ReactElement[] | string,
 }
 
 const Example = ({
   children,
   customChildren,
   description,
-  example,
+  example = '',
   globalProps,
+  globalPropsDescription = '',
   screenSizes,
   title,
   tokens,
+  tokensDescription = '',
 }: ExampleType): React.ReactElement => {
   const parser = new DOMParser(),
     parsedExample = parser.parseFromString(example, 'text/html'),
-    exampleHtml = parsedExample.body.innerHTML
+    exampleHtml = parsedExample.body.innerHTML,
+    defaultGlobalPropsDescription = screenSizes ? 'Available in every kit. These are added globally as they are most flexible when developing. *Screen sizes are optional.' : 'Available in every kit. These are added globally as they are most flexible when developing.',
+    defaultTokensDescription = 'Make your own styles using Playbook tokens to keep your site consistent.'
 
   return (
     <div id={title?.replace(/\s+/g, '')}>
@@ -66,7 +72,8 @@ const Example = ({
               text="Global Props"
           />
           <Body marginBottom="lg">
-            {screenSizes ? 'Available in every kit. These are added globally as they are most flexible when developing. *Screen sizes are optional.' : 'Available in every kit. These are added globally as they are most flexible when developing.'}
+            {globalPropsDescription && globalPropsDescription}
+            {!globalPropsDescription && defaultGlobalPropsDescription}
           </Body>
         </React.Fragment>
       )}
@@ -80,7 +87,8 @@ const Example = ({
               text="Tokens"
           />
           <Body marginBottom="lg">
-            {'Make your own styles using Playbook tokens to keep your site consistent.'}
+            {tokensDescription && tokensDescription}
+            {!tokensDescription && defaultTokensDescription}
           </Body>
         </React.Fragment>
       )}

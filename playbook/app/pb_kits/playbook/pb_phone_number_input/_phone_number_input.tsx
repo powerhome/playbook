@@ -89,6 +89,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const [itiInit, setItiInit] = useState<any>()
   const [error, setError] = useState('')
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
+  const [selectedData, setSelectedData] = useState()
 
   const validateTooLongNumber = (itiInit: any) => {
     const error = itiInit.getValidationError()
@@ -121,10 +122,16 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     validateOnlyNumbers()
   }
 
+  const getCurrentSelectedData = (itiInit: any, inputValue: string) => {
+    return { ...itiInit.getSelectedCountryData(), number: inputValue }
+  }
+
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(evt.target.value)
     validateTooLongNumber(itiInit)
-    onChange(evt)
+    const phoneNumberData = getCurrentSelectedData(itiInit, evt.target.value)
+    setSelectedData(phoneNumberData)
+    onChange(phoneNumberData)
     isValid(itiInit.isValidNumber())
   }
 
@@ -136,15 +143,21 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
 
   useEffect(() => {
     const telInputInit = new intlTelInput(inputRef.current, {
-        separateDialCode: true,
-        preferredCountries,
-        allowDropdown: !disabled,
-        initialCountry,
-        onlyCountries,
-      }
+      separateDialCode: true,
+      preferredCountries,
+      allowDropdown: !disabled,
+      initialCountry,
+      onlyCountries,
+    }
     )
-    
-    inputRef.current.addEventListener("countrychange", () => validateTooLongNumber(telInputInit))
+
+    inputRef.current.addEventListener("countrychange", (evt: Event) => {
+      validateTooLongNumber(telInputInit)
+      const phoneNumberData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
+      setSelectedData(phoneNumberData)
+      onChange(phoneNumberData)
+    })
+
     inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
     inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
 
@@ -156,6 +169,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
       <TextInput
         className={dropDownIsOpen ? 'dropdown_open' : ''}
         dark={dark}
+        data-phone-number={JSON.stringify(selectedData)}
         disabled={disabled}
         error={error}
         id={id}

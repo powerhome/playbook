@@ -78,6 +78,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     mode = 'single',
     name,
     onChange = () => { void 0 },
+    onClose,
     pickerId,
     placeholder = 'Select Date',
     plugins = false,
@@ -95,40 +96,46 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
 
-  useEffect(() => {
-      datePickerHelper({
-        allowInput,
-        defaultDate,
-        disableDate,
-        disableRange,
-        disableWeekdays,
-        enableTime,
-        format,
-        hideIcon,
-        inLine,
-        maxDate,
-        minDate,
-        mode,
-        onChange,
-        pickerId,
-        plugins,
-        position,
-        positionElement,
-        selectionType,
-        showTimezone,
-        staticPosition,
-        yearRange,
-        required: false,
-      }, scrollContainer)
-  })
+useEffect(() => {
+  datePickerHelper({
+    allowInput,
+    defaultDate,
+    disableDate,
+    disableRange,
+    disableWeekdays,
+    enableTime,
+    format,
+    hideIcon,
+    inLine,
+    maxDate,
+    minDate,
+    mode,
+    onChange,
+    onClose,
+    pickerId,
+    plugins,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    position,
+    positionElement,
+    selectionType,
+    showTimezone,
+    staticPosition,
+    yearRange,
+    required: false,
+  }, scrollContainer)
+})
+  const filteredProps = {...props}
+  delete filteredProps?.position
 
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
-    globalProps(props),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    globalProps(filteredProps),
     error ? 'error' : null,
     className
   )
-
   const iconWrapperClass = () => {
     let base = 'cal_icon_wrapper'
     if (dark) {

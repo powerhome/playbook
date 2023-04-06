@@ -1,3 +1,16 @@
+$relative: relative !default;
+$absolute: absolute !default;
+$fixed: fixed !default;
+$sticky: sticky !default;
+$static: static !default;
+$position: (
+  relative: $relative,
+  absolute: $absolute,
+  fixed: $fixed,
+  sticky: $sticky,
+  static: $static
+);
+
 // z_index variables
 $z_1: 100 !default;
 $z_2: 200 !default;

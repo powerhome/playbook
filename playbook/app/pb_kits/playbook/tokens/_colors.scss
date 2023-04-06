@@ -213,22 +213,62 @@ $status_color_text: (
 $primary_action:      $primary !default;
 
 /* Product colors ---------------------*/
-$windows:             $royal !default;
-$siding:              $yellow !default;
-$doors:               $teal !default;
-$solar:               $green !default;
-$roofing:             $slate !default;
-$gutters:             $purple !default;
-$insulation:          $red !default;
+$product_1_background:  #003DB2 !default;
+$product_1_highlight:   #0057FF !default;
+$product_2_background:  #6000AC !default;
+$product_2_highlight:   #8200E9 !default;
+$product_3_background:  #B85C00 !default;
+$product_3_highlight:   #CE7500 !default;
+$product_4_background:  #007E8F !default;
+$product_4_highlight:   #00B9D2 !default;
+$product_5_background:  #760B24 !default;
+$product_5_highlight:   #B8032E !default;
+$product_6_background:  #008540 !default;
+$product_6_highlight:   #00A851 !default;
+$product_7_background:  #96006C !default;
+$product_7_highlight:   #CD0094 !default;
+$product_8_background:  #144075 !default;
+$product_8_highlight:   #1A569E !default;
+$product_9_background:  #fcc419 !default;
+$product_9_highlight:   #ffd43b !default;
+$product_10_background: #20c997 !default;
+$product_10_highlight:  #38d9a9 !default;
+$windows:               $product_1_background !default; // deprecated
+$siding:                $product_2_background !default; // deprecated
+$doors:                 $product_3_background !default; // deprecated
+$solar:                 $product_4_background !default; // deprecated
+$roofing:               $product_5_background !default; // deprecated
+$gutters:               $product_6_background !default; // deprecated
+$insulation:            $product_7_background !default; // deprecated
 $product_colors: (
-  windows:            $windows,
-  siding:             $siding,
-  doors:              $doors,
-  solar:              $solar,
-  roofing:            $roofing,
-  gutters:            $gutters,
-  insulation:         $insulation
-);
+  windows:                $windows,
+  siding:                 $siding,
+  doors:                  $doors,
+  solar:                  $solar,
+  roofing:                $roofing,
+  gutters:                $gutters,
+  insulation:             $insulation,
+  product_1_background:   $product_1_background,
+  product_1_highlight:    $product_1_highlight,
+  product_2_background:   $product_2_background,
+  product_2_highlight:    $product_2_highlight,
+  product_3_background:   $product_3_background,
+  product_3_highlight:    $product_3_highlight,
+  product_4_background:   $product_4_background,
+  product_4_highlight:    $product_4_highlight,
+  product_5_background:   $product_5_background,
+  product_5_highlight:    $product_5_highlight,
+  product_6_background:   $product_6_background,
+  product_6_highlight:    $product_6_highlight,
+  product_7_background:   $product_7_background,
+  product_7_highlight:    $product_7_highlight,
+  product_8_background:   $product_8_background,
+  product_8_highlight:    $product_8_highlight,
+  product_9_background:   $product_9_background,
+  product_9_highlight:    $product_9_highlight,
+  product_10_background:  $product_10_background,
+  product_10_highlight:   $product_10_highlight
+) !default;
 
 /* Category colors ---------------------*/
 $category_1:   $royal !default;
