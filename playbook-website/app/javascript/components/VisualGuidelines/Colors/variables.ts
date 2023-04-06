@@ -63,13 +63,26 @@ export const TEXT_COLORS = [
  ]
 
  export const PRODUCTS = [
-  {name: "Windows", variable: "windows"},
-  {name: "Siding", variable: "siding"},
-  {name: "Doors", variable: "doors"},
-  {name: "Solar", variable: "solar"},
-  {name: "Roofing", variable: "roofing"},
-  {name: "Gutters", variable: "gutters"},
-  {name: "Attic Insulation", variable: "insulation"}
+  {name: "Product 1 Background", variable: "product_1_background"},
+  {name: "Product 1 Highlight", variable: "product_1_highlight"},
+  {name: "Product 2 Background", variable: "product_2_background"},
+  {name: "Product 2 Highlight", variable: "product_2_highlight"},
+  {name: "Product 3 Background", variable: "product_3_background"},
+  {name: "Product 3 Highlight", variable: "product_3_highlight"},
+  {name: "Product 4 Background", variable: "product_4_background"},
+  {name: "Product 4 Highlight", variable: "product_4_highlight"},
+  {name: "Product 5 Background", variable: "product_5_background"},
+  {name: "Product 5 Highlight", variable: "product_5_highlight"},
+  {name: "Product 6 Background", variable: "product_6_background"},
+  {name: "Product 6 Highlight", variable: "product_6_highlight"},
+  {name: "Product 7 Background", variable: "product_7_background"},
+  {name: "Product 7 Highlight", variable: "product_7_highlight"},
+  {name: "Product 8 Background", variable: "product_8_background"},
+  {name: "Product 8 Highlight", variable: "product_8_highlight"},
+  {name: "Product 9 Background", variable: "product_9_background"},
+  {name: "Product 9 Highlight", variable: "product_9_highlight"},
+  {name: "Product 10 Background",  variable: "product_10_background"},
+  {name: "Product 10 Highlight", variable: "product_10_highlight"}
  ]
 
  export const CATEGORY = [

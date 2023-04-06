@@ -5,22 +5,22 @@ const LegendColors = (props) => (
   <div>
     <Legend
         color="data_8"
-        text="Windows"
+        text="Data 8"
         {...props}
     />
     <Legend
         color="warning"
-        text="Windows"
+        text="Warning"
         {...props}
     />
     <Legend
-        color="windows"
-        text="Windows"
+        color="product_6_highlight"
+        text="Product 6 (highlight)"
         {...props}
     />
     <Legend
         color="category_7"
-        text="Windows"
+        text="Category 7"
         {...props}
     />
   </div>

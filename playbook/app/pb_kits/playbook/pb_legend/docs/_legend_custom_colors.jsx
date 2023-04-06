@@ -5,17 +5,17 @@ const LegendCustomColors = (props) => (
   <div>
     <Legend
         color="#dc418a"
-        text="Windows"
+        text="Custom Legend Color 1"
         {...props}
     />
     <Legend
         color="#3ef0b8"
-        text="Windows"
+        text="Custom Legend Color 2"
         {...props}
     />
     <Legend
         color="#ab8b04"
-        text="Windows"
+        text="Custom Legend Color 3"
         {...props}
     />
   </div>

@@ -122,7 +122,11 @@ module ApplicationHelper
 private
 
   def dark_mode_props(props)
-    (props || {}).merge(dark: dark_mode?)
+    if props[:dark].nil?
+      (props || {}).merge(dark: dark_mode?)
+    else
+      props
+    end
   end
 
   def dark_mode?
