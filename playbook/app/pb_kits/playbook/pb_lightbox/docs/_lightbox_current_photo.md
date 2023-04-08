@@ -1,0 +1,1 @@
+The `currentPhoto` prop allows the user to pass a number to the lightbox that will set the current slide by index. This can be leveraged if the user wants to change slides using custom buttons.
