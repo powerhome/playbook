@@ -47,7 +47,6 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
   } = props
 
   const [activePhoto, setActivePhoto] = useState(initialPhoto)
-
   useEffect(() => {
     onChange(activePhoto)
   },[activePhoto])
