@@ -35,7 +35,7 @@ test('Shows selected images', () => {
         data={{ testid: testId }}
         icon="close"
         id="test1"
-        initialPhoto={1}
+        initialPhoto={0}
         onClose={() => {}}
         photos={TEST_PHOTOS}
     />
@@ -43,7 +43,7 @@ test('Shows selected images', () => {
   const kit = screen.getByTestId(testId)
   const slide = kit.getElementsByClassName('Slide')[0]
   const image = slide.getElementsByTagName('img')[0]
-  expect(image).toHaveAttribute('src', TEST_PHOTOS[1])
+  expect(image).toHaveAttribute('src', TEST_PHOTOS[0])
 
   const thumbnails = kit.getElementsByClassName('Thumbnail')
 
