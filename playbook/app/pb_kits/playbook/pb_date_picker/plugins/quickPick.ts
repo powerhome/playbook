@@ -135,7 +135,7 @@ const quickPickPlugin = () => {
                 fp.clear();
               }
               else {
-                fp.setDate([start, end], true);
+                fp.setDate([start, "→", end], true);
               }
 
               fp.close();
@@ -148,20 +148,11 @@ const quickPickPlugin = () => {
           fp.calendarContainer.prepend(pluginData.rangesNav);
           pluginData.rangesNav.classList.add('quick-pick-ul')
           fp.calendarContainer.classList.add('quick-pick-drop-down');
-          // funciton to give the active butto the active class
+          // function to give the active butto the active class
           selectActiveRangeButton(selectedDates);
         }
-
-
-        /**
-         *
-         * @param {Array} selectedDates
-         */
         
       },
-      onValueUpdate(selectedDates: Array<string>) {
-        selectActiveRangeButton(selectedDates);
-      }
     };
   };
 }

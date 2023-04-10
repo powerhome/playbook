@@ -51,6 +51,6 @@
 }
 
 // Hide the calendar
-.flatpickr-months, .flatpickr-innerContainer {
+.quick-pick-drop-down > .flatpickr-months, .quick-pick-drop-down > .flatpickr-innerContainer {
   display: none;
 }

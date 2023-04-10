@@ -152,6 +152,9 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       },
     ] : disabledParser(),
     enableTime,
+    locale: {
+      rangeSeparator: ' → '
+    },
     maxDate,
     minDate,
     mode,
