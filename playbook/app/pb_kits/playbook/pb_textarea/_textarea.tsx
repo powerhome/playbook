@@ -1,11 +1,10 @@
-/* @flow */
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import React, { forwardRef, useEffect, useRef } from 'react'
 import classnames from 'classnames'
 
-import PbTextarea from './'
-import type { InputCallback } from '../types.js'
+import PbTextarea from '.'
+import type { InputCallback } from '../types'
 
 import { globalProps } from '../utilities/globalProps'
 
@@ -17,7 +16,7 @@ import FlexItem from '../pb_flex/_flex_item'
 type TextareaProps = {
   characterCount?: string,
   className?: string,
-  children?: array<React.ReactChild>,
+  children?: React.ReactChild[],
   disabled?: boolean,
   error?: string,
   id?: string,
@@ -52,8 +51,8 @@ const Textarea = ({
   rows = 4,
   value,
   ...props
-}: TextareaProps, ref: React.ElementRef<"textarea">) => {
-  ref = ref || useRef(false)
+}: TextareaProps) => {
+  const ref = useRef<HTMLTextAreaElement>(null)
   useEffect(() => {
     if (ref.current && resize === 'auto') {
       PbTextarea.addMatch(ref.current)
@@ -66,10 +65,10 @@ const Textarea = ({
   const classes = classnames('pb_textarea_kit', errorClass, inlineClass, resizeClass, globalProps(props), className)
 
   const characterCounter = () => {
-    return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : checkIfZero(characterCount)
+    return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
   }
 
-  const checkIfZero = (characterCount) => {
+  const checkIfZero = (characterCount: string | number) => {
     return characterCount == 0 ? characterCount.toString() : characterCount
   }
 
@@ -78,10 +77,8 @@ const Textarea = ({
       <Caption
           text={label}
       />
-      <If condition={children}>
-        {children}
-        <Else />
-        <textarea
+        {children || (
+          <textarea
             className="pb_textarea_kit"
             disabled={disabled}
             name={name}
@@ -92,42 +89,27 @@ const Textarea = ({
             rows={rows}
             value={value}
             {...props}
-        />
-        <If condition={error}>
-          <If condition={characterCount}>
-            <Flex
-                spacing="between"
-                vertical="center"
-            >
+          />
+        )}
+  {error && (
+        <>
+          {characterCount ? (
+            <Flex spacing="between" vertical="center">
               <FlexItem>
-                <Body
-                    margin="none"
-                    status="negative"
-                    text={error}
-                />
+                <Body margin="none" status="negative" text={error} />
               </FlexItem>
               <FlexItem>
-                <Caption
-                    margin="none"
-                    size="xs"
-                    text={characterCounter()}
-                />
+                <Caption margin="none" size="xs" text={characterCounter()} />
               </FlexItem>
             </Flex>
-            <Else />
-            <Body
-                status="negative"
-                text={error}
-            />
-          </If>
-          <Else />
-          <Caption
-              margin="none"
-              size="xs"
-              text={characterCounter()}
-          />
-        </If>
-      </If>
+          ) : (
+            <Body status="negative" text={error} />
+          )}
+        </>
+      )}
+      {!error && (
+        <Caption margin="none" size="md" text={characterCounter()} />
+      )}
     </div>
   )
 }
