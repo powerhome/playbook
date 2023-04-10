@@ -33,6 +33,19 @@
         color: lightenText($color_value);
       }
     }
+    @each $color_name, $color_value in $pb_card_header_colors {
+      &[class*=_#{$color_name}_striped] {
+        @if ((type-of($color_value) == color)) {
+          background: repeating-linear-gradient(
+            45deg,
+            $color_value,
+            $color_value 10px,
+            lighten( $color_value, 5% ) 10px,
+            lighten( $color_value, 5% ) 20px
+          );
+        }
+      }
+    }
     &[class*=_white] {
       border-bottom: 1px solid $border_light;
     }
