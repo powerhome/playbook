@@ -1,9 +1,13 @@
 {
   "name": "@playbook-ui/rich-text-editor",
-  "version": "0.2.0",
-  "description": "",
+  "version": "0.1.0",
   "main": "index.js",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/powerhome/playbook.git",
+    "directory": "playbook/packages/rich-text-editor"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c"
@@ -11,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tip-tap/starter-kit": "^2.0.2",
     "@tiptap/extension-bubble-menu": "^2.0.2",
     "@tiptap/extension-image": "^2.0.2",
     "@tiptap/extension-link": "^2.0.2",
@@ -23,5 +26,11 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2"
-  }
+  },
+  "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/powerhome/playbook/issues"
+  },
+  "homepage": "https://github.com/powerhome/playbook#readme",
+  "description": ""
 }

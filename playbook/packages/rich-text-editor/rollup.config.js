@@ -10,5 +10,9 @@ export default {
     name: 'MyLibrary',
     sourcemap: true,
   },
+  external: [
+    'react', 
+    'react-dom'
+  ],
   plugins: [resolve(), commonjs(), terser()],
 };
