@@ -1,7 +1,6 @@
 import moment from 'moment'
 
 type FpTypes = {
-  selectedDates: string | any[],
   setDate: (arg0: any, arg1: boolean) => void,
   config: { [key: string]: string },
   clear: (arg0: boolean, arg1: boolean) => void,
@@ -21,7 +20,6 @@ type pluginDataType = {
 }
 
 const quickPickPlugin = () => {
-  // console.log("quickpick")
   return function (fp: FpTypes & any): any {
 
   // variable that holds the ranges available
@@ -94,13 +92,12 @@ const quickPickPlugin = () => {
   };
 
   const selectActiveRangeButton = (selectedDates: Array<string>) => {
-
     const current = pluginData.rangesNav.querySelector('.active');
 
     if (current) {
       current.classList.remove('active');
     }
-      /** conditionaly statment to extract start and end dates from selectedDates, 
+      /** conditional statment to extract start and end dates from selectedDates, 
         *   then loop through ranges prop in pluginData
         *   and check if chosen dates equal to a date in the ranges prop
         *   if they are equal, add the active class
@@ -135,7 +132,7 @@ const quickPickPlugin = () => {
                 fp.clear();
               }
               else {
-                fp.setDate([start, "→", end], true);
+                fp.setDate([start, end], true);
               }
 
               fp.close();
@@ -148,11 +145,20 @@ const quickPickPlugin = () => {
           fp.calendarContainer.prepend(pluginData.rangesNav);
           pluginData.rangesNav.classList.add('quick-pick-ul')
           fp.calendarContainer.classList.add('quick-pick-drop-down');
+
+        /**
+         *
+         * @param {Array} selectedDates
+         */
+        
           // function to give the active butto the active class
           selectActiveRangeButton(selectedDates);
         }
         
       },
+      onValueUpdate(selectedDates: Array<string>) {
+        selectActiveRangeButton(selectedDates);
+      }
     };
   };
 }

@@ -95,10 +95,8 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
     // month and week selection
     if (selectionType === "month" || plugins.length > 0) {
-      console.log("month")
       pluginList.push(monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }))
     } else if ( selectionType === "week") {
-      console.log("week")
       pluginList.push(weekSelect())
 
     } else if (selectionType === "quickpick") {
