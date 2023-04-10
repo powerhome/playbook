@@ -2,7 +2,7 @@ React:
 
 <Body lineHeight="looser">
   Body content
-<Body/>
+</Body>
 
 
 Rails: 

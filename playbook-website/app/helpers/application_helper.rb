@@ -115,13 +115,26 @@ module ApplicationHelper
     super kit, props: dark_mode_props(props), &block
   end
 
+  def description(kit, example_key)
+    read_kit_file(kit, "_#{example_key}.md")
+  end
+
 private
 
   def dark_mode_props(props)
-    (props || {}).merge(dark: dark_mode?)
+    if props[:dark].nil?
+      (props || {}).merge(dark: dark_mode?)
+    else
+      props
+    end
   end
 
   def dark_mode?
     cookies[:dark_mode].eql? "true"
+  end
+
+  def read_kit_file(kit, *args)
+    path = ::Playbook.kit_path(kit, "docs", *args)
+    path.exist? ? path.read : ""
   end
 end

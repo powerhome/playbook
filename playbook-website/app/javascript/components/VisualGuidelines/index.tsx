@@ -5,7 +5,7 @@ import React, { useRef, useEffect } from "react";
 
 import Colors from "./Colors";
 import MaxWidth from "./Examples/MaxWidth";
-import Positioning from "./Examples/Positioning";
+import ZIndex from "./Examples/ZIndex";
 import LineHeight from "./Examples/LineHeight";
 import NumberSpacing from "./Examples/NumberSpacing";
 import Shadows from "./Examples/Shadows";
@@ -15,6 +15,7 @@ import Typography from "./Examples/Typography";
 import Display from "./Examples/Display";
 import Cursor from "./Examples/Cursor";
 import FlexBox from "./Examples/FlexBox";
+import Position from "./Examples/Position";
 
 const VisualGuidelines = ({
   examples,
@@ -36,9 +37,13 @@ const VisualGuidelines = ({
         <Colors />
       </div>
       <MaxWidth example={examples.width_jsx} />
-      <Positioning
-        example={examples.positioning_jsx}
+      <Position
+        example={examples.position_jsx}
         tokensExample={examples.position_token}
+      />
+      <ZIndex
+        example={examples.z_index_jsx}
+        tokensExample={examples.z_index_token}
       />
       <LineHeight
         example={examples.line_height_code_jsx}

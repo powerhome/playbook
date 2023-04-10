@@ -1,5 +1,54 @@
 
 
+## [12.14.0](https://github.com/powerhome/playbook/tree/12.14.0) (2023-04-06)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.13.0...12.14.0)
+
+**Kit Enhancements:**
+
+- Added New Product Tokens [\#2431](https://github.com/powerhome/playbook/pull/2431) ([jasoncypret](https://github.com/jasoncypret))
+- Datepicker onClose Prop [\#2425](https://github.com/powerhome/playbook/pull/2425) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Fixes Bad Doc Example Code Snippets [\#2432](https://github.com/powerhome/playbook/pull/2432) ([jasperfurniss](https://github.com/jasperfurniss))
+- Update dependency capybara to v3.39.0 [\#2429](https://github.com/powerhome/playbook/pull/2429) ([renovate[bot]](https://github.com/apps/renovate))
+- Changing the Phone Number Input Returned Value Format [\#2427](https://github.com/powerhome/playbook/pull/2427) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Position Global Prop [\#2426](https://github.com/powerhome/playbook/pull/2426) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+## [12.13.0](https://github.com/powerhome/playbook/tree/12.13.0) (2023-04-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.12.0...12.13.0)
+
+**Kit Enhancements:**
+
+- Adding xxs size to Flex gap, columnGap and rowGap [\#2423](https://github.com/powerhome/playbook/pull/2423) ([nidaqg](https://github.com/nidaqg))
+- Selectable List to Typescript [\#2421](https://github.com/powerhome/playbook/pull/2421) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Updating Sandpack Layout Styles [\#2420](https://github.com/powerhome/playbook/pull/2420) ([carloslimasd](https://github.com/carloslimasd))
+- Update dependency selenium-webdriver to v4.8.6 [\#2417](https://github.com/powerhome/playbook/pull/2417) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [12.12.0](https://github.com/powerhome/playbook/tree/12.12.0) (2023-03-30)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.11.0...12.12.0)
+
+**Kit Enhancements:**
+
+- Custom Tooltip Prop for Circle Chart [\#2415](https://github.com/powerhome/playbook/pull/2415) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Update dependency slim-rails to v3.6.2 [\#2416](https://github.com/powerhome/playbook/pull/2416) ([renovate[bot]](https://github.com/apps/renovate))
+- Addresses critical security Active Record RCE bug \#86 \#87 [\#2403](https://github.com/powerhome/playbook/pull/2403) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
 ## [12.11.0](https://github.com/powerhome/playbook/tree/12.11.0) (2023-03-28)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.10.0...12.11.0)

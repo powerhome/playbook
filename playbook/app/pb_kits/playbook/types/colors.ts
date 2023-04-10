@@ -1,6 +1,6 @@
 export type BackgroundColors = "white" | "dark" | "light"
 export type CategoryColors = "category_1" | "category_2" | "category_3" | "category_4" | "category_5" | "category_6" | "category_7" | "category_8" | "category_9" | "category_10" | "category_11" | "category_12" | "category_13" | "category_14" | "category_15" | "category_16" | "category_17" | "category_18" | "category_19" | "category_20" | "category_21"
-export type ProductColors = "windows" | "siding" | "doors" | "solar" | "roofing" | "gutters" | "insulation"
+export type ProductColors = "$product_1_background" | "$product_1_highlight" | "$product_2_background" | "$product_2_highlight" | "$product_3_background" | "$product_3_highlight" | "$product_4_background" | "$product_4_highlight" | "$product_5_background" | "$product_5_highlight" | "$product_6_background" | "$product_6_highlight" | "$product_7_background" | "$product_7_highlight" | "$product_8_background" | "$product_8_highlight" | "$product_9_background" | "$product_9_highlight" | "$product_10_background" | "$product_10_highlight" | "windows" | "siding" | "doors" | "solar" | "roofing" | "gutters" | "insulation"
 export type TextColors = "text_lt_default" | "text_lt_light" | "text_lt_lighter" | "text_dk_default" | "text_dk_default" | "text_dk_default"
 export type CardColors = "card_light" | "card_dark"
 export type StatusColors = "success" | "warning" | "error" | "info" | "neutral"

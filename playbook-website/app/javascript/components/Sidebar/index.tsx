@@ -4,7 +4,8 @@ import {Nav, NavItem, Caption} from 'playbook-ui'
 export const MENU_ITEMS = [
   "Colors",
   "Max Width",
-  "Positioning",
+  "Position",
+  "Z-Index",
   "Line Height",
   "Number Spacing",
   "Shadows",

@@ -6,11 +6,13 @@ import {
   SandpackCodeEditor,
 } from "@codesandbox/sandpack-react"
 
-import { CircleIconButton, Card, Caption } from "playbook-ui"
+import AnimateHeight from 'react-animate-height'
+import { Button, Caption } from "playbook-ui"
 import entryPoint from "./entryPoint"
 
 const KitDocs = ({ source, exampleTitle }) => {
-  const [showCode, setShowCode] = useState(false)
+  const [editorHeight, setEditorHeight] = useState(0);
+
   const code = source
     .replace(
       /import (\w+) from ('|")\.\.\/_(\w+)('|")/g,
@@ -23,64 +25,86 @@ const KitDocs = ({ source, exampleTitle }) => {
 
   return (
     <>
-      <Card className='pb--doc' padding='none'>
-        <SandpackProvider
-          files={{
-            "/style.css": {
-              code: `body { background: white };`,
-              hidden: true,
-            },
-            "/App.js": {
-              code: code,
-            },
-            "/index.js": {
-              code: entryPoint,
-              hidden: true,
-            },
-          }}
-          theme='dark'
-          template='react'
-          customSetup={{
-            entry: "/src/index.js",
-            dependencies: {
-              "playbook-ui": "latest",
-            },
-          }}
-          options={{
-            externalResources: [
-              "https://kit.fontawesome.com/098a1cd4d5.js",
-              "https://unpkg.com/playbook-ui@latest/dist/playbook.css",
-              "https://unpkg.com/playbook-ui@latest/dist/reset.css",
-            ],
-          }}
-        >
-          <SandpackLayout style={{ backgroundColor: "white", border: "none" }}>
-            <div style={{ width: "100%" }}>
-              <div className='pb--kit-example'>
-                <Caption paddingBottom='md' text={exampleTitle}></Caption>
+      <SandpackProvider
+        files={{
+          "/style.css": {
+            code: `body { background: white };`,
+            hidden: true,
+          },
+          "/App.js": {
+            code: code,
+          },
+          "/index.js": {
+            code: entryPoint,
+            hidden: true,
+          },
+        }}
+        theme='dark'
+        template='react'
+        customSetup={{
+          entry: "/src/index.js",
+          dependencies: {
+            "playbook-ui": "latest",
+          },
+        }}
+        options={{
+          externalResources: [
+            "https://kit.fontawesome.com/098a1cd4d5.js",
+            "https://unpkg.com/playbook-ui@latest/dist/playbook.css",
+            "https://unpkg.com/playbook-ui@latest/dist/reset.css",
+          ],
+        }}
+      >
+        <SandpackLayout style={{ backgroundColor: "white", border: "none" }}>
+          <div style={{ width: "100%" }}>
+            <div className='pb--kit-example'>
+              <Caption paddingBottom='md' text={exampleTitle}></Caption>
 
-                <SandpackPreview
-                  style={{ height: "450px" }}
-                  showOpenInCodeSandbox={false}
-                  showRefreshButton={false}
-                  actionsChildren={
-                    <CircleIconButton
-                      icon='pen'
-                      variant='secondary'
-                      onClick={() => setShowCode(!showCode)}
-                    />
-                  }
+              <SandpackPreview
+                showOpenInCodeSandbox={false}
+                showRefreshButton={false}
+              />
+            </div>
+
+            {editorHeight === 0 && (
+              <div style={{ width: "100%", display: "flex", justifyContent: "right" }}>
+                <Button
+                  icon='code'
+                  marginRight='xl'
+                  onClick={() => setEditorHeight('auto')}
+                  paddingX="none"
+                  tabIndex={0}
+                  text='Show Code'
+                  variant='link'
                 />
               </div>
-            </div>
-            {showCode && (
-              <SandpackCodeEditor
-                style={{ height: "100%", maxHeight: "450px" }}
-              />
             )}
-          </SandpackLayout>
-        </SandpackProvider>
-      </Card>
+
+            {editorHeight === 'auto' && (
+              <div style={{ width: "100%", display: "flex", justifyContent: "right" }}>
+                <Button
+                  icon='times'
+                  marginRight='xl'
+                  onClick={() => setEditorHeight(0)}
+                  paddingX="none"
+                  tabIndex={0}
+                  text='Close Code'
+                  variant='link'
+                />
+              </div>
+            )}
+
+            <AnimateHeight
+              duration={500}
+              height={editorHeight}
+            >
+              <SandpackCodeEditor
+                style={{ height: "100%", maxHeight: "300px" }}
+              />
+            </AnimateHeight>
+          </div>
+        </SandpackLayout>
+      </SandpackProvider>
     </>
   )
 }
