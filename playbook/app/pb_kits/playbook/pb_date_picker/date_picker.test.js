@@ -158,4 +158,47 @@ describe('DatePicker Kit', () => {
       expect(input).toHaveValue('01/01/2020 at 12:00 PM')
     })
   })
+  test('shows DatePicker QuickPick dropdown', async () => {
+    const testId = 'datepicker-quick-pick'
+    render(
+      <DatePicker
+          allowInput
+          data={{ testid: testId }}
+          mode="range"
+          pickerId="date-picker-quick-pick"
+          placeholder="mm/dd/yyyy → mm/dd/yyyy"
+          selectionType="quickpick"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('mm/dd/yyyy → mm/dd/yyyy')
+
+    fireEvent(
+      input,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    const today = within(kit).getByText('Today')
+    const thisYear = within(kit).getByText('This year')
+    await waitFor(() => {
+      expect(today).toBeInTheDocument()
+      expect(thisYear).toBeInTheDocument()
+    })
+
+    fireEvent(
+      thisYear,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+
+    await waitFor(() => {
+      expect(input).toHaveValue('01/01/2023 → 12/31/2023')
+    })
+
+  })
 })
