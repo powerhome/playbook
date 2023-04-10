@@ -103,65 +103,6 @@ module Playbook
         class_string += error_class
         class_string
       end
-
-      def format_date(date)
-        date.strftime("%m/%d/%Y")
-      end
-
-      def date_ranges
-        [
-          {
-            label: "Today",
-            start_date: format_date(::Date.current),
-            end_date: format_date(::Date.current),
-          },
-          {
-            label: "Yesterday",
-            start_date: format_date(::Date.current.yesterday),
-            end_date: format_date(::Date.current.yesterday),
-          },
-          {
-            label: "This Week",
-            start_date: format_date(::Date.current.beginning_of_week),
-            end_date: format_date(::Date.current.end_of_week),
-          },
-          {
-            label: "This Month",
-            start_date: format_date(::Date.current.beginning_of_month),
-            end_date: format_date(::Date.current),
-          },
-          {
-            label: "This Quarter",
-            start_date: format_date(::Date.current.beginning_of_quarter),
-            end_date: format_date(::Date.current),
-          },
-          {
-            label: "This Year",
-            start_date: format_date(::Date.current.beginning_of_year),
-            end_date: format_date(::Date.current),
-          },
-          {
-            label: "Last Week",
-            start_date: format_date(::Date.current.last_week.beginning_of_week),
-            end_date: format_date(::Date.current.last_week.end_of_week),
-          },
-          {
-            label: "Last Month",
-            start_date: format_date(::Date.current.last_month.beginning_of_month),
-            end_date: format_date(::Date.current.last_month.end_of_month),
-          },
-          {
-            label: "Last Quarter",
-            start_date: format_date(::Date.current.last_quarter.beginning_of_quarter),
-            end_date: format_date(::Date.current.last_quarter.end_of_quarter),
-          },
-          {
-            label: "Last Year",
-            start_date: format_date(::Date.current.last_year.beginning_of_year),
-            end_date: format_date(::Date.current.last_year.end_of_year),
-          },
-        ]
-      end
     end
   end
 end
