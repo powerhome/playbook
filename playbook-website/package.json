@@ -10,7 +10,7 @@
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@fortawesome/fontawesome-pro": "^6.2.1",
-    "@rails/webpacker": "5.2.1",
+    "@rails/webpacker": "5.4.4",
     "maplibre-gl": "^2.4.0",
     "playbook-ui": ">= 1",
     "react": "^17.0.2",
