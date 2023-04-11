@@ -5,4 +5,5 @@ export type ToolbarTypes = {
     text?: string,
     onclick?: () => {}
     classname?: string
+    disable?: boolean
 }
