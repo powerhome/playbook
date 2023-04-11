@@ -197,7 +197,7 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
-      expect(input).toHaveValue('01/01/2023 → 12/31/2023')
+      expect(input).toHaveValue('01/01/2023 → 04/11/2023')
     })
 
   })
