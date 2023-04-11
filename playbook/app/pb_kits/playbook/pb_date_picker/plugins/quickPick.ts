@@ -27,9 +27,9 @@ const quickPickPlugin = () => {
       'Today': [new Date(), new Date()],
       'Yesterday': [moment().subtract(1, 'days').toDate(), moment().subtract(1, 'days').toDate()],
       'This week': [moment().startOf('week').toDate(), moment().endOf('week').toDate()],
-      'This month': [moment().startOf('month').toDate(), moment().endOf('month').toDate()],
-      'This quarter': [moment().startOf('quarter').toDate(), moment().endOf('quarter').toDate()],
-      'This year': [moment().startOf('year').toDate(), moment().endOf('year').toDate()],
+      'This month': [moment().startOf('month').toDate(), new Date()],
+      'This quarter': [moment().startOf('quarter').toDate(), new Date()],
+      'This year': [moment().startOf('year').toDate(), new Date()],
       'Last week': [
           moment().subtract(1, 'week').startOf('week').toDate(),
           moment().subtract(1, 'week').endOf('week').toDate()
@@ -97,11 +97,11 @@ const quickPickPlugin = () => {
     if (current) {
       current.classList.remove('active');
     }
-      /** conditional statment to extract start and end dates from selectedDates, 
-        *   then loop through ranges prop in pluginData
-        *   and check if chosen dates equal to a date in the ranges prop
-        *   if they are equal, add the active class
-        */
+    /** conditional statment to extract start and end dates from selectedDates, 
+    *   then loop through ranges prop in pluginData
+    *   and check if chosen dates equal to a date in the ranges prop
+    *   if they are equal, add the active class
+    */
     if (selectedDates.length > 0) {
 
       const startDate = moment(selectedDates[0]);
@@ -114,7 +114,6 @@ const quickPickPlugin = () => {
         }
       }
     }
-
   }
 
     
