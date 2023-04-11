@@ -8,9 +8,12 @@
     "release": "RAILS_ENV=production NODE_ENV=production ./bin/webpack"
   },
   "dependencies": {
-    "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@fortawesome/fontawesome-pro": "^6.2.1",
+    "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@rails/webpacker": "5.2.1",
+    "@tiptap/pm": "^2.0.2",
+    "@tiptap/react": "^2.0.2",
+    "@tiptap/starter-kit": "^2.0.2",
     "maplibre-gl": "^2.4.0",
     "playbook-ui": ">= 1",
     "react": "^17.0.2",

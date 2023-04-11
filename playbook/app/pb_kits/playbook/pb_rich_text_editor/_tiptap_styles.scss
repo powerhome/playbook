@@ -1,0 +1,114 @@
+@import "tokens/border_radius";
+@import "tokens/colors";
+
+[class^="pb_rich_text_editor_kit"] {
+  .toolbar_button {
+    display: flex;
+    align-items: center;
+    background: $transparent;
+    border: none;
+    border-radius: $border_rad_heaviest;
+    color: $text_lt_light;
+    cursor: pointer;
+    &_icon {
+      width: 42px;
+      height: 42px;
+    }
+    &.open {
+      color: $primary;
+    }
+    &.active,
+    &:active {
+      color: $primary;
+      background-color: $bg_light;
+    }
+    &:hover:not([disabled]) {
+      background-color: $neutral_subtle;
+    }
+    &:disabled {
+      .pb_icon_kit {
+        color: $border_light;
+      }
+    }
+  }
+
+  .toolbar {
+  border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
+  &_block {
+    gap: $space_xs;
+  }
+  .editor-dropdown-button {
+    background: transparent;
+    border: none;
+    color: $text_lt_light;
+    cursor: pointer;
+    font-weight: $light;
+    padding: 7px 0px;
+    width: 120px;
+  }
+}
+
+  .ProseMirror {
+    height: 100%;
+    padding: 1.5rem;
+    > * + * {
+      margin-top: 0.75em;
+    }
+
+    code {
+      background-color: rgba(#616161, 0.1);
+      color: #616161;
+    }
+
+    pre {
+      background: #0d0d0d;
+      color: #fff;
+      font-family: "JetBrainsMono", monospace;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+
+      code {
+        color: inherit;
+        padding: 0;
+        background: none;
+        font-size: 0.8rem;
+      }
+    }
+
+    blockquote {
+      padding-left: 2rem;
+      margin-left: 1rem;
+      border-left: 2px solid rgba(#0d0d0d, 0.1);
+    }
+
+    p {
+      &.is-editor-empty {
+        &:first-child {
+          &::before {
+            color: $text_lt_light;
+            content: attr(data-placeholder);
+            float: left;
+            height: 0;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+  .tiptap-editor {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    padding-top: $space_xl;
+    background-color: $white;
+    margin: auto;
+    height: 100%;
+    > div {
+      flex-grow: 1;
+      width: 950px;
+      display: flex;
+      align-self: center;
+      flex-direction: column;
+    }
+  }
+}

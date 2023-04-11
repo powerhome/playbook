@@ -17,8 +17,8 @@ type NavProps = {
   id?: string,
   onClick?: React.MouseEventHandler<HTMLElement>,
   orientation?: "vertical" | "horizontal",
-  link: string,
-  title: string,
+  link?: string,
+  title?: string,
   variant?: "normal" | "subtle",
 }
 
