@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import PbTextarea from '.'
 import type { InputCallback } from '../types'
 
+import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -14,9 +15,11 @@ import Flex from '../pb_flex/_flex'
 import FlexItem from '../pb_flex/_flex_item'
 
 type TextareaProps = {
+  aria?: {[key: string]: string},
   characterCount?: string,
   className?: string,
   children?: React.ReactChild[],
+  data?: {[key: string]: string},
   disabled?: boolean,
   error?: string,
   id?: string,
@@ -30,14 +33,16 @@ type TextareaProps = {
   name?: string,
   required?: boolean,
   rows?: number,
-  resize: 'none' | 'both' | 'horizontal' | 'vertical' | 'auto',
+  resize: "none" | "both" | "horizontal" | "vertical" | "auto",
   onChange?: InputCallback<HTMLTextAreaElement>,
 }
 
 const Textarea = ({
+  aria = {},
   characterCount,
   className,
   children,
+  data = {},
   disabled,
   inline = false,
   resize = 'none',
@@ -51,8 +56,8 @@ const Textarea = ({
   rows = 4,
   value,
   ...props
-}: TextareaProps) => {
-  const ref = useRef<HTMLTextAreaElement>(null)
+}: TextareaProps, ref: any) => {
+  ref = useRef<HTMLTextAreaElement>(null)
   useEffect(() => {
     if (ref.current && resize === 'auto') {
       PbTextarea.addMatch(ref.current)
@@ -64,6 +69,8 @@ const Textarea = ({
   const resizeClass = `resize_${resize}`
   const classes = classnames('pb_textarea_kit', errorClass, inlineClass, resizeClass, globalProps(props), className)
   const noCount = typeof characterCount !== 'undefined'
+  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
+  const dataProps: {[key: string]: any} = buildDataProps(data)
 
   const characterCounter = () => {
     return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
@@ -74,7 +81,11 @@ const Textarea = ({
   }
 
   return (
-    <div className={classes}>
+    <div
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
+    >
       <Caption text={label} />
       {children || (
         <textarea
