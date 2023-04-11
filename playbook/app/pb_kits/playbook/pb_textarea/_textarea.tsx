@@ -63,6 +63,7 @@ const Textarea = ({
   const inlineClass = inline ? 'inline' : ''
   const resizeClass = `resize_${resize}`
   const classes = classnames('pb_textarea_kit', errorClass, inlineClass, resizeClass, globalProps(props), className)
+  const noCount = typeof characterCount !== 'undefined'
 
   const characterCounter = () => {
     return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
@@ -74,24 +75,23 @@ const Textarea = ({
 
   return (
     <div className={classes}>
-      <Caption
-          text={label}
-      />
-        {children || (
-          <textarea
-            className="pb_textarea_kit"
-            disabled={disabled}
-            name={name}
-            onChange={onChange}
-            placeholder={placeholder}
-            ref={ref}
-            required={required}
-            rows={rows}
-            value={value}
-            {...props}
-          />
-        )}
-  {error && (
+      <Caption text={label} />
+      {children || (
+        <textarea
+          className="pb_textarea_kit"
+          disabled={disabled}
+          name={name}
+          onChange={onChange}
+          placeholder={placeholder}
+          ref={ref}
+          required={required}
+          rows={rows}
+          value={value}
+          {...props}
+        />
+      )}
+
+      {error ? (
         <>
           {characterCount ? (
             <Flex spacing="between" vertical="center">
@@ -106,12 +106,13 @@ const Textarea = ({
             <Body status="negative" text={error} />
           )}
         </>
-      )}
-      {!error && (
-        <Caption margin="none" size="md" text={characterCounter()} />
+      ) : (
+         noCount && (
+          <Caption margin="none" size="xs" text={characterCounter()} />
+        )
       )}
     </div>
-  )
+  );
 }
 
 export default forwardRef(Textarea)
