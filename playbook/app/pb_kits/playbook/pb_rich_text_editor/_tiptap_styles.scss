@@ -1,10 +1,6 @@
 @import "tokens/border_radius";
 @import "tokens/colors";
 
-.pb_tiptap_toolbar_dropdown_list_item {
-  cursor: pointer;
-}
-
 [class^="pb_rich_text_editor_kit"] {
   .toolbar_button {
     display: flex;
@@ -15,8 +11,8 @@
     color: $text_lt_light;
     cursor: pointer;
     &_icon {
-      width: 42px;
-      height: 42px;
+      width: $space_xl + 2;
+      height: $space_xl + 2;
     }
     &.open {
       color: $primary;
@@ -40,20 +36,20 @@
   }
 
   .toolbar {
-  border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
-  &_block {
-    gap: $space_xs;
+    border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
+    &_block {
+      gap: $space_xs;
+    }
+    .editor-dropdown-button {
+      background: transparent;
+      border: none;
+      color: $text_lt_light;
+      cursor: pointer;
+      font-weight: $light;
+      padding: ($space_xs - 1) 0px;
+      width: $space_xl * 3;
+    }
   }
-  .editor-dropdown-button {
-    background: transparent;
-    border: none;
-    color: $text_lt_light;
-    cursor: pointer;
-    font-weight: $light;
-    padding: 7px 0px;
-    width: 120px;
-  }
-}
 
   .ProseMirror {
     background: $white;
@@ -86,7 +82,7 @@
     blockquote {
       padding-left: 2rem;
       margin-left: 1rem;
-      border-left: 2px solid rgba(#0d0d0d, 0.1);
+      border-left: ($space_xxs - 2) solid rgba(#0d0d0d, 0.1);
     }
 
     p {
@@ -101,22 +97,6 @@
           }
         }
       }
-    }
-  }
-  .tiptap-editor {
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem;
-    padding-top: $space_xl;
-    background-color: $white;
-    margin: auto;
-    height: 100%;
-    > div {
-      flex-grow: 1;
-      width: 950px;
-      display: flex;
-      align-self: center;
-      flex-direction: column;
     }
   }
 }
