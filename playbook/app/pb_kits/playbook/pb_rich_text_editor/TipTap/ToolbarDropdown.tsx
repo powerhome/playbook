@@ -98,7 +98,7 @@ const toolbarDropdownItems = [
           <Icon 
               fixedWidth 
               icon="angle-down" 
-              margin-left="xxs" 
+              margin-left="xs" 
           />
         </Flex>
       </Flex>
