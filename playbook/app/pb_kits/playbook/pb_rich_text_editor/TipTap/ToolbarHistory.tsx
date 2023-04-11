@@ -26,7 +26,7 @@ const toolbarHistoryItems = [
     <>
     <FlexItem displayFlex>
           {toolbarHistoryItems.map(
-            ({ onclick, classname, disable, icon, text }:ToolbarTypes, index:any) => (
+            ({ onclick, classname, disable, icon, text }:ToolbarTypes, index:number) => (
               <EditorButton
                 classname={classname}
                 onclick={onclick}

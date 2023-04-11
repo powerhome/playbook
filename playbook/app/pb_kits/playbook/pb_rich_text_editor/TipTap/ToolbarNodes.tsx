@@ -4,6 +4,7 @@ import { ToolbarTypes } from "./EditorTypes";
 
 const ToolbarNodes = ({editor}:any) => {
 
+
 const toolbarNodesItems = [
         {
           onclick: () => editor.chain().focus().toggleCodeBlock().run(),
@@ -12,7 +13,7 @@ const toolbarNodesItems = [
           text: "Codeblock",
         },
         {
-          onclick: () => editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run(),
+          // onclick: () => editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run(),
           icon: "link",
           isActive: editor.isActive("link"),
           text: "Link",
