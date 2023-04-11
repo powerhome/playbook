@@ -37,7 +37,7 @@ or be selective
  @import "pb_body/body";
 ```
 
-From here all of our display kits should work for you nicely
+From here all of our display kits should work for you nicely.
 
 
 ## Javascript Enabled Rails Kits
@@ -54,7 +54,7 @@ This will allow you to choose what version you want.
 yarn install
 ```
 
-Now that you have the package installed you could import styles via JS
+Now that you have the package installed you could import styles via JS.
 
 ```jsx
 @import "playbook-ui/dist/tokens/screen_sizes.scss";
@@ -77,7 +77,7 @@ import 'playbook-ui/dist/playbook-rails.js';
 
 #### Add Font Awesome
 
-Playbook ships with font awesome but you’ll need to include it in your application
+Playbook ships with font awesome but you’ll need to include it in your application.
 
 ```js
 //= require regular-min.js
