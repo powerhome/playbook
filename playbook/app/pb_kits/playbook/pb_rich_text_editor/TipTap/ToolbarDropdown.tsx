@@ -7,6 +7,8 @@ import Icon from '../../pb_icon/_icon'
 import Nav from '../../pb_nav/_nav'
 import NavItem from '../../pb_nav/_item'
 
+import { ToolbarTypes } from './EditorTypes'
+
 const ToolbarDropdown = ({editor}: any) => {
   const [showPopover, setShowPopover] = useState(false)
   const [activeItem, setActiveItem] = useState({text: "Paragraph", icon: "paragraph"})
@@ -89,7 +91,7 @@ const toolbarDropdownItems = [
             key={activeItem ? activeItem.icon : toolbarDropdownItems[0].icon}
             gap="xs"
       >
-        <Icon icon={activeItem ? activeItem.icon : toolbarDropdownItems[0].icon}/>
+        <Icon icon={activeItem ? activeItem.icon : toolbarDropdownItems[0].icon} size='lg'/>
         {activeItem.text}
         <Flex
             className={showPopover ? "fa-flip-vertical" : ""}
@@ -115,7 +117,7 @@ const toolbarDropdownItems = [
           show={showPopover}
       >
         <Nav variant="subtle">
-          {toolbarDropdownItems.map(({ icon, text, onclick, isActive}:any, index:number) => (
+          {toolbarDropdownItems.map(({ icon, text, onclick, isActive}:ToolbarTypes, index:number) => (
             <NavItem
               className={`toolbar_dropdown_list_item ${isActive ? "active" : ""}`}
               iconLeft={icon}

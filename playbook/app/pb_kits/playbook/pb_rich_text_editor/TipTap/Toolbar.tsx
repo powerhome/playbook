@@ -6,16 +6,7 @@ import SectionSeparator from "../../pb_section_separator/_section_separator";
 
 import  EditorButton  from "./EditorButton";
 import ToolbarDropdown from "./ToolbarDropdown";
-
-
-export type ToolbarItemProps = {
-  icon?: string;
-  text?: string;
-  classname?: string;
-  onclick?: () => {}
-}
-
-
+import { ToolbarTypes } from "./EditorTypes";
 
 const EditorToolbar = ({ editor}:any) => {
   const toolbaritems = [
@@ -61,7 +52,7 @@ const EditorToolbar = ({ editor}:any) => {
           <ToolbarDropdown editor={editor}/>
           <SectionSeparator orientation="vertical" />
             {toolbaritems && toolbaritems.map(
-              ({ icon, text, classname, onclick}:ToolbarItemProps, index:number) => (
+              ({ icon, text, classname, onclick}:ToolbarTypes, index:number) => (
                 <EditorButton
                   classname={classname}
                   icon={icon}
