@@ -119,7 +119,7 @@ const toolbarDropdownItems = [
         <Nav variant="subtle">
           {toolbarDropdownItems.map(({ icon, text, onclick, isActive}:ToolbarTypes, index:number) => (
             <NavItem
-              className={`toolbar_dropdown_list_item ${isActive ? "active" : ""}`}
+              className={`pb_tiptap_toolbar_dropdown_list_item ${isActive ? "active" : ""}`}
               iconLeft={icon}
               key={`${text}_${index}`}
               onClick={()=> {onclick(); setShowPopover(false); setActiveItem({text:text, icon:icon})}}

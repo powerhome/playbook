@@ -1,9 +1,29 @@
-import React from "react";
+import React, {useCallback} from "react";
 import EditorButton from "./EditorButton";
 import { ToolbarTypes } from "./EditorTypes";
 
 const ToolbarNodes = ({editor}:any) => {
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const setLink = useCallback(() => {
+  const previousUrl = editor.getAttributes("link").href;
+  const url = window.prompt("URL", previousUrl);
+
+  // cancelled
+  if (url === null) {
+    return;
+  }
+
+  // empty
+  if (url === "") {
+    editor.chain().focus().extendMarkRange("link").unsetLink().run();
+
+    return;
+  }
+
+  // update link
+  editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+}, [editor]);
 
 const toolbarNodesItems = [
         {
@@ -13,7 +33,7 @@ const toolbarNodesItems = [
           text: "Codeblock",
         },
         {
-          // onclick: () => editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run(),
+          onclick: setLink,
           icon: "link",
           isActive: editor.isActive("link"),
           text: "Link",
