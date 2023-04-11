@@ -57,8 +57,6 @@
 
   .ProseMirror {
     background: $white;
-    border-bottom-left-radius: $border_rad_heavier;
-    border-bottom-right-radius: $border_rad_heavier;
     height: 100%;
     padding: 1.5rem;
     > * + * {
