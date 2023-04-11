@@ -6,7 +6,9 @@ import SectionSeparator from "../../pb_section_separator/_section_separator";
 
 import  EditorButton  from "./EditorButton";
 import ToolbarDropdown from "./ToolbarDropdown";
+import ToolbarNodes from "./ToolbarNodes";
 import { ToolbarTypes } from "./EditorTypes";
+import ToolbarHistoryItems from "./ToolbarHistory";
 
 const EditorToolbar = ({ editor}:any) => {
   const toolbaritems = [
@@ -30,21 +32,6 @@ const EditorToolbar = ({ editor}:any) => {
     },
   ]
 
-  const toolbarNodesItems = [
-    {
-      onclick: () => editor.chain().focus().toggleCodeBlock().run(),
-      icon: "code",
-      isActive: editor.isActive("codeBlock"),
-      text: "Codeblock",
-    },
-    {
-      onclick: () => editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run(),
-      icon: "link",
-      isActive: editor.isActive("link"),
-      text: "Link",
-    },
-  ];
-
   return (
     <Background backgroundColor="white" className="toolbar">
       <Flex flex="0" justify="between" paddingX="md" paddingY="xxs" wrap>
@@ -63,16 +50,9 @@ const EditorToolbar = ({ editor}:any) => {
               )
             )}
             <SectionSeparator orientation="vertical" />
-            {toolbarNodesItems.map(({ onclick, icon, text, isActive }:any, index:number) => (
-              <EditorButton
-                classname={`toolbar_button ${isActive ? 'is-active' : ''}`}
-                onclick={onclick}
-                icon={icon}
-                key={index}
-                text={text}
-              />
-            ))}
+            <ToolbarNodes editor={editor} />
         </FlexItem>
+        <ToolbarHistoryItems editor={editor} />
       </Flex>
       <SectionSeparator />
     </Background>

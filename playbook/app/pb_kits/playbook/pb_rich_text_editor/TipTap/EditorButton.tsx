@@ -10,10 +10,12 @@ type EditorButtonProps = {
   onclick?: () => {},
   icon?: string;
   text?: string;
+  disable?: boolean
 };
 
 const EditorButton = ({
   classname,
+  disable,
   onclick,
   icon,
   text,
@@ -30,6 +32,7 @@ const EditorButton = ({
       <button
         className={classname}
         onClick={onclick}
+        disabled={disable}
       >
         <Flex 
           align="center"
