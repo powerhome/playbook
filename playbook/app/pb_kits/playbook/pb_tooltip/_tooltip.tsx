@@ -7,7 +7,6 @@ import {
   Placement, 
   safePolygon, 
   shift,
-  Strategy,
   useFloating, 
   useHover, 
   useInteractions,
@@ -18,9 +17,6 @@ import { GlobalProps, globalProps } from "../utilities/globalProps"
 import { buildAriaProps, buildDataProps } from "../utilities/props"
 import Flex from "../pb_flex/_flex"
 
-
-
-
 type TooltipProps = {
   aria?: { [key: string]: string },
   className?: string | string[],
@@ -30,7 +26,7 @@ type TooltipProps = {
   icon?: string,
   interaction?: boolean,
   placement?: Placement,
-  position?: Strategy,
+  position: "absolute" | "fixed";
   text: string,
   zIndex?: Pick<GlobalProps, "ZIndex">,
 } & GlobalProps
@@ -45,7 +41,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     icon = null,
     interaction = false,
     placement: preferredPlacement = "top",
-    position,
+    position = "absolute",
     text,
     zIndex,
     ...rest
