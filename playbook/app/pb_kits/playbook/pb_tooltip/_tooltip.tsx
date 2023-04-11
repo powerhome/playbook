@@ -28,7 +28,6 @@ type TooltipProps = {
   placement?: Placement,
   position: "absolute" | "fixed";
   text: string,
-  zIndex?: Pick<GlobalProps, "ZIndex">,
 } & GlobalProps
 
 const Tooltip = (props: TooltipProps): React.ReactElement => {
@@ -43,7 +42,6 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     placement: preferredPlacement = "top",
     position = "absolute",
     text,
-    zIndex,
     ...rest
   } = props
 
@@ -127,7 +125,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
                 position: strategy,
                 top: y ?? 0,
                 left: x ?? 0,
-                zIndex: zIndex ?? 0,
+                zIndex: props.zIndex ?? 0,
               },
             })}
         >
