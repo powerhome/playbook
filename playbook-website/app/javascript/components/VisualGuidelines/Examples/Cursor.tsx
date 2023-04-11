@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, Caption, FlexItem, Pill } from 'playbook-ui'
+import { Card, Caption, FlexItem, Flex, Body } from 'playbook-ui'
 import Example from '../Templates/Example'
 
 const CURSOR = [
@@ -19,6 +19,7 @@ const Cursor = ({ example }: { example: string }) => (
       title="Cursor"
     />
     <Card
+      marginTop="md"
       padding="none"
       rounded
       shadow="deeper"
@@ -29,9 +30,17 @@ const Cursor = ({ example }: { example: string }) => (
             marginBottom="xs"
             text="Visual Guide"
           />
-          {CURSOR.map(function (cursor, i) {
-            return <Pill text={cursor} cursor={cursor} key={i} />;
-          })}
+
+          <Body text="Hover over any card below to display its cursor." marginBottom="sm" />
+
+          <Flex gap="xs" wrap>
+            {CURSOR.map(function (cursor, i) {
+              return <Card padding="xs" cursor={cursor} key={i}>
+                {cursor}
+              </Card>
+            })}
+          </Flex>
+
         </Card.Body>
       </FlexItem>
     </Card>
