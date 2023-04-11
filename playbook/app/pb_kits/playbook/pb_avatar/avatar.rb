@@ -25,6 +25,14 @@ module Playbook
         { status: status, classname: "size_#{size}" }
       end
 
+      def alt_text
+        if image_alt.present?
+          image_alt
+        else
+          name
+        end
+      end
+
       def handle_img_error
         "this.style.display = 'none'"
       end
