@@ -7,7 +7,7 @@ module Playbook
       prop :highlight, type: Playbook::Props::Hash,
                        default: {}
       prop :tag, type: Playbook::Props::Enum,
-                 values: %w[div section footer header article aside main nav tr td th],
+                 values: %w[div section footer header article aside main nav],
                  default: "div"
       prop :border_none, type: Playbook::Props::Boolean,
                          default: false

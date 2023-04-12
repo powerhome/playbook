@@ -23,7 +23,7 @@ type CardPropTypes = {
   length?: number,
   padding?: string,
   selected?: boolean,
-  tag?: "div" | "section" | "footer" | "header" | "article" | "aside" | "main" | "nav" | "tr" | "td" | "th",
+  tag?: "div" | "section" | "footer" | "header" | "article" | "aside" | "main" | "nav",
 } & GlobalProps
 
 type CardHeaderProps = {
@@ -105,7 +105,7 @@ const Card = (props: CardPropTypes) => {
 
   const nonHeaderChildren = cardChildren.filter((child: Node) => (get(child, 'type.displayName') !== 'Header'))
 
-  const tagOptions = ['div', 'section', 'footer', 'header', 'article', 'aside', 'main', 'nav', 'td', 'tr', 'th']
+  const tagOptions = ['div', 'section', 'footer', 'header', 'article', 'aside', 'main', 'nav']
   const Tag = tagOptions.includes(tag) ? tag : 'div'
 
   return (
