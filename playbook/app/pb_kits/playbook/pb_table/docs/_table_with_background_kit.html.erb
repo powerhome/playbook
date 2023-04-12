@@ -1,34 +1,58 @@
+<%= pb_rails("table", props: { size: "sm", margin_bottom: "lg" }) do %>
+  <thead>
+    <%= pb_rails("background", props: { background_color: "light", tag: "tr" }) do %>
+      <th>Column 1</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+    <% end %>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+    </tr>
+    <%= pb_rails("background", props: { background_color: "light", tag: "tr" }) do %>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+    <% end %>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+    </tr>
+  </tbody>
+<% end %>
 <%= pb_rails("table", props: { size: "sm" }) do %>
   <thead>
     <tr>
       <th>Column 1</th>
       <th>Column 2</th>
       <th>Column 3</th>
-      <th>Column 4</th>
-      <th>Column 5</th>
     </tr>
   </thead>
   <tbody>
-    <%= pb_rails("background", props: { background_color: "success", tag: "tr" }) do %>
-      <td>Value 1</td>
+    <tr>
+      <%= pb_rails("background", props: { background_color: "warning_subtle", tag: "td" }) do %>
+        Value 1
+      <% end %>
       <td>Value 2</td>
       <td>Value 3</td>
-      <td>Value 4</td>
-      <td>Value 5</td>
-    <% end %>
-    <%= pb_rails("background", props: { background_color: "warning", tag: "tr" }) do %>
+    </tr>
+    <tr>
+      <td>Value 1</td>
+      <%= pb_rails("background", props: { background_color: "success_subtle", tag: "td" }) do %>
+        Value 2
+      <% end %>
+      <td>Value 3</td>
+    </tr>
+    <tr>
       <td>Value 1</td>
       <td>Value 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td>Value 5</td>
-    <% end %>
-    <%= pb_rails("background", props: { background_color: "info", tag: "tr" }) do %>
-      <td>Value 1</td>
-      <td>Value 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td>Value 5</td>
-    <% end %>
+      <%= pb_rails("background", props: { background_color: "info_subtle", tag: "td" }) do %>
+        Value 3
+      <% end %>
+    </tr>
   </tbody>
 <% end %>
