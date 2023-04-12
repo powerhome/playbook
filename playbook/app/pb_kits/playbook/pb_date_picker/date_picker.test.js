@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react'
+import moment from 'moment'
 import { fireEvent, render, screen, waitFor, within } from '../utilities/test-utils'
 
 import DatePicker from './_date_picker'
@@ -9,7 +10,6 @@ import { getTimezoneText } from './plugins/timeSelect'
 
 jest.setSystemTime(new Date('01/01/2020'));
 const DEFAULT_DATE = new Date()
-
 
 describe('DatePicker Kit', () => {
   beforeEach(() => {
@@ -158,7 +158,7 @@ describe('DatePicker Kit', () => {
       expect(input).toHaveValue('01/01/2020 at 12:00 PM')
     })
   })
-  test('shows DatePicker QuickPick dropdown', async () => {
+  test('shows DatePicker QuickPick dropdown and adds correct date to input', async () => {
     const testId = 'datepicker-quick-pick'
     render(
       <DatePicker
@@ -197,7 +197,7 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
-      expect(input).toHaveValue('01/01/2023 → 04/11/2023')
+      expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " → " + moment().format('MM/DD/YYYY'))
     })
 
   })
