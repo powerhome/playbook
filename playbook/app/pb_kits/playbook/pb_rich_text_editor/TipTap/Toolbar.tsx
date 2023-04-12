@@ -34,7 +34,7 @@ const EditorToolbar = ({ editor}:any) => {
 
   return (
     <Background backgroundColor="white" className="toolbar">
-      <Flex flex="0" justify="between" paddingX="md" paddingY="xxs" wrap>
+      <Flex flex="0" justify="between" paddingX="sm" paddingY="xxs" wrap>
         <FlexItem className="toolbar_block" displayFlex>
           <ToolbarDropdown editor={editor}/>
           <SectionSeparator orientation="vertical" />

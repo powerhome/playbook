@@ -88,7 +88,9 @@
       margin-left: 1rem;
       border-left: ($space_xxs - 2) solid rgba(#0d0d0d, 0.1);
     }
-
+    &:focus-visible {
+      outline: unset;
+    }
     p {
       &.is-editor-empty {
         &:first-child {
