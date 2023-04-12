@@ -9,21 +9,21 @@ const CardHeader = (props) => {
     <div>
       <Title
           {...props}
+          marginBottom='sm'
           size={4}
           tag="h4"
           text="Category Colors"
       />
 
-      <br />
-
       <Card
           {...props}
+          marginBottom='sm'
           padding="none"
       >
-        <Card.Header>
+        <Card.Header headerColor="category_1" >
           <Body
-              {...props}
-              text="category_1"
+              dark
+              text="Category 1"
           />
         </Card.Header>
         <Card.Body>
@@ -34,19 +34,15 @@ const CardHeader = (props) => {
         </Card.Body>
       </Card>
 
-      <br />
-
       <Card
           {...props}
+          marginBottom='sm'
           padding="none"
       >
         <Card.Header
-            headerColor="category_2"
+            headerColor="category_3"
         >
-          <Body
-              {...props}
-              text="category_2"
-          />
+          <Body text="Category 3" />
         </Card.Header>
         <Card.Body
             padding="md"
@@ -58,27 +54,27 @@ const CardHeader = (props) => {
         </Card.Body>
       </Card>
 
-      <br />
 
       <Title
           {...props}
+          marginBottom='sm'
           size={4}
           tag="h4"
           text="Product Colors"
       />
 
-      <br />
-
       <Card
           {...props}
+          marginBottom='sm'
           padding="none"
       >
         <Card.Header
-            headerColor="siding"
+            headerColor="product_2_background"
         >
           <Body
               {...props}
-              text="Siding"
+              dark
+              text="Product 2 Background"
           />
         </Card.Header>
         <Card.Body>
@@ -89,18 +85,16 @@ const CardHeader = (props) => {
         </Card.Body>
       </Card>
 
-      <br />
-
       <Card
           {...props}
+          marginBottom='sm'
           padding="none"
       >
-        <Card.Header
-            headerColor="gutters"
-        >
+        <Card.Header headerColor="product_6_background" >
           <Body
               {...props}
-              text="Gutters"
+              dark
+              text="Product 6 Background"
           />
         </Card.Header>
         <Card.Body>
@@ -111,28 +105,24 @@ const CardHeader = (props) => {
         </Card.Body>
       </Card>
 
-      <br />
 
       <Title
           {...props}
+          marginBottom='sm'
           size={4}
           tag="h4"
           text="Background Colors"
       />
 
-      <br />
-
       <Card
           {...props}
+          marginBottom='sm'
           padding="none"
       >
         <Card.Header
             headerColor="white"
         >
-          <Body
-              {...props}
-              text="White"
-          />
+          <Body text="White" />
         </Card.Header>
         <Card.Body>
           <Body
@@ -141,8 +131,6 @@ const CardHeader = (props) => {
           />
         </Card.Body>
       </Card>
-
-      <br />
 
       <Card
           {...props}
@@ -152,7 +140,7 @@ const CardHeader = (props) => {
             headerColor="dark"
         >
           <Body
-              {...props}
+              dark
               text="Dark"
           />
         </Card.Header>
