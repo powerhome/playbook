@@ -24,10 +24,10 @@ const quickPickPlugin = () => {
 
 
   // custom useState for setting active item
-  const useState = (defaultValue: string) => {
+  const useState = (defaultValue?: string) => {
     let value = defaultValue;
     const getValue = () => value
-    const setValue = (newValue: string) => value = newValue
+    const setValue = (newValue?: string) => value = newValue
     return [getValue, setValue];
   }
 
