@@ -12,7 +12,7 @@ module Playbook
 
       selected_props.map do |k|
         cursor_value = send(k)
-        "cursor_#{cursor_value}" if cursor_values.include? cursor_value
+        "cursor_#{cursor_value.underscore}" if cursor_values.include? cursor_value
       end.compact.join(" ")
     end
 
@@ -23,7 +23,7 @@ module Playbook
     end
 
     def cursor_values
-      %w[pointer]
+      %w[auto default none contextMenu help pointer progress wait cell crosshair text verticalText alias copy move noDrop notAllowed grab grabbing eResize nResize neResize nwResize sResize seResize swResize wResize ewResize nsResize neswResize nwseResize colResize rowResize allScroll zoomIn zoomOut]
     end
   end
 end
