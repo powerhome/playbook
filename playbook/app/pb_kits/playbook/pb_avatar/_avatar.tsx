@@ -67,7 +67,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
       >
         { canShowImage && (
           <Image
-              alt={imageAlt}
+              alt={imageAlt ? imageAlt : name}
               onError={handleError}
               url={imageUrl}
           />
