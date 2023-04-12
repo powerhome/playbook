@@ -33,9 +33,9 @@ const Cursor = ({ example }: { example: string }) => (
 
           <Body text="Hover over any card below to display its cursor." marginBottom="sm" />
 
-          <Flex gap="xs" wrap>
+          <Flex gap="xxs" wrap>
             {CURSOR.map(function (cursor, i) {
-              return <Card padding="xs" cursor={cursor} key={i}>
+              return <Card borderRadius="none" padding="xs" cursor={cursor} key={i}>
                 {cursor}
               </Card>
             })}
