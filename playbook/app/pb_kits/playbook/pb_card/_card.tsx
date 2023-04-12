@@ -23,7 +23,7 @@ type CardPropTypes = {
   length?: number,
   padding?: string,
   selected?: boolean,
-  tag?: "div" | "section" | "footer" | "header" | "article" | "aside" | "main" | "nav",
+  tag?: "div" | "section" | "footer" | "header" | "article" | "aside" | "main" | "nav" | "tr" | "td" | "th",
 } & GlobalProps
 
 type CardHeaderProps = {
