@@ -2,6 +2,8 @@
 @import "tokens/colors";
 @import "tokens/spacing";
 @import "tokens/titles";
+@import "tokens/line_height";
+@import "tokens/typography";
 
 [class^="pb_rich_text_editor_kit"] {
   .toolbar_button {
@@ -59,7 +61,6 @@
     border-bottom-left-radius: $border_rad_heaviest;
     height: 100%;
     padding: 1.5rem;
-    line-height: 169.8%;
     > * + * {
       margin-top: 0.75em;
     }
@@ -83,16 +84,24 @@
         font-size: 0.8rem;
       }
     }
-
+    a {
+      color: $primary;
+      border-bottom: 1px solid $primary;
+      &:hover {
+        color: $text_lt_default;
+        border-bottom: 1px solid $text_lt_default
+      }
+    }
     blockquote {
-      padding-left: 2rem;
-      margin-left: 1rem;
-      border-left: ($space_xxs - 2) solid rgba(#0d0d0d, 0.1);
+      font-size: $font_larger;
+      padding: $space_md;
+      font-style: italic;
     }
     &:focus-visible {
       outline: unset;
     }
     p {
+      line-height: $lh_loose;
       &.is-editor-empty {
         &:first-child {
           &::before {
@@ -105,26 +114,18 @@
         }
       }
     }
-    h1,
+    h1 {
+      font-size: $font_largest;
+      font-weight: $bold;
+    }
     h2 {
-      @include pb_title_2;
-      margin-top: $space_lg;
+      font-size: $font_larger;
+      font-weight: $bold;
     }
-    h3,
-    h4 {
-      @include pb_title_3;
-      margin-top: $space_md;
-      margin-bottom: $space_xs;
+    h3 {
+      font-size: $font_large;
+      font-weight: $bold;
     }
-
-    p {
-      margin: $space_sm 0;
-    }
-    img {
-      max-width: 100%;
-    }
-
-    ul,
     ol {
       padding-left: ($space_xs - 2px);
       padding-left: $space_lg;

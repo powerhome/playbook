@@ -43,13 +43,6 @@ const toolbarDropdownItems = [
         onclick: () => editor.chain().focus().toggleHeading({level:3}).run(),
     },
     {
-        node: "heading-4",
-        icon: "h4",
-        isActive: editor.isActive("heading", {level: 4}),
-        text: "Heading 4",
-        onclick: () => editor.chain().focus().toggleHeading({level:4}).run(),
-    },
-    {
         node: "bulletList",
         icon: "list",
         isActive: editor.isActive("bulletList"),
