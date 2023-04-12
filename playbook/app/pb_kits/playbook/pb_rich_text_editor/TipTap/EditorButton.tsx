@@ -7,7 +7,7 @@ import Tooltip from "../../pb_tooltip/_tooltip";
 
 type EditorButtonProps = {
   classname?: string,
-  onclick?: () => {},
+  onclick?: () => {} | void,
   icon?: string;
   text?: string;
   disable?: boolean
