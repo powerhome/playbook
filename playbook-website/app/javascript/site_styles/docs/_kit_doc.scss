@@ -39,7 +39,7 @@
     &.dark {
       color: $text_dk_light;
       a {
-        color: $teal;
+        color: $primary_action;
       }
     }
     padding: calc(2rem + 4px) 2rem 1rem;
@@ -52,22 +52,6 @@
 
   .pb--kit-example {
     position: relative;
-
-    // &::after {
-    //   content: '';
-    //   width: 100%;
-    //   height: 4px;
-    //   background: $border-light;
-    //   position: absolute;
-    //   top: 0;
-    //   left: 0;
-    // }
-    // &.dark{
-    //   &::after {
-    //     display: none;
-    //   }
-    // }
-
     code {
       background-color: rgba($text_lt_lighter, 0.35);
       border-radius: 5px;

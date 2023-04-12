@@ -78,6 +78,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     mode = 'single',
     name,
     onChange = () => { void 0 },
+    onClose,
     pickerId,
     placeholder = 'Select Date',
     plugins = false,
@@ -95,9 +96,13 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
 
+  const filteredProps = {...props}
+  delete filteredProps?.position
+
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
-    globalProps(props),
+    //@ts-ignore
+    globalProps(filteredProps),
     error ? 'error' : null,
     className
   )
@@ -117,8 +122,10 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       minDate,
       mode,
       onChange,
+      onClose,
       pickerId,
       plugins,
+      // @ts-ignore
       position,
       positionElement,
       selectionType,
