@@ -1,5 +1,6 @@
 @import "tokens/border_radius";
 @import "tokens/colors";
+@import "tokens/spacing";
 
 [class^="pb_rich_text_editor_kit"] {
   .toolbar_button {
@@ -53,8 +54,11 @@
 
   .ProseMirror {
     background: $white;
+    border-bottom-right-radius: $border_rad_heaviest;
+    border-bottom-left-radius: $border_rad_heaviest;
     height: 100%;
     padding: 1.5rem;
+    line-height: 169.8%;
     > * + * {
       margin-top: 0.75em;
     }
@@ -97,6 +101,43 @@
           }
         }
       }
+    }
+    h1,
+    h2 {
+      @include pb_title_2;
+      margin-top: $space_lg;
+    }
+    h3,
+    h4 {
+      @include pb_title_3;
+      margin-top: $space_md;
+      margin-bottom: $space_xs;
+    }
+
+    p {
+      margin: $space_sm 0;
+    }
+    img {
+      max-width: 100%;
+    }
+
+    ul,
+    ol {
+      padding-left: ($space_xs - 2px);
+      padding-left: $space_lg;
+      margin: $space_xs 0 $space_sm;
+      li {
+        margin: 2px 0;
+      }
+    }
+    ul {
+      list-style: disc;
+      ::marker {
+        color: shade($slate, 20%);
+      }
+    }
+    ol {
+      list-style: decimal;
     }
   }
 }
