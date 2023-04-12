@@ -7,7 +7,7 @@ import PbTextarea from '.'
 import type { InputCallback } from '../types'
 
 import { buildAriaProps, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -35,7 +35,7 @@ type TextareaProps = {
   rows?: number,
   resize: "none" | "both" | "horizontal" | "vertical" | "auto",
   onChange?: InputCallback<HTMLTextAreaElement>,
-}
+} & GlobalProps
 
 const Textarea = ({
   aria = {},
