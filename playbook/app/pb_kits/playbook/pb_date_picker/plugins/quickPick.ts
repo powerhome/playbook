@@ -22,6 +22,17 @@ type pluginDataType = {
 const quickPickPlugin = () => {
   return function (fp: FpTypes & any): any {
 
+
+  // custom useState for setting active item
+  const useState = (defaultValue: string) => {
+    let value = defaultValue;
+    const getValue = () => value
+    const setValue = (newValue: string) => value = newValue
+    return [getValue, setValue];
+  }
+
+  const [activeLabel, setActiveLabel] = useState("");
+
   // variable that holds the ranges available
   const ranges = {
       'Today': [new Date(), new Date()],
@@ -34,15 +45,15 @@ const quickPickPlugin = () => {
           moment().subtract(1, 'week').startOf('week').toDate(),
           moment().subtract(1, 'week').endOf('week').toDate()
       ],
-      'Last month': [ 
+      'Last month': [
           moment().subtract(1, 'month').startOf('month').toDate(),
           moment().subtract(1, 'month').endOf('month').toDate()
       ],
-      'Last quarter': [ 
+      'Last quarter': [
           moment().subtract(1, 'quarter').startOf('quarter').toDate(),
           moment().subtract(1, 'quarter').endOf('quarter').toDate()
       ],
-      'Last year': [ 
+      'Last year': [
           moment().subtract(1, 'year').startOf('year').toDate(),
           moment().subtract(1, 'year').endOf('year').toDate()
       ]
@@ -97,26 +108,17 @@ const quickPickPlugin = () => {
     if (current) {
       current.classList.remove('active');
     }
-    /** conditional statment to extract start and end dates from selectedDates, 
+    /** conditional statment to extract start and end dates from selectedDates,
     *   then loop through ranges prop in pluginData
     *   and check if chosen dates equal to a date in the ranges prop
     *   if they are equal, add the active class
     */
     if (selectedDates.length > 0) {
-
-      const startDate = moment(selectedDates[0]);
-      const endDate = selectedDates.length > 1 ? moment(selectedDates[1]) : startDate;
-
-      for (const [label, range] of Object.entries(pluginData.ranges)) {
-        if (startDate.isSame(moment(range[0]), 'day') && endDate.isSame(moment(range[1]), 'day')) {
-          pluginData.rangesButtons[label].classList.add('active');
-          break;
-        }
-      }
+      pluginData.rangesButtons[activeLabel()].classList.add('active');
     }
   }
 
-    
+
     return {
       // onReady is a hook from flatpickr that runs when calender is in a ready state
       onReady(selectedDates: Array<string>) {
@@ -131,6 +133,7 @@ const quickPickPlugin = () => {
                 fp.clear();
               }
               else {
+                setActiveLabel(label)
                 fp.setDate([start, end], true);
               }
 
@@ -149,11 +152,11 @@ const quickPickPlugin = () => {
          *
          * @param {Array} selectedDates
          */
-        
+
           // function to give the active butto the active class
           selectActiveRangeButton(selectedDates);
         }
-        
+
       },
       onValueUpdate(selectedDates: Array<string>) {
         selectActiveRangeButton(selectedDates);
