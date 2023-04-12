@@ -26,11 +26,7 @@ module Playbook
       end
 
       def alt_text
-        if image_alt.present?
-          image_alt
-        else
-          name
-        end
+        image_alt.present? ? image_alt : name
       end
 
       def handle_img_error
