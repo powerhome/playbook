@@ -10,7 +10,7 @@ import AnimateHeight from "react-animate-height"
 import { Button, Caption } from "playbook-ui"
 import entryPoint from "./entryPoint"
 
-const KitDocs = ({ source, exampleTitle, proximaNovaBlack, css }) => {
+const KitDocs = ({ source, exampleTitle, css }) => {
   const [editorHeight, setEditorHeight] = useState(0)
 
   const code = source
@@ -63,7 +63,7 @@ const KitDocs = ({ source, exampleTitle, proximaNovaBlack, css }) => {
               <SandpackPreview
                 showOpenInCodeSandbox={false}
                 showRefreshButton={false}
-                style={{ backgroundColor: "white"}}
+                style={{ backgroundColor: "white" }}
               />
             </div>
 
