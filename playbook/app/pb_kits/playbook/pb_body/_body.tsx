@@ -42,7 +42,7 @@ const Body = (props: BodyProps): React.ReactElement => {
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_body_kit', color === "success" ? "success_sm" : color, variant, status),
+    buildCss('pb_body_kit', color, variant, status),
     globalProps(props),
     className
   )
