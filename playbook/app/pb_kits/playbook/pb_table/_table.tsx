@@ -1,19 +1,17 @@
-/* @flow */
-
-import React, { useEffect, type Node } from 'react'
+import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import PbTable from './'
+import PbTable from '.'
 
 type TableProps = {
-  aria?: object,
-  children: array<Node> | Node,
+  aria?: { [key: string]: string },
+  children: React.ReactNode[] | React.ReactNode,
   className: string,
   collapse?: "sm" | "md" | "lg",
   container: boolean,
   dark?: boolean,
-  data?: object,
+  data?: { [key: string]: string },
   dataTable: boolean,
   disableHover: boolean,
   id?: string,
@@ -52,9 +50,9 @@ const Table = (props: TableProps) => {
 
   return (
     <table
-        {...ariaProps}
-        {...dataProps}
-        className={classnames(
+      {...ariaProps}
+      {...dataProps}
+      className={classnames(
         'pb_table',
         `table-${size}`,
         `table-responsive-${responsive}`,
@@ -70,7 +68,7 @@ const Table = (props: TableProps) => {
         tableCollapseCss,
         className
       )}
-        id={id}
+      id={id}
     >
       {children}
     </table>
