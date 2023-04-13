@@ -27,9 +27,9 @@ module Playbook
 
     # Deal with lists of kits, used in Playbook doc and Externally
     # rubocop:disable Style/StringConcatenation
-    def pb_kits(type: "rails", limit_examples: false, dark_mode: false)
+    def pb_kits(type: "rails", limit_examples: false, dark_mode: false, method: get_kits)
       display_kits = []
-      kits = get_kits
+      kits = method
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
@@ -45,7 +45,12 @@ module Playbook
 
     # rubocop:disable Naming/AccessorMethodName
     def get_kits
-      menu = YAML.load_file(Playbook::Engine.root.join("app/pb_kits/playbook/data/menu.yml"))
+      menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
+      menu["kits"]
+    end
+
+    def get_kits_pb_website
+      menu = YAML.load_file(Rails.root.join("config/menu.yml"))
       menu["kits"]
     end
     # rubocop:enable Naming/AccessorMethodName

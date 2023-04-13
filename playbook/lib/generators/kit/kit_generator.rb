@@ -96,7 +96,7 @@ class KitGenerator < Rails::Generators::NamedBase
       `rubocop --safe-auto-correct #{full_kit_directory}`
 
       # Add kit to Playbook menu ==========================
-      open("app/pb_kits/playbook/data/menu.yml", "a") do |f|
+      open("../playbook-website/config/menu.yml", "a") do |f|
         f.puts "  - #{@kit_name_underscore}"
       end
 

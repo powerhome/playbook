@@ -18,7 +18,7 @@ import Option from './components/Option'
 import Placeholder from './components/Placeholder'
 import ValueContainer from './components/ValueContainer'
 
-import { noop } from '../utilities/props'
+import { noop, buildDataProps } from '../utilities/props'
 
 /**
  * @typedef {object} Props
@@ -28,10 +28,14 @@ import { noop } from '../utilities/props'
  */
 
 type TypeaheadProps = {
-  id?: string,
   async?: boolean,
+  className?: string,
+  components?: object,
   createable?: boolean,
   dark?: boolean,
+  data?: object,
+  error?: string,
+  id?: string,
   label?: string,
   loadOptions?: string,
   getOptionLabel?: string | (() => any),
@@ -44,7 +48,19 @@ type TypeaheadProps = {
  * @param {TypeaheadProps} props - props as described at https://react-select.com/props
  */
 
-const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, createable, async, ...props }: TypeaheadProps) => {
+const Typeahead = ({
+  async,
+  className,
+  components = {},
+  createable,
+  error = "",
+  data = {},
+  getOptionLabel,
+  getOptionValue,
+  id,
+  loadOptions = noop,
+  ...props
+}: TypeaheadProps) => {
   const selectProps = {
     cacheOptions: true,
     components: {
@@ -57,6 +73,7 @@ const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, cre
       Option,
       Placeholder,
       ValueContainer,
+      ...components
     },
     loadOptions: isString(loadOptions) ? get(window, loadOptions) : loadOptions,
     getOptionLabel: isString(getOptionLabel) ? get(window, getOptionLabel) : getOptionLabel,
@@ -82,7 +99,7 @@ const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, cre
   const handleOnChange = (_data, { action, option, removedValue }) => {
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
-      const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option })
+      const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option ? option : _data })
       document.dispatchEvent(multiValueClearEvent)
     }
     if (action === 'remove-value' || action === 'pop-value') {
@@ -95,13 +112,22 @@ const Typeahead = ({ loadOptions = noop, getOptionLabel, id, getOptionValue, cre
     }
   }
 
-  const classes = `pb_typeahead_kit react-select ${globalProps(props)}`
+  const dataProps = buildDataProps(data)
+  const classes = classnames(
+    'pb_typeahead_kit react-select',
+    globalProps(props),
+    className
+  )
+
   const inlineClass = selectProps.inline ? 'inline' : null
 
   return (
-    <div className={classnames(classes, inlineClass)}>
+    <div {...dataProps}
+        className={classnames(classes, inlineClass)}
+    >
       <Tag
           classNamePrefix="typeahead-kit-select"
+          error={error}
           onChange={handleOnChange}
           {...selectProps}
       />

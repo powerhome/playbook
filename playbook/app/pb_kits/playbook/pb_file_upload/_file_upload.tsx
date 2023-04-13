@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useRef } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { useDropzone, DropzoneInputProps, DropzoneRootProps } from 'react-dropzone'
 import classnames from 'classnames'
 
 import { buildCss, buildDataProps, noop } from '../utilities/props'
@@ -12,6 +12,7 @@ import Card from '../pb_card/_card'
 type FileUploadProps = {
   accept?: string[],
   className?: string,
+  customMessage?: string,
   data?: {[key: string]: string | number},
   acceptedFilesDescription?: string,
   maxSize?: number,
@@ -28,6 +29,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     accept = null,
     acceptedFilesDescription = '',
     className,
+    customMessage,
     data = {},
     maxSize,
     onFilesAccepted = noop,
@@ -38,13 +40,20 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     onFilesAccepted(files)
   }, [onFilesAccepted])
 
-  const { getRootProps, getInputProps, isDragActive, rejectedFiles } = useDropzone({
+  type DropZoneProps = {
+    getRootProps: () => DropzoneRootProps & any;
+    getInputProps: () => DropzoneInputProps & any;
+    isDragActive: boolean;
+    rejectedFiles: File[];
+  }
+
+  const { getRootProps, getInputProps, isDragActive, rejectedFiles }: DropZoneProps = useDropzone({
     accept,
     maxSize,
     onDrop,
   })
 
-  const prevRejected: any = useRef();
+  const prevRejected = useRef<File[] | null>(null);
 
   const maxFileSizeText = `Max file size is ${getFormattedFileSize(maxSize)}.`
 
@@ -70,10 +79,9 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
   const dataProps = buildDataProps(data)
 
   const getDescription = () => {
-    let msg = ""
-    accept === null ? msg += 'Choose a file or drag it here.' : msg += `Choose a file or drag it here. The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`
-    if (maxSize) msg += ` ${maxFileSizeText}`
-    return msg
+    return customMessage
+      ? customMessage
+      : `Choose a file or drag it here.${accept === null ? '' : ` The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`}${maxSize ? ` ${maxFileSizeText}` : ''}`;
   }
 
   return (

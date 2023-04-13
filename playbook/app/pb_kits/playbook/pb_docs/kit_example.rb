@@ -11,6 +11,8 @@ module Playbook
       prop :example_title, type: Playbook::Props::String, required: true
       prop :example_key, type: Playbook::Props::String, required: true
       prop :show_code, type: Playbook::Props::Boolean, default: true
+      prop :show_raw, type: Playbook::Props::Boolean, default: false
+      prop :code_only, type: Playbook::Props::Boolean, default: false
       prop :type, type: Playbook::Props::Enum, values: %w[rails react], default: "rails"
       prop :dark, type: Playbook::Props::Boolean, default: false
 

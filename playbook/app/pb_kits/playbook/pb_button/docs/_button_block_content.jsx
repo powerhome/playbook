@@ -5,6 +5,7 @@ const ButtonBlockContent = (props) => (
   <div>
     <Button fixedWidth 
         {...props}
+        tabIndex={0}
     >
       <Pill marginRight="xs"
           text="5"

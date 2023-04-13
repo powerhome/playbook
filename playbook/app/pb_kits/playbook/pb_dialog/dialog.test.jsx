@@ -25,6 +25,7 @@ function DialogTest({ props }) {
           onClose={close}
           onConfirm={() => setIsLoading(!isLoading)}
           opened={isOpen}
+          placement="right"
           portalClassName="portal"
           size={size}
           text={text}
@@ -94,6 +95,17 @@ test("renders the buttons", async () => {
   await waitFor(() => expect(queryByText("Okay")).toHaveTextContent(confirmButton));
 
   await waitFor(() => expect(queryByText("Cancel Button")).toHaveTextContent(cancelButton));
+
+  cleanup()
+});
+
+test("renders the right placement dialog", async () => {
+
+  const { queryByText } = render(<DialogTest />);
+
+  fireEvent.click(queryByText('Open Dialog'));
+
+  await waitFor(() => expect(queryByText("Header Title is the Title Prop")));
 
   cleanup()
 });

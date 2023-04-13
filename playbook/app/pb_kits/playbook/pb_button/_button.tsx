@@ -23,12 +23,14 @@ type ButtonPropTypes = {
   loading?: boolean,
   newWindow?: boolean,
   onClick?: EventHandler,
+  tabIndex?: number,
   size?: 'sm' | 'md' | 'lg',
+  target?: string,
   text?: string,
   type?: 'inline' | null,
-  htmlType: 'submit' | 'reset' | 'button' | undefined,
+  htmlType?: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
-  variant: 'primary' | 'secondary' | 'link',
+  variant?: 'primary' | 'secondary' | 'link',
   wrapperClass?: string,
 } & GlobalProps
 
@@ -66,8 +68,10 @@ const Button = (props: ButtonPropTypes) => {
     id,
     loading = false,
     onClick,
+    tabIndex,
     link = null,
     newWindow = false,
+    target = '',
     text,
     htmlType = 'button',
     value,
@@ -117,7 +121,17 @@ const Button = (props: ButtonPropTypes) => {
     }
   }
 
-  const displayButton = () => {
+  const getTargetAttribute = () => {
+    if (target && link) {
+      return target
+    } else if (newWindow) {
+      return '_blank'
+    }
+
+    return null
+  }
+
+  const displayButton = () => {    
     if (link)
       return (
         <a
@@ -126,9 +140,10 @@ const Button = (props: ButtonPropTypes) => {
             className={css}
             href={link}
             id={id}
-            rel="noreferrer"
+            rel={target !== 'child' ? 'noreferrer' : null}
             role="link"
-            target={newWindow ? '_blank' : null}
+            tabIndex={tabIndex}
+            target={getTargetAttribute()}
         >
           {ifLoading()}
         </a>
@@ -144,6 +159,7 @@ const Button = (props: ButtonPropTypes) => {
             id={id}
             onClick={onClick}
             role="button"
+            tabIndex={tabIndex}
             type={htmlType}
             value={value}
         >

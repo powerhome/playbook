@@ -5,8 +5,7 @@
 @import "./sass_partials/inline_styles";
 @import "./sass_partials/month_and_year_styles";
 @import "./sass_partials/time_selection_styles";
-
-
+@import "./sass_partials/input_styles";
 
 [class^=pb_date_picker_kit] {
   .input_wrapper {
@@ -20,8 +19,10 @@
     @import "./sass_partials/calendar_input_icon";
   }
 
-  &:focus, :focus-within {
-    div.cal_icon_wrapper, input.text_input{
+  &:focus,
+  :focus-within {
+    div.cal_icon_wrapper,
+    input.date_picker_input {
       @include transition_default;
       border-color: $primary;
     }
@@ -33,15 +34,17 @@
   @import "./sass_partials/header_styles";
   @import "./sass_partials/overrides";
 
-  .text_input.flatpickr-input {
+  .date_picker_input.flatpickr-input {
     text-overflow: ellipsis;
     padding-right: $space_xl + 10 !important;
   }
+
   // Calendar Shadow and Border
   .flatpickr-calendar {
     box-shadow: $shadow_deeper;
     border: 1px solid $border_light;
   }
+
   // Hide Caret
   &:before,
   &:after {

@@ -7,15 +7,15 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 import Image from '../pb_image/_image'
 import OnlineStatus from '../pb_online_status/_online_status'
 
-type AvatarProps = {
+export type AvatarProps = {
   aria?: {[key: string]: string},
   className?: string,
   data?: {[key: string]: string},
   dark?: boolean,
   id?: string,
   imageAlt?: string,
-  imageUrl: string,
-  name: string,
+  imageUrl?: string,
+  name?: string,
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
   status?: "away" | "offline" | "online",
 } & GlobalProps

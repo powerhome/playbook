@@ -11,9 +11,15 @@ import Example from '../Templates/Example'
 
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] //TODO: investigate using types
 
+const MaxWidthDescription = () => (
+  <>
+    When building your interface it is common to add max width to specific kits so the interface looks good at all sizes. For articles we recommend pairing a "medium" width with "loose" line height. See our <a href="https://playbook.powerapp.cloud/kits/body/react" target="_blank">Body Kit</a> for an example. We've made it easy to add max with ANY kit through our global props. See below:
+  </>
+)
+
 const MaxWidth = ({ example }: {example: string}) => (
   <Example
-      description="When building your interface it is common to add max width to specific kits so the interface looks good at all sizes. We've made it easy to add max with ANY kit through our global props. See below:"
+      description={<MaxWidthDescription />}
       example={example}
       globalProps={{
         maxWidth: SIZES,

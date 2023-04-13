@@ -3,13 +3,13 @@
 <Card/>
 
 <Card
-  display={
-    xs: "hidden",
+  display={{
+    xs: "none",
     sm: "flex",
     md: "inline",
     lg: "inline_block",
     xl: "block"
-  }
+  }}
 >
   Card content
-<Card/>
+</Card>

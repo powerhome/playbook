@@ -19,6 +19,7 @@ type DatePickerConfig = {
   hideIcon?: boolean;
   inLine?: boolean,
   onChange: (dateStr: string, selectedDates: Date[]) => void,
+  onClose: (dateStr: Date[] | string, selectedDates: Date[] | string) => void,
   selectionType?: "month" | "week" | "",
   showTimezone?: boolean,
   staticPosition: boolean,
@@ -41,6 +42,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     minDate,
     mode,
     onChange = () => {},
+    onClose = () => {},
     pickerId,
     plugins,
     position = "auto",
@@ -112,6 +114,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   flatpickr(`#${pickerId}`, {
+    allowInput,
     closeOnSelect,
     disableMobile: true,
     dateFormat: getDateFormat(),
@@ -150,9 +153,10 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       window.addEventListener('resize', calendarResizer)
       if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
     }],
-    onClose: [() => {
+    onClose: [(selectedDates, dateStr) => {
       window.removeEventListener('resize', calendarResizer)
       if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
+      onClose(selectedDates, dateStr)
     }],
     onChange: [(selectedDates, dateStr) => {
       onChange(dateStr, selectedDates)
