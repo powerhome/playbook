@@ -3,47 +3,76 @@
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/colors";
 
+.markdown_title {
+  @include pb_title_1;
+  font-weight: $bolder;
+  margin: 1rem 0;
+}
+
 .markdown {
   h1 {
-    @include pb_title_1;
-    margin: 1rem 0;
+    font-size: $text_largest;
+    font-weight: $bolder;
+    margin: 1rem 0 0.5rem 0;
   }
 
   h2 {
-    @include pb_title_2;
-    margin: 1rem 0;
+    font-size: $text_larger;
+    font-weight: $bolder;
+    margin: 1rem 0 0.5rem 0;
   }
 
   h3 {
-    @include pb_title_3;
-    margin: 1rem 0;
+    font-size: $text_large;
+    font-weight: $bolder;
+    margin: 1rem 0 0.5rem 0;
   }
   h4 {
-    @include pb_title_4;
-    margin: 1rem 0;
+    font-size:  $text_base;
+    font-weight: $bolder;
+    margin: 1rem 0 0.5rem 0;
   }
   h5 {
-    margin: 1rem 0;
+    margin: 1rem 0 0.5rem 0;
   }
   h6 {
-    margin: 1rem 0;
+    margin: 1rem 0 0.5rem 0;
   }
 
   hr {
     margin: 2rem 0;
+    box-sizing: content-box;
+    overflow: hidden;
+    background: transparent;
+    border-bottom: 1px solid $transparent;
+    height: 1px;
+    padding: 0;
+    background-color: $border_light;
+    border: 0;
   }
-  p{
-    margin: 1.5rem 0;
+  p {
+    margin: 1.5rem 0 0.5rem 0;
+    line-height: $lh_loose;
   }
   code {
-    background: #122b3b;
-    color: #faf6e4;
+    font-family: monospace;
+    background: $bg_light;
     padding: 0.1rem 0.3rem;
     margin: 0 5px;
     box-shadow: 0 2px 10px $shadow;
     border-radius: 0.25rem;
     overflow: hidden;
-    font-size: 14px;
+    font-size: ($text_small - 1px);
+  }
+  pre {
+    background: $bg_dark;
+    padding: $space_sm;
+    border-radius: $border_rad_heavy;
+    code {
+      background: transparent;
+      box-shadow: none;
+      color: #faf6e4;
+    }
   }
 
   body {
@@ -85,4 +114,5 @@
      color: $text_dk_light;
     }
   }
+  // Pull more styles here: https://github.com/sindresorhus/github-markdown-css/blob/main/github-markdown-light.css
 }

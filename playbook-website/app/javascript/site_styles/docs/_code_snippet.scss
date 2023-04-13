@@ -1,8 +1,14 @@
 @import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/typography";
 
 .pb--codeCopy {
+  font-size: ($text_small - 1px);
   .highlight {
     margin: 20px 0;
+  }
+  pre.highlight {
+    padding: $space_xl $space_md;
+    margin: 0;
   }
   .highlight .hll {
     background-color: #404040

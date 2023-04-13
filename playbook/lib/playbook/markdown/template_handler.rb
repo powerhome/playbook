@@ -13,8 +13,8 @@ module Playbook
       self.default_format = Mime[:html]
 
       class << self
-        def call(template)
-          compiled_source = erb.call(template)
+        def call(template, source)
+          compiled_source = erb.call(template, source)
           "#{name}.render(begin;#{compiled_source};end)"
         end
 

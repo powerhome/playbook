@@ -19,6 +19,8 @@ module Playbook
           safe_links_only: true,
         }
 
+        # pb_table table-sm table-responsive-collapse table-card table-collapse-sm
+
         extensions = {
           autolink: true,
           superscript: true,
@@ -91,7 +93,9 @@ module Playbook
       end
 
       def image(link, title, alt_text)
-        image_tag(link, title: title, alt: alt_text, class: "imageloader lazyload")
+        return nil if link.nil?
+
+        %(<a href="#{link}" target="_blank">#{image_tag(link, title: title, alt: alt_text, class: 'imageloader lazyload')}</a>)
       end
 
       def preprocess(full_document)
