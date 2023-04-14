@@ -1,7 +1,6 @@
 @import "../tokens/colors";
 
 $transform-rotate-deg: 135deg;
-$input-max-width: 284px;
 $dropdown-min-width: 340px;
 $flag-min-resolution: 192dpi;
 
@@ -9,10 +8,6 @@ $flag-min-resolution: 192dpi;
   input::placeholder {
     color: $focus_input_light;
   }
-
-  // .text_input {
-  //   max-width: $input-max-width;
-  // }
 
   .dropdown_open {
     .text_input {
