@@ -67,23 +67,24 @@
     }
 
     code {
-      background-color: rgba(#616161, 0.1);
-      color: #616161;
+      font-family: monospace;
+      background: $bg_light;
+      padding: 0.1rem 0.3rem;
+      margin: 0 5px;
+      box-shadow: 0 2px 10px $shadow;
+      border-radius: 0.25rem;
+      overflow: hidden;
+      font-size: ($text_small - 1px);
     }
 
     pre {
-      background: #2f2746;
-      box-shadow: $shadow_deep;
-      color: #fff;
-      font-family: "JetBrainsMono", monospace;
-      padding: 0.75rem 1rem;
-      border-radius: $border_rad_heavier;
-
+      background: $bg_dark;
+      padding: $space_sm;
+      border-radius: $border_rad_heavy;
       code {
-        color: inherit;
-        padding: 0;
-        background: none;
-        font-size: 0.8rem;
+        background: transparent;
+        box-shadow: none;
+        color: #faf6e4;
       }
     }
     a {
@@ -105,6 +106,7 @@
     }
     p {
       line-height: $lh_loose;
+      margin: 1.5rem 0 0.5rem 0;
       &.is-editor-empty {
         &:first-child {
           &::before {
@@ -119,15 +121,40 @@
     }
     h1 {
       font-size: $font_largest;
-      font-weight: $bold;
+      font-weight: $bolder;
+      margin: 1rem 0 0.5rem 0;
     }
     h2 {
       font-size: $font_larger;
-      font-weight: $bold;
+      font-weight: $bolder;
+      margin: 1rem 0 0.5rem 0;
     }
     h3 {
       font-size: $font_large;
-      font-weight: $bold;
+      font-weight: $bolder;
+      margin: 1rem 0 0.5rem 0;
+    }
+    h4 {
+      font-size: $text_base;
+      font-weight: $bolder;
+      margin: 1rem 0 0.5rem 0;
+    }
+    h5 {
+      margin: 1rem 0 0.5rem 0;
+    }
+    h6 {
+      margin: 1rem 0 0.5rem 0;
+    }
+    hr {
+      margin: 2rem 0;
+      box-sizing: content-box;
+      overflow: hidden;
+      background: transparent;
+      border-bottom: 1px solid $transparent;
+      height: 1px;
+      padding: 0;
+      background-color: $border_light;
+      border: 0;
     }
     ol {
       padding-left: ($space_xs - 2px);
