@@ -78,7 +78,7 @@
     }
 
     pre {
-      background: $bg_dark;
+      background: #2f2746;
       padding: $space_sm;
       border-radius: $border_rad_heavy;
       code {
@@ -157,21 +157,25 @@
       border: 0;
     }
     ol {
-      padding-left: ($space_xs - 2px);
-      padding-left: $space_lg;
+      padding-left: $space_md;
       margin: $space_xs 0 $space_sm;
+      list-style: decimal;
       li {
         margin: 2px 0;
+        p {
+          margin: 0;
+        }
       }
     }
     ul {
       list-style: disc;
-      ::marker {
-        color: shade($slate, 20%);
+      padding-left: $space_md;
+      li {
+        margin: 2px 0;
+        p {
+          margin: 0;
+        }
       }
-    }
-    ol {
-      list-style: decimal;
     }
   }
 }
