@@ -4,6 +4,7 @@
 @import "tokens/titles";
 @import "tokens/line_height";
 @import "tokens/typography";
+@import "tokens/shadows";
 
 [class^="pb_rich_text_editor_kit"] {
   .toolbar_button {
@@ -71,11 +72,12 @@
     }
 
     pre {
-      background: #0d0d0d;
+      background: #2f2746;
+      box-shadow: $shadow_deep;
       color: #fff;
       font-family: "JetBrainsMono", monospace;
       padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
+      border-radius: $border_rad_heavier;
 
       code {
         color: inherit;
@@ -89,13 +91,14 @@
       border-bottom: 1px solid $primary;
       &:hover {
         color: $text_lt_default;
-        border-bottom: 1px solid $text_lt_default
+        border-bottom: 1px solid $text_lt_default;
       }
     }
     blockquote {
       font-size: $font_larger;
       padding: $space_md;
       font-style: italic;
+      color: $text_lt_default;
     }
     &:focus-visible {
       outline: unset;
