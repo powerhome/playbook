@@ -44,7 +44,7 @@ group :development do
   gem "better_errors", "2.9.1"
   gem "binding_of_caller"
   gem "rubocop", "1.36.0"
-  gem "rubocop-performance", "~> 1.15.0"
+  gem "rubocop-performance", "~> 1.17.0"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.1.0"
 end
