@@ -61,9 +61,17 @@
     border-bottom-right-radius: $border_rad_heaviest;
     border-bottom-left-radius: $border_rad_heaviest;
     height: 100%;
-    padding: 1.5rem;
-    > * + * {
-      margin-top: 0.75em;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    line-height: $lh_loose;
+
+    h4,
+    h5,
+    h6,
+    ul,
+    ol,
+    blockquote,
+    p {
+      margin: 1rem 0 0 0;
     }
 
     code {
@@ -78,12 +86,14 @@
     }
 
     pre {
-      background: #2f2746;
+      background: $bg_dark;
       padding: $space_sm;
-      border-radius: $border_rad_heavy;
+      border-radius: $border_rad_heaviest;
+      margin: 1.5rem 0 2rem 0;
       code {
         background: transparent;
         box-shadow: none;
+        border: 0;
         color: #faf6e4;
       }
     }
@@ -97,16 +107,16 @@
     }
     blockquote {
       font-size: $font_larger;
-      padding: $space_md;
+      padding: $space_sm $space_md;
       font-style: italic;
-      color: $text_lt_default;
+      p {
+        margin: 0;
+      }
     }
     &:focus-visible {
       outline: unset;
     }
     p {
-      line-height: $lh_loose;
-      margin: 1.5rem 0 0.5rem 0;
       &.is-editor-empty {
         &:first-child {
           &::before {
@@ -120,33 +130,36 @@
       }
     }
     h1 {
-      font-size: $font_largest;
+      font-size: $text_larger;
+      line-height: $text_larger;
       font-weight: $bolder;
-      margin: 1rem 0 0.5rem 0;
+      letter-spacing: $lspace_tight;
+      margin: 2.1rem 0 0 0;
     }
     h2 {
-      font-size: $font_larger;
+      font-size: $text_larger;
+      line-height: $text_larger;
       font-weight: $bolder;
-      margin: 1rem 0 0.5rem 0;
+      letter-spacing: $lspace_tight;
+      margin: 1.9rem 0 0 0;
     }
     h3 {
-      font-size: $font_large;
+      font-size: $text_large;
+      line-height: $text_large;
       font-weight: $bolder;
-      margin: 1rem 0 0.5rem 0;
+      letter-spacing: $lspace_tight;
+      margin: 1.7rem 0 0 0;
     }
-    h4 {
-      font-size: $text_base;
-      font-weight: $bolder;
-      margin: 1rem 0 0.5rem 0;
-    }
-    h5 {
-      margin: 1rem 0 0.5rem 0;
-    }
+    h4,
+    h5,
     h6 {
-      margin: 1rem 0 0.5rem 0;
+      font-size: $text_base;
+      line-height: $text_base;
+      letter-spacing: $lspace_tight;
+      font-weight: $bolder;
     }
     hr {
-      margin: 2rem 0;
+      margin: 2.2rem 0;
       box-sizing: content-box;
       overflow: hidden;
       background: transparent;
@@ -157,8 +170,8 @@
       border: 0;
     }
     ol {
+      margin: 1rem 0 0 0;
       padding-left: $space_md;
-      margin: $space_xs 0 $space_sm;
       list-style: decimal;
       li {
         margin: 2px 0;
@@ -168,7 +181,8 @@
       }
     }
     ul {
-      list-style: disc;
+      list-style-position: disc;
+      margin: 1rem 0 0 0;
       padding-left: $space_md;
       li {
         margin: 2px 0;
