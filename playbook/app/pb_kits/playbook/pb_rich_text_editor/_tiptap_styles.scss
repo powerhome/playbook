@@ -1,10 +1,11 @@
-@import "tokens/border_radius";
-@import "tokens/colors";
-@import "tokens/spacing";
-@import "tokens/titles";
-@import "tokens/line_height";
-@import "tokens/typography";
-@import "tokens/shadows";
+@import "../tokens/border_radius";
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/titles";
+@import "../tokens/line_height";
+@import "../tokens/typography";
+@import "../tokens/shadows";
+@import "../tokens/transition";
 
 [class^="pb_rich_text_editor_kit"] {
   .toolbar_button {
@@ -42,6 +43,8 @@
 
   .toolbar {
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
+    border: 1px solid $border_light;
+    overflow-x: auto;
     &_block {
       gap: $space_xs;
     }
@@ -58,11 +61,16 @@
 
   .ProseMirror {
     background: $white;
+    border: 1px solid $border_light;
+    border-top-color: transparent;
     border-bottom-right-radius: $border_rad_heaviest;
     border-bottom-left-radius: $border_rad_heaviest;
     height: 100%;
-    padding: 0 1.5rem 1.5rem 1.5rem;
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
     line-height: $lh_loose;
+    :first-child {
+      margin-top: 0;
+    }
 
     h4,
     h5,
@@ -115,19 +123,8 @@
     }
     &:focus-visible {
       outline: unset;
-    }
-    p {
-      &.is-editor-empty {
-        &:first-child {
-          &::before {
-            color: $text_lt_light;
-            content: attr(data-placeholder);
-            float: left;
-            height: 0;
-            pointer-events: none;
-          }
-        }
-      }
+      border-color: $primary;
+      @include transition_default;
     }
     h1 {
       font-size: $text_larger;
