@@ -34,7 +34,12 @@ module Playbook
         @source ||= begin
           extension = type == "react" ? "jsx" : "html.erb"
           raw_code = read_kit_file("_#{example_key}.#{extension}")
-          raw_code.gsub("'../../'", "'playbook-ui'").gsub(/\s*{...props}\s*\n/, "\n")
+          raw_code.gsub("'../../'", "'playbook-ui'")
+          if dark
+            raw_code.gsub("{...props}", "dark")
+          else
+            raw_code.gsub(/\s*{...props}\s*\n/, "\n")
+          end
         end
       end
 
