@@ -33,7 +33,8 @@ module Playbook
       def source
         @source ||= begin
           extension = type == "react" ? "jsx" : "html.erb"
-          read_kit_file("_#{example_key}.#{extension}")
+          raw_code = read_kit_file("_#{example_key}.#{extension}")
+          raw_code.gsub("'../../'", "'playbook-ui'").gsub(/\s*{...props}\s*\n/, "\n")
         end
       end
 
