@@ -1,5 +1,22 @@
 
 
+## [12.15.0](https://github.com/powerhome/playbook/tree/12.15.0) (2023-04-12)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.14.0...12.15.0)
+
+**Kit Enhancements:**
+
+- Update Avatar Kit imageAlt Default [\#2446](https://github.com/powerhome/playbook/pull/2446) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Change Star Rating Kit from JSX to TSX [\#2428](https://github.com/powerhome/playbook/pull/2428) ([markdoeswork](https://github.com/markdoeswork))
+
+**Improvements:**
+
+- Adding Card Header Support for Striped Colors [\#2442](https://github.com/powerhome/playbook/pull/2442) ([carloslimasd](https://github.com/carloslimasd))
+- Updating Global Props Cursor Values [\#2433](https://github.com/powerhome/playbook/pull/2433) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+
 ## [12.14.0](https://github.com/powerhome/playbook/tree/12.14.0) (2023-04-06)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.13.0...12.14.0)
