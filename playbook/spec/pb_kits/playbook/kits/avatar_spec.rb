@@ -24,4 +24,11 @@ RSpec.describe Playbook::PbAvatar::Avatar do
       expect(subject.new(size: "lg").classname).to eq "pb_avatar_kit_size_lg"
     end
   end
+
+  describe "#testing avatar kit methods" do
+    it "returns the image alt using either image alt or name prop" do
+      image = subject.new(name: "Terry Johnson")
+      expect(image.alt_text).to eq "Terry Johnson"
+    end
+  end
 end

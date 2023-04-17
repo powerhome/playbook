@@ -1,4 +1,5 @@
 @import "card_mixin";
+@import "../utilities/colors";
 
 [class^=pb_card_kit] {
   @include pb_card;
@@ -29,8 +30,19 @@
     @each $color_name, $color_value in $pb_card_header_colors {
       &[class*=_#{$color_name}] {
         @include pb_card_header_color($color_value);
-        [class^=pb_body_kit] {
-          color: lightenText($color_value);
+        color: lightenText($color_value);
+      }
+    }
+    @each $color_name, $color_value in $pb_card_header_colors {
+      &[class*=_#{$color_name}_striped] {
+        @if ((type-of($color_value) == color)) {
+          background: repeating-linear-gradient(
+            45deg,
+            $color_value,
+            $color_value 10px,
+            lighten( $color_value, 5% ) 10px,
+            lighten( $color_value, 5% ) 20px
+          );
         }
       }
     }

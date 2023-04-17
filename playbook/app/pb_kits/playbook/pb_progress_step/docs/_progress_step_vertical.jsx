@@ -1,7 +1,7 @@
 import React from 'react'
 
-import ProgressStep from '../_progress_step.jsx'
-import ProgressStepItem from '../_progress_step_item.jsx'
+import ProgressStep from '../_progress_step.tsx'
+import ProgressStepItem from '../_progress_step_item.tsx'
 
 const ProgressStepVertical = (props) => (
   <div>

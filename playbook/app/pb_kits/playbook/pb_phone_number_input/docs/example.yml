@@ -1,0 +1,13 @@
+examples:
+
+  react:
+  - phone_number_input_default: Default
+  - phone_number_input_preferred_countries: Preferred Countries
+  - phone_number_input_initial_country: Initial Country
+  - phone_number_input_only_countries: Limited Countries
+
+  rails:
+  - phone_number_input_default: Default
+  - phone_number_input_preferred_countries: Preferred Countries
+  - phone_number_input_initial_country: Initial Country
+  - phone_number_input_only_countries: Limited Countries

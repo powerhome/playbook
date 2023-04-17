@@ -4,6 +4,7 @@ examples:
   - date_picker_default: Default
   - date_picker_hide_icon: Hide Input Icon
   - date_picker_default_date: Default Date
+  - date_picker_allow_input: Allow Input
   - date_picker_input: Input Field
   - date_picker_label: Label
   - date_picker_range: Range
@@ -22,14 +23,15 @@ examples:
   - date_picker_positions: Custom Positions
   - date_picker_positions_element: Custom Position (based on element)
 
-
   react:
   - date_picker_default: Default
   - date_picker_hide_icon: Hide Input Icon
   - date_picker_default_date: Default Date
+  - date_picker_allow_input: Allow Input
   - date_picker_input: Input Field
   - date_picker_label: Label
   - date_picker_on_change: onChange
+  - date_picker_on_close: onClose
   - date_picker_range: Range
   - date_picker_format: Format
   - date_picker_disabled: Disabled Dates

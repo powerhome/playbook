@@ -22,6 +22,11 @@ RSpec.describe Playbook::PbTitle::Title do
       .with_default("h3")
   }
 
+  it {
+    is_expected.to define_boolean_prop(:bold)
+      .with_default(true)
+  }
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_title_kit_3"
@@ -32,6 +37,7 @@ RSpec.describe Playbook::PbTitle::Title do
       expect(subject.new(size: 4).classname).to eq "pb_title_kit_4"
       expect(subject.new(tag: "h3").classname).to eq "pb_title_kit_3"
       expect(subject.new(size: 4, color: "link").classname).to eq "pb_title_kit_4_link"
+      expect(subject.new(bold: false).classname).to eq "pb_title_kit_3_thin"
     end
   end
 

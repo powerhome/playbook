@@ -1,0 +1,3 @@
+For the Rails version of the dialog kit, the clickable element being used to open the dialog must be given a `open-dialog` data attribute with a value that is the same as the id being given to the dialog itself. See code example below to see this in action.
+
+Additionally, both the cancel button and the confirm button have optional id props which can be used to pass in a custom id to allow developers to target that button with custom javascript if needed (`confirm_button_id` and `cancel_button_id`).

@@ -1,0 +1,192 @@
+@import "../tokens/colors";
+
+$transform-rotate-deg: 135deg;
+$input-max-width: 284px;
+$dropdown-min-width: 340px;
+$flag-min-resolution: 192dpi;
+
+.pb_phone_number_input {
+  input::placeholder {
+    color: $focus_input_light;
+  }
+
+  .text_input {
+    max-width: $input-max-width;
+  }
+
+  .dropdown_open {
+    .text_input {
+      border-color: $primary !important;
+    }
+
+    .iti__selected-flag:focus-visible {
+      outline-style: none;
+    }
+  }
+
+  .iti__country {
+    padding: 5px 10px 5px 16px;
+    transition: $transition_default;
+  }
+
+  .iti__selected-flag {
+    padding: 0 $space_xxs 0 $space_sm;
+
+    &[aria-expanded="true"] {
+      color: $primary_action;
+    }
+
+    &:focus-visible {
+      outline-style: solid;
+      border-radius: $space_xxs 0px 0px $space_xxs;
+      outline-color: $primary;
+    }
+  }
+
+  .iti__country.iti__highlight {
+    background-color: $hover_light;
+
+    .iti__country-name, .iti__dial-code {
+      color: $primary;
+    }
+  }
+
+  .iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+    background-color: $focus_input_light;
+  }
+
+  .iti__flag-container:hover + .text_input {
+    background-color: $focus_input_light;
+  }
+
+  .iti__flag {
+    background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags.png");
+    border-radius: 1px;
+  }
+
+  .iti--separate-dial-code {
+    width: 100%;
+  }
+
+  .iti--separate-dial-code .iti__selected-flag {
+    background-color: rgba($white, $opacity_1);
+  }
+
+  .iti__arrow {
+    border-left: unset;
+    border-right: unset;
+    border-top: unset;
+    width: unset;
+    height: unset;
+    margin-bottom: $space_xxs;
+  }
+
+  .iti__arrow--up {
+    border-bottom: unset;
+  }
+
+  .iti__arrow::before {
+    border-style: solid;
+    border-width: 1px 1px 0 0;
+    content: '';
+    display: inline-block;
+    height: $space_xxs + 1px;
+    left: 1px;
+    position: relative;
+    vertical-align: top;
+    width: $space_xxs + 1px;
+    top: $space_xs + 2px;
+    transform: rotate($transform-rotate-deg);
+    color: $slate;
+  }
+
+  .iti__arrow.iti__arrow--up::before {
+    transform: rotate(-($transform-rotate-deg/3));
+    top: $space_xs + 4px;
+    color: $primary_action;
+  }
+
+  .iti__active::after {
+    float: right;
+    content: "";
+    margin-top: $space_xxs + 1px;
+    transform: rotate($transform-rotate-deg/3);
+    height: $space_xs + 4px;
+    width: $space_xxs + 2px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+    border-radius: 1px;
+  }
+
+  .iti__country-list {
+    min-width: $dropdown-min-width;
+    border-radius: $border_radius_md;
+    border: 1px solid $border_light;
+    box-shadow: $shadow_deep;
+    margin-top: 1px;
+  }
+
+  .iti__divider {
+    border-bottom: 1px solid $border_light;
+  }
+
+  &.dark {
+    .iti--allow-dropdown .iti__flag-container {
+      background-color: rgba($white, 0);
+
+      &:hover {
+        background-color: rgba($white, 0);
+
+        &+ .text_input {
+          background-color: rgba($white, 0.15);
+        }
+
+        .iti__selected-flag {
+          background-color: rgba($white, 0);
+        }
+      }
+    }
+
+    .iti__selected-flag {
+      background-color: rgba($white, 0);
+      color: $white;
+    }
+
+    .iti__country-list {
+      background-color: $bg_dark;
+      border: 1px solid $border_dark;
+
+      .iti__highlight {
+        background-color: $hover_dark;
+
+        .iti__country-name {
+          color: $text_dk_default;
+        }
+  
+        .iti__dial-code {
+          color: $text_lt_lighter;
+        }
+      }
+    }
+
+    .iti__divider {
+      border-bottom: 1px solid $border_dark;
+    }
+
+    .iti__arrow.iti__arrow--up::before {
+      color: $slate;
+    }
+
+    .dropdown_open {
+      .text_input {
+        background-color: rgba($white, 0.025) !important;
+      }
+    }
+  }
+  
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: $flag-min-resolution) {
+    .iti__flag {
+      background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags@2x.png");
+    }
+  }
+}

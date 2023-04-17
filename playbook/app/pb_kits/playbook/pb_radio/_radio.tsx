@@ -10,16 +10,16 @@ type RadioProps = {
   aria?: {[key: string]: string},
   alignment?: string,
   checked?: boolean,
-  children?: Node,
+  children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
   error?: boolean,
   id?: string,
   label: string,
-  name: string,
-  value: string,
-  text: string,
+  name?: string,
+  value?: string,
+  text?: string,
   onChange: (event: React.FormEvent<HTMLInputElement> | null)=>void,
 } & GlobalProps
 
@@ -78,7 +78,7 @@ const Radio = ({
         status={error ? 'negative' : null}
         text={label}
         variant={null}
-      />
+    />
     </label>
   )
 }

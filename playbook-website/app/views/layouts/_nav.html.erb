@@ -52,6 +52,7 @@
     <% end %>
   <% end %>
   <%= react_component("KitSearch", classname: "mobile-kit-search", id: "mobile-kit-search", kits: search_list()) %>
+  <%= pb_rails("section_separator", props: {classname: "pb--page--topNav--separator"}) %>
 </div>
 
 <% flash.each do |name, msg| %>

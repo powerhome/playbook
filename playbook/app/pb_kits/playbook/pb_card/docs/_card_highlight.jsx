@@ -7,27 +7,25 @@ const CardHighlight = (props) => {
     <div>
       <Card
           {...props}
-          highlight={{ position: 'side', color: 'windows' }}
+          highlight={{ position: 'side', color: 'product_6_highlight' }}
+          marginBottom="sm"
       >
-        {'Card content'}
+        {'Side Position & Product 6 Highlight Color'}
       </Card>
-
-      <br />
 
       <Card
           {...props}
           highlight={{ position: 'top', color: 'warning' }}
+          marginBottom="sm"
       >
-        {'Card content'}
+        {'Top Position & Warning Color'}
       </Card>
-
-      <br />
 
       <Card
           {...props}
           highlight={{ position: 'side', color: 'category_2' }}
       >
-        {'Card content'}
+        {'Side Position & Category 2 Color'}
       </Card>
     </div>
   )

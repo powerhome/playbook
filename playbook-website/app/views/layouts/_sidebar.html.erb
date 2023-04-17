@@ -14,7 +14,8 @@
     title: "Kits",
     link: all_link(@type),
     variant: "subtle",
-    padding_y: "sm"
+    padding_y: "sm",
+    dark: cookies[:dark_mode] == "true" ? true : false
   }) do %>
     <% pb_rails("nav/item", props: {
       text: "All",

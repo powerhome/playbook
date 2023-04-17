@@ -43,7 +43,7 @@ const DialogHeader = (props: DialogHeaderProps) => {
   /* eslint-disable react/jsx-handler-names */
 
   return (
-    <>
+    <div className="dialog_sticky_header">
       <Flex
           {...ariaProps}
           {...dataProps}
@@ -56,11 +56,12 @@ const DialogHeader = (props: DialogHeaderProps) => {
             onClose={api.onClose}
           />
         }
+        
       </Flex>
       {separator &&
         <SectionSeparator />
       }
-    </>
+    </div>
   )
 }
 

@@ -26,6 +26,7 @@ RSpec.describe Playbook::PbUser::User do
       .with_default("sm")
       .with_values("lg", "md", "sm")
   }
+  it { is_expected.to define_prop(:subtitle) }
   it { is_expected.to define_prop(:title) }
 
   describe "#classname" do
