@@ -28,3 +28,17 @@ test('loads the given image url and name', () => {
   expect(image).toHaveAttribute('src', imageUrl)
   expect(image).toHaveAttribute('alt', imageAlt)
 })
+
+test('uses the name prop as the alt property if no imageAlt prop is passed in', () => {
+  render(
+    <Avatar
+        data={{ testid: testId }}
+        imageUrl={imageUrl}
+        name={name}
+    />
+  )
+
+  const image    = screen.getByAltText(name)
+
+  expect(image).toHaveAttribute('alt', name)
+})
