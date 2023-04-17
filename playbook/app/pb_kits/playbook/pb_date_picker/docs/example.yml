@@ -8,6 +8,7 @@ examples:
   - date_picker_input: Input Field
   - date_picker_label: Label
   - date_picker_range: Range
+  - date_picker_quick_pick: Range (Quick Pick)
   - date_picker_format: Format
   - date_picker_disabled: Disabled Dates
   - date_picker_min_max: Min Max
@@ -21,7 +22,6 @@ examples:
   - date_picker_week: Week
   - date_picker_time: Time Selection
   - date_picker_positions: Custom Positions
-  - date_picker_quick_pick: Quick Pick
   - date_picker_positions_element: Custom Position (based on element)
 
   react:
@@ -34,6 +34,7 @@ examples:
   - date_picker_on_change: onChange
   - date_picker_on_close: onClose
   - date_picker_range: Range
+  - date_picker_quick_pick: Range (Quick Pick)
   - date_picker_format: Format
   - date_picker_disabled: Disabled Dates
   - date_picker_min_max: Min Max
@@ -46,5 +47,4 @@ examples:
   - date_picker_week: Week
   - date_picker_time: Time Selection
   - date_picker_positions: Custom Positions
-  - date_picker_quick_pick: Quick Pick
   - date_picker_positions_element: Custom Position (based on element)
