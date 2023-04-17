@@ -1,0 +1,8 @@
+
+<%= "#{@kit} in Rails rendered though React" %>
+<br>
+<br>
+<%= react_component("PbKitReact", kit: "Passed via Props from Controller", rawHTML: @raw_example) %>
+<br>
+<br>
+<%= react_component("PbKitFetch", kit: "Example Fetched from Server") %>
