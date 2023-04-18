@@ -1,3 +1,5 @@
+<%= javascript_include_tag('copyCode.js')%>
+
 <% example_html = ERB.new(example).result %>
 
 <%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark }) do %>
@@ -15,9 +17,11 @@
     <div id="code-wrapper">
       <div class="pb--codeControls">
         <ul>
-          <li>
-            <a id="code" href="#" onclick="copyContent(`<%= example_html%>`)" class="">Copy HTML</a>
-          </li>
+          <% if type == "rails" %>
+            <li>
+              <a id="code" href="#" onclick="copyContent(`<%= example_html%>`)" class="">Copy HTML</a>
+            </li>
+          <% end %>
           <li>
             <a href="#" id="toggle-open" data-toggle="code_example">Code Example</a>
           </li>
@@ -32,13 +36,3 @@
   <% end %>
 <% end %>
 
-<script>
-  let copyContent = (content) => {
-    const el = document.createElement("textarea")
-    el.value = content
-    document.body.appendChild(el)
-    el.select()
-    document.execCommand("copy")
-    document.body.removeChild(el)
-    }
-</script>

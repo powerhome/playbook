@@ -9,6 +9,10 @@ window.datePickerHelper = datePickerHelper
 import dialogHelper from './pb_dialog/dialogHelper'
 window.dialogHelper = dialogHelper
 
+// CopyContent
+import copyContent from './pb_docs/copyCode'
+window.copyContent = copyContent
+
 // Lazy image loading
 import 'lazysizes'
 
