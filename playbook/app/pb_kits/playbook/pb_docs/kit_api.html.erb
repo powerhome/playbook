@@ -1,7 +1,7 @@
 <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
   <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm" }) %>
   <%= pb_rails("card", props: { padding: "none" }) do %>
-<% puts kit_local_props %>
+<% puts local_prop_data %>
 <% puts "===================" %>
     <%= pb_rails("list", props: { xpadding: true }) do %>
       <% kit_props.each do |key, _def| %>
