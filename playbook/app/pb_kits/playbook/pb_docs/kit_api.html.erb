@@ -1,12 +1,16 @@
 <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
   <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm" }) %>
   <%= pb_rails("card", props: { padding: "none" }) do %>
-<% puts local_prop_data %>
-<% puts "===================" %>
+
+<% puts "===================#{local_prop_data}" %>
     <%= pb_rails("list", props: { xpadding: true }) do %>
-      <% kit_props.each do |key, _def| %>
-        <%= pb_rails("list/item") do %>
-          <%= key %>
+      <% local_prop_data.each do |hash|%>
+        <% hash.values.first.each do |subhash| %>
+          <% subhash.each do |value| %>
+            <%= pb_rails("list/item") do %>
+              <%= value %>
+            <% end %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

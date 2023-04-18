@@ -31,10 +31,10 @@ module Playbook
           # puts "THIS IS THE DEFAULT: ========== #{key[:value].instance_variable_get(:@values)}"
           values = key[:value].instance_variable_get(:@values)
 
-          local_props.push(name)
-          local_props.push(type)
-          local_props.push(default)
-          local_props.push(values)
+          local_props.push([{ key: "name", value: name }, { key: "type", value: type }, { key: "default", value: default }, { key: "values", value: values }])
+          # local_props.push({ key: "type", value: type })
+          # local_props.push({ key: "default", value: default })
+          # local_props.push({ key: "values", value: values })
 
           # puts Time.current
           # key.each do |prop|
