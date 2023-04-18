@@ -1,10 +1,10 @@
 <%= pb_rails("table", props: { size: "sm", margin_bottom: "lg" }) do %>
   <thead>
-    <%= pb_rails("background", props: { background_color: "light", tag: "tr" }) do %>
+    <tr>
       <th>Column 1</th>
       <th>Column 2</th>
       <th>Column 3</th>
-    <% end %>
+    </tr>
   </thead>
   <tbody>
     <tr>
@@ -12,7 +12,7 @@
       <td>Value 2</td>
       <td>Value 3</td>
     </tr>
-    <%= pb_rails("background", props: { background_color: "light", tag: "tr" }) do %>
+    <%= pb_rails("background", props: { background_color: "error_subtle", tag: "tr" }) do %>
       <td>Value 1</td>
       <td>Value 2</td>
       <td>Value 3</td>
@@ -42,17 +42,13 @@
     </tr>
     <tr>
       <td>Value 1</td>
-      <%= pb_rails("background", props: { background_color: "success_subtle", tag: "td" }) do %>
-        Value 2
-      <% end %>
+      <td>Value 2</td>
       <td>Value 3</td>
     </tr>
     <tr>
       <td>Value 1</td>
       <td>Value 2</td>
-      <%= pb_rails("background", props: { background_color: "info_subtle", tag: "td" }) do %>
-        Value 3
-      <% end %>
+      <td>Value 3</td>
     </tr>
   </tbody>
 <% end %>

@@ -7,18 +7,14 @@ const TableWithBackgroundKit = (props) => {
   return (
     <div>
       <Table
-          marginBottom="lg"
           {...props}
       >
         <thead>
-          <Background
-              backgroundColor="light"
-              tag='tr'
-          >
+          <tr>
               <th>{'Column 1'}</th>
               <th>{'Column 2'}</th>
               <th>{'Column 3'}</th>
-          </Background>
+          </tr>
         </thead>
         <tbody>
           <tr>
@@ -27,7 +23,7 @@ const TableWithBackgroundKit = (props) => {
             <td>{'Value 3'}</td>
           </tr>
           <Background
-              backgroundColor="light"
+              backgroundColor="error_subtle"
               tag='tr'
           >
             <td>{'Value 1'}</td>
@@ -64,23 +60,13 @@ const TableWithBackgroundKit = (props) => {
           </tr>
           <tr>
             <td>{'Value 1'}</td>
-            <Background
-                backgroundColor="success_subtle"
-                tag='td'
-            >
-              {'Value 2'}
-            </Background>
+            <td>{'Value 2'}</td>
             <td>{'Value 3'}</td>
           </tr>
           <tr>
             <td>{'Value 1'}</td>
             <td>{'Value 2'}</td>
-            <Background
-                backgroundColor="info_subtle"
-                tag='td'
-            >
-              {'Value 3'}
-            </Background>
+            <td>{'Value 3'}</td>
           </tr>
         </tbody>
       </Table>
