@@ -4,15 +4,15 @@
 
 <% puts "===================#{local_prop_data}" %>
     <%= pb_rails("list", props: { xpadding: true }) do %>
-      <% local_prop_data.each do |hash|%>
-        <% hash.values.first.each do |subhash| %>
-          <% subhash.each do |value| %>
-            <%= pb_rails("list/item") do %>
-              <%= value %>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
+      <%# <% local_prop_data.each do |hash|%> %>
+        <%# <% hash.values.first.each do |subhash| %> %>
+          <%# <% subhash.each do |value| %> %>
+            <%# <%= pb_rails("list/item") do %> %>
+              <%# <%= value %> %>
+            <%# <% end %> %>
+          <%# <% end %> %>
+        <%# <% end %> %>
+      <%# <% end %> %>
     <% end %>
   <% end %>
 </div>

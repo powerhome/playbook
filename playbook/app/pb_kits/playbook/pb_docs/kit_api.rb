@@ -16,7 +16,7 @@ module Playbook
       end
 
       def local_prop_data
-        local_props = []
+        local_props = {}
 
         kit_local_props.each do |key, _value|
           # Itterate over values
@@ -31,7 +31,8 @@ module Playbook
           # puts "THIS IS THE DEFAULT: ========== #{key[:value].instance_variable_get(:@values)}"
           values = key[:value].instance_variable_get(:@values)
 
-          local_props.push([{ key: "name", value: name }, { key: "type", value: type }, { key: "default", value: default }, { key: "values", value: values }])
+          # local_props.push([{ key: "name", value: name }, { key: "type", value: type }, { key: "default", value: default }, { key: "values", value: values }])
+          local_props[name.to_sym] = { "type": type, "default": default, "values": values }
           # local_props.push({ key: "type", value: type })
           # local_props.push({ key: "default", value: default })
           # local_props.push({ key: "values", value: values })
