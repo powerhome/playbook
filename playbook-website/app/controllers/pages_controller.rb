@@ -123,6 +123,12 @@ class PagesController < ApplicationController
     render "pages/kit_show_demo", layout: "layouts/kits"
   end
 
+  def kit_show_new
+    @kit = params[:name]
+    @examples = kit_examples
+    render "pages/kit_show_new", layout: "layouts/kits"
+  end
+
   def rails_raw
     @kit = params[:name]
     example = pb_doc_kit_examples(@kit, "rails").first
