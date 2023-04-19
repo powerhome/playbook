@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root                      to: "pages#home"
-  get "home",               to: "pages#home"
-  get "getting_started",    to: "pages#getting_started"
-  get "kits",               to: "pages#kits"
-  get "visual_guidelines",  to: "pages#visual_guidelines"
-  get "changelog",          to: "pages#changelog"
+  root                           to: "pages#home"
+  get "home",                    to: "pages#home"
+  get "getting_started",         to: "pages#getting_started"
+  get "kits",                    to: "pages#kits"
+  get "visual_guidelines",       to: "pages#visual_guidelines"
+  get "visual_guidelines/:name", to: "pages#visual_guidelines_individual"
+  get "changelog",               to: "pages#changelog"
 
   get "kits/:name",                 to: "pages#kit_show_rails",       as: "kit_show"
   get "kits/:name/rails",           to: "pages#kit_show_rails",       as: "kit_show_rails"

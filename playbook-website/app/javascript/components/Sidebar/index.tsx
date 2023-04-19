@@ -18,7 +18,7 @@ export const MENU_ITEMS = [
 ];
 
 const Sidebar = () => {
-
+  
   return (
     <>
     <Caption marginY="md" marginLeft="md" text="Visual Guidelines"/>
@@ -26,7 +26,7 @@ const Sidebar = () => {
         {
             MENU_ITEMS.map(item => (
                 <NavItem
-                link={`#${item.replace(/\s+/g, '')}`}
+                link={`/visual_guidelines/${item.toLowerCase().replace(/[\sA-Z-]+/g, (match) => " ".replace(/[\s-]/g, '_'))}`}
                 text={item}
                 />
             ))

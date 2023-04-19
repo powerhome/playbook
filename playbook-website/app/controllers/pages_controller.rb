@@ -10,11 +10,11 @@ require "will_paginate/array" # Needed to show a fake pagination example
 require_relative "application_controller"
 
 class PagesController < ApplicationController
-  before_action :set_js, only: %i[visual_guidelines]
+  before_action :set_js, only: %i[visual_guidelines visual_guidelines_individual]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
-  before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
+  before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines visual_guidelines_individual]
 
   include Playbook::PbDocHelper
   include Playbook::PbKitHelper
@@ -136,6 +136,20 @@ class PagesController < ApplicationController
                                           show_raw: true,
                                         })
     render inline: raw_example, layout: false
+  end
+
+  def visual_guidelines_individual
+    formatter = Rouge::Formatters::HTML.new
+    lexer = Rouge::Lexer.find("react")
+    kit_examples = {}
+    Dir.glob(Rails.root.join("app/views/pages/code_snippets/*.txt")).each do |example_path|
+      example_txt = File.read(example_path)
+
+      formatted_example_txt = formatter.format(lexer.lex(example_txt))
+      kit_examples[example_path.split("/").last.sub(".txt", "")] = formatted_example_txt
+    end
+    @kit_examples_json = kit_examples
+    render "pages/visual_guidelines_individual", layout: "layouts/visual_guidelines"
   end
 
   # TODO: rename this method once all guidelines are completed
