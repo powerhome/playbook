@@ -1,4 +1,4 @@
-<%= javascript_include_tag('copyCode.js')%>
+
 
 <% example_html = ERB.new(example).result %>
 
@@ -19,7 +19,7 @@
         <ul>
           <% if type == "rails" %>
             <li>
-              <a id="code" href="#" onclick="copyContent(`<%= example_html%>`)" class="">Copy HTML</a>
+              <a href="#" onclick="copyContent(`<%= example_html %>`)" >Copy HTML</a>
             </li>
           <% end %>
           <li>
@@ -35,4 +35,3 @@
     </div>
   <% end %>
 <% end %>
-
