@@ -48,13 +48,14 @@
 <% end %>
 
 <script>
-const copyOnClick = (content, elementID) => {
-  copyContent(content)
-  const popover = document.getElementById(elementID);
-  popover.style.display = "block";
+  const copyOnClick = (content, elementID) => {
+    copyContent(content)
 
-  setTimeout(() => {
-    popover.style.display = "none";
-  }, 3000);
-}
+    const popover = document.getElementById(elementID);
+    popover.style.display = "block";
+
+    setTimeout(() => {
+      popover.style.display = "none";
+    }, 3000);
+  }
 </script>
