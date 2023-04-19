@@ -1,14 +1,13 @@
-/* @flow */
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type TableRowPropTypes = {
-  aria?: object,
-  children: array<React.ReactNode> | React.ReactNode,
+  aria?: { [key: string]: string },
+  children: React.ReactNode[] | React.ReactNode,
   className: string,
-  data?: object,
+  data?: { [key: string]: string },
   id?: string,
   sideHighlightColor: string,
 }
@@ -31,10 +30,10 @@ const TableRow = (props: TableRowPropTypes) => {
 
   return (
     <tr
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
+      id={id}
     >
       {children}
     </tr>
