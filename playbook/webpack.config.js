@@ -174,6 +174,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: "javascript/auto"
+      },
+      {
         test: /\.scss$/i,
         use: [
           MiniCssExtractPlugin.loader,

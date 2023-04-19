@@ -42,6 +42,10 @@
   <% if (action_name == "kit_show_rails") %>
     <%= pb_kit(kit: @kit, dark_mode: dark_mode?) %>
   <% else %>
+    <%= react_component("KitProps", 
+      kit: @kit, 
+      source: get_source(@kit))
+    %>
     <%= pb_kit(kit: @kit, type: "react", dark_mode: dark_mode?) %>
   <% end %>
 
