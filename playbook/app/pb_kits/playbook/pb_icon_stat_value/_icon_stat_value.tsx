@@ -94,13 +94,13 @@ const IconStatValue = (props: IconStatValueProps) => {
 
       <div>
         <Flex
-            vertical="bottom"
+            align="baseline"
         >
-          {titleSize(size)}
+            {titleSize(size)}
           &nbsp;
-          <Body
-              text={unit}
-          />
+            <Body
+                text={unit}
+            />
         </Flex>
         <Caption text={text} />
       </div>
