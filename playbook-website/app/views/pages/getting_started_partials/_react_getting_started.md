@@ -1,5 +1,3 @@
-# React Getting Started
-
 #### Bundle Install
 
 ```sh

@@ -5,7 +5,24 @@
 .getting_started {
   display: flex;
   justify-content: center;
-  padding: $space_lg $space_xl;
+  padding: $space_lg 0;
+  [class^=pb_bread_crumbs_kit] {
+    border-color: $transparent;
+  }
+  [class*=pb_icon_kit],
+  [class*=pb_title_kit_4] {
+    &:not(.current) {
+      color: $text_lt_light;
+    }  
+  }
+  [class^=pb_selectable_card_icon_kit] {
+    label {
+      padding: $space_xl 0;
+    }
+    .pb_body_kit_light {
+      display: none;
+    }
+  }
   .markdown {
     code {
       // override
@@ -14,6 +31,10 @@
         padding: $space_sm;
         border-radius: $border_rad_heavy;
       }
+    }
+    img {
+      width: 100%;
+      height: auto;
     }
   }
 }
