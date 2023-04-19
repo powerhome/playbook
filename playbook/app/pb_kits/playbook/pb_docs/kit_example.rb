@@ -41,8 +41,10 @@ module Playbook
     private
 
       def sanitize_code(stringified_code)
-        stringified_code = stringified_code.gsub("'../..'", "playbook-ui")
-                                           .gsub("'../../'", "playbook-ui")
+        stringified_code = stringified_code.gsub("'../..'", "'playbook-ui'")
+                                           .gsub("'../../'", "'playbook-ui'")
+                                           .gsub('"../../"', '"playbook-ui"')
+                                           .gsub('"../.."', '"playbook-ui"')
                                            .gsub("../../", "playbook-ui/")
                                            .gsub("../..", "playbook-ui/")
         stringified_code = dark ? stringified_code.gsub("{...props}", "dark") : stringified_code.gsub(/\s*{...props}\s*\n/, "\n")
