@@ -21,7 +21,10 @@ const Sidebar = () => {
   
   return (
     <>
-    <Caption marginY="md" marginLeft="md" text="Visual Guidelines"/>
+    <Caption marginY="md" 
+             marginLeft="md" >
+      <a style={{color: 'unset'}} href="https://playbook.powerapp.cloud/visual_guidelines">Visual Guidelines</a>
+    </Caption>
     <Nav variant="subtle">
         {
             MENU_ITEMS.map(item => (

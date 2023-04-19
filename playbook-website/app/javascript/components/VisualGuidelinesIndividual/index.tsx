@@ -71,7 +71,7 @@ const VisualGuidelinesIndividual = ({
         return null;
     }
   }
-  return <React.Fragment>{getComponent(result)}</React.Fragment>;
+  return <div className="visual_guidelines_individual">{getComponent(result)}</div>;
 };
 
 export default VisualGuidelinesIndividual;
