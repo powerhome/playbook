@@ -1,5 +1,3 @@
-
-
 <% example_html = ERB.new(example).result %>
 
 <%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark }) do %>
@@ -19,7 +17,18 @@
         <ul>
           <% if type == "rails" %>
             <li>
-              <a href="#" onclick="copyContent(`<%= example_html %>`)" >Copy HTML</a>
+              <a href="#" id="copy-<%= example_key %>-trigger" onclick="copyContent(`<%= example_html %>`)">
+                Copy HTML
+              </a>
+              <%= pb_rails("popover", props: {
+                  close_on_click: "any",
+                  trigger_element_id: "copy-#{example_key}-trigger",
+                  tooltip_id: "copy-#{example_key}",
+                  position: "top",
+                  padding: "xs"
+                  }) do %>
+                    HTML Copied
+              <% end %>
             </li>
           <% end %>
           <li>
