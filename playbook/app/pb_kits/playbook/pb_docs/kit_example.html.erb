@@ -17,7 +17,7 @@
         <ul>
           <% if type == "rails" %>
             <li>
-              <a href="#" id="copy-<%= example_key %>-trigger" onclick="copyContent(`<%= example_html %>`)">
+              <a href="#" id="copy-<%= example_key %>-trigger" onclick="copyOnClick(`<%= example_html %>`, `copy-<%= example_key %>`)">
                 Copy HTML
               </a>
               <%= pb_rails("popover", props: {
@@ -46,3 +46,14 @@
     </div>
   <% end %>
 <% end %>
+
+<script>
+const copyOnClick = (content, elementID) => {
+  copyContent(content)
+
+  const popover = document.getElementById(elementID);
+  setTimeout(() => {
+    popover.remove();
+  }, 3000);
+}
+</script>
