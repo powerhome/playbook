@@ -48,7 +48,7 @@
 <% end %>
 
 <script>
-  const copyOnClick = (content, elementID) => {
+  function copyOnClick(content, elementID) {
     copyContent(content)
 
     const popover = document.getElementById(elementID);
@@ -59,3 +59,4 @@
     }, 3000);
   }
 </script>
+   
