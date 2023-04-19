@@ -33,21 +33,26 @@ module Playbook
       def source
         @source ||= begin
           extension = type == "react" ? "jsx" : "html.erb"
-          raw_code = read_kit_file("_#{example_key}.#{extension}")
-          raw_code = raw_code.gsub("../../", "playbook-ui")
-          raw_code = dark ? raw_code.gsub("{...props}", "dark") : raw_code.gsub(/\s*{...props}\s*\n/, "\n")
-          puts raw_code == /props:\s*{.*}\s*\)/m
-          puts Time.current
-          if raw_code.include?("props: { ")
-            raw_code = raw_code.gsub("props: {", "props: {dark: true,") if type == "rails" && dark
-          elsif type == "rails" && dark
-            raw_code = raw_code.gsub("props: {", "props: {\n    dark: true,")
-          end
-          raw_code
+          stringified_code = read_kit_file("_#{example_key}.#{extension}")
+          sanitize_code(stringified_code)
         end
       end
 
     private
+
+      def sanitize_code(stringified_code)
+        stringified_code = stringified_code.gsub("'../..'", "playbook-ui")
+                                           .gsub("'../../'", "playbook-ui")
+                                           .gsub("../../", "playbook-ui/")
+                                           .gsub("../..", "playbook-ui/")
+        stringified_code = dark ? stringified_code.gsub("{...props}", "dark") : stringified_code.gsub(/\s*{...props}\s*\n/, "\n")
+        if stringified_code.include?("props: { ")
+          stringified_code = stringified_code.gsub("props: {", "props: {dark: true,") if type == "rails" && dark
+        elsif type == "rails" && dark
+          stringified_code = stringified_code.gsub("props: {", "props: {\n    dark: true,")
+        end
+        stringified_code
+      end
 
       def read_kit_file(*args)
         path = ::Playbook.kit_path(kit, "docs", *args)
