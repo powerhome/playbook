@@ -36,7 +36,13 @@ module Playbook
           raw_code = read_kit_file("_#{example_key}.#{extension}")
           raw_code = raw_code.gsub("../../", "playbook-ui")
           raw_code = dark ? raw_code.gsub("{...props}", "dark") : raw_code.gsub(/\s*{...props}\s*\n/, "\n")
-          raw_code = raw_code.gsub("props: {", "props: {\n    dark: true,") if type == "rails" && dark
+          puts raw_code == /props:\s*{.*}\s*\)/m
+          puts Time.current
+          if raw_code.include?("props: { ")
+            raw_code = raw_code.gsub("props: {", "props: {dark: true,") if type == "rails" && dark
+          elsif type == "rails" && dark
+            raw_code = raw_code.gsub("props: {", "props: {\n    dark: true,")
+          end
           raw_code
         end
       end
