@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "getting_started", to: "pages#getting_started"
   get "getting_started/rails", to: "pages#getting_started_rails"
   get "getting_started/react", to: "pages#getting_started_react"
-  # get "getting_started/html", to: "pages#getting_started_html_css"
+  get "getting_started/html", to: "pages#getting_started_html_css"
   get "getting_started/rails_react", to: "pages#getting_started_rails_react"
 
   get "kits",               to: "pages#kits"
