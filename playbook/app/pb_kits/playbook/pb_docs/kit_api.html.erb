@@ -36,7 +36,7 @@
                     <%= pb_rails("body", props: {
                       classname: "kearning"
                     }) do %>
-                        <%= value[:type] == "Enum" ? "array" : value[:type].downcase %>
+                        <%= value[:type] == "Enum" ? "string" : value[:type].downcase %>
                     <% end %>
                   <% end %>
                 </td>
