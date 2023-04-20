@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { parse } from 'react-docgen';
+// import { parse } from 'react-docgen';
 
 const KitProps = ({ kit, source }) => {
   console.log('kit: ',kit)
