@@ -1,21 +1,24 @@
-import React, { useEffect } from "react"
-import { parse } from 'react-docgen';
+import React, { useEffect } from 'react'
+const reactDocs = require('react-docgen')
 
 const KitProps = ({ kit, source }) => {
-  console.log('kit: ',kit)
-  console.log('source: ',source)
+  // eslint-disable-next-line no-console
+  console.log('kit: ', kit)
+  // eslint-disable-next-line no-console
+  console.log('source: ', source)
 
   useEffect(() => {
     const code = `/** My first component */
       export default ({ name }: { name: string }) => <div>{{name}}</div>;`
-    const documentation = parse(source)
+    const documentation = reactDocs.parse(code)
+    // eslint-disable-next-line no-console
     console.log('documentation: ', documentation)
-  }, []);
+  }, [])
 
   return (
-    <>
+    <div>
       {'HELLO KIT PROPS'}
-    </>
+    </div>
   )
 }
 
