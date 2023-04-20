@@ -32,6 +32,7 @@ const KitDocs = ({ source, exampleTitle, css }) => {
           },
           "/index.js": {
             code: entryPoint,
+            hidden: true,
           },
         }}
         theme='dark'
