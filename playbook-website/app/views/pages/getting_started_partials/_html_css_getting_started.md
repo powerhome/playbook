@@ -1,4 +1,4 @@
-#### 1 Add the Playbook NPM Package
+#### Add the Playbook NPM Package
 
 ```sh
 yarn add "playbook-ui@stable"
@@ -9,25 +9,26 @@ This will allow you to choose what version you want.
 ```sh
 yarn install
 ```
-#### 2 Import the CSS
+
+#### Import the CSS
 
 ```sass
 @import "playbook-ui/dis/playbook";
 @import "playbook-ui/dist/reset";
 ```
-#### 3 Optionally you can import the Javascript if you want some of the interactivity
+
+#### Optionally you can import the Javascript if you want some of the interactivity
 This will add all the Javascript to use the popovers & graphs for example.
 
 ```js
 import 'playbook-ui/dist/playbook-rails.js';
 ```
 
-#### 4 Navigate to the Rails Kits and copy the raw HTML from the examples
+#### Navigate to the Rails Kits and copy the raw HTML from the examples
 
 ![Copy the raw HTML from the examples](/images/getting_started/copy_html.png) 
 
-#### 5 How to include CSS and Javascript Assets
-
+#### How to include CSS and Javascript Assets
 To include CSS and JavaScript files in an HTML document, follow these steps:
 1. Create a CSS file with the extension ".css" and a JavaScript file with the extension ".js". Place them in a directory on your server, preferably in a subdirectory named "css" or "js" respectively.
 2. Open the HTML file you want to add the assets to in a text editor.
