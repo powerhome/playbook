@@ -15,6 +15,9 @@
       color: $text_lt_light;
     }  
   }
+  [class*=pb_icon_kit] {
+    color: $text_lt_lighter;
+  }
   [class^=pb_selectable_card_icon_kit] {
     label {
       padding: $space_xl 0;
