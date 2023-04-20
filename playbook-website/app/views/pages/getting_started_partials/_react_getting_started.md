@@ -11,8 +11,8 @@ yarn add playbook-ui
  "react-dom": "16.8.6",
 ```
 
-#### Import fonts and CSS styles
 
+#### Import fonts and CSS styles
 Can be imported in your Index.js file or top level app Component
 
 ```js
@@ -21,12 +21,13 @@ import 'playbook-ui/dist/fonts/regular-min';
 import 'playbook-ui/dist/playbook.css';
 ```
 
+
 #### Import Playbook React components
 
 ```js
 import { Avatar, Button } from 'playbook-ui';
 ```
 
-#### CodeSandbox React Setup Example
 
+#### CodeSandbox React Setup Example
 [Link to CodeSandbox Example](https://codesandbox.io/s/cool-platform-ydfb3)
