@@ -63,7 +63,7 @@ $bg_dark_card:        #231E3D !default;
 $background_colors: (
   bg_light:           $bg_light,
   bg_dark:            $bg_dark,
-  bg_dark_card:       $bg_dark_card 
+  bg_dark_card:       $bg_dark_card
 );
 
 /* Card colors ------------------*/
@@ -125,9 +125,11 @@ $shadow_colors: (
 $text_lt_default:     $charcoal !default;
 $text_lt_light:       #687887 !default;
 $text_lt_lighter:     $slate !default;
+$text_lt_success_sm:  #157F48 !default;
 $text_dk_default:     $white !default;
 $text_dk_light:       rgba($white, $opacity_6) !default;
 $text_dk_lighter:     rgba($white, $opacity_4) !default;
+$text_dk_success_sm:  #00CA74 !default;
 $text_colors: (
   text_lt_default:    $text_lt_default,
   text_lt_light:      $text_lt_light,
@@ -181,6 +183,7 @@ $primary_secondary:   lighten($primary, 10%) !default;
 $status_colors: (
   success:            $success,
   success_secondary:    $success_secondary,
+  success_sm:         $text_lt_success_sm,
   success_subtle:     $success_subtle,
   warning:            $warning,
   warning_secondary:    $warning_secondary,
@@ -202,6 +205,18 @@ $status_colors: (
 
 $status_color_text: (
   success:            $success,
+  success_sm:         $text_lt_success_sm,
+  warning:            darken($warning, 10%),
+  error:              $error,
+  info:               $info,
+  neutral:            darken($neutral, 15%),
+  primary:            $primary
+);
+
+// as we add more dark text colors we can update this variable
+$status_color_text_dark: (
+  success:            $success,
+  success_sm:         $text_dk_success_sm,
   warning:            darken($warning, 10%),
   error:              $error,
   info:               $info,
