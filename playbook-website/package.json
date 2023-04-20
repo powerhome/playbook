@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome-pro": "^6.2.1",
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@rails/webpacker": "5.2.1",
+    "anchor-js": "^5.0.0",
     "maplibre-gl": "^2.4.0",
     "playbook-ui": ">= 1",
     "prismjs": "^1.29.0",
