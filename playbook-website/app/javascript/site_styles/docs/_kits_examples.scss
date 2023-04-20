@@ -13,3 +13,21 @@
     }
   }
 }
+
+.popover-copy {
+  background-color: $bg_dark;
+  color: $white;
+
+  .copy-popover-arrow {
+    border-color: transparent transparent $black transparent !important;
+    transform: rotate(180deg);
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: calc(50% - 10px);
+    border-color: $white transparent transparent transparent;
+    border-style: solid;
+    border-width: 10px;
+    margin-bottom: 50px;
+  }
+}
