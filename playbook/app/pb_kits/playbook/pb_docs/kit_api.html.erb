@@ -1,18 +1,90 @@
 <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
-  <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm" }) %>
-  <%= pb_rails("card", props: { padding: "none" }) do %>
-
-<% puts "===================#{local_prop_data}" %>
-    <%= pb_rails("list", props: { xpadding: true }) do %>
-      <%# <% local_prop_data.each do |hash|%> %>
-        <%# <% hash.values.first.each do |subhash| %> %>
-          <%# <% subhash.each do |value| %> %>
-            <%# <%= pb_rails("list/item") do %> %>
-              <%# <%= value %> %>
-            <%# <% end %> %>
-          <%# <% end %> %>
-        <%# <% end %> %>
-      <%# <% end %> %>
+  <% if local_prop_data.present? %>
+    <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm" }) %>
+    <%= pb_rails("card", props: { padding: "none" }) do %>
+      <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
+        <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle" }) do %>
+          <%= pb_rails("nav/item", props: { text: "Kit Props", link: "#", active: true }) %>
+          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#" }) %>
+        <% end %>
+      <% end %>
+      <%= pb_rails("section_separator") %>
+      <%= pb_rails("card/card_body", props: {}) do %>
+        <%= pb_rails("table", props: {container: false, disable_hover: true}) do %>
+          <thead>
+            <tr>
+              <th>Props</th>
+              <th>Type</th>
+              <th>Values</th>
+              <th>Default</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% local_prop_data.each do |key, value|%>
+              <tr>
+                <td>
+                  <%= pb_rails("title", props: { text: key, tag: "h4", size: 4 }) %>
+                </td>
+                <td>
+                  <%= pb_rails("card", props: {
+                    classname: "card",
+                    padding: "xxs",
+                    background: "light",
+                    border_none: true,
+                    border_radius: "sm"
+                  })  do %>
+                    <%= pb_rails("body", props: {
+                      classname: "kearning"
+                    }) do %>
+                        <%= value[:type] == "Enum" ? "array" : value[:type].downcase %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if value[:values].present? %>
+                    <% value[:values].each do |item| %>
+                      <% if item != nil %>
+                        <%= pb_rails("card", props: {
+                          flex_direction: "row",
+                          classname: "card",
+                          padding: "xxs",
+                          background: "light",
+                          border_none: true,
+                          border_radius: "sm",
+                          margin: "xxs"
+                        })  do %>
+                          <%= pb_rails("body", props: {
+                              classname: "kearning"
+                          }) do %>
+                            <%= item %>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if value[:default].present? || value[:default].is_a?(TrueClass) || value[:default].is_a?(FalseClass) %>
+                    <%= pb_rails("card", props: {
+                            classname: "card",
+                            padding: "xxs",
+                            background: "light",
+                            border_none: true,
+                            border_radius: "sm"
+                      })  do %>
+                        <%= pb_rails("body", props: {
+                          classname: "kearning"
+                        }) do %>
+                            <%= value[:default] %>
+                        <% end %>
+                      <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
