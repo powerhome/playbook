@@ -1,5 +1,28 @@
 
 
+## [12.16.0](https://github.com/powerhome/playbook/tree/12.16.0) (2023-04-19)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.15.0...12.16.0)
+
+**Kit Enhancements:**
+
+- New Success sm Token [\#2458](https://github.com/powerhome/playbook/pull/2458) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Converting Table Kit to Typescript [\#2457](https://github.com/powerhome/playbook/pull/2457) ([carloslimasd](https://github.com/carloslimasd))
+- Add Table Tags to Background Kit [\#2453](https://github.com/powerhome/playbook/pull/2453) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Convert Textarea Kit to Typescript [\#2444](https://github.com/powerhome/playbook/pull/2444) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fix for Icon Stat Value Kit Misalignment [\#2463](https://github.com/powerhome/playbook/pull/2463) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Fixing Phone Number Input Kit Width and Method Errors [\#2462](https://github.com/powerhome/playbook/pull/2462) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Rails / React Playground and React Render Rails Examples [\#2460](https://github.com/powerhome/playbook/pull/2460) ([jasoncypret](https://github.com/jasoncypret))
+- Testing Adding Proxima Nova to Sandpack [\#2456](https://github.com/powerhome/playbook/pull/2456) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
 ## [12.15.0](https://github.com/powerhome/playbook/tree/12.15.0) (2023-04-12)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.14.0...12.15.0)
