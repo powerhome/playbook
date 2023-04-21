@@ -4,15 +4,12 @@ import { Card, Nav, SectionSeparator, Table, Title, Body, NavItem } from 'playbo
 const reactDocgen = require('react-docgen')
 
 const KitProps = ({ source }) => {
-  let showKitProps = true, filteredProps = []
   const globalProps = ['aria', 'className', 'data', 'dark', 'id']
+  let showKitProps = true, filteredProps = []
 
   try {
     const documentation = reactDocgen.parse(source)
     filteredProps = Object.entries(documentation.props).filter(([key, value]) => !globalProps.includes(key))
-
-    console.log('documentation: ', documentation)
-    console.log('filtered: ', filteredProps)
   } catch (e) {
     showKitProps = false
   }
