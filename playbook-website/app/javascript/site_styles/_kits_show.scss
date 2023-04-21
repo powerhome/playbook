@@ -1,4 +1,5 @@
 @import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/typography";
 
 .kit-show-wrapper {
   .sample-card-grid-override {
@@ -16,5 +17,12 @@
     .title-alignment {
       align-self: center;
     }
+  }
+  .kearning {
+    letter-spacing: $lspace_looser;
+  }
+  .card {
+    max-width: fit-content;
+    display: inline-block;
   }
 }

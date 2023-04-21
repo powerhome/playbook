@@ -42,10 +42,6 @@
   <% if (action_name == "kit_show_rails") %>
     <%= pb_kit(kit: @kit, dark_mode: dark_mode?) %>
   <% else %>
-    <%= react_component("KitProps",
-      kit: @kit,
-      source: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "react").tsx_source )
-    %>
     <%= pb_kit(kit: @kit, type: "react", dark_mode: dark_mode?) %>
   <% end %>
 
@@ -98,5 +94,12 @@
   <% if (action_name == "kit_show_rails") %>
     <br>
     <%= pb_rails("docs/kit_api", props: { kit: @kit }) %>
+  <% else %>
+    <br>
+    <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm" }) %>
+    <%= react_component("KitProps",
+      kit: @kit,
+      source: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "react").tsx_source )
+    %>
   <% end %>
 </div>
