@@ -5,14 +5,18 @@
       <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
         <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle" }) do %>
         <% if local_prop_data.present? %>
-          <%= pb_rails("nav/item", props: { text: "Kit Props", link: "#", active: true, id: "local-button" }) %>
+          <%= pb_rails("nav/item", props: { text: "Kit Props", link: "#", active: true, id: "local-button-active", classname: "local-active" }) %>
         <% end %>
-          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", active: true, id: "global-button" }) %>
+        <% if local_prop_data.present? %>
+          <%= pb_rails("nav/item", props: { text: "Kit Props", link: "#", id: "local-button", classname: "global-active" }) %>
+        <% end %>
+          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", active: true, id: "global-button-active", classname: "global-active" }) %>
+          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", id: "global-button", classname: "local-active" }) %>
         <% end %>
       <% end %>
       <%= pb_rails("section_separator") %>
       <%= pb_rails("card/card_body", props: {}) do %>
-        <%= pb_rails("table", props: {container: false, disable_hover: true, id: "global-prop-table"}) do %>
+        <%= pb_rails("table", props: {container: false, disable_hover: true, id: "global-prop-table", classname: "global-active"}) do %>
           <thead>
             <tr>
               <th>Props</th>
@@ -86,7 +90,7 @@
             <% end %>
           </tbody>
         <% end %>
-        <%= pb_rails("table", props: {container: false, disable_hover: true, id: "local-prop-table"}) do %>
+        <%= pb_rails("table", props: {container: false, disable_hover: true, id: "local-prop-table", classname: "local-active"}) do %>
           <thead>
             <tr>
               <th>Props</th>
@@ -166,20 +170,47 @@
 
 <script>
 
-document.getElementById("global-prop-table").style.display = "none"
-const element = document.getElementById("global-button");
-element.addEventListener("click", showGlobal);
+
+
+const globalStuff = document.querySelectorAll('.global-active');
+const localStuff = document.querySelectorAll('.local-active');
+
+  globalStuff.forEach(element => {
+    element.style.display = 'none';
+  });
+
+
+const globalButton = document.getElementById("global-button");
+globalButton.addEventListener("click", showGlobal);
+
+
+const localButton = document.getElementById("local-button");
+localButton.addEventListener("click", showLocal);
+
 
 function showGlobal() {
-  document.getElementById("global-prop-table").style.display = "block"
-  document.getElementById("local-prop-table").style.display = "none"
+  localStuff.forEach(element => {
+    element.style.display = 'none';
+  });
+
+  globalStuff.forEach(element => {
+    element.style.display = 'table';
+  });
 }
 
-const elementt = document.getElementById("local-button");
-elementt.addEventListener("click", showLocal);
+
 
 function showLocal() {
-  document.getElementById("global-prop-table").style.display = "none"
-  document.getElementById("local-prop-table").style.display = "block"
+  localStuff.forEach(element => {
+    element.style.display = 'table';
+  });
+
+  globalStuff.forEach(element => {
+    element.style.display = 'none';
+  });
 }
+
+
+
+
 </script>

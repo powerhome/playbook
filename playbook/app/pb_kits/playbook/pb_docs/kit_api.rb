@@ -48,7 +48,6 @@ module Playbook
       end
 
       def kit_props
-        pp "===============#{kit_class}"
         kit_class.props
       end
 
