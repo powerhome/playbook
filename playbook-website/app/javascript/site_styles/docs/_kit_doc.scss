@@ -20,19 +20,10 @@
     }
   }
 
-  .pb--close-toggle {
+  .pb--button--copy {
     position: absolute;
     right: 10px;
     top: 10px;
-    background: rgba($white, 0.8);
-    padding: 0 10px;
-    border-radius: 2px;
-    height: 22px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 600;
   }
 
   .pb--kit-example, .pb--kit-example-markdown {
