@@ -5,14 +5,14 @@
       <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
         <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle" }) do %>
         <% if local_prop_data.present? %>
-          <%= pb_rails("nav/item", props: { text: "Kit Props", link: "#", active: true }) %>
+          <%= pb_rails("nav/item", props: { text: "Kit Props", link: "#", active: true, id: "local-button" }) %>
         <% end %>
-          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", active: true }) %>
+          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", active: true, id: "global-button" }) %>
         <% end %>
       <% end %>
       <%= pb_rails("section_separator") %>
       <%= pb_rails("card/card_body", props: {}) do %>
-        <%= pb_rails("table", props: {container: false, disable_hover: true}) do %>
+        <%= pb_rails("table", props: {container: false, disable_hover: true, id: "global-prop-table"}) do %>
           <thead>
             <tr>
               <th>Props</th>
@@ -86,18 +86,100 @@
             <% end %>
           </tbody>
         <% end %>
+        <%= pb_rails("table", props: {container: false, disable_hover: true, id: "local-prop-table"}) do %>
+          <thead>
+            <tr>
+              <th>Props</th>
+              <th>Type</th>
+              <th>Values</th>
+              <th>Default</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% local_prop_data.each do |key, value|%>
+              <tr>
+                <td>
+                  <%= pb_rails("title", props: { text: key, tag: "h4", size: 4 }) %>
+                </td>
+                <td>
+                  <%= pb_rails("card", props: {
+                    classname: "card",
+                    padding: "xxs",
+                    background: "light",
+                    border_none: true,
+                    border_radius: "sm"
+                  })  do %>
+                    <%= pb_rails("body", props: {
+                      classname: "kearning"
+                    }) do %>
+                        <%= value[:type].downcase %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if value[:values].present? %>
+                    <% value[:values].each do |item| %>
+                      <% if item != nil %>
+                        <%= pb_rails("card", props: {
+                          flex_direction: "row",
+                          classname: "card",
+                          padding: "xxs",
+                          background: "light",
+                          border_none: true,
+                          border_radius: "sm",
+                          margin: "xxs"
+                        })  do %>
+                          <%= pb_rails("body", props: {
+                              classname: "kearning"
+                          }) do %>
+                            <%= item %>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if value[:default].present? || value[:default].is_a?(TrueClass) || value[:default].is_a?(FalseClass) %>
+                    <%= pb_rails("card", props: {
+                            classname: "card",
+                            padding: "xxs",
+                            background: "light",
+                            border_none: true,
+                            border_radius: "sm"
+                      })  do %>
+                        <%= pb_rails("body", props: {
+                          classname: "kearning"
+                        }) do %>
+                            <%= value[:default] %>
+                        <% end %>
+                      <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
       <% end %>
     <% end %>
   </div>
 
 <script>
-  function myFunction() {
-    console.log("here")
-    <%# var x = document.getElementById("myDIV");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    } %>
-  }
+
+document.getElementById("global-prop-table").style.display = "none"
+const element = document.getElementById("global-button");
+element.addEventListener("click", showGlobal);
+
+function showGlobal() {
+  document.getElementById("global-prop-table").style.display = "block"
+  document.getElementById("local-prop-table").style.display = "none"
+}
+
+const elementt = document.getElementById("local-button");
+elementt.addEventListener("click", showLocal);
+
+function showLocal() {
+  document.getElementById("global-prop-table").style.display = "none"
+  document.getElementById("local-prop-table").style.display = "block"
+}
 </script>
