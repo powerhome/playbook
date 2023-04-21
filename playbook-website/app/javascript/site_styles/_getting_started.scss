@@ -9,14 +9,18 @@
   [class^=pb_bread_crumbs_kit] {
     border-color: $transparent;
   }
-  [class*=pb_icon_kit],
-  [class*=pb_title_kit_4] {
-    &:not(.current) {
-      color: $text_lt_light;
-    }  
+  [class^=pb_selectable_card] {
+    [class*=pb_icon_kit] {
+      color: $text_lt_lighter;
+    }
   }
-  [class*=pb_icon_kit] {
-    color: $text_lt_lighter;
+  [class^=pb_bread_crumbs_kit] {
+    [class*=pb_icon_kit],
+    [class*=pb_title_kit_4] {
+      &:not(.current) {
+        color: $text_lt_light !important;
+      }  
+    }
   }
   [class^=pb_selectable_card_icon_kit] {
     label {
