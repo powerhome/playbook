@@ -19,7 +19,6 @@ Now that you have the package installed you could import styles via JS
 @import "playbook-ui/dist/tokens/screen_sizes.scss";
 ```
 
-
 #### Import all the Javascript Needed for Rails Kits
 
 This will add all the javascript to use the popovers, & graphs for example.

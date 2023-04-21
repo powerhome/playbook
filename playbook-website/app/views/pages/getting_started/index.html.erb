@@ -1,5 +1,5 @@
-<div class="getting_started">
-  <%= pb_rails("flex", props:{ align: "stretch", flex_direction: "column", max_width: "md"})  do %>
+<%= pb_rails("flex", props:{ classname: "getting_started", justify: "center" })  do %>
+  <%= pb_rails("flex/flex_item", props:{ max_width: "md"})  do %>
     <%= pb_rails("title", props: { text: "Getting Started", tag: "h1", size: 1, margin_bottom: "sm" }) %>
     <%= pb_rails("body", props: { margin_bottom: "md"}) do %>
       Playbook is an open source design system built for Ruby on Rails, React, and very soon SwiftUI. Playbook is built 
@@ -63,4 +63,4 @@
       <% end %>
     <% end %>
   <% end %>
-</div>
+<% end %>

@@ -48,4 +48,3 @@ Replace "path/to/your/css/file.css" with the actual path to your CSS file.
 Replace "path/to/your/js/file.js" with the actual path to your JavaScript file.
 5. Save the HTML file and upload all the files (HTML, CSS, and JavaScript) to your server.
 6. Test your HTML document in a web browser to ensure that the assets are being loaded correctly.
-

@@ -1,12 +1,5 @@
-<div class="getting_started">
-  <%= pb_rails("flex", props:{ 
-    align: "stretch",
-    flex_direction: "column",
-    justify: "center",
-    margin_y: "lg",
-    max_width: "md",
-    classname: "markdown",
-  }) do %>
+<%= pb_rails("flex", props:{ classname: "getting_started", justify: "center" })  do %>
+  <%= pb_rails("flex/flex_item", props:{ max_width: "md", classname: "markdown" })  do %>
     <div>
       <%= pb_rails("bread_crumbs", props: { aria: { label: "Breadcrumb Navigation" }, margin_bottom: "xl" }) do%>
         <%= pb_rails("icon", props: { icon: "flag-checkered"}) %>
@@ -26,4 +19,4 @@
     <% end %>
     <%= markdown(@html_css_getting_started) %>
   <% end %>
-</div>
+<% end %>
