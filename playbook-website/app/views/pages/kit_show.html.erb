@@ -97,8 +97,7 @@
   <% else %>
     <br>
     <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm" }) %>
-    <%= react_component("KitProps",
-      kit: @kit,
+    <%= react_component("AvailableProps",
       source: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "react").tsx_source )
     %>
   <% end %>
