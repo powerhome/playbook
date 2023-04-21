@@ -91,7 +91,7 @@ module Playbook
       prop :image_url
 
       prop :tag, type: Playbook::Props::Enum,
-                  values: %w[h1 h2 h3 h4 h5 h6 p div span],
+                  values: %w[h1 h2 h3 h4 h5 h6 p div span tr th td],
                   default: "div"
 
       prop :transition, type: Playbook::Props::Enum,
