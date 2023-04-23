@@ -29,21 +29,18 @@ const LightboxCurrentPhoto = (props) => {
     'https://images.unsplash.com/photo-1526657782461-9fe13402a841?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1984&q=80',
     'https://images.unsplash.com/photo-1523057530100-383d7fbc77a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80',
   ]
-  const [selectedPhoto, setSelectedPhoto] = useState(0)
   const [light, toggleLight] = useState(false)
   //Setting state with the index of the current slide exposed by the onChange prop
-  const [active, setActive] = useState(selectedPhoto)
+  const [active, setActive] = useState(0)
   //Setting state for the current photo to pass to the kit
   const [currentPhoto, setCurrentPhoto] = useState(active)
 
   const handleCloseLightbox = () => {
     toggleLight(!light)
-    setSelectedPhoto(null)
   }
 
-  const onPhotoClick = (photo) => {
+  const onPhotoClick = () => {
     toggleLight(!light)
-    setSelectedPhoto(photo)
   }
 
   const exampleStyles = {
@@ -52,29 +49,24 @@ const LightboxCurrentPhoto = (props) => {
   }
 
   return (
-    <div>
+    <div className="lightbox_doc_example_custom">
       {light ? (
         <>
-          <div style={{width: '200px', height: '50px', position: 'fixed', top: 0, right: 0, zIndex: 1000000000000000}}>
-            <div style={{position: 'absolute',right: '100px'}}>
-              <Button 
-                  onClick={()=> setCurrentPhoto(active > 0 ? active - 1 : 0)}
-              >
-                Back
-              </Button>
-            </div>
-            <div style={{position: 'absolute', right: 0}}>
-              <Button
-                  onClick={() => setCurrentPhoto(active < photos.length - 1 ? active + 1 : photos.length - 1)}
-              >
-                Next
-              </Button>
-            </div>
+          <div className='custom_lightbox_sidebar'>
+            <Button 
+                onClick={()=> setCurrentPhoto(active > 0 ? active - 1 : 0)}
+            >
+              Back
+            </Button>
+            <Button marginLeft='sm'
+                onClick={() => setCurrentPhoto(active < photos.length - 1 ? active + 1 : photos.length - 1)}
+            >
+              Next
+            </Button>
           </div>
           <Lightbox
               currentPhoto={currentPhoto}
               icon="times"
-              initialPhoto={selectedPhoto}
               onChange={(index) => setActive(index)}
               onClose={handleCloseLightbox}
               photos={photos}
