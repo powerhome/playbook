@@ -30,14 +30,14 @@ import 'playbook-ui/dist/playbook-rails.js';
 #### Add Inline Rails JS to Your Layout (Needed for Rails Graphs)
 
 ```erb
-<%%= yield :pb_js %>
+<%= yield :pb_js %>
 ```
 
 #### Add Font Awesome
 
 Playbook ships with font awesome but you’ll need to include it in your application
 
-```js
+```
 //= require regular-min.js
 //= require fontawesome-min.js
 ```

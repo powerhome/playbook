@@ -14,7 +14,7 @@ yarn install
 
 ```sass
 @import "playbook-ui/dis/playbook";
-@import "playbook-ui/dist/reset";
+ @import "playbook-ui/dist/reset";
 ```
 
 #### Optionally you can import the Javascript if you want some of the interactivity
