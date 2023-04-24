@@ -47,6 +47,8 @@ module Playbook
                                            .gsub('"../.."', '"playbook-ui"')
                                            .gsub("../../", "playbook-ui/")
                                            .gsub("../..", "playbook-ui/")
+                                           .gsub("'../", "'playbook-ui/")
+                                           .gsub('"../', '"playbook-ui/')
         stringified_code = dark ? stringified_code.gsub("{...props}", "dark") : stringified_code.gsub(/\s*{...props}\s*\n/, "\n")
         if stringified_code.include?("props: { ")
           stringified_code = stringified_code.gsub("props: {", "props: {dark: true,") if type == "rails" && dark
