@@ -54,3 +54,8 @@
 .quick-pick-drop-down > .flatpickr-months, .quick-pick-drop-down > .flatpickr-innerContainer {
   display: none;
 }
+
+#cal-icon-date-picker-quick-pick.cal_icon_wrapper {
+  pointer-events: auto;
+  cursor: pointer;
+}
