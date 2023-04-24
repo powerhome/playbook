@@ -62,7 +62,7 @@ const LightboxCurrentPhoto = (props) => {
               <Body marginBottom='md'>
                 This UI is for demonstration purposes only to demonstrate how external buttons can be used to change the slides.
               </Body>
-              <FlexItem>
+              <FlexItem alignSelf="center">
                 <Flex justifyContent="center">
                   <Button 
                       onClick={()=> setCurrentPhoto(active > 0 ? active - 1 : 0)}

@@ -4,7 +4,6 @@ import Slides from './Slides'
 import Thumbnails from './Thumbnails'
 
 type CarouselType = {
-  initialPhoto?: string,
   onClose?: () => void,
   icon?: string,
   currentIndex: number,

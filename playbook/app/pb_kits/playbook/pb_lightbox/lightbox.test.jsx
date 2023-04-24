@@ -18,7 +18,6 @@ test('Kit renders', () => {
         data={{ testid: testId }}
         icon="close"
         id="test1"
-        initialPhoto={1}
         onClose={() => {}}
         photos={TEST_PHOTOS}
     />
@@ -35,7 +34,6 @@ test('Shows selected images', () => {
         data={{ testid: testId }}
         icon="close"
         id="test1"
-        initialPhoto={0}
         onClose={() => {}}
         photos={TEST_PHOTOS}
     />
@@ -77,7 +75,6 @@ test('Closes on escape key', async () => {
         data={{ testid: testId }}
         icon="close"
         id="test1"
-        initialPhoto={0}
         onClose={mockClose}
         photos={TEST_PHOTOS}
     />
@@ -106,7 +103,6 @@ test('Closes on close button', async () => {
         data={{ testid: testId }}
         icon="close"
         id="test1"
-        initialPhoto={0}
         onClose={mockClose}
         photos={TEST_PHOTOS}
     />
