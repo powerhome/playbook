@@ -22,7 +22,6 @@ type pluginDataType = {
 const quickPickPlugin = () => {
   return function (fp: FpTypes & any): any {
 
-
   // custom useState for setting active item
   const useState = (defaultValue?: string) => {
     let value = defaultValue;

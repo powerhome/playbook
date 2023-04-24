@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -150,6 +150,12 @@ useEffect(() => {
     return base
   }
 
+  const iconRef = useRef(null);
+
+  const handleMouseOver = () => {
+    iconRef.current.style.cursor = "pointer"
+  }
+
   return (
     <div
         {...ariaProps}
@@ -167,7 +173,7 @@ useEffect(() => {
             className="pb_date_picker_kit_label"
             text={hideLabel ? null : label}
         />
-          <> 
+          <>
             <div className="date_picker_input_wrapper">
               <input
                   autoComplete="off"
@@ -180,7 +186,7 @@ useEffect(() => {
                   value={inputValue}
               />
 
-              {error && 
+              {error &&
                   <Body
                       status="negative"
                       text={error}
@@ -188,11 +194,13 @@ useEffect(() => {
                   />
               }
             </div>
-        
-            {!hideIcon && 
+
+            {!hideIcon &&
               <div
                   className={iconWrapperClass()}
                   id={`cal-icon-${pickerId}`}
+                  onMouseOver={handleMouseOver}
+                  ref={iconRef}
               >
                 <Icon
                     className="cal_icon"
