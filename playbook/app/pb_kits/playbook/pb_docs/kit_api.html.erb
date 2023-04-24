@@ -259,10 +259,10 @@
 
 <script>
 
-const globalStuff = document.querySelectorAll('.global-active');
-const localStuff = document.querySelectorAll('.local-active');
+const globalNavAndTable = document.querySelectorAll('.global-active');
+const localNavAndTable = document.querySelectorAll('.local-active');
 
-globalStuff.forEach(element => {
+globalNavAndTable.forEach(element => {
   element.style.display = 'none';
 });
 
@@ -277,21 +277,21 @@ if (localButton) {
 }
 
 function showGlobal() {
-  localStuff.forEach(element => {
+  localNavAndTable.forEach(element => {
     element.style.display = 'none';
   });
 
-  globalStuff.forEach(element => {
+  globalNavAndTable.forEach(element => {
     element.style.display = 'table';
   });
 }
 
 function showLocal() {
-  localStuff.forEach(element => {
+  localNavAndTable.forEach(element => {
     element.style.display = 'table';
   });
 
-  globalStuff.forEach(element => {
+  globalNavAndTable.forEach(element => {
     element.style.display = 'none';
   });
 }
