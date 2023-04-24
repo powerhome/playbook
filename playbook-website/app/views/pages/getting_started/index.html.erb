@@ -46,16 +46,8 @@
       <%= pb_rails("flex/flex_item", props: { 
         flex: 1 
       }) do %>
-        <%= pb_rails("tooltip", props: {
-          trigger_element_selector: "#html-setup",
-          tooltip_id: "tooltip-html-setup",
-          position: 'top'
-        }) do %>
-        Coming Soon
-        <% end %> 
-        <a href="#" id="html-setup">
+        <a href="/getting_started/html" id="html-setup">
           <%= pb_rails("selectable_card_icon", props: {
-            disabled: true,
             icon: "file-code", 
             title_text: "HTML & CSS", 
           }) %>

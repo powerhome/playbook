@@ -22,4 +22,4 @@ import 'playbook-ui/dist/playbook.css';
 import { Avatar, Button } from 'playbook-ui';
 ```
 #### CodeSandbox React Setup Example
-[Link to CodeSandbox Example](https://codesandbox.io/s/cool-platform-ydfb3)
+[Link to CodeSandbox Example](https://codesandbox.io/s/playbook-empty-6ixcw)
