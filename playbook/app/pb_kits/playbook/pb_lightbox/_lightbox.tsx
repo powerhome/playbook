@@ -12,7 +12,7 @@ type LightboxType = {
   aria?: {[key: string]: string},
   children: React.ReactNode[] | React.ReactNode | string,
   className?: string,
-  currentPhoto?: number,
+  currentPhotoIndex?: number,
   data?: {[key: string]: string | number},
   description?: string | any,
   id?: string,
@@ -32,7 +32,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     aria = {},
     children,
     className,
-    currentPhoto,
+    currentPhotoIndex,
     data = {},
     description,
     id = '',
@@ -52,8 +52,8 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
   },[activePhoto])
 
   useEffect(() => {
-    setActivePhoto(currentPhoto)
-  },[currentPhoto])
+    setActivePhoto(currentPhotoIndex)
+  },[currentPhotoIndex])
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)

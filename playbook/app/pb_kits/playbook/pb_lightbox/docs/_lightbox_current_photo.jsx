@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint-disable jsx-control-statements/jsx-use-if-tag */
 import React, { useState } from 'react'
-import { Flex, Image, Button } from '../../'
+import { Flex, Image, Button, Body, FlexItem } from '../../'
 import Lightbox from '../_lightbox.tsx'
 
 const LightboxCurrentPhoto = (props) => {
@@ -52,20 +52,34 @@ const LightboxCurrentPhoto = (props) => {
     <div className="lightbox_doc_example_custom">
       {light ? (
         <>
-          <div className='custom_lightbox_sidebar'>
-            <Button 
-                onClick={()=> setCurrentPhoto(active > 0 ? active - 1 : 0)}
+          <Flex alignItems="center" 
+              className='custom_lightbox_sidebar'
+              justifyContent="center"
+          >
+            <Flex margin='lg'
+                orientation='column'
             >
-              Back
-            </Button>
-            <Button marginLeft='sm'
-                onClick={() => setCurrentPhoto(active < photos.length - 1 ? active + 1 : photos.length - 1)}
-            >
-              Next
-            </Button>
-          </div>
+              <Body marginBottom='md'>
+                This UI is for demonstration purposes only to demonstrate how external buttons can be used to change the slides.
+              </Body>
+              <FlexItem>
+                <Flex justifyContent="center">
+                  <Button 
+                      onClick={()=> setCurrentPhoto(active > 0 ? active - 1 : 0)}
+                  >
+                    Back
+                  </Button>
+                  <Button marginLeft='sm'
+                      onClick={() => setCurrentPhoto(active < photos.length - 1 ? active + 1 : photos.length - 1)}
+                  >
+                    Next
+                  </Button>
+                </Flex>
+              </FlexItem>
+            </Flex>
+          </Flex>
           <Lightbox
-              currentPhoto={currentPhoto}
+              currentPhotoIndex={currentPhoto}
               icon="times"
               onChange={(index) => setActive(index)}
               onClose={handleCloseLightbox}
