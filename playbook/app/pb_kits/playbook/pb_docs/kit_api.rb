@@ -28,10 +28,15 @@ module Playbook
 
       def kit_global_props
         global = []
+
         kit_props.each do |key, value|
           value.kit == Playbook::KitBase && global.push({ key: key, value: value })
         end
         global
+      end
+
+      def get_values(prop)
+        send("#{prop}_values") if respond_to?(send("#{prop}_values"))
       end
 
       def global_prop_data
@@ -41,7 +46,7 @@ module Playbook
           name = key[:value].instance_variable_get(:@name)
           type = key[:value].class.to_s.split("::").last
           default = key[:value].instance_variable_get(:@default)
-          values = key[:value].instance_variable_get(:@values)
+          values = get_values(key[:value].instance_variable_get(:@name).to_s)
           global_props[name.to_sym] = { "type": type, "default": default, "values": values }
         end
         global_props
