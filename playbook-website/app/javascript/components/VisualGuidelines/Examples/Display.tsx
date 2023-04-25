@@ -33,8 +33,6 @@ const Display = ({example}: {example: string}) => (
         title='Display'
     />
     <Title
-        marginBottom='xs'
-        paddingTop='sm'
         size={4}
         text='Utility Classes'
     />
