@@ -22,11 +22,11 @@ const KitProps = ({ kitPropsValues }) => {
                   </td>
                   <td>
                     <Card
-                      className="card"
                       padding="xxs"
                       background="light"
                       borderNone
                       borderRadius="sm"
+                      display="inline_block"
                     >
                       <Body className="kearning">
                         {
@@ -36,19 +36,24 @@ const KitProps = ({ kitPropsValues }) => {
                     </Card>
                   </td>
                   <td>
-                    <Card
-                      flexDirection="row"
-                      className="card"
-                      padding="xxs"
-                      background="light"
-                      borderNone
-                      borderRadius="sm"
-                      margin="xxs"
-                    >
-                      <Body className="kearning">
-                        {propsValue.flowType.name === 'union' && propsValue.flowType.raw}
-                      </Body>
-                    </Card>
+                    {
+                      propsValue.flowType.raw ? (
+                        <Card
+                          flexDirection="row"
+                          padding="xxs"
+                          background="light"
+                          borderNone
+                          borderRadius="sm"
+                          margin="xxs"
+                          display="inline_block"
+                        >
+                          <Body className="kearning">
+                            {propsValue.flowType.name === 'union' && propsValue.flowType.raw}
+                          </Body>
+                        </Card>
+                        ) : null
+                    }
+                    
                   </td>
                 </tr>
               </>
