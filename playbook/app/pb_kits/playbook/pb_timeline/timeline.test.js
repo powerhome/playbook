@@ -1,82 +1,88 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 
-import Source from './_source'
+import Timeline from './_timeline'
+import TitleDetail from '../pb_title_detail/_title_detail'
 
 const testId = 'timeline'
 const className = 'custom-class-name'
 
-const SourceDefault = (props) => (
+const TimelineDefault = (props) => (
     <>
-        <Source
+        <Timeline
             aria={{ label: testId }}
             className={className}
             data={{ testid: testId }}
-            source="BJ's Johnston-208"
-            type='retail'
+            id={testId}
             {...props}
-        />
+        >
+            <Timeline.Item
+                icon="user"
+                iconColor="royal"
+                lineStyle="dotted"
+                {...props}
+            >
+                <TitleDetail
+                    detail="37-27 74th Street"
+                    title="Jackson heights"
+                    {...props}
+                />
+            </Timeline.Item>
+            <Timeline.Item
+                icon="check"
+                iconColor="teal"
+                {...props}
+            >
+                <TitleDetail
+                    detail="81 Gate St Brooklyn"
+                    title="Greenpoint"
+                    {...props}
+                />
+            </Timeline.Item>
+        </Timeline>
     </>
 )
 
 test('should pass data prop', () => {
-    render(<SourceDefault />)
+    render(<TimelineDefault />)
     const kit = screen.getByTestId(testId)
     expect(kit).toBeInTheDocument()
 })
 
 test('should pass className prop', () => {
-    render(<SourceDefault />)
+    render(<TimelineDefault />)
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveClass(className)
 })
 
 test('should pass aria prop', () => {
-    render(<SourceDefault />)
+    render(<TimelineDefault />)
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveAttribute('aria-label', testId)
 })
 
-test('should pass type prop', () => {
-    render(<SourceDefault />)
-    const kit = screen.getByText('Retail')
-    expect(kit).toBeInTheDocument()
-})
-
-test('should pass source prop', () => {
-    render(<SourceDefault />)
-    const kit = screen.getByText("BJ's Johnston-208")
-    expect(kit).toBeInTheDocument()
-})
-
-test('should not hide icon by default', () => {
-    render(<SourceDefault />)
+test('should pass id prop', () => {
+    render(<TimelineDefault />)
     const kit = screen.getByTestId(testId)
-    expect(kit.querySelector('.pb_icon_circle_kit_sm_default')).toBeTruthy()
+    expect(kit).toHaveProperty('id', testId)
 })
 
-test('should hide icon', () => {
-    render(<SourceDefault hideIcon />)
+test('should have horizontal orientation by default', () => {
+    render(<TimelineDefault />)
     const kit = screen.getByTestId(testId)
-    expect(kit.querySelector('.pb_icon_circle_kit_sm_default')).toBeFalsy()
+    expect(kit).toHaveClass('pb_timeline_kit__horizontal')
 })
 
-test('should pass user prop', () => {
-    const user = {
-        name: 'Anna Black',
-        userId: '48582',
-    }
-    
-    render(
-        <SourceDefault
-            type='user'
-            user={user}
-        />
-    )
+test('should pass vertical orientation', () => {
+    const props = { orientation: 'vertical' }
+    render(<TimelineDefault {...props} />)
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass('pb_timeline_kit__vertical')
+})
 
-    let kit = screen.getByText(user.name)
-    expect(kit).toBeInTheDocument()
-
-    kit = screen.getByText(user.userId)
-    expect(kit).toBeInTheDocument()
+test('should pass showDate prop', () => {
+    const props = { showDate: true }
+    render(<TimelineDefault {...props} />)
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass('pb_timeline_kit__horizontal__with_date')
 })

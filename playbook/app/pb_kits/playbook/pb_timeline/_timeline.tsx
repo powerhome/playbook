@@ -20,6 +20,7 @@ const Timeline = ({
   className,
   children,
   data = {},
+  id,
   orientation = 'horizontal',
   showDate = false,
 }: TimelineProps) => {
@@ -32,6 +33,7 @@ const Timeline = ({
       {...ariaProps}
       {...dataProps}
       className={classnames(timelineCss, className)}
+      id={id}
     >
       {children}
     </div>
