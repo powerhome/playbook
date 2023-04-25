@@ -9,16 +9,16 @@ export default class PbTable extends PbEnhancedElement {
     const tables = document.querySelectorAll('.table-responsive-collapse');
 
     // Each Table
-    [].forEach.call(tables, (table) => {
+    [].forEach.call(tables, (table: HTMLTableElement) => {
       // Header Titles
-      var headers = [].map.call(table.querySelectorAll('th'), (header) => {
+      var headers = [].map.call(table.querySelectorAll('th'), (header: Element) => {
         return header.textContent.replace(/\r?\n|\r/, '')
       });
 
       // for each row in tbody
-      [].forEach.call(table.querySelectorAll('tbody tr'), (row) => {
+      [].forEach.call(table.querySelectorAll('tbody tr'), (row: HTMLTableRowElement) => {
         // for each cell
-        [].forEach.call(row.cells, (cell, headerIndex) => {
+        [].forEach.call(row.cells, (cell: HTMLTableCellElement, headerIndex: number) => {
           // apply the attribute
           cell.setAttribute('data-title', headers[headerIndex])
         })

@@ -29,7 +29,10 @@ type BorderRadius = {
 }
 
 type Cursor = {
-  cursor?: "pointer",
+  cursor?: "auto" | "default" | "none" | "contextMenu" | "help" | "pointer" | "progress" | "wait" | "cell" |
+  "crosshair" | "text" | "verticalText" | "alias" | "copy" | "move" | "noDrop" | "notAllowed" | "grab" |
+  "grabbing" | "eResize" | "nResize" | "neResize" | "nwResize" | "sResize" | "seResize" | "swResize" | "wResize" |
+  "ewResize" | "nsResize" | "neswResize" | "nwseResize" | "colResize" | "rowResize" | "allScroll" | "zoomIn" | "zoomOut",
 }
 
 type Dark = {
@@ -209,7 +212,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   cursorProps: ({ cursor }: Cursor) => {
     let css = ''
-    css += cursor ? `cursor_${cursor} ` : ''
+    css += cursor ? `cursor_${camelToSnakeCase(cursor)}` : ''
     return css
   },
   alignContentProps: ({ alignContent }: AlignContent) => {

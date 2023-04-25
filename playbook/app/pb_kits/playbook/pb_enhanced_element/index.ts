@@ -7,7 +7,7 @@ export default class PbEnhancedElement {
   static _observer: ElementObserver
   element: Element
 
-  constructor(element: Element) {
+  constructor(element?: Element) {
     this.element = element
   }
 
