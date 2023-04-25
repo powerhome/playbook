@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   root                           to: "pages#home"
   get "home",                    to: "pages#home"
   get "getting_started",         to: "pages#getting_started"
-  get "kits",                    to: "pages#kits"
   get "visual_guidelines",       to: redirect("/visual_guidelines/colors")
   get "visual_guidelines/:name", to: "pages#visual_guidelines"
   get "changelog",               to: "pages#changelog"
+  get "getting_started/rails", to: "pages#getting_started_rails"
+  get "getting_started/react", to: "pages#getting_started_react"
+  get "getting_started/html", to: "pages#getting_started_html_css"
+  get "getting_started/rails_react", to: "pages#getting_started_rails_react"
+  get "kits", to: "pages#kits"
 
   get "kits/:name",                 to: "pages#kit_show_rails",       as: "kit_show"
   get "kits/:name/rails",           to: "pages#kit_show_rails",       as: "kit_show_rails"
