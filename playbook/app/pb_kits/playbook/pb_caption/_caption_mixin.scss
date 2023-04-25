@@ -6,7 +6,7 @@ $pb_caption_colors: (
   light:          $text_lt_light,
   link:           $primary,
   lighter:        $text_lt_lighter,
-  success:        $success,
+  success:        $text_lt_success_sm,
   error:          $error,
 );
 
@@ -14,7 +14,7 @@ $pb_dark_caption_colors: (
   default:        $text_dk_default,
   light:          $text_dk_light,
   link:           $primary,
-  success:        $success,
+  success:        $text_dk_success_sm,
   error:          $error,
 );
 

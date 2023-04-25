@@ -1,6 +1,8 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 
 export default class PbTextarea extends PbEnhancedElement {
+  style: {[key: string]: string}
+  scrollHeight: string
   static get selector() {
     return '.resize_auto textarea'
   }

@@ -10,10 +10,14 @@ module Playbook
                      default: "neutral"
 
       def classname
-        generate_classname("pb_badge_kit", variant, rounded_class)
+        generate_classname("pb_badge_kit", variant_class, rounded_class)
       end
 
     private
+
+      def variant_class
+        variant === "success" ? "success_sm" : variant
+      end
 
       def rounded_class
         rounded ? "rounded" : nil
