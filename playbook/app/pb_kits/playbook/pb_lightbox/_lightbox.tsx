@@ -17,6 +17,7 @@ type LightboxType = {
   description?: string | any,
   id?: string,
   photos: [],
+  initialPhoto?: number,
   onChange?: (index: number)=> {},
   onClickRight?: () => void,
   onClose?: () => void,
@@ -35,6 +36,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     data = {},
     description,
     id = '',
+    initialPhoto = 0,
     photos,
     onChange = ()=>{},
     onClose,
@@ -44,7 +46,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     title,
   } = props
 
-  const [activePhoto, setActivePhoto] = useState(0)
+  const [activePhoto, setActivePhoto] = useState(initialPhoto)
   useEffect(() => {
     onChange(activePhoto)
   },[activePhoto])
