@@ -23,11 +23,11 @@ const GlobalProps = () => {
                   </td>
                   <td>
                     <Card
-                      className="card"
                       padding="xxs"
                       background="light"
                       borderNone
                       borderRadius="sm"
+                      display="inline_block"
                     >
                       <Body className="kearning">
                         {prop.type}
@@ -37,12 +37,12 @@ const GlobalProps = () => {
                   <td>
                     <Card
                       flexDirection="row"
-                      className="card"
                       padding="xxs"
                       background="light"
                       borderNone
                       borderRadius="sm"
                       margin="xxs"
+                      display="inline_block"
                     >
                       <Body className="kearning">
                         {prop.values}
