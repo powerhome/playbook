@@ -11,6 +11,10 @@ import '@fortawesome/fontawesome-pro/js/regular.min.js'
 
 import '../site_styles/main.scss'
 
+// CopyContent
+import copyContent from '../components/copyCode'
+window.copyContent = copyContent
+
 import DarkModeToggle from '../components/DarkModeToggle'
 import KitSearch from '../components/KitSearch'
 import SnippetToggle from '../components/SnippetToggle'
