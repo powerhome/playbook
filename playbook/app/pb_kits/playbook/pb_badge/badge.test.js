@@ -60,7 +60,6 @@ test('displays rounded corners', () => {
 
 test('displays color variants', () => {
   [
-    "success",
     "warning",
     "error",
     "info"
@@ -77,4 +76,20 @@ test('displays color variants', () => {
 
     cleanup()
   })
+})
+
+test('displays success variant', () => {
+    render(
+      <Badge
+          data={{ testid: testId }}
+          text={"success"}
+          variant={"success"}
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass(`pb_badge_kit_success_sm
+    `)
+
+    cleanup()
+
 })
