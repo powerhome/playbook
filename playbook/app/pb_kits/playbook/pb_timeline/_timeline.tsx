@@ -1,17 +1,15 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
-import TimelineItem from './_item.jsx'
+import TimelineItem from './_item'
 
 type TimelineProps = {
-  aria?: object,
-  children?: array<React.ReactChild>,
+  aria?: { [key: string]: string },
+  children?: React.ReactChild[],
   className?: string,
-  data?: string,
+  data?: { [key: string]: string },
   id?: string,
   orientation?: string,
   showDate?: boolean,
@@ -31,9 +29,9 @@ const Timeline = ({
   const timelineCss = buildCss('pb_timeline_kit', `_${orientation}`, dateStyle)
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={classnames(timelineCss, className)}
+      {...ariaProps}
+      {...dataProps}
+      className={classnames(timelineCss, className)}
     >
       {children}
     </div>
