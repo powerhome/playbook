@@ -32,11 +32,47 @@ module Playbook
         kit_props.each do |key, value|
           value.kit == Playbook::KitBase && global.push({ key: key, value: value })
         end
+
+        pb_module = Playbook::KitBase.included_modules.select { |mod| mod.to_s.include?("Playbook::") }
+
+        values = {}
+        pb_module.each do |mod|
+          mod.instance_methods.each do |method_name|
+            next unless method_name.to_s.end_with?("_values")
+
+            value = send(method_name)
+            type = value.class
+            values[method_name.to_s.chomp("_values").to_sym] = { "type": type, "values": value }
+          end
+        end
+
+        # pp values
+
+        global_props_with_values = {}
+        global_props_without_values = []
+
+        global.each do |name, _prop|
+          prop_name = name[:value].instance_variable_get(:@name)
+          pp prop_name
+          # loop through values and extract values that have key that matches prop_name
+          values.each do |key, value|
+            # for each key that matches prop_name push key value pair
+            if key == prop_name
+              global_props_with_values[key] = value
+            else
+              global_props_without_values << prop_name unless global_props_without_values.include?(prop_name)
+            end
+          end
+        end
+
+        puts global_props_with_values
+        puts "without values #{global_props_without_values}"
+
         global
       end
 
       def get_values(prop)
-        send("#{prop}_values") if respond_to?(send("#{prop}_values"))
+        # send("#{prop}_values") if send("#{prop}_values").present?
       end
 
       def global_prop_data
