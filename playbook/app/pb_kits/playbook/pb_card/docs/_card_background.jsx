@@ -41,7 +41,7 @@ const CardBackground = (props) => {
           marginBottom="sm"
           {...props}
       >
-        <Body text="Light"/>
+        <Body text="Light"  />
       </Card>
 
     
