@@ -6,11 +6,6 @@ require "rails"
 
 RSpec.describe "All our Kits that are React Components" do
   it "should have a const classes that ends with className" do
-    puts "mark is here"
-    puts "Dir"
-    puts Rails.env
-    puts Dir.pwd
-    puts Pathname.new(Dir.pwd).children
     kits_path = if Rails.env.development?
                   "#{Dir.pwd}/playbook/app/pb_kits/playbook"
                 else
