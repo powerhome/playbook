@@ -19,6 +19,7 @@ type TableProps = {
   singleLine: boolean,
   size: "sm" | "md" | "lg",
   sticky?: boolean,
+  verticalBorder?: boolean,
 }
 
 const Table = (props: TableProps) => {
@@ -37,11 +38,13 @@ const Table = (props: TableProps) => {
     singleLine = false,
     size = 'sm',
     sticky = false,
+    verticalBorder = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const tableCollapseCss = responsive !== 'none' ? `table-collapse-${collapse}` : ''
+  const verticalBorderCss = verticalBorder ? 'vertical-border' : ''
 
   useEffect(() => {
     const instance = new PbTable()
@@ -66,6 +69,7 @@ const Table = (props: TableProps) => {
         },
         globalProps(props),
         tableCollapseCss,
+        verticalBorderCss,
         className
       )}
       id={id}

@@ -1,0 +1,14 @@
+[class^=pb_table] {
+  &.vertical-border {
+    td,
+    th {
+      border-right: 1px solid $border_light !important;
+    }
+
+    tr:hover {
+      td:last-child {
+        border-right-color: darken($border_light, 10%) !important;
+      }
+    }
+  }
+}
