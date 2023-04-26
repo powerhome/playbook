@@ -94,10 +94,5 @@
   <% if (action_name == "kit_show_rails") %>
     <br>
     <%= pb_rails("docs/kit_api", props: { kit: @kit }) %>
-  <% else %>
-    <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm", margin_top: "sm" }) %>
-    <%= react_component("AvailableProps",
-      source: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "react").tsx_source )
-    %>
   <% end %>
 </div>
