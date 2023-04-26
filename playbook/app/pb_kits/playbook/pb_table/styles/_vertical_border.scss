@@ -5,9 +5,11 @@
       border-right: 1px solid $border_light !important;
     }
 
-    tr:hover {
-      td:last-child {
-        border-right-color: darken($border_light, 10%) !important;
+    @media screen and (min-width: $screen-xs-min) {
+      tr:hover {
+        td:last-child {
+          border-right-color: darken($border_light, 10%) !important;
+        }
       }
     }
   }
