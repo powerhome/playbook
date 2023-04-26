@@ -134,9 +134,15 @@ $pb_button_border_width: 0px;
 @mixin pb_button_disabled {
   $disabled_color: rgba($charcoal, $opacity_5);
   @include pb_button_variant(rgba($slate, $opacity_4), $disabled_color);
-  pointer-events: none;
+  cursor: not-allowed;
   &:focus {
     outline: none;
+  }
+  &:hover {
+    @include pb_button_variant(rgba($slate, $opacity_4), $disabled_color);
+  }
+  &:active {
+    @include pb_button_variant(rgba($slate, $opacity_4), $disabled_color);
   }
 }
 
