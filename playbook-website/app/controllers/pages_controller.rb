@@ -34,8 +34,27 @@ class PagesController < ApplicationController
   end
 
   def getting_started
+    render "pages/getting_started/index"
+  end
+
+  def getting_started_rails
     @rails_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_getting_started.md").read
+    render "pages/getting_started/rails"
+  end
+
+  def getting_started_react
     @react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_react_getting_started.md").read
+    render "pages/getting_started/react"
+  end
+
+  def getting_started_rails_react
+    @rails_react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_react_getting_started.md").read
+    render "pages/getting_started/rails_react"
+  end
+
+  def getting_started_html_css
+    @html_css_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_html_css_getting_started.md").read
+    render "pages/getting_started/html"
   end
 
   def changelog
