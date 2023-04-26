@@ -32,8 +32,6 @@ const DATASET = [
 const BorderRadius = ({tokensExample}: { tokensExample: string }) => (
   <React.Fragment>
     <Title
-        marginTop='xl'
-        paddingTop='xl'
         size={1}
         text='Border Radius'
     />
