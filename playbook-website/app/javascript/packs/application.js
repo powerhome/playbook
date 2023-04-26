@@ -24,7 +24,6 @@ import KitDocs from '../components/KitDocs'
 import PbKitReact from '../components/PbKitReact'
 import PbKitFetch from '../components/PbKitFetch'
 import PbKitPlayground from '../components/PbKitPlayground'
-import AvailableProps from '../components/AvailableProps'
 
 WebpackerReact.setup({
   DarkModeToggle,
@@ -35,7 +34,6 @@ WebpackerReact.setup({
   PbKitReact,
   PbKitFetch,
   PbKitPlayground,
-  AvailableProps,
 })
 
 // Produce image assets
