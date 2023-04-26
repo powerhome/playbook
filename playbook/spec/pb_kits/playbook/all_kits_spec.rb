@@ -5,6 +5,10 @@ require "yaml"
 
 RSpec.describe "All our Kits that are React Components" do
   it "should have a const classes that ends with className" do
+    puts "mark is here"
+    puts "Dir"
+    puts Dir.pwd
+    puts Pathname.new(Dir.pwd).children
     kits_path = "#{Dir.pwd}/playbook/app/pb_kits/playbook"
     all_kits = []
 
