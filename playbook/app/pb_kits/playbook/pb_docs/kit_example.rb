@@ -23,7 +23,7 @@ module Playbook
       end
 
       def description
-        @description ||= read_kit_file("docs", "_#{example_key}.md")
+        @description ||= read_kit_file("_#{example_key}.md")
       end
 
       def highlighter
@@ -33,14 +33,9 @@ module Playbook
       def source
         @source ||= begin
           extension = type == "react" ? "jsx" : "html.erb"
-          read_kit_file("docs", "_#{example_key}.#{extension}")
           stringified_code = read_kit_file("_#{example_key}.#{extension}")
           sanitize_code(stringified_code)
         end
-      end
-
-      def tsx_source
-        read_kit_file("", "_#{example_key}.tsx")
       end
 
     private
@@ -61,8 +56,8 @@ module Playbook
         stringified_code
       end
 
-      def read_kit_file(folder, *args)
-        path = ::Playbook.kit_path(kit, folder, *args)
+      def read_kit_file(*args)
+        path = ::Playbook.kit_path(kit, "docs", *args)
         path.exist? ? path.read : ""
       end
     end
