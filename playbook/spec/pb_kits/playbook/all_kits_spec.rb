@@ -2,6 +2,7 @@
 
 require "pathname"
 require "yaml"
+require "rails"
 
 RSpec.describe "All our Kits that are React Components" do
   it "should have a const classes that ends with className" do
@@ -9,7 +10,11 @@ RSpec.describe "All our Kits that are React Components" do
     puts "Dir"
     puts Dir.pwd
     puts Pathname.new(Dir.pwd).children
-    kits_path = "#{Dir.pwd}/playbook/app/pb_kits/playbook"
+    kits_path = if Rails.env.production?
+                  "#{Dir.pwd}/app/pb_kits/playbook"
+                else
+                  "#{Dir.pwd}/playbook/app/pb_kits/playbook"
+                end
     all_kits = []
 
     Pathname.new(kits_path).children.select(&:directory?).each do |kit|
