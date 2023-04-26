@@ -5,14 +5,16 @@ require "yaml"
 
 RSpec.describe "All our Kits that are React Components" do
   it "should have a const classes that ends with className" do
+    kits_path = "#{Dir.pwd}/playbook/app/pb_kits/playbook"
     all_kits = []
-    Pathname.new("../app/pb_kits/playbook").children.select(&:directory?).each do |kit|
-      all_kits.push(kit.to_s.split("../app/pb_kits/playbook/pb_"))
+
+    Pathname.new(kits_path).children.select(&:directory?).each do |kit|
+      all_kits.push(kit.to_s.split("#{kits_path}/pb_"))
     end
 
     all_kits.each do |kit|
-      path = Pathname.new("../app/pb_kits/playbook/pb_#{kit}/_#{kit}.tsx")
-      path = Pathname.new("../app/pb_kits/playbook/pb_#{kit}/_#{kit}.jsx") unless File.exist?(path)
+      path = Pathname.new("#{kits_path}/pb_#{kit}/_#{kit}.tsx")
+      path = Pathname.new("#{kits_path}/pb_#{kit}/_#{kit}.jsx") unless File.exist?(path)
       next unless File.exist?(path)
 
       file = File.open(path, "r:UTF-8", &:read)
