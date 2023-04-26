@@ -7,7 +7,7 @@ import TimelineItem from './_item'
 
 type TimelineProps = {
   aria?: { [key: string]: string },
-  children?: React.ReactChild[],
+  children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   data?: { [key: string]: string },
   id?: string,

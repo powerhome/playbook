@@ -8,7 +8,7 @@ import IconCircle from '../pb_icon_circle/_icon_circle'
 
 type ItemProps = {
   className?: string,
-  children?: React.ReactNode[],
+  children?: React.ReactNode[] | React.ReactNode,
   date?: Date,
   icon?: string,
   iconColor?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
