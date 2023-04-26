@@ -20,16 +20,6 @@
               <a href="#" id="copy-<%= example_key %>-trigger" onclick="copyOnClick(`<%= example_html %>`, `copy-<%= example_key %>`)">
                 Copy HTML
               </a>
-              <%= pb_rails("popover", props: {
-                  classname: "popover-copy",
-                  close_on_click: "any",
-                  trigger_element_id: "copy-#{example_key}-trigger",
-                  tooltip_id: "copy-#{example_key}",
-                  position: "top",
-                  padding: "xs"
-                  }) do %>
-                    HTML Copied
-              <% end %>
             </li>
           <% end %>
           <li>
@@ -49,13 +39,6 @@
 <script>
   function copyOnClick(content, elementID) {
     copyContent(content)
-
-    const popover = document.getElementById(elementID);
-    popover.style.display = "block";
-
-    setTimeout(() => {
-      popover.style.display = "none";
-    }, 3000);
   }
 </script>
    
