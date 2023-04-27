@@ -23,7 +23,7 @@
     &.open {
       color: $primary;
     }
-    &.active,
+    &.is-active,
     &:active {
       color: $primary;
       background-color: $bg_light;
