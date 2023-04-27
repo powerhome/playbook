@@ -54,6 +54,6 @@
   <% end %>
 <% end %>
 
-<% if current_page?('/visual_guidelines') %>
+<% if current_page?('/visual_guidelines') || request.path.match(/^\/visual_guidelines\//) %>
   <%= react_component("Sidebar") %>
 <% end %>
