@@ -5,3 +5,4 @@ examples:
   - lightbox_multiple: Multiple
   - lightbox_compound_component: Compound Component
   - lightbox_custom_header: Custom Header
+  - lightbox_current_photo: Current Photo
