@@ -11,6 +11,15 @@ import '@fortawesome/fontawesome-pro/js/regular.min.js'
 import '@fortawesome/fontawesome-pro/js/brands.min.js'
 
 import '../site_styles/main.scss'
+import AnchorJS from 'anchor-js'
+
+document.addEventListener('DOMContentLoaded', () => {
+  const anchors = new AnchorJS()
+
+  anchors.add('.pb--kit-example .pb_caption_kit_md')
+
+  anchors.add('.changelog-card-collection h2')
+})
 
 // CopyContent
 import copyContent from '../components/copyCode'

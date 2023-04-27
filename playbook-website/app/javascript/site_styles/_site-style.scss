@@ -18,6 +18,14 @@ body {
   }
 }
 
+.anchorjs-link {
+  font-size: 2em !important;
+  vertical-align: middle !important;
+  position: relative;
+  top: -3px;
+}
+
+
 .pb--page {
   &--topNav {
     flex: 0 0;
