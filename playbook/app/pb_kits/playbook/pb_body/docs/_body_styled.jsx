@@ -3,7 +3,7 @@ import { Body } from '../..'
 
 const BodyStyled = (props) => {
   return (
-    <div>
+    <>
       <Body {...props}>
         <b>{"This text is using the <b> tag"}</b>
         <br />
@@ -12,8 +12,20 @@ const BodyStyled = (props) => {
         <br />
         <br />
         <a href="#">{"This text is using the <a> tag"}</a>
+        <br />
+        <br />
+        <i>{"This text is using an <i> tag"}</i>
+        <br />
+        <br />
+        {"This "}<em>word</em>{" is using an <em> tag."}
+        <br />
+        <br />
+        <small>{"This text is using a <small> tag."}</small>
+        <br />
+        <br />
+        <u>{"This text is using a <u> tag."}</u>
       </Body>
-    </div>
+    </>
   )
 }
 
