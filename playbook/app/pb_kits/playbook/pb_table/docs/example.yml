@@ -21,7 +21,7 @@ examples:
     - table_action_middle: Table with Actions in the Middle
     - table_icon_buttons: Table with Icon Buttons
     - table_with_background_kit: Table With Background Kit
-
+    - table_vertical_border: Vertical Borders
 
   react:
     - table_sm: Small
@@ -45,4 +45,4 @@ examples:
     - table_action_middle: Table with Actions in the Middle
     - table_icon_buttons: Table with Icon Buttons
     - table_with_background_kit: Table With Background Kit
-
+    - table_vertical_border: Vertical Borders
