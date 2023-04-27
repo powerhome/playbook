@@ -2,7 +2,7 @@ import React from 'react'
 
 import Image from '../_image'
 
-const DefaultImage = (props: any) => {
+const DefaultImage = (props) => {
   return (
     <>
       <br />
