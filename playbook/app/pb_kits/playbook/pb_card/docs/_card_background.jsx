@@ -8,91 +8,88 @@ const CardBackground = (props) => {
     <div>
       <Title
           {...props}
+          marginBottom="sm"
           size={4}
           tag="h4"
           text="Card Colors"
       />
-
-      <br />
-
       <Card
           background="dark"
           dark
+          marginBottom="sm"
           {...props}
       >
         <Body
-            color="lighter"
+            dark
             text="Dark"
-            {...props}
         />
       </Card>
 
-      <br />
-
-      <Card>
+      <Card
+          marginBottom="sm"
+          {...props}
+      >
         <Body
-            text="White"
+            text="White / Default"
+            {...props}    
         />
       </Card>
 
-      <br />
 
       <Card
           background="light"
+          marginBottom="sm"
           {...props}
       >
-        <Body
-            text="Light"
-        />
+        <Body text="Light"/>
       </Card>
 
-      <br />
-
+    
       <Title
           {...props}
+          marginBottom="sm"
           size={4}
           tag="h4"
           text="Product Colors"
       />
 
-      <br />
-
       <Card
-          background="windows"
+          background="product_1_background"
+          marginBottom="sm"
           {...props}
-      >
+        >
         <Body
-            color="lighter"
-            text="Windows"
-            {...props}
+            dark
+            text="Product 1 Background"
         />
       </Card>
 
-      <br />
+      
 
-      <Card
-          background="siding"
+      <Card 
+          background="product_7_highlight" 
+          marginBottom="sm"
+          {...props} >
+        <Body 
+            dark
+            text="Product 7 Highlight"  
+          />
+      </Card>
+
+      
+
+      <Card 
+          background="product_2_highlight" 
+          marginBottom="sm"
           {...props}
       >
         <Body
-            text="Siding"
-            {...props}
+            dark
+            text="Product 2 Highlight"    
         />
       </Card>
 
-      <br />
-
-      <Card
-          background="doors"
-          {...props}
-      >
-        <Body
-            text="Doors"
-            {...props}
-        />
-      </Card>
-
-      <br />
+      
     </div>
   )
 }

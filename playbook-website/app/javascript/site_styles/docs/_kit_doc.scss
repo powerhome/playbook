@@ -20,49 +20,34 @@
     }
   }
 
-  .pb--close-toggle {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background: rgba($white, 0.8);
-    padding: 0 10px;
-    border-radius: 2px;
-    height: 22px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 600;
+  .pb--button {
+    &.display--none {
+      display: none;
+    }
+    &--copy {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
   }
 
   .pb--kit-example, .pb--kit-example-markdown {
     &.dark {
       color: $text_dk_light;
       a {
-        color: $teal;
+        color: $primary_action;
       }
     }
     padding: calc(2rem + 4px) 2rem 1rem;
+
+    &.sandpack-markdown {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
   }
 
   .pb--kit-example {
     position: relative;
-
-    // &::after {
-    //   content: '';
-    //   width: 100%;
-    //   height: 4px;
-    //   background: $border-light;
-    //   position: absolute;
-    //   top: 0;
-    //   left: 0;
-    // }
-    // &.dark{
-    //   &::after {
-    //     display: none;
-    //   }
-    // }
-
     code {
       background-color: rgba($text_lt_lighter, 0.35);
       border-radius: 5px;

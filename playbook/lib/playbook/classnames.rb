@@ -31,6 +31,7 @@ module Playbook
         flex_grow_props,
         flex_shrink_props,
         order_props,
+        position_props,
       ].compact.join(" ")
     end
 

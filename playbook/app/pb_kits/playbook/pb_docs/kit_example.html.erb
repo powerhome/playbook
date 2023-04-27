@@ -1,6 +1,8 @@
+<% example_html = ERB.new(example).result %>
+
 <%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark }) do %>
   <div class="pb--kit-example">
-    <%= pb_rails("caption", props: { text: example_title }) %>
+    <%= pb_rails("caption", props: { text: example_title, dark: dark }) %>
     <br />
     <%= example %>
     <br>
@@ -13,16 +15,54 @@
     <div id="code-wrapper">
       <div class="pb--codeControls">
         <ul>
+          <% if type == "rails" %>
+            <li>
+              <a href="#" id="copy-<%= example_key %>-trigger" onclick="copyOnClick(`<%= example_html %>`, `copy-<%= example_key %>`)">
+                Copy HTML
+              </a>
+            </li>
+          <% end %>
           <li>
-            <a href="#" id="toggle-open" data-toggle="code_example">Code Example</a>
+            <%= pb_rails("button", props: { 
+              text: "Show code", 
+              icon: "code", 
+              size: "sm", 
+              variant: "link", 
+              id: "code-example-open-icon", 
+              classname: "pb--button" 
+            }) %>
+            <%= pb_rails("button", props: { 
+              text: "Close code", 
+              icon: "close", 
+              size: "sm", 
+              variant: "link", 
+              id: "code-example-close-icon", 
+              classname: "pb--button display--none"
+            }) %>
           </li>
         </ul>
       </div>
-      <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
+      <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example"  style="display: none" >
         <%= pb_rails("section_separator", props: { dark: dark })%>
-        <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle">Close</a>
+        <button 
+          class="pb--button--copy pb_button_kit_primary_inline_enabled size_sm" 
+          role="button" 
+          tabindex="0"
+          onclick="copyContent('<%= j source %>')"
+        >
+          <%= pb_rails("icon", props: { icon: "copy", fixed_width: true, margin_right: "xs" }) %>
+          <span class="pb_button_content">Copy Code</span>
+        </button>
         <pre class="highlight"><%= raw rouge(source, highlighter) %></pre>
       </div>
     </div>
   <% end %>
 <% end %>
+
+<script>
+  function copyOnClick(content, elementID) {
+    copyContent(content)
+  }
+  
+</script>
+   

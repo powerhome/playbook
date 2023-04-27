@@ -48,15 +48,15 @@ const DialogFullHeight = () => {
     <>
       <Flex wrap>
         <Button id="sm"
-            marginRight="xl"
+            marginRight="md"
             onClick={toggleHeaderSeparatorDialog}>
           {"Small Dialog"}
         </Button>
-        <Button marginRight="xl"
+        <Button marginRight="md"
             onClick={toggleFooterSeparatorDialog}>
           {"Medium Dialog"}
         </Button>
-        <Button marginRight="xl"
+        <Button marginRight="md"
             onClick={toggleBothSeparatorsDialog}>
           {"Large Dialog"}
         </Button>

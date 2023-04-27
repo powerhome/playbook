@@ -1,20 +1,19 @@
-
 // Border Radius
-$border_rad_lightest:     1px;
-$border_rad_lighter:      2px;
-$border_rad_light:        4px;
-$border_rad_normal:       0;
-$border_rad_heavy:        5px;
-$border_rad_heavier:      6px;
-$border_rad_heaviest:     7px;
-$border_rad_mega:         1000px;
-$border_radius_xs:        4px;
-$border_radius_sm:        4px;
-$border_radius_md:        6px;
-$border_radius_lg:        8px;
-$border_radius_xl:        16px;
-$border_radius_rounded:   1000px;
-$border_radius_none:      0;
+$border_rad_lightest:     1px !default;
+$border_rad_lighter:      2px !default;
+$border_rad_light:        4px !default;
+$border_rad_normal:       0 !default;
+$border_rad_heavy:        5px !default;
+$border_rad_heavier:      6px !default;
+$border_rad_heaviest:     7px !default;
+$border_rad_mega:         1000px !default;
+$border_radius_xs:        4px !default;
+$border_radius_sm:        4px !default;
+$border_radius_md:        6px !default;
+$border_radius_lg:        8px !default;
+$border_radius_xl:        16px !default;
+$border_radius_rounded:   1000px !default;
+$border_radius_none:      0 !default;
 $border_radius: (
   lightest:              $border_rad_lightest,
   lighter:               $border_rad_lighter,

@@ -1,19 +1,20 @@
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('#code-wrapper').forEach((wrapper) => {
-    const openToggle = wrapper.querySelector('#toggle-open')
-    const closeToggle = wrapper.querySelector('#toggle-close')
     const codeDrawer = wrapper.querySelector('.pb--codeCopy')
+    const openExampleIcon = wrapper.querySelector('#code-example-open-icon')
+    const closeExampleIcon = wrapper.querySelector('#code-example-close-icon')
 
-    const toggleLambda = (element) => {
-      if (element.style.display === 'none') {
-        element.style.display = 'block'
-      } else {
-        element.style.display = 'none'
-      }
+    const handleToggleExample = () => {
+      codeDrawer.style.display === 'none'
+        ? (codeDrawer.style.display = 'block')
+        : (codeDrawer.style.display = 'none')
+
+      openExampleIcon.classList.toggle('display--none')
+      closeExampleIcon.classList.toggle('display--none')
     }
 
-    openToggle.addEventListener('click', () => toggleLambda(codeDrawer))
-    closeToggle.addEventListener('click', () => toggleLambda(codeDrawer))
+    openExampleIcon.addEventListener('click', () => handleToggleExample())
+    closeExampleIcon.addEventListener('click', () => handleToggleExample())
   })
 
   if (process.env.NODE_ENV === 'development') {

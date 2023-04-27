@@ -24,7 +24,7 @@ type BackgroundProps = {
   id?: string,
   imageUrl?: string,
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td',
   transition?: 'fade' | 'blur' | 'scale',
 } & GlobalProps
 

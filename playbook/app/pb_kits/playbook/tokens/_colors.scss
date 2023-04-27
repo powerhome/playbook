@@ -8,10 +8,10 @@ Colors -----------------------------*/
 $royal:               #0056CF !default;
 $purple:              #9E64E9 !default;
 $teal:                #00C4D7 !default;
-$red:                 #FF2229 !default;
+$red:                 #DA0014 !default;
 $red_dark:            #ff4a50 !default;
 $yellow:              #F9BB00 !default;
-$green:               #00CA74 !default;
+$green:               #1CA05C !default;
 $orange:              #FD804C !default;
 $default:             #93a8b8 !default;
 $colors: (
@@ -59,26 +59,30 @@ $main_colors: (
 Background colors ------------------*/
 $bg_light:            $silver !default;
 $bg_dark:             #0a0527 !default;
+$bg_dark_card:        #231E3D !default;
 $background_colors: (
   bg_light:           $bg_light,
-  bg_dark:            $bg_dark
+  bg_dark:            $bg_dark,
+  bg_dark_card:       $bg_dark_card
 );
 
 /* Card colors ------------------*/
 $card_light:          $white !default;
-$card_dark:           rgba($white, $opacity_1);
+$card_dark:           rgba($white, $opacity_1) !default;
 $card_colors: (
   card_light:         $card_light,
   card_dark:          $card_dark
 );
 
 $primary-action:      $primary !default;
+$secondary-action:    rgba($primary_action, 0.05) !default;
+
 $action_colors: (
   primary_action:            $primary-action
 );
 
 /* Active colors ----------------------*/
-$active_light:        lighten(#E5F2FF, 3.5%);
+$active_light:        lighten(#E5F2FF, 3.5%) !default;
 $active_dark:         #0082ff !default;
 $active_colors: (
   active_light:       $active_light,
@@ -86,31 +90,33 @@ $active_colors: (
 );
 
 /* Hover colors -----------------------*/
-$hover_light:         darken($silver, 5%);
-$hover_dark:          rgba($white, $opacity_2);
+$hover_light:         darken($silver, 5%) !default;
+$hover_dark:          rgba($white, $opacity_2) !default;
 $hover_colors: (
   hover_light:        $hover_light,
   hover_dark:         $hover_dark
 );
 
 /* Focus colors -----------------------*/
-$focus_input_light:   rgba($active_light, $opacity_5);
-$focus_input_dark:    rgba(#144075, $opacity_5);
+$focus_color:         $primary !default;
+$focus_input_light:   rgba($active_light, $opacity_5) !default;
+$focus_input_dark:    rgba(#144075, $opacity_5) !default;
 $focus_input_colors: (
   focus_input_light:        $focus_input_light,
-  focus_input_dark:         $focus_input_dark
+  focus_input_dark:         $focus_input_dark,
+  focus_color:              $focus_color
 );
 
 /* Border colors ----------------------*/
 $border_light:        #E4E8F0 !default;
-$border_dark:         rgba($white, $opacity_1);
+$border_dark:         rgba($white, $opacity_1) !default;
 $border_colors: (
   border_light:       $border_light,
   border_dark:        $border_dark
 );
 
 /* Shadow colors ----------------------*/
-$shadow:        rgba(#3C6AAC, $opacity_2);
+$shadow:        rgba(#3C6AAC, $opacity_2) !default;
 $shadow_colors: (
   shadow:       $shadow,
 );
@@ -119,9 +125,11 @@ $shadow_colors: (
 $text_lt_default:     $charcoal !default;
 $text_lt_light:       #687887 !default;
 $text_lt_lighter:     $slate !default;
+$text_lt_success_sm:  #157F48 !default;
 $text_dk_default:     $white !default;
-$text_dk_light:       rgba($white, $opacity_6);
-$text_dk_lighter:     rgba($white, $opacity_4);
+$text_dk_light:       rgba($white, $opacity_6) !default;
+$text_dk_lighter:     rgba($white, $opacity_4) !default;
+$text_dk_success_sm:  #00CA74 !default;
 $text_colors: (
   text_lt_default:    $text_lt_default,
   text_lt_light:      $text_lt_light,
@@ -153,28 +161,29 @@ $data_colors: (
 
 /* Status colors ----------------------*/
 $success:             $green !default;
-$success_secondary:   lighten($success, 10%);
-$success_subtle:      rgba($success, $opacity_1);
+$success_secondary:   lighten($success, 10%) !default;
+$success_subtle:      rgba($success, $opacity_1) !default;
 $warning:             $yellow !default;
-$warning_secondary:   lighten($warning, 10%);
-$warning_subtle:      rgba($warning, $opacity_1);
+$warning_secondary:   lighten($warning, 10%) !default;
+$warning_subtle:      rgba($warning, $opacity_1) !default;
 $error:               $red !default;
 $error_dark:          $red_dark !default;
-$error_dark_body:     lighten($error_dark, 2%);
-$error_secondary:     lighten($error, 10%);
-$error_subtle:        rgba($error, $opacity_1);
+$error_dark_body:     $error_dark !default;
+$error_secondary:     lighten($error, 10%) !default;
+$error_subtle:        rgba($error, $opacity_1) !default;
 $info:                $teal !default;
-$info_secondary :     lighten($info, 10%);
-$info_subtle:         rgba($info, $opacity_1);
+$info_secondary :     lighten($info, 10%) !default;
+$info_subtle:         rgba($info, $opacity_1) !default;
 $neutral:             $slate !default;
-$neutral_secondary:   lighten($neutral, 10%);
-$neutral_subtle:      rgba($neutral, $opacity_1);
+$neutral_secondary:   lighten($neutral, 10%) !default;
+$neutral_subtle:      rgba($neutral, $opacity_1) !default;
 $primary:             $primary !default;
-$primary_secondary:   lighten($primary, 10%);
+$primary_secondary:   lighten($primary, 10%) !default;
 
 $status_colors: (
   success:            $success,
   success_secondary:    $success_secondary,
+  success_sm:         $text_lt_success_sm,
   success_subtle:     $success_subtle,
   warning:            $warning,
   warning_secondary:    $warning_secondary,
@@ -196,6 +205,18 @@ $status_colors: (
 
 $status_color_text: (
   success:            $success,
+  success_sm:         $text_lt_success_sm,
+  warning:            darken($warning, 10%),
+  error:              $error,
+  info:               $info,
+  neutral:            darken($neutral, 15%),
+  primary:            $primary
+);
+
+// as we add more dark text colors we can update this variable
+$status_color_text_dark: (
+  success:            $success,
+  success_sm:         $text_dk_success_sm,
   warning:            darken($warning, 10%),
   error:              $error,
   info:               $info,
@@ -207,22 +228,62 @@ $status_color_text: (
 $primary_action:      $primary !default;
 
 /* Product colors ---------------------*/
-$windows:             $royal !default;
-$siding:              $yellow !default;
-$doors:               $teal !default;
-$solar:               $green !default;
-$roofing:             $slate !default;
-$gutters:             $purple !default;
-$insulation:          $red !default;
+$product_1_background:  #003DB2 !default;
+$product_1_highlight:   #0057FF !default;
+$product_2_background:  #6000AC !default;
+$product_2_highlight:   #8200E9 !default;
+$product_3_background:  #B85C00 !default;
+$product_3_highlight:   #CE7500 !default;
+$product_4_background:  #007E8F !default;
+$product_4_highlight:   #00B9D2 !default;
+$product_5_background:  #760B24 !default;
+$product_5_highlight:   #B8032E !default;
+$product_6_background:  #008540 !default;
+$product_6_highlight:   #00A851 !default;
+$product_7_background:  #96006C !default;
+$product_7_highlight:   #CD0094 !default;
+$product_8_background:  #144075 !default;
+$product_8_highlight:   #1A569E !default;
+$product_9_background:  #fcc419 !default;
+$product_9_highlight:   #ffd43b !default;
+$product_10_background: #20c997 !default;
+$product_10_highlight:  #38d9a9 !default;
+$windows:               $product_1_background !default; // deprecated
+$siding:                $product_2_background !default; // deprecated
+$doors:                 $product_3_background !default; // deprecated
+$solar:                 $product_4_background !default; // deprecated
+$roofing:               $product_5_background !default; // deprecated
+$gutters:               $product_6_background !default; // deprecated
+$insulation:            $product_7_background !default; // deprecated
 $product_colors: (
-  windows:            $windows,
-  siding:             $siding,
-  doors:              $doors,
-  solar:              $solar,
-  roofing:            $roofing,
-  gutters:            $gutters,
-  insulation:         $insulation
-);
+  windows:                $windows,
+  siding:                 $siding,
+  doors:                  $doors,
+  solar:                  $solar,
+  roofing:                $roofing,
+  gutters:                $gutters,
+  insulation:             $insulation,
+  product_1_background:   $product_1_background,
+  product_1_highlight:    $product_1_highlight,
+  product_2_background:   $product_2_background,
+  product_2_highlight:    $product_2_highlight,
+  product_3_background:   $product_3_background,
+  product_3_highlight:    $product_3_highlight,
+  product_4_background:   $product_4_background,
+  product_4_highlight:    $product_4_highlight,
+  product_5_background:   $product_5_background,
+  product_5_highlight:    $product_5_highlight,
+  product_6_background:   $product_6_background,
+  product_6_highlight:    $product_6_highlight,
+  product_7_background:   $product_7_background,
+  product_7_highlight:    $product_7_highlight,
+  product_8_background:   $product_8_background,
+  product_8_highlight:    $product_8_highlight,
+  product_9_background:   $product_9_background,
+  product_9_highlight:    $product_9_highlight,
+  product_10_background:  $product_10_background,
+  product_10_highlight:   $product_10_highlight
+) !default;
 
 /* Category colors ---------------------*/
 $category_1:   $royal !default;

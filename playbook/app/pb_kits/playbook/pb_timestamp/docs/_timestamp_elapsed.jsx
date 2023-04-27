@@ -1,5 +1,5 @@
 import React from 'react'
-import Timestamp from '../_timestamp.jsx'
+import Timestamp from '../_timestamp'
 
 const todaysDate = new Date()
 const year = new Date().getFullYear()

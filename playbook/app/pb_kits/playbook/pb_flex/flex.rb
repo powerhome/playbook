@@ -25,15 +25,15 @@ module Playbook
                      deprecated: true
 
       prop :gap, type: Playbook::Props::Enum,
-                 values: %w[xs sm md lg xl none],
+                 values: %w[xxs xs sm md lg xl none],
                  default: "none"
 
       prop :row_gap, type: Playbook::Props::Enum,
-                     values: %w[xs sm md lg xl none],
+                     values: %w[xxs xs sm md lg xl none],
                      default: "none"
 
       prop :column_gap, type: Playbook::Props::Enum,
-                        values: %w[xs sm md lg xl none],
+                        values: %w[xxs xs sm md lg xl none],
                         default: "none"
 
       prop :reverse, type: Playbook::Props::Boolean,

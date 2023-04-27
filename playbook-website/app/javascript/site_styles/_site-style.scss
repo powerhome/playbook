@@ -10,6 +10,8 @@ $nav_breakpoint: breakpoint("lg");
 body {
   overflow-x: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
   &.visual_guidelines,
   &.kits {
     overflow-y: hidden;
@@ -21,7 +23,7 @@ body {
     flex: 0 0;
     padding: $space_sm $space_md $space_xs $space_md;
     background: $white;
-    border-bottom: $border_light 1px solid;
+    position: relative;
     h1 {
       display: flex;
       align-items: center;
@@ -29,8 +31,15 @@ body {
         display: flex;
       }
     }
+    &--separator {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+    }
     &.dark{
-    background: tint(#0a0527, 10);
+      background: tint(#0a0527, 10);
     }
     .desktop-kit-search {
       width: 33vw;
@@ -150,6 +159,7 @@ body {
   &--footer {
     background-color: $royal;
     padding: $space_lg * 2 $space_lg * 3;
+    margin-top: auto;
     .inner-footer-wrapper {
       max-width: 1350px;
       margin: 0 auto;

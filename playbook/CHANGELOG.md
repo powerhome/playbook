@@ -1,5 +1,602 @@
 
 
+## [12.16.0](https://github.com/powerhome/playbook/tree/12.16.0) (2023-04-19)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.15.0...12.16.0)
+
+**Kit Enhancements:**
+
+- New Success sm Token [\#2458](https://github.com/powerhome/playbook/pull/2458) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Converting Table Kit to Typescript [\#2457](https://github.com/powerhome/playbook/pull/2457) ([carloslimasd](https://github.com/carloslimasd))
+- Add Table Tags to Background Kit [\#2453](https://github.com/powerhome/playbook/pull/2453) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Convert Textarea Kit to Typescript [\#2444](https://github.com/powerhome/playbook/pull/2444) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fix for Icon Stat Value Kit Misalignment [\#2463](https://github.com/powerhome/playbook/pull/2463) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Fixing Phone Number Input Kit Width and Method Errors [\#2462](https://github.com/powerhome/playbook/pull/2462) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Rails / React Playground and React Render Rails Examples [\#2460](https://github.com/powerhome/playbook/pull/2460) ([jasoncypret](https://github.com/jasoncypret))
+- Testing Adding Proxima Nova to Sandpack [\#2456](https://github.com/powerhome/playbook/pull/2456) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+## [12.15.0](https://github.com/powerhome/playbook/tree/12.15.0) (2023-04-12)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.14.0...12.15.0)
+
+**Kit Enhancements:**
+
+- Update Avatar Kit imageAlt Default [\#2446](https://github.com/powerhome/playbook/pull/2446) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Change Star Rating Kit from JSX to TSX [\#2428](https://github.com/powerhome/playbook/pull/2428) ([markdoeswork](https://github.com/markdoeswork))
+
+**Improvements:**
+
+- Adding Card Header Support for Striped Colors [\#2442](https://github.com/powerhome/playbook/pull/2442) ([carloslimasd](https://github.com/carloslimasd))
+- Updating Global Props Cursor Values [\#2433](https://github.com/powerhome/playbook/pull/2433) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+
+## [12.14.0](https://github.com/powerhome/playbook/tree/12.14.0) (2023-04-06)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.13.0...12.14.0)
+
+**Kit Enhancements:**
+
+- Added New Product Tokens [\#2431](https://github.com/powerhome/playbook/pull/2431) ([jasoncypret](https://github.com/jasoncypret))
+- Datepicker onClose Prop [\#2425](https://github.com/powerhome/playbook/pull/2425) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Fixes Bad Doc Example Code Snippets [\#2432](https://github.com/powerhome/playbook/pull/2432) ([jasperfurniss](https://github.com/jasperfurniss))
+- Update dependency capybara to v3.39.0 [\#2429](https://github.com/powerhome/playbook/pull/2429) ([renovate[bot]](https://github.com/apps/renovate))
+- Changing the Phone Number Input Returned Value Format [\#2427](https://github.com/powerhome/playbook/pull/2427) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Position Global Prop [\#2426](https://github.com/powerhome/playbook/pull/2426) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+## [12.13.0](https://github.com/powerhome/playbook/tree/12.13.0) (2023-04-04)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.12.0...12.13.0)
+
+**Kit Enhancements:**
+
+- Adding xxs size to Flex gap, columnGap and rowGap [\#2423](https://github.com/powerhome/playbook/pull/2423) ([nidaqg](https://github.com/nidaqg))
+- Selectable List to Typescript [\#2421](https://github.com/powerhome/playbook/pull/2421) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Updating Sandpack Layout Styles [\#2420](https://github.com/powerhome/playbook/pull/2420) ([carloslimasd](https://github.com/carloslimasd))
+- Update dependency selenium-webdriver to v4.8.6 [\#2417](https://github.com/powerhome/playbook/pull/2417) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [12.12.0](https://github.com/powerhome/playbook/tree/12.12.0) (2023-03-30)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.11.0...12.12.0)
+
+**Kit Enhancements:**
+
+- Custom Tooltip Prop for Circle Chart [\#2415](https://github.com/powerhome/playbook/pull/2415) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Update dependency slim-rails to v3.6.2 [\#2416](https://github.com/powerhome/playbook/pull/2416) ([renovate[bot]](https://github.com/apps/renovate))
+- Addresses critical security Active Record RCE bug \#86 \#87 [\#2403](https://github.com/powerhome/playbook/pull/2403) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+
+## [12.11.0](https://github.com/powerhome/playbook/tree/12.11.0) (2023-03-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.10.0...12.11.0)
+
+**Kit Enhancements:**
+
+- Converting Source kit to Typescript [\#2410](https://github.com/powerhome/playbook/pull/2410) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Selectable Card Icon kit to Typescript [\#2404](https://github.com/powerhome/playbook/pull/2404) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Rich Text Editor kit to Typescript [\#2401](https://github.com/powerhome/playbook/pull/2401) ([carloslimasd](https://github.com/carloslimasd))
+- Creating Fixed Toast auto close Functionality [\#2396](https://github.com/powerhome/playbook/pull/2396) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+
+- Fixed Date Picker Kit Jump on Range Select [\#2408](https://github.com/powerhome/playbook/pull/2408) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Dependency Updates [\#2411](https://github.com/powerhome/playbook/pull/2411) ([jasperfurniss](https://github.com/jasperfurniss))
+- Adding Target Prop to Button Kit [\#2409](https://github.com/powerhome/playbook/pull/2409) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+## [12.10.0](https://github.com/powerhome/playbook/tree/12.10.0) (2023-03-22)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.9.1...12.10.0)
+
+**Kit Enhancements:**
+
+- Move Menu YML to Playbook Website [\#2395](https://github.com/powerhome/playbook/pull/2395) ([jasperfurniss](https://github.com/jasperfurniss), [Israel-Molestina](https://github.com/Israel-Molestina))
+- Converting Nav Kit to Typescript [\#2376](https://github.com/powerhome/playbook/pull/2376) ([carloslimasd](https://github.com/carloslimasd))
+- Map Kit Style Updates [\#2368](https://github.com/powerhome/playbook/pull/2368) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Text Input Spacing Error Without Label [\#2398](https://github.com/powerhome/playbook/pull/2398) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Improvements:**
+
+- Add Articles doc to Body Kit [\#2400](https://github.com/powerhome/playbook/pull/2400) ([carloslimasd](https://github.com/carloslimasd))
+- Update dependency bootsnap to v1.16.0 [\#2389](https://github.com/powerhome/playbook/pull/2389) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [12.9.1](https://github.com/powerhome/playbook/tree/12.9.1) (2023-03-17)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.9.0...12.9.1)
+
+**Fixed Bugs:**
+
+- Fix For TreeMap Chart SCSS [\#2394](https://github.com/powerhome/playbook/pull/2394) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+
+## [12.9.0](https://github.com/powerhome/playbook/tree/12.9.0) (2023-03-16)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.8.0...12.9.0)
+
+**Kit Enhancements:**
+
+- Implementing Phone Number Input Kit Dark Mode [\#2371](https://github.com/powerhome/playbook/pull/2371) ([carloslimasd](https://github.com/carloslimasd))
+- Typescript Conversion: Progress Step Kit [\#2367](https://github.com/powerhome/playbook/pull/2367) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Fixed Bugs:**
+
+- Adding Classname Prop to Typeahead Kit [\#2373](https://github.com/powerhome/playbook/pull/2373) ([carloslimasd](https://github.com/carloslimasd))
+- Styling Treemap Kit Back Button [\#2353](https://github.com/powerhome/playbook/pull/2353) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Bump rack from 2.2.6.3 to 2.2.6.4 in /playbook [\#2387](https://github.com/powerhome/playbook/pull/2387) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.3 to 2.2.6.4 in /playbook-website [\#2386](https://github.com/powerhome/playbook/pull/2386) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.3 to 2.2.6.4 in /examples/rails-react-example [\#2385](https://github.com/powerhome/playbook/pull/2385) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.3 to 2.2.6.4 in /examples/playbook-rails [\#2384](https://github.com/powerhome/playbook/pull/2384) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.3 to 2.2.6.4 in /examples/playbook-rails-webpack [\#2383](https://github.com/powerhome/playbook/pull/2383) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependency spring to v4.1.1 [\#2379](https://github.com/powerhome/playbook/pull/2379) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency puma to v5.6.5 [\#2378](https://github.com/powerhome/playbook/pull/2378) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency psych to v3.3.4 [\#2377](https://github.com/powerhome/playbook/pull/2377) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency faker to v3.1.1 [\#2370](https://github.com/powerhome/playbook/pull/2370) ([renovate[bot]](https://github.com/apps/renovate))
+- NPM + Ruby Gem Alpha Release Github Action [\#2366](https://github.com/powerhome/playbook/pull/2366) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+
+
+## [12.8.0](https://github.com/powerhome/playbook/tree/12.8.0) (2023-03-14)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.7.1...12.8.0)
+
+**Kit Enhancements:**
+
+- MultiLevelSelect returnAllSelected Prop [\#2365](https://github.com/powerhome/playbook/pull/2365) ([nidaqg](https://github.com/nidaqg))
+- Converting Progress Pills kit to TS [\#2362](https://github.com/powerhome/playbook/pull/2362) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Multiple Users Stacked Kit to TS [\#2360](https://github.com/powerhome/playbook/pull/2360) ([carloslimasd](https://github.com/carloslimasd))
+- Typescript Conversion: Multiple Users Kit [\#2348](https://github.com/powerhome/playbook/pull/2348) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Improvements:**
+
+- Fixing Fontawesome Imports [\#2361](https://github.com/powerhome/playbook/pull/2361) ([carloslimasd](https://github.com/carloslimasd))
+
+**Merged pull requests:**
+
+- Bump rack from 2.2.6.2 to 2.2.6.3 in /playbook-website [\#2359](https://github.com/powerhome/playbook/pull/2359) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.2 to 2.2.6.3 in /examples/rails-react-example [\#2358](https://github.com/powerhome/playbook/pull/2358) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.2 to 2.2.6.3 in /examples/playbook-rails-webpack [\#2357](https://github.com/powerhome/playbook/pull/2357) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.2 to 2.2.6.3 in /examples/playbook-rails [\#2356](https://github.com/powerhome/playbook/pull/2356) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.2 to 2.2.6.3 in /playbook [\#2355](https://github.com/powerhome/playbook/pull/2355) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+## [12.7.1](https://github.com/powerhome/playbook/tree/12.7.1) (2023-03-08)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.7.0...12.7.1)
+
+**Fixed Bugs:**
+
+- Fixed className Order in Tooltip [\#2354](https://github.com/powerhome/playbook/pull/2354) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [12.7.0](https://github.com/powerhome/playbook/tree/12.7.0) (2023-03-08)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.6.0...12.7.0)
+
+**Kit Enhancements:**
+
+- Add Tooltip Delay [\#2347](https://github.com/powerhome/playbook/pull/2347) ([augustomallmann](https://github.com/augustomallmann))
+
+**Fixed Bugs:**
+
+- Recoded Separator to Remove Z-Index Issues [\#2352](https://github.com/powerhome/playbook/pull/2352) ([jasoncypret](https://github.com/jasoncypret))
+- Selectable Cards Hover Target Area Update [\#2345](https://github.com/powerhome/playbook/pull/2345) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Allowing Input Typing on Date Picker [\#2342](https://github.com/powerhome/playbook/pull/2342) ([carloslimasd](https://github.com/carloslimasd))
+
+**New Kits:**
+
+- MultiLevelSelect in Rails [\#2351](https://github.com/powerhome/playbook/pull/2351) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Phone Number Input Kit Button Up [\#2334](https://github.com/powerhome/playbook/pull/2334) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+## [12.6.0](https://github.com/powerhome/playbook/tree/12.6.0) (2023-03-03)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.5.0...12.6.0)
+
+**Kit Enhancements:**
+
+- Rails Version of Phone Number Input Kit [\#2343](https://github.com/powerhome/playbook/pull/2343) ([jasperfurniss](https://github.com/jasperfurniss))
+- Converting Person Contact Kit to Typescript [\#2338](https://github.com/powerhome/playbook/pull/2338) ([carloslimasd](https://github.com/carloslimasd))
+- Typescript Conversion: Filter Kit [\#2330](https://github.com/powerhome/playbook/pull/2330) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**New Kits:**
+
+- New Multi Level Select Kit [\#2339](https://github.com/powerhome/playbook/pull/2339) ([nidaqg](https://github.com/nidaqg), [jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Changing Green Token Color [\#2336](https://github.com/powerhome/playbook/pull/2336) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Default to Tokens [\#2335](https://github.com/powerhome/playbook/pull/2335) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Secondary Action to Color Tokens [\#2324](https://github.com/powerhome/playbook/pull/2324) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+## [12.5.0](https://github.com/powerhome/playbook/tree/12.5.0) (2023-02-24)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.4.0...12.5.0)
+
+**Breaking changes:**
+
+- Date Picker Hide Input Icon Broken [\#2312](https://github.com/powerhome/playbook/pull/2312) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Kit Enhancements:**
+
+- Converting Passphrase Kit to Typescript [\#2331](https://github.com/powerhome/playbook/pull/2331) ([carloslimasd](https://github.com/carloslimasd))
+- Map Kit Custom Styles [\#2329](https://github.com/powerhome/playbook/pull/2329) ([nidaqg](https://github.com/nidaqg))
+- Converting Loading Inline Kit to Typescrit [\#2328](https://github.com/powerhome/playbook/pull/2328) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Message Kit to Typescript [\#2326](https://github.com/powerhome/playbook/pull/2326) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+
+- Selectable List Kit Active Background Color Fix [\#2325](https://github.com/powerhome/playbook/pull/2325) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Fixing Typeahead off spacing on dropdown [\#2323](https://github.com/powerhome/playbook/pull/2323) ([carloslimasd](https://github.com/carloslimasd))
+
+**New Kits:**
+
+- Phone Number Input Rails [\#2333](https://github.com/powerhome/playbook/pull/2333) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Sandpack [\#2299](https://github.com/powerhome/playbook/pull/2299) ([jasperfurniss](https://github.com/jasperfurniss), [carloslimasd](https://github.com/carloslimasd))
+
+
+
+## [12.4.0](https://github.com/powerhome/playbook/tree/12.4.0) (2023-02-20)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.3.1...12.4.0)
+
+**Kit Enhancements:**
+
+- Added Default Property to Color Tokens [\#2322](https://github.com/powerhome/playbook/pull/2322) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Typescript Conversion: Dashboard Value [\#2316](https://github.com/powerhome/playbook/pull/2316) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Typescript Conversion: Date Time Stacked [\#2315](https://github.com/powerhome/playbook/pull/2315) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Radio Kit: Pseudo Styles  [\#2314](https://github.com/powerhome/playbook/pull/2314) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Typescript Conversion: Title Count [\#2311](https://github.com/powerhome/playbook/pull/2311) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Typescript Conversion: Person [\#2310](https://github.com/powerhome/playbook/pull/2310) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Fixed Bugs:**
+
+- Text Input Kit Left-Aligned Add On With No Border, Added Missing Padding [\#2318](https://github.com/powerhome/playbook/pull/2318) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Give Sticky Header for Dialog a Z-Index [\#2317](https://github.com/powerhome/playbook/pull/2317) ([nidaqg](https://github.com/nidaqg))
+
+**New Kits:**
+
+- Phone Number Input Kit [\#2305](https://github.com/powerhome/playbook/pull/2305) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+## [12.3.1](https://github.com/powerhome/playbook/tree/12.3.1) (2023-02-14)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.3.0...12.3.1)
+
+**Fixed Bugs:**
+
+- Moved Focus SCSS to Utilities Folder [\#2313](https://github.com/powerhome/playbook/pull/2313) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [12.3.0](https://github.com/powerhome/playbook/tree/12.3.0) (2023-02-13)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.2.0...12.3.0)
+
+**Kit Enhancements:**
+
+- Checkbox Pseudo Styles [\#2308](https://github.com/powerhome/playbook/pull/2308) ([nidaqg](https://github.com/nidaqg))
+- TS Conversion of Progress Simple + Jest Tests [\#2306](https://github.com/powerhome/playbook/pull/2306) ([nidaqg](https://github.com/nidaqg))
+- Circle Icon Button Pseudo State [\#2301](https://github.com/powerhome/playbook/pull/2301) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Typeahead Error State [\#2286](https://github.com/powerhome/playbook/pull/2286) ([Israel-Molestina](https://github.com/Israel-Molestina), [nidaqg](https://github.com/nidaqg))
+- Button Pseudo State [\#2281](https://github.com/powerhome/playbook/pull/2281) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Fixed Bugs:**
+
+- Fixed Form Group Bug Where Content Jumped on Select [\#2304](https://github.com/powerhome/playbook/pull/2304) ([nidaqg](https://github.com/nidaqg))
+
+**New Kits:**
+
+- Map Kit [\#2273](https://github.com/powerhome/playbook/pull/2273) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [12.2.0](https://github.com/powerhome/playbook/tree/12.2.0) (2023-02-07)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.1.0...12.2.0)
+
+**Kit Enhancements:**
+
+- Typescript Conversion: TimeStamp [\#2298](https://github.com/powerhome/playbook/pull/2298) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Time Stacked Typescript Conversion [\#2297](https://github.com/powerhome/playbook/pull/2297) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Typescript Conversion Stat Value [\#2294](https://github.com/powerhome/playbook/pull/2294) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Typescript Conversion Stat Change [\#2293](https://github.com/powerhome/playbook/pull/2293) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Fixed Bugs:**
+
+- Bar Graph borders don't match theme [\#2300](https://github.com/powerhome/playbook/pull/2300) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Added ClassName prop to Tooltip Kit [\#2295](https://github.com/powerhome/playbook/pull/2295) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+
+
+## [12.1.0](https://github.com/powerhome/playbook/tree/12.1.0) (2023-02-02)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.0.0...12.1.0)
+
+**Fixed Bugs:**
+
+- Added Position Fixed to Rails Dialog [\#2285](https://github.com/powerhome/playbook/pull/2285) ([nidaqg](https://github.com/nidaqg))
+- Fixed Body Content disappearing behind Footer for Dialog [\#2283](https://github.com/powerhome/playbook/pull/2283) ([nidaqg](https://github.com/nidaqg))
+- Fix for Typeahead Event Detail Showing Null [\#2282](https://github.com/powerhome/playbook/pull/2282) ([nidaqg](https://github.com/nidaqg))
+
+**New Kits:**
+
+- Pagination Kit [\#2254](https://github.com/powerhome/playbook/pull/2254) ([jasoncypret](https://github.com/jasoncypret), [Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Improvements:**
+
+- GitHub Actions Alpha [\#2289](https://github.com/powerhome/playbook/pull/2289) ([carloslimasd](https://github.com/carloslimasd))
+- Bump globalid from 1.0.0 to 1.1.0 in /playbook-website [\#2288](https://github.com/powerhome/playbook/pull/2288) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump globalid from 1.0.0 to 1.0.1 in /playbook [\#2269](https://github.com/powerhome/playbook/pull/2269) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump globalid from 1.0.0 to 1.0.1 in /examples/rails-react-example [\#2266](https://github.com/powerhome/playbook/pull/2266) ([dependabot[bot]](https://github.com/apps/dependabot))
+- bump rack from 2.2.3.1 to 2.2.6.2 in /playbook [\#2263](https://github.com/powerhome/playbook/pull/2263) ([dependabot[bot]](https://github.com/apps/dependabot))
+- bump rack from 2.2.3.1 to 2.2.6.2 in /playbook-website [\#2260](https://github.com/powerhome/playbook/pull/2260) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+
+## [12.0.0](https://github.com/powerhome/playbook/tree/12.0.0) (2023-01-30)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.20.0...12.0.0)
+
+**Breaking changes:**
+
+- Removed FA from Dist, Imported into Playbook via Yarn [\#2180](https://github.com/powerhome/playbook/pull/2180) ([nidaqg](https://github.com/nidaqg), [jasperfurniss](https://github.com/jasperfurniss), [benlangfeld](https://github.com/benlangfeld))
+
+**Improvements:**
+
+- Bump globalid from 1.0.0 to 1.0.1 in /examples/playbook-rails-webpack [\#2270](https://github.com/powerhome/playbook/pull/2270) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+## [11.20.0](https://github.com/powerhome/playbook/tree/11.20.0) (2023-01-23)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.19.0...11.20.0)
+
+**Kit Enhancements:**
+
+- Converting Selectable Icon kit to Typescript [\#2259](https://github.com/powerhome/playbook/pull/2259) ([carloslimasd](https://github.com/carloslimasd))
+- Typescript Conversion Selectable Card [\#2258](https://github.com/powerhome/playbook/pull/2258) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Add Custom Message to FileUpload kit [\#2256](https://github.com/powerhome/playbook/pull/2256) ([gavhuang](https://github.com/gavhuang))
+- Dialog Kit Animation [\#2248](https://github.com/powerhome/playbook/pull/2248) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Body kit style \<b\>, \<strong\>, and \<a\> [\#2247](https://github.com/powerhome/playbook/pull/2247) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Fixed Bugs:**
+
+- Fixing Select Icon Position in Error State [\#2253](https://github.com/powerhome/playbook/pull/2253) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Update dependency react-highlight-words to ^0.20.0 [\#2275](https://github.com/powerhome/playbook/pull/2275) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency flow-bin to v0.198.1 [\#2274](https://github.com/powerhome/playbook/pull/2274) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump ci-kubed to v6.0.0 [\#2272](https://github.com/powerhome/playbook/pull/2272) ([TeamTeaTime](https://github.com/TeamTeaTime))
+- Bump globalid from 1.0.0 to 1.0.1 in /examples/playbook-rails [\#2267](https://github.com/powerhome/playbook/pull/2267) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.4 to 2.2.6.2 in /examples/playbook-rails [\#2264](https://github.com/powerhome/playbook/pull/2264) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.4 to 2.2.6.2 in /examples/playbook-rails-webpack [\#2262](https://github.com/powerhome/playbook/pull/2262) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.4 to 2.2.6.2 in /examples/rails-react-example [\#2261](https://github.com/powerhome/playbook/pull/2261) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update dependency @types/react to v17.0.53 [\#2257](https://github.com/powerhome/playbook/pull/2257) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+
+## [11.19.0](https://github.com/powerhome/playbook/tree/11.19.0) (2023-01-16)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.18.0...11.19.0)
+
+**Kit Enhancements:**
+
+- Convert List Kit to Typescript [\#2234](https://github.com/powerhome/playbook/pull/2234) ([nidaqg](https://github.com/nidaqg))
+- Provide Text Highlight Example in Typeahead Kit [\#2231](https://github.com/powerhome/playbook/pull/2231) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- TS Conversion Popover [\#2219](https://github.com/powerhome/playbook/pull/2219) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fixing Collapsible Kit Content Spacing Issue [\#2229](https://github.com/powerhome/playbook/pull/2229) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Make Dev Dependencies Actually Dev Dependencies [\#2236](https://github.com/powerhome/playbook/pull/2236) ([drborges](https://github.com/drborges))
+
+
+
+## [11.18.0](https://github.com/powerhome/playbook/tree/11.18.0) (2023-01-10)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.17.0...11.18.0)
+
+**Kit Enhancements:**
+
+- Update Error Color Token [\#2226](https://github.com/powerhome/playbook/pull/2226) ([nidaqg](https://github.com/nidaqg))
+- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret), [carloslimasd](https://github.com/carloslimasd), [Israel-Molestina](https://github.com/Israel-Molestina)), 
+
+**Fixed Bugs:**
+
+- Fixed SVG-loader Error in User Badge Kit [\#2244](https://github.com/powerhome/playbook/pull/2244) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Fixes loader-utils security vulnerability [\#2241](https://github.com/powerhome/playbook/pull/2241) ([jasperfurniss](https://github.com/jasperfurniss))
+- Popover Kit Updates for Dropdown Doc Example [\#2235](https://github.com/powerhome/playbook/pull/2235) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [11.17.0](https://github.com/powerhome/playbook/tree/11.17.0) (2023-01-06)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.16.0...11.17.0)
+
+**Improvements:**
+
+- Update React to v17 [\#2230](https://github.com/powerhome/playbook/pull/2230) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [11.16.0](https://github.com/powerhome/playbook/tree/11.16.0) (2023-01-03)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.15.0...11.16.0)
+
+**Fixed Bugs:**
+
+- Circle Chart Fix for Live Update Variant [\#2237](https://github.com/powerhome/playbook/pull/2237) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Rebuild Charts to Use React-Highcharts [\#2191](https://github.com/powerhome/playbook/pull/2191) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [11.15.0](https://github.com/powerhome/playbook/tree/11.15.0) (2022-12-19)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.14.0...11.15.0)
+
+**Kit Enhancements:**
+
+- Dialog Sticky Header Footer [\#2207](https://github.com/powerhome/playbook/pull/2207) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Nav Kit Wiggle Fix [\#2223](https://github.com/powerhome/playbook/pull/2223) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Updating new kit architecture names [\#2217](https://github.com/powerhome/playbook/pull/2217) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+## [11.14.0](https://github.com/powerhome/playbook/tree/11.14.0) (2022-12-13)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.13.0...11.14.0)
+
+**Kit Enhancements:**
+
+- Passphrase kit dependency and documentation [\#2172](https://github.com/powerhome/playbook/pull/2172) ([augustomallmann](https://github.com/augustomallmann), [Israel-Molestina](https://github.com/Israel-Molestina) )
+
+
+## [11.13.0](https://github.com/powerhome/playbook/tree/11.13.0) (2022-12-05)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.12.1...11.13.0)
+
+**Kit Enhancements:**
+
+- Converting Enhanced Element to Typescript [\#2185](https://github.com/powerhome/playbook/pull/2185) ([carloslimasd](https://github.com/carloslimasd))
+- Rails Dialog All Remaining Variants [\#2182](https://github.com/powerhome/playbook/pull/2182) ([nidaqg](https://github.com/nidaqg))
+- Date Picker AM/PM Buttons Instead of Toggle [\#2179](https://github.com/powerhome/playbook/pull/2179) ([nidaqg](https://github.com/nidaqg))
+- Add maxSize to FileUpload [\#2141](https://github.com/powerhome/playbook/pull/2141) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Datepicker closeOnSelect Prop [\#2187](https://github.com/powerhome/playbook/pull/2187) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Fixed Bugs:**
+
+- Change bg color when selectable list item is selected [\#2174](https://github.com/powerhome/playbook/pull/2174) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Website: kit pages in React [\#2192](https://github.com/powerhome/playbook/pull/2192) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Update dependency flow-bin to v0.194.0 [\#2190](https://github.com/powerhome/playbook/pull/2190) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+
+## [11.12.1](https://github.com/powerhome/playbook/tree/11.12.1) (2022-11-22)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.12.0...11.12.1)
+
+**Fixed Bugs:**
+
+- Fix Button Hover Bug [\#2183](https://github.com/powerhome/playbook/pull/2183) ([nidaqg](https://github.com/nidaqg))
+
+
+
+## [11.12.0](https://github.com/powerhome/playbook/tree/11.12.0) (2022-11-15)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.11.0...11.12.0)
+
+**Kit Enhancements:**
+
+- Charts/Graphs kits legend position [\#2171](https://github.com/powerhome/playbook/pull/2171) ([Israel-Molestina](https://github.com/Israel-Molestina))
+-  Added Hover State to Buttons with Link Variant [\#2169](https://github.com/powerhome/playbook/pull/2169) ([jasperfurniss](https://github.com/jasperfurniss))
+- Converted Legend Kit to TS [\#2156](https://github.com/powerhome/playbook/pull/2156) ([nidaqg](https://github.com/nidaqg))
+- Title kit enhancement: Bold prop/tokens [\#2154](https://github.com/powerhome/playbook/pull/2154) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Theming Support For Icons [\#2106](https://github.com/powerhome/playbook/pull/2106) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Reinstated Flatpickr Default AM/PM Toggle [\#2175](https://github.com/powerhome/playbook/pull/2175) ([nidaqg](https://github.com/nidaqg))
+- Added Missing Export for BreadCrumbItem [\#2170](https://github.com/powerhome/playbook/pull/2170) ([nidaqg](https://github.com/nidaqg))
+- Radio kit \(React\) alignment error [\#2163](https://github.com/powerhome/playbook/pull/2163) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**New Kits:**
+
+- Dialog Rails Kit with HTML5 [\#2168](https://github.com/powerhome/playbook/pull/2168) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Update dependency @types/lodash to v4.14.188 [\#2164](https://github.com/powerhome/playbook/pull/2164) ([renovate[bot]](https://github.com/apps/renovate))
+- Walkthrough kit update Joyride version [\#2162](https://github.com/powerhome/playbook/pull/2162) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Update dependency flow-bin to v0.193.0 [\#2161](https://github.com/powerhome/playbook/pull/2161) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @types/react to v17.0.52 [\#2160](https://github.com/powerhome/playbook/pull/2160) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [11.11.0](https://github.com/powerhome/playbook/tree/11.11.0) (2022-10-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/11.10.0...11.11.0)
+
+**Kit Enhancements:**
+
+- Add Subtitle Prop to User Kit [\#2159](https://github.com/powerhome/playbook/pull/2159) ([stephenmckeon](https://github.com/stephenmckeon))
+
+**Improvements:**
+
+- Update dependency @types/react to v17.0.51 [\#2158](https://github.com/powerhome/playbook/pull/2158) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
 ## [11.10.0](https://github.com/powerhome/playbook/tree/11.10.0) (2022-10-25)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.9.0...11.10.0)
@@ -2876,16 +3473,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
 
 
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

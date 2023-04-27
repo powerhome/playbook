@@ -28,6 +28,7 @@ type CardPropTypes = {
 
 type CardHeaderProps = {
   headerColor?: BackgroundColors | ProductColors | CategoryColors | "none",
+  headerColorStriped?: boolean,
   children: React.ReactChild[] | React.ReactChild,
   className?: string,
   padding?: string,
@@ -41,8 +42,8 @@ type CardBodyProps = {
 
 // Header component
 const Header = (props: CardHeaderProps) => {
-  const { children, className, headerColor = 'category_1', padding = 'sm' } = props
-  const headerCSS = buildCss('pb_card_header_kit', `${headerColor}`)
+  const { children, className, headerColor = 'category_1', headerColorStriped = false, padding = 'sm' } = props
+  const headerCSS = buildCss('pb_card_header_kit', `${headerColor}`, headerColorStriped ? 'striped' : '')
 
   const headerSpacing = globalProps(props, { padding })
 

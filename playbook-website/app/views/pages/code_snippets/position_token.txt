@@ -1,5 +1,5 @@
-@import "tokens/positioning
+@import "token/positioning"
 
 .selector {
-    z-index: $z_10;
+     position: $absolute;
 }

@@ -29,7 +29,10 @@ type BorderRadius = {
 }
 
 type Cursor = {
-  cursor?: "pointer",
+  cursor?: "auto" | "default" | "none" | "contextMenu" | "help" | "pointer" | "progress" | "wait" | "cell" |
+  "crosshair" | "text" | "verticalText" | "alias" | "copy" | "move" | "noDrop" | "notAllowed" | "grab" |
+  "grabbing" | "eResize" | "nResize" | "neResize" | "nwResize" | "sResize" | "seResize" | "swResize" | "wResize" |
+  "ewResize" | "nsResize" | "neswResize" | "nwseResize" | "colResize" | "rowResize" | "allScroll" | "zoomIn" | "zoomOut",
 }
 
 type Dark = {
@@ -100,6 +103,10 @@ type Padding = {
   padding?: AllSizes,
 }
 
+type Position = {
+  position?: "relative" | "absolute" | "fixed" | "sticky" | "static",
+}
+
 type Shadow = {
   shadow?: "none" | "deep" | "deeper" | "deepest",
 }
@@ -115,7 +122,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
-  Shadow & ZIndex
+  Position & Shadow & ZIndex
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -205,7 +212,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   cursorProps: ({ cursor }: Cursor) => {
     let css = ''
-    css += cursor ? `cursor_${cursor} ` : ''
+    css += cursor ? `cursor_${camelToSnakeCase(cursor)}` : ''
     return css
   },
   alignContentProps: ({ alignContent }: AlignContent) => {
@@ -283,7 +290,12 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     } else {
       return order ? `flex_order_${order}` : ''
     }
-  }
+  }, 
+  positionProps: ({ position }: Position) => {
+    let css = ''
+    css += position && position !== 'static' ? `position_${position}` : ''
+    return css
+  },
 }
 
 type DefaultProps = {[key: string]: string} | Record<string, unknown>

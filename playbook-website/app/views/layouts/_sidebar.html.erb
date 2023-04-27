@@ -14,7 +14,8 @@
     title: "Kits",
     link: all_link(@type),
     variant: "subtle",
-    padding_y: "sm"
+    padding_y: "sm",
+    dark: cookies[:dark_mode] == "true" ? true : false
   }) do %>
     <% pb_rails("nav/item", props: {
       text: "All",
@@ -53,6 +54,6 @@
   <% end %>
 <% end %>
 
-<% if current_page?('/visual_guidelines') %>
+<% if current_page?('/visual_guidelines') || request.path.match(/^\/visual_guidelines\//) %>
   <%= react_component("Sidebar") %>
 <% end %>

@@ -8,7 +8,7 @@ ruby "3.1.2"
 gem "playbook_ui", path: "../playbook"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 6.1.6"
+gem "rails", "~> 6.1.6.1"
 # Use Puma as the app server
 gem "puma", "~> 5.6"
 gem "slim-rails", "~> 3.2"
@@ -28,6 +28,9 @@ gem "bootsnap", ">= 1.1.0", require: false
 # livenessProbe and readinessProbe. See: https://github.com/powerhome/playbook/blob/master/playbook/config/deploy/templates/deployment.yaml.erb
 gem "health_check"
 
+gem "faker"
+gem "will_paginate"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
@@ -39,6 +42,7 @@ group :development do
   gem "web-console", ">= 3.3.0"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "better_errors", "2.9.1"
+  gem "binding_of_caller"
   gem "rubocop", "1.36.0"
   gem "rubocop-performance", "~> 1.15.0"
   gem "spring"
