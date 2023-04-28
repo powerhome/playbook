@@ -26,23 +26,19 @@
     <%= render 'layouts/mobile_hamburger'%>
     <%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "sm"}) do %>
       <%= pb_rails("layout/sidebar") do %>
-        <%= pb_rails("nav", props: { orientation: "vertical", variant: "bold" }) do %>
-          <%= pb_rails("nav/item", props: { text: "About", link: "#" }) %>
-          <%= pb_rails("nav/item", props: { text: "Case Studies", link: "#", active: true }) %>
-          <%= pb_rails("nav/item", props: { text: "Service ", link: "#" }) %>
-          <%= pb_rails("nav/item", props: { text: "Contacts", link: "#" }) %>
-        <% end %>
+        <% render partial: "layouts/docs_navigation"%>
       <% end %>
       <%= pb_rails("layout/body") do %>
         <%= pb_rails("background", props: { display: "flex", classname: "markdown", display: "flex", justify_content: "center", background_color: "white" }) do %>
           <%= pb_rails("flex/flex_item", props: { max_width: "md", margin_x: "sm", padding_y: "md" }) do %>
-            <div class="markdown_title"><%= @name.titleize %></div>
+          <%= @TOC %>
+            <div class="markdown_title"><%= @page_title.titleize %></div>
             <%= yield %>
             <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
             <%= pb_rails("button", props: {
               size: "sm",
               text: "Edit this page",
-              link: "https://github.com/powerhome/playbook/edit/master/playbook-website/guides/create_kit/#{@name}"
+              link: gh_edit_link(@parent, @page),
             }) %>
           <% end %>  
         <% end %>  

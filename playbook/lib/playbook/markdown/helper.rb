@@ -12,6 +12,10 @@ module Playbook
         markdown(template.source)
       end
 
+      def render_markdown(text)
+        Playbook::Markdown::Helper.markdown(text)
+      end
+
       def self.markdown(text)
         options = {
           filter_html: false,
@@ -39,6 +43,9 @@ module Playbook
         }
 
         renderer = HTMLBlockCode.new(options)
+        # toc_renderer = Redcarpet::Render::HTML_TOC.new(with_toc_data: true)
+        # @TOC = Redcarpet::Markdown.new(toc_renderer)
+        # puts "TOC: #{@TOC.inspect}"
         markdown = Redcarpet::Markdown.new(renderer, extensions)
         "#{markdown.render(text).inspect}.html_safe;"
       end
