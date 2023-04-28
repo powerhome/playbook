@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 import classnames from 'classnames'
 import type { InputCallback } from '../types'
@@ -13,11 +11,11 @@ import {
 import { globalProps } from '../utilities/globalProps'
 
 type Props = {
-  aria?: object,
+  aria?: { [key: string]: string },
   checked?: boolean,
-  children?: React.Node,
+  children?: React.ReactNode | React.ReactNode[],
   className?: string,
-  data?: object,
+  data?: { [key: string]: string },
   id?: string,
   name?: string,
   onChange?: InputCallback<HTMLInputElement>,
@@ -33,7 +31,7 @@ const Toggle = ({
   data = {},
   id,
   name,
-  onChange = () => {},
+  onChange = () => { },
   size = 'sm',
   value,
   ...props
@@ -51,24 +49,24 @@ const Toggle = ({
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={classnames(css, globalProps(props), className)}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={classnames(css, globalProps(props), className)}
+      id={id}
     >
       <label className="pb_toggle_wrapper">
-        <If condition={children}>
-          {children}
-          <Else />
+        {children && children}
+
+        {!children &&
           <input
-              {...props}
-              defaultChecked={checked}
-              name={name}
-              onChange={onChange}
-              type="checkbox"
-              value={value}
+            {...props}
+            defaultChecked={checked}
+            name={name}
+            onChange={onChange}
+            type="checkbox"
+            value={value}
           />
-        </If>
+        }
         <div className="pb_toggle_control" />
       </label>
     </div>
