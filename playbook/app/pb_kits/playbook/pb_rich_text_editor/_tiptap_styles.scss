@@ -193,11 +193,12 @@
 
 .pb_tiptap_toolbar_dropdown_list_item {
   &.is-active,
-    &:active {
-      color: $primary;
-      background-color: $bg_light;
-      .pb_nav_list_item_text, .pb_nav_list_item_icon_left {
-        color: $primary !important;
-      }
+  &:active {
+    color: $primary;
+    background-color: $bg_light;
+    .pb_nav_list_item_text,
+    .pb_nav_list_item_icon_left {
+      color: $primary !important;
     }
+  }
 }
