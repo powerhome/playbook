@@ -38,7 +38,7 @@ module Playbook
         # extracts the modules from kit_base.rb, which is where we import all the global props that we inject into every rails kit
         pb_module = Playbook::KitBase.included_modules.select { |mod| mod.to_s.include?("Playbook::") }
 
-        # loops through the kits and extracts each prop with its values and pushes that to the global_props array
+        # loops through the kits and extracts each prop with its values and pushes that to the global_props hash
         kit_props.each do |key, value|
           value.kit == Playbook::KitBase && global_props[key.to_sym] = value
         end
@@ -49,8 +49,7 @@ module Playbook
         end
 
         # Loops through each module in pb_module and searches for methods that end in _values, as these methods hold the values for each prop
-        # we then save the values and type and push that to the values object as a key value pair
-        # where the name is the key and the type and value are the values
+        # we then save the values and type and push that to the values hash as a key value pair
         pb_module.each do |mod|
           mod.instance_methods.each do |method_name|
             next unless method_name.to_s.end_with?("_values")
