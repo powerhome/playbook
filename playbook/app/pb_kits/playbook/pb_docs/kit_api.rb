@@ -27,20 +27,26 @@ module Playbook
       end
 
       def kit_global_props
-        global_props = []
+        global_props = {}
         global_prop_names = []
         global_prop_values = {}
         global_props_with_values = {}
         global_props_without_values = []
         parent_child_object = {}
-
-        # loops through the kits and extracts each prop with its values and pushes that to the global_props array
-        kit_props.each do |key, value|
-          value.kit == Playbook::KitBase && global_props.push({ key: key, value: value })
-        end
+        updated_global_props_with_values = {}
 
         # extracts the modules from kit_base.rb, which is where we import all the global props that we inject into every rails kit
         pb_module = Playbook::KitBase.included_modules.select { |mod| mod.to_s.include?("Playbook::") }
+
+        # loops through the kits and extracts each prop with its values and pushes that to the global_props array
+        kit_props.each do |key, value|
+          value.kit == Playbook::KitBase && global_props[key.to_sym] = value
+        end
+
+        # loops through the global_props and extracts the name of each prop and pushes that to global_prop_names array
+        global_props.each do |name, _values|
+          global_prop_names.push(name)
+        end
 
         # Loops through each module in pb_module and searches for methods that end in _values, as these methods hold the values for each prop
         # we then save the values and type and push that to the values object as a key value pair
@@ -53,11 +59,6 @@ module Playbook
             type = value.class
             global_prop_values[method_name.to_s.chomp("_values").to_sym] = { "type": type, "values": value }
           end
-        end
-
-        # loops through the global_props and extracts the name of each prop and pushes that to global_prop_names array
-        global_props.each do |name, _prop|
-          global_prop_names.push(name[:value].instance_variable_get(:@name))
         end
 
         # loops throughthe global_prop_names
@@ -101,18 +102,29 @@ module Playbook
           end
         end
 
-        global_props
+        # loop through the global_props hash and the global_props_with_values hash.
+        # extract the props from global_props that are not found in global_props_with_values into updated_global_props_with_values
+        global_props.each do |prop, value|
+          unless global_props_with_values.include?(prop)
+            type = value.class.to_s.split("::").last
+            updated_global_props_with_values[prop] = { "type": type }
+          end
+        end
+
+        # Merge updated_global_props_with_values into global_props_with_values
+        # global_props_with_values will now hold all the global props thier values and type
+        global_props_with_values.merge!(updated_global_props_with_values)
+
+        global_props_with_values
       end
 
       def global_prop_data
         global_props = {}
 
-        kit_global_props.each do |key, _value|
-          name = key[:value].instance_variable_get(:@name)
-          type = key[:value].class.to_s.split("::").last
-          default = key[:value].instance_variable_get(:@default)
-          values = key[:value].instance_variable_get(:@values)
-          global_props[name.to_sym] = { "type": type, "default": default, "values": values }
+        kit_global_props.each do |key, value|
+          type = value[:type]
+          values = value[:values]
+          global_props[key] = { "type": type, "values": values }
         end
         global_props
       end
