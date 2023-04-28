@@ -6,6 +6,16 @@ module Playbook
       base.prop :number_spacing
     end
 
+    def number_spacing_values
+      %w[tabular]
+    end
+
+    def number_spacing_options
+      {
+        number_spacing: "ns",
+      }
+    end
+
   private
 
     def number_spacing_props
@@ -16,16 +26,6 @@ module Playbook
         index_value = send(k)
         "ns_#{index_value}" if number_spacing_values.include? index_value
       end.compact.join(" ")
-    end
-
-    def number_spacing_options
-      {
-        number_spacing: "ns",
-      }
-    end
-
-    def number_spacing_values
-      %w[tabular]
     end
   end
 end

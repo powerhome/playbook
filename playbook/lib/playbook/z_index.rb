@@ -10,6 +10,12 @@ module Playbook
       %w[1 2 3 4 5 6 7 8 9 10]
     end
 
+    def z_index_options
+      {
+        z_index: "z-index",
+      }
+    end
+
   private
 
     def z_index_props
@@ -20,12 +26,6 @@ module Playbook
         index_value = send(k)
         "z_index_#{index_value}" if z_index_values.include? index_value
       end.compact.join(" ")
-    end
-
-    def z_index_options
-      {
-        z_index: "z-index",
-      }
     end
   end
 end
