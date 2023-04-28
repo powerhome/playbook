@@ -6,4 +6,42 @@
   display: flex;
   justify-content: center;
   padding: $space_lg $space_xl;
+  [class^=pb_bread_crumbs_kit] {
+    border-color: $transparent;
+  }
+  [class^=pb_selectable_card] {
+    [class*=pb_icon_kit] {
+      color: $text_lt_lighter;
+    }
+  }
+  [class^=pb_bread_crumbs_kit] {
+    [class*=pb_icon_kit],
+    [class*=pb_title_kit_4] {
+      &:not(.current) {
+        color: $text_lt_light !important;
+      }  
+    }
+  }
+  [class^=pb_selectable_card_icon_kit] {
+    label {
+      padding: $space_xl 0;
+    }
+    .pb_body_kit_light {
+      display: none;
+    }
+  }
+  .markdown {
+    code {
+      // override
+      @at-root pre {
+        background: $bg_dark;
+        padding: $space_sm;
+        border-radius: $border_rad_heavy;
+      }
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
 }

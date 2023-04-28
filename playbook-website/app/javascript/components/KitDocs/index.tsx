@@ -6,12 +6,12 @@ import {
   SandpackCodeEditor,
 } from "@codesandbox/sandpack-react"
 
-import AnimateHeight from 'react-animate-height'
+import AnimateHeight from "react-animate-height"
 import { Button, Caption } from "playbook-ui"
 import entryPoint from "./entryPoint"
 
-const KitDocs = ({ source, exampleTitle }) => {
-  const [editorHeight, setEditorHeight] = useState(0);
+const KitDocs = ({ source, exampleTitle, css }) => {
+  const [editorHeight, setEditorHeight] = useState(0)
 
   const code = source
     .replace(
@@ -27,10 +27,6 @@ const KitDocs = ({ source, exampleTitle }) => {
     <>
       <SandpackProvider
         files={{
-          "/style.css": {
-            code: `body { background: white };`,
-            hidden: true,
-          },
           "/App.js": {
             code: code,
           },
@@ -50,12 +46,17 @@ const KitDocs = ({ source, exampleTitle }) => {
         options={{
           externalResources: [
             "https://kit.fontawesome.com/098a1cd4d5.js",
-            "https://unpkg.com/playbook-ui@latest/dist/playbook.css",
-            "https://unpkg.com/playbook-ui@latest/dist/reset.css",
+            `${css}`,
           ],
         }}
       >
-        <SandpackLayout style={{ backgroundColor: "white", border: "none" }}>
+        <SandpackLayout
+          style={{
+            backgroundColor: "white",
+            border: "none",
+            fontFamily: "Proxima Nova",
+          }}
+        >
           <div style={{ width: "100%" }}>
             <div className='pb--kit-example'>
               <Caption paddingBottom='md' text={exampleTitle}></Caption>
@@ -63,16 +64,23 @@ const KitDocs = ({ source, exampleTitle }) => {
               <SandpackPreview
                 showOpenInCodeSandbox={false}
                 showRefreshButton={false}
+                style={{ backgroundColor: "white" }}
               />
             </div>
 
             {editorHeight === 0 && (
-              <div style={{ width: "100%", display: "flex", justifyContent: "right" }}>
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "right",
+                }}
+              >
                 <Button
                   icon='code'
                   marginRight='xl'
-                  onClick={() => setEditorHeight('auto')}
-                  paddingX="none"
+                  onClick={() => setEditorHeight("auto")}
+                  paddingX='none'
                   tabIndex={0}
                   text='Show Code'
                   variant='link'
@@ -80,13 +88,19 @@ const KitDocs = ({ source, exampleTitle }) => {
               </div>
             )}
 
-            {editorHeight === 'auto' && (
-              <div style={{ width: "100%", display: "flex", justifyContent: "right" }}>
+            {editorHeight === "auto" && (
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "right",
+                }}
+              >
                 <Button
                   icon='times'
                   marginRight='xl'
                   onClick={() => setEditorHeight(0)}
-                  paddingX="none"
+                  paddingX='none'
                   tabIndex={0}
                   text='Close Code'
                   variant='link'
@@ -94,10 +108,7 @@ const KitDocs = ({ source, exampleTitle }) => {
               </div>
             )}
 
-            <AnimateHeight
-              duration={500}
-              height={editorHeight}
-            >
+            <AnimateHeight duration={500} height={editorHeight}>
               <SandpackCodeEditor
                 style={{ height: "100%", maxHeight: "300px" }}
               />

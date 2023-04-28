@@ -1,7 +1,7 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (12.15.0)
+    playbook_ui (12.17.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -113,14 +113,14 @@ GEM
     debug_inspector (1.1.0)
     erubi (1.12.0)
     execjs (2.8.1)
-    faker (3.1.1)
+    faker (3.2.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
     health_check (3.1.0)
       railties (>= 5.0)
-    i18n (1.12.0)
+    i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     io-like (0.3.1)
     json (2.6.2)
@@ -277,6 +277,7 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
+  x86_64-darwin-20
   x86_64-darwin-21
   x86_64-darwin-22
   x86_64-linux

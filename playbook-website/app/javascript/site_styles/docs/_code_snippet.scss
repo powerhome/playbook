@@ -1,6 +1,8 @@
 @import "playbook-ui/dist/tokens/colors";
 @import "playbook-ui/dist/tokens/typography";
 
+
+// Rails & REACT 
 .pb--codeCopy {
   font-size: ($text_small - 1px);
   .highlight {
@@ -536,5 +538,40 @@
   }
   .codeSnippetGuidelines {
     overflow-x: auto;
+  }
+}
+
+
+// New React Based Editor using Prism
+
+.pbDocPlayground {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  &-Editor {
+    background: $bg_dark;
+    font-weight: 700;
+    padding-top: $space_lg;
+    padding-left: $space_md;
+    flex: 1;
+    flex-basis: 50vw;
+    textarea {
+      outline: 0;
+    }
+  }
+  &-Preview {
+    flex: 1;
+    flex-basis: 50vw;
+    overflow: auto;
+    display: block;
+    &-Example {
+    }
+    &-Loading {
+      flex: 1;
+      place-self: center;
+    }
+    &-Error {
+      padding: $space_lg;
+    }
   }
 }

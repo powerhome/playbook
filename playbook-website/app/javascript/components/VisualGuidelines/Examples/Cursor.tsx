@@ -40,11 +40,10 @@ const Cursor = ({ example }: { example: string }) => (
               </Card>
             })}
           </Flex>
-
-        </Card.Body>
+          </Card.Body>
       </FlexItem>
     </Card>
   </>
-)
+  )
 
-export default Cursor
+  export default Cursor
