@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
@@ -19,6 +17,7 @@ import Placeholder from './components/Placeholder'
 import ValueContainer from './components/ValueContainer'
 
 import { noop, buildDataProps } from '../utilities/props'
+import { Noop } from '../types'
 
 /**
  * @typedef {object} Props
@@ -33,11 +32,11 @@ type TypeaheadProps = {
   components?: object,
   createable?: boolean,
   dark?: boolean,
-  data?: object,
+  data?: {[key: string]: string},
   error?: string,
   id?: string,
   label?: string,
-  loadOptions?: string,
+  loadOptions?: string | Noop,
   getOptionLabel?: string | (() => any),
   getOptionValue?: string | (() => any),
   name?: string,
@@ -87,6 +86,7 @@ const Typeahead = ({
     multiKit: '',
     onCreateOption: null,
     plusIcon: false,
+    onMultiValueClick: (option: { label: string, value: string }) => { },
     ...props,
   }
 
@@ -123,13 +123,13 @@ const Typeahead = ({
 
   return (
     <div {...dataProps}
-        className={classnames(classes, inlineClass)}
+      className={classnames(classes, inlineClass)}
     >
       <Tag
-          classNamePrefix="typeahead-kit-select"
-          error={error}
-          onChange={handleOnChange}
-          {...selectProps}
+        classNamePrefix="typeahead-kit-select"
+        error={error}
+        onChange={handleOnChange}
+        {...selectProps}
       />
     </div>
   )
