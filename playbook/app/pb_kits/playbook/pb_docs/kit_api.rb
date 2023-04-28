@@ -60,10 +60,10 @@ module Playbook
           end
         end
 
-        # loops throughthe global_prop_names
-        # then loops through the global_prop_values and extracts the values that have the same name found in global_prop_names
+        # loops through the global_prop_names array
+        # then loops through the global_prop_values hash and extracts the values that have the same name found in global_prop_names
         # this loop helps ensure only global props values are actually extracted, as there could be other methods that end in _values in the modules we are iterating over
-        # these verified global props with values are then pushed to the global_props_with_values object
+        # these verified global props with values are then pushed to the global_props_with_values hash
         global_prop_names.each do |name, _prop|
           global_prop_values.each do |key, value|
             global_props_with_values[key] = value if key == name
@@ -75,7 +75,8 @@ module Playbook
         global_props_without_values = global_prop_names - global_prop_values.keys
 
         # Loops through each module in pb_module and searches for methods that end in _options, as these methods hold all the props in the module
-        # save the prop names prop values and  and parent module name to parent_child_object
+        # save the prop names prop values and  and parent module name to parent_child_object hash
+        # this is a comprehensive list of all parent module and children props for edge cases like spacing.rb, that is not named after the props it represents
         pb_module.each do |mod|
           mod.instance_methods.each do |method_name|
             next unless method_name.to_s.end_with?("_options")
@@ -91,6 +92,7 @@ module Playbook
         # loops through each child and extracts the individual props
         # Checks if the props match any of the props in global_props_without_values
         # if it does, then we push that prop to global_props_with_values hash
+        # This extracts the props in the spacing.rb file and any file that is not named after the props it represents
         parent_child_object.each do |_parent, children|
           children.each do |_child, props|
             props.each do |prop, _value|
@@ -103,6 +105,7 @@ module Playbook
 
         # loop through the global_props hash and the global_props_with_values hash.
         # extract the props from global_props that are not found in global_props_with_values into updated_global_props_with_values
+        # This is the last piece that grabs the global props that did not have values at all, like classname and dark, and adds it to our hash
         global_props.each do |prop, value|
           unless global_props_with_values.include?(prop)
             type = value.class.to_s.split("::").last
