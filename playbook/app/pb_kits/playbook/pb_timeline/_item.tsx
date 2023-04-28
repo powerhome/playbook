@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 
@@ -10,8 +8,8 @@ import IconCircle from '../pb_icon_circle/_icon_circle'
 
 type ItemProps = {
   className?: string,
-  children?: array<React.Node>,
-  date?: date,
+  children?: React.ReactNode[] | React.ReactNode,
+  date?: Date,
   icon?: string,
   iconColor?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
   lineStyle?: 'solid' | 'dotted',
@@ -31,19 +29,19 @@ const TimelineItem = ({
   return (
     <div className={classnames(timelineItemCss, className)}>
       <div className="pb_timeline_item_left_block">
-        <If condition={date}>
+        {date &&
           <DateStacked
-              align="center"
-              date={date}
-              size="sm"
+            align="center"
+            date={date}
+            size="sm"
           />
-        </If>
+        }
       </div>
       <div className="pb_timeline_item_step">
         <IconCircle
-            icon={icon}
-            size="xs"
-            variant={iconColor}
+          icon={icon}
+          size="xs"
+          variant={iconColor}
         />
         <div className="pb_timeline_item_connector" />
       </div>

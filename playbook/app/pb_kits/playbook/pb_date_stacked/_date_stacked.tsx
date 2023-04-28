@@ -14,7 +14,7 @@ type DateStackedProps = {
   className?: string | string[];
   dark?: boolean;
   data?: string;
-  date: string;
+  date: string | Date;
   size?: "sm" | "md";
   id?: string;
   reverse?: boolean;
