@@ -109,15 +109,22 @@ const toolbarDropdownItems = [
           shouldClosePopover={handlePopoverClose}
           show={showPopover}
       >
-        <Nav variant="subtle">
+        <Nav 
+          paddingTop="xs"
+          paddingBottom="xs" 
+          variant="subtle"
+        >
           {toolbarDropdownItems.map(({ icon, text, onclick, isActive}:ToolbarTypes, index:number) => (
             <NavItem
               cursor="pointer"
               className={`pb_tiptap_toolbar_dropdown_list_item ${isActive ? "is-active" : ""}`}
               iconLeft={icon}
               key={`${text}_${index}`}
+              margin='none'
               onClick={()=> {onclick(); setShowPopover(false); setActiveItem({text:text, icon:icon})}}
               text={text}
+              paddingTop='xxs'
+              paddingBottom='xxs'
             />
           ))}
         </Nav>

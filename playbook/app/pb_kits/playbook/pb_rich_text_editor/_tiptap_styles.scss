@@ -201,4 +201,15 @@
       color: $primary !important;
     }
   }
+  &:hover {
+    background-color: $neutral_subtle;
+    .pb_nav_list_item_text,
+    .pb_nav_list_item_icon_left {
+      background-color: unset;
+      color: $text_lt_light !important;
+    }
+    .pb_nav_list_item_link {
+      background-color: unset !important;
+    }
+  }
 }
