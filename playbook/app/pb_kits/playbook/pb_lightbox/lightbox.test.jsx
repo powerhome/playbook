@@ -43,7 +43,7 @@ test('Shows selected images', () => {
   const kit = screen.getByTestId(testId)
   const slide = kit.getElementsByClassName('Slide')[0]
   const image = slide.getElementsByTagName('img')[0]
-  expect(image).toHaveAttribute('src', TEST_PHOTOS[1])
+  expect(image).toHaveAttribute('src', TEST_PHOTOS[0])
 
   const thumbnails = kit.getElementsByClassName('Thumbnail')
 
