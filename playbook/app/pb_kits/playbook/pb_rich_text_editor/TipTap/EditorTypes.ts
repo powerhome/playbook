@@ -1,7 +1,7 @@
 export type ToolbarTypes = {
     node?: string,
     icon?: string,
-    isActive?: any,
+    isActive?: string | null,
     text?: string,
     onclick?: () => {}
     classname?: string
