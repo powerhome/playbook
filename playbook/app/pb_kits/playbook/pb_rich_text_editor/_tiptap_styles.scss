@@ -68,6 +68,7 @@
     height: 100%;
     padding: 1rem 1.5rem 1.5rem 1.5rem;
     line-height: $lh_loose;
+    @include transition_default;
     :first-child {
       margin-top: 0;
     }
@@ -123,7 +124,7 @@
     }
     &:focus-visible {
       outline: unset;
-      border-color: $primary;
+      border-top-color: $primary;
       @include transition_default;
     }
     h1 {
@@ -211,5 +212,15 @@
     .pb_nav_list_item_link {
       background-color: unset !important;
     }
+  }
+}
+.pb_rich_text_editor_advanced_container {
+  transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+  &:focus-visible,
+  &:focus-within {
+    outline: unset;
+    box-shadow: 0 0 0 1px $primary;
+    border-radius: $border_rad_heaviest;
+    transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   }
 }

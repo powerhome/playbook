@@ -159,7 +159,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     >
       {
         advancedEditor ? (
-          <div>
+          <div className='pb_rich_text_editor_advanced_container'>
           <EditorToolbar editor={advancedEditor}/>
           { children }
           </div>
