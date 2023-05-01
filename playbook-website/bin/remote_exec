@@ -8,7 +8,7 @@
 #  appropriate version of kubectl to apply the "pod".
 #
 # Usage:
-#   app bin/container/remote_exec --namespace=nitro-web-pr12345 --cluster=app-beta-gm bash -l
+#   app bin/container/remote_exec --namespace=playbook-pr12345 --cluster=app-beta-gm bash -l
 #
 
 set -Eeuo pipefail
@@ -38,8 +38,8 @@ Required:
 -n, --namespace        Required - The Kubernetes namespace in which a pod is
                        desired.
                        Examples:
-                         -n nitro-web-pr12345
-                         --namespace nitro-web-pr12345
+                         -n playbook-pr12345
+                         --namespace playbook-pr12345
 
 Optional:
 
