@@ -13,6 +13,10 @@ module Playbook
         local
       end
 
+      def padding_margin_values
+        %w[none xxs xs sm md lg xl]
+      end
+
       def local_prop_data
         local_props = {}
 
