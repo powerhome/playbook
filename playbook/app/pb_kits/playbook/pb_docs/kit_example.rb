@@ -33,8 +33,7 @@ module Playbook
       def source
         @source ||= begin
           extension = type == "react" ? "jsx" : "html.erb"
-          read_kit_file("docs", "_#{example_key}.#{extension}")
-          stringified_code = read_kit_file("_#{example_key}.#{extension}")
+          stringified_code = read_kit_file("docs", "_#{example_key}.#{extension}")
           sanitize_code(stringified_code)
         end
       end
