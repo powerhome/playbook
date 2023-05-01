@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 import Body from '../pb_body/_body'
@@ -15,7 +15,7 @@ type TitleDetailProps = {
   detail: string,
   id?: string,
   title: string,
-}
+} & GlobalProps
 
 const TitleDetail = (props: TitleDetailProps) => {
   const { align = 'left', aria = {}, className, data = {}, detail, id, title } = props
