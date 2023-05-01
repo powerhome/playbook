@@ -8,7 +8,7 @@ import {
   buildDataProps,
 } from '../utilities/props'
 
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 type Props = {
   aria?: { [key: string]: string },
@@ -21,7 +21,7 @@ type Props = {
   onChange?: InputCallback<HTMLInputElement>,
   size?: "sm" | "md",
   value?: string,
-}
+} & GlobalProps
 
 const Toggle = ({
   aria = {},
