@@ -56,6 +56,9 @@
       font-weight: $light;
       padding: ($space_xs - 1) 0px;
       width: $space_xl * 3;
+      &:focus-visible {
+        box-shadow: unset;
+      }
     }
   }
 
