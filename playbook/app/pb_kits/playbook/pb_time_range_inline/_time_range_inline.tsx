@@ -21,7 +21,7 @@ type TimeRangeInlineProps = {
   timezone?: boolean,
   startTime: string,
   endTime: string,
-}
+} & GlobalProps
 
 const timezoneString = (dateValue: string) => {
   const date = new DateTime({ value: dateValue })
