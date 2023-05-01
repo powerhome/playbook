@@ -10682,9 +10682,7 @@ react-is@^18.0.0:
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
 react-joyride@^2.5.3:
-  version "2.5.3"
-  resolved "https://registry.yarnpkg.com/react-joyride/-/react-joyride-2.5.3.tgz#3e753f80502a74abcc956babec4873d204345911"
-  integrity sha512-DKKvb/JAAsHm0x/RWO3WI6NOtTMHDso5v8MTauxTSz2dFs7Tu1rWg1BDBWmEMj6pUCvem7hblFbCiDAcvhs8tQ==
+  version "2.5.4"
   dependencies:
     deepmerge "^4.2.2"
     exenv "^1.2.2"
