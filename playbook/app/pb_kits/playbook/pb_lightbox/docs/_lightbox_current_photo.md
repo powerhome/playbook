@@ -1,1 +1,0 @@
-The `currentPhotoIndex` prop allows the user to pass a number to the lightbox that will set the current slide by index. This can be leveraged if the user wants to change slides using custom buttons. To do this, the user must also make use of the current slide's index that is exposed by the `onChange` prop. 
