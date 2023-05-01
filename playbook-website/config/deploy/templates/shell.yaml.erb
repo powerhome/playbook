@@ -4,11 +4,13 @@ metadata:
   name: playbook-shell
   labels:
     app: playbook
+    app.kubernetes.io/component: shell
 template:
   metadata:
     generateName: playbook-shell-
     labels:
       app: playbook
+      app.kubernetes.io/component: shell
   spec:
     restartPolicy: Never
     containers:
@@ -42,9 +44,9 @@ template:
         resources:
           limits:
             cpu: 0.3
-            memory: 256Mi
+            memory: 512Mi
             ephemeral-storage: 100Mi
           requests:
             cpu: 0.1
-            memory: 256Mi
+            memory: 512Mi
             ephemeral-storage: 100Mi
