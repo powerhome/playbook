@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import DateTime from '../pb_kit/dateTime'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 
 import Body from '../pb_body/_body'
