@@ -128,7 +128,7 @@
       @include transition_default;
     }
     h1 {
-      font-size: $text_larger;
+      font-size: $text_largest;
       line-height: $text_larger;
       font-weight: $bolder;
       letter-spacing: $lspace_tight;
@@ -197,6 +197,7 @@
   &:active {
     color: $primary;
     background-color: $bg_light;
+    border-radius: unset !important;
     .pb_nav_list_item_text,
     .pb_nav_list_item_icon_left {
       color: $primary !important;
@@ -204,6 +205,7 @@
   }
   &:hover {
     background-color: $neutral_subtle;
+    border-radius: unset !important;
     .pb_nav_list_item_text,
     .pb_nav_list_item_icon_left {
       background-color: unset;
