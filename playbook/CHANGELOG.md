@@ -1,5 +1,14 @@
 
 
+## [12.17.1](https://github.com/powerhome/playbook/tree/12.17.1) (2023-04-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.17.0...12.17.1)
+
+**Fixed Bugs:**
+
+- Revert "Lightbox currentPhotoIndex Prop" [\#2515](https://github.com/powerhome/playbook/pull/2515) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
 ## [12.17.0](https://github.com/powerhome/playbook/tree/12.17.0) (2023-04-27)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.16.0...12.17.0)
