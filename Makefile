@@ -36,3 +36,6 @@ clean:
 
 changelog: placeYarnConfig
 	docker compose run web bundle exec github_changelog_generator
+
+reviewRailsConsole:
+	playbook-website/bin/deployer bash -lc "playbook-website/bin/remote_exec --time-to-live $(time-to-live) --cluster $(review_cluster) --namespace nitro-web-pr$(pr) bundle exec rails console"
