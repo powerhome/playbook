@@ -219,7 +219,12 @@ body {
     }
   }
 }
-#toggle-modes{
+
+.h100 {
+  height: 100%;
+}
+
+#toggle-modes {
   display: flex;
   margin-right: 80px;
 }
@@ -263,22 +268,4 @@ body {
       }
     }
   }
-}
-
-//styles for a custom doc example for the lightbox currentPhoto prop
-.lightbox_doc_example_custom {
-  .Lightbox, .carousel-header {
-    width: 70%;
-  }
-  .custom_lightbox_sidebar {
-    width: 30%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: $white;
-    text-align: center;
-    z-index: 3;
-  }
-
 }
