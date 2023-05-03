@@ -5,7 +5,7 @@ require "rouge"
 require "rouge/plugins/redcarpet"
 require "action_view"
 
-module Playbook
+module PlaybookWebsite
   module Markdown
     module Helper
       def self.call(template, _source)
@@ -14,7 +14,7 @@ module Playbook
 
       def render_markdown(text)
         # rubocop:disable Security/Eval
-        eval(Playbook::Markdown::Helper.markdown(text))
+        eval(PlaybookWebsite::Markdown::Helper.markdown(text))
         # rubocop:enable Security/Eval
       end
 

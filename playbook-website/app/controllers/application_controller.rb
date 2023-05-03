@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper Webpacker::Helper
   helper Playbook::PbDocHelper
-  helper Playbook::Markdown::Helper
+  helper PlaybookWebsite::Markdown::Helper
   helper ApplicationHelper
   helper SampleHelper
 

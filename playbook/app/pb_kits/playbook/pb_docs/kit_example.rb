@@ -5,8 +5,6 @@
 module Playbook
   module PbDocs
     class KitExample < Playbook::KitBase
-      include Playbook::Markdown::Helper
-
       prop :kit, type: Playbook::Props::String, required: true
       prop :example_title, type: Playbook::Props::String, required: true
       prop :example_key, type: Playbook::Props::String, required: true

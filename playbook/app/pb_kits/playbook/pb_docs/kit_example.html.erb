@@ -10,7 +10,7 @@
 
   <% if show_code %>
     <div class="markdown pb--kit-example-markdown <%= dark ? "dark" : "" %>">
-      <%= render_markdown(description) %>
+      <%# render_markdown(description) %>
     </div>
     <div id="code-wrapper">
       <div class="pb--codeControls">
@@ -30,7 +30,7 @@
       <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
         <%= pb_rails("section_separator", props: { dark: dark })%>
         <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle">Close</a>
-        <pre class="highlight"><%= raw rouge(source, highlighter) %></pre>
+        <pre class="highlight"><%# raw rouge(source, highlighter) %></pre>
       </div>
     </div>
   <% end %>

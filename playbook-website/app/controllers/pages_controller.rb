@@ -6,7 +6,7 @@ require "rouge"
 require "will_paginate"
 require "playbook/pagination_renderer"
 require "will_paginate/array" # Needed to show a fake pagination example
-
+require "markdown_helper"
 require_relative "application_controller"
 
 class PagesController < ApplicationController
