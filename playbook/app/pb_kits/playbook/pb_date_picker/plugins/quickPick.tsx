@@ -1,4 +1,6 @@
+// import React, { useState } from 'react'
 import moment from 'moment'
+// import SelectableCard from '../../pb_selectable_card/_selectable_card'
 
 type FpTypes = {
   setDate: (arg0: any, arg1: boolean) => void,
@@ -22,15 +24,7 @@ type pluginDataType = {
 const quickPickPlugin = () => {
   return function (fp: FpTypes & any): any {
 
-  // custom useState for setting active item
-  const useState = (defaultValue?: string) => {
-    let value = defaultValue;
-    const getValue = () => value
-    const setValue = (newValue?: string) => value = newValue
-    return [getValue, setValue];
-  }
-
-  const [activeLabel, setActiveLabel] = useState("");
+    let activeLabel = ""
 
   // variable that holds the ranges available
   const ranges = {
@@ -75,21 +69,32 @@ const quickPickPlugin = () => {
   //funciton for creating the range buttons in the nav
   const addRangeButton = (label: string) => {
 
+    // creating new elements to mimick selectable card component
+    // const div1 = document.createElement('div');
+    // const label1 = document.createElement('label');
+    const div2 = document.createElement('div');
+    div2.className = "nav-item-link"
+    div2.innerHTML = label;
+    // label1.appendChild(div1)
+    // div2.appendChild(label1)
+
+    pluginData.rangesButtons[label] = div2;
+
     // create the button element and add class and text
-    const button = document.createElement('a');
-    button.className = "nav-item-link";
-    const itemLabel = document.createElement('span')
-    itemLabel.className = "nav-item-text"
-    itemLabel.innerHTML = label;
+    // const button = document.createElement('a');
+    // button.className = "nav-item-link";
+    // const itemLabel = document.createElement('span')
+    // itemLabel.className = "nav-item-text"
+    // itemLabel.innerHTML = label;
 
     // create li elements inside the dropdown
     const item = document.createElement('li');
     item.className = "nav-item";
 
-    pluginData.rangesButtons[label] = button;
+    // pluginData.rangesButtons[label] = button;
 
-    // append span text to anchor tag
-    pluginData.rangesButtons[label].appendChild(itemLabel)
+    // // append span text to anchor tag
+    // pluginData.rangesButtons[label].appendChild(itemLabel)
 
     // append those anchor tags to the li items
     item.appendChild(pluginData.rangesButtons[label]);
@@ -113,7 +118,7 @@ const quickPickPlugin = () => {
     *   if they are equal, add the active class
     */
     if (selectedDates.length > 0) {
-      pluginData.rangesButtons[activeLabel()].classList.add('active');
+      pluginData.rangesButtons[activeLabel].classList.add('active');
     }
   }
 
@@ -132,11 +137,11 @@ const quickPickPlugin = () => {
                 fp.clear();
               }
               else {
-                setActiveLabel(label)
+                activeLabel = label
                 fp.setDate([start, end], true);
+                fp.close();
               }
 
-              fp.close();
             });
         }
 
@@ -159,6 +164,18 @@ const quickPickPlugin = () => {
       },
       onValueUpdate(selectedDates: Array<string>) {
         selectActiveRangeButton(selectedDates);
+      },
+
+      onClose(selectedDates: Array<string>) {
+        // set the input value to the selected dates when the dropdown is closed
+        if (!selectedDates[1]) {
+          console.log("here")
+          fp.input.value = fp.formatDate(this.selectedDates[0], fp.config.dateFormat) + ' → ' + fp.formatDate(this.selectedDates[1], fp.config.dateFormat);
+        }
+        // if (selectedDates) {
+        //   fp.input.value = fp.formatDate(this.selectedDates[0], fp.config.dateFormat) + ' → ' + fp.formatDate(this.selectedDates[1], fp.config.dateFormat);
+        //   // fp.setDate([selectedDates[0], selectedDates[1]], true);
+        // }
       }
     };
   };

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -150,12 +150,6 @@ useEffect(() => {
     return base
   }
 
-  const iconRef = useRef(null);
-
-  const handleMouseOver = () => {
-    iconRef.current.style.cursor = "pointer"
-  }
-
   return (
     <div
         {...ariaProps}
@@ -199,8 +193,6 @@ useEffect(() => {
               <div
                   className={iconWrapperClass()}
                   id={`cal-icon-${pickerId}`}
-                  onMouseOver={handleMouseOver}
-                  ref={iconRef}
               >
                 <Icon
                     className="cal_icon"
