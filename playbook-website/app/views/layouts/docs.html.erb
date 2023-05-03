@@ -31,7 +31,6 @@
       <%= pb_rails("layout/body") do %>
         <%= pb_rails("background", props: { display: "flex", classname: "markdown h100", display: "flex", justify_content: "center", background_color: "white" }) do %>
           <%= pb_rails("flex/flex_item", props: { max_width: "md", margin_x: "sm", padding_y: "md" }) do %>
-          <%= @TOC %>
             <div class="markdown_title"><%= @page_title.titleize %></div>
             <%= yield %>
             <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
