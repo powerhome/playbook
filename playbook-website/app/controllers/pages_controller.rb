@@ -16,7 +16,7 @@ class PagesController < ApplicationController
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
 
-  include Playbook::PbDocHelper
+  include PlaybookWebsite::PbDocHelper
   include Playbook::PbKitHelper
 
   def disable_dark_mode

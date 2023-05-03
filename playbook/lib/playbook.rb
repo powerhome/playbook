@@ -8,7 +8,6 @@ require "playbook/props"
 require "playbook/forms"
 require "playbook/pb_forms_helper"
 require "playbook/pb_kit_helper"
-require "playbook/pb_doc_helper"
 require "playbook/kit_base"
 require "playbook/kit_resolver"
 

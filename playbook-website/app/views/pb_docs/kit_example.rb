@@ -2,7 +2,7 @@
 
 # rubocop:disable Style/CaseLikeIf
 
-module Playbook
+module PlaybookWebsite
   module PbDocs
     class KitExample < Playbook::KitBase
       prop :kit, type: Playbook::Props::String, required: true

@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
+require "pb_doc_helper"
+
 class ApplicationController < ActionController::Base
   before_action :set_app_js
 
   helper Webpacker::Helper
-  helper Playbook::PbDocHelper
+  helper PlaybookWebsite::PbDocHelper
   helper PlaybookWebsite::Markdown::Helper
   helper ApplicationHelper
   helper SampleHelper
