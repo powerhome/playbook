@@ -3,81 +3,138 @@
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/colors";
 
+.markdown_title {
+  @include pb_title_1;
+  line-height: $heading_1;
+  font-weight: $bolder;
+  margin: 1rem 0;
+}
+
 .markdown {
+  font-weight: 500;
+  line-height: $lh_loose;
+  h4,h5,h6,ul,ol,blockquote,p {
+    margin: 1rem 0 0 0;
+  }
   h1 {
-    @include pb_title_1;
-    margin: 1rem 0;
+    font-size: $text_larger;
+    line-height: $text_larger;
+    font-weight: $bolder;
+    letter-spacing: $lspace_tight;
+    margin: 2.1rem 0 0 0;
   }
-
   h2 {
-    @include pb_title_2;
-    margin: 1rem 0;
+    font-size: $text_larger;
+    line-height: $text_larger;
+    font-weight: $bolder;
+    letter-spacing: $lspace_tight;
+    margin: 1.9rem 0 0 0;
   }
-
   h3 {
-    @include pb_title_3;
-    margin: 1rem 0;
+    font-size: $text_large;
+    line-height: $text_large;
+    font-weight: $bolder;
+    letter-spacing: $lspace_tight;
+    margin: 1.7rem 0 0 0;
   }
-  h4 {
-    @include pb_title_4;
-    margin: 1rem 0;
+  h4, h5, h6 {
+    font-size: $text_base;
+    line-height: $text_base;
+    letter-spacing: $lspace_tight;
+    font-weight: $bolder;
   }
-  h5 {
-    margin: 1rem 0;
+  h1,h2,h3,h4,h5,h6 {
+    .markdown-header-anchor {
+      opacity: 0;
+      transition: 0.2s all ease-in-out;
+      &-icon:hover {
+        color: $text_lt_default;
+      }
+    }
+    &:hover .markdown-header-anchor{
+      opacity: 1;
+      transition: 0.1s all ease-in-out;
+    }
   }
-  h6 {
-    margin: 1rem 0;
-  }
-
   hr {
-    margin: 2rem 0;
+    margin: 2.2rem 0;
+    box-sizing: content-box;
+    overflow: hidden;
+    background: transparent;
+    border-bottom: 1px solid $transparent;
+    height: 1px;
+    padding: 0;
+    background-color: $border_light;
+    border: 0;
   }
-  p{
-    margin: 1.5rem 0;
+  p {
+    // margin: 1rem 0 0 0;
   }
   code {
-    background: #122b3b;
-    color: #faf6e4;
+    font-family: monospace;
+    background: $bg_light;
     padding: 0.1rem 0.3rem;
     margin: 0 5px;
-    box-shadow: 0 2px 10px $shadow;
+    border: 1px solid $border_light;
     border-radius: 0.25rem;
     overflow: hidden;
-    font-size: 14px;
+    font-size: ($text_small - 1px);
   }
-
-  body {
-    font-size: 1rem;
+  pre {
+    background: $bg_dark;
+    padding: $space_sm;
+    border-radius: $border_rad_heaviest;
+    margin: 1.5rem 0 2rem 0;
+    code {
+      background: transparent;
+      box-shadow: none;
+      border: 0;
+      color: #faf6e4;
+    }
   }
-
   ul, ol {
-    margin: 0;
+    margin: 1rem 0 0 0;
     padding: 0;
-    list-style: none;
   }
   ol {
     counter-reset: list-counter;
+    list-style: none;
     li:before {
       content: counter(list-counter);
       counter-increment: list-counter;
-      display: block;
+      display: inline-flex;
       width: 20px;
-      flex: 0 0 20px;
-      text-align: left;
+      text-align: right;
       color: $text_lt_default;
-      font-weight: $bold;
       margin-right: $space-sm;
+      font-feature-settings: "tnum";
+      font-variant-numeric: tabular-nums;
+      flex-direction: row-reverse;
     }
   }
-  li {
-    border-bottom: 1px solid $border_light;
-    padding: $space-sm 0;
-    display: flex;
-    align-items: left;
-    &:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
-    }
+  ul {
+    list-style-position: inside;
+  }
+  blockquote {
+    font-size: $font_larger;
+    font-style: italic;
+    padding: $space_sm $space_md;
+  }
+  img {
+    max-width: 100%;
+    margin: 1.5rem 0 2rem 0;
+  }
+  table {
+    margin: 1.5rem 0 2rem 0;
+  }
+
+  // Decorators
+  u {
+    text-decoration-color: $text_lt_light;
+    text-decoration-thickness: 1px;
+  }
+  del {
+    color: $text_lt_light;
   }
   &.dark {
     color: $text_dk_light ;
