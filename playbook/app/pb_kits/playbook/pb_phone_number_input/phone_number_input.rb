@@ -7,12 +7,10 @@ module Playbook
                       default: false
       prop :initial_country, type: Playbook::Props::String,
                              default: ""
-      prop :is_valid
       prop :label, type: Playbook::Props::String,
                    default: ""
       prop :name, type: Playbook::Props::String,
                   default: ""
-      prop :onchange
       prop :only_countries, type: Playbook::Props::Array,
                             default: []
       prop :preferred_countries, type: Playbook::Props::Array,
@@ -30,10 +28,8 @@ module Playbook
           dark: dark,
           disabled: disabled,
           initialCountry: initial_country,
-          isValid: is_valid,
           label: label,
           name: name,
-          onChange: onchange,
           onlyCountries: only_countries,
           preferredCountries: preferred_countries,
           value: value,

@@ -23,7 +23,7 @@ module Playbook
       end
 
       def description
-        @description ||= read_kit_file("_#{example_key}.md")
+        @description ||= read_kit_file("docs", "_#{example_key}.md")
       end
 
       def highlighter
@@ -33,14 +33,35 @@ module Playbook
       def source
         @source ||= begin
           extension = type == "react" ? "jsx" : "html.erb"
-          read_kit_file("_#{example_key}.#{extension}")
+          stringified_code = read_kit_file("docs", "_#{example_key}.#{extension}")
+          sanitize_code(stringified_code)
         end
+      end
+
+      def tsx_source
+        read_kit_file("", "_#{example_key}.tsx")
       end
 
     private
 
-      def read_kit_file(*args)
-        path = ::Playbook.kit_path(kit, "docs", *args)
+      def sanitize_code(stringified_code)
+        stringified_code = stringified_code.gsub('"../.."', '"playbook-ui"')
+                                           .gsub('"../../"', '"playbook-ui"')
+                                           .gsub("'../../'", "'playbook-ui'")
+                                           .gsub("'../..'", "'playbook-ui'")
+                                           .gsub(%r{from "../.*}, "from 'playbook-ui'")
+                                           .gsub(%r{from '../.*}, "from 'playbook-ui'")
+        stringified_code = dark ? stringified_code.gsub("{...props}", "dark") : stringified_code.gsub(/\s*{...props}\s*\n/, "\n")
+        if stringified_code.include?("props: { ")
+          stringified_code = stringified_code.gsub("props: {", "props: {dark: true,") if type == "rails" && dark
+        elsif type == "rails" && dark
+          stringified_code = stringified_code.gsub("props: {", "props: {\n    dark: true,")
+        end
+        stringified_code.gsub(" {...props}", "")
+      end
+
+      def read_kit_file(folder, *args)
+        path = ::Playbook.kit_path(kit, folder, *args)
         path.exist? ? path.read : ""
       end
     end

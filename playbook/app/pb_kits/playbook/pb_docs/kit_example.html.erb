@@ -1,3 +1,5 @@
+<% example_html = ERB.new(example).result %>
+
 <%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark }) do %>
   <div class="pb--kit-example">
     <%= pb_rails("caption", props: { text: example_title, dark: dark }) %>
@@ -8,11 +10,18 @@
 
   <% if show_code %>
     <div class="markdown pb--kit-example-markdown <%= dark ? "dark" : "" %>">
-      <%= markdown(description) %>
+      <%= render_markdown(description) %>
     </div>
     <div id="code-wrapper">
       <div class="pb--codeControls">
         <ul>
+          <% if type == "rails" %>
+            <li>
+              <a href="#" id="copy-<%= example_key %>-trigger" onclick="copyOnClick(`<%= example_html %>`, `copy-<%= example_key %>`)">
+                Copy HTML
+              </a>
+            </li>
+          <% end %>
           <li>
             <a href="#" id="toggle-open" data-toggle="code_example">Code Example</a>
           </li>
@@ -26,3 +35,11 @@
     </div>
   <% end %>
 <% end %>
+
+<script>
+  function copyOnClick(content, elementID) {
+    copyContent(content)
+  }
+  
+</script>
+   

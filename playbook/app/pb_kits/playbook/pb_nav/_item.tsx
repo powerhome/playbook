@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Icon from '../pb_icon/_icon'
 import Image from '../pb_image/_image'
@@ -20,8 +20,8 @@ type NavItemProps = {
   link?: string,
   onClick?: React.MouseEventHandler<HTMLElement>,
   target?: '_blank' | '_self' | '_parent' | '_top',
-  text?: string,
-}
+  text: string,
+} & GlobalProps
 
 const NavItem = (props: NavItemProps) => {
   const {
@@ -87,7 +87,7 @@ const NavItem = (props: NavItemProps) => {
         <span className="pb_nav_list_item_text">
           {text || children}
         </span>
-        
+
         {iconRight &&
           <div
             className="pb_nav_list_item_icon_section"

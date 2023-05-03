@@ -9,7 +9,7 @@
 
       <%= pb_rails("flex/flex_item", props: { margin_bottom: "md" }) do %>
         <%= pb_rails("card", props: { margin: "sm", padding: "lg" }) do %>
-          <%= markdown(@data) %>
+          <%= render_markdown(@data) %>
         <% end %>
       <% end %>
     <%= pb_rails("flex/flex_item", props: { margin: "md" })  do %>
