@@ -11,7 +11,6 @@ import { ToolbarTypes } from './EditorTypes'
 
 const ToolbarDropdown = ({editor}: any) => {
   const [showPopover, setShowPopover] = useState(false)
-  const [activeItem, setActiveItem] = useState({text: "Paragraph", icon: "paragraph"})
 
 const toolbarDropdownItems = [
     {
@@ -75,30 +74,35 @@ const toolbarDropdownItems = [
     setShowPopover(!shouldClosePopover)
   }
 
-  const popoverReference = (
-    <Button className="editor-dropdown-button"
-        onClick={handleTogglePopover}
-        variant="secondary"
-    >
-      <Flex align="center"
-            key={activeItem ? activeItem.icon : toolbarDropdownItems[0].icon}
-            gap="xs"
-      >
-        <Icon icon={activeItem ? activeItem.icon : toolbarDropdownItems[0].icon} size='lg'/>
-        {activeItem.text}
-        <Flex
-            className={showPopover ? "fa-flip-vertical" : ""}
-            display="inline_flex"
-        >
-          <Icon 
-              fixedWidth 
-              icon="angle-down" 
-              margin-left="xs" 
-          />
+let activeCount = 0;
+const activeItems = [];
+
+for (const { text, isActive, icon } of toolbarDropdownItems) {
+  if (isActive) {
+    activeCount ++
+    activeItems.push(
+      <Flex align="center" key={icon} gap="xs">
+        <Icon icon={icon} size="lg" />
+        <div>{text}</div>
+        <Flex className={showPopover ? "fa-flip-vertical" : ""} display="inline_flex">
+          <Icon fixedWidth icon="angle-down" margin-left="xs" />
         </Flex>
       </Flex>
-    </Button>
-  )
+    );
+  }
+}
+
+const popoverReference = (
+  <Button className="editor-dropdown-button" onClick={handleTogglePopover} variant="secondary">
+    {
+       activeCount === 2 ? (
+        activeItems[1]
+       ) : (
+        activeItems[0] || null
+       )
+    }
+  </Button>
+);
 
   return (
       <PbReactPopover
@@ -121,7 +125,7 @@ const toolbarDropdownItems = [
               iconLeft={icon}
               key={`${text}_${index}`}
               margin='none'
-              onClick={()=> {onclick(); setShowPopover(false); setActiveItem({text:text, icon:icon})}}
+              onClick={()=> {onclick(); setShowPopover(false)}}
               text={text}
               paddingTop='xxs'
               paddingBottom='xxs'
