@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module PlaybookWebsite
+module Playbook
   module PbDocs
     class KitApi < Playbook::KitBase
       prop :kit, type: Playbook::Props::String, required: true

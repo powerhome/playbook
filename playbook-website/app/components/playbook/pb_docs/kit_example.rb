@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 # rubocop:disable Style/CaseLikeIf
-
-module PlaybookWebsite
+module Playbook
   module PbDocs
     class KitExample < Playbook::KitBase
       prop :kit, type: Playbook::Props::String, required: true

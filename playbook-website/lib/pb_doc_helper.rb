@@ -10,7 +10,7 @@ module PlaybookWebsite
       examples = pb_doc_kit_examples(kit, type)
       examples = examples.first(1) if limit_examples
       examples.map do |example|
-        pb_rails "pb_docs/kit_example", props: {
+        pb_rails "docs/kit_example", props: {
           kit: kit,
           example_title: example.values.first,
           example_key: example.keys.first,
