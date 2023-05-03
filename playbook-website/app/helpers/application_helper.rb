@@ -70,6 +70,22 @@ module ApplicationHelper
     end
   end
 
+  def doc_link(parent, page = nil)
+    if page.nil?
+      guides_parent_path(parent)
+    else
+      guides_parent_page_path(parent, page)
+    end
+  end
+
+  def gh_edit_link(parent, page)
+    if page.nil?
+      "https://github.com/powerhome/playbook/edit/master/playbook-website/guides/#{parent}"
+    else
+      "https://github.com/powerhome/playbook/edit/master/playbook-website/guides/#{parent}/#{page}"
+    end
+  end
+
   def all_active(controller_name, action_name)
     (controller_name == "pages" && action_name == "kits")
   end

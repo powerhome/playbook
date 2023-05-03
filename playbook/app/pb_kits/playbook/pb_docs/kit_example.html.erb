@@ -10,7 +10,7 @@
 
   <% if show_code %>
     <div class="markdown pb--kit-example-markdown <%= dark ? "dark" : "" %>">
-      <%= markdown(description) %>
+      <%= render_markdown(description) %>
     </div>
     <div id="code-wrapper">
       <div class="pb--codeControls">
