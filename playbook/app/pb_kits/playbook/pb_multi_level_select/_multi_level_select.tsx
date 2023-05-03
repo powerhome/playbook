@@ -43,7 +43,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
           checkIt(item, selectedItems, setSelectedItems);
-          currentNode.expanded = false
+          currentNode
         } else {
           unCheckIt(item, selectedItems, setSelectedItems);
         }
@@ -52,7 +52,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         if (foundItem) {
           if (currentNode.checked) {
             checkIt(foundItem, selectedItems, setSelectedItems);
-            currentNode.expanded = false
           } else {
             unCheckIt(foundItem, selectedItems, setSelectedItems);
           }

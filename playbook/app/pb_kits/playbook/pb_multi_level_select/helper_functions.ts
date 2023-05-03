@@ -26,7 +26,7 @@ export const checkIt = (
   }
 
   foundItem.checked = true;
-  foundItem.expanded = true;
+  foundItem.expanded = false;
   selectedItems.push(foundItem);
 
   if (foundItem.children) {
