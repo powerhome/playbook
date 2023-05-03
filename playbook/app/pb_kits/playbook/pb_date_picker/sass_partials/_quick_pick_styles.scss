@@ -63,9 +63,13 @@ $pb_card_border_radius: $border_rad_heavier;
     padding: $space_xs $space_xs;
     display: grid;
     grid-template-columns: 1fr 1fr;
-
   }
+
   .nav-item {
     margin: $space_xs $space_xs;
+  }
+
+  .nav-item-link {
+    padding: $space_xs $space_xxs;
   }
 }
