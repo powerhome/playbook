@@ -61,10 +61,6 @@ class PagesController < ApplicationController
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
   end
 
-  def grid
-    render layout: "layouts/grid"
-  end
-
   def home; end
 
   def kits
