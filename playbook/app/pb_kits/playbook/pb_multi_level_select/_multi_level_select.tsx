@@ -43,6 +43,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
           checkIt(item, selectedItems, setSelectedItems);
+          currentNode.expanded = false
         } else {
           unCheckIt(item, selectedItems, setSelectedItems);
         }
@@ -51,6 +52,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         if (foundItem) {
           if (currentNode.checked) {
             checkIt(foundItem, selectedItems, setSelectedItems);
+            currentNode.expanded = false
           } else {
             unCheckIt(foundItem, selectedItems, setSelectedItems);
           }
@@ -92,7 +94,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         treeData={formattedData}
         onChange={(
           // @ts-ignore
-          selectedNodes: { [key: string]: any }[], 
+          selectedNodes: { [key: string]: any }[],
           currentNode: { [key: string]: any }[]
         ) => {
           setCheckedData(currentNode);
@@ -102,7 +104,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         {...props}
       />
     );
-  }, [formattedData]);
+  }, [formattedData])
+  console.log(formattedData)
+  console.log('formattedData')
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
