@@ -34,6 +34,9 @@
         <a href="https://powerhrg.com/">
           <%= pb_rails("body", props: { classname: "dark", text: "Power Website" }) %>
         </a>
+        <%= link_to guides_parent_path('design_guidelines') do %>
+          <%= pb_rails("body", props: { classname: "dark", text: "Design Guidelines" }) %>
+        <% end %>
       <% end %>
     <% end %>
     <div class="copyright-tag">
