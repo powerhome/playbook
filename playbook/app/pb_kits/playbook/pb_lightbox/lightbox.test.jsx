@@ -18,6 +18,7 @@ test('Kit renders', () => {
         data={{ testid: testId }}
         icon="close"
         id="test1"
+        initialPhoto={1}
         onClose={() => {}}
         photos={TEST_PHOTOS}
     />
@@ -34,6 +35,7 @@ test('Shows selected images', () => {
         data={{ testid: testId }}
         icon="close"
         id="test1"
+        initialPhoto={1}
         onClose={() => {}}
         photos={TEST_PHOTOS}
     />
@@ -41,7 +43,7 @@ test('Shows selected images', () => {
   const kit = screen.getByTestId(testId)
   const slide = kit.getElementsByClassName('Slide')[0]
   const image = slide.getElementsByTagName('img')[0]
-  expect(image).toHaveAttribute('src', TEST_PHOTOS[0])
+  expect(image).toHaveAttribute('src', TEST_PHOTOS[1])
 
   const thumbnails = kit.getElementsByClassName('Thumbnail')
 
@@ -75,6 +77,7 @@ test('Closes on escape key', async () => {
         data={{ testid: testId }}
         icon="close"
         id="test1"
+        initialPhoto={0}
         onClose={mockClose}
         photos={TEST_PHOTOS}
     />
@@ -103,6 +106,7 @@ test('Closes on close button', async () => {
         data={{ testid: testId }}
         icon="close"
         id="test1"
+        initialPhoto={0}
         onClose={mockClose}
         photos={TEST_PHOTOS}
     />

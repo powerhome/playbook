@@ -5,7 +5,7 @@
 .getting_started {
   display: flex;
   justify-content: center;
-  padding: $space_lg 0;
+  padding: $space_lg $space_xl;
   [class^=pb_bread_crumbs_kit] {
     border-color: $transparent;
   }

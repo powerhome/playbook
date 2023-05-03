@@ -1,5 +1,39 @@
 
 
+## [12.17.1](https://github.com/powerhome/playbook/tree/12.17.1) (2023-04-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.17.0...12.17.1)
+
+**Fixed Bugs:**
+
+- Revert "Lightbox currentPhotoIndex Prop" [\#2515](https://github.com/powerhome/playbook/pull/2515) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+## [12.17.0](https://github.com/powerhome/playbook/tree/12.17.0) (2023-04-27)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.16.0...12.17.0)
+
+**Kit Enhancements:**
+
+- Updated Disabled Button Cursor to Not-Allowed  [\#2491](https://github.com/powerhome/playbook/pull/2491) ([RexGluck](https://github.com/RexGluck))
+- Converting Timeline Kit to Typescript [\#2486](https://github.com/powerhome/playbook/pull/2486) ([carloslimasd](https://github.com/carloslimasd))
+- Add a Favicon to Playbook Website [\#2473](https://github.com/powerhome/playbook/pull/2473) ([ekanarek](https://github.com/ekanarek))
+- New Lightbox currentPhotoIndex Prop [\#2441](https://github.com/powerhome/playbook/pull/2441) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Appending important! to all Cursor Global Prop SCSS Values [\#2501](https://github.com/powerhome/playbook/pull/2501) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Playbook styling to Style Tags in Body Kit [\#2497](https://github.com/powerhome/playbook/pull/2497) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Optional Vertical Borders to Table Kit [\#2488](https://github.com/powerhome/playbook/pull/2488) ([carloslimasd](https://github.com/carloslimasd))
+- Improve Global Props Documentation in Rails [\#2481](https://github.com/powerhome/playbook/pull/2481) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Restructure Visual Guidelines Page [\#2476](https://github.com/powerhome/playbook/pull/2476) ([nidaqg](https://github.com/nidaqg))
+- Rebuild Getting Started [\#2475](https://github.com/powerhome/playbook/pull/2475) ([augustomallmann](https://github.com/augustomallmann))
+- Copy Kits in HTML Button to all Rails Doc Examples [\#2470](https://github.com/powerhome/playbook/pull/2470) ([nickamantia](https://github.com/nickamantia))
+- Update Code Snippets in all Doc Examples [\#2467](https://github.com/powerhome/playbook/pull/2467) ([markdoeswork](https://github.com/markdoeswork))
+- Update Dependency faker to v3.2.0 [\#2478](https://github.com/powerhome/playbook/pull/2478) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
 ## [12.16.0](https://github.com/powerhome/playbook/tree/12.16.0) (2023-04-19)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.15.0...12.16.0)
