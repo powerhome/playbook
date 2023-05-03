@@ -29,8 +29,8 @@ Rails.application.routes.draw do
   get "kit_category/:name/rails", to: "pages#kit_category_show_rails", as: "kit_category_show_rails"
   get "kit_category/:name/react", to: "pages#kit_category_show_react", as: "kit_category_show_reacts"
 
-  get "guides", to: "guides#create_kit"
-  get "guides/use-in-nitro", to: "guides#use_nitro"
+  get "guides/:parent",           to: "guides#md_doc", as: "guides_parent"
+  get "guides/:parent/:page",     to: "guides#md_doc", as: "guides_parent_page"
 
   # Full Page Samples Get Generated Here
   get "samples", to: "samples#index"
