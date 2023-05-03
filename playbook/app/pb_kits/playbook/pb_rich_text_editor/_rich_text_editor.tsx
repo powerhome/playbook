@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop } from '../utilities/props'
 
 try {
@@ -43,7 +43,8 @@ type RichTextEditorProps = {
   sticky?: boolean,
   template: string,
   value?: string,
-}
+  maxWidth?: string
+} & GlobalProps
 
 const RichTextEditor = (props: RichTextEditorProps) => {
   const {
@@ -62,6 +63,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     sticky = false,
     template = '',
     value = '',
+    maxWidth="md"
   } = props
 
   const ariaProps = buildAriaProps(aria),
@@ -140,7 +142,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     inlineClass = inline ? 'inline' : '',
     toolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
 
-  let css = classnames(globalProps(props), className)
+  let css = classnames(globalProps(props, {maxWidth}), className)
   css = classnames(
     richTextEditorClass,
     simpleClass,
