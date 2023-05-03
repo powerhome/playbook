@@ -16,6 +16,9 @@ class PagesController < ApplicationController
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
 
+  include Playbook::PbDocHelper
+  include Playbook::PbKitHelper
+
   def disable_dark_mode
     cookies[:dark_mode] = {
       value: "false",
@@ -31,16 +34,31 @@ class PagesController < ApplicationController
   end
 
   def getting_started
+    render "pages/getting_started/index"
+  end
+
+  def getting_started_rails
     @rails_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_getting_started.md").read
+    render "pages/getting_started/rails"
+  end
+
+  def getting_started_react
     @react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_react_getting_started.md").read
+    render "pages/getting_started/react"
+  end
+
+  def getting_started_rails_react
+    @rails_react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_react_getting_started.md").read
+    render "pages/getting_started/rails_react"
+  end
+
+  def getting_started_html_css
+    @html_css_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_html_css_getting_started.md").read
+    render "pages/getting_started/html"
   end
 
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
-  end
-
-  def grid
-    render layout: "layouts/grid"
   end
 
   def home; end
@@ -79,10 +97,39 @@ class PagesController < ApplicationController
     render template: "pages/kit_show", layout: "layouts/kits"
   end
 
-  def kit_show_new
+  def kit_playground_rails
+    @kit = "avatar"
+    @examples = pb_doc_kit_examples(@kit, "rails")
+    @raw_example = view_context.pb_rails("docs/kit_example", props: {
+                                           kit: @kit,
+                                           example_title: @examples.first.values.first,
+                                           example_key: @examples.first.keys.first,
+                                           type: "rails",
+                                           dark: false,
+                                           code_only: true,
+                                         })
+    render "pages/rails_in_react_playground", layout: "layouts/fullscreen"
+  end
+
+  def rails_pg_render
+    render inline: erb_code_params
+  rescue => e
+    render json: { error: e }, status: 400
+  end
+
+  def rails_in_react
     @kit = params[:name]
-    @examples = kit_examples
-    render "pages/kit_show_new", layout: "layouts/kits"
+    @examples = pb_doc_kit_examples(@kit, "rails")
+    @raw_example = view_context.pb_rails("docs/kit_example", props: {
+                                           kit: @kit,
+                                           example_title: @examples.first.values.first,
+                                           example_key: @examples.first.keys.first,
+                                           show_code: false,
+                                           type: "rails",
+                                           dark: false,
+                                           show_raw: true,
+                                         })
+    render "pages/rails_in_react", layout: "layouts/kits"
   end
 
   def kit_show_demo
@@ -91,7 +138,26 @@ class PagesController < ApplicationController
     render "pages/kit_show_demo", layout: "layouts/kits"
   end
 
-  def principles; end
+  def kit_show_new
+    @kit = params[:name]
+    @examples = kit_examples
+    render "pages/kit_show_new", layout: "layouts/kits"
+  end
+
+  def rails_raw
+    @kit = params[:name]
+    example = pb_doc_kit_examples(@kit, "rails").first
+    raw_example = view_context.pb_rails("docs/kit_example", props: {
+                                          kit: @kit,
+                                          example_title: example.values.first,
+                                          example_key: example.keys.first,
+                                          show_code: false,
+                                          type: "rails",
+                                          dark: false,
+                                          show_raw: true,
+                                        })
+    render inline: raw_example, layout: false
+  end
 
   # TODO: rename this method once all guidelines are completed
   def visual_guidelines
@@ -167,6 +233,10 @@ private
 
   def kit_examples
     pb_doc_kit_examples(params[:name], "rails")
+  end
+
+  def erb_code_params
+    params.require(:erb_code)
   end
 
   def read_kit_file(*args)

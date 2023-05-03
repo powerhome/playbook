@@ -1,7 +1,7 @@
 <div class="pb--kit-show <%=@kit%>-kit">
   <%= pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: 1, margin_top: "xl" }) %>
   <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
-    <%= markdown(pb_doc_kit_description(@kit)) %>
+    <%= render_markdown(pb_doc_kit_description(@kit)) %>
   </div>
 </div>
 
@@ -11,17 +11,19 @@
       <%= react_component("KitDocs", 
         kit: @kit, 
         source: get_source(example.keys.first), 
-        exampleTitle: example.values.first)
+        exampleTitle: example.values.first,
+        css: asset_pack_url('application.css'),
+      )
       %>
 
       <div class="sandpack-markdown markdown pb--kit-example-markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
-        <%= markdown(description(@kit, example.keys.first)) %>
+        <%= render_markdown(description(@kit, example.keys.first)) %>
       </div> 
     <% end %>
   <% end %>
 
   <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
     <br>
-    <%= markdown(pb_doc_kit_footer(@kit)) %>
+    <%= render_markdown(pb_doc_kit_footer(@kit)) %>
   </div>
 </div>

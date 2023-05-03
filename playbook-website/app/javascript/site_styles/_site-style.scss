@@ -10,6 +10,8 @@ $nav_breakpoint: breakpoint("lg");
 body {
   overflow-x: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
   &.visual_guidelines,
   &.kits {
     overflow-y: hidden;
@@ -157,6 +159,7 @@ body {
   &--footer {
     background-color: $royal;
     padding: $space_lg * 2 $space_lg * 3;
+    margin-top: auto;
     .inner-footer-wrapper {
       max-width: 1350px;
       margin: 0 auto;
@@ -216,7 +219,12 @@ body {
     }
   }
 }
-#toggle-modes{
+
+.h100 {
+  height: 100%;
+}
+
+#toggle-modes {
   display: flex;
   margin-right: 80px;
 }

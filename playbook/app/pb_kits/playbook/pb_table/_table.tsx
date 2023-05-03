@@ -1,19 +1,17 @@
-/* @flow */
-
-import React, { useEffect, type Node } from 'react'
+import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import PbTable from './'
+import PbTable from '.'
 
 type TableProps = {
-  aria?: object,
-  children: array<Node> | Node,
+  aria?: { [key: string]: string },
+  children: React.ReactNode[] | React.ReactNode,
   className: string,
   collapse?: "sm" | "md" | "lg",
   container: boolean,
   dark?: boolean,
-  data?: object,
+  data?: { [key: string]: string },
   dataTable: boolean,
   disableHover: boolean,
   id?: string,
@@ -21,6 +19,7 @@ type TableProps = {
   singleLine: boolean,
   size: "sm" | "md" | "lg",
   sticky?: boolean,
+  verticalBorder?: boolean,
 }
 
 const Table = (props: TableProps) => {
@@ -39,11 +38,13 @@ const Table = (props: TableProps) => {
     singleLine = false,
     size = 'sm',
     sticky = false,
+    verticalBorder = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const tableCollapseCss = responsive !== 'none' ? `table-collapse-${collapse}` : ''
+  const verticalBorderCss = verticalBorder ? 'vertical-border' : ''
 
   useEffect(() => {
     const instance = new PbTable()
@@ -52,9 +53,9 @@ const Table = (props: TableProps) => {
 
   return (
     <table
-        {...ariaProps}
-        {...dataProps}
-        className={classnames(
+      {...ariaProps}
+      {...dataProps}
+      className={classnames(
         'pb_table',
         `table-${size}`,
         `table-responsive-${responsive}`,
@@ -68,9 +69,10 @@ const Table = (props: TableProps) => {
         },
         globalProps(props),
         tableCollapseCss,
+        verticalBorderCss,
         className
       )}
-        id={id}
+      id={id}
     >
       {children}
     </table>
