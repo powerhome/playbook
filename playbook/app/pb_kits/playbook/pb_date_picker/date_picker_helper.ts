@@ -185,6 +185,15 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   //                 Additional JS Functionality               |
   // ===========================================================
 
+  // Opens flatpickr instance when calendar icon is clicked for quick pick
+  const icon = document.getElementById(`cal-icon-${pickerId}`)
+  const instance = document.getElementById(`${pickerId}`)._flatpickr
+  icon.addEventListener("click", function(event) {
+    event.preventDefault();
+    instance.open()
+  });
+  
+
   // Assign dynamically sourced flatpickr instance to variable
   const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
   picker.innerContainer.parentElement.id = `cal-${pickerId}`
