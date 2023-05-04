@@ -10,6 +10,7 @@ class PagesController < ApplicationController
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
+  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react rails_in_react kit_show_demo kit_show_new visual_guidelines]
 
   def disable_dark_mode
     cookies[:dark_mode] = {
@@ -59,34 +60,27 @@ class PagesController < ApplicationController
     params[:type] ||= "react"
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    render layout: "layouts/kits"
-  end
-
-  def all_kit_examples
-    params[:type] ||= "react"
-    @type = params[:type]
-    render layout: "layouts/kits"
   end
 
   def kit_category_show_rails
     params[:type] ||= "rails"
     @type = params[:type]
-    render template: "pages/kit_category_show", layout: "layouts/kits"
+    render template: "pages/kit_category_show"
   end
 
   def kit_category_show_react
-    render template: "pages/kit_category_show", layout: "layouts/kits"
+    render template: "pages/kit_category_show"
   end
 
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    render "pages/kit_show", layout: "layouts/kits"
+    render "pages/kit_show"
   end
 
   def kit_show_react
     @type = "react"
-    render template: "pages/kit_show", layout: "layouts/kits"
+    render template: "pages/kit_show"
   end
 
   def kit_playground_rails
@@ -121,19 +115,13 @@ class PagesController < ApplicationController
                                            dark: false,
                                            show_raw: true,
                                          })
-    render "pages/rails_in_react", layout: "layouts/kits"
-  end
-
-  def kit_show_demo
-    @kit = params[:name]
-    @examples = kit_examples
-    render "pages/kit_show_demo", layout: "layouts/kits"
+    render "pages/rails_in_react"
   end
 
   def kit_show_new
     @kit = params[:name]
     @examples = kit_examples
-    render "pages/kit_show_new", layout: "layouts/kits"
+    render "pages/kit_show_new"
   end
 
   def rails_raw
@@ -163,7 +151,7 @@ class PagesController < ApplicationController
       kit_examples[example_path.split("/").last.sub(".txt", "")] = formatted_example_txt
     end
     @kit_examples_json = kit_examples
-    render "pages/visual_guidelines", layout: "layouts/visual_guidelines"
+    render "pages/visual_guidelines"
   end
 
   def get_source(example)
@@ -196,6 +184,10 @@ private
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
     end
+  end
+
+  def set_show_sidebar
+    @show_sidebar = true
   end
 
   def ensure_kit_type_exists

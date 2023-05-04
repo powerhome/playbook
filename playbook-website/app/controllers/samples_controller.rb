@@ -5,8 +5,6 @@ class SamplesController < ApplicationController
   before_action :set_sample, only: :show
   before_action :delete_dark_mode_cookie
 
-  layout "samples"
-
   def index; end
 
   def show; end

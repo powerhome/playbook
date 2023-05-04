@@ -12,10 +12,6 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  &.visual_guidelines,
-  &.kits {
-    overflow-y: hidden;
-  }
 }
 
 .pb--page {
@@ -93,13 +89,23 @@ body {
     @include break_at($nav_breakpoint) {
       grid-template-columns: auto !important;
     }
+    &.no-sidebar {
+      grid-template-columns: 0 auto !important;
+      @include break_at($nav_breakpoint) {
+        grid-template-columns: auto !important;
+      }
+    }
     &--main {
       flex-grow: 1;
-      padding: 0 60px 40px;
       height: calc(100vh - 89px);
       overflow: auto;
       @include break_at($nav_breakpoint) {
         padding: $space-lg $space-xl;
+      }
+      .pb--kits,
+      .pb--kit-show,
+      .kit-show-wrapper {
+        padding: 0 60px 40px;
       }
       &.dark{
         background: #0a0527;
@@ -181,16 +187,6 @@ body {
       [class^="pb_caption_kit"] {
         margin-top: $space_lg;
       }
-    }
-  }
-
-  &--sideNav.non-kit {
-    background-color: $white;
-    display: none;
-    height: auto !important;
-    overflow: hidden;
-    @include break_at($nav_breakpoint) {
-      display: block;
     }
   }
 
