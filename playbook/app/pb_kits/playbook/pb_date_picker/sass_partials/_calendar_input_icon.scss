@@ -1,3 +1,4 @@
+@import "../../tokens/colors";
 // Calendar Icon Styles
 .cal_icon_wrapper {
   cursor: pointer;
@@ -13,8 +14,8 @@
   padding-left: $space_sm - 1;
   color: $text_lt_light;
   @media (hover: hover) {
-    &:hover {
-      cursor: pointer;
+    &:hover{
+      background-color: rgba($focus_input_light,$opacity_5);
     }
   }
   &.dark {
