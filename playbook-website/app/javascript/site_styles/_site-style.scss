@@ -219,7 +219,12 @@ body {
     }
   }
 }
-#toggle-modes{
+
+.h100 {
+  height: 100%;
+}
+
+#toggle-modes {
   display: flex;
   margin-right: 80px;
 }

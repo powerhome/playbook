@@ -1,4 +1,4 @@
-<%= pb_rails("flex", props: { horizontal: "center", orientation: "column" }) do %>
+<%= pb_rails("flex", props: { gap: "md", justify: "center", wrap: true }) do %>
   <%= pb_rails("flex/flex_item") do %>
     <span id='regular-tooltip-1'>Hover here (Top)</span>
 
@@ -11,7 +11,7 @@
     <% end %>
   <% end %>
 
-  <%= pb_rails("flex/flex_item", props: {margin_top: "md"}) do %>
+  <%= pb_rails("flex/flex_item") do %>
     <span id='regular-tooltip-2'>Hover here (Bottom)</span>
     <%= pb_rails("tooltip", props: {
       trigger_element_selector: "#regular-tooltip-2",
@@ -22,7 +22,7 @@
     <% end %>
   <% end %>
 
-  <%= pb_rails("flex/flex_item", props: {margin_top: "md"}) do %>
+  <%= pb_rails("flex/flex_item") do %>
     <span id='regular-tooltip-3'>Hover here (Right)</span>
     <%= pb_rails("tooltip", props: {
       trigger_element_selector: "#regular-tooltip-3",
@@ -33,7 +33,7 @@
     <% end %>
   <% end %>
 
-  <%= pb_rails("flex/flex_item", props: {margin_top: "md"}) do %>
+  <%= pb_rails("flex/flex_item") do %>
     <span id='regular-tooltip-4'>Hover here (Left)</span>
     <%= pb_rails("tooltip", props: {
       trigger_element_selector: "#regular-tooltip-4",

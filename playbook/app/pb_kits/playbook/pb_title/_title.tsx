@@ -39,7 +39,7 @@ const Title = (props: TitleProps): React.ReactElement => {
   const classes = classnames(
     buildCss('pb_title_kit', `size_${size}`, variant, color, getBold),
     globalProps(props),
-    className,
+    className
   )
   const Tag: React.ReactElement | any = `${tag}`
 

@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Caption from '../pb_caption/_caption'
 
@@ -17,10 +17,10 @@ type NavProps = {
   id?: string,
   onClick?: React.MouseEventHandler<HTMLElement>,
   orientation?: "vertical" | "horizontal",
-  link: string,
-  title: string,
+  link?: string,
+  title?: string,
   variant?: "normal" | "subtle",
-}
+} & GlobalProps
 
 const Nav = (props: NavProps) => {
   const {

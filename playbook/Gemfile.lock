@@ -1,12 +1,12 @@
 PATH
   remote: .
   specs:
-    playbook_ui (12.17.0)
+    playbook_ui (12.18.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
       react-rails (= 2.6.1)
-      redcarpet (~> 3.5)
+      redcarpet (~> 3.6)
       rouge (~> 3.15)
       view_component (= 2.55.0)
       webpacker-react (~> 0.3.2)
