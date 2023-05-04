@@ -15,7 +15,6 @@
               <th>Props</th>
               <th>Type</th>
               <th>Values</th>
-              <th>Default</th>
             </tr>
           </thead>
           <tbody>
@@ -35,11 +34,34 @@
                     <%= pb_rails("body", props: {
                       classname: "kearning"
                     }) do %>
-                        <%= value[:type].downcase %>
+                        <% if key =~ /^padding|^margin/ %>
+                            <%= "array" %>
+                        <% else %>
+                          <%= value[:type].to_s.downcase %>
+                        <% end %>
                     <% end %>
                   <% end %>
                 </td>
                 <td>
+                  <% if key =~ /^padding|^margin/ %>
+                  <% padding_margin_values.each do |item| %>
+                      <%= pb_rails("card", props: {
+                          flex_direction: "row",
+                          classname: "card",
+                          padding: "xxs",
+                          background: "light",
+                          border_none: true,
+                          border_radius: "sm",
+                          margin: "xxs"
+                        })  do %>
+                          <%= pb_rails("body", props: {
+                              classname: "kearning"
+                          }) do %>
+                            <%= item %>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                  <% else %>
                   <% if value[:values].present? %>
                     <% value[:values].each do |item| %>
                       <% if item != nil %>
@@ -61,22 +83,6 @@
                       <% end %>
                     <% end %>
                   <% end %>
-                </td>
-                <td>
-                  <% if value[:default].present? || value[:default].is_a?(TrueClass) || value[:default].is_a?(FalseClass) %>
-                    <%= pb_rails("card", props: {
-                            classname: "card",
-                            padding: "xxs",
-                            background: "light",
-                            border_none: true,
-                            border_radius: "sm"
-                      })  do %>
-                        <%= pb_rails("body", props: {
-                          classname: "kearning"
-                        }) do %>
-                            <%= value[:default] %>
-                        <% end %>
-                      <% end %>
                   <% end %>
                 </td>
               </tr>
@@ -110,7 +116,6 @@
               <th>Props</th>
               <th>Type</th>
               <th>Values</th>
-              <th>Default</th>
             </tr>
           </thead>
           <tbody>
@@ -130,11 +135,34 @@
                     <%= pb_rails("body", props: {
                       classname: "kearning"
                     }) do %>
-                        <%= value[:type].downcase %>
+                        <% if key =~ /^padding|^margin/ %>
+                            <%= "array" %>
+                        <% else %>
+                          <%= value[:type].to_s.downcase %>
+                        <% end %>
                     <% end %>
                   <% end %>
                 </td>
                 <td>
+                  <% if key =~ /^padding|^margin/ %>
+                  <% padding_margin_values.each do |item| %>
+                      <%= pb_rails("card", props: {
+                          flex_direction: "row",
+                          classname: "card",
+                          padding: "xxs",
+                          background: "light",
+                          border_none: true,
+                          border_radius: "sm",
+                          margin: "xxs"
+                        })  do %>
+                          <%= pb_rails("body", props: {
+                              classname: "kearning"
+                          }) do %>
+                            <%= item %>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                  <% else %>
                   <% if value[:values].present? %>
                     <% value[:values].each do |item| %>
                       <% if item != nil %>
@@ -156,22 +184,6 @@
                       <% end %>
                     <% end %>
                   <% end %>
-                </td>
-                <td>
-                  <% if value[:default].present? || value[:default].is_a?(TrueClass) || value[:default].is_a?(FalseClass) %>
-                    <%= pb_rails("card", props: {
-                            classname: "card",
-                            padding: "xxs",
-                            background: "light",
-                            border_none: true,
-                            border_radius: "sm"
-                      })  do %>
-                        <%= pb_rails("body", props: {
-                          classname: "kearning"
-                        }) do %>
-                            <%= value[:default] %>
-                        <% end %>
-                      <% end %>
                   <% end %>
                 </td>
               </tr>
