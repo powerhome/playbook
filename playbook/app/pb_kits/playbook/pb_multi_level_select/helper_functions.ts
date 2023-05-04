@@ -19,19 +19,20 @@ export const findItemById = (
 export const checkIt = (
   foundItem: { [key: string]: any },
   selectedItems: any[],
-  setSelectedItems: Function
+  setSelectedItems: Function,
+  expand: boolean
 ) => {
   if (!foundItem) {
     return;
   }
 
   foundItem.checked = true;
-  foundItem.expanded = false;
+  foundItem.expanded = expand;
   selectedItems.push(foundItem);
 
   if (foundItem.children) {
     foundItem.children.map((x: any) => {
-      checkIt(x, selectedItems, setSelectedItems);
+      checkIt(x, selectedItems, setSelectedItems, expand);
     });
   }
 
@@ -41,19 +42,21 @@ export const checkIt = (
 export const unCheckIt = (
   foundItem: { [key: string]: any },
   selectedItems: any,
-  setSelectedItems: any
+  setSelectedItems: any,
+  expand: boolean
 ) => {
   if (!foundItem) {
     return;
   }
 
   foundItem.checked = false;
+  foundItem.expanded = false;
   const newSelectedItems = selectedItems.filter(
     (item: any) => item.id !== foundItem.id
   );
   if (foundItem.children) {
     foundItem.children.map((x: any) => {
-      unCheckIt(x, selectedItems, setSelectedItems);
+      unCheckIt(x, selectedItems, setSelectedItems, expand);
     });
   }
   setSelectedItems([...newSelectedItems]);

@@ -42,17 +42,25 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const updatedData = formattedData.map((item: any) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
-          checkIt(item, selectedItems, setSelectedItems);
+          checkIt(item, selectedItems, setSelectedItems, false);
         } else {
-          unCheckIt(item, selectedItems, setSelectedItems);
+          unCheckIt(item, selectedItems, setSelectedItems, false);
         }
       } else if (item.children) {
         const foundItem = findItemById(item.children, currentNode._id);
         if (foundItem) {
           if (currentNode.checked) {
-            checkIt(foundItem, selectedItems, setSelectedItems);
+            checkIt(foundItem, selectedItems, setSelectedItems, false);
+            if (currentNode._parent) {
+              const parent = findItemById(formattedData, currentNode._parent);
+              parent.expanded = true;
+            }
           } else {
-            unCheckIt(foundItem, selectedItems, setSelectedItems);
+            unCheckIt(foundItem, selectedItems, setSelectedItems, false);
+            if (currentNode._parent) {
+              const parent = findItemById(formattedData, currentNode._parent);
+              parent.expanded = true;
+            }
           }
         }
       }
@@ -97,6 +105,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         ) => {
           setCheckedData(currentNode);
           onSelect(currentNode);
+
         }}
         id={id}
         {...props}
