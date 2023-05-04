@@ -26,7 +26,7 @@ type TooltipProps = {
   icon?: string,
   interaction?: boolean,
   placement?: Placement,
-  position: "absolute" | "fixed";
+  position?: "absolute" | "fixed";
   text: string,
 } & GlobalProps
 
