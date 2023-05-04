@@ -32,7 +32,7 @@ type TypeaheadProps = {
   components?: object,
   createable?: boolean,
   dark?: boolean,
-  data?: {[key: string]: string},
+  data?: { [key: string]: string },
   error?: string,
   id?: string,
   label?: string,
@@ -40,6 +40,18 @@ type TypeaheadProps = {
   getOptionLabel?: string | (() => any),
   getOptionValue?: string | (() => any),
   name?: string,
+}
+
+export type SelectValueType = {
+  label: string,
+  value: string,
+  imageUrl?: string,
+}
+
+type TagOnChangeValues = {
+  action?: string,
+  option?: SelectValueType,
+  removedValue?: string,
 }
 
 /**
@@ -66,7 +78,6 @@ const Typeahead = ({
       Control,
       ClearIndicator,
       IndicatorsContainer,
-      IndicatorSeparator: null,
       MenuList,
       MultiValue,
       Option,
@@ -84,9 +95,8 @@ const Typeahead = ({
     isSearchable: true,
     name,
     multiKit: '',
-    onCreateOption: null,
     plusIcon: false,
-    onMultiValueClick: (option: { label: string, value: string }) => { },
+    onMultiValueClick: (_option: SelectValueType) => { },
     ...props,
   }
 
@@ -96,7 +106,7 @@ const Typeahead = ({
       : (async ? AsyncSelect : Select)
   )
 
-  const handleOnChange = (_data, { action, option, removedValue }) => {
+  const handleOnChange = (_data: SelectValueType, { action, option, removedValue }: TagOnChangeValues) => {
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
       const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option ? option : _data })
