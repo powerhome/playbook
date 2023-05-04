@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
-require "yaml"
-require "redcarpet"
-require "rouge"
 require "will_paginate"
 require "playbook/pagination_renderer"
-require "will_paginate/array" # Needed to show a fake pagination example
-require "markdown_helper"
-require_relative "application_controller"
+require "will_paginate/array"
 
 class PagesController < ApplicationController
   before_action :set_js, only: %i[visual_guidelines]
@@ -15,9 +10,6 @@ class PagesController < ApplicationController
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
-
-  include PlaybookWebsite::PbDocHelper
-  include Playbook::PbKitHelper
 
   def disable_dark_mode
     cookies[:dark_mode] = {

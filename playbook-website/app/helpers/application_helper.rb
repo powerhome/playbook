@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+require "pb_doc_helper"
+
 module ApplicationHelper
   include ::Webpacker::React::Helpers
+  include ::Webpacker::Helper
   include ::Playbook::PbFormsHelper
   include ::Playbook::PbKitHelper
   include ::PlaybookWebsite::Markdown::Helper

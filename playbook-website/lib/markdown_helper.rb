@@ -13,9 +13,7 @@ module PlaybookWebsite
       end
 
       def render_markdown(text)
-        # rubocop:disable Security/Eval
-        eval(PlaybookWebsite::Markdown::Helper.markdown(text))
-        # rubocop:enable Security/Eval
+        eval(PlaybookWebsite::Markdown::Helper.markdown(text)) # rubocop:disable Security/Eval
       end
 
       def self.markdown(text)

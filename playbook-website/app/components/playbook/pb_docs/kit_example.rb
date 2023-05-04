@@ -11,6 +11,8 @@ module Playbook
       prop :type, type: Playbook::Props::Enum, values: %w[rails react], default: "rails"
       prop :dark, type: Playbook::Props::Boolean, default: false
 
+      include PlaybookWebsite::Markdown::Helper
+
       def example
         if type == "rails"
           render inline: source
