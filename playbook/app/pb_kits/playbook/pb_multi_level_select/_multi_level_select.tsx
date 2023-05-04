@@ -43,7 +43,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
           checkIt(item, selectedItems, setSelectedItems);
-          currentNode
         } else {
           unCheckIt(item, selectedItems, setSelectedItems);
         }
@@ -104,8 +103,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       />
     );
   }, [formattedData])
-  console.log(formattedData)
-  console.log('formattedData')
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
