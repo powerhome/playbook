@@ -3,18 +3,18 @@
     <div>
       <%= pb_rails("bread_crumbs", props: { aria: { label: "Breadcrumb Navigation" }, margin_bottom: "xl" }) do%>
         <%= pb_rails("icon", props: { icon: "flag-checkered"}) %>
-        <%= pb_rails("bread_crumbs/bread_crumb_item", props: { link: "/getting_started" }) do %> 
+        <%= pb_rails("bread_crumbs/bread_crumb_item", props: { link: "/getting_started" }) do %>
           <%= pb_rails("title", props: { size: 4, text: "Getting Started", tag: "span" }) %>
         <%end%>
         <%= pb_rails("icon", props: { icon: "atom", classname: "current" }) %>
-        <%= pb_rails("bread_crumbs/bread_crumb_item") do %> 
+        <%= pb_rails("bread_crumbs/bread_crumb_item") do %>
           <%= pb_rails("title", props: { size: 4, text: "React", tag: "span", classname: "current" }) %>
         <%end%>
       <%end%>
     </div>
     <%= pb_rails("title", props: { text: "React Setup", tag: "h1", size: 1, margin_bottom: "sm" }) %>
     <%= pb_rails("body", props: { margin_bottom: "md"}) do %>
-      Playbook's Ruby Gem makes it easy to use playbook with your favorite rails app. Here's a few routes you can take 
+      Playbook's Ruby Gem makes it easy to use playbook with your favorite rails app. Here's a few routes you can take
       to get you started:
     <% end %>
     <%= markdown(@react_getting_started) %>

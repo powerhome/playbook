@@ -8,9 +8,9 @@
 <div class="kit-show-wrapper">
   <% @examples.each do |example| %>
     <%= pb_rails("card", props: { classname: "pb--doc", padding: "none" }) do %>
-      <%= react_component("KitDocs", 
-        kit: @kit, 
-        source: get_source(example.keys.first), 
+      <%= react_component("KitDocs",
+        kit: @kit,
+        source: get_source(example.keys.first),
         exampleTitle: example.values.first,
         css: asset_pack_url('application.css'),
       )
@@ -18,7 +18,7 @@
 
       <div class="sandpack-markdown markdown pb--kit-example-markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
         <%= markdown(description(@kit, example.keys.first)) %>
-      </div> 
+      </div>
     <% end %>
   <% end %>
 

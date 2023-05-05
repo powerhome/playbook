@@ -113,7 +113,7 @@
     display: none;
     overflow-x: auto;
     border-radius: 0 0 6px 6px;
-    background:tint($bg_dark,10);
+    background: $bg_dark;
   }
 
   &.dark_ui {
@@ -132,8 +132,4 @@
       }
     }
   }
-}
-
-pre.highlight {
-  padding: $space_xl;
 }

@@ -454,7 +454,7 @@
 **Kit Enhancements:**
 
 - Update Error Color Token [\#2226](https://github.com/powerhome/playbook/pull/2226) ([nidaqg](https://github.com/nidaqg))
-- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret), [carloslimasd](https://github.com/carloslimasd), [Israel-Molestina](https://github.com/Israel-Molestina)), 
+- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret), [carloslimasd](https://github.com/carloslimasd), [Israel-Molestina](https://github.com/Israel-Molestina)),
 
 **Fixed Bugs:**
 
@@ -856,7 +856,7 @@
 ## [11.2.7](https://github.com/powerhome/playbook/compare/11.2.6...11.2.7) (2022-08-17)
 
 **Fixed Bugs:**
-- Dialog Title Patch [\#2017](https://github.com/powerhome/playbook/pull/2017)([augustomallmann](https://github.com/augustomallmann)) 
+- Dialog Title Patch [\#2017](https://github.com/powerhome/playbook/pull/2017)([augustomallmann](https://github.com/augustomallmann))
 
 ## [11.2.6](https://github.com/powerhome/playbook/compare/11.2.5...11.2.6) (2022-08-12)
 
@@ -880,7 +880,7 @@
 
 **Kit Enhancements:**
 - Convert Avatar Action Button to Typescript [\#1975](https://github.com/powerhome/playbook/pull/1975) ([augustomallmann](https://github.com/augustomallmann))
-- Typescript Conversion: Bread Crumbs [\#1976](https://github.com/powerhome/playbook/pull/1976) ([augustomallmann](https://github.com/augustomallmann)) 
+- Typescript Conversion: Bread Crumbs [\#1976](https://github.com/powerhome/playbook/pull/1976) ([augustomallmann](https://github.com/augustomallmann))
 
 ## [11.2.2](https://github.com/powerhome/playbook/compare/11.2.1...11.2.2) (2022-08-04)
 **Fixed Bugs:**
@@ -894,8 +894,8 @@
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.1.2...11.2.0)
 
-**New Kits** 
-- \[PLAY-158\] Lightbox Kit [\#1772](https://github.com/powerhome/playbook/pull/1772) ([jasperfurniss](https://github.com/jasperfurniss), [thestephenmarshall](https://github.com/thestephenmarshall), 
+**New Kits**
+- \[PLAY-158\] Lightbox Kit [\#1772](https://github.com/powerhome/playbook/pull/1772) ([jasperfurniss](https://github.com/jasperfurniss), [thestephenmarshall](https://github.com/thestephenmarshall),
 [Ivancandido11](https://github.com/Ivancandido11))
 
 **Kit Enhancements:**

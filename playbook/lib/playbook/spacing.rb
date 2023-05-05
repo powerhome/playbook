@@ -20,6 +20,16 @@ module Playbook
       base.prop :padding_y
     end
 
+    def max_width_options
+      {
+        max_width: "mw",
+      }
+    end
+
+    def max_width_values
+      %w[xs sm md lg xl 0 none]
+    end
+
     def spacing_options
       {
         margin: "m",
@@ -61,16 +71,6 @@ module Playbook
         width_value = send(k)
         "max_width_#{width_value}" if max_width_values.include? width_value
       end.compact.join(" ")
-    end
-
-    def max_width_options
-      {
-        max_width: "mw",
-      }
-    end
-
-    def max_width_values
-      %w[xs sm md lg xl 0 none]
     end
   end
 end

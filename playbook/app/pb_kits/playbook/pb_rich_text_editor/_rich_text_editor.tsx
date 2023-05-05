@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop } from '../utilities/props'
 
 try {
@@ -14,6 +14,7 @@ try {
 } catch (_e) { /* do nothing */ }
 
 import { TrixEditor } from "react-trix"
+import EditorToolbar from './TipTap/Toolbar'
 
 type Editor = {
   attributeIsActive?: Function,
@@ -22,12 +23,23 @@ type Editor = {
   getSelectedRange?: () => Array<number>,
   insertHTML?: Function,
   loadHTML?: Function,
-  setSelectedRange?: (range: Array<number>) => void,  
+  setSelectedRange?: (range: Array<number>) => void,
+}
+
+type Editor = {
+  attributeIsActive?: Function,
+  element?: HTMLElement,
+  getSelectedDocument?: Function,
+  getSelectedRange?: () => Array<number>,
+  insertHTML?: Function,
+  loadHTML?: Function,
+  setSelectedRange?: (range: Array<number>) => void,
 }
 
 type RichTextEditorProps = {
   aria?: { [key: string]: string },
   toolbarBottom?: Boolean,
+  children?: React.ReactNode | React.ReactNode[]
   className?: string,
   data?: { [key: string]: string },
   focus?: boolean,
@@ -40,12 +52,15 @@ type RichTextEditorProps = {
   sticky?: boolean,
   template: string,
   value?: string,
-}
+  maxWidth?: string
+} & GlobalProps
 
 const RichTextEditor = (props: RichTextEditorProps) => {
   const {
     aria = {},
+    advancedEditor,
     toolbarBottom = false,
+    children,
     className,
     data = {},
     focus = false,
@@ -57,6 +72,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     sticky = false,
     template = '',
     value = '',
+    maxWidth="md"
   } = props
 
   const ariaProps = buildAriaProps(aria),
@@ -135,7 +151,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     inlineClass = inline ? 'inline' : '',
     toolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
 
-  let css = classnames(globalProps(props), className)
+  let css = classnames(globalProps(props, {maxWidth}), className)
   css = classnames(
     richTextEditorClass,
     simpleClass,

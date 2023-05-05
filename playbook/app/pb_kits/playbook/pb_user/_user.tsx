@@ -49,7 +49,7 @@ const User = (props: UserProps) => {
   const classes = classnames(
     buildCss('pb_user_kit', align, orientation, size),
     globalProps(props),
-    className,
+    className
   )
 
   const avatarPresent = avatar || avatarUrl

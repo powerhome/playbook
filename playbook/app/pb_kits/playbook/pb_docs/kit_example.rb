@@ -23,7 +23,7 @@ module Playbook
       end
 
       def description
-        @description ||= read_kit_file("_#{example_key}.md")
+        @description ||= read_kit_file("docs", "_#{example_key}.md")
       end
 
       def highlighter
@@ -36,6 +36,10 @@ module Playbook
           stringified_code = read_kit_file("_#{example_key}.#{extension}")
           sanitize_code(stringified_code)
         end
+      end
+
+      def tsx_source
+        read_kit_file("", "_#{example_key}.tsx")
       end
 
     private

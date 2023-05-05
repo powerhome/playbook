@@ -22,7 +22,6 @@ examples:
     - table_icon_buttons: Table with Icon Buttons
     - table_with_background_kit: Table With Background Kit
 
-
   react:
     - table_sm: Small
     - table_md: Medium
@@ -45,4 +44,3 @@ examples:
     - table_action_middle: Table with Actions in the Middle
     - table_icon_buttons: Table with Icon Buttons
     - table_with_background_kit: Table With Background Kit
-
