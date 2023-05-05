@@ -25,6 +25,18 @@ import PbKitReact from '../components/PbKitReact'
 import PbKitFetch from '../components/PbKitFetch'
 import PbKitPlayground from '../components/PbKitPlayground'
 import AvailableProps from '../components/AvailableProps'
+import AnchorJS from 'anchor-js'
+
+document.addEventListener('DOMContentLoaded', () => {
+  const anchors = new AnchorJS()
+  anchors.add('.pb--kit-example > .pb_caption_kit_md:first-child')
+  anchors.add('.changelog-card-collection h2')
+  const propsTableAnchors = new AnchorJS()
+  propsTableAnchors.options = {
+    class: 'props-table-anchor',
+  }
+  propsTableAnchors.add('.pb--propsTable > .pb_title_kit_3')
+})
 
 WebpackerReact.setup({
   DarkModeToggle,
