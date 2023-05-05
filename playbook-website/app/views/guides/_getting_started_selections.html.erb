@@ -1,0 +1,47 @@
+<%= pb_rails("flex", props:{ justify: "center" }) do %>
+  <%= pb_rails("caption", props: { size: 'lg', margin_y: "lg" }) do %>
+    What type of setup do you have?
+  <% end %>
+<% end %>
+<%= pb_rails("flex", props:{ gap: "sm", wrap:true }) do %>
+  <%= pb_rails("flex/flex_item", props: { 
+    flex: 1 
+  }) do %>
+    <%= link_to guides_parent_page_path('getting_started', 'ruby_on_rails_setup') do %>
+      <%= pb_rails("selectable_card_icon", props: {
+        icon: "gem", 
+        title_text: "Ruby on Rails",
+      }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("flex/flex_item", props: { 
+    flex: 1 
+  }) do %>
+    <a href="/getting_started/rails_react">
+      <%= pb_rails("selectable_card_icon", props: {
+        icon: "object-intersect", 
+        title_text: "Rails & React",
+      }) %>
+    </a>
+  <% end %>
+  <%= pb_rails("flex/flex_item", props: { 
+    flex: 1 
+  }) do %>
+    <a href="/getting_started/react">
+      <%= pb_rails("selectable_card_icon", props: {
+        icon: "atom", 
+        title_text: "React",
+      }) %>
+    </a>
+  <% end %>
+  <%= pb_rails("flex/flex_item", props: { 
+    flex: 1 
+  }) do %>
+    <a href="/getting_started/html" id="html-setup">
+      <%= pb_rails("selectable_card_icon", props: {
+        icon: "file-code", 
+        title_text: "HTML & CSS", 
+      }) %>
+    </a>
+  <% end %>
+<% end %>

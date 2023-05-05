@@ -1,16 +1,24 @@
 import React from 'react'
-import { Card, Title, Body, Table } from 'playbook-ui'
+import { Body, Card, Table, Title } from 'playbook-ui'
 
-const KitProps = ({ kitPropsValues }) => {
+const KitProps = ({ kitPropsValues, darkMode }) => {
   return (
     <>
-      <Card.Body padding="none">
-        <Table container={false} disableHover size="md" >
+      <Card.Body
+          dark={darkMode}
+          padding="none"
+      >
+        <Table
+            container={false}
+            dark={darkMode}
+            disableHover
+            size="md"
+        >
           <thead>
             <tr>
-              <th>Props</th>
-              <th>Type</th>
-              <th>Values</th>
+              <th>{'Props'}</th>
+              <th>{'Type'}</th>
+              <th>{'Values'}</th>
             </tr>
           </thead>
           <tbody>
@@ -18,17 +26,25 @@ const KitProps = ({ kitPropsValues }) => {
               <>
                 <tr>
                   <td>
-                    <Title text={propName} tag="h4" size={4} />
+                    <Title
+                        dark={darkMode}
+                        size={4}
+                        tag="h4"
+                        text={propName}
+                    />
                   </td>
                   <td>
                     <Card
-                      padding="xxs"
-                      background="light"
-                      borderNone
-                      borderRadius="sm"
-                      display="inline_block"
+                        background={darkMode ? 'dark' : 'light'}
+                        borderNone
+                        borderRadius="sm"
+                        display="inline_block"
+                        padding="xxs"
                     >
-                      <Body className="kearning">
+                      <Body
+                          className="kearning"
+                          dark={darkMode}
+                      >
                         {
                           propsValue.flowType.name === 'signature' ? propsValue.flowType.type : propsValue.flowType.name
                         }
@@ -37,17 +53,21 @@ const KitProps = ({ kitPropsValues }) => {
                   </td>
                   <td>
                     {
+                      // eslint-disable-next-line jsx-control-statements/jsx-use-if-tag
                       propsValue.flowType.raw ? (
                         <Card
-                          flexDirection="row"
-                          padding="xxs"
-                          background="light"
-                          borderNone
-                          borderRadius="sm"
-                          margin="xxs"
-                          display="inline_block"
+                            background={darkMode ? 'dark' : 'light'}
+                            borderNone
+                            borderRadius="sm"
+                            display="inline_block"
+                            flexDirection="row"
+                            margin="xxs"
+                            padding="xxs"
                         >
-                          <Body className="kearning">
+                          <Body
+                              className="kearning"
+                              dark={darkMode}
+                          >
                             {propsValue.flowType.name === 'union' && propsValue.flowType.raw}
                           </Body>
                         </Card>

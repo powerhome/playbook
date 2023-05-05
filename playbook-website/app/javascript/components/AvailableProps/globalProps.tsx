@@ -1,50 +1,69 @@
 import React from 'react'
-import { Card, Title, Body, Table } from 'playbook-ui'
+import { Body, Card, Table, Title } from 'playbook-ui'
 import globalPropsValues from './globalPropsValues'
 
-const GlobalProps = () => {
+const GlobalProps = ({ darkMode }) => {
   return (
     <>
-      <Card.Body padding="none">
-        <Table container={false} disableHover size="md" >
+      <Card.Body
+          dark={darkMode}
+          padding="none"
+      >
+        <Table
+            container={false}
+            dark={darkMode}
+            disableHover
+            size="md"
+        >
           <thead>
             <tr>
-              <th>Props</th>
-              <th>Type</th>
-              <th>Values</th>
+              <th>{'Props'}</th>
+              <th>{'Type'}</th>
+              <th>{'Values'}</th>
             </tr>
           </thead>
           <tbody>
-            {globalPropsValues.map(prop => (
+            {globalPropsValues.map((prop) => (
               <>
                 <tr>
                   <td>
-                    <Title text={prop.prop} tag="h4" size={4} />
+                    <Title
+                        dark={darkMode}
+                        size={4}
+                        tag="h4"
+                        text={prop.prop}
+                    />
                   </td>
                   <td>
                     <Card
-                      padding="xxs"
-                      background="light"
-                      borderNone
-                      borderRadius="sm"
-                      display="inline_block"
+                        background={darkMode ? 'dark' : 'light'}
+                        borderNone
+                        borderRadius="sm"
+                        display="inline_block"
+                        padding="xxs"
                     >
-                      <Body className="kearning">
+                      <Body
+                          className="kearning"
+                          dark={darkMode}
+                      >
                         {prop.type}
                       </Body>
                     </Card>
                   </td>
                   <td>
                     <Card
-                      flexDirection="row"
-                      padding="xxs"
-                      background="light"
-                      borderNone
-                      borderRadius="sm"
-                      margin="xxs"
-                      display="inline_block"
+                        background={darkMode ? 'dark' : 'light'}
+                        borderNone
+                        borderRadius="sm"
+                        display="inline_block"
+                        flexDirection="row"
+                        margin="xxs"
+                        padding="xxs"
                     >
-                      <Body className="kearning">
+                      <Body
+                          className="kearning"
+                          dark={darkMode}
+                      >
                         {prop.values}
                       </Body>
                     </Card>

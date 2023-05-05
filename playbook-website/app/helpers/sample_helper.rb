@@ -27,7 +27,7 @@ module SampleHelper
       rouge_type = "react"
     end
     code = get_raw_code(sample, type)
-    raw rouge(code, rouge_type)
+    raw render_code(code, rouge_type)
   end
 
   def get_category(sample)

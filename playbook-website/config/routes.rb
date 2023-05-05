@@ -1,21 +1,20 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root                           to: "pages#home"
-  get "home",                    to: "pages#home"
-  get "getting_started",         to: "pages#getting_started"
-  get "visual_guidelines",       to: redirect("/visual_guidelines/colors")
-  get "visual_guidelines/:name", to: "pages#visual_guidelines"
-  get "changelog",               to: "pages#changelog"
-  get "getting_started/rails", to: "pages#getting_started_rails"
-  get "getting_started/react", to: "pages#getting_started_react"
-  get "getting_started/html", to: "pages#getting_started_html_css"
-  get "getting_started/rails_react", to: "pages#getting_started_rails_react"
-  get "kits", to: "pages#kits"
+  root                            to: "pages#home"
+  get "home",                     to: "pages#home"
+  get "visual_guidelines",        to: redirect("/visual_guidelines/colors")
+  get "visual_guidelines/:name",  to: "pages#visual_guidelines"
+  get "changelog",                to: "pages#changelog"
 
-  get "kits/:name",                 to: "pages#kit_show_rails",       as: "kit_show"
-  get "kits/:name/rails",           to: "pages#kit_show_rails",       as: "kit_show_rails"
-  get "kits/:name/react",           to: "pages#kit_show_react",       as: "kit_show_reacts"
+  # Kits
+  get "kits", to: "pages#kits"
+  get "kits/:name",                 to: "pages#kit_show_rails",           as: "kit_show"
+  get "kits/:name/rails",           to: "pages#kit_show_rails",           as: "kit_show_rails"
+  get "kits/:name/react",           to: "pages#kit_show_react",           as: "kit_show_reacts"
+  get "kit_category/:name",         to: "pages#kit_category_show_rails",  as: "kit_category_show"
+  get "kit_category/:name/rails",   to: "pages#kit_category_show_rails",  as: "kit_category_show_rails"
+  get "kit_category/:name/react",   to: "pages#kit_category_show_react",  as: "kit_category_show_reacts"
 
   # Experiments
   get "kits/:name/sandpack",        to: "pages#kit_show_new",         as: "kit_show_new"
@@ -24,14 +23,11 @@ Rails.application.routes.draw do
   get "kit_playground_rails",       to: "pages#kit_playground_rails", as: "kit_playground_rails"
   post "rails_pg_render",           to: "pages#rails_pg_render",      as: "rails_pg_render"
 
-  get "kit_category/:name",       to: "pages#kit_category_show_rails", as: "kit_category_show"
-  get "kit_category/:name/rails", to: "pages#kit_category_show_rails", as: "kit_category_show_rails"
-  get "kit_category/:name/react", to: "pages#kit_category_show_react", as: "kit_category_show_reacts"
+  # Docs
+  get "guides/:parent",         to: "guides#md_doc", as: "guides_parent"
+  get "guides/:parent/:page",   to: "guides#md_doc", as: "guides_parent_page"
 
-  get "guides/:parent",           to: "guides#md_doc", as: "guides_parent"
-  get "guides/:parent/:page",     to: "guides#md_doc", as: "guides_parent_page"
-
-  # Full Page Samples Get Generated Here
+  # Samples
   get "samples", to: "samples#index"
   get "samples/:name(/:type)", defaults: { type: "rails" },
                                to: "samples#show",

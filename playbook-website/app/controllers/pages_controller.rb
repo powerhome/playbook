@@ -26,30 +26,6 @@ class PagesController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def getting_started
-    render "pages/getting_started/index"
-  end
-
-  def getting_started_rails
-    @rails_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_getting_started.md").read
-    render "pages/getting_started/rails"
-  end
-
-  def getting_started_react
-    @react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_react_getting_started.md").read
-    render "pages/getting_started/react"
-  end
-
-  def getting_started_rails_react
-    @rails_react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_react_getting_started.md").read
-    render "pages/getting_started/rails_react"
-  end
-
-  def getting_started_html_css
-    @html_css_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_html_css_getting_started.md").read
-    render "pages/getting_started/html"
-  end
-
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
   end
@@ -141,13 +117,10 @@ class PagesController < ApplicationController
 
   # TODO: rename this method once all guidelines are completed
   def visual_guidelines
-    formatter = Rouge::Formatters::HTML.new
-    lexer = Rouge::Lexer.find("react")
     kit_examples = {}
     Dir.glob(Rails.root.join("app/views/pages/code_snippets/*.txt")).each do |example_path|
       example_txt = File.read(example_path)
-
-      formatted_example_txt = formatter.format(lexer.lex(example_txt))
+      formatted_example_txt = render_code(example_txt, "react")
       kit_examples[example_path.split("/").last.sub(".txt", "")] = formatted_example_txt
     end
     @kit_examples_json = kit_examples

@@ -93,11 +93,12 @@
 
   <% if (action_name == "kit_show_rails") %>
     <br>
-    <%= pb_rails("docs/kit_api", props: { kit: @kit }) %>
+    <%= pb_rails("docs/kit_api", props: { kit: @kit, dark: dark_mode? }) %>
   <% else %>
     <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm", margin_top: "sm" }) %>
     <%= react_component("AvailableProps",
-      source: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "react").tsx_source )
-    %>
+      source: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "react").tsx_source,
+      darkMode: dark_mode?
+    )%>
   <% end %>
 </div>
