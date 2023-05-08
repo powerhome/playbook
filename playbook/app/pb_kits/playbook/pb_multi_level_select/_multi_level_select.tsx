@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
-import { findItemById, checkIt, unCheckIt } from "./helper_functions";
+import { findItemById, checkIt, unCheckIt, getParentAndAncestorsIds } from "./helper_functions";
 import MultiSelectHelper from "./_multi_select_helper";
 
 type MultiLevelSelectProps = {
@@ -58,8 +58,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           } else {
             unCheckIt(foundItem, selectedItems, setSelectedItems, false);
             if (currentNode._parent) {
-              const parent = findItemById(formattedData, currentNode._parent);
-              parent.expanded = true;
+             const parents = getParentAndAncestorsIds(currentNode._parent, formattedData)
+             parents.forEach((item:string) => {
+              const ancestor = findItemById(formattedData,item)
+              ancestor.expanded = true
+             });
             }
           }
         }

@@ -61,3 +61,27 @@ export const unCheckIt = (
   }
   setSelectedItems([...newSelectedItems]);
 };
+
+
+export const getParentAndAncestorsIds = (itemId:string, items:{ [key: string]: string; }[], ancestors:string[] = []):any => {
+  for (let i = 0; i < items.length; i++) {
+    const item:any = items[i];
+    if (item.id === itemId) {
+      // item found in current level of items array
+      return [...ancestors, item.id];
+    }
+    if (item.children && item.children.length > 0) {
+      // recursively search through children
+      const foundAncestors = getParentAndAncestorsIds(
+        itemId,
+        item.children,
+        [...ancestors, item.id]
+      );
+      if (foundAncestors) {
+        return foundAncestors;
+      }
+    }
+  }
+  // item not found in this level of items array or its children
+  return null;
+}
