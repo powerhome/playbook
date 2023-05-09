@@ -2,7 +2,7 @@
 
 $LOAD_PATH.push File.expand_path("lib", __dir__)
 
-require "playbook/version"
+require "./playbook/version"
 
 Gem::Specification.new do |s|
   s.name        = "playbook_ui_docs"
