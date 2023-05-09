@@ -148,12 +148,12 @@ const quickPickPlugin = () => {
         selectActiveRangeButton(selectedDates);
       },
 
-      onClose(selectedDates: Array<string>) {
-        // set the input value to the selected dates when the dropdown is closed
-        if (!selectedDates[1]) {
-          fp.input.value = fp.formatDate(this.selectedDates[0], fp.config.dateFormat) + ' → ' + fp.formatDate(this.selectedDates[1], fp.config.dateFormat);
-        }
-      }
+      // onClose(selectedDates: Array<string>) {
+      //   // set the input value to the selected dates when the dropdown is closed
+      //   // if (!selectedDates[1]) {
+      //   //   fp.input.value = fp.formatDate(this.selectedDates[0], fp.config.dateFormat) + ' → ' + fp.formatDate(this.selectedDates[1], fp.config.dateFormat);
+      //   // }
+      // }
     };
   };
 }
