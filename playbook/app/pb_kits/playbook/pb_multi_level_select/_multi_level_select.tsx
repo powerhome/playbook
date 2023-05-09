@@ -52,9 +52,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           if (currentNode.checked) {
             checkIt(foundItem, selectedItems, setSelectedItems, false);
             if (currentNode._parent) {
-              const parent = findItemById(formattedData, currentNode._parent);
-              parent.expanded = true;
-            }
+              const parents = getParentAndAncestorsIds(currentNode._parent, formattedData)
+              parents.forEach((item:string) => {
+               const ancestor = findItemById(formattedData,item)
+               ancestor.expanded = true
+              });
+             }
           } else {
             unCheckIt(foundItem, selectedItems, setSelectedItems, false);
             if (currentNode._parent) {
