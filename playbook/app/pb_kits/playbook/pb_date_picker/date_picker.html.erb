@@ -60,22 +60,8 @@
   </div>
 
   <%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", (event) => {
+    window.addEventListener("DOMContentLoaded", () => {
       datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
-      event.preventDefault();
-      const variantArr = document.querySelectorAll('#cal-icon-<%= object.picker_id %>')
-      if (!variantArr) {
-        setTimeout(attachIconClickHandler, 100);
-        return;
-      }
-
-      const instance = document.querySelector('#<%= object.picker_id %>')._flatpickr
-      variantArr.forEach(icon => {
-        icon.addEventListener("click", function(event) {
-          event.preventDefault();
-          instance.open()
-        });
-      });
     })
 
   <% end %>
