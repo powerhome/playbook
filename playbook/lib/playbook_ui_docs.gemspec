@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
+puts 'mark look here'
+
+puts File.expand_path("lib", __dir__)
+
 $LOAD_PATH.push File.expand_path("lib", __dir__)
 
+puts Dir.pwd
+
 require "playbook/version"
+
 
 Gem::Specification.new do |s|
   s.name        = "playbook_ui_docs"
