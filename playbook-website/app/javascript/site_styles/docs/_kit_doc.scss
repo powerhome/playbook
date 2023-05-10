@@ -35,6 +35,18 @@
     font-weight: 600;
   }
 
+  .pb--copy-code {
+    background: rgba(#004ebb, 0.8);
+    color: white;
+    padding: 14px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
   .pb--kit-example, .pb--kit-example-markdown {
     &.dark {
       color: $text_dk_light;

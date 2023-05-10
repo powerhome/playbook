@@ -15,21 +15,23 @@
     <div id="code-wrapper">
       <div class="pb--codeControls">
         <ul>
-          <% if type == "rails" %>
-            <li>
-              <a href="#" id="copy-<%= example_key %>-trigger" onclick="copyOnClick(`<%= example_html %>`, `copy-<%= example_key %>`)">
-                Copy HTML
-              </a>
-            </li>
-          <% end %>
           <li>
             <a href="#" id="toggle-open" data-toggle="code_example"><i class="far fa-code"></i> Show Code</a>
-            <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle" data-togglable="code_example" style="display: none">Close</a>
           </li>
         </ul>
       </div>
       <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
         <%= pb_rails("section_separator", props: { dark: dark })%>
+        <div style="display: flex; justify-content: flex-end;">
+          <a href="#" id="copy-code-<%= example_key %>" class="pb--copy-code" onclick="copyOnClick(`<%= source %>`, `copy-<%= example_key %>`)">
+            <i class="far fa-copy" style="padding-right: 4px;"></i> Copy Code
+          </a>
+          <% if type == "rails" %>
+            <a href="#" id="copy-<%= example_key %>-trigger" class="pb--copy-code" onclick="copyOnClick(`<%= example_html %>`, `copy-<%= example_key %>-trigger`)">
+              Copy HTML
+            </a>
+          <% end %>
+        </div>
         <pre class="highlight"><%= raw rouge(source, highlighter) %></pre>
       </div>
     </div>
