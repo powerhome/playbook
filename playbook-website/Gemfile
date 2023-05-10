@@ -11,7 +11,6 @@ gem "playbook_ui", path: "../playbook"
 gem "rails", "~> 6.1.6.1"
 # Use Puma as the app server
 gem "puma", "~> 5.6"
-gem "slim-rails", "~> 3.2"
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem "webpacker", "4.3.0"
 # Make Compatible with Ruby 3.1.0 Upgrade
