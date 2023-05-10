@@ -30,7 +30,6 @@ import AnchorJS from 'anchor-js'
 document.addEventListener('DOMContentLoaded', () => {
   const anchors = new AnchorJS()
   anchors.add('.pb--kit-example > .pb_caption_kit_md:first-child')
-  anchors.add('.changelog-card-collection h2')
   const propsTableAnchors = new AnchorJS()
   propsTableAnchors.options = {
     class: 'props-table-anchor',
