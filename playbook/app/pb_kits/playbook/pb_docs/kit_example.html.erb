@@ -23,13 +23,13 @@
             </li>
           <% end %>
           <li>
-            <a href="#" id="toggle-open" data-toggle="code_example">Code Example</a>
+            <a href="#" id="toggle-open" data-toggle="code_example"><i class="far fa-code"></i> Show Code</a>
+            <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle" data-togglable="code_example" style="display: none">Close</a>
           </li>
         </ul>
       </div>
       <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
         <%= pb_rails("section_separator", props: { dark: dark })%>
-        <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle">Close</a>
         <pre class="highlight"><%= raw rouge(source, highlighter) %></pre>
       </div>
     </div>
@@ -40,6 +40,5 @@
   function copyOnClick(content, elementID) {
     copyContent(content)
   }
-  
+
 </script>
-   

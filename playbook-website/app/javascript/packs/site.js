@@ -7,8 +7,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const toggleLambda = (element) => {
       if (element.style.display === 'none') {
         element.style.display = 'block'
+        openToggle.innerHTML = '<i class="far fa-times"></i> Close Code'
       } else {
         element.style.display = 'none'
+        openToggle.innerHTML = '<i class="far fa-code"></i> Show Code'
       }
     }
 
