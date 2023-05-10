@@ -29,7 +29,7 @@
       </div>
       <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
         <%= pb_rails("section_separator", props: { dark: dark })%>
-        <a href="#" id="copy-code-<%= example_key %>" class="pb--copy-code" onclick="copyOnClick(`<%= source %>`, `copy-<%= example_key %>`)">
+        <a href="#" id="copy-code-<%= example_key %>" class="pb--copy-code" onclick="copyOnClick(`<%= source %>`, `copy-code-<%= example_key %>`)">
           <%= pb_rails("button", props: { text: "Copy Code", size: "sm", icon: "copy" }) %>
         </a>
         <pre class="highlight"><%= raw rouge(source, highlighter) %></pre>

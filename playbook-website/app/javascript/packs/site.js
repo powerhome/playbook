@@ -1,7 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('#code-wrapper').forEach((wrapper) => {
     const openToggle = wrapper.querySelector('#toggle-open')
-    const closeToggle = wrapper.querySelector('#toggle-close')
     const codeDrawer = wrapper.querySelector('.pb--codeCopy')
 
     const toggleLambda = (element) => {
@@ -15,7 +14,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     openToggle.addEventListener('click', () => toggleLambda(codeDrawer))
-    closeToggle.addEventListener('click', () => toggleLambda(codeDrawer))
   })
 
   if (process.env.NODE_ENV === 'development') {
