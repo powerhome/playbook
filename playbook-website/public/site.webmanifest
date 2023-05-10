@@ -1,4 +1,4 @@
-"icons": [
+{"icons": [
   {
     "src": "/images/pb-favicon-180x180.png",
     "sizes": "180x180",
@@ -23,5 +23,6 @@
     "src": "/images/pb-favicon.svg",
     "sizes": "any",
     "type": "image/svg+xml"
-  },
-],
+  }
+ ]
+}
