@@ -2,7 +2,9 @@
 
 $LOAD_PATH.push File.expand_path("lib", __dir__)
 
-require "./playbook/version"
+require_path = ENV.fetch("GEM_HOST_API_KEY", nil).nil? ? "./" : ""
+
+require "#{require_path}playbook/version"
 
 Gem::Specification.new do |s|
   s.name        = "playbook_ui_docs"
