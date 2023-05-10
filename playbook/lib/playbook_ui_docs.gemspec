@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.push File.expand_path("lib", __dir__)
+$LOAD_PATH.push File.expand_path("../lib", __dir__)
 
-require_path = ENV.fetch("GEM_HOST_API_KEY", nil).nil? ? "./" : ""
-
-require "#{require_path}playbook/version"
+require "playbook/version"
 
 Gem::Specification.new do |s|
   s.name        = "playbook_ui_docs"
