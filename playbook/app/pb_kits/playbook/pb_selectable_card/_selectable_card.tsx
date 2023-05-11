@@ -13,9 +13,9 @@ import {
 
 import Icon from '../pb_icon/_icon'
 import Checkbox from '../pb_checkbox/_checkbox'
-import Card from '../pb_card/_card'
 import Flex from '../pb_flex/_flex'
 import Radio from '../pb_radio/_radio'
+import Card from '../pb_card/_card'
 
 type SelectableCardProps = {
   aria?: { [key: string]: string },
@@ -149,13 +149,15 @@ const SelectableCard = (props: SelectableCardProps) => {
                   </Input>
                 </Flex>
                 <div className="separator" />
-                <Card.Body
+                <div className="psuedo_separator"/>
+                <Card
+                    borderNone
                     dark={dark}
                     padding="sm"
                     status={error ? 'negative' : null}
                 >
                   {text ||props.children}
-                </Card.Body>
+                </Card>
               </Flex>
               :
             text || props.children
