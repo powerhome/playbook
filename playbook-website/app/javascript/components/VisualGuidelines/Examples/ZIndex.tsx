@@ -29,11 +29,11 @@ const screenSizeProps = {
 }
 
 const UTILITY_CLASSES = [
-  {size: 'xs', media: '@media screen and (max-width: 575px)', class: '.z_index_xs_{1-10}', properties: 'z_index: {100-1000} !important'},
-  {size: 'sm', media: '@media screen and (max-width: 576px)', class: '.z_index_sm_{1-10}', properties: 'z_index: {100-1000} !important'},
-  {size: 'md', media: '@media screen and (max-width: 768px)', class: '.z_index_md_{1-10}', properties: 'z_index: {100-1000} !important'},
-  {size: 'lg', media: '@media screen and (max-width: 992px)', class: '.z_index_lg_{1-10}', properties: 'z_index: {100-1000} !important'},
-  {size: 'xl', media: '@media screen and (max-width: 1200px)', class: '.z_index_xl_{1-10}', properties: 'z_index: {100-1000} !important'},
+  {size: 'xs', media: '@media screen and (max-width: $screen-xs-min)', class: '.z_index_xs_{1-10}', properties: 'z_index: {100-1000} !important'},
+  {size: 'sm', media: '@media screen and (max-width: $screen-sm-min)', class: '.z_index_sm_{1-10}', properties: 'z_index: {100-1000} !important'},
+  {size: 'md', media: '@media screen and (max-width: $screen-md-min)', class: '.z_index_md_{1-10}', properties: 'z_index: {100-1000} !important'},
+  {size: 'lg', media: '@media screen and (max-width: $screen-lg-min)', class: '.z_index_lg_{1-10}', properties: 'z_index: {100-1000} !important'},
+  {size: 'xl', media: '@media screen and (max-width: $screen-xl-min)', class: '.z_index_xl_{1-10}', properties: 'z_index: {100-1000} !important'},
 ]
 
 const globalPropsDescription = (
