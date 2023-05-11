@@ -50,18 +50,14 @@
   function copyOnClick(content, elementID) {
     copyContent(content)
   }
-  document.getElementById('<%= "copy-button-#{example_key}" %>').addEventListener('click', function() {
+  var button = document.getElementById('<%= "copy-button-#{example_key}" %>')
+  button.addEventListener('click', function() {
     var fadeAwayDiv = document.getElementById("<%= "tooltip-#{example_key}" %>")
-    fadeAwayDiv.classList.add('fade-out')
     setTimeout(function() {
-      fadeAwayDiv.style.display = 'none'
-    }, 2000)
+      fadeAwayDiv.classList.remove('show')
+    }, 3000)
+    setTimeout(function() {
+      fadeAwayDiv.classList.add('hide')
+    }, 3001)
   })
 </script>
-
-<style>
-  .fade-out {
-    opacity: 0;
-    transition: opacity 1s ease;
-  }
-</style>
