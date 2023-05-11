@@ -11,8 +11,12 @@ export default class PbTable extends PbEnhancedElement {
     // Each Table
     [].forEach.call(tables, (table: HTMLTableElement) => {
       // Header Titles
-      var headers = [].map.call(table.querySelectorAll('th'), (header: Element) => {
-        return header.textContent.replace(/\r?\n|\r/, '')
+      let headers: string[] = [];
+      [].forEach.call(table.querySelectorAll('th'), (header: HTMLTableCellElement) => {
+        let colSpan = header.colSpan
+        for (let i = 0; i < colSpan; i++) {
+          headers.push(header.textContent.replace(/\r?\n|\r/, ''));
+        }
       });
 
       // for each row in tbody
