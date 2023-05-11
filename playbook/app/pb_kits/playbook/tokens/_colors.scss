@@ -68,7 +68,7 @@ $background_colors: (
 
 /* Card colors ------------------*/
 $card_light:          $white !default;
-$card_dark:           rgba($white, $opacity_1) !default;
+$card_dark:           mix(white, $bg_dark, 10%)  !default;
 $card_colors: (
   card_light:         $card_light,
   card_dark:          $card_dark
@@ -109,16 +109,18 @@ $focus_input_colors: (
 
 /* Border colors ----------------------*/
 $border_light:        #E4E8F0 !default;
-$border_dark:         rgba($white, $opacity_1) !default;
+$border_dark:         mix(white, $bg_dark, 20%) !default;
 $border_colors: (
   border_light:       $border_light,
   border_dark:        $border_dark
 );
 
 /* Shadow colors ----------------------*/
-$shadow:        rgba(#3C6AAC, $opacity_2) !default;
+$shadow:             rgba(#3C6AAC, $opacity_2) !default;
+$shadow_dark:        $bg_dark !default;
 $shadow_colors: (
   shadow:       $shadow,
+  shadow_dark:       $shadow_dark,
 );
 
 /* Text colors ------------------------*/
