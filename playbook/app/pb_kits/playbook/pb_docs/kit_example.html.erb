@@ -30,10 +30,18 @@
       <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
         <%= pb_rails("section_separator", props: { dark: dark })%>
         <a href="#" id="copy-code-<%= example_key %>" class="pb--copy-code" onclick="copyOnClick(`<%= source %>`, `copy-code-<%= example_key %>`)">
-          <%= pb_rails("button", props: { text: "Copy Code", size: "sm", icon: "copy" }) %>
+          <%= pb_rails("button", props: { id: "copy-button-#{example_key}", text: "Copy Code", size: "sm", icon: "copy" }) %>
         </a>
         <pre class="highlight"><%= raw rouge(source, highlighter) %></pre>
       </div>
+          <%= pb_rails("popover", props: {
+        trigger_element_id: "copy-button-#{example_key}",
+        tooltip_id: "tooltip-#{example_key}",
+        offset: true,
+        position: "top"
+    }) do %>
+        Code Copied
+    <% end %>
     </div>
   <% end %>
 <% end %>
@@ -42,5 +50,18 @@
   function copyOnClick(content, elementID) {
     copyContent(content)
   }
-
+  document.getElementById('<%= "copy-button-#{example_key}" %>').addEventListener('click', function() {
+    var fadeAwayDiv = document.getElementById("<%= "tooltip-#{example_key}" %>")
+    fadeAwayDiv.classList.add('fade-out')
+    setTimeout(function() {
+      fadeAwayDiv.style.display = 'none'
+    }, 2000)
+  })
 </script>
+
+<style>
+  .fade-out {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+</style>
