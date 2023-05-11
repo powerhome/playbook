@@ -52,6 +52,10 @@
   }
   var button = document.getElementById('<%= "copy-button-#{example_key}" %>')
   button.addEventListener('click', function() {
+    var tempElement = document.createElement('div')
+    tempElement.innerHTML = `<%= source %>`
+    var decodedString = tempElement.textContent || tempElement.innerText;
+    copyContent(decodedString)
     var fadeAwayDiv = document.getElementById("<%= "tooltip-#{example_key}" %>")
     setTimeout(function() {
       fadeAwayDiv.classList.remove('show')
