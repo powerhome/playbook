@@ -15,6 +15,7 @@
     "@tiptap/pm": "^2.0.2",
     "@tiptap/react": "^2.0.2",
     "@tiptap/starter-kit": "^2.0.2",
+    "anchor-js": "^5.0.0",
     "maplibre-gl": "^2.4.0",
     "playbook-ui": ">= 1",
     "prismjs": "^1.29.0",
