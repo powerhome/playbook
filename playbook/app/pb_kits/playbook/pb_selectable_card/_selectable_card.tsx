@@ -149,7 +149,7 @@ const SelectableCard = (props: SelectableCardProps) => {
                   </Input>
                 </Flex>
                 <div className="separator" />
-                <div className="psuedo-separator"/>
+                <div className="psuedo_separator"/>
                 <Card
                     borderNone
                     dark={dark}

@@ -45,7 +45,7 @@ const SelectableCardInput = (props) => {
           variant="displayInput"
           {...props}
       >
-        <Body {...props}>{'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget pretium nibh. Proin sed fermentum arcu. Sed iaculis hendrerit suscipit. Vivamus in risus nibh. Ut ac quam tempor, aliquam purus ac, elementum felis. Sed feugiat mauris at lectus euismod ultrices. Aliquam facilisis imperdiet imperdiet. Phasellus in mauris arcu. Vivamus varius convallis nunc a porta. Etiam eu fermentum metus. Suspendisse vehicula lectus sit amet purus tempor, eu suscipit mauris laoreet.'}</Body>
+        <Body {...props}>{'Ruby'}</Body>
       </SelectableCard>
 
       <SelectableCard
