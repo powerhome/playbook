@@ -2277,9 +2277,7 @@
   integrity sha512-AK8m4JKvjv2LgTho2GLPW4UI9Z8Oc1tErG9TAeJzud8NFFZ2iOOueAwyGjPLaEQxWaE2p5xlKjbBUWDV5bd6AQ==
 
 "@tiptap/extension-link@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@tiptap/extension-link/-/extension-link-2.0.2.tgz#86ef3fd04d5906167d63cc87c1c622a71b48a6e7"
-  integrity sha512-PzBM09Mmsxj0V5fAa0kxdIZdkNjowQWj4O4nrjEWSbSmF90v0Fyj4R/VjSg4dBf3ExfFNYmsjC3wPiRulnCu5g==
+  version "2.0.3"
   dependencies:
     linkifyjs "^4.1.0"
 
@@ -2309,9 +2307,7 @@
   integrity sha512-kAO+WurWOyHIV/x8qHMF3bSlWrdlPtjEYmf+w8wHKy3FzE55eF6SsGt4FymClNkJmyXdgflXBB3Wv/Z53myy8g==
 
 "@tiptap/pm@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@tiptap/pm/-/pm-2.0.2.tgz#f4ae342ce503c0ede8c17cec4566fec38197e67a"
-  integrity sha512-vXlI82bZ4XrmVD6m/pO27gqlm+tU57mpjy9WjkJpEUOifQZK8LihR3l5k55Z0RqalV4/E79iU1cp8mw0v13nhA==
+  version "2.0.3"
   dependencies:
     prosemirror-changeset "^2.2.0"
     prosemirror-collab "^1.3.0"
@@ -2333,17 +2329,13 @@
     prosemirror-view "^1.28.2"
 
 "@tiptap/react@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@tiptap/react/-/react-2.0.2.tgz#a252daf39195afc9cc73f7f48d54a01d6bb23988"
-  integrity sha512-m/id2H5bvdz0X6pW0T/4wsDwp55fBO03iMa6OVsbASmwvQuCLoemthtZrHmhn609UTWYd8CXnSeDht2t5pz03A==
+  version "2.0.3"
   dependencies:
     "@tiptap/extension-bubble-menu" "^2.0.2"
     "@tiptap/extension-floating-menu" "^2.0.2"
 
 "@tiptap/starter-kit@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@tiptap/starter-kit/-/starter-kit-2.0.2.tgz#9b1732dce0ddc6612792ec0438f4cb404a1ba906"
-  integrity sha512-s0yE6nEVYnxnHHdLxZ6McMhOAMbZ1czAj9qvmc1Mra0U/p08fg3VTn1gIgy8FA3t0TWUNpuwsO4FcgKlWaQ+eg==
+  version "2.0.3"
   dependencies:
     "@tiptap/core" "^2.0.2"
     "@tiptap/extension-blockquote" "^2.0.2"
