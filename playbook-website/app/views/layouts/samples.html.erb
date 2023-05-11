@@ -2,7 +2,10 @@
 <html>
     <head>
         <title>Full Screen Examples</title>
-        <%= favicon_link_tag "pb-favicon.png", type: "image/png" %>
+        <link rel="icon" href="/images/pb-favicon.ico" sizes="any"><!-- 32×32 -->
+        <link rel="icon" href="/images/pb-favicon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/images/pb-favicon-180.png"><!-- 180×180 -->
+        <link rel="manifest" href="/site.webmanifest">
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
         <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport"/>
