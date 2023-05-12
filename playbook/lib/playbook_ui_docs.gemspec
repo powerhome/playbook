@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.license     = "ISC"
 
   s.files = Dir[
-    "app/pb_kits/playbook/pb_*/docs/**/*",
+    "app/pb_kits/playbook/pb_*/**/**/*",
     "dist/app/components/playbook/pb_docs/**/*",
     "dist/menu.yml",
     "dist/playbook-doc.js",
