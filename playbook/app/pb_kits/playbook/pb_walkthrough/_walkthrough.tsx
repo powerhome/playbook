@@ -137,7 +137,7 @@ const Tooltip = React.forwardRef((props: TooltipProps) => (
       }
     </Flex>
   </div>
-)) as React.ForwardRefRenderFunction<HTMLDivElement, TooltipRenderProps>
+)) as unknown as React.ForwardRefRenderFunction<HTMLDivElement, TooltipRenderProps>
 
 const Walkthrough = (props: WalkthroughProps) => {
   const {
