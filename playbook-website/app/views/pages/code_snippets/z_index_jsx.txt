@@ -1,1 +1,13 @@
 <Pill text="example" position="absolute" zIndex="5" />
+
+<Pill
+    text="example"
+    position="absolute"
+    zIndex={{
+        xs: "1",
+        sm: "3",
+        md: "5",
+        lg: "7",
+        xl: "10"
+    }}
+/>

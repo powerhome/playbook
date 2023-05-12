@@ -1,5 +1,26 @@
 
 
+## [12.20.0](https://github.com/powerhome/playbook/tree/12.20.0) (2023-05-11)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.19.0...12.20.0)
+
+**Kit Enhancements:**
+
+- Typeahead kit to Typescript [\#2534](https://github.com/powerhome/playbook/pull/2534) ([carloslimasd](https://github.com/carloslimasd))
+- MultiLevelSelect fixes for Expanding Tree + Styling [\#2532](https://github.com/powerhome/playbook/pull/2532) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fixes for SelectableCard Children overflowing Card [\#2548](https://github.com/powerhome/playbook/pull/2548) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Anchor Linking for Playbook Website  [\#2546](https://github.com/powerhome/playbook/pull/2546) ([jasperfurniss](https://github.com/jasperfurniss))
+- Making zIndex Global Prop Responsive [\#2539](https://github.com/powerhome/playbook/pull/2539) ([carloslimasd](https://github.com/carloslimasd))
+- Favicon for Playbook Website [\#2524](https://github.com/powerhome/playbook/pull/2524) ([markdoeswork](https://github.com/markdoeswork))
+
+
+
 ## [12.19.0](https://github.com/powerhome/playbook/tree/12.19.0) (2023-05-09)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.18.0...12.19.0)

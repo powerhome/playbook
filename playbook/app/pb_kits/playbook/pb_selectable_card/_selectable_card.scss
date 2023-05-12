@@ -81,9 +81,10 @@ $pb_selectable_card_border: 2px;
         }
 
         .separator {
-          width: 2px;
-          margin-right: 0px;
           background: $royal;
+        }
+        .psuedo_separator {
+          background-color: $royal;
         }
       }
     }
@@ -125,11 +126,15 @@ $pb_selectable_card_border: 2px;
 
   .separator {
     align-self: stretch;
-    width: 1px;
-    margin-right: 1px;
+    padding-right: 1px;
     margin-top: -1px;
     margin-bottom: -1px;
     background: $border_light;
+  }
+
+  .psuedo_separator {
+    align-self: stretch;
+    padding-right: 1px;
   }
 
   &.error {
