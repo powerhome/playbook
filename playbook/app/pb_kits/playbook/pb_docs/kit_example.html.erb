@@ -17,29 +17,28 @@
         <ul>
           <% if type == "rails" %>
             <li>
-              <a href="#" id="copy-<%= example_key %>-trigger" onclick="copyOnClick(`<%= example_html %>`, `copy-<%= example_key %>`)">
-                Copy HTML
-              </a>
+            <%= pb_rails("button", props: { id:"copy-html-#{example_key}", text: "Copy HTML", variant: "link", size: "sm" }) %>
             </li>
           <% end %>
           <li>
-            <a href="#" id="toggle-open" data-toggle="code_example"><i class="far fa-code"></i> Show Code</a>
+            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-opened", text: "Close Code", variant: "link", size: "sm", display: "none" }) %>
+            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-closed", text: "Show Code", variant: "link", size: "sm" }) %>
           </li>
         </ul>
       </div>
       <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
         <%= pb_rails("section_separator", props: { dark: dark })%>
-        <a href="#" id="copy-code-<%= example_key %>" class="pb--copy-code" onclick="copyOnClick(`<%= source %>`, `copy-code-<%= example_key %>`)">
+        <a href="#" style="padding: 16px 0px 22px 0px;" id="copy-code-<%= example_key %>" class="pb--copy-code" onclick="copyOnClick(`<%= source %>`, `copy-code-<%= example_key %>`)">
           <%= pb_rails("button", props: { id: "copy-button-#{example_key}", text: "Copy Code", size: "sm", icon: "copy" }) %>
         </a>
         <pre class="highlight"><%= raw rouge(source, highlighter) %></pre>
       </div>
-          <%= pb_rails("popover", props: {
-        trigger_element_id: "copy-button-#{example_key}",
-        tooltip_id: "tooltip-#{example_key}",
-        offset: true,
-        position: "top"
-    }) do %>
+        <%= pb_rails("popover", props: {
+          trigger_element_id: "copy-button-#{example_key}",
+          tooltip_id: "tooltip-#{example_key}",
+          offset: true,
+          position: "bottom"
+        }) do %>
         Code Copied
     <% end %>
     </div>
@@ -47,9 +46,14 @@
 <% end %>
 
 <script>
-  function copyOnClick(content, elementID) {
-    copyContent(content)
-  }
+  var htmlButton = document.getElementById('<%= "copy-html-#{example_key}" %>')
+  htmlButton.addEventListener('click', function() {
+    var tempElement = document.createElement('div')
+    tempElement.innerHTML = `<%= example_html %>`
+    var decodedString = tempElement.textContent || tempElement.innerText;
+    copyContent(decodedString)
+  })
+
   var button = document.getElementById('<%= "copy-button-#{example_key}" %>')
   button.addEventListener('click', function() {
     var tempElement = document.createElement('div')

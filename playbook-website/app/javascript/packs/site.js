@@ -1,19 +1,23 @@
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('#code-wrapper').forEach((wrapper) => {
-    const openToggle = wrapper.querySelector('#toggle-open')
+    const openToggleOpened = wrapper.querySelector('#toggle-open-opened')
+    const openToggleClosed = wrapper.querySelector('#toggle-open-closed')
     const codeDrawer = wrapper.querySelector('.pb--codeCopy')
 
     const toggleLambda = (element) => {
       if (element.style.display === 'none') {
         element.style.display = 'block'
-        openToggle.innerHTML = '<i class="far fa-times"></i> Close Code'
+        openToggleClosed.style.display = 'none'
+        openToggleOpened.style.display = 'flex'
       } else {
         element.style.display = 'none'
-        openToggle.innerHTML = '<i class="far fa-code"></i> Show Code'
+        openToggleClosed.style.display = 'flex'
+        openToggleOpened.style.display = 'none'
       }
     }
 
-    openToggle.addEventListener('click', () => toggleLambda(codeDrawer))
+    openToggleOpened.addEventListener('click', () => toggleLambda(codeDrawer))
+    openToggleClosed.addEventListener('click', () => toggleLambda(codeDrawer))
   })
 
   if (process.env.NODE_ENV === 'development') {
