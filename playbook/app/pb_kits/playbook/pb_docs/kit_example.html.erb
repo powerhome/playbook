@@ -15,11 +15,10 @@
     <div id="code-wrapper">
       <div class="pb--codeControls">
         <ul>
-          <% if type == "rails" %>
+          <% hide_button = type == "rails" ? 'flex' : 'none' %>
             <li>
-            <%= pb_rails("button", props: { id:"copy-html-#{example_key}", text: "Copy HTML", variant: "link", size: "sm" }) %>
+            <%= pb_rails("button", props: { id:"copy-html-#{example_key}", text: "Copy HTML", variant: "link", size: "sm", display: hide_button }) %>
             </li>
-          <% end %>
           <li>
             <%= pb_rails("button", props: { icon: "code", id:"toggle-open-opened", text: "Close Code", variant: "link", size: "sm", display: "none" }) %>
             <%= pb_rails("button", props: { icon: "code", id:"toggle-open-closed", text: "Show Code", variant: "link", size: "sm" }) %>
