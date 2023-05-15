@@ -17,7 +17,7 @@
         <ul>
           <% hide_button = type == "rails" ? 'flex' : 'none' %>
             <li>
-            <%= pb_rails("button", props: { id:"copy-html-#{example_key}", text: "Copy HTML", variant: "link", size: "sm", display: hide_button }) %>
+            <%= pb_rails("button", props: { id:"copy-html-#{example_key}", icon: "copy", text: "Copy HTML", variant: "link", size: "sm", display: hide_button }) %>
             </li>
           <li>
             <%= pb_rails("button", props: { icon: "code", id:"toggle-open-opened", text: "Close Code", variant: "link", size: "sm", display: "none" }) %>
