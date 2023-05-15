@@ -1,12 +1,12 @@
 PATH
   remote: .
   specs:
-    playbook_ui (12.15.0)
+    playbook_ui (12.20.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
       react-rails (= 2.6.1)
-      redcarpet (~> 3.5)
+      redcarpet (~> 3.6)
       rouge (~> 3.15)
       view_component (= 2.55.0)
       webpacker-react (~> 0.3.2)
@@ -268,7 +268,7 @@ GEM
       spring (>= 1.2, < 3.0)
     strscan (3.0.3)
     thor (1.2.1)
-    tilt (2.0.11)
+    tilt (2.1.0)
     timeout (0.3.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)

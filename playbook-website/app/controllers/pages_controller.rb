@@ -34,16 +34,31 @@ class PagesController < ApplicationController
   end
 
   def getting_started
+    render "pages/getting_started/index"
+  end
+
+  def getting_started_rails
     @rails_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_getting_started.md").read
+    render "pages/getting_started/rails"
+  end
+
+  def getting_started_react
     @react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_react_getting_started.md").read
+    render "pages/getting_started/react"
+  end
+
+  def getting_started_rails_react
+    @rails_react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_react_getting_started.md").read
+    render "pages/getting_started/rails_react"
+  end
+
+  def getting_started_html_css
+    @html_css_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_html_css_getting_started.md").read
+    render "pages/getting_started/html"
   end
 
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
-  end
-
-  def grid
-    render layout: "layouts/grid"
   end
 
   def home; end
@@ -121,6 +136,12 @@ class PagesController < ApplicationController
     @kit = params[:name]
     @examples = kit_examples
     render "pages/kit_show_demo", layout: "layouts/kits"
+  end
+
+  def kit_show_new
+    @kit = params[:name]
+    @examples = kit_examples
+    render "pages/kit_show_new", layout: "layouts/kits"
   end
 
   def rails_raw

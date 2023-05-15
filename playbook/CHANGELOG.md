@@ -1,5 +1,124 @@
 
 
+## [12.20.0](https://github.com/powerhome/playbook/tree/12.20.0) (2023-05-11)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.19.0...12.20.0)
+
+**Kit Enhancements:**
+
+- Typeahead kit to Typescript [\#2534](https://github.com/powerhome/playbook/pull/2534) ([carloslimasd](https://github.com/carloslimasd))
+- MultiLevelSelect fixes for Expanding Tree + Styling [\#2532](https://github.com/powerhome/playbook/pull/2532) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fixes for SelectableCard Children overflowing Card [\#2548](https://github.com/powerhome/playbook/pull/2548) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Anchor Linking for Playbook Website  [\#2546](https://github.com/powerhome/playbook/pull/2546) ([jasperfurniss](https://github.com/jasperfurniss))
+- Making zIndex Global Prop Responsive [\#2539](https://github.com/powerhome/playbook/pull/2539) ([carloslimasd](https://github.com/carloslimasd))
+- Favicon for Playbook Website [\#2524](https://github.com/powerhome/playbook/pull/2524) ([markdoeswork](https://github.com/markdoeswork))
+
+
+
+## [12.19.0](https://github.com/powerhome/playbook/tree/12.19.0) (2023-05-09)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.18.0...12.19.0)
+
+**Kit Enhancements:**
+
+- Add/Update Tokens for Card Dark [\#2535](https://github.com/powerhome/playbook/pull/2535) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Tooltip Position Prop [\#2529](https://github.com/powerhome/playbook/pull/2529) ([augustomallmann](https://github.com/augustomallmann))
+
+**Fixed Bugs:**
+
+- Fixing Table Kit undefined Mobile Headers [\#2536](https://github.com/powerhome/playbook/pull/2536) ([carloslimasd](https://github.com/carloslimasd))
+
+
+## [12.18.0](https://github.com/powerhome/playbook/tree/12.18.0) (2023-05-03)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.17.1...12.18.0)
+
+**Kit Enhancements:**
+
+- currentPhotoIndex for lightbox Kit [\#2517](https://github.com/powerhome/playbook/pull/2517) ([nidaqg](https://github.com/nidaqg))
+- Converting Toggle Kit to Typescript [\#2510](https://github.com/powerhome/playbook/pull/2510) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Title Detail Kit to Typescript [\#2508](https://github.com/powerhome/playbook/pull/2508) ([carloslimasd](https://github.com/carloslimasd))
+- Converting Time Range Inline Kit to TS [\#2500](https://github.com/powerhome/playbook/pull/2500) ([carloslimasd](https://github.com/carloslimasd))
+- New Tiptap Variant For RichTextEditor [\#2445](https://github.com/powerhome/playbook/pull/2445) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fixing Tooltip Kit Wrong Backgrounds in Rails [\#2435](https://github.com/powerhome/playbook/pull/2435) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Fix React Global Props Table [\#2513](https://github.com/powerhome/playbook/pull/2513) ([markdoeswork](https://github.com/markdoeswork))
+- Remove {...props} from Doc Examples [\#2511](https://github.com/powerhome/playbook/pull/2511) ([markdoeswork](https://github.com/markdoeswork))
+- Update Global Props Documentation in Rails [\#2487](https://github.com/powerhome/playbook/pull/2487) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Global Test for checking className in all Kits [\#2464](https://github.com/powerhome/playbook/pull/2464) ([markdoeswork](https://github.com/markdoeswork))
+- Markdown Repairs & Re-enable Smart Markdown Docs in Playbook [\#2465](https://github.com/powerhome/playbook/pull/2465) ([jasoncypret](https://github.com/jasoncypret))
+
+
+
+
+## [12.17.1](https://github.com/powerhome/playbook/tree/12.17.1) (2023-04-28)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.17.0...12.17.1)
+
+**Fixed Bugs:**
+
+- Revert "Lightbox currentPhotoIndex Prop" [\#2515](https://github.com/powerhome/playbook/pull/2515) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+## [12.17.0](https://github.com/powerhome/playbook/tree/12.17.0) (2023-04-27)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.16.0...12.17.0)
+
+**Kit Enhancements:**
+
+- Updated Disabled Button Cursor to Not-Allowed  [\#2491](https://github.com/powerhome/playbook/pull/2491) ([RexGluck](https://github.com/RexGluck))
+- Converting Timeline Kit to Typescript [\#2486](https://github.com/powerhome/playbook/pull/2486) ([carloslimasd](https://github.com/carloslimasd))
+- Add a Favicon to Playbook Website [\#2473](https://github.com/powerhome/playbook/pull/2473) ([ekanarek](https://github.com/ekanarek))
+- New Lightbox currentPhotoIndex Prop [\#2441](https://github.com/powerhome/playbook/pull/2441) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Appending important! to all Cursor Global Prop SCSS Values [\#2501](https://github.com/powerhome/playbook/pull/2501) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Playbook styling to Style Tags in Body Kit [\#2497](https://github.com/powerhome/playbook/pull/2497) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Optional Vertical Borders to Table Kit [\#2488](https://github.com/powerhome/playbook/pull/2488) ([carloslimasd](https://github.com/carloslimasd))
+- Improve Global Props Documentation in Rails [\#2481](https://github.com/powerhome/playbook/pull/2481) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Restructure Visual Guidelines Page [\#2476](https://github.com/powerhome/playbook/pull/2476) ([nidaqg](https://github.com/nidaqg))
+- Rebuild Getting Started [\#2475](https://github.com/powerhome/playbook/pull/2475) ([augustomallmann](https://github.com/augustomallmann))
+- Copy Kits in HTML Button to all Rails Doc Examples [\#2470](https://github.com/powerhome/playbook/pull/2470) ([nickamantia](https://github.com/nickamantia))
+- Update Code Snippets in all Doc Examples [\#2467](https://github.com/powerhome/playbook/pull/2467) ([markdoeswork](https://github.com/markdoeswork))
+- Update Dependency faker to v3.2.0 [\#2478](https://github.com/powerhome/playbook/pull/2478) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+
+## [12.16.0](https://github.com/powerhome/playbook/tree/12.16.0) (2023-04-19)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.15.0...12.16.0)
+
+**Kit Enhancements:**
+
+- New Success sm Token [\#2458](https://github.com/powerhome/playbook/pull/2458) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Converting Table Kit to Typescript [\#2457](https://github.com/powerhome/playbook/pull/2457) ([carloslimasd](https://github.com/carloslimasd))
+- Add Table Tags to Background Kit [\#2453](https://github.com/powerhome/playbook/pull/2453) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Convert Textarea Kit to Typescript [\#2444](https://github.com/powerhome/playbook/pull/2444) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fix for Icon Stat Value Kit Misalignment [\#2463](https://github.com/powerhome/playbook/pull/2463) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Fixing Phone Number Input Kit Width and Method Errors [\#2462](https://github.com/powerhome/playbook/pull/2462) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Rails / React Playground and React Render Rails Examples [\#2460](https://github.com/powerhome/playbook/pull/2460) ([jasoncypret](https://github.com/jasoncypret))
+- Testing Adding Proxima Nova to Sandpack [\#2456](https://github.com/powerhome/playbook/pull/2456) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
 ## [12.15.0](https://github.com/powerhome/playbook/tree/12.15.0) (2023-04-12)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.14.0...12.15.0)
@@ -3450,6 +3569,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
 
 
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

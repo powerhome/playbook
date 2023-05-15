@@ -3,9 +3,9 @@ examples:
   - body_light: Default
   - body_block: Block
   - body_articles: Best settings for articles
-  - body_styled: Styled b/strong/a tags
+  - body_styled: Styled tags
   react:
   - body_light: Default
   - body_block: Block
   - body_articles: Best settings for articles
-  - body_styled: Styled b/strong/a tags
+  - body_styled: Styled tags

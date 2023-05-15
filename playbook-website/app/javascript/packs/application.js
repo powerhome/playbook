@@ -8,8 +8,13 @@ import 'playbook-ui/dist/playbook-rails'
 import 'playbook-ui/dist/playbook-doc' // playbook-react doc components
 import '@fortawesome/fontawesome-pro/js/fontawesome.min.js'
 import '@fortawesome/fontawesome-pro/js/regular.min.js'
+import '@fortawesome/fontawesome-pro/js/brands.min.js'
 
 import '../site_styles/main.scss'
+
+// CopyContent
+import copyContent from '../components/copyCode'
+window.copyContent = copyContent
 
 import DarkModeToggle from '../components/DarkModeToggle'
 import KitSearch from '../components/KitSearch'
@@ -19,6 +24,18 @@ import KitDocs from '../components/KitDocs'
 import PbKitReact from '../components/PbKitReact'
 import PbKitFetch from '../components/PbKitFetch'
 import PbKitPlayground from '../components/PbKitPlayground'
+import AvailableProps from '../components/AvailableProps'
+import AnchorJS from 'anchor-js'
+
+document.addEventListener('DOMContentLoaded', () => {
+  const anchors = new AnchorJS()
+  anchors.add('.pb--kit-example > .pb_caption_kit_md:first-child')
+  const propsTableAnchors = new AnchorJS()
+  propsTableAnchors.options = {
+    class: 'props-table-anchor',
+  }
+  propsTableAnchors.add('.pb--propsTable > .pb_title_kit_3')
+})
 
 WebpackerReact.setup({
   DarkModeToggle,
@@ -29,6 +46,7 @@ WebpackerReact.setup({
   PbKitReact,
   PbKitFetch,
   PbKitPlayground,
+  AvailableProps,
 })
 
 // Produce image assets

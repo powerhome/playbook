@@ -50,8 +50,6 @@ const Example = ({
       {title && (
         <Title
             marginBottom="xs"
-            marginTop="xl"
-            paddingTop="xl"
             size={1}
             tag="h1"
             text={title}

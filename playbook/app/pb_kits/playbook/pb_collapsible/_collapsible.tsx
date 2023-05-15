@@ -59,8 +59,8 @@ const Collapsible = ({
   const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_collapsible_kit'),
-    className,
-    globalProps(props, { padding })
+    globalProps(props, { padding }),
+    className
   )
 
   return (

@@ -63,12 +63,12 @@ $bg_dark_card:        #231E3D !default;
 $background_colors: (
   bg_light:           $bg_light,
   bg_dark:            $bg_dark,
-  bg_dark_card:       $bg_dark_card 
+  bg_dark_card:       $bg_dark_card
 );
 
 /* Card colors ------------------*/
 $card_light:          $white !default;
-$card_dark:           rgba($white, $opacity_1) !default;
+$card_dark:           mix(white, $bg_dark, 10%)  !default;
 $card_colors: (
   card_light:         $card_light,
   card_dark:          $card_dark
@@ -109,25 +109,29 @@ $focus_input_colors: (
 
 /* Border colors ----------------------*/
 $border_light:        #E4E8F0 !default;
-$border_dark:         rgba($white, $opacity_1) !default;
+$border_dark:         mix(white, $bg_dark, 20%) !default;
 $border_colors: (
   border_light:       $border_light,
   border_dark:        $border_dark
 );
 
 /* Shadow colors ----------------------*/
-$shadow:        rgba(#3C6AAC, $opacity_2) !default;
+$shadow:             rgba(#3C6AAC, $opacity_2) !default;
+$shadow_dark:        $bg_dark !default;
 $shadow_colors: (
   shadow:       $shadow,
+  shadow_dark:       $shadow_dark,
 );
 
 /* Text colors ------------------------*/
 $text_lt_default:     $charcoal !default;
 $text_lt_light:       #687887 !default;
 $text_lt_lighter:     $slate !default;
+$text_lt_success_sm:  #157F48 !default;
 $text_dk_default:     $white !default;
 $text_dk_light:       rgba($white, $opacity_6) !default;
 $text_dk_lighter:     rgba($white, $opacity_4) !default;
+$text_dk_success_sm:  #00CA74 !default;
 $text_colors: (
   text_lt_default:    $text_lt_default,
   text_lt_light:      $text_lt_light,
@@ -181,6 +185,7 @@ $primary_secondary:   lighten($primary, 10%) !default;
 $status_colors: (
   success:            $success,
   success_secondary:    $success_secondary,
+  success_sm:         $text_lt_success_sm,
   success_subtle:     $success_subtle,
   warning:            $warning,
   warning_secondary:    $warning_secondary,
@@ -202,6 +207,18 @@ $status_colors: (
 
 $status_color_text: (
   success:            $success,
+  success_sm:         $text_lt_success_sm,
+  warning:            darken($warning, 10%),
+  error:              $error,
+  info:               $info,
+  neutral:            darken($neutral, 15%),
+  primary:            $primary
+);
+
+// as we add more dark text colors we can update this variable
+$status_color_text_dark: (
+  success:            $success,
+  success_sm:         $text_dk_success_sm,
   warning:            darken($warning, 10%),
   error:              $error,
   info:               $info,

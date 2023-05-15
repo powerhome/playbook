@@ -65,3 +65,32 @@ test("closes on mouseleave", async () => {
 
   cleanup();
 });
+
+test("has default position absolute", async () => {
+  render(<TooltipTest />);
+
+  fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
+  await waitFor(() => {
+    expect(screen.queryByRole("tooltip")).toHaveStyle({"position": "absolute"});
+    cleanup();
+  })
+
+  cleanup();
+});
+
+test("has position fixed", async () => {
+  render(
+    <Tooltip
+        data={{ testid: "fixed-position-test" }}
+        position="fixed"
+    />
+  );
+
+  fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
+  await waitFor(() => {
+    expect(screen.queryByRole("tooltip")).toHaveStyle({"position": "fixed"});
+    cleanup();
+  })
+
+  cleanup();
+});

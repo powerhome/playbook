@@ -18,7 +18,7 @@ type UserProps = {
   data?: {[key: string]: string},
   id?: string,
   name?: string,
-  orientation?: "horiztonal" | "vertical",
+  orientation?: "horizontal" | "vertical",
   size?: "sm" | "md" | "lg",
   subtitle?: string | Array<Node> | Node,
   territory?: string,
@@ -49,7 +49,7 @@ const User = (props: UserProps) => {
   const classes = classnames(
     buildCss('pb_user_kit', align, orientation, size),
     globalProps(props),
-    className,
+    className
   )
 
   const avatarPresent = avatar || avatarUrl
