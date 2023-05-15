@@ -1,4 +1,5 @@
 @import "playbook-ui/dist/tokens/spacing";
+@import "playbook-ui/dist/tokens/typography";
 
 .changelog-card-collection {
   max-width: 650px;
@@ -8,5 +9,10 @@
     &:first-child {
       margin-top: 0;
     }
+  }
+  .markdown-header-anchor-icon {
+    font-size: $font_base;
+    position: relative;
+    bottom: $space_xxs / 2;
   }
 }

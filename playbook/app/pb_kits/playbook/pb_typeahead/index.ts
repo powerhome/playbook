@@ -2,18 +2,26 @@ import PbEnhancedElement from '../pb_enhanced_element'
 import { debounce } from 'lodash'
 
 export default class PbTypeahead extends PbEnhancedElement {
+  _searchInput: HTMLInputElement
+  _resultsElement: HTMLElement
+  _debouncedSearch: Function
+  _resultsLoadingIndicator: HTMLElement
+  _resultOptionTemplate: HTMLElement
+  _resultsOptionCache: Map<string, Array<DocumentFragment>>
+  _searchContext: string
+
   static get selector() {
     return '[data-pb-typeahead-kit]'
   }
 
   connect() {
-    this.element.addEventListener('keydown', (event) => this.handleKeydown(event))
+    this.element.addEventListener('keydown', (event: KeyboardEvent) => this.handleKeydown(event))
     this.searchInput.addEventListener('focus', () => this.debouncedSearch())
     this.searchInput.addEventListener('input', () => this.debouncedSearch())
-    this.resultsElement.addEventListener('click', (event) => this.optionSelected(event))
+    this.resultsElement.addEventListener('click', (event: MouseEvent) => this.optionSelected(event))
   }
 
-  handleKeydown(event) {
+  handleKeydown(event: KeyboardEvent) {
     if (event.key === 'ArrowUp') {
       event.preventDefault()
       this.focusPreviousOption()
@@ -24,7 +32,7 @@ export default class PbTypeahead extends PbEnhancedElement {
   }
 
   search() {
-    if (this.searchTerm.length < this.searchTermMinimumLength) return this.clearResults()
+    if (this.searchTerm.length < parseInt(this.searchTermMinimumLength)) return this.clearResults()
 
     this.toggleResultsLoadingIndicator(true)
     this.showResults()
@@ -34,17 +42,17 @@ export default class PbTypeahead extends PbEnhancedElement {
     const search = {
       searchingFor: searchTerm,
       searchingContext: searchContext,
-      setResults: (results) => {
+      setResults: (results: Array<DocumentFragment>) => {
         this.resultsCacheUpdate(searchTerm, searchContext, results)
       },
     }
     this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-search', { bubbles: true, detail: search }))
   }
 
-  resultsCacheUpdate(searchTerm, searchContext, results) {
+  resultsCacheUpdate(searchTerm: string, searchContext: string, results: Array<DocumentFragment>) {
     const searchTermAndContext = this.cacheKeyFor(searchTerm, searchContext)
     if (this.resultsOptionCache.has(searchTermAndContext)) this.resultsOptionCache.delete(searchTermAndContext)
-    if (this.resultsOptionCache.size > 32) this.resultsOptionCache.delete(this.resultsOptionCache.keys[0])
+    if (this.resultsOptionCache.size > 32) this.resultsOptionCache.delete(this.resultsOptionCache.keys().next().value)
 
     this.resultsOptionCache.set(searchTermAndContext, results)
     this.showResults()
@@ -57,7 +65,7 @@ export default class PbTypeahead extends PbEnhancedElement {
   get debouncedSearch() {
     return this._debouncedSearch = (
       this._debouncedSearch ||
-        debounce(this.search, this.searchDebounceTimeout).bind(this)
+      debounce(this.search, parseInt(this.searchDebounceTimeout)).bind(this)
     )
   }
 
@@ -70,12 +78,12 @@ export default class PbTypeahead extends PbEnhancedElement {
       this.resultsElement.appendChild(this.newResultOption(result.cloneNode(true)))
     }
     for (const result of this.resultsElement.querySelectorAll('[data-result-option-item]')) {
-      result.addEventListener('mousedown', (event) => this.optionSelected(event))
+      result.addEventListener('mousedown', (event: MouseEvent) => this.optionSelected(event))
     }
   }
 
-  optionSelected(event) {
-    const resultOption = event.target.closest('[data-result-option-item]')
+  optionSelected(event: MouseEvent) {
+    const resultOption = (event.target as Element).closest('[data-result-option-item]')
     if (!resultOption) return
 
     this.resultsCacheClear()
@@ -89,8 +97,8 @@ export default class PbTypeahead extends PbEnhancedElement {
     this.resultsElement.innerHTML = ''
   }
 
-  newResultOption(content) {
-    const resultOption = this.resultOptionTemplate.content.cloneNode(true)
+  newResultOption(content: DocumentFragment) {
+    const resultOption = (this.resultOptionTemplate as HTMLTemplateElement).content.cloneNode(true) as Element
     resultOption.querySelector('slot[name="content"]').replaceWith(content)
     return resultOption
   }
@@ -100,9 +108,9 @@ export default class PbTypeahead extends PbEnhancedElement {
     const previousIndex = currentIndex - 1
     const previousOptionItem = (
       this.resultOptionItems[previousIndex] ||
-        this.resultOptionItems[this.resultOptionItems.length - 1]
-    )
-    previousOptionItem.focus()
+      this.resultOptionItems[this.resultOptionItems.length - 1]
+    );
+    (previousOptionItem as HTMLElement).focus()
   }
 
   focusNextOption() {
@@ -110,9 +118,9 @@ export default class PbTypeahead extends PbEnhancedElement {
     const nextIndex = currentIndex + 1
     const nextOptionItem = (
       this.resultOptionItems[nextIndex] ||
-        this.resultOptionItems[0]
-    )
-    nextOptionItem.focus()
+      this.resultOptionItems[0]
+    );
+    (nextOptionItem as HTMLElement).focus()
   }
 
   get resultOptionItems() {
@@ -134,11 +142,11 @@ export default class PbTypeahead extends PbEnhancedElement {
   get searchContext() {
     if (this._searchContext) return this._searchContext
 
-    const selector = this.element.dataset.searchContextValueSelector
-    if (selector) return (
+    const selector = (this.element as HTMLElement).dataset.searchContextValueSelector
+    if (selector) return ((
       this.element.parentNode.querySelector(selector) ||
-        this.element.closest(selector)
-    ).value
+      this.element.closest(selector)
+    ) as HTMLInputElement).value
 
     return null
   }
@@ -151,7 +159,7 @@ export default class PbTypeahead extends PbEnhancedElement {
     return this.cacheKeyFor(this.searchTerm, this.searchContext)
   }
 
-  cacheKeyFor(searchTerm, searchContext) {
+  cacheKeyFor(searchTerm: string, searchContext: string) {
     return [searchTerm, JSON.stringify(searchContext)].join()
   }
 
@@ -160,11 +168,11 @@ export default class PbTypeahead extends PbEnhancedElement {
   }
 
   get searchTermMinimumLength() {
-    return this.element.dataset.pbTypeaheadKitSearchTermMinimumLength
+    return (this.element as HTMLElement).dataset.pbTypeaheadKitSearchTermMinimumLength
   }
 
   get searchDebounceTimeout() {
-    return this.element.dataset.pbTypeaheadKitSearchDebounceTimeout
+    return (this.element as HTMLElement).dataset.pbTypeaheadKitSearchDebounceTimeout
   }
 
   get resultsElement() {
@@ -192,9 +200,9 @@ export default class PbTypeahead extends PbEnhancedElement {
     )
   }
 
-  toggleResultsLoadingIndicator(visible) {
-    var visibilityProperty = 0
-    if (visible) visibilityProperty = 1
+  toggleResultsLoadingIndicator(visible: boolean) {
+    var visibilityProperty = '0'
+    if (visible) visibilityProperty = '1'
     this.resultsLoadingIndicator.style.opacity = visibilityProperty
   }
 }

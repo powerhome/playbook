@@ -113,9 +113,11 @@ type Shadow = {
 
 type Space = "spaceBetween" | "spaceAround" | "spaceEvenly"
 
+type ZIndexType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+type ZIndexResponsiveType = {[key: string]: ZIndexType}
 type ZIndex = {
-  zIndex?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
-}
+  zIndex?: ZIndexType,
+} | ZIndexResponsiveType
 
 // keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
@@ -178,9 +180,19 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += maxWidth ? `max_width_${maxWidth } ` : ''
     return css
   },
-  zIndexProps: ({ zIndex }: ZIndex) => {
+  zIndexProps: (zIndex: ZIndex) => {
     let css = ''
-    css += zIndex ? `z_index_${zIndex } ` : ''
+    Object.entries(zIndex).forEach((zIndexEntry) => {
+      if (zIndexEntry[0] == "zIndex") {
+        if (typeof zIndexEntry[1] == "number") {
+          css += `z_index_${zIndexEntry[1]} `
+        } else if (typeof zIndexEntry[1] == "object") {
+          Object.entries(zIndexEntry[1]).forEach((zIndexObj) => {
+            css += `z_index_${zIndexObj[0]}_${zIndexObj[1]} `
+          })
+        }
+      }
+    })
     return css
   },
   shadowProps: ({ shadow }: Shadow) => {

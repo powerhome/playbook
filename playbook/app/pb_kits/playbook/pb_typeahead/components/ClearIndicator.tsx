@@ -1,5 +1,3 @@
-/* @flow */
-
 import React, { useEffect } from 'react'
 import { components } from 'react-select'
 
@@ -11,8 +9,8 @@ const ClearContainer = (props: any) => {
 
   return (
     <components.ClearIndicator
-        className="clear_indicator"
-        {...props}
+      className="clear_indicator"
+      {...props}
     />
   )
 }

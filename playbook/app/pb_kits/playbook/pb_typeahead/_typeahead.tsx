@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
@@ -19,6 +17,7 @@ import Placeholder from './components/Placeholder'
 import ValueContainer from './components/ValueContainer'
 
 import { noop, buildDataProps } from '../utilities/props'
+import { Noop } from '../types'
 
 /**
  * @typedef {object} Props
@@ -33,14 +32,26 @@ type TypeaheadProps = {
   components?: object,
   createable?: boolean,
   dark?: boolean,
-  data?: object,
+  data?: { [key: string]: string },
   error?: string,
   id?: string,
   label?: string,
-  loadOptions?: string,
+  loadOptions?: string | Noop,
   getOptionLabel?: string | (() => any),
   getOptionValue?: string | (() => any),
   name?: string,
+}
+
+export type SelectValueType = {
+  label: string,
+  value: string,
+  imageUrl?: string,
+}
+
+type TagOnChangeValues = {
+  action?: string,
+  option?: SelectValueType,
+  removedValue?: string,
 }
 
 /**
@@ -67,7 +78,7 @@ const Typeahead = ({
       Control,
       ClearIndicator,
       IndicatorsContainer,
-      IndicatorSeparator: null,
+      IndicatorSeparator: null as null,
       MenuList,
       MultiValue,
       Option,
@@ -85,8 +96,9 @@ const Typeahead = ({
     isSearchable: true,
     name,
     multiKit: '',
-    onCreateOption: null,
+    onCreateOption: null as null,
     plusIcon: false,
+    onMultiValueClick: (_option: SelectValueType) => { },
     ...props,
   }
 
@@ -96,7 +108,7 @@ const Typeahead = ({
       : (async ? AsyncSelect : Select)
   )
 
-  const handleOnChange = (_data, { action, option, removedValue }) => {
+  const handleOnChange = (_data: SelectValueType, { action, option, removedValue }: TagOnChangeValues) => {
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
       const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option ? option : _data })
@@ -123,13 +135,13 @@ const Typeahead = ({
 
   return (
     <div {...dataProps}
-        className={classnames(classes, inlineClass)}
+      className={classnames(classes, inlineClass)}
     >
       <Tag
-          classNamePrefix="typeahead-kit-select"
-          error={error}
-          onChange={handleOnChange}
-          {...selectProps}
+        classNamePrefix="typeahead-kit-select"
+        error={error}
+        onChange={handleOnChange}
+        {...selectProps}
       />
     </div>
   )
