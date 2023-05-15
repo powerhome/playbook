@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
-import { findItemById, checkIt, unCheckIt } from "./helper_functions";
+import { findItemById, checkIt, unCheckIt, getParentAndAncestorsIds } from "./helper_functions";
 import MultiSelectHelper from "./_multi_select_helper";
 
 type MultiLevelSelectProps = {
@@ -42,17 +42,31 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const updatedData = formattedData.map((item: any) => {
       if (item.id === currentNode._id) {
         if (currentNode.checked) {
-          checkIt(item, selectedItems, setSelectedItems);
+          checkIt(item, selectedItems, setSelectedItems, false);
         } else {
-          unCheckIt(item, selectedItems, setSelectedItems);
+          unCheckIt(item, selectedItems, setSelectedItems, false);
         }
       } else if (item.children) {
         const foundItem = findItemById(item.children, currentNode._id);
         if (foundItem) {
           if (currentNode.checked) {
-            checkIt(foundItem, selectedItems, setSelectedItems);
+            checkIt(foundItem, selectedItems, setSelectedItems, false);
+            if (currentNode._parent) {
+              const parents = getParentAndAncestorsIds(currentNode._parent, formattedData)
+              parents.forEach((item:string) => {
+               const ancestor = findItemById(formattedData,item)
+               ancestor.expanded = true
+              });
+             }
           } else {
-            unCheckIt(foundItem, selectedItems, setSelectedItems);
+            unCheckIt(foundItem, selectedItems, setSelectedItems, false);
+            if (currentNode._parent) {
+             const parents = getParentAndAncestorsIds(currentNode._parent, formattedData)
+             parents.forEach((item:string) => {
+              const ancestor = findItemById(formattedData,item)
+              ancestor.expanded = true
+             });
+            }
           }
         }
       }
@@ -92,17 +106,18 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         treeData={formattedData}
         onChange={(
           // @ts-ignore
-          selectedNodes: { [key: string]: any }[], 
+          selectedNodes: { [key: string]: any }[],
           currentNode: { [key: string]: any }[]
         ) => {
           setCheckedData(currentNode);
           onSelect(currentNode);
+
         }}
         id={id}
         {...props}
       />
     );
-  }, [formattedData]);
+  }, [formattedData])
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>

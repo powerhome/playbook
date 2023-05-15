@@ -1,5 +1,8 @@
 <title> <%= @page_title || "Playbook Design System" %> </title>
-<%= favicon_link_tag "pb-favicon.png", type: "image/png" %>
+<link rel="icon" href="/images/pb-favicon.ico" sizes="any"><!-- 32×32 -->
+<link rel="icon" href="/images/pb-favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/images/pb-favicon-180.png"><!-- 180×180 -->
+<link rel="manifest" href="/site.webmanifest">
 <%= csrf_meta_tags%>
 <%= csp_meta_tag%>
 <%= stylesheet_packs_with_chunks_tag 'application' %>
