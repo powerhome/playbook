@@ -25,9 +25,9 @@ Gem::Specification.new do |s|
     "dist/playbook-rails.js"
   ] + ["Rakefile"]
 
-  s.files += Dir.glob("app/pb_kits/playbook/pb_*/**/*").reject { |file|
-    (file == 'docs') || (file.include? "docs")
-  }
+  s.files += Dir.glob("app/pb_kits/playbook/pb_*/**/*").reject do |file|
+    (file == "docs") || (file.include? "docs")
+  end
 
   s.add_dependency "actionpack", ">= 5.2.4.5"
   s.add_dependency "actionview", ">= 5.2.4.5"
