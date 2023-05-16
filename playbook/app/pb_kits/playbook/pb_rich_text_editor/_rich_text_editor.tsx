@@ -35,7 +35,8 @@ type RichTextEditorProps = {
   data?: { [key: string]: string },
   focus?: boolean,
   id?: string,
-  inline?: boolean,
+  inline?: boolean, 
+  moreExtensions?: { [key: string]: string }[],
   name?: string,
   onChange: (html: string, text: string) => void,
   placeholder?: string,
@@ -56,6 +57,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     data = {},
     focus = false,
     inline = false,
+    moreExtensions,
     name,
     onChange = noop,
     placeholder,
@@ -162,7 +164,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
       {
         advancedEditor ? (
           <div className='pb_rich_text_editor_advanced_container'>
-          <EditorToolbar editor={advancedEditor}/>
+          <EditorToolbar moreExtensions={moreExtensions} editor={advancedEditor}/>
           { children }
           </div>
         ) : (
