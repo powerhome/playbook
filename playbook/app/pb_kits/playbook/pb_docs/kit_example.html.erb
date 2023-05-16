@@ -46,25 +46,29 @@
 
 <script>
   var htmlButton = document.getElementById('<%= "copy-html-#{example_key}" %>')
-  htmlButton.addEventListener('click', function() {
-    var tempElement = document.createElement('div')
-    tempElement.innerHTML = `<%= example_html %>`
-    var decodedString = tempElement.textContent || tempElement.innerText;
-    copyContent(decodedString)
-  })
+  if (htmlButton) {
+    htmlButton.addEventListener('click', function() {
+      var tempElement = document.createElement('div')
+      tempElement.innerHTML = `<%= example_html %>`
+      var decodedString = tempElement.textContent || tempElement.innerText;
+      copyContent(decodedString)
+    })
+  }
 
   var button = document.getElementById('<%= "copy-button-#{example_key}" %>')
-  button.addEventListener('click', function() {
-    var tempElement = document.createElement('div')
-    tempElement.innerHTML = `<%= source %>`
-    var decodedString = tempElement.textContent || tempElement.innerText;
-    copyContent(decodedString)
-    var fadeAwayDiv = document.getElementById("<%= "tooltip-#{example_key}" %>")
-    setTimeout(function() {
-      fadeAwayDiv.classList.remove('show')
-    }, 3000)
-    setTimeout(function() {
-      fadeAwayDiv.classList.add('hide')
-    }, 3001)
-  })
+  if (button) {
+    button.addEventListener('click', function() {
+      var tempElement = document.createElement('div')
+      tempElement.innerHTML = `<%= source %>`
+      var decodedString = tempElement.textContent || tempElement.innerText;
+      copyContent(decodedString)
+      var fadeAwayDiv = document.getElementById("<%= "tooltip-#{example_key}" %>")
+      setTimeout(function() {
+        fadeAwayDiv.classList.remove('show')
+      }, 3000)
+      setTimeout(function() {
+        fadeAwayDiv.classList.add('hide')
+      }, 3001)
+    })
+  }
 </script>
