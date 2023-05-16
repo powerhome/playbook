@@ -14,7 +14,7 @@ examples:
   react:
   - rich_text_editor_default: Default
   - rich_text_editor_advanced_default: Advanced Default
-  - rich_text_editor_more_extensions: Advanced (Extra Extensions)
+  - rich_text_editor_more_extensions: Advanced (More Extensions)
   - rich_text_editor_simple: Simple
   - rich_text_editor_attributes: Attributes
   - rich_text_editor_focus: Focus
