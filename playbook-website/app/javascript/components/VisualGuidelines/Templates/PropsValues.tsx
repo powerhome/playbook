@@ -46,7 +46,7 @@ const PropsValues = (props: Props): React.ReactElement => {
                 <Card.Body>
                   <Caption
                       marginBottom="sm"
-                      text="Screen EXAMPLE IN USE"
+                      text="Screen Size"
                   />
                   {Object.values(props.screenSizes)[0].map((propValue) => (
                     <Pill
