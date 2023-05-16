@@ -53,6 +53,10 @@ module Playbook
       %w[none xxs xs sm md lg xl auto initial inherit]
     end
 
+    def screen_size_values
+      %w[xs sm md lg xl]
+    end
+
     def spacing_props
       selected_props = spacing_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?

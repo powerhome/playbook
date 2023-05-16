@@ -45,16 +45,25 @@ $positions: (
 	}
 }
 
-// @each $size, $size_value in $breakpoints_grid {
-//   @each $position_name, $position in $positions {
-//     @each $space_name, $space in $space_classes {
-//         $min_size: map-get($size_value, "min");
-//         $max_size: map-get($size_value, "max");
-//         .#{$position_name}_#{$size}_#{$space_name} {
-//           @include break_on($min_size, $max_size) {
-//             #{$position}: #{$space} !important;
-//           }
-//         }
-//     }
-//   }
-// }
+@each $size, $size_value in $breakpoints_grid {
+  @each $position_name, $position in $positions {
+    @each $space_name, $space in $space_classes {
+        $min_size: map-get($size_value, "min");
+        $max_size: map-get($size_value, "max");
+        .#{$position_name}_#{$size}_#{$space_name} {
+          @if type-of($position)=="list" {
+            @each $coordinate in $position {
+              @include break_on($min_size, $max_size) {
+              #{$coordinate}: #{$space} !important;
+              }
+            }
+          }
+          @else {
+            @include break_on($min_size, $max_size) {
+              #{$position}: #{$space} !important;
+            }
+          }
+        }
+    }
+  }
+}
