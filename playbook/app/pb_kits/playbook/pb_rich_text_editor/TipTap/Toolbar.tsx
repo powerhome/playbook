@@ -11,7 +11,7 @@ import { ToolbarTypes } from "./EditorTypes";
 import ToolbarHistoryItems from "./ToolbarHistory";
 import MoreExtensionsDropdown from "./MoreExtensionsDropdown";
 
-const EditorToolbar = ({ editor, moreExtensions }:any) => {
+const EditorToolbar = ({ editor, extensions }:any) => {
   const toolbaritems = [
     {
         icon: "bold",
@@ -53,9 +53,9 @@ const EditorToolbar = ({ editor, moreExtensions }:any) => {
             <SectionSeparator orientation="vertical" />
             <ToolbarNodes editor={editor} />
             {
-          moreExtensions && (
+          extensions && (
             <>
-            <MoreExtensionsDropdown moreExtensions={moreExtensions}/>
+            <MoreExtensionsDropdown extensions={extensions}/>
             </>
           )
         }

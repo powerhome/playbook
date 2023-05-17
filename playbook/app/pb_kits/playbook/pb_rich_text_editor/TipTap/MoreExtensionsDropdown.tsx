@@ -6,7 +6,7 @@ import Icon from '../../pb_icon/_icon'
 import Nav from '../../pb_nav/_nav'
 import NavItem from '../../pb_nav/_item'
 
-const MoreExtensionsDropdown = ({moreExtensions}: any) => {
+const MoreExtensionsDropdown = ({extensions}: any) => {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleTogglePopover = () => {
@@ -48,7 +48,7 @@ const popoverReference = (
           paddingBottom="xs" 
           variant="subtle"
         >
-          {moreExtensions && moreExtensions.map(({ icon, text, onclick}:any, index:number) => ( 
+          {extensions && extensions.map(({ icon, text, onclick}:any, index:number) => ( 
             <NavItem
               cursor="pointer"
               className="pb_tiptap_toolbar_dropdown_list_item"

@@ -35,7 +35,7 @@ const RichTextEditorMoreExtensions = (props) => {
     <div>
       <RichTextEditor
           advancedEditor={editor}
-          moreExtensions={ExtensionsList}
+          extensions={ExtensionsList}
           {...props}
       >
         <EditorContent editor={editor}/>
