@@ -44,8 +44,8 @@ const popoverReference = (
           show={showPopover}
       >
         <Nav 
-          paddingTop="xs"
-          paddingBottom="xs" 
+          paddingTop={extensions.length > 1 ? "xs" : "none"}
+          paddingBottom={extensions.length > 1 ? "xs" : "none"} 
           variant="subtle"
         >
           {extensions && extensions.map(({ icon, text, onclick, isActive}:any, index:number) => ( 
