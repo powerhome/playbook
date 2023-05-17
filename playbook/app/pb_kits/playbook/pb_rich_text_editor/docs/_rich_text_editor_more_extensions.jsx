@@ -25,7 +25,7 @@ const RichTextEditorMoreExtensions = (props) => {
     {
         icon: "horizontal-rule",
         isActive: editor.isActive("horizontalRule"),
-        text: "Insert Horizontal Rule",
+        text: "Horizontal Rule",
         onclick: () => editor.chain().focus().setHorizontalRule().run(),
     }
   ]
