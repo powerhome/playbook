@@ -48,10 +48,10 @@ const popoverReference = (
           paddingBottom="xs" 
           variant="subtle"
         >
-          {extensions && extensions.map(({ icon, text, onclick}:any, index:number) => ( 
+          {extensions && extensions.map(({ icon, text, onclick, isActive}:any, index:number) => ( 
             <NavItem
               cursor="pointer"
-              className="pb_tiptap_toolbar_dropdown_list_item"
+              className={`pb_tiptap_toolbar_dropdown_list_item ${isActive ? "is-active" : ""}`}
               iconLeft={icon}
                key={`${text}_${index}`}
               margin='none'
