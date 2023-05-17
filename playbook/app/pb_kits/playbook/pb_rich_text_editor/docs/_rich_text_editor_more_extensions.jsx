@@ -5,6 +5,7 @@ import StarterKit from "@tiptap/starter-kit"
 import Link from '@tiptap/extension-link'
 
 import HorizontalRule from "@tiptap/extension-horizontal-rule"
+import Highlight from '@tiptap/extension-highlight'
 
 
 const RichTextEditorMoreExtensions = (props) => {
@@ -13,7 +14,8 @@ const RichTextEditorMoreExtensions = (props) => {
         extensions: [
             StarterKit,
             Link,
-            HorizontalRule
+            HorizontalRule,
+            Highlight.configure({ multicolor: true })
         ],
         content:"Add your text here. You can format your text, add links, quotes, and bullets."
     })
@@ -27,6 +29,12 @@ const RichTextEditorMoreExtensions = (props) => {
         isActive: editor.isActive("horizontalRule"),
         text: "Horizontal Rule",
         onclick: () => editor.chain().focus().setHorizontalRule().run(),
+    },
+    {
+      icon: "highlighter",
+      isActive: editor.isActive("highlight"),
+      text: "Highlighter",
+      onclick: () => editor.chain().focus().toggleHighlight().run(),
     }
   ]
 

@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome-pro": "^6.2.1",
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@rails/webpacker": "5.2.1",
+    "@tiptap/extension-highlight": "^2.0.3",
     "@tiptap/extension-horizontal-rule": "^2.0.3",
     "@tiptap/extension-link": "^2.0.2",
     "@tiptap/pm": "^2.0.2",
