@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "pry"
+
 module Playbook
   module PbAvatar
     class Avatar < Playbook::KitBase
