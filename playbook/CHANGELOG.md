@@ -1,5 +1,20 @@
 
 
+## [12.22.0](https://github.com/powerhome/playbook/tree/12.22.0) (2023-05-18)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.21.0...12.22.0)
+
+**Kit Enhancements:**
+
+- Convert WeekdayStacked to TS + Jest Tests [\#2571](https://github.com/powerhome/playbook/pull/2571) ([nidaqg](https://github.com/nidaqg))
+- Created 'extensions' Prop For advanced RTE [\#2560](https://github.com/powerhome/playbook/pull/2560) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Fix Renovate Failures [\#2569](https://github.com/powerhome/playbook/pull/2569) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+
 ## [12.21.0](https://github.com/powerhome/playbook/tree/12.21.0) (2023-05-16)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.20.0...12.21.0)
