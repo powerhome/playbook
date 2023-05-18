@@ -61,12 +61,12 @@ module Playbook
       selected_props = spacing_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 
-      responsive = selected_props.present? && try(selected_props.first).is_a?(::Hash)
+      responsive = selected_props.present? && try(:spacing).is_a?(::Hash)
       css = ""
       if responsive
-        spacing_value = send(selected_props.first)
+        spacing_value = send(:spacing)
         spacing_value.each do |key, value|
-          css += "#{key}_#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
+          css += "spacing_#{key}_#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
         end
       else
         selected_props.each do |k|
