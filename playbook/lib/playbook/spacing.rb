@@ -61,21 +61,21 @@ module Playbook
       selected_props = spacing_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 
-      responsive = selected_props.present? && try(:spacing).is_a?(::Hash)
+      responsive = selected_props.present? && try(selected_props.first).is_a?(::Hash)
       css = ""
-      if responsive
-        spacing_value = send(:spacing)
-        spacing_value.each do |key, value|
-          css += "spacing_#{key}_#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
-        end
-      else
-        selected_props.each do |k|
-          spacing_value = send(k)
-          css += "#{spacing_options[k]}_#{spacing_value}" if spacing_values.include? spacing_value
+      selected_props.each do |prop|
+        spacing_value = send(prop)
+        prefix = spacing_options[prop]
+        if responsive
+          spacing_value.each do |key, value|
+            css += "#{prefix}_#{key}_#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
+          end
+        elsif spacing_values.include?(spacing_value)
+          css += "#{prefix}_#{spacing_value} "
         end
       end
 
-      css unless css.blank?
+      css.strip unless css.blank?
     end
 
     def max_width_props
