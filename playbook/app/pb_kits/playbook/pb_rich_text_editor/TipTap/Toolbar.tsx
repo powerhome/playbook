@@ -53,13 +53,12 @@ const EditorToolbar = ({ editor, extensions }:any) => {
             <SectionSeparator orientation="vertical" />
             <ToolbarNodes editor={editor} />
             {
-          extensions && (
-            <>
-            <MoreExtensionsDropdown extensions={extensions}/>
-            </>
-          )
-        }
-
+              extensions && (
+                <>
+                  <MoreExtensionsDropdown extensions={extensions}/>
+                </>
+              )
+            }
         </FlexItem>
         <ToolbarHistoryItems editor={editor} />
       </Flex>

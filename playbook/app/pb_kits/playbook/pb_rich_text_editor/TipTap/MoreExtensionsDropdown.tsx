@@ -20,9 +20,9 @@ const MoreExtensionsDropdown = ({extensions}: any) => {
 
 const popoverReference = (
     <button
-    className="toolbar_button"
-    onClick={handleTogglePopover}
-  >
+      className="toolbar_button"
+      onClick={handleTogglePopover}
+    >
     <Flex 
       align="center"
       className="toolbar_button_icon"
@@ -53,14 +53,14 @@ const popoverReference = (
               cursor="pointer"
               className={`pb_tiptap_toolbar_dropdown_list_item ${isActive ? "is-active" : ""}`}
               iconLeft={icon}
-               key={`${text}_${index}`}
+              key={`${text}_${index}`}
               margin='none'
               onClick={()=> {onclick(); setShowPopover(false)}}
               text={text}
               paddingTop='xxs'
               paddingBottom='xxs'
             />
-        ))}
+          ))}
         </Nav>
       </PbReactPopover>
   )
