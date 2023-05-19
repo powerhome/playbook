@@ -1,0 +1,28 @@
+<%= pb_rails("caption", props: { size: "xs", text: "Raw example no applied styling" }) %>
+
+<%= pb_rails("date", props: {
+  date: Date.today,
+  unstyled: true,
+  margin_bottom: "md"
+}) %>
+
+<%= pb_rails("caption", props: { size: "xs", text: "Example with wrapping typography kit" }) %>
+
+<%= pb_rails("title", props: { size: 3 }) do %>
+  <%= pb_rails("date", props: {
+    date: "2012-08-02T15:49:29Z",
+    unstyled: true,
+    margin_bottom: "md"
+  }) %>
+<% end %>
+
+<%= pb_rails("caption", props: { size: "xs", text: "Example with icon + subcaption" }) %>
+
+<%= pb_rails("caption", props: { size: "xs" }) do %>
+  <%= pb_rails("date", props: {
+    date: DateTime.now,
+    show_icon: true,
+    unstyled: true,
+    show_day_of_week: true
+  }) %>
+<% end %>
