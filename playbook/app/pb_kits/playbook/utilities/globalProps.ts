@@ -207,7 +207,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
           css += handleObjectValue(value, getPrefix(key));
         } else {
           const prefix = getPrefix(key);
-          css += `${prefix}${value} `;
+          css += `${prefix}_${value} `;
         }
       }
     });
