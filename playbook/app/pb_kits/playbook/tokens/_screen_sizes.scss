@@ -38,6 +38,28 @@ $breakpoints_grid: (
     )
 );
 
+$breakpoints_test: (
+
+  xs: (
+    max: $screen-xs-max
+  ),
+  sm: (
+
+      max: $screen-md-max
+  ),
+  md: (
+
+      max: $screen-lg-max
+  ),
+  lg: (
+
+      max: $screen-xl-max
+  ),
+  xl: (
+      min: $screen-xl-max,
+  )
+);
+
 @function breakpoint($breakpoint_name) {
   @return map-get($breakpoints, $breakpoint_name);
 }
