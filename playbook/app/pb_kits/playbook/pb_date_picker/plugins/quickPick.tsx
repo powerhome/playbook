@@ -99,16 +99,16 @@ const quickPickPlugin = () => {
     *   and check if chosen dates equal to a date in the ranges prop
     *   if they are equal, add the active class
     */
-    // if (selectedDates.length > 0 && activeLabel) {
-      const selected = pluginData.rangesNav.querySelectorAll(".nav-item-link")
-      selected.forEach(el => {
-        if (el.innerHTML === activeLabel)
-        el.classList.add('active')
-        return
-      })
+    if (selectedDates.length > 0 && activeLabel) {
+      // const selected = pluginData.rangesNav.querySelectorAll(".nav-item-link")
+      // selected.forEach(el => {
+      //   if (el.innerHTML === activeLabel)
+      //   el.classList.add('active')
+      //   return
+      // })
 
-      // pluginData.rangesButtons[activeLabel].classList.add('active');
-    // }
+      pluginData.rangesButtons[activeLabel].classList.add('active');
+    }
   }
 
 
