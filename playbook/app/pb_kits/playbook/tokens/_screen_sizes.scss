@@ -56,16 +56,6 @@ $breakpoints_max_only: (
     )
 );
 
-@mixin break_test($min: null, $max: null) {
-  @if not $max {
-    @media screen and (min-width: $min) {
-      @content;
-    }
-} @else {
-    @media screen and (max-width: $max) {
-    @content;}
-  }
-}
 
 @function breakpoint($breakpoint_name) {
   @return map-get($breakpoints, $breakpoint_name);
