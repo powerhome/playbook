@@ -1,5 +1,19 @@
 
 
+## [12.23.0](https://github.com/powerhome/playbook/tree/12.23.0) (2023-05-23)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.22.0...12.23.0)
+
+**Fixed Bugs:**
+
+- Fixes for Darkmode Styling of TextInput [\#2575](https://github.com/powerhome/playbook/pull/2575) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Adding check to Empty Filters [\#2573](https://github.com/powerhome/playbook/pull/2573) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
 ## [12.22.0](https://github.com/powerhome/playbook/tree/12.22.0) (2023-05-18)
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.21.0...12.22.0)
