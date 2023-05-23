@@ -99,9 +99,16 @@ const quickPickPlugin = () => {
     *   and check if chosen dates equal to a date in the ranges prop
     *   if they are equal, add the active class
     */
-    if (selectedDates.length > 0 && activeLabel) {
-      pluginData.rangesButtons[activeLabel].classList.add('active');
-    }
+    // if (selectedDates.length > 0 && activeLabel) {
+      const selected = pluginData.rangesNav.querySelectorAll(".nav-item-link")
+      selected.forEach(el => {
+        if (el.innerHTML === activeLabel)
+        el.classList.add('active')
+        return
+      })
+
+      // pluginData.rangesButtons[activeLabel].classList.add('active');
+    // }
   }
 
 
@@ -148,7 +155,7 @@ const quickPickPlugin = () => {
 
       onClose(selectedDates: Array<string>) {
         // set the input value to the selected dates when the dropdown is closed
-        if (selectedDates.length < 2) {  
+        if (selectedDates.length < 2 && selectedDates.length > 0) {  
           fp.input.placeholder = fp.formatDate(this.selectedDates[0], fp.config.dateFormat);
         }
        }
