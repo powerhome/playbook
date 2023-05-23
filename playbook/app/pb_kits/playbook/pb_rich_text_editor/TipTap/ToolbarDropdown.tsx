@@ -98,7 +98,17 @@ const popoverReference = (
        activeCount === 2 ? (
         activeItems[1]
        ) : (
+        activeCount === 1 ? (
         activeItems[0] || null
+        ) : (
+          <Flex align="center" key="paragraph" gap="xs">
+            <Icon icon="paragraph" size="lg" />
+            <div>Paragraph</div>
+            <Flex className={showPopover ? "fa-flip-vertical" : ""} display="inline_flex">
+              <Icon fixedWidth icon="angle-down" margin-left="xs" />
+            </Flex>
+          </Flex>
+        )
        )
     }
   </Button>

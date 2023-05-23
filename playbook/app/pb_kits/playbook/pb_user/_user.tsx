@@ -18,7 +18,7 @@ type UserProps = {
   data?: {[key: string]: string},
   id?: string,
   name?: string,
-  orientation?: "horiztonal" | "vertical",
+  orientation?: "horizontal" | "vertical",
   size?: "sm" | "md" | "lg",
   subtitle?: string | Array<Node> | Node,
   territory?: string,
