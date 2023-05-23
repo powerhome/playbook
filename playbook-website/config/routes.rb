@@ -41,4 +41,6 @@ Rails.application.routes.draw do
   # dark mode
   get "/enable_dark_mode", to: "pages#enable_dark_mode", as: "enable_dark_mode"
   get "/disable_dark_mode", to: "pages#disable_dark_mode", as: "disable_dark_mode"
+
+  mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
 end

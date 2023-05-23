@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency "actionpack", ">= 5.2.4.5"
   s.add_dependency "actionview", ">= 5.2.4.5"
   s.add_dependency "activesupport", ">= 5.2.4.5"
+  s.add_dependency "lookbook", "2.0.3"
   s.add_dependency "react-rails", "2.6.1"
   s.add_dependency "redcarpet", "~> 3.6"
   s.add_dependency "rouge", "~> 3.15"
