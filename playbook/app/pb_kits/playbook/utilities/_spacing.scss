@@ -45,7 +45,7 @@ $positions: (
 	}
 }
 
-@each $size, $size_value in $breakpoints_test {
+@each $size, $size_value in $breakpoints_max_only {
   @each $position_name, $position in $positions {
     @each $space_name, $space in $space_classes {
         $min_size: map-get($size_value, "min");
