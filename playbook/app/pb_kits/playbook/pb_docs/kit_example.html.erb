@@ -7,7 +7,12 @@
     <%= example %>
     <br>
   </div>
-
+  
+  <% if (action_name == "kit_show_swift") %>
+    <div class="pb--kit-example-markdown pt_none <%= dark ? "dark" : "" %>">
+      <%= render_markdown(description) %>
+    </div>
+  <% end %>
   <% if show_code %>
     <div class="markdown pb--kit-example-markdown <%= dark ? "dark" : "" %>">
       <%= render_markdown(description) %>

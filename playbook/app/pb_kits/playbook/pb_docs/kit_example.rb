@@ -20,6 +20,7 @@ module Playbook
         elsif type == "react"
           react_component example_key.camelize, { dark: dark }
         elsif type == "swift"
+          ## render the markdown file
           render inline: source
         end
       end

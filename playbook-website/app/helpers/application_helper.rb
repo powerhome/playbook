@@ -39,6 +39,7 @@ module ApplicationHelper
 
     Playbook.kit_path(kit, "docs")
             .glob("**/*.#{extension}")
+            .any? { |path| path.basename.to_s.include?(extension) }
             .present?
   end
 
@@ -63,16 +64,22 @@ module ApplicationHelper
   end
 
   def sub_category_link(type, link)
-    if type == "react"
+    case type
+    when "react"
       kit_show_reacts_path(link)
+    when "swift"
+      kit_show_swift_path(link)
     else
       kit_show_path(link)
     end
   end
 
   def kit_link(type, link)
-    if type == "react"
+    case type
+    when "react"
       kit_show_reacts_path(link)
+    when "swift"
+      kit_show_swift_path(link)
     else
       kit_show_path(link)
     end
@@ -113,7 +120,11 @@ module ApplicationHelper
   def format_search_hash(kit)
     {
       label: kit.to_s.titleize,
-      value: @type == "react" || @type.nil? ? "/kits/#{kit}/react" : "/kits/#{kit}",
+      value: if @type == "react" || @type.nil?
+               "/kits/#{kit}/react"
+             else
+               @type == "swift" ? "/kits/#{kit}/swift" : "/kits/#{kit}"
+             end,
     }
   end
 

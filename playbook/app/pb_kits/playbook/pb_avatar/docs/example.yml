@@ -10,4 +10,4 @@ examples:
     - avatar_no_image: "Bad Image Link"
     - avatar_status: Status
   swift:
-    - avatar_default_swift: Default
+    - avatar_swift: Default

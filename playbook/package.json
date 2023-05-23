@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "12.20.0",
+  "version": "12.22.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "scripts": {
@@ -59,8 +59,7 @@
     "react-select": "3.0.8",
     "react-trix": "^0.9.0",
     "react-zoom-pan-pinch": "^2.6.1",
-    "svg-url-loader": "^8.0.0",
-    "wasm-pack": "^0.11.1"
+    "svg-url-loader": "^8.0.0"
   },
   "devDependencies": {
     "@actions/core": "1.10.0",
