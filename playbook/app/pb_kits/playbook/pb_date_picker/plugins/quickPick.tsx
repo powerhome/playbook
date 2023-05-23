@@ -64,7 +64,7 @@ const quickPickPlugin = () => {
  *    @returns HTML Element
  */
 
-  //funciton for creating the range buttons in the nav
+  //function for creating the range buttons in the nav
   const addRangeButton = (label: string) => {
 
     // creating new elements to mimick selectable card component
@@ -99,16 +99,16 @@ const quickPickPlugin = () => {
     *   and check if chosen dates equal to a date in the ranges prop
     *   if they are equal, add the active class
     */
-    if (selectedDates.length > 0) {
+    if (selectedDates.length > 0 && activeLabel !== "") {
       pluginData.rangesButtons[activeLabel].classList.add('active');
     }
   }
 
 
-    return {
+     return {
       // onReady is a hook from flatpickr that runs when calender is in a ready state
       onReady(selectedDates: Array<string>) {
-        // loop through the ranges and create an anchor tag for each range and add an event listiner to set the date when user clicks on a date range
+        // loop through the ranges and create an anchor tag for each range and add an event listener to set the date when user clicks on a date range
         for (const [label, range] of Object.entries(pluginData.ranges)) {
           addRangeButton(label).addEventListener('click', function () {
 
@@ -126,8 +126,7 @@ const quickPickPlugin = () => {
 
             });
         }
-
-        // conditional to check if there is a dropdown to add it to the calendar container and git it the classes it needs
+            // conditional to check if there is a dropdown to add it to the calendar container and get it the classes it needs
         if (pluginData.rangesNav.children.length > 0) {
 
           fp.calendarContainer.prepend(pluginData.rangesNav);
@@ -138,8 +137,7 @@ const quickPickPlugin = () => {
          *
          * @param {Array} selectedDates
          */
-
-          // function to give the active butto the active class
+          // function to give the active button the active class
           selectActiveRangeButton(selectedDates);
         }
 
@@ -150,10 +148,13 @@ const quickPickPlugin = () => {
 
       // onClose(selectedDates: Array<string>) {
       //   // set the input value to the selected dates when the dropdown is closed
-      //   // if (!selectedDates[1]) {
-      //   //   fp.input.value = fp.formatDate(this.selectedDates[0], fp.config.dateFormat) + ' → ' + fp.formatDate(this.selectedDates[1], fp.config.dateFormat);
-      //   // }
-      // }
+      //   if (selectedDates.length < 2) {  
+      //     console.log(fp.input.value)
+         
+      //     fp.input.value = [fp.formatDate(this.selectedDates[0], fp.config.dateFormat), fp.formatDate(this.selectedDates[0], fp.config.dateFormat)];
+      //     console.log(fp.input.value)
+      //   }
+      //  }
     };
   };
 }
