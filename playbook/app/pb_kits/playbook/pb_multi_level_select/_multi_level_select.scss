@@ -3,12 +3,41 @@
 @import "../tokens/border_radius";
 @import "../tokens/shadows";
 @import "../tokens/spacing";
+@import "../tokens/typography";
+@import "../tokens/line_height";
 
 .pb_multi_level_select {
+  font-family: $font-family-base;
+
+  .search {
+    font-family: $font-family-base;
+  }
+
   .dropdown {
     width: 100%;
     .search {
       border-bottom: none;
+    }
+
+    .toggle {
+      padding: 0px $space_xs + 1;
+    }
+    .node.tree {
+      display: flex;
+      align-items: center;
+    }
+
+    .node-label {
+      line-height: $lh_tight;
+      color: $text_lt_default;
+      font-size: $text_default;
+      font-weight: $regular;
+      font-family: $font-family-base;
+    }
+
+    .checkbox-item {
+      height: $space_sm;
+      width: $space_sm;
     }
 
     .toggle.expanded:after {
@@ -16,44 +45,57 @@
       border-width: 0.1em 0.1em 0 0;
       content: "";
       display: inline-block;
-      height: 0.6em;
-      left: 0.1em;
+      height: 0.8em;
       position: relative;
       vertical-align: top;
-      width: 0.6em;
-      top: 10px;
+      width: 0.8em;
+      top: 7px;
       transform: rotate(135deg);
       font-size: 0.5em;
+    }
+    .toggle.expanded:hover {
+      background-color: rgba(0, 86, 207, 0.1);
+      border-radius: $border_radius_rounded;
+      &::after {
+        color: $primary;
+      }
     }
     .toggle.collapsed:after {
       border-style: solid;
       border-width: 0.1em 0.1em 0 0;
       content: "";
       display: inline-block;
-      height: 0.6em;
-      left: 0.1em;
+      height: 0.8em;
+      right: 0.1em;
       position: relative;
       vertical-align: top;
-      width: 0.6em;
-      top: 10px;
+      width: 0.8em;
+      top: 7px;
       font-size: 0.5em;
-
       transform: rotate(45deg);
-      top: 12px;
+      top: 9px;
+    }
+
+    .toggle.collapsed:hover {
+      background-color: rgba(0, 86, 207, 0.1);
+      border-radius: $border_radius_rounded;
+      &::after {
+        color: $primary;
+      }
     }
 
     .tag {
-      height: 37px;
+      height: fit-content;
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      padding: 0 $space_xxs 0 $space_xs;
-      border-radius: 18px;
+      padding: $space_xxs $space_xxs $space_xxs $space_xs;
+      border-radius: $border_radius_xl + 2;
       background-color: rgba($primary, 0.1);
       color: $primary;
       border: none;
-      font-size: 16px;
-      font-weight: 700;
+      font-size: $font_smaller;
+      font-weight: $bolder;
 
       .tag-remove {
         color: $primary;

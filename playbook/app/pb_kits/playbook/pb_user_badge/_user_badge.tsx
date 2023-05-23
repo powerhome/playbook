@@ -1,17 +1,15 @@
-/* @flow */
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import Veteran from './badges/veteran.jsx';
-import MillionDollar from './badges/million-dollar.jsx';
-
+import Veteran from './badges/veteran'
+import MillionDollar from './badges/million-dollar';
 
 type UserBadgeProps = {
-  aria?: object,
+  aria?: {[key: string]: string},
   badge?: "million-dollar" | "veteran",
   className?: string,
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
   size?: "sm" | "md" | "lg",
 }
@@ -37,10 +35,10 @@ const UserBadge = (props: UserBadgeProps) => {
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      className={classes}
+      id={id}
     >
       <div className="pb_user_badge_wrapper">
         {image}
@@ -48,4 +46,5 @@ const UserBadge = (props: UserBadgeProps) => {
     </div>
   )
 }
+
 export default UserBadge
