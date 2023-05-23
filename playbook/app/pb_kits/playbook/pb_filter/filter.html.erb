@@ -9,22 +9,23 @@
           <div class="maskContainer">
             <div class="filters">
               <div class="left_gradient"></div>
-              <% object.filters.each do |filter| %>
-                <% if filter[:name] == "" %>
-                  <div>
-                    <%= pb_rails("body", props: {
-                      color: "light",
-                      padding_left: "xs",
-                      size: 4,
-                      tag:"h4",
-                      text: "No Filter Selected"
-                    }) %>
-                  </div>
-                <% else %>
-                <div class="filter">
-                  <%= pb_rails("caption", props: { text: filter[:name]}) %>
-                  <%= pb_rails("title", props: { size: 4, tag:"h4", text: filter[:value]}) %>
+              <% if object.filters&.none? { |filter| filter[:name].present? } %>
+                <div>
+                  <%= pb_rails("body", props: {
+                    color: "light",
+                    padding_left: "xs",
+                    size: 4,
+                    tag:"span",
+                    text: "No Filter Selected"
+                  }) %>
                 </div>
+              <% end %>
+              <% object.filters&.each do |filter| %>
+                <% if filter[:name].present? %>
+                  <div class="filter">
+                    <%= pb_rails("caption", props: { text: filter[:name]}) %>
+                    <%= pb_rails("title", props: { size: 4, tag:"h4", text: filter[:value]}) %>
+                  </div>
                 <% end %>
               <% end %>
               <div class="right_gradient"></div>
