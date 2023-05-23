@@ -35,8 +35,10 @@
       <% if pb_doc_has_kit_type?(@kit, "react") %>
         <%= pb_rails("nav/item", props: { text: "React", link: kit_show_reacts_path(@kit), active: action_name == 'kit_show_react' }) %>
       <% end %>
-      <% if pb_doc_has_kit_type?(@kit, "swift") %>
-        <%= pb_rails("nav/item", props: { text: "Swift", link: kit_show_swift_path(@kit), active: action_name == 'kit_show_swift' }) %>
+      <% if Rails.env.development? %>
+        <% if pb_doc_has_kit_type?(@kit, "swift") %>
+          <%= pb_rails("nav/item", props: { text: "Swift", link: kit_show_swift_path(@kit), active: action_name == 'kit_show_swift' }) %>
+        <% end %>
       <% end %>
     <% end %>
 
@@ -46,8 +48,8 @@
     <%= pb_kit(kit: @kit, dark_mode: dark_mode?) %>
   <% elsif (action_name == "kit_show_react") %>
     <%= pb_kit(kit: @kit, type: "react", dark_mode: dark_mode?) %>
-  <% else %>
-    <%= render_markdown(pb_doc_kit_swift(@kit)) %>
+  <% elsif (action_name == "kit_show_swift") %>
+    <%= pb_kit(kit: @kit, type: "swift", dark_mode: dark_mode?) %>
   <% end %>
 
   <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
@@ -91,7 +93,7 @@
               <% end %>
             <% end %>
           </a>
-        <% end %>
+        <% end %>f
       <% end %>
     <% end %>
   <% end %>
@@ -106,5 +108,13 @@
         source: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "react").tsx_source )
       %>
     </div>
+  <% elsif (action_name == "kit_show_swift") %>
+    <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
+      <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm", margin_top: "sm" }) %>
+      <%= react_component("AvailableProps",
+        source: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "swift").swift_source )
+      %>
+    </div>
   <% end %>
+
 </div>

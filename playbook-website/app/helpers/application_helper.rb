@@ -21,10 +21,6 @@ module ApplicationHelper
     pb_doc_example_read_source kit, "_description.md"
   end
 
-  def pb_doc_kit_swift(kit)
-    pb_doc_example_read_source kit, "#{kit}.swift.md"
-  end
-
   def pb_doc_example_read_source(kit, file)
     Playbook.kit_path(kit, "docs", file).read
   rescue Errno::ENOENT
@@ -38,7 +34,7 @@ module ApplicationHelper
     when "react"
       extension = "jsx"
     when "swift"
-      extension = "swift.md"
+      extension = "swift"
     end
 
     Playbook.kit_path(kit, "docs")
