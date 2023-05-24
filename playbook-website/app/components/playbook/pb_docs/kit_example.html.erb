@@ -15,31 +15,60 @@
     <div id="code-wrapper">
       <div class="pb--codeControls">
         <ul>
-          <% if type == "rails" %>
+          <% hide_button = type == "rails" ? 'flex' : 'none' %>
             <li>
-              <a href="#" id="copy-<%= example_key %>-trigger" onclick="copyOnClick(`<%= example_html %>`, `copy-<%= example_key %>`)">
-                Copy HTML
-              </a>
+            <%= pb_rails("button", props: { id:"copy-html-#{example_key}", icon: "copy", text: "Copy HTML", variant: "link", size: "sm", display: hide_button }) %>
             </li>
-          <% end %>
           <li>
-            <a href="#" id="toggle-open" data-toggle="code_example">Code Example</a>
+            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-opened", text: "Close Code", variant: "link", size: "sm", display: "none" }) %>
+            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-closed", text: "Show Code", variant: "link", size: "sm" }) %>
           </li>
         </ul>
       </div>
       <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
         <%= pb_rails("section_separator", props: { dark: dark })%>
-        <a href="#" id="toggle-close" data-toggle="false" class="pb--close-toggle">Close</a>
+        <a href="#" id="copy-code-<%= example_key %>" class="pb--copy-code" onclick="copyOnClick(`<%= source %>`, `copy-code-<%= example_key %>`)">
+          <%= pb_rails("button", props: { id: "copy-button-#{example_key}", text: "Copy Code", size: "sm", icon: "copy", padding_x: "xs" }) %>
+        </a>
         <pre class="highlight"><%= raw render_code(source, highlighter) %></pre>
       </div>
+        <%= pb_rails("popover", props: {
+          trigger_element_id: "copy-button-#{example_key}",
+          tooltip_id: "tooltip-#{example_key}",
+          offset: true,
+          position: "bottom"
+        }) do %>
+        Code Copied
+    <% end %>
     </div>
   <% end %>
 <% end %>
 
 <script>
-  function copyOnClick(content, elementID) {
-    copyContent(content)
+  var htmlButton = document.getElementById('<%= "copy-html-#{example_key}" %>')
+  if (htmlButton) {
+    htmlButton.addEventListener('click', function() {
+      var tempElement = document.createElement('div')
+      tempElement.innerHTML = `<%= example_html %>`
+      var decodedString = tempElement.textContent || tempElement.innerText;
+      copyContent(decodedString)
+    })
   }
-  
+
+  var button = document.getElementById('<%= "copy-button-#{example_key}" %>')
+  if (button) {
+    button.addEventListener('click', function() {
+      var tempElement = document.createElement('div')
+      tempElement.innerHTML = `<%= source %>`
+      var decodedString = tempElement.textContent || tempElement.innerText;
+      copyContent(decodedString)
+      var fadeAwayDiv = document.getElementById("<%= "tooltip-#{example_key}" %>")
+      setTimeout(function() {
+        fadeAwayDiv.classList.remove('show')
+      }, 3000)
+      setTimeout(function() {
+        fadeAwayDiv.classList.add('hide')
+      }, 3001)
+    })
+  }
 </script>
-   
