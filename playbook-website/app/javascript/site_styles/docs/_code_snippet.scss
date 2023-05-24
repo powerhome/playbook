@@ -2,14 +2,14 @@
 @import "playbook-ui/dist/tokens/typography";
 
 
-// Rails & REACT 
+// Rails & REACT
 .pb--codeCopy {
   font-size: ($text_small - 1px);
   .highlight {
     margin: 20px 0;
   }
   pre.highlight {
-    padding: $space_xl $space_md;
+    padding: 44px 24px;
     margin: 0;
   }
   .highlight .hll {
