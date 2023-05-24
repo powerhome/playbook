@@ -8,3 +8,4 @@ export { default as RichTextEditorToolbarBottom } from './_rich_text_editor_tool
 export { default as RichTextEditorInline } from './_rich_text_editor_inline.jsx'
 export { default as RichTextEditorPreview } from './_rich_text_editor_preview.jsx'
 export { default as RichTextEditorAdvancedDefault } from './_rich_text_editor_advanced_default.jsx'
+export { default as RichTextEditorMoreExtensions } from './_rich_text_editor_more_extensions.jsx'
