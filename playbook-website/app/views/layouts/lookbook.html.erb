@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Playbook Design System </title>
+    <link rel="icon" href="/images/pb-favicon.ico" sizes="any"><!-- 32×32 -->
+    <link rel="icon" href="/images/pb-favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/images/pb-favicon-180.png"><!-- 180×180 -->
+    <link rel="manifest" href="/site.webmanifest">
+    <%= csrf_meta_tags%>
+    <%= csp_meta_tag%>
+    <%= stylesheet_packs_with_chunks_tag 'application' %>
+    <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport" />
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Black.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Bold.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Extrabld.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Light.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Regular.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Semibold.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Thin.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-BlackIt.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-BoldIt.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-ExtrabldIt.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-LightIt.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-RegularIt.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-SemiboldIt.woff2' %>
+    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-ThinIt.woff2' %>
+  </head>
+  <body class="pb_flex_kit_orientation_row_justify_content_center_align_items_center_spacing_none">
+    <%= yield %>
+  </body>
+  <%= javascript_packs_with_chunks_tag(*@application_js) %>
+  <%= yield :pb_js %>
+</html>

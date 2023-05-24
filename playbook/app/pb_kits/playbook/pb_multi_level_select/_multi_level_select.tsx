@@ -2,8 +2,10 @@ import React, { useState, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
-import { findItemById, checkIt, unCheckIt, getParentAndAncestorsIds } from "./helper_functions";
 import MultiSelectHelper from "./_multi_select_helper";
+import { getParentAndAncestorsIds, checkIt, unCheckIt, findItemById } from "./helper_functions";
+// @ts-ignore
+
 
 type MultiLevelSelectProps = {
   aria?: { [key: string]: string };
@@ -54,18 +56,18 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             if (currentNode._parent) {
               const parents = getParentAndAncestorsIds(currentNode._parent, formattedData)
               parents.forEach((item:string) => {
-               const ancestor = findItemById(formattedData,item)
-               ancestor.expanded = true
+                const ancestor = findItemById(formattedData, item)
+                ancestor.expanded = true
               });
-             }
+            }
           } else {
             unCheckIt(foundItem, selectedItems, setSelectedItems, false);
             if (currentNode._parent) {
-             const parents = getParentAndAncestorsIds(currentNode._parent, formattedData)
-             parents.forEach((item:string) => {
-              const ancestor = findItemById(formattedData,item)
-              ancestor.expanded = true
-             });
+              const parents = getParentAndAncestorsIds(currentNode._parent, formattedData)
+              parents.forEach((item:string) => {
+                const ancestor = findItemById(formattedData, item)
+                ancestor.expanded = true
+              });
             }
           }
         }
@@ -111,7 +113,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         ) => {
           setCheckedData(currentNode);
           onSelect(currentNode);
-
         }}
         id={id}
         {...props}
@@ -130,7 +131,15 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           {...props}
         />
       ) : (
-        <>{DropDownSelectComponent}</>
+        <>
+          {/* <Collapsible>
+            <Collapsible.Main> */}
+              {DropDownSelectComponent}
+            {/* </Collapsible.Main>
+            <Collapsible.Content>
+              {/* Additional content */}
+     
+        </>
       )}
     </div>
   );

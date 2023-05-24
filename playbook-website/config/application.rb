@@ -27,5 +27,7 @@ module PlaybookWebsite
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.view_component.preview_paths << "#{Rails.root}/app/components/previews"
+    config.view_component.default_preview_layout = "lookbook.html.erb"
   end
 end
