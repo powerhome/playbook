@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.license     = "ISC"
 
   s.files = Dir[
+    "app/pb_kits/playbook/pb_*/**/*",
     "app/pb_kits/playbook/{plugins,tokens,utilities}/**/*",
     "app/pb_kits/playbook/*.{scss,js,rb}",
     "app/assets/images/*",
@@ -22,12 +23,13 @@ Gem::Specification.new do |s|
     "lib/*.rb",
     "lib/playbook/**/*",
     "dist/reset.css",
-    "dist/playbook-rails.js"
+    "dist/playbook-rails.js",
+    "dist/menu.yml",
   ] + ["Rakefile"]
 
-  s.files += Dir.glob("app/pb_kits/playbook/pb_*/**/*").reject do |file|
-    (file == "docs") || (file.include? "docs")
-  end
+  # s.files += Dir.glob("app/pb_kits/playbook/pb_*/**/*").reject do |file|
+  #   (file == "docs") || (file.include? "docs")
+  # end
 
   s.add_dependency "actionpack", ">= 5.2.4.5"
   s.add_dependency "actionview", ">= 5.2.4.5"
