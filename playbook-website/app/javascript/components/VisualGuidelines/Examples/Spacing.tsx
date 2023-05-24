@@ -46,6 +46,7 @@ const Spacing = ({ example, tokensExample }: {example: string, tokensExample?: s
   <React.Fragment>
     <Example
       description="Used for building Kits: Spacing is sized by 8px which serves as the starting point and base that all spacing options follow."
+      codesandboxExample
       example={example}
       screenSizes={screenSizeProps}
       title="Spacing"
