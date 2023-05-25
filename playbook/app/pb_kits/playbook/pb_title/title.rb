@@ -26,6 +26,13 @@ module Playbook
       def is_bold
         bold ? nil : "thin"
       end
+      # def title_3_bold
+      #   if bold & size == 3
+      #     nil
+      #   elsif size == 3
+      #   "thin"
+      #   end
+      # end
     end
   end
 end
