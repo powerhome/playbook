@@ -19,7 +19,7 @@ import PropsValues from './PropsValues'
 
 type ExampleType = {
   children?: React.ReactChild[] | React.ReactChild,
-  codesandboxExample? : boolean,
+  // codesandboxExample? : boolean,
   customChildren?: boolean,
   description?: React.ReactChild[] | React.ReactChild | string,
   example?: string,
@@ -33,7 +33,7 @@ type ExampleType = {
 
 const Example = ({
   children,
-  codesandboxExample,
+  // codesandboxExample,
   customChildren,
   description,
   example = '',
@@ -142,7 +142,7 @@ const Example = ({
               <span dangerouslySetInnerHTML={{ __html: exampleHtml }} />
             </pre>
           </div>
-          { codesandboxExample && (
+          {/* { codesandboxExample && (
               <Flex className="codeSandBoxLink" justify="end" >
               <Tooltip
                 placement='top'
@@ -160,7 +160,7 @@ const Example = ({
                 />
                 </Tooltip>
               </Flex>
-          )}
+          )} */}
         </Card>
       </Card>
     </div>
