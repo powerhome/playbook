@@ -110,7 +110,8 @@ namespace :pb_release do
 
     # Publish to NPM
     unless dryrun
-      `rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml`
+      # `rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml`
+      `rm -rf dist/app  dist/pb_doc_helper.rb`
       puts "\nPublishing to NPM..."
       npm_suffix = looks_like_alpha ? "--tag alpha" : ""
       `npm publish playbook-ui-#{npm_version}.tgz #{npm_suffix}`
