@@ -12,6 +12,7 @@
   &[class*=_2] {
     @include pb_title_2;
     @include title_colors;
+    @include pb_title_bold;
   }
 
   &[class*=_3] {
