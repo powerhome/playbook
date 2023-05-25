@@ -21,13 +21,13 @@ const Title = (props: TitleProps): React.ReactElement => {
   if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
   const {
     aria = {},
-    bold = true,
     children,
     className,
     color,
     data = {},
     id,
     size = 3,
+    bold = size === 3 ? false : true,
     tag = 'h3',
     text,
     variant = null,
@@ -35,6 +35,7 @@ const Title = (props: TitleProps): React.ReactElement => {
 
   const ariaProps: {[key: string]: string | number} = buildAriaProps(aria)
   const dataProps: {[key: string]: string | number} = buildDataProps(data)
+
   const getBold = bold ? '' : 'thin'
   const classes = classnames(
     buildCss('pb_title_kit', `size_${size}`, variant, color, getBold),
