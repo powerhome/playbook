@@ -35,6 +35,19 @@
     font-weight: 600;
   }
 
+  .pb--copy-code {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 0 10px;
+    border-radius: 2px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+  }
+
   .pb--kit-example, .pb--kit-example-markdown {
     &.dark {
       color: $text_dk_light;
@@ -73,7 +86,7 @@
       align-items: center;
       list-style: none;
       margin: 0;
-      padding: 0 20px;
+      padding: 0 10px;
 
       li {
         font-size: 12px;
@@ -118,6 +131,11 @@
     overflow-x: auto;
     border-radius: 0 0 6px 6px;
     background: $bg_dark;
+  }
+
+  .fa-code {
+    display: block;
+    margin: 0 auto;
   }
 
   &.dark_ui {

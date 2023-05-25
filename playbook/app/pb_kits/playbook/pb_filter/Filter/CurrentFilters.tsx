@@ -27,7 +27,7 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps): React.ReactElem
             color="light"
             paddingLeft="xs"
             size={4}
-            tag="h4"
+            tag="span"
             text="No Filter Selected"
         />
       </div>

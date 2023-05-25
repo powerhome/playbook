@@ -12,18 +12,17 @@ import DateTime from '../pb_kit/dateTime'
 
 type WeekdayStackedProps = {
   align?: "left" | "center" | "right",
-  aria?: object,
+  aria?: {[key:string]:string },
   className?: string,
   dark?: boolean,
   data?: object,
-  date: date,
+  date: Date,
   id?: string,
   variant?: "day_only" | "month_day" | "expanded",
   compact?: boolean,
-  id?: string,
 }
 
-const getDayOfWeek = (value, compact) => {
+const getDayOfWeek = (value: Date | string, compact: boolean) => {
   const dateTime = new DateTime({ value })
   if (compact) {
     return dateTime.toDayAbbr()
@@ -32,7 +31,7 @@ const getDayOfWeek = (value, compact) => {
   }
 }
 
-const getFormattedDate = (value, variant) => {
+const getFormattedDate = (value: Date | string, variant: "day_only" | "month_day" | "expanded") => {
   const dateTime = new DateTime({ value })
   if (variant === 'day_only') {
     return dateTime.toDay()
