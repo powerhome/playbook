@@ -58,6 +58,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   //function to map over data and add checked + parent_id property to each item
   const addCheckedAndParentProperty = (treeData:any, parent_id:string = null) => {
+    if (!Array.isArray(treeData)) {
+      return; 
+    }
+
     return treeData.map((item:any) => {
       const newItem = { ...item, checked: false, parent_id };
 
@@ -129,18 +133,22 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //Function is filtering formattedData by filteredItem to create typeahead functionality
   const filterTreeData = (formattedData:any, searchTerm:string) => {
     const matchedItems:any = [];
-    const recursiveSearch = (formattedData:any, term:string) => {
-      for (const item of formattedData) {
+  
+    const recursiveSearch = (data:any, term:any) => {
+      if (!Array.isArray(data)) {
+        return; 
+      }
+      data.forEach((item:any) => {
         if (item.label.toLowerCase().includes(term.toLowerCase())) {
           matchedItems.push(item);
         }
-
-        if (item.children && item.children.length > 0 ) {
+  
+        if (item.children && item.children.length > 0) {
           recursiveSearch(item.children, term);
         }
-      }
+      });
     };
-
+  
     recursiveSearch(formattedData, searchTerm);
     return matchedItems;
   };
