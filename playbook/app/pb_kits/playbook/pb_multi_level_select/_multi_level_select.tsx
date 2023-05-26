@@ -128,14 +128,14 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   //Function is filtering formattedData by filteredItem to create typeahead functionality
   const filterTreeData = (formattedData:any, searchTerm:string) => {
-    const matchedItems:any[] = [];
-    const recursiveSearch = (data:any, term:string) => {
-      for (const item of data) {
+    const matchedItems:any = [];
+    const recursiveSearch = (formattedData:any, term:string) => {
+      for (const item of formattedData) {
         if (item.label.toLowerCase().includes(term.toLowerCase())) {
           matchedItems.push(item);
         }
 
-        if (item.children) {
+        if (item.children && item.children.length > 0 ) {
           recursiveSearch(item.children, term);
         }
       }
