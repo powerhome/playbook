@@ -103,37 +103,37 @@ const globalPropsValues = [
   {
     prop: "marginRight",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "marginLeft",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "marginTop",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "marginBottom",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "marginX",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "marginY",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "margin",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "maxWidth",
@@ -154,37 +154,37 @@ const globalPropsValues = [
   {
     prop: "paddingRight",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "paddingLeft",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "paddingTop",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "paddingBottom",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "paddingX",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "paddingY",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "padding",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "position",
