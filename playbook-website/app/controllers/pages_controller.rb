@@ -11,8 +11,8 @@ require_relative "application_controller"
 
 class PagesController < ApplicationController
   before_action :set_js, only: %i[visual_guidelines]
-  before_action :set_kit, only: %i[kit_show_rails kit_show_react]
-  before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
+  before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
+  before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
 
@@ -94,6 +94,11 @@ class PagesController < ApplicationController
 
   def kit_show_react
     @type = "react"
+    render template: "pages/kit_show", layout: "layouts/kits"
+  end
+
+  def kit_show_swift
+    @type = "swift"
     render template: "pages/kit_show", layout: "layouts/kits"
   end
 
@@ -211,9 +216,7 @@ private
     is_rails_kit = action_name == "kit_show_rails"
     files = is_rails_kit ? File.join("**", "*.erb") : File.join("**", "*.jsx")
     kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
-    unless kit_files.present?
-      redirect_to action: is_rails_kit ? "kit_show_react" : "kit_show_rails"
-    end
+    redirect_to action: action_name unless kit_files.present?
   end
 
   def pb_doc_kit_path(kit, *args)
