@@ -251,6 +251,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
               placeholder="Select..."
               value={filterItem}
               onClick={() => setIsClosed(false)}
+              data-tree={JSON.stringify(returnedArray)}
             />
           </div>
           {isClosed ? (
