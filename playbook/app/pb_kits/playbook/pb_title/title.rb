@@ -19,7 +19,8 @@ module Playbook
                      deprecated: true
 
       def initialize(props)
-        props[:bold] = props[:size] != 3 unless props.key?(:bold)
+        props[:bold] = [1, 2, 4].include?(props[:size]) unless props.key?(:bold)
+        props[:bold] = false if props[:size].nil? && !props.key?(:bold)
         super(props)
       end
 
