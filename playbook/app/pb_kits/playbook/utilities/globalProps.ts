@@ -22,7 +22,7 @@ type AlignItems = {
 type AlignSelf = {
   alignSelf?: Alignment & ("auto" | "stretch" | "baseline")
 }
-type AllSizes = None | Sizes
+type AllSizes = None | Sizes | "auto" | "initial" | "inherit"
 
 type BorderRadius = {
   borderRadius?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "rounded",
@@ -153,22 +153,67 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     padding,
   }: Margin & Padding) => {
     let css = ''
-    css += marginRight ? `mr_${marginRight} ` : ''
-    css += marginLeft ? `ml_${marginLeft} ` : ''
-    css += marginTop ? `mt_${marginTop} ` : ''
-    css += marginBottom ? `mb_${marginBottom} ` : ''
-    css += marginX ? `mx_${marginX} ` : ''
-    css += marginY ? `my_${marginY} ` : ''
-    css += margin ? `m_${margin} ` : ''
-    css += paddingRight ? `pr_${paddingRight} ` : ''
-    css += paddingLeft ? `pl_${paddingLeft} ` : ''
-    css += paddingTop ? `pt_${paddingTop} ` : ''
-    css += paddingBottom ? `pb_${paddingBottom} ` : ''
-    css += paddingX ? `px_${paddingX} ` : ''
-    css += paddingY ? `py_${paddingY} ` : ''
-    css += padding ? `p_${padding} ` : ''
-    return css
+    const spacingProps = {
+      marginRight,
+      marginLeft,
+      marginTop,
+      marginBottom,
+      marginX,
+      marginY,
+      margin,
+      paddingRight,
+      paddingLeft,
+      paddingTop,
+      paddingBottom,
+      paddingX,
+      paddingY,
+      padding,
+    };
+
+    function handleObjectValue(properties: Margin | Padding, prefix: string) {
+      let classResult = '';
+
+      Object.entries(properties).forEach(([key, value]) => {
+        classResult += `${prefix}_${key}_${value} `;
+      });
+
+      return classResult;
+    }
+
+    function getPrefix(key: string) {
+      const prefixes: Record<string, string> = {
+        marginRight: 'mr',
+        marginLeft: 'ml',
+        marginTop: 'mt',
+        marginBottom: 'mb',
+        marginX: 'mx',
+        marginY: 'my',
+        margin: 'm',
+        paddingRight: 'pr',
+        paddingLeft: 'pl',
+        paddingTop: 'pt',
+        paddingBottom: 'pb',
+        paddingX: 'px',
+        paddingY: 'py',
+        padding: 'p',
+      };
+
+      return prefixes[key];
+    }
+
+    Object.entries(spacingProps).forEach(([key, value]) => {
+      if (value) {
+        if (typeof value === 'object') {
+          css += handleObjectValue(value, getPrefix(key));
+        } else {
+          const prefix = getPrefix(key);
+          css += `${prefix}_${value} `;
+        }
+      }
+    });
+    return css.trim();
   },
+
   darkProps: ({ dark }: Dark) => dark ? 'dark' : '',
   numberSpacingProps: ({ numberSpacing }: NumberSpacing) => {
     let css = ''
