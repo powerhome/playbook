@@ -29,7 +29,7 @@ RSpec.describe Playbook::PbTitle::Title do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_title_kit_3"
+      expect(subject.new({}).classname).to eq "pb_title_kit_3 thin"
 
       expect(subject.new(classname: "additional_class").classname).to eq "pb_title_kit_3 additional_class thin"
       expect(subject.new(dark: true).classname).to eq "pb_title_kit_3 dark thin"
