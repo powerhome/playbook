@@ -24,10 +24,9 @@ RSpec.describe Playbook::PbTitle::Title do
 
   it do
     is_expected.to(define_boolean_prop(:bold)
-      .with_default(true) do |default|
-        default.nil? || @props[:size] != 3
-      end)
+      .with_default(true) { |props| props[:size] != 3 })
   end
+  With th
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
