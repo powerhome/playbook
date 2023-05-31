@@ -81,7 +81,7 @@ describe("IconStatValue Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        const value = kit.querySelector(".pb_title_kit_size_3")
+        const value = kit.querySelector(".pb_title_kit_size_3_thin")
         expect(value.textContent).toEqual("64.18")
     })
 
