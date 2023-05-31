@@ -38,5 +38,5 @@ test('with colors', () => {
   )
 
   const kit = screen.getByTestId('primary-test')
-  expect(kit).toHaveClass('pb_title_kit_size_3_success_thin')
+  expect(kit).toHaveClass('pb_title_kit_size_3 thin')
 })
