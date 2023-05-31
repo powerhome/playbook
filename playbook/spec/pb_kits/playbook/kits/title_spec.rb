@@ -24,7 +24,7 @@ RSpec.describe Playbook::PbTitle::Title do
 
   it do
     is_expected.to(define_boolean_prop(:bold)
-      .with_default { |props| props[:size] != 3 })
+      .with_default { |props| ![1, 2, 4].include?(props[:size]) })
   end
 
   describe "#classname" do
