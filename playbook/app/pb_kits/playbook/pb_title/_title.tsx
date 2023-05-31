@@ -38,7 +38,7 @@ const Title = (props: TitleProps): React.ReactElement => {
 
   const getBold = bold ? '' : 'thin'
   const classes = classnames(
-    buildCss('pb_title_kit', `size_${size}`, variant, color, getBold),
+    buildCss("pb_title_kit", `size_${size}`, variant, color) + ` ${getBold}`,
     globalProps(props),
     className
   )

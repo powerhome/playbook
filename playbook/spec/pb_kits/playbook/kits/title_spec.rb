@@ -37,7 +37,7 @@ RSpec.describe Playbook::PbTitle::Title do
       expect(subject.new(size: 4).classname).to eq "pb_title_kit_4"
       expect(subject.new(tag: "h3").classname).to eq "pb_title_kit_3"
       expect(subject.new(size: 4, color: "link").classname).to eq "pb_title_kit_4_link"
-      expect(subject.new(bold: false).classname).to eq "pb_title_kit_3_thin"
+      expect(subject.new(bold: false).classname).to eq "pb_title_kit_3 thin"
     end
   end
 

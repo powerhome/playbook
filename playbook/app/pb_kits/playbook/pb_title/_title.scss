@@ -30,7 +30,7 @@
     @include pb_title_dark;
   }
 
-  &[class*=_thin] {
+  &[class*=thin] {
     @include pb_title_thin;
   }
 }

@@ -27,11 +27,11 @@ module Playbook
       prop :bold, type: Playbook::Props::Boolean
 
       def classname
-        generate_classname("pb_title_kit", size, variant, color, is_bold)
+        generate_classname("pb_title_kit", size, variant, color) + is_bold
       end
 
       def is_bold
-        bold ? nil : "thin"
+        bold ? "" : " thin"
       end
     end
   end
