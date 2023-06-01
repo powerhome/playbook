@@ -22,10 +22,11 @@ RSpec.describe Playbook::PbTitle::Title do
       .with_default("h3")
   }
 
-  it do
-    is_expected.to(define_boolean_prop(:bold)
-      .with_default(true) { |props| props[:size] != 3 })
-  end
+  it {
+    is_expected.to define_boolean_prop(:bold)
+      .with_default(proc { |props| [1, 2, 4].include?(props[:size]) })
+      .with_default(false)
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
