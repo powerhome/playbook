@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get "kits/:name/swift",           to: "pages#kit_show_swift",       as: "kit_show_swift"
   get "all_kit_examples",           to: "pages#all_kit_examples"
 
+  get "testkits/*names/:type", defaults: { type: "rails" }, to: "pages#kits_show", as: "kits_show"
+
   # Experiments
   get "kits/:name/sandpack",        to: "pages#kit_show_new",         as: "kit_show_new"
   get "kits/:name/rails_in_react",  to: "pages#rails_in_react",       as: "rails_in_react"

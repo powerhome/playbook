@@ -102,6 +102,13 @@ class PagesController < ApplicationController
     render template: "pages/kit_show", layout: "layouts/kits"
   end
 
+  def kits_show
+    @kits = params[:names].split("%26")
+    @type = params[:type]
+
+    render template: "pages/kits_show", layout: "layouts/kits"
+  end
+
   def kit_playground_rails
     @kit = "avatar"
     @examples = pb_doc_kit_examples(@kit, "rails")
