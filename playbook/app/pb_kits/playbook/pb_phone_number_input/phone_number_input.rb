@@ -5,6 +5,8 @@ module Playbook
     class PhoneNumberInput < Playbook::KitBase
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
+      prop :required, type: Playbook::Props::Boolean,
+                      default: false
       prop :initial_country, type: Playbook::Props::String,
                              default: ""
       prop :label, type: Playbook::Props::String,
