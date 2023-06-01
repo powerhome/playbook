@@ -1,0 +1,16 @@
+<%= pb_form_with(scope: :phone_number, url: "", method: :get, id: "example-form-validation") do |form| %>
+    <%= pb_rails("phone_number_input", props: { id: "validation", required: true }) %>
+    <%= form.actions do |action| %>
+        <%= action.submit %>
+    <% end %>
+<% end %>
+
+<% content_for(:pb_js) do %>
+    <%= javascript_tag do %>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('#example-form-validation').addEventListener('submit', function (e) {
+                if (e.target.querySelectorAll('[error]:not([error=""])').length > 0) e.preventDefault();
+            })
+        })
+    <% end %>
+<% end %>

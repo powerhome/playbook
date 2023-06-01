@@ -12,6 +12,7 @@ RSpec.describe Playbook::PbPhoneNumberInput do
   it { is_expected.to define_prop(:name).with_default("") }
   it { is_expected.to define_array_prop(:only_countries).with_default([]) }
   it { is_expected.to define_array_prop(:preferred_countries).with_default([]) }
+  it { is_expected.to define_prop(:error).with_default("") }
   it { is_expected.to define_prop(:value).with_default("") }
 
   describe "#classname" do
