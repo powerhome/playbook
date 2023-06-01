@@ -34,7 +34,7 @@ type IconProps = {
   pulse?: boolean,
   rotation?: 90 | 180 | 270,
   size?: IconSizes,
-  fontStyle?: 'far' | 'fas' | 'fab',
+  fontStyle?: 'far' | 'fas' | 'fab' | 'fak',
   spin?: boolean,
 } & GlobalProps
 

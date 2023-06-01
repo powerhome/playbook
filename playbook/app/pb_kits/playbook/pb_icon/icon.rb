@@ -33,7 +33,7 @@ module Playbook
                   values: ["lg", "xs", "sm", "1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", nil],
                   default: nil
       prop :font_style, type: Playbook::Props::Enum,
-                        values: %w[far fas fab],
+                        values: %w[far fas fab fak],
                         default: "far"
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
