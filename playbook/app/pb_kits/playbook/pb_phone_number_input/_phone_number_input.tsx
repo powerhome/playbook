@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+
 import intlTelInput from 'intl-tel-input'
 import 'intl-tel-input/build/css/intlTelInput.css'
-import TextInput from '../pb_text_input/_text_input'
 import 'intl-tel-input/build/js/utils.js'
+
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
+
+import TextInput from '../pb_text_input/_text_input'
 
 declare global {
   interface Window {
@@ -137,9 +140,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
 
   // Separating Concerns as React Docs Recommend
   // This also Fixes things for our react_component rendering on the Rails Side
-  useEffect(() => {
-    formatAllCountries()
-  }, [])
+  useEffect(formatAllCountries, [])
 
   useEffect(() => {
     const telInputInit = new intlTelInput(inputRef.current, {
@@ -165,20 +166,24 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   }, [])
 
   return (
-    <div {...ariaProps} {...dataProps} className={classes}>
+    <div
+        className={classes}
+        {...ariaProps}
+        {...dataProps}
+    >
       <TextInput
-        className={dropDownIsOpen ? 'dropdown_open' : ''}
-        dark={dark}
-        data-phone-number={JSON.stringify(selectedData)}
-        disabled={disabled}
-        error={error}
-        id={id}
-        label={label}
-        name={name}
-        onBlur={() => validateErrors()}
-        onChange={handleOnChange}
-        ref={inputRef}
-        value={inputValue}
+          className={dropDownIsOpen ? 'dropdown_open' : ''}
+          dark={dark}
+          data-phone-number={JSON.stringify(selectedData)}
+          disabled={disabled}
+          error={error}
+          id={id}
+          label={label}
+          name={name}
+          onBlur={() => validateErrors()}
+          onChange={handleOnChange}
+          ref={inputRef}
+          value={inputValue}
       />
     </div>
   )
