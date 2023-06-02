@@ -104,6 +104,23 @@ class PagesController < ApplicationController
 
   def kits_show
     @kits = params[:names].split("%26")
+    @kits_array = @kits.first.split("&")
+    @type = params[:type]
+
+    render template: "pages/kits_show", layout: "layouts/kits"
+  end
+
+  def kits_show_rails
+    @kits = params[:names].split("%26")
+    @kits_array = @kits.first.split("&")
+    @type = params[:type]
+
+    render template: "pages/kits_show", layout: "layouts/kits"
+  end
+
+  def kits_show_react
+    @kits = params[:names].split("%26")
+    @kits_array = @kits.first.split("&")
     @type = params[:type]
 
     render template: "pages/kits_show", layout: "layouts/kits"
