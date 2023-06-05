@@ -1,3 +1,4 @@
+![titleboldandresponsivespacing](https://github.com/powerhome/playbook/assets/9158723/9741a86c-5439-4081-b197-0101079c8575)
 
 
 ## [12.24.0](https://github.com/powerhome/playbook/tree/12.24.0) (2023-05-26)
