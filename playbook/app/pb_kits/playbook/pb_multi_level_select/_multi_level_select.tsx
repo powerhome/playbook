@@ -103,7 +103,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   //handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e:any) => {
-    if (e.target.id === "multiselect_input" || e.target.classList.contains("pb_form_pill_tag") || e.target.classList.contains("pb_icon_kit")) {
+    if (e.target.id === "multiselect_input" || e.target.classList.contains("pb_form_pill_tag")) {
       return;
     }
     setIsClosed(!isClosed);
@@ -162,7 +162,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           matched.push(item);
         }
 
-        if (item.children) {
+        if (item.children && item.children.length > 0) {
           recursiveSearch(item.children, term);
         }
       }
@@ -171,6 +171,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     recursiveSearch(formattedData, id);
     return matched;
   };
+
 
   //rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items:any) => {
@@ -198,13 +199,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             >
               {isItemMatchingFilter && (
                 <>
-                  {item.children && (
                     <Icon
                       paddingLeft="xs"
                       paddingRight="xs"
                       icon="chevron-down"
+                      className={item.children ? "" : "toggle_icon"}
                     />
-                  )}
 
                   <Checkbox text={item.label} id={item.id}>
                     <input

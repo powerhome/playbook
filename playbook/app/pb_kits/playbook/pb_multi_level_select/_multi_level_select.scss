@@ -13,6 +13,10 @@
   .wrapper {
     position: relative;
 
+    .toggle_icon {
+      visibility: hidden;
+    }
+
     .input_wrapper {
       background-color: $white;
       cursor: pointer;
