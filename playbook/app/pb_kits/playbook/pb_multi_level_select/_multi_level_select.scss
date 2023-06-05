@@ -15,6 +15,9 @@
 
     .toggle_icon {
       visibility: hidden;
+      .pb_button_content {
+        visibility: hidden !important;
+      }
     }
 
     .input_wrapper {
@@ -55,8 +58,6 @@
 
     .dropdown_item {
       list-style: none;
-      padding-top: 4px;
-      padding-bottom: 4px;
       display: flex;
       align-items: center;
     }
@@ -69,5 +70,4 @@
   .open {
     display: block;
   }
-
 }

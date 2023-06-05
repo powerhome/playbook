@@ -5,6 +5,7 @@ import { globalProps, GlobalProps } from "../utilities/globalProps";
 import Icon from "../pb_icon/_icon";
 import Checkbox from "../pb_checkbox/_checkbox";
 import FormPill from "../pb_form_pill/_form_pill";
+import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button";
 
 type MultiLevelSelectProps = {
   aria?: { [key: string]: string };
@@ -42,6 +43,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [returnedArray, setReturnedArray] = useState([]);
   //formattedData with checked and parent_id added
   const [formattedData, setFormattedData] = useState(treeData);
+  //toggle chevron in dropdown
+  const [isToggled, setIsToggled] = useState(true)
 
   useEffect(() => {
     returnAllSelected && (
@@ -200,12 +203,26 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             >
               {isItemMatchingFilter && (
                 <>
-                    <Icon
-                      paddingLeft="xs"
-                      paddingRight="xs"
-                      icon="chevron-down"
-                      className={item.children ? "" : "toggle_icon"}
-                    />
+                {isToggled ? (
+                  <div key="chevron-down">
+                    <CircleIconButton
+                            icon="chevron-down"
+                            className={item.children ? "" : "toggle_icon"}
+                            onClick={()=> setIsToggled(!isToggled)}
+                            variant="link"
+                          />
+                  </div>
+                ) : (
+                  <div key="chevron-up">
+                    <CircleIconButton
+                            icon="chevron-up"
+                            className={item.children ? "" : "toggle_icon"}
+                            onClick={()=> setIsToggled(!isToggled)}
+                            variant="link"
+                          />
+                  </div>
+                )}
+                    
 
                   <Checkbox text={item.label} id={item.id}>
                     <input
