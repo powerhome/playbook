@@ -43,7 +43,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //formattedData with checked and parent_id added
   const [formattedData, setFormattedData] = useState(treeData);
 
-  //useEffect is only for testing returns. See console while clicking items
   useEffect(() => {
     returnAllSelected && (
       onSelect(returnedArray)
@@ -82,7 +81,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       if (item.id === id) {
         item.checked = false;
       }
-      if (item.children) {
+      if (item.children && item.children.length > 0) {
         unCheckIt(item.children, id);
       }
       return item;
@@ -102,9 +101,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     unCheckIt(formattedData, clickedItem.id);
   };
 
-  //handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input is clicked
+  //handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e:any) => {
-    if (e.target.id === "multiselect_input") {
+    if (e.target.id === "multiselect_input" || e.target.classList.contains("pb_form_pill_tag") || e.target.classList.contains("pb_icon_kit")) {
       return;
     }
     setIsClosed(!isClosed);
