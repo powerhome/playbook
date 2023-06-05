@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   get "kits/*names/rails",      to: "pages#kits_show_rails",      as: "kits_show_rails"
   get "kits/*names/react",      to: "pages#kits_show_react",      as: "kits_show_react"
-  get "kits/*names", to: redirect { |params, _request| format("testkits/%<names>s/rails", params) }
+  get "kits/*names", to: redirect { |params, _request| format("kits/%<names>s/rails", params) }
 
   # Experiments
   get "kits/:name/sandpack",        to: "pages#kit_show_new",         as: "kit_show_new"
