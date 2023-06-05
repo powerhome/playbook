@@ -55,19 +55,20 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setFormattedData(addCheckedAndParentProperty(treeData));
   }, []);
 
-  //function to map over data and add checked + parent_id property to each item
-  const addCheckedAndParentProperty = (treeData:any, parent_id:string = null) => {
+  //function to map over data and add checked + parent_id + depth property to each item
+  const addCheckedAndParentProperty = (treeData:any, parent_id:string = null, depth:number = 0) => {
     if (!Array.isArray(treeData)) {
       return; 
     }
 
     return treeData.map((item:any) => {
-      const newItem = { ...item, checked: false, parent_id };
+      const newItem = { ...item, checked: false, parent_id, depth };
 
       if (newItem.children && newItem.children.length > 0) {
         newItem.children = addCheckedAndParentProperty(
           newItem.children,
-          newItem.id
+          newItem.id,
+          depth + 1
         );
       }
 
@@ -192,10 +193,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           return (
             <li
               key={item.id}
-              className={`dropdown_item ${
-                item.parent_id !== null && "child_node"
-              }`}
+              className="dropdown_item"
               data-name={item.id}
+              style={{paddingLeft: item.depth * 20}}
+
             >
               {isItemMatchingFilter && (
                 <>
