@@ -1,9 +1,7 @@
-<%= pb_form_with(scope: :phone_number, url: "", method: :get, id: "example-form-validation") do |form| %>
-    <%= pb_rails("phone_number_input", props: { id: "validation", initial_country: "af", value: "70 123 4567", required: true }) %>
-    <%= form.actions do |action| %>
-        <%= action.submit %>
-    <% end %>
-<% end %>
+<form id="example-form-validation" action="" method="get">
+    <%= pb_rails("phone_number_input", props: { error: "Missing phone number.", id: "validation", initial_country: "af", value: "", required: true }) %>
+    <%= pb_rails("button", props: {html_type: "submit", text: "Save Phone Number"}) %>
+</form>
 
 <% content_for(:pb_js) do %>
     <%= javascript_tag do %>

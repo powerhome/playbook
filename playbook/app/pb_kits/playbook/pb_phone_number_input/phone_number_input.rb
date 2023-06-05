@@ -30,7 +30,7 @@ module Playbook
           id: id,
           dark: dark,
           disabled: disabled,
-          errorMsg: error,
+          error: error,
           initialCountry: initial_country,
           label: label,
           name: name,

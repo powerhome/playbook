@@ -24,7 +24,7 @@ type PhoneNumberInputProps = {
   dark?: boolean,
   data?: { [key: string]: string },
   disabled?: boolean,
-  errorMsg?: string,
+  error?: string,
   id?: string,
   initialCountry?: string,
   isValid?: (valid: boolean) => void,
@@ -69,7 +69,6 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     dark = false,
     data = {},
     disabled = false,
-    errorMsg,
     id = "",
     initialCountry = "",
     isValid = () => {
@@ -98,7 +97,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const inputRef = useRef<HTMLInputElement>()
   const [inputValue, setInputValue] = useState(value)
   const [itiInit, setItiInit] = useState<any>()
-  const [error, setError] = useState(errorMsg)
+  const [error, setError] = useState(props.error)
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
 
