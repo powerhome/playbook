@@ -1,3 +1,3 @@
 To apply your own styles, use the `unstyled` prop. Then in your CSS file, select the `pb_date_kit_unstyled` classname to add your styles. You can also target the child elements as needed. You can also wrap an unstyled date kit in other Playbook Kits like `Title` and `Caption`.
 
-Note: Playbook uses the "Proxima Nova" font-family by default. Deviating completely from our design system is discouraged.
+Note: Deviating completely from our design system is discouraged.
