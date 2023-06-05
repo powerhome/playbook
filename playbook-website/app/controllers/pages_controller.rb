@@ -226,9 +226,27 @@ private
     end
   end
 
+  # def set_kit
+  #   menu = MENU["kits"].map { |link| link.is_a?(Hash) ? link.first.last : link }
+  #   if menu.flatten.include?(params[:name])
+  #     @kit = params[:name]
+  #   else
+  #     redirect_to root_path, flash: { error: "That kit does not exist" }
+  #   end
+  # end
+
   def set_kit
     menu = MENU["kits"].map { |link| link.is_a?(Hash) ? link.first.last : link }
-    if menu.flatten.include?(params[:name])
+    if params[:name].include?("&")
+      @kits = params[:name].split("&")
+      @kits.each do |kit|
+        if menu.flatten.include?(kit)
+          @kit = params[:name]
+        else
+          redirect_to root_path, flash: { error: "One or more kits does not exist" }
+        end
+      end
+    elsif menu.flatten.include?(params[:name])
       @kit = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
