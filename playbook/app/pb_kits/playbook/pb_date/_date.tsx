@@ -70,10 +70,10 @@ const PbDate = (props: PbDateProps) => {
             )}
 
             {showDayOfWeek && (
-              <>
+              <div>
                 {weekday}
-                <div>{" • "}</div>
-              </>
+                <span>{" • "}</span>
+              </div>
             )}
 
             <span>
