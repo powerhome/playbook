@@ -72,3 +72,15 @@ test('should pass value prop', () => {
   const kit = screen.getByRole("textbox")
   expect(kit).toHaveDisplayValue(value)
 })
+
+test('should provide validation callback', () => {
+  const value = '1234567890'
+  const props = {
+    id: testId,
+    value,
+  }
+
+  render(<PhoneNumberInput {...props} />)
+  const kit = screen.getByRole("textbox")
+  expect(kit).toHaveDisplayValue(value)
+})

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 
 import intlTelInput from 'intl-tel-input'
@@ -9,6 +9,8 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import TextInput from '../pb_text_input/_text_input'
+import { Callback } from '../types'
+import { isEmpty } from '../utilities/object'
 
 declare global {
   interface Window {
@@ -29,7 +31,7 @@ type PhoneNumberInputProps = {
   label?: string,
   name?: string,
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void,
-  onValidate?: (valid: boolean) => void,
+  onValidate?: Callback<boolean, void>,
   onlyCountries: string[],
   preferredCountries?: string[],
   required?: boolean,
@@ -78,6 +80,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     onChange = () => {
       void 0
     },
+    onValidate = () => null,
     onlyCountries = [],
     required = false,
     preferredCountries = [],
@@ -100,8 +103,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   const [selectedData, setSelectedData] = useState()
 
   useEffect(() => {
-
-  }, [error])
+    if (error?.length > 0) {
+      onValidate(false)
+    } else {
+      onValidate(true)
+    }
+  }, [error, onValidate])
 
   const validateTooLongNumber = (itiInit: any) => {
     const error = itiInit.getValidationError()
@@ -165,6 +172,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
       const phoneNumberData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
       setSelectedData(phoneNumberData)
       onChange(phoneNumberData)
+      isValid(telInputInit.isValidNumber())
     })
 
     inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
@@ -173,8 +181,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     setItiInit(telInputInit)
   }, [])
 
-  const textInputProps: {[key: string]: any} = {
-    aria,
+  let textInputProps: {[key: string]: any} = {
     className: dropDownIsOpen ? 'dropdown_open' : '',
     dark,
     "data-phone-number": JSON.stringify(selectedData),
@@ -188,14 +195,14 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     value: inputValue
   }
 
+  let wrapperProps: Record<string, unknown> = { className: classes }
+
+  if (!isEmpty(aria)) textInputProps = {...textInputProps, ...ariaProps}
+  if (!isEmpty(data)) wrapperProps = {...wrapperProps, ...dataProps}
   if (required) textInputProps.required = true
 
   return (
-    <div
-        className={classes}
-        {...ariaProps}
-        {...dataProps}
-    >
+    <div {...wrapperProps}>
       <TextInput
           ref={inputRef}
           {...textInputProps}
@@ -204,4 +211,4 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   )
 }
 
-export default PhoneNumberInput
+export default forwardRef(PhoneNumberInput)

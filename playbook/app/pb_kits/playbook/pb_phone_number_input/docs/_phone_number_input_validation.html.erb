@@ -1,5 +1,5 @@
 <%= pb_form_with(scope: :phone_number, url: "", method: :get, id: "example-form-validation") do |form| %>
-    <%= pb_rails("phone_number_input", props: { id: "validation", required: true }) %>
+    <%= pb_rails("phone_number_input", props: { id: "validation", initial_country: "af", value: "70 123 4567", required: true }) %>
     <%= form.actions do |action| %>
         <%= action.submit %>
     <% end %>
