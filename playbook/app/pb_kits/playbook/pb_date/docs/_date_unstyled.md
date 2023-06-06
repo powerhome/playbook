@@ -1,3 +1,1 @@
-To apply your own styles, use the `unstyled` prop. Then in your CSS file, select the `pb_date_kit_unstyled` classname to add your styles. You can also target the child elements as needed. You can also wrap an unstyled date kit in other Playbook Kits like `Title` and `Caption`.
-
-Note: Deviating completely from our design system is discouraged.
+For alternative typography styles you can pass a boolean prop called `unstyled` to the `Date` kit and wrap it in any of our typography kits (`Title`, `Body`, `Caption`, etc.). This will allow the `Date` kit to inherit any of our typography styles.

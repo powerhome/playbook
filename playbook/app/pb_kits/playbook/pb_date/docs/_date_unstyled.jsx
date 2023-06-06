@@ -4,6 +4,9 @@ import { Caption, Date as FormattedDate, Title } from '../../'
 const DateUnstyled = (props) => {
   return (
     <>
+      <Caption size="xs"
+          text="Example with no year"
+      />
       <FormattedDate
           unstyled
           value={new Date()}
@@ -12,46 +15,11 @@ const DateUnstyled = (props) => {
 
       <br />
 
-      <FormattedDate
-          unstyled
-          value="2012-08-03"
-          {...props}
+      <Caption size="xs"
+          text="Example with wrapping typography kit"
       />
-
-      <br />
-
-      <FormattedDate
-          showDayOfWeek
-          unstyled
-          value="2017-12-03"
-          {...props}
-      />
-
-      <br />
-
-      <FormattedDate
-          showIcon
-          unstyled
-          value="1995-12-25"
-          {...props}
-      />
-
-      <br />
-
-      <FormattedDate
-          showDayOfWeek
-          showIcon
-          unstyled
-          value="1995-12-25"
-          {...props}
-      />
-
-      <br />
-
       <Title size={1}>
         <FormattedDate
-            showDayOfWeek
-            showIcon
             unstyled
             value="1995-12-25"
             {...props}
@@ -60,7 +28,10 @@ const DateUnstyled = (props) => {
 
       <br />
 
-      <Caption>
+      <Caption size="xs"
+          text="Example with icon + subcaption"
+      />
+      <Caption size="xs">
         <FormattedDate
             showDayOfWeek
             showIcon

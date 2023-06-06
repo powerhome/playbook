@@ -60,9 +60,9 @@ const PbDate = (props: PbDateProps) => {
         id={id}
     >
       {unstyled
-        ? <div className="pb_date_kit_unstyled">
+        ? <>
             {showIcon && (
-              <div className="pb_icon_kit_container">
+              <div>
                 <Icon fixedWidth
                     icon="calendar-alt"
                 />
@@ -75,7 +75,7 @@ const PbDate = (props: PbDateProps) => {
                   {weekday}
                 </div>
 
-                <div>{" • "}</div>
+                <div>{"•"}</div>
               </>
             )}
 
@@ -86,7 +86,7 @@ const PbDate = (props: PbDateProps) => {
 
               {currentYear != year && <span>{`, ${year}`}</span>}
             </span>
-          </div>
+          </>
         : size == "md" || size == "lg"
           ? (
             <Title size={4}
