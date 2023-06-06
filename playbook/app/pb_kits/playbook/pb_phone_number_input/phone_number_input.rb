@@ -17,7 +17,8 @@ module Playbook
                             default: []
       prop :preferred_countries, type: Playbook::Props::Array,
                                  default: []
-      prop :error, type: Playbook::Props::String
+      prop :error, type: Playbook::Props::String,
+                   default: ""
       prop :value, type: Playbook::Props::String,
                    default: ""
 
