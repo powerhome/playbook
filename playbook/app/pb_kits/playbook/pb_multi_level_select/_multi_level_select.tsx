@@ -35,7 +35,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     globalProps(props),
     className
   );
-
+  //state for whether dropdown is open or closed
   const [isClosed, setIsClosed] = useState(true);
   //state from onchange for textinput, to use for filtering to create typeahead
   const [filterItem, setFilterItem] = useState("");
@@ -44,7 +44,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //formattedData with checked and parent_id added
   const [formattedData, setFormattedData] = useState(treeData);
   //toggle chevron in dropdown
-  const [isToggled, setIsToggled] = useState(true)
+  const [isToggled, setIsToggled] = useState({})
 
   useEffect(() => {
     returnAllSelected && (
@@ -63,7 +63,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (!Array.isArray(treeData)) {
       return; 
     }
-
     return treeData.map((item:any) => {
       const newItem = { ...item, checked: false, parent_id, depth };
 
@@ -132,6 +131,14 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       setReturnedArray((prevItems) => [...prevItems, filtered[0]]);
     }
   };
+
+//handle click on chevron toggles in dropdown
+const handleToggleClick = (id:number) => {
+  setIsToggled((prevState:any) => ({
+    ...prevState,
+    [id]: !prevState[id],
+  }));
+}
 
   //Function is filtering formattedData by filteredItem to create typeahead functionality
   const filterTreeData = (formattedData:any, searchTerm:string) => {
@@ -203,27 +210,14 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             >
               {isItemMatchingFilter && (
                 <>
-                {isToggled ? (
-                  <div key="chevron-down">
+                  <div key={isToggled[item.id] ? "chevron-up" : "chevron-down"}>
                     <CircleIconButton
-                            icon="chevron-down"
-                            className={item.children ? "" : "toggle_icon"}
-                            onClick={()=> setIsToggled(!isToggled)}
-                            variant="link"
-                          />
+                      icon={isToggled[item.id] ? "chevron-up" : "chevron-down"}
+                      className={item.children ? "" : "toggle_icon"}
+                      onClick={() => handleToggleClick(item.id)}
+                      variant="link"
+                    />
                   </div>
-                ) : (
-                  <div key="chevron-up">
-                    <CircleIconButton
-                            icon="chevron-up"
-                            className={item.children ? "" : "toggle_icon"}
-                            onClick={()=> setIsToggled(!isToggled)}
-                            variant="link"
-                          />
-                  </div>
-                )}
-                    
-
                   <Checkbox text={item.label} id={item.id}>
                     <input
                       checked={item.checked}
