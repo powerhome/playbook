@@ -1,15 +1,15 @@
 <% if !local_prop_data.present? %>
   <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
-  <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm" }) %>
-    <%= pb_rails("card", props: { padding: "none" }) do %>
+  <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm", dark: dark }) %>
+    <%= pb_rails("card", props: { padding: "none", dark: dark }) do %>
       <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
-        <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle" }) do %>
-          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", active: true }) %>
+        <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle", dark: dark }) do %>
+          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", active: true, dark: dark }) %>
         <% end %>
       <% end %>
-      <%= pb_rails("section_separator") %>
+      <%= pb_rails("section_separator", dark: dark) %>
       <%= pb_rails("card/card_body", props: {}) do %>
-        <%= pb_rails("table", props: {container: false, disable_hover: true }) do %>
+        <%= pb_rails("table", props: {container: false, disable_hover: true, dark: dark }) do %>
           <thead>
             <tr>
               <th>Props</th>
@@ -21,18 +21,19 @@
             <% global_prop_data.each do |key, value|%>
               <tr>
                 <td>
-                  <%= pb_rails("title", props: { text: key, tag: "h4", size: 4 }) %>
+                  <%= pb_rails("title", props: { text: key, tag: "h4", size: 4, dark: dark }) %>
                 </td>
                 <td>
                   <%= pb_rails("card", props: {
                     classname: "card",
                     padding: "xxs",
-                    background: "light",
+                    background: dark ? "dark" : "light",
                     border_none: true,
                     border_radius: "sm"
                   })  do %>
                     <%= pb_rails("body", props: {
-                      classname: "kearning"
+                      classname: "kearning",
+                      dark: dark
                     }) do %>
                         <% if key =~ /^padding|^margin/ %>
                             <%= "array" %>
@@ -49,13 +50,14 @@
                           flex_direction: "row",
                           classname: "card",
                           padding: "xxs",
-                          background: "light",
+                          background: dark ? "dark" : "light",
                           border_none: true,
                           border_radius: "sm",
                           margin: "xxs"
                         })  do %>
                           <%= pb_rails("body", props: {
-                              classname: "kearning"
+                              classname: "kearning",
+                              dark: dark
                           }) do %>
                             <%= item %>
                           <% end %>
@@ -69,13 +71,14 @@
                           flex_direction: "row",
                           classname: "card",
                           padding: "xxs",
-                          background: "light",
+                          background: dark ? "dark" : "light",
                           border_none: true,
                           border_radius: "sm",
                           margin: "xxs"
                         })  do %>
                           <%= pb_rails("body", props: {
-                              classname: "kearning"
+                              classname: "kearning",
+                              dark: dark
                           }) do %>
                             <%= item %>
                           <% end %>
@@ -94,23 +97,23 @@
   </div>
 <% else %>
   <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
-    <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm" }) %>
-    <%= pb_rails("card", props: { padding: "none" }) do %>
+    <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm", dark: dark }) %>
+    <%= pb_rails("card", props: { padding: "none", dark: dark }) do %>
       <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
-        <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle" }) do %>
+        <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle", dark: dark }) do %>
         <% if local_prop_data.present? %>
-          <%= pb_rails("nav/item", props: { text: "Kit Props", link: "#", active: true, id: "local-button-active", classname: "local-active" }) %>
+          <%= pb_rails("nav/item", props: { text: "Kit Props", link: "#", active: true, id: "local-button-active", classname: "local-active", dark: dark }) %>
         <% end %>
         <% if local_prop_data.present? %>
-          <%= pb_rails("nav/item", props: { text: "Kit Props", link: "#", id: "local-button", classname: "global-active" }) %>
+          <%= pb_rails("nav/item", props: { text: "Kit Props", link: "#", id: "local-button", classname: "global-active", dark: dark }) %>
         <% end %>
-          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", active: true, id: "global-button-active", classname: "global-active" }) %>
-          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", id: "global-button", classname: "local-active" }) %>
+          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", active: true, id: "global-button-active", classname: "global-active", dark: dark }) %>
+          <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", id: "global-button", classname: "local-active", dark: dark }) %>
         <% end %>
       <% end %>
-      <%= pb_rails("section_separator") %>
-      <%= pb_rails("card/card_body", props: {}) do %>
-        <%= pb_rails("table", props: {container: false, disable_hover: true, id: "global-prop-table", classname: "global-active"}) do %>
+      <%= pb_rails("section_separator", props: { dark: dark }) %>
+      <%= pb_rails("card/card_body", props: { dark: dark }) do %>
+        <%= pb_rails("table", props: {container: false, disable_hover: true, id: "global-prop-table", classname: "global-active", dark: dark}) do %>
           <thead>
             <tr>
               <th>Props</th>
@@ -122,18 +125,19 @@
           <% global_prop_data.each do |key, value|%>
               <tr>
                 <td>
-                  <%= pb_rails("title", props: { text: key, tag: "h4", size: 4 }) %>
+                  <%= pb_rails("title", props: { text: key, tag: "h4", size: 4, dark: dark }) %>
                 </td>
                 <td>
                   <%= pb_rails("card", props: {
                     classname: "card",
                     padding: "xxs",
-                    background: "light",
+                    background: dark ? "dark" : "light",
                     border_none: true,
                     border_radius: "sm"
                   })  do %>
                     <%= pb_rails("body", props: {
-                      classname: "kearning"
+                      classname: "kearning",
+                      dark: dark
                     }) do %>
                         <% if key =~ /^padding|^margin/ %>
                             <%= "array" %>
@@ -150,13 +154,14 @@
                           flex_direction: "row",
                           classname: "card",
                           padding: "xxs",
-                          background: "light",
+                          background: dark ? "dark" : "light",
                           border_none: true,
                           border_radius: "sm",
                           margin: "xxs"
                         })  do %>
                           <%= pb_rails("body", props: {
-                              classname: "kearning"
+                              classname: "kearning",
+                              dark: dark
                           }) do %>
                             <%= item %>
                           <% end %>
@@ -170,13 +175,14 @@
                           flex_direction: "row",
                           classname: "card",
                           padding: "xxs",
-                          background: "light",
+                          background: dark ? "dark" : "light",
                           border_none: true,
                           border_radius: "sm",
                           margin: "xxs"
                         })  do %>
                           <%= pb_rails("body", props: {
-                              classname: "kearning"
+                              classname: "kearning",
+                              dark: dark
                           }) do %>
                             <%= item %>
                           <% end %>
@@ -190,7 +196,7 @@
             <% end %>
           </tbody>
         <% end %>
-        <%= pb_rails("table", props: {container: false, disable_hover: true, id: "local-prop-table", classname: "local-active"}) do %>
+        <%= pb_rails("table", props: {container: false, disable_hover: true, id: "local-prop-table", classname: "local-active", dark: dark }) do %>
           <thead>
             <tr>
               <th>Props</th>
@@ -203,18 +209,20 @@
           <% local_prop_data.each do |key, value|%>
               <tr>
                 <td>
-                  <%= pb_rails("title", props: { text: key, tag: "h4", size: 4 }) %>
+                  <%= pb_rails("title", props: { text: key, tag: "h4", size: 4, dark: dark }) %>
                 </td>
                 <td>
                   <%= pb_rails("card", props: {
                     classname: "card",
+                    dark: dark,
                     padding: "xxs",
-                    background: "light",
+                    background: dark ? "dark" : "light",
                     border_none: true,
                     border_radius: "sm"
                   })  do %>
                     <%= pb_rails("body", props: {
-                      classname: "kearning"
+                      classname: "kearning",
+                      dark: dark
                     }) do %>
                         <%= value[:type].downcase %>
                     <% end %>
@@ -228,13 +236,14 @@
                           flex_direction: "row",
                           classname: "card",
                           padding: "xxs",
-                          background: "light",
+                          background: dark ? "dark" : "light",
                           border_none: true,
                           border_radius: "sm",
                           margin: "xxs"
                         })  do %>
                           <%= pb_rails("body", props: {
-                              classname: "kearning"
+                              classname: "kearning",
+                              dark: dark,
                           }) do %>
                             <%= item %>
                           <% end %>
@@ -248,12 +257,13 @@
                     <%= pb_rails("card", props: {
                             classname: "card",
                             padding: "xxs",
-                            background: "light",
+                            background: dark ? "dark" : "light",
                             border_none: true,
                             border_radius: "sm"
                       })  do %>
                         <%= pb_rails("body", props: {
-                          classname: "kearning"
+                          classname: "kearning",
+                          dark: dark,
                         }) do %>
                             <%= value[:default] %>
                         <% end %>

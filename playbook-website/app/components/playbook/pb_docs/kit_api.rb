@@ -4,6 +4,7 @@ module Playbook
   module PbDocs
     class KitApi < Playbook::KitBase
       prop :kit, type: Playbook::Props::String, required: true
+      prop :dark, type: Playbook::Props::Boolean, default: false
 
       def kit_local_props
         local = []
