@@ -44,7 +44,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //formattedData with checked and parent_id added
   const [formattedData, setFormattedData] = useState(treeData);
   //toggle chevron in dropdown
-  const [isToggled, setIsToggled] = useState({})
+  const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({})
 
   useEffect(() => {
     returnAllSelected && (
@@ -134,7 +134,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
 //handle click on chevron toggles in dropdown
 const handleToggleClick = (id:number) => {
-  setIsToggled((prevState:any) => ({
+  setIsToggled((prevState:{ [id: number]: boolean }) => ({
     ...prevState,
     [id]: !prevState[id],
   }));
@@ -246,7 +246,6 @@ const handleToggleClick = (id:number) => {
           <div className="input_inner_container">
             {returnedArray.length !== 0
               ? returnedArray.map((item, index) => (
-                //@ts-ignore
                   <FormPill
                     key={index}
                     text={item.label}

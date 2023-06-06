@@ -10,7 +10,7 @@ type FormPillProps = {
   className?: string,
   id?: string,
   text: string,
-  name: string,
+  name?: string,
   onClick?: React.MouseEventHandler<HTMLSpanElement>,
   avatar?: boolean,
   avatarUrl?: string,
