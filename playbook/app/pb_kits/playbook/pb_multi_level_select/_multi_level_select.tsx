@@ -78,10 +78,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     });
   };
 
-  //function for unchecking items in formattedData when pill x is clicked
+  //function for unchecking items in formattedData
   const unCheckIt = (formattedData:any, id:string) => {
     formattedData.map((item:any) => {
-      if (item.id === id) {
+      if (item.id === id && item.checked) {
         item.checked = false;
       }
       if (item.children && item.children.length > 0) {
@@ -117,9 +117,19 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const clickedItem = e.target.parentNode.id;
     //setting filterItem to "" will clear textinput and clear typeahead
     setFilterItem("");
-    //Now setting returnedArray with all objects from formattedData that match clicked items
+
     const filtered = filterTreeDataById(formattedData, clickedItem);
-    //filtered will always be an array with 1 object in it, so targetting it with index [0]
+    //check all children of checked parent item
+    if (filtered[0].children && filtered[0].children.length > 0) {
+      filtered[0].children.forEach((item: any) => {
+        toggleCheckedRecursive(item);
+      });
+    }
+
+    const checkedItems = getCheckedItems(formattedData);
+    console.log(checkedItems);
+
+    //filtered will always be an array with 1 object in it, so targetting it with index [0] 
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
         const updatedFiltered = returnedArray.filter(
@@ -128,8 +138,35 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         setReturnedArray(updatedFiltered);
       }
     } else {
-      setReturnedArray((prevItems) => [...prevItems, filtered[0]]);
+      setReturnedArray(checkedItems)
     }
+  };
+
+//recursively check all child and grandchild items if parent checked
+  const toggleCheckedRecursive = (item: any) => {
+    if (!item.checked) {
+      item.checked = true;
+    }
+    if (item.children && item.children.length > 0) {
+      item.children.forEach((childItem: any) => {
+        toggleCheckedRecursive(childItem);
+      });
+    }
+  };
+
+  //function to get all items with checked = true
+  const getCheckedItems = (data: any[]): any[] => {
+    const checkedItems: any[] = [];
+    data.forEach((item: any) => {
+      if (item.checked) {
+        checkedItems.push(item);
+      }
+      if (item.children && item.children.length > 0) {
+        const childCheckedItems = getCheckedItems(item.children);
+        checkedItems.push(...childCheckedItems);
+      }
+    });
+    return checkedItems;
   };
 
 //handle click on chevron toggles in dropdown
@@ -202,24 +239,23 @@ const handleToggleClick = (id:number) => {
 
           return (
             <>
-            <li
-              key={item.id}
-              className="dropdown_item"
-              data-name={item.id}
-              style={{paddingLeft: item.depth * 20}}
-
-            >
-              {isItemMatchingFilter && (
-                <>
-                  <div key={isToggled[item.id] ? "chevron-down" : "chevron-right"}>
-                    <CircleIconButton
-                      icon={isToggled[item.id] ? "chevron-down" : "chevron-right"}
-                      className={item.children ? "" : "toggle_icon"}
-                      onClick={() => handleToggleClick(item.id)}
-                      variant="link"
-                    />
-                  </div>
-                  <Checkbox text={item.label} id={item.id}>
+            {isItemMatchingFilter && (
+              <>
+              <li
+                key={item.id}
+                className="dropdown_item"
+                data-name={item.id}
+                style={{paddingLeft: item.depth * 20}}
+              >
+                <div key={isToggled[item.id] ? "chevron-down" : "chevron-right"}>
+                  <CircleIconButton
+                    icon={isToggled[item.id] ? "chevron-down" : "chevron-right"}
+                    className={item.children ? "" : "toggle_icon"}
+                    onClick={() => handleToggleClick(item.id)}
+                    variant="link"
+                  />
+                </div>
+                <Checkbox text={item.label} id={item.id}>
                     <input
                       checked={item.checked}
                       type="checkbox"
@@ -230,10 +266,17 @@ const handleToggleClick = (id:number) => {
                         handledropdownItemClick(e);
                       }}
                     />
-                  </Checkbox>
-                </>
-              )}
-            </li>
+                </Checkbox>
+              </li>
+              {/* {
+                isToggled[item.id] && (
+                  item.children.map((x:any)=> {
+                    <div>hello</div>
+                  })
+                )
+              } */}
+              </>
+            )}
             </>
           );
         })}
