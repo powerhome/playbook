@@ -4,6 +4,7 @@ import { Button } from "../../"
 const ButtonDefault = (props) => (
   <div>
     <Button
+        hover="product_5_background"
         marginRight='lg'
         onClick={() => alert("button clicked!")}
         tabIndex={0}
@@ -11,6 +12,7 @@ const ButtonDefault = (props) => (
         {...props}
     />{" "}
     <Button
+        hover="text_lt_light"
         marginRight='lg'
         onClick={() => alert("button clicked!")}
         tabIndex={0}
@@ -19,6 +21,7 @@ const ButtonDefault = (props) => (
         {...props}
     />{" "}
     <Button
+        hover="product_5_background"
         marginRight='lg'
         onClick={() => alert("button clicked!")}
         tabIndex={0}

@@ -124,7 +124,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
-  Position & Shadow & ZIndex
+  Position & Shadow & ZIndex & { hover?: string };
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -136,6 +136,9 @@ const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: st
 
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
+
+  hoverProps: ({ hover }: { hover?: string }) => hover ? `bg-hover-${hover}` : '', // Add the "hoverProps" category
+
   spacingProps: ({
     marginRight,
     marginLeft,
@@ -213,7 +216,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     });
     return css.trim();
   },
-
+  borderRadiusProps: ({ borderRadius }: BorderRadius) => {
+    let css = ''
+    css += borderRadius ? `border_radius_${borderRadius} ` : ''
+    return css
+  },
   darkProps: ({ dark }: Dark) => dark ? 'dark' : '',
   numberSpacingProps: ({ numberSpacing }: NumberSpacing) => {
     let css = ''
@@ -363,6 +370,7 @@ export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {})
     return PROP_CATEGORIES[key](allProps)
   }).filter((value) => value?.length > 0).join(" ")
 }
+
 
 export const deprecatedProps = (kit: string, props: string[] = []): void => {
   if (process.env.NODE_ENV === 'development') {
