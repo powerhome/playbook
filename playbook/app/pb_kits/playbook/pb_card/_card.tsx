@@ -54,6 +54,7 @@ const Header = (props: CardHeaderProps) => {
   )
 }
 
+
 // Body component
 const Body = (props: CardBodyProps) => {
   const { children, padding = 'md', className } = props
