@@ -201,6 +201,7 @@ const handleToggleClick = (id:number) => {
           }
 
           return (
+            <>
             <li
               key={item.id}
               className="dropdown_item"
@@ -210,9 +211,9 @@ const handleToggleClick = (id:number) => {
             >
               {isItemMatchingFilter && (
                 <>
-                  <div key={isToggled[item.id] ? "chevron-up" : "chevron-down"}>
+                  <div key={isToggled[item.id] ? "chevron-down" : "chevron-right"}>
                     <CircleIconButton
-                      icon={isToggled[item.id] ? "chevron-up" : "chevron-down"}
+                      icon={isToggled[item.id] ? "chevron-down" : "chevron-right"}
                       className={item.children ? "" : "toggle_icon"}
                       onClick={() => handleToggleClick(item.id)}
                       variant="link"
@@ -233,6 +234,7 @@ const handleToggleClick = (id:number) => {
                 </>
               )}
             </li>
+            </>
           );
         })}
       </ul>
