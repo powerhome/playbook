@@ -34,7 +34,6 @@ const PhoneNumberInputValidation = (props) => {
         >
             {showFormErrors && (
                 <FixedConfirmationToast
-                    closeable
                     marginBottom="md"
                     status="error"
                     text={formErrors}
