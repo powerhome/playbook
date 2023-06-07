@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
@@ -35,6 +35,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     globalProps(props),
     className
   );
+
+  const dropdownRef = useRef(null);
+
   //state for whether dropdown is open or closed
   const [isClosed, setIsClosed] = useState(true);
   //state from onchange for textinput, to use for filtering to create typeahead
@@ -45,6 +48,24 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [formattedData, setFormattedData] = useState(treeData);
   //toggle chevron in dropdown
   const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({});
+
+
+  useEffect(() => {
+    // Function to handle clicks outside the dropdown
+    const handleClickOutside = (event: any) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsClosed(true);
+      }
+    };
+
+    // Attach the event listener
+    window.addEventListener("click", handleClickOutside);
+
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     let el = document.getElementById(`pb_data_wrapper_${id}`);
@@ -98,6 +119,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       return item;
     });
   };
+
+
 
   //click event for x on form pill
   const handlePillClose = (event: any, clickedItem: { [key: string]: any }) => {
@@ -219,7 +242,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //handle click on chevron toggles in dropdown
-  const handleToggleClick = (id: string) => {
+  const handleToggleClick = (id: string, event: React.MouseEvent) => {
+    event.stopPropagation();
     setIsToggled((prevState: { [id: string]: boolean }) => ({
       ...prevState,
       [id]: !prevState[id],
@@ -294,7 +318,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                           isToggled[item.id] ? "chevron-down" : "chevron-right"
                         }
                         className={item.children ? "" : "toggle_icon"}
-                        onClick={() => handleToggleClick(item.id)}
+                        onClick={(event) => handleToggleClick(item.id, event)}
                         variant="link"
                       />
                     </div>
@@ -327,7 +351,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
-      <div className="wrapper">
+      <div ref={dropdownRef} className="wrapper">
         <div className="input_wrapper" onClick={handleInputWrapperClick}>
           <div className="input_inner_container">
             {returnedArray.length !== 0
