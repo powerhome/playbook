@@ -182,28 +182,6 @@ if (clickedItem) {
 }
 }
 
-  //Function is filtering formattedData by filteredItem to create typeahead functionality
-  const filterTreeData = (formattedData:any, searchTerm:string) => {
-    const matchedItems:any = [];
-  
-    const recursiveSearch = (data:any, term:any) => {
-      if (!Array.isArray(data)) {
-        return; 
-      }
-      data.forEach((item:any) => {
-        if (item.label.toLowerCase().includes(term.toLowerCase())) {
-          matchedItems.push(item);
-        }
-  
-        if (item.children && item.children.length > 0) {
-          recursiveSearch(item.children, term);
-        }
-      });
-    };
-  
-    recursiveSearch(formattedData, searchTerm);
-    return matchedItems;
-  };
 
   //function is going over formattedData and returning all objects that match the
   //id of the clicked item from the dropdown
@@ -231,20 +209,8 @@ if (clickedItem) {
     return (
       <ul>
         {items.map((item:any) => {
-          const isItemMatchingFilter = item.label
-            .toLowerCase()
-            .includes(filterItem.toLowerCase());
-
-          if (
-            !isItemMatchingFilter &&
-            (!item.children || item.children.length === 0)
-          ) {
-            return null;
-          }
-
           return (
             <>
-            {isItemMatchingFilter && (
               <li
                 key={item.id}
                 className="dropdown_item"
@@ -273,20 +239,29 @@ if (clickedItem) {
                       />
                   </Checkbox>
                 </div>
-                {/* {item.expanded && item.children && item.children.length > 0 && ( // Show children if expanded is true
+                {item.expanded && item.children && item.children.length > 0 && ( // Show children if expanded is true
                     <div>
                       {renderNestedOptions(item.children)}
                     </div>
                   )}
- */}
+
               </li>
-            )}
             </>
           );
         })}
       </ul>
     );
   };
+  const findByFilter = (formattedData:any, filterText:any) => {
+    return formattedData.filter((item:any) => {
+      const isMatched = item.label.toLowerCase().includes(filterText.toLowerCase());
+      const hasMatchingChildren = item.children && item.children.length > 0
+        ? findByFilter(item.children, filterText).length > 0
+        : false;
+      return isMatched || hasMatchingChildren;
+    });
+  };
+  
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
@@ -306,7 +281,11 @@ if (clickedItem) {
             {returnedArray.length !== 0 ? <br /> : null}
             <input
               id="multiselect_input"
-              onChange={(e) => setFilterItem(e.target.value)}
+              onChange={(e) => {
+                setFilterItem(e.target.value)
+                // Filter options based on the input value
+                console.log(findByFilter(formattedData, e.target.value))
+              }}
               placeholder="Select..."
               value={filterItem}
               onClick={() => setIsClosed(false)}
@@ -324,12 +303,12 @@ if (clickedItem) {
           )}
         </div>
         <div className={`dropdown_menu ${isClosed ? "close" : "open"}`}>
-          {renderNestedOptions(filterTreeData(formattedData, filterItem))}
+          {renderNestedOptions(findByFilter(formattedData, filterItem))}
         </div>
       </div>
     </div>
   );
-          }
+}
 
 
 export default MultiLevelSelect;
