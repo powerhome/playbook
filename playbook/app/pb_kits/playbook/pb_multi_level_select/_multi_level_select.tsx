@@ -100,7 +100,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //click event for x on form pill
-  const handlePillClose = (clickedItem: { [key: string]: any }) => {
+  const handlePillClose = (event: any, clickedItem: { [key: string]: any }) => {
+    // prevents the dropdown from closing when clicking on the pill
+    event.stopPropagation();
     //logic for removing items from returnArray when pills clicked
     if (returnedArray.includes(clickedItem)) {
       const removeUnchecked = returnedArray.filter(
@@ -334,7 +336,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     key={index}
                     text={item.label}
                     size="small"
-                    onClick={() => handlePillClose(item)}
+                    onClick={(event) => handlePillClose(event, item)}
                   />
                 ))
               : null}
