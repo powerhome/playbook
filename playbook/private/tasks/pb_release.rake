@@ -93,24 +93,30 @@ namespace :pb_release do
     `yarn release`
     puts "\nCreating NPM package..."
     `npm pack`
+
+    # RubyGems
+    puts "\nCreating Gem..."
+    `gem build playbook_ui.gemspec`
+    puts "\nCreating Docs Gem..."
+    `gem build lib/playbook_ui_docs.gemspec`
+    # Publish to RubyGems
+    unless dryrun
+      puts "\nPushing to RubyGems..."
+      `gem push playbook_ui-#{version}.gem`
+      `gem push playbook_ui_docs-#{version}.gem`
+      puts "\nPushed to RubyGems. Now lets clean up..."
+      `rm -rf playbook_ui-*.gem playbook_ui_docs-*.gem`
+    end
+
     # Publish to NPM
     unless dryrun
+      # `rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml`
+      `rm -rf dist/app  dist/pb_doc_helper.rb`
       puts "\nPublishing to NPM..."
       npm_suffix = looks_like_alpha ? "--tag alpha" : ""
       `npm publish playbook-ui-#{npm_version}.tgz #{npm_suffix}`
       puts "\nPublished to NPM. Now lets clean up..."
       `rm -rf playbook-ui-*.tgz`
-    end
-
-    # RubyGems
-    puts "\nCreating Gem..."
-    `gem build playbook_ui.gemspec`
-    # Publish to RubyGems
-    unless dryrun
-      puts "\nPushing to RubyGems..."
-      `gem push playbook_ui-#{version}.gem`
-      puts "\nPushed to RubyGems. Now lets clean up..."
-      `rm -rf playbook_ui-*.gem`
     end
 
     if dryrun
