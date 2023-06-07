@@ -47,6 +47,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({})
 
   useEffect(() => {
+    let el = document.getElementById(`pb_data_wrapper_${id}`);
+    if (el) {
+      el.setAttribute("data-tree", JSON.stringify(returnedArray));
+    }
     returnAllSelected && (
       onSelect(returnedArray)
     )
@@ -289,7 +293,6 @@ if (clickedItem) {
               placeholder="Select..."
               value={filterItem}
               onClick={() => setIsClosed(false)}
-              data-tree={JSON.stringify(returnedArray)}
             />
           </div>
           {isClosed ? (
