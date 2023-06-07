@@ -62,7 +62,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   //function to map over data and add checked + parent_id + depth + expanded property to each item
   const addCheckedAndParentProperty = (
-    treeData: any,
+    treeData: { [key: string]: any }[],
     parent_id: string = null,
     depth: number = 0,
     expanded: boolean = false
@@ -70,7 +70,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (!Array.isArray(treeData)) {
       return;
     }
-    return treeData.map((item: any) => {
+    return treeData.map((item: { [key: string]: any } | any) => {
       const newItem = { ...item, checked: false, parent_id, depth, expanded };
 
       if (newItem.children && newItem.children.length > 0) {
@@ -87,8 +87,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //function for unchecking items in formattedData
-  const unCheckIt = (formattedData: any, id: string) => {
-    formattedData.map((item: any) => {
+  const unCheckIt = (formattedData: { [key: string]: any }[], id: string) => {
+    formattedData.map((item: { [key: string]: any }) => {
       if (item.id === id && item.checked) {
         item.checked = false;
       }
@@ -100,7 +100,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //click event for x on form pill
-  const handlePillClose = (clickedItem: any) => {
+  const handlePillClose = (clickedItem: { [key: string]: any }) => {
     //logic for removing items from returnArray when pills clicked
     if (returnedArray.includes(clickedItem)) {
       const removeUnchecked = returnedArray.filter(
@@ -113,7 +113,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
-  const handleInputWrapperClick = (e: any) => {
+  const handleInputWrapperClick = (e:any) => {
     if (
       e.target.id === "multiselect_input" ||
       e.target.classList.contains("pb_form_pill_tag")
@@ -133,11 +133,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     //check and uncheck all children of checked/unchecked parent item
     if (filtered[0].children && filtered[0].children.length > 0) {
       if (filtered[0].checked) {
-        filtered[0].children.forEach((item: any) => {
+        filtered[0].children.forEach((item: { [key: string]: any }) => {
           checkedRecursive(item);
         });
       } else if (!filtered[0].checked && !returnAllSelected) {
-        filtered[0].children.forEach((item: any) => {
+        filtered[0].children.forEach((item: { [key: string]: any }) => {
           unCheckedRecursive(item);
         });
       }
@@ -149,19 +149,19 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
         if (!returnAllSelected) {
-          const updatedFiltered = (returnedArray: any, filtered: any) => {
+          const updatedFiltered = (returnedArray: { [key: string]: any }[], filtered: { [key: string]: any }) => {
             const updatedArray = returnedArray.filter(
-              (item: any) => item !== filtered[0]
+              (item: { [key: string]: any }) => item !== filtered[0]
             );
 
             if (filtered.children && filtered.children.length > 0) {
-              const filteredChildren = filtered.children.map((child: any) =>
+              const filteredChildren = filtered.children.map((child: { [key: string]: any }) =>
                 updatedFiltered(returnedArray, [child])
               );
               updatedArray.push(...filteredChildren.flat());
             }
             return updatedArray.filter(
-              (item: any, index: number) => updatedArray.indexOf(item) === index
+              (item: { [key: string]: any }, index: number) => updatedArray.indexOf(item) === index
             );
           };
           setReturnedArray(checkedItems);
@@ -178,33 +178,33 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //recursively check all child and grandchild items if parent checked
-  const checkedRecursive = (item: any) => {
+  const checkedRecursive = (item: { [key: string]: any }) => {
     if (!item.checked) {
       item.checked = true;
     }
     if (item.children && item.children.length > 0) {
-      item.children.forEach((childItem: any) => {
+      item.children.forEach((childItem: { [key: string]: any }) => {
         checkedRecursive(childItem);
       });
     }
   };
 
   //recursively uncheck all child and grandchild items if parent checked
-  const unCheckedRecursive = (item: any) => {
+  const unCheckedRecursive = (item: { [key: string]: any }) => {
     if (item.checked) {
       item.checked = false;
     }
     if (item.children && item.children.length > 0) {
-      item.children.forEach((childItem: any) => {
+      item.children.forEach((childItem: { [key: string]: any }) => {
         unCheckedRecursive(childItem);
       });
     }
   };
 
   //function to get all items with checked = true
-  const getCheckedItems = (data: any[]): any[] => {
-    const checkedItems: any[] = [];
-    data.forEach((item: any) => {
+  const getCheckedItems = (data: { [key: string]: any }[]): { [key: string]: any }[] => {
+    const checkedItems: { [key: string]: any }[] = [];
+    data.forEach((item: { [key: string]: any }) => {
       if (item.checked) {
         checkedItems.push(item);
       }
@@ -231,9 +231,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   //function is going over formattedData and returning all objects that match the
   //id of the clicked item from the dropdown
-  const filterFormattedDataById = (formattedData: any, id: string) => {
-    const matched: any = [];
-    const recursiveSearch = (data: any, term: any) => {
+  const filterFormattedDataById = (formattedData: { [key: string]: any }[], id: string) => {
+    const matched: { [key: string]: any }[] = [];
+    const recursiveSearch = (data: { [key: string]: any }[], term: string) => {
       for (const item of data) {
         if (item.id.toLowerCase().includes(term.toLowerCase())) {
           matched.push(item);
@@ -249,9 +249,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return matched;
   };
 
-  const findByFilter = (formattedData: any, searchTerm: string) => {
-    const matchedItems: any[] = [];
-    const recursiveSearch = (data: any, term: string) => {
+  const findByFilter = (formattedData: { [key: string]: any }[], searchTerm: string) => {
+    const matchedItems: { [key: string]: any }[] = [];
+    const recursiveSearch = (data: { [key: string]: any }[], term: string) => {
       for (const item of data) {
         if (item.label.toLowerCase().includes(term.toLowerCase())) {
           matchedItems.push(item);
@@ -268,11 +268,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //rendering formattedData to UI based on typeahead
-  const renderNestedOptions = (items: any) => {
+  const renderNestedOptions = (items: { [key: string]: any }[]) => {
     return (
       <ul>
         {Array.isArray(items) &&
-          items.map((item: any) => {
+          items.map((item: { [key: string]: any }) => {
             return (
               <>
                 <li
