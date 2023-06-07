@@ -25,6 +25,7 @@ type FormPillProps = {
 const FormPill = (props: FormPillProps) => {
   const {
     className,
+    id,
     text,
     name,
     onClick = () => {},
@@ -41,7 +42,7 @@ const FormPill = (props: FormPillProps) => {
     textTransform,
   )
   return (
-    <div className={css}>
+    <div className={css} id={id}>
         {name &&
         <>
         <Avatar

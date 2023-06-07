@@ -51,7 +51,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (el) {
       el.setAttribute("data-tree", JSON.stringify(returnedArray));
     }
-    returnAllSelected && onSelect(returnedArray);
+    onSelect(returnedArray);
   }, [returnedArray]);
 
   useEffect(() => {
@@ -130,15 +130,17 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setFilterItem("");
 
     const filtered = filterFormattedDataById(formattedData, clickedItem);
-    //check all children of checked parent item
-    if (
-      filtered[0].checked &&
-      filtered[0].children &&
-      filtered[0].children.length > 0
-    ) {
-      filtered[0].children.forEach((item: any) => {
-        toggleCheckedRecursive(item);
-      });
+    //check and uncheck all children of checked/unchecked parent item
+    if (filtered[0].children && filtered[0].children.length > 0) {
+      if (filtered[0].checked) {
+        filtered[0].children.forEach((item: any) => {
+          checkedRecursive(item);
+        });
+      } else if (!filtered[0].checked && !returnAllSelected) {
+        filtered[0].children.forEach((item: any) => {
+          unCheckedRecursive(item);
+        });
+      }
     }
 
     const checkedItems = getCheckedItems(formattedData);
@@ -146,10 +148,29 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     //filtered will always be an array with 1 object in it, so targetting it with index [0]
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
-        const updatedFiltered = returnedArray.filter(
-          (item) => item !== filtered[0]
-        );
-        setReturnedArray(updatedFiltered);
+        if (!returnAllSelected) {
+          const updatedFiltered = (returnedArray: any, filtered: any) => {
+            const updatedArray = returnedArray.filter(
+              (item: any) => item !== filtered[0]
+            );
+
+            if (filtered.children && filtered.children.length > 0) {
+              const filteredChildren = filtered.children.map((child: any) =>
+                updatedFiltered(returnedArray, [child])
+              );
+              updatedArray.push(...filteredChildren.flat());
+            }
+            return updatedArray.filter(
+              (item: any, index: number) => updatedArray.indexOf(item) === index
+            );
+          };
+          setReturnedArray(checkedItems);
+        } else {
+          const updatedFiltered = returnedArray.filter(
+            (item) => item !== filtered[0]
+          );
+          setReturnedArray(updatedFiltered);
+        }
       }
     } else {
       setReturnedArray(checkedItems);
@@ -157,13 +178,25 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //recursively check all child and grandchild items if parent checked
-  const toggleCheckedRecursive = (item: any) => {
+  const checkedRecursive = (item: any) => {
     if (!item.checked) {
       item.checked = true;
     }
     if (item.children && item.children.length > 0) {
       item.children.forEach((childItem: any) => {
-        toggleCheckedRecursive(childItem);
+        checkedRecursive(childItem);
+      });
+    }
+  };
+
+  //recursively uncheck all child and grandchild items if parent checked
+  const unCheckedRecursive = (item: any) => {
+    if (item.checked) {
+      item.checked = false;
+    }
+    if (item.children && item.children.length > 0) {
+      item.children.forEach((childItem: any) => {
+        unCheckedRecursive(childItem);
       });
     }
   };
@@ -278,7 +311,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   </div>
                   {item.expanded &&
                     item.children &&
-                    item.children.length > 0 && !filterItem && ( // Show children if expanded is true
+                    item.children.length > 0 &&
+                    !filterItem && ( // Show children if expanded is true
                       <div>{renderNestedOptions(item.children)}</div>
                     )}
                 </li>
