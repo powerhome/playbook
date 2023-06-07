@@ -41,6 +41,8 @@ type PhoneNumberInputProps = {
 enum ValidationError {
   TooShort = 2,
   TooLong = 3,
+  MissingAreaCode = 4,
+  SomethingWentWrong = -99
 }
 
 const formatToGlobalCountryName = (countryName: string) => {
@@ -109,35 +111,68 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     }
   }, [error, onValidate])
 
+  if (itiInit) isValid(itiInit.isValidNumber())
+
+  const showFormattedError = (reason = '') => {
+    const countryName = itiInit.getSelectedCountryData().name
+    const reasonText = reason.length > 0 ? ` (${reason})` : ''
+    setError(`Invalid ${countryName} phone number${reasonText}`)
+    return true
+  }
+
   const validateTooLongNumber = (itiInit: any) => {
-    const error = itiInit.getValidationError()
-
-    if (error === ValidationError.TooLong) {
-      const countryName = itiInit.getSelectedCountryData().name
-      setError(`Invalid ${countryName} phone number (too long)`)
+    if (!itiInit) return
+    if (itiInit.getValidationError() === ValidationError.TooLong) {
+      return showFormattedError('too long')
     } else {
-      setError("")
+      setError('')
     }
   }
 
-  const validateTooShortNumber = () => {
-    const error = itiInit.getValidationError()
-
-    if (error === ValidationError.TooShort) {
-      const countryName = itiInit.getSelectedCountryData().name
-      setError(`Invalid ${countryName} phone number (too short)`)
+  const validateTooShortNumber = (itiInit: any) => {
+    if (!itiInit) return
+    if (itiInit.getValidationError() === ValidationError.TooShort) {
+      return showFormattedError('too short')
+    } else {
+      setError('')
     }
   }
 
-  const validateOnlyNumbers = () => {
+  const validateOnlyNumbers = (itiInit: any) => {
+    if (!itiInit) return
     if (inputValue && !containOnlyNumbers(inputValue)) {
-      setError("Invalid phone number. Enter numbers only.")
+      return showFormattedError('enter numbers only')
+    }
+  }
+
+  const validateUnhandledError = (itiInit: any) => {
+    if (!itiInit) return
+    if (itiInit.getValidationError() === ValidationError.SomethingWentWrong) {
+      if (inputValue.length === 1) {
+        return showFormattedError('too short')
+      } else if (inputValue.length === 0) {
+        setError('Missing phone number')
+        return true
+      } else {
+        return showFormattedError()
+      }
+    }
+  }
+
+  const validateMissingAreaCode = (itiInit: any) => {
+    if (!itiInit) return
+    if (itiInit.getValidationError() === ValidationError.MissingAreaCode) {
+      showFormattedError('missing area code')
+      return true
     }
   }
 
   const validateErrors = () => {
-    validateTooShortNumber()
-    validateOnlyNumbers()
+    if (validateOnlyNumbers(itiInit)) return
+    if (validateTooLongNumber(itiInit)) return
+    if (validateTooShortNumber(itiInit)) return
+    if (validateUnhandledError(itiInit)) return
+    if (validateMissingAreaCode(itiInit)) return
   }
 
   const getCurrentSelectedData = (itiInit: any, inputValue: string) => {
@@ -146,11 +181,9 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(evt.target.value)
-    validateTooLongNumber(itiInit)
     const phoneNumberData = getCurrentSelectedData(itiInit, evt.target.value)
     setSelectedData(phoneNumberData)
     onChange(phoneNumberData)
-    isValid(itiInit.isValidNumber())
   }
 
   // Separating Concerns as React Docs Recommend
@@ -158,20 +191,20 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   useEffect(formatAllCountries, [])
 
   useEffect(() => {
-    const telInputInit = new intlTelInput(inputRef.current, {
+    const telInputInit = intlTelInput(inputRef.current, {
       separateDialCode: true,
       preferredCountries,
       allowDropdown: !disabled,
       initialCountry,
       onlyCountries,
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.6/js/utils.min.js"
     })
 
     inputRef.current.addEventListener("countrychange", (evt: Event) => {
-      validateTooLongNumber(telInputInit)
       const phoneNumberData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
       setSelectedData(phoneNumberData)
       onChange(phoneNumberData)
-      isValid(telInputInit.isValidNumber())
+      validateErrors()
     })
 
     inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
@@ -186,6 +219,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     "data-phone-number": JSON.stringify(selectedData),
     disabled,
     error,
+    type: 'tel',
     id,
     label,
     name,
