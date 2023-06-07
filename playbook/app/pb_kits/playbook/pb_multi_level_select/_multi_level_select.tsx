@@ -15,7 +15,7 @@ type MultiLevelSelectProps = {
   returnAllSelected?: boolean;
   treeData?: { [key: string]: string }[];
   onSelect?: (prop: { [key: string]: any }) => void;
-} & GlobalProps
+} & GlobalProps;
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const {
@@ -44,16 +44,14 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //formattedData with checked and parent_id added
   const [formattedData, setFormattedData] = useState(treeData);
   //toggle chevron in dropdown
-  const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({})
+  const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({});
 
   useEffect(() => {
     let el = document.getElementById(`pb_data_wrapper_${id}`);
     if (el) {
       el.setAttribute("data-tree", JSON.stringify(returnedArray));
     }
-    returnAllSelected && (
-      onSelect(returnedArray)
-    )
+    returnAllSelected && onSelect(returnedArray);
   }, [returnedArray]);
 
   useEffect(() => {
@@ -63,11 +61,16 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   }, []);
 
   //function to map over data and add checked + parent_id + depth + expanded property to each item
-  const addCheckedAndParentProperty = (treeData:any, parent_id:string = null, depth:number = 0, expanded:boolean = false) => {
+  const addCheckedAndParentProperty = (
+    treeData: any,
+    parent_id: string = null,
+    depth: number = 0,
+    expanded: boolean = false
+  ) => {
     if (!Array.isArray(treeData)) {
-      return; 
+      return;
     }
-    return treeData.map((item:any) => {
+    return treeData.map((item: any) => {
       const newItem = { ...item, checked: false, parent_id, depth, expanded };
 
       if (newItem.children && newItem.children.length > 0) {
@@ -84,8 +87,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //function for unchecking items in formattedData
-  const unCheckIt = (formattedData:any, id:string) => {
-    formattedData.map((item:any) => {
+  const unCheckIt = (formattedData: any, id: string) => {
+    formattedData.map((item: any) => {
       if (item.id === id && item.checked) {
         item.checked = false;
       }
@@ -110,14 +113,17 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
-  const handleInputWrapperClick = (e:any) => {
-    if (e.target.id === "multiselect_input" || e.target.classList.contains("pb_form_pill_tag")) {
+  const handleInputWrapperClick = (e: any) => {
+    if (
+      e.target.id === "multiselect_input" ||
+      e.target.classList.contains("pb_form_pill_tag")
+    ) {
       return;
     }
     setIsClosed(!isClosed);
   };
 
-  const handledropdownItemClick = (e:any) => {
+  const handledropdownItemClick = (e: any) => {
     //grab id from parent div
     const clickedItem = e.target.parentNode.id;
     //setting filterItem to "" will clear textinput and clear typeahead
@@ -125,7 +131,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
     const filtered = filterFormattedDataById(formattedData, clickedItem);
     //check all children of checked parent item
-    if (filtered[0].checked && filtered[0].children && filtered[0].children.length > 0) {
+    if (
+      filtered[0].checked &&
+      filtered[0].children &&
+      filtered[0].children.length > 0
+    ) {
       filtered[0].children.forEach((item: any) => {
         toggleCheckedRecursive(item);
       });
@@ -133,7 +143,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
     const checkedItems = getCheckedItems(formattedData);
 
-    //filtered will always be an array with 1 object in it, so targetting it with index [0] 
+    //filtered will always be an array with 1 object in it, so targetting it with index [0]
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
         const updatedFiltered = returnedArray.filter(
@@ -142,11 +152,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         setReturnedArray(updatedFiltered);
       }
     } else {
-      setReturnedArray(checkedItems)
+      setReturnedArray(checkedItems);
     }
   };
 
-//recursively check all child and grandchild items if parent checked
+  //recursively check all child and grandchild items if parent checked
   const toggleCheckedRecursive = (item: any) => {
     if (!item.checked) {
       item.checked = true;
@@ -173,25 +183,24 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return checkedItems;
   };
 
-//handle click on chevron toggles in dropdown
-const handleToggleClick = (id:string) => {
-  setIsToggled((prevState:{ [id: string]: boolean }) => ({
-    ...prevState,
-    [id]: !prevState[id],
-  }));
-const clickedItem = filterFormattedDataById(formattedData, id)
+  //handle click on chevron toggles in dropdown
+  const handleToggleClick = (id: string) => {
+    setIsToggled((prevState: { [id: string]: boolean }) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
+    const clickedItem = filterFormattedDataById(formattedData, id);
 
-if (clickedItem) {
-  clickedItem[0].expanded = !clickedItem[0].expanded
-}
-}
-
+    if (clickedItem) {
+      clickedItem[0].expanded = !clickedItem[0].expanded;
+    }
+  };
 
   //function is going over formattedData and returning all objects that match the
   //id of the clicked item from the dropdown
-  const filterFormattedDataById = (formattedData:any, id:string) => {
+  const filterFormattedDataById = (formattedData: any, id: string) => {
     const matched: any = [];
-    const recursiveSearch = (data:any, term:any) => {
+    const recursiveSearch = (data: any, term: any) => {
       for (const item of data) {
         if (item.id.toLowerCase().includes(term.toLowerCase())) {
           matched.push(item);
@@ -207,75 +216,78 @@ if (clickedItem) {
     return matched;
   };
 
+  const findByFilter = (formattedData: any, searchTerm: string) => {
+    const matchedItems: any[] = [];
+    const recursiveSearch = (data: any, term: string) => {
+      for (const item of data) {
+        if (item.label.toLowerCase().includes(term.toLowerCase())) {
+          matchedItems.push(item);
+        }
+
+        if (item.children) {
+          recursiveSearch(item.children, term);
+        }
+      }
+    };
+
+    recursiveSearch(formattedData, searchTerm);
+    return matchedItems;
+  };
 
   //rendering formattedData to UI based on typeahead
-  const renderNestedOptions = (items:any) => {
+  const renderNestedOptions = (items: any) => {
     return (
       <ul>
         {Array.isArray(items) &&
-          items.map((item:any) => {
+          items.map((item: any) => {
             return (
               <>
                 <li
                   key={item.id}
                   className="dropdown_item"
                   data-name={item.id}
-                  style={{paddingLeft: item.depth * 20}}
+                  style={{ paddingLeft: item.depth * 20 }}
                 >
                   <div className="dropdown_item_checkbox_row">
-                    <div key={isToggled[item.id] ? "chevron-down" : "chevron-right"}>
+                    <div
+                      key={
+                        isToggled[item.id] ? "chevron-down" : "chevron-right"
+                      }
+                    >
                       <CircleIconButton
-                        icon={isToggled[item.id] ? "chevron-down" : "chevron-right"}
+                        icon={
+                          isToggled[item.id] ? "chevron-down" : "chevron-right"
+                        }
                         className={item.children ? "" : "toggle_icon"}
                         onClick={() => handleToggleClick(item.id)}
                         variant="link"
                       />
                     </div>
                     <Checkbox text={item.label} id={item.id}>
-                        <input
-                          checked={item.checked}
-                          type="checkbox"
-                          name={item.label}
-                          value={item.label}
-                          onChange={(e) => {
-                            item.checked = !item.checked;
-                            handledropdownItemClick(e);
-                          }}
-                        />
+                      <input
+                        checked={item.checked}
+                        type="checkbox"
+                        name={item.label}
+                        value={item.label}
+                        onChange={(e) => {
+                          item.checked = !item.checked;
+                          handledropdownItemClick(e);
+                        }}
+                      />
                     </Checkbox>
                   </div>
-                  {item.expanded && item.children && item.children.length > 0 && ( // Show children if expanded is true
-                      <div>
-                        {renderNestedOptions(item.children)}
-                      </div>
+                  {item.expanded &&
+                    item.children &&
+                    item.children.length > 0 && !filterItem && ( // Show children if expanded is true
+                      <div>{renderNestedOptions(item.children)}</div>
                     )}
-
                 </li>
               </>
             );
-        })}
+          })}
       </ul>
     );
   };
-
-  const findByFilter = (formattedData:any, searchTerm:string) => {
-      const matchedItems:any[] = [];
-      const recursiveSearch = (data:any, term:string) => {
-        for (const item of data) {
-          if (item.label.toLowerCase().includes(term.toLowerCase())) {
-            matchedItems.push(item);
-          }
-  
-          if (item.children) {
-            recursiveSearch(item.children, term);
-          }
-        }
-      };
-  
-      recursiveSearch(formattedData, searchTerm);
-      return matchedItems;
-  };
-  
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
@@ -296,7 +308,7 @@ if (clickedItem) {
             <input
               id="multiselect_input"
               onChange={(e) => {
-                setFilterItem(e.target.value)
+                setFilterItem(e.target.value);
               }}
               placeholder="Select..."
               value={filterItem}
@@ -314,12 +326,13 @@ if (clickedItem) {
           )}
         </div>
         <div className={`dropdown_menu ${isClosed ? "close" : "open"}`}>
-          {renderNestedOptions(filterItem ? findByFilter(formattedData, filterItem) : formattedData)}
+          {renderNestedOptions(
+            filterItem ? findByFilter(formattedData, filterItem) : formattedData
+          )}
         </div>
       </div>
     </div>
   );
-}
-
+};
 
 export default MultiLevelSelect;
