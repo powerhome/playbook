@@ -51,6 +51,8 @@
     padding: 20px;
     border-radius: 6px;
     border: 1px solid #e4e8f0;
+    max-height: 600px;
+    overflow: scroll;
 
     .dropdown_item {
       list-style: none;
