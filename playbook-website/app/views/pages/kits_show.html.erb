@@ -1,11 +1,11 @@
+  <div class="kit-show-wrapper">
 <% @kits_array.each do |kit| %>
-  <div class="pb--kit-show <%=kit%>-kit">
+  <div class="pb--kit-show <%=kit%>-kit multi-kit-titles">
     <%= pb_rails("title", props: { text: pb_kit_title(kit), tag: "h1", size: 1, margin_top: "xl" }) %>
     <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
       <%= render_markdown(pb_doc_kit_description(kit)) %>
     </div>
   </div>
-  <div class="kit-show-wrapper">
     <div class="pb--kit-type-nav">
     <% if get_samples(kit).size > 0 %>
       <div class="sample-ui-link-wrapper mb_xl">
@@ -30,18 +30,18 @@
 
     <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
       <% if pb_doc_has_kit_type?(kit, "rails") %>
-          <%= pb_rails("nav/item", props: { text: "Rails", link: kits_show_rails_path(@kits), active: action_name == 'kits_show_rails' }) %>
+        <%= pb_rails("nav/item", props: { text: "Rails", link: kits_show_rails_path(@kits), active: action_name == 'kit_show_rails' }) %>
       <% end %>
       <% if pb_doc_has_kit_type?(kit, "react") %>
-        <%= pb_rails("nav/item", props: { text: "React", link: kits_show_react_path(@kits), active: action_name == 'kits_show_react' }) %>
+        <%= pb_rails("nav/item", props: { text: "React", link: kits_show_react_path(@kits), active: action_name == 'kit_show_react' }) %>
       <% end %>
     <% end %>
 
     <%= pb_rails("section_separator") %>
     </div>
-    <% if (action_name == "kits_show_rails") %>
+    <% if (action_name == "kit_show_rails") %>
       <%= pb_kit(kit: kit, dark_mode: dark_mode?) %>
-    <% elsif (action_name == "kits_show_react") %>
+    <% elsif (action_name == "kit_show_react") %>
       <%= pb_kit(kit: kit, type: "react", dark_mode: dark_mode?) %>
     <% end %>
 <% end %>

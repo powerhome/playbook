@@ -54,41 +54,29 @@ class PagesController < ApplicationController
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    render "pages/kit_show"
+    if params[:name].include?("&")
+      @kits = params[:name].split("%26")
+      @kits_array = @kits.first.split("&")
+      render template: "pages/kits_show"
+    else
+      render template: "pages/kit_show"
+    end
   end
 
   def kit_show_react
     @type = "react"
-    render template: "pages/kit_show"
+    if params[:name].include?("&")
+      @kits = params[:name].split("%26")
+      @kits_array = @kits.first.split("&")
+      render template: "pages/kits_show"
+    else
+      render template: "pages/kit_show"
+    end
   end
 
   def kit_show_swift
     @type = "swift"
     render template: "pages/kit_show", layout: "layouts/kits"
-  end
-
-  def kits_show
-    @kits = params[:names].split("%26")
-    @kits_array = @kits.first.split("&")
-    @type = params[:type]
-
-    render template: "pages/kits_show", layout: "layouts/kits"
-  end
-
-  def kits_show_rails
-    @kits = params[:names].split("%26")
-    @kits_array = @kits.first.split("&")
-    @type = params[:type]
-
-    render template: "pages/kits_show", layout: "layouts/kits"
-  end
-
-  def kits_show_react
-    @kits = params[:names].split("%26")
-    @kits_array = @kits.first.split("&")
-    @type = params[:type]
-
-    render template: "pages/kits_show", layout: "layouts/kits"
   end
 
   def kit_playground_rails
@@ -182,14 +170,21 @@ private
     end
   end
 
-  # def set_kit
-  #   menu = MENU["kits"].map { |link| link.is_a?(Hash) ? link.first.last : link }
-  #   if menu.flatten.include?(params[:name])
-  #     @kit = params[:name]
-  #   else
-  #     redirect_to root_path, flash: { error: "That kit does not exist" }
-  #   end
-  # end
+  def pb_doc_has_kit_type?(kit, type = "rails")
+    case type
+    when "rails"
+      extension = "erb"
+    when "react"
+      extension = "jsx"
+    when "swift"
+      extension = "swift"
+    end
+
+    Playbook.kit_path(kit, "docs")
+            .glob("**/*.#{extension}")
+            .any? { |path| path.basename.to_s.include?(extension) }
+            .present?
+  end
 
   def set_kit
     menu = MENU["kits"].map { |link| link.is_a?(Hash) ? link.first.last : link }
@@ -214,11 +209,18 @@ private
   end
 
   def ensure_kit_type_exists
-    # TODO: unsure why we cannot simply use the helpers that are included in ApplicationController - fix this
-    is_rails_kit = action_name == "kit_show_rails"
-    files = is_rails_kit ? File.join("**", "*.erb") : File.join("**", "*.jsx")
-    kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
-    redirect_to action: action_name unless kit_files.present?
+    kits_param = params[:name].gsub("%26", "&")
+    @kits = kits_param.split("&")
+    invalid_kits = []
+
+    @kits.each do |kit|
+      invalid_kits << kit unless pb_doc_has_kit_type?(kit, "rails") || pb_doc_has_kit_type?(kit, "react")
+    end
+
+    if invalid_kits.any?
+      error_message = "The following kits do not exist for the specified type: #{invalid_kits.join(', ')}"
+      redirect_to root_path, flash: { error: error_message }
+    end
   end
 
   def pb_doc_kit_path(kit, *args)
