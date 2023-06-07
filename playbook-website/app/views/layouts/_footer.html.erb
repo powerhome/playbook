@@ -7,18 +7,21 @@
       <% end %>
       <%= pb_rails("flex/flex_item", props: {}) do %>
         <%= pb_rails("caption", props: { classname: "dark", text: "Playbook", margin_bottom: "xs" }) %>
-        <a href="/">
+        <%= link_to root_path do %>
           <%= pb_rails("body", props: { classname: "dark", text: "Introduction" }) %>
-        </a>
-        <a href="/getting_started">
+        <% end %>
+        <%= link_to guides_parent_path('getting_started') do %>
           <%= pb_rails("body", props: { classname: "dark", text: "Getting Started" }) %>
-        </a>
-        <a href="/kits">
+        <% end %>
+        <%= link_to kits_path do %>
           <%= pb_rails("body", props: { classname: "dark", text: "Browse Kits" }) %>
-        </a>
-        <a href="/changelog">
+        <% end %>
+        <%= link_to changelog_path do %>
           <%= pb_rails("body", props: { classname: "dark", text: "View Changelog" }) %>
-        </a>
+        <% end %>
+        <%= link_to kit_playground_rails_path do %>
+          <%= pb_rails("body", props: { classname: "dark", text: "Code Playground" }) %>
+        <% end %>
       <% end %>
       <%= pb_rails("flex/flex_item", props: {}) do %>
         <%= pb_rails("caption", props: { classname: "dark", text: "Additional Links", margin_bottom: "xs" }) %>

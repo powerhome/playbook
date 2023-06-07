@@ -1,3 +1,5 @@
 # frozen_string_literal: true
 
-ActionView::Template.register_template_handler(:md, Playbook::Markdown::Helper)
+require "markdown_helper"
+
+ActionView::Template.register_template_handler(:md, PlaybookWebsite::Markdown::Helper)
