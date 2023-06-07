@@ -58,19 +58,20 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setFormattedData(addCheckedAndParentProperty(treeData));
   }, []);
 
-  //function to map over data and add checked + parent_id + depth property to each item
-  const addCheckedAndParentProperty = (treeData:any, parent_id:string = null, depth:number = 0) => {
+  //function to map over data and add checked + parent_id + depth + expanded property to each item
+  const addCheckedAndParentProperty = (treeData:any, parent_id:string = null, depth:number = 0, expanded:boolean = false) => {
     if (!Array.isArray(treeData)) {
       return; 
     }
     return treeData.map((item:any) => {
-      const newItem = { ...item, checked: false, parent_id, depth };
+      const newItem = { ...item, checked: false, parent_id, depth, expanded };
 
       if (newItem.children && newItem.children.length > 0) {
         newItem.children = addCheckedAndParentProperty(
           newItem.children,
           newItem.id,
-          depth + 1
+          depth + 1,
+          expanded
         );
       }
 
@@ -118,16 +119,15 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     //setting filterItem to "" will clear textinput and clear typeahead
     setFilterItem("");
 
-    const filtered = filterTreeDataById(formattedData, clickedItem);
+    const filtered = filterFormattedDataById(formattedData, clickedItem);
     //check all children of checked parent item
-    if (filtered[0].children && filtered[0].children.length > 0) {
+    if (filtered[0].checked && filtered[0].children && filtered[0].children.length > 0) {
       filtered[0].children.forEach((item: any) => {
         toggleCheckedRecursive(item);
       });
     }
 
     const checkedItems = getCheckedItems(formattedData);
-    console.log(checkedItems);
 
     //filtered will always be an array with 1 object in it, so targetting it with index [0] 
     if (returnedArray.includes(filtered[0])) {
@@ -170,11 +170,16 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
 //handle click on chevron toggles in dropdown
-const handleToggleClick = (id:number) => {
-  setIsToggled((prevState:{ [id: number]: boolean }) => ({
+const handleToggleClick = (id:string) => {
+  setIsToggled((prevState:{ [id: string]: boolean }) => ({
     ...prevState,
     [id]: !prevState[id],
   }));
+const clickedItem = filterFormattedDataById(formattedData, id)
+
+if (clickedItem) {
+  clickedItem[0].expanded = !clickedItem[0].expanded
+}
 }
 
   //Function is filtering formattedData by filteredItem to create typeahead functionality
@@ -202,8 +207,8 @@ const handleToggleClick = (id:number) => {
 
   //function is going over formattedData and returning all objects that match the
   //id of the clicked item from the dropdown
-  const filterTreeDataById = (formattedData:any, id:string) => {
-    const matched: any[] = [];
+  const filterFormattedDataById = (formattedData:any, id:string) => {
+    const matched: any = [];
     const recursiveSearch = (data:any, term:any) => {
       for (const item of data) {
         if (item.id.toLowerCase().includes(term.toLowerCase())) {
@@ -240,42 +245,41 @@ const handleToggleClick = (id:number) => {
           return (
             <>
             {isItemMatchingFilter && (
-              <>
               <li
                 key={item.id}
                 className="dropdown_item"
                 data-name={item.id}
                 style={{paddingLeft: item.depth * 20}}
               >
-                <div key={isToggled[item.id] ? "chevron-down" : "chevron-right"}>
-                  <CircleIconButton
-                    icon={isToggled[item.id] ? "chevron-down" : "chevron-right"}
-                    className={item.children ? "" : "toggle_icon"}
-                    onClick={() => handleToggleClick(item.id)}
-                    variant="link"
-                  />
-                </div>
-                <Checkbox text={item.label} id={item.id}>
-                    <input
-                      checked={item.checked}
-                      type="checkbox"
-                      name={item.label}
-                      value={item.label}
-                      onChange={(e) => {
-                        item.checked = !item.checked;
-                        handledropdownItemClick(e);
-                      }}
+                <div className="dropdown_item_checkbox_row">
+                  <div key={isToggled[item.id] ? "chevron-down" : "chevron-right"}>
+                    <CircleIconButton
+                      icon={isToggled[item.id] ? "chevron-down" : "chevron-right"}
+                      className={item.children ? "" : "toggle_icon"}
+                      onClick={() => handleToggleClick(item.id)}
+                      variant="link"
                     />
-                </Checkbox>
+                  </div>
+                  <Checkbox text={item.label} id={item.id}>
+                      <input
+                        checked={item.checked}
+                        type="checkbox"
+                        name={item.label}
+                        value={item.label}
+                        onChange={(e) => {
+                          item.checked = !item.checked;
+                          handledropdownItemClick(e);
+                        }}
+                      />
+                  </Checkbox>
+                </div>
+                {/* {item.expanded && item.children && item.children.length > 0 && ( // Show children if expanded is true
+                    <div>
+                      {renderNestedOptions(item.children)}
+                    </div>
+                  )}
+ */}
               </li>
-              {/* {
-                isToggled[item.id] && (
-                  item.children.map((x:any)=> {
-                    <div>hello</div>
-                  })
-                )
-              } */}
-              </>
             )}
             </>
           );

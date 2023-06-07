@@ -54,8 +54,10 @@
 
     .dropdown_item {
       list-style: none;
-      display: flex;
-      align-items: center;
+      .dropdown_item_checkbox_row {
+        display: flex;
+        align-items: center;
+      }
     }
   }
 
