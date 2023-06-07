@@ -212,58 +212,68 @@ if (clickedItem) {
   const renderNestedOptions = (items:any) => {
     return (
       <ul>
-        {items.map((item:any) => {
-          return (
-            <>
-              <li
-                key={item.id}
-                className="dropdown_item"
-                data-name={item.id}
-                style={{paddingLeft: item.depth * 20}}
-              >
-                <div className="dropdown_item_checkbox_row">
-                  <div key={isToggled[item.id] ? "chevron-down" : "chevron-right"}>
-                    <CircleIconButton
-                      icon={isToggled[item.id] ? "chevron-down" : "chevron-right"}
-                      className={item.children ? "" : "toggle_icon"}
-                      onClick={() => handleToggleClick(item.id)}
-                      variant="link"
-                    />
-                  </div>
-                  <Checkbox text={item.label} id={item.id}>
-                      <input
-                        checked={item.checked}
-                        type="checkbox"
-                        name={item.label}
-                        value={item.label}
-                        onChange={(e) => {
-                          item.checked = !item.checked;
-                          handledropdownItemClick(e);
-                        }}
+        {Array.isArray(items) &&
+          items.map((item:any) => {
+            return (
+              <>
+                <li
+                  key={item.id}
+                  className="dropdown_item"
+                  data-name={item.id}
+                  style={{paddingLeft: item.depth * 20}}
+                >
+                  <div className="dropdown_item_checkbox_row">
+                    <div key={isToggled[item.id] ? "chevron-down" : "chevron-right"}>
+                      <CircleIconButton
+                        icon={isToggled[item.id] ? "chevron-down" : "chevron-right"}
+                        className={item.children ? "" : "toggle_icon"}
+                        onClick={() => handleToggleClick(item.id)}
+                        variant="link"
                       />
-                  </Checkbox>
-                </div>
-                {item.expanded && item.children && item.children.length > 0 && ( // Show children if expanded is true
-                    <div>
-                      {renderNestedOptions(item.children)}
                     </div>
-                  )}
+                    <Checkbox text={item.label} id={item.id}>
+                        <input
+                          checked={item.checked}
+                          type="checkbox"
+                          name={item.label}
+                          value={item.label}
+                          onChange={(e) => {
+                            item.checked = !item.checked;
+                            handledropdownItemClick(e);
+                          }}
+                        />
+                    </Checkbox>
+                  </div>
+                  {item.expanded && item.children && item.children.length > 0 && ( // Show children if expanded is true
+                      <div>
+                        {renderNestedOptions(item.children)}
+                      </div>
+                    )}
 
-              </li>
-            </>
-          );
+                </li>
+              </>
+            );
         })}
       </ul>
     );
   };
-  const findByFilter = (formattedData:any, filterText:any) => {
-    return formattedData.filter((item:any) => {
-      const isMatched = item.label.toLowerCase().includes(filterText.toLowerCase());
-      const hasMatchingChildren = item.children && item.children.length > 0
-        ? findByFilter(item.children, filterText).length > 0
-        : false;
-      return isMatched || hasMatchingChildren;
-    });
+
+  const findByFilter = (formattedData:any, searchTerm:string) => {
+      const matchedItems:any[] = [];
+      const recursiveSearch = (data:any, term:string) => {
+        for (const item of data) {
+          if (item.label.toLowerCase().includes(term.toLowerCase())) {
+            matchedItems.push(item);
+          }
+  
+          if (item.children) {
+            recursiveSearch(item.children, term);
+          }
+        }
+      };
+  
+      recursiveSearch(formattedData, searchTerm);
+      return matchedItems;
   };
   
 
@@ -287,8 +297,6 @@ if (clickedItem) {
               id="multiselect_input"
               onChange={(e) => {
                 setFilterItem(e.target.value)
-                // Filter options based on the input value
-                console.log(findByFilter(formattedData, e.target.value))
               }}
               placeholder="Select..."
               value={filterItem}
@@ -306,7 +314,7 @@ if (clickedItem) {
           )}
         </div>
         <div className={`dropdown_menu ${isClosed ? "close" : "open"}`}>
-          {renderNestedOptions(findByFilter(formattedData, filterItem))}
+          {renderNestedOptions(filterItem ? findByFilter(formattedData, filterItem) : formattedData)}
         </div>
       </div>
     </div>
