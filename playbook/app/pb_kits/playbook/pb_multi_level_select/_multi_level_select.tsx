@@ -49,7 +49,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //toggle chevron in dropdown
   const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({});
 
-
   useEffect(() => {
     // Function to handle clicks outside the dropdown
     const handleClickOutside = (event: any) => {
@@ -120,8 +119,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     });
   };
 
-
-
   //click event for x on form pill
   const handlePillClose = (event: any, clickedItem: { [key: string]: any }) => {
     // prevents the dropdown from closing when clicking on the pill
@@ -138,7 +135,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
-  const handleInputWrapperClick = (e:any) => {
+  const handleInputWrapperClick = (e: any) => {
     if (
       e.target.id === "multiselect_input" ||
       e.target.classList.contains("pb_form_pill_tag")
@@ -146,6 +143,17 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       return;
     }
     setIsClosed(!isClosed);
+  };
+
+  const getAncestorsOfChecked = (formattedData: any, item: any) => {
+    if (item.parent_id) {
+      const ancestors = filterFormattedDataById(formattedData, item.parent_id);
+      ancestors[0].checked = false;
+
+      if (ancestors[0].parent_id) {
+        getAncestorsOfChecked(formattedData, ancestors[0]);
+      }
+    }
   };
 
   const handledropdownItemClick = (e: any) => {
@@ -174,19 +182,27 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
         if (!returnAllSelected) {
-          const updatedFiltered = (returnedArray: { [key: string]: any }[], filtered: { [key: string]: any }) => {
+          //uncheck parent if any child unchecked
+          getAncestorsOfChecked(formattedData, filtered[0]);
+
+          const updatedFiltered = (
+            returnedArray: { [key: string]: any }[],
+            filtered: { [key: string]: any }
+          ) => {
             const updatedArray = returnedArray.filter(
               (item: { [key: string]: any }) => item !== filtered[0]
             );
 
             if (filtered.children && filtered.children.length > 0) {
-              const filteredChildren = filtered.children.map((child: { [key: string]: any }) =>
-                updatedFiltered(returnedArray, [child])
+              const filteredChildren = filtered.children.map(
+                (child: { [key: string]: any }) =>
+                  updatedFiltered(returnedArray, [child])
               );
               updatedArray.push(...filteredChildren.flat());
             }
             return updatedArray.filter(
-              (item: { [key: string]: any }, index: number) => updatedArray.indexOf(item) === index
+              (item: { [key: string]: any }, index: number) =>
+                updatedArray.indexOf(item) === index
             );
           };
           setReturnedArray(checkedItems);
@@ -227,7 +243,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   //function to get all items with checked = true
-  const getCheckedItems = (data: { [key: string]: any }[]): { [key: string]: any }[] => {
+  const getCheckedItems = (
+    data: { [key: string]: any }[]
+  ): { [key: string]: any }[] => {
     const checkedItems: { [key: string]: any }[] = [];
     data.forEach((item: { [key: string]: any }) => {
       if (item.checked) {
@@ -257,7 +275,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   //function is going over formattedData and returning all objects that match the
   //id of the clicked item from the dropdown
-  const filterFormattedDataById = (formattedData: { [key: string]: any }[], id: string) => {
+  const filterFormattedDataById = (
+    formattedData: { [key: string]: any }[],
+    id: string
+  ) => {
     const matched: { [key: string]: any }[] = [];
     const recursiveSearch = (data: { [key: string]: any }[], term: string) => {
       for (const item of data) {
@@ -275,7 +296,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return matched;
   };
 
-  const findByFilter = (formattedData: { [key: string]: any }[], searchTerm: string) => {
+  const findByFilter = (
+    formattedData: { [key: string]: any }[],
+    searchTerm: string
+  ) => {
     const matchedItems: { [key: string]: any }[] = [];
     const recursiveSearch = (data: { [key: string]: any }[], term: string) => {
       for (const item of data) {
