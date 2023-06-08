@@ -139,14 +139,14 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   }
 
   const validateOnlyNumbers = (itiInit: any) => {
-    if (!itiInit) return
+    if (!required || !itiInit) return
     if (inputValue && !containOnlyNumbers(inputValue)) {
       return showFormattedError('enter numbers only')
     }
   }
 
   const validateUnhandledError = (itiInit: any) => {
-    if (!itiInit) return
+    if (!required || !itiInit) return
     if (itiInit.getValidationError() === ValidationError.SomethingWentWrong) {
       if (inputValue.length === 1) {
         return showFormattedError('too short')
@@ -160,7 +160,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   }
 
   const validateMissingAreaCode = (itiInit: any) => {
-    if (!itiInit) return
+    if (!required || !itiInit) return
     if (itiInit.getValidationError() === ValidationError.MissingAreaCode) {
       showFormattedError('missing area code')
       return true
