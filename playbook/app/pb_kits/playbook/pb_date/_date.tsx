@@ -147,8 +147,7 @@ const PbDate = (props: PbDateProps) => {
                   {currentYear != year && <>{`, ${year}`}</>}
                 </Caption>
               </>
-            )
-      }
+            )}
     </div>
   );
 };

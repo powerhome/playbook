@@ -20,6 +20,7 @@ type TimeProps = {
   size?: "md" | "sm";
   showTimezone?: boolean;
   timeZone?: string;
+  unstyled?: boolean;
 } & GlobalProps
 
 const Time = (props: TimeProps) => {
@@ -30,8 +31,10 @@ const Time = (props: TimeProps) => {
     showIcon,
     size,
     timeZone,
+    unstyled = false,
     showTimezone = true,
   } = props;
+
   const classes = classnames(
     buildCss("pb_time_kit", align, size),
     globalProps(props),
@@ -43,46 +46,80 @@ const Time = (props: TimeProps) => {
   return (
     <div className={classes}>
       {showIcon && (
-        <>
-          <Body color="light" tag="span">
-            <Icon fixedWidth icon="clock" size={size === "md" ? "" : "sm"} />
-          </Body>{" "}
-        </>
+        unstyled
+          ? (
+              <span>
+                <Icon fixedWidth
+                    icon="clock"
+                    size={size === "md" ? "" : "sm"}
+                />
+                {" "}
+              </span>
+            )
+          : (
+            <>
+              <Body color="light"
+                  tag="span"
+              >
+                <Icon fixedWidth
+                    icon="clock"
+                    size={size === "md" ? "" : "sm"}
+                />
+                {" "}
+              </Body>
+            </>
+            )
       )}
 
       <time dateTime={date}>
         <span>
-          {size === "md" ? (
-            <>
-              <Body
-                className="pb_time"
-                tag="span"
-                text={dateTimestamp.toTimeWithMeridian()}
-              />{" "}
-              {showTimezone && (
-                <Body
-                  color="light"
-                  tag="span"
-                  text={dateTimestamp.toTimezone()}
-                />
-              )}
-            </>
-          ) : (
-            <>
-              <Caption
-                color="light"
-                tag="span"
-                text={dateTimestamp.toTimeWithMeridian()}
-              />{" "}
-              {showTimezone && (
-                <Caption
-                  color="light"
-                  tag="span"
-                  text={dateTimestamp.toTimezone()}
-                />
-              )}
-            </>
-          )}
+          {unstyled
+            ? (
+                <>
+                  <span>
+                    {dateTimestamp.toTimeWithMeridian()}
+                  </span>
+                  {" "}
+                  {showTimezone && (
+                    <span>
+                      {dateTimestamp.toTimezone()}
+                    </span>
+                  )}
+                </>
+              )
+            : size === "md"
+              ? (
+                  <>
+                    <Body
+                        className="pb_time"
+                        tag="span"
+                        text={dateTimestamp.toTimeWithMeridian()}
+                    />{" "}
+                    {showTimezone && (
+                      <Body
+                          color="light"
+                          tag="span"
+                          text={dateTimestamp.toTimezone()}
+                      />
+                    )}
+                  </>
+                )
+              : (
+                  <>
+                    <Caption
+                        color="light"
+                        tag="span"
+                        text={dateTimestamp.toTimeWithMeridian()}
+                    />{" "}
+                    {showTimezone && (
+                      <Caption
+                          color="light"
+                          tag="span"
+                          text={dateTimestamp.toTimezone()}
+                      />
+                    )}
+                  </>
+                )}
         </span>
       </time>
     </div>

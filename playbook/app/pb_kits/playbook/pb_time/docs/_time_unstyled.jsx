@@ -1,15 +1,19 @@
 import React from 'react'
-import { Caption, Date as FormattedDate, Title } from '../../'
+import Time from '../_time'
+import Caption from '../../pb_caption/_caption'
+import Title from '../../pb_title/_title'
 
-const DateUnstyled = (props) => {
+const TimeUnstyled = (props) => {
   return (
     <>
       <Caption size="xs"
           text="Basic unstyled example"
       />
-      <FormattedDate
+      <Time
+          date={new Date().getTime()}
+          showIcon
+          showTimezone={false}
           unstyled
-          value={new Date()}
           {...props}
       />
 
@@ -19,9 +23,10 @@ const DateUnstyled = (props) => {
           text="Example with wrapping typography kit"
       />
       <Title size={1}>
-        <FormattedDate
+        <Time
+            date={new Date().getTime()}
+            showTimezone={false}
             unstyled
-            value="1995-12-25"
             {...props}
         />
       </Title>
@@ -32,16 +37,18 @@ const DateUnstyled = (props) => {
           text="Example with icon + subcaption"
       />
       <Caption size="xs">
-        <FormattedDate
-            showDayOfWeek
+        <Time
+            date={new Date().getTime()}
             showIcon
+            showTimezone={false}
             unstyled
-            value="1995-12-25"
             {...props}
         />
       </Caption>
+
+      <br />
     </>
   )
 }
 
-export default DateUnstyled
+export default TimeUnstyled
