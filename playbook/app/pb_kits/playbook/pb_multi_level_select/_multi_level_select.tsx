@@ -205,7 +205,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 updatedArray.indexOf(item) === index
             );
           };
-          setReturnedArray(checkedItems);
+          setReturnedArray(getCheckedItems(formattedData));
         } else {
           const updatedFiltered = returnedArray.filter(
             (item) => item !== filtered[0]
