@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library 'github.com/powerhome/ci-kubed@v6.0.0'
+library 'github.com/powerhome/ci-kubed@v6.7.0'
 
 app.build(
   resources: [
