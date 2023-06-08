@@ -17,6 +17,12 @@ const TitleLightWeight = (props) => {
           text='Title 2'
           {...props}
       />
+      <Title bold={false}
+          size={3}
+          tag='h2'
+          text='Title 3'
+          {...props}
+      />
     </div>
   )
 }
