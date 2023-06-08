@@ -139,6 +139,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           );
           setReturnedArray(removeUnchecked);
         }
+        if (clickedItem.children && clickedItem.children.length > 0) {
+          unCheckedRecursive(clickedItem);
+          setReturnedArray(getCheckedItems(formattedData));
+        }
       }
     }
     //logic to uncheck clickedItem in formattedData
@@ -156,7 +160,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setIsClosed(!isClosed);
   };
 
-  const getAncestorsOfChecked = (formattedData: { [key: string]: any }[], item: { [key: string]: any }) => {
+  const getAncestorsOfChecked = (
+    formattedData: { [key: string]: any }[],
+    item: { [key: string]: any }
+  ) => {
     if (item.parent_id) {
       const ancestors = filterFormattedDataById(formattedData, item.parent_id);
       ancestors[0].checked = false;
@@ -241,7 +248,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   };
 
-  //recursively uncheck all child and grandchild items if parent checked
+  //recursively uncheck all child and grandchild items if parent unchecked
   const unCheckedRecursive = (item: { [key: string]: any }) => {
     if (item.checked) {
       item.checked = false;
