@@ -22,8 +22,8 @@ app.build(
           passwordVariable: 'AWS_SECRET_ACCESS_KEY'
         )
       ]) {
-        sh "mkdir -p ~/.kube"
-        sh "playbook-website/bin/deployer sops --decrypt --output yarn.secrets.dec.env yarn.secrets.env"
+        shell "mkdir -p ~/.kube"
+        shell "playbook-website/bin/deployer sops --decrypt --output yarn.secrets.dec.env yarn.secrets.env"
       }
 
       compose.buildAndPush()
