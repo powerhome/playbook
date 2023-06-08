@@ -16,9 +16,10 @@ Rails.application.routes.draw do
   get "kit_category/:name",         to: "pages#kit_category_show_rails",  as: "kit_category_show"
   get "kit_category/:name/rails",   to: "pages#kit_category_show_rails",  as: "kit_category_show_rails"
   get "kit_category/:name/react",   to: "pages#kit_category_show_react",  as: "kit_category_show_reacts"
-  get "kits/*names",                to: "pages#kit_show_rails",           as: "kits_show"
-  get "kits/*names/rails",          to: "pages#kits_show_rails",          as: "kits_show_rails"
-  get "kits/*names/react",          to: "pages#kits_show_react",          as: "kits_show_react"
+
+  get "multikits/*names/rails",      to: "pages#kits_show_rails",      as: "kits_show_rails"
+  get "multikits/*names/react",      to: "pages#kits_show_react",      as: "kits_show_react"
+  # get "multikits/*names", to: redirect { |params, _request| format("multikits/%<names>s/rails", params) }
 
   # Experiments
   get "kits/:name/sandpack",        to: "pages#kit_show_new",         as: "kit_show_new"
