@@ -51,7 +51,6 @@ const Time = (props: TimeProps) => {
               <span>
                 <Icon fixedWidth
                     icon="clock"
-                    size={size === "md" ? "" : "sm"}
                 />
                 {" "}
               </span>

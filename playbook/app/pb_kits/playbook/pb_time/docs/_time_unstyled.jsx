@@ -10,9 +10,10 @@ const TimeUnstyled = (props) => {
           text="Basic unstyled example"
       />
       <Time
-          date={new Date().getTime()}
+          date={new Date()}
           showIcon
-          showTimezone={false}
+          showTimezone
+          timeZone="America/New_York"
           unstyled
           {...props}
       />
@@ -24,8 +25,10 @@ const TimeUnstyled = (props) => {
       />
       <Title size={1}>
         <Time
-            date={new Date().getTime()}
-            showTimezone={false}
+            date={new Date()}
+            showIcon
+            showTimezone
+            timeZone="America/New_York"
             unstyled
             {...props}
         />
@@ -38,9 +41,10 @@ const TimeUnstyled = (props) => {
       />
       <Caption size="xs">
         <Time
-            date={new Date().getTime()}
+            date={new Date()}
             showIcon
-            showTimezone={false}
+            showTimezone
+            timeZone="America/New_York"
             unstyled
             {...props}
         />
