@@ -125,10 +125,21 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     event.stopPropagation();
     //logic for removing items from returnArray when pills clicked
     if (returnedArray.includes(clickedItem)) {
-      const removeUnchecked = returnedArray.filter(
-        (item) => item.id !== clickedItem.id
-      );
-      setReturnedArray(removeUnchecked);
+      if (returnAllSelected) {
+        const removeUnchecked = returnedArray.filter(
+          (item) => item.id !== clickedItem.id
+        );
+        setReturnedArray(removeUnchecked);
+      } else {
+        if (clickedItem.parent_id) {
+          getAncestorsOfChecked(formattedData, clickedItem);
+          const getNewChecked = getCheckedItems(formattedData);
+          const removeUnchecked = getNewChecked.filter(
+            (item) => item.id !== clickedItem.id
+          );
+          setReturnedArray(removeUnchecked);
+        }
+      }
     }
     //logic to uncheck clickedItem in formattedData
     unCheckIt(formattedData, clickedItem.id);
@@ -145,7 +156,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setIsClosed(!isClosed);
   };
 
-  const getAncestorsOfChecked = (formattedData: any, item: any) => {
+  const getAncestorsOfChecked = (formattedData: { [key: string]: any }[], item: { [key: string]: any }) => {
     if (item.parent_id) {
       const ancestors = filterFormattedDataById(formattedData, item.parent_id);
       ancestors[0].checked = false;
