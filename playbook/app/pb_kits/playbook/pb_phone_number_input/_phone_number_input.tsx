@@ -139,7 +139,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   }
 
   const validateOnlyNumbers = (itiInit: any) => {
-    if (!required || !itiInit) return
+    if (!itiInit) return
     if (inputValue && !containOnlyNumbers(inputValue)) {
       return showFormattedError('enter numbers only')
     }
@@ -195,6 +195,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
       separateDialCode: true,
       preferredCountries,
       allowDropdown: !disabled,
+      autoInsertDialCode: false,
       initialCountry,
       onlyCountries,
       utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.6/js/utils.min.js"
