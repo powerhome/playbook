@@ -134,7 +134,11 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     if (itiInit.getValidationError() === ValidationError.TooShort) {
       return showFormattedError('too short')
     } else {
-      setError('')
+      if (inputValue.length === 1) {
+        return showFormattedError('too short')
+      } else {
+        setError('')
+      }
     }
   }
 
