@@ -226,10 +226,16 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             (child: any) => child.checked
           );
           if (allChildrenChecked) {
-            setChildrenChecked(item.id)
+            setChildrenChecked((prevChildrenChecked) => ({
+              ...prevChildrenChecked,
+              [item.id]: true,
+            }));
             updatedCheckedItems.push(item);
           } else {
-            
+            setChildrenChecked((prevChildrenChecked) => ({
+              ...prevChildrenChecked,
+              [item.id]: false,
+            }));
           }
         } else {
           updatedCheckedItems.push(item)
