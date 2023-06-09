@@ -48,6 +48,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [formattedData, setFormattedData] = useState(treeData);
   //toggle chevron in dropdown
   const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({});
+  const [childrenChecked, setChildrenChecked] = useState<{ [id: number]: boolean }>({});
   //state for return for default
   const [defaultReturn, setDefaultReturn] = useState([]);
 
@@ -94,20 +95,22 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     treeData: { [key: string]: any }[],
     parent_id: string = null,
     depth: number = 0,
-    expanded: boolean = false
+    expanded: boolean = false,
+    allChildrenChecked:boolean = false,
   ) => {
     if (!Array.isArray(treeData)) {
       return;
     }
     return treeData.map((item: { [key: string]: any } | any) => {
-      const newItem = { ...item, checked: false, parent_id, depth, expanded };
+      const newItem = { ...item, checked: false, parent_id, depth, expanded, allChildrenChecked };
 
       if (newItem.children && newItem.children.length > 0) {
         newItem.children = addCheckedAndParentProperty(
           newItem.children,
           newItem.id,
           depth + 1,
-          expanded
+          expanded,
+          allChildrenChecked
         );
       }
 
@@ -208,46 +211,42 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
     const checkedItems = getCheckedItems(formattedData);
 
-      if(!filtered[0].checked && !returnAllSelected) {
-          //uncheck parent and grandparent if any child unchecked
-          getAncestorsOfChecked(formattedData, filtered[0]);
+    if (!filtered[0].checked && !returnAllSelected) {
+      //uncheck parent and grandparent if any child unchecked
+      getAncestorsOfChecked(formattedData, filtered[0]);
 
-          const newChecked = getCheckedItems(formattedData);
-          console.log(newChecked)
-          //if children, see if all children checked, if yes return only parent otherwise return selection
-          const updatedCheckedItems = [];
-          for (const item of newChecked) {
-            const { children } = item;
-            let allChildrenChecked = true;
-
-            if (children && children.length > 0) {
-              for (const child of children) {
-                const childChecked = newChecked.some(
-                  (checkedItem) => checkedItem.id === child.id
-                );
-
-                if (!childChecked) {
-                  allChildrenChecked = false;
-                  break;
-                }
-              }
-            }
-
-            if (allChildrenChecked) {
-              updatedCheckedItems.push(item);
-            }
+      const newChecked = getCheckedItems(formattedData);
+      console.log(newChecked);
+      //if children, see if all children checked, if yes return only parent otherwise return selection
+      const updatedCheckedItems = [];
+      for (const item of newChecked) {
+        console.log(item);
+        if (item.children && item.children.length > 0) {
+          const allChildrenChecked = item.children.every(
+            (child: any) => child.checked
+          );
+          if (allChildrenChecked) {
+            setChildrenChecked(item.id)
+            updatedCheckedItems.push(item);
+          } else {
+            
           }
-          console.log("UPDATED", updatedCheckedItems)
-          setDefaultReturn(updatedCheckedItems);
+        } else {
+          updatedCheckedItems.push(item)
+        }
+
+      }
+      console.log("UPDATED", updatedCheckedItems);
+      setDefaultReturn(updatedCheckedItems);
     }
 
     //filtered will always be an array with 1 object in it, so targetting it with index [0]
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
-          const updatedFiltered = returnedArray.filter(
-            (item) => item !== filtered[0]
-          );
-          setReturnedArray(updatedFiltered);
+        const updatedFiltered = returnedArray.filter(
+          (item) => item !== filtered[0]
+        );
+        setReturnedArray(updatedFiltered);
         // }
       }
     } else {
