@@ -1,8 +1,17 @@
+# Responsive Components in Rapid Time: Introducing Global Responsive Spacing Props for React and Rails Components. 
+
+![titleboldandresponsivespacing](https://github.com/powerhome/playbook/assets/9158723/9741a86c-5439-4081-b197-0101079c8575)
+
+With all components, you can specify any of our spacing props values at certain screen sizes. For example, let's say I wanted the Badge component to have a small padding on phones, and a medium size padding on medium screens and higher. It's as easy as this:
+
+```jsx
+<Badge padding={{ xs: "sm", md: "md"  }} />
+```
+
+Give it a try and let us know what you think!
 
 
-## [12.24.0](https://github.com/powerhome/playbook/tree/12.24.0) (2023-05-26)
-
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.23.0...12.24.0)
+[12.24.0](https://github.com/powerhome/playbook/tree/12.24.0) full list of changes:
 
 **Kit Enhancements:**
 - Title 2 Defaults to Bold [\#2559](https://github.com/powerhome/playbook/pull/2559) ([jasperfurniss](https://github.com/jasperfurniss))
@@ -12,7 +21,7 @@
 - Responsive Spacing global prop [\#2563](https://github.com/powerhome/playbook/pull/2563) ([nickamantia](https://github.com/nickamantia))
 - Creating an example Swift kit doc [\#2550](https://github.com/powerhome/playbook/pull/2550) ([carloslimasd](https://github.com/carloslimasd))
 
-
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.23.0...12.24.0)
 
 ## [12.23.0](https://github.com/powerhome/playbook/tree/12.23.0) (2023-05-23)
 

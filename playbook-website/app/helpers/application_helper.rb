@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
+require "pb_doc_helper"
+
 module ApplicationHelper
   include ::Webpacker::React::Helpers
+  include ::Webpacker::Helper
   include ::Playbook::PbFormsHelper
   include ::Playbook::PbKitHelper
+  include ::PlaybookWebsite::Markdown::Helper
+  include ::PlaybookWebsite::PbDocHelper
 
   def pb_category_kits(category_kits: [], type: "rails")
     display_kits = []
@@ -95,9 +100,9 @@ module ApplicationHelper
 
   def gh_edit_link(parent, page)
     if page.nil?
-      "https://github.com/powerhome/playbook/edit/master/playbook-website/guides/#{parent}"
+      "https://github.com/powerhome/playbook/edit/master/playbook-website/app/views/guides/#{parent}.md"
     else
-      "https://github.com/powerhome/playbook/edit/master/playbook-website/guides/#{parent}/#{page}"
+      "https://github.com/powerhome/playbook/edit/master/playbook-website/app/views/guides/#{parent}/#{page}.md"
     end
   end
 
