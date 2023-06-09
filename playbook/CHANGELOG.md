@@ -1,19 +1,4 @@
 
-
-## [12.25.0](https://github.com/powerhome/playbook/tree/12.25.0) (2023-06-09)
-
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.24.0...12.25.0)
-
-**Kit Enhancements:**
-
-- Unstyled Variant for Date and Time Kits [\#2592](https://github.com/powerhome/playbook/pull/2592) ([gavhuang](https://github.com/gavhuang))
-- Bold Option for Title 3 [\#2579](https://github.com/powerhome/playbook/pull/2579) ([nickamantia](https://github.com/nickamantia))
-
-**Improvements:**
-
-- Changelog Improvements [\#2591](https://github.com/powerhome/playbook/pull/2591) ([jasoncypret](https://github.com/jasoncypret))
-- Separation of Markdown & PBDocs Dependencies from Playbook Libray [\#2527](https://github.com/powerhome/playbook/pull/2527) ([jasoncypret](https://github.com/jasoncypret))
-
 # Responsive Components in Rapid Time: Introducing Global Responsive Spacing Props for React and Rails Components. 
 
 ![titleboldandresponsivespacing](https://github.com/powerhome/playbook/assets/9158723/9741a86c-5439-4081-b197-0101079c8575)
