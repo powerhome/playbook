@@ -145,11 +145,13 @@ const quickPickPlugin = () => {
          * @param {Array} selectedDates
          */
           // function to give the active button the active class
+          debugger
           selectActiveRangeButton(selectedDates);
         }
 
       },
       onValueUpdate(selectedDates: Array<string>) {
+        debugger
         selectActiveRangeButton(selectedDates);
       },
 
