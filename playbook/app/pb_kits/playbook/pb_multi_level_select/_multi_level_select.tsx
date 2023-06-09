@@ -48,6 +48,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [formattedData, setFormattedData] = useState(treeData);
   //toggle chevron in dropdown
   const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({});
+  //state for return for default
+  const [defaultReturn, setDefaultReturn] = useState([]);
 
   useEffect(() => {
     // Function to handle clicks outside the dropdown
@@ -68,11 +70,18 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   useEffect(() => {
     let el = document.getElementById(`pb_data_wrapper_${id}`);
-    if (el) {
-      el.setAttribute("data-tree", JSON.stringify(returnedArray));
+    if (returnAllSelected) {
+      if (el) {
+        el.setAttribute("data-tree", JSON.stringify(returnedArray));
+      }
+      onSelect(returnedArray);
+    } else {
+      if (el) {
+        el.setAttribute("data-tree", JSON.stringify(defaultReturn));
+      }
+      onSelect(defaultReturn);
     }
-    onSelect(returnedArray);
-  }, [returnedArray]);
+  }, [returnedArray, defaultReturn]);
 
   useEffect(() => {
     //Create new formattedData array for use that has checked + parent property
@@ -123,25 +132,27 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const handlePillClose = (event: any, clickedItem: { [key: string]: any }) => {
     // prevents the dropdown from closing when clicking on the pill
     event.stopPropagation();
-    //logic for removing items from returnArray when pills clicked
-    if (returnedArray.includes(clickedItem)) {
-      if (returnAllSelected) {
+    //logic for removing items from returnArray or defaultReturn when pills clicked
+    if (returnAllSelected) {
+      if (returnedArray.includes(clickedItem)) {
         const removeUnchecked = returnedArray.filter(
           (item) => item.id !== clickedItem.id
         );
         setReturnedArray(removeUnchecked);
-      } else {
+      }
+    } else {
+      if (defaultReturn.includes(clickedItem)) {
         if (clickedItem.parent_id) {
           getAncestorsOfChecked(formattedData, clickedItem);
           const getNewChecked = getCheckedItems(formattedData);
           const removeUnchecked = getNewChecked.filter(
             (item) => item.id !== clickedItem.id
           );
-          setReturnedArray(removeUnchecked);
+          setDefaultReturn(removeUnchecked);
         }
         if (clickedItem.children && clickedItem.children.length > 0) {
           unCheckedRecursive(clickedItem);
-          setReturnedArray(getCheckedItems(formattedData));
+          setDefaultReturn(getCheckedItems(formattedData));
         }
       }
     }
@@ -160,6 +171,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setIsClosed(!isClosed);
   };
 
+  //function to retrieve all ancestors of unchecked item and set checked to false
   const getAncestorsOfChecked = (
     formattedData: { [key: string]: any }[],
     item: { [key: string]: any }
@@ -196,43 +208,83 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
     const checkedItems = getCheckedItems(formattedData);
 
+      if(!filtered[0].checked && !returnAllSelected) {
+          //uncheck parent and grandparent if any child unchecked
+          getAncestorsOfChecked(formattedData, filtered[0]);
+
+          const newChecked = getCheckedItems(formattedData);
+          console.log(newChecked)
+          //if children, see if all children checked, if yes return only parent otherwise return selection
+          const updatedCheckedItems = [];
+          for (const item of newChecked) {
+            const { children } = item;
+            let allChildrenChecked = true;
+
+            if (children && children.length > 0) {
+              for (const child of children) {
+                const childChecked = newChecked.some(
+                  (checkedItem) => checkedItem.id === child.id
+                );
+
+                if (!childChecked) {
+                  allChildrenChecked = false;
+                  break;
+                }
+              }
+            }
+
+            if (allChildrenChecked) {
+              updatedCheckedItems.push(item);
+            }
+          }
+          console.log("UPDATED", updatedCheckedItems)
+          setDefaultReturn(updatedCheckedItems);
+    }
+
     //filtered will always be an array with 1 object in it, so targetting it with index [0]
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
-        if (!returnAllSelected) {
-          //uncheck parent if any child unchecked
-          getAncestorsOfChecked(formattedData, filtered[0]);
-
-          const updatedFiltered = (
-            returnedArray: { [key: string]: any }[],
-            filtered: { [key: string]: any }
-          ) => {
-            const updatedArray = returnedArray.filter(
-              (item: { [key: string]: any }) => item !== filtered[0]
-            );
-
-            if (filtered.children && filtered.children.length > 0) {
-              const filteredChildren = filtered.children.map(
-                (child: { [key: string]: any }) =>
-                  updatedFiltered(returnedArray, [child])
-              );
-              updatedArray.push(...filteredChildren.flat());
-            }
-            return updatedArray.filter(
-              (item: { [key: string]: any }, index: number) =>
-                updatedArray.indexOf(item) === index
-            );
-          };
-          setReturnedArray(getCheckedItems(formattedData));
-        } else {
           const updatedFiltered = returnedArray.filter(
             (item) => item !== filtered[0]
           );
           setReturnedArray(updatedFiltered);
-        }
+        // }
       }
     } else {
       setReturnedArray(checkedItems);
+    }
+
+    if (!returnAllSelected && filtered[0].checked) {
+      //if clicked item has parent_id, find parent and check if all children checked or not
+      if (filtered[0].parent_id !== null) {
+        const parent = filterFormattedDataById(
+          formattedData,
+          filtered[0].parent_id
+        );
+        const allChildrenChecked = parent[0].children.every(
+          (child: any) => child.checked
+        );
+        if (allChildrenChecked) {
+          // Only return the parent and remove its children from defaultReturn
+          parent[0].checked = true;
+          const filteredDefaultReturn = defaultReturn.filter((item) => {
+            // Remove children of the specific parent
+            if (parent[0].children.find((child: any) => child.id === item.id)) {
+              return false;
+            }
+            return true;
+          });
+          setDefaultReturn([...filteredDefaultReturn, parent[0]]);
+        } else {
+          const checkedChildren = parent[0].children.filter(
+            (child: any) => child.checked
+          );
+          const updatedDefaultReturn = [...defaultReturn, ...checkedChildren];
+          setDefaultReturn(updatedDefaultReturn);
+        }
+      } else {
+        setDefaultReturn([filtered[0]]);
+      }
     }
   };
 
@@ -396,7 +448,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       <div ref={dropdownRef} className="wrapper">
         <div className="input_wrapper" onClick={handleInputWrapperClick}>
           <div className="input_inner_container">
-            {returnedArray.length !== 0
+            {returnedArray.length !== 0 && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill
                     key={index}
@@ -406,7 +458,24 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   />
                 ))
               : null}
-            {returnedArray.length !== 0 ? <br /> : null}
+            {!returnAllSelected &&
+              defaultReturn.length !== 0 &&
+              defaultReturn
+                .filter(
+                  (item, index, self) =>
+                    index === self.findIndex((obj) => obj.id === item.id)
+                )
+                .map((item, index) => (
+                  <FormPill
+                    key={index}
+                    text={item.label}
+                    size="small"
+                    onClick={(event) => handlePillClose(event, item)}
+                  />
+                ))}
+            {returnedArray.length !== 0 || defaultReturn.length !== 0 ? (
+              <br />
+            ) : null}
             <input
               id="multiselect_input"
               onChange={(e) => {
