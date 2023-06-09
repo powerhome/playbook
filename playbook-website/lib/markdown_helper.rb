@@ -5,17 +5,20 @@ require "rouge"
 require "rouge/plugins/redcarpet"
 require "action_view"
 
-module Playbook
+module PlaybookWebsite
   module Markdown
     module Helper
-      def self.call(template, _source)
-        markdown(template.source)
+      def self.call(template, source)
+        compiled_source = markdown(source)
+        erb.call(template, compiled_source)
+      end
+
+      def self.erb
+        @erb ||= ActionView::Template.registered_template_handler(:erb)
       end
 
       def render_markdown(text)
-        # rubocop:disable Security/Eval
-        eval(Playbook::Markdown::Helper.markdown(text))
-        # rubocop:enable Security/Eval
+        PlaybookWebsite::Markdown::Helper.markdown(text)
       end
 
       def self.markdown(text)
@@ -49,10 +52,10 @@ module Playbook
         # @TOC = Redcarpet::Markdown.new(toc_renderer)
         # puts "TOC: #{@TOC.inspect}"
         markdown = Redcarpet::Markdown.new(renderer, extensions)
-        "#{markdown.render(text).inspect}.html_safe;"
+        markdown.render(text).html_safe
       end
 
-      def rouge(text, language)
+      def render_code(text, language)
         formatter = Rouge::Formatters::HTML.new(scope: ".highlight")
         lexer = Rouge::Lexer.find(language)
         formatter.format(lexer.lex(text))
