@@ -6,6 +6,15 @@ import Icon from "../pb_icon/_icon";
 import Checkbox from "../pb_checkbox/_checkbox";
 import FormPill from "../pb_form_pill/_form_pill";
 import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button";
+import {
+  unCheckIt,
+  getAncestorsOfChecked,
+  unCheckedRecursive,
+  checkedRecursive,
+  filterFormattedDataById,
+  findByFilter,
+  getCheckedItems,
+} from "./_helper_functions";
 
 type MultiLevelSelectProps = {
   aria?: { [key: string]: string };
@@ -48,61 +57,64 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [formattedData, setFormattedData] = useState(treeData);
   //toggle chevron in dropdown
   const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({});
-  const [childrenChecked, setChildrenChecked] = useState<{ [id: number]: boolean }>({});
   //state for return for default
   const [defaultReturn, setDefaultReturn] = useState([]);
 
   useEffect(() => {
+    let el = document.getElementById(`pb_data_wrapper_${id}`);
+    if (el) {
+      el.setAttribute(
+        "data-tree",
+        JSON.stringify(returnAllSelected ? returnedArray : defaultReturn)
+      );
+    }
+    returnAllSelected
+      ? onSelect(returnedArray)
+      : onSelect(
+          defaultReturn.filter(
+            (item, index, self) =>
+              index === self.findIndex((obj) => obj.id === item.id)
+          )
+        );
+  }, [returnedArray, defaultReturn]);
+
+  useEffect(() => {
+    //Create new formattedData array for use
+    setFormattedData(addCheckedAndParentProperty(treeData));
     // Function to handle clicks outside the dropdown
     const handleClickOutside = (event: any) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsClosed(true);
       }
     };
-
     // Attach the event listener
     window.addEventListener("click", handleClickOutside);
-
     // Clean up the event listener on unmount
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
-  useEffect(() => {
-    let el = document.getElementById(`pb_data_wrapper_${id}`);
-    if (returnAllSelected) {
-      if (el) {
-        el.setAttribute("data-tree", JSON.stringify(returnedArray));
-      }
-      onSelect(returnedArray);
-    } else {
-      if (el) {
-        el.setAttribute("data-tree", JSON.stringify(defaultReturn));
-      }
-      onSelect(defaultReturn);
-    }
-  }, [returnedArray, defaultReturn]);
-
-  useEffect(() => {
-    //Create new formattedData array for use that has checked + parent property
-    //Use this for all kit logic
-    setFormattedData(addCheckedAndParentProperty(treeData));
-  }, []);
-
-  //function to map over data and add checked + parent_id + depth + expanded property to each item
+  //function to map over data and add checked + parent_id + depth + expanded + allChildrenChecked property to each item
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
     parent_id: string = null,
     depth: number = 0,
     expanded: boolean = false,
-    allChildrenChecked:boolean = false,
+    allChildrenChecked: boolean = false
   ) => {
     if (!Array.isArray(treeData)) {
       return;
     }
     return treeData.map((item: { [key: string]: any } | any) => {
-      const newItem = { ...item, checked: false, parent_id, depth, expanded, allChildrenChecked };
+      const newItem = {
+        ...item,
+        checked: false,
+        parent_id,
+        depth,
+        expanded,
+        allChildrenChecked,
+      };
 
       if (newItem.children && newItem.children.length > 0) {
         newItem.children = addCheckedAndParentProperty(
@@ -115,19 +127,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       }
 
       return newItem;
-    });
-  };
-
-  //function for unchecking items in formattedData
-  const unCheckIt = (formattedData: { [key: string]: any }[], id: string) => {
-    formattedData.map((item: { [key: string]: any }) => {
-      if (item.id === id && item.checked) {
-        item.checked = false;
-      }
-      if (item.children && item.children.length > 0) {
-        unCheckIt(item.children, id);
-      }
-      return item;
     });
   };
 
@@ -165,6 +164,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   //handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
+    e.stopPropagation();
     if (
       e.target.id === "multiselect_input" ||
       e.target.classList.contains("pb_form_pill_tag")
@@ -174,23 +174,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setIsClosed(!isClosed);
   };
 
-  //function to retrieve all ancestors of unchecked item and set checked to false
-  const getAncestorsOfChecked = (
-    formattedData: { [key: string]: any }[],
-    item: { [key: string]: any }
-  ) => {
-    if (item.parent_id) {
-      const ancestors = filterFormattedDataById(formattedData, item.parent_id);
-      ancestors[0].checked = false;
-
-      if (ancestors[0].parent_id) {
-        getAncestorsOfChecked(formattedData, ancestors[0]);
-      }
-    }
-  };
-
+  //Main function to handle any click inside dropdown
   const handledropdownItemClick = (e: any) => {
-    //grab id from parent div
     const clickedItem = e.target.parentNode.id;
     //setting filterItem to "" will clear textinput and clear typeahead
     setFilterItem("");
@@ -199,10 +184,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     //check and uncheck all children of checked/unchecked parent item
     if (filtered[0].children && filtered[0].children.length > 0) {
       if (filtered[0].checked) {
+        filtered[0].allChildrenChecked = true;
         filtered[0].children.forEach((item: { [key: string]: any }) => {
           checkedRecursive(item);
         });
       } else if (!filtered[0].checked && !returnAllSelected) {
+        filtered[0].allChildrenChecked = false;
         filtered[0].children.forEach((item: { [key: string]: any }) => {
           unCheckedRecursive(item);
         });
@@ -211,54 +198,47 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
     const checkedItems = getCheckedItems(formattedData);
 
-    if (!filtered[0].checked && !returnAllSelected) {
-      //uncheck parent and grandparent if any child unchecked
-      getAncestorsOfChecked(formattedData, filtered[0]);
-
-      const newChecked = getCheckedItems(formattedData);
-      console.log(newChecked);
-      //if children, see if all children checked, if yes return only parent otherwise return selection
-      const updatedCheckedItems = [];
-      for (const item of newChecked) {
-        console.log(item);
-        if (item.children && item.children.length > 0) {
-          const allChildrenChecked = item.children.every(
-            (child: any) => child.checked
-          );
-          if (allChildrenChecked) {
-            setChildrenChecked((prevChildrenChecked) => ({
-              ...prevChildrenChecked,
-              [item.id]: true,
-            }));
-            updatedCheckedItems.push(item);
-          } else {
-            setChildrenChecked((prevChildrenChecked) => ({
-              ...prevChildrenChecked,
-              [item.id]: false,
-            }));
-          }
-        } else {
-          updatedCheckedItems.push(item)
-        }
-
-      }
-      console.log("UPDATED", updatedCheckedItems);
-      setDefaultReturn(updatedCheckedItems);
-    }
-
-    //filtered will always be an array with 1 object in it, so targetting it with index [0]
+    //checking and unchecking items for returnAllSelected variant
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
         const updatedFiltered = returnedArray.filter(
           (item) => item !== filtered[0]
         );
         setReturnedArray(updatedFiltered);
-        // }
       }
     } else {
       setReturnedArray(checkedItems);
     }
 
+    //when item is unchecked for default variant
+    if (!filtered[0].checked && !returnAllSelected) {
+      //uncheck parent and grandparent if any child unchecked
+      getAncestorsOfChecked(formattedData, filtered[0]);
+
+      const newChecked = getCheckedItems(formattedData);
+      //get all checked items, and filter to check if all children checked, if yes return only parent
+      const updatedCheckedItems = [];
+      for (const item of newChecked) {
+        if (item.children && item.children.length > 0) {
+          const allChildrenChecked = item.children.every(
+            (child: any) => child.checked
+          );
+          allChildrenChecked
+            ? (item.allChildrenChecked = true)
+            : (item.allChildrenChecked = false);
+        }
+        item.allChildrenChecked && updatedCheckedItems.push(item);
+        const childItem = updatedCheckedItems.some(
+          (x) => x.id === item?.parent_id
+        );
+        if (!childItem) {
+          updatedCheckedItems.push(item);
+        }
+      }
+      setDefaultReturn(updatedCheckedItems);
+    }
+
+    //when item is checked for default variant
     if (!returnAllSelected && filtered[0].checked) {
       //if clicked item has parent_id, find parent and check if all children checked or not
       if (filtered[0].parent_id !== null) {
@@ -272,6 +252,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         if (allChildrenChecked) {
           // Only return the parent and remove its children from defaultReturn
           parent[0].checked = true;
+          parent[0].allChildrenChecked = true;
           const filteredDefaultReturn = defaultReturn.filter((item) => {
             // Remove children of the specific parent
             if (parent[0].children.find((child: any) => child.id === item.id)) {
@@ -281,6 +262,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           });
           setDefaultReturn([...filteredDefaultReturn, parent[0]]);
         } else {
+          parent[0].allChildrenChecked = false;
           const checkedChildren = parent[0].children.filter(
             (child: any) => child.checked
           );
@@ -290,48 +272,15 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       } else {
         setDefaultReturn([filtered[0]]);
       }
-    }
-  };
-
-  //recursively check all child and grandchild items if parent checked
-  const checkedRecursive = (item: { [key: string]: any }) => {
-    if (!item.checked) {
-      item.checked = true;
-    }
-    if (item.children && item.children.length > 0) {
-      item.children.forEach((childItem: { [key: string]: any }) => {
-        checkedRecursive(childItem);
-      });
-    }
-  };
-
-  //recursively uncheck all child and grandchild items if parent unchecked
-  const unCheckedRecursive = (item: { [key: string]: any }) => {
-    if (item.checked) {
-      item.checked = false;
-    }
-    if (item.children && item.children.length > 0) {
-      item.children.forEach((childItem: { [key: string]: any }) => {
-        unCheckedRecursive(childItem);
-      });
-    }
-  };
-
-  //function to get all items with checked = true
-  const getCheckedItems = (
-    data: { [key: string]: any }[]
-  ): { [key: string]: any }[] => {
-    const checkedItems: { [key: string]: any }[] = [];
-    data.forEach((item: { [key: string]: any }) => {
-      if (item.checked) {
-        checkedItems.push(item);
+      //if checked item has children
+      if (filtered[0].children && filtered[0].children.length > 0) {
+        const childIds = filtered[0].children.map((child: any) => child.id);
+        const filteredDefaultReturn = defaultReturn.filter(
+          (item) => !childIds.includes(item.id)
+        );
+        setDefaultReturn([...filteredDefaultReturn, filtered[0]]);
       }
-      if (item.children && item.children.length > 0) {
-        const childCheckedItems = getCheckedItems(item.children);
-        checkedItems.push(...childCheckedItems);
-      }
-    });
-    return checkedItems;
+    }
   };
 
   //handle click on chevron toggles in dropdown
@@ -346,50 +295,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (clickedItem) {
       clickedItem[0].expanded = !clickedItem[0].expanded;
     }
-  };
-
-  //function is going over formattedData and returning all objects that match the
-  //id of the clicked item from the dropdown
-  const filterFormattedDataById = (
-    formattedData: { [key: string]: any }[],
-    id: string
-  ) => {
-    const matched: { [key: string]: any }[] = [];
-    const recursiveSearch = (data: { [key: string]: any }[], term: string) => {
-      for (const item of data) {
-        if (item.id.toLowerCase().includes(term.toLowerCase())) {
-          matched.push(item);
-        }
-
-        if (item.children && item.children.length > 0) {
-          recursiveSearch(item.children, term);
-        }
-      }
-    };
-
-    recursiveSearch(formattedData, id);
-    return matched;
-  };
-
-  const findByFilter = (
-    formattedData: { [key: string]: any }[],
-    searchTerm: string
-  ) => {
-    const matchedItems: { [key: string]: any }[] = [];
-    const recursiveSearch = (data: { [key: string]: any }[], term: string) => {
-      for (const item of data) {
-        if (item.label.toLowerCase().includes(term.toLowerCase())) {
-          matchedItems.push(item);
-        }
-
-        if (item.children) {
-          recursiveSearch(item.children, term);
-        }
-      }
-    };
-
-    recursiveSearch(formattedData, searchTerm);
-    return matchedItems;
   };
 
   //rendering formattedData to UI based on typeahead
