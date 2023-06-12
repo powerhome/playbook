@@ -365,9 +365,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     onClick={(event) => handlePillClose(event, item)}
                   />
                 ))}
-            {returnedArray.length !== 0 || defaultReturn.length !== 0 ? (
-              <br />
-            ) : null}
+            {(returnedArray.length !== 0 && returnAllSelected) && <br />}
+            {(defaultReturn.length !== 0 && !returnAllSelected) && <br/>}
             <input
               id="multiselect_input"
               onChange={(e) => {
