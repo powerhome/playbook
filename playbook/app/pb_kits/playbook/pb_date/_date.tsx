@@ -19,6 +19,7 @@ type PbDateProps = {
   showDayOfWeek?: boolean;
   showIcon?: boolean;
   size?: "sm" | "md" | "lg";
+  unstyled?: boolean;
   value: string | Date;
 };
 
@@ -32,6 +33,7 @@ const PbDate = (props: PbDateProps) => {
     showDayOfWeek = false,
     showIcon = false,
     size = "md",
+    unstyled = false,
     value,
   } = props;
 
@@ -52,48 +54,100 @@ const PbDate = (props: PbDateProps) => {
   );
 
   return (
-    <div {...ariaProps} {...dataProps} className={classes} id={id}>
-      {size == "md" || size == "lg" ? (
-        <Title size={4} tag="h4">
-          {showIcon && (
-            <Body className="pb_icon_kit_container" color="light" tag="span">
-              <Icon fixedWidth icon="calendar-alt" />
-            </Body>
-          )}
+    <div {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
+      {unstyled
+        ? <>
+            {showIcon && (
+              <div>
+                <Icon fixedWidth
+                    icon="calendar-alt"
+                />
+              </div>
+            )}
 
-          {showDayOfWeek && (
-            <>
-              {weekday}
-              <Body color="light" tag="span" text=" • " />
-            </>
-          )}
+            {showDayOfWeek && (
+              <>
+                <div>
+                  {weekday}
+                </div>
 
-          <span>
-            {month} {day}
-          </span>
-          {currentYear != year && <span>{`, ${year}`}</span>}
-        </Title>
-      ) : (
-        <>
-          {showIcon && (
-            <Caption className="pb_icon_kit_container" tag="span">
-              <Icon fixedWidth icon="calendar-alt" size="sm" />
-            </Caption>
-          )}
+                <div>{"•"}</div>
+              </>
+            )}
 
-          {showDayOfWeek && (
-            <>
-              <Caption tag="div">{weekday}</Caption>
-              <Caption color="light" tag="div" text=" • " />
-            </>
-          )}
+            <span>
+              <span>
+                {month} {day}
+              </span>
 
-          <Caption tag="span">
-            {month} {day}
-            {currentYear != year && <>{`, ${year}`}</>}
-          </Caption>
-        </>
-      )}
+              {currentYear != year && <span>{`, ${year}`}</span>}
+            </span>
+          </>
+        : size == "md" || size == "lg"
+          ? (
+            <Title size={4}
+                tag="h4"
+            >
+              {showIcon && (
+                <Body className="pb_icon_kit_container"
+                    color="light"
+                    tag="span"
+                >
+                  <Icon fixedWidth
+                      icon="calendar-alt"
+                  />
+                </Body>
+              )}
+
+              {showDayOfWeek && (
+                <>
+                  {weekday}
+                  <Body color="light"
+                      tag="span"
+                      text=" • "
+                  />
+                </>
+              )}
+
+              <span>
+                {month} {day}
+              </span>
+              {currentYear != year && <span>{`, ${year}`}</span>}
+            </Title>
+            )
+          : (
+              <>
+                {showIcon && (
+                  <Caption className="pb_icon_kit_container"
+                      tag="span"
+                  >
+                    <Icon fixedWidth
+                        icon="calendar-alt"
+                        size="sm"
+                    />
+                  </Caption>
+                )}
+
+                {showDayOfWeek && (
+                  <>
+                    <Caption tag="div">{weekday}</Caption>
+                    <Caption color="light"
+                        tag="div"
+                        text=" • "
+                    />
+                  </>
+                )}
+
+                <Caption tag="span">
+                  {month} {day}
+                  {currentYear != year && <>{`, ${year}`}</>}
+                </Caption>
+              </>
+            )}
     </div>
   );
 };
