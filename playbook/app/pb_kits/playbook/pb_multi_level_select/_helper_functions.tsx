@@ -126,24 +126,29 @@ export const getChildIds = (item: any, defaultArray: any) => {
   return childIds;
 };
 
-export const updateReturnItems = (newChecked:any) => {
-  const updatedCheckedItems = [];
-      for (const item of newChecked) {
-        if (item.children && item.children.length > 0) {
-          const allChildrenChecked = item.children.every(
-            (child: any) => child.checked
-          );
-          allChildrenChecked
-            ? (item.allChildrenChecked = true)
-            : (item.allChildrenChecked = false);
-        }
-        item.allChildrenChecked && updatedCheckedItems.push(item);
-        const childItem = updatedCheckedItems.some(
-          (x) => x.id === item?.parent_id
-        );
-        if (!childItem) {
-          updatedCheckedItems.push(item);
-        }
+export const updateReturnItems = (newChecked: any) => {
+  const updatedCheckedItems: any[] = [];
+  for (const item of newChecked) {
+    if (item.children && item.children.length > 0) {
+      const allChildrenChecked = item.children.every(
+        (child: any) => child.checked
+      );
+      if (allChildrenChecked) {
+        item.allChildrenChecked = true;
+        updatedCheckedItems.push(item);
+      } else {
+        item.allChildrenChecked = false;
       }
-      return updatedCheckedItems
-}
+    }
+    const childItem = updatedCheckedItems.some((x) => x.id === item?.parent_id);
+    if (!childItem) {
+      updatedCheckedItems.push(item);
+    }
+  }
+  const filteredReturn = updatedCheckedItems.filter((item) => {
+    return !updatedCheckedItems.find(
+      (otherItem) => otherItem.id === item.parent_id
+    );
+  });
+  return filteredReturn;
+};
