@@ -15,7 +15,7 @@ export const unCheckIt = (
 };
 
 //function to retrieve all ancestors of unchecked item and set checked to false
-export const getAncestorsOfChecked = (
+export const getAncestorsOfUnchecked = (
   formattedData: { [key: string]: any }[],
   item: { [key: string]: any }
 ) => {
@@ -24,7 +24,7 @@ export const getAncestorsOfChecked = (
     ancestors[0].checked = false;
 
     if (ancestors[0].parent_id) {
-      getAncestorsOfChecked(formattedData, ancestors[0]);
+      getAncestorsOfUnchecked(formattedData, ancestors[0]);
     }
   }
 };
@@ -114,7 +114,10 @@ export const getCheckedItems = (
   return checkedItems;
 };
 
-export const getChildIds = (item: { [key: string]: any }, defaultArray: { [key: string]: any }[]) => {
+export const getChildIds = (
+  item: { [key: string]: any },
+  defaultArray: { [key: string]: any }[]
+) => {
   let childIds: string[] = [];
   item.children.forEach((child: { [key: string]: any }) => {
     childIds.push(child.id);
@@ -148,4 +151,43 @@ export const updateReturnItems = (newChecked: { [key: string]: any }[]) => {
     );
   });
   return filteredReturn;
+};
+
+export const recursiveReturnOnlyParent = (
+  items: { [key: string]: any },
+  formattedData: { [key: string]: any }[],
+  defaultReturn: { [key: string]: any }[],
+  setDefaultReturn: any
+) => {
+  const parent = filterFormattedDataById(formattedData, items.parent_id);
+  const allChildrenChecked = parent[0].children.every(
+    (child: { [key: string]: any }) => child.checked
+  );
+  if (allChildrenChecked) {
+    // Only return the parent and remove its children from defaultReturn
+    parent[0].checked = true;
+    const filteredDefaultReturn = defaultReturn.filter((item) => {
+      // Remove children of the specific parent
+      if (
+        parent[0].children.find(
+          (child: { [key: string]: any }) => child.id === item.id
+        )
+      ) {
+        return false;
+      }
+      return true;
+    });
+    setDefaultReturn([...filteredDefaultReturn, parent[0]]);
+    // Check if the parent has a parent and its children are all checked
+    const parentHasParent = parent[0].parent_id !== null;
+    if (parentHasParent) {
+      recursiveReturnOnlyParent(parent[0], formattedData, filteredDefaultReturn, setDefaultReturn);
+    }
+  } else {
+    const checkedChildren = parent[0].children.filter(
+      (child: { [key: string]: any }) => child.checked
+    );
+    const updatedDefaultReturn = [...defaultReturn, ...checkedChildren];
+    setDefaultReturn(updatedDefaultReturn);
+  }
 };

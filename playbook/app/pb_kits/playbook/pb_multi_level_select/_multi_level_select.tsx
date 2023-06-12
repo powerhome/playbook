@@ -8,7 +8,7 @@ import FormPill from "../pb_form_pill/_form_pill";
 import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button";
 import {
   unCheckIt,
-  getAncestorsOfChecked,
+  getAncestorsOfUnchecked,
   unCheckedRecursive,
   checkedRecursive,
   filterFormattedDataById,
@@ -16,6 +16,7 @@ import {
   getCheckedItems,
   getChildIds,
   updateReturnItems,
+  recursiveReturnOnlyParent,
 } from "./_helper_functions";
 
 type MultiLevelSelectProps = {
@@ -143,7 +144,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       }
     } else {
       if (defaultReturn.includes(clickedItem)) {
-        getAncestorsOfChecked(formattedData, clickedItem);
+        getAncestorsOfUnchecked(formattedData, clickedItem);
         const newChecked = getCheckedItems(formattedData);
         const filteredReturn = updateReturnItems(newChecked).filter(
           (item) => item.id !== clickedItem.id
@@ -207,7 +208,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     //when item is unchecked for default variant
     if (!filtered[0].checked && !returnAllSelected) {
       //uncheck parent and grandparent if any child unchecked
-      getAncestorsOfChecked(formattedData, filtered[0]);
+      getAncestorsOfUnchecked(formattedData, filtered[0]);
 
       const newChecked = getCheckedItems(formattedData);
       //get all checked items, and filter to check if all children checked, if yes return only parent
@@ -228,31 +229,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
       //if clicked item has parent_id, find parent and check if all children checked or not
       if (filtered[0].parent_id !== null) {
-        const parent = filterFormattedDataById(
+        recursiveReturnOnlyParent(
+          filtered[0],
           formattedData,
-          filtered[0].parent_id
+          defaultReturn,
+          setDefaultReturn
         );
-        const allChildrenChecked = parent[0].children.every(
-          (child: { [key: string]: any }) => child.checked
-        );
-        if (allChildrenChecked) {
-          // Only return the parent and remove its children from defaultReturn
-          parent[0].checked = true;
-          const filteredDefaultReturn = defaultReturn.filter((item) => {
-            // Remove children of the specific parent
-            if (parent[0].children.find((child: { [key: string]: any }) => child.id === item.id)) {
-              return false;
-            }
-            return true;
-          });
-          setDefaultReturn([...filteredDefaultReturn, parent[0]]);
-        } else {
-          const checkedChildren = parent[0].children.filter(
-            (child: { [key: string]: any }) => child.checked
-          );
-          const updatedDefaultReturn = [...defaultReturn, ...checkedChildren];
-          setDefaultReturn(updatedDefaultReturn);
-        }
       } else {
         setDefaultReturn([filtered[0]]);
       }
