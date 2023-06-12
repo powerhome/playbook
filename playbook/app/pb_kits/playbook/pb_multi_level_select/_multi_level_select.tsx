@@ -14,6 +14,7 @@ import {
   filterFormattedDataById,
   findByFilter,
   getCheckedItems,
+  getChildIds
 } from "./_helper_functions";
 
 type MultiLevelSelectProps = {
@@ -274,11 +275,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       }
       //if checked item has children
       if (filtered[0].children && filtered[0].children.length > 0) {
-        const childIds = filtered[0].children.map((child: any) => child.id);
-        const filteredDefaultReturn = defaultReturn.filter(
-          (item) => !childIds.includes(item.id)
+        const childIds = getChildIds(
+          filtered[0],
+          defaultReturn
         );
-        setDefaultReturn([...filteredDefaultReturn, filtered[0]]);
+        const filteredDefaultArray = defaultReturn.filter((item: any) => !childIds.includes(item.id));
+        setDefaultReturn([...filteredDefaultArray, filtered[0]]);
       }
     }
   };

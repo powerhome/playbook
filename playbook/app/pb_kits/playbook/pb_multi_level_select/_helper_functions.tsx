@@ -113,3 +113,15 @@ export const getCheckedItems = (
   });
   return checkedItems;
 };
+
+export const getChildIds = (item: any, defaultArray: any) => {
+  let childIds: any[] = [];
+  item.children.forEach((child: any) => {
+    childIds.push(child.id);
+    if (child.children && child.children.length > 0) {
+      const childChildIds = getChildIds(child, defaultArray);
+      childIds.push(...childChildIds);
+    }
+  });
+  return childIds;
+};
