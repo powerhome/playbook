@@ -147,7 +147,6 @@ const quickPickPlugin = () => {
         }
       },
       onValueUpdate(selectedDates: Array<string>) {
-        debugger
         selectActiveRangeButton(selectedDates);
       },
 
