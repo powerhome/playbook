@@ -1,9 +1,10 @@
 examples:
 
   rails:
-  - detail_default: Default
+  - detail_default: Variants
 
 
   react:
-  - detail_default: Default
-
+  - detail_default: Variants
+  - detail_styled: Styled
+  - detail_bolded: Bolded

@@ -1,3 +1,44 @@
-.pb_detail {
+@import "./detail_mixins";
+@import "../tokens/titles";
+@import "../tokens/typography";
 
+[class^=pb_detail_kit]{
+  @include pb_detail($color: $text_lt_light);
+
+  @each $color_name, $color_value in $pb_detail_colors {
+    &[class*=_#{$color_name}] {
+      @include pb_detail($color_value);
+    }
+  }
+
+  @each $dark_color_name, $dark_color_value in $pb_dark_detail_colors{
+    &[class*=_#{$dark_color_name}][class*=dark]{
+      @include pb_detail($dark_color_value)
+    }
+  }
+
+  // Styles
+  b, strong {
+    @include pb_title_4;
+    color: inherit;
+    font-size: $text_small;
+    font-weight: $bold;
+  }
+
+  a {
+    color: $primary;
+    &:hover {
+      cursor: pointer;
+      color: $text_lt_default;
+    }
+  }
+
+  em {
+    font-weight: $bold;
+  }
+
+  small {
+    font-size: $font_smaller;
+    letter-spacing: $lspace_loose;
+  }
 }
