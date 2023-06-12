@@ -114,9 +114,9 @@ export const getCheckedItems = (
   return checkedItems;
 };
 
-export const getChildIds = (item: any, defaultArray: any) => {
-  let childIds: any[] = [];
-  item.children.forEach((child: any) => {
+export const getChildIds = (item: { [key: string]: any }, defaultArray: { [key: string]: any }[]) => {
+  let childIds: string[] = [];
+  item.children.forEach((child: { [key: string]: any }) => {
     childIds.push(child.id);
     if (child.children && child.children.length > 0) {
       const childChildIds = getChildIds(child, defaultArray);
@@ -126,18 +126,15 @@ export const getChildIds = (item: any, defaultArray: any) => {
   return childIds;
 };
 
-export const updateReturnItems = (newChecked: any) => {
-  const updatedCheckedItems: any[] = [];
+export const updateReturnItems = (newChecked: { [key: string]: any }[]) => {
+  const updatedCheckedItems: { [key: string]: any }[] = [];
   for (const item of newChecked) {
     if (item.children && item.children.length > 0) {
       const allChildrenChecked = item.children.every(
-        (child: any) => child.checked
+        (child: { [key: string]: any }) => child.checked
       );
       if (allChildrenChecked) {
-        item.allChildrenChecked = true;
         updatedCheckedItems.push(item);
-      } else {
-        item.allChildrenChecked = false;
       }
     }
     const childItem = updatedCheckedItems.some((x) => x.id === item?.parent_id);

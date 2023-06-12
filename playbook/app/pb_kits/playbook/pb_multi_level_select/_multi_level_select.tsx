@@ -97,13 +97,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     };
   }, []);
 
-  //function to map over data and add checked + parent_id + depth + expanded + allChildrenChecked property to each item
+  //function to map over data and add checked + parent_id + depth + expanded property to each item
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
     parent_id: string = null,
     depth: number = 0,
-    expanded: boolean = false,
-    allChildrenChecked: boolean = false
+    expanded: boolean = false
   ) => {
     if (!Array.isArray(treeData)) {
       return;
@@ -115,7 +114,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         parent_id,
         depth,
         expanded,
-        allChildrenChecked,
       };
 
       if (newItem.children && newItem.children.length > 0) {
@@ -123,8 +121,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           newItem.children,
           newItem.id,
           depth + 1,
-          expanded,
-          allChildrenChecked
+          expanded
         );
       }
 
@@ -183,12 +180,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     //check and uncheck all children of checked/unchecked parent item
     if (filtered[0].children && filtered[0].children.length > 0) {
       if (filtered[0].checked) {
-        filtered[0].allChildrenChecked = true;
         filtered[0].children.forEach((item: { [key: string]: any }) => {
           checkedRecursive(item);
         });
       } else if (!filtered[0].checked && !returnAllSelected) {
-        filtered[0].allChildrenChecked = false;
         filtered[0].children.forEach((item: { [key: string]: any }) => {
           unCheckedRecursive(item);
         });
@@ -222,6 +217,15 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
     //when item is checked for default variant
     if (!returnAllSelected && filtered[0].checked) {
+      //if checked item has children
+      if (filtered[0].children && filtered[0].children.length > 0) {
+        const childIds = getChildIds(filtered[0], defaultReturn);
+        const filteredDefaultArray = defaultReturn.filter(
+          (item: { [key: string]: any }) => !childIds.includes(item.id)
+        );
+        setDefaultReturn([...filteredDefaultArray, filtered[0]]);
+      }
+
       //if clicked item has parent_id, find parent and check if all children checked or not
       if (filtered[0].parent_id !== null) {
         const parent = filterFormattedDataById(
@@ -229,38 +233,28 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           filtered[0].parent_id
         );
         const allChildrenChecked = parent[0].children.every(
-          (child: any) => child.checked
+          (child: { [key: string]: any }) => child.checked
         );
         if (allChildrenChecked) {
           // Only return the parent and remove its children from defaultReturn
           parent[0].checked = true;
-          parent[0].allChildrenChecked = true;
           const filteredDefaultReturn = defaultReturn.filter((item) => {
             // Remove children of the specific parent
-            if (parent[0].children.find((child: any) => child.id === item.id)) {
+            if (parent[0].children.find((child: { [key: string]: any }) => child.id === item.id)) {
               return false;
             }
             return true;
           });
           setDefaultReturn([...filteredDefaultReturn, parent[0]]);
         } else {
-          parent[0].allChildrenChecked = false;
           const checkedChildren = parent[0].children.filter(
-            (child: any) => child.checked
+            (child: { [key: string]: any }) => child.checked
           );
           const updatedDefaultReturn = [...defaultReturn, ...checkedChildren];
           setDefaultReturn(updatedDefaultReturn);
         }
       } else {
         setDefaultReturn([filtered[0]]);
-      }
-      //if checked item has children
-      if (filtered[0].children && filtered[0].children.length > 0) {
-        const childIds = getChildIds(filtered[0], defaultReturn);
-        const filteredDefaultArray = defaultReturn.filter(
-          (item: any) => !childIds.includes(item.id)
-        );
-        setDefaultReturn([...filteredDefaultArray, filtered[0]]);
       }
     }
   };
@@ -365,8 +359,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     onClick={(event) => handlePillClose(event, item)}
                   />
                 ))}
-            {(returnedArray.length !== 0 && returnAllSelected) && <br />}
-            {(defaultReturn.length !== 0 && !returnAllSelected) && <br/>}
+            {returnedArray.length !== 0 && returnAllSelected && <br />}
+            {defaultReturn.length !== 0 && !returnAllSelected && <br />}
             <input
               id="multiselect_input"
               onChange={(e) => {
