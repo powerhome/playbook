@@ -146,19 +146,14 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       }
     } else {
       if (defaultReturn.includes(clickedItem)) {
-        if (clickedItem.parent_id) {
-          getAncestorsOfChecked(formattedData, clickedItem);
-          const getNewChecked = getCheckedItems(formattedData);
-          const removeUnchecked = getNewChecked.filter(
-            (item) => item.id !== clickedItem.id
-          );
-          setDefaultReturn(removeUnchecked);
-        }
+        getAncestorsOfChecked(formattedData, clickedItem);
+        const newChecked = getCheckedItems(formattedData);
+        const filteredReturn = updateReturnItems(newChecked).filter(
+          (item) => item.id !== clickedItem.id
+        );
+        setDefaultReturn(filteredReturn);
         if (clickedItem.children && clickedItem.children.length > 0) {
           unCheckedRecursive(clickedItem);
-          const newChecked = getCheckedItems(formattedData);
-          const filteredReturn = updateReturnItems(newChecked);
-          setDefaultReturn(filteredReturn);
         }
       }
     }
