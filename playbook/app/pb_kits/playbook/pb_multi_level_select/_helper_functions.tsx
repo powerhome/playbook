@@ -125,3 +125,25 @@ export const getChildIds = (item: any, defaultArray: any) => {
   });
   return childIds;
 };
+
+export const updateReturnItems = (newChecked:any) => {
+  const updatedCheckedItems = [];
+      for (const item of newChecked) {
+        if (item.children && item.children.length > 0) {
+          const allChildrenChecked = item.children.every(
+            (child: any) => child.checked
+          );
+          allChildrenChecked
+            ? (item.allChildrenChecked = true)
+            : (item.allChildrenChecked = false);
+        }
+        item.allChildrenChecked && updatedCheckedItems.push(item);
+        const childItem = updatedCheckedItems.some(
+          (x) => x.id === item?.parent_id
+        );
+        if (!childItem) {
+          updatedCheckedItems.push(item);
+        }
+      }
+      return updatedCheckedItems
+}

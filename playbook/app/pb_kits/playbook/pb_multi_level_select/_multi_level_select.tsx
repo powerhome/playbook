@@ -14,7 +14,8 @@ import {
   filterFormattedDataById,
   findByFilter,
   getCheckedItems,
-  getChildIds
+  getChildIds,
+  updateReturnItems,
 } from "./_helper_functions";
 
 type MultiLevelSelectProps = {
@@ -155,7 +156,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         }
         if (clickedItem.children && clickedItem.children.length > 0) {
           unCheckedRecursive(clickedItem);
-          setDefaultReturn(getCheckedItems(formattedData));
+          const newChecked = getCheckedItems(formattedData);
+          const filteredReturn = updateReturnItems(newChecked);
+          setDefaultReturn(filteredReturn);
         }
       }
     }
@@ -218,25 +221,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
       const newChecked = getCheckedItems(formattedData);
       //get all checked items, and filter to check if all children checked, if yes return only parent
-      const updatedCheckedItems = [];
-      for (const item of newChecked) {
-        if (item.children && item.children.length > 0) {
-          const allChildrenChecked = item.children.every(
-            (child: any) => child.checked
-          );
-          allChildrenChecked
-            ? (item.allChildrenChecked = true)
-            : (item.allChildrenChecked = false);
-        }
-        item.allChildrenChecked && updatedCheckedItems.push(item);
-        const childItem = updatedCheckedItems.some(
-          (x) => x.id === item?.parent_id
-        );
-        if (!childItem) {
-          updatedCheckedItems.push(item);
-        }
-      }
-      setDefaultReturn(updatedCheckedItems);
+      const filteredReturn = updateReturnItems(newChecked);
+      setDefaultReturn(filteredReturn);
     }
 
     //when item is checked for default variant
@@ -275,11 +261,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       }
       //if checked item has children
       if (filtered[0].children && filtered[0].children.length > 0) {
-        const childIds = getChildIds(
-          filtered[0],
-          defaultReturn
+        const childIds = getChildIds(filtered[0], defaultReturn);
+        const filteredDefaultArray = defaultReturn.filter(
+          (item: any) => !childIds.includes(item.id)
         );
-        const filteredDefaultArray = defaultReturn.filter((item: any) => !childIds.includes(item.id));
         setDefaultReturn([...filteredDefaultArray, filtered[0]]);
       }
     }
