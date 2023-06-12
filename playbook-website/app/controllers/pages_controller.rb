@@ -73,7 +73,7 @@ class PagesController < ApplicationController
     @selected_kit = params[:name]
     @type = "rails"
 
-    render template: "pages/kits_show"
+    render template: "pages/kits_show", layout: "layouts/fullscreen"
   end
 
   def kits_show_react
@@ -82,7 +82,7 @@ class PagesController < ApplicationController
     @selected_kit = params[:name]
     @type = "react"
 
-    render template: "pages/kits_show"
+    render template: "pages/kits_show", layout: "layouts/fullscreen"
   end
 
   def kits_show
@@ -91,7 +91,7 @@ class PagesController < ApplicationController
     @selected_kit = params[:name]
     @type = params[:type]
 
-    render template: "pages/kits_show"
+    render template: "pages/kits_show", layout: "layouts/fullscreen"
   end
 
   def kit_playground_rails

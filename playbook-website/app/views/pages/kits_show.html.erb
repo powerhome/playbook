@@ -1,12 +1,14 @@
-<div class="kit-show-wrapper">
+<%= pb_rails("flex", props: {orientation: "column", margin: "xl"}) do %>
   <%= pb_rails("nav", props: { margin_bottom: "md", orientation: "horizontal" }) do %>
     <% @kits_array.each do |kit| %>
-       <%= pb_rails("nav/item", props: { id: "nav-item-#{kit}", text: kit.titleize, link: kits_show_path(names: params[:names], name: kit, type: @type), active: kit == @selected_kit}) %>
+      <%= pb_rails("nav/item", props: { id: "nav-item-#{kit}", text: kit.titleize, link: kits_show_path(names: params[:names], name: kit, type: @type), active: kit == @selected_kit}) %>
     <% end %>
   <% end %>
-  <% if @type == "rails" %>
-    <%= pb_kit(kit: @selected_kit, dark_mode: dark_mode?) %>
-  <% elsif @type == "react" %>
-    <%= pb_kit(kit: @selected_kit, type: "react", dark_mode: dark_mode?) %>
-  <% end %>
-</div>
+  <div class="multi-kits-container">
+    <% if @type == "rails" %>
+      <%= pb_kit(kit: @selected_kit, dark_mode: dark_mode?) %>
+    <% elsif @type == "react" %>
+      <%= pb_kit(kit: @selected_kit, type: "react", dark_mode: dark_mode?) %>
+    <% end %>
+  </div>
+<% end %>
