@@ -8,7 +8,8 @@ app.build(
     limitCpu: '2',
     requestMemory: '10Gi',
     limitMemory: '10Gi',
-  ]
+  ],
+  timeout: 30,
 ) {
   app.composeBuild(
     appRepo: "image-registry.powerapp.cloud/playbook/playbook",
