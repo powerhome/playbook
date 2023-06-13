@@ -1,9 +1,9 @@
 import React from 'react'
-import { DetailText } from '../..'
+import { Detail } from '../..'
 
-const DetailTextStyled = (props) => (
+const DetailStyled = (props) => (
   <>
-    <DetailText {...props}>
+    <Detail {...props}>
       <b>{"This text is using the <b> tag."}</b>
       <br />
       <br />
@@ -25,8 +25,8 @@ const DetailTextStyled = (props) => (
       <u>{"This text is using the <u> tag."}</u>
       <br />
       <br />
-    </DetailText>
+    </Detail>
   </>
 )
 
-export default DetailTextStyled
+export default DetailStyled

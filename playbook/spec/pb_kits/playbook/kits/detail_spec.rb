@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_detail_text/detail_text"
+require_relative "../../../../app/pb_kits/playbook/pb_detail/detail"
 
-RSpec.describe Playbook::PbDetailText::DetailText do
-  subject { Playbook::PbDetailText::DetailText }
+RSpec.describe Playbook::PbDetail::Detail do
+  subject { Playbook::PbDetail::Detail }
 
   it {
     is_expected.to define_enum_prop(:color)
@@ -23,10 +23,10 @@ RSpec.describe Playbook::PbDetailText::DetailText do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_detail_text_kit_light"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_detail_text_kit_light additional_class"
-      expect(subject.new(dark: true).classname).to eq "pb_detail_text_kit_light dark"
-      expect(subject.new(dark: true, color: "link").classname).to eq "pb_detail_text_kit_link dark"
+      expect(subject.new({}).classname).to eq "pb_detail_kit_light"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_detail_kit_light additional_class"
+      expect(subject.new(dark: true).classname).to eq "pb_detail_kit_light dark"
+      expect(subject.new(dark: true, color: "link").classname).to eq "pb_detail_kit_link dark"
     end
   end
 end

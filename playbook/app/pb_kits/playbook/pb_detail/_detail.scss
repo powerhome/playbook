@@ -1,19 +1,19 @@
-@import "./detail_text_mixins";
+@import "./detail_mixins";
 @import "../tokens/titles";
 @import "../tokens/typography";
 
-[class^=pb_detail_text_kit]{
-  @include pb_detail_text;
+[class^=pb_detail_kit]{
+  @include pb_detail;
 
-  @each $color_name, $color_value in $pb_detail_text_colors {
+  @each $color_name, $color_value in $pb_detail_colors {
     &[class*=_#{$color_name}] {
-      @include pb_detail_text($color_value);
+      @include pb_detail($color_value);
     }
   }
 
-  @each $dark_color_name, $dark_color_value in $pb_dark_detail_text_colors{
+  @each $dark_color_name, $dark_color_value in $pb_dark_detail_colors{
     &[class*=_#{$dark_color_name}][class*=dark]{
-      @include pb_detail_text($dark_color_value)
+      @include pb_detail($dark_color_value)
     }
   }
 

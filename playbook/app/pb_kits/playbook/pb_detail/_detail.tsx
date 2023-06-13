@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
-type DetailTextProps = {
+type DetailProps = {
   aria?: { [key: string]: string },
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
@@ -15,7 +15,7 @@ type DetailTextProps = {
   text?: string,
 } & GlobalProps
 
-const DetailText = (props: DetailTextProps) => {
+const Detail = (props: DetailProps) => {
   const {
     aria = {},
     children,
@@ -30,7 +30,7 @@ const DetailText = (props: DetailTextProps) => {
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_detail_text_kit', color),
+    buildCss('pb_detail_kit', color),
     globalProps(props),
     className
   )
@@ -48,4 +48,4 @@ const DetailText = (props: DetailTextProps) => {
   )
 }
 
-export default DetailText
+export default Detail
