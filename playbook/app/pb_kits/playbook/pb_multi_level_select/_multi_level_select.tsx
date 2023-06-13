@@ -138,12 +138,18 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     //logic for removing items from returnArray or defaultReturn when pills clicked
     if (returnAllSelected) {
       if (returnedArray.includes(clickedItem)) {
-        const childrenOfChecked = getChildIds(clickedItem, returnedArray);
-        const updatedFiltered = returnedArray
-          .filter((item) => item !== clickedItem)
-          .filter((item) => !childrenOfChecked.includes(item.id));
-
-        setReturnedArray(updatedFiltered);
+        if (clickedItem.children && clickedItem.children.length > 0) {
+          const childrenOfChecked = getChildIds(clickedItem, returnedArray);
+          const updatedFiltered = returnedArray
+            .filter((item) => item !== clickedItem)
+            .filter((item) => !childrenOfChecked.includes(item.id));
+          setReturnedArray(updatedFiltered);
+        } else {
+          const updatedFiltered = returnedArray.filter(
+            (item) => item !== clickedItem
+          );
+          setReturnedArray(updatedFiltered);
+        }
       }
     } else {
       if (defaultReturn.includes(clickedItem)) {
@@ -199,12 +205,19 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     //checking and unchecking items for returnAllSelected variant
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
-        const childrenOfChecked = getChildIds(filtered[0], returnedArray);
-        const updatedFiltered = returnedArray
-          .filter((item) => item !== filtered[0])
-          .filter((item) => !childrenOfChecked.includes(item.id));
+        if (filtered[0].children && filtered[0].children.length > 0) {
+          const childrenOfChecked = getChildIds(filtered[0], returnedArray);
+          const updatedFiltered = returnedArray
+            .filter((item) => item !== filtered[0])
+            .filter((item) => !childrenOfChecked.includes(item.id));
 
-        setReturnedArray(updatedFiltered);
+          setReturnedArray(updatedFiltered);
+        } else {
+          const updatedFiltered = returnedArray.filter(
+            (item) => item !== filtered[0]
+          );
+          setReturnedArray(updatedFiltered);
+        }
       }
     } else {
       setReturnedArray(checkedItems);
