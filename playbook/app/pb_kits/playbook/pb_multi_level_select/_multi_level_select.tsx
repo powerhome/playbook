@@ -17,6 +17,7 @@ import {
   updateReturnItems,
   recursiveReturnOnlyParent,
   removeChildrenIfParentChecked,
+  getChildIds,
 } from "./_helper_functions";
 
 type MultiLevelSelectProps = {
@@ -137,10 +138,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     //logic for removing items from returnArray or defaultReturn when pills clicked
     if (returnAllSelected) {
       if (returnedArray.includes(clickedItem)) {
-        const removeUnchecked = returnedArray.filter(
-          (item) => item.id !== clickedItem.id
-        );
-        setReturnedArray(removeUnchecked);
+        const childrenOfChecked = getChildIds(clickedItem, returnedArray);
+        const updatedFiltered = returnedArray
+          .filter((item) => item !== clickedItem)
+          .filter((item) => !childrenOfChecked.includes(item.id));
+
+        setReturnedArray(updatedFiltered);
       }
     } else {
       if (defaultReturn.includes(clickedItem)) {
@@ -150,10 +153,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           (item) => item.id !== clickedItem.id
         );
         setDefaultReturn(filteredReturn);
-        if (clickedItem.children && clickedItem.children.length > 0) {
-          unCheckedRecursive(clickedItem);
-        }
       }
+    }
+    if (clickedItem.children && clickedItem.children.length > 0) {
+      unCheckedRecursive(clickedItem);
     }
     //logic to uncheck clickedItem in formattedData
     unCheckIt(formattedData, clickedItem.id);
@@ -184,7 +187,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         filtered[0].children.forEach((item: { [key: string]: any }) => {
           checkedRecursive(item);
         });
-      } else if (!filtered[0].checked && !returnAllSelected) {
+      } else if (!filtered[0].checked) {
         filtered[0].children.forEach((item: { [key: string]: any }) => {
           unCheckedRecursive(item);
         });
@@ -196,9 +199,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     //checking and unchecking items for returnAllSelected variant
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
-        const updatedFiltered = returnedArray.filter(
-          (item) => item !== filtered[0]
-        );
+        const childrenOfChecked = getChildIds(filtered[0], returnedArray);
+        const updatedFiltered = returnedArray
+          .filter((item) => item !== filtered[0])
+          .filter((item) => !childrenOfChecked.includes(item.id));
+
         setReturnedArray(updatedFiltered);
       }
     } else {
@@ -220,7 +225,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (!returnAllSelected && filtered[0].checked) {
       //if checked item has children
       if (filtered[0].children && filtered[0].children.length > 0) {
-        removeChildrenIfParentChecked(filtered[0], defaultReturn, setDefaultReturn)
+        removeChildrenIfParentChecked(
+          filtered[0],
+          defaultReturn,
+          setDefaultReturn
+        );
       }
 
       //if clicked item has parent_id, find parent and check if all children checked or not
