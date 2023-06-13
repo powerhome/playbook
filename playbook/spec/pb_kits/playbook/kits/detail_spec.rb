@@ -7,7 +7,7 @@ RSpec.describe Playbook::PbDetail::Detail do
 
   it {
     is_expected.to define_enum_prop(:color)
-      .with_default("default")
+      .with_default("")
       .with_values("default", "lighter", "link", "success", "error")
   }
 
