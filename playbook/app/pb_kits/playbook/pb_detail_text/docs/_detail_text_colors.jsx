@@ -5,31 +5,31 @@ const DetailTextColors = (props) => (
   <div>
     <DetailText
         color="default"
-        text="I am a detail text kit (Default as a color)"
+        text="I am a detail text kit"
         {...props}
     />
 
     <DetailText
         color="lighter"
-        text="I am a detail text kit (Lighter)"
+        text="I am a detail text kit"
         {...props}
     />
 
     <DetailText
         color="link"
-        text="I am a detail text kit (Link)"
+        text="I am a detail text kit"
         {...props}
     />
 
     <DetailText
         color="error"
-        text="I am a detail text kit (Error)"
+        text="I am a detail text kit"
         {...props}
     />
 
     <DetailText
         color="success"
-        text="I am a detail text kit (Success)"
+        text="I am a detail text kit"
         {...props}
     />
   </div>
