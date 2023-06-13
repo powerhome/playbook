@@ -1,0 +1,11 @@
+examples:
+
+  rails:
+  - detail_text_default: Variants
+  - detail_text_styled: Styled
+  - detail_text_bolded: Bolded
+
+  react:
+  - detail_text_default: Variants
+  - detail_text_styled: Styled
+  - detail_text_bolded: Bolded

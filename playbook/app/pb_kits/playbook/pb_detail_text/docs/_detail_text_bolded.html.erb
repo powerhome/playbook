@@ -1,0 +1,33 @@
+<%= pb_rails("detail_text") do %>
+  <b>I am a bolded detail text kit (Default)</b>
+<% end %>
+
+<%= pb_rails("detail_text", props: {
+  color: "default"
+}) do %>
+  <b>I am a bolded detail text kit (Default as a color)</b>
+<% end %>
+
+<%= pb_rails("detail_text", props: {
+  color: "lighter"
+}) do %>
+  <b>I am a bolded detail text kit (lighter)</b>
+<% end %>
+
+<%= pb_rails("detail_text", props: {
+  color: "link"
+}) do %>
+  <b>I am a bolded detail text kit (link)</b>
+<% end %>
+
+<%= pb_rails("detail_text", props: {
+  color: "error"
+}) do %>
+  <b>I am a bolded detail text kit (Error)</b>
+<% end %>
+
+<%= pb_rails("detail_text", props: {
+  color: "success"
+}) do %>
+  <b>I am a bolded detail text kit (Success)</b>
+<% end %>

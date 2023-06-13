@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbDetail
-    class Detail < ::Playbook::KitBase
+  module PbDetailText
+    class DetailText < ::Playbook::KitBase
       prop :color, type: Playbook::Props::Enum,
                    values: %w[light default lighter link error success],
                    default: "light"
@@ -12,7 +12,7 @@ module Playbook
       prop :text
 
       def classname
-        generate_classname("pb_detail_kit", color)
+        generate_classname("pb_detail_text_kit", color)
       end
 
       def content
