@@ -3,6 +3,7 @@
 @import "../tokens/typography";
 
 $pb_detail_colors: (
+  light:          $text_lt_light,
   default:        $text_lt_default,
   lighter:        $text_lt_lighter,
   link:           $primary,
@@ -11,6 +12,7 @@ $pb_detail_colors: (
 );
 
 $pb_dark_detail_colors: (
+  light:          $text_dk_light,
   default:        $text_dk_default,
   lighter:        $text_dk_lighter,
   link:           $primary,

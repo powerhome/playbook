@@ -7,8 +7,8 @@ RSpec.describe Playbook::PbDetail::Detail do
 
   it {
     is_expected.to define_enum_prop(:color)
-      .with_default("")
-      .with_values("default", "lighter", "link", "success", "error")
+      .with_default("light")
+      .with_values("light", "default", "lighter", "link", "success", "error")
   }
 
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
@@ -23,9 +23,9 @@ RSpec.describe Playbook::PbDetail::Detail do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_detail_kit"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_detail_kit additional_class"
-      expect(subject.new(dark: true).classname).to eq "pb_detail_kit dark"
+      expect(subject.new({}).classname).to eq "pb_detail_kit_light"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_detail_kit_light additional_class"
+      expect(subject.new(dark: true).classname).to eq "pb_detail_kit_light dark"
       expect(subject.new(dark: true, color: "link").classname).to eq "pb_detail_kit_link dark"
     end
   end

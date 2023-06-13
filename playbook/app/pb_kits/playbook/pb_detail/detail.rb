@@ -4,8 +4,8 @@ module Playbook
   module PbDetail
     class Detail < ::Playbook::KitBase
       prop :color, type: Playbook::Props::Enum,
-                   values: [nil, "default", "lighter", "link", "error", "success"],
-                   default: nil
+                   values: %w[light default lighter link error success],
+                   default: "light"
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[h1 h2 h3 h4 h5 h6 p span div],
                  default: "div"

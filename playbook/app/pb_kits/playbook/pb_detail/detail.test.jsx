@@ -12,11 +12,11 @@ test('returns namespaced class name', () => {
   )
 
   const kit = screen.getByTestId('primary-test')
-  expect(kit).toHaveClass('pb_detail_kit')
+  expect(kit).toHaveClass('pb_detail_kit_light')
 })
 
 test('with colors', () => {
-  ['default', 'lighter', 'link', 'success', 'error'].forEach((color) => {
+  ['light', 'default', 'lighter', 'link', 'success', 'error'].forEach((color) => {
     const testId = `colors-test-${color}`
 
     render(
