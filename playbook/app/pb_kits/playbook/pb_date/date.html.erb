@@ -4,7 +4,28 @@
     class: object.classname,
     aria: object.aria) do %>
 
-  <% if object.size == "md" %>
+  <% if object.unstyled %>
+    <!-- icon -->
+    <% if object.show_icon %>
+      <div><%= pb_rails("icon", props: { icon: "calendar-alt", fixed_width: true }) %></div>
+    <% end %>
+
+    <!-- day_of_week -->
+    <% if object.show_day_of_week %>
+      <div><%= object.day_of_week %></div>
+      <div>•</div>
+    <% end %>
+
+    <!-- month day, year -->
+    <%# if not current year %>
+    <% if object.year.to_s == DateTime.now.year.to_s %>
+      <span><%= "#{object.month} #{object.day}" %></span>
+    <%# if is current year %>
+    <% else %>
+      <span><%= "#{object.month} #{object.day}, #{object.year}" %></span>
+    <% end %>
+
+  <% elsif object.size == "md" || object.size == "lg" %>
     <!-- icon -->
     <% if object.show_icon %>
       <%= pb_rails("body", props: {
@@ -36,7 +57,6 @@
     <% end %>
 
   <% else %>
-
     <!-- icon -->
     <% if object.show_icon %>
       <%= pb_rails("caption", props: {
