@@ -3,11 +3,9 @@ examples:
   rails:
   - detail_default: Default
   - detail_colors: Colors
-  - detail_styled: Styled
   - detail_bolded: Bolded
 
   react:
   - detail_default: Default
   - detail_colors: Colors
-  - detail_styled: Styled
   - detail_bolded: Bolded
