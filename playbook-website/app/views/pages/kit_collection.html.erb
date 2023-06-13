@@ -1,7 +1,7 @@
 <%= pb_rails("flex", props: {orientation: "column", margin: "xl"}) do %>
   <%= pb_rails("nav", props: { margin_bottom: "md", orientation: "horizontal" }) do %>
     <% @kits_array.each do |kit| %>
-      <%= pb_rails("nav/item", props: { id: "nav-item-#{kit}", text: kit.titleize, link: kits_show_path(names: params[:names], name: kit, type: @type), active: kit == @selected_kit}) %>
+      <%= pb_rails("nav/item", props: { id: "nav-item-#{kit}", text: kit.titleize, link: kit_collection_show_path(names: params[:names], name: kit, type: @type), active: kit == @selected_kit}) %>
     <% end %>
   <% end %>
   <div class="multi-kits-container">

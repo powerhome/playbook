@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   get "kit_category/:name",         to: "pages#kit_category_show_rails",  as: "kit_category_show"
   get "kit_category/:name/rails",   to: "pages#kit_category_show_rails",  as: "kit_category_show_rails"
   get "kit_category/:name/react",   to: "pages#kit_category_show_react",  as: "kit_category_show_reacts"
-  get "kit_mashup/*names/:name/rails",    to: "pages#kits_show_rails",                        as: "kits_show_rails"
-  get "kit_mashup/*names/:name/react",    to: "pages#kits_show_react",                        as: "kits_show_react"
-  get "kit_mashup/*names/:name(/:type)",  to: "pages#kits_show", defaults: { type: "rails" }, as: "kits_show"
+  get "kit_collection/*names/:name/rails",    to: "pages#kit_collection_rails",                        as: "kit_collection_rails"
+  get "kit_collection/*names/:name/react",    to: "pages#kit_collection_react",                        as: "kit_collection_react"
+  get "kit_collection/*names/:name(/:type)",  to: "pages#kit_collection_show", defaults: { type: "rails" }, as: "kit_collection_show"
 
   # Experiments
   get "kits/:name/sandpack",        to: "pages#kit_show_new",         as: "kit_show_new"

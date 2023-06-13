@@ -67,31 +67,31 @@ class PagesController < ApplicationController
     render template: "pages/kit_show", layout: "layouts/kits"
   end
 
-  def kits_show_rails
+  def kit_collection_rails
     @kits = params[:names].split("%26")
     @kits_array = @kits.first.split("&")
     @selected_kit = params[:name]
     @type = "rails"
 
-    render template: "pages/kits_show", layout: "layouts/fullscreen"
+    render template: "pages/kit_collection", layout: "layouts/fullscreen"
   end
 
-  def kits_show_react
+  def kit_collection_react
     @kits = params[:names].split("%26")
     @kits_array = @kits.first.split("&")
     @selected_kit = params[:name]
     @type = "react"
 
-    render template: "pages/kits_show", layout: "layouts/fullscreen"
+    render template: "pages/kit_collection", layout: "layouts/fullscreen"
   end
 
-  def kits_show
+  def kit_collection_show
     @kits = params[:names].split("%26")
     @kits_array = @kits.first.split("&")
     @selected_kit = params[:name]
     @type = params[:type]
 
-    render template: "pages/kits_show", layout: "layouts/fullscreen"
+    render template: "pages/kit_collection", layout: "layouts/fullscreen"
   end
 
   def kit_playground_rails
