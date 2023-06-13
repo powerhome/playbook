@@ -90,7 +90,7 @@ kits:
   - typography:
     - body
     - caption
-    - detail_text
+    - detail
     - title
   - typography_patterns:
     - contact
