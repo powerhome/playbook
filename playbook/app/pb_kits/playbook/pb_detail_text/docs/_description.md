@@ -1,1 +1,1 @@
-Used for tables or designs with large amounts of data or text. This kit's font size is smaller than the `Body` kit and larger than the Caption's kit `subcaption` variant.
+Used for tables or designs with large amounts of data or text. This kit's font size is smaller than the `Body` kit and larger than the Caption kit's `subcaption` variant.
