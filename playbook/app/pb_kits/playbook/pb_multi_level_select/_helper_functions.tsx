@@ -163,7 +163,6 @@ export const recursiveReturnOnlyParent = (
   const allChildrenChecked = parent[0].children.every(
     (child: { [key: string]: any }) => child.checked
   );
-      console.log("PARENT")
   if (allChildrenChecked) {
     // Only return the parent and remove its children from defaultReturn
     parent[0].checked = true;
@@ -176,18 +175,14 @@ export const recursiveReturnOnlyParent = (
       ) {
         return false;
       }
-      return true;
     });
-    console.log("filtered recursive parent only", filteredDefaultReturn, parent[0],defaultReturn)
     setDefaultReturn([...filteredDefaultReturn, parent[0]]);
     // Check if the parent has a parent and its children are all checked
     const parentHasParent = parent[0].parent_id !== null;
     if (parentHasParent) {
-      console.log("PARENT HAS PARENT")
       recursiveReturnOnlyParent(parent[0], formattedData, filteredDefaultReturn, setDefaultReturn);
     }
   } else {
-    console.log("NO PARENT")
     const checkedChildren = parent[0].children.filter(
       (child: { [key: string]: any }) => child.checked
     );
@@ -197,14 +192,9 @@ export const recursiveReturnOnlyParent = (
 };
 
 export const removeChildrenIfParentChecked = (items:any, defaultReturn:any, setDefaultReturn:any) => {
-  console.log("CHILDREN")
   const childIds = getChildIds(items, defaultReturn);
-  console.log(childIds)
-  console.log("DEFAULT", defaultReturn)
   const filteredDefaultArray = defaultReturn.filter(
     (item: { [key: string]: any }) => !childIds.includes(item.id)
   );
-  console.log("filteredarray", filteredDefaultArray)
   setDefaultReturn([...filteredDefaultArray, items]);
-
 }
