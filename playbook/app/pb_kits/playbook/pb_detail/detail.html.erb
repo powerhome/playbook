@@ -1,7 +1,7 @@
-<%= content_tag(:div,
+<%= content_tag(object.tag,
     aria: object.aria,
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-  <span>DETAIL CONTENT</span>
+  <%= object.content %>
 <% end %>
