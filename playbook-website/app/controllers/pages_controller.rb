@@ -70,15 +70,16 @@ class PagesController < ApplicationController
   def kit_collection_show_rails
     @kits = params[:names].split("%26")
     @kits_array = @kits.first.split("&")
+    params[:name] ||= @kits_array[0]
     @selected_kit = params[:name]
     @type = "rails"
-
     render template: "pages/kit_collection", layout: "layouts/fullscreen"
   end
 
   def kit_collection_show_react
     @kits = params[:names].split("%26")
     @kits_array = @kits.first.split("&")
+    params[:name] ||= @kits_array[0]
     @selected_kit = params[:name]
     @type = "react"
 
@@ -88,6 +89,7 @@ class PagesController < ApplicationController
   def kit_collection_show
     @kits = params[:names].split("%26")
     @kits_array = @kits.first.split("&")
+    params[:name] ||= @kits_array[0]
     @selected_kit = params[:name]
     @type = params[:type]
 
