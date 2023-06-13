@@ -4,42 +4,42 @@ import { Detail } from '../..'
 const DetailBolded = (props) => (
   <div>
     <Detail {...props}>
-        <b>{"I am a bolded detail kit (Default)"}</b>
+      <b>{"I am a bolded detail kit (Default)"}</b>
     </Detail>
 
     <Detail
         color="default"
         {...props}
     >
-        <b>{"I am a bolded detail kit (Default as a color)"}</b>
+      <b>{"I am a bolded detail kit (Default as a color)"}</b>
     </Detail>
 
     <Detail
         color="lighter"
         {...props}
     >
-        <b>{"I am a bolded detail kit (Lighter)"}</b>
+      <b>{"I am a bolded detail kit (Lighter)"}</b>
     </Detail>
 
     <Detail
         color="link"
         {...props}
     >
-        <b>{"I am a bolded detail kit (Link)"}</b>
+      <b>{"I am a bolded detail kit (Link)"}</b>
     </Detail>
 
     <Detail
         color="error"
         {...props}
     >
-        <b>{"I am a bolded detail kit (Error)"}</b>
+      <b>{"I am a bolded detail kit (Error)"}</b>
     </Detail>
 
     <Detail
         color="success"
         {...props}
     >
-        <b>{"I am a bolded detail kit (Success)"}</b>
+      <b>{"I am a bolded detail kit (Success)"}</b>
     </Detail>
   </div>
 )
