@@ -1,17 +1,33 @@
-// import { ensureAccessible, renderKit } from '../utilities/test-utils'
+import React from 'react'
+import { render, screen } from '../utilities/test-utils'
 
-import { Detail } from '../'
+import Detail from './_detail'
 
-/* See these resources for more testing info:
-  - https://github.com/testing-library/jest-dom#usage for useage and examples
-  - https://jestjs.io/docs/en/using-matchers
-*/
+test('returns namespaced class name', () => {
+  render(
+    <Detail
+        data={{ testid: 'primary-test' }}
+        text="Test colors"
+    />
+  )
 
-test('generated scaffold test - update me', () => {
-  const props = {
-    data: { testid: 'default' }
-  }
+  const kit = screen.getByTestId('primary-test')
+  expect(kit).toHaveClass('pb_detail_kit')
+})
 
-  const kit = renderKit(Detail , props)
-  expect(kit).toBeInTheDocument()
+test('with colors', () => {
+  ['default', 'lighter', 'link', 'success', 'error'].forEach((color) => {
+    const testId = `colors-test-${color}`
+
+    render(
+      <Detail
+          color={color}
+          data={{ testid: testId }}
+          text="Test colors"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass(`pb_detail_kit_${color}`)
+  })
 })
