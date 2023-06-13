@@ -14,9 +14,9 @@ import {
   filterFormattedDataById,
   findByFilter,
   getCheckedItems,
-  getChildIds,
   updateReturnItems,
   recursiveReturnOnlyParent,
+  removeChildrenIfParentChecked,
 } from "./_helper_functions";
 
 type MultiLevelSelectProps = {
@@ -218,13 +218,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
     //when item is checked for default variant
     if (!returnAllSelected && filtered[0].checked) {
+      console.log("DEFAULT BEFORE CHILDREN", defaultReturn)
+
       //if checked item has children
       if (filtered[0].children && filtered[0].children.length > 0) {
-        const childIds = getChildIds(filtered[0], defaultReturn);
-        const filteredDefaultArray = defaultReturn.filter(
-          (item: { [key: string]: any }) => !childIds.includes(item.id)
-        );
-        setDefaultReturn([...filteredDefaultArray, filtered[0]]);
+        removeChildrenIfParentChecked(filtered[0], defaultReturn, setDefaultReturn)
       }
 
       //if clicked item has parent_id, find parent and check if all children checked or not

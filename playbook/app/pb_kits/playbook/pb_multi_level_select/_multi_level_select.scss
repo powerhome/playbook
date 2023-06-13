@@ -59,6 +59,13 @@
       .dropdown_item_checkbox_row {
         display: flex;
         align-items: center;
+        .pb_button_kit_link_inline_enabled {
+          color: $charcoal;
+          &:hover {
+            color: $primary;
+          }
+        }
+
       }
     }
   }
