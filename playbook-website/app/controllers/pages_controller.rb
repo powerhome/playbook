@@ -67,7 +67,7 @@ class PagesController < ApplicationController
     render template: "pages/kit_show", layout: "layouts/kits"
   end
 
-  def kit_collection_rails
+  def kit_collection_show_rails
     @kits = params[:names].split("%26")
     @kits_array = @kits.first.split("&")
     @selected_kit = params[:name]
@@ -76,7 +76,7 @@ class PagesController < ApplicationController
     render template: "pages/kit_collection", layout: "layouts/fullscreen"
   end
 
-  def kit_collection_react
+  def kit_collection_show_react
     @kits = params[:names].split("%26")
     @kits_array = @kits.first.split("&")
     @selected_kit = params[:name]
