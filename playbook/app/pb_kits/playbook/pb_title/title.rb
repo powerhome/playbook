@@ -17,21 +17,14 @@ module Playbook
                      values: [nil, "link"],
                      default: nil,
                      deprecated: true
-
-      def initialize(props)
-        props[:bold] = [1, 2, 4].include?(props[:size]) unless props.key?(:bold)
-        props[:bold] = false if props[:size].nil? && !props.key?(:bold)
-        super(props)
-      end
-
-      prop :bold, type: Playbook::Props::Boolean
+      prop :bold, type: Playbook::Props::Boolean, default: true
 
       def classname
-        generate_classname("pb_title_kit", size, variant, color) + is_bold
+        generate_classname("pb_title_kit", size, variant, color, is_bold)
       end
 
       def is_bold
-        bold ? "" : " thin"
+        bold ? nil : "thin"
       end
     end
   end
