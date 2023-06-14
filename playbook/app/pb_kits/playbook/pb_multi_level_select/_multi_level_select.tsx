@@ -92,6 +92,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         setIsClosed(true);
       }
     };
+    //if any items already checked in first render, set return accordingly
+    const initialChecked = getCheckedItems(treeData)
+    initialChecked && returnAllSelected && setReturnedArray(initialChecked)
+    initialChecked && !returnAllSelected && setDefaultReturn(initialChecked)
+
     // Attach the event listener
     window.addEventListener("click", handleClickOutside);
     // Clean up the event listener on unmount

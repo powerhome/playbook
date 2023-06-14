@@ -191,7 +191,7 @@ export const recursiveReturnOnlyParent = (
   }
 };
 
-export const removeChildrenIfParentChecked = (items:any, defaultReturn:any, setDefaultReturn:any) => {
+export const removeChildrenIfParentChecked = (items:{ [key: string]: any }, defaultReturn:{ [key: string]: any }[], setDefaultReturn:any) => {
   const childIds = getChildIds(items, defaultReturn);
   const filteredDefaultArray = defaultReturn.filter(
     (item: { [key: string]: any }) => !childIds.includes(item.id)
