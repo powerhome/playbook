@@ -1,13 +1,13 @@
-# Textarea
+## Textarea
 Enables users to add longer text to a form
 
-## When to Use
+### When to Use
 * For long answers from users
 
-## When not to Use
+### When not to Use
 * For short answers from users, you can use a Text Input instead
 
-## How to use
+### How to use
 | Code | Image |
 | ----------------- | ---------------------- |
 | ![Screenshot 2023-06-14 at 1 50 02 PM](https://github.com/powerhome/playbook/assets/73671109/42084be1-84f1-4195-8257-a1cc09bec056) |![2023-06-14 at 2 28 18 PM](https://github.com/powerhome/playbook/assets/73671109/8a53e409-5d93-4bc0-b3b2-a40f19588db5) |
@@ -21,7 +21,7 @@ Enables users to add longer text to a form
 
 
 
-## Props
+### Props
 | Name | Type | Default |
 | --- | ----------- | --------- |
 | characterCount | Enum | Displays the character counter on the bottom right of the Textarea and its different variants |
