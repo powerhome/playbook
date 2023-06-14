@@ -47,13 +47,16 @@
     position: absolute;
     z-index: $z_1;
     width: 100%;
-    padding-left: $space_sm;
     background-color: $white;
-    padding: $space_sm;
+    padding: $space_sm $space_sm $space_sm 0;
     border-radius: $border_rad_heavier;
     border: 1px solid #e4e8f0;
     max-height: 600px;
     overflow: auto;
+
+    ul {
+      padding: 0px !important;
+    }
 
     .dropdown_item {
       list-style: none;
@@ -61,13 +64,15 @@
       .dropdown_item_checkbox_row {
         display: flex;
         align-items: center;
+        .pb_checkbox_kit {
+          align-items: center;
+        }
         .pb_button_kit_link_inline_enabled {
           color: $charcoal;
           &:hover {
             color: $primary;
           }
         }
-
       }
     }
   }
