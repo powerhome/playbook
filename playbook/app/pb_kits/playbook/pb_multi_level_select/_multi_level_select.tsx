@@ -60,7 +60,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //formattedData with checked and parent_id added
   const [formattedData, setFormattedData] = useState(treeData);
   //toggle chevron in dropdown
-  const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({});
+  //@ts-ignore
+  const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({}); 
   //state for return for default
   const [defaultReturn, setDefaultReturn] = useState([]);
 
@@ -279,7 +280,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   key={item.id}
                   className="dropdown_item"
                   data-name={item.id}
-                  style={{ paddingLeft: item.depth * 20 }}
                 >
                   <div className="dropdown_item_checkbox_row">
                     <div
