@@ -5,6 +5,7 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type DetailProps = {
   aria?: { [key: string]: string },
+  bold?: boolean,
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   color?: 'light' | 'default' | 'lighter' | 'link' | 'error' | 'success',
@@ -18,6 +19,7 @@ type DetailProps = {
 const Detail = (props: DetailProps) => {
   const {
     aria = {},
+    bold = false,
     children,
     className,
     color = 'light',
@@ -29,10 +31,12 @@ const Detail = (props: DetailProps) => {
 
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
+  const isBold = bold ? "bold" : null
   const classes = classnames(
     buildCss('pb_detail_kit', color),
     globalProps(props),
-    className
+    className,
+    isBold
   )
   const Tag: React.ReactElement | any = `${tag}`
 

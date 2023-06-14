@@ -18,7 +18,7 @@
   }
 
   // Styles
-  b, strong {
+  &.bold, b, strong {
     font-weight: $bold;
   }
 

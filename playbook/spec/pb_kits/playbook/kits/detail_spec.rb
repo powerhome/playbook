@@ -21,12 +21,15 @@ RSpec.describe Playbook::PbDetail::Detail do
 
   it { is_expected.to define_prop(:text) }
 
+  it { is_expected.to define_prop(:bold) }
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_detail_kit_light"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_detail_kit_light additional_class"
       expect(subject.new(dark: true).classname).to eq "pb_detail_kit_light dark"
       expect(subject.new(dark: true, color: "link").classname).to eq "pb_detail_kit_link dark"
+      expect(subject.new(bold: true).classname).to eq "pb_detail_kit_light bold"
     end
   end
 end
