@@ -291,7 +291,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                         icon={
                           item.expanded ? "chevron-down" : "chevron-right"
                         }
-                        className={item.children ? "" : "toggle_icon"}
+                        className={item.children && !filterItem ? "" : "toggle_icon"}
                         onClick={(event) => handleToggleClick(item.id, event)}
                         variant="link"
                       />
@@ -360,7 +360,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
               onChange={(e) => {
                 setFilterItem(e.target.value);
               }}
-              placeholder="Select..."
+              placeholder="Start typing..."
               value={filterItem}
               onClick={() => setIsClosed(false)}
             />

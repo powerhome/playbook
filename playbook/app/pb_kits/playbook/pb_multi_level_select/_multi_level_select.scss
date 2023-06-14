@@ -36,6 +36,7 @@
       input {
         border: none;
         font-family: $font_family_base;
+        padding: $space_xs;
         &:focus {
           outline: none;
         }
