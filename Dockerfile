@@ -1,4 +1,4 @@
-# syntax = docker/dockerfile:1.4.2
+# syntax = docker/dockerfile:1.5.2
 
 FROM phusion/passenger-customizable:1.0.19 AS base
 
@@ -32,17 +32,17 @@ RUN apt-get update -y \
 WORKDIR /home/app/src
 
 # Build Library
-COPY playbook-website/package.json playbook-website/
-COPY playbook/package.json playbook/
-COPY package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock .npmrc ./
-COPY .yarn ./.yarn
+COPY --link playbook-website/package.json playbook-website/
+COPY --link playbook/package.json playbook/
+COPY --link package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock .npmrc ./
+COPY --link .yarn ./.yarn
 RUN --mount=type=secret,id=yarnenv,required env $(cat /run/secrets/yarnenv | xargs) yarn install
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
-COPY --chown=app:app playbook /home/app/src/playbook
+COPY --link --chown=9999:9999 playbook /home/app/src/playbook
 
 # Bundle website
-COPY --chown=app:app playbook-website /home/app/src/playbook-website
+COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
 RUN cd playbook-website && bundle install --frozen
 
 # Setup service

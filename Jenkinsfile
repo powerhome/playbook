@@ -13,7 +13,8 @@ app.build(
 ) {
   app.composeBuild(
     appRepo: "image-registry.powerapp.cloud/playbook/playbook",
-    files: ["docker-compose.yml", "docker-compose.ci.yml"]
+    files: ["docker-compose.yml", "docker-compose.ci.yml"],
+    bakeFiles: ['docker-bake.hcl']
   ) { compose ->
     stage('Image Build') {
       withCredentials([
@@ -27,7 +28,7 @@ app.build(
         shell "playbook-website/bin/deployer sops --decrypt --output yarn.secrets.dec.env yarn.secrets.env"
       }
 
-      compose.buildAndPush()
+      compose.bake()
     }
 
     stage('Test') {
