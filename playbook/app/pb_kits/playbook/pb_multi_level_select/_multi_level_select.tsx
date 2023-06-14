@@ -272,7 +272,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 key={item.id}
                 className='dropdown_item'
                 data-name={item.id}
-                style={{ paddingLeft: item.depth * 20 }}
+                // style={{ paddingLeft: item.depth * 20 }}
               >
                 <CheckboxItem
                   item={item}

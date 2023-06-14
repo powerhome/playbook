@@ -10,20 +10,22 @@ type CheckboxItemProps = {
 export default function CheckboxItem({ item, onChange }: CheckboxItemProps) {
   const [expanded, setExpanded] = useState(false)
 
-  const handleClick = () => {
+  const handleClick = (e: ) => {
+    e.stopPropagation();
+    console.log("getting clicked yo")
     setExpanded(!expanded)
   }
 
   return (
     <div className='dropdown_item_checkbox_row'>
-      {/* <div key={isToggled[item.id] ? "chevron-down" : "chevron-right"}> */}
-      <CircleIconButton
-        icon={expanded ? "chevron-down" : "chevron-right"}
-        className={item.children ? "" : "toggle_icon"}
-        onClick={handleClick}
-        variant='link'
-      />
-      {/* </div> */}
+      <div key={expanded ? "chevron-down" : "chevron-right"}>
+        <CircleIconButton
+          icon={expanded ? "chevron-down" : "chevron-right"}
+          className={item.children ? "" : "toggle_icon"}
+          onClick={handleClick}
+          variant='link'
+        />
+      </div>
       <Checkbox text={item.label} id={item.id}>
         <input
           checked={item.checked}
