@@ -17,4 +17,4 @@ examples:
   - textarea_inline: Inline
 
   swift:
-  - textarea_swift: Default
+  - textarea_swift: ""
