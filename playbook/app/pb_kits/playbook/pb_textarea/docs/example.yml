@@ -15,3 +15,6 @@ examples:
   - textarea_error: Textarea w/ Error
   - textarea_character_counter: Character Counter
   - textarea_inline: Inline
+
+  swift:
+  - textarea_swift: Default
