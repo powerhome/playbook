@@ -34,9 +34,9 @@ const Detail = (props: DetailProps) => {
   const isBold = bold ? "bold" : null
   const classes = classnames(
     buildCss('pb_detail_kit', color),
+    isBold,
     globalProps(props),
-    className,
-    isBold
+    className
   )
   const Tag: React.ReactElement | any = `${tag}`
 
