@@ -7,7 +7,7 @@
           <%= pb_rails("nav/item", props: { text: "Global Props", link: "#", active: true, dark: dark }) %>
         <% end %>
       <% end %>
-      <%= pb_rails("section_separator", dark: dark) %>
+      <%= pb_rails("section_separator", props:{ dark: dark }) %>
       <%= pb_rails("card/card_body", props: {}) do %>
         <%= pb_rails("table", props: {container: false, disable_hover: true, dark: dark }) do %>
           <thead>
