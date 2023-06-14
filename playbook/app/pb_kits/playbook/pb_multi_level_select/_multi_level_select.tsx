@@ -296,7 +296,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                         icon={
                           item.expanded ? "chevron-down" : "chevron-right"
                         }
-                        className={item.children ? "" : "toggle_icon"}
+                        className={item.children && item.children.length > 0 ? "" : "toggle_icon"}
                         onClick={(event) => handleToggleClick(item.id, event)}
                         variant="link"
                       />
