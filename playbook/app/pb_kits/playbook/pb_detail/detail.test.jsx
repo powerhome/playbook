@@ -42,6 +42,5 @@ test('bold font-weight should be 600', () => {
   )
 
   const kit = screen.getByTestId('primary-test')
-  console.log(kit)
   expect(kit).toHaveClass("bold")
 })

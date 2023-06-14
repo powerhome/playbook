@@ -2,7 +2,7 @@
 
 module Playbook
   module PbDetail
-    class Detail < ::Playbook::KitBase
+    class Detail < Playbook::KitBase
       prop :bold, type: Playbook::Props::Boolean,
                   default: false
       prop :color, type: Playbook::Props::Enum,
@@ -14,7 +14,7 @@ module Playbook
       prop :text
 
       def classname
-        "#{generate_classname('pb_detail_kit', color)}#{is_bold}"
+        generate_classname("pb_detail_kit", color) + is_bold
       end
 
       def content
