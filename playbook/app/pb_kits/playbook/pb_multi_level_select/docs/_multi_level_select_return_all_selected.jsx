@@ -73,7 +73,7 @@ const MultiLevelSelectReturnAllSelected = (props) => {
       <MultiLevelSelect
           id="multiselect-parent-persistence"
           onSelect={(selectedNodes) =>
-          console.log("Selected Items", selectedNodes)
+            console.log("Selected Items", selectedNodes)
           }
           returnAllSelected
           treeData={treeData}
