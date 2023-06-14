@@ -8,17 +8,18 @@ Enables users to add longer text to a form
 * for short answers from users, you can use a Text Input instead
 
 ## How to use
-```swift
-@State var defaultText = ""
+| Code | Image |
+| ----------------- | ---------------------- |
+| ![Screenshot 2023-06-14 at 1 50 02 PM](https://github.com/powerhome/playbook/assets/73671109/42084be1-84f1-4195-8257-a1cc09bec056) | ![Screenshot 2023-06-14 at 1 02 00 PM](https://github.com/powerhome/playbook/assets/73671109/cbef64f6-4d99-45fb-84a7-362d6965f9db) |
+| ![Screenshot 2023-06-14 at 1 56 01 PM](https://github.com/powerhome/playbook/assets/73671109/3db63263-ee41-437c-9440-c33191620994) | ![Screenshot 2023-06-14 at 1 54 05 PM](https://github.com/powerhome/playbook/assets/73671109/f03e6584-bd59-4af7-a8cc-7c01f5d434da) |
+| ![Screenshot 2023-06-14 at 1 57 45 PM](https://github.com/powerhome/playbook/assets/73671109/950f5704-d2ed-43c4-8081-baa372c53d56) | ![Screenshot 2023-06-14 at 1 54 15 PM](https://github.com/powerhome/playbook/assets/73671109/0bc976dc-cf3f-44d3-935c-5507604f3354) |
 
-   PBTextArea(
-     "Label",
-     text: $defaultText,
-     placeholder: "Placeholder with text"
-   )
-```
 
-![Textarea screenshot](https://github.com/powerhome/PlaybookSwift/assets/73671109/091f0274-81be-4cd7-9d14-ec23a371607f)
+
+
+
+
+
 
 ## Props
 | Name | Type | Default |
