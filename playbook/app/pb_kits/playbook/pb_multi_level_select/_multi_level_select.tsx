@@ -99,12 +99,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     };
   }, []);
 
-  //function to map over data and add checked + parent_id + depth + expanded property to each item
+  //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
     parent_id: string = null,
     depth: number = 0,
-    expanded: boolean = false
   ) => {
     if (!Array.isArray(treeData)) {
       return;
@@ -112,21 +111,16 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return treeData.map((item: { [key: string]: any } | any) => {
       const newItem = {
         ...item,
-        checked: false,
         parent_id,
         depth,
-        expanded,
       };
-
       if (newItem.children && newItem.children.length > 0) {
         newItem.children = addCheckedAndParentProperty(
           newItem.children,
           newItem.id,
           depth + 1,
-          expanded
         );
       }
-
       return newItem;
     });
   };
@@ -290,12 +284,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   <div className="dropdown_item_checkbox_row">
                     <div
                       key={
-                        isToggled[item.id] ? "chevron-down" : "chevron-right"
+                        item.expanded ? "chevron-down" : "chevron-right"
                       }
                     >
                       <CircleIconButton
                         icon={
-                          isToggled[item.id] ? "chevron-down" : "chevron-right"
+                          item.expanded ? "chevron-down" : "chevron-right"
                         }
                         className={item.children ? "" : "toggle_icon"}
                         onClick={(event) => handleToggleClick(item.id, event)}
