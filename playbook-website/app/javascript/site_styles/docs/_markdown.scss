@@ -121,7 +121,7 @@
   }
   img {
     max-width: 100%;
-    margin: 1.5rem 0 2rem 0;
+    margin: 1.5rem 0 0.2rem 0;
   }
   table {
     margin: 1.5rem 0 2rem 0;
@@ -136,9 +136,20 @@
     color: $text_lt_light;
   }
   &.dark {
-    color: $text_dk_light ;
+    color: $text_dk_default ;
     h1,h2,h3,h4,h5,h6 {
-     color: $text_dk_light;
+     color: $text_dk_default;
+    }
+    a {
+      color: $active_dark;
+    }
+    code {
+      background: $bg_dark;
+      border-color: $bg_dark;
+      color: $text_dk_default;
+    }
+    pre code {
+      color: #faf6e4;
     }
   }
 }

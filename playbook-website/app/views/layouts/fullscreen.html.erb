@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> Playbook Design System </title>
-    <%= csrf_meta_tags%>
-    <%= csp_meta_tag%>
-    <%= stylesheet_packs_with_chunks_tag 'application' %>
-    <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport"></meta>
+    <%= render 'layouts/head'%>
   </head>
-  <body class="fullscreen">
+  <body class="fullscreen <%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= yield %>
   </body>
   <%= javascript_packs_with_chunks_tag 'application', 'site' %>
