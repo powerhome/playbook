@@ -8,7 +8,7 @@ module Playbook
       prop :example_title, type: Playbook::Props::String, required: true
       prop :example_key, type: Playbook::Props::String, required: true
       prop :show_code, type: Playbook::Props::Boolean, default: true
-      prop :type, type: Playbook::Props::Enum, values: %w[rails react], default: "rails"
+      prop :type, type: Playbook::Props::Enum, values: %w[rails react swift], default: "rails"
       prop :dark, type: Playbook::Props::Boolean, default: false
 
       include PlaybookWebsite::Markdown::Helper
@@ -18,6 +18,9 @@ module Playbook
           render inline: source
         elsif type == "react"
           react_component example_key.camelize, { dark: dark }
+        elsif type == "swift"
+          ## render the markdown file
+          render inline: source
         end
       end
 
@@ -31,7 +34,11 @@ module Playbook
 
       def source
         @source ||= begin
-          extension = type == "react" ? "jsx" : "html.erb"
+          extension = if type == "rails"
+                        "html.erb"
+                      else
+                        type == "swift" ? "swift" : "jsx"
+                      end
           stringified_code = read_kit_file("docs", "_#{example_key}.#{extension}")
           sanitize_code(stringified_code)
         end

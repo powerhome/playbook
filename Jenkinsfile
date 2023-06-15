@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library 'github.com/powerhome/ci-kubed@v6.0.0'
+library 'github.com/powerhome/ci-kubed@v6.7.0'
 
 app.build(
   resources: [
@@ -8,7 +8,8 @@ app.build(
     limitCpu: '2',
     requestMemory: '10Gi',
     limitMemory: '10Gi',
-  ]
+  ],
+  timeout: 30,
 ) {
   app.composeBuild(
     appRepo: "image-registry.powerapp.cloud/playbook/playbook",
@@ -22,8 +23,8 @@ app.build(
           passwordVariable: 'AWS_SECRET_ACCESS_KEY'
         )
       ]) {
-        sh "mkdir -p ~/.kube"
-        sh "playbook-website/bin/deployer sops --decrypt --output yarn.secrets.dec.env yarn.secrets.env"
+        shell "mkdir -p ~/.kube"
+        shell "playbook-website/bin/deployer sops --decrypt --output yarn.secrets.dec.env yarn.secrets.env"
       }
 
       compose.buildAndPush()
