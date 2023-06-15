@@ -25,3 +25,5 @@ examples:
   - card_separator: Separator Card
   - card_border_none: No Border
   - card_border_radius: Border Radius
+  swift:
+  - card_swift: ""
