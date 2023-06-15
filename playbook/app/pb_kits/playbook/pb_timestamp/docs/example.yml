@@ -13,3 +13,6 @@ examples:
   - timestamp_timezones: Timezones
   - timestamp_updated: Last Updated by
   - timestamp_elapsed: Time Ago
+
+  swift:
+  - timestamp_swift: ""
