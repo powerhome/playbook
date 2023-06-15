@@ -1,36 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> Playbook Design System </title>
-    <%= csrf_meta_tags%>
-    <%= csp_meta_tag%>
-    <%= stylesheet_packs_with_chunks_tag 'application' %>
-    <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport" />
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Black.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Bold.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Extrabld.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Light.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Regular.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Semibold.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-Thin.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-BlackIt.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-BoldIt.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-ExtrabldIt.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-LightIt.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-RegularIt.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-SemiboldIt.woff2' %>
-    <%= preload_pack_asset 'media/site_styles/fonts/ProximaNova-ThinIt.woff2' %>
+    <%= render 'layouts/head'%>
   </head>
-  <body>
+  <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= render 'layouts/nav'%>
     <%= render 'layouts/mobile_hamburger'%>
-    <%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "sm", flex: "1"}) do %>
+    <%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "sm", flex: "1", classname: "#{'no-sidebar' if !@show_sidebar}"}) do %>
       <%= pb_rails("layout/sidebar") do %>
         <% render partial: "layouts/docs_navigation"%>
       <% end %>
       <%= pb_rails("layout/body") do %>
         <%= pb_rails("background", props: { display: "flex", classname: "markdown h100", display: "flex", justify_content: "center", background_color: "white" }) do %>
-          <%= pb_rails("flex/flex_item", props: { max_width: "md", margin_x: "sm", padding_y: "md" }) do %>
+          <%= pb_rails("flex/flex_item", props: { max_width: "md", margin_x: "sm", padding_y: "md", classname: "minw0" }) do %>
           <%= @TOC %>
             <div class="markdown_title"><%= @page_title.titleize %></div>
             <%= yield %>
