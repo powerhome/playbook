@@ -62,7 +62,7 @@ export const filterFormattedDataById = (
   const matched: { [key: string]: any }[] = [];
   const recursiveSearch = (data: { [key: string]: any }[], term: string) => {
     for (const item of data) {
-      if (item.id.toLowerCase().includes(term.toLowerCase())) {
+      if (item.id.toLowerCase() === (term.toLowerCase())) {
         matched.push(item);
       }
 
@@ -206,7 +206,7 @@ export const removeChildrenIfParentChecked = (
 ) => {
   const childIds = getChildIds(items, defaultReturn);
   const filteredDefaultArray = defaultReturn.filter(
-    (item: { [key: string]: any }) => !childIds.includes(item.id)
+    (item: { [key: string]: any }) => childIds !== item.id
   );
   setDefaultReturn([...filteredDefaultArray, items]);
 };
