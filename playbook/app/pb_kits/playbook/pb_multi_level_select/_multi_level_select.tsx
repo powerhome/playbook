@@ -25,6 +25,7 @@ type MultiLevelSelectProps = {
   className?: string;
   data?: { [key: string]: string };
   id?: string;
+  name?: string;
   returnAllSelected?: boolean;
   treeData?: { [key: string]: string }[];
   onSelect?: (prop: { [key: string]: any }) => void;
@@ -36,6 +37,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     className,
     data = {},
     id,
+    name,
     returnAllSelected = false,
     treeData,
     onSelect = () => {},
@@ -73,6 +75,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         JSON.stringify(returnAllSelected ? returnedArray : defaultReturn)
       );
     }
+    updateHiddenInputValue(returnAllSelected ? returnedArray : defaultReturn);
     returnAllSelected
       ? onSelect(returnedArray)
       : onSelect(
@@ -82,6 +85,15 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           )
         );
   }, [returnedArray, defaultReturn]);
+
+
+
+  const updateHiddenInputValue = (value: any) => {
+    const hiddenInput = document.querySelector('input#'+id)  as HTMLInputElement;
+    if (hiddenInput) {
+      hiddenInput.value = JSON.stringify(value);
+    }
+  };
 
   useEffect(() => {
     //Create new formattedData array for use
@@ -104,6 +116,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       window.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
 
   //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
@@ -333,6 +346,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       <div ref={dropdownRef} className="wrapper">
         <div className="input_wrapper" onClick={handleInputWrapperClick}>
           <div className="input_inner_container">
+          <input type="hidden" id={id} name={name} value=""  />
             {returnedArray.length !== 0 && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill
