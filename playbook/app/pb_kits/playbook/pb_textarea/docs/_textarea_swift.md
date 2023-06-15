@@ -1,6 +1,3 @@
-### Description
-Enables users to add longer text to a form
-
 ### When to Use
 For long answers from users
 
