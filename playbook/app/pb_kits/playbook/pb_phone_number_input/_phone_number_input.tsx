@@ -111,8 +111,6 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     }
   }, [error, onValidate])
 
-  if (itiInit) isValid(itiInit.isValidNumber())
-
   const showFormattedError = (reason = '') => {
     const countryName = itiInit.getSelectedCountryData().name
     const reasonText = reason.length > 0 ? ` (${reason})` : ''
@@ -172,6 +170,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   }
 
   const validateErrors = () => {
+    if (itiInit) isValid(itiInit.isValidNumber())
     if (validateOnlyNumbers(itiInit)) return
     if (validateTooLongNumber(itiInit)) return
     if (validateTooShortNumber(itiInit)) return
@@ -188,6 +187,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
     const phoneNumberData = getCurrentSelectedData(itiInit, evt.target.value)
     setSelectedData(phoneNumberData)
     onChange(phoneNumberData)
+    isValid(itiInit.isValidNumber())
   }
 
   // Separating Concerns as React Docs Recommend
