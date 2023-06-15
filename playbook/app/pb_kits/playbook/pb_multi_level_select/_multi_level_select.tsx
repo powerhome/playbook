@@ -75,6 +75,17 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         JSON.stringify(returnAllSelected ? returnedArray : defaultReturn)
       );
     }
+    const updateHiddenInputValue = (value: any) => {
+      console.log("value", value)
+      const hiddenInput = document.querySelector(
+        "input#" + id
+      ) as HTMLInputElement
+      console.log("hiddenInput", hiddenInput)
+      if (hiddenInput) {
+        hiddenInput.value = JSON.stringify(value)
+      }
+    }
+
     updateHiddenInputValue(returnAllSelected ? returnedArray : defaultReturn);
     returnAllSelected
       ? onSelect(returnedArray)
@@ -86,14 +97,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         );
   }, [returnedArray, defaultReturn]);
 
-
-
-  const updateHiddenInputValue = (value: any) => {
-    const hiddenInput = document.querySelector('input#'+id)  as HTMLInputElement;
-    if (hiddenInput) {
-      hiddenInput.value = JSON.stringify(value);
-    }
-  };
 
   useEffect(() => {
     //Create new formattedData array for use
@@ -346,7 +349,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       <div ref={dropdownRef} className="wrapper">
         <div className="input_wrapper" onClick={handleInputWrapperClick}>
           <div className="input_inner_container">
-          <input type="hidden" id={id} name={name} value=""  />
+          <input type="hidden" id={id} name={name} value={JSON.stringify(returnAllSelected ? returnedArray : defaultReturn)}  />
             {returnedArray.length !== 0 && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill
