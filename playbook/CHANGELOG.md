@@ -1,3 +1,22 @@
+# Styling typography just got easier!
+
+![12 25 0](https://github.com/powerhome/playbook/assets/73710701/6db5b3e0-f499-446d-965a-0e00b0c31931)
+
+Sometimes you don't need all the styles that ship with the Date kit.
+We have added a simple boolean prop called "unstyled" that puts control in your hands.
+You can now wrap our Date kit with any of our typography kits (Title, Body, Caption, etc) and the date kit will inherit that component's styles! 🎉
+
+[12.25.0](https://github.com/powerhome/playbook/tree/12.25.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Unstyled Variant for Date and Time Kits [\#2592](https://github.com/powerhome/playbook/pull/2592) ([gavhuang](https://github.com/gavhuang))
+- Bold Option for Title 3 [\#2579](https://github.com/powerhome/playbook/pull/2579) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Changelog Improvements [\#2591](https://github.com/powerhome/playbook/pull/2591) ([jasoncypret](https://github.com/jasoncypret))
+- Separation of Markdown & PBDocs Dependencies from Playbook Library [\#2527](https://github.com/powerhome/playbook/pull/2527) ([jasoncypret](https://github.com/jasoncypret))
 
 # Responsive Components in Rapid Time: Introducing Global Responsive Spacing Props for React and Rails Components. 
 
