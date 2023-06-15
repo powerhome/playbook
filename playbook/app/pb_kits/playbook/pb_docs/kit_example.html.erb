@@ -1,20 +1,21 @@
 <% example_html = ERB.new(example).result %>
 
 <%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark }) do %>
-  <div class="pb--kit-example">
-    <%= pb_rails("caption", props: { text: example_title, dark: dark }) %>
-    <br />
-    <%= example %>
-    <br>
-  </div>
-  
-  <% if (action_name == "kit_show_swift") %>
-    <div class="pb--kit-example-markdown pt_none <%= dark ? "dark" : "" %>">
+  <% unless (action_name == "kit_show_swift") %>
+    <div class="pb--kit-example">
+      <%= pb_rails("caption", props: { text: example_title, dark: dark }) %>
+      <br />
+      <%= example %>
+      <br>
+    </div>
+  <% else %>
+    <div class="pb--kit-example-markdown pt_none markdown <%= dark ? "dark" : "" %>">
+      <%= pb_rails("caption", props: { text: example_title, dark: dark, margin_top: "md" }) %>
       <%= render_markdown(description) %>
     </div>
   <% end %>
   <% if show_code %>
-    <div class="markdown pb--kit-example-markdown <%= dark ? "dark" : "" %>">
+    <div class="markdown pb--kit-example-markdown markdown <%= dark ? "dark" : "" %>">
       <%= render_markdown(description) %>
     </div>
     <div id="code-wrapper">
@@ -32,10 +33,10 @@
       </div>
       <div class="pb--codeCopy" data-action="toggle" data-togglable="code_example" style="display: none" >
         <%= pb_rails("section_separator", props: { dark: dark })%>
-        <a href="#" style="padding: 16px 0px 22px 0px;" id="copy-code-<%= example_key %>" class="pb--copy-code" onclick="copyOnClick(`<%= source %>`, `copy-code-<%= example_key %>`)">
-          <%= pb_rails("button", props: { id: "copy-button-#{example_key}", text: "Copy Code", size: "sm", icon: "copy" }) %>
+        <a href="#" id="copy-code-<%= example_key %>" class="pb--copy-code" onclick="copyOnClick(`<%= source %>`, `copy-code-<%= example_key %>`)">
+          <%= pb_rails("button", props: { id: "copy-button-#{example_key}", text: "Copy Code", size: "sm", icon: "copy", padding_x: "xs" }) %>
         </a>
-        <pre class="highlight"><%= raw rouge(source, highlighter) %></pre>
+        <pre class="highlight"><%= raw render_code(source, highlighter) %></pre>
       </div>
         <%= pb_rails("popover", props: {
           trigger_element_id: "copy-button-#{example_key}",

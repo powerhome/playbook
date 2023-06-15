@@ -75,6 +75,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         JSON.stringify(returnAllSelected ? returnedArray : defaultReturn)
       );
     }
+    
     const updateHiddenInputValue = (value: any) => {
       console.log("value", value)
       const hiddenInput = document.querySelector(
@@ -97,7 +98,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         );
   }, [returnedArray, defaultReturn]);
 
-
   useEffect(() => {
     //Create new formattedData array for use
     setFormattedData(addCheckedAndParentProperty(treeData));
@@ -119,7 +119,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       window.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
 
   //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
