@@ -7,7 +7,7 @@ Card component can easily wrap custom content using the same Playbook pattern.
 - Render content with Playbook background colors
 
 ### When not to Use
-- To execute actions, try to use buttons instead.
+- To execute actions and for tappble areas, try to use buttons instead.
 
 ### How to use
 swift
@@ -17,15 +17,15 @@ swift
 
 
 ### Props
-| Name | Type | Description | 
-| --- | ----------- | --------- |
-| alignment | Enum | Displays the character counter on the bottom right of the Textarea and its different variants | 
-| backgroundColor | String | Displays error text on the bottom left of the Textarea and changes border to error status color | 
-| border | Bool | Displays inline variant | 
-| borderRadius | String | The label for the TextArea |
-| highlight | String | Specifies the value of the Textarea |  
-| padding | String | The placeholder of the Textarea | 
-| style | String | The placeholder of the Textarea | 
-| shadow | String | The placeholder of the Textarea | 
-| width | String | The placeholder of the Textarea | 
-| content | String | The placeholder of the Textarea |
+| Name | Type | Description |  Default Value | Values |
+| --------- | --------- | --------- | --------- | --------- |
+| alignment | Alignment | Set Card content alignment | .leading | 
+| backgroundColor | Color | Set Card background color | .card |
+| border | Bool | Show card default border | true |
+| borderRadius | CGFloat | Display card border radius | BorderRadius.medium |
+| highlight | Highlight | Specifies the card edge that can be highlighted and set its color | .none |  
+| padding | CGFloat | Specifies the space between the content and the card edge | Spacing.medium | 
+| style | PBCardStyle | Set de card style | .default |
+| shadow | Shadow? | Set card shadow with Playboook Shadow tokens | nil | 
+| width | CGFloat? | Set car width | .infinity |
+| content | Content | Display a generic content that conforms to a View | - |
