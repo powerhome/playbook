@@ -171,17 +171,19 @@ const PbReactPopover = (props: PbPopoverProps) => {
 
         switch (closeOnClick) {
           case "outside":
-            if (!targetIsPopover || targetIsReference) {
+            if (!targetIsPopover && !targetIsReference) {
               shouldClosePopover(true);
             }
             break;
           case "inside":
-            if (targetIsPopover || targetIsReference) {
+            if (targetIsPopover) {
               shouldClosePopover(true);
             }
             break;
           case "any":
-            shouldClosePopover(true);
+            if (targetIsPopover || !targetIsPopover && !targetIsReference) {
+              shouldClosePopover(true);
+            }
             break;
         }
       },
