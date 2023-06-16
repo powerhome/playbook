@@ -26,6 +26,7 @@ type MultiLevelSelectProps = {
   data?: { [key: string]: string };
   id?: string;
   name?: string;
+  returnCompleteData?: boolean;
   returnAllSelected?: boolean;
   treeData?: { [key: string]: string }[];
   onSelect?: (prop: { [key: string]: any }) => void;
@@ -39,6 +40,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     id,
     name,
     returnAllSelected = false,
+    returnCompleteData = false,
     treeData,
     onSelect = () => {},
   } = props;
@@ -67,36 +69,56 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //state for return for default
   const [defaultReturn, setDefaultReturn] = useState([]);
 
+
+  const getSelectedIds = (selectedData: { [key: string]: any }[]) => {
+    return selectedData.map((item) => item.id);
+  };
+
+  const filterDuplicates = (array: any) => {
+    return array.filter(
+      (item: { id: any }, index: any, self: any[]) =>
+        index === self.findIndex((obj) => obj.id === item.id)
+    )
+  }
+
+  const getValues = () => {
+    return (
+      returnCompleteData && returnAllSelected
+      ? returnedArray && onSelect(returnedArray)
+      : returnCompleteData && !returnAllSelected
+      ? defaultReturn && onSelect(defaultReturn)
+      : !returnCompleteData && returnAllSelected
+      ? getSelectedIds(returnedArray) &&
+        onSelect(getSelectedIds(filterDuplicates(returnedArray)))
+      : !returnCompleteData &&
+        !returnAllSelected &&
+        getSelectedIds(filterDuplicates(defaultReturn)) &&
+        onSelect(getSelectedIds(filterDuplicates(defaultReturn)))
+    )
+  }
+
   useEffect(() => {
-    let el = document.getElementById(`pb_data_wrapper_${id}`);
+    let el = document.getElementById(`pb_data_wrapper_${id}`)
     if (el) {
       el.setAttribute(
         "data-tree",
         JSON.stringify(returnAllSelected ? returnedArray : defaultReturn)
-      );
+      )
     }
-    
+
     const updateHiddenInputValue = (value: any) => {
-      console.log("value", value)
       const hiddenInput = document.querySelector(
         "input#" + id
       ) as HTMLInputElement
-      console.log("hiddenInput", hiddenInput)
       if (hiddenInput) {
         hiddenInput.value = JSON.stringify(value)
       }
     }
 
-    updateHiddenInputValue(returnAllSelected ? returnedArray : defaultReturn);
-    returnAllSelected
-      ? onSelect(returnedArray)
-      : onSelect(
-          defaultReturn.filter(
-            (item, index, self) =>
-              index === self.findIndex((obj) => obj.id === item.id)
-          )
-        );
-  }, [returnedArray, defaultReturn]);
+    updateHiddenInputValue(getValues())
+    console.log('getting called')
+
+  }, [returnedArray, defaultReturn])
 
   useEffect(() => {
     //Create new formattedData array for use
@@ -348,7 +370,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       <div ref={dropdownRef} className="wrapper">
         <div className="input_wrapper" onClick={handleInputWrapperClick}>
           <div className="input_inner_container">
-          <input type="hidden" id={id} name={name} value={JSON.stringify(returnAllSelected ? returnedArray : defaultReturn)}  />
+          <input type="hidden" id={id} name={name} value={JSON.stringify(getValues())}  />
             {returnedArray.length !== 0 && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill

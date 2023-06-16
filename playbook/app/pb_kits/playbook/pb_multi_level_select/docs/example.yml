@@ -2,9 +2,11 @@ examples:
   rails:
   - multi_level_select_default: Default
   - multi_level_select_return_all_selected: Return All Selected
+  - multi_level_select_return_complete_data: Return Complete Data
   - multi_level_select_with_form: With Form
   
   react:
   - multi_level_select_default: Default
   - multi_level_select_return_all_selected: Return All Selected
+  - multi_level_select_return_complete_data: Return Complete Data
   

@@ -1,8 +1,4 @@
-import React from "react";
-import MultiLevelSelect from "../_multi_level_select";
-
-const treeData = [
-  {
+<% treeData = [{
     label: "Power Home Remodeling",
     value: "Power Home Remodeling",
     id: "powerhome1",
@@ -65,23 +61,13 @@ const treeData = [
         ],
       },
     ],
-  },
-];
+  }] %>
 
-const MultiLevelSelectReturnAllSelected = (props) => {
-  return (
-    <div>
-      <MultiLevelSelect
-          id="multiselect-parent-persistence"
-          onSelect={(selectedNodes) =>
-          console.log("Selected Items with Return All Selected Data", selectedNodes)
-          }
-          returnAllSelected
-          treeData={treeData}
-          {...props}
-      />
-    </div>
-  );
-};
 
-export default MultiLevelSelectReturnAllSelected;
+<%= pb_rails("multi_level_select", props: {
+    id: "default-multi-level-select",
+    tree_data: treeData, 
+    return_complete_data: true
+}) %>
+
+
