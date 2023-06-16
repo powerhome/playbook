@@ -18,6 +18,7 @@ import {
   recursiveReturnOnlyParent,
   removeChildrenIfParentChecked,
   getChildIds,
+  areAllCheckedFalse
 } from "./_helper_functions";
 
 type MultiLevelSelectProps = {
@@ -94,8 +95,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     };
     //if any items already checked in first render, set return accordingly
     const initialChecked = getCheckedItems(treeData)
+    const initialUnchecked = areAllCheckedFalse(treeData)
     initialChecked && returnAllSelected && setReturnedArray(initialChecked)
     initialChecked && !returnAllSelected && setDefaultReturn(initialChecked)
+    initialUnchecked && returnAllSelected && setReturnedArray([])
+    initialUnchecked && !returnAllSelected && setDefaultReturn([])
 
     // Attach the event listener
     window.addEventListener("click", handleClickOutside);

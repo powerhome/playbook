@@ -3,70 +3,736 @@ import MultiLevelSelect from "../_multi_level_select";
 
 const treeData = [
   {
-    label: "Power Home Remodeling",
-    value: "Power Home Remodeling",
-    id: "powerhome1",
-    expanded: true,
-    children: [
-      {
-        label: "People",
-        value: "People",
-        id: "people1",
-        children: [
-          {
-            label: "Talent Acquisition",
-            value: "Talent Acquisition",
-            id: "talent1",
-          },
-          {
-            label: "Business Affairs",
-            value: "Business Affairs",
-            id: "business1",
-            children: [
+     "checked":false,
+     "children":[
+        {
+           "checked":false,
+           "children":[
               {
-                label: "Initiatives",
-                value: "Initiatives",
-                id: "initiative1",
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"401",
+                       "label":"Corporate Recruiting",
+                       "value":"Corporate Recruiting"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"406",
+                       "label":"Install Partner Recruiting",
+                       "value":"Install Partner Recruiting"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"411",
+                       "label":"Revenue Recruiting",
+                       "value":"Revenue Recruiting"
+                    }
+                 ],
+                 "id":"61",
+                 "label":"Talent Acquisition",
+                 "value":"Talent Acquisition"
               },
               {
-                label: "Learning & Development",
-                value: "Learning & Development",
-                id: "development1",
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"356",
+                       "label":"Business Affairs",
+                       "value":"Business Affairs"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"361",
+                       "label":"HR Business Partners",
+                       "value":"HR Business Partners"
+                    }
+                 ],
+                 "id":"66",
+                 "label":"Business Affairs",
+                 "value":"Business Affairs"
               },
-            ],
-          },
-          {
-            label: "People Experience",
-            value: "People Experience",
-            id: "experience1",
-          },
-        ],
-      },
-      {
-        label: "Contact Center",
-        value: "Contact Center",
-        id: "contact1",
-        children: [
-          {
-            label: "Appointment Management",
-            value: "Appointment Management",
-            id: "appointment1",
-          },
-          {
-            label: "Customer Service",
-            value: "Customer Service",
-            id: "customer1",
-          },
-          {
-            label: "Energy",
-            value: "Energy",
-            id: "energy1",
-          },
-        ],
-      },
-    ],
-  },
-];
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"366",
+                       "label":"Human Resources",
+                       "value":"Human Resources"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"371",
+                       "label":"Initiatives",
+                       "value":"Initiatives"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"376",
+                       "label":"Learning and Development",
+                       "value":"Learning and Development"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"381",
+                       "label":"People Technology",
+                       "value":"People Technology"
+                    }
+                 ],
+                 "id":"71",
+                 "label":"People and Development",
+                 "value":"People and Development"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"386",
+                       "label":"Engagement",
+                       "value":"Engagement"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"391",
+                       "label":"Meeting Planning",
+                       "value":"Meeting Planning"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"396",
+                       "label":"Special Events",
+                       "value":"Special Events"
+                    }
+                 ],
+                 "id":"186",
+                 "label":"People Experience",
+                 "value":"People Experience"
+              }
+           ],
+           "id":"6",
+           "label":"People",
+           "value":"People"
+        },
+        {
+           "checked":false,
+           "children":[
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"301",
+                       "label":"Confirmation",
+                       "value":"Confirmation"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"306",
+                       "label":"Inside Sales",
+                       "value":"Inside Sales"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"311",
+                       "label":"Sales Support",
+                       "value":"Sales Support"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"316",
+                       "label":"Scheduling",
+                       "value":"Scheduling"
+                    }
+                 ],
+                 "id":"81",
+                 "label":"Appointment Management",
+                 "value":"Appointment Management"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"321",
+                       "label":"Design",
+                       "value":"Design"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"326",
+                       "label":"Policy",
+                       "value":"Policy"
+                    }
+                 ],
+                 "id":"191",
+                 "label":"Energy",
+                 "value":"Energy"
+              }
+           ],
+           "id":"11",
+           "label":"Contact Center",
+           "value":"Contact Center"
+        },
+        {
+           "checked":false,
+           "children":[
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"431",
+                       "label":"Analysts",
+                       "value":"Analysts"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"441",
+                       "label":"Customer Development",
+                       "value":"Customer Development"
+                    }
+                 ],
+                 "id":"91",
+                 "label":"Customer Development",
+                 "value":"Customer Development"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"446",
+                       "label":"Quality Assurance",
+                       "value":"Quality Assurance"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"451",
+                       "label":"Sales",
+                       "value":"Sales"
+                    }
+                 ],
+                 "id":"96",
+                 "label":"Sales",
+                 "value":"Sales"
+              }
+           ],
+           "id":"16",
+           "label":"Revenue",
+           "value":"Revenue"
+        },
+        {
+           "checked":false,
+           "children":[
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"416",
+                       "label":"Customer Support",
+                       "value":"Customer Support"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"421",
+                       "label":"Quality Assurance Scheduling",
+                       "value":"Quality Assurance Scheduling"
+                    }
+                 ],
+                 "id":"106",
+                 "label":"Customer Support",
+                 "value":"Customer Support"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"426",
+                       "label":"Production Management",
+                       "value":"Production Management"
+                    }
+                 ],
+                 "id":"211",
+                 "label":"Production Management",
+                 "value":"Production Management"
+              }
+           ],
+           "id":"21",
+           "label":"Project Services",
+           "value":"Project Services"
+        },
+        {
+           "checked":false,
+           "children":[
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"456",
+                       "label":"Procurement",
+                       "value":"Procurement"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"461",
+                       "label":"Warehousing",
+                       "value":"Warehousing"
+                    }
+                 ],
+                 "id":"206",
+                 "label":"Inventory Management",
+                 "value":"Inventory Management"
+              }
+           ],
+           "id":"26",
+           "label":"Supply Chain",
+           "value":"Supply Chain"
+        },
+        {
+           "checked":false,
+           "children":[
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"341",
+                       "label":"Craftsman",
+                       "value":"Craftsman"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"346",
+                       "label":"Installation Management",
+                       "value":"Installation Management"
+                    }
+                 ],
+                 "id":"121",
+                 "label":"Installation",
+                 "value":"Installation"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"351",
+                       "label":"Service Management",
+                       "value":"Service Management"
+                    }
+                 ],
+                 "id":"126",
+                 "label":"Warranty",
+                 "value":"Warranty"
+              }
+           ],
+           "id":"31",
+           "label":"Installation Services",
+           "value":"Installation Services"
+        },
+        {
+           "checked":false,
+           "children":[
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"331",
+                       "label":"Accounting",
+                       "value":"Accounting"
+                    }
+                 ],
+                 "id":"131",
+                 "label":"Accounting",
+                 "value":"Accounting"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"336",
+                       "label":"Payroll",
+                       "value":"Payroll"
+                    }
+                 ],
+                 "id":"141",
+                 "label":"Payroll",
+                 "value":"Payroll"
+              }
+           ],
+           "id":"36",
+           "label":"Corporate Finance",
+           "value":"Corporate Finance"
+        },
+        {
+           "checked":false,
+           "children":[
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"236",
+                       "label":"Legal",
+                       "value":"Legal"
+                    }
+                 ],
+                 "id":"146",
+                 "label":"Legal",
+                 "value":"Legal"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"226",
+                       "label":"Executive",
+                       "value":"Executive"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"231",
+                       "label":"Administrative",
+                       "value":"Administrative"
+                    }
+                 ],
+                 "id":"201",
+                 "label":"Executive",
+                 "value":"Executive"
+              }
+           ],
+           "id":"41",
+           "label":"Advisory",
+           "value":"Advisory"
+        },
+        {
+           "checked":false,
+           "children":[
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"276",
+                       "label":"Product Management",
+                       "value":"Product Management"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"281",
+                       "label":"User Experience",
+                       "value":"User Experience"
+                    }
+                 ],
+                 "id":"151",
+                 "label":"Product",
+                 "value":"Product"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"251",
+                       "label":"Agile",
+                       "value":"Agile"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"256",
+                       "label":"Development",
+                       "value":"Development"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"261",
+                       "label":"Site Reliability Engineering",
+                       "value":"Site Reliability Engineering"
+                    }
+                 ],
+                 "id":"156",
+                 "label":"Delivery",
+                 "value":"Delivery"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"286",
+                       "label":"Asset Management",
+                       "value":"Asset Management"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"291",
+                       "label":"Nitro Support",
+                       "value":"Nitro Support"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"296",
+                       "label":"Technical Support",
+                       "value":"Technical Support"
+                    }
+                 ],
+                 "id":"161",
+                 "label":"Support",
+                 "value":"Support"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"266",
+                       "label":"Facility Management",
+                       "value":"Facility Management"
+                    },
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"271",
+                       "label":"Real Estate Development",
+                       "value":"Real Estate Development"
+                    }
+                 ],
+                 "id":"181",
+                 "label":"Facilities",
+                 "value":"Facilities"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"246",
+                       "label":"Business Intelligence",
+                       "value":"Business Intelligence"
+                    }
+                 ],
+                 "id":"196",
+                 "label":"Analytics",
+                 "value":"Analytics"
+              }
+           ],
+           "id":"46",
+           "label":"Business Technologies",
+           "value":"Business Technologies"
+        },
+        {
+           "checked":false,
+           "children":[
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"241",
+                       "label":"Communications",
+                       "value":"Communications"
+                    }
+                 ],
+                 "id":"171",
+                 "label":"Communications",
+                 "value":"Communications"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"471",
+                       "label":"Public Relations",
+                       "value":"Public Relations"
+                    }
+                 ],
+                 "id":"216",
+                 "label":"Public Relations",
+                 "value":"Public Relations"
+              },
+              {
+                 "checked":false,
+                 "children":[
+                    {
+                       "checked":false,
+                       "children":[
+                          
+                       ],
+                       "id":"466",
+                       "label":"Media Arts",
+                       "value":"Media Arts"
+                    }
+                 ],
+                 "id":"221",
+                 "label":"Media Arts",
+                 "value":"Media Arts"
+              }
+           ],
+           "id":"51",
+           "label":"Brand and Communications",
+           "value":"Brand and Communications"
+        }
+     ],
+     "id":"1",
+     "label":"Power Home Remodeling",
+     "value":"Power Home Remodeling"
+  }
+]
+
 
 const MultiLevelSelectDefault = (props) => {
   return (

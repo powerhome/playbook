@@ -210,3 +210,19 @@ export const removeChildrenIfParentChecked = (
   );
   setDefaultReturn([...filteredDefaultArray, items]);
 };
+
+export const areAllCheckedFalse = (data:any) => {
+  for (const item of data) {
+    if (item.checked !== false) {
+      return false; // Return false if any item is not checked: false
+    }
+
+    if (Array.isArray(item.children && item.children.length > 0)) {
+      if (!areAllCheckedFalse(item.children)) {
+        return false; // Return false if any nested item is not checked: false
+      }
+    }
+  }
+
+  return true; // Return true if all items are checked: false
+};
