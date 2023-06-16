@@ -30,6 +30,7 @@ import * as DateStacked from 'pb_date_stacked/docs'
 import * as DateTime from 'pb_date_time/docs'
 import * as DateTimeStacked from 'pb_date_time_stacked/docs'
 import * as DateYearStacked from 'pb_date_year_stacked/docs'
+import * as Detail from 'pb_detail/docs'
 import * as Dialog from 'pb_dialog/docs'
 import * as DistributionBarDocs from 'pb_distribution_bar/docs'
 import * as FileUpload from 'pb_file_upload/docs'
@@ -130,6 +131,7 @@ WebpackerReact.setup({
   ...DateTime,
   ...DateTimeStacked,
   ...DateYearStacked,
+  ...Detail,
   ...Dialog,
   ...DistributionBarDocs,
   ...FileUpload,
