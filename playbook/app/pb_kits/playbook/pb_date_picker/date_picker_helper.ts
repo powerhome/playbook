@@ -24,6 +24,7 @@ type DatePickerConfig = {
   onClose: (dateStr: Date[] | string, selectedDates: Date[] | string) => void,
   showTimezone?: boolean,
   staticPosition: boolean,
+  thisRangesEndToday?: boolean,
   timeCaption?: string,
   timeFormat?: string,
   yearRange: number[]
@@ -52,6 +53,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     selectionType,
     showTimezone,
     staticPosition = true,
+    thisRangesEndToday = false,
     timeCaption = 'Select Time',
     timeFormat = 'at h:i K',
     yearRange,
@@ -90,7 +92,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }
   }
 
-  const setPlugins = () => {
+  const setPlugins = (thisRangesEndToday: boolean) => {
     const pluginList = []
 
     // month and week selection
@@ -101,7 +103,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
     } else if (selectionType === "quickpick") {
     //------- QUICKPICK VARIANT PLUGIN -------------//
-    pluginList.push(quickPickPlugin())
+    pluginList.push(quickPickPlugin(thisRangesEndToday))
     }
 
     // time selection
@@ -173,7 +175,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     onYearChange: [() => {
       yearChangeHook()
     }],
-    plugins: setPlugins(),
+    plugins: setPlugins(thisRangesEndToday),
     position,
     positionElement: getPositionElement(positionElement),
     prevArrow: '<i class="far fa-angle-left"></i>',

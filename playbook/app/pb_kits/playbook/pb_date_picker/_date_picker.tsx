@@ -42,6 +42,7 @@ type DatePickerProps = {
   selectionType?: "month" | "week"| "quickpick",
   showTimezone?: boolean,
   staticPosition: boolean,
+  thisRangesEndToday?: boolean,
   timeFormat?: string,
   type?: string,
   yearRange?: number[],
@@ -88,6 +89,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     selectionType = '',
     showTimezone = false,
     staticPosition = true,
+    thisRangesEndToday = false,
     yearRange = [1900, 2100],
   } = props
 
@@ -121,6 +123,7 @@ useEffect(() => {
     selectionType,
     showTimezone,
     staticPosition,
+    thisRangesEndToday,
     yearRange,
     required: false,
   }, scrollContainer)

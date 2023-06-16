@@ -21,19 +21,24 @@ type pluginDataType = {
 
 let activeLabel = ""
 
-const quickPickPlugin = () => {
+const quickPickPlugin = (thisRangesEndToday: boolean) => {
   return function (fp: FpTypes & any): any {
+    const thisWeekEndDate = thisRangesEndToday ? new Date() : moment().endOf('isoWeek').toDate()
+    const thisMonthEndDate = thisRangesEndToday ? new Date() : moment().endOf('month').toDate()
+    const thisQuarterEndDate = thisRangesEndToday ? new Date() : moment().endOf('quarter').toDate()
+    const thisYearEndDate = thisRangesEndToday ? new Date() : moment().endOf('year').toDate()
+
     // variable that holds the ranges available
     const ranges = {
       'Today': [new Date(), new Date()],
       'Yesterday': [moment().subtract(1, 'days').toDate(), moment().subtract(1, 'days').toDate()],
-      'This week': [moment().startOf('week').toDate(), moment().endOf('week').toDate()],
-      'This month': [moment().startOf('month').toDate(), new Date()],
-      'This quarter': [moment().startOf('quarter').toDate(), new Date()],
-      'This year': [moment().startOf('year').toDate(), new Date()],
+      'This week': [moment().startOf('isoWeek').toDate(), thisWeekEndDate],
+      'This month': [moment().startOf('month').toDate(), thisMonthEndDate],
+      'This quarter': [moment().startOf('quarter').toDate(), thisQuarterEndDate],
+      'This year': [moment().startOf('year').toDate(), thisYearEndDate],
       'Last week': [
-        moment().subtract(1, 'week').startOf('week').toDate(),
-        moment().subtract(1, 'week').endOf('week').toDate()
+        moment().subtract(1, 'week').startOf('isoWeek').toDate(),
+        moment().subtract(1, 'week').endOf('isoWeek').toDate()
       ],
       'Last month': [
         moment().subtract(1, 'month').startOf('month').toDate(),

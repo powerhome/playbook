@@ -19,6 +19,8 @@ module Playbook
                               default: []
       prop :enable_time, type: Playbook::Props::Boolean,
                          default: false
+      prop :end_date, type: Playbook::Props::String,
+                      default: "endDate"
       prop :error, type: Playbook::Props::String
       prop :format, type: Playbook::Props::String,
                     default: "m/d/Y"
@@ -43,9 +45,9 @@ module Playbook
                        required: true
       prop :placeholder, type: Playbook::Props::String,
                          default: "Select Date"
-      prop :plugins, type: Playbook::Props::Boolean,
-                     default: false,
-                     deprecated: true
+      prop :plugins,  type: Playbook::Props::Boolean,
+                      default: false,
+                      deprecated: true
       prop :position, type: Playbook::Props::String,
                       default: "auto"
       prop :position_element, type: Playbook::Props::String
@@ -55,8 +57,12 @@ module Playbook
                             default: "none"
       prop :show_timezone, type: Playbook::Props::Boolean,
                            default: false
+      prop :start_date, type: Playbook::Props::String,
+                        default: "startDate"
       prop :static_position, type: Playbook::Props::Boolean,
                              default: true
+      prop :this_ranges_end_today, type: Playbook::Props::Boolean,
+                                   default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :year_range, type: Playbook::Props::Array,
@@ -88,6 +94,7 @@ module Playbook
           selectionType: selection_type,
           showTimezone: show_timezone,
           staticPosition: static_position,
+          thisRangesEndToday: this_ranges_end_today,
           yearRange: year_range,
         }.to_json.html_safe
       end

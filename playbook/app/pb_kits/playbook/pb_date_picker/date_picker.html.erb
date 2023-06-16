@@ -20,6 +20,16 @@
         placeholder: object.placeholder,
         required: object.required,
       }) %>
+      <% if object.selection_type == "quickpick" %>
+        <%= pb_rails("text_input", props: {
+          id: "#{object.start_date}-#{object.picker_id}",
+          name: object.start_date,
+        }) %>
+        <%= pb_rails("text_input", props: {
+          id: "#{object.end_date}-#{object.picker_id}",
+          name: object.end_date,
+        }) %>
+      <% end %>
     <% end %>
     <% if !object.hide_icon %>
       <div
@@ -60,9 +70,26 @@
   </div>
 
   <%= javascript_tag do %>
+    if (<%= object.selection_type == "quickpick" %>) {
+      const startDate = document.getElementById("<%= object.start_date %>-<%= object.picker_id %>")
+      if (startDate) startDate.style.display = "none"
+
+      const endDate = document.getElementById("<%= object.end_date %>-<%= object.picker_id %>")
+      if (endDate) endDate.style.display = "none"
+    }
+
     window.addEventListener("DOMContentLoaded", () => {
       datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
-    })
 
+      if (<%= object.selection_type == "quickpick" %>) {
+        document.getElementById("<%= object.picker_id %>").addEventListener("change", ({ target }) => {
+          const startDate = document.getElementById("<%= object.start_date %>-<%= object.picker_id %>")
+          const endDate = document.getElementById("<%= object.end_date %>-<%= object.picker_id %>")
+          const splittedValue = target.value.split(" → ")
+          startDate.value = splittedValue[0]
+          endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
+        })
+      }
+    })
   <% end %>
 <% end %>
