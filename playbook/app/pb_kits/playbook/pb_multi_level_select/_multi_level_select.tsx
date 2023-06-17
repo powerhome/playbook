@@ -82,9 +82,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
               index === self.findIndex((obj) => obj.id === item.id)
           )
         );
+        console.log("RETURN", returnedArray)
   }, [returnedArray, defaultReturn]);
 
   useEffect(() => {
+    console.log("TREEDATA", treeData)
     //Create new formattedData array for use
     setFormattedData(addCheckedAndParentProperty(treeData));
     // Function to handle clicks outside the dropdown
@@ -95,11 +97,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     };
     //if any items already checked in first render, set return accordingly
     const initialChecked = getCheckedItems(treeData)
+    console.log("INITIAl CHECKED", initialChecked)
     const initialUnchecked = areAllCheckedFalse(treeData)
+    console.log("INIITAL UNCHECKED", initialUnchecked)
     initialChecked && returnAllSelected && setReturnedArray(initialChecked)
     initialChecked && !returnAllSelected && setDefaultReturn(initialChecked)
-    initialUnchecked && returnAllSelected && setReturnedArray([])
-    initialUnchecked && !returnAllSelected && setDefaultReturn([])
+    // initialUnchecked && returnAllSelected && setReturnedArray([])
+    // initialUnchecked && !returnAllSelected && setDefaultReturn([])
 
     // Attach the event listener
     window.addEventListener("click", handleClickOutside);
