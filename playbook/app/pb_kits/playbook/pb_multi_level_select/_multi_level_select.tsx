@@ -89,12 +89,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     console.log("TREEDATA", treeData)
     //Create new formattedData array for use
     setFormattedData(addCheckedAndParentProperty(treeData));
-    // Function to handle clicks outside the dropdown
-    const handleClickOutside = (event: any) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsClosed(true);
-      }
-    };
     //if any items already checked in first render, set return accordingly
     const initialChecked = getCheckedItems(treeData)
     console.log("INITIAl CHECKED", initialChecked)
@@ -105,13 +99,22 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     // initialUnchecked && returnAllSelected && setReturnedArray([])
     // initialUnchecked && !returnAllSelected && setDefaultReturn([])
 
-    // Attach the event listener
-    window.addEventListener("click", handleClickOutside);
-    // Clean up the event listener on unmount
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
+  }, [treeData]);
+
+  useEffect(()=> {
+    // Function to handle clicks outside the dropdown
+    const handleClickOutside = (event: any) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsClosed(true);
+      }
     };
-  }, []);
+        // Attach the event listener
+        window.addEventListener("click", handleClickOutside);
+        // Clean up the event listener on unmount
+        return () => {
+          window.removeEventListener("click", handleClickOutside);
+        };
+  },[])
 
   //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
