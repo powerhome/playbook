@@ -59,7 +59,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //this is essentially the return that the user will get when they use the kit
   const [returnedArray, setReturnedArray] = useState([]);
   //formattedData with checked and parent_id added
-  const [formattedData, setFormattedData] = useState(treeData);
+  const [formattedData, setFormattedData] = useState([]);
   //toggle chevron in dropdown
   //@ts-ignore
   const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({}); 
@@ -82,7 +82,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
               index === self.findIndex((obj) => obj.id === item.id)
           )
         );
-        console.log("RETURN", returnedArray)
   }, [returnedArray, defaultReturn]);
 
   useEffect(() => {
@@ -96,8 +95,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     console.log("INIITAL UNCHECKED", initialUnchecked)
     initialChecked && returnAllSelected && setReturnedArray(initialChecked)
     initialChecked && !returnAllSelected && setDefaultReturn(initialChecked)
-    // initialUnchecked && returnAllSelected && setReturnedArray([])
-    // initialUnchecked && !returnAllSelected && setDefaultReturn([])
 
   }, [treeData]);
 
