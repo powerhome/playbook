@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import classnames from "classnames";
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
-import { globalProps, GlobalProps } from "../utilities/globalProps";
-import Icon from "../pb_icon/_icon";
-import Checkbox from "../pb_checkbox/_checkbox";
-import FormPill from "../pb_form_pill/_form_pill";
-import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button";
+import React, { useState, useEffect, useRef } from "react"
+import classnames from "classnames"
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps, GlobalProps } from "../utilities/globalProps"
+import Icon from "../pb_icon/_icon"
+import Checkbox from "../pb_checkbox/_checkbox"
+import FormPill from "../pb_form_pill/_form_pill"
+import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button"
 import {
   unCheckIt,
   getAncestorsOfUnchecked,
@@ -18,19 +18,19 @@ import {
   recursiveReturnOnlyParent,
   removeChildrenIfParentChecked,
   getChildIds,
-} from "./_helper_functions";
+} from "./_helper_functions"
 
 type MultiLevelSelectProps = {
-  aria?: { [key: string]: string };
-  className?: string;
-  data?: { [key: string]: string };
-  id?: string;
-  name?: string;
-  returnCompleteData?: boolean;
-  returnAllSelected?: boolean;
-  treeData?: { [key: string]: string }[];
-  onSelect?: (prop: { [key: string]: any }) => void;
-} & GlobalProps;
+  aria?: { [key: string]: string }
+  className?: string
+  data?: { [key: string]: string }
+  id?: string
+  name?: string
+  returnCompleteData?: boolean
+  returnAllSelected?: boolean
+  treeData?: { [key: string]: string }[]
+  onSelect?: (prop: { [key: string]: any }) => void
+} & GlobalProps
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const {
@@ -43,232 +43,223 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     returnCompleteData = false,
     treeData,
     onSelect = () => {},
-  } = props;
+  } = props
 
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss("pb_multi_level_select"),
     globalProps(props),
     className
-  );
+  )
 
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef(null)
 
   //state for whether dropdown is open or closed
-  const [isClosed, setIsClosed] = useState(true);
+  const [isClosed, setIsClosed] = useState(true)
   //state from onchange for textinput, to use for filtering to create typeahead
-  const [filterItem, setFilterItem] = useState("");
+  const [filterItem, setFilterItem] = useState("")
   //this is essentially the return that the user will get when they use the kit
-  const [returnedArray, setReturnedArray] = useState([]);
+  const [returnedArray, setReturnedArray] = useState([])
   //formattedData with checked and parent_id added
-  const [formattedData, setFormattedData] = useState(treeData);
+  const [formattedData, setFormattedData] = useState(treeData)
   //toggle chevron in dropdown
   //@ts-ignore
-  const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({}); 
+  const [isToggled, setIsToggled] = useState<{ [id: number]: boolean }>({})
   //state for return for default
-  const [defaultReturn, setDefaultReturn] = useState([]);
+  const [defaultReturn, setDefaultReturn] = useState([])
 
+  const [formattedReturn, setFormattedReturn] = useState([])
 
   const getSelectedIds = (selectedData: { [key: string]: any }[]) => {
-    return selectedData.map((item) => item.id);
-  };
-
-  const filterDuplicates = (array: any) => {
-    return array.filter(
-      (item: { id: any }, index: any, self: any[]) =>
-        index === self.findIndex((obj) => obj.id === item.id)
-    )
+    return selectedData
+      .map((item) => item.id)
+      .filter((value, index, self) => self.indexOf(value) === index)
   }
 
   const getValues = () => {
-    return (
-      returnCompleteData && returnAllSelected
-      ? returnedArray && onSelect(returnedArray)
-      : returnCompleteData && !returnAllSelected
-      ? defaultReturn && onSelect(defaultReturn)
-      : !returnCompleteData && returnAllSelected
-      ? getSelectedIds(returnedArray) &&
-        onSelect(getSelectedIds(filterDuplicates(returnedArray)))
-      : !returnCompleteData &&
-        !returnAllSelected &&
-        getSelectedIds(filterDuplicates(defaultReturn)) &&
-        onSelect(getSelectedIds(filterDuplicates(defaultReturn)))
-    )
+   if(returnCompleteData){
+    if(returnAllSelected){
+      return setFormattedReturn(returnedArray)
+    } else {
+      return setFormattedReturn(defaultReturn) 
+    }
+   } else {
+      if(returnAllSelected){
+        setFormattedReturn(getSelectedIds(returnedArray))
+      } else {
+        setFormattedReturn(getSelectedIds(defaultReturn)) 
+      }
+    }
+  }
+
+  const updateHiddenInputValue = (value: any) => {
+    const hiddenInput = document.querySelector(
+      "input#" + id
+    ) as HTMLInputElement
+    if (hiddenInput) {
+      hiddenInput.value = JSON.stringify(value)
+    }
   }
 
   useEffect(() => {
-    let el = document.getElementById(`pb_data_wrapper_${id}`)
-    if (el) {
-      el.setAttribute(
-        "data-tree",
-        JSON.stringify(returnAllSelected ? returnedArray : defaultReturn)
-      )
-    }
-
-    const updateHiddenInputValue = (value: any) => {
-      const hiddenInput = document.querySelector(
-        "input#" + id
-      ) as HTMLInputElement
-      if (hiddenInput) {
-        hiddenInput.value = JSON.stringify(value)
-      }
-    }
-
-    updateHiddenInputValue(getValues())
-    console.log('getting called')
-
+    getValues()
   }, [returnedArray, defaultReturn])
 
   useEffect(() => {
+    onSelect(formattedReturn)
+    updateHiddenInputValue(formattedReturn)
+  }, [formattedReturn])
+
+  useEffect(() => {
     //Create new formattedData array for use
-    setFormattedData(addCheckedAndParentProperty(treeData));
+    setFormattedData(addCheckedAndParentProperty(treeData))
     // Function to handle clicks outside the dropdown
     const handleClickOutside = (event: any) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsClosed(true);
+        setIsClosed(true)
       }
-    };
+    }
     //if any items already checked in first render, set return accordingly
     const initialChecked = getCheckedItems(treeData)
     initialChecked && returnAllSelected && setReturnedArray(initialChecked)
     initialChecked && !returnAllSelected && setDefaultReturn(initialChecked)
 
     // Attach the event listener
-    window.addEventListener("click", handleClickOutside);
+    window.addEventListener("click", handleClickOutside)
     // Clean up the event listener on unmount
     return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+      window.removeEventListener("click", handleClickOutside)
+    }
+  }, [])
 
   //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
     parent_id: string = null,
-    depth: number = 0,
+    depth: number = 0
   ) => {
     if (!Array.isArray(treeData)) {
-      return;
+      return
     }
     return treeData.map((item: { [key: string]: any } | any) => {
       const newItem = {
         ...item,
         parent_id,
         depth,
-      };
+      }
       if (newItem.children && newItem.children.length > 0) {
         newItem.children = addCheckedAndParentProperty(
           newItem.children,
           newItem.id,
-          depth + 1,
-        );
+          depth + 1
+        )
       }
-      return newItem;
-    });
-  };
+      return newItem
+    })
+  }
 
   //click event for x on form pill
   const handlePillClose = (event: any, clickedItem: { [key: string]: any }) => {
     // prevents the dropdown from closing when clicking on the pill
-    event.stopPropagation();
+    event.stopPropagation()
     //logic for removing items from returnArray or defaultReturn when pills clicked
     if (returnAllSelected) {
       if (returnedArray.includes(clickedItem)) {
         if (clickedItem.children && clickedItem.children.length > 0) {
-          const childrenOfChecked = getChildIds(clickedItem, returnedArray);
+          const childrenOfChecked = getChildIds(clickedItem, returnedArray)
           const updatedFiltered = returnedArray
             .filter((item) => item !== clickedItem)
-            .filter((item) => !childrenOfChecked.includes(item.id));
-          setReturnedArray(updatedFiltered);
+            .filter((item) => !childrenOfChecked.includes(item.id))
+          setReturnedArray(updatedFiltered)
         } else {
           const updatedFiltered = returnedArray.filter(
             (item) => item !== clickedItem
-          );
-          setReturnedArray(updatedFiltered);
+          )
+          setReturnedArray(updatedFiltered)
         }
       }
     } else {
       if (defaultReturn.includes(clickedItem)) {
-        getAncestorsOfUnchecked(formattedData, clickedItem);
-        const newChecked = getCheckedItems(formattedData);
+        getAncestorsOfUnchecked(formattedData, clickedItem)
+        const newChecked = getCheckedItems(formattedData)
         const filteredReturn = updateReturnItems(newChecked).filter(
           (item) => item.id !== clickedItem.id
-        );
-        setDefaultReturn(filteredReturn);
+        )
+        setDefaultReturn(filteredReturn)
       }
     }
     if (clickedItem.children && clickedItem.children.length > 0) {
-      unCheckedRecursive(clickedItem);
+      unCheckedRecursive(clickedItem)
     }
     //logic to uncheck clickedItem in formattedData
-    unCheckIt(formattedData, clickedItem.id);
-  };
+    unCheckIt(formattedData, clickedItem.id)
+  }
 
   //handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
-    e.stopPropagation();
+    e.stopPropagation()
     if (
       e.target.id === "multiselect_input" ||
       e.target.classList.contains("pb_form_pill_tag")
     ) {
-      return;
+      return
     }
-    setIsClosed(!isClosed);
-  };
+    setIsClosed(!isClosed)
+  }
 
   //Main function to handle any click inside dropdown
   const handledropdownItemClick = (e: any) => {
-    const clickedItem = e.target.parentNode.id;
+    const clickedItem = e.target.parentNode.id
     //setting filterItem to "" will clear textinput and clear typeahead
-    setFilterItem("");
+    setFilterItem("")
 
-    const filtered = filterFormattedDataById(formattedData, clickedItem);
+    const filtered = filterFormattedDataById(formattedData, clickedItem)
     //check and uncheck all children of checked/unchecked parent item
     if (filtered[0].children && filtered[0].children.length > 0) {
       if (filtered[0].checked) {
         filtered[0].children.forEach((item: { [key: string]: any }) => {
-          checkedRecursive(item);
-        });
+          checkedRecursive(item)
+        })
       } else if (!filtered[0].checked) {
         filtered[0].children.forEach((item: { [key: string]: any }) => {
-          unCheckedRecursive(item);
-        });
+          unCheckedRecursive(item)
+        })
       }
     }
 
-    const checkedItems = getCheckedItems(formattedData);
+    const checkedItems = getCheckedItems(formattedData)
 
     //checking and unchecking items for returnAllSelected variant
     if (returnedArray.includes(filtered[0])) {
       if (!filtered[0].checked) {
         if (filtered[0].children && filtered[0].children.length > 0) {
-          const childrenOfChecked = getChildIds(filtered[0], returnedArray);
+          const childrenOfChecked = getChildIds(filtered[0], returnedArray)
           const updatedFiltered = returnedArray
             .filter((item) => item !== filtered[0])
-            .filter((item) => !childrenOfChecked.includes(item.id));
+            .filter((item) => !childrenOfChecked.includes(item.id))
 
-          setReturnedArray(updatedFiltered);
+          setReturnedArray(updatedFiltered)
         } else {
           const updatedFiltered = returnedArray.filter(
             (item) => item !== filtered[0]
-          );
-          setReturnedArray(updatedFiltered);
+          )
+          setReturnedArray(updatedFiltered)
         }
       }
     } else {
-      setReturnedArray(checkedItems);
+      setReturnedArray(checkedItems)
     }
 
     //when item is unchecked for default variant
     if (!filtered[0].checked && !returnAllSelected) {
       //uncheck parent and grandparent if any child unchecked
-      getAncestorsOfUnchecked(formattedData, filtered[0]);
+      getAncestorsOfUnchecked(formattedData, filtered[0])
 
-      const newChecked = getCheckedItems(formattedData);
+      const newChecked = getCheckedItems(formattedData)
       //get all checked items, and filter to check if all children checked, if yes return only parent
-      const filteredReturn = updateReturnItems(newChecked);
-      setDefaultReturn(filteredReturn);
+      const filteredReturn = updateReturnItems(newChecked)
+      setDefaultReturn(filteredReturn)
     }
 
     //when item is checked for default variant
@@ -279,7 +270,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           filtered[0],
           defaultReturn,
           setDefaultReturn
-        );
+        )
       }
 
       //if clicked item has parent_id, find parent and check if all children checked or not
@@ -289,26 +280,26 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           formattedData,
           defaultReturn,
           setDefaultReturn
-        );
+        )
       } else {
-        setDefaultReturn([filtered[0]]);
+        setDefaultReturn([filtered[0]])
       }
     }
-  };
+  }
 
   //handle click on chevron toggles in dropdown
   const handleToggleClick = (id: string, event: React.MouseEvent) => {
-    event.stopPropagation();
+    event.stopPropagation()
     setIsToggled((prevState: { [id: string]: boolean }) => ({
       ...prevState,
       [id]: !prevState[id],
-    }));
-    const clickedItem = filterFormattedDataById(formattedData, id);
+    }))
+    const clickedItem = filterFormattedDataById(formattedData, id)
 
     if (clickedItem) {
-      clickedItem[0].expanded = !clickedItem[0].expanded;
+      clickedItem[0].expanded = !clickedItem[0].expanded
     }
-  };
+  }
 
   //rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: any }[]) => {
@@ -318,35 +309,29 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           items.map((item: { [key: string]: any }) => {
             return (
               <>
-                <li
-                  key={item.id}
-                  className="dropdown_item"
-                  data-name={item.id}
-                >
-                  <div className="dropdown_item_checkbox_row">
-                    <div
-                      key={
-                        item.expanded ? "chevron-down" : "chevron-right"
-                      }
-                    >
+                <li key={item.id} className='dropdown_item' data-name={item.id}>
+                  <div className='dropdown_item_checkbox_row'>
+                    <div key={item.expanded ? "chevron-down" : "chevron-right"}>
                       <CircleIconButton
-                        icon={
-                          item.expanded ? "chevron-down" : "chevron-right"
+                        icon={item.expanded ? "chevron-down" : "chevron-right"}
+                        className={
+                          item.children && item.children.length > 0
+                            ? ""
+                            : "toggle_icon"
                         }
-                        className={item.children && item.children.length > 0 ? "" : "toggle_icon"}
                         onClick={(event) => handleToggleClick(item.id, event)}
-                        variant="link"
+                        variant='link'
                       />
                     </div>
                     <Checkbox text={item.label} id={item.id}>
                       <input
                         checked={item.checked}
-                        type="checkbox"
+                        type='checkbox'
                         name={item.label}
                         value={item.label}
                         onChange={(e) => {
-                          item.checked = !item.checked;
-                          handledropdownItemClick(e);
+                          item.checked = !item.checked
+                          handledropdownItemClick(e)
                         }}
                       />
                     </Checkbox>
@@ -359,24 +344,29 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     )}
                 </li>
               </>
-            );
+            )
           })}
       </ul>
-    );
-  };
+    )
+  }
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
-      <div ref={dropdownRef} className="wrapper">
-        <div className="input_wrapper" onClick={handleInputWrapperClick}>
-          <div className="input_inner_container">
-          <input type="hidden" id={id} name={name} value={JSON.stringify(getValues())}  />
+      <div ref={dropdownRef} className='wrapper'>
+        <div className='input_wrapper' onClick={handleInputWrapperClick}>
+          <div className='input_inner_container'>
+            <input
+              type='hidden'
+              id={id}
+              name={name}
+              value={JSON.stringify(formattedReturn)}
+            />
             {returnedArray.length !== 0 && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill
                     key={index}
                     text={item.label}
-                    size="small"
+                    size='small'
                     onClick={(event) => handlePillClose(event, item)}
                   />
                 ))
@@ -392,29 +382,29 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   <FormPill
                     key={index}
                     text={item.label}
-                    size="small"
+                    size='small'
                     onClick={(event) => handlePillClose(event, item)}
                   />
                 ))}
             {returnedArray.length !== 0 && returnAllSelected && <br />}
             {defaultReturn.length !== 0 && !returnAllSelected && <br />}
             <input
-              id="multiselect_input"
+              id='multiselect_input'
               onChange={(e) => {
-                setFilterItem(e.target.value);
+                setFilterItem(e.target.value)
               }}
-              placeholder="Start typing..."
+              placeholder='Start typing...'
               value={filterItem}
               onClick={() => setIsClosed(false)}
             />
           </div>
           {isClosed ? (
-            <div key="chevron-down">
-              <Icon icon="chevron-down" />
+            <div key='chevron-down'>
+              <Icon icon='chevron-down' />
             </div>
           ) : (
-            <div key="chevron-up">
-              <Icon icon="chevron-up" />
+            <div key='chevron-up'>
+              <Icon icon='chevron-up' />
             </div>
           )}
         </div>
@@ -425,7 +415,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MultiLevelSelect;
+export default MultiLevelSelect
