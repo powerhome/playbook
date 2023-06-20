@@ -67,6 +67,18 @@ class PagesController < ApplicationController
     render "pages/kit_show"
   end
 
+  def kit_collection_show_rails
+    handle_kit_collection("rails")
+  end
+
+  def kit_collection_show_react
+    handle_kit_collection("react")
+  end
+
+  def kit_collection_show
+    handle_kit_collection(params[:type])
+  end
+
   def kit_playground_rails
     @kit = "avatar"
     @examples = pb_doc_kit_examples(@kit, "rails")
@@ -205,5 +217,15 @@ private
   def read_kit_file(*args)
     path = ::Playbook.kit_path(@kit, "docs", *args)
     path.exist? ? path.read : ""
+  end
+
+  def handle_kit_collection(type)
+    @kits = params[:names].split("%26")
+    @kits_array = @kits.first.split("&")
+    params[:name] ||= @kits_array[0]
+    @selected_kit = params[:name]
+    @type = type
+
+    render template: "pages/kit_collection", layout: "layouts/fullscreen"
   end
 end
