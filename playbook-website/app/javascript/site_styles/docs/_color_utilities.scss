@@ -1,4 +1,5 @@
 @import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/typography";
 
 // Only used for our documentation site.
 // Creates color classes for color utilities.
@@ -63,7 +64,7 @@ ul {
         width: 100%;
         text-align: center;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: $bold;
       }
 
       p.var {

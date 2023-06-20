@@ -39,7 +39,7 @@ trix-toolbar .trix-button {
   float: left;
   color: rgba(0, 0, 0, 0.6);
   font-size: 0.75em;
-  font-weight: 600;
+  font-weight: $bold;
   white-space: nowrap;
   padding: 0 0.5em;
   margin: 0;
@@ -137,7 +137,7 @@ trix-toolbar .trix-dialog {
   z-index: 5; }
 trix-toolbar .trix-input--dialog {
   font-size: inherit;
-  font-weight: normal;
+  font-weight: $regular;
   padding: 0.5em 0.8em;
   margin: 0 10px 0 0;
   border-radius: 3px;
