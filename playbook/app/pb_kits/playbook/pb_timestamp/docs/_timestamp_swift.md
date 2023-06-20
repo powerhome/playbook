@@ -12,7 +12,7 @@
 | <img width="500" alt="Screenshot 2023-06-14 at 1 57 45 PM" src="https://github.com/powerhome/playbook/assets/73671109/7a9bbe64-c22b-4909-918b-9bb9005440e0"> | <img width="550" alt="Screenshot 2023-06-14 at 1 54 15 PM" src="https://github.com/powerhome/playbook/assets/73671109/fa710373-8be1-4d60-a81e-dda2b7817c78"> |
 
 ### Props
-| Name | Type | Description | Default Value | Values |
+| Name | Type | Description | Default | Values |
 | --- | ----------- | --------- | --------- | --------- |
 | **amPmStyle** | `AmPmStyle` | Displays the character counter on the bottom right of the Textarea and its different variants | `.short` | `.short` `.full`|
 | **showDate** | `Bool` | Displays error text on the bottom left of the Textarea and changes border to error status color | `true` | |
