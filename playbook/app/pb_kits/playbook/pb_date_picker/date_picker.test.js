@@ -197,6 +197,46 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
+      expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " → " + moment().endOf('year').format('MM/DD/YYYY'))
+    })
+
+  })
+  test('shows DatePicker QuickPick ranges ending today', async () => {
+    const testId = 'datepicker-quick-pick-ends-today'
+    render(
+      <DatePicker
+          allowInput
+          data={{ testid: testId }}
+          mode="range"
+          pickerId="date-picker-quick-pick"
+          placeholder="mm/dd/yyyy → mm/dd/yyyy"
+          selectionType="quickpick"
+          thisRangesEndToday
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('mm/dd/yyyy → mm/dd/yyyy')
+
+    fireEvent(
+      input,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    
+    const thisYear = within(kit).getByText('This year')
+
+    fireEvent(
+      thisYear,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+
+    await waitFor(() => {
       expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " → " + moment().format('MM/DD/YYYY'))
     })
 
