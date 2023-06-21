@@ -20,8 +20,12 @@
         placeholder: object.placeholder,
         required: object.required,
       }) %>
-      <input id="<%= "#{object.start_date}-#{object.picker_id}" %>" name="<%= "#{object.start_date}-#{object.picker_id}" %>">
-      <input id="<%= "#{object.end_date}-#{object.picker_id}" %>" name="<%= "#{object.end_date}-#{object.picker_id}" %>">
+
+      <h2>Test quick pick</h2>
+      <div class="Godinho">
+        <input id="<%= "#{object.start_date}-#{object.picker_id}" %>" name="<%= "#{object.start_date}-#{object.picker_id}" %>">
+        <input id="<%= "#{object.end_date}-#{object.picker_id}" %>" name="<%= "#{object.end_date}-#{object.picker_id}" %>">
+      </div>
     <% end %>
     <% if !object.hide_icon %>
       <div
