@@ -20,8 +20,8 @@
         placeholder: object.placeholder,
         required: object.required,
       }) %>
-      <input type="hidden" id="<%= "#{object.start_date}-#{object.picker_id}" %>" name="<%= "#{object.start_date}-#{object.picker_id}" %>">
-      <input type="hidden" id="<%= "#{object.end_date}-#{object.picker_id}" %>" name="<%= "#{object.end_date}-#{object.picker_id}" %>">
+      <input id="<%= "#{object.start_date}-#{object.picker_id}" %>" name="<%= "#{object.start_date}-#{object.picker_id}" %>">
+      <input id="<%= "#{object.end_date}-#{object.picker_id}" %>" name="<%= "#{object.end_date}-#{object.picker_id}" %>">
     <% end %>
     <% if !object.hide_icon %>
       <div
