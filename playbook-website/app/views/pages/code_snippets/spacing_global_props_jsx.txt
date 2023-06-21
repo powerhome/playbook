@@ -1,1 +1,11 @@
 <Badge paddingTop="sm"/>
+
+<Badge
+    paddingTop={{
+        xs: "xxs",
+        sm: "xs",
+        md: "xl",
+        lg: "md",
+        xl: "none"
+    }}
+/>

@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
+require "pb_doc_helper"
+
 module ApplicationHelper
   include ::Webpacker::React::Helpers
+  include ::Webpacker::Helper
   include ::Playbook::PbFormsHelper
   include ::Playbook::PbKitHelper
+  include ::PlaybookWebsite::Markdown::Helper
+  include ::PlaybookWebsite::PbDocHelper
 
   def pb_category_kits(category_kits: [], type: "rails")
     display_kits = []
@@ -28,9 +33,18 @@ module ApplicationHelper
   end
 
   def pb_doc_has_kit_type?(kit, type = "rails")
-    extension = type == "react" ? "jsx" : "erb"
+    case type
+    when "rails"
+      extension = "erb"
+    when "react"
+      extension = "jsx"
+    when "swift"
+      extension = "swift"
+    end
+
     Playbook.kit_path(kit, "docs")
             .glob("**/*.#{extension}")
+            .any? { |path| path.basename.to_s.include?(extension) }
             .present?
   end
 
@@ -55,16 +69,22 @@ module ApplicationHelper
   end
 
   def sub_category_link(type, link)
-    if type == "react"
+    case type
+    when "react"
       kit_show_reacts_path(link)
+    when "swift"
+      kit_show_swift_path(link)
     else
       kit_show_path(link)
     end
   end
 
   def kit_link(type, link)
-    if type == "react"
+    case type
+    when "react"
       kit_show_reacts_path(link)
+    when "swift"
+      kit_show_swift_path(link)
     else
       kit_show_path(link)
     end
@@ -80,9 +100,9 @@ module ApplicationHelper
 
   def gh_edit_link(parent, page)
     if page.nil?
-      "https://github.com/powerhome/playbook/edit/master/playbook-website/guides/#{parent}"
+      "https://github.com/powerhome/playbook/edit/master/playbook-website/app/views/guides/#{parent}.md"
     else
-      "https://github.com/powerhome/playbook/edit/master/playbook-website/guides/#{parent}/#{page}"
+      "https://github.com/powerhome/playbook/edit/master/playbook-website/app/views/guides/#{parent}/#{page}.md"
     end
   end
 
@@ -105,7 +125,11 @@ module ApplicationHelper
   def format_search_hash(kit)
     {
       label: kit.to_s.titleize,
-      value: @type == "react" || @type.nil? ? "/kits/#{kit}/react" : "/kits/#{kit}",
+      value: if @type == "react" || @type.nil?
+               "/kits/#{kit}/react"
+             else
+               @type == "swift" ? "/kits/#{kit}/swift" : "/kits/#{kit}"
+             end,
     }
   end
 

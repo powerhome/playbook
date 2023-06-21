@@ -50,17 +50,32 @@ module Playbook
     end
 
     def spacing_values
-      %w[none xxs xs sm md lg xl]
+      %w[none xxs xs sm md lg xl auto initial inherit]
+    end
+
+    def screen_size_values
+      %w[xs sm md lg xl]
     end
 
     def spacing_props
       selected_props = spacing_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 
-      selected_props.map do |k|
-        spacing_value = send(k)
-        "#{spacing_options[k]}_#{spacing_value}" if spacing_values.include? spacing_value
-      end.compact.join(" ")
+      responsive = selected_props.present? && try(selected_props.first).is_a?(::Hash)
+      css = ""
+      selected_props.each do |prop|
+        spacing_value = send(prop)
+        prefix = spacing_options[prop]
+        if responsive
+          spacing_value.each do |key, value|
+            css += "#{prefix}_#{key}_#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
+          end
+        elsif spacing_values.include?(spacing_value)
+          css += "#{prefix}_#{spacing_value} "
+        end
+      end
+
+      css.strip unless css.blank?
     end
 
     def max_width_props

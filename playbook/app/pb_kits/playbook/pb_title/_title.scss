@@ -12,11 +12,13 @@
   &[class*=_2] {
     @include pb_title_2;
     @include title_colors;
+    @include pb_title_bold;
   }
 
   &[class*=_3] {
     @include pb_title_3;
     @include title_colors;
+    @include pb_title_bold;
   }
 
   &[class*=_4] {
@@ -28,7 +30,7 @@
     @include pb_title_dark;
   }
 
-  &[class*=_thin] {
+  &[class*=thin] {
     @include pb_title_thin;
   }
 }

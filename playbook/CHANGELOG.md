@@ -1,3 +1,60 @@
+# Styling typography just got easier!
+
+![12 25 0](https://github.com/powerhome/playbook/assets/73710701/6db5b3e0-f499-446d-965a-0e00b0c31931)
+
+Sometimes you don't need all the styles that ship with the Date kit.
+We have added a simple boolean prop called "unstyled" that puts control in your hands.
+You can now wrap our Date kit with any of our typography kits (Title, Body, Caption, etc) and the date kit will inherit that component's styles! 🎉
+
+[12.25.0](https://github.com/powerhome/playbook/tree/12.25.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Unstyled Variant for Date and Time Kits [\#2592](https://github.com/powerhome/playbook/pull/2592) ([gavhuang](https://github.com/gavhuang))
+- Bold Option for Title 3 [\#2579](https://github.com/powerhome/playbook/pull/2579) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Changelog Improvements [\#2591](https://github.com/powerhome/playbook/pull/2591) ([jasoncypret](https://github.com/jasoncypret))
+- Separation of Markdown & PBDocs Dependencies from Playbook Library [\#2527](https://github.com/powerhome/playbook/pull/2527) ([jasoncypret](https://github.com/jasoncypret))
+
+# Responsive Components in Rapid Time: Introducing Global Responsive Spacing Props for React and Rails Components. 
+
+![titleboldandresponsivespacing](https://github.com/powerhome/playbook/assets/9158723/9741a86c-5439-4081-b197-0101079c8575)
+
+With all components, you can specify any of our spacing props values at certain screen sizes. For example, let's say I wanted the Badge component to have a small padding on phones, and a medium size padding on medium screens and higher. It's as easy as this:
+
+```jsx
+<Badge padding={{ xs: "sm", md: "md"  }} />
+```
+
+Give it a try and let us know what you think!
+
+
+[12.24.0](https://github.com/powerhome/playbook/tree/12.24.0) full list of changes:
+
+**Kit Enhancements:**
+- Title 2 Defaults to Bold [\#2559](https://github.com/powerhome/playbook/pull/2559) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Responsive Spacing global prop [\#2563](https://github.com/powerhome/playbook/pull/2563) ([nickamantia](https://github.com/nickamantia))
+- Creating an example Swift kit doc [\#2550](https://github.com/powerhome/playbook/pull/2550) ([carloslimasd](https://github.com/carloslimasd))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.23.0...12.24.0)
+
+## [12.23.0](https://github.com/powerhome/playbook/tree/12.23.0) (2023-05-23)
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.22.0...12.23.0)
+
+**Fixed Bugs:**
+
+- Fixes for Darkmode Styling of TextInput [\#2575](https://github.com/powerhome/playbook/pull/2575) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Adding check to Empty Filters [\#2573](https://github.com/powerhome/playbook/pull/2573) ([carloslimasd](https://github.com/carloslimasd))
+
 
 
 ## [12.22.0](https://github.com/powerhome/playbook/tree/12.22.0) (2023-05-18)
