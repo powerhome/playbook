@@ -80,7 +80,6 @@ const Card = (props: CardPropTypes) => {
     highlight = {},
     selected = false,
     tag = 'div',
-    padding = 'md',
   } = props
   const borderCSS = borderNone == true ? 'border_none' : ''
   const selectedCSS = selected == true ? 'selected' : 'deselected'
@@ -114,7 +113,7 @@ const Card = (props: CardPropTypes) => {
     <Tag
         {...ariaProps}
         {...dataProps}
-        className={classnames(cardCss, globalProps(props, { padding }), className)}
+        className={classnames(cardCss, globalProps(props), className)}
     >
       {subComponentTags('Header')}
       {nonHeaderChildren}

@@ -19,7 +19,6 @@ type CollapsibleProps = {
   iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   iconSize?: typeof IconSizes
   id?: string,
-  padding?: string,
 }
 
 const useCollapsible = (initial = false) => {
@@ -40,7 +39,7 @@ const Collapsible = ({
   iconColor = 'default',
   iconSize,
   id,
-  padding = 'md',
+
   ...props
 }: CollapsibleProps) => {
   const [isCollapsed, collapse] = useCollapsible(collapsed)
@@ -59,7 +58,7 @@ const Collapsible = ({
   const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_collapsible_kit'),
-    globalProps(props, { padding }),
+    globalProps(props),
     className
   )
 

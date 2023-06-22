@@ -2,7 +2,7 @@ import React from 'react'
 import { Collapsible } from '../..'
 
 const CollapsibleDefault = () => (
-  <Collapsible>
+  <Collapsible >
     <Collapsible.Main>
       <div>{'Main Section'}</div>
     </Collapsible.Main>

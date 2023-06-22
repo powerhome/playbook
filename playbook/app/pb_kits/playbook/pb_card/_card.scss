@@ -3,6 +3,7 @@
 
 [class^=pb_card_kit] {
   @include pb_card;
+  padding: $space_md;
 
   &[class*=_selected] {
     @include pb_card_selected;
@@ -57,6 +58,7 @@
     flex-basis: auto;
     min-height: 1px;
     border: 0;
+    // padding: $space_md;
   }
 
   &[class*=_highlight] {
