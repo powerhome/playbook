@@ -30,11 +30,12 @@
     margin: 1.9rem 0 0 0;
   }
   h3 {
-    font-size: $text_large;
-    line-height: $text_large;
-    font-weight: $bolder;
-    letter-spacing: $lspace_tight;
-    margin: 1.7rem 0 0 0;
+    font-size: $font_smaller;
+    font-weight: $bold;
+    color: $text_lt_light;
+    text-transform: uppercase;
+    letter-spacing: $lspace_looser;
+    margin: 1rem 0 0 0;
   }
   h4, h5, h6 {
     font-size: $text_base;
@@ -138,7 +139,7 @@
   &.dark {
     color: $text_dk_default ;
     h1,h2,h3,h4,h5,h6 {
-     color: $text_dk_default;
+      color: $text_dk_default;
     }
     a {
       color: $active_dark;
