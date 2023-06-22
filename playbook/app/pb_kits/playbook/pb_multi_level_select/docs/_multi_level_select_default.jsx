@@ -72,15 +72,18 @@ const MultiLevelSelectDefault = (props) => {
   return (
     <div>
       <MultiLevelSelect
-          id="multiselect-default"
+          id='multiselect-default'
           onSelect={(selectedNodes) =>
-          console.log("Selected Items (default... with ids only)", selectedNodes)
-          }
+          console.log(
+            "Selected Items (default... with ids only)",
+            selectedNodes
+          )
+        }
           treeData={treeData}
           {...props}
       />
     </div>
-  );
+  )
 };
 
 export default MultiLevelSelectDefault;

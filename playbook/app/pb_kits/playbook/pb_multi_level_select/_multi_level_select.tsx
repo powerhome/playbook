@@ -93,12 +93,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
-  const updateHiddenInputValue = (value: any) => {
+  const updateHiddenInputValue = (inputValue: any) => {
     const hiddenInput = document.querySelector(
       "input#" + id
     ) as HTMLInputElement
     if (hiddenInput) {
-      hiddenInput.value = JSON.stringify(value)
+      hiddenInput.value = JSON.stringify(inputValue)
     }
   }
 
@@ -355,12 +355,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       <div ref={dropdownRef} className='wrapper'>
         <div className='input_wrapper' onClick={handleInputWrapperClick}>
           <div className='input_inner_container'>
-            <input
-              type='hidden'
-              id={id}
-              name={name}
-              value={JSON.stringify(formattedReturn)}
-            />
+            <input type='hidden' id={id} name={name} value={formattedReturn} />
             {returnedArray.length !== 0 && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill

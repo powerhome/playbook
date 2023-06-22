@@ -1,3 +1,28 @@
 <div id="pb_data_wrapper_<%= object.id %>" data-tree="">
 <%= react_component("MultiLevelSelect", object.multi_level_select_options ) %>
 </div>
+
+<%#  write a simple javascript that function that runs JSON.parse on the value coming from the hidden input %>
+<%# Then, update the hiddenInput's value with the parsed data. %>
+<%# Make sure this function gets called whenever the value changes in any way. So i think i need it to be in an event listener of some type  %>
+
+<%#  %>
+<script>
+
+function updateHiddenInput() {
+  const hiddenInput = document.querySelector("input#" + "<%= object.id %>");
+  let newValue = hiddenInput.value;
+  try {
+    newValue = JSON.parse(newValue);
+  } catch (error) {
+    // Handle JSON parsing error, if any
+    console.error(error);
+  }
+  hiddenInput.value = JSON.stringify(newValue);
+}
+
+updateHiddenInput();
+
+document.addEventListener("change", updateHiddenInput);
+
+</script>
