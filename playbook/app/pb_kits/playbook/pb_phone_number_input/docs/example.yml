@@ -6,6 +6,7 @@ examples:
   - phone_number_input_initial_country: Initial Country
   - phone_number_input_only_countries: Limited Countries
   - phone_number_input_validation: Form Validation
+  - phone_number_input_ref: Accessing the Input Element
 
   rails:
   - phone_number_input_default: Default

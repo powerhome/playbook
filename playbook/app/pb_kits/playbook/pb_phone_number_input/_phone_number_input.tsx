@@ -64,7 +64,7 @@ const containOnlyNumbers = (value: string) => {
   return /^[()+\-\ .\d]*$/g.test(value)
 }
 
-const PhoneNumberInput = (props: PhoneNumberInputProps) => {
+const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefObject<HTMLInputElement>) => {
   const {
     aria = {},
     className,
@@ -242,7 +242,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   return (
     <div {...wrapperProps}>
       <TextInput
-          ref={inputRef}
+          ref={
+            inputNode => {
+              ref ? ref.current = inputNode : null
+              inputRef.current = inputNode
+            }
+          }
           {...textInputProps}
       />
     </div>

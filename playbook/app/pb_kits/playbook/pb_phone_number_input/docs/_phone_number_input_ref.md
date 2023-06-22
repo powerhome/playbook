@@ -1,0 +1,1 @@
+Pass a `ref` to the `ref` prop if you need to interact with the input element (e.g., focus the input box).
