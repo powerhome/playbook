@@ -80,6 +80,9 @@ export const getDefaultCheckedItems = (treeData:{ [key: string]: any }[]) => {
   const checkedDefault: { [key: string]: any }[] = [];
 
   const traverseTree = (items:{ [key: string]: any }[]) => {
+    if (!Array.isArray(items)) {
+      return;
+    }
     items.forEach((item:{ [key: string]: any }) => {
       if (item.checked) {
         if (item.children && item.children.length > 0) {
