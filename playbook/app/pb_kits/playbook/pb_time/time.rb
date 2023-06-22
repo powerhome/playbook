@@ -15,6 +15,8 @@ module Playbook
                        default: false
       prop :show_timezone, type: Playbook::Props::Boolean,
                            default: true
+      prop :unstyled, type: Playbook::Props::Boolean,
+                      default: false
 
       def classname
         # convert deprecated prop values

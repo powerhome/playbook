@@ -7,6 +7,7 @@ class GuidesController < ApplicationController
     @page       = params[:page]
     @parent     = params[:parent]
     @page_title = @page || @parent
+    @page_title = @page_title.titleize
     search_path = File.join(Rails.root, "/app/views/guides/#{@parent}")
     @navigation = Dir.children(search_path).map { |f| File.basename(f, ".md") }.sort
     if @parent

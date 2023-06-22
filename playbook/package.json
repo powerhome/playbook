@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "12.24.0",
+  "version": "12.26.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "scripts": {
@@ -50,7 +50,6 @@
     "moment-strftime": "^0.5.0",
     "moment-timezone": "^0.5.26",
     "react-animate-height": "^2.0.23",
-    "react-dropdown-tree-select": "^2.8.0",
     "react-dropzone": "^10.2.2",
     "react-highlight-words": "^0.20.0",
     "react-joyride": "^2.5.3",
