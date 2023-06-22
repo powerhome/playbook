@@ -14,7 +14,7 @@ describe("IconStatValue Kit", () => {
                 text="Electric"
                 unit="kw"
                 value={64.18}
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -29,7 +29,7 @@ describe("IconStatValue Kit", () => {
                 text="Electric"
                 unit="kw"
                 value={64.18}
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -45,7 +45,7 @@ describe("IconStatValue Kit", () => {
                 text="Electric"
                 unit="kw"
                 value={64.18}
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -61,7 +61,7 @@ describe("IconStatValue Kit", () => {
                 text="Electric"
                 unit="kw"
                 value={64.18}
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -77,7 +77,7 @@ describe("IconStatValue Kit", () => {
                 text="Electric"
                 unit="kw"
                 value={64.18}
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -97,7 +97,7 @@ describe("IconStatValue Kit", () => {
                     text="Electric"
                     unit="kw"
                     value={64.18}
-          />
+                />
             )
     
             const kit = screen.getByTestId(testId)
@@ -125,7 +125,7 @@ describe("IconStatValue Kit", () => {
                     unit="kw"
                     value={64.18}
                     variant={colorProp}
-          />
+                />
             )
     
             const kit = screen.getByTestId(testId)
@@ -144,7 +144,7 @@ describe("IconStatValue Kit", () => {
                     text="Electric"
                     unit="kw"
                     value={64.18}
-          />
+                />
             )
     
             const kit = screen.getByTestId(testId)

@@ -14,7 +14,7 @@ const PopoverTest = () => {
   const popoverReference = (
     <Button onClick={togglePopover} 
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -36,7 +36,7 @@ const PopoverTestZIndex = () => {
   const popoverReference = (
     <Button onClick={togglePopover} 
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -60,7 +60,7 @@ const PopoverTestHeight = () => {
   const popoverReference = (
     <Button onClick={togglePopover} 
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -88,7 +88,7 @@ const PopoverTestClicktoClose = () => {
   const popoverReference = (
     <Button onClick={togglePopover} 
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -116,7 +116,7 @@ const PopoverTestClicktoClose2 = () => {
   const popoverReference = (
     <Button onClick={togglePopover} 
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -144,7 +144,7 @@ const PopoverTestClicktoClose3 = () => {
   const popoverReference = (
     <Button onClick={togglePopover} 
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover

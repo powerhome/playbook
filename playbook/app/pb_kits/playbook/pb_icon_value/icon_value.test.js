@@ -12,7 +12,7 @@ describe("IconValue Kit", () => {
                 data={{ testid: testId }}
                 icon="clipboard"
                 text="33-123456"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -25,7 +25,7 @@ describe("IconValue Kit", () => {
                 data={{ testid: testId }}
                 icon="clipboard"
                 text="33-123456"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -39,7 +39,7 @@ describe("IconValue Kit", () => {
                 data={{ testid: testId }}
                 icon="clipboard"
                 text="33-123456"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -54,7 +54,7 @@ describe("IconValue Kit", () => {
                 data={{ testid: testId }}
                 icon="clipboard"
                 text="33-123456"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -68,7 +68,7 @@ describe("IconValue Kit", () => {
                 data={{ testid: testId }}
                 icon="clipboard"
                 text="33-123456"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)

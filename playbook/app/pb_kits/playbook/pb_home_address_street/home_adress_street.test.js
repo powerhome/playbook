@@ -23,7 +23,7 @@ function HomeAdressStreetTest(props) {
             territory="PHL"
             zipcode="19382"
             {...props}
-    />
+        />
     );
   }
   
