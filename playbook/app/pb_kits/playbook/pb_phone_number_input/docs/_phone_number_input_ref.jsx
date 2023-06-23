@@ -11,7 +11,7 @@ const PhoneNumberInputRef = (props) => {
     return (
         <>
             <PhoneNumberInput
-                id="default"
+                id="ref"
                 ref={ref}
                 {...props}
             />
