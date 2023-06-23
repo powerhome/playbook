@@ -33,31 +33,26 @@ WORKDIR /home/app/src
 
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
 COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
-
-FROM base AS build-library
-COPY --link playbook-website/package.json playbook-website/
-COPY --link playbook/package.json playbook/
 COPY --link package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock .npmrc ./
 COPY --link .yarn ./.yarn
 
+FROM base AS build-yarn
 # Build Library
 RUN --mount=type=secret,id=yarnenv,required \
     --mount=id=yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
     env $(cat /run/secrets/yarnenv | xargs) yarn install
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
-FROM build-library AS playbook-release
-RUN --mount=type=secret,id=yarnenv,required cd playbook; env $(cat /run/secrets/yarnenv | xargs) yarn release
-
-FROM build-library AS playbook-website-release
-RUN --mount=type=secret,id=yarnenv,required cd playbook-website; env $(cat /run/secrets/yarnenv | xargs) yarn release
-
-FROM base AS prod
+FROM base AS build-bundle
 # Bundle website
 RUN cd playbook-website && bundle install --frozen
 
-COPY --link --from=playbook-release /home/app/src/playbook /home/app/src/playbook
-COPY --link --from=playbook-website-release /home/app/src/playbook-website /home/app/src/playbook-website
+FROM base AS prod
+COPY --link --from=build-bundle /usr/local/rvm/gems /usr/local/rvm/gems
+COPY --link --from=build-yarn /home/app/src /home/app/src
+
+RUN --mount=type=secret,id=yarnenv,required cd playbook; env $(cat /run/secrets/yarnenv | xargs) yarn release
+RUN --mount=type=secret,id=yarnenv,required cd playbook-website; env $(cat /run/secrets/yarnenv | xargs) yarn release
 
 # Setup service
 RUN chmod +x playbook-website/services/*.sh
