@@ -1,4 +1,4 @@
-# Detail Kit Unleashed: Amplify Data Visualization in Your UI!
+# Detail Kit Unleashed: Supercharge Data Display in Your UI
 ##### June 23, 2023
 
 ![12-26-0](https://github.com/powerhome/playbook/assets/73710701/2daca1f7-8d62-4f78-97e9-465767566ee1)
