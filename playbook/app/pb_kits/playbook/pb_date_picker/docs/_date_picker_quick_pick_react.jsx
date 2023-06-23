@@ -1,9 +1,8 @@
 import React from 'react'
-
 import DatePicker from '../_date_picker'
 
-const DatePickerQuickPick = (props) => (
-  <div>
+const DatePickerQuickPickReact = (props) => (
+  <>
     <DatePicker
         allowInput
         mode="range"
@@ -12,7 +11,7 @@ const DatePickerQuickPick = (props) => (
         selectionType="quickpick"
         {...props}
     />
-  </div>
+  </>
 )
 
-export default DatePickerQuickPick
+export default DatePickerQuickPickReact

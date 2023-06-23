@@ -23,8 +23,8 @@
     <% end %>
 
     <% if object.selection_type == "quickpick" %>
-      <input type="hidden" id="<%= "#{object.start_date}-#{object.picker_id}" %>" name="<%= "#{object.start_date}-#{object.picker_id}" %>">
-      <input type="hidden" id="<%= "#{object.end_date}-#{object.picker_id}" %>" name="<%= "#{object.end_date}-#{object.picker_id}" %>">
+      <input type="hidden" id="<%= "#{object.start_date_id}" %>" name="<%= "#{object.start_date_name}" %>">
+      <input type="hidden" id="<%= "#{object.end_date_id}" %>" name="<%= "#{object.end_date_name}" %>">
     <% end %>
 
     <% if !object.hide_icon %>
@@ -71,8 +71,8 @@
 
       if (<%= object.selection_type == "quickpick" %>) {
         document.getElementById("<%= object.picker_id %>").addEventListener("change", ({ target }) => {
-          const startDate = document.getElementById("<%= object.start_date %>-<%= object.picker_id %>")
-          const endDate = document.getElementById("<%= object.end_date %>-<%= object.picker_id %>")
+          const startDate = document.getElementById("<%= object.start_date_id %>")
+          const endDate = document.getElementById("<%= object.end_date_id %>")
           const splittedValue = target.value.split(" → ")
           startDate.value = splittedValue[0]
           endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
