@@ -5,23 +5,20 @@ const PhoneNumberInputRef = (props) => {
     const ref = useRef()
 
     const handleClick = () => {
-        // Get the input element and name attribute
-        console.log(ref.current)
-        alert(`${ref.current.name} Check the console for all of the input element's attributes!`)
+        ref.current.value = ""
     }
 
     return (
         <>
             <PhoneNumberInput
-                id='default'
-                name="This is my name attribute!"
+                id="default"
                 ref={ref}
                 {...props}
             />
 
             <Button
                 onClick={handleClick}
-                text="Click Me!"
+                text="Clear the Input Field"
             />
         </>
     )
