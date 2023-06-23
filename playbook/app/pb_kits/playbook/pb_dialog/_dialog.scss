@@ -238,7 +238,6 @@
 					position:fixed;
 					bottom: 0;
 					background-color: $white;
-          padding: $space_sm;
 				}
 				
 				&[class*="_sm"] {
@@ -269,6 +268,10 @@
 }
 
 [class*="dialog_header"] {
+  padding: $space_sm;
+}
+
+[class*="dialog_footer"] {
   padding: $space_sm;
 }
 

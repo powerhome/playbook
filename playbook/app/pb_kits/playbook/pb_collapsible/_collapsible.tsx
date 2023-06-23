@@ -39,7 +39,6 @@ const Collapsible = ({
   iconColor = 'default',
   iconSize,
   id,
-
   ...props
 }: CollapsibleProps) => {
   const [isCollapsed, collapse] = useCollapsible(collapsed)

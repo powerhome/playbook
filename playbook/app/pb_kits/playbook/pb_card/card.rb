@@ -29,11 +29,7 @@ module Playbook
       end
 
       def body_padding
-        if padding.present?
-          ""
-        else
-          "p_md"
-        end
+        "" if padding.present?
       end
 
       def body_flex_direction
