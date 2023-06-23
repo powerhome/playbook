@@ -39,9 +39,6 @@ COPY --link package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock .npmr
 COPY --link .yarn ./.yarn
 
 FROM base AS build-library
-
-USER app:app
-
 # Build Library
 RUN --mount=type=secret,id=yarnenv,required \
     --mount=id=yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
