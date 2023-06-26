@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState, useImperativeHandle, RefObject } from 'react'
+import React, { forwardRef, useEffect, useRef, useState, useImperativeHandle } from 'react'
 import classnames from 'classnames'
 
 import intlTelInput from 'intl-tel-input'
