@@ -52,6 +52,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   const dropdownRef = useRef(null)
 
+
   //state for expanded property
   const [expanded, setExpanded] = useState([])
   //state for whether dropdown is open or closed
@@ -68,9 +69,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [formattedReturn, setFormattedReturn] = useState([])
 
   const getSelectedIds = (selectedData: { [key: string]: any }[]) => {
-    return selectedData
-      .map((item) => item.id)
-      .filter((value, index, self) => self.indexOf(value) === index)
+    return selectedData.map((item) => item.id)
   }
 
   const getValues = () => {
@@ -89,18 +88,19 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
-  const updateHiddenInputValue = (inputValue: any) => {
-    const hiddenInput = document.querySelector(
-      "input#" + id
-    ) as HTMLInputElement
-    if (hiddenInput) {
-      hiddenInput.value = JSON.stringify(inputValue)
-    }
-  }
+
+  useEffect(() => {
+    getValues()
+  }, [returnedArray, defaultReturn])
+
+  useEffect(() => {
+    onSelect(formattedReturn)
+  }, [formattedReturn])
 
   useEffect(() => {
     setFormattedData(addCheckedAndParentProperty(treeData))
   }, [treeData])
+
 
   useEffect(() => {
     if (returnAllSelected) {
@@ -249,7 +249,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
     const filtered = filterFormattedDataById(formattedData, clickedItem)
     const updatedTree = changeItem(filtered[0], check)
-    console.log(updatedTree)
     if (returnAllSelected) {
       onSelect(getCheckedItems(updatedTree))
     } else {
@@ -334,7 +333,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       <div ref={dropdownRef} className='wrapper'>
         <div className='input_wrapper' onClick={handleInputWrapperClick}>
           <div className='input_inner_container'>
-            <input type='hidden' id={id} name={name} value={formattedReturn} />
+            {returnedArray.map((item) => (
+              <input type='hidden' name={name} value={item.id} />
+            ))}
+
             {returnedArray.length !== 0 && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill

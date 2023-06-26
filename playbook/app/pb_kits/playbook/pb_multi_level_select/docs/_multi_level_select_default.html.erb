@@ -8,6 +8,7 @@
         label: "People",
         value: "People",
         id: "people1",
+        checked: true,
         children: [
           {
             label: "Talent Acquisition",
@@ -18,6 +19,7 @@
             label: "Business Affairs",
             value: "Business Affairs",
             id: "business1",
+            checked: true,
             children: [
               {
                 label: "Initiatives",
@@ -68,9 +70,8 @@
 <%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
   <%= pb_rails("multi_level_select", props: {
       id: "default-multi-level-select-test",
-      name: "q[user_title_org_level_id_in]",
-      tree_data: treeData,
-      return_all_selected: true
+      name: "my_array[]",
+      tree_data: treeData
   }) %>
   <%= form.actions do |action| %>
     <%= action.submit %>

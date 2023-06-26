@@ -79,6 +79,7 @@ const MultiLevelSelectDefault = (props) => {
             selectedNodes
           )
         }
+          returnAllSelected
           treeData={treeData}
           {...props}
       />
