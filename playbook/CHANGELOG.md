@@ -1,3 +1,29 @@
+# Detail Kit Unleashed: Supercharge Data Display in Your UI
+##### June 23, 2023
+
+![12-26-0](https://github.com/powerhome/playbook/assets/73710701/2daca1f7-8d62-4f78-97e9-465767566ee1)
+
+Need to display a wealth of information without cluttering your UI? Look no further than our brand-new Detail Kit! Designed specifically for showcasing hierarchical relationships of text and maintaining clarity in data-rich layouts, Detail is your go-to solution for tables, charts, and data-heavy UI.
+
+[12.26.1](https://github.com/powerhome/playbook/tree/12.26.0) full list of changes:
+
+**Kit Enhancements:**
+
+- MultiLevelSelect Refactor to Remove Third Party Library [\#2578](https://github.com/powerhome/playbook/pull/2578) ([nidaqg](https://github.com/nidaqg))
+
+**New Kits:**
+
+- Detail Kit [\#2596](https://github.com/powerhome/playbook/pull/2596) ([gavhuang](https://github.com/gavhuang))
+
+**Improvements:**
+
+- Kit Mashup Page for Handoffs [\#2583](https://github.com/powerhome/playbook/pull/2583) ([nickamantia](https://github.com/nickamantia))
+- Correct Broken Swift Markdown Docs [\#2600](https://github.com/powerhome/playbook/pull/2600) ([jasoncypret](~https://github.com/jasoncypret))
+- Titleize docs Page Titles [\#2594](https://github.com/powerhome/playbook/pull/2594) ([jasoncypret](https://github.com/jasoncypret))
+- Bump ci-kubed@v6.7.0 [\#2593](https://github.com/powerhome/playbook/pull/2593) ([mfilipe](https://github.com/mfilipe))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.25.0...12.26.0)
+
 # Styling typography just got easier!
 ##### June 13, 2023
 
