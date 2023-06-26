@@ -73,8 +73,8 @@ FROM jsdeps AS release
 # Bundle website
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
-RUN --mount=type=secret,id=yarnenv,required cd playbook; env $(cat /run/secrets/yarnenv | xargs) yarn release
 COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
+RUN --mount=type=secret,id=yarnenv,required cd playbook; env $(cat /run/secrets/yarnenv | xargs) yarn release
 RUN --mount=type=secret,id=yarnenv,required cd playbook-website; env $(cat /run/secrets/yarnenv | xargs) yarn release
 
 FROM base AS prod
