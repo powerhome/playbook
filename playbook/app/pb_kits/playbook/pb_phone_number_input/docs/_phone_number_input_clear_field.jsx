@@ -1,17 +1,20 @@
 import React, { useRef } from 'react'
-import { Button, PhoneNumberInput } from '../../'
+import { Button, PhoneNumberInput } from '../..'
 
-const PhoneNumberInputRef = (props) => {
+const PhoneNumberInputClearField = (props) => {
+    // 1. Create a ref - this accesses the kit's input element.
     const ref = useRef()
 
+    // 2. Use clearField() to clear the field.
     const handleClick = () => {
-        ref.current.value = ""
+        ref.current.clearField()
     }
 
+    // 3. Pass the ref to the ref prop.
     return (
         <>
             <PhoneNumberInput
-                id="ref"
+                id="clear-field"
                 ref={ref}
                 {...props}
             />
@@ -24,4 +27,4 @@ const PhoneNumberInputRef = (props) => {
     )
 }
 
-export default PhoneNumberInputRef
+export default PhoneNumberInputClearField
