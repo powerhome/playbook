@@ -1,4 +1,5 @@
 # Styling typography just got easier!
+##### June 13, 2023
 
 ![12 25 0](https://github.com/powerhome/playbook/assets/73710701/6db5b3e0-f499-446d-965a-0e00b0c31931)
 
@@ -18,7 +19,8 @@ You can now wrap our Date kit with any of our typography kits (Title, Body, Capt
 - Changelog Improvements [\#2591](https://github.com/powerhome/playbook/pull/2591) ([jasoncypret](https://github.com/jasoncypret))
 - Separation of Markdown & PBDocs Dependencies from Playbook Library [\#2527](https://github.com/powerhome/playbook/pull/2527) ([jasoncypret](https://github.com/jasoncypret))
 
-# Responsive Components in Rapid Time: Introducing Global Responsive Spacing Props for React and Rails Components. 
+# Responsive Components in Rapid Time: Introducing Global Responsive Spacing Props for React and Rails Components.
+##### May 26, 2023
 
 ![titleboldandresponsivespacing](https://github.com/powerhome/playbook/assets/9158723/9741a86c-5439-4081-b197-0101079c8575)
 
@@ -637,7 +639,7 @@ Give it a try and let us know what you think!
 **Kit Enhancements:**
 
 - Update Error Color Token [\#2226](https://github.com/powerhome/playbook/pull/2226) ([nidaqg](https://github.com/nidaqg))
-- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret), [carloslimasd](https://github.com/carloslimasd), [Israel-Molestina](https://github.com/Israel-Molestina)), 
+- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret), [carloslimasd](https://github.com/carloslimasd), [Israel-Molestina](https://github.com/Israel-Molestina)),
 
 **Fixed Bugs:**
 
@@ -1039,7 +1041,7 @@ Give it a try and let us know what you think!
 ## [11.2.7](https://github.com/powerhome/playbook/compare/11.2.6...11.2.7) (2022-08-17)
 
 **Fixed Bugs:**
-- Dialog Title Patch [\#2017](https://github.com/powerhome/playbook/pull/2017)([augustomallmann](https://github.com/augustomallmann)) 
+- Dialog Title Patch [\#2017](https://github.com/powerhome/playbook/pull/2017)([augustomallmann](https://github.com/augustomallmann))
 
 ## [11.2.6](https://github.com/powerhome/playbook/compare/11.2.5...11.2.6) (2022-08-12)
 
@@ -1063,7 +1065,7 @@ Give it a try and let us know what you think!
 
 **Kit Enhancements:**
 - Convert Avatar Action Button to Typescript [\#1975](https://github.com/powerhome/playbook/pull/1975) ([augustomallmann](https://github.com/augustomallmann))
-- Typescript Conversion: Bread Crumbs [\#1976](https://github.com/powerhome/playbook/pull/1976) ([augustomallmann](https://github.com/augustomallmann)) 
+- Typescript Conversion: Bread Crumbs [\#1976](https://github.com/powerhome/playbook/pull/1976) ([augustomallmann](https://github.com/augustomallmann))
 
 ## [11.2.2](https://github.com/powerhome/playbook/compare/11.2.1...11.2.2) (2022-08-04)
 **Fixed Bugs:**
@@ -1077,8 +1079,8 @@ Give it a try and let us know what you think!
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.1.2...11.2.0)
 
-**New Kits** 
-- \[PLAY-158\] Lightbox Kit [\#1772](https://github.com/powerhome/playbook/pull/1772) ([jasperfurniss](https://github.com/jasperfurniss), [thestephenmarshall](https://github.com/thestephenmarshall), 
+**New Kits**
+- \[PLAY-158\] Lightbox Kit [\#1772](https://github.com/powerhome/playbook/pull/1772) ([jasperfurniss](https://github.com/jasperfurniss), [thestephenmarshall](https://github.com/thestephenmarshall),
 [Ivancandido11](https://github.com/Ivancandido11))
 
 **Kit Enhancements:**
