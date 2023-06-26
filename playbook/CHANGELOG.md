@@ -1,5 +1,5 @@
 # Detail Kit Unleashed: Supercharge Data Display in Your UI
-##### June 23, 2023
+##### June 22, 2023
 
 ![12-26-0](https://github.com/powerhome/playbook/assets/73710701/2daca1f7-8d62-4f78-97e9-465767566ee1)
 
@@ -25,7 +25,7 @@ Need to display a wealth of information without cluttering your UI? Look no furt
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.25.0...12.26.0)
 
 # Styling typography just got easier!
-##### June 13, 2023
+##### June 9, 2023
 
 ![12 25 0](https://github.com/powerhome/playbook/assets/73710701/6db5b3e0-f499-446d-965a-0e00b0c31931)
 
