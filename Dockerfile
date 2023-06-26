@@ -36,6 +36,10 @@ COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
 COPY --link package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock .npmrc ./
 COPY --link .yarn ./.yarn
 
+# Setup service
+RUN chmod +x playbook-website/services/*.sh
+RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/puma.sh /etc/service/puma/run
+
 FROM base AS build-yarn
 # Build Library
 RUN --mount=type=secret,id=yarnenv,required \
@@ -53,7 +57,3 @@ COPY --link --from=build-yarn /home/app/src /home/app/src
 
 RUN --mount=type=secret,id=yarnenv,required cd playbook; env $(cat /run/secrets/yarnenv | xargs) yarn release
 RUN --mount=type=secret,id=yarnenv,required cd playbook-website; env $(cat /run/secrets/yarnenv | xargs) yarn release
-
-# Setup service
-RUN chmod +x playbook-website/services/*.sh
-RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/puma.sh /etc/service/puma/run
