@@ -218,8 +218,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       allowDropdown: !disabled,
       autoInsertDialCode: false,
       initialCountry,
-      onlyCountries,
-      utilsScript: "intl-tel-input/build/js/utils.js"
+      onlyCountries
     })
 
     inputRef.current.addEventListener("countrychange", (evt: Event) => {
