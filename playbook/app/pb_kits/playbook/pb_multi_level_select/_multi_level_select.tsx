@@ -334,7 +334,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         <div className='input_wrapper' onClick={handleInputWrapperClick}>
           <div className='input_inner_container'>
             {returnedArray.map((item) => (
-              <input type='hidden' name={name} value={item.id} />
+              <input type='hidden' name={`${name}[]`} value={item.id} />
             ))}
 
             {returnedArray.length !== 0 && returnAllSelected
