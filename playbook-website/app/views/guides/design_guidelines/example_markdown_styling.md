@@ -11,6 +11,7 @@ Headings are an essential component of any design system. They help organize con
 ## H2: Headings
 ### H3: Subheadings
 #### H4: Sub-Subheadings
+##### H5: Changelog Dates
 
 ![](https://p-a6FbDk.t4.n0.cdn.getcloudapp.com/items/jkuAW48D/e1e18232-8a66-47d4-abd9-5bee15b49961.jpg?source=client&v=4821b53656635fa27dfb8c37e23969a7)
 
@@ -57,7 +58,7 @@ Click here to learn more about design systems.
 **Bold** and _underline_ are used to *highlight specific words* or phrases within ~~a block of~~ text. They help draw the user’s attention to important information. Here’s an example: *Design systems are* a collection of **reusable components**, **guidelines**, and **assets** that help ensure _consistency across all of your design work_.
 
 ### Code Blocks and Inline Code
-Code blocks and `inline code` are used to display and highlight code within a block of text. This is especially useful for developers who need to reference code snippets in their work. 
+Code blocks and `inline code` are used to display and highlight code within a block of text. This is especially useful for developers who need to reference code snippets in their work.
 
 Here’s an example:
 
