@@ -23,7 +23,6 @@ type MultiLevelSelectProps = {
   data?: { [key: string]: string }
   id?: string
   name?: string
-  returnCompleteData?: boolean
   returnAllSelected?: boolean
   treeData?: { [key: string]: string }[]
   onSelect?: (prop: { [key: string]: any }) => void
@@ -37,7 +36,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     id,
     name,
     returnAllSelected = false,
-    returnCompleteData = false,
     treeData,
     onSelect = () => {},
   } = props
@@ -66,41 +64,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //state for return for default
   const [defaultReturn, setDefaultReturn] = useState([])
 
-  const [formattedReturn, setFormattedReturn] = useState([])
-
-  const getSelectedIds = (selectedData: { [key: string]: any }[]) => {
-    return selectedData.map((item) => item.id)
-  }
-
-  const getValues = () => {
-    if (returnCompleteData) {
-      if (returnAllSelected) {
-        return setFormattedReturn(returnedArray)
-      } else {
-        return setFormattedReturn(defaultReturn)
-      }
-    } else {
-      if (returnAllSelected) {
-        setFormattedReturn(getSelectedIds(returnedArray))
-      } else {
-        setFormattedReturn(getSelectedIds(defaultReturn))
-      }
-    }
-  }
-
-
-  useEffect(() => {
-    getValues()
-  }, [returnedArray, defaultReturn])
-
-  useEffect(() => {
-    onSelect(formattedReturn)
-  }, [formattedReturn])
 
   useEffect(() => {
     setFormattedData(addCheckedAndParentProperty(treeData))
   }, [treeData])
-
 
   useEffect(() => {
     if (returnAllSelected) {
@@ -281,8 +248,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         {Array.isArray(items) &&
           items.map((item: { [key: string]: any }) => {
             return (
-              <>
-                <li key={item.id} className='dropdown_item' data-name={item.id}>
+              <div key={item.id}>
+                <li className='dropdown_item' data-name={item.id}>
                   <div className='dropdown_item_checkbox_row'>
                     <div
                       key={isExpanded(item) ? "chevron-down" : "chevron-right"}
@@ -321,7 +288,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                       <div>{renderNestedOptions(item.children)}</div>
                     )}
                 </li>
-              </>
+              </div>
             )
           })}
       </ul>
@@ -333,9 +300,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       <div ref={dropdownRef} className='wrapper'>
         <div className='input_wrapper' onClick={handleInputWrapperClick}>
           <div className='input_inner_container'>
-            {returnedArray.map((item) => (
-              <input type='hidden' name={`${name}[]`} value={item.id} />
-            ))}
+            {returnedArray.length !== 0 && returnAllSelected
+              ? returnedArray.map((item) => (
+                  <input type='hidden' name={`${name}[]`} value={item.id} />
+                ))
+              : null}
 
             {returnedArray.length !== 0 && returnAllSelected
               ? returnedArray.map((item, index) => (

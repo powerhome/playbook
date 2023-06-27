@@ -65,7 +65,7 @@
   ],
 }] %>
 
-  <%= form.multi_level_select :example, props: {id: "with-form-multi-level-select", tree_data: treeData, return_all_selected: true } %>
+  <%= form.multi_level_select :example, props: {id: "with-form-multi-level-select", tree_data: treeData, return_all_selected: true, margin_bottom: "sm" } %>
   <%= form.actions do |action| %>
     <%= action.button props: { type: "submit", text: "Submit", variant: "primary", margin_top: "lg" } %>
   <% end %>   
