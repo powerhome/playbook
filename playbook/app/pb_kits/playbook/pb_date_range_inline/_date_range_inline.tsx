@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 import { globalProps } from "../utilities/globalProps";
 import { buildCss, buildDataProps } from "../utilities/props";
-import DateTime from "../pb_kit/dateTime";
+import { toMonth, toDay, toYear, toIso } from '../pb_kit/dateTime'
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -21,18 +21,18 @@ type DateRangeInlineProps = {
   endDate?: Date;
 };
 
-const dateTimestamp = (dateValue: Date | string, includeYear: boolean) => {
-  const date = new DateTime({ value: dateValue });
+const dateTimestamp = (dateValue: Date, includeYear: boolean) => {
+  const date = dateValue
   if (includeYear) {
-    return `${date.toMonth()} ${date.toDay()}, ${date.toYear()}`;
+    return `${toMonth(date)} ${toDay(date)}, ${toYear(date)}`;
   } else {
-    return `${date.toMonth()} ${date.toDay()}`;
+    return `${toMonth(date)} ${toDay(date)}`;
   }
 };
 
-const dateTimeIso = (dateValue: Date | string) => {
-  const date = new DateTime({ value: dateValue });
-  return date.toIso();
+const dateTimeIso = (dateValue: Date) => {
+  const date = dateValue;
+  return toIso(date);
 };
 
 const DateRangeInline = (props: DateRangeInlineProps) => {
@@ -52,14 +52,17 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
       <>
         {icon && (
           <>
-            <Body color="light" key={Math.random()} tag="span">
-              <Icon
-                className="pb_date_range_inline_icon"
-                dark={dark}
-                fixedWidth
-                icon="calendar-alt"
-                size={size}
+            <Body color="light"
+                key={Math.random()}
                 tag="span"
+            >
+              <Icon
+                  className="pb_date_range_inline_icon"
+                  dark={dark}
+                  fixedWidth
+                  icon="calendar-alt"
+                  size={size}
+                  tag="span"
               />
             </Body>
           </>
@@ -78,7 +81,7 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
 
   const dateRangeClasses = buildCss("pb_date_range_inline_kit", align);
   const dataProps = buildDataProps(data)
-  const renderTime = (date: Date | string) => {
+  const renderTime = (date: Date) => {
     return (
       <time dateTime={dateTimeIso(date)}>
         {dateInCurrentYear() ? (
@@ -92,24 +95,30 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
 
   return (
     <div
-    {...dataProps}
-      className={classnames(dateRangeClasses, globalProps(props), className)}
+        {...dataProps}
+        className={classnames(dateRangeClasses, globalProps(props), className)}
     >
       <div className="pb_date_range_inline_wrapper">
         {size == "xs" && (
           <>
             {iconContent()}
-            <Caption dark={dark} tag="span">
+            <Caption dark={dark}
+                tag="span"
+            >
               {renderTime(startDate)}
             </Caption>
-            <Caption dark={dark} tag="span">
+            <Caption dark={dark}
+                tag="span"
+            >
               <Icon
-                className="pb_date_range_inline_arrow"
-                fixedWidth
-                icon="long-arrow-right"
+                  className="pb_date_range_inline_arrow"
+                  fixedWidth
+                  icon="long-arrow-right"
               />
             </Caption>
-            <Caption dark={dark} tag="span">
+            <Caption dark={dark}
+                tag="span"
+            >
               {renderTime(endDate)}
             </Caption>
           </>
@@ -118,18 +127,25 @@ const DateRangeInline = (props: DateRangeInlineProps) => {
         {size == "sm" && (
           <>
             {iconContent()}
-            <Body dark={dark} tag="span">
+            <Body dark={dark}
+                tag="span"
+            >
               {renderTime(startDate)}
             </Body>
-            <Body color="light" dark={dark} tag="span">
-              <Icon
-                className="pb_date_range_inline_arrow"
+            <Body color="light"
                 dark={dark}
-                fixedWidth
-                icon="long-arrow-right"
+                tag="span"
+            >
+              <Icon
+                  className="pb_date_range_inline_arrow"
+                  dark={dark}
+                  fixedWidth
+                  icon="long-arrow-right"
               />
             </Body>
-            <Body dark={dark} tag="span">
+            <Body dark={dark}
+                tag="span"
+            >
               {renderTime(endDate)}
             </Body>
           </>

@@ -1,10 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
-import { toMonth, toDay, toYear } from '../pb_kit/dateTime'
 
-// import DateTime from '../pb_kit/dateTime'
 import { buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { toMonth, toDay, toYear } from '../pb_kit/dateTime'
 
 import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
@@ -30,7 +29,8 @@ const DateYearStacked = (props: DateYearStackedProps) => {
 
   return (
     <div {...dataProps}
-    className={css}>
+        className={css}
+    >
       <Title
           dark={dark}
           size={4}

@@ -69,9 +69,9 @@ export default class DateTime {
     return this.value.strftime('%P')[0]
   }
 
-  toIso() {
-    return this.value.toISOString()
-  }
+  // toIso() {
+  //   return this.value.toISOString()
+  // }
 
   toTime() {
     const time = this.value.strftime('%I:%M')
@@ -91,23 +91,26 @@ export default class DateTime {
 }
 
 
-export const toMonth = (newDate: any) => {
-    // console.log(date)
+export const toMonth = (newDate: Date): string => {
     const date = new Date(newDate)
     const month = date.toLocaleString("en-US", {month: "short"})
     return month
 }
 
-export const toDay = (newDate: any) => {
-    // console.log(date)
+export const toDay = (newDate: Date): string => {
     const date = new Date(newDate)
     const day = date.toLocaleString("en-US", {day: "numeric"})
     return day
 }
 
-export const toYear = (newDate: any) => {
-    // console.log(date)
+export const toYear = (newDate: Date): string => {
     const date = new Date(newDate)
     const year = date.toLocaleString("en-US", {year: "numeric",})
     return year
+}
+
+export const toIso = (newDate: Date): string => {
+    const date = new Date(newDate)
+    const isoString = date.toISOString()
+    return isoString
 }
