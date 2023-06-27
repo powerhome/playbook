@@ -5,10 +5,10 @@ const PhoneNumberInputAccessInputElement = (props) => {
     // 1. Create a ref - this accesses the kit's input element.
     const ref = useRef()
 
-    // 2. Add any event listener to ref.current.inputNode() inside a useEffect hook.
+    // 2. Add any event listener to ref.current.inputNode() inside a useEffect hook and trigger it once.
     useEffect(() => {
         ref.current.inputNode().addEventListener("click", () => alert("Clicked!"))
-    })
+    }, [])
 
     // 3. Pass the ref to the ref prop.
     return (
