@@ -9,8 +9,6 @@ module Playbook
                        default: []
       prop :return_all_selected, type: Playbook::Props::Boolean,
                                  default: false
-      prop :return_complete_data, type: Playbook::Props::Boolean,
-                                  default: false
 
       def classname
         generate_classname("pb_multi_level_select")
@@ -22,7 +20,6 @@ module Playbook
           name: name,
           treeData: tree_data,
           returnAllSelected: return_all_selected,
-          returnCompleteData: return_complete_data,
         }
       end
     end
