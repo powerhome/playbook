@@ -1,7 +1,7 @@
 @mixin line_height_tiken_visual {
   font-size: 28px;
   letter-spacing: -0.03em;
-  font-weight: 100;
+  font-weight: $lighter;
   color: #242B42;
   margin: 0;
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif;

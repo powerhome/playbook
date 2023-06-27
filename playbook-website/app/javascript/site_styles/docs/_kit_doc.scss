@@ -1,6 +1,7 @@
 @import "playbook-ui/dist/tokens/colors";
 @import "playbook-ui/dist/tokens/spacing";
 
+
 .pb--doc {
   margin-bottom: 20px;
   border-radius: 6px;
@@ -32,7 +33,7 @@
     justify-content: center;
     align-items: center;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: $bold;
   }
 
   .pb--copy-code {
@@ -100,7 +101,7 @@
         }
 
         &.active {
-          font-weight: 600;
+          font-weight: $bold;
 
           &::after {
             background-color: $primary_action;
