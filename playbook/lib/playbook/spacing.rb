@@ -61,11 +61,10 @@ module Playbook
       selected_props = spacing_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 
-      # responsive = selected_props.present? && try(selected_props.first).is_a?(::Hash)
+      responsive = selected_props.present? && try(selected_props.first).is_a?(::Hash)
       css = ""
       selected_props.each do |prop|
         spacing_value = send(prop)
-        responsive = prop.is_a?(::Hash)
         prefix = spacing_options[prop]
         if responsive
           spacing_value.each do |key, value|

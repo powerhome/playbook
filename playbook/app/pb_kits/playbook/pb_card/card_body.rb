@@ -7,9 +7,9 @@ module Playbook
         generate_classname("pb_card_body_kit", flex_direction, justify_content, flex_wrap, justify_self, align_items, align_content, align_self, flex, flex_grow, flex_shrink, order, separator: " ")
       end
 
-      # def body_padding
-      #   "" if padding.present?
-      # end
+      def body_padding
+        "" if padding.present?
+      end
 
       def body_flex_direction
         if flex_direction.present?
