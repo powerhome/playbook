@@ -37,9 +37,9 @@ export default class DateTime {
   //   return this.value.toLocaleString("en-US", {month: "short"})
   // }
 
-  toMonthNum() {
-    return this.value.strftime('%-m')
-  }
+  // toMonthNum() {
+  //   return this.value.strftime('%-m')
+  // }
 
   toMonthFull() {
     return this.value.strftime('%B')
@@ -113,4 +113,10 @@ export const toIso = (newDate: Date): string => {
     const date = new Date(newDate)
     const isoString = date.toISOString()
     return isoString
+}
+
+export const toMonthNum = (newDate: Date): string => {
+    const date = new Date(newDate)
+    const month = date.toLocaleString("en-US", {month: "numeric"})
+    return month
 }

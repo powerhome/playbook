@@ -1,8 +1,8 @@
 import React from "react";
 import classnames from "classnames";
-import DateTime from "../pb_kit/dateTime";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
+import { toMonthNum, toDay } from '../pb_kit/dateTime'
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -26,9 +26,9 @@ type LabelValueProps = {
   title?: string;
 };
 
-const dateString = (value: DateTime) => {
-  const month = value.toMonthNum();
-  const day = value.toDay();
+const dateString = (value: Date) => {
+  const month = toMonthNum(value);
+  const day = toDay(value);
 
   return ` · ${month}/${day}`;
 };
@@ -52,7 +52,7 @@ const LabelValue = (props: LabelValueProps) => {
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
-  const formattedDate = new DateTime({ value: date });
+  const formattedDate = date;
   const variantClass = variant === "details" ? "details" : "";
   const classes = classnames(
     buildCss("pb_label_value_kit", variantClass),
@@ -62,59 +62,81 @@ const LabelValue = (props: LabelValueProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      id={id}
-      title={title}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+        title={title}
     >
-      <Caption dark={dark} text={label} />
+      <Caption dark={dark}
+          text={label}
+      />
       {variant === "details" ? (
-        <Flex inline vertical="center">
+        <Flex inline
+            vertical="center"
+        >
           {icon && (
-            <Body color="light" dark={dark} marginRight="xs">
-              <Icon dark={dark} fixedWidth icon={icon} />
+            <Body color="light"
+                dark={dark}
+                marginRight="xs"
+            >
+              <Icon dark={dark}
+                  fixedWidth
+                  icon={icon}
+              />
             </Body>
           )}
           {description && (
             <Body
-              color="light"
-              dark={dark}
-              marginRight="xs"
-              text={description}
+                color="light"
+                dark={dark}
+                marginRight="xs"
+                text={description}
             />
           )}
           {active === true ? (
-            <Flex inline vertical="center">
+            <Flex inline
+                vertical="center"
+            >
               {title && (
-                <Title dark={dark} size={4} text={title} variant="link" />
+                <Title dark={dark}
+                    size={4}
+                    text={title}
+                    variant="link"
+                />
               )}
               {date && (
                 <Title
-                  dark={dark}
-                  marginLeft="xs"
-                  size={4}
-                  text={" " + dateString(formattedDate)}
-                  variant="link"
+                    dark={dark}
+                    marginLeft="xs"
+                    size={4}
+                    text={" " + dateString(formattedDate)}
+                    variant="link"
                 />
               )}
             </Flex>
           ) : (
             <>
-              {title && <Title dark={dark} size={4} text={title} />}
+              {title && <Title dark={dark}
+                  size={4}
+                  text={title}
+                        />
+              }
               {date && (
                 <Title
-                  dark={dark}
-                  marginLeft="xs"
-                  size={4}
-                  text={" " + dateString(formattedDate)}
+                    dark={dark}
+                    marginLeft="xs"
+                    size={4}
+                    text={" " + dateString(formattedDate)}
                 />
               )}
             </>
           )}
         </Flex>
       ) : (
-        <Body dark={dark} text={value} />
+        <Body dark={dark}
+            text={value}
+        />
       )}
     </div>
   );
