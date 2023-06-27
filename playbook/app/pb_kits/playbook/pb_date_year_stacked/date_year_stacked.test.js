@@ -21,8 +21,7 @@ describe("DateYearStacked Kit", () => {
     render(
       <DateYearStacked 
           data={{ testid: testId }} 
-          date={new Date(Date.now())}
-      />
+          date={new Date(Date.now())} />
     );
 
     const kit = screen.getByTestId(testId);
@@ -33,8 +32,7 @@ describe("DateYearStacked Kit", () => {
     render(
       <DateYearStacked 
           data={{ testid: testId }} 
-          date={new Date(Date.now())}
-      />
+          date={new Date(Date.now())} />
     );
 
     const kit = screen.getByTestId(testId);
@@ -46,8 +44,7 @@ describe("DateYearStacked Kit", () => {
     render(
       <DateYearStacked 
           data={{ testid: testId }} 
-          date={new Date(Date.now())}
-      />
+          date={new Date(Date.now())} />
     );
 
     const kit = screen.getByTestId(testId);

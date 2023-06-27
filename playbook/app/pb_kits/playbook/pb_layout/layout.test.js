@@ -16,8 +16,7 @@ test("render all color variants", () => {
   testValues.forEach((variant) => {
     const { getByTestId } = render(
       <LayoutTest data={{ testid: `test-${variant}` }}
-          variant={variant}
-      />
+          variant={variant} />
     )
     expect(getByTestId(`test-${variant}`)).toHaveClass(
       `pb_layout_kit_sidebar_size_md_left_${
@@ -34,8 +33,7 @@ test("render transparent class", () => {
 
   const { getByTestId } = render(
     <LayoutTest data={{ testid: `test-${id}` }}
-        variant={id}
-    />
+        variant={id} />
   )
   expect(getByTestId(`test-${id}`)).toHaveClass(
     `pb_layout_kit_sidebar_size_md_left_${id}`
@@ -49,8 +47,7 @@ test("render all sizes variants", () => {
   testValues.forEach((size) => {
     const { getByTestId } = render(
       <LayoutTest data={{ testid: `test-${size}` }}
-          size={size}
-      />
+          size={size} />
     )
     expect(getByTestId(`test-${size}`)).toHaveClass(
       `pb_layout_kit_sidebar_size_${size}_left_light`
@@ -87,8 +84,7 @@ test("render all layout variants", () => {
   testValues.forEach(({ layout, expected }) => {
     const { getByTestId } = render(
       <Layout data={{ testid: `test-${layout}` }}
-          layout={layout}
-      >
+          layout={layout}>
         <Layout.Body>
           <Card>{"Card content"}</Card>
         </Layout.Body>

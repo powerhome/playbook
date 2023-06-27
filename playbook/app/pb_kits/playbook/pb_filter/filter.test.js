@@ -46,15 +46,12 @@ function FilterTest(props) {
           {...props}
       />
       <Flex spacing="between"
-          {...props}
-      >
+          {...props}>
         <Button text="Apply"
-            {...props}
-        />
+            {...props} />
         <Button text="Clear"
             variant="secondary"
-            {...props}
-        />
+            {...props} />
       </Flex>
     </Filter>
   );

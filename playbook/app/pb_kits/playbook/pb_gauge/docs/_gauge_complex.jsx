@@ -74,7 +74,7 @@ const GaugeComplex = (props) => (
               <Body
                   color="light"
                   text="% Abandoned"
-              />
+               />
             <Flex wrap>
               <FlexItem
                   fixedSize="150px"

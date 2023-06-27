@@ -9,8 +9,7 @@ test("should render a div with a button child", () => {
     <FormGroup>
       <Button 
           data={{ testid: testId }} 
-          text={"some text"}
-      />
+          text={"some text"} />
     </FormGroup>
   )
 

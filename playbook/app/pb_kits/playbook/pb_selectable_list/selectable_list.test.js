@@ -8,8 +8,7 @@ const SelectableListCheckbox = () => {
     return (
       <SelectableList 
           data={{ testid: testId }} 
-          variant="checkbox"
-      >
+          variant="checkbox">
         <SelectableList.Item
             label="Mild"
             name="checkbox-name-1"
@@ -29,8 +28,7 @@ const SelectableListRadio = () => {
     return (
         <SelectableList
             data={{ testid: testId }}
-            variant="radio"
-        >
+            variant="radio">
         <SelectableList.Item
             label="Small"
             name="radio"

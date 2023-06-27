@@ -3,7 +3,6 @@
 require "will_paginate"
 require "playbook/pagination_renderer"
 require "will_paginate/array"
-require "pry"
 
 class PagesController < ApplicationController
   before_action :set_js, only: %i[visual_guidelines]
