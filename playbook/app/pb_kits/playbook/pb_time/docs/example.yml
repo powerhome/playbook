@@ -6,6 +6,7 @@ examples:
   - time_timestamp: Timestamp Values
   - time_timezone: Handling Timezones
   - time_align: Alignment
+  - time_unstyled: Unstyled
 
   react:
   - time_default: Default
@@ -13,3 +14,4 @@ examples:
   - time_timestamp: Timestamp Values
   - time_timezone: Handling Timezones
   - time_align: Alignment
+  - time_unstyled: Unstyled
