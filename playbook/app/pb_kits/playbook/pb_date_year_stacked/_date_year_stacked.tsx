@@ -1,7 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
+import { toMonth, toDay, toYear } from '../pb_kit/dateTime'
 
-import DateTime from '../pb_kit/dateTime'
+// import DateTime from '../pb_kit/dateTime'
 import { buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
@@ -13,13 +14,13 @@ type DateYearStackedProps = {
   className?: string | string[],
   dark?: boolean,
   data?: string,
-  date: string,
+  date: Date,
   id?: string,
 }
 
 const DateYearStacked = (props: DateYearStackedProps) => {
   const { align = 'left', className, dark = false, date, data={} } = props
-  const dateTimestamp = new DateTime({ value: date })
+  const dateTimestamp = date
   const css = classnames(
     buildCss('pb_date_year_stacked', align),
     globalProps(props),
@@ -33,11 +34,9 @@ const DateYearStacked = (props: DateYearStackedProps) => {
       <Title
           dark={dark}
           size={4}
-          text={`${dateTimestamp.toDay()} ${dateTimestamp
-          .toMonth()
-          .toUpperCase()}`}
+          text={`${toDay(dateTimestamp)} ${toMonth(dateTimestamp).toUpperCase()}`}
       />
-      <Body color="light">{dateTimestamp.toYear()}</Body>
+      <Body color="light">{toYear(dateTimestamp)}</Body>
     </div>
   )
 }

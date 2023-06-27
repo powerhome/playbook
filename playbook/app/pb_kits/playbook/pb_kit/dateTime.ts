@@ -28,13 +28,14 @@ export default class DateTime {
     return this.value.strftime(format)
   }
 
-  toYear() {
-    return this.value.strftime('%Y')
-  }
+  // toYear() {
+  //   return this.value.strftime('%Y')
+  // }
 
-  toMonth() {
-    return this.value.strftime('%b')
-  }
+  // toMonth() {
+  //   // return this.value.strftime('%b')
+  //   return this.value.toLocaleString("en-US", {month: "short"})
+  // }
 
   toMonthNum() {
     return this.value.strftime('%-m')
@@ -44,9 +45,9 @@ export default class DateTime {
     return this.value.strftime('%B')
   }
 
-  toDay() {
-    return this.value.strftime('%e')
-  }
+  // toDay() {
+  //   return this.value.strftime('%e')
+  // }
 
   toDayAbbr() {
     return ABBR_DAYS[this.value.day()]
@@ -87,4 +88,26 @@ export default class DateTime {
   toTimeWithMeridian() {
     return this.toTime() + this.toMeridian()
   }
+}
+
+
+export const toMonth = (newDate: any) => {
+    // console.log(date)
+    const date = new Date(newDate)
+    const month = date.toLocaleString("en-US", {month: "short"})
+    return month
+}
+
+export const toDay = (newDate: any) => {
+    // console.log(date)
+    const date = new Date(newDate)
+    const day = date.toLocaleString("en-US", {day: "numeric"})
+    return day
+}
+
+export const toYear = (newDate: any) => {
+    // console.log(date)
+    const date = new Date(newDate)
+    const year = date.toLocaleString("en-US", {year: "numeric",})
+    return year
 }
