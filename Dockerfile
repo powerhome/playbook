@@ -31,8 +31,6 @@ RUN apt-get update -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN bundle config --global silence_root_warning 1
-RUN bundle config --global path $BUNDLE_TO
-RUN bundle config --global frozen true
 
 # Setup service
 COPY --link playbook-website/services/puma.sh /home/app/src/playbook-website/services/puma.sh
@@ -79,7 +77,6 @@ RUN --mount=type=secret,id=yarnenv,required cd playbook-website; env $(cat /run/
 
 FROM base AS prod
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
-COPY --from=rubydeps --link /home/app/src/playbook-website/.bundle /home/app/src/playbook-website/.bundle
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
 COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
 COPY --link --from=release /home/app/src/playbook/dist /home/app/src/playbook/dist
