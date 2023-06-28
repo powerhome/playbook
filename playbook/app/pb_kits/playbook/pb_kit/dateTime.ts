@@ -127,3 +127,18 @@ export const toWeekday = (newDate: Date): string => {
     const date = new Date(newDate)
     return days[date.getUTCDay()]
 }
+
+export const toMeridiem = (newDate: Date): string => {
+    const date = new Date(newDate)
+    return date.toLocaleString(undefined, { hour12: true }).slice(-2).charAt(0);
+}
+
+export const toTimeNew = (newDate: Date): string => {
+    const date = new Date(newDate)
+    return date.toLocaleTimeString(undefined, {timeStyle: "short"}).slice(0, 4);
+}
+
+export const toTimeZoneNew = (newDate: Date, timeZone: string): string => {
+    const date = new Date(newDate)
+    return date.toLocaleString(undefined, {timeZone, timeZoneName: "short"});
+}
