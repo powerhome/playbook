@@ -45,7 +45,7 @@ const DateStacked = (props: DateStackedProps) => {
     className
   );
 
-  const currentYear = new Date().getFullYear().toString();
+  const currentYear = new Date().getFullYear()
   const dateTimestamp = date;
   const inputYear = toYear(dateTimestamp);
   const dataProps = buildDataProps(data)
@@ -61,7 +61,7 @@ const DateStacked = (props: DateStackedProps) => {
             <Title
                 dark={dark}
                 size={sizes[size]}
-                text={toDay(dateTimestamp)}
+                text={toDay(dateTimestamp).toString()}
             />
           </div>
           {currentYear != inputYear && <Caption size="xs">{inputYear}</Caption>}
@@ -81,7 +81,7 @@ const DateStacked = (props: DateStackedProps) => {
                   bold
                   dark={dark}
                   size="4"
-                  text={toDay(dateTimestamp)}
+                  text={toDay(dateTimestamp).toString()}
               />
               {currentYear != inputYear && <Title size="4">{inputYear}</Title>}
             </div>

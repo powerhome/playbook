@@ -33,8 +33,8 @@ export default class DateTime {
   // }
 
   // toMonth() {
-  //   // return this.value.strftime('%b')
-  //   return this.value.toLocaleString("en-US", {month: "short"})
+  //   return this.value.strftime('%b')
+  //   // return this.value.toLocaleString("en-US", {month: "short"})
   // }
 
   // toMonthNum() {
@@ -46,6 +46,9 @@ export default class DateTime {
   }
 
   // toDay() {
+    // const date = new Date(newDate)
+    // const day = date.toLocaleString("en-US", {day: "numeric"})
+    // return day
   //   return this.value.strftime('%e')
   // }
 
@@ -53,9 +56,9 @@ export default class DateTime {
     return ABBR_DAYS[this.value.day()]
   }
 
-  toWeekday() {
-    return this.value.strftime('%a')
-  }
+  // toWeekday() {
+  //   return this.value.strftime('%a')
+  // }
 
   toHour() {
     return this.value.strftime('%l')
@@ -90,23 +93,23 @@ export default class DateTime {
   }
 }
 
+const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 export const toMonth = (newDate: Date): string => {
     const date = new Date(newDate)
-    const month = date.toLocaleString("en-US", {month: "short"})
-    return month
+    return months[date.getUTCMonth()]
 }
 
-export const toDay = (newDate: Date): string => {
+export const toDay = (newDate: Date): number => {
     const date = new Date(newDate)
-    const day = date.toLocaleString("en-US", {day: "numeric"})
-    return day
+    return date.getUTCDate()
 }
 
-export const toYear = (newDate: Date): string => {
+export const toYear = (newDate: Date): number => {
     const date = new Date(newDate)
-    const year = date.toLocaleString("en-US", {year: "numeric",})
-    return year
+    return date.getUTCFullYear()
 }
 
 export const toIso = (newDate: Date): string => {
@@ -115,8 +118,12 @@ export const toIso = (newDate: Date): string => {
     return isoString
 }
 
-export const toMonthNum = (newDate: Date): string => {
+export const toMonthNum = (newDate: Date): number => {
     const date = new Date(newDate)
-    const month = date.toLocaleString("en-US", {month: "numeric"})
-    return month
+    return date.getUTCMonth() +1
+}
+
+export const toWeekday = (newDate: Date): string => {
+    const date = new Date(newDate)
+    return days[date.getUTCDay()]
 }

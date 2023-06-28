@@ -39,7 +39,7 @@
   /* Generic */
   .highlight .k {
     color: #6ab825;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Keyword */
   .highlight .l {
@@ -74,7 +74,7 @@
   /* Comment.Multiline */
   .highlight .cp {
     color: #5bb3ff;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Comment.Preproc */
   .highlight .cpf {
@@ -89,7 +89,7 @@
   /* Comment.Single */
   .highlight .cs {
     color: #e50808;
-    font-weight: bold;
+    font-weight: $bolder;
     background-color: #520000
   }
   /* Comment.Special */
@@ -108,7 +108,7 @@
   /* Generic.Error */
   .highlight .gh {
     color: #ffffff;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Generic.Heading */
   .highlight .gi {
@@ -125,7 +125,7 @@
   /* Generic.Prompt */
   .highlight .gs {
     color: #d0d0d0;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Generic.Strong */
   .highlight .gu {
@@ -139,17 +139,17 @@
   /* Generic.Traceback */
   .highlight .kc {
     color: #6ab825;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Keyword.Constant */
   .highlight .kd {
     color: #6ab825;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Keyword.Declaration */
   .highlight .kn {
     color: #6ab825;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Keyword.Namespace */
   .highlight .kp {
@@ -158,12 +158,12 @@
   /* Keyword.Pseudo */
   .highlight .kr {
     color: #6ab825;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Keyword.Reserved */
   .highlight .kt {
     color: #6ab825;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Keyword.Type */
   .highlight .ld {
@@ -230,7 +230,7 @@
   /* Name.Property */
   .highlight .nt {
     color: #6ab825;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Name.Tag */
   .highlight .nv {
@@ -239,7 +239,7 @@
   /* Name.Variable */
   .highlight .ow {
     color: #6ab825;
-    font-weight: bold
+    font-weight: $bolder;
   }
   /* Operator.Word */
   .highlight .w {
@@ -367,7 +367,7 @@
   }
   .highlight .cp {
     color: #b2fd6d;
-    font-weight: bold;
+    font-weight: $bolder;
     font-style: italic;
   }
   .highlight .err {
@@ -382,7 +382,7 @@
   .highlight .kd,
   .highlight .kv {
     color: #f6dd62;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .o,
   .highlight .ow {
@@ -402,7 +402,7 @@
     font-style: italic;
   }
   .highlight .gs {
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .gt {
     color: #dee5e7;
@@ -410,63 +410,63 @@
   }
   .highlight .kc {
     color: #f696db;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .kn {
     color: #ffb000;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .kp {
     color: #ffb000;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .kr {
     color: #ffb000;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .gh {
     color: #ffb000;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .gu {
     color: #ffb000;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .kt {
     color: #b2fd6d;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .no {
     color: #b2fd6d;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .nc {
     color: #b2fd6d;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .nd {
     color: #b2fd6d;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .nn {
     color: #b2fd6d;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .bp {
     color: #b2fd6d;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .ne {
     color: #b2fd6d;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .nl {
     color: #ffb000;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .nt {
     color: #ffb000;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .m,
   .highlight .mf,
@@ -477,15 +477,15 @@
   .highlight .mb,
   .highlight .mx {
     color: #f696db;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .ld {
     color: #f696db;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .ss {
     color: #f696db;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .s,
   .highlight .sb,
@@ -496,26 +496,26 @@
   .highlight .sr,
   .highlight .s1 {
     color: #fff0a6;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .se {
     color: #4df4ff;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .sc {
     color: #4df4ff;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .si {
     color: #4df4ff;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .nb {
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .ni {
     color: #999999;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .highlight .w {
     color: #BBBBBB;
@@ -534,7 +534,7 @@
   .highlight .vg,
   .highlight .vi {
     color: #a8e1fe;
-    font-weight: bold;
+    font-weight: $bolder;
   }
   .codeSnippetGuidelines {
     overflow-x: auto;
@@ -556,7 +556,7 @@
   height: 100vh;
   &-Editor {
     background: $bg_dark;
-    font-weight: 700;
+    font-weight: $bolder;
     padding-top: $space_lg;
     padding-left: $space_md;
     flex: 1;
