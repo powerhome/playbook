@@ -5,6 +5,8 @@ module Playbook
     class PhoneNumberInput < Playbook::KitBase
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
+      prop :required, type: Playbook::Props::Boolean,
+                      default: false
       prop :initial_country, type: Playbook::Props::String,
                              default: ""
       prop :label, type: Playbook::Props::String,
@@ -15,6 +17,8 @@ module Playbook
                             default: []
       prop :preferred_countries, type: Playbook::Props::Array,
                                  default: []
+      prop :error, type: Playbook::Props::String,
+                   default: ""
       prop :value, type: Playbook::Props::String,
                    default: ""
 
@@ -27,11 +31,13 @@ module Playbook
           id: id,
           dark: dark,
           disabled: disabled,
+          error: error,
           initialCountry: initial_country,
           label: label,
           name: name,
           onlyCountries: only_countries,
           preferredCountries: preferred_countries,
+          required: required,
           value: value,
         }
       end
