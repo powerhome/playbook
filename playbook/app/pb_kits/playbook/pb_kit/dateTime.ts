@@ -1,4 +1,3 @@
-
 import moment, { Moment } from 'moment'
 import 'moment-strftime'
 import 'moment-timezone'
@@ -68,29 +67,29 @@ export default class DateTime {
     return this.value.strftime('%M')
   }
 
-  toMeridian() {
-    return this.value.strftime('%P')[0]
-  }
+  // toMeridian() {
+  //   return this.value.strftime('%P')[0]
+  // }
 
   // toIso() {
   //   return this.value.toISOString()
   // }
 
-  toTime() {
-    const time = this.value.strftime('%I:%M')
+  // toTime() {
+  //   const time = this.value.strftime('%I:%M')
 
-    // strftime adds a leading 0 on single hour times. ie 08:31.
-    // this removes that 0 to match the rails kit.
-    return time.charAt() === '0' ? time.slice(1) : time
-  }
+  //   // strftime adds a leading 0 on single hour times. ie 08:31.
+  //   // this removes that 0 to match the rails kit.
+  //   return time.charAt() === '0' ? time.slice(1) : time
+  // }
 
-  toTimezone() {
-    return this.value.strftime('%Z')
-  }
+  // toTimezone() {
+  //   return this.value.strftime('%Z')
+  // }
 
-  toTimeWithMeridian() {
-    return this.toTime() + this.toMeridian()
-  }
+  // toTimeWithMeridian() {
+  //   return this.toTime() + this.toMeridian()
+  // }
 }
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -128,19 +127,19 @@ export const toWeekday = (newDate: Date): string => {
     return days[date.getUTCDay()]
 }
 
-export const toMeridiem = (newDate: Date): string => {
+export const toMeridiem = (newDate: Date, timeZone: string): string => {
     const date = new Date(newDate)
-    return date.toLocaleString(undefined, { hour12: true }).slice(-2).charAt(0);
+    return date.toLocaleString(undefined, {timeZone, hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
 }
 
-export const toTimeNew = (newDate: Date): string => {
+export const toTime = (newDate: Date, timeZone: string): string => {
     const date = new Date(newDate)
-    return date.toLocaleTimeString(undefined, {timeStyle: "short"}).slice(0, 4);
+    return date.toLocaleTimeString(undefined, {timeZone, timeStyle: "short"}).split(' ')[0];
 }
 
-export const toTimeZoneNew = (newDate: Date, timeZone: string): string => {
+export const toTimeZone = (newDate: Date, timeZone: string): string => {
     const date = new Date(newDate)
-    return date.toLocaleString(undefined, {timeZone, timeZoneName: "short"});
+    return date.toLocaleString(undefined, {timeZone, timeZoneName: "short"}).split(' ')[3];
 }
 
 export const toDayAbbr = (newDate: Date): string => {
@@ -155,4 +154,9 @@ export const toCustomFormat = (newDate: Date, format = 'month_day'): string => {
   } else {
     return `${date.toLocaleString(undefined, {month: "short"})} ${toDay(date)}`
   }
+}
+
+export const toTimeWithMeridianNew = (newDate: Date, timeZone: string): string => {
+  const date = new Date(newDate)
+  return `${toTime(date, timeZone)}${toMeridiem(date, timeZone)}`;
 }
