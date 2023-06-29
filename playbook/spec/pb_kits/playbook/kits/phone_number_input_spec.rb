@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_popover/popover"
+require_relative "../../../../app/pb_kits/playbook/pb_phone_number_input/phone_number_input"
 
 RSpec.describe Playbook::PbPhoneNumberInput do
   subject { Playbook::PbPhoneNumberInput::PhoneNumberInput }
