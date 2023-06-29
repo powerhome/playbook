@@ -1,13 +1,11 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (12.24.0)
+    playbook_ui (12.27.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
       react-rails (= 2.6.1)
-      redcarpet (~> 3.6)
-      rouge (~> 3.15)
       view_component (= 2.55.0)
       webpacker-react (~> 0.3.2)
 
@@ -244,7 +242,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     thor (1.2.1)
-    tilt (2.1.0)
+    tilt (2.2.0)
     timeout (0.3.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -296,6 +294,8 @@ DEPENDENCIES
   psych (< 4)
   puma (~> 5.6)
   rails (~> 6.1.6.1)
+  redcarpet (~> 3.6)
+  rouge (~> 3.15)
   rubocop (= 1.36.0)
   rubocop-performance (~> 1.15.0)
   selenium-webdriver

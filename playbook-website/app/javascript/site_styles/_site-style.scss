@@ -3,6 +3,7 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/border_radius";
 @import "playbook-ui/dist/tokens/shadows";
+@import "playbook-ui/dist/tokens/typography";
 
 $selector: ".pb--page";
 $nav_breakpoint: breakpoint("lg");
@@ -12,10 +13,6 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  &.visual_guidelines,
-  &.kits {
-    overflow-y: hidden;
-  }
 }
 
 .pb--page {
@@ -93,15 +90,25 @@ body {
     @include break_at($nav_breakpoint) {
       grid-template-columns: auto !important;
     }
+    &.no-sidebar {
+      grid-template-columns: 0 auto !important;
+      @include break_at($nav_breakpoint) {
+        grid-template-columns: auto !important;
+      }
+    }
     &--main {
       flex-grow: 1;
-      padding: 0 60px 40px;
       height: calc(100vh - 89px);
       overflow: auto;
-      @include break_at($nav_breakpoint) {
-        padding: $space-lg $space-xl;
+      .pb--kits,
+      .pb--kit-show,
+      .kit-show-wrapper {
+        padding: 0 ($space_xl + $space_md) $space_xl;
+        @include break_at($nav_breakpoint) {
+          padding: $space-lg;
+        }
       }
-      &.dark{
+      &.dark {
         background: #0a0527;
       }
       &.height-override {
@@ -184,16 +191,6 @@ body {
     }
   }
 
-  &--sideNav.non-kit {
-    background-color: $white;
-    display: none;
-    height: auto !important;
-    overflow: hidden;
-    @include break_at($nav_breakpoint) {
-      display: block;
-    }
-  }
-
   &--sideNav {
     height: calc(100vh - 89px);
     overflow: auto;
@@ -223,6 +220,9 @@ body {
 .h100 {
   height: 100%;
 }
+.minw0 {
+  min-width: 0;
+}
 
 #toggle-modes {
   display: flex;
@@ -232,7 +232,6 @@ body {
 .pb--kit-type-nav {
   margin: 20px 0 30px;
   line-height: 34px;
-  border-bottom: 2px solid rgba($border_light, 0.6);
 
   &.sample {
     margin: 0;
@@ -244,7 +243,7 @@ body {
     padding: 0 10px;
     line-height: 34px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: $regular;
     display: inline-block;
     position: relative;
 
@@ -261,7 +260,7 @@ body {
     }
 
     &.active {
-      font-weight: 600;
+      font-weight: $bold;
 
       &::after {
         background: $primary;

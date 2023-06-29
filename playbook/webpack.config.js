@@ -42,6 +42,16 @@ const COPY_PLUGIN = new CopyPlugin({
     {
       from: `${WEBSITE}/config/menu.yml`,
       to:`${DIST_PATH}/`
+    },
+    // Copy Doc Display Helper Files
+    {
+      from: `${WEBSITE}/app/components/playbook/pb_docs`,
+      to:`${DIST_PATH}/app/components/playbook/pb_docs`
+    },
+    // Copy Doc Helper
+    {
+      from: `${WEBSITE}/lib/pb_doc_helper.rb`,
+      to:`${DIST_PATH}/`
     }
   ],
   options: {

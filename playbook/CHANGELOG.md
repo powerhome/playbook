@@ -1,8 +1,87 @@
+# An Easier Way to Display Structured Data: The MultiLevelSelect kit!
+##### June 28, 2023
+![12-27-0](https://github.com/powerhome/playbook/assets/9158723/d385bcb8-a279-4240-a47e-c91120c7e22b)
+
+We're excited to announce the release of our Multi Level Select kit for Rails and React. With [this zero-dependency component](https://playbook.powerapp.cloud/kits/multi_level_select/react), developers can easily add data to complex forms, bringing effortless navigation to any application. 
+
+[12.27.0](https://github.com/powerhome/playbook/tree/12.27.0) full list of changes:
 
 
-## [12.24.0](https://github.com/powerhome/playbook/tree/12.24.0) (2023-05-26)
+**Kit Enhancements:**
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.23.0...12.24.0)
+- Bold default for Title 3 [\#2598](https://github.com/powerhome/playbook/pull/2598) ([nickamantia](https://github.com/nickamantia))
+- MultiSelect Rails [\#2590](https://github.com/powerhome/playbook/pull/2590) ([jasperfurniss](https://github.com/jasperfurniss))
+- Phone Number Kit Validation [\#2582](https://github.com/powerhome/playbook/pull/2582) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Improvements:**
+
+- Add CSS for Changelog Dates [\#2616](https://github.com/powerhome/playbook/pull/2616) ([gavhuang](https://github.com/gavhuang))
+- Font weight tokens updates [\#2609](https://github.com/powerhome/playbook/pull/2609) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.26.1...12.27.0)
+
+# Detail Kit Unleashed: Supercharge Data Display in Your UI
+##### June 22, 2023
+
+![12-26-0](https://github.com/powerhome/playbook/assets/73710701/2daca1f7-8d62-4f78-97e9-465767566ee1)
+
+Need to display a wealth of information without cluttering your UI? Look no further than our brand-new Detail Kit! Designed specifically for showcasing hierarchical relationships of text and maintaining clarity in data-rich layouts, Detail is your go-to solution for tables, charts, and data-heavy UI.
+
+[12.26.1](https://github.com/powerhome/playbook/tree/12.26.0) full list of changes:
+
+**Kit Enhancements:**
+
+- MultiLevelSelect Refactor to Remove Third Party Library [\#2578](https://github.com/powerhome/playbook/pull/2578) ([nidaqg](https://github.com/nidaqg))
+
+**New Kits:**
+
+- Detail Kit [\#2596](https://github.com/powerhome/playbook/pull/2596) ([gavhuang](https://github.com/gavhuang))
+
+**Improvements:**
+
+- Kit Mashup Page for Handoffs [\#2583](https://github.com/powerhome/playbook/pull/2583) ([nickamantia](https://github.com/nickamantia))
+- Correct Broken Swift Markdown Docs [\#2600](https://github.com/powerhome/playbook/pull/2600) ([jasoncypret](~https://github.com/jasoncypret))
+- Titleize docs Page Titles [\#2594](https://github.com/powerhome/playbook/pull/2594) ([jasoncypret](https://github.com/jasoncypret))
+- Bump ci-kubed@v6.7.0 [\#2593](https://github.com/powerhome/playbook/pull/2593) ([mfilipe](https://github.com/mfilipe))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.25.0...12.26.0)
+
+# Styling typography just got easier!
+##### June 9, 2023
+
+![12 25 0](https://github.com/powerhome/playbook/assets/73710701/6db5b3e0-f499-446d-965a-0e00b0c31931)
+
+Sometimes you don't need all the styles that ship with the Date kit.
+We have added a simple boolean prop called "unstyled" that puts control in your hands.
+You can now wrap our Date kit with any of our typography kits (Title, Body, Caption, etc) and the date kit will inherit that component's styles! 🎉
+
+[12.25.0](https://github.com/powerhome/playbook/tree/12.25.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Unstyled Variant for Date and Time Kits [\#2592](https://github.com/powerhome/playbook/pull/2592) ([gavhuang](https://github.com/gavhuang))
+- Bold Option for Title 3 [\#2579](https://github.com/powerhome/playbook/pull/2579) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Changelog Improvements [\#2591](https://github.com/powerhome/playbook/pull/2591) ([jasoncypret](https://github.com/jasoncypret))
+- Separation of Markdown & PBDocs Dependencies from Playbook Library [\#2527](https://github.com/powerhome/playbook/pull/2527) ([jasoncypret](https://github.com/jasoncypret))
+
+# Responsive Components in Rapid Time: Introducing Global Responsive Spacing Props for React and Rails Components.
+##### May 26, 2023
+
+![titleboldandresponsivespacing](https://github.com/powerhome/playbook/assets/9158723/9741a86c-5439-4081-b197-0101079c8575)
+
+With all components, you can specify any of our spacing props values at certain screen sizes. For example, let's say I wanted the Badge component to have a small padding on phones, and a medium size padding on medium screens and higher. It's as easy as this:
+
+```jsx
+<Badge padding={{ xs: "sm", md: "md"  }} />
+```
+
+Give it a try and let us know what you think!
+
+
+[12.24.0](https://github.com/powerhome/playbook/tree/12.24.0) full list of changes:
 
 **Kit Enhancements:**
 - Title 2 Defaults to Bold [\#2559](https://github.com/powerhome/playbook/pull/2559) ([jasperfurniss](https://github.com/jasperfurniss))
@@ -12,7 +91,7 @@
 - Responsive Spacing global prop [\#2563](https://github.com/powerhome/playbook/pull/2563) ([nickamantia](https://github.com/nickamantia))
 - Creating an example Swift kit doc [\#2550](https://github.com/powerhome/playbook/pull/2550) ([carloslimasd](https://github.com/carloslimasd))
 
-
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.23.0...12.24.0)
 
 ## [12.23.0](https://github.com/powerhome/playbook/tree/12.23.0) (2023-05-23)
 
@@ -608,7 +687,7 @@
 **Kit Enhancements:**
 
 - Update Error Color Token [\#2226](https://github.com/powerhome/playbook/pull/2226) ([nidaqg](https://github.com/nidaqg))
-- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret), [carloslimasd](https://github.com/carloslimasd), [Israel-Molestina](https://github.com/Israel-Molestina)), 
+- New psuedo border on hover: + Table.scss file cleanup [\#2189](https://github.com/powerhome/playbook/pull/2189) ([jasoncypret](https://github.com/jasoncypret), [carloslimasd](https://github.com/carloslimasd), [Israel-Molestina](https://github.com/Israel-Molestina)),
 
 **Fixed Bugs:**
 
@@ -1010,7 +1089,7 @@
 ## [11.2.7](https://github.com/powerhome/playbook/compare/11.2.6...11.2.7) (2022-08-17)
 
 **Fixed Bugs:**
-- Dialog Title Patch [\#2017](https://github.com/powerhome/playbook/pull/2017)([augustomallmann](https://github.com/augustomallmann)) 
+- Dialog Title Patch [\#2017](https://github.com/powerhome/playbook/pull/2017)([augustomallmann](https://github.com/augustomallmann))
 
 ## [11.2.6](https://github.com/powerhome/playbook/compare/11.2.5...11.2.6) (2022-08-12)
 
@@ -1034,7 +1113,7 @@
 
 **Kit Enhancements:**
 - Convert Avatar Action Button to Typescript [\#1975](https://github.com/powerhome/playbook/pull/1975) ([augustomallmann](https://github.com/augustomallmann))
-- Typescript Conversion: Bread Crumbs [\#1976](https://github.com/powerhome/playbook/pull/1976) ([augustomallmann](https://github.com/augustomallmann)) 
+- Typescript Conversion: Bread Crumbs [\#1976](https://github.com/powerhome/playbook/pull/1976) ([augustomallmann](https://github.com/augustomallmann))
 
 ## [11.2.2](https://github.com/powerhome/playbook/compare/11.2.1...11.2.2) (2022-08-04)
 **Fixed Bugs:**
@@ -1048,8 +1127,8 @@
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/11.1.2...11.2.0)
 
-**New Kits** 
-- \[PLAY-158\] Lightbox Kit [\#1772](https://github.com/powerhome/playbook/pull/1772) ([jasperfurniss](https://github.com/jasperfurniss), [thestephenmarshall](https://github.com/thestephenmarshall), 
+**New Kits**
+- \[PLAY-158\] Lightbox Kit [\#1772](https://github.com/powerhome/playbook/pull/1772) ([jasperfurniss](https://github.com/jasperfurniss), [thestephenmarshall](https://github.com/thestephenmarshall),
 [Ivancandido11](https://github.com/Ivancandido11))
 
 **Kit Enhancements:**
@@ -3627,9 +3706,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rails PbLayout prop `dark` dropped (https://github.com/powerhome/playbook/commit/b16da50914e110c75c6d96c985fa02781c9e2040#diff-377fda563d148f7b3ad33f904b7b0cdbL13)
 
 
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
 
 
 \* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

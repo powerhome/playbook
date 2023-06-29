@@ -32,7 +32,7 @@
           }) %>
           <%= pb_rails("flex", props: { classname: "button-flexbox", margin_top: "md", wrap: true }) do %>
             <%= pb_rails("flex/flex_item", props: {}) do %>
-              <%= pb_rails("button", props: { text: "Getting Started", link: "/getting_started" }) %>
+              <%= pb_rails("button", props: { text: "Getting Started", link: guides_parent_path('getting_started') }) %>
             <% end %>
             <%= pb_rails("flex/flex_item", props: {}) do %>
               <%= pb_rails("button", props: { text: "Browse All Kits", link: "/kits", margin_left: "md", variant: "secondary" }) %>
@@ -57,8 +57,8 @@
         <% rails_contents = Rails.root.join("app/views/pages/code_snippets/user_erb.txt").read %>
 
         <div class="pb--codeCopy code-snippets">
-          <pre class="highlight"><%= raw rouge(rails_contents, "erb") %></pre>
-          <pre class="highlight" style="display:none"><%= raw rouge(react_contents, "jsx") %></pre>
+          <pre class="highlight"><%= raw render_code(rails_contents, "erb") %></pre>
+          <pre class="highlight" style="display:none"><%= raw render_code(react_contents, "jsx") %></pre>
         </div>
       <% end %>
     <% end %>

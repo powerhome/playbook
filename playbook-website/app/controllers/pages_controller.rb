@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
-require "yaml"
-require "redcarpet"
-require "rouge"
 require "will_paginate"
 require "playbook/pagination_renderer"
-require "will_paginate/array" # Needed to show a fake pagination example
-
-require_relative "application_controller"
+require "will_paginate/array"
 
 class PagesController < ApplicationController
   before_action :set_js, only: %i[visual_guidelines]
@@ -15,9 +10,7 @@ class PagesController < ApplicationController
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
-
-  include Playbook::PbDocHelper
-  include Playbook::PbKitHelper
+  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift]
 
   def disable_dark_mode
     cookies[:dark_mode] = {
@@ -33,32 +26,11 @@ class PagesController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def getting_started
-    render "pages/getting_started/index"
-  end
-
-  def getting_started_rails
-    @rails_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_getting_started.md").read
-    render "pages/getting_started/rails"
-  end
-
-  def getting_started_react
-    @react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_react_getting_started.md").read
-    render "pages/getting_started/react"
-  end
-
-  def getting_started_rails_react
-    @rails_react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_react_getting_started.md").read
-    render "pages/getting_started/rails_react"
-  end
-
-  def getting_started_html_css
-    @html_css_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_html_css_getting_started.md").read
-    render "pages/getting_started/html"
-  end
-
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
+    @page_title = "What's New"
+    @show_sidebar = false
+    render layout: "docs"
   end
 
   def home; end
@@ -67,39 +39,44 @@ class PagesController < ApplicationController
     params[:type] ||= "react"
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    render layout: "layouts/kits"
-  end
-
-  def all_kit_examples
-    params[:type] ||= "react"
-    @type = params[:type]
-    render layout: "layouts/kits"
   end
 
   def kit_category_show_rails
     params[:type] ||= "rails"
     @type = params[:type]
-    render template: "pages/kit_category_show", layout: "layouts/kits"
+    render template: "pages/kit_category_show"
   end
 
   def kit_category_show_react
-    render template: "pages/kit_category_show", layout: "layouts/kits"
+    render template: "pages/kit_category_show"
   end
 
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    render "pages/kit_show", layout: "layouts/kits"
+    render "pages/kit_show"
   end
 
   def kit_show_react
     @type = "react"
-    render template: "pages/kit_show", layout: "layouts/kits"
+    render template: "pages/kit_show"
   end
 
   def kit_show_swift
     @type = "swift"
-    render template: "pages/kit_show", layout: "layouts/kits"
+    render "pages/kit_show"
+  end
+
+  def kit_collection_show_rails
+    handle_kit_collection("rails")
+  end
+
+  def kit_collection_show_react
+    handle_kit_collection("react")
+  end
+
+  def kit_collection_show
+    handle_kit_collection(params[:type])
   end
 
   def kit_playground_rails
@@ -134,19 +111,13 @@ class PagesController < ApplicationController
                                            dark: false,
                                            show_raw: true,
                                          })
-    render "pages/rails_in_react", layout: "layouts/kits"
-  end
-
-  def kit_show_demo
-    @kit = params[:name]
-    @examples = kit_examples
-    render "pages/kit_show_demo", layout: "layouts/kits"
+    render "pages/rails_in_react"
   end
 
   def kit_show_new
     @kit = params[:name]
     @examples = kit_examples
-    render "pages/kit_show_new", layout: "layouts/kits"
+    render "pages/kit_show_new"
   end
 
   def rails_raw
@@ -166,17 +137,14 @@ class PagesController < ApplicationController
 
   # TODO: rename this method once all guidelines are completed
   def visual_guidelines
-    formatter = Rouge::Formatters::HTML.new
-    lexer = Rouge::Lexer.find("react")
     kit_examples = {}
     Dir.glob(Rails.root.join("app/views/pages/code_snippets/*.txt")).each do |example_path|
       example_txt = File.read(example_path)
-
-      formatted_example_txt = formatter.format(lexer.lex(example_txt))
+      formatted_example_txt = render_code(example_txt, "react")
       kit_examples[example_path.split("/").last.sub(".txt", "")] = formatted_example_txt
     end
     @kit_examples_json = kit_examples
-    render "pages/visual_guidelines", layout: "layouts/visual_guidelines"
+    render "pages/visual_guidelines"
   end
 
   def get_source(example)
@@ -209,6 +177,10 @@ private
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
     end
+  end
+
+  def set_show_sidebar
+    @show_sidebar = true
   end
 
   def ensure_kit_type_exists
@@ -245,5 +217,15 @@ private
   def read_kit_file(*args)
     path = ::Playbook.kit_path(@kit, "docs", *args)
     path.exist? ? path.read : ""
+  end
+
+  def handle_kit_collection(type)
+    @kits = params[:names].split("%26")
+    @kits_array = @kits.first.split("&")
+    params[:name] ||= @kits_array[0]
+    @selected_kit = params[:name]
+    @type = type
+
+    render template: "pages/kit_collection", layout: "layouts/fullscreen"
   end
 end

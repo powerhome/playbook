@@ -93,14 +93,14 @@
                 <% end %>
               <% end %>
             </a>
-          <% end %>f
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
 
     <% if (action_name == "kit_show_rails") %>
       <br>
-      <%= pb_rails("docs/kit_api", props: { kit: @kit }) %>
+      <%= pb_rails("docs/kit_api", props: { kit: @kit, dark: dark_mode? }) %>
     <% elsif (action_name == "kit_show_react") %>
       <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
         <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm", margin_top: "sm" }) %>
@@ -109,5 +109,4 @@
         %>
       </div>
     <% end %>
-  
 </div>

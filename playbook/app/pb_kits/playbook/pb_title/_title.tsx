@@ -21,13 +21,13 @@ const Title = (props: TitleProps): React.ReactElement => {
   if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
   const {
     aria = {},
-    bold = true,
     children,
     className,
     color,
     data = {},
     id,
     size = 3,
+    bold = true,
     tag = 'h3',
     text,
     variant = null,

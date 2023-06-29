@@ -2,6 +2,7 @@
 @import "playbook-ui/dist/tokens/typography";
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/app/pb_kits/playbook/pb_caption/_caption_mixin.scss";
 
 .markdown_title {
   @include pb_title_1;
@@ -11,7 +12,6 @@
 }
 
 .markdown {
-  font-weight: 500;
   line-height: $lh_loose;
   h4,h5,h6,ul,ol,blockquote,p {
     margin: 1rem 0 0 0;
@@ -37,7 +37,10 @@
     letter-spacing: $lspace_tight;
     margin: 1.7rem 0 0 0;
   }
-  h4, h5, h6 {
+  h5 {
+    @include caption;
+  }
+  h4, h6 {
     font-size: $text_base;
     line-height: $text_base;
     letter-spacing: $lspace_tight;
@@ -122,7 +125,7 @@
   }
   img {
     max-width: 100%;
-    margin: 1.5rem 0 2rem 0;
+    margin: 1.5rem 0 0.2rem 0;
   }
   table {
     margin: 1.5rem 0 2rem 0;
@@ -137,9 +140,20 @@
     color: $text_lt_light;
   }
   &.dark {
-    color: $text_dk_light ;
+    color: $text_dk_default ;
     h1,h2,h3,h4,h5,h6 {
-     color: $text_dk_light;
+      color: $text_dk_default;
+    }
+    a {
+      color: $active_dark;
+    }
+    code {
+      background: $bg_dark;
+      border-color: $bg_dark;
+      color: $text_dk_default;
+    }
+    pre code {
+      color: #faf6e4;
     }
   }
 }

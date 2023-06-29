@@ -15,6 +15,8 @@ module Playbook
                   values: %w[lg md sm xs],
                   default: "md"
       prop :timezone, default: "America/New_York"
+      prop :unstyled, type: Playbook::Props::Boolean,
+                      default: false
 
       def classname
         generate_classname("pb_date_kit", alignment)

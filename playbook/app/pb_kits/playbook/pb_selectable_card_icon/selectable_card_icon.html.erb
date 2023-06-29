@@ -8,12 +8,14 @@
     value: object.value,
     checked: object.checked,
     disabled: object.disabled,
+    custom_icon: object.custom_icon,
     icon: object.checkmark,
     multi: object.multi,
     dark: object.dark,
     input_options: object.input_options
   }) do %>
     <%= pb_rails("selectable_icon", props: {
+      custom_icon: object.custom_icon,
       icon: object.icon,
       inputs: "disabled",
       text: object.title_text,
