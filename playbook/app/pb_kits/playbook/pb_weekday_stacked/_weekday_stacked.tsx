@@ -8,7 +8,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import Caption from '../pb_caption/_caption'
 import Title from '../pb_title/_title'
 
-import DateTime from '../pb_kit/dateTime'
+import { toWeekday, toDayAbbr, toDay, toCustomFormat } from '../pb_kit/dateTime'
 
 type WeekdayStackedProps = {
   align?: "left" | "center" | "right",
@@ -22,22 +22,22 @@ type WeekdayStackedProps = {
   compact?: boolean,
 }
 
-const getDayOfWeek = (value: Date | string, compact: boolean) => {
-  const dateTime = new DateTime({ value })
+const getDayOfWeek = (value: Date, compact: boolean) => {
+  const dateTime = value
   if (compact) {
-    return dateTime.toDayAbbr()
+    return toDayAbbr(dateTime)
   } else {
-    return dateTime.toWeekday()
+    return toWeekday(dateTime)
   }
 }
 
-const getFormattedDate = (value: Date | string, variant: "day_only" | "month_day" | "expanded") => {
-  const dateTime = new DateTime({ value })
+const getFormattedDate = (value: Date, variant: "day_only" | "month_day" | "expanded"):  => {
+  const dateTime = value
   if (variant === 'day_only') {
-    return dateTime.toDay()
+    return toDay(dateTime).toString()
   } else {
-    const format = variant === 'expanded' ? '%b %-d' : '%-m/%-d'
-    return dateTime.toCustomFormat(format)
+    const format = variant === 'expanded' ? 'expanded' : 'month_day'
+    return toCustomFormat(dateTime, format)
   }
 }
 

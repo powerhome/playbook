@@ -24,9 +24,9 @@ export default class DateTime {
     return this.value.strftime('%Z')
   }
 
-  toCustomFormat(format = '%-m/%-d') {
-    return this.value.strftime(format)
-  }
+  // toCustomFormat(format = '%-m/%-d') {
+  //   return this.value.strftime(format)
+  // }
 
   // toYear() {
   //   return this.value.strftime('%Y')
@@ -52,9 +52,9 @@ export default class DateTime {
   //   return this.value.strftime('%e')
   // }
 
-  toDayAbbr() {
-    return ABBR_DAYS[this.value.day()]
-  }
+  // toDayAbbr() {
+  //   return ABBR_DAYS[this.value.day()]
+  // }
 
   // toWeekday() {
   //   return this.value.strftime('%a')
@@ -93,7 +93,7 @@ export default class DateTime {
   }
 }
 
-const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -141,4 +141,18 @@ export const toTimeNew = (newDate: Date): string => {
 export const toTimeZoneNew = (newDate: Date, timeZone: string): string => {
     const date = new Date(newDate)
     return date.toLocaleString(undefined, {timeZone, timeZoneName: "short"});
+}
+
+export const toDayAbbr = (newDate: Date): string => {
+  const date = new Date(newDate)
+  return ABBR_DAYS[date.getUTCDay()]
+}
+
+export const toCustomFormat = (newDate: Date, format = 'month_day'): string => {
+  const date = new Date(newDate)
+  if (format == "month_day") {
+    return `${toMonthNum(date)}/${toDay(date)}`
+  } else {
+    return `${date.toLocaleString(undefined, {month: "short"})} ${toDay(date)}`
+  }
 }
