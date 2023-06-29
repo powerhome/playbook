@@ -27,7 +27,7 @@ app.build(
         shell "mkdir -p ~/.kube"
         shell "playbook-website/bin/deployer sops --decrypt --output yarn.secrets.dec.env yarn.secrets.env"
       }
-      println "Cache build 1"
+      
       compose.bake()
     }
 

@@ -51,6 +51,7 @@ RUN --mount=type=bind,target=/tmp/src \
 
 FROM base as rubydeps
 
+# Bundle website
 COPY --link --chown=9999:9999 --from=rubypackages /home/app/src /home/app/src
 COPY --link --chown=9999:9999 playbook/lib/playbook /home/app/src/playbook/lib/playbook
 RUN cd playbook-website && bundle install
@@ -68,7 +69,6 @@ RUN --mount=type=secret,id=yarnenv,required \
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
 FROM jsdeps AS release
-# Bundle website
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
 COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
