@@ -156,7 +156,7 @@ export const toCustomFormat = (newDate: Date, format = 'month_day'): string => {
   }
 }
 
-export const toTimeWithMeridianNew = (newDate: Date, timeZone: string): string => {
+export const toTimeWithMeridiem = (newDate: Date, timeZone: string): string => {
   const date = new Date(newDate)
   return `${toTime(date, timeZone)}${toMeridiem(date, timeZone)}`;
 }

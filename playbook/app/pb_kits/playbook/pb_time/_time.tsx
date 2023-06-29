@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 import { buildCss } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
-import { toTimeZone, toTimeWithMeridianNew } from '../pb_kit/dateTime'
+import { toTimeZone, toTimeWithMeridiem } from '../pb_kit/dateTime'
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -74,7 +74,7 @@ const Time = (props: TimeProps) => {
             ? (
                 <>
                   <span>
-                    {toTimeWithMeridianNew(date, timeZone)}
+                    {toTimeWithMeridiem(date, timeZone)}
                   </span>
                   {" "}
                   {showTimezone && (
@@ -90,7 +90,7 @@ const Time = (props: TimeProps) => {
                     <Body
                         className="pb_time"
                         tag="span"
-                        text={toTimeWithMeridianNew(date, timeZone)}
+                        text={toTimeWithMeridiem(date, timeZone)}
                     />{" "}
                     {showTimezone && (
                       <Body
@@ -106,7 +106,7 @@ const Time = (props: TimeProps) => {
                     <Caption
                         color="light"
                         tag="span"
-                        text={toTimeWithMeridianNew(date, timeZone)}
+                        text={toTimeWithMeridiem(date, timeZone)}
                     />{" "}
                     {showTimezone && (
                       <Caption
