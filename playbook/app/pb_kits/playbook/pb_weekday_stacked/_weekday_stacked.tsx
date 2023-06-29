@@ -23,21 +23,19 @@ type WeekdayStackedProps = {
 }
 
 const getDayOfWeek = (value: Date, compact: boolean) => {
-  const dateTime = value
   if (compact) {
-    return toDayAbbr(dateTime)
+    return toDayAbbr(value)
   } else {
-    return toWeekday(dateTime)
+    return toWeekday(value)
   }
 }
 
-const getFormattedDate = (value: Date, variant: "day_only" | "month_day" | "expanded"):  => {
-  const dateTime = value
+const getFormattedDate = (value: Date, variant: "day_only" | "month_day" | "expanded")  => {
   if (variant === 'day_only') {
-    return toDay(dateTime).toString()
+    return toDay(value).toString()
   } else {
     const format = variant === 'expanded' ? 'expanded' : 'month_day'
-    return toCustomFormat(dateTime, format)
+    return toCustomFormat(value, format)
   }
 }
 

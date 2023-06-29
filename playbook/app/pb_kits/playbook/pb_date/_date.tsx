@@ -37,11 +37,10 @@ const PbDate = (props: PbDateProps) => {
     value,
   } = props;
 
-  const dateTimestamp = value;
-  const weekday = toWeekday(dateTimestamp);
-  const month = toMonth(dateTimestamp);
-  const day = toDay(dateTimestamp);
-  const year = toYear(dateTimestamp);
+  const weekday = toWeekday(value);
+  const month = toMonth(value);
+  const day = toDay(value);
+  const year = toYear(value);
   const currentYear = new Date().getFullYear();
 
   const ariaProps = buildAriaProps(aria);

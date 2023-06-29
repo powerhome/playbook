@@ -52,7 +52,6 @@ const LabelValue = (props: LabelValueProps) => {
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
-  const formattedDate = date;
   const variantClass = variant === "details" ? "details" : "";
   const classes = classnames(
     buildCss("pb_label_value_kit", variantClass),
@@ -110,7 +109,7 @@ const LabelValue = (props: LabelValueProps) => {
                     dark={dark}
                     marginLeft="xs"
                     size={4}
-                    text={" " + dateString(formattedDate)}
+                    text={" " + dateString(date)}
                     variant="link"
                 />
               )}
@@ -127,7 +126,7 @@ const LabelValue = (props: LabelValueProps) => {
                     dark={dark}
                     marginLeft="xs"
                     size={4}
-                    text={" " + dateString(formattedDate)}
+                    text={" " + dateString(date)}
                 />
               )}
             </>

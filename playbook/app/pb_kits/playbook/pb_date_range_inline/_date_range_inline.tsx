@@ -22,17 +22,15 @@ type DateRangeInlineProps = {
 };
 
 const dateTimestamp = (dateValue: Date, includeYear: boolean) => {
-  const date = dateValue
   if (includeYear) {
-    return `${toMonth(date)} ${toDay(date)}, ${toYear(date)}`;
+    return `${toMonth(dateValue)} ${toDay(dateValue)}, ${toYear(dateValue)}`;
   } else {
-    return `${toMonth(date)} ${toDay(date)}`;
+    return `${toMonth(dateValue)} ${toDay(dateValue)}`;
   }
 };
 
 const dateTimeIso = (dateValue: Date) => {
-  const date = dateValue;
-  return toIso(date);
+  return toIso(dateValue);
 };
 
 const DateRangeInline = (props: DateRangeInlineProps) => {

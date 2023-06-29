@@ -19,7 +19,6 @@ type DateYearStackedProps = {
 
 const DateYearStacked = (props: DateYearStackedProps) => {
   const { align = 'left', className, dark = false, date, data={} } = props
-  const dateTimestamp = date
   const css = classnames(
     buildCss('pb_date_year_stacked', align),
     globalProps(props),
@@ -34,9 +33,9 @@ const DateYearStacked = (props: DateYearStackedProps) => {
       <Title
           dark={dark}
           size={4}
-          text={`${toDay(dateTimestamp)} ${toMonth(dateTimestamp).toUpperCase()}`}
+          text={`${toDay(date)} ${toMonth(date).toUpperCase()}`}
       />
-      <Body color="light">{toYear(dateTimestamp)}</Body>
+      <Body color="light">{toYear(date)}</Body>
     </div>
   )
 }
