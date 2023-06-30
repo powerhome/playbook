@@ -1,72 +1,75 @@
 <% treeData = [{
     label: "Power Home Remodeling",
     value: "Power Home Remodeling",
-    id: "powerhome1",
+    id: "100",
     expanded: true,
-
     children: [
       {
         label: "People",
         value: "People",
-        id: "people1",
+        id: "101",
         children: [
           {
             label: "Talent Acquisition",
             value: "Talent Acquisition",
-            id: "talent1",
+            id: "102",
           },
           {
             label: "Business Affairs",
             value: "Business Affairs",
-            id: "business1",
+            id: "103",
             children: [
               {
                 label: "Initiatives",
                 value: "Initiatives",
-                id: "initiative1",
+                id: "104",
               },
               {
                 label: "Learning & Development",
                 value: "Learning & Development",
-                id: "development1",
+                id: "105",
               },
             ],
           },
           {
             label: "People Experience",
             value: "People Experience",
-            id: "experience1",
+            id: "106",
           },
         ],
       },
       {
         label: "Contact Center",
         value: "Contact Center",
-        id: "contact1",
+        id: "107",
         children: [
           {
             label: "Appointment Management",
             value: "Appointment Management",
-            id: "appointment1",
+            id: "108",
           },
           {
             label: "Customer Service",
             value: "Customer Service",
-            id: "customer1",
+            id: "109",
           },
           {
             label: "Energy",
             value: "Energy",
-            id: "energy1",
+            id: "110",
           },
         ],
       },
     ],
-  }] %>
+}] %>
+
+
 
 
 <%= pb_rails("multi_level_select", props: {
-    id: "parent-persistence-multi-level-select",
-    tree_data:treeData,
+    id: "multi-level-select-return-all-selected-rails",
+    name: "my_data_array",
+    tree_data: treeData,
     return_all_selected: true
-    }) %>
+}) %>
+ 
