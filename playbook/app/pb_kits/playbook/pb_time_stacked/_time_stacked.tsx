@@ -1,9 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import DateTime from '../pb_kit/dateTime'
 import { buildCss, buildDataProps } from '../utilities/props'
 import { deprecatedProps, globalProps } from '../utilities/globalProps'
+import { toTimeWithMeridiem, toTimeZone } from '../pb_kit/dateTime'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -13,7 +13,7 @@ type TimeStackedProps = {
   className?: string | string[],
   dark?: boolean,
   data?: { [key: string]: string },
-  date?: string,
+  date?: Date,
   id?: string,
   time?: number | Date,
   timeZone?: string,
@@ -39,8 +39,6 @@ const TimeStackedDefault = (props: TimeStackedProps): React.ReactElement => {
   )
   const dataProps = buildDataProps(data)
 
-  const dateTimestamp = new DateTime({ value: date ? date : new Date(time), zone: timeZone })
-
   return (
     <div
         className={classes}
@@ -52,13 +50,13 @@ const TimeStackedDefault = (props: TimeStackedProps): React.ReactElement => {
           dark={dark}
       >
         <time>
-          {dateTimestamp.toTimeWithMeridian()}
+          {toTimeWithMeridiem(date ? date : new Date(time), timeZone)}
           <Caption
               className="pb_time_stacked"
               color="light"
               dark={dark}
               tag="span"
-              text={dateTimestamp.toTimezone()}
+              text={toTimeZone(date ? date : new Date(time), timeZone)}
           />
         </time>
       </Body>
