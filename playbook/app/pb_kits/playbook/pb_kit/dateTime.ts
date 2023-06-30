@@ -96,19 +96,34 @@ const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-export const toMonth = (newDate: Date): string => {
-    const date = new Date(newDate)
-    return months[date.getUTCMonth()]
+export const toMonth = (newDate: Date, timeZone?: string): string => {
+    if (timeZone) {
+      const date = new Date(newDate.toLocaleString(undefined, { timeZone }));
+      return months[date.getUTCMonth()]
+    } else {
+      const date = new Date(newDate)
+      return months[date.getUTCMonth()]
+    }
 }
 
-export const toDay = (newDate: Date): number => {
-    const date = new Date(newDate)
-    return date.getUTCDate()
+export const toDay = (newDate: Date, timeZone?: string): number => {
+    if (timeZone) {
+      const date = new Date(newDate.toLocaleString(undefined, { timeZone }));
+      return date.getUTCDate()
+    } else {
+      const date = new Date(newDate)
+      return date.getUTCDate()
+    }
 }
 
-export const toYear = (newDate: Date): number => {
-    const date = new Date(newDate)
-    return date.getUTCFullYear()
+export const toYear = (newDate: Date, timeZone?: string): number => {
+    if (timeZone) {
+      const date = new Date(newDate.toLocaleString(undefined, { timeZone }));
+      return date.getUTCFullYear()
+    } else {
+      const date = new Date(newDate)
+      return date.getUTCFullYear()
+    }
 }
 
 export const toIso = (newDate: Date): string => {
@@ -175,7 +190,7 @@ export const toTimeWithMeridiem = (newDate: Date, timeZone: string): string => {
 export const toHour = (newDate: Date, timeZone?: string): string => {
   const date = new Date(newDate)
   if (timeZone) {
-    return date.toLocaleTimeString(undefined, {timeZone, timeStyle: "short"}).split(' ')[0];
+    return date.toLocaleTimeString(undefined, {timeZone, hour: "numeric"}).split(' ')[0];
   } else {
     return date.toLocaleTimeString(undefined, {hour: "numeric"}).split(' ')[0];
   }
@@ -184,8 +199,8 @@ export const toHour = (newDate: Date, timeZone?: string): string => {
 export const toMinute = (newDate: Date, timeZone?: string): string => {
   const date = new Date(newDate)
   if (timeZone) {
-    return date.toLocaleTimeString(undefined, {timeZone, minute: "numeric"}).split(' ')[0];
+    return date.toLocaleTimeString(undefined, {timeZone, hour: "2-digit", minute: "2-digit"}).slice(3, 5);
   } else {
-    return date.toLocaleTimeString(undefined, {minute: "numeric"});
+    return date.toLocaleTimeString(undefined, {hour: "2-digit", minute: "2-digit"}).slice(3, 5);
   }
 }
