@@ -10,6 +10,7 @@ import Button from '../pb_button/_button'
 type MapProps = {
   aria?: { [key: string]: string },
   children?: React.ReactChild[] | React.ReactNode,
+  customButton?:any,
   className?: string,
   data?: { [key: string]: string },
   id?: string,
@@ -24,6 +25,7 @@ const Map = (props: MapProps) => {
   const {
   aria = {},
   children,
+  customButton,
   className,
   data = {},
   id,
@@ -45,9 +47,10 @@ const Map = (props: MapProps) => {
         className={classes}
         id={id}
     >
-      {
-        zoomBtns ? (
           <Flex className="custom-nav-control" orientation='column'>
+          {
+          zoomBtns ? (
+            <>
             <div className="custom-nav-control-zoom">
               <Button className='map-zoom-in-button'
                   onClick={zoomInClick}
@@ -69,9 +72,14 @@ const Map = (props: MapProps) => {
                 </Button>
               ) : null
             }
-         </Flex>
+            </>
          ) : null
       }
+      {
+        customButton ? customButton : null
+      }
+      </Flex>
+
       {children}
     </div>
   )
