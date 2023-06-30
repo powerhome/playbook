@@ -72,8 +72,8 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
 
   const fullDateDisplay = () => {
     let fullDisplay = `${toMonth(timestamp, timezone)} ${toDay(timestamp, timezone)}`
-    if (toYear(timestamp).toString() !== currentYear) {
-      fullDisplay = `${fullDisplay}, ${toYear(timestamp)}`
+    if (toYear(timestamp, timezone).toString() !== currentYear) {
+      fullDisplay = `${fullDisplay}, ${toYear(timestamp, timezone)}`
     }
     return `${fullDisplay} ${' \u00b7 '} ${fullTimeDisplay()}`
   }
@@ -109,8 +109,6 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
             size="xs"
             text={captionText()}
         />
-        {console.log(toMinute(timestamp, timezone))}
-        {/* {console.log("timestamp", timestamp)} */}
       </div>
     </div>
   )
