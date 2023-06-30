@@ -12,6 +12,8 @@ module Playbook
                            default: false
       prop :data_table, type: Playbook::Props::Boolean,
                         default: false
+      prop :highlight_column, type: Playbook::Props::Number,
+                              default: 0
       prop :container, type: Playbook::Props::Boolean,
                        default: true
       prop :responsive, type: Playbook::Props::Enum,

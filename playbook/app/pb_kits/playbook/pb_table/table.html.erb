@@ -7,3 +7,8 @@
     <%= content.presence %>
   <% end %>
 <% end %>
+<style>
+  td:nth-child(<%= highlight_column %>) {
+    background-color: $active_light;
+  }
+</style>
