@@ -5,6 +5,20 @@
 @import "./_pb_map_button_mixin.scss";
 
 [class*="pb_map"] {
+  .pb_map-custom-button {
+    @include pb_map_button;
+    // position: absolute;
+    // right: $space_xs + 3;
+    .pb_icon_kit {
+      width: 14px;
+      height: 16px;
+    }
+
+    .pb_button_content {
+      height: 16px;
+    }
+  }
+
   .mapboxgl-map,
   .maplibregl-map {
     font-family: $font_family_base !important;
