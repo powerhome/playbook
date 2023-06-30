@@ -204,3 +204,34 @@ export const toMinute = (newDate: Date, timeZone?: string): string => {
     return date.toLocaleTimeString(undefined, {hour: "2-digit", minute: "2-digit"}).slice(3, 5);
   }
 }
+
+export const fromNow = (newDate: Date, timeZone?: string): string => {
+
+  // subtract end time from start time (endTime - startTime)
+  // create object of amount of miliseconds as keys and values as strings, seconds ago, minutes ago, months ago etc...
+  // compare subtracted time to keys in object and grab the matching string
+  // concat the time elapsed with the string and return that
+
+
+  /*
+  {
+    0-44s: a few seconds ago
+    45-89s: a minute ago
+    90s-44m: 2-44 minutes ago ago
+    45-89m: an hour ago
+    90m-21h: 2-21 hours ago
+    22-35h: a day ago
+    36h-25d: 2-25 days ago
+    26-45d: a month ago
+    45-319d: 2-10 months ago
+    320-547d: a year ago
+    548d+: 2-20 years ago
+  }
+  */
+  const date = new Date(newDate)
+  if (timeZone) {
+    return date.toLocaleTimeString(undefined, {timeZone, hour: "2-digit", minute: "2-digit"}).slice(3, 5);
+  } else {
+    return date.toLocaleTimeString(undefined, {hour: "2-digit", minute: "2-digit"}).slice(3, 5);
+  }
+}
