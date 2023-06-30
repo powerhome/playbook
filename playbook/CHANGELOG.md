@@ -7,12 +7,12 @@ We’ve updated our PhoneNumberInput so that it’s more react-friendly. You can
 
 [12.28.0](https://github.com/powerhome/playbook/tree/12.28.0) full list of changes:
 
-****Kit Enhancements:****
+**Kit Enhancements:**
 
 - Implementing Custom Icons for Selectable Card Icon Kit [\#2620](https://github.com/powerhome/playbook/pull/2620) ([carloslimasd](https://github.com/carloslimasd))
 - Access Phone Number Input Kit’s Input Attributes [\#2613](https://github.com/powerhome/playbook/pull/2613) ([gavhuang](https://github.com/gavhuang))
 
-****Fixed Bugs:****
+**Fixed Bugs:**
 
 - MultiLevelSelect Kit: Fixed Expanded State to Load From TreeData [\#2621](https://github.com/powerhome/playbook/pull/2621) ([jasperfurniss](https://github.com/jasperfurniss))
 
