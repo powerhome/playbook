@@ -1,3 +1,24 @@
+# Updated Phone Number Input: Easier Value Manipulation in React Forms
+##### June 29, 2023
+
+![12 28 0](https://github.com/powerhome/playbook/assets/73710701/a1476fb7-bf5e-43f9-bc7d-a993eaef673a)
+
+We’ve updated our PhoneNumberInput so that it’s more react-friendly. You can now pass a ref directly to the PhoneNumberInput kit, giving you more control over the input! This should make it much easier to manually clear the values when using with form libraries like formik, react-hook-form, or any form in general.
+
+[12.28.0](https://github.com/powerhome/playbook/tree/12.28.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Implementing Custom Icons for Selectable Card Icon Kit [\#2620](https://github.com/powerhome/playbook/pull/2620) ([carloslimasd](https://github.com/carloslimasd))
+- Access Phone Number Input Kit’s Input Attributes [\#2613](https://github.com/powerhome/playbook/pull/2613) ([gavhuang](https://github.com/gavhuang))
+
+**Fixed Bugs:**
+
+- MultiLevelSelect Kit: Fixed Expanded State to Load From TreeData [\#2621](https://github.com/powerhome/playbook/pull/2621) ([jasperfurniss](https://github.com/jasperfurniss))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.27.0...12.28.0)
+
+
 # An Easier Way to Display Structured Data: The MultiLevelSelect kit!
 ##### June 28, 2023
 ![12-27-0](https://github.com/powerhome/playbook/assets/9158723/d385bcb8-a279-4240-a47e-c91120c7e22b)
