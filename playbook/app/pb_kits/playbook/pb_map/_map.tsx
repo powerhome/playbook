@@ -8,7 +8,6 @@ import MapControls from './_map_controls';
 type MapProps = {
   aria?: { [key: string]: string },
   children?: React.ReactChild[] | React.ReactNode,
-  customButton?:any,
   className?: string,
   data?: { [key: string]: string },
   id?: string,
@@ -23,7 +22,6 @@ const Map = (props: MapProps) => {
   const {
   aria = {},
   children,
-  customButton,
   className,
   data = {},
   id,
@@ -45,16 +43,19 @@ const Map = (props: MapProps) => {
         className={classes}
         id={id}
     >
-      <Map.Controls
-      customButton={customButton}
-      flyTo={flyTo}
-      flyToClick={flyToClick}
-      zoomBtns={zoomBtns}
-      zoomInClick={zoomInClick}
-      zoomOutClick={zoomOutClick}
-      >
-       {customButton}
-      </Map.Controls>
+      {
+        zoomBtns ? (
+          <Map.Controls
+          flyTo={flyTo}
+          flyToClick={flyToClick}
+          zoomBtns={zoomBtns}
+          zoomInClick={zoomInClick}
+          zoomOutClick={zoomOutClick}
+        >
+         {children}
+        </Map.Controls>
+        ) : null
+      }
       {children}
     </div>
   )

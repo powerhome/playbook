@@ -50,14 +50,18 @@ const MapWithCustomButton = (props) => {
     }, [])
 
 return ( 
-  <Map customButton={<MapCustomButton icon="home"/>}
-      flyTo
-      flyToClick={()=> {handleFlyTo(mapInstance)}}
-      zoomBtns
-      zoomInClick={() => {handleZoomIn(mapInstance)}}
-      zoomOutClick={()=> {handleZoomOut(mapInstance)}}
+  <Map 
       {...props}
   >
+    <Map.Controls flyTo
+        flyToClick={()=> {handleFlyTo(mapInstance)}}
+        zoomBtns
+        zoomInClick={() => {handleZoomIn(mapInstance)}}
+        zoomOutClick={()=> {handleZoomOut(mapInstance)}}
+    >
+      <MapCustomButton icon="home"/>
+      <MapCustomButton icon="search"/>
+    </Map.Controls>
        <div
            ref={mapContainerRef}
            style={{
