@@ -51,10 +51,8 @@ const Map = (props: MapProps) => {
           zoomBtns={zoomBtns}
           zoomInClick={zoomInClick}
           zoomOutClick={zoomOutClick}
-        >
-         {children}
-        </Map.Controls>
-        ) : null
+          />
+         ) : null
       }
       {children}
     </div>
