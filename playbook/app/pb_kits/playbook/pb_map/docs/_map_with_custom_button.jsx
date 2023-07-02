@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Map, mapTheme, MapCustomButton } from '../../'
+import { Map, mapTheme, MapCustomButton } from '../..'
 import maplibregl from 'maplibre-gl'
 
 const MapWithCustomButton = (props) => {
@@ -59,8 +59,12 @@ return (
         zoomInClick={() => {handleZoomIn(mapInstance)}}
         zoomOutClick={()=> {handleZoomOut(mapInstance)}}
     >
-      <MapCustomButton icon="home"/>
-      <MapCustomButton icon="search"/>
+      <MapCustomButton icon="home" 
+          onClick={() => alert("button clicked!")}
+      />
+      <MapCustomButton icon="search" 
+          onClick={() => alert("button clicked!")}
+      />
     </Map.Controls>
        <div
            ref={mapContainerRef}

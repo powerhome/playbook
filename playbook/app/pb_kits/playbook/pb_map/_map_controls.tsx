@@ -3,6 +3,15 @@ import Button from "../pb_button/_button";
 import Icon from "../pb_icon/_icon";
 import Flex from "../pb_flex/_flex";
 
+type MapControlTypes = {
+  zoomBtns?: boolean, 
+  flyTo?: boolean, 
+  zoomInClick?: () => {},
+  zoomOutClick?: () => {},
+  flyToClick?: () => {},
+  children?: React.ReactNode | React.ReactNode[]
+}
+
 const MapControls = ({
   zoomBtns,
   zoomInClick,
@@ -10,7 +19,7 @@ const MapControls = ({
   flyTo,
   flyToClick,
   children,
-}: any) => {
+}: MapControlTypes) => {
   return (
     <Flex className="custom-nav-control" orientation="column">
       {zoomBtns ? (
