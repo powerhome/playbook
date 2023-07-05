@@ -8,7 +8,9 @@
   <% end %>
 <% end %>
 <style>
-  td:nth-child(<%= highlight_column %>) {
-    background-color: #E5F2FF;
-  }
+  <% id = "##{object.id}" if object.id.present? %>
+  <% selector = "#{id} td:nth-child(#{highlight_column})" %>
+    <%= selector %> {
+      background-color: #E5F2FF;
+    }
 </style>
