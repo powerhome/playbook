@@ -15,6 +15,7 @@ import {
   getCheckedItems,
   getDefaultCheckedItems,
   recursiveCheckParent,
+  getExpandedItems,
 } from "./_helper_functions"
 
 type MultiLevelSelectProps = {
@@ -51,26 +52,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   )
 
   const dropdownRef = useRef(null)
-
-
-  const getExpandedItems = (treeData: { [key: string]: string }[]) => {
-    let expandedItems: any[] = [];
-    
-    const traverse = (items: string | any[]) => {
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        if (item.expanded) {
-          expandedItems.push(item.id);
-        }
-        if (Array.isArray(item.children)) {
-          traverse(item.children);
-        }
-      }
-    }
-  
-    traverse(treeData);
-    return expandedItems;
-  }
 
   //state for whether dropdown is open or closed
   const [isClosed, setIsClosed] = useState(true)
