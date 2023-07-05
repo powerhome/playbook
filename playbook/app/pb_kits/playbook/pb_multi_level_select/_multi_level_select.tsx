@@ -22,6 +22,7 @@ type MultiLevelSelectProps = {
   className?: string
   data?: { [key: string]: string }
   id?: string
+  inputDisplay?: "pills" | "none"
   name?: string
   returnAllSelected?: boolean
   treeData?: { [key: string]: string }[]
@@ -34,6 +35,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     className,
     data = {},
     id,
+    inputDisplay = "pills",
     name,
     returnAllSelected = false,
     treeData,
@@ -331,7 +333,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 ))
               : null}
 
-            {returnedArray.length !== 0 && returnAllSelected
+            {returnedArray.length !== 0 && inputDisplay === "pills" && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill
                     key={index}
@@ -342,7 +344,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 ))
               : null}
             {!returnAllSelected &&
-              defaultReturn.length !== 0 &&
+              defaultReturn.length !== 0 && inputDisplay === "pills" ?
               defaultReturn.map((item, index) => (
                 <FormPill
                   key={index}
@@ -350,9 +352,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   size='small'
                   onClick={(event: any) => handlePillClose(event, item)}
                 />
-              ))}
-            {returnedArray.length !== 0 && returnAllSelected && <br />}
-            {defaultReturn.length !== 0 && !returnAllSelected && <br />}
+              ))
+              : null
+            }
+            {returnedArray.length !== 0 && returnAllSelected && inputDisplay === "pills" && <br />}
+            {defaultReturn.length !== 0 && !returnAllSelected && inputDisplay === "pills" && <br />}
             <input
               id='multiselect_input'
               onChange={(e) => {
