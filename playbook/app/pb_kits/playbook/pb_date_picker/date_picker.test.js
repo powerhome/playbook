@@ -166,13 +166,13 @@ describe('DatePicker Kit', () => {
           data={{ testid: testId }}
           mode="range"
           pickerId="date-picker-quick-pick"
-          placeholder="mm/dd/yyyy → mm/dd/yyyy"
+          placeholder="mm/dd/yyyy to mm/dd/yyyy"
           selectionType="quickpick"
       />
     )
 
     const kit = screen.getByTestId(testId)
-    const input = within(kit).getByPlaceholderText('mm/dd/yyyy → mm/dd/yyyy')
+    const input = within(kit).getByPlaceholderText('mm/dd/yyyy to mm/dd/yyyy')
 
     fireEvent(
       input,
@@ -197,7 +197,7 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
-      expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " → " + moment().endOf('year').format('MM/DD/YYYY'))
+      expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " to " + moment().endOf('year').format('MM/DD/YYYY'))
     })
 
   })
@@ -209,14 +209,14 @@ describe('DatePicker Kit', () => {
           data={{ testid: testId }}
           mode="range"
           pickerId="date-picker-quick-pick"
-          placeholder="mm/dd/yyyy → mm/dd/yyyy"
+          placeholder="mm/dd/yyyy to mm/dd/yyyy"
           selectionType="quickpick"
           thisRangesEndToday
       />
     )
 
     const kit = screen.getByTestId(testId)
-    const input = within(kit).getByPlaceholderText('mm/dd/yyyy → mm/dd/yyyy')
+    const input = within(kit).getByPlaceholderText('mm/dd/yyyy to mm/dd/yyyy')
 
     fireEvent(
       input,
@@ -237,7 +237,7 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
-      expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " → " + moment().format('MM/DD/YYYY'))
+      expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " to " + moment().format('MM/DD/YYYY'))
     })
 
   })

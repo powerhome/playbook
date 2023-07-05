@@ -7,7 +7,7 @@ const DatePickerQuickPickReact = (props) => (
         allowInput
         mode="range"
         pickerId="date-picker-quick-pick"
-        placeholder="mm/dd/yyyy → mm/dd/yyyy"
+        placeholder="mm/dd/yyyy to mm/dd/yyyy"
         selectionType="quickpick"
         {...props}
     />

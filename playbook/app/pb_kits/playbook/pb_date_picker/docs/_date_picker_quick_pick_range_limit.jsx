@@ -7,7 +7,7 @@ const DatePickerQuickPickRangeLimit = (props) => (
         allowInput
         mode="range"
         pickerId="thisRangesEndToday"
-        placeholder="mm/dd/yyyy → mm/dd/yyyy"
+        placeholder="mm/dd/yyyy to mm/dd/yyyy"
         selectionType="quickpick"
         thisRangesEndToday
         {...props}
