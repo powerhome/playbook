@@ -92,7 +92,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       return pluginData.rangesButtons[label];
     };
 
-    const selectActiveRangeButton = (selectedDates: Array<string>) => {
+    const selectActiveRangeButton = (selectedDates: Array<Date>) => {
       const current = pluginData.rangesNav.querySelector('.active');
 
       if (current) {
@@ -103,6 +103,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       *   and check if chosen dates equal to a date in the ranges prop
       *   if they are equal, add the active class
       */
+     
       if (selectedDates.length > 0 && activeLabel) {
         // const selected = pluginData.rangesNav.querySelectorAll(".nav-item-link")
         // selected.forEach(el => {
@@ -115,10 +116,15 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       }
     }
 
+    const isLabelMatchingSelectedDates = (selectedDates: Array<Date>) => {
+      return activeLabel && selectedDates[0].toDateString() === pluginData.ranges[activeLabel][0].toDateString() &&
+        selectedDates[1].toDateString() === pluginData.ranges[activeLabel][1].toDateString()
+    }
+
 
     return {
       // onReady is a hook from flatpickr that runs when calender is in a ready state
-      onReady(selectedDates: Array<string>) {
+      onReady(selectedDates: Array<Date>) {
         // loop through the ranges and create an anchor tag for each range and add an event listener to set the date when user clicks on a date range
         for (const [label, range] of Object.entries(pluginData.ranges)) {
           addRangeButton(label).addEventListener('click', function () {
@@ -151,11 +157,22 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
           selectActiveRangeButton(selectedDates);
         }
       },
-      onValueUpdate(selectedDates: Array<string>) {
-        selectActiveRangeButton(selectedDates);
+      onValueUpdate(selectedDates: Array<Date>) {
+        selectActiveRangeButton(selectedDates)
       },
 
-      onClose(selectedDates: Array<string>) {
+      onClose(selectedDates: Array<Date>) {
+        // remove the active class from the button if the selected dates don't match the label
+        if (!isLabelMatchingSelectedDates(selectedDates)) {
+          pluginData.rangesButtons[activeLabel]?.classList.remove('active');
+          activeLabel = ""
+        }
+
+        // set the date to the first date in the array if the user types only one date
+        if (selectedDates.length === 1) {
+          fp.setDate([selectedDates[0], selectedDates[0]], true);
+        }
+
         // set the input value to the selected dates when the dropdown is closed
         if (selectedDates.length < 2 && selectedDates.length > 0) {
           fp.input.placeholder = fp.formatDate(this.selectedDates[0], fp.config.dateFormat);
