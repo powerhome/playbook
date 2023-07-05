@@ -120,6 +120,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       if (item.id != id) item.children = modifyValue(id, item.children, check)
       else {
         item.checked = check
+        handleExpansion(item, check)
         item.children = modifyRecursive(item.children, check)
       }
 
@@ -157,7 +158,24 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return tree
   }
 
-
+  const handleExpansion = (item: { [key: string]: any }, checked: boolean) => {
+    if (item) {
+      let expandedArray = [...expanded];
+      const itemExpanded = isExpanded(item);
+      if (itemExpanded) {
+        if (checked) {
+          return;
+        } else {
+          expandedArray = expandedArray.filter((i) => i != item.id);
+        }
+      } else {
+        if (checked) {
+          expandedArray.push(item.id);
+        }
+      }
+      setExpanded(expandedArray);
+    }
+  };
 
   //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
