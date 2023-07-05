@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 import { globalProps } from "../utilities/globalProps";
 import { buildCss, buildDataProps } from "../utilities/props";
-import { toMonth, toDay, toYear, toIso } from '../pb_kit/dateTime'
+import DateTime from '../pb_kit/dateTime';
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -23,14 +23,14 @@ type DateRangeInlineProps = {
 
 const dateTimestamp = (dateValue: Date, includeYear: boolean) => {
   if (includeYear) {
-    return `${toMonth(dateValue)} ${toDay(dateValue)}, ${toYear(dateValue)}`;
+    return `${DateTime.toMonth(dateValue)} ${DateTime.toDay(dateValue)}, ${DateTime.toYear(dateValue)}`;
   } else {
-    return `${toMonth(dateValue)} ${toDay(dateValue)}`;
+    return `${DateTime.toMonth(dateValue)} ${DateTime.toDay(dateValue)}`;
   }
 };
 
 const dateTimeIso = (dateValue: Date) => {
-  return toIso(dateValue);
+  return DateTime.toIso(dateValue);
 };
 
 const DateRangeInline = (props: DateRangeInlineProps) => {

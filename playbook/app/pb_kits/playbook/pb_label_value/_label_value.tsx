@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
-import { toMonthNum, toDay } from '../pb_kit/dateTime'
+import DateTime from '../pb_kit/dateTime';
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -27,8 +27,8 @@ type LabelValueProps = {
 };
 
 const dateString = (value: Date) => {
-  const month = toMonthNum(value);
-  const day = toDay(value);
+  const month = DateTime.toMonthNum(value);
+  const day = DateTime.toDay(value);
 
   return ` · ${month}/${day}`;
 };

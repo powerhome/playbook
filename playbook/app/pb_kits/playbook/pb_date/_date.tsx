@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
-import { toMonth, toYear, toWeekday, toDay } from '../pb_kit/dateTime'
+import DateTime from '../pb_kit/dateTime';
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -37,10 +37,10 @@ const PbDate = (props: PbDateProps) => {
     value,
   } = props;
 
-  const weekday = toWeekday(value);
-  const month = toMonth(value);
-  const day = toDay(value);
-  const year = toYear(value);
+  const weekday = DateTime.toWeekday(value);
+  const month = DateTime.toMonth(value);
+  const day = DateTime.toDay(value);
+  const year = DateTime.toYear(value);
   const currentYear = new Date().getFullYear();
 
   const ariaProps = buildAriaProps(aria);

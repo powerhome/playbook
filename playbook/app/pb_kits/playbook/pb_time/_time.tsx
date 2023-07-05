@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 import { buildCss } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
-import { toTimeZone, toTimeWithMeridiem } from '../pb_kit/dateTime'
+import DateTime from '../pb_kit/dateTime';
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -74,12 +74,12 @@ const Time = (props: TimeProps) => {
             ? (
                 <>
                   <span>
-                    {toTimeWithMeridiem(date, timeZone)}
+                    {DateTime.toTimeWithMeridiem(date, timeZone)}
                   </span>
                   {" "}
                   {showTimezone && (
                     <span>
-                      {toTimeZone(date, timeZone)}
+                      {DateTime.toTimeZone(date, timeZone)}
                     </span>
                   )}
                 </>
@@ -90,13 +90,13 @@ const Time = (props: TimeProps) => {
                     <Body
                         className="pb_time"
                         tag="span"
-                        text={toTimeWithMeridiem(date, timeZone)}
+                        text={DateTime.toTimeWithMeridiem(date, timeZone)}
                     />{" "}
                     {showTimezone && (
                       <Body
                           color="light"
                           tag="span"
-                          text={toTimeZone(date, timeZone)}
+                          text={DateTime.toTimeZone(date, timeZone)}
                       />
                     )}
                   </>
@@ -106,13 +106,13 @@ const Time = (props: TimeProps) => {
                     <Caption
                         color="light"
                         tag="span"
-                        text={toTimeWithMeridiem(date, timeZone)}
+                        text={DateTime.toTimeWithMeridiem(date, timeZone)}
                     />{" "}
                     {showTimezone && (
                       <Caption
                           color="light"
                           tag="span"
-                          text={toTimeZone(date, timeZone)}
+                          text={DateTime.toTimeZone(date, timeZone)}
                       />
                     )}
                   </>

@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
-import { toTimeZone, toMeridiem, toIso, toHour, toMinute } from '../pb_kit/dateTime'
+import DateTime from '../pb_kit/dateTime';
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -24,15 +24,15 @@ type TimeRangeInlineProps = {
 } & GlobalProps
 
 const timezoneString = (dateValue: Date) => {
-  return `${toTimeZone(dateValue)}`
+  return `${DateTime.toTimeZone(dateValue)}`
 }
 
 const dateTimestamp = (dateValue: Date) => {
-  return `${toHour(dateValue)}:${toMinute(dateValue)}${toMeridiem(dateValue)}`
+  return `${DateTime.toHour(dateValue)}:${DateTime.toMinute(dateValue)}${DateTime.toMeridiem(dateValue)}`
 }
 
 const dateTimeIso = (dateValue: Date) => {
-  return toIso(dateValue)
+  return DateTime.toIso(dateValue)
 }
 
 const TimeRangeInline = (props: TimeRangeInlineProps) => {

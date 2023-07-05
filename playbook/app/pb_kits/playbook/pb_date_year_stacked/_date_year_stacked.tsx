@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 import { buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import { toMonth, toDay, toYear } from '../pb_kit/dateTime'
+import DateTime from '../pb_kit/dateTime';
 
 import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
@@ -33,9 +33,9 @@ const DateYearStacked = (props: DateYearStackedProps) => {
       <Title
           dark={dark}
           size={4}
-          text={`${toDay(date)} ${toMonth(date).toUpperCase()}`}
+          text={`${DateTime.toDay(date)} ${DateTime.toMonth(date).toUpperCase()}`}
       />
-      <Body color="light">{toYear(date)}</Body>
+      <Body color="light">{DateTime.toYear(date)}</Body>
     </div>
   )
 }
