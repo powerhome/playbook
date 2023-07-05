@@ -12,6 +12,7 @@ const treeData = [
         label: "People",
         value: "People",
         id: "people1",
+        expanded: true,
         children: [
           {
             label: "Talent Acquisition",

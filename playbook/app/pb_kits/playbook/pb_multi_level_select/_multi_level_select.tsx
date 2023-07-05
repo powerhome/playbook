@@ -51,8 +51,25 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const dropdownRef = useRef(null)
 
 
-  //state for expanded property
-  const [expanded, setExpanded] = useState([])
+  const getExpandedItems = (treeData: { [key: string]: string }[]) => {
+    let expandedItems: any[] = [];
+    
+    const traverse = (items: string | any[]) => {
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        if (item.expanded) {
+          expandedItems.push(item.id);
+        }
+        if (Array.isArray(item.children)) {
+          traverse(item.children);
+        }
+      }
+    }
+  
+    traverse(treeData);
+    return expandedItems;
+  }
+
   //state for whether dropdown is open or closed
   const [isClosed, setIsClosed] = useState(true)
   //state from onchange for textinput, to use for filtering to create typeahead
@@ -63,6 +80,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [formattedData, setFormattedData] = useState([])
   //state for return for default
   const [defaultReturn, setDefaultReturn] = useState([])
+  // Get expanded items from treeData.
+  const initialExpandedItems = getExpandedItems(treeData);
+  // Initialize state with expanded items.
+  const [expanded, setExpanded] = useState(initialExpandedItems);
 
 
   useEffect(() => {
@@ -153,11 +174,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return tree
   }
 
+
+
   //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
     parent_id: string = null,
-    depth: number = 0
+    depth: number = 0,
   ) => {
     if (!Array.isArray(treeData)) {
       return
@@ -294,6 +317,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       </ul>
     )
   }
+
+
 
   return (
     <div {...ariaProps} {...dataProps} className={classes} id={id}>

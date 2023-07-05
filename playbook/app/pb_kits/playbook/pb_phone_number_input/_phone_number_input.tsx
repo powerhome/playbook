@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useRef, useState, useImperativeHandle } from 'react'
 import classnames from 'classnames'
 
 import intlTelInput from 'intl-tel-input'
@@ -64,7 +64,7 @@ const containOnlyNumbers = (value: string) => {
   return /^[()+\-\ .\d]*$/g.test(value)
 }
 
-const PhoneNumberInput = (props: PhoneNumberInputProps) => {
+const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefObject<unknown>) => {
   const {
     aria = {},
     className,
@@ -110,6 +110,23 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
       onValidate(true)
     }
   }, [error, onValidate])
+
+  /*
+    useImperativeHandle exposes the kit's input element to a parent component via a ref.
+    See the Playbook docs for use cases.
+    Read: https://react.dev/reference/react/useImperativeHandle
+  */
+  useImperativeHandle(ref, () => {
+    return {
+      clearField() {
+        setInputValue("")
+        setError("")
+      },
+      inputNode() {
+        return inputRef.current
+      }
+    }
+  })
 
   const showFormattedError = (reason = '') => {
     const countryName = itiInit.getSelectedCountryData().name
@@ -201,8 +218,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
       allowDropdown: !disabled,
       autoInsertDialCode: false,
       initialCountry,
-      onlyCountries,
-      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.6/js/utils.min.js"
+      onlyCountries
     })
 
     inputRef.current.addEventListener("countrychange", (evt: Event) => {
@@ -242,7 +258,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps) => {
   return (
     <div {...wrapperProps}>
       <TextInput
-          ref={inputRef}
+          ref={
+            inputNode => {
+              ref ? ref.current = inputNode : null
+              inputRef.current = inputNode
+            }
+          }
           {...textInputProps}
       />
     </div>
