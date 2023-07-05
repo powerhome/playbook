@@ -1,96 +1,4 @@
-import moment, { Moment } from 'moment'
-import 'moment-strftime'
-import 'moment-timezone'
-
-type DateTimeType = {
-  value: string | Date,
-  zone?: string,
-}
-
 const ABBR_DAYS = ['SU', 'M', 'T', 'W', 'TH', 'F', 'S']
-
-export default class DateTime {
-  value: Moment & any
-  constructor({ value, zone = 'America/New_York' }: DateTimeType) {
-    this.value = this.convertToTimestampZone(value, zone)
-  }
-
-  convertToTimestampZone(value: string | Date, zone: string) {
-    return moment(value).tz(zone)
-  }
-
-  convertToTimezone() {
-    return this.value.strftime('%Z')
-  }
-
-  // toCustomFormat(format = '%-m/%-d') {
-  //   return this.value.strftime(format)
-  // }
-
-  // toYear() {
-  //   return this.value.strftime('%Y')
-  // }
-
-  // toMonth() {
-  //   return this.value.strftime('%b')
-  //   // return this.value.toLocaleString("en-US", {month: "short"})
-  // }
-
-  // toMonthNum() {
-  //   return this.value.strftime('%-m')
-  // }
-
-  // toMonthFull() {
-  //   return this.value.strftime('%B')
-  // }
-
-  // toDay() {
-    // const date = new Date(newDate)
-    // const day = date.toLocaleString("en-US", {day: "numeric"})
-    // return day
-  //   return this.value.strftime('%e')
-  // }
-
-  // toDayAbbr() {
-  //   return ABBR_DAYS[this.value.day()]
-  // }
-
-  // toWeekday() {
-  //   return this.value.strftime('%a')
-  // }
-
-  // toHour() {
-  //   return this.value.strftime('%l')
-  // }
-
-  // toMinute() {
-  //   return this.value.strftime('%M')
-  // }
-
-  // toMeridian() {
-  //   return this.value.strftime('%P')[0]
-  // }
-
-  // toIso() {
-  //   return this.value.toISOString()
-  // }
-
-  // toTime() {
-  //   const time = this.value.strftime('%I:%M')
-
-  //   // strftime adds a leading 0 on single hour times. ie 08:31.
-  //   // this removes that 0 to match the rails kit.
-  //   return time.charAt() === '0' ? time.slice(1) : time
-  // }
-
-  // toTimezone() {
-  //   return this.value.strftime('%Z')
-  // }
-
-  // toTimeWithMeridian() {
-  //   return this.toTime() + this.toMeridian()
-  // }
-}
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -205,33 +113,32 @@ export const toMinute = (newDate: Date, timeZone?: string): string => {
   }
 }
 
-export const fromNow = (newDate: Date, timeZone?: string): string => {
+export const fromNow = (newDate: Date): string => {
 
-  // subtract end time from start time (endTime - startTime)
-  // create object of amount of miliseconds as keys and values as strings, seconds ago, minutes ago, months ago etc...
-  // compare subtracted time to keys in object and grab the matching string
-  // concat the time elapsed with the string and return that
+  const startDate = new Date(newDate).getTime()
+  const endDate = new Date().getTime()
+  const elapsedTime = endDate - startDate
+  let elapsedTimeString = `${Math.round(elapsedTime / (365.25 * 24 * 60 * 60 * 1000))} years ago.`; // 730+ days
 
+  const elapsedTimeData = [
+    { min: 0, max: 44999, value: "a few seconds ago." }, // 0-44 seconds
+    { min: 45000, max: 89999, value: "a minute ago." }, // 45-89 seconds
+    { min: 90000, max: 2649999, value: `${Math.round(elapsedTime / 60000)} minutes ago.`}, //  90s-44 minutes
+    { min: 2650000, max: 7299999, value: "an hour ago" }, // 45-120 minutes
+    { min: 7300000, max: 75699999, value: `${Math.round(elapsedTime / 3600000)} hours ago.`}, // 2-21 hours
+    { min: 75700000, max: 172899999, value: "a day ago." }, // 22-48 hours
+    { min: 172900000, max: 2169999999, value: `${Math.round(elapsedTime / 86400000)} days ago.`}, // 2-25 days
+    { min: 2170000000, max: 5184999999, value: "a month ago."}, // 26-60 days
+    { min: 5185000000, max: 27561699999, value: `${Math.round(elapsedTime / 30.44 * 24 * 60 * 60 * 1000)} months ago.`}, // 60-319 days
+    { min: 27561700000, max: 63072999999, value: "a year ago."}, // 320-730 days
+  ];
 
-  /*
-  {
-    0-44s: a few seconds ago
-    45-89s: a minute ago
-    90s-44m: 2-44 minutes ago ago
-    45-89m: an hour ago
-    90m-21h: 2-21 hours ago
-    22-35h: a day ago
-    36h-25d: 2-25 days ago
-    26-45d: a month ago
-    45-319d: 2-10 months ago
-    320-547d: a year ago
-    548d+: 2-20 years ago
+  for (const timeDate of elapsedTimeData) {
+    if (elapsedTime >= timeDate.min && elapsedTime <= timeDate.max) {
+      elapsedTimeString = timeDate.value;
+      break;
+    }
   }
-  */
-  const date = new Date(newDate)
-  if (timeZone) {
-    return date.toLocaleTimeString(undefined, {timeZone, hour: "2-digit", minute: "2-digit"}).slice(3, 5);
-  } else {
-    return date.toLocaleTimeString(undefined, {hour: "2-digit", minute: "2-digit"}).slice(3, 5);
-  }
+
+  return elapsedTimeString
 }

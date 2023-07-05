@@ -1,10 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import DateTime from '../pb_kit/dateTime'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import { toMonth, toDay, toMinute, toHour, toMeridiem, toTimeZone, toYear } from '../pb_kit/dateTime'
+import { toMonth, toDay, toMinute, toHour, toMeridiem, toTimeZone, toYear, fromNow } from '../pb_kit/dateTime'
 
 import Caption from '../pb_caption/_caption'
 
@@ -54,7 +53,6 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
   )
 
   const currentYear = new Date().getFullYear().toString()
-  const dateTimestamp = new DateTime({ value: timestamp, zone: timezone })
   const dateDisplay = `${toMonth(timestamp, timezone)} ${toDay(timestamp, timezone)}`
   const shouldShowUser = showUser == true && text.length > 0
   const shouldShowTimezone = showTimezone == true && timezone.length > 0
@@ -83,7 +81,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
   }
 
   const formatElapsedString = () => {
-    return `${updatedText} ${userDisplay} ${dateTimestamp.value.fromNow()}`
+    return `${updatedText} ${userDisplay} ${fromNow(timestamp)}`
   }
 
   const captionText = () => {
