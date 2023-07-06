@@ -76,9 +76,11 @@ $card_colors: (
 
 $primary-action:      $primary !default;
 $secondary-action:    rgba($primary_action, 0.05) !default;
+$primary_action_dark: #0082ff !default;
 
 $action_colors: (
-  primary_action:            $primary-action
+  primary_action:            $primary-action,
+  primary_action_dark:       $primary_action_dark
 );
 
 /* Active colors ----------------------*/

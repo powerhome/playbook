@@ -245,6 +245,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += shadow ? `shadow_${shadow} ` : ''
     return css
   },
+  borderRadiusProps: ({ borderRadius }: BorderRadius) => {
+    let css = ''
+    css += borderRadius ? `border_radius_${borderRadius} ` : ''
+    return css
+  },
   lineHeightProps: ({ lineHeight }: LineHeight) => {
     let css = ''
     css += lineHeight ? `line_height_${lineHeight} ` : ''
@@ -347,7 +352,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     } else {
       return order ? `flex_order_${order}` : ''
     }
-  }, 
+  },
   positionProps: ({ position }: Position) => {
     let css = ''
     css += position && position !== 'static' ? `position_${position}` : ''

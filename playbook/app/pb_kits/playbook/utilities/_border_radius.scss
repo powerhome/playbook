@@ -1,0 +1,11 @@
+@import "../tokens/border_radius";
+
+@mixin border-radius-classes($border_radius-list) {
+  @each $name, $radius in $border_radius-list {
+    .#{$name} {
+      border-radius: $radius;
+    }
+  }
+}
+
+@include border-radius-classes($border_radius)

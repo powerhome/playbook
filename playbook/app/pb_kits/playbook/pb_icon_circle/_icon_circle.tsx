@@ -22,6 +22,7 @@ type IconCircleProps = {
     | "teal"
     | "red"
     | "yellow"
+    | "orange"
     | "green",
 }
 

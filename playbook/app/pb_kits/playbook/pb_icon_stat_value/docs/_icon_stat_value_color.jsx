@@ -66,6 +66,15 @@ const IconStatValueColor = (props) => {
           variant="green"
           {...props}
       />
+      <br />
+      <IconStatValue
+          icon="globe"
+          text="Uranus"
+          unit="AU"
+          value={19.18}
+          variant="orange"
+          {...props}
+      />
     </div>
 
   )
