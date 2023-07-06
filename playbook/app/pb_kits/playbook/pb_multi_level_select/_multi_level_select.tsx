@@ -348,11 +348,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           </div>
           {isClosed ? (
             <div key='chevron-down'>
-              <Icon icon='chevron-down' />
+              <Icon icon='chevron-down' size="xs"/>
             </div>
           ) : (
             <div key='chevron-up'>
-              <Icon icon='chevron-up' />
+              <Icon icon='chevron-up' size="xs"/>
             </div>
           )}
         </div>
