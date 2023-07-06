@@ -98,20 +98,8 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       if (current) {
         current.classList.remove('active');
       }
-      /** conditional statment to extract start and end dates from selectedDates,
-      *   then loop through ranges prop in pluginData
-      *   and check if chosen dates equal to a date in the ranges prop
-      *   if they are equal, add the active class
-      */
      
       if (selectedDates.length > 0 && activeLabel) {
-        // const selected = pluginData.rangesNav.querySelectorAll(".nav-item-link")
-        // selected.forEach(el => {
-        //   if (el.innerHTML === activeLabel)
-        //   el.classList.add('active')
-        //   return
-        // })
-
         pluginData.rangesButtons[activeLabel].classList.add('active');
       }
     }
