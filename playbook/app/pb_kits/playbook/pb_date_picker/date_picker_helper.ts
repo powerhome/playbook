@@ -182,33 +182,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     static: staticPosition,
   })
 
-
-  // ===========================================================
-  //                 Additional JS Functionality               |
-  // ===========================================================
-
-  // opens flatpickr instance when calander icon is clicked so we can have a hover state on icon
-  // window.addEventListener("DOMContentLoaded", (event) => {
-  //   event.preventDefault();
-  //   function attachIconClickHandler() {
-  //     const variantArr = document.querySelectorAll(`#cal-icon-${pickerId}`)
-  //     if (!variantArr) {
-  //       setTimeout(attachIconClickHandler, 100);
-  //       return;
-  //     }
-
-  //     const instance = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
-  //     variantArr.forEach((icon) => {
-  //       icon.addEventListener("click", function(event) {
-  //         event.preventDefault();
-  //         instance.open()
-  //       });
-  //     })
-  //   }
-
-  //   attachIconClickHandler();
-  // });
-
   // Assign dynamically sourced flatpickr instance to variable
   const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
   picker.innerContainer.parentElement.id = `cal-${pickerId}`
