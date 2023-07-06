@@ -1,0 +1,1 @@
+Tighter padding on first and last-child cells for data-heavy tables.
