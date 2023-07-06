@@ -21,10 +21,10 @@ module Playbook
         return false if @required && !subject_class.props[prop_key].required
 
         if @type_class && @default
-          subject_class.props[prop_key].class == @type_class &&
+          subject_class.props[prop_key].instance_of?(@type_class) &&
             subject_class.props[prop_key].default == @default
         elsif @type_class && !@default
-          subject_class.props[prop_key].class == @type_class
+          subject_class.props[prop_key].instance_of?(@type_class)
         elsif !@type_class && @default
           subject_class.props[prop_key].default == @default
         else
@@ -113,6 +113,29 @@ module Playbook
 
       failure_message do |subject_class|
         base_message = "expected #{subject_class} to define :#{prop_key} boolean prop"
+        default_message = "with default of #{@default}"
+
+        @default ? [base_message, default_message].join(" ") : base_message
+      end
+    end
+
+    matcher :define_array_prop do |prop_key|
+      chain :with_default do |default|
+        @default = default
+      end
+
+      match do |subject_class|
+        is_array = subject_class.props[prop_key]&.class == Props::Array
+
+        if @default
+          is_array && subject_class.props[prop_key].default == @default
+        else
+          is_array
+        end
+      end
+
+      failure_message do |subject_class|
+        base_message = "expected #{subject_class} to define :#{prop_key} array prop"
         default_message = "with default of #{@default}"
 
         @default ? [base_message, default_message].join(" ") : base_message

@@ -12,6 +12,7 @@ const treeData = [
         label: "People",
         value: "People",
         id: "people1",
+        expanded: true,
         children: [
           {
             label: "Talent Acquisition",
@@ -72,15 +73,18 @@ const MultiLevelSelectDefault = (props) => {
   return (
     <div>
       <MultiLevelSelect
-          id="multiselect-default"
+          id='multiselect-default'
           onSelect={(selectedNodes) =>
-          console.log("Selected Items", selectedNodes)
-          }
+          console.log(
+            "Selected Items",
+            selectedNodes
+          )
+        }
           treeData={treeData}
           {...props}
       />
     </div>
-  );
+  )
 };
 
 export default MultiLevelSelectDefault;

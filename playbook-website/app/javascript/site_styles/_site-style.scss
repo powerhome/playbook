@@ -3,6 +3,7 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/border_radius";
 @import "playbook-ui/dist/tokens/shadows";
+@import "playbook-ui/dist/tokens/typography";
 
 $selector: ".pb--page";
 $nav_breakpoint: breakpoint("lg");
@@ -242,7 +243,7 @@ body {
     padding: 0 10px;
     line-height: 34px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: $regular;
     display: inline-block;
     position: relative;
 
@@ -259,7 +260,7 @@ body {
     }
 
     &.active {
-      font-weight: 600;
+      font-weight: $bold;
 
       &::after {
         background: $primary;
