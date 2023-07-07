@@ -12,7 +12,8 @@ type IconCircleProps = {
   className?: string,
   dark?: boolean,
   data?: {[key:string]: string},
-  icon: string,
+  icon?: string,
+  emoji?: string,
   id?: string,
   size?: "base" | "xs" | "sm" | "md" | "lg" | "xl",
   variant?: | "default"
@@ -26,7 +27,7 @@ type IconCircleProps = {
 }
 
 const IconCircle = (props: IconCircleProps) => {
-  const { aria = {}, className, dark = false, data = {}, icon, id, size = 'md', variant = 'default' } = props
+  const { aria = {}, className, dark = false, data = {}, emoji, icon, id, size = 'md', variant = 'default' } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -39,10 +40,22 @@ const IconCircle = (props: IconCircleProps) => {
         className={classes}
         id={id}
     >
-      <Icon
-          dark={dark}
-          icon={icon}
-      />
+      {
+        icon && !emoji && (
+          <Icon
+            dark={dark}
+            icon={icon}
+          />
+        )
+      }
+      {
+        emoji && !icon && (
+          <span>
+            {emoji}
+          </span>
+        )
+      }
+     
     </div>
   )
 }

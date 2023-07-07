@@ -3,7 +3,9 @@
 module Playbook
   module PbIconCircle
     class IconCircle < Playbook::KitBase
-      prop :icon, required: true
+      prop :icon
+      prop :emoji, type: Playbook::Props::String,
+                   default: ""
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md base lg xl],
                   default: "md"
