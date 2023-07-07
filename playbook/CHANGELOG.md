@@ -1,3 +1,46 @@
+# Updated Phone Number Input: Easier Value Manipulation in React Forms
+##### June 29, 2023
+
+![12 28 0](https://github.com/powerhome/playbook/assets/73710701/a1476fb7-bf5e-43f9-bc7d-a993eaef673a)
+
+We’ve updated our PhoneNumberInput so that it’s more react-friendly. You can now pass a ref directly to the PhoneNumberInput kit, giving you more control over the input! This should make it much easier to manually clear the values when using with form libraries like formik, react-hook-form, or any form in general.
+
+[12.28.0](https://github.com/powerhome/playbook/tree/12.28.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Implementing Custom Icons for Selectable Card Icon Kit [\#2620](https://github.com/powerhome/playbook/pull/2620) ([carloslimasd](https://github.com/carloslimasd))
+- Access Phone Number Input Kit’s Input Attributes [\#2613](https://github.com/powerhome/playbook/pull/2613) ([gavhuang](https://github.com/gavhuang))
+
+**Fixed Bugs:**
+
+- MultiLevelSelect Kit: Fixed Expanded State to Load From TreeData [\#2621](https://github.com/powerhome/playbook/pull/2621) ([jasperfurniss](https://github.com/jasperfurniss))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.27.0...12.28.0)
+
+
+# An Easier Way to Display Structured Data: The MultiLevelSelect kit!
+##### June 28, 2023
+![12-27-0](https://github.com/powerhome/playbook/assets/9158723/d385bcb8-a279-4240-a47e-c91120c7e22b)
+
+We're excited to announce the release of our Multi Level Select kit for Rails and React. With [this zero-dependency component](https://playbook.powerapp.cloud/kits/multi_level_select/react), developers can easily add data to complex forms, bringing effortless navigation to any application. 
+
+[12.27.0](https://github.com/powerhome/playbook/tree/12.27.0) full list of changes:
+
+
+**Kit Enhancements:**
+
+- Bold default for Title 3 [\#2598](https://github.com/powerhome/playbook/pull/2598) ([nickamantia](https://github.com/nickamantia))
+- MultiSelect Rails [\#2590](https://github.com/powerhome/playbook/pull/2590) ([jasperfurniss](https://github.com/jasperfurniss))
+- Phone Number Kit Validation [\#2582](https://github.com/powerhome/playbook/pull/2582) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Improvements:**
+
+- Add CSS for Changelog Dates [\#2616](https://github.com/powerhome/playbook/pull/2616) ([gavhuang](https://github.com/gavhuang))
+- Font weight tokens updates [\#2609](https://github.com/powerhome/playbook/pull/2609) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.26.1...12.27.0)
+
 # Detail Kit Unleashed: Supercharge Data Display in Your UI
 ##### June 22, 2023
 

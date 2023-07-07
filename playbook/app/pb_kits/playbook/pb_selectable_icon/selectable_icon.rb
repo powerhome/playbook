@@ -4,6 +4,8 @@ module Playbook
   module PbSelectableIcon
     class SelectableIcon < Playbook::KitBase
       # Icon props
+      prop :custom_icon, type: Playbook::Props::String,
+                         default: nil
       prop :icon, type: Playbook::Props::String
       # Title text
       prop :text, type: Playbook::Props::String
