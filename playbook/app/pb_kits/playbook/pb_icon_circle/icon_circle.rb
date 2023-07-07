@@ -13,6 +13,11 @@ module Playbook
                      values: %w[default royal blue orange purple teal red yellow green],
                      default: "default"
 
+      def valid_emoji(emoji)
+        emoji_regex = /\p{Emoji}/
+        emoji_regex.match?(emoji)
+      end
+
       def classname
         generate_classname("pb_icon_circle_kit", size, variant)
       end

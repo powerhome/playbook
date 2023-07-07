@@ -33,6 +33,12 @@ const IconCircle = (props: IconCircleProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_icon_circle_kit', size, variant), globalProps(props), className)
 
+  const isValidEmoji = (emoji: string) => {
+    // Using regular expression to check if the string is a valid emoji/emoji Unicode
+    const emojiRegex = /^(\p{Emoji}|\uFE0F)+$/u;
+    return emojiRegex.test(emoji);
+  };
+
   return (
     <div
         {...ariaProps}
@@ -49,7 +55,7 @@ const IconCircle = (props: IconCircleProps) => {
         )
       }
       {
-        emoji && !icon && (
+        emoji && !icon && isValidEmoji(emoji) && (
           <span>
             {emoji}
           </span>

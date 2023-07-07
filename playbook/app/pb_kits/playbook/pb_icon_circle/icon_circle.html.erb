@@ -5,7 +5,7 @@
     id: object.id) do %>
   <% if object.icon.present? && object.emoji.blank? %>
     <%= pb_rails("icon", props: { dark: object.dark, icon: object.icon, fixed_width: true }) %>
-  <% elsif object.emoji.present? && object.icon.blank? %>
+  <% elsif object.emoji.present? && object.icon.blank? && valid_emoji(object.emoji) %>
     <span><%= object.emoji.html_safe %></span>
   <% end %>
 <% end %>
