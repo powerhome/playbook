@@ -7,7 +7,7 @@ A new Quick Pick variant now in DatePicker! This sleek and intuitive component p
 
 [12.29.0](https://github.com/powerhome/playbook/tree/12.29.0) full list of changes:
 
-****Kit Enhancements:****
+**Kit Enhancements:**
 
 - Map Custom Button [\#2626](https://github.com/powerhome/playbook/pull/2626) ([nidaqg](https://github.com/nidaqg))
 - New QuickPick Variant for DatePicker with Preset Dropdown [\#2407](https://github.com/powerhome/playbook/pull/2407) ([carloslimasd](https://github.com/carloslimasd) , [Israel-Molestina](https://github.com/Israel-Molestina))
