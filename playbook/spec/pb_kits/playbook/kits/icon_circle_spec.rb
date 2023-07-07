@@ -5,7 +5,11 @@ require_relative "../../../../app/pb_kits/playbook/pb_icon_circle/icon_circle"
 RSpec.describe Playbook::PbIconCircle::IconCircle do
   subject { Playbook::PbIconCircle::IconCircle }
 
-  it { is_expected.to define_prop(:icon).that_is_required }
+  it { is_expected.to define_prop(:icon) }
+  it {
+    is_expected.to define_prop(:emoji)
+      .with_default("")
+  }
   it {
     is_expected.to define_enum_prop(:size)
       .with_default("md")
@@ -25,10 +29,6 @@ RSpec.describe Playbook::PbIconCircle::IconCircle do
       expect(subject.new(icon: icon, size: "sm", dark: true).classname).to eq "pb_icon_circle_kit_sm_default dark"
       expect(subject.new(icon: icon, variant: "purple", size: "lg").classname).to eq "pb_icon_circle_kit_lg_purple"
       expect(subject.new(icon: icon, classname: "additional_class").classname).to eq "pb_icon_circle_kit_md_default additional_class"
-    end
-
-    it "raises an error when not given an icon" do
-      expect { subject.new({}) }.to raise_error(Playbook::Props::Error)
     end
   end
 end
