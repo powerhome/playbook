@@ -15,6 +15,7 @@ module Playbook
         dark_props,
         max_width_props,
         z_index_props,
+        border_radius_props,
         number_spacing_props,
         shadow_props,
         line_height_props,
