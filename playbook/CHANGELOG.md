@@ -1,3 +1,19 @@
+# Introducing Quick Pick: Effortless Date Range Selection with the Enhanced Date Picker
+##### July 6, 2023
+
+![12 29 0](https://github.com/powerhome/playbook/assets/73710701/f8ebb760-d5ab-4508-b833-7bef68ab3376)
+
+A new Quick Pick variant now in DatePicker! This sleek and intuitive component provides a range of pre-defined date options, enhances user experience, and streamlines workflows.
+
+[12.29.0](https://github.com/powerhome/playbook/tree/12.29.0) full list of changes:
+
+****Kit Enhancements:****
+
+- Map Custom Button [\#2626](https://github.com/powerhome/playbook/pull/2626) ([nidaqg](https://github.com/nidaqg))
+- New QuickPick Variant for DatePicker with Preset Dropdown [\#2407](https://github.com/powerhome/playbook/pull/2407) ([carloslimasd](https://github.com/carloslimasd) , [Israel-Molestina](https://github.com/Israel-Molestina))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.28.0...12.29.0)
+
 # Updated Phone Number Input: Easier Value Manipulation in React Forms
 ##### June 29, 2023
 
