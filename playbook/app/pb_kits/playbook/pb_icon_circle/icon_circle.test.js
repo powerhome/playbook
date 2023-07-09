@@ -12,7 +12,7 @@ describe("IconCircle Kit", () => {
                 data={{ testid: testId }}
                 icon="user"
                 size="md"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -25,7 +25,7 @@ describe("IconCircle Kit", () => {
                 data={{ testid: testId }}
                 icon="user"
                 size="md"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
