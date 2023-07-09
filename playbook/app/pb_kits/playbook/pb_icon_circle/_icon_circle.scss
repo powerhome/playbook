@@ -21,6 +21,10 @@ $pb_icon_circle_sizes: (
   overflow: hidden;
   position: relative;
 
+  .icon_circle_emoji {
+    font-family: sans-serif;
+  }
+
   i,
   svg {
     &[class^=pb_icon_kit] {

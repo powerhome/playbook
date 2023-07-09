@@ -56,7 +56,7 @@ const IconCircle = (props: IconCircleProps) => {
       }
       {
         emoji && !icon && isValidEmoji(emoji) && (
-          <span>
+          <span className="icon_circle_emoji">
             {emoji}
           </span>
         )
