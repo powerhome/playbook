@@ -6,20 +6,20 @@ const IconCircleEmoji = (props) => {
   return (
     <div>
       <IconCircle
-          emoji="😁"
+          icon="😁"
           size="sm"
           {...props}
       />
       <br/>
       <IconCircle
-          emoji="&#128525;"
+          icon="&#128525;"
           size="md"
           variant="red"
           {...props}
       />
       <br/>
       <IconCircle
-          emoji="&#x1F389;"
+          icon="&#x1F389;"
           size="lg"
           variant="teal"
           {...props}

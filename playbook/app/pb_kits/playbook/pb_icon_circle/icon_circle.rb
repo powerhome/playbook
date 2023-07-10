@@ -3,7 +3,7 @@
 module Playbook
   module PbIconCircle
     class IconCircle < Playbook::KitBase
-      prop :icon
+      prop :icon, required: true
       prop :emoji, type: Playbook::Props::String,
                    default: ""
       prop :size, type: Playbook::Props::Enum,
@@ -12,11 +12,6 @@ module Playbook
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default royal blue orange purple teal red yellow green],
                      default: "default"
-
-      def valid_emoji(emoji)
-        emoji_regex = /\p{Emoji}/
-        emoji_regex.match?(emoji)
-      end
 
       def classname
         generate_classname("pb_icon_circle_kit", size, variant)

@@ -38,6 +38,11 @@ module Playbook
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
 
+      def valid_emoji(icon)
+        emoji_regex = /\p{Emoji}/
+        emoji_regex.match?(icon)
+      end
+
       def classname
         generate_classname(
           "pb_icon_kit",

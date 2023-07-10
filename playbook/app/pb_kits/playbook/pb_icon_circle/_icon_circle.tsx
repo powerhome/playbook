@@ -12,8 +12,7 @@ type IconCircleProps = {
   className?: string,
   dark?: boolean,
   data?: {[key:string]: string},
-  icon?: string,
-  emoji?: string,
+  icon: string,
   id?: string,
   size?: "base" | "xs" | "sm" | "md" | "lg" | "xl",
   variant?: | "default"
@@ -27,17 +26,12 @@ type IconCircleProps = {
 }
 
 const IconCircle = (props: IconCircleProps) => {
-  const { aria = {}, className, dark = false, data = {}, emoji, icon, id, size = 'md', variant = 'default' } = props
+  const { aria = {}, className, dark = false, data = {}, icon, id, size = 'md', variant = 'default' } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_icon_circle_kit', size, variant), globalProps(props), className)
 
-  const isValidEmoji = (emoji: string) => {
-    // Using regular expression to check if the string is a valid emoji/emoji Unicode
-    const emojiRegex = /^(\p{Emoji}|\uFE0F)+$/u;
-    return emojiRegex.test(emoji);
-  };
 
   return (
     <div
@@ -46,22 +40,11 @@ const IconCircle = (props: IconCircleProps) => {
         className={classes}
         id={id}
     >
-      {
-        icon && !emoji && (
-          <Icon
-            dark={dark}
-            icon={icon}
-          />
-        )
-      }
-      {
-        emoji && !icon && isValidEmoji(emoji) && (
-          <span className="icon_circle_emoji">
-            {emoji}
-          </span>
-        )
-      }
-     
+        <Icon
+          dark={dark}
+          icon={icon}
+        />
+        
     </div>
   )
 }

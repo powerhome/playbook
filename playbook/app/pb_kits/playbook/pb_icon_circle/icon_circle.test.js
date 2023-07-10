@@ -37,7 +37,7 @@ describe("IconCircle Kit", () => {
         render(
             <IconCircle
                 data={{ testid: testId }}
-                emoji="&#128525;"
+                icon="&#128525;"
                 size="md"
             />
         )
