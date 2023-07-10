@@ -15,10 +15,43 @@
   <% end %>
 
   <%= pb_rails("background", props: { classname: "middle-white-background", background_color: "white", padding: "xl" }) do %>
+    <%= pb_rails("flex", props: { max_width: "xl", horizontal: "center", spacing: "evenly", wrap: true }) do %>
+      <%= pb_rails("background", props: {background_color: "dark", border_radius: "xl" }) do %>
+        <%= pb_rails("background", props: {background_color: "dark", image_url: asset_pack_path("media/images/banner-background.png"), border_radius: "xl", background_repeat: "no-repeat", background_position: "center right", background_size: "auto", alt: "background", transition: "fade", padding: "xl" }) do %>
+          <%= pb_rails("flex", props: { horizontal: "center", spacing: "between", wrap: true }) do %>
+            <%= pb_rails("flex/flex_item") do %>
+              <%= pb_rails("flex", props: {orientation: "column"}) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("body", props: {
+                    text: "BY THE NUMBERS",
+                    color: "link"
+                  }) %>
+                <% end %>
+                <%= pb_rails("flex/flex_item") do %>2<% end %>
+              <% end %>
+            <% end %>
+            <%= pb_rails("flex/flex_item") do %>2<% end %>
 
-    <%= pb_rails("background", props: {background_color: "dark", border_radius: "xl" }) do %>
-
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae
+          gravida nibh. Integer nec lorem vitae purus vehicula gravida sed at
+          nibh. Cras suscipit nibh sed sem rhoncus accumsan. Nulla iaculis odio
+          odio, non porta purus pellentesque non. Integer tortor nisi, gravida
+          at tempor eu, pretium quis velit. Sed tincidunt vulputate ipsum ac
+          ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Vivamus odio urna, ornare sed mauris a, iaculis consectetur dui.
+          Vivamus ac rutrum mi, in vehicula neque. Lorem ipsum dolor sit amet,
+          consectetur adipiscing elit. Mauris vitae gravida nibh. Integer nec
+          lorem vitae purus vehicula gravida sed at nibh. Cras suscipit nibh sed
+          sem rhoncus accumsan. Nulla iaculis odio odio, non porta purus
+          pellentesque non. Integer tortor nisi, gravida at tempor eu, pretium
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
+  <% end %>
+
+  <%= pb_rails("background", props: { classname: "middle-white-background", background_color: "white", padding: "xl" }) do %>
+
 
     <%= pb_rails("flex", props: { classname: "second-section-inner-wrapper", horizontal: "center", spacing: "evenly", wrap: true }) do %>
       <%= pb_rails("flex/flex_item", props: { classname: "react-rails-text"}) do %>
