@@ -87,7 +87,7 @@ const NavItem = (props: NavItemProps) => {
         <span className="pb_nav_list_item_text">
           {text || children}
         </span>
-        
+
         {iconRight &&
           <div
             className="pb_nav_list_item_icon_section"
