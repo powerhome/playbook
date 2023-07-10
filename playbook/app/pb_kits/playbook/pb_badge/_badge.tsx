@@ -24,7 +24,7 @@ type BadgeProps = {
   removeOnClick?: React.MouseEventHandler<HTMLSpanElement>,
   rounded?: boolean,
   text?: string,
-  variant?: "error" | "info" | "neutral" | "primary" | "success" | "warning",
+  variant?: "error" | "info" | "neutral" | "notification" | "primary" | "success" | "warning",
 } & GlobalProps
 const Badge = (props: BadgeProps) => {
   const {
