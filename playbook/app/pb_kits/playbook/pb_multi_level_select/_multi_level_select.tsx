@@ -15,6 +15,7 @@ import {
   getCheckedItems,
   getDefaultCheckedItems,
   recursiveCheckParent,
+  getExpandedItems,
 } from "./_helper_functions"
 
 type MultiLevelSelectProps = {
@@ -22,6 +23,7 @@ type MultiLevelSelectProps = {
   className?: string
   data?: { [key: string]: string }
   id?: string
+  inputDisplay?: "pills" | "none"
   name?: string
   returnAllSelected?: boolean
   treeData?: { [key: string]: string }[]
@@ -34,6 +36,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     className,
     data = {},
     id,
+    inputDisplay = "pills",
     name,
     returnAllSelected = false,
     treeData,
@@ -49,26 +52,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   )
 
   const dropdownRef = useRef(null)
-
-
-  const getExpandedItems = (treeData: { [key: string]: string }[]) => {
-    let expandedItems: any[] = [];
-    
-    const traverse = (items: string | any[]) => {
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        if (item.expanded) {
-          expandedItems.push(item.id);
-        }
-        if (Array.isArray(item.children)) {
-          traverse(item.children);
-        }
-      }
-    }
-  
-    traverse(treeData);
-    return expandedItems;
-  }
 
   //state for whether dropdown is open or closed
   const [isClosed, setIsClosed] = useState(true)
@@ -173,8 +156,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
     return tree
   }
-
-
 
   //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
@@ -331,7 +312,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 ))
               : null}
 
-            {returnedArray.length !== 0 && returnAllSelected
+            {returnedArray.length !== 0 && inputDisplay === "pills" && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill
                     key={index}
@@ -342,7 +323,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 ))
               : null}
             {!returnAllSelected &&
-              defaultReturn.length !== 0 &&
+              defaultReturn.length !== 0 && inputDisplay === "pills" ?
               defaultReturn.map((item, index) => (
                 <FormPill
                   key={index}
@@ -350,9 +331,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   size='small'
                   onClick={(event: any) => handlePillClose(event, item)}
                 />
-              ))}
-            {returnedArray.length !== 0 && returnAllSelected && <br />}
-            {defaultReturn.length !== 0 && !returnAllSelected && <br />}
+              ))
+              : null
+            }
+            {returnedArray.length !== 0 && returnAllSelected && inputDisplay === "pills" && <br />}
+            {defaultReturn.length !== 0 && !returnAllSelected && inputDisplay === "pills" && <br />}
             <input
               id='multiselect_input'
               onChange={(e) => {
@@ -365,11 +348,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           </div>
           {isClosed ? (
             <div key='chevron-down'>
-              <Icon icon='chevron-down' />
+              <Icon icon='chevron-down' size="xs"/>
             </div>
           ) : (
             <div key='chevron-up'>
-              <Icon icon='chevron-up' />
+              <Icon icon='chevron-up' size="xs"/>
             </div>
           )}
         </div>
