@@ -1,0 +1,107 @@
+<div class="large-screen-banner">
+  <%= pb_rails("background", props: {
+      classname: "middle-banner-background",
+      background_color: "white",
+      padding_top: "xl"
+  }) do %>
+    <%= pb_rails("flex", props: {
+        classname: "banner-background-width",
+        max_width: "xl",
+        horizontal: "center",
+        wrap: true
+    }) do %>
+      <%= pb_rails("background", props: {
+          classname: "banner-background-width",
+          background_color: "dark",
+          border_radius: "xl"
+      }) do %>
+        <%= pb_rails("background", props: {
+            background_color: "dark",
+            image_url: asset_pack_path("media/images/banner-background.png"),
+            border_radius: "xl",
+            background_repeat: "no-repeat",
+            background_position: "center right",
+            background_size: "auto",
+            alt: "background",
+            transition: "fade",
+            padding: "xl"
+        }) do %>
+          <%= pb_rails("flex", props: {
+              horizontal: "center",
+              spacing: "between",
+              wrap: true
+          }) do %>
+            <%= pb_rails("flex/flex_item", props: {align_self: "start"}) do %>
+              <%= pb_rails("flex", props: {
+                  orientation: "column"
+              }) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("body", props: {
+                    text: "BY THE NUMBERS",
+                    color: "link"
+                  }) %>
+                <% end %>
+                <%= pb_rails("flex/flex_item", props: {padding_top: "xs"}) do %>
+                  <%= pb_rails("title", props: {
+                      text: "Don't take our word for it.",
+                      tag: "h2",
+                      size: 2,
+                      dark: true
+                  }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= pb_rails("flex/flex_item") do %>
+              <%= pb_rails("button", props: {
+                  dark: true,
+                  variant: "link"
+              }) do %>
+                <span>Explore All Components</span>
+                <%= pb_rails("icon", props: {dark: true, icon: "chevron-right"}) %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <%= pb_rails("flex", props: {
+              padding_top: "xl",
+              horizontal: "center",
+              spacing: "between",
+              wrap: true
+          }) do %>
+            <%= pb_rails("flex/flex_item") do %>
+              <%= pb_rails("icon_stat_value", props: {
+                dark: true,
+                size: "md",
+                icon: "globe",
+                text: "components",
+                unit: "＋",
+                value: 200,
+                variant:"orange"
+              }) %>
+            <% end %>
+            <%= pb_rails("flex/flex_item") do %>
+              <%= pb_rails("icon_stat_value", props: {
+                dark: true,
+                size: "md",
+                icon: "globe",
+                text: "downloads",
+                unit: "＋",
+                value: 900,
+                variant:"orange"
+              }) %>
+            <% end %>
+            <%= pb_rails("flex/flex_item") do %>
+              <%= pb_rails("icon_stat_value", props: {
+                dark: true,
+                size: "md",
+                icon: "globe",
+                text: "Release Updates",
+                value: "Weekly",
+                variant:"orange"
+              }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

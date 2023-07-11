@@ -26,6 +26,10 @@
     display: flex;
     justify-content: center;
   }
+  .middle-banner-background {
+    display: flex;
+    justify-content: center;
+  }
   .pb-hero-image {
     padding-right: $space_lg;
   }
@@ -40,6 +44,9 @@
     width: 275px;
     position: absolute;
     left: 505px;
+  }
+  .banner-background-width {
+    width: 100%;
   }
   @include break_at(1342px){
     .kit-example {
@@ -77,6 +84,41 @@
         margin-left: 0 !important;
         margin-top: $space_md;
       }
+    }
+  }
+
+
+  // BreakPoints for new HomePage Banner
+  @include break_at(breakpoint("md")) {
+    .numbers-body-txt {
+      display: none;
+    }
+    .banner-flexbox-top {
+      flex-direction: column;
+      align-items: center;
+      align-content: center;
+    }
+    .middle-banner-background {
+      padding-left: $space_md;
+      padding-right: $space_md;
+    }
+  }
+
+  @include break_at(breakpoint("sm")) {
+    .hide-sm-screen-txt {
+      display: none;
+    }
+    .numbers-body-txt {
+      display: block;
+    }
+    // .banner-flexbox-top {
+    //   flex-direction: column;
+    //   align-items: center;
+    //   align-content: center;
+    // }
+    .middle-banner-background {
+      padding-left: none;
+      padding-right: none;
     }
   }
 }

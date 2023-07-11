@@ -22,7 +22,7 @@ module Playbook
       prop :text, type: Playbook::Props::String,
                   default: ""
 
-      prop :value, type: Playbook::Props::Numeric
+      prop :value
 
       def classname
         generate_classname("pb_icon_stat_value_kit", orientation, size, variant)
