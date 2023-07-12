@@ -1,5 +1,7 @@
 // Color Helper Utilities
 
+$transition-speed: 0.2s;
+
 @function shade($color, $percentage) {
   @return mix($charcoal, $color, $percentage);
 }
@@ -31,12 +33,46 @@
   @each $name, $color in $colors-list {
     .bg-hover-#{$name}:hover {
       background-color: $color !important;
-      transition: background-color $transition-speed ease, height $transition-speed ease;
+      transition: background-color $transition-speed ease;
     }
   }
 }
 
+@mixin hover-shadow-classes($shadows-list) {
+  @each $name, $shadow in $shadows-list {
+    .hover_#{$name}:hover {
+      box-shadow: $shadow;
+      transition: box-shadow $transition-speed ease;
+    }
+  }
+}
+
+@mixin hover-scale-classes($scales-list) {
+  @each $name, $scale in $scales-list {
+    .hover_#{$name}:hover {
+      transform: $scale;
+    }
+  }
+}
+
+
+// @include hover-scale-classes($scales);
+@include hover-shadow-classes($box_shadows);
+@include hover-color-classes($product_colors);
+@include hover-color-classes($status_colors);
+@include hover-color-classes($data_colors);
+@include hover-color-classes($shadow_colors);
+@include hover-color-classes($colors);
+@include hover-color-classes($interface_colors);
+@include hover-color-classes($main_colors);
 @include hover-color-classes($background_colors);
+@include hover-color-classes($card_colors);
+@include hover-color-classes($active_colors);
+@include hover-color-classes($action_colors);
+@include hover-color-classes($hover_colors);
+@include hover-color-classes($border_colors);
+@include hover-color-classes($text_colors);
+@include hover-color-classes($category_colors);
 
 
 @mixin text-color($colors-list) {

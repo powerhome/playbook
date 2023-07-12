@@ -1,9 +1,11 @@
-@import "playbook-ui/dist/tokens/border_radius";
+@import "../tokens/exports/border_radius";
+
+$transition-speed: 0.2s;
 
 .border_radius {
-//   @mixin border-example {
-//     transition: background-color $transition-speed ease, height $transition-speed ease;
-//   }
+  @mixin border-example {
+    transition: background-color $transition-speed ease, height $transition-speed ease;
+  }
 
   &_rounded {
     border-radius: $border_radius_rounded;

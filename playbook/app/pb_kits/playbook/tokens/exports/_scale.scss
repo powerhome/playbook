@@ -1,0 +1,10 @@
+@import "../scale";
+
+:export {
+    @mixin export_scale($scales_list) {
+        @each $name, $scale in $scales_list {
+        #{$name}: $scale;
+        }
+    }
+    @include export_scale($scales);
+}

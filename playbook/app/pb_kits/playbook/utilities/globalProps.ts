@@ -59,6 +59,11 @@ type FlexWrap = {
   flexWrap?: "wrap" | "nowrap" | "wrapReverse"
 }
 
+type Hover = Shadow & {
+  background?: string,
+  scale?: "sm" | "md" | "lg"
+}
+
 type JustifyContent = {
   justifyContent?: Alignment & Space
 }
@@ -137,7 +142,14 @@ const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: st
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
 
-  hoverProps: ({ hover }: { hover?: string }) => hover ? `bg-hover-${hover}` : '', // Add the "hoverProps" category
+  hoverProps: ({ hover }: { hover?: Hover }) => {
+      let css = '';
+      if (!hover) return css;
+      css += hover.shadow ? `hover_shadow_${hover.shadow} ` : '';
+      css += hover.background ? `bg-hover-${hover.background } ` : '';
+      css += hover.scale ? `hover_scale_${hover.scale} ` : '';
+      return css;
+  },
 
   spacingProps: ({
     marginRight,
