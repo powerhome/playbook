@@ -25,7 +25,7 @@ test('with thin font weight', () => {
   )
 
   const kit = screen.getByTestId('primary-test')
-  expect(kit).toHaveClass('pb_title_kit_thin')
+  expect(kit).toHaveClass('pb_title_kit_size_3_thin')
 })
 
 test('with colors', () => {
@@ -38,5 +38,5 @@ test('with colors', () => {
   )
 
   const kit = screen.getByTestId('primary-test')
-  expect(kit).toHaveClass('pb_title_kit_success')
+  expect(kit).toHaveClass('pb_title_kit_size_3_success')
 })

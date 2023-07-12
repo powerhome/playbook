@@ -103,7 +103,7 @@ describe("LabelValue Kit", () => {
             />
         )
         const kit = screen.getByTestId(testId)
-        const activeProp = kit.querySelector(".pb_title_kit_link")
+        const activeProp = kit.querySelector(".pb_title_kit_size_4_link")
         expect(activeProp).toBeInTheDocument()
     })
 })
