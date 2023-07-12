@@ -1,3 +1,29 @@
+# Condensed Spacing for Data Heavy Tables
+##### July 11, 2023
+
+![release-12-30-0](https://github.com/powerhome/playbook/assets/73710701/a4c5cbb3-ce18-42ef-8a39-02216e81b6b8)
+
+Sometimes tables can be very data heavy and users run out of room quickly. With the new default spacing in the first and last columns, there is more room in the table, allowing users to add more data!
+
+[12.30.1](https://github.com/powerhome/playbook/tree/12.30.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Circle Icon Support for Emojis [\#2633](https://github.com/powerhome/playbook/pull/2633) ([nidaqg](https://github.com/nidaqg))
+- Implementing Responsive Title [\#2631](https://github.com/powerhome/playbook/pull/2631) ([carloslimasd](https://github.com/carloslimasd))
+- Tighter Spacing for DataTables [\#2629](https://github.com/powerhome/playbook/pull/2629) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- MultiLevelSelect: Expansion Improvement and No Pills Option [\#2628](https://github.com/powerhome/playbook/pull/2628) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fixes for flexGrow={0} flexShrink={0} [\#2634](https://github.com/powerhome/playbook/pull/2634) ([neildecapia](https://github.com/neildecapia))
+
+**Improvements:**
+
+- Use Docker Bake in Playbook [\#2602](https://github.com/powerhome/playbook/pull/2602) ([mfilipe](https://github.com/mfilipe))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.29.0...12.30.0)
+
 # Introducing Quick Pick: Effortless Date Range Selection with the Enhanced Date Picker
 ##### July 6, 2023
 
