@@ -11,7 +11,6 @@ const MessageDefault = (props) => {
           avatarStatus='online'
           avatarUrl='https://randomuser.me/api/portraits/men/50.jpg'
           borderRadius='rounded'
-        // hover='product_7_background'
           label='Anna Black'
           message='How can we assist you today?'
           timestamp='20 seconds ago'
@@ -26,7 +25,6 @@ const MessageDefault = (props) => {
       <Message
           avatarName='Becca Jacobs'
           avatarUrl='https://randomuser.me/api/portraits/women/50.jpg'
-        // hover='primary'
           label='Lucille Sanchez'
           message='Application for Kate Smith is waiting for your approval'
           timestamp='2 days ago'

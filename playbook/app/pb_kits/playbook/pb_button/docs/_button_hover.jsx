@@ -5,28 +5,28 @@ const ButtonHover = (props) => (
   <div>
     <div>
       <Button
-          hover={{ background: 'product_5_background' }}
+          hover={{ background: "info" }}
           marginRight='lg'
           onClick={() => alert("button clicked!")}
           tabIndex={0}
-          text='Color'
+          text='Color 1'
           {...props}
       />{" "}
       <Button
-          hover={{ background: 'text_lt_light' }}
+          hover={{ background: "success_subtle" }}
           marginRight='lg'
           onClick={() => alert("button clicked!")}
           tabIndex={0}
-          text='Color'
+          text='Color 2'
           variant='secondary'
           {...props}
       />{" "}
       <Button
-          hover={{ background: 'product_1_background' }}
+          hover={{ background: "warning_subtle" }}
           marginRight='lg'
           onClick={() => alert("button clicked!")}
           tabIndex={0}
-          text='Color'
+          text='Color 3'
           variant='link'
           {...props}
       />
@@ -38,7 +38,7 @@ const ButtonHover = (props) => (
           marginTop='xl'
           onClick={() => alert("button clicked!")}
           tabIndex={0}
-          text='Shadow'
+          text='Shadow Deep'
           {...props}
       />{" "}
       <Button
@@ -47,7 +47,7 @@ const ButtonHover = (props) => (
           marginTop='xl'
           onClick={() => alert("button clicked!")}
           tabIndex={0}
-          text='Shadow'
+          text='Shadow Deeper'
           variant='secondary'
           {...props}
       />{" "}
@@ -57,38 +57,7 @@ const ButtonHover = (props) => (
           marginTop='xl'
           onClick={() => alert("button clicked!")}
           tabIndex={0}
-          text='Shadow'
-          variant='link'
-          {...props}
-      />
-    </div>
-    <div>
-      <Button
-          hover={{ background: "data_4", shadow: "deep" }}
-          marginRight='lg'
-          marginTop='xl'
-          onClick={() => alert("button clicked!")}
-          tabIndex={0}
-          text='Multiple Attributes'
-          {...props}
-      />{" "}
-      <Button
-          hover={{ background: "data_4", shadow: "deeper" }}
-          marginRight='lg'
-          marginTop='xl'
-          onClick={() => alert("button clicked!")}
-          tabIndex={0}
-          text='Multiple Attributes'
-          variant='secondary'
-          {...props}
-      />{" "}
-      <Button
-          hover={{ background: "data_4", shadow: "deepest" }}
-          marginRight='lg'
-          marginTop='xl'
-          onClick={() => alert("button clicked!")}
-          tabIndex={0}
-          text='Multiple Attributes'
+          text='Shadow Deepest'
           variant='link'
           {...props}
       />
@@ -100,11 +69,42 @@ const ButtonHover = (props) => (
           marginTop='xl'
           onClick={() => alert("button clicked!")}
           tabIndex={0}
-          text='Multiple Attributes'
+          text='Scale Small'
           {...props}
       />{" "}
       <Button
           hover={{ scale: "md" }}
+          marginRight='lg'
+          marginTop='xl'
+          onClick={() => alert("button clicked!")}
+          tabIndex={0}
+          text='Scale Medium'
+          variant='secondary'
+          {...props}
+      />{" "}
+      <Button
+          hover={{ scale: "lg" }}
+          marginRight='lg'
+          marginTop='xl'
+          onClick={() => alert("button clicked!")}
+          tabIndex={0}
+          text='Scale Large'
+          variant='link'
+          {...props}
+      />
+    </div>
+    <div>
+      <Button
+          hover={{ background: "error_subtle", shadow: "deep" }}
+          marginRight='lg'
+          marginTop='xl'
+          onClick={() => alert("button clicked!")}
+          tabIndex={0}
+          text='Multiple Attributes'
+          {...props}
+      />{" "}
+      <Button
+          hover={{ background: "info_subtle", shadow: "deeper" }}
           marginRight='lg'
           marginTop='xl'
           onClick={() => alert("button clicked!")}
@@ -114,7 +114,7 @@ const ButtonHover = (props) => (
           {...props}
       />{" "}
       <Button
-          hover={{ scale: "lg" }}
+          hover={{ background: "success_subtle", shadow: "deepest" }}
           marginRight='lg'
           marginTop='xl'
           onClick={() => alert("button clicked!")}
