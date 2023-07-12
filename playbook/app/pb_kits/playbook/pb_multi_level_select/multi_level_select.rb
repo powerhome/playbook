@@ -9,8 +9,6 @@ module Playbook
                        default: []
       prop :return_all_selected, type: Playbook::Props::Boolean,
                                  default: false
-      prop :selected_ids, type: Playbook::Props::Array,
-                          default: []
       prop :input_display, type: Playbook::Props::Enum,
                            values: %w[pills none],
                            default: "pills"
@@ -26,7 +24,6 @@ module Playbook
           name: name,
           treeData: tree_data,
           returnAllSelected: return_all_selected,
-          selectedIds: selected_ids,
         }
       end
     end
