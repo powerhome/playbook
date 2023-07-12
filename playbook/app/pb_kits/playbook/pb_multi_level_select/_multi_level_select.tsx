@@ -28,6 +28,7 @@ type MultiLevelSelectProps = {
   returnAllSelected?: boolean
   treeData?: { [key: string]: string }[]
   onSelect?: (prop: { [key: string]: any }) => void
+  selectedIds?: string[]
 } & GlobalProps
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
@@ -41,6 +42,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     returnAllSelected = false,
     treeData,
     onSelect = () => {},
+    selectedIds
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -70,8 +72,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
 
   useEffect(() => {
-    setFormattedData(addCheckedAndParentProperty(treeData))
-  }, [treeData])
+    setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
+  }, [treeData, selectedIds])
 
   useEffect(() => {
     if (returnAllSelected) {
@@ -160,6 +162,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
+    selectedIds: string[],
     parent_id: string = null,
     depth: number = 0,
   ) => {
@@ -169,6 +172,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return treeData.map((item: { [key: string]: any } | any) => {
       const newItem = {
         ...item,
+        checked: selectedIds && selectedIds.length && selectedIds.includes(item.id),
         parent_id,
         depth,
       }
@@ -179,6 +183,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             : item.children
         newItem.children = addCheckedAndParentProperty(
           children,
+          selectedIds,
           newItem.id,
           depth + 1
         )
