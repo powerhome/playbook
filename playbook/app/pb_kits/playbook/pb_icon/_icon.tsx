@@ -93,9 +93,22 @@ const Icon = (props: IconProps) => {
     className
   )
 
+  const classesEmoji = classnames(
+    'pb_icon_kit',
+    globalProps(props),
+    'icon_circle_emoji',
+    className
+  )
+
   aria.label ? null : aria.label = `${icon} icon`
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
+
+  const isValidEmoji = (emoji: string) => {
+    // Using regular expression to check if the string is a valid emoji/emoji Unicode
+    const emojiRegex = /^(\p{Emoji}|\uFE0F)+$/u;
+    return emojiRegex.test(emoji);
+  };
 
   // Add a conditional here to show only the SVG if custom
   const displaySVG = (customIcon: any) => {
@@ -111,6 +124,19 @@ const Icon = (props: IconProps) => {
           }
         </>
       )
+    else if (isValidEmoji(icon))
+      return (
+        <>
+          <span
+              {...dataProps}
+              className={classesEmoji}
+              id={id}
+          >
+            {icon}
+          </span>
+        </>
+      )
+
     else
       return (
         <>

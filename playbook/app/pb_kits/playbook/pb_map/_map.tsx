@@ -3,9 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
-import Flex  from "../pb_flex/_flex"
-import Icon from '../pb_icon/_icon'
-import Button from '../pb_button/_button'
+import MapControls from './_map_controls';
 
 type MapProps = {
   aria?: { [key: string]: string },
@@ -47,29 +45,13 @@ const Map = (props: MapProps) => {
     >
       {
         zoomBtns ? (
-          <Flex className="custom-nav-control" orientation='column'>
-            <div className="custom-nav-control-zoom">
-              <Button className='map-zoom-in-button'
-                  onClick={zoomInClick}
-              >
-                    <Icon icon="plus"/>
-              </Button>
-              <Button className='map-zoom-out-button'
-                 onClick={zoomOutClick}
-              >
-                    <Icon icon="minus"/>
-              </Button>
-            </div>
-            {
-              flyTo ? (
-                <Button className='map-flyto-button'
-                  onClick={flyToClick}
-                >
-                      <Icon icon="eye"/>
-                </Button>
-              ) : null
-            }
-         </Flex>
+          <Map.Controls
+          flyTo={flyTo}
+          flyToClick={flyToClick}
+          zoomBtns={zoomBtns}
+          zoomInClick={zoomInClick}
+          zoomOutClick={zoomOutClick}
+          />
          ) : null
       }
       {children}
@@ -77,4 +59,5 @@ const Map = (props: MapProps) => {
   )
 }
 
+Map.Controls = MapControls
 export default Map

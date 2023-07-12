@@ -1,0 +1,1 @@
+Applying `this_ranges_end_today` (Rails) or `thisRangesEndToday` (React) causes all “This” preset ranges (i.e., this week, this month, this quarter, this year) to use an endDate of today, instead of their natural end date in the future.
