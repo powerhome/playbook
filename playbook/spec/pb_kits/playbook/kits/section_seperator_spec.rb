@@ -28,6 +28,7 @@ RSpec.describe Playbook::PbSectionSeparator::SectionSeparator do
       expect(subject.new(variant: "background", classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_background_horizontal additional_class dark"
       expect(subject.new(orientation: "vertical", classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_card_vertical additional_class dark"
       expect(subject.new(classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_card_horizontal additional_class dark"
+      expect(subject.new(line_style: "dashed").classname).to eq "pb_section_separator_kit_card_horizontal_dashed"
     end
   end
 end
