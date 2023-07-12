@@ -1,7 +1,7 @@
 # Condensed Spacing for Data Heavy Tables
 ##### July 11, 2023
 
-![release-12-30-0](https://github.com/powerhome/playbook/assets/73710701/a4c5cbb3-ce18-42ef-8a39-02216e81b6b8)
+![12-30-0](https://github.com/powerhome/playbook/assets/73710701/247eb623-e03e-4653-b1c1-119947e025e6)
 
 Sometimes tables can be very data heavy and users run out of room quickly. With the new default spacing in the first and last columns, there is more room in the table, allowing users to add more data!
 
