@@ -87,38 +87,29 @@
     }
   }
 
-
   // BreakPoints for new HomePage Banner
-  @include break_at(breakpoint("md")) {
-    .numbers-body-txt {
-      display: none;
-    }
-    .banner-flexbox-top {
-      flex-direction: column;
-      align-items: center;
-      align-content: center;
-    }
-    .middle-banner-background {
-      padding-left: $space_md;
-      padding-right: $space_md;
+
+  .small-screen-banner,
+  .medium-screen-banner,
+  .large-screen-banner {
+    display: none; /* Hide all banners by default */
+  }
+
+  @media (min-width: 769px) {
+    .large-screen-banner {
+      display: block;
     }
   }
 
-  @include break_at(breakpoint("sm")) {
-    .hide-sm-screen-txt {
-      display: none;
-    }
-    .numbers-body-txt {
+  @media (min-width: 576px) and (max-width: 768px) {
+    .medium-screen-banner {
       display: block;
     }
-    // .banner-flexbox-top {
-    //   flex-direction: column;
-    //   align-items: center;
-    //   align-content: center;
-    // }
-    .middle-banner-background {
-      padding-left: none;
-      padding-right: none;
+  }
+
+  @media (max-width: 575px) {
+    .small-screen-banner {
+      display: block;
     }
   }
 }
