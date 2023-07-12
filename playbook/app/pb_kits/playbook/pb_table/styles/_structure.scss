@@ -39,10 +39,22 @@
         thead tr th {
           padding-top: $cell-pad-sm;
           padding-bottom: $cell-pad-sm;
+          &:first-child {
+            padding-left: $cell-pad-sm;
+          }
+          &:last-child {
+            padding-right: $cell-pad-sm;
+          }
         }
         tbody tr td {
           padding-top: $cell-pad-sm;
           padding-bottom: $cell-pad-sm;
+          &:first-child {
+            padding-left: $cell-pad-sm;
+          }
+          &:last-child {
+            padding-right: $cell-pad-sm;
+          }
         }
       }
     }

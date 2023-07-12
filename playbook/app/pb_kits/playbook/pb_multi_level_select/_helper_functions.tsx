@@ -6,11 +6,11 @@ export const getAncestorsOfUnchecked = (
   if (item.parent_id) {
     const ancestor = filterFormattedDataById(data, item.parent_id);
     ancestor[0].checked = false;
-    ancestor[0].parent_id && getAncestorsOfUnchecked(data, ancestor[0])
+    ancestor[0].parent_id && getAncestorsOfUnchecked(data, ancestor[0]);
   }
   return data;
 };
-  
+
 //function is going over formattedData and returning all objects that match the
 //id of the clicked item from the dropdown
 export const filterFormattedDataById = (
@@ -20,9 +20,9 @@ export const filterFormattedDataById = (
   const matched: { [key: string]: any }[] = [];
   const recursiveSearch = (data: { [key: string]: any }[], term: string) => {
     for (const item of data) {
-      if (item.id.toLowerCase() === (term.toLowerCase())) {
+      if (item.id.toLowerCase() === term.toLowerCase()) {
         matched.push(item);
-        return
+        return;
       }
 
       if (item.children && item.children.length > 0) {
@@ -75,24 +75,29 @@ export const getCheckedItems = (
   });
   return checkedItems;
 };
-    
-export const getDefaultCheckedItems = (treeData:{ [key: string]: any }[]) => {
+
+export const getDefaultCheckedItems = (treeData: { [key: string]: any }[]) => {
   const checkedDefault: { [key: string]: any }[] = [];
 
-  const traverseTree = (items:{ [key: string]: any }[]) => {
+  const traverseTree = (items: { [key: string]: any }[]) => {
     if (!Array.isArray(items)) {
       return;
     }
-    items.forEach((item:{ [key: string]: any }) => {
+    items.forEach((item: { [key: string]: any }) => {
       if (item.checked) {
         if (item.children && item.children.length > 0) {
-          const uncheckedChildren = item.children.filter((child:{ [key: string]: any }) => !child.checked);
+          const uncheckedChildren = item.children.filter(
+            (child: { [key: string]: any }) => !child.checked
+          );
           if (uncheckedChildren.length === 0) {
             checkedDefault.push(item);
             return;
           }
         } else {
-          const parent = items.find((parentItem:{ [key: string]: any }) => parentItem.id === item.parentId);
+          const parent = items.find(
+            (parentItem: { [key: string]: any }) =>
+              parentItem.id === item.parentId
+          );
           if (!parent || !parent.checked) {
             checkedDefault.push(item);
           }
@@ -112,23 +117,47 @@ export const getDefaultCheckedItems = (treeData:{ [key: string]: any }[]) => {
 
 export const recursiveCheckParent = (
   item: { [key: string]: any },
-  data:any
+  data: any
 ) => {
   if (item.parent_id !== null) {
-  const parent = filterFormattedDataById(data, item.parent_id);
-  const allChildrenChecked = parent[0].children.every(
-    (child: { [key: string]: any }) => child.checked
-  );
-  if (allChildrenChecked) {
-    parent[0].checked = true;
-    const parentHasParent = parent[0].parent_id !== null;
-    if (parentHasParent) {
-      recursiveCheckParent(
-        parent[0],
-        data
-      );
+    const parent = filterFormattedDataById(data, item.parent_id);
+    const allChildrenChecked = parent[0].children.every(
+      (child: { [key: string]: any }) => child.checked
+    );
+    if (allChildrenChecked) {
+      parent[0].checked = true;
+      const parentHasParent = parent[0].parent_id !== null;
+      if (parentHasParent) {
+        recursiveCheckParent(parent[0], data);
+      }
     }
-}
-}
-return data;
-}
+  }
+  return data;
+};
+
+export const getExpandedItems = (treeData: { [key: string]: string }[]) => {
+  let expandedItems: any[] = [];
+
+  const traverse = (items: string | any[], ancestors: any[] = []) => {
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const itemAncestors = [...ancestors, item];
+
+      if (item.expanded) {
+        expandedItems.push(item.id);
+      }
+      if (Array.isArray(item.children)) {
+        const hasCheckedChildren = item.children.some(
+          (child: { [key: string]: string }) => child.checked
+        );
+        if (hasCheckedChildren) {
+          expandedItems.push(...itemAncestors.map((ancestor) => ancestor.id));
+        }
+        traverse(item.children, itemAncestors);
+      }
+    }
+  };
+
+  traverse(treeData);
+  return expandedItems;
+};

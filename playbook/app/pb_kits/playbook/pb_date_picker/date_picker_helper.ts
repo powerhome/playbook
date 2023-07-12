@@ -3,6 +3,7 @@ import { BaseOptions } from 'flatpickr/dist/types/options'
 import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
 import weekSelect from "flatpickr/dist/plugins/weekSelect/weekSelect"
 import timeSelectPlugin from './plugins/timeSelect'
+import quickPickPlugin from './plugins/quickPick'
 
 const getPositionElement = (element: string | Element) => {
   return (typeof element === 'string') ? document.querySelectorAll(element)[0] : element
@@ -19,10 +20,11 @@ type DatePickerConfig = {
   hideIcon?: boolean;
   inLine?: boolean,
   onChange: (dateStr: string, selectedDates: Date[]) => void,
+  selectionType?: "month" | "week" | "quickpick" | "",
   onClose: (dateStr: Date[] | string, selectedDates: Date[] | string) => void,
-  selectionType?: "month" | "week" | "",
   showTimezone?: boolean,
   staticPosition: boolean,
+  thisRangesEndToday?: boolean,
   timeCaption?: string,
   timeFormat?: string,
   yearRange: number[]
@@ -51,6 +53,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     selectionType,
     showTimezone,
     staticPosition = true,
+    thisRangesEndToday = false,
     timeCaption = 'Select Time',
     timeFormat = 'at h:i K',
     yearRange,
@@ -89,18 +92,23 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }
   }
 
-  const setPlugins = () => {
-    let pluginList = []
+  const setPlugins = (thisRangesEndToday: boolean) => {
+    const pluginList = []
 
     // month and week selection
     if (selectionType === "month" || plugins.length > 0) {
       pluginList.push(monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }))
     } else if ( selectionType === "week") {
       pluginList.push(weekSelect())
+
+    } else if (selectionType === "quickpick") {
+    //------- QUICKPICK VARIANT PLUGIN -------------//
+    pluginList.push(quickPickPlugin(thisRangesEndToday))
     }
 
     // time selection
     if (enableTime) pluginList.push(timeSelectPlugin({ caption: timeCaption, showTimezone: showTimezone}))
+
 
     return pluginList
   }
@@ -144,6 +152,9 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       },
     ] : disabledParser(),
     enableTime,
+    locale: {
+      rangeSeparator: ' to '
+    },
     maxDate,
     minDate,
     mode,
@@ -164,16 +175,12 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     onYearChange: [() => {
       yearChangeHook()
     }],
-    plugins: setPlugins(),
+    plugins: setPlugins(thisRangesEndToday),
     position,
     positionElement: getPositionElement(positionElement),
     prevArrow: '<i class="far fa-angle-left"></i>',
     static: staticPosition,
   })
-
-  // ===========================================================
-  //                 Additional JS Functionality               |
-  // ===========================================================
 
   // Assign dynamically sourced flatpickr instance to variable
   const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
