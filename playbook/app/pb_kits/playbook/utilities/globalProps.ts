@@ -2,6 +2,7 @@ import { omit } from 'lodash'
 import { camelToSnakeCase } from './text'
 
 import {
+  BitValues,
   Binary,
   Display,
   DisplaySizes,
@@ -48,7 +49,7 @@ type FlexDirection = {
 }
 
 type FlexGrow = {
-  flexGrow?: 0 | 1
+  flexGrow?: Binary
 }
 
 type FlexShrink = {
@@ -321,15 +322,19 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   flexGrowProps: ({ flexGrow }: FlexGrow) => {
     if (typeof flexGrow == 'object') {
       return getResponsivePropClasses(flexGrow, 'flex_grow')
+    } else if (BitValues.includes(flexGrow)) {
+      return `flex_grow_${flexGrow}`
     } else {
-      return flexGrow ? `flex_grow_${flexGrow}` : ''
+      return ''
     }
   },
   flexShrinkProps: ({ flexShrink }: FlexShrink) => {
     if (typeof flexShrink == 'object') {
       return getResponsivePropClasses(flexShrink, 'flex_shrink')
+    } else if (BitValues.includes(flexShrink)) {
+      return `flex_shrink_${flexShrink}`
     } else {
-      return flexShrink ? `flex_shrink_${flexShrink}` : ''
+      return ''
     }
   },
   justifyContentProps: ({ justifyContent }: JustifyContent) => {
