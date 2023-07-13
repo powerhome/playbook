@@ -1,24 +1,28 @@
-<div class="large-screen-banner">
+
     <%= pb_rails("background", props: {
-        classname: "middle-banner-background",
+        display: { xs: "none", sm: "none", md: "none", lg: "flex", xl: "flex"  },
+        classname: "middle-white-background",
         background_color: "white",
-        padding_top: "xl"
+        padding_top: "xl",
+        padding_bottom: "xl"
     }) do %>
         <%= pb_rails("flex", props: {
             classname: "banner-background-width",
+            padding_left: { xs: "none", sm: "none", md: "none", lg: "md", xl: "md" },
+            padding_right: { xs: "none", sm: "none", md: "none", lg: "md", xl: "md" },
             max_width: "xl",
-            horizontal: "center",
+            justify: "center",
             wrap: true
         }) do %>
             <%= pb_rails("background", props: {
                 classname: "banner-background-width",
                 background_color: "dark",
-                border_radius: "xl"
+                border_radius: "lg"
             }) do %>
                 <%= pb_rails("background", props: {
                     background_color: "dark",
                     image_url: asset_pack_path("media/images/banner-background.png"),
-                    border_radius: "xl",
+                    border_radius: "lg",
                     background_repeat: "no-repeat",
                     background_position: "center right",
                     background_size: "auto",
@@ -76,7 +80,7 @@
                             <%= pb_rails("icon_stat_value", props: {
                                 dark: true,
                                 size: "lg",
-                                icon: "globe",
+                                icon: "puzzle",
                                 text: "components",
                                 value: "200＋",
                                 variant:"orange"
@@ -86,7 +90,7 @@
                             <%= pb_rails("icon_stat_value", props: {
                                 dark: true,
                                 size: "lg",
-                                icon: "globe",
+                                icon: "chart-line-up",
                                 text: "downloads",
                                 value: "900k＋",
                                 variant:"orange"
@@ -96,7 +100,7 @@
                             <%= pb_rails("icon_stat_value", props: {
                                 dark: true,
                                 size: "lg",
-                                icon: "globe",
+                                icon: "arrows-repeat",
                                 text: "Release Updates",
                                 value: "Weekly",
                                 variant:"orange"
@@ -108,4 +112,4 @@
             <% end %>
         <% end %>
     <% end %>
-</div>
+

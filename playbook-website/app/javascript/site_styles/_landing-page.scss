@@ -3,8 +3,12 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/border_radius";
 @import "playbook-ui/dist/tokens/shadows";
+@import "playbook-ui/dist/tokens/screen_sizes";
 
 .landing-page {
+  .top-banner-padding {
+    padding-bottom: $space_xl;
+  }
   .code-snippets {
     background-color: $bg_dark;
     border-radius: $border_rad_heaviest;
@@ -26,10 +30,6 @@
     display: flex;
     justify-content: center;
   }
-  .middle-banner-background {
-    display: flex;
-    justify-content: center;
-  }
   .pb-hero-image {
     padding-right: $space_lg;
   }
@@ -44,9 +44,6 @@
     width: 275px;
     position: absolute;
     left: 505px;
-  }
-  .banner-background-width {
-    width: 100%;
   }
   @include break_at(1342px){
     .kit-example {
@@ -87,29 +84,16 @@
     }
   }
 
-  // BreakPoints for new HomePage Banner
+  // Social proof scss
 
-  .small-screen-banner,
-  .medium-screen-banner,
-  .large-screen-banner {
-    display: none; /* Hide all banners by default */
+  .banner-background-width {
+    width: 100%;
   }
 
-  @media (min-width: 769px) {
-    .large-screen-banner {
-      display: block;
-    }
-  }
 
-  @media (min-width: 576px) and (max-width: 768px) {
-    .medium-screen-banner {
-      display: block;
-    }
-  }
+  // .small-banner-align {
+  //   align-items: baseline;
+  //   align-content: center;
+  // }
 
-  @media (max-width: 575px) {
-    .small-screen-banner {
-      display: block;
-    }
-  }
 }
