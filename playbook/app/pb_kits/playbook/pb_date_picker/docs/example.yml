@@ -8,6 +8,8 @@ examples:
   - date_picker_input: Input Field
   - date_picker_label: Label
   - date_picker_range: Range
+  - date_picker_quick_pick_rails: Range (Quick Pick)
+  - date_picker_quick_pick_range_limit: Range (Quick Pick w/ “This” Range limit)
   - date_picker_format: Format
   - date_picker_disabled: Disabled Dates
   - date_picker_min_max: Min Max
@@ -33,6 +35,8 @@ examples:
   - date_picker_on_change: onChange
   - date_picker_on_close: onClose
   - date_picker_range: Range
+  - date_picker_quick_pick_react: Range (Quick Pick)
+  - date_picker_quick_pick_range_limit: Range (Quick Pick w/ “This” Range limit)
   - date_picker_format: Format
   - date_picker_disabled: Disabled Dates
   - date_picker_min_max: Min Max
