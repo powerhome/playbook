@@ -66,7 +66,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //state for return for default
   const [defaultReturn, setDefaultReturn] = useState([])
   // Get expanded items from treeData.
-  const initialExpandedItems = getExpandedItems(treeData);
+  const initialExpandedItems = getExpandedItems(treeData, selectedIds);
   // Initialize state with expanded items.
   const [expanded, setExpanded] = useState(initialExpandedItems);
 
