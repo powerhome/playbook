@@ -12,7 +12,7 @@ test('Global Props: Returns ordinal suffixed class name', () => {
     render(
       <Body
           data={{ testid: testId }}
-          flexShrink={`${x}`}
+          flexShrink={x}
           text="Hi"
       />
     )
