@@ -8,4 +8,5 @@ examples:
   react:
   - message_default: Default
   - message_timestamp: With Timestamp Hover
+  - message_hover: Hover
 

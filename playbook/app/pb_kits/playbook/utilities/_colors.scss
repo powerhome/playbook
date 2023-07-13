@@ -1,5 +1,7 @@
 // Color Helper Utilities
 
+$transition-speed: 0.2s;
+
 @function shade($color, $percentage) {
   @return mix($charcoal, $color, $percentage);
 }
@@ -26,6 +28,7 @@
     }
   }
 }
+
 
 @mixin text-color($colors-list) {
   @each $name, $color in $colors-list {
