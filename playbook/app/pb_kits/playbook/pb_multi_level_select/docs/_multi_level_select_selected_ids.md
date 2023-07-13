@@ -1,3 +1,5 @@
-The `selectedIds` prop (`selected_ids` for Rails) allows you to pass in an array of ids that, if present, will mark the corresponding nodes on the treeData as checked on page load. The prop however is optional, and items that include checked:true on the treeData itself will also load checked data.
+`selected_ids` (Rails) / `selectedIds` (React) is an optional prop that accepts an array of ids that, if present, will mark the corresponding nodes on the treeData as checked on page load. 
 
-When an item is marked as checked on page load, the dropdown will expand to show the checked items for easier accessibility. 
+Items that include `checked:true` on the treeData itself will also be selected on page load, even without being passed to `selectedIds`.
+
+When an item is marked as checked on page load by any means, the dropdown will expand to show the checked items for easier accessibility. 
