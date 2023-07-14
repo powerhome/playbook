@@ -33,8 +33,8 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     dark = false,
     data = {},
     text,
-    timestamp = () => { new Date(timestamp) },
     timezone,
+    timestamp,
     showDate = true,
     showUser = false,
     hideUpdated = false,
@@ -53,26 +53,27 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     className
   )
 
+  const timeStamp = new Date(timestamp)
   const currentYear = new Date().getFullYear().toString()
-  const dateDisplay = `${DateTime.toMonth(timestamp, timezone)} ${DateTime.toDay(timestamp, timezone)}`
+  const dateDisplay = `${DateTime.toMonth(timeStamp, timezone)} ${DateTime.toDay(timeStamp, timezone)}`
   const shouldShowUser = showUser == true && text.length > 0
   const shouldShowTimezone = showTimezone == true && timezone.length > 0
   const updatedText = hideUpdated ? "" : "Last updated"
   const userDisplay = shouldShowUser ? ` by ${text}` : ''
 
-  let timeDisplay = `${DateTime.toHour(timestamp, timezone)}:${DateTime.toMinute(timestamp, timezone)}${DateTime.toMeridiem(timestamp, timezone)}`
+  let timeDisplay = `${DateTime.toHour(timeStamp, timezone)}:${DateTime.toMinute(timeStamp, timezone)}${DateTime.toMeridiem(timeStamp, timezone)}`
 
   const fullTimeDisplay = () => {
     if (shouldShowTimezone) {
-      timeDisplay = `${timeDisplay} ${DateTime.toTimeZone(timestamp, timezone)}`
+      timeDisplay = `${timeDisplay} ${DateTime.toTimeZone(timeStamp, timezone)}`
     }
     return timeDisplay
   }
 
   const fullDateDisplay = () => {
-    let fullDisplay = `${DateTime.toMonth(timestamp, timezone)} ${DateTime.toDay(timestamp, timezone)}`
-    if (DateTime.toYear(timestamp, timezone).toString() !== currentYear) {
-      fullDisplay = `${fullDisplay}, ${DateTime.toYear(timestamp, timezone)}`
+    let fullDisplay = `${DateTime.toMonth(timeStamp, timezone)} ${DateTime.toDay(timeStamp, timezone)}`
+    if (DateTime.toYear(timeStamp, timezone).toString() !== currentYear) {
+      fullDisplay = `${fullDisplay}, ${DateTime.toYear(timeStamp, timezone)}`
     }
     return `${fullDisplay} ${' \u00b7 '} ${fullTimeDisplay()}`
   }
@@ -82,7 +83,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
   }
 
   const formatElapsedString = () => {
-    return `${updatedText} ${userDisplay} ${DateTime.fromNow(timestamp)}`
+    return `${updatedText} ${userDisplay} ${DateTime.fromNow(timeStamp)}`
   }
 
   const captionText = () => {
@@ -92,7 +93,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     case 'elapsed':
       return formatElapsedString()
     default:
-      return showDate ? timestamp ? fullDateDisplay() : text : fullTimeDisplay()
+      return showDate ? timeStamp ? fullDateDisplay() : text : fullTimeDisplay()
     }
   }
 
