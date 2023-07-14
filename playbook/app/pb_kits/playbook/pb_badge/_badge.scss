@@ -37,6 +37,11 @@
     border-radius: $pb_badge_height / 2;
   }
 
+  &[class*=_notification] {
+    background: $primary;
+    color: $white;
+  }
+
   &.dark {
     border-width: 0;
 

@@ -4,9 +4,11 @@
     data: object.data,
     class: object.classname) do %>
     <% if object.orientation === 'horizontal' %>
-        <% if object.text %>
+        <% if content %>
+            <%= content %>
+        <% elsif object.text %>
             <span><%= pb_rails("caption", props: { text: object.text }) %></span>
-        <%end%>
+        <% end %>
     <% end %>
     <% if object.orientation === 'vertical' %>
         <%= pb_rails("flex", props: { orientation: "column"}) do %>

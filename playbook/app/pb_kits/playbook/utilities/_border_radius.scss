@@ -1,0 +1,31 @@
+@import "../tokens/exports/border_radius";
+
+$transition-speed: 0.2s;
+
+.border_radius {
+  @mixin border-example {
+    transition: background-color $transition-speed ease, height $transition-speed ease;
+  }
+
+  &_rounded {
+    border-radius: $border_radius_rounded;
+  }
+  &_xl {
+    border-radius: $border_radius_xl;
+  }
+  &_lg {
+    border-radius: $border_radius_lg;
+  }
+  &_md {
+    border-radius: $border_radius_md;
+  }
+  &_sm {
+    border-radius: $border_radius_sm;
+  }
+  &_xs {
+    border-radius: $border_radius_xs;
+  }
+  &_none {
+    border-radius: $border_radius_none;
+  }
+}
