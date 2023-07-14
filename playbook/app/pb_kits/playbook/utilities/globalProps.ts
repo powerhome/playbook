@@ -265,11 +265,6 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += shadow ? `shadow_${shadow} ` : ''
     return css
   },
-  borderRadiusProps: ({ borderRadius }: BorderRadius) => {
-    let css = ''
-    css += borderRadius ? `border_radius_${borderRadius} ` : ''
-    return css
-  },
   lineHeightProps: ({ lineHeight }: LineHeight) => {
     let css = ''
     css += lineHeight ? `line_height_${lineHeight} ` : ''
