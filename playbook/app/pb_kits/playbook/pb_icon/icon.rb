@@ -33,7 +33,7 @@ module Playbook
                   values: ["lg", "xs", "sm", "1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", nil],
                   default: nil
       prop :font_style, type: Playbook::Props::Enum,
-                        values: %w[far fas fab],
+                        values: %w[far fas fab fak],
                         default: "far"
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
@@ -140,7 +140,13 @@ module Playbook
       end
 
       def font_style_class
-        font_style ? font_style.to_s : "far"
+        white_list = %w[powergon greensky]
+
+        if white_list.include?(icon)
+          "fak"
+        elsif font_style
+          font_style.to_s
+        end
       end
 
       def spin_class

@@ -34,7 +34,7 @@ type IconProps = {
   pulse?: boolean,
   rotation?: 90 | 180 | 270,
   size?: IconSizes,
-  fontStyle?: 'far' | 'fas' | 'fab',
+  fontStyle?: 'far' | 'fas' | 'fab' | 'fak',
   spin?: boolean,
 } & GlobalProps
 
@@ -76,6 +76,7 @@ const Icon = (props: IconProps) => {
     [`fa-${size}`]: size,
     [`fa-pull-${pull}`]: pull,
     [`fa-rotate-${rotation}`]: rotation,
+
   }
 
   // Lets check and see if the icon prop is referring to a custom Power icon...
@@ -83,11 +84,15 @@ const Icon = (props: IconProps) => {
   // this ensures the JS will not do any further operations
   // faClasses[`fa-${icon}`] = customIcon ? 'custom' : icon
   if (!customIcon) faClasses[`fa-${icon}`] = icon
-
+  
+  const whiteList = [
+    'greensky', 'powergon'
+  ]
+  
   const classes = classnames(
     flipMap[flip],
     'pb_icon_kit',
-    customIcon ? '' : fontStyle,
+    customIcon ? '' : whiteList.includes(icon) ? `fak` : fontStyle,
     faClasses,
     globalProps(props),
     className
@@ -109,6 +114,7 @@ const Icon = (props: IconProps) => {
     const emojiRegex = /^(\p{Emoji}|\uFE0F)+$/u;
     return emojiRegex.test(emoji);
   };
+
 
   // Add a conditional here to show only the SVG if custom
   const displaySVG = (customIcon: any) => {

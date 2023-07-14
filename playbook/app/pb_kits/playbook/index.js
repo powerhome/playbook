@@ -2,6 +2,7 @@
 import './_playbook.scss'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import 'lazysizes'
+import './custom-icons'
 
 // vvv React Component JSX Imports from the React Kits vvv
 export { default as Avatar } from './pb_avatar/_avatar'
