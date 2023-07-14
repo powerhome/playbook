@@ -3,7 +3,7 @@
 
 ![12 31 0](https://github.com/powerhome/playbook/assets/73710701/2e750b21-4df3-4ed1-9e6e-2303e8fd9184)
 
-Titles can now dynamically change based on screen size, making responsive design easier to implement. Try it out by passing multiple size values to the size prop!
+Titles can now dynamically change based on screen size, making responsive design easier to implement. [Try it out](https://playbook.powerapp.cloud/kits/title/react#responsive) by passing multiple size values to the size prop!
 
 [12.31.0](https://github.com/powerhome/playbook/tree/12.31.0)
 
