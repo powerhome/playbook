@@ -26,10 +26,9 @@ const dialogHelper = () => {
       if (dialogParentDataset.overlayClick === "overlay_close") return
 
       const clickedOutsideDialogBox = event.target.classList.contains("pb_dialog_rails")
-      const closeDialog = () => dialogElement.close()
 
       if (clickedOutsideDialogBox) {
-        closeDialog()
+        dialogElement.close()
       }
     })
   })
