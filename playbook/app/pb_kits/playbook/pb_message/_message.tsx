@@ -23,7 +23,7 @@ type MessageProps = {
   id?: string,
   label?: string,
   message: string,
-  timestamp?: Date,
+  timestamp?: string,
   timestampObject?: Date,
   timezone?: string,
   alignTimestamp?: string,
@@ -88,8 +88,8 @@ const Message = (props: MessageProps) => {
           }
           <Timestamp
               className={`pull-${alignTimestamp} ${timestampObject ? 'message_humanized_time' : null}`}
-              text={timestamp.toString()}
-              timestamp={null}
+              text={timestamp}
+              timestamp={''}
               timezone={timezone}
           />
           {timestampObject &&
