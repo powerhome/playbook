@@ -1,3 +1,22 @@
+# Responsive Design Made Easier: Introducing Responsive Titles!
+##### July 13, 2023
+
+![12 31 0](https://github.com/powerhome/playbook/assets/73710701/2e750b21-4df3-4ed1-9e6e-2303e8fd9184)
+
+Titles can now dynamically change based on screen size, making responsive design easier to implement. [Try it out](https://playbook.powerapp.cloud/kits/title/react#responsive) by passing multiple size values to the size prop!
+
+[12.31.0](https://github.com/powerhome/playbook/tree/12.31.0)
+
+**Kit Enhancements:**
+
+- Global Hover Prop [\#2644](https://github.com/powerhome/playbook/pull/2644) ([jasperfurniss](https://github.com/jasperfurniss))
+- Implementing Responsive Title [\#2642](https://github.com/powerhome/playbook/pull/2642) ([carloslimasd](https://github.com/carloslimasd))
+- Adding New Dashed Section Separator [\#2640](https://github.com/powerhome/playbook/pull/2640) ([carloslimasd](https://github.com/carloslimasd))
+- MultiLevelSelect: Added New selectedIds Prop [\#2639](https://github.com/powerhome/playbook/pull/2639) ([nidaqg](https://github.com/nidaqg))
+- Adding Badge Notification Variant [\#2635](https://github.com/powerhome/playbook/pull/2635) ([carloslimasd](https://github.com/carloslimasd))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.30.1...12.31.0)
+
 # Condensed Spacing for Data Heavy Tables
 ##### July 11, 2023
 
