@@ -71,13 +71,42 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }
   }
   const disabledParser = () => {
-    if (disableDate && disableDate.length > 0) {
-      return disableDate
-    } else if (disableRange && disableRange.length > 0) {
-      return disableRange
-    } else {
-      return []
-    }
+    const disabledArray=[]
+     
+    disableDate && disableDate.length > 0 && disabledArray.push(...disableDate)
+    disableRange && disableRange.length > 0 && disabledArray.push(...disableRange)
+    disableWeekdays && disableWeekdays.length > 0 && disabledArray.push(...disabledWeekDays())
+
+    return disabledArray
+  }
+
+  const disabledWeekDays = () => {
+    return (
+      [
+        (date:any) => {
+          const weekdayObj: {
+            [day: string]: number
+          } = {
+            Sunday: 0,
+            Monday: 1,
+            Tuesday: 2,
+            Wednesday: 3,
+            Thursday: 4,
+            Friday: 5,
+            Saturday: 6,
+          }
+          return (
+            date.getDay() === weekdayObj[disableWeekdays[0]] ||
+            date.getDay() === weekdayObj[disableWeekdays[1]] ||
+            date.getDay() === weekdayObj[disableWeekdays[2]] ||
+            date.getDay() === weekdayObj[disableWeekdays[3]] ||
+            date.getDay() === weekdayObj[disableWeekdays[4]] ||
+            date.getDay() === weekdayObj[disableWeekdays[5]] ||
+            date.getDay() === weekdayObj[disableWeekdays[6]]
+          )
+        },
+      ]
+    )
   }
   const calendarResizer = () => {
     const cal = document.querySelector(`#cal-${pickerId}.open`) as HTMLElement
@@ -127,30 +156,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     disableMobile: true,
     dateFormat: getDateFormat(),
     defaultDate: defaultDateGetter(),
-    disable: disableWeekdays && disableWeekdays.length > 0 ? [
-      (date) => {
-        const weekdayObj: {
-          [day: string]: number
-        } = {
-          Sunday: 0,
-          Monday: 1,
-          Tuesday: 2,
-          Wednesday: 3,
-          Thursday: 4,
-          Friday: 5,
-          Saturday: 6,
-        }
-        return (
-          date.getDay() === weekdayObj[disableWeekdays[0]] ||
-          date.getDay() === weekdayObj[disableWeekdays[1]] ||
-          date.getDay() === weekdayObj[disableWeekdays[2]] ||
-          date.getDay() === weekdayObj[disableWeekdays[3]] ||
-          date.getDay() === weekdayObj[disableWeekdays[4]] ||
-          date.getDay() === weekdayObj[disableWeekdays[5]] ||
-          date.getDay() === weekdayObj[disableWeekdays[6]]
-        )
-      },
-    ] : disabledParser(),
+    disable: disabledParser(),
     enableTime,
     locale: {
       rangeSeparator: ' to '
