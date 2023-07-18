@@ -147,7 +147,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       let css = '';
       if (!hover) return css;
       css += hover.shadow ? `hover_shadow_${hover.shadow} ` : '';
-      css += hover.background ? `bg-hover-${hover.background } ` : '';
+      css += hover.background ? `hover_background_${hover.background } ` : '';
       css += hover.scale ? `hover_scale_${hover.scale} ` : '';
       return css;
   },
