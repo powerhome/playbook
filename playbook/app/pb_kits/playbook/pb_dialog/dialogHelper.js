@@ -29,6 +29,7 @@ const dialogHelper = () => {
 
       if (clickedOutsideDialogBox) {
         dialogElement.close()
+        event.stopPropagation()
       }
     })
   })
