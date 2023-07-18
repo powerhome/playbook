@@ -6,7 +6,6 @@ import Checkbox from "../pb_checkbox/_checkbox"
 import Icon from "../pb_icon/_icon"
 import FormPill from "../pb_form_pill/_form_pill"
 import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button"
-import Body from "../pb_body/_body"
 import { cloneDeep } from "lodash"
 
 import {
@@ -320,7 +319,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     <div {...ariaProps} {...dataProps} className={classes} id={id}>
       <div ref={dropdownRef} className='wrapper'>
         <div className='input_wrapper' onClick={handleInputWrapperClick}>
-          <div className='input_inner_container' style={{display: `${inputDisplay === "none" && "flex"}`}}>
+          <div className='input_inner_container'>
             {returnedArray.length !== 0 && returnAllSelected
               ? returnedArray.map((item) => (
                   <input type='hidden' name={`${name}[]`} value={item.id} />
@@ -349,11 +348,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
               ))
               : null
             }
-            {
-              inputDisplay === "none" && itemsSelectedLength() && (
-                <Body paddingRight="xs">{`${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? 'item' : 'items'} selected`}</Body>
-              )
-            }
             {returnedArray.length !== 0 && returnAllSelected && inputDisplay === "pills" && <br />}
             {defaultReturn.length !== 0 && !returnAllSelected && inputDisplay === "pills" && <br />}
             <input
@@ -361,7 +355,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
               onChange={(e) => {
                 setFilterItem(e.target.value)
               }}
-              placeholder={inputDisplay === "none" && itemsSelectedLength() ? "" : "Start typing..."}
+              placeholder={inputDisplay === "none" && itemsSelectedLength() ? (
+                    `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? 'item' : 'items'} selected`
+                  ) : ("Start typing...")}
               value={filterItem}
               onClick={() => setIsClosed(false)}
             />
