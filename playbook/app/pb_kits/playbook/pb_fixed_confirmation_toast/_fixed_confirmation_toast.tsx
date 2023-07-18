@@ -25,7 +25,7 @@ type FixedConfirmationToastProps = {
   onClose?: () => void,
   open?: boolean,
   status?: "success" | "error" | "neutral" | "tip",
-  text: string,
+  text?: string,
   vertical?: "top" | "bottom",
 }
 
