@@ -16,9 +16,9 @@
     <% end %>
   <% end %>
 
-  <%= pb_rails("docs/lg_hp_social_proof_component") %>
-  <%= pb_rails("docs/md_hp_social_proof_component") %>
-  <%= pb_rails("docs/sm_hp_social_proof_component") %>
+  <%= render(LgHpSocialProofComponent.new) %>
+  <%= render(MdHpSocialProofComponent.new) %>
+  <%= render(SmHpSocialProofComponent.new) %>
 
   <%= pb_rails("background", props: { classname: "middle-white-background", background_color: "white", padding: "xl" }) do %>
     <%= pb_rails("flex", props: { classname: "second-section-inner-wrapper", horizontal: "center", spacing: "evenly", wrap: true }) do %>
