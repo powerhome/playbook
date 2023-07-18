@@ -250,6 +250,15 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
+  const itemsSelectedLength = () => {
+    let items
+    if (returnAllSelected && returnedArray && returnedArray.length) {
+      items = returnedArray.length
+    } else if (!returnAllSelected && defaultReturn && defaultReturn.length) {
+      items = defaultReturn.length
+    }
+    return items
+  }
   //rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: any }[]) => {
     return (
@@ -346,7 +355,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
               onChange={(e) => {
                 setFilterItem(e.target.value)
               }}
-              placeholder='Start typing...'
+              placeholder={inputDisplay === "none" && itemsSelectedLength() ? (
+                    `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? 'item' : 'items'} selected`
+                  ) : ("Start typing...")}
               value={filterItem}
               onClick={() => setIsClosed(false)}
             />
