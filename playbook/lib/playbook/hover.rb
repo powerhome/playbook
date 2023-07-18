@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "pry"
-
 module Playbook
   module Hover
     def self.included(base)
