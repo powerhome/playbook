@@ -14,24 +14,26 @@ const iconMap = {
 };
 
 type FixedConfirmationToastProps = {
-  autoClose?: number;
-  className?: string;
-  closeable?: boolean;
-  data?: string;
-  horizontal?: "right" | "left" | "center";
-  id?: string;
-  multiLine?: boolean;
-  onClose?: () => void;
-  open?: boolean;
-  status?: "success" | "error" | "neutral" | "tip";
-  text: string;
-  vertical?: "top" | "bottom";
-};
+  autoClose?: number,
+  children?: React.ReactChild[] | React.ReactChild,
+  className?: string,
+  closeable?: boolean,
+  data?: string,
+  horizontal?: "right" | "left" | "center",
+  id?: string,
+  multiLine?: boolean,
+  onClose?: () => void,
+  open?: boolean,
+  status?: "success" | "error" | "neutral" | "tip",
+  text: string,
+  vertical?: "top" | "bottom",
+}
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   const [showToast, toggleToast] = useState(true);
   const {
     autoClose = 0,
+    children,
     className,
     closeable = false,
     horizontal,
@@ -75,13 +77,20 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
       {showToast && (
         <div className={css} onClick={handleClick}>
           {icon && <Icon className="pb_icon" fixedWidth icon={icon} />}
-          <Title
-            className="pb_fixed_confirmation_toast_text"
-            size={4}
-            text={text}
-          />
+
+          {
+            children && children ||
+            text && (
+              <Title
+                className="pb_fixed_confirmation_toast_text"
+                size={4}
+                text={text}
+              />
+            )
+          }
+
           {closeable && (
-            <Icon className="pb_icon" fixedWidth={false} icon="times" />
+            <Icon className="pb_icon" cursor="pointer" fixedWidth={false} icon="times" />
           )}
         </div>
       )}
