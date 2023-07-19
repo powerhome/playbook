@@ -43,9 +43,6 @@
     display: block;
   }
 
-  & > [class^=pb_card_body_kit] {
-    padding: 0px;
-  }
 
   .pb--kit-example, .pb--kit-example-markdown {
     padding: calc(2rem + 4px) 2rem 1rem;
