@@ -6,9 +6,6 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 
 .landing-page {
-  .top-banner-padding {
-    padding-bottom: $space_xl;
-  }
   .code-snippets {
     background-color: $bg_dark;
     border-radius: $border_rad_heaviest;
