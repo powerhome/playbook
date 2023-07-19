@@ -20,6 +20,7 @@ require "playbook/flex_grow"
 require "playbook/flex_shrink"
 require "playbook/order"
 require "playbook/position"
+require "playbook/hover"
 require "playbook/border_radius"
 
 module Playbook
@@ -46,6 +47,7 @@ module Playbook
     include Playbook::FlexShrink
     include Playbook::Order
     include Playbook::Position
+    include Playbook::Hover
     include Playbook::BorderRadius
 
     prop :id
