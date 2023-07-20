@@ -1,3 +1,25 @@
+# Customize Your Toasts: Introducing 'Children' for Fixed Confirmation Toast Kit!
+##### July 20, 2023
+
+![12 32 0](https://github.com/powerhome/playbook/assets/9158723/dfb6f39f-68d2-438b-935b-2e3a683d3897)
+
+Level up your toasts with our latest feature – "Children" for Fixed Confirmation Toast Kit! 🚀 Now, web developers can fully customize Fixed Confirmation Toast contents by easily passing ‘children’, making it a breeze to add custom content like links to your toasts. Say goodbye to static toasts and say hello to interactive and engaging user experiences! 🎉
+
+[12.32.0](https://github.com/powerhome/playbook/tree/12.32.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Global Hover Prop (Rails) with Doc Examples [\#2652](https://github.com/powerhome/playbook/pull/2652) ([jasperfurniss](https://github.com/jasperfurniss))
+- Adding Children prop to Fixed Confirmation Toast [\#2651](https://github.com/powerhome/playbook/pull/2651) ([carloslimasd](https://github.com/carloslimasd))
+- MultiLevelSelect: Designs for No Pills Variant [\#2649](https://github.com/powerhome/playbook/pull/2649) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- DatePicker Disabled Dates Conflict [\#2648](https://github.com/powerhome/playbook/pull/2648) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.31.0...12.32.0)
+
 # Responsive Design Made Easier: Introducing Responsive Titles!
 ##### July 13, 2023
 
@@ -5,7 +27,7 @@
 
 Titles can now dynamically change based on screen size, making responsive design easier to implement. [Try it out](https://playbook.powerapp.cloud/kits/title/react#responsive) by passing multiple size values to the size prop!
 
-[12.31.0](https://github.com/powerhome/playbook/tree/12.31.0)
+[12.31.0](https://github.com/powerhome/playbook/tree/12.31.0) full list of changes:
 
 **Kit Enhancements:**
 
