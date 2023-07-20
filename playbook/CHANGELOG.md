@@ -1,5 +1,5 @@
 # Customize Your Toasts: Introducing 'Children' for Fixed Confirmation Toast Kit!
-##### July 20, 2023
+##### July 19, 2023
 
 ![12 32 0](https://github.com/powerhome/playbook/assets/9158723/dfb6f39f-68d2-438b-935b-2e3a683d3897)
 
