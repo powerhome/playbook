@@ -4,6 +4,7 @@ import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 import Icon from '../pb_icon/_icon'
+import Caption from "../pb_caption/_caption"
 
 type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
@@ -11,6 +12,7 @@ type ButtonPropTypes = {
   aria?: { [key: string]: string },
   children?: React.ReactChild[] | React.ReactChild,
   className?: string | string[],
+  count?: number,
   data?: { [key: string]: string },
   disabled?: boolean,
   fixedWidth?: boolean,
@@ -30,7 +32,7 @@ type ButtonPropTypes = {
   type?: 'inline' | null,
   htmlType?: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
-  variant?: 'primary' | 'secondary' | 'link',
+  variant?: 'primary' | 'secondary' | 'link'| 'reaction',
   wrapperClass?: string,
 } & GlobalProps
 
@@ -38,6 +40,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
   const {
     disabled = false,
     fullWidth = false,
+    icon,
     loading = false,
     type = 'inline',
     variant = 'primary',
@@ -52,6 +55,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
   className += disabled ? '_disabled' : '_enabled'
   className += loading ? '_loading' : ''
   className += `${size !== null ? ` size_${size}` : ''}`
+  className += `${variant === 'reaction' && !icon ? ` reaction_default` : ''}`
 
   return className
 }
@@ -61,6 +65,7 @@ const Button = (props: ButtonPropTypes) => {
     aria = {},
     children,
     className,
+    count,
     data = {},
     disabled,
     icon = null,
@@ -75,6 +80,7 @@ const Button = (props: ButtonPropTypes) => {
     text,
     htmlType = 'button',
     value,
+    variant,
     form = null
   } = props
 
@@ -131,41 +137,71 @@ const Button = (props: ButtonPropTypes) => {
     return null
   }
 
-  const displayButton = () => {    
-    if (link)
+  const displayButton = () => {
+    if (link) {
       return (
         <a
-            {...ariaProps}
-            {...dataProps}
-            className={css}
-            href={link}
-            id={id}
-            rel={target !== 'child' ? 'noreferrer' : null}
-            role="link"
-            tabIndex={tabIndex}
-            target={getTargetAttribute()}
+          {...ariaProps}
+          {...dataProps}
+          className={css}
+          href={link}
+          id={id}
+          rel={target !== "child" ? "noreferrer" : null}
+          role="link"
+          tabIndex={tabIndex}
+          target={getTargetAttribute()}
         >
           {ifLoading()}
         </a>
-      )
-    else
+      );
+    } else if (variant === "reaction") {
       return (
         <button
-            {...ariaProps}
-            {...dataProps}
-            className={css}
-            disabled={disabled}
-            form={form}
-            id={id}
-            onClick={onClick}
-            role="button"
-            tabIndex={tabIndex}
-            type={htmlType}
-            value={value}
+          {...ariaProps}
+          {...dataProps}
+          className={css}
+          disabled={disabled}
+          form={form}
+          id={id}
+          onClick={onClick}
+          role="button"
+          tabIndex={tabIndex}
+          type={htmlType}
+          value={value}
+        >
+          {icon ? (
+            <div className='reaction_button_icon_wrapper'>
+              <Icon icon={icon} />
+              {count && (
+                <Caption paddingLeft="xxs" size="xs">
+                  {count}
+                </Caption>
+              )}
+            </div>
+          ) : (
+            <Icon icon="face-smile-plus" />
+          )}
+        </button>
+      );
+    } else {
+      return (
+        <button
+          {...ariaProps}
+          {...dataProps}
+          className={css}
+          disabled={disabled}
+          form={form}
+          id={id}
+          onClick={onClick}
+          role="button"
+          tabIndex={tabIndex}
+          type={htmlType}
+          value={value}
         >
           {ifLoading()}
         </button>
-      )
+      );
+    }
   }
 
   return (

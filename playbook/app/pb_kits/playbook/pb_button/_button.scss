@@ -1,5 +1,9 @@
 @import "./button_mixins";
 @import "../tokens/colors";
+@import "../tokens/border_radius";
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/typography";
 
 $pb_button_sizes: (
   "sm":   0.75rem,
@@ -29,6 +33,29 @@ $pb_button_sizes: (
   }
   &[class*=_link]  {
     @include pb_button_link;
+  }
+  &[class*=_reaction] {
+    background-color: $card_light;
+    min-width: 40px;
+    border-radius: $border_radius_rounded;
+    border: 1px solid $border_light;
+    color: $text_lt_light;
+    padding: ($space_xxs - 2) $space_xs;
+    min-height: $space_md + 2;
+
+    .icon_circle_emoji {
+      height: $space_sm;
+    }
+  }
+
+  &.reaction_default {
+    padding: ($space_xxs + 1) ($space_sm - 4);
+    color: $text_lt_lighter;
+  }
+
+  .reaction_button_icon_wrapper {
+    display: flex;
+    height: $space_sm;
   }
 
   // Disabled =================

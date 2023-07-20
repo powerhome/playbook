@@ -22,4 +22,5 @@ examples:
   - button_options: Button Additional Options (onClick)
   - button_size: Button Size
   - button_form: Button Form Attribute
+  - button_reaction: Reaction Button
   - button_hover: Button Hover
