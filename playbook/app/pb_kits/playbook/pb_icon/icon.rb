@@ -140,13 +140,7 @@ module Playbook
       end
 
       def font_style_class
-        white_list = %w[powergon greensky]
-
-        if white_list.include?(icon)
-          "fak"
-        elsif font_style
-          font_style.to_s
-        end
+        font_style ? font_style.to_s : "far"
       end
 
       def spin_class

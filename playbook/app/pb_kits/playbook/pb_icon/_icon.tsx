@@ -85,14 +85,10 @@ const Icon = (props: IconProps) => {
   // faClasses[`fa-${icon}`] = customIcon ? 'custom' : icon
   if (!customIcon) faClasses[`fa-${icon}`] = icon
   
-  const whiteList = [
-    'greensky', 'powergon'
-  ]
-  
   const classes = classnames(
     flipMap[flip],
     'pb_icon_kit',
-    customIcon ? '' : whiteList.includes(icon) ? `fak` : fontStyle,
+    customIcon ? '' : fontStyle,
     faClasses,
     globalProps(props),
     className
