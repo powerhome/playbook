@@ -15,6 +15,7 @@ type BackgroundProps = {
   'card_light' | 'card_dark' | 'data_1' | 'data_2' | 'data_3' | 'data_4' | 'data_5' | 'data_6' | 'data_7' | 'data_8' |
   'border_light' | 'border_dark' | 'success_secondary' | 'error_secondary' | 'info_secondary' | 'warning_secondary' |
   'neutral_secondary' | 'primary_secondary' | 'success_subtle' | 'warning_subtle' | 'error_subtle' | 'info_subtle' | 'neutral_subtle',
+  backgroundPosition?: string,
   backgroundRepeat?: 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat' | 'space' | 'round' | 'initial' | 'inherit',
   backgroundSize?: 'auto' | 'cover' | 'contain',
   children?: React.ReactChild[] | React.ReactNode,
@@ -33,6 +34,7 @@ const Background = (props: BackgroundProps) => {
     alt = '',
     aria = {},
     backgroundColor = 'light',
+    backgroundPosition = '',
     backgroundRepeat = 'initial',
     backgroundSize = 'cover',
     children,
@@ -52,7 +54,14 @@ const Background = (props: BackgroundProps) => {
     backgroundImage: `url(${imageUrl})`,
     backgroundRepeat: `${backgroundRepeat}`,
     backgroundSize: `${backgroundSize}`,
+    backgroundPosition: backgroundPosition
   }
+
+  const backgroundPositionStyle = {
+    backgroundColor: customColor? customColor: null,
+    backgroundPosition: `${backgroundPosition}`
+  }
+
   const getBackgroundColor = customColor ? 'pb_background_custom_color' : `pb_background_color_${backgroundColor}`
   const classes = classnames(buildCss('pb_background_kit'), 'lazyload', backgroundStyle, transition, globalProps(props), getBackgroundColor, className)
 
@@ -80,7 +89,7 @@ const Background = (props: BackgroundProps) => {
             {...dataProps}
             className={classes}
             id={id}
-            style={customColor ? { backgroundColor: customColor } : null}
+            style={backgroundPositionStyle}
         >
           { children }
         </Tag>
