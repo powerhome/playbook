@@ -61,7 +61,7 @@ $pb_button_sizes: (
 
   .reaction_button_icon_wrapper {
     display: flex;
-    height: $space_sm;
+    height: $space_sm + 1;
   }
 
   // Disabled =================
