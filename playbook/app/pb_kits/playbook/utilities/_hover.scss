@@ -2,7 +2,7 @@
 
 @mixin hover-color-classes($colors-list) {
     @each $name, $color in $colors-list {
-      .bg-hover-#{$name}:hover {
+      .hover_background_#{$name}:hover {
         background-color: $color !important;
         transition: background-color $transition-speed ease;
       }
