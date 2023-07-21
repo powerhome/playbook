@@ -46,6 +46,12 @@ $pb_button_sizes: (
     .icon_circle_emoji {
       height: $space_sm;
     }
+    &:hover {
+      background-color: $bg_light;
+    }
+    &.active {
+      border-color: $primary_action;
+    }
   }
 
   &.reaction_default {

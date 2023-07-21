@@ -16,8 +16,9 @@ module Playbook
       prop :new_window, type: Playbook::Props::Boolean,
                         default: false
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[primary secondary link],
+                     values: %w[primary secondary link reaction],
                      default: "primary"
+      prop :count, type: Playbook::Props::Number
       prop :target
       prop :text
       prop :type

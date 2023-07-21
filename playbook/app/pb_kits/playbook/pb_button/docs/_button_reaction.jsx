@@ -1,7 +1,11 @@
-import React from "react"
+import React, {useState} from "react"
 import { Button } from "../../"
 
-const ButtonReaction = (props) => (
+const ButtonReaction = (props) => {
+
+const [highlightActive, setHighlightActive] =useState(false)
+
+return (
   <div>
     <Button
         count={5}
@@ -11,8 +15,11 @@ const ButtonReaction = (props) => (
         {...props}
     />
     <Button
+        count={153}
+        highlight = {highlightActive}
         icon="&#127881;"
         marginLeft='lg'
+        onClick={()=> setHighlightActive(!highlightActive)}
         tabIndex={0}
         variant="reaction"
         {...props}
@@ -26,5 +33,6 @@ const ButtonReaction = (props) => (
 
     </div>
 )
+}
 
 export default ButtonReaction

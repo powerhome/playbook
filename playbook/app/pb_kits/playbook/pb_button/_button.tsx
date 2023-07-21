@@ -18,6 +18,7 @@ type ButtonPropTypes = {
   fixedWidth?: boolean,
   form?: string,
   fullWidth?: boolean,
+  highlight?: boolean,
   icon?: string,
   iconRight?: boolean,
   id?: string,
@@ -40,6 +41,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
   const {
     disabled = false,
     fullWidth = false,
+    highlight,
     icon,
     loading = false,
     type = 'inline',
@@ -56,6 +58,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
   className += loading ? '_loading' : ''
   className += `${size !== null ? ` size_${size}` : ''}`
   className += `${variant === 'reaction' && !icon ? ` reaction_default` : ''}`
+  className += `${variant === 'reaction' && highlight ? ` active` : ''}`
 
   return className
 }
