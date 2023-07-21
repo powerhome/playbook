@@ -181,7 +181,10 @@ const Dialog = (props: DialogProps) => {
             {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}
             {!status && text ? <Dialog.Body>{text}</Dialog.Body> : null}
             {status && (
-              <Dialog.Body padding="md">
+              <Dialog.Body
+                  className="dialog_status_text_align"
+                  padding="md"
+              >
                 <Flex align="center" orientation="column">
                   <IconCircle
                     icon={sweetAlertStatus[status].icon}
@@ -197,17 +200,17 @@ const Dialog = (props: DialogProps) => {
             )}
             {cancelButton && confirmButton ? (
               <Dialog.Footer>
-                  <Button 
-                    loading={loading} 
-                    onClick={onConfirm} 
-                    htmlType="button" 
+                  <Button
+                    loading={loading}
+                    onClick={onConfirm}
+                    htmlType="button"
                     variant="primary">
                     {confirmButton}
                   </Button>
-                  <Button 
-                    id="cancel-button" 
-                    onClick={onCancel} 
-                    variant="link" 
+                  <Button
+                    id="cancel-button"
+                    onClick={onCancel}
+                    variant="link"
                     htmlType="button">
                     {cancelButton}
                   </Button>
