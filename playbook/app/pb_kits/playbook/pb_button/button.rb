@@ -19,6 +19,8 @@ module Playbook
                      values: %w[primary secondary link reaction],
                      default: "primary"
       prop :count, type: Playbook::Props::Number
+      prop :highlight, type: Playbook::Props::Boolean,
+                       default: false
       prop :target
       prop :text
       prop :type
@@ -65,7 +67,7 @@ module Playbook
       end
 
       def classname
-        button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
+        button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class, default_reaction_class, highlight_active)
         button_class + size_class
       end
 
@@ -85,6 +87,14 @@ module Playbook
 
       def size_class
         size ? " size_#{size}" : ""
+      end
+
+      def default_reaction_class
+        variant === "reaction" && !object.icon ? " reaction_default" : ""
+      end
+
+      def highlight_active
+        variant === "reaction" && object.highlight ? " active" : ""
       end
     end
   end
