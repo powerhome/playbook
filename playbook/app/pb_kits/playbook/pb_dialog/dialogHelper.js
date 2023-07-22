@@ -1,7 +1,6 @@
 const dialogHelper = () => {
   const openTrigger = document.querySelectorAll("[data-open-dialog]");
   const closeTrigger = document.querySelectorAll("[data-close-dialog]");
-  const dialogs = document.querySelectorAll(".pb_dialog_rails")
 
   openTrigger.forEach((open) => {
     open.addEventListener("click", () => {
@@ -9,6 +8,21 @@ const dialogHelper = () => {
       var targetDialog = document.getElementById(openTriggerData)
       if (targetDialog.open) return;
       targetDialog.showModal();
+
+      //the following allows you to close dialog by clicking on overlay
+      targetDialog.addEventListener('click',((event) => {
+        var dialogContainerData = targetDialog.parentElement.dataset
+         if (dialogContainerData.overlayClick === "overlay_close") return;
+          let rect = event.target.getBoundingClientRect();
+                if (rect.left > event.clientX ||
+              rect.right < event.clientX ||
+              rect.top > event.clientY ||
+              rect.bottom < event.clientY
+          ) {
+              targetDialog.close();
+          }
+        })
+      );
     });
   });
 
@@ -18,21 +32,6 @@ const dialogHelper = () => {
       document.getElementById(closeTriggerData).close();
     });
   });
-
-  // Close dialog box on outside click
-  dialogs.forEach((dialogElement) => {
-    dialogElement.addEventListener("click", (event) => {
-      const dialogParentDataset = dialogElement.parentElement.dataset
-      if (dialogParentDataset.overlayClick === "overlay_close") return
-
-      const clickedOutsideDialogBox = event.target.classList.contains("pb_dialog_rails")
-
-      if (clickedOutsideDialogBox) {
-        dialogElement.close()
-        event.stopPropagation()
-      }
-    })
-  })
 };
 
 export default dialogHelper;
