@@ -67,8 +67,8 @@ module Playbook
       end
 
       def classname
-        button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class, default_reaction_class, highlight_active)
-        button_class + size_class
+        button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
+        button_class + size_class + default_reaction_class + highlight_active
       end
 
     private
