@@ -9,7 +9,7 @@ return (
   <div>
     <Button
         count={5}
-        icon="&#128525;"
+        icon="😍"
         tabIndex={0}
         variant="reaction"
         {...props}

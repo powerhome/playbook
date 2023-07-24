@@ -50,7 +50,8 @@ $pb_button_sizes: (
       background-color: $bg_light;
     }
     &.active {
-      border-color: $primary_action;
+      border-color:transparent;
+      box-shadow: 0px 0px 0 1px $primary_action;
     }
   }
 
