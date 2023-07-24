@@ -4,6 +4,12 @@
   text='Shadow Deep'
 />
 
+<Button
+  hover={{ scale: "lg" }}
+  onClick={() => alert("button clicked!")}
+  text='Shadow Deep'
+/>
+
 <Message
     hover={{ background: "success_subtle" }}
     label='Anna Black'

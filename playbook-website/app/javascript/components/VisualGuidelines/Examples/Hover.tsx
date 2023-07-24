@@ -7,18 +7,27 @@ import {
   Flex,
   FlexItem,
   Icon,
+  Pill,
+  SectionSeparator,
+  Table,
+  Title,
 } from 'playbook-ui'
 
 import Example from '../Templates/Example'
 
-const ZINDEX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
 const shadowArr = ['deep', 'deeper', 'deepest']
 const scaleObj = { 'sm': '@1.05', 'md': '@1.10', 'lg': '@1.15' }
 
-const hoverDescription = (
-  <>
+const Hover = ({ example }: { example: string }) => (
+  <React.Fragment>
+    <Title
+        marginBottom="sm"
+        size={1}
+        tag="h1"
+        text="Hover"
+    />
     <Body
+        paddingBottom="xxs"
         text="Adding our hover prop is usefull for easily customizing UI for kit ineractions."
     />
     <Button
@@ -38,20 +47,122 @@ const hoverDescription = (
         />
       </Body>
     </Button>
-  </>
-)
-
-const Hover = ({ example }: { example: string }) => (
-  <React.Fragment>
-    <Example
-        description={hoverDescription}
-        example={example}
-        globalProps={{
-          hover: ZINDEX,
-        }}
-        // globalPropsDescription={globalPropsDescription}
-        title="Hover"
+    <Title
+        marginBottom="xs"
+        marginTop="md"
+        size={4}
+        tag="h4"
+        text="Global Props"
     />
+    <Body
+        marginBottom="md"
+        text="Available in every kit. These are added globally as they are most flexible when developing."
+    />
+    <Example
+        customChildren
+        example={example}
+    >
+      <Flex
+          paddingBottom="sm"
+          vertical="stretch"
+      >
+        <Card.Body
+            marginRight="xl"
+            paddingRight="xl"
+        >
+          <Caption
+              marginBottom="sm"
+              text="Props"
+          />
+          <Pill
+              text="hover"
+              textTransform="none"
+          />
+        </Card.Body>
+        <SectionSeparator
+            marginBottom="xs"
+            marginLeft="xl"
+            marginTop="md"
+            orientation="vertical"
+            paddingLeft="xl"
+            variant="card"
+        />
+        <Table
+            container={false}
+            dataTable
+            marginTop="sm"
+            marginX="sm"
+            size="sm"
+        >
+          <thead>
+            <tr>
+              <th>{'options'}</th>
+              <th>{'values'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <Pill
+                    text="background"
+                    textTransform="none"
+                    variant="warning"
+                />
+              </td>
+              <td>
+                <Pill
+                    text="${color}"
+                    textTransform="none"
+                    variant="warning"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Pill
+                    text="shadow"
+                    textTransform="none"
+                    variant="warning"
+                />
+              </td>
+              <td>
+                {shadowArr.map((value) => {
+                  return (
+                    <Pill
+                        key={value}
+                        text={value}
+                        textTransform="none"
+                        variant="warning"
+                    />
+                  )
+                })}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Pill
+                    text="scale"
+                    textTransform="none"
+                    variant="warning"
+                />
+              </td>
+              <td>
+                {Object.entries(scaleObj).map(([key]) => {
+                  return (
+                    <Pill
+                        key={key}
+                        text={key}
+                        textTransform="none"
+                        variant="warning"
+                    />
+                  )
+                })}
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </Flex>
+    </Example>
 
     <Card
         marginTop="md"
