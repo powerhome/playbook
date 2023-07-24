@@ -96,7 +96,7 @@ const Icon = (props: IconProps) => {
   const classesEmoji = classnames(
     'pb_icon_kit',
     globalProps(props),
-    'icon_circle_emoji',
+    'pb_icon_kit_emoji',
     className
   )
 
