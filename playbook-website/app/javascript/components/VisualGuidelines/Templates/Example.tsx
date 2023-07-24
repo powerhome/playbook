@@ -21,7 +21,7 @@ type ExampleType = {
   children?: React.ReactChild[] | React.ReactChild,
   // codesandboxExample? : boolean,
   customChildren?: boolean,
-  description?: React.ReactChild[] | React.ReactChild | string,
+  description?: React.ReactChild[] | React.ReactChild | string | (() => JSX.Element),
   example?: string,
   globalProps?: { [key: string]: string[] | number[] },
   globalPropsDescription?: React.ReactElement | React.ReactElement[] | string,
