@@ -41,10 +41,10 @@ $pb_button_sizes: (
     border: 1px solid $border_light;
     color: $text_lt_light;
     padding: ($space_xxs - 2) $space_xs;
-    min-height: $space_md + 2;
+    min-height: $space_md + 4;
 
     .icon_circle_emoji {
-      height: $space_sm - 1;
+      font-size: $font_base;
     }
     &:hover {
       background-color: $bg_light;
@@ -61,7 +61,7 @@ $pb_button_sizes: (
 
   .reaction_button_icon_wrapper {
     display: flex;
-    height: $space_sm + 1;
+    align-items: center;
   }
 
   // Disabled =================
