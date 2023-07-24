@@ -4,6 +4,7 @@ import { Button } from "../../"
 const ButtonReaction = (props) => {
 
 const [highlightActive, setHighlightActive] =useState(false)
+const reactionCount = 153
 
 return (
   <div>
@@ -15,7 +16,7 @@ return (
         {...props}
     />
     <Button
-        count={153}
+        count={highlightActive ? (reactionCount + 1) : reactionCount}
         highlight = {highlightActive}
         icon="&#127881;"
         marginLeft='lg'
