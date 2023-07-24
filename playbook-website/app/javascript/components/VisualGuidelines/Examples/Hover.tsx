@@ -13,6 +13,9 @@ import Example from '../Templates/Example'
 
 const ZINDEX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+const shadowArr = ['deep', 'deeper', 'deepest']
+const scaleObj = { 'sm': '@1.05', 'md': '@1.10', 'lg': '@1.15' }
+
 const hoverDescription = (
   <>
     <Body
@@ -51,15 +54,14 @@ const Hover = ({ example }: { example: string }) => (
     />
 
     <Card
-        marginTop="sm"
+        marginTop="md"
         shadow="deep"
     >
       <Flex
-          gap="sm"
           orientation="column"
           wrap
       >
-        <FlexItem>
+        <FlexItem paddingBottom="xs">
           <Caption
               text="Visual Guide"
           />
@@ -67,6 +69,60 @@ const Hover = ({ example }: { example: string }) => (
         <FlexItem>
           <Body
               text="Hover over any card below to view hover property."
+          />
+        </FlexItem>
+        <FlexItem paddingY="sm">
+          <Flex
+              gap="sm"
+              wrap
+          >
+            <Card
+                hover={{ background: 'success_subtle' }}
+                padding="xs"
+            >
+              <Body
+                  text="background color*"
+              />
+            </Card>
+            {shadowArr.map((value) => {
+              return (
+                <Card
+                    hover={{ shadow: value }}
+                    key={value}
+                    padding="xs"
+                >
+                  <Body
+                      text={`shadow ${value}`}
+                  />
+                </Card>
+              )
+            })}
+            {Object.entries(scaleObj).map(([key, value]) => {
+              return (
+                <Card
+                    hover={{ scale: key }}
+                    key={key}
+                    padding="xs"
+                >
+                  <Flex align="center">
+                    <Body
+                        paddingRight="xxs"
+                        text={`scale ${key}`}
+                    />
+                    <Caption
+                        size="xs"
+                        text={value}
+                    />
+                  </Flex>
+                </Card>
+              )
+            })}
+          </Flex>
+        </FlexItem>
+        <FlexItem>
+          <Caption
+              size="xs"
+              text="*background accepts any color token"
           />
         </FlexItem>
       </Flex>
