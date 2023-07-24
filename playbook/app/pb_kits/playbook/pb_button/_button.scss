@@ -42,9 +42,12 @@ $pb_button_sizes: (
     color: $text_lt_light;
     padding: ($space_xxs - 2) $space_xs;
     min-height: $space_md + 2;
+    line-height: $font_base;
 
     .icon_circle_emoji {
-      height: $space_sm;
+      height: $space_sm - 1;
+      line-height: $font_base;
+      padding-top: 1px;
     }
     &:hover {
       background-color: $bg_light;
