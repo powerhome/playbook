@@ -1,7 +1,7 @@
 # Get Ready to Hover: Introducing the Global Hover Prop!
 ##### July 21, 2023
 
-![12 33 0](https://github.com/powerhome/playbook/assets/73710701/5aa88f5c-8d83-42a8-9db0-e527e23af779)
+![12 33 0](https://github.com/powerhome/playbook/assets/73710701/e07453a9-be77-438d-aeac-3ccf0e2d21eb)
 
 Add some flair to your page by adjusting the shadow, scaling, or background color of elements when they’re being hovered over. The global hover prop is in beta now, and works with all kits. In particular, try it out with the Card, Button, or Message kit to add interactions to your page!
 
