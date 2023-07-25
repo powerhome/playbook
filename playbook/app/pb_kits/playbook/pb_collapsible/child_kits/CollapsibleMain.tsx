@@ -7,6 +7,7 @@ import { globalProps } from '../../utilities/globalProps'
 
 import Flex from '../../pb_flex/_flex'
 import FlexItem from '../../pb_flex/_flex_item'
+import Icon, { IconSizes } from "../../pb_icon/_icon"
 import CollapsibleContext from '../context'
 
 
@@ -39,24 +40,35 @@ type IconColors =  "default" | "light" | "lighter" | "link" | "error" | "success
 
 type IconProps = {
   collapsed: boolean | (()=> void)
+  icon?: [] | string
   iconColor?: IconColors
-  iconSize?: string | (() => void)
+  iconSize?: (() => void) | IconSizes | any
 }
 
-const Icon = ({ collapsed, iconSize, iconColor }: IconProps) => {
-  const direction = collapsed ? 'down' : 'up'
-  const size = iconSize
+const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
   const color = colorMap[iconColor]
 
   return (
-    <div
-        className="icon_wrapper"
-        key={direction}
-        style={{ verticalAlign: 'middle', color: color }}
-    >
-      <i className={`far fa-chevron-${direction} fa-fw ${size && `fa-${size}`}`} />
-    </div>
-  )
+    <>
+      {collapsed ? (
+        <div
+          className="icon_wrapper"
+          key="chevron-down"
+          style={{ verticalAlign: "middle", color: color }}
+        >
+          <Icon icon={icon ? icon[0] : "chevron-down"} size={iconSize} />
+        </div>
+      ) : (
+        <div
+          className="icon_wrapper"
+          key="chevron-up"
+          style={{ verticalAlign: "middle", color: color }}
+        >
+          <Icon icon={icon ? icon[1] : "chevron-up"} size={iconSize} />
+        </div>
+      )}
+    </>
+  );
 }
 
 const CollapsibleMain = ({
@@ -79,7 +91,7 @@ const CollapsibleMain = ({
         >
           <FlexItem>{children}</FlexItem>
           <FlexItem>
-            <Icon
+            <ToggleIcon
                 collapsed={context.collapsed as () => void}
                 iconColor={context.iconColor as IconColors}
                 iconSize={context.iconSize}
