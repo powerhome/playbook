@@ -1,15 +1,19 @@
 <%= content_tag(object.tag,
     object.tag == "button" ? object.options : object.link_options) do %>
     <% if object.variant === "reaction" %>
-        <% if object.icon %>
-            <div class="reaction_button_icon_wrapper">
+        <% if icon && object.valid_emoji(object.icon) %>
+            <%= pb_rails("flex", props:{ align: "center" }) do %>
                 <%= pb_rails("icon", props: { icon: "#{icon}"}) %>
                 <% if object.count %>
                     <%= pb_rails("caption", props: { text: "#{count}", size: "xs", padding_left:"xxs" }) %>
                 <% end %>
-            </div>
-        <% else %>
-            <%= pb_rails("icon", props: { icon: "face-smile-plus" }) %>
+            <% end %>
+        <% elsif !object.valid_emoji(object.icon) %>
+            <% if object.icon %>
+                <%= pb_rails("icon", props: { icon: "#{icon}" }) %>
+            <% else %>
+                <%= pb_rails("icon", props: { icon: "face-smile-plus" }) %>
+            <% end %>
         <% end %>
     <% else %>
     <% if object.icon && !object.icon_right %>

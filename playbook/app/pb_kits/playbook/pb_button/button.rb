@@ -66,6 +66,11 @@ module Playbook
         link ? "a" : "button"
       end
 
+      def valid_emoji(icon)
+        emoji_regex = /\p{Emoji}/
+        emoji_regex.match?(icon)
+      end
+
       def classname
         button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
         button_class + size_class + default_reaction_class + highlight_active
@@ -90,7 +95,7 @@ module Playbook
       end
 
       def default_reaction_class
-        variant === "reaction" && !object.icon ? " reaction_default" : ""
+        variant === "reaction" && !object.valid_emoji(object.icon) ? " reaction_default" : ""
       end
 
       def highlight_active

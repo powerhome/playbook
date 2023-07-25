@@ -31,6 +31,14 @@ return (
         variant="reaction"
         {...props}
     />
+    <Button
+        icon="user"
+        marginLeft='lg'
+        tabIndex={0}
+        variant="reaction"
+        {...props}
+    />
+
 
     </div>
 )

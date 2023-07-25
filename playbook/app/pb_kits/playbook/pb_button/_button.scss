@@ -43,7 +43,7 @@ $pb_button_sizes: (
     padding: ($space_xxs - 2) $space_xs;
     min-height: $space_md + 4;
 
-    .pb_icon_kit_emoji {
+    .pb_icon_kit_emoji, .pb_icon_kit {
       font-size: $font_base;
     }
     &:hover {
@@ -52,17 +52,15 @@ $pb_button_sizes: (
     &.active {
       border-color:transparent;
       box-shadow: 0px 0px 0 2px $primary_action;
+      &:hover {
+        background-color: rgba($primary, 0.03);
+      }
     }
   }
 
   &.reaction_default {
     padding: ($space_xxs + 1) ($space_sm - 4);
     color: $text_lt_lighter;
-  }
-
-  .reaction_button_icon_wrapper {
-    display: flex;
-    align-items: center;
   }
 
   // Disabled =================

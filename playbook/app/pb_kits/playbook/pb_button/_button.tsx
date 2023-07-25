@@ -5,6 +5,7 @@ import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 import Icon from '../pb_icon/_icon'
 import Caption from "../pb_caption/_caption"
+import Flex from "../pb_flex/_flex"
 
 type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
@@ -37,6 +38,12 @@ type ButtonPropTypes = {
   wrapperClass?: string,
 } & GlobalProps
 
+const isValidEmoji = (emoji: string) => {
+  // Using regular expression to check if the string is a valid emoji/emoji Unicode
+  const emojiRegex = /^(\p{Emoji}|\uFE0F)+$/u;
+  return emojiRegex.test(emoji);
+};
+
 const buttonClassName = (props: ButtonPropTypes) => {
   const {
     disabled = false,
@@ -57,7 +64,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
   className += disabled ? '_disabled' : '_enabled'
   className += loading ? '_loading' : ''
   className += `${size !== null ? ` size_${size}` : ''}`
-  className += `${variant === 'reaction' && !icon ? ` reaction_default` : ''}`
+  className += `${variant === 'reaction' && !isValidEmoji(icon) ? ` reaction_default` : ''}`
   className += `${variant === 'reaction' && highlight ? ` active` : ''}`
 
   return className
@@ -172,18 +179,24 @@ const Button = (props: ButtonPropTypes) => {
           type={htmlType}
           value={value}
         >
-          {icon ? (
-            <div className='reaction_button_icon_wrapper'>
+          {icon && isValidEmoji(icon) && (
+            <Flex align='center'>
               <Icon icon={icon} />
               {count && (
                 <Caption paddingLeft="xxs" size="xs">
                   {count}
                 </Caption>
               )}
-            </div>
-          ) : (
-            <Icon icon="face-smile-plus" />
-          )}
+            </Flex>
+           )
+          }
+          {
+            !isValidEmoji(icon) && (
+              <Icon icon={icon ? icon : "face-smile-plus"} />
+            )
+          }
+
+        
         </button>
       );
     } else {
