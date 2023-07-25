@@ -11,7 +11,7 @@ import IconSizes from "../pb_icon/_icon"
 
 
 type CollapsibleProps = {
-  children?: JSX.Element | [],
+  children?: JSX.Element | [] | any,
   aria?: {[key: string]: string},
   className?: string,
   collapsed?: boolean,

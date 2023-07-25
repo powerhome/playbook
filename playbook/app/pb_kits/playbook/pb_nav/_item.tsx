@@ -93,19 +93,6 @@ const NavItem = (props: NavItemProps) => {
            <span className="pb_nav_list_item_text">
             {text}
           </span>
-  
-          {/* {iconRight &&
-            <div
-              className="pb_nav_list_item_icon_section"
-              key={iconRight}
-            >
-              <Icon
-                className="pb_nav_list_item_icon_right"
-                fixedWidth
-                icon={iconRight}
-              />
-            </div>
-          } */}
         </Tag>
         </Collapsible.Main>
         <Collapsible.Content>
