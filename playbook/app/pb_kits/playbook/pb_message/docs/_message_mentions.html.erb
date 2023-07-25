@@ -1,0 +1,25 @@
+<%= pb_rails("message", props: {
+  label: "Keith Craig",
+  timestamp: "2 days ago",
+  avatar_name: "Keith Craig",
+  padding_bottom: "md"
+}) do %>
+  <%= pb_rails("body") do %>
+    <%= pb_rails("highlight", props: {background_color: "blue", border_radius: "xs", padding: "xxs", text_color: "primary"}) do %>
+      @all
+    <% end %>, please hold for one moment. I will check with my manager.
+  <% end %>
+<% end %>
+
+<%= pb_rails("message", props: {
+  label: "Lucille Sanchez",
+  timestamp: "2 days ago",
+  avatar_name: "Lucille Sanchez",
+  avatar_url: "https://randomuser.me/api/portraits/women/50.jpg"
+}) do %>
+  <%= pb_rails("body") do %>
+    <%= pb_rails("highlight", props: {background_color: "yellow", border_radius: "xs", padding: "xxs", text_color: "primary"}) do %>
+      @Keith Craig
+    <% end %>, application for Kate Smith is waiting for your approval.
+  <% end %>
+<% end %>

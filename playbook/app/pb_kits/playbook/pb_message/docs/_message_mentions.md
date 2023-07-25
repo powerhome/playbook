@@ -1,0 +1,1 @@
+Create user mentions within any Message kit by passing our [Highlight kit](https://playbook.powerapp.cloud/kits/highlight/#custom-colors) and using global and kit props to customize the colors, border radius, and spacing. See the code example below for details.

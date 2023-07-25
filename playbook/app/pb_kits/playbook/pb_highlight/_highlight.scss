@@ -1,6 +1,58 @@
 @import "../tokens/colors";
 @import "../tokens/opacity";
 
+$highlight_bg_color_yellow: rgba(249, 187, 0, 0.2);
+$highlight_bg_color_blue: #e5eefa;
+
 [class^=pb_highlight_kit] {
-  background-color: rgba($yellow,$opacity_2);
+  @mixin highlight-color-classes($colors-list) {
+    @each $name, $color in $colors-list {
+      &.highlight_bg_color_#{$name} {
+        background-color: $color;
+
+        mark {
+          background-color: unset;}
+      }
+
+      &.highlight_text_color_#{$name} {
+        color: $color;
+
+        mark {
+          color: unset;
+        }
+      }
+    }
+  }
+
+  @include highlight-color-classes($product_colors);
+  @include highlight-color-classes($status_colors);
+  @include highlight-color-classes($data_colors);
+  @include highlight-color-classes($shadow_colors);
+  @include highlight-color-classes($colors);
+  @include highlight-color-classes($interface_colors);
+  @include highlight-color-classes($main_colors);
+  @include highlight-color-classes($background_colors);
+  @include highlight-color-classes($card_colors);
+  @include highlight-color-classes($active_colors);
+  @include highlight-color-classes($action_colors);
+  @include highlight-color-classes($hover_colors);
+  @include highlight-color-classes($border_colors);
+  @include highlight-color-classes($text_colors);
+  @include highlight-color-classes($category_colors);
+
+  &.highlight_bg_color_yellow {
+    background-color: $highlight_bg_color_yellow !important;
+
+    mark {
+      background-color: unset !important;
+    }
+  }
+
+  &.highlight_bg_color_blue {
+    background-color: $highlight_bg_color_blue !important;
+
+    mark {
+      background-color: unset !important;
+    }
+  }
 }
