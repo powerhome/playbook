@@ -15,6 +15,7 @@ export const MENU_ITEMS = [
   "Display",
   "Cursor",
   "Flex Box",
+  "Hover",
 ];
 
 const Sidebar = () => {
@@ -34,7 +35,7 @@ const Sidebar = () => {
     </Nav>
     </>
   )
-  
+
 };
 
 export default Sidebar;
