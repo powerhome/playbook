@@ -1,0 +1,48 @@
+<%= pb_rails("background", props: {
+    background_color: "light",
+    padding: "xl"
+}) do %>
+    <%= pb_rails("flex", props: {
+        classname: "hp-social-proof-background-width",
+        max_width: "xxl",
+        justify_content: "center",
+        align: "center",
+        flex_direction: { xs: "column", sm: "row", md: "row", lg: "row", xl: "row", xxl: "row" },
+    }) do %>
+        <%= pb_rails("flex/flex_item", props: {
+          padding_bottom: "sm"
+        }) do %>
+            <%= pb_rails("body", props: {
+                text: "DESIGN, DEVELOP, DELIVER",
+                color: "link"
+            }) %>
+        <% end %>
+        <%= pb_rails("flex/flex_item", props: {
+            padding_bottom: "lg",
+        }) do %>
+            <%= pb_rails("title", props: {
+                text: "Solutions writeen in multiple languages.",
+                text_align: "center",
+                tag: "h3",
+                size: 3
+            }) %>
+        <% end %>
+        <%= pb_rails("flex/flex_item", props: {
+            padding_bottom: "lg"
+        }) do %>
+            <%= pb_rails("body", props: {
+                text: "Playbook gives designers and developers the frameworks they need to create engaging product experiences.",
+                text_align: "center",
+                color: "light"
+            }) %>
+        <% end %>
+        <%= pb_rails("flex/flex_item", props: { classname: "hp-social-proof-background-width" }) do %>
+            <%= pb_rails("button", props: {
+                text: "Explore Playbook Solutions",
+                full_width: true,
+                icon: "arrow-right",
+                icon_right: true
+            }) %>
+        <% end %>
+    <% end %>
+<% end %>

@@ -1,0 +1,11 @@
+@import "../tokens/text_align";
+
+@mixin text-align-classes($text_align-list) {
+  @each $name, $alignment in $text_align-list {
+    .text_align_#{$name} {
+      text-align: $alignment;
+    }
+  }
+}
+
+@include text-align-classes($text_align);

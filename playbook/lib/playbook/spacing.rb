@@ -27,7 +27,7 @@ module Playbook
     end
 
     def max_width_values
-      %w[xs sm md lg xl 0 none]
+      %w[xs sm md lg xl xxl 0 none]
     end
 
     def spacing_options
