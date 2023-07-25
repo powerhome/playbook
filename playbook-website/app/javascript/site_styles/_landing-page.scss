@@ -3,6 +3,7 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/border_radius";
 @import "playbook-ui/dist/tokens/shadows";
+@import "playbook-ui/dist/tokens/screen_sizes";
 
 .landing-page {
   .code-snippets {
@@ -78,5 +79,11 @@
         margin-top: $space_md;
       }
     }
+  }
+
+  // Social proof scss
+
+  .hp-social-proof-background-width {
+    width: 100%;
   }
 }

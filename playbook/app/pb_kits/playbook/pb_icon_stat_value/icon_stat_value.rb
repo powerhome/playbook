@@ -9,7 +9,7 @@ module Playbook
                   values: %w[sm md lg],
                   default: "sm"
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[default royal blue purple teal red yellow green],
+                     values: %w[default royal blue purple teal red yellow green orange],
                      default: "default"
 
       prop :orientation, type: Playbook::Props::Enum,
@@ -22,7 +22,7 @@ module Playbook
       prop :text, type: Playbook::Props::String,
                   default: ""
 
-      prop :value, type: Playbook::Props::Numeric
+      prop :value
 
       def classname
         generate_classname("pb_icon_stat_value_kit", orientation, size, variant)
