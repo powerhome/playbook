@@ -6,12 +6,14 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Icon from '../pb_icon/_icon'
 import Image from '../pb_image/_image'
+import Collapsible from '../pb_collapsible/_collapsible'
 
 type NavItemProps = {
   active?: boolean,
   aria?: { [key: string]: string },
   children?: React.ReactNode[] | React.ReactNode,
   className?: string,
+  collapsible?: boolean,
   data?: object,
   iconLeft?: string,
   iconRight?: string,
@@ -29,6 +31,7 @@ const NavItem = (props: NavItemProps) => {
     aria = {},
     children,
     className,
+    collapsible,
     data = {},
     iconLeft,
     iconRight,
@@ -53,54 +56,113 @@ const NavItem = (props: NavItemProps) => {
       className={classes}
       id={id}
     >
-      <Tag
-        className="pb_nav_list_item_link"
-        href={link}
-        onClick={onClick}
-        target={target}
-      >
-        {imageUrl &&
-          <div
-            className="pb_nav_list_item_icon_section"
-            key={imageUrl}
-          >
-            <Image
-              className="pb_nav_img_wrapper"
-              url={imageUrl}
-            />
-          </div>
-        }
-
-        {iconLeft &&
-          <div
-            className="pb_nav_list_item_icon_section"
-            key={iconLeft}
-          >
-            <Icon
-              className="pb_nav_list_item_icon_left"
-              fixedWidth
-              icon={iconLeft}
-            />
-          </div>
-        }
-
-        <span className="pb_nav_list_item_text">
-          {text || children}
-        </span>
-
-        {iconRight &&
-          <div
-            className="pb_nav_list_item_icon_section"
-            key={iconRight}
-          >
-            <Icon
-              className="pb_nav_list_item_icon_right"
-              fixedWidth
-              icon={iconRight}
-            />
-          </div>
-        }
-      </Tag>
+      {
+        collapsible ? (
+          <Collapsible iconSize="xs" padding="none">
+          <Collapsible.Main>
+          <Tag
+          className="pb_nav_list_item_link"
+          href={link}
+          onClick={onClick}
+          target={target}
+        >
+          {imageUrl &&
+            <div
+              className="pb_nav_list_item_icon_section"
+              key={imageUrl}
+            >
+              <Image
+                className="pb_nav_img_wrapper"
+                url={imageUrl}
+              />
+            </div>
+          }
+  
+          {iconLeft &&
+            <div
+              className="pb_nav_list_item_icon_section"
+              key={iconLeft}
+            >
+              <Icon
+                className="pb_nav_list_item_icon_left"
+                fixedWidth
+                icon={iconLeft}
+              />
+            </div>
+          }
+           <span className="pb_nav_list_item_text">
+            {text}
+          </span>
+  
+          {/* {iconRight &&
+            <div
+              className="pb_nav_list_item_icon_section"
+              key={iconRight}
+            >
+              <Icon
+                className="pb_nav_list_item_icon_right"
+                fixedWidth
+                icon={iconRight}
+              />
+            </div>
+          } */}
+        </Tag>
+        </Collapsible.Main>
+        <Collapsible.Content>
+        {children}
+        </Collapsible.Content>
+        </Collapsible>
+        ) : (
+        <Tag
+          className="pb_nav_list_item_link"
+          href={link}
+          onClick={onClick}
+          target={target}
+        >
+          {imageUrl &&
+            <div
+              className="pb_nav_list_item_icon_section"
+              key={imageUrl}
+            >
+              <Image
+                className="pb_nav_img_wrapper"
+                url={imageUrl}
+              />
+            </div>
+          }
+  
+          {iconLeft &&
+            <div
+              className="pb_nav_list_item_icon_section"
+              key={iconLeft}
+            >
+              <Icon
+                className="pb_nav_list_item_icon_left"
+                fixedWidth
+                icon={iconLeft}
+              />
+            </div>
+          }
+  
+          <span className="pb_nav_list_item_text">
+            {text || children}
+          </span>
+  
+          {iconRight &&
+            <div
+              className="pb_nav_list_item_icon_section"
+              key={iconRight}
+            >
+              <Icon
+                className="pb_nav_list_item_icon_right"
+                fixedWidth
+                icon={iconRight}
+              />
+            </div>
+          }
+        </Tag>
+        )
+      }
     </li>
   )
 }
