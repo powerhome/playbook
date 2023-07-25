@@ -9,18 +9,18 @@ const reactionCount = 153
 return (
   <div>
     <Button
-        count={5}
-        icon="😍"
+        count={highlightActive ? (reactionCount + 1) : reactionCount}
+        highlight = {highlightActive}
+        icon="&#127881;"
+        onClick={()=> setHighlightActive(!highlightActive)}
         tabIndex={0}
         variant="reaction"
         {...props}
     />
     <Button
-        count={highlightActive ? (reactionCount + 1) : reactionCount}
-        highlight = {highlightActive}
-        icon="&#127881;"
+        count={5}
+        icon="😍"
         marginLeft='lg'
-        onClick={()=> setHighlightActive(!highlightActive)}
         tabIndex={0}
         variant="reaction"
         {...props}
