@@ -20,7 +20,7 @@ const Highlight = (props: HighlightProps): React.ReactElement => {
   const {
     backgroundColor = 'yellow',
     children,
-    className = 'pb_highlight_kit',
+    className,
     data = {},
     highlightedText = ['highlight'],
     id = '',
@@ -36,7 +36,7 @@ const Highlight = (props: HighlightProps): React.ReactElement => {
     <Highlighter
         autoEscape
         data={data}
-        highlightClassName={classnames(className, backgroundColorClass, textColorClass, globalProps(props))}
+        highlightClassName={classnames('pb_highlight_kit', backgroundColorClass, textColorClass, globalProps(props), className)}
         highlightTag="mark"
         id={id}
         searchWords={highlightedText}

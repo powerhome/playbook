@@ -1,1 +1,3 @@
-<%= pb_rails("highlight", props: {background_color: "blue", border_radius: "xs", padding: "xxs", text: "Highlight Kit", text_color: "primary"})%>
+<%= pb_rails("body") do %>
+    This is the <%= pb_rails("highlight", props: {background_color: "blue", text_color: "primary"}) do%>Highlight Kit with custom colors<% end %>.
+<% end %>

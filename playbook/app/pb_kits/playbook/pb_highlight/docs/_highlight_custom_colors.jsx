@@ -6,10 +6,8 @@ const HighlightCustomColors = (props) => (
   <>
     <Highlight
         backgroundColor='blue'
-        borderRadius="xs"
-        highlightedText={['highlight kit']}
-        padding="xxs"
-        text="This is the Highlight Kit"
+        highlightedText={['highlight kit with custom colors']}
+        text="This is the Highlight Kit with custom colors."
         textColor='primary'
         {...props}
     />

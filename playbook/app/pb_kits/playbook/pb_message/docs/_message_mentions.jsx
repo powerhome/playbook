@@ -18,7 +18,7 @@ const MessageDefault = (props) => {
                     borderRadius="xs"
                     highlightedText={['@all']}
                     padding="xxs"
-                    text="@all, please hold for one moment. I will check with my manager."
+                    text="@all please hold for one moment. I will check with my manager."
                     textColor='primary'
                     {...props}
                 />
@@ -28,6 +28,7 @@ const MessageDefault = (props) => {
                 avatarName='Lucille Sanchez'
                 avatarUrl='https://randomuser.me/api/portraits/women/50.jpg'
                 label='Lucille Sanchez'
+                timestamp='2 days ago'
                 {...props}
             >
 
@@ -36,7 +37,7 @@ const MessageDefault = (props) => {
                     borderRadius="xs"
                     highlightedText={['@Keith Craig']}
                     padding="xxs"
-                    text="@Keith Craig, application for Kate Smith is waiting for your approval."
+                    text="@Keith Craig thanks. Keep us posted!"
                     textColor='primary'
                     {...props}
                 />

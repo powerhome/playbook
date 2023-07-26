@@ -11,7 +11,8 @@ $highlight_bg_color_blue: #e5eefa;
         background-color: $color;
 
         mark {
-          background-color: unset;}
+          background-color: unset;
+        }
       }
 
       &.highlight_text_color_#{$name} {
