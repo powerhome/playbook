@@ -1,10 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import DateTime from '../pb_kit/dateTime'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import DateTime from '../pb_kit/dateTime';
-
 
 import Caption from '../pb_caption/_caption'
 
@@ -15,7 +14,7 @@ type TimestampProps = {
   dark?: boolean,
   data?: string,
   text: string,
-  timestamp: Date | string,
+  timestamp: string,
   timezone: string,
   id?: string,
   showDate?: boolean,
@@ -33,8 +32,8 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     dark = false,
     data = {},
     text,
-    timezone,
     timestamp,
+    timezone,
     showDate = true,
     showUser = false,
     hideUpdated = false,
@@ -54,25 +53,26 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
   )
 
   const currentYear = new Date().getFullYear().toString()
-  const dateDisplay = `${DateTime.toMonth(timestamp, timezone)} ${DateTime.toDay(timestamp, timezone)}`
+  const dateTimestamp = new DateTime({ value: timestamp, zone: timezone })
+  const dateDisplay = `${dateTimestamp.toMonth()} ${dateTimestamp.toDay()}`
   const shouldShowUser = showUser == true && text.length > 0
   const shouldShowTimezone = showTimezone == true && timezone.length > 0
   const updatedText = hideUpdated ? "" : "Last updated"
   const userDisplay = shouldShowUser ? ` by ${text}` : ''
 
-  let timeDisplay = `${DateTime.toHour(timestamp, timezone)}:${DateTime.toMinute(timestamp, timezone)}${DateTime.toMeridiem(timestamp, timezone)}`
+  let timeDisplay = `${dateTimestamp.toHour()}:${dateTimestamp.toMinute()}${dateTimestamp.toMeridian()}`
 
   const fullTimeDisplay = () => {
     if (shouldShowTimezone) {
-      timeDisplay = `${timeDisplay} ${DateTime.toTimeZone(timestamp, timezone)}`
+      timeDisplay = `${timeDisplay} ${dateTimestamp.toTimezone()}`
     }
     return timeDisplay
   }
 
   const fullDateDisplay = () => {
-    let fullDisplay = `${DateTime.toMonth(timestamp, timezone)} ${DateTime.toDay(timestamp, timezone)}`
-    if (DateTime.toYear(timestamp, timezone).toString() !== currentYear) {
-      fullDisplay = `${fullDisplay}, ${DateTime.toYear(timestamp, timezone)}`
+    let fullDisplay = `${dateTimestamp.toMonth()} ${dateTimestamp.toDay()}`
+    if (dateTimestamp.toYear() !== currentYear) {
+      fullDisplay = `${fullDisplay}, ${dateTimestamp.toYear()}`
     }
     return `${fullDisplay} ${' \u00b7 '} ${fullTimeDisplay()}`
   }
@@ -82,7 +82,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
   }
 
   const formatElapsedString = () => {
-    return `${updatedText} ${userDisplay} ${DateTime.fromNow(timestamp)}`
+    return `${updatedText} ${userDisplay} ${dateTimestamp.value.fromNow()}`
   }
 
   const captionText = () => {
