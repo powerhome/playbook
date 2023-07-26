@@ -1,9 +1,9 @@
 import React from "react";
 
 import classnames from "classnames";
+import DateTime from "../pb_kit/dateTime";
 import { buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
-import DateTime from '../pb_kit/dateTime';
 
 import Caption from "../pb_caption/_caption";
 import Title from "../pb_title/_title";
@@ -14,7 +14,7 @@ type DateStackedProps = {
   className?: string | string[];
   dark?: boolean;
   data?: string;
-  date: Date;
+  date: string | Date;
   size?: "sm" | "md";
   id?: string;
   reverse?: boolean;
@@ -45,42 +45,39 @@ const DateStacked = (props: DateStackedProps) => {
     className
   );
 
-  const currentYear = new Date().getFullYear()
-  const inputYear = DateTime.toYear(date);
+  const currentYear = new Date().getFullYear().toString();
+  const dateTimestamp = new DateTime({ value: date });
+  const inputYear = dateTimestamp.toYear().toString();
   const dataProps = buildDataProps(data)
 
   return (
     <>
       {bold == false ? (
-        <div {...dataProps}
-            className={classes}
-        >
+        <div {...dataProps} className={classes}>
           <div className="pb_date_stacked_day_month">
-            <Caption text={DateTime.toMonth(date).toUpperCase()} />
+            <Caption text={dateTimestamp.toMonth().toUpperCase()} />
             <Title
-                dark={dark}
-                size={sizes[size]}
-                text={DateTime.toDay(date).toString()}
+              dark={dark}
+              size={sizes[size]}
+              text={dateTimestamp.toDay()}
             />
           </div>
           {currentYear != inputYear && <Caption size="xs">{inputYear}</Caption>}
         </div>
       ) : (
-          <div {...dataProps}
-              className={classes}
-          >
+          <div {...dataProps} className={classes}>
             <div className="pb_date_stacked_day_month">
-              <Title
-                  bold
-                  dark={dark}
-                  size="4"
-                  text={DateTime.toMonth(date)}
+              <Title 
+                bold 
+                dark={dark} 
+                size="4" 
+                text={dateTimestamp.toMonth()} 
               />
-              <Title
-                  bold
-                  dark={dark}
-                  size="4"
-                  text={DateTime.toDay(date).toString()}
+              <Title 
+                bold 
+                dark={dark} 
+                size="4" 
+                text={dateTimestamp.toDay()} 
               />
               {currentYear != inputYear && <Title size="4">{inputYear}</Title>}
             </div>

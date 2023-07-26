@@ -12,8 +12,8 @@ import DateStacked from '../pb_date_stacked/_date_stacked'
 
 type DateTimeStackedProps = {
   id?: string,
-  date: Date,
-  datetime: Date,
+  date: string,
+  datetime: string,
   dark: boolean,
   timeZone?: string,
 }

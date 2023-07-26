@@ -1,3 +1,30 @@
+# Get Ready to Hover: Introducing the Global Hover Prop!
+##### July 21, 2023
+
+![12 33 0](https://github.com/powerhome/playbook/assets/73710701/e07453a9-be77-438d-aeac-3ccf0e2d21eb)
+
+Add some flair to your page by adjusting the shadow, scaling, or background color of elements when they’re being hovered over. The global hover prop is in beta now, and works with all kits. In particular, try it out with the Card, Button, or Message kit to add interactions to your page!
+
+[12.33.0](https://github.com/powerhome/playbook/tree/12.33.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Center Align Text for Status Dialogs [\#2657](https://github.com/powerhome/playbook/pull/2657) ([gavhuang](https://github.com/gavhuang))
+- Refactor Dialog Kit Close on Outside Click [\#2650](https://github.com/powerhome/playbook/pull/2650) ([gavhuang](https://github.com/gavhuang))
+- Icon Kit: Self-Hosted Custom Fontawesome Icons Enablement  [\#2647](https://github.com/powerhome/playbook/pull/2647) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Fixed Bugs:**
+
+- Fixing Map Kit Button Height for Safari [\#2655](https://github.com/powerhome/playbook/pull/2655) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Kit Collection Page: Add Kit + Global Props Table to Rails Page [\#2659](https://github.com/powerhome/playbook/pull/2659) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Website Homepage - Social Proof [\#2641](https://github.com/powerhome/playbook/pull/2641) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Refactor Date and Time Kits to not Rely on Moment.js [\#2627](https://github.com/powerhome/playbook/pull/2627) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.32.0...12.33.0)
+
 # Customize Your Toasts: Introducing 'Children' for Fixed Confirmation Toast Kit!
 ##### July 19, 2023
 
