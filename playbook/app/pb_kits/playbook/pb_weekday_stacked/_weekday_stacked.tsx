@@ -7,7 +7,8 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 
 import Caption from '../pb_caption/_caption'
 import Title from '../pb_title/_title'
-import DateTime from '../pb_kit/dateTime';
+
+import DateTime from '../pb_kit/dateTime'
 
 type WeekdayStackedProps = {
   align?: "left" | "center" | "right",
@@ -21,20 +22,22 @@ type WeekdayStackedProps = {
   compact?: boolean,
 }
 
-const getDayOfWeek = (value: Date, compact: boolean) => {
+const getDayOfWeek = (value: Date | string, compact: boolean) => {
+  const dateTime = new DateTime({ value })
   if (compact) {
-    return DateTime.toDayAbbr(value)
+    return dateTime.toDayAbbr()
   } else {
-    return DateTime.toWeekday(value)
+    return dateTime.toWeekday()
   }
 }
 
-const getFormattedDate = (value: Date, variant: "day_only" | "month_day" | "expanded")  => {
+const getFormattedDate = (value: Date | string, variant: "day_only" | "month_day" | "expanded") => {
+  const dateTime = new DateTime({ value })
   if (variant === 'day_only') {
-    return DateTime.toDay(value).toString()
+    return dateTime.toDay()
   } else {
-    const format = variant === 'expanded' ? 'expanded' : 'month_day'
-    return DateTime.toCustomFormat(value, format)
+    const format = variant === 'expanded' ? '%b %-d' : '%-m/%-d'
+    return dateTime.toCustomFormat(format)
   }
 }
 
