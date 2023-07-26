@@ -6,10 +6,11 @@
         classname: "hp-social-proof-background-width",
         max_width: "xxl",
         align_items: { xs: "center", sm: "start" },
-        flex_direction: { xs: "column", sm: "column", md: "row", lg: "row", xl: "row", xxl: "row" },
+        flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row", xxl: "row" },
     }) do %>
         <%= pb_rails("flex/flex_item", props: {
-            padding_bottom: "sm"
+            padding_bottom: "sm",
+            padding_top: "lg"
         }) do %>
             <%= pb_rails("body", props: {
                 text: "DESIGN, DEVELOP, DELIVER",
@@ -18,30 +19,87 @@
             }) %>
         <% end %>
         <%= pb_rails("flex/flex_item", props: {
-            padding_bottom: "lg",
+            padding_bottom: { xs: "lg", sm: "sm", md: "sm", lg: "sm", xl: "sm", xxl: "sm" },
         }) do %>
             <%= pb_rails("title", props: {
                 text: "Solutions writeen in multiple languages.",
-                text_align: { xs: "center", sm: "start" },
+                text_align: "center",
                 tag: "h3",
-                size: 3
+                size: 3,
+                display: { xs: "flex", sm: "none", md: "none", lg: "none", xl: "none", xxl: "none" }
+            }) %>
+            <%= pb_rails("title", props: {
+                text: "Create solutions to repetitive problems, for multiple languages and access to anywhere!",
+                text_align: "start",
+                tag: "h2",
+                size: 2,
+                display: { xs: "none", sm: "flex" }
             }) %>
         <% end %>
         <%= pb_rails("flex/flex_item", props: {
-            padding_bottom: "lg"
+            padding_bottom: { xs: "lg", sm: "xl", md: "xl", lg: "xl", xl: "xl", xxl: "xl" },
         }) do %>
             <%= pb_rails("body", props: {
                 text: "Playbook gives designers and developers the frameworks they need to create engaging product experiences.",
                 text_align: { xs: "center", sm: "start" },
-                color: "light"
+                color: "light",
+                display: { xs: "flex", sm: "none", md: "none", lg: "none", xl: "none", xxl: "none" }
+            }) %>
+            <%= pb_rails("body", props: {
+                text: "Playbook was created for Power by Power. Playbook is an open-source, cross-platform design system that gives designers and developers the frameworks they need to create engaging product experiences—accessibility, internationalization, and performance included.",
+                text_align: { xs: "center", sm: "start" },
+                color: "light",
+                display: { xs: "none", sm: "flex" }
             }) %>
         <% end %>
-        <%= pb_rails("flex/flex_item", props: { classname: "hp-social-proof-background-width" }) do %>
+        <%= pb_rails("flex/flex_item", props: {
+            classname: "hp-social-proof-background-width",
+            display: { xs: "none", sm: "flex" }
+        }) do %>
+            <%= pb_rails("flex", props: {
+                classname: "hp-social-proof-background-width",
+                justify: "between",
+                gap: "md"
+            }) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("card", props: {
+                            shadow: "deeper",
+                            border_radius: "lg",
+                            cursor: "pointer"
+                    })  do %>
+                        <%= pb_rails("image", props: { alt: "picture of a misty forest", size: "xs", url: asset_pack_path("media/images/hp-react-solutions.svg") }) %>
+                    <% end %>
+                <% end %>
+                <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("card", props: {
+                            shadow: "deeper",
+                            border_radius: "lg",
+                            cursor: "pointer"
+                    })  do %>
+                        <%= pb_rails("image", props: { alt: "picture of a misty forest", size: "xs", url: asset_pack_path("media/images/hp-rails-solutions.svg") }) %>
+                    <% end %>
+                <% end %>
+                <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("card", props: {
+                            shadow: "deeper",
+                            border_radius: "lg",
+                            cursor: "pointer"
+                    })  do %>
+                        <%= pb_rails("image", props: { alt: "picture of a misty forest", size: "xs", url: asset_pack_path("media/images/hp-htmlcss-solutions.svg") }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+        <%= pb_rails("flex/flex_item", props: {
+            classname: "hp-social-proof-background-width",
+            text_align: "center",
+            padding_top: { xs: "none", sm: "xl", md: "xl", lg: "xl", xl: "xl", xxl: "xl" }
+        }) do %>
             <%= pb_rails("button", props: {
                 text: "Explore Playbook Solutions",
-                full_width: true,
                 icon: "arrow-right",
-                icon_right: true
+                icon_right: true,
+                size: "lg"
             }) %>
         <% end %>
     <% end %>
