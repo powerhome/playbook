@@ -1,6 +1,6 @@
-![badge-rectangle-swift](https://github.com/powerhome/playbook/assets/92755007/311b4b7e-1c55-4e73-962e-4fc0828ececd)
 
-```swift
+```swift![badge-colors-swift](https://github.com/powerhome/playbook/assets/92755007/bf7f0a8c-404c-4e8c-9370-cf4ae6e4b2f9)
+
 HStack {
     PBBadge(text: "1", rounded: true, variant: .chat)
     PBBadge(text: "4", variant: .chat)
