@@ -7,7 +7,7 @@ RSpec.describe Playbook::PbHighlight::Highlight do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_highlight_kit"
+      expect(subject.new({}).classname).to eq "pb_highlight_kit highlight_bg_color_yellow highlight_text_color_black"
     end
   end
 end
