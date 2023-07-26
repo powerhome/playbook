@@ -3,12 +3,13 @@ import React from "react";
 import Nav from "../_nav";
 import NavItem from "../_item";
 
-const CollapsibleNav = (props) => {
+const CollapsibleNavCustomIcons = (props) => {
   return (
     <Nav variant="subtle">
       <NavItem
           collapsible 
           iconLeft="city" 
+          iconRight={["chevron-down", "chevron-up"]}
           link="#" 
           text="Overview" 
           {...props}
@@ -33,6 +34,7 @@ const CollapsibleNav = (props) => {
           active 
           collapsible 
           iconLeft="theater-masks"
+          iconRight={["chevron-down", "chevron-up"]}
           link="#" 
           text="Albums" 
           {...props}
@@ -56,6 +58,7 @@ const CollapsibleNav = (props) => {
       <NavItem 
           collapsible 
           iconLeft="city" 
+          iconRight={["chevron-down", "chevron-up"]}
           link="#" 
           text="Similar Artists" 
           {...props}
@@ -80,4 +83,4 @@ const CollapsibleNav = (props) => {
   );
 };
 
-export default CollapsibleNav;
+export default CollapsibleNavCustomIcons;

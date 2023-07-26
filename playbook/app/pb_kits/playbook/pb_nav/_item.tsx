@@ -16,7 +16,7 @@ type NavItemProps = {
   collapsible?: boolean,
   data?: object,
   iconLeft?: string,
-  iconRight?: string,
+  iconRight?: string | string[],
   id?: string,
   imageUrl?: string,
   link?: string,
@@ -58,7 +58,7 @@ const NavItem = (props: NavItemProps) => {
     >
       {
         collapsible ? (
-          <Collapsible iconSize="xs" padding="none">
+          <Collapsible icon={iconRight ? iconRight : ['plus','minus']} iconSize="xs" padding="none">
           <Collapsible.Main>
           <Tag
           className="pb_nav_list_item_link"
@@ -138,12 +138,12 @@ const NavItem = (props: NavItemProps) => {
           {iconRight &&
             <div
               className="pb_nav_list_item_icon_section"
-              key={iconRight}
+              key={iconRight as string}
             >
               <Icon
                 className="pb_nav_list_item_icon_right"
                 fixedWidth
-                icon={iconRight}
+                icon={iconRight as string}
               />
             </div>
           }
