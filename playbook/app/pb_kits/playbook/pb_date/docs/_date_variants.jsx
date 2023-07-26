@@ -7,7 +7,7 @@ const DateVariants = (props) => {
       <FormattedDate
           showIcon
           size="sm"
-          value={new Date('25 Dec 1995')}
+          value="1995-12-25"
           {...props}
       />
 
@@ -15,7 +15,7 @@ const DateVariants = (props) => {
       <br />
 
       <FormattedDate
-          value={new Date('25 Dec 1995')}
+          value="1995-12-25"
           {...props}
       />
 
@@ -24,7 +24,7 @@ const DateVariants = (props) => {
 
       <FormattedDate
           showIcon
-          value={new Date('25 Dec 1995')}
+          value="1995-12-25"
           {...props}
       />
 
@@ -33,7 +33,7 @@ const DateVariants = (props) => {
 
       <FormattedDate
           showDayOfWeek
-          value={new Date('25 Dec 1995')}
+          value="1995-12-25"
           {...props}
       />
 
@@ -43,7 +43,7 @@ const DateVariants = (props) => {
       <FormattedDate
           showDayOfWeek
           showIcon
-          value={new Date('25 Dec 1995')}
+          value="1995-12-25"
           {...props}
       />
     </div>
