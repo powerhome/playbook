@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/112719604/250161736-c0511b62-7def-4a76-b845-6512e9130cd4.png)
+![badge-chat-notification-swift](https://github.com/powerhome/playbook/assets/92755007/5304774d-cb61-49c3-a0f7-f869fc731f9f)
 
 ```swift
 HStack {
