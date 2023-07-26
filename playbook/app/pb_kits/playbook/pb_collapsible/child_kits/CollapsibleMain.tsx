@@ -40,9 +40,9 @@ type IconColors =  "default" | "light" | "lighter" | "link" | "error" | "success
 
 type IconProps = {
   collapsed: boolean | (()=> void)
-  icon?: [] | string
+  icon?: string[] | string
   iconColor?: IconColors
-  iconSize?: (() => void) | IconSizes | any
+  iconSize?: IconSizes
 }
 
 const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
@@ -94,7 +94,8 @@ const CollapsibleMain = ({
             <ToggleIcon
                 collapsed={context.collapsed as () => void}
                 iconColor={context.iconColor as IconColors}
-                iconSize={context.iconSize}
+                iconSize={context.iconSize as IconSizes}
+                icon={context.icon as string[] | string}
             />
             </FlexItem>
         </Flex>

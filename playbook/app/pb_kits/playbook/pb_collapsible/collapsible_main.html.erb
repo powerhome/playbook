@@ -10,8 +10,13 @@
       <% end %>
       <%= pb_rails("flex/flex_item") do %>
         <div style="color: <%= object.icon_color %>">
-          <i class="far fa-chevron-down <%= object.icon_size %>"></i>
-          <i class="far fa-chevron-up <%= object.icon_size %>"></i>
+        <% if object.icon.present? %>
+          <%= pb_rails("icon", props: { icon: "#{icon[0]}", id:"collapsible_open_icon", size: object.size }) %>
+          <%= pb_rails("icon", props: { icon: "#{icon[1]}", id:"collapsible_close_icon", size: object.size }) %>
+        <% else %>
+          <%= pb_rails("icon", props: { icon: "chevron-down", id:"collapsible_open_icon", size: object.size }) %>
+          <%= pb_rails("icon", props: { icon: "chevron-up", id:"collapsible_close_icon", size: object.size }) %>
+        <% end %>
         </div>
       <% end %>
     <% end %>
