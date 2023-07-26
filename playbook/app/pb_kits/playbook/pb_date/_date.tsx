@@ -1,9 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 
+import DateTime from "../pb_kit/dateTime";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
-import DateTime from '../pb_kit/dateTime';
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -20,7 +20,7 @@ type PbDateProps = {
   showIcon?: boolean;
   size?: "sm" | "md" | "lg";
   unstyled?: boolean;
-  value: Date;
+  value: string | Date;
 };
 
 const PbDate = (props: PbDateProps) => {
@@ -37,11 +37,12 @@ const PbDate = (props: PbDateProps) => {
     value,
   } = props;
 
-  const weekday = DateTime.toWeekday(value);
-  const month = DateTime.toMonth(value);
-  const day = DateTime.toDay(value);
-  const year = DateTime.toYear(value);
-  const currentYear = new Date().getFullYear();
+  const dateTimestamp = new DateTime({ value: value });
+  const weekday = dateTimestamp.toWeekday();
+  const month = dateTimestamp.toMonth();
+  const day = dateTimestamp.toDay();
+  const year = dateTimestamp.toYear();
+  const currentYear = new Date().getFullYear().toString();
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);

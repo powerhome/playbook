@@ -13,7 +13,7 @@ type DateTimeProps = {
   aria?: { [key: string]: string; },
   className?: string,
   data?: { [key: string]: string; },
-  datetime: Date,
+  datetime: string,
   id?: string,
   size?: "sm" | "md",
   showDayOfWeek: boolean,

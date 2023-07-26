@@ -14,7 +14,7 @@ const DateDefault = (props) => {
 
       <FormattedDate
           size="sm"
-          value={new Date('03 Aug 2012')}
+          value="2012-08-03"
           {...props}
       />
 
@@ -23,7 +23,7 @@ const DateDefault = (props) => {
       <FormattedDate
           showDayOfWeek
           size="sm"
-          value={new Date('03 Dec 2017')}
+          value="2017-12-03"
           {...props}
       />
 
@@ -38,7 +38,7 @@ const DateDefault = (props) => {
       <br />
 
       <FormattedDate
-          value={new Date('03 Aug 2012')}
+          value="2012-08-03"
           {...props}
       />
 
@@ -46,7 +46,7 @@ const DateDefault = (props) => {
 
       <FormattedDate
           showDayOfWeek
-          value={new Date('03 Dec 2017')}
+          value="2017-12-03"
           {...props}
       />
     </>

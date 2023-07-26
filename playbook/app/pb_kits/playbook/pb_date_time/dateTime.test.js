@@ -89,7 +89,7 @@ describe('DateTime Kit', () => {
     const kit = screen.getByTestId(testId)
     const text = kit.querySelector('.pb_time_kit_md.ml_sm')
 
-    expect(text.textContent).toEqual('2:00p GMT+9')
+    expect(text.textContent).toEqual('2:00p JST')
   })
   test('renders DatePicker size', () => {
     render(
