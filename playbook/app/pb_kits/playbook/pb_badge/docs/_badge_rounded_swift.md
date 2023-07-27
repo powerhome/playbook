@@ -1,4 +1,4 @@
-![badge-rounded-swift](https://github.com/powerhome/playbook/assets/92755007/8e7bee65-3a9b-4be8-88a6-56265e1fe019)
+<img width="1326" alt="badge-rounded" src="https://github.com/powerhome/playbook/assets/92755007/775a906f-0108-4ee1-a277-e7b9f2715a2b">
 
 ```swift
 HStack {
