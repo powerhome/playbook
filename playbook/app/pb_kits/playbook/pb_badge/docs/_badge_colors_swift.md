@@ -1,4 +1,4 @@
-<img width="1326" alt="badge-colors" src="https://github.com/powerhome/playbook/assets/92755007/52ce34ef-eb0d-48c0-9232-89edfff60cef">
+<img width="600" alt="badge-colors" src="https://github.com/powerhome/playbook/assets/92755007/52ce34ef-eb0d-48c0-9232-89edfff60cef">
 
 
 ```swift

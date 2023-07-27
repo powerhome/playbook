@@ -16,4 +16,4 @@ examples:
   - badge_rounded_swift: Rounded
   - badge_colors_swift: Colors
   - badge_notification_swift: Notification
-  
+  - badge_props_swift: ""
