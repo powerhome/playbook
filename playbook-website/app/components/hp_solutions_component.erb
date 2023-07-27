@@ -57,35 +57,53 @@
             display: { xs: "none", sm: "flex" }
         }) do %>
             <%= pb_rails("flex", props: {
-                classname: "hp-social-proof-background-width",
+                flex_grow: 1,
                 justify: "between",
                 gap: "md"
             }) do %>
-                <%= pb_rails("flex/flex_item") do %>
+                <%= pb_rails("flex/flex_item", props: { flex_grow: 1 }) do %>
                     <%= pb_rails("card", props: {
                             shadow: "deeper",
                             border_radius: "lg",
-                            cursor: "pointer"
+                            cursor: "pointer",
+                            hover: { scale: "sm" }
                     })  do %>
-                        <%= pb_rails("image", props: { alt: "picture of a misty forest", size: "xs", url: asset_pack_path("media/images/hp-react-solutions.svg") }) %>
+                        <%= pb_rails("image", props: {
+                            classname: "hp-social-proof-background-width",
+                            alt: "react logo",
+                            size: "xs",
+                            url: asset_pack_path("media/images/hp-react-solutions.svg")
+                        }) %>
                     <% end %>
                 <% end %>
-                <%= pb_rails("flex/flex_item") do %>
+                <%= pb_rails("flex/flex_item", props: { flex_grow: 1 }) do %>
                     <%= pb_rails("card", props: {
                             shadow: "deeper",
                             border_radius: "lg",
-                            cursor: "pointer"
+                            cursor: "pointer",
+                            hover: { scale: "sm" }
                     })  do %>
-                        <%= pb_rails("image", props: { alt: "picture of a misty forest", size: "xs", url: asset_pack_path("media/images/hp-rails-solutions.svg") }) %>
+                        <%= pb_rails("image", props: {
+                            classname: "hp-social-proof-background-width",
+                            alt: "rails logo",
+                            size: "xs",
+                            url: asset_pack_path("media/images/hp-rails-solutions.svg")
+                        }) %>
                     <% end %>
                 <% end %>
-                <%= pb_rails("flex/flex_item") do %>
+                <%= pb_rails("flex/flex_item", props: { flex_grow: 1 }) do %>
                     <%= pb_rails("card", props: {
                             shadow: "deeper",
                             border_radius: "lg",
-                            cursor: "pointer"
+                            cursor: "pointer",
+                            hover: { scale: "sm" }
                     })  do %>
-                        <%= pb_rails("image", props: { alt: "picture of a misty forest", size: "xs", url: asset_pack_path("media/images/hp-htmlcss-solutions.svg") }) %>
+                        <%= pb_rails("image", props: {
+                            classname: "hp-social-proof-background-width",
+                            alt: "htmlcss logo",
+                            size: "xs",
+                            url: asset_pack_path("media/images/hp-htmlcss-solutions.svg")
+                        }) %>
                     <% end %>
                 <% end %>
             <% end %>
@@ -98,6 +116,7 @@
             <%= pb_rails("button", props: {
                 text: "Explore Playbook Solutions",
                 icon: "arrow-right",
+                link: "/guides/getting_started",
                 icon_right: true,
                 size: "lg"
             }) %>
