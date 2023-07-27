@@ -8,6 +8,7 @@ examples:
   - icon_border: Icon Border
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
+  - icon_fa_kit: Icon with FontAwesome Kit
 
   react:
   - icon_default: Icon Default
@@ -18,3 +19,4 @@ examples:
   - icon_border: Icon Border
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
+  - icon_fa_kit: Icon with FontAwesome Kit

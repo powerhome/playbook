@@ -14,6 +14,7 @@ type IconStatValueProps = {
   aria?: { [key: string]: string },
   className?: string,
   data?: object,
+  dark?: boolean,
   icon: string,
   id?: string,
   orientation?: "vertical" | "horizontal",
@@ -28,6 +29,7 @@ type IconStatValueProps = {
     | "teal"
     | "red"
     | "yellow"
+    | "orange"
     | "green",
 }
 
@@ -36,6 +38,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     aria = {},
     className,
     data = {},
+    dark = false,
     icon,
     id,
     orientation = 'horizontal',
@@ -55,6 +58,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     if (size == 'lg') {
       return (
         <Title
+            dark={dark}
             size={1}
             tag="span"
             text={`${value}`}
@@ -63,6 +67,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     } else if (size == 'md') {
       return (
         <Title
+            dark={dark}
             size={2}
             tag="span"
             text={`${value}`}
@@ -71,6 +76,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     } else {
       return (
         <Title
+            dark={dark}
             size={3}
             tag="span"
             text={`${value}`}
@@ -87,6 +93,7 @@ const IconStatValue = (props: IconStatValueProps) => {
         id={id}
     >
       <IconCircle
+          dark={dark}
           icon={icon}
           size={size}
           variant={variant}
@@ -99,10 +106,14 @@ const IconStatValue = (props: IconStatValueProps) => {
             {titleSize(size)}
           &nbsp;
             <Body
+                dark={dark}
                 text={unit}
             />
         </Flex>
-        <Caption text={text} />
+        <Caption
+            dark={dark}
+            text={text}
+        />
       </div>
 
     </div>

@@ -3,3 +3,4 @@ export { default as FixedConfirmationToastMultiLine } from './_fixed_confirmatio
 export { default as FixedConfirmationToastClose } from './_fixed_confirmation_toast_close.jsx'
 export { default as FixedConfirmationToastPositions } from './_fixed_confirmation_toast_positions.jsx'
 export { default as FixedConfirmationToastAutoClose } from './_fixed_confirmation_toast_auto_close.jsx'
+export { default as FixedConfirmationToastChildren } from './_fixed_confirmation_toast_children.jsx'

@@ -70,7 +70,8 @@ module Playbook
                                 neutral_subtle
                               ],
                               default: "light"
-
+      prop :background_position, type: Playbook::Props::String,
+                                default: nil
       prop :background_repeat, type: Playbook::Props::Enum,
                                 values: %w[
                                   repeat
@@ -106,7 +107,8 @@ module Playbook
       end
 
       def custom_background_color
-        "background-color: #{custom_color};"
+        "background-color: #{custom_color};
+        background-position: #{background_position}"
       end
 
     private

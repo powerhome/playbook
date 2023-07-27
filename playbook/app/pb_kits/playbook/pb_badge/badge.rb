@@ -6,7 +6,7 @@ module Playbook
       prop :rounded, type: Playbook::Props::Boolean, default: false
       prop :text
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[success warning error info neutral primary],
+                     values: %w[success warning error info neutral notification primary],
                      default: "neutral"
 
       def classname

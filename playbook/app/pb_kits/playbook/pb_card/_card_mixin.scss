@@ -53,7 +53,7 @@ $pb_card_header_colors: map-merge(map-merge($product_colors, $additional_colors)
   };
 
   @each $name, $shadow in $box_shadows {
-    &[class*=_#{$name}] {
+    &[class^=_#{$name}] {
       box-shadow: $shadow;
     }
   }

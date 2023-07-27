@@ -4,8 +4,11 @@ examples:
   - icon_circle_default: Default
   - icon_circle_sizes: Size
   - icon_circle_color: Color
+  - icon_circle_emoji: With Emoji
+
 
   react:
   - icon_circle_default: Default
   - icon_circle_sizes: Size
   - icon_circle_color: Color
+  - icon_circle_emoji: With Emoji

@@ -141,6 +141,10 @@
     .map-flyto-button {
       @include pb_map_button;
 
+      .pb_button_content {
+        height: $space_sm;
+      }
+
       svg {
         width: $space_xs + 6;
         height: $space_sm;

@@ -2,6 +2,7 @@ import { omit } from 'lodash'
 import { camelToSnakeCase } from './text'
 
 import {
+  BitValues,
   Binary,
   Display,
   DisplaySizes,
@@ -48,7 +49,7 @@ type FlexDirection = {
 }
 
 type FlexGrow = {
-  flexGrow?: 0 | 1
+  flexGrow?: Binary
 }
 
 type FlexShrink = {
@@ -57,6 +58,11 @@ type FlexShrink = {
 
 type FlexWrap = {
   flexWrap?: "wrap" | "nowrap" | "wrapReverse"
+}
+
+type Hover = Shadow & {
+  background?: string,
+  scale?: "sm" | "md" | "lg"
 }
 
 type JustifyContent = {
@@ -124,7 +130,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
-  Position & Shadow & ZIndex
+  Position & Shadow & ZIndex & { hover?: string };
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -136,6 +142,16 @@ const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: st
 
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
+
+  hoverProps: ({ hover }: { hover?: Hover }) => {
+      let css = '';
+      if (!hover) return css;
+      css += hover.shadow ? `hover_shadow_${hover.shadow} ` : '';
+      css += hover.background ? `hover_background_${hover.background } ` : '';
+      css += hover.scale ? `hover_scale_${hover.scale} ` : '';
+      return css;
+  },
+
   spacingProps: ({
     marginRight,
     marginLeft,
@@ -213,7 +229,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     });
     return css.trim();
   },
-
+  borderRadiusProps: ({ borderRadius }: BorderRadius) => {
+    let css = ''
+    css += borderRadius ? `border_radius_${borderRadius} ` : ''
+    return css
+  },
   darkProps: ({ dark }: Dark) => dark ? 'dark' : '',
   numberSpacingProps: ({ numberSpacing }: NumberSpacing) => {
     let css = ''
@@ -316,15 +336,19 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   flexGrowProps: ({ flexGrow }: FlexGrow) => {
     if (typeof flexGrow == 'object') {
       return getResponsivePropClasses(flexGrow, 'flex_grow')
+    } else if (BitValues.includes(flexGrow)) {
+      return `flex_grow_${flexGrow}`
     } else {
-      return flexGrow ? `flex_grow_${flexGrow}` : ''
+      return ''
     }
   },
   flexShrinkProps: ({ flexShrink }: FlexShrink) => {
     if (typeof flexShrink == 'object') {
       return getResponsivePropClasses(flexShrink, 'flex_shrink')
+    } else if (BitValues.includes(flexShrink)) {
+      return `flex_shrink_${flexShrink}`
     } else {
-      return flexShrink ? `flex_shrink_${flexShrink}` : ''
+      return ''
     }
   },
   justifyContentProps: ({ justifyContent }: JustifyContent) => {
@@ -347,7 +371,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     } else {
       return order ? `flex_order_${order}` : ''
     }
-  }, 
+  },
   positionProps: ({ position }: Position) => {
     let css = ''
     css += position && position !== 'static' ? `position_${position}` : ''
@@ -363,6 +387,7 @@ export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {})
     return PROP_CATEGORIES[key](allProps)
   }).filter((value) => value?.length > 0).join(" ")
 }
+
 
 export const deprecatedProps = (kit: string, props: string[] = []): void => {
   if (process.env.NODE_ENV === 'development') {

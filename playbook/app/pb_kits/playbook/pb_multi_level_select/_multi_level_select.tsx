@@ -15,6 +15,7 @@ import {
   getCheckedItems,
   getDefaultCheckedItems,
   recursiveCheckParent,
+  getExpandedItems,
 } from "./_helper_functions"
 
 type MultiLevelSelectProps = {
@@ -22,10 +23,12 @@ type MultiLevelSelectProps = {
   className?: string
   data?: { [key: string]: string }
   id?: string
+  inputDisplay?: "pills" | "none"
   name?: string
   returnAllSelected?: boolean
   treeData?: { [key: string]: string }[]
   onSelect?: (prop: { [key: string]: any }) => void
+  selectedIds?: string[]
 } & GlobalProps
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
@@ -34,10 +37,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     className,
     data = {},
     id,
+    inputDisplay = "pills",
     name,
     returnAllSelected = false,
     treeData,
     onSelect = () => {},
+    selectedIds
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -50,26 +55,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   const dropdownRef = useRef(null)
 
-
-  const getExpandedItems = (treeData: { [key: string]: string }[]) => {
-    let expandedItems: any[] = [];
-    
-    const traverse = (items: string | any[]) => {
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        if (item.expanded) {
-          expandedItems.push(item.id);
-        }
-        if (Array.isArray(item.children)) {
-          traverse(item.children);
-        }
-      }
-    }
-  
-    traverse(treeData);
-    return expandedItems;
-  }
-
   //state for whether dropdown is open or closed
   const [isClosed, setIsClosed] = useState(true)
   //state from onchange for textinput, to use for filtering to create typeahead
@@ -81,14 +66,14 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //state for return for default
   const [defaultReturn, setDefaultReturn] = useState([])
   // Get expanded items from treeData.
-  const initialExpandedItems = getExpandedItems(treeData);
+  const initialExpandedItems = getExpandedItems(treeData, selectedIds);
   // Initialize state with expanded items.
   const [expanded, setExpanded] = useState(initialExpandedItems);
 
 
   useEffect(() => {
-    setFormattedData(addCheckedAndParentProperty(treeData))
-  }, [treeData])
+    setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
+  }, [treeData, selectedIds])
 
   useEffect(() => {
     if (returnAllSelected) {
@@ -174,11 +159,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return tree
   }
 
-
-
   //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
+    selectedIds: string[],
     parent_id: string = null,
     depth: number = 0,
   ) => {
@@ -188,6 +172,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return treeData.map((item: { [key: string]: any } | any) => {
       const newItem = {
         ...item,
+        checked: selectedIds && selectedIds.length && selectedIds.includes(item.id),
         parent_id,
         depth,
       }
@@ -198,6 +183,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             : item.children
         newItem.children = addCheckedAndParentProperty(
           children,
+          selectedIds,
           newItem.id,
           depth + 1
         )
@@ -264,6 +250,15 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
+  const itemsSelectedLength = () => {
+    let items
+    if (returnAllSelected && returnedArray && returnedArray.length) {
+      items = returnedArray.length
+    } else if (!returnAllSelected && defaultReturn && defaultReturn.length) {
+      items = defaultReturn.length
+    }
+    return items
+  }
   //rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: any }[]) => {
     return (
@@ -331,7 +326,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 ))
               : null}
 
-            {returnedArray.length !== 0 && returnAllSelected
+            {returnedArray.length !== 0 && inputDisplay === "pills" && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill
                     key={index}
@@ -342,7 +337,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 ))
               : null}
             {!returnAllSelected &&
-              defaultReturn.length !== 0 &&
+              defaultReturn.length !== 0 && inputDisplay === "pills" ?
               defaultReturn.map((item, index) => (
                 <FormPill
                   key={index}
@@ -350,26 +345,30 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   size='small'
                   onClick={(event: any) => handlePillClose(event, item)}
                 />
-              ))}
-            {returnedArray.length !== 0 && returnAllSelected && <br />}
-            {defaultReturn.length !== 0 && !returnAllSelected && <br />}
+              ))
+              : null
+            }
+            {returnedArray.length !== 0 && returnAllSelected && inputDisplay === "pills" && <br />}
+            {defaultReturn.length !== 0 && !returnAllSelected && inputDisplay === "pills" && <br />}
             <input
               id='multiselect_input'
               onChange={(e) => {
                 setFilterItem(e.target.value)
               }}
-              placeholder='Start typing...'
+              placeholder={inputDisplay === "none" && itemsSelectedLength() ? (
+                    `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? 'item' : 'items'} selected`
+                  ) : ("Start typing...")}
               value={filterItem}
               onClick={() => setIsClosed(false)}
             />
           </div>
           {isClosed ? (
             <div key='chevron-down'>
-              <Icon icon='chevron-down' />
+              <Icon icon='chevron-down' size="xs"/>
             </div>
           ) : (
             <div key='chevron-up'>
-              <Icon icon='chevron-up' />
+              <Icon icon='chevron-up' size="xs"/>
             </div>
           )}
         </div>

@@ -20,6 +20,8 @@ require "playbook/flex_grow"
 require "playbook/flex_shrink"
 require "playbook/order"
 require "playbook/position"
+require "playbook/hover"
+require "playbook/border_radius"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -45,6 +47,8 @@ module Playbook
     include Playbook::FlexShrink
     include Playbook::Order
     include Playbook::Position
+    include Playbook::Hover
+    include Playbook::BorderRadius
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}

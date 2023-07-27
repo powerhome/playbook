@@ -5,7 +5,7 @@ const SectionSeparatorText = (props) => {
   return (
     <SectionSeparator
         {...props}
-        text="Title Separator"
+        text="Text Separator"
     />
   )
 }
