@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import React, { useContext } from 'react'
-import AnimateHeight from 'react-animate-height'
 import { buildCss } from '../../utilities/props'
 import { globalProps } from '../../utilities/globalProps'
 
@@ -23,15 +22,9 @@ const CollapsibleContent = ({
   const contentSpacing = globalProps(props, { padding })
 
   return (
-    <AnimateHeight
-        duration={400}
-        height={context.collapsed ? 0 : 'auto'}
-        id="bottom-section"
-    >
-      <div className={classnames(contentCSS, className, contentSpacing)}>
-        {children}
-      </div>
-    </AnimateHeight>
+    <div data-collapsible-content="true" className={classnames(contentCSS, contentSpacing, "toggle-content", context.collapsed ? "" : "is-visible", className)}>
+      {children}
+    </div>
   )
 }
 
