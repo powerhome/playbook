@@ -1,31 +1,39 @@
-<%= pb_rails("table", props: { data_table: true }) do %>
+<%= pb_rails("table", props: { vertical_border: true }) do %>
+  <colgroup>
+      <col align="center" />
+      <col align="left" />
+      <col align="center" />
+      <col align="center" />
+  </colgroup>
   <thead>
     <tr>
-      <th>Column 1</th>
+      <%= pb_rails("table/table_header", props: {align: "center", colspan: 2}) do %>
+        Column 1
+      <% end %>
       <th>Column 2</th>
       <th>Column 3</th>
       <th>Column 4</th>
-      <th>Column 5</th>
+
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Value 1</td>
-      <td>Value 2</td>
+      <td>Value blah</td>
+      <td>Value blah</td>
       <td>Value 3</td>
       <td>Value 4</td>
       <td>Value 5</td>
     </tr>
     <tr>
-      <td>Value 1</td>
-      <td>Value 2</td>
+      <td>Value blah 2nd row</td>
+      <td>Value blah 2nd row</td>
       <td>Value 3</td>
       <td>Value 4</td>
       <td>Value 5</td>
     </tr>
     <tr>
-      <td>Value 1</td>
-      <td>Value 2</td>
+      <td>Value blah 3rd row</td>
+      <td>Value blah 3rd row</td>
       <td>Value 3</td>
       <td>Value 4</td>
       <td>Value 5</td>
