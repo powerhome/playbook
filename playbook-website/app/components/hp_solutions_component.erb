@@ -3,7 +3,7 @@
     padding: "xl"
 }) do %>
     <%= pb_rails("flex", props: {
-        classname: "hp-social-proof-background-width",
+        width: "100",
         max_width: "xxl",
         align_items: { xs: "center", sm: "start" },
         flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row", xxl: "row" },
@@ -53,7 +53,7 @@
             }) %>
         <% end %>
         <%= pb_rails("flex/flex_item", props: {
-            classname: "hp-social-proof-background-width",
+            width: "100",
             display: { xs: "none", sm: "flex" }
         }) do %>
             <%= pb_rails("flex", props: {
@@ -69,7 +69,7 @@
                             hover: { scale: "sm" }
                     })  do %>
                         <%= pb_rails("image", props: {
-                            classname: "hp-social-proof-background-width",
+                            width: "100",
                             alt: "react logo",
                             size: "xs",
                             url: asset_pack_path("media/images/hp-react-solutions.svg")
@@ -84,7 +84,7 @@
                             hover: { scale: "sm" }
                     })  do %>
                         <%= pb_rails("image", props: {
-                            classname: "hp-social-proof-background-width",
+                            width: "100",
                             alt: "rails logo",
                             size: "xs",
                             url: asset_pack_path("media/images/hp-rails-solutions.svg")
@@ -99,7 +99,7 @@
                             hover: { scale: "sm" }
                     })  do %>
                         <%= pb_rails("image", props: {
-                            classname: "hp-social-proof-background-width",
+                            width: "100",
                             alt: "htmlcss logo",
                             size: "xs",
                             url: asset_pack_path("media/images/hp-htmlcss-solutions.svg")
@@ -109,7 +109,7 @@
             <% end %>
         <% end %>
         <%= pb_rails("flex/flex_item", props: {
-            classname: "hp-social-proof-background-width",
+            width: "100",
             text_align: "center",
             padding_top: { xs: "none", sm: "xl", md: "xl", lg: "xl", xl: "xl", xxl: "xl" }
         }) do %>
