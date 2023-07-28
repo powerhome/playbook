@@ -16,7 +16,7 @@ type CollapsibleProps = {
   className?: string,
   collapsed?: boolean,
   data?: object,
-  icon?: Object,
+  icon?: string | string[]
   iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   iconSize?: IconSizes
   id?: string,

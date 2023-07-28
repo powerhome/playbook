@@ -6,8 +6,7 @@ module Playbook
       prop :color, type: Playbook::Props::Enum,
                    values: %w[default light lighter link success error],
                    default: "default"
-      prop :icon, type: Playbook::Props::Array,
-                  default: []
+      prop :icon
       prop :size, type: Playbook::Props::Enum,
                   values: ["lg", "xs", "sm", "1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", nil],
                   default: nil
@@ -17,6 +16,15 @@ module Playbook
 
       def classname
         generate_classname("pb_collapsible_main_kit", padding, separator: " ")
+      end
+
+      def show_icon(icon)
+        case icon
+        when ::String
+          [icon, icon]
+        when ::Array
+          icon
+        end
       end
 
       def icon_color

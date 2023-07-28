@@ -48,6 +48,13 @@ type IconProps = {
 const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
   const color = colorMap[iconColor]
 
+  const showIcon = (icon: string |string[]) => {
+    if (typeof icon === "string") {
+      return [icon, icon]
+    }
+    return icon
+  }
+
   return (
     <>
       {collapsed ? (
@@ -56,7 +63,7 @@ const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
           key="chevron-down"
           style={{ verticalAlign: "middle", color: color }}
         >
-          <Icon icon={icon ? icon[0] : "chevron-down"} size={iconSize} />
+          <Icon icon={icon ? showIcon(icon)[0] : "chevron-down"} size={iconSize} />
         </div>
       ) : (
         <div
@@ -64,7 +71,7 @@ const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
           key="chevron-up"
           style={{ verticalAlign: "middle", color: color }}
         >
-          <Icon icon={icon ? icon[1] : "chevron-up"} size={iconSize} />
+          <Icon icon={icon ? showIcon(icon)[1] : "chevron-up"} size={iconSize} />
         </div>
       )}
     </>
