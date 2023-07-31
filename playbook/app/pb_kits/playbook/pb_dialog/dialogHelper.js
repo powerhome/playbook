@@ -25,11 +25,14 @@ const dialogHelper = () => {
       const dialogParentDataset = dialogElement.parentElement.dataset
       if (dialogParentDataset.overlayClick === "overlay_close") return
 
-      const clickedOutsideDialogBox = event.target.classList.contains("pb_dialog_rails")
+      const dialogModal = event.target.getBoundingClientRect()
+      const clickedOutsideDialogModal = dialogModal.left > event.clientX ||
+                                        dialogModal.right < event.clientX ||
+                                        dialogModal.top > event.clientY ||
+                                        dialogModal.bottom < event.clientY
 
-      if (clickedOutsideDialogBox) {
+      if (clickedOutsideDialogModal) {
         dialogElement.close()
-        event.stopPropagation()
       }
     })
   })
