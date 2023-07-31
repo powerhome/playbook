@@ -60,7 +60,7 @@ const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
       {collapsed ? (
         <div
           className="icon_wrapper"
-          key="chevron-down"
+          key={icon ? showIcon(icon)[0] : "chevron-down"}
           style={{ verticalAlign: "middle", color: color }}
         >
           <Icon icon={icon ? showIcon(icon)[0] : "chevron-down"} size={iconSize} />
@@ -68,7 +68,7 @@ const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
       ) : (
         <div
           className="icon_wrapper"
-          key="chevron-up"
+          key={icon ? showIcon(icon)[1] : "chevron-up"}
           style={{ verticalAlign: "middle", color: color }}
         >
           <Icon icon={icon ? showIcon(icon)[1] : "chevron-up"} size={iconSize} />
