@@ -21,7 +21,7 @@ const dialogHelper = () => {
 
   // Close dialog box on outside click
   dialogs.forEach((dialogElement) => {
-    dialogElement.addEventListener("click", (event) => {
+    dialogElement.addEventListener("mousedown", (event) => {
       const dialogParentDataset = dialogElement.parentElement.dataset
       if (dialogParentDataset.overlayClick === "overlay_close") return
 
