@@ -26,13 +26,14 @@ const dialogHelper = () => {
       if (dialogParentDataset.overlayClick === "overlay_close") return
 
       const dialogModal = event.target.getBoundingClientRect()
-      const clickedOutsideDialogModal = dialogModal.left > event.clientX ||
-                                        dialogModal.right < event.clientX ||
-                                        dialogModal.top > event.clientY ||
-                                        dialogModal.bottom < event.clientY
+      const clickedOutsideDialogModal = event.clientX < dialogModal.left ||
+                                        event.clientX > dialogModal.right ||
+                                        event.clientY < dialogModal.top ||
+                                        event.clientY > dialogModal.bottom
 
       if (clickedOutsideDialogModal) {
         dialogElement.close()
+        event.stopPropagation()
       }
     })
   })
