@@ -11,3 +11,9 @@ examples:
   - pill_default: Default
   - pill_variants: Variants
   - pill_example: Example
+
+  swift:
+  - pill_default_swift: Default
+  - pill_variants_swift: Variants
+  - pill_example_swift: Example
+  - pill_props_swift: ""

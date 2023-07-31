@@ -1,0 +1,3 @@
+```swift
+PBPill("default")s
+```
