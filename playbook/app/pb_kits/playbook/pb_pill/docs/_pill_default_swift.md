@@ -1,3 +1,3 @@
 ```swift
-PBPill("default")s
+PBPill("default")
 ```
