@@ -1,4 +1,4 @@
-<img width="600" alt="badge-rectangle" src="https://github.com/powerhome/playbook/assets/92755007/04188c68-84f0-475b-9764-7b9a325f73da">
+![badge-rectangle](https://github.com/powerhome/playbook/assets/92755007/04188c68-84f0-475b-9764-7b9a325f73da)
 
 ```swift
 HStack {
