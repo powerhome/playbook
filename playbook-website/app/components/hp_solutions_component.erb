@@ -4,7 +4,7 @@
 }) do %>
     <%= pb_rails("flex", props: {
         max_width: "xxl",
-        flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row" }
+        flex_direction: { xs: "column", sm: "column", md: "column", lg: "row", xl: "row" }
     }) do %>
         <%= pb_rails("flex/flex_item", props: {
             display: { xs: "none", sm: "flex" },
@@ -26,7 +26,7 @@
                 }) %>
             <% end %>
         <% end %>
-        <%= pb_rails("flex/flex_item", props: {}) do %>
+        <%= pb_rails("flex/flex_item", props: { width: "100" }) do %>
             <%= pb_rails("flex", props: { orientation: "column", align_items: { xs: "center", sm: "start" }, }) do %>
                 <%= pb_rails("flex/flex_item", props: {
                     padding_bottom: { xs: "sm", sm: "sm", md: "sm", lg: "sm", xl: "sm" },
@@ -83,53 +83,107 @@
                         gap: "md"
                     }) do %>
                         <%= pb_rails("flex/flex_item", props: { flex_grow: 1 }) do %>
-                            <%= link_to "/guides/getting_started/react_setup" do %>
-                                <%= pb_rails("card", props: {
-                                        padding: "xl",
-                                        shadow: "deeper",
-                                        border_radius: "lg",
-                                        cursor: "pointer",
-                                        link: "/guides/getting_started/react_setup",
-                                        hover: { scale: "sm" }
-                                })  do %>
-                                    <%= pb_rails("image", props: {
-                                        width: "100",
-                                        alt: "react logo",
-                                        url: asset_pack_path("media/images/hp-react-solutions.svg")
-                                    }) %>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                        <%= pb_rails("flex/flex_item", props: { flex_grow: 1 }) do %>
-                            <%= link_to "/guides/getting_started/ruby_on_rails_setup" do %>
-                                <%= pb_rails("card", props: {
-                                        padding: "xl",
-                                        shadow: "deeper",
-                                        border_radius: "lg",
-                                        cursor: "pointer",
-                                        hover: { scale: "sm" }
-                                })  do %>
-                                    <%= pb_rails("image", props: {
-                                        width: "100",
-                                        alt: "rails logo",
-                                        url: asset_pack_path("media/images/hp-rails-solutions.svg")
-                                    }) %>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                        <%= pb_rails("flex/flex_item", props: { flex_grow: 1 }) do %>
-                            <%= link_to "/guides/getting_started/HTML_&_CSS" do %>
-                                <%= pb_rails("card", props: {
-                                    padding: "xl",
-                                    shadow: "deeper",
-                                    border_radius: "lg",
-                                    cursor: "pointer",
-                                    hover: { scale: "sm" }
+                            <%= pb_rails("flex", props: {
+                                orientation: "column"
+                            }) do %>
+                                <%= pb_rails("flex/flex_item", props: {
+                                    flex_grow: 1,
+                                    width: "100"
                                 }) do %>
-                                    <%= pb_rails("image", props: {
-                                    width: "100",
-                                    alt: "htmlcss logo",
-                                    url: asset_pack_path("media/images/hp-htmlcss-solutions.svg")
+                                    <%= link_to "/guides/getting_started/react_setup" do %>
+                                        <%= pb_rails("card", props: {
+                                                text_align: "center",
+                                                padding: "xl",
+                                                shadow: "deeper",
+                                                border_radius: "lg",
+                                                cursor: "pointer",
+                                                link: "/guides/getting_started/react_setup",
+                                                hover: { scale: "sm" }
+                                        })  do %>
+                                            <%= pb_rails("image", props: {
+                                                alt: "react logo",
+                                                url: asset_pack_path("media/images/hp-react-solutions.svg")
+                                            }) %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                                <%= pb_rails("flex/flex_item", props: {
+                                    flex_grow: 1,
+                                    display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
+                                }) do %>
+                                    <%= pb_rails("caption", props: {
+                                        text: "Endlessly flexible presentational UI components with encapsulated styles and constraint based theme props.",
+                                        size: 'xs'
+                                    }) %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                        <%= pb_rails("flex/flex_item", props: { flex_grow: 1 }) do %>
+                            <%= pb_rails("flex", props: {
+                                orientation: "column"
+                            }) do %>
+                                <%= pb_rails("flex/flex_item", props: {
+                                    flex_grow: 1,
+                                    width: "100"
+                                }) do %>
+                                    <%= link_to "/guides/getting_started/ruby_on_rails_setup" do %>
+                                        <%= pb_rails("card", props: {
+                                                padding: "xl",
+                                                text_align: "center",
+                                                shadow: "deeper",
+                                                border_radius: "lg",
+                                                cursor: "pointer",
+                                                hover: { scale: "sm" }
+                                        })  do %>
+                                            <%= pb_rails("image", props: {
+                                                alt: "rails logo",
+                                                url: asset_pack_path("media/images/hp-rails-solutions.svg")
+                                            }) %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                                <%= pb_rails("flex/flex_item", props: {
+                                    flex_grow: 1,
+                                    display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
+                                }) do %>
+                                    <%= pb_rails("caption", props: {
+                                        text: "100+ highly customizable ViewComponents. Build design driven UI in Rails with ViewComponents.",
+                                        size: 'xs'
+                                    }) %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                        <%= pb_rails("flex/flex_item", props: { flex_grow: 1 }) do %>
+                            <%= pb_rails("flex", props: {
+                                orientation: "column"
+                            }) do %>
+                                <%= pb_rails("flex/flex_item", props: {
+                                    flex_grow: 1,
+                                    width: "100"
+                                }) do %>
+                                    <%= link_to "/guides/getting_started/HTML_&_CSS" do %>
+                                        <%= pb_rails("card", props: {
+                                            padding: "xl",
+                                            text_align: "center",
+                                            shadow: "deeper",
+                                            border_radius: "lg",
+                                            cursor: "pointer",
+                                            hover: { scale: "sm" }
+                                        }) do %>
+                                            <%= pb_rails("image", props: {
+                                            alt: "htmlcss logo",
+                                            url: asset_pack_path("media/images/hp-htmlcss-solutions.svg")
+                                            }) %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                                <%= pb_rails("flex/flex_item", props: {
+                                    flex_grow: 1,
+                                    display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
+                                }) do %>
+                                    <%= pb_rails("caption", props: {
+                                        text: "Utility classes help you work within the constraints of a system instead of littering your stylesheets with arbitrary values.",
+                                        size: 'xs'
                                     }) %>
                                 <% end %>
                             <% end %>
@@ -138,7 +192,7 @@
                 <% end %>
                 <%= pb_rails("flex/flex_item", props: {
                     width: "100",
-                    text_align: "center",
+                    text_align: { xs: "center", sm: "center", md: "center", lg: "start", xl: "start" },
                     padding_top: { xs: "none", sm: "xl", md: "xl", lg: "xl", xl: "xl" }
                 }) do %>
                     <%= pb_rails("button", props: {
