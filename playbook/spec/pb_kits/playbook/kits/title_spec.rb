@@ -15,7 +15,7 @@ RSpec.describe Playbook::PbTitle::Title do
     is_expected.to define_boolean_prop(:dark)
       .with_default(false)
   }
-  it { is_expected.to define_prop(:size).of_type(Playbook::Props::Enum).with_default(3) }
+  it { is_expected.to define_prop(:size).with_default(3) }
   it {
     is_expected.to define_enum_prop(:tag)
       .with_values("h1", "h2", "h3", "h4", "h5", "h6", "p", "div", "span")
@@ -38,6 +38,7 @@ RSpec.describe Playbook::PbTitle::Title do
       expect(subject.new(tag: "h3").classname).to eq "pb_title_kit_3"
       expect(subject.new(size: 4, color: "link").classname).to eq "pb_title_kit_4_link"
       expect(subject.new(bold: false).classname).to eq "pb_title_kit_3_thin"
+      expect(subject.new(size: { xs: 3, sm: 2, md: 1 }).classname).to eq "pb_title_kit pb_title_kit_xs_3 pb_title_kit_sm_2 pb_title_kit_md_1"
     end
   end
 

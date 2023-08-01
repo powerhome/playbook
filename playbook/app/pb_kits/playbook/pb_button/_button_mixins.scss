@@ -47,9 +47,9 @@ $pb_button_border_width: 0px;
   width: fit-content;
   font-family: $font_family_base;
   white-space: nowrap;
-  
+
   @include focus;
-  
+
   &[class*=dark] {
     @include focus-dark
   }
@@ -77,7 +77,7 @@ $pb_button_border_width: 0px;
     outline: none;
     border-width: $pb_button_border_width;
   }
-  
+
 };
 
 @mixin pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken)){
@@ -101,7 +101,7 @@ $pb_button_border_width: 0px;
 
 // Secondary ====================
 @mixin pb_button_secondary {
-  @include pb_button_variant($secondary-action, $primary_action);
+  @include pb_button_variant($secondary_action, $primary_action);
 
   @media (hover:hover) {
     &:hover {
@@ -109,9 +109,9 @@ $pb_button_border_width: 0px;
     }
     &:active {
       transition: none;
-      @include pb_button_variant($secondary-action, $primary_action);
+      @include pb_button_variant($secondary_action, $primary_action);
     }
-  } 
+  }
 }
 
 // Link =========================

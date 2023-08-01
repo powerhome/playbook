@@ -28,6 +28,7 @@ type MultiLevelSelectProps = {
   returnAllSelected?: boolean
   treeData?: { [key: string]: string }[]
   onSelect?: (prop: { [key: string]: any }) => void
+  selectedIds?: string[]
 } & GlobalProps
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
@@ -41,6 +42,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     returnAllSelected = false,
     treeData,
     onSelect = () => {},
+    selectedIds
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -64,14 +66,14 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //state for return for default
   const [defaultReturn, setDefaultReturn] = useState([])
   // Get expanded items from treeData.
-  const initialExpandedItems = getExpandedItems(treeData);
+  const initialExpandedItems = getExpandedItems(treeData, selectedIds);
   // Initialize state with expanded items.
   const [expanded, setExpanded] = useState(initialExpandedItems);
 
 
   useEffect(() => {
-    setFormattedData(addCheckedAndParentProperty(treeData))
-  }, [treeData])
+    setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
+  }, [treeData, selectedIds])
 
   useEffect(() => {
     if (returnAllSelected) {
@@ -160,6 +162,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
+    selectedIds: string[],
     parent_id: string = null,
     depth: number = 0,
   ) => {
@@ -169,6 +172,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return treeData.map((item: { [key: string]: any } | any) => {
       const newItem = {
         ...item,
+        checked: selectedIds && selectedIds.length && selectedIds.includes(item.id),
         parent_id,
         depth,
       }
@@ -179,6 +183,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             : item.children
         newItem.children = addCheckedAndParentProperty(
           children,
+          selectedIds,
           newItem.id,
           depth + 1
         )
@@ -245,6 +250,15 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
+  const itemsSelectedLength = () => {
+    let items
+    if (returnAllSelected && returnedArray && returnedArray.length) {
+      items = returnedArray.length
+    } else if (!returnAllSelected && defaultReturn && defaultReturn.length) {
+      items = defaultReturn.length
+    }
+    return items
+  }
   //rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: any }[]) => {
     return (
@@ -341,7 +355,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
               onChange={(e) => {
                 setFilterItem(e.target.value)
               }}
-              placeholder='Start typing...'
+              placeholder={inputDisplay === "none" && itemsSelectedLength() ? (
+                    `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? 'item' : 'items'} selected`
+                  ) : ("Start typing...")}
               value={filterItem}
               onClick={() => setIsClosed(false)}
             />

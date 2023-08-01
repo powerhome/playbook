@@ -1,12 +1,15 @@
 examples:
 
   rails:
-  - section_separator_text: Text Separator
   - section_separator_line: Line Separator
+  - section_separator_dashed: Dashed Separator
+  - section_separator_text: Text Separator
   - section_separator_vertical: Vertical
-
+  - section_separator_children: Children
 
   react:
-  - section_separator_text: Text Separator
   - section_separator_line: Line Separator
+  - section_separator_dashed: Dashed Separator
+  - section_separator_text: Text Separator
   - section_separator_vertical: Vertical
+  - section_separator_children: Children
