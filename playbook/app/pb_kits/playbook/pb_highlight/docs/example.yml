@@ -2,8 +2,6 @@ examples:
   
   rails:
   - highlight_default: Default
-  - highlight_custom_colors: Custom Colors
   
   react:
   - highlight_default: Default
-  - highlight_custom_colors: Custom Colors

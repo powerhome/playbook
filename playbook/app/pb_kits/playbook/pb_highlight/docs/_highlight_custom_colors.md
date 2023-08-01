@@ -1,1 +1,0 @@
-Pass any of our color tokens to the `backgroundColor` prop or any of our font color tokens to `textColor` prop to customize the color of the highlight background or the highlighted text, respectively.
