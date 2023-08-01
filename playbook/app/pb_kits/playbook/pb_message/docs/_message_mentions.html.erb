@@ -4,34 +4,21 @@
   avatar_name: "Keith Craig",
   padding_bottom: "md"
 }) do %>
-  <%= pb_rails("message/message_mention", props: {variant: "user"}) do %>
+  <%= pb_rails("message/message_mention", props: { variant: "user" }) do %>
     @all
-  <% end %> please hold for one moment. I will check with my manager.
+  <% end %> let's welcome 
+  <%= pb_rails("message/message_mention", props: { variant: "self" }) do %>
+    @Lucille Sanchez
+  <% end %> to the team this week!
 <% end %>
 
 <%= pb_rails("message", props: {
   label: "Lucille Sanchez",
   timestamp: "2 days ago",
   avatar_name: "Lucille Sanchez",
-  avatar_url: "https://randomuser.me/api/portraits/women/50.jpg",
-  padding_bottom: "md"
+  avatar_url: "https://randomuser.me/api/portraits/women/50.jpg"
 }) do %>
   <%= pb_rails("message/message_mention", props: {variant: "self"}) do %>
     @Keith Craig
-  <% end %>  thanks. Keep us posted!
-<% end %>
-
-<%= pb_rails("message", props: {
-  label: "Becca Jacobs",
-  timestamp: "2 days ago",
-  avatar_name: "Becca Jacobs",
-  avatar_url: "https://randomuser.me/api/portraits/women/39.jpg"
-}) do %>
-  Hello 
-  <%= pb_rails("message/message_mention", props: { variant: "user" }) do %>
-    @all
-  <% end %>, let's welcome 
-  <%= pb_rails("message/message_mention", props: { variant: "self" }) do %>
-    @Anna Black
-  <% end %> to the team this week.
+  <% end %> thanks for the warm welcome! I'm so excited!
 <% end %>
