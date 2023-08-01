@@ -31,7 +31,7 @@ const MessageDefault = (props) => {
                 label='Becca Jacobs'
                 timestamp='2 days ago'
             >
-                {'Hello '}<Message.Mention variant='user'>{'@all'}</Message.Mention>{`, let's welcome`}
+                {'Hello '}<Message.Mention variant='user'>{'@all'}</Message.Mention>{`, let's welcome `}
                 <Message.Mention variant='self'>{'@Anna Black'}</Message.Mention>{' to the team this week.'}
             </Message>
         </>
