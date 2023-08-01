@@ -12,3 +12,10 @@ examples:
   - radio_custom: Custom
   - radio_error: With Error
   - radio_alignment: Alignment
+
+  swift:
+  - radio_default_swift: Default
+  - radio_custom_swift: Custom
+  - radio_error_swift: With Error
+  - radio_alignment_swift: Alignment
+  - radio_props_swift: ""
