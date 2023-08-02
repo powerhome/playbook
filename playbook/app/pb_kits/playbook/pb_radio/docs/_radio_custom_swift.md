@@ -12,5 +12,5 @@ VStack(alignment: .leading) {
     orientation: .vertical,
     selected: $selectedCustom
   )
-  }
+}
 ```
