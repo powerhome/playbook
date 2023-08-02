@@ -1,13 +1,10 @@
 ### Props
 | Name | Type | Description | Default | Values |
 | --- | ----------- | --------- | --------- | --------- |
-| **title** | `String` | Description | | |
-| **subtitle** | `String` | Description | | |
-| **items** | `type` | Description | `defaultValue` | `all` `other` `accepted` `values` |
-| **orientation** | `type` | Description | `defaultValue` | `all` `other` `accepted` `values` |
-| **textAlignment** | `type` | Description | `defaultValue` | `all` `other` `accepted` `values` |
-| **spacing** | `type` | Description | `defaultValue` | `all` `other` `accepted` `values` |
-| **padding** | `type` | Description | `defaultValue` | `all` `other` `accepted` `values` |
-| **errorState** | `type` | Description | `defaultValue` | `all` `other` `accepted` `values` |
-| **selected** | `type` | Description | `defaultValue` | `all` `other` `accepted` `values` |
-| **errorState** | `type` | Description | `defaultValue` | `all` `other` `accepted` `values` |
+| **items** | `` | Specifies the value of the Radio buttons | | |
+| **orientation** | `` | Changes between stacked or inline Radio items | `.vertical` | |
+| **textAlignment** | `` | Changes lable position | `.horizontal` | |
+| **spacing** | `CGFloat` | Applies padding around Radio and lable | `Spacing.xSmall` | `Spacing.none` `Spacing.xxSmall` `Spacing.xSmall` `Spacing.small` `Spacing.medium` `Spacing.large` `Spacing.xLarge` |
+| **padding** | `CGFloat` | Applies padding between Radio and lable | `Spacing.xSmall` | `Spacing.none` `Spacing.xxSmall` `Spacing.xSmall` `Spacing.small` `Spacing.medium` `Spacing.large` `Spacing.xLarge` |
+| **errorState** | `Bool` | Changes Radio to error styling | | |
+| **selected** | `` | Sets selected Radio item | | |
