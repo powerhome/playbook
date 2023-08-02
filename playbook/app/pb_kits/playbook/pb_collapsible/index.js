@@ -2,8 +2,8 @@ import PbEnhancedElement from '../pb_enhanced_element'
 
 const MAIN_SELECTOR = '[data-collapsible-main]'
 const CONTENT_SELECTOR = '[data-collapsible-content]'
-const DOWN_ARROW_SELECTOR = '.fa-chevron-down'
-const UP_ARROW_SELECTOR = '.fa-chevron-up'
+const DOWN_ARROW_SELECTOR = '#collapsible_open_icon'
+const UP_ARROW_SELECTOR = '#collapsible_close_icon'
 
 export default class PbCollapsible extends PbEnhancedElement {
   static get selector() {
@@ -75,5 +75,5 @@ export default class PbCollapsible extends PbEnhancedElement {
   displayUpArrow() {
     this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'inline-block'
     this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'none'
-  }
+   }
 }
