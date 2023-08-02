@@ -1,8 +1,18 @@
 import React from 'react'
-import { Collapsible } from '../..'
+import { Collapsible, useCollapsible, Button } from '../..'
 
-const CollapsibleIcons = () => (
-  <Collapsible icon={['plus','minus']}>
+const CollapsibleIcons = () => {
+  const [isCollapsed, collapse] = useCollapsible(true)
+
+  // console.log('example: ', isCollapsed);
+  return (
+  <>
+  <Button onClick={collapse}>
+        {isCollapsed ? "Expand" : "Collapse"}
+  </Button>
+  <Collapsible collapsed={isCollapsed} 
+      icon={['plus','minus']}
+  >
     <Collapsible.Main>
       <div>{'Main Section'}</div>
     </Collapsible.Main>
@@ -14,6 +24,8 @@ const CollapsibleIcons = () => (
       </div>
     </Collapsible.Content>
   </Collapsible>
-)
+  </>
+  )
+}
 
 export default CollapsibleIcons

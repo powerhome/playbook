@@ -9,7 +9,7 @@ const CollapsibleNavCustomIcons = (props) => {
       <NavItem
           collapsible 
           iconLeft="city" 
-          iconRight={["chevron-down", "chevron-up"]}
+          iconRight={["plus", "minus"]}
           link="#" 
           text="Overview" 
           {...props}
@@ -34,7 +34,7 @@ const CollapsibleNavCustomIcons = (props) => {
           active 
           collapsible 
           iconLeft="theater-masks"
-          iconRight={["chevron-down", "chevron-up"]}
+          iconRight={["plus", "minus"]}
           link="#" 
           text="Albums" 
           {...props}
@@ -58,7 +58,7 @@ const CollapsibleNavCustomIcons = (props) => {
       <NavItem 
           collapsible 
           iconLeft="city" 
-          iconRight={["chevron-down", "chevron-up"]}
+          iconRight={["plus", "minus"]}
           link="#" 
           text="Similar Artists" 
           {...props}

@@ -130,3 +130,4 @@ export { default as dialogHelper } from './pb_dialog/dialogHelper'
 
 //Theming
 export {default as mapTheme} from './pb_map/pbMapTheme'
+export {useCollapsible} from './pb_collapsible/_collapsible'
