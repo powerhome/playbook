@@ -28,7 +28,6 @@ const DialogHeader = (props: DialogHeaderProps) => {
     children,
     className,
     data = {},
-    padding = "sm",
     spacing = "between",
     closeable = true,
     separator = true,
@@ -38,7 +37,7 @@ const DialogHeader = (props: DialogHeaderProps) => {
   const dataProps = buildDataProps(data)
   const api = useContext(DialogContext)
   const headerCSS = buildCss("dialog_header")
-  const headerSpacing = globalProps(props, { padding })
+  const headerSpacing = globalProps(props)
 
   /* eslint-disable react/jsx-handler-names */
 
