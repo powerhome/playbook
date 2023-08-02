@@ -1,8 +1,8 @@
 import classnames from 'classnames'
-import React, { useContext } from 'react'
-import AnimateHeight from 'react-animate-height'
+import React, { useContext, useRef, useEffect } from 'react'
 import { buildCss } from '../../utilities/props'
 import { globalProps } from '../../utilities/globalProps'
+import { hideElement, showElement } from '../_helper_functions'
 
 import CollapsibleContext from '../context'
 
@@ -21,17 +21,25 @@ const CollapsibleContent = ({
   const context: {[key: string]: boolean | string} = useContext(CollapsibleContext)
   const contentCSS = buildCss('pb_collapsible_content_kit')
   const contentSpacing = globalProps(props, { padding })
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    // Use the showElement and hideElement functions based on the context value
+    if (contentRef.current) {
+      if (context.collapsed) {
+        hideElement(contentRef.current);
+      } else {
+        showElement(contentRef.current);
+      }
+    }
+  }, [context.collapsed]);
 
   return (
-    <AnimateHeight
-        duration={400}
-        height={context.collapsed ? 0 : 'auto'}
-        id="bottom-section"
-    >
-      <div className={classnames(contentCSS, className, contentSpacing)}>
-        {children}
-      </div>
-    </AnimateHeight>
+    <div ref={contentRef}
+      data-collapsible-content="true" 
+      className={classnames(contentCSS, contentSpacing, "toggle-content", className)}>
+      {children}
+    </div>
   )
 }
 
