@@ -1,3 +1,5 @@
+<img width="1326" alt="Radio (Custom)" src="https://github.com/powerhome/playbook/assets/92755007/3eab180b-0550-4d7e-b562-84a007690218">
+
 ```swift
 VStack(alignment: .leading) {
   if let selectedCustom = selectedCustom {
