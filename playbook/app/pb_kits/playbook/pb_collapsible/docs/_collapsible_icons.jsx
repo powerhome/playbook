@@ -9,8 +9,8 @@ const CollapsibleIcons = () => {
   <Button onClick={()=> setIsCollapsed(!isCollapsed)}>
         {isCollapsed ? "Expand" : "Collapse"}
   </Button>
-  <Collapsible icon={['plus','minus']}
-      setCollapsible={isCollapsed}
+  <Collapsible collapsed={isCollapsed}
+      icon={['plus','minus']}
   >
     <Collapsible.Main>
       <div>{'Main Section'}</div>

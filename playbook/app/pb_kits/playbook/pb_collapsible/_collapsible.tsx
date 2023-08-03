@@ -21,7 +21,6 @@ type CollapsibleProps = {
   iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   iconSize?: IconSizes
   id?: string,
-  setCollapsible?: boolean,
 }
 
 
@@ -36,14 +35,13 @@ const Collapsible = ({
   iconColor = 'default',
   iconSize,
   id,
-  setCollapsible,
   ...props
 }: CollapsibleProps) => {
   const [isCollapsed, toggle, setIsCollapsed] = useCollapsible(collapsed)
 
   useEffect(()=> {
-   setIsCollapsed(setCollapsible)
-  },[setCollapsible])
+   setIsCollapsed(collapsed)
+  },[collapsed])
 
   const CollapsibleParent = React.Children.toArray(children) as JSX.Element[]
 
