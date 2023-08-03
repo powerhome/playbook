@@ -2,4 +2,4 @@
 
 ```swift
 PBPill("default")
-```![Uploading Pill (Default).png…]()
+```
