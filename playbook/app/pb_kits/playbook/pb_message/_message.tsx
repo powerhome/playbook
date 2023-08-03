@@ -11,6 +11,7 @@ import Body from '../pb_body/_body'
 import Flex from '../pb_flex/_flex'
 import Timestamp from '../pb_timestamp/_timestamp'
 import Title from '../pb_title/_title'
+import MessageMention from './_message_mention'
 
 type MessageProps = {
   aria: { [key: string]: string },
@@ -113,4 +114,5 @@ const Message = (props: MessageProps) => {
   )
 }
 
+Message.Mention = MessageMention
 export default Message

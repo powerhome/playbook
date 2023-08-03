@@ -1,8 +1,8 @@
 import React from 'react'
 import { Collapsible } from '../..'
 
-const CollapsibleDefault = () => (
-  <Collapsible >
+const CollapsibleIcons = () => (
+  <Collapsible icon={['plus','minus']}>
     <Collapsible.Main>
       <div>{'Main Section'}</div>
     </Collapsible.Main>
@@ -16,4 +16,4 @@ const CollapsibleDefault = () => (
   </Collapsible>
 )
 
-export default CollapsibleDefault
+export default CollapsibleIcons

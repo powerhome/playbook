@@ -1,3 +1,22 @@
+# Enhance Chat Engagement: Introducing the Reaction Button for Instant User Reactions!
+##### July 28, 2023
+
+![12 34 0](https://github.com/powerhome/playbook/assets/73710701/2a9d2a9c-74ea-4034-bc24-6334edf11af7)
+
+The new [Reaction Button variant](https://playbook.powerapp.cloud/kits/button/react#reaction-button) and its delightful, dynamic UI is our latest enhancement to your users' chat experience! Watch as emoji use and interactions take center stage, making every conversation more immersive and enjoyable. Say goodbye to bland chats and let emotions shine through like never before!
+
+[12.34.0](https://github.com/powerhome/playbook/tree/12.34.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Reaction Button Variant for Button Kit [\#2658](https://github.com/powerhome/playbook/pull/2658) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Bump word-wrap from 1.2.3 to 1.2.4 [\#2654](https://github.com/powerhome/playbook/pull/2654) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.32.0...12.34.0)
+
 # Get Ready to Hover: Introducing the Global Hover Prop!
 ##### July 21, 2023
 
