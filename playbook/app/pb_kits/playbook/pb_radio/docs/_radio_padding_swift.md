@@ -1,3 +1,5 @@
+<img width="1326" alt="Radio (Padding)" src="https://github.com/powerhome/playbook/assets/92755007/5cb123fb-791b-43f7-a57e-336f93c1bb3a">
+
 ```swift
 VStack(alignment: .leading) {
   PBRadio(
