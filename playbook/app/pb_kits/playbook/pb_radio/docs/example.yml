@@ -17,5 +17,9 @@ examples:
   - radio_default_swift: Default
   - radio_custom_swift: Custom
   - radio_error_swift: With Error
+  - radio_orientation_swift: Orientation
   - radio_alignment_swift: Alignment
+  - radio_spacing_swift: Spacing
+  - radio_padding_swift: Padding
+  - radio_subtitle_swift: Subtitle
   - radio_props_swift: ""
