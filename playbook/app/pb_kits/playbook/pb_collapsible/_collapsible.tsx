@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import classnames from 'classnames'
+import  useCollapsible from './useCollapsible'
 
 import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -20,22 +21,10 @@ type CollapsibleProps = {
   iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   iconSize?: IconSizes
   id?: string,
+  setCollapsible?: boolean,
 }
 
-export const useCollapsible = (initial= true) => {
-  const [collapsed, setCollapsed] = useState(initial)
-  useEffect(()=> {
-     console.log("inside hook",collapsed)
-      },[collapsed])
 
-  const toggleCollapse = () => setCollapsed(!collapsed)
-  
-    
-  return [
-    collapsed,
-    toggleCollapse,
-  ]
-}
 
 const Collapsible = ({
   aria = {},
@@ -47,14 +36,15 @@ const Collapsible = ({
   iconColor = 'default',
   iconSize,
   id,
+  setCollapsible,
   ...props
 }: CollapsibleProps) => {
-  // console.log(collapsed)
-  const [isCollapsed, collapse] = useCollapsible(true)
+  const [isCollapsed, toggle, setIsCollapsed] = useCollapsible(collapsed)
 
-  // useEffect(() => {
-  //   collapse
-  // }, [collapsed]);
+  useEffect(()=> {
+   setIsCollapsed(setCollapsible)
+  },[setCollapsible])
+
   const CollapsibleParent = React.Children.toArray(children) as JSX.Element[]
 
   if (CollapsibleParent.length !== 2) {
@@ -73,10 +63,8 @@ const Collapsible = ({
     globalProps(props),
     className
   )
-  // console.log(collapsed)
-  // console.log('internal component:', isCollapsed)
   return (
-    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, collapse, icon, iconSize, iconColor }}>
+    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, toggle, icon, iconSize, iconColor }}>
       <div
           {...ariaProps}
           {...dataProps}

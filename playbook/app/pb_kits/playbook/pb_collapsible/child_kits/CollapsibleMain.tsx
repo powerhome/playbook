@@ -83,13 +83,13 @@ const CollapsibleMain = ({
   cursor = 'pointer',
   ...props
 }: CollapsibleMainProps): React.ReactElement=> {
-  const context: {[key: string]: IconColors | (() => void)} | boolean = useContext(CollapsibleContext)
+  const {collapsed, toggle, icon, iconSize, iconColor}: any = useContext(CollapsibleContext)
   const mainCSS = buildCss('pb_collapsible_main_kit')
   const mainSpacing = globalProps(props, { cursor })
 
   return (
     <div className={classnames(mainCSS, className, mainSpacing)}>
-      <div onClick={context.collapse as (() => void)}>
+      <div onClick={toggle}>
         <Flex
             spacing="between"
             vertical="center"
@@ -97,10 +97,10 @@ const CollapsibleMain = ({
           <FlexItem>{children}</FlexItem>
           <FlexItem>
             <ToggleIcon
-                collapsed={context.collapsed as () => void}
-                iconColor={context.iconColor as IconColors}
-                iconSize={context.iconSize as IconSizes}
-                icon={context.icon as string[] | string}
+                collapsed={collapsed as () => void}
+                iconColor={iconColor as IconColors}
+                iconSize={iconSize as IconSizes}
+                icon={icon as string[] | string}
             />
             </FlexItem>
         </Flex>

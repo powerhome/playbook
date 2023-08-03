@@ -2,16 +2,15 @@ import React from 'react'
 import { Collapsible, useCollapsible, Button } from '../..'
 
 const CollapsibleIcons = () => {
-  const [isCollapsed, collapse] = useCollapsible(true)
+  const [isCollapsed, setIsCollapsed] = useCollapsible(true)
 
-  // console.log('example: ', isCollapsed);
   return (
   <>
-  <Button onClick={collapse}>
+  <Button onClick={()=> setIsCollapsed(!isCollapsed)}>
         {isCollapsed ? "Expand" : "Collapse"}
   </Button>
-  <Collapsible collapsed={isCollapsed} 
-      icon={['plus','minus']}
+  <Collapsible icon={['plus','minus']}
+      setCollapsible={isCollapsed}
   >
     <Collapsible.Main>
       <div>{'Main Section'}</div>
