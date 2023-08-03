@@ -32,7 +32,6 @@ const colorMap = {
 type CollapsibleMainProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
-  padding?: string,
   cursor?: string,
 
 }
@@ -82,12 +81,11 @@ const CollapsibleMain = ({
   children,
   className,
   cursor = 'pointer',
-  padding = 'md',
   ...props
 }: CollapsibleMainProps): React.ReactElement=> {
   const context: {[key: string]: IconColors | (() => void)} | boolean = useContext(CollapsibleContext)
   const mainCSS = buildCss('pb_collapsible_main_kit')
-  const mainSpacing = globalProps(props, { cursor, padding })
+  const mainSpacing = globalProps(props, { cursor })
 
   return (
     <div className={classnames(mainCSS, className, mainSpacing)}>

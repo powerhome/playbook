@@ -58,7 +58,7 @@ const NavItem = (props: NavItemProps) => {
     >
       {
         collapsible ? (
-          <Collapsible icon={iconRight ? iconRight : ["chevron-down", "chevron-up"]} iconSize="xs" padding="none">
+          <Collapsible icon={iconRight ? iconRight : ['plus','minus']} iconSize="xs">
           <Collapsible.Main>
           <Tag
           className="pb_nav_list_item_link"
