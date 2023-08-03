@@ -1,4 +1,4 @@
-<img width="1326" alt="Radio (Spacing)" src="https://github.com/powerhome/playbook/assets/92755007/58d1bf02-0c79-4526-9e5c-ba2f631d1dfe">
+![radio-spacing](https://github.com/powerhome/playbook/assets/92755007/58d1bf02-0c79-4526-9e5c-ba2f631d1dfe)
 
 ```swift
 HStack(alignment: .top) {
