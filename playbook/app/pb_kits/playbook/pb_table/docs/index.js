@@ -1,4 +1,4 @@
-export { default as TableSm } from './_table_sm.jsx'
+export { default as TableSm } from './_table_sm.tsx'
 export { default as TableMd } from './_table_md.jsx'
 export { default as TableLg } from './_table_lg.jsx'
 export { default as TableSticky } from './_table_sticky.jsx'

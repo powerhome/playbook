@@ -8,9 +8,11 @@
     "release": "RAILS_ENV=production NODE_ENV=production ./bin/webpack"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@fortawesome/fontawesome-pro": "^6.2.1",
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@rails/webpacker": "5.2.1",
+    "@tanstack/react-table": "^8.9.3",
     "@tiptap/extension-highlight": "^2.0.3",
     "@tiptap/extension-horizontal-rule": "^2.0.3",
     "@tiptap/extension-link": "^2.0.2",
