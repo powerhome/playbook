@@ -263,8 +263,20 @@
   }
 }
 
-// Styles specific to Rails version of kit
-// Rails version has own wrapper because of the way the overlay functions for the HTML dialog used to create this
+[class*="dialog_body"] {
+  padding: $space_sm;
+}
+
+[class*="dialog_header"] {
+  padding: $space_sm;
+}
+
+[class*="dialog_footer"] {
+  padding: $space_sm;
+}
+
+//styles specific to rails version of kit
+// rails version has own wrapper because of the way the overlay functions for the HTML dialog used to create this
 .pb_dialog_wrapper_rails {
   $medium: 500px;
   $large: 800px;

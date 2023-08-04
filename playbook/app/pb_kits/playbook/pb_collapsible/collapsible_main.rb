@@ -6,6 +6,7 @@ module Playbook
       prop :color, type: Playbook::Props::Enum,
                    values: %w[default light lighter link success error],
                    default: "default"
+      prop :icon
       prop :size, type: Playbook::Props::Enum,
                   values: ["lg", "xs", "sm", "1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", nil],
                   default: nil
@@ -17,11 +18,13 @@ module Playbook
         generate_classname("pb_collapsible_main_kit", padding, separator: " ")
       end
 
-      def icon_size
-        return "" if size.nil?
-
-        size_object = { lg: "fa-lg", xs: "fa-xs", sm: "fa-sm", "1x": "fa-1x", "2x": "fa-2x", "3x": "fa-3x", "4x": "fa-4x", "5x": "fa-5x", "6x": "fa-6x", "7x": "fa-7x", "8x": "fa-8x", "9x": "fa-9x", "10x": "fa-10x" }
-        size_object[size.to_sym]
+      def show_icon(icon)
+        case icon
+        when ::String
+          [icon, icon]
+        when ::Array
+          icon
+        end
       end
 
       def icon_color
