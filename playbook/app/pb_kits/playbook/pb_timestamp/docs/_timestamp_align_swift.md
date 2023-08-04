@@ -1,3 +1,5 @@
+<img width="1326" alt="Timestamp (Last Updated)" src="https://github.com/powerhome/playbook/assets/92755007/ccc2b3c7-d7c3-40a0-ac24-d433bd3e054a">
+
 ```swift
 VStack(alignment: .leading, spacing: Spacing.small) {
   Group {
