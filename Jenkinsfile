@@ -1,11 +1,10 @@
 #!/usr/bin/env groovy
 
-library 'github.com/powerhome/ci-kubed@v6.7.0'
+library 'github.com/powerhome/ci-kubed@v6.10.1'
 
 app.build(
   resources: [
-    requestCpu: '1',
-    limitCpu: '2',
+    requestCpu: '2',
     requestMemory: '10Gi',
     limitMemory: '10Gi',
   ],

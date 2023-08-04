@@ -1,3 +1,24 @@
+# Tagging Made Easy! Say Hello to Seamless @mentions in Your Messages! 💬 👋
+##### August 2, 2023
+
+![12 35 0](https://github.com/powerhome/playbook/assets/73710701/a991aa2c-155f-4412-a72c-3550114f730a)
+
+Highlight users dynamically within chats with our new Message kit subcomponent, @mentions! Choose 'user' (default, blue) or 'self' (yellow) variants for easy implementation and level up your chat experience!
+
+ [12.35.0](https://github.com/powerhome/playbook/tree/12.35.0) full list of changes:
+
+ **Kit Enhancements:**
+
+- Preliminary Work for Upcoming Collapsible Nav Kit
+- Adding Mention Variant to Message Kit
+
+**Fixed Bugs:**
+
+- Responsive Spacing Global Props not Falling Back to Defaults
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.34.0...12.35.0)
+
+ 
 # Enhance Chat Engagement: Introducing the Reaction Button for Instant User Reactions!
 ##### July 28, 2023
 
