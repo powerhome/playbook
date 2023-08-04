@@ -3,9 +3,10 @@
 @import "../tokens/border_radius";
 
 [class^="pb_nav_list"] {
-  .pb_collapsible_nav_item{
+  .pb_collapsible_nav_item {
   .pb_collapsible_main_kit,
-  .pb_collapsible_content_kit {
+  .pb_collapsible_content_kit,
+  .pb_collapsible_kit {
     padding: 0 !important;
   }
 
