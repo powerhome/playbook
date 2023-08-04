@@ -14,15 +14,19 @@ type NavItemProps = {
   children?: React.ReactNode[] | React.ReactNode,
   className?: string,
   collapsible?: boolean,
+  collapsibleClick?: () => void,
   data?: object,
   iconLeft?: string,
   iconRight?: string | string[],
+  iconRightClick?: () => void,
+  iconLeftClick?: () => void,
   id?: string,
   imageUrl?: string,
   link?: string,
   onClick?: React.MouseEventHandler<HTMLElement>,
   target?: '_blank' | '_self' | '_parent' | '_top',
   text: string,
+  toggleCollapsed?: any
 } & GlobalProps
 
 const NavItem = (props: NavItemProps) => {
@@ -32,15 +36,19 @@ const NavItem = (props: NavItemProps) => {
     children,
     className,
     collapsible,
+    collapsibleClick,
     data = {},
     iconLeft,
     iconRight,
+    iconRightClick,
+    iconLeftClick,
     id,
     imageUrl,
     link,
     onClick = () => { },
     target = '_self',
     text = '',
+    toggleCollapsed
   } = props
 
   const Tag = link ? 'a' : 'div'
@@ -48,6 +56,14 @@ const NavItem = (props: NavItemProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), collapsible ? 'pb_collapsible_nav_item' : '', globalProps(props), className)
+
+
+  const handleIconClick = (e:any) => {
+    if (iconLeftClick) {
+    e.stopPropagation();
+    iconLeftClick()
+    }
+  }
 
   return (
     <li
@@ -58,7 +74,13 @@ const NavItem = (props: NavItemProps) => {
     >
       {
         collapsible ? (
-          <Collapsible icon={iconRight ? iconRight : ['plus','minus']} iconSize="xs">
+          <Collapsible icon={iconRight ? iconRight : ['plus','minus']} 
+            iconSize="xs" 
+            id={id}
+            collapsed={toggleCollapsed}
+            iconClick={iconRightClick}
+            onClick={collapsibleClick}
+          >
           <Collapsible.Main>
           <Tag
           className="pb_nav_list_item_link"
@@ -70,6 +92,7 @@ const NavItem = (props: NavItemProps) => {
             <div
               className="pb_nav_list_item_icon_section"
               key={imageUrl}
+              onClick={(e)=>handleIconClick(e)}
             >
               <Image
                 className="pb_nav_img_wrapper"
@@ -82,6 +105,7 @@ const NavItem = (props: NavItemProps) => {
             <div
               className="pb_nav_list_item_icon_section"
               key={iconLeft}
+              onClick={(e)=>handleIconClick(e)}
             >
               <Icon
                 className="pb_nav_list_item_icon_left"

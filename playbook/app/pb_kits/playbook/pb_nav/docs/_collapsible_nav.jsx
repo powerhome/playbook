@@ -1,16 +1,31 @@
 import React from "react";
 
-import Nav from "../_nav";
-import NavItem from "../_item";
+// import Nav from "../_nav";
+// import NavItem from "../_item";
+import { Nav, NavItem, useCollapsible, Button } from '../..'
+
 
 const CollapsibleNav = (props) => {
+
+  const [isCollapsed, setIsCollapsed] = useCollapsible(true)
+
   return (
+    <>
+      <Button onClick={()=> setIsCollapsed(!isCollapsed)}>
+        {isCollapsed ? "Expand" : "Collapse"}
+      </Button>
+
     <Nav variant="subtle">
       <NavItem
-          collapsible 
-          iconLeft="city" 
+          collapsible
+          collapsibleClick={()=> console.log("main click!")}
+          iconLeft="chevron-down" 
+          iconLeftClick={()=> console.log("Left Icon Clicked!")}
+          iconRightClick={()=> console.log("Right Icon Clicked!")}
+          id="collapsible-nav-item-1"
           link="#" 
           text="Overview" 
+          toggleCollapsed={isCollapsed} 
           {...props}
       >
         <NavItem
@@ -32,9 +47,11 @@ const CollapsibleNav = (props) => {
       <NavItem 
           active 
           collapsible 
-          iconLeft="theater-masks"
+          iconLeft="chevron-down"
+          id="collapsible-nav-item-2"
           link="#" 
           text="Albums" 
+          toggleCollapsed={isCollapsed}
           {...props}
       >
         <NavItem 
@@ -55,9 +72,11 @@ const CollapsibleNav = (props) => {
       </NavItem>
       <NavItem 
           collapsible 
-          iconLeft="city" 
+          iconLeft="chevron-down" 
+          id="collapsible-nav-item-3"
           link="#" 
           text="Similar Artists" 
+          toggleCollapsed={isCollapsed}
           {...props}
       >
         <NavItem 
@@ -77,6 +96,7 @@ const CollapsibleNav = (props) => {
         />
       </NavItem>
     </Nav>
+    </>
   );
 };
 
