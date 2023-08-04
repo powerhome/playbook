@@ -4,6 +4,8 @@
 // KITS
 @import "playbook-ui/dist/playbook";
 
+// Testing a 3rd Party Icon Font in our Icon Rails Examples
+
 // APP STYLES
 @import "./site-style";
 @import "./docs/all";
@@ -34,4 +36,8 @@
 //Map Kit styles
 @import "./map_styles/map_default";
 
-@import "./kit_api"
+@import "./kit_api";
+
+//Test Icon Fonts for POC
+@import "./font_boxboard";
+@import "./box_icons";

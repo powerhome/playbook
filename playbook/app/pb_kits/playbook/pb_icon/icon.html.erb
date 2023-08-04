@@ -2,14 +2,28 @@
   <%= object.render_svg(object.custom_icon) %>
 <% elsif object.valid_emoji(object.icon) %>
   <span class="pb_icon_kit_emoji"><%= object.icon.html_safe %></span>
+<% elsif object.font_family.present? %>
+  <%= content_tag(:i, nil,
+      id: object.id,
+      data: object.data,
+      class: object.icon_font_classname,
+      style: 
+      "font-family: #{object.font_family.to_s};font-size: #{object.size.to_s.match?(/x/) ? object.size.to_s.gsub(/x/, '').to_i : object.size.to_s}em;"
+  ) %>
+  <%= content_tag(:span, nil,
+      aria: { label: "#{object.icon} icon" }.merge(object.aria),
+      hidden: true
+  ) %>
 <% else %>
   <%= content_tag(:i, nil,
       id: object.id,
       data: object.data,
-      class: object.classname
+      class: object.classname,
   ) %>
   <%= content_tag(:span, nil,
       aria: { label: "#{object.icon} icon" }.merge(object.aria),
       hidden: true
   ) %>
 <% end %>
+
+

@@ -15,6 +15,8 @@ module Playbook
                   values: ["horizontal", "vertical", "both", nil],
                   default: nil
       prop :icon
+      prop :font_family, type: Playbook::Props::String,
+                         default: nil
       prop :custom_icon, type: Playbook::Props::String,
                          default: nil
       prop :inverse, type: Playbook::Props::Boolean,
@@ -37,6 +39,8 @@ module Playbook
                         default: "far"
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
+      prop :prefix, type: Playbook::Props::String,
+                    default: "fa"
 
       def valid_emoji(icon)
         emoji_regex = /\p{Emoji}/
@@ -47,6 +51,24 @@ module Playbook
         generate_classname(
           "pb_icon_kit",
           font_style_class,
+          icon_class,
+          border_class,
+          fixed_width_class,
+          flip_class,
+          inverse_class,
+          list_item_class,
+          pull_class,
+          pulse_class,
+          rotation_class,
+          size_class,
+          spin_class,
+          separator: " "
+        )
+      end
+
+      def icon_font_classname
+        generate_classname(
+          "pb_icon_kit",
           icon_class,
           border_class,
           fixed_width_class,
@@ -101,7 +123,7 @@ module Playbook
       end
 
       def icon_class
-        icon ? "fa-#{icon}" : nil
+        icon ? "#{prefix}-#{icon}" : nil
       end
 
       def inverse_class
@@ -136,7 +158,7 @@ module Playbook
       end
 
       def size_class
-        size ? "fa-#{size}" : nil
+        size ? "#{prefix}-#{size}" : nil
       end
 
       def font_style_class

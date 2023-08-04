@@ -9,6 +9,7 @@ examples:
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
   - icon_fa_kit: Icon with FontAwesome Kit
+  - icon_font: Bring Your Own Icon Font
 
   react:
   - icon_default: Icon Default
