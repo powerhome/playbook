@@ -4,6 +4,7 @@ module Playbook
   module PbNav
     class Item < Playbook::KitBase
       prop :active, type: Playbook::Props::Boolean, default: false
+      prop :collapsible, type: Playbook::Props::Boolean, default: false
       prop :link
       prop :text
       prop :icon_left
@@ -31,6 +32,10 @@ module Playbook
           href: link,
           target: target
         )
+      end
+
+      def collapsible_icons
+        icon_right.present? ? icon_right : %w[plus minus]
       end
 
     private

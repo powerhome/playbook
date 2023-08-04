@@ -29,22 +29,20 @@
         flex: 1;
         font-weight: $regular;
       }
-      @media (hover:hover) {
-        &:hover {
-          background-color: rgba($primary, 0.03);
-          [class*=_icon] {
-            color: $primary;
-          }
-          [class*=_text] {
-            color: $primary;
-          }
-        }
-      }
     }
     &[class*=_active] [class*=_link] {
       @include pb_title_4;
       color: $primary;
       letter-spacing: normal;
     }
+      &:hover {
+        background-color: rgba($primary, 0.03);
+        [class*=_icon] {
+          color: $primary;
+        }
+        [class*=_text] {
+          color: $primary;
+        }
+      }
   }
 }
