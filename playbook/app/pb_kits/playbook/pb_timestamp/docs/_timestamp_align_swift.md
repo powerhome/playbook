@@ -1,4 +1,4 @@
-<img width="1326" alt="Timestamp (Last Updated)" src="https://github.com/powerhome/playbook/assets/92755007/ccc2b3c7-d7c3-40a0-ac24-d433bd3e054a">
+<img width="1326" alt="Timestamp (Alignment)" src="https://github.com/powerhome/playbook/assets/92755007/9107e699-218e-4a15-a0f9-b1a8f4710c37">
 
 ```swift
 VStack(alignment: .leading, spacing: Spacing.small) {
