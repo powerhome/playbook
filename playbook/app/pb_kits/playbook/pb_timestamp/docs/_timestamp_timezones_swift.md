@@ -1,3 +1,5 @@
+<img width="1326" alt="Timestamp (Timezones)" src="https://github.com/powerhome/playbook/assets/92755007/119f0838-e912-473b-83de-626db1fd0d61">
+
 ```swift
 VStack(alignment: .leading, spacing: Spacing.small) {
   Group {
