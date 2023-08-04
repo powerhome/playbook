@@ -10,7 +10,7 @@
     background-color: $bg_dark;
     border-radius: $border_rad_heaviest;
     box-shadow: $shadow_deepest;
-    min-width: 733px;
+    // min-width: 733px;
   }
   .hero-text-width {
     max-width: 500px;
@@ -81,3 +81,54 @@
     }
   }
 }
+
+
+//slider css
+.container {
+  position: relative;
+  width: 500px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.card {
+  position: absolute;
+  width: 500px;
+  height: 400px;
+  transition: transform 0.3s ease;
+}
+
+.card2 {
+  transform: translateX(250px); /* Start card2 halfway to the right */
+}
+
+.img-comp-slider {
+  position: absolute;
+  z-index: 9;
+  cursor: ew-resize;
+  width: 20px;
+  height: 400px;
+  background-color: $bg_light;
+  box-shadow: -10px 0 15px -2px $shadow;
+}
+
+.img-comp-slider svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: $text_lt_light
+}
+
+.vertical-bar {
+  position: absolute;
+  cursor: ew-resize;
+  top: 0;
+  left: -10px; /* Adjust this value to control the distance of the bar from the card */
+  width: 20px; /* Adjust the width of the vertical bar */
+  height: 400px;
+  background-color: $bg_light;
+  box-shadow: -10px 0 15px -2px $shadow;
+  user-select: none;
+}
+
