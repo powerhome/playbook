@@ -97,14 +97,14 @@ const CollapsibleMain = ({
   const mainCSS = buildCss('pb_collapsible_main_kit')
   const mainSpacing = globalProps(props, { cursor })
 
-  const handleCollapsibleClick = () => {
+  const handleCollapsibleClick = (e:any) => {
     toggle();
-    onClick && onClick()
+    onClick && onClick(e)
   }
 
   return (
     <div className={classnames(mainCSS, className, mainSpacing)}>
-      <div onClick={handleCollapsibleClick}>
+      <div onClick={(e)=>handleCollapsibleClick(e)}>
         <Flex
             spacing="between"
             vertical="center"
