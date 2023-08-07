@@ -1,7 +1,5 @@
 import React from "react";
-
-import Nav from "../_nav";
-import NavItem from "../_item";
+import { Nav, NavItem } from '../..'
 
 const CollapsibleNavCustomIcons = (props) => {
   return (

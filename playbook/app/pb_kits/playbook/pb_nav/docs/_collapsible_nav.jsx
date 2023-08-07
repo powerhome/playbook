@@ -1,5 +1,5 @@
 import React from "react"
-import { Nav, NavItem, Button, useCollapsible } from "../.."
+import { Nav, NavItem, useCollapsible } from "../.."
 
 const CollapsibleNav = (props) => {
   const navItems = ["Overview", "Albums", "Similar Artists"]
@@ -16,19 +16,14 @@ const CollapsibleNav = (props) => {
     })
   }
 
+
   const handleIconRightClick = (index) => {
-    const [toggle] = collapsibles[index]
-    toggle()
+    const [isCollapsed, setCollapsed] = collapsibles[index]
+    setCollapsed(!isCollapsed)
   }
 
   return (
     <>
-      <Button
-          onClick={() => collapsibles.forEach(([toggle]) => toggle())}
-      >
-        {collapsibles.every(([collapsed]) => collapsed) ? "Expand" : "Collapse"}
-      </Button>
-
       <Nav variant='subtle'>
         {navItems.map((text, index) => {
           const [collapsed] = collapsibles[index]
@@ -36,18 +31,29 @@ const CollapsibleNav = (props) => {
             <NavItem
                 collapsible
                 collapsibleClick={() => handleMainClick(index)}
-                iconLeft='chevron-down'
+                iconLeft="chevron-down"
                 iconRightClick={() => handleIconRightClick(index)}
                 id={`collapsible-nav-item-${index + 1}`}
                 key={index}
-                link='#'
+                link="#"
                 text={text}
                 toggleCollapsed={collapsed}
                 {...props}
             >
-              {text}
+              <NavItem link="#" 
+                  text="City" 
+                  {...props} 
+              />
+              <NavItem link="#" 
+                  text="People" 
+                  {...props} 
+              />
+              <NavItem link="#" 
+                  text="Business" 
+                  {...props} 
+              />
             </NavItem>
-          )
+          );
         })}
       </Nav>
     </>

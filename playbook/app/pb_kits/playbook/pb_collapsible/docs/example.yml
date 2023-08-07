@@ -1,10 +1,10 @@
 examples:
 
   rails:
-  # - collapsible_default: Default
-  # - collapsible_size: Size
-  # - collapsible_color: Color
-  # - collapsible_icons: Custom Icons
+  - collapsible_default: Default
+  - collapsible_size: Size
+  - collapsible_color: Color
+  - collapsible_icons: Custom Icons
 
   react:
   - collapsible_default: Default
