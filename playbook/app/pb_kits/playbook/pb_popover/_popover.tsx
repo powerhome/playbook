@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import {
   Popper,
@@ -17,6 +17,7 @@ import {
 
 import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
+import _uniqueId from 'lodash/uniqueId';
 
 type PbPopoverProps = {
   aria?: { [key: string]: string };
@@ -72,6 +73,7 @@ const Popover = (props: PbPopoverProps) => {
     maxWidth,
     minHeight,
     minWidth,
+    targetId,
   } = props;
 
   const popoverSpacing =
@@ -123,6 +125,7 @@ const Popover = (props: PbPopoverProps) => {
                     popoverSpacing,
                     overflowHandling
                   )}
+                  id={targetId}
                   style={widthHeightStyles()}
               >
                 {children}
@@ -136,6 +139,7 @@ const Popover = (props: PbPopoverProps) => {
 };
 
 const PbReactPopover = (props: PbPopoverProps) => {
+  const [targetId] = useState(_uniqueId('id-'))
   const {
     className,
     children,
@@ -163,25 +167,27 @@ const PbReactPopover = (props: PbPopoverProps) => {
       "click",
       ({ target }) => {
         const targetIsPopover =
-          (target as HTMLElement).closest("[class^=pb_popover_tooltip]") !==
+          (target as HTMLElement).closest("#" + targetId) !==
           null;
         const targetIsReference =
-          (target as HTMLElement).closest(".pb_popover_reference_wrapper") !==
+          (target as HTMLElement).closest("#reference-" + targetId) !==
           null;
 
         switch (closeOnClick) {
           case "outside":
-            if (!targetIsPopover || targetIsReference) {
+            if (!targetIsPopover && !targetIsReference) {
               shouldClosePopover(true);
             }
             break;
           case "inside":
-            if (targetIsPopover || targetIsReference) {
+            if (targetIsPopover) {
               shouldClosePopover(true);
             }
             break;
           case "any":
-            shouldClosePopover(true);
+            if (targetIsPopover || !targetIsPopover && !targetIsReference) {
+              shouldClosePopover(true);
+            }
             break;
         }
       },
@@ -200,6 +206,7 @@ const PbReactPopover = (props: PbPopoverProps) => {
         offset={offset}
         placement={placement}
         referenceElement={referenceElement}
+        targetId={targetId}
         zIndex={zIndex}
         {...props}
     >
@@ -214,6 +221,7 @@ const PbReactPopover = (props: PbPopoverProps) => {
           <PopperReference>
             {({ ref }) => (
               <span
+                  id={"reference-" + targetId}
                   className="pb_popover_reference_wrapper"
                   ref={ref}>
                 <reference.type {...reference.props} />
