@@ -102,16 +102,6 @@
   transform: translateX(250px); /* Start card2 halfway to the right */
 }
 
-.img-comp-slider {
-  position: absolute;
-  z-index: 9;
-  cursor: ew-resize;
-  width: 20px;
-  height: 400px;
-  background-color: $bg_light;
-  box-shadow: -10px 0 15px -2px $shadow;
-}
-
 .img-comp-slider svg {
   position: absolute;
   top: 50%;
