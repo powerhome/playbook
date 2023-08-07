@@ -1,3 +1,18 @@
+# 12.36.0
+##### August 4, 2023
+
+List of changes: 
+
+**Fixed Bugs:**
+
+- \[PLAY-941\] Fix Dialog Kit Close Event [\#2672](https://github.com/powerhome/playbook/pull/2672) ([gavhuang](https://github.com/gavhuang))
+- \[PLAY-716\] Popover kit closeOnClick issue [\#2606](https://github.com/powerhome/playbook/pull/2606) ([nickamantia](https://github.com/nickamantia)[carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+- Bump ci-kubed@v6.10.1 [\#2679](https://github.com/powerhome/playbook/pull/2679) ([ryanmrodriguez](https://github.com/ryanmrodriguez))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.35.0...12.36.0)
+
 # Tagging Made Easy! Say Hello to Seamless @mentions in Your Messages! 💬 👋
 ##### August 2, 2023
 
