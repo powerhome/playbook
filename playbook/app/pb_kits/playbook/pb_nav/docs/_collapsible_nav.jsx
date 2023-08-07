@@ -1,135 +1,57 @@
-import React, {useState, useEffect} from "react";
-import { Nav, NavItem, Button, useCollapsible } from '../..'
-
+import React from "react"
+import { Nav, NavItem, Button, useCollapsible } from "../.."
 
 const CollapsibleNav = (props) => {
+  const navItems = ["Overview", "Albums", "Similar Artists"]
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const collapsibles = navItems.map(() => useCollapsible(true))
 
-  const [isCollapsed, setIsCollapsed] = useCollapsible(true)
-  const [allCollapsed, setAllCollapsed] = useState([])
-  const [clickedId, setClickedId] = useState("")
-
-  const handleMainClick = (e) => {
-    const navItemId = e.target.closest('[id^="collapsible-nav-item"]').id; //don't like this at all, using it for testing for now. Better way of getting id needed
-    // setAllCollapsed(prevState => [... prevState, navItemId])
-    setAllCollapsed(prevState => {
-      if (prevState.includes(navItemId)) {
-        return prevState.filter(item => item !== navItemId);
+  const handleMainClick = (index) => {
+    collapsibles.forEach(([, , setCollapsed], idx) => {
+      if (idx === index) {
+        setCollapsed(false)
       } else {
-        return [...prevState, navItemId];
+        setCollapsed(true)
       }
-    });    
-    setClickedId(navItemId)
-    setIsCollapsed(!isCollapsed)
-    }
+    })
+  }
 
-    useEffect(()=> {
-      console.log("Id", clickedId)
-      console.log("All Id", allCollapsed)
-      console.log("ISCOLLAPSED",isCollapsed)
-    },[clickedId])
-
-    const handleClick = (id) => {
-      // if (allCollapsed.includes(id)) {
-      //   return true
-      // }
-      if (id === clickedId) {
-        return isCollapsed
-      }
-      // return true
-    }
-
+  const handleIconRightClick = (index) => {
+    const [toggle] = collapsibles[index]
+    toggle()
+  }
 
   return (
     <>
-      <Button onClick={()=> setIsCollapsed(!isCollapsed)}>
-        {isCollapsed ? "Expand" : "Collapse"}
+      <Button
+          onClick={() => collapsibles.forEach(([toggle]) => toggle())}
+      >
+        {collapsibles.every(([collapsed]) => collapsed) ? "Expand" : "Collapse"}
       </Button>
 
-    <Nav variant="subtle">
-      <NavItem
-          collapsible
-          collapsibleClick={(e)=> handleMainClick(e)}
-          iconLeft="chevron-down" 
-          iconLeftClick={()=> console.log("Left Icon Clicked!")}
-          iconRightClick={()=> console.log("Right Icon Clicked!")}
-          id="collapsible-nav-item-1"
-          link="#" 
-          text="Overview" 
-          toggleCollapsed={handleClick("collapsible-nav-item-1")}
-          {...props}
-      >
-        <NavItem
-            link="#" 
-            text="City"
-            {...props}
-        />
-        <NavItem
-            link="#"
-            text="People"
-            {...props}
-        />
-        <NavItem 
-            link="#" 
-            text="Business" 
-            {...props}
-        />
-      </NavItem>
-      <NavItem 
-          active 
-          collapsible 
-          collapsibleClick={(e)=> handleMainClick(e)}
-          iconLeft="chevron-down"
-          id="collapsible-nav-item-2"
-          link="#" 
-          text="Albums" 
-          toggleCollapsed={handleClick("collapsible-nav-item-2")}
-          {...props}
-      >
-        <NavItem 
-            link="#" 
-            text="Entertainment" 
-            {...props}
-        />
-        <NavItem 
-            link="#" 
-            text="Food" 
-            {...props}
-        />
-        <NavItem 
-            link="#" 
-            text="Style" 
-            {...props}
-        />
-      </NavItem>
-      <NavItem 
-          collapsible 
-          collapsibleClick={(e)=> handleMainClick(e)}
-          iconLeft="chevron-down" 
-          id="collapsible-nav-item-3"
-          link="#" 
-          text="Similar Artists" 
-          toggleCollapsed={handleClick("collapsible-nav-item-3")}
-          {...props}
-      >
-        <NavItem 
-            link="#" 
-            text="City"
-            {...props} 
-        />
-        <NavItem
-            link="#"
-            text="People"
-            {...props}
-        />
-        <NavItem 
-            link="#" 
-            text="Business" 
-            {...props}
-        />
-      </NavItem>
-    </Nav>
+      <Nav variant='subtle'>
+        {navItems.map((text, index) => {
+          const [collapsed] = collapsibles[index]
+          return (
+            <NavItem
+                collapsible
+                collapsibleClick={() => handleMainClick(index)}
+                iconLeft='chevron-down'
+                iconRightClick={() => handleIconRightClick(index)}
+                id={`collapsible-nav-item-${index + 1}`}
+                key={index}
+                link='#'
+                text={text}
+                toggleCollapsed={collapsed}
+                {...props}
+            >
+              {text}
+            </NavItem>
+          )
+        })}
+      </Nav>
     </>
-  );
-};
+  )
+}
 
-export default CollapsibleNav;
+export default CollapsibleNav
