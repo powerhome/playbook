@@ -1,36 +1,49 @@
-import React, {useState} from "react";
-import { Nav, NavItem } from '../..'
+import React, {useState, useEffect} from "react";
+import { Nav, NavItem, Button, useCollapsible } from '../..'
 
 
 const CollapsibleNav = (props) => {
 
-  // const [isCollapsed, setIsCollapsed] = useCollapsible(true)
-  const [allCollapsed, setAllCollapsed] = useState({})
+  const [isCollapsed, setIsCollapsed] = useCollapsible(true)
+  const [allCollapsed, setAllCollapsed] = useState([])
+  const [clickedId, setClickedId] = useState("")
 
   const handleMainClick = (e) => {
     const navItemId = e.target.closest('[id^="collapsible-nav-item"]').id; //don't like this at all, using it for testing for now. Better way of getting id needed
-    setAllCollapsed(prevState => ({ ...prevState, [navItemId]: !prevState[navItemId] }));
+    // setAllCollapsed(prevState => [... prevState, navItemId])
+    setAllCollapsed(prevState => {
+      if (prevState.includes(navItemId)) {
+        return prevState.filter(item => item !== navItemId);
+      } else {
+        return [...prevState, navItemId];
+      }
+    });    
+    setClickedId(navItemId)
+    setIsCollapsed(!isCollapsed)
     }
 
-    const getToggleCollapsedValue = (navItemId) => {
-      if (navItemId in allCollapsed && allCollapsed[navItemId] === true) {
-        return true;
-      }
-    };
+    useEffect(()=> {
+      console.log("Id", clickedId)
+      console.log("All Id", allCollapsed)
+      console.log("ISCOLLAPSED",isCollapsed)
+    },[clickedId])
 
-    // const handleButtonClick = () => {
-    //   const newAllCollapsed = Object.fromEntries(
-    //     Object.keys(allCollapsed).map(navItemId => [navItemId, true])
-    //   );
-    //   setAllCollapsed(newAllCollapsed);
-    // }
+    const handleClick = (id) => {
+      // if (allCollapsed.includes(id)) {
+      //   return true
+      // }
+      if (id === clickedId) {
+        return isCollapsed
+      }
+      // return true
+    }
 
 
   return (
     <>
-      {/* <Button onClick={handleButtonClick}>
+      <Button onClick={()=> setIsCollapsed(!isCollapsed)}>
         {isCollapsed ? "Expand" : "Collapse"}
-      </Button> */}
+      </Button>
 
     <Nav variant="subtle">
       <NavItem
@@ -42,7 +55,7 @@ const CollapsibleNav = (props) => {
           id="collapsible-nav-item-1"
           link="#" 
           text="Overview" 
-          toggleCollapsed={getToggleCollapsedValue("collapsible-nav-item-1")} 
+          toggleCollapsed={handleClick("collapsible-nav-item-1")}
           {...props}
       >
         <NavItem
@@ -69,7 +82,7 @@ const CollapsibleNav = (props) => {
           id="collapsible-nav-item-2"
           link="#" 
           text="Albums" 
-          toggleCollapsed={getToggleCollapsedValue("collapsible-nav-item-2")}
+          toggleCollapsed={handleClick("collapsible-nav-item-2")}
           {...props}
       >
         <NavItem 
@@ -95,7 +108,7 @@ const CollapsibleNav = (props) => {
           id="collapsible-nav-item-3"
           link="#" 
           text="Similar Artists" 
-          toggleCollapsed={getToggleCollapsedValue("collapsible-nav-item-1")}
+          toggleCollapsed={handleClick("collapsible-nav-item-3")}
           {...props}
       >
         <NavItem 
