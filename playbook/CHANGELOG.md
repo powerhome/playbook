@@ -6,7 +6,7 @@ List of changes:
 **Fixed Bugs:**
 
 - \[PLAY-941\] Fix Dialog Kit Close Event [\#2672](https://github.com/powerhome/playbook/pull/2672) ([gavhuang](https://github.com/gavhuang))
-- \[PLAY-716\] Popover kit closeOnClick issue [\#2606](https://github.com/powerhome/playbook/pull/2606) ([nickamantia](https://github.com/nickamantia)[carloslimasd](https://github.com/carloslimasd))
+- \[PLAY-716\] Popover kit closeOnClick issue [\#2606](https://github.com/powerhome/playbook/pull/2606) ([nickamantia](https://github.com/nickamantia), [carloslimasd](https://github.com/carloslimasd))
 
 **Improvements:**
 - Bump ci-kubed@v6.10.1 [\#2679](https://github.com/powerhome/playbook/pull/2679) ([ryanmrodriguez](https://github.com/ryanmrodriguez))
@@ -24,12 +24,12 @@ Highlight users dynamically within chats with our new Message kit subcomponent, 
 
  **Kit Enhancements:**
 
-- Preliminary Work for Upcoming Collapsible Nav Kit
-- Adding Mention Variant to Message Kit
+- Preliminary Work for Upcoming Collapsible Nav Kit [\#2666](https://github.com/powerhome/playbook/pull/2666) ([nidaqg](https://github.com/nidaqg))
+- Adding Mention Variant to Message Kit [\#2664](https://github.com/powerhome/playbook/pull/2664) ([carloslimasd](https://github.com/carloslimasd))
 
 **Fixed Bugs:**
 
-- Responsive Spacing Global Props not Falling Back to Defaults
+- Responsive Spacing Global Props not Falling Back to Defaults [\#2615](https://github.com/powerhome/playbook/pull/2615)  ([carloslimasd](https://github.com/carloslimasd), [nickamantia](https://github.com/nickamantia))
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/12.34.0...12.35.0)
 
