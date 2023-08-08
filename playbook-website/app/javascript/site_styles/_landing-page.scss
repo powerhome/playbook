@@ -86,39 +86,38 @@
 //slider css
 .container {
   position: relative;
-  width: 500px;
-  height: 400px;
+  width: 560px;
+  height: 350px;
   overflow: hidden;
 }
 
-.card {
+.solutionsCard {
   position: absolute;
-  width: 500px;
-  height: 400px;
-  transition: transform 0.3s ease;
+  width: 560px;
+  height: 350px;
 }
 
-.card2 {
-  transform: translateX(250px); /* Start card2 halfway to the right */
-}
-
-.img-comp-slider svg {
+.vertical-bar svg {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 48%;
+  left: 35%;
   color: $text_lt_light
 }
 
 .vertical-bar {
   position: absolute;
   cursor: ew-resize;
-  top: 0;
-  left: -10px; /* Adjust this value to control the distance of the bar from the card */
-  width: 20px; /* Adjust the width of the vertical bar */
-  height: 400px;
+  top: -1px;
+  left: -10px;
+  width: 20px;
+  height: 350px;
   background-color: $bg_light;
   box-shadow: -10px 0 15px -2px $shadow;
   user-select: none;
+}
+
+.highlightSolutions {
+  padding-top: $space_md !important;
+  padding-bottom: $space_md !important;
 }
 
