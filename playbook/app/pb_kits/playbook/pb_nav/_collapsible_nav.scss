@@ -5,11 +5,12 @@
 [class^="pb_nav_list"] {
   [class*="pb_collapsible_nav_item"] {
     &[class*="_active"] {
+      background-color: unset !important;
       .pb_collapsible_main_kit {
         background-color: $primary !important;
         border-radius: $border_rad_heavier;
-        .pb_nav_list_item_text,
-        .pb_nav_list_item_icon,
+        .pb_nav_list_item_text_collapsible,
+        .pb_nav_list_item_icon_collapsible,
         .icon_wrapper,
         .pb_icon_kit {
           color: $white !important;
@@ -17,13 +18,12 @@
       }
 
       &:hover {
-      .pb_nav_list_item_link {
-        .pb_nav_list_item_text,
-        .pb_nav_list_item_icon {
-          color: unset !important;
+        background-color: unset;
+        .pb_nav_list_item_text_collapsible,
+        .pb_nav_list_item_icon_collapsible {
+          color: $white !important;
         }
       }
-    }
 
       .icon_wrapper {
         &:hover {
@@ -36,12 +36,13 @@
     }
 
     &:hover {
-      .pb_nav_list_item_link {
-        .pb_nav_list_item_text,
-        .pb_nav_list_item_icon {
-          color: unset !important;
+      .pb_nav_list_item_link_collapsible {
+        background-color: unset !important;
+        .pb_nav_list_item_text_collapsible,
+        .pb_nav_list_item_icon_collapsible {
+          color: unset;
         }
-      background-color: unset !important;
+
       }
       .pb_collapsible_main_kit {
         border-radius: $border_rad_heavier;

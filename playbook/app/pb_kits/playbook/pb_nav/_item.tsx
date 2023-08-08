@@ -83,14 +83,14 @@ const NavItem = (props: NavItemProps) => {
           >
           <Collapsible.Main>
           <Tag
-          className="pb_nav_list_item_link"
+          className="pb_nav_list_item_link_collapsible"
           href={link}
           onClick={onClick}
           target={target}
         >
           {imageUrl &&
             <div
-              className="pb_nav_list_item_icon_section"
+              className="pb_nav_list_item_icon_section_collapsible"
               key={imageUrl}
               onClick={(e)=>handleIconClick(e)}
             >
@@ -103,18 +103,18 @@ const NavItem = (props: NavItemProps) => {
   
           {iconLeft &&
             <div
-              className="pb_nav_list_item_icon_section"
+              className="pb_nav_list_item_icon_section_collapsible"
               key={iconLeft}
               onClick={(e)=>handleIconClick(e)}
             >
               <Icon
-                className="pb_nav_list_item_icon_left"
+                className="pb_nav_list_item_icon_left_collapsible"
                 fixedWidth
                 icon={iconLeft}
               />
             </div>
           }
-           <span className="pb_nav_list_item_text">
+           <span className="pb_nav_list_item_text_collapsible">
             {text}
           </span>
         </Tag>
