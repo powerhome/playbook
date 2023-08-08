@@ -25,8 +25,7 @@ Highlight users dynamically within chats with our new Message kit subcomponent, 
  **Kit Enhancements:**
 
 - Preliminary Work for Upcoming Collapsible Nav Kit [\#2666](https://github.com/powerhome/playbook/pull/2666) ([nidaqg](https://github.com/nidaqg))
-
-- Adding Mention Variant to Message Kit  [\#2664](https://github.com/powerhome/playbook/pull/2664) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Mention Variant to Message Kit [\#2664](https://github.com/powerhome/playbook/pull/2664) ([carloslimasd](https://github.com/carloslimasd))
 
 **Fixed Bugs:**
 
