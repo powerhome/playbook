@@ -5,9 +5,7 @@ const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 const formatDate = (newDate: Date | string) => {
-  const isStringDate = typeof newDate === "string"
-
-  if (isStringDate) {
+  if (typeof newDate === "string") {
     const unhyphenatedDate = new Date(newDate.replace(/-/g, "/"))
     return unhyphenatedDate
   }
