@@ -90,6 +90,23 @@ module Playbook
         end
       end
 
+      def embedded_svg(icon_name)
+        file = File.read(Rails.root.join("app", "javascript", "images", "#{icon_name}.svg"))
+        doc = Nokogiri::HTML::DocumentFragment.parse file
+        svg = doc.at_css "svg"
+
+        doc.to_html.html_safe
+
+        size_factor = size.to_i
+        if size_factor > 1
+          pixel_size = size_factor * 16
+          svg["width"] = pixel_size.to_s
+          svg["height"] = pixel_size.to_s
+        end
+
+        raw doc
+      end
+
     private
 
       def border_class
