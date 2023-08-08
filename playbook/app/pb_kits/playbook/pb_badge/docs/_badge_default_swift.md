@@ -2,8 +2,8 @@
 
 ```swift
 HStack {
-    PBBadge(text: "+1", variant: .primary)
-    PBBadge(text: "+4", variant: .primary)
-    PBBadge(text: "+1000", variant: .primary)
+  PBBadge(text: "+1", variant: .primary)
+  PBBadge(text: "+4", variant: .primary)
+  PBBadge(text: "+1000", variant: .primary)
  }
 ```
