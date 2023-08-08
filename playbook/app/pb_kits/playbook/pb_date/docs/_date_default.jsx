@@ -1,5 +1,5 @@
 import React from 'react'
-import { Date as FormattedDate } from '../../'
+import { Date as FormattedDate, Caption, Title } from '../../'
 
 const DateDefault = (props) => {
   return (
@@ -9,6 +9,17 @@ const DateDefault = (props) => {
           value={new Date()}
           {...props}
       />
+
+      <br />
+
+      <div style={{display: "flex", columnGap: 4}}>
+        <FormattedDate
+            size="sm"
+            value={"2012-08-03"}
+            {...props}
+        />
+        <Caption>{"(Hyphenated Date)"}</Caption>
+      </div>
 
       <br />
 
@@ -34,6 +45,19 @@ const DateDefault = (props) => {
           value={new Date()}
           {...props}
       />
+
+      <br />
+
+      <div style={{display: "flex", columnGap: 4}}>
+        <FormattedDate
+            value={"2012-08-03"}
+            {...props}
+        />
+        <Title
+            size={4}
+            text={"(Hyphenated Date)"}
+        />
+      </div>
 
       <br />
 

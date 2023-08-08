@@ -4,8 +4,19 @@ const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
+const formatDate = (newDate: Date | string) => {
+  const isStringDate = typeof newDate === "string"
+
+  if (isStringDate) {
+    const unhyphenatedDate = new Date(newDate.replace(/-/g, "/"))
+    return unhyphenatedDate
+  }
+
+  return new Date(newDate)
+}
+
 export const toMinute = (newDate: Date | string, timeZone?: string): string => {
-  const date = new Date(newDate)
+  const date = formatDate(newDate)
   if (timeZone) {
     return date.toLocaleTimeString(undefined, {timeZone, hour: "2-digit", minute: "2-digit"}).slice(3, 5);
   } else {
@@ -14,7 +25,7 @@ export const toMinute = (newDate: Date | string, timeZone?: string): string => {
 }
 
 export const toHour = (newDate: Date | string, timeZone?: string): string => {
-  const date = new Date(newDate)
+  const date = formatDate(newDate)
   if (timeZone) {
     return date.toLocaleTimeString(undefined, {timeZone, hour: "numeric"}).split(' ')[0];
   } else {
@@ -24,36 +35,36 @@ export const toHour = (newDate: Date | string, timeZone?: string): string => {
 
 export const toDay = (newDate: Date | string, timeZone?: string): number => {
     if (timeZone) {
-      const date = new Date(newDate.toLocaleString(undefined, { timeZone }));
+      const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
       return date.getDate()
     } else {
-      const date = new Date(newDate)
+      const date = formatDate(newDate)
       return date.getDate()
     }
 }
 
 export const toDayAbbr = (newDate: Date | string): string => {
-  const date = new Date(newDate)
+  const date = formatDate(newDate)
   return ABBR_DAYS[date.getUTCDay()]
 }
 
 export const toWeekday = (newDate: Date | string): string => {
-    const date = new Date(newDate)
+    const date = formatDate(newDate)
     return days[date.getUTCDay()]
 }
 
 export const toMonth = (newDate: Date | string, timeZone?: string): string => {
     if (timeZone) {
-      const date = new Date(newDate.toLocaleString(undefined, { timeZone }));
+      const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
       return months[date.getUTCMonth()]
     } else {
-      const date = new Date(newDate)
+      const date = formatDate(newDate)
       return months[date.getUTCMonth()]
     }
 }
 
 export const toMonthNum = (newDate: Date | string): number => {
-  const date = new Date(newDate)
+  const date = formatDate(newDate)
   return date.getUTCMonth() +1
 }
 
@@ -68,7 +79,7 @@ export const toYear = (newDate: Date | string, timeZone?: string): number => {
 }
 
 export const toTime = (newDate: Date | string, timeZone?: string): string => {
-  const date = new Date(newDate)
+  const date = formatDate(newDate)
   if (timeZone) {
     return date.toLocaleTimeString(undefined, {timeZone, timeStyle: "short"}).split(' ')[0];
   } else {
@@ -77,7 +88,7 @@ export const toTime = (newDate: Date | string, timeZone?: string): string => {
 }
 
 export const toMeridiem = (newDate: Date | string, timeZone?: string): string => {
-    const date = new Date(newDate)
+    const date = formatDate(newDate)
     if (timeZone) {
       return date.toLocaleString(undefined, {timeZone, hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
     } else {
@@ -86,7 +97,7 @@ export const toMeridiem = (newDate: Date | string, timeZone?: string): string =>
 }
 
 export const toTimeZone = (newDate: Date | string, timeZone?: string): string => {
-    const date = new Date(newDate)
+    const date = formatDate(newDate)
     if (timeZone) {
       return date.toLocaleString(undefined, {timeZone, timeZoneName: "short"}).split(' ')[3];
     } else {
@@ -95,18 +106,18 @@ export const toTimeZone = (newDate: Date | string, timeZone?: string): string =>
 }
 
 export const toTimeWithMeridiem = (newDate: Date | string, timeZone: string): string => {
-  const date = new Date(newDate)
+  const date = formatDate(newDate)
   return `${toTime(date, timeZone)}${toMeridiem(date, timeZone)}`;
 }
 
 export const toIso = (newDate: Date | string): string => {
-    const date = new Date(newDate)
+    const date = formatDate(newDate)
     return date.toISOString()
 }
 
 export const fromNow = (newDate: Date | string): string => {
 
-  const startDate = new Date(newDate).getTime()
+  const startDate = formatDate(newDate).getTime()
   const endDate = new Date().getTime()
   const elapsedTime = endDate - startDate
   let elapsedTimeString = `${Math.round(elapsedTime / (365.25 * 24 * 60 * 60 * 1000))} years ago.`; // 730+ days
@@ -135,7 +146,7 @@ export const fromNow = (newDate: Date | string): string => {
 }
 
 export const toCustomFormat = (newDate: Date | string, format = 'month_day'): string => {
-  const date = new Date(newDate)
+  const date = formatDate(newDate)
   if (format == "month_day") {
     return `${toMonthNum(date)}/${toDay(date)}`
   } else {
