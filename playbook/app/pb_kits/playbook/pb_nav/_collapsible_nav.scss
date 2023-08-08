@@ -3,25 +3,75 @@
 @import "../tokens/border_radius";
 
 [class^="pb_nav_list"] {
-  .pb_collapsible_nav_item {
-  .pb_collapsible_main_kit,
-  .pb_collapsible_content_kit,
-  .pb_collapsible_kit {
-    padding: 0 !important;
-  }
+  [class*="pb_collapsible_nav_item"] {
+    &[class*="_active"] {
+      .pb_collapsible_main_kit {
+        background-color: $primary !important;
+        border-radius: $border_rad_heavier;
+        .pb_nav_list_item_text,
+        .pb_nav_list_item_icon,
+        .icon_wrapper,
+        .pb_icon_kit {
+          color: $white !important;
+        }
+      }
 
-  .icon_wrapper {
-    border-radius: $border_radius_rounded;
-    width: 19px;
-    height: 19px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: $space_xs;
+      &:hover {
+      .pb_nav_list_item_link {
+        .pb_nav_list_item_text,
+        .pb_nav_list_item_icon {
+          color: unset !important;
+        }
+      }
+    }
+
+      .icon_wrapper {
+        &:hover {
+          background-color: mix($primary, $card_light, 40%);
+          .pb_icon_kit {
+            color: $primary !important;
+          }
+        }
+      }
+    }
+
     &:hover {
-      background-color: rgba($primary_action, $opacity_3);
+      .pb_nav_list_item_link {
+        .pb_nav_list_item_text,
+        .pb_nav_list_item_icon {
+          color: unset !important;
+        }
+      background-color: unset !important;
+      }
+      .pb_collapsible_main_kit {
+        border-radius: $border_rad_heavier;
+        background-color: rgba($primary, 0.03);
+        .pb_icon_kit {
+          color: $primary !important;
+        }
+        [class*="_text"] {
+          color: $primary !important;
+        }
+      }
+    }
 
+    .pb_collapsible_main_kit,
+    .pb_collapsible_content_kit,
+    .pb_collapsible_kit {
+      padding: 0 !important;
+    }
+
+    .icon_wrapper {
+      border-radius: $border_radius_rounded;
+      width: 19px;
+      height: 19px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: $space_xs;
+      &:hover {
+        background-color: rgba($primary_action, $opacity_3);
+      }
     }
   }
-}
 }

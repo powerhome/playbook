@@ -55,7 +55,7 @@ const NavItem = (props: NavItemProps) => {
   const activeClass = active === true ? 'active' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), collapsible ? 'pb_collapsible_nav_item' : '', globalProps(props), className)
+  const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), collapsible ? buildCss('pb_collapsible_nav_item', activeClass) : '', globalProps(props), className)
 
 
   const handleIconClick = (e:any) => {
