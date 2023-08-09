@@ -90,7 +90,7 @@ const NavItem = (props: NavItemProps) => {
             iconSize="xs" 
             id={id}
             collapsed={toggleCollapsed}
-            iconClick={iconRightClick}
+            onIconClick={iconRightClick}
             onClick={collapsibleClick}
           >
           <Collapsible.Main>

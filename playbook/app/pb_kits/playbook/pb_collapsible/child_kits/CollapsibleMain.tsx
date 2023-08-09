@@ -42,10 +42,10 @@ type IconProps = {
   icon?: string[] | string
   iconColor?: IconColors
   iconSize?: IconSizes
-  iconClick?: ()=> void
+  onIconClick?: ()=> void
 }
 
-const ToggleIcon = ({ collapsed, icon, iconSize, iconColor, iconClick }: IconProps) => {
+const ToggleIcon = ({ collapsed, icon, iconSize, iconColor, onIconClick }: IconProps) => {
   const color = colorMap[iconColor]
 
   const showIcon = (icon: string |string[]) => {
@@ -56,9 +56,9 @@ const ToggleIcon = ({ collapsed, icon, iconSize, iconColor, iconClick }: IconPro
   }
 
   const handleIconClick = (e:any) => {
-    if (iconClick) {
+    if (onIconClick) {
     e.stopPropagation();
-    iconClick()
+    onIconClick()
     }
   }
 
@@ -93,7 +93,7 @@ const CollapsibleMain = ({
   cursor = 'pointer',
   ...props
 }: CollapsibleMainProps): React.ReactElement=> {
-  const {collapsed, toggle, icon, iconSize, iconColor, iconClick, onClick}: any = useContext(CollapsibleContext)
+  const {collapsed, toggle, icon, iconSize, iconColor, onIconClick, onClick}: any = useContext(CollapsibleContext)
   const mainCSS = buildCss('pb_collapsible_main_kit')
   const mainSpacing = globalProps(props, { cursor })
 
@@ -116,7 +116,7 @@ const CollapsibleMain = ({
                 iconColor={iconColor as IconColors}
                 iconSize={iconSize as IconSizes}
                 icon={icon as string[] | string}
-                iconClick={iconClick}
+                onIconClick={onIconClick}
             />
             </FlexItem>
         </Flex>
