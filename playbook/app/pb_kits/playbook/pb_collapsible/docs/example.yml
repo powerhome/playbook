@@ -11,3 +11,4 @@ examples:
   - collapsible_size: Size
   - collapsible_color: Color
   - collapsible_icons: Custom Icons
+  - collapsible_state: Access Collapsible State
