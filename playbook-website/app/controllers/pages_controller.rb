@@ -11,6 +11,7 @@ class PagesController < ApplicationController
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
   before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift]
+  include ApplicationHelper
 
   def disable_dark_mode
     cookies[:dark_mode] = {
@@ -27,13 +28,24 @@ class PagesController < ApplicationController
   end
 
   def changelog
-    @data = Playbook::Engine.root.join("CHANGELOG.md").read
+    @changelog = Playbook::Engine.root.join("CHANGELOG.md").read
     @page_title = "What's New"
-    @show_sidebar = false
-    render layout: "docs"
+    respond_to do |format|
+      format.html do
+        @show_sidebar = false
+        render layout: "docs"
+      end
+      format.json do
+        @posts = changelog_to_hash(@changelog)
+        render json: @posts.to_json
+      end
+    end
   end
 
-  def home; end
+  def home
+    # @changelog = Playbook::Engine.root.join("CHANGELOG.md").read
+    # @posts = changelog_to_object(@changelog)
+  end
 
   def kits
     params[:type] ||= "react"
