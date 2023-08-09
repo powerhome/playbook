@@ -25,6 +25,11 @@
       &:hover {
         background-color: unset;
       }
+      .pb_collapsible_main_kit:hover {
+        .pb_nav_list_item_text_collapsible {
+          color: $white !important;
+        }
+      }
 
       .icon_wrapper {
         &:hover {
@@ -40,13 +45,14 @@
       .pb_nav_list_item_link_collapsible {
         background-color: unset !important;
       }
-      .pb_collapsible_main_kit {
-        border-radius: $border_rad_heavier;
-        background-color: mix($primary, $card_light, 10%);
-        .pb_nav_list_item_link_collapsible,
-        svg {
-          color: $primary !important;
-        }
+    }
+
+    .pb_collapsible_main_kit:hover {
+      border-radius: $border_rad_heavier;
+      background-color: mix($primary, $card_light, 10%);
+      .pb_nav_list_item_text_collapsible,
+      svg {
+        color: $primary !important;
       }
     }
 
@@ -63,11 +69,10 @@
 
     .pb_collapsible_main_kit {
       .pb_nav_list_item_text_collapsible {
-      @include pb_title_4;
-      font-weight: $bolder !important;
+        @include pb_title_4;
+        font-weight: $bolder !important;
       }
     }
-
 
     .icon_wrapper {
       border-radius: $border_radius_rounded;
