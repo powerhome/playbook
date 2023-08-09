@@ -54,6 +54,11 @@
       padding: 0 !important;
     }
 
+    .pb_collapsible_content_kit {
+      margin-left: $space_md - 2 !important;
+      border-left: 2px solid $border_light;
+    }
+
     .icon_wrapper {
       border-radius: $border_radius_rounded;
       width: 19px;
