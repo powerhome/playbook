@@ -371,7 +371,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     } else {
       return order ? `flex_order_${order}` : ''
     }
-  }, 
+  },
   positionProps: ({ position }: Position) => {
     let css = ''
     css += position && position !== 'static' ? `position_${position}` : ''

@@ -42,10 +42,10 @@ type CardBodyProps = {
 
 // Header component
 const Header = (props: CardHeaderProps) => {
-  const { children, className, headerColor = 'category_1', headerColorStriped = false, padding = 'sm' } = props
+  const { children, className, headerColor = 'category_1', headerColorStriped = false } = props
   const headerCSS = buildCss('pb_card_header_kit', `${headerColor}`, headerColorStriped ? 'striped' : '')
 
-  const headerSpacing = globalProps(props, { padding })
+  const headerSpacing = globalProps(props)
 
   return (
     <div className={classnames(headerCSS, headerSpacing, className)}>
@@ -57,9 +57,9 @@ const Header = (props: CardHeaderProps) => {
 
 // Body component
 const Body = (props: CardBodyProps) => {
-  const { children, padding = 'md', className } = props
+  const { children, className } = props
   const bodyCSS = buildCss('pb_card_body_kit')
-  const bodySpacing = globalProps(props, { padding })
+  const bodySpacing = globalProps(props)
 
   return (
     <div className={classnames(bodyCSS, bodySpacing, className)}>
@@ -80,7 +80,6 @@ const Card = (props: CardPropTypes) => {
     highlight = {},
     selected = false,
     tag = 'div',
-    padding = 'md',
   } = props
   const borderCSS = borderNone == true ? 'border_none' : ''
   const selectedCSS = selected == true ? 'selected' : 'deselected'
@@ -114,7 +113,7 @@ const Card = (props: CardPropTypes) => {
     <Tag
         {...ariaProps}
         {...dataProps}
-        className={classnames(cardCss, globalProps(props, { padding }), className)}
+        className={classnames(cardCss, globalProps(props), className)}
     >
       {subComponentTags('Header')}
       {nonHeaderChildren}

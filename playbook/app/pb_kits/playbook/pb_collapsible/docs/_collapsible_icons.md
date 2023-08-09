@@ -1,0 +1,2 @@
+##### Prop
+This kit uses 'chevron-up' and 'chevron-down' icons as default for the toggle icons. To customize these icons, use the `icon` prop to pass in an array of two icons, the first will render when the collapisble is closed and the second will render when the collapsible is open. In this example, we are using `icon: ['plus','minus']`

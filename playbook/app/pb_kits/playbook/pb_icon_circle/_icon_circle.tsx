@@ -22,11 +22,21 @@ type IconCircleProps = {
     | "teal"
     | "red"
     | "yellow"
+    | "orange"
     | "green",
 }
 
 const IconCircle = (props: IconCircleProps) => {
-  const { aria = {}, className, dark = false, data = {}, icon, id, size = 'md', variant = 'default' } = props
+  const {
+    aria = {},
+    className,
+    dark = false,
+    data = {},
+    icon,
+    id,
+    size = 'md',
+    variant = 'default'
+  } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -41,10 +51,10 @@ const IconCircle = (props: IconCircleProps) => {
         id={id}
     >
         <Icon
-          dark={dark}
-          icon={icon}
+            dark={dark}
+            icon={icon}
         />
-        
+
     </div>
   )
 }

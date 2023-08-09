@@ -7,7 +7,7 @@ const HighlightDefault = (props) => (
   <div>
     <Highlight
         highlightedText={['highlight kit']}
-        text="This is the Highlight Kit"
+        text="This is the Highlight Kit."
         {...props}
     />
     <br />
@@ -15,7 +15,7 @@ const HighlightDefault = (props) => (
       {' '}
       {'Hello this is a'}
       {' '}
-      <Highlight text=" highlight wrapped"/>
+      <Highlight text=" highlight wrapped."/>
     </Body>
     <br />
     <Body

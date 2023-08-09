@@ -24,6 +24,7 @@ const PopoverClose = (props) => {
 
   const handleOutsideTogglePopover = () => {
     setOutsideShowPopover(!showOutsidePopover)
+    setAnyShowPopover(false)
   }
 
   const handleAnyShouldClosePopover = (shouldClosePopover) => {
@@ -32,6 +33,7 @@ const PopoverClose = (props) => {
 
   const handleAnyTogglePopover = () => {
     setAnyShowPopover(!showAnyPopover)
+    setOutsideShowPopover(false)
   }
 
   const insidePopoverTrigger = (

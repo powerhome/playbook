@@ -1,3 +1,85 @@
+# 12.36.0
+##### August 4, 2023
+
+List of changes: 
+
+**Fixed Bugs:**
+
+- \[PLAY-941\] Fix Dialog Kit Close Event [\#2672](https://github.com/powerhome/playbook/pull/2672) ([gavhuang](https://github.com/gavhuang))
+- \[PLAY-716\] Popover kit closeOnClick issue [\#2606](https://github.com/powerhome/playbook/pull/2606) ([nickamantia](https://github.com/nickamantia), [carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+- Bump ci-kubed@v6.10.1 [\#2679](https://github.com/powerhome/playbook/pull/2679) ([ryanmrodriguez](https://github.com/ryanmrodriguez))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.35.0...12.36.0)
+
+# Tagging Made Easy! Say Hello to Seamless @mentions in Your Messages! 💬 👋
+##### August 2, 2023
+
+![12 35 0](https://github.com/powerhome/playbook/assets/73710701/a991aa2c-155f-4412-a72c-3550114f730a)
+
+Highlight users dynamically within chats with our new Message kit subcomponent, @mentions! Choose 'user' (default, blue) or 'self' (yellow) variants for easy implementation and level up your chat experience!
+
+ [12.35.0](https://github.com/powerhome/playbook/tree/12.35.0) full list of changes:
+
+ **Kit Enhancements:**
+
+- Preliminary Work for Upcoming Collapsible Nav Kit [\#2666](https://github.com/powerhome/playbook/pull/2666) ([nidaqg](https://github.com/nidaqg))
+- Adding Mention Variant to Message Kit [\#2664](https://github.com/powerhome/playbook/pull/2664) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+
+- Responsive Spacing Global Props not Falling Back to Defaults [\#2615](https://github.com/powerhome/playbook/pull/2615)  ([carloslimasd](https://github.com/carloslimasd), [nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.34.0...12.35.0)
+
+ 
+# Enhance Chat Engagement: Introducing the Reaction Button for Instant User Reactions!
+##### July 28, 2023
+
+![12 34 0](https://github.com/powerhome/playbook/assets/73710701/2a9d2a9c-74ea-4034-bc24-6334edf11af7)
+
+The new [Reaction Button variant](https://playbook.powerapp.cloud/kits/button/react#reaction-button) and its delightful, dynamic UI is our latest enhancement to your users' chat experience! Watch as emoji use and interactions take center stage, making every conversation more immersive and enjoyable. Say goodbye to bland chats and let emotions shine through like never before!
+
+[12.34.0](https://github.com/powerhome/playbook/tree/12.34.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Reaction Button Variant for Button Kit [\#2658](https://github.com/powerhome/playbook/pull/2658) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Bump word-wrap from 1.2.3 to 1.2.4 [\#2654](https://github.com/powerhome/playbook/pull/2654) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.32.0...12.34.0)
+
+# Get Ready to Hover: Introducing the Global Hover Prop!
+##### July 21, 2023
+
+![12 33 0](https://github.com/powerhome/playbook/assets/73710701/e07453a9-be77-438d-aeac-3ccf0e2d21eb)
+
+Add some flair to your page by adjusting the shadow, scaling, or background color of elements when they’re being hovered over. The global hover prop is in beta now, and works with all kits. In particular, try it out with the Card, Button, or Message kit to add interactions to your page!
+
+[12.33.0](https://github.com/powerhome/playbook/tree/12.33.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Center Align Text for Status Dialogs [\#2657](https://github.com/powerhome/playbook/pull/2657) ([gavhuang](https://github.com/gavhuang))
+- Refactor Dialog Kit Close on Outside Click [\#2650](https://github.com/powerhome/playbook/pull/2650) ([gavhuang](https://github.com/gavhuang))
+- Icon Kit: Self-Hosted Custom Fontawesome Icons Enablement  [\#2647](https://github.com/powerhome/playbook/pull/2647) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Fixed Bugs:**
+
+- Fixing Map Kit Button Height for Safari [\#2655](https://github.com/powerhome/playbook/pull/2655) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Kit Collection Page: Add Kit + Global Props Table to Rails Page [\#2659](https://github.com/powerhome/playbook/pull/2659) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Website Homepage - Social Proof [\#2641](https://github.com/powerhome/playbook/pull/2641) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Refactor Date and Time Kits to not Rely on Moment.js [\#2627](https://github.com/powerhome/playbook/pull/2627) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.32.0...12.33.0)
+
 # Customize Your Toasts: Introducing 'Children' for Fixed Confirmation Toast Kit!
 ##### July 19, 2023
 
