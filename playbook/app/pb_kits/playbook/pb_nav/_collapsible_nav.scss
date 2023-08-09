@@ -6,6 +6,9 @@
   [class*="pb_collapsible_nav_item"] {
     &[class*="_active"] {
       background-color: unset !important;
+      .pb_nav_list_item_link {
+        color: unset !important;
+      }
       .pb_collapsible_main_kit {
         background-color: $primary !important;
         border-radius: $border_rad_heavier;
@@ -19,10 +22,6 @@
 
       &:hover {
         background-color: unset;
-        .pb_nav_list_item_text_collapsible,
-        .pb_nav_list_item_icon_collapsible {
-          color: $white !important;
-        }
       }
 
       .icon_wrapper {
@@ -38,19 +37,12 @@
     &:hover {
       .pb_nav_list_item_link_collapsible {
         background-color: unset !important;
-        .pb_nav_list_item_text_collapsible,
-        .pb_nav_list_item_icon_collapsible {
-          color: unset;
-        }
-
       }
       .pb_collapsible_main_kit {
         border-radius: $border_rad_heavier;
         background-color: rgba($primary, 0.03);
-        .pb_icon_kit {
-          color: $primary !important;
-        }
-        [class*="_text"] {
+        .pb_nav_list_item_link_collapsible,
+        svg {
           color: $primary !important;
         }
       }
