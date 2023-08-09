@@ -8,7 +8,7 @@ const formatDate = (newDate: Date | string) => {
   const isTimelessStringDate = typeof newDate === "string" && !newDate.includes("T")
 
   if (isTimelessStringDate) {
-    const unhyphenatedDate = new Date(newDate.replace(/-/g, "/"))
+    const unhyphenatedDate = new Date((newDate as string).replace(/-/g, "/"))
     return unhyphenatedDate
   }
 
