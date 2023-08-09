@@ -27,7 +27,7 @@ module Playbook
 
       def options
         {
-          class: "pb_nav_list_item_link",
+          class: collapsible ? "pb_nav_list_item_link_collapsible" : "pb_nav_list_item_link",
         }.compact
       end
 
