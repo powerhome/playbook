@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, NavItem } from '../..'
 
-const CollapsibleNavCustomIcons = (props) => {
+const CollapsibleNavEmphasize = (props) => {
   return (
     <Nav variant="subtle">
       <NavItem
@@ -30,7 +30,6 @@ const CollapsibleNavCustomIcons = (props) => {
         />
       </NavItem>
       <NavItem 
-          active 
           collapsible 
           emphasized
           iconLeft="theater-masks"
@@ -84,4 +83,4 @@ const CollapsibleNavCustomIcons = (props) => {
   );
 };
 
-export default CollapsibleNavCustomIcons;
+export default CollapsibleNavEmphasize;
