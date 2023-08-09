@@ -6,6 +6,7 @@ const CollapsibleNavCustomIcons = (props) => {
     <Nav variant="subtle">
       <NavItem
           collapsible 
+          emphasized
           iconLeft="city" 
           iconRight={["plus", "minus"]}
           link="#" 
@@ -31,6 +32,7 @@ const CollapsibleNavCustomIcons = (props) => {
       <NavItem 
           active 
           collapsible 
+          emphasized
           iconLeft="theater-masks"
           iconRight={["plus", "minus"]}
           link="#" 
@@ -55,6 +57,7 @@ const CollapsibleNavCustomIcons = (props) => {
       </NavItem>
       <NavItem 
           collapsible 
+          emphasized
           iconLeft="city" 
           iconRight={["plus", "minus"]}
           link="#" 

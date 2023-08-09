@@ -11,6 +11,8 @@ import Collapsible from '../pb_collapsible/_collapsible'
 type NavItemProps = {
   active?: boolean,
   aria?: { [key: string]: string },
+  boldText?: boolean,
+  emphasized?: boolean,
   children?: React.ReactNode[] | React.ReactNode,
   className?: string,
   collapsible?: boolean,
@@ -26,6 +28,7 @@ type NavItemProps = {
   onClick?: React.MouseEventHandler<HTMLElement>,
   target?: '_blank' | '_self' | '_parent' | '_top',
   text: string,
+  tierIndicator?: boolean,
   toggleCollapsed?: any
 } & GlobalProps
 
@@ -33,6 +36,8 @@ const NavItem = (props: NavItemProps) => {
   const {
     active = false,
     aria = {},
+    boldText,
+    emphasized,
     children,
     className,
     collapsible,
@@ -48,14 +53,21 @@ const NavItem = (props: NavItemProps) => {
     onClick = () => { },
     target = '_self',
     text = '',
+    tierIndicator,
     toggleCollapsed
   } = props
 
   const Tag = link ? 'a' : 'div'
   const activeClass = active === true ? 'active' : ''
+  const tierIndicatorClass = collapsible && tierIndicator ? 'tier_indicator' : ''
+  const boldTextClass = collapsible && boldText ? 'bold_text' : ''
+  const emphasizedClass = collapsible && emphasized ? 'emphasized' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), collapsible ? buildCss('pb_collapsible_nav_item', activeClass) : '', globalProps(props), className)
+  const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), 
+                  collapsible ? buildCss('pb_collapsible_nav_item', activeClass, tierIndicatorClass, boldTextClass, emphasizedClass) : '', 
+                  globalProps(props), 
+                  className)
 
 
   const handleIconClick = (e:any) => {
