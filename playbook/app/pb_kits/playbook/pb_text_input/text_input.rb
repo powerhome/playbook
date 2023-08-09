@@ -60,7 +60,7 @@ module Playbook
           required: required,
           type: type,
           value: value,
-        }
+        }.merge(input_options)
       end
 
       def validation_message
