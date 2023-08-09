@@ -43,8 +43,8 @@ class PagesController < ApplicationController
   end
 
   def home
-    # @changelog = Playbook::Engine.root.join("CHANGELOG.md").read
-    # @posts = changelog_to_object(@changelog)
+    @changelog = Playbook::Engine.root.join("CHANGELOG.md").read
+    @posts = changelog_to_object(@changelog)
   end
 
   def kits
