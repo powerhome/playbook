@@ -81,4 +81,4 @@ const CollapsibleNav = (props) => {
   );
 };
 
-export default CollapsibleNav;
+export default CollapsibleNav
