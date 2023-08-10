@@ -31,6 +31,7 @@ const CollapsibleNavCustom = (props) => {
             <NavItem
                 collapsible
                 collapsibleClick={() => handleMainClick(index)}
+                emphasized
                 iconLeft="chevron-down"
                 iconRightClick={() => handleIconRightClick(index)}
                 id={`collapsible-nav-item-${index + 1}`}
