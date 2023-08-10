@@ -18,6 +18,7 @@ type NavItemProps = {
   collapsible?: boolean,
   collapsibleClick?: () => void,
   data?: object,
+  dark?: boolean,
   iconLeft?: string,
   iconRight?: string | string[],
   iconRightClick?: () => void,
@@ -43,6 +44,7 @@ const NavItem = (props: NavItemProps) => {
     collapsible,
     collapsibleClick,
     data = {},
+    dark = false,
     iconLeft,
     iconRight,
     iconRightClick,
@@ -93,7 +95,7 @@ const NavItem = (props: NavItemProps) => {
             onIconClick={iconRightClick}
             onClick={collapsibleClick}
           >
-          <Collapsible.Main>
+          <Collapsible.Main dark={dark}>
           <Tag
           className="pb_nav_list_item_link_collapsible"
           href={link}

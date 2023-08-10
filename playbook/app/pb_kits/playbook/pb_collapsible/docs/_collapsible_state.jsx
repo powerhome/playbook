@@ -1,7 +1,7 @@
 import React from 'react'
 import { Collapsible, useCollapsible, Button } from '../..'
 
-const CollapsibleState = () => {
+const CollapsibleState = (props) => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
 
   return (
@@ -19,7 +19,9 @@ const CollapsibleState = () => {
         icon={["plus", "minus"]}
         padding="none"
     >
-      <Collapsible.Main padding="sm">
+      <Collapsible.Main padding="sm" 
+          {...props}
+      >
           <div>{"Main Section"}</div>
       </Collapsible.Main>
       <Collapsible.Content>
@@ -35,7 +37,9 @@ const CollapsibleState = () => {
         icon={["plus", "minus"]}
         padding="none"
     >
-      <Collapsible.Main padding="sm">
+      <Collapsible.Main padding="sm" 
+          {...props}
+      >
           <div>{"Main Section"}</div>
       </Collapsible.Main>
       <Collapsible.Content>
@@ -51,7 +55,9 @@ const CollapsibleState = () => {
         icon={["plus", "minus"]}
         padding="none"
     >
-        <Collapsible.Main padding="sm">
+        <Collapsible.Main padding="sm" 
+            {...props}
+        >
           <div>{"Main Section"}</div>
         </Collapsible.Main>
         <Collapsible.Content>

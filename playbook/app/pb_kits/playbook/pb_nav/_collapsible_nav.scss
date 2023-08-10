@@ -104,5 +104,23 @@
         background-color: mix($primary, $card_light, 40%);
       }
     }
+
+    &.dark {
+      .pb_nav_list_item_text_collapsible, .pb_nav_list_item_text {
+        color: $white !important;
+      }
+      .pb_nav_list_kit_item:hover {
+        background-color: #FFFFFF33;
+        color: $white;
+      }
+
+      .pb_collapsible_main_kit:hover {
+        background-color: #FFFFFF33;
+        .pb_nav_list_item_text_collapsible,
+        svg {
+          color: $white !important;
+        }
+      }
+    }
   }
 }

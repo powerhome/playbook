@@ -2,10 +2,11 @@
   aria: object.aria,
   class: object.classname,
   data: object.data,
+  dark: object.dark,
   id: object.id) do %>
   <% if object.collapsible %>
     <%= pb_rails("collapsible", props: { name: "collapsible-nav-example" }) do %>
-      <%= pb_rails("collapsible/collapsible_main", props: { name: "default-collapsible-nav", icon: object.collapsible_icons, size: "xs" }) do %>
+      <%= pb_rails("collapsible/collapsible_main", props: { name: "default-collapsible-nav", icon: object.collapsible_icons, size: "xs", dark: object.dark }) do %>
         <%= content_tag(object.tag,
         object.link ? object.link_options : object.options) do %>
           <% if object.image_url %>

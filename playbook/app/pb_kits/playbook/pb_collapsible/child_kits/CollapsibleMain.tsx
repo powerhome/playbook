@@ -33,6 +33,7 @@ type CollapsibleMainProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
   cursor?: string,
+  dark?: boolean,
   onClick?: ()=> void
 }
 type IconColors =  "default" | "light" | "lighter" | "link" | "error" | "success"

@@ -1,14 +1,14 @@
 import React from 'react'
 import { Collapsible } from '../..'
 
-const CollapsibleIcons = () => {
+const CollapsibleIcons = (props) => {
 
   return (
   <>
   <Collapsible
       icon={['plus','minus']}
   >
-    <Collapsible.Main>
+    <Collapsible.Main {...props}>
       <div>{'Main Section'}</div>
     </Collapsible.Main>
     <Collapsible.Content>

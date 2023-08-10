@@ -20,6 +20,12 @@
   .icon_wrapper:hover {
       color: $primary
   }
+
+  .dark {
+    .pb_icon_kit {
+      color: $white;
+    }
+  }
 }
 
 [class^=pb_collapsible_main_kit] {
