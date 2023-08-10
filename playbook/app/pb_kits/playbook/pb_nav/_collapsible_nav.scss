@@ -6,14 +6,13 @@
 
 [class^="pb_nav_list"] {
   [class*="pb_collapsible_nav_item"] {
-
     @mixin tier_indicator_class {
       .pb_collapsible_content_kit {
         margin-left: $space_md - 2 !important;
         border-left: 2px solid $border_light;
       }
     }
-    
+
     @mixin bold_text_class {
       .pb_collapsible_main_kit {
         .pb_nav_list_item_text_collapsible {
@@ -94,8 +93,8 @@
 
     .icon_wrapper {
       border-radius: $border_radius_rounded;
-      width: 19px;
-      height: 19px;
+      width: $space_sm + 3;
+      height: $space_sm + 3;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -106,19 +105,46 @@
     }
 
     &.dark {
-      .pb_nav_list_item_text_collapsible, .pb_nav_list_item_text {
+      &[class*="pb_nav_list_kit_item"] [class*="_link"]:hover {
+        .pb_nav_list_item_text {
+          color: $white !important;
+        }
+      }
+
+      .pb_nav_list_item_text_collapsible {
         color: $white !important;
       }
+      .pb_nav_list_item_text {
+        color: $text_dk_light;
+      }
       .pb_nav_list_kit_item:hover {
-        background-color: #FFFFFF33;
+        background-color: #ffffff33;
         color: $white;
+      }
+      .pb_icon_kit {
+        color: $text_dk_light;
       }
 
       .pb_collapsible_main_kit:hover {
-        background-color: #FFFFFF33;
+        background-color: mix($white, $card_dark, 20%);
         .pb_nav_list_item_text_collapsible,
         svg {
           color: $white !important;
+        }
+      }
+      .icon_wrapper:hover {
+        background-color: mix($white, $card_dark, 40%);
+      }
+      &[class*="_active"] {
+        .icon_wrapper:hover {
+          background-color: mix($primary, $card_light, 40%);
+        }
+      }
+
+      &[class*="pb_collapsible_nav_item"][class*="_emphasized"],
+      &[class*="pb_collapsible_nav_item"][class*="_tier_indicator"] {
+        .pb_collapsible_content_kit {
+          border-color: $border_dark;
         }
       }
     }
