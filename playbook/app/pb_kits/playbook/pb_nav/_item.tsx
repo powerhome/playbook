@@ -25,7 +25,7 @@ type NavItemProps = {
   id?: string,
   imageUrl?: string,
   link?: string,
-  onClick?: () => {},
+  onClick?: () => void,
   target?: '_blank' | '_self' | '_parent' | '_top',
   text: string,
   tierIndicator?: boolean,
