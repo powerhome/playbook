@@ -137,6 +137,7 @@ module ApplicationHelper
     md_html = render_markdown(changelog)
     document = Nokogiri::HTML5(md_html)
     posts = []
+
     # Loop Through Each Post
     document.search("h1").each_with_index do |title, i|
       index_element = i + 1
@@ -146,18 +147,32 @@ module ApplicationHelper
       set_b = "#{end_element}/preceding-sibling::*"
       my_content = document.xpath("#{set_a}[ count(.|#{set_b}) = count(#{set_b}) ]
         | #{start_element} | #{end_element}")
-      image = my_content.search("img").map { |img| img["src"] }&.first
-      next if image.nil?
 
-      posts << {
-        title: title.text,
-        description: my_content.css("p ~ p").map(&:text)&.first,
-        date: my_content.search("h5").map(&:text)&.first,
+      # Extract attributes with defaults
+      image = my_content.search("img").map { |img| img["src"] }&.first
+      title_text = title.text
+
+      # Find the first non-empty paragraph <p> tag after the title or the image
+      description = my_content.xpath("#{start_element}/following-sibling::p[string-length(normalize-space(text())) > 0][1]")&.text || ""
+
+      date = my_content.search("h5").map(&:text)&.first
+      link = title.xpath("a[1]")[0]&.[]("href")&.gsub!("#", "")
+      content = my_content.search("p").to_s
+
+      # Create a hash with extracted attributes
+      post_hash = {
+        title: title_text,
+        description: description,
+        date: date,
         image: image,
-        link: title.xpath("a[1]")[0]["href"]&.gsub!("#", ""),
-        content: my_content.search("p").to_s,
+        link: link,
+        content: content,
       }
+
+      # Create the post object with OpenStruct
+      posts << OpenStruct.new(post_hash)
     end
+
     # Return Posts
     posts
   end
