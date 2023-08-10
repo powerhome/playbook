@@ -16,12 +16,6 @@ const CollapsibleNavCustom = (props) => {
     })
   }
 
-
-  const handleIconRightClick = (index) => {
-    const [isCollapsed, setCollapsed] = collapsibles[index]
-    setCollapsed(!isCollapsed)
-  }
-
   return (
     <>
       <Nav variant='subtle'>
@@ -33,7 +27,6 @@ const CollapsibleNavCustom = (props) => {
                 collapsibleClick={() => handleMainClick(index)}
                 emphasized
                 iconLeft="chevron-down"
-                iconRightClick={() => handleIconRightClick(index)}
                 id={`collapsible-nav-item-${index + 1}`}
                 key={index}
                 link="#"

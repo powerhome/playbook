@@ -21,8 +21,8 @@ type NavItemProps = {
   dark?: boolean,
   iconLeft?: string,
   iconRight?: string | string[],
-  iconRightClick?: () => void,
-  iconLeftClick?: () => void,
+  onIconRightClick?: () => void,
+  onIconLeftClick?: () => void,
   id?: string,
   imageUrl?: string,
   link?: string,
@@ -47,8 +47,8 @@ const NavItem = (props: NavItemProps) => {
     dark = false,
     iconLeft,
     iconRight,
-    iconRightClick,
-    iconLeftClick,
+    onIconRightClick,
+    onIconLeftClick,
     id,
     imageUrl,
     link,
@@ -73,9 +73,9 @@ const NavItem = (props: NavItemProps) => {
 
 
   const handleIconClick = (e:any) => {
-    if (iconLeftClick) {
+    if (onIconLeftClick) {
     e.stopPropagation();
-    iconLeftClick()
+    onIconLeftClick()
     }
   }
 
@@ -92,7 +92,7 @@ const NavItem = (props: NavItemProps) => {
             iconSize="xs" 
             id={id}
             collapsed={toggleCollapsed}
-            onIconClick={iconRightClick}
+            onIconClick={onIconRightClick}
             onClick={collapsibleClick}
           >
           <Collapsible.Main dark={dark}>
