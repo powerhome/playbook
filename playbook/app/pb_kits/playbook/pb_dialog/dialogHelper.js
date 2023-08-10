@@ -21,13 +21,17 @@ const dialogHelper = () => {
 
   // Close dialog box on outside click
   dialogs.forEach((dialogElement) => {
-    dialogElement.addEventListener("click", (event) => {
+    dialogElement.addEventListener("mousedown", (event) => {
       const dialogParentDataset = dialogElement.parentElement.dataset
       if (dialogParentDataset.overlayClick === "overlay_close") return
 
-      const clickedOutsideDialogBox = event.target.classList.contains("pb_dialog_rails")
+      const dialogModal = event.target.getBoundingClientRect()
+      const clickedOutsideDialogModal = event.clientX < dialogModal.left ||
+                                        event.clientX > dialogModal.right ||
+                                        event.clientY < dialogModal.top ||
+                                        event.clientY > dialogModal.bottom
 
-      if (clickedOutsideDialogBox) {
+      if (clickedOutsideDialogModal) {
         dialogElement.close()
         event.stopPropagation()
       }

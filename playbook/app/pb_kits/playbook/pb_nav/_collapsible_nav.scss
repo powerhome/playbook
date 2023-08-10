@@ -1,6 +1,27 @@
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/border_radius";
+
 [class^="pb_nav_list"] {
+  .pb_collapsible_nav_item {
   .pb_collapsible_main_kit,
-  .pb_collapsible_content_kit {
+  .pb_collapsible_content_kit,
+  .pb_collapsible_kit {
     padding: 0 !important;
   }
+
+  .icon_wrapper {
+    border-radius: $border_radius_rounded;
+    width: 19px;
+    height: 19px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: $space_xs;
+    &:hover {
+      background-color: rgba($primary_action, $opacity_3);
+
+    }
+  }
+}
 }

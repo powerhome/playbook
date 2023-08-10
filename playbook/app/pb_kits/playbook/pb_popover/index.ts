@@ -49,13 +49,16 @@ export default class PbPopover extends PbEnhancedElement {
   checkCloseTooltip() {
     document.querySelector('body').addEventListener('click', ({ target } ) => {
       const isTooltipElement = (target as HTMLElement).closest(`#${this.tooltipId}`) !== null
+      const isTriggerElement = (target as HTMLElement).closest(`#${this.triggerElementId}`) !== null
 
       switch (this.closeOnClick) {
       case 'any':
-        this.hideTooltip()
+        if (isTooltipElement || !isTooltipElement && !isTriggerElement) {
+          this.hideTooltip()
+        }
         break
       case 'outside':
-        if (!isTooltipElement) {
+        if (!isTooltipElement && !isTriggerElement) {
           this.hideTooltip()
         }
         break
