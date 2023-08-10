@@ -91,6 +91,14 @@ type MaxWidth = {
   maxWidth?: Sizes,
 }
 
+type MinWidth = {
+  minWidth?: Sizes | number,
+}
+
+type MinHeight = {
+  minHeight?: Sizes | number,
+}
+
 type NumberSpacing = {
   numberSpacing?: "tabular",
 }
@@ -130,7 +138,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
-  Position & Shadow & ZIndex & { hover?: string };
+  Position & Shadow & MinHeight & MinWidth & ZIndex & { hover?: string };
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -376,6 +384,20 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     let css = ''
     css += position && position !== 'static' ? `position_${position}` : ''
     return css
+  },
+  minWidthProps: ({ minWidth }: MinWidth) => {
+    if (typeof minWidth === 'object') {
+      return getResponsivePropClasses(minWidth, 'width')
+    } else {
+      return minWidth ? `width_${minWidth} ` : ''
+    }
+  },
+  minHeightProps: ({ minHeight }: MinHeight) => {
+    if (typeof minHeight === 'object') {
+      return getResponsivePropClasses(minHeight, 'width')
+    } else {
+      return minHeight ? `width_${minHeight} ` : ''
+    }
   },
 }
 

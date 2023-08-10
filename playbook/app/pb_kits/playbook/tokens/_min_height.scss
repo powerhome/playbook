@@ -1,0 +1,20 @@
+$min_height_xs:      360px !default;
+$min_height_0:       0 !default;
+$min_height_none:    none !default;
+$min_height_sm:      540px !default;
+$min_height_md:      720px !default;
+$min_height_lg:      960px !default;
+$min_height_xl:      1140px !default;
+$min_height_xxl:     1320px !default;
+$min_height_100:     100% !default;
+$min_height_values:(
+  xs:     $min_height_xs,
+  0:      $min_height_0,
+  none:   $min_height_none,
+  sm:     $min_height_sm,
+  md:     $min_height_md,
+  lg:     $min_height_lg,
+  xl:     $min_height_xl,
+  xxl:    $min_height_xxl,
+  100:    $min_height_100
+);

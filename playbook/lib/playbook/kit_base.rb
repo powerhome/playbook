@@ -22,6 +22,8 @@ require "playbook/order"
 require "playbook/position"
 require "playbook/hover"
 require "playbook/border_radius"
+require "playbook/min_width"
+require "playbook/min_height"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -49,6 +51,8 @@ module Playbook
     include Playbook::Position
     include Playbook::Hover
     include Playbook::BorderRadius
+    include Playbook::MinWidth
+    include Playbook::MinHeight
 
     prop :id
     prop :data, type: Playbook::Props::Hash, default: {}

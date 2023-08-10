@@ -1,0 +1,20 @@
+$min_width_xs:      360px !default;
+$min_width_0:       0 !default;
+$min_width_none:    none !default;
+$min_width_sm:      540px !default;
+$min_width_md:      720px !default;
+$min_width_lg:      960px !default;
+$min_width_xl:      1140px !default;
+$min_width_xxl:     1320px !default;
+$min_width_100:     100% !default;
+$min_width_values:(
+  xs:     $min_width_xs,
+  0:      $min_width_0,
+  none:   $min_width_none,
+  sm:     $min_width_sm,
+  md:     $min_width_md,
+  lg:     $min_width_lg,
+  xl:     $min_width_xl,
+  xxl:    $min_width_xxl,
+  100:    $min_width_100
+);
