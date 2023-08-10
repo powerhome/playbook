@@ -3,7 +3,7 @@
 
 ![12-37-0](https://github.com/powerhome/playbook/assets/73710701/85d8aa24-c1db-4b2f-b1c3-5c64d039baf8)
 
-Get better control over your forms with our improved Text Inputs! Pass any HTML input option to the input_options prop and have it effortlessly get added as an attribute to the input element!
+Get better control over your forms with our new input_options prop on our Text Input kit! Set any HTML input option as a prop and have it effortlessly get passed down to the styled input.
 
 [12.37.0](https://github.com/powerhome/playbook/tree/12.37.0) full list of changes:
 
