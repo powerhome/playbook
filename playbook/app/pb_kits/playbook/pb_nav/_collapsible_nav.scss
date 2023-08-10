@@ -13,7 +13,7 @@
       }
     }
 
-    @mixin bold_text_class {
+    @mixin bold_class {
       .pb_collapsible_main_kit {
         .pb_nav_list_item_text_collapsible {
           @include pb_title_4;
@@ -83,12 +83,12 @@
     }
 
     &[class*="_bold_text"] {
-      @include bold_text_class;
+      @include bold_class;
     }
 
     &[class*="_emphasized"] {
       @include tier_indicator_class;
-      @include bold_text_class;
+      @include bold_class;
     }
 
     .icon_wrapper {

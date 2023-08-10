@@ -23,15 +23,15 @@ const CollapsibleNavCustom = (props) => {
           const [collapsed] = collapsibles[index]
           return (
             <NavItem
+                collapsed={collapsed}
                 collapsible
-                collapsibleClick={() => handleMainClick(index)}
                 emphasized
                 iconLeft="chevron-down"
                 id={`collapsible-nav-item-${index + 1}`}
                 key={index}
                 link="#"
+                onClick={() => handleMainClick(index)}
                 text={text}
-                toggleCollapsed={collapsed}
                 {...props}
             >
               <NavItem link="#" 

@@ -4,7 +4,7 @@ module Playbook
   module PbNav
     class Item < Playbook::KitBase
       prop :active, type: Playbook::Props::Boolean, default: false
-      prop :bold_text, type: Playbook::Props::Boolean, default: false
+      prop :bold, type: Playbook::Props::Boolean, default: false
       prop :collapsible, type: Playbook::Props::Boolean, default: false
       prop :emphasized, type: Playbook::Props::Boolean, default: false
       prop :link
@@ -18,7 +18,7 @@ module Playbook
                     default: "_self"
       def classname
         if collapsible
-          "pb_collapsible_nav_item #{generate_classname('pb_nav_list_kit_item', active_class, bold_text_class, tier_indicator_class, emphasized_class)}"
+          "pb_collapsible_nav_item #{generate_classname('pb_nav_list_kit_item', active_class, bold_class, tier_indicator_class, emphasized_class)}"
         else
           generate_classname("pb_nav_list_kit_item", active_class)
         end
@@ -51,8 +51,8 @@ module Playbook
         active ? "active" : nil
       end
 
-      def bold_text_class
-        bold_text ? "bold_text" : nil
+      def bold_class
+        bold ? "bold" : nil
       end
 
       def tier_indicator_class

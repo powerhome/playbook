@@ -11,12 +11,11 @@ import Collapsible from '../pb_collapsible/_collapsible'
 type NavItemProps = {
   active?: boolean,
   aria?: { [key: string]: string },
-  boldText?: boolean,
+  bold?: boolean,
   emphasized?: boolean,
   children?: React.ReactNode[] | React.ReactNode,
   className?: string,
   collapsible?: boolean,
-  collapsibleClick?: () => void,
   data?: object,
   dark?: boolean,
   iconLeft?: string,
@@ -26,23 +25,22 @@ type NavItemProps = {
   id?: string,
   imageUrl?: string,
   link?: string,
-  onClick?: React.MouseEventHandler<HTMLElement>,
+  onClick?: () => {},
   target?: '_blank' | '_self' | '_parent' | '_top',
   text: string,
   tierIndicator?: boolean,
-  toggleCollapsed?: any
+  collapsed?: boolean
 } & GlobalProps
 
 const NavItem = (props: NavItemProps) => {
   const {
     active = false,
     aria = {},
-    boldText,
+    bold,
     emphasized,
     children,
     className,
     collapsible,
-    collapsibleClick,
     data = {},
     dark = false,
     iconLeft,
@@ -56,18 +54,18 @@ const NavItem = (props: NavItemProps) => {
     target = '_self',
     text = '',
     tierIndicator,
-    toggleCollapsed
+    collapsed
   } = props
 
   const Tag = link ? 'a' : 'div'
   const activeClass = active === true ? 'active' : ''
   const tierIndicatorClass = collapsible && tierIndicator ? 'tier_indicator' : ''
-  const boldTextClass = collapsible && boldText ? 'bold_text' : ''
+  const boldClass = collapsible && bold ? 'bold' : ''
   const emphasizedClass = collapsible && emphasized ? 'emphasized' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), 
-                  collapsible ? buildCss('pb_collapsible_nav_item', activeClass, tierIndicatorClass, boldTextClass, emphasizedClass) : '', 
+                  collapsible ? buildCss('pb_collapsible_nav_item', activeClass, tierIndicatorClass, boldClass, emphasizedClass) : '', 
                   globalProps(props), 
                   className)
 
@@ -91,15 +89,14 @@ const NavItem = (props: NavItemProps) => {
           <Collapsible icon={iconRight ? iconRight : ['plus','minus']} 
             iconSize="xs" 
             id={id}
-            collapsed={toggleCollapsed}
+            collapsed={collapsed}
             onIconClick={onIconRightClick}
-            onClick={collapsibleClick}
+            onClick={onClick}
           >
           <Collapsible.Main dark={dark}>
           <Tag
           className="pb_nav_list_item_link_collapsible"
           href={link}
-          onClick={onClick}
           target={target}
         >
           {imageUrl &&
