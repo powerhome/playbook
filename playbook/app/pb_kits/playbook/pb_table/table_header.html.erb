@@ -1,0 +1,8 @@
+<%= content_tag(:th,
+    colspan: object.colspan,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id) do %>
+  <%= content.presence %>
+<% end %>

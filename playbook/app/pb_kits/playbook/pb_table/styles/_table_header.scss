@@ -1,0 +1,23 @@
+
+$text_align_values: (
+  start: start,
+  end: end,
+  left: left,
+  right: right,
+  center: center,
+  justify: justify,
+  justify-all: justify-all,
+  match-parent: match-parent,
+);
+
+[class^=pb_table] {
+  thead {
+    [class^=pb_table_header_kit] {
+      @each $align_name, $align_value in $text_align_values {
+        &[class*=_align_#{$align_name}] {
+          text-align: $align_value;
+        }
+      }
+    }
+  }
+}
