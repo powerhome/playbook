@@ -85,7 +85,7 @@
             <%= pb_rails("flex", props: { orientation: "column" }) do %>
               <%= pb_rails("caption", props: { text: post.date, padding_bottom: "xs" }) %>
               <%= pb_rails("title", props: { text: post.title, tag: "h4", size: 4, padding_bottom: "sm" }) %>
-              <%= pb_rails("body", props: { text: post.description, color: "light" }) %>
+              <%= pb_rails("body", props: { classname: "whats-new-description", text: post.description, color: "light" }) %>
             <% end %>
   
             <%= pb_rails("flex", props: { align: "center", display: { lg: "none", md: "none", sm: "none", xs: "none" } }) do %>

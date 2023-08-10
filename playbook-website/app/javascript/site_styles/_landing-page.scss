@@ -42,6 +42,13 @@
     position: absolute;
     left: 505px;
   }
+  .whats-new-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+ }
   @include break_at(1342px){
     .kit-example {
       margin-top: $space_xl * 2;
