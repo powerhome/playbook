@@ -12,7 +12,8 @@
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
     "watch": "webpack --watch --mode=development",
-    "release": "webpack --mode=production"
+    "release": "webpack --mode=production",
+    "webpack:analyze": "npx webpack --stats=detailed --json > stats.json && npx webpack-bundle-analyzer ./stats.json"
   },
   "repository": {
     "type": "git",
