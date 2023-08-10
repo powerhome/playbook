@@ -6,7 +6,7 @@
 
 [class^="pb_nav_list"] {
   [class*="pb_collapsible_nav_item"] {
-    @mixin tier_indicator_class {
+    @mixin collapsible_trail_class {
       .pb_collapsible_content_kit {
         margin-left: $space_md - 2 !important;
         border-left: 2px solid $border_light;
@@ -78,8 +78,8 @@
       padding: 0 !important;
     }
 
-    &[class*="_tier_indicator"] {
-      @include tier_indicator_class;
+    &[class*="_collapsible_trail"] {
+      @include collapsible_trail_class;
     }
 
     &[class*="_bold_text"] {
@@ -87,7 +87,7 @@
     }
 
     &[class*="_emphasized"] {
-      @include tier_indicator_class;
+      @include collapsible_trail_class;
       @include bold_class;
     }
 
@@ -142,7 +142,7 @@
       }
 
       &[class*="pb_collapsible_nav_item"][class*="_emphasized"],
-      &[class*="pb_collapsible_nav_item"][class*="_tier_indicator"] {
+      &[class*="pb_collapsible_nav_item"][class*="_collapsible_trail"] {
         .pb_collapsible_content_kit {
           border-color: $border_dark;
         }

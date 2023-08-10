@@ -28,7 +28,7 @@ type NavItemProps = {
   onClick?: () => void,
   target?: '_blank' | '_self' | '_parent' | '_top',
   text: string,
-  tierIndicator?: boolean,
+  collapsibleTrail?: boolean,
   collapsed?: boolean
 } & GlobalProps
 
@@ -53,19 +53,19 @@ const NavItem = (props: NavItemProps) => {
     onClick = () => { },
     target = '_self',
     text = '',
-    tierIndicator,
+    collapsibleTrail,
     collapsed
   } = props
 
   const Tag = link ? 'a' : 'div'
   const activeClass = active === true ? 'active' : ''
-  const tierIndicatorClass = collapsible && tierIndicator ? 'tier_indicator' : ''
+  const collapsibleTrailClass = collapsible && collapsibleTrail ? 'collapsible_trail' : ''
   const boldClass = collapsible && bold ? 'bold' : ''
   const emphasizedClass = collapsible && emphasized ? 'emphasized' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), 
-                  collapsible ? buildCss('pb_collapsible_nav_item', activeClass, tierIndicatorClass, boldClass, emphasizedClass) : '', 
+                  collapsible ? buildCss('pb_collapsible_nav_item', activeClass, collapsibleTrailClass, boldClass, emphasizedClass) : '', 
                   globalProps(props), 
                   className)
 

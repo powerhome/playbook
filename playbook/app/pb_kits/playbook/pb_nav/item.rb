@@ -9,7 +9,7 @@ module Playbook
       prop :emphasized, type: Playbook::Props::Boolean, default: false
       prop :link
       prop :text
-      prop :tier_indicator, type: Playbook::Props::Boolean, default: false
+      prop :collapsible_trail, type: Playbook::Props::Boolean, default: false
       prop :icon_left
       prop :icon_right
       prop :image_url
@@ -18,7 +18,7 @@ module Playbook
                     default: "_self"
       def classname
         if collapsible
-          "pb_collapsible_nav_item #{generate_classname('pb_nav_list_kit_item', active_class, bold_class, tier_indicator_class, emphasized_class)}"
+          "pb_collapsible_nav_item #{generate_classname('pb_nav_list_kit_item', active_class, bold_class, collapsible_trail_class, emphasized_class)}"
         else
           generate_classname("pb_nav_list_kit_item", active_class)
         end
@@ -55,8 +55,8 @@ module Playbook
         bold ? "bold" : nil
       end
 
-      def tier_indicator_class
-        tier_indicator ? "tier_indicator" : nil
+      def collapsible_trail_class
+        collapsible_trail ? "collapsible_trail" : nil
       end
 
       def emphasized_class
