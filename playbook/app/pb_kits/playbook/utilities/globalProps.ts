@@ -389,7 +389,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     if (typeof textAlign === 'object') {
       return getResponsivePropClasses(textAlign, 'text_align')
     } else {
-      return textAlign ? `text_align_${textAlign}` : ''
+      return textAlign ? `text_align_${textAlign} ` : ''
     }
   },
   widthProps: ({ width }: Width) => {

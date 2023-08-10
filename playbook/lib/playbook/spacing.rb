@@ -57,6 +57,10 @@ module Playbook
       %w[xs sm md lg xl]
     end
 
+    def break_method_values
+      %w[on at]
+    end
+
     def spacing_props
       selected_props = spacing_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
@@ -66,9 +70,12 @@ module Playbook
       selected_props.each do |prop|
         spacing_value = send(prop)
         prefix = spacing_options[prop]
+
         if responsive
+          break_value = spacing_value.delete(:break) || break_method_values.first
+          default_value = spacing_value.delete(:default) || "md"
           spacing_value.each do |key, value|
-            css += "#{prefix}_#{key}_#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
+            css += "#{prefix}_#{key}_#{value}_#{break_value}_#{default_value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
           end
         elsif spacing_values.include?(spacing_value)
           css += "#{prefix}_#{spacing_value} "
