@@ -1,0 +1,1 @@
+The `emphasized` prop can be passed to NavItem for a more emphasized look for the collapsible Nav.
