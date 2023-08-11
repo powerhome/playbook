@@ -77,22 +77,23 @@
 
   <% @posts.take(2).each.with_index do |post, index| %>
     <%= pb_rails("flex", props: { justify: "center", padding_top: "md", padding_bottom: index == 1 ? "lg" : nil }) do %>
-        <a href="<%= changelog_path(anchor: @posts.first.link) %>">
-          <%= pb_rails("card", props: { border_radius: "lg", max_width: "xl", width: "100", margin_x: "md", hover: { shadow: "deepest" } }) do %>
-            <%= pb_rails("flex", props: { justify: "around", gap: "md", align_items: "stretch", flex_direction: { xs: "column" } }) do %>
-              <%= pb_rails("background", props: { image_url: post.image.present? ? post.image : nil, border_radius: "md", padding: "xl" }) %>
+      <%= pb_rails("card", props: { border_radius: "lg", max_width: "xl", width: "100", margin_x: "md", padding: "none", hover: { shadow: "deepest" } }) do %>
+        <a href="<%= changelog_path(anchor: post.link) %>">
+          <%= pb_rails("flex", props: { justify: "around", gap: "md", align_items: "stretch", padding: "sm", flex_direction: { xs: "column" } }) do %>
+            <%= pb_rails("background", props: { image_url: post.image.present? ? post.image : nil, border_radius: "md", padding: "xl" }) %>
+  
+            <%= pb_rails("flex", props: { orientation: "column", width: "100" }) do %>
+              <%= pb_rails("caption", props: { text: post.date, padding_bottom: "xs" }) %>
+              <%= pb_rails("title", props: { text: post.title, tag: "h4", size: 4, padding_bottom: "sm" }) %>
+              <%= pb_rails("body", props: { classname: "whats-new-description", text: post.description, color: "light" }) %>
+            <% end %>
 
-              <%= pb_rails("flex", props: { orientation: "column", width: "100" }) do %>
-                <%= pb_rails("caption", props: { text: post.date, padding_bottom: "xs" }) %>
-                <%= pb_rails("title", props: { text: post.title, tag: "h4", size: 4, padding_bottom: "sm" }) %>
-                <%= pb_rails("body", props: { classname: "whats-new-description", text: post.description, color: "light" }) %>
-              <% end %>
-              <%= pb_rails("flex", props: { align: "center", display: { lg: "none", md: "none", sm: "none", xs: "none" } }) do %>
-                <%= pb_rails("button", props: { link: changelog_path(anchor: post.link), icon: "chevron-right", icon_right: true, text: "Read More", margin_right: "sm" }) %>
-              <% end %>
+            <%= pb_rails("flex", props: { align: "center", display: { lg: "none", md: "none", sm: "none", xs: "none" } }) do %>
+              <%= pb_rails("button", props: { icon: "chevron-right", icon_right: true, text: "Read More", margin_right: "sm" }) %>
             <% end %>
           <% end %>
         </a>
+      <% end %>
     <% end %>
   <% end %>
   
