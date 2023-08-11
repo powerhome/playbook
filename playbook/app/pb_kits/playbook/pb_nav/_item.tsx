@@ -11,13 +11,13 @@ import Collapsible from '../pb_collapsible/_collapsible'
 type NavItemProps = {
   active?: boolean,
   aria?: { [key: string]: string },
-  bold?: boolean,
-  emphasized?: boolean,
+  fontWeight?: "bold" | "regular",
   children?: React.ReactNode[] | React.ReactNode,
   className?: string,
   collapsible?: boolean,
   data?: object,
   dark?: boolean,
+  fontSize?: "normal" | "small",
   iconLeft?: string,
   iconRight?: string | string[],
   onIconRightClick?: () => void,
@@ -36,13 +36,13 @@ const NavItem = (props: NavItemProps) => {
   const {
     active = false,
     aria = {},
-    bold,
-    emphasized,
+    fontWeight = "regular",
     children,
     className,
     collapsible,
     data = {},
     dark = false,
+    fontSize = "normal",
     iconLeft,
     iconRight,
     onIconRightClick,
@@ -60,12 +60,14 @@ const NavItem = (props: NavItemProps) => {
   const Tag = link ? 'a' : 'div'
   const activeClass = active === true ? 'active' : ''
   const collapsibleTrailClass = collapsible && collapsibleTrail ? 'collapsible_trail' : ''
-  const boldClass = collapsible && bold ? 'bold' : ''
-  const emphasizedClass = collapsible && emphasized ? 'emphasized' : ''
+  const fontSizeClass = fontSize === 'small' ? "font_size_small" : "font_size_normal"
+  const fontWeightClass = fontWeight === 'bold' ? "font_bold" : "font_regular"
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), 
-                  collapsible ? buildCss('pb_collapsible_nav_item', activeClass, collapsibleTrailClass, boldClass, emphasizedClass) : '', 
+                  collapsible ? buildCss('pb_collapsible_nav_item', activeClass, collapsibleTrailClass) : '', 
+                  fontSizeClass,
+                  fontWeightClass,
                   globalProps(props), 
                   className)
 

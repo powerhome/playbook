@@ -4,9 +4,13 @@ module Playbook
   module PbNav
     class Item < Playbook::KitBase
       prop :active, type: Playbook::Props::Boolean, default: false
-      prop :bold, type: Playbook::Props::Boolean, default: false
+      prop :font_size, type: Playbook::Props::Enum,
+                       values: %w[normal small],
+                       default: "normal"
+      prop :font_weight, type: Playbook::Props::Enum,
+                         values: %w[bold regular],
+                         default: "regular"
       prop :collapsible, type: Playbook::Props::Boolean, default: false
-      prop :emphasized, type: Playbook::Props::Boolean, default: false
       prop :link
       prop :text
       prop :collapsible_trail, type: Playbook::Props::Boolean, default: false
@@ -18,9 +22,9 @@ module Playbook
                     default: "_self"
       def classname
         if collapsible
-          "pb_collapsible_nav_item #{generate_classname('pb_nav_list_kit_item', active_class, bold_class, collapsible_trail_class, emphasized_class)}"
+          "#{generate_classname('pb_nav_list_kit_item', active_class)} #{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class}"
         else
-          generate_classname("pb_nav_list_kit_item", active_class)
+          "#{generate_classname('pb_nav_list_kit_item', active_class)} #{font_size_class} #{font_weight_class}"
         end
       end
 
@@ -51,16 +55,16 @@ module Playbook
         active ? "active" : nil
       end
 
-      def bold_class
-        bold ? "bold" : nil
+      def font_weight_class
+        font_weight === "bold" ? "font_bold" : "font_regular"
       end
 
       def collapsible_trail_class
         collapsible_trail ? "collapsible_trail" : nil
       end
 
-      def emphasized_class
-        emphasized ? "emphasized" : nil
+      def font_size_class
+        font_size === "small" ? "font_size_small" : "font_size_normal"
       end
     end
   end

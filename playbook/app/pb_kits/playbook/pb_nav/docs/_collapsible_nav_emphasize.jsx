@@ -3,10 +3,12 @@ import { Nav, NavItem } from '../..'
 
 const CollapsibleNavEmphasize = (props) => {
   return (
-    <Nav variant="subtle">
+    <Nav variant="bold">
       <NavItem
           collapsible 
-          emphasized
+          collapsibleTrail
+          fontSize="small"
+          fontWeight="bold"
           iconLeft="city" 
           iconRight={["plus", "minus"]}
           link="#" 
@@ -31,7 +33,9 @@ const CollapsibleNavEmphasize = (props) => {
       </NavItem>
       <NavItem 
           collapsible 
-          emphasized
+          collapsibleTrail
+          fontSize="small"
+          fontWeight="bold"
           iconLeft="theater-masks"
           iconRight={["plus", "minus"]}
           link="#" 
@@ -56,7 +60,9 @@ const CollapsibleNavEmphasize = (props) => {
       </NavItem>
       <NavItem 
           collapsible 
-          emphasized
+          collapsibleTrail
+          fontSize="small"
+          fontWeight="bold"
           iconLeft="city" 
           iconRight={["plus", "minus"]}
           link="#" 

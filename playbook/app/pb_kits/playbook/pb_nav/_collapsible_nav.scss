@@ -3,25 +3,30 @@
 @import "../tokens/border_radius";
 @import "../tokens/titles";
 @import "../tokens/typography";
+@import "./mixins";
 
 [class^="pb_nav_list"] {
+
+  .font_size_small {
+    .pb_nav_list_item_text,
+    .pb_nav_list_item_text_collapsible {
+      font-size: $font_small !important;
+    }
+  }
+
+  .font_bold {
+    .pb_nav_list_item_text {
+      @include pb_title_4;
+    }
+    .pb_collapsible_main_kit {
+      .pb_nav_list_item_text_collapsible {
+        @include pb_title_4;
+        font-weight: $bolder !important;
+      }
+    }
+  }
+
   [class*="pb_collapsible_nav_item"] {
-    @mixin collapsible_trail_class {
-      .pb_collapsible_content_kit {
-        margin-left: $space_md - 2 !important;
-        border-left: 2px solid $border_light;
-      }
-    }
-
-    @mixin bold_class {
-      .pb_collapsible_main_kit {
-        .pb_nav_list_item_text_collapsible {
-          @include pb_title_4;
-          font-weight: $bolder !important;
-        }
-      }
-    }
-
     &[class*="_active"] {
       background-color: unset !important;
       .pb_nav_list_item_link {
@@ -63,6 +68,11 @@
       }
     }
 
+    .pb_collapsible_content_kit {
+      margin-left: $space_sm + 2;
+      border-left: 1px solid transparent;
+    }
+
     .pb_collapsible_main_kit:hover {
       border-radius: $border_rad_heavier;
       background-color: mix($primary, $card_light, 10%);
@@ -80,15 +90,6 @@
 
     &[class*="_collapsible_trail"] {
       @include collapsible_trail_class;
-    }
-
-    &[class*="_bold_text"] {
-      @include bold_class;
-    }
-
-    &[class*="_emphasized"] {
-      @include collapsible_trail_class;
-      @include bold_class;
     }
 
     .icon_wrapper {
@@ -141,7 +142,6 @@
         }
       }
 
-      &[class*="pb_collapsible_nav_item"][class*="_emphasized"],
       &[class*="pb_collapsible_nav_item"][class*="_collapsible_trail"] {
         .pb_collapsible_content_kit {
           border-color: $border_dark;
