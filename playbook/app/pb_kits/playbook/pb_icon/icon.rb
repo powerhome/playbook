@@ -91,8 +91,10 @@ module Playbook
       end
 
       def embedded_svg(icon_name)
-        file = File.read(Rails.root.join("app", "assets", "images", "#{icon_name}.svg"))
-        doc = Nokogiri::HTML::DocumentFragment.parse file
+        svg_path = Rails.application.config.respond_to?(:icon_path) ? Rails.application.config.icon_path : "app/assets/images"
+        file_path = File.read(Rails.root.join(svg_path, "#{icon_name}.svg"))
+
+        doc = Nokogiri::HTML::DocumentFragment.parse file_path
         svg = doc.at_css "svg"
 
         doc.to_html.html_safe
