@@ -10,3 +10,10 @@ examples:
   - badge_rounded: Rounded
   - badge_colors: Colors
   - badge_notification: Notification
+
+  swift:
+  - badge_default_swift: Rectangle
+  - badge_rounded_swift: Rounded
+  - badge_colors_swift: Colors
+  - badge_notification_swift: Notification
+  - badge_props_swift: ""

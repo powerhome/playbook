@@ -1,83 +1,63 @@
-import React from "react";
-
-import Nav from "../_nav";
-import NavItem from "../_item";
+import React from "react"
+import { Nav, NavItem, useCollapsible } from "../.."
 
 const CollapsibleNav = (props) => {
-  return (
-    <Nav variant="subtle">
-      <NavItem
-          collapsible 
-          iconLeft="city" 
-          link="#" 
-          text="Overview" 
-          {...props}
-      >
-        <NavItem
-            link="#" 
-            text="City"
-            {...props}
-        />
-        <NavItem
-            link="#"
-            text="People"
-            {...props}
-        />
-        <NavItem 
-            link="#" 
-            text="Business" 
-            {...props}
-        />
-      </NavItem>
-      <NavItem 
-          active 
-          collapsible 
-          iconLeft="theater-masks"
-          link="#" 
-          text="Albums" 
-          {...props}
-      >
-        <NavItem 
-            link="#" 
-            text="Entertainment" 
-            {...props}
-        />
-        <NavItem 
-            link="#" 
-            text="Food" 
-            {...props}
-        />
-        <NavItem 
-            link="#" 
-            text="Style" 
-            {...props}
-        />
-      </NavItem>
-      <NavItem 
-          collapsible 
-          iconLeft="city" 
-          link="#" 
-          text="Similar Artists" 
-          {...props}
-      >
-        <NavItem 
-            link="#" 
-            text="City"
-            {...props} 
-        />
-        <NavItem
-            link="#"
-            text="People"
-            {...props}
-        />
-        <NavItem 
-            link="#" 
-            text="Business" 
-            {...props}
-        />
-      </NavItem>
-    </Nav>
-  );
-};
+  const navItems = ["Overview", "Albums", "Similar Artists"]
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const collapsibles = navItems.map(() => useCollapsible(true))
 
-export default CollapsibleNav;
+  const handleMainClick = (index) => {
+    collapsibles.forEach(([, , setCollapsed], idx) => {
+      if (idx === index) {
+        setCollapsed(false)
+      } else {
+        setCollapsed(true)
+      }
+    })
+  }
+
+
+  const handleIconRightClick = (index) => {
+    const [isCollapsed, setCollapsed] = collapsibles[index]
+    setCollapsed(!isCollapsed)
+  }
+
+  return (
+    <>
+      <Nav variant='subtle'>
+        {navItems.map((text, index) => {
+          const [collapsed] = collapsibles[index]
+          return (
+            <NavItem
+                collapsible
+                collapsibleClick={() => handleMainClick(index)}
+                iconLeft="chevron-down"
+                iconRightClick={() => handleIconRightClick(index)}
+                id={`collapsible-nav-item-${index + 1}`}
+                key={index}
+                link="#"
+                text={text}
+                toggleCollapsed={collapsed}
+                {...props}
+            >
+              <NavItem link="#" 
+                  text="City" 
+                  {...props} 
+              />
+              <NavItem link="#" 
+                  text="People" 
+                  {...props} 
+              />
+              <NavItem link="#" 
+                  text="Business" 
+                  {...props} 
+              />
+            </NavItem>
+          );
+        })}
+      </Nav>
+    </>
+  )
+}
+
+export default CollapsibleNav

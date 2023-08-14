@@ -14,7 +14,11 @@ module Playbook
                     values: %w[_blank _self _parent _top],
                     default: "_self"
       def classname
-        generate_classname("pb_nav_list_kit_item", active_class)
+        if collapsible
+          "pb_collapsible_nav_item #{generate_classname('pb_nav_list_kit_item', active_class)}"
+        else
+          generate_classname("pb_nav_list_kit_item", active_class)
+        end
       end
 
       def tag

@@ -9,7 +9,7 @@
         <%= content.presence %>
       <% end %>
       <%= pb_rails("flex/flex_item") do %>
-        <div style="color: <%= object.icon_color %>">
+        <div style="color: <%= object.icon_color %>" class="icon_wrapper" >
         <% if object.icon.present? %>
           <%= pb_rails("icon", props: { icon: object.show_icon(object.icon)[0], id:"collapsible_open_icon", size: object.size }) %>
           <%= pb_rails("icon", props: { icon: object.show_icon(object.icon)[1], id:"collapsible_close_icon", size: object.size }) %>
