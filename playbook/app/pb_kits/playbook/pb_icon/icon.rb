@@ -79,31 +79,27 @@ module Playbook
         )
       end
 
-      def render_svg(path)
-        if File.extname(path) == ".svg"
-          doc = Nokogiri::XML(URI.open(path)) # rubocop:disable Security/Open
+      def embedded_svg(icon_name)
+        if File.extname(icon_name) == ".svg"
+          doc = Nokogiri::XML(URI.open(icon_name)) # rubocop:disable Security/Open
           svg = doc.at_css "svg"
           svg["class"] = "pb_custom_icon " + object.custom_icon_classname
           raw doc
         else
-          raise("Custom icon must be an svg. Please check your path and file type.")
-        end
-      end
+          svg_path = Rails.application.config.respond_to?(:icon_path) ? Rails.application.config.icon_path : "app/assets/images"
+          file_path = File.read(Rails.root.join(svg_path, "#{icon_name}.svg"))
 
-      def embedded_svg(icon_name)
-        svg_path = Rails.application.config.respond_to?(:icon_path) ? Rails.application.config.icon_path : "app/assets/images"
-        file_path = File.read(Rails.root.join(svg_path, "#{icon_name}.svg"))
+          doc = Nokogiri::HTML::DocumentFragment.parse file_path
+          svg = doc.at_css "svg"
 
-        doc = Nokogiri::HTML::DocumentFragment.parse file_path
-        svg = doc.at_css "svg"
+          doc.to_html.html_safe
 
-        doc.to_html.html_safe
-
-        size_factor = size.to_i
-        if size_factor > 1
-          pixel_size = size_factor * 16
-          svg["width"] = pixel_size.to_s
-          svg["height"] = pixel_size.to_s
+          size_factor = size.to_i
+          if size_factor > 1
+            pixel_size = size_factor * 16
+            svg["width"] = pixel_size.to_s
+            svg["height"] = pixel_size.to_s
+          end
         end
 
         raw doc
