@@ -16,3 +16,42 @@ $pb_title_colors: (
     }
   }
 }
+
+$pb_title_truncate: (
+  truncate_1: 1,
+  truncate_2: 2,
+  truncate_3: 3,
+  truncate_4: 4,
+  truncate_5: 5
+);
+
+@mixin title_truncate {
+  @each $name, $number in $pb_title_truncate {
+    
+    &[class*=_#{$name}] {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: $number;
+      -webkit-box-orient: vertical;
+      
+      
+      &.pb_title_kit_1_#{$name} {
+        clip-path: polygon(0 0, 0 calc(100% - 18px), 100% calc(100% - 18px), 100% 0);
+      }
+
+      &.pb_title_kit_2_#{$name} {
+        clip-path: polygon(0 0, 0 calc(100% - 17px), 100% calc(100% - 17px), 100% 0);
+      }
+
+      &.pb_title_kit_3_#{$name} {
+        clip-path: polygon(0 0, 0 calc(100% - 18px), 100% calc(100% - 18px), 100% 0);
+      }
+
+      &.pb_title_kit_4_#{$name} {
+        clip-path: polygon(0 0, 0 calc(100% - 18px), 100% calc(100% - 18px), 100% 0);
+      }
+      
+    }
+  }
+}

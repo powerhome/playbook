@@ -71,7 +71,7 @@
   <% end %>
   <%= pb_rails("flex", props: { orientation: "column", align: "center", padding_top: "lg" }) do %>
     <%= pb_rails("title", props: { color: "link", text: "NEWEST FROM PLAYBOOK", tag: "h4", size: 4, padding_bottom: "sm" }) %>
-    <%= pb_rails("title", props: { text: "Playbook is always shipping.", tag: "h2", size: 2, padding_bottom: "xs" }) %>
+    <%= pb_rails("title", props: { text: "Playbook is always shipping.", tag: "h2", size: 2, padding_bottom: "xs", truncate: "1" }) %>
     <%= pb_rails("caption", props: { size: "lg", text: "Move Fast. Follow Momentum.", padding_bottom: "sm" }) %>
   <% end %>
 
@@ -80,11 +80,11 @@
       <%= pb_rails("card", props: { border_radius: "lg", max_width: "xl", width: "100", margin_x: "md", padding: "none", hover: { shadow: "deepest" } }) do %>
         <a href="<%= changelog_path(anchor: post.link) %>">
           <%= pb_rails("flex", props: { justify: "around", gap: "md", align_items: "stretch", padding: "sm", flex_direction: { xs: "column" } }) do %>
-            <%= pb_rails("background", props: { image_url: post.image.present? ? post.image : nil, border_radius: "md", padding: "xl" }) %>
+            <%= pb_rails("background", props: { image_url: post.image.present? ? post.image : nil, border_radius: "md", padding: "xl", min_height: "4"}) %>
   
             <%= pb_rails("flex", props: { orientation: "column", width: "100" }) do %>
               <%= pb_rails("caption", props: { text: post.date, padding_bottom: "xs" }) %>
-              <%= pb_rails("title", props: { text: post.title, tag: "h4", size: 4, padding_bottom: "sm" }) %>
+              <%= pb_rails("title", props: { text: "Tagging Made Easy! Say Hello to Seamless  💬 👋", tag: "h2", size: 2, padding_bottom: "sm", truncate: "1" }) %>
               <%= pb_rails("body", props: { classname: "whats-new-description", text: post.description, color: "light" }) %>
             <% end %>
 
