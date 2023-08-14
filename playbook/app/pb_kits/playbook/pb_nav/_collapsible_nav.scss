@@ -34,7 +34,7 @@
         &:hover {
           background-color: rgba($primary, 0.03) !important;
           .pb_nav_list_item_text {
-          color: $primary !important;
+            color: $primary !important;
           }
         }
         .pb_nav_list_item_text {
@@ -45,6 +45,18 @@
   }
 
   [class*="pb_collapsible_nav_item"] {
+    .pb_nav_list_item_link_collapsible {
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    .pb_collapsible_main_kit {
+      &:focus-visible {
+        box-shadow: 0px 0px 0px 2px $primary_action;
+        border-radius: $border_rad_heavier;
+      }
+    }
     //active state for collapsible nav
     &[class*="_active"] {
       background-color: unset !important;
@@ -82,6 +94,13 @@
       }
     }
 
+    //Make sure link is entire width of navitem when in collapsible
+    .pb_collapsible_main_kit {
+      .pb_flex_item_kit:first-child {
+        width: 100%;
+      }
+    }
+
     &:hover {
       .pb_nav_list_item_link_collapsible {
         background-color: unset !important;
@@ -94,12 +113,17 @@
       border-left: 1px solid transparent;
     }
 
-    .pb_collapsible_main_kit:hover {
-      border-radius: $border_rad_heavier;
-      background-color: mix($primary, $card_light, 10%);
-      .pb_nav_list_item_text_collapsible,
-      svg {
-        color: $primary !important;
+    .pb_collapsible_main_kit {
+      transition-property: color, border-color, background-color;
+      transition-duration: 0.15s;
+      transition-timing-function: $bezier;
+      &:hover {
+        border-radius: $border_rad_heavier;
+        background-color: mix($primary, $card_light, 10%);
+        .pb_nav_list_item_text_collapsible,
+        svg {
+          color: $primary !important;
+        }
       }
     }
 
