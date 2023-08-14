@@ -3,4 +3,8 @@
     border: 1px #ccc dashed;
     text-align: center;
   }
+
+  &  ::file-selector-button {
+    display: none;
+  }
 }
