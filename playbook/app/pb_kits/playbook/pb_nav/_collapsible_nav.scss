@@ -6,7 +6,6 @@
 @import "./mixins";
 
 [class^="pb_nav_list"] {
-
   .font_size_small {
     .pb_nav_list_item_text,
     .pb_nav_list_item_text_collapsible {
@@ -26,7 +25,27 @@
     }
   }
 
+  //styling bold variant to work with collapsible
+  &[class*="_bold"] {
+    [class*="pb_collapsible_nav_item_active"] {
+      .pb_nav_list_item_link {
+        background-color: unset !important;
+        box-shadow: unset !important;
+        &:hover {
+          background-color: rgba($primary, 0.03) !important;
+          .pb_nav_list_item_text {
+          color: $primary !important;
+          }
+        }
+        .pb_nav_list_item_text {
+          font-weight: $regular !important;
+        }
+      }
+    }
+  }
+
   [class*="pb_collapsible_nav_item"] {
+    //active state for collapsible nav
     &[class*="_active"] {
       background-color: unset !important;
       .pb_nav_list_item_link {
@@ -52,6 +71,7 @@
         }
       }
 
+      //style icon right to look like button
       .icon_wrapper {
         &:hover {
           background-color: mix($primary, $card_light, 40%);
@@ -68,6 +88,7 @@
       }
     }
 
+    // verticasl line on left of collapsible content
     .pb_collapsible_content_kit {
       margin-left: $space_sm + 2;
       border-left: 1px solid transparent;
