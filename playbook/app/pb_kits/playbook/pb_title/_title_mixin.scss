@@ -29,10 +29,11 @@ $pb_title_truncate: (
   @each $name, $number in $pb_title_truncate {
     
     &[class*=_#{$name}] {
-      white-space: nowrap; 
+
       overflow: hidden;
-      text-overflow: ellipsis; 
+      display: -webkit-box;
       -webkit-line-clamp: $number;
+      -webkit-box-orient: vertical; 
     }
   }
 }
