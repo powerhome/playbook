@@ -31,6 +31,9 @@
       .pb_collapsible_content_kit {
         margin-left: $space_lg + 3;
       }
+      .pb_collapsible_main_kit {
+        border-radius: unset;
+      }
       &[class*="_active"] {
         .pb_collapsible_main_kit {
           background-color: $active_light;
@@ -40,6 +43,24 @@
           .pb_nav_list_item_text {
             color: unset !important;
             font-weight: $regular !important;
+          }
+        }
+      }
+
+      &.dark {
+        border-color: $border_dark;
+        .pb_collapsible_main_kit:hover {
+          .pb_nav_list_item_text_collapsible {
+            color: $white !important;
+          }
+        }
+        &[class*="_active"] {
+          .pb_collapsible_main_kit {
+            background-color: mix($white, $card_dark, 20%);
+            .pb_nav_list_item_text_collapsible,
+            svg {
+              color: $white !important;
+            }
           }
         }
       }
@@ -101,7 +122,6 @@
           }
         }
 
-        //style icon right to look like button
         .icon_wrapper {
           &:hover {
             background-color: mix($primary, $card_light, 40%);
@@ -158,8 +178,8 @@
       transition-property: color, border-color, background-color;
       transition-duration: 0.15s;
       transition-timing-function: $bezier;
+      border-radius: $border_rad_heavier;
       &:hover {
-        border-radius: $border_rad_heavier;
         background-color: mix($primary, $card_light, 10%);
         .pb_nav_list_item_text_collapsible,
         svg {
@@ -192,6 +212,12 @@
     }
 
     &.dark {
+      .pb_nav_list_kit_item {
+        border-color: $border_dark;
+        .pb_nav_list_item_text {
+          color: $text_dk_light !important;
+        }
+      }
       &[class*="pb_nav_list_kit_item"] [class*="_link"]:hover {
         .pb_nav_list_item_text {
           color: $white !important;
