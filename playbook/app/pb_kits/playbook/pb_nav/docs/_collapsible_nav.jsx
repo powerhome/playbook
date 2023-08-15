@@ -3,9 +3,12 @@ import { Nav, NavItem } from '../..'
 
 const CollapsibleNav = (props) => {
   return (
-    <Nav variant="subtle">
+    <Nav>
       <NavItem
+          active
           collapsible 
+          collapsibleTrail
+          fontWeight="bold"
           iconLeft="city" 
           iconRight={["plus", "minus"]}
           link="#" 
@@ -29,8 +32,9 @@ const CollapsibleNav = (props) => {
         />
       </NavItem>
       <NavItem 
-          active 
           collapsible 
+          collapsibleTrail
+          // fontWeight="bold"
           iconLeft="theater-masks"
           iconRight={["plus", "minus"]}
           link="#" 
@@ -55,6 +59,8 @@ const CollapsibleNav = (props) => {
       </NavItem>
       <NavItem 
           collapsible 
+          collapsibleTrail
+          // fontWeight="bold"
           iconLeft="city" 
           iconRight={["plus", "minus"]}
           link="#" 

@@ -18,14 +18,15 @@ const CollapsibleNavCustom = (props) => {
 
   return (
     <>
-      <Nav variant='subtle'>
+      <Nav variant='bold'>
         {navItems.map((text, index) => {
           const [collapsed] = collapsibles[index]
           return (
             <NavItem
                 collapsed={collapsed}
                 collapsible
-                emphasized
+                collapsibleTrail
+                fontWeight="bold"
                 iconLeft="chevron-down"
                 id={`collapsible-nav-item-${index + 1}`}
                 key={index}
