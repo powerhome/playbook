@@ -81,6 +81,9 @@ $selector: ".pb_nav_list";
     // Horizontal Overrides
     [class*=pb_nav_list_kit_item] {
       margin: 0;
+      [class*=_item_text]{
+        font-weight: $regular;
+      }
     }
     [class*=_active] {
       background-color: $active_light;
@@ -101,6 +104,9 @@ $selector: ".pb_nav_list";
     // Horizontal Overrides
     [class*=pb_nav_list_kit_item] {
       margin: 0;
+      [class*=_item_text]{
+        font-weight: $regular;
+      }
     }
     [class*=_active] {
       [class*=_text] {

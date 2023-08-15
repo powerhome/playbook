@@ -11,7 +11,7 @@ import Collapsible from '../pb_collapsible/_collapsible'
 type NavItemProps = {
   active?: boolean,
   aria?: { [key: string]: string },
-  fontWeight?: "bold" | "regular",
+  fontWeight?: "regular" | "bold",
   children?: React.ReactNode[] | React.ReactNode,
   className?: string,
   collapsible?: boolean,

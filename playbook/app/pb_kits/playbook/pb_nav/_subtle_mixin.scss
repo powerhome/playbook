@@ -27,7 +27,6 @@
       }
       [class*=_text] {
         flex: 1;
-        font-weight: $regular;
       }
       &:hover {
         background-color: rgba($primary, 0.03);
