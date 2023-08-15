@@ -34,7 +34,7 @@ test('renders time in default timezone', () => {
 test('renders time in timezone', () => {
   props.timeZone = 'Asia/Tokyo'
   const kit = renderKit(DateTimeStacked, props)
-  expect(kit).toHaveTextContent(`${monthDayYear}2:00aJST`)
+  expect(kit).toHaveTextContent(`${monthDayYear}2:00aGMT+9`)
 })
 
 test('renders time in timezone', () => {
