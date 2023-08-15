@@ -1,5 +1,4 @@
 <%= content_tag(:div,
-  data: object.data,
   aria: object.aria,
   class: object.classnames) do %>
   <% if object.label %>
@@ -24,6 +23,7 @@
         disabled: object.disabled,
         required: object.required,
         multiple: object.multiple,
+        data: object.data,
         onchange: object.onchange,
         include_blank: object.include_blank,
       )
