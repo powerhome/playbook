@@ -1,11 +1,13 @@
-<%= content_tag("label",
+<%= content_tag("div",
     aria: object.aria,
     class: object.classname,
     data: object.data,
-    for: "upload",
     id: object.id) do %>
+
+    
       <%= pb_rails("form_group") do %>
-        <%= pb_rails("button", props: { text: "Choose File", variant: "secondary" }) %>
-        <%= pb_rails("text_input", props: { input_options: { id: "upload", classname: "hidden"}, placeholder: "No file chosen", type: "file" } ) %>
+        <label for="upload" class="pb_button_kit_secondary_inline_enabled"><%= "#{object.label}" %></label>
+        <%= pb_rails("text_input", props: { input_options: { id: "upload"}, placeholder: "#{object.placeholder}", cursor: "pointer", type: "file" } ) %>
       <% end %>
+    </label>
 <% end %>
