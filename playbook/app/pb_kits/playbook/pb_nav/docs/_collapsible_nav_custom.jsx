@@ -26,7 +26,7 @@ const CollapsibleNavCustom = (props) => {
                 collapsed={collapsed}
                 collapsible
                 collapsibleTrail
-                fontWeight="bold"
+                fontWeight="bolder"
                 iconLeft="chevron-down"
                 id={`collapsible-nav-item-${index + 1}`}
                 key={index}

@@ -1,19 +1,19 @@
 <%= pb_rails("nav", props: { variant: "subtle" }) do %>
-    <%= pb_rails("nav/item", props: { text: "Overview", link: "#", font_weight:"bold", font_size:"small", collapsible: true, icon_left:"city" }) do %>
+    <%= pb_rails("nav/item", props: { text: "Overview", link: "#", font_weight:"bolder", font_size:"small", collapsible: true, icon_left:"city", collapsible_trail: true }) do %>
         <%= pb_rails("nav", props: { variant: "subtle" }) do %>
             <%= pb_rails("nav/item", props: { text: "City", link: "#" }) %>
             <%= pb_rails("nav/item", props: { text: "People", link: "#" }) %>
             <%= pb_rails("nav/item", props: { text: "Business", link: "#" }) %>
         <% end %>
     <% end %>
-    <%= pb_rails("nav/item", props: { text: "Albums", link: "#", font_weight:"bold", font_size:"small", collapsible: true, icon_left: "theater-masks" }) do %>
+    <%= pb_rails("nav/item", props: { text: "Albums", link: "#", font_weight:"bolder", font_size:"small", collapsible: true, icon_left: "theater-masks", collapsible_trail:true }) do %>
         <%= pb_rails("nav", props: { variant: "subtle" }) do %>
             <%= pb_rails("nav/item", props: { text: "Entertainment", link: "#" }) %>
             <%= pb_rails("nav/item", props: { text: "Food", link: "#" }) %>
             <%= pb_rails("nav/item", props: { text: "Style", link: "#" }) %>
         <% end %>
     <% end %>
-    <%= pb_rails("nav/item", props: { text: "Similar Artists", link: "#", font_weight:"bold", font_size:"small", collapsible: true, icon_left: "city" }) do %>
+    <%= pb_rails("nav/item", props: { text: "Similar Artists", link: "#", font_weight:"bolder", font_size:"small", collapsible: true, icon_left: "city", collapsible_trail:true }) do %>
         <%= pb_rails("nav", props: { variant: "subtle" }) do %>
             <%= pb_rails("nav/item", props: { text: "City", link: "#" }) %>
             <%= pb_rails("nav/item", props: { text: "People", link: "#" }) %>

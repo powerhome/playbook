@@ -9,7 +9,7 @@ const CollapsibleNavEmphasize = (props) => {
           collapsible
           collapsibleTrail
           fontSize="small"
-          fontWeight="bold"
+          fontWeight="bolder"
           iconLeft="city" 
           iconRight={["plus", "minus"]}
           link="#" 
@@ -36,7 +36,7 @@ const CollapsibleNavEmphasize = (props) => {
           collapsible 
           collapsibleTrail
           fontSize="small"
-          fontWeight="bold"
+          fontWeight="bolder"
           iconLeft="theater-masks"
           iconRight={["plus", "minus"]}
           link="#" 
@@ -63,7 +63,7 @@ const CollapsibleNavEmphasize = (props) => {
           collapsible 
           collapsibleTrail
           fontSize="small"
-          fontWeight="bold"
+          fontWeight="bolder"
           iconLeft="city" 
           iconRight={["plus", "minus"]}
           link="#" 

@@ -13,7 +13,7 @@
     }
   }
 
-  .font_bold {
+  .font_bolder {
     .pb_nav_list_item_text {
       @include pb_title_4;
     }
@@ -24,6 +24,18 @@
       }
     }
   }
+
+  .font_bold {
+    .pb_nav_list_item_text {
+      font-weight: $bold;
+    }
+    .pb_collapsible_main_kit {
+      .pb_nav_list_item_text_collapsible {
+        font-weight: $bold !important;
+      }
+    }
+  }
+
 
   .font_regular {
     .pb_nav_list_item_text {

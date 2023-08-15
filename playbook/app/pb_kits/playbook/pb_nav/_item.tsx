@@ -11,7 +11,7 @@ import Collapsible from '../pb_collapsible/_collapsible'
 type NavItemProps = {
   active?: boolean,
   aria?: { [key: string]: string },
-  fontWeight?: "regular" | "bold",
+  fontWeight?: "regular" | "bold" | "bolder",
   children?: React.ReactNode[] | React.ReactNode,
   className?: string,
   collapsible?: boolean,
@@ -61,7 +61,7 @@ const NavItem = (props: NavItemProps) => {
   const activeClass = active === true ? 'active' : ''
   const collapsibleTrailClass = collapsible && collapsibleTrail ? 'collapsible_trail' : ''
   const fontSizeClass = fontSize === 'small' ? "font_size_small" : "font_size_normal"
-  const fontWeightClass = fontWeight === 'bold' ? "font_bold" : "font_regular"
+  const fontWeightClass = fontWeight === 'bold' ? "font_bold" : fontWeight === 'bolder' ? "font_bolder" : "font_regular"
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), 

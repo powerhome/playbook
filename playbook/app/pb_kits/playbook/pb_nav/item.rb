@@ -8,7 +8,7 @@ module Playbook
                        values: %w[normal small],
                        default: "normal"
       prop :font_weight, type: Playbook::Props::Enum,
-                         values: %w[bold regular],
+                         values: %w[bold regular bolder],
                          default: "regular"
       prop :collapsible, type: Playbook::Props::Boolean, default: false
       prop :link
@@ -56,7 +56,14 @@ module Playbook
       end
 
       def font_weight_class
-        font_weight === "bold" ? "font_bold" : "font_regular"
+        case font_weight
+        when "bold"
+          "font_bold"
+        when "bolder"
+          "font_bolder"
+        else
+          "font_regular"
+        end
       end
 
       def collapsible_trail_class
