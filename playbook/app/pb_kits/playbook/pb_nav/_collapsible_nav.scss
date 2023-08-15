@@ -36,7 +36,6 @@
     }
   }
 
-
   .font_regular {
     .pb_nav_list_item_text {
       font-weight: $regular;
@@ -47,7 +46,6 @@
       }
     }
   }
-
 
   //styling for default variant with collapsible
   &[class*="_normal"] {
@@ -159,6 +157,10 @@
   }
 
   [class*="pb_collapsible_nav_item"] {
+    .pb_nav_list_kit_item {
+      margin-right: 0px !important;
+    }
+
     &[class*="_active"] {
       background-color: unset !important;
       .pb_nav_list_item_link {
