@@ -13,10 +13,18 @@ module Playbook
                    default: "Upload File"
 
       prop :placeholder, type: Playbook::Props::String,
-                         default: "No file chosen"
+                         default: "No fil"
+
+      prop :full_width, type: Playbook::Props::Boolean,
+                        default: false
 
       def classname
-        generate_classname("pb_file_upload_kit")
+        file_upload_class = generate_classname("pb_file_upload_kit")
+        file_upload_class + full_width_class
+      end
+
+      def full_width_class
+        full_width ? " full_width" : ""
       end
     end
   end

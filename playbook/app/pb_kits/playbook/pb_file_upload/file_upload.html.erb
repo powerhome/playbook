@@ -3,11 +3,15 @@
     class: object.classname,
     data: object.data,
     id: object.id) do %>
-
-    
-      <%= pb_rails("form_group") do %>
-        <label for="upload" class="pb_button_kit_secondary_inline_enabled"><%= "#{object.label}" %></label>
-        <%= pb_rails("text_input", props: { input_options: { id: "upload"}, placeholder: "#{object.placeholder}", cursor: "pointer", type: "file" } ) %>
+      <%= pb_rails("form_group", props: {cursor: "pointer"}) do %>
+        <label for="upload" class="pb_button_kit_secondary_inline_enabled label"><%= "#{object.label}" %></label>
+        <%= pb_rails("text_input", props: {
+          type: "file",
+          input_options: {
+            id: "upload", 
+            classname: "cursor_pointer",
+          }
+        }) %>
       <% end %>
     </label>
 <% end %>
