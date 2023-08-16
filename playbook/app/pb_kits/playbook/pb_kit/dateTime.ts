@@ -195,11 +195,10 @@ export const getMonthStartDate = (newDate: Date | string): Date => {
 
 export const getMonthEndDate = (newDate: Date | string): Date => {
   const date = formatDate(newDate)
-  const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0)
   // Replicate Moment.js: End of month has a time of 23:59:59
-  const lastDayOfMonthWithTime = new Date(lastDayOfMonth.setHours(23, 59, 59, 0))
+  const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59)
 
-  return lastDayOfMonthWithTime
+  return lastDayOfMonth
 }
 
 export const getQuarterStartDate = (newDate: Date | string): Date => {
@@ -218,6 +217,20 @@ export const getQuarterEndDate = (newDate: Date | string): Date => {
   const endOfQuarter = new Date(startOfNextQuarter.getTime() - 1)
 
   return endOfQuarter
+}
+
+export const getStartOfYearDate = (newDate: Date | string): Date => {
+  const date = formatDate(newDate)
+  const startOfYear = new Date(date.getFullYear(), 0, 1);
+
+  return startOfYear;
+}
+
+export const getEndOfYearDate = (newDate: Date | string): Date => {
+  const date = formatDate(newDate)
+  const endOfYear = new Date(date.getFullYear(), 11, 31, 23, 59, 59);
+
+  return endOfYear;
 }
 
 export default {
@@ -242,5 +255,7 @@ export default {
   getMonthStartDate,
   getMonthEndDate,
   getQuarterStartDate,
-  getQuarterEndDate
+  getQuarterEndDate,
+  getStartOfYearDate,
+  getEndOfYearDate
 }
