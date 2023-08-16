@@ -154,6 +154,15 @@ export const toCustomFormat = (newDate: Date | string, format = 'month_day'): st
   }
 }
 
+// For quickPick.tsx
+
+export const getMonthEndDate = (newDate: Date | string): Date => {
+  const date = formatDate(newDate)
+  const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+  return lastDayOfMonth
+}
+
 export default {
   toMinute,
   toHour,
@@ -170,4 +179,5 @@ export default {
   toIso,
   fromNow,
   toCustomFormat,
+  getMonthEndDate
 }

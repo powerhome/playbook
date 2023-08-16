@@ -1,4 +1,5 @@
 import moment from 'moment'
+import DateTime from '../../pb_kit/dateTime';
 
 type FpTypes = {
   setDate: (arg0: any, arg1: boolean) => void,
@@ -24,7 +25,7 @@ let activeLabel = ""
 const quickPickPlugin = (thisRangesEndToday: boolean) => {
   return function (fp: FpTypes & any): any {
     const thisWeekEndDate = thisRangesEndToday ? new Date() : moment().endOf('isoWeek').toDate()
-    const thisMonthEndDate = thisRangesEndToday ? new Date() : moment().endOf('month').toDate()
+    const thisMonthEndDate = thisRangesEndToday ? new Date() : DateTime.getMonthEndDate(new Date())
     const thisQuarterEndDate = thisRangesEndToday ? new Date() : moment().endOf('quarter').toDate()
     const thisYearEndDate = thisRangesEndToday ? new Date() : moment().endOf('year').toDate()
 
@@ -98,7 +99,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       if (current) {
         current.classList.remove('active');
       }
-     
+
       if (selectedDates.length > 0 && activeLabel) {
         pluginData.rangesButtons[activeLabel].classList.add('active');
       }
@@ -111,7 +112,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
 
 
     return {
-      // onReady is a hook from flatpickr that runs when calender is in a ready state
+      // onReady is a hook from flatpickr that runs when calendar is in a ready state
       onReady(selectedDates: Array<Date>) {
         // loop through the ranges and create an anchor tag for each range and add an event listener to set the date when user clicks on a date range
         for (const [label, range] of Object.entries(pluginData.ranges)) {
