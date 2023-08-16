@@ -13,7 +13,7 @@ module Playbook
                    default: "Upload File"
 
       prop :placeholder, type: Playbook::Props::String,
-                         default: "No fil"
+                         default: "No file"
 
       prop :full_width, type: Playbook::Props::Boolean,
                         default: false
