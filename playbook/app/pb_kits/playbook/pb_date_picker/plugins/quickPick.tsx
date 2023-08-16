@@ -24,6 +24,7 @@ let activeLabel = ""
 
 const quickPickPlugin = (thisRangesEndToday: boolean) => {
   return function (fp: FpTypes & any): any {
+    const yesterday = DateTime.getYesterdayDate(new Date())
     const thisWeekEndDate = thisRangesEndToday ? new Date() : moment().endOf('isoWeek').toDate()
     const thisMonthStartDate = DateTime.getMonthStartDate(new Date())
     const thisMonthEndDate = thisRangesEndToday ? new Date() : DateTime.getMonthEndDate(new Date())
@@ -33,7 +34,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
     // variable that holds the ranges available
     const ranges = {
       'Today': [new Date(), new Date()],
-      'Yesterday': [moment().subtract(1, 'days').toDate(), moment().subtract(1, 'days').toDate()],
+      'Yesterday': [yesterday, yesterday],
       'This week': [moment().startOf('isoWeek').toDate(), thisWeekEndDate],
       'This month': [thisMonthStartDate, thisMonthEndDate],
       'This quarter': [moment().startOf('quarter').toDate(), thisQuarterEndDate],
