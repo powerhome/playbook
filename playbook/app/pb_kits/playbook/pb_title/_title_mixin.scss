@@ -27,9 +27,7 @@ $pb_title_truncate: (
 
 @mixin title_truncate {
   @each $name, $number in $pb_title_truncate {
-    
     &[class*=_#{$name}] {
-
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: $number;

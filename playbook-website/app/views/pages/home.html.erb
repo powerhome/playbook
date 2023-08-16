@@ -84,8 +84,10 @@
   
             <%= pb_rails("flex", props: { orientation: "column", width: "100" }) do %>
               <%= pb_rails("caption", props: { text: post.date, padding_bottom: "xs" }) %>
-              <%= pb_rails("title", props: { text: post.title, tag: "h4", size: 4, padding_bottom: "sm", truncate: "1", width: "100" }) %>
-              <%= pb_rails("body", props: { classname: "whats-new-description", text: post.description, color: "light" }) %>
+              <%= pb_rails("flex", props: { padding_bottom: "sm"}) do %>
+                <%= pb_rails("title", props: { text: post.title, tag: "h4", size: 4, truncate: "1" }) %>
+              <% end %>
+              <%= pb_rails("body", props: { classname: "whats-new-description", text: post.description, color: "light", truncate: "2" }) %>
             <% end %>
 
             <%= pb_rails("flex", props: { align: "center", display: { lg: "none", md: "none", sm: "none", xs: "none" } }) do %>
