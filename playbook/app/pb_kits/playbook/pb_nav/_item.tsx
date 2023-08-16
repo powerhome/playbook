@@ -7,7 +7,6 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 import Icon from '../pb_icon/_icon'
 import Image from '../pb_image/_image'
 import Collapsible from '../pb_collapsible/_collapsible'
-import spacing from '../tokens/exports/_spacing.scss'
 
 type NavItemProps = {
   active?: boolean,
@@ -65,8 +64,8 @@ const NavItem = (props: NavItemProps) => {
     text = '',
     collapsibleTrail,
     collapsed, 
-    orientation,
-    variant,
+    // orientation,
+    // variant,
     padding,
     paddingX,
     paddingY,
@@ -75,6 +74,15 @@ const NavItem = (props: NavItemProps) => {
     paddingLeft,
     paddingRight
   } = props
+
+  const filteredProps = {...props}
+  delete filteredProps?.padding
+  delete filteredProps?.paddingX
+  delete filteredProps?.paddingY
+  delete filteredProps?.paddingBottom
+  delete filteredProps?.paddingTop
+  delete filteredProps?.paddingRight
+  delete filteredProps?.paddingLeft
 
   const Tag = link ? 'a' : 'div'
   const activeClass = active === true ? 'active' : ''
@@ -87,8 +95,19 @@ const NavItem = (props: NavItemProps) => {
                   collapsible ? buildCss('pb_collapsible_nav_item', activeClass, collapsibleTrailClass) : '', 
                   fontSizeClass,
                   fontWeightClass,
-                  globalProps(props), 
+                  globalProps(filteredProps), 
                   className)
+
+  const tagClasses = classnames(collapsible ? 'pb_nav_list_item_link_collapsible' : "pb_nav_list_item_link",
+                      globalProps({
+                        padding,
+                        paddingBottom,
+                        paddingLeft,
+                        paddingRight,
+                        paddingTop,
+                        paddingX,
+                        paddingY,
+                      }))
 
 
   const handleIconClick = (e:any) => {
@@ -116,7 +135,7 @@ const NavItem = (props: NavItemProps) => {
           >
           <Collapsible.Main dark={dark}>
           <Tag
-          className={`pb_nav_list_item_link_collapsible ${globalProps({paddingX, padding, paddingY, paddingBottom, paddingTop, paddingLeft, paddingRight})}`}
+          className={tagClasses}
           href={link}
           target={target}
         >
@@ -157,7 +176,7 @@ const NavItem = (props: NavItemProps) => {
         </Collapsible>
         ) : (
         <Tag
-        className={`pb_nav_list_item_link ${globalProps({paddingX},{paddingY})}`}
+        className={tagClasses}
         href={link}
           onClick={onClick}
           target={target}
