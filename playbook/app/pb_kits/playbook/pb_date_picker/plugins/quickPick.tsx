@@ -29,6 +29,8 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
 
     const thisWeekStartDate = DateTime.getFirstDayOfWeek(new Date())
     const thisWeekEndDate = thisRangesEndToday ? new Date() : DateTime.getLastDayOfWeek(new Date())
+    const lastWeekStartDate = DateTime.getPreviousWeekStartDate(new Date())
+    const lastWeekEndDate = DateTime.getPreviousWeekEndDate(new Date())
 
     const thisMonthStartDate = DateTime.getMonthStartDate(new Date())
     const thisMonthEndDate = thisRangesEndToday ? new Date() : DateTime.getMonthEndDate(new Date())
@@ -47,10 +49,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       'This month': [thisMonthStartDate, thisMonthEndDate],
       'This quarter': [thisQuarterStartDate, thisQuarterEndDate],
       'This year': [thisYearStartDate, thisYearEndDate],
-      'Last week': [
-        moment().subtract(1, 'week').startOf('isoWeek').toDate(),
-        moment().subtract(1, 'week').endOf('isoWeek').toDate()
-      ],
+      'Last week': [lastWeekStartDate, lastWeekEndDate],
       'Last month': [
         moment().subtract(1, 'month').startOf('month').toDate(),
         moment().subtract(1, 'month').endOf('month').toDate()
@@ -119,7 +118,6 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       return activeLabel && selectedDates[0].toDateString() === pluginData.ranges[activeLabel][0].toDateString() &&
         selectedDates[1].toDateString() === pluginData.ranges[activeLabel][1].toDateString()
     }
-
 
     return {
       // onReady is a hook from flatpickr that runs when calendar is in a ready state

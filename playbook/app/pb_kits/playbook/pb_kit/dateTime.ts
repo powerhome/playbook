@@ -154,6 +154,7 @@ export const toCustomFormat = (newDate: Date | string, format = 'month_day'): st
 }
 
 // For quickPick.tsx
+// Yesterday
 export const getYesterdayDate = (newDate: Date | string): Date => {
   const today = formatDate(newDate)
   const yesterday = new Date()
@@ -162,11 +163,12 @@ export const getYesterdayDate = (newDate: Date | string): Date => {
   return yesterday
 }
 
+// Weeks
 export const getFirstDayOfWeek = (newDate: Date | string): Date => {
   const today = formatDate(newDate)
   const dayOfWeek = today.getDay()
   // Replicate Moment.js: Start of week (Monday) has a time of 00:00:00
-  const firstDayOfWeek = new Date(today.setHours(0, 0, 0, 0))
+  const firstDayOfWeek = new Date(today.setHours(0, 0, 0))
 
   const daysToSubtract = dayOfWeek === 0 ? 6 : (dayOfWeek - 1)
   firstDayOfWeek.setDate(today.getDate() - daysToSubtract)
@@ -186,9 +188,35 @@ export const getLastDayOfWeek = (newDate: Date | string): Date => {
   return lastDayOfWeek
 }
 
+export const getPreviousWeekStartDate = (newDate: Date | string): Date => {
+  const firstDayOfWeek = getFirstDayOfWeek(newDate)
+  const firstDayOfPreviousWeek = new Date(
+    firstDayOfWeek.getFullYear(),
+    firstDayOfWeek.getMonth(),
+    firstDayOfWeek.getDate() - 7
+  )
+
+  return firstDayOfPreviousWeek
+}
+
+export const getPreviousWeekEndDate = (newDate: Date | string): Date => {
+  const lastDayOfWeek = getLastDayOfWeek(newDate)
+  const lastDayOfPreviousWeek = new Date(
+    lastDayOfWeek.getFullYear(),
+    lastDayOfWeek.getMonth(),
+    lastDayOfWeek.getDate() - 7,
+    lastDayOfWeek.getHours(),
+    lastDayOfWeek.getMinutes(),
+    lastDayOfWeek.getSeconds()
+  )
+
+  return lastDayOfPreviousWeek
+}
+
+// Months
 export const getMonthStartDate = (newDate: Date | string): Date => {
   const date = formatDate(newDate)
-  const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+  const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1)
 
   return firstDayOfMonth
 }
@@ -201,10 +229,11 @@ export const getMonthEndDate = (newDate: Date | string): Date => {
   return lastDayOfMonth
 }
 
+// Quarters
 export const getQuarterStartDate = (newDate: Date | string): Date => {
   const date = formatDate(newDate)
   const quarter = Math.floor(date.getMonth() / 3)
-  const startOfQuarter = new Date(date.getFullYear(), quarter * 3, 1);
+  const startOfQuarter = new Date(date.getFullYear(), quarter * 3, 1)
 
   return startOfQuarter
 }
@@ -219,18 +248,19 @@ export const getQuarterEndDate = (newDate: Date | string): Date => {
   return endOfQuarter
 }
 
+// Years
 export const getStartOfYearDate = (newDate: Date | string): Date => {
   const date = formatDate(newDate)
-  const startOfYear = new Date(date.getFullYear(), 0, 1);
+  const startOfYear = new Date(date.getFullYear(), 0, 1)
 
-  return startOfYear;
+  return startOfYear
 }
 
 export const getEndOfYearDate = (newDate: Date | string): Date => {
   const date = formatDate(newDate)
-  const endOfYear = new Date(date.getFullYear(), 11, 31, 23, 59, 59);
+  const endOfYear = new Date(date.getFullYear(), 11, 31, 23, 59, 59)
 
-  return endOfYear;
+  return endOfYear
 }
 
 export default {
@@ -252,10 +282,12 @@ export default {
   getYesterdayDate,
   getFirstDayOfWeek,
   getLastDayOfWeek,
+  getPreviousWeekStartDate,
+  getPreviousWeekEndDate,
   getMonthStartDate,
   getMonthEndDate,
   getQuarterStartDate,
   getQuarterEndDate,
   getStartOfYearDate,
-  getEndOfYearDate
+  getEndOfYearDate,
 }
