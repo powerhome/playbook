@@ -1,3 +1,27 @@
+# Text Fields Just Got Smarter!
+##### August 9, 2023
+
+![12-37-0](https://github.com/powerhome/playbook/assets/73710701/85d8aa24-c1db-4b2f-b1c3-5c64d039baf8)
+
+Get better control over your forms with our new input_options prop on our Text Input kit! Set any HTML input option as a prop and have it effortlessly get passed down to the styled input!
+
+[12.37.0](https://github.com/powerhome/playbook/tree/12.37.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Groundwork for Upcoming Collapsible Nav Kit [\#2678](https://github.com/powerhome/playbook/pull/2678) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fixed Text Input Options Prop [\#2686](https://github.com/powerhome/playbook/pull/2686) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Converted Changelog Markdown to a Hash, Object, or Json [\#2693](https://github.com/powerhome/playbook/pull/2693) ([jasoncypret](https://github.com/jasoncypret))
+- Swift Developer Docs: Badge, Pill, Radio and Timestamp Kits [\#2690](https://github.com/powerhome/playbook/pull/2690) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.36.0...12.37.0)
+
 # 12.36.0
 ##### August 4, 2023
 

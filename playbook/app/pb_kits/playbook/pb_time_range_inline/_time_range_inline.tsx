@@ -1,9 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import DateTime from '../pb_kit/dateTime'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
+import DateTime from '../pb_kit/dateTime';
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -19,23 +19,20 @@ type TimeRangeInlineProps = {
   dark?: boolean,
   icon?: boolean,
   timezone?: boolean,
-  startTime: string,
-  endTime: string,
+  startTime: Date,
+  endTime: Date,
 } & GlobalProps
 
-const timezoneString = (dateValue: string) => {
-  const date = new DateTime({ value: dateValue })
-  return `${date.convertToTimezone()}`
+const timezoneString = (dateValue: Date) => {
+  return `${DateTime.toTimeZone(dateValue)}`
 }
 
-const dateTimestamp = (dateValue: string) => {
-  const date = new DateTime({ value: dateValue })
-  return `${date.toHour()}:${date.toMinute()}${date.toMeridian()}`
+const dateTimestamp = (dateValue: Date) => {
+  return `${DateTime.toHour(dateValue)}:${DateTime.toMinute(dateValue)}${DateTime.toMeridiem(dateValue)}`
 }
 
-const dateTimeIso = (dateValue: string) => {
-  const date = new DateTime({ value: dateValue })
-  return date.toIso()
+const dateTimeIso = (dateValue: Date) => {
+  return DateTime.toIso(dateValue)
 }
 
 const TimeRangeInline = (props: TimeRangeInlineProps) => {
@@ -59,10 +56,10 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
   const separator = (
     <Body color="light">
       <Icon
-        className="pb_time_range_inline_arrow"
-        dark={dark}
-        fixedWidth
-        icon="long-arrow-right"
+          className="pb_time_range_inline_arrow"
+          dark={dark}
+          fixedWidth
+          icon="long-arrow-right"
       />
     </Body>
   )
@@ -71,16 +68,16 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
     return (
       icon &&
       <Body
-        color="light"
-        tag="span"
+          color="light"
+          tag="span"
       >
         <Icon
-          className="pb_time_range_inline_icon"
-          dark={dark}
-          fixedWidth
-          icon="clock"
-          size={size}
-          tag="span"
+            className="pb_time_range_inline_icon"
+            dark={dark}
+            fixedWidth
+            icon="clock"
+            size={size}
+            tag="span"
         />
       </Body>
     )
@@ -88,17 +85,17 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      className={classnames('pb_time_range_inline_kit_' + alignment, globalProps(props), className)}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        className={classnames('pb_time_range_inline_kit_' + alignment, globalProps(props), className)}
+        id={id}
     >
       <div className="pb_time_range_inline_wrapper">
         {size == 'xs' &&
           <>
             <Caption
-              dark={dark}
-              tag="span"
+                dark={dark}
+                tag="span"
             >
               {iconContent()}
               <time dateTime={dateTimeIso(startTime)}>
@@ -108,15 +105,15 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
               </time>
             </Caption>
             <Caption
-              className="pb_time_range_inline_arrow"
-              dark={dark}
-              tag="span"
+                className="pb_time_range_inline_arrow"
+                dark={dark}
+                tag="span"
             >
               {separator}
             </Caption>
             <Caption
-              dark={dark}
-              tag="span"
+                dark={dark}
+                tag="span"
             >
               <time dateTime={dateTimeIso(endTime)}>
                 {` ${dateTimestamp(
@@ -126,9 +123,9 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
             </Caption>
             {timezone &&
               <Caption
-                className="pb_time_range_inline_timezone"
-                dark={dark}
-                tag="span"
+                  className="pb_time_range_inline_timezone"
+                  dark={dark}
+                  tag="span"
               >
                 {timezoneString(endTime)}
               </Caption>
@@ -138,8 +135,8 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
         {size == 'sm' &&
           <>
             <Body
-              dark={dark}
-              tag="span"
+                dark={dark}
+                tag="span"
             >
               {iconContent()}
               <time dateTime={dateTimeIso(startTime)}>
@@ -149,15 +146,15 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
               </time>
             </Body>
             <Body
-              className="pb_time_range_inline_arrow"
-              dark={dark}
-              tag="span"
+                className="pb_time_range_inline_arrow"
+                dark={dark}
+                tag="span"
             >
               {separator}
             </Body>
             <Body
-              dark={dark}
-              tag="span"
+                dark={dark}
+                tag="span"
             >
               <time dateTime={dateTimeIso(endTime)}>
                 {` ${dateTimestamp(
@@ -167,10 +164,10 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
             </Body>
             {timezone &&
               <Body
-                className="pb_time_range_inline_timezone"
-                color="light"
-                dark={dark}
-                tag="span"
+                  className="pb_time_range_inline_timezone"
+                  color="light"
+                  dark={dark}
+                  tag="span"
               >
                 {timezoneString(endTime)}
               </Body>

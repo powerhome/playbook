@@ -7,7 +7,7 @@ const DateAlignment = (props) => {
       <FormattedDate
           dayOfWeek
           icon
-          value="1995-12-25"
+          value={new Date('25 Dec 1995')}
           {...props}
       />
 
@@ -17,7 +17,7 @@ const DateAlignment = (props) => {
           alignment="center"
           dayOfWeek
           icon
-          value="2020-12-25"
+          value={new Date('25 Dec 2020')}
           {...props}
       />
 
