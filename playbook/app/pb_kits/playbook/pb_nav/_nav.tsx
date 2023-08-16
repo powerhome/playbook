@@ -22,6 +22,11 @@ type NavProps = {
   variant?: "normal" | "subtle",
 } & GlobalProps
 
+type NavChildProps = {
+  orientation: "vertical" | "horizontal";
+  variant: "normal" | "subtle";
+};
+
 const Nav = (props: NavProps) => {
   const {
     aria = {},
@@ -50,6 +55,18 @@ const Nav = (props: NavProps) => {
     className
   )
 
+// Map over the children and clone them with orientation and variant props to gain access to them in navItem
+const childrenWithProps = React.Children.map(children, (child) => {
+  if (React.isValidElement(child)) {
+    const childProps: NavChildProps = {
+      orientation: orientation,
+      variant: variant,
+    };
+    return React.cloneElement(child, childProps);
+  }
+  return child;
+});
+
   return (
     <nav
       {...ariaProps}
@@ -72,7 +89,7 @@ const Nav = (props: NavProps) => {
           </a>
         </div>
       }
-      <ul>{children}</ul>
+      <ul>{childrenWithProps}</ul>
     </nav>
   )
 }
