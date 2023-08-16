@@ -11,7 +11,7 @@ examples:
   - select_error: Select w/ Error
   - select_inline: Select Inline
   - select_inline_compact: Select Inline Compact
-  - select_data_attributes: Select W/ Data Attributes
+  - select_attributes: Select W/ Attributes
 
 
 
