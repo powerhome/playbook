@@ -1,3 +1,16 @@
+# 12.38.0
+##### August 15, 2023
+
+List of changes: 
+
+**Improvements:**
+
+-  Refactor Date and Time Kits to not Rely on Moment.js [\#2691](https://github.com/powerhome/playbook/pull/2691) ([gavhuang](https://github.com/gavhuang), [Israel-Molestina](https://github.com/Israel-Molestina))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.37.0...12.38.0)
+
+
+
 # Text Fields Just Got Smarter!
 ##### August 9, 2023
 
