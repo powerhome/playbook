@@ -37,8 +37,8 @@ type NavItemProps = {
   paddingX?: string,
   paddingY?: string,
   padding?: 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
-  orientation: "vertical" | "horizontal",
-  variant: "normal" | "subtle",
+  orientation?: "vertical" | "horizontal",
+  variant?: "normal" | "subtle",
 } & GlobalProps
 
 const NavItem = (props: NavItemProps) => {
