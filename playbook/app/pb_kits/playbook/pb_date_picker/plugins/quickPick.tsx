@@ -26,11 +26,16 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
   return function (fp: FpTypes & any): any {
     const today = new Date()
     const yesterday = DateTime.getYesterdayDate(new Date())
+
     const thisWeekStartDate = DateTime.getFirstDayOfWeek(new Date())
     const thisWeekEndDate = thisRangesEndToday ? new Date() : DateTime.getLastDayOfWeek(new Date())
+
     const thisMonthStartDate = DateTime.getMonthStartDate(new Date())
     const thisMonthEndDate = thisRangesEndToday ? new Date() : DateTime.getMonthEndDate(new Date())
-    const thisQuarterEndDate = thisRangesEndToday ? new Date() : moment().endOf('quarter').toDate()
+
+    const thisQuarterStartDate = DateTime.getQuarterStartDate(new Date())
+    const thisQuarterEndDate = thisRangesEndToday ? new Date() : DateTime.getQuarterEndDate(new Date())
+
     const thisYearEndDate = thisRangesEndToday ? new Date() : moment().endOf('year').toDate()
 
     // variable that holds the ranges available
@@ -39,7 +44,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       'Yesterday': [yesterday, yesterday],
       'This week': [thisWeekStartDate, thisWeekEndDate],
       'This month': [thisMonthStartDate, thisMonthEndDate],
-      'This quarter': [moment().startOf('quarter').toDate(), thisQuarterEndDate],
+      'This quarter': [thisQuarterStartDate, thisQuarterEndDate],
       'This year': [moment().startOf('year').toDate(), thisYearEndDate],
       'Last week': [
         moment().subtract(1, 'week').startOf('isoWeek').toDate(),
@@ -58,7 +63,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
         moment().subtract(1, 'year').endOf('year').toDate()
       ]
     }
-    //creating the ul element for the nav dropdown and giving it classnames
+    // creating the ul element for the nav dropdown and giving it classnames
     const rangesNav = document.createElement('ul');
 
     // creating the pluginData object that will hold the properties of this plugin
@@ -69,11 +74,11 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
     };
 
     /**
-   *    @param {string} label
-   *    @returns HTML Element
-   */
+      * @param {string} label
+      * @returns HTML Element
+      */
 
-    //function for creating the range buttons in the nav
+    // function for creating the range buttons in the nav
     const addRangeButton = (label: string) => {
 
       // creating new elements to mimick selectable card component
@@ -93,7 +98,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       // append the li item to the ul rangeNav prop
       pluginData.rangesNav.appendChild(item);
 
-      // return the ranges buton prop
+      // return the ranges button prop
       return pluginData.rangesButtons[label];
     };
 
