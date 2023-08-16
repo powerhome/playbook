@@ -20,11 +20,13 @@ type NavProps = {
   link?: string,
   title?: string,
   variant?: "normal" | "subtle",
+  itemPadding?: {padding?: string, paddingBottom?: string, paddingTop?: string, paddingRight?: string, paddingLeft?: string, paddingX?: string, paddingY?: string}
 } & GlobalProps
 
-type NavChildProps = {
-  orientation: "vertical" | "horizontal";
-  variant: "normal" | "subtle";
+export type NavChildProps = {
+  orientation?: "vertical" | "horizontal";
+  variant?: "normal" | "subtle";
+  itemPadding?: {padding?: string, paddingBottom?: string, paddingTop?: string, paddingRight?: string, paddingLeft?: string, paddingX?: string, paddingY?: string}
 };
 
 const Nav = (props: NavProps) => {
@@ -42,6 +44,7 @@ const Nav = (props: NavProps) => {
     orientation = 'vertical',
     title = '',
     variant = 'normal',
+    itemPadding,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -61,6 +64,7 @@ const childrenWithProps = React.Children.map(children, (child) => {
     const childProps: NavChildProps = {
       orientation: orientation,
       variant: variant,
+      itemPadding: itemPadding
     };
     return React.cloneElement(child, childProps);
   }

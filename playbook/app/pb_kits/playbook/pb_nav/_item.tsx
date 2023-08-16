@@ -7,6 +7,7 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 import Icon from '../pb_icon/_icon'
 import Image from '../pb_image/_image'
 import Collapsible from '../pb_collapsible/_collapsible'
+import { NavChildProps } from './_nav'
 
 type NavItemProps = {
   active?: boolean,
@@ -66,6 +67,7 @@ const NavItem = (props: NavItemProps) => {
     collapsed, 
     // orientation,
     // variant,
+    itemPadding,
     padding,
     paddingX,
     paddingY,
@@ -98,17 +100,28 @@ const NavItem = (props: NavItemProps) => {
                   globalProps(filteredProps), 
                   className)
 
-  const tagClasses = classnames(collapsible ? 'pb_nav_list_item_link_collapsible' : "pb_nav_list_item_link",
-                      globalProps({
-                        padding,
-                        paddingBottom,
-                        paddingLeft,
-                        paddingRight,
-                        paddingTop,
-                        paddingX,
-                        paddingY,
-                      }))
+const paddingProps = {
+  padding,
+  paddingBottom,
+  paddingTop,
+  paddingRight,
+  paddingLeft,
+  paddingX,
+  paddingY,
+};
 
+const finalItemPadding = {
+  ...(itemPadding || {}),
+  ...Object.entries(paddingProps).reduce((acc:any, [prop, value]) => {
+    if (value) {
+        acc[prop] = value;
+    }
+    return acc;
+  }, {}),
+};
+
+  const tagClasses = classnames(collapsible ? 'pb_nav_list_item_link_collapsible' : "pb_nav_list_item_link",
+                      globalProps({...finalItemPadding}))
 
   const handleIconClick = (e:any) => {
     if (onIconLeftClick) {
@@ -116,6 +129,18 @@ const NavItem = (props: NavItemProps) => {
     onIconLeftClick()
     }
   }
+
+// Map over the children and clone them with itemPadding prop so nested navItems all get itemPadding
+const childrenWithProps = React.Children.map(children, (child) => {
+  if (React.isValidElement(child)) {
+    const childProps: NavChildProps = {
+      itemPadding: itemPadding
+    };
+    return React.cloneElement(child, childProps);
+  }
+  return child;
+});
+
 
   return (
     <li
@@ -171,7 +196,7 @@ const NavItem = (props: NavItemProps) => {
         </Tag>
         </Collapsible.Main>
         <Collapsible.Content>
-        {children}
+        {childrenWithProps}
         </Collapsible.Content>
         </Collapsible>
         ) : (
