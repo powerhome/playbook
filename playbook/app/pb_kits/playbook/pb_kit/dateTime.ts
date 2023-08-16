@@ -116,7 +116,6 @@ export const toIso = (newDate: Date | string): string => {
 }
 
 export const fromNow = (newDate: Date | string): string => {
-
   const startDate = formatDate(newDate).getTime()
   const endDate = new Date().getTime()
   const elapsedTime = endDate - startDate
@@ -163,6 +162,30 @@ export const getYesterdayDate = (newDate: Date | string): Date => {
   return yesterday
 }
 
+export const getFirstDayOfWeek = (newDate: Date | string): Date => {
+  const today = formatDate(newDate)
+  const dayOfWeek = today.getDay()
+  // Replicate Moment.js: Start of week (Monday) has a time of 00:00:00
+  const firstDayOfWeek = new Date(today.setHours(0, 0, 0, 0))
+
+  const daysToSubtract = dayOfWeek === 0 ? 6 : (dayOfWeek - 1)
+  firstDayOfWeek.setDate(today.getDate() - daysToSubtract)
+
+  return firstDayOfWeek
+}
+
+export const getLastDayOfWeek = (newDate: Date | string): Date => {
+  const today = formatDate(newDate)
+  const dayOfWeek = today.getDay()
+  // Replicate Moment.js: End of week (Sunday) has a time of 23:59:59
+  const lastDayOfWeek = new Date(today.setHours(23, 59, 59, 0))
+
+  const daysToAdd = dayOfWeek === 0 ? 0 : (6 - dayOfWeek + 1)
+  lastDayOfWeek.setDate(today.getDate() + daysToAdd)
+
+  return lastDayOfWeek
+}
+
 export const getMonthStartDate = (newDate: Date | string): Date => {
   const date = formatDate(newDate)
   const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -172,7 +195,8 @@ export const getMonthStartDate = (newDate: Date | string): Date => {
 
 export const getMonthEndDate = (newDate: Date | string): Date => {
   const date = formatDate(newDate)
-  const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  // Replicate Moment.js: End of month has a time of 23:59:59
+  const lastDayOfMonth = new Date(new Date(date.getFullYear(), date.getMonth() + 1, 0).setHours(23, 59, 59, 0))
 
   return lastDayOfMonth
 }
@@ -194,6 +218,8 @@ export default {
   fromNow,
   toCustomFormat,
   getYesterdayDate,
+  getFirstDayOfWeek,
+  getLastDayOfWeek,
   getMonthStartDate,
-  getMonthEndDate
+  getMonthEndDate,
 }
