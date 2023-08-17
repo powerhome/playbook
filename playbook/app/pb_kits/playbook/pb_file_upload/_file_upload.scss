@@ -3,22 +3,8 @@
     border: 1px #ccc dashed;
     text-align: center;
   }
-  // Overrides default focus styles only for File Upload
-  .text_input:focus {
-    border: 1px solid $border_light !important;
-    background-color: transparent !important;
-  }
   ::file-selector-button {
     display: none;
-  }
-  &.full_width {
-    [class*='pb_form_group_kit'] {
-      width: 100% !important;
-      
-      [class*='pb_text_input_kit'] {
-        width: 100% !important;
-      }
-    }
   }
 }
 

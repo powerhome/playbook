@@ -18,6 +18,9 @@ module Playbook
       prop :full_width, type: Playbook::Props::Boolean,
                         default: false
 
+      prop :input_options, type: Playbook::Props::Hash,
+                           default: {}
+
       def classname
         file_upload_class = generate_classname("pb_file_upload_kit")
         file_upload_class + full_width_class
