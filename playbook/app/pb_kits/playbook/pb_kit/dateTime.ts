@@ -169,8 +169,9 @@ export const getFirstDayOfWeek = (newDate: Date | string): Date => {
   const dayOfWeek = today.getDay()
   // Replicate Moment.js: Start of week (Monday) has a time of 00:00:00
   const firstDayOfWeek = new Date(today.setHours(0, 0, 0))
+  const isSunday = dayOfWeek === 0
 
-  const daysToSubtract = dayOfWeek === 0 ? 6 : (dayOfWeek - 1)
+  const daysToSubtract = isSunday ? 6 : (dayOfWeek - 1)
   firstDayOfWeek.setDate(today.getDate() - daysToSubtract)
 
   return firstDayOfWeek
@@ -181,8 +182,9 @@ export const getLastDayOfWeek = (newDate: Date | string): Date => {
   const dayOfWeek = today.getDay()
   // Replicate Moment.js: End of week (Sunday) has a time of 23:59:59
   const lastDayOfWeek = new Date(today.setHours(23, 59, 59, 0))
+  const isSunday = dayOfWeek === 0
 
-  const daysToAdd = dayOfWeek === 0 ? 0 : (6 - dayOfWeek + 1)
+  const daysToAdd = isSunday ? 0 : (7 - dayOfWeek)
   lastDayOfWeek.setDate(today.getDate() + daysToAdd)
 
   return lastDayOfWeek
