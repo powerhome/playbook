@@ -231,6 +231,31 @@ export const getMonthEndDate = (newDate: Date | string): Date => {
   return lastDayOfMonth
 }
 
+export const getPreviousMonthStartDate = (newDate: Date | string): Date => {
+  const firstDayOfMonth = getMonthStartDate(newDate)
+  const firstDayOfPreviousMonth = new Date(
+    firstDayOfMonth.getFullYear(),
+    firstDayOfMonth.getMonth() - 1,
+    firstDayOfMonth.getDate()
+  )
+
+  return firstDayOfPreviousMonth
+}
+
+export const getPreviousMonthEndDate = (newDate: Date | string): Date => {
+  const lastDayOfMonth = getMonthEndDate(newDate)
+  const lastDayOfPreviousMonth = new Date(
+    lastDayOfMonth.getFullYear(),
+    lastDayOfMonth.getMonth() - 1,
+    lastDayOfMonth.getDate(),
+    lastDayOfMonth.getHours(),
+    lastDayOfMonth.getMinutes(),
+    lastDayOfMonth.getSeconds()
+  )
+
+  return lastDayOfPreviousMonth
+}
+
 // Quarters
 export const getQuarterStartDate = (newDate: Date | string): Date => {
   const date = formatDate(newDate)
@@ -288,6 +313,8 @@ export default {
   getPreviousWeekEndDate,
   getMonthStartDate,
   getMonthEndDate,
+  getPreviousMonthStartDate,
+  getPreviousMonthEndDate,
   getQuarterStartDate,
   getQuarterEndDate,
   getStartOfYearDate,
