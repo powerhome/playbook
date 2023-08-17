@@ -1,9 +1,22 @@
+# 12.38.0
+##### August 15, 2023
+
+List of changes: 
+
+**Improvements:**
+
+-  Refactor Date and Time Kits to not Rely on Moment.js [\#2691](https://github.com/powerhome/playbook/pull/2691) ([gavhuang](https://github.com/gavhuang), [Israel-Molestina](https://github.com/Israel-Molestina))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.37.0...12.38.0)
+
+
+
 # Text Fields Just Got Smarter!
 ##### August 9, 2023
 
 ![12-37-0](https://github.com/powerhome/playbook/assets/73710701/85d8aa24-c1db-4b2f-b1c3-5c64d039baf8)
 
-Get better control over your forms with our new input_options prop on our Text Input kit! Set any HTML input option as a prop and have it effortlessly get passed down to the styled input!
+Get better control over your forms with our new input_options prop on our Text Input kit! Set any HTML input option as a prop and have it effortlessly get passed down to the styled input! 
 
 [12.37.0](https://github.com/powerhome/playbook/tree/12.37.0) full list of changes:
 
