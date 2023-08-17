@@ -49,3 +49,20 @@ test('returns dark class name', () => {
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveClass(`${kitClass} dark`)
 })
+
+test('returns multiple variant', () => {
+  render(
+    <Select
+        data={{ testid: "selectMultiple" }}
+        label="Favorite Food"
+        multiple
+        name="food"
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId("selectMultiple");
+  const selectElement = kit.querySelector('select');
+
+  expect(selectElement).toHaveAttribute('multiple', '');
+});
