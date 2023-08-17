@@ -39,6 +39,8 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
 
     const thisQuarterStartDate = DateTime.getQuarterStartDate(new Date())
     const thisQuarterEndDate = thisRangesEndToday ? new Date() : DateTime.getQuarterEndDate(new Date())
+    const lastQuarterStartDate = DateTime.getPreviousQuarterStartDate(new Date())
+    const lastQuarterEndDate = DateTime.getPreviousQuarterEndDate(new Date())
 
     const thisYearStartDate = DateTime.getStartOfYearDate(new Date())
     const thisYearEndDate = thisRangesEndToday ? new Date() : moment().endOf('year').toDate()
@@ -53,10 +55,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       'This year': [thisYearStartDate, thisYearEndDate],
       'Last week': [lastWeekStartDate, lastWeekEndDate],
       'Last month': [lastMonthStartDate, lastMonthEndDate],
-      'Last quarter': [
-        moment().subtract(1, 'quarter').startOf('quarter').toDate(),
-        moment().subtract(1, 'quarter').endOf('quarter').toDate()
-      ],
+      'Last quarter': [lastQuarterStartDate, lastQuarterEndDate],
       'Last year': [
         moment().subtract(1, 'year').startOf('year').toDate(),
         moment().subtract(1, 'year').endOf('year').toDate()
