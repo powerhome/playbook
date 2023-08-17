@@ -62,6 +62,12 @@
       padding-top: $space_xxs;
       padding-bottom: $space_xxs;
     }
+    option:checked {
+      background-color: $hover_light;
+    }
+    option:hover {
+      background-color: $hover_light;
+    }
   }
   option {
     color: $text_lt_default;
