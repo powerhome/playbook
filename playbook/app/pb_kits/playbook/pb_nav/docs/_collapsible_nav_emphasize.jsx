@@ -1,11 +1,15 @@
 import React from "react";
 import { Nav, NavItem } from '../..'
 
-const CollapsibleNavCustomIcons = (props) => {
+const CollapsibleNavEmphasize = (props) => {
   return (
-    <Nav variant="subtle">
+    <Nav variant="bold">
       <NavItem
-          collapsible 
+          active 
+          collapsible
+          collapsibleTrail
+          fontSize="small"
+          fontWeight="bolder"
           iconLeft="city" 
           iconRight={["plus", "minus"]}
           link="#" 
@@ -29,8 +33,10 @@ const CollapsibleNavCustomIcons = (props) => {
         />
       </NavItem>
       <NavItem 
-          active 
           collapsible 
+          collapsibleTrail
+          fontSize="small"
+          fontWeight="bolder"
           iconLeft="theater-masks"
           iconRight={["plus", "minus"]}
           link="#" 
@@ -55,6 +61,9 @@ const CollapsibleNavCustomIcons = (props) => {
       </NavItem>
       <NavItem 
           collapsible 
+          collapsibleTrail
+          fontSize="small"
+          fontWeight="bolder"
           iconLeft="city" 
           iconRight={["plus", "minus"]}
           link="#" 
@@ -81,4 +90,4 @@ const CollapsibleNavCustomIcons = (props) => {
   );
 };
 
-export default CollapsibleNavCustomIcons;
+export default CollapsibleNavEmphasize;
