@@ -1,6 +1,6 @@
 <%= content_tag(:div,
-  data: object.data,
   aria: object.aria,
+  data: object.data,
   class: object.classnames) do %>
   <% if object.label %>
     <label class="pb_select_kit_label" for="<%= object.name %>">
@@ -19,13 +19,7 @@
           selected: object.selected,
           disabled: object.disabled_options,
         ),
-        id: object.id,
-        prompt: object.blank_selection,
-        disabled: object.disabled,
-        required: object.required,
-        multiple: object.multiple,
-        onchange: object.onchange,
-        include_blank: object.include_blank,
+        object.all_attributes
       )
       %>
       <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
