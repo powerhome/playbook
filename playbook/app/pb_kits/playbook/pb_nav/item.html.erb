@@ -42,3 +42,30 @@
     <% end %>
   <% end %>
 <% end %>
+
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+  var liElements = document.querySelectorAll('li');
+  
+  liElements.forEach(function(liElement) {
+    var ulElement = findParentByTagName(liElement, 'ul');
+    if (ulElement) {
+      var orientation = ulElement.getAttribute('data-orientation');
+      var variant = ulElement.getAttribute('data-variant');
+      
+      liElement.setAttribute('data-orientation', orientation);
+      liElement.setAttribute('data-variant', variant);
+    }
+  });
+});
+
+function findParentByTagName(element, tagName) {
+  while (element.parentNode) {
+    element = element.parentNode;
+    if (element.tagName && element.tagName.toLowerCase() === tagName.toLowerCase()) {
+      return element;
+    }
+  }
+  return null;
+}
+</script>
