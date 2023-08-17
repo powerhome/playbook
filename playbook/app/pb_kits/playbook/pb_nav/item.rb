@@ -28,13 +28,38 @@ module Playbook
         end
       end
 
+      def spacing_props
+        if object.padding || object.padding_x || object.padding_y || object.padding_bottom || object.padding_top || object.padding_right || object.padding_left
+          # Call the original method
+          original_result = super
+
+          # Remove p_value, px_value, py_value, etc. based on the object's properties
+          padding_classes_to_remove = []
+          padding_classes_to_remove << "p_#{object.padding}" if object.padding
+          padding_classes_to_remove << "px_#{object.padding_x}" if object.padding_x
+          padding_classes_to_remove << "py_#{object.padding_y}" if object.padding_y
+          padding_classes_to_remove << "pb_#{object.padding_bottom}" if object.padding_bottom
+          padding_classes_to_remove << "pt_#{object.padding_top}" if object.padding_top
+          padding_classes_to_remove << "pr_#{object.padding_right}" if object.padding_right
+          padding_classes_to_remove << "pl_#{object.padding_left}" if object.padding_left
+
+          padding_classes_to_remove.each do |class_to_remove|
+            original_result.gsub!(class_to_remove, "")
+          end
+
+          original_result.strip
+        else
+          super
+        end
+      end
+
       def tag
         link ? "a" : "div"
       end
 
       def options
         {
-          class: collapsible ? "pb_nav_list_item_link_collapsible" : "pb_nav_list_item_link",
+          class: collapsible ? "pb_nav_list_item_link_collapsible #{padding_classes}" : "pb_nav_list_item_link #{padding_classes}",
         }.compact
       end
 
@@ -72,6 +97,27 @@ module Playbook
 
       def font_size_class
         font_size === "small" ? "font_size_small" : "font_size_normal"
+      end
+
+      def padding_classes
+        padding_attributes = {
+          padding: "p",
+          padding_x: "px",
+          padding_y: "py",
+          padding_bottom: "pb",
+          padding_top: "pt",
+          padding_right: "pr",
+          padding_left: "pl",
+        }
+
+        # rubocop:disable Style/RedundantAssignment
+        padding_classes = padding_attributes.map do |attr, class_prefix|
+          # rubocop:enable Style/RedundantAssignment
+          value = object.public_send(attr)
+          " #{class_prefix}_#{value}" if value
+        end.compact.join
+
+        padding_classes
       end
     end
   end
