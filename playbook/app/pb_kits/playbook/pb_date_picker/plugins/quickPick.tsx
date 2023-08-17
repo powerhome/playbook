@@ -1,4 +1,3 @@
-import moment from 'moment'
 import DateTime from '../../pb_kit/dateTime';
 
 type FpTypes = {
@@ -124,8 +123,8 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
         for (const [label, range] of Object.entries(pluginData.ranges)) {
           addRangeButton(label).addEventListener('click', function () {
 
-            const start = moment(range[0]).toDate();
-            const end = moment(range[1]).toDate();
+            const start = new Date(range[0]);
+            const end = new Date(range[1]);
 
             if (!start) {
               fp.clear();
