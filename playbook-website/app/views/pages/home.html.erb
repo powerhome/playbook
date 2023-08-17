@@ -75,6 +75,7 @@
     <%= pb_rails("title", props: { text: "Playbook is always shipping.", tag: "h2", size: 2, padding_bottom: "xs" }) %>
     <%= pb_rails("caption", props: { size: "lg", text: "Move Fast. Follow Momentum.", padding_bottom: "sm" }) %>
   <% end %>
+  
   <% @posts.take(2).each.with_index do |post, index| %>
     <%= pb_rails("flex", props: { justify: "center", padding_top: "md", align: "baseline", padding_bottom: index == 1 ? "lg" : nil }) do %>
       <%= pb_rails("card", props: { border_radius: "lg", max_width: "xl", width: "100", margin_x: "md", padding: "none", hover: { shadow: "deepest" } }) do %>
