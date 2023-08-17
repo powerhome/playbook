@@ -38,7 +38,6 @@
   &[class*=_truncate] {
     @include title_truncate;
   }
-  
 
   @each $size, $size_value in $breakpoints_grid {
     @each $title_size_value in [1, 2, 3, 4] {
