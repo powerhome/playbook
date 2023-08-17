@@ -42,8 +42,10 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
     const lastQuarterStartDate = DateTime.getPreviousQuarterStartDate(new Date())
     const lastQuarterEndDate = DateTime.getPreviousQuarterEndDate(new Date())
 
-    const thisYearStartDate = DateTime.getStartOfYearDate(new Date())
-    const thisYearEndDate = thisRangesEndToday ? new Date() : moment().endOf('year').toDate()
+    const thisYearStartDate = DateTime.getYearStartDate(new Date())
+    const thisYearEndDate = thisRangesEndToday ? new Date() : DateTime.getYearEndDate(new Date())
+    const lastYearStartDate = DateTime.getPreviousYearStartDate(new Date())
+    const lastYearEndDate = DateTime.getPreviousYearEndDate(new Date())
 
     // variable that holds the ranges available
     const ranges = {
@@ -56,10 +58,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       'Last week': [lastWeekStartDate, lastWeekEndDate],
       'Last month': [lastMonthStartDate, lastMonthEndDate],
       'Last quarter': [lastQuarterStartDate, lastQuarterEndDate],
-      'Last year': [
-        moment().subtract(1, 'year').startOf('year').toDate(),
-        moment().subtract(1, 'year').endOf('year').toDate()
-      ]
+      'Last year': [lastYearStartDate, lastYearEndDate]
     }
 
     // creating the ul element for the nav dropdown and giving it classnames
