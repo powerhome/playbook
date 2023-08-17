@@ -12,6 +12,7 @@ examples:
   - select_inline: Select Inline
   - select_inline_compact: Select Inline Compact
   - select_attributes: Select W/ Attributes
+  - select_multiple: Select Multiple
 
 
 
