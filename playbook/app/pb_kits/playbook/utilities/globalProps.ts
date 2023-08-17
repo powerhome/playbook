@@ -92,11 +92,11 @@ type MaxWidth = {
 }
 
 type MinWidth = {
-  minWidth?: Sizes | number,
+  minWidth?: Sizes | number | string,
 }
 
 type MinHeight = {
-  minHeight?: Sizes | number,
+  minHeight?: Sizes | number | string,
 }
 
 type NumberSpacing = {
@@ -126,7 +126,7 @@ type Shadow = {
 }
 
 type Width = {
-  width?: Sizes | number,
+  width?: Sizes | number | string,
 }
 
 type Space = "spaceBetween" | "spaceAround" | "spaceEvenly"

@@ -6,7 +6,7 @@ import PbReactPopover from '../../pb_popover/_popover'
 type FiltersPopoverProps = { 
   children?: React.ReactChild[] | React.ReactChild | (({closePopover}: {closePopover: () => void}) =>  ReactNode), 
   dark?: boolean,
-  minWidth?: string,
+  minWidth?: string | number,
   placement?: "top" | "right" | "bottom" | "left" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "right-start" | "right-end" | "left-start" | "left-end",
 }
 const FiltersPopover = ({ children, dark, minWidth, placement = "bottom-start" }: FiltersPopoverProps): React.ReactElement => {
