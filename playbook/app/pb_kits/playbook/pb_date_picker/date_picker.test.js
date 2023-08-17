@@ -17,6 +17,10 @@ const formatDate = (date) => {
   return `${month}/${day}/${year}`
 }
 
+Date.prototype.formatDate = function () {
+  return formatDate(this)
+}
+
 describe('DatePicker Kit', () => {
   beforeEach(() => {
     jest.spyOn(console, 'error').mockImplementation(() => { });
@@ -164,6 +168,7 @@ describe('DatePicker Kit', () => {
       expect(input).toHaveValue('01/01/2020 at 12:00 PM')
     })
   })
+
   test('shows DatePicker QuickPick dropdown and adds correct date to input', async () => {
     const testId = 'datepicker-quick-pick'
     render(
@@ -203,10 +208,10 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
-      expect(input).toHaveValue(formatDate(DateTime.getYearStartDate(new Date())) + " to " + formatDate(DateTime.getYearEndDate(new Date())))
+      expect(input).toHaveValue(DateTime.getYearStartDate(new Date()).formatDate() + " to " + DateTime.getYearEndDate(new Date()).formatDate())
     })
-
   })
+
   test('shows DatePicker QuickPick ranges ending today', async () => {
     const testId = 'datepicker-quick-pick-ends-today'
     render(
@@ -243,8 +248,7 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
-      expect(input).toHaveValue(formatDate(DateTime.getYearStartDate(new Date())) + " to " + formatDate(new Date()))
+      expect(input).toHaveValue(DateTime.getYearStartDate(new Date()).formatDate() + " to " + new Date().formatDate())
     })
-
   })
 })
