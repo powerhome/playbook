@@ -1,15 +1,21 @@
 /* eslint-disable no-console */
 import React from 'react'
-import moment from 'moment'
 import { fireEvent, render, screen, waitFor, within } from '../utilities/test-utils'
 
 import DatePicker from './_date_picker'
+import DateTime from "../pb_kit/dateTime.ts"
 import { getTimezoneText } from './plugins/timeSelect'
-
-
 
 jest.setSystemTime(new Date('01/01/2020'));
 const DEFAULT_DATE = new Date()
+
+const formatDate = (date) => {
+  const month = (date.getMonth() + 1).toString().padStart(2, "0")
+  const day = (date.getDate()).toString().padStart(2, "0")
+  const year = date.getFullYear()
+
+  return `${month}/${day}/${year}`
+}
 
 describe('DatePicker Kit', () => {
   beforeEach(() => {
@@ -197,7 +203,7 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
-      expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " to " + moment().endOf('year').format('MM/DD/YYYY'))
+      expect(input).toHaveValue(formatDate(DateTime.getYearStartDate(new Date())) + " to " + formatDate(DateTime.getYearEndDate(new Date())))
     })
 
   })
@@ -225,7 +231,7 @@ describe('DatePicker Kit', () => {
         cancelable: true,
       }),
     )
-    
+
     const thisYear = within(kit).getByText('This year')
 
     fireEvent(
@@ -237,7 +243,7 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
-      expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " to " + moment().format('MM/DD/YYYY'))
+      expect(input).toHaveValue(formatDate(DateTime.getYearStartDate(new Date())) + " to " + formatDate(new Date()))
     })
 
   })
