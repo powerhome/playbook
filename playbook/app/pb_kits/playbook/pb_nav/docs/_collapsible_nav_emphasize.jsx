@@ -3,7 +3,7 @@ import { Nav, NavItem } from '../..'
 
 const CollapsibleNavEmphasize = (props) => {
   return (
-    <Nav variant="bold">
+    <Nav variant="subtle">
       <NavItem
           active 
           collapsible

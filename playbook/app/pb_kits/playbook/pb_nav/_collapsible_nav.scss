@@ -116,6 +116,9 @@
             font-weight: $regular !important;
           }
         }
+          .icon_wrapper:hover {
+            background-color: mix($primary, $card_light, 40%);
+          }
       }
     }
   }
@@ -125,30 +128,25 @@
     [class*="pb_collapsible_nav_item"] {
       &[class*="_active"] {
         .pb_collapsible_main_kit {
-          background-color: $primary !important;
+          background-color: $active_light;
           border-radius: $border_rad_heavier;
           .pb_nav_list_item_text_collapsible,
-          .pb_nav_list_item_icon_collapsible,
-          .icon_wrapper,
-          .pb_icon_kit {
-            color: $white !important;
+          .pb_nav_list_item_icon_collapsible
+           {
+            color: $primary;
           }
         }
-
         &:hover {
           background-color: unset;
         }
-        .pb_collapsible_main_kit:hover {
-          .pb_nav_list_item_text_collapsible {
-            color: $white !important;
-          }
-        }
-
-        .icon_wrapper {
-          &:hover {
-            background-color: mix($primary, $card_light, 40%);
-            .pb_icon_kit {
-              color: $primary !important;
+      }
+      &.dark {
+        &[class*="_active"] {
+          .pb_collapsible_main_kit {
+            background-color: mix($white, $card_dark, 20%);
+            .pb_nav_list_item_text_collapsible,
+            svg {
+              color: $white !important;
             }
           }
         }
@@ -273,11 +271,6 @@
       }
       .icon_wrapper:hover {
         background-color: mix($white, $card_dark, 40%);
-      }
-      &[class*="_active"] {
-        .icon_wrapper:hover {
-          background-color: mix($primary, $card_light, 40%);
-        }
       }
 
       &[class*="pb_collapsible_nav_item"][class*="_collapsible_trail"] {
