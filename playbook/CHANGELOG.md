@@ -1,7 +1,7 @@
 # Collapsible Kit ✨Enhancements✨: External Controls and Customizable Icons!
 ##### August 17, 2023
 
-![12390](https://github.com/powerhome/playbook/assets/73710701/bdd3c61e-40ee-4ef7-ad12-d381822831b3)
+![12-39](https://github.com/powerhome/playbook/assets/73710701/db1d5b50-3049-443b-8a99-2dab35a431f3)
 
 Have a stack of collapsible sections and need a way to expand & collapse them all at once? You can now implement external controls like buttons to do just that! There’s more -- you can also pass custom icons like plus (‘+’) or minus (‘-’) if you don’t fancy chevrons.
 
