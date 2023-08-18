@@ -1,4 +1,4 @@
-@import "../tokens/width.scss";
+@import "../tokens/width";
 
 @for $i from 1 through 99 {
   .width_#{$i} {
