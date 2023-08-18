@@ -1,5 +1,14 @@
 @mixin collapsible_trail_class {
     .pb_collapsible_content_kit {
-      border-color: $border_light;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        bottom: 4px;
+        left: 5px;
+        width: 1px; 
+        background-color: $border_light;
+      }
     }
   }

@@ -195,7 +195,6 @@
     // vertical line on left of collapsible content
     .pb_collapsible_content_kit {
       margin-left: $space_sm + 2;
-      border-left: 1px solid transparent;
     }
 
     .pb_collapsible_main_kit {
@@ -275,7 +274,9 @@
 
       &[class*="pb_collapsible_nav_item"][class*="_collapsible_trail"] {
         .pb_collapsible_content_kit {
-          border-color: $border_dark;
+          &::after {
+            background-color: $border_dark;
+          }
         }
       }
     }
