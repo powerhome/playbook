@@ -4,7 +4,10 @@
     text-align: center;
   }
   ::file-selector-button {
-    display: none;
+    visibility: hidden;
+    padding: 0;
+    border: none;
+    width: 0;
   }
 }
 
