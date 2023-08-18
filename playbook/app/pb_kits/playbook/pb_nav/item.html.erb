@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
   liElements.forEach(function(liElement) {
     var ulElement = findParentByTagName(liElement, 'ul');
-    if (ulElement) {
+    if (ulElement && ulElement.hasAttribute('data-variant')) {
       var orientation = ulElement.getAttribute('data-orientation');
       var variant = ulElement.getAttribute('data-variant');
       
