@@ -5,6 +5,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Caption from '../pb_caption/_caption'
+import { SpacingObject, NavChildProps } from './navTypes'
 
 type NavProps = {
   aria?: { [key: string]: string },
@@ -20,14 +21,8 @@ type NavProps = {
   link?: string,
   title?: string,
   variant?: "normal" | "subtle",
-  itemPadding?: {padding?: string, paddingBottom?: string, paddingTop?: string, paddingRight?: string, paddingLeft?: string, paddingX?: string, paddingY?: string}
+  itemPadding?: SpacingObject
 } & GlobalProps
-
-export type NavChildProps = {
-  orientation?: "vertical" | "horizontal";
-  variant?: "normal" | "subtle";
-  itemPadding?: {padding?: string, paddingBottom?: string, paddingTop?: string, paddingRight?: string, paddingLeft?: string, paddingX?: string, paddingY?: string}
-};
 
 const Nav = (props: NavProps) => {
   const {
@@ -58,7 +53,7 @@ const Nav = (props: NavProps) => {
     className
   )
 
-// Map over the children and clone them with orientation and variant props to gain access to them in navItem
+// Map over the children and clone them with orientation, variant and itemPadding props to gain access to them in navItem
 const childrenWithProps = React.Children.map(children, (child) => {
   if (React.isValidElement(child)) {
     const childProps: NavChildProps = {
