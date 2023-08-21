@@ -39,6 +39,13 @@ type NavItemProps = {
   paddingX?: Spacing;
   paddingY?: Spacing;
   padding?: Spacing;
+  margin?: Spacing,
+  marginBottom?: Spacing,
+  marginTop?: Spacing,
+  marginRight?: Spacing,
+  marginLeft?: Spacing,
+  marginX?: Spacing,
+  marginY?: Spacing,
   orientation?: "vertical" | "horizontal";
   variant?: "normal" | "subtle";
 } & GlobalProps;
@@ -77,7 +84,7 @@ const NavItem = (props: NavItemProps) => {
     text = "",
     collapsibleTrail,
     collapsed,
-    itemPadding,
+    itemSpacing,
     padding,
     paddingX,
     paddingY,
@@ -85,16 +92,32 @@ const NavItem = (props: NavItemProps) => {
     paddingTop,
     paddingLeft,
     paddingRight,
+    margin,
+    marginBottom,
+    marginTop,
+    marginRight,
+    marginLeft,
+    marginX,
+    marginY
   } = props;
 
   const filteredProps = { ...props };
-  delete filteredProps?.padding;
-  delete filteredProps?.paddingX;
-  delete filteredProps?.paddingY;
-  delete filteredProps?.paddingBottom;
-  delete filteredProps?.paddingTop;
-  delete filteredProps?.paddingRight;
-  delete filteredProps?.paddingLeft;
+  [
+    "padding",
+    "paddingX",
+    "paddingY",
+    "paddingBottom",
+    "paddingTop",
+    "paddingRight",
+    "paddingLeft",
+    "margin",
+    "marginX",
+    "marginY",
+    "marginBottom",
+    "marginTop",
+    "marginRight",
+    "marginLeft",
+  ].forEach((prop) => delete filteredProps[prop]);
 
   const Tag = link ? "a" : "div";
   const activeClass = active === true ? "active" : "";
@@ -121,7 +144,7 @@ const NavItem = (props: NavItemProps) => {
     className
   );
 
-  const paddingProps = {
+  const spacingProps = {
     padding,
     paddingBottom,
     paddingTop,
@@ -129,11 +152,18 @@ const NavItem = (props: NavItemProps) => {
     paddingLeft,
     paddingX,
     paddingY,
+    margin,
+    marginBottom,
+    marginTop,
+    marginRight,
+    marginLeft,
+    marginX,
+    marginY,
   };
 
-  const finalItemPadding = {
-    ...(itemPadding || {}),
-    ...Object.entries(paddingProps).reduce((acc: any, [prop, value]) => {
+  const finalItemSpacing = {
+    ...(itemSpacing || {}),
+    ...Object.entries(spacingProps).reduce((acc: any, [prop, value]) => {
       if (value) {
         acc[prop] = value;
       }
@@ -143,7 +173,7 @@ const NavItem = (props: NavItemProps) => {
 
   const tagClasses = classnames(
     collapsible ? "pb_nav_list_item_link_collapsible" : "pb_nav_list_item_link",
-    globalProps({ ...finalItemPadding })
+    globalProps({ ...finalItemSpacing })
   );
 
   const handleIconClick = (e: any) => {
@@ -153,11 +183,11 @@ const NavItem = (props: NavItemProps) => {
     }
   };
 
-  // Map over the children and clone them with itemPadding prop so nested navItems all get itemPadding
+  // Map over the children and clone them with itemSpacing prop so nested navItems all get itemSpacing
   const childrenWithProps = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       const childProps: NavChildProps = {
-        itemPadding: itemPadding,
+        itemSpacing: itemSpacing,
       };
       return React.cloneElement(child, childProps);
     }

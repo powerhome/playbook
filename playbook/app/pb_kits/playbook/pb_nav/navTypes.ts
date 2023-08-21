@@ -8,11 +8,18 @@ export type SpacingObject = {
   paddingLeft?: Spacing;
   paddingX?: Spacing;
   paddingY?: Spacing;
+  margin?: Spacing;
+  marginBottom?: Spacing;
+  marginTop?: Spacing;
+  marginRight?: Spacing;
+  marginLeft?: Spacing;
+  margingX?: Spacing;
+  marginY?: Spacing;
 };
 
 export type NavChildProps = {
     orientation?: "vertical" | "horizontal";
     variant?: "normal" | "subtle";
-    itemPadding?: SpacingObject
+    itemSpacing?: SpacingObject
   };
   
