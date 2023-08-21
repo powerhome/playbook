@@ -30,7 +30,7 @@ module Playbook
       def modified_content
         parsed_content = Nokogiri::HTML.fragment(content.presence)
 
-        parsed_content.css("*").each do |element|
+        parsed_content.css("li").each do |element|
           element["data-orientation"] = orientation
           element["data-variant"] = variant
         end
