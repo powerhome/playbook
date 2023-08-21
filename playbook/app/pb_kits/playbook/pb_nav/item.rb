@@ -29,7 +29,7 @@ module Playbook
       end
 
       def spacing_props
-        if object.padding || object.padding_x || object.padding_y || object.padding_bottom || object.padding_top || object.padding_right || object.padding_left
+        if object.padding || object.padding_x || object.padding_y || object.padding_bottom || object.padding_top || object.padding_right || object.padding_left || object.margin || object.margin_x || object.margin_y || object.margin_bottom || object.margin_top || object.margin_right || object.margin_left
           # Call the original method
           original_result = super
 
@@ -42,6 +42,13 @@ module Playbook
           padding_classes_to_remove << "pt_#{object.padding_top}" if object.padding_top
           padding_classes_to_remove << "pr_#{object.padding_right}" if object.padding_right
           padding_classes_to_remove << "pl_#{object.padding_left}" if object.padding_left
+          padding_classes_to_remove << "m_#{object.margin}" if object.margin
+          padding_classes_to_remove << "mx_#{object.margin_x}" if object.margin_x
+          padding_classes_to_remove << "my_#{object.margin_y}" if object.margin_y
+          padding_classes_to_remove << "mb_#{object.margin_bottom}" if object.margin_bottom
+          padding_classes_to_remove << "mt_#{object.margin_top}" if object.margin_top
+          padding_classes_to_remove << "mr_#{object.margin_right}" if object.margin_right
+          padding_classes_to_remove << "ml_#{object.margin_left}" if object.margin_left
 
           padding_classes_to_remove.each do |class_to_remove|
             original_result.gsub!(class_to_remove, "")
@@ -100,7 +107,7 @@ module Playbook
       end
 
       def padding_classes
-        padding_attributes = {
+        spacing_attributes = {
           padding: "p",
           padding_x: "px",
           padding_y: "py",
@@ -108,10 +115,17 @@ module Playbook
           padding_top: "pt",
           padding_right: "pr",
           padding_left: "pl",
+          margin: "m",
+          margin_x: "mx",
+          margin_y: "my",
+          margin_bottom: "mb",
+          margin_top: "mt",
+          margin_right: "mr",
+          margin_left: "ml",
         }
 
         # rubocop:disable Style/RedundantAssignment
-        padding_classes = padding_attributes.map do |attr, class_prefix|
+        padding_classes = spacing_attributes.map do |attr, class_prefix|
           # rubocop:enable Style/RedundantAssignment
           value = object.public_send(attr)
           " #{class_prefix}_#{value}" if value
