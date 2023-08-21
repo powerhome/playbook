@@ -33,6 +33,7 @@ module Playbook
         parsed_content.css("li").each do |element|
           element["data-orientation"] = orientation
           element["data-variant"] = variant
+          element["data-spacing"] = item_padding
         end
 
         parsed_content.to_html

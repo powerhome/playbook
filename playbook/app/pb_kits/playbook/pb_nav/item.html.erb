@@ -43,3 +43,17 @@
   <% end %>
 <% end %>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var liElements = document.querySelectorAll('li');
+
+  liElements.forEach(function(liElement) {
+    var orientation = liElement.getAttribute('data-orientation');
+    var variant = liElement.getAttribute('data-variant');
+    if (orientation === "horizontal" && variant === "normal") {
+      liElement.classList.remove('font_regular')
+      liElement.classList.add('font_bold')
+    }
+  })
+})
+</script>
