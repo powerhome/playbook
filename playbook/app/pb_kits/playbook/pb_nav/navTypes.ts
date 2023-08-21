@@ -1,11 +1,13 @@
+import { Spacing } from "../types";
+
 export type SpacingObject = {
-  padding?: string;
-  paddingBottom?: string;
-  paddingTop?: string;
-  paddingRight?: string;
-  paddingLeft?: string;
-  paddingX?: string;
-  paddingY?: string;
+  padding?: Spacing;
+  paddingBottom?: Spacing;
+  paddingTop?: Spacing;
+  paddingRight?: Spacing;
+  paddingLeft?: Spacing;
+  paddingX?: Spacing;
+  paddingY?: Spacing;
 };
 
 export type NavChildProps = {

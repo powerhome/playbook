@@ -10,7 +10,7 @@
       <% end %>
     <% end %>
   <% end %>
-  <ul data-orientation="<%= object.orientation %>" data-variant="<%= object.variant %>">
-    <%= content.presence %>
+  <ul>
+  <%= raw object.modified_content %>
   </ul>
 <% end %>
