@@ -1,4 +1,4 @@
-import moment from 'moment'
+import DateTime from '../../pb_kit/dateTime';
 
 type FpTypes = {
   setDate: (arg0: any, arg1: boolean) => void,
@@ -23,37 +23,44 @@ let activeLabel = ""
 
 const quickPickPlugin = (thisRangesEndToday: boolean) => {
   return function (fp: FpTypes & any): any {
-    const thisWeekEndDate = thisRangesEndToday ? new Date() : moment().endOf('isoWeek').toDate()
-    const thisMonthEndDate = thisRangesEndToday ? new Date() : moment().endOf('month').toDate()
-    const thisQuarterEndDate = thisRangesEndToday ? new Date() : moment().endOf('quarter').toDate()
-    const thisYearEndDate = thisRangesEndToday ? new Date() : moment().endOf('year').toDate()
+    const today = new Date()
+    const yesterday = DateTime.getYesterdayDate(new Date())
+
+    const thisWeekStartDate = DateTime.getFirstDayOfWeek(new Date())
+    const thisWeekEndDate = thisRangesEndToday ? new Date() : DateTime.getLastDayOfWeek(new Date())
+    const lastWeekStartDate = DateTime.getPreviousWeekStartDate(new Date())
+    const lastWeekEndDate = DateTime.getPreviousWeekEndDate(new Date())
+
+    const thisMonthStartDate = DateTime.getMonthStartDate(new Date())
+    const thisMonthEndDate = thisRangesEndToday ? new Date() : DateTime.getMonthEndDate(new Date())
+    const lastMonthStartDate = DateTime.getPreviousMonthStartDate(new Date())
+    const lastMonthEndDate = DateTime.getPreviousMonthEndDate(new Date())
+
+    const thisQuarterStartDate = DateTime.getQuarterStartDate(new Date())
+    const thisQuarterEndDate = thisRangesEndToday ? new Date() : DateTime.getQuarterEndDate(new Date())
+    const lastQuarterStartDate = DateTime.getPreviousQuarterStartDate(new Date())
+    const lastQuarterEndDate = DateTime.getPreviousQuarterEndDate(new Date())
+
+    const thisYearStartDate = DateTime.getYearStartDate(new Date())
+    const thisYearEndDate = thisRangesEndToday ? new Date() : DateTime.getYearEndDate(new Date())
+    const lastYearStartDate = DateTime.getPreviousYearStartDate(new Date())
+    const lastYearEndDate = DateTime.getPreviousYearEndDate(new Date())
 
     // variable that holds the ranges available
     const ranges = {
-      'Today': [new Date(), new Date()],
-      'Yesterday': [moment().subtract(1, 'days').toDate(), moment().subtract(1, 'days').toDate()],
-      'This week': [moment().startOf('isoWeek').toDate(), thisWeekEndDate],
-      'This month': [moment().startOf('month').toDate(), thisMonthEndDate],
-      'This quarter': [moment().startOf('quarter').toDate(), thisQuarterEndDate],
-      'This year': [moment().startOf('year').toDate(), thisYearEndDate],
-      'Last week': [
-        moment().subtract(1, 'week').startOf('isoWeek').toDate(),
-        moment().subtract(1, 'week').endOf('isoWeek').toDate()
-      ],
-      'Last month': [
-        moment().subtract(1, 'month').startOf('month').toDate(),
-        moment().subtract(1, 'month').endOf('month').toDate()
-      ],
-      'Last quarter': [
-        moment().subtract(1, 'quarter').startOf('quarter').toDate(),
-        moment().subtract(1, 'quarter').endOf('quarter').toDate()
-      ],
-      'Last year': [
-        moment().subtract(1, 'year').startOf('year').toDate(),
-        moment().subtract(1, 'year').endOf('year').toDate()
-      ]
+      'Today': [today, today],
+      'Yesterday': [yesterday, yesterday],
+      'This week': [thisWeekStartDate, thisWeekEndDate],
+      'This month': [thisMonthStartDate, thisMonthEndDate],
+      'This quarter': [thisQuarterStartDate, thisQuarterEndDate],
+      'This year': [thisYearStartDate, thisYearEndDate],
+      'Last week': [lastWeekStartDate, lastWeekEndDate],
+      'Last month': [lastMonthStartDate, lastMonthEndDate],
+      'Last quarter': [lastQuarterStartDate, lastQuarterEndDate],
+      'Last year': [lastYearStartDate, lastYearEndDate]
     }
-    //creating the ul element for the nav dropdown and giving it classnames
+
+    // creating the ul element for the nav dropdown and giving it classnames
     const rangesNav = document.createElement('ul');
 
     // creating the pluginData object that will hold the properties of this plugin
@@ -64,11 +71,11 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
     };
 
     /**
-   *    @param {string} label
-   *    @returns HTML Element
-   */
+      * @param {string} label
+      * @returns HTML Element
+      */
 
-    //function for creating the range buttons in the nav
+    // function for creating the range buttons in the nav
     const addRangeButton = (label: string) => {
 
       // creating new elements to mimick selectable card component
@@ -88,7 +95,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       // append the li item to the ul rangeNav prop
       pluginData.rangesNav.appendChild(item);
 
-      // return the ranges buton prop
+      // return the ranges button prop
       return pluginData.rangesButtons[label];
     };
 
@@ -98,7 +105,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       if (current) {
         current.classList.remove('active');
       }
-     
+
       if (selectedDates.length > 0 && activeLabel) {
         pluginData.rangesButtons[activeLabel].classList.add('active');
       }
@@ -109,16 +116,15 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
         selectedDates[1].toDateString() === pluginData.ranges[activeLabel][1].toDateString()
     }
 
-
     return {
-      // onReady is a hook from flatpickr that runs when calender is in a ready state
+      // onReady is a hook from flatpickr that runs when calendar is in a ready state
       onReady(selectedDates: Array<Date>) {
         // loop through the ranges and create an anchor tag for each range and add an event listener to set the date when user clicks on a date range
         for (const [label, range] of Object.entries(pluginData.ranges)) {
           addRangeButton(label).addEventListener('click', function () {
 
-            const start = moment(range[0]).toDate();
-            const end = moment(range[1]).toDate();
+            const start = new Date(range[0]);
+            const end = new Date(range[1]);
 
             if (!start) {
               fp.clear();
