@@ -17,6 +17,7 @@ const formatDate = (newDate: Date | string) => {
 
 export const toMinute = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
+
   if (timeZone) {
     return date.toLocaleTimeString(undefined, { timeZone, hour: "2-digit", minute: "2-digit" }).slice(3, 5);
   } else {
@@ -26,6 +27,7 @@ export const toMinute = (newDate: Date | string, timeZone?: string): string => {
 
 export const toHour = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
+
   if (timeZone) {
     return date.toLocaleTimeString(undefined, { timeZone, hour: "numeric" }).split(' ')[0];
   } else {
@@ -34,52 +36,53 @@ export const toHour = (newDate: Date | string, timeZone?: string): string => {
 }
 
 export const toDay = (newDate: Date | string, timeZone?: string): number => {
-    if (timeZone) {
-      const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
-      return date.getDate()
-    } else {
-      const date = formatDate(newDate)
-      return date.getDate()
-    }
+  if (timeZone) {
+    const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
+    return date.getDate()
+  } else {
+    const date = formatDate(newDate)
+    return date.getDate()
+  }
 }
 
 export const toDayAbbr = (newDate: Date | string): string => {
   const date = formatDate(newDate)
-  return ABBR_DAYS[date.getUTCDay()]
+  return ABBR_DAYS[date.getDay()]
 }
 
 export const toWeekday = (newDate: Date | string): string => {
-    const date = formatDate(newDate)
-    return days[date.getUTCDay()]
+  const date = formatDate(newDate)
+  return days[date.getDay()]
 }
 
 export const toMonth = (newDate: Date | string, timeZone?: string): string => {
-    if (timeZone) {
-      const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
-      return months[date.getUTCMonth()]
-    } else {
-      const date = formatDate(newDate)
-      return months[date.getUTCMonth()]
-    }
+  if (timeZone) {
+    const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
+    return months[date.getMonth()]
+  } else {
+    const date = formatDate(newDate)
+    return months[date.getMonth()]
+  }
 }
 
 export const toMonthNum = (newDate: Date | string): number => {
   const date = formatDate(newDate)
-  return date.getUTCMonth() +1
+  return date.getMonth() + 1
 }
 
 export const toYear = (newDate: Date | string, timeZone?: string): number => {
     if (timeZone) {
-      const date = new Date(newDate.toLocaleString(undefined, { timeZone }));
-      return date.getUTCFullYear()
+      const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
+      return date.getFullYear()
     } else {
-      const date = new Date(newDate)
-      return date.getUTCFullYear()
+      const date = formatDate(newDate)
+      return date.getFullYear()
     }
 }
 
 export const toTime = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
+
   if (timeZone) {
     return date.toLocaleTimeString(undefined, { timeZone, timeStyle: "short" }).split(' ')[0];
   } else {
@@ -88,21 +91,23 @@ export const toTime = (newDate: Date | string, timeZone?: string): string => {
 }
 
 export const toMeridiem = (newDate: Date | string, timeZone?: string): string => {
-    const date = formatDate(newDate)
-    if (timeZone) {
-      return date.toLocaleString(undefined, { timeZone, hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
-    } else {
-      return date.toLocaleString(undefined, { hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
-    }
+  const date = formatDate(newDate)
+
+  if (timeZone) {
+    return date.toLocaleString(undefined, { timeZone, hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
+  } else {
+    return date.toLocaleString(undefined, { hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
+  }
 }
 
 export const toTimeZone = (newDate: Date | string, timeZone?: string): string => {
-    const date = formatDate(newDate)
-    if (timeZone) {
-      return date.toLocaleString(undefined, { timeZone, timeZoneName: "short" }).split(' ')[3];
-    } else {
-      return date.toLocaleString(undefined, { timeZoneName: "short" }).split(' ')[3];
-    }
+  const date = formatDate(newDate)
+
+  if (timeZone) {
+    return date.toLocaleString(undefined, { timeZone, timeZoneName: "short" }).split(' ')[3];
+  } else {
+    return date.toLocaleString(undefined, { timeZoneName: "short" }).split(' ')[3];
+  }
 }
 
 export const toTimeWithMeridiem = (newDate: Date | string, timeZone: string): string => {
@@ -111,8 +116,8 @@ export const toTimeWithMeridiem = (newDate: Date | string, timeZone: string): st
 }
 
 export const toIso = (newDate: Date | string): string => {
-    const date = formatDate(newDate)
-    return date.toISOString()
+  const date = formatDate(newDate)
+  return date.toISOString()
 }
 
 export const fromNow = (newDate: Date | string): string => {
