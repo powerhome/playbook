@@ -35,7 +35,7 @@
   "rules": {
     "jsx-control-statements/jsx-jcs-no-undef": 1,
     "no-console": 1,
-    "no-restricted-globals": [1, { "name": "moment" }],
+    "no-restricted-globals": 1,
     "no-use-before-define": [1, { "functions": true, "classes": true }],
     "react/forbid-prop-types": 2,
     "react/jsx-boolean-value": 2,

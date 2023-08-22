@@ -9247,25 +9247,6 @@ mkdirp@1.x, mkdirp@^1.0.3, mkdirp@^1.0.4:
   dependencies:
     minimist "^1.2.6"
 
-moment-strftime@^0.5.0:
-  version "0.5.0"
-  resolved "https://npm.powerapp.cloud/moment-strftime/-/moment-strftime-0.5.0.tgz#0cd395058cfabb2cbdbf49a2d3758aa22093d65a"
-  integrity sha512-0gwXdJEY1nD1YMlH9nLbDl+HLMfprzfxT2+qDkl29jGgDlVHzPCdwBBN0DPgY+e3+ur7tfdngxweKYBiT80nEA==
-  dependencies:
-    moment "^2.11.2"
-
-moment-timezone@^0.5.26:
-  version "0.5.40"
-  resolved "https://npm.powerapp.cloud/moment-timezone/-/moment-timezone-0.5.40.tgz#c148f5149fd91dd3e29bf481abc8830ecba16b89"
-  integrity sha512-tWfmNkRYmBkPJz5mr9GVDn9vRlVZOTe6yqY92rFxiOdWXbjaR0+9LwQnZGGuNR63X456NqmEkbskte8tWL5ePg==
-  dependencies:
-    moment ">= 2.9.0"
-
-"moment@>= 2.9.0", moment@^2.11.2, moment@^2.29.1:
-  version "2.29.4"
-  resolved "https://npm.powerapp.cloud/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
-  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
-
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://npm.powerapp.cloud/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
