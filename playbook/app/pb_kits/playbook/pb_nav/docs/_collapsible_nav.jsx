@@ -7,10 +7,7 @@ const CollapsibleNav = (props) => {
       <NavItem
           active
           collapsible 
-          collapsibleTrail
-          fontWeight="bolder"
           iconLeft="city" 
-          iconRight={["plus", "minus"]}
           link="#" 
           text="Overview" 
           {...props}
@@ -33,10 +30,7 @@ const CollapsibleNav = (props) => {
       </NavItem>
       <NavItem 
           collapsible 
-          collapsibleTrail
-          fontWeight="bolder"
           iconLeft="theater-masks"
-          iconRight={["plus", "minus"]}
           link="#" 
           text="Albums" 
           {...props}
@@ -59,10 +53,7 @@ const CollapsibleNav = (props) => {
       </NavItem>
       <NavItem 
           collapsible 
-          collapsibleTrail
-          fontWeight="bolder"
           iconLeft="city" 
-          iconRight={["plus", "minus"]}
           link="#" 
           text="Similar Artists" 
           {...props}

@@ -18,7 +18,7 @@ const CollapsibleNavCustom = (props) => {
 
   return (
     <>
-      <Nav>
+      <Nav variant="bold">
         {navItems.map((text, index) => {
           const [collapsed] = collapsibles[index]
           return (
@@ -28,6 +28,7 @@ const CollapsibleNavCustom = (props) => {
                 collapsibleTrail
                 fontWeight="bolder"
                 iconLeft="chevron-down"
+                iconRight={["plus", "minus"]}
                 id={`collapsible-nav-item-${index + 1}`}
                 key={index}
                 link="#"

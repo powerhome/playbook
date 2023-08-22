@@ -78,7 +78,7 @@ module Playbook
       end
 
       def collapsible_icons
-        icon_right.present? ? icon_right : %w[plus minus]
+        icon_right.present? && icon_right
       end
 
     private

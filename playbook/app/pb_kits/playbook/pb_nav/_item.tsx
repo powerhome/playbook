@@ -198,7 +198,7 @@ const NavItem = (props: NavItemProps) => {
     <li {...ariaProps} {...dataProps} className={classes} id={id}>
       {collapsible ? (
         <Collapsible
-          icon={iconRight ? iconRight : ["plus", "minus"]}
+          icon={iconRight && iconRight}
           iconSize="xs"
           id={id}
           collapsed={collapsed}
