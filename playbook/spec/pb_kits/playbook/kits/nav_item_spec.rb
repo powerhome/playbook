@@ -14,8 +14,8 @@ RSpec.describe Playbook::PbNav::Item do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to start_with "pb_nav_list_kit_item"
-      expect(subject.new(active: true).classname).to eq "pb_nav_list_kit_item_active font_size_normal font_regular"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_nav_list_kit_item additional_class font_size_normal font_regular"
+      expect(subject.new(active: true).classname).to eq "pb_nav_list_kit_item_active font_size_regular font_regular"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_nav_list_kit_item additional_class font_size_regular font_regular"
     end
   end
 end
