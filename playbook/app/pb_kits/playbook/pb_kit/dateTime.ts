@@ -124,7 +124,7 @@ export const fromNow = (newDate: Date | string): string => {
   const startDate = formatDate(newDate).getTime()
   const endDate = new Date().getTime()
   const elapsedTime = endDate - startDate
-  let elapsedTimeString = `${Math.round(elapsedTime / (365.25 * 24 * 60 * 60 * 1000))} years ago.`; // 730+ days
+  let elapsedTimeString = `${Math.round(elapsedTime / (365.25 * 24 * 60 * 60 * 1000))} years ago`; // 730+ days
 
   const elapsedTimeData = [
     { min: 0, max: 44999, value: "a few seconds ago" }, // 0-44 seconds
