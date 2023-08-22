@@ -21,7 +21,7 @@ const DateUnstyled = (props) => {
       <Title size={1}>
         <FormattedDate
             unstyled
-            value="1995-12-25"
+            value={new Date('25 Dec 1995')}
             {...props}
         />
       </Title>
@@ -36,7 +36,7 @@ const DateUnstyled = (props) => {
             showDayOfWeek
             showIcon
             unstyled
-            value="1995-12-25"
+            value={new Date('25 Dec 1995')}
             {...props}
         />
       </Caption>

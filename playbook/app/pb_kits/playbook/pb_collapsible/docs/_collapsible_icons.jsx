@@ -1,9 +1,14 @@
 import React from 'react'
 import { Collapsible } from '../..'
 
-const CollapsibleIcons = () => (
-  <Collapsible icon={['plus','minus']}>
-    <Collapsible.Main>
+const CollapsibleIcons = (props) => {
+
+  return (
+  <>
+  <Collapsible
+      icon={['plus','minus']}
+  >
+    <Collapsible.Main {...props}>
       <div>{'Main Section'}</div>
     </Collapsible.Main>
     <Collapsible.Content>
@@ -14,6 +19,8 @@ const CollapsibleIcons = () => (
       </div>
     </Collapsible.Content>
   </Collapsible>
-)
+  </>
+  )
+}
 
 export default CollapsibleIcons

@@ -1,15 +1,17 @@
 import React from "react";
+import { Nav, NavItem } from '../..'
 
-import Nav from "../_nav";
-import NavItem from "../_item";
-
-const CollapsibleNavCustomIcons = (props) => {
+const CollapsibleNavEmphasize = (props) => {
   return (
-    <Nav variant="subtle">
+    <Nav variant="bold">
       <NavItem
-          collapsible 
+          active 
+          collapsible
+          collapsibleTrail
+          fontSize="small"
+          fontWeight="bolder"
           iconLeft="city" 
-          iconRight={["chevron-down", "chevron-up"]}
+          iconRight={["plus", "minus"]}
           link="#" 
           text="Overview" 
           {...props}
@@ -31,10 +33,12 @@ const CollapsibleNavCustomIcons = (props) => {
         />
       </NavItem>
       <NavItem 
-          active 
           collapsible 
+          collapsibleTrail
+          fontSize="small"
+          fontWeight="bolder"
           iconLeft="theater-masks"
-          iconRight={["chevron-down", "chevron-up"]}
+          iconRight={["plus", "minus"]}
           link="#" 
           text="Albums" 
           {...props}
@@ -57,8 +61,11 @@ const CollapsibleNavCustomIcons = (props) => {
       </NavItem>
       <NavItem 
           collapsible 
+          collapsibleTrail
+          fontSize="small"
+          fontWeight="bolder"
           iconLeft="city" 
-          iconRight={["chevron-down", "chevron-up"]}
+          iconRight={["plus", "minus"]}
           link="#" 
           text="Similar Artists" 
           {...props}
@@ -83,4 +90,4 @@ const CollapsibleNavCustomIcons = (props) => {
   );
 };
 
-export default CollapsibleNavCustomIcons;
+export default CollapsibleNavEmphasize;

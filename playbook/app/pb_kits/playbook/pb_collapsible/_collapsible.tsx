@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import classnames from 'classnames'
+import  useCollapsible from './useCollapsible'
 
 import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -16,20 +17,15 @@ type CollapsibleProps = {
   className?: string,
   collapsed?: boolean,
   data?: object,
-  icon?: string | string[]
+  icon?: string | string[],
   iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
-  iconSize?: IconSizes
+  iconSize?: IconSizes,
+  onIconClick?: ()=> void,
+  onClick?: ()=> void,
   id?: string,
 }
 
-const useCollapsible = (initial = false) => {
-  const [collapsed, setCollapsed] = useState(initial)
 
-  return [
-    collapsed,
-    () => setCollapsed((t) => !t),
-  ]
-}
 
 const Collapsible = ({
   aria = {},
@@ -40,10 +36,17 @@ const Collapsible = ({
   icon,
   iconColor = 'default',
   iconSize,
+  onIconClick,
+  onClick,
   id,
   ...props
 }: CollapsibleProps) => {
-  const [isCollapsed, collapse] = useCollapsible(collapsed)
+  const [isCollapsed, toggle, setIsCollapsed] = useCollapsible(collapsed)
+
+  useEffect(()=> {
+   setIsCollapsed(collapsed)
+  },[collapsed])
+
   const CollapsibleParent = React.Children.toArray(children) as JSX.Element[]
 
   if (CollapsibleParent.length !== 2) {
@@ -62,9 +65,8 @@ const Collapsible = ({
     globalProps(props),
     className
   )
-
   return (
-    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, collapse, icon, iconSize, iconColor }}>
+    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, toggle, icon, iconSize, iconColor, onIconClick, onClick }}>
       <div
           {...ariaProps}
           {...dataProps}

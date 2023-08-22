@@ -1,13 +1,13 @@
 import React from 'react'
 import { Collapsible } from '../..'
 
-const CollapsibleColor = () => (
+const CollapsibleColor = (props) => (
   <div>
     <Collapsible
         iconColor='default'
         marginBottom="xs"
     >
-      <Collapsible.Main>
+      <Collapsible.Main {...props}>
         <div>{'Default Section'}</div>
       </Collapsible.Main>
       <Collapsible.Content>

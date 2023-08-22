@@ -6,6 +6,8 @@ require "action_view"
 module Playbook
   module PbSelect
     class Select < Playbook::KitBase
+      prop :attributes, type: Playbook::Props::Hash,
+                        default: {}
       prop :blank_selection
       prop :compact, type: Playbook::Props::Boolean, default: false
       prop :disabled, type: Playbook::Props::Boolean, default: false
@@ -21,6 +23,18 @@ module Playbook
 
       def classnames
         classname + inline_class + compact_class
+      end
+
+      def all_attributes
+        {
+          id: id,
+          prompt: blank_selection,
+          disabled: disabled,
+          required: required,
+          multiple: multiple,
+          onchange: onchange,
+          include_blank: include_blank,
+        }.merge(attributes)
       end
 
       def classname

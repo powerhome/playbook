@@ -33,7 +33,8 @@ type CollapsibleMainProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
   cursor?: string,
-
+  dark?: boolean,
+  onClick?: ()=> void
 }
 type IconColors =  "default" | "light" | "lighter" | "link" | "error" | "success"
 
@@ -42,9 +43,10 @@ type IconProps = {
   icon?: string[] | string
   iconColor?: IconColors
   iconSize?: IconSizes
+  onIconClick?: ()=> void
 }
 
-const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
+const ToggleIcon = ({ collapsed, icon, iconSize, iconColor, onIconClick }: IconProps) => {
   const color = colorMap[iconColor]
 
   const showIcon = (icon: string |string[]) => {
@@ -54,6 +56,13 @@ const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
     return icon
   }
 
+  const handleIconClick = (e:any) => {
+    if (onIconClick) {
+    e.stopPropagation();
+    onIconClick()
+    }
+  }
+
   return (
     <>
       {collapsed ? (
@@ -61,6 +70,7 @@ const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
           className="icon_wrapper"
           key={icon ? showIcon(icon)[0] : "chevron-down"}
           style={{ verticalAlign: "middle", color: color }}
+          onClick={(e)=> handleIconClick(e)}
         >
           <Icon icon={icon ? showIcon(icon)[0] : "chevron-down"} size={iconSize} />
         </div>
@@ -69,6 +79,7 @@ const ToggleIcon = ({ collapsed, icon, iconSize, iconColor }: IconProps) => {
           className="icon_wrapper"
           key={icon ? showIcon(icon)[1] : "chevron-up"}
           style={{ verticalAlign: "middle", color: color }}
+          onClick={(e)=> handleIconClick(e)}
         >
           <Icon icon={icon ? showIcon(icon)[1] : "chevron-up"} size={iconSize} />
         </div>
@@ -83,13 +94,18 @@ const CollapsibleMain = ({
   cursor = 'pointer',
   ...props
 }: CollapsibleMainProps): React.ReactElement=> {
-  const context: {[key: string]: IconColors | (() => void)} | boolean = useContext(CollapsibleContext)
+  const {collapsed, toggle, icon, iconSize, iconColor, onIconClick, onClick}: any = useContext(CollapsibleContext)
   const mainCSS = buildCss('pb_collapsible_main_kit')
   const mainSpacing = globalProps(props, { cursor })
 
+  const handleCollapsibleClick = () => {
+    toggle();
+    onClick && onClick()
+  }
+
   return (
     <div className={classnames(mainCSS, className, mainSpacing)}>
-      <div onClick={context.collapse as (() => void)}>
+      <div onClick={handleCollapsibleClick}>
         <Flex
             spacing="between"
             vertical="center"
@@ -97,10 +113,11 @@ const CollapsibleMain = ({
           <FlexItem>{children}</FlexItem>
           <FlexItem>
             <ToggleIcon
-                collapsed={context.collapsed as () => void}
-                iconColor={context.iconColor as IconColors}
-                iconSize={context.iconSize as IconSizes}
-                icon={context.icon as string[] | string}
+                collapsed={collapsed as () => void}
+                iconColor={iconColor as IconColors}
+                iconSize={iconSize as IconSizes}
+                icon={icon as string[] | string}
+                onIconClick={onIconClick}
             />
             </FlexItem>
         </Flex>

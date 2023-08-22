@@ -14,9 +14,9 @@ type DateRangeStackedProps = {
   className?: string | string[],
   data?: string,
   dark?: boolean,
-  endDate: string,
+  endDate: Date,
   id?: string,
-  startDate: string,
+  startDate: Date,
 }
 
 const DateRangeStacked = (props: DateRangeStackedProps) => {
@@ -29,7 +29,9 @@ const DateRangeStacked = (props: DateRangeStackedProps) => {
   const dataProps = buildDataProps(data)
 
   return (
-    <div {...dataProps} className={css}>
+    <div {...dataProps}
+        className={css}
+    >
       <Flex vertical="center">
         <FlexItem>
           <DateYearStacked
