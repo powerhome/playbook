@@ -126,6 +126,8 @@ export const fromNow = (newDate: Date | string): string => {
   const elapsedTime = endDate - startDate
   let elapsedTimeString = `${Math.round(elapsedTime / (365.25 * 24 * 60 * 60 * 1000))} years ago`; // 730+ days
 
+  const MILLISECONDS_IN_A_MONTH = 30.44 * 24 * 60 * 60 * 1000
+
   const elapsedTimeData = [
     { min: 0, max: 44999, value: "a few seconds ago" }, // 0-44 seconds
     { min: 45000, max: 89999, value: "a minute ago" }, // 45-89 seconds
@@ -135,7 +137,7 @@ export const fromNow = (newDate: Date | string): string => {
     { min: 75700000, max: 172899999, value: "a day ago" }, // 22-48 hours
     { min: 172900000, max: 2169999999, value: `${Math.round(elapsedTime / 86400000)} days ago`}, // 2-25 days
     { min: 2170000000, max: 5184999999, value: "a month ago"}, // 26-60 days
-    { min: 5185000000, max: 27561699999, value: `${Math.round(elapsedTime / 30.44 * 24 * 60 * 60 * 1000)} months ago`}, // 60-319 days
+    { min: 5185000000, max: 27561699999, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_MONTH)} months ago`}, // 60-319 days
     { min: 27561700000, max: 63072999999, value: "a year ago"}, // 320-730 days
   ];
 
