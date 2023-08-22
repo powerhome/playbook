@@ -1,3 +1,37 @@
+# Collapsible Kit ✨Enhancements✨: External Controls and Customizable Icons!
+##### August 17, 2023
+
+![123900](https://github.com/powerhome/playbook/assets/73710701/61e291b4-74c2-4133-84a2-19b1458cb895)
+
+Have a stack of collapsible sections and need a way to expand & collapse them all at once? You can now implement external controls like buttons to do just that! There’s more -- you can also pass custom icons like plus (‘+’) or minus (‘-’) if you don’t fancy chevrons.
+
+ [12.39.0](https://github.com/powerhome/playbook/tree/12.39.0)  full list of changes:
+
+**Kit Enhancements:**
+
+- Collapsible Kit Enhancements [\#2692](https://github.com/powerhome/playbook/pull/2692) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Select Kit 'multiple' Variant Fixes [\#2701](https://github.com/powerhome/playbook/pull/2701) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.38.0...12.39.0)
+
+
+# 12.38.0
+##### August 15, 2023
+
+List of changes: 
+
+**Improvements:**
+
+-  Refactor Date and Time Kits to not Rely on Moment.js [\#2691](https://github.com/powerhome/playbook/pull/2691) ([gavhuang](https://github.com/gavhuang), [Israel-Molestina](https://github.com/Israel-Molestina))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.37.0...12.38.0)
+
+
+
 # Text Fields Just Got Smarter!
 ##### August 9, 2023
 

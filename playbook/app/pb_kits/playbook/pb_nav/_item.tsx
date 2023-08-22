@@ -11,57 +11,71 @@ import Collapsible from '../pb_collapsible/_collapsible'
 type NavItemProps = {
   active?: boolean,
   aria?: { [key: string]: string },
+  fontWeight?: "regular" | "bold" | "bolder",
   children?: React.ReactNode[] | React.ReactNode,
   className?: string,
   collapsible?: boolean,
-  collapsibleClick?: () => void,
   data?: object,
+  dark?: boolean,
+  fontSize?: "normal" | "small",
   iconLeft?: string,
   iconRight?: string | string[],
-  iconRightClick?: () => void,
-  iconLeftClick?: () => void,
+  onIconRightClick?: () => void,
+  onIconLeftClick?: () => void,
   id?: string,
   imageUrl?: string,
   link?: string,
-  onClick?: React.MouseEventHandler<HTMLElement>,
+  onClick?: () => void,
   target?: '_blank' | '_self' | '_parent' | '_top',
   text: string,
-  toggleCollapsed?: any
+  collapsibleTrail?: boolean,
+  collapsed?: boolean
 } & GlobalProps
 
 const NavItem = (props: NavItemProps) => {
   const {
     active = false,
     aria = {},
+    fontWeight = "regular",
     children,
     className,
     collapsible,
-    collapsibleClick,
     data = {},
+    dark = false,
+    fontSize = "normal",
     iconLeft,
     iconRight,
-    iconRightClick,
-    iconLeftClick,
+    onIconRightClick,
+    onIconLeftClick,
     id,
     imageUrl,
     link,
     onClick = () => { },
     target = '_self',
     text = '',
-    toggleCollapsed
+    collapsibleTrail,
+    collapsed
   } = props
 
   const Tag = link ? 'a' : 'div'
   const activeClass = active === true ? 'active' : ''
+  const collapsibleTrailClass = collapsible && collapsibleTrail ? 'collapsible_trail' : ''
+  const fontSizeClass = fontSize === 'small' ? "font_size_small" : "font_size_normal"
+  const fontWeightClass = fontWeight === 'bold' ? "font_bold" : fontWeight === 'bolder' ? "font_bolder" : "font_regular"
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), collapsible ? 'pb_collapsible_nav_item' : '', globalProps(props), className)
+  const classes = classnames(buildCss('pb_nav_list_kit_item', activeClass), 
+                  collapsible ? buildCss('pb_collapsible_nav_item', activeClass, collapsibleTrailClass) : '', 
+                  fontSizeClass,
+                  fontWeightClass,
+                  globalProps(props), 
+                  className)
 
 
   const handleIconClick = (e:any) => {
-    if (iconLeftClick) {
+    if (onIconLeftClick) {
     e.stopPropagation();
-    iconLeftClick()
+    onIconLeftClick()
     }
   }
 
@@ -77,20 +91,19 @@ const NavItem = (props: NavItemProps) => {
           <Collapsible icon={iconRight ? iconRight : ['plus','minus']} 
             iconSize="xs" 
             id={id}
-            collapsed={toggleCollapsed}
-            iconClick={iconRightClick}
-            onClick={collapsibleClick}
+            collapsed={collapsed}
+            onIconClick={onIconRightClick}
+            onClick={onClick}
           >
-          <Collapsible.Main>
+          <Collapsible.Main dark={dark}>
           <Tag
-          className="pb_nav_list_item_link"
+          className="pb_nav_list_item_link_collapsible"
           href={link}
-          onClick={onClick}
           target={target}
         >
           {imageUrl &&
             <div
-              className="pb_nav_list_item_icon_section"
+              className="pb_nav_list_item_icon_section_collapsible"
               key={imageUrl}
               onClick={(e)=>handleIconClick(e)}
             >
@@ -103,18 +116,18 @@ const NavItem = (props: NavItemProps) => {
   
           {iconLeft &&
             <div
-              className="pb_nav_list_item_icon_section"
+              className="pb_nav_list_item_icon_section_collapsible"
               key={iconLeft}
               onClick={(e)=>handleIconClick(e)}
             >
               <Icon
-                className="pb_nav_list_item_icon_left"
+                className="pb_nav_list_item_icon_left_collapsible"
                 fixedWidth
                 icon={iconLeft}
               />
             </div>
           }
-           <span className="pb_nav_list_item_text">
+           <span className="pb_nav_list_item_text_collapsible">
             {text}
           </span>
         </Tag>
