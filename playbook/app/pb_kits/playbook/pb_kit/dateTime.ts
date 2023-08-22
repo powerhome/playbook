@@ -71,13 +71,13 @@ export const toMonthNum = (newDate: Date | string): number => {
 }
 
 export const toYear = (newDate: Date | string, timeZone?: string): number => {
-    if (timeZone) {
-      const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
-      return date.getFullYear()
-    } else {
-      const date = formatDate(newDate)
-      return date.getFullYear()
-    }
+  if (timeZone) {
+    const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
+    return date.getFullYear()
+  } else {
+    const date = formatDate(newDate)
+    return date.getFullYear()
+  }
 }
 
 export const toTime = (newDate: Date | string, timeZone?: string): string => {
@@ -121,7 +121,6 @@ export const toIso = (newDate: Date | string): string => {
 }
 
 export const fromNow = (newDate: Date | string): string => {
-
   const startDate = formatDate(newDate).getTime()
   const endDate = new Date().getTime()
   const elapsedTime = endDate - startDate
