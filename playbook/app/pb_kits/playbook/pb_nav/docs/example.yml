@@ -27,7 +27,7 @@ examples:
   - subtle_nav: Subtle Variant
   - subtle_with_icons_nav: Subtle With Icons
   - collapsible_nav: Collapsible Nav
-  - collapsible_nav_emphasize: Collapsible Nav with Emphasize Styling
+  - collapsible_nav_emphasize: Collapsible Nav with fontWeight And collapsibleTrail
   - collapsible_nav_custom: Collapsible Nav With Custom Toggling
   - subtle_no_highlight_nav: Subtle No Highlight
   - bold_vertical_nav: Bold Variant

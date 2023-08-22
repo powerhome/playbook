@@ -50,6 +50,13 @@
   //styling for default variant with collapsible
   &[class*="_normal"] {
     [class*="pb_collapsible_nav_item"] {
+      &[class*="_collapsible_trail"] {
+        .pb_collapsible_content_kit {
+          &::after {
+            left: 0px !important;
+          }
+        }
+      }
       .pb_collapsible_content_kit {
         margin-left: $space_lg + 3;
       }
@@ -116,9 +123,9 @@
             font-weight: $regular !important;
           }
         }
-          .icon_wrapper:hover {
-            background-color: mix($primary, $card_light, 40%);
-          }
+        .icon_wrapper:hover {
+          background-color: mix($primary, $card_light, 40%);
+        }
       }
     }
   }
@@ -131,8 +138,7 @@
           background-color: $active_light;
           border-radius: $border_rad_heavier;
           .pb_nav_list_item_text_collapsible,
-          .pb_nav_list_item_icon_collapsible
-           {
+          .pb_nav_list_item_icon_collapsible {
             color: $primary;
           }
         }

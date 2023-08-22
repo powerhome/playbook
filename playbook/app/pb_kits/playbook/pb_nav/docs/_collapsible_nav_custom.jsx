@@ -18,7 +18,7 @@ const CollapsibleNavCustom = (props) => {
 
   return (
     <>
-      <Nav variant='subtle'>
+      <Nav>
         {navItems.map((text, index) => {
           const [collapsed] = collapsibles[index]
           return (
