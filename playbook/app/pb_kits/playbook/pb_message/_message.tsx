@@ -11,6 +11,7 @@ import Body from '../pb_body/_body'
 import Flex from '../pb_flex/_flex'
 import Timestamp from '../pb_timestamp/_timestamp'
 import Title from '../pb_title/_title'
+import MessageMention from './_message_mention'
 
 type MessageProps = {
   aria: { [key: string]: string },
@@ -24,7 +25,7 @@ type MessageProps = {
   label?: string,
   message: string,
   timestamp?: string,
-  timestampObject?: string,
+  timestampObject?: Date,
   timezone?: string,
   alignTimestamp?: string,
 }
@@ -61,50 +62,50 @@ const Message = (props: MessageProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
     >
       {shouldDisplayAvatar &&
         <Avatar
-          imageUrl={avatarUrl}
-          name={avatarName}
-          size="xs"
-          status={avatarStatus}
+            imageUrl={avatarUrl}
+            name={avatarName}
+            size="xs"
+            status={avatarStatus}
         />
       }
       <div className="content_wrapper">
         <Flex
-          justify={alignTimestamp === 'left' ? 'none' : 'between'}
-          orientation="row"
+            justify={alignTimestamp === 'left' ? 'none' : 'between'}
+            orientation="row"
         >
           {label &&
             <Title
-              className="message_title"
-              size={4}
-              text={label}
+                className="message_title"
+                size={4}
+                text={label}
             />
           }
           <Timestamp
-            className={`pull-${alignTimestamp} ${timestampObject ? 'message_humanized_time' : null}`}
-            text={timestamp}
-            timestamp={''}
-            timezone={timezone}
+              className={`pull-${alignTimestamp} ${timestampObject ? 'message_humanized_time' : null}`}
+              text={timestamp}
+              timestamp={''}
+              timezone={timezone}
           />
           {timestampObject &&
             <Timestamp
-              className={`pull-${alignTimestamp} message_timestamp`}
-              text={''}
-              timestamp={timestampObject}
-              timezone={timezone}
+                className={`pull-${alignTimestamp} message_timestamp`}
+                text={''}
+                timestamp={timestampObject}
+                timezone={timezone}
             />
           }
         </Flex>
         {message &&
           <Body
-            className="pb_message_body"
-            text={message}
+              className="pb_message_body"
+              text={message}
           />
         }
         {children}
@@ -113,4 +114,5 @@ const Message = (props: MessageProps) => {
   )
 }
 
+Message.Mention = MessageMention
 export default Message

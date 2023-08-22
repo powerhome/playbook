@@ -1,9 +1,9 @@
 import React from 'react'
 import { Collapsible } from '../..'
 
-const CollapsibleDefault = () => (
-  <Collapsible>
-    <Collapsible.Main>
+const CollapsibleDefault = (props) => (
+  <Collapsible >
+    <Collapsible.Main {...props}>
       <div>{'Main Section'}</div>
     </Collapsible.Main>
     <Collapsible.Content>

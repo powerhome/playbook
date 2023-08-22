@@ -11,6 +11,8 @@ examples:
   - select_error: Select w/ Error
   - select_inline: Select Inline
   - select_inline_compact: Select Inline Compact
+  - select_attributes: Select W/ Attributes
+  - select_multiple: Select Multiple
 
 
 
@@ -25,3 +27,4 @@ examples:
   - select_error: Select w/ Error
   - select_inline: Select Inline
   - select_inline_compact: Select Inline Compact
+  - select_multiple: Select Multiple

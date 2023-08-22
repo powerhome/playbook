@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import classnames from 'classnames'
+import  useCollapsible from './useCollapsible'
 
 import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
@@ -7,29 +8,24 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import CollapsibleContent from './child_kits/CollapsibleContent'
 import CollapsibleMain from './child_kits/CollapsibleMain'
 import CollapsibleContext from './context'
-import IconSizes from "../pb_icon/_icon"
+import { IconSizes } from "../pb_icon/_icon"
 
 
 type CollapsibleProps = {
-  children?: JSX.Element | [],
+  children?: JSX.Element | [] | any,
   aria?: {[key: string]: string},
   className?: string,
   collapsed?: boolean,
   data?: object,
+  icon?: string | string[],
   iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
-  iconSize?: typeof IconSizes
+  iconSize?: IconSizes,
+  onIconClick?: ()=> void,
+  onClick?: ()=> void,
   id?: string,
-  padding?: string,
 }
 
-const useCollapsible = (initial = false) => {
-  const [collapsed, setCollapsed] = useState(initial)
 
-  return [
-    collapsed,
-    () => setCollapsed((t) => !t),
-  ]
-}
 
 const Collapsible = ({
   aria = {},
@@ -37,13 +33,20 @@ const Collapsible = ({
   children = [],
   collapsed = true,
   data = {},
+  icon,
   iconColor = 'default',
   iconSize,
+  onIconClick,
+  onClick,
   id,
-  padding = 'md',
   ...props
 }: CollapsibleProps) => {
-  const [isCollapsed, collapse] = useCollapsible(collapsed)
+  const [isCollapsed, toggle, setIsCollapsed] = useCollapsible(collapsed)
+
+  useEffect(()=> {
+   setIsCollapsed(collapsed)
+  },[collapsed])
+
   const CollapsibleParent = React.Children.toArray(children) as JSX.Element[]
 
   if (CollapsibleParent.length !== 2) {
@@ -59,12 +62,11 @@ const Collapsible = ({
   const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss('pb_collapsible_kit'),
-    globalProps(props, { padding }),
+    globalProps(props),
     className
   )
-
   return (
-    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, collapse, iconSize, iconColor }}>
+    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, toggle, icon, iconSize, iconColor, onIconClick, onClick }}>
       <div
           {...ariaProps}
           {...dataProps}

@@ -1,3 +1,97 @@
+# Collapsible Kit ✨Enhancements✨: External Controls and Customizable Icons!
+##### August 17, 2023
+
+![123900](https://github.com/powerhome/playbook/assets/73710701/61e291b4-74c2-4133-84a2-19b1458cb895)
+
+Have a stack of collapsible sections and need a way to expand & collapse them all at once? You can now implement external controls like buttons to do just that! There’s more -- you can also pass custom icons like plus (‘+’) or minus (‘-’) if you don’t fancy chevrons.
+
+ [12.39.0](https://github.com/powerhome/playbook/tree/12.39.0)  full list of changes:
+
+**Kit Enhancements:**
+
+- Collapsible Kit Enhancements [\#2692](https://github.com/powerhome/playbook/pull/2692) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Select Kit 'multiple' Variant Fixes [\#2701](https://github.com/powerhome/playbook/pull/2701) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.38.0...12.39.0)
+
+
+# 12.38.0
+##### August 15, 2023
+
+List of changes: 
+
+**Improvements:**
+
+-  Refactor Date and Time Kits to not Rely on Moment.js [\#2691](https://github.com/powerhome/playbook/pull/2691) ([gavhuang](https://github.com/gavhuang), [Israel-Molestina](https://github.com/Israel-Molestina))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.37.0...12.38.0)
+
+
+
+# Text Fields Just Got Smarter!
+##### August 9, 2023
+
+![12-37-0](https://github.com/powerhome/playbook/assets/73710701/85d8aa24-c1db-4b2f-b1c3-5c64d039baf8)
+
+Get better control over your forms with our new input_options prop on our Text Input kit! Set any HTML input option as a prop and have it effortlessly get passed down to the styled input! 
+
+[12.37.0](https://github.com/powerhome/playbook/tree/12.37.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Groundwork for Upcoming Collapsible Nav Kit [\#2678](https://github.com/powerhome/playbook/pull/2678) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fixed Text Input Options Prop [\#2686](https://github.com/powerhome/playbook/pull/2686) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Converted Changelog Markdown to a Hash, Object, or Json [\#2693](https://github.com/powerhome/playbook/pull/2693) ([jasoncypret](https://github.com/jasoncypret))
+- Swift Developer Docs: Badge, Pill, Radio and Timestamp Kits [\#2690](https://github.com/powerhome/playbook/pull/2690) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.36.0...12.37.0)
+
+# 12.36.0
+##### August 4, 2023
+
+List of changes: 
+
+**Fixed Bugs:**
+
+- \[PLAY-941\] Fix Dialog Kit Close Event [\#2672](https://github.com/powerhome/playbook/pull/2672) ([gavhuang](https://github.com/gavhuang))
+- \[PLAY-716\] Popover kit closeOnClick issue [\#2606](https://github.com/powerhome/playbook/pull/2606) ([nickamantia](https://github.com/nickamantia), [carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+- Bump ci-kubed@v6.10.1 [\#2679](https://github.com/powerhome/playbook/pull/2679) ([ryanmrodriguez](https://github.com/ryanmrodriguez))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.35.0...12.36.0)
+
+# Tagging Made Easy! Say Hello to Seamless @mentions in Your Messages! 💬 👋
+##### August 2, 2023
+
+![12 35 0](https://github.com/powerhome/playbook/assets/73710701/a991aa2c-155f-4412-a72c-3550114f730a)
+
+Highlight users dynamically within chats with our new Message kit subcomponent, @mentions! Choose 'user' (default, blue) or 'self' (yellow) variants for easy implementation and level up your chat experience!
+
+ [12.35.0](https://github.com/powerhome/playbook/tree/12.35.0) full list of changes:
+
+ **Kit Enhancements:**
+
+- Preliminary Work for Upcoming Collapsible Nav Kit [\#2666](https://github.com/powerhome/playbook/pull/2666) ([nidaqg](https://github.com/nidaqg))
+- Adding Mention Variant to Message Kit [\#2664](https://github.com/powerhome/playbook/pull/2664) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+
+- Responsive Spacing Global Props not Falling Back to Defaults [\#2615](https://github.com/powerhome/playbook/pull/2615)  ([carloslimasd](https://github.com/carloslimasd), [nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.34.0...12.35.0)
+
+ 
 # Enhance Chat Engagement: Introducing the Reaction Button for Instant User Reactions!
 ##### July 28, 2023
 

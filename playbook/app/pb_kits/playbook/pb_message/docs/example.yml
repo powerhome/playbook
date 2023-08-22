@@ -4,10 +4,10 @@ examples:
   - message_default: Default
   - message_timestamp: With Timestamp Hover
   - message_hover: Hover
-
+  - message_mentions: Mentions
 
   react:
   - message_default: Default
   - message_timestamp: With Timestamp Hover
   - message_hover: Hover
-
+  - message_mentions: Mentions

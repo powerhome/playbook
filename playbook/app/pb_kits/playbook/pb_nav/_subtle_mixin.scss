@@ -27,17 +27,14 @@
       }
       [class*=_text] {
         flex: 1;
-        font-weight: $regular;
       }
-      @media (hover:hover) {
-        &:hover {
-          background-color: rgba($primary, 0.03);
-          [class*=_icon] {
-            color: $primary;
-          }
-          [class*=_text] {
-            color: $primary;
-          }
+      &:hover {
+        background-color: rgba($primary, 0.03);
+        [class*=_icon] {
+          color: $primary;
+        }
+        [class*=_text] {
+          color: $primary;
         }
       }
     }
