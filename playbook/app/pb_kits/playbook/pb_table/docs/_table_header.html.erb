@@ -1,0 +1,42 @@
+
+
+<%= pb_rails("table", props: { size: "lg"} ) do %>
+  <thead>
+    <tr>
+      <%= pb_rails("table/table_header", props: {
+        sort_menu: [
+          { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+          { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: false },
+          { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+        ],
+      }) %>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Column 4</th>
+      <th>Column 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td>Value 3</td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+  </tbody>
+<% end %>
