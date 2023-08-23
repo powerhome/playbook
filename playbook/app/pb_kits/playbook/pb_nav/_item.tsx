@@ -8,7 +8,6 @@ import Icon from "../pb_icon/_icon";
 import Image from "../pb_image/_image";
 import Collapsible from "../pb_collapsible/_collapsible";
 import { NavChildProps } from "./navTypes";
-import { Spacing } from "../types";
 
 type NavItemProps = {
   active?: boolean;
@@ -32,20 +31,6 @@ type NavItemProps = {
   text: string;
   collapsibleTrail?: boolean;
   collapsed?: boolean;
-  paddingBottom?: Spacing;
-  paddingTop?: Spacing;
-  paddingLeft?: Spacing;
-  paddingRight?: Spacing;
-  paddingX?: Spacing;
-  paddingY?: Spacing;
-  padding?: Spacing;
-  margin?: Spacing,
-  marginBottom?: Spacing,
-  marginTop?: Spacing,
-  marginRight?: Spacing,
-  marginLeft?: Spacing,
-  marginX?: Spacing,
-  marginY?: Spacing,
   orientation?: "vertical" | "horizontal";
   variant?: "normal" | "subtle";
 } & GlobalProps;
@@ -85,39 +70,8 @@ const NavItem = (props: NavItemProps) => {
     collapsibleTrail,
     collapsed,
     itemSpacing,
-    padding,
-    paddingX,
-    paddingY,
-    paddingBottom,
-    paddingTop,
-    paddingLeft,
-    paddingRight,
-    margin,
-    marginBottom,
-    marginTop,
-    marginRight,
-    marginLeft,
-    marginX,
-    marginY
   } = props;
 
-  const filteredProps = { ...props };
-  [
-    "padding",
-    "paddingX",
-    "paddingY",
-    "paddingBottom",
-    "paddingTop",
-    "paddingRight",
-    "paddingLeft",
-    "margin",
-    "marginX",
-    "marginY",
-    "marginBottom",
-    "marginTop",
-    "marginRight",
-    "marginLeft",
-  ].forEach((prop) => delete filteredProps[prop]);
 
   const Tag = link ? "a" : "div";
   const activeClass = active === true ? "active" : "";
@@ -133,6 +87,11 @@ const NavItem = (props: NavItemProps) => {
       : "font_regular";
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+
+  const tagClasses = classnames(
+    collapsible ? "pb_nav_list_item_link_collapsible" : "pb_nav_list_item_link",
+  );
+
   const classes = classnames(
     buildCss("pb_nav_list_kit_item", activeClass),
     collapsible
@@ -140,41 +99,11 @@ const NavItem = (props: NavItemProps) => {
       : "",
     fontSizeClass,
     fontWeightClass,
-    globalProps(filteredProps),
+    tagClasses,
+    globalProps(props),
     className
   );
 
-  const spacingProps = {
-    padding,
-    paddingBottom,
-    paddingTop,
-    paddingRight,
-    paddingLeft,
-    paddingX,
-    paddingY,
-    margin,
-    marginBottom,
-    marginTop,
-    marginRight,
-    marginLeft,
-    marginX,
-    marginY,
-  };
-
-  const finalItemSpacing = {
-    ...(itemSpacing || {}),
-    ...Object.entries(spacingProps).reduce((acc: any, [prop, value]) => {
-      if (value) {
-        acc[prop] = value;
-      }
-      return acc;
-    }, {}),
-  };
-
-  const tagClasses = classnames(
-    collapsible ? "pb_nav_list_item_link_collapsible" : "pb_nav_list_item_link",
-    globalProps({ ...finalItemSpacing })
-  );
 
   const handleIconClick = (e: any) => {
     if (onIconLeftClick) {
@@ -195,8 +124,9 @@ const NavItem = (props: NavItemProps) => {
   });
 
   return (
-    <li {...ariaProps} {...dataProps} className={classes} id={id}>
+    <>
       {collapsible ? (
+        <div {...ariaProps} {...dataProps} className={classes} id={id}>
         <Collapsible
           icon={iconRight && iconRight}
           iconSize="xs"
@@ -235,9 +165,13 @@ const NavItem = (props: NavItemProps) => {
           </Collapsible.Main>
           <Collapsible.Content>{childrenWithProps}</Collapsible.Content>
         </Collapsible>
+        </div>
       ) : (
         <Tag
-          className={tagClasses}
+        {...ariaProps} 
+        {...dataProps} 
+        className={classes} 
+        id={id}
           href={link}
           onClick={onClick}
           target={target}
@@ -274,7 +208,7 @@ const NavItem = (props: NavItemProps) => {
           )}
         </Tag>
       )}
-    </li>
+    </>
   );
 };
 

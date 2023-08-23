@@ -17,13 +17,13 @@ $selector: ".pb_nav_list";
     list-style: none;
   }
 
-  [class*=pb_nav_list_kit_item] {
+  [class*=pb_nav_list_kit_item][class*=pb_nav_list_item]{
     transition-property: border-color;
     transition-duration: 0.15s;
     transition-timing-function: $bezier;
     padding: 0;
 
-    [class*=_link] {
+    &[class*=_link] {
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -44,7 +44,6 @@ $selector: ".pb_nav_list";
 
       [class*=_text] {
         font-size: $font_base;
-        // font-weight: $bold;
         color: $text_lt_default;
       }
 
@@ -57,52 +56,52 @@ $selector: ".pb_nav_list";
           }
         }
       }
-    }
+      &[class*=_active] {
+          border-color: $primary;
+          [class*=_item_icon] {
+            color: $text_lt_default;
+          }
+          [class*=_item_text] {
+            color: $text_lt_default;
+            font-weight: $bold;
+          }
+          &:hover {
+            #{$selector}_item_icon,
+            #{$selector}_item_text {
+              color: $primary;
+            }
+          }
+        }
+      }
   }
 
-  [class*=_active] {
-    #{$selector}_item_link {
-      border-color: $primary;
-
-      [class*=_item_icon] {
-        color: $text_lt_default;
-      }
-
-      [class*=_item_text] {
-        color: $text_lt_default;
-        font-weight: $bold;
-      }
-    }
-  }
 
   // Subtle Variant
   &[class*=_subtle] {
     @include subtle;
     // Horizontal Overrides
-    [class*=pb_nav_list_kit_item] {
+    [class*=pb_nav_list_kit_item][class*=pb_nav_list_item]{
       margin: 0;
       [class*=_item_text]{
-        font-weight: $regular;
+        font-weight: $regular !important;
       }
-    }
-    [class*=_active] {
+    &[class*=_active] {
       background-color: $active_light;
       &[class*=dark] {
         background-color: rgba($white, $opacity_1);
       }
-      [class*=_item_link] {
         [class*=_item_text]{
-          color: $primary;
+          color: $primary !important;
         }
-      }
     }
+  }
   }
 
   // Bold Variant
   &[class*=_bold] {
     @include bold;
     // Horizontal Overrides
-    [class*=pb_nav_list_kit_item] {
+    [class*=pb_nav_list_kit_item][class*=pb_nav_list_item]{
       margin: 0;
       [class*=_item_text]{
         font-weight: $regular;
@@ -110,7 +109,7 @@ $selector: ".pb_nav_list";
     }
     [class*=_active] {
       [class*=_text] {
-        color: $white;
+        color: $white !important;
       }
     }
   }
