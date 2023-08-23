@@ -124,7 +124,7 @@ type TextAlign = {
 }
 
 type Width = {
-  width?: Sizes | number,
+  width?: Sizes | number | string,
 }
 
 type ZIndexType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
