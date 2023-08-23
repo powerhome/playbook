@@ -19,9 +19,9 @@ export const toMinute = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
 
   if (timeZone) {
-    return date.toLocaleTimeString(undefined, { timeZone, hour: "2-digit", minute: "2-digit" }).slice(3, 5);
+    return date.toLocaleTimeString("en-US", { timeZone, hour: "2-digit", minute: "2-digit" }).slice(3, 5);
   } else {
-    return date.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }).slice(3, 5);
+    return date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }).slice(3, 5);
   }
 }
 
@@ -29,15 +29,15 @@ export const toHour = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
 
   if (timeZone) {
-    return date.toLocaleTimeString(undefined, { timeZone, hour: "numeric" }).split(' ')[0];
+    return date.toLocaleTimeString("en-US", { timeZone, hour: "numeric" }).split(' ')[0];
   } else {
-    return date.toLocaleTimeString(undefined, { hour: "numeric" }).split(' ')[0];
+    return date.toLocaleTimeString("en-US", { hour: "numeric" }).split(' ')[0];
   }
 }
 
 export const toDay = (newDate: Date | string, timeZone?: string): number => {
   if (timeZone) {
-    const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
+    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone }));
     return date.getDate()
   } else {
     const date = formatDate(newDate)
@@ -57,7 +57,7 @@ export const toWeekday = (newDate: Date | string): string => {
 
 export const toMonth = (newDate: Date | string, timeZone?: string): string => {
   if (timeZone) {
-    const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
+    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone }));
     return months[date.getMonth()]
   } else {
     const date = formatDate(newDate)
@@ -72,7 +72,7 @@ export const toMonthNum = (newDate: Date | string): number => {
 
 export const toYear = (newDate: Date | string, timeZone?: string): number => {
   if (timeZone) {
-    const date = new Date(formatDate(newDate).toLocaleString(undefined, { timeZone }));
+    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone }));
     return date.getFullYear()
   } else {
     const date = formatDate(newDate)
@@ -84,9 +84,9 @@ export const toTime = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
 
   if (timeZone) {
-    return date.toLocaleTimeString(undefined, { timeZone, timeStyle: "short" }).split(' ')[0];
+    return date.toLocaleTimeString("en-US", { timeZone, timeStyle: "short" }).split(' ')[0];
   } else {
-    return date.toLocaleTimeString(undefined, { timeStyle: "short" }).split(' ')[0];
+    return date.toLocaleTimeString("en-US", { timeStyle: "short" }).split(' ')[0];
   }
 }
 
@@ -94,9 +94,9 @@ export const toMeridiem = (newDate: Date | string, timeZone?: string): string =>
   const date = formatDate(newDate)
 
   if (timeZone) {
-    return date.toLocaleString(undefined, { timeZone, hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
+    return date.toLocaleString("en-US", { timeZone, hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
   } else {
-    return date.toLocaleString(undefined, { hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
+    return date.toLocaleString("en-US", { hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
   }
 }
 
@@ -104,9 +104,9 @@ export const toTimeZone = (newDate: Date | string, timeZone?: string): string =>
   const date = formatDate(newDate)
 
   if (timeZone) {
-    return date.toLocaleString(undefined, { timeZone, timeZoneName: "short" }).split(' ')[3];
+    return date.toLocaleString("en-US", { timeZone, timeZoneName: "short" }).split(' ')[3];
   } else {
-    return date.toLocaleString(undefined, { timeZoneName: "short" }).split(' ')[3];
+    return date.toLocaleString("en-US", { timeZoneName: "short" }).split(' ')[3];
   }
 }
 
@@ -156,7 +156,7 @@ export const toCustomFormat = (newDate: Date | string, format = 'month_day'): st
   if (format == "month_day") {
     return `${toMonthNum(date)}/${toDay(date)}`
   } else {
-    return `${date.toLocaleString(undefined, { month: "short" })} ${toDay(date)}`
+    return `${date.toLocaleString("en-US", { month: "short" })} ${toDay(date)}`
   }
 }
 
