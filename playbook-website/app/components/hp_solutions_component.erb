@@ -7,273 +7,276 @@
     padding_left: "md",
     padding_right: "md"
 }) do %>
-    <%= pb_rails("flex", props: {
-        max_width: "xxl",
-        gap: "xl",
-        flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row" }
-    }) do %>
-        <%= pb_rails("flex/flex_item", props: {
-            display: { xs: "none", sm: "flex" },
-            padding_bottom: "xl",
-            classname: "container",
-            width: "100",
-            border_radius: "lg"
-        }) do %>
-            <%= pb_rails("card", props: {
-                shadow: "deeper",
-                justify_content: "center",
-                border_radius: "lg",
-                width: "100",
-                classname: "solutionsCard"
-            }) do %>
-                <%= pb_rails("user", props: {
-                    name: "Anna Black",
-                    title: "LVL II • Sales Representative",
-                    orientation: "horizontal",
-                    align: "center",
-                    size: "lg",
-                    avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
-                }) %>
-            <% end %>
-            <% react_contents = Rails.root.join("app/views/pages/code_snippets/user_jsx.txt").read %>
-            <%= pb_rails("card", props: {
-                shadow: "deeper",
-                dark: true,
-                background: "dark",
-                border_radius: "lg",
-                padding: "none",
-                margin: "none",
-                width: "100",
-                classname: "solutionsCard card2"
-            })  do %>
-                <div class="vertical-bar">
-                    <%= pb_rails("icon", props: { icon: "grip-lines-vertical" }) %>
-                </div>
-                <div class="pb--codeCopy">
-                    <pre class="highlight highlightSolutions"><%= raw render_code(react_contents, "jsx") %></pre>
-                </div>
-            <% end %>
-        <% end %>
-        <%= pb_rails("flex/flex_item", props: { width: "100" }) do %>
-            <%= pb_rails("flex", props: { orientation: "column", align_items: { xs: "center", sm: "start" }, }) do %>
-                <%= pb_rails("flex/flex_item", props: {
-                    padding_bottom: { xs: "sm", sm: "sm", md: "sm", lg: "sm", xl: "sm" },
-                    text_align: { xs: "center", sm: "start" },
-                    padding_top: { xs: "none", sm: "lg", md: "lg", lg: "lg", xl: "xl" }
-                }) do %>
-                    <%= pb_rails("body", props: {
-                        text: "DESIGN, DEVELOP, DELIVER",
-                        text_align: { xs: "center", sm: "start" },
-                        color: "link"
-                    }) %>
-                <% end %>
-                <%= pb_rails("flex/flex_item", props: {
-                    padding_bottom: { xs: "lg", sm: "sm", md: "sm", lg: "sm", xl: "sm" },
-                }) do %>
-                    <%= pb_rails("title", props: {
-                        text: "Solutions writeen in multiple languages.",
-                        text_align: "center",
-                        tag: "h3",
-                        size: 3,
-                        display: { xs: "flex", sm: "none", md: "none", lg: "none", xl: "none" }
-                    }) %>
-                    <%= pb_rails("title", props: {
-                        text: "Create solutions to repetitive problems, for multiple languages and access to anywhere!",
-                        text_align: "start",
-                        tag: "h2",
-                        size: 2,
-                        display: { xs: "none", sm: "flex" }
-                    }) %>
-                <% end %>
-                <%= pb_rails("flex/flex_item", props: {
-                    padding_bottom: { xs: "lg", sm: "xl", md: "xl", lg: "xl", xl: "xl" },
-                }) do %>
-                    <%= pb_rails("body", props: {
-                        text: "Playbook gives designers and developers the frameworks they need to create engaging product experiences.",
-                        text_align: { xs: "center", sm: "start" },
-                        color: "light",
-                        display: { xs: "flex", sm: "none", md: "none", lg: "none", xl: "none" }
-                    }) %>
-                    <%= pb_rails("body", props: {
-                        text: "Playbook was created for Power by Power. Playbook is an open-source, cross-platform design system that gives designers and developers the frameworks they need to create engaging product experiences—accessibility, internationalization, and performance included.",
-                        text_align: { xs: "center", sm: "start" },
-                        color: "light",
-                        display: { xs: "none", sm: "flex" }
-                    }) %>
-                <% end %>
-                <%= pb_rails("flex/flex_item", props: {
-                    width: "100",
-                    display: { xs: "none", sm: "flex" }
-                }) do %>
-                    <%= pb_rails("flex", props: {
-                        width: "100",
-                        justify: "between",
-                        gap: "md"
-                    }) do %>
-                        <%= pb_rails("flex/flex_item", props: { width: "100" }) do %>
-                            <%= pb_rails("flex", props: {
-                                orientation: "column"
-                            }) do %>
-                                <%= pb_rails("flex/flex_item", props: {
-                                    width: "100",
-                                    width: "100"
-                                }) do %>
-                                    <%= link_to "/guides/getting_started/react_setup" do %>
-                                        <%= pb_rails("card", props: {
-                                                text_align: "center",
-                                                padding: "xl",
-                                                shadow: "deeper",
-                                                border_radius: "lg",
-                                                cursor: "pointer",
-                                                link: "/guides/getting_started/react_setup",
-                                                hover: { scale: "sm" }
-                                        })  do %>
-                                            <%= pb_rails("image", props: {
-                                                alt: "react logo",
-                                                url: asset_pack_path("media/images/hp-react-solutions.svg")
-                                            }) %>
-                                        <% end %>
-                                    <% end %>
-                                <% end %>
-                                <%= pb_rails("flex/flex_item", props: {
-                                    width: "100",
-                                    display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
-                                }) do %>
-                                    <%= pb_rails("caption", props: {
-                                        text: "Endlessly flexible presentational UI components with encapsulated styles and constraint based theme props.",
-                                        size: 'xs'
-                                    }) %>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                        <%= pb_rails("flex/flex_item", props: { width: "100" }) do %>
-                            <%= pb_rails("flex", props: {
-                                orientation: "column"
-                            }) do %>
-                                <%= pb_rails("flex/flex_item", props: {
-                                    width: "100",
-                                    width: "100"
-                                }) do %>
-                                    <%= link_to "/guides/getting_started/ruby_on_rails_setup" do %>
-                                        <%= pb_rails("card", props: {
-                                                padding: "xl",
-                                                text_align: "center",
-                                                shadow: "deeper",
-                                                border_radius: "lg",
-                                                cursor: "pointer",
-                                                hover: { scale: "sm" }
-                                        })  do %>
-                                            <%= pb_rails("image", props: {
-                                                alt: "rails logo",
-                                                url: asset_pack_path("media/images/hp-rails-solutions.svg")
-                                            }) %>
-                                        <% end %>
-                                    <% end %>
-                                <% end %>
-                                <%= pb_rails("flex/flex_item", props: {
-                                    width: "100",
-                                    display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
-                                }) do %>
-                                    <%= pb_rails("caption", props: {
-                                        text: "100+ highly customizable ViewComponents. Build design driven UI in Rails with ViewComponents.",
-                                        size: 'xs'
-                                    }) %>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                        <%= pb_rails("flex/flex_item", props: { width: "100" }) do %>
-                            <%= pb_rails("flex", props: {
-                                orientation: "column"
-                            }) do %>
-                                <%= pb_rails("flex/flex_item", props: {
-                                    width: "100",
-                                    width: "100"
-                                }) do %>
-                                    <%= link_to "/guides/getting_started/HTML_&_CSS" do %>
-                                        <%= pb_rails("card", props: {
-                                            padding: "xl",
-                                            text_align: "center",
-                                            shadow: "deeper",
-                                            border_radius: "lg",
-                                            cursor: "pointer",
-                                            hover: { scale: "sm" }
-                                        }) do %>
-                                            <%= pb_rails("image", props: {
-                                            alt: "htmlcss logo",
-                                            url: asset_pack_path("media/images/hp-htmlcss-solutions.svg")
-                                            }) %>
-                                        <% end %>
-                                    <% end %>
-                                <% end %>
-                                <%= pb_rails("flex/flex_item", props: {
-                                    width: "100",
-                                    display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
-                                }) do %>
-                                    <%= pb_rails("caption", props: {
-                                        text: "Utility classes help you work within the constraints of a system instead of littering your stylesheets with arbitrary values.",
-                                        size: 'xs'
-                                    }) %>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                <% end %>
-                <%= pb_rails("flex/flex_item", props: {
-                    width: "100",
-                    text_align: { xs: "center", sm: "center", md: "center", lg: "start", xl: "start" },
-                    padding_top: { xs: "none", sm: "xl", md: "xl", lg: "xl", xl: "xl" }
-                }) do %>
-                    <%= pb_rails("button", props: {
-                        text: "Explore Playbook Solutions",
-                        icon: "arrow-right",
-                        link: "/guides/getting_started",
-                        icon_right: true,
-                        size: "lg"
-                    }) %>
-                <% end %>
-            <% end %>
-        <% end %>
+	<%= pb_rails("flex", props: {
+			max_width: "xxl",
+			gap: "xl",
+			flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row" }
+	}) do %>
+		<%= pb_rails("flex/flex_item", props: {
+			display: { xs: "none", sm: "flex" },
+			padding_bottom: "xl",
+			classname: "container",
+			width: "100",
+			border_radius: "lg"
+		}) do %>
+			<%= pb_rails("card", props: {
+				shadow: "deeper",
+				justify_content: "center",
+				border_radius: "lg",
+				width: "100",
+				classname: "solutionsCard"
+			}) do %>
+				<%= pb_rails("user", props: {
+					name: "Anna Black",
+					title: "LVL II • Sales Representative",
+					orientation: "horizontal",
+					align: "center",
+					size: "lg",
+					avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+				}) %>
+			<% end %>
 
-    <% end %>
+			<% react_contents = Rails.root.join("app/views/pages/code_snippets/user_jsx.txt").read %>
+
+			<%= pb_rails("card", props: {
+				shadow: "deeper",
+				dark: true,
+				background: "dark",
+				border_radius: "lg",
+				padding: "none",
+				margin: "none",
+				width: "100",
+				classname: "solutionsCard card2"
+			})  do %>
+				<div class="vertical-bar">
+					<%= pb_rails("icon", props: { icon: "grip-lines-vertical" }) %>
+				</div>
+				<div class="pb--codeCopy">
+					<pre class="highlight highlightSolutions"><%= raw render_code(react_contents, "jsx") %></pre>
+				</div>
+			<% end %>
+		<% end %>
+
+		<%= pb_rails("flex/flex_item", props: { width: "100" }) do %>
+			<%= pb_rails("flex", props: { orientation: "column", align_items: { xs: "center", sm: "start" }, }) do %>
+				<%= pb_rails("flex/flex_item", props: {
+					padding_bottom: { xs: "sm", sm: "xl", md: "sm", lg: "md", xl: "sm" },
+					text_align: { xs: "center", sm: "start" },
+				}) do %>
+					<%= pb_rails("body", props: {
+						text: "DESIGN, DEVELOP, DELIVER",
+						text_align: { xs: "center", sm: "start" },
+						color: "link"
+					}) %>
+				<% end %>
+
+				<%= pb_rails("flex/flex_item", props: {
+					padding_bottom: { xs: "lg", sm: "sm", md: "sm", lg: "sm", xl: "sm" },
+				}) do %>
+					<%= pb_rails("title", props: {
+						text: "Solutions written in multiple languages.",
+						text_align: "center",
+						tag: "h3",
+						size: 3,
+						display: { xs: "flex", sm: "none", md: "none", lg: "none", xl: "none" }
+					}) %>
+					<%= pb_rails("title", props: {
+						text: "Create solutions to repetitive problems, for multiple languages and access to anywhere!",
+						text_align: "start",
+						tag: "h2",
+						size: 2,
+						display: { xs: "none", sm: "flex" }
+					}) %>
+				<% end %>
+
+				<%= pb_rails("flex/flex_item", props: {
+					padding_bottom: { xs: "lg", sm: "xl", md: "xl", lg: "xl", xl: "xl" },
+				}) do %>
+					<%= pb_rails("body", props: {
+						text: "Playbook gives designers and developers the frameworks they need to create engaging product experiences.",
+						text_align: { xs: "center", sm: "start" },
+						color: "light",
+						display: { xs: "flex", sm: "none", md: "none", lg: "none", xl: "none" }
+					}) %>
+					<%= pb_rails("body", props: {
+						text: "Playbook was created for Power by Power. Playbook is an open-source, cross-platform design system that gives designers and developers the frameworks they need to create engaging product experiences—accessibility, internationalization, and performance included.",
+						text_align: { xs: "center", sm: "start" },
+						color: "light",
+						display: { xs: "none", sm: "flex" }
+					}) %>
+				<% end %>
+
+				<%= pb_rails("flex/flex_item", props: {
+					width: "100",
+					display: { xs: "none", sm: "flex" }
+				}) do %>
+					<%= pb_rails("flex", props: {
+						width: "100",
+						justify: "between",
+						gap: "md"
+					}) do %>
+						<%= pb_rails("flex", props: {
+							orientation: "column"
+						}) do %>
+							<%= pb_rails("flex/flex_item", props: {
+								width: "100",
+								width: "100"
+							}) do %>
+								<%= link_to "/guides/getting_started/react_setup" do %>
+									<%= pb_rails("card", props: {
+										text_align: "center",
+										padding: "xl",
+										shadow: "deeper",
+										border_radius: "lg",
+										cursor: "pointer",
+										link: "/guides/getting_started/react_setup",
+										hover: { scale: "sm" }
+									}) do %>
+										<%= pb_rails("image", props: {
+											alt: "react logo",
+											url: asset_pack_path("media/images/hp-react-solutions.svg")
+										}) %>
+									<% end %>
+								<% end %>
+							<% end %>
+
+							<%= pb_rails("flex/flex_item", props: {
+								width: "100",
+								display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
+							}) do %>
+								<%= pb_rails("caption", props: {
+									text: "Endlessly flexible presentational UI components with encapsulated styles and constraint based theme props.",
+									size: "xs"
+								}) %>
+							<% end %>
+						<% end %>
+
+						<%= pb_rails("flex", props: {
+							orientation: "column"
+						}) do %>
+							<%= pb_rails("flex/flex_item", props: {
+								width: "100",
+								width: "100"
+							}) do %>
+								<%= link_to "/guides/getting_started/ruby_on_rails_setup" do %>
+									<%= pb_rails("card", props: {
+										padding: "xl",
+										text_align: "center",
+										shadow: "deeper",
+										border_radius: "lg",
+										cursor: "pointer",
+										hover: { scale: "sm" }
+									}) do %>
+										<%= pb_rails("image", props: {
+											alt: "rails logo",
+											url: asset_pack_path("media/images/hp-rails-solutions.svg")
+										}) %>
+									<% end %>
+								<% end %>
+							<% end %>
+
+							<%= pb_rails("flex/flex_item", props: {
+								width: "100",
+								display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
+							}) do %>
+								<%= pb_rails("caption", props: {
+									text: "100+ highly customizable ViewComponents. Build design driven UI in Rails with ViewComponents.",
+									size: 'xs'
+								}) %>
+							<% end %>
+						<% end %>
+
+						<%= pb_rails("flex", props: {
+							orientation: "column"
+						}) do %>
+							<%= pb_rails("flex/flex_item", props: {
+								width: "100",
+								width: "100"
+							}) do %>
+								<%= link_to "/guides/getting_started/HTML_&_CSS" do %>
+									<%= pb_rails("card", props: {
+										padding: "xl",
+										text_align: "center",
+										shadow: "deeper",
+										border_radius: "lg",
+										cursor: "pointer",
+										hover: { scale: "sm" }
+									}) do %>
+										<%= pb_rails("image", props: {
+											alt: "htmlcss logo",
+											url: asset_pack_path("media/images/hp-htmlcss-solutions.svg")
+										}) %>
+									<% end %>
+								<% end %>
+							<% end %>
+
+							<%= pb_rails("flex/flex_item", props: {
+								width: "100",
+								display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
+							}) do %>
+								<%= pb_rails("caption", props: {
+									text: "Utility classes help you work within the constraints of a system instead of littering your stylesheets with arbitrary values.",
+									size: 'xs'
+								}) %>
+							<% end %>
+						<% end %>
+					<% end %>
+				<% end %>
+
+				<%= pb_rails("flex/flex_item", props: {
+					width: "100",
+					text_align: { xs: "center", sm: "center", md: "center", lg: "start", xl: "start" },
+					padding_top: { xs: "none", sm: "xl", md: "xl", lg: "xl", xl: "xl" }
+				}) do %>
+					<%= pb_rails("button", props: {
+						text: "Explore Playbook Solutions",
+						icon: "arrow-right",
+						link: "/guides/getting_started",
+						icon_right: true,
+						size: "lg"
+					}) %>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
 <% end %>
 
 <script>
-    (function() {
-        // IIFE contains it's own private scope
-        document.addEventListener("DOMContentLoaded", () => {
-            const container = document.querySelector('.container');
-            const card2 = document.querySelector('.card2');
-            const verticalBar = document.querySelector('.vertical-bar');
-            const containerRect = container.getBoundingClientRect();
-            const containerMid = containerRect.width/2
+	(function() {
+		// IIFE contains it's own private scope
+		document.addEventListener("DOMContentLoaded", () => {
+			const container = document.querySelector('.container');
+			const card2 = document.querySelector('.card2');
+			const verticalBar = document.querySelector('.vertical-bar');
+			const containerRect = container.getBoundingClientRect();
+			const containerMid = containerRect.width / 2
 
-            card2.style.transform = `translateX(${containerMid}px) translateY(0)`
-            card2.style.transition = 'none'
+			card2.style.transform = `translateX(${containerMid}px) translateY(0)`
+			card2.style.transition = 'none'
 
-            let isDragging = false;
+			let isDragging = false;
 
-            // event listener for vertical bar
-            verticalBar.addEventListener('mousedown', (e) => {
-                isDragging = true;
-            });
+			// event listener for vertical bar
+			verticalBar.addEventListener('mousedown', (e) => {
+					isDragging = true;
+			});
 
-            document.addEventListener('mouseup', () => {
-                isDragging = false;
-            });
+			document.addEventListener('mouseup', () => {
+					isDragging = false;
+			});
 
+			document.addEventListener('mousemove', (e) => {
+				const containerRectResponsive = container.getBoundingClientRect();
+				if (!isDragging) return;
+				let xTranslate = e.clientX - containerRectResponsive.left
+				if (xTranslate >= containerRectResponsive.width - 5) {
+						xTranslate = containerRectResponsive.width - 5
+				} else if (xTranslate <= 5) {
+						xTranslate = 5
+				}
 
-            document.addEventListener('mousemove', (e) => {
-                const containerRectResponsive = container.getBoundingClientRect();
-                if (!isDragging) return;
-                let xTranslate = e.clientX - containerRectResponsive.left
-                if (xTranslate >= containerRectResponsive.width - 5 ) {
-                    xTranslate = containerRectResponsive.width - 5
-                } else if (xTranslate <= 5 ) {
-                    xTranslate = 5
-                }
-
-                card2.style.transform = `translateY(0px) translateX(${xTranslate}px)`
-            })
-        })
-    })();
+				card2.style.transform = `translateY(0px) translateX(${xTranslate}px)`
+			})
+		})
+	})();
 </script>

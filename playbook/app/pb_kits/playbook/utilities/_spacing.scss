@@ -54,8 +54,6 @@ $position in $positions {
   }
 }
 
-
-
 @each $size,
 $size_value in $breakpoints_grid {
 
@@ -71,37 +69,37 @@ $size_value in $breakpoints_grid {
 				$max_size: map-get($size_value, "max");
 
 				.#{$position_name}_#{$size}_#{$space_name}_#{$break_method} {
-						@if type-of($position)=="list" {
-							@if $break_method =="break_on" {
-								@each $coordinate in $position {
-									@include break_on($min_size, $max_size) {
-										#{$coordinate}: #{$space} !important;
-									}
-								}
-							}
+          @if type-of($position)=="list" {
+            @if $break_method =="on" {
+              @each $coordinate in $position {
+                @include break_on($min_size, $max_size) {
+                  #{$coordinate}: #{$space} !important;
+                }
+              }
+            }
 
-							@else {
-								@each $coordinate in $position {
-									@include break_at($max_size) {
-										#{$coordinate}: #{$space} !important;
-									}
-								}
-							}
-						}
+            @else {
+              @each $coordinate in $position {
+                @include break_at($max_size) {
+                  #{$coordinate}: #{$space} !important;
+                }
+              }
+            }
+          }
 
-						@else {
-							@if $break_method =="break_on" {
-								@include break_on($min_size, $max_size) {
-									#{$position}: #{$space} !important;
-								}
-							}
+          @else {
+            @if $break_method =="on" {
+              @include break_on($min_size, $max_size) {
+                #{$position}: #{$space} !important;
+              }
+            }
 
-							@else {
-								@include break_at($max_size) {
-									#{$position}: #{$space} !important;
-								}
-							}
-						}
+            @else {
+              @include break_at($max_size) {
+                #{$position}: #{$space} !important;
+              }
+            }
+          }
 				}
 			}
 		}

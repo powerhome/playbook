@@ -10,7 +10,6 @@
     background-color: $bg_dark;
     border-radius: $border_rad_heaviest;
     box-shadow: $shadow_deepest;
-    // min-width: 733px;
   }
   .hero-text-width {
     max-width: 500px;
@@ -82,7 +81,6 @@
   }
 }
 
-
 //slider css
 .container {
   position: relative;
@@ -118,4 +116,3 @@
   padding-top: $space_md !important;
   padding-bottom: $space_md !important;
 }
-
