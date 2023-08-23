@@ -9,7 +9,7 @@
 $selector: ".pb_nav_list";
 
 [class^=pb_nav_list][class*=_horizontal] {
-  ul {
+  .pb_nav_wrapper {
     display: flex;
     align-items: center;
     padding: 0;

@@ -88,7 +88,7 @@ const childrenWithProps = React.Children.map(children, (child) => {
           </a>
         </div>
       }
-      <ul>{childrenWithProps}</ul>
+      <div className='pb_nav_wrapper'>{childrenWithProps}</div>
     </nav>
   )
 }
