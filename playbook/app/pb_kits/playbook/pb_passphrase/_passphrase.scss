@@ -70,7 +70,6 @@
   @-moz-document url-prefix() {
     .passphrase-popover {
       position: relative;
-      top: $space_sm;
       left: -($space_xs * 1.5);
     }
   }
