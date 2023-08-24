@@ -19,7 +19,7 @@ type NavItemProps = {
   collapsible?: boolean;
   data?: object;
   dark?: boolean;
-  fontSize?: "regular" | "small";
+  fontSize?: "normal" | "small";
   iconLeft?: string;
   iconRight?: string | string[];
   onIconRightClick?: () => void;
@@ -64,7 +64,7 @@ const NavItem = (props: NavItemProps) => {
     collapsible,
     data = {},
     dark = false,
-    fontSize = "regular",
+    fontSize = "normal",
     iconLeft,
     iconRight,
     onIconRightClick,
@@ -112,7 +112,7 @@ const NavItem = (props: NavItemProps) => {
   const collapsibleTrailClass =
     collapsible && collapsibleTrail ? "collapsible_trail" : "";
   const fontSizeClass =
-    fontSize === "small" ? "font_size_small" : "font_size_regular";
+    fontSize === "small" ? "font_size_small" : "font_size_normal";
   const fontWeightClass =
     fontWeight === "bold"
       ? "font_bold"

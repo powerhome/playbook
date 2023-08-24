@@ -5,8 +5,8 @@ module Playbook
     class Item < Playbook::KitBase
       prop :active, type: Playbook::Props::Boolean, default: false
       prop :font_size, type: Playbook::Props::Enum,
-                       values: %w[regular small],
-                       default: "regular"
+                       values: %w[normal small],
+                       default: "normal"
       prop :font_weight, type: Playbook::Props::Enum,
                          values: %w[bold regular bolder],
                          default: "regular"
@@ -58,7 +58,7 @@ module Playbook
       end
 
       def font_size_class
-        font_size === "small" ? "font_size_small" : "font_size_regular"
+        font_size === "small" ? "font_size_small" : "font_size_normal"
       end
     end
   end
