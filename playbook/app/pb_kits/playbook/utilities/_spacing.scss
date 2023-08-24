@@ -68,7 +68,7 @@ $size_value in $breakpoints_grid {
 				$min_size: map-get($size_value, "min");
 				$max_size: map-get($size_value, "max");
 
-				.#{$position_name}_#{$size}_#{$space_name}_#{$break_method} {
+				.#{$position_name}_break-#{$break_method}-#{$size}_p-#{$space_name} {
           @if type-of($position)=="list" {
             @if $break_method =="on" {
               @each $coordinate in $position {
@@ -80,8 +80,10 @@ $size_value in $breakpoints_grid {
 
             @else {
               @each $coordinate in $position {
-                @include break_at($max_size) {
-                  #{$coordinate}: #{$space} !important;
+                @if ($max_size != null) {
+                  @include break_at($max_size) {
+                    #{$coordinate}: #{$space} !important;
+                  }
                 }
               }
             }
