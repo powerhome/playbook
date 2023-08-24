@@ -44,7 +44,7 @@ class PagesController < ApplicationController
 
   def home
     @changelog = Playbook::Engine.root.join("CHANGELOG.md").read
-    @posts = changelog_to_object(@changelog)
+    @posts = changelog_to_hash(@changelog)
   rescue => e
     Rails.logger.error("Error in home method: #{e.message}")
     Rails.logger.error(e.backtrace.join("\n"))
