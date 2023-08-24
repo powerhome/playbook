@@ -1,13 +1,6 @@
 import { Spacing } from "../types";
 
 export type SpacingObject = {
-  padding?: Spacing;
-  paddingBottom?: Spacing;
-  paddingTop?: Spacing;
-  paddingRight?: Spacing;
-  paddingLeft?: Spacing;
-  paddingX?: Spacing;
-  paddingY?: Spacing;
   margin?: Spacing;
   marginBottom?: Spacing;
   marginTop?: Spacing;

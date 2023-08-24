@@ -104,7 +104,7 @@ const CollapsibleMain = ({
   }
 
   return (
-    <div className={classnames(mainCSS, className, mainSpacing)}>
+    <div className={classnames(mainCSS, mainSpacing, className)}>
       <div onClick={handleCollapsibleClick}>
         <Flex
             spacing="between"

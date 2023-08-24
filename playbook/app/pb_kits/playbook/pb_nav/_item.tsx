@@ -8,6 +8,7 @@ import Icon from "../pb_icon/_icon";
 import Image from "../pb_image/_image";
 import Collapsible from "../pb_collapsible/_collapsible";
 import { NavChildProps } from "./navTypes";
+import { Spacing } from "../types";
 
 type NavItemProps = {
   active?: boolean;
@@ -33,6 +34,13 @@ type NavItemProps = {
   collapsed?: boolean;
   orientation?: "vertical" | "horizontal";
   variant?: "normal" | "subtle";
+  margin?: Spacing;
+  marginBottom?: Spacing;
+  marginTop?: Spacing;
+  marginRight?: Spacing;
+  marginLeft?: Spacing;
+  marginX?: Spacing;
+  marginY?: Spacing;
 } & GlobalProps;
 
 const NavItem = (props: NavItemProps) => {
@@ -70,8 +78,34 @@ const NavItem = (props: NavItemProps) => {
     collapsibleTrail,
     collapsed,
     itemSpacing,
+    margin,
+    marginBottom,
+    marginTop,
+    marginRight,
+    marginLeft,
+    marginX,
+    marginY
   } = props;
 
+  //custom got collapsible only, to apply margin to correct div
+  const filteredProps = { ...props };
+  delete filteredProps?.margin;
+  delete filteredProps?.marginX;
+  delete filteredProps?.marginY;
+  delete filteredProps?.marginBottom;
+  delete filteredProps?.marginTop;
+  delete filteredProps?.marginRight;
+  delete filteredProps?.marginLeft;
+
+  const marginProps = {
+    margin,
+    marginBottom,
+    marginTop,
+    marginRight,
+    marginLeft,
+    marginX,
+    marginY,
+  };
 
   const Tag = link ? "a" : "div";
   const activeClass = active === true ? "active" : "";
@@ -100,10 +134,9 @@ const NavItem = (props: NavItemProps) => {
     fontSizeClass,
     fontWeightClass,
     tagClasses,
-    globalProps(props),
+    collapsible ? globalProps(filteredProps) : globalProps(props),
     className
   );
-
 
   const handleIconClick = (e: any) => {
     if (onIconLeftClick) {
@@ -136,7 +169,9 @@ const NavItem = (props: NavItemProps) => {
             onIconClick={onIconRightClick}
             onClick={onClick}
           >
-            <Collapsible.Main dark={dark}>
+            <Collapsible.Main 
+            className={globalProps({ ...marginProps })}
+            dark={dark}>
               <Tag
                 {...ariaProps}
                 {...dataProps}
