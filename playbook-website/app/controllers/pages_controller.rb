@@ -44,7 +44,7 @@ class PagesController < ApplicationController
 
   def home
     @changelog = Playbook::Engine.root.join("CHANGELOG.md").read
-    @posts = changelog_to_object(@changelog)
+    @posts = changelog_to_hash(@changelog)
   end
 
   def kits
