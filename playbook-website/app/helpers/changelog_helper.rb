@@ -5,10 +5,10 @@ module ChangelogHelper
     posts = []
 
     markdown_html = render_markdown(changelog)
-    headings = extract_headings(markdown_html)
+    document = parse_html(markdown_html)
 
-    headings.each_with_index do |title, index|
-      post = extract_post_data(markdown_html, title, index)
+    document.css("h1").each_with_index do |title_element, index|
+      post = extract_post_data(document, title_element, index)
       posts << post if post[:image].present?
     end
 
@@ -17,53 +17,46 @@ module ChangelogHelper
 
 private
 
-  def extract_headings(markdown_html)
-    Nokogiri::HTML(markdown_html).css("h1")
+  def parse_html(html)
+    Nokogiri::HTML5(html)
   end
 
-  def extract_post_data(markdown_html, title, index)
+  def extract_post_data(document, title_element, index)
     index_element = index + 1
     start_element = "h1:nth-of-type(#{index_element})"
     end_element = "h1:nth-of-type(#{index_element + 1})"
     set_a = "#{start_element} ~ *:not(#{end_element})"
-    content = Nokogiri::HTML(markdown_html).css(set_a).to_html
+    content = document.css(set_a)
 
     image_urls = extract_images(content)
     return {} if image_urls.empty?
 
     {
-      title: title.text,
+      title: title_element.text,
       description: extract_description(content),
       date: extract_date(content),
       image: image_urls,
-      link: extract_link(title),
-      content: Nokogiri::HTML(content).css("p").to_html,
+      link: extract_link(title_element),
+      content: content.css("p").to_s,
     }
   end
 
   def extract_description(content)
-    description = Nokogiri::HTML(content).css("p ~ p").first
-    description&.text
-  end
-
-  def extract_images(content)
-    rendered_html = Nokogiri::HTML(content)
-    rendered_html.css("img").map { |img| img["src"] }
+    first_paragraph = content.css("p ~ p").first
+    first_paragraph&.text
   end
 
   def extract_date(content)
-    first_h5 = Nokogiri::HTML(content).css("h5").first
+    first_h5 = content.css("h5").first
     first_h5&.text
   end
 
-  def extract_link(title)
-    link = title.css("a:first-child").attr("href")&.value
-    link&.gsub("#", "")
+  def extract_images(content)
+    content.css("img").map { |img| img["src"] }
   end
 
-  def render_markdown(markdown)
-    renderer = Redcarpet::Render::HTML.new
-    markdown_parser = Redcarpet::Markdown.new(renderer)
-    markdown_parser.render(markdown)
+  def extract_link(title_element)
+    link = title_element.css("a:first-child").attr("href")&.value
+    link&.gsub("#", "")
   end
 end
