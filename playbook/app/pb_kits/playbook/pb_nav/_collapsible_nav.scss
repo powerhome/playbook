@@ -3,7 +3,7 @@
 @import "../tokens/border_radius";
 @import "../tokens/titles";
 @import "../tokens/typography";
-@import "./mixins";
+@import "./collapsible_trail_mixin";
 
 [class^="pb_nav_list"][class*=_vertical]{
 
@@ -13,9 +13,12 @@
     padding: 0 !important;
   }
 
-
   //styling for default variant with collapsible
   &[class*="_normal"] {
+    .pb_collapsible_kit {
+      &[class*="_active"] {
+        background-color: unset;
+      }
     [class*="pb_collapsible_nav_item"] {
       &[class*="_collapsible_trail"] {
         .pb_collapsible_content_kit {
@@ -41,6 +44,7 @@
             font-weight: $regular !important;
           }
         }
+      }
       }
 
       &.dark {
@@ -69,13 +73,13 @@
       &[class*="_active"] {
         background-color: unset;
         .pb_collapsible_main_kit {
-          background-color: $primary !important;
+          background-color: $primary;
           border-radius: $border_rad_heavier;
           .pb_nav_list_item_text_collapsible,
           .pb_nav_list_item_icon_collapsible,
           .icon_wrapper,
           .pb_icon_kit {
-            color: $white !important;
+            color: $white;
           }
         }
         .pb_nav_list_item_link {
@@ -84,11 +88,11 @@
           &:hover {
             background-color: rgba($primary, 0.03) !important;
             .pb_nav_list_item_text {
-              color: $primary !important;
+              color: $primary;
             }
           }
           .pb_nav_list_item_text {
-            font-weight: $regular !important;
+            font-weight: $regular;
           }
         }
         .icon_wrapper:hover {
@@ -139,7 +143,11 @@
         color: unset;
       }
     }
-     }
+  }
+
+  &[class*="_collapsible_trail"] {
+    @include collapsible_trail_class;
+  }
 
     .pb_nav_list_item_link_collapsible {
       &:focus-visible {
@@ -182,15 +190,10 @@
         background-color: mix($primary, $card_light, 10%);
         .pb_nav_list_item_text_collapsible,
         svg {
-          color: $primary !important;
+          color: $primary;
         }
       }
     }
-
-
-    // &[class*="_collapsible_trail"] {
-    //   @include collapsible_trail_class;
-    // }
 
     .icon_wrapper {
       border-radius: $border_radius_rounded;

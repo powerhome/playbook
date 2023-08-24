@@ -95,7 +95,7 @@ const NavItem = (props: NavItemProps) => {
   const classes = classnames(
     buildCss("pb_nav_list_kit_item", activeClass),
     collapsible
-      ? buildCss("pb_collapsible_nav_item", activeClass, collapsibleTrailClass)
+      ? buildCss("pb_collapsible_nav_item", activeClass)
       : "",
     fontSizeClass,
     fontWeightClass,
@@ -128,7 +128,7 @@ const NavItem = (props: NavItemProps) => {
       {collapsible ? (
         <>
           <Collapsible
-            className={`collapsible_nav_wrapper_${activeClass}`}
+            className={`collapsible_nav_wrapper_${activeClass}_${collapsibleTrailClass}`}
             icon={iconRight && iconRight}
             iconSize="xs"
             id={id}
