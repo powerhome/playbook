@@ -5,8 +5,7 @@
 @import "../tokens/typography";
 @import "./collapsible_trail_mixin";
 
-[class^="pb_nav_list"][class*=_vertical]{
-
+[class^="pb_nav_list"][class*="_vertical"] {
   .pb_collapsible_main_kit,
   .pb_collapsible_content_kit,
   .pb_collapsible_kit {
@@ -19,7 +18,6 @@
       &[class*="_active"] {
         background-color: unset;
       }
-    [class*="pb_collapsible_nav_item"] {
       &[class*="_collapsible_trail"] {
         .pb_collapsible_content_kit {
           &::after {
@@ -32,19 +30,12 @@
       }
       .pb_collapsible_main_kit {
         border-radius: unset;
+        margin: 0;
       }
       &[class*="_active"] {
         .pb_collapsible_main_kit {
           background-color: $active_light;
         }
-        .pb_nav_list_item_link {
-          border-color: transparent !important;
-          .pb_nav_list_item_text {
-            color: unset !important;
-            font-weight: $regular !important;
-          }
-        }
-      }
       }
 
       &.dark {
@@ -134,20 +125,20 @@
   }
 
   .pb_collapsible_kit {
-   [class*=pb_collapsible_nav_item][class*=pb_nav_list_item_link_collapsible][class*=pb_nav_list_kit_item]{
+    [class*="pb_collapsible_nav_item"][class*="pb_nav_list_item_link_collapsible"][class*="pb_nav_list_kit_item"] {
       margin: 0px;
-    &[class*="_active"] {
-      background-color: unset;
-      box-shadow: unset;
-      .pb_nav_list_item_text_collapsible {
-        color: unset;
+      &[class*="_active"] {
+        background-color: unset;
+        box-shadow: unset;
+        .pb_nav_list_item_text_collapsible {
+          color: unset;
+        }
       }
     }
-  }
 
-  &[class*="_collapsible_trail"] {
-    @include collapsible_trail_class;
-  }
+    &[class*="_collapsible_trail"] {
+      @include collapsible_trail_class;
+    }
 
     .pb_nav_list_item_link_collapsible {
       &:focus-visible {
@@ -207,9 +198,6 @@
         background-color: mix($primary, $card_light, 40%);
       }
     }
-
-
-
 
     &.dark {
       .pb_nav_list_kit_item {
