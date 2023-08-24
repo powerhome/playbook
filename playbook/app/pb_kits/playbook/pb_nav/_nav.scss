@@ -5,3 +5,46 @@
 @import "./vertical_nav";
 @import "./horizontal_nav";
 @import "./collapsible_nav";
+
+[class^="pb_nav_list"] {
+  .font_size_small {
+    .pb_nav_list_item_text,
+    .pb_nav_list_item_text_collapsible {
+      font-size: $font_small !important;
+    }
+  }
+
+  .font_bolder {
+    .pb_nav_list_item_text {
+      @include pb_title_4;
+    }
+    .pb_collapsible_main_kit {
+      .pb_nav_list_item_text_collapsible {
+        @include pb_title_4;
+        font-weight: $bolder !important;
+      }
+    }
+  }
+
+  .font_bold {
+    .pb_nav_list_item_text {
+      font-weight: $bold;
+    }
+    .pb_collapsible_main_kit {
+      .pb_nav_list_item_text_collapsible {
+        font-weight: $bold !important;
+      }
+    }
+  }
+
+  .font_regular {
+    .pb_nav_list_item_text {
+      font-weight: $regular;
+    }
+    .pb_collapsible_main_kit {
+      .pb_nav_list_item_text_collapsible {
+        font-weight: $regular !important;
+      }
+    }
+  }
+}

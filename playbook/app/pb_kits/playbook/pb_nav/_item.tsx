@@ -126,52 +126,62 @@ const NavItem = (props: NavItemProps) => {
   return (
     <>
       {collapsible ? (
-        <div {...ariaProps} {...dataProps} className={classes} id={id}>
-        <Collapsible
-          icon={iconRight && iconRight}
-          iconSize="xs"
-          id={id}
-          collapsed={collapsed}
-          onIconClick={onIconRightClick}
-          onClick={onClick}
-        >
-          <Collapsible.Main dark={dark}>
-            <Tag className={tagClasses} href={link} target={target}>
-              {imageUrl && (
-                <div
-                  className="pb_nav_list_item_icon_section_collapsible"
-                  key={imageUrl}
-                  onClick={(e) => handleIconClick(e)}
-                >
-                  <Image className="pb_nav_img_wrapper" url={imageUrl} />
-                </div>
-              )}
+        <>
+          <Collapsible
+            className={`collapsible_nav_wrapper_${activeClass}`}
+            icon={iconRight && iconRight}
+            iconSize="xs"
+            id={id}
+            collapsed={collapsed}
+            onIconClick={onIconRightClick}
+            onClick={onClick}
+          >
+            <Collapsible.Main dark={dark}>
+              <Tag
+                {...ariaProps}
+                {...dataProps}
+                className={classes}
+                id={id}
+                href={link}
+                target={target}
+              >
+                {imageUrl && (
+                  <div
+                    className="pb_nav_list_item_icon_section_collapsible"
+                    key={imageUrl}
+                    onClick={(e) => handleIconClick(e)}
+                  >
+                    <Image className="pb_nav_img_wrapper" url={imageUrl} />
+                  </div>
+                )}
 
-              {iconLeft && (
-                <div
-                  className="pb_nav_list_item_icon_section_collapsible"
-                  key={iconLeft}
-                  onClick={(e) => handleIconClick(e)}
-                >
-                  <Icon
-                    className="pb_nav_list_item_icon_left_collapsible"
-                    fixedWidth
-                    icon={iconLeft}
-                  />
-                </div>
-              )}
-              <span className="pb_nav_list_item_text_collapsible">{text}</span>
-            </Tag>
-          </Collapsible.Main>
-          <Collapsible.Content>{childrenWithProps}</Collapsible.Content>
-        </Collapsible>
-        </div>
+                {iconLeft && (
+                  <div
+                    className="pb_nav_list_item_icon_section_collapsible"
+                    key={iconLeft}
+                    onClick={(e) => handleIconClick(e)}
+                  >
+                    <Icon
+                      className="pb_nav_list_item_icon_left_collapsible"
+                      fixedWidth
+                      icon={iconLeft}
+                    />
+                  </div>
+                )}
+                <span className="pb_nav_list_item_text_collapsible">
+                  {text}
+                </span>
+              </Tag>
+            </Collapsible.Main>
+            <Collapsible.Content>{childrenWithProps}</Collapsible.Content>
+          </Collapsible>
+        </>
       ) : (
         <Tag
-        {...ariaProps} 
-        {...dataProps} 
-        className={classes} 
-        id={id}
+          {...ariaProps}
+          {...dataProps}
+          className={classes}
+          id={id}
           href={link}
           onClick={onClick}
           target={target}
