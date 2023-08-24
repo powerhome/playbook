@@ -6,7 +6,7 @@ module ChangelogHelper
     document = Nokogiri::HTML5(md_html)
     posts = []
     # Loop Through Each Post
-    document.search("h1").each_with_index do |title, i|
+    document.search("h1").lazy.take(15).each_with_index do |title, i|
       index_element = i + 1
       start_element = "//h1[#{index_element}]"
       end_element = "//h1[#{index_element + 1}]"
