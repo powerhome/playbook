@@ -2,26 +2,23 @@
 
 module ChangelogHelper
   def changelog_to_hash(changelog)
+    posts = []
+
     markdown_html = render_markdown(changelog)
     document = parse_html(markdown_html)
-    extract_posts(document)
+
+    document.css("h1").each_with_index do |title_element, index|
+      post = extract_post_data(document, title_element, index)
+      posts << post if post[:image].present?
+    end
+
+    posts
   end
 
 private
 
   def parse_html(html)
     Nokogiri::HTML5(html)
-  end
-
-  def extract_posts(document)
-    posts = []
-
-    document.css("h1").each_with_index do |title_element, index|
-      post = extract_post_data(document, title_element, index)
-      posts << post unless post[:image].nil?
-    end
-
-    posts
   end
 
   def extract_post_data(document, title_element, index)
@@ -31,22 +28,27 @@ private
     set_a = "#{start_element} ~ *:not(#{end_element})"
     content = document.css(set_a)
 
+    image_urls = extract_images(content)
+    return {} if image_urls.empty?
+
     {
       title: title_element.text,
       description: extract_description(content),
       date: extract_date(content),
-      image: extract_images(content),
+      image: image_urls,
       link: extract_link(title_element),
       content: content.css("p").to_s,
     }
   end
 
   def extract_description(content)
-    content.css("p ~ p").map(&:text).first
+    first_paragraph = content.css("p ~ p").first
+    first_paragraph&.text
   end
 
   def extract_date(content)
-    content.css("h5").map(&:text).first
+    first_h5 = content.css("h5").first
+    first_h5&.text
   end
 
   def extract_images(content)
