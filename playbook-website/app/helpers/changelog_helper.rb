@@ -2,34 +2,59 @@
 
 module ChangelogHelper
   def changelog_to_hash(changelog)
-    md_html = render_markdown(changelog)
-    document = Nokogiri::HTML5(md_html)
+    markdown_html = render_markdown(changelog)
+    document = parse_html(markdown_html)
+    extract_posts(document)
+  end
+
+private
+
+  def parse_html(html)
+    Nokogiri::HTML5(html)
+  end
+
+  def extract_posts(document)
     posts = []
 
-    document.css("h1").each_with_index do |title, i|
-      index_element = i + 1
-      start_element = "h1:nth-of-type(#{index_element})"
-      end_element = "h1:nth-of-type(#{index_element + 1})"
-      set_a = "#{start_element} ~ *:not(#{end_element})"
-      my_content = document.css(set_a)
-      image = my_content.css("img").map { |img| img["src"] }
-      next if image.nil?
-
-      posts << {
-        title: title.text,
-        description: my_content.css("p ~ p").map(&:text).first,
-        date: my_content.css("h5").map(&:text).first,
-        image: image,
-        link: title.css("a:first-child").attr("href")&.value&.gsub("#", ""),
-        content: my_content.css("p").to_s,
-      }
+    document.css("h1").each_with_index do |title_element, index|
+      post = extract_post_data(document, title_element, index)
+      posts << post unless post[:image].nil?
     end
 
     posts
   end
 
-  def changelog_to_object(changelog)
-    hash = changelog_to_hash(changelog)
-    hash.map { |post| OpenStruct.new(post) }
+  def extract_post_data(document, title_element, index)
+    index_element = index + 1
+    start_element = "h1:nth-of-type(#{index_element})"
+    end_element = "h1:nth-of-type(#{index_element + 1})"
+    set_a = "#{start_element} ~ *:not(#{end_element})"
+    content = document.css(set_a)
+
+    {
+      title: title_element.text,
+      description: extract_description(content),
+      date: extract_date(content),
+      image: extract_images(content),
+      link: extract_link(title_element),
+      content: content.css("p").to_s,
+    }
+  end
+
+  def extract_description(content)
+    content.css("p ~ p").map(&:text).first
+  end
+
+  def extract_date(content)
+    content.css("h5").map(&:text).first
+  end
+
+  def extract_images(content)
+    content.css("img").map { |img| img["src"] }
+  end
+
+  def extract_link(title_element)
+    link = title_element.css("a:first-child").attr("href")&.value
+    link&.gsub("#", "")
   end
 end
