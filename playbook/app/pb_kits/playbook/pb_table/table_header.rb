@@ -3,7 +3,8 @@
 module Playbook
   module PbTable
     class TableHeader < Playbook::KitBase
-      prop :align, type: Playbook::Props::String,
+      prop :align, type: Playbook::Props::Enum,
+                   values: %w[start center end stretch baseline none],
                    default: "start"
       prop :align_content, type: Playbook::Props::Enum,
                            values: %w[start center end stretch baseline none],
