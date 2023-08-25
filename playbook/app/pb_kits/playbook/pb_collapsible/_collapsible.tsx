@@ -20,7 +20,7 @@ type CollapsibleProps = {
   icon?: string | string[],
   iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   iconSize?: IconSizes,
-  iconClick?: ()=> void,
+  onIconClick?: ()=> void,
   onClick?: ()=> void,
   id?: string,
 }
@@ -36,7 +36,7 @@ const Collapsible = ({
   icon,
   iconColor = 'default',
   iconSize,
-  iconClick,
+  onIconClick,
   onClick,
   id,
   ...props
@@ -66,7 +66,7 @@ const Collapsible = ({
     className
   )
   return (
-    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, toggle, icon, iconSize, iconColor, iconClick, onClick }}>
+    <CollapsibleContext.Provider value={{ collapsed: isCollapsed, toggle, icon, iconSize, iconColor, onIconClick, onClick }}>
       <div
           {...ariaProps}
           {...dataProps}

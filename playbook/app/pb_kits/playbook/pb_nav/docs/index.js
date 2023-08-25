@@ -14,4 +14,5 @@ export { default as NewTab } from './_new_tab.jsx'
 export { default as BoldHorizontalNav } from './_bold_horizontal_nav.jsx'
 export { default as BoldVerticalNav } from './_bold_vertical_nav.jsx'
 export { default as CollapsibleNav } from './_collapsible_nav.jsx'
-export { default as CollapsibleNavCustomIcons } from './_collapsible_nav_custom_icons.jsx'
+export { default as CollapsibleNavCustom } from './_collapsible_nav_custom.jsx'
+export { default as CollapsibleNavEmphasize } from "./_collapsible_nav_emphasize.jsx"

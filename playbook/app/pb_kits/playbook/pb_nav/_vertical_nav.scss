@@ -56,7 +56,7 @@ $selector: ".pb_nav_list";
               color: $primary;
             }
             [class*=_text] {
-              color: $primary;
+              color: $primary !important;
             }
           }
         }
