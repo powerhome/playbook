@@ -2,19 +2,29 @@
   <thead>
     <tr>
       <%= pb_rails("table/table_header", props: {
+        id: "name",
         sort_menu: [
-          { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: false, direction: "desc" },
-          { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: true },
-          { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+          { item: "Name", link: "?q[sorts]=name+desc", active: false, direction: "desc" },
+          { item: "Name", link: "?q[sorts]=name+asc", active: true, direction: "asc" },
         ],
-      }) do %>
-        <%= pb_rails("star_rating", props: { rating: 3.5, hide_rating: true }) %>
-      <% end %>
-
-      <th>Column 2</th>
-      <th>Column 3</th>
-      <th>Column 4</th>
-      <th>Column 5</th>
+      }) %>
+      <%= pb_rails("table/table_header", props: {
+        text: "Age",
+        id: "age",
+        sort_menu: [
+          { item: "Age", link: "?q[sorts]=age+desc", active: false, direction: "desc" },
+          { item: "Age", link: "?q[sorts]=age+asc", active: false, direction: "asc" },
+        ],
+      }) %>
+      <%= pb_rails("table/table_header", props: {
+        text: "Territory",
+        id: "territory",
+        sort_menu: [
+          { item: "Territory", link: "?q[sorts]=territory+desc", active: false, direction: "desc" },
+          { item: "Territory", link: "?q[sorts]=territory+asc", active: false, direction: "asc" },
+        ],
+      }) %>
+      <%= pb_rails("table/table_header", props: { text: "Job Title" }) %>
     </tr>
   </thead>
   <tbody>
@@ -23,21 +33,18 @@
       <td>Value 2</td>
       <td>Value 3</td>
       <td>Value 4</td>
-      <td>Value 5</td>
     </tr>
     <tr>
       <td>Value 1</td>
       <td>Value 2</td>
       <td>Value 3</td>
       <td>Value 4</td>
-      <td>Value 5</td>
     </tr>
     <tr>
       <td>Value 1</td>
       <td>Value 2</td>
       <td>Value 3</td>
       <td>Value 4</td>
-      <td>Value 5</td>
     </tr>
   </tbody>
 <% end %>
