@@ -22,7 +22,7 @@ module Playbook
                     default: "_self"
       def classname
         if collapsible
-          "#{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link_collapsible"
+          "#{generate_classname('pb_nav_list_kit_item', active_class)} #{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link_collapsible"
         else
           "#{generate_classname('pb_nav_list_kit_item', active_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link"
         end
@@ -34,6 +34,10 @@ module Playbook
 
       def collapsible_icons
         icon_right.present? && icon_right
+      end
+
+      def collapsible_nav_classname
+        "collapsible_nav_wrapper_#{active_class}_#{collapsible_trail_class}"
       end
 
     private
