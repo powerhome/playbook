@@ -37,9 +37,9 @@
           background-color: $active_light;
         }
       }
-
-      &.dark {
-        border-color: $border_dark;
+    }
+    &.dark {
+      .pb_collapsible_kit {
         .pb_collapsible_main_kit:hover {
           .pb_nav_list_item_text_collapsible {
             color: $white !important;
@@ -91,6 +91,20 @@
         }
       }
     }
+    &.dark {
+      .pb_collapsible_kit {
+        &[class*="_active"] {
+          .pb_collapsible_main_kit {
+            background-color: $primary;
+          }
+          .pb_nav_list_item_link {
+            &:hover {
+              background-color: rgba($white, $opacity_1) !important;
+            }
+          }
+        }
+      }
+    }
   }
 
   //styling for subtle variant with collapsible
@@ -110,10 +124,12 @@
           background-color: unset;
         }
       }
-      &.dark {
+    }
+    &.dark {
+      .pb_collapsible_kit {
         &[class*="_active"] {
           .pb_collapsible_main_kit {
-            background-color: mix($white, $card_dark, 20%);
+            background-color: mix($white, $card_dark, 20%) !important;
             .pb_nav_list_item_text_collapsible,
             svg {
               color: $white !important;
@@ -198,22 +214,18 @@
         background-color: mix($primary, $card_light, 40%);
       }
     }
-
-    &.dark {
-      .pb_nav_list_kit_item {
-        border-color: $border_dark;
-        .pb_nav_list_item_text {
-          color: $text_dk_light !important;
-        }
-      }
+  }
+  &.dark {
+    .pb_collapsible_kit {
       &[class*="pb_nav_list_kit_item"] [class*="_link"]:hover {
         .pb_nav_list_item_text {
           color: $white !important;
         }
       }
-
-      .pb_nav_list_item_text_collapsible {
-        color: $white !important;
+      [class*="pb_collapsible_nav_item"][class*="pb_nav_list_item_link_collapsible"][class*="pb_nav_list_kit_item"] {
+        .pb_nav_list_item_text_collapsible {
+          color: $white !important;
+        }
       }
       .pb_nav_list_item_text {
         color: $text_dk_light;
@@ -237,7 +249,7 @@
         background-color: mix($white, $card_dark, 40%);
       }
 
-      &[class*="pb_collapsible_nav_item"][class*="_collapsible_trail"] {
+      &[class*="_collapsible_trail"] {
         .pb_collapsible_content_kit {
           &::after {
             background-color: $border_dark;
