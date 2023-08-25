@@ -7,7 +7,7 @@ module ChangelogHelper
     markdown_html = render_markdown(changelog)
     document = parse_html(markdown_html)
 
-    document.css("h1").lazy.take(10).each_with_index do |title_element, index|
+    document.css("h1").lazy.take(5).each_with_index do |title_element, index|
       post = extract_post_data(document, title_element, index)
       posts << post if post[:image].present?
     end
@@ -52,7 +52,7 @@ private
   end
 
   def extract_images(content)
-    content.css("img").map { |img| img["src"] }
+    content.css("p a img").map { |img| img["src"] }
   end
 
   def extract_link(title_element)
