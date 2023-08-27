@@ -20,16 +20,19 @@ const CollapsibleNavEmphasize = (props) => {
           {...props}
       >
         <NavItem
+            fontSize="small"
             link="#" 
             text="City"
             {...props}
         />
         <NavItem
+            fontSize="small"
             link="#"
             text="People"
             {...props}
         />
         <NavItem 
+            fontSize="small"
             link="#" 
             text="Business" 
             {...props}
@@ -47,16 +50,19 @@ const CollapsibleNavEmphasize = (props) => {
           {...props}
       >
         <NavItem 
+            fontSize="small"
             link="#" 
             text="Entertainment" 
             {...props}
         />
         <NavItem 
+            fontSize="small"
             link="#" 
             text="Food" 
             {...props}
         />
         <NavItem 
+            fontSize="small"
             link="#" 
             text="Style" 
             {...props}
@@ -74,16 +80,19 @@ const CollapsibleNavEmphasize = (props) => {
           {...props}
       >
         <NavItem 
+            fontSize="small"
             link="#" 
             text="City"
             {...props} 
         />
         <NavItem
+            fontSize="small"
             link="#"
             text="People"
             {...props}
         />
         <NavItem 
+            fontSize="small"
             link="#" 
             text="Business" 
             {...props}
