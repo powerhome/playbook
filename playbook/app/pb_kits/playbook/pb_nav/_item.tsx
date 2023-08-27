@@ -84,10 +84,48 @@ const NavItem = (props: NavItemProps) => {
     marginRight,
     marginLeft,
     marginX,
-    marginY
+    marginY,
   } = props;
 
-  //custom got collapsible only, to apply margin to correct div
+  const spacingMarginProps = {
+    margin,
+    marginBottom,
+    marginTop,
+    marginRight,
+    marginLeft,
+    marginX,
+    marginY,
+  };
+
+//separate margin props and padding props  in itemSpacing object 
+const filterItemSpacing = (obj: { [key: string]: string }) => {
+  const filteredPadding: { [key: string]: string } = {};
+  const filteredMargin: { [key: string]: string } = {};
+  for (const key in obj) {
+    if (key.startsWith('padding')) {
+      filteredPadding[key] = obj[key];
+    } else if (key.startsWith('margin')) {
+      filteredMargin[key] = obj[key];
+    }
+  }
+  return { filteredPadding, filteredMargin };
+};
+
+//deconstruct itemSpacing
+const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
+
+//if itemSpacing has margin props, apply those, if margin global props passed to navItem itself, navItem props take precendence 
+  const finalItemSpacing = {
+    ...(filteredMargin || {}),
+    ...Object.entries(spacingMarginProps).reduce((acc: any, [prop, value]) => {
+      if (value) {
+        acc[prop] = value;
+      }
+      return acc;
+    }, {}),
+  };
+
+  //custom for collapsible only, to apply margin to correct div
   const filteredProps = { ...props };
   delete filteredProps?.margin;
   delete filteredProps?.marginX;
@@ -97,15 +135,6 @@ const NavItem = (props: NavItemProps) => {
   delete filteredProps?.marginRight;
   delete filteredProps?.marginLeft;
 
-  const marginProps = {
-    margin,
-    marginBottom,
-    marginTop,
-    marginRight,
-    marginLeft,
-    marginX,
-    marginY,
-  };
 
   const Tag = link ? "a" : "div";
   const activeClass = active === true ? "active" : "";
@@ -134,7 +163,7 @@ const NavItem = (props: NavItemProps) => {
     fontSizeClass,
     fontWeightClass,
     tagClasses,
-    collapsible ? globalProps(filteredProps) : globalProps(props),
+    collapsible ? globalProps(filteredProps, {...filteredPadding}) : globalProps(props, {...itemSpacing}),
     className
   );
 
@@ -144,6 +173,7 @@ const NavItem = (props: NavItemProps) => {
       onIconLeftClick();
     }
   };
+
 
   // Map over the children and clone them with itemSpacing prop so nested navItems all get itemSpacing
   const childrenWithProps = React.Children.map(children, (child) => {
@@ -170,7 +200,7 @@ const NavItem = (props: NavItemProps) => {
             onClick={onClick}
           >
             <Collapsible.Main 
-            className={globalProps({ ...marginProps })}
+            className={globalProps({ ...finalItemSpacing })}
             dark={dark}>
               <Tag
                 {...ariaProps}
