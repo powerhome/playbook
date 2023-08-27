@@ -8,6 +8,13 @@ export type SpacingObject = {
   marginLeft?: Spacing;
   margingX?: Spacing;
   marginY?: Spacing;
+  padding?: Spacing;
+  paddingBottom?: Spacing;
+  paddingTop?: Spacing;
+  paddingRight?: Spacing;
+  paddingLeft?: Spacing;
+  paddingX?: Spacing;
+  paddingY?: Spacing;
 };
 
 export type NavChildProps = {
