@@ -72,7 +72,6 @@ module Playbook
         prefix = spacing_options[prop]
 
         if responsive
-          default_value = spacing_value.delete(:default) || nil
           break_value = spacing_value.delete(:break) || break_method_values.first
           spacing_value.each do |key, value|
             css += "#{prefix}_break-#{break_value}-#{key}_#{prefix}-#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
