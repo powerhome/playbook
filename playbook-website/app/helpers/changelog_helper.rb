@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# controllers/concerns/changelog_helper.rb
 module ChangelogHelper
   def changelog_to_hash(changelog)
     posts = []
@@ -8,26 +7,9 @@ module ChangelogHelper
     markdown_html = render_markdown(changelog)
     document = parse_html(markdown_html)
 
-    document.css("h1").lazy.take(5).each_with_index do |title_element, i|
-      post = extract_post_data(document, title_element, i)
-      index_element = i + 1
-      start_element = "//h1[#{index_element}]"
-      end_element = "//h1[#{index_element + 1}]"
-      set_a = "#{start_element}/following-sibling::*"
-      set_b = "#{end_element}/preceding-sibling::*"
-      my_content = document.xpath("#{set_a}[ count(.|#{set_b}) = count(#{set_b}) ]
-      | #{start_element} | #{end_element}")
-      image_url = image = my_content.search("img").map { |img| img["src"] }&.first
-      next if image.nil?
-      next unless image_url.present? # Skip posts without images
-
-      posts << {
-        title: post[:title],
-        description: post[:description],
-        date: post[:date],
-        image: image_url,
-        link: post[:link],
-      }
+    document.css("h1").lazy.take(5).each_with_index do |title_element, index|
+      post = extract_post_data(document, title_element, index)
+      posts << post if post[:image].present?
     end
 
     posts
@@ -46,10 +28,14 @@ private
     set_a = "#{start_element} ~ *:not(#{end_element})"
     content = document.css(set_a)
 
+    image_urls = extract_images(content)
+    return {} if image_urls.empty?
+
     {
       title: title_element.text,
       description: extract_description(content),
       date: extract_date(content),
+      image: image_urls,
       link: extract_link(title_element),
       content: content.css("p").to_s,
     }
@@ -65,10 +51,8 @@ private
     first_h5&.text
   end
 
-  def extract_image_url(content)
-    match_data = content.match(/!\[.*\]\((.*?)\)/)
-    image_url = match_data[1] if match_data
-    image_url&.gsub(/\A\s+|\s+\z/, "")
+  def extract_images(content)
+    content.css("p a img").map { |img| img["src"] }
   end
 
   def extract_link(title_element)
