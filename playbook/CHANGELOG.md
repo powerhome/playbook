@@ -1,3 +1,14 @@
+# 13.0.0
+##### August 22, 2023
+
+List of changes: 
+
+**Breaking changes:**
+
+- Remove Moment Packages and Update Date Picker's QiickPick Variants [\#2707](https://github.com/powerhome/playbook/pull/2707) ([gavhuang](https://github.com/gavhuang))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.0.0...13.0.0)
+
 # Collapsible Kit ✨Enhancements✨: External Controls and Customizable Icons!
 ##### August 17, 2023
 
