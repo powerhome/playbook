@@ -82,7 +82,7 @@
         <a href="<%= changelog_path(anchor: post[:link]) %>">
           <%= pb_rails("flex", props: { align_items: "stretch", padding: "sm", gap: "sm", flex_direction: { xs: "column" } }) do %>
             <%= pb_rails("flex/flex_item", props: { fixed_size: "200px", display: "flex" }) do %>
-              <%= pb_rails("background", props: { image_url: post[:image].present? ? post[:image] : nil, border_radius: "md", background_color: "neutral", background_position: "top", flex_grow: 1 }) %>
+              <%= pb_rails("background", props: { image_url: post[:image], border_radius: "md", background_color: "neutral", background_position: "top", flex_grow: 1 }) %>
             <% end %>
   
             <%= pb_rails("flex", props: { flex: 1, flex_direction: "column" }) do %>
