@@ -54,6 +54,27 @@ $position in $positions {
   }
 }
 
+// Generate default classes
+@each $position_name,
+$position in $positions {
+
+  @each $space_name,
+  $space in $space_classes {
+    .#{$position_name}_default-#{$space_name} {
+      @if type-of($position)=="list" {
+        @each $coordinate in $position {
+          #{$coordinate}: #{$space} !important;
+        }
+      }
+
+      @else {
+        #{$position}: #{$space} !important;
+      }
+    }
+  }
+}
+
+// Generate media queries
 @each $size,
 $size_value in $breakpoints_grid {
 

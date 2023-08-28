@@ -54,7 +54,7 @@ module Playbook
     end
 
     def screen_size_values
-      %w[xs sm md lg xl]
+      %w[xs sm md lg xl default]
     end
 
     def break_method_values
@@ -72,10 +72,13 @@ module Playbook
         prefix = spacing_options[prop]
 
         if responsive
+          default_value = spacing_value.delete(:default) || nil
           break_value = spacing_value.delete(:break) || break_method_values.first
           spacing_value.each do |key, value|
-            css += "#{prefix}_break-#{break_value}-#{key}_p-#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
+            css += "#{prefix}_break-#{break_value}-#{key}_#{prefix}-#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
           end
+
+          css += "#{prefix}_default-#{default_value} " if spacing_values.include?(default_value)
         elsif spacing_values.include?(spacing_value)
           css += "#{prefix}_#{spacing_value} "
         end
