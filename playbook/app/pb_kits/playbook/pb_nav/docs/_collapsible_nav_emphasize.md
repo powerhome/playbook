@@ -1,0 +1,1 @@
+The ` navBold` prop can be passed to NavItem
