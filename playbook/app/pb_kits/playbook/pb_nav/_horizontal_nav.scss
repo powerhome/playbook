@@ -43,7 +43,6 @@ $selector: ".pb_nav_list";
       }
 
       [class*="_text"] {
-        font-size: $font_base;
         color: $text_lt_default;
         font-weight: $bold;
       }
