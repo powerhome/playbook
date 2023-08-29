@@ -23,7 +23,7 @@ module Playbook
                       default: nil
 
       def classname
-        generate_classname("pb_body_kit", color_class, status_class, is_truncate)
+        generate_classname("pb_body_kit", color_class, status_class, is_truncated)
       end
 
       def content
@@ -31,7 +31,7 @@ module Playbook
         highlighting ? apply_highlight(body_text) : body_text
       end
 
-      def is_truncate
+      def is_truncated
         truncate ? "truncate_#{truncate}" : nil
       end
 
