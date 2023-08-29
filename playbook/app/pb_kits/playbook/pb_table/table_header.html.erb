@@ -1,4 +1,3 @@
-
 <%= content_tag(:th,
     colspan: object.colspan,
     aria: object.aria,
@@ -28,7 +27,7 @@
   <% else %>
     <%= content.presence || object.text %>
   <% end %>
-  <% if object.sort_menu != [{}] %>
+  <% if object.sort_menu != [{}] && object.colspan > 1 %>
     <%= pb_rails("popover", props: { classname: "pb_filter_sort_menu",
                                     close_on_click: "outside",
                                     trigger_element_id: "pb-th#{object.id}",
@@ -49,4 +48,17 @@
       <% end %>
     <% end %>
   <% end %>
+<% end %>
+<% if object.sort_menu != [{}] && object.colspan == 1 %>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var thId = `<%= "#pb-th#{object.id}" %>`
+      var firstLink = `<%= object.sort_menu[0][:link] %>`
+      var thElement = document.querySelector(thId);
+
+      thElement.addEventListener("click", function() {
+        window.location.href = firstLink;
+      });
+    });
+  </script>
 <% end %>

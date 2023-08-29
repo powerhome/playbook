@@ -3,6 +3,7 @@
     <tr>
       <%= pb_rails("table/table_header", props: {
         id: "name",
+        colspan: 2,
         sort_menu: [
           { item: "Name", link: "?q[sorts]=name+desc", active: false, direction: "desc" },
           { item: "Name", link: "?q[sorts]=name+asc", active: true, direction: "asc" },
@@ -29,22 +30,25 @@
   </thead>
   <tbody>
     <tr>
-      <td>Value 1</td>
-      <td>Value 2</td>
+      <td>Name 1</td>
+      <td>Name 2</td>
       <td>Value 3</td>
       <td>Value 4</td>
+      <td>Value 5</td>
     </tr>
     <tr>
-      <td>Value 1</td>
-      <td>Value 2</td>
+      <td>Name 1</td>
+      <td>Name 2</td>
       <td>Value 3</td>
       <td>Value 4</td>
+      <td>Value 5</td>
     </tr>
     <tr>
-      <td>Value 1</td>
-      <td>Value 2</td>
+      <td>Name 1</td>
+      <td>Name 2</td>
       <td>Value 3</td>
       <td>Value 4</td>
+      <td>Value 5</td>
     </tr>
   </tbody>
 <% end %>
