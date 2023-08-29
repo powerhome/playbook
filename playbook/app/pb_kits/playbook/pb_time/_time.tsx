@@ -68,7 +68,7 @@ const Time = (props: TimeProps) => {
             )
       )}
 
-      <time dateTime={date.toString()}>
+      <time dateTime={date.toLocaleString()}>
         <span>
           {unstyled
             ? (
