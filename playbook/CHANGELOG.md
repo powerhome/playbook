@@ -1,3 +1,18 @@
+# 💔 Say Goodbye to the Past: We're Breaking Up with moment.js! 🕒
+##### August 22, 2023
+
+![13-0-0-banner](https://github.com/powerhome/playbook/assets/73710701/cfb781dd-7a96-4a07-8c5c-53af8bc878de)
+
+Say goodbye to the old and make way for the new as we bid adieu to moment.js in our Playbook design system! We've given our Date and Time kits a makeover, retiring the dated library in favor of a more vibrant and efficient solution. Our kits still handle dates and times flawlessly, but with the breakup, our bundle size has shed a whopping 25%, giving you a snappier experience.
+
+[13.0.0](https://github.com/powerhome/playbook/tree/13.0.0) full list of changes:
+
+**Breaking changes:**
+
+- Remove Moment Packages and Update Date Picker's QuickPick Variants [\#2707](https://github.com/powerhome/playbook/pull/2707) ([gavhuang](https://github.com/gavhuang))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.0.0...13.0.0)
+
 # Collapsible Kit ✨Enhancements✨: External Controls and Customizable Icons!
 ##### August 17, 2023
 
