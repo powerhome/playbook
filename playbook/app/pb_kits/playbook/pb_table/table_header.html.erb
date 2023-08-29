@@ -53,7 +53,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       var thId = `<%= "#pb-th#{object.id}" %>`
-      var firstLink = `<%= object.sort_menu[0][:link] %>`
+      var firstLink = `<%= next_link %>`
       var thElement = document.querySelector(thId);
 
       thElement.addEventListener("click", function() {

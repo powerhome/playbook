@@ -27,6 +27,17 @@ module Playbook
         align.present? ? "align_#{align}" : nil
       end
 
+      def next_link
+        return sort_menu[0][:link] if sort_menu.all? { |item| item[:active] == false }
+
+        sort_menu.each_with_index do |item, index|
+          if item[:active] == true
+            next_index = (index + 1) % sort_menu.length
+            sort_menu[next_index][:link]
+          end
+        end
+      end
+
       def sort_icon(direction)
         case direction
         when "asc"
