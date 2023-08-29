@@ -6,7 +6,7 @@ $text_align_center:         center !default;
 $text_align_justify:        justify !default;
 $text_align_justify_all:    justify-all !default;
 $text_align_match_parent:   match-parent !default;
-$text_align:(
+$text_align: (
   start:         $text_align_start,
   end:           $text_align_end,
   left:          $text_align_left,

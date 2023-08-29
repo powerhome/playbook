@@ -79,40 +79,40 @@
       }
     }
   }
-}
 
-//slider css
-.container {
-  position: relative;
-  height: 350px;
-  overflow: hidden;
-}
+  // Slider css
+  .container {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+  }
 
-.solutionsCard {
-  position: absolute;
-  height: 350px;
-}
+  .solutionsCard {
+    position: absolute;
+    height: 350px;
+  }
 
-.vertical-bar svg {
-  position: absolute;
-  top: 48%;
-  left: 35%;
-  color: $text_lt_light
-}
+  .vertical-bar svg {
+    position: absolute;
+    top: 48%;
+    left: 35%;
+    color: $text_lt_light
+  }
 
-.vertical-bar {
-  position: absolute;
-  cursor: ew-resize;
-  top: -1px;
-  left: -10px;
-  width: 20px;
-  height: 350px;
-  background-color: $bg_light;
-  box-shadow: -10px 0 15px -2px $shadow;
-  user-select: none;
-}
+  .vertical-bar {
+    position: absolute;
+    cursor: ew-resize;
+    top: -1px;
+    left: -10px;
+    width: 20px;
+    height: 350px;
+    background-color: $bg_light;
+    box-shadow: -10px 0 15px -2px $shadow;
+    user-select: none;
+  }
 
-.highlightSolutions {
-  padding-top: $space_md !important;
-  padding-bottom: $space_md !important;
+  .highlightSolutions {
+    padding-top: $space_md !important;
+    padding-bottom: $space_md !important;
+  }
 }
