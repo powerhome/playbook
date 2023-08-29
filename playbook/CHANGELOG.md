@@ -9,7 +9,7 @@ Say goodbye to the old and make way for the new as we bid adieu to moment.js in 
 
 **Breaking changes:**
 
-- Remove Moment Packages and Update Date Picker's QiickPick Variants [\#2707](https://github.com/powerhome/playbook/pull/2707) ([gavhuang](https://github.com/gavhuang))
+- Remove Moment Packages and Update Date Picker's QuickPick Variants [\#2707](https://github.com/powerhome/playbook/pull/2707) ([gavhuang](https://github.com/gavhuang))
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/13.0.0...13.0.0)
 
