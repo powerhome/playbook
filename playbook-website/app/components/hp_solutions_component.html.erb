@@ -8,21 +8,22 @@
     padding_right: "md"
 }) do %>
 	<%= pb_rails("flex", props: {
+			classname: "width-full",
 			max_width: "xxl",
 			gap: "xl",
 			flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row" }
 	}) do %>
 		<%= pb_rails("flex/flex_item", props: {
+			classname: "container width-full",
+			shadow: "deeper",
 			display: { xs: "none", sm: "flex" },
 			padding_bottom: "xl",
-			classname: "container",
 			border_radius: "lg"
 		}) do %>
 			<%= pb_rails("card", props: {
-				shadow: "deeper",
+				classname: "solutionsCard width-full",
 				justify_content: "center",
 				border_radius: "lg",
-				classname: "solutionsCard"
 			}) do %>
 				<%= pb_rails("user", props: {
 					name: "Anna Black",
@@ -37,13 +38,13 @@
 			<% react_contents = Rails.root.join("app/views/pages/code_snippets/user_jsx.txt").read %>
 
 			<%= pb_rails("card", props: {
+				classname: "solutionsCard secondSolutionsCard width-full",
 				shadow: "deeper",
 				dark: true,
 				background: "dark",
 				border_radius: "lg",
 				padding: "none",
 				margin: "none",
-				classname: "solutionsCard card2"
 			})  do %>
 				<div class="vertical-bar">
 					<%= pb_rails("icon", props: { icon: "grip-lines-vertical" }) %>
@@ -231,13 +232,13 @@
 		// IIFE contains it's own private scope
 		document.addEventListener("DOMContentLoaded", () => {
 			const container = document.querySelector('.container');
-			const card2 = document.querySelector('.card2');
+			const secondSolutionsCard = document.querySelector('.secondSolutionsCard');
 			const verticalBar = document.querySelector('.vertical-bar');
 			const containerRect = container.getBoundingClientRect();
 			const containerMid = containerRect.width / 2
 
-			card2.style.transform = `translateX(${containerMid}px) translateY(0)`
-			card2.style.transition = 'none'
+			secondSolutionsCard.style.transform = `translateX(${containerMid}px) translateY(0)`
+			secondSolutionsCard.style.transition = 'none'
 
 			let isDragging = false;
 
@@ -260,7 +261,7 @@
 						xTranslate = 5
 				}
 
-				card2.style.transform = `translateY(0px) translateX(${xTranslate}px)`
+				secondSolutionsCard.style.transform = `translateY(0px) translateX(${xTranslate}px)`
 			})
 		})
 	})();

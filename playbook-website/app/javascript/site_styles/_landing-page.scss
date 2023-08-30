@@ -91,6 +91,9 @@
     position: relative;
     height: 350px;
     overflow: hidden;
+    @media screen and (min-width: $screen-xl-min) {
+      min-width: 650px;
+    };
   }
 
   .solutionsCard {
