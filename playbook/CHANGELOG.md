@@ -310,16 +310,3 @@ You can now wrap our Date kit with any of our typography kits (Title, Body, Capt
 
 - Changelog Improvements [\#2591](https://github.com/powerhome/playbook/pull/2591) ([jasoncypret](https://github.com/jasoncypret))
 - Separation of Markdown & PBDocs Dependencies from Playbook Library [\#2527](https://github.com/powerhome/playbook/pull/2527) ([jasoncypret](https://github.com/jasoncypret))
-
-# Responsive Components in Rapid Time: Introducing Global Responsive Spacing Props for React and Rails Components.
-##### May 26, 2023
-
-![titleboldandresponsivespacing](https://github.com/powerhome/playbook/assets/9158723/9741a86c-5439-4081-b197-0101079c8575)
-
-With all components, you can specify any of our spacing props values at certain screen sizes. For example, let's say I wanted the Badge component to have a small padding on phones, and a medium size padding on medium screens and higher. It's as easy as this:
-
-```jsx
-<Badge padding={{ xs: "sm", md: "md"  }} />
-```
-
-Give it a try and let us know what you think!
