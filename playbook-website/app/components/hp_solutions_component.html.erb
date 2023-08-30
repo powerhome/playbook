@@ -2,10 +2,7 @@
     justify_content: "center",
     display: "flex",
     background_color: "light",
-    padding_top: "xl",
-    padding_bottom: "xl",
-    padding_left: "md",
-    padding_right: "md"
+		padding_x: "md",
 }) do %>
 	<%= pb_rails("flex", props: {
 			classname: "width-full",
@@ -14,7 +11,7 @@
 			flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row" }
 	}) do %>
 		<%= pb_rails("flex/flex_item", props: {
-			classname: "container width-full",
+			classname: "solutionsContainer width-full",
 			shadow: "deeper",
 			display: { xs: "none", sm: "flex" },
 			padding_bottom: "xl",
@@ -211,7 +208,6 @@
 				<% end %>
 
 				<%= pb_rails("flex/flex_item", props: {
-					text_align: { xs: "center", sm: "center", md: "center", lg: "start", xl: "start" },
 					padding_top: { xs: "none", sm: "xl", md: "xl", lg: "xl", xl: "xl" }
 				}) do %>
 					<%= pb_rails("button", props: {
@@ -229,20 +225,19 @@
 
 <script>
 	(function() {
-		// IIFE contains it's own private scope
 		document.addEventListener("DOMContentLoaded", () => {
-			const container = document.querySelector('.container');
+			const solutionsContainer = document.querySelector('.solutionsContainer');
 			const secondSolutionsCard = document.querySelector('.secondSolutionsCard');
 			const verticalBar = document.querySelector('.vertical-bar');
-			const containerRect = container.getBoundingClientRect();
-			const containerMid = containerRect.width / 2
+			const solutionsContainerRect = solutionsContainer.getBoundingClientRect();
+			const solutionsContainerMid = solutionsContainerRect.width / 2
 
-			secondSolutionsCard.style.transform = `translateX(${containerMid}px) translateY(0)`
+			secondSolutionsCard.style.transform = `translateX(${solutionsContainerMid}px) translateY(0)`
 			secondSolutionsCard.style.transition = 'none'
 
 			let isDragging = false;
 
-			// event listener for vertical bar
+			// Event listener for vertical bar
 			verticalBar.addEventListener('mousedown', (e) => {
 					isDragging = true;
 			});
@@ -252,11 +247,11 @@
 			});
 
 			document.addEventListener('mousemove', (e) => {
-				const containerRectResponsive = container.getBoundingClientRect();
+				const solutionsContainerRectResponsive = solutionsContainer.getBoundingClientRect();
 				if (!isDragging) return;
-				let xTranslate = e.clientX - containerRectResponsive.left
-				if (xTranslate >= containerRectResponsive.width - 5) {
-						xTranslate = containerRectResponsive.width - 5
+				let xTranslate = e.clientX - solutionsContainerRectResponsive.left
+				if (xTranslate >= solutionsContainerRectResponsive.width - 5) {
+						xTranslate = solutionsContainerRectResponsive.width - 5
 				} else if (xTranslate <= 5) {
 						xTranslate = 5
 				}
