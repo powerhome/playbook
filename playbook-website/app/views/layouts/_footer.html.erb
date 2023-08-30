@@ -1,44 +1,12 @@
 <div class="pb--page--footer">
   <div class="inner-footer-wrapper">
-    <%= pb_rails("flex", props: { horizontal: "center", spacing: "around", wrap: true }) do %>
-      <%= pb_rails("flex/flex_item", props: { classname: "footer-logo-block" }) do %>
-        <%= image_pack_tag("media/images/pb-white-logo.svg") %>
-        <%= pb_rails("body", props: { text: "Made with love", color: "lighter", margin_top: "xs" }) %>
-      <% end %>
-      <%= pb_rails("flex/flex_item", props: {}) do %>
-        <%= pb_rails("caption", props: { classname: "dark", text: "Playbook", margin_bottom: "xs" }) %>
-        <%= link_to root_path do %>
-          <%= pb_rails("body", props: { classname: "dark", text: "Introduction" }) %>
-        <% end %>
-        <%= link_to guides_parent_path('getting_started') do %>
-          <%= pb_rails("body", props: { classname: "dark", text: "Getting Started" }) %>
-        <% end %>
-        <%= link_to kits_path do %>
-          <%= pb_rails("body", props: { classname: "dark", text: "Browse Kits" }) %>
-        <% end %>
-        <%= link_to changelog_path do %>
-          <%= pb_rails("body", props: { classname: "dark", text: "View Changelog" }) %>
-        <% end %>
-        <%= link_to kit_playground_rails_path do %>
-          <%= pb_rails("body", props: { classname: "dark", text: "Code Playground" }) %>
-        <% end %>
-      <% end %>
-      <%= pb_rails("flex/flex_item", props: {}) do %>
-        <%= pb_rails("caption", props: { classname: "dark", text: "Additional Links", margin_bottom: "xs" }) %>
-        <a href="https://github.com/powerhome/playbook">
-          <%= pb_rails("body", props: { classname: "dark", text: "Playbook Github" }) %>
-        </a>
-        <a href="https://www.techatpower.com/jobs">
-          <%= pb_rails("body", props: { classname: "dark", text: "Open Positions" }) %>
-        </a>
-        <a href="https://www.techatpower.com/">
-          <%= pb_rails("body", props: { classname: "dark", text: "Tech at Power" }) %>
-        </a>
-        <a href="https://powerhrg.com/">
-          <%= pb_rails("body", props: { classname: "dark", text: "Power Website" }) %>
-        </a>
-        <%= link_to guides_parent_path('design_guidelines') do %>
-          <%= pb_rails("body", props: { classname: "dark", text: "Design Guidelines" }) %>
+    <%= pb_rails("flex", props: { justify: "center", spacing: "around", wrap: true }) do %>
+      <%= pb_rails("flex/flex_item", props: { max_width: "md" }) do %>
+        <%= pb_rails("title", props: { dark: true, text: "Contribute to Playbook", tag: "h1", size: 1, padding_bottom: "lg" }) %>
+        <%= pb_rails("body", props: { dark: true } )do %>
+          When you start designing a new feature, you may come across a Design Token or Component that isn’t defined in Playbook. If so, you should
+          <a href="https://github.com/powerhome/playbook/issues" target="_blank">open an issue</a> 
+          or reach out to the team to make a contribution.
         <% end %>
       <% end %>
     <% end %>
