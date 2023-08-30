@@ -41,6 +41,9 @@
     position: absolute;
     left: 505px;
   }
+  .language-card {
+    min-height: 122px;
+  }
   @include break_at(1342px){
     .kit-example {
       margin-top: $space_xl * 2;
