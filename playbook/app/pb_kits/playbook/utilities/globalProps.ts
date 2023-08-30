@@ -127,10 +127,6 @@ type TextAlign = {
   textAlign?: "start" | "end" | "left" | "right" | "center" | "justify" | "justifyAll" | "matchParent",
 }
 
-type Width = {
-  width?: Sizes | number | string,
-}
-
 type ZIndexType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 type ZIndexResponsiveType = {[key: string]: ZIndexType}
 type ZIndex = {
@@ -142,7 +138,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
-  Position & Shadow & TextAlign & Width & ZIndex & { hover?: string };
+  Position & Shadow & TextAlign & ZIndex & { hover?: string };
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -406,14 +402,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     } else {
       return textAlign ? `text_align_${textAlign} ` : ''
     }
-  },
-  widthProps: ({ width }: Width) => {
-    if (typeof width === 'object') {
-      return getResponsivePropClasses(width, 'width')
-    } else {
-      return width ? `width_${width} ` : ''
-    }
-  },
+  }
 }
 
 type DefaultProps = {[key: string]: string} | Record<string, unknown>

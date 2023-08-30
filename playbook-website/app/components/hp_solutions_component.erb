@@ -16,14 +16,12 @@
 			display: { xs: "none", sm: "flex" },
 			padding_bottom: "xl",
 			classname: "container",
-			width: "100",
 			border_radius: "lg"
 		}) do %>
 			<%= pb_rails("card", props: {
 				shadow: "deeper",
 				justify_content: "center",
 				border_radius: "lg",
-				width: "100",
 				classname: "solutionsCard"
 			}) do %>
 				<%= pb_rails("user", props: {
@@ -45,7 +43,6 @@
 				border_radius: "lg",
 				padding: "none",
 				margin: "none",
-				width: "100",
 				classname: "solutionsCard card2"
 			})  do %>
 				<div class="vertical-bar">
@@ -57,7 +54,7 @@
 			<% end %>
 		<% end %>
 
-		<%= pb_rails("flex/flex_item", props: { width: "100" }) do %>
+		<%= pb_rails("flex/flex_item") do %>
 			<%= pb_rails("flex", props: { orientation: "column", align_items: { xs: "center", sm: "start" }, }) do %>
 				<%= pb_rails("flex/flex_item", props: {
 					padding_bottom: { xs: "sm", sm: "xl", md: "sm", lg: "md", xl: "sm" },
@@ -107,20 +104,16 @@
 				<% end %>
 
 				<%= pb_rails("flex/flex_item", props: {
-					width: "100",
 					display: { xs: "none", sm: "flex" }
 				}) do %>
 					<%= pb_rails("flex", props: {
-						width: "100",
 						justify: "between",
 						gap: "md"
 					}) do %>
 						<%= pb_rails("flex", props: {
 							orientation: "column"
 						}) do %>
-							<%= pb_rails("flex/flex_item", props: {
-								width: "100",
-							}) do %>
+							<%= pb_rails("flex/flex_item") do %>
 								<%= link_to "/guides/getting_started/react_setup" do %>
 									<%= pb_rails("card", props: {
 										classname: "language-card",
@@ -141,7 +134,6 @@
 							<% end %>
 
 							<%= pb_rails("flex/flex_item", props: {
-								width: "100",
 								display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
 							}) do %>
 								<%= pb_rails("caption", props: {
@@ -154,9 +146,7 @@
 						<%= pb_rails("flex", props: {
 							orientation: "column"
 						}) do %>
-							<%= pb_rails("flex/flex_item", props: {
-								width: "100"
-							}) do %>
+							<%= pb_rails("flex/flex_item") do %>
 								<%= link_to "/guides/getting_started/ruby_on_rails_setup" do %>
 									<%= pb_rails("card", props: {
 										classname: "language-card",
@@ -176,7 +166,6 @@
 							<% end %>
 
 							<%= pb_rails("flex/flex_item", props: {
-								width: "100",
 								display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
 							}) do %>
 								<%= pb_rails("caption", props: {
@@ -189,9 +178,7 @@
 						<%= pb_rails("flex", props: {
 							orientation: "column"
 						}) do %>
-							<%= pb_rails("flex/flex_item", props: {
-								width: "100",
-							}) do %>
+							<%= pb_rails("flex/flex_item") do %>
 								<%= link_to "/guides/getting_started/HTML_&_CSS" do %>
 									<%= pb_rails("card", props: {
 										classname: "language-card",
@@ -211,7 +198,6 @@
 							<% end %>
 
 							<%= pb_rails("flex/flex_item", props: {
-								width: "100",
 								display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
 							}) do %>
 								<%= pb_rails("caption", props: {
@@ -224,7 +210,6 @@
 				<% end %>
 
 				<%= pb_rails("flex/flex_item", props: {
-					width: "100",
 					text_align: { xs: "center", sm: "center", md: "center", lg: "start", xl: "start" },
 					padding_top: { xs: "none", sm: "xl", md: "xl", lg: "xl", xl: "xl" }
 				}) do %>
