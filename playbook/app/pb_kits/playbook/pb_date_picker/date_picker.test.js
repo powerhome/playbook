@@ -1,15 +1,25 @@
 /* eslint-disable no-console */
 import React from 'react'
-import moment from 'moment'
 import { fireEvent, render, screen, waitFor, within } from '../utilities/test-utils'
 
 import DatePicker from './_date_picker'
+import DateTime from "../pb_kit/dateTime.ts"
 import { getTimezoneText } from './plugins/timeSelect'
-
-
 
 jest.setSystemTime(new Date('01/01/2020'));
 const DEFAULT_DATE = new Date()
+
+const formatDate = (date) => {
+  const month = (date.getMonth() + 1).toString().padStart(2, "0")
+  const day = (date.getDate()).toString().padStart(2, "0")
+  const year = date.getFullYear()
+
+  return `${month}/${day}/${year}`
+}
+
+Date.prototype.formatDate = function () {
+  return formatDate(this)
+}
 
 describe('DatePicker Kit', () => {
   beforeEach(() => {
@@ -158,6 +168,7 @@ describe('DatePicker Kit', () => {
       expect(input).toHaveValue('01/01/2020 at 12:00 PM')
     })
   })
+
   test('shows DatePicker QuickPick dropdown and adds correct date to input', async () => {
     const testId = 'datepicker-quick-pick'
     render(
@@ -197,10 +208,10 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
-      expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " to " + moment().endOf('year').format('MM/DD/YYYY'))
+      expect(input).toHaveValue(DateTime.getYearStartDate(new Date()).formatDate() + " to " + DateTime.getYearEndDate(new Date()).formatDate())
     })
-
   })
+
   test('shows DatePicker QuickPick ranges ending today', async () => {
     const testId = 'datepicker-quick-pick-ends-today'
     render(
@@ -225,7 +236,7 @@ describe('DatePicker Kit', () => {
         cancelable: true,
       }),
     )
-    
+
     const thisYear = within(kit).getByText('This year')
 
     fireEvent(
@@ -237,8 +248,7 @@ describe('DatePicker Kit', () => {
     )
 
     await waitFor(() => {
-      expect(input).toHaveValue(moment().startOf('year').format('MM/DD/YYYY') + " to " + moment().format('MM/DD/YYYY'))
+      expect(input).toHaveValue(DateTime.getYearStartDate(new Date()).formatDate() + " to " + new Date().formatDate())
     })
-
   })
 })
