@@ -1,3 +1,23 @@
+# 🚄 Playbook's On Track: Introducing the New File Upload for Rails ViewComponents! 📂
+##### August 29, 2023
+
+![13 1 0](https://github.com/powerhome/playbook/assets/73710701/9675c4dc-5e7c-437a-9e1e-da5dea4133b2)
+
+The File Upload kit for Rails ViewComponents redefines HTML's default input to match Playbook's aesthetics, ensuring consistency and elegance for every upload. 🚀📂🎉
+
+ [13.1.0](https://github.com/powerhome/playbook/tree/13.1.0) full list of changes:
+
+ **Fixed Bugs:**
+
+- Fixed Misalignment on Passphrase Icon in Firefox [\#2718](https://github.com/powerhome/playbook/pull/2718) ([nidaqg](https://github.com/nidaqg))
+- dateTime Bug Fixes [\#2716](https://github.com/powerhome/playbook/pull/2716) ([gavhuang](https://github.com/gavhuang))
+
+**New Kits:**
+
+- File Upload Kit \(Rails\) [\#2700](https://github.com/powerhome/playbook/pull/2700) ([jasperfurniss](https://github.com/jasperfurniss))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.0.0...13.1.0)
+
 # 💔 Say Goodbye to the Past: We're Breaking Up with moment.js! 🕒
 ##### August 22, 2023
 
