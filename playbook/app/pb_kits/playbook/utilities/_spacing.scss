@@ -54,26 +54,6 @@ $position in $positions {
   }
 }
 
-// Generate default classes
-@each $position_name,
-$position in $positions {
-
-  @each $space_name,
-  $space in $space_classes {
-    .#{$position_name}_default-#{$space_name} {
-      @if type-of($position)=="list" {
-        @each $coordinate in $position {
-          #{$coordinate}: #{$space} !important;
-        }
-      }
-
-      @else {
-        #{$position}: #{$space} !important;
-      }
-    }
-  }
-}
-
 // Generate media queries
 @each $size,
 $size_value in $breakpoints_grid {
@@ -89,7 +69,7 @@ $size_value in $breakpoints_grid {
 				$min_size: map-get($size_value, "min");
 				$max_size: map-get($size_value, "max");
 
-				.#{$position_name}_break-#{$break_method}-#{$size}_#{$position_name}-#{$space_name} {
+				.break_#{$break_method}_#{$size}\:#{$position_name}_#{$space_name} {
           @if type-of($position) == "list" {
             @if $break_method == "on" {
               @each $coordinate in $position {

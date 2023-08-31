@@ -65,9 +65,9 @@ module Playbook
       selected_props = spacing_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 
-      responsive = selected_props.present? && try(selected_props.first).is_a?(::Hash)
       css = ""
       selected_props.each do |prop|
+        responsive = try(prop).is_a?(::Hash)
         spacing_value = send(prop)
         prefix = spacing_options[prop]
 
@@ -75,10 +75,10 @@ module Playbook
           default_value = spacing_value.delete(:default) || nil
           break_value = spacing_value.delete(:break) || break_method_values.first
           spacing_value.each do |key, value|
-            css += "#{prefix}_break-#{break_value}-#{key}_#{prefix}-#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
+            css += "break_#{break_value}_#{key}\:#{prefix}_#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
           end
 
-          css += "#{prefix}_default-#{default_value} " if spacing_values.include?(default_value)
+          css += "#{prefix}_#{default_value} " if spacing_values.include?(default_value)
         elsif spacing_values.include?(spacing_value)
           css += "#{prefix}_#{spacing_value} "
         end
