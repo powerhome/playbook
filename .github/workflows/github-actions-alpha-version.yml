@@ -13,7 +13,6 @@ jobs:
     env:
       # Set an environment variable for the branch name
       BRANCH_NAME: ${{ github.head_ref }}
-      FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
       GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
       NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
     steps:

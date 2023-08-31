@@ -1,6 +1,3 @@
-placeYarnConfig:
-	playbook-website/bin/deployer sops --decrypt --output yarn.secrets.dec.env yarn.secrets.env
-
 start:
 	docker compose up
 

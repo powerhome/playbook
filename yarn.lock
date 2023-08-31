@@ -1442,7 +1442,7 @@
 
 "@fortawesome/fontawesome-pro@^6.2.1":
   version "6.2.1"
-  resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-pro/-/6.2.1/fontawesome-pro-6.2.1.tgz#1cd5b79d93fdb955ef8a04996fef20a44207a6f0"
+  resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-pro/-/6.2.1/fontawesome-pro-6.2.1.tgz#1cd5b79d93fdb955ef8a04996fef20a44207a6f0"
   integrity sha512-dHk7iiCf5MCmoUvmrYzfN/I3gebpgpA1oqlOffgOThnsaAR4kpaQ5YMTdkdG99Of1hnN0Bok6R+HE28zXb3SOg==
 
 "@gar/promisify@^1.0.1":
