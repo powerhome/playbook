@@ -139,7 +139,7 @@
 						<% end %>
 
 						<%= pb_rails("flex/flex_item", props: {
-							display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
+							display: { sm: "none", md: "none", lg: "none", xl: "flex" }
 						}) do %>
 							<%= pb_rails("caption", props: {
 								text: "Endlessly flexible presentational UI components with encapsulated styles and constraint based theme props.",
@@ -175,11 +175,11 @@
 						<% end %>
 
 						<%= pb_rails("flex/flex_item", props: {
-							display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
+							display: { sm: "none", md: "none", lg: "none", xl: "flex" }
 						}) do %>
 							<%= pb_rails("caption", props: {
 								text: "100+ highly customizable ViewComponents. Build design driven UI in Rails with ViewComponents.",
-								size: 'xs'
+								size: "xs"
 							}) %>
 						<% end %>
 					<% end %>
@@ -211,7 +211,7 @@
 						<% end %>
 
 						<%= pb_rails("flex/flex_item", props: {
-							display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
+							display: { sm: "none", md: "none", lg: "none", xl: "flex" }
 						}) do %>
 							<%= pb_rails("caption", props: {
 								text: "Utility classes help you work within the constraints of a system instead of littering your stylesheets with arbitrary values.",
@@ -224,7 +224,7 @@
 				<%= pb_rails("flex", props: {
 					classname: "explore-button",
 					align_self: "stretch",
-					margin_top: { xs: "none", sm: "xl", md: "xl", lg: "xl", xl: "xl" }
+					margin_top: { sm: "xl", xl: "xl", default: "none" }
 				}) do %>
 					<%= pb_rails("button", props: {
 						text: "Explore Playbook Solutions",

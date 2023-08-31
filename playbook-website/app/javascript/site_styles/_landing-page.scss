@@ -46,11 +46,6 @@
   }
   .language-card {
     min-height: 126px;
-
-    @include break_on($screen-lg-min, $screen-xl-min) {
-      min-height: 152px;
-      max-height: 160px;
-    }
   }
 
   @include break_on($screen-sm-min, $screen-lg-min) {
