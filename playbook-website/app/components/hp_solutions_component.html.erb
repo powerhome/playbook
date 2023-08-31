@@ -215,7 +215,7 @@
 						}) do %>
 							<%= pb_rails("caption", props: {
 								text: "Utility classes help you work within the constraints of a system instead of littering your stylesheets with arbitrary values.",
-								size: 'xs'
+								size: "xs"
 							}) %>
 						<% end %>
 					<% end %>
@@ -253,23 +253,24 @@
 
 			let isDragging = false;
 
-			// Event listener for vertical bar
 			verticalBar.addEventListener('mousedown', (e) => {
-					isDragging = true;
+				isDragging = true;
 			});
 
 			document.addEventListener('mouseup', () => {
-					isDragging = false;
+				isDragging = false;
 			});
 
 			document.addEventListener('mousemove', (e) => {
-				const solutionsContainerRectResponsive = solutionsContainer.getBoundingClientRect();
 				if (!isDragging) return;
+
+				const solutionsContainerRectResponsive = solutionsContainer.getBoundingClientRect();
 				let xTranslate = e.clientX - solutionsContainerRectResponsive.left
+
 				if (xTranslate >= solutionsContainerRectResponsive.width - 5) {
-						xTranslate = solutionsContainerRectResponsive.width - 5
+					xTranslate = solutionsContainerRectResponsive.width - 5
 				} else if (xTranslate <= 5) {
-						xTranslate = 5
+					xTranslate = 5
 				}
 
 				secondSolutionsCard.style.transform = `translateY(0px) translateX(${xTranslate}px)`
