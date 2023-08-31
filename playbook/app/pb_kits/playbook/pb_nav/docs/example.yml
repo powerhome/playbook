@@ -7,10 +7,12 @@ examples:
   - borderless_nav: No Borders
   - subtle_nav: Subtle Variant
   - subtle_with_icons_nav: Subtle With Icons
-  - collapsible_nav: Collapsible Nav
-  - collapsible_nav_emphasize: Collapsible Nav with fontWeight, fontSize and collapsibleTrail
   - subtle_no_highlight_nav: Subtle No Highlight
   - bold_vertical_nav: Bold Variant
+  - nav_with_spacing_control: Nav with Spacing Control
+  - nav_with_font_control: Nav With Font Control
+  - collapsible_nav: Collapsible Nav
+  - collapsible_nav_with_all_options: Collapsible Nav With Options
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
@@ -26,11 +28,14 @@ examples:
   - borderless_nav: No Borders
   - subtle_nav: Subtle Variant
   - subtle_with_icons_nav: Subtle With Icons
-  - collapsible_nav: Collapsible Nav
-  - collapsible_nav_emphasize: Collapsible Nav with fontWeight, fontSize and collapsibleTrail
-  - collapsible_nav_custom: Collapsible Nav With Custom Toggling
   - subtle_no_highlight_nav: Subtle No Highlight
   - bold_vertical_nav: Bold Variant
+  - nav_with_spacing_control: Nav with Spacing Control
+  - nav_with_font_control: Nav With Font Control
+  - collapsible_nav: Collapsible Nav
+  - collapsible_nav_with_all_options: Collapsible Nav With Options
+  - collapsible_nav_item_spacing: Collapsible Nav With ItemSpacing
+  - collapsible_nav_custom: Collapsible Nav With Custom Toggling
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav

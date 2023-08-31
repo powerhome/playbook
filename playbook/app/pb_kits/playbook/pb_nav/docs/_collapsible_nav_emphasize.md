@@ -1,1 +1,0 @@
-The `fontWeight` prop can be used to make the navitem text bold or bolder, it is set to regular by default. The additional `collapsibleTrail` prop can be used to add the vertical line to the left of the nested navItems.

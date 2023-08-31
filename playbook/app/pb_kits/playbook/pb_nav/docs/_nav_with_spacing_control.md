@@ -1,0 +1,1 @@
+Each variant of the Nav kit comes with it's own default padding and margin but if needed, these spacing values can be overidden using our padding and margin global props. Any of the spacing global props can be used on the navItem, this example uses paddingY="xxs" and margin="none" on the bold variant to show this in action!

@@ -1,0 +1,3 @@
+The `itemSpacing` prop can be used on the Nav itself for easier control over all spacing (padding and margin) on all NavItems. This prop is useful for overriding all spacing defaults on all navItems without having to use spacing global props on individual navItems. `itemSpacing` takes an object that can contain one or all of the padding and margin global props.
+
+For more customized control, the `itemSpacing` prop on the Nav can also be used in conjunction with global props on individual navItems. In this example, we are applying certain spacing props to all navItems using `itemSpacing` but also using paddingY on nested navItems for a tighter look. 

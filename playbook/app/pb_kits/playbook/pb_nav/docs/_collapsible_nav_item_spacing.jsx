@@ -1,99 +1,88 @@
 import React from "react";
 import { Nav, NavItem } from '../..'
 
-const CollapsibleNavEmphasize = (props) => {
+const CollapsibleNavItemSpacing = (props) => {
   return (
     <Nav 
-        variant="subtle"
+        itemSpacing={{padding: "xs", marginY: "none"}}
+        variant="bold"
         {...props}
     >
       <NavItem
-          active 
-          collapsible
-          collapsibleTrail
-          fontSize="small"
-          fontWeight="bolder"
+          active
+          collapsible 
           iconLeft="city" 
-          iconRight={["plus", "minus"]}
           link="#" 
           text="Overview" 
           {...props}
       >
         <NavItem
-            fontSize="small"
             link="#" 
+            paddingY="none"
             text="City"
             {...props}
         />
         <NavItem
-            fontSize="small"
             link="#"
+            paddingY="none"
             text="People"
             {...props}
         />
         <NavItem 
-            fontSize="small"
             link="#" 
+            paddingY="none"
             text="Business" 
             {...props}
         />
       </NavItem>
       <NavItem 
           collapsible 
-          collapsibleTrail
-          fontSize="small"
-          fontWeight="bolder"
           iconLeft="theater-masks"
-          iconRight={["plus", "minus"]}
           link="#" 
           text="Albums" 
           {...props}
       >
         <NavItem 
-            fontSize="small"
             link="#" 
+            paddingY="none"
             text="Entertainment" 
             {...props}
         />
         <NavItem 
-            fontSize="small"
             link="#" 
+            paddingY="none"
             text="Food" 
             {...props}
         />
         <NavItem 
-            fontSize="small"
             link="#" 
+            paddingY="none"
             text="Style" 
             {...props}
         />
       </NavItem>
       <NavItem 
           collapsible 
-          collapsibleTrail
-          fontSize="small"
-          fontWeight="bolder"
           iconLeft="city" 
-          iconRight={["plus", "minus"]}
           link="#" 
           text="Similar Artists" 
           {...props}
       >
         <NavItem 
-            fontSize="small"
             link="#" 
+            paddingY="none"
             text="City"
             {...props} 
         />
         <NavItem
-            fontSize="small"
             link="#"
+            paddingY="none"
             text="People"
             {...props}
         />
         <NavItem 
-            fontSize="small"
             link="#" 
+            paddingY="none"
             text="Business" 
             {...props}
         />
@@ -102,4 +91,4 @@ const CollapsibleNavEmphasize = (props) => {
   );
 };
 
-export default CollapsibleNavEmphasize;
+export default CollapsibleNavItemSpacing
