@@ -9,14 +9,15 @@
 			classname: "width-full",
 			max_width: "xxl",
 			flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row" },
-			padding_y: "xl"
+			margin_y: "xl"
 	}) do %>
 		<%= pb_rails("flex/flex_item", props: {
 			classname: "solutionsContainer width-full",
 			shadow: "deeper",
 			display: { xs: "none", sm: "flex" },
 			margin_top: { xl: "lg" },
-			margin_right: { xl: "lg" },
+			margin_right: { xl: "xl" },
+			margin_bottom: { lg: "xl", break: "at" },
 			border_radius: "lg"
 		}) do %>
 			<%= pb_rails("card", props: {
@@ -55,42 +56,39 @@
 		<% end %>
 
 		<%= pb_rails("flex/flex_item", props: {
-			max_width: "md",
 			margin_left: { xl: "xl" },
 		}) do %>
 			<%= pb_rails("flex", props: { orientation: "column", align_items: { xs: "center", sm: "start" }, }) do %>
-				<%= pb_rails("flex/flex_item", props: {
-					padding_bottom: { xs: "sm", sm: "xl", md: "sm", lg: "md", xl: "sm" },
+				<%= pb_rails("body", props: {
+					text: "DESIGN, DEVELOP, DELIVER",
 					text_align: { xs: "center", sm: "start" },
-				}) do %>
-					<%= pb_rails("body", props: {
-						text: "DESIGN, DEVELOP, DELIVER",
-						text_align: { xs: "center", sm: "start" },
-						color: "link"
-					}) %>
-				<% end %>
+					margin_top: { lg: "lg", xl: "none", default: "xl" },
+					color: "link"
+				}) %>
 
 				<%= pb_rails("flex/flex_item", props: {
-					padding_bottom: { xs: "lg", sm: "sm", md: "sm", lg: "sm", xl: "sm" },
+					margin_top: "sm"
 				}) do %>
 					<%= pb_rails("title", props: {
 						text: "Solutions written in multiple languages.",
 						text_align: "center",
 						tag: "h3",
 						size: 3,
-						display: { xs: "flex", sm: "none", md: "none", lg: "none", xl: "none" }
+						display: { xs: "flex", sm: "none", md: "none", lg: "none", xl: "none" },
+						margin_bottom: "lg"
 					}) %>
 					<%= pb_rails("title", props: {
 						text: "Create solutions to repetitive problems, for multiple languages and access to anywhere!",
 						text_align: "start",
 						tag: "h2",
 						size: 2,
-						display: { xs: "none", sm: "flex" }
+						display: { xs: "none", sm: "flex" },
+						margin_bottom: { xl: "lg", default: "sm" }
 					}) %>
 				<% end %>
 
 				<%= pb_rails("flex/flex_item", props: {
-					padding_bottom: { xs: "lg", sm: "xl", md: "xl", lg: "xl", xl: "xl" },
+					margin_bottom: { xs: "lg", xl: "xl", default: "none" },
 				}) do %>
 					<%= pb_rails("body", props: {
 						text: "Playbook gives designers and developers the frameworks they need to create engaging product experiences.",
@@ -106,114 +104,127 @@
 					}) %>
 				<% end %>
 
-				<%= pb_rails("flex/flex_item", props: {
-					display: { xs: "none", sm: "flex" }
+				<%= pb_rails("flex", props: {
+					classname: "width-full card-container",
+					display: { xs: "none" },
+					justify: "around",
+					margin_y: { xl: "sm", default: "xl" },
+					gap: "md"
 				}) do %>
 					<%= pb_rails("flex", props: {
-						justify: "between",
-						gap: "md"
+						orientation: "column",
+						row_gap: "sm",
+						max_width: "xs"
 					}) do %>
-						<%= pb_rails("flex", props: {
-							orientation: "column"
+						<%= pb_rails("flex/flex_item", props: {
+							align_self: "stretch"
 						}) do %>
-							<%= pb_rails("flex/flex_item") do %>
-								<%= link_to "/guides/getting_started/react_setup" do %>
-									<%= pb_rails("card", props: {
-										classname: "language-card",
-										text_align: "center",
-										padding: "xl",
-										shadow: "deeper",
-										border_radius: "lg",
-										cursor: "pointer",
-										link: "/guides/getting_started/react_setup",
-										hover: { scale: "sm" }
-									}) do %>
-										<%= pb_rails("image", props: {
-											alt: "react logo",
-											url: asset_pack_path("media/images/hp-react-solutions.svg")
-										}) %>
-									<% end %>
+							<%= link_to "/guides/getting_started/react_setup" do %>
+								<%= pb_rails("card", props: {
+									classname: "language-card",
+									text_align: "center",
+									padding: "xl",
+									shadow: "deeper",
+									border_radius: "lg",
+									cursor: "pointer",
+									link: "/guides/getting_started/react_setup",
+									hover: { scale: "sm" }
+								}) do %>
+									<%= pb_rails("image", props: {
+										alt: "React logo",
+										url: asset_pack_path("media/images/hp-react-solutions.svg")
+									}) %>
 								<% end %>
-							<% end %>
-
-							<%= pb_rails("flex/flex_item", props: {
-								display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
-							}) do %>
-								<%= pb_rails("caption", props: {
-									text: "Endlessly flexible presentational UI components with encapsulated styles and constraint based theme props.",
-									size: "xs"
-								}) %>
 							<% end %>
 						<% end %>
 
-						<%= pb_rails("flex", props: {
-							orientation: "column"
+						<%= pb_rails("flex/flex_item", props: {
+							display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
 						}) do %>
-							<%= pb_rails("flex/flex_item") do %>
-								<%= link_to "/guides/getting_started/ruby_on_rails_setup" do %>
-									<%= pb_rails("card", props: {
-										classname: "language-card",
-										padding: "xl",
-										text_align: "center",
-										shadow: "deeper",
-										border_radius: "lg",
-										cursor: "pointer",
-										hover: { scale: "sm" }
-									}) do %>
-										<%= pb_rails("image", props: {
-											alt: "rails logo",
-											url: asset_pack_path("media/images/hp-rails-solutions.svg")
-										}) %>
-									<% end %>
-								<% end %>
-							<% end %>
+							<%= pb_rails("caption", props: {
+								text: "Endlessly flexible presentational UI components with encapsulated styles and constraint based theme props.",
+								size: "xs"
+							}) %>
+						<% end %>
+					<% end %>
 
-							<%= pb_rails("flex/flex_item", props: {
-								display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
-							}) do %>
-								<%= pb_rails("caption", props: {
-									text: "100+ highly customizable ViewComponents. Build design driven UI in Rails with ViewComponents.",
-									size: 'xs'
-								}) %>
+					<%= pb_rails("flex", props: {
+						orientation: "column",
+						row_gap: "sm",
+						max_width: "xs"
+					}) do %>
+						<%= pb_rails("flex/flex_item", props: {
+							align_self: "stretch"
+						}) do %>
+							<%= link_to "/guides/getting_started/ruby_on_rails_setup" do %>
+								<%= pb_rails("card", props: {
+									classname: "language-card",
+									padding: "xl",
+									text_align: "center",
+									shadow: "deeper",
+									border_radius: "lg",
+									cursor: "pointer",
+									hover: { scale: "sm" }
+								}) do %>
+									<%= pb_rails("image", props: {
+										alt: "Rails logo",
+										url: asset_pack_path("media/images/hp-rails-solutions.svg")
+									}) %>
+								<% end %>
 							<% end %>
 						<% end %>
 
-						<%= pb_rails("flex", props: {
-							orientation: "column"
+						<%= pb_rails("flex/flex_item", props: {
+							display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
 						}) do %>
-							<%= pb_rails("flex/flex_item") do %>
-								<%= link_to "/guides/getting_started/HTML_&_CSS" do %>
-									<%= pb_rails("card", props: {
-										classname: "language-card",
-										padding: "xl",
-										text_align: "center",
-										shadow: "deeper",
-										border_radius: "lg",
-										cursor: "pointer",
-										hover: { scale: "sm" }
-									}) do %>
-										<%= pb_rails("image", props: {
-											alt: "htmlcss logo",
-											url: asset_pack_path("media/images/hp-htmlcss-solutions.svg")
-										}) %>
-									<% end %>
+							<%= pb_rails("caption", props: {
+								text: "100+ highly customizable ViewComponents. Build design driven UI in Rails with ViewComponents.",
+								size: 'xs'
+							}) %>
+						<% end %>
+					<% end %>
+
+					<%= pb_rails("flex", props: {
+						orientation: "column",
+						row_gap: "sm",
+						max_width: "xs"
+					}) do %>
+						<%= pb_rails("flex/flex_item", props: {
+							align_self: "stretch"
+						}) do %>
+							<%= link_to "/guides/getting_started/HTML_&_CSS" do %>
+								<%= pb_rails("card", props: {
+									classname: "language-card",
+									padding: "xl",
+									text_align: "center",
+									shadow: "deeper",
+									border_radius: "lg",
+									cursor: "pointer",
+									hover: { scale: "sm" }
+								}) do %>
+									<%= pb_rails("image", props: {
+										alt: "HTML-CSS logo",
+										url: asset_pack_path("media/images/hp-htmlcss-solutions.svg")
+									}) %>
 								<% end %>
 							<% end %>
+						<% end %>
 
-							<%= pb_rails("flex/flex_item", props: {
-								display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
-							}) do %>
-								<%= pb_rails("caption", props: {
-									text: "Utility classes help you work within the constraints of a system instead of littering your stylesheets with arbitrary values.",
-									size: 'xs'
-								}) %>
-							<% end %>
+						<%= pb_rails("flex/flex_item", props: {
+							display: { sm: "none", md: "none", lg: "flex", xl: "flex" }
+						}) do %>
+							<%= pb_rails("caption", props: {
+								text: "Utility classes help you work within the constraints of a system instead of littering your stylesheets with arbitrary values.",
+								size: 'xs'
+							}) %>
 						<% end %>
 					<% end %>
 				<% end %>
 
-				<%= pb_rails("flex/flex_item", props: {
-					padding_top: { xs: "none", sm: "xl", md: "xl", lg: "xl", xl: "xl" }
+				<%= pb_rails("flex", props: {
+					classname: "explore-button",
+					align_self: "stretch",
+					margin_top: { xs: "none", sm: "xl", md: "xl", lg: "xl", xl: "xl" }
 				}) do %>
 					<%= pb_rails("button", props: {
 						text: "Explore Playbook Solutions",
