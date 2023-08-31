@@ -3,18 +3,20 @@
     display: "flex",
     background_color: "light",
 		padding_x: "md",
+		padding_y: { md: "none", default: "xl", break: "at" }
 }) do %>
 	<%= pb_rails("flex", props: {
 			classname: "width-full",
 			max_width: "xxl",
-			gap: "xl",
-			flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row" }
+			flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row" },
+			padding_y: "xl"
 	}) do %>
 		<%= pb_rails("flex/flex_item", props: {
 			classname: "solutionsContainer width-full",
 			shadow: "deeper",
 			display: { xs: "none", sm: "flex" },
-			padding_bottom: "xl",
+			margin_top: { xl: "lg" },
+			margin_right: { xl: "lg" },
 			border_radius: "lg"
 		}) do %>
 			<%= pb_rails("card", props: {
@@ -52,7 +54,10 @@
 			<% end %>
 		<% end %>
 
-		<%= pb_rails("flex/flex_item") do %>
+		<%= pb_rails("flex/flex_item", props: {
+			max_width: "md",
+			margin_left: { xl: "xl" },
+		}) do %>
 			<%= pb_rails("flex", props: { orientation: "column", align_items: { xs: "center", sm: "start" }, }) do %>
 				<%= pb_rails("flex/flex_item", props: {
 					padding_bottom: { xs: "sm", sm: "xl", md: "sm", lg: "md", xl: "sm" },
