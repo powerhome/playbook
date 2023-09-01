@@ -5,6 +5,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Caption from '../pb_caption/_caption'
+import { SpacingObject, NavChildProps } from './navTypes'
 
 type NavProps = {
   aria?: { [key: string]: string },
@@ -20,6 +21,7 @@ type NavProps = {
   link?: string,
   title?: string,
   variant?: "normal" | "subtle",
+  itemSpacing?: SpacingObject
 } & GlobalProps
 
 const Nav = (props: NavProps) => {
@@ -37,6 +39,7 @@ const Nav = (props: NavProps) => {
     orientation = 'vertical',
     title = '',
     variant = 'normal',
+    itemSpacing,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -49,6 +52,19 @@ const Nav = (props: NavProps) => {
     globalProps(props),
     className
   )
+
+// Map over the children and clone them with orientation, variant and itemSpacing props to gain access to them in navItem
+const childrenWithProps = React.Children.map(children, (child) => {
+  if (React.isValidElement(child)) {
+    const childProps: NavChildProps = {
+      orientation: orientation,
+      variant: variant,
+      itemSpacing: itemSpacing
+    };
+    return React.cloneElement(child, childProps);
+  }
+  return child;
+});
 
   return (
     <nav
@@ -72,7 +88,7 @@ const Nav = (props: NavProps) => {
           </a>
         </div>
       }
-      <ul>{children}</ul>
+      <div className='pb_nav_wrapper'>{childrenWithProps}</div>
     </nav>
   )
 }
