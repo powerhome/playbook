@@ -204,12 +204,12 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
 
       Object.entries(properties).forEach(([key, value]) => {
         if (screenSizeValues.includes(key)) {
-          classResult += `${prefix}_break-${breakValue}-${key}_${prefix}-${value} `;
+          classResult += `break_${breakValue}_${key}:${prefix}_${value} `;
         }
       });
 
       if (defaultValue) {
-        classResult += `${prefix}_default-${defaultValue} `;
+        classResult += `${prefix}_${defaultValue} `;
       }
 
       return classResult;
