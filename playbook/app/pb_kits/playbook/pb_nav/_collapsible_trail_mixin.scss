@@ -1,13 +1,15 @@
+@import "../tokens/spacing";
+
 @mixin collapsible_trail_class {
     .pb_collapsible_content_kit {
       position: relative;
       &::after {
         content: "";
         position: absolute;
-        top: 4px;
-        bottom: 4px;
-        left: 5px;
-        width: 1px; 
+        top: $space_xxs;
+        bottom: $space_xxs;
+        left: $space_xxs + 1;
+        width: $space_xxs - 3; 
         background-color: $border_light;
       }
     }
