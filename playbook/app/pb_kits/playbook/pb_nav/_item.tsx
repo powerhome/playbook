@@ -186,12 +186,14 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
     return child;
   });
 
+  const collapsibleClasses = buildCss("collapsible_nav_wrapper", activeClass, collapsibleTrailClass)
+
   return (
     <>
       {collapsible ? (
         <>
           <Collapsible
-            className={`collapsible_nav_wrapper_${activeClass}_${collapsibleTrailClass}`}
+            className={collapsibleClasses}
             icon={iconRight && iconRight}
             iconSize="xs"
             id={id}

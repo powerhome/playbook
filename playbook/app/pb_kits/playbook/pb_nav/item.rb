@@ -87,7 +87,7 @@ module Playbook
       end
 
       def collapsible_nav_classname
-        "collapsible_nav_wrapper_#{active_class}_#{collapsible_trail_class}"
+        generate_classname("collapsible_nav_wrapper", active_class, collapsible_trail_class)
       end
 
     private
