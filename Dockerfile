@@ -58,7 +58,7 @@ RUN cd playbook-website && bundle install
 
 FROM base as jsdeps
 
-COPY --link package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock .npmrc ./
+COPY --link package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock ./
 COPY --link .yarn ./.yarn
 COPY --link --chown=9999:9999 --from=jspackages /home/app/src /home/app/src
 
