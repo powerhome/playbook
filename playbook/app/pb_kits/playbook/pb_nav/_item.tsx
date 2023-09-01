@@ -47,7 +47,7 @@ const NavItem = (props: NavItemProps) => {
   
   const fontWeightDefault = (orientation: string, variant: string) => {
     return orientation === "horizontal" && variant === "subtle"
-      ? "regular "
+      ? "regular"
       : orientation === "horizontal" && variant === "normal"
       ? "bold"
       : "regular";
@@ -138,16 +138,22 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
 
   const Tag = link ? "a" : "div";
   const activeClass = active === true ? "active" : "";
-  const collapsibleTrailClass =
-    collapsible && collapsibleTrail ? "collapsible_trail" : "";
-  const fontSizeClass =
-    fontSize === "small" ? "font_size_small" : "font_size_normal";
-  const fontWeightClass =
-    fontWeight === "bold"
-      ? "font_bold"
-      : fontWeight === "bolder"
-      ? "font_bolder"
-      : "font_regular";
+  const collapsibleTrailClass = collapsible && collapsibleTrail ? "collapsible_trail" : "";
+
+  const fontSizeMapping = {
+    "small": "font_size_small",
+    "normal": "font_size_normal"
+  };
+    
+  const fontWeightMapping = {
+    "bold": "font_bold",
+    "bolder": "font_bolder",
+    "regular": "font_regular"
+  };
+    
+  const fontSizeClass = fontSizeMapping[fontSize];
+  const fontWeightClass = fontWeightMapping[fontWeight];
+
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
 
