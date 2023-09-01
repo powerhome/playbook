@@ -130,7 +130,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
-  Position & Shadow  & ZIndex & { hover?: string };
+  Position & Shadow & ZIndex & { hover?: string };
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
