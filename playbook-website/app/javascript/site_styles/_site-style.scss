@@ -165,11 +165,13 @@ body {
 
   &--footer {
     background-color: $bg_dark;
-    padding: $space_lg * 2 $space_lg * 3;
+    padding: $space_lg * 2 0;
     margin-top: auto;
     .inner-footer-wrapper {
-      max-width: 1350px;
       margin: 0 auto;
+    }
+    .link-container {
+      width: 100%;
     }
     .footer-logo-block {
       text-align: center;
@@ -181,10 +183,8 @@ body {
     // reformat footer links on smaller screens
     @include break_at(650px){
       [class^=pb_flex_kit] {
-        flex-direction: column !important;
         align-content: center;
       }
-      text-align: center;
       [class^="pb_caption_kit"] {
         margin-top: $space_lg;
       }

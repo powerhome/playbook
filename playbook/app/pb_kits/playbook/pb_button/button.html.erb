@@ -18,14 +18,14 @@
     <% else %>
     <% if object.icon && !object.icon_right %>
         <span>
-            <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, margin_right: "xs" }) %>
+            <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, margin_right: "xs", font_style: object.font_style }) %>
         </span>
     <% end %>
     <%= pb_rails("icon", props: { icon: "spinner", pulse: true, fixed_width: true, classname: "loading-icon" }) %>
     <span class="pb_button_content"><%= content.presence || object.text %></span>
     <% if object.icon && object.icon_right %>
         <span>
-            <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, margin_left: "xs" }) %>
+            <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, margin_left: "xs", font_style: object.font_style }) %>
         </span>
     <% end %>
     <% end %>
