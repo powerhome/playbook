@@ -1,0 +1,9 @@
+<%= content_tag(:col,
+    span: object.span,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    style: "background-color: #{object.background_color};",
+    id: object.id) do %>
+  <%= content.presence %>
+<% end %>
