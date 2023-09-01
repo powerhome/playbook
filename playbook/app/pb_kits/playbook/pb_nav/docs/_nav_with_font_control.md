@@ -1,5 +1,4 @@
-To gain greater control over the font styles in the navItems, devs have access to two additional props:
+All Nav variants' navItems accept the following props for customizing font:
 
-`fontSize`/`font_size` prop can be used to set navItem text to `small` or `normal` (`normal` by default)
-
-`fontWeight`/`font_weight` prop can be used to set navItem text to `bold`, `bolder` or `regular` (`regular` by default)
+- `fontSize` / `font_size` defaults to `normal`, also accepts `small`
+- `fontWeight` / `font_weight` defaults to `regular`, also accepts `bold` and `bolder`

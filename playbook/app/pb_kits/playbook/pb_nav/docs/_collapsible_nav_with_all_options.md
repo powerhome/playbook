@@ -1,5 +1,4 @@
-In addition to font and spacing props, the Collapsible Nav variant has access to two additional props: 
- 
-`collapsibleTrail`/`collapsible_trail` prop can be used to add the vertical line to the left of the nested navItems.
+Collapsible Navs optionally accept the following props:
 
-`iconRight` for the collapsible Nav allows you to customize your icon sets by passing it an array of any comma-separated pair of icon values. The first icon value will replace the kit's default icon when collapsed (chevron-down), and the second value will replace the default icon when expanded (chevron-up). `iconRight` also allows you to pass it a single icon as a string, in which case the icon will not toggle with the collapsible state.
+- `collapsibleTrail` / `collapsible_trail`, enables a vertical guideline to the left of the collapsible nav's children
+- `iconRight` optionally accepts an array of 2 icon values; the first is used as the default icon when the node is collapsed, the second is toggled when the node is expanded. If only 1 icon value is passed, the icon will not toggle between collapsible states.
