@@ -1,3 +1,7 @@
+---
+title: Ruby & React Setup
+---
+
 Integrate Playbook's design system seamlessly into your Rails and React app with the Playbook Ruby Gem and React components. Get started today with our easy-to-follow tutorial.
 
 ## Javascript Enabled Rails Kits

@@ -1,3 +1,7 @@
+---
+title: Ruby on Rails Setup
+---
+
 #### Update your Gemfile
 ```sh
 gem 'playbook_ui'

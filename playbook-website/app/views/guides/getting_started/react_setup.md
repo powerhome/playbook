@@ -1,3 +1,7 @@
+---
+title: React Setup
+---
+
 #### Bundle Install
 ```sh
 yarn add playbook-ui

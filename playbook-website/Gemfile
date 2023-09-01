@@ -18,6 +18,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "health_check"
 
 gem "redcarpet", "~> 3.6"
+gem 'front_matter_parser', "~> 1.0.1" 
 gem "rouge", "~> 3.15"
 gem "faker"
 gem "will_paginate"

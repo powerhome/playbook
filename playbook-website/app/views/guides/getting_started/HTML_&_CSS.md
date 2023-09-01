@@ -1,3 +1,7 @@
+---
+title: HTML & CSS Setup
+---
+
 If you have another environment like PHP you can still use Playbook through the raw CSS and using the copy HTML button on and Rails kit. See details below:
 
 #### Add the Playbook NPM Package
