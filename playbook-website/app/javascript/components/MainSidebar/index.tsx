@@ -1,19 +1,8 @@
 import React from "react";
 import { Nav, NavItem } from 'playbook-ui'
-
+import { linkFormat } from "../../utilities/website_sidebar_helper";
 
 const MainSidebar = ({dark, type, category, kit, kits}) => {
-
-    const linkFormat = (item) => {
-        const linkTitle = Array.isArray(item) ? item[0] : item
-        const replaceUnderscore = linkTitle
-        .replace(/_/g, ' ')
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-
-        return replaceUnderscore;
-    }
 
     return (
         <>
@@ -38,20 +27,19 @@ const MainSidebar = ({dark, type, category, kit, kits}) => {
                             text={linkFormat(Object.keys(link))}
                         />                       
                         
-                        <div className="sub_category">
                             {
                             link[Object.keys(link)[0]].map((sublink, i) => (
                                     <NavItem
                                         active={kit === sublink}
                                         dark={dark}
                                         key={i}
+                                        marginLeft="xl"
                                         link={`/kits/${sublink}/${type}`}
                                         text={linkFormat(sublink)}
                                     />
                                 )) 
                             }
                         </div>
-                    </div>
                     ) : (
                         <NavItem
                             active={kit === link}
