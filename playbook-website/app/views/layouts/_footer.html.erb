@@ -1,69 +1,64 @@
 <div class="pb--page--footer">
   <div class="inner-footer-wrapper">
     <%= pb_rails("flex", props: { align: "center", orientation: "column", margin_x: "xl" }) do %>
-
+    
       <%= pb_rails("flex/flex_item", props: { max_width: "md" }) do %>
         <%= pb_rails("flex", props: { justify: "center" }) do %>
-          <%= pb_rails("title", props: { dark: true, text: "Contribute to Playbook", tag: "h1", size: 1, padding_bottom: "lg" }) %>
+          <%= pb_rails("title", props: { dark: true, text: "Contribute to Playbook", tag: "h1", size: 1, padding_bottom: "lg", text_align: "center" }) %>
         <% end %>
-        <%= pb_rails("body", props: { dark: true, padding_bottom: "lg", color: "light", display: { xs: "none" } }) do %>
+        <%= pb_rails("body", props: { dark: true, padding_bottom: "lg", color: "light", text_align: "center", display: { xs: "none" } }) do %>
           When you start designing a new feature, you may come across a Design Token or Component that isn’t defined in Playbook. If so, you should
           <a href="https://github.com/powerhome/playbook/issues" target="_blank">open an issue</a> 
           or reach out to the team to make a contribution.
         <% end %>
         <%= pb_rails("flex", props: { justify: "center" }) do %>
-          <%= pb_rails("button", props: { font_style: "fab", icon: "github", text: "Contribute on GitHub", margin_bottom: "lg" }) %>
+          <%= pb_rails("button", props: { font_style: "fab", icon: "github", text: "Contribute on GitHub", link: "https://github.com/powerhome/playbook", margin_bottom: "lg" }) %>
         <% end %>
       <% end %>
     <% end %>
     <%= pb_rails("flex/flex_item", props: { align_self: "stretch" }) do %>
       <%= pb_rails("section_separator", props: { padding_y: "xl" }) %>
     <% end %>
-       
-    <%= pb_rails("flex", props: { justify: "center", margin_x: "xl" }) do %>
-
-      <%= pb_rails("flex", props: {  margin_x: { xs: "lg" }, classname: "link-container", justify: "between", max_width: "xl", flex_direction: { xs: "row" } }) do %>
+    
+    <%= pb_rails("flex", props: { justify: "center", margin: "xl"}) do %>
+      <%= pb_rails("flex", props: {  margin_x: { xs: "xl" }, classname: "link-container", justify: "between", max_width: "xl", flex_direction: { xs: "row" } }) do %>
         <%= pb_rails("flex", props: { max_width: "sm",  padding_top: "xl", display: { xs: "none" } }) do %>
-          
-            <%= image_pack_tag("media/images/power-subtract-logo.svg") %>
-
+          <%= image_pack_tag("media/images/power-subtract-logo.svg") %>
           <%= pb_rails("flex/flex_item", props: { align_self: "center" }) do %>
             <%= pb_rails("body", props: { dark: true, text: "As the highest-rated residential remodeler in the nation, our international technology team builds a custom suite of products that continuously transform our business.", color: "light", padding_left: "lg", display: { md: "none", sm: "none", xs: "none" }}) %>
           <% end %>
         <% end %>
-
+    
         <%= pb_rails("flex/flex_item") do %>
           <%= pb_rails("title", props: {dark: true, tag: "h4", text: "Power", size: 4, padding_bottom: "lg" }) %>
           <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
             <a href="https://www.techatpower.com/">Tech @ Power</a>
-            <% end %>
+          <% end %>
           <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
             <a href="https://www.techatpower.com/jobs">Open Positions</a>
-            <% end %>
+          <% end %>
           <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
             <a href="https://powerhrg.com/">About Power</a>
-            <% end %>
+          <% end %>
         <% end %>
-
+    
         <%= pb_rails("flex/flex_item") do %>
           <%= pb_rails("title", props: {dark: true, tag: "h4", text: "Connect", size: 4, padding_bottom: "lg" }) %>
-
           <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
             <a href="https://dribbble.com/powerhrg">Dribbble</a>
-            <% end %>
+          <% end %>
           <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
             <a href="https://github.com/powerhome/playbook">Github</a>
-            <% end %>
+          <% end %>
           <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
             <a href="https://nitro.powerhrg.com/connect#rooms/23514">Connect Chat</a>
-            <% end %>
+          <% end %>
         <% end %>
-
       <% end %>
-
     <% end %>
+
     <div class="copyright-tag">
-      <%= pb_rails("body", props: { text: "© 2023-24, ALL RIGHTS RESERVED", color: "lighter" }) %>
+      <%= pb_rails("body", props: { text: "© 2023-24, ALL RIGHTS RESERVED", color: "lighter", padding_top: "xl" }) %>
     </div>
   </div>
 </div>

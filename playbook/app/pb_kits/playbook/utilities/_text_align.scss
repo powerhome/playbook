@@ -1,0 +1,3 @@
+@import "../tokens/text_align";
+
+@include global_props_responsive_css($text_align, 'text_align', 'text-align');

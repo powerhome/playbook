@@ -178,7 +178,6 @@ body {
     }
     .copyright-tag {
       text-align: center;
-      margin-top: $space_xl * 3;
     }
     // reformat footer links on smaller screens
     @include break_at(650px){
