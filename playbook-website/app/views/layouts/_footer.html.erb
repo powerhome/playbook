@@ -17,7 +17,7 @@
       <% end %>
     <% end %>
     <%= pb_rails("flex/flex_item", props: { align_self: "stretch" }) do %>
-      <%= pb_rails("section_separator", props: { padding_y: "xl" }) %>
+      <%= pb_rails("section_separator", props: { padding_y: "xl", dark: true }) %>
     <% end %>
     
     <%= pb_rails("flex", props: { justify: "center", margin: "xl"}) do %>
@@ -30,29 +30,29 @@
         <% end %>
     
         <%= pb_rails("flex/flex_item") do %>
-          <%= pb_rails("title", props: {dark: true, tag: "h4", text: "Power", size: 4, padding_bottom: "lg" }) %>
-          <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
-            <a href="https://www.techatpower.com/">Tech @ Power</a>
-          <% end %>
-          <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
-            <a href="https://www.techatpower.com/jobs">Open Positions</a>
-          <% end %>
-          <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
-            <a href="https://powerhrg.com/">About Power</a>
-          <% end %>
+          <%= pb_rails("title", props: { dark: true, tag: "h4", text: "Power", size: 4, padding_bottom: "lg" }) %>
+          <a href="https://www.techatpower.com/">
+            <%= pb_rails("body", props: { text: "Tech @ Power", dark: true, color: "light", padding_bottom: "lg" }) %>
+          </a>
+          <a href="https://www.techatpower.com/jobs">
+            <%= pb_rails("body", props: { text: "Open Positions", dark: true, color: "light", padding_bottom: "lg" }) %>
+          </a>
+          <a href="https://powerhrg.com/">
+            <%= pb_rails("body", props: { text: "About Power", dark: true, color: "light", padding_bottom: "lg" }) %>
+          </a>
         <% end %>
     
         <%= pb_rails("flex/flex_item") do %>
-          <%= pb_rails("title", props: {dark: true, tag: "h4", text: "Connect", size: 4, padding_bottom: "lg" }) %>
-          <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
-            <a href="https://dribbble.com/powerhrg">Dribbble</a>
-          <% end %>
-          <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
-            <a href="https://github.com/powerhome/playbook">Github</a>
-          <% end %>
-          <%= pb_rails("body", props: { dark: true, color: "light", padding_bottom: "lg" }) do %>
-            <a href="https://nitro.powerhrg.com/connect#rooms/23514">Connect Chat</a>
-          <% end %>
+          <%= pb_rails("title", props: { dark: true, tag: "h4", text: "Connect", size: 4, padding_bottom: "lg" }) %>
+          <a href="https://dribbble.com/powerhrg">
+            <%= pb_rails("body", props: { text: "Dribbble", dark: true, color: "light", padding_bottom: "lg" }) %>
+          </a>
+          <a href="https://github.com/powerhome/playbook">
+            <%= pb_rails("body", props: { text: "Github", dark: true, color: "light", padding_bottom: "lg" }) %>
+          </a>
+          <a href="https://nitro.powerhrg.com/connect#rooms/23514">
+            <%= pb_rails("body", props: { text: "Connect Chat", dark: true, color: "light", padding_bottom: "lg" })  %>
+          </a>
         <% end %>
       <% end %>
     <% end %>
