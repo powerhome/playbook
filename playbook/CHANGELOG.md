@@ -3,7 +3,7 @@
 
 ![13 2 0](https://github.com/powerhome/playbook/assets/73710701/cad86206-4b3b-4f40-b2a2-5a38d6a1d909)
 
-Nesting navigation is easy with the new Collapsible Nav Kit variant. And we didn’t stop at a built in collapsible feature, we refactored the Nav Kit to make it more flexible over all! You can now customize navItem text, spacing and icons with global props. With the newly improved Nav Kit the design possibilities are endless!
+Nesting navigation is easy with the Nav kit's new Collapsible variant. And we didn't stop at a built-in collapsible feature, we refactored the Nav kit to make it more flexible overall! You can now use global props to customize text, spacing, and icons, making Nav kit design possibilities almost endless!
 
 [13.2.0](https://github.com/powerhome/playbook/tree/13.2.0) full list of changes:
 
