@@ -240,8 +240,4 @@
 	<% end %>
 <% end %>
 
-<%= javascript_include_tag do %>
-	window.addEventListener("DOMContentLoaded", () => {
-		imageComparsionSlider()
-	})
-<% end %>
+<%= javascript_pack_tag 'imageComparsionSlider' %>

@@ -16,9 +16,6 @@ import '../site_styles/main.scss'
 import copyContent from '../components/copyCode'
 window.copyContent = copyContent
 
-import imageComparsionSlider from '../scripts/imageComparsionSlider'
-window.imageComparsionSlider = imageComparsionSlider
-
 import DarkModeToggle from '../components/DarkModeToggle'
 import KitSearch from '../components/KitSearch'
 import SnippetToggle from '../components/SnippetToggle'
