@@ -1,3 +1,22 @@
+# 🤸 🎉 Collapsible, Flexible, Customizable: Introducing the New and Improved Nav Kit!
+##### September 1, 2023
+
+![13 2 0](https://github.com/powerhome/playbook/assets/73710701/cad86206-4b3b-4f40-b2a2-5a38d6a1d909)
+
+Nesting navigation is easy with the Nav kit's new Collapsible variant. And we didn't stop at a built-in collapsible feature, we refactored the Nav kit to make it more flexible overall! You can now use global props to customize text, spacing, and icons, making Nav kit design possibilities almost endless!
+
+[13.2.0](https://github.com/powerhome/playbook/tree/13.2.0) full list of changes:
+
+**Kit Enhancements:**
+
+- New Collapsible Variant for Nav Kit [\#2704](https://github.com/powerhome/playbook/pull/2704) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Website Doc Updates [\#2721](https://github.com/powerhome/playbook/pull/2721) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.1.0...13.2.0)
+
 # 🚄 Playbook's On Track: Introducing the New File Upload for Rails ViewComponents! 📂
 ##### August 29, 2023
 
