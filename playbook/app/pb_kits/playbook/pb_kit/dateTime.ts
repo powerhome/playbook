@@ -137,17 +137,17 @@ export const fromNow = (newDate: Date | string): string => {
     return months
   }
 
-  const FOURTY_FIVE_SECONDS = 45000
+  const FORTY_FIVE_SECONDS = 45000
   const NINETY_SECONDS = 90000
 
-  const FOURTY_FIVE_MINUTES = 2670000
+  const FORTY_FIVE_MINUTES = 2670000
   const NINETY_MINUTES = 5400000
 
   const TWENTY_TWO_HOURS = 77400000
   const THIRTY_SIX_HOURS = 129600000
 
   const TWENTY_SIX_DAYS = 2203200000
-  const FOURTY_FIVE_DAYS = 3888000000
+  const FORTY_FIVE_DAYS = 3888000000
 
   const TEN_AND_A_HALF_MONTHS = 27560000000
 
@@ -159,15 +159,15 @@ export const fromNow = (newDate: Date | string): string => {
 
   // Inspiration: https://momentjs.com/docs/#/displaying/fromnow/
   const intervals = [
-    { min: 0, max: FOURTY_FIVE_SECONDS, value: "a few seconds ago" }, // 0-44.99 seconds
-    { min: FOURTY_FIVE_SECONDS, max: NINETY_SECONDS, value: "a minute ago" }, // 45-89.99 seconds
-    { min: NINETY_SECONDS, max: FOURTY_FIVE_MINUTES, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_MINUTE)} minutes ago` }, // 90s-44.49 minutes: "2 minutes ago ... 44 minutes ago"
-    { min: FOURTY_FIVE_MINUTES, max: NINETY_MINUTES, value: "an hour ago" }, // 44.5-89.99 minutes
+    { min: 0, max: FORTY_FIVE_SECONDS, value: "a few seconds ago" }, // 0-44.99 seconds
+    { min: FORTY_FIVE_SECONDS, max: NINETY_SECONDS, value: "a minute ago" }, // 45-89.99 seconds
+    { min: NINETY_SECONDS, max: FORTY_FIVE_MINUTES, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_MINUTE)} minutes ago` }, // 90s-44.49 minutes: "2 minutes ago ... 44 minutes ago"
+    { min: FORTY_FIVE_MINUTES, max: NINETY_MINUTES, value: "an hour ago" }, // 44.5-89.99 minutes
     { min: NINETY_MINUTES, max: TWENTY_TWO_HOURS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_HOUR)} hours ago` }, // 90m-21.49 hours: "2 hours ago ... 21 hours ago"
     { min: TWENTY_TWO_HOURS, max: THIRTY_SIX_HOURS, value: "a day ago" }, // 21.5-35.99 hours
     { min: THIRTY_SIX_HOURS, max: TWENTY_SIX_DAYS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_DAY)} days ago` }, // 36h-25.49 days: "2 days ago ... 25 days ago"
-    { min: TWENTY_SIX_DAYS, max: FOURTY_FIVE_DAYS, value: "a month ago" }, // 25.5-44.99 days
-    { min: FOURTY_FIVE_DAYS, max: TEN_AND_A_HALF_MONTHS, value: `${differenceInMonths()} months ago` }, // 45 days to 319 days: "2 months ago ... 10 months ago"
+    { min: TWENTY_SIX_DAYS, max: FORTY_FIVE_DAYS, value: "a month ago" }, // 25.5-44.99 days
+    { min: FORTY_FIVE_DAYS, max: TEN_AND_A_HALF_MONTHS, value: `${differenceInMonths()} months ago` }, // 45 days to 319 days: "2 months ago ... 10 months ago"
   ]
 
   for (const interval of intervals) {
