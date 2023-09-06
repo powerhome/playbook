@@ -127,7 +127,13 @@ export const fromNow = (newDate: Date | string): string => {
   const startDate = formattedDate.getTime()
   const endDate = today.getTime()
   const elapsedTime = endDate - startDate
-  const years = today.getFullYear() - formattedDate.getFullYear()
+  const differenceInYears = today.getFullYear() - formattedDate.getFullYear()
+  const differenceInMonths = () => {
+    let months = differenceInYears * 12
+    months -= formattedDate.getMonth()
+    months += today.getMonth()
+    return months
+  }
 
   const SUB_FOURTY_FIVE_SECONDS = 44999
   const FOURTY_FIVE_SECONDS = 45000
@@ -154,9 +160,8 @@ export const fromNow = (newDate: Date | string): string => {
   const MILLISECONDS_IN_A_MINUTE = 60000
   const MILLISECONDS_IN_A_HOUR = 3600000
   const MILLISECONDS_IN_A_DAY = 86400000
-  const DAYS_IN_A_MONTH = 30
 
-  let elapsedTimeString = years === 1 ? `${years} year ago` : `${years} years ago` // 320 days to 1+ year: "x year(s) ago"
+  let elapsedTimeString = differenceInYears === 1 ? `${differenceInYears} year ago` : `${differenceInYears} years ago` // 320 days to 1+ year: "x year(s) ago"
 
   // https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/02-fromnow/
   const elapsedTimeData = [
@@ -168,7 +173,7 @@ export const fromNow = (newDate: Date | string): string => {
     { min: TWENTY_TWO_HOURS, max: SUB_THIRTY_SIX_HOURS, value: "a day ago" }, // 21.5-35.99 hours
     { min: THIRTY_SIX_HOURS, max: SUB_TWENTY_SIX_DAYS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_DAY)} days ago`}, // 36h-25.49 days: "2 days ago ... 25 days ago"
     { min: TWENTY_SIX_DAYS, max: SUB_FOURTY_FIVE_DAYS, value: "a month ago"}, // 25.5-44.99 days
-    { min: FOURTY_FIVE_DAYS, max: TEN_MONTHS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_DAY / DAYS_IN_A_MONTH)} months ago`}, // 45 days to 319 days: "2 months ago ... 10 months ago"
+    { min: FOURTY_FIVE_DAYS, max: TEN_MONTHS, value: `${differenceInMonths()} months ago`}, // 45 days to 319 days: "2 months ago ... 10 months ago"
   ]
 
   for (const timeDate of elapsedTimeData) {
