@@ -5,7 +5,10 @@ import NavItem from '../_item'
 
 const BorderlessNav = (props) => {
   return (
-    <Nav borderless>
+    <Nav 
+        borderless
+        {...props}
+    >
       <NavItem
           active
           link="#"
