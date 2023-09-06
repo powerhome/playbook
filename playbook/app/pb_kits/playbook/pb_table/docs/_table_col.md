@@ -1,0 +1,1 @@
+You can choose the background color of a table's column in a table by adding the `table/table_colgroup` and `table/table_col` kits inside of a `table` kit. The `span` prop lets you choose how many columns `table/table_col` goes accross and the `background_color` prop lets you pass our plabyook color tokens to change the color of the column.

@@ -69,7 +69,7 @@ module Playbook
                                 info_subtle
                                 neutral_subtle
                               ],
-                              default: "light"
+                              default: "card_light"
 
       def classname
         generate_classname("pb_table_col_kit", custom_background_color)
