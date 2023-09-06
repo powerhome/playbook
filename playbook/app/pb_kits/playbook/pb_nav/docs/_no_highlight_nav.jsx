@@ -5,7 +5,10 @@ import NavItem from '../_item'
 
 const NoHighlightNav = (props) => {
   return (
-    <Nav highlight={false}>
+    <Nav 
+        highlight={false}
+        {...props}
+    >
       <NavItem
           active
           link="#"

@@ -5,7 +5,7 @@ import NavItem from '../_item'
 
 const BlockNoTitleNav = (props) => {
   return (
-    <Nav>
+    <Nav {...props}>
       <NavItem
           iconLeft="newspaper"
           link="#"

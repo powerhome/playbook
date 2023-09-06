@@ -124,11 +124,15 @@ const Select = ({
           htmlFor={name}
       >
         {selectBody}
-        <Icon
-            className="pb_select_kit_caret"
-            fixedWidth
-            icon="angle-down"
-        />
+        { multiple !== true ?
+          <Icon
+              className="pb_select_kit_caret"
+              fixedWidth
+              icon="angle-down"
+          />
+          :
+          null
+        }
         {error &&
           <Body
               status="negative"

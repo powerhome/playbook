@@ -1,3 +1,115 @@
+# 🤸 🎉 Collapsible, Flexible, Customizable: Introducing the New and Improved Nav Kit!
+##### September 1, 2023
+
+![13 2 0](https://github.com/powerhome/playbook/assets/73710701/cad86206-4b3b-4f40-b2a2-5a38d6a1d909)
+
+Nesting navigation is easy with the Nav kit's new Collapsible variant. And we didn't stop at a built-in collapsible feature, we refactored the Nav kit to make it more flexible overall! You can now use global props to customize text, spacing, and icons, making Nav kit design possibilities almost endless!
+
+[13.2.0](https://github.com/powerhome/playbook/tree/13.2.0) full list of changes:
+
+**Kit Enhancements:**
+
+- New Collapsible Variant for Nav Kit [\#2704](https://github.com/powerhome/playbook/pull/2704) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Website Doc Updates [\#2721](https://github.com/powerhome/playbook/pull/2721) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.1.0...13.2.0)
+
+# 🚄 Playbook's On Track: Introducing the New File Upload for Rails ViewComponents! 📂
+##### August 29, 2023
+
+![13 1 0](https://github.com/powerhome/playbook/assets/73710701/9675c4dc-5e7c-437a-9e1e-da5dea4133b2)
+
+The File Upload kit for Rails ViewComponents redefines HTML's default input to match Playbook's aesthetics, ensuring consistency and elegance for every upload. 🚀📂🎉
+
+ [13.1.0](https://github.com/powerhome/playbook/tree/13.1.0) full list of changes:
+
+ **Fixed Bugs:**
+
+- Fixed Misalignment on Passphrase Icon in Firefox [\#2718](https://github.com/powerhome/playbook/pull/2718) ([nidaqg](https://github.com/nidaqg))
+- dateTime Bug Fixes [\#2716](https://github.com/powerhome/playbook/pull/2716) ([gavhuang](https://github.com/gavhuang))
+
+**New Kits:**
+
+- File Upload Kit \(Rails\) [\#2700](https://github.com/powerhome/playbook/pull/2700) ([jasperfurniss](https://github.com/jasperfurniss))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.0.0...13.1.0)
+
+# 💔 Say Goodbye to the Past: We're Breaking Up with moment.js! 🕒
+##### August 22, 2023
+
+![13-0-0-banner](https://github.com/powerhome/playbook/assets/73710701/cfb781dd-7a96-4a07-8c5c-53af8bc878de)
+
+Say goodbye to the old and make way for the new as we bid adieu to moment.js in our Playbook design system! We've given our Date and Time kits a makeover, retiring the dated library in favor of a more vibrant and efficient solution. Our kits still handle dates and times flawlessly, but with the breakup, our bundle size has shed a whopping 25%, giving you a snappier experience.
+
+[13.0.0](https://github.com/powerhome/playbook/tree/13.0.0) full list of changes:
+
+**Breaking changes:**
+
+- Remove Moment Packages and Update Date Picker's QuickPick Variants [\#2707](https://github.com/powerhome/playbook/pull/2707) ([gavhuang](https://github.com/gavhuang))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.0.0...13.0.0)
+
+# Collapsible Kit ✨Enhancements✨: External Controls and Customizable Icons!
+##### August 17, 2023
+
+![123900](https://github.com/powerhome/playbook/assets/73710701/61e291b4-74c2-4133-84a2-19b1458cb895)
+
+Have a stack of collapsible sections and need a way to expand & collapse them all at once? You can now implement external controls like buttons to do just that! There’s more -- you can also pass custom icons like plus (‘+’) or minus (‘-’) if you don’t fancy chevrons.
+
+ [12.39.0](https://github.com/powerhome/playbook/tree/12.39.0)  full list of changes:
+
+**Kit Enhancements:**
+
+- Collapsible Kit Enhancements [\#2692](https://github.com/powerhome/playbook/pull/2692) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Select Kit 'multiple' Variant Fixes [\#2701](https://github.com/powerhome/playbook/pull/2701) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.38.0...12.39.0)
+
+
+# 12.38.0
+##### August 15, 2023
+
+List of changes: 
+
+**Improvements:**
+
+-  Refactor Date and Time Kits to not Rely on Moment.js [\#2691](https://github.com/powerhome/playbook/pull/2691) ([gavhuang](https://github.com/gavhuang), [Israel-Molestina](https://github.com/Israel-Molestina))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.37.0...12.38.0)
+
+
+
+# Text Fields Just Got Smarter!
+##### August 9, 2023
+
+![12-37-0](https://github.com/powerhome/playbook/assets/73710701/85d8aa24-c1db-4b2f-b1c3-5c64d039baf8)
+
+Get better control over your forms with our new input_options prop on our Text Input kit! Set any HTML input option as a prop and have it effortlessly get passed down to the styled input! 
+
+[12.37.0](https://github.com/powerhome/playbook/tree/12.37.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Groundwork for Upcoming Collapsible Nav Kit [\#2678](https://github.com/powerhome/playbook/pull/2678) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fixed Text Input Options Prop [\#2686](https://github.com/powerhome/playbook/pull/2686) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Converted Changelog Markdown to a Hash, Object, or Json [\#2693](https://github.com/powerhome/playbook/pull/2693) ([jasoncypret](https://github.com/jasoncypret))
+- Swift Developer Docs: Badge, Pill, Radio and Timestamp Kits [\#2690](https://github.com/powerhome/playbook/pull/2690) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.36.0...12.37.0)
+
 # 12.36.0
 ##### August 4, 2023
 
