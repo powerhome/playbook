@@ -127,6 +127,8 @@ export const fromNow = (newDate: Date | string): string => {
   const startDate = formattedDate.getTime()
   const endDate = today.getTime()
   const elapsedTime = endDate - startDate
+
+  // For years/months, don't use elapsedTime due to rounding
   const differenceInYears = today.getFullYear() - formattedDate.getFullYear()
   const differenceInMonths = () => {
     let months = differenceInYears * 12
@@ -135,27 +137,19 @@ export const fromNow = (newDate: Date | string): string => {
     return months
   }
 
-  const SUB_FOURTY_FIVE_SECONDS = 44999
   const FOURTY_FIVE_SECONDS = 45000
-  const SUB_NINETY_SECONDS = 89999
   const NINETY_SECONDS = 90000
 
-  const SUB_FOURTY_FIVE_MINUTES = 2669999
   const FOURTY_FIVE_MINUTES = 2670000
-  const SUB_NINETY_MINUTES = 5399999
   const NINETY_MINUTES = 5400000
 
-  const SUB_TWENTY_TWO_HOURS = 77399999
   const TWENTY_TWO_HOURS = 77400000
-  const SUB_THIRTY_SIX_HOURS = 129599999
   const THIRTY_SIX_HOURS = 129600000
 
-  const SUB_TWENTY_SIX_DAYS = 2203199999
   const TWENTY_SIX_DAYS = 2203200000
-  const SUB_FOURTY_FIVE_DAYS = 3887999999
   const FOURTY_FIVE_DAYS = 3888000000
 
-  const TEN_MONTHS = 26280000000
+  const TEN_AND_A_HALF_MONTHS = 27560000000
 
   const MILLISECONDS_IN_A_MINUTE = 60000
   const MILLISECONDS_IN_A_HOUR = 3600000
@@ -163,23 +157,25 @@ export const fromNow = (newDate: Date | string): string => {
 
   let elapsedTimeString = differenceInYears === 1 ? `${differenceInYears} year ago` : `${differenceInYears} years ago` // 320 days to 1+ year: "x year(s) ago"
 
-  // https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/02-fromnow/
-  const elapsedTimeData = [
-    { min: 0, max: SUB_FOURTY_FIVE_SECONDS, value: "a few seconds ago" }, // 0-44.99 seconds
-    { min: FOURTY_FIVE_SECONDS, max: SUB_NINETY_SECONDS, value: "a minute ago" }, // 45-89.99 seconds
-    { min: NINETY_SECONDS, max: SUB_FOURTY_FIVE_MINUTES, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_MINUTE)} minutes ago`}, // 90s-44.49 minutes: "2 minutes ago ... 44 minutes ago"
-    { min: FOURTY_FIVE_MINUTES, max: SUB_NINETY_MINUTES, value: "an hour ago" }, // 44.5-89.99 minutes
-    { min: NINETY_MINUTES, max: SUB_TWENTY_TWO_HOURS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_HOUR)} hours ago`}, // 90m-21.49 hours: "2 hours ago ... 21 hours ago"
-    { min: TWENTY_TWO_HOURS, max: SUB_THIRTY_SIX_HOURS, value: "a day ago" }, // 21.5-35.99 hours
-    { min: THIRTY_SIX_HOURS, max: SUB_TWENTY_SIX_DAYS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_DAY)} days ago`}, // 36h-25.49 days: "2 days ago ... 25 days ago"
-    { min: TWENTY_SIX_DAYS, max: SUB_FOURTY_FIVE_DAYS, value: "a month ago"}, // 25.5-44.99 days
-    { min: FOURTY_FIVE_DAYS, max: TEN_MONTHS, value: `${differenceInMonths()} months ago`}, // 45 days to 319 days: "2 months ago ... 10 months ago"
+  // Inspiration: https://momentjs.com/docs/#/displaying/fromnow/
+  const intervals = [
+    { min: 0, max: FOURTY_FIVE_SECONDS, value: "a few seconds ago" }, // 0-44.99 seconds
+    { min: FOURTY_FIVE_SECONDS, max: NINETY_SECONDS, value: "a minute ago" }, // 45-89.99 seconds
+    { min: NINETY_SECONDS, max: FOURTY_FIVE_MINUTES, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_MINUTE)} minutes ago` }, // 90s-44.49 minutes: "2 minutes ago ... 44 minutes ago"
+    { min: FOURTY_FIVE_MINUTES, max: NINETY_MINUTES, value: "an hour ago" }, // 44.5-89.99 minutes
+    { min: NINETY_MINUTES, max: TWENTY_TWO_HOURS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_HOUR)} hours ago` }, // 90m-21.49 hours: "2 hours ago ... 21 hours ago"
+    { min: TWENTY_TWO_HOURS, max: THIRTY_SIX_HOURS, value: "a day ago" }, // 21.5-35.99 hours
+    { min: THIRTY_SIX_HOURS, max: TWENTY_SIX_DAYS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_DAY)} days ago` }, // 36h-25.49 days: "2 days ago ... 25 days ago"
+    { min: TWENTY_SIX_DAYS, max: FOURTY_FIVE_DAYS, value: "a month ago" }, // 25.5-44.99 days
+    { min: FOURTY_FIVE_DAYS, max: TEN_AND_A_HALF_MONTHS, value: `${differenceInMonths()} months ago` }, // 45 days to 319 days: "2 months ago ... 10 months ago"
   ]
 
-  for (const timeDate of elapsedTimeData) {
-    if (elapsedTime >= timeDate.min && elapsedTime <= timeDate.max) {
-      elapsedTimeString = timeDate.value;
-      break;
+  for (const interval of intervals) {
+    const { min, max, value } = interval
+
+    if (elapsedTime >= min && elapsedTime < max) {
+      elapsedTimeString = value
+      break
     }
   }
 
