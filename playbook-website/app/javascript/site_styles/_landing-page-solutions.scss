@@ -1,24 +1,50 @@
 .landing-page {
   .language-card {
-    min-height: 126px;
-  }
+    max-width: 200px;
+    flex: 1;
 
-  @include break_on($screen-sm-min, $screen-lg-min) {
-    .card-container {
-      flex-wrap: wrap;
+    [class*="pb_card_kit"] {
+      min-height: 126px;
+      align-items: center;
+      justify-content: center;
     }
   }
 
   @include break_on($screen-xl-min, 1340px) {
+    .solutionsContainer {
+      margin-right: 0 !important;
+    }
+
+    .language-card {
+      max-width: 166px;
+    }
+
     .card-container {
-      flex-wrap: wrap;
-      justify-content: start;
+      column-gap: $space_sm;
     }
   }
 
   @include break_at($screen-xl-min) {
     .explore-button {
       justify-content: center;
+    }
+  }
+
+  @include break_on($screen-xs-min, $screen-xl-min) {
+    .language-card {
+      max-width: 294px;
+    }
+  }
+
+  @include break_on($screen-xs-min, $screen-md-min) {
+    .language-card {
+      max-width: 200px;
+    }
+  }
+
+  @include break_at(710px) {
+    .language-card {
+      max-width: 162px;
     }
   }
 

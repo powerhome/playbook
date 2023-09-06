@@ -108,27 +108,24 @@
 				<%= pb_rails("flex", props: {
 					classname: "width-full card-container",
 					display: { xs: "none" },
-					justify: "around",
+					justify: "between",
 					margin_y: { xl: "sm", default: "xl" },
 					gap: "md"
 				}) do %>
 					<%= pb_rails("flex", props: {
+						classname: "language-card",
 						orientation: "column",
 						row_gap: "sm",
-						max_width: "xs"
+						# max_width: "xs"
 					}) do %>
 						<%= pb_rails("flex/flex_item", props: {
 							align_self: "stretch"
 						}) do %>
 							<%= link_to "/guides/getting_started/react_setup" do %>
 								<%= pb_rails("card", props: {
-									classname: "language-card",
-									text_align: "center",
-									padding: "xl",
 									shadow: "deeper",
 									border_radius: "lg",
 									cursor: "pointer",
-									link: "/guides/getting_started/react_setup",
 									hover: { scale: "sm" }
 								}) do %>
 									<%= pb_rails("image", props: {
@@ -144,24 +141,23 @@
 						}) do %>
 							<%= pb_rails("caption", props: {
 								text: "Endlessly flexible presentational UI components with encapsulated styles and constraint based theme props.",
-								size: "xs"
+								size: "xs",
+								padding_x: "xxs",
 							}) %>
 						<% end %>
 					<% end %>
 
 					<%= pb_rails("flex", props: {
+						classname: "language-card",
 						orientation: "column",
 						row_gap: "sm",
-						max_width: "xs"
+						# max_width: "xs"
 					}) do %>
 						<%= pb_rails("flex/flex_item", props: {
 							align_self: "stretch"
 						}) do %>
 							<%= link_to "/guides/getting_started/ruby_on_rails_setup" do %>
 								<%= pb_rails("card", props: {
-									classname: "language-card",
-									padding: "xl",
-									text_align: "center",
 									shadow: "deeper",
 									border_radius: "lg",
 									cursor: "pointer",
@@ -180,24 +176,23 @@
 						}) do %>
 							<%= pb_rails("caption", props: {
 								text: "100+ highly customizable ViewComponents. Build design driven UI in Rails with ViewComponents.",
-								size: "xs"
+								size: "xs",
+								padding_x: "xxs",
 							}) %>
 						<% end %>
 					<% end %>
 
 					<%= pb_rails("flex", props: {
+						classname: "language-card",
 						orientation: "column",
 						row_gap: "sm",
-						max_width: "xs"
+						# max_width: "xs"
 					}) do %>
 						<%= pb_rails("flex/flex_item", props: {
 							align_self: "stretch"
 						}) do %>
 							<%= link_to "/guides/getting_started/HTML_&_CSS" do %>
 								<%= pb_rails("card", props: {
-									classname: "language-card",
-									padding: "xl",
-									text_align: "center",
 									shadow: "deeper",
 									border_radius: "lg",
 									cursor: "pointer",
@@ -216,7 +211,8 @@
 						}) do %>
 							<%= pb_rails("caption", props: {
 								text: "Utility classes help you work within the constraints of a system instead of littering your stylesheets with arbitrary values.",
-								size: "xs"
+								size: "xs",
+								padding_x: "xxs",
 							}) %>
 						<% end %>
 					<% end %>
