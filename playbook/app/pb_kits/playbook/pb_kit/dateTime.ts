@@ -121,25 +121,55 @@ export const toIso = (newDate: Date | string): string => {
 }
 
 export const fromNow = (newDate: Date | string): string => {
-  const startDate = formatDate(newDate).getTime()
-  const endDate = new Date().getTime()
-  const elapsedTime = endDate - startDate
-  let elapsedTimeString = `${Math.round(elapsedTime / (365.25 * 24 * 60 * 60 * 1000))} years ago`; // 730+ days
+  const today = new Date()
+  const formattedDate = formatDate(newDate)
 
+  const startDate = formattedDate.getTime()
+  const endDate = today.getTime()
+  const elapsedTime = endDate - startDate
+  const years = today.getFullYear() - formattedDate.getFullYear()
+
+  const FOURTY_FOUR_SECONDS = 44999
+  const FOURTY_FIVE_SECONDS = 45000
+  const EIGHTY_NINE_SECONDS = 89999
+  const NINETY_SECONDS = 90000
+
+  const FOURTY_FOUR_MINUTES = 2669999
+  const FOURTY_FIVE_MINUTES = 2670000
+  const EIGHTY_NINE_MINUTES = 5399999
+  const NINETY_MINUTES = 5400000
+
+  const TWENTY_ONE_HOURS = 77399999
+  const TWENTY_TWO_HOURS = 77400000
+  const THIRTY_FIVE_HOURS = 129599999
+  const THIRTY_SIX_HOURS = 129600000
+
+  const TWENTY_FIVE_DAYS = 2203199999
+  const TWENTY_SIX_DAYS = 2203200000
+  const FOURTY_FIVE_DAYS = 3945199999
+
+  const ONE_AND_A_HALF_MONTHS = 3945200000
+  const TEN_MONTHS = 27615168000
+
+  const MILLISECONDS_IN_A_MINUTE = 60000
+  const MILLISECONDS_IN_A_HOUR = 3600000
+  const MILLISECONDS_IN_A_DAY = 86400000
   const MILLISECONDS_IN_A_MONTH = 30.44 * 24 * 60 * 60 * 1000
 
+  let elapsedTimeString = years === 1 ? `${years} year ago` : `${years} years ago` // 320 days to 1+ year: "x year(s) ago"
+
+  // https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/02-fromnow/
   const elapsedTimeData = [
-    { min: 0, max: 44999, value: "a few seconds ago" }, // 0-44 seconds
-    { min: 45000, max: 89999, value: "a minute ago" }, // 45-89 seconds
-    { min: 90000, max: 2649999, value: `${Math.round(elapsedTime / 60000)} minutes ago`}, //  90s-44 minutes
-    { min: 2650000, max: 7299999, value: "an hour ago" }, // 45-120 minutes
-    { min: 7300000, max: 75699999, value: `${Math.round(elapsedTime / 3600000)} hours ago`}, // 2-21 hours
-    { min: 75700000, max: 172899999, value: "a day ago" }, // 22-48 hours
-    { min: 172900000, max: 2169999999, value: `${Math.round(elapsedTime / 86400000)} days ago`}, // 2-25 days
-    { min: 2170000000, max: 5184999999, value: "a month ago"}, // 26-60 days
-    { min: 5185000000, max: 27561699999, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_MONTH)} months ago`}, // 60-319 days
-    { min: 27561700000, max: 63072999999, value: "a year ago"}, // 320-730 days
-  ];
+    { min: 0, max: FOURTY_FOUR_SECONDS, value: "a few seconds ago" }, // 0-44 seconds
+    { min: FOURTY_FIVE_SECONDS, max: EIGHTY_NINE_SECONDS, value: "a minute ago" }, // 45-89 seconds
+    { min: NINETY_SECONDS, max: FOURTY_FOUR_MINUTES, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_MINUTE)} minutes ago`}, // 90s-44 minutes: "2 minutes ago ... 44 minutes ago"
+    { min: FOURTY_FIVE_MINUTES, max: EIGHTY_NINE_MINUTES, value: "an hour ago" }, // 45-89 minutes
+    { min: NINETY_MINUTES, max: TWENTY_ONE_HOURS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_HOUR)} hours ago`}, // 90m-21.49 hours: "2 hours ago ... 21 hours ago"
+    { min: TWENTY_TWO_HOURS, max: THIRTY_FIVE_HOURS, value: "a day ago" }, // 21.5-35 hours
+    { min: THIRTY_SIX_HOURS, max: TWENTY_FIVE_DAYS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_DAY)} days ago`}, // 36h-25.49 days: "2 days ago ... 25 days ago"
+    { min: TWENTY_SIX_DAYS, max: FOURTY_FIVE_DAYS, value: "a month ago"}, // 25.5-44.99 days
+    { min: ONE_AND_A_HALF_MONTHS, max: TEN_MONTHS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_MONTH)} months ago`}, // 45 days to 319 days: "2 months ago ... 10 months ago"
+  ]
 
   for (const timeDate of elapsedTimeData) {
     if (elapsedTime >= timeDate.min && elapsedTime <= timeDate.max) {
