@@ -1,20 +1,8 @@
 import React from "react"
-import { Nav, NavItem, useCollapsible } from "../.."
+import { Nav, NavItem } from "../.."
 
-const CollapsibleNavCustom = (props) => {
+const CollapsibleNavWithAllOptions = (props) => {
   const navItems = ["Overview", "Albums", "Similar Artists"]
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const collapsibles = navItems.map(() => useCollapsible(true))
-
-  const handleMainClick = (index) => {
-    collapsibles.forEach(([, , setCollapsed], idx) => {
-      if (idx === index) {
-        setCollapsed(false)
-      } else {
-        setCollapsed(true)
-      }
-    })
-  }
 
   return (
     <>
@@ -23,32 +11,36 @@ const CollapsibleNavCustom = (props) => {
           {...props}
       >
         {navItems.map((text, index) => {
-          const [collapsed] = collapsibles[index]
           return (
             <NavItem
-                collapsed={collapsed}
                 collapsible
                 collapsibleTrail
-                fontSize="small"
                 fontWeight="bolder"
-                iconLeft="chevron-down"
+                iconLeft="city"
                 iconRight={["plus", "minus"]}
-                id={`collapsible-nav-item-${index + 1}`}
                 key={index}
                 link="#"
-                onClick={() => handleMainClick(index)}
                 text={text}
                 {...props}
             >
-              <NavItem link="#" 
+              <NavItem 
+                  fontSize="small"
+                  link="#" 
+                  marginY="none"
                   text="City" 
                   {...props} 
               />
-              <NavItem link="#" 
+              <NavItem 
+                  fontSize="small"
+                  link="#" 
+                  marginY="none"
                   text="People" 
                   {...props} 
               />
-              <NavItem link="#" 
+              <NavItem
+                  fontSize="small"
+                  link="#" 
+                  marginY="none"
                   text="Business" 
                   {...props} 
               />
@@ -60,4 +52,4 @@ const CollapsibleNavCustom = (props) => {
   )
 }
 
-export default CollapsibleNavCustom
+export default CollapsibleNavWithAllOptions
