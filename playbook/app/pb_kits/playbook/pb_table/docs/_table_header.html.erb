@@ -1,0 +1,54 @@
+<%= pb_rails("table", props: { size: "lg"} ) do %>
+  <thead>
+    <tr>
+      <%= pb_rails("table/table_header", props: {
+        id: "name",
+        colspan: 2,
+        sort_menu: [
+          { item: "Name", link: "?q[sorts]=name+desc", active: false, direction: "desc" },
+          { item: "Name", link: "?q[sorts]=name+asc", active: true, direction: "asc" },
+        ],
+      }) %>
+      <%= pb_rails("table/table_header", props: {
+        text: "Age",
+        id: "age",
+        sort_menu: [
+          { item: "Age", link: "?q[sorts]=age+desc", active: false, direction: "desc" },
+          { item: "Age", link: "?q[sorts]=age+asc", active: false, direction: "asc" },
+        ],
+      }) %>
+      <%= pb_rails("table/table_header", props: {
+        text: "Territory",
+        id: "territory",
+        sort_menu: [
+          { item: "Territory", link: "?q[sorts]=territory+desc", active: false, direction: "desc" },
+          { item: "Territory", link: "?q[sorts]=territory+asc", active: false, direction: "asc" },
+        ],
+      }) %>
+      <%= pb_rails("table/table_header", props: { text: "Job Title" }) %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name 1</td>
+      <td>Name 2</td>
+      <td>Value 3</td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+    <tr>
+      <td>Name 1</td>
+      <td>Name 2</td>
+      <td>Value 3</td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+    <tr>
+      <td>Name 1</td>
+      <td>Name 2</td>
+      <td>Value 3</td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+  </tbody>
+<% end %>
