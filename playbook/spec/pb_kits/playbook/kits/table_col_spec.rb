@@ -18,7 +18,7 @@ RSpec.describe Playbook::PbTable::TableCol do
   describe "#background_color" do
     it "should have certain color tokens", :aggregate_failures do
       kit_background_colors = subject.new({}).props[:background_color].values
-      background_colors = YAML.load_file(Playbook::Engine.root.join("dist/colors.yml"))["background_colors"].map(&:to_s)
+      background_colors = YAML.load_file(Playbook::Engine.root.join("colors.yml"))["background_colors"].map(&:to_s)
       expect(kit_background_colors.sort).to eq background_colors.sort
     end
   end

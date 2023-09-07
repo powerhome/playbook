@@ -6,7 +6,7 @@ module Playbook
       prop :span, type: Playbook::Props::Number,
                   default: 1
       prop :background_color, type: Playbook::Props::Enum,
-                              values: YAML.load_file(Playbook::Engine.root.join("dist/colors.yml"))["background_colors"],
+                              values: YAML.load_file(Playbook::Engine.root.join("colors.yml"))["background_colors"],
                               default: "card_light"
 
       def classname
