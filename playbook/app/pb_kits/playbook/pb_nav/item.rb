@@ -22,31 +22,72 @@ module Playbook
                     default: "_self"
       def classname
         if collapsible
-          "#{generate_classname('pb_nav_list_kit_item', active_class)} #{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class}"
+          "#{generate_classname('pb_nav_list_kit_item', active_class)} #{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link_collapsible"
         else
-          "#{generate_classname('pb_nav_list_kit_item', active_class)} #{font_size_class} #{font_weight_class}"
+          "#{generate_classname('pb_nav_list_kit_item', active_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link"
         end
+      end
+
+      def spacing_props
+        if collapsible
+          if object.margin || object.margin_x || object.margin_y || object.margin_bottom || object.margin_top || object.margin_right || object.margin_left
+            # Call the original method
+            original_result = super
+
+            # Remove p_value, px_value, py_value, etc. based on the object's properties
+            margin_classes_to_remove = []
+            margin_classes_to_remove << "m_#{object.margin}" if object.margin
+            margin_classes_to_remove << "mx_#{object.margin_x}" if object.margin_x
+            margin_classes_to_remove << "my_#{object.margin_y}" if object.margin_y
+            margin_classes_to_remove << "mb_#{object.margin_bottom}" if object.margin_bottom
+            margin_classes_to_remove << "mt_#{object.margin_top}" if object.margin_top
+            margin_classes_to_remove << "mr_#{object.margin_right}" if object.margin_right
+            margin_classes_to_remove << "ml_#{object.margin_left}" if object.margin_left
+
+            margin_classes_to_remove.each do |class_to_remove|
+              original_result.gsub!(class_to_remove, "")
+            end
+
+            original_result.strip
+          else
+            super
+          end
+        else
+          super
+        end
+      end
+
+      def margin_classes
+        margin_attributes = {
+          margin: "m",
+          margin_x: "mx",
+          margin_y: "my",
+          margin_bottom: "mb",
+          margin_top: "mt",
+          margin_right: "mr",
+          margin_left: "ml",
+        }
+
+        # rubocop:disable Style/RedundantAssignment
+        margin_classes = margin_attributes.map do |attr, class_prefix|
+          # rubocop:enable Style/RedundantAssignment
+          value = object.public_send(attr)
+          " #{class_prefix}_#{value}" if value
+        end.compact.join
+
+        margin_classes
       end
 
       def tag
         link ? "a" : "div"
       end
 
-      def options
-        {
-          class: collapsible ? "pb_nav_list_item_link_collapsible" : "pb_nav_list_item_link",
-        }.compact
-      end
-
-      def link_options
-        options.merge(
-          href: link,
-          target: target
-        )
-      end
-
       def collapsible_icons
-        icon_right.present? ? icon_right : %w[plus minus]
+        icon_right.present? && icon_right
+      end
+
+      def collapsible_nav_classname
+        generate_classname("collapsible_nav_wrapper", active_class, collapsible_trail_class)
       end
 
     private
