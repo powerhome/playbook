@@ -11,4 +11,5 @@ updates:
     schedule:
       interval: "daily"
     # Allow Dependabot access to all defined private registries when performing a version update
-    registries: "*"
+    registries:
+      - power-npm
