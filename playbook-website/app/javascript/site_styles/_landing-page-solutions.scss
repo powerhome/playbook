@@ -7,22 +7,14 @@
       height: 120px;
       align-items: center;
       justify-content: center;
-    }
-  }
 
-  @include break_on($screen-xl-min, 1340px) {
-    .solutionsContainer {
-      margin-right: 0 !important;
-    }
-  }
-
-  @include break_on($screen-md-min, $screen-xl-max) {
-    .language-card {
-      max-width: 350px;
-
-      [class*="pb_card_kit"] {
+      @include break_on($screen-md-min, $screen-xl-max) {
         height: 160px;
       }
+    }
+
+    @include break_on($screen-md-min, $screen-xl-max) {
+      max-width: 350px;
     }
   }
 
@@ -37,6 +29,11 @@
     position: relative;
     height: 350px;
     overflow: hidden;
+
+    @include break_on($screen-xl-min, 1340px) {
+      margin-right: 0 !important;
+    }
+
     @media screen and (min-width: $screen-xl-min) {
       min-width: 570px;
     };
