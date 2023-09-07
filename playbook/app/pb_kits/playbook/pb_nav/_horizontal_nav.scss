@@ -8,8 +8,8 @@
 
 $selector: ".pb_nav_list";
 
-[class^=pb_nav_list][class*=_horizontal] {
-  ul {
+[class^="pb_nav_list"][class*="_horizontal"] {
+  .pb_nav_wrapper {
     display: flex;
     align-items: center;
     padding: 0;
@@ -17,13 +17,13 @@ $selector: ".pb_nav_list";
     list-style: none;
   }
 
-  [class*=pb_nav_list_kit_item] {
+  [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"] {
     transition-property: border-color;
     transition-duration: 0.15s;
     transition-timing-function: $bezier;
     padding: 0;
 
-    [class*=_link] {
+    &[class*="_link"] {
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -36,21 +36,36 @@ $selector: ".pb_nav_list";
       transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
       color: $text_lt_default;
 
-      [class*=_icon_left] {
+      [class*="_icon_left"] {
         font-size: $font_large;
         margin-right: $space_sm;
         color: $text_lt_lighter;
       }
 
-      [class*=_text] {
-        font-size: $font_base;
-        font-weight: $bold;
+      [class*="_text"] {
         color: $text_lt_default;
+        font-weight: $bold;
       }
 
-      @media (hover:hover) {
+      @media (hover: hover) {
         &:hover {
           color: $primary;
+          #{$selector}_item_icon,
+          #{$selector}_item_text {
+            color: $primary;
+          }
+        }
+      }
+      &[class*="_active"] {
+        border-color: $primary;
+        [class*="_item_icon"] {
+          color: $text_lt_default;
+        }
+        [class*="_item_text"] {
+          color: $text_lt_default;
+          font-weight: $bold;
+        }
+        &:hover {
           #{$selector}_item_icon,
           #{$selector}_item_text {
             color: $primary;
@@ -60,81 +75,66 @@ $selector: ".pb_nav_list";
     }
   }
 
-  [class*=_active] {
-    #{$selector}_item_link {
-      border-color: $primary;
-
-      [class*=_item_icon] {
-        color: $text_lt_default;
-      }
-
-      [class*=_item_text] {
-        color: $text_lt_default;
-        font-weight: $bold;
-      }
-    }
-  }
-
   // Subtle Variant
-  &[class*=_subtle] {
+  &[class*="_subtle"] {
     @include subtle;
     // Horizontal Overrides
-    [class*=pb_nav_list_kit_item] {
+    [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"] {
       margin: 0;
-      [class*=_item_text]{
-        font-weight: $regular;
+      [class*="_item_text"] {
+        font-weight: $regular !important;
       }
-    }
-    [class*=_active] {
-      background-color: $active_light;
-      &[class*=dark] {
-        background-color: rgba($white, $opacity_1);
-      }
-      [class*=_item_link] {
-        [class*=_item_text]{
-          color: $primary;
+      &[class*="_active"] {
+        background-color: $active_light;
+        &[class*="dark"] {
+          background-color: rgba($white, $opacity_1);
+          [class*="_item_text"] {
+            color: $white !important;
+          }
+        }
+        [class*="_item_text"] {
+          color: $primary !important;
         }
       }
     }
   }
 
   // Bold Variant
-  &[class*=_bold] {
+  &[class*="_bold"] {
     @include bold;
     // Horizontal Overrides
-    [class*=pb_nav_list_kit_item] {
+    [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"] {
       margin: 0;
-      [class*=_item_text]{
+      [class*="_item_text"] {
         font-weight: $regular;
       }
     }
-    [class*=_active] {
-      [class*=_text] {
-        color: $white;
+    [class*="_active"] {
+      [class*="_text"] {
+        color: $white !important;
       }
     }
   }
 
-  &[class*=dark]{
-    [class*=pb_nav_list_kit_item]{
-      [class*=_link]{
-        border-color: rgba($white, $opacity_3);
-      }
-      &[class*=_active] [class*=_link]{
+  &[class*="dark"] {
+    [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"] {
+      border-color: rgba($white, $opacity_3);
+      &[class*="_active"] {
         border-color: $active_dark;
-        [class*=_text],[class*=_icon]{
+        [class*="_text"],
+        [class*="_icon"] {
           color: $text_dk_default;
         }
       }
-      [class*=_link] {
-        [class*=_text],[class*=_icon]{
-          color: $text_dk_lighter;
-        }
-        &:hover{
-          background-color: rgba($white, $opacity_1);
-          [class*=_icon],[class*=_text] {
-            color: $white;
-          }
+      [class*="_text"],
+      [class*="_icon"] {
+        color: $text_dk_lighter;
+      }
+      &:hover {
+        background-color: rgba($white, $opacity_1);
+        [class*="_icon"],
+        [class*="_text"] {
+          color: $white !important;
         }
       }
     }

@@ -11,71 +11,61 @@
 
 $selector: ".pb_nav_list";
 
-[class^=pb_nav_list][class*=_vertical] {
-  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  [class*=pb_nav_list_title] {
+[class^="pb_nav_list"][class*="_vertical"] {
+  [class*="pb_nav_list_title"] {
     padding: 0 $space_md $space_sm $space_sm;
   }
 
   // Normal Variant
-  &[class*=_normal]  {
-    [class*=pb_nav_list_kit_item] {
-      list-style: none;
+  &[class*="_normal"] {
+    [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"] {
       border-bottom: 1px solid $border_light;
-      &[class*=_active] {
-        [class*=_link] {
-          border-color: $primary;
-          [class*=_item_icon] {
-            color: $primary;
-          }
-          [class*=_item_text] {
-            color: $primary;
-            font-weight: $bold;
-          }
+      &[class*="_active"] {
+        border-left-color: $primary !important;
+        [class*="_item_icon"] {
+          color: $primary !important;
+        }
+        [class*="_item_text"] {
+          color: $primary !important;
+          font-weight: $bold;
         }
       }
-      [class*=_link] {
+      &[class*="_link"] {
         text-decoration: none;
         display: flex;
         align-items: center;
         padding: $space_sm $space_sm $space_sm ($space_sm - 3px);
-        border: 0 solid transparent;
-        border-width: 0 0 0 3px;
+        border-left: 0 solid transparent;
+        border-left-width: 3px;
         transition-property: color, border-color, background-color;
         transition-duration: 0.15s;
         transition-timing-function: $bezier;
-        @media (hover:hover) {
+        @media (hover: hover) {
           &:hover {
             background-color: rgba($primary, 0.03);
-            [class*=_icon] {
+            [class*="_icon"] {
               color: $primary;
             }
-            [class*=_text] {
+            [class*="_text"] {
               color: $primary !important;
             }
           }
         }
-        [class*=_icon_left] {
+        [class*="_icon_left"] {
           font-size: $font_large;
           margin-right: $space_xs;
           color: $text_lt_lighter;
         }
-        [class*=_icon_right] {
+        [class*="_icon_right"] {
           font-size: $font_large;
           margin-left: $space_sm;
           color: $text_lt_default;
         }
-        [class*=_text] {
-          font-size: $font_base;
+        [class*="_text"] {
           color: $text_lt_default;
           flex: 1;
         }
-        [class*=_img_left] {
+        [class*="_img_left"] {
           margin-right: $space_xs;
           height: 20px;
           width: 25px;
@@ -85,49 +75,51 @@ $selector: ".pb_nav_list";
         border-bottom: 0;
       }
     }
-
   }
 
   // Subtle Variant
-  &[class*=_subtle] {
+  &[class*="_subtle"] {
     @include subtle;
   }
 
   // Bold Variant
-  &[class*=_bold] {
+  &[class*="_bold"] {
     @include bold;
   }
 
   // Show Highlight
-  &[class*=_highlight] {
-    [class*=_active] {
+  &[class*="_highlight"] {
+    [class*="_active"] {
       background-color: $active_light;
     }
-    &[class*=dark]{
-      [class*=_active] {
-      background-color: rgba($white, $opacity_1);
-    }
+    &[class*="dark"] {
+      [class*="_active"] {
+        background-color: rgba($white, $opacity_1);
+      }
     }
   }
 
-  &[class*=dark]{
-    background: tint($bg_dark,10%);
-    [class*=pb_nav_list_kit_item]{
+  &[class*="dark"] {
+    background: tint($bg_dark, 10%);
+    [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"] {
       border-color: rgba($white, $opacity_1);
-      &[class*=_active] [class*=_link]{
-        border-color: $white;
-        [class*=_text],[class*=_icon]{
-          color: $text_dk_default;
+      &[class*="_active"] {
+        border-left-color: $white !important;
+        [class*="_item_text"],
+        [class*="_item_icon"] {
+          color: $text_dk_default !important;
         }
       }
-      [class*=_link] {
-        [class*=_text],[class*=_icon]{
-          color: $text_dk_lighter;
-        }
-        &:hover{
+      [class*="_item_text"],
+      [class*="_item_icon"] {
+        color: $text_dk_lighter !important;
+      }
+      &[class*="_link"] {
+        &:hover {
           background-color: rgba($white, $opacity_1);
-          [class*=_icon],[class*=_text] {
-            color: $white;
+          [class*="_icon"],
+          [class*="_text"] {
+            color: $white !important;
           }
         }
       }
@@ -135,13 +127,12 @@ $selector: ".pb_nav_list";
   }
 
   //Borderless
-  &[class*=_borderless] {
-    [class*=pb_nav_list_kit_item] {
+  &[class*="_borderless"] {
+    [class*="pb_nav_list_kit_item"] {
       list-style: none;
-      border-bottom: 0;
+      border-bottom: 0 !important;
     }
   }
-
 }
 
 //Image Wrapper
