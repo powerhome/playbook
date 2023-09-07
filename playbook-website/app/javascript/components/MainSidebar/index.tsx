@@ -6,23 +6,23 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
   const collapsibles = kits.map(() => useCollapsible(true));
 
   //using localstorage to store index of clicked item in between page reloads
-  useEffect(() => {
-    const clicked = localStorage.getItem("clickedNavItem");
-    setTimeout(() => {
-      collapsibles.forEach(([, , setCollapsed], idx) => {
-        if (idx.toString() === clicked) {
-          setCollapsed(false);
-        }
-      });
-    }, 100);
-  }, []);
+  // useEffect(() => {
+  //   const clicked = localStorage.getItem("clickedNavItem");
+  //   setTimeout(() => {
+  //     collapsibles.forEach(([, , setCollapsed], idx) => {
+  //       if (idx.toString() === clicked) {
+  //         setCollapsed(false);
+  //       }
+  //     });
+  //   }, 100);
+  // }, []);
 
   //set up custom toggling
   const handleMainClick = (index) => {
     collapsibles.forEach(([, , setCollapsed], idx) => {
       if (idx === index) {
         setCollapsed(false);
-        localStorage.setItem("clickedNavItem", idx);
+        // localStorage.setItem("clickedNavItem", idx);
       } else {
         setCollapsed(true);
       }
