@@ -10,6 +10,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
         dark={dark}
         link={`/kits${type ? `?type=${type}` : ""}`}
         variant="bold"
+        paddingTop="xxs"
       >
         <NavItem
           collapsed={false}
@@ -21,8 +22,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
           iconRight={["plus", "minus"]}
           key="top-nav-item"
           link={`/kits`}
-          marginBottom="none"
-          marginTop="xxs"
+          marginY="none"
           text="Components"
           paddingY="xxs"
         >
