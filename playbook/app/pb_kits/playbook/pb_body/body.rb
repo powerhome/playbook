@@ -54,7 +54,7 @@ module Playbook
       end
 
       def hover_class
-        text_hover ? "text_hover" : false
+        text_hover ? "text_hover" : nil
       end
     end
   end
