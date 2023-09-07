@@ -5,7 +5,7 @@
 
 Nesting navigation is easy with the Nav kit's new Collapsible variant. And we didn't stop at a built-in collapsible feature, we refactored the Nav kit to make it more flexible overall! You can now use global props to customize text, spacing, and icons, making Nav kit design possibilities almost endless!
 
-[13.2.0](https://github.com/powerhome/playbook/tree/13.2.0) full list of changes:
+**[13.2.0](https://github.com/powerhome/playbook/tree/13.2.0) full list of changes:**
 
 **Kit Enhancements:**
 
@@ -24,7 +24,7 @@ Nesting navigation is easy with the Nav kit's new Collapsible variant. And we di
 
 The File Upload kit for Rails ViewComponents redefines HTML's default input to match Playbook's aesthetics, ensuring consistency and elegance for every upload. 🚀📂🎉
 
- [13.1.0](https://github.com/powerhome/playbook/tree/13.1.0) full list of changes:
+ **[13.1.0](https://github.com/powerhome/playbook/tree/13.1.0) full list of changes:**
 
  **Fixed Bugs:**
 
@@ -44,7 +44,7 @@ The File Upload kit for Rails ViewComponents redefines HTML's default input to m
 
 Say goodbye to the old and make way for the new as we bid adieu to moment.js in our Playbook design system! We've given our Date and Time kits a makeover, retiring the dated library in favor of a more vibrant and efficient solution. Our kits still handle dates and times flawlessly, but with the breakup, our bundle size has shed a whopping 25%, giving you a snappier experience.
 
-[13.0.0](https://github.com/powerhome/playbook/tree/13.0.0) full list of changes:
+**[13.0.0](https://github.com/powerhome/playbook/tree/13.0.0) full list of changes:**
 
 **Breaking changes:**
 
@@ -59,7 +59,7 @@ Say goodbye to the old and make way for the new as we bid adieu to moment.js in 
 
 Have a stack of collapsible sections and need a way to expand & collapse them all at once? You can now implement external controls like buttons to do just that! There’s more -- you can also pass custom icons like plus (‘+’) or minus (‘-’) if you don’t fancy chevrons.
 
- [12.39.0](https://github.com/powerhome/playbook/tree/12.39.0)  full list of changes:
+ **[12.39.0](https://github.com/powerhome/playbook/tree/12.39.0)  full list of changes:**
 
 **Kit Enhancements:**
 
@@ -93,7 +93,7 @@ List of changes:
 
 Get better control over your forms with our new input_options prop on our Text Input kit! Set any HTML input option as a prop and have it effortlessly get passed down to the styled input! 
 
-[12.37.0](https://github.com/powerhome/playbook/tree/12.37.0) full list of changes:
+**[12.37.0](https://github.com/powerhome/playbook/tree/12.37.0) full list of changes:**
 
 **Kit Enhancements:**
 
@@ -132,7 +132,7 @@ List of changes:
 
 Highlight users dynamically within chats with our new Message kit subcomponent, @mentions! Choose 'user' (default, blue) or 'self' (yellow) variants for easy implementation and level up your chat experience!
 
- [12.35.0](https://github.com/powerhome/playbook/tree/12.35.0) full list of changes:
+ **[12.35.0](https://github.com/powerhome/playbook/tree/12.35.0) full list of changes:**
 
  **Kit Enhancements:**
 
@@ -153,7 +153,7 @@ Highlight users dynamically within chats with our new Message kit subcomponent, 
 
 The new [Reaction Button variant](https://playbook.powerapp.cloud/kits/button/react#reaction-button) and its delightful, dynamic UI is our latest enhancement to your users' chat experience! Watch as emoji use and interactions take center stage, making every conversation more immersive and enjoyable. Say goodbye to bland chats and let emotions shine through like never before!
 
-[12.34.0](https://github.com/powerhome/playbook/tree/12.34.0) full list of changes:
+**[12.34.0](https://github.com/powerhome/playbook/tree/12.34.0) full list of changes:**
 
 **Kit Enhancements:**
 
@@ -172,7 +172,7 @@ The new [Reaction Button variant](https://playbook.powerapp.cloud/kits/button/re
 
 Add some flair to your page by adjusting the shadow, scaling, or background color of elements when they’re being hovered over. The global hover prop is in beta now, and works with all kits. In particular, try it out with the Card, Button, or Message kit to add interactions to your page!
 
-[12.33.0](https://github.com/powerhome/playbook/tree/12.33.0) full list of changes:
+**[12.33.0](https://github.com/powerhome/playbook/tree/12.33.0) full list of changes:**
 
 **Kit Enhancements:**
 
@@ -199,7 +199,7 @@ Add some flair to your page by adjusting the shadow, scaling, or background colo
 
 Level up your toasts with our latest feature – "Children" for Fixed Confirmation Toast Kit! 🚀 Now, web developers can fully customize Fixed Confirmation Toast contents by easily passing ‘children’, making it a breeze to add custom content like links to your toasts. Say goodbye to static toasts and say hello to interactive and engaging user experiences! 🎉
 
-[12.32.0](https://github.com/powerhome/playbook/tree/12.32.0) full list of changes:
+**[12.32.0](https://github.com/powerhome/playbook/tree/12.32.0) full list of changes:**
 
 **Kit Enhancements:**
 
@@ -221,7 +221,7 @@ Level up your toasts with our latest feature – "Children" for Fixed Confirmati
 
 Titles can now dynamically change based on screen size, making responsive design easier to implement. [Try it out](https://playbook.powerapp.cloud/kits/title/react#responsive) by passing multiple size values to the size prop!
 
-[12.31.0](https://github.com/powerhome/playbook/tree/12.31.0) full list of changes:
+**[12.31.0](https://github.com/powerhome/playbook/tree/12.31.0) full list of changes:**
 
 **Kit Enhancements:**
 
@@ -240,7 +240,7 @@ Titles can now dynamically change based on screen size, making responsive design
 
 Sometimes tables can be very data heavy and users run out of room quickly. With the new default spacing in the first and last columns, there is more room in the table, allowing users to add more data!
 
-[12.30.1](https://github.com/powerhome/playbook/tree/12.30.0) full list of changes:
+**[12.30.1](https://github.com/powerhome/playbook/tree/12.30.0) full list of changes:**
 
 **Kit Enhancements:**
 
@@ -266,7 +266,7 @@ Sometimes tables can be very data heavy and users run out of room quickly. With 
 
 A new Quick Pick variant now in DatePicker! This sleek and intuitive component provides a range of pre-defined date options, enhances user experience, and streamlines workflows.
 
-[12.29.0](https://github.com/powerhome/playbook/tree/12.29.0) full list of changes:
+**[12.29.0](https://github.com/powerhome/playbook/tree/12.29.0) full list of changes:**
 
 **Kit Enhancements:**
 
@@ -283,7 +283,7 @@ A new Quick Pick variant now in DatePicker! This sleek and intuitive component p
 
 We’ve updated our PhoneNumberInput so that it’s more react-friendly. You can now pass a ref directly to the PhoneNumberInput kit, giving you more control over the input! This should make it much easier to manually clear the values when using with form libraries like formik, react-hook-form, or any form in general.
 
-[12.28.0](https://github.com/powerhome/playbook/tree/12.28.0) full list of changes:
+**[12.28.0](https://github.com/powerhome/playbook/tree/12.28.0) full list of changes:**
 
 **Kit Enhancements:**
 
@@ -302,7 +302,7 @@ We’ve updated our PhoneNumberInput so that it’s more react-friendly. You can
 
 We're excited to announce the release of our Multi Level Select kit for Rails and React. With [this zero-dependency component](https://playbook.powerapp.cloud/kits/multi_level_select/react), developers can easily add data to complex forms, bringing effortless navigation to any application. 
 
-[12.27.0](https://github.com/powerhome/playbook/tree/12.27.0) full list of changes:
+**[12.27.0](https://github.com/powerhome/playbook/tree/12.27.0) full list of changes:**
 
 
 **Kit Enhancements:**
@@ -325,7 +325,7 @@ We're excited to announce the release of our Multi Level Select kit for Rails an
 
 Need to display a wealth of information without cluttering your UI? Look no further than our brand-new Detail Kit! Designed specifically for showcasing hierarchical relationships of text and maintaining clarity in data-rich layouts, Detail is your go-to solution for tables, charts, and data-heavy UI.
 
-[12.26.1](https://github.com/powerhome/playbook/tree/12.26.0) full list of changes:
+**[12.26.1](https://github.com/powerhome/playbook/tree/12.26.0) full list of changes:**
 
 **Kit Enhancements:**
 
@@ -353,7 +353,7 @@ Sometimes you don't need all the styles that ship with the Date kit.
 We have added a simple boolean prop called "unstyled" that puts control in your hands.
 You can now wrap our Date kit with any of our typography kits (Title, Body, Caption, etc) and the date kit will inherit that component's styles! 🎉
 
-[12.25.0](https://github.com/powerhome/playbook/tree/12.25.0) full list of changes:
+**[12.25.0](https://github.com/powerhome/playbook/tree/12.25.0) full list of changes:**
 
 **Kit Enhancements:**
 

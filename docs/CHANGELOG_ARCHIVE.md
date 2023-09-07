@@ -11,7 +11,7 @@ With all components, you can specify any of our spacing props values at certain 
 
 Give it a try and let us know what you think!
 
-[12.24.0](https://github.com/powerhome/playbook/tree/12.24.0) full list of changes:
+**[12.24.0](https://github.com/powerhome/playbook/tree/12.24.0) full list of changes:**
 
 **Kit Enhancements:**
 - Title 2 Defaults to Bold [\#2559](https://github.com/powerhome/playbook/pull/2559) ([jasperfurniss](https://github.com/jasperfurniss))
