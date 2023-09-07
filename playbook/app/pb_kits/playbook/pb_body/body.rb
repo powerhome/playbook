@@ -18,9 +18,11 @@ module Playbook
                           default: false
       prop :highlighted_text, type: Playbook::Props::Array,
                               default: []
+      prop :text_hover, type: Playbook::Props::Boolean,
+                        default: false
 
       def classname
-        generate_classname("pb_body_kit", color_class, status_class)
+        generate_classname("pb_body_kit", color_class, status_class, hover_class)
       end
 
       def content
@@ -42,6 +44,10 @@ module Playbook
 
       def status_class
         status == "neutral" ? nil : status
+      end
+
+      def hover_class
+        text_hover ? "text_hover" : false
       end
     end
   end

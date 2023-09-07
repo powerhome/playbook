@@ -19,6 +19,7 @@ type BodyProps = {
   status?: 'neutral' | 'negative' | 'positive',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
+  textHover?: boolean,
   variant?: null | 'link',
 } & GlobalProps
 
@@ -36,13 +37,15 @@ const Body = (props: BodyProps): React.ReactElement => {
     status = null,
     tag = 'div',
     text = '',
+    textHover = "",
     variant = null,
   } = props
 
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
+  const hoverClass = textHover ? "text_hover" : ""
   const classes = classnames(
-    buildCss('pb_body_kit', color, variant, status),
+    buildCss('pb_body_kit', color, variant, status, hoverClass),
     globalProps(props),
     className
   )
