@@ -4,7 +4,7 @@
     flex: 1;
 
     [class*="pb_card_kit"] {
-      height: 126px;
+      height: 120px;
       align-items: center;
       justify-content: center;
     }
@@ -16,17 +16,17 @@
     }
   }
 
-  @include break_on($screen-md-min, $screen-xl-min) {
+  @include break_on($screen-md-min, $screen-xl-max) {
     .language-card {
       max-width: 350px;
 
       [class*="pb_card_kit"] {
-        height: 180px;
+        height: 160px;
       }
     }
   }
 
-  @include break_at($screen-xs-min) {
+  @include break_at($screen-xl-max) {
     .explore-button {
       justify-content: center;
     }
