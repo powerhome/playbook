@@ -1,13 +1,13 @@
 import React from 'react'
 import { Collapsible } from '../..'
 
-const CollapsibleSize = () => (
+const CollapsibleSize = (props) => (
   <div>
     <Collapsible
         iconSize="xs"
         marginBottom="xs"
     >
-      <Collapsible.Main>
+      <Collapsible.Main {...props}>
         <div>{'Extra Small Section'}</div>
       </Collapsible.Main>
       <Collapsible.Content>
@@ -22,7 +22,7 @@ const CollapsibleSize = () => (
         iconSize="sm"
         marginBottom="xs"
     >
-      <Collapsible.Main>
+      <Collapsible.Main {...props}>
         <div>{'Small Section'}</div>
       </Collapsible.Main>
       <Collapsible.Content>
@@ -36,7 +36,7 @@ const CollapsibleSize = () => (
     <Collapsible
         marginBottom="xs"
     >
-      <Collapsible.Main>
+      <Collapsible.Main {...props}>
         <div>{'Default Section'}</div>
       </Collapsible.Main>
       <Collapsible.Content>
@@ -51,7 +51,7 @@ const CollapsibleSize = () => (
         iconSize="lg"
         marginBottom="xs"
     >
-      <Collapsible.Main>
+      <Collapsible.Main {...props}>
         <div>{'Large Section'}</div>
       </Collapsible.Main>
       <Collapsible.Content>

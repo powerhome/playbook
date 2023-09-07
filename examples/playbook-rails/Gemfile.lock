@@ -133,7 +133,7 @@ GEM
       digest
       net-protocol
       timeout
-    nio4r (2.5.8)
+    nio4r (2.5.9)
     nokogiri (1.13.9-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.9-x86_64-linux)
@@ -148,7 +148,7 @@ GEM
       view_component (= 2.55.0)
       webpacker-react (~> 0.3.2)
     public_suffix (5.0.0)
-    puma (5.6.5)
+    puma (5.6.7)
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.6.4)
@@ -264,7 +264,7 @@ DEPENDENCIES
   font-awesome-sass (~> 6.2.0)
   jbuilder
   playbook_ui
-  puma (~> 5.0)
+  puma (~> 5.6)
   rails (~> 7.0.4)
   sassc-rails
   selenium-webdriver

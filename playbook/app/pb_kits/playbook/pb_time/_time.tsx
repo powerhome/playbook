@@ -1,9 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 
-import DateTime from "../pb_kit/dateTime";
 import { buildCss } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
+import DateTime from '../pb_kit/dateTime';
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -13,7 +13,7 @@ type TimeProps = {
   align?: "left" | "center" | "right";
   className?: string | string[];
   data?: string;
-  date: string;
+  date: Date;
   dark?: boolean;
   id?: string;
   showIcon?: boolean;
@@ -40,8 +40,6 @@ const Time = (props: TimeProps) => {
     globalProps(props),
     className
   );
-
-  const dateTimestamp = new DateTime({ value: date, zone: timeZone });
 
   return (
     <div className={classes}>
@@ -70,18 +68,18 @@ const Time = (props: TimeProps) => {
             )
       )}
 
-      <time dateTime={date}>
+      <time dateTime={date.toLocaleString()}>
         <span>
           {unstyled
             ? (
                 <>
                   <span>
-                    {dateTimestamp.toTimeWithMeridian()}
+                    {DateTime.toTimeWithMeridiem(date, timeZone)}
                   </span>
                   {" "}
                   {showTimezone && (
                     <span>
-                      {dateTimestamp.toTimezone()}
+                      {DateTime.toTimeZone(date, timeZone)}
                     </span>
                   )}
                 </>
@@ -92,13 +90,13 @@ const Time = (props: TimeProps) => {
                     <Body
                         className="pb_time"
                         tag="span"
-                        text={dateTimestamp.toTimeWithMeridian()}
+                        text={DateTime.toTimeWithMeridiem(date, timeZone)}
                     />{" "}
                     {showTimezone && (
                       <Body
                           color="light"
                           tag="span"
-                          text={dateTimestamp.toTimezone()}
+                          text={DateTime.toTimeZone(date, timeZone)}
                       />
                     )}
                   </>
@@ -108,13 +106,13 @@ const Time = (props: TimeProps) => {
                     <Caption
                         color="light"
                         tag="span"
-                        text={dateTimestamp.toTimeWithMeridian()}
+                        text={DateTime.toTimeWithMeridiem(date, timeZone)}
                     />{" "}
                     {showTimezone && (
                       <Caption
                           color="light"
                           tag="span"
-                          text={dateTimestamp.toTimezone()}
+                          text={DateTime.toTimeZone(date, timeZone)}
                       />
                     )}
                   </>
