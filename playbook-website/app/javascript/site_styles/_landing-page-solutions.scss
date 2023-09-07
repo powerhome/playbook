@@ -4,7 +4,7 @@
     flex: 1;
 
     [class*="pb_card_kit"] {
-      min-height: 126px;
+      height: 126px;
       align-items: center;
       justify-content: center;
     }
@@ -14,37 +14,21 @@
     .solutionsContainer {
       margin-right: 0 !important;
     }
+  }
 
+  @include break_on($screen-md-min, $screen-xl-min) {
     .language-card {
-      max-width: 166px;
-    }
+      max-width: 350px;
 
-    .card-container {
-      column-gap: $space_sm;
+      [class*="pb_card_kit"] {
+        height: 180px;
+      }
     }
   }
 
-  @include break_at($screen-xl-min) {
+  @include break_at($screen-xs-min) {
     .explore-button {
       justify-content: center;
-    }
-  }
-
-  @include break_on($screen-xs-min, $screen-xl-min) {
-    .language-card {
-      max-width: 294px;
-    }
-  }
-
-  @include break_on($screen-xs-min, $screen-md-min) {
-    .language-card {
-      max-width: 200px;
-    }
-  }
-
-  @include break_at(710px) {
-    .language-card {
-      max-width: 162px;
     }
   }
 
