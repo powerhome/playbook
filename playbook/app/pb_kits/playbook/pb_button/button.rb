@@ -29,9 +29,9 @@ module Playbook
                   values: ["sm", "md", "lg", nil],
                   default: nil
       prop :form, default: nil
-      prop :font_style, type: Playbook::Props::Enum,
-                        values: %w[far fas fab fak],
-                        default: "far"
+      prop :icon_font_family, type: Playbook::Props::Enum,
+                              values: %w[far fas fab fak],
+                              default: "far"
 
       def options
         {

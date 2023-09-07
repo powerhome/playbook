@@ -27,10 +27,6 @@
     @include title_colors;
   }
 
-  &.dark {
-    @include pb_title_dark;
-  }
-
   &[class*=_thin] {
     @include pb_title_thin;
   }
@@ -50,5 +46,8 @@
           }
         }
     }
+  }
+  &.dark {
+    @include pb_title_dark;
   }
 }

@@ -165,7 +165,7 @@ body {
 
   &--footer {
     background-color: $bg_dark;
-    padding: $space_lg * 2 0;
+    padding: $space_lg * 2 0 40px;
     margin-top: auto;
     .inner-footer-wrapper {
       margin: 0 auto;
@@ -179,6 +179,7 @@ body {
     .copyright-tag {
       text-align: center;
     }
+   
     // reformat footer links on smaller screens
     @include break_at(650px){
       [class^=pb_flex_kit] {
