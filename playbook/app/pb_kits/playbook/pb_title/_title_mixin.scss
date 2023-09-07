@@ -16,3 +16,22 @@ $pb_title_colors: (
     }
   }
 }
+
+$pb_title_truncate: (
+  truncate_1: 1,
+  truncate_2: 2,
+  truncate_3: 3,
+  truncate_4: 4,
+  truncate_5: 5
+);
+
+@mixin title_truncate {
+  @each $name, $number in $pb_title_truncate {
+    &[class*=_#{$name}] {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: $number;
+      -webkit-box-orient: vertical; 
+    }
+  }
+}

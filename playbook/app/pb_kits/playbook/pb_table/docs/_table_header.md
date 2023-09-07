@@ -1,0 +1,1 @@
+A kit that produces a `<th>` tag. You can also use the `sort_menu` prop to make the header a sortable link, just like <a href="https://playbook.powerapp.cloud/kits/filter#sort-only" target="_blank">our filter kit.</a>
