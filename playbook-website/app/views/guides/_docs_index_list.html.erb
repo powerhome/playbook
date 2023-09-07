@@ -1,0 +1,23 @@
+<% if @navigation.present? %>
+  <%= pb_rails("layout", props: { layout: "collection", margin_y: "xl", padding_bottom: "xl" }) do %>
+    <%= pb_rails("layout/body") do %>
+      <% @navigation.each do |page_name| %>
+        <%= link_to doc_link(@parent, page_name), class: "display_flex align_items_stretch" do %>
+          <%= pb_rails("card", props: { padding: "none", hover: { shadow: "deep" }, flex: 1} ) do %>
+            <%= pb_rails("background" ) do %>
+              <%= pb_rails("flex", props: { justify: "center", padding: "xl"} ) do %>
+                <%= pb_rails("icon_circle", props: { icon: "files", variant: "royal" }) %>
+              <% end %>
+            <% end %>
+            <%= pb_rails("flex", props: { justify: "between", align: "center", padding: "sm"} ) do %>
+              <%= pb_rails("title", props: { size: 4, color: "link", text: page_name.titleize }) %>
+              <%= pb_rails("title", props: { size: 4, color: "link" }) do %>
+                <%= pb_rails("icon", props: { icon: "arrow-right-long" }) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

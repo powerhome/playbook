@@ -28,11 +28,13 @@ class PagesController < ApplicationController
   end
 
   def changelog
-    @changelog = Playbook::Engine.root.join("CHANGELOG.md").read
-    @page_title = "What's New"
+    file = Playbook::Engine.root.join("CHANGELOG.md")
+    @changelog = file.read
     respond_to do |format|
       format.html do
         @show_sidebar = false
+        @page_title = "What's New"
+        @front_matter = nil
         render layout: "docs"
       end
       format.json do
