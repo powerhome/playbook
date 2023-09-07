@@ -3,11 +3,6 @@ import { Nav, NavItem } from "playbook-ui";
 import { linkFormat } from "../../utilities/website_sidebar_helper";
 
 const MainSidebar = ({ dark, type, category, kit, kits }) => {
-  const handleClick = (link, type) => {
-    setTimeout(() => {
-      window.location.href = `/kit_category/${Object.keys(link)}?type=${type}`;
-    }, 1200);
-  };
 
   return (
     <>
@@ -26,15 +21,14 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
           iconRight={["plus", "minus"]}
           key="top-nav-item"
           link={`/kits`}
-          marginY="xxs"
+          marginBottom="none"
+          marginTop="xxs"
           text="Components"
           paddingY="xxs"
         >
           {kits.map((link, i) =>
             typeof link === "object" ? (
                 <NavItem
-                  // onClick={() => handleClick(link, type)}
-                  // onIconRightClick={}
                   active={category === Object.keys(link)[0]}
                   collapsible
                   collapsibleTrail
@@ -43,7 +37,8 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
                   iconRight={["plus", "minus"]}
                   key={`${Object.keys(link)[0]}-${i}`}
                   link={`/kit_category/${Object.keys(link)}?type=${type}`}
-                  marginY="xxs"
+                  marginBottom="none"
+                  marginTop="xxs"        
                   text={linkFormat(Object.keys(link))}
                   paddingY="xxs"
                 >
@@ -67,7 +62,8 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
                 fontSize="small"
                 key={`${link}-${i}`}
                 link={`/kits/${link}?type=${type}`}
-                marginY="xxs"
+                marginBottom="none"
+                marginTop="xxs"      
                 text={linkFormat(link)}
                 paddingY="xxs"
               />
