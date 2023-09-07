@@ -1,13 +1,13 @@
 start:
 	docker compose up
 
-build: placeYarnConfig
+build:
 	docker compose build
 
 bundle:
 	docker compose run web bundle
 
-yarn: placeYarnConfig
+yarn:
 	docker compose run web yarn
 
 install:
@@ -16,13 +16,13 @@ install:
 it:
 	make install && make start
 
-test: placeYarnConfig
+test:
 	docker compose run web bin/test
 
-shell: placeYarnConfig
+shell:
 	docker compose run web /bin/bash --login
 
-console: placeYarnConfig
+console:
 	docker compose run web bin/rails console
 
 stop:
@@ -31,5 +31,5 @@ stop:
 clean:
 	docker compose down --rmi all --volumes
 
-changelog: placeYarnConfig
+changelog:
 	docker compose run web bundle exec github_changelog_generator
