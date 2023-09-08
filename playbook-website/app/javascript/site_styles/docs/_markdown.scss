@@ -59,6 +59,11 @@
       transition: 0.1s all ease-in-out;
     }
   }
+  h4:last-of-type {
+    border-top: 1px solid $border_light;
+    padding-top: $space_md;
+    font-weight: $regular;
+  }
   hr {
     margin: 2.2rem 0;
     box-sizing: content-box;
