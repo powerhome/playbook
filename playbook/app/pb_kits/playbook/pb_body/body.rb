@@ -21,11 +21,9 @@ module Playbook
       prop :truncate, type: Playbook::Props::Enum,
                       values: [nil, "1", "2", "3", "4", "5"],
                       default: nil
-      prop :text_hover, type: Playbook::Props::Boolean,
-                        default: false
 
       def classname
-        generate_classname("pb_body_kit", color_class, status_class, is_truncated, hover_class)
+        generate_classname("pb_body_kit", color_class, status_class, is_truncated)
       end
 
       def content
@@ -51,10 +49,6 @@ module Playbook
 
       def status_class
         status == "neutral" ? nil : status
-      end
-
-      def hover_class
-        text_hover ? "text_hover" : nil
       end
     end
   end

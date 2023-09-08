@@ -28,7 +28,7 @@ const TableOneAction = (props) => {
             <Button
                 onClick={() => alert('button clicked!')}
                 paddingLeft="none"
-                text="Tetriary Action"
+                text="Tertiary Action"
                 variant="link"
                 {...props}
             />
@@ -49,7 +49,7 @@ const TableOneAction = (props) => {
             <Button
                 onClick={() => alert('button clicked!')}
                 paddingLeft="none"
-                text="Tetriary Action"
+                text="Tertiary Action"
                 variant="link"
                 {...props}
             />
@@ -70,7 +70,7 @@ const TableOneAction = (props) => {
             <Button
                 onClick={() => alert('button clicked!')}
                 paddingLeft="none"
-                text="Tetriary Action"
+                text="Tertiary Action"
                 variant="link"
                 {...props}
             />
