@@ -179,7 +179,6 @@ body {
     .copyright-tag {
       text-align: center;
     }
-   
     // reformat footer links on smaller screens
     @include break_at(650px){
       [class^=pb_flex_kit] {
