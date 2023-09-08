@@ -4,7 +4,9 @@ import { linkFormat } from "../../utilities/website_sidebar_helper";
 
 const MainSidebar = ({ dark, type, category, kit, kits }) => {
   //hook into collapsible logic for all nested nav items
-  const collapsibles = kits.map(() => useCollapsible(true));
+  const collapsibles = kits.map(() => useCollapsible());
+
+  const currentURL = window.location.pathname + window.location.search;
 
   //set up custom toggling
   const handleMainClick = (index) => {
@@ -19,14 +21,13 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
 
   //click event for right icon
   const handleIconClick = (index) => {
-    collapsibles.forEach(([, toggle], idx) => {
+    collapsibles.forEach(([collapsed, , setCollapsed], idx) => {
       if (idx === index) {
-        toggle();
+        //using setCollapsed instead of toggle() because using toggle() here was causing a strange animation bug
+        collapsed === true ? setCollapsed(false) : setCollapsed(true)
       }
     });
   };
-
-  const currentURL = window.location.pathname + window.location.search;
 
   return (
     <>
@@ -64,9 +65,10 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
                 <NavItem
                   active={category === Object.keys(link)[0]}
                   collapsed={
-                    category === Object.keys(link)[0] || hasActiveSublink
-                      ? false
-                      : currentURL === `/kit_category/${Object.keys(link)}?type=${type}` 
+                    category === Object.keys(link)[0] ||
+                    hasActiveSublink ||
+                    currentURL ===
+                      `/kit_category/${Object.keys(link)}?type=${type}`
                       ? false
                       : collapsed
                   }
