@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Nav, NavItem, useCollapsible } from "playbook-ui";
 import { linkFormat } from "../../utilities/website_sidebar_helper";
 
 const MainSidebar = ({ dark, type, category, kit, kits }) => {
+//state for which item is currently active
+  const [activeItem, setActiveItem] = useState()
+  //hook into collapsible logic for all nested nav items
   const collapsibles = kits.map(() => useCollapsible(true));
 
   //set up custom toggling
@@ -16,11 +19,22 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
     });
   };
 
+  const handleIconClick = (index) => {
+    collapsibles.forEach(([,toggle, ], idx) => {
+      if (idx === index) {
+        toggle();
+      } 
+    });
+  }
+
+  const handleComponentsClick = () => {
+    //logic here
+  }
+
   return (
     <>
       <Nav
         dark={dark}
-        link={`/kits${type ? `?type=${type}` : ""}`}
         variant="bold"
         paddingTop="xxs"
       >
@@ -33,17 +47,18 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
           fontWeight="bolder"
           iconRight={["plus", "minus"]}
           key="top-nav-item"
-          link={`/kits`}
+          link={`/kits${type ? `?type=${type}` : ""}`}
           marginY="none"
-          text="Components"
+          onClick={()=> handleComponentsClick()}
           paddingY="xxs"
+          text="Components"
         >
           {kits.map((link, i) => {
             const [collapsed] = collapsibles[i];
             return typeof link === "object" ? (
               <NavItem
                 active={category === Object.keys(link)[0]}
-                collapsed={collapsed}
+                collapsed={category === Object.keys(link)[0] ? false : collapsed}
                 collapsible
                 collapsibleTrail
                 dark={dark}
@@ -54,6 +69,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
                 marginBottom="none"
                 marginTop="xxs"
                 onClick={() => handleMainClick(i)}
+                onIconRightClick={()=> handleIconClick(i)}
                 paddingY="xxs"
                 text={linkFormat(Object.keys(link))}
               >
