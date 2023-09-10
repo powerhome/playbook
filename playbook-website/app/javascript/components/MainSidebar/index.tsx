@@ -42,11 +42,12 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
           fontWeight="bolder"
           iconRight={["plus", "minus"]}
           key="top-nav-item"
-          link={
-            currentURL === `/kits${type ? `?type=${type}` : ""}`
-              ? ""
-              : `/kits${type ? `?type=${type}` : ""}`
-          }
+          // link={
+          //   currentURL === `/kits${type ? `?type=${type}` : ""}`
+          //     ? ""
+          //     : `/kits${type ? `?type=${type}` : ""}`
+          // }
+          link={`/kits${type ? `?type=${type}` : ""}`}
           marginY="none"
           paddingY="xxs"
           text="Components"
@@ -80,12 +81,13 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
                   fontSize="small"
                   iconRight={["plus", "minus"]}
                   key={`${Object.keys(link)[0]}-${i}`}
-                  link={
-                    currentURL ===
-                    `/kit_category/${Object.keys(link)}?type=${type}`
-                      ? ""
-                      : `/kit_category/${Object.keys(link)}?type=${type}`
-                  }
+                  // link={
+                  //   currentURL ===
+                  //   `/kit_category/${Object.keys(link)}?type=${type}`
+                  //     ? ""
+                  //     : `/kit_category/${Object.keys(link)}?type=${type}`
+                  // }
+                  link={`/kit_category/${Object.keys(link)}?type=${type}`}
                   marginBottom="none"
                   marginTop="xxs"
                   onClick={() => handleMainClick(i)}
@@ -100,11 +102,12 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
                       dark={dark}
                       fontSize="small"
                       key={`${sublink}-${i}`}
-                      link={
-                        currentURL === `/kits/${sublink}/${type}`
-                          ? ""
-                          : `/kits/${sublink}/${type}`
-                      }
+                      // link={
+                      //   currentURL === `/kits/${sublink}/${type}`
+                      //     ? ""
+                      //     : `/kits/${sublink}/${type}`
+                      // }
+                      link={`/kits/${sublink}/${type}`}
                       marginY="none"
                       paddingY="xxs"
                       text={linkFormat(sublink)}
@@ -120,11 +123,12 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
                   dark={dark}
                   fontSize="small"
                   key={`${link}-${i}`}
-                  link={
-                    currentURL === `/kits/${link}?type=${type}`
-                      ? ""
-                      : `/kits/${link}?type=${type}`
-                  }
+                  // link={
+                  //   currentURL === `/kits/${link}?type=${type}`
+                  //     ? ""
+                  //     : `/kits/${link}?type=${type}`
+                  // }
+                  link={`/kits/${link}?type=${type}`}
                   marginBottom="none"
                   marginTop="xxs"
                   text={linkFormat(link)}
