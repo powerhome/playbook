@@ -6,7 +6,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
   //hook into collapsible logic for all nested nav items
   const collapsibles = kits.map(() => useCollapsible());
 
-  const currentURL = window.location.pathname + window.location.search;
+  // const currentURL = window.location.pathname + window.location.search;
 
   //set up custom toggling
   const handleMainClick = (index) => {
@@ -66,14 +66,19 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
               return (
                 <NavItem
                   active={category === Object.keys(link)[0]}
-                  collapsed={
-                    category === Object.keys(link)[0] ||
-                    hasActiveSublink ||
-                    currentURL ===
-                      `/kit_category/${Object.keys(link)}?type=${type}`
-                      ? false
-                      : collapsed
-                  }
+                  // collapsed={
+                  //   category === Object.keys(link)[0] ||
+                  //   hasActiveSublink ||
+                  //   currentURL ===
+                  //     `/kit_category/${Object.keys(link)}?type=${type}`
+                  //     ? false
+                  //     : collapsed
+                  // }
+                  collapsed={category === Object.keys(link)[0] ||
+                       hasActiveSublink
+                       ? false
+                       : collapsed
+                      }
                   collapsible
                   collapsibleTrail
                   cursor="pointer"
