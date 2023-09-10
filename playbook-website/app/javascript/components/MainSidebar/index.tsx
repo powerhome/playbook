@@ -36,6 +36,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
           collapsed={false}
           collapsible
           collapsibleTrail
+          cursor="pointer"
           dark={dark}
           fontSize="small"
           fontWeight="bolder"
@@ -74,6 +75,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
                   }
                   collapsible
                   collapsibleTrail
+                  cursor="pointer"
                   dark={dark}
                   fontSize="small"
                   iconRight={["plus", "minus"]}
@@ -94,6 +96,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
                   {link[Object.keys(link)[0]].map((sublink, i) => (
                     <NavItem
                       active={kit === sublink}
+                      cursor="pointer"
                       dark={dark}
                       fontSize="small"
                       key={`${sublink}-${i}`}
@@ -113,6 +116,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
               return (
                 <NavItem
                   active={kit === link}
+                  cursor="pointer"
                   dark={dark}
                   fontSize="small"
                   key={`${link}-${i}`}
