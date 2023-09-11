@@ -4,7 +4,7 @@ registries:
     type: npm-registry
     url: npm.powerapp.cloud
     username: dependabot
-    password: ${{secrets.DEPENDABOT_PASSWORD}}
+    password: ${{secrets.POWERHOME_NPM_REGISTRY_PASSWORD}}
 updates:
   - package-ecosystem: "npm"
     directory: "/"
