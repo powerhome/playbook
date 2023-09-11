@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { Nav, NavItem, useCollapsible } from "playbook-ui";
 import { linkFormat } from "../../utilities/website_sidebar_helper";
 
 const MainSidebar = ({ dark, type, category, kit, kits }) => {
+  const [isActive, setIsActive] = useState({})
   //hook into collapsible logic for all nested nav items
   const collapsibles = kits.map(() => useCollapsible());
 
@@ -11,6 +12,11 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
   //set up custom toggling
   const handleMainClick = (index) => {
     collapsibles.forEach(([, , setCollapsed], idx) => {
+      setIsActive((prevIsActive) => {
+        const newIsActive = { ...prevIsActive };
+        newIsActive[index] = true;
+        return newIsActive;
+      });
       if (idx === index) {
         setCollapsed(false);
       } else {
@@ -19,6 +25,16 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
     });
   };
 
+  const handleNestedClick = (index) => {
+    setIsActive((prevIsActive) => {
+      const newIsActive = { ...prevIsActive };
+      newIsActive[index] = true;
+      return newIsActive;
+    });
+console.log("HERE")
+  }
+
+  console.log(isActive)
   //click event for right icon
   const handleIconClick = (index) => {
     collapsibles.forEach(([collapsed, , setCollapsed], idx) => {
@@ -45,12 +61,16 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
     if (typeof link === "object") {
       const categoryKey = Object.keys(link)[0];
       const sublinks = link[categoryKey];
-      const isActiveCategory = category === categoryKey;
+      const isActiveCategory = isActive[i] ? true : Object.keys(isActive).length === 0 ? category === categoryKey : false;
 
+      function calculateIsActiveCategory(index) {
+          return isActive[index] ? true : Object.keys(isActive).length === 0 ? category === categoryKey : false;
+      }
+      
       const hasActiveSublink = link[Object.keys(link)[0]].some(sublink => sublink === kit);
       return (
         <NavItem
-          active={isActiveCategory}
+          active={calculateIsActiveCategory(i)}
           collapsed={isActiveCategory || hasActiveSublink ? false : collapsed}
           collapsible
           collapsibleTrail
@@ -69,12 +89,13 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
         >
           {sublinks.map((sublink, j) => (
             <NavItem
-              active={kit === sublink}
+              active={isActive[j] ? true : Object.keys(isActive).length === 0 ? kit === sublink : false}
               cursor="pointer"
               dark={dark}
               fontSize="small"
               key={`${sublink}-${j}`}
               link={generateLink(categoryKey, sublink, type)}
+              onClick={()=>console.log("HERE")}
               marginY="none"
               paddingY="xxs"
               text={linkFormat(sublink)}
