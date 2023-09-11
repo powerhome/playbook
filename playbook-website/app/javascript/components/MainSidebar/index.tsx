@@ -32,13 +32,22 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
   const renderNavItem = (link, i) => {
     const [collapsed] = collapsibles[i];
 
+    const generateLink = (categoryKey, sublink, type) => {    
+      if (sublink) {
+        const link = `/kits/${sublink}/${type}`;
+        return currentURL === link ? "" : link;
+      } else {
+        const link = `/kit_category/${categoryKey}?type=${type}`;
+        return currentURL === link ? "" : link;
+      }
+    };
+    
     if (typeof link === "object") {
       const categoryKey = Object.keys(link)[0];
       const sublinks = link[categoryKey];
       const isActiveCategory = category === categoryKey;
 
       const hasActiveSublink = link[Object.keys(link)[0]].some(sublink => sublink === kit);
-      
       return (
         <NavItem
           active={isActiveCategory}
@@ -50,7 +59,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
           fontSize="small"
           iconRight={["plus", "minus"]}
           key={`${categoryKey}-${i}`}
-          link={currentURL === `/kit_category/${categoryKey}?type=${type}` ? "" : `/kit_category/${categoryKey}?type=${type}`}
+          link={generateLink(categoryKey, null, type)}          
           marginBottom="none"
           marginTop="xxs"
           onClick={() => handleMainClick(i)}
@@ -65,7 +74,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
               dark={dark}
               fontSize="small"
               key={`${sublink}-${j}`}
-              link={currentURL === `/kits/${sublink}/${type}` ? "" : `/kits/${sublink}/${type}`}
+              link={generateLink(categoryKey, sublink, type)}
               marginY="none"
               paddingY="xxs"
               text={linkFormat(sublink)}
@@ -81,7 +90,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
           dark={dark}
           fontSize="small"
           key={`${link}-${i}`}
-          link={currentURL === `/kits/${link}?type=${type}` ? "" : `/kits/${link}?type=${type}`}
+          link={generateLink(null, link, type)}
           marginBottom="none"
           marginTop="xxs"
           text={linkFormat(link)}
