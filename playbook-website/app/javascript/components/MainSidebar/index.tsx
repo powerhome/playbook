@@ -6,7 +6,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
   //hook into collapsible logic for all nested nav items
   const collapsibles = kits.map(() => useCollapsible());
 
-  //const currentURL = window.location.pathname + window.location.search;
+  const currentURL = window.location.pathname + window.location.search;
 
   //set up custom toggling
   const handleMainClick = (index) => {
@@ -50,7 +50,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
           fontSize="small"
           iconRight={["plus", "minus"]}
           key={`${categoryKey}-${i}`}
-          link={`/kit_category/${categoryKey}?type=${type}`}
+          link={currentURL === `/kit_category/${categoryKey}?type=${type}` ? "" : `/kit_category/${categoryKey}?type=${type}`}
           marginBottom="none"
           marginTop="xxs"
           onClick={() => handleMainClick(i)}
@@ -65,7 +65,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
               dark={dark}
               fontSize="small"
               key={`${sublink}-${j}`}
-              link={`/kits/${sublink}/${type}`}
+              link={currentURL === `/kits/${sublink}/${type}` ? "" : `/kits/${sublink}/${type}`}
               marginY="none"
               paddingY="xxs"
               text={linkFormat(sublink)}
@@ -81,7 +81,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
           dark={dark}
           fontSize="small"
           key={`${link}-${i}`}
-          link={`/kits/${link}?type=${type}`}
+          link={currentURL === `/kits/${link}?type=${type}` ? "" : `/kits/${link}?type=${type}`}
           marginBottom="none"
           marginTop="xxs"
           text={linkFormat(link)}
@@ -103,7 +103,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
         fontWeight="bolder"
         iconRight={["plus", "minus"]}
         key="top-nav-item"
-        link={`/kits${type ? `?type=${type}` : ""}`}
+        link={currentURL === `/kits${type ? `?type=${type}` : ""}` ? "" : `/kits${type ? `?type=${type}` : ""}`}
         marginY="none"
         paddingY="xxs"
         text="Components"
