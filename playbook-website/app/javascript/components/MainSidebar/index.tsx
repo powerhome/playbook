@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Nav, NavItem, useCollapsible } from "playbook-ui";
 import { linkFormat } from "../../utilities/website_sidebar_helper";
 
@@ -6,7 +6,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
   //hook into collapsible logic for all nested nav items
   const collapsibles = kits.map(() => useCollapsible());
 
-  // const currentURL = window.location.pathname + window.location.search;
+  //const currentURL = window.location.pathname + window.location.search;
 
   //set up custom toggling
   const handleMainClick = (index) => {
@@ -29,122 +29,88 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
     });
   };
 
-  return (
-    <>
-      <Nav dark={dark} variant="bold" paddingTop="xxs">
+  const renderNavItem = (link, i) => {
+    const [collapsed] = collapsibles[i];
+
+    if (typeof link === "object") {
+      const categoryKey = Object.keys(link)[0];
+      const sublinks = link[categoryKey];
+      const isActiveCategory = category === categoryKey;
+
+      const hasActiveSublink = link[Object.keys(link)[0]].some(sublink => sublink === kit);
+      
+      return (
         <NavItem
-          collapsed={false}
+          active={isActiveCategory}
+          collapsed={isActiveCategory || hasActiveSublink ? false : collapsed}
           collapsible
           collapsibleTrail
           cursor="pointer"
           dark={dark}
           fontSize="small"
-          fontWeight="bolder"
           iconRight={["plus", "minus"]}
-          key="top-nav-item"
-          // link={
-          //   currentURL === `/kits${type ? `?type=${type}` : ""}`
-          //     ? ""
-          //     : `/kits${type ? `?type=${type}` : ""}`
-          // }
-          link={`/kits${type ? `?type=${type}` : ""}`}
-          marginY="none"
+          key={`${categoryKey}-${i}`}
+          link={`/kit_category/${categoryKey}?type=${type}`}
+          marginBottom="none"
+          marginTop="xxs"
+          onClick={() => handleMainClick(i)}
+          onIconRightClick={() => handleIconClick(i)}
           paddingY="xxs"
-          text="Components"
+          text={linkFormat(categoryKey)}
         >
-          {kits.map((link, i) => {
-            const [collapsed] = collapsibles[i];
-            let hasActiveSublink = false;
-
-            if (typeof link === "object") {
-              // Check if any sublink is active
-              link[Object.keys(link)[0]].forEach((sublink) => {
-                if (sublink === kit) {
-                  hasActiveSublink = true;
-                }
-              });
-              return (
-                <NavItem
-                  active={category === Object.keys(link)[0]}
-                  // collapsed={
-                  //   category === Object.keys(link)[0] ||
-                  //   hasActiveSublink ||
-                  //   currentURL ===
-                  //     `/kit_category/${Object.keys(link)}?type=${type}`
-                  //     ? false
-                  //     : collapsed
-                  // }
-                  collapsed={category === Object.keys(link)[0] ||
-                       hasActiveSublink
-                       ? false
-                       : collapsed
-                      }
-                  collapsible
-                  collapsibleTrail
-                  cursor="pointer"
-                  dark={dark}
-                  fontSize="small"
-                  iconRight={["plus", "minus"]}
-                  key={`${Object.keys(link)[0]}-${i}`}
-                  // link={
-                  //   currentURL ===
-                  //   `/kit_category/${Object.keys(link)}?type=${type}`
-                  //     ? ""
-                  //     : `/kit_category/${Object.keys(link)}?type=${type}`
-                  // }
-                  link={`/kit_category/${Object.keys(link)}?type=${type}`}
-                  marginBottom="none"
-                  marginTop="xxs"
-                  onClick={() => handleMainClick(i)}
-                  onIconRightClick={() => handleIconClick(i)}
-                  paddingY="xxs"
-                  text={linkFormat(Object.keys(link))}
-                >
-                  {link[Object.keys(link)[0]].map((sublink, i) => (
-                    <NavItem
-                      active={kit === sublink}
-                      cursor="pointer"
-                      dark={dark}
-                      fontSize="small"
-                      key={`${sublink}-${i}`}
-                      // link={
-                      //   currentURL === `/kits/${sublink}/${type}`
-                      //     ? ""
-                      //     : `/kits/${sublink}/${type}`
-                      // }
-                      link={`/kits/${sublink}/${type}`}
-                      marginY="none"
-                      paddingY="xxs"
-                      text={linkFormat(sublink)}
-                    />
-                  ))}
-                </NavItem>
-              );
-            } else {
-              return (
-                <NavItem
-                  active={kit === link}
-                  cursor="pointer"
-                  dark={dark}
-                  fontSize="small"
-                  key={`${link}-${i}`}
-                  // link={
-                  //   currentURL === `/kits/${link}?type=${type}`
-                  //     ? ""
-                  //     : `/kits/${link}?type=${type}`
-                  // }
-                  link={`/kits/${link}?type=${type}`}
-                  marginBottom="none"
-                  marginTop="xxs"
-                  text={linkFormat(link)}
-                  paddingY="xxs"
-                />
-              );
-            }
-          })}
+          {sublinks.map((sublink, j) => (
+            <NavItem
+              active={kit === sublink}
+              cursor="pointer"
+              dark={dark}
+              fontSize="small"
+              key={`${sublink}-${j}`}
+              link={`/kits/${sublink}/${type}`}
+              marginY="none"
+              paddingY="xxs"
+              text={linkFormat(sublink)}
+            />
+          ))}
         </NavItem>
-      </Nav>
-    </>
+      );
+    } else {
+      return (
+        <NavItem
+          active={kit === link}
+          cursor="pointer"
+          dark={dark}
+          fontSize="small"
+          key={`${link}-${i}`}
+          link={`/kits/${link}?type=${type}`}
+          marginBottom="none"
+          marginTop="xxs"
+          text={linkFormat(link)}
+          paddingY="xxs"
+        />
+      );
+    }
+  };
+  
+  return (
+    <Nav dark={dark} variant="bold" paddingTop="xxs">
+      <NavItem
+        collapsed={false}
+        collapsible
+        collapsibleTrail
+        cursor="pointer"
+        dark={dark}
+        fontSize="small"
+        fontWeight="bolder"
+        iconRight={["plus", "minus"]}
+        key="top-nav-item"
+        link={`/kits${type ? `?type=${type}` : ""}`}
+        marginY="none"
+        paddingY="xxs"
+        text="Components"
+      >
+        {kits.map((link, i) => renderNavItem(link, i))}
+      </NavItem>
+    </Nav>
   );
 };
 
