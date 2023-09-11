@@ -5,16 +5,14 @@ module Playbook
     class TableCol < Playbook::KitBase
       prop :span, type: Playbook::Props::Number,
                   default: 1
-      prop :background_color, type: Playbook::Props::Enum,
-                              values: YAML.load_file(Playbook::Engine.root.join("colors.yml"))["background_colors"],
-                              default: "card_light"
+      prop :background_color
 
       def classname
-        generate_classname("pb_table_col_kit", custom_background_color)
-      end
-
-      def custom_background_color
-        "background_color_#{background_color}"
+        if background_color.present?
+          generate_classname("pb_background_kit", "pb_background_color_#{background_color}", "pb_table_col_kit", separator: " ")
+        else
+          generate_classname("pb_table_col_kit")
+        end
       end
     end
   end
