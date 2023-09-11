@@ -123,11 +123,25 @@
   ul {
     list-style-position: inside;
   }
-  blockquote {
-    font-size: $font_larger;
-    font-style: italic;
-    padding: $space_sm $space_md;
+  li {
+    font-size: $text_medium;
   }
+  blockquote {
+    position: relative;
+    padding-left: calc(#{$space_md} - 1px);
+  }
+  blockquote::before {
+    content: '';
+    display: inline-block;
+    background: $text_lt_lighter;
+    width: 7px;
+    height: 100%;
+    border-radius: 5px;
+    position: absolute;
+    border:none;
+    left: 0;
+    top: 0;
+}
   img {
     max-width: 100%;
     margin: 1.5rem 0 0.2rem 0;

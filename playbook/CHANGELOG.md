@@ -24,9 +24,9 @@ Nesting navigation is easy with the Nav kit's new Collapsible variant. And we di
 
 The File Upload kit for Rails ViewComponents redefines HTML's default input to match Playbook's aesthetics, ensuring consistency and elegance for every upload. 🚀📂🎉
 
- **[13.1.0](https://github.com/powerhome/playbook/tree/13.1.0) full list of changes:**
+**[13.1.0](https://github.com/powerhome/playbook/tree/13.1.0) full list of changes:**
 
- **Fixed Bugs:**
+**Fixed Bugs:**
 
 - Fixed Misalignment on Passphrase Icon in Firefox [\#2718](https://github.com/powerhome/playbook/pull/2718) ([nidaqg](https://github.com/nidaqg))
 - dateTime Bug Fixes [\#2716](https://github.com/powerhome/playbook/pull/2716) ([gavhuang](https://github.com/gavhuang))
