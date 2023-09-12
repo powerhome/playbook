@@ -1,6 +1,7 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    "github>powerhome/renovate-config"
   ],
   "major": {
     "enabled": false
@@ -26,16 +27,5 @@
       ],
       "enabled": false
     }
-  ],
-  "hostRules": [
-    {
-      "hostType": "npm",
-      "matchHost": "npm.powerapp.cloud",
-      "authType": "Basic",
-      "encrypted": {
-        "token": "wcFMA/xDdHCJBTolAQ/8Cnx6wEuOCqWkg8C/ELFERNIJryK5Bhxzu+64NoNrnNfzRkAmV7y3/dCyrDMws8qEsT+b6bjZ7gG+/nu0MUnOdUoXgQtbo4lhxjwfUwVZ96KdTl+HkRLoCYe7+p0pjS/QuSxzU+l1YDSnakyAG6yfnP5mP+lRo+7l8Wp56gGD05WWxsC19bmvelkJmqYICgk95kxTLeMug1K7XiyV57eVFpOBGCEhCk10Z/NKJ0+u2/7iPCFCtLmUUjVwXMc8U7otQs1EyOVkzhKd0W6I2JJNfSJjDHODKg3kNv9WZtFq1otPnHL9pexC9x3A1jBZy1WfGwJvIj4/OuTohn48Us/xnkupKYLHVQggp87G5F0Br/CoMUtq8EqjTWDTwUxydIOu4+F+P+aVdlmoYxBzN4Wbr4Ay5bbeiCNZEtzFUczhQs75tymyuyAlRgPKFTGGmXAvHj9rdviQH3UDfWuoR3YikzSOU18SJJ7wzZ+7dxVYk4wjBmSbXER9MCDcJFjjslm+wZad4c7+DeW0g/fGPr4B6yOVqUnrR3n4DNzEjUEfv9idnIhNdKkQ75iETebgET3GzgJ4wA9LWlhJhR26IB0BfwTTo69AEITeS6zj6FX88I3rXknAF+oWaiIftsX8NOsZrBPAd5wakWzWEzjQP/4HrUAbqB4+Mtk8pH8CGteh1yXSdAEn3uAZ2J2MP6ld1d+4EPIWzBG2Or8FPkjZWaNPPaht+ZjWXiHpJK7JbD453DwYT5IcUMU89Lm3VbO/RkEDH4OyUnfMHPhOLfkCvTxufuiX+2MHkbSY8HehXVcTYE6kD+T1fSrH/ldUQkjAXZNXOrq2ek3T"
-      }
-    }
-  ],
-  "npmrc": "registry=https://npm.powerapp.cloud\n//npm.powerapp.cloud/:always-auth=true"
+  ]
 }
