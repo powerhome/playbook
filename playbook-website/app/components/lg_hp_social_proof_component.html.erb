@@ -1,20 +1,20 @@
 <%= pb_rails("background", props: {
-    display: { xs: "none", sm: "flex", md: "flex", lg: "none", xl: "none"  },
-    classname: "middle-white-background",
+    display: { xs: "none", sm: "none", md: "none", lg: "flex", xl: "flex" },
+    justify_content: "center",
     background_color: "white",
     padding_top: "xl",
     padding_bottom: "xl"
 }) do %>
     <%= pb_rails("flex", props: {
-        padding_right: "md",
+        classname: "width-full",
         padding_left: "md",
-        classname: "hp-social-proof-background-width",
+        padding_right: "md",
         max_width: "xl",
         justify: "center",
         wrap: true
     }) do %>
         <%= pb_rails("background", props: {
-            classname: "hp-social-proof-background-width",
+            classname: "width-full",
             background_color: "dark",
             border_radius: "lg"
         }) do %>
@@ -27,29 +27,39 @@
                 background_size: "auto",
                 alt: "background",
                 transition: "fade",
-                padding_top: "lg",
-                padding_right: "lg",
-                padding_left: "lg",
-                padding_bottom: "xl",
+                padding: "xl"
             }) do %>
 
                 <%= pb_rails("flex", props: {
-                    orientation: "column",
-                    align: "center"
+                    justify: "center",
+                    spacing: "between",
+                    wrap: true
                 }) do %>
-                    <%= pb_rails("flex/flex_item") do %>
-                        <%= pb_rails("title", props: {
-                            text: "Don't take our word for it.",
-                            tag: "h2",
-                            size: 2,
-                            dark: true
-                        }) %>
+                    <%= pb_rails("flex/flex_item", props: {align_self: "center"}) do %>
+                        <%= pb_rails("flex", props: { orientation: "column" }) do %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <%= pb_rails("body", props: {
+                                    text: "BY THE NUMBERS",
+                                    dark: true,
+                                    color: "link"
+                                }) %>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item", props: {  padding_top: "xxs" }) do %>
+                                <%= pb_rails("title", props: {
+                                    text: "Don't take our word for it.",
+                                    tag: "h2",
+                                    size: 2,
+                                    dark: true
+                                }) %>
+                            <% end %>
+                        <% end %>
                     <% end %>
-                    <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("flex/flex_item", props: { align_self: "center" }) do %>
                         <%= pb_rails("button", props: {
                             dark: true,
+                            variant: "link",
                             link: "/kits",
-                            variant: "link"
+                            padding: "none"
                         }) do %>
                             <span>Explore All Components</span>
                             <%= pb_rails("icon", props: {
@@ -62,14 +72,14 @@
 
                 <%= pb_rails("flex", props: {
                     padding_top: "xl",
-                    horizontal: "center",
+                    justify: "center",
                     spacing: "between",
                     wrap: true
                 }) do %>
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("icon_stat_value", props: {
                             dark: true,
-                            size: "sm",
+                            size: "lg",
                             icon: "puzzle",
                             text: "components",
                             value: "200＋",
@@ -79,7 +89,7 @@
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("icon_stat_value", props: {
                             dark: true,
-                            size: "sm",
+                            size: "lg",
                             icon: "chart-line-up",
                             text: "downloads",
                             value: "1m＋",
@@ -89,7 +99,7 @@
                     <%= pb_rails("flex/flex_item") do %>
                         <%= pb_rails("icon_stat_value", props: {
                             dark: true,
-                            size: "sm",
+                            size: "lg",
                             icon: "arrows-repeat",
                             text: "Release Updates",
                             value: "Weekly",
@@ -102,3 +112,4 @@
         <% end %>
     <% end %>
 <% end %>
+

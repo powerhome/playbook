@@ -62,6 +62,7 @@ type FlexWrap = {
 
 type Hover = Shadow & {
   background?: string,
+  color?: string,
   scale?: "sm" | "md" | "lg"
 }
 
@@ -85,6 +86,8 @@ type Margin = {
   marginX?: AllSizes,
   marginY?: AllSizes,
   margin?: AllSizes,
+  break?: string,
+  default?: string
 }
 
 type MaxWidth = {
@@ -107,6 +110,8 @@ type Padding = {
   paddingX?: AllSizes,
   paddingY?: AllSizes,
   padding?: AllSizes,
+  break?: string,
+  default?: string
 }
 
 type Position = {
@@ -119,6 +124,10 @@ type Shadow = {
 
 type Space = "spaceBetween" | "spaceAround" | "spaceEvenly"
 
+type TextAlign = {
+  textAlign?: "start" | "end" | "left" | "right" | "center" | "justify" | "justifyAll" | "matchParent",
+}
+
 type ZIndexType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 type ZIndexResponsiveType = {[key: string]: ZIndexType}
 type ZIndex = {
@@ -130,7 +139,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
-  Position & Shadow & ZIndex & { hover?: string };
+  Position & Shadow & TextAlign & ZIndex & { hover?: string };
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -149,6 +158,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       css += hover.shadow ? `hover_shadow_${hover.shadow} ` : '';
       css += hover.background ? `hover_background_${hover.background } ` : '';
       css += hover.scale ? `hover_scale_${hover.scale} ` : '';
+      css += hover.color ? `hover_color_${hover.color } ` : '';
       return css;
   },
 
@@ -186,12 +196,23 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       padding,
     };
 
+    const screenSizeValues = ["xs", "sm", "md", "lg", "xl"]
+
     function handleObjectValue(properties: Margin | Padding, prefix: string) {
       let classResult = '';
 
+      const breakValue = properties.break || "on";
+      const defaultValue = properties.default || null;
+
       Object.entries(properties).forEach(([key, value]) => {
-        classResult += `${prefix}_${key}_${value} `;
+        if (screenSizeValues.includes(key)) {
+          classResult += `break_${breakValue}_${key}:${prefix}_${value} `;
+        }
       });
+
+      if (defaultValue) {
+        classResult += `${prefix}_${defaultValue} `;
+      }
 
       return classResult;
     }
@@ -377,6 +398,13 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += position && position !== 'static' ? `position_${position}` : ''
     return css
   },
+  textAlignProps: ({ textAlign }: TextAlign) => {
+    if (typeof textAlign === 'object') {
+      return getResponsivePropClasses(textAlign, 'text_align')
+    } else {
+      return textAlign ? `text_align_${textAlign} ` : ''
+    }
+  }
 }
 
 type DefaultProps = {[key: string]: string} | Record<string, unknown>
