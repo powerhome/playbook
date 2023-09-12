@@ -5,7 +5,7 @@ module Playbook
     class TableCol < Playbook::KitBase
       prop :span, type: Playbook::Props::Number,
                   default: 1
-      prop :background_color
+      prop :background_color, type: Playbook::Props::String
 
       def classname
         if background_color.present?

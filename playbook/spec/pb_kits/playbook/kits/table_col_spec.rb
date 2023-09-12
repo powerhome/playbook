@@ -9,22 +9,15 @@ RSpec.describe Playbook::PbTable::TableCol do
   }
 
   it {
-    is_expected.to define_enum_prop(:background_color)
-      .with_default("card_light")
+    is_expected.to define_prop(:background_color)
+      .of_type(Playbook::Props::String)
   }
-
-  describe "#background_color" do
-    it "should have certain color tokens", :aggregate_failures do
-      kit_background_colors = subject.new({}).props[:background_color].values
-      background_colors = YAML.load_file(Playbook::Engine.root.join("colors.yml"))["background_colors"].map(&:to_s)
-      expect(kit_background_colors.sort).to eq background_colors.sort
-    end
-  end
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to start_with "pb_table_col_kit"
-      expect(subject.new(dark: true, align: "end").classname).to eq "pb_table_col_kit_background_color_card_light dark"
+      expect(subject.new({ background_color: "info_subtle" }).classname).to eq "pb_background_kit pb_background_color_info_subtle pb_table_col_kit"
+      expect(subject.new(dark: true).classname).to eq "pb_table_col_kit dark"
     end
   end
 end
