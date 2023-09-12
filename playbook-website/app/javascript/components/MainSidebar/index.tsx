@@ -17,6 +17,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
         setCollapsed(true);
       }
     });
+    return true
   };
 
 
