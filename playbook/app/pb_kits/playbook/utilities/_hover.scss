@@ -6,6 +6,10 @@
         background-color: $color !important;
         transition: background-color $transition-speed ease;
       }
+      .hover_color_#{$name}:hover {
+        color: $color !important;
+        transition: color $transition-speed ease;
+      }
     }
   }
   
