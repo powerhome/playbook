@@ -138,7 +138,7 @@ const globalPropsValues = [
   {
     prop: "maxWidth",
     type: "union",
-    values: '| "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
+    values: '"xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl"',
   },
   {
     prop: "numberSpacing",
