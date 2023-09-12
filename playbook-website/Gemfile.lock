@@ -230,6 +230,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.11.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.11.0)
+    sentry-ruby (5.11.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     spring (4.1.1)
     spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
@@ -299,6 +304,8 @@ DEPENDENCIES
   rubocop (= 1.36.0)
   rubocop-performance (~> 1.15.0)
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
   spring
   spring-watcher-listen (~> 2.1.0)
   tzinfo-data
