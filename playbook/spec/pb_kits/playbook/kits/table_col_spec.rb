@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_table/table_colgroup"
-
 RSpec.describe Playbook::PbTable::TableCol do
   subject { Playbook::PbTable::TableCol }
 
