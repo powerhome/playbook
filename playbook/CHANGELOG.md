@@ -386,4 +386,4 @@ You can now wrap our Date kit with any of our typography kits (Title, Body, Capt
 
 
 
-#### 🔍 Looking for something? **[See Our Release Archives]()**
+#### 🔍 Looking for something? **[See Our Release Archives](https://github.com/powerhome/playbook/blob/master/docs/CHANGELOG_ARCHIVE.md)**
