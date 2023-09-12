@@ -27,7 +27,7 @@
   <% else %>
     <%= content.presence || object.text %>
   <% end %>
-  <% if object.sort_menu != [{}] && object.colspan > 1 %>
+  <% if use_dropdown_select %>
     <%= pb_rails("popover", props: { classname: "pb_filter_sort_menu",
                                     close_on_click: "outside",
                                     trigger_element_id: "pb-th#{object.id}",
@@ -49,7 +49,7 @@
     <% end %>
   <% end %>
 <% end %>
-<% if object.sort_menu != [{}] && object.colspan == 1 %>
+<% unless use_dropdown_select %>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       var thId = `<%= "#pb-th#{object.id}" %>`

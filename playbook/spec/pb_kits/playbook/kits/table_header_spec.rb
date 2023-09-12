@@ -29,6 +29,11 @@ RSpec.describe Playbook::PbTable::TableHeader do
       .of_type(Playbook::Props::HashArray)
       .with_default([{}])
   }
+  it {
+    is_expected.to define_prop(:sort_dropdown_menu)
+      .of_type(Playbook::Props::Boolean)
+      .with_default(false)
+  }
   it { is_expected.to define_prop(:text).with_default("") }
 
   describe "#classname" do

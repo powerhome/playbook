@@ -18,6 +18,8 @@ module Playbook
                        default: [{}]
       prop :text, type: Playbook::Props::String,
                   default: ""
+      prop :sort_dropdown_menu, type: Playbook::Props::Boolean,
+                                default: false
 
       def classname
         generate_classname("pb_table_header_kit", align_class)
@@ -36,6 +38,10 @@ module Playbook
             sort_menu[next_index][:link]
           end
         end
+      end
+
+      def use_dropdown_select
+        sort_menu != [{}] && (object.colspan > 1 || sort_dropdown_menu)
       end
 
       def sort_icon(direction)
