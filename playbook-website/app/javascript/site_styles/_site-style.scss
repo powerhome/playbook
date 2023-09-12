@@ -194,18 +194,6 @@ body {
   &--sideNav {
     height: calc(100vh - 89px);
     overflow: auto;
-    .category_section {
-      &.active {
-        padding: $space_xs 0;
-        background: $bg_light;
-      }
-      .sub_category {
-        padding-left: $space_md;
-      }
-    }
-    &[class*=dark]{
-      border-color: $border_dark;
-    }
     .mobile-sidebar-pages {
       display: none;
     }
