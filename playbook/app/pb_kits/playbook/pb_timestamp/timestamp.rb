@@ -21,6 +21,8 @@ module Playbook
       prop :show_user, type: Playbook::Props::Boolean,
                        default: false
       prop :timezone, default: "America/New_York"
+      prop :unstyled, type: Playbook::Props::Boolean,
+                      default: false
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default elapsed updated],
                      default: "default"
@@ -29,7 +31,7 @@ module Playbook
         generate_classname("pb_timestamp_kit", variant_class, align)
       end
 
-      def caption_text
+      def timestamp_text
         case variant
         when "updated"
           format_updated_string

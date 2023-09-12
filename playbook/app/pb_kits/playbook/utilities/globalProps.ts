@@ -86,6 +86,8 @@ type Margin = {
   marginX?: AllSizes,
   marginY?: AllSizes,
   margin?: AllSizes,
+  break?: string,
+  default?: string
 }
 
 type MaxWidth = {
@@ -108,6 +110,8 @@ type Padding = {
   paddingX?: AllSizes,
   paddingY?: AllSizes,
   padding?: AllSizes,
+  break?: string,
+  default?: string
 }
 
 type Position = {
@@ -192,12 +196,23 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       padding,
     };
 
+    const screenSizeValues = ["xs", "sm", "md", "lg", "xl"]
+
     function handleObjectValue(properties: Margin | Padding, prefix: string) {
       let classResult = '';
 
+      const breakValue = properties.break || "on";
+      const defaultValue = properties.default || null;
+
       Object.entries(properties).forEach(([key, value]) => {
-        classResult += `${prefix}_${key}_${value} `;
+        if (screenSizeValues.includes(key)) {
+          classResult += `break_${breakValue}_${key}:${prefix}_${value} `;
+        }
       });
+
+      if (defaultValue) {
+        classResult += `${prefix}_${defaultValue} `;
+      }
 
       return classResult;
     }
