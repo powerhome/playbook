@@ -39,7 +39,7 @@ const TOKENS = {
 }
 
 const screenSizeProps = {
-  display: ['xs', 'sm', 'md', 'lg', 'xl']
+  display: ['xs', 'sm', 'md', 'lg', 'xl', 'default']
 }
 
 const Spacing = ({ example, tokensExample }: {example: string, tokensExample?: string}) => (

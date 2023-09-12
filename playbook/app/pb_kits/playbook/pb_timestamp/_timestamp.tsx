@@ -5,7 +5,6 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import DateTime from '../pb_kit/dateTime';
 
-
 import Caption from '../pb_caption/_caption'
 
 type TimestampProps = {
@@ -22,6 +21,7 @@ type TimestampProps = {
   showUser?: boolean,
   hideUpdated?: boolean,
   showTimezone?: boolean,
+  unstyled?: boolean,
   variant?: "default" | "elapsed" | "updated"
 }
 
@@ -39,6 +39,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     showUser = false,
     hideUpdated = false,
     showTimezone = false,
+    unstyled = false,
     variant = 'default',
   } = props
 
@@ -85,7 +86,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     return `${updatedText} ${userDisplay} ${DateTime.fromNow(timestamp)}`
   }
 
-  const captionText = () => {
+  const timestampText = () => {
     switch (variant) {
     case 'updated':
       return formatUpdatedString()
@@ -103,11 +104,17 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
         className={classes}
     >
       <div className="pb_timestamp_kit">
-        <Caption
-            dark={dark}
-            size="xs"
-            text={captionText()}
-        />
+        {unstyled ? (
+          <div>
+            {timestampText()}
+          </div>
+        ) : (
+          <Caption
+              dark={dark}
+              size="xs"
+              text={timestampText()}
+          />
+        )}
       </div>
     </div>
   )
