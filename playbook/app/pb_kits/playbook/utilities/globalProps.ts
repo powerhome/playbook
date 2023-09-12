@@ -62,6 +62,7 @@ type FlexWrap = {
 
 type Hover = Shadow & {
   background?: string,
+  color?: string,
   scale?: "sm" | "md" | "lg"
 }
 
@@ -157,6 +158,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       css += hover.shadow ? `hover_shadow_${hover.shadow} ` : '';
       css += hover.background ? `hover_background_${hover.background } ` : '';
       css += hover.scale ? `hover_scale_${hover.scale} ` : '';
+      css += hover.color ? `hover_color_${hover.color } ` : '';
       return css;
   },
 
