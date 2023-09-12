@@ -6,6 +6,7 @@ examples:
   - timestamp_timezones: Timezones
   - timestamp_updated: Last Updated by
   - timestamp_elapsed: Time Ago
+  - timestamp_unstyled: Unstyled
 
   react:
   - timestamp_default: Default
@@ -13,7 +14,8 @@ examples:
   - timestamp_timezones: Timezones
   - timestamp_updated: Last Updated by
   - timestamp_elapsed: Time Ago
-  
+  - timestamp_unstyled: Unstyled
+
   swift:
   - timestamp_default_swift: Default
   - timestamp_align_swift: Alignments
