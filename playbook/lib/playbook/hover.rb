@@ -24,12 +24,16 @@ module Playbook
       []
     end
 
+    def hover_color_values
+      []
+    end
+
     def hover_values
       hover_options.keys.select { |sk| try(sk) }
     end
 
     def hover_attributes
-      %w[background shadow scale]
+      %w[background shadow scale color]
     end
 
     def hover_props
@@ -43,7 +47,7 @@ module Playbook
         prefix = hover_options[prop]
         if responsive
           value.each do |key, val|
-            if key == :background
+            if %i[background color].include?(key)
               css += "#{prefix}_#{key}_#{val} " if hover_attributes.include?(key.to_s)
             elsif hover_attributes.include?(key.to_s) && send("hover_#{key}_values").include?(val.to_s)
               css += "#{prefix}_#{key}_#{val} "
