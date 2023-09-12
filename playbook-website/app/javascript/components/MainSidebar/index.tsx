@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Nav, NavItem, useCollapsible } from "playbook-ui";
 import { linkFormat } from "../../utilities/website_sidebar_helper";
 
@@ -19,15 +19,6 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
     });
   };
 
-  //click event for right icon
-  const handleIconClick = (index) => {
-    collapsibles.forEach(([collapsed, , setCollapsed], idx) => {
-      if (idx === index) {
-        //using setCollapsed instead of toggle() because using toggle() here was causing a strange animation bug
-        collapsed === true ? setCollapsed(false) : setCollapsed(true)
-      }
-    });
-  };
 
   const renderNavItem = (link, i) => {
     const [collapsed] = collapsibles[i];
@@ -43,15 +34,33 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
     };
     
     if (typeof link === "object") {
+      //useState for handling collapsed state
+      const [toggleNav, setToggleNav] = useState(false);
+      //useEffect to handle toggle to consolidate logic
+      useEffect(() => {
+        setToggleNav(isActiveCategory || hasActiveSublink ? false : collapsed);
+      }, [collapsed]);
+
+      //click event for right icon
+      const handleIconClick = (index) => {
+        collapsibles.forEach(([, ,], idx) => {
+          if (idx === index) {
+            toggleNav === true ? setToggleNav(false) : setToggleNav(true)
+          }
+        });
+      };
+
       const categoryKey = Object.keys(link)[0];
       const sublinks = link[categoryKey];
       const isActiveCategory = category === categoryKey;
 
-      const hasActiveSublink = link[Object.keys(link)[0]].some(sublink => sublink === kit);
+      const hasActiveSublink = link[Object.keys(link)[0]].some(
+        (sublink) => sublink === kit
+      );
       return (
         <NavItem
           active={isActiveCategory}
-          collapsed={isActiveCategory || hasActiveSublink ? false : collapsed}
+          collapsed={toggleNav}
           collapsible
           collapsibleTrail
           cursor="pointer"
@@ -59,7 +68,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
           fontSize="small"
           iconRight={["plus", "minus"]}
           key={`${categoryKey}-${i}`}
-          link={generateLink(categoryKey, null, type)}          
+          link={generateLink(categoryKey, null, type)}
           marginBottom="none"
           marginTop="xxs"
           onClick={() => handleMainClick(i)}
