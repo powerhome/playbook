@@ -4,5 +4,9 @@
   data: object.data,
   class: object.classname) do %>
 
-  <%= pb_rails("caption", props: { text: object.caption_text, size: 'xs', dark: object.dark }) %>
+  <% if object.unstyled %>
+    <div><%= object.timestamp_text %></div>
+  <% else %>
+    <%= pb_rails("caption", props: { text: object.timestamp_text, size: 'xs', dark: object.dark }) %>
+  <% end %>
 <% end %>
