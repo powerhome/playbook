@@ -42,4 +42,27 @@ RSpec.describe Playbook::PbTable::TableHeader do
       expect(subject.new(dark: true, align: "end").classname).to eq "pb_table_header_kit_align_end dark align_content_center"
     end
   end
+
+  describe "next_link" do
+    it "makes the next link the first sort option when nothing is active" do
+      expect(
+        subject.new(
+          sort_menu: [
+            { item: "Territory", link: "?sort=territory_desc", active: false, direction: "desc" },
+            { item: "Territory", link: "?sort=territory_asc", active: false, direction: "asc" },
+          ]
+        ).next_link
+      ).to eq "?sort=territory_desc"
+    end
+    it "provides what the next sort option link would be" do
+      expect(
+        subject.new(
+          sort_menu: [
+            { item: "Territory", link: "?sort=territory_desc", active: true, direction: "desc" },
+            { item: "Territory", link: "?sort=territory_asc", active: false, direction: "asc" },
+          ]
+        ).next_link
+      ).to eq "?sort=territory_asc"
+    end
+  end
 end
