@@ -1,7 +1,7 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (13.2.0)
+    playbook_ui (13.4.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -110,7 +110,7 @@ GEM
     date (3.3.3)
     debug_inspector (1.1.0)
     erubi (1.12.0)
-    execjs (2.8.1)
+    execjs (2.9.0)
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
@@ -231,6 +231,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.11.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.11.0)
+    sentry-ruby (5.11.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     spring (4.1.1)
     spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
@@ -301,6 +306,8 @@ DEPENDENCIES
   rubocop (= 1.36.0)
   rubocop-performance (~> 1.15.0)
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
   spring
   spring-watcher-listen (~> 2.1.0)
   tzinfo-data

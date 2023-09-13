@@ -19,86 +19,38 @@
   <%= render(LgHpSocialProofComponent.new) %>
   <%= render(MdHpSocialProofComponent.new) %>
   <%= render(SmHpSocialProofComponent.new) %>
+  <%= render(HpSolutionsComponent.new)%>
 
-  <%= pb_rails("background", props: { classname: "middle-white-background", background_color: "white", padding: "xl" }) do %>
-    <%= pb_rails("flex", props: { classname: "second-section-inner-wrapper", horizontal: "center", spacing: "evenly", wrap: true }) do %>
-      <%= pb_rails("flex/flex_item", props: { classname: "react-rails-text"}) do %>
-        <%= pb_rails("title", props: { margin_bottom: "sm", text: 'React & Rails Components packaged in a single "Kit"', tag: "h2", size: 2 }) %>
-          <%= pb_rails("body", props: {
-            text: "Consistency in design is one of the most important tools we can use to build great user experiences.
-            The “kits” in Playbook are identical no matter if they are built for Rails UI or React front ends. Whether
-            your system is legacy or bleeding edge, consistency across interfaces is a very important advantage when
-            working with large codebases."
-          }) %>
-          <br/>
-          <%= pb_rails("body", props: {
-            text: "The kits are also built to work with any industry. If it's a product then we have battle-tested kits
-            ready to suit your needs. Get started by adding Playbook to your application in 5 min, or start
-            browsing our library to spark inspiration."
-          }) %>
-          <%= pb_rails("flex", props: { classname: "button-flexbox", margin_top: "md", wrap: true }) do %>
-            <%= pb_rails("flex/flex_item", props: {}) do %>
-              <%= pb_rails("button", props: { text: "Getting Started", link: guides_parent_path('getting_started') }) %>
-            <% end %>
-            <%= pb_rails("flex/flex_item", props: {}) do %>
-              <%= pb_rails("button", props: { text: "Browse All Kits", link: "/kits", margin_left: "md", variant: "secondary" }) %>
-            <% end %>
-          <% end %>
-      <% end %>
-
-      <%= pb_rails("flex/flex_item", props: { classname: "kit-example" }) do %>
-        <%= pb_rails("card", props: { classname: "user-card", shadow: "deeper" }) do %>
-          <%= pb_rails("user", props: {
-            name: "Anna Black",
-            title: "Sales Representative",
-            orientation: "vertical",
-            align: "center",
-            size: "lg",
-            avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
-          }) %>
-        <% end %>
-
-        <%= react_component('SnippetToggle', { test: 'test' }) %>
-        <% react_contents = Rails.root.join("app/views/pages/code_snippets/user_jsx.txt").read %>
-        <% rails_contents = Rails.root.join("app/views/pages/code_snippets/user_erb.txt").read %>
-
-        <div class="pb--codeCopy code-snippets">
-          <pre class="highlight"><%= raw render_code(rails_contents, "erb") %></pre>
-          <pre class="highlight" style="display:none"><%= raw render_code(react_contents, "jsx") %></pre>
-        </div>
-      <% end %>
+  <%= pb_rails("background", props: { background_color: "white" }) do %>
+    <%= pb_rails("flex", props: { orientation: "column", align: "center", padding_top: "lg" }) do %>
+      <%= pb_rails("title", props: { color: "link", text: "NEWEST FROM PLAYBOOK", tag: "h4", size: 4, padding_bottom: "sm" }) %>
+      <%= pb_rails("title", props: { text: "Playbook is always shipping.", tag: "h2", size: 2, text_align: "center", padding_bottom: "xs" }) %>
+      <%= pb_rails("caption", props: { size: "lg", text: "Move Fast. Follow Momentum.", padding_bottom: "sm" }) %>
     <% end %>
-  <% end %>
 
-  <%= pb_rails("flex", props: { orientation: "column", align: "center", padding_top: "lg" }) do %>
-    <%= pb_rails("title", props: { color: "link", text: "NEWEST FROM PLAYBOOK", tag: "h4", size: 4, padding_bottom: "sm" }) %>
-    <%= pb_rails("title", props: { text: "Playbook is always shipping.", tag: "h2", size: 2, padding_bottom: "xs" }) %>
-    <%= pb_rails("caption", props: { size: "lg", text: "Move Fast. Follow Momentum.", padding_bottom: "sm" }) %>
-  <% end %>
-
-  <% @posts.take(2).each.with_index do |post, index| %>
-    <%= pb_rails("flex", props: { justify: "center", padding_top: "md", align: "baseline", padding_bottom: index == 1 ? "lg" : nil }) do %>
-      <%= pb_rails("card", props: { border_radius: "lg", max_width: "xl", margin_x: "md", padding: "none", hover: { shadow: "deepest" } }) do %>
-        <a href="<%= changelog_path(anchor: post[:link]) %>">
-          <%= pb_rails("flex", props: { align_items: "stretch", padding: "sm", gap: "sm", flex_direction: { xs: "column" } }) do %>
-            <%= pb_rails("flex/flex_item", props: { fixed_size: "200px", display: "flex" }) do %>
-              <%= pb_rails("background", props: { image_url: post[:image], border_radius: "md", background_color: "neutral", background_position: "top", flex_grow: 1 }) %>
-            <% end %>
-  
-            <%= pb_rails("flex", props: { flex: 1, flex_direction: "column" }) do %>
-              <%= pb_rails("caption", props: { text: post[:date], padding_top: { xs: "xs" } }) %>
-              <%= pb_rails("flex", props: { padding_bottom: "sm" }) do %>
-                <%= pb_rails("title", props: { text: post[:title], tag: "h4", size: 4, padding_top: "xs", truncate: "1" }) %>
+    <% @posts.take(2).each.with_index do |post, index| %>
+      <%= pb_rails("flex", props: { justify: "center", padding_top: "md", align: "baseline", padding_bottom: index == 1 ? "lg" : nil }) do %>
+        <%= pb_rails("card", props: { border_radius: "lg", max_width: "xl", margin_x: "md", padding: "none", hover: { shadow: "deepest" } }) do %>
+          <a href="<%= changelog_path(anchor: post[:link]) %>">
+            <%= pb_rails("flex", props: { align_items: "stretch", padding: "sm", gap: "sm", flex_direction: { xs: "column" } }) do %>
+              <%= pb_rails("flex/flex_item", props: { fixed_size: "200px", display: "flex" }) do %>
+                <%= pb_rails("background", props: { image_url: post[:image], border_radius: "md", background_color: "neutral", background_position: "top", flex_grow: 1 }) %>
               <% end %>
-              <%= pb_rails("body", props: { text: post[:description], color: "light", truncate: "2" }) %>
+
+              <%= pb_rails("flex", props: { flex: 1, flex_direction: "column" }) do %>
+                <%= pb_rails("caption", props: { text: post[:date], padding_top: { xs: "xs" } }) %>
+                <%= pb_rails("flex", props: { padding_bottom: "sm" }) do %>
+                  <%= pb_rails("title", props: { text: post[:title], tag: "h4", size: 4, padding_top: "xs", truncate: "1" }) %>
+                <% end %>
+                <%= pb_rails("body", props: { text: post[:description], color: "light", truncate: "2" }) %>
+              <% end %>
+              <%= pb_rails("flex", props: { align: "center", display: { lg: "none", md: "none", sm: "none", xs: "none" } }) do %>
+                <%= pb_rails("button", props: { icon: "chevron-right", icon_right: true, text: "Read More" }) %>
+              <% end %>
             <% end %>
-            <%= pb_rails("flex", props: { align: "center", display: { lg: "none", md: "none", sm: "none", xs: "none" } }) do %>
-              <%= pb_rails("button", props: { icon: "chevron-right", icon_right: true, text: "Read More" }) %>
-            <% end %>
-          <% end %>
-        </a>
+          </a>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
-  
 </div>
