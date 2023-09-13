@@ -9,8 +9,8 @@ List of changes:
 
 **Improvements:**
 
-- Convert Website Sidebar to React [\#2727](https://github.com/powerhome/playbook/pull/2727) ([nidaqg](https://github.com/nidaqg))
-- Website V1 - Homepage - What's New [\#2708](https://github.com/powerhome/playbook/pull/2708) ([nickamantia](https://github.com/nickamantia))
+> - Convert Website Sidebar to React [\#2727](https://github.com/powerhome/playbook/pull/2727) ([nidaqg](https://github.com/nidaqg))
+> - Website V1 - Homepage - What's New [\#2708](https://github.com/powerhome/playbook/pull/2708) ([nickamantia](https://github.com/nickamantia))
 - Bump puma from 5.6.5 to 6.3.1 in /playbook-website [\#2715](https://github.com/powerhome/playbook/pull/2715) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump puma from 5.6.5 to 5.6.7 in /examples/rails-react-example [\#2714](https://github.com/powerhome/playbook/pull/2714) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump puma from 5.6.5 to 5.6.7 in /examples/playbook-rails [\#2713](https://github.com/powerhome/playbook/pull/2713) ([dependabot[bot]](https://github.com/apps/dependabot))

@@ -141,7 +141,7 @@
   .changelog-container blockquote::before {
     content: '';
     display: inline-block;
-    background: $text_lt_lighter;
+    background: $border_light;
     width: 7px;
     height: 100%;
     border-radius: 5px;
