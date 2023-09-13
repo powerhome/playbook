@@ -1,5 +1,7 @@
 ---
 title: React Setup
+icon: atom
+description: React applications. Endlessly flexible presentational UI components with encapsulated styles and constraint based theme props.
 ---
 
 #### Bundle Install

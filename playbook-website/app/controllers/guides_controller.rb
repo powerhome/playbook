@@ -22,7 +22,7 @@ private
     @page       = params[:page]
     @parent     = params[:parent]
     search_path = File.join(Rails.root, "/app/views/guides/#{@parent}")
-    @navigation = Dir.children(search_path).map { |f| File.basename(f, ".md") }.sort
+    @navigation = DOCS[:"#{@parent}"]
     file = if @page
              Dir.glob("#{Dir[search_path].first}/#{@page}*.md").first
            else

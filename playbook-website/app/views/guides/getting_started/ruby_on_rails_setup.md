@@ -1,5 +1,7 @@
 ---
 title: Ruby on Rails Setup
+icon: gem
+description: Pure rails and javascript agnostic setup. 100+ highly customizable ViewComponents. Build design driven UI in Rails with ViewComponents.
 ---
 
 #### Update your Gemfile
