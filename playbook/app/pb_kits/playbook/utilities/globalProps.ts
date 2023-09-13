@@ -417,13 +417,13 @@ export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {})
 }
 
 
-export const deprecatedProps = (kit: string, props: string[] = []): void => {
-  if (process.env.NODE_ENV === 'development') {
-    /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-    props.forEach((prop) => {
-      console.warn(`${kit} Kit: The prop '${prop}' is deprecated and will be removed in a future release!`)
-    })
-  }
+export const deprecatedProps = (): void => {
+  // if (process.env.NODE_ENV === 'development') {
+  //   /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+  //   props.forEach((prop) => {
+  //     console.warn(`${kit} Kit: The prop '${prop}' is deprecated and will be removed in a future release!`)
+  //   })
+  // }
 }
 
 export const domSafeProps = (props: {[key: string]: string}): {[key: string]: string} => {

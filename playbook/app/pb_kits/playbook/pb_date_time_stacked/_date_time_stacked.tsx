@@ -19,7 +19,7 @@ type DateTimeStackedProps = {
 }
 
 const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
-  if (props.date) deprecatedProps('Date Time Stacked', ['date'])
+  if (props.date) deprecatedProps()
 
   const {
     date,

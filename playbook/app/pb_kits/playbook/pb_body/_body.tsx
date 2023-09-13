@@ -24,7 +24,7 @@ type BodyProps = {
 } & GlobalProps
 
 const Body = (props: BodyProps): React.ReactElement => {
-  if (props.variant) deprecatedProps("Body", ["status"]) //status prop is deprecated, use color instead please
+  if (props.variant) deprecatedProps() //status prop is deprecated, use color instead please
   const {
     aria = {},
     children,
