@@ -32,12 +32,19 @@ module Playbook
       def next_link
         return sort_menu[0][:link] if sort_menu.all? { |item| item[:active] == false }
 
+        link = ""
+
         sort_menu.each_with_index do |item, index|
           if item[:active] == true
             next_index = (index + 1) % sort_menu.length
-            sort_menu[next_index][:link]
+            link = sort_menu[next_index][:link]
           end
         end
+        link
+      end
+
+      def non_sorting?
+        sort_menu == [{}] || sort_menu == [] || sort_menu.nil?
       end
 
       def use_dropdown_select

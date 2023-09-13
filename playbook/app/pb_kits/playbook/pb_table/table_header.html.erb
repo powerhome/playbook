@@ -4,17 +4,19 @@
     class: object.classname,
     data: object.data,
     id: "pb-th#{object.id}") do %>
+  <%= content.presence || object.text if non_sorting? %>
   <% object.sort_menu.each do |item| %>
     <% if item[:active] == true %>
       <%= pb_rails("flex", props:{ align: object.align_content }) do %>
-        <%= content.presence || content_tag(:span, item[:item], class: "pb_th_active") %>
-        <span class="pb_th_active">
+        <% link_to next_link do %>
+          <%= content.presence || object.text %>
           <%= pb_rails("icon", props: { icon: object.sort_icon(item[:direction]),
                                         fixed_width: true,
                                         classname: "pb_th_active",
                                         padding_left: "xs" }) %>
-        </span>
+        <% end %>
       <% end %>
+    <% else %>
     <% end %>
   <% end %>
   <% if object.sort_menu.all? { |item| item[:active] == false } %>
@@ -24,8 +26,6 @@
                                     fixed_width: true,
                                     padding_left: "xs" }) %>
     <% end %>
-  <% else %>
-    <%= content.presence || object.text %>
   <% end %>
   <% if use_dropdown_select %>
     <%= pb_rails("popover", props: { classname: "pb_filter_sort_menu",
@@ -48,17 +48,4 @@
       <% end %>
     <% end %>
   <% end %>
-<% end %>
-<% unless use_dropdown_select %>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var thId = `<%= "#pb-th#{object.id}" %>`
-      var firstLink = `<%= next_link %>`
-      var thElement = document.querySelector(thId);
-
-      thElement.addEventListener("click", function() {
-        window.location.href = firstLink;
-      });
-    });
-  </script>
 <% end %>
