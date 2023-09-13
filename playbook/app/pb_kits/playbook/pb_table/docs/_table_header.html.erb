@@ -2,11 +2,19 @@
   <thead>
     <tr>
       <%= pb_rails("table/table_header", props: {
+        text: "Territory",
+        id: "territory",
+        sort_menu: [
+          { item: "Territory", link: "?territory=desc", active: false, direction: "desc" },
+          { item: "Territory", link: "?territory=asc", active: false, direction: "asc" },
+        ],
+      }) %>
+      <%= pb_rails("table/table_header", props: {
         id: "name",
         colspan: 2,
         sort_menu: [
-          { item: "Name", link: "?q[sorts]=name+desc", active: false, direction: "desc" },
-          { item: "Name", link: "?q[sorts]=name+asc", active: true, direction: "asc" },
+          { item: "Name", link: "?name=desc", active: false, direction: "desc" },
+          { item: "Name", link: "?name=asc", active: true, direction: "asc" },
         ],
       }) %>
       <%= pb_rails("table/table_header", props: {
@@ -14,16 +22,8 @@
         id: "age",
         sort_dropdown_menu: true,
         sort_menu: [
-          { item: "Age", link: "?q[sorts]=age+desc", active: false, direction: "desc" },
-          { item: "Age", link: "?q[sorts]=age+asc", active: false, direction: "asc" },
-        ],
-      }) %>
-      <%= pb_rails("table/table_header", props: {
-        text: "Territory",
-        id: "territory",
-        sort_menu: [
-          { item: "Territory", link: "?q[sorts]=territory+desc", active: false, direction: "desc" },
-          { item: "Territory", link: "?q[sorts]=territory+asc", active: false, direction: "asc" },
+          { item: "Age", link: "?age=desc", active: false, direction: "desc" },
+          { item: "Age", link: "?age=asc", active: false, direction: "asc" },
         ],
       }) %>
       <%= pb_rails("table/table_header", props: { text: "Job Title" }) %>
@@ -31,25 +31,29 @@
   </thead>
   <tbody>
     <tr>
-      <td>Name 1</td>
-      <td>Name 2</td>
-      <td>Value 3</td>
+      <td>Ter 1</td>
+      <td>First Name 1</td>
+      <td>Last Name 1</td>
       <td>Value 4</td>
       <td>Value 5</td>
     </tr>
     <tr>
-      <td>Name 1</td>
-      <td>Name 2</td>
-      <td>Value 3</td>
+      <td>Ter 2</td>
+      <td>First Name 2</td>
+      <td>Last Name 2</td>
       <td>Value 4</td>
       <td>Value 5</td>
     </tr>
     <tr>
-      <td>Name 1</td>
-      <td>Name 2</td>
-      <td>Value 3</td>
+      <td>Ter 3</td>
+      <td>First Name 3</td>
+      <td>Last Name 3</td>
       <td>Value 4</td>
       <td>Value 5</td>
     </tr>
   </tbody>
 <% end %>
+
+<script>
+console.log("<%= params["sort"] %>");
+</script>
