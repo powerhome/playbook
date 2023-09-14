@@ -30,7 +30,7 @@ RSpec.describe Playbook::PbTable::TableHeader do
       .with_default([{}])
   }
   it {
-    is_expected.to define_prop(:sort_dropdown_menu)
+    is_expected.to define_prop(:sort_dropdown)
       .of_type(Playbook::Props::Boolean)
       .with_default(false)
   }

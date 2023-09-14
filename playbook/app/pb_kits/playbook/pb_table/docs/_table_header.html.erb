@@ -23,7 +23,7 @@
       <%= pb_rails("table/table_header", props: {
         text: "Age",
         id: "age",
-        sort_dropdown_menu: true,
+        sort_dropdown: true,
         sort_menu: [
           { item: "Age", link: "?sort=age_desc", active: params["sort"] == "age_desc", direction: "desc" },
           { item: "Age", link: "?sort=age_asc", active: params["sort"] == "age_asc", direction: "asc" }
