@@ -59,11 +59,6 @@
       transition: 0.1s all ease-in-out;
     }
   }
-  h4:last-of-type {
-    border-top: 1px solid $border_light;
-    padding-top: $space_md;
-    font-weight: $regular;
-  }
   hr {
     margin: 2.2rem 0;
     box-sizing: content-box;
@@ -128,7 +123,6 @@
     font-style: italic;
     padding: $space_sm $space_md;
   }
-
   .changelog-container blockquote {
     position: relative;
     font-style: normal;
@@ -148,6 +142,12 @@
     position: absolute;
     left: 0;
     top: 0;
+  }
+
+  .changelog-container h4:last-of-type {
+    border-top: 1px solid $border_light;
+    padding-top: $space_md;
+    font-weight: $regular;
   }
 
   img {
