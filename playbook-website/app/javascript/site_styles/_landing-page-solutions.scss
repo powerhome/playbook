@@ -1,0 +1,70 @@
+.landing-page {
+  .language-card {
+    max-width: 200px;
+    flex: 1;
+
+    [class*="pb_card_kit"] {
+      height: 120px;
+      align-items: center;
+      justify-content: center;
+
+      @include break_on($screen-md-min, $screen-xl-max) {
+        height: 160px;
+      }
+    }
+
+    @include break_on($screen-md-min, $screen-xl-max) {
+      max-width: 350px;
+    }
+  }
+
+  @include break_at($screen-xl-max) {
+    .explore-button {
+      justify-content: center;
+    }
+  }
+
+  // Image comparsion slider
+  .solutionsContainer {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+
+    @include break_on($screen-xl-min, 1340px) {
+      margin-right: 0 !important;
+    }
+
+    @media screen and (min-width: $screen-xl-min) {
+      min-width: 570px;
+    };
+  }
+
+  .solutionsCard {
+    position: absolute;
+    height: 350px;
+  }
+
+  .vertical-bar svg {
+    position: absolute;
+    top: 48%;
+    left: 35%;
+    color: $text_lt_light
+  }
+
+  .vertical-bar {
+    position: absolute;
+    cursor: ew-resize;
+    top: -1px;
+    left: -10px;
+    width: 20px;
+    height: 350px;
+    background-color: $bg_light;
+    box-shadow: -10px 0 15px -2px $shadow;
+    user-select: none;
+  }
+
+  .highlightSolutions {
+    padding-top: $space_md !important;
+    padding-bottom: $space_md !important;
+  }
+}

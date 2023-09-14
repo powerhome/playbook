@@ -9,7 +9,7 @@ RSpec.describe Playbook::PbBackground::Background do
   it {
     is_expected.to define_enum_prop(:tag)
       .with_default("div")
-      .with_values("h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "div", "tr", "td", "th")
+      .with_values("h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "div", "tr", "td", "th", "thead", "col")
   }
   it {
     is_expected.to define_enum_prop(:background_color)
