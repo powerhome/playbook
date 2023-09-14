@@ -34,9 +34,9 @@ module Playbook
                     default: false
       prop :label, type: Playbook::Props::String,
                    default: "Date Picker"
-      prop :input_aria, type: Playbook::Props::Hash,
+      prop :input_aria, type: Playbook::Props::HashProp,
                         default: {}
-      prop :input_data, type: Playbook::Props::Hash,
+      prop :input_data, type: Playbook::Props::HashProp,
                         default: {}
       prop :max_date, type: Playbook::Props::String
       prop :min_date, type: Playbook::Props::String

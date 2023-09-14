@@ -53,8 +53,8 @@ module Playbook
     include Playbook::TextAlign
 
     prop :id
-    prop :data, type: Playbook::Props::Hash, default: {}
-    prop :aria, type: Playbook::Props::Hash, default: {}
+    prop :data, type: Playbook::Props::HashProp, default: {}
+    prop :aria, type: Playbook::Props::HashProp, default: {}
     prop :children, type: Playbook::Props::Proc
 
     def object

@@ -17,8 +17,8 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
   it { is_expected.to define_boolean_prop(:hide_icon).with_default(false) }
   it { is_expected.to define_boolean_prop(:hide_label).with_default(false) }
   it { is_expected.to define_prop(:label).of_type(Playbook::Props::String).with_default("Date Picker") }
-  it { is_expected.to define_prop(:input_aria).of_type(Playbook::Props::Hash).with_default({}) }
-  it { is_expected.to define_prop(:input_data).of_type(Playbook::Props::Hash).with_default({}) }
+  it { is_expected.to define_prop(:input_aria).of_type(Playbook::Props::HashProp).with_default({}) }
+  it { is_expected.to define_prop(:input_data).of_type(Playbook::Props::HashProp).with_default({}) }
   it { is_expected.to define_prop(:max_date).of_type(Playbook::Props::String) }
   it { is_expected.to define_prop(:min_date).of_type(Playbook::Props::String) }
   it { is_expected.to define_prop(:name).of_type(Playbook::Props::String) }

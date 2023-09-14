@@ -11,7 +11,7 @@ module Playbook
                      default: false
       prop :error, type: Playbook::Props::Boolean,
                    default: false
-      prop :input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
       prop :name, type: Playbook::Props::String,
                   default: "radio_name"
