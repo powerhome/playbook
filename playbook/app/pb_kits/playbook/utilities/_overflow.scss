@@ -1,0 +1,9 @@
+@import "../tokens/overflow";
+
+$overflow_classes: (
+    visible: $overflow_visible,
+    hidden: $overflow_hidden,
+    scroll: $overflow_scroll,
+    auto:$overflow_auto,
+);
+
