@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-MENU = YAML.load_file(Rails.root.join("config/menu.yml"))
-SAMPLES = YAML.load_file(Rails.root.join("config/samples.yml"))
+MENU = Rails.cache.fetch("menu_yml") { YAML.load_file(Rails.root.join("config/menu.yml")) }
+SAMPLES = Rails.cache.fetch("samples_yml") { YAML.load_file(Rails.root.join("config/samples.yml")) }
 
 require "markdown_helper"
 search_path = File.join(Rails.root, "/app/views/guides")

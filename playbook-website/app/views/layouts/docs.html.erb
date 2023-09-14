@@ -12,10 +12,11 @@
       <% end %>
       <%= pb_rails("layout/body") do %>
         <% unless action_name == 'changelog' %>
-          <%= pb_rails("background", props: { 
-            classname: "background-image", 
-            image_url: @front_matter['header'] || asset_pack_url("media/images/pb_generic_header.jpg"), 
-            background_size: "cover",
+          <%= pb_rails("background", props: {
+            background_color: "dark",
+            image_url: @front_matter['header'] || asset_pack_url("media/images/pb_generic_header.jpg"),
+            background_repeat: "no-repeat",
+            background_size: "contain",
             background_position: "center"
           }) do %>
             <div style="height:250px"></div>
