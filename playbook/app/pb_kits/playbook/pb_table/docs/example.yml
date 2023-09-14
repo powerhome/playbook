@@ -1,6 +1,5 @@
 examples:
   rails:
-
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
