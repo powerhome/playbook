@@ -1,6 +1,5 @@
 {
   "extends": [
-    "config:base",
     "github>powerhome/renovate-config"
   ],
   "major": {
