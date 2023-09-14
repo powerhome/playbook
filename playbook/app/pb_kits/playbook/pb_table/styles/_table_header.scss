@@ -22,6 +22,11 @@ $text_align_values: (
   }
 }
 
+.pb_flex_kit_orientation_row_justify_content_between_align_items_center_spacing_none:hover {
+  background-color: rgba($primary, 0.03);
+  color: $primary !important;
+}
+
 [class^=pb_table] {
   thead {
     [class^=pb_th_active] {

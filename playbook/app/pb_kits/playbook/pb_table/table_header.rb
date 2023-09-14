@@ -9,6 +9,9 @@ module Playbook
       prop :align_content, type: Playbook::Props::Enum,
                            values: %w[start center end stretch baseline none],
                            default: "center"
+      prop :justify_sort_icon, type: Playbook::Props::Enum,
+                               values: %w[start center end stretch around between evenly none],
+                               default: "between"
       prop :colspan, type: Playbook::Props::Number,
                      default: 1
       prop :placement, type: Playbook::Props::Enum,
@@ -51,12 +54,12 @@ module Playbook
         sort_menu != [{}] && (object.colspan > 1 || sort_dropdown_menu)
       end
 
-      def sort_icon(direction)
+      def sort_icon(direction, active)
         case direction
         when "asc"
-          "sort-amount-up"
+          active ? "sort-amount-up" : "arrow-up"
         when "desc"
-          "sort-amount-down"
+          active ? "sort-amount-down" : "arrow-down"
         else
           ""
         end
