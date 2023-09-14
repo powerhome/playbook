@@ -1,3 +1,28 @@
+# ✨New Unstyled Variant✨: More Style options for Date 📆, Time ⏰, and Timestamp⏱️ Kits!
+#### September 12, 2023
+
+![13 4 0](https://github.com/powerhome/playbook/assets/73710701/06c0fc00-e174-4562-bb77-cbf9e67e9baa)
+
+In addition to the Date and Time kit, the Timestamp now also supports the 'unstyled' variant! The days of not having styled options for Date/Time kits are over. The new & improved Timestamp kit is now more flexible than ever with the ability to customize font sizes, weight, and color by wrapping the kit in any of our typography kits!
+
+[13.4.0](https://github.com/powerhome/playbook/compare/13.3.0...13.4.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Unstyled Variant for Timestamp Kit [\#2732](https://github.com/powerhome/playbook/pull/2732) ([gavhuang](https://github.com/gavhuang))
+
+**Fixed Bugs:**
+
+- dateTime Rounding Bug [\#2728](https://github.com/powerhome/playbook/pull/2728) ([gavhuang](https://github.com/gavhuang))
+
+**Improvements:**
+
+- Collapsible Nav in Website Sidebar [\#2729](https://github.com/powerhome/playbook/pull/2729) ([nidaqg](https://github.com/nidaqg))
+- Website V1 - Site Footer  [\#2725](https://github.com/powerhome/playbook/pull/2725) ([nickamantia](https://github.com/nickamantia))
+- Homepage - Solutions and Global Prop Edits + Additions [\#2695](https://github.com/powerhome/playbook/pull/2695) ([Israel-Molestina](https://github.com/Israel-Molestina), [gavhuang](https://github.com/gavhuang))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.4.0...13.4.0)
+
 # 13.3.0
 ##### September 7, 2023
 
