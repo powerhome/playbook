@@ -4,41 +4,29 @@
     class: object.classname,
     data: object.data,
     id: "pb-th#{object.id}") do %>
-  <%= content.presence || object.text if non_sorting? %>
-  <% object.sort_menu.each do |item| %>
-    <% if item[:active] == true %>
-      <%= link_to next_link do %>
-        <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon }) do %>
-          <%= content.presence || object.text %>
-          <%= pb_rails("icon", props: { icon: object.sort_icon(item[:direction], item[:active]),
-                                        fixed_width: true,
-                                        classname: "pb_th_active",
-                                        padding_left: "xs" }) %>
-        <% end %>
-      <% end %>
-    <% else %>
-    <% end %>
-  <% end %>
-  <% if object.sort_menu.all? { |item| item[:active] == false } %>
-    <%= link_to next_link, style: "color: #687887;" do %>
-      <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon }) do %>
-          <%= content.presence || object.text %>
-          <%= pb_rails("icon", props: { icon: "arrow-up-arrow-down",
-                                        fixed_width: true,
-                                        padding_left: "xs" }) %>
+  <% if non_sorting? %>
+    <%= content.presence || object.text %>
+  <% else %>
+    <%= link_to next_link, style: link_style do %>
+    <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon }) do %>
+      <%= content.presence || object.text %>
+        <%= pb_rails("icon", props: { icon: object.sort_icon(active_item[:direction], active_item[:active]),
+                                      fixed_width: true,
+                                      classname: active_item.any? ? "pb_th_active" : "",
+                                      padding_left: "xs" }) %>
       <% end %>
     <% end %>
-  <% end %>
-  <% if use_dropdown_select %>
-    <%= pb_rails("popover", props: { classname: "pb_filter_sort_menu",
-                                    close_on_click: "outside",
-                                    trigger_element_id: "pb-th#{object.id}",
-                                    tooltip_id: "sort-filter-btn-tooltip#{object.id}",
-                                    position: object.placement ,
-                                    padding: 'none'}) do %>
-      <%= pb_rails("nav") do %>
-        <% object.sort_menu.each do |item| %>
-          <%= pb_rails("nav/item", props: { text: item[:item], link: item[:link], icon_right: sort_icon(item[:direction], item[:active]), active: item[:active] }) %>
+    <% if use_dropdown_select %>
+      <%= pb_rails("popover", props: { classname: "pb_filter_sort_menu",
+                                      close_on_click: "outside",
+                                      trigger_element_id: "pb-th#{object.id}",
+                                      tooltip_id: "sort-filter-btn-tooltip#{object.id}",
+                                      position: object.placement ,
+                                      padding: 'none'}) do %>
+        <%= pb_rails("nav") do %>
+          <% object.sort_menu.each do |item| %>
+            <%= pb_rails("nav/item", props: { text: item[:item], link: item[:link], icon_right: sort_icon(item[:direction], item[:active]), active: item[:active] }) %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

@@ -61,8 +61,20 @@ module Playbook
         when "desc"
           active ? "sort-amount-down" : "arrow-down"
         else
-          ""
+          "arrow-up-arrow-down"
         end
+      end
+
+      def link_style
+        active_item.any? ? "" : "color: #687887;"
+      end
+
+      def active_item
+        active_item = {}
+        sort_menu.each do |item|
+          active_item = item if item[:active] == true
+        end
+        active_item
       end
     end
   end

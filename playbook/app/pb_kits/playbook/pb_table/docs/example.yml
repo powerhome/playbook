@@ -1,9 +1,5 @@
 examples:
   rails:
-    - table_sm: Small
-    - table_md: Medium
-    - table_lg: Large
-    - table_sticky: Sticky Header
     - table_header: Table Header
     - table_alignment_row: Row Alignment
     - table_alignment_column: Column Alignment
