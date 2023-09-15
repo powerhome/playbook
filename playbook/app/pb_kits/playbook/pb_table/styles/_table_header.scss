@@ -22,9 +22,13 @@ $text_align_values: (
   }
 }
 
-.pb_flex_kit_orientation_row_justify_content_between_align_items_center_spacing_none:hover {
+.pb_th_link:hover {
   background-color: rgba($primary, 0.03);
   color: $primary !important;
+}
+
+.pb_th_link, .pb_th_nolink{
+  padding: 4px;
 }
 
 [class^=pb_table] {

@@ -4,16 +4,20 @@
     class: object.classname,
     data: object.data,
     id: "pb-th#{object.id}") do %>
-  <% if non_sorting? %>
-    <%= content.presence || object.text %>
+  <% unless sorting_style? %>
+    <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon, classname: "pb_th_nolink" }) do %>
+      <%= content.presence || object.text %>
+    <% end %>
   <% else %>
     <%= link_to next_link, style: link_style do %>
-    <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon }) do %>
-      <%= content.presence || object.text %>
-        <%= pb_rails("icon", props: { icon: object.sort_icon(active_item[:direction], active_item[:active]),
-                                      fixed_width: true,
-                                      classname: active_item.any? ? "pb_th_active" : "",
-                                      padding_left: "xs" }) %>
+      <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon, classname: "pb_th_link" }) do %>
+        <%= content.presence || object.text %>
+          <% if sorting_style? %>
+            <%= pb_rails("icon", props: { icon: object.sort_icon(active_item[:direction], active_item[:active]),
+                                          fixed_width: true,
+                                          classname: active_item.any? ? "pb_th_active" : "",
+                                          padding_left: "xs" }) %>
+        <% end %>
       <% end %>
     <% end %>
     <% if use_dropdown_select %>

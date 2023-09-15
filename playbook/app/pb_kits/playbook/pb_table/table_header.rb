@@ -46,8 +46,8 @@ module Playbook
         link
       end
 
-      def non_sorting?
-        sort_menu == [{}] || sort_menu == [] || sort_menu.nil?
+      def sorting_style?
+        sort_menu != [{}]
       end
 
       def use_dropdown_select
