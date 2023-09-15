@@ -9,10 +9,6 @@ module Playbook
       prop :shrink, type: Playbook::Props::Boolean,
                     default: false
 
-      prop :overflow, type: Playbook::Props::Enum,
-                      values: %w[auto hidden inherit initial scroll visible] + [nil],
-                      default: nil
-
       prop :align_self, type: Playbook::Props::Enum,
                         values: %w[start center end stretch] + [nil],
                         default: nil
@@ -21,7 +17,7 @@ module Playbook
                           default: false
 
       def classname
-        generate_classname("pb_flex_item_kit", fixed_size_class, grow_class, shrink_class, display_flex_class) + overflow_class + align_self_class
+        generate_classname("pb_flex_item_kit", fixed_size_class, grow_class, shrink_class, display_flex_class) + align_self_class
       end
 
       def style_value
@@ -44,10 +40,6 @@ module Playbook
 
       def grow_class
         grow ? "grow" : nil
-      end
-
-      def overflow_class
-        overflow ? " overflow_#{overflow}" : ""
       end
 
       def shrink_class
