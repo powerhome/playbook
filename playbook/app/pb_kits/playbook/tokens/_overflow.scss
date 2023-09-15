@@ -1,10 +1,10 @@
-$oveflow_visible: visible;
-$overflow_hidden: hidden;
-$overflow_scroll: scroll;
-$overflow_auto: auto;
+$visible: visible;
+$hidden: hidden;
+$scroll: scroll;
+$auto: auto;
 $overflow: (
-    overflow_visible: $overflow_visible,
-    overflow_hidden: $overflow_hidden,
-    overflow_scroll: $overflow_scroll,
-    overflow_auto:$overflow_auto,
+  visible: $visible,
+  hidden: $hidden,
+  scroll: $scroll,
+  auto: $auto,
 );

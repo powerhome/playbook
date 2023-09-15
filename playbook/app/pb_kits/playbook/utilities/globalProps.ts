@@ -128,6 +128,13 @@ type TextAlign = {
   textAlign?: "start" | "end" | "left" | "right" | "center" | "justify" | "justifyAll" | "matchParent",
 }
 
+type OverflowTypes = "scroll" | "visible" | "hidden" | "auto"
+type Overflow = {
+overflowX?: OverflowTypes,
+overflowY?: OverflowTypes,
+overflow?: OverflowTypes
+}
+
 type ZIndexType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 type ZIndexResponsiveType = {[key: string]: ZIndexType}
 type ZIndex = {
@@ -138,7 +145,7 @@ type ZIndex = {
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
-  LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
+  LineHeight & Margin & MaxWidth & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & ZIndex & { hover?: string };
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
@@ -255,6 +262,14 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += borderRadius ? `border_radius_${borderRadius} ` : ''
     return css
   },
+  overflowProps: ({ overflow, overflowX, overflowY }: Overflow) => {
+    let css = ''
+    css += overflow ? `overflow_${overflow}` : ''
+    css += overflowX ? `overflow_x_${overflowX}` : ''
+    css += overflowY ? `overflow_y_${overflowY}` : ''
+    return css
+  },
+
   darkProps: ({ dark }: Dark) => dark ? 'dark' : '',
   numberSpacingProps: ({ numberSpacing }: NumberSpacing) => {
     let css = ''
