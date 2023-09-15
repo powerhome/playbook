@@ -21,7 +21,6 @@ RSpec.describe Playbook::PbFlex::FlexItem do
       expect(subject.new(shrink: true).classname).to eq "pb_flex_item_kit_shrink"
       expect(subject.new(flex: "1").classname).to eq "pb_flex_item_kit flex_1"
       expect(subject.new(fixed_size: "250px").classname).to eq "pb_flex_item_kit_fixed_size"
-      expect(subject.new(overflow: "hidden").classname).to eq "pb_flex_item_kit overflow_hidden"
     end
   end
 end

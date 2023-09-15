@@ -8,7 +8,7 @@ type FlexItemPropTypes = {
   grow?: boolean,
   shrink?: boolean,
   className?: string,
-  overflow?: "auto" | "hidden" | "initial" | "inherit" | "scroll" | "visible",
+  // overflow?: "auto" | "hidden" | "initial" | "inherit" | "scroll" | "visible",
   order?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'first' | 'none',
   alignSelf?: "start" | "end" | "center" | "stretch" | null,
   displayFlex?: boolean
@@ -20,7 +20,6 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
     className,
     fixedSize,
     grow,
-    overflow = null,
     shrink,
     flex = 'none',
     order = 'none',
@@ -30,7 +29,6 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
   const growClass = grow === true ? 'grow' : ''
   const displayFlexClass = displayFlex === true ? `display_flex_${displayFlex}` : ''
   const flexClass = flex !== 'none' ? `flex_${flex}` : ''
-  const overflowClass = overflow ? `overflow_${overflow}` : ''
   const shrinkClass = shrink === true ? 'shrink' : ''
   const alignSelfClass = alignSelf ? `align_self_${alignSelf}` : ''
   const fixedStyle =
@@ -39,7 +37,7 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
 
   return (
     <div
-        className={classnames(buildCss('pb_flex_item_kit', growClass, shrinkClass, flexClass, displayFlexClass), overflowClass, orderClass, alignSelfClass, globalProps(props), className)}
+        className={classnames(buildCss('pb_flex_item_kit', growClass, shrinkClass, flexClass, displayFlexClass), orderClass, alignSelfClass, globalProps(props), className)}
         style={fixedStyle}
     >
       {children}
