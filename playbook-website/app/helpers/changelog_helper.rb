@@ -34,13 +34,10 @@ private
     content = document.css(set_a)
     title_text = title_element.text
 
-    image = extract_images(content) if title_text.match?(/[a-zA-Z]/)
-
     {
       title: title_text,
       description: extract_description(content),
       date: extract_date(content),
-      image: image[0],
       link: extract_link(title_element),
       content: content.css("p").to_s,
     }
@@ -54,10 +51,6 @@ private
   def extract_date(content)
     first_h5 = content.css("h5").first
     first_h5&.text
-  end
-
-  def extract_images(content)
-    content.css("img").map { |img| img["src"] }
   end
 
   def extract_link(title_element)
