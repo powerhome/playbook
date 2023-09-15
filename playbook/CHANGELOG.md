@@ -1,3 +1,20 @@
+#
+##### September 14, 2023
+
+
+
+[13.5.0](https://github.com/powerhome/playbook/tree/13.5.0) full list of changes:
+
+**Improvements:**
+
+- Text Align Global Prop Docs [\#2740](https://github.com/powerhome/playbook/pull/2740) ([gavhuang](https://github.com/gavhuang))
+- Add Sentry to Playbook [\#2735](https://github.com/powerhome/playbook/pull/2735) ([gavhuang](https://github.com/gavhuang))
+- Website - Changelog updates [\#2734](https://github.com/powerhome/playbook/pull/2734) ([nickamantia](https://github.com/nickamantia))
+- Col and Colgroup table kits [\#2723](https://github.com/powerhome/playbook/pull/2723) ([markdoeswork](([nickamantia](https://github.com/nickamantia))))
+- Rotate secrets encryption for new owner team [\#2737](https://github.com/powerhome/playbook/pull/2737) ([benlangfeld](https://github.com/benlangfeld))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.4.0...13.5.0)
+
 # ✨New Unstyled Variant✨: More Style options for Date 📆, Time ⏰, and Timestamp⏱️ Kits!
 #### September 12, 2023
 
