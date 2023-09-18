@@ -51,5 +51,5 @@ test('with responsive title', () => {
     )
 
     const kit = screen.getByTestId('primary-test')
-    expect(kit).toHaveClass('pb_title_kit pb_title_kit_xs_3 pb_title_kit_sm_2 pb_title_kit_md_1')
+    expect(kit).toHaveClass('pb_title_kit pb_title_kit_xs_size_3 pb_title_kit_sm_size_2 pb_title_kit_md_size_1')
 })
