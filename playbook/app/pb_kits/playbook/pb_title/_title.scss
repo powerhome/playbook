@@ -4,25 +4,25 @@
 @import './title_mixin';
 
 [class^=pb_title_kit]{
-  &[class*=_1] {
+  &[class*=size_1] {
     @include pb_title_1;
     @include title_colors;
     @include pb_title_bold;
   }
 
-  &[class*=_2] {
+  &[class*=size_2] {
     @include pb_title_2;
     @include title_colors;
     @include pb_title_bold;
   }
 
-  &[class*=_3] {
+  &[class*=size_3] {
     @include pb_title_3;
     @include title_colors;
     @include pb_title_bold;
   }
 
-  &[class*=_4] {
+  &[class*=size_4] {
     @include pb_title_4;
     @include title_colors;
   }
@@ -39,7 +39,7 @@
     @each $title_size_value in [1, 2, 3, 4] {
         $min_size: map-get($size_value, "min");
         $max_size: map-get($size_value, "max");
-        &[class*=_#{$size}_#{$title_size_value}] {
+        &[class*=_#{$size}_size_#{$title_size_value}] {
           @include break_on($min_size, $max_size) {
             @if $title_size_value == 1 { @include pb_title_1; }
             @else if $title_size_value == 2 { @include pb_title_2; }

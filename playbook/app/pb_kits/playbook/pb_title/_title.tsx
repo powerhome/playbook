@@ -46,10 +46,10 @@ const Title = (props: TitleProps): React.ReactElement => {
 
   const buildResponsiveSizeCss = () => {
     let css = ''
-    
+
     if (!isSizeNumberOrString) {
       Object.entries(size).forEach((sizeObj) => {
-        css += `pb_title_kit_${sizeObj[0]}_${sizeObj[1]} `
+        css += `pb_title_kit_${sizeObj[0]}_size_${sizeObj[1]} `
       })
     }
 
