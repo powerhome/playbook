@@ -11,7 +11,7 @@ With all components, you can specify any of our spacing props values at certain 
 
 Give it a try and let us know what you think!
 
-[12.24.0](https://github.com/powerhome/playbook/tree/12.24.0) full list of changes:
+**[12.24.0](https://github.com/powerhome/playbook/tree/12.24.0) full list of changes:**
 
 **Kit Enhancements:**
 - Title 2 Defaults to Bold [\#2559](https://github.com/powerhome/playbook/pull/2559) ([jasperfurniss](https://github.com/jasperfurniss))
@@ -21,11 +21,11 @@ Give it a try and let us know what you think!
 - Responsive Spacing global prop [\#2563](https://github.com/powerhome/playbook/pull/2563) ([nickamantia](https://github.com/nickamantia))
 - Creating an example Swift kit doc [\#2550](https://github.com/powerhome/playbook/pull/2550) ([carloslimasd](https://github.com/carloslimasd))
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.23.0...12.24.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.23.0...12.24.0)**
 
 ## [12.23.0](https://github.com/powerhome/playbook/tree/12.23.0) (2023-05-23)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.22.0...12.23.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.22.0...12.23.0)**
 
 **Fixed Bugs:**
 
@@ -39,7 +39,7 @@ Give it a try and let us know what you think!
 
 ## [12.22.0](https://github.com/powerhome/playbook/tree/12.22.0) (2023-05-18)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.21.0...12.22.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.21.0...12.22.0)**
 
 **Kit Enhancements:**
 
@@ -54,7 +54,7 @@ Give it a try and let us know what you think!
 
 ## [12.21.0](https://github.com/powerhome/playbook/tree/12.21.0) (2023-05-16)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.20.0...12.21.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.20.0...12.21.0)**
 
 **Kit Enhancements:**
 
@@ -69,7 +69,7 @@ Give it a try and let us know what you think!
 
 ## [12.20.0](https://github.com/powerhome/playbook/tree/12.20.0) (2023-05-11)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.19.0...12.20.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.19.0...12.20.0)**
 
 **Kit Enhancements:**
 
@@ -90,7 +90,7 @@ Give it a try and let us know what you think!
 
 ## [12.19.0](https://github.com/powerhome/playbook/tree/12.19.0) (2023-05-09)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.18.0...12.19.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.18.0...12.19.0)**
 
 **Kit Enhancements:**
 
@@ -104,7 +104,7 @@ Give it a try and let us know what you think!
 
 ## [12.18.0](https://github.com/powerhome/playbook/tree/12.18.0) (2023-05-03)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.17.1...12.18.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.17.1...12.18.0)**
 
 **Kit Enhancements:**
 
@@ -131,7 +131,7 @@ Give it a try and let us know what you think!
 
 ## [12.17.1](https://github.com/powerhome/playbook/tree/12.17.1) (2023-04-28)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.17.0...12.17.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.17.0...12.17.1)**
 
 **Fixed Bugs:**
 
@@ -140,7 +140,7 @@ Give it a try and let us know what you think!
 
 ## [12.17.0](https://github.com/powerhome/playbook/tree/12.17.0) (2023-04-27)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.16.0...12.17.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.16.0...12.17.0)**
 
 **Kit Enhancements:**
 
@@ -165,7 +165,7 @@ Give it a try and let us know what you think!
 
 ## [12.16.0](https://github.com/powerhome/playbook/tree/12.16.0) (2023-04-19)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.15.0...12.16.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.15.0...12.16.0)**
 
 **Kit Enhancements:**
 
@@ -188,7 +188,7 @@ Give it a try and let us know what you think!
 
 ## [12.15.0](https://github.com/powerhome/playbook/tree/12.15.0) (2023-04-12)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.14.0...12.15.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.14.0...12.15.0)**
 
 **Kit Enhancements:**
 
@@ -205,7 +205,7 @@ Give it a try and let us know what you think!
 
 ## [12.14.0](https://github.com/powerhome/playbook/tree/12.14.0) (2023-04-06)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.13.0...12.14.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.13.0...12.14.0)**
 
 **Kit Enhancements:**
 
@@ -223,7 +223,7 @@ Give it a try and let us know what you think!
 
 ## [12.13.0](https://github.com/powerhome/playbook/tree/12.13.0) (2023-04-04)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.12.0...12.13.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.12.0...12.13.0)**
 
 **Kit Enhancements:**
 
@@ -239,7 +239,7 @@ Give it a try and let us know what you think!
 
 ## [12.12.0](https://github.com/powerhome/playbook/tree/12.12.0) (2023-03-30)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.11.0...12.12.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.11.0...12.12.0)**
 
 **Kit Enhancements:**
 
@@ -254,7 +254,7 @@ Give it a try and let us know what you think!
 
 ## [12.11.0](https://github.com/powerhome/playbook/tree/12.11.0) (2023-03-28)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.10.0...12.11.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.10.0...12.11.0)**
 
 **Kit Enhancements:**
 
@@ -276,7 +276,7 @@ Give it a try and let us know what you think!
 
 ## [12.10.0](https://github.com/powerhome/playbook/tree/12.10.0) (2023-03-22)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.9.1...12.10.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.9.1...12.10.0)**
 
 **Kit Enhancements:**
 
@@ -297,7 +297,7 @@ Give it a try and let us know what you think!
 
 ## [12.9.1](https://github.com/powerhome/playbook/tree/12.9.1) (2023-03-17)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.9.0...12.9.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.9.0...12.9.1)**
 
 **Fixed Bugs:**
 
@@ -307,7 +307,7 @@ Give it a try and let us know what you think!
 
 ## [12.9.0](https://github.com/powerhome/playbook/tree/12.9.0) (2023-03-16)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.8.0...12.9.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.8.0...12.9.0)**
 
 **Kit Enhancements:**
 
@@ -337,7 +337,7 @@ Give it a try and let us know what you think!
 
 ## [12.8.0](https://github.com/powerhome/playbook/tree/12.8.0) (2023-03-14)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.7.1...12.8.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.7.1...12.8.0)**
 
 **Kit Enhancements:**
 
@@ -362,7 +362,7 @@ Give it a try and let us know what you think!
 
 ## [12.7.1](https://github.com/powerhome/playbook/tree/12.7.1) (2023-03-08)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.7.0...12.7.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.7.0...12.7.1)**
 
 **Fixed Bugs:**
 
@@ -372,7 +372,7 @@ Give it a try and let us know what you think!
 
 ## [12.7.0](https://github.com/powerhome/playbook/tree/12.7.0) (2023-03-08)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.6.0...12.7.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.6.0...12.7.0)**
 
 **Kit Enhancements:**
 
@@ -396,7 +396,7 @@ Give it a try and let us know what you think!
 
 ## [12.6.0](https://github.com/powerhome/playbook/tree/12.6.0) (2023-03-03)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.5.0...12.6.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.5.0...12.6.0)**
 
 **Kit Enhancements:**
 
@@ -418,7 +418,7 @@ Give it a try and let us know what you think!
 
 ## [12.5.0](https://github.com/powerhome/playbook/tree/12.5.0) (2023-02-24)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.4.0...12.5.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.4.0...12.5.0)**
 
 **Breaking changes:**
 
@@ -448,7 +448,7 @@ Give it a try and let us know what you think!
 
 ## [12.4.0](https://github.com/powerhome/playbook/tree/12.4.0) (2023-02-20)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.3.1...12.4.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.3.1...12.4.0)**
 
 **Kit Enhancements:**
 
@@ -472,7 +472,7 @@ Give it a try and let us know what you think!
 
 ## [12.3.1](https://github.com/powerhome/playbook/tree/12.3.1) (2023-02-14)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.3.0...12.3.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.3.0...12.3.1)**
 
 **Fixed Bugs:**
 
@@ -482,7 +482,7 @@ Give it a try and let us know what you think!
 
 ## [12.3.0](https://github.com/powerhome/playbook/tree/12.3.0) (2023-02-13)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.2.0...12.3.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.2.0...12.3.0)**
 
 **Kit Enhancements:**
 
@@ -504,7 +504,7 @@ Give it a try and let us know what you think!
 
 ## [12.2.0](https://github.com/powerhome/playbook/tree/12.2.0) (2023-02-07)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.1.0...12.2.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.1.0...12.2.0)**
 
 **Kit Enhancements:**
 
@@ -522,7 +522,7 @@ Give it a try and let us know what you think!
 
 ## [12.1.0](https://github.com/powerhome/playbook/tree/12.1.0) (2023-02-02)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.0.0...12.1.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/12.0.0...12.1.0)**
 
 **Fixed Bugs:**
 
@@ -548,7 +548,7 @@ Give it a try and let us know what you think!
 
 ## [12.0.0](https://github.com/powerhome/playbook/tree/12.0.0) (2023-01-30)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.20.0...12.0.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.20.0...12.0.0)**
 
 **Breaking changes:**
 
@@ -562,7 +562,7 @@ Give it a try and let us know what you think!
 
 ## [11.20.0](https://github.com/powerhome/playbook/tree/11.20.0) (2023-01-23)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.19.0...11.20.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.19.0...11.20.0)**
 
 **Kit Enhancements:**
 
@@ -592,7 +592,7 @@ Give it a try and let us know what you think!
 
 ## [11.19.0](https://github.com/powerhome/playbook/tree/11.19.0) (2023-01-16)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.18.0...11.19.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.18.0...11.19.0)**
 
 **Kit Enhancements:**
 
@@ -612,7 +612,7 @@ Give it a try and let us know what you think!
 
 ## [11.18.0](https://github.com/powerhome/playbook/tree/11.18.0) (2023-01-10)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.17.0...11.18.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.17.0...11.18.0)**
 
 **Kit Enhancements:**
 
@@ -632,7 +632,7 @@ Give it a try and let us know what you think!
 
 ## [11.17.0](https://github.com/powerhome/playbook/tree/11.17.0) (2023-01-06)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.16.0...11.17.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.16.0...11.17.0)**
 
 **Improvements:**
 
@@ -642,7 +642,7 @@ Give it a try and let us know what you think!
 
 ## [11.16.0](https://github.com/powerhome/playbook/tree/11.16.0) (2023-01-03)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.15.0...11.16.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.15.0...11.16.0)**
 
 **Fixed Bugs:**
 
@@ -656,7 +656,7 @@ Give it a try and let us know what you think!
 
 ## [11.15.0](https://github.com/powerhome/playbook/tree/11.15.0) (2022-12-19)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.14.0...11.15.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.14.0...11.15.0)**
 
 **Kit Enhancements:**
 
@@ -674,7 +674,7 @@ Give it a try and let us know what you think!
 
 ## [11.14.0](https://github.com/powerhome/playbook/tree/11.14.0) (2022-12-13)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.13.0...11.14.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.13.0...11.14.0)**
 
 **Kit Enhancements:**
 
@@ -683,7 +683,7 @@ Give it a try and let us know what you think!
 
 ## [11.13.0](https://github.com/powerhome/playbook/tree/11.13.0) (2022-12-05)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.12.1...11.13.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.12.1...11.13.0)**
 
 **Kit Enhancements:**
 
@@ -707,7 +707,7 @@ Give it a try and let us know what you think!
 
 ## [11.12.1](https://github.com/powerhome/playbook/tree/11.12.1) (2022-11-22)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.12.0...11.12.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.12.0...11.12.1)**
 
 **Fixed Bugs:**
 
@@ -717,7 +717,7 @@ Give it a try and let us know what you think!
 
 ## [11.12.0](https://github.com/powerhome/playbook/tree/11.12.0) (2022-11-15)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.11.0...11.12.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.11.0...11.12.0)**
 
 **Kit Enhancements:**
 
@@ -748,7 +748,7 @@ Give it a try and let us know what you think!
 
 ## [11.11.0](https://github.com/powerhome/playbook/tree/11.11.0) (2022-10-28)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.10.0...11.11.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.10.0...11.11.0)**
 
 **Kit Enhancements:**
 
@@ -762,7 +762,7 @@ Give it a try and let us know what you think!
 
 ## [11.10.0](https://github.com/powerhome/playbook/tree/11.10.0) (2022-10-25)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.9.0...11.10.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.9.0...11.10.0)**
 
 **Kit Enhancements:**
 
@@ -795,7 +795,7 @@ Give it a try and let us know what you think!
 
 ## [11.9.0](https://github.com/powerhome/playbook/tree/11.9.0) (2022-10-19)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.8.1...11.9.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.8.1...11.9.0)**
 
 **Fixed Bugs:**
 
@@ -816,7 +816,7 @@ Give it a try and let us know what you think!
 
 ## [11.8.1](https://github.com/powerhome/playbook/tree/11.8.1) (2022-10-13)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.8.0...11.8.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.8.0...11.8.1)**
 
 **Fixed Bugs:**
 
@@ -827,7 +827,7 @@ Give it a try and let us know what you think!
 
 ## [11.8.0](https://github.com/powerhome/playbook/tree/11.8.0) (2022-10-12)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.7.0...11.8.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.7.0...11.8.0)**
 
 **Kit Enhancements:**
 
@@ -858,7 +858,7 @@ Give it a try and let us know what you think!
 
 ## [11.7.0](https://github.com/powerhome/playbook/tree/11.7.0) (2022-09-30)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.6.0...11.7.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.6.0...11.7.0)**
 
 **Kit Enhancements:**
 
@@ -891,7 +891,7 @@ Give it a try and let us know what you think!
 
 ## [11.6.0](https://github.com/powerhome/playbook/tree/11.6.0) (2022-09-23)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.5.0.alpha-rubocop...11.6.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.5.0.alpha-rubocop...11.6.0)**
 
 **Kit Enhancements:**
 
@@ -927,7 +927,7 @@ Give it a try and let us know what you think!
 
 ## [11.5.0](https://github.com/powerhome/playbook/tree/11.5.0) (2022-09-10)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.4.0...11.5.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.4.0...11.5.0)**
 
 **Kit Enhancements:**
 
@@ -964,7 +964,7 @@ Give it a try and let us know what you think!
 
 ## [11.4.0](https://github.com/powerhome/playbook/tree/11.4.0) (2022-08-29)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.3.0...11.4.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.3.0...11.4.0)**
 
 **Kit Enhancements:**
 
@@ -999,7 +999,7 @@ Give it a try and let us know what you think!
 
 ## [11.3.0](https://github.com/powerhome/playbook/tree/11.3.0) (2022-08-19)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.2.7...11.3.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.2.7...11.3.0)**
 
 **Fixed Bugs:**
 - \[Play-199\] Fix Alignment on Currency Kit [\#1991](https://github.com/powerhome/playbook/pull/1991) ([nidaqg](https://github.com/nidaqg))
@@ -1055,7 +1055,7 @@ Give it a try and let us know what you think!
 
 ## [11.2.0](https://github.com/powerhome/playbook/tree/11.2.0) (2022-07-26)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.1.2...11.2.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.1.2...11.2.0)**
 
 **New Kits**
 - \[PLAY-158\] Lightbox Kit [\#1772](https://github.com/powerhome/playbook/pull/1772) ([jasperfurniss](https://github.com/jasperfurniss), [thestephenmarshall](https://github.com/thestephenmarshall),
@@ -1088,7 +1088,7 @@ Give it a try and let us know what you think!
 
 ## [11.1.2](https://github.com/powerhome/playbook/tree/11.1.2) (2022-07-18)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.1.1...11.1.2)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.1.1...11.1.2)**
 
 **Merged pull requests:**
 
@@ -1098,7 +1098,7 @@ Give it a try and let us know what you think!
 
 ## [11.1.1](https://github.com/powerhome/playbook/tree/11.1.1) (2022-07-15)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.1.0...11.1.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.1.0...11.1.1)**
 
 **Kit Enhancements:**
 
@@ -1113,7 +1113,7 @@ Give it a try and let us know what you think!
 
 ## [11.1.0](https://github.com/powerhome/playbook/tree/11.1.0) (2022-07-08)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.0.1...11.1.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.0.1...11.1.0)**
 
 **Kit Enhancements:**
 
@@ -1127,7 +1127,7 @@ Give it a try and let us know what you think!
 
 ## [11.0.1](https://github.com/powerhome/playbook/tree/11.0.1) (2022-06-10)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/11.0.0...11.0.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/11.0.0...11.0.1)**
 
 **Fixed Bugs:**
 
@@ -1141,7 +1141,7 @@ Give it a try and let us know what you think!
 
 ## [11.0.0](https://github.com/powerhome/playbook/tree/11.0.0) (2022-06-07)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.26.1...11.0.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.26.1...11.0.0)**
 
 **Breaking changes:**
 
@@ -1176,7 +1176,7 @@ Give it a try and let us know what you think!
 
 ## [10.26.1](https://github.com/powerhome/playbook/tree/10.26.1) (2022-05-27)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.26.0...10.26.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.26.0...10.26.1)**
 
 **Fixed Bugs:**
 
@@ -1198,7 +1198,7 @@ Give it a try and let us know what you think!
 
 ## [10.26.0](https://github.com/powerhome/playbook/tree/10.26.0) (2022-05-12)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.25.1...10.26.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.25.1...10.26.0)**
 
 **Kit Enhancements:**
 
@@ -1224,7 +1224,7 @@ Give it a try and let us know what you think!
 
 ## [10.25.1](https://github.com/powerhome/playbook/tree/10.25.1) (2022-05-02)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.25.0...10.25.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.25.0...10.25.1)**
 
 
 **Merged pull requests:**
@@ -1241,7 +1241,7 @@ Give it a try and let us know what you think!
 
 ## [10.25.0](https://github.com/powerhome/playbook/tree/10.25.0) (2022-04-21)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.24.0...10.25.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.24.0...10.25.0)**
 
 **Kit Enhancements:**
 
@@ -1269,7 +1269,7 @@ Give it a try and let us know what you think!
 
 ## [10.24.0](https://github.com/powerhome/playbook/tree/10.24.0) (2022-03-28)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.23.0...10.24.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.23.0...10.24.0)**
 
 **Kit Enhancements:**
 
@@ -1296,7 +1296,7 @@ Give it a try and let us know what you think!
 
 ## [10.23.0](https://github.com/powerhome/playbook/tree/10.23.0) (2022-03-16)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.22.1...10.23.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.22.1...10.23.0)**
 
 **Kit Enhancements:**
 
@@ -1320,7 +1320,7 @@ Give it a try and let us know what you think!
 
 ## [10.22.0](https://github.com/powerhome/playbook/tree/10.22.0) (2022-03-01)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.21.0...10.22.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.21.0...10.22.0)**
 
 **Kit Enhancements:**
 
@@ -1346,7 +1346,7 @@ Give it a try and let us know what you think!
 
 ## [10.21.0](https://github.com/powerhome/playbook/tree/10.21.0) (2022-02-15)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.20.0...10.21.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.20.0...10.21.0)**
 
 **Kit Enhancements:**
 
@@ -1375,7 +1375,7 @@ Give it a try and let us know what you think!
 
 ## [10.20.0](https://github.com/powerhome/playbook/tree/10.20.0) (2022-02-01)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.19.0...10.20.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.19.0...10.20.0)**
 
 
 **Kit Enhancements:**
@@ -1399,7 +1399,7 @@ Give it a try and let us know what you think!
 
 ## [10.19.0](https://github.com/powerhome/playbook/tree/10.19.0) (2022-01-31)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.19.0-lightbox-alpha-1...10.19.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.19.0-lightbox-alpha-1...10.19.0)**
 
 **Kit Enhancements:**
 
@@ -1444,11 +1444,11 @@ Give it a try and let us know what you think!
 
 ## [10.18.2](https://github.com/powerhome/playbook/tree/10.18.2) (2022-01-26)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.1...10.18.2)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.1...10.18.2)**
 
 ## [10.18.1](https://github.com/powerhome/playbook/tree/10.18.1) (2022-01-19)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.0...10.18.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.0...10.18.1)**
 
 **Improvements:**
 
@@ -1458,7 +1458,7 @@ Give it a try and let us know what you think!
 
 ## [10.19.0](https://github.com/powerhome/playbook/tree/10.19.0) (2022-01-31)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.19.0-lightbox-alpha-1...10.19.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.19.0-lightbox-alpha-1...10.19.0)**
 
 **Kit Enhancements:**
 
@@ -1477,11 +1477,11 @@ Give it a try and let us know what you think!
 
 ## [10.18.2](https://github.com/powerhome/playbook/tree/10.18.2) (2022-01-26)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.1...10.18.2)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.1...10.18.2)**
 
 ## [10.18.0](https://github.com/powerhome/playbook/tree/10.18.0) (2022-01-17)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.0...10.18.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.18.0...10.18.0)**
 
 **Improvements:**
 
@@ -1515,7 +1515,7 @@ Give it a try and let us know what you think!
 
 ## [10.17.0](https://github.com/powerhome/playbook/tree/10.17.0) (2021-12-10)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.16.0...10.17.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.16.0...10.17.0)**
 
 **Kit Enhancements:**
 
@@ -1542,7 +1542,7 @@ Give it a try and let us know what you think!
 
 ## [10.16.0](https://github.com/powerhome/playbook/tree/10.16.0) (2021-11-30)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.15.1...10.16.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.15.1...10.16.0)**
 
 **Kit Enhancements:**
 
@@ -1552,7 +1552,7 @@ Give it a try and let us know what you think!
 
 ## [10.15.1](https://github.com/powerhome/playbook/tree/10.15.1) (2021-11-29)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.15.0...10.15.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.15.0...10.15.1)**
 
 **Merged pull requests:**
 
@@ -1562,7 +1562,7 @@ Give it a try and let us know what you think!
 
 ## [10.15.0](https://github.com/powerhome/playbook/tree/10.15.0) (2021-11-29)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.14.0...10.15.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.14.0...10.15.0)**
 
 **Kit Enhancements:**
 
@@ -1603,7 +1603,7 @@ Give it a try and let us know what you think!
 
 ## [10.14.0](https://github.com/powerhome/playbook/tree/10.14.0) (2021-11-12)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.13.1...10.14.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.13.1...10.14.0)**
 
 **Fixed Bugs:**
 
@@ -1615,7 +1615,7 @@ Give it a try and let us know what you think!
 
 - No changes patched for NPM
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.13.0...10.13.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.13.0...10.13.1)**
 
 **Merged pull requests:**
 
@@ -1626,7 +1626,7 @@ Give it a try and let us know what you think!
 
 ## [10.13.0](https://github.com/powerhome/playbook/tree/10.13.0) (2021-11-04)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.13.0...10.13.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.13.0...10.13.0)**
 
 **Merged pull requests:**
 
@@ -1635,13 +1635,13 @@ Give it a try and let us know what you think!
 
 ## [10.13.0](https://github.com/powerhome/playbook/tree/10.13.0) (2021-10-08)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.12.0...10.13.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.12.0...10.13.0)**
 
 
 
 ## [10.12.0](https://github.com/powerhome/playbook/tree/10.12.0) (2021-10-08)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.11.0...10.12.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.11.0...10.12.0)**
 
 **Kit Enhancements:**
 
@@ -1662,7 +1662,7 @@ Give it a try and let us know what you think!
 
 ## [10.11.0](https://github.com/powerhome/playbook/tree/10.11.0) (2021-10-01)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.10.0...10.11.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.10.0...10.11.0)**
 
 **Kit Enhancements:**
 
@@ -1674,7 +1674,7 @@ Give it a try and let us know what you think!
 
 ## [10.10.0](https://github.com/powerhome/playbook/tree/10.10.0) (2021-09-23)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.9.0...10.10.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.9.0...10.10.0)**
 
 **Merged pull requests:**
 
@@ -1685,7 +1685,7 @@ Give it a try and let us know what you think!
 
 ## [10.9.0](https://github.com/powerhome/playbook/tree/10.9.0) (2021-09-20)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.8.0...10.9.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.8.0...10.9.0)**
 
 **Merged pull requests:**
 
@@ -1702,7 +1702,7 @@ Give it a try and let us know what you think!
 
 ## [10.8.0](https://github.com/powerhome/playbook/tree/10.8.0) (2021-09-09)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.7.1...10.8.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.7.1...10.8.0)**
 
 **Kit Enhancements:**
 
@@ -1718,7 +1718,7 @@ Give it a try and let us know what you think!
 
 ## [10.7.1](https://github.com/powerhome/playbook/tree/10.7.1) (2021-08-27)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.7.0...10.7.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.7.0...10.7.1)**
 
 **Improvements:**
 
@@ -1730,7 +1730,7 @@ Give it a try and let us know what you think!
 
 ## [10.7.0](https://github.com/powerhome/playbook/tree/10.7.0) (2021-08-26)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.6.1-alpha1...10.7.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.6.1-alpha1...10.7.0)**
 
 **Kit Enhancements:**
 
@@ -1748,13 +1748,13 @@ Give it a try and let us know what you think!
 
 ## [10.6.1-alpha1](https://github.com/powerhome/playbook/tree/10.6.1-alpha1) (2021-08-18)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.6.0...10.6.1-alpha1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.6.0...10.6.1-alpha1)**
 
 
 
 ## [10.6.0](https://github.com/powerhome/playbook/tree/10.6.0) (2021-08-17)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.5.0...10.6.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.5.0...10.6.0)**
 
 **Kit Enhancements:**
 
@@ -1773,7 +1773,7 @@ Give it a try and let us know what you think!
 
 ## [10.5.0](https://github.com/powerhome/playbook/tree/10.5.0) (2021-08-04)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.4.0...10.5.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.4.0...10.5.0)**
 
 **Kit Enhancements:**
 
@@ -1792,7 +1792,7 @@ Give it a try and let us know what you think!
 
 ## [10.4.0](https://github.com/powerhome/playbook/tree/10.4.0) (2021-07-28)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.3.0...10.4.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.3.0...10.4.0)**
 
 **Fixed Bugs:**
 
@@ -1802,7 +1802,7 @@ Give it a try and let us know what you think!
 
 ## [10.3.0](https://github.com/powerhome/playbook/tree/10.3.0) (2021-07-27)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.2.1...10.3.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.2.1...10.3.0)**
 
 **Improvements:**
 
@@ -1825,7 +1825,7 @@ Give it a try and let us know what you think!
 
 ## [10.2.1](https://github.com/powerhome/playbook/tree/10.2.1) (2021-07-22)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.2.0...10.2.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.2.0...10.2.1)**
 
 **Local Changes**
 
@@ -1835,7 +1835,7 @@ Give it a try and let us know what you think!
 
 ## [10.2.0](https://github.com/powerhome/playbook/tree/10.2.0) (2021-07-22)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.1.0...10.2.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.1.0...10.2.0)**
 
 **New Kits:**
 
@@ -1849,7 +1849,7 @@ Give it a try and let us know what you think!
 
 ## [10.1.0](https://github.com/powerhome/playbook/tree/10.1.0) (2021-07-14)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.0.1...10.1.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.0.1...10.1.0)**
 
 **Kit Enhancements:**
 
@@ -1885,7 +1885,7 @@ Give it a try and let us know what you think!
 
 ## [10.0.1](https://github.com/powerhome/playbook/tree/10.0.1) (2021-07-02)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/10.0.0...10.0.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/10.0.0...10.0.1)**
 
 **Fixed Bugs:**
 
@@ -1899,7 +1899,7 @@ Give it a try and let us know what you think!
 
 ## [10.0.0](https://github.com/powerhome/playbook/tree/10.0.0) (2021-06-30)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.19.0...10.0.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.19.0...10.0.0)**
 
 **Breaking changes:**
 
@@ -1922,7 +1922,7 @@ Give it a try and let us know what you think!
 
 ## [9.19.0](https://github.com/powerhome/playbook/tree/9.19.0) (2021-06-16)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.18.0...9.19.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.18.0...9.19.0)**
 
 **Kit Enhancements:**
 
@@ -1946,7 +1946,7 @@ Give it a try and let us know what you think!
 
 ## [9.18.0](https://github.com/powerhome/playbook/tree/9.18.0) (2021-06-09)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.17.0...9.18.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.17.0...9.18.0)**
 
 **Kit Enhancements:**
 
@@ -1961,7 +1961,7 @@ Give it a try and let us know what you think!
 
 ## [9.17.0](https://github.com/powerhome/playbook/tree/9.17.0) (2021-06-03)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.16.0...9.17.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.16.0...9.17.0)**
 
 **Merged pull requests:**
 
@@ -1976,7 +1976,7 @@ Give it a try and let us know what you think!
 
 ## [9.16.0](https://github.com/powerhome/playbook/tree/9.16.0) (2021-05-24)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.15.0...9.16.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.15.0...9.16.0)**
 
 **Fixed Bugs:**
 
@@ -1991,7 +1991,7 @@ Give it a try and let us know what you think!
 
 ## [9.15.0](https://github.com/powerhome/playbook/tree/9.15.0) (2021-05-19)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.14.1...9.15.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.14.1...9.15.0)**
 
 **Kit Enhancements:**
 
@@ -2003,7 +2003,7 @@ Give it a try and let us know what you think!
 
 ## [9.14.1](https://github.com/powerhome/playbook/tree/9.14.1) (2021-05-12)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.13.0...9.14.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.13.0...9.14.1)**
 
 **Kit Enhancements:**
 
@@ -2020,7 +2020,7 @@ Give it a try and let us know what you think!
 
 ## [9.13.0](https://github.com/powerhome/playbook/tree/9.13.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.12.0...9.13.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.12.0...9.13.0)**
 
 **Kit Enhancements:**
 
@@ -2028,7 +2028,7 @@ Give it a try and let us know what you think!
 
 ## [9.12.0](https://github.com/powerhome/playbook/tree/9.12.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.11.0...9.12.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.11.0...9.12.0)**
 
 **Kit Enhancements:**
 
@@ -2046,7 +2046,7 @@ Give it a try and let us know what you think!
 
 ## [9.11.0](https://github.com/powerhome/playbook/tree/9.11.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.10.0...9.11.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.10.0...9.11.0)**
 
 **Merged pull requests:**
 
@@ -2055,7 +2055,7 @@ Give it a try and let us know what you think!
 
 ## [9.10.0](https://github.com/powerhome/playbook/tree/9.10.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.9.0...9.10.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.9.0...9.10.0)**
 
 **Kit Enhancements:**
 
@@ -2072,7 +2072,7 @@ Give it a try and let us know what you think!
 
 ## [9.9.0](https://github.com/powerhome/playbook/tree/9.9.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.8.0...9.9.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.8.0...9.9.0)**
 
 **Kit Enhancements:**
 
@@ -2080,7 +2080,7 @@ Give it a try and let us know what you think!
 
 ## [9.8.0](https://github.com/powerhome/playbook/tree/9.8.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.7.0...9.8.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.7.0...9.8.0)**
 
 **Kit Enhancements:**
 
@@ -2096,7 +2096,7 @@ Give it a try and let us know what you think!
 
 ## [9.7.0](https://github.com/powerhome/playbook/tree/9.7.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.6.1...9.7.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.6.1...9.7.0)**
 
 **Kit Enhancements:**
 
@@ -2108,7 +2108,7 @@ Give it a try and let us know what you think!
 
 ## [9.6.1](https://github.com/powerhome/playbook/tree/9.6.1)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.6.0...9.6.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.6.0...9.6.1)**
 
 **Fixed Bugs:**
 
@@ -2116,7 +2116,7 @@ Give it a try and let us know what you think!
 
 ## [9.6.0](https://github.com/powerhome/playbook/tree/9.6.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.5.0...9.6.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.5.0...9.6.0)**
 
 **Fixed Bugs:**
 
@@ -2128,7 +2128,7 @@ Give it a try and let us know what you think!
 
 ## [9.5.0](https://github.com/powerhome/playbook/tree/9.5.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.4.0...9.5.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.4.0...9.5.0)**
 
 **Kit Enhancements:**
 
@@ -2138,7 +2138,7 @@ Give it a try and let us know what you think!
 
 ## [9.4.0](https://github.com/powerhome/playbook/tree/9.4.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.3.1...9.4.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.3.1...9.4.0)**
 
 **Kit Enhancements:**
 
@@ -2148,13 +2148,13 @@ Give it a try and let us know what you think!
 
 ## [9.3.1](https://github.com/powerhome/playbook/tree/9.3.1) (2021-04-09)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.3.0...9.3.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.3.0...9.3.1)**
 
 
 
 ## [9.3.0](https://github.com/powerhome/playbook/tree/9.3.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.2.2...9.3.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.2.2...9.3.0)**
 
 **Merged pull requests:**
 
@@ -2164,7 +2164,7 @@ Give it a try and let us know what you think!
 
 ## [9.2.2](https://github.com/powerhome/playbook/tree/9.2.2)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.2.1...9.2.2)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.2.1...9.2.2)**
 
 **Fixed Bugs:**
 
@@ -2174,7 +2174,7 @@ Give it a try and let us know what you think!
 
 ## [9.2.1](https://github.com/powerhome/playbook/tree/9.2.1) (2021-04-07)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.2.0...9.2.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.2.0...9.2.1)**
 
 **Fixed Bugs:**
 
@@ -2184,7 +2184,7 @@ Give it a try and let us know what you think!
 
 ## [9.1.0](https://github.com/powerhome/playbook/tree/9.1.0) (2021-04-05)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/9.0.0...9.1.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/9.0.0...9.1.0)**
 
 **Fixed Bugs:**
 
@@ -2199,7 +2199,7 @@ Give it a try and let us know what you think!
 
 ## [9.0.0](https://github.com/powerhome/playbook/tree/9.0.0) (2021-04-01)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.3.0...9.0.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/8.3.0...9.0.0)**
 
 **Breaking changes:**
 
@@ -2213,7 +2213,7 @@ Give it a try and let us know what you think!
 
 ## [8.3.0](https://github.com/powerhome/playbook/tree/8.3.0) (2021-04-01)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.2.1...8.3.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/8.2.1...8.3.0)**
 
 **Kit Enhancements:**
 
@@ -2230,8 +2230,8 @@ Give it a try and let us know what you think!
 
 
 ## [8.2.1](https://github.com/powerhome/playbook/tree/8.2.1) (2021-03-23)
-
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.3...8.2.1)
+**
+**[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.3...8.2.1)
 
 **Improvements:**
 - Make github_changelog_generator a dev dependency [\#1399](https://github.com/powerhome/playbook/pull/1399) ([benlangfeld](https://github.com/benlangfeld))
@@ -2243,12 +2243,12 @@ Give it a try and let us know what you think!
 
 ## [8.1.3](https://github.com/powerhome/playbook/tree/8.1.3) (2021-03-18)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.2.0...8.1.3)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/8.2.0...8.1.3)**
 
 
 ## [8.2.0](https://github.com/powerhome/playbook/tree/HEAD) (2021-03-11)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.2...8.2.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.2...8.2.0)**
 
 **Kit Enhancements:**
 
@@ -2279,15 +2279,15 @@ Give it a try and let us know what you think!
 
 ## [8.1.2](https://github.com/powerhome/playbook/tree/8.1.2) (2021-03-04)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.1...8.1.2)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.1...8.1.2)**
 
 ## [8.1.1](https://github.com/powerhome/playbook/tree/8.1.1) (2021-03-04)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.0.2...8.1.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/8.0.2...8.1.1)**
 
 ## [8.1.0](https://github.com/powerhome/playbook/tree/8.1.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.0.0...8.1.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/8.0.0...8.1.0)**
 
 **Kit Enhancements:**
 
@@ -2313,15 +2313,15 @@ Give it a try and let us know what you think!
 
 ## [8.0.3](https://github.com/powerhome/playbook/tree/8.0.3) (2021-03-04)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.2...8.0.3)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/8.1.2...8.0.3)**
 
 ## [8.0.2](https://github.com/powerhome/playbook/tree/8.0.2) (2021-03-04)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/8.2.0-alpha1...8.0.2)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/8.2.0-alpha1...8.0.2)**
 
 ## [8.0.0](https://github.com/powerhome/playbook/tree/8.0.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.16.0...8.0.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.16.0...8.0.0)**
 
 **Kit Enhancements:**
 
@@ -2351,7 +2351,7 @@ Give it a try and let us know what you think!
 
 ## [7.16.0](https://github.com/powerhome/playbook/tree/7.16.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.15.1...7.16.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.15.1...7.16.0)**
 
 **Kit Enhancements:**
 
@@ -2371,7 +2371,7 @@ Give it a try and let us know what you think!
 
 ## [7.15.0](https://github.com/powerhome/playbook/tree/7.15.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.14.0...7.15.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.14.0...7.15.0)**
 
 **Kit Enhancements:**
 
@@ -2396,7 +2396,7 @@ Give it a try and let us know what you think!
 
 ## [7.14.0](https://github.com/powerhome/playbook/tree/7.14.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.13.0...7.14.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.13.0...7.14.0)**
 
 **Kit Enhancements:**
 
@@ -2428,7 +2428,7 @@ Give it a try and let us know what you think!
 
 ## [7.13.0](https://github.com/powerhome/playbook/tree/7.13.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.12.1...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.12.1...HEAD)**
 
 **Kit Enhancements:**
 
@@ -2438,7 +2438,7 @@ Give it a try and let us know what you think!
 
 ## [7.12.1](https://github.com/powerhome/playbook/tree/7.12.1)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.12.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.12.0...HEAD)**
 
 **Fixed Bugs:**
 
@@ -2447,7 +2447,7 @@ Give it a try and let us know what you think!
 
 ## [7.12.0](https://github.com/powerhome/playbook/tree/7.12.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.12.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.12.0...HEAD)**
 
 **Kit Enhancements:**
 
@@ -2472,7 +2472,7 @@ Give it a try and let us know what you think!
 
 ## [7.11.0](https://github.com/powerhome/playbook/tree/HEAD)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.11.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.11.0...HEAD)**
 
 **Kit Enhancements:**
 
@@ -2506,7 +2506,7 @@ Give it a try and let us know what you think!
 
 ## [7.10.0](https://github.com/powerhome/playbook/tree/HEAD)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.10.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.10.0...HEAD)**
 
 **Kit Enhancements:**
 
@@ -2525,7 +2525,7 @@ Give it a try and let us know what you think!
 
 ## [7.9.0](https://github.com/powerhome/playbook/tree/HEAD)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.9.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.9.0...HEAD)**
 
 **Kit Enhancements:**
 
@@ -2537,7 +2537,7 @@ Give it a try and let us know what you think!
 
 ## [7.8.0](https://github.com/powerhome/playbook/tree/HEAD)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.8.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.8.0...HEAD)**
 
 **Kit Enhancements:**
 
@@ -2569,7 +2569,7 @@ Give it a try and let us know what you think!
 
 ## [7.7.0](https://github.com/powerhome/playbook/tree/HEAD)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.7.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.7.0...HEAD)**
 
 **Fixed Bugs:**
 
@@ -2583,21 +2583,21 @@ Give it a try and let us know what you think!
 
 ## [7.6.2](https://github.com/powerhome/playbook/tree/HEAD)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.5.1...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.5.1...HEAD)**
 
 **Fixed Bugs**
 - Remove Recursive Imports
 
 ## [7.6.1](https://github.com/powerhome/playbook/tree/HEAD)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.5.1...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.5.1...HEAD)**
 
 **Fixed Bugs**
 - Rebuild Yarn Lock File
 
 ## [7.6.0](https://github.com/powerhome/playbook/tree/HEAD)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.5.1...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.5.1...HEAD)**
 
 **Kit Enhancements**
 
@@ -2615,7 +2615,7 @@ Give it a try and let us know what you think!
 
 ## [7.5.1](https://github.com/powerhome/playbook/tree/HEAD)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.5.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.5.0...HEAD)**
 
 **Fixed Bugs:**
 
@@ -2625,7 +2625,7 @@ Give it a try and let us know what you think!
 
 ## [7.5.0](https://github.com/powerhome/playbook/tree/HEAD)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.4.2...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.4.2...HEAD)**
 
 **Merged pull requests:**
 
@@ -2644,7 +2644,7 @@ Give it a try and let us know what you think!
 
 ## [7.4.0](https://github.com/powerhome/playbook/tree/7.4.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.4.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.4.0...HEAD)**
 
 **Kit Enhancements:**
 
@@ -2667,7 +2667,7 @@ Give it a try and let us know what you think!
 
 ## [7.3.0](https://github.com/powerhome/playbook/tree/7.3.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.3.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.3.0...HEAD)**
 
 **Kit Enhancements:**
 
@@ -2689,7 +2689,7 @@ Give it a try and let us know what you think!
 
 ## [7.2.0](https://github.com/powerhome/playbook/tree/7.2.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.1.2...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.1.2...HEAD)**
 
 **Kit Enhancements:**
 
@@ -2722,7 +2722,7 @@ Give it a try and let us know what you think!
 
 ## [7.1.0](https://github.com/powerhome/playbook/tree/7.1.0) (2020-10-09)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha14...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha14...HEAD)**
 
 **Kit Enhancements:**
 
@@ -2756,7 +2756,7 @@ Give it a try and let us know what you think!
 
 ## [7.0.0](https://github.com/powerhome/playbook/tree/7.0.0) (2020-09-29)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.1...7.0.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.1...7.0.0)**
 
 **Breaking changes:**
 
@@ -2765,7 +2765,7 @@ Give it a try and let us know what you think!
 
 ## [6.8.1](https://github.com/powerhome/playbook/tree/6.8.1) (2020-09-28)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.0...6.8.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/6.8.0...6.8.1)**
 
 **Implemented enhancements:**
 
@@ -2774,7 +2774,7 @@ Give it a try and let us know what you think!
 
 ## [6.8.0](https://github.com/powerhome/playbook/tree/6.8.0) (2020-09-18)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.7.0...6.8.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/6.7.0...6.8.0)**
 
 **Implemented enhancements:**
 
@@ -2794,7 +2794,7 @@ Give it a try and let us know what you think!
 
 ## [6.7.0](2020-9-16)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.6.1...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/6.6.1...HEAD)**
 
 **Implemented enhancements:**
 
@@ -2803,7 +2803,7 @@ Give it a try and let us know what you think!
 
 ## [6.6.1](2020-9-16)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.6.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/6.6.0...HEAD)**
 
 **Merged pull requests:**
 
@@ -2811,7 +2811,7 @@ Give it a try and let us know what you think!
 
 ## [6.6.0](2020-9-11)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.5.2...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/6.5.2...HEAD)**
 
 **Breaking changes:**
 
@@ -2850,7 +2850,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.5.0] (2020-9-8)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha2...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha2...HEAD)**
 
 **Implemented enhancements:**
 
@@ -2861,7 +2861,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.4.2] (2020-9-3)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha1...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/7.0.1-alpha1...HEAD)**
 
 **Implemented enhancements:**
 
@@ -2875,7 +2875,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.4.0] (2020-8-28)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.3.1...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/6.3.1...HEAD)**
 
 **Implemented enhancements:**
 
@@ -2897,7 +2897,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.3.1](https://github.com/powerhome/playbook/tree/6.3.1) (2020-08-27)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.3.0...6.3.1)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/6.3.0...6.3.1)**
 
 **Merged pull requests:**
 
@@ -2905,7 +2905,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.3.0](https://github.com/powerhome/playbook/tree/6.3.0) (2020-08-24)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.2.1...6.3.0)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/6.2.1...6.3.0)**
 
 **Implemented enhancements:**
 
@@ -2948,7 +2948,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v6.2.0] 2020-8-13](https://github.com/powerhome/playbook/tree/HEAD/6.2.0)
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/6.1.0...HEAD)
+**[Full Changelog](https://github.com/powerhome/playbook/compare/6.1.0...HEAD)**
 
 **Implemented enhancements:**
 
