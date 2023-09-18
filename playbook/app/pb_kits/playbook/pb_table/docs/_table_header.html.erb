@@ -14,10 +14,10 @@
         text: "Full Name",
         colspan: 2,
         sort_menu: [
-          { item: "First Name", link: "?sort=firstname_desc", active: params["sort"] == "firstname_desc", direction: "desc" },
-          { item: "First Name", link: "?sort=firstname_asc", active: params["sort"] == "firstname_asc", direction: "asc" },
-          { item: "Last Name", link: "?sort=lastname_desc", active: params["sort"] == "lastname_desc", direction: "desc" },
-          { item: "Last Name", link: "?sort=lastname_asc", active: params["sort"] == "lastname_asc", direction: "asc" }
+          { item: "First Name Descending", link: "?sort=firstname_desc", active: params["sort"] == "firstname_desc", direction: "desc" },
+          { item: "First Name Ascending", link: "?sort=firstname_asc", active: params["sort"] == "firstname_asc", direction: "asc" },
+          { item: "Last Name Descending", link: "?sort=lastname_desc", active: params["sort"] == "lastname_desc", direction: "desc" },
+          { item: "Last Name Ascending", link: "?sort=lastname_asc", active: params["sort"] == "lastname_asc", direction: "asc" }
         ],
       }) %>
       <%= pb_rails("table/table_header", props: {
@@ -25,8 +25,8 @@
         id: "age",
         sort_dropdown: true,
         sort_menu: [
-          { item: "Age", link: "?sort=age_desc", active: params["sort"] == "age_desc", direction: "desc" },
-          { item: "Age", link: "?sort=age_asc", active: params["sort"] == "age_asc", direction: "asc" }
+          { item: "Age Descending", link: "?sort=age_desc", active: params["sort"] == "age_desc", direction: "desc" },
+          { item: "Age Ascending", link: "?sort=age_asc", active: params["sort"] == "age_asc", direction: "asc" }
         ],
       }) %>
       <%= pb_rails("table/table_header", props: { text: "Job Title" }) %>

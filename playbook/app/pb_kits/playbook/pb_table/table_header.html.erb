@@ -27,7 +27,7 @@
                                       tooltip_id: "sort-filter-btn-tooltip#{object.id}",
                                       position: object.placement ,
                                       padding: 'none'}) do %>
-        <%= pb_rails("nav") do %>
+        <%= pb_rails("nav", props: {classname: "pb_table_header_dropdown"}) do %>
           <% object.sort_menu.each do |item| %>
             <%= pb_rails("nav/item", props: { text: item[:item], link: item[:link], icon_right: sort_icon(item[:direction], item[:active]), active: item[:active] }) %>
           <% end %>
