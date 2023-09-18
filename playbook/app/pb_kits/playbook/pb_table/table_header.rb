@@ -16,7 +16,7 @@ module Playbook
                      default: 1
       prop :placement, type: Playbook::Props::Enum,
                        values: %w[top bottom left right top-start top-end bottom-start bottom-end right-start right-end left-start left-end],
-                       default: "bottom-start"
+                       default: "bottom-end"
       prop :sort_menu, type: Playbook::Props::HashArray,
                        default: [{}]
       prop :text, type: Playbook::Props::String,
