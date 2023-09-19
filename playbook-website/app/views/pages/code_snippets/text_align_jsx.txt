@@ -1,0 +1,13 @@
+<Title
+    text="Default Title"
+    textAlign="center"
+/>
+
+<Title
+    text="Default Title"
+    textAlign={{
+      xs: "center",
+      sm: "left",
+      lg: "center",
+    }}
+/>
