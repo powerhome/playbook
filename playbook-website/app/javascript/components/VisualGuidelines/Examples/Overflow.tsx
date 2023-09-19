@@ -14,7 +14,7 @@ const TOKENS = {
 const Overflow = ({ example, tokensExample }: { example: string, tokensExample?: string }) => (
   <React.Fragment>
     <Example
-      description="Control over the overflow of a container can be useful for your UI. The overflow prop can be used to override default overflow behavior and apply any of the tokens: "
+      description="The Overflow prop allows you to specify if and how a container's contents are visible when they exceed (i.e., overflow) the container's borders."
       example={example}
       title="Overflow"
     >
