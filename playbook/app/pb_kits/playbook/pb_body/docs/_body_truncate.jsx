@@ -20,6 +20,7 @@ const BodyTruncate = (props) => {
       />
 
       <br />
+      <br />
 
       <Caption text="After second row" />
       <Body
@@ -29,29 +30,12 @@ const BodyTruncate = (props) => {
       />
 
       <br />
+      <br />
 
       <Caption text="After third row" />
       <Body
           text={lorem}
           truncate="3"
-          {...props}
-      />
-
-      <br />
-
-      <Caption text="After fourth row" />
-      <Body
-          text={lorem}
-          truncate="4"
-          {...props}
-      />
-
-      <br />
-
-      <Caption text="After fifth row" />
-      <Body
-          text={lorem}
-          truncate="5"
           {...props}
       />
     </Flex>

@@ -21,6 +21,7 @@ const TitleTruncate = (props) => {
       />
 
       <br />
+      <br />
 
       <Caption text="After second row" />
       <Title
@@ -31,32 +32,13 @@ const TitleTruncate = (props) => {
       />
 
       <br />
+      <br />
 
       <Caption text="After third row" />
       <Title
           size={4}
           text={lorem}
           truncate="3"
-          {...props}
-      />
-
-      <br />
-
-      <Caption text="After fourth row" />
-      <Title
-          size={4}
-          text={lorem}
-          truncate="4"
-          {...props}
-      />
-
-      <br />
-
-      <Caption text="After fifth row" />
-      <Title
-          size={4}
-          text={lorem}
-          truncate="5"
           {...props}
       />
     </Flex>

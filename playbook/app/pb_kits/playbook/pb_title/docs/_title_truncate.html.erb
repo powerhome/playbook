@@ -3,20 +3,16 @@
 <%= pb_rails("flex", props: { orientation: "column", max_width: "md" }) do %>
   <%= pb_rails("caption", props: { text: "After first row" }) %>
   <%= pb_rails("title", props: { text: lorem, truncate: "1", size: 4 }) %>
+
+  <br />
   <br />
 
   <%= pb_rails("caption", props: { text: "After second row" }) %>
   <%= pb_rails("title", props: { text: lorem, truncate: "2", size: 4 }) %>
+
+  <br />
   <br />
 
   <%= pb_rails("caption", props: { text: "After third row" }) %>
   <%= pb_rails("title", props: { text: lorem, truncate: "3", size: 4 }) %>
-  <br />
-
-  <%= pb_rails("caption", props: { text: "After fourth row" }) %>
-  <%= pb_rails("title", props: { text: lorem, truncate: "4", size: 4 }) %>
-  <br />
-
-  <%= pb_rails("caption", props: { text: "After fifth row" }) %>
-  <%= pb_rails("title", props: { text: lorem, truncate: "5", size: 4 }) %>
 <% end %>
