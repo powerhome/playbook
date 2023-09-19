@@ -41,7 +41,7 @@ const Title = (props: TitleProps): React.ReactElement => {
   const ariaProps: {[key: string]: string | number} = buildAriaProps(aria)
   const dataProps: {[key: string]: string | number} = buildDataProps(data)
   const getBold = bold ? '' : 'thin'
-  const isTruncated = truncate ? `truncate_${truncate}` : null
+  const isTruncated = truncate ? `truncate-${truncate}` : null
   const isSizeNumberOrString = typeof size === "number" || typeof size === "string"
 
   const buildResponsiveSizeCss = () => {
@@ -49,7 +49,7 @@ const Title = (props: TitleProps): React.ReactElement => {
 
     if (!isSizeNumberOrString) {
       Object.entries(size).forEach((sizeObj) => {
-        css += `pb_title_kit_${sizeObj[0]}_size_${sizeObj[1]} `
+        css += `pb_title_kit_${sizeObj[0]}_${sizeObj[1]} `
       })
     }
 

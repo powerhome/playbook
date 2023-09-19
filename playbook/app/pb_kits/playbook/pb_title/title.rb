@@ -24,7 +24,7 @@ module Playbook
         if is_size_responsive
           generate_classname("pb_title_kit", variant, color, is_bold, is_truncated) + generate_responsive_size_classname
         else
-          generate_classname("pb_title_kit", "size_#{size}", variant, color, is_bold, is_truncated)
+          generate_classname("pb_title_kit", size, variant, color, is_bold, is_truncated)
         end
       end
 
@@ -33,7 +33,7 @@ module Playbook
       end
 
       def is_truncated
-        truncate ? "truncate_#{truncate}" : nil
+        truncate ? "truncate-#{truncate}" : nil
       end
 
       def is_size_responsive
@@ -44,7 +44,7 @@ module Playbook
         css = ""
         if is_size_responsive
           size.each do |key, value|
-            css += " pb_title_kit_#{key}_size_#{value}"
+            css += " pb_title_kit_#{key}_#{value}"
           end
         end
 
