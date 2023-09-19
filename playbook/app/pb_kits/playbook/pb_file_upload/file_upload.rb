@@ -18,7 +18,7 @@ module Playbook
       prop :full_width, type: Playbook::Props::Boolean,
                         default: false
 
-      prop :input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
 
       def classname

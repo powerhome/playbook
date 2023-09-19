@@ -4,7 +4,7 @@ module Playbook
   module PbPassphrase
     class Passphrase < Playbook::KitBase
       prop :confirmation, type: Playbook::Props::Boolean, default: false
-      prop :input_props, type: Playbook::Props::Hash, default: {}
+      prop :input_props, type: Playbook::Props::HashProp, default: {}
       prop :label
       prop :show_tips_below, type: Playbook::Props::Enum,
                              values: %w[always xs sm md lg xl],

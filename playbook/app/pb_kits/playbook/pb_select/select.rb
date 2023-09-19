@@ -6,7 +6,7 @@ require "action_view"
 module Playbook
   module PbSelect
     class Select < Playbook::KitBase
-      prop :attributes, type: Playbook::Props::Hash,
+      prop :attributes, type: Playbook::Props::HashProp,
                         default: {}
       prop :blank_selection
       prop :compact, type: Playbook::Props::Boolean, default: false
