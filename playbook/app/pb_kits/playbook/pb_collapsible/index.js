@@ -38,7 +38,7 @@ export default class PbCollapsible extends PbEnhancedElement {
     // Once the transition is complete, remove the inline max-height so the content can scale responsively
     window.setTimeout(() => {
       elem.style.height = ''
-      elem.style.overflow = ""
+      elem.style.overflow = "visible"
     }, 300)
   }
 
