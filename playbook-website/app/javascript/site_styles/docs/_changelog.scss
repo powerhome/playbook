@@ -1,0 +1,29 @@
+.changelog-container {
+    blockquote {
+        position: relative;
+        font-style: normal;
+        padding: 0px 0px 0px calc(#{$space_md} - 1px);
+
+        &::before {
+            content: '';
+            display: inline-block;
+            background: $border_light;
+            width: 7px;
+            height: 100%;
+            border-radius: 5px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        li, p {
+            font-size: $text_medium;
+        }
+    }
+
+    h4:last-of-type {
+        border-top: 1px solid $border_light;
+        padding-top: $space_md;
+        font-weight: $regular;
+    }
+}
