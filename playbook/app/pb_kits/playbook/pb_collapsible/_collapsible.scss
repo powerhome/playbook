@@ -12,6 +12,7 @@
     overflow: hidden;
     transition: height 300ms, padding 300ms ease-in-out;
   }
+  
   .toggle-content.is-visible {
     display: block;
     height: auto;
