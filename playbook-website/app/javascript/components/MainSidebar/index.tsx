@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Nav, NavItem, useCollapsible } from "playbook-ui";
 import { renderNavItem } from "./NestedNavItems";
 
@@ -29,10 +29,6 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
     //return true at end to disable default collapsible behavior
     return true;
   };
-
-  useEffect(() => {
-    console.log(isActive);
-  }, [isActive]);
 
   //right icon click for top level item
   const handleComponentsIconClick = () => {
