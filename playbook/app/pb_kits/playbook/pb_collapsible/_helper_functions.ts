@@ -13,7 +13,6 @@ export const showElement = (elem:any) => {
 
 export const hideElement = (elem:any) => {
   elem.style.height = elem.scrollHeight + 'px';
-  elem.classList.add('overflow-hidden'); // Add overflow-hidden class
 
   window.setTimeout(() => {
     elem.style.height = '0';
