@@ -1,0 +1,5 @@
+@import "tokens/overflow
+
+.selector {
+    overflow-x: $visible;
+}
