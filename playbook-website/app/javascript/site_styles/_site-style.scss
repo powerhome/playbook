@@ -16,74 +16,74 @@ body {
 }
 
 .pb--page {
-  &--topNav {
-    flex: 0 0;
-    padding: $space_sm $space_md $space_xs $space_md;
-    background: $white;
-    position: relative;
-    h1 {
-      display: flex;
-      align-items: center;
-      img {
-        display: flex;
-      }
-    }
-    &--separator {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
-    }
-    &.dark{
-      background: tint(#0a0527, 10);
-    }
-    .desktop-kit-search {
-      width: 33vw;
-      max-width: 300px;
-      [class*=_label] {
-        margin-bottom: 0 !important;
-      }
-      .text_input_wrapper {
-        margin-bottom: 0 !important;
-      }
-    }
-    .mobile-kit-search {
-      display: none;
-    }
-    .pb-version-tag {
-      text-align: right;
-      position: relative;
-      bottom: $space_md - 4;
-    }
-    .separator-explicit-height {
-      height: $space_xl + 5;
-      margin-left: $space_xs;
-      margin-right: $space_xs;
-    }
-    // Mobile Overrides
-    @include break_at($nav_breakpoint) {
-      .full-size-nav, .github-nav-icon {
-        display: none;
-      }
-      .toggle-wrapper {
-        margin-right: 65px;
-      }
-    }
-    @include break_at(breakpoint("sm")) {
-      .desktop-kit-search, .separator-explicit-height {
-        display: none;
-      }
-      .mobile-kit-search {
-        display: block;
-      }
-    }
-    @include break_at(375px) {
-      .toggle-wrapper {
-        display: none;
-      }
-    }
-  }
+  // &--topNav {
+  //   flex: 0 0;
+  //   padding: $space_sm $space_md $space_xs $space_md;
+  //   background: $white;
+  //   position: relative;
+  //   h1 {
+  //     display: flex;
+  //     align-items: center;
+  //     img {
+  //       display: flex;
+  //     }
+  //   }
+  //   &--separator {
+  //     position: absolute;
+  //     bottom: 0;
+  //     right: 0;
+  //     left: 0;
+  //     width: 100%;
+  //   }
+  //   &.dark{
+  //     background: tint(#0a0527, 10);
+  //   }
+  //   .desktop-kit-search {
+  //     width: 33vw;
+  //     max-width: 300px;
+  //     [class*=_label] {
+  //       margin-bottom: 0 !important;
+  //     }
+  //     .text_input_wrapper {
+  //       margin-bottom: 0 !important;
+  //     }
+  //   }
+  //   .mobile-kit-search {
+  //     display: none;
+  //   }
+  //   .pb-version-tag {
+  //     text-align: right;
+  //     position: relative;
+  //     bottom: $space_md - 4;
+  //   }
+  //   .separator-explicit-height {
+  //     height: $space_xl + 5;
+  //     margin-left: $space_xs;
+  //     margin-right: $space_xs;
+  //   }
+  //   // Mobile Overrides
+  //   @include break_at($nav_breakpoint) {
+  //     .full-size-nav, .github-nav-icon {
+  //       display: none;
+  //     }
+  //     .toggle-wrapper {
+  //       margin-right: 65px;
+  //     }
+  //   }
+  //   @include break_at(breakpoint("sm")) {
+  //     .desktop-kit-search, .separator-explicit-height {
+  //       display: none;
+  //     }
+  //     .mobile-kit-search {
+  //       display: block;
+  //     }
+  //   }
+  //   @include break_at(375px) {
+  //     .toggle-wrapper {
+  //       display: none;
+  //     }
+  //   }
+  // }
 
   &--content {
     min-height: calc(100vh - 89px);

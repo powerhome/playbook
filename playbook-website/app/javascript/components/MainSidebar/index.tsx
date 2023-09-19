@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Nav, NavItem, useCollapsible } from "playbook-ui";
+import { Nav, NavItem, useCollapsible, Image, Pill, Flex } from "playbook-ui";
 import { renderNavItem } from "./NestedNavItems";
+import {PBLogo} from "../../images/pb-logo.svg"
+import KitSearch from "../KitSearch";
 
-const MainSidebar = ({ dark, type, category, kit, kits }) => {
+const MainSidebar = ({ dark, type, category, kit, kits, PBversion, search_list }) => {
   //active state for navItems(will be dedundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
 
@@ -46,7 +48,59 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
   };
 
   return (
+    <>
+    <Image url={PBLogo}/>
+    <Pill text={PBversion} variant="success"/>
+    <Flex orientation="column" align="stretch" margin="md">
+    <KitSearch classname="desktop-kit-search" id="desktop-kit-search" kits={search_list}/>
+    </Flex>
     <Nav dark={dark} variant="bold" paddingTop="xxs">
+    <NavItem
+        cursor="pointer"
+        dark={dark}
+        fontSize="small"
+        fontWeight="bolder"
+        key="top-nav-item1"
+        link={componentsLink}
+        marginY="none"
+        paddingY="xxs"
+        text="What's New"
+      />
+       <NavItem
+        cursor="pointer"
+        dark={dark}
+        fontSize="small"
+        fontWeight="bolder"
+        key="top-nav-item1"
+        // link={}
+        marginY="none"
+        paddingY="xxs"
+        text="Getting Started"
+      />
+      <NavItem
+        cursor="pointer"
+        dark={dark}
+        fontSize="small"
+        fontWeight="bolder"
+        key="top-nav-item1"
+        // link={}
+        marginY="none"
+        paddingY="xxs"
+        text="Design"
+      />
+       <NavItem
+        cursor="pointer"
+        dark={dark}
+        fontSize="small"
+        fontWeight="bolder"
+        key="top-nav-item1"
+        // link={}
+        marginY="none"
+        paddingY="xxs"
+        text="Samples"
+      />
+
+
       <NavItem
         active={activeTopLevel()}
         collapsed={isTopLevelCollapsed}
@@ -80,6 +134,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
         )}
       </NavItem>
     </Nav>
+    </>
   );
 };
 
