@@ -33,26 +33,33 @@ export default class PbCollapsible extends PbEnhancedElement {
     const height = getHeight()
     elem.classList.add('is-visible')
     elem.style.height = height // Update the max-height
+    // elem.classList.remove('overflow-hidden'); // Remove overflow-hidden class
+    elem.style.overflow = "hidden"
+
 
     // Once the transition is complete, remove the inline max-height so the content can scale responsively
     window.setTimeout(() => {
       elem.style.height = ''
+      elem.style.overflow = ""
     }, 300)
   }
 
   hideElement(elem) {
     // Give the element a height to change from
     elem.style.height = elem.scrollHeight + 'px'
+    // elem.classList.add('overflow-hidden'); // Add overflow-hidden class
 
     window.setTimeout(() => {
       elem.style.height = '0'
       elem.style.paddingTop = '0'
       elem.style.paddingBottom = '0'
+      elem.style.overflow = "hidden"
     }, 1)
 
     // When the transition is complete, hide it
     window.setTimeout(() => {
       elem.classList.remove('is-visible')
+      elem.style.overflow = ""
     }, 300)
   }
 
