@@ -8,7 +8,6 @@ type FlexItemPropTypes = {
   grow?: boolean,
   shrink?: boolean,
   className?: string,
-  // overflow?: "auto" | "hidden" | "initial" | "inherit" | "scroll" | "visible",
   order?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'first' | 'none',
   alignSelf?: "start" | "end" | "center" | "stretch" | null,
   displayFlex?: boolean
