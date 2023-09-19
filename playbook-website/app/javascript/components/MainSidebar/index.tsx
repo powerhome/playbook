@@ -19,10 +19,6 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
 
   //set up toggling for top level item
   const handleComponentsClick = () => {
-    const topLevelLink = `/kits${type ? `?type=${type}` : ""}`;
-    currentURL === topLevelLink
-      ? null
-      : setIsTopLevelCollapsed(!isTopLevelCollapsed);
     //return true at end to disable default collapsible behavior
     return true;
   };
@@ -38,6 +34,7 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
   return (
     <Nav dark={dark} variant="bold" paddingTop="xxs">
       <NavItem
+        // active={currentURL === `/kits${type ? `?type=${type}` : ""}`}
         collapsed={isTopLevelCollapsed}
         collapsible
         collapsibleTrail
