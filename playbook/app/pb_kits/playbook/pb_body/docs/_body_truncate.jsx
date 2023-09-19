@@ -14,23 +14,19 @@ const BodyTruncate = (props) => {
     >
       <Caption text="After first row" />
       <Body
+          marginBottom="md"
           text={lorem}
           truncate="1"
           {...props}
       />
 
-      <br />
-      <br />
-
       <Caption text="After second row" />
       <Body
+          marginBottom="md"
           text={lorem}
           truncate="2"
           {...props}
       />
-
-      <br />
-      <br />
 
       <Caption text="After third row" />
       <Body

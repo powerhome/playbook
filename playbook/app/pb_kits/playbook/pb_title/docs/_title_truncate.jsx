@@ -14,25 +14,21 @@ const TitleTruncate = (props) => {
     >
       <Caption text="After first row" />
       <Title
+          marginBottom="md"
           size={4}
           text={lorem}
           truncate="1"
           {...props}
       />
 
-      <br />
-      <br />
-
       <Caption text="After second row" />
       <Title
+          marginBottom="md"
           size={4}
           text={lorem}
           truncate="2"
           {...props}
       />
-
-      <br />
-      <br />
 
       <Caption text="After third row" />
       <Title
