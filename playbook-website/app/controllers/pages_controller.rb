@@ -186,7 +186,11 @@ private
     is_rails_kit = action_name == "kit_show_rails"
     files = is_rails_kit ? File.join("**", "*.erb") : File.join("**", "*.jsx")
     kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
-    redirect_to action: action_name unless kit_files.present?
+    if action_name === "kit_show_rails"
+      redirect_to action: "kit_show_react" unless kit_files.present?
+    elsif action_name === "kit_show_react"
+      redirect_to action: "kit_show_rails" unless kit_files.present?
+    end
   end
 
   def pb_doc_kit_path(kit, *args)
