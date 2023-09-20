@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Nav, NavItem, useCollapsible, Image, Pill, Flex } from "playbook-ui";
 import { renderNavItem, kitsType } from "./KitsNavItems";
 import PBLogo from "../../images/pb-logo.svg";
@@ -22,7 +22,7 @@ const MainSidebar = ({
   const collapsibles = kits.map(() => useCollapsible());
 
   //hook into collapsible logic for top level item
-  const topLevelCollapsibles = SideBarNavItems.map(()=> useCollapsible())
+  const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
 
   const currentURL = window.location.pathname + window.location.search;
 
@@ -40,11 +40,11 @@ const MainSidebar = ({
   //set up toggling for top level item
   const handleComponentsClick = (item, index) => {
     topLevelCollapsibles.forEach(([, , setCollapsed], idx) => {
-     setIsActive(() => {
-      const newIsActive = {};
-      newIsActive[item] = true;
-      return newIsActive;
-    });
+      setIsActive(() => {
+        const newIsActive = {};
+        newIsActive[item] = true;
+        return newIsActive;
+      });
       if (idx === index) {
         setCollapsed(false);
       } else {
@@ -57,11 +57,11 @@ const MainSidebar = ({
 
   //right icon click for top level item
   const handleComponentsIconClick = (i) => {
-    topLevelCollapsibles.forEach(([,toggle ,], idx) => {
+    topLevelCollapsibles.forEach(([, toggle], idx) => {
       if (idx === i) {
-        toggle()
+        toggle();
       }
-    })
+    });
   };
 
   const activeTopLevel = (key, link) => {
@@ -75,6 +75,11 @@ const MainSidebar = ({
       ? currentURL === kitsLink
       : false;
   };
+
+  //collapsed logic for toplevel nav items
+  const toggleTopLevelNavItem = (key, link, collapsed) => { 
+    return activeTopLevel(key, link) ? false : collapsed
+  }
 
   return (
     <>
@@ -97,72 +102,74 @@ const MainSidebar = ({
       </Flex>
       <Nav dark={dark} variant="bold" paddingTop="xxs">
         {SideBarNavItems.map(({ name, key, children, leftIcon, link }, i) => {
-          const [collapsed] = topLevelCollapsibles[i]
-        
+          const [collapsed] = topLevelCollapsibles[i];
+
           return (
-          <NavItem
-            active={activeTopLevel(key, link)}
-            collapsed={children && activeTopLevel(key, link) ? false : collapsed}
-            collapsible={children}
-            collapsibleTrail={children}
-            cursor="pointer"
-            dark={dark}
-            fontSize="small"
-            fontWeight="bolder"
-            iconRight={children && ["plus", "minus"]}
-            key={key}
-            iconLeft={leftIcon}
-            link={TopLevelLink(link)}
-            marginY="none"
-            onClick={() => handleComponentsClick(key, i)}
-            onIconRightClick={children && (()=>handleComponentsIconClick(i))}
-            paddingY="xxs"
-            text={name}
-          >
-            {children && (
-              <>
-                {name === "Components" && (
-                  <>
-                    {kits.map((link, i) =>
-                      renderNavItem(
-                        link,
-                        i,
-                        collapsibles,
-                        category,
-                        type,
-                        dark,
-                        kit,
-                        isActive,
-                        setIsActive
-                      )
-                    )}
-                  </>
-                )}
-                {name === "Tokens and Guidelines" && (
-                  <>
-                    {VisualGuidelinesItems.map(({ name, link }, i) => (
-                      <>
-                        <NavItem
-                          active={link === currentURL}
-                          cursor="pointer"
-                          dark={dark}
-                          fontSize="small"
-                          key={`${link}-${i}`}
-                          link={link}
-                          marginBottom="none"
-                          marginTop="xxs"
-                          text={name}
-                          paddingY="xxs"
-                        />
-                      </>
-                    ))}
-                  </>
-                )}
-              </>
-            )}
-          </NavItem>
-          )
-                    })}
+            <NavItem
+              active={activeTopLevel(key, link)}
+              collapsed={children && toggleTopLevelNavItem(key, link, collapsed)}
+              collapsible={children}
+              collapsibleTrail={children}
+              cursor="pointer"
+              dark={dark}
+              fontSize="small"
+              fontWeight="bolder"
+              iconRight={children && ["plus", "minus"]}
+              key={key}
+              iconLeft={leftIcon}
+              link={TopLevelLink(link)}
+              marginY="none"
+              onClick={() => handleComponentsClick(key, i)}
+              onIconRightClick={
+                children && (() => handleComponentsIconClick(i))
+              }
+              paddingY="xxs"
+              text={name}
+            >
+              {children && (
+                <>
+                  {name === "Components" && (
+                    <>
+                      {kits.map((link, i) =>
+                        renderNavItem(
+                          link,
+                          i,
+                          collapsibles,
+                          category,
+                          type,
+                          dark,
+                          kit,
+                          isActive,
+                          setIsActive
+                        )
+                      )}
+                    </>
+                  )}
+                  {name === "Tokens and Guidelines" && (
+                    <>
+                      {VisualGuidelinesItems.map(({ name, link }, i) => (
+                        <>
+                          <NavItem
+                            active={link === currentURL}
+                            cursor="pointer"
+                            dark={dark}
+                            fontSize="small"
+                            key={`${link}-${i}`}
+                            link={link}
+                            marginBottom="none"
+                            marginTop="xxs"
+                            text={name}
+                            paddingY="xxs"
+                          />
+                        </>
+                      ))}
+                    </>
+                  )}
+                </>
+              )}
+            </NavItem>
+          );
+        })}
       </Nav>
     </>
   );
