@@ -1,2 +1,2 @@
-declare module "playbook-ui"
-declare module "*.svg"
+declare module "playbook-ui";
+declare module "*.svg";

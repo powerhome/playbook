@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import { Nav, NavItem, useCollapsible, Image, Pill, Flex } from "playbook-ui";
 import { renderNavItem } from "./NestedNavItems";
-import {PBLogo} from "../../images/pb-logo.svg"
+import PBLogo from "../../images/pb-logo.svg";
 import KitSearch from "../KitSearch";
+import { SideBarNavItems } from "./SidebarNavItems";
 
-const MainSidebar = ({ dark, type, category, kit, kits, PBversion, search_list }) => {
+const MainSidebar = ({
+  dark,
+  type,
+  category,
+  kit,
+  kits,
+  PBversion,
+  search_list,
+}) => {
   //active state for navItems(will be dedundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
 
@@ -49,91 +58,71 @@ const MainSidebar = ({ dark, type, category, kit, kits, PBversion, search_list }
 
   return (
     <>
-    <Image url={PBLogo}/>
-    <Pill text={PBversion} variant="success"/>
-    <Flex orientation="column" align="stretch" margin="md">
-    <KitSearch classname="desktop-kit-search" id="desktop-kit-search" kits={search_list}/>
-    </Flex>
-    <Nav dark={dark} variant="bold" paddingTop="xxs">
-    <NavItem
-        cursor="pointer"
-        dark={dark}
-        fontSize="small"
-        fontWeight="bolder"
-        key="top-nav-item1"
-        link={componentsLink}
-        marginY="none"
-        paddingY="xxs"
-        text="What's New"
-      />
-       <NavItem
-        cursor="pointer"
-        dark={dark}
-        fontSize="small"
-        fontWeight="bolder"
-        key="top-nav-item1"
-        // link={}
-        marginY="none"
-        paddingY="xxs"
-        text="Getting Started"
-      />
-      <NavItem
-        cursor="pointer"
-        dark={dark}
-        fontSize="small"
-        fontWeight="bolder"
-        key="top-nav-item1"
-        // link={}
-        marginY="none"
-        paddingY="xxs"
-        text="Design"
-      />
-       <NavItem
-        cursor="pointer"
-        dark={dark}
-        fontSize="small"
-        fontWeight="bolder"
-        key="top-nav-item1"
-        // link={}
-        marginY="none"
-        paddingY="xxs"
-        text="Samples"
-      />
-
-
-      <NavItem
-        active={activeTopLevel()}
-        collapsed={isTopLevelCollapsed}
-        collapsible
-        collapsibleTrail
-        cursor="pointer"
-        dark={dark}
-        fontSize="small"
-        fontWeight="bolder"
-        iconRight={["plus", "minus"]}
-        key="top-nav-item"
-        link={componentsLink}
-        marginY="none"
-        onClick={() => handleComponentsClick("top-nav-item")}
-        onIconRightClick={handleComponentsIconClick}
-        paddingY="xxs"
-        text="Components"
+      <Flex
+        orientation="row"
+        spacing="between"
+        align="center"
+        marginTop="lg"
+        marginX="sm"
       >
-        {kits.map((link, i) =>
-          renderNavItem(
-            link,
-            i,
-            collapsibles,
-            category,
-            type,
-            dark,
-            kit,
-            isActive,
-            setIsActive
-          )
-        )}
-      </NavItem>
-    </Nav>
+        <Image alt="Playbook logo" url={PBLogo} />
+        <Pill text={PBversion} variant="success" />
+      </Flex>
+      <Flex orientation="column" align="stretch" margin="sm">
+        <KitSearch
+          classname="desktop-kit-search"
+          id="desktop-kit-search"
+          kits={search_list}
+        />
+      </Flex>
+      <Nav dark={dark} variant="bold" paddingTop="xxs">
+        {SideBarNavItems.map(({ name, key, children, leftIcon, link }) => (
+          <NavItem
+            // active={activeTopLevel()}
+            collapsed={children && isTopLevelCollapsed}
+            collapsible={children}
+            collapsibleTrail={children}
+            cursor="pointer"
+            dark={dark}
+            fontSize="small"
+            fontWeight="bolder"
+            iconRight={children && ["plus", "minus"]}
+            key={key}
+            iconLeft={leftIcon}
+            link={link}
+            marginY="none"
+            onClick={() => handleComponentsClick(key)}
+            onIconRightClick={children && handleComponentsIconClick}
+            paddingY="xxs"
+            text={name}
+          >
+            {children && (
+              <>
+              {
+                name === "Components" && (
+                  <>
+                  {kits.map((link, i) =>
+                  renderNavItem(
+                    link,
+                    i,
+                    collapsibles,
+                    category,
+                    type,
+                    dark,
+                    kit,
+                    isActive,
+                    setIsActive
+                  )
+                )}
+                </>
+                )
+              }
+                
+              </>
+            )}
+          </NavItem>
+        ))}
+      </Nav>
     </>
   );
 };
