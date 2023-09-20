@@ -56,7 +56,7 @@ const Currency = (props: CurrencyProps) => {
   const emphasizedClass = emphasized ? '' : '_deemphasized'
 
   let variantClass
-  if (size === 'sm') {
+  if (size) {
     if (variant === 'light') {
       variantClass = '_light'
     } else if (variant === 'bold') {
