@@ -78,8 +78,6 @@ module Playbook
       end
 
       def variant_class
-        return unless size == "sm"
-
         case variant
         when "light"
           "_light"

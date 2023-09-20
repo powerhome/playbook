@@ -56,12 +56,10 @@ const Currency = (props: CurrencyProps) => {
   const emphasizedClass = emphasized ? '' : '_deemphasized'
 
   let variantClass
-  if (size) {
-    if (variant === 'light') {
-      variantClass = '_light'
-    } else if (variant === 'bold') {
-      variantClass = '_bold'
-    }
+  if (variant === 'light') {
+    variantClass = '_light'
+  } else if (variant === 'bold') {
+    variantClass = '_bold'
   }
 
   const [whole, decimal = '00'] = amount.split('.')
