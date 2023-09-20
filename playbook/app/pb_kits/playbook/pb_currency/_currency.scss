@@ -47,10 +47,11 @@
 
 
     &[class*=_bold] [class^=pb_body_kit][class*=_light] {
-      &:not([class*=dark]) {
-        color: $text_lt_default;
-      }
+      color: $text_lt_default;
       font-weight: $bolder;
+      &.dark {
+        color: $text_dk_default;
+      }
     }
 
     & > [class*=dollar_sign] {
