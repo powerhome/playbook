@@ -1,18 +1,3 @@
-<div class="mobile-sidebar-pages">
-  <%= pb_rails("nav", props: { title: "Pages", link: "/", padding_y: "sm", variant: "subtle" }) do %>
-    <%= pb_rails("nav/item", props: { active: current_page?(guides_parent_path('getting_started')), text: "Getting Started", link: guides_parent_path('getting_started') }) %>
-    <%= pb_rails("nav/item", props: { active: current_page?('/visual_guidelines'), text: "Design", link: "/visual_guidelines" }) %>
-    <%= pb_rails("nav/item", props: { active: action_name.include?('kit'), text: "Components", link: "/kits" }) %>
-    <%= pb_rails("nav/item", props: { active: action_name.include?('sample'), text: "Samples", link: "/samples" }) %>
-  <% end %>
-
-  <%= pb_rails("section_separator") %>
-</div>
-
-<% if action_name.include?('kit') || current_page?('/tokens') || current_page?('/utilities') %>
+<% if action_name.include?('kit') || current_page?('/tokens') || current_page?('/utilities') || current_page?('/visual_guidelines') || request.path.match(/^\/visual_guidelines\//) %>
   <%= react_component("MainSidebar", dark: dark_mode?, type: @type, category: @category, kit: @kit, kits: MENU["kits"], PBversion: Playbook::VERSION, search_list: search_list()) %>
-<% end %>
-
-<% if current_page?('/visual_guidelines') || request.path.match(/^\/visual_guidelines\//) %>
-  <%= react_component("Sidebar") %>
 <% end %>

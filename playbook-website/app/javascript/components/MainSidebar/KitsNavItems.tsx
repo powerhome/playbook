@@ -4,6 +4,14 @@ import { linkFormat } from "../../utilities/website_sidebar_helper";
 
 const currentURL = window.location.pathname + window.location.search;
 
+export const kitsType = (type) => {
+  if (type === null || type === undefined) {
+    return "rails";
+  } else {
+    return type;
+  }
+};
+
 export const renderNavItem = (
   link,
   i,
@@ -43,6 +51,7 @@ export const renderNavItem = (
     });
   };
 
+
   //click on non-collapsible navitem click
   const handleNonCollapseLinkClick = (link) => {
     setIsActive(() => {
@@ -54,10 +63,10 @@ export const renderNavItem = (
 
   const generateLink = (categoryKey, sublink, type) => {
     if (sublink) {
-      const link = `/kits/${sublink}/${type}`;
+      const link = `/kits/${sublink}/${kitsType(type)}`;
       return currentURL === link ? "" : link;
     } else {
-      const link = `/kit_category/${categoryKey}?type=${type}`;
+      const link = `/kit_category/${categoryKey}?type=${kitsType(type)}`;
       return currentURL === link ? "" : link;
     }
   };

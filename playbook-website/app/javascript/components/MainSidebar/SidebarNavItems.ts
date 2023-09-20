@@ -9,7 +9,7 @@ export const SideBarNavItems = [
     {
         name: "Getting Started",
         key: "top-nav-item-2",
-        link: "",
+        link: "/guides/getting_started",
         children: true,
         leftIcon:"flag"
     },

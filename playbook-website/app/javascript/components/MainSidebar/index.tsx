@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Nav, NavItem, useCollapsible, Image, Pill, Flex } from "playbook-ui";
-import { renderNavItem } from "./NestedNavItems";
+import { renderNavItem, kitsType } from "./KitsNavItems";
 import PBLogo from "../../images/pb-logo.svg";
 import KitSearch from "../KitSearch";
 import { SideBarNavItems } from "./SidebarNavItems";
+import { VisualGuidelinesItems } from "./GuidelinesNavItems";
 
 const MainSidebar = ({
   dark,
@@ -24,10 +25,17 @@ const MainSidebar = ({
   const [isTopLevelCollapsed, setIsTopLevelCollapsed] = useState(false);
 
   const currentURL = window.location.pathname + window.location.search;
-  const componentsLink =
-    currentURL === `/kits${type ? `?type=${type}` : ""}`
-      ? ""
-      : `/kits${type ? `?type=${type}` : ""}`;
+
+  const TopLevelLink = (link) => {
+    if (link === "/kits") {
+      return currentURL ===
+        `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`
+        ? ""
+        : `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
+    } else {
+      return currentURL === link ? "" : link;
+    }
+  };
 
   //set up toggling for top level item
   const handleComponentsClick = (item) => {
@@ -48,11 +56,15 @@ const MainSidebar = ({
       : setIsTopLevelCollapsed(true);
   };
 
-  const activeTopLevel = () => {
-    return isActive["top-nav-item"]
+  const activeTopLevel = (key, link) => {
+    const kitsLink =
+      link === "/kits"
+        ? `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`
+        : link;
+    return isActive[key]
       ? true
       : Object.keys(isActive).length === 0
-      ? currentURL === `/kits${type ? `?type=${type}` : ""}`
+      ? currentURL === kitsLink
       : false;
   };
 
@@ -78,7 +90,7 @@ const MainSidebar = ({
       <Nav dark={dark} variant="bold" paddingTop="xxs">
         {SideBarNavItems.map(({ name, key, children, leftIcon, link }) => (
           <NavItem
-            // active={activeTopLevel()}
+            active={activeTopLevel(key, link)}
             collapsed={children && isTopLevelCollapsed}
             collapsible={children}
             collapsibleTrail={children}
@@ -89,7 +101,7 @@ const MainSidebar = ({
             iconRight={children && ["plus", "minus"]}
             key={key}
             iconLeft={leftIcon}
-            link={link}
+            link={TopLevelLink(link)}
             marginY="none"
             onClick={() => handleComponentsClick(key)}
             onIconRightClick={children && handleComponentsIconClick}
@@ -98,26 +110,43 @@ const MainSidebar = ({
           >
             {children && (
               <>
-              {
-                name === "Components" && (
+                {name === "Components" && (
                   <>
-                  {kits.map((link, i) =>
-                  renderNavItem(
-                    link,
-                    i,
-                    collapsibles,
-                    category,
-                    type,
-                    dark,
-                    kit,
-                    isActive,
-                    setIsActive
-                  )
+                    {kits.map((link, i) =>
+                      renderNavItem(
+                        link,
+                        i,
+                        collapsibles,
+                        category,
+                        type,
+                        dark,
+                        kit,
+                        isActive,
+                        setIsActive
+                      )
+                    )}
+                  </>
                 )}
-                </>
-                )
-              }
-                
+                {name === "Tokens and Guidelines" && (
+                  <>
+                    {VisualGuidelinesItems.map(({ name, link }, i) => (
+                      <>
+                        <NavItem
+                          active={link === currentURL}
+                          cursor="pointer"
+                          dark={dark}
+                          fontSize="small"
+                          key={`${link}-${i}`}
+                          link={link}
+                          marginBottom="none"
+                          marginTop="xxs"
+                          text={name}
+                          paddingY="xxs"
+                        />
+                      </>
+                    ))}
+                  </>
+                )}
               </>
             )}
           </NavItem>
