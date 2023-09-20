@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Nav, NavItem, useCollapsible, Image, Pill, Flex } from "playbook-ui";
 import { renderNavItem, kitsType } from "./KitsNavItems";
 import PBLogo from "../../images/pb-logo.svg";
@@ -15,14 +15,14 @@ const MainSidebar = ({
   PBversion,
   search_list,
 }) => {
-  //active state for navItems(will be dedundant once routing moved to react router)
+  //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
 
-  //hook into collapsible logic for all nested nav items
+  //hook into collapsible logic for all components nested nav items
   const collapsibles = kits.map(() => useCollapsible());
 
   //hook into collapsible logic for top level item
-  const [isTopLevelCollapsed, setIsTopLevelCollapsed] = useState(false);
+  const topLevelCollapsibles = SideBarNavItems.map(()=> useCollapsible())
 
   const currentURL = window.location.pathname + window.location.search;
 
@@ -38,22 +38,30 @@ const MainSidebar = ({
   };
 
   //set up toggling for top level item
-  const handleComponentsClick = (item) => {
-    setIsActive(() => {
+  const handleComponentsClick = (item, index) => {
+    topLevelCollapsibles.forEach(([, , setCollapsed], idx) => {
+     setIsActive(() => {
       const newIsActive = {};
       newIsActive[item] = true;
       return newIsActive;
     });
-
+      if (idx === index) {
+        setCollapsed(false);
+      } else {
+        setCollapsed(true);
+      }
+    });
     //return true at end to disable default collapsible behavior
     return true;
   };
 
   //right icon click for top level item
-  const handleComponentsIconClick = () => {
-    isTopLevelCollapsed === true
-      ? setIsTopLevelCollapsed(false)
-      : setIsTopLevelCollapsed(true);
+  const handleComponentsIconClick = (i) => {
+    topLevelCollapsibles.forEach(([,toggle ,], idx) => {
+      if (idx === i) {
+        toggle()
+      }
+    })
   };
 
   const activeTopLevel = (key, link) => {
@@ -88,10 +96,13 @@ const MainSidebar = ({
         />
       </Flex>
       <Nav dark={dark} variant="bold" paddingTop="xxs">
-        {SideBarNavItems.map(({ name, key, children, leftIcon, link }) => (
+        {SideBarNavItems.map(({ name, key, children, leftIcon, link }, i) => {
+          const [collapsed] = topLevelCollapsibles[i]
+        
+          return (
           <NavItem
             active={activeTopLevel(key, link)}
-            collapsed={children && isTopLevelCollapsed}
+            collapsed={children && activeTopLevel(key, link) ? false : collapsed}
             collapsible={children}
             collapsibleTrail={children}
             cursor="pointer"
@@ -103,8 +114,8 @@ const MainSidebar = ({
             iconLeft={leftIcon}
             link={TopLevelLink(link)}
             marginY="none"
-            onClick={() => handleComponentsClick(key)}
-            onIconRightClick={children && handleComponentsIconClick}
+            onClick={() => handleComponentsClick(key, i)}
+            onIconRightClick={children && (()=>handleComponentsIconClick(i))}
             paddingY="xxs"
             text={name}
           >
@@ -150,7 +161,8 @@ const MainSidebar = ({
               </>
             )}
           </NavItem>
-        ))}
+          )
+                    })}
       </Nav>
     </>
   );
