@@ -40,6 +40,9 @@ module Playbook
                       values: %w[default matching],
                       default: "default"
 
+      prop :unstyled, type: Playbook::Props::Boolean,
+                      default: false
+
       def classname
         generate_classname("pb_currency_kit", align, size, dark_class)
       end
