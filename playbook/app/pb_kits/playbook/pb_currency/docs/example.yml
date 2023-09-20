@@ -15,3 +15,4 @@ examples:
   - currency_no_symbol: No Symbol
   - currency_abbreviated: Abbreviate Larger Amounts
   - currency_matching_decimals: Matching Decimals
+  - currency_unstyled: Unstyled
