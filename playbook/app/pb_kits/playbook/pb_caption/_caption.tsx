@@ -17,7 +17,7 @@ type CaptionProps = {
 } & GlobalProps;
 
 const Caption = (props: CaptionProps): React.ReactElement => {
-  if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
+  if (props.variant) deprecatedProps() //variant prop is deprecated, use color instead
   const {
     aria = {},
     children,

@@ -11,13 +11,23 @@
         <% render partial: "layouts/docs_navigation"%>
       <% end %>
       <%= pb_rails("layout/body") do %>
+        <% unless action_name == 'changelog' %>
+          <%= pb_rails("background", props: {
+            background_color: "dark",
+            image_url: @front_matter['header'] || asset_pack_url("media/images/pb_generic_header.jpg"),
+            background_repeat: "no-repeat",
+            background_size: "contain",
+            background_position: "center"
+          }) do %>
+            <div style="height:250px"></div>
+          <% end %>
+        <% end %>
         <%= pb_rails("background", props: { display: "flex", classname: "markdown h100", display: "flex", justify_content: "center", background_color: "white" }) do %>
-          <%= pb_rails("flex/flex_item", props: { max_width: "md", margin_x: "sm", padding_y: "md", classname: "minw0" }) do %>
-          <%= @TOC %>
-            <div class="markdown_title"><%= @page_title.titleize %></div>
+          <%= pb_rails("flex/flex_item", props: { max_width: action_name == 'changelog' ? 'md' : 'lg', margin_x: "sm", padding_y: "md", classname: "minw0 w100" }) do %>
+            <div class="markdown_title"><%= @page_title %></div>
             <%= yield %>
             <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
-            <%= link_to gh_edit_link(@parent, @page) do %>
+            <%= link_to action_name == 'changelog' ? "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md" : gh_edit_link(@parent, @page, @link_extension) do %>
               <%= pb_rails("caption", props: {
                 text: "Edit this page",
                 color: "link",

@@ -6,10 +6,10 @@ module Playbook
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"
-      prop :stat_change, type: Playbook::Props::Hash,
+      prop :stat_change, type: Playbook::Props::HashProp,
                          default: {}
       prop :stat_label
-      prop :stat_value, type: Playbook::Props::Hash,
+      prop :stat_value, type: Playbook::Props::HashProp,
                         default: {}
 
       def formatted_stat_value

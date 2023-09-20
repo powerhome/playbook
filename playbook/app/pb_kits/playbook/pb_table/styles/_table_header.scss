@@ -1,4 +1,3 @@
-
 $text_align_values: (
   start: start,
   end: end,
@@ -22,10 +21,30 @@ $text_align_values: (
   }
 }
 
+.pb_th_link:hover {
+  background-color: rgba($primary, 0.03);
+  color: $primary !important;
+}
+
+.pb_th_link, .pb_th_nolink{
+  padding: $space_xxs;
+}
+
 [class^=pb_table] {
   thead {
     [class^=pb_th_active] {
       color: $primary !important;
+    }
+  }
+}
+
+[class*="pb_table_header_dropdown"][class*="_vertical"] {
+  &[class*="_normal"] {
+    [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"] {
+      &[class*="_link"] {
+        border-left-width: 0px;
+        background-color: #fff !important;
+      }
     }
   }
 }

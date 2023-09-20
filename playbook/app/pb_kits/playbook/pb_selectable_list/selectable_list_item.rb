@@ -12,7 +12,7 @@ module Playbook
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[radio checkbox],
                      default: "radio"
-      prop :input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
 
       def classname
