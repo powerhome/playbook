@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Nav, useCollapsible, Image, Badge, Flex } from "playbook-ui";
 import { renderTopLevelNavItem } from "./TopLevelNavItems";
+// @ts-ignore
 import PBLogo from "../../images/pb-logo.svg";
 import KitSearch from "../KitSearch";
-import { SideBarNavItems } from "./SidebarNavItems";
 
 const MainSidebar = ({
   dark,
@@ -19,9 +19,6 @@ const MainSidebar = ({
 
   //hook into collapsible logic for all components nested nav items
   const collapsibles = kits.map(() => useCollapsible());
-
-  //hook into collapsible logic for top level item
-  const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
 
   return (
     <>
@@ -50,7 +47,6 @@ const MainSidebar = ({
       </Flex>
       <Nav dark={dark} variant="bold" paddingTop="xxs">
         {renderTopLevelNavItem(
-          topLevelCollapsibles,
           dark,
           type,
           isActive,

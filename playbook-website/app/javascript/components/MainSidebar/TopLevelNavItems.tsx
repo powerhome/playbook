@@ -1,13 +1,12 @@
 import React from "react";
-import { NavItem } from "playbook-ui";
+import { NavItem, useCollapsible } from "playbook-ui";
 import { renderNavItem, kitsType } from "./KitsNavItems";
-import { VisualGuidelinesItems } from "./GuidelinesNavItems";
-import { SideBarNavItems } from "./SidebarNavItems";
+import { VisualGuidelinesItems } from "./MenuData/GuidelinesNavItems";
+import { SideBarNavItems } from "./MenuData/SidebarNavItems";
 
 const currentURL = window.location.pathname + window.location.search;
 
 export const renderTopLevelNavItem = (
-  topLevelCollapsibles,
   dark,
   type,
   isActive,
@@ -17,6 +16,9 @@ export const renderTopLevelNavItem = (
   category,
   collapsibles
 ) => {
+  //hook into collapsible logic for top level item
+  const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
+
   const TopLevelLink = (link) => {
     if (link === "/kits") {
       return currentURL ===
