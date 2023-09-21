@@ -55,6 +55,13 @@ module Playbook
         }
       end
 
+      def caption_props
+        {
+          text: label,
+          dark: dark,
+        }
+      end
+
       def title_props
         {
           size: size_value,
