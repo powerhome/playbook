@@ -26,11 +26,18 @@
     align-items: baseline;
 
     &[class*=_deemphasized] {
-      [class^=pb_body_kit][class*=_light], [class^=pb_title_kit] {
+      [class^=pb_body_kit], [class^=pb_body_kit] {
         &:not([class*=dark]) {
           color: $text_lt_default;
         }
+      }
+
+      [class^=pb_body_kit][class*=_light] {
         font-weight: $regular;
+      }
+
+      [class^=pb_title_kit] {
+        font-weight: $lighter;
       }
     }
 
