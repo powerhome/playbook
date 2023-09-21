@@ -29,7 +29,7 @@ class PagesController < ApplicationController
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
     @page_title = "What's New"
-    @show_sidebar = false
+    @show_sidebar = true
     @front_matter = nil
     render layout: "docs"
   end

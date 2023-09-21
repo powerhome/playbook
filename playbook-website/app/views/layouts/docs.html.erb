@@ -5,9 +5,10 @@
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= render 'layouts/mobile_hamburger'%>
-    <%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "sm", flex: "1", classname: "#{'no-sidebar' if !@show_sidebar}"}) do %>
-      <%= pb_rails("layout/sidebar") do %>
-        <% render partial: "layouts/docs_navigation"%>
+    <%= pb_rails("layout", props: {position: "left", size: "md", collapse: "xs", classname: "pb--page--content #{'no-sidebar' if !@show_sidebar}"}) do %>
+      <%= render 'layouts/mobile_hamburger' %>
+      <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav"}) do %>
+        <% render partial: "layouts/sidebar"%>
       <% end %>
       <%= pb_rails("layout/body") do %>
         <% unless action_name == 'changelog' %>
