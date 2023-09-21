@@ -16,6 +16,12 @@ body {
 }
 
 .pb--page {
+  &--dark-mode-toggle {
+    position: absolute;
+    top: $space_xl;
+    right: $space_xl;
+    z-index: 100;
+  }
   &--content {
     min-height: calc(100vh - 89px);
     @include break_at($nav_breakpoint) {

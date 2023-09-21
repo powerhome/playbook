@@ -29,8 +29,10 @@ const MainSidebar = ({
         marginTop="lg"
         marginX="sm"
       >
-        <Image alt="Playbook logo" url={PBLogo} />
-        <Badge text={PBversion} variant="success" rounded />
+        <a href={"/"}>
+          <Image alt="Playbook logo" url={PBLogo} />
+        </a>
+        <Badge text={PBversion} dark={dark} variant="success" rounded />
       </Flex>
       <Flex
         orientation="column"

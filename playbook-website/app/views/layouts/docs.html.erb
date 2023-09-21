@@ -4,7 +4,6 @@
     <%= render 'layouts/head'%>
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
-    <%= render 'layouts/nav'%>
     <%= render 'layouts/mobile_hamburger'%>
     <%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "sm", flex: "1", classname: "#{'no-sidebar' if !@show_sidebar}"}) do %>
       <%= pb_rails("layout/sidebar") do %>
