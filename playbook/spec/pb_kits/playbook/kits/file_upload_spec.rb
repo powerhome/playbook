@@ -10,7 +10,7 @@ RSpec.describe Playbook::PbFileUpload::FileUpload do
   it { is_expected.to define_prop(:label).of_type(Playbook::Props::String).with_default("Upload File") }
   it { is_expected.to define_prop(:placeholder).of_type(Playbook::Props::String).with_default("No file") }
   it { is_expected.to define_prop(:full_width).of_type(Playbook::Props::Boolean).with_default(false) }
-  it { is_expected.to define_prop(:input_options).of_type(Playbook::Props::Hash).with_default({}) }
+  it { is_expected.to define_prop(:input_options).of_type(Playbook::Props::HashProp).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

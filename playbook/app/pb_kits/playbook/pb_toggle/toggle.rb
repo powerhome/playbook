@@ -5,7 +5,7 @@ require "action_view"
 module Playbook
   module PbToggle
     class Toggle < Playbook::KitBase
-      prop :input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
 
       prop :checked, type: Playbook::Props::Boolean,

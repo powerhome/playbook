@@ -10,7 +10,7 @@ module Playbook
       prop :value
       prop :name
 
-      prop :input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
       prop :required, type: Playbook::Props::Boolean,
                       default: false

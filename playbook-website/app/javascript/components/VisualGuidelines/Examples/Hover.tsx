@@ -28,7 +28,7 @@ const Hover = ({ example }: { example: string }) => (
     />
     <Body
         paddingBottom="xxs"
-        text="Adding our hover prop is usefull for easily customizing UI for kit ineractions."
+        text="Adding our hover prop is useful for easily customizing UI for kit interactions."
     />
     <Button
         link="https://codesandbox.io/s/playbook-global-hover-prop-example-forked-mhssmm?file=/src/App.js"

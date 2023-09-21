@@ -12,12 +12,12 @@ RSpec.describe Playbook::PbDashboardValue::DashboardValue do
   }
   it {
     is_expected.to define_prop(:stat_change)
-      .of_type(Playbook::Props::Hash)
+      .of_type(Playbook::Props::HashProp)
   }
   it { is_expected.to define_string_prop(:stat_label) }
   it {
     is_expected.to define_prop(:stat_value)
-      .of_type(Playbook::Props::Hash)
+      .of_type(Playbook::Props::HashProp)
   }
 
   describe "#sanitized_stat_value", :aggregate_failures do

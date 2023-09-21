@@ -1,0 +1,10 @@
+$visible: visible !default;
+$hidden: hidden !default;
+$scroll: scroll !default;
+$auto: auto !default;
+$overflow: (
+  visible: $visible,
+  hidden: $hidden,
+  scroll: $scroll,
+  auto: $auto,
+);
