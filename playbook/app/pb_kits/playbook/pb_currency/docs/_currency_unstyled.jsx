@@ -12,7 +12,10 @@ const CurrencyUnstyled = (props) => {
           {...props}
       />
 
-      <Title size={1}>
+      <Title
+          size={1}
+          {...props}
+      >
         <Currency
             amount="2,000.50"
             label="Example with wrapping typography kit"

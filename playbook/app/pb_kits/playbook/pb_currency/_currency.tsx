@@ -99,7 +99,7 @@ const Currency = (props: CurrencyProps) => {
         className={classes}
         id={id}
     >
-      <Caption>{label}</Caption>
+      <Caption dark={dark}>{label}</Caption>
 
       <div className={`pb_currency_wrapper${variantClass || emphasizedClass}`}>
         {unstyled ? (
@@ -135,7 +135,7 @@ const Currency = (props: CurrencyProps) => {
                 dark={dark}
             >
               {getAbbreviation}
-              {unit ? <>{unit}</> : <>{getDecimalValue}</>}
+              {unit ? unit : getDecimalValue}
             </Body>
           </>
         )}
