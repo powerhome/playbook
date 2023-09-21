@@ -141,7 +141,7 @@ const Currency = (props: CurrencyProps) => {
         )}
       </div>
     </div>
-  );
+  )
 }
 
 export default Currency
