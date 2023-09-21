@@ -27,27 +27,61 @@ module PlaybookWebsite
 
     # Deal with lists of kits, used in Playbook doc and Externally
     # rubocop:disable Style/StringConcatenation
-    def pb_kits(type: "rails", limit_examples: false, dark_mode: false, method: get_kits)
+    def pb_kits(type: "rails", limit_examples: false, dark_mode: false)
       display_kits = []
-      kits = method
+      kits = get_kits(type)
       kits.each do |kit|
-        if kit.is_a?(Hash)
-          nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode)
-          end
-        else
-          display_kits << render_pb_doc_kit(kit, type, limit_examples, false, dark_mode)
+        nav_array = nav_hash_array(kit)
+        next unless nav_array.is_a?(Array)
+
+        nav_array.each do |sub_kit|
+          display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode)
         end
       end
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
     end
+
     # rubocop:enable Style/StringConcatenation
 
     # rubocop:disable Naming/AccessorMethodName
-    def get_kits
+    def get_kits(type = "rails")
       menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
-      menu["kits"]
+      menu["kits"][type]
     end
+
+    # rubocop:disable Style/CaseLikeIf
+    def aggregate_kits
+      menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
+      all_kits = []
+
+      # Loop over each type (rails, react, swift, etc.)
+      menu["kits"].each do |_type, kits|
+        kits.each do |kit|
+          if kit.is_a?(Hash)
+            kit_name = kit.keys.first
+            existing_kit = all_kits.find { |k| k.is_a?(Hash) && k.keys.first == kit_name }
+
+            if existing_kit
+              existing_kit[kit_name] += kit[kit_name] unless kit[kit_name].nil?
+              existing_kit[kit_name].uniq!
+              existing_kit[kit_name].sort!
+            else
+              all_kits << { kit_name => kit[kit_name] }
+            end
+          elsif kit.is_a?(String)
+            all_kits << kit unless all_kits.include?(kit)
+          end
+        end
+      end
+
+      # Sort the top-level entries
+      all_kits.sort_by! do |kit|
+        kit.is_a?(Hash) ? kit.keys.first : kit
+      end
+
+      all_kits
+    end
+    # rubocop:enable Style/CaseLikeIf
 
     def get_kits_pb_website
       menu = YAML.load_file(Rails.root.join("config/menu.yml"))

@@ -5,6 +5,7 @@ require "playbook/pagination_renderer"
 require "will_paginate/array"
 
 class PagesController < ApplicationController
+  include PbDocHelper
   before_action :set_js, only: %i[visual_guidelines]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
@@ -159,10 +160,10 @@ private
   end
 
   def set_category
-    categories = MENU["kits"].map { |link| link.first.first if link.is_a?(Hash) }.compact
+    categories = aggregate_kits.map { |link| link.first.first if link.is_a?(Hash) }.compact
     @category = params[:name]
     if categories.flatten.include?(@category)
-      @category_kits = MENU["kits"].map { |link| link.first.last if link.is_a?(Hash) && link.first.first == @category }.compact.flatten
+      @category_kits = aggregate_kits.map { |link| link.first.last if link.is_a?(Hash) && link.first.first == @category }.compact.flatten
       @kits = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
@@ -170,7 +171,7 @@ private
   end
 
   def set_kit
-    menu = MENU["kits"].map { |link| link.is_a?(Hash) ? link.first.last : link }
+    menu = aggregate_kits.map { |link| link.is_a?(Hash) ? link.first.last : link }
     if menu.flatten.include?(params[:name])
       @kit = params[:name]
     else
