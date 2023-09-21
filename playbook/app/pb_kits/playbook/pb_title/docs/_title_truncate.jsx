@@ -12,7 +12,10 @@ const TitleTruncate = (props) => {
         maxWidth="md"
         orientation="column"
     >
-      <Caption text="After first row" />
+      <Caption
+          text="After first row"
+          {...props}
+      />
       <Title
           marginBottom="md"
           size={4}
@@ -21,7 +24,10 @@ const TitleTruncate = (props) => {
           {...props}
       />
 
-      <Caption text="After second row" />
+      <Caption
+          text="After second row"
+          {...props}
+      />
       <Title
           marginBottom="md"
           size={4}
@@ -30,7 +36,10 @@ const TitleTruncate = (props) => {
           {...props}
       />
 
-      <Caption text="After third row" />
+      <Caption
+          text="After third row"
+          {...props}
+      />
       <Title
           size={4}
           text={lorem}

@@ -12,7 +12,10 @@ const BodyTruncate = (props) => {
         maxWidth="md"
         orientation="column"
     >
-      <Caption text="After first row" />
+      <Caption
+          text="After first row"
+          {...props}
+      />
       <Body
           marginBottom="md"
           text={lorem}
@@ -20,7 +23,10 @@ const BodyTruncate = (props) => {
           {...props}
       />
 
-      <Caption text="After second row" />
+      <Caption
+          text="After second row"
+          {...props}
+      />
       <Body
           marginBottom="md"
           text={lorem}
@@ -28,7 +34,10 @@ const BodyTruncate = (props) => {
           {...props}
       />
 
-      <Caption text="After third row" />
+      <Caption
+          text="After third row"
+          {...props}
+      />
       <Body
           text={lorem}
           truncate="3"
