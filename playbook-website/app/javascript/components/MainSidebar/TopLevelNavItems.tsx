@@ -6,19 +6,29 @@ import { SideBarNavItems } from "./SidebarNavItems";
 
 const currentURL = window.location.pathname + window.location.search;
 
-export const renderTopLevelNavItem = (topLevelCollapsibles, dark, type, isActive, setIsActive, kits, kit, category, collapsibles ) => {
-    const TopLevelLink = (link) => {
-        if (link === "/kits") {
-          return currentURL ===
-            `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`
-            ? ""
-            : `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
-        } else {
-          return currentURL === link ? "" : link;
-        }
-      };
+export const renderTopLevelNavItem = (
+  topLevelCollapsibles,
+  dark,
+  type,
+  isActive,
+  setIsActive,
+  kits,
+  kit,
+  category,
+  collapsibles
+) => {
+  const TopLevelLink = (link) => {
+    if (link === "/kits") {
+      return currentURL ===
+        `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`
+        ? ""
+        : `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
+    } else {
+      return currentURL === link ? "" : link;
+    }
+  };
 
-        //set up toggling for top level item
+  //set up toggling for top level item
   const handleComponentsClick = (item, index) => {
     topLevelCollapsibles.forEach(([, , setCollapsed], idx) => {
       setIsActive(() => {
@@ -58,83 +68,83 @@ export const renderTopLevelNavItem = (topLevelCollapsibles, dark, type, isActive
   };
 
   //collapsed logic for toplevel nav items
-  const toggleTopLevelNavItem = (key, link, collapsed) => { 
-    return activeTopLevel(key, link) ? false : collapsed
-  }
+  const toggleTopLevelNavItem = (key, link, collapsed) => {
+    // if url starts with visual_guidelines, then relevant collapsible nav to be toggled open on first render
+    const currentPage = currentURL.match(/^(\/[^/]+)\/[^/]+/);
+    const match = currentPage && currentPage[1] === link;
 
+    return activeTopLevel(key, link) || match ? false : collapsed;
+  };
 
-    
-    return (
-        <>
-        {SideBarNavItems.map(({ name, key, children, leftIcon, link }, i) => {
-          const [collapsed] = topLevelCollapsibles[i];
+  return (
+    <>
+      {SideBarNavItems.map(({ name, key, children, leftIcon, link }, i) => {
+        const [collapsed] = topLevelCollapsibles[i];
 
-          return (
-            <NavItem
-              active={activeTopLevel(key, link)}
-              collapsed={children && toggleTopLevelNavItem(key, link, collapsed)}
-              collapsible={children}
-              collapsibleTrail={children}
-              cursor="pointer"
-              dark={dark}
-              fontSize="small"
-              fontWeight="bolder"
-              iconRight={children && ["plus", "minus"]}
-              key={key}
-              iconLeft={leftIcon}
-              link={TopLevelLink(link)}
-              marginY="none"
-              onClick={() => handleComponentsClick(key, i)}
-              onIconRightClick={
-                children && (() => handleComponentsIconClick(i))
-              }
-              paddingY="xxs"
-              text={name}
-            >
-              {children && (
-                <>
-                  {name === "Components" && (
-                    <>
-                      {kits.map((link, i) =>
-                        renderNavItem(
-                          link,
-                          i,
-                          collapsibles,
-                          category,
-                          type,
-                          dark,
-                          kit,
-                          isActive,
-                          setIsActive
-                        )
-                      )}
-                    </>
-                  )}
-                  {name === "Tokens and Guidelines" && (
-                    <>
-                      {VisualGuidelinesItems.map(({ name, link }, i) => (
-                        <>
-                          <NavItem
-                            active={link === currentURL}
-                            cursor="pointer"
-                            dark={dark}
-                            fontSize="small"
-                            key={`${link}-${i}`}
-                            link={link}
-                            marginBottom="none"
-                            marginTop="xxs"
-                            text={name}
-                            paddingY="xxs"
-                          />
-                        </>
-                      ))}
-                    </>
-                  )}
-                </>
-              )}
-            </NavItem>
-          );
-        })}
-        </>
-    )
-}
+        return (
+          <NavItem
+            active={activeTopLevel(key, link)}
+            collapsed={children && toggleTopLevelNavItem(key, link, collapsed)}
+            collapsible={children}
+            collapsibleTrail={children}
+            cursor="pointer"
+            dark={dark}
+            fontSize="small"
+            fontWeight="bolder"
+            iconRight={children && ["plus", "minus"]}
+            key={key}
+            iconLeft={leftIcon}
+            link={TopLevelLink(link)}
+            marginY="none"
+            onClick={() => handleComponentsClick(key, i)}
+            onIconRightClick={children && (() => handleComponentsIconClick(i))}
+            paddingY="xxs"
+            text={name}
+          >
+            {children && (
+              <>
+                {name === "Components" && (
+                  <>
+                    {kits.map((link, i) =>
+                      renderNavItem(
+                        link,
+                        i,
+                        collapsibles,
+                        category,
+                        type,
+                        dark,
+                        kit,
+                        isActive,
+                        setIsActive
+                      )
+                    )}
+                  </>
+                )}
+                {name === "Tokens and Guidelines" && (
+                  <>
+                    {VisualGuidelinesItems.map(({ name, link }, i) => (
+                      <>
+                        <NavItem
+                          active={link === currentURL}
+                          cursor="pointer"
+                          dark={dark}
+                          fontSize="small"
+                          key={`${link}-${i}`}
+                          link={link}
+                          marginBottom="none"
+                          marginTop="xxs"
+                          text={name}
+                          paddingY="xxs"
+                        />
+                      </>
+                    ))}
+                  </>
+                )}
+              </>
+            )}
+          </NavItem>
+        );
+      })}
+    </>
+  );
+};
