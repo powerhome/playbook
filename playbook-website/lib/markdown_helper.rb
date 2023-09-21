@@ -21,6 +21,10 @@ module PlaybookWebsite
         PlaybookWebsite::Markdown::Helper.markdown(text)
       end
 
+      def render_frontmatter(file)
+        FrontMatterParser::Parser.parse_file(file)
+      end
+
       def self.markdown(text)
         options = {
           filter_html: false,
@@ -47,12 +51,22 @@ module PlaybookWebsite
           with_toc_data: true,
         }
 
-        renderer = HTMLBlockCode.new(options)
         # toc_renderer = Redcarpet::Render::HTML_TOC.new(with_toc_data: true)
         # @TOC = Redcarpet::Markdown.new(toc_renderer)
         # puts "TOC: #{@TOC.inspect}"
+
+        # Strip Frontmatter
+        text = text.gsub(/^(---\s*.*??)^(---\s*$?)/m, "")
+        renderer = HTMLBlockCode.new(options)
         markdown = Redcarpet::Markdown.new(renderer, extensions)
-        markdown.render(text).html_safe
+        key = cache_key(text)
+        Rails.cache.fetch key do
+          markdown.render(text).html_safe
+        end
+      end
+
+      def self.cache_key(text)
+        Digest::MD5.hexdigest(text)
       end
 
       def render_code(text, language)

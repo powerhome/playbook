@@ -23,6 +23,7 @@ require "playbook/position"
 require "playbook/hover"
 require "playbook/border_radius"
 require "playbook/text_align"
+require "playbook/overflow"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -51,10 +52,11 @@ module Playbook
     include Playbook::Hover
     include Playbook::BorderRadius
     include Playbook::TextAlign
+    include Playbook::Overflow
 
     prop :id
-    prop :data, type: Playbook::Props::Hash, default: {}
-    prop :aria, type: Playbook::Props::Hash, default: {}
+    prop :data, type: Playbook::Props::HashProp, default: {}
+    prop :aria, type: Playbook::Props::HashProp, default: {}
     prop :children, type: Playbook::Props::Proc
 
     def object

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Playbook::Props::Hash do
-  subject { Playbook::Props::Hash.new(name: :hash_prop, kit: Class.new) }
+RSpec.describe Playbook::Props::HashProp do
+  subject { Playbook::Props::HashProp.new(name: :hash_prop, kit: Class.new) }
 
   describe "#validate" do
     it "returns true given a Ruby Hash", :aggregate_failures do

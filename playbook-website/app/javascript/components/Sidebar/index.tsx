@@ -17,6 +17,7 @@ export const MENU_ITEMS = [
   "Flex Box",
   "Hover",
   "Text Align",
+  "Overflow"
 ];
 
 const Sidebar = () => {

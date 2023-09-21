@@ -35,6 +35,7 @@ module Playbook
         hover_props,
         border_radius_props,
         text_align_props,
+        overflow_props,
       ].compact.join(" ")
     end
 

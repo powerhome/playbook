@@ -183,7 +183,7 @@ module Playbook
       end
 
       match do |subject_class|
-        is_hash = subject_class.props[prop_key]&.class == Props::Hash
+        is_hash = subject_class.props[prop_key]&.class == Props::HashProp
 
         if @default
           is_hash && subject_class.props[prop_key].default == @default

@@ -20,7 +20,7 @@ type TimeStackedProps = {
 }
 
 const TimeStackedDefault = (props: TimeStackedProps): React.ReactElement => {
-  if (props.date) deprecatedProps('Time Stacked', ['date']) //date prop is deprecated, use time instead
+  if (props.date) deprecatedProps() //date prop is deprecated, use time instead
 
   const {
     align = 'left',

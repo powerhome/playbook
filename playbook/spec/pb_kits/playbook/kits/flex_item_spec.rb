@@ -5,11 +5,6 @@ require_relative "../../../../app/pb_kits/playbook/pb_flex/flex_item"
 RSpec.describe Playbook::PbFlex::FlexItem do
   subject { Playbook::PbFlex::FlexItem }
 
-  it {
-    is_expected.to define_enum_prop(:overflow)
-      .with_default(nil)
-      .with_values("auto", "hidden", "initial", "inherit", "scroll", "visible", nil)
-  }
   it { is_expected.to define_boolean_prop(:shrink).with_default(false) }
   it { is_expected.to define_boolean_prop(:grow).with_default(false) }
   it { is_expected.to define_string_prop(:fixed_size) }

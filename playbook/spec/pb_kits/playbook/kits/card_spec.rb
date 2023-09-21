@@ -8,7 +8,7 @@ RSpec.describe Playbook::PbCard::Card do
   it { is_expected.to define_boolean_prop(:selected).with_default(false) }
   it {
     is_expected.to define_prop(:highlight)
-      .of_type(Playbook::Props::Hash)
+      .of_type(Playbook::Props::HashProp)
       .with_default({})
   }
   it {

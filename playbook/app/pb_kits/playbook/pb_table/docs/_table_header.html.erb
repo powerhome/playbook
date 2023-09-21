@@ -2,27 +2,31 @@
   <thead>
     <tr>
       <%= pb_rails("table/table_header", props: {
+        text: "Territory",
+        id: "territory",
+        sort_menu: [
+          { item: "Territory", link: "?sort=territory_desc", active: params["sort"] == "territory_desc", direction: "desc" },
+          { item: "Territory", link: "?sort=territory_asc", active: params["sort"] == "territory_asc", direction: "asc" }
+        ],
+      }) %>
+      <%= pb_rails("table/table_header", props: {
         id: "name",
+        text: "Full Name",
         colspan: 2,
         sort_menu: [
-          { item: "Name", link: "?q[sorts]=name+desc", active: false, direction: "desc" },
-          { item: "Name", link: "?q[sorts]=name+asc", active: true, direction: "asc" },
+          { item: "First Name Descending", link: "?sort=firstname_desc", active: params["sort"] == "firstname_desc", direction: "desc" },
+          { item: "First Name Ascending", link: "?sort=firstname_asc", active: params["sort"] == "firstname_asc", direction: "asc" },
+          { item: "Last Name Descending", link: "?sort=lastname_desc", active: params["sort"] == "lastname_desc", direction: "desc" },
+          { item: "Last Name Ascending", link: "?sort=lastname_asc", active: params["sort"] == "lastname_asc", direction: "asc" }
         ],
       }) %>
       <%= pb_rails("table/table_header", props: {
         text: "Age",
         id: "age",
+        sort_dropdown: true,
         sort_menu: [
-          { item: "Age", link: "?q[sorts]=age+desc", active: false, direction: "desc" },
-          { item: "Age", link: "?q[sorts]=age+asc", active: false, direction: "asc" },
-        ],
-      }) %>
-      <%= pb_rails("table/table_header", props: {
-        text: "Territory",
-        id: "territory",
-        sort_menu: [
-          { item: "Territory", link: "?q[sorts]=territory+desc", active: false, direction: "desc" },
-          { item: "Territory", link: "?q[sorts]=territory+asc", active: false, direction: "asc" },
+          { item: "Age Descending", link: "?sort=age_desc", active: params["sort"] == "age_desc", direction: "desc" },
+          { item: "Age Ascending", link: "?sort=age_asc", active: params["sort"] == "age_asc", direction: "asc" }
         ],
       }) %>
       <%= pb_rails("table/table_header", props: { text: "Job Title" }) %>
@@ -30,25 +34,25 @@
   </thead>
   <tbody>
     <tr>
-      <td>Name 1</td>
-      <td>Name 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td>Value 5</td>
+      <td>Ter 1</td>
+      <td>First Name 1</td>
+      <td>Last Name 1</td>
+      <td>Age 1</td>
+      <td>Job 1</td>
     </tr>
     <tr>
-      <td>Name 1</td>
-      <td>Name 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td>Value 5</td>
+      <td>Ter 2</td>
+      <td>First Name 2</td>
+      <td>Last Name 2</td>
+      <td>Age 2</td>
+      <td>Job 2</td>
     </tr>
     <tr>
-      <td>Name 1</td>
-      <td>Name 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td>Value 5</td>
+      <td>Ter 3</td>
+      <td>First Name 3</td>
+      <td>Last Name 3</td>
+      <td>Age 3</td>
+      <td>Job 3</td>
     </tr>
   </tbody>
 <% end %>

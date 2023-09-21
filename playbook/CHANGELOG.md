@@ -1,3 +1,23 @@
+# 13.6.0
+##### September 19, 2023
+
+List of changes: 
+
+**Kit Enhancements:**
+
+- Global Prop Overflow [\#2744](https://github.com/powerhome/playbook/pull/2744) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Prevent Conflicts with Ruby's Hash [\#2742](https://github.com/powerhome/playbook/pull/2742) ([gavhuang](https://github.com/gavhuang))
+
+**Improvements:**
+
+- Sidebar Collapsible Nav Optimization [\#2749](https://github.com/powerhome/playbook/pull/2749) ([nidaqg](https://github.com/nidaqg))
+- Table Header Improvements [\#2738](https://github.com/powerhome/playbook/pull/2738) ([markdoeswork](https://github.com/markdoeswork))
+- Updating Markdown to Support Headers and Index [\#2733](https://github.com/powerhome/playbook/pull/2733) ([jasoncypret](https://github.com/jasoncypret))
+- Turn off Rails deprecation warnings [\#2739](https://github.com/powerhome/playbook/pull/2739) ([nickamantia](https://github.com/nickamantia))
+
 # No More Custom CSS! The Global Text Align Prop is Here!
 ##### September 14, 2023
 

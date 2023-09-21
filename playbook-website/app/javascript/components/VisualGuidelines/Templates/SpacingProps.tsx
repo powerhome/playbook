@@ -18,7 +18,7 @@ import {
 type Props = {
   propValues: string[];
   propNames: string[];
-  screenSizes: { [key: string]: string[] | number[] },
+  screenSizes?: { [key: string]: string[] | number[] },
 };
 
 const SpacingProps = ({ propNames, propValues, screenSizes }: Props): React.ReactElement => {
@@ -42,27 +42,30 @@ const SpacingProps = ({ propNames, propValues, screenSizes }: Props): React.Reac
           ))}
         </Card.Body>
       </FlexItem>
-      <SectionSeparator
-        marginBottom="md"
-        marginTop="md"
-        orientation="vertical"
-        variant="card"
-      />
-
-      <FlexItem flex={1}>
-        <Card.Body>
-          <Caption marginBottom="sm" text="Screen Size" />
-          {Object.values(screenSizes)[0].map((value) => (
-            <Pill
-              key={value}
-              text={value}
-              marginRight="xs"
-              textTransform="none"
-              variant="warning"
-            />
-          ))}
-        </Card.Body>
-      </FlexItem>
+      {screenSizes ? (
+        <>
+          <SectionSeparator
+            marginBottom="md"
+            marginTop="md"
+            orientation="vertical"
+            variant="card"
+          />
+          <FlexItem flex={1}>
+            <Card.Body>
+              <Caption marginBottom="sm" text="Screen Size" />
+              {Object.values(screenSizes)[0].map((value) => (
+                <Pill
+                  key={value}
+                  text={value}
+                  marginRight="xs"
+                  textTransform="none"
+                  variant="warning"
+                />
+              ))}
+            </Card.Body>
+          </FlexItem>
+        </>
+      ) : null}
       <SectionSeparator
         marginBottom="md"
         marginTop="md"
