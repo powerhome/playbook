@@ -5,7 +5,7 @@ require "playbook/pagination_renderer"
 require "will_paginate/array"
 
 class PagesController < ApplicationController
-  include PbDocHelper
+  include PlaybookWebsite::PbDocHelper
   before_action :set_js, only: %i[visual_guidelines]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
