@@ -52,10 +52,10 @@
       }
     }
 
-
-    &[class*=_bold] [class^=pb_body_kit],
-    &[class*=_bold] [class^=pb_body_kit].dark {
-      font-weight: $bolder;
+    &[class*=_bold] {
+      [class^=pb_body_kit], [class^=pb_body_kit].dark {
+        font-weight: $bolder;
+      }
     }
 
     & > [class*=dollar_sign] {
