@@ -53,11 +53,9 @@
     }
 
 
-    &[class*=_bold] [class^=pb_body_kit] {
-      color: $text_lt_default;
-      &.dark {
-        color: $text_dk_default;
-      }
+    &[class*=_bold] [class^=pb_body_kit],
+    &[class*=_bold] [class^=pb_body_kit].dark {
+      font-weight: $bolder;
     }
 
     & > [class*=dollar_sign] {
