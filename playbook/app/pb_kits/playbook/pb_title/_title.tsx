@@ -17,7 +17,7 @@ type TitleProps = {
   size?: SizeType | SizeResponsiveType,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
   text?: string,
-  truncate?: null | '1' | '2' | '3' | '4' | '5',
+  truncate?: null | "1" | "2" | "3" | "4" | "5",
   variant?: null | "link",
 } & GlobalProps
 
@@ -41,12 +41,12 @@ const Title = (props: TitleProps): React.ReactElement => {
   const ariaProps: {[key: string]: string | number} = buildAriaProps(aria)
   const dataProps: {[key: string]: string | number} = buildDataProps(data)
   const getBold = bold ? '' : 'thin'
-  const isTruncated = truncate ? `truncate_${truncate}` : null
+  const isTruncated = truncate ? `truncate-${truncate}` : null
   const isSizeNumberOrString = typeof size === "number" || typeof size === "string"
 
   const buildResponsiveSizeCss = () => {
     let css = ''
-    
+
     if (!isSizeNumberOrString) {
       Object.entries(size).forEach((sizeObj) => {
         css += `pb_title_kit_${sizeObj[0]}_${sizeObj[1]} `

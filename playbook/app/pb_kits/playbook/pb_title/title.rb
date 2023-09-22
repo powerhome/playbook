@@ -33,7 +33,7 @@ module Playbook
       end
 
       def is_truncated
-        truncate ? "truncate_#{truncate}" : nil
+        truncate ? "truncate-#{truncate}" : nil
       end
 
       def is_size_responsive
