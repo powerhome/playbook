@@ -14,7 +14,8 @@ export const renderTopLevelNavItem = (
   kits,
   kit,
   category,
-  collapsibles
+  collapsibles,
+  samples
 ) => {
   //hook into collapsible logic for top level item
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
@@ -129,7 +130,7 @@ export const renderTopLevelNavItem = (
                     )}
                   </>
                 ) : (
-                  renderOtherNavItems(name, currentURL, dark)
+                  renderOtherNavItems(name, currentURL, dark, samples)
                 )}
               </>
             )}

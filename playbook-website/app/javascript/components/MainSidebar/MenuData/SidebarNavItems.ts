@@ -31,7 +31,7 @@ export const SideBarNavItems = [
         name: "UI Samples",
         key: "top-nav-item-5",
         link: "/samples",
-        children: false,
+        children: true,
         leftIcon:"vial"
     },
     {
