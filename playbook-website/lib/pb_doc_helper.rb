@@ -43,13 +43,11 @@ module PlaybookWebsite
 
     # rubocop:enable Style/StringConcatenation
 
-    # rubocop:disable Naming/AccessorMethodName
     def get_kits(type = "rails")
       menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
       menu["kits"][type]
     end
 
-    # rubocop:disable Style/CaseLikeIf
     def aggregate_kits
       menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
       all_kits = []
@@ -57,7 +55,8 @@ module PlaybookWebsite
       # Loop over each type (rails, react, swift, etc.)
       menu["kits"].each do |_type, kits|
         kits.each do |kit|
-          if kit.is_a?(Hash)
+          case kit
+          when Hash
             kit_name = kit.keys.first
             existing_kit = all_kits.find { |k| k.is_a?(Hash) && k.keys.first == kit_name }
 
@@ -68,7 +67,7 @@ module PlaybookWebsite
             else
               all_kits << { kit_name => kit[kit_name] }
             end
-          elsif kit.is_a?(String)
+          when String
             all_kits << kit unless all_kits.include?(kit)
           end
         end
@@ -81,13 +80,6 @@ module PlaybookWebsite
 
       all_kits
     end
-    # rubocop:enable Style/CaseLikeIf
-
-    def get_kits_pb_website
-      menu = YAML.load_file(Rails.root.join("config/menu.yml"))
-      menu["kits"]
-    end
-    # rubocop:enable Naming/AccessorMethodName
 
     # rubocop:disable Style/OptionalBooleanParameter
     def render_pb_doc_kit(kit, type, limit_examples, code = true, dark_mode = false)
