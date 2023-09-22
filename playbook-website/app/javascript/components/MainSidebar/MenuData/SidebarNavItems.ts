@@ -21,7 +21,7 @@ export const SideBarNavItems = [
         leftIcon:"grid-2"
     },
     {
-        name: "Tokens and Guidelines",
+        name: "Tokens & Guidelines",
         key: "top-nav-item-4",
         link: "/visual_guidelines",
         children: true,

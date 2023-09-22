@@ -23,7 +23,7 @@ export const renderOtherNavItems = (name, currentURL, dark, samples) => {
 
   return (
     <>
-      {name === "Tokens and Guidelines" &&
+      {name === "Tokens & Guidelines" &&
         VisualGuidelinesItems.map(({ name, link }, i) => (
           <>
             <NavItem

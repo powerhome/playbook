@@ -5,12 +5,12 @@
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= render 'layouts/mobile_hamburger'%>
-    <%= pb_rails("layout", props: {position: "left", size: "md", collapse: "xs", classname: "pb--page--content #{'no-sidebar' if !@show_sidebar}"}) do %>
+    <%= pb_rails("layout", props: {classname: "pb--page--content #{'no-sidebar' if !@show_sidebar}"}) do %>
       <%= render 'layouts/mobile_hamburger' %>
       <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav"}) do %>
         <% render partial: "layouts/sidebar"%>
       <% end %>
-      <%= pb_rails("layout/body") do %>
+      <%= pb_rails("layout/body", props: {classname: "guides--page"}) do %>
         <% unless action_name == 'changelog' %>
           <%= pb_rails("background", props: {
             background_color: "dark",
@@ -22,7 +22,7 @@
             <div style="height:250px"></div>
           <% end %>
         <% end %>
-        <%= pb_rails("background", props: { display: "flex", classname: "markdown h100", display: "flex", justify_content: "center", background_color: "white" }) do %>
+        <%= pb_rails("background", props: { display: "flex", classname: "markdown guides--page", display: "flex", justify_content: "center", background_color: "white" }) do %>
           <%= pb_rails("flex/flex_item", props: { max_width: action_name == 'changelog' ? 'md' : 'lg', margin_x: "sm", padding_y: "md", classname: "minw0 w100" }) do %>
             <div class="markdown_title"><%= @page_title %></div>
             <%= yield %>
@@ -36,10 +36,9 @@
             <% end %>
           <% end %>
         <% end %>
+        <%= render 'layouts/footer'%>
       <% end %>
     <% end %>
-
-    <%= render 'layouts/footer'%>
   </body>
   <%= javascript_packs_with_chunks_tag(*@application_js) %>
   <%= yield :pb_js %>
