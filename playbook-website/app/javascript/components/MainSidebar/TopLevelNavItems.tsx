@@ -15,7 +15,8 @@ export const renderTopLevelNavItem = (
   kit,
   category,
   collapsibles,
-  samples
+  samples, 
+  guides_nav
 ) => {
   //hook into collapsible logic for top level item
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
@@ -77,13 +78,15 @@ export const renderTopLevelNavItem = (
     const currentPage = currentURL.match(/^(\/[^/]+)\/[^/]+/);
     // if url starts with /kit, then relevant collapsible nav to be toggled open on first render
     const kitCategoryPage = currentURL.match(/^\/([^/]{3})/);
+    // if url matches /guides, than relevant collapsible nav to ne toggled open on first render
+    const guidesPage = currentURL.split('/').slice(0, 3).join('/');
     //NOTE: All toggle and active state logic should be replaced with state once website moves to react router
     const match =
       currentPage &&
       (currentPage[1] === link ||
         (kitCategoryPage &&
           `/${kitCategoryPage[1]}` === link.substring(0, link.length - 1)));
-    return activeTopLevel(key, link) || match ? false : collapsed;
+    return activeTopLevel(key, link) || match || (guidesPage === link) ? false : collapsed;
   };
 
   return (
@@ -130,7 +133,7 @@ export const renderTopLevelNavItem = (
                     )}
                   </>
                 ) : (
-                  renderOtherNavItems(name, currentURL, dark, samples)
+                  renderOtherNavItems(name, currentURL, dark, samples, guides_nav)
                 )}
               </>
             )}
