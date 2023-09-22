@@ -40,7 +40,6 @@ module PlaybookWebsite
       end
       raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
     end
-
     # rubocop:enable Style/StringConcatenation
 
     def get_kits(type = "rails")

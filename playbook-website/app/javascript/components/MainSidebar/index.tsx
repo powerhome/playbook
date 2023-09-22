@@ -7,7 +7,6 @@ const MainSidebar = ({ dark, type, category, kit, kits }) => {
   const [isActive, setIsActive] = useState({});
 
   //hook into collapsible logic for all nested nav items
-
   const collapsibles = kits.map(() => useCollapsible());
 
   //hook into collapsible logic for top level item
