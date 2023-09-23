@@ -1,0 +1,14 @@
+<%=
+  resourceAllocation ||= {}
+  component_resource_allocation = resourceAllocation.dig(component) || {}
+  if defined?(override)
+    override_resource_allocation = resourceAllocation.dig(override) || {}
+    component_resource_allocation = override_resource_allocation unless override_resource_allocation.empty?
+  end
+  template = { resources: defaults.deep_merge(component_resource_allocation) }
+  template.to_json
+%>
+
+
+
+
