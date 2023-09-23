@@ -3,10 +3,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_app_js
 
-  before_action do
-    Rack::MiniProfiler.authorize_request if current_user&.is_admin?
-  end
-
   include PlaybookWebsite::Markdown::Helper
 
   helper ApplicationHelper
