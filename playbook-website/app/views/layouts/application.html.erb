@@ -4,6 +4,7 @@
     <%= render 'layouts/head'%>
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
+    <%= render 'layouts/mobile_nav'%>
     <% if action_name.include?('kit') %>
       <div class="pb--page--dark-mode-toggle">
         <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>

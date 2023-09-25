@@ -4,39 +4,42 @@
     <%= render 'layouts/head'%>
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
+  <%= render 'layouts/mobile_nav'%>
     <%= render 'layouts/mobile_hamburger'%>
     <%= pb_rails("layout", props: {classname: "pb--page--content #{'no-sidebar' if !@show_sidebar}"}) do %>
       <%= render 'layouts/mobile_hamburger' %>
       <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav"}) do %>
         <% render partial: "layouts/sidebar"%>
       <% end %>
-      <%= pb_rails("layout/body", props: {classname: "guides--page"}) do %>
-        <% unless action_name == 'changelog' %>
-          <%= pb_rails("background", props: {
-            background_color: "dark",
-            image_url: @front_matter['header'] || asset_pack_url("media/images/pb_generic_header.jpg"),
-            background_repeat: "no-repeat",
-            background_size: "contain",
-            background_position: "center"
-          }) do %>
-            <div style="height:250px"></div>
-          <% end %>
-        <% end %>
-        <%= pb_rails("background", props: { display: "flex", classname: "markdown guides--page", display: "flex", justify_content: "center", background_color: "white" }) do %>
-          <%= pb_rails("flex/flex_item", props: { max_width: action_name == 'changelog' ? 'md' : 'lg', margin_x: "sm", padding_y: "md", classname: "minw0 w100" }) do %>
-            <div class="markdown_title"><%= @page_title %></div>
-            <%= yield %>
-            <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
-            <%= link_to action_name == 'changelog' ? "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md" : gh_edit_link(@parent, @page, @link_extension) do %>
-              <%= pb_rails("caption", props: {
-                text: "Edit this page",
-                color: "link",
-                size: "xs"
-              }) %>
+      <%= pb_rails("layout/body") do %>
+        <div class="pb--page--content--main">
+          <% unless action_name == 'changelog' %>
+            <%= pb_rails("background", props: {
+              background_color: "dark",
+              image_url: @front_matter['header'] || asset_pack_url("media/images/pb_generic_header.jpg"),
+              background_repeat: "no-repeat",
+              background_size: "contain",
+              background_position: "center"
+            }) do %>
+              <div style="height:250px"></div>
             <% end %>
           <% end %>
-        <% end %>
-        <%= render 'layouts/footer'%>
+          <%= pb_rails("background", props: { display: "flex", classname: "markdown guides--page", display: "flex", justify_content: "center", background_color: "white" }) do %>
+            <%= pb_rails("flex/flex_item", props: { max_width: action_name == 'changelog' ? 'md' : 'lg', margin_x: "sm", padding_y: "md", classname: "minw0 w100" }) do %>
+              <div class="markdown_title"><%= @page_title %></div>
+              <%= yield %>
+              <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
+              <%= link_to action_name == 'changelog' ? "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md" : gh_edit_link(@parent, @page, @link_extension) do %>
+                <%= pb_rails("caption", props: {
+                  text: "Edit this page",
+                  color: "link",
+                  size: "xs"
+                }) %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <%= render 'layouts/footer'%>
+        </div>
       <% end %>
     <% end %>
   </body>

@@ -17,7 +17,7 @@ body {
 
 .pb--page {
   &--dark-mode-toggle {
-    position: absolute;
+    position: fixed;
     top: $space_xl;
     right: $space_xl;
     z-index: 100;
@@ -64,7 +64,7 @@ body {
   }
   &--hamburger, &--checkbox {
     position: absolute;
-    right: $space-xl;
+    left: $space-xl;
     top: 30px;
     display: none;
     font-size: $space-xl;
@@ -72,6 +72,7 @@ body {
     height: 30px;
     color: $primary;
     cursor: pointer;
+    z-index: 1;
     @include break_at($nav_breakpoint) {
       display: block;
     }
@@ -137,6 +138,17 @@ body {
       .mobile-sidebar-pages {
         display: block;
       }
+    }
+  }
+
+  &--mobileNav {
+    height: 100px;
+    background-color: $white;
+    width: 100%;
+    display: none;
+    z-index: 1;
+    @include break_at($nav_breakpoint) {
+        display: block;
     }
   }
   
