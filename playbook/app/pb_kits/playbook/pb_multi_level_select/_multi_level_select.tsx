@@ -41,7 +41,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     name,
     returnAllSelected = false,
     treeData,
-    onSelect = () => {},
+    onSelect = () => null,
     selectedIds
   } = props
 
@@ -69,7 +69,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const initialExpandedItems = getExpandedItems(treeData, selectedIds);
   // Initialize state with expanded items.
   const [expanded, setExpanded] = useState(initialExpandedItems);
-
 
   useEffect(() => {
     setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
@@ -164,7 +163,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     treeData: { [key: string]: any }[],
     selectedIds: string[],
     parent_id: string = null,
-    depth: number = 0,
+    depth = 0,
   ) => {
     if (!Array.isArray(treeData)) {
       return
@@ -267,35 +266,41 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           items.map((item: { [key: string]: any }) => {
             return (
               <div key={item.id}>
-                <li className='dropdown_item' data-name={item.id}>
-                  <div className='dropdown_item_checkbox_row'>
+                <li
+                    className="dropdown_item"
+                    data-name={item.id}
+                >
+                  <div className="dropdown_item_checkbox_row">
                     <div
-                      key={isExpanded(item) ? "chevron-down" : "chevron-right"}
+                        key={isExpanded(item) ? "chevron-down" : "chevron-right"}
                     >
                       <CircleIconButton
-                        icon={
-                          isExpanded(item) ? "chevron-down" : "chevron-right"
-                        }
-                        className={
-                          item.children && item.children.length > 0
-                            ? ""
-                            : "toggle_icon"
-                        }
-                        onClick={(event: any) =>
-                          handleToggleClick(item.id, event)
-                        }
-                        variant='link'
+                          className={
+                            item.children && item.children.length > 0
+                              ? ""
+                              : "toggle_icon"
+                          }
+                          icon={
+                            isExpanded(item) ? "chevron-down" : "chevron-right"
+                          }
+                          onClick={(event: any) =>
+                            handleToggleClick(item.id, event)
+                          }
+                          variant="link"
                       />
                     </div>
-                    <Checkbox text={item.label} id={item.id}>
+                    <Checkbox
+                        id={item.id}
+                        text={item.label}
+                    >
                       <input
-                        checked={item.checked}
-                        type='checkbox'
-                        name={item.label}
-                        value={item.label}
-                        onChange={(e) => {
-                          handledropdownItemClick(e, !item.checked)
-                        }}
+                          checked={item.checked}
+                          name={item.label}
+                          onChange={(e) => {
+                            handledropdownItemClick(e, !item.checked)
+                          }}
+                          type='checkbox'
+                          value={item.label}
                       />
                     </Checkbox>
                   </div>
@@ -313,26 +318,40 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     )
   }
 
-
-
   return (
-    <div {...ariaProps} {...dataProps} className={classes} id={id}>
-      <div ref={dropdownRef} className='wrapper'>
-        <div className='input_wrapper' onClick={handleInputWrapperClick}>
-          <div className='input_inner_container'>
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
+      <div
+          className="wrapper"
+          ref={dropdownRef}
+      >
+        <div
+            className="input_wrapper"
+            onClick={handleInputWrapperClick}
+        >
+          <div className="input_inner_container">
             {returnedArray.length !== 0 && returnAllSelected
               ? returnedArray.map((item) => (
-                  <input type='hidden' name={`${name}[]`} value={item.id} />
+                  <input
+                      key={item.id}
+                      name={`${name}[]`}
+                      type="hidden"
+                      value={item.id}
+                  />
                 ))
               : null}
 
             {returnedArray.length !== 0 && inputDisplay === "pills" && returnAllSelected
               ? returnedArray.map((item, index) => (
                   <FormPill
-                    key={index}
-                    text={item.label}
-                    size='small'
-                    onClick={(event: any) => handlePillClose(event, item)}
+                      key={index}
+                      onClick={(event: any) => handlePillClose(event, item)}
+                      size="small"
+                      text={item.label}
                   />
                 ))
               : null}
@@ -340,10 +359,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
               defaultReturn.length !== 0 && inputDisplay === "pills" ?
               defaultReturn.map((item, index) => (
                 <FormPill
-                  key={index}
-                  text={item.label}
-                  size='small'
-                  onClick={(event: any) => handlePillClose(event, item)}
+                    key={index}
+                    onClick={(event: any) => handlePillClose(event, item)}
+                    size="small"
+                    text={item.label}
                 />
               ))
               : null
@@ -351,24 +370,30 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             {returnedArray.length !== 0 && returnAllSelected && inputDisplay === "pills" && <br />}
             {defaultReturn.length !== 0 && !returnAllSelected && inputDisplay === "pills" && <br />}
             <input
-              id='multiselect_input'
-              onChange={(e) => {
-                setFilterItem(e.target.value)
-              }}
-              placeholder={inputDisplay === "none" && itemsSelectedLength() ? (
-                    `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? 'item' : 'items'} selected`
-                  ) : ("Start typing...")}
-              value={filterItem}
-              onClick={() => setIsClosed(false)}
+                id="multiselect_input"
+                onChange={(e) => {
+                  setFilterItem(e.target.value)
+                }}
+                onClick={() => setIsClosed(false)}
+                placeholder={inputDisplay === "none" && itemsSelectedLength() ? (
+                      `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? "item" : "items"} selected`
+                    ) : ("Start typing...")}
+                value={filterItem}
             />
           </div>
           {isClosed ? (
-            <div key='chevron-down'>
-              <Icon icon='chevron-down' size="xs"/>
+            <div key="chevron-down">
+              <Icon
+                  icon="chevron-down"
+                  size="xs"
+              />
             </div>
           ) : (
-            <div key='chevron-up'>
-              <Icon icon='chevron-up' size="xs"/>
+            <div key="chevron-up">
+              <Icon
+                  icon="chevron-up"
+                  size="xs"
+              />
             </div>
           )}
         </div>

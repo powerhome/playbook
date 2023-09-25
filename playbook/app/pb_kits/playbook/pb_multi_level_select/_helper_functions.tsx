@@ -1,16 +1,3 @@
-//function to retrieve all ancestors of unchecked item and set checked to false
-export const getAncestorsOfUnchecked = (
-  data: { [key: string]: any }[],
-  item: { [key: string]: any }
-) => {
-  if (item.parent_id) {
-    const ancestor = filterFormattedDataById(data, item.parent_id);
-    ancestor[0].checked = false;
-    ancestor[0].parent_id && getAncestorsOfUnchecked(data, ancestor[0]);
-  }
-  return data;
-};
-
 //function is going over formattedData and returning all objects that match the
 //id of the clicked item from the dropdown
 export const filterFormattedDataById = (
@@ -35,10 +22,23 @@ export const filterFormattedDataById = (
   return matched;
 };
 
+//function to retrieve all ancestors of unchecked item and set checked to false
+export const getAncestorsOfUnchecked = (
+  data: { [key: string]: any }[],
+  item: { [key: string]: any }
+) => {
+  if (item.parent_id) {
+    const ancestor = filterFormattedDataById(data, item.parent_id);
+    ancestor[0].checked = false;
+    ancestor[0].parent_id && getAncestorsOfUnchecked(data, ancestor[0]);
+  }
+  return data;
+};
+
 export const findByFilter = (
   formattedData: { [key: string]: any }[],
   searchTerm: string
-) => {
+): { [key: string]: any }[] => {
   const matchedItems: { [key: string]: any }[] = [];
   const recursiveSearch = (data: { [key: string]: any }[], term: string) => {
     for (const item of data) {
@@ -76,7 +76,7 @@ export const getCheckedItems = (
   return checkedItems;
 };
 
-export const getDefaultCheckedItems = (treeData: { [key: string]: any }[]) => {
+export const getDefaultCheckedItems = (treeData: { [key: string]: any }[]): { [key: string]: any }[] => {
   const checkedDefault: { [key: string]: any }[] = [];
 
   const traverseTree = (items: { [key: string]: any }[]) => {
@@ -118,7 +118,7 @@ export const getDefaultCheckedItems = (treeData: { [key: string]: any }[]) => {
 export const recursiveCheckParent = (
   item: { [key: string]: any },
   data: any
-) => {
+): any => {
   if (item.parent_id !== null) {
     const parent = filterFormattedDataById(data, item.parent_id);
     const allChildrenChecked = parent[0].children.every(
@@ -135,8 +135,8 @@ export const recursiveCheckParent = (
   return data;
 };
 
-export const getExpandedItems = (treeData: { [key: string]: string }[], selectedIds: string[]) => {
-  let expandedItems: any[] = [];
+export const getExpandedItems = (treeData: { [key: string]: string }[], selectedIds: string[]): any[] => {
+  const expandedItems: any[] = [];
 
   const traverse = (items: string | any[], ancestors: any[] = []) => {
     for (let i = 0; i < items.length; i++) {
