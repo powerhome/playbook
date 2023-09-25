@@ -62,8 +62,9 @@ export const renderTopLevelNavItem = (
       : false;
   };
 
-  // if url starts with /visual_guidelines, then relevant collapsible nav to be toggled open on first render
+  // if url starts with /visual_guidelines or /kits, then relevant collapsible nav to be toggled open on first render
   const currentPage = currentURL.match(/^(\/[^/]+)\/[^/]+/);
+  const kitsPage = currentURL.match(/^\/([^/?#]+)/)
   // if url starts with /kit, then relevant collapsible nav to be toggled open on first render
   const kitCategoryPage = currentURL.match(/^\/([^/]{3})/);
   // if url matches /guides, than relevant collapsible nav to be toggled open on first render
@@ -79,7 +80,7 @@ export const renderTopLevelNavItem = (
       currentPage &&
       (currentPage[1] === link ||
         (kitCategoryPage &&
-          `/${kitCategoryPage[1]}` === link.substring(0, link.length - 1)));
+          `/${kitCategoryPage[1]}` === link.substring(0, link.length - 1))) || (kitsPage && kitsPage[0] === link);
 
     const guidesMatch = guidesPage === link;
 
