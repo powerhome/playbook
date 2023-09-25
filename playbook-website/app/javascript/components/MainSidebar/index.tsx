@@ -14,7 +14,6 @@ const MainSidebar = ({
   PBversion,
   search_list,
   samples,
-  guides_nav
 }) => {
   //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
@@ -60,7 +59,6 @@ const MainSidebar = ({
           category,
           collapsibles,
           samples,
-          guides_nav
         )}
       </Nav>
     </>

@@ -1,8 +1,9 @@
 import React from "react";
 import { NavItem } from "playbook-ui";
 import { VisualGuidelinesItems } from "./MenuData/GuidelinesNavItems";
+import { GuidesNavItems } from "./MenuData/GuildesNavItems";
 
-export const renderOtherNavItems = (name, currentURL, dark, samples, guides_nav) => {
+export const renderOtherNavItems = (name, currentURL, dark, samples) => {
   const samplesMenu: string[] = [];
 
   //Get samples pages from Samples yml file
@@ -60,17 +61,17 @@ export const renderOtherNavItems = (name, currentURL, dark, samples, guides_nav)
       )}
       {name === "Getting Started" && (
         <>
-          {guides_nav && guides_nav.pages.map((link, i) => (
+          {GuidesNavItems.map((link, i) => (
             <NavItem
-              active={`/${link.url}` === currentURL}
+              active={link.link === currentURL}
               cursor="pointer"
               dark={dark}
               fontSize="small"
-              key={`${link.title}-${i}`}
-              link={`/${link.url}`}
+              key={`${link.name}-${i}`}
+              link={link.link}
               marginBottom="none"
               marginTop="xxs"
-              text={link.title}
+              text={link.name}
               paddingY="xxs"
             />
           ))}
