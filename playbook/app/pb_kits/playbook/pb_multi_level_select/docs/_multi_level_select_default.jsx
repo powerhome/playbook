@@ -73,11 +73,11 @@ const MultiLevelSelectDefault = (props) => {
   return (
     <>
       <MultiLevelSelect
-          id='multiselect-single'
+          id="multiselect-single"
           inputName="Power"
-          onSelect={(e) => console.log(e)}
+          onSelect={(selectedNode) => console.log("Selected Node", selectedNode)}
           treeData={treeData}
-          variant='single'
+          variant="single"
           {...props}
       />
     </>

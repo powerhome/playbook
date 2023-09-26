@@ -74,6 +74,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const initialExpandedItems = getExpandedItems(treeData, selectedIds)
   // Initialize state with expanded items.
   const [expanded, setExpanded] = useState(initialExpandedItems)
+  // State for single select variant
+  const [singleSelectValue, setSingleSelectValue] = useState("")
 
   useEffect(() => {
     setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
@@ -240,8 +242,22 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     e: React.ChangeEvent<HTMLInputElement>,
     check: boolean
   ) => {
-    console.log(e.target, check);
+    const clickedItem = e.target.id
+    setSingleSelectValue(e.target.value)
+    setIsClosed(true)
+
+    // Search the formatted data for the clicked radio item
+    const filtered = filterFormattedDataById(formattedData, clickedItem)
+    filtered[0].checked = check
+
+    onSelect(filtered)
   };
+
+  // Handle on single select input change
+  const handleOnSingleSelectInputChange = (value: string) => {
+    setFilterItem(value)
+    setSingleSelectValue(value)
+  }
 
   const isExpanded = (item: any) => expanded.indexOf(item.id) > -1
 
@@ -270,6 +286,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
     return items
   }
+
   //rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: any }[]) => {
     return (
@@ -332,7 +349,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   {isExpanded(item) &&
                     item.children &&
                     item.children.length > 0 &&
-                    !filterItem && ( // Show children if expanded is true
+                    ((variant === "single" && !singleSelectValue) || !filterItem) && ( // Show children if expanded is true
                       <div>{renderNestedOptions(item.children)}</div>
                     )}
                 </li>
@@ -380,30 +397,41 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   />
                 ))
               : null}
-            {!returnAllSelected &&
-              defaultReturn.length !== 0 && inputDisplay === "pills" ?
-              defaultReturn.map((item, index) => (
-                <FormPill
-                    key={index}
-                    onClick={(event: any) => handlePillClose(event, item)}
-                    size="small"
-                    text={item.label}
-                />
-              ))
+
+            {!returnAllSelected && defaultReturn.length !== 0 && inputDisplay === "pills"
+              ? defaultReturn.map((item, index) => (
+                  <FormPill
+                      key={index}
+                      onClick={(event: any) => handlePillClose(event, item)}
+                      size="small"
+                      text={item.label}
+                  />
+                ))
               : null
             }
+
             {returnedArray.length !== 0 && returnAllSelected && inputDisplay === "pills" && <br />}
+
             {defaultReturn.length !== 0 && !returnAllSelected && inputDisplay === "pills" && <br />}
+
             <input
                 id="multiselect_input"
                 onChange={(e) => {
-                  setFilterItem(e.target.value)
+                  const { value } = e.target
+
+                  variant === "single"
+                    ? handleOnSingleSelectInputChange(value)
+                    : setFilterItem(value)
                 }}
                 onClick={() => setIsClosed(false)}
-                placeholder={inputDisplay === "none" && itemsSelectedLength() ? (
-                      `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? "item" : "items"} selected`
-                    ) : ("Start typing...")}
-                value={filterItem}
+                placeholder={
+                  inputDisplay === "none" && itemsSelectedLength()
+                    ? `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? "item" : "items"} selected`
+                    : variant === "single" && singleSelectValue
+                    ? singleSelectValue
+                    : ("Start typing...")
+                }
+                value={singleSelectValue}
             />
           </div>
           {isClosed ? (
@@ -424,7 +452,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         </div>
         <div className={`dropdown_menu ${isClosed ? "close" : "open"}`}>
           {renderNestedOptions(
-            filterItem ? findByFilter(formattedData, filterItem) : formattedData
+            singleSelectValue || filterItem
+              ? findByFilter(formattedData, (singleSelectValue || filterItem))
+              : formattedData
           )}
         </div>
       </div>
