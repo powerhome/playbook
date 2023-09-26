@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { NavItem, useCollapsible } from "playbook-ui";
-import { renderNavItem, kitsType } from "./KitsNavItems";
+import { renderNavItem, kitsType } from "./NavComponents/KitsNavComponent";
 import { SideBarNavItems } from "./MenuData/SidebarNavItems";
-import { renderOtherNavItems } from "./OtherNavItems";
+import { renderOtherNavItems } from "./NavComponents/OtherNavComponent";
 
 const currentURL = window.location.pathname + window.location.search;
 

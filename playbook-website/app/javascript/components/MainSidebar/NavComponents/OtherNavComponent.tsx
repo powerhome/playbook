@@ -1,7 +1,7 @@
 import React from "react";
 import { NavItem } from "playbook-ui";
-import { VisualGuidelinesItems } from "./MenuData/GuidelinesNavItems";
-import { GuidesNavItems } from "./MenuData/GuildesNavItems";
+import { VisualGuidelinesItems } from "../MenuData/GuidelinesNavItems";
+import { GuidesNavItems } from "../MenuData/GuildesNavItems";
 
 export const renderOtherNavItems = (name, currentURL, dark, samples) => {
   const samplesMenu: string[] = [];

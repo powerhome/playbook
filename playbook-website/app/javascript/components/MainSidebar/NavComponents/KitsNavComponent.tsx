@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavItem } from "playbook-ui";
-import { linkFormat } from "../../utilities/website_sidebar_helper";
+import { linkFormat } from "../../../utilities/website_sidebar_helper";
 
 const currentURL = window.location.pathname + window.location.search;
 
