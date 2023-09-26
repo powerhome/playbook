@@ -240,22 +240,20 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   const handleRadioButtonClick = (
     e: React.ChangeEvent<HTMLInputElement>,
-    check: boolean
   ) => {
-    const clickedItem = e.target.id
+    const clickedItemID = e.target.id
     setSingleSelectValue(e.target.value)
     setIsClosed(true)
 
     // Search the formatted data for the clicked radio item
-    const filtered = filterFormattedDataById(formattedData, clickedItem)
-    filtered[0].checked = check
+    const clickedItem = filterFormattedDataById(formattedData, clickedItemID)
 
-    onSelect(filtered)
+    onSelect(clickedItem)
   };
 
   // Handle on single select input change
   const handleOnSingleSelectInputChange = (value: string) => {
-    setFilterItem(value)
+    setFilterItem("")
     setSingleSelectValue(value)
   }
 
@@ -320,12 +318,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     </div>
                     { variant === "single" ? (
                       <Radio
+                          checked={singleSelectValue.toLowerCase() === item.value.toLowerCase()}
                           id={item.id}
                           label={item.label}
                           name={inputName}
-                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            return handleRadioButtonClick(e, !item.checked)
-                          }}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => (
+                            handleRadioButtonClick(e)
+                          )}
                           type="radio"
                           value={item.label}
                       />
@@ -349,7 +348,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                   {isExpanded(item) &&
                     item.children &&
                     item.children.length > 0 &&
-                    ((variant === "single" && !singleSelectValue) || !filterItem) && ( // Show children if expanded is true
+                    (variant === "single" || !filterItem) && ( // Show children if expanded is true
                       <div>{renderNestedOptions(item.children)}</div>
                     )}
                 </li>
