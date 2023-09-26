@@ -1,4 +1,7 @@
 <div class="pb--kits">
+  <div class="pb--page--dark-mode-toggle-desktop">
+    <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
+  </div>
   <%= pb_rails("title", props: { text: pb_kit_title(@category), tag: "h1", size: 1, margin_top:"xl" }) %>
   <br>
   <div class="pb--kit-type-nav">
