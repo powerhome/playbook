@@ -1,3 +1,23 @@
+# 🧠 Smart Multi-Line Truncation is Here!
+##### September 22, 2023
+
+![13 7 0](https://github.com/powerhome/playbook/assets/73710701/be8a6446-b0eb-4a86-bebc-b2916f316c12)
+
+Got text content that’s too long to fully display? No job’s too large for the new truncate prop. Pop it into the Body or Title kit, set the number of lines to truncate to, and your overflow text will… 👋
+
+[13.7.0](https://github.com/powerhome/playbook/tree/13.7.0) full list of changes:
+
+**Fixed Bugs:**
+
+- Rich Text Editor Button Fix [\#2757](https://github.com/powerhome/playbook/pull/2757) ([nidaqg](https://github.com/nidaqg))
+- Collapsible Kit Hides Tooltip Fix [\#2751](https://github.com/powerhome/playbook/pull/2751) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Body and Title Truncate Docs + Prevent Class Name Clash [\#2750](https://github.com/powerhome/playbook/pull/2750) ([gavhuang](https://github.com/gavhuang))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.6.0...13.7.0)
+
 # 13.6.0
 ##### September 19, 2023
 
