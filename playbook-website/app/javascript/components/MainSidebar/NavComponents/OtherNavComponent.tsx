@@ -75,8 +75,8 @@ export const OtherNavItems = ({
           marginBottom="none"
           marginTop="xxs"
           onClick={() => handleItemClick(link, i)}
-          text={transformMenuTitle(link)}
           paddingY="xxs"
+          text={transformMenuTitle(link)}
         />
       ))}
     </>

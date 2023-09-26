@@ -112,14 +112,15 @@ export const TopLevelNavItem = ({
         dark={dark}
         fontSize="small"
         fontWeight="bolder"
+        iconLeft={leftIcon}
         iconRight={children && ["plus", "minus"]}
         key={key}
-        iconLeft={leftIcon}
         link={TopLevelLink(link)}
         marginY="none"
         onClick={() => handleComponentsClick(key, i)}
         onIconRightClick={children && (() => handleComponentsIconClick(i))}
         paddingY="xxs"
+        target={name === "Playground" ? "_blank" : "_self"}
         text={name}
       >
         {children && (
