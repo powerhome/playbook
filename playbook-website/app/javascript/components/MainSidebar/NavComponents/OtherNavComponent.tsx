@@ -4,15 +4,6 @@ import { VisualGuidelinesItems } from "../MenuData/GuidelinesNavItems";
 import { GuidesNavItems } from "../MenuData/GuildesNavItems";
 
 export const renderOtherNavItems = (name, currentURL, dark, samples) => {
-  const samplesMenu: string[] = [];
-
-  //Get samples pages from Samples yml file
-  for (const key in samples) {
-    if (samples.hasOwnProperty(key)) {
-      samples[key].forEach((item: string) => samplesMenu.push(item));
-    }
-  }
-
   //transform text from samples yml
   const transformMenuTitle = (link) => {
     const words = link
@@ -22,61 +13,47 @@ export const renderOtherNavItems = (name, currentURL, dark, samples) => {
     return words.join(" ");
   };
 
+  const samplesMenu: string[] = [];
+
+  //Get samples pages from Samples yml file
+  for (const key in samples) {
+    if (samples.hasOwnProperty(key)) {
+      samples[key].forEach((item: string) => samplesMenu.push(item));
+    }
+  }
+  let menuItems: {[key:string]:string}[] | string[] = [];
+
+  //conditionally render navitems depending on name
+  if (name === "Tokens & Guidelines") {
+    menuItems = VisualGuidelinesItems;
+  } else if (name === "UI Samples" && samples) {
+    menuItems = samplesMenu;
+  } else if (name === "Getting Started") {
+    menuItems = GuidesNavItems;
+  }
+
+  console.log(samplesMenu);
+
   return (
     <>
-      {name === "Tokens & Guidelines" &&
-        VisualGuidelinesItems.map(({ name, link }, i) => (
-          <>
-            <NavItem
-              active={link === currentURL}
-              cursor="pointer"
-              dark={dark}
-              fontSize="small"
-              key={`${link}-${i}`}
-              link={link}
-              marginBottom="none"
-              marginTop="xxs"
-              text={name}
-              paddingY="xxs"
-            />
-          </>
-        ))}
-      {name === "UI Samples" && (
-        <>
-          {samplesMenu.map((link, i) => (
-            <NavItem
-              active={`/samples/${link}` === currentURL}
-              cursor="pointer"
-              dark={dark}
-              fontSize="small"
-              key={`${link}-${i}`}
-              link={`/samples/${link}`}
-              marginBottom="none"
-              marginTop="xxs"
-              text={transformMenuTitle(link)}
-              paddingY="xxs"
-            />
-          ))}
-        </>
-      )}
-      {name === "Getting Started" && (
-        <>
-          {GuidesNavItems.map((link, i) => (
-            <NavItem
-              active={link.link === currentURL}
-              cursor="pointer"
-              dark={dark}
-              fontSize="small"
-              key={`${link.name}-${i}`}
-              link={link.link}
-              marginBottom="none"
-              marginTop="xxs"
-              text={link.name}
-              paddingY="xxs"
-            />
-          ))}
-        </>
-      )}
+      {menuItems.map((link, i) => (
+        <NavItem
+          active={
+            name === "UI Samples"
+              ? `/samples/${link}` === currentURL
+              : link.link === currentURL
+          }
+          cursor="pointer"
+          dark={dark}
+          fontSize="small"
+          key={`${link.link}-${i}`}
+          link={name === "UI Samples" ? `/samples/${link}` : link.link}
+          marginBottom="none"
+          marginTop="xxs"
+          text={name === "UI Samples" ? transformMenuTitle(link) : link.name}
+          paddingY="xxs"
+        />
+      ))}
     </>
   );
 };
