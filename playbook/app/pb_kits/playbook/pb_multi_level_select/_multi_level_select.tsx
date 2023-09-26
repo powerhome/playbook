@@ -426,11 +426,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 placeholder={
                   inputDisplay === "none" && itemsSelectedLength()
                     ? `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? "item" : "items"} selected`
-                    : variant === "single" && singleSelectValue
-                    ? singleSelectValue
                     : ("Start typing...")
                 }
-                value={singleSelectValue}
+                value={singleSelectValue || filterItem}
             />
           </div>
           {isClosed ? (
