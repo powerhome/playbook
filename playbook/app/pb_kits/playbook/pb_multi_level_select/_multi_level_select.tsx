@@ -3,6 +3,7 @@ import classnames from "classnames"
 import { globalProps, GlobalProps } from "../utilities/globalProps"
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 import Checkbox from "../pb_checkbox/_checkbox"
+import Radio from "../pb_radio/_radio"
 import Icon from "../pb_icon/_icon"
 import FormPill from "../pb_form_pill/_form_pill"
 import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button"
@@ -24,11 +25,13 @@ type MultiLevelSelectProps = {
   data?: { [key: string]: string }
   id?: string
   inputDisplay?: "pills" | "none"
+  inputName?: string
   name?: string
   returnAllSelected?: boolean
   treeData?: { [key: string]: string }[]
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[]
+  variant?: "multi" | "single"
 } & GlobalProps
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
@@ -38,11 +41,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     data = {},
     id,
     inputDisplay = "pills",
+    inputName,
     name,
     returnAllSelected = false,
     treeData,
     onSelect = () => null,
-    selectedIds
+    selectedIds,
+    variant = "multi"
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -66,9 +71,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   //state for return for default
   const [defaultReturn, setDefaultReturn] = useState([])
   // Get expanded items from treeData.
-  const initialExpandedItems = getExpandedItems(treeData, selectedIds);
+  const initialExpandedItems = getExpandedItems(treeData, selectedIds)
   // Initialize state with expanded items.
-  const [expanded, setExpanded] = useState(initialExpandedItems);
+  const [expanded, setExpanded] = useState(initialExpandedItems)
 
   useEffect(() => {
     setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
@@ -231,6 +236,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
+  const handleRadioButtonClick = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    check: boolean
+  ) => {
+    console.log(e.target, check);
+  };
+
   const isExpanded = (item: any) => expanded.indexOf(item.id) > -1
 
   //handle click on chevron toggles in dropdown
@@ -289,20 +301,33 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                           variant="link"
                       />
                     </div>
-                    <Checkbox
-                        id={item.id}
-                        text={item.label}
-                    >
-                      <input
-                          checked={item.checked}
-                          name={item.label}
-                          onChange={(e) => {
-                            handledropdownItemClick(e, !item.checked)
+                    { variant === "single" ? (
+                      <Radio
+                          id={item.id}
+                          label={item.label}
+                          name={inputName}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            return handleRadioButtonClick(e, !item.checked)
                           }}
-                          type='checkbox'
+                          type="radio"
                           value={item.label}
                       />
-                    </Checkbox>
+                    ) : (
+                      <Checkbox
+                          id={item.id}
+                          text={item.label}
+                      >
+                        <input
+                            checked={item.checked}
+                            name={item.label}
+                            onChange={(e) => {
+                              handledropdownItemClick(e, !item.checked)
+                            }}
+                            type='checkbox'
+                            value={item.label}
+                        />
+                      </Checkbox>
+                    )}
                   </div>
                   {isExpanded(item) &&
                     item.children &&
