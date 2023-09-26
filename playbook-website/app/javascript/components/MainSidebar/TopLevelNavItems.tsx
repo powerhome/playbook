@@ -58,7 +58,7 @@ export const renderTopLevelNavItem = (
     return isActive[key]
       ? true
       : Object.keys(isActive).length === 0
-      ? currentURL === kitsLink
+      ? currentURL === kitsLink || currentURL === link
       : false;
   };
 
