@@ -69,6 +69,11 @@ body {
       &.smooth-scroll {
         scroll-behavior: smooth;
       }
+
+      &--guides {
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
   &--hamburger {

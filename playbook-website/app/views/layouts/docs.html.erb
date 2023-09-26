@@ -24,21 +24,28 @@
               <div style="height:250px"></div>
             <% end %>
           <% end %>
-          <%= pb_rails("background", props: { display: "flex", classname: "markdown guides--page", display: "flex", justify_content: "center", background_color: "white" }) do %>
-            <%= pb_rails("flex/flex_item", props: { max_width: action_name == 'changelog' ? 'md' : 'lg', margin_x: "sm", padding_y: "md", classname: "minw0 w100" }) do %>
-              <div class="markdown_title"><%= @page_title %></div>
-              <%= yield %>
-              <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
-              <%= link_to action_name == 'changelog' ? "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md" : gh_edit_link(@parent, @page, @link_extension) do %>
-                <%= pb_rails("caption", props: {
-                  text: "Edit this page",
-                  color: "link",
-                  size: "xs"
-                }) %>
+          <%= pb_rails("flex", props:{orientation: "column", align:"center"}) do %>
+              <%= pb_rails("flex/flex_item", props: { classname: "minw0 w100" }) do %>
+                <%= pb_rails("background", props: { display: "flex", justify_content:"center",classname: "markdown w100", background_color: "white", padding_x: "sm", padding_y: "md" }) do %>
+                  <%= pb_rails("background", props: { max_width: action_name == 'changelog' ? 'md' : 'lg', background_color: "white" }) do %>
+                    <div class="markdown_title"><%= @page_title %></div>
+                    <%= yield %>
+                    <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
+                    <%= link_to action_name == 'changelog' ? "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md" : gh_edit_link(@parent, @page, @link_extension) do %>
+                      <%= pb_rails("caption", props: {
+                        text: "Edit this page",
+                        color: "link",
+                        size: "xs"
+                      }) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
               <% end %>
-            <% end %>
+              <%= pb_rails("flex/flex_item", props:{classname: "w100"}) do %>
+                <%= render 'layouts/footer'%>
+              <% end %>
           <% end %>
-          <%= render 'layouts/footer'%>
+          
         </div>
       <% end %>
     <% end %>
