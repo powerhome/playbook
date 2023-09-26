@@ -3,14 +3,14 @@ import { NavItem } from "playbook-ui";
 import { VisualGuidelinesItems } from "../MenuData/GuidelinesNavItems";
 import { GuidesNavItems } from "../MenuData/GuildesNavItems";
 
-export const renderOtherNavItems = (
+export const OtherNavItems = ({
   name,
   currentURL,
   dark,
   samples,
   setIsActive,
-  isActive
-) => {
+  isActive,
+}) => {
   //transform text from samples yml
   const transformMenuTitle = (link) => {
     if (name === "UI Samples") {

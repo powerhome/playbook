@@ -12,7 +12,7 @@ export const kitsType = (type) => {
   }
 };
 
-export const renderNavItem = (
+export const KitsNavItem = ({
   link,
   i,
   collapsibles,
@@ -21,8 +21,8 @@ export const renderNavItem = (
   dark,
   kit,
   isActive,
-  setIsActive
-) => {
+  setIsActive,
+}) => {
   const [collapsed] = collapsibles[i];
   //set up custom toggling
   const handleMainClick = (index, categoryKey) => {
@@ -50,7 +50,6 @@ export const renderNavItem = (
       return newIsActive;
     });
   };
-
 
   //click on non-collapsible navitem click
   const handleNonCollapseLinkClick = (link) => {

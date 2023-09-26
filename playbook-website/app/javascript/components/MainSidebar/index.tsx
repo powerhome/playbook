@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Nav, useCollapsible, Image, Badge, Flex } from "playbook-ui";
-import { renderTopLevelNavItem } from "./TopLevelNavItems";
+import { TopLevelNavItem } from "./TopLevelNavItems";
 // @ts-ignore
 import PBLogo from "../../images/pb-logo.svg";
 import KitSearch from "../KitSearch";
@@ -49,17 +49,17 @@ const MainSidebar = ({
         />
       </Flex>
       <Nav dark={dark} variant="bold" paddingTop="xxs">
-        {renderTopLevelNavItem(
-          dark,
-          type,
-          isActive,
-          setIsActive,
-          kits,
-          kit,
-          category,
-          collapsibles,
-          samples,
-        )}
+        <TopLevelNavItem
+          dark={dark}
+          type={type}
+          isActive={isActive}
+          setIsActive={setIsActive}
+          kits={kits}
+          kit={kit}
+          category={category}
+          collapsibles={collapsibles}
+          samples={samples}
+        />
       </Nav>
     </>
   );

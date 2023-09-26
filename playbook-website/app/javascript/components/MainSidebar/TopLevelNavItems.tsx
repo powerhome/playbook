@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { NavItem, useCollapsible } from "playbook-ui";
-import { renderNavItem, kitsType } from "./NavComponents/KitsNavComponent";
+import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent";
 import { SideBarNavItems } from "./MenuData/SidebarNavItems";
-import { renderOtherNavItems } from "./NavComponents/OtherNavComponent";
+import { OtherNavItems } from "./NavComponents/OtherNavComponent";
 
 const currentURL = window.location.pathname + window.location.search;
 
-export const renderTopLevelNavItem = (
+export const TopLevelNavItem = ({
   dark,
   type,
   isActive,
@@ -15,11 +15,12 @@ export const renderTopLevelNavItem = (
   kit,
   category,
   collapsibles,
-  samples
-) => {
+  samples,
+}) => {
   //hook into collapsible logic for top level item
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
 
+  //logic to make it so no navigation if already on that page(prevent unneeded rerenders)
   const TopLevelLink = (link) => {
     if (link === "/kits") {
       return currentURL ===
@@ -64,7 +65,7 @@ export const renderTopLevelNavItem = (
 
   // if url starts with /visual_guidelines or /kits, then relevant collapsible nav to be toggled open on first render
   const currentPage = currentURL.match(/^(\/[^/]+)\/[^/]+/);
-  const kitsPage = currentURL.match(/^\/([^/?#]+)/)
+  const kitsPage = currentURL.match(/^\/([^/?#]+)/);
   // if url starts with /kit, then relevant collapsible nav to be toggled open on first render
   const kitCategoryPage = currentURL.match(/^\/([^/]{3})/);
   // if url matches /guides, than relevant collapsible nav to be toggled open on first render
@@ -77,10 +78,12 @@ export const renderTopLevelNavItem = (
     const [toggleWithIcon, setToggleWithIcon] = useState(false);
 
     const categoryMatch =
-      currentPage &&
-      (currentPage[1] === link ||
-        (kitCategoryPage &&
-          `/${kitCategoryPage[1]}` === link.substring(0, link.length - 1))) || (kitsPage && kitsPage[0] === link);
+      (currentPage &&
+        (currentPage[1] === link ||
+          (kitCategoryPage &&
+            `/${kitCategoryPage[1]}` ===
+              link.substring(0, link.length - 1)))) ||
+      (kitsPage && kitsPage[0] === link);
 
     const guidesMatch = guidesPage === link;
 
@@ -123,22 +126,29 @@ export const renderTopLevelNavItem = (
           <>
             {name === "Components" ? (
               <>
-                {kits.map((link, i) =>
-                  renderNavItem(
-                    link,
-                    i,
-                    collapsibles,
-                    category,
-                    type,
-                    dark,
-                    kit,
-                    isActive,
-                    setIsActive
-                  )
-                )}
+                {kits.map((link, i) => (
+                  <KitsNavItem
+                    link={link}
+                    i={i}
+                    collapsibles={collapsibles}
+                    category={category}
+                    type={type}
+                    dark={dark}
+                    kit={kit}
+                    isActive={isActive}
+                    setIsActive={setIsActive}
+                  />
+                ))}
               </>
             ) : (
-              renderOtherNavItems(name, currentURL, dark, samples, setIsActive, isActive)
+              <OtherNavItems
+                name={name}
+                currentURL={currentURL}
+                dark={dark}
+                samples={samples}
+                setIsActive={setIsActive}
+                isActive={isActive}
+              />
             )}
           </>
         )}
