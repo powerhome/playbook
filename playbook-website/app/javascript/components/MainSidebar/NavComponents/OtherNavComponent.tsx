@@ -3,8 +3,14 @@ import { NavItem } from "playbook-ui";
 import { VisualGuidelinesItems } from "../MenuData/GuidelinesNavItems";
 import { GuidesNavItems } from "../MenuData/GuildesNavItems";
 
-export const renderOtherNavItems = (name, currentURL, dark, samples) => {
-
+export const renderOtherNavItems = (
+  name,
+  currentURL,
+  dark,
+  samples,
+  setIsActive,
+  isActive
+) => {
   //transform text from samples yml
   const transformMenuTitle = (link) => {
     if (name === "UI Samples") {
@@ -36,22 +42,39 @@ export const renderOtherNavItems = (name, currentURL, dark, samples) => {
     menuItems = GuidesNavItems;
   }
 
+  const handleItemClick = (link, i) => {
+    const key = name === "UI Samples" ? `${link}-${i}` : `${link.link}-${i}`;
+    setIsActive(() => {
+      const newIsActive = {};
+      newIsActive[key] = true;
+      return newIsActive;
+    });
+  };
+
+  const activeForItems = (link, i) => {
+    const key = name === "UI Samples" ? `${link}-${i}` : `${link.link}-${i}`;
+    return isActive[key]
+      ? true
+      : Object.keys(isActive).length === 0
+      ? name === "UI Samples"
+        ? `/samples/${link}` === currentURL
+        : link.link === currentURL
+      : null;
+  };
+
   return (
     <>
       {menuItems.map((link, i) => (
         <NavItem
-          active={
-            name === "UI Samples"
-              ? `/samples/${link}` === currentURL
-              : link.link === currentURL
-          }
+          active={activeForItems(link, i)}
           cursor="pointer"
           dark={dark}
           fontSize="small"
-          key={`${link.link}-${i}`}
+          key={name === "UI Samples" ? `${link}-${i}` : `${link.link}-${i}`}
           link={name === "UI Samples" ? `/samples/${link}` : link.link}
           marginBottom="none"
           marginTop="xxs"
+          onClick={() => handleItemClick(link, i)}
           text={transformMenuTitle(link)}
           paddingY="xxs"
         />

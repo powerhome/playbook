@@ -138,7 +138,7 @@ export const renderTopLevelNavItem = (
                 )}
               </>
             ) : (
-              renderOtherNavItems(name, currentURL, dark, samples)
+              renderOtherNavItems(name, currentURL, dark, samples, setIsActive, isActive)
             )}
           </>
         )}
