@@ -26,6 +26,53 @@ class PagesController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def to_url_format(text)
+    text.gsub(/[^a-zA-Z0-9]+/, "-").strip.gsub(/\s+/, "-")
+  end
+
+  def extract_changelog_data(changelog)
+    releases = []
+
+    changelog.split(/^# /).each do |section|
+      break if releases.size == 2
+
+      next unless section.strip.length.positive?
+
+      title_match = section.match(/(.+?)\n/)
+      next unless title_match
+
+      title = title_match[1].strip
+
+      date_match = section.match(/####? (.+?)\n/)
+      date = date_match ? date_match[1].strip : nil
+
+      image_match = section.match(/!\[.+?\]\((.+?)\)/)
+      next unless image_match
+
+      image = image_match[1].strip
+
+      description_match = section.match(/!\[.*?\]\(.*?\)\n\n(.*?)\n\n\[.*?\]\(.*?\)/m)
+      description = description_match ? description_match[1].strip : nil
+
+      link = to_url_format(title).to_s
+
+      releases << {
+        title: title,
+        date: date,
+        image: image,
+        description: description,
+        link: link,
+      }
+    end
+
+    releases
+  end
+
+  def home
+    @data = Playbook::Engine.root.join("CHANGELOG.md").read
+    @structured_data = extract_changelog_data(@data)
+  end
+
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
     @page_title = "What's New"
