@@ -70,9 +70,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [formattedData, setFormattedData] = useState([])
   // State for return for default
   const [defaultReturn, setDefaultReturn] = useState([])
-  // Get expanded items from treeData.
+  // Get expanded items from treeData
   const initialExpandedItems = getExpandedItems(treeData, selectedIds)
-  // Initialize state with expanded items.
+  // Initialize state with expanded items
   const [expanded, setExpanded] = useState(initialExpandedItems)
   // State for single select variant input value
   const [singleSelectInputValue, setSingleSelectInputValue] = useState("")
@@ -249,17 +249,18 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const { id: selectedItemID, value: inputText } = e.target
+    // Reset tree checked state, triggering useEffect
+    const treeWithNoSelections = modifyRecursive(formattedData, false)
+    // Update tree with single selection
+    const treeWithSelectedItem = modifyValue(selectedItemID, treeWithNoSelections, true)
+    const selectedItem = filterFormattedDataById(treeWithSelectedItem, selectedItemID)
+
     setSingleSelectInputValue(inputText)
     // Reset the filter to always display dropdown options on click
     setFilterItem("")
     setIsClosed(true)
 
-    // Reset tree checked state, triggering useEffect
-    const treeWithNoSelections = modifyRecursive(formattedData, false)
-    // Make single selection
-    const treeWithSelectedItem = modifyValue(selectedItemID, treeWithNoSelections, true)
-
-    onSelect(filterFormattedDataById(treeWithSelectedItem, selectedItemID))
+    onSelect(selectedItem)
   };
 
   // Single select: reset the tree state upon typing
@@ -351,7 +352,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                             onChange={(e) => {
                               handledropdownItemClick(e, !item.checked)
                             }}
-                            type='checkbox'
+                            type="checkbox"
                             value={item.label}
                         />
                       </Checkbox>
@@ -387,43 +388,65 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             onClick={handleInputWrapperClick}
         >
           <div className="input_inner_container">
-            {returnedArray.length !== 0 && returnAllSelected
-              ? returnedArray.map((item) => (
+            {variant === "single" && defaultReturn.length !== 0
+              ? defaultReturn.map((selectedItem) => (
                   <input
-                      key={item.id}
+                      key={selectedItem.id}
                       name={`${name}[]`}
                       type="hidden"
-                      value={item.id}
+                      value={selectedItem.id}
                   />
                 ))
               : null}
 
-            {returnedArray.length !== 0 && inputDisplay === "pills" && returnAllSelected
-              ? returnedArray.map((item, index) => (
-                  <FormPill
-                      key={index}
-                      onClick={(event: any) => handlePillClose(event, item)}
-                      size="small"
-                      text={item.label}
-                  />
-                ))
-              : null}
+            {variant !== "single" && (
+              <>
+                {returnAllSelected && returnedArray.length !== 0
+                  ? returnedArray.map((item) => (
+                      <input
+                          key={item.id}
+                          name={`${name}[]`}
+                          type="hidden"
+                          value={item.id}
+                      />
+                    ))
+                  : null}
 
-            {!returnAllSelected && defaultReturn.length !== 0 && inputDisplay === "pills"
-              ? defaultReturn.map((item, index) => (
-                  <FormPill
-                      key={index}
-                      onClick={(event: any) => handlePillClose(event, item)}
-                      size="small"
-                      text={item.label}
-                  />
-                ))
-              : null
-            }
+                {returnAllSelected &&
+                returnedArray.length !== 0 &&
+                inputDisplay === "pills"
+                  ? returnedArray.map((item, index) => (
+                      <FormPill
+                          key={index}
+                          onClick={(event: any) => handlePillClose(event, item)}
+                          size="small"
+                          text={item.label}
+                      />
+                    ))
+                  : null}
 
-            {returnedArray.length !== 0 && returnAllSelected && inputDisplay === "pills" && <br />}
+                {!returnAllSelected &&
+                defaultReturn.length !== 0 &&
+                inputDisplay === "pills"
+                  ? defaultReturn.map((item, index) => (
+                      <FormPill
+                          key={index}
+                          onClick={(event: any) => handlePillClose(event, item)}
+                          size="small"
+                          text={item.label}
+                      />
+                    ))
+                  : null}
 
-            {defaultReturn.length !== 0 && !returnAllSelected && inputDisplay === "pills" && <br />}
+                {returnAllSelected &&
+                  returnedArray.length !== 0 &&
+                  inputDisplay === "pills" && <br />}
+
+                {!returnAllSelected &&
+                  defaultReturn.length !== 0 &&
+                  inputDisplay === "pills" && <br />}
+              </>
+            )}
 
             <input
                 id="multiselect_input"
@@ -436,11 +459,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 placeholder={
                   inputDisplay === "none" && itemsSelectedLength()
                     ? `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? "item" : "items"} selected`
-                    : ("Start typing...")
+                    : "Start typing..."
                 }
                 value={singleSelectInputValue || filterItem}
             />
           </div>
+
           {isClosed ? (
             <div key="chevron-down">
               <Icon
@@ -457,6 +481,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             </div>
           )}
         </div>
+
         <div className={`dropdown_menu ${isClosed ? "close" : "open"}`}>
           {renderNestedOptions(
             filterItem
