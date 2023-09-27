@@ -60,22 +60,22 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   const dropdownRef = useRef(null)
 
-  //state for whether dropdown is open or closed
+  // State for whether dropdown is open or closed
   const [isClosed, setIsClosed] = useState(true)
-  //state from onchange for textinput, to use for filtering to create typeahead
+  // State from onchange for textinput, to use for filtering to create typeahead
   const [filterItem, setFilterItem] = useState("")
-  //this is essentially the return that the user will get when they use the kit
+  // This is essentially the return that the user will get when they use the kit
   const [returnedArray, setReturnedArray] = useState([])
-  //formattedData with checked and parent_id added
+  // FormattedData with checked and parent_id added
   const [formattedData, setFormattedData] = useState([])
-  //state for return for default
+  // State for return for default
   const [defaultReturn, setDefaultReturn] = useState([])
   // Get expanded items from treeData.
   const initialExpandedItems = getExpandedItems(treeData, selectedIds)
   // Initialize state with expanded items.
   const [expanded, setExpanded] = useState(initialExpandedItems)
-  // State for single select variant
-  const [singleSelectValue, setSingleSelectValue] = useState("")
+  // State for single select variant input value
+  const [singleSelectInputValue, setSingleSelectInputValue] = useState("")
 
   useEffect(() => {
     setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
@@ -115,7 +115,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     })
   }
 
-  //iterate over tree, find item and set checked or unchecked
+  // Iterate over tree, find item and set checked or unchecked
   const modifyValue = (
     id: string,
     tree: { [key: string]: any }[],
@@ -128,14 +128,20 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       if (item.id != id) item.children = modifyValue(id, item.children, check)
       else {
         item.checked = check
-        item.children = modifyRecursive(item.children, check)
+
+        if (variant === "single") {
+          // Single select: no children should be checked
+          item.children = modifyRecursive(item.children, !check)
+        } else {
+          item.children = modifyRecursive(item.children, check)
+        }
       }
 
       return item
     })
   }
 
-  //clone tree, check items + children
+  // Clone tree, check items + children
   const checkItem = (item: { [key: string]: any }) => {
     const tree = cloneDeep(formattedData)
     if (returnAllSelected) {
@@ -146,7 +152,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
-  //clone tree, uncheck items + children
+  // Clone tree, uncheck items + children
   const unCheckItem = (item: { [key: string]: any }) => {
     const tree = cloneDeep(formattedData)
     if (returnAllSelected) {
@@ -157,7 +163,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
-  //setformattedData with proper properties
+  // setFormattedData with proper properties
   const changeItem = (item: { [key: string]: any }, check: boolean) => {
     const tree = check ? checkItem(item) : unCheckItem(item)
     setFormattedData(tree)
@@ -165,7 +171,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return tree
   }
 
-  //function to map over data and add parent_id + depth property to each item
+  // Function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
     selectedIds: string[],
@@ -198,12 +204,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     })
   }
 
-  //click event for x on form pill
+  // Click event for x on form pill
   const handlePillClose = (event: any, clickedItem: { [key: string]: any }) => {
-    // prevents the dropdown from closing when clicking on the pill
+    // Prevents the dropdown from closing when clicking on the pill
     event.stopPropagation()
     const updatedTree = changeItem(clickedItem, false)
-    //logic for removing items from returnArray or defaultReturn when pills clicked
+    // Logic for removing items from returnArray or defaultReturn when pills clicked
     if (returnAllSelected) {
       onSelect(getCheckedItems(updatedTree))
     } else {
@@ -211,7 +217,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
-  //handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
+  // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
     e.stopPropagation()
     if (
@@ -223,10 +229,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setIsClosed(!isClosed)
   }
 
-  //Main function to handle any click inside dropdown
+  // Main function to handle any click inside dropdown
   const handledropdownItemClick = (e: any, check: boolean) => {
     const clickedItem = e.target.parentNode.id
-    //setting filterItem to "" will clear textinput and clear typeahead
+    // Setting filterItem to "" will clear textinput and clear typeahead
     setFilterItem("")
 
     const filtered = filterFormattedDataById(formattedData, clickedItem)
@@ -238,28 +244,34 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
+  // Single select
   const handleRadioButtonClick = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const clickedItemID = e.target.id
-    setSingleSelectValue(e.target.value)
+    const { id: selectedItemID, value: inputText } = e.target
+    setSingleSelectInputValue(inputText)
+    // Reset the filter to always display dropdown options on click
+    setFilterItem("")
     setIsClosed(true)
 
-    // Search the formatted data for the clicked radio item
-    const clickedItem = filterFormattedDataById(formattedData, clickedItemID)
+    // Reset tree checked state, triggering useEffect
+    const treeWithNoSelections = modifyRecursive(formattedData, false)
+    // Make single selection
+    const treeWithSelectedItem = modifyValue(selectedItemID, treeWithNoSelections, true)
 
-    onSelect(clickedItem)
+    onSelect(filterFormattedDataById(treeWithSelectedItem, selectedItemID))
   };
 
-  // Handle on single select input change
-  const handleOnSingleSelectInputChange = (value: string) => {
-    setFilterItem("")
-    setSingleSelectValue(value)
-  }
+  // Single select: reset the tree state upon typing
+  const handleRadioInputChange = (inputText: string) => {
+    modifyRecursive(formattedData, false)
+    setSingleSelectInputValue(inputText)
+    setFilterItem(inputText)
+  };
 
   const isExpanded = (item: any) => expanded.indexOf(item.id) > -1
 
-  //handle click on chevron toggles in dropdown
+  // Handle click on chevron toggles in dropdown
   const handleToggleClick = (id: string, event: React.MouseEvent) => {
     event.stopPropagation()
     const clickedItem = filterFormattedDataById(formattedData, id)
@@ -285,7 +297,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return items
   }
 
-  //rendering formattedData to UI based on typeahead
+  // Rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: any }[]) => {
     return (
       <ul>
@@ -318,7 +330,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     </div>
                     { variant === "single" ? (
                       <Radio
-                          checked={singleSelectValue.toLowerCase() === item.value.toLowerCase()}
+                          checked={item.checked}
                           id={item.id}
                           label={item.label}
                           name={inputName}
@@ -415,12 +427,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
             <input
                 id="multiselect_input"
-                onChange={(e) => {
-                  const { value } = e.target
-
+                onChange={(e) =>{
                   variant === "single"
-                    ? handleOnSingleSelectInputChange(value)
-                    : setFilterItem(value)
+                    ? handleRadioInputChange(e.target.value)
+                    : setFilterItem(e.target.value)
                 }}
                 onClick={() => setIsClosed(false)}
                 placeholder={
@@ -428,7 +438,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     ? `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? "item" : "items"} selected`
                     : ("Start typing...")
                 }
-                value={singleSelectValue || filterItem}
+                value={singleSelectInputValue || filterItem}
             />
           </div>
           {isClosed ? (
@@ -449,8 +459,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         </div>
         <div className={`dropdown_menu ${isClosed ? "close" : "open"}`}>
           {renderNestedOptions(
-            singleSelectValue || filterItem
-              ? findByFilter(formattedData, (singleSelectValue || filterItem))
+            filterItem
+              ? findByFilter(formattedData, filterItem)
               : formattedData
           )}
         </div>
