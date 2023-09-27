@@ -165,7 +165,7 @@ body {
     display: none;
     z-index: 1;
     @include break_at($nav_breakpoint) {
-        display: block;
+        display: flex;
     }
   }
   
