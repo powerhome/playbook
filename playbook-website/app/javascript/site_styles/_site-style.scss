@@ -164,6 +164,9 @@ body {
     width: 100%;
     display: none;
     z-index: 1;
+    &.dark {
+      background: tint(#0a0527, 10);
+    }
     @include break_at($nav_breakpoint) {
         display: flex;
     }
