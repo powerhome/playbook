@@ -1,3 +1,43 @@
+# 🧠 Smart Multi-Line Truncation is Here!
+##### September 22, 2023
+
+![13 7 0](https://github.com/powerhome/playbook/assets/73710701/be8a6446-b0eb-4a86-bebc-b2916f316c12)
+
+Got text content that’s too long to fully display? No job’s too large for the new truncate prop. Pop it into the Body or Title kit, set the number of lines to truncate to, and your overflow text will… 👋
+
+[13.7.0](https://github.com/powerhome/playbook/tree/13.7.0) full list of changes:
+
+**Fixed Bugs:**
+
+- Rich Text Editor Button Fix [\#2757](https://github.com/powerhome/playbook/pull/2757) ([nidaqg](https://github.com/nidaqg))
+- Collapsible Kit Hides Tooltip Fix [\#2751](https://github.com/powerhome/playbook/pull/2751) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Body and Title Truncate Docs + Prevent Class Name Clash [\#2750](https://github.com/powerhome/playbook/pull/2750) ([gavhuang](https://github.com/gavhuang))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.6.0...13.7.0)
+
+# 13.6.0
+##### September 19, 2023
+
+List of changes: 
+
+**Kit Enhancements:**
+
+- Global Prop Overflow [\#2744](https://github.com/powerhome/playbook/pull/2744) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Prevent Conflicts with Ruby's Hash [\#2742](https://github.com/powerhome/playbook/pull/2742) ([gavhuang](https://github.com/gavhuang))
+
+**Improvements:**
+
+- Sidebar Collapsible Nav Optimization [\#2749](https://github.com/powerhome/playbook/pull/2749) ([nidaqg](https://github.com/nidaqg))
+- Table Header Improvements [\#2738](https://github.com/powerhome/playbook/pull/2738) ([markdoeswork](https://github.com/markdoeswork))
+- Updating Markdown to Support Headers and Index [\#2733](https://github.com/powerhome/playbook/pull/2733) ([jasoncypret](https://github.com/jasoncypret))
+- Turn off Rails deprecation warnings [\#2739](https://github.com/powerhome/playbook/pull/2739) ([nickamantia](https://github.com/nickamantia))
+
 # No More Custom CSS! The Global Text Align Prop is Here!
 ##### September 14, 2023
 

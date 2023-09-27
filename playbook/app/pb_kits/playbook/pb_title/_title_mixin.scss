@@ -18,11 +18,11 @@ $pb_title_colors: (
 }
 
 $pb_title_truncate: (
-  truncate_1: 1,
-  truncate_2: 2,
-  truncate_3: 3,
-  truncate_4: 4,
-  truncate_5: 5
+  truncate-1: 1,
+  truncate-2: 2,
+  truncate-3: 3,
+  truncate-4: 4,
+  truncate-5: 5
 );
 
 @mixin title_truncate {
@@ -31,7 +31,7 @@ $pb_title_truncate: (
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: $number;
-      -webkit-box-orient: vertical; 
+      -webkit-box-orient: vertical;
     }
   }
 }

@@ -22,6 +22,8 @@ const popoverReference = (
     <button
       className="toolbar_button"
       onClick={handleTogglePopover}
+      role="button"
+      type="button"
     >
     <Flex 
       align="center"
