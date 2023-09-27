@@ -43,6 +43,19 @@ export const findByFilter = (
   return matchedItems;
 };
 
+// Function to retrieve all ancestors of unchecked item and set checked to false
+export const getAncestorsOfUnchecked = (
+  data: { [key: string]: any }[],
+  item: { [key: string]: any }
+): { [key: string]: any }[] => {
+  if (item.parent_id) {
+    const ancestor = filterFormattedDataById(data, item.parent_id);
+    ancestor[0].checked = false;
+    ancestor[0].parent_id && getAncestorsOfUnchecked(data, ancestor[0]);
+  }
+  return data;
+};
+
 // Function to get all items with checked = true
 export const getCheckedItems = (
   data: { [key: string]: any }[]
