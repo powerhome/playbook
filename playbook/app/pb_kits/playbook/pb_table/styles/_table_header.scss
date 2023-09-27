@@ -56,13 +56,13 @@ $text_align_values: (
       }
 
 .header_last_item {
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: $border_radius_md;
+  border-bottom-right-radius: $border_radius_md;
 }
 
 .header_first_item {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  border-top-left-radius: $border_radius_md;
+  border-top-right-radius: $border_radius_md;
 }
 
 [class^="pb_nav_list"][class*="_vertical"][class*="_highlight"] [class*="_active"] {
