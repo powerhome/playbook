@@ -74,8 +74,6 @@ export const TopLevelNavItem = ({
   //extract render logic out of return for better performance
   const renderTopItems = (name, key, children, leftIcon, link, i) => {
     const [collapsed] = topLevelCollapsibles[i];
-    //use state to hanlde toggle logic to make sure both main click and right icon click works as expected
-    const [toggleWithIcon, setToggleWithIcon] = useState(false);
 
     const categoryMatch =
       (currentPage &&
@@ -87,17 +85,22 @@ export const TopLevelNavItem = ({
 
     const guidesMatch = guidesPage === link;
 
+    //use state to handle toggle logic to make sure both main click and right icon click works as expected
+    const [toggleTopNav, setToggleTopNav] = useState(
+      categoryMatch || guidesMatch ? false : true
+    );
+
     useEffect(() => {
-      setToggleWithIcon(categoryMatch || guidesMatch ? false : collapsed);
+      setToggleTopNav(categoryMatch || guidesMatch ? false : collapsed);
     }, [collapsed]);
 
     //right icon click for top level item
     const handleComponentsIconClick = (i) => {
       topLevelCollapsibles.forEach(([, toggle], idx) => {
         if (idx === i) {
-          toggleWithIcon === true
-            ? setToggleWithIcon(false)
-            : setToggleWithIcon(true);
+          toggleTopNav === true
+            ? setToggleTopNav(false)
+            : setToggleTopNav(true);
         }
       });
     };
@@ -105,7 +108,7 @@ export const TopLevelNavItem = ({
     return (
       <NavItem
         active={activeTopLevel(key, link)}
-        collapsed={children && toggleWithIcon}
+        collapsed={children && toggleTopNav}
         collapsible={children}
         collapsibleTrail={children}
         cursor="pointer"

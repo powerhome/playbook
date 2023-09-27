@@ -71,8 +71,22 @@ export const KitsNavItem = ({
   };
 
   if (typeof link === "object") {
+    const categoryKey = Object.keys(link)[0];
+    const sublinks = link[categoryKey];
+    const isActiveCategory = isActive[i]
+      ? true
+      : Object.keys(isActive).length === 0
+      ? category === categoryKey
+      : false;
+
+    const hasActiveSublink = link[Object.keys(link)[0]].some(
+      (sublink) => sublink === kit
+    );
+
     //useState for handling collapsed state
-    const [toggleNav, setToggleNav] = useState(false);
+    const [toggleNav, setToggleNav] = useState(
+      isActiveCategory || hasActiveSublink ? false : true
+    );
     //useEffect to handle toggle to consolidate logic
     useEffect(() => {
       setToggleNav(isActiveCategory || hasActiveSublink ? false : collapsed);
@@ -86,14 +100,6 @@ export const KitsNavItem = ({
         }
       });
     };
-
-    const categoryKey = Object.keys(link)[0];
-    const sublinks = link[categoryKey];
-    const isActiveCategory = isActive[i]
-      ? true
-      : Object.keys(isActive).length === 0
-      ? category === categoryKey
-      : false;
 
     const calculateIsActiveCategory = (i, categoryKey, sublink) => {
       if (sublink) {
@@ -110,10 +116,6 @@ export const KitsNavItem = ({
           : false;
       }
     };
-
-    const hasActiveSublink = link[Object.keys(link)[0]].some(
-      (sublink) => sublink === kit
-    );
 
     return (
       <NavItem
