@@ -84,6 +84,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   useEffect(() => {
     if (returnAllSelected) {
       setReturnedArray(getCheckedItems(formattedData))
+    } else if (variant === "single" && selectedIds?.length) {
+      // The default is the first selectedId if there are more than one
+      const defaultSelection = filterFormattedDataById(formattedData, selectedIds[0])
+      setSingleSelectInputValue(defaultSelection[0]?.value)
+      setDefaultReturn(defaultSelection)
     } else {
       setDefaultReturn(getDefaultCheckedItems(formattedData))
     }
