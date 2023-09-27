@@ -24,7 +24,7 @@ $text_align_values: (
 .pb_th_link:hover {
   background-color: rgba($primary, 0.03);
   color: $primary !important;
-  border-radius: 6px;
+  border-radius: $border_radius_md;
 }
 
 .pb_th_link, .pb_th_nolink{
