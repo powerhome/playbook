@@ -24,6 +24,7 @@ $text_align_values: (
 .pb_th_link:hover {
   background-color: rgba($primary, 0.03);
   color: $primary !important;
+  border-radius: 6px;
 }
 
 .pb_th_link, .pb_th_nolink{
@@ -43,8 +44,27 @@ $text_align_values: (
     [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"] {
       &[class*="_link"] {
         border-left-width: 0px;
-        background-color: #fff !important;
       }
     }
   }
+}
+
+[class*="pb_table_header_dropdown"][class*="_vertical"][class*="_normal"]
+  [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"][class*="_link"]
+    [class*="_icon_right"] {
+      font-size: 16px;
+      }
+
+.header_last_item {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.header_first_item {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+[class^="pb_nav_list"][class*="_vertical"][class*="_highlight"] [class*="_active"] {
+  background-color: $card_light;
 }
