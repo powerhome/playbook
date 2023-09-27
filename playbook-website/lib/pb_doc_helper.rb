@@ -43,16 +43,14 @@ module PlaybookWebsite
     # rubocop:enable Style/StringConcatenation
 
     def get_kits(type = "rails")
-      menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
-      menu["kits"][type]
+      MENU["kits"][type]
     end
 
     def aggregate_kits
-      menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
       all_kits = []
 
       # Loop over each type (rails, react, swift, etc.)
-      menu["kits"].each do |_type, kits|
+      MENU["kits"].each do |_type, kits|
         kits.each do |kit|
           case kit
           when Hash
