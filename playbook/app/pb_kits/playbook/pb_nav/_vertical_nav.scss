@@ -36,7 +36,6 @@ $selector: ".pb_nav_list";
         align-items: center;
         padding: $space_sm $space_sm $space_sm ($space_sm - 3px);
         border-left: 0 solid transparent;
-        border-left-width: 3px;
         transition-property: color, border-color, background-color;
         transition-duration: 0.15s;
         transition-timing-function: $bezier;
@@ -92,9 +91,15 @@ $selector: ".pb_nav_list";
     [class*="_active"] {
       background-color: $active_light;
     }
+    [class*="_indicator"] {
+      border-left-width: 3px !important;
+    }
     &[class*="dark"] {
       [class*="_active"] {
         background-color: rgba($white, $opacity_1);
+      }
+      [class*="_indicator"] {
+        border-left-width: 3px !important;
       }
     }
   }

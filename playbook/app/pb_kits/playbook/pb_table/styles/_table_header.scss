@@ -39,16 +39,6 @@ $text_align_values: (
   }
 }
 
-[class*="pb_table_header_dropdown"][class*="_vertical"] {
-  &[class*="_normal"] {
-    [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"] {
-      &[class*="_link"] {
-        border-left-width: 0px;
-      }
-    }
-  }
-}
-
 .header_last_item {
   border-bottom-left-radius: $border_radius_md;
   border-bottom-right-radius: $border_radius_md;
@@ -57,8 +47,4 @@ $text_align_values: (
 .header_first_item {
   border-top-left-radius: $border_radius_md;
   border-top-right-radius: $border_radius_md;
-}
-
-[class^="pb_nav_list"][class*="_vertical"][class*="_highlight"] [class*="_active"] {
-  background-color: $card_light;
 }
