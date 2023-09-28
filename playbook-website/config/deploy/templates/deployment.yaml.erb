@@ -62,12 +62,15 @@ spec:
               port: 3000
             initialDelaySeconds: 60
             timeoutSeconds: 10
-          resources:
-            limits:
-              cpu: 0.3
-              memory: 256Mi
-              ephemeral-storage: 100Mi
-            requests:
-              cpu: 0.1
-              memory: 256Mi
-              ephemeral-storage: 100Mi
+          <<: <%= partial "resources", component: "playbook", defaults: {
+            "limits" => {
+              "cpu" => "0.3",
+              "memory" => "256Mi",
+              "ephemeral-storage" => "100Mi"
+            },
+            "requests" => {
+              "cpu" => "0.1",
+              "memory" => "256Mi",
+              "ephemeral-storage" => "100Mi"
+            }
+          } %> 
