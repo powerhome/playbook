@@ -75,24 +75,34 @@ export const TopLevelNavItem = ({
   const renderTopItems = (name, key, children, leftIcon, link, i) => {
     const [collapsed] = topLevelCollapsibles[i];
 
-    const categoryMatch =
-      (currentPage &&
-        (currentPage[1] === link ||
-          (kitCategoryPage &&
-            `/${kitCategoryPage[1]}` ===
-              link.substring(0, link.length - 1)))) ||
-      (kitsPage && kitsPage[0] === link);
+    //is link for navitem equal to current url? Logic will be redundant once website moves to react
+    const onCurrentPage = () => {
+      const categoryMatch =
+        (currentPage &&
+          (currentPage[1] === link ||
+            (kitCategoryPage &&
+              `/${kitCategoryPage[1]}` ===
+                link.substring(0, link.length - 1)))) ||
+        (kitsPage && kitsPage[0] === link);
 
-    const guidesMatch = guidesPage === link;
+      const guidesMatch = guidesPage === link;
+
+      return categoryMatch || guidesMatch ? true : false;
+    };
 
     //use state to handle toggle logic to make sure both main click and right icon click works as expected
     const [toggleTopNav, setToggleTopNav] = useState(
-      categoryMatch || guidesMatch ? false : true
+      onCurrentPage() ? false : true
     );
 
+    //on first render, active item should be toggled open, after that custom toggling logic to run
     useEffect(() => {
-      setToggleTopNav(categoryMatch || guidesMatch ? false : collapsed);
-    }, [collapsed]);
+      if (Object.keys(isActive).length === 0) {
+        setToggleTopNav(onCurrentPage() ? false : true);
+      } else {
+        setToggleTopNav(collapsed);
+      }
+    }, [collapsed, isActive]);
 
     //right icon click for top level item
     const handleComponentsIconClick = (i) => {
