@@ -53,7 +53,8 @@
     }
 
     &[class*=_bold] {
-      [class^=pb_body_kit], [class^=pb_body_kit].dark {
+      [class^=pb_body_kit], [class^=_light]{
+        color: $text_lt_default;
         font-weight: $bolder;
       }
     }
