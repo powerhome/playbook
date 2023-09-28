@@ -6,6 +6,7 @@ import NavItem from './_item'
 
 const navTestId = 'nav'
 const itemTestId = 'item'
+const activeTestId = 'active'
 const navClassName = 'custom-class-name-nav'
 const itemClassName = 'custom-class-name-item'
 const navTitle = 'Menu'
@@ -35,6 +36,7 @@ const NavDefault = (props) => {
             />
             <NavItem
                 active
+                data={{ testid: activeTestId }}
                 link="#"
                 text="Video"
             />
@@ -68,6 +70,12 @@ test('should render title', () => {
     render(<NavDefault />)
     const kit = screen.getByText(itemTitle)
     expect(kit).toBeInTheDocument()
+})
+
+test('should have a left border', () => {
+    render(<NavDefault iconRight="angle-down" />)
+    const kit = screen.getByTestId(activeTestId)
+    expect(kit).toContainHTML('pb_nav_list_kit_item_active_indicator')
 })
 
 test('should have a right icon', () => {
