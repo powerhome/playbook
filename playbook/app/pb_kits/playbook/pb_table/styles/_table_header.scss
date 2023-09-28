@@ -24,7 +24,7 @@ $text_align_values: (
 .pb_th_link:hover {
   background-color: rgba($primary, 0.03);
   color: $primary !important;
-  border-radius: 6px;
+  border-radius: $border_radius_md;
 }
 
 .pb_th_link, .pb_th_nolink{
@@ -49,14 +49,23 @@ $text_align_values: (
   }
 }
 
+<<<<<<< HEAD
+=======
+[class*="pb_table_header_dropdown"][class*="_vertical"][class*="_normal"]
+  [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"][class*="_link"]
+    [class*="_icon_right"] {
+      font-size: $border_radius_md;
+      }
+
+>>>>>>> 5a3ec850aecd02e4cc3db52204b8a03e01bea91c
 .header_last_item {
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: $border_radius_md;
+  border-bottom-right-radius: $border_radius_md;
 }
 
 .header_first_item {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  border-top-left-radius: $border_radius_md;
+  border-top-right-radius: $border_radius_md;
 }
 
 [class^="pb_nav_list"][class*="_vertical"][class*="_highlight"] [class*="_active"] {
