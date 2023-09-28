@@ -140,7 +140,7 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
 
   const Tag = link ? "a" : "div";
   const activeClass = active === true ? "active" : "";
-  const highlightedBorderClass = active === true && highlighted_border == true ? "" : "highlighted_border_none";
+  const highlightedBorderClass = active === true && highlighted_border === false ? "highlighted_border_none" : "";
   const collapsibleTrailClass = collapsible && collapsibleTrail ? "collapsible_trail" : "";
 
   const fontSizeMapping = {

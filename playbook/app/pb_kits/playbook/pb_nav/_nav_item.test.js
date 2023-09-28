@@ -6,8 +6,8 @@ import NavItem from './_item'
 
 const navTestId = 'nav'
 const itemTestId = 'item'
-const activeTestBorderlessId = 'active'
-const activeTestBorderId = 'activeborder'
+const activeTestBorderlessId = 'activeborderless'
+const activeTestBorderId = 'active'
 const navClassName = 'custom-class-name-nav'
 const itemClassName = 'custom-class-name-item'
 const navTitle = 'Menu'
@@ -44,6 +44,7 @@ const NavDefault = (props) => {
             <NavItem
                 active
                 data={{ testid: activeTestBorderlessId }}
+                highlighted_border={false}
                 link="#"
                 text="Video"
             />

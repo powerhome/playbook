@@ -98,7 +98,7 @@ module Playbook
       end
 
       def highlighted_border_class
-        highlighted_border && active ? nil : "highlighted_border_none"
+        !highlighted_border && active ? "highlighted_border_none" : nil
       end
 
       def font_weight_class
