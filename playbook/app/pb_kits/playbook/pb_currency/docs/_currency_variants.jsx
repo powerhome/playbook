@@ -25,7 +25,7 @@ const CurrencyVariants = (props) => {
       <Currency
           amount="45"
           label="Bold"
-          size="lg"
+          size="sm"
           unit="/mo"
           variant="bold"
           {...props}
