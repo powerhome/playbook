@@ -12,7 +12,7 @@ import { Spacing } from "../types";
 
 type NavItemProps = {
   active?: boolean;
-  active_indicator?: boolean;
+  highlighted_border?: boolean;
   aria?: { [key: string]: string };
   fontWeight?: "regular" | "bold" | "bolder";
   children?: React.ReactNode[] | React.ReactNode;
@@ -56,7 +56,7 @@ const NavItem = (props: NavItemProps) => {
 
   const {
     active = false,
-    active_indicator = true,
+    highlighted_border = true,
     aria = {},
     orientation,
     variant,
@@ -140,7 +140,7 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
 
   const Tag = link ? "a" : "div";
   const activeClass = active === true ? "active" : "";
-  const activeIndicatorClass = active === true && active_indicator == true ? "indicator" : "";
+  const highlightedBorderClass = active === true && highlighted_border == true ? "" : "highlighted_border_none";
   const collapsibleTrailClass = collapsible && collapsibleTrail ? "collapsible_trail" : "";
 
   const fontSizeMapping = {
@@ -165,9 +165,9 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
   );
 
   const classes = classnames(
-    buildCss("pb_nav_list_kit_item", activeClass, activeIndicatorClass),
+    buildCss("pb_nav_list_kit_item", activeClass, highlightedBorderClass),
     collapsible
-      ? buildCss("pb_collapsible_nav_item", activeClass, activeIndicatorClass)
+      ? buildCss("pb_collapsible_nav_item", activeClass, highlightedBorderClass)
       : "",
     fontSizeClass,
     fontWeightClass,
@@ -195,7 +195,7 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
     return child;
   });
 
-  const collapsibleClasses = buildCss("collapsible_nav_wrapper", activeClass, activeIndicatorClass, collapsibleTrailClass)
+  const collapsibleClasses = buildCss("collapsible_nav_wrapper", activeClass, highlightedBorderClass, collapsibleTrailClass)
 
   return (
     <>

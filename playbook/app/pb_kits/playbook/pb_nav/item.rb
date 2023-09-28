@@ -10,7 +10,7 @@ module Playbook
       prop :font_weight, type: Playbook::Props::Enum,
                          values: %w[bold regular bolder],
                          default: "regular"
-      prop :active_indicator, type: Playbook::Props::Boolean, default: true
+      prop :highlighted_border, type: Playbook::Props::Boolean, default: true
       prop :collapsible, type: Playbook::Props::Boolean, default: false
       prop :link
       prop :text
@@ -23,9 +23,9 @@ module Playbook
                     default: "_self"
       def classname
         if collapsible
-          "#{generate_classname('pb_nav_list_kit_item', active_class, active_indicator_class)} #{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link_collapsible"
+          "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link_collapsible"
         else
-          "#{generate_classname('pb_nav_list_kit_item', active_class, active_indicator_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link"
+          "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link"
         end
       end
 
@@ -97,8 +97,8 @@ module Playbook
         active ? "active" : nil
       end
 
-      def active_indicator_class
-        active_indicator && active ? "indicator" : nil
+      def highlighted_border_class
+        highlighted_border && active ? nil : "highlighted_border_none"
       end
 
       def font_weight_class

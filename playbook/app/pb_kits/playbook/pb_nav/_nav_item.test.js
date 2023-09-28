@@ -6,7 +6,8 @@ import NavItem from './_item'
 
 const navTestId = 'nav'
 const itemTestId = 'item'
-const activeTestId = 'active'
+const activeTestBorderlessId = 'active'
+const activeTestBorderId = 'activeborder'
 const navClassName = 'custom-class-name-nav'
 const itemClassName = 'custom-class-name-item'
 const navTitle = 'Menu'
@@ -36,7 +37,13 @@ const NavDefault = (props) => {
             />
             <NavItem
                 active
-                data={{ testid: activeTestId }}
+                data={{ testid: activeTestBorderId }}
+                link="#"
+                text="Video"
+            />
+            <NavItem
+                active
+                data={{ testid: activeTestBorderlessId }}
                 link="#"
                 text="Video"
             />
@@ -74,8 +81,14 @@ test('should render title', () => {
 
 test('should have a left border', () => {
     render(<NavDefault iconRight="angle-down" />)
-    const kit = screen.getByTestId(activeTestId)
-    expect(kit).toContainHTML('pb_nav_list_kit_item_active_indicator')
+    const kit = screen.getByTestId(activeTestBorderId)
+    expect(kit).toContainHTML('pb_nav_list_kit_item_active')
+})
+
+test('should not have a left border', () => {
+    render(<NavDefault iconRight="angle-down" />)
+    const kit = screen.getByTestId(activeTestBorderlessId)
+    expect(kit).toContainHTML('pb_nav_list_kit_item_active_highlighted_border_none')
 })
 
 test('should have a right icon', () => {
