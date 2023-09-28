@@ -32,6 +32,7 @@
             <%= pb_rails("nav/item", props: {
               text: item[:item],
               link: item[:link],
+              padding: "xs",
               icon_right: sort_icon(item[:direction], item[:active]),
               active: item[:active],
               classname: "header_nav_item #{'header_first_item' if index == 0} #{'header_last_item' if index == object.sort_menu.size - 1}"
