@@ -97,6 +97,7 @@ export const TopLevelNavItem = ({
 
     //on first render, active item should be toggled open, after that custom toggling logic to run
     useEffect(() => {
+    //isActive will always be empty on first render due to rails navigation. Once we move to React router, this code will not be needed
       if (Object.keys(isActive).length === 0) {
         setToggleTopNav(onCurrentPage() ? false : true);
       } else {

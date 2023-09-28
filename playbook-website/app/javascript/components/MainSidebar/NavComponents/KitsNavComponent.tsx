@@ -89,8 +89,13 @@ export const KitsNavItem = ({
     );
     //useEffect to handle toggle to consolidate logic
     useEffect(() => {
-      setToggleNav(isActiveCategory || hasActiveSublink ? false : collapsed);
-    }, [collapsed]);
+      // isActive will always be empty on first render due to rails navigation. Once we move to React router, this code will not be needed
+      if (Object.keys(isActive).length === 0) {
+        setToggleNav(isActiveCategory || hasActiveSublink ? false : collapsed);
+      } else {
+        setToggleNav(collapsed);
+      }
+    }, [collapsed, isActive]);
 
     //click event for right icon
     const handleIconClick = (index) => {
