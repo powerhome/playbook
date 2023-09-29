@@ -45,6 +45,7 @@ export const KitsNavItem = ({
     return true;
   };
 
+  //make sure kits nav will stay toggled open when nested item is clicked
   const updateKitsNav = (index) => {
     collapsibles.forEach((collapsible, i) => {
       const [, , setCollapsed] = collapsible;
