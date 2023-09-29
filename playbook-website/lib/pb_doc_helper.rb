@@ -26,47 +26,40 @@ module PlaybookWebsite
     end
 
     # Deal with lists of kits, used in Playbook doc and Externally
-    # rubocop:disable Style/StringConcatenation
     def pb_kits(type: "rails", limit_examples: false, dark_mode: false)
-      display_kits = []
       kits = get_kits(type)
-      kits.each do |kit|
-        nav_array = nav_hash_array(kit)
-        next unless nav_array.is_a?(Array)
 
-        nav_array.each do |sub_kit|
-          display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode)
-        end
-      end
-      raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
+      # Iterate through the filtered kits and render them
+      kits.map do |kit|
+        render_pb_doc_kit(kit["name"], type, limit_examples, true, dark_mode)
+      end.join.html_safe
     end
-    # rubocop:enable Style/StringConcatenation
 
     def get_kits(type = "rails")
-      MENU["kits"][type]
+      kits = MENU["kits"] || []
+
+      # Filter kits that have at least one component compatible with the type
+      kits.select do |kit|
+        kit["components"].any? { |component| component["platforms"].include?(type) }
+      end
     end
 
     def aggregate_kits
       all_kits = []
 
-      # Loop over each type (rails, react, swift, etc.)
-      MENU["kits"].each do |_type, kits|
-        kits.each do |kit|
-          case kit
-          when Hash
-            kit_name = kit.keys.first
-            existing_kit = all_kits.find { |k| k.is_a?(Hash) && k.keys.first == kit_name }
+      # Loop over the kits
+      MENU["kits"].each do |kit|
+        kit_name = kit["name"]
+        components = kit["components"].map { |c| c["name"] }
 
-            if existing_kit
-              existing_kit[kit_name] += kit[kit_name] unless kit[kit_name].nil?
-              existing_kit[kit_name].uniq!
-              existing_kit[kit_name].sort!
-            else
-              all_kits << { kit_name => kit[kit_name] }
-            end
-          when String
-            all_kits << kit unless all_kits.include?(kit)
-          end
+        existing_kit = all_kits.find { |k| k.is_a?(Hash) && k.keys.first == kit_name }
+
+        if existing_kit
+          existing_kit[kit_name][:components] += components
+          existing_kit[kit_name][:components].uniq!
+          existing_kit[kit_name][:components].sort!
+        else
+          all_kits << { kit_name => { components: components } }
         end
       end
 
@@ -78,14 +71,26 @@ module PlaybookWebsite
       all_kits
     end
 
-    # rubocop:disable Style/OptionalBooleanParameter
-    def render_pb_doc_kit(kit, type, limit_examples, code = true, dark_mode = false)
-      title = pb_doc_render_clickable_title(kit, type)
-      ui = raw("<div class='pb--docItem-ui'>
-          #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
-      title + ui
+    def render_pb_doc_kit(kit_name, type, limit_examples, code, dark_mode)
+      title = pb_doc_render_clickable_title(kit_name, type)
+      components = MENU["kits"].find { |kit| kit["name"] == kit_name }["components"]
+
+      # Render the UI content for the parent kit
+      ui_content = raw("<div class='pb--docItem-ui'>
+        #{pb_kit(kit: kit_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
+      </div>")
+
+      # Render the component names and UI content for each component
+      component_content = components.map do |component|
+        component_name = component["name"]
+        raw("<div class='pb--docItem-ui'>
+          #{pb_kit(kit: component_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
+        </div>")
+      end.join.html_safe
+
+      # Combine the title, component content, and UI content for the parent kit
+      "#{title}#{component_content}#{ui_content}".html_safe
     end
-  # rubocop:enable Style/OptionalBooleanParameter
 
   private
 
