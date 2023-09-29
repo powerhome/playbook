@@ -1,85 +1,67 @@
 import React, { useState } from "react";
-import { Nav, NavItem, useCollapsible } from "playbook-ui";
-import { renderNavItem } from "./NestedNavItems";
+import { Nav, useCollapsible, Image, Badge, Flex } from "playbook-ui";
+import { TopLevelNavItem } from "./TopLevelNavItems";
+// @ts-ignore
+import PBLogo from "../../images/pb-logo.svg";
+import KitSearch from "../KitSearch";
 
-const MainSidebar = ({ dark, type, category, kit, kits }) => {
-  //active state for navItems(will be dedundant once routing moved to react router)
+const MainSidebar = ({
+  dark,
+  type,
+  category,
+  kit,
+  kits,
+  PBversion,
+  search_list,
+  samples,
+}) => {
+  //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
 
-  //hook into collapsible logic for all nested nav items
+  //hook into collapsible logic for all components nested nav items
   const collapsibles = kits.map(() => useCollapsible());
 
-  //hook into collapsible logic for top level item
-  const [isTopLevelCollapsed, setIsTopLevelCollapsed] = useState(false);
-
-  const currentURL = window.location.pathname + window.location.search;
-  const componentsLink =
-    currentURL === `/kits${type ? `?type=${type}` : ""}`
-      ? ""
-      : `/kits${type ? `?type=${type}` : ""}`;
-
-  //set up toggling for top level item
-  const handleComponentsClick = (item) => {
-    setIsActive(() => {
-      const newIsActive = {};
-      newIsActive[item] = true;
-      return newIsActive;
-    });
-
-    //return true at end to disable default collapsible behavior
-    return true;
-  };
-
-  //right icon click for top level item
-  const handleComponentsIconClick = () => {
-    isTopLevelCollapsed === true
-      ? setIsTopLevelCollapsed(false)
-      : setIsTopLevelCollapsed(true);
-  };
-
-  const activeTopLevel = () => {
-    return isActive["top-nav-item"]
-      ? true
-      : Object.keys(isActive).length === 0
-      ? currentURL === `/kits${type ? `?type=${type}` : ""}`
-      : false;
-  };
-
   return (
-    <Nav dark={dark} variant="bold" paddingTop="xxs">
-      <NavItem
-        active={activeTopLevel()}
-        collapsed={isTopLevelCollapsed}
-        collapsible
-        collapsibleTrail
-        cursor="pointer"
-        dark={dark}
-        fontSize="small"
-        fontWeight="bolder"
-        iconRight={["plus", "minus"]}
-        key="top-nav-item"
-        link={componentsLink}
-        marginY="none"
-        onClick={() => handleComponentsClick("top-nav-item")}
-        onIconRightClick={handleComponentsIconClick}
-        paddingY="xxs"
-        text="Components"
+    <>
+      <Flex
+        orientation="row"
+        spacing="between"
+        align="center"
+        marginTop="lg"
+        marginX="sm"
       >
-        {kits.map((link, i) =>
-          renderNavItem(
-            link,
-            i,
-            collapsibles,
-            category,
-            type,
-            dark,
-            kit,
-            isActive,
-            setIsActive
-          )
-        )}
-      </NavItem>
-    </Nav>
+        <a href={"/"}>
+          <Image alt="Playbook logo" url={PBLogo} />
+        </a>
+        <Badge text={PBversion} dark={dark} variant="success" rounded />
+      </Flex>
+      <Flex
+        orientation="column"
+        align="stretch"
+        marginBottom="xxs"
+        marginTop="md"
+        marginX="sm"
+      >
+        <KitSearch
+          classname="desktop-kit-search"
+          id="desktop-kit-search"
+          kits={search_list}
+        />
+      </Flex>
+      <Nav dark={dark} variant="bold" paddingTop="xxs">
+        <TopLevelNavItem
+          dark={dark}
+          type={type}
+          isActive={isActive}
+          setIsActive={setIsActive}
+          kits={kits}
+          kit={kit}
+          category={category}
+          collapsibles={collapsibles}
+          samples={samples}
+        />
+      </Nav>
+    </>
   );
 };
 

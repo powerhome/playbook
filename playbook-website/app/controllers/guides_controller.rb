@@ -5,6 +5,7 @@ class GuidesController < ApplicationController
   before_action :set_page_vars
 
   def md_doc
+    @show_sidebar = true
     if @parent
       if @page
         render template: "guides/#{@parent}/#{@page}"

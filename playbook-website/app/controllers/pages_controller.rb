@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
-  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift]
+  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift home]
 
   def disable_dark_mode
     cookies[:dark_mode] = {
@@ -29,7 +29,7 @@ class PagesController < ApplicationController
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
     @page_title = "What's New"
-    @show_sidebar = false
+    @show_sidebar = true
     @front_matter = nil
     render layout: "docs"
   end
