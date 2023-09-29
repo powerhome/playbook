@@ -14,7 +14,7 @@ export const kitsType = (type) => {
 
 export const KitsNavItem = ({
   link,
-  i,
+  kitIndex,
   collapsibles,
   category,
   type,
@@ -25,7 +25,7 @@ export const KitsNavItem = ({
   updateTopLevelNav,
   parentIndex
 }) => {
-  const [collapsed] = collapsibles[i];
+  const [collapsed] = collapsibles[kitIndex];
   //set up custom toggling
   const handleMainClick = (index, categoryKey) => {
     collapsibles.forEach(([, , setCollapsed], idx) => {
@@ -58,10 +58,10 @@ export const KitsNavItem = ({
   };
 
   //click on nested items
-  const handleSubItemClick = (j, sublink, Index) => {
+  const handleSubItemClick = (subLinkIndex, sublink, Index) => {
     setIsActive(() => {
       const newIsActive = {};
-      newIsActive[`${sublink}-${j}`] = true;
+      newIsActive[`${sublink}-${subLinkIndex}`] = true;
       return newIsActive;
     });
     updateTopLevelNav(parentIndex);
@@ -91,7 +91,7 @@ export const KitsNavItem = ({
   if (typeof link === "object") {
     const categoryKey = Object.keys(link)[0];
     const sublinks = link[categoryKey];
-    const isActiveCategory = isActive[i]
+    const isActiveCategory = isActive[kitIndex]
       ? true
       : Object.keys(isActive).length === 0
       ? category === categoryKey
@@ -142,7 +142,7 @@ export const KitsNavItem = ({
 
     return (
       <NavItem
-        active={calculateIsActiveCategory(i, categoryKey, null)}
+        active={calculateIsActiveCategory(kitIndex, categoryKey, null)}
         collapsed={toggleNav}
         collapsible
         collapsibleTrail
@@ -150,12 +150,12 @@ export const KitsNavItem = ({
         dark={dark}
         fontSize="small"
         iconRight={["plus", "minus"]}
-        key={`${categoryKey}-${i}`}
+        key={`${categoryKey}-${kitIndex}`}
         link={generateLink(categoryKey, null, type)}
         marginBottom="none"
         marginTop="xxs"
-        onClick={() => handleMainClick(i, categoryKey)}
-        onIconRightClick={() => handleIconClick(i)}
+        onClick={() => handleMainClick(kitIndex, categoryKey)}
+        onIconRightClick={() => handleIconClick(kitIndex)}
         paddingY="xxs"
         text={linkFormat(categoryKey)}
       >
@@ -168,7 +168,7 @@ export const KitsNavItem = ({
             key={`${sublink}-${j}`}
             link={generateLink(categoryKey, sublink, type)}
             marginY="none"
-            onClick={() => handleSubItemClick(j, sublink, i)}
+            onClick={() => handleSubItemClick(j, sublink, kitIndex)}
             paddingY="xxs"
             text={linkFormat(sublink)}
           />
@@ -188,7 +188,7 @@ export const KitsNavItem = ({
         cursor="pointer"
         dark={dark}
         fontSize="small"
-        key={`${link}-${i}`}
+        key={`${link}-${kitIndex}`}
         link={generateLink(null, link, type)}
         marginBottom="none"
         marginTop="xxs"
