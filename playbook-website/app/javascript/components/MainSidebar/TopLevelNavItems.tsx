@@ -97,7 +97,7 @@ export const TopLevelNavItem = ({
 
     //on first render, active item should be toggled open, after that custom toggling logic to run
     useEffect(() => {
-    //isActive will always be empty on first render due to rails navigation. Once we move to React router, this code will not be needed
+      //isActive will always be empty on first render due to rails navigation. Once we move to React router, this code will not be needed
       if (Object.keys(isActive).length === 0) {
         setToggleTopNav(onCurrentPage() ? false : true);
       } else {
@@ -112,6 +112,19 @@ export const TopLevelNavItem = ({
           toggleTopNav === true
             ? setToggleTopNav(false)
             : setToggleTopNav(true);
+        }
+      });
+    };
+
+    //callback function so top level nav item stays toggled opwn if child is clicked
+    const updateTopLevelNav = (index) => {
+      topLevelCollapsibles.forEach((collapsible, i) => {
+        const [, , setCollapsed] = collapsible;
+
+        if (i !== index) {
+          setCollapsed(true);
+        } else {
+          setCollapsed(false);
         }
       });
     };
@@ -152,6 +165,7 @@ export const TopLevelNavItem = ({
                     kit={kit}
                     isActive={isActive}
                     setIsActive={setIsActive}
+                    updateTopLevelNav={updateTopLevelNav}
                   />
                 ))}
               </>
@@ -163,6 +177,7 @@ export const TopLevelNavItem = ({
                 samples={samples}
                 setIsActive={setIsActive}
                 isActive={isActive}
+                updateTopLevelNav={updateTopLevelNav}
               />
             )}
           </>

@@ -10,6 +10,7 @@ export const OtherNavItems = ({
   samples,
   setIsActive,
   isActive,
+  updateTopLevelNav,
 }) => {
   //transform text from samples yml
   const transformMenuTitle = (link) => {
@@ -42,6 +43,15 @@ export const OtherNavItems = ({
     menuItems = GuidesNavItems;
   }
 
+  //Only needed for toggle logic for top level nav. Numbers are index values of nav items
+  const navIndexMap = {
+    "Getting Started": 1,
+    "Tokens & Guidelines": 3,
+    "UI Samples": 4,
+  };
+
+  const navIndex = navIndexMap[name];
+
   const handleItemClick = (link, i) => {
     const key = name === "UI Samples" ? `${link}-${i}` : `${link.link}-${i}`;
     setIsActive(() => {
@@ -49,6 +59,7 @@ export const OtherNavItems = ({
       newIsActive[key] = true;
       return newIsActive;
     });
+    updateTopLevelNav(navIndex);
   };
 
   const activeForItems = (link, i) => {

@@ -22,6 +22,7 @@ export const KitsNavItem = ({
   kit,
   isActive,
   setIsActive,
+  updateTopLevelNav,
 }) => {
   const [collapsed] = collapsibles[i];
   //set up custom toggling
@@ -37,6 +38,7 @@ export const KitsNavItem = ({
       } else {
         setCollapsed(true);
       }
+      updateTopLevelNav(2);
     });
     //return true at end to disable default collapsible behavior
     return true;
@@ -49,6 +51,7 @@ export const KitsNavItem = ({
       newIsActive[`${sublink}-${i}`] = true;
       return newIsActive;
     });
+    updateTopLevelNav(2);
   };
 
   //click on non-collapsible navitem click
@@ -58,6 +61,7 @@ export const KitsNavItem = ({
       newIsActive[link] = true;
       return newIsActive;
     });
+    updateTopLevelNav(2);
   };
 
   const generateLink = (categoryKey, sublink, type) => {
