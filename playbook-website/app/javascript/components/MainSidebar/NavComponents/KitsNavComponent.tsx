@@ -44,14 +44,26 @@ export const KitsNavItem = ({
     return true;
   };
 
+  const updateKitsNav = (index) => {
+    collapsibles.forEach((collapsible, i) => {
+      const [, , setCollapsed] = collapsible;
+      if (i !== index) {
+        setCollapsed(true);
+      } else {
+        setCollapsed(false);
+      }
+    });
+  };
+
   //click on nested items
-  const handleSubItemClick = (i, sublink) => {
+  const handleSubItemClick = (j, sublink, parentIndex) => {
     setIsActive(() => {
       const newIsActive = {};
-      newIsActive[`${sublink}-${i}`] = true;
+      newIsActive[`${sublink}-${j}`] = true;
       return newIsActive;
     });
     updateTopLevelNav(2);
+    updateKitsNav(parentIndex);
   };
 
   //click on non-collapsible navitem click
@@ -154,7 +166,7 @@ export const KitsNavItem = ({
             key={`${sublink}-${j}`}
             link={generateLink(categoryKey, sublink, type)}
             marginY="none"
-            onClick={() => handleSubItemClick(j, sublink)}
+            onClick={() => handleSubItemClick(j, sublink, i)}
             paddingY="xxs"
             text={linkFormat(sublink)}
           />
