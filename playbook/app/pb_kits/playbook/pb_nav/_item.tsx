@@ -12,6 +12,7 @@ import { Spacing } from "../types";
 
 type NavItemProps = {
   active?: boolean;
+  highlighted_border?: boolean;
   aria?: { [key: string]: string };
   fontWeight?: "regular" | "bold" | "bolder";
   children?: React.ReactNode[] | React.ReactNode;
@@ -44,7 +45,7 @@ type NavItemProps = {
 } & GlobalProps;
 
 const NavItem = (props: NavItemProps) => {
-  
+
   const fontWeightDefault = (orientation: string, variant: string) => {
     return orientation === "horizontal" && variant === "subtle"
       ? "regular"
@@ -55,6 +56,7 @@ const NavItem = (props: NavItemProps) => {
 
   const {
     active = false,
+    highlighted_border = true,
     aria = {},
     orientation,
     variant,
@@ -97,7 +99,7 @@ const NavItem = (props: NavItemProps) => {
     marginY,
   };
 
-//separate margin props and padding props  in itemSpacing object 
+//separate margin props and padding props  in itemSpacing object
 const filterItemSpacing = (obj: { [key: string]: string }) => {
   const filteredPadding: { [key: string]: string } = {};
   const filteredMargin: { [key: string]: string } = {};
@@ -114,7 +116,7 @@ const filterItemSpacing = (obj: { [key: string]: string }) => {
 //deconstruct itemSpacing
 const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
 
-//if itemSpacing has margin props, apply those, if margin global props passed to navItem itself, navItem props take precendence 
+//if itemSpacing has margin props, apply those, if margin global props passed to navItem itself, navItem props take precendence
   const finalItemSpacing = {
     ...(filteredMargin || {}),
     ...Object.entries(spacingMarginProps).reduce((acc: any, [prop, value]) => {
@@ -138,19 +140,20 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
 
   const Tag = link ? "a" : "div";
   const activeClass = active === true ? "active" : "";
+  const highlightedBorderClass = active === true && highlighted_border === false ? "highlighted_border_none" : "";
   const collapsibleTrailClass = collapsible && collapsibleTrail ? "collapsible_trail" : "";
 
   const fontSizeMapping = {
     "small": "font_size_small",
     "normal": "font_size_normal"
   };
-    
+
   const fontWeightMapping = {
     "bold": "font_bold",
     "bolder": "font_bolder",
     "regular": "font_regular"
   };
-    
+
   const fontSizeClass = fontSizeMapping[fontSize];
   const fontWeightClass = fontWeightMapping[fontWeight];
 
@@ -162,9 +165,9 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
   );
 
   const classes = classnames(
-    buildCss("pb_nav_list_kit_item", activeClass),
+    buildCss("pb_nav_list_kit_item", activeClass, highlightedBorderClass),
     collapsible
-      ? buildCss("pb_collapsible_nav_item", activeClass)
+      ? buildCss("pb_collapsible_nav_item", activeClass, highlightedBorderClass)
       : "",
     fontSizeClass,
     fontWeightClass,
@@ -192,7 +195,7 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
     return child;
   });
 
-  const collapsibleClasses = buildCss("collapsible_nav_wrapper", activeClass, collapsibleTrailClass)
+  const collapsibleClasses = buildCss("collapsible_nav_wrapper", activeClass, highlightedBorderClass, collapsibleTrailClass)
 
   return (
     <>
@@ -207,7 +210,7 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
             onIconClick={onIconRightClick}
             onClick={onClick}
           >
-            <Collapsible.Main 
+            <Collapsible.Main
             className={globalProps({ ...finalItemSpacing })}
             dark={dark}>
               <Tag
