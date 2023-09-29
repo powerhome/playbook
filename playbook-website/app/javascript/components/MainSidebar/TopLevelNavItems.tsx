@@ -154,10 +154,10 @@ export const TopLevelNavItem = ({
           <>
             {name === "Components" ? (
               <>
-                {kits.map((link, i) => (
+                {kits.map((link, index) => (
                   <KitsNavItem
                     link={link}
-                    i={i}
+                    i={index}
                     collapsibles={collapsibles}
                     category={category}
                     type={type}
@@ -166,6 +166,7 @@ export const TopLevelNavItem = ({
                     isActive={isActive}
                     setIsActive={setIsActive}
                     updateTopLevelNav={updateTopLevelNav}
+                    parentIndex={i}
                   />
                 ))}
               </>
@@ -178,6 +179,7 @@ export const TopLevelNavItem = ({
                 setIsActive={setIsActive}
                 isActive={isActive}
                 updateTopLevelNav={updateTopLevelNav}
+                parentIndex={i}
               />
             )}
           </>

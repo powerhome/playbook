@@ -23,6 +23,7 @@ export const KitsNavItem = ({
   isActive,
   setIsActive,
   updateTopLevelNav,
+  parentIndex
 }) => {
   const [collapsed] = collapsibles[i];
   //set up custom toggling
@@ -38,7 +39,7 @@ export const KitsNavItem = ({
       } else {
         setCollapsed(true);
       }
-      updateTopLevelNav(2);
+      updateTopLevelNav(parentIndex);
     });
     //return true at end to disable default collapsible behavior
     return true;
@@ -56,14 +57,14 @@ export const KitsNavItem = ({
   };
 
   //click on nested items
-  const handleSubItemClick = (j, sublink, parentIndex) => {
+  const handleSubItemClick = (j, sublink, Index) => {
     setIsActive(() => {
       const newIsActive = {};
       newIsActive[`${sublink}-${j}`] = true;
       return newIsActive;
     });
-    updateTopLevelNav(2);
-    updateKitsNav(parentIndex);
+    updateTopLevelNav(parentIndex);
+    updateKitsNav(Index);
   };
 
   //click on non-collapsible navitem click
@@ -73,7 +74,7 @@ export const KitsNavItem = ({
       newIsActive[link] = true;
       return newIsActive;
     });
-    updateTopLevelNav(2);
+    updateTopLevelNav(parentIndex);
   };
 
   const generateLink = (categoryKey, sublink, type) => {
