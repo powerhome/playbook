@@ -15,6 +15,7 @@ $mention_bg_color_blue: #e5eefa;
     color: $primary;
     display: inline;
     padding: $space_xxs;
+    font-size: $font_base - 1;
     
     &[class*=_user] {
       background-color: $mention_bg_color_blue;
