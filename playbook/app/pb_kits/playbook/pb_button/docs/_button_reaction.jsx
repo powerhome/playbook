@@ -19,7 +19,7 @@ return (
     />
     <Button
         count={5}
-        icon="😍"
+        icon="1️⃣"
         marginLeft='lg'
         tabIndex={0}
         variant="reaction"
