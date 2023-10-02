@@ -6,7 +6,7 @@ const currentURL = window.location.pathname + window.location.search;
 
 export const kitsType = (type) => {
   if (type === null || type === undefined) {
-    return "rails";
+    return "react";
   } else {
     return type;
   }
