@@ -61,14 +61,14 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const dropdownRef = useRef(null)
 
   // State for whether dropdown is open or closed
-  const [isClosed, setIsClosed] = useState(true)
+  const [isDropdownClosed, setIsDropdownClosed] = useState(true)
   // State from onchange for textinput, to use for filtering to create typeahead
   const [filterItem, setFilterItem] = useState("")
-  // This is essentially the return that the user will get when they use the kit
-  const [returnedArray, setReturnedArray] = useState([])
   // FormattedData with checked and parent_id added
   const [formattedData, setFormattedData] = useState([])
-  // State for return for default
+  // State for the return of returnAllSelected
+  const [returnedArray, setReturnedArray] = useState([])
+  // State for default return
   const [defaultReturn, setDefaultReturn] = useState([])
   // Get expanded items from treeData
   const initialExpandedItems = getExpandedItems(treeData, selectedIds)
@@ -84,21 +84,24 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   useEffect(() => {
     if (returnAllSelected) {
       setReturnedArray(getCheckedItems(formattedData))
-    } else if (variant === "single" && selectedIds?.length) {
-      // The default is the first selectedId if there are more than one
-      const defaultSelection = filterFormattedDataById(formattedData, selectedIds[0])
-      setSingleSelectInputValue(defaultSelection[0]?.value)
-      setDefaultReturn(defaultSelection)
+    } else if (variant === "single") {
+      if (selectedIds?.length) {
+        // The default is the first selectedId if there are more than one
+        const defaultSelection = filterFormattedDataById(formattedData, selectedIds[0])
+        setSingleSelectInputValue(defaultSelection[0]?.value)
+        setDefaultReturn(defaultSelection)
+      }
     } else {
       setDefaultReturn(getDefaultCheckedItems(formattedData))
     }
+    // console.log("test formatted Data", formattedData)
   }, [formattedData])
 
   useEffect(() => {
     // Function to handle clicks outside the dropdown
     const handleClickOutside = (event: any) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsClosed(true)
+        setIsDropdownClosed(true)
       }
     }
     // Attach the event listener
@@ -231,7 +234,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     ) {
       return
     }
-    setIsClosed(!isClosed)
+    setIsDropdownClosed(!isDropdownClosed)
   }
 
   // Main function to handle any click inside dropdown
@@ -260,10 +263,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const treeWithSelectedItem = modifyValue(selectedItemID, treeWithNoSelections, true)
     const selectedItem = filterFormattedDataById(treeWithSelectedItem, selectedItemID)
 
+    setFormattedData(treeWithSelectedItem)
     setSingleSelectInputValue(inputText)
     // Reset the filter to always display dropdown options on click
     setFilterItem("")
-    setIsClosed(true)
+    setIsDropdownClosed(true)
 
     onSelect(selectedItem)
   };
@@ -275,7 +279,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setFilterItem(inputText)
   };
 
-  const isExpanded = (item: any) => expanded.indexOf(item.id) > -1
+  const isTreeRowExpanded = (item: any) => expanded.indexOf(item.id) > -1
 
   // Handle click on chevron toggles in dropdown
   const handleToggleClick = (id: string, event: React.MouseEvent) => {
@@ -283,7 +287,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const clickedItem = filterFormattedDataById(formattedData, id)
     if (clickedItem) {
       let expandedArray = [...expanded]
-      const itemExpanded = isExpanded(clickedItem[0])
+      const itemExpanded = isTreeRowExpanded(clickedItem[0])
 
       if (itemExpanded)
         expandedArray = expandedArray.filter((i) => i != clickedItem[0].id)
@@ -317,7 +321,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 >
                   <div className="dropdown_item_checkbox_row">
                     <div
-                        key={isExpanded(item) ? "chevron-down" : "chevron-right"}
+                        key={isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"}
                     >
                       <CircleIconButton
                           className={
@@ -326,7 +330,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                               : "toggle_icon"
                           }
                           icon={
-                            isExpanded(item) ? "chevron-down" : "chevron-right"
+                            isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"
                           }
                           onClick={(event: any) =>
                             handleToggleClick(item.id, event)
@@ -363,7 +367,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                       </Checkbox>
                     )}
                   </div>
-                  {isExpanded(item) &&
+                  {isTreeRowExpanded(item) &&
                     item.children &&
                     item.children.length > 0 &&
                     (variant === "single" || !filterItem) && ( // Show children if expanded is true
@@ -460,7 +464,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     ? handleRadioInputChange(e.target.value)
                     : setFilterItem(e.target.value)
                 }}
-                onClick={() => setIsClosed(false)}
+                onClick={() => setIsDropdownClosed(false)}
                 placeholder={
                   inputDisplay === "none" && itemsSelectedLength()
                     ? `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? "item" : "items"} selected`
@@ -470,7 +474,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             />
           </div>
 
-          {isClosed ? (
+          {isDropdownClosed ? (
             <div key="chevron-down">
               <Icon
                   icon="chevron-down"
@@ -487,7 +491,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           )}
         </div>
 
-        <div className={`dropdown_menu ${isClosed ? "close" : "open"}`}>
+        <div className={`dropdown_menu ${isDropdownClosed ? "close" : "open"}`}>
           {renderNestedOptions(
             filterItem
               ? findByFilter(formattedData, filterItem)
