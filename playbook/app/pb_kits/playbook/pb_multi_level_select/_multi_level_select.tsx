@@ -76,6 +76,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [expanded, setExpanded] = useState(initialExpandedItems)
   // State for single select variant input value
   const [singleSelectInputValue, setSingleSelectInputValue] = useState("")
+  // State for single select variant input value
+  const [singleSelectedItem, setSingleSelectedItem] = useState([])
 
   useEffect(() => {
     setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
@@ -84,11 +86,15 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   useEffect(() => {
     if (returnAllSelected) {
       setReturnedArray(getCheckedItems(formattedData))
-    } else if (variant === "single" && selectedIds?.length) {
-      // The default is the first selectedId if there are more than one
-      const defaultSelection = filterFormattedDataById(formattedData, selectedIds[0])
-      setSingleSelectInputValue(defaultSelection[0]?.value)
-      setDefaultReturn(defaultSelection)
+    } else if (variant === "single") {
+      if (selectedIds?.length && !singleSelectedItem.length) {
+        // The default is the first selectedId if there are more than one
+        const defaultSelection = filterFormattedDataById(formattedData, selectedIds[0])
+        setSingleSelectInputValue(defaultSelection[0]?.value)
+        setDefaultReturn(defaultSelection)
+      } else {
+        setDefaultReturn(singleSelectedItem)
+      }
     } else {
       setDefaultReturn(getDefaultCheckedItems(formattedData))
     }
@@ -261,6 +267,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const selectedItem = filterFormattedDataById(treeWithSelectedItem, selectedItemID)
 
     setFormattedData(treeWithSelectedItem)
+    setSingleSelectedItem(selectedItem)
     setSingleSelectInputValue(inputText)
     // Reset the filter to always display dropdown options on click
     setFilterItem("")
