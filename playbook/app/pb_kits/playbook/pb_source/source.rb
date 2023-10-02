@@ -10,7 +10,7 @@ module Playbook
       prop :type, type: Playbook::Props::Enum,
                   values: %w[user retail inbound outbound prospecting events referral],
                   default: "inbound"
-      prop :user, type: Playbook::Props::Hash, default: {}
+      prop :user, type: Playbook::Props::HashProp, default: {}
 
       def type_text
         if type == "user" || (type == "referral" && user.present?)

@@ -18,6 +18,7 @@ import FlexBox from "../VisualGuidelines/Examples/FlexBox";
 import Position from "../VisualGuidelines/Examples/Position";
 import Hover from "../VisualGuidelines/Examples/Hover";
 import TextAlign from "../VisualGuidelines/Examples/TextAlign";
+import Overflow from "./Examples/Overflow";
 
 const VisualGuidelines = ({
   examples,
@@ -72,6 +73,10 @@ const VisualGuidelines = ({
         return <Hover example={examples.hover_jsx}/>;
       case "text_align":
         return <TextAlign example={examples.text_align_jsx} />
+        case "overflow":
+          return <Overflow example={examples.overflow_jsx} 
+                    tokensExample={examples.overflow_token}
+                 />
 
       default:
         return <Colors/>;

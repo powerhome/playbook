@@ -4,7 +4,7 @@ module Playbook
   module PbCard
     class Card < Playbook::KitBase
       prop :selected, type: Playbook::Props::Boolean, default: false
-      prop :highlight, type: Playbook::Props::Hash,
+      prop :highlight, type: Playbook::Props::HashProp,
                        default: {}
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[div section footer header article aside main nav],

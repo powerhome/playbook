@@ -49,7 +49,7 @@ type DatePickerProps = {
 } & GlobalProps
 
 const DatePicker = (props: DatePickerProps): React.ReactElement => {
-  if (props.plugins) deprecatedProps('Date Picker', ['plugins'])
+  if (props.plugins) deprecatedProps()
 
   const {
     allowInput = false,

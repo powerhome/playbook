@@ -16,7 +16,7 @@ RSpec.describe Playbook::PbSource::Source do
       .with_default("inbound")
   }
   it {
-    is_expected.to define_prop(:user).of_type(Playbook::Props::Hash)
+    is_expected.to define_prop(:user).of_type(Playbook::Props::HashProp)
                                      .with_default({})
   }
 

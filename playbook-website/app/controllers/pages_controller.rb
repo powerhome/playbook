@@ -10,8 +10,7 @@ class PagesController < ApplicationController
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
-  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift]
-  include ChangelogHelper
+  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift home]
 
   def disable_dark_mode
     cookies[:dark_mode] = {
@@ -27,24 +26,17 @@ class PagesController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def changelog
-    @changelog = Playbook::Engine.root.join("CHANGELOG.md").read
-    @page_title = "What's New"
-    respond_to do |format|
-      format.html do
-        @show_sidebar = false
-        render layout: "docs"
-      end
-      format.json do
-        @posts = changelog_to_hash(@changelog)
-        render json: @posts.to_json
-      end
-    end
+  def home
+    @data = Playbook::Engine.root.join("CHANGELOG.md").read
+    @structured_data = extract_changelog_data(@data)
   end
 
-  def home
-    @changelog = Playbook::Engine.root.join("CHANGELOG.md").read
-    @posts = changelog_to_hash(@changelog)
+  def changelog
+    @data = Playbook::Engine.root.join("CHANGELOG.md").read
+    @page_title = "What's New"
+    @show_sidebar = true
+    @front_matter = nil
+    render layout: "docs"
   end
 
   def kits
@@ -200,7 +192,11 @@ private
     is_rails_kit = action_name == "kit_show_rails"
     files = is_rails_kit ? File.join("**", "*.erb") : File.join("**", "*.jsx")
     kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
-    redirect_to action: action_name unless kit_files.present?
+    if action_name === "kit_show_rails"
+      redirect_to action: "kit_show_react" unless kit_files.present?
+    elsif action_name === "kit_show_react"
+      redirect_to action: "kit_show_rails" unless kit_files.present?
+    end
   end
 
   def pb_doc_kit_path(kit, *args)
@@ -216,6 +212,48 @@ private
     else
       []
     end
+  end
+
+  def to_url_format(text)
+    text.gsub(/[^a-zA-Z0-9]+/, "-").strip.gsub(/\s+/, "-")
+  end
+
+  def extract_changelog_data(changelog)
+    releases = []
+
+    changelog.split(/^# /).each do |section|
+      break if releases.size == 2
+
+      next unless section.strip.length.positive?
+
+      title_match = section.match(/(.+?)\n/)
+      next unless title_match
+
+      title = title_match[1].strip
+
+      date_match = section.match(/####? (.+?)\n/)
+      date = date_match ? date_match[1].strip : nil
+
+      image_match = section.match(/!\[.+?\]\((.+?)\)/)
+      next unless image_match
+
+      image = image_match[1].strip
+
+      description_match = section.match(/!\[.*?\]\(.*?\)\n\n(.*?)\n\n\[.*?\]\(.*?\)/m)
+      description = description_match ? description_match[1].strip : nil
+
+      link = to_url_format(title).to_s
+
+      releases << {
+        title: title,
+        date: date,
+        image: image,
+        description: description,
+        link: link,
+      }
+    end
+
+    releases
   end
 
   def kit_examples

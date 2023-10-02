@@ -18,11 +18,15 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "health_check"
 
 gem "redcarpet", "~> 3.6"
+gem 'front_matter_parser', "~> 1.0.1" 
 gem "rouge", "~> 3.15"
 gem "faker"
 gem "will_paginate"
 gem "sentry-ruby"
 gem "sentry-rails"
+gem 'rack-mini-profiler'
+gem 'memory_profiler'
+gem 'stackprof'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

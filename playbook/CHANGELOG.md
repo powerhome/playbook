@@ -1,3 +1,84 @@
+# The Unstyled Currency Kit Variant: Your Key to Dynamic Styling
+##### September 23, 2023
+
+![13 8 0](https://github.com/powerhome/playbook/assets/73710701/64531e67-2c90-4f3c-819e-5be485b0c287)
+
+Now, with a simple boolean prop and our versatile typography kits, your currency displays can effortlessly adapt to any style for a more flexible user experience!
+
+[13.8.0](https://github.com/powerhome/playbook/tree/13.8.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Unstyled Currency Kit [\#2755](https://github.com/powerhome/playbook/pull/2755) ([gavhuang](https://github.com/gavhuang))
+- Nav Kit + Table Kit Enhancements [\#2766](https://github.com/powerhome/playbook/pull/2766) ([markdoeswork](https://github.com/markdoeswork))
+
+**Improvements:**
+
+- Website Sidebar Consolidation [\#2754](https://github.com/powerhome/playbook/pull/2754) ([nidaqg](https://github.com/nidaqg))
+- Added Changelog Previews to Homepage [\#2765](https://github.com/powerhome/playbook/pull/2765) ([jasperfurniss](https://github.com/jasperfurniss))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.7.0...13.8.0)
+
+# 🧠 Smart Multi-Line Truncation is Here!
+##### September 22, 2023
+
+![13 7 0](https://github.com/powerhome/playbook/assets/73710701/be8a6446-b0eb-4a86-bebc-b2916f316c12)
+
+Got text content that’s too long to fully display? No job’s too large for the new truncate prop. Pop it into the Body or Title kit, set the number of lines to truncate to, and your overflow text will… 👋
+
+[13.7.0](https://github.com/powerhome/playbook/tree/13.7.0) full list of changes:
+
+**Fixed Bugs:**
+
+- Rich Text Editor Button Fix [\#2757](https://github.com/powerhome/playbook/pull/2757) ([nidaqg](https://github.com/nidaqg))
+- Collapsible Kit Hides Tooltip Fix [\#2751](https://github.com/powerhome/playbook/pull/2751) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Body and Title Truncate Docs + Prevent Class Name Clash [\#2750](https://github.com/powerhome/playbook/pull/2750) ([gavhuang](https://github.com/gavhuang))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.6.0...13.7.0)
+
+# 13.6.0
+##### September 19, 2023
+
+List of changes: 
+
+**Kit Enhancements:**
+
+- Global Prop Overflow [\#2744](https://github.com/powerhome/playbook/pull/2744) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Prevent Conflicts with Ruby's Hash [\#2742](https://github.com/powerhome/playbook/pull/2742) ([gavhuang](https://github.com/gavhuang))
+
+**Improvements:**
+
+- Sidebar Collapsible Nav Optimization [\#2749](https://github.com/powerhome/playbook/pull/2749) ([nidaqg](https://github.com/nidaqg))
+- Table Header Improvements [\#2738](https://github.com/powerhome/playbook/pull/2738) ([markdoeswork](https://github.com/markdoeswork))
+- Updating Markdown to Support Headers and Index [\#2733](https://github.com/powerhome/playbook/pull/2733) ([jasoncypret](https://github.com/jasoncypret))
+- Turn off Rails deprecation warnings [\#2739](https://github.com/powerhome/playbook/pull/2739) ([nickamantia](https://github.com/nickamantia))
+
+# No More Custom CSS! The Global Text Align Prop is Here!
+##### September 14, 2023
+
+![13 5 0](https://github.com/powerhome/playbook/assets/73710701/5348b6a2-652d-4d25-97d6-3c4ac846b4a2)
+
+
+Gone are the days of adding custom CSS to align kits. With the global text-align prop, you can align any kit left, center, just by using textAlign=” ” as a prop!
+
+[13.5.0](https://github.com/powerhome/playbook/tree/13.5.0) full list of changes:
+
+**Improvements:**
+
+- Text Align Global Prop Docs [\#2740](https://github.com/powerhome/playbook/pull/2740) ([gavhuang](https://github.com/gavhuang))
+- Add Sentry to Playbook [\#2735](https://github.com/powerhome/playbook/pull/2735) ([gavhuang](https://github.com/gavhuang))
+- Website - Changelog updates [\#2734](https://github.com/powerhome/playbook/pull/2734) ([nickamantia](https://github.com/nickamantia))
+- Col and Colgroup table kits [\#2723](https://github.com/powerhome/playbook/pull/2723) ([markdoeswork](([nickamantia](https://github.com/nickamantia))))
+- Rotate secrets encryption for new owner team [\#2737](https://github.com/powerhome/playbook/pull/2737) ([benlangfeld](https://github.com/benlangfeld))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.4.0...13.5.0)
+
 # ✨New Unstyled Variant✨: More Style options for Date 📆, Time ⏰, and Timestamp⏱️ Kits!
 #### September 12, 2023
 

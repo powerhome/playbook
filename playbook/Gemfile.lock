@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (13.4.0)
+    playbook_ui (13.8.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -92,7 +92,7 @@ GEM
     diff-lcs (1.4.4)
     digest (3.1.0)
     erubi (1.10.0)
-    execjs (2.8.1)
+    execjs (2.9.1)
     faraday (1.7.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -264,7 +264,7 @@ GEM
       spring (>= 1.2, < 3.0)
     strscan (3.0.3)
     thor (1.2.1)
-    tilt (2.2.0)
+    tilt (2.3.0)
     timeout (0.3.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)

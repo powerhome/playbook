@@ -23,7 +23,7 @@ module Playbook
                        default: false
       prop :value
 
-      prop :input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
 
       def classname

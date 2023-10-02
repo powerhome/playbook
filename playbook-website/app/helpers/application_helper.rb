@@ -98,12 +98,13 @@ module ApplicationHelper
     end
   end
 
-  def gh_edit_link(parent, page)
-    if page.nil?
-      "https://github.com/powerhome/playbook/edit/master/playbook-website/app/views/guides/#{parent}.md"
-    else
-      "https://github.com/powerhome/playbook/edit/master/playbook-website/app/views/guides/#{parent}/#{page}.md"
-    end
+  def gh_edit_link(parent, page, link_extension)
+    gh_link = "https://github.com/powerhome/playbook/edit/master/playbook-website/app/views/guides/"
+    gh_link + if page.nil?
+                link_extension
+              else
+                "#{parent}/#{link_extension}"
+              end
   end
 
   def all_active(controller_name, action_name)

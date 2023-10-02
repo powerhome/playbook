@@ -31,8 +31,10 @@ const EditorButton = ({
     >
       <button
         className={classname}
-        onClick={onclick}
         disabled={disable}
+        onClick={onclick}
+        role="button"
+        type="button"
       >
         <Flex 
           align="center"
