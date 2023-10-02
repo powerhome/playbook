@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
-  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift]
+  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift home]
 
   def disable_dark_mode
     cookies[:dark_mode] = {
@@ -26,10 +26,15 @@ class PagesController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def home
+    @data = Playbook::Engine.root.join("CHANGELOG.md").read
+    @structured_data = extract_changelog_data(@data)
+  end
+
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
     @page_title = "What's New"
-    @show_sidebar = false
+    @show_sidebar = true
     @front_matter = nil
     render layout: "docs"
   end
@@ -207,6 +212,48 @@ private
     else
       []
     end
+  end
+
+  def to_url_format(text)
+    text.gsub(/[^a-zA-Z0-9]+/, "-").strip.gsub(/\s+/, "-")
+  end
+
+  def extract_changelog_data(changelog)
+    releases = []
+
+    changelog.split(/^# /).each do |section|
+      break if releases.size == 2
+
+      next unless section.strip.length.positive?
+
+      title_match = section.match(/(.+?)\n/)
+      next unless title_match
+
+      title = title_match[1].strip
+
+      date_match = section.match(/####? (.+?)\n/)
+      date = date_match ? date_match[1].strip : nil
+
+      image_match = section.match(/!\[.+?\]\((.+?)\)/)
+      next unless image_match
+
+      image = image_match[1].strip
+
+      description_match = section.match(/!\[.*?\]\(.*?\)\n\n(.*?)\n\n\[.*?\]\(.*?\)/m)
+      description = description_match ? description_match[1].strip : nil
+
+      link = to_url_format(title).to_s
+
+      releases << {
+        title: title,
+        date: date,
+        image: image,
+        description: description,
+        link: link,
+      }
+    end
+
+    releases
   end
 
   def kit_examples
