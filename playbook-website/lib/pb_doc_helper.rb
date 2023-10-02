@@ -52,44 +52,58 @@ module PlaybookWebsite
         kit_name = kit["name"]
         components = kit["components"].map { |c| c["name"] }
 
-        existing_kit = all_kits.find { |k| k.is_a?(Hash) && k.keys.first == kit_name }
+        kit_structure = { kit_name => components }
 
-        if existing_kit
-          existing_kit[kit_name][:components] += components
-          existing_kit[kit_name][:components].uniq!
-          existing_kit[kit_name][:components].sort!
-        else
-          all_kits << { kit_name => { components: components } }
-        end
+        all_kits << kit_structure
       end
 
-      # Sort the top-level entries
-      all_kits.sort_by! do |kit|
-        kit.is_a?(Hash) ? kit.keys.first : kit
-      end
+      # Sort the kit structures by their keys (kit names)
+      all_kits.sort_by! { |kit_structure| kit_structure.keys.first }
 
       all_kits
     end
 
-    def render_pb_doc_kit(kit_name, type, limit_examples, code, dark_mode)
-      title = pb_doc_render_clickable_title(kit_name, type)
-      components = MENU["kits"].find { |kit| kit["name"] == kit_name }["components"]
+    def render_pb_doc_kit(kit_name, type, limit_examples, code: true, dark_mode: false)
+      parent_kit = MENU["kits"].find { |kit| kit["name"] == kit_name }
 
-      # Render the UI content for the parent kit
-      ui_content = raw("<div class='pb--docItem-ui'>
-        #{pb_kit(kit: kit_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
-      </div>")
+      # Initialize component_content as an empty string
+      component_content = ""
+      title = ""
 
-      # Render the component names and UI content for each component
-      component_content = components.map do |component|
-        component_name = component["name"]
-        raw("<div class='pb--docItem-ui'>
+      # Check if parent_kit is nil
+      if parent_kit.nil?
+        title = pb_doc_render_clickable_title(kit_name, type)
+        component_content = raw("<div class='pb--docItem-ui'>
+    #{pb_kit(kit: kit_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
+      else
+        # Filter components based on the specified type
+        components = parent_kit["components"].select { |component| component["platforms"].include?(type) }
+
+        # If it's a parent with components, accumulate the UI content for child components
+        if components.any?
+          component_content = components.map do |component|
+            component_name = component["name"]
+            title = pb_doc_render_clickable_title(component_name, type) # Use component_name for the title
+
+            # Render the component UI content with the same styles/tags as the parent
+            component_ui = raw("<div class='pb--docItem-ui'>
           #{pb_kit(kit: component_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
         </div>")
-      end.join.html_safe
 
-      # Combine the title, component content, and UI content for the parent kit
-      "#{title}#{component_content}#{ui_content}".html_safe
+            # Combine the component name and component UI content
+            "#{title}#{component_ui}"
+          end.join.html_safe
+        end
+      end
+
+      # Combine the component content and UI content for the parent kit
+      # rubocop:disable Style/RedundantInterpolation
+      if parent_kit.nil?
+        "#{title}#{component_content}".html_safe
+      else
+        "#{component_content}".html_safe
+      end
+      # rubocop:enable Style/RedundantInterpolation
     end
 
   private

@@ -3,6 +3,8 @@ import { Nav, NavItem, useCollapsible } from "playbook-ui";
 import { renderNavItem } from "./NestedNavItems";
 
 const MainSidebar = ({ dark, type, category, kit, kits }) => {
+  console.log("hi")
+  console.log(kits)
   //active state for navItems(will be dedundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
 
