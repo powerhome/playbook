@@ -1,4 +1,3 @@
-
 [class^=pb_currency_kit] {
   &[class*=_center]  {
     & > [class^=pb_caption],
@@ -21,30 +20,43 @@
       justify-content: flex-end;
     }
   }
+
   [class^=pb_currency_wrapper] {
     display: flex;
     align-items: baseline;
 
-    &[class*=_deemphasized] [class^=pb_body_kit][class*=_light] {
-      color: $text_lt_default;
+    &[class*=_deemphasized] {
+      [class^=pb_body_kit], [class^=pb_body_kit] {
+        &:not([class*=dark]) {
+          color: $text_lt_default;
+        }
+      }
+
+      [class^=pb_body_kit][class*=_light] {
+        font-weight: $regular;
+      }
+
+      [class^=pb_title_kit] {
+        font-weight: $lighter;
+      }
     }
 
-    &[class*=_deemphasized] [class^=pb_title_kit][class*=_4] {
-      font-weight: $regular;
+    &[class*=_light] {
+      [class^=pb_body_kit], [class^=pb_title_kit] {
+        color: $text_lt_light;
+        font-weight: $regular;
+      }
+
+      [class^=pb_title_kit].dark {
+        color: $text_dk_light;
+      }
     }
 
-    &[class*=_light] [class^=pb_body_kit][class*=_light] {
-      color: $text_lt_light;
-    }
-
-    &[class*=_light] [class^=pb_title_kit][class*=_4] {
-      color: $text_lt_light;
-      font-weight: $regular;
-    }
-
-    &[class*=_bold] [class^=pb_body_kit][class*=_light] {
-      color: $text_lt_default;
-      font-weight: $bolder;
+    &[class*=_bold] {
+      [class^=pb_body_kit], [class^=_light]{
+        color: $text_lt_default;
+        font-weight: $bolder;
+      }
     }
 
     & > [class*=dollar_sign] {
@@ -54,6 +66,14 @@
     & > [class*=unit] {
       display: flex;
       align-items: flex-end;
+    }
+  }
+
+  &[class*=_sm] {
+    [class^=pb_currency_wrapper][class*=_deemphasized] {
+      [class^=pb_title_kit] {
+        font-weight: $regular;
+      }
     }
   }
 

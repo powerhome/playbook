@@ -22,6 +22,9 @@ $selector: ".pb_nav_list";
       border-bottom: 1px solid $border_light;
       &[class*="_active"] {
         border-left-color: $primary !important;
+        &[class*="_highlighted_border_none"] {
+          border-left-width: 0px !important;
+        }
         [class*="_item_icon"] {
           color: $primary !important;
         }

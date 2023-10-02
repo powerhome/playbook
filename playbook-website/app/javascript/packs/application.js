@@ -19,7 +19,6 @@ window.copyContent = copyContent
 import DarkModeToggle from '../components/DarkModeToggle'
 import KitSearch from '../components/KitSearch'
 import SnippetToggle from '../components/SnippetToggle'
-import Sidebar from '../components/Sidebar'
 import KitDocs from '../components/KitDocs'
 import PbKitReact from '../components/PbKitReact'
 import PbKitFetch from '../components/PbKitFetch'
@@ -42,7 +41,6 @@ WebpackerReact.setup({
   DarkModeToggle,
   KitSearch,
   SnippetToggle,
-  Sidebar,
   KitDocs,
   PbKitReact,
   PbKitFetch,

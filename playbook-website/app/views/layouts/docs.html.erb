@@ -4,42 +4,51 @@
     <%= render 'layouts/head'%>
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
-    <%= render 'layouts/nav'%>
+  <%= render 'layouts/mobile_nav'%>
     <%= render 'layouts/mobile_hamburger'%>
-    <%= pb_rails("layout", props: {position: "left", size: "sm", collapse: "sm", flex: "1", classname: "#{'no-sidebar' if !@show_sidebar}"}) do %>
-      <%= pb_rails("layout/sidebar") do %>
-        <% render partial: "layouts/docs_navigation"%>
+    <%= pb_rails("layout", props: {classname: "pb--page--content #{'no-sidebar' if !@show_sidebar}"}) do %>
+      <%= render 'layouts/mobile_hamburger' %>
+      <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav"}) do %>
+        <% render partial: "layouts/sidebar"%>
       <% end %>
       <%= pb_rails("layout/body") do %>
-        <% unless action_name == 'changelog' %>
-          <%= pb_rails("background", props: {
-            background_color: "dark",
-            image_url: @front_matter['header'] || asset_pack_url("media/images/pb_generic_header.jpg"),
-            background_repeat: "no-repeat",
-            background_size: "contain",
-            background_position: "center"
-          }) do %>
-            <div style="height:250px"></div>
-          <% end %>
-        <% end %>
-        <%= pb_rails("background", props: { display: "flex", classname: "markdown h100", display: "flex", justify_content: "center", background_color: "white" }) do %>
-          <%= pb_rails("flex/flex_item", props: { max_width: action_name == 'changelog' ? 'md' : 'lg', margin_x: "sm", padding_y: "md", classname: "minw0 w100" }) do %>
-            <div class="markdown_title"><%= @page_title %></div>
-            <%= yield %>
-            <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
-            <%= link_to action_name == 'changelog' ? "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md" : gh_edit_link(@parent, @page, @link_extension) do %>
-              <%= pb_rails("caption", props: {
-                text: "Edit this page",
-                color: "link",
-                size: "xs"
-              }) %>
+        <div class="pb--page--content--main">
+          <% unless action_name == 'changelog' %>
+            <%= pb_rails("background", props: {
+              background_color: "dark",
+              image_url: @front_matter['header'] || asset_pack_url("media/images/pb_generic_header.jpg"),
+              background_repeat: "no-repeat",
+              background_size: "contain",
+              background_position: "center"
+            }) do %>
+              <div style="height:250px"></div>
             <% end %>
           <% end %>
-        <% end %>
+          <%= pb_rails("flex", props:{orientation: "column", align:"center"}) do %>
+              <%= pb_rails("flex/flex_item", props: { classname: "minw0 w100" }) do %>
+                <%= pb_rails("background", props: { display: "flex", justify_content:"center",classname: "markdown w100", background_color: "white", padding_x: "sm", padding_y: "md" }) do %>
+                  <%= pb_rails("background", props: { max_width: action_name == 'changelog' ? 'md' : 'lg', background_color: "white" }) do %>
+                    <div class="markdown_title"><%= @page_title %></div>
+                    <%= yield %>
+                    <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
+                    <%= link_to action_name == 'changelog' ? "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md" : gh_edit_link(@parent, @page, @link_extension) do %>
+                      <%= pb_rails("caption", props: {
+                        text: "Edit this page",
+                        color: "link",
+                        size: "xs"
+                      }) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <%= pb_rails("flex/flex_item", props:{classname: "w100"}) do %>
+                <%= render 'layouts/footer'%>
+              <% end %>
+          <% end %>
+          
+        </div>
       <% end %>
     <% end %>
-
-    <%= render 'layouts/footer'%>
   </body>
   <%= javascript_packs_with_chunks_tag(*@application_js) %>
   <%= yield :pb_js %>

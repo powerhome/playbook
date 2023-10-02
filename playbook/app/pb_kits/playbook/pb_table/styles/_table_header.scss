@@ -24,6 +24,7 @@ $text_align_values: (
 .pb_th_link:hover {
   background-color: rgba($primary, 0.03);
   color: $primary !important;
+  border-radius: $border_radius_md;
 }
 
 .pb_th_link, .pb_th_nolink{
@@ -38,13 +39,12 @@ $text_align_values: (
   }
 }
 
-[class*="pb_table_header_dropdown"][class*="_vertical"] {
-  &[class*="_normal"] {
-    [class*="pb_nav_list_kit_item"][class*="pb_nav_list_item"] {
-      &[class*="_link"] {
-        border-left-width: 0px;
-        background-color: #fff !important;
-      }
-    }
-  }
+.header_last_item {
+  border-bottom-left-radius: $border_radius_md;
+  border-bottom-right-radius: $border_radius_md;
+}
+
+.header_first_item {
+  border-top-left-radius: $border_radius_md;
+  border-top-right-radius: $border_radius_md;
 }

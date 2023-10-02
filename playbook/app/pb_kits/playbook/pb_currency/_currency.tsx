@@ -24,6 +24,7 @@ type CurrencyProps = {
   symbol?: string,
   variant?: 'default' | 'light' | 'bold',
   unit?: string,
+  unstyled?: boolean,
 }
 
 const sizes: {lg: 1, md: 3, sm: 4} = {
@@ -49,17 +50,16 @@ const Currency = (props: CurrencyProps) => {
     symbol = '$',
     variant = 'default',
     dark = false,
+    unstyled = false,
   } = props
 
   const emphasizedClass = emphasized ? '' : '_deemphasized'
 
   let variantClass
-  if (size === 'sm') {
-    if (variant === 'light') {
-      variantClass = '_light'
-    } else if (variant === 'bold') {
-      variantClass = '_bold'
-    }
+  if (variant === 'light') {
+    variantClass = '_light'
+  } else if (variant === 'bold') {
+    variantClass = '_bold'
   }
 
   const [whole, decimal = '00'] = amount.split('.')
@@ -99,44 +99,46 @@ const Currency = (props: CurrencyProps) => {
         className={classes}
         id={id}
     >
-      <Caption>{label}</Caption>
+      <Caption dark={dark}>{label}</Caption>
 
       <div className={`pb_currency_wrapper${variantClass || emphasizedClass}`}>
-        <Body
-            className="dollar_sign"
-            color="light"
-            dark={dark}
-        >
-          {symbol}
-        </Body>
+        {unstyled ? (
+          <>
+            <div>{symbol}</div>
+            <div>{getAmount}</div>
+            <div>
+              {getAbbreviation}
+              {unit ? unit : getDecimalValue}
+            </div>
+          </>
+        ) : (
+          <>
+            <Body
+                className="dollar_sign"
+                color="light"
+                dark={dark}
+            >
+              {symbol}
+            </Body>
 
-        <Title
-            className="pb_currency_value"
-            dark={dark}
-            size={sizes[size]}
-        >
-          {getAmount}
-        </Title>
+            <Title
+                className="pb_currency_value"
+                dark={dark}
+                size={sizes[size]}
+            >
+              {getAmount}
+            </Title>
 
-        <Body
-            className="unit"
-            color="light"
-            dark={dark}
-        >
-          {getAbbreviation}
-          {
-            unit ? (
-              <>
-              {unit}
-              </>
-            ) : (
-              <>
-              {getDecimalValue}
-              </>
-            )
-          }
-          
-        </Body>
+            <Body
+                className="unit"
+                color="light"
+                dark={dark}
+            >
+              {getAbbreviation}
+              {unit ? unit : getDecimalValue}
+            </Body>
+          </>
+        )}
       </div>
     </div>
   )
