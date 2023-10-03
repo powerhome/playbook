@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Playbook
+module PlaybookWebsite
   module PbDocHelper
     def pb_kit_title(title)
       title.remove("pb_").titleize.tr("_", " ")
@@ -26,66 +26,81 @@ module Playbook
     end
 
     # Deal with lists of kits, used in Playbook doc and Externally
-    # rubocop:disable Style/StringConcatenation
     def pb_kits(type: "rails", limit_examples: false, dark_mode: false)
-      display_kits = []
       kits = get_kits(type)
-      kits.each do |kit|
-        nav_array = nav_hash_array(kit)
-        next unless nav_array.is_a?(Array)
 
-        nav_array.each do |sub_kit|
-          display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode)
-        end
-      end
-      raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
+      # Iterate through the filtered kits and render them
+      kits.map do |kit|
+        render_pb_doc_kit(kit["name"], type, limit_examples, true, dark_mode)
+      end.join.html_safe
     end
-    # rubocop:enable Style/StringConcatenation
 
     def get_kits(type = "rails")
-      menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
-      menu["kits"][type]
+      kits = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml")) || []
+
+      # Filter kits that have at least one component compatible with the type
+      kits.select do |kit|
+        kit["components"].any? { |component| component["platforms"].include?(type) }
+      end
     end
 
     def aggregate_kits
-      menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
       all_kits = []
 
-      # Loop over each type (rails, react, swift, etc.)
-      menu["kits"].each do |_type, kits|
-        kits.each do |kit|
-          case kit
-          when Hash
-            kit_name = kit.keys.first
-            existing_kit = all_kits.find { |k| k.is_a?(Hash) && k.keys.first == kit_name }
+      YAML.load_file(Playbook::Engine.root.join("dist/menu.yml")).each do |kit|
+        kit_name = kit["name"]
+        components = kit["components"].map { |c| c["name"] }
 
-            if existing_kit
-              existing_kit[kit_name] += kit[kit_name] unless kit[kit_name].nil?
-              existing_kit[kit_name].uniq!
-              existing_kit[kit_name].sort!
-            else
-              all_kits << { kit_name => kit[kit_name] }
-            end
-          when String
-            all_kits << kit unless all_kits.include?(kit)
-          end
-        end
-      end
-
-      # Sort the top-level entries
-      all_kits.sort_by! do |kit|
-        kit.is_a?(Hash) ? kit.keys.first : kit
+        all_kits << if components.size == 1
+                      components.first
+                    else
+                      { kit_name => components }
+                    end
       end
 
       all_kits
     end
 
     # rubocop:disable Style/OptionalBooleanParameter
-    def render_pb_doc_kit(kit, type, limit_examples, code = true, dark_mode = false)
-      title = pb_doc_render_clickable_title(kit, type)
-      ui = raw("<div class='pb--docItem-ui'>
-          #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
-      title + ui
+    def render_pb_doc_kit(kit_name, type, limit_examples, code = true, dark_mode = false)
+      parent_kit = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml")).find { |kit| kit["name"] == kit_name }
+
+      # Initialize component_content as an empty string
+      component_content = ""
+      title = ""
+
+      # Check if parent_kit is nil
+      if parent_kit.nil?
+        title = pb_doc_render_clickable_title(kit_name, type)
+        component_content = raw("<div class='pb--docItem-ui'>
+    #{pb_kit(kit: kit_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
+      else
+        # Filter components based on the specified type
+        components = parent_kit["components"].select { |component| component["platforms"].include?(type) }
+
+        # If it's a parent with components, accumulate the UI content for child components
+        if components.any?
+          component_content = components.map do |component|
+            component_name = component["name"]
+            title = pb_doc_render_clickable_title(component_name, type) # Use component_name for the title
+
+            # Render the component UI content with the same styles/tags as the parent
+            component_ui = raw("<div class='pb--docItem-ui'>
+          #{pb_kit(kit: component_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
+        </div>")
+
+            # Combine the component name and component UI content
+            "#{title}#{component_ui}"
+          end.join.to_s
+        end
+      end
+
+      # Combine the component content and UI content for the parent kit
+      if parent_kit.nil?
+        "#{title}#{component_content}".to_s
+      else
+        component_content.to_s.to_s
+      end
     end
   # rubocop:enable Style/OptionalBooleanParameter
 
