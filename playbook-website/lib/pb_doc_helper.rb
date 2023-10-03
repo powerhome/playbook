@@ -47,23 +47,22 @@ module PlaybookWebsite
     def aggregate_kits
       all_kits = []
 
-      # Loop over the kits
       MENU["kits"].each do |kit|
         kit_name = kit["name"]
         components = kit["components"].map { |c| c["name"] }
 
-        kit_structure = { kit_name => components }
-
-        all_kits << kit_structure
+        all_kits << if components.size == 1
+                      components.first
+                    else
+                      { kit_name => components }
+                    end
       end
-
-      # Sort the kit structures by their keys (kit names)
-      all_kits.sort_by! { |kit_structure| kit_structure.keys.first }
 
       all_kits
     end
 
-    def render_pb_doc_kit(kit_name, type, limit_examples, code: true, dark_mode: false)
+    # rubocop:disable Style/OptionalBooleanParameter
+    def render_pb_doc_kit(kit_name, type, limit_examples, code = true, dark_mode = false)
       parent_kit = MENU["kits"].find { |kit| kit["name"] == kit_name }
 
       # Initialize component_content as an empty string
@@ -92,19 +91,18 @@ module PlaybookWebsite
 
             # Combine the component name and component UI content
             "#{title}#{component_ui}"
-          end.join.html_safe
+          end.join.to_s
         end
       end
 
       # Combine the component content and UI content for the parent kit
-      # rubocop:disable Style/RedundantInterpolation
       if parent_kit.nil?
-        "#{title}#{component_content}".html_safe
+        "#{title}#{component_content}".to_s
       else
-        "#{component_content}".html_safe
+        component_content.to_s.to_s
       end
-      # rubocop:enable Style/RedundantInterpolation
     end
+  # rubocop:enable Style/OptionalBooleanParameter
 
   private
 
