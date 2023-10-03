@@ -76,7 +76,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [expanded, setExpanded] = useState(initialExpandedItems)
   // State for single select variant input value
   const [singleSelectInputValue, setSingleSelectInputValue] = useState("")
-  // State for single select variant input value
+  // State for single select item
   const [singleSelectedItem, setSingleSelectedItem] = useState([])
 
   useEffect(() => {
@@ -87,11 +87,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (returnAllSelected) {
       setReturnedArray(getCheckedItems(formattedData))
     } else if (variant === "single") {
-      if (selectedIds?.length && !singleSelectedItem.length) {
-        // The default is the first selectedId if there are more than one
-        const defaultSelection = filterFormattedDataById(formattedData, selectedIds[0])
-        setSingleSelectInputValue(defaultSelection[0]?.value)
-        setDefaultReturn(defaultSelection)
+      if (selectedIds?.length === 0 && filterItem !== "") {
+        // Run if no selectedIds and not searching
+        setSingleSelectInputValue("")
+        setSingleSelectedItem([])
+        setDefaultReturn(defaultReturn)
       } else {
         setDefaultReturn(singleSelectedItem)
       }
@@ -195,7 +195,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return treeData.map((item: { [key: string]: any } | any) => {
       const newItem = {
         ...item,
-        checked: selectedIds && selectedIds.length && selectedIds.includes(item.id),
+        checked: Boolean(selectedIds && selectedIds.length && selectedIds.includes(item.id)),
         parent_id,
         depth,
       }
