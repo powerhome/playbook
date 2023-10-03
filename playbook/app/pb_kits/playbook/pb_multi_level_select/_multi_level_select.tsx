@@ -74,10 +74,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const initialExpandedItems = getExpandedItems(treeData, selectedIds)
   // Initialize state with expanded items
   const [expanded, setExpanded] = useState(initialExpandedItems)
-  // State for single select variant input value
-  const [singleSelectInputValue, setSingleSelectInputValue] = useState("")
-  // State for single select item
-  const [singleSelectedItem, setSingleSelectedItem] = useState([])
+
+  // Single Select specific state
+  const [singleSelectedItem, setSingleSelectedItem] = useState({
+    id: selectedIds,
+    value: "",
+    item: []
+  })
 
   useEffect(() => {
     setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
@@ -87,13 +90,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (returnAllSelected) {
       setReturnedArray(getCheckedItems(formattedData))
     } else if (variant === "single") {
-      if (selectedIds?.length === 0 && filterItem !== "") {
-        // Run if no selectedIds and not searching
-        setSingleSelectInputValue("")
-        setSingleSelectedItem([])
+      if (singleSelectedItem?.id?.length === 0) {
+        setSingleSelectedItem({ id: [], value: "", item: []})
         setDefaultReturn(defaultReturn)
       } else {
-        setDefaultReturn(singleSelectedItem)
+        setDefaultReturn(singleSelectedItem.item)
       }
     } else {
       setDefaultReturn(getDefaultCheckedItems(formattedData))
@@ -267,8 +268,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const selectedItem = filterFormattedDataById(treeWithSelectedItem, selectedItemID)
 
     setFormattedData(treeWithSelectedItem)
-    setSingleSelectedItem(selectedItem)
-    setSingleSelectInputValue(inputText)
+    setSingleSelectedItem({id: [selectedItemID], value: inputText, item: selectedItem})
     // Reset the filter to always display dropdown options on click
     setFilterItem("")
     setIsDropdownClosed(true)
@@ -279,7 +279,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   // Single select: reset the tree state upon typing
   const handleRadioInputChange = (inputText: string) => {
     modifyRecursive(formattedData, false)
-    setSingleSelectInputValue(inputText)
+    setSingleSelectedItem({id: [], value: inputText, item: []})
     setFilterItem(inputText)
   };
 
@@ -474,7 +474,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     ? `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? "item" : "items"} selected`
                     : "Start typing..."
                 }
-                value={singleSelectInputValue || filterItem}
+                value={singleSelectedItem.value || filterItem}
             />
           </div>
 
