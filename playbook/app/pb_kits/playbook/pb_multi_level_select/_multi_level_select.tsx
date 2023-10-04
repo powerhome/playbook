@@ -83,14 +83,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   })
 
   useEffect(() => {
-    let formattedData;
-
-    if (variant === "single") {
-      // Only one selection should be allowed
-      formattedData = addCheckedAndParentProperty(treeData, [selectedIds?.[0]])
-    } else {
-      formattedData = addCheckedAndParentProperty(treeData, selectedIds)
-    }
+    const formattedData = addCheckedAndParentProperty(
+      treeData,
+      variant === "single" ? [selectedIds?.[0]] : selectedIds
+    )
 
     setFormattedData(formattedData)
 
@@ -102,10 +98,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         // If there is a selectedId but no current item, set the selectedItem
         if (selectedIds?.length !== 0 && !singleSelectedItem.value) {
           const selectedItem = filterFormattedDataById(formattedData, selectedIds[0])
-          const { id, value } = selectedItem[0]
-          setSingleSelectedItem({ id: [id], value, item: selectedItem})
-        } else {
-          setSingleSelectedItem(singleSelectedItem)
+
+          if (!selectedItem.length) {
+            setSingleSelectedItem({ id: [], value: "", item: []})
+          } else {
+            const { id, value } = selectedItem[0]
+            setSingleSelectedItem({ id: [id], value, item: selectedItem})
+          }
         }
       }
     }
