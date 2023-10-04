@@ -300,6 +300,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   // Single select: reset the tree state upon typing
   const handleRadioInputChange = (inputText: string) => {
     modifyRecursive(formattedData, false)
+    setDefaultReturn([])
     setSingleSelectedItem({id: [], value: inputText, item: []})
     setFilterItem(inputText)
   };
