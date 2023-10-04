@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module PlaybookWebsite
+module Playbook
   module PbDocHelper
     def pb_kit_title(title)
       title.remove("pb_").titleize.tr("_", " ")
