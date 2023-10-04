@@ -1,0 +1,49 @@
+import React from "react";
+import {
+  Flex,
+  Card,
+  Checkbox,
+  SectionSeparator,
+  Badge,
+  Caption,
+} from "playbook-ui";
+
+const LettuceCheckboxCard = () => {
+  return (
+    <div className="LettuceCheckbox">
+      <Flex>
+        <Card borderNone borderRadius="xl" shadow="deep">
+          <Flex justify="between">
+            <Caption size="xs" text="Select at least 1" />
+            <Badge text="Required" rounded variant="primary" />
+          </Flex>
+          <Flex orientation="column" align="stretch">
+            <Checkbox
+              paddingY="xs"
+              tabIndex={0}
+              text="Spring Mix"
+              hover={{ background: "active_light" }}
+            />
+            <SectionSeparator />
+            <Checkbox
+              paddingY="xs"
+              checked
+              tabIndex={1}
+              text="Chopped Romain"
+              hover={{ background: "active_light" }}
+            />
+            <SectionSeparator />
+            <Checkbox
+              paddingY="xs"
+              tabIndex={2}
+              text="Curly Kale"
+              hover={{ background: "active_light" }}
+            />
+          </Flex>
+        </Card>
+      </Flex>
+    </div>
+  );
+};
+
+export default LettuceCheckboxCard;

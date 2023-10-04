@@ -7,6 +7,36 @@
 @import "./landing-page-solutions";
 
 .landing-page {
+  .homepage_hero_container {
+    .gauge-max-width {
+      max-width: 150px;
+    }
+    // Global Padding prop does not work on size small buttons
+    .OrderDetails {
+      .button-padding {
+        padding-left: 0px !important;
+      }
+    }
+
+    .NotificationsLarge,
+    .NotificationsSmall {
+      .button-padding {
+        padding: 6px 16px !important;
+      }
+    }
+
+    .SubscribeToggle {
+      .card-min-width {
+        min-width: 318px;
+      }
+    }
+
+    .NotificationsLarge {
+      .background-min-height {
+        min-height: 173px !important;
+      }
+    }
+  }
   .code-snippets {
     background-color: $bg_dark;
     border-radius: $border_rad_heaviest;
@@ -46,7 +76,7 @@
     width: 100%;
   }
 
-  @include break_at(1342px){
+  @include break_at(1342px) {
     .kit-example {
       margin-top: $space_xl * 2;
     }
@@ -76,13 +106,13 @@
 
   // Rearrange buttons on smaller screens
   // and realign text to center
-  @include break_at(443px){
+  @include break_at(443px) {
     text-align: center;
 
     .button-flexbox {
       flex-direction: column !important;
       align-content: center;
-      [class^=pb_button_kit_secondary] {
+      [class^="pb_button_kit_secondary"] {
         margin-left: 0 !important;
         margin-top: $space_md;
       }

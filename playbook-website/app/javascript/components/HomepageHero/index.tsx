@@ -1,14 +1,27 @@
 import React from "react";
-import {Title, Caption, Background} from "playbook-ui";
+import {
+  Background,
+} from "playbook-ui";
+import WelcomeComponent from "./HeroComponents/Welcome";
 
 
 const HomepageHero = () => {
-    return (
-        <>
-        <Caption text="Welcome to Playbook" color="link" />
-            <Title text="The Design System to help you ship faster."/>
-        </>
-    )
-}
+  return (
+    <>
+      <Background
+        className="homepage_hero_container"
+        paddingX="md"
+        paddingTop="xl"
+        backgroundColor="white"
+      >
+        <WelcomeComponent/>
+        <Background maxWidth="xl">
+          
 
-export default HomepageHero
+        </Background>
+      </Background>
+    </>
+  );
+};
+
+export default HomepageHero;
