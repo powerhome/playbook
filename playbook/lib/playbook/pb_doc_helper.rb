@@ -39,7 +39,7 @@ module Playbook
       kits = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml")) || []
 
       # Filter kits that have at least one component compatible with the type
-      kits.select do |kit|
+      kits["kits"].select do |kit|
         kit["components"].any? { |component| component["platforms"].include?(type) }
       end
     end
@@ -47,7 +47,7 @@ module Playbook
     def aggregate_kits
       all_kits = []
 
-      YAML.load_file(Playbook::Engine.root.join("dist/menu.yml")).each do |kit|
+      YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))["kits"].each do |kit|
         kit_name = kit["name"]
         components = kit["components"].map { |c| c["name"] }
 
@@ -63,18 +63,13 @@ module Playbook
 
     # rubocop:disable Style/OptionalBooleanParameter
     def render_pb_doc_kit(kit_name, type, limit_examples, code = true, dark_mode = false)
-      parent_kit = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml")).find { |kit| kit["name"] == kit_name }
+      parent_kit = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))["kits"].find { |kit| kit["name"] == kit_name }
 
       # Initialize component_content as an empty string
       component_content = ""
-      title = ""
 
-      # Check if parent_kit is nil
-      if parent_kit.nil?
-        title = pb_doc_render_clickable_title(kit_name, type)
-        component_content = raw("<div class='pb--docItem-ui'>
-    #{pb_kit(kit: kit_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
-      else
+      # Check if parent_kit is not nil
+      if parent_kit
         # Filter components based on the specified type
         components = parent_kit["components"].select { |component| component["platforms"].include?(type) }
 
@@ -86,8 +81,8 @@ module Playbook
 
             # Render the component UI content with the same styles/tags as the parent
             component_ui = raw("<div class='pb--docItem-ui'>
-          #{pb_kit(kit: component_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
-        </div>")
+              #{pb_kit(kit: component_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
+            </div>")
 
             # Combine the component name and component UI content
             "#{title}#{component_ui}"
@@ -96,11 +91,7 @@ module Playbook
       end
 
       # Combine the component content and UI content for the parent kit
-      if parent_kit.nil?
-        "#{title}#{component_content}".to_s
-      else
-        component_content.to_s.to_s
-      end
+      component_content.to_s.to_s
     end
   # rubocop:enable Style/OptionalBooleanParameter
 
