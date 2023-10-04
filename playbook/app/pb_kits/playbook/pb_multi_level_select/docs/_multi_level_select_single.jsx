@@ -76,7 +76,6 @@ const MultiLevelSelectSingle = (props) => {
           id="multiselect-single"
           inputName="Power"
           onSelect={(selectedNode) => console.log("Selected Node", selectedNode)}
-          selectedIds={["eney2"]}
           treeData={treeData}
           variant="single"
           {...props}
