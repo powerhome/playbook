@@ -47,7 +47,7 @@ export const TopLevelNavItem = ({
       }
     });
     //return true at end to disable default collapsible behavior
-    // return true;
+    return true;
   };
 
   //NOTE: All toggle and active state logic should be replaced with state once website moves to react router
@@ -107,7 +107,6 @@ export const TopLevelNavItem = ({
 
     //right icon click for top level item
     const handleComponentsIconClick = (i) => {
-      console.log("TESTING THE CLICK")
       topLevelCollapsibles.forEach(([, toggle], idx) => {
         if (idx === i) {
           toggleTopNav === true
