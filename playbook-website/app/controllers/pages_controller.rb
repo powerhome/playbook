@@ -15,9 +15,10 @@ class PagesController < ApplicationController
   def react_app
     @kit = params[:name]
     @kits = MENU["kits"]
+    @dark = cookies[:dark_mode] == "true"
     respond_to do |format|
       format.html { render template: "react_app", layout: false }
-      format.json { render json: { kits: @kits, kit: @kit } }
+      format.json { render json: { kits: @kits, kit: @kit, dark: @dark } }
     end
   end
 

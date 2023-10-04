@@ -37,9 +37,6 @@ type ResponsiveProp<T> = T | {
   xl?: T
 };
 
-
-
-
 const breakpoints: {[key: string]: string} = {
   xs: '(max-width: 575px)',
   sm: '(min-width: 576px) and (max-width: 767px)',

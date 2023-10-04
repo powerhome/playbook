@@ -19,7 +19,6 @@ body {
   &--dark-mode-toggle-desktop {
     display: flex;
     justify-content: flex-end;
-    margin-top: $space_lg;
     @include break_at($nav_breakpoint) {
       display: none;
     }

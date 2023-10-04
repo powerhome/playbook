@@ -1,84 +1,138 @@
 import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import MainSidebar from "./MainSidebar"
-import { Layout, Background, Flex } from "playbook-ui"
+import { Layout, Background, Icon, Title, Body, Button, Flex } from "playbook-ui"
+import HeaderMobile from "../images/pb_generic_header.jpg"
+import HeaderDesktop from "../images/pb_generic_header_desktop.jpg"
+import Footer from "./Footer"
+import DarkModeToggle from "./DarkModeToggle"
 
 function App() {
   const [kits, setKits] = useState([])
   const [dark, setDark] = useState(false)
 
+  // This is only for the Body component to hide itself and used for a few other props that aren't fully responsive yet.
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+
   useEffect(() => {
-    // Fetch JSON data from the server
     fetch("/beta/kits.json")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
-        setKits(data.kits) // Set 'kits' to the 'kits' property of 'data'
-        setDark(data.dark_mode)
+        setKits(data.kits)
+        setDark(data.dark)
       })
       .catch((error) => {
         console.log(error)
       })
+
+    window.addEventListener("resize", () => {
+      setIsMobile(window.innerWidth < 768)
+    })
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        setIsMobile(window.innerWidth < 768)
+      })
+    }
   }, [])
 
   return (
-    kits.length > 0 && (
-      <Layout
-        className='pb--page--content'
-        dark={dark}
-        collapse='md'
-        position='left'
-        size='lg'
-      >
-        <Layout.Side>
-          {/* todo: convert to React------ >    <%= render 'layouts/mobile_hamburger' %></Layout> */}
-          <MainSidebar kits={kits} />
-        </Layout.Side>
-        <Layout.Body>
-          <div className={`pb--page--content--main ${dark}`}>
-            <Flex gap='md' justify='center' wrap>
-              <Background backgroundColor='success' padding='xl' />
-              <br />
-              <Background backgroundColor='success_secondary' padding='xl' />
-              <br />
+    <>
+     <Flex spacing='between' vertical='center'>
+      <div class='pb--page--dark-mode-toggle-mobile'>
+        <DarkModeToggle initMode={dark} />
+      </div>
+      </Flex>
+      {kits.length > 0 && (
+        <Layout
+          className='pb--page--content'
+          collapse='md'
+          position='left'
+          size='lg'
+        >
+          <Icon icon='bars' className='pb--page--hamburger'></Icon>
+          <input type='checkbox' className='pb--page--checkbox' />
+          <Layout.Side className='pb--page--sideNav'>
+            <MainSidebar kits={kits} />
+          </Layout.Side>
+          <Layout.Body>
+            <div className={`pb--page--content--main ${dark}`}>
+              {!isMobile && (
+                <Button
+                  text='Back to Legacy View'
+                  variant='link'
+                  icon='circle-left'
+                  tag='h1'
+                  marginY='xs'
+                  paddingLeft='none'
+                  marginBottom='none'
+                  paddingBottom='none'
+                  link='/kits'
+                  marginLeft='md'
+                />
+              )}
               <Background
-                alt='colorful background'
-                padding="xl"
+                alt='background with blue colors fading to darker blue'
+                margin={{
+                  xs: "none",
+                  sm: "none",
+                  md: "md",
+                  lg: "md",
+                  xl: "md",
+                }}
+                marginTop={{ md: "none", lg: "none", xl: "none" }}
+                padding={{ md: "xl", default: "xl" }}
+                paddingTop={{ xs: "lg" }}
+                paddingBottom={{ xs: "xs" }}
+                paddingX={{ xs: "xs" }}
+                textAlign={isMobile ? "center" : "left"}
+                borderRadius={isMobile ? "none" : "lg"}
                 backgroundSize={{
-                  xs: "sm",
-                  sm: "md",
-                  md: "xxl",
+                  default: "1105px 243px",
+                  xs: "80%",
+                  sm: "80%",
+                  md: "1105px 243px",
                 }}
                 backgroundPosition={{
-                  default: "center center",
+                  default: "right bottom",
                   xs: "center top",
-                  sm: "left top",
-                  md: "right top",
+                  sm: "center top",
+                  md: "right bottom",
                 }}
-                backgroundRepeat={{
-                  xs: "no-repeat",
-                  sm: "repeat-x",
-                  md: "repeat-y",
+                backgroundColor='dark'
+                backgroundRepeat='no-repeat'
+                imageUrl={{
+                  default: HeaderDesktop,
+                  xs: HeaderMobile,
+                  sm: HeaderMobile,
+                  md: HeaderDesktop,
                 }}
-                backgroundColor={{
-                  xs: "primary",
-                  sm: "success",
-                  md: "warning",
-                  default: "error"
-                }}
-                // imageUrl={{
-                //   xs: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
-                //   sm: "https://images.unsplash.com/photo-1682685797208-c741d58c2eff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
-                //   md: "https://images.unsplash.com/photo-1696161812499-e17695da6056?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
-                // }}
-              />
-              {/* {children go here} */}
-              {/* todo: convert to React------ >    <%= render 'layouts/footer'%> */}
-            </Flex>
-          </div>
-        </Layout.Body>
-      </Layout>
-    )
+              >
+                <Title
+                  size={{ xs: 3, sm: 3, md: 2, lg: 2, xl: 2 }}
+                  paddingTop={{ xs: "xl", sm: "xl", md: "none" }}
+                  paddingBottom={{ default: "sm" }}
+                  text='Components'
+                  marginBottom={{ xs: "sm", md: "xs" }}
+                  dark
+                />
+                {!isMobile && (
+                  <Body
+                    maxWidth='sm'
+                    lineHeight='loose'
+                    paddingBottom='xl'
+                    dark
+                    text='Components are the reusable building blocks of our design system. Each component meets a specific interaction or UI need, and has been specifically created to work together to create patterns and intuitive user experiences.'
+                  />
+                )}
+              </Background>
+              {/* I rebuilt the footer and it's ready to go. Just wasn't a part of my initial story.  */}
+              {/* <Footer /> */}
+            </div>
+          </Layout.Body>
+        </Layout>
+      )}
+    </>
   )
 }
 
