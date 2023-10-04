@@ -16,75 +16,24 @@ body {
 }
 
 .pb--page {
-  &--topNav {
-    flex: 0 0;
-    padding: $space_sm $space_md $space_xs $space_md;
-    background: $white;
-    position: relative;
-    h1 {
-      display: flex;
-      align-items: center;
-      img {
-        display: flex;
-      }
-    }
-    &--separator {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
-    }
-    &.dark{
-      background: tint(#0a0527, 10);
-    }
-    .desktop-kit-search {
-      width: 33vw;
-      max-width: 300px;
-      [class*=_label] {
-        margin-bottom: 0 !important;
-      }
-      .text_input_wrapper {
-        margin-bottom: 0 !important;
-      }
-    }
-    .mobile-kit-search {
+  &--dark-mode-toggle-desktop {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $space_lg;
+    @include break_at($nav_breakpoint) {
       display: none;
     }
-    .pb-version-tag {
-      text-align: right;
-      position: relative;
-      bottom: $space_md - 4;
-    }
-    .separator-explicit-height {
-      height: $space_xl + 5;
-      margin-left: $space_xs;
-      margin-right: $space_xs;
-    }
-    // Mobile Overrides
+  }
+  &--dark-mode-toggle-mobile {
+    position: fixed;
+    top: $space_lg;
+    right: $space_xl;
+    display: none;
+    z-index: 100;
     @include break_at($nav_breakpoint) {
-      .full-size-nav, .github-nav-icon {
-        display: none;
-      }
-      .toggle-wrapper {
-        margin-right: 65px;
-      }
-    }
-    @include break_at(breakpoint("sm")) {
-      .desktop-kit-search, .separator-explicit-height {
-        display: none;
-      }
-      .mobile-kit-search {
-        display: block;
-      }
-    }
-    @include break_at(375px) {
-      .toggle-wrapper {
-        display: none;
-      }
+      display: block;
     }
   }
-
   &--content {
     min-height: calc(100vh - 89px);
     @include break_at($nav_breakpoint) {
@@ -98,7 +47,7 @@ body {
     }
     &--main {
       flex-grow: 1;
-      height: calc(100vh - 89px);
+      height: 100vh;
       overflow: auto;
       .pb--kits,
       .pb--kit-show,
@@ -120,6 +69,11 @@ body {
       &.smooth-scroll {
         scroll-behavior: smooth;
       }
+
+      &--guides {
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
   &--hamburger {
@@ -127,7 +81,7 @@ body {
   }
   &--hamburger, &--checkbox {
     position: absolute;
-    right: $space-xl;
+    left: $space-xl;
     top: 30px;
     display: none;
     font-size: $space-xl;
@@ -135,6 +89,7 @@ body {
     height: 30px;
     color: $primary;
     cursor: pointer;
+    z-index: 1;
     @include break_at($nav_breakpoint) {
       display: block;
     }
@@ -145,12 +100,12 @@ body {
       @include break_at($nav_breakpoint) {
         position: absolute;
         transform-origin: 0% 0%;
-        transform: translate(110%, 0);
+        transform: translate(-110%, 0);
         transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
         border-radius: $border_rad_heavier;
         box-shadow: $shadow_deepest;
         top: 100px;
-        right: 0;
+        left: 0;
         min-width: 200px;
         width: auto !important;
         z-index: 1000;
@@ -158,7 +113,7 @@ body {
     }
     &:checked ~ #{$selector}--sideNav {
       @include break_at($nav_breakpoint) {
-        transform: translate(-10%, 0);
+        transform: translate(10%, 0);
       }
     }
   }
@@ -191,7 +146,7 @@ body {
   }
 
   &--sideNav {
-    height: calc(100vh - 89px);
+    height: 100vh;
     overflow: auto;
     .mobile-sidebar-pages {
       display: none;
@@ -202,6 +157,27 @@ body {
       }
     }
   }
+
+  &--mobileNav {
+    position: relative;
+    height: 100px;
+    background-color: $white;
+    width: 100%;
+    display: none;
+    z-index: 1;
+    &.dark {
+      background: tint(#0a0527, 10);
+    }
+    @include break_at($nav_breakpoint) {
+        display: flex;
+    }
+  }
+  
+}
+
+.guides--page {
+  height: 100vh;
+  overflow: auto;
 }
 
 .h100 {
