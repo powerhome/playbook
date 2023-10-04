@@ -62,7 +62,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   // State for whether dropdown is open or closed
   const [isDropdownClosed, setIsDropdownClosed] = useState(true)
-  // State from onchange for textinput, to use for filtering to create typeahead
+  // State from onChange for textinput, to use for filtering to create typeahead
   const [filterItem, setFilterItem] = useState("")
   // FormattedData with checked and parent_id added
   const [formattedData, setFormattedData] = useState([])
@@ -77,25 +77,45 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   // Single Select specific state
   const [singleSelectedItem, setSingleSelectedItem] = useState({
-    id: selectedIds,
+    id: [],
     value: "",
     item: []
   })
 
   useEffect(() => {
-    setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
+    let formattedData;
+
+    if (variant === "single") {
+      // Only one selection should be allowed
+      formattedData = addCheckedAndParentProperty(treeData, [selectedIds?.[0]])
+    } else {
+      formattedData = addCheckedAndParentProperty(treeData, selectedIds)
+    }
+
+    setFormattedData(formattedData)
+
+    if (variant === "single") {
+      // No selectedIds, reset state
+      if (selectedIds?.length === 0 || !selectedIds?.length) {
+        setSingleSelectedItem({ id: [], value: "", item: []})
+      } else {
+        // If there is a selectedId but no current item, set the selectedItem
+        if (selectedIds?.length !== 0 && !singleSelectedItem.value) {
+          const selectedItem = filterFormattedDataById(formattedData, selectedIds[0])
+          const { id, value } = selectedItem[0]
+          setSingleSelectedItem({ id: [id], value, item: selectedItem})
+        } else {
+          setSingleSelectedItem(singleSelectedItem)
+        }
+      }
+    }
   }, [treeData, selectedIds])
 
   useEffect(() => {
     if (returnAllSelected) {
       setReturnedArray(getCheckedItems(formattedData))
     } else if (variant === "single") {
-      if (singleSelectedItem?.id?.length === 0) {
-        setSingleSelectedItem({ id: [], value: "", item: []})
-        setDefaultReturn(defaultReturn)
-      } else {
-        setDefaultReturn(singleSelectedItem.item)
-      }
+      setDefaultReturn(singleSelectedItem.item)
     } else {
       setDefaultReturn(getDefaultCheckedItems(formattedData))
     }
@@ -260,7 +280,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const handleRadioButtonClick = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const { id: selectedItemID, value: inputText } = e.target
+    const { id, value: inputText } = e.target
+    // The radio button needs a unique ID, this grabs the ID before the hyphen
+    const selectedItemID = id.match(/^[^-]*/)[0]
     // Reset tree checked state, triggering useEffect
     const treeWithNoSelections = modifyRecursive(formattedData, false)
     // Update tree with single selection
@@ -345,7 +367,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     { variant === "single" ? (
                       <Radio
                           checked={item.checked}
-                          id={item.id}
+                          id={`${item.id}-${item.label}`}
                           label={item.label}
                           name={inputName}
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => (
