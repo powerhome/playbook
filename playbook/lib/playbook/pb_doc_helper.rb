@@ -69,7 +69,8 @@ module Playbook
       component_content = ""
 
       # Check if parent_kit is not nil
-      if parent_kit
+      # Check if type is not "swift"
+      if parent_kit && type != "swift"
         # Filter components based on the specified type
         components = parent_kit["components"].select { |component| component["platforms"].include?(type) }
 
@@ -81,8 +82,8 @@ module Playbook
 
             # Render the component UI content with the same styles/tags as the parent
             component_ui = raw("<div class='pb--docItem-ui'>
-              #{pb_kit(kit: component_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
-            </div>")
+                #{pb_kit(kit: component_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
+              </div>")
 
             # Combine the component name and component UI content
             "#{title}#{component_ui}"
@@ -90,9 +91,10 @@ module Playbook
         end
       end
 
-      # Combine the component content and UI content for the parent kit
-      component_content.to_s.to_s
+      # Return the component_content
+      component_content.to_s
     end
+
   # rubocop:enable Style/OptionalBooleanParameter
 
   private
