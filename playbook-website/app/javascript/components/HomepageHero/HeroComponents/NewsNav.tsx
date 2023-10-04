@@ -31,7 +31,7 @@ const NewsNavCard = () => {
   );
 
   return (
-    <div className="NewsNav">
+    <div className="news_nav">
       <Flex>
         <Card borderNone borderRadius="lg" shadow="deep" padding="xs">
           <Flex align="center">

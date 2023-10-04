@@ -19,9 +19,9 @@ const TicketsChartCard = () => {
   ];
 
   return (
-    <div className="TicketsChart">
+    <div className="tickets_chart component_example">
       <Flex>
-        <Card borderNone borderRadius="xl" shadow="deep" paddingBottom="none">
+        <Card borderNone borderRadius="xl" shadow="deepest" paddingBottom="none">
           <Flex orientation="column" align="stretch">
             <Flex justify="between" align="center">
               <Caption text="total tickets sold" />

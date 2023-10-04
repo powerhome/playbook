@@ -8,13 +8,13 @@ const SubscribeToggleCard = () => {
   };
 
   return (
-    <div className="SubscribeToggle">
+    <div className="subscribe_toggle component_example">
       <Flex>
         <Card
           className="card-min-width"
           borderNone
           borderRadius="xl"
-          shadow="deep"
+          shadow="deepest"
           paddingY="sm"
         >
           <Flex align="center" justify="between" gap="xs">

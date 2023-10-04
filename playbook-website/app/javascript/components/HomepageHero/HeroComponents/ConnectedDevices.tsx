@@ -3,7 +3,7 @@ import { Flex, Card, Title, Collapsible, Pill, Body, Icon } from "playbook-ui";
 
 const ConnectedDevicesCard = () => {
   return (
-    <div className="ConnectedDevices">
+    <div className="connected_devices component_example">
       <Flex>
         <Card
           borderNone

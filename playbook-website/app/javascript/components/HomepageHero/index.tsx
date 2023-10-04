@@ -1,5 +1,5 @@
 import React from "react";
-import { Background } from "playbook-ui";
+import { Background, Flex } from "playbook-ui";
 import WelcomeComponent from "./HeroComponents/Welcome";
 import ConnectedDevicesCard from "./HeroComponents/ConnectedDevices";
 import HoverCard from "./HeroComponents/Hover";
@@ -20,20 +20,21 @@ const HomepageHero = () => {
         paddingX="md"
         paddingTop="xl"
         backgroundColor="white"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
       >
         <WelcomeComponent />
-        <Background backgroundColor="white" maxWidth="xl">
-          <ConnectedDevicesCard />
-          <HoverCard />
-          <LettuceCheckboxCard />
-          <NewsNavCard />
-          <NotificationsLargeCard />
-          <NotificationsSmallCard />
-          <OrderDetailsCard />
-          <SelectPlanCard />
-          <SubscribeToggleCard />
-          <TicketsChartCard />
-        </Background>
+        <TicketsChartCard />
+        <NotificationsLargeCard />
+        {/* <NewsNavCard /> */}
+        <ConnectedDevicesCard />
+        <HoverCard />
+        <LettuceCheckboxCard />
+        {/* <NotificationsSmallCard /> */}
+        <OrderDetailsCard />
+        <SelectPlanCard />
+        <SubscribeToggleCard />
       </Background>
     </>
   );

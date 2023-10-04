@@ -3,7 +3,7 @@ import { Flex, Card, Body, Icon, Caption, Tooltip } from "playbook-ui";
 
 const HoverCard = () => {
   return (
-    <div className="ConnectedDevices">
+    <div className="hover_card component_example">
       <Flex>
         <Tooltip
           delay={{ close: 500 }}
@@ -23,7 +23,7 @@ const HoverCard = () => {
           }
           zIndex={10}
         >
-          <Card borderNone borderRadius="xl" shadow="deep" padding="sm">
+          <Card borderNone borderRadius="xl" shadow="deepest" padding="sm">
             <Body color="light">
               <Flex gap="xxs" align="center">
                 <Icon icon="info-circle" />

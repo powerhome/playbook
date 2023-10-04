@@ -13,9 +13,9 @@ import { Logos } from "../ComponentData/LogosData";
 const WelcomeComponent = () => {
   return (
     <>
-      <Flex>
-        <FlexItem fixedSize="563px">
-          <Caption text="Welcome to Playbook" color="link" />
+      <Flex className="welcome_component">
+        <FlexItem fixedSize="546px">
+          <Title text="WELCOME TO PLAYBOOK" size={4} color="link" />
           <Title
             size={1}
             text="The Design System to help you ship faster."

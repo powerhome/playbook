@@ -12,9 +12,9 @@ import {
 
 const OrderDetailsCard = () => {
   return (
-    <div className="OrderDetails">
+    <div className="order_details component_example">
       <Flex>
-        <Card borderNone borderRadius="lg" shadow="deep" padding="sm">
+        <Card borderNone borderRadius="lg" shadow="deepest" padding="sm">
           <Flex orientation="column" gap="lg" align="stretch">
             <ProgressStep icon>
               <ProgressStepItem status="complete">

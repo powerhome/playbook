@@ -8,35 +8,75 @@
 
 .landing-page {
   .homepage_hero_container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    .component_example {
+      position: absolute;
+    }
+    .tickets_chart {
+      top: 137px;
+      right: 350px;
+    }
+    .connected_devices {
+      right: 320px;
+      top: 410px;
+    }
+    .lettuce_checkbox {
+      top: 555px;
+      right: 350px;
+    }
+    .select_plan {
+      top: 555px;
+      right: 955px;
+    }
+    .order_details {
+      top: 670px;
+      right: 590px;
+    }
+    .hover_card {
+      top: 760px;
+      right: 440px;
+      z-index: 1;
+    }
     .gauge-max-width {
       max-width: 150px;
     }
     // Global Padding prop does not work on size small buttons
-    .OrderDetails {
+    .order_details {
       .button-padding {
         padding-left: 0px !important;
       }
     }
 
-    .NotificationsLarge,
+    .notifications_large,
     .NotificationsSmall {
       .button-padding {
         padding: 6px 16px !important;
       }
     }
 
-    .SubscribeToggle {
+    .subscribe_toggle {
+      top: 750px;
+      right: 1180px;
       .card-min-width {
         min-width: 318px;
       }
     }
 
-    .NotificationsLarge {
+    .notifications_large {
+      top: 310px;
+      right: 500px;
+      // right: 28%;
       .background-min-height {
         min-height: 173px !important;
+        border-top-left-radius: $border_radius_xl;
+        border-top-right-radius: $border_radius_xl;
       }
     }
   }
+
   .code-snippets {
     background-color: $bg_dark;
     border-radius: $border_rad_heaviest;

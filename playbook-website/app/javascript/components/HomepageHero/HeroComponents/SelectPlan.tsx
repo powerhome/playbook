@@ -35,9 +35,9 @@ const SelectPlanCard = () => {
   };
 
   return (
-    <div className="SelectPlan">
+    <div className="select_plan component_example">
       <Flex>
-        <Card borderNone borderRadius="xl" shadow="deep">
+        <Card borderNone borderRadius="xl" shadow="deepest">
           <Flex orientation="column" gap="sm" align="stretch">
             {plans.map((plan) => {
               return (

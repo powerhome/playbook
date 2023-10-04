@@ -36,11 +36,11 @@ const NotificationsLargeCard = () => {
   };
 
   return (
-    <div className="NotificationsLarge">
+    <div className="notifications_large component_example">
       <Card
         borderNone
         borderRadius="xl"
-        shadow="deep"
+        shadow="deepest"
         padding="none"
         maxWidth="sm"
       >

@@ -10,9 +10,9 @@ import {
 
 const LettuceCheckboxCard = () => {
   return (
-    <div className="LettuceCheckbox">
+    <div className="lettuce_checkbox component_example">
       <Flex>
-        <Card borderNone borderRadius="xl" shadow="deep">
+        <Card borderNone borderRadius="xl" shadow="deepest">
           <Flex justify="between">
             <Caption size="xs" text="Select at least 1" />
             <Badge text="Required" rounded variant="primary" />
