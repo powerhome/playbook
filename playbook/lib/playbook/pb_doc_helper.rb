@@ -7,21 +7,20 @@ module Playbook
     end
 
     def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false, dark_mode: false)
-      # Check if the type is "swift" and return an empty string if it is
-      return "" if type == "swift"
-
-      examples = pb_doc_kit_examples(kit, type)
-      examples = examples.first(1) if limit_examples
-      examples.map do |example|
-        pb_rails "docs/kit_example", props: {
-          kit: kit,
-          example_title: example.values.first,
-          example_key: example.keys.first,
-          show_code: show_code,
-          type: type,
-          dark: dark_mode,
-        }
-      end.join.yield_self(&method(:raw))
+      unless type == "swift"
+        examples = pb_doc_kit_examples(kit, type)
+        examples = examples.first(1) if limit_examples
+        examples.map do |example|
+          pb_rails "docs/kit_example", props: {
+            kit: kit,
+            example_title: example.values.first,
+            example_key: example.keys.first,
+            show_code: show_code,
+            type: type,
+            dark: dark_mode,
+          }
+        end.join.yield_self(&method(:raw))
+      end
     end
 
     # Deal with lists of kits, used in Playbook doc and Externally
