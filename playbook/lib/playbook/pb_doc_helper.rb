@@ -36,6 +36,8 @@ module Playbook
     end
 
     def get_kits(type = "rails")
+      return [] if type == "swift"
+
       kits = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml")) || []
 
       # Filter kits that have at least one component compatible with the type
@@ -69,26 +71,23 @@ module Playbook
       component_content = ""
 
       # Check if parent_kit is not nil
-      # Check if type is not "swift"
-      if parent_kit && type != "swift"
-        # Filter components based on the specified type
-        components = parent_kit["components"].select { |component| component["platforms"].include?(type) }
+      # Filter components based on the specified type
+      components = parent_kit["components"].select { |component| component["platforms"].include?(type) }
 
-        # If it's a parent with components, accumulate the UI content for child components
-        if components.any?
-          component_content = components.map do |component|
-            component_name = component["name"]
-            title = pb_doc_render_clickable_title(component_name, type) # Use component_name for the title
+      # If it's a parent with components, accumulate the UI content for child components
+      if components.any?
+        component_content = components.map do |component|
+          component_name = component["name"]
+          title = pb_doc_render_clickable_title(component_name, type) # Use component_name for the title
 
-            # Render the component UI content with the same styles/tags as the parent
-            component_ui = raw("<div class='pb--docItem-ui'>
+          # Render the component UI content with the same styles/tags as the parent
+          component_ui = raw("<div class='pb--docItem-ui'>
                 #{pb_kit(kit: component_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
               </div>")
 
-            # Combine the component name and component UI content
-            "#{title}#{component_ui}"
-          end.join.to_s
-        end
+          # Combine the component name and component UI content
+          "#{title}#{component_ui}"
+        end.join.to_s
       end
 
       # Return the component_content
