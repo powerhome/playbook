@@ -123,7 +123,7 @@ const Background = (props: BackgroundProps) => {
       [`pb_background_color_${resBackgroundColor}`]: resBackgroundColor && !customColor,
       [`pb_background_custom_color`]: !!customColor,
     },
-    className,
+    className
   );
 
   const backgroundStyle = {
