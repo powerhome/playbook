@@ -2,6 +2,10 @@
 
 module Playbook
   module PbDocHelper
+    def render_markdown(text)
+      PlaybookWebsite::Markdown::Helper.markdown(text)
+    end
+
     def pb_kit_title(title)
       title.remove("pb_").titleize.tr("_", " ")
     end
@@ -36,8 +40,6 @@ module Playbook
     end
 
     def get_kits(type = "rails")
-      return [] if type == "swift"
-
       kits = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml")) || []
 
       # Filter kits that have at least one component compatible with the type
