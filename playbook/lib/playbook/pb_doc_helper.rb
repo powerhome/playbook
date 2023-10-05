@@ -7,6 +7,9 @@ module Playbook
     end
 
     def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false, dark_mode: false)
+      # Check if the type is "swift" and return an empty string if it is
+      return "" if type == "swift"
+
       examples = pb_doc_kit_examples(kit, type)
       examples = examples.first(1) if limit_examples
       examples.map do |example|
@@ -19,10 +22,6 @@ module Playbook
           dark: dark_mode,
         }
       end.join.yield_self(&method(:raw))
-    end
-
-    def nav_hash_array(link)
-      link.first.last
     end
 
     # Deal with lists of kits, used in Playbook doc and Externally
