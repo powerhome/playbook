@@ -34,7 +34,8 @@ type ResponsiveProp<T> = T | {
   sm?: T,
   md?: T,
   lg?: T,
-  xl?: T
+  xl?: T,
+  default?: T
 };
 
 const breakpoints: {[key: string]: string} = {
@@ -80,11 +81,11 @@ const Background = (props: BackgroundProps) => {
   } = props
   
   const [responsiveProps, setResponsiveProps] = useState({
-    backgroundSize: getResponsiveValue(props.backgroundSize),
-    backgroundPosition: getResponsiveValue(props.backgroundPosition),
-    backgroundRepeat: getResponsiveValue(props.backgroundRepeat),
-    backgroundColor: getResponsiveValue(props.backgroundColor),
-    imageUrl: getResponsiveValue(props.imageUrl),
+    backgroundSize: getResponsiveValue(backgroundSize),
+    backgroundPosition: getResponsiveValue(backgroundPosition),
+    backgroundRepeat: getResponsiveValue(backgroundRepeat),
+    backgroundColor: getResponsiveValue(backgroundColor),
+    imageUrl: getResponsiveValue(imageUrl),
   });
 
   // Update responsive values on window resize.
@@ -117,6 +118,7 @@ const Background = (props: BackgroundProps) => {
     buildCss('pb_background_kit'),
     'lazyload',
     globalProps(props),
+    transition,
     {
       [`pb_background_color_${resBackgroundColor}`]: resBackgroundColor && !customColor,
       [`pb_background_custom_color`]: !!customColor,
