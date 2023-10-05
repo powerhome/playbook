@@ -29,10 +29,19 @@ module Playbook
     def pb_kits(type: "rails", limit_examples: false, dark_mode: false)
       kits = get_kits(type)
 
-      # Iterate through the filtered kits and render them
-      kits.map do |kit|
-        render_pb_doc_kit(kit["name"], type, limit_examples, true, dark_mode)
-      end.join.html_safe
+      # Initialize an empty string to store the rendered HTML
+      rendered_html = ""
+
+      # Iterate through the filtered kits and render their child components
+      kits.each do |kit|
+        kit["components"].each do |component|
+          # Check if the component is compatible with the specified type
+          rendered_html += render_pb_doc_kit(component["name"], type, limit_examples, true, dark_mode) if component["platforms"].include?(type)
+        end
+      end
+
+      # Return the rendered HTML as safe HTML
+      rendered_html.html_safe
     end
 
     def get_kits(type = "rails")
@@ -63,33 +72,10 @@ module Playbook
 
     # rubocop:disable Style/OptionalBooleanParameter
     def render_pb_doc_kit(kit_name, type, limit_examples, code = true, dark_mode = false)
-      parent_kit = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))["kits"].find { |kit| kit["name"] == kit_name }
-
-      # Initialize component_content as an empty string
-      component_content = ""
-
-      # Check if parent_kit is not nil
-      # Filter components based on the specified type
-      components = parent_kit["components"].select { |component| component["platforms"].include?(type) }
-
-      # If it's a parent with components, accumulate the UI content for child components
-      if components.any?
-        component_content = components.map do |component|
-          component_name = component["name"]
-          title = pb_doc_render_clickable_title(component_name, type) # Use component_name for the title
-
-          # Render the component UI content with the same styles/tags as the parent
-          component_ui = raw("<div class='pb--docItem-ui'>
-                #{pb_kit(kit: component_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}
-              </div>")
-
-          # Combine the component name and component UI content
-          "#{title}#{component_ui}"
-        end.join.to_s
-      end
-
-      # Return the component_content
-      component_content.to_s
+      title = pb_doc_render_clickable_title(kit_name, type)
+      ui = raw("<div class='pb--docItem-ui'>
+          #{pb_kit(kit: kit_name, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
+      title + ui
     end
 
   # rubocop:enable Style/OptionalBooleanParameter
@@ -111,23 +97,24 @@ module Playbook
       end
     end
 
-    def pb_doc_render_clickable_title(kit, type)
+    # Modify the method to accept kit_name
+    def pb_doc_render_clickable_title(kit_name, type)
       url = "#"
       begin
         url = case type
               when "react"
-                kit_show_reacts_path(kit)
+                kit_show_reacts_path(kit_name) # Use kit_name instead of kit
               when "swift"
-                kit_show_swift_path(kit)
+                kit_show_swift_path(kit_name) # Use kit_name instead of kit
               else
-                kit_show_path(kit)
+                kit_show_path(kit_name) # Use kit_name instead of kit
               end
       # FIXME: this is here because this helper generates a link for playbook website,
       #       but shouldn't do anything when used elsewhere
       rescue
-        puts "Kit Path Not Avaliable"
+        puts "Kit Path Not Available"
       end
-      render inline: "<a href='#{url}'>#{pb_rails(:title, props: { text: pb_kit_title(kit), tag: 'h3', size: 2 })}</a>"
+      render inline: "<a href='#{url}'>#{pb_rails(:title, props: { text: pb_kit_title(kit_name), tag: 'h3', size: 2 })}</a>"
     end
   end
 end
