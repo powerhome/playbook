@@ -5,6 +5,9 @@
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= render 'layouts/mobile_nav'%>
+    <div class="pb--page--dark-mode-toggle-mobile">
+      <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
+    </div>
     <div id="root"></div>
   </body>
   <%= javascript_pack_tag('app') %>
