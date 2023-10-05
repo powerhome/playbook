@@ -1,5 +1,5 @@
 import React from "react";
-import { Background, Flex, FlexItem } from "playbook-ui";
+import { Background, Flex, FlexItem, Image } from "playbook-ui";
 import WelcomeComponent from "./HeroComponents/Welcome";
 import ConnectedDevicesCard from "./HeroComponents/ConnectedDevices";
 import HoverCard from "./HeroComponents/Hover";
@@ -12,6 +12,9 @@ import SelectPlanCard from "./HeroComponents/SelectPlan";
 import SubscribeToggleCard from "./HeroComponents/SubscribeToggle";
 import TicketsChartCard from "./HeroComponents/TicketsChart";
 import Blur from "./HeroComponents/Blur";
+// @ts-ignore
+import GridLarge from "../../images/LargeBackgroundGrid.svg";
+
 
 const HomepageHero = () => {
   return (
@@ -43,6 +46,7 @@ const HomepageHero = () => {
           className="homepage_hero_container_cards"
           position="absolute"
         >
+          <Image url={GridLarge} position="absolute" className="homepage_hero_container_cards_grid"/>
           <Flex orientation="column">
             <FlexItem
               alignSelf="end"
@@ -74,11 +78,9 @@ const HomepageHero = () => {
           </Flex>
           <TicketsChartCard />
           <NotificationsLargeCard />
-          {/* <NewsNavCard /> */}
           <ConnectedDevicesCard />
           <HoverCard />
           <LettuceCheckboxCard />
-          {/* <NotificationsSmallCard /> */}
           <OrderDetailsCard />
           <SelectPlanCard />
           <SubscribeToggleCard />
