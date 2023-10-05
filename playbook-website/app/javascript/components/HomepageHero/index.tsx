@@ -64,11 +64,11 @@ const HomepageHero = () => {
             >
               <Blur
                 background="rgba(0, 130, 255, 0.25)"
-                borderRadius="570.112px"
+                borderRadius="var(--border-radius-none, 402px)"
                 filter="blur(100px)"
                 flexShrink="0"
-                height="427.257px"
-                width="570.112px"
+                height="301px"
+                width="402px"
               />
             </FlexItem>
           </Flex>
