@@ -16,6 +16,13 @@
     height: 100vh;
     top: 100px;
 
+    .welcome_component {
+      &_underline {
+        bottom: 8px;
+        left: 100px;
+      }
+    }
+
     &_cards {
       position: absolute;
       background-color: transparent; //can we add transparent as an option for the background color in background kit?
