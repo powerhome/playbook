@@ -2,10 +2,6 @@
 
 module Playbook
   module PbDocHelper
-    def render_markdown(text)
-      PlaybookWebsite::Markdown::Helper.markdown(text)
-    end
-
     def pb_kit_title(title)
       title.remove("pb_").titleize.tr("_", " ")
     end
