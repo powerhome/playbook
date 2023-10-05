@@ -8,14 +8,14 @@
 
 .landing-page {
   .homepage_hero_wrapper {
-    height: 940px;
+    height: $screen-lg-min - 52;
   }
 
   .homepage_hero_container {
     .welcome_component {
       &_underline {
-        bottom: 8px;
-        left: 100px;
+        bottom: $space_xs;
+        left: ($space_xl * 2) + 20;
       }
     }
 
@@ -29,31 +29,31 @@
         position: absolute;
       }
       .tickets_chart {
-        top: 137px;
-        right: 35px;
+        top: ($space_xl * 3) + 17;
+        right: $space_xl - 5;
       }
       .connected_devices {
         right: 0px;
-        top: 410px;
+        top: $screen-xs-min - 165;
       }
       .lettuce_checkbox {
-        top: 555px;
-        right: 15px;
+        top: $screen-xs-min - 20;
+        right: $space_sm - 1;
       }
       .select_plan {
-        top: 555px;
-        right: 610px;
+        top: $screen-xs-min - 20;
+        right: $screen-sm-min + 34;
       }
       .order_details {
-        top: 660px;
-        right: 248px;
+        top: $screen-sm-min + 84;
+        right: ($space_xl * 6) + 8;
       }
       .hover_card {
-        top: 760px;
-        right: 110px;
+        top: $screen-md-min - 8;
+        right: ($space_xl * 3) - 10;
       }
       .gauge-max-width {
-        max-width: 150px;
+        max-width: ($space_xl * 3) + 30;
       }
       // Global Padding prop does not work on size small buttons
       .order_details {
@@ -65,23 +65,23 @@
       .notifications_large,
       .NotificationsSmall {
         .button-padding {
-          padding: 6px 16px !important;
+          padding: ($space_xxs + 2) $space_sm !important;
         }
       }
 
       .subscribe_toggle {
-        top: 750px;
+        top: $screen-md-min - 18;
         left: 0px;
         .card-min-width {
-          min-width: 318px;
+          min-width: ($space_xl * 8) - 2;
         }
       }
 
       .notifications_large {
-        top: 310px;
-        right: 170px;
+        top: ($space_xl * 8) - 10;
+        right: ($space_xl * 4) + 10;
         .background-min-height {
-          min-height: 173px !important;
+          min-height: ($space_xl * 4) + 13 !important;
           border-top-left-radius: $border_radius_xl;
           border-top-right-radius: $border_radius_xl;
         }

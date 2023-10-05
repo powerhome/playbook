@@ -9,7 +9,7 @@ const WelcomeComponent = () => {
     <>
       <Flex className="welcome_component">
         <FlexItem fixedSize="546px">
-          <Title text="WELCOME TO PLAYBOOK" size={4} color="link" />
+          <Title text="WELCOME TO PLAYBOOK" size={4} color="link" paddingBottom="xs" />
           <Title size={1} paddingBottom="sm" position="relative">
             {" "}
             The Design System to help you{" "}
