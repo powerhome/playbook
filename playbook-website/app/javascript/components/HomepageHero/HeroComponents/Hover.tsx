@@ -4,7 +4,12 @@ import { Flex, Card, Body, Icon, Caption, Tooltip } from "playbook-ui";
 const HoverCard = () => {
   return (
     <div className="hover_card component_example">
-      <Flex cursor="pointer" hover={{ scale: "sm" }}>
+      <Flex
+        cursor="pointer"
+        hover={{ scale: "sm" }}
+        position="relative"
+        zIndex={1}
+      >
         <Tooltip
           delay={{ close: 500 }}
           placement="bottom"
