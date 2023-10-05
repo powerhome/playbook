@@ -20,10 +20,18 @@
     }
 
     &_cards {
-      position: absolute;
       background-color: transparent; //can we add transparent as an option for the background color in background kit?
       height: 100%;
       width: 100%;
+
+      &_blur_1 {
+        top: 15%;
+        right: 5%;
+      }
+      &_blur_2 {
+        top: 40%;
+        right: 30%;
+      }
 
       .component_example {
         position: absolute;

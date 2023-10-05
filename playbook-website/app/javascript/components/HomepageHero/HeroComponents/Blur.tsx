@@ -1,5 +1,15 @@
 import React from "react";
 
+type BlurProps = {
+  width?: string,
+  height?: string,
+  flexShrink?: string,
+  borderRadius?: string,
+  background?: string,
+  filter?: string,
+  children?: React.ReactNode
+
+}
 const Blur = ({
   width,
   height,
@@ -8,7 +18,7 @@ const Blur = ({
   background,
   filter,
   children,
-}) => {
+}:BlurProps) => {
   return (
     <div
       style={{
