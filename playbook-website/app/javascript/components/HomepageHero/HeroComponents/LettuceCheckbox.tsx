@@ -11,7 +11,7 @@ import {
 const LettuceCheckboxCard = () => {
   return (
     <div className="lettuce_checkbox component_example">
-      <Flex>
+      <Flex cursor="pointer" hover={{ scale: "sm" }}>
         <Card borderNone borderRadius="xl" shadow="deepest">
           <Flex justify="between">
             <Caption size="xs" text="Select at least 1" />

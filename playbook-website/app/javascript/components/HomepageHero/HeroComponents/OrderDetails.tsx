@@ -13,7 +13,7 @@ import {
 const OrderDetailsCard = () => {
   return (
     <div className="order_details component_example">
-      <Flex>
+      <Flex cursor="pointer" hover={{ scale: "sm" }}>
         <Card borderNone borderRadius="lg" shadow="deepest" padding="sm">
           <Flex orientation="column" gap="lg" align="stretch">
             <ProgressStep icon>

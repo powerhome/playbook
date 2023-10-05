@@ -7,72 +7,82 @@
 @import "./landing-page-solutions";
 
 .landing-page {
+  .homepage_hero_wrapper {
+    height: 1000px;
+  }
+
   .homepage_hero_container {
     position: relative;
-    width: 100vw;
     height: 100vh;
+    top: 100px;
 
-    .component_example {
+    &_cards {
       position: absolute;
-    }
-    .tickets_chart {
-      top: 137px;
-      right: 350px;
-    }
-    .connected_devices {
-      right: 320px;
-      top: 410px;
-    }
-    .lettuce_checkbox {
-      top: 555px;
-      right: 350px;
-    }
-    .select_plan {
-      top: 555px;
-      right: 955px;
-    }
-    .order_details {
-      top: 670px;
-      right: 590px;
-    }
-    .hover_card {
-      top: 760px;
-      right: 440px;
-      z-index: 1;
-    }
-    .gauge-max-width {
-      max-width: 150px;
-    }
-    // Global Padding prop does not work on size small buttons
-    .order_details {
-      .button-padding {
-        padding-left: 0px !important;
-      }
-    }
+      background-color: transparent; //can we add transparent as an option for the background color in background kit?
+      height: 100%;
+      width: 100%;
 
-    .notifications_large,
-    .NotificationsSmall {
-      .button-padding {
-        padding: 6px 16px !important;
+      .component_example {
+        position: absolute;
       }
-    }
-
-    .subscribe_toggle {
-      top: 750px;
-      right: 1180px;
-      .card-min-width {
-        min-width: 318px;
+      .tickets_chart {
+        top: 137px;
+        right: 90px;
       }
-    }
+      .connected_devices {
+        right: 40px;
+        top: 410px;
+      }
+      .lettuce_checkbox {
+        top: 555px;
+        right: 80px;
+      }
+      .select_plan {
+        top: 555px;
+        right: 680px;
+      }
+      .order_details {
+        top: 670px;
+        right: 330px;
+      }
+      .hover_card {
+        top: 760px;
+        right: 190px;
+        z-index: 1;
+      }
+      .gauge-max-width {
+        max-width: 150px;
+      }
+      // Global Padding prop does not work on size small buttons
+      .order_details {
+        .button-padding {
+          padding-left: 0px !important;
+        }
+      }
 
-    .notifications_large {
-      top: 310px;
-      right: 500px;
-      // right: 28%;
-      .background-min-height {
-        min-height: 173px !important;
-        border-top-left-radius: $border_radius_xl;
-        border-top-right-radius: $border_radius_xl;
+      .notifications_large,
+      .NotificationsSmall {
+        .button-padding {
+          padding: 6px 16px !important;
+        }
+      }
+
+      .subscribe_toggle {
+        top: 750px;
+        right: 900px;
+        .card-min-width {
+          min-width: 318px;
+        }
+      }
+
+      .notifications_large {
+        top: 310px;
+        right: 220px;
+        .background-min-height {
+          min-height: 173px !important;
+          border-top-left-radius: $border_radius_xl;
+          border-top-right-radius: $border_radius_xl;
+        }
       }
     }
   }

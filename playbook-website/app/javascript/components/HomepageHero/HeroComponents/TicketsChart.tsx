@@ -20,7 +20,7 @@ const TicketsChartCard = () => {
 
   return (
     <div className="tickets_chart component_example">
-      <Flex>
+      <Flex cursor="pointer" hover={{ scale: "sm" }}>
         <Card borderNone borderRadius="xl" shadow="deepest" paddingBottom="none">
           <Flex orientation="column" align="stretch">
             <Flex justify="between" align="center">

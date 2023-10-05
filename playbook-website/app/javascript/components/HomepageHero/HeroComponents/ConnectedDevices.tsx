@@ -4,7 +4,7 @@ import { Flex, Card, Title, Collapsible, Pill, Body, Icon } from "playbook-ui";
 const ConnectedDevicesCard = () => {
   return (
     <div className="connected_devices component_example">
-      <Flex>
+      <Flex cursor="pointer" hover={{ scale: "sm" }}>
         <Card
           borderNone
           borderRadius="xl"

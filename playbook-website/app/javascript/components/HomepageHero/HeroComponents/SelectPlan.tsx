@@ -36,7 +36,7 @@ const SelectPlanCard = () => {
 
   return (
     <div className="select_plan component_example">
-      <Flex>
+      <Flex cursor="pointer" hover={{ scale: "sm" }}>
         <Card borderNone borderRadius="xl" shadow="deepest">
           <Flex orientation="column" gap="sm" align="stretch">
             {plans.map((plan) => {

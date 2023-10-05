@@ -9,7 +9,7 @@ const SubscribeToggleCard = () => {
 
   return (
     <div className="subscribe_toggle component_example">
-      <Flex>
+      <Flex cursor="pointer" hover={{ scale: "sm" }}>
         <Card
           className="card-min-width"
           borderNone

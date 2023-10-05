@@ -40,9 +40,11 @@ const NotificationsLargeCard = () => {
       <Card
         borderNone
         borderRadius="xl"
+        cursor="pointer"
         shadow="deepest"
         padding="none"
         maxWidth="sm"
+        hover={{ scale: "sm" }}
       >
         <Card.Body padding="none">
           <Background
