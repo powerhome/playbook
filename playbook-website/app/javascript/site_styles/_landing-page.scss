@@ -8,14 +8,10 @@
 
 .landing-page {
   .homepage_hero_wrapper {
-    height: 1000px;
+    height: 940px;
   }
 
   .homepage_hero_container {
-    position: relative;
-    height: 100vh;
-    top: 100px;
-
     .welcome_component {
       &_underline {
         bottom: 8px;
@@ -34,27 +30,27 @@
       }
       .tickets_chart {
         top: 137px;
-        right: 90px;
+        right: 35px;
       }
       .connected_devices {
-        right: 40px;
+        right: 0px;
         top: 410px;
       }
       .lettuce_checkbox {
         top: 555px;
-        right: 80px;
+        right: 15px;
       }
       .select_plan {
         top: 555px;
-        right: 680px;
+        right: 610px;
       }
       .order_details {
-        top: 670px;
-        right: 330px;
+        top: 660px;
+        right: 248px;
       }
       .hover_card {
         top: 760px;
-        right: 190px;
+        right: 110px;
       }
       .gauge-max-width {
         max-width: 150px;
@@ -75,7 +71,7 @@
 
       .subscribe_toggle {
         top: 750px;
-        right: 900px;
+        left: 0px;
         .card-min-width {
           min-width: 318px;
         }
@@ -83,7 +79,7 @@
 
       .notifications_large {
         top: 310px;
-        right: 220px;
+        right: 170px;
         .background-min-height {
           min-height: 173px !important;
           border-top-left-radius: $border_radius_xl;

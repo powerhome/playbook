@@ -22,17 +22,18 @@ const HomepageHero = () => {
     >
       <Flex
         className="homepage_hero_container"
-        orientation="column"
+        marginX="md"
         maxWidth="xl"
+        orientation="column"
+        paddingTop="xl"
+        position="relative"
       >
         <Background
-          paddingX="md"
           paddingTop="xl"
           backgroundColor="white"
           display="flex"
           flexDirection="column"
           alignItems="center"
-          maxWidth="xl"
         >
           <WelcomeComponent />
         </Background>
