@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Title,
-  Caption,
   Body,
   Flex,
   FlexItem,
@@ -40,15 +39,19 @@ const WelcomeComponent = () => {
               fixedWidth
               icon="arrow-right"
               iconRight
+              link="/guides/getting_started"
               marginRight="sm"
               tabIndex={0}
               text="Get started"
+              zIndex={2}
             />
             <Button
               fixedWidth
+              link="/kits"
               tabIndex={0}
               text="Explore components"
               variant="secondary"
+              zIndex={2}
             />
           </Flex>
         </FlexItem>
