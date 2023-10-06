@@ -46,6 +46,7 @@ module Playbook
     # rubocop:disable Naming/AccessorMethodName
     def get_kits
       menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
+      all_kits = []
       menu["kits"].each do |kit|
         kit_name = kit["name"]
         components = kit["components"].map { |c| c["name"] }
