@@ -15,6 +15,9 @@ $medium_screen: 1218px;
     @include break_at($max_screen) {
       height: 1030px;
     }
+    @include break_at($medium_screen) {
+      height: 800px;
+    }
   }
 
   .homepage_hero_container {
@@ -26,6 +29,9 @@ $medium_screen: 1218px;
           right: -10px;
           left: unset;
         }
+        @include break_at($medium_screen) {
+          right: 133px;
+        }
       }
       @include break_at($max_screen) {
         align-items: center;
@@ -34,6 +40,9 @@ $medium_screen: 1218px;
       &_text {
         @include break_at($max_screen) {
           width: 80%;
+        }
+        @include break_at($medium_screen) {
+          width: 90%;
         }
       }
     }
@@ -79,6 +88,10 @@ $medium_screen: 1218px;
           top: 60px;
           right: 460px;
         }
+        @include break_at($medium_screen) {
+          right: 380px;
+          top: 140px;
+        }
       }
       .connected_devices {
         right: 0px;
@@ -86,6 +99,10 @@ $medium_screen: 1218px;
         @include break_at($max_screen) {
           right: 130px;
           top: 360px;
+        }
+        @include break_at($medium_screen) {
+          right: 420px;
+          top: 50px;
         }
       }
       .lettuce_checkbox {
@@ -107,6 +124,10 @@ $medium_screen: 1218px;
           top: 455px;
           right: 170px;
           z-index: 2;
+        }
+        @include break_at($medium_screen) {
+          top: 30px;
+          right: 160px;
         }
       }
       .hover_card {
@@ -147,6 +168,11 @@ $medium_screen: 1218px;
           top: 450px;
           right: 620px;
           left: unset;
+        }
+        @include break_at($medium_screen) {
+          top: 230px;
+          right: 150px;
+          z-index: 2;
         }
       }
 
