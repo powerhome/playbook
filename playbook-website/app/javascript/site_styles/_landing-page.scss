@@ -181,12 +181,12 @@ $mobile_screen: 575px;
         }
         @include break_at($max_screen) {
           top: 450px;
-          right: 15%;
+          right: 620px;
           left: unset;
         }
         @include break_at($medium_screen) {
           top: 230px;
-          right: 150px;
+          right: 15%;
           z-index: 2;
         }
       }
