@@ -11,7 +11,6 @@ module Playbook
       prop :show_code, type: Playbook::Props::Boolean, default: true
       prop :type, type: Playbook::Props::Enum, values: %w[rails react swift], default: "rails"
       prop :dark, type: Playbook::Props::Boolean, default: false
-      include PlaybookWebsite::Markdown::Helper
 
       def example
         if type == "rails"
