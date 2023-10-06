@@ -23,7 +23,7 @@ $medium_screen: 1218px;
         bottom: $space_xs;
         left: ($space_xl * 2) + 20;
         @include break_at($max_screen) {
-          right: 38px;
+          right: -10px;
           left: unset;
         }
       }
@@ -52,9 +52,21 @@ $medium_screen: 1218px;
         right: 30%;
       }
 
+      &_blur_3 {
+        top: 10%;
+        left: 10%;
+      }
+      &_blur_4 {
+        bottom: 0px;
+        right: 0px;
+      }
+
       &_grid {
         bottom: 15%;
         right: 0;
+      }
+      &_grid2 {
+        bottom: 3%;
       }
 
       .component_example {

@@ -9,7 +9,7 @@ import SubscribeToggleCard from "./SubscribeToggle";
 import TicketsChartCard from "./TicketsChart";
 import Blur from "./Blur";
 // @ts-ignore
-import GridLarge from "../../../images/LargeBackgroundGrid.svg";
+import GridMedium from "../../../images/MediumBackgroundGrid.svg";
 
 const MediumScreen = () => {
   return (
@@ -42,15 +42,15 @@ const MediumScreen = () => {
       </Background>
 
       <Background className="homepage_hero_container_cards" position="relative">
-        {/* <Image
-          url={GridLarge}
+        <Image
+          url={GridMedium}
           position="absolute"
-          className="homepage_hero_container_cards_grid"
+          className="homepage_hero_container_cards_grid2"
         />
         <Flex orientation="column">
           <FlexItem
             alignSelf="end"
-            className="homepage_hero_container_cards_blur_1"
+            className="homepage_hero_container_cards_blur_3"
             position="absolute"
           >
             <Blur
@@ -58,24 +58,24 @@ const MediumScreen = () => {
               borderRadius="570.112px"
               filter="blur(100px)"
               flexShrink="0"
-              height="164.619px"
-              width="219.661px"
+              height="138.544px"
+              width="184.867px"
             />
           </FlexItem>
           <FlexItem
-            className="homepage_hero_container_cards_blur_2"
+            className="homepage_hero_container_cards_blur_4"
             position="absolute"
           >
             <Blur
               background="rgba(0, 130, 255, 0.25)"
-              borderRadius="var(--border-radius-none, 402px)"
+              borderRadius="var(--border-radius-none, 479.808px)"
               filter="blur(100px)"
               flexShrink="0"
-              height="301px"
-              width="402px"
+              height="359.581px"
+              width="479.808px"
             />
           </FlexItem>
-        </Flex> */}
+        </Flex>
         <TicketsChartCard />
         <ConnectedDevicesCard />
         <NotificationsSmallCard />
