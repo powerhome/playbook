@@ -42,11 +42,14 @@ const SmallScreen = () => {
 
         <Background
           className="homepage_hero_container_cards"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
           position="relative"
         >
           <Image
             url={GridSmall}
-            position="absolute"
             className="homepage_hero_container_cards_grid3"
           />
           <Flex orientation="column">

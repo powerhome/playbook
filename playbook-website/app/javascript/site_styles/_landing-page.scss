@@ -85,11 +85,6 @@ $medium_screen: 1218px;
       &_grid2 {
         bottom: 3%;
       }
-      &_grid3 {
-        bottom: 0px;
-        right: 17%;
-      }
-
       .component_example {
         position: absolute;
       }
@@ -102,7 +97,7 @@ $medium_screen: 1218px;
         }
         @include break_at($medium_screen) {
           right: 380px;
-          top: 140px;
+          top: 50%;
         }
       }
       .connected_devices {
@@ -113,7 +108,7 @@ $medium_screen: 1218px;
           top: 360px;
         }
         @include break_at($medium_screen) {
-          right: 420px;
+          right: 55%;
           top: 50px;
         }
       }
@@ -139,7 +134,7 @@ $medium_screen: 1218px;
         }
         @include break_at($medium_screen) {
           top: 30px;
-          right: 160px;
+          right: 20%;
         }
       }
       .hover_card {
@@ -178,7 +173,7 @@ $medium_screen: 1218px;
         }
         @include break_at($max_screen) {
           top: 450px;
-          right: 620px;
+          right: 15%;
           left: unset;
         }
         @include break_at($medium_screen) {
