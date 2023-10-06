@@ -7,6 +7,7 @@
   <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
     <%= pb_rails("nav/item", props: { text: "Rails", link: kits_path('', type: 'rails'), active: @type == 'rails' }) %>
     <%= pb_rails("nav/item", props: { text: "React", link: kits_path('', type: 'react'), active: @type == 'react' }) %>
+    <%= pb_rails("nav/item", props: { text: "Swift", link: kits_path('', type: 'swift'), active: @type == 'swift' }) if Rails.env.development? %>
   <% end %>
   <%= pb_rails("section_separator") %>
   <br>

@@ -134,10 +134,27 @@ module ApplicationHelper
     }
   end
 
+  def aggregate_kits
+    all_kits = []
+
+    MENU["kits"].each do |kit|
+      kit_name = kit["name"]
+      components = kit["components"].map { |c| c["name"] }
+
+      all_kits << if components.size == 1
+                    components.first
+                  else
+                    { kit_name => components }
+                  end
+    end
+
+    all_kits
+  end
+
   def search_list
     all_kits = []
     formatted_kits = []
-    MENU["kits"].each do |kit|
+    aggregate_kits.each do |kit|
       if kit.is_a? Hash
         kit.values[0].each do |sub_kit|
           all_kits.push(sub_kit)
