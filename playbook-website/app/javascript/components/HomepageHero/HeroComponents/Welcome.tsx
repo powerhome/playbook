@@ -4,12 +4,33 @@ import { Logos } from "../ComponentData/LogosData";
 // @ts-ignore
 import Underline from "../../../images/PurpleUnderline.svg";
 
-const WelcomeComponent = () => {
+type WelcomeProps = {
+  fixedSize?: string;
+  headerAlign?: string;
+  ButtonsAlignment?: string;
+  displayProps?: any;
+};
+
+const WelcomeComponent = ({
+  fixedSize,
+  headerAlign,
+  ButtonsAlignment,
+  displayProps,
+}: WelcomeProps) => {
   return (
     <>
       <Flex className="welcome_component">
-        <FlexItem fixedSize="546px">
-          <Title text="WELCOME TO PLAYBOOK" size={4} color="link" paddingBottom="xs" />
+        <FlexItem
+          fixedSize={fixedSize}
+          textAlign={headerAlign}
+          {...displayProps}
+        >
+          <Title
+            text="WELCOME TO PLAYBOOK"
+            size={4}
+            color="link"
+            paddingBottom="xs"
+          />
           <Title size={1} paddingBottom="sm" position="relative">
             {" "}
             The Design System to help you{" "}
@@ -23,10 +44,11 @@ const WelcomeComponent = () => {
             </span>
           </Title>
           <Body
+            className="welcome_component_text"
             color="light"
             text="Playbook makes it easy to support bleeding edge, or legacy systems. Use Playbook’s 200+ components and end-to-end design language to create simple, intuitive and beautiful experiences with ease."
           />
-          <Flex paddingY="lg">
+          <Flex paddingY="lg" justifyContent={ButtonsAlignment}>
             {Logos.map(({ text, logo }) => (
               <>
                 <Flex align="center" paddingRight="sm">
@@ -36,7 +58,7 @@ const WelcomeComponent = () => {
               </>
             ))}
           </Flex>
-          <Flex>
+          <Flex justifyContent={ButtonsAlignment}>
             <Button
               fixedWidth
               icon="arrow-right"

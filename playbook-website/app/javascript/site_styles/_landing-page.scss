@@ -6,9 +6,15 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "./landing-page-solutions";
 
+$max_screen: 1376px;
+$medium_screen: 1218px;
+
 .landing-page {
   .homepage_hero_wrapper {
     height: $screen-lg-min - 52;
+    @include break_at($max_screen) {
+      height: 1030px;
+    }
   }
 
   .homepage_hero_container {
@@ -16,6 +22,19 @@
       &_underline {
         bottom: $space_xs;
         left: ($space_xl * 2) + 20;
+        @include break_at($max_screen) {
+          right: 38px;
+          left: unset;
+        }
+      }
+      @include break_at($max_screen) {
+        align-items: center;
+        justify-content: center;
+      }
+      &_text {
+        @include break_at($max_screen) {
+          width: 80%;
+        }
       }
     }
 
@@ -44,10 +63,18 @@
       .tickets_chart {
         top: ($space_xl * 3) + 17;
         right: $space_xl - 5;
+        @include break_at($max_screen) {
+          top: 60px;
+          right: 460px;
+        }
       }
       .connected_devices {
         right: 0px;
         top: $screen-xs-min - 165;
+        @include break_at($max_screen) {
+          right: 130px;
+          top: 360px;
+        }
       }
       .lettuce_checkbox {
         top: $screen-xs-min - 20;
@@ -56,10 +83,19 @@
       .select_plan {
         top: $screen-xs-min - 20;
         right: $screen-sm-min + 34;
+        @include break_at($max_screen) {
+          top: 285px;
+          right: 450px;
+        }
       }
       .order_details {
         top: $screen-sm-min + 84;
         right: ($space_xl * 6) + 8;
+        @include break_at($max_screen) {
+          top: 455px;
+          right: 170px;
+          z-index: 2;
+        }
       }
       .hover_card {
         top: $screen-md-min - 8;
@@ -76,9 +112,16 @@
       }
 
       .notifications_large,
-      .NotificationsSmall {
+      .notifications_small {
         .button-padding {
           padding: ($space_xxs + 2) $space_sm !important;
+        }
+      }
+
+      .notifications_small {
+        @include break_at($max_screen) {
+          top: 115px;
+          right: 120px;
         }
       }
 
@@ -87,6 +130,11 @@
         left: 0px;
         .card-min-width {
           min-width: ($space_xl * 8) - 2;
+        }
+        @include break_at($max_screen) {
+          top: 450px;
+          right: 620px;
+          left: unset;
         }
       }
 

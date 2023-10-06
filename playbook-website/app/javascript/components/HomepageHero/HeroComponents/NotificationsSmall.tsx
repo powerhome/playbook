@@ -35,7 +35,7 @@ const NotificationsSmallCard = () => {
   };
 
   return (
-    <div className="NotificationsSmall">
+    <div className="notifications_small component_example">
       <Flex>
         <Card borderNone borderRadius="xl" shadow="deep" padding="none">
           <Card.Body padding="none">
