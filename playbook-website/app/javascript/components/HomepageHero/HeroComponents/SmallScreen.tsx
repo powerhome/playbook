@@ -5,9 +5,9 @@ import ConnectedDevicesCard from "./ConnectedDevices";
 import OrderDetailsCard from "./OrderDetails";
 import SubscribeToggleCard from "./SubscribeToggle";
 import TicketsChartCard from "./TicketsChart";
-// import Blur from "./Blur";
-// // @ts-ignore
-// import GridMedium from "../../../images/MediumBackgroundGrid.svg";
+import Blur from "./Blur";
+// @ts-ignore
+import GridSmall from "../../../images/SmallBackgroundGrid.svg";
 
 const SmallScreen = () => {
   return (
@@ -44,44 +44,44 @@ const SmallScreen = () => {
           className="homepage_hero_container_cards"
           position="relative"
         >
-          {/* <Image
-          url={GridMedium}
-          position="absolute"
-          className="homepage_hero_container_cards_grid2"
-        />
-        <Flex orientation="column">
-          <FlexItem
-            alignSelf="end"
-            className="homepage_hero_container_cards_blur_3"
+          <Image
+            url={GridSmall}
             position="absolute"
-          >
-            <Blur
-              background="var(--data-3, #9E64E9)"
-              borderRadius="570.112px"
-              filter="blur(100px)"
-              flexShrink="0"
-              height="138.544px"
-              width="184.867px"
-            />
-          </FlexItem>
-          <FlexItem
-            className="homepage_hero_container_cards_blur_4"
-            position="absolute"
-          >
-            <Blur
-              background="rgba(0, 130, 255, 0.25)"
-              borderRadius="var(--border-radius-none, 479.808px)"
-              filter="blur(100px)"
-              flexShrink="0"
-              height="359.581px"
-              width="479.808px"
-            />
-          </FlexItem>
-        </Flex> */}
+            className="homepage_hero_container_cards_grid3"
+          />
+          <Flex orientation="column">
+            <FlexItem
+              alignSelf="end"
+              className="homepage_hero_container_cards_blur_5"
+              position="absolute"
+            >
+              <Blur
+                background="var(--data-3, #9E64E9)"
+                borderRadius="570.112px"
+                filter="blur(75px)"
+                flexShrink="0"
+                height="129px"
+                width="128px"
+              />
+            </FlexItem>
+            <FlexItem
+              className="homepage_hero_container_cards_blur_6"
+              position="absolute"
+            >
+              <Blur
+                background="rgba(0, 130, 255, 0.25)"
+                borderRadius="var(--border-radius-none, 479.808px)"
+                filter="blur(75px)"
+                flexShrink="0"
+                height="160px"
+                width="252px"
+              />
+            </FlexItem>
+          </Flex>
           <ConnectedDevicesCard />
           <OrderDetailsCard />
           <SubscribeToggleCard />
-          <TicketsChartCard/>
+          <TicketsChartCard />
         </Background>
       </Flex>
     </>

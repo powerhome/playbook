@@ -69,6 +69,14 @@ $medium_screen: 1218px;
         bottom: 0px;
         right: 0px;
       }
+      &_blur_5 {
+        top: 12%;
+        left: 17%;
+      }
+      &_blur_6 {
+        bottom: 4%;
+        right: 10%;
+      }
 
       &_grid {
         bottom: 15%;
@@ -76,6 +84,10 @@ $medium_screen: 1218px;
       }
       &_grid2 {
         bottom: 3%;
+      }
+      &_grid3 {
+        bottom: 0px;
+        right: 17%;
       }
 
       .component_example {

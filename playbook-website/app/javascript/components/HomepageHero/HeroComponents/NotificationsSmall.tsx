@@ -36,8 +36,8 @@ const NotificationsSmallCard = () => {
 
   return (
     <div className="notifications_small component_example">
-      <Flex>
-        <Card borderNone borderRadius="xl" shadow="deep" padding="none">
+      <Flex cursor="pointer" hover={{ scale: "sm" }}>
+        <Card borderNone borderRadius="xl" shadow="deepest" padding="none">
           <Card.Body padding="none">
             <Background
               className="background-min-height"
