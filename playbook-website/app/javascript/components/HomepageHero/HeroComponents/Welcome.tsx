@@ -9,6 +9,7 @@ type WelcomeProps = {
   headerAlign?: string;
   ButtonsAlignment?: string;
   displayProps?: any;
+  TitleSize?: number | string;
 };
 
 const WelcomeComponent = ({
@@ -16,6 +17,7 @@ const WelcomeComponent = ({
   headerAlign,
   ButtonsAlignment,
   displayProps,
+  TitleSize,
 }: WelcomeProps) => {
   return (
     <>
@@ -31,7 +33,11 @@ const WelcomeComponent = ({
             color="link"
             paddingBottom="xs"
           />
-          <Title size={1} paddingBottom="sm" position="relative">
+          <Title
+            size={TitleSize ? TitleSize : 1}
+            paddingBottom="sm"
+            position="relative"
+          >
             {" "}
             The Design System to help you{" "}
             <span>

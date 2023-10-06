@@ -8,6 +8,7 @@
 
 $max_screen: 1376px;
 $medium_screen: 1218px;
+$mobile_screen: 575px;
 
 .landing-page {
   .homepage_hero_wrapper {
@@ -17,6 +18,9 @@ $medium_screen: 1218px;
     }
     @include break_at($medium_screen) {
       height: 800px;
+    }
+    @include break_at($mobile_screen) {
+      height: 100%;
     }
   }
 
@@ -31,6 +35,10 @@ $medium_screen: 1218px;
         }
         @include break_at($medium_screen) {
           right: 133px;
+        }
+        @include break_at($mobile_screen) {
+          width: 145px;
+          right: 80px;
         }
       }
       @include break_at($max_screen) {
