@@ -36,7 +36,7 @@ const NotificationsLargeCard = () => {
   };
 
   return (
-    <div className="notifications_large component_example">
+    <Flex className="notifications_large component_example">
       <Card
         borderNone
         borderRadius="xl"
@@ -139,7 +139,7 @@ const NotificationsLargeCard = () => {
           </Flex>
         </Card.Body>
       </Card>
-    </div>
+    </Flex>
   );
 };
 

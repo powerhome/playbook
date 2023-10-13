@@ -35,45 +35,47 @@ const SelectPlanCard = () => {
   };
 
   return (
-    <div className="select_plan component_example">
-      <Flex cursor="pointer" hover={{ scale: "sm" }}>
-        <Card borderNone borderRadius="xl" shadow="deepest">
-          <Flex orientation="column" gap="sm" align="stretch">
-            {plans.map((plan) => {
-              return (
-                <SelectableCard
-                  checked={selected === plan.planName}
-                  icon
-                  inputId={plan.planName}
-                  multi={false}
-                  name="Plan"
-                  onChange={handleSelect}
-                  value={plan.planName}
-                  shadow={selected === plan.planName ? "deep" : "none"}
-                  margin="none"
-                >
-                  <Flex justify="between">
-                    <Flex orientation="column">
-                      <Flex gap="xs" paddingRight="xl">
-                        <Title size={4} text={plan.planName} />
-                        <Title size={4} color="light" text={plan.current} />
-                      </Flex>
-                      <Caption size="xs" text={plan.subCopy} />
+    <Flex
+      className="select_plan component_example"
+      cursor="pointer"
+      hover={{ scale: "sm" }}
+    >
+      <Card borderNone borderRadius="xl" shadow="deepest">
+        <Flex orientation="column" gap="sm" align="stretch">
+          {plans.map((plan) => {
+            return (
+              <SelectableCard
+                checked={selected === plan.planName}
+                icon
+                inputId={plan.planName}
+                multi={false}
+                name="Plan"
+                onChange={handleSelect}
+                value={plan.planName}
+                shadow={selected === plan.planName ? "deep" : "none"}
+                margin="none"
+              >
+                <Flex justify="between">
+                  <Flex orientation="column">
+                    <Flex gap="xs" paddingRight="xl">
+                      <Title size={4} text={plan.planName} />
+                      <Title size={4} color="light" text={plan.current} />
                     </Flex>
-                    <Currency
-                      amount={plan.price}
-                      unit="/month"
-                      size="md"
-                      symbol="$"
-                    />
+                    <Caption size="xs" text={plan.subCopy} />
                   </Flex>
-                </SelectableCard>
-              );
-            })}
-          </Flex>
-        </Card>
-      </Flex>
-    </div>
+                  <Currency
+                    amount={plan.price}
+                    unit="/month"
+                    size="md"
+                    symbol="$"
+                  />
+                </Flex>
+              </SelectableCard>
+            );
+          })}
+        </Flex>
+      </Card>
+    </Flex>
   );
 };
 
