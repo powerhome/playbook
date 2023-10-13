@@ -23,13 +23,13 @@ const MobileScreen = () => {
           <WelcomeComponent
             fixedSize="374px"
             headerAlign="center"
-            ButtonsAlignment="center"
+            buttonsAlignment="center"
             displayProps={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
-            TitleSize={3}
+            titleSize={3}
           />
         </Background>
       </Flex>

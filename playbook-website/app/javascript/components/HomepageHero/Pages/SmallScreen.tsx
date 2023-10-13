@@ -31,7 +31,7 @@ const SmallScreen = () => {
           <WelcomeComponent
             fixedSize="599px"
             headerAlign="center"
-            ButtonsAlignment="center"
+            buttonsAlignment="center"
             displayProps={{
               display: "flex",
               flexDirection: "column",

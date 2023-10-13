@@ -7,17 +7,17 @@ import Underline from "../../../images/PurpleUnderline.svg";
 type WelcomeProps = {
   fixedSize?: string;
   headerAlign?: string;
-  ButtonsAlignment?: string;
+  buttonsAlignment?: string;
   displayProps?: any;
-  TitleSize?: number | string;
+  titleSize?: number | string;
 };
 
 const WelcomeComponent = ({
   fixedSize,
   headerAlign,
-  ButtonsAlignment,
+  buttonsAlignment,
   displayProps,
-  TitleSize,
+  titleSize,
 }: WelcomeProps) => {
   return (
     <>
@@ -34,7 +34,7 @@ const WelcomeComponent = ({
             paddingBottom="xs"
           />
           <Title
-            size={TitleSize ? TitleSize : 1}
+            size={titleSize ? titleSize : 1}
             paddingBottom="sm"
             position="relative"
           >
@@ -54,7 +54,7 @@ const WelcomeComponent = ({
             color="light"
             text="Playbook makes it easy to support bleeding edge, or legacy systems. Use Playbook’s 200+ components and end-to-end design language to create simple, intuitive and beautiful experiences with ease."
           />
-          <Flex paddingY="lg" justifyContent={ButtonsAlignment}>
+          <Flex paddingY="lg" justifyContent={buttonsAlignment}>
             {Logos.map(({ text, logo }) => (
               <>
                 <Flex align="center" paddingRight="sm">
@@ -64,7 +64,7 @@ const WelcomeComponent = ({
               </>
             ))}
           </Flex>
-          <Flex justifyContent={ButtonsAlignment}>
+          <Flex justifyContent={buttonsAlignment}>
             <Button
               fixedWidth
               icon="arrow-right"

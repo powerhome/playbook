@@ -32,7 +32,7 @@ const MediumScreen = () => {
         <WelcomeComponent
           fixedSize="963px"
           headerAlign="center"
-          ButtonsAlignment="center"
+          buttonsAlignment="center"
           displayProps={{
             display: "flex",
             flexDirection: "column",
