@@ -5,6 +5,7 @@
 @import "playbook-ui/dist/tokens/shadows";
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "./landing-page-solutions";
+@import "./homepage_mixins";
 
 $max_screen: $screen-xl-min + 176px;
 $medium_screen: $screen-xl-min + 18px;
@@ -62,29 +63,22 @@ $mobile_screen: $screen-xs-min;
       width: 100%;
 
       &_blur_1 {
-        top: 18%;
-        right: 5%;
+        @include blur-position(18%, null, null, 5%);
       }
       &_blur_2 {
-        top: 50%;
-        right: 30%;
+        @include blur-position(50%, null, null, 30%);
       }
-
       &_blur_3 {
-        top: 10%;
-        left: 10%;
+        @include blur-position(10%, null, 10%, null);
       }
       &_blur_4 {
-        bottom: 0px;
-        right: 0px;
+        @include blur-position(null, 0px, null, 0px);
       }
       &_blur_5 {
-        top: 12%;
-        left: 17%;
+        @include blur-position(12%, null, 17%, null);
       }
       &_blur_6 {
-        bottom: 4%;
-        right: 10%;
+        @include blur-position(null, 4%, null, 10%);
       }
 
       &_grid {
