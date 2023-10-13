@@ -1,5 +1,5 @@
 import React from "react";
-import { Background, Flex, FlexItem, Image } from "playbook-ui";
+import { Background, Image } from "playbook-ui";
 import WelcomeComponent from "./Welcome";
 import ConnectedDevicesCard from "../HeroComponents/ConnectedDevices";
 import HoverCard from "../HeroComponents/Hover";
@@ -9,9 +9,9 @@ import OrderDetailsCard from "../HeroComponents/OrderDetails";
 import SelectPlanCard from "../HeroComponents/SelectPlan";
 import SubscribeToggleCard from "../HeroComponents/SubscribeToggle";
 import TicketsChartCard from "../HeroComponents/TicketsChart";
-import Blur from "../HeroComponents/Blur";
 // @ts-ignore
 import GridLarge from "../../../images/LargeBackgroundGrid.svg";
+import BlurBackground from "./BlurBackground";
 
 const MaxScreen = () => {
   return (
@@ -32,35 +32,15 @@ const MaxScreen = () => {
           position="absolute"
           className="homepage_hero_container_cards_grid"
         />
-        <Flex orientation="column">
-          <FlexItem
-            alignSelf="end"
-            className="homepage_hero_container_cards_blur_1"
-            position="absolute"
-          >
-            <Blur
-              background="var(--data-3, #9E64E9)"
-              borderRadius="570.112px"
-              filter="blur(100px)"
-              flexShrink="0"
-              height="164.619px"
-              width="219.661px"
-            />
-          </FlexItem>
-          <FlexItem
-            className="homepage_hero_container_cards_blur_2"
-            position="absolute"
-          >
-            <Blur
-              background="rgba(0, 130, 255, 0.25)"
-              borderRadius="var(--border-radius-none, 402px)"
-              filter="blur(100px)"
-              flexShrink="0"
-              height="301px"
-              width="402px"
-            />
-          </FlexItem>
-        </Flex>
+
+        <BlurBackground
+          firstBlurClass="blur_1"
+          firstBlurHeight="164.619px"
+          firstBlurWidth="219.661px"
+          secondBlurClass="blur_2"
+          secondBlurHeight="301px"
+          secondBlurWidth="402px"
+        />
         <TicketsChartCard />
         <NotificationsLargeCard />
         <ConnectedDevicesCard />

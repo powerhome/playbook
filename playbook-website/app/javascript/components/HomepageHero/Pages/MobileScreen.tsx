@@ -1,5 +1,5 @@
 import React from "react";
-import { Background, Flex } from "playbook-ui";
+import { Background } from "playbook-ui";
 import WelcomeComponent from "./Welcome";
 
 const MobileScreen = () => {

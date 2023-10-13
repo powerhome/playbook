@@ -1,11 +1,12 @@
 import React from "react";
-import { Background, Flex, FlexItem, Image } from "playbook-ui";
+import { Background, Image } from "playbook-ui";
 import WelcomeComponent from "./Welcome";
 import ConnectedDevicesCard from "../HeroComponents/ConnectedDevices";
 import OrderDetailsCard from "../HeroComponents/OrderDetails";
 import SubscribeToggleCard from "../HeroComponents/SubscribeToggle";
 import TicketsChartCard from "../HeroComponents/TicketsChart";
-import Blur from "../HeroComponents/Blur";
+import BlurBackground from "./BlurBackground";
+
 // @ts-ignore
 import GridSmall from "../../../images/SmallBackgroundGrid.svg";
 
@@ -45,35 +46,15 @@ const SmallScreen = () => {
           url={GridSmall}
           className="homepage_hero_container_cards_grid3"
         />
-        <Flex orientation="column">
-          <FlexItem
-            alignSelf="end"
-            className="homepage_hero_container_cards_blur_5"
-            position="absolute"
-          >
-            <Blur
-              background="var(--data-3, #9E64E9)"
-              borderRadius="570.112px"
-              filter="blur(75px)"
-              flexShrink="0"
-              height="129px"
-              width="128px"
-            />
-          </FlexItem>
-          <FlexItem
-            className="homepage_hero_container_cards_blur_6"
-            position="absolute"
-          >
-            <Blur
-              background="rgba(0, 130, 255, 0.25)"
-              borderRadius="var(--border-radius-none, 479.808px)"
-              filter="blur(75px)"
-              flexShrink="0"
-              height="160px"
-              width="252px"
-            />
-          </FlexItem>
-        </Flex>
+        <BlurBackground
+          firstBlurClass="blur_5"
+          firstBlurHeight="129px"
+          firstBlurWidth="128px"
+          secondBlurClass="blur_6"
+          secondBlurHeight="160px"
+          secondBlurWidth="252px"
+        />
+
         <ConnectedDevicesCard />
         <OrderDetailsCard />
         <SubscribeToggleCard />
