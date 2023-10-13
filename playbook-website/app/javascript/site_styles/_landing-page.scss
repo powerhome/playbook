@@ -8,6 +8,7 @@
 
 $max_screen: 1376px;
 $medium_screen: 1218px;
+$small_screen: 762px;
 $mobile_screen: 575px;
 
 .landing-page {
@@ -107,6 +108,10 @@ $mobile_screen: 575px;
           right: 380px;
           top: 50%;
         }
+        @include break_at($small_screen) {
+          left: 10%;
+          right: unset;
+        }
       }
       .connected_devices {
         right: 0px;
@@ -118,6 +123,10 @@ $mobile_screen: 575px;
         @include break_at($medium_screen) {
           right: 55%;
           top: 50px;
+        }
+        @include break_at($small_screen) {
+          right: unset;
+          left: 10%;
         }
       }
       .lettuce_checkbox {
@@ -143,6 +152,9 @@ $mobile_screen: 575px;
         @include break_at($medium_screen) {
           top: 30px;
           right: 20%;
+        }
+        @include break_at($small_screen) {
+          right: 10%;
         }
       }
       .hover_card {

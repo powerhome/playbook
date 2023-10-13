@@ -32,7 +32,15 @@ const HomepageHero = () => {
       display="flex"
       justifyContent="center"
     >
-      {isMax ? <MaxScreen /> : isMedium ? <MediumScreen /> : isMobile ? <SmallScreen /> : <MobileScreen/>}
+      {isMax ? (
+        <MaxScreen />
+      ) : isMedium ? (
+        <MediumScreen />
+      ) : isMobile ? (
+        <SmallScreen />
+      ) : (
+        <MobileScreen />
+      )}
     </Background>
   );
 };
