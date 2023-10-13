@@ -24,13 +24,32 @@
     }
   }
 
+  @include break_on($screen-xl-min, 1600px) {
+    .solutionsFlexContainer {
+      flex-direction: column !important;
+      row-gap: $space_xl;
+    }
+
+    .language-card {
+      max-width: 300px;
+
+      [class*="pb_card_kit"] {
+        height: 175px;
+      }
+
+      &-text {
+        display: none !important;
+      }
+    }
+  }
+
   // Image comparsion slider
   .solutionsContainer {
     position: relative;
     height: 350px;
     overflow: hidden;
 
-    @include break_on($screen-xl-min, 1340px) {
+    @include break_on($screen-xl-min, 1600px) {
       margin-right: 0 !important;
     }
 
