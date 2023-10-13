@@ -4904,17 +4904,17 @@ css-loader@3.6.0, css-loader@^3.5.3:
     schema-utils "^2.7.0"
     semver "^6.3.0"
 
-css-modules-flow-types-loader@0.3.1:
-  version "0.3.1"
-  resolved "https://npm.powerapp.cloud/css-modules-flow-types-loader/-/css-modules-flow-types-loader-0.3.1.tgz#08a95246725b99ae10c82cb5c673bcc121ff8283"
-  integrity sha512-FV/0r4RiTbNOpKk+cURu9WxXoRbg0fWQRsh5M0fQqfOyaXdQfIG3e+dKFOm+Sxe2PrUjKDeuk280ZTsHSwPf3A==
+css-modules-flow-types-loader@2.0.0:
+  version "2.0.0"
+  resolved "https://npm.powerapp.cloud/css-modules-flow-types-loader/-/css-modules-flow-types-loader-2.0.0.tgz#eb65fa1164c568e65155ae7ca3d2bdbba13bd06e"
+  integrity sha512-+yMRll91z2p4St1VPTNqj2v6kDJkPS8zBHTYnH/vF5rXdJawrPVkQVlZ1axA+3+m9lFGPhROKZn2nq+VuNvcPg==
   dependencies:
-    css-modules-flow-types-printer "^0.3.1"
+    css-modules-flow-types-printer "^2.0.0"
 
-css-modules-flow-types-printer@^0.3.1:
-  version "0.3.1"
-  resolved "https://npm.powerapp.cloud/css-modules-flow-types-printer/-/css-modules-flow-types-printer-0.3.1.tgz#870b237009172bb4a9c83756015f59818a99a0a0"
-  integrity sha512-n4ZtFrI7WDWc9CtoABUKO31AoRSgjDhwCvyCr2Xjbf/FE83a4HxbbiKuuBCgZV4yzhb0F+eeKsA2HhttgBxkVA==
+css-modules-flow-types-printer@^2.0.0:
+  version "2.0.0"
+  resolved "https://npm.powerapp.cloud/css-modules-flow-types-printer/-/css-modules-flow-types-printer-2.0.0.tgz#82a7797239f330e2ecf920c779f3e8cea60ec97f"
+  integrity sha512-ZIsHyilSscfckNvX5LqTcAq+1vCB8cBvhPoCtNZ1PVcIPkkhjMv+NXCX2MdOt4aCCvKJnWusfW98xeZE1m/llA==
 
 css-prefers-color-scheme@^3.1.1:
   version "3.1.1"
