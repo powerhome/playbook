@@ -13,13 +13,7 @@ import GridMedium from "../../../images/MediumBackgroundGrid.svg";
 
 const MediumScreen = () => {
   return (
-    <Flex
-      className="homepage_hero_container"
-      marginX="md"
-      maxWidth="xl"
-      orientation="column"
-      paddingTop="xl"
-    >
+    <>
       <Background
         alignItems="center"
         backgroundColor="white"
@@ -86,7 +80,7 @@ const MediumScreen = () => {
         <SelectPlanCard />
         <SubscribeToggleCard />
       </Background>
-    </Flex>
+    </>
   );
 };
 

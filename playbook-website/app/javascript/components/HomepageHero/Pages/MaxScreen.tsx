@@ -15,14 +15,7 @@ import GridLarge from "../../../images/LargeBackgroundGrid.svg";
 
 const MaxScreen = () => {
   return (
-    <Flex
-      className="homepage_hero_container"
-      marginX="md"
-      maxWidth="xl"
-      orientation="column"
-      paddingTop="xl"
-      position="relative"
-    >
+    <>
       <Background
         alignItems="center"
         backgroundColor="white"
@@ -30,7 +23,7 @@ const MaxScreen = () => {
         flexDirection="column"
         paddingTop="xl"
       >
-        <WelcomeComponent fixedSize="546px"/>
+        <WelcomeComponent fixedSize="546px" />
       </Background>
 
       <Background className="homepage_hero_container_cards" position="absolute">
@@ -77,7 +70,7 @@ const MaxScreen = () => {
         <SelectPlanCard />
         <SubscribeToggleCard />
       </Background>
-    </Flex>
+    </>
   );
 };
 

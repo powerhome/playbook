@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Background } from "playbook-ui";
+import { Background, Flex } from "playbook-ui";
 import MaxScreen from "./Pages/MaxScreen";
 import MediumScreen from "./Pages/MediumScreen";
 import SmallScreen from "./Pages/SmallScreen";
@@ -32,15 +32,24 @@ const HomepageHero = () => {
       display="flex"
       justifyContent="center"
     >
-      {isMax ? (
-        <MaxScreen />
-      ) : isMedium ? (
-        <MediumScreen />
-      ) : isMobile ? (
-        <SmallScreen />
-      ) : (
-        <MobileScreen />
-      )}
+      <Flex
+        className="homepage_hero_container"
+        marginX="md"
+        maxWidth="xl"
+        orientation="column"
+        paddingTop="xl"
+        position="relative"
+      >
+        {isMax ? (
+          <MaxScreen />
+        ) : isMedium ? (
+          <MediumScreen />
+        ) : isMobile ? (
+          <SmallScreen />
+        ) : (
+          <MobileScreen />
+        )}
+      </Flex>
     </Background>
   );
 };

@@ -19,7 +19,7 @@ $mobile_screen: $screen-xs-min;
       height: $screen-xl-min - 170px;
     }
     @include break_at($medium_screen) {
-      height: $screen-md-min + 32px;
+      height: $screen-md-min + 82px;
     }
     @include break_at($mobile_screen) {
       height: 100%;
