@@ -16,17 +16,6 @@ app.build(
     bakeFiles: ['docker-bake.hcl']
   ) { compose ->
     stage('Image Build') {
-      withCredentials([
-        usernamePassword(
-          credentialsId: 'playbook-ci-build-aws-creds',
-          usernameVariable: 'AWS_ACCESS_KEY_ID',
-          passwordVariable: 'AWS_SECRET_ACCESS_KEY'
-        )
-      ]) {
-        shell "mkdir -p ~/.kube"
-        shell "playbook-website/bin/deployer sops --decrypt --output yarn.secrets.dec.env yarn.secrets.env"
-      }
-
       compose.bake()
     }
 
