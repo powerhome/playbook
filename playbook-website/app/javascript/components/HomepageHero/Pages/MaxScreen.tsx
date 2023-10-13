@@ -1,17 +1,19 @@
 import React from "react";
 import { Background, Flex, FlexItem, Image } from "playbook-ui";
 import WelcomeComponent from "./Welcome";
-import ConnectedDevicesCard from "./ConnectedDevices";
-import NotificationsSmallCard from "./NotificationsSmall";
-import OrderDetailsCard from "./OrderDetails";
-import SelectPlanCard from "./SelectPlan";
-import SubscribeToggleCard from "./SubscribeToggle";
-import TicketsChartCard from "./TicketsChart";
-import Blur from "./Blur";
+import ConnectedDevicesCard from "../HeroComponents/ConnectedDevices";
+import HoverCard from "../HeroComponents/Hover";
+import LettuceCheckboxCard from "../HeroComponents/LettuceCheckbox";
+import NotificationsLargeCard from "../HeroComponents/NotificationsLarge";
+import OrderDetailsCard from "../HeroComponents/OrderDetails";
+import SelectPlanCard from "../HeroComponents/SelectPlan";
+import SubscribeToggleCard from "../HeroComponents/SubscribeToggle";
+import TicketsChartCard from "../HeroComponents/TicketsChart";
+import Blur from "../HeroComponents/Blur";
 // @ts-ignore
-import GridMedium from "../../../images/MediumBackgroundGrid.svg";
+import GridLarge from "../../../images/LargeBackgroundGrid.svg";
 
-const MediumScreen = () => {
+const MaxScreen = () => {
   return (
     <Flex
       className="homepage_hero_container"
@@ -19,38 +21,28 @@ const MediumScreen = () => {
       maxWidth="xl"
       orientation="column"
       paddingTop="xl"
+      position="relative"
     >
       <Background
         alignItems="center"
         backgroundColor="white"
         display="flex"
         flexDirection="column"
-        justifyContent="center"
         paddingTop="xl"
-        paddingBottom="sm"
       >
-        <WelcomeComponent
-          fixedSize="963px"
-          headerAlign="center"
-          ButtonsAlignment="center"
-          displayProps={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        />
+        <WelcomeComponent fixedSize="546px"/>
       </Background>
 
-      <Background className="homepage_hero_container_cards" position="relative">
+      <Background className="homepage_hero_container_cards" position="absolute">
         <Image
-          url={GridMedium}
+          url={GridLarge}
           position="absolute"
-          className="homepage_hero_container_cards_grid2"
+          className="homepage_hero_container_cards_grid"
         />
         <Flex orientation="column">
           <FlexItem
             alignSelf="end"
-            className="homepage_hero_container_cards_blur_3"
+            className="homepage_hero_container_cards_blur_1"
             position="absolute"
           >
             <Blur
@@ -58,27 +50,29 @@ const MediumScreen = () => {
               borderRadius="570.112px"
               filter="blur(100px)"
               flexShrink="0"
-              height="138.544px"
-              width="184.867px"
+              height="164.619px"
+              width="219.661px"
             />
           </FlexItem>
           <FlexItem
-            className="homepage_hero_container_cards_blur_4"
+            className="homepage_hero_container_cards_blur_2"
             position="absolute"
           >
             <Blur
               background="rgba(0, 130, 255, 0.25)"
-              borderRadius="var(--border-radius-none, 479.808px)"
+              borderRadius="var(--border-radius-none, 402px)"
               filter="blur(100px)"
               flexShrink="0"
-              height="359.581px"
-              width="479.808px"
+              height="301px"
+              width="402px"
             />
           </FlexItem>
         </Flex>
         <TicketsChartCard />
+        <NotificationsLargeCard />
         <ConnectedDevicesCard />
-        <NotificationsSmallCard />
+        <HoverCard />
+        <LettuceCheckboxCard />
         <OrderDetailsCard />
         <SelectPlanCard />
         <SubscribeToggleCard />
@@ -87,4 +81,4 @@ const MediumScreen = () => {
   );
 };
 
-export default MediumScreen;
+export default MaxScreen;

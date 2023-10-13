@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Background } from "playbook-ui";
-import MaxScreen from "./HeroComponents/MaxScreen";
-import MediumScreen from "./HeroComponents/MediumScreen";
-import SmallScreen from "./HeroComponents/SmallScreen";
-import MobileScreen from "./HeroComponents/MobileScreen";
+import MaxScreen from "./Pages/MaxScreen";
+import MediumScreen from "./Pages/MediumScreen";
+import SmallScreen from "./Pages/SmallScreen";
+import MobileScreen from "./Pages/MobileScreen";
 
 const HomepageHero = () => {
   const [isMax, setIsMax] = useState(window.innerWidth > 1376);

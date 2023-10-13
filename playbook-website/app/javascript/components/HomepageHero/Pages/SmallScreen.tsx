@@ -1,11 +1,11 @@
 import React from "react";
 import { Background, Flex, FlexItem, Image } from "playbook-ui";
 import WelcomeComponent from "./Welcome";
-import ConnectedDevicesCard from "./ConnectedDevices";
-import OrderDetailsCard from "./OrderDetails";
-import SubscribeToggleCard from "./SubscribeToggle";
-import TicketsChartCard from "./TicketsChart";
-import Blur from "./Blur";
+import ConnectedDevicesCard from "../HeroComponents/ConnectedDevices";
+import OrderDetailsCard from "../HeroComponents/OrderDetails";
+import SubscribeToggleCard from "../HeroComponents/SubscribeToggle";
+import TicketsChartCard from "../HeroComponents/TicketsChart";
+import Blur from "../HeroComponents/Blur";
 // @ts-ignore
 import GridSmall from "../../../images/SmallBackgroundGrid.svg";
 
