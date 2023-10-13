@@ -13,15 +13,19 @@ jobs:
     env:
       # Set an environment variable for the branch name
       BRANCH_NAME: ${{ github.head_ref }}
-      FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
       GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
       NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
     steps:
       - uses: actions/checkout@v3
+      - name: 'Enable registry auth'
+        shell: bash
+        run: |
+          echo "//registry.npmjs.org/:_authToken="$(echo -n '${{ secrets.NPM_TOKEN }}')"" >> ~/.npmrc
+          echo "//npm.powerapp.cloud/:_auth="$(echo -n 'gh-actions:${{ secrets.POWERHOME_NPM_REGISTRY_PASSWORD }}' | base64)"" >> ~/.npmrc
+          echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-          registry-url: 'https://registry.npmjs.org'
       - name: Ruby Setup
         uses: ruby/setup-ruby@v1
         with:
@@ -64,7 +68,7 @@ jobs:
           gem build playbook_ui.gemspec
           gem build lib/playbook_ui_docs.gemspec
           rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
-          npm publish playbook-ui-${{ env.new_npm_alpha_version }}.tgz --tag alpha
+          npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_alpha_version }}.tgz --tag alpha
           echo "${{ env.new_ruby_alpha_version }}"
           gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
           gem push playbook_ui_docs-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
