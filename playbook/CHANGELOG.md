@@ -1,3 +1,18 @@
+# 13.9.0
+##### October 5, 2023
+
+List of changes:
+
+**Bugs:**
+
+- Reaction Button Emoji Fixes [\#2772](https://github.com/powerhome/playbook/pull/2772) ([nidaqg](https://github.com/nidaqg))
+- Font Size for Message Mentions to be 15px [\#2773](https://github.com/powerhome/playbook/pull/2773) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Misc Sidebar Fixes [\#2771](https://github.com/powerhome/playbook/pull/2771) ([nidaqg](https://github.com/nidaqg))
+
+
 # The Unstyled Currency Kit Variant: Your Key to Dynamic Styling
 ##### September 23, 2023
 
