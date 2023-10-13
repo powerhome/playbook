@@ -20,6 +20,7 @@ jobs:
       - name: 'Enable registry auth'
         shell: bash
         run: |
+          echo "//registry.npmjs.org/:_authToken="$(echo -n '${{ secrets.NPM_TOKEN }}')"" >> ~/.npmrc
           echo "//npm.powerapp.cloud/:_auth="$(echo -n 'gh-actions:${{ secrets.POWERHOME_NPM_REGISTRY_PASSWORD }}' | base64)"" >> ~/.npmrc
           echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
       - uses: actions/setup-node@v3
