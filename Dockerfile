@@ -58,22 +58,21 @@ RUN cd playbook-website && bundle install
 
 FROM base as jsdeps
 
-COPY --link package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock .npmrc ./
+COPY --link package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock ./
 COPY --link .yarn ./.yarn
 COPY --link --chown=9999:9999 --from=jspackages /home/app/src /home/app/src
 
 # Build Library
-RUN --mount=type=secret,id=yarnenv,required \
-    --mount=id=yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
-    env $(cat /run/secrets/yarnenv | xargs) yarn install --frozen-lockfile
+RUN --mount=id=yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
+    yarn install --frozen-lockfile
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
 FROM jsdeps AS release
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
 COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
-RUN --mount=type=secret,id=yarnenv,required cd playbook; env $(cat /run/secrets/yarnenv | xargs) yarn release
-RUN --mount=type=secret,id=yarnenv,required cd playbook-website; env $(cat /run/secrets/yarnenv | xargs) yarn release
+RUN cd playbook; yarn release
+RUN cd playbook-website; yarn release
 
 FROM base AS prod
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
