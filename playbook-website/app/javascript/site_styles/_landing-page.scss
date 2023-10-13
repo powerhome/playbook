@@ -6,19 +6,19 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "./landing-page-solutions";
 
-$max_screen: 1376px;
-$medium_screen: 1218px;
-$small_screen: 762px;
-$mobile_screen: 575px;
+$max_screen: $screen-xl-min + 176px;
+$medium_screen: $screen-xl-min + 18px;
+$small_screen: $screen-md-min - 6px;
+$mobile_screen: $screen-xs-min;
 
 .landing-page {
   .homepage_hero_wrapper {
     height: $screen-lg-min - 52;
     @include break_at($max_screen) {
-      height: 1030px;
+      height: $screen-xl-min - 170px;
     }
     @include break_at($medium_screen) {
-      height: 800px;
+      height: $screen-md-min + 32px;
     }
     @include break_at($mobile_screen) {
       height: 100%;
@@ -35,11 +35,11 @@ $mobile_screen: 575px;
           left: unset;
         }
         @include break_at($medium_screen) {
-          right: 133px;
+          right: ($space_xl * 3) + 13px;
         }
         @include break_at($mobile_screen) {
-          width: 145px;
-          right: 80px;
+          width: ($space_xl * 3) + 25px;
+          right: $space_xl * 2;
         }
       }
       @include break_at($max_screen) {
@@ -98,11 +98,11 @@ $mobile_screen: 575px;
         top: ($space_xl * 3) + 17;
         right: $space_xl - 5;
         @include break_at($max_screen) {
-          top: 60px;
-          right: 460px;
+          top: ($space_lg * 2) - 4px;
+          right: $screen-xs-min - 115px;
         }
         @include break_at($medium_screen) {
-          right: 380px;
+          right: ($space_xl * 9) + 20px;
           top: 50%;
         }
         @include break_at($small_screen) {
@@ -112,14 +112,14 @@ $mobile_screen: 575px;
       }
       .connected_devices {
         right: 0px;
-        top: $screen-xs-min - 165;
+        top: $screen-xs-min - 165px;
         @include break_at($max_screen) {
-          right: 130px;
-          top: 360px;
+          right: ($space_xl * 3) + 10px;
+          top: $space_xl * 9;
         }
         @include break_at($medium_screen) {
           right: 55%;
-          top: 50px;
+          top: $space_xl + 10px;
         }
         @include break_at($small_screen) {
           right: unset;
@@ -134,20 +134,20 @@ $mobile_screen: 575px;
         top: $screen-xs-min - 20;
         right: $screen-sm-min + 34;
         @include break_at($max_screen) {
-          top: 285px;
-          right: 450px;
+          top: ($space_xl * 7) + 5px;
+          right: $screen-xs-min - 125px;
         }
       }
       .order_details {
         top: $screen-sm-min + 84;
         right: ($space_xl * 6) + 8;
         @include break_at($max_screen) {
-          top: 455px;
-          right: 170px;
+          top: $screen-xs-min - 120px;
+          right: ($space_xl * 4) + 10px;
           z-index: 2;
         }
         @include break_at($medium_screen) {
-          top: 30px;
+          top: $space_lg - 2px;
           right: 20%;
         }
         @include break_at($small_screen) {
@@ -177,8 +177,8 @@ $mobile_screen: 575px;
 
       .notifications_small {
         @include break_at($max_screen) {
-          top: 115px;
-          right: 120px;
+          top: ($space_xl * 3) - 5px;
+          right: $space_xl * 3;
         }
       }
 
@@ -189,12 +189,12 @@ $mobile_screen: 575px;
           min-width: ($space_xl * 8) - 2;
         }
         @include break_at($max_screen) {
-          top: 450px;
-          right: 620px;
+          top: $screen-xs-min - 125px;
+          right: $screen-sm-min + 44px;
           left: unset;
         }
         @include break_at($medium_screen) {
-          top: 230px;
+          top: ($space_xl * 5) + 30px;
           right: 15%;
           z-index: 2;
         }
