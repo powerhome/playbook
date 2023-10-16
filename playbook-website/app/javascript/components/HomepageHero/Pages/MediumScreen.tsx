@@ -1,12 +1,14 @@
 import React from "react";
 import { Background, Image } from "playbook-ui";
 import WelcomeComponent from "./Welcome";
-import ConnectedDevicesCard from "../HeroComponents/ConnectedDevices";
-import NotificationsSmallCard from "../HeroComponents/NotificationsSmall";
-import OrderDetailsCard from "../HeroComponents/OrderDetails";
-import SelectPlanCard from "../HeroComponents/SelectPlan";
-import SubscribeToggleCard from "../HeroComponents/SubscribeToggle";
-import TicketsChartCard from "../HeroComponents/TicketsChart";
+import {
+  ConnectedDevicesCard,
+  OrderDetailsCard,
+  SelectPlanCard,
+  SubscribeToggleCard,
+  TicketsChartCard,
+  NotificationsSmallCard,
+} from "../HeroComponents";
 // @ts-ignore
 import GridMedium from "../../../images/MediumBackgroundGrid.svg";
 import BlurBackground from "./BlurBackground";
