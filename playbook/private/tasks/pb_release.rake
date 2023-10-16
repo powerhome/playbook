@@ -114,7 +114,7 @@ namespace :pb_release do
       `rm -rf dist/app  dist/pb_doc_helper.rb`
       puts "\nPublishing to NPM..."
       npm_suffix = looks_like_alpha ? "--tag alpha" : ""
-      `npm publish playbook-ui-#{npm_version}.tgz #{npm_suffix}`
+      `npm publish --registry https://registry.npmjs.org playbook-ui-#{npm_version}.tgz #{npm_suffix}`
       puts "\nPublished to NPM. Now lets clean up..."
       `rm -rf playbook-ui-*.tgz`
     end

@@ -1,6 +1,6 @@
 {
   "extends": [
-    "config:base"
+    "github>powerhome/renovate-config"
   ],
   "major": {
     "enabled": false
@@ -25,19 +25,6 @@
         "^(@babel|babel|webpacker|webpack|node)"
       ],
       "enabled": false
-    }
-  ],
-  "hostRules": [
-    {
-      "matchHost": "registry.npmjs.org",
-      "hostType": "npm",
-    },
-    {
-      "matchHost": "https://npm.fontawesome.com/",
-      "hostType": "npm",
-      "encrypted": {
-        "token": "wcFMA/xDdHCJBTolAQ//V7fMAjcFXapqPi3FsQgzYhv0p+P8LRnj6vUHMqAAUvwzD5TgxIO5hmdHy/9kEz3GCq/oTHlcKHtKrlIbudEoFqfx/xZPS/YJUnvslO+/dx+u1OjWsktCIe2a+i3GJ9PDtXPGj7YvJ0LJYeXC5CFtRDqjXAG656/il2X1JQ9KD8A9IuzF35LzwPID7RfMEmE1P+ZTe+XhiwDArP5Az+b9BF1ay/OCEbixHuJlvbSLUtooKr+0NUZ/HM+5HY/NM/wJU578cN8JXeAYTwcHuoMt7okcQU/AIWERb2jKP7ZT2f37fpg58AiSCXORC60Sg8dfGkrNA9Oi9J4IhksLOt1qDxeAe6rMHmZL+NTusEh6aG8f9OUehhmpznlvOfOAYCQP3NCXRLalzu5wgTujf9zxTG+hbE8yNshW6LqU1M+GppG8vxCYZLgUdmcKR5OHPBdOAiYd3jLPAs+5duxcP0hmcYdE6dkkeZzhf4BLB/BJ89gW4jLtOf31r0k9isUAzDBfuICdMHmo5XLjXNeaFVu5UTga//O+qWyxS9o0StYYIcBH5BQnr2H47/PdOZPH6FGB5EOZRAtzFZYMOUOB/cbVhwFaEC9TCq71DffhdAv+jb3d9iHkvpLnfvVC1b2gIULG1YD2CqKTn2PXP5bOk4JMLRuTnKYzmjLgkQguRfT6gZDSgAGGSOBiQhaKL2S7iQz9Go1Ur/9p/PEUQTDV38cR/ueBf16XLwPqPauY85Zc3K7jdmD3Y19RNA5CBV6pII1SfgEZNp9bx4SoNeOJZeo8orXyTD9oaHIBE4NS5wFCcv79MyRVIOjvwVxFpk/LGzBH3xMzJPoPtFHXnZHv3oHGFfLV"
-      }
     }
   ]
 }

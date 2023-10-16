@@ -1,3 +1,39 @@
+# 13.9.0
+##### October 5, 2023
+
+List of changes:
+
+**Bugs:**
+
+- Reaction Button Emoji Fixes [\#2772](https://github.com/powerhome/playbook/pull/2772) ([nidaqg](https://github.com/nidaqg))
+- Font Size for Message Mentions to be 15px [\#2773](https://github.com/powerhome/playbook/pull/2773) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Misc Sidebar Fixes [\#2771](https://github.com/powerhome/playbook/pull/2771) ([nidaqg](https://github.com/nidaqg))
+
+
+# The Unstyled Currency Kit Variant: Your Key to Dynamic Styling
+##### September 23, 2023
+
+![13 8 0](https://github.com/powerhome/playbook/assets/73710701/64531e67-2c90-4f3c-819e-5be485b0c287)
+
+Now, with a simple boolean prop and our versatile typography kits, your currency displays can effortlessly adapt to any style for a more flexible user experience!
+
+[13.8.0](https://github.com/powerhome/playbook/tree/13.8.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Unstyled Currency Kit [\#2755](https://github.com/powerhome/playbook/pull/2755) ([gavhuang](https://github.com/gavhuang))
+- Nav Kit + Table Kit Enhancements [\#2766](https://github.com/powerhome/playbook/pull/2766) ([markdoeswork](https://github.com/markdoeswork))
+
+**Improvements:**
+
+- Website Sidebar Consolidation [\#2754](https://github.com/powerhome/playbook/pull/2754) ([nidaqg](https://github.com/nidaqg))
+- Added Changelog Previews to Homepage [\#2765](https://github.com/powerhome/playbook/pull/2765) ([jasperfurniss](https://github.com/jasperfurniss))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.7.0...13.8.0)
+
 # 🧠 Smart Multi-Line Truncation is Here!
 ##### September 22, 2023
 
