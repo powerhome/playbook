@@ -7,20 +7,20 @@ import MobileScreen from "./Pages/MobileScreen";
 
 const HomepageHero = () => {
   const [isMax, setIsMax] = useState(window.innerWidth > 1376);
-  const [isMedium, setIsMedium] = useState(window.innerWidth > 1218);
+  const [isMedium, setIsMedium] = useState(window.innerWidth > 1147);
   const [isMobile, setIsMobile] = useState(window.innerWidth > 575);
 
   useEffect(() => {
     window.addEventListener("resize", () => {
       setIsMax(window.innerWidth > 1376);
-      setIsMedium(window.innerWidth > 1218);
+      setIsMedium(window.innerWidth > 1147);
       setIsMobile(window.innerWidth > 575);
     });
 
     return () => {
       window.removeEventListener("resize", () => {
         setIsMax(window.innerWidth > 1376);
-        setIsMedium(window.innerWidth > 1218);
+        setIsMedium(window.innerWidth > 1147);
         setIsMobile(window.innerWidth > 575);
       });
     };

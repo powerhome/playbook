@@ -8,7 +8,7 @@
 @import "./homepage_mixins";
 
 $max_screen: $screen-xl-min + 176px;
-$medium_screen: $screen-xl-min + 18px;
+$medium_screen: $screen-xl-min - 53px;
 $small_screen: $screen-md-min - 6px;
 $mobile_screen: $screen-xs-min;
 
