@@ -10,6 +10,8 @@ type WelcomeProps = {
   buttonsAlignment?: string;
   displayProps?: any;
   titleSize?: number | string;
+  buttonsFlexDirection?: string;
+  buttonFullWidth?: string | boolean;
 };
 
 const WelcomeComponent = ({
@@ -18,6 +20,8 @@ const WelcomeComponent = ({
   buttonsAlignment,
   displayProps,
   titleSize,
+  buttonsFlexDirection = "row",
+  buttonFullWidth
 }: WelcomeProps) => {
   return (
     <>
@@ -64,19 +68,20 @@ const WelcomeComponent = ({
               </>
             ))}
           </Flex>
-          <Flex justifyContent={buttonsAlignment}>
+          <Flex className="welcome_component_buttons" justifyContent={buttonsAlignment} orientation={buttonsFlexDirection}>
             <Button
-              fixedWidth
+              fullWidth={buttonFullWidth && true}
               icon="arrow-right"
               iconRight
               link="/guides/getting_started"
+              marginBottom="sm"
               marginRight="sm"
               tabIndex={0}
               text="Get started"
               zIndex={2}
             />
             <Button
-              fixedWidth
+              fullWidth={buttonFullWidth}
               link="/kits"
               tabIndex={0}
               text="Explore components"

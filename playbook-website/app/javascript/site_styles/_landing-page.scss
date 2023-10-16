@@ -55,6 +55,9 @@ $mobile_screen: $screen-xs-min;
           width: 90%;
         }
       }
+      &_buttons {
+        width: 100%;
+      }
     }
 
     &_cards {
@@ -170,6 +173,9 @@ $mobile_screen: $screen-xs-min;
       }
 
       .notifications_small {
+        .background-min-height{
+          min-height: ($space_xl * 3) + 13px !important;
+        }
         @include break_at($max_screen) {
           top: ($space_xl * 3) - 5px;
           right: $space_xl * 3;

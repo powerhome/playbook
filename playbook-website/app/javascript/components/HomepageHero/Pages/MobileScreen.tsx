@@ -14,14 +14,16 @@ const MobileScreen = () => {
         paddingY="md"
       >
         <WelcomeComponent
-          fixedSize="374px"
-          headerAlign="center"
+          buttonFullWidth={true}
           buttonsAlignment="center"
+          buttonsFlexDirection="column"
           displayProps={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
+          fixedSize="374px"
+          headerAlign="center"
           titleSize={3}
         />
       </Background>
