@@ -1,1 +1,36 @@
-<%= search_list%>
+<div class="landing-page">
+  <%= pb_rails("background", props: { background_color: "white", padding_bottom: { xs: "none", sm: "none", md: "xl", lg: "xl", xl: "xl" } }) do %>
+    <%= pb_rails("background", props: { classname: "homepage-hero", image_url: asset_pack_path("media/images/landing-background.svg"), padding: "xl" }) do %>
+      <%= pb_rails("flex", props: { classname: "flex-container hero-inner-wrapper", horizontal: "center", wrap: true } ) do %>
+        <div class="flex-item">
+          <%= image_pack_tag("media/images/landing-image.svg", class: "pb-hero-image") %>
+        </div>
+        <%= pb_rails("flex/flex_item", props: { classname: "hero-text-width", margin_top: "xl" }) do %>
+          <%= pb_rails("title", props: { classname: "dark", margin_bottom: "md", text: "Playbook Design System", tag: "h2", size: 2 }) %>
+          <%= pb_rails("body", props: {
+            classname: "dark",
+            text: "Playbook is the first design system built for both Rails & React interfaces. Playbook takes a modern design approach, and applies it in a way that makes it easy to support bleeding edge, or legacy systems. Playbook is built & maintained by the User Experience & Development teams at Power Home Remodeling, the largest home remodeler in the US."
+          }) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= render(LgHpSocialProofComponent.new) %>
+  <%= render(MdHpSocialProofComponent.new) %>
+  <%= render(SmHpSocialProofComponent.new) %>
+  <%= render(HpSolutionsComponent.new)%>
+
+
+  <%= pb_rails("background", props: { background_color: "white" }) do %>
+    <%= pb_rails("flex", props: { orientation: "column", align: "center", padding_top: "lg" }) do %>
+      <%= pb_rails("title", props: { color: "link", text: "NEWEST FROM PLAYBOOK", tag: "h4", size: 4, padding_bottom: "sm" }) %>
+      <%= pb_rails("title", props: { text: "Playbook is always shipping.", tag: "h2", size: 2, text_align: "center", padding_bottom: "xs" }) %>
+      <%= pb_rails("caption", props: { size: "lg", text: "Move Fast. Follow Momentum.", padding_bottom: "sm" }) %>
+    <% end %>
+
+    <% @structured_data.each.with_index do |post, index| %>
+      <%= render(PreviewCardComponent.new(post: post, index: index)) %>
+    <% end %>
+  <% end %>
+</div>
