@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { isValidEmoji } from '../utilities/validEmojiChecker'
 
 import Icon from '../pb_icon/_icon'
 import Caption from "../pb_caption/_caption"
@@ -37,12 +38,6 @@ type ButtonPropTypes = {
   variant?: 'primary' | 'secondary' | 'link'| 'reaction',
   wrapperClass?: string,
 } & GlobalProps
-
-const isValidEmoji = (emoji: string) => {
-  // Using regular expression to check if the string is a valid emoji/emoji Unicode
-  const emojiRegex = /^(\p{Emoji}|\uFE0F)+$/u;
-  return emojiRegex.test(emoji);
-};
 
 const buttonClassName = (props: ButtonPropTypes) => {
   const {

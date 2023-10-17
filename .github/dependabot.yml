@@ -1,0 +1,15 @@
+version: 2
+registries:
+  power-npm:
+    type: npm-registry
+    url: npm.powerapp.cloud
+    username: dependabot
+    password: ${{secrets.POWERHOME_NPM_REGISTRY_PASSWORD}}
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    # Allow Dependabot access to all defined private registries when performing a version update
+    registries:
+      - power-npm
