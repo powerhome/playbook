@@ -2,8 +2,6 @@ services:
   web:
     build:
       target: prod
-      secrets:
-        - yarnenv
     volumes: []
   webpacker:
     volumes: []
