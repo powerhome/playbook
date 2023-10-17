@@ -1,3 +1,5 @@
+$screen-xxl-min: 1600px !default;
+
 .landing-page {
   .language-card {
     max-width: 200px;
@@ -7,6 +9,12 @@
       height: 120px;
       align-items: center;
       justify-content: center;
+
+      @include break_on($screen-md-min, $screen-xxl-min) {
+        img {
+          width: 75%;
+        }
+      }
 
       @include break_on($screen-md-min, $screen-xl-max) {
         height: 160px;
@@ -24,7 +32,7 @@
     }
   }
 
-  @include break_on($screen-xl-min, 1600px) {
+  @include break_on($screen-xl-min, $screen-xxl-min) {
     .solutionsFlexContainer {
       flex-direction: column !important;
       row-gap: $space_xl;
@@ -49,7 +57,7 @@
     height: 350px;
     overflow: hidden;
 
-    @include break_on($screen-xl-min, 1600px) {
+    @include break_on($screen-xl-min, $screen-xxl-min) {
       margin-right: 0 !important;
     }
 
