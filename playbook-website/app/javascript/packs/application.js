@@ -25,6 +25,7 @@ import PbKitFetch from '../components/PbKitFetch'
 import PbKitPlayground from '../components/PbKitPlayground'
 import AvailableProps from '../components/AvailableProps'
 import MainSidebar from '../components/MainSidebar'
+import HomepageHero from '../components/HomepageHero'
 import AnchorJS from 'anchor-js'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -47,6 +48,7 @@ WebpackerReact.setup({
   PbKitPlayground,
   AvailableProps,
   MainSidebar,
+  HomepageHero,
 })
 
 // Produce image assets
