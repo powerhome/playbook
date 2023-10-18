@@ -8,12 +8,13 @@ Rails.application.routes.draw do
   get "changelog",                to: "pages#changelog"
 
   # Kits
+  get "beta/kits", to: "pages#react_app"
   get "kits", to: "pages#kits"
-  get "kits/:name",                 to: "pages#kit_show_rails",           as: "kit_show"
+  get "kits/:name",                 to: "pages#kit_show_rails", as: "kit_show"
   get "kits/:name/rails",           to: "pages#kit_show_rails",           as: "kit_show_rails"
   get "kits/:name/react",           to: "pages#kit_show_react",           as: "kit_show_reacts"
   get "kits/:name/swift",           to: "pages#kit_show_swift",           as: "kit_show_swift"
-  get "kit_category/:name",         to: "pages#kit_category_show_rails",  as: "kit_category_show"
+  get "kit_category/:name",         to: "pages#react_app"
   get "kit_category/:name/rails",   to: "pages#kit_category_show_rails",  as: "kit_category_show_rails"
   get "kit_category/:name/react",   to: "pages#kit_category_show_react",  as: "kit_category_show_reacts"
   get "kit_collection/*names/:name/rails",    to: "pages#kit_collection_show_rails",                        as: "kit_collection_show_rails"
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   get "kit_collection/*names/(/:name)(/:type)",  to: "pages#kit_collection_show_rails", defaults: { type: "rails" }, as: "kit_collection_show"
 
   # Experiments
+  #
   get "kits/:name/sandpack",        to: "pages#kit_show_new",         as: "kit_show_new"
   get "kits/:name/rails_in_react",  to: "pages#rails_in_react",       as: "rails_in_react"
   get "kits/:name/rails_raw",       to: "pages#rails_raw",            as: "rails_raw"
