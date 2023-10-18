@@ -27,7 +27,6 @@ import AvailableProps from '../components/AvailableProps'
 import MainSidebar from '../components/MainSidebar'
 import HomepageHero from '../components/HomepageHero'
 import AnchorJS from 'anchor-js'
-import App from '../components/App'
 
 document.addEventListener('DOMContentLoaded', () => {
   const anchors = new AnchorJS()
@@ -49,7 +48,6 @@ WebpackerReact.setup({
   PbKitPlayground,
   AvailableProps,
   MainSidebar,
-  App,
   HomepageHero,
 })
 
