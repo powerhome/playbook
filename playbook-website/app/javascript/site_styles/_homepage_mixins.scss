@@ -1,0 +1,14 @@
+@mixin blur-position($top: null, $bottom: null, $left: null, $right: null) {
+  @if $top {
+    top: $top;
+  }
+  @if $bottom {
+    bottom: $bottom;
+  }
+  @if $left {
+    left: $left;
+  }
+  @if $right {
+    right: $right;
+  }
+}

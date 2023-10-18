@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'layouts/head'%>
+  </head>
+  <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
+    <%= render 'layouts/mobile_nav'%>
+    <div class="pb--page--dark-mode-toggle-mobile">
+      <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
+    </div>
+    <div id="root"></div>
+  </body>
+  <%= javascript_pack_tag('app') %>
+  <%= javascript_packs_with_chunks_tag(*@application_js) %>
+  <%= yield :pb_js if @type != 'react' %>
+  <%= render 'layouts/ga'%>
+</html>
