@@ -1,3 +1,5 @@
+![button-circles](https://github.com/powerhome/playbook/assets/92755007/c8f98358-5369-475d-9287-67f2aa54f35c)
+
 ```swift
 VStack(alignment: .leading, spacing: Spacing.small) {
     PBButton(
