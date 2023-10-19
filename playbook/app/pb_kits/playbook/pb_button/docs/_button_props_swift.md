@@ -8,4 +8,4 @@
 | **Title** | `String` | Sets Button text | `nil` |  |
 | **Icon** | `PBIcon` | Adds an icon to the Button | `nil` |  |
 | **Icon Position** | `IconPosition` | Adjusts the icon's position | `.left` | `.left` `.right` |
-| **Action** | `(() -> Void)` | Adds an action for the Button to perform | `{}` |  |
+| **Action** | `Void` | Adds an action for the Button to perform | `{}` |  |
