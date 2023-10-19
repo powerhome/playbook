@@ -3,8 +3,8 @@
 ```swift
 VStack(alignment: .leading, spacing: Spacing.small) {
    PBButton(
-      title: "Button Primary",
-      action: {}
+     title: "Button Primary",
+     action: {}
     )
     PBButton(
       variant: .secondary,
@@ -20,5 +20,4 @@ VStack(alignment: .leading, spacing: Spacing.small) {
       title: "Button Disabled"
     )
  }
-
 ```
