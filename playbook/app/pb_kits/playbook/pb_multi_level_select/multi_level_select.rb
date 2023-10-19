@@ -14,6 +14,11 @@ module Playbook
       prop :input_display, type: Playbook::Props::Enum,
                            values: %w[pills none],
                            default: "pills"
+      prop :input_name, type: Playbook::Props::String,
+                        default: ""
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[multi single],
+                     default: "multi"
 
       def classname
         generate_classname("pb_multi_level_select")
@@ -27,6 +32,8 @@ module Playbook
           treeData: tree_data,
           returnAllSelected: return_all_selected,
           selectedIds: selected_ids,
+          input_name: input_name,
+          variant: variant,
         }
       end
     end
