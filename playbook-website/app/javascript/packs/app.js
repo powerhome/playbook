@@ -7,12 +7,15 @@ import '@fortawesome/fontawesome-pro/js/regular.min.js'
 import '../site_styles/main.scss'
 import 'playbook-ui/dist/playbook.css'
 import 'playbook-ui/dist/playbook.js'
+import { BrowserRouter } from 'react-router-dom'
 
 const rootElement = document.getElementById('root')
 
 ReactDOM.render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <App check="hello" />
+    </BrowserRouter>
   </StrictMode>,
   rootElement
 )

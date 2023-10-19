@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get "changelog",                to: "pages#changelog"
 
   # Kits
-  get "beta/kits", to: "pages#react_app"
+
+  ## Beta View
+  get "beta", to: "pages#react_app"
+
+  # Legacy View
   get "kits", to: "pages#kits"
   get "kits/:name",                 to: "pages#kit_show_rails",           as: "kit_show"
   get "kits/:name/rails",           to: "pages#kit_show_rails",           as: "kit_show_rails"
