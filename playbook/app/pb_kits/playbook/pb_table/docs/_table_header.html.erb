@@ -1,3 +1,26 @@
+<% data_rows = [
+    { 'territory' => 'North', 'firstname' => 'John', 'lastname' => 'Doe', 'age' => 30, 'job' => 'Engineer' },
+    { 'territory' => 'South', 'firstname' => 'Alice', 'lastname' => 'Smith', 'age' => 28, 'job' => 'Designer' },
+    { 'territory' => 'East', 'firstname' => 'Mike', 'lastname' => 'Johnson', 'age' => 35, 'job' => 'Manager' },
+    { 'territory' => 'West', 'firstname' => 'Sarah', 'lastname' => 'Brown', 'age' => 29, 'job' => 'Developer' },
+    { 'territory' => 'Central', 'firstname' => 'David', 'lastname' => 'Wilson', 'age' => 32, 'job' => 'Analyst' }
+  ]
+%>
+
+<% if params["sort"] %>
+  <% sort_param = params["sort"].gsub(/_(asc|desc)\z/, "") %>
+  <% sort_direction = params["sort"].end_with?("_asc") ? 1 : -1 %>
+  <% data_rows.sort! do |a, b|
+    value_a = a[sort_param]
+    value_b = b[sort_param]
+
+    value_a = value_a.to_i if value_a.is_a?(String) && value_a.match?(/^\d+$/)
+    value_b = value_b.to_i if value_b.is_a?(String) && value_b.match?(/^\d+$/)
+
+    sort_direction * (value_a <=> value_b)
+  end %>
+<% end %>
+
 <%= pb_rails("table", props: { size: "lg", vertical_border: true, id: "table-header" } ) do %>
   <thead>
     <tr>
@@ -33,35 +56,6 @@
     </tr>
   </thead>
   <tbody>
-    <% data_rows = [
-        { 'territory' => 'North', 'firstname' => 'John', 'lastname' => 'Doe', 'age' => 30, 'job' => 'Engineer' },
-        { 'territory' => 'South', 'firstname' => 'Alice', 'lastname' => 'Smith', 'age' => 28, 'job' => 'Designer' },
-        { 'territory' => 'East', 'firstname' => 'Mike', 'lastname' => 'Johnson', 'age' => 35, 'job' => 'Manager' },
-        { 'territory' => 'West', 'firstname' => 'Sarah', 'lastname' => 'Brown', 'age' => 29, 'job' => 'Developer' },
-        { 'territory' => 'Central', 'firstname' => 'David', 'lastname' => 'Wilson', 'age' => 32, 'job' => 'Analyst' }
-      ]
-    %>
-
-    <% def extract_sort_direction(param) %>
-      <% param.end_with?("_asc") ? 1 : -1 %>
-    <% end %>
-
-    <% if params["sort"] %>
-      <% sort_param = params["sort"].gsub(/_(asc|desc)\z/, "") %>
-      <% sort_direction = params["sort"].end_with?("_asc") ? 1 : -1 %>
-      <% data_rows.sort! do |a, b|
-        value_a = a[sort_param]
-        value_b = b[sort_param]
-
-        value_a = value_a.to_i if value_a.is_a?(String) && value_a.match?(/^\d+$/)
-        value_b = value_b.to_i if value_b.is_a?(String) && value_b.match?(/^\d+$/)
-
-        sort_direction * (value_a <=> value_b)
-      end %>
-    <% end %>
-
-
-
     <% data_rows.each do |row| %>
       <tr>
         <% row.each do |key, value| %>
@@ -72,5 +66,4 @@
       </tr>
     <% end %>
   </tbody>
-
 <% end %>
