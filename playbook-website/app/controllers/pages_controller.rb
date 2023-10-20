@@ -8,9 +8,9 @@ class PagesController < ApplicationController
   before_action :set_js, only: %i[visual_guidelines]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
-  before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
+  before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react kit_category_show_swift]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
-  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift home]
+  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo kit_show_new visual_guidelines home]
 
   def disable_dark_mode
     cookies[:dark_mode] = {
@@ -159,15 +159,30 @@ class PagesController < ApplicationController
 
 private
 
+  def aggregate_kits
+    menu = YAML.load_file(Rails.root.join("config/menu.yml"))
+    puts menu
+    puts "mark here"
+    puts Time.current
+    menu["kits"]
+  end
+
   def set_js
     @application_js.concat ["visual_guidelines"]
   end
 
   def set_category
-    categories = MENU["kits"].map { |link| link.first.first if link.is_a?(Hash) }.compact
+    puts "set categoryyyyy"
+    puts Time.current
+    categories = aggregate_kits.map { |item| item["name"] }
+    puts aggregate_kits
+    puts "arg kits look me"
+    puts params[:name]
+    puts categories.flatten
+    puts "^ puts flatten"
     @category = params[:name]
-    if categories.flatten.include?(@category)
-      @category_kits = MENU["kits"].map { |link| link.first.last if link.is_a?(Hash) && link.first.first == @category }.compact.flatten
+    if categories.include?(@category)
+      @category_kits = aggregate_kits.map { |link| link.first.last if link.is_a?(Hash) && link.first.first == @category }.compact.flatten
       @kits = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
@@ -175,7 +190,9 @@ private
   end
 
   def set_kit
-    menu = MENU["kits"].map { |link| link.is_a?(Hash) ? link.first.last : link }
+    puts "set kit"
+    puts Time.current
+    menu = aggregate_kits.map { |link| link.is_a?(Hash) ? link.first.last : link }
     if menu.flatten.include?(params[:name])
       @kit = params[:name]
     else
@@ -189,13 +206,30 @@ private
 
   def ensure_kit_type_exists
     # TODO: unsure why we cannot simply use the helpers that are included in ApplicationController - fix this
-    is_rails_kit = action_name == "kit_show_rails"
-    files = is_rails_kit ? File.join("**", "*.erb") : File.join("**", "*.jsx")
+    # is_rails_kit = action_name == "kit_show_rails"
+    # files = is_rails_kit ? File.join("**", "*.erb") : File.join("**", "*.jsx")
+    # kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
+    # if action_name === "kit_show_rails"
+    #   redirect_to action: "kit_show_react" unless kit_files.present?
+    # elsif action_name === "kit_show_react"
+    #   redirect_to action: "kit_show_rails" unless kit_files.present?
+    # end
+    case action_name
+    when "kit_show_rails"
+      files = File.join("**", "*.erb")
+    when "kit_show_react"
+      files = File.join("**", "*.jsx")
+    when "kit_show_swift"
+      files = File.join("**", "*.md")
+    end
     kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
-    if action_name === "kit_show_rails"
-      redirect_to action: "kit_show_react" unless kit_files.present?
-    elsif action_name === "kit_show_react"
+    case action_name
+    when "kit_show_rails"
       redirect_to action: "kit_show_rails" unless kit_files.present?
+    when "kit_show_react"
+      redirect_to action: "kit_show_react" unless kit_files.present?
+    when "kit_show_swift"
+      redirect_to action: "kit_show_swift" unless kit_files.present?
     end
   end
 
