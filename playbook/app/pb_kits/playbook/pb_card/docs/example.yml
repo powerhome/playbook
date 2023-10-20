@@ -25,3 +25,17 @@ examples:
   - card_separator: Separator Card
   - card_border_none: No Border
   - card_border_radius: Border Radius
+  swift:
+  - card_light_swift: Default
+  - card_background_swift: Card Backgrounds
+  - card_highlight_swift: Highlight Cards
+  - card_header_swift: Header Cards
+  - card_selected_swift: Selected
+  - card_tag_swift: HTML Tag
+  - card_padding_swift: Padding Size
+  - card_shadow_swift: Shadow Size
+  - card_content_swift: Content Size
+  - card_separator_swift: Separator Card
+  - card_border_none_swift: No Border
+  - card_border_radius_swift: Border Radius
+  - card_props_swift: ""
