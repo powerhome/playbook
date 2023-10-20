@@ -28,8 +28,8 @@
         text: "Territory",
         id: "territory",
         sort_menu: [
-          { item: "Territory", link: "?sort=territory_desc#table-header", active: params["sort"] == "territory_desc", direction: "desc" },
-          { item: "Territory", link: "?sort=territory_asc#table-header", active: params["sort"] == "territory_asc", direction: "asc" }
+          { item: "Territory", link: "?sort=territory_asc#table-header", active: params["sort"] == "territory_asc", direction: "asc" },
+          { item: "Territory", link: "?sort=territory_desc#table-header", active: params["sort"] == "territory_desc", direction: "desc" }
         ],
       }) %>
       <%= pb_rails("table/table_header", props: {
@@ -59,7 +59,7 @@
     <% data_rows.each do |row| %>
       <tr>
         <% row.each do |key, value| %>
-          <%= pb_rails("background", props: { background_color: (params["sort"] && params["sort"].start_with?(key) ? "error_subtle" : "card_light"), tag: "td" }) do %>
+          <%= pb_rails("background", props: { background_color: (params["sort"] && params["sort"].start_with?(key) ? "info_subtle" : "card_light"), tag: "td" }) do %>
             <%= value %>
           <% end %>
         <% end %>
