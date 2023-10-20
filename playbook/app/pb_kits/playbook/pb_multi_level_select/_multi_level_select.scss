@@ -30,10 +30,11 @@
       align-items: center;
       justify-content: space-between;
       .input_inner_container {
-        max-width: 90%;
+        width: 100%;
       }
 
       input {
+        width: 100%;
         border: none;
         font-family: $font_family_base;
         font-size: $font_base;
