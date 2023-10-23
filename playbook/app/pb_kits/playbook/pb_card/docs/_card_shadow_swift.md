@@ -1,0 +1,19 @@
+```swift
+VStack(spacing: Spacing.small) {
+  PBCard(shadow: Shadow.deep) {
+    Text("Deep").pbFont(.body)
+  }
+
+  PBCard(shadow: Shadow.deeper) {
+    Text("Deeper").pbFont(.body)
+  }
+
+  PBCard(shadow: Shadow.deepest) {
+    Text("Deepest").pbFont(.body)
+  }
+
+  PBCard(shadow: Shadow.none) {
+    Text("None").pbFont(.body)
+  }
+ }
+```
