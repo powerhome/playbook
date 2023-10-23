@@ -6,7 +6,7 @@
 		padding_y: { md: "none", default: "xl", break: "at" }
 }) do %>
 	<%= pb_rails("flex", props: {
-			classname: "width-full",
+			classname: "solutionsFlexContainer width-full",
 			max_width: "xxl",
 			flex_direction: { xs: "column", sm: "column", md: "column", lg: "column", xl: "row" },
 			margin_y: "xl"
@@ -137,6 +137,7 @@
 						<% end %>
 
 						<%= pb_rails("flex/flex_item", props: {
+							classname: "language-card-text",
 							display: { sm: "none", md: "none", lg: "none", xl: "flex" }
 						}) do %>
 							<%= pb_rails("caption", props: {
@@ -172,6 +173,7 @@
 						<% end %>
 
 						<%= pb_rails("flex/flex_item", props: {
+							classname: "language-card-text",
 							display: { sm: "none", md: "none", lg: "none", xl: "flex" }
 						}) do %>
 							<%= pb_rails("caption", props: {
@@ -207,6 +209,7 @@
 						<% end %>
 
 						<%= pb_rails("flex/flex_item", props: {
+							classname: "language-card-text",
 							display: { sm: "none", md: "none", lg: "none", xl: "flex" }
 						}) do %>
 							<%= pb_rails("caption", props: {

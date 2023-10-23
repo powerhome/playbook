@@ -77,7 +77,7 @@ const MultiLevelSelectSelectedIds = (props) => {
           console.log("Selected Items with Return All Selected Data", selectedNodes)
           }
           returnAllSelected
-          selectedIds={["energy1","talent1"]}
+          selectedIds={["energy1", "talent1"]}
           treeData={treeData}
           {...props}
       />

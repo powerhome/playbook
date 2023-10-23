@@ -1,0 +1,73 @@
+<% treeData = [{
+    label: "Power Home Remodeling",
+    value: "Power Home Remodeling",
+    id: "200",
+    expanded: true,
+    children: [
+      {
+        label: "People",
+        value: "People",
+        id: "201",
+        expanded: true,
+        children: [
+          {
+            label: "Talent Acquisition",
+            value: "Talent Acquisition",
+            id: "202",
+          },
+          {
+            label: "Business Affairs",
+            value: "Business Affairs",
+            id: "203",
+            children: [
+              {
+                label: "Initiatives",
+                value: "Initiatives",
+                id: "204",
+              },
+              {
+                label: "Learning & Development",
+                value: "Learning & Development",
+                id: "205",
+              },
+            ],
+          },
+          {
+            label: "People Experience",
+            value: "People Experience",
+            id: "206",
+          },
+        ],
+      },
+      {
+        label: "Contact Center",
+        value: "Contact Center",
+        id: "207",
+        children: [
+          {
+            label: "Appointment Management",
+            value: "Appointment Management",
+            id: "208",
+          },
+          {
+            label: "Customer Service",
+            value: "Customer Service",
+            id: "209",
+          },
+          {
+            label: "Energy",
+            value: "Energy",
+            id: "210",
+          },
+        ],
+      },
+    ],
+}] %>
+
+<%= pb_rails("multi_level_select", props: {
+    id: "multi-level-select-single-rails",
+    name: "my_single_select_array",
+    tree_data: treeData,
+    input_name: "Power",
+    variant: "single"
+}) %>

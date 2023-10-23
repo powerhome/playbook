@@ -1,7 +1,7 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (13.9.0)
+    playbook_ui (13.10.0)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -136,7 +136,6 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
-    memory_profiler (1.0.1)
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.18.0)
@@ -166,8 +165,6 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.4)
-    rack-mini-profiler (3.1.1)
-      rack (>= 1.2.0)
     rack-proxy (0.7.2)
       rack
     rack-test (2.1.0)
@@ -250,7 +247,6 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    stackprof (0.2.25)
     thor (1.2.1)
     tilt (2.3.0)
     timeout (0.3.2)
@@ -301,11 +297,9 @@ DEPENDENCIES
   front_matter_parser (~> 1.0.1)
   health_check
   listen (>= 3.0.5, < 3.7.2)
-  memory_profiler
   playbook_ui!
   psych (< 4)
   puma (~> 6.3)
-  rack-mini-profiler
   rails (~> 6.1.6.1)
   redcarpet (~> 3.6)
   rouge (~> 3.15)
@@ -316,7 +310,6 @@ DEPENDENCIES
   sentry-ruby
   spring
   spring-watcher-listen (~> 2.1.0)
-  stackprof
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (= 4.3.0)
