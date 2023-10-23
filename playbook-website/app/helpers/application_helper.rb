@@ -13,7 +13,7 @@ module ApplicationHelper
   def pb_category_kits(category_kits: [], type: "rails")
     display_kits = []
     category_kits.each do |kit|
-      display_kits << render_pb_doc_kit(kit, type, false)
+      display_kits << render_pb_doc_kit(kit, type, false) if pb_doc_has_kit_type?(kit, type)
     end
     raw("<div class='pb--docItem'>#{display_kits.join("</div><div class='pb--docItem'>")}</div>")
   end

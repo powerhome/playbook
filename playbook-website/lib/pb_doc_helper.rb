@@ -33,9 +33,9 @@ module PlaybookWebsite
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode)
+            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode) if pb_doc_has_kit_type?(sub_kit, type)
           end
-        else
+        elsif pb_doc_has_kit_type?(kit, type)
           display_kits << render_pb_doc_kit(kit, type, limit_examples, false, dark_mode)
         end
       end
