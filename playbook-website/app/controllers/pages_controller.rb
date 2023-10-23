@@ -164,12 +164,23 @@ private
     menu["kits"]
   end
 
+  def categories
+    aggregate_kits.map { |item| item["name"] }
+  end
+
+  def all_kits
+    group_components = []
+    aggregate_kits.each do |category|
+      group_components.push(category["components"])
+    end
+    group_components.flatten.map { |item| item["name"] }
+  end
+
   def set_js
     @application_js.concat ["visual_guidelines"]
   end
 
   def set_category
-    categories = aggregate_kits.map { |item| item["name"] }
     @category = params[:name]
     if categories.include?(@category)
       @category_kits = kit_categories
@@ -185,8 +196,7 @@ private
   end
 
   def set_kit
-    menu = aggregate_kits.map { |link| link.is_a?(Hash) ? link.first.last : link }
-    if menu.flatten.include?(params[:name])
+    if all_kits.include?(params[:name])
       @kit = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
