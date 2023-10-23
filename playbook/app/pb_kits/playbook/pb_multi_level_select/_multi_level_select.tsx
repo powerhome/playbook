@@ -336,8 +336,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const singleHiddenInstances = document.querySelectorAll('.singleHidden');
 
   singleHiddenInstances.forEach(singleHiddenInstance => {
-      if (singleHiddenInstance.nextElementSibling && singleHiddenInstance.nextElementSibling.classList.contains('pb_radio_button')) {
-          singleHiddenInstance.nextElementSibling.style.display = 'none';
+
+    const siblingElement = singleHiddenInstance.nextElementSibling as HTMLElement;
+      if (siblingElement && siblingElement.classList.contains('pb_radio_button')) {
+        siblingElement.style.display = 'none';
       }
   });
 
