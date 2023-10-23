@@ -13,6 +13,7 @@ const treeData = [
         value: "People",
         id: "people2",
         expanded: true,
+        hidden: true,
         children: [
           {
             label: "Talent Acquisition",
@@ -23,6 +24,7 @@ const treeData = [
             label: "Business Affairs",
             value: "Business Affairs",
             id: "business2",
+            hidden: true,
             children: [
               {
                 label: "Initiatives",
@@ -47,6 +49,7 @@ const treeData = [
         label: "Contact Center",
         value: "Contact Center",
         id: "contact2",
+        hidden: true,
         children: [
           {
             label: "Appointment Management",

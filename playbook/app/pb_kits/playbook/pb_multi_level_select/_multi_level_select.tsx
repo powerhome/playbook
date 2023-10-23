@@ -333,6 +333,18 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return items
   }
 
+  const singleHiddenInstances = document.querySelectorAll('.singleHidden');
+
+  // Iterate through each input element
+  singleHiddenInstances.forEach(singleHiddenInstance => {
+      // Check if it has a sibling element with class "pb_radio_button"
+      if (singleHiddenInstance.nextElementSibling && singleHiddenInstance.nextElementSibling.classList.contains('pb_radio_button')) {
+          // Add the "display: none" style to the sibling element
+          singleHiddenInstance.nextElementSibling.style.display = 'none';
+      }
+  });
+
+
   // Rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: any }[]) => {
     return (
@@ -367,6 +379,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     { variant === "single" ? (
                       <Radio
                           checked={item.checked}
+                          class={item.hidden ? "singleHidden" : ""}
                           id={`${item.id}-${item.label}`}
                           label={item.label}
                           name={inputName}
