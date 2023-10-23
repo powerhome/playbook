@@ -161,9 +161,6 @@ private
 
   def aggregate_kits
     menu = YAML.load_file(Rails.root.join("config/menu.yml"))
-    puts menu
-    puts "mark here"
-    puts Time.current
     menu["kits"]
   end
 
@@ -172,26 +169,22 @@ private
   end
 
   def set_category
-    puts "set categoryyyyy"
-    puts Time.current
     categories = aggregate_kits.map { |item| item["name"] }
-    puts aggregate_kits
-    puts "arg kits look me"
-    puts params[:name]
-    puts categories.flatten
-    puts "^ puts flatten"
     @category = params[:name]
     if categories.include?(@category)
-      @category_kits = aggregate_kits.map { |link| link.first.last if link.is_a?(Hash) && link.first.first == @category }.compact.flatten
+      @category_kits = kit_categories
       @kits = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
     end
   end
 
+  def kit_categories
+    @category = params[:name]
+    aggregate_kits.find { |item| item["name"] == @category }["components"].map { |component| component["name"] }
+  end
+
   def set_kit
-    puts "set kit"
-    puts Time.current
     menu = aggregate_kits.map { |link| link.is_a?(Hash) ? link.first.last : link }
     if menu.flatten.include?(params[:name])
       @kit = params[:name]
