@@ -335,11 +335,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   const singleHiddenInstances = document.querySelectorAll('.singleHidden');
 
-  // Iterate through each input element
   singleHiddenInstances.forEach(singleHiddenInstance => {
-      // Check if it has a sibling element with class "pb_radio_button"
       if (singleHiddenInstance.nextElementSibling && singleHiddenInstance.nextElementSibling.classList.contains('pb_radio_button')) {
-          // Add the "display: none" style to the sibling element
           singleHiddenInstance.nextElementSibling.style.display = 'none';
       }
   });
