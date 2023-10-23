@@ -1,3 +1,5 @@
+![card-border-radius](https://github.com/powerhome/playbook/assets/92755007/c2c0965f-7c4f-4e7b-8c94-f187c724939d)
+
 ```swift
 VStack(spacing: Spacing.small) {
   PBCard(borderRadius: BorderRadius.none) {
