@@ -209,30 +209,23 @@ private
 
   def ensure_kit_type_exists
     # TODO: unsure why we cannot simply use the helpers that are included in ApplicationController - fix this
-    # is_rails_kit = action_name == "kit_show_rails"
-    # files = is_rails_kit ? File.join("**", "*.erb") : File.join("**", "*.jsx")
-    # kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
-    # if action_name === "kit_show_rails"
-    #   redirect_to action: "kit_show_react" unless kit_files.present?
-    # elsif action_name === "kit_show_react"
-    #   redirect_to action: "kit_show_rails" unless kit_files.present?
-    # end
     case action_name
     when "kit_show_rails"
-      files = File.join("**", "*.erb")
+      extension = "*.erb"
     when "kit_show_react"
-      files = File.join("**", "*.jsx")
+      extension = "*.jsx"
     when "kit_show_swift"
-      files = File.join("**", "*.md")
+      extension = "*.swift"
     end
+    files = File.join("**", extension)
     kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
-    case action_name
-    when "kit_show_rails"
-      redirect_to action: "kit_show_rails" unless kit_files.present?
-    when "kit_show_react"
+
+    if action_name === "kit_show_rails"
       redirect_to action: "kit_show_react" unless kit_files.present?
-    when "kit_show_swift"
-      redirect_to action: "kit_show_swift" unless kit_files.present?
+    elsif action_name === "kit_show_react"
+      redirect_to action: "kit_show_rails" unless kit_files.present?
+    elsif action_name === "kit_show_swift"
+      redirect_to action: "kit_show_react" unless kit_files.present?
     end
   end
 
