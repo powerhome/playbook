@@ -1,12 +1,19 @@
-//  create a component that just renders and h1 and accepts a prop called name
 import React from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 
 export default function Scaffold() {
-  const { name } = useParams()
+  const { name, type } = useParams()
+  const [searchParams] = useSearchParams()
+  const queryType = searchParams.get("type")
+
   return (
-    <div>
-      <h1>{`${name}`} component page</h1>
+    <div className='pl_md'>
+      <h1>Component Page: {`${name}`} </h1>
+      {queryType ? (
+        <h2>Type: {`${queryType}`}</h2>
+      ) : (
+        <h2>Type: {`${type}`} </h2>
+      )}
     </div>
   )
 }

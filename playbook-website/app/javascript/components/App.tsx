@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import MainSidebar from "./MainSidebar"
+import { Outlet } from "react-router-dom"
+import ReactSidebar from "./ReactSidebar"
 import {
   Layout,
   Background,
@@ -13,21 +13,32 @@ import {
 } from "playbook-ui"
 import HeaderMobile from "../images/pb_generic_header.jpg"
 import HeaderDesktop from "../images/pb_generic_header_desktop.jpg"
-import Footer from "./Footer"
 import DarkModeToggle from "./DarkModeToggle"
 
 function App() {
   const [kits, setKits] = useState([])
   const [dark, setDark] = useState(false)
+  const [kit, setKit] = useState("")
+  const [type, setType] = useState("")
+  const [category, setCategory] = useState("")
+  const [PBversion, setPBversion] = useState("")
+  const [searchList, setSearchList] = useState([])
+  const [samples, setSamples] = useState([])
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
   useEffect(() => {
-    fetch("/beta.json")
+    fetch("/beta/kits.json")
       .then((response) => response.json())
       .then((data) => {
         setKits(data.kits)
         setDark(data.dark)
+        setKit(data.kit)
+        setType(data.type)
+        setCategory(data.category)
+        setPBversion(data.PBversion)
+        setSearchList(data.search_list)
+        setSamples(data.samples)
       })
       .catch((error) => {
         console.log(error)
@@ -56,7 +67,15 @@ function App() {
           <Icon icon='bars' className='pb--page--hamburger'></Icon>
           <input type='checkbox' className='pb--page--checkbox' />
           <Layout.Side className='pb--page--sideNav'>
-            <MainSidebar kits={kits} />
+            <ReactSidebar
+              kits={kits}
+              kit={kit}
+              type={type}
+              category={category}
+              PBversion={PBversion}
+              searchList={searchList}
+              samples={samples}
+            />
           </Layout.Side>
           <Layout.Body>
             <div className={`pb--page--content--main ${dark}`}>
@@ -137,8 +156,9 @@ function App() {
                   />
                 )}
               </Background>
-              {/* I rebuilt the footer and it's ready to go. Just wasn't a part of my initial story.  */}
-              {/* <Footer /> */}
+              
+              <Outlet />
+
             </div>
           </Layout.Body>
         </Layout>
