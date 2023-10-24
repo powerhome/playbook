@@ -10,4 +10,4 @@ presence of `sort_menu` enables the sort link within the header
 </br>
 <div class="pb_pill_kit_warning"><div class="pb_title_kit_size_4 pb_pill_text">Disclaimer</div></div>
 
-This example uses a custom sorting method. You may need to modify this for your projects needs.
+This example uses a custom sort method that may need to be modified or replaced within your project.
