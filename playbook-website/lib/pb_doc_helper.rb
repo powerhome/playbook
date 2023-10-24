@@ -51,6 +51,7 @@ module PlaybookWebsite
     def get_kits(_type = "rails")
       aggregate_kits || []
       # Filter kits that have at least one component compatible with the type
+      # Empty array
     end
 
     def get_kits_pb_website
