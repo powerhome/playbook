@@ -1,3 +1,5 @@
+![card-shadow](https://github.com/powerhome/playbook/assets/92755007/7dd7edc1-a2b1-4e91-b271-9c897c9ededd)
+
 ```swift
 VStack(spacing: Spacing.small) {
   PBCard(shadow: Shadow.deep) {
