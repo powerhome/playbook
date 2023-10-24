@@ -64,7 +64,6 @@ spec:
             timeoutSeconds: 10
           <<: <%= partial "resources", component: "playbook", defaults: {
             "limits" => {
-              "cpu" => "0.3",
               "memory" => "256Mi",
               "ephemeral-storage" => "100Mi"
             },

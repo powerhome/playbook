@@ -40,11 +40,11 @@ $pb_button_sizes: (
     border-radius: $border_radius_rounded;
     border: 1px solid $border_light;
     color: $text_lt_light;
-    padding: ($space_xxs - 2) $space_xs;
+    padding: ($space_xxs - 3) $space_xs;
     min-height: $space_md + 4;
 
     .pb_icon_kit_emoji, .pb_icon_kit {
-      font-size: $font_base;
+      font-size: $font_small;
     }
     &:hover {
       background-color: $bg_light;
