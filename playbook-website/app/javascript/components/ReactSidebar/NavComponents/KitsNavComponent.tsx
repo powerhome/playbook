@@ -1,29 +1,27 @@
 import React, { useState, useEffect } from "react"
 import { linkFormat } from "../../../utilities/website_sidebar_helper"
 import RoutedNavItem from "../RoutedNavItem"
-
-
-export const kitsType = (type) => {
-  if (type === null || type === undefined) {
-    return "react"
-  } else {
-    return type
-  }
-}
+import { useParams } from "react-router-dom"
 
 export const KitsNavItem = ({
   link,
   kitIndex,
   collapsibles,
   category,
-  type,
   dark,
   isActive,
   setIsActive,
   updateTopLevelNav,
   parentIndex,
 }) => {
+
+  const { name, type } = useParams()
+
   const [collapsed] = collapsibles[kitIndex]
+
+
+
+
   //set up custom toggling
   const handleMainClick = (index, categoryKey) => {
     collapsibles.forEach(([, , setCollapsed], idx) => {
@@ -43,6 +41,7 @@ export const KitsNavItem = ({
     return true
   }
 
+
   //make sure kits nav will stay toggled open when nested item is clicked
   const updateKitsNav = (index) => {
     collapsibles.forEach((collapsible, i) => {
@@ -54,6 +53,8 @@ export const KitsNavItem = ({
       }
     })
   }
+
+
 
   //click on nested items
   const handleSubItemClick = (subLinkIndex, sublink, Index) => {
@@ -101,11 +102,11 @@ export const KitsNavItem = ({
         fontSize='small'
         iconRight={["plus", "minus"]}
         key={`${categoryKey}-${kitIndex}`}
-        path={`kit_category/${categoryKey}/${kitsType(type)}`}
+        path={`kit_category/${categoryKey}/${type}`}
         marginBottom='none'
         marginTop='xxs'
         onClick={() => handleMainClick(kitIndex, categoryKey)}
-        onIconRightClick={() => console.log('hello')}
+        onIconRightClick={() => console.log("hello")}
         paddingY='xxs'
         text={linkFormat(categoryKey)}
       >
@@ -115,7 +116,7 @@ export const KitsNavItem = ({
             dark={dark}
             fontSize='small'
             key={`${sublink}-${j}`}
-            path={`kits/${sublink}/${kitsType(type)}`}
+            path={`kits/${sublink}/${type}`}
             marginY='none'
             onClick={() => handleSubItemClick(j, sublink, kitIndex)}
             paddingY='xxs'
@@ -131,7 +132,7 @@ export const KitsNavItem = ({
         dark={dark}
         fontSize='small'
         key={`${link}-${kitIndex}`}
-        path={`kits/${link}/${kitsType(type)}`}
+        path={`kits/${link}/${type}`}
         marginBottom='none'
         marginTop='xxs'
         onClick={() => updateTopLevelNav(parentIndex)}

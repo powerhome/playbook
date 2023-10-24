@@ -13,12 +13,13 @@ class PagesController < ApplicationController
   before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift home]
 
   def react_app
-    @kit = params[:name]
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
+    @type = params[:type]
+
     respond_to do |format|
       format.html { render template: "react_app", layout: false }
-      format.json { render json: { kits: @kits, kit: @kit, dark: @dark } }
+      format.json { render json: { kits: @kits, dark: @dark, type: @type } }
     end
   end
 
