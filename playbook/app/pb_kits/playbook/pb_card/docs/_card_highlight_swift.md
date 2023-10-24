@@ -1,3 +1,5 @@
+![card-highlight](https://github.com/powerhome/playbook/assets/92755007/aba8c811-e21a-4aee-8d2d-64789989875d)
+
 ```swift
 VStack(spacing: Spacing.small) {
   PBCard(highlight: .side(.product(.product6, category: .highlight))) {
