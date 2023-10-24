@@ -5,63 +5,63 @@ const treeData = [
   {
     label: "Power Home Remodeling",
     value: "Power Home Remodeling",
-    id: "powerhome2",
+    id: "powerhome3",
     expanded: true,
     children: [
       {
         label: "People",
         value: "People",
-        id: "people2",
+        id: "people3",
         expanded: true,
         children: [
           {
             label: "Talent Acquisition",
             value: "Talent Acquisition",
-            id: "talent2",
+            id: "talent3",
           },
           {
             label: "Business Affairs",
             value: "Business Affairs",
-            id: "business2",
+            id: "business3",
             children: [
               {
                 label: "Initiatives",
                 value: "Initiatives",
-                id: "initiative2",
+                id: "initiative3",
               },
               {
                 label: "Learning & Development",
                 value: "Learning & Development",
-                id: "development2",
+                id: "development3",
               },
             ],
           },
           {
             label: "People Experience",
             value: "People Experience",
-            id: "experience2",
+            id: "experience3",
           },
         ],
       },
       {
         label: "Contact Center",
         value: "Contact Center",
-        id: "contact2",
+        id: "contact3",
         children: [
           {
             label: "Appointment Management",
             value: "Appointment Management",
-            id: "appointment2",
+            id: "appointment3",
           },
           {
             label: "Customer Service",
             value: "Customer Service",
-            id: "customer2",
+            id: "customer3",
           },
           {
             label: "Energy",
             value: "Energy",
-            id: "energy2",
+            id: "energy3",
           },
         ],
       },
@@ -69,12 +69,12 @@ const treeData = [
   },
 ];
 
-const MultiLevelSelectSingle = (props) => {
+const MultiLevelSelectSingleChildrenOnly = (props) => {
   return (
     <div>
       <MultiLevelSelect
-          id="multiselect-single"
-          inputName="Power"
+          id="multiselect-single-children-only"
+          inputName="PowerChildren"
           onSelect={(selectedNode) => console.log("Selected Node", selectedNode)}
           treeData={treeData}
           ultimateChildrenOnly
@@ -85,4 +85,4 @@ const MultiLevelSelectSingle = (props) => {
   )
 };
 
-export default MultiLevelSelectSingle;
+export default MultiLevelSelectSingleChildrenOnly;

@@ -31,6 +31,7 @@ type MultiLevelSelectProps = {
   treeData?: { [key: string]: string }[]
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[]
+  ultimateChildrenOnly?: boolean
   variant?: "multi" | "single"
 } & GlobalProps
 
@@ -47,6 +48,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     treeData,
     onSelect = () => null,
     selectedIds,
+    ultimateChildrenOnly = false,
     variant = "multi"
   } = props
 
@@ -378,7 +380,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     { variant === "single" ? (
                       <Radio
                           checked={item.checked}
-                          class={item.hidden ? "singleHidden" : ""}
+                          class={ultimateChildrenOnly ? item.children ? "singleHidden" : "" : null}
                           id={`${item.id}-${item.label}`}
                           label={item.label}
                           name={inputName}

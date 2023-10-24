@@ -16,6 +16,8 @@ module Playbook
                            default: "pills"
       prop :input_name, type: Playbook::Props::String,
                         default: ""
+      prop :ultimate_children_only, type: Playbook::Props::Boolean,
+                                    default: false
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[multi single],
                      default: "multi"
@@ -33,6 +35,7 @@ module Playbook
           returnAllSelected: return_all_selected,
           selectedIds: selected_ids,
           input_name: input_name,
+          ultimateChildrenOnly: ultimate_children_only,
           variant: variant,
         }
       end
