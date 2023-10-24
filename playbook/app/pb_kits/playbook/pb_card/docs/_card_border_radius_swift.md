@@ -25,5 +25,9 @@ VStack(spacing: Spacing.small) {
    PBCard(borderRadius: BorderRadius.xLarge) {
     Text("X Large").pbFont(.body)
   }
+
+   PBCard(borderRadius: BorderRadius.rounded) {
+    Text("Rounded").pbFont(.body)
+  }
  }
  ``````
