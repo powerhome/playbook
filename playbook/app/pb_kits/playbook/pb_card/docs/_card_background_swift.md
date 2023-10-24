@@ -1,3 +1,5 @@
+![card-background-colors](https://github.com/powerhome/playbook/assets/92755007/9b9a6519-0f79-4d8c-a58a-ea5799f9e679)
+
 ```swift
 VStack(alignment: .leading, spacing: Spacing.small) {
   PBCard {
