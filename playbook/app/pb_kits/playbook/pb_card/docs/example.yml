@@ -35,4 +35,5 @@ examples:
   - card_separator_swift: Separator Card
   - card_border_none_swift: No Border
   - card_border_radius_swift: Border Radius
+  - card_styles_swift: Styles
   - card_props_swift: ""
