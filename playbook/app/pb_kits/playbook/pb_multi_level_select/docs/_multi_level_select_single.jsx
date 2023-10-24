@@ -77,7 +77,6 @@ const MultiLevelSelectSingle = (props) => {
           inputName="Power"
           onSelect={(selectedNode) => console.log("Selected Node", selectedNode)}
           treeData={treeData}
-          ultimateChildrenOnly
           variant="single"
           {...props}
       />
