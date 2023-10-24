@@ -1,3 +1,5 @@
+![card-padding](https://github.com/powerhome/playbook/assets/92755007/b5f56638-2307-46fb-ac28-c4225cf3e051)
+
 ```swift
 VStack(spacing: Spacing.small) {
   PBCard(padding: Spacing.none) {
