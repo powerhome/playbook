@@ -1,4 +1,4 @@
-![badge-colors](https://github.com/powerhome/playbook/assets/92755007/52ce34ef-eb0d-48c0-9232-89edfff60cef)
+![badge-colors](https://github.com/powerhome/playbook/assets/92755007/79c1d61c-0411-4ee3-ab4f-927df2fad422)
 
 ```swift
 HStack {
