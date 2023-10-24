@@ -3,7 +3,6 @@ import { NavItem, useCollapsible } from "playbook-ui";
 import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent";
 import { SideBarNavItems } from "./MenuData/SidebarNavItems";
 import { OtherNavItems } from "./NavComponents/OtherNavComponent";
-import RoutedNavItem from "./RoutedNavItem";
 
 const currentURL = window.location.pathname + window.location.search;
 
@@ -131,7 +130,7 @@ export const TopLevelNavItem = ({
     };
 
     return (
-      <RoutedNavItem
+      <NavItem
         active={activeTopLevel(key, link)}
         collapsed={children && toggleTopNav}
         collapsible={children}
@@ -143,7 +142,7 @@ export const TopLevelNavItem = ({
         iconLeft={leftIcon}
         iconRight={children && ["plus", "minus"]}
         key={key}
-        path={TopLevelLink(link)}
+        link={TopLevelLink(link)}
         marginY="none"
         onClick={() => handleComponentsClick(key, i)}
         onIconRightClick={children && (() => handleComponentsIconClick(i))}
@@ -185,7 +184,7 @@ export const TopLevelNavItem = ({
             )}
           </>
         )}
-      </RoutedNavItem>
+      </NavItem>
     );
   };
 
