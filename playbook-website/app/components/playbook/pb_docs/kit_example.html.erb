@@ -15,7 +15,7 @@
     </div>
   <% end %>
   <% if show_code %>
-    <div class="markdown pb--kit-example-markdown markdown <%= dark ? "dark" : "" %>">
+    <div class="markdown pb--kit-example-markdown markdown <%= type == "swift" ? "kit_show_swift" : "" %> <%= dark ? "dark" : "" %>">
       <%= render_markdown(description) %>
     </div>
     <div id="code-wrapper">

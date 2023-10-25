@@ -225,8 +225,9 @@ private
     when "kit_show_react"
       extension = "*.jsx"
     when "kit_show_swift"
-      extension = "*.swift"
+      extension = "*.md"
     end
+
     files = File.join("**", extension)
     kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
 
