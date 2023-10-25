@@ -36,15 +36,18 @@ module ApplicationHelper
     case type
     when "rails"
       extension = "erb"
+      query_string = extension
     when "react"
       extension = "jsx"
+      query_string = extension
     when "swift"
-      extension = "swift"
+      extension = "md"
+      query_string = "_swift"
     end
 
     Playbook.kit_path(kit, "docs")
             .glob("**/*.#{extension}")
-            .any? { |path| path.basename.to_s.include?(extension) }
+            .any? { |path| path.basename.to_s.include?(query_string) }
             .present?
   end
 

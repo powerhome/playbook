@@ -27,7 +27,7 @@
             </li>
           <li>
             <%= pb_rails("button", props: { icon: "code", id:"toggle-open-opened", text: "Close Code", variant: "link", size: "sm", display: "none" }) %>
-            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-closed", text: "Show Code", variant: "link", size: "sm" }) %>
+            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-closed", text: "Show Code", variant: "link", size: "sm", classname: hide_code_button }) %>
           </li>
         </ul>
       </div>
@@ -78,3 +78,9 @@
     })
   }
 </script>
+
+<style>
+  .swift-hide-code-button {
+    display: none;
+  }
+</style>
