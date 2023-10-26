@@ -51,6 +51,15 @@ module ApplicationHelper
             .present?
   end
 
+  def category_has_kits?(category_kits: [], type: "rails")
+    display_kits = []
+    category_kits.each do |kit|
+      display_kits.push(pb_doc_has_kit_type?(kit, type))
+      display_kits.push(pb_doc_has_kit_type?(kit, type))
+    end
+    display_kits.include?(true)
+  end
+
   def nav_hash_category(link)
     link.keys.first
   end

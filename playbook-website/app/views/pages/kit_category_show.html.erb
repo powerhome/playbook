@@ -1,1 +1,20 @@
-<%= @category %>
+<div class="pb--kits">
+  <div class="pb--page--dark-mode-toggle-desktop">
+    <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
+  </div>
+  <%= pb_rails("title", props: { text: pb_kit_title(@category), tag: "h1", size: 1, margin_top:"xl" }) %>
+  <br>
+  <div class="pb--kit-type-nav">
+    <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
+      <%= pb_rails("nav/item", props: { text: "Rails", link: kit_category_show_path(@category, type: 'rails'), active: @type == 'rails' }) %>
+      <%= pb_rails("nav/item", props: { text: "React", link: kit_category_show_path(@category, type: 'react'), active: @type == 'react' }) %>
+      <% if category_has_kits?(category_kits: @category_kits, type: "swift") %>
+        <%= pb_rails("nav/item", props: { text: "Swift", link: kit_category_show_path(@category, type: 'swift'), active: @type == 'swift' }) %>
+      <% end %>
+    <% end %>
+    <%= pb_rails("section_separator") %>
+  </div>
+  <br>
+  <br>
+  <%= pb_category_kits(category_kits: @category_kits, type: @type) %>
+</div>

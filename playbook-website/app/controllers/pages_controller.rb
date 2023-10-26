@@ -192,7 +192,7 @@ private
 
   def set_category
     @category = params[:name]
-    if categories.include?(@category)
+    if categories.include?(@category) && helpers.category_has_kits?(category_kits: kit_categories, type: params[:type])
       @category_kits = kit_categories
       @kits = params[:name]
     else
