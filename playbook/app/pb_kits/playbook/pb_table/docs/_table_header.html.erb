@@ -1,3 +1,4 @@
+<%# Example data for demonstration purposes %>
 <% data_rows = [
     { 'territory' => 'North', 'firstname' => 'John', 'lastname' => 'Doe', 'age' => 30, 'job' => 'Engineer' },
     { 'territory' => 'South', 'firstname' => 'Alice', 'lastname' => 'Smith', 'age' => 28, 'job' => 'Designer' },
@@ -7,6 +8,7 @@
   ]
 %>
 
+<%# Example sort method for demonstration purposes %>
 <% if params["sort"] %>
   <% sort_param = params["sort"].gsub(/_(asc|desc)\z/, "") %>
   <% sort_direction = params["sort"].end_with?("_asc") ? 1 : -1 %>
