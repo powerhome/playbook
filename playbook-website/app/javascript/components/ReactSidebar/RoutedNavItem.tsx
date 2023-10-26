@@ -5,7 +5,7 @@ import { NavItem } from "playbook-ui"
 const RoutedNavItem = ({ text, path, ...props }) => {
   return (
     <NavLink to={path} end>
-      {({ isActive }) => <NavItem active={isActive} text={text} {...props} />}
+      {({ isActive }) => <NavItem active={isActive} link={"#"} text={text} {...props} />}
     </NavLink>
   )
 }

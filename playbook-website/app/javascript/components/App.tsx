@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { Outlet } from "react-router-dom"
+import { Layout, Icon } from "playbook-ui"
 import ReactSidebar from "./ReactSidebar"
-import {
-  Layout,
-  Background,
-  Icon,
-  Title,
-  Body,
-  Button,
-  Flex,
-  FlexItem,
-} from "playbook-ui"
-
 import LayoutRight from "./LayoutRight"
 
 function App() {

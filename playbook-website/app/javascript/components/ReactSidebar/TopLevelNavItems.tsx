@@ -4,13 +4,12 @@ import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent"
 import { SideBarNavItems } from "./MenuData/SidebarNavItems"
 import { OtherNavItems } from "./NavComponents/OtherNavComponent"
 import RoutedNavItem from "./RoutedNavItem"
-import { useLocation } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 
 // const currentURL = window.location.pathname + window.location.search
 
 export const TopLevelNavItem = ({
   dark,
-  type,
   isActive,
   setIsActive,
   kits,
@@ -19,25 +18,19 @@ export const TopLevelNavItem = ({
   collapsibles,
   samples,
 }) => {
-  //hook into collapsible logic for top level item
-  const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible())
+  const { name, type = "react" } = useParams()
 
-  //set up toggling for top level item
-  const handleComponentsClick = (index) => {
-    topLevelCollapsibles.forEach(([, , setCollapsed], idx) => {
-      if (idx === index) {
-        setCollapsed(false)
-      } else {
-        setCollapsed(true)
-      }
-    })
-    //return true at end to disable default collapsible behavior
-    return true
-  }
+  const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
 
-  //extract render logic out of return for better performance
+  const handleComponentsClick = (index: any) => {
+    topLevelCollapsibles.forEach((collapsible, idx) => {
+      collapsible[2](idx === index ? false : true); // Use the setCollapsed function
+    });
+  };
+  // };
+
   const renderTopItems = (name, key, children, leftIcon, link, i) => {
-    const [collapsed] = topLevelCollapsibles[i]
+    const [collapsed, , setCollapsed] = collapsibles[i];
 
     //callback function so top level nav item stays toggled opwn if child is clicked
     const updateTopLevelNav = (index) => {
@@ -52,10 +45,16 @@ export const TopLevelNavItem = ({
       })
     }
 
+    const handleComponentsIconClick = (i: any) => {
+      topLevelCollapsibles.forEach(([collapsed, toggle, setCollapsed], idx) => {
+        idx === i ? toggle : null
+      })
+    }
+
     return (
-      <NavItem
-        collapsed={false}
-        collapsible={children}
+      <RoutedNavItem
+        collapsed={collapsed}
+        collapsible
         collapsibleTrail={children}
         cursor='pointer'
         dark={dark}
@@ -66,8 +65,8 @@ export const TopLevelNavItem = ({
         key={key}
         path={link}
         marginY='none'
-        // onClick={() => console.log("clicked the main one")}
-        onIconRightClick={() => console.log("clicked the right icon")}
+        onClick={() => handleComponentsClick(i)}
+        onIconRightClick={children && (() => handleComponentsIconClick(i))}
         paddingY='xxs'
         target={name === "Playground" ? "_blank" : "_self"}
         text={name}
@@ -104,7 +103,7 @@ export const TopLevelNavItem = ({
             )}
           </>
         )}
-      </NavItem>
+      </RoutedNavItem>
     )
   }
 

@@ -63,7 +63,7 @@ const ToggleIcon = ({
 
   const handleIconClick = (e: any) => {
     if (onIconClick) {
-      e.stopPropagation()
+      e.preventDefault()
       onIconClick()
     }
   }

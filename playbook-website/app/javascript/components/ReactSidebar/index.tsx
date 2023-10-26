@@ -7,6 +7,7 @@ import PBLogo from "../../images/pb-logo.svg"
 import KitSearch from "../KitSearch"
 import Scaffold from "../Scaffold"
 
+import { CollapsibleProvider } from './CollapsibleContext'; 
 const MainSidebar = ({
   dark,
   type,
@@ -23,7 +24,7 @@ const MainSidebar = ({
   const collapsibles = kits.map(() => useCollapsible())
 
   return (
-    <>
+    <CollapsibleProvider>
       <Flex
         orientation='row'
         spacing='between'
@@ -49,7 +50,6 @@ const MainSidebar = ({
           kits={searchList}
         />
       </Flex>
-
       <Nav dark={dark} variant='bold' paddingTop='xxs'>
         <TopLevelNavItem
           dark={dark}
@@ -62,7 +62,7 @@ const MainSidebar = ({
           samples={samples}
         />
       </Nav>
-    </>
+    </CollapsibleProvider>
   )
 }
 

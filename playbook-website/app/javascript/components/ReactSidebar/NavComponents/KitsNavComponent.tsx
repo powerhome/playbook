@@ -15,7 +15,7 @@ export const KitsNavItem = ({
   parentIndex,
 }) => {
 
-  const { name, type } = useParams()
+  const { name, type = "react" } = useParams()
 
   const [collapsed] = collapsibles[kitIndex]
 
@@ -24,6 +24,7 @@ export const KitsNavItem = ({
 
   //set up custom toggling
   const handleMainClick = (index, categoryKey) => {
+
     collapsibles.forEach(([, , setCollapsed], idx) => {
       setIsActive(() => {
         const newIsActive = {}
@@ -55,7 +56,6 @@ export const KitsNavItem = ({
   }
 
 
-
   //click on nested items
   const handleSubItemClick = (subLinkIndex, sublink, Index) => {
     setIsActive(() => {
@@ -84,11 +84,9 @@ export const KitsNavItem = ({
     }, [collapsed])
 
     //click event for right icon
-    const handleIconClick = (index) => {
-      collapsibles.forEach(([, ,], idx) => {
-        if (idx === index) {
-          toggleNav === true ? setToggleNav(false) : setToggleNav(true)
-        }
+    const handleComponentsIconClick = (i: any) => {
+      collapsibles.forEach(([collapsed, , setCollapsed], idx) => {
+        idx === i ? setCollapsed(!collapsed) : null
       })
     }
 
@@ -106,7 +104,7 @@ export const KitsNavItem = ({
         marginBottom='none'
         marginTop='xxs'
         onClick={() => handleMainClick(kitIndex, categoryKey)}
-        onIconRightClick={() => console.log("hello")}
+        onIconRightClick={() => handleComponentsIconClick(kitIndex)}
         paddingY='xxs'
         text={linkFormat(categoryKey)}
       >
