@@ -9,7 +9,8 @@ export const OtherNavItems = ({
   samples,
   setIsActive,
   updateTopLevelNav,
-  parentIndex
+  parentIndex,
+  reloadDocument
 }) => {
   //transform text from samples yml
   const transformMenuTitle = (link) => {
@@ -56,6 +57,7 @@ export const OtherNavItems = ({
     <>
       {menuItems.map((link, i) => (
         <RoutedNavItem
+          reloadDocument={reloadDocument}
           cursor="pointer"
           dark={dark}
           fontSize="small"

@@ -4,7 +4,7 @@ import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent"
 import { SideBarNavItems } from "./MenuData/SidebarNavItems"
 import { OtherNavItems } from "./NavComponents/OtherNavComponent"
 import RoutedNavItem from "./RoutedNavItem"
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useParams, matchRoutes } from "react-router-dom"
 
 // const currentURL = window.location.pathname + window.location.search
 
@@ -20,17 +20,36 @@ export const TopLevelNavItem = ({
 }) => {
   const { name, type = "react" } = useParams()
 
-  const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
+  const location = useLocation()
+  const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible())
 
+  
+
+  useEffect(() => {
+    const matchedIndex = SideBarNavItems.findIndex((item, index) => {
+      if (item.children) {
+        // For React routes, we need to handle nested routes
+        const currentRoutes = [{ path: `/beta/${item.link}/*` }]
+        const match = matchRoutes(currentRoutes, location)
+        return match != null
+      } else {
+        // For Rails routes, match against the pathname directly
+        return location.pathname.includes(`/${item.link}`)
+      }
+    })
+
+    if (matchedIndex !== -1) {
+      topLevelCollapsibles[matchedIndex][2](false) // Use the setCollapsed function
+    }
+  }, [location.pathname, topLevelCollapsibles])
   const handleComponentsClick = (index: any) => {
     topLevelCollapsibles.forEach((collapsible, idx) => {
-      collapsible[2](idx === index ? false : true); // Use the setCollapsed function
-    });
-  };
-  // };
+      collapsible[2](idx === index ? false : true) // Use the setCollapsed function
+    })
+  }
 
   const renderTopItems = (name, key, children, leftIcon, link, i) => {
-    const [collapsed, , setCollapsed] = collapsibles[i];
+    const [collapsed, , setCollapsed] = collapsibles[i]
 
     //callback function so top level nav item stays toggled opwn if child is clicked
     const updateTopLevelNav = (index) => {
@@ -51,10 +70,14 @@ export const TopLevelNavItem = ({
       })
     }
 
+    const isComponents = name === "Components"
+    const Tag = name == "Components" ? RoutedNavItem : NavItem
+
     return (
-      <RoutedNavItem
-        collapsed={collapsed}
-        collapsible
+      <Tag
+        reloadDocument={isComponents ? false : true}
+        collapsed={children && collapsed}
+        collapsible={children}
         collapsibleTrail={children}
         cursor='pointer'
         dark={dark}
@@ -63,7 +86,8 @@ export const TopLevelNavItem = ({
         iconLeft={leftIcon}
         iconRight={children && ["plus", "minus"]}
         key={key}
-        path={link}
+        path={isComponents ? link : null}
+        link={isComponents ? "#" : link}
         marginY='none'
         onClick={() => handleComponentsClick(i)}
         onIconRightClick={children && (() => handleComponentsIconClick(i))}
@@ -93,6 +117,7 @@ export const TopLevelNavItem = ({
               </>
             ) : (
               <OtherNavItems
+                reloadDocument
                 name={name}
                 dark={dark}
                 samples={samples}
@@ -103,7 +128,7 @@ export const TopLevelNavItem = ({
             )}
           </>
         )}
-      </RoutedNavItem>
+      </Tag>
     )
   }
 

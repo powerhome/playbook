@@ -2,10 +2,12 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 import { NavItem } from "playbook-ui"
 
-const RoutedNavItem = ({ text, path, ...props }) => {
+const RoutedNavItem = ({ text, path, reloadDocument, link, ...props }) => {
   return (
-    <NavLink to={path} end>
-      {({ isActive }) => <NavItem active={isActive} link={"#"} text={text} {...props} />}
+    <NavLink to={path} end reloadDocument={reloadDocument}>
+      {({ isActive }) => (
+        <NavItem active={isActive} link={link} text={text} {...props} />
+      )}
     </NavLink>
   )
 }
