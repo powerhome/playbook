@@ -1,7 +1,7 @@
 <% example_html = ERB.new(example).result %>
 
 <%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark }) do %>
-  <% unless (action_name == "kit_show_swift") %>
+  <% unless (type == "swift") %>
     <div class="pb--kit-example">
       <%= pb_rails("caption", props: { text: example_title, dark: dark }) %>
       <br />
@@ -9,13 +9,13 @@
       <br>
     </div>
   <% else %>
-    <div class="pb--kit-example-markdown pt_none markdown <%= dark ? "dark" : "" %>">
+    <div class="pb--kit-example-markdown pt_none markdown kit_show_swift <%= dark ? "dark" : "" %>">
       <%= pb_rails("caption", props: { text: example_title, dark: dark, margin_top: "md" }) %>
       <%= render_markdown(description) %>
     </div>
   <% end %>
   <% if show_code %>
-    <div class="markdown pb--kit-example-markdown markdown <%= dark ? "dark" : "" %>">
+    <div class="markdown pb--kit-example-markdown markdown <%= type == "swift" ? "kit_show_swift" : "" %> <%= dark ? "dark" : "" %>">
       <%= render_markdown(description) %>
     </div>
     <div id="code-wrapper">

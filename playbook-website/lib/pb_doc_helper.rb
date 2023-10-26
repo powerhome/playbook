@@ -44,14 +44,9 @@ module PlaybookWebsite
     # rubocop:enable Style/StringConcatenation
 
     # rubocop:disable Naming/AccessorMethodName
-    # def get_kits
-    #   menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
-    #   menu["kits"]
-    # end
     def get_kits(_type = "rails")
       aggregate_kits || []
       # Filter kits that have at least one component compatible with the type
-      # Empty array
     end
 
     def get_kits_pb_website

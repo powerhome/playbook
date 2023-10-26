@@ -14,7 +14,7 @@ module Playbook
           kit: kit,
           example_title: example.values.first,
           example_key: example.keys.first,
-          show_code: show_code,
+          show_code: type == "swift" ? true : show_code,
           type: type,
           dark: dark_mode,
         }
@@ -33,9 +33,9 @@ module Playbook
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode)
+            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode) if pb_doc_has_kit_type?(sub_kit, type)
           end
-        else
+        elsif pb_doc_has_kit_type?(kit, type)
           display_kits << render_pb_doc_kit(kit, type, limit_examples, false, dark_mode)
         end
       end
@@ -90,6 +90,25 @@ module Playbook
       else
         []
       end
+    end
+
+    def pb_doc_has_kit_type?(kit, type = "rails")
+      case type
+      when "rails"
+        extension = "erb"
+        query_string = extension
+      when "react"
+        extension = "jsx"
+        query_string = extension
+      when "swift"
+        extension = "md"
+        query_string = "_swift"
+      end
+
+      pb_doc_kit_path(kit, "docs")
+        .glob("**/*.#{extension}")
+        .any? { |path| path.basename.to_s.include?(query_string) }
+        .present?
     end
 
     def pb_doc_render_clickable_title(kit, type)

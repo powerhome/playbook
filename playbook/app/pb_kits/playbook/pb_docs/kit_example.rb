@@ -51,6 +51,10 @@ module Playbook
         read_kit_file("", "_#{example_key}.swift")
       end
 
+      def hide_code_button
+        type == "swift" ? "swift-hide-code-button" : ""
+      end
+
     private
 
       def sanitize_code(stringified_code)
