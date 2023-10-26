@@ -21,7 +21,7 @@
   end %>
 <% end %>
 
-<%= pb_rails("table", props: { size: "lg", vertical_border: true, id: "table-header" } ) do %>
+<%= pb_rails("table", props: { data_table: true, vertical_border: true, id: "table-header" } ) do %>
   <thead>
     <tr>
       <%= pb_rails("table/table_header", props: {
@@ -59,7 +59,11 @@
     <% data_rows.each do |row| %>
       <tr>
         <% row.each do |key, value| %>
-          <%= pb_rails("background", props: { background_color: (params["sort"] && params["sort"].start_with?(key) ? "info_subtle" : "card_light"), tag: "td" }) do %>
+          <%= pb_rails("background", props: {
+              background_color: (params["sort"] && params["sort"].start_with?(key) ? "info_subtle" : "card_light"),
+              classname: (value.is_a?(Integer) ? "cell-right" : ""),
+              tag: "td"
+          }) do %>
             <%= value %>
           <% end %>
         <% end %>

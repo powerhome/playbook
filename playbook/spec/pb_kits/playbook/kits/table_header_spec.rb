@@ -21,7 +21,7 @@ RSpec.describe Playbook::PbTable::TableHeader do
   }
   it {
     is_expected.to define_enum_prop(:placement)
-      .with_default("bottom-start")
+      .with_default("bottom-end")
       .with_values("top", "right", "bottom", "left", "top-start", "top-end", "bottom-start", "bottom-end", "right-start", "right-end", "left-start", "left-end")
   }
   it {

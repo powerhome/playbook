@@ -11,12 +11,12 @@ module Playbook
                            default: "center"
       prop :justify_sort_icon, type: Playbook::Props::Enum,
                                values: %w[start center end stretch around between evenly none],
-                               default: "none"
+                               default: "between"
       prop :colspan, type: Playbook::Props::Number,
                      default: 1
       prop :placement, type: Playbook::Props::Enum,
                        values: %w[top bottom left right top-start top-end bottom-start bottom-end right-start right-end left-start left-end],
-                       default: "bottom-start"
+                       default: "bottom-end"
       prop :sort_menu, type: Playbook::Props::HashArray,
                        default: [{}]
       prop :text, type: Playbook::Props::String,
