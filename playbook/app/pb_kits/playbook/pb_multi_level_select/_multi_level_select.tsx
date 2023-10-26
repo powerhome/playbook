@@ -137,6 +137,23 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }, [])
 
+
+  // useEffect(() => {
+  //   const singleHiddenInstances = document.querySelectorAll('.singleHidden');
+
+  //   singleHiddenInstances.forEach(singleHiddenInstance => {
+  //     const siblingElement = singleHiddenInstance.nextElementSibling as HTMLElement;
+  //       if (siblingElement && siblingElement.classList.contains('pb_radio_button')) {
+  //         siblingElement.style.display = 'none';
+  //         singleHiddenInstance.setAttribute('disabled', 'disabled');
+  //         const parentElement = singleHiddenInstance.parentElement;
+  //         if (parentElement) {
+  //             parentElement.style.cursor = 'default';
+  //         }
+  //       }
+  //   });
+  // }, [])
+
   const modifyRecursive = (tree: { [key: string]: any }[], check: boolean) => {
     if (!Array.isArray(tree)) {
       return
@@ -335,23 +352,25 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return items
   }
 
-  const singleHiddenInstances = document.querySelectorAll('.singleHidden');
-
-  singleHiddenInstances.forEach(singleHiddenInstance => {
-
-    const siblingElement = singleHiddenInstance.nextElementSibling as HTMLElement;
-      if (siblingElement && siblingElement.classList.contains('pb_radio_button')) {
-        siblingElement.style.display = 'none';
-      }
-  });
-
-
   // Rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: any }[]) => {
     return (
       <ul>
         {Array.isArray(items) &&
           items.map((item: { [key: string]: any }) => {
+            const singleHiddenInstances = document.querySelectorAll('.singleHidden');
+
+            singleHiddenInstances.forEach(singleHiddenInstance => {
+              const siblingElement = singleHiddenInstance.nextElementSibling as HTMLElement;
+                if (siblingElement && siblingElement.classList.contains('pb_radio_button')) {
+                  siblingElement.style.display = 'none';
+                  singleHiddenInstance.setAttribute('disabled', 'disabled');
+                  const parentElement = singleHiddenInstance.parentElement;
+                  if (parentElement) {
+                      parentElement.style.cursor = 'default';
+                  }
+                }
+            });
             return (
               <div key={item.id}>
                 <li

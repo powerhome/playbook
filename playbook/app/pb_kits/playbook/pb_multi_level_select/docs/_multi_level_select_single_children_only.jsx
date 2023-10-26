@@ -6,13 +6,11 @@ const treeData = [
     label: "Power Home Remodeling",
     value: "Power Home Remodeling",
     id: "powerhome3",
-    expanded: true,
     children: [
       {
         label: "People",
         value: "People",
         id: "people3",
-        expanded: true,
         children: [
           {
             label: "Talent Acquisition",
