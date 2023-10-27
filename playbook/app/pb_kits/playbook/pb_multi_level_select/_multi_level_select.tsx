@@ -298,6 +298,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const handleRadioButtonClick = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
+
     const { id, value: inputText } = e.target
     // The radio button needs a unique ID, this grabs the ID before the hyphen
     const selectedItemID = id.match(/^[^-]*/)[0]
@@ -314,6 +315,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setIsDropdownClosed(true)
 
     onSelect(selectedItem)
+
+
   };
 
   // Single select: reset the tree state upon typing
@@ -326,8 +329,26 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   const isTreeRowExpanded = (item: any) => expanded.indexOf(item.id) > -1
 
+  const handleSingleHidden = () => {
+    const singleHiddenInstances = document.querySelectorAll('.singleHidden');
+
+    singleHiddenInstances.forEach(singleHiddenInstance => {
+      const siblingElement = singleHiddenInstance.nextElementSibling as HTMLElement;
+        if (siblingElement && siblingElement.classList.contains('pb_radio_button')) {
+          siblingElement.style.display = 'none';
+          singleHiddenInstance.setAttribute('disabled', 'disabled');
+          const parentElement = singleHiddenInstance.parentElement;
+          if (parentElement) {
+              parentElement.style.cursor = 'default';
+          }
+        }
+    });
+  }
+  handleSingleHidden()
+
   // Handle click on chevron toggles in dropdown
   const handleToggleClick = (id: string, event: React.MouseEvent) => {
+    // handleSingleHidden()
     event.stopPropagation()
     const clickedItem = filterFormattedDataById(formattedData, id)
     if (clickedItem) {
@@ -340,6 +361,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
       setExpanded(expandedArray)
     }
+    handleSingleHidden()
   }
 
   const itemsSelectedLength = () => {
@@ -358,19 +380,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       <ul>
         {Array.isArray(items) &&
           items.map((item: { [key: string]: any }) => {
-            const singleHiddenInstances = document.querySelectorAll('.singleHidden');
-
-            singleHiddenInstances.forEach(singleHiddenInstance => {
-              const siblingElement = singleHiddenInstance.nextElementSibling as HTMLElement;
-                if (siblingElement && siblingElement.classList.contains('pb_radio_button')) {
-                  siblingElement.style.display = 'none';
-                  singleHiddenInstance.setAttribute('disabled', 'disabled');
-                  const parentElement = singleHiddenInstance.parentElement;
-                  if (parentElement) {
-                      parentElement.style.cursor = 'default';
-                  }
-                }
-            });
             return (
               <div key={item.id}>
                 <li
