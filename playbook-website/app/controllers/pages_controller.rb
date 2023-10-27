@@ -218,25 +218,12 @@ private
   end
 
   def ensure_kit_type_exists
-    # TODO: unsure why we cannot simply use the helpers that are included in ApplicationController - fix this
-    case action_name
-    when "kit_show_rails"
-      extension = "*.erb"
-    when "kit_show_react"
-      extension = "*.jsx"
-    when "kit_show_swift"
-      extension = "*.md"
-    end
-
-    files = File.join("**", extension)
-    kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
-
     if action_name === "kit_show_rails"
-      redirect_to action: "kit_show_react" unless kit_files.present?
+      redirect_to action: "kit_show_react" unless helpers.pb_doc_has_kit_type?(params[:name], "rails")
     elsif action_name === "kit_show_react"
-      redirect_to action: "kit_show_rails" unless kit_files.present?
+      redirect_to action: "kit_show_rails" unless helpers.pb_doc_has_kit_type?(params[:name], "react")
     elsif action_name === "kit_show_swift"
-      redirect_to action: "kit_show_react" unless kit_files.present?
+      redirect_to action: "kit_show_react" unless helpers.pb_doc_has_kit_type?(params[:name], "swift")
     end
   end
 
