@@ -6,7 +6,7 @@ const RoutedNavItem = ({ text, path, reloadDocument, link, ...props }) => {
   return (
     <NavLink to={path} end reloadDocument={reloadDocument}>
       {({ isActive }) => (
-        <NavItem active={isActive} link={link} text={text} {...props} />
+        <NavItem link={link} text={text} {...props} />
       )}
     </NavLink>
   )

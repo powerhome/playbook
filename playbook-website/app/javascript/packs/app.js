@@ -16,6 +16,8 @@ import {
 } from 'react-router-dom'
 import Scaffold from '../components/Scaffold'
 import RedirectToType from '../components/RedirectToType'
+import ComponentsList from '../components/ComponentsList'
+import Component from '../components/ComponentsList/Component'
 
 const rootElement = document.getElementById('root')
 
@@ -26,26 +28,19 @@ const router = createBrowserRouter(
         path="/beta"
     >
       <Route
-          element={<Scaffold />}
-          exact
+          element={<ComponentsList />}
           path="kits"
       >
         <Route
-            element={<Scaffold />}
-            exact
-            path=":name/:type"
-        />
-        <Route
-            element={<Navigate to="react" />}
-            exact
+            element={<Component />}
             path=":name"
         />
         <Route
             element={<Navigate to="react" />}
-            exact
-            path=""
+            path=":name"
         />
       </Route>
+
       <Route
           element={<Scaffold />}
           path="kit_category/:name/:type"

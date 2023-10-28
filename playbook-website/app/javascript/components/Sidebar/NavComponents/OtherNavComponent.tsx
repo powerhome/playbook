@@ -1,6 +1,6 @@
 import React from "react";
 import { VisualGuidelinesItems } from "../MenuData/GuidelinesNavItems";
-import { GuidesNavItems } from "../MenuData/GuildesNavItems";
+import { GuidesNavItems } from "../MenuData/GuidesNavItems";
 import RoutedNavItem from "../RoutedNavItem";
 
 export const OtherNavItems = ({

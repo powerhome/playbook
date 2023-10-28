@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Layout, Icon } from "playbook-ui"
-import ReactSidebar from "./ReactSidebar"
+import Sidebar from "./Sidebar"
 import LayoutRight from "./LayoutRight"
 
 function App() {
@@ -54,7 +54,7 @@ function App() {
           <Icon icon='bars' className='pb--page--hamburger'></Icon>
           <input type='checkbox' className='pb--page--checkbox' />
           <Layout.Side className='pb--page--sideNav'>
-            <ReactSidebar
+            <Sidebar
               kits={kits}
               type={type}
               category={category}

@@ -105,6 +105,7 @@ export const TopLevelNavItem = ({
                     kitIndex={index}
                     collapsibles={collapsibles}
                     category={category}
+                    key={index}
                     type={type}
                     dark={dark}
                     kit={kit}

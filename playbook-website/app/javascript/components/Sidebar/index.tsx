@@ -5,10 +5,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 // @ts-ignore
 import PBLogo from "../../images/pb-logo.svg"
 import KitSearch from "../KitSearch"
-import Scaffold from "../Scaffold"
 
 import { CollapsibleProvider } from './CollapsibleContext'; 
-const MainSidebar = ({
+const Sidebar = ({
   dark,
   type,
   category,
@@ -66,4 +65,4 @@ const MainSidebar = ({
   )
 }
 
-export default MainSidebar
+export default Sidebar
