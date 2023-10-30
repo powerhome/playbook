@@ -40,7 +40,6 @@ const router = createBrowserRouter(
             path=":name"
         />
       </Route>
-
       <Route
           element={<Scaffold />}
           path="kit_category/:name/:type"
@@ -52,7 +51,6 @@ const router = createBrowserRouter(
     </Route>
   )
 )
-
 ReactDOM.render(
   <RouterProvider router={router} />,
   rootElement

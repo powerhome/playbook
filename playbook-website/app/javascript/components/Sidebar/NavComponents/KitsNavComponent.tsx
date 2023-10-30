@@ -14,34 +14,9 @@ export const KitsNavItem = ({
   updateTopLevelNav,
   parentIndex,
 }) => {
-
   const { name, type = "react" } = useParams()
 
   const [collapsed] = collapsibles[kitIndex]
-
-
-
-
-  //set up custom toggling
-  const handleMainClick = (index, categoryKey) => {
-
-    collapsibles.forEach(([, , setCollapsed], idx) => {
-      setIsActive(() => {
-        const newIsActive = {}
-        newIsActive[`${categoryKey}-${index}`] = true
-        return newIsActive
-      })
-      if (idx === index) {
-        setCollapsed(false)
-      } else {
-        setCollapsed(true)
-      }
-      updateTopLevelNav(parentIndex)
-    })
-    //return true at end to disable default collapsible behavior
-    return true
-  }
-
 
   //make sure kits nav will stay toggled open when nested item is clicked
   const updateKitsNav = (index) => {
@@ -55,14 +30,8 @@ export const KitsNavItem = ({
     })
   }
 
-
   //click on nested items
   const handleSubItemClick = (subLinkIndex, sublink, Index) => {
-    setIsActive(() => {
-      const newIsActive = {}
-      newIsActive[`${sublink}-${subLinkIndex}`] = true
-      return newIsActive
-    })
     updateTopLevelNav(parentIndex)
     updateKitsNav(Index)
   }
@@ -70,29 +39,30 @@ export const KitsNavItem = ({
   if (typeof link === "object") {
     const categoryKey = Object.keys(link)[0]
     const sublinks = link[categoryKey]
-    const isActiveCategory = isActive[kitIndex]
-      ? true
-      : Object.keys(isActive).length === 0
-      ? category === categoryKey
-      : false
-
-    //useState for handling collapsed state
-    const [toggleNav, setToggleNav] = useState(false)
-    //useEffect to handle toggle to consolidate logic
-    useEffect(() => {
-      setToggleNav(collapsed)
-    }, [collapsed])
 
     //click event for right icon
-    const handleComponentsIconClick = (i: any) => {
-      collapsibles.forEach(([collapsed, , setCollapsed], idx) => {
-        idx === i ? setCollapsed(!collapsed) : null
+    const handleComponentsIconClick = (e: any, i: any) => {
+      collapsibles.forEach(([collapsed, toggle, setCollapsed], idx) => {
+        console.log("collapsed", collapsed)
+        idx === i ? toggle : null
+      })
+    }
+
+    const handleComponentsClick = (index: any) => {
+      topLevelCollapsibles.forEach((collapsible, idx) => {
+        collapsible[2](idx === index ? false : true) // Use the setCollapsed function
+      })
+    }
+
+    const handleMainClick = (index) => {
+      collapsibles.forEach(([collapsed, toggle, setCollapsed], idx) => {
+        setCollapsed(idx === index ? false : true)
       })
     }
 
     return (
       <RoutedNavItem
-        collapsed={false}
+        collapsed={collapsed}
         collapsible
         collapsibleTrail
         cursor='pointer'
@@ -103,8 +73,8 @@ export const KitsNavItem = ({
         path={`kit_category/${categoryKey}/${type}`}
         marginBottom='none'
         marginTop='xxs'
-        onClick={() => handleMainClick(kitIndex, categoryKey)}
-        onIconRightClick={() => handleComponentsIconClick(kitIndex)}
+        onClick={() => handleMainClick(kitIndex)}
+        onIconRightClick={(e) => handleComponentsIconClick(e, kitIndex)}
         paddingY='xxs'
         text={linkFormat(categoryKey)}
       >

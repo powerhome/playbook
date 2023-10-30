@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import { NavItem, useCollapsible } from "playbook-ui"
-import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent"
+import { KitsNavItem} from "./NavComponents/KitsNavComponent"
 import { SideBarNavItems } from "./MenuData/SidebarNavItems"
 import { OtherNavItems } from "./NavComponents/OtherNavComponent"
 import RoutedNavItem from "./RoutedNavItem"
@@ -42,6 +42,7 @@ export const TopLevelNavItem = ({
       topLevelCollapsibles[matchedIndex][2](false) // Use the setCollapsed function
     }
   }, [location.pathname, topLevelCollapsibles])
+  
   const handleComponentsClick = (index: any) => {
     topLevelCollapsibles.forEach((collapsible, idx) => {
       collapsible[2](idx === index ? false : true) // Use the setCollapsed function

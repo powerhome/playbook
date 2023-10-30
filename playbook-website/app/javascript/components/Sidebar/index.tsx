@@ -1,12 +1,21 @@
 import React, { useState } from "react"
 import { Nav, useCollapsible, Image, Badge, Flex } from "playbook-ui"
 import { TopLevelNavItem } from "./TopLevelNavItems"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 // @ts-ignore
 import PBLogo from "../../images/pb-logo.svg"
 import KitSearch from "../KitSearch"
 
 import { CollapsibleProvider } from './CollapsibleContext'; 
+interface SidebarProps {
+  dark: boolean;
+  type: string;
+  category: string;
+  kits: any[];
+  PBversion: string;
+  searchList: any[];
+  samples: any[];
+}
+
 const Sidebar = ({
   dark,
   type,
@@ -15,7 +24,7 @@ const Sidebar = ({
   PBversion,
   searchList,
   samples,
-}) => {
+}: SidebarProps) => {
   //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({})
 

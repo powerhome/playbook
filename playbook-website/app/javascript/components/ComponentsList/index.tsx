@@ -12,7 +12,7 @@ export default function Components() {
           <Title text={"Avatar"} size='2' />
         </NavLink>
       )}
-      <Outlet /> {/* This will render the Component content */}
+      <Outlet /> 
     </div>
   )
 }

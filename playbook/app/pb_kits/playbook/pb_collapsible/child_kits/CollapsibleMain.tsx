@@ -64,7 +64,7 @@ const ToggleIcon = ({
   const handleIconClick = (e: any) => {
     if (onIconClick) {
       e.preventDefault()
-      onIconClick()
+      onIconClick(e)
     }
   }
 
