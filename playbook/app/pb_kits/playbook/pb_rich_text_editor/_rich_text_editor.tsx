@@ -4,6 +4,7 @@ import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop } from '../utilities/props'
+import cn from 'classnames'
 
 try {
   const Trix = require('trix')
@@ -29,6 +30,7 @@ type Editor = {
 type RichTextEditorProps = {
   aria?: { [key: string]: string },
   advancedEditor?: any,
+  advancedToolbarEditor?: boolean,
   toolbarBottom?: Boolean,
   children?: React.ReactNode | React.ReactNode[]
   className?: string,
@@ -51,6 +53,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   const {
     aria = {},
     advancedEditor,
+    advancedEditorToolbar = true,
     toolbarBottom = false,
     children,
     className,
@@ -154,7 +157,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     toolbarBottomClass,
     css
   )
-
+  
   return (
     <div
       {...ariaProps}
@@ -163,8 +166,14 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     >
       {
         advancedEditor ? (
-          <div className='pb_rich_text_editor_advanced_container'>
-          <EditorToolbar extensions={extensions} editor={advancedEditor}/>
+          <div 
+              className={cn("pb_rich_text_editor_advanced_container", { 
+              ["toolbar-active"]: advancedEditorToolbar,
+              })}
+            >
+            {advancedEditorToolbar && (
+              <EditorToolbar extensions={extensions} editor={advancedEditor}/>
+            )}
           { children }
           </div>
         ) : (
