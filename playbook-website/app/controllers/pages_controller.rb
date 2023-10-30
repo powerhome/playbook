@@ -170,8 +170,7 @@ class PagesController < ApplicationController
 private
 
   def aggregate_kits
-    menu = YAML.load_file(Rails.root.join("config/menu.yml"))
-    menu["kits"]
+    MENU["kits"]
   end
 
   def categories
