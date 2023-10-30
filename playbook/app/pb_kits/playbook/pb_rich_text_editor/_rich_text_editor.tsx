@@ -30,7 +30,7 @@ type Editor = {
 type RichTextEditorProps = {
   aria?: { [key: string]: string },
   advancedEditor?: any,
-  advancedToolbarEditor?: boolean,
+  advancedEditorToolbar?: boolean,
   toolbarBottom?: Boolean,
   children?: React.ReactNode | React.ReactNode[]
   className?: string,
@@ -157,7 +157,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     toolbarBottomClass,
     css
   )
-  
+
   return (
     <div
       {...ariaProps}
