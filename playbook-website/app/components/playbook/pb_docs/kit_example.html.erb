@@ -14,8 +14,8 @@
       <%= render_markdown(description) %>
     </div>
   <% end %>
-  <% if show_code %>
-    <div class="markdown pb--kit-example-markdown markdown <%= type == "swift" ? "kit_show_swift" : "" %> <%= dark ? "dark" : "" %>">
+  <% if show_code && type != "swift" %>
+    <div class="markdown pb--kit-example-markdown markdown <%= dark ? "dark" : "" %>">
       <%= render_markdown(description) %>
     </div>
     <div id="code-wrapper">
@@ -27,7 +27,7 @@
             </li>
           <li>
             <%= pb_rails("button", props: { icon: "code", id:"toggle-open-opened", text: "Close Code", variant: "link", size: "sm", display: "none" }) %>
-            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-closed", text: "Show Code", variant: "link", size: "sm", classname: hide_code_button }) %>
+            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-closed", text: "Show Code", variant: "link", size: "sm" }) %>
           </li>
         </ul>
       </div>
@@ -78,9 +78,3 @@
     })
   }
 </script>
-
-<style>
-  .swift-hide-code-button {
-    display: none;
-  }
-</style>

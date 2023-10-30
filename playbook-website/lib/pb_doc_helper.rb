@@ -14,7 +14,7 @@ module PlaybookWebsite
           kit: kit,
           example_title: example.values.first,
           example_key: example.keys.first,
-          show_code: type == "swift" ? true : show_code,
+          show_code: show_code,
           type: type,
           dark: dark_mode,
         }
