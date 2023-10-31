@@ -3,126 +3,68 @@ import MultiLevelSelect from "../_multi_level_select";
 
 const treeData = [
   {
-    label: "Philadelphia",
-    value: "Philadelphia",
-    id: "phl",
+    label: "Power Home Remodeling",
+    value: "Power Home Remodeling",
+    id: "powerhome1",
+    expanded: true,
     children: [
       {
-        label: "HQ",
-        value: "HQ",
-        id: "hq",
-      },
-      {
-        label: "Marketing & Sales PHL",
-        value: "Marketing & Sales PHL",
-        id: "marketing1",
-      },
-      {
-        label: "Installation Office PHL",
-        value: "Installation Office PHL",
-        id: "installation1",
-      },
-      {
-        label: "Warehouse PHL",
-        value: "Warehouse PHL",
-        id: "warehouse1",
-      },
-    ]
-  },
-  {
-    label: "New Jersey",
-    value: "New Jersey",
-    id: "nj",
-    children: [
-      {
-        label: "New Jersey",
-        value: "New Jersey",
-        id: "nj1",
+        label: "People",
+        value: "People",
+        id: "people1",
         children: [
           {
-            label: "Marketing & Sales NJ",
-            value: "Marketing & Sales NJ",
-            id: "marketing2",
+            label: "Talent Acquisition",
+            value: "Talent Acquisition",
+            id: "talent1",
           },
           {
-            label: "Installation Office NJ",
-            value: "Installation Office NJ",
-            id: "installation2",
+            label: "Business Affairs",
+            value: "Business Affairs",
+            id: "business1",
+            children: [
+              {
+                label: "Initiatives",
+                value: "Initiatives",
+                id: "initiative1",
+              },
+              {
+                label: "Learning & Development",
+                value: "Learning & Development",
+                id: "development1",
+              },
+            ],
           },
           {
-            label: "Warehouse NJ",
-            value: "Warehouse NJ",
-            id: "warehouse2",
+            label: "People Experience",
+            value: "People Experience",
+            id: "experience1",
           },
         ],
       },
       {
-        label: "Princeton",
-        value: "Princeton",
-        id: "princeton",
+        label: "Contact Center",
+        value: "Contact Center",
+        id: "contact1",
         children: [
           {
-            label: "Marketing & Sales Princeton",
-            value: "Marketing & Sales Princeton",
-            id: "marketing3",
+            label: "Appointment Management",
+            value: "Appointment Management",
+            id: "appointment1",
           },
           {
-            label: "Installation Office Princeton",
-            value: "Installation Office Princeton",
-            id: "installation3",
+            label: "Customer Service",
+            value: "Customer Service",
+            id: "customer1",
           },
           {
-            label: "Warehouse Princeton",
-            value: "Warehouse Princeton",
-            id: "warehouse3",
+            label: "Energy",
+            value: "Energy",
+            id: "energy1",
           },
-        ]
+        ],
       },
-    ]
-  },
-  {
-    label: "Maryland",
-    value: "Maryland",
-    id: "MD",
-    children: [
-      {
-        label: "Marketing & Sales MD",
-        value: "Marketing & Sales MD",
-        id: "marketing4",
-      },
-      {
-        label: "Installation Office MD",
-        value: "Installation Office MD",
-        id: "installation4",
-      },
-      {
-        label: "Warehouse MD",
-        value: "Warehouse MD",
-        id: "warehouse4",
-      },
-    ]
-  },
-  {
-    label: "Connecticut",
-    value: "Connecticut",
-    id: "CT",
-    children: [
-      {
-        label: "Marketing & Sales CT",
-        value: "Marketing & Sales CT",
-        id: "marketing5",
-      },
-      {
-        label: "Installation Office CT",
-        value: "Installation Office CT",
-        id: "installation5",
-      },
-      {
-        label: "Warehouse CT",
-        value: "Warehouse CT",
-        id: "warehouse5",
-      },
-    ]
+    ],
   },
 ];
 
