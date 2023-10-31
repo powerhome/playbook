@@ -97,7 +97,10 @@ class KitGenerator < Rails::Generators::NamedBase
 
       # Add kit to Playbook menu ==========================
       open("../playbook-website/config/menu.yml", "a") do |f|
-        f.puts "  - #{@kit_name_underscore}"
+        f.puts "  - name: #{@kit_name_underscore}"
+        f.puts "    components:"
+        f.puts "      - name: #{@kit_name_underscore}"
+        f.puts "        platforms: *#{platforms}"
       end
 
       say_status  "complete",
@@ -108,6 +111,18 @@ class KitGenerator < Rails::Generators::NamedBase
 
 # rubocop:enable Style/StringConcatenation
 private
+
+  def platforms
+    if @react_kit && @rails_kit && @swift_kit
+      "all"
+    elsif @react_kit && @rails_kit
+      "web"
+    elsif @react_kit
+      "react_only"
+    elsif @rails_kit
+      "rails_only"
+    end
+  end
 
   def react_imports_page(path:, import_statement:, webpack_statement:, import_area_indicator:)
     re_array = File.readlines(path)
