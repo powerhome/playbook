@@ -4,6 +4,7 @@ import { globalProps, GlobalProps } from "../utilities/globalProps"
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 import Checkbox from "../pb_checkbox/_checkbox"
 import Radio from "../pb_radio/_radio"
+import Body from "../pb_body/_body"
 import Icon from "../pb_icon/_icon"
 import FormPill from "../pb_form_pill/_form_pill"
 import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button"
@@ -136,23 +137,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       window.removeEventListener("click", handleClickOutside)
     }
   }, [])
-
-
-  // useEffect(() => {
-  //   const singleHiddenInstances = document.querySelectorAll('.singleHidden');
-
-  //   singleHiddenInstances.forEach(singleHiddenInstance => {
-  //     const siblingElement = singleHiddenInstance.nextElementSibling as HTMLElement;
-  //       if (siblingElement && siblingElement.classList.contains('pb_radio_button')) {
-  //         siblingElement.style.display = 'none';
-  //         singleHiddenInstance.setAttribute('disabled', 'disabled');
-  //         const parentElement = singleHiddenInstance.parentElement;
-  //         if (parentElement) {
-  //             parentElement.style.cursor = 'default';
-  //         }
-  //       }
-  //   });
-  // }, [])
 
   const modifyRecursive = (tree: { [key: string]: any }[], check: boolean) => {
     if (!Array.isArray(tree)) {
@@ -298,7 +282,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const handleRadioButtonClick = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-
     const { id, value: inputText } = e.target
     // The radio button needs a unique ID, this grabs the ID before the hyphen
     const selectedItemID = id.match(/^[^-]*/)[0]
@@ -315,8 +298,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setIsDropdownClosed(true)
 
     onSelect(selectedItem)
-
-
   };
 
   // Single select: reset the tree state upon typing
@@ -329,26 +310,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   const isTreeRowExpanded = (item: any) => expanded.indexOf(item.id) > -1
 
-  const handleSingleHidden = () => {
-    const singleHiddenInstances = document.querySelectorAll('.singleHidden');
-
-    singleHiddenInstances.forEach(singleHiddenInstance => {
-      const siblingElement = singleHiddenInstance.nextElementSibling as HTMLElement;
-        if (siblingElement && siblingElement.classList.contains('pb_radio_button')) {
-          siblingElement.style.display = 'none';
-          singleHiddenInstance.setAttribute('disabled', 'disabled');
-          const parentElement = singleHiddenInstance.parentElement;
-          if (parentElement) {
-              parentElement.style.cursor = 'default';
-          }
-        }
-    });
-  }
-  handleSingleHidden()
-
   // Handle click on chevron toggles in dropdown
   const handleToggleClick = (id: string, event: React.MouseEvent) => {
-    // handleSingleHidden()
     event.stopPropagation()
     const clickedItem = filterFormattedDataById(formattedData, id)
     if (clickedItem) {
@@ -361,7 +324,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
       setExpanded(expandedArray)
     }
-    handleSingleHidden()
   }
 
   const itemsSelectedLength = () => {
@@ -406,9 +368,11 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                       />
                     </div>
                     { variant === "single" ? (
+                      ultimateChildrenOnly && item.children ? (
+                        <Body>{item.label}</Body>
+                      ) :
                       <Radio
                           checked={item.checked}
-                          class={ultimateChildrenOnly ? item.children ? "singleHidden" : "" : null}
                           id={`${item.id}-${item.label}`}
                           label={item.label}
                           name={inputName}
