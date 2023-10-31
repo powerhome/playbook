@@ -12,6 +12,7 @@ function App() {
   const [PBversion, setPBversion] = useState("")
   const [searchList, setSearchList] = useState([])
   const [samples, setSamples] = useState([])
+  const [navigation, setNavigation] = useState([])
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
@@ -23,9 +24,10 @@ function App() {
         setDark(data.dark)
         setType(data.type)
         setCategory(data.category)
-        setPBversion(data.PBversion)
+        setPBversion(data.version)
         setSearchList(data.search_list)
         setSamples(data.samples)
+        setNavigation(data.navigation)
       })
       .catch((error) => {
         console.log(error)
@@ -61,6 +63,7 @@ function App() {
               PBversion={PBversion}
               searchList={searchList}
               samples={samples}
+              navigation={navigation}
             />
           </Layout.Side>
           <LayoutRight isMobile={isMobile} dark={dark} />

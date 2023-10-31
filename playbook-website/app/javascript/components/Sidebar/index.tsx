@@ -24,6 +24,7 @@ const Sidebar = ({
   PBversion,
   searchList,
   samples,
+  navigation
 }: SidebarProps) => {
   //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({})
@@ -68,6 +69,7 @@ const Sidebar = ({
           category={category}
           collapsibles={collapsibles}
           samples={samples}
+          navigation={navigation}
         />
       </Nav>
     </CollapsibleProvider>

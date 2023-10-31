@@ -5,6 +5,7 @@ require "playbook/pagination_renderer"
 require "will_paginate/array"
 
 class PagesController < ApplicationController
+  include PageVarsConcern
   before_action :set_js, only: %i[visual_guidelines]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
@@ -16,10 +17,14 @@ class PagesController < ApplicationController
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
     @type = params[:type]
+    @navigation = session[:navigation]
+    @version = Playbook::VERSION
+    @search_list = ApplicationHelper.search_list
+    @samples = SAMPLES
 
     respond_to do |format|
       format.html { render template: "react_app", layout: false }
-      format.json { render json: { kits: @kits, dark: @dark, type: @type } }
+      format.json { render json: { kits: @kits, dark: @dark, type: @type, navigation: @navigation, version: @version, search_list: @search_list, samples: @samples } }
     end
   end
 
