@@ -22,8 +22,6 @@ export const TopLevelNavItem = ({
   const location = useLocation()
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible())
 
-  
-
   useEffect(() => {
     const matchedIndex = SideBarNavItems.findIndex((item, index) => {
       if (item.children) {
@@ -44,8 +42,13 @@ export const TopLevelNavItem = ({
   
   const handleComponentsClick = (index: any) => {
     topLevelCollapsibles.forEach((collapsible, idx) => {
-      collapsible[2](idx === index ? false : true) // Use the setCollapsed function
-    })
+      const [, toggle, setCollapsed] = collapsible;
+      if (idx !== index) {
+        setCollapsed(true);
+      } else {
+        toggle();
+      }
+    });
   }
 
   const renderTopItems = (name, key, children, leftIcon, link, i) => {
@@ -65,9 +68,7 @@ export const TopLevelNavItem = ({
     }
 
     const handleComponentsIconClick = (i: any) => {
-      topLevelCollapsibles.forEach(([collapsed, toggle, setCollapsed], idx) => {
-        idx === i ? toggle : null
-      })
+      topLevelCollapsibles[i][1](); // Use the toggle function
     }
 
     const isComponents = name === "Components"

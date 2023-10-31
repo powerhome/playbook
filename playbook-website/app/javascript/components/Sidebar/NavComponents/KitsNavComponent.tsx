@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { linkFormat } from "../../../utilities/website_sidebar_helper"
 import RoutedNavItem from "../RoutedNavItem"
 import { useParams } from "react-router-dom"
+import { CollapsibleProvider } from "../CollapsibleContext"
 
 export const KitsNavItem = ({
   link,
@@ -34,6 +35,7 @@ export const KitsNavItem = ({
   const handleSubItemClick = (subLinkIndex, sublink, Index) => {
     updateTopLevelNav(parentIndex)
     updateKitsNav(Index)
+    collapsibles[Index][2](false) // Use the setCollapsed function
   }
 
   if (typeof link === "object") {
@@ -42,9 +44,8 @@ export const KitsNavItem = ({
 
     //click event for right icon
     const handleComponentsIconClick = (e: any, i: any) => {
-      collapsibles.forEach(([collapsed, toggle, setCollapsed], idx) => {
-        idx === i ? toggle : null
-      })
+      e.stopPropagation()
+      collapsibles[i][1]() // Use the toggle function
     }
 
     const handleMainClick = (event, index) => {
@@ -52,9 +53,16 @@ export const KitsNavItem = ({
         return
       }
       collapsibles.forEach(([collapsed, toggle, setCollapsed], idx) => {
-        setCollapsed(idx !== index)
+        if (idx === index) {
+          debugger;
+          setCollapsed(false)
+        } else {
+          setCollapsed(true)
+        }
       })
     }
+
+    const test = useContext(CollapsibleProvider);
 
     return (
       <RoutedNavItem
