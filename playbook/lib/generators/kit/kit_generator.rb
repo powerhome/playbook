@@ -59,7 +59,7 @@ class KitGenerator < Rails::Generators::NamedBase
                   :green
 
       # Ask user if Rails version should be generated ======
-      if yes?("Create RAILS #{@kit_name_underscore} kit? (y/N)")
+      if @rails_kit == true
         template "kit_ruby.erb", "#{full_kit_directory}/#{@kit_name_underscore}.rb"
         template "kit_html.erb", "#{full_kit_directory}/#{@kit_name_underscore}.html.erb"
         template "kit_example_rails.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.html.erb"
@@ -70,7 +70,7 @@ class KitGenerator < Rails::Generators::NamedBase
       end
 
       # Ask user if React version should be generated ======
-      if yes?("Create REACT #{@kit_name_pascal} kit? (y/N)")
+      if @react_kit == true
         template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.tsx"
         template "kit_jsx_test.erb", "#{full_kit_directory}/#{@kit_name_underscore}.test.jsx"
         template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
