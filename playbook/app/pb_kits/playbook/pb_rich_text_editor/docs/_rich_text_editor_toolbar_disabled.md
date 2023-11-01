@@ -1,3 +1,1 @@
-This variant allows you to optionally include the default toolbar. 
-
-The default toolbar relies on [Tiptap's StarterKit](https://tiptap.dev/api/extensions/starter-kit) which might add  that are not necessary for your application. Setting the `advancedEditorToobar` to false enables you to instantiate an editor with the minimum requirements.
+Because our default variant's toolbar requires [Tiptap's StarterKit](https://tiptap.dev/api/extensions/starter-kit) which may include features that are not relevant to your project or even block some custom extensions, optionally setting `advancedEditorToolbar` to `false` creates an editor without a toolbar, using only the minimum requirements.
