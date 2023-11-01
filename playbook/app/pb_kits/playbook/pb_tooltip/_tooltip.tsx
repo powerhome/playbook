@@ -28,6 +28,7 @@ type TooltipProps = {
   placement?: Placement,
   position?: "absolute" | "fixed";
   text: string,
+  truncatable: boolean,
 } & GlobalProps
 
 const Tooltip = (props: TooltipProps): React.ReactElement => {
@@ -42,6 +43,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     placement: preferredPlacement = "top",
     position = "absolute",
     text,
+    truncatable = false,
     zIndex,
     ...rest
   } = props
@@ -63,6 +65,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     middlewareData: { arrow: { x: arrowX, y: arrowY } = {},  },
     placement,
     reference,
+    refs,
     strategy,
     x,
     y,
@@ -82,12 +85,24 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     ],
     open,
     onOpenChange(open) {
-      setOpen(open)
+      if (truncatable) {
+        const domRef = refs.domReference.current;
+        if (
+          (domRef?.clientWidth === domRef?.scrollWidth) ||
+          (domRef?.scrollWidth === 0)
+        ) {
+          return
+        } else {
+          setOpen(open);
+        }
+      } else {
+        setOpen(open);
+      }
     },
     placement: preferredPlacement
   })
 
-
+      
   const { getFloatingProps } = useInteractions([
     useHover(context, {
       delay,
