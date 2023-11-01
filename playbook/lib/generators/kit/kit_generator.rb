@@ -54,6 +54,15 @@ class KitGenerator < Rails::Generators::NamedBase
       open("app/pb_kits/playbook/_playbook.scss", "a") do |f|
         f.puts "\n@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
       end
+      scss_file = "app/pb_kits/playbook/_playbook.scss"
+
+      # Sort kit names alphabetically
+      lines = File.readlines(scss_file)
+      utilities_lines = lines.select { |line| line.include?("utilities") }
+      remaining_lines = lines.reject { |line| line.include?("utilities") }.sort
+      sorted_lines = remaining_lines + utilities_lines
+      File.open(scss_file, "w") { |f| f.puts sorted_lines.join }
+
       say_status  "complete",
                   "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
                   :green
