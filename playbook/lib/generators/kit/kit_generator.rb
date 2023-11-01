@@ -5,12 +5,19 @@ class KitGenerator < Rails::Generators::NamedBase
   desc "This generator creates a new Playbook Kit"
   source_root File.expand_path("templates", __dir__)
   class_option :props, type: :array, default: []
+  class_option :rails, type: :boolean, default: false, desc: "Creates the boilerplate files for Rails"
+  class_option :react, type: :boolean, default: false, desc: "Creates the boilerplate files for React"
+  class_option :swift, type: :boolean, default: false, desc: "Creates the boilerplate files for Swift"
 
   REACT_EXAMPLES_PATH = "app/pb_kits/playbook/playbook-doc.js"
   REACT_INDEX_PATH = "app/pb_kits/playbook/index.js"
 
   def create_templates
     kit_name = name.strip.downcase
+    all_kits = (options[:rails] == false && options[:react] == false && options[:swift] == false)
+    @rails_kit = all_kits ? true : options[:rails]
+    @react_kit = all_kits ? true : options[:react]
+    @swift_kit = all_kits ? true : options[:swift]
     @kit_name_uppercase = kit_name.upcase
     @kit_name_lowercase = kit_name
     @kit_name_capitalize = kit_name.capitalize
@@ -53,7 +60,6 @@ class KitGenerator < Rails::Generators::NamedBase
 
       # Ask user if Rails version should be generated ======
       if yes?("Create RAILS #{@kit_name_underscore} kit? (y/N)")
-        @rails_kit = true
         template "kit_ruby.erb", "#{full_kit_directory}/#{@kit_name_underscore}.rb"
         template "kit_html.erb", "#{full_kit_directory}/#{@kit_name_underscore}.html.erb"
         template "kit_example_rails.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.html.erb"
@@ -65,7 +71,6 @@ class KitGenerator < Rails::Generators::NamedBase
 
       # Ask user if React version should be generated ======
       if yes?("Create REACT #{@kit_name_pascal} kit? (y/N)")
-        @react_kit = true
         template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.tsx"
         template "kit_jsx_test.erb", "#{full_kit_directory}/#{@kit_name_underscore}.test.jsx"
         template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
