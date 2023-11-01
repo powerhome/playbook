@@ -2,6 +2,7 @@ examples:
 
   rails:
   - tooltip_default: Default
+  - tooltip_truncated: Text Truncation
   - tooltip_selectors: Using Common Selectors
   - tooltip_with_icon_circle: Icon Circle Tooltip
 

@@ -7,6 +7,7 @@ module Playbook
       prop :trigger_element_selector
       prop :trigger_element_id, deprecated: true
       prop :tooltip_id
+      prop :truncatable, default: false
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
 

@@ -54,6 +54,9 @@ export default class PbTooltip extends PbEnhancedElement {
   }
 
   showTooltip(trigger) {
+    let triggerClasses = [...trigger.classList];
+    if (triggerClasses.includes("tooltip-disabled")) return
+
     this.popper = createPopper(trigger, this.tooltip, {
       placement: this.position,
       modifiers: [

@@ -7,3 +7,22 @@
     <div class="arrow" id="<%= object.tooltip_id %>-arrow"></div>
   </div>
 <% end %>
+
+<script>
+  if (<%= object.truncatable %>) {
+    // only display tooltip if trigger element is truncated
+    document.addEventListener("DOMContentLoaded", function () {
+      const formatedTriggerElementId =
+        "<%= object.trigger_element_selector %>".replace("#", "");
+      const triggerElement = document.getElementById(formatedTriggerElementId);
+
+      // if scrollWidth is the same as the offsetWidth, the trigger element is not truncated
+      if (
+        triggerElement.offsetWidth === triggerElement.scrollWidth ||
+        triggerElement.scrollWidth === 0
+      ) {
+        triggerElement.classList.add("tooltip-disabled");
+      }
+    });
+  }
+</script>

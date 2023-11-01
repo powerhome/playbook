@@ -1,0 +1,30 @@
+<%= pb_rails("flex", props: { gap: "md", justify: "center", wrap: true }) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <span id='truncated-tooltip-1'>Truncated</span>
+    <%= pb_rails("tooltip", props: {
+      trigger_element_selector: "#truncated-tooltip-1",
+      tooltip_id: "truncated-1",
+      position: 'left',
+      truncation_enabled: true
+    }) do %>
+        Whoa. I'm truncated a tooltip.
+    <% end %>
+  <% end %>
+  <%= pb_rails("flex/flex_item") do %>
+    <span id='truncated-tooltip-2' style="
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 30px;
+    ">Truncated</span>
+    <%= pb_rails("tooltip", props: {
+      trigger_element_selector: "#truncated-tooltip-2",
+      tooltip_id: "truncated-2",
+      position: 'left',
+      truncation_enabled: true
+    }) do %>
+        Whoa. I'm truncated a tooltip.
+    <% end %>
+  <% end %>
+<% end %>
