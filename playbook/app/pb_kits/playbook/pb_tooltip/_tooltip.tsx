@@ -61,10 +61,8 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
 
   const {
     context,
-    floating,
     middlewareData: { arrow: { x: arrowX, y: arrowY } = {},  },
     placement,
-    reference,
     refs,
     strategy,
     x,
@@ -123,7 +121,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     <>
       <div
           className={`pb_tooltip_kit ${css}`}
-          ref={reference}
+          ref={refs.setReference}
           role="tooltip_trigger"
           style={{ display: "inline-flex" }}
           {...ariaProps}
@@ -135,7 +133,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
         <div
             {...getFloatingProps({
               className: `tooltip_tooltip ${placement} visible`,
-              ref: floating,
+              ref: refs.setFloating,
               role: "tooltip",
               style: {
                 position: strategy,
