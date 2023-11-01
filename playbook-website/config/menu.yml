@@ -283,7 +283,3 @@ kits:
     components:
       - name: "walkthrough"
         platforms: *web
-  - name: duck
-    components:
-      - name: duck
-        platforms: *
