@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import LayoutRight from "./LayoutRight"
+import LayoutRight from "./src/layouts/LayoutRight"
 
 function App() {
   const [kits, setKits] = useState([])
