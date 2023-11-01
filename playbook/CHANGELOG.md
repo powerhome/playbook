@@ -1,3 +1,28 @@
+# 13.10.0
+##### October 19, 2023
+
+List of changes:
+
+**Kit Enhancements:**
+
+- Multi Level Select - Single Select Variant [\#2767](https://github.com/powerhome/playbook/pull/2767) ([gavhuang](https://github.com/gavhuang))
+- Responsive Background Props [\#2797](https://github.com/powerhome/playbook/pull/2797) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Fixed Bugs:**
+
+- Fixing Reaction Button Height Discrepancy and Changing Font Size [\#2793](https://github.com/powerhome/playbook/pull/2793) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Docs: Avatar + Badge update [\#2796](https://github.com/powerhome/playbook/pull/2796) ([nickamantia](https://github.com/nickamantia))
+- Homepage Responsiveness Updates [\#2786](https://github.com/powerhome/playbook/pull/2786) ([gavhuang](https://github.com/gavhuang))
+- Homepage Hero Layout [\#2774](https://github.com/powerhome/playbook/pull/2774) ([nidaqg](https://github.com/nidaqg))
+- React Scaffold for Beta Website [\#2797](https://github.com/powerhome/playbook/pull/2797) ([jasperfurniss](https://github.com/jasperfurniss))
+- No CPU Limits + Increase Memory in Production [\#2787](https://github.com/powerhome/playbook/pull/2787) ([ryanmrodriguez](https://github.com/ryanmrodriguez))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.9.0...13.10.0)
+
+
 # 13.9.0
 ##### October 5, 2023
 
