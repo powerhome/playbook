@@ -3,6 +3,7 @@ import classnames from "classnames"
 import { globalProps, GlobalProps } from "../utilities/globalProps"
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 import Checkbox from "../pb_checkbox/_checkbox"
+import Radio from "../pb_radio/_radio"
 import Icon from "../pb_icon/_icon"
 import FormPill from "../pb_form_pill/_form_pill"
 import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button"
@@ -24,11 +25,13 @@ type MultiLevelSelectProps = {
   data?: { [key: string]: string }
   id?: string
   inputDisplay?: "pills" | "none"
+  inputName?: string
   name?: string
   returnAllSelected?: boolean
   treeData?: { [key: string]: string }[]
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[]
+  variant?: "multi" | "single"
 } & GlobalProps
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
@@ -38,11 +41,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     data = {},
     id,
     inputDisplay = "pills",
+    inputName,
     name,
     returnAllSelected = false,
     treeData,
-    onSelect = () => {},
-    selectedIds
+    onSelect = () => null,
+    selectedIds,
+    variant = "multi"
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -55,29 +60,61 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   const dropdownRef = useRef(null)
 
-  //state for whether dropdown is open or closed
-  const [isClosed, setIsClosed] = useState(true)
-  //state from onchange for textinput, to use for filtering to create typeahead
+  // State for whether dropdown is open or closed
+  const [isDropdownClosed, setIsDropdownClosed] = useState(true)
+  // State from onChange for textinput, to use for filtering to create typeahead
   const [filterItem, setFilterItem] = useState("")
-  //this is essentially the return that the user will get when they use the kit
-  const [returnedArray, setReturnedArray] = useState([])
-  //formattedData with checked and parent_id added
+  // FormattedData with checked and parent_id added
   const [formattedData, setFormattedData] = useState([])
-  //state for return for default
+  // State for the return of returnAllSelected
+  const [returnedArray, setReturnedArray] = useState([])
+  // State for default return
   const [defaultReturn, setDefaultReturn] = useState([])
-  // Get expanded items from treeData.
-  const initialExpandedItems = getExpandedItems(treeData, selectedIds);
-  // Initialize state with expanded items.
-  const [expanded, setExpanded] = useState(initialExpandedItems);
+  // Get expanded items from treeData
+  const initialExpandedItems = getExpandedItems(treeData, selectedIds)
+  // Initialize state with expanded items
+  const [expanded, setExpanded] = useState(initialExpandedItems)
 
+  // Single Select specific state
+  const [singleSelectedItem, setSingleSelectedItem] = useState({
+    id: [],
+    value: "",
+    item: []
+  })
 
   useEffect(() => {
-    setFormattedData(addCheckedAndParentProperty(treeData, selectedIds))
+    const formattedData = addCheckedAndParentProperty(
+      treeData,
+      variant === "single" ? [selectedIds?.[0]] : selectedIds
+    )
+
+    setFormattedData(formattedData)
+
+    if (variant === "single") {
+      // No selectedIds, reset state
+      if (selectedIds?.length === 0 || !selectedIds?.length) {
+        setSingleSelectedItem({ id: [], value: "", item: []})
+      } else {
+        // If there is a selectedId but no current item, set the selectedItem
+        if (selectedIds?.length !== 0 && !singleSelectedItem.value) {
+          const selectedItem = filterFormattedDataById(formattedData, selectedIds[0])
+
+          if (!selectedItem.length) {
+            setSingleSelectedItem({ id: [], value: "", item: []})
+          } else {
+            const { id, value } = selectedItem[0]
+            setSingleSelectedItem({ id: [id], value, item: selectedItem})
+          }
+        }
+      }
+    }
   }, [treeData, selectedIds])
 
   useEffect(() => {
     if (returnAllSelected) {
       setReturnedArray(getCheckedItems(formattedData))
+    } else if (variant === "single") {
+      setDefaultReturn(singleSelectedItem.item)
     } else {
       setDefaultReturn(getDefaultCheckedItems(formattedData))
     }
@@ -87,7 +124,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     // Function to handle clicks outside the dropdown
     const handleClickOutside = (event: any) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsClosed(true)
+        setIsDropdownClosed(true)
       }
     }
     // Attach the event listener
@@ -109,7 +146,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     })
   }
 
-  //iterate over tree, find item and set checked or unchecked
+  // Iterate over tree, find item and set checked or unchecked
   const modifyValue = (
     id: string,
     tree: { [key: string]: any }[],
@@ -122,14 +159,20 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       if (item.id != id) item.children = modifyValue(id, item.children, check)
       else {
         item.checked = check
-        item.children = modifyRecursive(item.children, check)
+
+        if (variant === "single") {
+          // Single select: no children should be checked
+          item.children = modifyRecursive(item.children, !check)
+        } else {
+          item.children = modifyRecursive(item.children, check)
+        }
       }
 
       return item
     })
   }
 
-  //clone tree, check items + children
+  // Clone tree, check items + children
   const checkItem = (item: { [key: string]: any }) => {
     const tree = cloneDeep(formattedData)
     if (returnAllSelected) {
@@ -140,7 +183,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
-  //clone tree, uncheck items + children
+  // Clone tree, uncheck items + children
   const unCheckItem = (item: { [key: string]: any }) => {
     const tree = cloneDeep(formattedData)
     if (returnAllSelected) {
@@ -151,7 +194,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
-  //setformattedData with proper properties
+  // setFormattedData with proper properties
   const changeItem = (item: { [key: string]: any }, check: boolean) => {
     const tree = check ? checkItem(item) : unCheckItem(item)
     setFormattedData(tree)
@@ -159,12 +202,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return tree
   }
 
-  //function to map over data and add parent_id + depth property to each item
+  // Function to map over data and add parent_id + depth property to each item
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
     selectedIds: string[],
     parent_id: string = null,
-    depth: number = 0,
+    depth = 0,
   ) => {
     if (!Array.isArray(treeData)) {
       return
@@ -172,7 +215,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return treeData.map((item: { [key: string]: any } | any) => {
       const newItem = {
         ...item,
-        checked: selectedIds && selectedIds.length && selectedIds.includes(item.id),
+        checked: Boolean(selectedIds && selectedIds.length && selectedIds.includes(item.id)),
         parent_id,
         depth,
       }
@@ -192,12 +235,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     })
   }
 
-  //click event for x on form pill
+  // Click event for x on form pill
   const handlePillClose = (event: any, clickedItem: { [key: string]: any }) => {
-    // prevents the dropdown from closing when clicking on the pill
+    // Prevents the dropdown from closing when clicking on the pill
     event.stopPropagation()
     const updatedTree = changeItem(clickedItem, false)
-    //logic for removing items from returnArray or defaultReturn when pills clicked
+    // Logic for removing items from returnArray or defaultReturn when pills clicked
     if (returnAllSelected) {
       onSelect(getCheckedItems(updatedTree))
     } else {
@@ -205,7 +248,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
-  //handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
+  // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
     e.stopPropagation()
     if (
@@ -214,13 +257,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     ) {
       return
     }
-    setIsClosed(!isClosed)
+    setIsDropdownClosed(!isDropdownClosed)
   }
 
-  //Main function to handle any click inside dropdown
+  // Main function to handle any click inside dropdown
   const handledropdownItemClick = (e: any, check: boolean) => {
     const clickedItem = e.target.parentNode.id
-    //setting filterItem to "" will clear textinput and clear typeahead
+    // Setting filterItem to "" will clear textinput and clear typeahead
     setFilterItem("")
 
     const filtered = filterFormattedDataById(formattedData, clickedItem)
@@ -232,15 +275,45 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }
 
-  const isExpanded = (item: any) => expanded.indexOf(item.id) > -1
+  // Single select
+  const handleRadioButtonClick = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const { id, value: inputText } = e.target
+    // The radio button needs a unique ID, this grabs the ID before the hyphen
+    const selectedItemID = id.match(/^[^-]*/)[0]
+    // Reset tree checked state, triggering useEffect
+    const treeWithNoSelections = modifyRecursive(formattedData, false)
+    // Update tree with single selection
+    const treeWithSelectedItem = modifyValue(selectedItemID, treeWithNoSelections, true)
+    const selectedItem = filterFormattedDataById(treeWithSelectedItem, selectedItemID)
 
-  //handle click on chevron toggles in dropdown
+    setFormattedData(treeWithSelectedItem)
+    setSingleSelectedItem({id: [selectedItemID], value: inputText, item: selectedItem})
+    // Reset the filter to always display dropdown options on click
+    setFilterItem("")
+    setIsDropdownClosed(true)
+
+    onSelect(selectedItem)
+  };
+
+  // Single select: reset the tree state upon typing
+  const handleRadioInputChange = (inputText: string) => {
+    modifyRecursive(formattedData, false)
+    setDefaultReturn([])
+    setSingleSelectedItem({id: [], value: inputText, item: []})
+    setFilterItem(inputText)
+  };
+
+  const isTreeRowExpanded = (item: any) => expanded.indexOf(item.id) > -1
+
+  // Handle click on chevron toggles in dropdown
   const handleToggleClick = (id: string, event: React.MouseEvent) => {
     event.stopPropagation()
     const clickedItem = filterFormattedDataById(formattedData, id)
     if (clickedItem) {
       let expandedArray = [...expanded]
-      const itemExpanded = isExpanded(clickedItem[0])
+      const itemExpanded = isTreeRowExpanded(clickedItem[0])
 
       if (itemExpanded)
         expandedArray = expandedArray.filter((i) => i != clickedItem[0].id)
@@ -259,7 +332,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
     return items
   }
-  //rendering formattedData to UI based on typeahead
+
+  // Rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: any }[]) => {
     return (
       <ul>
@@ -267,42 +341,62 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           items.map((item: { [key: string]: any }) => {
             return (
               <div key={item.id}>
-                <li className='dropdown_item' data-name={item.id}>
-                  <div className='dropdown_item_checkbox_row'>
+                <li
+                    className="dropdown_item"
+                    data-name={item.id}
+                >
+                  <div className="dropdown_item_checkbox_row">
                     <div
-                      key={isExpanded(item) ? "chevron-down" : "chevron-right"}
+                        key={isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"}
                     >
                       <CircleIconButton
-                        icon={
-                          isExpanded(item) ? "chevron-down" : "chevron-right"
-                        }
-                        className={
-                          item.children && item.children.length > 0
-                            ? ""
-                            : "toggle_icon"
-                        }
-                        onClick={(event: any) =>
-                          handleToggleClick(item.id, event)
-                        }
-                        variant='link'
+                          className={
+                            item.children && item.children.length > 0
+                              ? ""
+                              : "toggle_icon"
+                          }
+                          icon={
+                            isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"
+                          }
+                          onClick={(event: any) =>
+                            handleToggleClick(item.id, event)
+                          }
+                          variant="link"
                       />
                     </div>
-                    <Checkbox text={item.label} id={item.id}>
-                      <input
-                        checked={item.checked}
-                        type='checkbox'
-                        name={item.label}
-                        value={item.label}
-                        onChange={(e) => {
-                          handledropdownItemClick(e, !item.checked)
-                        }}
+                    { variant === "single" ? (
+                      <Radio
+                          checked={item.checked}
+                          id={`${item.id}-${item.label}`}
+                          label={item.label}
+                          name={inputName}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => (
+                            handleRadioButtonClick(e)
+                          )}
+                          type="radio"
+                          value={item.label}
                       />
-                    </Checkbox>
+                    ) : (
+                      <Checkbox
+                          id={item.id}
+                          text={item.label}
+                      >
+                        <input
+                            checked={item.checked}
+                            name={item.label}
+                            onChange={(e) => {
+                              handledropdownItemClick(e, !item.checked)
+                            }}
+                            type="checkbox"
+                            value={item.label}
+                        />
+                      </Checkbox>
+                    )}
                   </div>
-                  {isExpanded(item) &&
+                  {isTreeRowExpanded(item) &&
                     item.children &&
                     item.children.length > 0 &&
-                    !filterItem && ( // Show children if expanded is true
+                    (variant === "single" || !filterItem) && ( // Show children if expanded is true
                       <div>{renderNestedOptions(item.children)}</div>
                     )}
                 </li>
@@ -313,68 +407,121 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     )
   }
 
-
-
   return (
-    <div {...ariaProps} {...dataProps} className={classes} id={id}>
-      <div ref={dropdownRef} className='wrapper'>
-        <div className='input_wrapper' onClick={handleInputWrapperClick}>
-          <div className='input_inner_container'>
-            {returnedArray.length !== 0 && returnAllSelected
-              ? returnedArray.map((item) => (
-                  <input type='hidden' name={`${name}[]`} value={item.id} />
-                ))
-              : null}
-
-            {returnedArray.length !== 0 && inputDisplay === "pills" && returnAllSelected
-              ? returnedArray.map((item, index) => (
-                  <FormPill
-                    key={index}
-                    text={item.label}
-                    size='small'
-                    onClick={(event: any) => handlePillClose(event, item)}
+    <div
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
+    >
+      <div
+          className="wrapper"
+          ref={dropdownRef}
+      >
+        <div
+            className="input_wrapper"
+            onClick={handleInputWrapperClick}
+        >
+          <div className="input_inner_container">
+            {variant === "single" && defaultReturn.length !== 0
+              ? defaultReturn.map((selectedItem) => (
+                  <input
+                      key={selectedItem.id}
+                      name={`${name}[]`}
+                      type="hidden"
+                      value={selectedItem.id}
                   />
                 ))
               : null}
-            {!returnAllSelected &&
-              defaultReturn.length !== 0 && inputDisplay === "pills" ?
-              defaultReturn.map((item, index) => (
-                <FormPill
-                  key={index}
-                  text={item.label}
-                  size='small'
-                  onClick={(event: any) => handlePillClose(event, item)}
-                />
-              ))
-              : null
-            }
-            {returnedArray.length !== 0 && returnAllSelected && inputDisplay === "pills" && <br />}
-            {defaultReturn.length !== 0 && !returnAllSelected && inputDisplay === "pills" && <br />}
+
+            {variant !== "single" && (
+              <>
+                {returnAllSelected && returnedArray.length !== 0
+                  ? returnedArray.map((item) => (
+                      <input
+                          key={item.id}
+                          name={`${name}[]`}
+                          type="hidden"
+                          value={item.id}
+                      />
+                    ))
+                  : null}
+
+                {returnAllSelected &&
+                returnedArray.length !== 0 &&
+                inputDisplay === "pills"
+                  ? returnedArray.map((item, index) => (
+                      <FormPill
+                          key={index}
+                          onClick={(event: any) => handlePillClose(event, item)}
+                          size="small"
+                          text={item.label}
+                      />
+                    ))
+                  : null}
+
+                {!returnAllSelected &&
+                defaultReturn.length !== 0 &&
+                inputDisplay === "pills"
+                  ? defaultReturn.map((item, index) => (
+                      <FormPill
+                          key={index}
+                          onClick={(event: any) => handlePillClose(event, item)}
+                          size="small"
+                          text={item.label}
+                      />
+                    ))
+                  : null}
+
+                {returnAllSelected &&
+                  returnedArray.length !== 0 &&
+                  inputDisplay === "pills" && <br />}
+
+                {!returnAllSelected &&
+                  defaultReturn.length !== 0 &&
+                  inputDisplay === "pills" && <br />}
+              </>
+            )}
+
             <input
-              id='multiselect_input'
-              onChange={(e) => {
-                setFilterItem(e.target.value)
-              }}
-              placeholder={inputDisplay === "none" && itemsSelectedLength() ? (
-                    `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? 'item' : 'items'} selected`
-                  ) : ("Start typing...")}
-              value={filterItem}
-              onClick={() => setIsClosed(false)}
+                id="multiselect_input"
+                onChange={(e) =>{
+                  variant === "single"
+                    ? handleRadioInputChange(e.target.value)
+                    : setFilterItem(e.target.value)
+                }}
+                onClick={() => setIsDropdownClosed(false)}
+                placeholder={
+                  inputDisplay === "none" && itemsSelectedLength()
+                    ? `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? "item" : "items"} selected`
+                    : "Start typing..."
+                }
+                value={singleSelectedItem.value || filterItem}
             />
           </div>
-          {isClosed ? (
-            <div key='chevron-down'>
-              <Icon icon='chevron-down' size="xs"/>
+
+          {isDropdownClosed ? (
+            <div key="chevron-down">
+              <Icon
+                  icon="chevron-down"
+                  size="xs"
+              />
             </div>
           ) : (
-            <div key='chevron-up'>
-              <Icon icon='chevron-up' size="xs"/>
+            <div key="chevron-up">
+              <Icon
+                  icon="chevron-up"
+                  size="xs"
+              />
             </div>
           )}
         </div>
-        <div className={`dropdown_menu ${isClosed ? "close" : "open"}`}>
+
+        <div className={`dropdown_menu ${isDropdownClosed ? "close" : "open"}`}>
           {renderNestedOptions(
-            filterItem ? findByFilter(formattedData, filterItem) : formattedData
+            filterItem
+              ? findByFilter(formattedData, filterItem)
+              : formattedData
           )}
         </div>
       </div>
