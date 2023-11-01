@@ -32,7 +32,7 @@ type MultiLevelSelectProps = {
   treeData?: { [key: string]: string }[]
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[]
-  ultimateChildrenOnly?: boolean
+  // ultimateChildrenOnly?: boolean
   variant?: "multi" | "single"
 } & GlobalProps
 
@@ -49,7 +49,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     treeData,
     onSelect = () => null,
     selectedIds,
-    ultimateChildrenOnly = false,
+    // ultimateChildrenOnly = false,
     variant = "multi"
   } = props
 
@@ -349,26 +349,24 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     data-name={item.id}
                 >
                   <div className="dropdown_item_checkbox_row">
-                    <div
-                        key={isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"}
-                    >
-                      <CircleIconButton
-                          className={
-                            item.children && item.children.length > 0
-                              ? ""
-                              : "toggle_icon"
-                          }
-                          icon={
-                            isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"
-                          }
-                          onClick={(event: any) =>
-                            handleToggleClick(item.id, event)
-                          }
-                          variant="link"
-                      />
-                    </div>
+                    {item.children && item.children.length > 0
+                    ?
+                      <div
+                          key={isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"}
+                      >
+                        <CircleIconButton
+                            icon={
+                              isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"
+                            }
+                            onClick={(event: any) =>
+                              handleToggleClick(item.id, event)
+                            }
+                            variant="link"
+                        />
+                      </div>
+                    : null}
                     { variant === "single" ? (
-                      ultimateChildrenOnly && item.children ? (
+                      item.hideRadio ? (
                         <Body>{item.label}</Body>
                       ) :
                       <Radio
@@ -379,6 +377,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => (
                             handleRadioButtonClick(e)
                           )}
+                          padding='xs'
                           type="radio"
                           value={item.label}
                       />

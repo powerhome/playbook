@@ -3,29 +3,29 @@ import MultiLevelSelect from "../_multi_level_select";
 
 const treeData = [
   {
+    label: "HQ",
+    value: "HQ",
+    id: "hq",
+  },
+  {
     label: "Philadelphia",
     value: "Philadelphia",
     id: "phl",
     children: [
       {
-        label: "HQ",
-        value: "HQ",
-        id: "hq",
-      },
-      {
         label: "Marketing & Sales PHL",
         value: "Marketing & Sales PHL",
-        id: "marketing1",
+        id: "marketingPHL",
       },
       {
         label: "Installation Office PHL",
         value: "Installation Office PHL",
-        id: "installation1",
+        id: "installationPHL",
       },
       {
         label: "Warehouse PHL",
         value: "Warehouse PHL",
-        id: "warehouse1",
+        id: "warehousePHL",
       },
     ]
   },
@@ -42,17 +42,17 @@ const treeData = [
           {
             label: "Marketing & Sales NJ",
             value: "Marketing & Sales NJ",
-            id: "marketing2",
+            id: "marketingNJ",
           },
           {
             label: "Installation Office NJ",
             value: "Installation Office NJ",
-            id: "installation2",
+            id: "installationNJ",
           },
           {
             label: "Warehouse NJ",
             value: "Warehouse NJ",
-            id: "warehouse2",
+            id: "warehouseNJ",
           },
         ],
       },
@@ -64,17 +64,17 @@ const treeData = [
           {
             label: "Marketing & Sales Princeton",
             value: "Marketing & Sales Princeton",
-            id: "marketing3",
+            id: "marketingPR",
           },
           {
             label: "Installation Office Princeton",
             value: "Installation Office Princeton",
-            id: "installation3",
+            id: "installationPR",
           },
           {
             label: "Warehouse Princeton",
             value: "Warehouse Princeton",
-            id: "warehouse3",
+            id: "warehousePR",
           },
         ]
       },
@@ -88,17 +88,17 @@ const treeData = [
       {
         label: "Marketing & Sales MD",
         value: "Marketing & Sales MD",
-        id: "marketing4",
+        id: "marketingMD",
       },
       {
         label: "Installation Office MD",
         value: "Installation Office MD",
-        id: "installation4",
+        id: "installationMD",
       },
       {
         label: "Warehouse MD",
         value: "Warehouse MD",
-        id: "warehouse4",
+        id: "warehouseMD",
       },
     ]
   },
@@ -110,17 +110,17 @@ const treeData = [
       {
         label: "Marketing & Sales CT",
         value: "Marketing & Sales CT",
-        id: "marketing5",
+        id: "marketingCT",
       },
       {
         label: "Installation Office CT",
         value: "Installation Office CT",
-        id: "installation5",
+        id: "installationCT",
       },
       {
         label: "Warehouse CT",
         value: "Warehouse CT",
-        id: "warehouse5",
+        id: "warehouseCT",
       },
     ]
   },
