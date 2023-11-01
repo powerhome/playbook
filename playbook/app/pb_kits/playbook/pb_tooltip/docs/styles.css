@@ -1,0 +1,7 @@
+.tooltip-text-truncation {
+  display: inline-block !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}

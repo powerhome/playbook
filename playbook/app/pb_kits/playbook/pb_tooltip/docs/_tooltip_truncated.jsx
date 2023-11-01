@@ -1,0 +1,44 @@
+// @flow
+
+import React from 'react'
+import { Tooltip, Flex, FlexItem } from '../..'
+import './styles.css'
+
+const TooltipTruncated = (props) => {
+
+  return (
+   <Flex 
+       flexDirection='row'
+       gap='md'
+       justifyContent='center'
+       wrap
+   >
+    <FlexItem>
+      <Tooltip 
+          className='tooltip-text-truncation'
+          style={{
+            'backgroundColor': 'red'
+          }}
+          text='This is a truncated tooltip trigger.' 
+          truncatable
+          zIndex={10}
+          {...props}
+      >
+        {'This is a truncated tooltip trigger.'}
+      </Tooltip>
+    </FlexItem>
+    <FlexItem>
+      <Tooltip 
+          text='This is a truncated tooltip trigger.' 
+          truncatable
+          zIndex={10}
+          {...props}
+      >
+        {'This tooltip trigger is not truncated.'}
+      </Tooltip>
+    </FlexItem>
+   </Flex>
+  )
+}
+
+export default TooltipTruncated
