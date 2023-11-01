@@ -67,8 +67,8 @@ class KitGenerator < Rails::Generators::NamedBase
                   "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
                   :green
 
-      # Ask user if Rails version should be generated ======
-      if @rails_kit == true
+      # Code for Rails kit
+      if @rails_kit
         template "kit_ruby.erb", "#{full_kit_directory}/#{@kit_name_underscore}.rb"
         template "kit_html.erb", "#{full_kit_directory}/#{@kit_name_underscore}.html.erb"
         template "kit_example_rails.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.html.erb"
@@ -78,8 +78,8 @@ class KitGenerator < Rails::Generators::NamedBase
                     :green
       end
 
-      # Ask user if React version should be generated ======
-      if @react_kit == true
+      # Code for React kit
+      if @react_kit
         template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.tsx"
         template "kit_jsx_test.erb", "#{full_kit_directory}/#{@kit_name_underscore}.test.jsx"
         template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
@@ -103,6 +103,9 @@ class KitGenerator < Rails::Generators::NamedBase
                     "#{@kit_name_capitalize} react kit successfully created.",
                     :green
       end
+
+      # Code for Swift kit
+      template "kit_example_swift.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default_swift.md" if @swift_kit
 
       # Create kit example.yml
       template "kit_example_yml.erb", "#{full_kit_directory}/docs/example.yml"
@@ -131,10 +134,16 @@ private
       "all"
     elsif @react_kit && @rails_kit
       "web"
+    elsif @react_kit && @swift_kit
+      "react_swift"
+    elsif @rails_kit && @swift_kit
+      "rails_swift"
     elsif @react_kit
       "react_only"
     elsif @rails_kit
       "rails_only"
+    elsif @swift_kit
+      "swift_only"
     end
   end
 
