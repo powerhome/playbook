@@ -169,6 +169,18 @@ class PagesController < ApplicationController
 
 private
 
+  def missing_rails_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "rails") == false
+  end
+
+  def missing_react_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "react") == false
+  end
+
+  def missing_swift_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "swift") == false
+  end
+
   def aggregate_kits
     MENU["kits"]
   end
@@ -218,11 +230,12 @@ private
 
   def ensure_kit_type_exists
     if action_name === "kit_show_rails"
-      redirect_to action: "kit_show_react" unless helpers.pb_doc_has_kit_type?(params[:name], "rails")
+      redirect_to action: "kit_show_react" if missing_rails_kit? && missing_react_kit? == false
     elsif action_name === "kit_show_react"
-      redirect_to action: "kit_show_rails" unless helpers.pb_doc_has_kit_type?(params[:name], "react")
+      redirect_to action: "kit_show_rails" if missing_react_kit? && missing_rails_kit? == false
+      redirect_to action: "kit_show_swift" if missing_react_kit? && missing_rails_kit? && missing_swift_kit? == false
     elsif action_name === "kit_show_swift"
-      redirect_to action: "kit_show_react" unless helpers.pb_doc_has_kit_type?(params[:name], "swift")
+      redirect_to action: "kit_show_react" if missing_swift_kit?
     end
   end
 
