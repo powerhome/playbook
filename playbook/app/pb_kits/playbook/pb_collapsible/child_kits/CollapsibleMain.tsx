@@ -62,12 +62,9 @@ const ToggleIcon = ({
   }
 
   const handleIconClick = (e: any) => {
-    console.log("THE EVENT IS:", e.target)
     if (onIconClick) {
-      console.log("THE EVENT (before) IS:", e.target)
       e.preventDefault()
       onIconClick(e)
-      console.log("THE EVENT (after) IS:", e.target)
     }
   }
 
@@ -120,9 +117,8 @@ const CollapsibleMain = ({
   const mainCSS = buildCss("pb_collapsible_main_kit")
   const mainSpacing = globalProps(props, { cursor })
 
-  const handleCollapsibleClick = (e: any) => {
-    onClick && onClick(e)
-    console.log("Component level:", e.target)
+  const handleCollapsibleClick = () => {
+    onClick && onClick()
     //To disable default toggling behavior return "true" in the onClick()
     const disableToggle = onClick && onClick()
     if (disableToggle !== true) {
@@ -132,7 +128,7 @@ const CollapsibleMain = ({
 
   return (
     <div className={classnames(mainCSS, mainSpacing, className)}>
-      <div onClick={(e) => handleCollapsibleClick(e)}>
+      <div onClick={handleCollapsibleClick}>
         <Flex spacing='between' vertical='center'>
           <FlexItem>{children}</FlexItem>
           <FlexItem>

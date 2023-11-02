@@ -44,21 +44,21 @@ export const KitsNavItem = ({
 
     //click event for right icon
     const handleComponentsIconClick = (e: any, i: any) => {
-      e.stopPropagation()
-      collapsibles[i][1]() // Use the toggle function
+      collapsibles.forEach(([collapsed, toggle, setCollapsed], idx) => {
+        console.log("collapsed", collapsed)
+        idx === i ? toggle : null
+      })
     }
 
-    const handleMainClick = (event, index) => {
-      if (!event || event.target.classList.contains("pb_icon_kit")) {
-        return
-      }
+    const handleComponentsClick = (index: any) => {
+      topLevelCollapsibles.forEach((collapsible, idx) => {
+        collapsible[2](idx === index ? false : true) // Use the setCollapsed function
+      })
+    }
+
+    const handleMainClick = (index) => {
       collapsibles.forEach(([collapsed, toggle, setCollapsed], idx) => {
-        if (idx === index) {
-          debugger;
-          setCollapsed(false)
-        } else {
-          setCollapsed(true)
-        }
+        setCollapsed(idx === index ? false : true)
       })
     }
 
@@ -77,8 +77,8 @@ export const KitsNavItem = ({
         path={`kit_category/${categoryKey}/${type}`}
         marginBottom='none'
         marginTop='xxs'
-        onClick={(event) => handleMainClick(event, kitIndex)}
-        onIconRightClick={(e: any) => handleComponentsIconClick(e, kitIndex)}
+        onClick={() => handleMainClick(kitIndex)}
+        onIconRightClick={(e) => handleComponentsIconClick(e, kitIndex)}
         paddingY='xxs'
         text={linkFormat(categoryKey)}
       >
@@ -87,9 +87,8 @@ export const KitsNavItem = ({
             cursor='pointer'
             dark={dark}
             fontSize='small'
-            reloadDocument={true}
             key={`${sublink}-${j}`}
-            path={`/kits/${sublink}/${type}`}
+            path={`kits/${sublink}/${type}`}
             marginY='none'
             onClick={() => handleSubItemClick(j, sublink, kitIndex)}
             paddingY='xxs'

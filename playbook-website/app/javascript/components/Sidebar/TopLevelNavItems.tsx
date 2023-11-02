@@ -6,6 +6,8 @@ import { OtherNavItems } from "./NavComponents/OtherNavComponent"
 import RoutedNavItem from "./RoutedNavItem"
 import { useLocation, useParams, matchRoutes } from "react-router-dom"
 
+// const currentURL = window.location.pathname + window.location.search
+
 export const TopLevelNavItem = ({
   dark,
   isActive,
@@ -15,7 +17,6 @@ export const TopLevelNavItem = ({
   category,
   collapsibles,
   samples,
-  navigation
 }) => {
   const { name, type = "react" } = useParams()
 
@@ -120,7 +121,6 @@ export const TopLevelNavItem = ({
             ) : (
               <OtherNavItems
                 reloadDocument
-                navigation={navigation}
                 name={name}
                 dark={dark}
                 samples={samples}

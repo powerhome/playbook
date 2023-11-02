@@ -123,7 +123,7 @@ module ApplicationHelper
     (!kit.nil? && @kit == link)
   end
 
-  def self.format_search_hash(kit)
+  def format_search_hash(kit)
     {
       label: kit.to_s.titleize,
       value: if @type == "react" || @type.nil?
@@ -134,7 +134,7 @@ module ApplicationHelper
     }
   end
 
-  def self.search_list
+  def search_list
     all_kits = []
     formatted_kits = []
     MENU["kits"].each do |kit|
