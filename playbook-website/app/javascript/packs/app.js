@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import App from '../components/Website'
+import App from '../components/Website/App'
 import '@fortawesome/fontawesome-pro/js/fontawesome.min.js'
 import '@fortawesome/fontawesome-pro/js/regular.min.js'
 import '../site_styles/main.scss'
@@ -14,8 +14,9 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom'
+import Scaffold from '../components/Scaffold'
 import RedirectToType from '../components/RedirectToType'
-import { Component, ComponentsList, Scaffold } from '../components/Website/src/pages'
+import { Component, ComponentsList } from 'components/Website/src/pages'
 
 const rootElement = document.getElementById('react-root')
 
