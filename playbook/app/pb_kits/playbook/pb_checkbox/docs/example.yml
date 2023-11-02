@@ -13,3 +13,9 @@ examples:
   - checkbox_custom: Custom Checkbox
   - checkbox_error: Default w/ Error
   - checkbox_indeterminate: Indeterminate Checkbox
+
+  swift:
+    - checkbox_default_swift: Default
+    - checkbox_error_swift: Default w/ Error
+    - checkbox_indeterminate_swift: Indeterminate Checkbox
+    - checkbox_props_swift: ""
