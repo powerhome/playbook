@@ -3,7 +3,7 @@ import { Nav, useCollapsible, Image, Badge, Flex } from "playbook-ui"
 import { TopLevelNavItem } from "./TopLevelNavItems"
 // @ts-ignore
 import PBLogo from "../../images/pb-logo.svg"
-import KitSearch from "../../../../KitSearch"
+import KitSearch from "../KitSearch"
 
 import { CollapsibleProvider } from './CollapsibleContext'; 
 interface SidebarProps {

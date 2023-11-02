@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
 import { NavItem, useCollapsible } from "playbook-ui"
-import { KitsNavItem} from "./KitsNavComponent"
+import { KitsNavItem} from "./NavComponents/KitsNavComponent"
 import { SideBarNavItems } from "./MenuData/SidebarNavItems"
-import { OtherNavItems } from "./OtherNavComponent"
-import RoutedNavItem from "../RoutedNavItem"
+import { OtherNavItems } from "./NavComponents/OtherNavComponent"
+import RoutedNavItem from "./RoutedNavItem"
 import { useLocation, useParams, matchRoutes } from "react-router-dom"
 
 export const TopLevelNavItem = ({
