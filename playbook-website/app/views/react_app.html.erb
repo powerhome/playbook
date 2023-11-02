@@ -8,18 +8,7 @@
     <div class="pb--page--dark-mode-toggle-mobile">
       <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
     </div>
-
-    <%= pb_rails("layout", props: {
-      classname: "pb--page--content",
-      variant: dark_mode? ? 'dark' : 'light'
-    }) do %>
-      <%= render 'layouts/mobile_hamburger' %>
-      <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav"}) do%>
-        <%= render 'layouts/sidebar' %>
-      <% end %>
-      <%= pb_rails("layout/body", props: {id: "react-root"}) do%>
-      <% end %>
-    <%end%>
+    <div id="root"></div>
   </body>
   <%= javascript_pack_tag('app', defer: true) %>
   <%= javascript_packs_with_chunks_tag(*@application_js) %>

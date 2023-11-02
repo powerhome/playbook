@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react"
+import { Layout, Icon } from "playbook-ui"
+import Sidebar from "./Sidebar"
 import LayoutRight from "./LayoutRight"
 
 function App() {
   const [kits, setKits] = useState([])
   const [dark, setDark] = useState(false)
+  const [kit, setKit] = useState("")
+  const [type, setType] = useState("")
+  const [category, setCategory] = useState("")
+  const [PBversion, setPBversion] = useState("")
+  const [searchList, setSearchList] = useState([])
+  const [samples, setSamples] = useState([])
+  const [navigation, setNavigation] = useState([])
+
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
   useEffect(() => {
@@ -12,6 +22,12 @@ function App() {
       .then((data) => {
         setKits(data.kits)
         setDark(data.dark)
+        setType(data.type)
+        setCategory(data.category)
+        setPBversion(data.version)
+        setSearchList(data.search_list)
+        setSamples(data.samples)
+        setNavigation(data.navigation)
       })
       .catch((error) => {
         console.log(error)
@@ -29,7 +45,31 @@ function App() {
   }, [])
 
   return (
-    <>{kits.length > 0 && <LayoutRight isMobile={isMobile} dark={dark} />}</>
+    <>
+      {kits.length > 0 && (
+        <Layout
+          className='pb--page--content'
+          collapse='md'
+          position='left'
+          size='lg'
+        >
+          <Icon icon='bars' className='pb--page--hamburger'></Icon>
+          <input type='checkbox' className='pb--page--checkbox' />
+          <Layout.Side className='pb--page--sideNav'>
+            <Sidebar
+              kits={kits}
+              type={type}
+              category={category}
+              PBversion={PBversion}
+              searchList={searchList}
+              samples={samples}
+              navigation={navigation}
+            />
+          </Layout.Side>
+          <LayoutRight isMobile={isMobile} dark={dark} />
+        </Layout>
+      )}
+    </>
   )
 }
 
