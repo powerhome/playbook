@@ -1,48 +1,35 @@
 import React from "react"
 import { Outlet } from "react-router-dom"
-import HeroImage from "../HeroImage"
 import DarkModeToggle from "../DarkModeToggle"
-import HeaderMobile from "../../images/pb_generic_header.jpg"
-import HeaderDesktop from "../../images/pb_generic_header_desktop.jpg"
 
-import {
-  Layout,
-  FlexItem,
-  Flex,
-  Background,
-  Button,
-  Title,
-  Body,
-} from "playbook-ui"
+import { FlexItem, Flex, Button } from "playbook-ui"
 
 export default function LayoutRight({ isMobile, dark, kits }) {
   return (
-    <Layout.Body>
-      <div className={`pb--page--content--main ${dark}`}>
-        {!isMobile && (
-          <Flex spacing='between' vertical='center'>
-            <Button
-              text='Back to Legacy View'
-              variant='link'
-              icon='circle-left'
-              tag='h1'
-              marginY='xs'
-              paddingLeft='none'
-              marginBottom='none'
-              paddingBottom='none'
-              link='/kits'
-              marginLeft='md'
-            />
-            <FlexItem
-              marginRight='md'
-              className='pb--page--dark-mode-toggle-desktop'
-            >
-              <DarkModeToggle initMode={dark} />
-            </FlexItem>
-          </Flex>
-        )}
-        <Outlet />
-      </div>
-    </Layout.Body>
+    <div className={`pb--page--content--main ${dark}`}>
+      {!isMobile && (
+        <Flex spacing='between' vertical='center'>
+          <Button
+            text='Back to Legacy View'
+            variant='link'
+            icon='circle-left'
+            tag='h1'
+            marginY='xs'
+            paddingLeft='none'
+            marginBottom='none'
+            paddingBottom='none'
+            link='/kits'
+            marginLeft='md'
+          />
+          <FlexItem
+            marginRight='md'
+            className='pb--page--dark-mode-toggle-desktop'
+          >
+            <DarkModeToggle initMode={dark} />
+          </FlexItem>
+        </Flex>
+      )}
+      <Outlet />
+    </div>
   )
 }

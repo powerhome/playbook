@@ -19,7 +19,7 @@ import RedirectToType from '../components/RedirectToType'
 import ComponentsList from '../components/ComponentsList'
 import Component from '../components/ComponentsList/Component'
 
-const rootElement = document.getElementById('root')
+const rootElement = document.getElementById('react-root')
 
 const router = createBrowserRouter(
   createRoutesFromElements(
