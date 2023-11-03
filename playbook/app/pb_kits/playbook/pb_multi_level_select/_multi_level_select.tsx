@@ -377,7 +377,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => (
                             handleRadioButtonClick(e)
                           )}
-                          padding='xs'
+                          padding={item.children ? 'none' : 'xs'}
                           type="radio"
                           value={item.label}
                       />
