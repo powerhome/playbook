@@ -137,7 +137,10 @@ const CollapsibleMain = ({
               iconColor={iconColor as IconColors}
               iconSize={iconSize as IconSizes}
               icon={icon as string[] | string}
-              onIconClick={(event: any) => onIconClick(event)}
+              onIconClick={(event: any) => {
+                console.log('click')
+                onIconClick(event)
+              }}
             />
           </FlexItem>
         </Flex>

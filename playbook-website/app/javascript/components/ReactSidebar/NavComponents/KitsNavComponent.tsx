@@ -85,6 +85,7 @@ export const KitsNavItem = ({
 
     //click event for right icon
     const handleIconClick = (index) => {
+      console.log('click')
       collapsibles.forEach(([, ,], idx) => {
         if (idx === index) {
           toggleNav === true ? setToggleNav(false) : setToggleNav(true)
@@ -106,21 +107,21 @@ export const KitsNavItem = ({
         marginBottom='none'
         marginTop='xxs'
         onClick={() => handleMainClick(kitIndex, categoryKey)}
-        onIconRightClick={() => console.log("hello")}
+        onIconRightClick={handleIconClick}
         paddingY='xxs'
         text={linkFormat(categoryKey)}
       >
-        {sublinks.map((sublink, j) => (
+        {sublinks.map(({name}, j) => (
           <RoutedNavItem
             cursor='pointer'
             dark={dark}
             fontSize='small'
-            key={`${sublink}-${j}`}
-            path={`kits/${sublink}/${type}`}
+            key={`${name}-${j}`}
+            path={`kits/${name}/${type}`}
             marginY='none'
-            onClick={() => handleSubItemClick(j, sublink, kitIndex)}
+            onClick={() => handleSubItemClick(j, name, kitIndex)}
             paddingY='xxs'
-            text={linkFormat(sublink)}
+            text={linkFormat(name)}
           />
         ))}
       </RoutedNavItem>
@@ -136,7 +137,7 @@ export const KitsNavItem = ({
         marginBottom='none'
         marginTop='xxs'
         onClick={() => updateTopLevelNav(parentIndex)}
-        text={linkFormat(link)}
+        text={"test"}
         paddingY='xxs'
       />
     )

@@ -9,7 +9,7 @@ import {
   Caption,
 } from "playbook-ui"
 
-const Footer = () => {
+const Footer = (props) => {
   return (
     <div className='pb--page--footer'>
       <div className='inner-footer-wrapper'>

@@ -157,7 +157,7 @@ export const KitsNavItem = ({
         onClick={() => handleMainClick(kitIndex, categoryKey)}
         onIconRightClick={() => handleIconClick(kitIndex)}
         paddingY="xxs"
-        text={linkFormat(categoryKey)}
+        // text={linkFormat(categoryKey)}
       >
         {sublinks.map((sublink, j) => (
           <NavItem
@@ -170,7 +170,7 @@ export const KitsNavItem = ({
             marginY="none"
             onClick={() => handleSubItemClick(j, sublink, kitIndex)}
             paddingY="xxs"
-            text={linkFormat(sublink)}
+            // text={linkFormat(sublink)}
           />
         ))}
       </NavItem>
@@ -193,7 +193,7 @@ export const KitsNavItem = ({
         marginBottom="none"
         marginTop="xxs"
         onClick={() => handleNonCollapseLinkClick(link)}
-        text={linkFormat(link)}
+        // text={linkFormat(link)}
         paddingY="xxs"
       />
     );

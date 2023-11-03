@@ -20,7 +20,7 @@
       <% end %>
       <%= pb_rails("layout/body") do%>
         <div class="pb--page--content--main <%= 'dark' if dark_mode? %>">
-          <%= yield %>
+          <%= yield kits: MENU["kits"] %>
           <%= render 'layouts/footer'%>
         </div>
       <% end %>

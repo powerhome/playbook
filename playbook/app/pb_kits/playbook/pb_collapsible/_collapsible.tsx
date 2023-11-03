@@ -42,7 +42,6 @@ const Collapsible = ({
   ...props
 }: CollapsibleProps) => {
   const [isCollapsed, toggle, setIsCollapsed] = useCollapsible(collapsed)
-
   useEffect(()=> {
    setIsCollapsed(collapsed)
   },[collapsed])

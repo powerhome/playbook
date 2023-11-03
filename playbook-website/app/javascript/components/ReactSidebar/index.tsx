@@ -21,6 +21,7 @@ const MainSidebar = ({
 
   //hook into collapsible logic for all components nested nav items
   const collapsibles = kits.map(() => useCollapsible())
+  console.log('here',kits)
 
   return (
     <>

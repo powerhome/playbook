@@ -21,7 +21,7 @@ export const TopLevelNavItem = ({
 }) => {
   //hook into collapsible logic for top level item
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible())
-
+ 
   //set up toggling for top level item
   const handleComponentsClick = (index) => {
     topLevelCollapsibles.forEach(([, , setCollapsed], idx) => {

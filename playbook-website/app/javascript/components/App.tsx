@@ -14,7 +14,7 @@ import {
 
 import LayoutRight from "./LayoutRight"
 
-function App() {
+function App(props) {
   const [kits, setKits] = useState([])
   const [dark, setDark] = useState(false)
   const [kit, setKit] = useState("")
@@ -25,11 +25,12 @@ function App() {
   const [samples, setSamples] = useState([])
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-
+// console.log('app', props)
   useEffect(() => {
     fetch("/beta/kits.json")
       .then((response) => response.json())
       .then((data) => {
+        console.log('data',data)
         setKits(data.kits)
         setDark(data.dark)
         setType(data.type)
@@ -74,7 +75,7 @@ function App() {
               samples={samples}
             />
           </Layout.Side>
-          <LayoutRight isMobile={isMobile} dark={dark} />
+          <LayoutRight isMobile={isMobile} content={kits} dark={dark} />
         </Layout>
       )}
     </>
