@@ -1,3 +1,5 @@
+![icon-size](https://github.com/powerhome/playbook/assets/92755007/b3aa3933-56b1-4fe4-bb8b-00d786abb23a)
+
 ```swift
 
 HStack(spacing: Spacing.xSmall) {
