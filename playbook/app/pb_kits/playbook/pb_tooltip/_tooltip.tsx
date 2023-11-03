@@ -28,7 +28,7 @@ type TooltipProps = {
   placement?: Placement,
   position?: "absolute" | "fixed";
   text: string,
-  truncatable: boolean,
+  truncatable?: boolean,
 } & GlobalProps
 
 const Tooltip = (props: TooltipProps): React.ReactElement => {
