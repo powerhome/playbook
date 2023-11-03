@@ -1,16 +1,5 @@
 <%= pb_rails("flex", props: { gap: "md", justify: "center", wrap: true }) do %>
   <%= pb_rails("flex/flex_item") do %>
-    <span id='truncated-tooltip-1'>This tooltip trigger is not truncated.</span>
-    <%= pb_rails("tooltip", props: {
-      trigger_element_selector: "#truncated-tooltip-1",
-      tooltip_id: "truncated-1",
-      position: 'left',
-      truncatable: true
-    }) do %>
-        This tooltip trigger is not truncated.
-    <% end %>
-  <% end %>
-  <%= pb_rails("flex/flex_item") do %>
     <span id='truncated-tooltip-2' style="
       display: inline-block;
       white-space: nowrap;
@@ -27,4 +16,16 @@
         This is a truncated tooltip trigger.
     <% end %>
   <% end %>
+  <%= pb_rails("flex/flex_item") do %>
+    <span id='truncated-tooltip-1'>This tooltip trigger is not truncated.</span>
+    <%= pb_rails("tooltip", props: {
+      trigger_element_selector: "#truncated-tooltip-1",
+      tooltip_id: "truncated-1",
+      position: 'left',
+      truncatable: true
+    }) do %>
+        This tooltip trigger is not truncated.
+    <% end %>
+  <% end %>
+  
 <% end %>

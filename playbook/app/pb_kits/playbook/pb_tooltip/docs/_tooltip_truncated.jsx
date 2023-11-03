@@ -29,12 +29,13 @@ const TooltipTruncated = (props) => {
     </FlexItem>
     <FlexItem>
       <Tooltip 
+          className='tooltip-text-truncation'
           text='This is a truncated tooltip trigger.' 
           truncatable
           zIndex={10}
           {...props}
       >
-        {'This tooltip trigger is not truncated.'}
+        {'This'}
       </Tooltip>
     </FlexItem>
    </Flex>
