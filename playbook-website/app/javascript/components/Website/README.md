@@ -4,10 +4,10 @@ This directory is the root of the React application. It houses the entire React 
 
 See the READMEs of all the sub-folders:
 
-- [assets](./assets/README.md)
-- [components](./components/README.md)
-- [hooks](./hooks/README.md)
-- [layouts](./layouts/README.md)
-- [pages](./pages/README.md)
+- [assets](./src/assets/README.md)
+- [components](./src/components/README.md)
+- [hooks](./src/hooks/README.md)
+- [layouts](./src/layouts/README.md)
+- [pages](./src/pages/README.md)
 
 The routes are located at: `packs/app.js`.
