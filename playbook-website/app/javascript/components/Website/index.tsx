@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Layout, Icon } from "playbook-ui"
-import Sidebar from "./Sidebar"
-import LayoutRight from "./LayoutRight"
+import Sidebar from "./src/layouts/Sidebar"
+import LayoutRight from "./src/layouts/LayoutRight"
 
 function App() {
   const [kits, setKits] = useState([])

@@ -1,6 +1,6 @@
 import React from "react"
 import { Outlet } from "react-router-dom"
-import DarkModeToggle from "../DarkModeToggle"
+import DarkModeToggle from "../components/DarkModeToggle.jsx"
 
 import { FlexItem, Flex, Button } from "playbook-ui"
 
