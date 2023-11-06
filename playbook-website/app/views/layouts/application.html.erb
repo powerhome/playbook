@@ -2,6 +2,7 @@
 <html>
   <head>
     <%= render 'layouts/head'%>
+    <%= javascript_packs_with_chunks_tag(*@application_js) %>
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= render 'layouts/mobile_nav'%>
@@ -11,7 +12,7 @@
       </div>
     <% end %>
     <%= pb_rails("layout", props: {
-      classname: "pb--page--content #{'no-sidebar' if !@show_sidebar}" ,
+      classname: "pb--page--content" ,
       variant: dark_mode? ? 'dark' : 'light'
     }) do %>
       <%= render 'layouts/mobile_hamburger' %>
@@ -26,7 +27,6 @@
       <% end %>
     <%end%>
   </body>
-  <%= javascript_packs_with_chunks_tag(*@application_js) %>
   <%= yield :pb_js if @type != 'react' %>
   <%= render 'layouts/ga'%>
 </html>
