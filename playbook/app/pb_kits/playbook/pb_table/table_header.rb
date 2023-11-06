@@ -32,18 +32,41 @@ module Playbook
         align.present? ? "align_#{align}" : nil
       end
 
-      def next_link
-        return sort_menu[0][:link] if sort_menu.all? { |item| item[:active] == false }
+      def next_link(sort_item: "")
+        sort_menu_for = if sort_item.blank?
+                          sort_menu
+                        else
+                          sort_items_for(sort_item)
+                        end
+
+        return sort_menu_for[0][:link] if sort_menu_for.all? { |item| item[:active] == false }
 
         link = ""
 
-        sort_menu.each_with_index do |item, index|
+        sort_menu_for.each_with_index do |item, index|
           if item[:active] == true
-            next_index = (index + 1) % sort_menu.length
-            link = sort_menu[next_index][:link]
+            next_index = (index + 1) % sort_menu_for.length
+            link = sort_menu_for[next_index][:link]
           end
         end
         link
+      end
+
+      def sort_items
+        sort_menu.map { |hash| hash[:item] }.uniq
+      end
+
+      def sort_items_for(sort_item)
+        sort_menu.find_all { |hash| hash[:item] == sort_item }
+      end
+
+      def active_or_first_item(items)
+        active_item = items.find { |hash| hash[:active] == true }
+        if active_item.present?
+          active_item
+        else
+          items[0]
+        end
       end
 
       def sorting_style?
