@@ -5702,10 +5702,10 @@ es5-ext@^0.10.35, es5-ext@^0.10.50:
     es6-symbol "^3.1.3"
     next-tick "^1.1.0"
 
-es5-shim@4.6.6:
-  version "4.6.6"
-  resolved "https://npm.powerapp.cloud/es5-shim/-/es5-shim-4.6.6.tgz#1e0e95bedfdcd933a2d4931a3ac6c79164f18de6"
-  integrity sha512-Ay5QQE78I2WKUoZVZjL0AIuiIjsmXwZGkyCTH9+n6J1anPbb0ymDA27ASa2Lt0rhOpAlEKy2W0d17gJ1XOQ5eQ==
+es5-shim@4.6.7:
+  version "4.6.7"
+  resolved "https://npm.powerapp.cloud/es5-shim/-/es5-shim-4.6.7.tgz#bc67ae0fc3dd520636e0a1601cc73b450ad3e955"
+  integrity sha512-jg21/dmlrNQI7JyyA2w7n+yifSxBng0ZralnSfVZjoCawgNTCnS+yBCyVM9DL5itm7SUnDGgv7hcq2XCZX4iRQ==
 
 es6-iterator@^2.0.3:
   version "2.0.3"
