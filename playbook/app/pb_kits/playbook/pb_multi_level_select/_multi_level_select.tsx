@@ -32,7 +32,6 @@ type MultiLevelSelectProps = {
   treeData?: { [key: string]: string }[]
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[]
-  // ultimateChildrenOnly?: boolean
   variant?: "multi" | "single"
 } & GlobalProps
 
@@ -49,7 +48,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     treeData,
     onSelect = () => null,
     selectedIds,
-    // ultimateChildrenOnly = false,
     variant = "multi"
   } = props
 
