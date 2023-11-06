@@ -1,34 +1,11 @@
-import React, { useState, useEffect } from "react"
-import { Layout, Icon } from "playbook-ui"
-import Sidebar from "./src/layouts/Sidebar"
+import React from "react"
 import LayoutRight from "./src/layouts/LayoutRight"
+import { useLoaderData } from "react-router-dom"
+import { useMediaQuery } from "./src/hooks/useMediaQuery"
 
 function App() {
-  const [kits, setKits] = useState([])
-  const [dark, setDark] = useState(false)
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-
-  useEffect(() => {
-    fetch("/beta/kits.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setKits(data.kits)
-        setDark(data.dark)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-
-    window.addEventListener("resize", () => {
-      setIsMobile(window.innerWidth < 768)
-    })
-
-    return () => {
-      window.removeEventListener("resize", () => {
-        setIsMobile(window.innerWidth < 768)
-      })
-    }
-  }, [])
+  const { kits, dark } = useLoaderData()
+  const isMobile = useMediaQuery("(max-width: 768px)")
 
   return (
     <>{kits.length > 0 && <LayoutRight isMobile={isMobile} dark={dark} />}</>

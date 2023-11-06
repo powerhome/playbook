@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # Kits
 
   ## Beta View
-  get "beta/*path", to: "pages#react_app"
+  get "beta/*path", to: "pages#application_beta"
 
   # Legacy View
   get "kits", to: "pages#kits"

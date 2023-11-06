@@ -14,10 +14,9 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom'
-import Scaffold from '../components/Website/src/components/Scaffold'
-import RedirectToType from '../components/Website/src/hooks/RedirectToType'
 import ComponentsList from '../components/Website/src/pages/ComponentList'
 import Component from '../components/Website/src/pages/ComponentShow'
+import { ComponentsLoader } from '../components/Website/src/hooks/loaders'
 
 const rootElement = document.getElementById('react-root')
 
@@ -25,6 +24,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
         element={<App />}
+        loader={ComponentsLoader}
         path="/beta"
     >
       <Route
@@ -40,14 +40,6 @@ const router = createBrowserRouter(
             path=":name"
         />
       </Route>
-      <Route
-          element={<Scaffold />}
-          path="kit_category/:name/:type"
-      />
-      <Route
-          element={<RedirectToType />}
-          path="kit_category/:name"
-      />
     </Route>
   )
 )
