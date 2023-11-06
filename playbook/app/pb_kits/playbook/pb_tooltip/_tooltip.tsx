@@ -28,7 +28,7 @@ type TooltipProps = {
   placement?: Placement,
   position?: "absolute" | "fixed";
   text: string,
-  truncatable?: boolean,
+  truncationEnabled?: boolean,
 } & GlobalProps
 
 const Tooltip = (props: TooltipProps): React.ReactElement => {
@@ -43,7 +43,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     placement: preferredPlacement = "top",
     position = "absolute",
     text,
-    truncatable = false,
+    truncationEnabled = false,
     zIndex,
     ...rest
   } = props
@@ -83,7 +83,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     ],
     open,
     onOpenChange(open) {
-      if (truncatable) {
+      if (truncationEnabled) {
         const domRef = refs.domReference.current;
         if (
           (domRef?.clientWidth === domRef?.scrollWidth) ||

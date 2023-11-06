@@ -9,7 +9,7 @@
 <% end %>
 
 <script>
-  if (<%= object.truncatable %>) {
+  if (<%= object.truncation_enabled %>) {
     // only display tooltip if trigger element is truncated
     document.addEventListener("DOMContentLoaded", function () {
       const formatedTriggerElementId =

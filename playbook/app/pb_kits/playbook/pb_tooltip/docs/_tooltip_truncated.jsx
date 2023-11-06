@@ -20,7 +20,7 @@ const TooltipTruncated = (props) => {
             'backgroundColor': 'red'
           }}
           text='This is a truncated tooltip trigger.' 
-          truncatable
+          truncationEnabled
           zIndex={10}
           {...props}
       >
@@ -31,7 +31,7 @@ const TooltipTruncated = (props) => {
       <Tooltip 
           className='tooltip-text-truncation'
           text='This is a truncated tooltip trigger.' 
-          truncatable
+          truncationEnabled
           zIndex={10}
           {...props}
       >
