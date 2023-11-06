@@ -1,3 +1,5 @@
+![icon-circle-colors](https://github.com/powerhome/playbook/assets/92755007/d6507900-98e9-49fb-acfb-a238bef08d1b)
+
 ```swift
 
 VStack(spacing: Spacing.small) {
