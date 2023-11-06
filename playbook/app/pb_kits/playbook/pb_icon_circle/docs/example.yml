@@ -12,3 +12,9 @@ examples:
   - icon_circle_sizes: Size
   - icon_circle_color: Color
   - icon_circle_emoji: With Emoji
+
+  swift:
+  - icon_circle_defaul_swift: Default
+  - icon_circle_sizes_swift: Size
+  - icon_circle_color_swift: Color
+
