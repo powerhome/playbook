@@ -5,26 +5,26 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 100px;
-    ">This is a truncated tooltip trigger.</span>
+      max-width: 65px;
+    ">Tooltip for truncation only</span>
     <%= pb_rails("tooltip", props: {
       trigger_element_selector: "#truncated-tooltip-2",
       tooltip_id: "truncated-2",
       position: 'left',
       truncation_enabled: true
     }) do %>
-        This is a truncated tooltip trigger.
+        Tooltip for truncation only
     <% end %>
   <% end %>
   <%= pb_rails("flex/flex_item") do %>
-    <span id='truncated-tooltip-1'>This tooltip trigger is not truncated.</span>
+    <span id='truncated-tooltip-1'>Tooltip for truncation only</span>
     <%= pb_rails("tooltip", props: {
       trigger_element_selector: "#truncated-tooltip-1",
       tooltip_id: "truncated-1",
       position: 'left',
       truncation_enabled: true
     }) do %>
-        This tooltip trigger is not truncated.
+        Tooltip for truncation only
     <% end %>
   <% end %>
   
