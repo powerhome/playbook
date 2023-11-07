@@ -14,8 +14,8 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom'
-import ComponentsList from '../components/Website/src/pages/ComponentList'
-import Component from '../components/Website/src/pages/ComponentShow'
+import ComponentList from '../components/Website/src/pages/ComponentList'
+import ComponentShow from '../components/Website/src/pages/ComponentShow'
 import { ComponentsLoader } from '../components/Website/src/hooks/loaders'
 
 const rootElement = document.getElementById('react-root')
@@ -28,11 +28,11 @@ const router = createBrowserRouter(
         path="/beta"
     >
       <Route
-          element={<ComponentsList />}
+          element={<ComponentList />}
           path="kits"
       >
         <Route
-            element={<Component />}
+            element={<ComponentShow />}
             path=":name"
         />
         <Route

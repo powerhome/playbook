@@ -2,7 +2,7 @@ import React from "react"
 import { NavLink, Outlet, useOutlet } from "react-router-dom"
 import { Title } from "playbook-ui"
 
-export default function Components() {
+export default function ComponentList() {
   const outlet = useOutlet();
 
   return (

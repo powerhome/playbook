@@ -18,7 +18,7 @@ class PagesController < ApplicationController
     @type = params[:type]
 
     respond_to do |format|
-      format.html { render template: "layouts/application_beta" }
+      format.html { render layout: "application_beta", inline: "" }
       format.json { render json: { kits: @kits, dark: @dark, type: @type } }
     end
   end
