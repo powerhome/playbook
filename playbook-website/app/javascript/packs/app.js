@@ -1,9 +1,7 @@
-import ReactDOM from 'react-dom'
 import React from 'react'
 import App from '../components/Website'
 import '@fortawesome/fontawesome-pro/js/fontawesome.min.js'
 import '@fortawesome/fontawesome-pro/js/regular.min.js'
-import '../site_styles/main.scss'
 import 'playbook-ui/dist/playbook.css'
 import 'playbook-ui/dist/playbook.js'
 
@@ -17,8 +15,6 @@ import {
 import ComponentList from '../components/Website/src/pages/ComponentList'
 import ComponentShow from '../components/Website/src/pages/ComponentShow'
 import { ComponentsLoader } from '../components/Website/src/hooks/loaders'
-
-const rootElement = document.getElementById('react-root')
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -43,7 +39,5 @@ const router = createBrowserRouter(
     </Route>
   )
 )
-ReactDOM.render(
-  <RouterProvider router={router} />,
-  rootElement
-)
+
+export const Website = () => <RouterProvider router={router} />

@@ -4,7 +4,7 @@
     <%= render 'layouts/head'%>
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
-    <%= render 'layouts/mobile_nav'%>
+ 
     <div class="pb--page--dark-mode-toggle-mobile">
       <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
     </div>
@@ -16,8 +16,7 @@
       <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav"}) do%>
         <%= render 'layouts/sidebar' %>
       <% end %>
-      <%= pb_rails("layout/body", props: {id: "react-root"}) do%>
-      <% end %>
+      <%= react_component("Website") %>
     <% end %>
   </body>
   <%= javascript_pack_tag('app') %>
