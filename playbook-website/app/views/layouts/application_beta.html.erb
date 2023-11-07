@@ -20,7 +20,7 @@
       <% end %>
     <% end %>
   </body>
-  <%= javascript_pack_tag('app', defer: true) %>
+  <%= javascript_pack_tag('app') %>
   <%= javascript_packs_with_chunks_tag(*@application_js) %>
   <%= yield :pb_js if @type != 'react' %>
   <%= render 'layouts/ga'%>
