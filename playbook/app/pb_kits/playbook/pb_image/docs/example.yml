@@ -9,3 +9,8 @@ examples:
   - rounded_image: Rounded
   - custom_error_image: Error Handling
   - transition_image: Transition
+  swift:
+  - default_image_swift: Default
+  - rounded_image_swift: Rounded
+  - size_image_swift: Size
+  - image_props_swift: ""
