@@ -2,8 +2,8 @@
 <html>
   <head>
     <%= render 'layouts/head'%>
-    <%= javascript_packs_with_chunks_tag(*@application_js) %>
   </head>
+  <%= javascript_packs_with_chunks_tag(*@application_js) %>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= render 'layouts/mobile_nav'%>
     <% if action_name.include?('kit') %>

@@ -2,8 +2,8 @@
 <html>
   <head>
     <%= render 'layouts/head'%>
-    <%= javascript_packs_with_chunks_tag 'application', 'site' %>
   </head>
+  <%= javascript_packs_with_chunks_tag 'application', 'site' %>
   <body class="fullscreen <%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= yield %>
   </body>
