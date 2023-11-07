@@ -10,7 +10,7 @@ examples:
   - custom_error_image: Error Handling
   - transition_image: Transition
   swift:
-  - default_image_swift: Default
   - rounded_image_swift: Rounded
   - size_image_swift: Size
+  - size_none_image_swift: Size None
   - image_props_swift: ""
