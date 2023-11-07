@@ -1,10 +1,4 @@
 import React from 'react'
-import App from '../components/Website'
-import '@fortawesome/fontawesome-pro/js/fontawesome.min.js'
-import '@fortawesome/fontawesome-pro/js/regular.min.js'
-import 'playbook-ui/dist/playbook.css'
-import 'playbook-ui/dist/playbook.js'
-
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -12,6 +6,8 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom'
+
+import App from '../components/Website'
 import ComponentList from '../components/Website/src/pages/ComponentList'
 import ComponentShow from '../components/Website/src/pages/ComponentShow'
 import { ComponentsLoader } from '../components/Website/src/hooks/loaders'
