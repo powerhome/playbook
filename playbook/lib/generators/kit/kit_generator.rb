@@ -123,7 +123,7 @@ private
     sorted_file_array = re_array[0..(re_array.index(import_area_indicator) + 1)]
     sorted_file_array += example_components
     sorted_file_array << "\n"
-    sorted_file_array << "WebpackerReact.setup({\n"
+    sorted_file_array << "WebpackerReact.registerComponents({\n"
     sorted_file_array += webpack_components
     sorted_file_array << "})\n"
 

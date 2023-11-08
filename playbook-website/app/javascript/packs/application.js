@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   propsTableAnchors.add('.pb--propsTable > .pb_title_kit_3')
 })
 
-WebpackerReact.setup({
+WebpackerReact.registerComponents({
   DarkModeToggle,
   KitSearch,
   SnippetToggle,
