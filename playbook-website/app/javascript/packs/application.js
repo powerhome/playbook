@@ -1,5 +1,5 @@
 /* eslint no-console:0 */
-
+console.log('hello im first')
 import WebpackerReact from 'webpacker-react'
 import zxcvbn from 'zxcvbn'
 window.zxcvbn = zxcvbn

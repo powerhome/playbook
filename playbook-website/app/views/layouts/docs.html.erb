@@ -3,8 +3,8 @@
   <head>
     <%= render 'layouts/head'%>
   </head>
-  <%= javascript_packs_with_chunks_tag(*@application_js) %>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
+  <%= javascript_packs_with_chunks_tag(*@application_js) %>
   <%= render 'layouts/mobile_nav'%>
     <%= render 'layouts/mobile_hamburger'%>
     <%= pb_rails("layout", props: {classname: "pb--page--content #{'no-sidebar' if !@show_sidebar}"}) do %>
@@ -51,6 +51,7 @@
       <% end %>
     <% end %>
   </body>
+
   <%= yield :pb_js %>
   <%= render 'layouts/ga'%>
 </html>

@@ -3,15 +3,15 @@
   <head>
     <%= render 'layouts/head'%>
   </head>
-  <%= javascript_packs_with_chunks_tag(*@application_js) %>
-  <%= javascript_pack_tag('app') %>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
+  <%= javascript_packs_with_chunks_tag(*@application_js) %>
     <%= render 'layouts/mobile_nav'%>
     <div class="pb--page--dark-mode-toggle-mobile">
       <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
     </div>
     <div id="root"></div>
   </body>
+  <%= javascript_pack_tag('app') %>
   <%= yield :pb_js if @type != 'react' %>
   <%= render 'layouts/ga'%>
 </html>

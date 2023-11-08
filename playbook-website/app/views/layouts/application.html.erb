@@ -3,8 +3,8 @@
   <head>
     <%= render 'layouts/head'%>
   </head>
-  <%= javascript_packs_with_chunks_tag(*@application_js) %>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
+    <%= javascript_packs_with_chunks_tag(*@application_js) %>
     <%= render 'layouts/mobile_nav'%>
     <% if action_name.include?('kit') %>
       <div class="pb--page--dark-mode-toggle-mobile">
