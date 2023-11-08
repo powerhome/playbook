@@ -4,7 +4,6 @@ import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop } from '../utilities/props'
-import cn from 'classnames'
 
 try {
   const Trix = require('trix')
@@ -167,7 +166,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
       {
         advancedEditor ? (
           <div 
-              className={cn("pb_rich_text_editor_advanced_container", { 
+              className={classnames("pb_rich_text_editor_advanced_container", { 
               ["toolbar-active"]: advancedEditorToolbar,
               })}
             >
