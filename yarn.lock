@@ -8070,10 +8070,10 @@ jest-environment-node@^26.6.2:
     jest-mock "^26.6.2"
     jest-util "^26.6.2"
 
-jest-fail-on-console@2.5.0:
-  version "2.5.0"
-  resolved "https://npm.powerapp.cloud/jest-fail-on-console/-/jest-fail-on-console-2.5.0.tgz#86d80d9e2365f3e7bcbb46276bbce29d30be3eec"
-  integrity sha512-VOxmGPY5DG4LkOwQtue4dTK486fjYQO1mkFnrvO5tkGi5e6G4JlxvaRO3KiCFk7ZLUOxgqgnQTGoGinagxHeDg==
+jest-fail-on-console@3.1.1:
+  version "3.1.1"
+  resolved "https://npm.powerapp.cloud/jest-fail-on-console/-/jest-fail-on-console-3.1.1.tgz#4ca0d0cc8f11675e8e9f52159a37a6602a7e6c09"
+  integrity sha512-g9HGhKcWOz8lHeZhLCXGg+RD/7upngiKkkBrHimsO/tGB0qi++QZffOgybjeI2bDW1qgdFiJJEG6t/WeTlfmOw==
   dependencies:
     chalk "^4.1.0"
 
