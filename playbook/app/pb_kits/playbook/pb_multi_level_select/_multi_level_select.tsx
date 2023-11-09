@@ -343,26 +343,30 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             return (
               <div key={item.id}>
                 <li
-                    className="dropdown_item"
+                    className={"dropdown_item"}
                     data-name={item.id}
                 >
                   <div className="dropdown_item_checkbox_row">
-                    {item.children && item.children.length > 0
-                    ?
-                      <div
-                          key={isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"}
-                      >
-                        <CircleIconButton
-                            icon={
-                              isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"
-                            }
-                            onClick={(event: any) =>
-                              handleToggleClick(item.id, event)
-                            }
-                            variant="link"
-                        />
-                      </div>
-                    : null}
+                    { !item.parent_id && !item.children ? null :
+                        <div
+                            key={isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"}
+                        >
+                          <CircleIconButton
+                              className={
+                                item.children && item.children.length > 0
+                                  ? ""
+                                  : "toggle_icon"
+                              }
+                              icon={
+                                isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"
+                              }
+                              onClick={(event: any) =>
+                                handleToggleClick(item.id, event)
+                              }
+                              variant="link"
+                          />
+                        </div>
+                    }
                     { variant === "single" ? (
                       item.hideRadio ? (
                         <Body>{item.label}</Body>

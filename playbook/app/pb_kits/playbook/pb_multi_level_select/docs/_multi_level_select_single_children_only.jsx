@@ -11,7 +11,6 @@ const treeData = [
     label: "Philadelphia",
     value: "Philadelphia",
     id: "phl1",
-    hideRadio: true,
     children: [
       {
         label: "Marketing & Sales PHL",
