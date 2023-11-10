@@ -117,17 +117,25 @@ export const getDefaultCheckedItems = (
   return checkedDefault;
 };
 
-export const getParent = (
+export const recursiveCheckParent = (
   item: { [key: string]: any },
   data: any
 ): any => {
-  const parent = ""
   if (item.parent_id !== null) {
     const parent = filterFormattedDataById(data, item.parent_id);
+    const allChildrenChecked = parent[0].children.every(
+      (child: { [key: string]: any }) => child.checked
+    );
+    if (allChildrenChecked) {
+      parent[0].checked = true;
+      const parentHasParent = parent[0].parent_id !== null;
+      if (parentHasParent) {
+        recursiveCheckParent(parent[0], data);
+      }
     }
-    console.log(parent)
-    return parent
-  };
+  }
+  return data;
+};
 
 export const getExpandedItems = (
   treeData: { [key: string]: string }[],
