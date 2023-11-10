@@ -4,39 +4,38 @@ import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps } from "../utilities/props";
 
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 
 type LineGraphProps = {
-  align?: "left" | "right" | "center";
-  axisTitle?: string;
-  dark?: Boolean;
-  xAxisCategories: [];
-  yAxisMin: number;
-  yAxisMax: number;
-  className?: string;
+  align?: "left" | "right" | "center",
+  axisTitle?: string,
+  dark?: Boolean,
+  xAxisCategories: [],
+  yAxisMin: number,
+  yAxisMax: number,
+  className?: string,
   chartData: {
-    name: string;
-    data: number[];
-  }[];
-  gradient?: boolean;
-  id: string;
-  pointStart: number;
-  subTitle?: string;
-  title: string;
-  type?: string;
-  legend?: boolean;
-  toggleLegendClick?: boolean;
-  height?: string;
-  colors: string[];
-  layout?: "horizontal" | "vertical" | "proximate";
-  verticalAlign?: "top" | "middle" | "bottom";
-  x?: number;
-  y?: number;
-  aria?: { [key: string]: string };
-  data?: { [key: string]: string };
+    name: string,
+    data: number[],
+  }[],
+  gradient?: boolean,
+  id: string,
+  pointStart: number,
+  subTitle?: string,
+  title: string,
+  type?: string,
+  legend?: boolean,
+  toggleLegendClick?: boolean,
+  height?: string,
+  colors: string[],
+  layout?: "horizontal" | "vertical" | "proximate",
+  verticalAlign?: "top" | "middle" | "bottom",
+  x?: number,
+  y?: number,
+  aria?: { [key: string]: string },
+  data?: { [key: string]: string },
 };
 
 const LineGraph = ({
@@ -68,12 +67,6 @@ const LineGraph = ({
 }: LineGraphProps) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
-  const setupTheme = () => {
-    dark
-      ? Highcharts.setOptions(highchartsDarkTheme)
-      : Highcharts.setOptions(highchartsTheme);
-  };
-  setupTheme();
 
   const staticOptions = {
     title: {
@@ -126,12 +119,24 @@ const LineGraph = ({
   }
 
   const [options, setOptions] = useState({});
+  const [isHighchartsLoaded, setIsHighchartsLoaded] = useState(false);
 
   useEffect(() => {
     setOptions({ ...staticOptions });
+
+    const interval = setInterval(() => {
+      if (window.Highcharts) {
+        clearInterval(interval)
+        dark
+          ? window.Highcharts.setOptions(highchartsDarkTheme)
+          : window.Highcharts.setOptions(highchartsTheme)
+        setIsHighchartsLoaded(true)
+      }
+    }, 0)
   }, [chartData]);
 
   return (
+    isHighchartsLoaded &&
     <HighchartsReact
       containerProps={{
         className: classnames(globalProps(props), className),
@@ -139,7 +144,7 @@ const LineGraph = ({
         ...ariaProps,
         ...dataProps,
       }}
-      highcharts={Highcharts}
+      highcharts={window.Highcharts}
       options={options}
     />
   );

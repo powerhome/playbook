@@ -3,8 +3,6 @@ import classnames from "classnames";
 import HighchartsReact from "highcharts-react-official";
 import highchartsMore from "highcharts/highcharts-more";
 
-import Highcharts from "highcharts";
-
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
@@ -12,35 +10,35 @@ import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps } from "../utilities/props";
 
 type CircleChartProps = {
-  align?: "left" | "right" | "center";
-  aria: { [key: string]: string };
-  chartData?: [];
-  children?: Node;
-  className?: string;
-  colors?: string[];
-  dark?: Boolean;
-  data?: Object;
-  dataLabelHtml?: string;
-  dataLabels?: boolean;
-  height?: string;
-  id?: string;
-  innerSize?: "sm" | "md" | "lg" | "none";
-  legend?: boolean;
-  maxPointSize?: number;
-  minPointSize?: number;
-  rounded?: boolean;
-  startAngle?: number;
-  style?: string;
-  title?: string;
-  tooltipHtml: string;
-  useHtml?: boolean;
-  zMin?: number;
-  layout?: "horizontal" | "vertical" | "proximate";
-  verticalAlign?: "top" | "middle" | "bottom";
-  x?: number;
-  y?: number;
-  borderColor?: string;
-  borderWidth?: number;
+  align?: "left" | "right" | "center",
+  aria: { [key: string]: string },
+  chartData?: [],
+  children?: Node,
+  className?: string,
+  colors?: string[],
+  dark?: Boolean,
+  data?: Object,
+  dataLabelHtml?: string,
+  dataLabels?: boolean,
+  height?: string,
+  id?: string,
+  innerSize?: "sm" | "md" | "lg" | "none",
+  legend?: boolean,
+  maxPointSize?: number,
+  minPointSize?: number,
+  rounded?: boolean,
+  startAngle?: number,
+  style?: string,
+  title?: string,
+  tooltipHtml: string,
+  useHtml?: boolean,
+  zMin?: number,
+  layout?: "horizontal" | "vertical" | "proximate",
+  verticalAlign?: "top" | "middle" | "bottom",
+  x?: number,
+  y?: number,
+  borderColor?: string,
+  borderWidth?: number,
 };
 
 // Adjust Circle Chart Block Kit Dimensions to Match the Chart for Centering
@@ -90,29 +88,11 @@ const CircleChart = ({
 }: CircleChartProps) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
-  highchartsMore(Highcharts);
-
-  const setupTheme = () => {
-    dark
-      ? Highcharts.setOptions(highchartsDarkTheme)
-      : Highcharts.setOptions(highchartsTheme);
-  };
-  setupTheme();
-
-  Highcharts.setOptions({
-    tooltip: {
-      headerFormat: null,
-      pointFormat: tooltipHtml ? tooltipHtml : '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' + "<b>{point.y}</b>",
-      useHTML: useHtml,
-    },
-  });
-
   const innerSizes = { sm: "35%", md: "50%", lg: "85%", none: "0%" };
-  const innerSizeFormat = (size: "sm" | "md" | "lg" | "none") =>
-    innerSizes[size];
-
+  const innerSizeFormat = (size: "sm" | "md" | "lg" | "none") => innerSizes[size];
 
   const [options, setOptions] = useState({});
+  const [isHighchartsLoaded, setIsHighchartsLoaded] = useState(false);
 
   useEffect(() => {
     const formattedChartData = chartData.map((obj: any) => {
@@ -169,26 +149,50 @@ const CircleChart = ({
       credits: false,
     };
     setOptions({ ...staticOptions });
-  }, [chartData]);
 
+    const interval = setInterval(() => {
+      if (window.Highcharts) {
+        clearInterval(interval)
+        dark
+          ? window.Highcharts.setOptions(highchartsDarkTheme)
+          : window.Highcharts.setOptions(highchartsTheme)
+        
+        highchartsMore(window.Highcharts);
+
+        window.Highcharts.setOptions({
+          tooltip: {
+            headerFormat: null,
+            pointFormat: tooltipHtml ? tooltipHtml : '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' + "<b>{point.y}</b>",
+            useHTML: useHtml,
+          },
+        });
+
+        setIsHighchartsLoaded(true)
+      }
+    }, 0)
+  }, [chartData]);
 
   return (
     <>
       {children ? (
         <div id={`wrapper-circle-chart-${id}`}>
-          <HighchartsReact
-            containerProps={{
-              className: classnames("pb_circle_chart", globalProps(props)),
-              id: id,
-              ...ariaProps,
-              ...dataProps,
-            }}
-            highcharts={Highcharts}
-            options={options}
-          />
+          {
+            isHighchartsLoaded &&
+            <HighchartsReact
+              containerProps={{
+                className: classnames("pb_circle_chart", globalProps(props)),
+                id: id,
+                ...ariaProps,
+                ...dataProps,
+              }}
+              highcharts={window.Highcharts}
+              options={options}
+            />
+          }
           <div className="pb-circle-chart-block">{children}</div>
         </div>
       ) : (
+        isHighchartsLoaded &&
         <HighchartsReact
           containerProps={{
             className: classnames("pb_circle_chart", globalProps(props)),
@@ -196,7 +200,7 @@ const CircleChart = ({
             ...ariaProps,
             ...dataProps,
           }}
-          highcharts={Highcharts}
+          highcharts={window.Highcharts}
           options={options}
         />
       )}

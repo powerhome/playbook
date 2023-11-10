@@ -5,7 +5,6 @@ import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps } from "../utilities/props";
 
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
@@ -13,24 +12,24 @@ import treemap from 'highcharts/modules/treemap'
 
 type TreemapChartProps = {
   chartData: {
-    name: string;
-    parent?: string | number;
-    value: number;
-    color?: string;
-    id?: string | number;
-  }[];
-  className?: string;
-  colors: string[];
-  dark?: boolean;
-  drillable: boolean;
-  grouped: boolean;
-  height?: string;
-  id: number | string;
-  title?: string;
-  tooltipHtml: string;
-  type?: string;
-  aria?: { [key: string]: string };
-  data?: { [key: string]: string };
+    name: string,
+    parent?: string | number,
+    value: number,
+    color?: string,
+    id?: string | number,
+  }[],
+  className?: string,
+  colors: string[],
+  dark?: boolean,
+  drillable: boolean,
+  grouped: boolean,
+  height?: string,
+  id: number | string,
+  title?: string,
+  tooltipHtml: string,
+  type?: string,
+  aria?: { [key: string]: string },
+  data?: { [key: string]: string },
 };
 
 const TreemapChart = ({
@@ -50,13 +49,6 @@ const TreemapChart = ({
 }: TreemapChartProps) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
-  const setupTheme = () => {
-    dark
-      ? Highcharts.setOptions(highchartsDarkTheme)
-      : Highcharts.setOptions(highchartsTheme);
-  };  
-  treemap(Highcharts)
-  setupTheme();  
 
   const staticOptions = {
     title: {
@@ -88,13 +80,26 @@ const TreemapChart = ({
   };
 
   const [options, setOptions] = useState({});
+  const [isHighchartsLoaded, setIsHighchartsLoaded] = useState(false);
 
   useEffect(() => {
-    
     setOptions({ ...staticOptions });
+
+    const interval = setInterval(() => {
+      if (window.Highcharts) {
+        clearInterval(interval)
+        dark
+          ? window.Highcharts.setOptions(highchartsDarkTheme)
+          : window.Highcharts.setOptions(highchartsTheme)
+        
+        treemap(window.Highcharts)
+        setIsHighchartsLoaded(true)
+      }
+    }, 0)
   }, [chartData]);
 
   return (
+    isHighchartsLoaded &&
     <HighchartsReact
       containerProps={{
         className: classnames(globalProps(props), "pb_treemap_chart"),
@@ -102,7 +107,7 @@ const TreemapChart = ({
         ...ariaProps,
         ...dataProps,
       }}
-      highcharts={Highcharts}
+      highcharts={window.Highcharts}
       options={options}
     />
   );

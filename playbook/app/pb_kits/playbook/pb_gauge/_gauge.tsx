@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
@@ -14,26 +13,26 @@ import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 
 type GaugeProps = {
-  aria: { [key: string]: string };
-  className?: string;
-  chartData?: { name: string; value: number[] | number }[];
-  dark?: Boolean;
-  data?: { [key: string]: string };
-  disableAnimation?: boolean;
-  fullCircle?: boolean;
-  height?: string;
-  id?: string;
-  max?: number;
-  min?: number;
-  prefix?: string;
-  showLabels?: boolean;
-  style?: string;
-  suffix?: string;
-  title?: string;
-  tooltipHtml?: string;
-  colors: string[];
-  minorTickInterval: any;
-  circumference: number[];
+  aria: { [key: string]: string },
+  className?: string,
+  chartData?: { name: string, value: number[] | number }[],
+  dark?: Boolean,
+  data?: { [key: string]: string },
+  disableAnimation?: boolean,
+  fullCircle?: boolean,
+  height?: string,
+  id?: string,
+  max?: number,
+  min?: number,
+  prefix?: string,
+  showLabels?: boolean,
+  style?: string,
+  suffix?: string,
+  title?: string,
+  tooltipHtml?: string,
+  colors: string[],
+  minorTickInterval: any,
+  circumference: number[],
 };
 
 const Gauge = ({
@@ -62,28 +61,13 @@ const Gauge = ({
 }: GaugeProps) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
-  highchartsMore(Highcharts);
-  solidGauge(Highcharts);
-  const setupTheme = () => {
-    dark
-      ? Highcharts.setOptions(highchartsDarkTheme)
-      : Highcharts.setOptions(highchartsTheme);
-  };
-  setupTheme();
-
-  //set tooltip directly to prevent being overriden by Highcharts defaults
-  Highcharts.setOptions({
-    tooltip: {
-      pointFormat: tooltipHtml,
-      followPointer: true,
-    },
-  });
 
   const css = buildCss({
     pb_gauge_kit: true,
   });
 
   const [options, setOptions] = useState({});
+  const [isHighchartsLoaded, setIsHighchartsLoaded] = useState(false);
 
   useEffect(() => {
     const formattedChartData = chartData.map((obj: any) => {
@@ -174,18 +158,45 @@ const Gauge = ({
 
     setOptions({ ...staticOptions });
 
-    if (document.querySelector(".prefix")) {
-      document.querySelectorAll(".prefix").forEach((prefix) => {
-        prefix.setAttribute("y", "28");
-      });
-      document
-        .querySelectorAll(".fix")
-        .forEach((fix) => fix.setAttribute("y", "38"));
-    }
+    const interval = setInterval(() => {
+      if (window.Highcharts) {
+        clearInterval(interval)
+        
+        const gaugeInterval = setInterval(() => {
+          if (document.querySelector(".prefix")) {
+            clearInterval(gaugeInterval)
+            document.querySelectorAll(".prefix").forEach((prefix) => {
+              prefix.setAttribute("y", "28");
+            });
+            document
+              .querySelectorAll(".fix")
+              .forEach((fix) => fix.setAttribute("y", "38"));
+          }
+        }, 0)
+
+        dark
+          ? window.Highcharts.setOptions(highchartsDarkTheme)
+          : window.Highcharts.setOptions(highchartsTheme)
+        
+        highchartsMore(window.Highcharts);
+        solidGauge(window.Highcharts);
+      
+        //set tooltip directly to prevent being overriden by window.Highcharts defaults
+        window.Highcharts.setOptions({
+          tooltip: {
+            pointFormat: tooltipHtml,
+            followPointer: true,
+          },
+        });
+
+        setIsHighchartsLoaded(true)
+      }
+    }, 0)
 
   }, [chartData]);
 
   return (
+    isHighchartsLoaded &&
     <HighchartsReact
       containerProps={{
         className: classnames(css, globalProps(props)),
@@ -193,7 +204,7 @@ const Gauge = ({
         ...ariaProps,
         ...dataProps,
       }}
-      highcharts={Highcharts}
+      highcharts={window.Highcharts}
       options={options}
     />
   );

@@ -3,6 +3,8 @@
 import WebpackerReact from 'webpacker-react'
 import zxcvbn from 'zxcvbn'
 window.zxcvbn = zxcvbn
+import Highcharts from 'highcharts'
+window.Highcharts = Highcharts
 
 import 'playbook-ui/dist/playbook-rails'
 import 'playbook-ui/dist/playbook-doc' // playbook-react doc components

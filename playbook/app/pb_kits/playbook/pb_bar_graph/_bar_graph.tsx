@@ -3,7 +3,6 @@ import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps } from "../utilities/props";
 
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
@@ -11,31 +10,30 @@ import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import classnames from "classnames";
 
 type BarGraphProps = {
-  align?: "left" | "right" | "center";
-  axisTitle: string;
-  dark?: boolean;
-  xAxisCategories: [];
-  yAxisMin: number;
-  yAxisMax: number;
-  chartData: { name: string; data: number[] }[];
-  className?: string;
-  id: any;
-  pointStart: number | any;
-  subTitle?: string;
-  title: string;
-  type?: string;
-  legend?: boolean;
-  toggleLegendClick?: boolean;
-  height?: string;
-  colors: string[];
-  layout?: "horizontal" | "vertical" | "proximate";
-  verticalAlign?: "top" | "middle" | "bottom";
-  x?: number;
-  y?: number;
-  aria?: { [key: string]: string };
-  data?: { [key: string]: string };
+  align?: "left" | "right" | "center",
+  axisTitle: string,
+  dark?: boolean,
+  xAxisCategories: [],
+  yAxisMin: number,
+  yAxisMax: number,
+  chartData: { name: string, data: number[] }[],
+  className?: string,
+  id: any,
+  pointStart: number | any,
+  subTitle?: string,
+  title: string,
+  type?: string,
+  legend?: boolean,
+  toggleLegendClick?: boolean,
+  height?: string,
+  colors: string[],
+  layout?: "horizontal" | "vertical" | "proximate",
+  verticalAlign?: "top" | "middle" | "bottom",
+  x?: number,
+  y?: number,
+  aria?: { [key: string]: string },
+  data?: { [key: string]: string },
 };
-
 
 const BarGraph = ({
   aria = {},
@@ -65,12 +63,6 @@ const BarGraph = ({
 }: BarGraphProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
-  const setupTheme = () => {
-    dark
-      ? Highcharts.setOptions(highchartsDarkTheme)
-      : Highcharts.setOptions(highchartsTheme);
-  };
-  setupTheme();
 
   const staticOptions = {
     title: {
@@ -123,12 +115,24 @@ const BarGraph = ({
   }
 
   const [options, setOptions] = useState({});
+  const [isHighchartsLoaded, setIsHighchartsLoaded] = useState(false)
 
   useEffect(() => {
     setOptions({ ...staticOptions });
+
+    const interval = setInterval(() => {
+      if (window.Highcharts) {
+        clearInterval(interval)
+        dark
+          ? window.Highcharts.setOptions(highchartsDarkTheme)
+          : window.Highcharts.setOptions(highchartsTheme)
+        setIsHighchartsLoaded(true)
+      }
+    }, 0)
   }, [chartData]);
 
   return (
+    isHighchartsLoaded &&
     <HighchartsReact
         containerProps={{
           className: classnames(globalProps(props), className),
@@ -136,7 +140,7 @@ const BarGraph = ({
           ...ariaProps,
           ...dataProps,
         }}
-        highcharts={Highcharts}
+        highcharts={window.Highcharts}
         options={options}
     />
   );
