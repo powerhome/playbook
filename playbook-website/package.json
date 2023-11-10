@@ -8,7 +8,7 @@
     "release": "RAILS_ENV=production NODE_ENV=production ./bin/webpack"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-pro": "^6.2.1",
+    "@fortawesome/fontawesome-pro": "^6.4.2",
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@rails/webpacker": "5.2.1",
     "@tiptap/extension-document": "^2.1.12",

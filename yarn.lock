@@ -1440,10 +1440,10 @@
   resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.1.tgz#344baf6ff9eaad7a73cff067d8c56bfc11ae5304"
   integrity sha512-viouXhegu/TjkvYQoiRZK3aax69dGXxgEjpvZW81wIJdxm5Fnvp3VVIP4VHKqX4SvFw6qpmkILkD4RJWAdrt7A==
 
-"@fortawesome/fontawesome-pro@^6.2.1":
-  version "6.2.1"
-  resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-pro/-/6.2.1/fontawesome-pro-6.2.1.tgz#1cd5b79d93fdb955ef8a04996fef20a44207a6f0"
-  integrity sha512-dHk7iiCf5MCmoUvmrYzfN/I3gebpgpA1oqlOffgOThnsaAR4kpaQ5YMTdkdG99Of1hnN0Bok6R+HE28zXb3SOg==
+"@fortawesome/fontawesome-pro@^6.4.2":
+  version "6.4.2"
+  resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-pro/-/fontawesome-pro-6.4.2.tgz#1acc12423b4b35885c96423cf896ae73e1b9b85a"
+  integrity sha512-b7VtzrgoASuCbnWJ1A17Sw3wemaFGukyBk0Y2ks/rgcnhlJ1uzdyv2uM3QbEaq9OgyZAKGJD1Tli6qHRI68zSQ==
 
 "@gar/promisify@^1.0.1":
   version "1.1.3"
