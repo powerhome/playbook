@@ -5,6 +5,9 @@ import { buildAriaProps, buildDataProps } from "../utilities/props"
 
 import Icon from "../pb_icon/_icon"
 
+import './custom-icons'
+
+
 type StarRatingProps = {
   aria?: {[key: string]: string},
   className?: string,
@@ -38,6 +41,8 @@ const StarRating = ({
     rating % 1 !== 0
   )
 
+  const emptyStarCount = 5 - rating
+
   return (
     <div
         {...ariaProps}
@@ -45,6 +50,29 @@ const StarRating = ({
         className={css}
         id={id}
     >
+
+      {starCount().map((_) => (
+             <Icon
+             fixedWidth
+             fontStyle="fak"
+             icon="powergon"
+             size="5x"
+         />
+          ))}
+
+
+    {emptyStarCount > 0 && (
+      [...Array(8)].map((_, index) => (
+        <Icon
+          key={index}
+          fixedWidth
+          fontStyle="fak"
+          icon="powergon"
+          size="5x"
+        />
+      ))
+    )}
+
     {!hideRating && (
       <div className="pb_star_rating_number">
         {rating}
