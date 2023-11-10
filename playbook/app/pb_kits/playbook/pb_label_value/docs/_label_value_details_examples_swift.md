@@ -1,4 +1,5 @@
-![label-value-examples](https://github.com/powerhome/playbook/assets/92755007/65bfe80a-4be6-4810-8741-5f69cd958a12)
+![label-value-examples](https://github.com/powerhome/playbook/assets/92755007/1810abee-c45a-45ac-bb12-eef88d6a254e)
+
 
 ```swift
 
