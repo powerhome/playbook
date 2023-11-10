@@ -33,9 +33,9 @@ module Playbook
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode)
+            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode) if pb_doc_has_kit_type?(sub_kit, type)
           end
-        else
+        elsif pb_doc_has_kit_type?(kit, type)
           display_kits << render_pb_doc_kit(kit, type, limit_examples, false, dark_mode)
         end
       end
@@ -46,7 +46,18 @@ module Playbook
     # rubocop:disable Naming/AccessorMethodName
     def get_kits
       menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
-      menu["kits"]
+      all_kits = []
+      menu["kits"].each do |kit|
+        kit_name = kit["name"]
+        components = kit["components"].map { |c| c["name"] }
+
+        all_kits << if components.size == 1
+                      components.first
+                    else
+                      { kit_name => components }
+                    end
+      end
+      all_kits
     end
 
     def get_kits_pb_website
@@ -79,6 +90,25 @@ module Playbook
       else
         []
       end
+    end
+
+    def pb_doc_has_kit_type?(kit, type = "rails")
+      case type
+      when "rails"
+        extension = "erb"
+        query_string = extension
+      when "react"
+        extension = "jsx"
+        query_string = extension
+      when "swift"
+        extension = "md"
+        query_string = "_swift"
+      end
+
+      pb_doc_kit_path(kit, "docs")
+        .glob("**/*.#{extension}")
+        .any? { |path| path.basename.to_s.include?(query_string) }
+        .present?
     end
 
     def pb_doc_render_clickable_title(kit, type)
