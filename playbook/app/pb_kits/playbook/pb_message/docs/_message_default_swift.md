@@ -1,3 +1,5 @@
+![message-default](https://github.com/powerhome/playbook/assets/92755007/a50c7439-a429-4e8a-b8d4-ef8323199745)
+
 ```swift
 
 VStack(alignment: .leading, spacing: Spacing.small) {
