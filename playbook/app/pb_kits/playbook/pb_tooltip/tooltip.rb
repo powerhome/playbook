@@ -7,7 +7,6 @@ module Playbook
       prop :trigger_element_selector
       prop :trigger_element_id, deprecated: true
       prop :tooltip_id
-      prop :truncation_enabled, default: false
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
 
@@ -21,7 +20,8 @@ module Playbook
           pb_tooltip_position: position,
           pb_tooltip_trigger_element_selector: trigger_element_selector,
           pb_tooltip_trigger_element_id: trigger_element_id,
-          pb_tooltip_tooltip_id: tooltip_id
+          pb_tooltip_tooltip_id: tooltip_id,
+          pb_tooltip_show_tooltip: true
         )
       end
 

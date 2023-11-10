@@ -94,3 +94,37 @@ test("has position fixed", async () => {
 
   cleanup();
 });
+
+test("display tooltip with showTooltip set to true", async () => {
+  render(
+    <Tooltip
+        data={{ testid: "fixed-position-test" }}
+        showTooltip
+    />
+  );
+
+  fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
+  await waitFor(() => {
+    expect(screen.queryByRole("tooltip")).toBeInTheDocument();
+    cleanup();
+  })
+
+  cleanup();
+});
+
+test("doesn't display tooltip with showTooltip set to false", async () => {
+  render(
+    <Tooltip
+        data={{ testid: "fixed-position-test" }}
+        showTooltip={false}
+    />
+  );
+
+  fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
+  await waitFor(() => {
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
+    cleanup();
+  })
+
+  cleanup();
+});

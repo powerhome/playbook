@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, forwardRef, ForwardedRef } from "react"
 
 import {
   arrow, 
@@ -28,10 +28,10 @@ type TooltipProps = {
   placement?: Placement,
   position?: "absolute" | "fixed";
   text: string,
-  truncationEnabled?: boolean,
+  showTooltip?: boolean,
 } & GlobalProps
 
-const Tooltip = (props: TooltipProps): React.ReactElement => {
+const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): React.ReactElement => {
   const {
     aria = {},
     className,
@@ -43,7 +43,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     placement: preferredPlacement = "top",
     position = "absolute",
     text,
-    truncationEnabled = false,
+    showTooltip = true,
     zIndex,
     ...rest
   } = props
@@ -83,18 +83,10 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     ],
     open,
     onOpenChange(open) {
-      if (truncationEnabled) {
-        const domRef = refs.domReference.current;
-        if (
-          (domRef?.clientWidth === domRef?.scrollWidth) ||
-          (domRef?.scrollWidth === 0)
-        ) {
-          return
-        } else {
-          setOpen(open);
-        }
+      if(!showTooltip) {
+        return
       } else {
-        setOpen(open);
+        setOpen(open)
       }
     },
     placement: preferredPlacement
@@ -121,7 +113,17 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     <>
       <div
           className={`pb_tooltip_kit ${css}`}
-          ref={refs.setReference}
+          ref={(element) => {
+            refs.setReference(element);
+            if (ref) {
+              if (typeof ref === "function") {
+                ref(element);
+              } else if (typeof ref === "object") {
+                ref.current = element;
+              }
+            }
+          }}
+          // ref={refs.setReference}
           role="tooltip_trigger"
           style={{ display: "inline-flex" }}
           {...ariaProps}
@@ -166,6 +168,8 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
       )}
     </>
   )
-}
+})
+
+Tooltip.displayName = "Tooltip"
 
 export default Tooltip
