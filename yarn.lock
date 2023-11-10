@@ -2289,10 +2289,10 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-italic/-/extension-italic-2.0.2.tgz#e7ed247c00fdcdf3d64d0b844b798fdfa41b34d4"
   integrity sha512-AK8m4JKvjv2LgTho2GLPW4UI9Z8Oc1tErG9TAeJzud8NFFZ2iOOueAwyGjPLaEQxWaE2p5xlKjbBUWDV5bd6AQ==
 
-"@tiptap/extension-link@^2.0.2":
-  version "2.0.2"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-link/-/extension-link-2.0.2.tgz#86ef3fd04d5906167d63cc87c1c622a71b48a6e7"
-  integrity sha512-PzBM09Mmsxj0V5fAa0kxdIZdkNjowQWj4O4nrjEWSbSmF90v0Fyj4R/VjSg4dBf3ExfFNYmsjC3wPiRulnCu5g==
+"@tiptap/extension-link@^2.1.12":
+  version "2.1.12"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-link/-/extension-link-2.1.12.tgz#a18f83a0b54342e6274ff9e5a5907ef7f15aa723"
+  integrity sha512-Sti5hhlkCqi5vzdQjU/gbmr8kb578p+u0J4kWS+SSz3BknNThEm/7Id67qdjBTOQbwuN07lHjDaabJL0hSkzGQ==
   dependencies:
     linkifyjs "^4.1.0"
 
