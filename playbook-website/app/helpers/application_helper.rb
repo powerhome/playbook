@@ -13,7 +13,7 @@ module ApplicationHelper
   def pb_category_kits(category_kits: [], type: "rails")
     display_kits = []
     category_kits.each do |kit|
-      display_kits << render_pb_doc_kit(kit, type, false)
+      display_kits << render_pb_doc_kit(kit, type, false) if pb_doc_has_kit_type?(kit, type)
     end
     raw("<div class='pb--docItem'>#{display_kits.join("</div><div class='pb--docItem'>")}</div>")
   end
@@ -36,16 +36,28 @@ module ApplicationHelper
     case type
     when "rails"
       extension = "erb"
+      query_string = extension
     when "react"
       extension = "jsx"
+      query_string = extension
     when "swift"
-      extension = "swift"
+      extension = "md"
+      query_string = "_swift"
     end
 
     Playbook.kit_path(kit, "docs")
             .glob("**/*.#{extension}")
-            .any? { |path| path.basename.to_s.include?(extension) }
+            .any? { |path| path.basename.to_s.include?(query_string) }
             .present?
+  end
+
+  def category_has_kits?(category_kits: [], type: "rails")
+    display_kits = []
+    category_kits.each do |kit|
+      display_kits.push(pb_doc_has_kit_type?(kit, type))
+      display_kits.push(pb_doc_has_kit_type?(kit, type))
+    end
+    display_kits.include?(true)
   end
 
   def nav_hash_category(link)
@@ -134,10 +146,27 @@ module ApplicationHelper
     }
   end
 
+  def aggregate_kits
+    all_kits = []
+
+    MENU["kits"].each do |kit|
+      kit_name = kit["name"]
+      components = kit["components"].map { |c| c["name"] }
+
+      all_kits << if components.size == 1
+                    components.first
+                  else
+                    { kit_name => components }
+                  end
+    end
+
+    all_kits
+  end
+
   def search_list
     all_kits = []
     formatted_kits = []
-    MENU["kits"].each do |kit|
+    aggregate_kits.each do |kit|
       if kit.is_a? Hash
         kit.values[0].each do |sub_kit|
           all_kits.push(sub_kit)
