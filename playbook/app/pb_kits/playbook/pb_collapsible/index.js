@@ -15,6 +15,10 @@ export default class PbCollapsible extends PbEnhancedElement {
       this.toggleElement(this.target)
     })
     this.displayDownArrow()
+    // Listen for a custom event to toggle the collapsible
+    document.addEventListener(`${this.target.id}`, () => {
+      this.toggleElement(this.target)
+    })
   }
 
   get target() {
