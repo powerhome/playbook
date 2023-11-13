@@ -12,7 +12,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_collapsible_content_kit", "toggle-content", collapsed ? "" : "is-visible", padding, separator: " ")
+        generate_classname("pb_collapsible_content_kit", "toggle-content", collapsed ? nil : "is-visible", padding, separator: " ")
       end
     end
   end
