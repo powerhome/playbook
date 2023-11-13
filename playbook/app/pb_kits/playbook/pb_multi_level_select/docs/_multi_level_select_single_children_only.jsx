@@ -5,76 +5,80 @@ const treeData = [
   {
     label: "HQ",
     value: "HQ",
-    id: "hq",
+    id: "hq1",
   },
   {
     label: "Philadelphia",
     value: "Philadelphia",
-    id: "phl",
+    id: "phl1",
+    hideRadio: true,
     children: [
       {
         label: "Marketing & Sales PHL",
         value: "Marketing & Sales PHL",
-        id: "marketingPHL",
+        id: "marketingPHL1",
       },
       {
         label: "Installation Office PHL",
         value: "Installation Office PHL",
-        id: "installationPHL",
+        id: "installationPHL1",
       },
       {
         label: "Warehouse PHL",
         value: "Warehouse PHL",
-        id: "warehousePHL",
+        id: "warehousePHL1",
       },
     ]
   },
   {
     label: "New Jersey",
     value: "New Jersey",
-    id: "nj",
+    id: "nj2",
+    hideRadio: true,
     children: [
       {
         label: "New Jersey",
         value: "New Jersey",
-        id: "nj1",
+        id: "nj3",
+        hideRadio: true,
         children: [
           {
             label: "Marketing & Sales NJ",
             value: "Marketing & Sales NJ",
-            id: "marketingNJ",
+            id: "marketingNJ1",
           },
           {
             label: "Installation Office NJ",
             value: "Installation Office NJ",
-            id: "installationNJ",
+            id: "installationNJ1",
           },
           {
             label: "Warehouse NJ",
             value: "Warehouse NJ",
-            id: "warehouseNJ",
+            id: "warehouseNJ1",
           },
         ],
       },
       {
         label: "Princeton",
         value: "Princeton",
-        id: "princeton",
+        id: "princeton1",
+        hideRadio: true,
         children: [
           {
             label: "Marketing & Sales Princeton",
             value: "Marketing & Sales Princeton",
-            id: "marketingPR",
+            id: "marketingPR1",
           },
           {
             label: "Installation Office Princeton",
             value: "Installation Office Princeton",
-            id: "installationPR",
+            id: "installationPR1",
           },
           {
             label: "Warehouse Princeton",
             value: "Warehouse Princeton",
-            id: "warehousePR",
+            id: "warehousePR1",
           },
         ]
       },
@@ -83,55 +87,57 @@ const treeData = [
   {
     label: "Maryland",
     value: "Maryland",
-    id: "MD",
+    id: "MD1",
+    hideRadio: true,
     children: [
       {
         label: "Marketing & Sales MD",
         value: "Marketing & Sales MD",
-        id: "marketingMD",
+        id: "marketingMD1",
       },
       {
         label: "Installation Office MD",
         value: "Installation Office MD",
-        id: "installationMD",
+        id: "installationMD1",
       },
       {
         label: "Warehouse MD",
         value: "Warehouse MD",
-        id: "warehouseMD",
+        id: "warehouseMD1",
       },
     ]
   },
   {
     label: "Connecticut",
     value: "Connecticut",
-    id: "CT",
+    id: "CT1",
+    hideRadio: true,
     children: [
       {
         label: "Marketing & Sales CT",
         value: "Marketing & Sales CT",
-        id: "marketingCT",
+        id: "marketingCT1",
       },
       {
         label: "Installation Office CT",
         value: "Installation Office CT",
-        id: "installationCT",
+        id: "installationCT1",
       },
       {
         label: "Warehouse CT",
         value: "Warehouse CT",
-        id: "warehouseCT",
+        id: "warehouseCT1",
       },
     ]
   },
 ];
 
-const MultiLevelSelectSingle = (props) => {
+const MultiLevelSelectSingleChildrenOnly = (props) => {
   return (
     <div>
       <MultiLevelSelect
-          id="multiselect-single"
-          inputName="Power"
+          id="multiselect-single-children-only"
+          inputName="PowerChildren"
           onSelect={(selectedNode) => console.log("Selected Node", selectedNode)}
           treeData={treeData}
           variant="single"
@@ -141,4 +147,4 @@ const MultiLevelSelectSingle = (props) => {
   )
 };
 
-export default MultiLevelSelectSingle;
+export default MultiLevelSelectSingleChildrenOnly;

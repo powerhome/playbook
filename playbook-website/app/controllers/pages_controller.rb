@@ -8,9 +8,9 @@ class PagesController < ApplicationController
   before_action :set_js, only: %i[visual_guidelines]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
-  before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
+  before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react kit_category_show_swift]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
-  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_show_react kit_show_rails rails_in_react kit_show_demo kit_show_new visual_guidelines kit_show_swift home]
+  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo kit_show_new visual_guidelines home]
 
   def application_beta
     @kits = MENU["kits"]
@@ -170,24 +170,55 @@ class PagesController < ApplicationController
 
 private
 
+  def missing_rails_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "rails") == false
+  end
+
+  def missing_react_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "react") == false
+  end
+
+  def missing_swift_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "swift") == false
+  end
+
+  def aggregate_kits
+    MENU["kits"]
+  end
+
+  def categories
+    aggregate_kits.map { |item| item["name"] }
+  end
+
+  def all_kits
+    group_components = []
+    aggregate_kits.each do |category|
+      group_components.push(category["components"])
+    end
+    group_components.flatten.map { |item| item["name"] }
+  end
+
   def set_js
     @application_js.concat ["visual_guidelines"]
   end
 
   def set_category
-    categories = MENU["kits"].map { |link| link.first.first if link.is_a?(Hash) }.compact
     @category = params[:name]
-    if categories.flatten.include?(@category)
-      @category_kits = MENU["kits"].map { |link| link.first.last if link.is_a?(Hash) && link.first.first == @category }.compact.flatten
+    if categories.include?(@category) && helpers.category_has_kits?(category_kits: kit_categories, type: params[:type])
+      @category_kits = kit_categories
       @kits = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
     end
   end
 
+  def kit_categories
+    @category = params[:name]
+    aggregate_kits.find { |item| item["name"] == @category }["components"].map { |component| component["name"] }
+  end
+
   def set_kit
-    menu = MENU["kits"].map { |link| link.is_a?(Hash) ? link.first.last : link }
-    if menu.flatten.include?(params[:name])
+    if all_kits.include?(params[:name])
       @kit = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
@@ -199,14 +230,13 @@ private
   end
 
   def ensure_kit_type_exists
-    # TODO: unsure why we cannot simply use the helpers that are included in ApplicationController - fix this
-    is_rails_kit = action_name == "kit_show_rails"
-    files = is_rails_kit ? File.join("**", "*.erb") : File.join("**", "*.jsx")
-    kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
     if action_name === "kit_show_rails"
-      redirect_to action: "kit_show_react" unless kit_files.present?
+      redirect_to action: "kit_show_react" if missing_rails_kit? && missing_react_kit? == false
     elsif action_name === "kit_show_react"
-      redirect_to action: "kit_show_rails" unless kit_files.present?
+      redirect_to action: "kit_show_rails" if missing_react_kit? && missing_rails_kit? == false
+      redirect_to action: "kit_show_swift" if missing_react_kit? && missing_rails_kit? && missing_swift_kit? == false
+    elsif action_name === "kit_show_swift"
+      redirect_to action: "kit_show_react" if missing_swift_kit?
     end
   end
 

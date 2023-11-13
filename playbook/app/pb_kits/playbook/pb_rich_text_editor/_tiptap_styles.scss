@@ -65,9 +65,7 @@
   .ProseMirror {
     background: $white;
     border: 1px solid $border_light;
-    border-top-color: transparent;
-    border-bottom-right-radius: $border_rad_heaviest;
-    border-bottom-left-radius: $border_rad_heaviest;
+    border-radius: $border_rad_heaviest;
     height: 100%;
     padding: 1rem 1.5rem 1.5rem 1.5rem;
     line-height: $lh_loose;
@@ -127,7 +125,6 @@
     }
     &:focus-visible {
       outline: unset;
-      border-top-color: $primary;
       @include transition_default;
     }
     h1 {
@@ -227,5 +224,12 @@
     box-shadow: 0 0 0 1px $primary;
     border-radius: $border_rad_heaviest;
     transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+  }
+  &.toolbar-active {
+    .ProseMirror { 
+      border-top: none;
+      border-top-left-radius: initial;
+      border-top-right-radius: initial;
+    }
   }
 }

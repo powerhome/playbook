@@ -29,6 +29,7 @@ type Editor = {
 type RichTextEditorProps = {
   aria?: { [key: string]: string },
   advancedEditor?: any,
+  advancedEditorToolbar?: boolean,
   toolbarBottom?: Boolean,
   children?: React.ReactNode | React.ReactNode[]
   className?: string,
@@ -51,6 +52,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   const {
     aria = {},
     advancedEditor,
+    advancedEditorToolbar = true,
     toolbarBottom = false,
     children,
     className,
@@ -163,8 +165,14 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     >
       {
         advancedEditor ? (
-          <div className='pb_rich_text_editor_advanced_container'>
-          <EditorToolbar extensions={extensions} editor={advancedEditor}/>
+          <div 
+              className={classnames("pb_rich_text_editor_advanced_container", { 
+              ["toolbar-active"]: advancedEditorToolbar,
+              })}
+            >
+            {advancedEditorToolbar && (
+              <EditorToolbar extensions={extensions} editor={advancedEditor}/>
+            )}
           { children }
           </div>
         ) : (

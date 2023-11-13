@@ -54,4 +54,4 @@ const HomepageHero = () => {
   );
 };
 
-export default HomepageHero;
+export default HomepageHero
