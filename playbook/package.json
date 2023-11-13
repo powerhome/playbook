@@ -46,7 +46,7 @@
     "intl-tel-input": "^17.0.19",
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.19",
-    "react-animate-height": "^2.0.23",
+    "react-animate-height": "^3.2.3",
     "react-dropzone": "^10.2.2",
     "react-highlight-words": "^0.20.0",
     "react-joyride": "^2.5.3",
