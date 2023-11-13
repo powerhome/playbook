@@ -29,7 +29,7 @@ export default function LayoutRight({ isMobile, dark, kits }) {
           </FlexItem>
         </Flex>
       )}
-      <Outlet />
+      <Outlet context={isMobile} />
     </div>
   )
 }
