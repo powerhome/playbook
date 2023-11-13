@@ -11401,12 +11401,12 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-trix@^0.9.0:
-  version "0.9.0"
-  resolved "https://npm.powerapp.cloud/react-trix/-/react-trix-0.9.0.tgz#348b222c713f92642f824fcc4683f892e9237a55"
-  integrity sha512-lvkBQAhBVgO2WU0ORC4DmG2+TJooWzB7qnCYHM9sUTzdLaWgq0kGs/Rubwm5DUOt3VGW8/mjy2u5/lr13LZLww==
+react-trix@^0.10.2:
+  version "0.10.2"
+  resolved "https://npm.powerapp.cloud/react-trix/-/react-trix-0.10.2.tgz#ebe7f44d41087516ec59e5ce7af2ef2463120d03"
+  integrity sha512-bAALnBuoHBu3J3UfJWTvDXhmt1Tic1//w+vbBuSWuGO2gXzy+fyLBNBRiLKPrBcnOB5/t+rdXU8rLSBiz02R9w==
   dependencies:
-    trix "^1.2.2"
+    trix "^1.3.1"
 
 react-zoom-pan-pinch@^2.6.1:
   version "2.6.1"
@@ -13108,7 +13108,7 @@ trim-right@^1.0.1:
   resolved "https://npm.powerapp.cloud/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha512-WZGXGstmCWgeevgTL54hrCuw1dyMQIzWy7ZfqRJfSmJZBwklI15egmQytFP6bPidmw3M8d5yEowl1niq4vmqZw==
 
-trix@1.3.1, trix@^1.2.2:
+trix@1.3.1, trix@^1.3.1:
   version "1.3.1"
   resolved "https://npm.powerapp.cloud/trix/-/trix-1.3.1.tgz#ccce8d9e72bf0fe70c8c019ff558c70266f8d857"
   integrity sha512-BbH6mb6gk+AV4f2as38mP6Ucc1LE3OD6XxkZnAgPIduWXYtvg2mI3cZhIZSLqmMh9OITEpOBCCk88IVmyjU7bA==
