@@ -1,0 +1,1 @@
+The `collapsed` prop is a boolean prop that is set to 'true' by default. If set to 'false', the collapsible will be rendered toggled open on page load.

@@ -5,8 +5,8 @@ examples:
   - collapsible_size: Icon Size
   - collapsible_color: Icon Color
   - collapsible_icons: Custom Icons
-  - collapsible_state: Toggle Collapsible
-
+  - collapsible_external_controls: Toggle Collapsible With External Control
+  - collapsible_external_controls_multiple: Toggle All Collapsibles With One Button
 
   react:
   - collapsible_default: Default
