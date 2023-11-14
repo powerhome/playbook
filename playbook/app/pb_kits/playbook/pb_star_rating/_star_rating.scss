@@ -37,16 +37,28 @@ $pb_star_rating_height: 26px;
     .pb_star_rating_highlight {
       display: flex;
       position: absolute;
-      top: 5px;
       left: 0;
       z-index: 5;
-      color: $yellow;
       line-height: $pb_star_rating_height;
+    }
+    .empty_stars {
+      color: $text_lt_lighter;
+    }
+    .outline_star_color {
+      color: $primary;
+    }
+    .primary_star_color {
+      color: $primary;
+    }
+    .subtle_star_color {
+      color: $black;
+    }
+    .yellow_star_color {
+      color: $yellow;
     }
     .pb_star_rating_base {
       display: flex;
       position: absolute;
-      top: 5px;
       left: 0;
       z-index: 0;
       color: rgba($slate, $opacity-4);

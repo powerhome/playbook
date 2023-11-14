@@ -7,7 +7,6 @@ import Icon from "../pb_icon/_icon"
 
 import './custom-icons'
 
-
 type StarRatingProps = {
   aria?: {[key: string]: string},
   className?: string,
@@ -17,15 +16,19 @@ type StarRatingProps = {
   icon?: string,
   id?: string,
   rating: number,
+  denominator: number,
+  colorOption: string,
 };
 
 const StarRating = ({
   aria = {},
   className,
   data = {},
-  hideRating = false,
+  hideRating = true,
   id,
   rating = 0,
+  denominator = 5,
+  colorOption = "yellow",
 }: StarRatingProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -33,15 +36,9 @@ const StarRating = ({
     "pb_star_rating_kit", className,
   ])
 
-  const starCount = () => (
-    [...Array(Math.floor(rating))]
-  )
-
-  const hasHalfStar = () => (
-    rating % 1 !== 0
-  )
-
-  const emptyStarCount = 5 - rating
+  const activeStars = Math.round(rating) > denominator ? denominator : Math.round(rating)
+  const emptyStars = denominator - Math.round(rating)
+  const colorClass = `${colorOption}_star_color`
 
   return (
     <div
@@ -50,72 +47,40 @@ const StarRating = ({
         className={css}
         id={id}
     >
-
-      {starCount().map((_) => (
-             <Icon
-             fixedWidth
-             fontStyle="fak"
-             icon="powergon"
-             size="5x"
-         />
-          ))}
-
-
-    {emptyStarCount > 0 && (
-      [...Array(8)].map((_, index) => (
-        <Icon
-          key={index}
-          fixedWidth
-          fontStyle="fak"
-          icon="powergon"
-          size="5x"
-        />
-      ))
-    )}
-
-    {!hideRating && (
-      <div className="pb_star_rating_number">
-        {rating}
-      </div>
-    )}
+      {!hideRating && (
+        <div className="pb_star_rating_number">
+          {rating}
+        </div>
+      )}
       <div className="pb_star_rating_wrapper">
         <div className="pb_star_rating_highlight">
-          {starCount().map((_, index) => (
+          {[...Array(activeStars)].map((_) => (
+            <div className={colorClass}>
             <Icon
-                fixedWidth={false}
-                icon="star"
-                key={index}
+              fixedWidth
+              fontStyle="fak"
+              icon="newstar"
             />
+            </div>
           ))}
-          {hasHalfStar() && (
-            <Icon
-              fixedWidth={false}
-              icon="star-half"
-            />
-          )}
-        </div>
-
-        <div className="pb_star_rating_base">
-          <Icon
-              fixedWidth={false}
-              icon="star"
-          />
-          <Icon
-              fixedWidth={false}
-              icon="star"
-          />
-          <Icon
-              fixedWidth={false}
-              icon="star"
-          />
-          <Icon
-              fixedWidth={false}
-              icon="star"
-          />
-          <Icon
-              fixedWidth={false}
-              icon="star"
-          />
+          {[...Array(emptyStars)].map((_) => (
+            <div className="empty_stars">
+              {colorOption === 'outline' && (
+                <Icon
+                fixedWidth
+                fontStyle="fak"
+                icon="hallowstar"
+              />
+              ) }
+              {colorOption !== 'outline' && (
+                <Icon
+                fixedWidth
+                fontStyle="fak"
+                icon="newstar"
+              />
+              ) }
+            </div>
+          ))}
         </div>
       </div>
     </div>
