@@ -5,8 +5,8 @@
   "main": "./dist/playbook.js",
   "scripts": {
     "flow": "flow",
-    "lint": "eslint . --ext .js,.jsx,.tsx && prettier app/ --check",
-    "lint-fix": "eslint . --ext .js,.jsx,tsx --fix && prettier app/ --fix",
+    "lint": "eslint . --ext .js,.jsx,.tsx, && prettier app/ --check",
+    "lint-fix": "eslint . --ext .js,.jsx,tsx, --fix && prettier app/ --fix",
     "test": "jest",
     "test-watch": "jest --watch",
     "test-coverage": "jest --collectCoverage",
