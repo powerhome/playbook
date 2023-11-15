@@ -13169,10 +13169,10 @@ tsutils@^3.21.0:
   dependencies:
     tslib "^1.8.1"
 
-tsx-control-statements@4.1.1:
-  version "4.1.1"
-  resolved "https://npm.powerapp.cloud/tsx-control-statements/-/tsx-control-statements-4.1.1.tgz#2d5b36a8180357f91d079d47a977e4c030ddb32d"
-  integrity sha512-l1BndCi1teH+uz4Ebx9lCnjWlg91wrA1R26lRYgdh8d+dXoyNrSJpnc0zxCcasFPJ8hGHmZ2MOZ6Z+/g/47NKw==
+tsx-control-statements@5.1.0:
+  version "5.1.0"
+  resolved "https://npm.powerapp.cloud/tsx-control-statements/-/tsx-control-statements-5.1.0.tgz#4cd48646f61c1c461f05d5b54e97b9fae135417c"
+  integrity sha512-S0GfQUWZ18hp6L1Cfwc49+kMY3cC2mVBUiEvnk911NjPOU1X2piTONx6P0XSX72ISVOkebi5MThqne6wEOlXmQ==
 
 tty-browserify@0.0.0:
   version "0.0.0"
