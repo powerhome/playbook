@@ -45,9 +45,9 @@ const ToolbarNodes = ({ editor }: any) => {
         ({ onclick, icon, text, isActive }: ToolbarTypes, index: number) => (
           <EditorButton
             classname={`toolbar_button ${isActive ? "is-active" : ""}`}
-            onclick={onclick}
             icon={icon}
             key={index}
+            onclick={onclick}
             text={text}
           />
         )

@@ -40,18 +40,18 @@ const MoreExtensionsDropdown = ({ extensions }: any) => {
       show={showPopover}
     >
       <Nav
-        paddingTop={extensions.length > 1 ? "xs" : "none"}
         paddingBottom={extensions.length > 1 ? "xs" : "none"}
+        paddingTop={extensions.length > 1 ? "xs" : "none"}
         variant="subtle"
       >
         {extensions &&
           extensions.map(
             ({ icon, text, onclick, isActive }: any, index: number) => (
               <NavItem
-                cursor="pointer"
                 className={`pb_tiptap_toolbar_dropdown_list_item ${
                   isActive ? "is-active" : ""
                 }`}
+                cursor="pointer"
                 iconLeft={icon}
                 key={`${text}_${index}`}
                 margin="none"
@@ -59,9 +59,9 @@ const MoreExtensionsDropdown = ({ extensions }: any) => {
                   onclick()
                   setShowPopover(false)
                 }}
-                text={text}
-                paddingTop="xxs"
                 paddingBottom="xxs"
+                paddingTop="xxs"
+                text={text}
               />
             )
           )}

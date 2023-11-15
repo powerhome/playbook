@@ -53,8 +53,8 @@ const EditorToolbar = ({ editor, extensions }: any) => {
                   classname={classname}
                   icon={icon}
                   key={index}
-                  text={text}
                   onclick={onclick}
+                  text={text}
                 />
               )
             )}

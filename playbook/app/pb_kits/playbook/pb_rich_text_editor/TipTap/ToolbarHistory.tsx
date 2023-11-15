@@ -31,10 +31,10 @@ const ToolbarHistoryItems = ({ editor }: any) => {
           ) => (
             <EditorButton
               classname={classname}
-              onclick={onclick}
               disable={disable}
               icon={icon}
               key={index}
+              onclick={onclick}
               text={text}
             />
           )

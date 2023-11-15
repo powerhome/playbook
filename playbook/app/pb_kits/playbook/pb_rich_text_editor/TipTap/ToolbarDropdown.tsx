@@ -79,7 +79,7 @@ const ToolbarDropdown = ({ editor }: any) => {
     if (isActive) {
       activeCount++
       activeItems.push(
-        <Flex align="center" key={icon} gap="xs">
+        <Flex align="center" gap="xs" key={icon}>
           <Icon icon={icon} size="lg" />
           <div>{text}</div>
           <Flex
@@ -104,7 +104,7 @@ const ToolbarDropdown = ({ editor }: any) => {
       ) : activeCount === 1 ? (
         activeItems[0] || null
       ) : (
-        <Flex align="center" key="paragraph" gap="xs">
+        <Flex align="center" gap="xs" key="paragraph">
           <Icon icon="paragraph" size="lg" />
           <div>Paragraph</div>
           <Flex
@@ -127,14 +127,14 @@ const ToolbarDropdown = ({ editor }: any) => {
       shouldClosePopover={handlePopoverClose}
       show={showPopover}
     >
-      <Nav paddingTop="xs" paddingBottom="xs" variant="subtle">
+      <Nav paddingBottom="xs" paddingTop="xs" variant="subtle">
         {toolbarDropdownItems.map(
           ({ icon, text, onclick, isActive }: ToolbarTypes, index: number) => (
             <NavItem
-              cursor="pointer"
               className={`pb_tiptap_toolbar_dropdown_list_item ${
                 isActive ? "is-active" : ""
               }`}
+              cursor="pointer"
               iconLeft={icon}
               key={`${text}_${index}`}
               margin="none"
@@ -142,9 +142,9 @@ const ToolbarDropdown = ({ editor }: any) => {
                 onclick()
                 setShowPopover(false)
               }}
-              text={text}
-              paddingTop="xxs"
               paddingBottom="xxs"
+              paddingTop="xxs"
+              text={text}
             />
           )
         )}
