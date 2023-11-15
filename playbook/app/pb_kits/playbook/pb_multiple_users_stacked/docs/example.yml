@@ -6,3 +6,9 @@ examples:
 
   react:
   - multiple_users_stacked_default: Default
+
+  swift: 
+  - multiple_users_stacked_default_swift: Default
+  - multiple_users_stacked_small_swift: Small
+  - multiple_users_stacked_xsmall_swift: xSmall
+  - multiple_users_stacked_props_swift: ""
