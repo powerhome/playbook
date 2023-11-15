@@ -3,7 +3,7 @@
 @import "../tokens/spacing";
 
 $pb_star_rating_number_width: 30px;
-$pb_star_rating_wrapper_width: 90px;
+$pb_star_rating_wrapper_width: 100px;
 $pb_star_rating_height: 26px;
 
 [class^=pb_star_rating_kit] {
@@ -33,37 +33,10 @@ $pb_star_rating_height: 26px;
     flex-shrink: 0;
     flex-grow: 1;
     min-height: $pb_star_rating_height;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
 
-    .pb_star_rating_highlight {
-      display: flex;
-      position: absolute;
-      left: 0;
-      z-index: 5;
-      line-height: $pb_star_rating_height;
-    }
-    .empty_stars {
-      color: $text_lt_lighter;
-    }
-    .outline_star_color {
-      color: $primary;
-    }
-    .primary_star_color {
-      color: $primary;
-    }
-    .subtle_star_color {
-      color: $black;
-    }
-    .yellow_star_color {
-      color: $yellow;
-    }
-    .pb_star_rating_base {
-      display: flex;
-      position: absolute;
-      left: 0;
-      z-index: 0;
-      color: rgba($slate, $opacity-4);
-      line-height: $pb_star_rating_height;
-    }
   }
 
   &[class*=_hide_rating] {
