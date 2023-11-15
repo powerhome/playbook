@@ -1,38 +1,18 @@
-import React from 'react'
-import { IconCircle } from '../..'
+import React from "react"
+import { IconCircle } from "../.."
 
-const IconCircleSizes = (props) => {
+const IconCircleSizes = props => {
   return (
     <div>
-      <IconCircle
-          icon="rocket"
-          size="xs"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="xs" {...props} />
       <br />
-      <IconCircle
-          icon="rocket"
-          size="sm"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="sm" {...props} />
       <br />
-      <IconCircle
-          icon="rocket"
-          size="md"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="md" {...props} />
       <br />
-      <IconCircle
-          icon="rocket"
-          size="lg"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="lg" {...props} />
       <br />
-      <IconCircle
-          icon="rocket"
-          size="xl"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="xl" {...props} />
     </div>
   )
 }

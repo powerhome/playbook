@@ -1,25 +1,25 @@
-import React, { useContext } from 'react'
-import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../../utilities/props'
-import { globalProps, GlobalProps } from '../../utilities/globalProps'
+import React, { useContext } from "react"
+import classnames from "classnames"
+import { buildAriaProps, buildCss, buildDataProps } from "../../utilities/props"
+import { globalProps, GlobalProps } from "../../utilities/globalProps"
 
-import { CloseIcon } from '../_close_icon'
-import { DialogContext } from '../_dialog_context'
-import Flex from '../../pb_flex/_flex'
-import SectionSeparator from '../../pb_section_separator/_section_separator'
+import { CloseIcon } from "../_close_icon"
+import { DialogContext } from "../_dialog_context"
+import Flex from "../../pb_flex/_flex"
+import SectionSeparator from "../../pb_section_separator/_section_separator"
 
 type DialogHeaderProps = {
-  aria?: {[key: string]: string},
-  children: React.ReactNode[] | React.ReactNode | string,
-  className?: string,
-  closeable?: boolean,
-  data?: object,
-  id?: string,
-  padding?: string,
-  separator?: boolean,
-  spacing?: "none" | "between" | "around" | "evenly",
-  text?: string,
-  title?: string,
+  aria?: { [key: string]: string }
+  children: React.ReactNode[] | React.ReactNode | string
+  className?: string
+  closeable?: boolean
+  data?: object
+  id?: string
+  padding?: string
+  separator?: boolean
+  spacing?: "none" | "between" | "around" | "evenly"
+  text?: string
+  title?: string
 } & GlobalProps
 
 const DialogHeader = (props: DialogHeaderProps) => {
@@ -44,22 +44,15 @@ const DialogHeader = (props: DialogHeaderProps) => {
   return (
     <div className="dialog_sticky_header">
       <Flex
-          {...ariaProps}
-          {...dataProps}
-          className={classnames(headerCSS, headerSpacing, className)}
-          spacing={spacing}
+        {...ariaProps}
+        {...dataProps}
+        className={classnames(headerCSS, headerSpacing, className)}
+        spacing={spacing}
       >
         {children}
-        {closeable &&
-          <CloseIcon
-            onClose={api.onClose}
-          />
-        }
-        
+        {closeable && <CloseIcon onClose={api.onClose} />}
       </Flex>
-      {separator &&
-        <SectionSeparator />
-      }
+      {separator && <SectionSeparator />}
     </div>
   )
 }

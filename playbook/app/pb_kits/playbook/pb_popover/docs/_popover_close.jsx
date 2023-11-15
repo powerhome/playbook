@@ -1,16 +1,12 @@
-import React, { useState } from 'react'
-import {
-  Button,
-  Flex,
-  PbReactPopover,
-} from '../..'
+import React, { useState } from "react"
+import { Button, Flex, PbReactPopover } from "../.."
 
-const PopoverClose = (props) => {
+const PopoverClose = props => {
   const [showInsidePopover, setInsideShowPopover] = useState(false)
   const [showOutsidePopover, setOutsideShowPopover] = useState(false)
   const [showAnyPopover, setAnyShowPopover] = useState(false)
 
-  const handleInsideShouldClosePopover = (shouldClosePopover) => {
+  const handleInsideShouldClosePopover = shouldClosePopover => {
     setInsideShowPopover(!shouldClosePopover)
   }
 
@@ -18,7 +14,7 @@ const PopoverClose = (props) => {
     setInsideShowPopover(!showInsidePopover)
   }
 
-  const handleOutsideShouldClosePopover = (shouldClosePopover) => {
+  const handleOutsideShouldClosePopover = shouldClosePopover => {
     setOutsideShowPopover(!shouldClosePopover)
   }
 
@@ -27,7 +23,7 @@ const PopoverClose = (props) => {
     setAnyShowPopover(false)
   }
 
-  const handleAnyShouldClosePopover = (shouldClosePopover) => {
+  const handleAnyShouldClosePopover = shouldClosePopover => {
     setAnyShowPopover(!shouldClosePopover)
   }
 
@@ -38,64 +34,64 @@ const PopoverClose = (props) => {
 
   const insidePopoverTrigger = (
     <Button
-        onClick={handleInsideTogglePopover}
-        text="Click Inside"
-        variant="secondary"
+      onClick={handleInsideTogglePopover}
+      text="Click Inside"
+      variant="secondary"
     />
   )
 
   const outsidePopoverTrigger = (
     <Button
-        onClick={handleOutsideTogglePopover}
-        text="Click Outside"
-        variant="secondary"
+      onClick={handleOutsideTogglePopover}
+      text="Click Outside"
+      variant="secondary"
     />
   )
 
   const anyPopoverTrigger = (
     <Button
-        onClick={handleAnyTogglePopover}
-        text="Click Anywhere"
-        variant="secondary"
+      onClick={handleAnyTogglePopover}
+      text="Click Anywhere"
+      variant="secondary"
     />
   )
 
   return (
     <Flex spacing="between">
       <PbReactPopover
-          closeOnClick="inside"
-          offset
-          placement="bottom"
-          reference={insidePopoverTrigger}
-          shouldClosePopover={handleInsideShouldClosePopover}
-          show={showInsidePopover}
-          {...props}
+        closeOnClick="inside"
+        offset
+        placement="bottom"
+        reference={insidePopoverTrigger}
+        shouldClosePopover={handleInsideShouldClosePopover}
+        show={showInsidePopover}
+        {...props}
       >
-        {'Click on me!'}
+        {"Click on me!"}
       </PbReactPopover>
 
       <PbReactPopover
-          closeOnClick="outside"
-          offset
-          placement="top"
-          reference={outsidePopoverTrigger}
-          shouldClosePopover={handleOutsideShouldClosePopover}
-          show={showOutsidePopover}
-          {...props}
+        closeOnClick="outside"
+        offset
+        placement="top"
+        reference={outsidePopoverTrigger}
+        shouldClosePopover={handleOutsideShouldClosePopover}
+        show={showOutsidePopover}
+        {...props}
       >
-        {'Click anywhere but me!'}
+        {"Click anywhere but me!"}
       </PbReactPopover>
 
       <PbReactPopover
-          closeOnClick="any"
-          offset
-          placement="right"
-          reference={anyPopoverTrigger}
-          shouldClosePopover={handleAnyShouldClosePopover}
-          show={showAnyPopover}
-          {...props}
+        closeOnClick="any"
+        offset
+        placement="right"
+        reference={anyPopoverTrigger}
+        shouldClosePopover={handleAnyShouldClosePopover}
+        show={showAnyPopover}
+        {...props}
       >
-        {'Click anything!'}
+        {"Click anything!"}
       </PbReactPopover>
     </Flex>
   )

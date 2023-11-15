@@ -1,28 +1,18 @@
-import React from 'react'
+import React from "react"
 
-import OnlineStatus from '../_online_status'
+import OnlineStatus from "../_online_status"
 
-const OnlineStatusDefault = (props) => (
+const OnlineStatusDefault = props => (
   <>
-    <OnlineStatus
-        status="offline"
-        {...props}
-    />
+    <OnlineStatus status="offline" {...props} />
 
     <br />
 
-    <OnlineStatus
-        status="online"
-        {...props}
-    />
+    <OnlineStatus status="online" {...props} />
 
     <br />
 
-    <OnlineStatus
-        status="away"
-        {...props}
-    />
-
+    <OnlineStatus status="away" {...props} />
   </>
 )
 

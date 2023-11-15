@@ -1,7 +1,7 @@
-import React from 'react'
-import { Detail } from '../..'
+import React from "react"
+import { Detail } from "../.."
 
-const DetailStyled = (props) => (
+const DetailStyled = props => (
   <>
     <Detail {...props}>
       <b>{"This text is using the <b> tag."}</b>
@@ -16,7 +16,9 @@ const DetailStyled = (props) => (
       <i>{"This text is using the <i> tag."}</i>
       <br />
       <br />
-      {"This "}<em>{"word"}</em>{" is using an <em> tag."}
+      {"This "}
+      <em>{"word"}</em>
+      {" is using an <em> tag."}
       <br />
       <br />
       <small>{"This text is using the <small> tag."}</small>

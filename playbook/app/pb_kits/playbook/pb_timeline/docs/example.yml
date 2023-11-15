@@ -1,13 +1,10 @@
 examples:
-  
   rails:
-  - timeline_default: Default
-  - timeline_vertical: Vertical
-  - timeline_with_date: With Date
-  
-  
+    - timeline_default: Default
+    - timeline_vertical: Vertical
+    - timeline_with_date: With Date
+
   react:
-  - timeline_default: Default
-  - timeline_vertical: Vertical
-  - timeline_with_date: With Date
-  
+    - timeline_default: Default
+    - timeline_vertical: Vertical
+    - timeline_with_date: With Date

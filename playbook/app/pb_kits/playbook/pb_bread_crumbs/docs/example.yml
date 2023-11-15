@@ -1,7 +1,6 @@
 examples:
   rails:
-  - bread_crumbs_default: Default
- 
+    - bread_crumbs_default: Default
+
   react:
-  - bread_crumbs_default: Default
- 
+    - bread_crumbs_default: Default

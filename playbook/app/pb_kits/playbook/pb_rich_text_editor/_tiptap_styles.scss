@@ -217,16 +217,20 @@
   }
 }
 .pb_rich_text_editor_advanced_container {
-  transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+  transition:
+    box-shadow 0.3s ease-in-out,
+    border-radius 0.3s ease-in-out;
   &:focus-visible,
   &:focus-within {
     outline: unset;
     box-shadow: 0 0 0 1px $primary;
     border-radius: $border_rad_heaviest;
-    transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    transition:
+      box-shadow 0.3s ease-in-out,
+      border-radius 0.3s ease-in-out;
   }
   &.toolbar-active {
-    .ProseMirror { 
+    .ProseMirror {
       border-top: none;
       border-top-left-radius: initial;
       border-top-right-radius: initial;

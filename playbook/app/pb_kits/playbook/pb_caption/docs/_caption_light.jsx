@@ -1,23 +1,12 @@
-import React from 'react'
-import { Caption } from '../../'
+import React from "react"
+import { Caption } from "../../"
 
-const CaptionLight = (props) => {
+const CaptionLight = props => {
   return (
     <div>
-      <Caption
-          text="Caption"
-          {...props}
-      />
-      <Caption
-          size="lg"
-          text="Caption Large"
-          {...props}
-      />
-      <Caption
-          size="xs"
-          text="Subcaption"
-          {...props}
-      />
+      <Caption text="Caption" {...props} />
+      <Caption size="lg" text="Caption Large" {...props} />
+      <Caption size="xs" text="Subcaption" {...props} />
     </div>
   )
 }

@@ -13,7 +13,11 @@ $pb_button_h_padding: 34px;
 $pb_button_hover_darken: 4%;
 $pb_button_border_width: 0px;
 
-@mixin pb_button_variant($bg: $primary_action, $color: $text_dk_default, $border: transparent) {
+@mixin pb_button_variant(
+  $bg: $primary_action,
+  $color: $text_dk_default,
+  $border: transparent
+) {
   background-color: $bg;
   color: $color;
   border-color: $border;
@@ -38,7 +42,10 @@ $pb_button_border_width: 0px;
   padding: $pb_button_v_padding $pb_button_h_padding;
   cursor: pointer;
   outline: none;
-  transition: background $transition_default ease, color $transition_default ease, box-shadow $transition_default ease;
+  transition:
+    background $transition_default ease,
+    color $transition_default ease,
+    box-shadow $transition_default ease;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
@@ -50,8 +57,8 @@ $pb_button_border_width: 0px;
 
   @include focus;
 
-  &[class*=dark] {
-    @include focus-dark
+  &[class*="dark"] {
+    @include focus-dark;
   }
 
   .loading-icon {
@@ -77,10 +84,9 @@ $pb_button_border_width: 0px;
     outline: none;
     border-width: $pb_button_border_width;
   }
+}
 
-};
-
-@mixin pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken)){
+@mixin pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken)) {
   background-color: $bg;
 }
 
@@ -88,7 +94,7 @@ $pb_button_border_width: 0px;
 @mixin pb_button_primary {
   @include pb_button_variant($primary_action, $text_dk_default, transparent);
 
-  @media (hover:hover) {
+  @media (hover: hover) {
     &:hover {
       @include pb_button_hover;
     }
@@ -103,7 +109,7 @@ $pb_button_border_width: 0px;
 @mixin pb_button_secondary {
   @include pb_button_variant($secondary_action, $primary_action);
 
-  @media (hover:hover) {
+  @media (hover: hover) {
     &:hover {
       @include pb_button_hover(rgba($primary_action, $opacity_3));
     }
@@ -118,7 +124,7 @@ $pb_button_border_width: 0px;
 @mixin pb_button_link {
   @include pb_button_variant($transparent, $primary_action);
 
-  @media (hover:hover) {
+  @media (hover: hover) {
     &:hover {
       @include pb_button_hover($transparent);
       color: $text_lt_default;
@@ -166,12 +172,14 @@ $pb_button_border_width: 0px;
 }
 
 // Dark Primary =================
-@mixin pb_button_primary_dark{
+@mixin pb_button_primary_dark {
   @include pb_button_variant($primary_action);
 
-  @media (hover:hover) {
+  @media (hover: hover) {
     &:hover {
-      @include pb_button_hover($bg: darken($primary_action, $pb_button_hover_darken));
+      @include pb_button_hover(
+        $bg: darken($primary_action, $pb_button_hover_darken)
+      );
     }
     &:active {
       transition: none;
@@ -181,10 +189,10 @@ $pb_button_border_width: 0px;
 }
 
 // Dark Secondary ==============
-@mixin pb_button_secondary_dark{
+@mixin pb_button_secondary_dark {
   @include pb_button_variant(rgba($white, $opacity_2), $white);
 
-  @media (hover:hover) {
+  @media (hover: hover) {
     &:hover {
       @include pb_button_hover(rgba($primary_action, $opacity_2));
     }
@@ -199,10 +207,10 @@ $pb_button_border_width: 0px;
 @mixin pb_button_link_dark {
   @include pb_button_variant($transparent, $white);
 
-  @media (hover:hover) {
+  @media (hover: hover) {
     &:hover {
       @include pb_button_hover($transparent);
-      color: rgba($white, $opacity_6)
+      color: rgba($white, $opacity_6);
     }
     &:active {
       transition: none;

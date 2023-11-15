@@ -1,31 +1,20 @@
-import React from 'react'
+import React from "react"
 
-import DateTimeStacked from '../_date_time_stacked'
+import DateTimeStacked from "../_date_time_stacked"
 
-const DateTimeStackedDefault = (props) => (
+const DateTimeStackedDefault = props => (
   <div>
-    <DateTimeStacked
-        datetime={new Date()}
-        {...props}
-    />
+    <DateTimeStacked datetime={new Date()} {...props} />
+    <br />
+    <DateTimeStacked datetime={new Date(2018, 2, 20)} {...props} />
+    <br />
+    <DateTimeStacked datetime={new Date()} timeZone="Asia/Tokyo" {...props} />
     <br />
     <DateTimeStacked
-        datetime={new Date(2018, 2, 20)}
-        {...props}
+      datetime={new Date()}
+      timeZone="America/Denver"
+      {...props}
     />
-    <br />
-    <DateTimeStacked
-        datetime={new Date()}
-        timeZone="Asia/Tokyo"
-        {...props}
-    />
-    <br />
-    <DateTimeStacked
-        datetime={new Date()}
-        timeZone="America/Denver"
-        {...props}
-    />
-
   </div>
 )
 

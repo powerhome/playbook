@@ -1,12 +1,10 @@
-import React from 'react'
-import { Body } from '../../'
+import React from "react"
+import { Body } from "../../"
 
-const BodyBlock = (props) => {
+const BodyBlock = props => {
   return (
     <div>
-      <Body {...props}>
-        {'I am a body kit'}
-      </Body>
+      <Body {...props}>{"I am a body kit"}</Body>
     </div>
   )
 }

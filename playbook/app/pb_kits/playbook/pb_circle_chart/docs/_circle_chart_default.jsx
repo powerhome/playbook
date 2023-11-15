@@ -1,29 +1,25 @@
-import React from 'react'
+import React from "react"
 
-import CircleChart from '../_circle_chart'
+import CircleChart from "../_circle_chart"
 
 const data = [
   {
-    name: 'Waiting for Calls',
+    name: "Waiting for Calls",
     value: 41,
   },
   {
-    name: 'On Call',
+    name: "On Call",
     value: 49,
   },
   {
-    name: 'After call',
+    name: "After call",
     value: 10,
   },
 ]
 
-const CircleChartDefault = (props) => (
+const CircleChartDefault = props => (
   <div>
-    <CircleChart
-        chartData={data}
-        id="circle-chart-default"
-        {...props}
-    />
+    <CircleChart chartData={data} id="circle-chart-default" {...props} />
   </div>
 )
 

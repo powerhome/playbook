@@ -44,7 +44,7 @@ $pb_card_border_radius: $border_rad_heavier;
     border-width: 2px;
     border-color: $primary;
   }
-  @media (hover:hover) {
+  @media (hover: hover) {
     &:hover {
       cursor: pointer;
       box-shadow: $shadow-deep;
@@ -54,7 +54,8 @@ $pb_card_border_radius: $border_rad_heavier;
 }
 
 // Hide the calendar
-.quick-pick-drop-down > .flatpickr-months, .quick-pick-drop-down > .flatpickr-innerContainer {
+.quick-pick-drop-down > .flatpickr-months,
+.quick-pick-drop-down > .flatpickr-innerContainer {
   display: none;
 }
 

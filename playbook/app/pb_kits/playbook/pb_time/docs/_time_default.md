@@ -1,1 +1,1 @@
-Use this anywhere needed to display a certain timestamp 
+Use this anywhere needed to display a certain timestamp

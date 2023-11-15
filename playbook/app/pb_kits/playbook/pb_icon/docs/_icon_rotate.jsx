@@ -1,31 +1,13 @@
-import React from 'react'
+import React from "react"
 
-import Icon from '../_icon'
+import Icon from "../_icon"
 
-const IconRotate = (props) => {
+const IconRotate = props => {
   return (
     <div>
-      <Icon
-          fixedWidth
-          icon="user"
-          rotation={90}
-          size="2x"
-          {...props}
-      />
-      <Icon
-          fixedWidth
-          icon="user"
-          rotation={180}
-          size="2x"
-          {...props}
-      />
-      <Icon
-          fixedWidth
-          icon="user"
-          rotation={270}
-          size="2x"
-          {...props}
-      />
+      <Icon fixedWidth icon="user" rotation={90} size="2x" {...props} />
+      <Icon fixedWidth icon="user" rotation={180} size="2x" {...props} />
+      <Icon fixedWidth icon="user" rotation={270} size="2x" {...props} />
     </div>
   )
 }

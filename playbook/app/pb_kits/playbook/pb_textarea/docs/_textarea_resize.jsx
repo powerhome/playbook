@@ -1,42 +1,42 @@
-import React from 'react'
+import React from "react"
 
-import Textarea from '../_textarea'
+import Textarea from "../_textarea"
 
-const TextareaResize = (props) => {
+const TextareaResize = props => {
   return (
     <div>
       <Textarea
-          label="auto"
-          placeholder="Resize Auto"
-          resize="auto"
-          {...props}
+        label="auto"
+        placeholder="Resize Auto"
+        resize="auto"
+        {...props}
       />
 
       <br />
 
       <Textarea
-          label="vertical"
-          placeholder="Resize Vertical"
-          resize="vertical"
-          {...props}
+        label="vertical"
+        placeholder="Resize Vertical"
+        resize="vertical"
+        {...props}
       />
 
       <br />
 
       <Textarea
-          label="both"
-          placeholder="Resize Both"
-          resize="both"
-          {...props}
+        label="both"
+        placeholder="Resize Both"
+        resize="both"
+        {...props}
       />
 
       <br />
 
       <Textarea
-          label="horizontal"
-          placeholder="Resize Horizontal"
-          resize="horizontal"
-          {...props}
+        label="horizontal"
+        placeholder="Resize Horizontal"
+        resize="horizontal"
+        {...props}
       />
     </div>
   )

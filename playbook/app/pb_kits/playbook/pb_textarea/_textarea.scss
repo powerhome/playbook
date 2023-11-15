@@ -3,10 +3,10 @@
 @import "../tokens/spacing";
 @import "../tokens/titles";
 
-[class^=pb_textarea_kit] {
+[class^="pb_textarea_kit"] {
   margin-bottom: $space_sm;
 
-  [class^=pb_caption_kit] {
+  [class^="pb_caption_kit"] {
     margin-bottom: $space_xs;
     display: block;
   }
@@ -26,7 +26,7 @@
   }
   textarea:hover,
   .pb_text_area_kit:hover {
-    background-color: rgba($focus_input_light,$opacity_5);
+    background-color: rgba($focus_input_light, $opacity_5);
   }
 
   &.resize_both > textarea {
@@ -52,14 +52,15 @@
       background-color: rgba($white, $opacity_1);
       border-color: rgba($white, 0.15);
     }
-    textarea:focus, .pb_text_area_kit:focus {
+    textarea:focus,
+    .pb_text_area_kit:focus {
       border-color: $active_dark;
       background-color: rgba($white, 0.025);
     }
   }
 
   &.error {
-    [class*=pb_body_kit] {
+    [class*="pb_body_kit"] {
       margin-top: $space_xs / 2;
     }
     textarea {

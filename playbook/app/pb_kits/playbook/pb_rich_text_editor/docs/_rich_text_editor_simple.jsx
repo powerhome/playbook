@@ -1,12 +1,9 @@
-import React from 'react'
-import { RichTextEditor } from '../../'
+import React from "react"
+import { RichTextEditor } from "../../"
 
-const RichTextEditorSimple = (props) => (
+const RichTextEditorSimple = props => (
   <div>
-    <RichTextEditor
-        simple
-        {...props}
-    />
+    <RichTextEditor simple {...props} />
   </div>
 )
 

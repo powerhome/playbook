@@ -1,33 +1,25 @@
-import React from 'react'
-import FilterSingle, { FilterSingleProps } from './FilterSingle'
-import FilterDouble, { FilterDoubleProps } from './FilterDouble'
+import React from "react"
+import FilterSingle, { FilterSingleProps } from "./FilterSingle"
+import FilterDouble, { FilterDoubleProps } from "./FilterDouble"
 
 type FilterProps =
   | FilterSingleProps
   | (FilterDoubleProps & {
-      double?: boolean,
+      double?: boolean
     })
 
-const Filter = ({ 
+const Filter = ({
   double = false,
   ...templateProps
-  }: FilterProps): React.ReactElement => {
+}: FilterProps): React.ReactElement => {
   const displayFilter = () => {
     if (double === true) {
-      return (
-        <FilterDouble {...templateProps} />
-      )
+      return <FilterDouble {...templateProps} />
     } else {
-      return (
-        <FilterSingle {...templateProps} />
-      )
+      return <FilterSingle {...templateProps} />
     }
   }
-  return (
-    <>
-      {displayFilter()}
-    </>
-  )
+  return <>{displayFilter()}</>
 }
 
 export default Filter

@@ -54,7 +54,6 @@
   }
 }
 
-
 // Dialog animations for fading in and out from the right side
 @keyframes modalFadeInRight {
   from {
@@ -100,7 +99,6 @@
 
 // Dialog Styles
 .pb_dialog {
-
   // Local Variables
   $gutter: $space_lg;
   $small: 300px;
@@ -108,7 +106,7 @@
   $medium: 500px;
   $large: 800px;
   $xlarge: 1150px;
-  $animation-duration: .2s;
+  $animation-duration: 0.2s;
   $z-index: 100;
   $opacity_visible: 1;
   $opacity_hidden: 0;
@@ -212,15 +210,15 @@
       opacity: $opacity_hidden;
     }
     &[class*="full_height"] {
-      &[class*="_left"]{
+      &[class*="_left"] {
         justify-content: flex-start;
       }
 
-      &[class*="_center"]{
+      &[class*="_center"] {
         justify-content: center;
       }
 
-      &[class*="_right"]{
+      &[class*="_right"] {
         justify-content: flex-end;
       }
 
@@ -235,7 +233,7 @@
           height: $space_xl * 2;
         }
         .dialog_footer {
-          position:fixed;
+          position: fixed;
           bottom: 0;
           background-color: $white;
         }
@@ -287,18 +285,18 @@
   }
 
   &[class*="full_height"] {
-    &[class*="_left"]{
+    &[class*="_left"] {
       .pb_dialog_rails {
         margin: unset !important;
         margin-right: auto !important;
       }
     }
 
-    &[class*="_center"]{
+    &[class*="_center"] {
       justify-content: center;
     }
 
-    &[class*="_right"]{
+    &[class*="_right"] {
       .pb_dialog_rails {
         margin: unset !important;
         margin-left: auto !important;
@@ -316,7 +314,7 @@
         height: $space_xl * 2;
       }
       .dialog_footer {
-        position:fixed;
+        position: fixed;
         bottom: 0;
         background-color: $white;
       }
@@ -348,7 +346,6 @@
     top: 0 !important;
     padding: unset !important;
     margin: auto;
-
   }
 
   // Overlay for rails kit

@@ -1,19 +1,19 @@
-import React from 'react'
-import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import React from "react"
+import classnames from "classnames"
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
 
 type ProgressStepProps = {
-  aria?: { [key: string]: string },
-  className?: string,
-  data?: { [key: string]: string },
-  id?: string,
-  children?: React.ReactChild[] | React.ReactChild,
-  orientation?: "horizontal" | "vertical",
-  icon?: boolean,
-  showIcon?: boolean,
-  variant?: string,
-  color?: string,
+  aria?: { [key: string]: string }
+  className?: string
+  data?: { [key: string]: string }
+  id?: string
+  children?: React.ReactChild[] | React.ReactChild
+  orientation?: "horizontal" | "vertical"
+  icon?: boolean
+  showIcon?: boolean
+  variant?: string
+  color?: string
 }
 
 const ProgressStep = (props: ProgressStepProps): React.ReactElement => {
@@ -23,7 +23,7 @@ const ProgressStep = (props: ProgressStepProps): React.ReactElement => {
     children,
     color,
     data = {},
-    orientation = 'horizontal',
+    orientation = "horizontal",
     icon = false,
     showIcon = false,
     variant,
@@ -31,20 +31,20 @@ const ProgressStep = (props: ProgressStepProps): React.ReactElement => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const iconStyle = icon === true || showIcon === true ? 'icon' : ''
+  const iconStyle = icon === true || showIcon === true ? "icon" : ""
   const progressStepCss = buildCss(
-    'pb_progress_step_kit',
+    "pb_progress_step_kit",
     orientation,
     iconStyle,
     variant,
-    color,
+    color
   )
 
   return (
     <ul
-        {...ariaProps}
-        {...dataProps}
-        className={classnames(progressStepCss, globalProps(props), className)}
+      {...ariaProps}
+      {...dataProps}
+      className={classnames(progressStepCss, globalProps(props), className)}
     >
       {children}
     </ul>

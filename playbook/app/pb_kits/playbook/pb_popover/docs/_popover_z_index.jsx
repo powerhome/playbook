@@ -1,50 +1,38 @@
-import React, { useState } from 'react'
-import {
-  Body,
-  Button,
-  PbReactPopover,
-} from '../..'
+import React, { useState } from "react"
+import { Body, Button, PbReactPopover } from "../.."
 
-const PopoverZIndex = (props) => {
+const PopoverZIndex = props => {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleTogglePopover = () => {
     setShowPopover(!showPopover)
   }
 
-  const handleShouldClosePopover = (shouldClosePopover) => {
+  const handleShouldClosePopover = shouldClosePopover => {
     setShowPopover(!shouldClosePopover)
   }
 
   const popoverTrigger = (
-    <Button
-        onClick={handleTogglePopover}
-        text="Click Me"
-        variant="secondary"
-    />
+    <Button onClick={handleTogglePopover} text="Click Me" variant="secondary" />
   )
 
   return (
     <>
-      <div style={{ position: 'relative', zIndex: 2 }}>
-        <Body
-            marginBottom="md"
-            text="I've got a z-index of 2"
-            {...props}
-        />
+      <div style={{ position: "relative", zIndex: 2 }}>
+        <Body marginBottom="md" text="I've got a z-index of 2" {...props} />
       </div>
       <PbReactPopover
-          closeOnClick="outside"
-          offset
-          padding="sm"
-          placement="top"
-          reference={popoverTrigger}
-          shouldClosePopover={handleShouldClosePopover}
-          show={showPopover}
-          zIndex={3}
-          {...props}
+        closeOnClick="outside"
+        offset
+        padding="sm"
+        placement="top"
+        reference={popoverTrigger}
+        shouldClosePopover={handleShouldClosePopover}
+        show={showPopover}
+        zIndex={3}
+        {...props}
       >
-        {'I have a custom z-index of 3'}
+        {"I have a custom z-index of 3"}
       </PbReactPopover>
     </>
   )

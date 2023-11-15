@@ -1,30 +1,23 @@
-import React from 'react'
-import classnames from 'classnames'
+import React from "react"
+import classnames from "classnames"
 
-import { globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps } from "../utilities/globalProps"
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 
-import Avatar from '../pb_avatar/_avatar'
-import Badge from '../pb_badge/_badge'
+import Avatar from "../pb_avatar/_avatar"
+import Badge from "../pb_badge/_badge"
 
 type MultipleUsersStackedProps = {
-  aria?: { [key: string]: string },
-  className?: string,
-  dark?: boolean,
-  data?: { [key: string]: string },
-  id?: string,
-  users: Array<{ [key: string]: string }>,
+  aria?: { [key: string]: string }
+  className?: string
+  dark?: boolean
+  data?: { [key: string]: string }
+  id?: string
+  users: Array<{ [key: string]: string }>
 }
 
 const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
-  const {
-    aria = {},
-    className,
-    dark = false,
-    data = {},
-    id,
-    users,
-  } = props
+  const { aria = {}, className, dark = false, data = {}, id, users } = props
 
   const moreThanTwo = users.length > 2
   const onlyOne = users.length == 1
@@ -33,9 +26,11 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
   }
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss(
-    'pb_multiple_users_stacked_kit',
-    { single: onlyOne }), globalProps(props), className)
+  const classes = classnames(
+    buildCss("pb_multiple_users_stacked_kit", { single: onlyOne }),
+    globalProps(props),
+    className
+  )
 
   const firstUser = () => {
     return users.slice(0, 1).map((userObject, index) => {
@@ -82,12 +77,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
   }
 
   return (
-    <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      id={id}
-    >
+    <div {...ariaProps} {...dataProps} className={classes} id={id}>
       {firstUser()}
       {secondUser()}
       {plusUsers()}

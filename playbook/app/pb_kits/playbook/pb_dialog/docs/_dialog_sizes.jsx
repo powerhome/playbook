@@ -1,7 +1,7 @@
 /* @flow */
 
-import React, { useState } from 'react'
-import { Button, Dialog, Flex } from '../../'
+import React, { useState } from "react"
+import { Button, Dialog, Flex } from "../../"
 
 const useDialog = (visible = false) => {
   const [opened, setOpened] = useState(visible)
@@ -19,23 +19,23 @@ const DialogSizes = () => {
 
   const dialogs = [
     {
-      size: 'sm',
-      text: 'Body on small dialog',
-      title: 'Header on small dialog',
+      size: "sm",
+      text: "Body on small dialog",
+      title: "Header on small dialog",
       toggle: toggleSmDialog,
       visible: smDialogOpened,
     },
     {
-      size: 'md',
-      text: 'Body on medium dialog',
-      title: 'Header on medium dialog',
+      size: "md",
+      text: "Body on medium dialog",
+      title: "Header on medium dialog",
       toggle: toggleMdDialog,
       visible: mdDialogOpened,
     },
     {
-      size: 'lg',
-      text: 'Body on large dialog',
-      title: 'Header on large dialog',
+      size: "lg",
+      text: "Body on large dialog",
+      title: "Header on large dialog",
       toggle: toggleLgDialog,
       visible: lgDialogOpened,
     },
@@ -43,47 +43,31 @@ const DialogSizes = () => {
 
   return (
     <div>
-      <Flex 
-          rowGap="xs" 
-          wrap
-      >
-        <Button
-            id="sm"
-            marginRight="md"
-            onClick={toggleSmDialog}
-        >
-          {'Small Dialog'}
+      <Flex rowGap="xs" wrap>
+        <Button id="sm" marginRight="md" onClick={toggleSmDialog}>
+          {"Small Dialog"}
         </Button>
-        <Button
-            marginRight="md"
-            onClick={toggleMdDialog}
-        >
-          {'Medium Dialog'}
+        <Button marginRight="md" onClick={toggleMdDialog}>
+          {"Medium Dialog"}
         </Button>
-        <Button
-            marginRight="md"
-            onClick={toggleLgDialog}
-        >
-          {'Large Dialog'}
+        <Button marginRight="md" onClick={toggleLgDialog}>
+          {"Large Dialog"}
         </Button>
       </Flex>
       <Flex>
-        {dialogs.map((dialog) => (
+        {dialogs.map(dialog => (
           <Dialog
-              key={dialog.size}
-              onClose={dialog.toggle}
-              opened={dialog.visible}
-              size={dialog.size}
+            key={dialog.size}
+            onClose={dialog.toggle}
+            opened={dialog.visible}
+            size={dialog.size}
           >
             <Dialog.Header>{dialog.title}</Dialog.Header>
             <Dialog.Body>{dialog.text}</Dialog.Body>
             <Dialog.Footer>
-              <Button onClick={dialog.toggle}>{'Okay'}</Button>
-              <Button
-                  onClick={dialog.toggle}
-                  variant="link"
-              >
-                {'Cancel'}
+              <Button onClick={dialog.toggle}>{"Okay"}</Button>
+              <Button onClick={dialog.toggle} variant="link">
+                {"Cancel"}
               </Button>
             </Dialog.Footer>
           </Dialog>

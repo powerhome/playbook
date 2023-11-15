@@ -1,10 +1,10 @@
 // @flow
 
-import React, { useState } from 'react'
-import { Caption, Title, Toggle } from '../..'
+import React, { useState } from "react"
+import { Caption, Title, Toggle } from "../.."
 
 const ToggleCustomRadio = () => {
-  const [choice, setChoice] = useState('walk')
+  const [choice, setChoice] = useState("walk")
 
   const handleOnChange = ({ target }) => {
     setChoice(target.value)
@@ -12,57 +12,41 @@ const ToggleCustomRadio = () => {
 
   return (
     <>
-      <Title
-          size={4}
-          text="Select one option:"
-      />
+      <Title size={4} text="Select one option:" />
 
       <br />
 
-      <Caption
-          text="Walk"
-      />
-      <Toggle
-          checked={choice}
-          size="sm"
-      >
+      <Caption text="Walk" />
+      <Toggle checked={choice} size="sm">
         <input
-            name="modes of transportation"
-            onChange={handleOnChange}
-            type="radio"
-            value="walk"
+          name="modes of transportation"
+          onChange={handleOnChange}
+          type="radio"
+          value="walk"
         />
       </Toggle>
 
       <br />
 
-      <Caption
-          text="Bike"
-      />
-      <Toggle
-          size="sm"
-      >
+      <Caption text="Bike" />
+      <Toggle size="sm">
         <input
-            name="modes of transportation"
-            onChange={handleOnChange}
-            type="radio"
-            value="bike"
+          name="modes of transportation"
+          onChange={handleOnChange}
+          type="radio"
+          value="bike"
         />
       </Toggle>
 
       <br />
 
-      <Caption
-          text="Ride"
-      />
-      <Toggle
-          size="sm"
-      >
+      <Caption text="Ride" />
+      <Toggle size="sm">
         <input
-            name="modes of transportation"
-            onChange={handleOnChange}
-            type="radio"
-            value="ride"
+          name="modes of transportation"
+          onChange={handleOnChange}
+          type="radio"
+          value="ride"
         />
       </Toggle>
     </>

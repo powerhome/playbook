@@ -1,17 +1,11 @@
-import React from 'react'
+import React from "react"
 
-import Icon from '../_icon'
+import Icon from "../_icon"
 
-const IconBorder = (props) => {
+const IconBorder = props => {
   return (
     <div>
-      <Icon
-          border
-          fixedWidth
-          icon="user"
-          size="2x"
-          {...props}
-      />
+      <Icon border fixedWidth icon="user" size="2x" {...props} />
     </div>
   )
 }

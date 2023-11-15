@@ -1,32 +1,23 @@
-import React from 'react'
+import React from "react"
 
-import TitleCount from '../_title_count'
+import TitleCount from "../_title_count"
 
-const TitleCountDefault = (props) => {
+const TitleCountDefault = props => {
   return (
     <>
-      <TitleCount
-          count={35.78}
-          title="Appointments"
-          {...props}
-      />
+      <TitleCount count={35.78} title="Appointments" {...props} />
+
+      <br />
+
+      <TitleCount count={7399} size="lg" title="Appointments" {...props} />
 
       <br />
 
       <TitleCount
-          count={7399}
-          size="lg"
-          title="Appointments"
-          {...props}
-      />
-
-      <br />
-
-      <TitleCount
-          count={-379503.372}
-          size="lg"
-          title="Appointments"
-          {...props}
+        count={-379503.372}
+        size="lg"
+        title="Appointments"
+        {...props}
       />
     </>
   )

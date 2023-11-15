@@ -1,120 +1,120 @@
-import React from 'react'
+import React from "react"
 
-import CircleChart from '../_circle_chart'
+import CircleChart from "../_circle_chart"
 
 const dataFirst = [
   {
-    name: 'Bugs',
+    name: "Bugs",
     value: 8,
   },
   {
-    name: 'Chores',
+    name: "Chores",
     value: 1,
   },
   {
-    name: 'Stories',
+    name: "Stories",
     value: 12,
   },
 ]
 
 const dataSecond = [
   {
-    name: 'Queued',
+    name: "Queued",
     value: 7,
   },
   {
-    name: 'In Progress',
+    name: "In Progress",
     value: 6,
   },
   {
-    name: 'Validation',
+    name: "Validation",
     value: 3,
   },
   {
-    name: 'Done',
+    name: "Done",
     value: 6,
   },
 ]
 
 const dataThird = [
   {
-    name: '1 Point Tickets',
+    name: "1 Point Tickets",
     value: 2,
   },
   {
-    name: '3 Point Tickets',
+    name: "3 Point Tickets",
     value: 5,
   },
   {
-    name: '5 Point Tickets',
+    name: "5 Point Tickets",
     value: 6,
   },
   {
-    name: '8 Point Tickets',
+    name: "8 Point Tickets",
     value: 3,
   },
   {
-    name: '13 Point Tickets',
+    name: "13 Point Tickets",
     value: 1,
   },
 ]
 const dataFourth = [
   {
-    name: 'Facebook',
+    name: "Facebook",
     value: 2498,
   },
   {
-    name: 'YouTube',
+    name: "YouTube",
     value: 2000,
   },
   {
-    name: 'WhatsApp',
+    name: "WhatsApp",
     value: 2000,
   },
   {
-    name: 'Facebook Messenger',
+    name: "Facebook Messenger",
     value: 1300,
   },
   {
-    name: 'WeChat',
+    name: "WeChat",
     value: 1165,
   },
   {
-    name: 'Instagram',
+    name: "Instagram",
     value: 1000,
   },
   {
-    name: 'Tik Tok',
+    name: "Tik Tok",
     value: 800,
   },
 ]
 
-const CircleChartInnerSizes = (props) => (
+const CircleChartInnerSizes = props => (
   <div>
     <CircleChart
-        chartData={dataFirst}
-        id="with-innersize-sm"
-        innerSize="sm"
-        {...props}
+      chartData={dataFirst}
+      id="with-innersize-sm"
+      innerSize="sm"
+      {...props}
     />
     <CircleChart
-        chartData={dataSecond}
-        id="with-innersize-md"
-        innerSize="md"
-        {...props}
+      chartData={dataSecond}
+      id="with-innersize-md"
+      innerSize="md"
+      {...props}
     />
     <CircleChart
-        chartData={dataThird}
-        id="with-innersize-lg"
-        innerSize="lg"
-        {...props}
+      chartData={dataThird}
+      id="with-innersize-lg"
+      innerSize="lg"
+      {...props}
     />
     <CircleChart
-        chartData={dataFourth}
-        className="poop"
-        id="with-innersize-none "
-        innerSize="none"
-        {...props}
+      chartData={dataFourth}
+      className="poop"
+      id="with-innersize-none "
+      innerSize="none"
+      {...props}
     />
   </div>
 )

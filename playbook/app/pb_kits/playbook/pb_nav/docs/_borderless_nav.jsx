@@ -1,35 +1,15 @@
-import React from 'react'
+import React from "react"
 
-import Nav from '../_nav'
-import NavItem from '../_item'
+import Nav from "../_nav"
+import NavItem from "../_item"
 
-const BorderlessNav = (props) => {
+const BorderlessNav = props => {
   return (
-    <Nav 
-        borderless
-        {...props}
-    >
-      <NavItem
-          active
-          link="#"
-          text="All Categories"
-          {...props}
-      />
-      <NavItem
-          link="#"
-          text="Food"
-          {...props}
-      />
-      <NavItem
-          link="#"
-          text="Digital"
-          {...props}
-      />
-      <NavItem
-          link="#"
-          text="Design Art"
-          {...props}
-      />
+    <Nav borderless {...props}>
+      <NavItem active link="#" text="All Categories" {...props} />
+      <NavItem link="#" text="Food" {...props} />
+      <NavItem link="#" text="Digital" {...props} />
+      <NavItem link="#" text="Design Art" {...props} />
     </Nav>
   )
 }

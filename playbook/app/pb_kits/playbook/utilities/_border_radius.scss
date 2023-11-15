@@ -14,7 +14,9 @@ $transition-speed: 0.2s;
 
 .border_radius {
   @mixin border-example {
-    transition: background-color $transition-speed ease, height $transition-speed ease;
+    transition:
+      background-color $transition-speed ease,
+      height $transition-speed ease;
   }
 
   &_rounded {

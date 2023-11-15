@@ -1,27 +1,24 @@
-import React from 'react'
+import React from "react"
 
-import Layout from '../_layout'
+import Layout from "../_layout"
 
-import Card from '../../pb_card/_card'
+import Card from "../../pb_card/_card"
 
-const LayoutCollection = (props) => {
+const LayoutCollection = props => {
   return (
     <div>
-      <Layout
-          layout="collection"
-          {...props}
-      >
+      <Layout layout="collection" {...props}>
         <Layout.Body>
-          <Card>{'Card content'}</Card>
-          <Card>{'Card content'}</Card>
-          <Card>{'Card content'}</Card>
-          <Card>{'Card content'}</Card>
-          <Card>{'Card content'}</Card>
-          <Card>{'Card content'}</Card>
-          <Card>{'Card content'}</Card>
-          <Card>{'Card content'}</Card>
-          <Card>{'Card content'}</Card>
-          <Card>{'Card content'}</Card>
+          <Card>{"Card content"}</Card>
+          <Card>{"Card content"}</Card>
+          <Card>{"Card content"}</Card>
+          <Card>{"Card content"}</Card>
+          <Card>{"Card content"}</Card>
+          <Card>{"Card content"}</Card>
+          <Card>{"Card content"}</Card>
+          <Card>{"Card content"}</Card>
+          <Card>{"Card content"}</Card>
+          <Card>{"Card content"}</Card>
         </Layout.Body>
       </Layout>
     </div>

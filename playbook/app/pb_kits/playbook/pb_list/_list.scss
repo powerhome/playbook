@@ -1,31 +1,31 @@
 @import "list_mixin";
 
-[class*=pb_list_kit] {
+[class*="pb_list_kit"] {
   @include pb_list;
 }
 
-[class^=pb_list_kit] {
-  &[class*=_dark] li {
+[class^="pb_list_kit"] {
+  &[class*="_dark"] li {
     @include pb_list_dark;
   }
 
-  &[class*=_large] li {
+  &[class*="_large"] li {
     @include pb_list_large;
   }
 
-  &[class*=_xpadding] li {
+  &[class*="_xpadding"] li {
     @include pb_list_x_padding;
   }
 
-  &[class*=_borderless] li {
+  &[class*="_borderless"] li {
     @include pb_list_borderless;
   }
 
-  &[class*=_layout_left] li {
+  &[class*="_layout_left"] li {
     @include pb_list_layout_left;
   }
 
-  &[class*=_layout_right] li {
+  &[class*="_layout_right"] li {
     @include pb_list_layout_right;
   }
 }

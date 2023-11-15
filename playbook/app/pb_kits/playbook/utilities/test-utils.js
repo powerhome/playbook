@@ -1,11 +1,11 @@
 /* This file provides the base for tests */
 
-import React from 'react'
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import React from "react"
+import { render, screen } from "@testing-library/react"
+import "@testing-library/jest-dom/extend-expect"
 
 // Accessbility
-import { axe, toHaveNoViolations } from 'jest-axe'
+import { axe, toHaveNoViolations } from "jest-axe"
 expect.extend(toHaveNoViolations)
 
 /*
@@ -14,17 +14,13 @@ expect.extend(toHaveNoViolations)
 */
 // eslint-disable-next-line react/prop-types
 const TestApp = ({ children }) => {
-  return (
-    <>
-      { children }
-    </>
-  )
+  return <>{children}</>
 }
 
 const customRender = (ui, options) =>
   render(ui, { wrapper: TestApp, ...options })
 
-export * from '@testing-library/react'
+export * from "@testing-library/react"
 export { customRender as render }
 
 export const SCREEN_SIZES = ["xs", "sm", "md", "lg", "xl"]
@@ -38,11 +34,13 @@ export const renderKit = (Kit, props = {}, newProps = {}) => {
 export const ensureAccessible = async (Kit, props = {}, newProps = {}) => {
   const kitProps = { ...props, ...newProps }
   render(<Kit {...kitProps} />)
-  expect(await axe(screen.getByTestId(kitProps.data.testid))).toHaveNoViolations()
+  expect(
+    await axe(screen.getByTestId(kitProps.data.testid))
+  ).toHaveNoViolations()
 }
 
-export const appendAlert = (message) => {
-  const alertNode = document.createElement('div')
+export const appendAlert = message => {
+  const alertNode = document.createElement("div")
   alertNode.innerHTML = message
-  document.querySelector('body').appendChild(alertNode)
+  document.querySelector("body").appendChild(alertNode)
 }

@@ -1,27 +1,27 @@
-import React from 'react'
+import React from "react"
 
-import PersonContact from '../_person_contact'
+import PersonContact from "../_person_contact"
 
-const PersonContactDefault = (props) => {
+const PersonContactDefault = props => {
   return (
     <div>
       <PersonContact
-          contacts={[
+        contacts={[
           {
-            contactType: 'email',
-            contactValue: 'email@example.com',
+            contactType: "email",
+            contactValue: "email@example.com",
           },
           {
-            contactValue: '5555555555',
+            contactValue: "5555555555",
           },
           {
-            contactType: 'work',
-            contactValue: '3245627482',
+            contactType: "work",
+            contactValue: "3245627482",
           },
         ]}
-          firstName="Pauline"
-          lastName="Smith"
-          {...props}
+        firstName="Pauline"
+        lastName="Smith"
+        {...props}
       />
     </div>
   )

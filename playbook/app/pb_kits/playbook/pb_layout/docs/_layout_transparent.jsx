@@ -1,23 +1,13 @@
-import React from 'react'
+import React from "react"
 
-import Layout from '../_layout'
+import Layout from "../_layout"
 
-const LayoutTransparent = (props) => {
+const LayoutTransparent = props => {
   return (
     <div>
-      <Layout
-          collapse="sm"
-          position="left"
-          size="xs"
-          transparent
-          {...props}
-      >
-        <Layout.Side>
-          {'Side'}
-        </Layout.Side>
-        <Layout.Body>
-          {'Body'}
-        </Layout.Body>
+      <Layout collapse="sm" position="left" size="xs" transparent {...props}>
+        <Layout.Side>{"Side"}</Layout.Side>
+        <Layout.Body>{"Body"}</Layout.Body>
       </Layout>
     </div>
   )

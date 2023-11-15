@@ -1,3 +1,3 @@
 ##### Prop
 
-* `orientation` | **Type**: String | **Values**: row | column 
+- `orientation` | **Type**: String | **Values**: row | column

@@ -2,22 +2,21 @@
 @import "../tokens/typography";
 
 $pb_caption_colors: (
-  default:        $text_lt_default,
-  light:          $text_lt_light,
-  link:           $primary,
-  lighter:        $text_lt_lighter,
-  success:        $text_lt_success_sm,
-  error:          $error,
+  default: $text_lt_default,
+  light: $text_lt_light,
+  link: $primary,
+  lighter: $text_lt_lighter,
+  success: $text_lt_success_sm,
+  error: $error,
 );
 
 $pb_dark_caption_colors: (
-  default:        $text_dk_default,
-  light:          $text_dk_light,
-  link:           $primary,
-  success:        $text_dk_success_sm,
-  error:          $error,
+  default: $text_dk_default,
+  light: $text_dk_light,
+  link: $primary,
+  success: $text_dk_success_sm,
+  error: $error,
 );
-
 
 @mixin caption($font_size: $font_smaller, $font_weight: $bold) {
   font-weight: $font_weight;
@@ -47,7 +46,7 @@ $pb_dark_caption_colors: (
 @mixin pb_caption_kit_colors {
   @each $name, $color in $pb_caption_colors {
     &[class*="#{$name}"] {
-      color: $color
+      color: $color;
     }
   }
 }

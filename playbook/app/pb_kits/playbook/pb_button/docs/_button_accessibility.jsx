@@ -1,15 +1,15 @@
-import React from 'react'
-import { Button } from '../../'
+import React from "react"
+import { Button } from "../../"
 
-const ButtonAccessibility = (props) => (
+const ButtonAccessibility = props => (
   <div>
     <Button
-        aria={{ label: 'Go to Google' }}
-        link="https://google.com"
-        tabIndex={0}
-        tag="a"
-        text="Button with ARIA"
-        {...props}
+      aria={{ label: "Go to Google" }}
+      link="https://google.com"
+      tabIndex={0}
+      tag="a"
+      text="Button with ARIA"
+      {...props}
     />
   </div>
 )

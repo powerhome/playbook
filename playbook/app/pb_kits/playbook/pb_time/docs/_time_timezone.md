@@ -4,8 +4,8 @@ The list of supported timezones is exhaustive and we're most likely to only use 
 
 However, if you need to support another timezone you should be able to Google a specific list, otherwise you can follow the string pattern and try entering a continent and a city.
 
-Remember, this is just labeling the timezone, please verify the actual time for a specified timezone is rendering properly. 
+Remember, this is just labeling the timezone, please verify the actual time for a specified timezone is rendering properly.
 
 Format: `<Continent>/<Large_City_Name>`
 
-Continent Options: ` America | Europe | Asia | Africa | Pacific | India | Atlantic | Australia `
+Continent Options: `America | Europe | Asia | Africa | Pacific | India | Atlantic | Australia`

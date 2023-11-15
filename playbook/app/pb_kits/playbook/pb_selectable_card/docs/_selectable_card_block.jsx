@@ -1,53 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
-import SelectableCard from '../_selectable_card'
+import SelectableCard from "../_selectable_card"
 
-import Body from '../../pb_body/_body'
-import Title from '../../pb_title/_title'
+import Body from "../../pb_body/_body"
+import Title from "../../pb_title/_title"
 
-const SelectableCardBlock = (props) => {
+const SelectableCardBlock = props => {
   const [block, setBlock] = useState(true)
   const [tag, setTag] = useState(false)
 
-  const handleSelect = (event) => {
+  const handleSelect = event => {
     setBlock(event.target.checked)
   }
 
-  const handleTag = (event) => {
+  const handleTag = event => {
     setTag(event.target.checked)
   }
 
   return (
     <div className="pb--doc-demo-row">
       <SelectableCard
-          checked={block}
-          inputId="block"
-          name="block"
-          onChange={handleSelect}
-          value="block"
-          {...props}
+        checked={block}
+        inputId="block"
+        name="block"
+        onChange={handleSelect}
+        value="block"
+        {...props}
       >
-        <Title
-            size={4}
-            text="Block"
-            {...props}
-        />
-        <Body
-            tag="span"
-            {...props}
-        >
-          {'This uses block'}
+        <Title size={4} text="Block" {...props} />
+        <Body tag="span" {...props}>
+          {"This uses block"}
         </Body>
       </SelectableCard>
 
       <SelectableCard
-          checked={tag}
-          inputId="tag"
-          name="tag"
-          onChange={handleTag}
-          text="This passes text through the tag"
-          value="tag"
-          {...props}
+        checked={tag}
+        inputId="tag"
+        name="tag"
+        onChange={handleTag}
+        text="This passes text through the tag"
+        value="tag"
+        {...props}
       />
     </div>
   )

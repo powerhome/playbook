@@ -1,112 +1,111 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react"
 
-import {Body, Caption, Passphrase, ProgressSimple} from '../..'
-import zxcvbn from 'zxcvbn'
+import { Body, Caption, Passphrase, ProgressSimple } from "../.."
+import zxcvbn from "zxcvbn"
 
-const PassphraseCommon = (props) => {
-  const [input, setInput] = useState('')
+const PassphraseCommon = props => {
+  const [input, setInput] = useState("")
   const [checkStrength, setCheckStrength] = useState({
-    label: '',
+    label: "",
     percent: 0,
     score: 0,
-    variant: ''
+    variant: "",
   })
-  const handleChange = (e) => setInput(e.target.value)
+  const handleChange = e => setInput(e.target.value)
 
-  const handleStrengthCalculation = (settings) => {
+  const handleStrengthCalculation = settings => {
     const {
-        passphrase = "",
-        common = false,
-        isPwned = false,
-        averageThreshold = 2,
-        minLength = 12,
-        strongThreshold = 3,
-      } = settings
+      passphrase = "",
+      common = false,
+      isPwned = false,
+      averageThreshold = 2,
+      minLength = 12,
+      strongThreshold = 3,
+    } = settings
 
     const resultByScore = {
       0: {
-        variant: 'negative',
-        label: '',
+        variant: "negative",
+        label: "",
         percent: 0,
       },
       1: {
-        variant: 'negative',
-        label: 'This passphrase is too common',
+        variant: "negative",
+        label: "This passphrase is too common",
         percent: 25,
       },
       2: {
-        variant: 'negative',
-        label: 'Too weak',
+        variant: "negative",
+        label: "Too weak",
         percent: 25,
       },
       3: {
-        variant: 'warning',
-        label: 'Almost there, keep going!',
+        variant: "warning",
+        label: "Almost there, keep going!",
         percent: 50,
       },
       4: {
-        variant: 'positive',
-        label: 'Success! Strong passphrase',
+        variant: "positive",
+        label: "Success! Strong passphrase",
         percent: 100,
-      }
+      },
     }
 
-    const { score } = zxcvbn(passphrase);
+    const { score } = zxcvbn(passphrase)
 
     const noPassphrase = passphrase.length <= 0
     const commonPassphrase = common || isPwned
-    const weakPassphrase = passphrase.length < minLength || score < averageThreshold
+    const weakPassphrase =
+      passphrase.length < minLength || score < averageThreshold
     const averagePassphrase = score < strongThreshold
     const strongPassphrase = score >= strongThreshold
 
     if (noPassphrase) {
-      return {...resultByScore[0], score}
+      return { ...resultByScore[0], score }
     } else if (commonPassphrase) {
-      return {...resultByScore[1], score}
+      return { ...resultByScore[1], score }
     } else if (weakPassphrase) {
-      return {...resultByScore[2], score}
-    } else if (averagePassphrase){
-      return {...resultByScore[3], score}
+      return { ...resultByScore[2], score }
+    } else if (averagePassphrase) {
+      return { ...resultByScore[3], score }
     } else if (strongPassphrase) {
-      return {...resultByScore[4], score}
+      return { ...resultByScore[4], score }
     }
   }
 
-  const COMMON_PASSPHRASES = ['passphrase', 'apple', 'password', 'p@55w0rd']
+  const COMMON_PASSPHRASES = ["passphrase", "apple", "password", "p@55w0rd"]
 
-  const isCommon = (passphrase) => {
-    if (COMMON_PASSPHRASES.includes(passphrase))
-      return true
+  const isCommon = passphrase => {
+    if (COMMON_PASSPHRASES.includes(passphrase)) return true
     return false
   }
 
   useEffect(() => {
-    const result = handleStrengthCalculation({ passphrase: input, common: isCommon(input) });
+    const result = handleStrengthCalculation({
+      passphrase: input,
+      common: isCommon(input),
+    })
     setCheckStrength({ ...result })
   }, [input])
-
 
   return (
     <>
       <div>
-        <Body 
-            marginBottom='md'
-            text={`Try typing any of the following: ${COMMON_PASSPHRASES.join(', ')}`} />
-        <Passphrase
-            onChange={handleChange}
-            value={input}
-            {...props}
+        <Body
+          marginBottom="md"
+          text={`Try typing any of the following: ${COMMON_PASSPHRASES.join(
+            ", "
+          )}`}
         />
+        <Passphrase onChange={handleChange} value={input} {...props} />
         {input.length > 0 && (
           <>
             <ProgressSimple
-                className={input.length === 0 ? "progress-empty-input" : null}
-                percent={checkStrength.percent}
-                variant={checkStrength.variant}
+              className={input.length === 0 ? "progress-empty-input" : null}
+              percent={checkStrength.percent}
+              variant={checkStrength.variant}
             />
-            <Caption size='xs'
-                text={checkStrength.label} 
-            />
+            <Caption size="xs" text={checkStrength.label} />
           </>
         )}
       </div>

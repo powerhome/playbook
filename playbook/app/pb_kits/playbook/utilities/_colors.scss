@@ -18,7 +18,6 @@ $transition-speed: 0.2s;
   @return $text_color;
 }
 
-
 // Generate Color Helper Classes
 
 @mixin background-color($colors-list) {
@@ -28,7 +27,6 @@ $transition-speed: 0.2s;
     }
   }
 }
-
 
 @mixin text-color($colors-list) {
   @each $name, $color in $colors-list {

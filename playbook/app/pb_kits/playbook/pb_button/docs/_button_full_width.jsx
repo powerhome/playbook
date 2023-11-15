@@ -1,14 +1,9 @@
-import React from 'react'
-import { Button } from '../../'
+import React from "react"
+import { Button } from "../../"
 
-const ButtonFullWidth = (props) => (
+const ButtonFullWidth = props => (
   <div>
-    <Button
-        fullWidth
-        tabIndex={0}
-        text="Button Full Width"
-        {...props}
-    />
+    <Button fullWidth tabIndex={0} text="Button Full Width" {...props} />
   </div>
 )
 

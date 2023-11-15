@@ -1,25 +1,25 @@
-import React, { useEffect, useRef } from 'react'
-import Body from '../pb_body/_body'
-import Icon from '../pb_icon/_icon'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import classnames from 'classnames'
-import { globalProps, GlobalProps } from '../utilities/globalProps'
+import React, { useEffect, useRef } from "react"
+import Body from "../pb_body/_body"
+import Icon from "../pb_icon/_icon"
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import classnames from "classnames"
+import { globalProps, GlobalProps } from "../utilities/globalProps"
 
 type CheckboxProps = {
-  aria?: {[key: string]: string},
-  checked?: boolean,
-  children?: React.ReactChild[] | React.ReactChild,
-  className?: string,
-  dark?: boolean,
-  data?: {[key: string]: string},
-  error?: boolean,
-  id?: string,
-  indeterminate?: boolean,
-  name?: string,
-  onChange?: (event: React.FormEvent<HTMLInputElement>) => void,
-  tabIndex?: number,
-  text?: string,
-  value?: string,
+  aria?: { [key: string]: string }
+  checked?: boolean
+  children?: React.ReactChild[] | React.ReactChild
+  className?: string
+  dark?: boolean
+  data?: { [key: string]: string }
+  error?: boolean
+  id?: string
+  indeterminate?: boolean
+  name?: string
+  onChange?: (event: React.FormEvent<HTMLInputElement>) => void
+  tabIndex?: number
+  text?: string
+  value?: string
 } & GlobalProps
 
 const Checkbox = (props: CheckboxProps): JSX.Element => {
@@ -33,18 +33,25 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
     error = false,
     id,
     indeterminate = false,
-    name = '',
-    onChange = () => { void 0 },
+    name = "",
+    onChange = () => {
+      void 0
+    },
     tabIndex,
-    text = '',
-    value = '',
+    text = "",
+    value = "",
   } = props
 
   const checkRef = useRef(null)
   const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
-    buildCss('pb_checkbox_kit', checked ? 'checked' : null, error ? 'error' : null, indeterminate? 'indeterminate' : null),
+    buildCss(
+      "pb_checkbox_kit",
+      checked ? "checked" : null,
+      error ? "error" : null,
+      indeterminate ? "indeterminate" : null
+    ),
     globalProps(props),
     className
   )
@@ -57,55 +64,42 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
   }, [indeterminate, checked])
 
   const checkboxChildren = () => {
-    if (children)
-      return (children)
+    if (children) return children
     else
-    return (
-    <input
-        defaultChecked={checked}
-        name={name}
-        onChange={onChange}
-        ref={checkRef}
-        tabIndex={tabIndex}
-        type="checkbox"
-        value={value}
-      />)
+      return (
+        <input
+          defaultChecked={checked}
+          name={name}
+          onChange={onChange}
+          ref={checkRef}
+          tabIndex={tabIndex}
+          type="checkbox"
+          value={value}
+        />
+      )
   }
 
   return (
-    <label
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
+    <label {...ariaProps} {...dataProps} className={classes} id={id}>
       <>{checkboxChildren()}</>
 
-      {!indeterminate &&
+      {!indeterminate && (
         <span className="pb_checkbox_checkmark">
-          <Icon
-              className="check_icon"
-              fixedWidth
-              icon="check"
-          />
+          <Icon className="check_icon" fixedWidth icon="check" />
         </span>
-      }
+      )}
 
-      {indeterminate &&
+      {indeterminate && (
         <span className="pb_checkbox_indeterminate">
-          <Icon
-              className="indeterminate_icon"
-              fixedWidth
-              icon="minus"
-          />
+          <Icon className="indeterminate_icon" fixedWidth icon="minus" />
         </span>
-      }
+      )}
 
       <Body
-          className="pb_checkbox_label"
-          dark={dark}
-          status={error ? 'negative' : null}
-          variant={null}
+        className="pb_checkbox_label"
+        dark={dark}
+        status={error ? "negative" : null}
+        variant={null}
       >
         {text}
       </Body>

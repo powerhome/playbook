@@ -1,14 +1,14 @@
-import colors from '../tokens/exports/_colors.scss'
-import typography from '../tokens/exports/_typography.scss'
+import colors from "../tokens/exports/_colors.scss"
+import typography from "../tokens/exports/_typography.scss"
 
-import { ThemeProps } from './themeTypes'
+import { ThemeProps } from "./themeTypes"
 
-import Highcharts from 'highcharts'
+import Highcharts from "highcharts"
 
-const pbButtonHoverColor = '#004ebb'
+const pbButtonHoverColor = "#004ebb"
 const highchartsDarkTheme: ThemeProps = {
   lang: {
-    thousandsSep: ',',
+    thousandsSep: ",",
   },
   colors: [
     colors.data_1,
@@ -88,9 +88,9 @@ const highchartsDarkTheme: ThemeProps = {
     },
   },
   legend: {
-    layout: 'horizontal',
-    align: 'center',
-    verticalAlign: 'bottom',
+    layout: "horizontal",
+    align: "center",
+    verticalAlign: "bottom",
     itemStyle: {
       fontFamily: typography.font_family_base,
       color: colors.text_dk_light,
@@ -139,7 +139,7 @@ const highchartsDarkTheme: ThemeProps = {
     series: {
       borderColor: colors.bg_dark_card,
       borderWidth: 2,
-      type: 'area',
+      type: "area",
       nullColor: colors.text_dk_lighter,
       fillColor: {
         linearGradient: {
@@ -150,7 +150,7 @@ const highchartsDarkTheme: ThemeProps = {
         },
         stops: [
           [0, Highcharts.getOptions().colors[0]],
-          [1, 'white'],
+          [1, "white"],
         ],
       },
       threshold: null,
@@ -229,7 +229,7 @@ const highchartsDarkTheme: ThemeProps = {
       ],
       traverseUpButton: {
         position: { y: -50 },
-        text: '< Back',
+        text: "< Back",
         theme: {
           r: 4,
           states: {
@@ -254,7 +254,7 @@ const highchartsDarkTheme: ThemeProps = {
     },
   },
   credits: {
-    enabled: false
+    enabled: false,
   },
 }
 

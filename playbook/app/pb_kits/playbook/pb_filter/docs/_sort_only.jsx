@@ -1,18 +1,18 @@
-import React from 'react'
+import React from "react"
 
-import Filter from '../_filter'
+import Filter from "../_filter"
 
-const SortOnly = (props) => (
+const SortOnly = props => (
   <Filter
-      sortOptions={{
-        popularity: 'Popularity',
-        // eslint-disable-next-line
-        manager_title: 'Manager\'s Title',
-        // eslint-disable-next-line
-        manager_name: 'Manager\'s Name',
-      }}
-      sortValue={[{ name: 'popularity', dir: 'desc' }]}
-      {...props}
+    sortOptions={{
+      popularity: "Popularity",
+      // eslint-disable-next-line
+      manager_title: "Manager's Title",
+      // eslint-disable-next-line
+      manager_name: "Manager's Name",
+    }}
+    sortValue={[{ name: "popularity", dir: "desc" }]}
+    {...props}
   />
 )
 

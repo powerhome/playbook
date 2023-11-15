@@ -1,49 +1,46 @@
 // @flow
 
-import React from 'react'
-import { Tooltip, Button, Flex } from '../..'
+import React from "react"
+import { Tooltip, Button, Flex } from "../.."
 
-const TooltipIcon = (props) => {
+const TooltipIcon = props => {
   return (
-    <Flex flexDirection='row'
-        gap='md'
-        wrap
-    >
+    <Flex flexDirection="row" gap="md" wrap>
       <Tooltip
-          icon='paper-plane'
-          placement='top'
-          text='Send Email'
-          zIndex={10}
-          {...props}
+        icon="paper-plane"
+        placement="top"
+        text="Send Email"
+        zIndex={10}
+        {...props}
       >
-        <Button text='Tooltip With Icon' />
+        <Button text="Tooltip With Icon" />
       </Tooltip>
       <Tooltip
-          icon='paper-plane'
-          placement='bottom'
-          text='Send Email'
-          zIndex={10}
-          {...props}
+        icon="paper-plane"
+        placement="bottom"
+        text="Send Email"
+        zIndex={10}
+        {...props}
       >
-        <Button text='Tooltip With Icon' />
+        <Button text="Tooltip With Icon" />
       </Tooltip>
       <Tooltip
-          icon='paper-plane'
-          placement='right'
-          text='Send Email'
-          zIndex={10}
-          {...props}
+        icon="paper-plane"
+        placement="right"
+        text="Send Email"
+        zIndex={10}
+        {...props}
       >
-        <Button text='Tooltip With Icon' />
+        <Button text="Tooltip With Icon" />
       </Tooltip>
       <Tooltip
-          icon='paper-plane'
-          placement='left'
-          text='Send Email'
-          zIndex={10}
-          {...props}
+        icon="paper-plane"
+        placement="left"
+        text="Send Email"
+        zIndex={10}
+        {...props}
       >
-        <Button text='Tooltip With Icon' />
+        <Button text="Tooltip With Icon" />
       </Tooltip>
     </Flex>
   )

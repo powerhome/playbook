@@ -1,28 +1,29 @@
-import React from 'react'
-import classnames from 'classnames'
+import React from "react"
+import classnames from "classnames"
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
 
-import Body from '../pb_body/_body'
-import Caption from '../pb_caption/_caption'
-import Flex from '../pb_flex/_flex'
-import IconCircle from '../pb_icon_circle/_icon_circle'
-import Title from '../pb_title/_title'
+import Body from "../pb_body/_body"
+import Caption from "../pb_caption/_caption"
+import Flex from "../pb_flex/_flex"
+import IconCircle from "../pb_icon_circle/_icon_circle"
+import Title from "../pb_title/_title"
 
 type IconStatValueProps = {
-  aria?: { [key: string]: string },
-  className?: string,
-  data?: object,
-  dark?: boolean,
-  icon: string,
-  id?: string,
-  orientation?: "vertical" | "horizontal",
-  size?: "sm" | "md" | "lg",
-  text?: string,
-  unit?: string,
-  value: number,
-  variant?: "default"
+  aria?: { [key: string]: string }
+  className?: string
+  data?: object
+  dark?: boolean
+  icon: string
+  id?: string
+  orientation?: "vertical" | "horizontal"
+  size?: "sm" | "md" | "lg"
+  text?: string
+  unit?: string
+  value: number
+  variant?:
+    | "default"
     | "royal"
     | "blue"
     | "purple"
@@ -30,7 +31,7 @@ type IconStatValueProps = {
     | "red"
     | "yellow"
     | "orange"
-    | "green",
+    | "green"
 }
 
 const IconStatValue = (props: IconStatValueProps) => {
@@ -41,81 +42,42 @@ const IconStatValue = (props: IconStatValueProps) => {
     dark = false,
     icon,
     id,
-    orientation = 'horizontal',
-    size = 'sm',
-    text = '',
-    unit = '',
+    orientation = "horizontal",
+    size = "sm",
+    text = "",
+    unit = "",
     value = 0,
-    variant = 'default',
+    variant = "default",
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_icon_stat_value_kit', orientation, size, variant), globalProps(props),
+    buildCss("pb_icon_stat_value_kit", orientation, size, variant),
+    globalProps(props),
     className
   )
-  const titleSize = function(size: "sm" | "md" | "lg") {
-    if (size == 'lg') {
-      return (
-        <Title
-            dark={dark}
-            size={1}
-            tag="span"
-            text={`${value}`}
-        />
-      )
-    } else if (size == 'md') {
-      return (
-        <Title
-            dark={dark}
-            size={2}
-            tag="span"
-            text={`${value}`}
-        />
-      )
+  const titleSize = function (size: "sm" | "md" | "lg") {
+    if (size == "lg") {
+      return <Title dark={dark} size={1} tag="span" text={`${value}`} />
+    } else if (size == "md") {
+      return <Title dark={dark} size={2} tag="span" text={`${value}`} />
     } else {
-      return (
-        <Title
-            dark={dark}
-            size={3}
-            tag="span"
-            text={`${value}`}
-        />
-      )
+      return <Title dark={dark} size={3} tag="span" text={`${value}`} />
     }
   }
 
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      <IconCircle
-          dark={dark}
-          icon={icon}
-          size={size}
-          variant={variant}
-      />
+    <div {...ariaProps} {...dataProps} className={classes} id={id}>
+      <IconCircle dark={dark} icon={icon} size={size} variant={variant} />
 
       <div>
-        <Flex
-            align="baseline"
-        >
-            {titleSize(size)}
+        <Flex align="baseline">
+          {titleSize(size)}
           &nbsp;
-            <Body
-                dark={dark}
-                text={unit}
-            />
+          <Body dark={dark} text={unit} />
         </Flex>
-        <Caption
-            dark={dark}
-            text={text}
-        />
+        <Caption dark={dark} text={text} />
       </div>
-
     </div>
   )
 }

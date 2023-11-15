@@ -6,13 +6,13 @@ $pb_title_colors: (
   lighter: $text_lt_lighter,
   success: $success,
   error: $error,
-  link: $primary
+  link: $primary,
 );
 
 @mixin title_colors {
   @each $name, $color in $pb_title_colors {
-    &[class*=_#{$name}] {
-      color: $color
+    &[class*="_#{$name}"] {
+      color: $color;
     }
   }
 }
@@ -22,12 +22,12 @@ $pb_title_truncate: (
   truncate-2: 2,
   truncate-3: 3,
   truncate-4: 4,
-  truncate-5: 5
+  truncate-5: 5,
 );
 
 @mixin title_truncate {
   @each $name, $number in $pb_title_truncate {
-    &[class*=_#{$name}] {
+    &[class*="_#{$name}"] {
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: $number;

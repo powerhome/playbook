@@ -1,11 +1,11 @@
-import React from 'react'
-import { components } from 'react-select'
+import React from "react"
+import { components } from "react-select"
 
-import Flex from '../../pb_flex/_flex'
-import TextInput from '../../pb_text_input/_text_input'
+import Flex from "../../pb_flex/_flex"
+import TextInput from "../../pb_text_input/_text_input"
 
 type Props = {
-  selectProps: any,
+  selectProps: any
 }
 
 const TypeaheadControl = (props: Props) => (
@@ -16,10 +16,7 @@ const TypeaheadControl = (props: Props) => (
       label={props.selectProps.label}
     >
       <Flex>
-        <components.Control
-          className="text_input"
-          {...props}
-        />
+        <components.Control className="text_input" {...props} />
       </Flex>
     </TextInput>
   </div>

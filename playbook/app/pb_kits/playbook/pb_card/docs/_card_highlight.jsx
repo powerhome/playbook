@@ -1,31 +1,28 @@
-import React from 'react'
+import React from "react"
 
-import Card from '../_card'
+import Card from "../_card"
 
-const CardHighlight = (props) => {
+const CardHighlight = props => {
   return (
     <div>
       <Card
-          {...props}
-          highlight={{ position: 'side', color: 'product_6_highlight' }}
-          marginBottom="sm"
+        {...props}
+        highlight={{ position: "side", color: "product_6_highlight" }}
+        marginBottom="sm"
       >
-        {'Side Position & Product 6 Highlight Color'}
+        {"Side Position & Product 6 Highlight Color"}
       </Card>
 
       <Card
-          {...props}
-          highlight={{ position: 'top', color: 'warning' }}
-          marginBottom="sm"
+        {...props}
+        highlight={{ position: "top", color: "warning" }}
+        marginBottom="sm"
       >
-        {'Top Position & Warning Color'}
+        {"Top Position & Warning Color"}
       </Card>
 
-      <Card
-          {...props}
-          highlight={{ position: 'side', color: 'category_2' }}
-      >
-        {'Side Position & Category 2 Color'}
+      <Card {...props} highlight={{ position: "side", color: "category_2" }}>
+        {"Side Position & Category 2 Color"}
       </Card>
     </div>
   )

@@ -1,5 +1,5 @@
-import React from "react";
-import MultiLevelSelect from "../_multi_level_select";
+import React from "react"
+import MultiLevelSelect from "../_multi_level_select"
 
 const treeData = [
   {
@@ -66,22 +66,25 @@ const treeData = [
       },
     ],
   },
-];
+]
 
-const MultiLevelSelectReturnAllSelected = (props) => {
+const MultiLevelSelectReturnAllSelected = props => {
   return (
     <div>
       <MultiLevelSelect
-          id="multi-level-select-return-all-selected"
-          onSelect={(selectedNodes) =>
-          console.log("Selected Items with Return All Selected Data", selectedNodes)
-          }
-          returnAllSelected
-          treeData={treeData}
-          {...props}
+        id="multi-level-select-return-all-selected"
+        onSelect={selectedNodes =>
+          console.log(
+            "Selected Items with Return All Selected Data",
+            selectedNodes
+          )
+        }
+        returnAllSelected
+        treeData={treeData}
+        {...props}
       />
     </div>
-  );
-};
+  )
+}
 
-export default MultiLevelSelectReturnAllSelected;
+export default MultiLevelSelectReturnAllSelected

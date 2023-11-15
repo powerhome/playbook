@@ -1,20 +1,20 @@
-[class^=pb_date_time] {
-  [class*=pb_date_kit] > div:last-child {
+[class^="pb_date_time"] {
+  [class*="pb_date_kit"] > div:last-child {
     margin-right: 0 !important;
   }
-  &[class*=_center] {
+  &[class*="_center"] {
     display: flex;
     justify-content: center;
     text-align: center;
   }
-  &[class*=_right]  {
+  &[class*="_right"] {
     display: flex;
     justify-content: flex-end;
     text-align: right;
   }
-  &[class*=dark] {
-    [class^=pb_title_kit] {
-        color: $text_dk_default !important;
+  &[class*="dark"] {
+    [class^="pb_title_kit"] {
+      color: $text_dk_default !important;
     }
     & * {
       @include caption_dark;

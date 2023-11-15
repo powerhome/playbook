@@ -1,56 +1,65 @@
-import PbEnhancedElement from '../pb_enhanced_element'
+import PbEnhancedElement from "../pb_enhanced_element"
 
 import {
   createPopperLite as createPopper,
   flip,
   offset,
   preventOverflow,
-} from '@popperjs/core'
+} from "@popperjs/core"
 
 const TOOLTIP_OFFSET = [0, 20]
 const TOOLTIP_TIMEOUT = 250
 
 export default class PbTooltip extends PbEnhancedElement {
   static get selector() {
-    return '[data-pb-tooltip-kit]'
+    return "[data-pb-tooltip-kit]"
   }
 
   connect() {
-    this.triggerElements.forEach((trigger) => {
-      trigger.addEventListener('mouseenter', () => {
+    this.triggerElements.forEach(trigger => {
+      trigger.addEventListener("mouseenter", () => {
         this.mouseenterTimeout = setTimeout(() => {
           this.showTooltip(trigger)
           this.checkCloseTooltip(trigger)
         }, TOOLTIP_TIMEOUT)
 
-        trigger.addEventListener('mouseleave', () => {
-          clearTimeout(this.mouseenterTimeout)
+        trigger.addEventListener(
+          "mouseleave",
+          () => {
+            clearTimeout(this.mouseenterTimeout)
 
-          setTimeout(() => {
-            this.hideTooltip()
-          }, 0)
-        }, { once: true })
+            setTimeout(() => {
+              this.hideTooltip()
+            }, 0)
+          },
+          { once: true }
+        )
       })
     })
 
-    this.tooltip.addEventListener('mouseenter', () => {
+    this.tooltip.addEventListener("mouseenter", () => {
       clearTimeout(this.mouseenterTimeout)
     })
-    this.tooltip.addEventListener('mouseleave', () => {
+    this.tooltip.addEventListener("mouseleave", () => {
       this.hideTooltip()
     })
   }
 
   checkCloseTooltip(trigger) {
-    document.querySelector('body').addEventListener('click', ({ target }) => {
-      const isTooltip = target.closest(`#${this.tooltipId}`) === this.tooltip
-      const isTrigger = target.closest(this.triggerElementSelector) === trigger
-      if (isTrigger || isTooltip) {
-        this.checkCloseTooltip(trigger)
-      } else {
-        this.hideTooltip()
-      }
-    }, { once: true })
+    document.querySelector("body").addEventListener(
+      "click",
+      ({ target }) => {
+        const isTooltip = target.closest(`#${this.tooltipId}`) === this.tooltip
+        const isTrigger =
+          target.closest(this.triggerElementSelector) === trigger
+        if (isTrigger || isTooltip) {
+          this.checkCloseTooltip(trigger)
+        } else {
+          this.hideTooltip()
+        }
+      },
+      { once: true }
+    )
   }
 
   showTooltip(trigger) {
@@ -58,13 +67,13 @@ export default class PbTooltip extends PbEnhancedElement {
       placement: this.position,
       modifiers: [
         {
-          name: 'offset',
+          name: "offset",
           options: {
             offset: TOOLTIP_OFFSET,
           },
         },
         {
-          name: 'arrow',
+          name: "arrow",
           options: {
             element: document.querySelector(`#${this.tooltipId}-arrow`),
           },
@@ -74,16 +83,16 @@ export default class PbTooltip extends PbEnhancedElement {
         flip,
       ],
     })
-    this.tooltip.classList.add('show')
+    this.tooltip.classList.add("show")
   }
 
   hideTooltip() {
-    this.tooltip.classList.add('fade_out')
+    this.tooltip.classList.add("fade_out")
     setTimeout(() => {
       if (!this.popper) return
       this.popper.destroy()
-      this.tooltip.classList.remove('show')
-      this.tooltip.classList.remove('fade_out')
+      this.tooltip.classList.remove("show")
+      this.tooltip.classList.remove("fade_out")
     }, TOOLTIP_TIMEOUT)
   }
 
@@ -93,23 +102,27 @@ export default class PbTooltip extends PbEnhancedElement {
     if (this.triggerElementId) {
       triggerEl = document.querySelector(`#${this.triggerElementId}`) //deprecated
     } else {
-      const selectorIsId = this.triggerElementSelector.indexOf('#') > -1
-      triggerEl = selectorIsId ? document.querySelector(`${this.triggerElementSelector}`) :
-        document.querySelectorAll(`${this.triggerElementSelector}`)
+      const selectorIsId = this.triggerElementSelector.indexOf("#") > -1
+      triggerEl = selectorIsId
+        ? document.querySelector(`${this.triggerElementSelector}`)
+        : document.querySelectorAll(`${this.triggerElementSelector}`)
     }
 
     if (!triggerEl) {
       /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-      console.error('Tooltip Kit: an invalid or unavailable DOM reference was provided!')
+      console.error(
+        "Tooltip Kit: an invalid or unavailable DOM reference was provided!"
+      )
       return []
     }
 
     if (!triggerEl.length) triggerEl = [triggerEl]
-    return this._triggerElements = (this._triggerElements || triggerEl)
+    return (this._triggerElements = this._triggerElements || triggerEl)
   }
 
   get tooltip() {
-    return this._tooltip = (this._tooltip || this.element.querySelector(`#${this.tooltipId}`))
+    return (this._tooltip =
+      this._tooltip || this.element.querySelector(`#${this.tooltipId}`))
   }
 
   get position() {

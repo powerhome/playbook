@@ -204,7 +204,8 @@
     }
     .map-zoom-in-button,
     .map-zoom-out-button,
-    .map-flyto-button, .pb_map-custom-button {
+    .map-flyto-button,
+    .pb_map-custom-button {
       @include pb_map_button_dark;
     }
 

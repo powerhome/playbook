@@ -1,26 +1,26 @@
-import React from 'react'
+import React from "react"
 
-import CurrentFilters, { FilterDescription } from './CurrentFilters'
-import FilterBackground, { FilterBackgroundProps } from './FilterBackground'
-import FiltersPopover from './FiltersPopover'
-import ResultsCount from './ResultsCount'
+import CurrentFilters, { FilterDescription } from "./CurrentFilters"
+import FilterBackground, { FilterBackgroundProps } from "./FilterBackground"
+import FiltersPopover from "./FiltersPopover"
+import ResultsCount from "./ResultsCount"
 import SortMenu, {
   SortingChangeCallback,
   SortOptions,
   SortValue,
-} from './SortMenu'
+} from "./SortMenu"
 
-import Caption from '../../pb_caption/_caption'
-import Flex from '../../pb_flex/_flex'
-import SectionSeparator from '../../pb_section_separator/_section_separator'
+import Caption from "../../pb_caption/_caption"
+import Flex from "../../pb_flex/_flex"
+import SectionSeparator from "../../pb_section_separator/_section_separator"
 
 export type FilterDoubleProps = {
-  children?: React.ReactChild[] | React.ReactChild, 
-  filters?: FilterDescription,
-  onSortChange?: SortingChangeCallback,
-  results?: number,
-  sortOptions?: SortOptions,
-  sortValue?: SortValue[],
+  children?: React.ReactChild[] | React.ReactChild
+  filters?: FilterDescription
+  onSortChange?: SortingChangeCallback
+  results?: number
+  sortOptions?: SortOptions
+  sortValue?: SortValue[]
 } & FilterBackgroundProps
 
 const FilterDouble = ({
@@ -35,51 +35,28 @@ const FilterDouble = ({
   placement,
   ...bgProps
 }: FilterDoubleProps): React.ReactElement => (
-  <FilterBackground
-      dark={dark}
-      {...bgProps}
-  >
-    <Flex
-        orientation="row"
-        vertical="center"
-    >
-      <FiltersPopover
-          dark={dark}
-          minWidth={minWidth}
-          placement={placement}
-      >
-          {children}
+  <FilterBackground dark={dark} {...bgProps}>
+    <Flex orientation="row" vertical="center">
+      <FiltersPopover dark={dark} minWidth={minWidth} placement={placement}>
+        {children}
       </FiltersPopover>
-      <CurrentFilters
-          dark={dark}
-          filters={filters}
-      />
+      <CurrentFilters dark={dark} filters={filters} />
     </Flex>
     <SectionSeparator dark={dark} />
     <Flex
-        className="filter-bottom"
-        orientation="row"
-        spacing="between"
-        vertical="center"
+      className="filter-bottom"
+      orientation="row"
+      spacing="between"
+      vertical="center"
     >
-      <ResultsCount
-          dark={dark}
-          results={results}
-          title
-      />
-      <Flex
-          orientation="row"
-          vertical="center"
-      >
-        <Caption
-            dark={dark}
-            text="sort by:"
-        />
+      <ResultsCount dark={dark} results={results} title />
+      <Flex orientation="row" vertical="center">
+        <Caption dark={dark} text="sort by:" />
         <SortMenu
-            dark={dark}
-            onChange={onSortChange}
-            options={sortOptions}
-            value={sortValue}
+          dark={dark}
+          onChange={onSortChange}
+          options={sortOptions}
+          value={sortValue}
         />
       </Flex>
     </Flex>

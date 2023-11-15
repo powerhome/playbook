@@ -1,36 +1,24 @@
-import React from 'react'
+import React from "react"
 
-import Card from '../_card'
+import Card from "../_card"
 
-const CardShadow = (props) => {
+const CardShadow = props => {
   return (
     <div>
-      <Card
-          {...props}
-          shadow="none"
-      >
-        {'Card content'}
+      <Card {...props} shadow="none">
+        {"Card content"}
       </Card>
       <br />
-      <Card
-          {...props}
-          shadow="deep"
-      >
-        {'Card content'}
+      <Card {...props} shadow="deep">
+        {"Card content"}
       </Card>
       <br />
-      <Card
-          {...props}
-          shadow="deeper"
-      >
-        {'Card content'}
+      <Card {...props} shadow="deeper">
+        {"Card content"}
       </Card>
       <br />
-      <Card
-          {...props}
-          shadow="deepest"
-      >
-        {'Card content'}
+      <Card {...props} shadow="deepest">
+        {"Card content"}
       </Card>
       <br />
     </div>

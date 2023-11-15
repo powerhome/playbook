@@ -4,7 +4,7 @@ import Table from "./_table"
 
 const props = {
   data: { testid: "table" },
-  sticky: false
+  sticky: false,
 }
 
 it("should be accessible", async () => {
@@ -13,5 +13,7 @@ it("should be accessible", async () => {
 
 test("when sticky is true", () => {
   const kit = renderKit(Table, props, { sticky: true })
-  expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card sticky-header table-collapse-sm")
+  expect(kit).toHaveClass(
+    "pb_table table-sm table-responsive-collapse table-card sticky-header table-collapse-sm"
+  )
 })

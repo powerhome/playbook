@@ -1,45 +1,45 @@
-import React from 'react'
+import React from "react"
 
-import CircleChart from '../_circle_chart'
+import CircleChart from "../_circle_chart"
 
 const dataWithLabels = [
   {
-    name: 'Facebook',
+    name: "Facebook",
     value: 2498,
   },
   {
-    name: 'YouTube',
+    name: "YouTube",
     value: 2000,
   },
   {
-    name: 'WhatsApp',
+    name: "WhatsApp",
     value: 2000,
   },
   {
-    name: 'Facebook Messenger',
+    name: "Facebook Messenger",
     value: 1300,
   },
   {
-    name: 'WeChat',
+    name: "WeChat",
     value: 1165,
   },
   {
-    name: 'Instagram',
+    name: "Instagram",
     value: 1000,
   },
   {
-    name: 'Tik Tok',
+    name: "Tik Tok",
     value: 800,
   },
 ]
 
-const CircleChartWithLabels = (props) => (
+const CircleChartWithLabels = props => (
   <div>
     <CircleChart
-        chartData={dataWithLabels}
-        dataLabels
-        id="with-labels-example"
-        {...props}
+      chartData={dataWithLabels}
+      dataLabels
+      id="with-labels-example"
+      {...props}
     />
   </div>
 )

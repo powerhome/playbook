@@ -2,7 +2,7 @@
  * Defines a set of helper functions used to construct a component following
  * Playbook's patterns.
  */
-import classnames from 'classnames'
+import classnames from "classnames"
 
 /**
  *
@@ -10,8 +10,8 @@ import classnames from 'classnames'
  * @param {Object} data the object containing the data to derive the props from.
  * @returns {Object} an object whose keys have the prefix added to them.
  */
-const buildPrefixedProps = (prefix: string, data: {[key: string]: any}) => 
-  Object.keys(data).reduce((props: {[key: string]: any}, key: string) => {
+const buildPrefixedProps = (prefix: string, data: { [key: string]: any }) =>
+  Object.keys(data).reduce((props: { [key: string]: any }, key: string) => {
     props[`${prefix}-${key}`] = data[key]
     return props
   }, {})
@@ -22,7 +22,9 @@ const buildPrefixedProps = (prefix: string, data: {[key: string]: any}) =>
  *
  * @returns {() => {}} the noop function.
  */
-export const noop = (): void => { void 0 }
+export const noop = (): void => {
+  void 0
+}
 
 /**
  * Maps a given aria object into HTML valid aria attribtues and their values.
@@ -30,8 +32,9 @@ export const noop = (): void => { void 0 }
  * @param {Object} aria the object containing the aria prop values.
  * @returns {Object} an object holding the HTML valid aria props and their values.
  */
-export const buildAriaProps = (aria: {[key: string]: string}): {[key: string]: string} => 
-  buildPrefixedProps('aria', aria)
+export const buildAriaProps = (aria: {
+  [key: string]: string
+}): { [key: string]: string } => buildPrefixedProps("aria", aria)
 
 /**
  * Maps a given data object into HTML valid data attribtues and their values.
@@ -39,7 +42,8 @@ export const buildAriaProps = (aria: {[key: string]: string}): {[key: string]: s
  * @param {Object} data the object containing the data prop values.
  * @returns {Object} an object holding the HTML valid data props and their values.
  */
-export const buildDataProps = (data: {[key: string]: any}) => buildPrefixedProps('data', data)
+export const buildDataProps = (data: { [key: string]: any }) =>
+  buildPrefixedProps("data", data)
 
 /**
  * Builds a Playbook valid root className off of the incoming css rules.
@@ -47,5 +51,6 @@ export const buildDataProps = (data: {[key: string]: any}) => buildPrefixedProps
  * @param {Object} rules a 'classnames' compliant rules object, used to derive the root className.
  * @returns {String} the derived root className value.
  */
-export const buildCss = (...rules: (string | { [x: string]: string | boolean; })[]): string => classnames(rules).replace(/\s/g, '_')
-
+export const buildCss = (
+  ...rules: (string | { [x: string]: string | boolean })[]
+): string => classnames(rules).replace(/\s/g, "_")

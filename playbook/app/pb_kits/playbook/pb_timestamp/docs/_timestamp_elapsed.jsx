@@ -1,5 +1,5 @@
-import React from 'react'
-import Timestamp from '../_timestamp'
+import React from "react"
+import Timestamp from "../_timestamp"
 
 const todaysDate = new Date()
 const year = new Date().getFullYear()
@@ -9,34 +9,34 @@ const hours = new Date().getHours() - 10
 const minutes = new Date().getMinutes()
 const customDate = new Date(year, month, date, hours, minutes)
 
-const TimestampElapsed = (props) => {
+const TimestampElapsed = props => {
   return (
     <div>
       <Timestamp
-          showUser
-          text="Maricris Nonato"
-          timestamp={todaysDate}
-          variant="elapsed"
-          {...props}
+        showUser
+        text="Maricris Nonato"
+        timestamp={todaysDate}
+        variant="elapsed"
+        {...props}
       />
 
       <br />
 
       <Timestamp
-          showUser={false}
-          timestamp={customDate}
-          variant="elapsed"
-          {...props}
+        showUser={false}
+        timestamp={customDate}
+        variant="elapsed"
+        {...props}
       />
 
       <br />
 
       <Timestamp
-          hideUpdated
-          showUser={false}
-          timestamp={customDate}
-          variant="elapsed"
-          {...props}
+        hideUpdated
+        showUser={false}
+        timestamp={customDate}
+        variant="elapsed"
+        {...props}
       />
     </div>
   )

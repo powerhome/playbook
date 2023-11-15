@@ -1,86 +1,81 @@
 @import "../tokens/transition";
 
-[class^=pb_selectable_icon] {
+[class^="pb_selectable_icon"] {
+  text-align: center;
+  cursor: pointer;
+  transition: all $transition_short ease;
 
-	text-align: center;
-	cursor: pointer;
-	transition: all $transition_short ease;
+  @media (hover: hover) {
+    &:hover * {
+      transition: transform $transition_short ease;
+      transform: translateY(-2px);
+    }
+  }
 
-	@media (hover:hover) {
-		&:hover * {
-			transition: transform $transition_short ease;
-			transform: translateY(-2px);
-		}
-	}
+  * {
+    cursor: pointer;
+  }
 
-	* {
-		cursor: pointer;
-	}
+  h4 {
+    margin-top: $space_xs !important;
+    user-select: none;
+    transition: color $transition_short ease;
+  }
 
-	h4 {
-		margin-top: $space_xs !important;
-		user-select: none;
-		transition: color $transition_short ease;
-	}
+  label {
+    transition: color $transition_short ease;
+  }
 
-	label {
-		transition: color $transition_short ease;
-	}
+  &[class*="_disabled"] {
+    opacity: $opacity_6;
+    cursor: not-allowed;
+    * {
+      cursor: not-allowed;
+    }
+  }
 
-	&[class*=_disabled] {
-		opacity: $opacity_6;
-		cursor: not-allowed;
-		* {
-			cursor: not-allowed;
-		}
-	}
-	
-	input[type="checkbox"],
-	input[type="radio"] {
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		display: none;
-		appearance: none;
-		transition: color $transition_short ease;
+  input[type="checkbox"],
+  input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: none;
+    appearance: none;
+    transition: color $transition_short ease;
 
-		&:checked ~ label * {
-			transition: color $transition_short ease;
-			color: $primary;
-		}
-		
-		&:not(:checked) ~ label {
-			transition: color $transition_short ease;
-			color: $slate;
+    &:checked ~ label * {
+      transition: color $transition_short ease;
+      color: $primary;
+    }
 
-		}
-	}
+    &:not(:checked) ~ label {
+      transition: color $transition_short ease;
+      color: $slate;
+    }
+  }
 
+  &.dark {
+    input[type="checkbox"],
+    input[type="radio"] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      display: none;
+      appearance: none;
+      transition: color $transition_short ease;
 
-	&.dark {
-		input[type="checkbox"],
-		input[type="radio"] {
-			-webkit-appearance: none;
-			-moz-appearance: none;
-			display: none;
-			appearance: none;
-			transition: color $transition_short ease;
-			
-			&:checked ~ label * {
-				transition: color $transition_short ease;
-				color: $active_dark !important;
-			}
-				
-			&:not(:checked) ~ label {
-				transition: color $transition_short ease;
-				color: $text_dk_lighter;
+      &:checked ~ label * {
+        transition: color $transition_short ease;
+        color: $active_dark !important;
+      }
 
-				h4 {
-					transition: color $transition_short ease;
-					color: $text_dk_default;
-				}
-			}
-		}
- 	}
+      &:not(:checked) ~ label {
+        transition: color $transition_short ease;
+        color: $text_dk_lighter;
+
+        h4 {
+          transition: color $transition_short ease;
+          color: $text_dk_default;
+        }
+      }
+    }
+  }
 }
-
-

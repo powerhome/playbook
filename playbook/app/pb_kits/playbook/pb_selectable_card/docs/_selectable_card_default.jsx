@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import SelectableCard from '../_selectable_card.tsx'
+import React, { useState } from "react"
+import SelectableCard from "../_selectable_card.tsx"
 
-const SelectableCardDefault = (props) => {
+const SelectableCardDefault = props => {
   const [selectedWithIcon, setSelectedWithIcon] = useState(true)
   const [selectedNoIcon, setSelectedNoIcon] = useState(true)
   const [unselected, setUnselected] = useState(false)
@@ -9,53 +9,51 @@ const SelectableCardDefault = (props) => {
 
   return (
     <div className="pb--doc-demo-row">
-
       <SelectableCard
-          checked={selectedWithIcon}
-          icon
-          inputId="selectedWithIcon"
-          name="selectedWithIcon"
-          onChange={() => setSelectedWithIcon(!selectedWithIcon)}
-          value="selectedWithIcon"
-          {...props}
+        checked={selectedWithIcon}
+        icon
+        inputId="selectedWithIcon"
+        name="selectedWithIcon"
+        onChange={() => setSelectedWithIcon(!selectedWithIcon)}
+        value="selectedWithIcon"
+        {...props}
       >
-        {'Selected, with icon'}
+        {"Selected, with icon"}
       </SelectableCard>
 
       <SelectableCard
-          checked={selectedNoIcon}
-          inputId="selectedWithoutIcon"
-          name="selectedWithoutIcon"
-          onChange={() => setSelectedNoIcon(!selectedNoIcon)}
-          value="selectedWithoutIcon"
-          {...props}
+        checked={selectedNoIcon}
+        inputId="selectedWithoutIcon"
+        name="selectedWithoutIcon"
+        onChange={() => setSelectedNoIcon(!selectedNoIcon)}
+        value="selectedWithoutIcon"
+        {...props}
       >
-        {'Selected, without icon'}
+        {"Selected, without icon"}
       </SelectableCard>
 
       <SelectableCard
-          checked={unselected}
-          inputId="unselected"
-          name="unselected"
-          onChange={() => setUnselected(!unselected)}
-          value="unselected"
-          {...props}
+        checked={unselected}
+        inputId="unselected"
+        name="unselected"
+        onChange={() => setUnselected(!unselected)}
+        value="unselected"
+        {...props}
       >
-        {'Unselected'}
+        {"Unselected"}
       </SelectableCard>
 
       <SelectableCard
-          checked={disabled}
-          disabled
-          inputId="disabled"
-          name="disabled"
-          onChange={() => setDisabled(!disabled)}
-          value="disabled"
-          {...props}
+        checked={disabled}
+        disabled
+        inputId="disabled"
+        name="disabled"
+        onChange={() => setDisabled(!disabled)}
+        value="disabled"
+        {...props}
       >
-        {'Disabled'}
+        {"Disabled"}
       </SelectableCard>
-
     </div>
   )
 }

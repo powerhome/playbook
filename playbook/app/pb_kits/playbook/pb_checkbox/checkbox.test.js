@@ -1,18 +1,18 @@
-import React from 'react'
-import { render, screen } from '../utilities/test-utils'
+import React from "react"
+import { render, screen } from "../utilities/test-utils"
 
-import Checkbox from './_checkbox'
+import Checkbox from "./_checkbox"
 
-const testId = 'checkbox1',
-  kitClass = 'pb_checkbox_kit'
+const testId = "checkbox1",
+  kitClass = "pb_checkbox_kit"
 
-test('returns namespaced class name', () => {
+test("returns namespaced class name", () => {
   render(
     <Checkbox
-        data={{ testid: testId }}
-        name="checkbox-name"
-        text="Checkbox"
-        value="check-box value"
+      data={{ testid: testId }}
+      name="checkbox-name"
+      text="Checkbox"
+      value="check-box value"
     />
   )
 
@@ -20,14 +20,14 @@ test('returns namespaced class name', () => {
   expect(kit).toHaveClass(kitClass)
 })
 
-test('returns dark class name', () => {
+test("returns dark class name", () => {
   render(
     <Checkbox
-        dark
-        data={{ testid: testId }}
-        name="checkbox-name"
-        text="Checkbox"
-        value="check-box value"
+      dark
+      data={{ testid: testId }}
+      name="checkbox-name"
+      text="Checkbox"
+      value="check-box value"
     />
   )
 
@@ -35,14 +35,14 @@ test('returns dark class name', () => {
   expect(kit).toHaveClass(`${kitClass} dark`)
 })
 
-test('returns indeterminate class name', () => {
+test("returns indeterminate class name", () => {
   render(
     <Checkbox
-        data={{ testid: testId }}
-        indeterminate
-        name="checkbox-name"
-        text="Checkbox"
-        value="check-box value"
+      data={{ testid: testId }}
+      indeterminate
+      name="checkbox-name"
+      text="Checkbox"
+      value="check-box value"
     />
   )
 
@@ -50,45 +50,51 @@ test('returns indeterminate class name', () => {
   expect(kit).toHaveClass(`${kitClass}_indeterminate`)
 })
 
-test('has name attribute', () => {
+test("has name attribute", () => {
   render(
     <Checkbox
-        data={{ testid: testId }}
-        name="checkbox-name"
-        text="Checkbox"
-        value="check-box value"
+      data={{ testid: testId }}
+      name="checkbox-name"
+      text="Checkbox"
+      value="check-box value"
     />
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit.getElementsByTagName('input')[0]).toHaveAttribute('name', 'checkbox-name')
+  expect(kit.getElementsByTagName("input")[0]).toHaveAttribute(
+    "name",
+    "checkbox-name"
+  )
 })
 
-test('has value attribute', () => {
+test("has value attribute", () => {
   render(
     <Checkbox
-        data={{ testid: testId }}
-        name="checkbox-name"
-        text="Checkbox"
-        value="checkbox value"
+      data={{ testid: testId }}
+      name="checkbox-name"
+      text="Checkbox"
+      value="checkbox value"
     />
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit.getElementsByTagName('input')[0]).toHaveAttribute('value', 'checkbox value')
+  expect(kit.getElementsByTagName("input")[0]).toHaveAttribute(
+    "value",
+    "checkbox value"
+  )
 })
 
-test('has checked attribute', () => {
+test("has checked attribute", () => {
   render(
     <Checkbox
-        checked
-        data={{ testid: testId }}
-        name="checkbox-name"
-        text="Checkbox"
-        value="check-box value"
+      checked
+      data={{ testid: testId }}
+      name="checkbox-name"
+      text="Checkbox"
+      value="check-box value"
     />
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit.getElementsByTagName('input')[0]).toHaveAttribute('checked')
+  expect(kit.getElementsByTagName("input")[0]).toHaveAttribute("checked")
 })

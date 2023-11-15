@@ -1,17 +1,16 @@
-import React from "react";
+import React from "react"
 
-import Icon from "../../pb_icon/_icon";
-import Flex from "../../pb_flex/_flex";
-import Tooltip from "../../pb_tooltip/_tooltip";
-
+import Icon from "../../pb_icon/_icon"
+import Flex from "../../pb_flex/_flex"
+import Tooltip from "../../pb_tooltip/_tooltip"
 
 type EditorButtonProps = {
-  classname?: string,
-  onclick?: () => {} | void,
-  icon?: string;
-  text?: string;
+  classname?: string
+  onclick?: () => {} | void
+  icon?: string
+  text?: string
   disable?: boolean
-};
+}
 
 const EditorButton = ({
   classname,
@@ -21,12 +20,12 @@ const EditorButton = ({
   text,
 }: EditorButtonProps) => {
   return (
-    <Tooltip 
+    <Tooltip
       delay={{
-        open: 2000
+        open: 2000,
       }}
-      interaction 
-      placement="top" 
+      interaction
+      placement="top"
       text={text}
     >
       <button
@@ -36,16 +35,12 @@ const EditorButton = ({
         role="button"
         type="button"
       >
-        <Flex 
-          align="center"
-          className="toolbar_button_icon"
-          justify="center"
-        >
+        <Flex align="center" className="toolbar_button_icon" justify="center">
           <Icon icon={icon} size="lg" />
         </Flex>
       </button>
     </Tooltip>
-  );
-};
+  )
+}
 
 export default EditorButton

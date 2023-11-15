@@ -1,18 +1,12 @@
-import React from 'react'
-import { ProgressSimple } from '../..'
+import React from "react"
+import { ProgressSimple } from "../.."
 
 const ProgressSimpleValue = () => {
   return (
     <div>
-      <ProgressSimple
-          align="left"
-          percent={68}
-      />
+      <ProgressSimple align="left" percent={68} />
       <br />
-      <ProgressSimple
-          max="10"
-          value="2"
-      />
+      <ProgressSimple max="10" value="2" />
     </div>
   )
 }

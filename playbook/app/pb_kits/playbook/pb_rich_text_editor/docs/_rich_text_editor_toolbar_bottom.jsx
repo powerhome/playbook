@@ -1,13 +1,9 @@
-import React from 'react'
-import { RichTextEditor } from '../../'
+import React from "react"
+import { RichTextEditor } from "../../"
 
-const RichTextEditorToolbarBottom = (props) => (
+const RichTextEditorToolbarBottom = props => (
   <div>
-    <RichTextEditor
-        id="bottom-toolbar"
-        toolbarBottom
-        {...props}
-    />
+    <RichTextEditor id="bottom-toolbar" toolbarBottom {...props} />
   </div>
 )
 

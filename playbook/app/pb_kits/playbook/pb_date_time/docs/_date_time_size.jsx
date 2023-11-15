@@ -1,74 +1,44 @@
-import React from 'react'
-import DateTime from '../_date_time'
+import React from "react"
+import DateTime from "../_date_time"
 
-const DateTimeDefault = (props) => (
+const DateTimeDefault = props => (
   <div>
     <DateTime
-        datetime={new Date()}
-        showDayOfWeek
-        showIcon
-        size="sm"
-        {...props}
+      datetime={new Date()}
+      showDayOfWeek
+      showIcon
+      size="sm"
+      {...props}
     />
 
     <br />
 
-    <DateTime
-        datetime={new Date()}
-        showDayOfWeek
-        size="sm"
-        {...props}
-    />
+    <DateTime datetime={new Date()} showDayOfWeek size="sm" {...props} />
 
     <br />
 
-    <DateTime
-        datetime={new Date()}
-        showIcon
-        size="sm"
-        {...props}
-    />
+    <DateTime datetime={new Date()} showIcon size="sm" {...props} />
 
     <br />
 
-    <DateTime
-        datetime={new Date()}
-        size="sm"
-        {...props}
-    />
+    <DateTime datetime={new Date()} size="sm" {...props} />
 
     <br />
     <br />
 
-    <DateTime
-        datetime={new Date()}
-        showDayOfWeek
-        showIcon
-        {...props}
-    />
+    <DateTime datetime={new Date()} showDayOfWeek showIcon {...props} />
 
     <br />
 
-    <DateTime
-        datetime={new Date()}
-        showDayOfWeek
-        {...props}
-    />
+    <DateTime datetime={new Date()} showDayOfWeek {...props} />
 
     <br />
 
-    <DateTime
-        datetime={new Date()}
-        showIcon
-        {...props}
-    />
+    <DateTime datetime={new Date()} showIcon {...props} />
 
     <br />
 
-    <DateTime
-        datetime={new Date()}
-        {...props}
-    />
+    <DateTime datetime={new Date()} {...props} />
   </div>
 )
 

@@ -1,18 +1,16 @@
-import React from 'react'
-import { components } from 'react-select'
+import React from "react"
+import { components } from "react-select"
 
-import User from '../../pb_user/_user'
+import User from "../../pb_user/_user"
 
 const Option = (props: any) => {
-  const {
-    imageUrl,
-  } = props.data
+  const { imageUrl } = props.data
   const { valueComponent } = props.selectProps
 
   return (
     <components.Option {...props}>
       <>
-        {!valueComponent && imageUrl &&
+        {!valueComponent && imageUrl && (
           <User
             align="left"
             avatarUrl={imageUrl}
@@ -20,15 +18,11 @@ const Option = (props: any) => {
             name={props.label}
             orientation="horizontal"
           />
-        }
+        )}
 
-        {valueComponent &&
-          valueComponent(props.data)
-        }
+        {valueComponent && valueComponent(props.data)}
 
-        {!valueComponent && !imageUrl &&
-          props.label
-        }
+        {!valueComponent && !imageUrl && props.label}
       </>
     </components.Option>
   )

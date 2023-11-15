@@ -1,52 +1,35 @@
-import React from 'react'
-import classnames from 'classnames'
+import React from "react"
+import classnames from "classnames"
 
-import { globalProps } from '../utilities/globalProps'
-import Title from '../pb_title/_title'
+import { globalProps } from "../utilities/globalProps"
+import Title from "../pb_title/_title"
 
 type StatValueProps = {
-  className?: string,
-  id?: string,
-  unit?: string,
-  value: string | number,
+  className?: string
+  id?: string
+  unit?: string
+  value: string | number
 }
 
 const StatValue = (props: StatValueProps): React.ReactElement => {
-  const {
-    className,
-    id,
-    unit,
-    value = 0,
-  } = props
+  const { className, id, unit, value = 0 } = props
 
-  const displayValue = function(value: string | number) {
+  const displayValue = function (value: string | number) {
     if (value || value === 0) {
-      return (
-        <Title
-            size={1}
-            tag="span"
-            text={`${value}`}
-        />
-      )
+      return <Title size={1} tag="span" text={`${value}`} />
     }
   }
 
-  const displayUnit = function(unit: string) {
+  const displayUnit = function (unit: string) {
     if (unit) {
-      return (
-        <Title
-            size={3}
-            tag="span"
-            text={unit}
-        />
-      )
+      return <Title size={3} tag="span" text={unit} />
     }
   }
 
   return (
     <div
-        className={classnames('pb_stat_value_kit', globalProps(props), className)}
-        id={id}
+      className={classnames("pb_stat_value_kit", globalProps(props), className)}
+      id={id}
     >
       <div className="pb_stat_value_wrapper">
         {displayValue(value)}

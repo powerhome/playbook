@@ -1,4 +1,4 @@
-This example shows how to enhance the passphrase strenght by setting diferent thresholds and lengths. 
+This example shows how to enhance the passphrase strenght by setting diferent thresholds and lengths.
 
 The `meterSettings` array contains different settings for each rendered input. The `handleStrengthCalculation` handles the strength calculation using those settings, showing different results for the same `passphrase` input.
 
@@ -10,6 +10,6 @@ Note: minimum length trumps strength and will set the bar to a red color, despit
 
 <div class="pb_pill_kit_warning"><div class="pb_title_kit_size_4 pb_pill_text">Disclaimer</div></div>
 
-This example depends on the `zxcvbn` library. 
+This example depends on the `zxcvbn` library.
 
 You can use any library to achieve the same result, this example only intends to show how to add more features to the `Passphrase` kit.

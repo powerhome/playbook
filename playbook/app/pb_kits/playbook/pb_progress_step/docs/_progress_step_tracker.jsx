@@ -1,35 +1,27 @@
-import React from 'react'
+import React from "react"
 
-import ProgressStep from '../_progress_step.tsx'
-import ProgressStepItem from '../_progress_step_item'
+import ProgressStep from "../_progress_step.tsx"
+import ProgressStepItem from "../_progress_step_item"
 
-import Caption from '../../pb_caption/_caption'
+import Caption from "../../pb_caption/_caption"
 
-const ProgressStepTracker = (props) => (
+const ProgressStepTracker = props => (
   <div>
     <br />
-    <ProgressStep
-        icon
-        variant="tracker"
-        {...props}
-    >
+    <ProgressStep icon variant="tracker" {...props}>
       <ProgressStepItem status="complete">
-        <Caption>{'Ordered'}</Caption>
+        <Caption>{"Ordered"}</Caption>
       </ProgressStepItem>
       <ProgressStepItem status="active">
-        <Caption>{'Shipped'}</Caption>
+        <Caption>{"Shipped"}</Caption>
       </ProgressStepItem>
       <ProgressStepItem status="inactive">
-        <Caption>{'Delivered'}</Caption>
+        <Caption>{"Delivered"}</Caption>
       </ProgressStepItem>
     </ProgressStep>
 
     <br />
-    <ProgressStep
-        icon
-        variant="tracker"
-        {...props}
-    >
+    <ProgressStep icon variant="tracker" {...props}>
       <ProgressStepItem status="complete" />
       <ProgressStepItem status="complete" />
       <ProgressStepItem status="hidden" />

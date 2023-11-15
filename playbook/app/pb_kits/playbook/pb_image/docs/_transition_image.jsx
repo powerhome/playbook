@@ -1,25 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
-import Image from '../_image'
-import Select from '../../pb_select/_select'
-import FlexItem from '../../pb_flex/_flex_item'
-import Flex from '../../pb_flex/_flex'
-import Button from '../../pb_button/_button'
+import Image from "../_image"
+import Select from "../../pb_select/_select"
+import FlexItem from "../../pb_flex/_flex_item"
+import Flex from "../../pb_flex/_flex"
+import Button from "../../pb_button/_button"
 
-const TransitionImage = (props) => {
-  const [transition, setTransition] = useState('')
+const TransitionImage = props => {
+  const [transition, setTransition] = useState("")
   const [apply, setApply] = useState({
-    url: '',
-    transition: '',
+    url: "",
+    transition: "",
   })
 
   const loadImage = () => {
-    document.querySelector('.image').classList.remove(transition, 'lazyloaded')
-    setApply({
-      url: 'https://unsplash.it/500/400/?image=634',
-      transition: transition,
-    },
-    document.querySelector('.image').classList.add(transition, 'lazyload')
+    document.querySelector(".image").classList.remove(transition, "lazyloaded")
+    setApply(
+      {
+        url: "https://unsplash.it/500/400/?image=634",
+        transition: transition,
+      },
+      document.querySelector(".image").classList.add(transition, "lazyload")
     )
   }
 
@@ -29,13 +30,13 @@ const TransitionImage = (props) => {
 
   const options = [
     {
-      value: 'fade',
+      value: "fade",
     },
     {
-      value: 'blur',
+      value: "blur",
     },
     {
-      value: 'scale',
+      value: "scale",
     },
   ]
 
@@ -44,30 +45,30 @@ const TransitionImage = (props) => {
       <Flex>
         <FlexItem fixedSize="250px">
           <Select
-              blankSelection="Select a Transition..."
-              label=""
-              onChange={handleTransition}
-              options={options}
-              {...props}
+            blankSelection="Select a Transition..."
+            label=""
+            onChange={handleTransition}
+            options={options}
+            {...props}
           />
         </FlexItem>
         <FlexItem>
           <Button
-              disabled={transition === '' ? true : false}
-              marginLeft="sm"
-              onClick={loadImage}
-              text="Load Image"
-              {...props}
+            disabled={transition === "" ? true : false}
+            marginLeft="sm"
+            onClick={loadImage}
+            text="Load Image"
+            {...props}
           />
         </FlexItem>
       </Flex>
-      <div style={{ display: apply.url === '' ? 'none' : 'block' }}>
+      <div style={{ display: apply.url === "" ? "none" : "block" }}>
         <Image
-            alt="picture of a misty forest"
-            className="image"
-            transition={apply.transition}
-            url={apply.url}
-            {...props}
+          alt="picture of a misty forest"
+          className="image"
+          transition={apply.transition}
+          url={apply.url}
+          {...props}
         />
       </div>
     </>

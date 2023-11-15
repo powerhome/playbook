@@ -1,16 +1,11 @@
-import React from 'react'
-import Card from '../_card'
+import React from "react"
+import Card from "../_card"
 
-const CardBorderNone = (props) => {
+const CardBorderNone = props => {
   return (
-
-    <Card
-        {...props}
-        borderNone
-    >
-      {'Card content'}
+    <Card {...props} borderNone>
+      {"Card content"}
     </Card>
-
   )
 }
 

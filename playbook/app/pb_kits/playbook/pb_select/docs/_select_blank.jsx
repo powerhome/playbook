@@ -1,23 +1,23 @@
-import React from 'react'
+import React from "react"
 
-import Select from '../_select'
+import Select from "../_select"
 
-const SelectBlank = (props) => {
+const SelectBlank = props => {
   const options = [
-    { value: 'USA' },
-    { value: 'Canada' },
-    { value: 'Brazil' },
-    { value: 'Philippines' },
+    { value: "USA" },
+    { value: "Canada" },
+    { value: "Brazil" },
+    { value: "Philippines" },
   ]
 
   return (
     <div>
       <Select
-          blankSelection="Select One..."
-          label="Where do you live"
-          name="location"
-          options={options}
-          {...props}
+        blankSelection="Select One..."
+        label="Where do you live"
+        name="location"
+        options={options}
+        {...props}
       />
     </div>
   )

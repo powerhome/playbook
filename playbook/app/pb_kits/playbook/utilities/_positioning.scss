@@ -50,15 +50,15 @@
 }
 
 $zIndex_values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
-    
+
 @each $size, $size_value in $breakpoints_grid {
   @each $zIndex_value in $zIndex_values {
-      $min_size: map-get($size_value, "min");
-      $max_size: map-get($size_value, "max");
-      .z_index_#{$size}_#{$zIndex_value} {
-        @include break_on($min_size, $max_size) {
-          z-index: #{$zIndex_value * 100} !important;
-        }
+    $min_size: map-get($size_value, "min");
+    $max_size: map-get($size_value, "max");
+    .z_index_#{$size}_#{$zIndex_value} {
+      @include break_on($min_size, $max_size) {
+        z-index: #{$zIndex_value * 100} !important;
       }
+    }
   }
 }

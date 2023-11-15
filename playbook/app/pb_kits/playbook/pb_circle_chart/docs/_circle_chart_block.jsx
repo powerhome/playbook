@@ -1,40 +1,35 @@
-import React from 'react'
+import React from "react"
 
-import CircleChart from '../_circle_chart'
-import Title from '../../pb_title/_title'
+import CircleChart from "../_circle_chart"
+import Title from "../../pb_title/_title"
 
 const dataWithABlock = [
   {
-    name: 'Waiting for Calls',
+    name: "Waiting for Calls",
     value: 41,
   },
   {
-    name: 'On Call',
+    name: "On Call",
     value: 49,
   },
   {
-    name: 'After call',
+    name: "After call",
     value: 10,
   },
 ]
 
-const CircleChartBlock = (props) => (
-
+const CircleChartBlock = props => (
   <div>
     <CircleChart
-        chartData={dataWithABlock}
-        id="chart-with-a-block"
-        innerSize="lg"
-        marginTop="xl"
-        rounded
-        {...props}
+      chartData={dataWithABlock}
+      id="chart-with-a-block"
+      innerSize="lg"
+      marginTop="xl"
+      rounded
+      {...props}
     >
-      <Title
-          size={1}
-          tag="div"
-          {...props}
-      >
-        {'83'}
+      <Title size={1} tag="div" {...props}>
+        {"83"}
       </Title>
     </CircleChart>
   </div>

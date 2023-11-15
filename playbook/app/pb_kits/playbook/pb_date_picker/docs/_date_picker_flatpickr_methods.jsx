@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react"
 
-import DatePicker from '../_date_picker'
+import DatePicker from "../_date_picker"
 
-import Button from '../../pb_button/_button'
+import Button from "../../pb_button/_button"
 
 const DatePickerFlatpickrMethods = () => {
   let fpInstance
   useEffect(() => {
-    fpInstance = document.querySelector('#fp-methods')._flatpickr
+    fpInstance = document.querySelector("#fp-methods")._flatpickr
   }, [])
   const clickHandlerClear = () => {
     fpInstance.clear()
@@ -21,25 +21,10 @@ const DatePickerFlatpickrMethods = () => {
 
   return (
     <div>
-      <Button
-          marginRight="sm"
-          onClick={clickHandlerClose}
-          text="Close"
-      />
-      <Button
-          marginRight="sm"
-          onClick={clickHandlerClear}
-          text="Clear"
-      />
-      <Button
-          onClick={clickHandlerToday}
-          text="Today"
-      />
-      <DatePicker
-          hideLabel
-          marginTop="sm"
-          pickerId="fp-methods"
-      />
+      <Button marginRight="sm" onClick={clickHandlerClose} text="Close" />
+      <Button marginRight="sm" onClick={clickHandlerClear} text="Clear" />
+      <Button onClick={clickHandlerToday} text="Today" />
+      <DatePicker hideLabel marginTop="sm" pickerId="fp-methods" />
     </div>
   )
 }

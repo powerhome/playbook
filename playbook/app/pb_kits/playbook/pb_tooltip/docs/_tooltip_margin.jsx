@@ -1,36 +1,28 @@
 // @flow
 
-import React from 'react'
-import { Tooltip, Flex, CircleIconButton } from '../..'
+import React from "react"
+import { Tooltip, Flex, CircleIconButton } from "../.."
 
-const TooltipMargin = (props) => {
+const TooltipMargin = props => {
   return (
-    <Flex 
-        flexDirection='row' 
-        justifyContent='center' 
-        wrap
-    >
+    <Flex flexDirection="row" justifyContent="center" wrap>
       <Tooltip
-          margin='md'
-          placement='top'
-          text='Send Email'
-          zIndex={10}
-          {...props}
+        margin="md"
+        placement="top"
+        text="Send Email"
+        zIndex={10}
+        {...props}
       >
-        <CircleIconButton 
-            icon='paper-plane'
-        />
+        <CircleIconButton icon="paper-plane" />
       </Tooltip>
-      <Tooltip 
-          margin='md' 
-          placement='top' 
-          text='Send Email' 
-          zIndex={10} 
-          {...props}
+      <Tooltip
+        margin="md"
+        placement="top"
+        text="Send Email"
+        zIndex={10}
+        {...props}
       >
-        <CircleIconButton 
-            icon='paper-plane'
-        />
+        <CircleIconButton icon="paper-plane" />
       </Tooltip>
     </Flex>
   )

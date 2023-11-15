@@ -1,41 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { globalProps } from "../utilities/globalProps";
-import { buildAriaProps, buildDataProps } from "../utilities/props";
+import React, { useState, useEffect } from "react"
+import { globalProps } from "../utilities/globalProps"
+import { buildAriaProps, buildDataProps } from "../utilities/props"
 
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
-import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
-import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
-import mapColors from "../pb_dashboard/pbChartsColorsHelper";
+import HighchartsReact from "highcharts-react-official"
+import Highcharts from "highcharts"
+import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme"
+import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme"
+import mapColors from "../pb_dashboard/pbChartsColorsHelper"
 
-import classnames from "classnames";
+import classnames from "classnames"
 
 type BarGraphProps = {
-  align?: "left" | "right" | "center";
-  axisTitle: string;
-  dark?: boolean;
-  xAxisCategories: [];
-  yAxisMin: number;
-  yAxisMax: number;
-  chartData: { name: string; data: number[] }[];
-  className?: string;
-  id: any;
-  pointStart: number | any;
-  subTitle?: string;
-  title: string;
-  type?: string;
-  legend?: boolean;
-  toggleLegendClick?: boolean;
-  height?: string;
-  colors: string[];
-  layout?: "horizontal" | "vertical" | "proximate";
-  verticalAlign?: "top" | "middle" | "bottom";
-  x?: number;
-  y?: number;
-  aria?: { [key: string]: string };
-  data?: { [key: string]: string };
-};
-
+  align?: "left" | "right" | "center"
+  axisTitle: string
+  dark?: boolean
+  xAxisCategories: []
+  yAxisMin: number
+  yAxisMax: number
+  chartData: { name: string; data: number[] }[]
+  className?: string
+  id: any
+  pointStart: number | any
+  subTitle?: string
+  title: string
+  type?: string
+  legend?: boolean
+  toggleLegendClick?: boolean
+  height?: string
+  colors: string[]
+  layout?: "horizontal" | "vertical" | "proximate"
+  verticalAlign?: "top" | "middle" | "bottom"
+  x?: number
+  y?: number
+  aria?: { [key: string]: string }
+  data?: { [key: string]: string }
+}
 
 const BarGraph = ({
   aria = {},
@@ -63,14 +62,14 @@ const BarGraph = ({
   y = 0,
   ...props
 }: BarGraphProps): React.ReactElement => {
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const setupTheme = () => {
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
-      : Highcharts.setOptions(highchartsTheme);
-  };
-  setupTheme();
+      : Highcharts.setOptions(highchartsTheme)
+  }
+  setupTheme()
 
   const staticOptions = {
     title: {
@@ -116,30 +115,30 @@ const BarGraph = ({
     },
     series: chartData,
     credits: false,
-  };
-
-  if (!toggleLegendClick) {
-    staticOptions.plotOptions.series.events = { legendItemClick: () => false };
   }
 
-  const [options, setOptions] = useState({});
+  if (!toggleLegendClick) {
+    staticOptions.plotOptions.series.events = { legendItemClick: () => false }
+  }
+
+  const [options, setOptions] = useState({})
 
   useEffect(() => {
-    setOptions({ ...staticOptions });
-  }, [chartData]);
+    setOptions({ ...staticOptions })
+  }, [chartData])
 
   return (
     <HighchartsReact
-        containerProps={{
-          className: classnames(globalProps(props), className),
-          id: id,
-          ...ariaProps,
-          ...dataProps,
-        }}
-        highcharts={Highcharts}
-        options={options}
+      containerProps={{
+        className: classnames(globalProps(props), className),
+        id: id,
+        ...ariaProps,
+        ...dataProps,
+      }}
+      highcharts={Highcharts}
+      options={options}
     />
-  );
-};
+  )
+}
 
-export default BarGraph;
+export default BarGraph

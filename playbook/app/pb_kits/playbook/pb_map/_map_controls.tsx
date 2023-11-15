@@ -1,14 +1,14 @@
-import React from "react";
-import Button from "../pb_button/_button";
-import Icon from "../pb_icon/_icon";
-import Flex from "../pb_flex/_flex";
+import React from "react"
+import Button from "../pb_button/_button"
+import Icon from "../pb_icon/_icon"
+import Flex from "../pb_flex/_flex"
 
 type MapControlTypes = {
-  zoomBtns?: boolean, 
-  flyTo?: boolean, 
-  zoomInClick?: () => {},
-  zoomOutClick?: () => {},
-  flyToClick?: () => {},
+  zoomBtns?: boolean
+  flyTo?: boolean
+  zoomInClick?: () => {}
+  zoomOutClick?: () => {}
+  flyToClick?: () => {}
   children?: React.ReactNode | React.ReactNode[]
 }
 
@@ -41,7 +41,7 @@ const MapControls = ({
       ) : null}
       {children}
     </Flex>
-  );
-};
+  )
+}
 
-export default MapControls;
+export default MapControls

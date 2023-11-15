@@ -1,12 +1,8 @@
 /* @flow */
 
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
-import {
-  Caption,
-  Typeahead,
-  User,
-} from '../..'
+import { Caption, Typeahead, User } from "../.."
 
 /**
  *
@@ -24,31 +20,31 @@ type UserProps = {
   type?: String,
 }
 
-const filterResults = (results) =>
-  results.items.map((result) => {
+const filterResults = results =>
+  results.items.map(result => {
     return {
       imageUrl: result.avatar_url, //add the custom field
       label: result.login,
       value: result.id,
-      territory: 'PHL',
+      territory: "PHL",
       type: result.type,
     }
   })
 
-const promiseOptions = (inputValue) =>
-  new Promise((resolve) => {
+const promiseOptions = inputValue =>
+  new Promise(resolve => {
     if (inputValue) {
       fetch(`https://api.github.com/search/users?q=${inputValue}`)
-        .then((response) => response.json())
-        .then((results) => resolve(filterResults(results)))
+        .then(response => response.json())
+        .then(results => resolve(filterResults(results)))
     } else {
       resolve([])
     }
   })
 
-const TypeaheadWithPillsAsyncCustomOptions = (props) => {
+const TypeaheadWithPillsAsyncCustomOptions = props => {
   const [users, setUsers] = useState([])
-  const handleOnChange = (value) => setUsers(value)
+  const handleOnChange = value => setUsers(value)
 
   /**
    *
@@ -57,52 +53,45 @@ const TypeaheadWithPillsAsyncCustomOptions = (props) => {
    * @returns {null}
    * @summary - for doc example purposes only
    */
-  const handleOnMultiValueClick = (value) => {
+  const handleOnMultiValueClick = value => {
     alert(`You removed the user: "${value.label}"`)
   }
 
   return (
     <>
       <If condition={users && users.length > 0}>
-        <Caption
-            marginBottom="xs"
-            text="State (Users)"
-            {...props}
-        />
-        <For
-            each="user"
-            of={users}
-        >
+        <Caption marginBottom="xs" text="State (Users)" {...props} />
+        <For each="user" of={users}>
           <User
-              align="left"
-              avatar
-              avatarUrl={user.imageUrl}
-              key={user.value}
-              marginBottom="md"
-              name={user.label}
-              orientation="horizontal"
-              {...props}
+            align="left"
+            avatar
+            avatarUrl={user.imageUrl}
+            key={user.value}
+            marginBottom="md"
+            name={user.label}
+            orientation="horizontal"
+            {...props}
           />
         </For>
       </If>
       <Typeahead
-          async
-          isMulti
-          label="Github Users"
-          loadOptions={promiseOptions}
-          onChange={handleOnChange}
-          onMultiValueClick={handleOnMultiValueClick}
-          placeholder="type the name of a Github user"
-          valueComponent={(props: UserProps) => (
-            <User
-                avatar
-                avatarUrl={props.imageUrl}
-                name={props.label}
-                territory={props.territory}
-                title={props.type}
-            />
-          )}
-          {...props}
+        async
+        isMulti
+        label="Github Users"
+        loadOptions={promiseOptions}
+        onChange={handleOnChange}
+        onMultiValueClick={handleOnMultiValueClick}
+        placeholder="type the name of a Github user"
+        valueComponent={(props: UserProps) => (
+          <User
+            avatar
+            avatarUrl={props.imageUrl}
+            name={props.label}
+            territory={props.territory}
+            title={props.type}
+          />
+        )}
+        {...props}
       />
     </>
   )

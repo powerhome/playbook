@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
-import { Button, Gauge } from '../../'
+import React, { useState } from "react"
+import { Button, Gauge } from "../../"
 
-const GaugeLiveData = (props) => {
+const GaugeLiveData = props => {
   const [value, setValue] = useState(50)
-  const [name, setName] = useState('Name')
+  const [name, setName] = useState("Name")
 
   const updateValue = () => {
     setValue(Math.floor(Math.random() * 100))
   }
+  const namesArray = [
+    "Name",
+    "Windows",
+    "Doors",
+    "Roofing",
+    "Siding",
+    "Gutters",
+  ]
   const updateName = () => {
     let index = namesArray.indexOf(name)
     if (namesArray.indexOf(name) == 5) {
@@ -17,24 +25,15 @@ const GaugeLiveData = (props) => {
     }
     setName(namesArray[index])
   }
-  const namesArray = ['Name', 'Windows', 'Doors', 'Roofing', 'Siding', 'Gutters']
 
   return (
     <div>
-      <Button
-          onClick={updateValue}
-          text="Update Value"
-          {...props}
-      />
-      <Button
-          onClick={updateName}
-          text="Update Name"
-          {...props}
-      />
+      <Button onClick={updateValue} text="Update Value" {...props} />
+      <Button onClick={updateName} text="Update Name" {...props} />
       <Gauge
-          chartData={[{ name: name, value: value }]}
-          id="gauge-live-data"
-          {...props}
+        chartData={[{ name: name, value: value }]}
+        id="gauge-live-data"
+        {...props}
       />
     </div>
   )

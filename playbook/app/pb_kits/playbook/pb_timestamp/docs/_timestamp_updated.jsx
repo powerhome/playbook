@@ -1,26 +1,26 @@
-import React from 'react'
-import Timestamp from '../_timestamp'
+import React from "react"
+import Timestamp from "../_timestamp"
 
 const todaysDate = new Date()
 
-const TimestampUpdated = (props) => {
+const TimestampUpdated = props => {
   return (
     <div>
       <Timestamp
-          showUser
-          text="Maricris Nonato"
-          timestamp={todaysDate}
-          variant="updated"
-          {...props}
+        showUser
+        text="Maricris Nonato"
+        timestamp={todaysDate}
+        variant="updated"
+        {...props}
       />
 
       <br />
 
       <Timestamp
-          showUser={false}
-          timestamp={todaysDate}
-          variant="updated"
-          {...props}
+        showUser={false}
+        timestamp={todaysDate}
+        variant="updated"
+        {...props}
       />
     </div>
   )

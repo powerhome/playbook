@@ -1,35 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
-import CircleChart from '../_circle_chart'
-import Button from '../../pb_button/_button'
+import CircleChart from "../_circle_chart"
+import Button from "../../pb_button/_button"
 
-const CircleChartLiveData = (props) => {
+const CircleChartLiveData = props => {
   const [data, setData] = useState([
     {
-      name: 'Waiting for Calls',
+      name: "Waiting for Calls",
       value: 41,
     },
     {
-      name: 'On Call',
+      name: "On Call",
       value: 49,
     },
     {
-      name: 'After call',
+      name: "After call",
       value: 10,
     },
   ])
 
   const data2 = [
     {
-      name: 'Waiting for Calls',
+      name: "Waiting for Calls",
       value: 48,
     },
     {
-      name: 'On Call',
+      name: "On Call",
       value: 12,
     },
     {
-      name: 'After call',
+      name: "After call",
       value: 140,
     },
   ]
@@ -40,16 +40,8 @@ const CircleChartLiveData = (props) => {
 
   return (
     <div>
-      <Button
-          onClick={updateValue}
-          text="Update Value"
-          {...props}
-      />
-      <CircleChart
-          chartData={data}
-          id="circle-chart-live-data"
-          {...props}
-      />
+      <Button onClick={updateValue} text="Update Value" {...props} />
+      <CircleChart chartData={data} id="circle-chart-live-data" {...props} />
     </div>
   )
 }

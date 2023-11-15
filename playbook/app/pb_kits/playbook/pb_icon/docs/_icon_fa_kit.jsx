@@ -1,19 +1,13 @@
-import React from 'react'
+import React from "react"
 
-import Icon from '../_icon'
+import Icon from "../_icon"
 
-import '../../../../../../playbook-website/app/javascript/scripts/custom-icons'
+import "../../../../../../playbook-website/app/javascript/scripts/custom-icons"
 
-const IconFaKit = (props) => {
+const IconFaKit = props => {
   return (
     <div>
-      <Icon
-          {...props}
-          fixedWidth
-          fontStyle="fak"
-          icon="powergon"
-          size="5x"
-      />
+      <Icon {...props} fixedWidth fontStyle="fak" icon="powergon" size="5x" />
     </div>
   )
 }

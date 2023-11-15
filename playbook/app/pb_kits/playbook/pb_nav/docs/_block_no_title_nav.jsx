@@ -1,44 +1,39 @@
-import React from 'react'
+import React from "react"
 
-import Nav from '../_nav'
-import NavItem from '../_item'
+import Nav from "../_nav"
+import NavItem from "../_item"
 
-const BlockNoTitleNav = (props) => {
+const BlockNoTitleNav = props => {
   return (
     <Nav {...props}>
+      <NavItem iconLeft="newspaper" link="#" text="News Feed" {...props} />
       <NavItem
-          iconLeft="newspaper"
-          link="#"
-          text="News Feed"
-          {...props}
+        active
+        iconLeft="comments-alt"
+        link="#"
+        text="Messages"
+        {...props}
       />
       <NavItem
-          active
-          iconLeft="comments-alt"
-          link="#"
-          text="Messages"
-          {...props}
+        iconLeft="calendar-check"
+        iconRight="angle-down"
+        link="#"
+        text="Events"
+        {...props}
       />
       <NavItem
-          iconLeft="calendar-check"
-          iconRight="angle-down"
-          link="#"
-          text="Events"
-          {...props}
+        iconLeft="calendar-check"
+        iconRight="angle-down"
+        link="#"
+        text="Events"
+        {...props}
       />
       <NavItem
-          iconLeft="calendar-check"
-          iconRight="angle-down"
-          link="#"
-          text="Events"
-          {...props}
-      />
-      <NavItem
-          iconLeft="users-class"
-          iconRight="angle-down"
-          link="#"
-          text="Groups"
-          {...props}
+        iconLeft="users-class"
+        iconRight="angle-down"
+        link="#"
+        text="Groups"
+        {...props}
       />
     </Nav>
   )

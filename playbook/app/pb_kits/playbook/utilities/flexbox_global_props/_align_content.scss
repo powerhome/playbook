@@ -4,7 +4,11 @@ $align_content_values: (
   center: center,
   space_between: space-between,
   space_around: space-around,
-  space_evenly: space-evenly
+  space_evenly: space-evenly,
 );
 
-@include global_props_responsive_css($align_content_values, 'align_content', 'align-content');
+@include global_props_responsive_css(
+  $align_content_values,
+  "align_content",
+  "align-content"
+);

@@ -1,7 +1,7 @@
 // @flow
 
-import React from 'react'
-import { Typeahead } from '../..'
+import React from "react"
+import { Typeahead } from "../.."
 
 /**
  *
@@ -12,8 +12,8 @@ import { Typeahead } from '../..'
  * @summary - for doc example purposes only
  */
 
-const filterResults = (results) =>
-  results.items.map((result) => {
+const filterResults = results =>
+  results.items.map(result => {
     return {
       label: result.login,
       value: result.id,
@@ -21,20 +21,20 @@ const filterResults = (results) =>
   })
 
 /**
-*
-* @const promiseOptions
-* @ignore
-* @returns {Promise} - fetch API data results from Typeahead input text
-* @see - https://react-select.com/home#async
-* @summary - for doc example purposes only
-*/
+ *
+ * @const promiseOptions
+ * @ignore
+ * @returns {Promise} - fetch API data results from Typeahead input text
+ * @see - https://react-select.com/home#async
+ * @summary - for doc example purposes only
+ */
 
-const promiseOptions = (inputValue) =>
-  new Promise((resolve) => {
+const promiseOptions = inputValue =>
+  new Promise(resolve => {
     if (inputValue) {
       fetch(`https://api.github.com/search/users?q=${inputValue}`)
-        .then((response) => response.json())
-        .then((results) => {
+        .then(response => response.json())
+        .then(results => {
           resolve(results.items ? filterResults(results) : [])
         })
     } else {
@@ -42,15 +42,15 @@ const promiseOptions = (inputValue) =>
     }
   })
 
-const TypeaheadAsyncCreateable = (props) => {
+const TypeaheadAsyncCreateable = props => {
   return (
     <Typeahead
-        async
-        createable
-        isMulti
-        label="Existing or User Created Options"
-        loadOptions={promiseOptions}
-        {...props}
+      async
+      createable
+      isMulti
+      label="Existing or User Created Options"
+      loadOptions={promiseOptions}
+      {...props}
     />
   )
 }

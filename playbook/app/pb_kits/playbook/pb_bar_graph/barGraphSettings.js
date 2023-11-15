@@ -1,7 +1,7 @@
-import { commonSettings } from '../pb_dashboard/commonSettings.js'
-import typography from '../tokens/exports/_typography.scss'
+import { commonSettings } from "../pb_dashboard/commonSettings.js"
+import typography from "../tokens/exports/_typography.scss"
 
-const sizeColumns = function(highchart) {
+const sizeColumns = function (highchart) {
   const column = highchart.plotOptions.column
   const series = highchart.plotOptions.series
 
@@ -15,7 +15,7 @@ const sizeColumns = function(highchart) {
   series.groupPadding = 0
 }
 
-const styleDataLabels = (highchart) => {
+const styleDataLabels = highchart => {
   const series = highchart.plotOptions.series
 
   series.dataLabels.style.fontFamily = typography.font_family_base
@@ -23,7 +23,7 @@ const styleDataLabels = (highchart) => {
   series.dataLabels.style.fontWeight = typography.bold
 }
 
-const barGraphSettings = function(highchart) {
+const barGraphSettings = function (highchart) {
   commonSettings(highchart)
   sizeColumns(highchart)
   styleDataLabels(highchart)

@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react"
 
-import DatePicker from '../_date_picker'
+import DatePicker from "../_date_picker"
 
-const DatePickerMonthAndYear = (props) => {
+const DatePickerMonthAndYear = props => {
   return (
     <div>
       <DatePicker
-          label="Date Picker"
-          pickerId="disabled-date"
-          selectionType="month"
-          {...props}
+        label="Date Picker"
+        pickerId="disabled-date"
+        selectionType="month"
+        {...props}
       />
     </div>
   )

@@ -1,23 +1,23 @@
-import React from 'react'
-import { Gauge } from '../../'
+import React from "react"
+import { Gauge } from "../../"
 
-const GaugeHeight = (props) => (
+const GaugeHeight = props => (
   <div>
     <Gauge
-        chartData={[ { name: 'Pixels', value: 400 } ]}
-        height="400"
-        id="gauge-height-px"
-        suffix="px"
-        title="Fixed Height in Pixels"
-        {...props}
+      chartData={[{ name: "Pixels", value: 400 }]}
+      height="400"
+      id="gauge-height-px"
+      suffix="px"
+      title="Fixed Height in Pixels"
+      {...props}
     />
     <Gauge
-        chartData={[ { name: 'Percentage', value: 45 } ]}
-        height="45%"
-        id="gauge-height-percent"
-        suffix="%"
-        title="Height as Percentage of Width"
-        {...props}
+      chartData={[{ name: "Percentage", value: 45 }]}
+      height="45%"
+      id="gauge-height-percent"
+      suffix="%"
+      title="Height as Percentage of Width"
+      {...props}
     />
   </div>
 )

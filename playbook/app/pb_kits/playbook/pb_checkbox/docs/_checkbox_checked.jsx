@@ -1,16 +1,16 @@
-import React from 'react'
+import React from "react"
 
-import Checkbox from '../_checkbox'
+import Checkbox from "../_checkbox"
 
-const CheckboxChecked = (props) => {
+const CheckboxChecked = props => {
   return (
     <div>
       <Checkbox
-          checked
-          name="checkbox-name"
-          text="Checked Checkbox"
-          value="check-box value"
-          {...props}
+        checked
+        name="checkbox-name"
+        text="Checked Checkbox"
+        value="check-box value"
+        {...props}
       />
     </div>
   )

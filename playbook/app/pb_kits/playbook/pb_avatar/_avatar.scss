@@ -3,21 +3,21 @@
 @import "../tokens/typography";
 
 $avatar-sizes: (
-  "xxs":  20px,
-  "xs":   28px,
-  "sm":   38px,
-  "md":   60px,
+  "xxs": 20px,
+  "xs": 28px,
+  "sm": 38px,
+  "md": 60px,
   "base": 60px,
-  "lg":   80px,
-  "xl":   100px,
+  "lg": 80px,
+  "xl": 100px,
 );
 
-[class^=pb_avatar_kit] {
+[class^="pb_avatar_kit"] {
   position: relative;
 
   @each $name, $size in $avatar-sizes {
-    &[class*=_size_#{$name}],
-    &[class*=_size_#{$name}_thumb] {
+    &[class*="_size_#{$name}"],
+    &[class*="_size_#{$name}_thumb"] {
       width: $size;
       height: $size;
       object-fit: cover;
@@ -62,7 +62,7 @@ $avatar-sizes: (
           display: block;
         }
       }
-      [class^=pb_online_status] {
+      [class^="pb_online_status"] {
         position: absolute;
         right: 0;
         top: 0;

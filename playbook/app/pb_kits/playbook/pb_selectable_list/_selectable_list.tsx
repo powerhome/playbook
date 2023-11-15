@@ -1,73 +1,77 @@
-import React, { useState } from 'react'
-import classnames from 'classnames'
+import React, { useState } from "react"
+import classnames from "classnames"
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
-import { SelectableListItemProps } from './_item.js'
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
+import { SelectableListItemProps } from "./_item.js"
 
-import List from  '../pb_list/_list'
-import SelectableListItem from './_item'
+import List from "../pb_list/_list"
+import SelectableListItem from "./_item"
 
 type SelectableListProps = {
-  aria?: {[key: string]: string },
-  children?: React.ReactElement[],
-  className?: string,
-  data?: object,
-  id?: string,
-  variant?: 'checkbox' | 'radio',
+  aria?: { [key: string]: string }
+  children?: React.ReactElement[]
+  className?: string
+  data?: object
+  id?: string
+  variant?: "checkbox" | "radio"
 }
 
 const SelectableList = (props: SelectableListProps) => {
-  const {
-    aria = {},
-    children,
-    className,
-    data = {},
-    id,
-  } = props
+  const { aria = {}, children, className, data = {}, id } = props
 
   const ariaProps = buildAriaProps(aria)
-  const classes = classnames(buildCss('pb_selectable_list_kit'), globalProps(props), className)
+  const classes = classnames(
+    buildCss("pb_selectable_list_kit"),
+    globalProps(props),
+    className
+  )
   const dataProps = buildDataProps(data)
   const isRadio = props.variant === "radio"
-  const defaultCheckedRadioValue = children.filter((item: {props:SelectableListItemProps} ) => item.props.defaultChecked)[0]?.props?.value
+  const defaultCheckedRadioValue = children.filter(
+    (item: { props: SelectableListItemProps }) => item.props.defaultChecked
+  )[0]?.props?.value
 
-  const [selectedRadioValue, setSelectedRadioValue] = useState(defaultCheckedRadioValue)
-  
-  const onChangeRadioValue = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+  const [selectedRadioValue, setSelectedRadioValue] = useState(
+    defaultCheckedRadioValue
+  )
+
+  const onChangeRadioValue = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedRadioValue(target.value)
   }
 
   let selectableListItems = children
 
   if (isRadio) {
-    selectableListItems = children.map(( {props}: {props:SelectableListItemProps} ) => {
-      return (
-        <SelectableListItem
+    selectableListItems = children.map(
+      ({ props }: { props: SelectableListItemProps }) => {
+        return (
+          <SelectableListItem
             {...props}
-            className={classnames(selectedRadioValue === props.value ? "checked_item" : "", props.className)}
+            className={classnames(
+              selectedRadioValue === props.value ? "checked_item" : "",
+              props.className
+            )}
             key={props.value}
-            onChange={evt => { onChangeRadioValue(evt); props?.onChange?.(evt); }}
-        />
-      )
-    })
+            onChange={evt => {
+              onChangeRadioValue(evt)
+              props?.onChange?.(evt)
+            }}
+          />
+        )
+      }
+    )
   }
 
-  
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      <List variant={props.variant}>
-        {selectableListItems}
-      </List>
+    <div {...ariaProps} {...dataProps} className={classes} id={id}>
+      <List variant={props.variant}>{selectableListItems}</List>
     </div>
   )
 }
- 
+
 SelectableList.Item = SelectableListItem
 
 export default SelectableList

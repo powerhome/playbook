@@ -1,15 +1,11 @@
-import React from 'react'
+import React from "react"
 
-import Icon from '../_icon'
+import Icon from "../_icon"
 
-const IconDefault = (props) => {
+const IconDefault = props => {
   return (
     <div>
-      <Icon
-          fixedWidth
-          icon="user"
-          {...props}
-      />
+      <Icon fixedWidth icon="user" {...props} />
     </div>
   )
 }

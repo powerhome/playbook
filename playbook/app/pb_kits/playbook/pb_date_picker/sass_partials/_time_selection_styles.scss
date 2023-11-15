@@ -2,7 +2,7 @@
 @import "../../tokens/spacing";
 @import "../../tokens/colors";
 
-[class^=pb_date_picker_kit] {
+[class^="pb_date_picker_kit"] {
   .pb_time_selection {
     color: inherit;
     text-align: left;
@@ -22,15 +22,17 @@
         }
       }
       span {
-        &.arrowUp, &.arrowDown {
+        &.arrowUp,
+        &.arrowDown {
           display: none;
         }
       }
     }
-    [class^=pb_caption_kit_md], [class^=pb_caption_kit_xs] {
+    [class^="pb_caption_kit_md"],
+    [class^="pb_caption_kit_xs"] {
       line-height: $text_larger;
     }
-    [class^=pb_caption_kit_xs] {
+    [class^="pb_caption_kit_xs"] {
       clear: both;
       display: block;
     }
@@ -41,18 +43,19 @@
       }
     }
     .meridiem {
-      [class^=pb_form_group_kit] {
+      [class^="pb_form_group_kit"] {
         margin-left: $space_sm;
       }
 
       .datePicker-AMPM {
         display: none;
       }
-      &:focus, &:hover {
+      &:focus,
+      &:hover {
         background: transparent;
       }
 
-      [class^=pb_selectable_card_kit] > label {
+      [class^="pb_selectable_card_kit"] > label {
         padding: 0;
         margin: 0;
         width: 60px;

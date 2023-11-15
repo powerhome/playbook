@@ -1,50 +1,20 @@
-import React from 'react'
-import { Button, ButtonToolbar } from '../..'
+import React from "react"
+import { Button, ButtonToolbar } from "../.."
 
-const ButtonToolbarDefault = (props) => (
+const ButtonToolbarDefault = props => (
   <div className="pb--doc-demo-row">
-    <ButtonToolbar
-        orientation="vertical"
-        {...props}
-    >
-      <Button
-          text="Create"
-          {...props}
-      />
-      <Button
-          text="Edit"
-          {...props}
-      />
-      <Button
-          text="Copy"
-          {...props}
-      />
-      <Button
-          text="Cut"
-          {...props}
-      />
+    <ButtonToolbar orientation="vertical" {...props}>
+      <Button text="Create" {...props} />
+      <Button text="Edit" {...props} />
+      <Button text="Copy" {...props} />
+      <Button text="Cut" {...props} />
     </ButtonToolbar>
 
-    <ButtonToolbar
-        orientation="horizontal"
-        {...props}
-    >
-      <Button
-          text="Create"
-          {...props}
-      />
-      <Button
-          text="Edit"
-          {...props}
-      />
-      <Button
-          text="Copy"
-          {...props}
-      />
-      <Button
-          text="Cut"
-          {...props}
-      />
+    <ButtonToolbar orientation="horizontal" {...props}>
+      <Button text="Create" {...props} />
+      <Button text="Edit" {...props} />
+      <Button text="Copy" {...props} />
+      <Button text="Cut" {...props} />
     </ButtonToolbar>
   </div>
 )

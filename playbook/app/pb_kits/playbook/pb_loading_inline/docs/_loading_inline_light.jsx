@@ -1,21 +1,13 @@
-import React from 'react'
+import React from "react"
 
-import LoadingInline from '../_loading_inline'
+import LoadingInline from "../_loading_inline"
 
-const LoadingInlineLight = (props) => {
+const LoadingInlineLight = props => {
   return (
     <div>
-      <LoadingInline
-          {...props}
-      />
-      <LoadingInline
-          align="center"
-          {...props}
-      />
-      <LoadingInline
-          align="right"
-          {...props}
-      />
+      <LoadingInline {...props} />
+      <LoadingInline align="center" {...props} />
+      <LoadingInline align="right" {...props} />
     </div>
   )
 }

@@ -1,5 +1,5 @@
-import React from 'react'
-import { ProgressSimple } from '../..'
+import React from "react"
+import { ProgressSimple } from "../.."
 
 const ProgressSimpleDefault = () => {
   return (

@@ -1,35 +1,36 @@
 const dialogHelper = () => {
-  const openTrigger = document.querySelectorAll("[data-open-dialog]");
-  const closeTrigger = document.querySelectorAll("[data-close-dialog]");
+  const openTrigger = document.querySelectorAll("[data-open-dialog]")
+  const closeTrigger = document.querySelectorAll("[data-close-dialog]")
   const dialogs = document.querySelectorAll(".pb_dialog_rails")
 
-  openTrigger.forEach((open) => {
+  openTrigger.forEach(open => {
     open.addEventListener("click", () => {
-      var openTriggerData = open.dataset.openDialog;
+      var openTriggerData = open.dataset.openDialog
       var targetDialog = document.getElementById(openTriggerData)
-      if (targetDialog.open) return;
-      targetDialog.showModal();
-    });
-  });
+      if (targetDialog.open) return
+      targetDialog.showModal()
+    })
+  })
 
-  closeTrigger.forEach((close) => {
+  closeTrigger.forEach(close => {
     close.addEventListener("click", () => {
-      var closeTriggerData = close.dataset.closeDialog;
-      document.getElementById(closeTriggerData).close();
-    });
-  });
+      var closeTriggerData = close.dataset.closeDialog
+      document.getElementById(closeTriggerData).close()
+    })
+  })
 
   // Close dialog box on outside click
-  dialogs.forEach((dialogElement) => {
-    dialogElement.addEventListener("mousedown", (event) => {
+  dialogs.forEach(dialogElement => {
+    dialogElement.addEventListener("mousedown", event => {
       const dialogParentDataset = dialogElement.parentElement.dataset
       if (dialogParentDataset.overlayClick === "overlay_close") return
 
       const dialogModal = event.target.getBoundingClientRect()
-      const clickedOutsideDialogModal = event.clientX < dialogModal.left ||
-                                        event.clientX > dialogModal.right ||
-                                        event.clientY < dialogModal.top ||
-                                        event.clientY > dialogModal.bottom
+      const clickedOutsideDialogModal =
+        event.clientX < dialogModal.left ||
+        event.clientX > dialogModal.right ||
+        event.clientY < dialogModal.top ||
+        event.clientY > dialogModal.bottom
 
       if (clickedOutsideDialogModal) {
         dialogElement.close()
@@ -37,6 +38,6 @@ const dialogHelper = () => {
       }
     })
   })
-};
+}
 
-export default dialogHelper;
+export default dialogHelper

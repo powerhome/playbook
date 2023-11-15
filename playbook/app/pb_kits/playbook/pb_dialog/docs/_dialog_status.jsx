@@ -8,7 +8,6 @@ const useDialog = (visible = false) => {
   const [opened, setOpened] = useState(visible)
   const toggle = () => setOpened(!opened)
   return [opened, toggle]
-
 }
 
 const DialogStatus = () => {
@@ -27,8 +26,8 @@ const DialogStatus = () => {
       title: "Are you sure?",
       toggle: toggleDefaultAlert,
       visible: defaultAlertOpened,
-      buttonOneText:"Yes, Action",
-      buttonTwoText: "No, Cancel"
+      buttonOneText: "Yes, Action",
+      buttonTwoText: "No, Cancel",
     },
     {
       size: "status_size",
@@ -37,8 +36,8 @@ const DialogStatus = () => {
       title: "Are you sure?",
       toggle: toggleCautionAlert,
       visible: cautionAlertOpened,
-      buttonOneText:"Yes, Action",
-      buttonTwoText: "No, Cancel"
+      buttonOneText: "Yes, Action",
+      buttonTwoText: "No, Cancel",
     },
     {
       size: "status_size",
@@ -47,8 +46,8 @@ const DialogStatus = () => {
       title: "Delete",
       toggle: toggleDeleteAlert,
       visible: deleteAlertOpened,
-      buttonOneText:"Yes, Delete",
-      buttonTwoText: "No, Cancel"
+      buttonOneText: "Yes, Delete",
+      buttonTwoText: "No, Cancel",
     },
     {
       size: "sm",
@@ -57,7 +56,7 @@ const DialogStatus = () => {
       title: "Information",
       toggle: toggleInfoAlert,
       visible: infoAlertOpened,
-      buttonOneText:"Ok, Thanks!",
+      buttonOneText: "Ok, Thanks!",
     },
     {
       size: "sm",
@@ -75,91 +74,58 @@ const DialogStatus = () => {
       title: "Error Message",
       toggle: toggleErrorAlert,
       visible: errorAlertOpened,
-      buttonOneText:"Oh no!",
+      buttonOneText: "Oh no!",
     },
   ]
 
   return (
     <div>
-      <Flex 
-          rowGap="xs" 
-          wrap
-        >
-        <Button
-            marginRight="md"
-            onClick={toggleDefaultAlert}
-        >
+      <Flex rowGap="xs" wrap>
+        <Button marginRight="md" onClick={toggleDefaultAlert}>
           {"Default Status"}
         </Button>
-        <Button
-            marginRight="md"
-            onClick={toggleCautionAlert}
-        >
+        <Button marginRight="md" onClick={toggleCautionAlert}>
           {"Caution Status"}
         </Button>
-        <Button
-            marginRight="md"
-            onClick={toggleDeleteAlert}
-        >
+        <Button marginRight="md" onClick={toggleDeleteAlert}>
           {"Delete Status"}
         </Button>
-        <Button
-            marginRight="md"
-            onClick={toggleInfoAlert}
-        >
+        <Button marginRight="md" onClick={toggleInfoAlert}>
           {"Information Status"}
         </Button>
-        <Button
-            marginRight="md"
-            onClick={toggleSuccessAlert}
-        >
+        <Button marginRight="md" onClick={toggleSuccessAlert}>
           {"Success Status"}
         </Button>
-        <Button 
-            marginRight="md"
-            onClick={toggleErrorAlert}
-        >
+        <Button marginRight="md" onClick={toggleErrorAlert}>
           {"Error Status"}
         </Button>
       </Flex>
       <Flex>
-        {dialogs.map((dialog) => (
+        {dialogs.map(dialog => (
           <Dialog
-              key={dialog.status}
-              onClose={dialog.toggle}
-              opened={dialog.visible}
-              size={dialog.size}
-              status={dialog.status}
-              text={dialog.text}
-              title={dialog.title}
+            key={dialog.status}
+            onClose={dialog.toggle}
+            opened={dialog.visible}
+            size={dialog.size}
+            status={dialog.status}
+            text={dialog.text}
+            title={dialog.title}
           >
-          <Dialog.Footer
-              paddingBottom="md"
-              paddingX="md"
-          >
-            <If condition={!dialog.buttonTwoText}>
-              <Button
-                  fullWidth
-                  onClick={dialog.toggle}
-              >
-              {dialog.buttonOneText}
-              </Button>
-            </If>
-            <If condition={dialog.buttonTwoText}>
-              <Button
-                  onClick={dialog.toggle}
-                  paddingRight="xl"
-              >
-              {dialog.buttonOneText}
-              </Button>
-              <Button
-                  onClick={dialog.toggle}
-                  variant="secondary"
-              >
-              {dialog.buttonTwoText}
-              </Button>
-            </If>
-          </Dialog.Footer>
+            <Dialog.Footer paddingBottom="md" paddingX="md">
+              <If condition={!dialog.buttonTwoText}>
+                <Button fullWidth onClick={dialog.toggle}>
+                  {dialog.buttonOneText}
+                </Button>
+              </If>
+              <If condition={dialog.buttonTwoText}>
+                <Button onClick={dialog.toggle} paddingRight="xl">
+                  {dialog.buttonOneText}
+                </Button>
+                <Button onClick={dialog.toggle} variant="secondary">
+                  {dialog.buttonTwoText}
+                </Button>
+              </If>
+            </Dialog.Footer>
           </Dialog>
         ))}
       </Flex>

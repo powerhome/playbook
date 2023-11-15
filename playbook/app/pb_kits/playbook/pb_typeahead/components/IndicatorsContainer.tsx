@@ -1,5 +1,5 @@
-import React from 'react'
-import { components } from 'react-select'
+import React from "react"
+import { components } from "react-select"
 
 const IndicatorsContainer = (props: any) => (
   <components.IndicatorsContainer

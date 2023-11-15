@@ -1,25 +1,25 @@
-import React from "react";
-import classnames from "classnames";
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import React from "react"
+import classnames from "classnames"
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
 
 type ListProps = {
-  aria?: { [key: string]: string };
-  borderless?: boolean;
-  className?: string;
-  children: React.ReactNode[] | React.ReactNode;
-  dark?: boolean;
-  data?: object;
-  id?: string;
-  layout?: "" | "left" | "right";
-  ordered?: boolean;
-  role?: string;
-  tabIndex?: number;
-  text?: string;
-  size?: string;
-  variant?: string;
-  xpadding?: boolean;
-};
+  aria?: { [key: string]: string }
+  borderless?: boolean
+  className?: string
+  children: React.ReactNode[] | React.ReactNode
+  dark?: boolean
+  data?: object
+  id?: string
+  layout?: "" | "left" | "right"
+  ordered?: boolean
+  role?: string
+  tabIndex?: number
+  text?: string
+  size?: string
+  variant?: string
+  xpadding?: boolean
+}
 
 const List = (props: ListProps) => {
   const {
@@ -38,22 +38,22 @@ const List = (props: ListProps) => {
     xpadding = false,
     variant,
     text,
-  } = props;
+  } = props
 
   const layoutClass: { [key: string]: string } = {
     left: "layout_left",
     right: "layout_right",
     default: "",
-  };
+  }
 
   const childrenWithProps = React.Children.map(
     children,
     (child: React.ReactElement) => {
-      return React.cloneElement(child, { text, variant });
+      return React.cloneElement(child, { text, variant })
     }
-  );
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  )
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss("pb_list_kit", layoutClass[layout], size, {
       dark: dark,
@@ -63,7 +63,7 @@ const List = (props: ListProps) => {
     }),
     globalProps(props),
     className
-  );
+  )
 
   return (
     <div className={classes}>
@@ -91,7 +91,7 @@ const List = (props: ListProps) => {
         </ul>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default List;
+export default List

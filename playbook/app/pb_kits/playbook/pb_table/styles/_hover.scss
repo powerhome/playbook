@@ -2,7 +2,7 @@
 
 $transition-speed: 0.2s;
 
-[class^=pb_table] {
+[class^="pb_table"] {
   &.table-sm,
   &.table-md,
   &.table-lg {
@@ -15,13 +15,15 @@ $transition-speed: 0.2s;
           td {
             border-top-color: transparent;
             border-top-width: 0;
-            transition: all $transition-speed ease; 
+            transition: all $transition-speed ease;
           }
-          @media (hover:hover) { 
+          @media (hover: hover) {
             td {
               position: relative;
               &:after {
-                transition: background-color $transition-speed ease, height $transition-speed ease;
+                transition:
+                  background-color $transition-speed ease,
+                  height $transition-speed ease;
                 content: "";
                 position: absolute;
                 display: block;
@@ -45,7 +47,9 @@ $transition-speed: 0.2s;
                 border-top-width: 0;
                 border-top-color: transparent;
                 &:after {
-                  transition: background-color $transition-speed ease, height $transition-speed ease;
+                  transition:
+                    background-color $transition-speed ease,
+                    height $transition-speed ease;
                   background-color: darken($border_light, 10%);
                   height: 1px;
                 }

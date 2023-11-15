@@ -14,18 +14,22 @@ $top_bottom_radius: 0px;
   padding: $space_xxs 0px;
   li {
     display: inline;
-    > a, li > span {
-    padding: $pagination_padding;
-    text-decoration: none;
-  }}
-  li:first-child > a, li:first-child > span  {
+    > a,
+    li > span {
+      padding: $pagination_padding;
+      text-decoration: none;
+    }
+  }
+  li:first-child > a,
+  li:first-child > span {
     padding: $pagination_padding;
     border-right: $border_rad_lightest solid $border_light;
     z-index: 2;
     border-top-right-radius: $top_bottom_radius;
     border-bottom-right-radius: $top_bottom_radius;
   }
-  li:last-child > a, li:last-child > span {
+  li:last-child > a,
+  li:last-child > span {
     padding: $pagination_padding;
     border-left: $border_rad_lightest solid $border_light;
     z-index: 2;

@@ -14,7 +14,7 @@
   &[class^="pb_caption_kit_xs"] {
     @include caption_xs;
   }
-  
+
   &[class*="link"] {
     color: $primary;
   }

@@ -1,27 +1,23 @@
-import React from 'react'
-import TimeStacked from '../_time_stacked'
+import React from "react"
+import TimeStacked from "../_time_stacked"
 
-const TimeStackedDefault = (props) => {
+const TimeStackedDefault = props => {
   return (
     <div>
+      <TimeStacked time={new Date()} timeZone="America/New_York" {...props} />
+      <br />
       <TimeStacked
-          time={new Date()}
-          timeZone="America/New_York"
-          {...props}
+        align="center"
+        time={new Date()}
+        timeZone="America/New_York"
+        {...props}
       />
       <br />
       <TimeStacked
-          align="center"
-          time={new Date()}
-          timeZone="America/New_York"
-          {...props}
-      />
-      <br />
-      <TimeStacked
-          align="right"
-          time={new Date()}
-          timeZone="America/New_York"
-          {...props}
+        align="right"
+        time={new Date()}
+        timeZone="America/New_York"
+        {...props}
       />
     </div>
   )

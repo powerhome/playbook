@@ -1,15 +1,11 @@
-import React, { useState } from 'react'
-import {
-  Button,
-  Card,
-  RichTextEditor,
-} from '../../'
+import React, { useState } from "react"
+import { Button, Card, RichTextEditor } from "../../"
 
-const RichTextEditorPreview = (props) => {
+const RichTextEditorPreview = props => {
   const [showPreview, setShowPreview] = useState(false)
   const [previewText, setPreviewText] = useState(<div />)
 
-  const handleChange = (event) => setPreviewText(event)
+  const handleChange = event => setPreviewText(event)
   const handleClick = () => {
     setShowPreview(true)
   }
@@ -17,28 +13,28 @@ const RichTextEditorPreview = (props) => {
   return (
     <div>
       <RichTextEditor
-          id="content-preview-editor"
-          onChange={handleChange}
-          {...props}
+        id="content-preview-editor"
+        onChange={handleChange}
+        {...props}
       />
       <If condition={showPreview}>
         <Card marginTop="md">
           <div
-              className="trix-content"
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{ __html: previewText }}
-              id="preview-content"
+            className="trix-content"
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: previewText }}
+            id="preview-content"
           />
         </Card>
         <Else />
         <div />
       </If>
       <Button
-          id="preview-button"
-          marginTop="md"
-          onClick={handleClick}
-          text="Preview Output"
-          variant="secondary"
+        id="preview-button"
+        marginTop="md"
+        onClick={handleClick}
+        text="Preview Output"
+        variant="secondary"
       />
     </div>
   )

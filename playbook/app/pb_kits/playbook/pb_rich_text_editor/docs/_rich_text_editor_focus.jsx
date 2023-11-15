@@ -1,17 +1,11 @@
-import React from 'react'
-import { RichTextEditor } from '../../'
+import React from "react"
+import { RichTextEditor } from "../../"
 
-const RichTextEditorFocus = (props) => (
+const RichTextEditorFocus = props => (
   <>
-    <RichTextEditor
-        focus
-        {...props}
-    />
+    <RichTextEditor focus {...props} />
     <br />
-    <RichTextEditor
-        focus
-        {...props}
-    />
+    <RichTextEditor focus {...props} />
   </>
 )
 export default RichTextEditorFocus

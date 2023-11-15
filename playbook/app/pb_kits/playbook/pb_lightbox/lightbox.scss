@@ -3,8 +3,7 @@
 
 $slides-margin: $space-md;
 
- .carousel {
-
+.carousel {
   .carousel-header {
     background: rgb(0, 0, 0);
     border-radius: 0px;
@@ -15,7 +14,7 @@ $slides-margin: $space-md;
     right: 0;
     z-index: 9999999;
     align-items: center;
-    transition: all .5s;
+    transition: all 0.5s;
 
     .nav-right-btn {
       padding-left: $space_xs !important;
@@ -33,7 +32,11 @@ $slides-margin: $space-md;
     bottom: 0;
     position: absolute !important;
     border-radius: 0px 0px 5px 5px;
-    background: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.77) 100%);
+    background: linear-gradient(
+      -180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.77) 100%
+    );
   }
 
   .overlay,
@@ -42,7 +45,6 @@ $slides-margin: $space-md;
     pointer-events: none;
   }
 }
-
 
 .Lightbox {
   width: 100vw;
@@ -145,7 +147,6 @@ $slides-margin: $space-md;
     justify-content: center;
   }
 }
-
 
 .Thumbnail {
   padding: 3px;

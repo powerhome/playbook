@@ -1,7 +1,6 @@
 examples:
-  
   rails:
-  - highlight_default: Default
-  
+    - highlight_default: Default
+
   react:
-  - highlight_default: Default
+    - highlight_default: Default

@@ -1,48 +1,48 @@
 /* eslint-disable react/jsx-handler-names */
 /* eslint-disable react/no-multi-comp */
 
-import React, { useState } from "react";
-import classnames from "classnames";
-import Modal from "react-modal";
+import React, { useState } from "react"
+import classnames from "classnames"
+import Modal from "react-modal"
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
 
-import Body from "../pb_body/_body";
-import Button from "../pb_button/_button";
-import DialogHeader from "./child_kits/_dialog_header";
-import DialogFooter from "./child_kits/_dialog_footer";
-import DialogBody from "./child_kits/_dialog_body";
-import Flex from "../pb_flex/_flex";
-import IconCircle from "../pb_icon_circle/_icon_circle";
-import Title from "../pb_title/_title";
-import { DialogContext } from "./_dialog_context";
+import Body from "../pb_body/_body"
+import Button from "../pb_button/_button"
+import DialogHeader from "./child_kits/_dialog_header"
+import DialogFooter from "./child_kits/_dialog_footer"
+import DialogBody from "./child_kits/_dialog_body"
+import Flex from "../pb_flex/_flex"
+import IconCircle from "../pb_icon_circle/_icon_circle"
+import Title from "../pb_title/_title"
+import { DialogContext } from "./_dialog_context"
 
 type DialogProps = {
-  aria?: { [key: string]: string };
-  cancelButton?: string;
-  children: React.ReactNode | React.ReactNode[] | string;
-  className?: string;
-  closeable: boolean;
-  confirmButton?: string;
-  data?: object;
-  id?: string;
-  fullHeight?: boolean;
-  loading?: boolean;
-  onCancel?: () => void;
-  onChange?: () => void;
-  onClose?: () => void;
-  onConfirm?: () => void;
-  opened: boolean;
-  portalClassName?: string;
-  placement?: "left" | "center" | "right";
-  shouldCloseOnOverlayClick: boolean;
-  size?: "sm" | "md" | "lg" | "xl" | "status_size" | "content";
-  status?: "info" | "caution" | "delete" | "error" | "success";
-  text?: string;
-  title?: string;
-  trigger?: string;
-};
+  aria?: { [key: string]: string }
+  cancelButton?: string
+  children: React.ReactNode | React.ReactNode[] | string
+  className?: string
+  closeable: boolean
+  confirmButton?: string
+  data?: object
+  id?: string
+  fullHeight?: boolean
+  loading?: boolean
+  onCancel?: () => void
+  onChange?: () => void
+  onClose?: () => void
+  onConfirm?: () => void
+  opened: boolean
+  portalClassName?: string
+  placement?: "left" | "center" | "right"
+  shouldCloseOnOverlayClick: boolean
+  size?: "sm" | "md" | "lg" | "xl" | "status_size" | "content"
+  status?: "info" | "caution" | "delete" | "error" | "success"
+  text?: string
+  title?: string
+  trigger?: string
+}
 
 const Dialog = (props: DialogProps) => {
   const {
@@ -67,65 +67,73 @@ const Dialog = (props: DialogProps) => {
     text,
     title,
     trigger,
-  } = props;
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  } = props
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const dialogClassNames = {
     base: classnames("pb_dialog", buildCss("pb_dialog", size, placement)),
     afterOpen: "pb_dialog_after_open",
     beforeClose: "pb_dialog_before_close",
-  };
+  }
 
   const fullHeightClassNames = () => {
-    if(!fullHeight) return null
-    if(size === "xl") return `full_height_center`
+    if (!fullHeight) return null
+    if (size === "xl") return `full_height_center`
     return `full_height_${placement}`
   }
 
   const overlayClassNames = {
-    base: `pb_dialog_overlay ${fullHeight !== null && fullHeightClassNames() }`,
+    base: `pb_dialog_overlay ${fullHeight !== null && fullHeightClassNames()}`,
     afterOpen: "pb_dialog_overlay_after_open",
     beforeClose: "pb_dialog_overlay_before_close",
-  };
+  }
 
   const classes = classnames(
     buildCss("pb_dialog_wrapper"),
     globalProps(props),
     className
-  );
+  )
 
   const [triggerOpened, setTriggerOpened] = useState(false),
-    modalIsOpened = trigger ? triggerOpened : opened;
+    modalIsOpened = trigger ? triggerOpened : opened
 
   const api = {
     onClose: trigger
       ? function () {
-          setTriggerOpened(false);
+          setTriggerOpened(false)
         }
       : onClose,
-  };
+  }
 
   if (trigger) {
-    const modalTrigger = document.querySelector(trigger);
+    const modalTrigger = document.querySelector(trigger)
     modalTrigger.addEventListener(
       "click",
       () => {
-        setTriggerOpened(true);
+        setTriggerOpened(true)
         document
           .querySelector("#cancel-button")
           .addEventListener("click", () => {
-            setTriggerOpened(false);
-          });
+            setTriggerOpened(false)
+          })
       },
       { once: true }
-    );
+    )
   }
 
   type sweetAlertStatusProps = {
     [key: string]: {
-      icon: string,
-      variant: "default" | "yellow" | "red" | "green" | "royal" | "blue" | "purple" | "teal",
-      size: "sm" | "md" | "lg" | "base" | "xs" | "xl";
+      icon: string
+      variant:
+        | "default"
+        | "yellow"
+        | "red"
+        | "green"
+        | "royal"
+        | "blue"
+        | "purple"
+        | "teal"
+      size: "sm" | "md" | "lg" | "base" | "xs" | "xl"
     }
   }
 
@@ -160,7 +168,7 @@ const Dialog = (props: DialogProps) => {
       variant: "green",
       size: "lg",
     },
-  };
+  }
 
   return (
     <DialogContext.Provider value={api}>
@@ -181,10 +189,7 @@ const Dialog = (props: DialogProps) => {
             {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}
             {!status && text ? <Dialog.Body>{text}</Dialog.Body> : null}
             {status && (
-              <Dialog.Body
-                  className="dialog_status_text_align"
-                  padding="md"
-              >
+              <Dialog.Body className="dialog_status_text_align" padding="md">
                 <Flex align="center" orientation="column">
                   <IconCircle
                     icon={sweetAlertStatus[status].icon}
@@ -200,20 +205,22 @@ const Dialog = (props: DialogProps) => {
             )}
             {cancelButton && confirmButton ? (
               <Dialog.Footer>
-                  <Button
-                    loading={loading}
-                    onClick={onConfirm}
-                    htmlType="button"
-                    variant="primary">
-                    {confirmButton}
-                  </Button>
-                  <Button
-                    id="cancel-button"
-                    onClick={onCancel}
-                    variant="link"
-                    htmlType="button">
-                    {cancelButton}
-                  </Button>
+                <Button
+                  loading={loading}
+                  onClick={onConfirm}
+                  htmlType="button"
+                  variant="primary"
+                >
+                  {confirmButton}
+                </Button>
+                <Button
+                  id="cancel-button"
+                  onClick={onCancel}
+                  variant="link"
+                  htmlType="button"
+                >
+                  {cancelButton}
+                </Button>
               </Dialog.Footer>
             ) : null}
             {children}
@@ -221,10 +228,10 @@ const Dialog = (props: DialogProps) => {
         </Modal>
       </div>
     </DialogContext.Provider>
-  );
-};
-Dialog.Header = DialogHeader;
-Dialog.Body = DialogBody;
-Dialog.Footer = DialogFooter;
+  )
+}
+Dialog.Header = DialogHeader
+Dialog.Body = DialogBody
+Dialog.Footer = DialogFooter
 
-export default Dialog;
+export default Dialog

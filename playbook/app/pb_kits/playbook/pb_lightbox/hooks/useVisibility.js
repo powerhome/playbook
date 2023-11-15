@@ -1,5 +1,5 @@
-import { debounce } from 'lodash'
-import { useCallback, useMemo, useState } from 'react'
+import { debounce } from "lodash"
+import { useCallback, useMemo, useState } from "react"
 
 export default function useVisibility(initialState = false) {
   const [visible, setVisible] = useState(initialState)
@@ -7,7 +7,7 @@ export default function useVisibility(initialState = false) {
   const show = useCallback(({ afterDelay = 0 } = {}) => {
     debounce(() => setVisible(true), afterDelay)()
   }, [])
-  const toggle = useCallback(() => setVisible((current) => !current), [])
+  const toggle = useCallback(() => setVisible(current => !current), [])
 
   return useMemo(
     () => ({

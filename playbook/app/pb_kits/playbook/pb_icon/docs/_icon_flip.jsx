@@ -1,30 +1,30 @@
-import React from 'react'
+import React from "react"
 
-import Icon from '../_icon'
+import Icon from "../_icon"
 
-const IconFlip = (props) => {
+const IconFlip = props => {
   return (
     <div>
       <Icon
-          fixedWidth
-          flip="horizontal"
-          icon="question-circle"
-          size="2x"
-          {...props}
+        fixedWidth
+        flip="horizontal"
+        icon="question-circle"
+        size="2x"
+        {...props}
       />
       <Icon
-          fixedWidth
-          flip="vertical"
-          icon="question-circle"
-          size="2x"
-          {...props}
+        fixedWidth
+        flip="vertical"
+        icon="question-circle"
+        size="2x"
+        {...props}
       />
       <Icon
-          fixedWidth
-          flip="both"
-          icon="question-circle"
-          size="2x"
-          {...props}
+        fixedWidth
+        flip="both"
+        icon="question-circle"
+        size="2x"
+        {...props}
       />
     </div>
   )

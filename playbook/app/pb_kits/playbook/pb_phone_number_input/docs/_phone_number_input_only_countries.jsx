@@ -1,13 +1,9 @@
-import React from 'react'
-import { PhoneNumberInput } from '../../'
+import React from "react"
+import { PhoneNumberInput } from "../../"
 
-const PhoneNumberInputOnlyCountries = (props) => (
+const PhoneNumberInputOnlyCountries = props => (
   <>
-    <PhoneNumberInput
-        id='only'
-        onlyCountries={['us', 'br']}
-        {...props} 
-    />
+    <PhoneNumberInput id="only" onlyCountries={["us", "br"]} {...props} />
   </>
 )
 

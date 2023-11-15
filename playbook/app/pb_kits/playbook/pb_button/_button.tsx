@@ -1,42 +1,42 @@
-import React from 'react'
-import classnames from 'classnames'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
-import { GlobalProps, globalProps } from '../utilities/globalProps'
-import { isValidEmoji } from '../utilities/validEmojiChecker'
+import React from "react"
+import classnames from "classnames"
+import { buildAriaProps, buildDataProps } from "../utilities/props"
+import { GlobalProps, globalProps } from "../utilities/globalProps"
+import { isValidEmoji } from "../utilities/validEmojiChecker"
 
-import Icon from '../pb_icon/_icon'
+import Icon from "../pb_icon/_icon"
 import Caption from "../pb_caption/_caption"
 import Flex from "../pb_flex/_flex"
 
-type EventHandler = (React.MouseEventHandler<HTMLElement>)
+type EventHandler = React.MouseEventHandler<HTMLElement>
 
 type ButtonPropTypes = {
-  aria?: { [key: string]: string },
-  children?: React.ReactChild[] | React.ReactChild,
-  className?: string | string[],
-  count?: number,
-  data?: { [key: string]: string },
-  disabled?: boolean,
-  fixedWidth?: boolean,
-  form?: string,
-  fullWidth?: boolean,
-  highlight?: boolean,
-  icon?: string,
-  iconRight?: boolean,
-  id?: string,
-  link?: string,
-  loading?: boolean,
-  newWindow?: boolean,
-  onClick?: EventHandler,
-  tabIndex?: number,
-  size?: 'sm' | 'md' | 'lg',
-  target?: string,
-  text?: string,
-  type?: 'inline' | null,
-  htmlType?: 'submit' | 'reset' | 'button' | undefined,
-  value?: string | null,
-  variant?: 'primary' | 'secondary' | 'link'| 'reaction',
-  wrapperClass?: string,
+  aria?: { [key: string]: string }
+  children?: React.ReactChild[] | React.ReactChild
+  className?: string | string[]
+  count?: number
+  data?: { [key: string]: string }
+  disabled?: boolean
+  fixedWidth?: boolean
+  form?: string
+  fullWidth?: boolean
+  highlight?: boolean
+  icon?: string
+  iconRight?: boolean
+  id?: string
+  link?: string
+  loading?: boolean
+  newWindow?: boolean
+  onClick?: EventHandler
+  tabIndex?: number
+  size?: "sm" | "md" | "lg"
+  target?: string
+  text?: string
+  type?: "inline" | null
+  htmlType?: "submit" | "reset" | "button" | undefined
+  value?: string | null
+  variant?: "primary" | "secondary" | "link" | "reaction"
+  wrapperClass?: string
 } & GlobalProps
 
 const buttonClassName = (props: ButtonPropTypes) => {
@@ -46,21 +46,23 @@ const buttonClassName = (props: ButtonPropTypes) => {
     highlight,
     icon,
     loading = false,
-    type = 'inline',
-    variant = 'primary',
+    type = "inline",
+    variant = "primary",
     size = null,
   } = props
 
-  let className = 'pb_button_kit'
+  let className = "pb_button_kit"
 
-  className += `${variant !== null ? `_${variant}` : ''}`
-  className += `${type !== null ? `_${type}` : ''}`
-  className += `${fullWidth ? '_block' : ''}`
-  className += disabled ? '_disabled' : '_enabled'
-  className += loading ? '_loading' : ''
-  className += `${size !== null ? ` size_${size}` : ''}`
-  className += `${variant === 'reaction' && !isValidEmoji(icon) ? ` reaction_default` : ''}`
-  className += `${variant === 'reaction' && highlight ? ` active` : ''}`
+  className += `${variant !== null ? `_${variant}` : ""}`
+  className += `${type !== null ? `_${type}` : ""}`
+  className += `${fullWidth ? "_block" : ""}`
+  className += disabled ? "_disabled" : "_enabled"
+  className += loading ? "_loading" : ""
+  className += `${size !== null ? ` size_${size}` : ""}`
+  className += `${
+    variant === "reaction" && !isValidEmoji(icon) ? ` reaction_default` : ""
+  }`
+  className += `${variant === "reaction" && highlight ? ` active` : ""}`
 
   return className
 }
@@ -81,28 +83,20 @@ const Button = (props: ButtonPropTypes) => {
     tabIndex,
     link = null,
     newWindow = false,
-    target = '',
+    target = "",
     text,
-    htmlType = 'button',
+    htmlType = "button",
     value,
     variant,
-    form = null
+    form = null,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const css = classnames(
-    buttonClassName(props),
-    globalProps(props),
-    className
-  )
+  const css = classnames(buttonClassName(props), globalProps(props), className)
   const loadingIcon = (
     <div className="loading-icon">
-      <Icon
-          fixedWidth
-          icon="spinner"
-          pulse
-      />
+      <Icon fixedWidth icon="spinner" pulse />
     </div>
   )
 
@@ -113,22 +107,18 @@ const Button = (props: ButtonPropTypes) => {
       )}
       <span>{text || children}</span>
       {icon && iconRight && (
-        <i className={`pb_icon_kit far fa-${icon} fa-fw button_with_icon_right`} />
+        <i
+          className={`pb_icon_kit far fa-${icon} fa-fw button_with_icon_right`}
+        />
       )}
     </span>
   )
 
   const ifLoading = () => {
     if (loading) {
-      return (
-        <>
-          {loadingIcon}
-        </>
-      )
+      return <>{loadingIcon}</>
     } else {
-      return (
-        content
-      )
+      return content
     }
   }
 
@@ -136,7 +126,7 @@ const Button = (props: ButtonPropTypes) => {
     if (target && link) {
       return target
     } else if (newWindow) {
-      return '_blank'
+      return "_blank"
     }
 
     return null
@@ -158,7 +148,7 @@ const Button = (props: ButtonPropTypes) => {
         >
           {ifLoading()}
         </a>
-      );
+      )
     } else if (variant === "reaction") {
       return (
         <button
@@ -175,7 +165,7 @@ const Button = (props: ButtonPropTypes) => {
           value={value}
         >
           {icon && isValidEmoji(icon) && (
-            <Flex align='center'>
+            <Flex align="center">
               <Icon icon={icon} />
               {count && (
                 <Caption paddingLeft="xxs" size="xs">
@@ -183,17 +173,12 @@ const Button = (props: ButtonPropTypes) => {
                 </Caption>
               )}
             </Flex>
-           )
-          }
-          {
-            !isValidEmoji(icon) && (
-              <Icon icon={icon ? icon : "face-smile-plus"} />
-            )
-          }
-
-        
+          )}
+          {!isValidEmoji(icon) && (
+            <Icon icon={icon ? icon : "face-smile-plus"} />
+          )}
         </button>
-      );
+      )
     } else {
       return (
         <button
@@ -211,15 +196,11 @@ const Button = (props: ButtonPropTypes) => {
         >
           {ifLoading()}
         </button>
-      );
+      )
     }
   }
 
-  return (
-    <>
-      {displayButton()}
-    </>
-  )
+  return <>{displayButton()}</>
 }
 
 export default Button

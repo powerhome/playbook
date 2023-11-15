@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
-import Checkbox from '../_checkbox'
+import Checkbox from "../_checkbox"
 
-const CheckboxCustom = (props) => {
+const CheckboxCustom = props => {
   const [checked, setChecked] = useState(false)
 
   const handleOnChange = () => {
@@ -11,20 +11,17 @@ const CheckboxCustom = (props) => {
 
   return (
     <div>
-      {`The checkbox is ${checked ? 'checked' : 'unchecked'}.`}
+      {`The checkbox is ${checked ? "checked" : "unchecked"}.`}
       <br />
       <br />
       <div>
-        <Checkbox
-            text="Toggle Me"
-            {...props}
-        >
+        <Checkbox text="Toggle Me" {...props}>
           <input
-              checked={checked}
-              name="custom-name"
-              onChange={handleOnChange}
-              type="checkbox"
-              value="custom-value"
+            checked={checked}
+            name="custom-name"
+            onChange={handleOnChange}
+            type="checkbox"
+            value="custom-value"
           />
         </Checkbox>
       </div>

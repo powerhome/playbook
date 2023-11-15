@@ -1,7 +1,7 @@
-import React from 'react'
-import { Body } from '../..'
+import React from "react"
+import { Body } from "../.."
 
-const BodyStyled = (props) => {
+const BodyStyled = props => {
   return (
     <>
       <Body {...props}>
@@ -17,7 +17,9 @@ const BodyStyled = (props) => {
         <i>{"This text is using an <i> tag"}</i>
         <br />
         <br />
-        {"This "}<em>word</em>{" is using an <em> tag."}
+        {"This "}
+        <em>word</em>
+        {" is using an <em> tag."}
         <br />
         <br />
         <small>{"This text is using a <small> tag."}</small>

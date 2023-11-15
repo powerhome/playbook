@@ -1,15 +1,15 @@
-import React from 'react'
-import Button from '../_button'
+import React from "react"
+import Button from "../_button"
 
-const ButtonOptions = (props) => (
+const ButtonOptions = props => (
   <div>
     <Button
-        htmlType="submit"
-        onClick={() => alert('Click!')}
-        tabIndex={0}
-        text="Button with options"
-        value="1234"
-        {...props}
+      htmlType="submit"
+      onClick={() => alert("Click!")}
+      tabIndex={0}
+      text="Button with options"
+      value="1234"
+      {...props}
     />
   </div>
 )

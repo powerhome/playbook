@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-handler-names */
 import React, { useState } from "react"
-import { Button, Dialog, Flex} from "../.."
+import { Button, Dialog, Flex } from "../.."
 
 const useDialog = (visible = false) => {
   const [opened, setOpened] = useState(visible)
@@ -21,8 +21,8 @@ const DialogStackedAlert = () => {
       title: "Are you sure?",
       toggle: toggleDefaultAlert,
       visible: defaultAlertOpened,
-      buttonOneText:"Yes, Action",
-      buttonTwoText: "No, Cancel"
+      buttonOneText: "Yes, Action",
+      buttonTwoText: "No, Cancel",
     },
     {
       size: "sm",
@@ -31,8 +31,8 @@ const DialogStackedAlert = () => {
       title: "Are you sure?",
       toggle: toggleCautionAlert,
       visible: cautionAlertOpened,
-      buttonOneText:"Yes, Action",
-      buttonTwoText: "No, Cancel"
+      buttonOneText: "Yes, Action",
+      buttonTwoText: "No, Cancel",
     },
     {
       size: "sm",
@@ -41,39 +41,27 @@ const DialogStackedAlert = () => {
       title: "Delete",
       toggle: toggleDeleteAlert,
       visible: deleteAlertOpened,
-      buttonOneText:"Yes, Delete",
-      buttonTwoText: "No, Cancel"
-    }
+      buttonOneText: "Yes, Delete",
+      buttonTwoText: "No, Cancel",
+    },
   ]
 
   return (
     <div>
-    <Flex
-        rowGap="xs" 
-        wrap
-    >
-      <Button
-          marginRight="md"
-          onClick={toggleDefaultAlert}
-      >
-        {"Default Status"}
-      </Button>
-      <Button
-          marginRight="md"
-          onClick={toggleCautionAlert}
-      >
-        {"Caution Status"}
-      </Button>
-      <Button
-          marginRight="md"
-          onClick={toggleDeleteAlert}
-      >
-        {"Delete Status"}
-      </Button>
-    </Flex>
-    <Flex>
-      {dialogs.map((dialog) => (
-        <Dialog
+      <Flex rowGap="xs" wrap>
+        <Button marginRight="md" onClick={toggleDefaultAlert}>
+          {"Default Status"}
+        </Button>
+        <Button marginRight="md" onClick={toggleCautionAlert}>
+          {"Caution Status"}
+        </Button>
+        <Button marginRight="md" onClick={toggleDeleteAlert}>
+          {"Delete Status"}
+        </Button>
+      </Flex>
+      <Flex>
+        {dialogs.map(dialog => (
+          <Dialog
             alertStyle={dialog.alertStyle}
             key={dialog.status}
             onClose={dialog.toggle}
@@ -82,36 +70,21 @@ const DialogStackedAlert = () => {
             status={dialog.status}
             text={dialog.text}
             title={dialog.title}
-        >
-        <Dialog.Footer
-            padding="sm"
-            paddingBottom = "none"
-            paddingX="md"
-        >
-          <Button
-              fullWidth
-              onClick={dialog.toggle}
           >
-            {dialog.buttonOneText}
-          </Button>
-        </Dialog.Footer>
-        <Dialog.Footer
-            padding="sm"
-            paddingBottom = "md"
-            paddingX="md"
-        >
-          <Button
-              fullWidth
-              onClick={dialog.toggle}
-              variant="secondary"
-          >
-            {dialog.buttonTwoText}
-          </Button>
-        </Dialog.Footer>
-        </Dialog>
-      ))}
-    </Flex>
-  </div>
+            <Dialog.Footer padding="sm" paddingBottom="none" paddingX="md">
+              <Button fullWidth onClick={dialog.toggle}>
+                {dialog.buttonOneText}
+              </Button>
+            </Dialog.Footer>
+            <Dialog.Footer padding="sm" paddingBottom="md" paddingX="md">
+              <Button fullWidth onClick={dialog.toggle} variant="secondary">
+                {dialog.buttonTwoText}
+              </Button>
+            </Dialog.Footer>
+          </Dialog>
+        ))}
+      </Flex>
+    </div>
   )
 }
 

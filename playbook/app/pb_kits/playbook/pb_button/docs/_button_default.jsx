@@ -1,38 +1,38 @@
 import React from "react"
 import { Button } from "../../"
 
-const ButtonDefault = (props) => (
+const ButtonDefault = props => (
   <div>
     <Button
-        marginRight='lg'
-        onClick={() => alert("button clicked!")}
-        tabIndex={0}
-        text='Button Primary'
-        {...props}
+      marginRight="lg"
+      onClick={() => alert("button clicked!")}
+      tabIndex={0}
+      text="Button Primary"
+      {...props}
     />{" "}
     <Button
-        marginRight='lg'
-        onClick={() => alert("button clicked!")}
-        tabIndex={0}
-        text='Button Secondary'
-        variant='secondary'
-        {...props}
+      marginRight="lg"
+      onClick={() => alert("button clicked!")}
+      tabIndex={0}
+      text="Button Secondary"
+      variant="secondary"
+      {...props}
     />{" "}
     <Button
-        marginRight='lg'
-        onClick={() => alert("button clicked!")}
-        tabIndex={0}
-        text='Button Link'
-        variant='link'
-        {...props}
+      marginRight="lg"
+      onClick={() => alert("button clicked!")}
+      tabIndex={0}
+      text="Button Link"
+      variant="link"
+      {...props}
     />
     <Button
-        disabled
-        marginRight='lg'
-        onClick={() => alert("button clicked!")}
-        tabIndex={0}
-        text='Button Disabled'
-        {...props}
+      disabled
+      marginRight="lg"
+      onClick={() => alert("button clicked!")}
+      tabIndex={0}
+      text="Button Disabled"
+      {...props}
     />
   </div>
 )

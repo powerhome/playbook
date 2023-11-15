@@ -1,23 +1,23 @@
-import React from 'react'
-import Select from 'react-select'
-import AsyncSelect from 'react-select/async'
-import CreateableSelect from 'react-select/creatable'
-import AsyncCreateableSelect from 'react-select/async-creatable'
-import { get, isString, uniqueId } from 'lodash'
-import { globalProps } from '../utilities/globalProps'
-import classnames from 'classnames'
+import React from "react"
+import Select from "react-select"
+import AsyncSelect from "react-select/async"
+import CreateableSelect from "react-select/creatable"
+import AsyncCreateableSelect from "react-select/async-creatable"
+import { get, isString, uniqueId } from "lodash"
+import { globalProps } from "../utilities/globalProps"
+import classnames from "classnames"
 
-import Control from './components/Control'
-import ClearIndicator from './components/ClearIndicator'
-import IndicatorsContainer from './components/IndicatorsContainer'
-import MenuList from './components/MenuList'
-import MultiValue from './components/MultiValue'
-import Option from './components/Option'
-import Placeholder from './components/Placeholder'
-import ValueContainer from './components/ValueContainer'
+import Control from "./components/Control"
+import ClearIndicator from "./components/ClearIndicator"
+import IndicatorsContainer from "./components/IndicatorsContainer"
+import MenuList from "./components/MenuList"
+import MultiValue from "./components/MultiValue"
+import Option from "./components/Option"
+import Placeholder from "./components/Placeholder"
+import ValueContainer from "./components/ValueContainer"
 
-import { noop, buildDataProps } from '../utilities/props'
-import { Noop } from '../types'
+import { noop, buildDataProps } from "../utilities/props"
+import { Noop } from "../types"
 
 /**
  * @typedef {object} Props
@@ -27,31 +27,31 @@ import { Noop } from '../types'
  */
 
 type TypeaheadProps = {
-  async?: boolean,
-  className?: string,
-  components?: object,
-  createable?: boolean,
-  dark?: boolean,
-  data?: { [key: string]: string },
-  error?: string,
-  id?: string,
-  label?: string,
-  loadOptions?: string | Noop,
-  getOptionLabel?: string | (() => any),
-  getOptionValue?: string | (() => any),
-  name?: string,
+  async?: boolean
+  className?: string
+  components?: object
+  createable?: boolean
+  dark?: boolean
+  data?: { [key: string]: string }
+  error?: string
+  id?: string
+  label?: string
+  loadOptions?: string | Noop
+  getOptionLabel?: string | (() => any)
+  getOptionValue?: string | (() => any)
+  name?: string
 }
 
 export type SelectValueType = {
-  label: string,
-  value: string,
-  imageUrl?: string,
+  label: string
+  value: string
+  imageUrl?: string
 }
 
 type TagOnChangeValues = {
-  action?: string,
-  option?: SelectValueType,
-  removedValue?: string,
+  action?: string
+  option?: SelectValueType
+  removedValue?: string
 }
 
 /**
@@ -84,59 +84,74 @@ const Typeahead = ({
       Option,
       Placeholder,
       ValueContainer,
-      ...components
+      ...components,
     },
     loadOptions: isString(loadOptions) ? get(window, loadOptions) : loadOptions,
-    getOptionLabel: isString(getOptionLabel) ? get(window, getOptionLabel) : getOptionLabel,
-    getOptionValue: isString(getOptionValue) ? get(window, getOptionValue) : getOptionValue,
+    getOptionLabel: isString(getOptionLabel)
+      ? get(window, getOptionLabel)
+      : getOptionLabel,
+    getOptionValue: isString(getOptionValue)
+      ? get(window, getOptionValue)
+      : getOptionValue,
     defaultOptions: true,
     id: id || uniqueId(),
     inline: false,
     isClearable: true,
     isSearchable: true,
     name,
-    multiKit: '',
+    multiKit: "",
     onCreateOption: null as null,
     plusIcon: false,
-    onMultiValueClick: (_option: SelectValueType) => { },
+    onMultiValueClick: (_option: SelectValueType) => {},
     ...props,
   }
 
-  const Tag = (
-    createable
-      ? (async ? AsyncCreateableSelect : CreateableSelect)
-      : (async ? AsyncSelect : Select)
-  )
+  const Tag = createable
+    ? async
+      ? AsyncCreateableSelect
+      : CreateableSelect
+    : async
+      ? AsyncSelect
+      : Select
 
-  const handleOnChange = (_data: SelectValueType, { action, option, removedValue }: TagOnChangeValues) => {
-    if (action === 'select-option') {
+  const handleOnChange = (
+    _data: SelectValueType,
+    { action, option, removedValue }: TagOnChangeValues
+  ) => {
+    if (action === "select-option") {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
-      const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option ? option : _data })
+      const multiValueClearEvent = new CustomEvent(
+        `pb-typeahead-kit-${selectProps.id}-result-option-select`,
+        { detail: option ? option : _data }
+      )
       document.dispatchEvent(multiValueClearEvent)
     }
-    if (action === 'remove-value' || action === 'pop-value') {
-      const multiValueRemoveEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-remove`, { detail: removedValue })
+    if (action === "remove-value" || action === "pop-value") {
+      const multiValueRemoveEvent = new CustomEvent(
+        `pb-typeahead-kit-${selectProps.id}-result-option-remove`,
+        { detail: removedValue }
+      )
       document.dispatchEvent(multiValueRemoveEvent)
     }
-    if (action === 'clear') {
-      const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-clear`)
+    if (action === "clear") {
+      const multiValueClearEvent = new CustomEvent(
+        `pb-typeahead-kit-${selectProps.id}-result-clear`
+      )
       document.dispatchEvent(multiValueClearEvent)
     }
   }
 
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    'pb_typeahead_kit react-select',
+    "pb_typeahead_kit react-select",
     globalProps(props),
     className
   )
 
-  const inlineClass = selectProps.inline ? 'inline' : null
+  const inlineClass = selectProps.inline ? "inline" : null
 
   return (
-    <div {...dataProps}
-      className={classnames(classes, inlineClass)}
-    >
+    <div {...dataProps} className={classnames(classes, inlineClass)}>
       <Tag
         classNamePrefix="typeahead-kit-select"
         error={error}

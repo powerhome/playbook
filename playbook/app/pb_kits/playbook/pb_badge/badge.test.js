@@ -1,74 +1,49 @@
-import React from 'react'
-import { cleanup, render, screen } from '../utilities/test-utils'
+import React from "react"
+import { cleanup, render, screen } from "../utilities/test-utils"
 
-import Badge from './_badge'
+import Badge from "./_badge"
 
 const testId = "badge"
 
-test('default class name', () => {
-  render(
-    <Badge
-        data={{ testid: testId }}
-        text="+1"
-    />
-  )
+test("default class name", () => {
+  render(<Badge data={{ testid: testId }} text="+1" />)
 
   const kit = screen.getByTestId(testId)
 
-  expect(kit).toHaveClass('pb_badge_kit_neutral')
+  expect(kit).toHaveClass("pb_badge_kit_neutral")
 })
 
-test('primary class name', () => {
-  render(
-    <Badge
-        data={{ testid: testId }}
-        text="+1"
-        variant="primary"
-    />
-  )
+test("primary class name", () => {
+  render(<Badge data={{ testid: testId }} text="+1" variant="primary" />)
 
   const kit = screen.getByTestId(testId)
 
-  expect(kit).toHaveClass('pb_badge_kit_primary')
+  expect(kit).toHaveClass("pb_badge_kit_primary")
 })
 
-test('displays text content', () => {
-  render(
-    <Badge
-        text="+1"
-        variant="primary"
-    />
-  )
+test("displays text content", () => {
+  render(<Badge text="+1" variant="primary" />)
 
   const text = screen.getByText("+1")
   expect(text).toBeInTheDocument()
 })
 
-test('displays rounded corners', () => {
+test("displays rounded corners", () => {
   render(
-    <Badge
-        data={{ testid: testId }}
-        rounded
-        text="+1"
-        variant="primary"
-    />
+    <Badge data={{ testid: testId }} rounded text="+1" variant="primary" />
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit).toHaveClass('pb_badge_kit_primary_rounded')
+  expect(kit).toHaveClass("pb_badge_kit_primary_rounded")
 })
 
-test('displays color variants', () => {
-  [
-    "warning",
-    "error",
-    "info"
-  ].forEach((colorVariant) => {
+test("displays color variants", () => {
+  ;["warning", "error", "info"].forEach(colorVariant => {
     render(
       <Badge
-          data={{ testid: testId }}
-          text={colorVariant}
-          variant={colorVariant}
+        data={{ testid: testId }}
+        text={colorVariant}
+        variant={colorVariant}
       />
     )
     const kit = screen.getByTestId(testId)
@@ -78,30 +53,19 @@ test('displays color variants', () => {
   })
 })
 
-test('displays success variant', () => {
-    render(
-      <Badge
-          data={{ testid: testId }}
-          text={"success"}
-          variant={"success"}
-      />
-    )
-    const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass(`pb_badge_kit_success_sm
+test("displays success variant", () => {
+  render(
+    <Badge data={{ testid: testId }} text={"success"} variant={"success"} />
+  )
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass(`pb_badge_kit_success_sm
     `)
 
-    cleanup()
-
+  cleanup()
 })
 
-test('displays notification variant', () => {
-  render(
-    <Badge
-        data={{ testid: testId }}
-        text="1"
-        variant="notification"
-    />
-  )
+test("displays notification variant", () => {
+  render(<Badge data={{ testid: testId }} text="1" variant="notification" />)
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveClass(`pb_badge_kit_notification`)
   cleanup()

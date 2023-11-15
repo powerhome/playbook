@@ -1,1 +1,1 @@
-The color prop also allows for use of custom colors passed in as HEX codes. 
+The color prop also allows for use of custom colors passed in as HEX codes.

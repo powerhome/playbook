@@ -1,5 +1,5 @@
-import PbEnhancedElement from '../pb_enhanced_element'
-import { createPopper, Instance, Placement } from '@popperjs/core'
+import PbEnhancedElement from "../pb_enhanced_element"
+import { createPopper, Instance, Placement } from "@popperjs/core"
 
 const POPOVER_OFFSET_Y = [0, 20]
 
@@ -9,21 +9,21 @@ export default class PbPopover extends PbEnhancedElement {
   _tooltip: HTMLElement
   element: HTMLElement
   static get selector() {
-    return '[data-pb-popover-kit]'
+    return "[data-pb-popover-kit]"
   }
 
   moveTooltip() {
-    document.querySelector('body').appendChild(this.tooltip)
+    document.querySelector("body").appendChild(this.tooltip)
   }
 
   connect() {
     this.moveTooltip()
-    this.popper = createPopper (this.triggerElement, this.tooltip, {
+    this.popper = createPopper(this.triggerElement, this.tooltip, {
       placement: this.position as Placement,
-      strategy: 'fixed',
+      strategy: "fixed",
       modifiers: [
         {
-          name: 'offset',
+          name: "offset",
           options: {
             offset: this.offset,
           },
@@ -31,11 +31,11 @@ export default class PbPopover extends PbEnhancedElement {
       ],
     })
 
-    this.triggerElement.addEventListener('click', (event: Event) => {
+    this.triggerElement.addEventListener("click", (event: Event) => {
       event.preventDefault()
       event.stopPropagation()
 
-      if (!this.tooltip.classList.contains('show')) {
+      if (!this.tooltip.classList.contains("show")) {
         this.checkCloseTooltip()
       }
 
@@ -47,46 +47,55 @@ export default class PbPopover extends PbEnhancedElement {
   }
 
   checkCloseTooltip() {
-    document.querySelector('body').addEventListener('click', ({ target } ) => {
-      const isTooltipElement = (target as HTMLElement).closest(`#${this.tooltipId}`) !== null
-      const isTriggerElement = (target as HTMLElement).closest(`#${this.triggerElementId}`) !== null
+    document.querySelector("body").addEventListener(
+      "click",
+      ({ target }) => {
+        const isTooltipElement =
+          (target as HTMLElement).closest(`#${this.tooltipId}`) !== null
+        const isTriggerElement =
+          (target as HTMLElement).closest(`#${this.triggerElementId}`) !== null
 
-      switch (this.closeOnClick) {
-      case 'any':
-        if (isTooltipElement || !isTooltipElement && !isTriggerElement) {
-          this.hideTooltip()
+        switch (this.closeOnClick) {
+          case "any":
+            if (isTooltipElement || (!isTooltipElement && !isTriggerElement)) {
+              this.hideTooltip()
+            }
+            break
+          case "outside":
+            if (!isTooltipElement && !isTriggerElement) {
+              this.hideTooltip()
+            }
+            break
+          case "inside":
+            if (isTooltipElement) {
+              this.hideTooltip()
+            }
+            break
         }
-        break
-      case 'outside':
-        if (!isTooltipElement && !isTriggerElement) {
-          this.hideTooltip()
-        }
-        break
-      case 'inside':
-        if (isTooltipElement) {
-          this.hideTooltip()
-        }
-        break
-      }
-    }, true)
+      },
+      true
+    )
   }
 
   hideTooltip() {
-    this.tooltip.classList.remove('show')
-    this.tooltip.classList.add('hide')
+    this.tooltip.classList.remove("show")
+    this.tooltip.classList.add("hide")
   }
 
   toggleTooltip() {
-    this.tooltip.classList.toggle('show')
-    this.tooltip.classList.toggle('hide')
+    this.tooltip.classList.toggle("show")
+    this.tooltip.classList.toggle("hide")
   }
 
   get triggerElement() {
-    return this._triggerElement = (this._triggerElement || document.querySelector(`#${this.triggerElementId}`))
+    return (this._triggerElement =
+      this._triggerElement ||
+      document.querySelector(`#${this.triggerElementId}`))
   }
 
   get tooltip() {
-    return this._tooltip = (this._tooltip || this.element.querySelector(`#${this.tooltipId}`))
+    return (this._tooltip =
+      this._tooltip || this.element.querySelector(`#${this.tooltipId}`))
   }
 
   get position() {
@@ -102,7 +111,9 @@ export default class PbPopover extends PbEnhancedElement {
   }
 
   get offset() {
-    return this.element.dataset.pbPopoverOffset === 'true' ? POPOVER_OFFSET_Y : [0, 0]
+    return this.element.dataset.pbPopoverOffset === "true"
+      ? POPOVER_OFFSET_Y
+      : [0, 0]
   }
 
   get closeOnClick() {

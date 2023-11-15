@@ -1,16 +1,16 @@
-import React from 'react'
-import DatePicker from '../_date_picker'
+import React from "react"
+import DatePicker from "../_date_picker"
 
-const DatePickerQuickPickRangeLimit = (props) => (
+const DatePickerQuickPickRangeLimit = props => (
   <>
     <DatePicker
-        allowInput
-        mode="range"
-        pickerId="thisRangesEndToday"
-        placeholder="mm/dd/yyyy to mm/dd/yyyy"
-        selectionType="quickpick"
-        thisRangesEndToday
-        {...props}
+      allowInput
+      mode="range"
+      pickerId="thisRangesEndToday"
+      placeholder="mm/dd/yyyy to mm/dd/yyyy"
+      selectionType="quickpick"
+      thisRangesEndToday
+      {...props}
     />
   </>
 )

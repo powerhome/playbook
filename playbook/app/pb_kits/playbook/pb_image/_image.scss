@@ -9,12 +9,12 @@ $image-sizes: (
   "xl": 140px,
 );
 
-[class^=pb_image_kit] {
+[class^="pb_image_kit"] {
   position: relative;
   object-fit: cover;
 
   @each $name, $size in $image-sizes {
-    &[class*=size_#{$name}] {
+    &[class*="size_#{$name}"] {
       width: $size;
       height: $size;
       object-fit: cover;
@@ -24,7 +24,7 @@ $image-sizes: (
       flex-basis: $size;
     }
 
-    &[class*= rounded] {
+    &[class*="rounded"] {
       border-radius: $border-rad-heaviest;
     }
 

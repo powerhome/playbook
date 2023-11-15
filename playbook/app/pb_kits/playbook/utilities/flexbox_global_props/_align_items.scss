@@ -8,4 +8,8 @@ $align_items_values: (
   stretch: stretch,
 );
 
-@include global_props_responsive_css($align_items_values, 'align_items', 'align-items');
+@include global_props_responsive_css(
+  $align_items_values,
+  "align_items",
+  "align-items"
+);

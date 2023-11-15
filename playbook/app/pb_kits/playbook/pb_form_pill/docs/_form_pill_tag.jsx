@@ -1,15 +1,15 @@
-import React from 'react'
-import FormPill from '../_form_pill'
+import React from "react"
+import FormPill from "../_form_pill"
 
-const FormPillDefault = (props) => {
+const FormPillDefault = props => {
   return (
     <div>
       <FormPill
-          onClick={() => {
-alert('Click!')
-}}
-          text="this is a tag"
-          {...props}
+        onClick={() => {
+          alert("Click!")
+        }}
+        text="this is a tag"
+        {...props}
       />
     </div>
   )

@@ -9,7 +9,7 @@ VStack(alignment: .leading, spacing: Spacing.small) {
   PBCard(backgroundColor: .background(.light)) {
     Text("Light").pbFont(.body, color: .text(.light))
   }
-        
+
   PBCard(backgroundColor: .background(.dark)) {
     Text("Dark").pbFont(.body, color: .text(.light))
   }

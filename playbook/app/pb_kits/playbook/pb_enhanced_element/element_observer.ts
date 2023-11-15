@@ -13,12 +13,19 @@ export default class ElementObserver {
   }
 
   get mutationObserver(): MutationObserver {
-    return this._mutationObserver =
-      this._mutationObserver || new MutationObserver((mutationList) => this.processMutationList(mutationList))
+    return (this._mutationObserver =
+      this._mutationObserver ||
+      new MutationObserver(mutationList =>
+        this.processMutationList(mutationList)
+      ))
   }
 
   start(): void {
-    this.mutationObserver.observe(this.target, { attributes: true, childList: true, subtree: true })
+    this.mutationObserver.observe(this.target, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+    })
     this.catchup()
   }
 
@@ -27,16 +34,22 @@ export default class ElementObserver {
   }
 
   catchup(): void {
-    this.handleAdditions(this.matchDelegate.matches(this.target as unknown as Element))
+    this.handleAdditions(
+      this.matchDelegate.matches(this.target as unknown as Element)
+    )
   }
 
   processMutationList(mutationList: Array<MutationRecord>): void {
     for (const mutation of mutationList) {
-      if (mutation.type == 'attributes') {
+      if (mutation.type == "attributes") {
         this.processAttributeChange(mutation.target as Element)
-      } else if (mutation.type == 'childList') {
-        this.processRemovedNodes(Array.from(mutation.removedNodes) as Array<Element>)
-        this.processAddedNodes(Array.from(mutation.addedNodes) as Array<Element>)
+      } else if (mutation.type == "childList") {
+        this.processRemovedNodes(
+          Array.from(mutation.removedNodes) as Array<Element>
+        )
+        this.processAddedNodes(
+          Array.from(mutation.addedNodes) as Array<Element>
+        )
       }
     }
   }

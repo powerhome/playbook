@@ -1,37 +1,36 @@
-import React, { useState } from 'react'
-import SelectableIcon from '../_selectable_icon'
+import React, { useState } from "react"
+import SelectableIcon from "../_selectable_icon"
 
 const SelectableIconDefault = () => {
-  const [ checkSelected, toggleSelected ] = useState(true)
-  const [ checkUnselected, toggleUnselected ] = useState(false)
-  const [ checkDisabled, toggleDisabled ] = useState(false)
+  const [checkSelected, toggleSelected] = useState(true)
+  const [checkUnselected, toggleUnselected] = useState(false)
+  const [checkDisabled, toggleDisabled] = useState(false)
 
   return (
-
     <div className="pb--doc-demo-row">
       <SelectableIcon
-          checked={checkSelected}
-          icon="dollar-sign"
-          inputId={10}
-          onChange={() => toggleSelected(!checkSelected)}
-          text="US Dollar"
+        checked={checkSelected}
+        icon="dollar-sign"
+        inputId={10}
+        onChange={() => toggleSelected(!checkSelected)}
+        text="US Dollar"
       />
 
       <SelectableIcon
-          checked={checkUnselected}
-          icon="euro-sign"
-          inputId={11}
-          onChange={() => toggleUnselected(!checkUnselected)}
-          text="Euro"
+        checked={checkUnselected}
+        icon="euro-sign"
+        inputId={11}
+        onChange={() => toggleUnselected(!checkUnselected)}
+        text="Euro"
       />
 
       <SelectableIcon
-          checked={checkDisabled}
-          disabled
-          icon="yen-sign"
-          inputId={12}
-          onChange={() => toggleDisabled(!checkDisabled)}
-          text="Yen"
+        checked={checkDisabled}
+        disabled
+        icon="yen-sign"
+        inputId={12}
+        onChange={() => toggleDisabled(!checkDisabled)}
+        text="Yen"
       />
     </div>
   )

@@ -1,13 +1,10 @@
-import React from 'react'
+import React from "react"
 
-import DatePicker from '../_date_picker'
+import DatePicker from "../_date_picker"
 
-const DatePickerDefault = (props) => (
+const DatePickerDefault = props => (
   <div>
-    <DatePicker
-        pickerId="date-picker-default"
-        {...props}
-    />
+    <DatePicker pickerId="date-picker-default" {...props} />
   </div>
 )
 

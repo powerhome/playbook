@@ -10,7 +10,7 @@
 $pb_selectable_card_indicator_size: 22px;
 $pb_selectable_card_border: 2px;
 
-[class^=pb_selectable_card_kit] {
+[class^="pb_selectable_card_kit"] {
   display: block;
   margin-bottom: 0;
 
@@ -29,7 +29,7 @@ $pb_selectable_card_border: 2px;
     margin-bottom: $space_sm;
     cursor: pointer;
 
-    @media (hover:hover) {
+    @media (hover: hover) {
       &:hover {
         box-shadow: $shadow-deep;
         border-color: $slate;
@@ -42,7 +42,8 @@ $pb_selectable_card_border: 2px;
       align-items: center;
       height: $pb_selectable_card_indicator_size;
       width: $pb_selectable_card_indicator_size;
-      border-radius: ($pb_selectable_card_indicator_size/2) + ($pb_selectable_card_border/2);
+      border-radius: ($pb_selectable_card_indicator_size/2) +
+        ($pb_selectable_card_border/2);
       border-width: $pb_selectable_card_border;
       border-style: solid;
       border-color: $white;
@@ -65,7 +66,6 @@ $pb_selectable_card_border: 2px;
     display: none;
 
     &:checked {
-
       ~ label {
         > .buffer {
           padding: 0;
@@ -111,14 +111,14 @@ $pb_selectable_card_border: 2px;
     }
 
     .separator {
-      background: rgba($white,.1);
+      background: rgba($white, 0.1);
     }
 
     &.error {
       > label {
         border-color: $error_dark;
       }
-      .separator{
+      .separator {
         background: $error_dark;
       }
     }

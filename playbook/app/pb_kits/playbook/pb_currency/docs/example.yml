@@ -1,19 +1,18 @@
 examples:
-
   rails:
-  - currency_variants: Variants
-  - currency_size: Size
-  - currency_alignment: Alignment
-  - currency_no_symbol: No Symbol
-  - currency_abbreviated: Abbreviate Larger Amounts
-  - currency_matching_decimals: Matching Decimals
-  - currency_unstyled: Unstyled
+    - currency_variants: Variants
+    - currency_size: Size
+    - currency_alignment: Alignment
+    - currency_no_symbol: No Symbol
+    - currency_abbreviated: Abbreviate Larger Amounts
+    - currency_matching_decimals: Matching Decimals
+    - currency_unstyled: Unstyled
 
   react:
-  - currency_variants: Variants
-  - currency_size: Size
-  - currency_alignment: Alignment
-  - currency_no_symbol: No Symbol
-  - currency_abbreviated: Abbreviate Larger Amounts
-  - currency_matching_decimals: Matching Decimals
-  - currency_unstyled: Unstyled
+    - currency_variants: Variants
+    - currency_size: Size
+    - currency_alignment: Alignment
+    - currency_no_symbol: No Symbol
+    - currency_abbreviated: Abbreviate Larger Amounts
+    - currency_matching_decimals: Matching Decimals
+    - currency_unstyled: Unstyled

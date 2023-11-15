@@ -1,20 +1,13 @@
-import React from 'react'
+import React from "react"
 
-import Textarea from '../_textarea'
+import Textarea from "../_textarea"
 
-const TextareaCustom = (props) => {
+const TextareaCustom = props => {
   return (
     <div>
-      <Textarea
-          label="Label"
-          {...props}
-      >
-        <textarea
-            className="my_custom_class"
-            name="custom_textarea"
-            rows={4}
-        >
-          {'Content goes here.'}
+      <Textarea label="Label" {...props}>
+        <textarea className="my_custom_class" name="custom_textarea" rows={4}>
+          {"Content goes here."}
         </textarea>
       </Textarea>
     </div>

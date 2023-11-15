@@ -1,32 +1,18 @@
-import React from 'react'
-import { StatChange } from '../../'
+import React from "react"
+import { StatChange } from "../../"
 
-const StatChangeUnitTwo = (props) => {
+const StatChangeUnitTwo = props => {
   return (
     <div>
-      <StatChange
-          change="increase"
-          icon="level-up"
-          value="28.4"
-          {...props}
-      />
+      <StatChange change="increase" icon="level-up" value="28.4" {...props} />
 
       <br />
 
-      <StatChange
-          change="decrease"
-          icon="level-down"
-          value={6.1}
-          {...props}
-      />
+      <StatChange change="decrease" icon="level-down" value={6.1} {...props} />
 
       <br />
 
-      <StatChange
-          change="neutral"
-          value={102}
-          {...props}
-      />
+      <StatChange change="neutral" value={102} {...props} />
     </div>
   )
 }

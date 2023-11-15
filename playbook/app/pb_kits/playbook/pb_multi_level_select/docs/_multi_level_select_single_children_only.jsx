@@ -1,5 +1,5 @@
-import React from "react";
-import MultiLevelSelect from "../_multi_level_select";
+import React from "react"
+import MultiLevelSelect from "../_multi_level_select"
 
 const treeData = [
   {
@@ -28,7 +28,7 @@ const treeData = [
         value: "Warehouse PHL",
         id: "warehousePHL1",
       },
-    ]
+    ],
   },
   {
     label: "New Jersey",
@@ -80,9 +80,9 @@ const treeData = [
             value: "Warehouse Princeton",
             id: "warehousePR1",
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   {
     label: "Maryland",
@@ -105,7 +105,7 @@ const treeData = [
         value: "Warehouse MD",
         id: "warehouseMD1",
       },
-    ]
+    ],
   },
   {
     label: "Connecticut",
@@ -128,23 +128,23 @@ const treeData = [
         value: "Warehouse CT",
         id: "warehouseCT1",
       },
-    ]
+    ],
   },
-];
+]
 
-const MultiLevelSelectSingleChildrenOnly = (props) => {
+const MultiLevelSelectSingleChildrenOnly = props => {
   return (
     <div>
       <MultiLevelSelect
-          id="multiselect-single-children-only"
-          inputName="PowerChildren"
-          onSelect={(selectedNode) => console.log("Selected Node", selectedNode)}
-          treeData={treeData}
-          variant="single"
-          {...props}
+        id="multiselect-single-children-only"
+        inputName="PowerChildren"
+        onSelect={selectedNode => console.log("Selected Node", selectedNode)}
+        treeData={treeData}
+        variant="single"
+        {...props}
       />
     </div>
   )
-};
+}
 
-export default MultiLevelSelectSingleChildrenOnly;
+export default MultiLevelSelectSingleChildrenOnly

@@ -1,4 +1,5 @@
 ##### Prop
+
 This kit uses the `light` color by default, and can be replaced with colors below:
 
 `default` `lighter` `link` `error` `success`

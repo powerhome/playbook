@@ -14,53 +14,51 @@ $breakpoints: (
   sm: $screen-sm-min,
   md: $screen-md-min,
   lg: $screen-lg-min,
-  xl: $screen-xl-min
+  xl: $screen-xl-min,
 );
 
 $breakpoints_grid: (
-    xs: (
-        max: $screen-xs-min
-    ),
-    sm: (
-        min: $screen-sm-min,
-        max: $screen-md-max
-    ),
-    md: (
-        min: $screen-md-min,
-        max: $screen-lg-max
-    ),
-    lg: (
-        min: $screen-lg-min,
-        max: $screen-xl-max
-    ),
-    xl: (
-        min: $screen-xl-min,
-    )
+  xs: (
+    max: $screen-xs-min,
+  ),
+  sm: (
+    min: $screen-sm-min,
+    max: $screen-md-max,
+  ),
+  md: (
+    min: $screen-md-min,
+    max: $screen-lg-max,
+  ),
+  lg: (
+    min: $screen-lg-min,
+    max: $screen-xl-max,
+  ),
+  xl: (
+    min: $screen-xl-min,
+  ),
 );
 
 $breakpoints_max_only: (
-    xl: (
-        max: $screen-xl-max
-    ),
-    lg: (
-        max: $screen-lg-max
-    ),
-    md: (
-        max: $screen-md-max
-    ),
-    sm: (
-        max: $screen-sm-max
-    ),
-    xs: (
-        max: $screen-xs-max,
-    )
+  xl: (
+    max: $screen-xl-max,
+  ),
+  lg: (
+    max: $screen-lg-max,
+  ),
+  md: (
+    max: $screen-md-max,
+  ),
+  sm: (
+    max: $screen-sm-max,
+  ),
+  xs: (
+    max: $screen-xs-max,
+  ),
 );
-
 
 @function breakpoint($breakpoint_name) {
   @return map-get($breakpoints, $breakpoint_name);
 }
-
 
 @mixin break_at($size) {
   @media screen and (max-width: $size) {

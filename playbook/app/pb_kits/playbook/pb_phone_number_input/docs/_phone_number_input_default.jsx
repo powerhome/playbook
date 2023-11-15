@@ -1,12 +1,10 @@
-import React from 'react'
-import { PhoneNumberInput } from '../../'
+import React from "react"
+import { PhoneNumberInput } from "../../"
 
-const PhoneNumberInputDefault = (props) => (
-    <>
-        <PhoneNumberInput
-            id='default'
-            {...props} />
-    </>
+const PhoneNumberInputDefault = props => (
+  <>
+    <PhoneNumberInput id="default" {...props} />
+  </>
 )
 
 export default PhoneNumberInputDefault

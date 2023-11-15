@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from "react";
-import classnames from "classnames";
-import { globalProps } from "../utilities/globalProps";
-import { buildAriaProps, buildDataProps } from "../utilities/props";
+import React, { useState, useEffect } from "react"
+import classnames from "classnames"
+import { globalProps } from "../utilities/globalProps"
+import { buildAriaProps, buildDataProps } from "../utilities/props"
 
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
-import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
-import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
-import mapColors from "../pb_dashboard/pbChartsColorsHelper";
+import HighchartsReact from "highcharts-react-official"
+import Highcharts from "highcharts"
+import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme"
+import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme"
+import mapColors from "../pb_dashboard/pbChartsColorsHelper"
 
 type LineGraphProps = {
-  align?: "left" | "right" | "center";
-  axisTitle?: string;
-  dark?: Boolean;
-  xAxisCategories: [];
-  yAxisMin: number;
-  yAxisMax: number;
-  className?: string;
+  align?: "left" | "right" | "center"
+  axisTitle?: string
+  dark?: Boolean
+  xAxisCategories: []
+  yAxisMin: number
+  yAxisMax: number
+  className?: string
   chartData: {
-    name: string;
-    data: number[];
-  }[];
-  gradient?: boolean;
-  id: string;
-  pointStart: number;
-  subTitle?: string;
-  title: string;
-  type?: string;
-  legend?: boolean;
-  toggleLegendClick?: boolean;
-  height?: string;
-  colors: string[];
-  layout?: "horizontal" | "vertical" | "proximate";
-  verticalAlign?: "top" | "middle" | "bottom";
-  x?: number;
-  y?: number;
-  aria?: { [key: string]: string };
-  data?: { [key: string]: string };
-};
+    name: string
+    data: number[]
+  }[]
+  gradient?: boolean
+  id: string
+  pointStart: number
+  subTitle?: string
+  title: string
+  type?: string
+  legend?: boolean
+  toggleLegendClick?: boolean
+  height?: string
+  colors: string[]
+  layout?: "horizontal" | "vertical" | "proximate"
+  verticalAlign?: "top" | "middle" | "bottom"
+  x?: number
+  y?: number
+  aria?: { [key: string]: string }
+  data?: { [key: string]: string }
+}
 
 const LineGraph = ({
   aria = {},
@@ -66,14 +66,14 @@ const LineGraph = ({
   colors = [],
   ...props
 }: LineGraphProps) => {
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const setupTheme = () => {
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
-      : Highcharts.setOptions(highchartsTheme);
-  };
-  setupTheme();
+      : Highcharts.setOptions(highchartsTheme)
+  }
+  setupTheme()
 
   const staticOptions = {
     title: {
@@ -119,17 +119,17 @@ const LineGraph = ({
     },
     series: chartData,
     credits: false,
-  };
-
-  if (!toggleLegendClick) {
-    staticOptions.plotOptions.series.events = { legendItemClick: () => false };
   }
 
-  const [options, setOptions] = useState({});
+  if (!toggleLegendClick) {
+    staticOptions.plotOptions.series.events = { legendItemClick: () => false }
+  }
+
+  const [options, setOptions] = useState({})
 
   useEffect(() => {
-    setOptions({ ...staticOptions });
-  }, [chartData]);
+    setOptions({ ...staticOptions })
+  }, [chartData])
 
   return (
     <HighchartsReact
@@ -142,7 +142,7 @@ const LineGraph = ({
       highcharts={Highcharts}
       options={options}
     />
-  );
-};
+  )
+}
 
-export default LineGraph;
+export default LineGraph

@@ -1,39 +1,39 @@
 // Forms
-import './pb_form/pb_form_validation'
+import "./pb_form/pb_form_validation"
 
 // Date Picker
-import datePickerHelper from './pb_date_picker/date_picker_helper'
+import datePickerHelper from "./pb_date_picker/date_picker_helper"
 window.datePickerHelper = datePickerHelper
 
 // Dialog
-import dialogHelper from './pb_dialog/dialogHelper'
+import dialogHelper from "./pb_dialog/dialogHelper"
 window.dialogHelper = dialogHelper
 
 // Lazy image loading
-import 'lazysizes'
+import "lazysizes"
 
-import PbCollapsible from './pb_collapsible'
+import PbCollapsible from "./pb_collapsible"
 PbCollapsible.start()
 
-import PbPopover from './pb_popover'
+import PbPopover from "./pb_popover"
 PbPopover.start()
 
-import PbTooltip from './pb_tooltip'
+import PbTooltip from "./pb_tooltip"
 PbTooltip.start()
 
-import PbFixedConfirmationToast from './pb_fixed_confirmation_toast'
+import PbFixedConfirmationToast from "./pb_fixed_confirmation_toast"
 PbFixedConfirmationToast.start()
 
-import PbTypeahead from './pb_typeahead'
+import PbTypeahead from "./pb_typeahead"
 PbTypeahead.start()
 
-import PbTable from './pb_table'
+import PbTable from "./pb_table"
 PbTable.start()
 
-import PbTextarea from './pb_textarea'
+import PbTextarea from "./pb_textarea"
 PbTextarea.start()
 
-import 'flatpickr'
+import "flatpickr"
 
 // React-Rendered Rails Kits =====
-import './playbook-rails-react-bindings'
+import "./playbook-rails-react-bindings"

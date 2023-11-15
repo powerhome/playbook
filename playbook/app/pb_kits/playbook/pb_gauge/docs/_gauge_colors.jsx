@@ -1,18 +1,11 @@
-import React from 'react'
-import { Gauge } from '../../'
+import React from "react"
+import { Gauge } from "../../"
 
-const data = [
-  { name: 'Name', value: 67 },
-]
+const data = [{ name: "Name", value: 67 }]
 
-const GaugeColors = (props) => (
+const GaugeColors = props => (
   <div>
-    <Gauge
-        chartData={data}
-        id="gauge-colors"
-        {...props}
-        colors={['data-7']}
-    />
+    <Gauge chartData={data} id="gauge-colors" {...props} colors={["data-7"]} />
   </div>
 )
 

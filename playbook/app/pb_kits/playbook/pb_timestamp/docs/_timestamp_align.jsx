@@ -1,5 +1,5 @@
-import React from 'react'
-import Timestamp from '../_timestamp'
+import React from "react"
+import Timestamp from "../_timestamp"
 
 const todaysDate = new Date()
 const futureYear = new Date().getFullYear() + 4
@@ -11,116 +11,71 @@ const minutes = new Date().getMinutes()
 const futureDate = new Date(futureYear, month, date, hours, minutes)
 const pastDate = new Date(pastYear, month, date, hours, minutes)
 
-const TimestampAlign = (props) => {
+const TimestampAlign = props => {
   return (
     <div>
       <Timestamp
-          align="left"
-          showDate={false}
-          timestamp={todaysDate}
-          {...props}
+        align="left"
+        showDate={false}
+        timestamp={todaysDate}
+        {...props}
       />
 
       <br />
 
-      <Timestamp
-          align="left"
-          showDate
-          timestamp={todaysDate}
-          {...props}
-      />
+      <Timestamp align="left" showDate timestamp={todaysDate} {...props} />
 
       <br />
 
-      <Timestamp
-          align="left"
-          showDate
-          timestamp={futureDate}
-          {...props}
-      />
+      <Timestamp align="left" showDate timestamp={futureDate} {...props} />
 
       <br />
 
-      <Timestamp
-          align="left"
-          showDate
-          timestamp={pastDate}
-          {...props}
-      />
+      <Timestamp align="left" showDate timestamp={pastDate} {...props} />
 
       <br />
       <br />
 
       <Timestamp
-          align="center"
-          showDate={false}
-          timestamp={todaysDate}
-          {...props}
+        align="center"
+        showDate={false}
+        timestamp={todaysDate}
+        {...props}
       />
 
       <br />
 
-      <Timestamp
-          align="center"
-          showDate
-          timestamp={todaysDate}
-          {...props}
-      />
+      <Timestamp align="center" showDate timestamp={todaysDate} {...props} />
 
       <br />
 
-      <Timestamp
-          align="center"
-          showDate
-          timestamp={futureDate}
-          {...props}
-      />
+      <Timestamp align="center" showDate timestamp={futureDate} {...props} />
 
       <br />
 
-      <Timestamp
-          align="center"
-          showDate
-          timestamp={pastDate}
-          {...props}
-      />
+      <Timestamp align="center" showDate timestamp={pastDate} {...props} />
 
       <br />
       <br />
 
       <Timestamp
-          align="right"
-          showDate={false}
-          timestamp={todaysDate}
-          {...props}
+        align="right"
+        showDate={false}
+        timestamp={todaysDate}
+        {...props}
       />
 
       <br />
 
-      <Timestamp
-          align="right"
-          showDate
-          timestamp={todaysDate}
-          {...props}
-      />
+      <Timestamp align="right" showDate timestamp={todaysDate} {...props} />
 
       <br />
 
-      <Timestamp
-          align="right"
-          showDate
-          timestamp={futureDate}
-          {...props}
-      />
+      <Timestamp align="right" showDate timestamp={futureDate} {...props} />
 
       <br />
 
-      <Timestamp
-          align="right"
-          showDate
-          timestamp={pastDate}
-          {...props}
-      />
+      <Timestamp align="right" showDate timestamp={pastDate} {...props} />
     </div>
   )
 }

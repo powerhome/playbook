@@ -1,5 +1,5 @@
-import React from 'react'
-import { ProgressSimple } from '../..'
+import React from "react"
+import { ProgressSimple } from "../.."
 
 const ProgressSimpleVariants = () => {
   return (
@@ -8,24 +8,15 @@ const ProgressSimpleVariants = () => {
 
       <br />
 
-      <ProgressSimple
-          percent={90}
-          variant="positive"
-      />
+      <ProgressSimple percent={90} variant="positive" />
 
       <br />
 
-      <ProgressSimple
-          percent={10}
-          variant="negative"
-      />
+      <ProgressSimple percent={10} variant="negative" />
 
       <br />
 
-      <ProgressSimple
-          percent={40}
-          variant="warning"
-      />
+      <ProgressSimple percent={40} variant="warning" />
     </div>
   )
 }

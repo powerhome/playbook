@@ -1,6 +1,6 @@
 @import "../tokens/colors";
 
-[class^=pb_distribution_bar] {
+[class^="pb_distribution_bar"] {
   $bar_colors: map-merge($data_colors, $status_colors);
   $small_bar: 8px;
   $large_bar: 36px;
@@ -11,7 +11,9 @@
     height: 100%;
     display: inline-block;
     @each $name, $color in $bar_colors {
-      &:nth-child(#{length($bar_colors)}n+#{index(($bar_colors), ($name $color))}) {
+      &:nth-child(
+          #{length($bar_colors)}n + #{index(($bar_colors), ($name $color))}
+        ) {
         background-color: $color;
       }
       &.color_#{$name} {
@@ -27,10 +29,10 @@
       border-bottom-right-radius: $large_bar;
     }
   }
-  &[class*=_sm] {
+  &[class*="_sm"] {
     height: $small_bar;
   }
-  &[class*=_lg] {
+  &[class*="_lg"] {
     height: $large_bar;
   }
 }

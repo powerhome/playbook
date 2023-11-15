@@ -14,8 +14,8 @@
   padding-left: $space_sm - 1;
   color: $text_lt_light;
   @media (hover: hover) {
-    &:hover{
-      background-color: rgba($focus_input_light,$opacity_5);
+    &:hover {
+      background-color: rgba($focus_input_light, $opacity_5);
     }
   }
   &.dark {

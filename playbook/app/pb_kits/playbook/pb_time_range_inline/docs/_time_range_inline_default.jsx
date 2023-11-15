@@ -1,79 +1,79 @@
-import React from 'react'
-import { TimeRangeInline } from '../../'
+import React from "react"
+import { TimeRangeInline } from "../../"
 
-const TimeRangeInlineDefault = (props) => (
+const TimeRangeInlineDefault = props => (
   <div>
     <TimeRangeInline
-        endTime="2012-08-02T17:49:29Z"
-        size="xs"
-        startTime="2012-08-02T15:49:29Z"
-        {...props}
+      endTime="2012-08-02T17:49:29Z"
+      size="xs"
+      startTime="2012-08-02T15:49:29Z"
+      {...props}
     />
     <br />
     <TimeRangeInline
-        endTime="2012-08-02T17:49:29Z"
-        size="sm"
-        startTime="2012-08-02T15:49:29Z"
-        {...props}
-    />
-    <br />
-    <br />
-    <TimeRangeInline
-        alignment="center"
-        endTime="2012-08-02T17:49:29Z"
-        size="xs"
-        startTime="2012-08-02T15:49:29Z"
-        timezone="true"
-        {...props}
-    />
-    <br />
-    <TimeRangeInline
-        alignment="center"
-        endTime="2012-08-02T17:49:29Z"
-        size="sm"
-        startTime="2012-08-02T15:49:29Z"
-        timezone="true"
-        {...props}
+      endTime="2012-08-02T17:49:29Z"
+      size="sm"
+      startTime="2012-08-02T15:49:29Z"
+      {...props}
     />
     <br />
     <br />
     <TimeRangeInline
-        alignment="center"
-        endTime="2012-08-02T17:49:29Z"
-        icon="true"
-        size="xs"
-        startTime="2012-08-02T15:49:29Z"
-        {...props}
+      alignment="center"
+      endTime="2012-08-02T17:49:29Z"
+      size="xs"
+      startTime="2012-08-02T15:49:29Z"
+      timezone="true"
+      {...props}
     />
     <br />
     <TimeRangeInline
-        alignment="center"
-        endTime="2012-08-02T17:49:29Z"
-        icon="true"
-        size="sm"
-        startTime="2012-08-02T15:49:29Z"
-        {...props}
+      alignment="center"
+      endTime="2012-08-02T17:49:29Z"
+      size="sm"
+      startTime="2012-08-02T15:49:29Z"
+      timezone="true"
+      {...props}
     />
     <br />
     <br />
     <TimeRangeInline
-        alignment="right"
-        endTime="2012-08-02T17:49:29Z"
-        icon="true"
-        size="xs"
-        startTime="2012-08-02T15:49:29Z"
-        timezone="true"
-        {...props}
+      alignment="center"
+      endTime="2012-08-02T17:49:29Z"
+      icon="true"
+      size="xs"
+      startTime="2012-08-02T15:49:29Z"
+      {...props}
     />
     <br />
     <TimeRangeInline
-        alignment="right"
-        endTime="2012-08-02T17:49:29Z"
-        icon="true"
-        size="sm"
-        startTime="2012-08-02T15:49:29Z"
-        timezone="true"
-        {...props}
+      alignment="center"
+      endTime="2012-08-02T17:49:29Z"
+      icon="true"
+      size="sm"
+      startTime="2012-08-02T15:49:29Z"
+      {...props}
+    />
+    <br />
+    <br />
+    <TimeRangeInline
+      alignment="right"
+      endTime="2012-08-02T17:49:29Z"
+      icon="true"
+      size="xs"
+      startTime="2012-08-02T15:49:29Z"
+      timezone="true"
+      {...props}
+    />
+    <br />
+    <TimeRangeInline
+      alignment="right"
+      endTime="2012-08-02T17:49:29Z"
+      icon="true"
+      size="sm"
+      startTime="2012-08-02T15:49:29Z"
+      timezone="true"
+      {...props}
     />
   </div>
 )

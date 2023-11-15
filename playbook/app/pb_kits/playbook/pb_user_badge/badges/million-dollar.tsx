@@ -6,10 +6,7 @@ const MillionDollar = () => (
     xmlSpace="preserve"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx={121.5}
-      cy={121.5}
-      r={121.5}
-    />
+    <circle cx={121.5} cy={121.5} r={121.5} />
     <linearGradient
       gradientUnits="userSpaceOnUse"
       id="a"

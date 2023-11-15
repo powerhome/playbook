@@ -40,7 +40,7 @@
 }
 @mixin pb_list_layout_grid {
   display: grid;
-  grid-template: auto / repeat(12,1fr);
+  grid-template: auto / repeat(12, 1fr);
   align-items: center;
 }
 @mixin pb_list_layout_left {

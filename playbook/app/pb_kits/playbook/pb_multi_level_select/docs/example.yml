@@ -1,15 +1,15 @@
 examples:
   rails:
-  - multi_level_select_default: Default
-  - multi_level_select_single: Single Select
-  - multi_level_select_single_children_only: Single Select w/ Hidden Radios
-  - multi_level_select_return_all_selected: Return All Selected
-  - multi_level_select_selected_ids: Selected Ids
-  - multi_level_select_with_form: With Form
+    - multi_level_select_default: Default
+    - multi_level_select_single: Single Select
+    - multi_level_select_single_children_only: Single Select w/ Hidden Radios
+    - multi_level_select_return_all_selected: Return All Selected
+    - multi_level_select_selected_ids: Selected Ids
+    - multi_level_select_with_form: With Form
 
   react:
-  - multi_level_select_default: Default
-  - multi_level_select_single: Single Select
-  - multi_level_select_single_children_only: Single Select w/ Hidden Radios
-  - multi_level_select_return_all_selected: Return All Selected
-  - multi_level_select_selected_ids: Selected Ids
+    - multi_level_select_default: Default
+    - multi_level_select_single: Single Select
+    - multi_level_select_single_children_only: Single Select w/ Hidden Radios
+    - multi_level_select_return_all_selected: Return All Selected
+    - multi_level_select_selected_ids: Selected Ids

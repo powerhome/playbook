@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
-import { Body, Caption, Passphrase, ProgressSimple, TextInput } from '../..'
-import zxcvbn from 'zxcvbn'
+import { Body, Caption, Passphrase, ProgressSimple, TextInput } from "../.."
+import zxcvbn from "zxcvbn"
 
-
-const PassphraseMeterSettings = (props) => {
-  const [input, setInput] = useState('')
+const PassphraseMeterSettings = props => {
+  const [input, setInput] = useState("")
   const [result, setResult] = useState({})
   const [calculatedStrength, setCalculatedStrength] = useState(0)
 
   const meterSettings = [
     {
-      label: "Default settings"
+      label: "Default settings",
     },
     {
       minLength: 5,
@@ -30,76 +29,76 @@ const PassphraseMeterSettings = (props) => {
       strongThreshold: 4,
     },
   ]
-  
-  const handleStrengthCalculation = (settings) => {
+
+  const handleStrengthCalculation = settings => {
     const {
-        passphrase = "",
-        common = false,
-        isPwned = false,
-        averageThreshold = 2,
-        minLength = 12,
-        strongThreshold = 3,
-      } = settings
+      passphrase = "",
+      common = false,
+      isPwned = false,
+      averageThreshold = 2,
+      minLength = 12,
+      strongThreshold = 3,
+    } = settings
 
     const resultByScore = {
       0: {
-        variant: 'negative',
-        label: '',
+        variant: "negative",
+        label: "",
         percent: 0,
       },
       1: {
-        variant: 'negative',
-        label: 'This passphrase is too common',
+        variant: "negative",
+        label: "This passphrase is too common",
         percent: 25,
       },
       2: {
-        variant: 'negative',
-        label: 'Too weak',
+        variant: "negative",
+        label: "Too weak",
         percent: 25,
       },
       3: {
-        variant: 'warning',
-        label: 'Almost there, keep going!',
+        variant: "warning",
+        label: "Almost there, keep going!",
         percent: 50,
       },
       4: {
-        variant: 'positive',
-        label: 'Success! Strong passphrase',
+        variant: "positive",
+        label: "Success! Strong passphrase",
         percent: 100,
-      }
+      },
     }
 
-    const { score } = zxcvbn(passphrase);
+    const { score } = zxcvbn(passphrase)
 
     const noPassphrase = passphrase.length <= 0
     const commonPassphrase = common || isPwned
-    const weakPassphrase = passphrase.length < minLength || score < averageThreshold
+    const weakPassphrase =
+      passphrase.length < minLength || score < averageThreshold
     const averagePassphrase = score < strongThreshold
     const strongPassphrase = score >= strongThreshold
 
     if (noPassphrase) {
-      return {...resultByScore[0], score}
+      return { ...resultByScore[0], score }
     } else if (commonPassphrase) {
-      return {...resultByScore[1], score}
+      return { ...resultByScore[1], score }
     } else if (weakPassphrase) {
-      return {...resultByScore[2], score}
-    } else if (averagePassphrase){
-      return {...resultByScore[3], score}
+      return { ...resultByScore[2], score }
+    } else if (averagePassphrase) {
+      return { ...resultByScore[3], score }
     } else if (strongPassphrase) {
-      return {...resultByScore[4], score}
+      return { ...resultByScore[4], score }
     }
   }
 
-  
-  const handleChange = (e) => {
-    const passphrase = e.target.value;
+  const handleChange = e => {
+    const passphrase = e.target.value
 
-    setInput(passphrase) 
+    setInput(passphrase)
 
     const calculated = []
 
     meterSettings.forEach((setting, index) => {
-      const results = handleStrengthCalculation({passphrase, ...setting})
+      const results = handleStrengthCalculation({ passphrase, ...setting })
       if (index == 0) setCalculatedStrength(results.score)
       calculated.push(results)
     })
@@ -116,42 +115,39 @@ const PassphraseMeterSettings = (props) => {
           }
         </Body>
         <Passphrase
-            label={"Type your passphrase"}
-            onChange={handleChange}
-            value={input}
-            {...props}
+          label={"Type your passphrase"}
+          onChange={handleChange}
+          value={input}
+          {...props}
         />
         <TextInput
-            disabled
-            label="Calculated Strength"
-            readOnly
-            value={calculatedStrength}
+          disabled
+          label="Calculated Strength"
+          readOnly
+          value={calculatedStrength}
         />
         {meterSettings.map((settings, index) => (
           <div key={index}>
             <Passphrase
-                label={settings.label}
-                onChange={handleChange}
-                value={input}
-                {...props}
+              label={settings.label}
+              onChange={handleChange}
+              value={input}
+              {...props}
             />
             {input.length > 0 && (
               <>
                 <ProgressSimple
-                    percent={result[index].percent}
-                    variant={result[index].variant}
+                  percent={result[index].percent}
+                  variant={result[index].variant}
                 />
-                <Caption size='xs'
-                    text={result[index].label} 
-                />
+                <Caption size="xs" text={result[index].label} />
               </>
             )}
           </div>
         ))}
-        
       </div>
     </>
-  );
+  )
 }
 
 export default PassphraseMeterSettings

@@ -1,24 +1,12 @@
-import React from 'react'
+import React from "react"
 
-import Icon from '../_icon'
+import Icon from "../_icon"
 
-const IconPull = (props) => {
+const IconPull = props => {
   return (
     <div>
-      <Icon
-          fixedWidth
-          icon="arrow-left"
-          pull="left"
-          size="2x"
-          {...props}
-      />
-      <Icon
-          fixedWidth
-          icon="arrow-right"
-          pull="right"
-          size="2x"
-          {...props}
-      />
+      <Icon fixedWidth icon="arrow-left" pull="left" size="2x" {...props} />
+      <Icon fixedWidth icon="arrow-right" pull="right" size="2x" {...props} />
     </div>
   )
 }

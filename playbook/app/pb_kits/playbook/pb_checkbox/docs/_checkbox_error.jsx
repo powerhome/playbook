@@ -1,15 +1,15 @@
-import React from 'react'
-import { Checkbox } from '../..'
+import React from "react"
+import { Checkbox } from "../.."
 
-const CheckboxError = (props) => {
+const CheckboxError = props => {
   return (
     <div>
       <Checkbox
-          error
-          name="default name"
-          text="Checkbox label"
-          value="default value"
-          {...props}
+        error
+        name="default name"
+        text="Checkbox label"
+        value="default value"
+        {...props}
       />
     </div>
   )

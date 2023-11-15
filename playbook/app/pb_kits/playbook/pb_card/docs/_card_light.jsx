@@ -1,10 +1,10 @@
-import React from 'react'
-import Card from '../_card'
+import React from "react"
+import Card from "../_card"
 
-const CardLight = (props) => {
+const CardLight = props => {
   return (
     <div>
-      <Card {...props}>{'Card content'}</Card>
+      <Card {...props}>{"Card content"}</Card>
     </div>
   )
 }

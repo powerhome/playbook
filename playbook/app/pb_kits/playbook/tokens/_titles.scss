@@ -3,10 +3,10 @@
 @import "./line_height";
 
 @mixin pb_title(
-    $fontSize: $heading_1,
-    $fontWeight: $lighter,
-    $lineHeight: $lh_tighter
-){
+  $fontSize: $heading_1,
+  $fontWeight: $lighter,
+  $lineHeight: $lh_tighter
+) {
   font-size: $fontSize;
   letter-spacing: $lspace_tight;
   font-weight: $fontWeight;

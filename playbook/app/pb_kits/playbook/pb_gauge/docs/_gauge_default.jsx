@@ -1,17 +1,11 @@
-import React from 'react'
-import { Gauge } from '../../'
+import React from "react"
+import { Gauge } from "../../"
 
-const data = [
-  { name: 'Name', value: 45 },
-]
+const data = [{ name: "Name", value: 45 }]
 
-const GaugeDefault = (props) => (
+const GaugeDefault = props => (
   <div>
-    <Gauge
-        chartData={data}
-        id="gauge-default"
-        {...props}
-    />
+    <Gauge chartData={data} id="gauge-default" {...props} />
   </div>
 )
 

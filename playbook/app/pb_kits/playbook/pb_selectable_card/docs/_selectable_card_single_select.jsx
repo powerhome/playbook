@@ -1,51 +1,49 @@
-import React, { useState } from 'react'
-import SelectableCard from '../_selectable_card.tsx'
+import React, { useState } from "react"
+import SelectableCard from "../_selectable_card.tsx"
 
-const SelectableCardSingleSelect = (props) => {
+const SelectableCardSingleSelect = props => {
   const [selected, setSelected] = useState(null)
-  const handleSelect = (event) => {
+  const handleSelect = event => {
     setSelected(event.target.value)
   }
 
   return (
     <div className="pb--doc-demo-row">
-
       <SelectableCard
-          checked={selected === 'male'}
-          inputId="male1"
-          multi={false}
-          name="gender"
-          onChange={handleSelect}
-          value="male"
-          {...props}
+        checked={selected === "male"}
+        inputId="male1"
+        multi={false}
+        name="gender"
+        onChange={handleSelect}
+        value="male"
+        {...props}
       >
-        {'Male'}
+        {"Male"}
       </SelectableCard>
 
       <SelectableCard
-          checked={selected === 'female'}
-          inputId="female1"
-          multi={false}
-          name="gender"
-          onChange={handleSelect}
-          value="female"
-          {...props}
+        checked={selected === "female"}
+        inputId="female1"
+        multi={false}
+        name="gender"
+        onChange={handleSelect}
+        value="female"
+        {...props}
       >
-        {'Female'}
+        {"Female"}
       </SelectableCard>
 
       <SelectableCard
-          checked={selected === 'other'}
-          inputId="other1"
-          multi={false}
-          name="gender"
-          onChange={handleSelect}
-          value="other"
-          {...props}
+        checked={selected === "other"}
+        inputId="other1"
+        multi={false}
+        name="gender"
+        onChange={handleSelect}
+        value="other"
+        {...props}
       >
-        {'Other'}
+        {"Other"}
       </SelectableCard>
-
     </div>
   )
 }

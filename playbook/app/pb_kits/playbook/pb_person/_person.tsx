@@ -1,62 +1,40 @@
-import React from 'react'
-import classnames from 'classnames'
+import React from "react"
+import classnames from "classnames"
 
-import { globalProps } from '../utilities/globalProps'
-import {
-  buildAriaProps,
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
+import { globalProps } from "../utilities/globalProps"
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 
-import Body from '../pb_body/_body'
-import Title from '../pb_title/_title'
+import Body from "../pb_body/_body"
+import Title from "../pb_title/_title"
 
 type PersonProps = {
-  aria?: { [key: string]: string },
-  className?: string | string[],
-  data?: { [key: string]: string },
-  firstName: string,
-  id?: string,
-  lastName: string,
+  aria?: { [key: string]: string }
+  className?: string | string[]
+  data?: { [key: string]: string }
+  firstName: string
+  id?: string
+  lastName: string
 }
 
 const Person = (props: PersonProps): React.ReactElement => {
-  const {
-    aria = {},
-    className,
-    data = {},
-    firstName,
-    id,
-    lastName } = props
+  const { aria = {}, className, data = {}, firstName, id, lastName } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_person_kit'),
+    buildCss("pb_person_kit"),
     globalProps(props),
     className
   )
 
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      <Body
-          className="pb_person_first"
-          tag="span"
-      >
+    <div {...ariaProps} {...dataProps} className={classes} id={id}>
+      <Body className="pb_person_first" tag="span">
         {firstName}
       </Body>
-      {lastName && 
-        <Title
-            className="pb_person_first"
-            size={4}
-            text={` ${lastName}`}
-        />
-      }
+      {lastName && (
+        <Title className="pb_person_first" size={4} text={` ${lastName}`} />
+      )}
     </div>
   )
 }

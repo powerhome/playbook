@@ -1,19 +1,19 @@
-import React from 'react'
-import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps'
+import React from "react"
+import classnames from "classnames"
+import { globalProps } from "../utilities/globalProps"
 
 type DistributionBarProps = {
-  className?: string,
-  colors: [],
-  data?: string,
-  id?: string,
-  size?: "lg" | "sm",
-  widths?: number[],
+  className?: string
+  colors: []
+  data?: string
+  id?: string
+  size?: "lg" | "sm"
+  widths?: number[]
 }
 
-const normalizeCharacters = (widths:  number[]) => {
-  return widths.map((width) => {
-    return parseInt(width.toString().replace(/[^0-9.]/gi, ''))
+const normalizeCharacters = (widths: number[]) => {
+  return widths.map(width => {
+    return parseInt(width.toString().replace(/[^0-9.]/gi, ""))
   })
 }
 
@@ -23,24 +23,25 @@ const barValues = (normalizedValues: number[], colors: []) => {
   return normalizedValues.map((value, i) => {
     return (
       <div
-          className={classnames('pb_distribution_width', colors[i] ? `color_${colors[i]}` : '')}
-          key={i}
-          style={{ width: `${(value * 100) / widthSum}%` }}
+        className={classnames(
+          "pb_distribution_width",
+          colors[i] ? `color_${colors[i]}` : ""
+        )}
+        key={i}
+        style={{ width: `${(value * 100) / widthSum}%` }}
       />
     )
   })
 }
 
 const DistributionBar = (props: DistributionBarProps) => {
-  const {
-    size = 'lg',
-    widths = [1],
-    colors = [],
-  } = props
+  const { size = "lg", widths = [1], colors = [] } = props
   const normalizedValues = normalizeCharacters(widths)
 
   return (
-    <div className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}>
+    <div
+      className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}
+    >
       {barValues(normalizedValues, colors)}
     </div>
   )

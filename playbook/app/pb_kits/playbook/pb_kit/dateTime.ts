@@ -1,11 +1,25 @@
-const ABBR_DAYS = ['SU', 'M', 'T', 'W', 'TH', 'F', 'S']
+const ABBR_DAYS = ["SU", "M", "T", "W", "TH", "F", "S"]
 
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+]
 
 const formatDate = (newDate: Date | string) => {
-  const isTimelessStringDate = typeof newDate === "string" && !newDate.includes("T")
+  const isTimelessStringDate =
+    typeof newDate === "string" && !newDate.includes("T")
 
   if (isTimelessStringDate) {
     const unhyphenatedDate = new Date((newDate as string).replace(/-/g, "/"))
@@ -19,9 +33,17 @@ export const toMinute = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
 
   if (timeZone) {
-    return date.toLocaleTimeString("en-US", { timeZone, hour: "2-digit", minute: "2-digit" }).slice(3, 5);
+    return date
+      .toLocaleTimeString("en-US", {
+        timeZone,
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+      .slice(3, 5)
   } else {
-    return date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }).slice(3, 5);
+    return date
+      .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
+      .slice(3, 5)
   }
 }
 
@@ -29,15 +51,19 @@ export const toHour = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
 
   if (timeZone) {
-    return date.toLocaleTimeString("en-US", { timeZone, hour: "numeric" }).split(' ')[0];
+    return date
+      .toLocaleTimeString("en-US", { timeZone, hour: "numeric" })
+      .split(" ")[0]
   } else {
-    return date.toLocaleTimeString("en-US", { hour: "numeric" }).split(' ')[0];
+    return date.toLocaleTimeString("en-US", { hour: "numeric" }).split(" ")[0]
   }
 }
 
 export const toDay = (newDate: Date | string, timeZone?: string): number => {
   if (timeZone) {
-    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone }));
+    const date = new Date(
+      formatDate(newDate).toLocaleString("en-US", { timeZone })
+    )
     return date.getDate()
   } else {
     const date = formatDate(newDate)
@@ -57,7 +83,9 @@ export const toWeekday = (newDate: Date | string): string => {
 
 export const toMonth = (newDate: Date | string, timeZone?: string): string => {
   if (timeZone) {
-    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone }));
+    const date = new Date(
+      formatDate(newDate).toLocaleString("en-US", { timeZone })
+    )
     return months[date.getMonth()]
   } else {
     const date = formatDate(newDate)
@@ -72,7 +100,9 @@ export const toMonthNum = (newDate: Date | string): number => {
 
 export const toYear = (newDate: Date | string, timeZone?: string): number => {
   if (timeZone) {
-    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone }));
+    const date = new Date(
+      formatDate(newDate).toLocaleString("en-US", { timeZone })
+    )
     return date.getFullYear()
   } else {
     const date = formatDate(newDate)
@@ -84,35 +114,58 @@ export const toTime = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
 
   if (timeZone) {
-    return date.toLocaleTimeString("en-US", { timeZone, timeStyle: "short" }).split(' ')[0];
+    return date
+      .toLocaleTimeString("en-US", { timeZone, timeStyle: "short" })
+      .split(" ")[0]
   } else {
-    return date.toLocaleTimeString("en-US", { timeStyle: "short" }).split(' ')[0];
+    return date
+      .toLocaleTimeString("en-US", { timeStyle: "short" })
+      .split(" ")[0]
   }
 }
 
-export const toMeridiem = (newDate: Date | string, timeZone?: string): string => {
+export const toMeridiem = (
+  newDate: Date | string,
+  timeZone?: string
+): string => {
   const date = formatDate(newDate)
 
   if (timeZone) {
-    return date.toLocaleString("en-US", { timeZone, hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
+    return date
+      .toLocaleString("en-US", { timeZone, hour12: true })
+      .slice(-2)
+      .charAt(0)
+      .toLocaleLowerCase()
   } else {
-    return date.toLocaleString("en-US", { hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
+    return date
+      .toLocaleString("en-US", { hour12: true })
+      .slice(-2)
+      .charAt(0)
+      .toLocaleLowerCase()
   }
 }
 
-export const toTimeZone = (newDate: Date | string, timeZone?: string): string => {
+export const toTimeZone = (
+  newDate: Date | string,
+  timeZone?: string
+): string => {
   const date = formatDate(newDate)
 
   if (timeZone) {
-    return date.toLocaleString("en-US", { timeZone, timeZoneName: "short" }).split(' ')[3];
+    return date
+      .toLocaleString("en-US", { timeZone, timeZoneName: "short" })
+      .split(" ")[3]
   } else {
-    return date.toLocaleString("en-US", { timeZoneName: "short" }).split(' ')[3];
+    return date.toLocaleString("en-US", { timeZoneName: "short" }).split(" ")[3]
   }
 }
 
-export const toTimeWithMeridiem = (newDate: Date | string, timeZone: string): string => {
+export const toTimeWithMeridiem = (
+  newDate: Date | string,
+  timeZone: string
+): string => {
   const date = formatDate(newDate)
-  return `${toTime(date, timeZone)}${toMeridiem(date, timeZone)}`;
+  return `${toTime(date, timeZone)}${toMeridiem(date, timeZone)}`
 }
 
 export const toIso = (newDate: Date | string): string => {
@@ -155,19 +208,40 @@ export const fromNow = (newDate: Date | string): string => {
   const MILLISECONDS_IN_A_HOUR = 3600000
   const MILLISECONDS_IN_A_DAY = 86400000
 
-  let elapsedTimeString = differenceInYears === 1 ? `${differenceInYears} year ago` : `${differenceInYears} years ago` // 320 days to 1+ year: "x year(s) ago"
+  let elapsedTimeString =
+    differenceInYears === 1
+      ? `${differenceInYears} year ago`
+      : `${differenceInYears} years ago` // 320 days to 1+ year: "x year(s) ago"
 
   // Inspiration: https://momentjs.com/docs/#/displaying/fromnow/
   const intervals = [
     { min: 0, max: FORTY_FIVE_SECONDS, value: "a few seconds ago" }, // 0-44.99 seconds
     { min: FORTY_FIVE_SECONDS, max: NINETY_SECONDS, value: "a minute ago" }, // 45-89.99 seconds
-    { min: NINETY_SECONDS, max: FORTY_FIVE_MINUTES, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_MINUTE)} minutes ago` }, // 90s-44.49 minutes: "2 minutes ago ... 44 minutes ago"
+    {
+      min: NINETY_SECONDS,
+      max: FORTY_FIVE_MINUTES,
+      value: `${Math.round(
+        elapsedTime / MILLISECONDS_IN_A_MINUTE
+      )} minutes ago`,
+    }, // 90s-44.49 minutes: "2 minutes ago ... 44 minutes ago"
     { min: FORTY_FIVE_MINUTES, max: NINETY_MINUTES, value: "an hour ago" }, // 44.5-89.99 minutes
-    { min: NINETY_MINUTES, max: TWENTY_TWO_HOURS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_HOUR)} hours ago` }, // 90m-21.49 hours: "2 hours ago ... 21 hours ago"
+    {
+      min: NINETY_MINUTES,
+      max: TWENTY_TWO_HOURS,
+      value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_HOUR)} hours ago`,
+    }, // 90m-21.49 hours: "2 hours ago ... 21 hours ago"
     { min: TWENTY_TWO_HOURS, max: THIRTY_SIX_HOURS, value: "a day ago" }, // 21.5-35.99 hours
-    { min: THIRTY_SIX_HOURS, max: TWENTY_SIX_DAYS, value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_DAY)} days ago` }, // 36h-25.49 days: "2 days ago ... 25 days ago"
+    {
+      min: THIRTY_SIX_HOURS,
+      max: TWENTY_SIX_DAYS,
+      value: `${Math.round(elapsedTime / MILLISECONDS_IN_A_DAY)} days ago`,
+    }, // 36h-25.49 days: "2 days ago ... 25 days ago"
     { min: TWENTY_SIX_DAYS, max: FORTY_FIVE_DAYS, value: "a month ago" }, // 25.5-44.99 days
-    { min: FORTY_FIVE_DAYS, max: TEN_AND_A_HALF_MONTHS, value: `${differenceInMonths()} months ago` }, // 45 days to 319 days: "2 months ago ... 10 months ago"
+    {
+      min: FORTY_FIVE_DAYS,
+      max: TEN_AND_A_HALF_MONTHS,
+      value: `${differenceInMonths()} months ago`,
+    }, // 45 days to 319 days: "2 months ago ... 10 months ago"
   ]
 
   for (const interval of intervals) {
@@ -182,7 +256,10 @@ export const fromNow = (newDate: Date | string): string => {
   return elapsedTimeString
 }
 
-export const toCustomFormat = (newDate: Date | string, format = 'month_day'): string => {
+export const toCustomFormat = (
+  newDate: Date | string,
+  format = "month_day"
+): string => {
   const date = formatDate(newDate)
   if (format == "month_day") {
     return `${toMonthNum(date)}/${toDay(date)}`
@@ -209,7 +286,7 @@ export const getFirstDayOfWeek = (newDate: Date | string): Date => {
   const firstDayOfWeek = new Date(today.setHours(0, 0, 0))
   const isSunday = dayOfWeek === 0
 
-  const daysToSubtract = isSunday ? 6 : (dayOfWeek - 1)
+  const daysToSubtract = isSunday ? 6 : dayOfWeek - 1
   firstDayOfWeek.setDate(today.getDate() - daysToSubtract)
 
   return firstDayOfWeek
@@ -222,7 +299,7 @@ export const getLastDayOfWeek = (newDate: Date | string): Date => {
   const lastDayOfWeek = new Date(today.setHours(23, 59, 59, 0))
   const isSunday = dayOfWeek === 0
 
-  const daysToAdd = isSunday ? 0 : (7 - dayOfWeek)
+  const daysToAdd = isSunday ? 0 : 7 - dayOfWeek
   lastDayOfWeek.setDate(today.getDate() + daysToAdd)
 
   return lastDayOfWeek
@@ -264,7 +341,14 @@ export const getMonthStartDate = (newDate: Date | string): Date => {
 export const getMonthEndDate = (newDate: Date | string): Date => {
   const date = formatDate(newDate)
   // Replicate Moment.js: End of month has a time of 23:59:59
-  const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59)
+  const lastDayOfMonth = new Date(
+    date.getFullYear(),
+    date.getMonth() + 1,
+    0,
+    23,
+    59,
+    59
+  )
 
   return lastDayOfMonth
 }
@@ -410,5 +494,5 @@ export default {
   getYearStartDate,
   getYearEndDate,
   getPreviousYearStartDate,
-  getPreviousYearEndDate
+  getPreviousYearEndDate,
 }

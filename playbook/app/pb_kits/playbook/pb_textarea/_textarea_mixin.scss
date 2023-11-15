@@ -22,17 +22,20 @@
   overflow-wrap: break-word;
   resize: none;
   transition-property: box-shadow, color, background-color;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   transition-timing-function: $bezier;
-  &[type=number] {
-    -moz-appearance:textfield;
+  &[type="number"] {
+    -moz-appearance: textfield;
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
   }
-  &:disabled, &:disabled:hover, &:disabled:focus, &:disabled:active {
+  &:disabled,
+  &:disabled:hover,
+  &:disabled:focus,
+  &:disabled:active {
     background-color: shade($background_color, 5%);
     box-shadow: none;
     opacity: 0.5;
@@ -70,6 +73,8 @@
 }
 
 // Transitions ======================
-@mixin transition_default{
-  transition: background-color 0.3s ease-in-out 0s, border-color 0.3s ease-in-out 0s;
+@mixin transition_default {
+  transition:
+    background-color 0.3s ease-in-out 0s,
+    border-color 0.3s ease-in-out 0s;
 }

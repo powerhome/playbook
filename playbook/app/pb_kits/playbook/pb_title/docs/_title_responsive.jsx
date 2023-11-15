@@ -1,13 +1,13 @@
-import React from 'react'
-import Title from '../_title'
+import React from "react"
+import Title from "../_title"
 
-const TitleResponsive = (props) => {
+const TitleResponsive = props => {
   return (
     <>
       <Title
-          size={{xs: "3", sm: "2", md: "1"}}
-          text="Responsive Title"
-          {...props}
+        size={{ xs: "3", sm: "2", md: "1" }}
+        text="Responsive Title"
+        {...props}
       />
     </>
   )

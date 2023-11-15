@@ -1,6 +1,3 @@
 examples:
-  
   rails:
-  - pagination_default: Default
-  
-  
+    - pagination_default: Default

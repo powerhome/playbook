@@ -1,40 +1,40 @@
-import React, { useState, useEffect } from "react";
-import classnames from "classnames";
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
-import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
-import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
-import mapColors from "../pb_dashboard/pbChartsColorsHelper";
-import highchartsMore from "highcharts/highcharts-more";
-import solidGauge from "highcharts/modules/solid-gauge";
-import defaultColors from "../tokens/exports/_colors.scss";
-import typography from "../tokens/exports/_typography.scss";
+import React, { useState, useEffect } from "react"
+import classnames from "classnames"
+import HighchartsReact from "highcharts-react-official"
+import Highcharts from "highcharts"
+import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme"
+import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme"
+import mapColors from "../pb_dashboard/pbChartsColorsHelper"
+import highchartsMore from "highcharts/highcharts-more"
+import solidGauge from "highcharts/modules/solid-gauge"
+import defaultColors from "../tokens/exports/_colors.scss"
+import typography from "../tokens/exports/_typography.scss"
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
 
 type GaugeProps = {
-  aria: { [key: string]: string };
-  className?: string;
-  chartData?: { name: string; value: number[] | number }[];
-  dark?: Boolean;
-  data?: { [key: string]: string };
-  disableAnimation?: boolean;
-  fullCircle?: boolean;
-  height?: string;
-  id?: string;
-  max?: number;
-  min?: number;
-  prefix?: string;
-  showLabels?: boolean;
-  style?: string;
-  suffix?: string;
-  title?: string;
-  tooltipHtml?: string;
-  colors: string[];
-  minorTickInterval: any;
-  circumference: number[];
-};
+  aria: { [key: string]: string }
+  className?: string
+  chartData?: { name: string; value: number[] | number }[]
+  dark?: Boolean
+  data?: { [key: string]: string }
+  disableAnimation?: boolean
+  fullCircle?: boolean
+  height?: string
+  id?: string
+  max?: number
+  min?: number
+  prefix?: string
+  showLabels?: boolean
+  style?: string
+  suffix?: string
+  title?: string
+  tooltipHtml?: string
+  colors: string[]
+  minorTickInterval: any
+  circumference: number[]
+}
 
 const Gauge = ({
   aria = {},
@@ -60,16 +60,16 @@ const Gauge = ({
   circumference = fullCircle ? [0, 360] : [-100, 100],
   ...props
 }: GaugeProps) => {
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
-  highchartsMore(Highcharts);
-  solidGauge(Highcharts);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  highchartsMore(Highcharts)
+  solidGauge(Highcharts)
   const setupTheme = () => {
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
-      : Highcharts.setOptions(highchartsTheme);
-  };
-  setupTheme();
+      : Highcharts.setOptions(highchartsTheme)
+  }
+  setupTheme()
 
   //set tooltip directly to prevent being overriden by Highcharts defaults
   Highcharts.setOptions({
@@ -77,26 +77,26 @@ const Gauge = ({
       pointFormat: tooltipHtml,
       followPointer: true,
     },
-  });
+  })
 
   const css = buildCss({
     pb_gauge_kit: true,
-  });
+  })
 
-  const [options, setOptions] = useState({});
+  const [options, setOptions] = useState({})
 
   useEffect(() => {
     const formattedChartData = chartData.map((obj: any) => {
-      obj.y = obj.value;
-      delete obj.value;
-      return obj;
-    });
+      obj.y = obj.value
+      delete obj.value
+      return obj
+    })
 
     const staticOptions = {
       chart: {
         events: {
           load() {
-            setTimeout(this.reflow.bind(this), 0);
+            setTimeout(this.reflow.bind(this), 0)
           },
         },
         type: style,
@@ -170,20 +170,19 @@ const Gauge = ({
           },
         },
       },
-    };
-
-    setOptions({ ...staticOptions });
-
-    if (document.querySelector(".prefix")) {
-      document.querySelectorAll(".prefix").forEach((prefix) => {
-        prefix.setAttribute("y", "28");
-      });
-      document
-        .querySelectorAll(".fix")
-        .forEach((fix) => fix.setAttribute("y", "38"));
     }
 
-  }, [chartData]);
+    setOptions({ ...staticOptions })
+
+    if (document.querySelector(".prefix")) {
+      document.querySelectorAll(".prefix").forEach(prefix => {
+        prefix.setAttribute("y", "28")
+      })
+      document
+        .querySelectorAll(".fix")
+        .forEach(fix => fix.setAttribute("y", "38"))
+    }
+  }, [chartData])
 
   return (
     <HighchartsReact
@@ -196,7 +195,7 @@ const Gauge = ({
       highcharts={Highcharts}
       options={options}
     />
-  );
-};
+  )
+}
 
-export default Gauge;
+export default Gauge

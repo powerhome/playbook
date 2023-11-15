@@ -4,16 +4,16 @@
 @import "./section_separator_mixin";
 
 $section_colors_light: (
-  background:   $bg_light,
-  card:         $card_light,
+  background: $bg_light,
+  card: $card_light,
 );
 
 $section_colors_dark: (
-  background:   $bg_dark,
-  card:         tint($bg_dark,10),
+  background: $bg_dark,
+  card: tint($bg_dark, 10),
 );
 
-[class^=pb_section_separator_kit] {
+[class^="pb_section_separator_kit"] {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,10 +34,10 @@ $section_colors_dark: (
     flex: 1;
     @include section_separator_horizontal;
   }
-  &[class*=_horizontal] {
+  &[class*="_horizontal"] {
     justify-content: center;
   }
-  &[class*=_vertical] {
+  &[class*="_vertical"] {
     margin-left: $space_xs;
     margin-right: $space_xs;
     &::after {
@@ -45,8 +45,9 @@ $section_colors_dark: (
     }
   }
 
-  &[class*=_dashed] {
-    &::before, &::after {
+  &[class*="_dashed"] {
+    &::before,
+    &::after {
       border: 1px dashed $border_light;
       background: none;
     }
@@ -61,7 +62,7 @@ $section_colors_dark: (
     &::after {
       @include section_separator_horizontal(true);
     }
-    &[class*=_vertical] {
+    &[class*="_vertical"] {
       &::after {
         @include section_separator_vertical(true);
       }

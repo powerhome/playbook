@@ -1,24 +1,14 @@
-import React from 'react'
-import DateStacked from '../_date_stacked'
+import React from "react"
+import DateStacked from "../_date_stacked"
 
-const DateStackedNotCurrentYear = (props) => {
+const DateStackedNotCurrentYear = props => {
   return (
     <div>
-
-      <DateStacked
-          date={new Date('20 Mar 2018')}
-          size="sm"
-          {...props}
-      />
+      <DateStacked date={new Date("20 Mar 2018")} size="sm" {...props} />
 
       <br />
 
-      <DateStacked
-          date={new Date('20 Mar 2018')}
-          size="md"
-          {...props}
-      />
-
+      <DateStacked date={new Date("20 Mar 2018")} size="md" {...props} />
     </div>
   )
 }

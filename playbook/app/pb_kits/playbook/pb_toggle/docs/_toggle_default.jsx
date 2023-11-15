@@ -1,14 +1,12 @@
 // @flow
 
-import React from 'react'
-import { Toggle } from '../..'
+import React from "react"
+import { Toggle } from "../.."
 
 const ToggleDefault = () => {
   return (
     <>
-      <Toggle
-          checked
-      />
+      <Toggle checked />
 
       <br />
 

@@ -1,21 +1,28 @@
-import React from 'react'
+import React from "react"
 
-import Legend from '../_legend'
+import Legend from "../_legend"
 
-const products = ['Windows', 'Doors', 'Roofing', 'Siding', 'Solar', 'Gutters', 'Insulation', 'Other']
+const products = [
+  "Windows",
+  "Doors",
+  "Roofing",
+  "Siding",
+  "Solar",
+  "Gutters",
+  "Insulation",
+  "Other",
+]
 
-const LegendDefault = (props) => (
+const LegendDefault = props => (
   <div>
-    {
-      products.map((product, i) => (
-        <Legend
-            color={`data_${i + 1}`}
-            key={`legend_${i + 1}`}
-            text={product}
-            {...props}
-        />
-      ))
-    }
+    {products.map((product, i) => (
+      <Legend
+        color={`data_${i + 1}`}
+        key={`legend_${i + 1}`}
+        text={product}
+        {...props}
+      />
+    ))}
   </div>
 )
 

@@ -1,34 +1,17 @@
-import React from 'react'
-import DateTime from '../_date_time'
+import React from "react"
+import DateTime from "../_date_time"
 
-const DateTimeAlign = (props) => (
+const DateTimeAlign = props => (
   <div>
-    <DateTime
-        datetime={new Date()}
-        dayOfWeek
-        icon
-        {...props}
-    />
+    <DateTime datetime={new Date()} dayOfWeek icon {...props} />
 
     <br />
 
-    <DateTime
-        align="center"
-        datetime={new Date()}
-        dayOfWeek
-        icon
-        {...props}
-    />
+    <DateTime align="center" datetime={new Date()} dayOfWeek icon {...props} />
 
     <br />
 
-    <DateTime
-        align="right"
-        datetime={new Date()}
-        dayOfWeek
-        icon
-        {...props}
-    />
+    <DateTime align="right" datetime={new Date()} dayOfWeek icon {...props} />
   </div>
 )
 

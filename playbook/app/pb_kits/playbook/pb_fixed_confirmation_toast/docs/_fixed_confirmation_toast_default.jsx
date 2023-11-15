@@ -1,16 +1,16 @@
-import React from 'react'
+import React from "react"
 
-import FixedConfirmationToast from '../_fixed_confirmation_toast'
+import FixedConfirmationToast from "../_fixed_confirmation_toast"
 
-const FixedConfirmationToastDefault = (props) => {
+const FixedConfirmationToastDefault = props => {
   return (
     <div>
       <div>
         <FixedConfirmationToast
-            closeable
-            status="error"
-            text="Error Message"
-            {...props}
+          closeable
+          status="error"
+          text="Error Message"
+          {...props}
         />
       </div>
 
@@ -18,9 +18,9 @@ const FixedConfirmationToastDefault = (props) => {
 
       <div>
         <FixedConfirmationToast
-            status="success"
-            text="Items Successfully Moved"
-            {...props}
+          status="success"
+          text="Items Successfully Moved"
+          {...props}
         />
       </div>
 
@@ -28,9 +28,9 @@ const FixedConfirmationToastDefault = (props) => {
 
       <div>
         <FixedConfirmationToast
-            status="neutral"
-            text="Scan to Assign Selected Items"
-            {...props}
+          status="neutral"
+          text="Scan to Assign Selected Items"
+          {...props}
         />
       </div>
     </div>

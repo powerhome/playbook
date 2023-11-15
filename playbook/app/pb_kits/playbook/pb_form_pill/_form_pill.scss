@@ -10,8 +10,7 @@ $form_pill_colors: (
   primary: map-get($status_color_text, "primary"),
 );
 
-
-[class^=pb_form_pill_kit] {
+[class^="pb_form_pill_kit"] {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -22,11 +21,11 @@ $form_pill_colors: (
   margin-top: 2px;
   cursor: pointer;
   @each $color_name, $color_value in $form_pill_colors {
-    &[class*=_#{$color_name}]  {
+    &[class*="_#{$color_name}"] {
       background-color: rgba($color_value, $opacity-1);
       transition: background-color 0.2s ease;
       box-shadow: none;
-      @media (hover:hover) {
+      @media (hover: hover) {
         &:hover {
           background-color: rgba($color_value, $opacity-2);
         }
@@ -54,27 +53,33 @@ $form_pill_colors: (
   &.small {
     height: fit-content;
     height: -moz-fit-content;
-    .pb_form_pill_text, .pb_form_pill_close, .pb_form_pill_tag {
+    .pb_form_pill_text,
+    .pb_form_pill_close,
+    .pb_form_pill_tag {
       font-size: 16px;
       font-weight: $regular;
     }
-    .pb_form_pill_text, .pb_form_pill_tag {
+    .pb_form_pill_text,
+    .pb_form_pill_tag {
       line-height: 1.7;
       padding-left: $space_xs;
       padding-right: 2px;
     }
-    [class^=pb_avatar_kit], [class^=pb_avatar_kit] .avatar_wrapper {
+    [class^="pb_avatar_kit"],
+    [class^="pb_avatar_kit"] .avatar_wrapper {
       width: 20px;
       height: 20px;
       flex-basis: 20px;
-      &::before { line-height: 21px; }
+      &::before {
+        line-height: 21px;
+      }
     }
   }
-  &[class*=lowercase] {
+  &[class*="lowercase"] {
     text-transform: lowercase;
   }
 
-  &[class*=none] {
+  &[class*="none"] {
     text-transform: none;
   }
 }

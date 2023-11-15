@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from "react";
-import classnames from "classnames";
+import React, { useState, useEffect } from "react"
+import classnames from "classnames"
 
-import { globalProps } from "../utilities/globalProps";
-import { buildAriaProps, buildDataProps } from "../utilities/props";
+import { globalProps } from "../utilities/globalProps"
+import { buildAriaProps, buildDataProps } from "../utilities/props"
 
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
-import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
-import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
-import mapColors from "../pb_dashboard/pbChartsColorsHelper";
-import treemap from 'highcharts/modules/treemap'
+import HighchartsReact from "highcharts-react-official"
+import Highcharts from "highcharts"
+import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme"
+import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme"
+import mapColors from "../pb_dashboard/pbChartsColorsHelper"
+import treemap from "highcharts/modules/treemap"
 
 type TreemapChartProps = {
   chartData: {
-    name: string;
-    parent?: string | number;
-    value: number;
-    color?: string;
-    id?: string | number;
-  }[];
-  className?: string;
-  colors: string[];
-  dark?: boolean;
-  drillable: boolean;
-  grouped: boolean;
-  height?: string;
-  id: number | string;
-  title?: string;
-  tooltipHtml: string;
-  type?: string;
-  aria?: { [key: string]: string };
-  data?: { [key: string]: string };
-};
+    name: string
+    parent?: string | number
+    value: number
+    color?: string
+    id?: string | number
+  }[]
+  className?: string
+  colors: string[]
+  dark?: boolean
+  drillable: boolean
+  grouped: boolean
+  height?: string
+  id: number | string
+  title?: string
+  tooltipHtml: string
+  type?: string
+  aria?: { [key: string]: string }
+  data?: { [key: string]: string }
+}
 
 const TreemapChart = ({
   aria = {},
@@ -48,15 +48,15 @@ const TreemapChart = ({
   type = "treemap",
   ...props
 }: TreemapChartProps) => {
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const setupTheme = () => {
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
-      : Highcharts.setOptions(highchartsTheme);
-  };  
+      : Highcharts.setOptions(highchartsTheme)
+  }
   treemap(Highcharts)
-  setupTheme();  
+  setupTheme()
 
   const staticOptions = {
     title: {
@@ -85,14 +85,13 @@ const TreemapChart = ({
             : highchartsTheme.colors,
       },
     },
-  };
+  }
 
-  const [options, setOptions] = useState({});
+  const [options, setOptions] = useState({})
 
   useEffect(() => {
-    
-    setOptions({ ...staticOptions });
-  }, [chartData]);
+    setOptions({ ...staticOptions })
+  }, [chartData])
 
   return (
     <HighchartsReact
@@ -105,7 +104,7 @@ const TreemapChart = ({
       highcharts={Highcharts}
       options={options}
     />
-  );
-};
+  )
+}
 
-export default TreemapChart;
+export default TreemapChart

@@ -1,30 +1,18 @@
-import React from 'react'
-import { SectionSeparator, Card, Caption } from '../../'
+import React from "react"
+import { SectionSeparator, Card, Caption } from "../../"
 
 const children = (
-    <Card
-        borderRadius="rounded"
-        justifyContent="center"
-        padding="none"
-    >
-        <Caption
-            paddingLeft="xs"
-            paddingRight="xs"
-            size="xs"
-            text="TODAY"
-        />
-    </Card>
+  <Card borderRadius="rounded" justifyContent="center" padding="none">
+    <Caption paddingLeft="xs" paddingRight="xs" size="xs" text="TODAY" />
+  </Card>
 )
 
-const SectionSeparatorChildren = (props) => {
-    return (
-        <SectionSeparator
-            {...props}
-            lineStyle='dashed'
-        >
-            {children}
-        </SectionSeparator>
-    )
+const SectionSeparatorChildren = props => {
+  return (
+    <SectionSeparator {...props} lineStyle="dashed">
+      {children}
+    </SectionSeparator>
+  )
 }
 
 export default SectionSeparatorChildren

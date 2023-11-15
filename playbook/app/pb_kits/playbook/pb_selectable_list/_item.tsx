@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import classnames from "classnames";
+import React, { useState } from "react"
+import classnames from "classnames"
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
 
-import Checkbox from "../pb_checkbox/_checkbox";
-import ListItem from "../pb_list/_list_item";
-import Radio from "../pb_radio/_radio";
+import Checkbox from "../pb_checkbox/_checkbox"
+import ListItem from "../pb_list/_list_item"
+import Radio from "../pb_radio/_radio"
 
 export type SelectableListItemProps = {
-  aria?: { [key: string]: string };
-  children: React.ReactNode[] | React.ReactNode;
-  checked?: boolean;
-  className?: string;
-  data?: object;
-  defaultChecked?: boolean;
-  id?: string;
-  label?: string;
-  text?: string;
-  name?: string;
-  value?: string;
-  variant?: string;
-  onChange: (arg: React.ChangeEvent<HTMLInputElement>  | null) => void;
-};
+  aria?: { [key: string]: string }
+  children: React.ReactNode[] | React.ReactNode
+  checked?: boolean
+  className?: string
+  data?: object
+  defaultChecked?: boolean
+  id?: string
+  label?: string
+  text?: string
+  name?: string
+  value?: string
+  variant?: string
+  onChange: (arg: React.ChangeEvent<HTMLInputElement> | null) => void
+}
 
 const SelectableListItem = ({
   aria = {},
@@ -40,21 +40,21 @@ const SelectableListItem = ({
   onChange = () => {},
   ...props
 }: SelectableListItemProps) => {
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
   const classes = classnames(
     buildCss("pb_selectable_list_item_kit"),
     globalProps(props),
     className
-  );
+  )
 
-  const initialCheckedState = checked;
-  const [checkedState, setCheckedState] = useState(initialCheckedState);
+  const initialCheckedState = checked
+  const [checkedState, setCheckedState] = useState(initialCheckedState)
 
   const handleChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event);
-    setCheckedState(event.target.checked);
-  };
+    onChange(event)
+    setCheckedState(event.target.checked)
+  }
 
   return (
     <ListItem
@@ -96,12 +96,10 @@ const SelectableListItem = ({
             {children}
           </>
         )}
-        {variant !== "checkbox" && variant !== "radio" && (
-          { children }
-        )}
+        {variant !== "checkbox" && variant !== "radio" && { children }}
       </div>
     </ListItem>
-  );
-};
+  )
+}
 
-export default SelectableListItem;
+export default SelectableListItem

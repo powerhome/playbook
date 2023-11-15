@@ -1,22 +1,22 @@
-import React from 'react'
+import React from "react"
 
-import Select from '../_select'
+import Select from "../_select"
 
-const SelectValueTextSame = (props) => {
+const SelectValueTextSame = props => {
   const options = [
-    { value: 'Football' },
-    { value: 'Baseball' },
-    { value: 'Basketball' },
-    { value: 'Hockey' },
+    { value: "Football" },
+    { value: "Baseball" },
+    { value: "Basketball" },
+    { value: "Hockey" },
   ]
 
   return (
     <div>
       <Select
-          label="Favorite Sport"
-          name="sports"
-          options={options}
-          {...props}
+        label="Favorite Sport"
+        name="sports"
+        options={options}
+        {...props}
       />
     </div>
   )

@@ -3,7 +3,7 @@
 @import "../tokens/positioning";
 $transition: $transition_cubic;
 
-[class^=pb_checkbox_kit] {
+[class^="pb_checkbox_kit"] {
   cursor: pointer;
   display: inline-flex;
   vertical-align: middle;
@@ -21,7 +21,9 @@ $transition: $transition_cubic;
     border-radius: $border_rad_light;
     height: 22px;
     position: relative;
-    transition: background $transition_default ease, box-shadow $transition_default ease;
+    transition:
+      background $transition_default ease,
+      box-shadow $transition_default ease;
     width: 22px;
     .check_icon,
     .indeterminate_icon {
@@ -38,7 +40,7 @@ $transition: $transition_cubic;
     }
   }
 
-  @media (hover:hover) {
+  @media (hover: hover) {
     &:hover input ~ .pb_checkbox_checkmark {
       background-color: $bg_light;
     }
@@ -54,7 +56,9 @@ $transition: $transition_cubic;
     left: $offscreen;
 
     &:focus ~ .pb_checkbox_checkmark {
-        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
+      box-shadow:
+        0px 0px 0px 2px $white,
+        0px 0px 0px 4px $primary;
     }
     &:checked ~ .pb_checkbox_checkmark,
     & ~ .pb_checkbox_indeterminate {
@@ -79,22 +83,24 @@ $transition: $transition_cubic;
   &.dark {
     input {
       &:focus ~ .pb_checkbox_checkmark {
-        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;      
+        box-shadow:
+          0px 0px 0px 2px $bg_dark_card,
+          0px 0px 0px 4px $primary;
       }
     }
-    
-    @media (hover:hover) {
+
+    @media (hover: hover) {
       &:hover .pb_checkbox_checkmark {
-        background-color: rgba($white,.05);
+        background-color: rgba($white, 0.05);
       }
     }
 
     &.pb_checkbox_kit_error {
       > .pb_checkbox_checkmark {
         border-color: $error_dark;
-       }
+      }
 
-       input {
+      input {
         &:checked ~ .pb_checkbox_checkmark,
         & ~ .pb_checkbox_indeterminate {
           border-color: $primary;

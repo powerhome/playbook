@@ -4,7 +4,7 @@
 @import "../tokens/colors";
 @import "../tokens/spacing";
 
-[class^=pb_select] {
+[class^="pb_select"] {
   select {
     @include pb_textarea_light;
     @include pb_body_light;
@@ -20,12 +20,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-height: 45px;
-    @media (hover:hover) {
-      &:hover, &:active, &:focus {
+    @media (hover: hover) {
+      &:hover,
+      &:active,
+      &:focus {
         background-color: $focus_input_light;
       }
     }
-    &:focus{
+    &:focus {
       border-color: $primary;
       @include transition_default;
     }
@@ -48,12 +50,14 @@
     text-overflow: ellipsis;
     padding: $space_xs 0px !important;
     max-height: unset !important;
-    @media (hover:hover) {
-      &:hover, &:active, &:focus {
+    @media (hover: hover) {
+      &:hover,
+      &:active,
+      &:focus {
         background-color: rgba($focus_input_light, $opacity_5);
       }
     }
-    &:focus{
+    &:focus {
       border-color: $primary;
       @include transition_default;
     }
@@ -80,7 +84,7 @@
     position: relative;
     display: block;
     &.error {
-      [class*=pb_body_kit] {
+      [class*="pb_body_kit"] {
         margin-top: $space_xs / 2;
       }
       > select:first-child {
@@ -110,7 +114,7 @@
     &:hover {
       select {
         color: $primary !important;
-        background: rgba(0,130,255,0.1);
+        background: rgba(0, 130, 255, 0.1);
       }
       svg {
         color: $primary !important;
@@ -134,21 +138,23 @@
   }
 }
 
-[class^=pb_select].dark {
+[class^="pb_select"].dark {
   select {
     @include pb_textarea_dark;
     @include pb_body_light_dark;
     background: none;
-    background-color: rgba($white,.10);
+    background-color: rgba($white, 0.1);
     box-shadow: inset 0 -11px 20px rgba($white, 0.05);
     text-shadow: 0 0 0 $text_dk_default;
     padding-right: $space_xl;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    @media (hover:hover) {
-      &:hover, &:active, &:focus {
-        background-color: rgba($white,.05);
+    @media (hover: hover) {
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: rgba($white, 0.05);
       }
     }
   }
@@ -156,7 +162,7 @@
     @include pb_textarea_dark;
     @include pb_body_light_dark;
     background: none;
-    background-color: rgba($white,.10);
+    background-color: rgba($white, 0.1);
     appearance: none;
     cursor: pointer;
     box-shadow: inset 0 -11px 20px rgba($white, 0.05);
@@ -167,12 +173,14 @@
     text-overflow: ellipsis;
     padding: $space_xs 0px !important;
     max-height: unset !important;
-    @media (hover:hover) {
-      &:hover, &:active, &:focus {
-        background-color: rgba($white,.05);
+    @media (hover: hover) {
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: rgba($white, 0.05);
       }
     }
-    &:focus{
+    &:focus {
       border-color: $primary;
       @include transition_default;
     }
@@ -212,7 +220,7 @@
     &:hover {
       select {
         color: $white !important;
-        background: rgba(0,130,255,0.1);
+        background: rgba(0, 130, 255, 0.1);
       }
       svg {
         color: $primary !important;

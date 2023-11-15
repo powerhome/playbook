@@ -1,28 +1,14 @@
-import React from 'react'
-import Time from '../_time'
+import React from "react"
+import Time from "../_time"
 
-const TimeAlign = (props) => {
+const TimeAlign = props => {
   return (
     <div>
-      <Time
-          date={new Date()}
-          size="md"
-          {...props}
-      />
+      <Time date={new Date()} size="md" {...props} />
       <br />
-      <Time
-          align="center"
-          date={new Date()}
-          size="md"
-          {...props}
-      />
+      <Time align="center" date={new Date()} size="md" {...props} />
       <br />
-      <Time
-          align="right"
-          date={new Date()}
-          size="md"
-          {...props}
-      />
+      <Time align="right" date={new Date()} size="md" {...props} />
     </div>
   )
 }

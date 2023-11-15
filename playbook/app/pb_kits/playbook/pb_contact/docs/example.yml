@@ -1,10 +1,8 @@
 examples:
-
   rails:
-  - contact_default: Default
-  - contact_with_detail: Detail Indicator
-
+    - contact_default: Default
+    - contact_with_detail: Detail Indicator
 
   react:
-  - contact_default: Default
-  - contact_with_detail: Detail Indicator
+    - contact_default: Default
+    - contact_with_detail: Detail Indicator

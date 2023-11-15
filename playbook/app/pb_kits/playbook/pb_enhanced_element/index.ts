@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import ElementObserver from './element_observer'
+import ElementObserver from "./element_observer"
 
 export default class PbEnhancedElement {
   static _elements: Map<Element, PbEnhancedElement>
@@ -12,16 +12,19 @@ export default class PbEnhancedElement {
   }
 
   static get elements(): Map<Element, PbEnhancedElement> {
-    return this._elements = (this._elements || new Map)
+    return (this._elements = this._elements || new Map())
   }
 
   static get observer(): ElementObserver {
-    return this._observer = (this._observer || new ElementObserver(this))
+    return (this._observer = this._observer || new ElementObserver(this))
   }
 
   static get selector(): string {
     // eslint-disable-next-line no-console
-    console.warn('Define a static property for selector or redefine the matches function in a subclass.', this)
+    console.warn(
+      "Define a static property for selector or redefine the matches function in a subclass.",
+      this
+    )
     return null
   }
 
@@ -29,10 +32,11 @@ export default class PbEnhancedElement {
     if (!this.selector) return []
 
     const matches = []
-    if (node.nodeType === Node.ELEMENT_NODE && node.matches(this.selector)) matches.push(node)
+    if (node.nodeType === Node.ELEMENT_NODE && node.matches(this.selector))
+      matches.push(node)
     matches.push(...node.querySelectorAll(this.selector))
 
-    return (matches)
+    return matches
   }
 
   static addMatch(element: Element): void {
@@ -62,7 +66,7 @@ export default class PbEnhancedElement {
 
   connect(): void {
     // eslint-disable-next-line no-console
-    console.warn('Redefine the connect function in a subclass.', this)
+    console.warn("Redefine the connect function in a subclass.", this)
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -48,7 +48,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     treeData,
     onSelect = () => null,
     selectedIds,
-    variant = "multi"
+    variant = "multi",
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -80,7 +80,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const [singleSelectedItem, setSingleSelectedItem] = useState({
     id: [],
     value: "",
-    item: []
+    item: [],
   })
 
   useEffect(() => {
@@ -94,17 +94,20 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     if (variant === "single") {
       // No selectedIds, reset state
       if (selectedIds?.length === 0 || !selectedIds?.length) {
-        setSingleSelectedItem({ id: [], value: "", item: []})
+        setSingleSelectedItem({ id: [], value: "", item: [] })
       } else {
         // If there is a selectedId but no current item, set the selectedItem
         if (selectedIds?.length !== 0 && !singleSelectedItem.value) {
-          const selectedItem = filterFormattedDataById(formattedData, selectedIds[0])
+          const selectedItem = filterFormattedDataById(
+            formattedData,
+            selectedIds[0]
+          )
 
           if (!selectedItem.length) {
-            setSingleSelectedItem({ id: [], value: "", item: []})
+            setSingleSelectedItem({ id: [], value: "", item: [] })
           } else {
             const { id, value } = selectedItem[0]
-            setSingleSelectedItem({ id: [id], value, item: selectedItem})
+            setSingleSelectedItem({ id: [id], value, item: selectedItem })
           }
         }
       }
@@ -208,7 +211,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     treeData: { [key: string]: any }[],
     selectedIds: string[],
     parent_id: string = null,
-    depth = 0,
+    depth = 0
   ) => {
     if (!Array.isArray(treeData)) {
       return
@@ -216,7 +219,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return treeData.map((item: { [key: string]: any } | any) => {
       const newItem = {
         ...item,
-        checked: Boolean(selectedIds && selectedIds.length && selectedIds.includes(item.id)),
+        checked: Boolean(
+          selectedIds && selectedIds.length && selectedIds.includes(item.id)
+        ),
         parent_id,
         depth,
       }
@@ -277,34 +282,43 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   }
 
   // Single select
-  const handleRadioButtonClick = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleRadioButtonClick = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value: inputText } = e.target
     // The radio button needs a unique ID, this grabs the ID before the hyphen
     const selectedItemID = id.match(/^[^-]*/)[0]
     // Reset tree checked state, triggering useEffect
     const treeWithNoSelections = modifyRecursive(formattedData, false)
     // Update tree with single selection
-    const treeWithSelectedItem = modifyValue(selectedItemID, treeWithNoSelections, true)
-    const selectedItem = filterFormattedDataById(treeWithSelectedItem, selectedItemID)
+    const treeWithSelectedItem = modifyValue(
+      selectedItemID,
+      treeWithNoSelections,
+      true
+    )
+    const selectedItem = filterFormattedDataById(
+      treeWithSelectedItem,
+      selectedItemID
+    )
 
     setFormattedData(treeWithSelectedItem)
-    setSingleSelectedItem({id: [selectedItemID], value: inputText, item: selectedItem})
+    setSingleSelectedItem({
+      id: [selectedItemID],
+      value: inputText,
+      item: selectedItem,
+    })
     // Reset the filter to always display dropdown options on click
     setFilterItem("")
     setIsDropdownClosed(true)
 
     onSelect(selectedItem)
-  };
+  }
 
   // Single select: reset the tree state upon typing
   const handleRadioInputChange = (inputText: string) => {
     modifyRecursive(formattedData, false)
     setDefaultReturn([])
-    setSingleSelectedItem({id: [], value: inputText, item: []})
+    setSingleSelectedItem({ id: [], value: inputText, item: [] })
     setFilterItem(inputText)
-  };
+  }
 
   const isTreeRowExpanded = (item: any) => expanded.indexOf(item.id) > -1
 
@@ -317,7 +331,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       const itemExpanded = isTreeRowExpanded(clickedItem[0])
 
       if (itemExpanded)
-        expandedArray = expandedArray.filter((i) => i != clickedItem[0].id)
+        expandedArray = expandedArray.filter(i => i != clickedItem[0].id)
       else expandedArray.push(clickedItem[0].id)
 
       setExpanded(expandedArray)
@@ -342,60 +356,61 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           items.map((item: { [key: string]: any }) => {
             return (
               <div key={item.id}>
-                <li
-                    className={"dropdown_item"}
-                    data-name={item.id}
-                >
+                <li className={"dropdown_item"} data-name={item.id}>
                   <div className="dropdown_item_checkbox_row">
-                    { !item.parent_id && !item.children ? null :
-                        <div
-                            key={isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"}
-                        >
-                          <CircleIconButton
-                              className={
-                                item.children && item.children.length > 0
-                                  ? ""
-                                  : "toggle_icon"
-                              }
-                              icon={
-                                isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"
-                              }
-                              onClick={(event: any) =>
-                                handleToggleClick(item.id, event)
-                              }
-                              variant="link"
-                          />
-                        </div>
-                    }
-                    { variant === "single" ? (
+                    {!item.parent_id && !item.children ? null : (
+                      <div
+                        key={
+                          isTreeRowExpanded(item)
+                            ? "chevron-down"
+                            : "chevron-right"
+                        }
+                      >
+                        <CircleIconButton
+                          className={
+                            item.children && item.children.length > 0
+                              ? ""
+                              : "toggle_icon"
+                          }
+                          icon={
+                            isTreeRowExpanded(item)
+                              ? "chevron-down"
+                              : "chevron-right"
+                          }
+                          onClick={(event: any) =>
+                            handleToggleClick(item.id, event)
+                          }
+                          variant="link"
+                        />
+                      </div>
+                    )}
+                    {variant === "single" ? (
                       item.hideRadio ? (
                         <Body>{item.label}</Body>
-                      ) :
-                      <Radio
+                      ) : (
+                        <Radio
                           checked={item.checked}
                           id={`${item.id}-${item.label}`}
                           label={item.label}
                           name={inputName}
-                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => (
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             handleRadioButtonClick(e)
-                          )}
-                          padding={item.children ? 'none' : 'xs'}
+                          }
+                          padding={item.children ? "none" : "xs"}
                           type="radio"
                           value={item.label}
-                      />
+                        />
+                      )
                     ) : (
-                      <Checkbox
-                          id={item.id}
-                          text={item.label}
-                      >
+                      <Checkbox id={item.id} text={item.label}>
                         <input
-                            checked={item.checked}
-                            name={item.label}
-                            onChange={(e) => {
-                              handledropdownItemClick(e, !item.checked)
-                            }}
-                            type="checkbox"
-                            value={item.label}
+                          checked={item.checked}
+                          name={item.label}
+                          onChange={e => {
+                            handledropdownItemClick(e, !item.checked)
+                          }}
+                          type="checkbox"
+                          value={item.label}
                         />
                       </Checkbox>
                     )}
@@ -415,28 +430,17 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   }
 
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      <div
-          className="wrapper"
-          ref={dropdownRef}
-      >
-        <div
-            className="input_wrapper"
-            onClick={handleInputWrapperClick}
-        >
+    <div {...ariaProps} {...dataProps} className={classes} id={id}>
+      <div className="wrapper" ref={dropdownRef}>
+        <div className="input_wrapper" onClick={handleInputWrapperClick}>
           <div className="input_inner_container">
             {variant === "single" && defaultReturn.length !== 0
-              ? defaultReturn.map((selectedItem) => (
+              ? defaultReturn.map(selectedItem => (
                   <input
-                      key={selectedItem.id}
-                      name={`${name}[]`}
-                      type="hidden"
-                      value={selectedItem.id}
+                    key={selectedItem.id}
+                    name={`${name}[]`}
+                    type="hidden"
+                    value={selectedItem.id}
                   />
                 ))
               : null}
@@ -444,12 +448,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             {variant !== "single" && (
               <>
                 {returnAllSelected && returnedArray.length !== 0
-                  ? returnedArray.map((item) => (
+                  ? returnedArray.map(item => (
                       <input
-                          key={item.id}
-                          name={`${name}[]`}
-                          type="hidden"
-                          value={item.id}
+                        key={item.id}
+                        name={`${name}[]`}
+                        type="hidden"
+                        value={item.id}
                       />
                     ))
                   : null}
@@ -459,10 +463,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 inputDisplay === "pills"
                   ? returnedArray.map((item, index) => (
                       <FormPill
-                          key={index}
-                          onClick={(event: any) => handlePillClose(event, item)}
-                          size="small"
-                          text={item.label}
+                        key={index}
+                        onClick={(event: any) => handlePillClose(event, item)}
+                        size="small"
+                        text={item.label}
                       />
                     ))
                   : null}
@@ -472,10 +476,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 inputDisplay === "pills"
                   ? defaultReturn.map((item, index) => (
                       <FormPill
-                          key={index}
-                          onClick={(event: any) => handlePillClose(event, item)}
-                          size="small"
-                          text={item.label}
+                        key={index}
+                        onClick={(event: any) => handlePillClose(event, item)}
+                        size="small"
+                        text={item.label}
                       />
                     ))
                   : null}
@@ -491,44 +495,38 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             )}
 
             <input
-                id="multiselect_input"
-                onChange={(e) =>{
-                  variant === "single"
-                    ? handleRadioInputChange(e.target.value)
-                    : setFilterItem(e.target.value)
-                }}
-                onClick={() => setIsDropdownClosed(false)}
-                placeholder={
-                  inputDisplay === "none" && itemsSelectedLength()
-                    ? `${itemsSelectedLength()} ${itemsSelectedLength() === 1 ? "item" : "items"} selected`
-                    : "Start typing..."
-                }
-                value={singleSelectedItem.value || filterItem}
+              id="multiselect_input"
+              onChange={e => {
+                variant === "single"
+                  ? handleRadioInputChange(e.target.value)
+                  : setFilterItem(e.target.value)
+              }}
+              onClick={() => setIsDropdownClosed(false)}
+              placeholder={
+                inputDisplay === "none" && itemsSelectedLength()
+                  ? `${itemsSelectedLength()} ${
+                      itemsSelectedLength() === 1 ? "item" : "items"
+                    } selected`
+                  : "Start typing..."
+              }
+              value={singleSelectedItem.value || filterItem}
             />
           </div>
 
           {isDropdownClosed ? (
             <div key="chevron-down">
-              <Icon
-                  icon="chevron-down"
-                  size="xs"
-              />
+              <Icon icon="chevron-down" size="xs" />
             </div>
           ) : (
             <div key="chevron-up">
-              <Icon
-                  icon="chevron-up"
-                  size="xs"
-              />
+              <Icon icon="chevron-up" size="xs" />
             </div>
           )}
         </div>
 
         <div className={`dropdown_menu ${isDropdownClosed ? "close" : "open"}`}>
           {renderNestedOptions(
-            filterItem
-              ? findByFilter(formattedData, filterItem)
-              : formattedData
+            filterItem ? findByFilter(formattedData, filterItem) : formattedData
           )}
         </div>
       </div>

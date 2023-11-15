@@ -1,22 +1,22 @@
-import React from 'react'
-import classnames from 'classnames'
+import React from "react"
+import classnames from "classnames"
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
 
-import Caption from '../pb_caption/_caption'
+import Caption from "../pb_caption/_caption"
 
 type SectionSeparatorProps = {
-  aria?: { [key: string]: string; },
-  children?: React.ReactChild[] | React.ReactChild,
-  className?: string,
-  dark?: boolean,
-  data?: { [key: string]: string; },
-  id?: string,
-  lineStyle?: "solid" | "dashed",
-  orientation?: "horizontal" | "vertical",
-  text?: string,
-  variant?: "card" | "background",
+  aria?: { [key: string]: string }
+  children?: React.ReactChild[] | React.ReactChild
+  className?: string
+  dark?: boolean
+  data?: { [key: string]: string }
+  id?: string
+  lineStyle?: "solid" | "dashed"
+  orientation?: "horizontal" | "vertical"
+  text?: string
+  variant?: "card" | "background"
 }
 
 const SectionSeparator = (props: SectionSeparatorProps) => {
@@ -26,32 +26,33 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
     className,
     data = {},
     id,
-    lineStyle = 'solid',
-    orientation = 'horizontal',
+    lineStyle = "solid",
+    orientation = "horizontal",
     text,
     dark = false,
-    variant = 'card',
+    variant = "card",
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, lineStyle === "dashed" ? lineStyle : ""), globalProps(props), className)
+  const classes = classnames(
+    buildCss(
+      "pb_section_separator_kit",
+      variant,
+      orientation,
+      lineStyle === "dashed" ? lineStyle : ""
+    ),
+    globalProps(props),
+    className
+  )
 
   return (
-
-    <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      id={id}
-    >
-      {
-        children && children ||
-        text && (
+    <div {...ariaProps} {...dataProps} className={classes} id={id}>
+      {(children && children) ||
+        (text && (
           <span>
             <Caption text={text} dark={dark} />
           </span>
-        )
-      }
+        ))}
     </div>
   )
 }

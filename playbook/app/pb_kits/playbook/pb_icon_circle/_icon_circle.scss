@@ -5,30 +5,30 @@
 @import "../pb_icon/icon";
 
 $pb_icon_circle_sizes: (
-  "xs":   28px,
-  "sm":   38px,
-  "md":   60px,
+  "xs": 28px,
+  "sm": 38px,
+  "md": 60px,
   "base": 60px,
-  "lg":   80px,
-  "xl":   100px,
+  "lg": 80px,
+  "xl": 100px,
 );
 
-[class^=pb_icon_circle_kit] {
+[class^="pb_icon_circle_kit"] {
   display: flex;
   justify-content: center;
   align-items: center;
   object-fit: cover;
   overflow: hidden;
   position: relative;
-// font-family set to sans-serif ONLY for emojis.
-//Needed to fix misalignment issue caused by Proxima font
+  // font-family set to sans-serif ONLY for emojis.
+  //Needed to fix misalignment issue caused by Proxima font
   .icon_circle_emoji {
     font-family: monospace;
   }
 
   i,
   svg {
-    &[class^=pb_icon_kit] {
+    &[class^="pb_icon_kit"] {
       width: 100%;
       height: 100%;
       display: block;
@@ -40,7 +40,7 @@ $pb_icon_circle_sizes: (
   }
 
   @each $name, $size in $pb_icon_circle_sizes {
-    &[class*=_#{$name}] {
+    &[class*="_#{$name}"] {
       width: $size;
       height: $size;
       border-radius: $size/2;
@@ -55,7 +55,7 @@ $pb_icon_circle_sizes: (
   }
 
   @each $color_name, $color_value in $colors {
-    &[class*=_#{$color_name}] {
+    &[class*="_#{$color_name}"] {
       color: $color_value;
       background: rgba(mix($bg_dark, $color_value, 10%), $opacity_1);
       &.dark {

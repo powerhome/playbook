@@ -1,1 +1,1 @@
-Use `valueComponent` props to pass your desire custom options. `valueComponent` will be displayed if present. 
+Use `valueComponent` props to pass your desire custom options. `valueComponent` will be displayed if present.

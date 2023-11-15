@@ -6,5 +6,5 @@
     .padding(.bottom, Spacing.small)
 
   PBCheckbox(checked: true, text: "Checked", action: {})
-  
+
 ```

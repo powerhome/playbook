@@ -1,31 +1,19 @@
-import React from 'react'
+import React from "react"
 
-import IconValue from '../_icon_value'
+import IconValue from "../_icon_value"
 
-const IconValueDefault = (props) => {
+const IconValueDefault = props => {
   return (
     <div>
-      <IconValue
-          icon="clipboard"
-          text="33-123456"
-          {...props}
-      />
+      <IconValue icon="clipboard" text="33-123456" {...props} />
 
       <br />
 
-      <IconValue
-          icon="heart"
-          text="93"
-          {...props}
-      />
+      <IconValue icon="heart" text="93" {...props} />
 
       <br />
 
-      <IconValue
-          icon="clock"
-          text="15min"
-          {...props}
-      />
+      <IconValue icon="clock" text="15min" {...props} />
     </div>
   )
 }

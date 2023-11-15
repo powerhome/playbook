@@ -10,7 +10,7 @@ $space_classes: (
   none: 0,
   auto: auto,
   initial: initial,
-  inherit: inherit
+  inherit: inherit,
 );
 
 $positions: (
@@ -19,15 +19,27 @@ $positions: (
   ml: "margin-left",
   mt: "margin-top",
   mb: "margin-bottom",
-  mx: ("margin-left", "margin-right"),
-  my: ("margin-top", "margin-bottom"),
+  mx: (
+    "margin-left",
+    "margin-right",
+  ),
+  my: (
+    "margin-top",
+    "margin-bottom",
+  ),
   p: "padding",
   pr: "padding-right",
   pl: "padding-left",
   pt: "padding-top",
   pb: "padding-bottom",
-  px: ("padding-left", "padding-right"),
-  py: ("padding-top", "padding-bottom")
+  px: (
+    "padding-left",
+    "padding-right",
+  ),
+  py: (
+    "padding-top",
+    "padding-bottom",
+  ),
 );
 
 $break_methods: (
@@ -35,19 +47,14 @@ $break_methods: (
   on: "break_on",
 );
 
-@each $position_name,
-$position in $positions {
-
-  @each $space_name,
-  $space in $space_classes {
+@each $position_name, $position in $positions {
+  @each $space_name, $space in $space_classes {
     .#{$position_name}_#{$space_name} {
-      @if type-of($position)=="list" {
+      @if type-of($position) == "list" {
         @each $coordinate in $position {
           #{$coordinate}: #{$space} !important;
         }
-      }
-
-      @else {
+      } @else {
         #{$position}: #{$space} !important;
       }
     }
@@ -55,21 +62,14 @@ $position in $positions {
 }
 
 // Generate media queries
-@each $size,
-$size_value in $breakpoints_grid {
+@each $size, $size_value in $breakpoints_grid {
+  @each $position_name, $position in $positions {
+    @each $break_method, $method in $break_methods {
+      @each $space_name, $space in $space_classes {
+        $min_size: map-get($size_value, "min");
+        $max_size: map-get($size_value, "max");
 
-  @each $position_name,
-  $position in $positions {
-
-		@each $break_method,
-		$method in $break_methods {
-
-			@each $space_name,
-			$space in $space_classes {
-				$min_size: map-get($size_value, "min");
-				$max_size: map-get($size_value, "max");
-
-				.break_#{$break_method}_#{$size}\:#{$position_name}_#{$space_name} {
+        .break_#{$break_method}_#{$size}\:#{$position_name}_#{$space_name} {
           @if type-of($position) == "list" {
             @if $break_method == "on" {
               @each $coordinate in $position {
@@ -77,9 +77,7 @@ $size_value in $breakpoints_grid {
                   #{$coordinate}: #{$space} !important;
                 }
               }
-            }
-
-            @else {
+            } @else {
               @each $coordinate in $position {
                 @if ($max_size != null) {
                   @include break_at($max_size) {
@@ -88,16 +86,12 @@ $size_value in $breakpoints_grid {
                 }
               }
             }
-          }
-
-          @else {
+          } @else {
             @if $break_method == "on" {
               @include break_on($min_size, $max_size) {
                 #{$position}: #{$space} !important;
               }
-            }
-
-            @else {
+            } @else {
               @if ($max_size != null) {
                 @include break_at($max_size) {
                   #{$position}: #{$space} !important;
@@ -105,8 +99,8 @@ $size_value in $breakpoints_grid {
               }
             }
           }
-				}
-			}
-		}
-	}
+        }
+      }
+    }
+  }
 }

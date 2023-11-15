@@ -1,39 +1,33 @@
 // @flow
 
-import React from 'react'
-import { Tooltip, Button, Flex, FlexItem } from '../..';
+import React from "react"
+import { Tooltip, Button, Flex, FlexItem } from "../.."
 
-const TooltipInteraction = (props) => {
-
+const TooltipInteraction = props => {
   return (
-   <Flex 
-       flexDirection='row'
-       gap='md'
-       justifyContent='center'
-       wrap
-   >
-    <FlexItem>
-      <Tooltip 
-          interaction 
-          placement='top' 
+    <Flex flexDirection="row" gap="md" justifyContent="center" wrap>
+      <FlexItem>
+        <Tooltip
+          interaction
+          placement="top"
           text="You can copy me"
           zIndex={10}
           {...props}
-      >
-        <Button text="With Interaction"/>
-      </Tooltip>
-    </FlexItem>
-    <FlexItem>
-     <Tooltip 
-         placement='top' 
-         text="I'm just a regular tooltip" 
-         zIndex={10}
-         {...props}
-     >
-        <Button text="No Interaction"/>
-      </Tooltip>
-    </FlexItem>
-   </Flex>
+        >
+          <Button text="With Interaction" />
+        </Tooltip>
+      </FlexItem>
+      <FlexItem>
+        <Tooltip
+          placement="top"
+          text="I'm just a regular tooltip"
+          zIndex={10}
+          {...props}
+        >
+          <Button text="No Interaction" />
+        </Tooltip>
+      </FlexItem>
+    </Flex>
   )
 }
 

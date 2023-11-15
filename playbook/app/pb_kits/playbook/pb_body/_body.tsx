@@ -1,26 +1,30 @@
-import React from 'react'
-import classnames from 'classnames'
+import React from "react"
+import classnames from "classnames"
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import {
+  deprecatedProps,
+  globalProps,
+  GlobalProps,
+} from "../utilities/globalProps"
 
-import Highlight from '../pb_highlight/_highlight'
+import Highlight from "../pb_highlight/_highlight"
 
 type BodyProps = {
-  aria?: {[key: string]: string},
-  className?: string,
-  children?: React.ReactChild[] | React.ReactChild,
-  color?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
-  dark?: boolean,
-  data?: {[key: string]: string},
-  highlightedText?: string[],
-  highlighting?: boolean,
-  id?: string,
-  status?: 'neutral' | 'negative' | 'positive',
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
-  text?: string,
-  truncate?: null | '1' | '2' | '3' | '4' | '5',
-  variant?: null | 'link',
+  aria?: { [key: string]: string }
+  className?: string
+  children?: React.ReactChild[] | React.ReactChild
+  color?: "default" | "light" | "lighter" | "link" | "error" | "success"
+  dark?: boolean
+  data?: { [key: string]: string }
+  highlightedText?: string[]
+  highlighting?: boolean
+  id?: string
+  status?: "neutral" | "negative" | "positive"
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div"
+  text?: string
+  truncate?: null | "1" | "2" | "3" | "4" | "5"
+  variant?: null | "link"
 } & GlobalProps
 
 const Body = (props: BodyProps): React.ReactElement => {
@@ -29,47 +33,36 @@ const Body = (props: BodyProps): React.ReactElement => {
     aria = {},
     children,
     className,
-    color = '',
+    color = "",
     data = {},
     highlightedText = [],
     highlighting = false,
-    id = '',
+    id = "",
     status = null,
-    tag = 'div',
-    text = '',
+    tag = "div",
+    text = "",
     truncate = null,
     variant = null,
   } = props
 
-  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
-  const dataProps: {[key: string]: any} = buildDataProps(data)
-  const isTruncated = truncate ? `truncate_${truncate}` : ''
+  const ariaProps: { [key: string]: any } = buildAriaProps(aria)
+  const dataProps: { [key: string]: any } = buildDataProps(data)
+  const isTruncated = truncate ? `truncate_${truncate}` : ""
   const classes = classnames(
-    buildCss('pb_body_kit', color, variant, status, isTruncated),
+    buildCss("pb_body_kit", color, variant, status, isTruncated),
     globalProps(props),
     className
   )
   const Tag: React.ReactElement | any = `${tag}`
 
-
   return (
-    <Tag
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      { highlighting && (
-        <Highlight
-            highlightedText={highlightedText}
-            text={text}
-        >
+    <Tag {...ariaProps} {...dataProps} className={classes} id={id}>
+      {highlighting && (
+        <Highlight highlightedText={highlightedText} text={text}>
           {children}
         </Highlight>
-      ) }
-      { !highlighting && (
-        text || children
-      ) }
+      )}
+      {!highlighting && (text || children)}
     </Tag>
   )
 }

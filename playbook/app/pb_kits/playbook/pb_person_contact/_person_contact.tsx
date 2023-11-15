@@ -1,27 +1,27 @@
-import React from 'react'
-import classnames from 'classnames'
+import React from "react"
+import classnames from "classnames"
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
 
-import Caption from '../pb_caption/_caption'
-import Contact from '../pb_contact/_contact'
-import Person from '../pb_person/_person'
+import Caption from "../pb_caption/_caption"
+import Contact from "../pb_contact/_contact"
+import Person from "../pb_person/_person"
 
 type ContactItem = {
-  contactType: string,
-  contactValue: string,
-  contactDetail: string,
+  contactType: string
+  contactValue: string
+  contactDetail: string
 }
 
 type PersonContactProps = {
-  aria?: { [key: string]: string },
-  className?: string | string[],
-  data?: object,
-  firstName: string,
-  id?: string,
-  lastName: string,
-  contacts?: ContactItem[],
+  aria?: { [key: string]: string }
+  className?: string | string[]
+  data?: object
+  firstName: string
+  id?: string
+  lastName: string
+  contacts?: ContactItem[]
 }
 
 const PersonContact = (props: PersonContactProps) => {
@@ -38,34 +38,24 @@ const PersonContact = (props: PersonContactProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const classes = classnames(
-    buildCss('pb_person_contact_kit'),
+    buildCss("pb_person_contact_kit"),
     globalProps(props),
     className
   )
 
-  const wrongContacts = () => (
-    contacts.filter((contactObject) => (
-      contactObject.contactType === 'wrong-phone'
-    ))
-  )
+  const wrongContacts = () =>
+    contacts.filter(
+      contactObject => contactObject.contactType === "wrong-phone"
+    )
 
-  const validContacts = () => (
-    contacts.filter((contactObject) => (
-      contactObject.contactType !== 'wrong-phone'
-    ))
-  )
+  const validContacts = () =>
+    contacts.filter(
+      contactObject => contactObject.contactType !== "wrong-phone"
+    )
 
   return (
-    <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      id={id}
-    >
-      <Person
-        firstName={firstName}
-        lastName={lastName}
-      />
+    <div {...ariaProps} {...dataProps} className={classes} id={id}>
+      <Person firstName={firstName} lastName={lastName} />
       {validContacts().map((contactObject, index) => (
         <Contact
           contactDetail={contactObject.contactDetail}

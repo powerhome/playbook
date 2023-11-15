@@ -1,45 +1,17 @@
-import React from 'react'
+import React from "react"
 
-import Nav from '../_nav'
-import NavItem from '../_item'
+import Nav from "../_nav"
+import NavItem from "../_item"
 
-const SubtleNav = (props) => {
+const SubtleNav = props => {
   return (
-    <Nav 
-        variant="subtle"
-        {...props}
-    >
-      <NavItem
-          link="#"
-          text="Overview"
-          {...props}
-      />
-      <NavItem
-          active
-          link="#"
-          text="Albums"
-          {...props}
-      />
-      <NavItem
-          link="#"
-          text="Similar Artists"
-          {...props}
-      />
-      <NavItem
-          link="#"
-          text="Events"
-          {...props}
-      />
-      <NavItem
-          link="#"
-          text="Discography"
-          {...props}
-      />
-      <NavItem
-          link="#"
-          text="Listeners"
-          {...props}
-      />
+    <Nav variant="subtle" {...props}>
+      <NavItem link="#" text="Overview" {...props} />
+      <NavItem active link="#" text="Albums" {...props} />
+      <NavItem link="#" text="Similar Artists" {...props} />
+      <NavItem link="#" text="Events" {...props} />
+      <NavItem link="#" text="Discography" {...props} />
+      <NavItem link="#" text="Listeners" {...props} />
     </Nav>
   )
 }

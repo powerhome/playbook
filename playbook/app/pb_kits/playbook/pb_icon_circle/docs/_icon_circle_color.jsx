@@ -1,58 +1,23 @@
-import React from 'react'
+import React from "react"
 
-import IconCircle from '../_icon_circle'
+import IconCircle from "../_icon_circle"
 
-const IconCircleColor = (props) => {
+const IconCircleColor = props => {
   return (
     <div>
-      <IconCircle
-          icon="rocket"
-          size="sm"
-          variant="royal"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="sm" variant="royal" {...props} />
       <br />
-      <IconCircle
-          icon="rocket"
-          size="sm"
-          variant="orange"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="sm" variant="orange" {...props} />
       <br />
-      <IconCircle
-          icon="rocket"
-          size="sm"
-          variant="purple"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="sm" variant="purple" {...props} />
       <br />
-      <IconCircle
-          icon="rocket"
-          size="sm"
-          variant="teal"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="sm" variant="teal" {...props} />
       <br />
-      <IconCircle
-          icon="rocket"
-          size="sm"
-          variant="red"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="sm" variant="red" {...props} />
       <br />
-      <IconCircle
-          icon="rocket"
-          size="sm"
-          variant="yellow"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="sm" variant="yellow" {...props} />
       <br />
-      <IconCircle
-          icon="rocket"
-          size="sm"
-          variant="green"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="sm" variant="green" {...props} />
     </div>
   )
 }

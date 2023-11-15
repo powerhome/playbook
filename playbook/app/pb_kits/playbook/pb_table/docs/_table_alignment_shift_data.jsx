@@ -1,73 +1,68 @@
-import React from 'react'
+import React from "react"
 
-import Table from '../_table'
+import Table from "../_table"
 
-const TableAlignmentShiftData = (props) => {
+const TableAlignmentShiftData = props => {
   return (
     <div>
-      <Table
-          marginBottom="md"
-          {...props}
-      >
+      <Table marginBottom="md" {...props}>
         <thead>
           <tr>
             <th>&nbsp;</th>
-            <th>{'Price'}</th>
+            <th>{"Price"}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td shift="down">{'Total'}</td>
+            <td shift="down">{"Total"}</td>
             <td>
-              {'$12'}
+              {"$12"}
               <br />
-              {'$46'}
+              {"$46"}
               <br />
-              {'$25'}
+              {"$25"}
               <br />
-              {'-------'}
+              {"-------"}
               <br />
-              {'$83'}
+              {"$83"}
             </td>
           </tr>
         </tbody>
       </Table>
-      <Table
-          {...props}
-      >
+      <Table {...props}>
         <thead>
           <tr>
-            <th>{'Espresso Drinks'}</th>
-            <th>{'Ingredients'}</th>
+            <th>{"Espresso Drinks"}</th>
+            <th>{"Ingredients"}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td shift="up">{'Cappuccino'}</td>
+            <td shift="up">{"Cappuccino"}</td>
             <td>
-              {'Espresso'}
+              {"Espresso"}
               <br />
-              {'Steamed Milk'}
+              {"Steamed Milk"}
               <br />
-              {'Milk Foam'}
+              {"Milk Foam"}
             </td>
           </tr>
           <tr>
-            <td shift="up">{'Macchiato'}</td>
+            <td shift="up">{"Macchiato"}</td>
             <td>
-              {'Espresso'}
+              {"Espresso"}
               <br />
-              {'Steamed Milk'}
+              {"Steamed Milk"}
             </td>
           </tr>
           <tr>
-            <td shift="up">{'Mocha'}</td>
+            <td shift="up">{"Mocha"}</td>
             <td>
-              {'Espresso'}
+              {"Espresso"}
               <br />
-              {'Hot Chocolate'}
+              {"Hot Chocolate"}
               <br />
-              {'Steamed Milk'}
+              {"Steamed Milk"}
             </td>
           </tr>
         </tbody>

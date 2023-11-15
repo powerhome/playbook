@@ -1,22 +1,27 @@
 @import "../tokens/screen_sizes";
 
-@function str_replace($string, $search, $replace: '') {
+@function str_replace($string, $search, $replace: "") {
   $index: str_index($string, $search);
   @if $index {
-    @return str_slice($string, 1, $index - 1) + $replace + str_replace(str_slice($string, $index + str_length($search)), $search, $replace);
+    @return str_slice($string, 1, $index - 1) + $replace +
+      str_replace(
+        str_slice($string, $index + str_length($search)),
+        $search,
+        $replace
+      );
   }
   @return $string;
 }
 
 @mixin layout_settings($size, $side, $color, $selector) {
-  $parent_name: str_replace($selector, '.', '');
+  $parent_name: str_replace($selector, ".", "");
   $name: ".layout";
   display: grid;
 
   &.full {
     min-height: 100vh;
   }
-  @if $side == 'left' {
+  @if $side == "left" {
     grid-template-areas: "#{$parent_name}_sidebar #{$parent_name}_body";
     grid-template-columns: $size auto;
   } @else {
@@ -25,37 +30,37 @@
   }
 
   > #{$name}_body {
-    grid-area:"#{$parent_name}_body";
+    grid-area: "#{$parent_name}_body";
     min-width: 0;
   }
   > #{$name}_sidebar {
     grid-area: "#{$parent_name}_sidebar";
-    @if $side == 'left' {
+    @if $side == "left" {
       border-width: 0 1px 0 0;
       border-style: solid;
-      @if $color == 'dark' {
+      @if $color == "dark" {
         background: $bg_dark;
         border-color: $border_dark;
-      } @else if $color == 'gradient' {
+      } @else if $color == "gradient" {
         border-color: $border_dark;
         @include gradient;
-      } @else if $color == 'transparent' {
+      } @else if $color == "transparent" {
         border-color: transparent;
       } @else {
         background: $white;
         border-color: $border_light;
       }
     }
-    @if $side == 'right' {
+    @if $side == "right" {
       border-width: 0 0 0 1px;
       border-style: solid;
-      @if $color == 'dark' {
+      @if $color == "dark" {
         background: $bg_dark;
         border-color: $border_dark;
-      } @else if $color == 'gradient' {
+      } @else if $color == "gradient" {
         border-color: $border_dark;
         @include gradient;
-      } @else if $color == 'transparent' {
+      } @else if $color == "transparent" {
         border-color: transparent;
       } @else {
         background: $white;

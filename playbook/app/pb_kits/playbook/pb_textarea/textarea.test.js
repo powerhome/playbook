@@ -7,36 +7,21 @@ const testId = "textarea-kit"
 
 describe("TextArea Kit Props", () => {
   test("Expects to have correct classname", () => {
-    render(
-      <Textarea
-          data={{ testid: testId }}
-          label="Label"
-      />
-    )
+    render(<Textarea data={{ testid: testId }} label="Label" />)
 
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveClass("pb_textarea_kit")
   })
 
   test("should render aria-label", () => {
-    render(
-      <Textarea
-          aria={{ label: testId }}
-          data={{ testid: testId }}
-      />
-    )
+    render(<Textarea aria={{ label: testId }} data={{ testid: testId }} />)
 
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveAttribute("aria-label", testId)
   })
 
   test("should render custom classname", () => {
-    render(
-      <Textarea
-          className={"text_class"}
-          data={{ testid: testId }}
-      />
-    )
+    render(<Textarea className={"text_class"} data={{ testid: testId }} />)
 
     const kit = screen.getByTestId(testId)
 
@@ -44,12 +29,7 @@ describe("TextArea Kit Props", () => {
   })
 
   test("should render value", () => {
-    render(
-      <Textarea
-          data={{ testid: testId }}
-          value={"Default Value"}
-      />
-    )
+    render(<Textarea data={{ testid: testId }} value={"Default Value"} />)
 
     const kit = screen.getByTestId(testId)
     const textarea = kit.querySelector("textarea")
@@ -58,12 +38,7 @@ describe("TextArea Kit Props", () => {
   })
 
   test("should render disabled", () => {
-    render(
-      <Textarea
-          data={{ testid: testId }}
-          disabled={false}
-      />
-    )
+    render(<Textarea data={{ testid: testId }} disabled={false} />)
 
     const kit = screen.getByTestId(testId)
     const textarea = kit.querySelector("textarea")
@@ -72,12 +47,7 @@ describe("TextArea Kit Props", () => {
   })
 
   test("should render rows", () => {
-    render(
-      <Textarea
-          data={{ testid: testId }}
-          rows={7}
-      />
-    )
+    render(<Textarea data={{ testid: testId }} rows={7} />)
 
     const kit = screen.getByTestId(testId)
     const textarea = kit.querySelector("textarea")
@@ -86,12 +56,7 @@ describe("TextArea Kit Props", () => {
   })
 
   test("should render character count", () => {
-    render(
-      <Textarea
-          characterCount={50}
-          data={{ testid: testId }}
-      />
-    )
+    render(<Textarea characterCount={50} data={{ testid: testId }} />)
 
     const kit = screen.getByTestId(testId)
     const counter = kit.querySelector(".pb_caption_kit_xs")
@@ -100,12 +65,7 @@ describe("TextArea Kit Props", () => {
   })
 
   test("should have inline class", () => {
-    render(
-      <Textarea
-          data={{ testid: testId }}
-          inline
-      />
-    )
+    render(<Textarea data={{ testid: testId }} inline />)
 
     const kit = screen.getByTestId(testId)
 
@@ -113,12 +73,7 @@ describe("TextArea Kit Props", () => {
   })
 
   test("should have resize class", () => {
-    render(
-      <Textarea
-          data={{ testid: testId }}
-          resize={"none"}
-      />
-    )
+    render(<Textarea data={{ testid: testId }} resize={"none"} />)
 
     const kit = screen.getByTestId(testId)
 
@@ -126,12 +81,7 @@ describe("TextArea Kit Props", () => {
   })
 
   test("should render error", () => {
-    render(
-      <Textarea
-          data={{ testid: testId }}
-          error={"error message"}
-      />
-    )
+    render(<Textarea data={{ testid: testId }} error={"error message"} />)
 
     const kit = screen.getByTestId(testId)
     const error = kit.querySelector(".pb_body_kit_negative")
@@ -141,12 +91,7 @@ describe("TextArea Kit Props", () => {
   })
 
   test("should render label", () => {
-    render(
-      <Textarea
-          data={{ testid: testId }}
-          label={"Test Label"}
-      />
-    )
+    render(<Textarea data={{ testid: testId }} label={"Test Label"} />)
 
     const kit = screen.getByTestId(testId)
     const error = kit.querySelector(".pb_caption_kit_md")
@@ -157,9 +102,9 @@ describe("TextArea Kit Props", () => {
   test("should render max character display", () => {
     render(
       <Textarea
-          characterCount={"11"}
-          data={{ testid: testId }}
-          maxCharacters={"10"}
+        characterCount={"11"}
+        data={{ testid: testId }}
+        maxCharacters={"10"}
       />
     )
 
@@ -170,12 +115,7 @@ describe("TextArea Kit Props", () => {
   })
 
   test("should render max character display", () => {
-    render(
-      <Textarea
-          data={{ testid: testId }}
-          name={"TestName"}
-      />
-    )
+    render(<Textarea data={{ testid: testId }} name={"TestName"} />)
 
     const kit = screen.getByTestId(testId)
     const textarea = kit.querySelector("textarea")
@@ -185,10 +125,7 @@ describe("TextArea Kit Props", () => {
 
   test("should render placeholder", () => {
     render(
-      <Textarea
-          data={{ testid: testId }}
-          placeholder={"Test Placeholder"}
-      />
+      <Textarea data={{ testid: testId }} placeholder={"Test Placeholder"} />
     )
 
     const kit = screen.getByTestId(testId)
@@ -198,12 +135,7 @@ describe("TextArea Kit Props", () => {
   })
 
   test("should be required", () => {
-    render(
-      <Textarea
-          data={{ testid: testId }}
-          required
-      />
-    )
+    render(<Textarea data={{ testid: testId }} required />)
 
     const kit = screen.getByTestId(testId)
     const textarea = kit.querySelector("textarea")

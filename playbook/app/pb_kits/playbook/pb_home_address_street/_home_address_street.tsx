@@ -1,30 +1,30 @@
-import React from 'react'
-import classnames from 'classnames'
+import React from "react"
+import classnames from "classnames"
 
-import { joinPresent, titleize } from '../utilities/text'
-import { globalProps } from '../utilities/globalProps'
+import { joinPresent, titleize } from "../utilities/text"
+import { globalProps } from "../utilities/globalProps"
 
-import Body from '../pb_body/_body'
-import Hashtag from '../pb_hashtag/_hashtag'
-import Title from '../pb_title/_title'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import Body from "../pb_body/_body"
+import Hashtag from "../pb_hashtag/_hashtag"
+import Title from "../pb_title/_title"
+import { buildAriaProps, buildDataProps } from "../utilities/props"
 
 type HomeAddressStreetProps = {
-  aria?: { [key: string]: string },
-  address: string,
-  addressCont: string,
-  city: string,
-  className?: string,
-  data?: { [key: string]: string },
-  dark?: boolean,
-  emphasis: "street" | "city",
-  homeId: string,
-  houseStyle: string,
-  homeUrl: string,
-  newWindow: boolean,
-  state: string,
-  zipcode: string,
-  territory: string,
+  aria?: { [key: string]: string }
+  address: string
+  addressCont: string
+  city: string
+  className?: string
+  data?: { [key: string]: string }
+  dark?: boolean
+  emphasis: "street" | "city"
+  homeId: string
+  houseStyle: string
+  homeUrl: string
+  newWindow: boolean
+  state: string
+  zipcode: string
+  territory: string
 }
 
 const HomeAddressStreet = (props: HomeAddressStreetProps) => {
@@ -36,7 +36,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
     className,
     data = {},
     dark = false,
-    emphasis = 'street',
+    emphasis = "street",
     homeId,
     homeUrl,
     newWindow,
@@ -49,8 +49,8 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
   const classes = (className: string, dark: boolean) =>
     classnames(
       {
-        'pb_home_address_street': !dark,
-        'pb_home_address_street_dark': dark,
+        pb_home_address_street: !dark,
+        pb_home_address_street_dark: dark,
       },
       globalProps(props),
       className
@@ -58,69 +58,61 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
 
   const dataProps: { [key: string]: any } = buildDataProps(data)
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
-  
+
   return (
     <div className={classes(className, dark)} {...ariaProps} {...dataProps}>
-      {emphasis == 'street' && 
+      {emphasis == "street" && (
         <div>
           <Title
-              className="pb_home_address_street_address"
-              dark={dark}
-              size={4}
+            className="pb_home_address_street_address"
+            dark={dark}
+            size={4}
           >
-            {joinPresent([titleize(address), houseStyle], ' · ')}
+            {joinPresent([titleize(address), houseStyle], " · ")}
           </Title>
           <Title
-              className="pb_home_address_street_address"
-              dark={dark}
-              size={4}
+            className="pb_home_address_street_address"
+            dark={dark}
+            size={4}
           >
             {titleize(addressCont)}
           </Title>
-          <Body color="light">
-            {`${titleize(city)}, ${state} ${zipcode}`}
-          </Body>
+          <Body color="light">{`${titleize(city)}, ${state} ${zipcode}`}</Body>
         </div>
-      }
-      {emphasis == 'city' &&
+      )}
+      {emphasis == "city" && (
         <div>
           <Body color="light">
-            {joinPresent([titleize(address), houseStyle], ' · ')}
+            {joinPresent([titleize(address), houseStyle], " · ")}
           </Body>
           <Body color="light">{titleize(addressCont)}</Body>
           <div>
             <Title
-                className="pb_home_address_street_address"
-                dark={dark}
-                size={4}
-                tag="span"
+              className="pb_home_address_street_address"
+              dark={dark}
+              size={4}
+              tag="span"
             >
               {`${titleize(city)}, ${state}`}
             </Title>
-            <Body
-                color="light"
-                tag="span"
-            >
+            <Body color="light" tag="span">
               {` ${zipcode}`}
             </Body>
           </div>
         </div>
-      }
-      {homeId &&
+      )}
+      {homeId && (
         <Hashtag
-            classname="home-hashtag"
-            dark={dark}
-            marginRight="xxs"
-            newWindow={newWindow}
-            text={homeId}
-            type="home"
-            url={homeUrl || '#'}
+          classname="home-hashtag"
+          dark={dark}
+          marginRight="xxs"
+          newWindow={newWindow}
+          text={homeId}
+          type="home"
+          url={homeUrl || "#"}
         />
-      }
-      <Body
-          color="light"
-          tag="span"
-      >
+      )}
+      <Body color="light" tag="span">
         <small>{territory}</small>
       </Body>
     </div>

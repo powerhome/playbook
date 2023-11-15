@@ -1,30 +1,30 @@
-import React from 'react'
+import React from "react"
 
-import CircleChart from '../_circle_chart'
+import CircleChart from "../_circle_chart"
 
 const dataRounded = [
   {
-    name: 'Waiting for Calls',
+    name: "Waiting for Calls",
     value: 41,
   },
   {
-    name: 'On Call',
+    name: "On Call",
     value: 49,
   },
   {
-    name: 'After call',
+    name: "After call",
     value: 10,
   },
 ]
 
-const CircleChartRounded = (props) => (
+const CircleChartRounded = props => (
   <div>
     <CircleChart
-        chartData={dataRounded}
-        id="default-test-rounded"
-        innerSize="lg"
-        rounded
-        {...props}
+      chartData={dataRounded}
+      id="default-test-rounded"
+      innerSize="lg"
+      rounded
+      {...props}
     />
   </div>
 )

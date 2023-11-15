@@ -1,22 +1,22 @@
-import React from 'react'
-import { render, screen } from '../utilities/test-utils'
+import React from "react"
+import { render, screen } from "../utilities/test-utils"
 
-import { MultiLevelSelect } from '../'
+import { MultiLevelSelect } from "../"
 
 const treeData = {
-  label: 'search me',
-  value: 'searchme',
-  id:'default1',
+  label: "search me",
+  value: "searchme",
+  id: "default1",
   children: [
     {
-      label: 'search me too',
-      value: 'searchmetoo',
-      id:'default2',
+      label: "search me too",
+      value: "searchmetoo",
+      id: "default2",
       children: [
         {
-          label: 'No one can get me',
-          value: 'anonymous',
-          id:'default3',
+          label: "No one can get me",
+          value: "anonymous",
+          id: "default3",
         },
       ],
     },
@@ -24,16 +24,15 @@ const treeData = {
 }
 
 const testId = "multiselect-test"
-test('should render custom class', () => {
+test("should render custom class", () => {
   render(
-      <MultiLevelSelect
-          className='custom-class'
-          data={{ testid: testId}}
-          treeData={treeData}
-      /> 
+    <MultiLevelSelect
+      className="custom-class"
+      data={{ testid: testId }}
+      treeData={treeData}
+    />
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit).toHaveClass('custom-class')
+  expect(kit).toHaveClass("custom-class")
 })
-

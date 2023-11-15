@@ -1,12 +1,10 @@
-import React from 'react'
-import { SectionSeparator } from '../../'
+import React from "react"
+import { SectionSeparator } from "../../"
 
-const SectionSeparatorLine = (props) => {
+const SectionSeparatorLine = props => {
   return (
     <div>
-      <SectionSeparator
-          {...props}
-      />
+      <SectionSeparator {...props} />
     </div>
   )
 }

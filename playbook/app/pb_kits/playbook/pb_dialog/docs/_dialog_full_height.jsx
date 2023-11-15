@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   Body,
   Button,
@@ -7,21 +7,19 @@ import {
   Flex,
   RichTextEditor,
   Typeahead,
-} from "../..";
+} from "../.."
 
 const useDialog = (visible = false) => {
-  const [opened, setOpened] = useState(visible);
-  const toggle = () => setOpened(!opened);
+  const [opened, setOpened] = useState(visible)
+  const toggle = () => setOpened(!opened)
 
-  return [opened, toggle];
-};
+  return [opened, toggle]
+}
 
 const DialogFullHeight = () => {
-  const [headerSeparatorDialogOpened, toggleHeaderSeparatorDialog] =
-    useDialog();
-  const [footerSeparatorDialogOpened, toggleFooterSeparatorDialog] =
-    useDialog();
-  const [bothSeparatorsDialogOpened, toggleBothSeparatorsDialog] = useDialog();
+  const [headerSeparatorDialogOpened, toggleHeaderSeparatorDialog] = useDialog()
+  const [footerSeparatorDialogOpened, toggleFooterSeparatorDialog] = useDialog()
+  const [bothSeparatorsDialogOpened, toggleBothSeparatorsDialog] = useDialog()
 
   const dialogs = [
     {
@@ -42,34 +40,30 @@ const DialogFullHeight = () => {
       toggle: toggleBothSeparatorsDialog,
       visible: bothSeparatorsDialogOpened,
     },
-  ];
+  ]
 
   return (
     <>
       <Flex wrap>
-        <Button id="sm"
-            marginRight="md"
-            onClick={toggleHeaderSeparatorDialog}>
+        <Button id="sm" marginRight="md" onClick={toggleHeaderSeparatorDialog}>
           {"Small Dialog"}
         </Button>
-        <Button marginRight="md"
-            onClick={toggleFooterSeparatorDialog}>
+        <Button marginRight="md" onClick={toggleFooterSeparatorDialog}>
           {"Medium Dialog"}
         </Button>
-        <Button marginRight="md"
-            onClick={toggleBothSeparatorsDialog}>
+        <Button marginRight="md" onClick={toggleBothSeparatorsDialog}>
           {"Large Dialog"}
         </Button>
       </Flex>
       <Flex>
-        {dialogs.map(({toggle, visible, placement, size, title}, index) => (
+        {dialogs.map(({ toggle, visible, placement, size, title }, index) => (
           <Dialog
-              fullHeight
-              key={index}
-              onClose={toggle}
-              opened={visible}
-              placement={placement}
-              size={size}
+            fullHeight
+            key={index}
+            onClose={toggle}
+            opened={visible}
+            placement={placement}
+            size={size}
           >
             <Dialog.Header>
               <Body>{title}</Body>
@@ -88,8 +82,7 @@ const DialogFullHeight = () => {
             </Dialog.Body>
             <Dialog.Footer>
               <Button onClick={toggle}>{"Send My Issue"}</Button>
-              <Button onClick={toggle}
-                  variant="link">
+              <Button onClick={toggle} variant="link">
                 {"Back"}
               </Button>
             </Dialog.Footer>
@@ -97,7 +90,7 @@ const DialogFullHeight = () => {
         ))}
       </Flex>
     </>
-  );
-};
+  )
+}
 
-export default DialogFullHeight;
+export default DialogFullHeight

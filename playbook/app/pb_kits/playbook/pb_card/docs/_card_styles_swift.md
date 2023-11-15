@@ -9,7 +9,7 @@ VStack(alignment: .leading, spacing: Spacing.small) {
   PBCard(style: .selected()) {
     Text("Card Context").pbFont(.body)
   }
-  
+
   PBCard(style: .error) {
     Text("Card Context").pbFont(.body)
   }

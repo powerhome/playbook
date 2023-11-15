@@ -1,15 +1,11 @@
-import React from 'react'
+import React from "react"
 
-import IconCircle from '../_icon_circle'
+import IconCircle from "../_icon_circle"
 
-const IconCircleDefault = (props) => {
+const IconCircleDefault = props => {
   return (
     <div>
-      <IconCircle
-          icon="rocket"
-          size="md"
-          {...props}
-      />
+      <IconCircle icon="rocket" size="md" {...props} />
     </div>
   )
 }

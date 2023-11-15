@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
-import TextInput from '../_text_input'
+import TextInput from "../_text_input"
 
-const TextInputAddOn = (props) => {
-  const [defaultInput, setDefaultInput] = useState('')
-  const [firstInput, setFirstInput] = useState('')
-  const [secondInput, setSecondInput] = useState('')
-  const [thirdInput, setThirdInput] = useState('')
-  const [fourthInput, setFourthInput] = useState('')
+const TextInputAddOn = props => {
+  const [defaultInput, setDefaultInput] = useState("")
+  const [firstInput, setFirstInput] = useState("")
+  const [secondInput, setSecondInput] = useState("")
+  const [thirdInput, setThirdInput] = useState("")
+  const [fourthInput, setFourthInput] = useState("")
 
   const handleUpdateDefaultInput = ({ target }) => {
     setDefaultInput(target.value)
@@ -33,47 +33,47 @@ const TextInputAddOn = (props) => {
     <>
       <div>
         <TextInput
-            addOn={{ icon: 'bat' }}
-            label="Add On With Defaults"
-            onChange={handleUpdateDefaultInput}
-            value={defaultInput}
-            {...props}
+          addOn={{ icon: "bat" }}
+          label="Add On With Defaults"
+          onChange={handleUpdateDefaultInput}
+          value={defaultInput}
+          {...props}
         />
       </div>
       <div>
         <TextInput
-            addOn={{ icon: 'user', alignment: 'right', border: true }}
-            label="Right-Aligned Add On With Border"
-            onChange={handleUpdateFirstInput}
-            value={firstInput}
-            {...props}
+          addOn={{ icon: "user", alignment: "right", border: true }}
+          label="Right-Aligned Add On With Border"
+          onChange={handleUpdateFirstInput}
+          value={firstInput}
+          {...props}
         />
       </div>
       <div>
         <TextInput
-            addOn={{ icon: 'percent', alignment: 'right', border: false }}
-            label="Right-Aligned Add On With No Border"
-            onChange={handleUpdateThirdInput}
-            value={thirdInput}
-            {...props}
+          addOn={{ icon: "percent", alignment: "right", border: false }}
+          label="Right-Aligned Add On With No Border"
+          onChange={handleUpdateThirdInput}
+          value={thirdInput}
+          {...props}
         />
       </div>
       <div>
         <TextInput
-            addOn={{ icon: 'percent', alignment: 'left', border: false }}
-            label="Left-Aligned Add On With No Border"
-            onChange={handleUpdateSecondInput}
-            value={secondInput}
-            {...props}
+          addOn={{ icon: "percent", alignment: "left", border: false }}
+          label="Left-Aligned Add On With No Border"
+          onChange={handleUpdateSecondInput}
+          value={secondInput}
+          {...props}
         />
       </div>
       <div>
         <TextInput
-            addOn={{ icon: 'percent', alignment: 'left', border: true }}
-            label="Left-Aligned Add On With Border"
-            onChange={handleUpdateFourthInput}
-            value={fourthInput}
-            {...props}
+          addOn={{ icon: "percent", alignment: "left", border: true }}
+          label="Left-Aligned Add On With Border"
+          onChange={handleUpdateFourthInput}
+          value={fourthInput}
+          {...props}
         />
       </div>
     </>

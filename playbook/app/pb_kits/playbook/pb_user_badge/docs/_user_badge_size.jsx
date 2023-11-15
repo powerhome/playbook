@@ -1,31 +1,22 @@
-import React from 'react'
+import React from "react"
 
-import UserBadge from '../_user_badge'
+import UserBadge from "../_user_badge"
 
 const UserBadgeSize = () => {
   return (
     <div>
       <div>
-        <UserBadge
-            badge="veteran"
-            size="sm"
-        />
+        <UserBadge badge="veteran" size="sm" />
       </div>
       <br />
       <br />
       <div>
-        <UserBadge
-            badge="veteran"
-            size="md"
-        />
+        <UserBadge badge="veteran" size="md" />
       </div>
       <br />
       <br />
       <div>
-        <UserBadge
-            badge="veteran"
-            size="lg"
-        />
+        <UserBadge badge="veteran" size="lg" />
       </div>
     </div>
   )

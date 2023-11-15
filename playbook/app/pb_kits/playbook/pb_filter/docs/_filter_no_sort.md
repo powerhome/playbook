@@ -1,1 +1,1 @@
-To display results, use templates `single` or `default`. 
+To display results, use templates `single` or `default`.

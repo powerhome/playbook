@@ -12,4 +12,3 @@ examples:
     - popover_close: Close Options
     - popover_z_index: Set Z-Index
     - popover_scroll_height: Scroll and Height Settings
-    

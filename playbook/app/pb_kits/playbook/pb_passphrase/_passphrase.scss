@@ -9,7 +9,7 @@
     display: inline;
   }
 
-  [class*=show-below-] {
+  [class*="show-below-"] {
     display: none;
   }
   @each $breakpoint_name, $breakpoint in $breakpoints {
@@ -44,7 +44,7 @@
       right: 11px;
       top: 11px;
       cursor: pointer;
-      @media (hover:hover) {
+      @media (hover: hover) {
         &:hover .pb_body_kit_light {
           color: $primary;
         }
@@ -56,7 +56,8 @@
     }
   }
 
-  .pb_progress_simple_wrapper, .pb_progress_simple_wrapper_dark {
+  .pb_progress_simple_wrapper,
+  .pb_progress_simple_wrapper_dark {
     margin-bottom: ($space_xs/2);
 
     &.progress-empty-input {
@@ -74,4 +75,3 @@
     }
   }
 }
-

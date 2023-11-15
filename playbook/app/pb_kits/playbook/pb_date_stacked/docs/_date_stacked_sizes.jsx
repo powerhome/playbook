@@ -1,20 +1,12 @@
-import React from 'react'
-import DateStacked from '../_date_stacked'
+import React from "react"
+import DateStacked from "../_date_stacked"
 
-const DateStackedSizes = (props) => {
+const DateStackedSizes = props => {
   return (
     <div>
-      <DateStacked
-          date={new Date()}
-          size="sm"
-          {...props}
-      />
+      <DateStacked date={new Date()} size="sm" {...props} />
       <br />
-      <DateStacked
-          date={new Date()}
-          size="md"
-          {...props}
-      />
+      <DateStacked date={new Date()} size="md" {...props} />
     </div>
   )
 }

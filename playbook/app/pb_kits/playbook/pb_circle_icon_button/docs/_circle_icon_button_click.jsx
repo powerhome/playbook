@@ -1,13 +1,13 @@
-import React from 'react'
-import { CircleIconButton } from '../..'
+import React from "react"
+import { CircleIconButton } from "../.."
 
-const CircleIconButtonClick = (props) => (
+const CircleIconButtonClick = props => (
   <div>
     <CircleIconButton
-        icon="plus"
-        onClick={() => alert('Click!')}
-        variant="primary"
-        {...props}
+      icon="plus"
+      onClick={() => alert("Click!")}
+      variant="primary"
+      {...props}
     />
   </div>
 )

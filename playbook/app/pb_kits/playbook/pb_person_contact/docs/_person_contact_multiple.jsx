@@ -1,37 +1,37 @@
-import React from 'react'
+import React from "react"
 
-import PersonContact from '../_person_contact'
+import PersonContact from "../_person_contact"
 
-const PersonContactMultiple = (props) => {
+const PersonContactMultiple = props => {
   return (
     <div>
       <PersonContact
-          contacts={[
+        contacts={[
           {
-            contactType: 'email',
-            contactValue: 'email@example.com',
+            contactType: "email",
+            contactValue: "email@example.com",
           },
           {
-            contactValue: '5555555555',
+            contactValue: "5555555555",
           },
           {
-            contactType: 'work',
-            contactValue: '3245627482',
+            contactType: "work",
+            contactValue: "3245627482",
           },
         ]}
-          firstName="Harvey"
-          lastName="Walters"
-          {...props}
+        firstName="Harvey"
+        lastName="Walters"
+        {...props}
       />
       <PersonContact
-          contacts={[
+        contacts={[
           {
-            contactValue: '5555555555',
+            contactValue: "5555555555",
           },
         ]}
-          firstName="Brenda"
-          lastName="Walters"
-          {...props}
+        firstName="Brenda"
+        lastName="Walters"
+        {...props}
       />
     </div>
   )

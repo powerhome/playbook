@@ -6,7 +6,7 @@ $pb_star_rating_number_width: 30px;
 $pb_star_rating_wrapper_width: 90px;
 $pb_star_rating_height: 26px;
 
-[class^=pb_star_rating_kit] {
+[class^="pb_star_rating_kit"] {
   position: relative;
   display: inline-flex;
   justify-content: flex-start;
@@ -54,7 +54,7 @@ $pb_star_rating_height: 26px;
     }
   }
 
-  &[class*=_hide_rating] {
+  &[class*="_hide_rating"] {
     .pb_star_rating_number {
       display: none;
     }

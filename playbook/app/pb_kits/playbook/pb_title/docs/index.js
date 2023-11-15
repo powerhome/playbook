@@ -1,5 +1,5 @@
-export { default as TitleDefault } from './_title_default.jsx'
-export { default as TitleLightWeight } from './_title_light_weight.jsx'
-export { default as TitleColors } from './_title_colors.jsx'
-export { default as TitleResponsive } from './_title_responsive.jsx'
-export { default as TitleTruncate } from './_title_truncate.jsx'
+export { default as TitleDefault } from "./_title_default.jsx"
+export { default as TitleLightWeight } from "./_title_light_weight.jsx"
+export { default as TitleColors } from "./_title_colors.jsx"
+export { default as TitleResponsive } from "./_title_responsive.jsx"
+export { default as TitleTruncate } from "./_title_truncate.jsx"

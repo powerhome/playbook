@@ -3,14 +3,14 @@
 @import "../tokens/spacing";
 @import "../tokens/shadows";
 
-[class^=pb_typeahead_kit] {
+[class^="pb_typeahead_kit"] {
   .typeahead-kit-select__option {
     cursor: pointer;
   }
   .pb_typeahead_wrapper {
     position: relative;
 
-    .text_input_value_container{
+    .text_input_value_container {
       cursor: text;
     }
     .text_input_indicators,
@@ -24,10 +24,10 @@
       right: 1em;
       opacity: 0;
       color: $text_lt_light;
-      transition: opacity .15s ease-in-out;
+      transition: opacity 0.15s ease-in-out;
     }
   }
-  [class^=pb_text_input_kit] {
+  [class^="pb_text_input_kit"] {
     .text_input_wrapper {
       .text_input {
         max-height: none;
@@ -40,13 +40,13 @@
   .pb_item_kit {
     padding: ($space_xs + 2) 0;
 
-    @media (hover:hover) {
+    @media (hover: hover) {
       &:hover {
         background-color: $bg_light;
       }
     }
   }
-  [class^=pb_list_kit] {
+  [class^="pb_list_kit"] {
     max-height: 18em;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -57,20 +57,20 @@
     box-shadow: $shadow_deep;
     z-index: 100;
     border-radius: $border_rad_heavier;
-    transition: opacity .25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
   }
-  &:focus-within [class^=pb_list_kit] {
+  &:focus-within [class^="pb_list_kit"] {
     display: block;
     opacity: 1;
   }
-  &:not(:focus-within) [class^=pb_list_kit] {
+  &:not(:focus-within) [class^="pb_list_kit"] {
     display: none;
     opacity: 0;
   }
-  [class^=pb_list_kit] {
+  [class^="pb_list_kit"] {
     margin-top: -$space-sm;
     li {
-      transition: background-color .25s ease-in-out;
+      transition: background-color 0.25s ease-in-out;
     }
     & > [data-pb-typeahead-kit-results] > li {
       &:focus-within {
@@ -90,11 +90,11 @@
       }
     }
   }
-  &[class*=dark] {
+  &[class*="dark"] {
     .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
       color: $text_dk_light;
     }
-    [class^=pb_text_input_kit].dark .text_input_wrapper .text_input {
+    [class^="pb_text_input_kit"].dark .text_input_wrapper .text_input {
       display: inherit !important;
     }
     .typeahead-kit-select__menu {
@@ -119,21 +119,22 @@
     .typeahead-kit-select__option--is-focused {
       background-color: $active_dark;
     }
-    [class^=pb_list_kit] {
+    [class^="pb_list_kit"] {
       background-color: $bg_dark;
     }
     .pb_item_kit {
       button {
         color: white !important;
       }
-      @media (hover:hover) {
+      @media (hover: hover) {
         &:hover {
-          background-color: rgba($white,.1);
+          background-color: rgba($white, 0.1);
         }
       }
     }
   }
-  &.react-select, &.react-select .dark {
+  &.react-select,
+  &.react-select .dark {
     .text_input {
       display: inherit;
       padding: 3px 4px;
@@ -154,17 +155,17 @@
       box-sizing: border-box;
     }
   }
-  .placeholder+.input-wrapper .typeahead-plus-icon {
+  .placeholder + .input-wrapper .typeahead-plus-icon {
     display: none;
   }
   .text_input {
     .typeahead-kit-select {
-      &__single-value{
+      &__single-value {
         color: $text_lt_default;
       }
     }
     &.typeahead-kit-select {
-      &__single-value{
+      &__single-value {
         color: $text_lt_default;
       }
       &__control {
@@ -172,7 +173,7 @@
           @include pb_textarea_focus;
           @include transition_default;
           border-color: $primary;
-          background-color: rgba($focus_input_light,$opacity_5);
+          background-color: rgba($focus_input_light, $opacity_5);
           box-shadow: none;
           .typeahead-plus-icon {
             display: none;
@@ -181,7 +182,7 @@
       }
     }
   }
- 
+
   .typeahead-kit-select__menu {
     .typeahead-kit-select__menu-list {
       padding: 0;
@@ -199,7 +200,7 @@
   .typeahead-plus-icon {
     color: $text_lt_lighter;
   }
-  [class^=pb_badge_kit] span {
+  [class^="pb_badge_kit"] span {
     line-height: 16.5px;
     letter-spacing: normal;
   }
@@ -214,4 +215,3 @@
     }
   }
 }
-

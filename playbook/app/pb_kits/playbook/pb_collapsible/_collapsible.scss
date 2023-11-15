@@ -1,7 +1,7 @@
 @import "./tokens/colors";
 @import "./tokens/spacing";
 
-[class^=pb_collapsible_kit] {
+[class^="pb_collapsible_kit"] {
   padding: $space_md;
 
   .toggle-content {
@@ -10,7 +10,9 @@
     padding-bottom: 0 !important;
     padding-top: 0 !important;
     overflow: hidden;
-    transition: height 300ms, padding 300ms ease-in-out;
+    transition:
+      height 300ms,
+      padding 300ms ease-in-out;
   }
 
   .toggle-content.is-visible {
@@ -18,7 +20,7 @@
     height: auto;
   }
   .icon_wrapper:hover {
-      color: $primary
+    color: $primary;
   }
 
   .dark {
@@ -28,10 +30,10 @@
   }
 }
 
-[class^=pb_collapsible_main_kit] {
+[class^="pb_collapsible_main_kit"] {
   padding: $space_md;
 }
 
-[class^=pb_collapsible_content_kit] {
+[class^="pb_collapsible_content_kit"] {
   padding: $space_md;
 }

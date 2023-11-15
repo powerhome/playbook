@@ -1,45 +1,45 @@
-import React from 'react'
+import React from "react"
 
-import Select from '../_select'
+import Select from "../_select"
 
-const SelectDisabledOptions = (props) => {
+const SelectDisabledOptions = props => {
   const options = [
     {
-      value: '1',
+      value: "1",
       disabled: true,
-      text: 'Espresso',
+      text: "Espresso",
     },
     {
-      value: '2',
-      text: 'Americano',
+      value: "2",
+      text: "Americano",
     },
     {
-      value: '3',
+      value: "3",
       disabled: true,
-      text: 'Cappuccino',
+      text: "Cappuccino",
     },
     {
-      value: '4',
-      text: 'Mocha',
+      value: "4",
+      text: "Mocha",
     },
     {
-      value: '5',
-      text: 'Flat White',
+      value: "5",
+      text: "Flat White",
     },
     {
-      value: '6',
-      text: 'Latte',
+      value: "6",
+      text: "Latte",
     },
   ]
 
   return (
     <div>
       <Select
-          label="Favorite Coffee"
-          name="coffee"
-          options={options}
-          value="2"
-          {...props}
+        label="Favorite Coffee"
+        name="coffee"
+        options={options}
+        value="2"
+        {...props}
       />
     </div>
   )

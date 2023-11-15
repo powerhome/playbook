@@ -1,28 +1,24 @@
 /* @flow */
-import React from 'react'
-import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps'
-import {
-  buildAriaProps,
-  buildCss,
-  buildDataProps,
-} from '../utilities/props'
-import Icon from '../pb_icon/_icon'
-import Title from '../pb_title/_title'
+import React from "react"
+import classnames from "classnames"
+import { globalProps } from "../utilities/globalProps"
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import Icon from "../pb_icon/_icon"
+import Title from "../pb_title/_title"
 
 type SelectableIconProps = {
-  aria?: {[key: string]: string},
-  checked?: boolean,
-  className?: string,
-  customIcon?: {[key: string] :SVGElement},
-  disabled?: boolean,
-  data?: Object,
-  icon: string,
-  inputId: string,
-  inputs: string,
-  multi?: boolean,
-  name: string,
-  text: string,
+  aria?: { [key: string]: string }
+  checked?: boolean
+  className?: string
+  customIcon?: { [key: string]: SVGElement }
+  disabled?: boolean
+  data?: Object
+  icon: string
+  inputId: string
+  inputs: string
+  multi?: boolean
+  name: string
+  text: string
   value?: string
 }
 
@@ -35,7 +31,7 @@ const SelectableIcon = ({
   disabled = false,
   icon,
   inputId,
-  inputs = 'enabled',
+  inputs = "enabled",
   multi = true,
   name,
   text,
@@ -46,7 +42,7 @@ const SelectableIcon = ({
   const dataProps = buildDataProps(data)
 
   const classes = classnames(
-    buildCss('pb_selectable_icon_kit', {
+    buildCss("pb_selectable_icon_kit", {
       checked: checked,
       disabled: disabled,
       enabled: !disabled,
@@ -55,31 +51,19 @@ const SelectableIcon = ({
     className
   )
 
-  const inputType = multi === false ? 'radio' : 'checkbox'
+  const inputType = multi === false ? "radio" : "checkbox"
   const inputIdPresent = inputId !== null ? inputId : name
 
   return (
-    <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-    >
-      {inputs === 'disabled' && (
+    <div {...ariaProps} {...dataProps} className={classes}>
+      {inputs === "disabled" && (
         <>
-          <Icon
-            customIcon={customIcon}
-            icon={icon}
-            size="2x"
-          />
-          <Title
-            size={4}
-            tag="h4"
-            text={text}
-          />
+          <Icon customIcon={customIcon} icon={icon} size="2x" />
+          <Title size={4} tag="h4" text={text} />
         </>
       )}
-          
-      {inputs === 'enabled' && (
+
+      {inputs === "enabled" && (
         <>
           <input
             {...props}
@@ -91,16 +75,8 @@ const SelectableIcon = ({
             value={value}
           />
           <label htmlFor={inputIdPresent}>
-            <Icon
-              customIcon={customIcon}
-              icon={icon}
-              size="2x"
-            />
-            <Title
-              size={4}
-              tag="h4"
-              text={text}
-            />
+            <Icon customIcon={customIcon} icon={icon} size="2x" />
+            <Title size={4} tag="h4" text={text} />
           </label>
         </>
       )}

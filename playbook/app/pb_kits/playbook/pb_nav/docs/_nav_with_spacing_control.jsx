@@ -1,44 +1,33 @@
-import React from 'react'
+import React from "react"
 
-import Nav from '../_nav'
-import NavItem from '../_item'
+import Nav from "../_nav"
+import NavItem from "../_item"
 
-const NavWithSpacingControl = (props) => {
+const NavWithSpacingControl = props => {
   return (
-    <Nav
+    <Nav link="#" orientation="vertical" variant="bold" {...props}>
+      <NavItem link="#" margin="none" paddingY="xxs" text="About" {...props} />
+      <NavItem
+        active
         link="#"
-        orientation="vertical"
-        variant="bold"
+        margin="none"
+        paddingY="xxs"
+        text="Case Studies"
         {...props}
-    >
-      <NavItem
-          link="#"
-          margin="none"
-          paddingY="xxs"
-          text="About"
-          {...props}
       />
       <NavItem
-          active
-          link="#"
-          margin="none"
-          paddingY="xxs"
-          text="Case Studies"
-          {...props}
+        link="#"
+        margin="none"
+        paddingY="xxs"
+        text="Service"
+        {...props}
       />
       <NavItem
-          link="#"
-          margin="none"
-          paddingY="xxs"
-          text="Service"
-          {...props}
-      />
-      <NavItem
-          link="#"
-          margin="none"
-          paddingY="xxs"
-          text="Contacts"
-          {...props}
+        link="#"
+        margin="none"
+        paddingY="xxs"
+        text="Contacts"
+        {...props}
       />
     </Nav>
   )

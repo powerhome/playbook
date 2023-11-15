@@ -13,10 +13,9 @@ function LayoutTest(props) {
 
 test("render all color variants", () => {
   const testValues = [undefined, "light", "dark", "gradient"]
-  testValues.forEach((variant) => {
+  testValues.forEach(variant => {
     const { getByTestId } = render(
-      <LayoutTest data={{ testid: `test-${variant}` }}
-          variant={variant} />
+      <LayoutTest data={{ testid: `test-${variant}` }} variant={variant} />
     )
     expect(getByTestId(`test-${variant}`)).toHaveClass(
       `pb_layout_kit_sidebar_size_md_left_${
@@ -32,8 +31,7 @@ test("render transparent class", () => {
   const id = "transparent"
 
   const { getByTestId } = render(
-    <LayoutTest data={{ testid: `test-${id}` }}
-        variant={id} />
+    <LayoutTest data={{ testid: `test-${id}` }} variant={id} />
   )
   expect(getByTestId(`test-${id}`)).toHaveClass(
     `pb_layout_kit_sidebar_size_md_left_${id}`
@@ -44,10 +42,9 @@ test("render transparent class", () => {
 
 test("render all sizes variants", () => {
   const testValues = ["xs", "sm", "md", "lg", "xl"]
-  testValues.forEach((size) => {
+  testValues.forEach(size => {
     const { getByTestId } = render(
-      <LayoutTest data={{ testid: `test-${size}` }}
-          size={size} />
+      <LayoutTest data={{ testid: `test-${size}` }} size={size} />
     )
     expect(getByTestId(`test-${size}`)).toHaveClass(
       `pb_layout_kit_sidebar_size_${size}_left_light`
@@ -83,8 +80,7 @@ test("render all layout variants", () => {
 
   testValues.forEach(({ layout, expected }) => {
     const { getByTestId } = render(
-      <Layout data={{ testid: `test-${layout}` }}
-          layout={layout}>
+      <Layout data={{ testid: `test-${layout}` }} layout={layout}>
         <Layout.Body>
           <Card>{"Card content"}</Card>
         </Layout.Body>

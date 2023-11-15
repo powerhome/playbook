@@ -1,143 +1,118 @@
-import React from 'react'
-import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
-import Joyride, { TooltipRenderProps } from 'react-joyride'
-import Button from '../pb_button/_button'
-import Flex from '../pb_flex/_flex'
-import SectionSeparator from '../pb_section_separator/_section_separator'
-import Title from '../pb_title/_title'
+import React from "react"
+import classnames from "classnames"
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
+import Joyride, { TooltipRenderProps } from "react-joyride"
+import Button from "../pb_button/_button"
+import Flex from "../pb_flex/_flex"
+import SectionSeparator from "../pb_section_separator/_section_separator"
+import Title from "../pb_title/_title"
 
 type WalkthroughProps = {
-  aria?: { [key: string]: string },
-  callback?: () => void,
-  className?: string,
-  continuous?: boolean,
-  data?: { [key: string]: string },
-  id?: string,
-  run?: boolean,
-  steps?: [],
-  stepIndex?: number,
-  debug?: boolean,
-  disableCloseOnEsc?: boolean,
-  disableOverlay?: boolean,
-  disableOverlayClose?: boolean,
-  disableScrolling?: boolean,
-  floaterProps?: object,
-  hideBackButton?: boolean,
-  hideCloseButton?: boolean,
-  showProgress?: boolean,
-  showSkipButton?: boolean,
-  spotlightClicks?: boolean,
-  spotlightPadding?: number,
+  aria?: { [key: string]: string }
+  callback?: () => void
+  className?: string
+  continuous?: boolean
+  data?: { [key: string]: string }
+  id?: string
+  run?: boolean
+  steps?: []
+  stepIndex?: number
+  debug?: boolean
+  disableCloseOnEsc?: boolean
+  disableOverlay?: boolean
+  disableOverlayClose?: boolean
+  disableScrolling?: boolean
+  floaterProps?: object
+  hideBackButton?: boolean
+  hideCloseButton?: boolean
+  showProgress?: boolean
+  showSkipButton?: boolean
+  spotlightClicks?: boolean
+  spotlightPadding?: number
   styles?: {
     options: {
-      beaconSize?: number,
-      arrowColor?: string,
-      backgroundColor?: string,
-      primaryColor?: string,
-      overlayColor?: string,
-      spotlightShadow?: string,
-      width?: number,
-      zIndex?: number,
-    },
-  },
+      beaconSize?: number
+      arrowColor?: string
+      backgroundColor?: string
+      primaryColor?: string
+      overlayColor?: string
+      spotlightShadow?: string
+      width?: number
+      zIndex?: number
+    }
+  }
 }
 
 type TooltipProps = {
-  continuous?: boolean,
-  className?: string,
-  index?: number,
-  isLastStep?: boolean,
-  size?: number,
+  continuous?: boolean
+  className?: string
+  index?: number
+  isLastStep?: boolean
+  size?: number
   step: {
-    title?: string,
-    content?: React.ReactNode[] | React.ReactNode | string,
-    target: string,
-    disableBeacon?: boolean,
-  },
-  skip?: boolean,
-  backProps?: object,
-  closeProps?: object,
-  primaryProps?: object,
-  skipProps?: object,
-  tooltipProps?: object,
+    title?: string
+    content?: React.ReactNode[] | React.ReactNode | string
+    target: string
+    disableBeacon?: boolean
+  }
+  skip?: boolean
+  backProps?: object
+  closeProps?: object
+  primaryProps?: object
+  skipProps?: object
+  tooltipProps?: object
 }
 
 const Tooltip = React.forwardRef((props: TooltipProps) => (
-  <div
-    className="pb_card_kit_border_none p_none"
-    {...props.tooltipProps}
-  >
-    {props.step.title && <div>
-      <Flex
-        align="center"
-        justify="between"
-        padding="xs"
-      >
-        <Title
-          paddingLeft="xs"
-          size={4}
-        >
-          {props.step.title}
-        </Title>
-        {props.skip && (<Button
-          {...props.skipProps}
-          id="skip"
-          text="Skip Tour"
-          variant="link"
-        />)}
-        <Button
-          {...props.skipProps}
-          id="skip"
-          text="Skip Tour"
-          variant="link"
-        />
-      </Flex>
-      <SectionSeparator />
-    </div>}
+  <div className="pb_card_kit_border_none p_none" {...props.tooltipProps}>
+    {props.step.title && (
+      <div>
+        <Flex align="center" justify="between" padding="xs">
+          <Title paddingLeft="xs" size={4}>
+            {props.step.title}
+          </Title>
+          {props.skip && (
+            <Button
+              {...props.skipProps}
+              id="skip"
+              text="Skip Tour"
+              variant="link"
+            />
+          )}
+          <Button
+            {...props.skipProps}
+            id="skip"
+            text="Skip Tour"
+            variant="link"
+          />
+        </Flex>
+        <SectionSeparator />
+      </div>
+    )}
 
     <Flex padding="sm">{props.step.content}</Flex>
     <SectionSeparator />
-    <Flex
-      justify={props.index == 0 ? 'end' : 'between'}
-      padding="xs"
-    >
+    <Flex justify={props.index == 0 ? "end" : "between"} padding="xs">
+      {props.index > 0 && <Button {...props.backProps} id="back" text="Back" />}
 
-      {props.index > 0 && (
-        <Button
-          {...props.backProps}
-          id="back"
-          text="Back"
-        />
+      {props.continuous && !props.isLastStep && (
+        <Button {...props.primaryProps} id="next" text="Next" />
       )}
 
-      {props.continuous && !props.isLastStep &&
-        <Button
-          {...props.primaryProps}
-          id="next"
-          text="Next"
-        />
-      }
+      {!props.continuous && (
+        <Button {...props.closeProps} id="close" text="Close" />
+      )}
 
-      {!props.continuous &&
-        <Button
-          {...props.closeProps}
-          id="close"
-          text="Close"
-        />
-      }
-
-      {!((props.continuous && !props.isLastStep) || (!props.continuous)) &&
-        <Button
-          {...props.closeProps}
-          id="close"
-          text="Close"
-        />
-      }
+      {!((props.continuous && !props.isLastStep) || !props.continuous) && (
+        <Button {...props.closeProps} id="close" text="Close" />
+      )}
     </Flex>
   </div>
-)) as unknown as React.ForwardRefRenderFunction<HTMLDivElement, TooltipRenderProps>
+)) as unknown as React.ForwardRefRenderFunction<
+  HTMLDivElement,
+  TooltipRenderProps
+>
 
 const Walkthrough = (props: WalkthroughProps) => {
   const {
@@ -163,15 +138,14 @@ const Walkthrough = (props: WalkthroughProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_walkthrough'), globalProps(props), className)
+  const classes = classnames(
+    buildCss("pb_walkthrough"),
+    globalProps(props),
+    className
+  )
 
   return (
-    <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      id={id}
-    >
+    <div {...ariaProps} {...dataProps} className={classes} id={id}>
       <Joyride
         callback={callback}
         continuous={continuous}
@@ -186,7 +160,6 @@ const Walkthrough = (props: WalkthroughProps) => {
         {...props}
       />
     </div>
-
   )
 }
 

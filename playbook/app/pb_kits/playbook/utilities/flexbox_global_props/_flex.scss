@@ -17,4 +17,4 @@ $flex_values: (
   12: 12,
 );
 
-@include global_props_responsive_css($flex_values, 'flex', 'flex');
+@include global_props_responsive_css($flex_values, "flex", "flex");

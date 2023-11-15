@@ -6,37 +6,37 @@
     padding: 0 $space_sm !important;
   }
 
-  [class^=pb_button_kit][class*=_link] {
-    flex-shrink:0;
+  [class^="pb_button_kit"][class*="_link"] {
+    flex-shrink: 0;
     padding: 0 $space_xs !important;
     [id^="sort"] {
       margin-left: $space_xs !important;
     }
   }
 
-  [class^=pb_card_body_kit][class*=_md] {
+  [class^="pb_card_body_kit"][class*="_md"] {
     padding: 0 !important;
   }
 }
 
-[class^=pb_filter_kit] {
-  [class^=pb_circle_icon_button_kit] {
+[class^="pb_filter_kit"] {
+  [class^="pb_circle_icon_button_kit"] {
     padding-left: $space_sm !important;
     padding-top: $space_sm !important;
     padding-bottom: $space_sm !important;
   }
 
-  [class^=pb-form] {
-    padding: $space_sm ;
+  [class^="pb-form"] {
+    padding: $space_sm;
   }
 
   .sort-by {
-    flex-shrink:0;
+    flex-shrink: 0;
     margin-left: $space_xs !important;
   }
 
   .filter-results {
-    flex-shrink:0 !important;
+    flex-shrink: 0 !important;
   }
 
   .filter-bottom {
@@ -88,15 +88,15 @@
     z-index: 1;
   }
 
-  &[class*=dark] {
+  &[class*="dark"] {
     .filters .filter {
-    border-right: 1px solid $border_dark !important;
+      border-right: 1px solid $border_dark !important;
     }
     .maskContainer::before {
-      opacity:0;
+      opacity: 0;
     }
     .maskContainer::after {
-      opacity:0;
+      opacity: 0;
     }
   }
 }

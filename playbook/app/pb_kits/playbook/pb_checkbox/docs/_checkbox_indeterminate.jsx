@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
-import { Checkbox, Table } from '../..'
+import React, { useState } from "react"
+import { Checkbox, Table } from "../.."
 
-const CheckboxIndeterminate = (props) => {
+const CheckboxIndeterminate = props => {
   const [checkboxes, setCheckboxes] = useState([
-    { name: 'Coffee', checked: false },
-    { name: 'Ice Cream', checked: false },
-    { name: 'Chocolate', checked: true },
+    { name: "Coffee", checked: false },
+    { name: "Ice Cream", checked: false },
+    { name: "Chocolate", checked: true },
   ])
 
-  const isAllChecked = !checkboxes.find((checkbox) => !checkbox.checked)
-  const isNoneChecked = !checkboxes.find((checkbox) => checkbox.checked)
+  const isAllChecked = !checkboxes.find(checkbox => !checkbox.checked)
+  const isNoneChecked = !checkboxes.find(checkbox => checkbox.checked)
 
-  const processCheckboxes = (checked) =>
-    checkboxes.slice(0).map((checkbox) => {
+  const processCheckboxes = checked =>
+    checkboxes.slice(0).map(checkbox => {
       checkbox.checked = checked
       return checkbox
     })
@@ -30,21 +30,18 @@ const CheckboxIndeterminate = (props) => {
   }
 
   return (
-    <Table
-        container={false}
-        size="md"
-    >
+    <Table container={false} size="md">
       <thead>
         <tr>
           <th>
             <Checkbox
-                checked={isAllChecked}
-                indeterminate={!isAllChecked && !isNoneChecked}
-                name="checkbox-name"
-                onChange={onToggleAll}
-                text={isNoneChecked ? 'Check All' : 'Uncheck All'}
-                value="check-box value"
-                {...props}
+              checked={isAllChecked}
+              indeterminate={!isAllChecked && !isNoneChecked}
+              name="checkbox-name"
+              onChange={onToggleAll}
+              text={isNoneChecked ? "Check All" : "Uncheck All"}
+              value="check-box value"
+              {...props}
             />
           </th>
         </tr>
@@ -54,14 +51,14 @@ const CheckboxIndeterminate = (props) => {
           <tr key={index}>
             <td>
               <Checkbox
-                  checked={checkbox.checked}
-                  name={checkbox.name}
-                  onChange={() => {
-                    updateCheckboxes(checkbox, index)
-                  }}
-                  text={checkbox.name}
-                  value="check-box value"
-                  {...props}
+                checked={checkbox.checked}
+                name={checkbox.name}
+                onChange={() => {
+                  updateCheckboxes(checkbox, index)
+                }}
+                text={checkbox.name}
+                value="check-box value"
+                {...props}
               />
             </td>
           </tr>

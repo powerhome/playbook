@@ -9,11 +9,11 @@ $text_align_values: (
   match-parent: match-parent,
 );
 
-[class^=pb_table] {
+[class^="pb_table"] {
   thead {
-    [class^=pb_table_header_kit] {
+    [class^="pb_table_header_kit"] {
       @each $align_name, $align_value in $text_align_values {
-        &[class*=_align_#{$align_name}] {
+        &[class*="_align_#{$align_name}"] {
           text-align: $align_value;
         }
       }
@@ -27,13 +27,14 @@ $text_align_values: (
   border-radius: $border_radius_md;
 }
 
-.pb_th_link, .pb_th_nolink{
+.pb_th_link,
+.pb_th_nolink {
   padding: $space_xxs;
 }
 
-[class^=pb_table] {
+[class^="pb_table"] {
   thead {
-    [class^=pb_th_active] {
+    [class^="pb_th_active"] {
       color: $primary !important;
     }
   }
