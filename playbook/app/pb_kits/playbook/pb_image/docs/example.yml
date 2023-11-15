@@ -5,7 +5,12 @@ examples:
     - custom_error_image: Error Handling
     - transition_image: Transition
   react:
-    - default_image: Default
-    - rounded_image: Rounded
-    - custom_error_image: Error Handling
-    - transition_image: Transition
+  - default_image: Default
+  - rounded_image: Rounded
+  - custom_error_image: Error Handling
+  - transition_image: Transition
+  swift:
+  - size_image_swift: Size
+  - size_none_image_swift: Size None
+  - rounded_image_swift: Rounded
+  - image_props_swift: ""
