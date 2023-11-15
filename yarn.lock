@@ -1455,6 +1455,26 @@
   resolved "https://npm.powerapp.cloud/@gilbarbara/deep-equal/-/deep-equal-0.1.2.tgz#1a106721368dba5e7e9fb7e9a3a6f9efbd8df36d"
   integrity sha512-jk+qzItoEb0D0xSSmrKDDzf9sheQj/BAPxlgNxgmOaA3mxpUa6ndJLYGZKsJnIVEQSD8zcTbyILz7I0HcnBCRA==
 
+"@gilbarbara/deep-equal@^0.3.1":
+  version "0.3.1"
+  resolved "https://npm.powerapp.cloud/@gilbarbara/deep-equal/-/deep-equal-0.3.1.tgz#9c72ed0b2e6f8edb1580217e28d78b5b03ad4aee"
+  integrity sha512-I7xWjLs2YSVMc5gGx1Z3ZG1lgFpITPndpi8Ku55GeEIKpACCPQNS/OTqQbxgTCfq0Ncvcc+CrFov96itVh6Qvw==
+
+"@gilbarbara/helpers@^0.9.0":
+  version "0.9.0"
+  resolved "https://npm.powerapp.cloud/@gilbarbara/helpers/-/helpers-0.9.0.tgz#2572589da633ec820b740213a1d4d3439e136950"
+  integrity sha512-hl96DIoGgyJkjyiOGwEC6kZnYCsYSjhR8QTbvl7+i74fdllPgJeq4oCLH7HPiFGtnhCh4RuXTa4fmfy/8McAVQ==
+  dependencies:
+    "@gilbarbara/types" "^0.2.2"
+    is-lite "^1.2.0"
+
+"@gilbarbara/types@^0.2.2":
+  version "0.2.2"
+  resolved "https://npm.powerapp.cloud/@gilbarbara/types/-/types-0.2.2.tgz#397d66e5e4b1c44b65093b61e1e2bc0518b7d498"
+  integrity sha512-QuQDBRRcm1Q8AbSac2W1YElurOhprj3Iko/o+P1fJxUWS4rOGKMVli98OXS7uo4z+cKAif6a+L9bcZFSyauQpQ==
+  dependencies:
+    type-fest "^4.1.0"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://npm.powerapp.cloud/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -5197,6 +5217,11 @@ dedent@^0.7.0:
   resolved "https://npm.powerapp.cloud/dedent/-/dedent-0.7.0.tgz#2495ddbaf6eb874abb0e1be9df22d2e5a544326c"
   integrity sha512-Q6fKUPqnAHAyhiUgFU7BUzLiv0kd8saH9al7tnu5Q/okj6dnupxyTgFIBjVzJATdfIAm9NAsvXNzjaKa+bxVyA==
 
+deep-diff@^1.0.2:
+  version "1.0.2"
+  resolved "https://npm.powerapp.cloud/deep-diff/-/deep-diff-1.0.2.tgz#afd3d1f749115be965e89c63edc7abb1506b9c26"
+  integrity sha512-aWS3UIVH+NPGCD1kki+DCU9Dua032iSsO43LqQpcs4R3+dVv7tX0qBGjiVHJHjplsoUM2XRO/KB92glqc68awg==
+
 deep-equal@^1.0.1:
   version "1.1.1"
   resolved "https://npm.powerapp.cloud/deep-equal/-/deep-equal-1.1.1.tgz#b5c98c942ceffaf7cb051e24e1434a25a2e6076a"
@@ -5237,10 +5262,10 @@ deep-is@~0.1.3:
   resolved "https://npm.powerapp.cloud/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
   integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
 
-deepmerge@^4.2.2:
-  version "4.2.2"
-  resolved "https://npm.powerapp.cloud/deepmerge/-/deepmerge-4.2.2.tgz#44d2ea3679b8f4d4ffba33f03d865fc1e7bf4955"
-  integrity sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
+deepmerge@^4.2.2, deepmerge@^4.3.1:
+  version "4.3.1"
+  resolved "https://npm.powerapp.cloud/deepmerge/-/deepmerge-4.3.1.tgz#44b5f2147cd3b00d4b56137685966f26fd25dd4a"
+  integrity sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==
 
 default-gateway@^4.2.0:
   version "4.2.0"
@@ -7650,10 +7675,10 @@ is-lite@^0.8.2:
   resolved "https://npm.powerapp.cloud/is-lite/-/is-lite-0.8.2.tgz#26ab98b32aae8cc8b226593b9a641d2bf4bd3b6a"
   integrity sha512-JZfH47qTsslwaAsqbMI3Q6HNNjUuq6Cmzzww50TdP5Esb6e1y2sK2UAaZZuzfAzpoI2AkxoPQapZdlDuP6Vlsw==
 
-is-lite@^0.9.2:
-  version "0.9.2"
-  resolved "https://npm.powerapp.cloud/is-lite/-/is-lite-0.9.2.tgz#4b19e9a26b7c99ed50f748bcf088db57893d0730"
-  integrity sha512-qZuxbaEiKLOKhX4sbHLfhFN9iA3YciuZLb37/DfXCpWnz8p7qNL2lwkpxYMXfjlS8eEEjpULPZxAUI8N6FYvYQ==
+is-lite@^1.2.0:
+  version "1.2.0"
+  resolved "https://npm.powerapp.cloud/is-lite/-/is-lite-1.2.0.tgz#f64e67523251ce8d3a070bc50c89814c1951fa58"
+  integrity sha512-Q9EaBEC0QV44D9iyoLMJQPEF2qMOG3TgfPCm1/lnorU5Y0PJbEqlaqX0vSBxVnxqL/m2rE4ZqRhe2OEAgVdJHA==
 
 is-map@^2.0.1, is-map@^2.0.2:
   version "2.0.2"
@@ -11292,6 +11317,11 @@ react-highlight-words@^0.20.0:
     memoize-one "^4.0.0"
     prop-types "^15.5.8"
 
+react-innertext@^1.1.5:
+  version "1.1.5"
+  resolved "https://npm.powerapp.cloud/react-innertext/-/react-innertext-1.1.5.tgz#8147ac54db3f7067d95f49e2d2c05a720d27d8d0"
+  integrity sha512-PWAqdqhxhHIv80dT9znP2KvS+hfkbRovFp4zFYHFFlOoQLRiawIic81gKb3U1wEyJZgMwgs3JoLtwryASRWP3Q==
+
 react-input-autosize@^2.2.2:
   version "2.2.2"
   resolved "https://npm.powerapp.cloud/react-input-autosize/-/react-input-autosize-2.2.2.tgz#fcaa7020568ec206bc04be36f4eb68e647c4d8c2"
@@ -11314,20 +11344,23 @@ react-is@^18.0.0:
   resolved "https://npm.powerapp.cloud/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
-react-joyride@^2.5.3:
-  version "2.5.3"
-  resolved "https://npm.powerapp.cloud/react-joyride/-/react-joyride-2.5.3.tgz#3e753f80502a74abcc956babec4873d204345911"
-  integrity sha512-DKKvb/JAAsHm0x/RWO3WI6NOtTMHDso5v8MTauxTSz2dFs7Tu1rWg1BDBWmEMj6pUCvem7hblFbCiDAcvhs8tQ==
+react-joyride@^2.7.0:
+  version "2.7.0"
+  resolved "https://npm.powerapp.cloud/react-joyride/-/react-joyride-2.7.0.tgz#78b33a567f20d44daebfa03f3ea2f5cefa5a532d"
+  integrity sha512-fWcIKhat6okO4gLXMz8SRUTIQKmh3dHGzsEQxHVwGNBBFd3z/KQMYVu82dBX448ASTmSG1OJhA7lqBmKX7OQVA==
   dependencies:
-    deepmerge "^4.2.2"
-    exenv "^1.2.2"
-    is-lite "^0.9.2"
-    prop-types "^15.8.1"
+    "@gilbarbara/deep-equal" "^0.3.1"
+    "@gilbarbara/helpers" "^0.9.0"
+    deep-diff "^1.0.2"
+    deepmerge "^4.3.1"
+    is-lite "^1.2.0"
     react-floater "^0.7.6"
+    react-innertext "^1.1.5"
     react-is "^16.13.1"
     scroll "^3.0.1"
-    scrollparent "^2.0.1"
-    tree-changes "^0.9.2"
+    scrollparent "^2.1.0"
+    tree-changes "^0.11.1"
+    type-fest "^4.7.1"
 
 react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
@@ -11980,10 +12013,10 @@ scroll@^3.0.1:
   resolved "https://npm.powerapp.cloud/scroll/-/scroll-3.0.1.tgz#d5afb59fb3592ee3df31c89743e78b39e4cd8a26"
   integrity sha512-pz7y517OVls1maEzlirKO5nPYle9AXsFzTMNJrRGmT951mzpIBy7sNHOg5o/0MQd/NqliCiWnAi0kZneMPFLcg==
 
-scrollparent@^2.0.1:
-  version "2.0.1"
-  resolved "https://npm.powerapp.cloud/scrollparent/-/scrollparent-2.0.1.tgz#715d5b9cc57760fb22bdccc3befb5bfe06b1a317"
-  integrity sha512-HSdN78VMvFCSGCkh0oYX/tY4R3P1DW61f8+TeZZ4j2VLgfwvw0bpRSOv4PCVKisktIwbzHCfZsx+rLbbDBqIBA==
+scrollparent@^2.1.0:
+  version "2.1.0"
+  resolved "https://npm.powerapp.cloud/scrollparent/-/scrollparent-2.1.0.tgz#6cae915c953835886a6ba0d77fdc2bb1ed09076d"
+  integrity sha512-bnnvJL28/Rtz/kz2+4wpBjHzWoEzXhVg/TE8BeVGJHUqE8THNIRnDxDWMktwM+qahvlRdvlLdsQfYe+cuqfZeA==
 
 scss-tokenizer@^0.2.3:
   version "0.2.3"
@@ -13090,7 +13123,15 @@ traverse@~0.6.6:
   resolved "https://npm.powerapp.cloud/traverse/-/traverse-0.6.7.tgz#46961cd2d57dd8706c36664acde06a248f1173fe"
   integrity sha512-/y956gpUo9ZNCb99YjxG7OaslxZWHfCHAUUfshwqOXmxUIvqLjVO581BT+gM59+QV9tFe6/CGG53tsA1Y7RSdg==
 
-tree-changes@^0.9.1, tree-changes@^0.9.2:
+tree-changes@^0.11.1:
+  version "0.11.2"
+  resolved "https://npm.powerapp.cloud/tree-changes/-/tree-changes-0.11.2.tgz#e02e65c4faae6230dfe357aa97a26e8eb7c7d321"
+  integrity sha512-4gXlUthrl+RabZw6lLvcCDl6KfJOCmrC16BC5CRdut1EAH509Omgg0BfKLY+ViRlzrvYOTWR0FMS2SQTwzumrw==
+  dependencies:
+    "@gilbarbara/deep-equal" "^0.3.1"
+    is-lite "^1.2.0"
+
+tree-changes@^0.9.1:
   version "0.9.3"
   resolved "https://npm.powerapp.cloud/tree-changes/-/tree-changes-0.9.3.tgz#89433ab3b4250c2910d386be1f83912b7144efcc"
   integrity sha512-vvvS+O6kEeGRzMglTKbc19ltLWNtmNt1cpBoSYLj/iEcPVvpJasemKOlxBrmZaCtDJoF+4bwv3m01UKYi8mukQ==
@@ -13227,6 +13268,11 @@ type-fest@^2.0.0:
   version "2.19.0"
   resolved "https://npm.powerapp.cloud/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
   integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
+
+type-fest@^4.1.0, type-fest@^4.7.1:
+  version "4.7.1"
+  resolved "https://npm.powerapp.cloud/type-fest/-/type-fest-4.7.1.tgz#dbe462c5f350d708ec6ca6fe8925b5b6541ca9a7"
+  integrity sha512-iWr8RUmzAJRfhZugX9O7nZE6pCxDU8CZ3QxsLuTnGcBLJpCaP2ll3s4eMTBoFnU/CeXY/5rfQSuAEsTGJO4y8A==
 
 type-is@~1.6.18:
   version "1.6.18"
