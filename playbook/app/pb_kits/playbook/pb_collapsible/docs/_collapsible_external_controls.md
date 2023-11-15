@@ -1,1 +1,3 @@
 The `collapsed` prop is a boolean prop that is set to 'true' by default. If set to 'false', the collapsible will be rendered toggled open on page load.
+
+The Collapsible also exposes functionality that allows you to use an external control like a button to toggle the collapsible. Do do this, you must use a unique id on the collapsible/collapsible_content child kit. You can then attach an eventListner to the external control of your choice, pass it the id as an argument and use `document.dispatchEvent(new CustomEvent(id))` to hook up the functionality. To see this in action, see the code example below.
