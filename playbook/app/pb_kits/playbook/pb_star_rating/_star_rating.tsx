@@ -2,13 +2,14 @@ import React from "react"
 import classnames from "classnames"
 
 import { buildAriaProps, buildDataProps } from "../utilities/props"
+import Caption from '../pb_caption/_caption'
 
 type StarRatingProps = {
   aria?: {[key: string]: string},
   className?: string,
   data?: object,
   fixedWidth?: boolean,
-  hideRating: boolean,
+  layoutOption: string,
   icon?: string,
   id?: string,
   rating: number,
@@ -20,7 +21,7 @@ const StarRating = ({
   aria = {},
   className,
   data = {},
-  hideRating = true,
+  layoutOption = "default",
   id,
   rating = 0,
   denominator = 5,
@@ -32,8 +33,9 @@ const StarRating = ({
     "pb_star_rating_kit", className,
   ])
 
-  const activeStars = Math.round(rating) > denominator ? denominator : Math.round(rating)
-  const emptyStars = denominator - Math.round(rating)
+  const denominatorStyle = layoutOption === "onestar" ? 1 : denominator
+  const activeStars = Math.round(rating) > denominatorStyle ? denominatorStyle : Math.round(rating)
+  const emptyStars = denominatorStyle - Math.round(rating) < 0 ? 0 : denominatorStyle - Math.round(rating)
   const colorClass = `${colorOption}_star_color`
 
   const starYellow = (
@@ -73,12 +75,14 @@ const StarRating = ({
         className={css}
         id={id}
     >
-      {!hideRating && (
+      {layoutOption === "number" && (
         <div className="pb_star_rating_number">
-          {rating}
+          <Caption
+              text={rating.toString()}
+          />
         </div>
       )}
-      <div className="pb_star_rating_wrapper">
+      <div className={`pb_star_rating_wrapper ${layoutOption}`}>
         {[...Array(activeStars)].map((_) => (
           <div className={colorClass}>
             {colorOption === 'yellow' && (
@@ -106,8 +110,16 @@ const StarRating = ({
           </div>
         ))}
       </div>
-    </div>
-  )
-}
+      {layoutOption === "onestar" && (
+          <div>
+            <Caption
+                text={`${rating.toString()} of ${denominator}`}
+                paddingLeft="xs"
+            />
+          </div>
+        )}
+      </div>
+    )
+  }
 
 export default StarRating

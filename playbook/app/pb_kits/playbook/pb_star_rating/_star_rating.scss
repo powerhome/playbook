@@ -7,7 +7,6 @@ $pb_star_rating_wrapper_width: 100px;
 $pb_star_rating_height: 26px;
 
 [class^=pb_star_rating_kit] {
-  position: relative;
   display: inline-flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -27,16 +26,19 @@ $pb_star_rating_height: 26px;
   }
 
   .pb_star_rating_wrapper {
-    position: relative;
-    width: $pb_star_rating_wrapper_width;
-    flex-basis: $pb_star_rating_wrapper_width;
     flex-shrink: 0;
     flex-grow: 1;
     min-height: $pb_star_rating_height;
     display: flex;
     justify-content: space-between;
-    position: absolute;
+  }
 
+  .number {
+    flex-basis: $pb_star_rating_wrapper_width;
+  }
+
+  .default {
+    flex-basis: $pb_star_rating_wrapper_width;
   }
 
   &[class*=_hide_rating] {
