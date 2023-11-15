@@ -36,7 +36,6 @@ const StarRating = ({
   const denominatorStyle = layoutOption === "onestar" ? 1 : denominator
   const activeStars = Math.round(rating) > denominatorStyle ? denominatorStyle : Math.round(rating)
   const emptyStars = denominatorStyle - Math.round(rating) < 0 ? 0 : denominatorStyle - Math.round(rating)
-  const colorClass = `${colorOption}_star_color`
 
   const starYellow = (
     <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +44,7 @@ const StarRating = ({
   )
 
   const starPrimary = (
-    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={colorClass}>
+    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fillRule="evenodd" clipRule="evenodd" d="M9.86015 0.4371C9.73527 0.187329 9.4855 0 9.17328 0C8.89229 0 8.64252 0.187329 8.51763 0.4371L6.36335 4.83932L1.58647 5.55742C1.30547 5.58864 1.08692 5.80719 0.99326 6.05696C0.899595 6.33795 0.962038 6.61895 1.18059 6.8375L4.64617 10.2719L3.80319 15.1112C3.77197 15.3922 3.89685 15.7044 4.11541 15.8605C4.36518 16.0166 4.64617 16.0478 4.89594 15.9229L9.17328 13.6126L13.4506 15.9229C13.7004 16.0478 14.0126 16.0166 14.2624 15.8605C14.4809 15.7044 14.6058 15.3922 14.5434 15.1112L13.7316 10.2719L17.1972 6.8375C17.4157 6.61895 17.4782 6.33795 17.3845 6.05696C17.2909 5.80719 17.0723 5.58864 16.7913 5.55742L12.0144 4.83932L9.86015 0.4371Z" fill="#0056CF"/>
     </svg>
   );
@@ -84,7 +83,7 @@ const StarRating = ({
       )}
       <div className={`pb_star_rating_wrapper ${layoutOption}`}>
         {[...Array(activeStars)].map((_) => (
-          <div className={colorClass}>
+          <div className="pb_star">
             {colorOption === 'yellow' && (
                starYellow
             ) }
@@ -100,7 +99,7 @@ const StarRating = ({
           </div>
         ))}
         {[...Array(emptyStars)].map((_) => (
-          <div className="empty_stars">
+          <div className="pb_star">
             {colorOption === 'outline' && (
                starOutline
             ) }

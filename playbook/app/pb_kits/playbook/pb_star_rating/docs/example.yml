@@ -7,3 +7,4 @@ examples:
     - star_rating_default: Default
     - star_rating_color_options: Color Options
     - star_rating_hide: Layout Options
+    - star_rating_number_config: Number Config

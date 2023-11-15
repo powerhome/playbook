@@ -30,7 +30,10 @@ $pb_star_rating_height: 26px;
     flex-grow: 1;
     min-height: $pb_star_rating_height;
     display: flex;
-    justify-content: space-between;
+  }
+
+  .pb_star {
+    padding-left: 2px;
   }
 
   .number {
