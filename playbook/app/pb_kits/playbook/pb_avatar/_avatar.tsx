@@ -69,7 +69,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
           <Image
               alt={imageAlt ? imageAlt : name}
               onError={handleError}
-              url={imageUrl}
+              url={"imageUrl"}
           />
         )}
       </div>
