@@ -1,13 +1,10 @@
 import React from "react"
 import { Title } from "playbook-ui"
-import { useOutletContext } from "react-router-dom"
 
 export default function ComponentShow() {
-  const isMobile = useOutletContext()
-
   return (
     <Title
-      paddingTop={isMobile ? "md" : ""}
+      paddingTop={{ xs: "md", sm: "md", md: "md", default: "none" }}
       text={"Component Show Page"}
       size='2'
     />

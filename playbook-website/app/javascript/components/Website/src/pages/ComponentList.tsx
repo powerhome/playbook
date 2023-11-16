@@ -1,19 +1,22 @@
 import React from "react"
-import { NavLink, Outlet, useOutlet, useOutletContext } from "react-router-dom"
-import { Title } from "playbook-ui"
+import { NavLink, Outlet, useOutlet } from "react-router-dom"
+import { Flex, Title } from "playbook-ui"
 
 export default function ComponentList() {
-  const outlet = useOutlet();
-  const isMobile = useOutletContext();
+  const outlet = useOutlet()
 
   return (
-    <div className='pl_md'>
+    <Flex paddingLeft='md'>
       {!outlet && (
-        <NavLink to="avatar">
-          <Title paddingTop={isMobile ? "md" : ""} text={"Avatar"} size='2' />
+        <NavLink to='avatar'>
+          <Title
+            paddingTop={{ xs: "md", sm: "md", md: "md", default: "none" }}
+            text={"Avatar"}
+            size='2'
+          />
         </NavLink>
       )}
-      <Outlet context={isMobile} /> 
-    </div>
+      <Outlet />
+    </Flex>
   )
 }
