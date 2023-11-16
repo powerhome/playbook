@@ -12,13 +12,14 @@ class PagesController < ApplicationController
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
   before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo kit_show_new visual_guidelines home]
 
-  def react_app
-    @kit = params[:name]
+  def application_beta
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
+    @type = params[:type]
+
     respond_to do |format|
-      format.html { render template: "react_app", layout: false }
-      format.json { render json: { kits: @kits, kit: @kit, dark: @dark } }
+      format.html { render layout: "application_beta", inline: "" }
+      format.json { render json: { kits: @kits, dark: @dark, type: @type } }
     end
   end
 
