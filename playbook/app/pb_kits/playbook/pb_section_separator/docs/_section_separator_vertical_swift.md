@@ -1,4 +1,4 @@
-
+![section-separator-verticle](https://github.com/powerhome/playbook/assets/92755007/21ca54a5-6b8a-459f-91ad-4e9b68258f68)
 
 ```swift
 
