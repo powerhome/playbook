@@ -33,9 +33,9 @@ module PlaybookWebsite
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode)
+            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode) if pb_doc_has_kit_type?(sub_kit, type)
           end
-        else
+        elsif pb_doc_has_kit_type?(kit, type)
           display_kits << render_pb_doc_kit(kit, type, limit_examples, false, dark_mode)
         end
       end
@@ -44,9 +44,9 @@ module PlaybookWebsite
     # rubocop:enable Style/StringConcatenation
 
     # rubocop:disable Naming/AccessorMethodName
-    def get_kits
-      menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
-      menu["kits"]
+    def get_kits(_type = "rails")
+      aggregate_kits || []
+      # Filter kits that have at least one component compatible with the type
     end
 
     def get_kits_pb_website

@@ -18,3 +18,24 @@
   background-color: $bg_dark;
   color: $white;
 }
+
+
+.kit_show_swift {
+  p {
+    a {
+      background-color: $bg_light;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: $border_radius_lg;
+      box-shadow: inset $shadow_deep;
+      img {
+        max-width: 250px;
+        height: auto;
+        position: relative;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
