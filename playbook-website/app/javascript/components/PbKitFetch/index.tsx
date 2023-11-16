@@ -11,8 +11,6 @@ const PbKitFetch = ({ kit }) => {
     fetch('/kits/avatar/rails_raw')
       .then((response) => response.text())
       .then((data) => {
-        console.log(data)
-        debugger
         setLoading(false)
         setServerData(data)
       })
