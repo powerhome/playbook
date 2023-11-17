@@ -97,23 +97,27 @@ const StarRating = ({
               <Caption
                 text={rating.toString()}
                 size="xs"
+                paddingRight="xs"
               />
             )}
             {size === 'sm' && (
               <Caption
                 text={rating.toString()}
                 size="xs"
+                paddingRight="xs"
               />
             )}
             {size === 'md' && (
               <Body
                 text={rating.toString()}
+                paddingRight="xs"
               />
             )}
             {size === 'lg' && (
               <Title
                 text={rating.toString()}
                 size={2}
+                paddingRight="sm"
               />
             )}
         </div>

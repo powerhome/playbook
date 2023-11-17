@@ -6,20 +6,18 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  gap: 4px;
 
 
   .pb_star_rating_wrapper {
     display: flex;
-    gap: 4px;
   }
 
   .pb_star_rating_number_xs {
-    max-height: 14px;
+    max-height: 16px;
   }
 
   .pb_star_rating_number_sm {
-    max-height: 14px;
+    max-height: 16px;
   }
 
   .pb_star_rating_number_md {
