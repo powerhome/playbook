@@ -11,7 +11,7 @@ type StarRatingProps = {
   className?: string,
   data?: object,
   fixedWidth?: boolean,
-  layoutOption: string,
+  layoutOption?: "default" | "number" | "onestar",
   icon?: string,
   id?: string,
   rating: number,

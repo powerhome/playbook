@@ -2,6 +2,7 @@ examples:
   rails:
     - star_rating_default: Default
     - star_rating_hide: Hide Rating Value
+    - star_rating_size_options: Size Options
 
   react:
     - star_rating_default: Default
