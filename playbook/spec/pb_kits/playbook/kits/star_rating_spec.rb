@@ -10,6 +10,29 @@ RSpec.describe Playbook::PbStarRating::StarRating do
       .of_type(Playbook::Props::Numeric)
   }
 
+  it {
+    is_expected.to define_prop(:denominator)
+      .of_type(Playbook::Props::Numeric)
+  }
+
+  it {
+    is_expected.to define_enum_prop(:color_option)
+      .with_default("yellow")
+      .with_values("yellow", "primary", "subtle", "outline")
+  }
+
+  it {
+    is_expected.to define_enum_prop(:layout_option)
+      .with_default("default")
+      .with_values("default", "onestar", "number")
+  }
+
+  it {
+    is_expected.to define_enum_prop(:size)
+      .with_default("sm")
+      .with_values("xs", "sm", "md", "lg")
+  }
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_star_rating_kit"
