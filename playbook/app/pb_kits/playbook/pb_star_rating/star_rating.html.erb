@@ -5,7 +5,19 @@
     <%# Rating value %>
     <% if layout_option == "number" %>
       <%= content_tag(:div, class: "number_rails_#{size}") do %>
-        <%= pb_rails("caption", props: { text: object.rating, size: "xs", padding_right: "xxs" }) %>
+        <% case object.size %>
+          <% when "xs", "sm" %>
+          <%= pb_rails("caption", props: { text: object.rating,
+                                           size: "sm",
+                                           padding_right: "xxs" }) %>
+          <% when "md" %>
+          <%= pb_rails("body", props: { text: object.rating,
+                                        padding_right: "xxs" }) %>
+          <% when "lg" %>
+          <%= pb_rails("title", props: { text: object.rating,
+                                         size: 2,
+                                         padding_right: "sm" }) %>
+        <% end %>
       <% end %>
     <% end %>
     <%= content_tag(:div, class: "pb_star_rating_wrapper") do %>
@@ -36,9 +48,19 @@
     <% end %>
     <% if layout_option == "onestar" %>
       <%= content_tag(:div, class: "number_rails_#{size}") do %>
-        <%= pb_rails("caption", props: { text: "#{object.rating} of #{object.denominator}",
-                                         size: "xs",
-                                         padding_left: "xxs" }) %>
+        <% case object.size %>
+          <% when "xs", "sm" %>
+          <%= pb_rails("caption", props: { text: "#{object.rating} of #{object.denominator}",
+                                           size: "xs",
+                                           padding_left: "xxs" }) %>
+          <% when "md" %>
+          <%= pb_rails("body", props: { text: "#{object.rating} of #{object.denominator}",
+                                        padding_left: "xxs" }) %>
+          <% when "lg" %>
+          <%= pb_rails("title", props: { text: "#{object.rating} of #{object.denominator}",
+                                         size: 2,
+                                         padding_left: "sm" }) %>
+        <% end %>
       <% end %>
     <% end %>
 <% end %>
