@@ -3,9 +3,6 @@
 module Playbook
   module PbStarRating
     class StarRating < Playbook::KitBase
-      prop :hide_rating, type: Playbook::Props::Boolean,
-                         default: false
-
       prop :rating, type: Playbook::Props::Numeric,
                     default: 0
 
@@ -15,6 +12,10 @@ module Playbook
       prop :layout_option, type: Playbook::Props::Enum,
                            values: %w[default onestar number],
                            default: "default"
+
+      prop :color_option, type: Playbook::Props::Enum,
+                          values: %w[yellow primary subtle outline],
+                          default: "yellow"
 
       prop :size, type: Playbook::Props::Enum,
                   values: %w[xs sm md lg],

@@ -16,7 +16,7 @@ type StarRatingProps = {
   id?: string,
   rating: number,
   denominator: number,
-  colorOption: string,
+  colorOption?: "yellow" | "primary" | "subtle" | "outline",
   size?: "xs" | "sm" | "md" | "lg";
 };
 

@@ -2,11 +2,27 @@
 @import "../tokens/opacity";
 @import "../tokens/spacing";
 
-[class^=pb_star_rating_kit] {
+
+[class*=pb_star_rating_kit] {
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 
+  .number_rails_xs {
+    height: 22px !important;
+  }
+
+  .number_rails_sm {
+    height: 22px !important;
+  }
+
+  .number_rails_md {
+    height: 32px;
+  }
+
+  .number_rails_lg {
+    height: 56px;
+  }
 
   .pb_star_rating_wrapper {
     display: flex;
@@ -54,11 +70,5 @@
     align-items: center;
     justify-content: center;
     padding-right: 12px;
-  }
-
-  &[class*=_hide_rating] {
-    .pb_star_rating_number {
-      display: none;
-    }
   }
 }

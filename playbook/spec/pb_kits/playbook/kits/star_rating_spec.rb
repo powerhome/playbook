@@ -10,11 +10,6 @@ RSpec.describe Playbook::PbStarRating::StarRating do
       .of_type(Playbook::Props::Numeric)
   }
 
-  it {
-    is_expected.to define_prop(:hide_rating)
-      .of_type(Playbook::Props::Boolean)
-  }
-
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_star_rating_kit"
