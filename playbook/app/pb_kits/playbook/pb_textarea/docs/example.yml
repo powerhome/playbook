@@ -19,3 +19,4 @@ examples:
   swift:
   - textarea_default_swift: Default
   - textarea_error_swift: Textarea w/ Error
+  - textarea_props_swift: ""
