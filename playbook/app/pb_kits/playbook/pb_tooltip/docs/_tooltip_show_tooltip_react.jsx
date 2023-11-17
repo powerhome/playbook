@@ -10,7 +10,6 @@ const TooltipShowTooltipReact = (props) => {
    <Flex 
        flexDirection='column'
        gap='md'
-       justifyContent='center'
        wrap
    >
     <FlexItem>

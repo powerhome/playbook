@@ -9,7 +9,6 @@ const TooltipDefaultReact = (props) => {
    <Flex 
        flexDirection='row'
        gap='md'
-       justifyContent='center'
        wrap
    >
     <FlexItem>

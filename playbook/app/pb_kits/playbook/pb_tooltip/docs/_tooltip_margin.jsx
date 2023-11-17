@@ -7,7 +7,6 @@ const TooltipMargin = (props) => {
   return (
     <Flex 
         flexDirection='row' 
-        justifyContent='center' 
         wrap
     >
       <Tooltip
