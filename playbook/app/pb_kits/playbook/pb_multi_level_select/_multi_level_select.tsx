@@ -4,6 +4,7 @@ import { globalProps, GlobalProps } from "../utilities/globalProps"
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 import Checkbox from "../pb_checkbox/_checkbox"
 import Radio from "../pb_radio/_radio"
+import Body from "../pb_body/_body"
 import Icon from "../pb_icon/_icon"
 import FormPill from "../pb_form_pill/_form_pill"
 import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button"
@@ -342,29 +343,34 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             return (
               <div key={item.id}>
                 <li
-                    className="dropdown_item"
+                    className={"dropdown_item"}
                     data-name={item.id}
                 >
                   <div className="dropdown_item_checkbox_row">
-                    <div
-                        key={isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"}
-                    >
-                      <CircleIconButton
-                          className={
-                            item.children && item.children.length > 0
-                              ? ""
-                              : "toggle_icon"
-                          }
-                          icon={
-                            isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"
-                          }
-                          onClick={(event: any) =>
-                            handleToggleClick(item.id, event)
-                          }
-                          variant="link"
-                      />
-                    </div>
+                    { !item.parent_id && !item.children ? null :
+                        <div
+                            key={isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"}
+                        >
+                          <CircleIconButton
+                              className={
+                                item.children && item.children.length > 0
+                                  ? ""
+                                  : "toggle_icon"
+                              }
+                              icon={
+                                isTreeRowExpanded(item) ? "chevron-down" : "chevron-right"
+                              }
+                              onClick={(event: any) =>
+                                handleToggleClick(item.id, event)
+                              }
+                              variant="link"
+                          />
+                        </div>
+                    }
                     { variant === "single" ? (
+                      item.hideRadio ? (
+                        <Body>{item.label}</Body>
+                      ) :
                       <Radio
                           checked={item.checked}
                           id={`${item.id}-${item.label}`}
@@ -373,6 +379,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => (
                             handleRadioButtonClick(e)
                           )}
+                          padding={item.children ? 'none' : 'xs'}
                           type="radio"
                           value={item.label}
                       />
