@@ -2,6 +2,10 @@
 
 ```swift
 
+@State var defaultText = ""
+@State var placeholderText = ""
+@State var customText = "Default value text"
+
 VStack(alignment: .leading, spacing: Spacing.small) {
   PBTextArea(
     "Label",
