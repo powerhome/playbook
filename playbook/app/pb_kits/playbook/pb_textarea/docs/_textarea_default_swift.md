@@ -1,4 +1,4 @@
-
+![textarea-default](https://github.com/powerhome/playbook/assets/92755007/40eec958-63d7-4840-bf5c-f8d1e34c911a)
 
 ```swift
 
