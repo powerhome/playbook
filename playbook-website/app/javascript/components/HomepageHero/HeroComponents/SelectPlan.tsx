@@ -42,10 +42,11 @@ const SelectPlanCard = () => {
     >
       <Card borderNone borderRadius="xl" shadow="deepest">
         <Flex orientation="column" gap="sm" align="stretch">
-          {plans.map((plan) => {
+          {plans.map((plan, i) => {
             return (
               <SelectableCard
                 checked={selected === plan.planName}
+                key={`selectable-plan-card-${i}`}
                 icon
                 inputId={plan.planName}
                 multi={false}

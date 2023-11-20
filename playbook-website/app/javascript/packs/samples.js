@@ -11,7 +11,7 @@ import CrowdsourcedPosts from '../../views/samples/crowdsourced_posts'
 import CardDashboard from '../../views/samples/card_dashboard'
 import MusicApp from '../../views/samples/music_app'
 
-WebpackerReact.setup({
+WebpackerReact.registerComponents({
   AnalyticsDashboard,
   CardDashboard,
   ConferenceStatistics,
