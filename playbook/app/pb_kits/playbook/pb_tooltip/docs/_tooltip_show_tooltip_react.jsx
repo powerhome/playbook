@@ -28,6 +28,7 @@ const TooltipShowTooltipReact = (props) => {
     </FlexItem>
     <FlexItem>
       <Tooltip 
+          placement='right'
           showTooltip={showTooltip}
           text='Tooltip is enabled'
           zIndex={10}
