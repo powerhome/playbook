@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get "changelog",                to: "pages#changelog"
 
   # Kits
-  get "beta/kits", to: "pages#react_app"
+
+  ## Beta View
+  get "beta/*path", to: "pages#application_beta"
+
+  # Legacy View
   get "kits", to: "pages#kits"
   get "kits/:name",                 to: "pages#kit_show_rails",           as: "kit_show"
   get "kits/:name/rails",           to: "pages#kit_show_rails",           as: "kit_show_rails"
@@ -17,8 +21,10 @@ Rails.application.routes.draw do
   get "kit_category/:name",         to: "pages#kit_category_show_rails",  as: "kit_category_show"
   get "kit_category/:name/rails",   to: "pages#kit_category_show_rails",  as: "kit_category_show_rails"
   get "kit_category/:name/react",   to: "pages#kit_category_show_react",  as: "kit_category_show_reacts"
+  get "kit_category/:name/swift",   to: "pages#kit_category_show_swift",  as: "kit_category_show_swift"
   get "kit_collection/*names/:name/rails",    to: "pages#kit_collection_show_rails",                        as: "kit_collection_show_rails"
   get "kit_collection/*names/:name/react",    to: "pages#kit_collection_show_react",                        as: "kit_collection_show_react"
+  get "kit_collection/*names/:name/swift",    to: "pages#kit_collection_show_swift",                        as: "kit_collection_show_swift"
   get "kit_collection/*names/(/:name)(/:type)",  to: "pages#kit_collection_show_rails", defaults: { type: "rails" }, as: "kit_collection_show"
 
   # Experiments
