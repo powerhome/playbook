@@ -12,13 +12,14 @@ class PagesController < ApplicationController
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
   before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo kit_show_new visual_guidelines home]
 
-  def react_app
-    @kit = params[:name]
+  def application_beta
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
+    @type = params[:type]
+
     respond_to do |format|
-      format.html { render template: "react_app", layout: false }
-      format.json { render json: { kits: @kits, kit: @kit, dark: @dark } }
+      format.html { render layout: "application_beta", inline: "" }
+      format.json { render json: { kits: @kits, dark: @dark, type: @type } }
     end
   end
 
@@ -169,6 +170,18 @@ class PagesController < ApplicationController
 
 private
 
+  def missing_rails_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "rails") == false
+  end
+
+  def missing_react_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "react") == false
+  end
+
+  def missing_swift_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "swift") == false
+  end
+
   def aggregate_kits
     MENU["kits"]
   end
@@ -218,11 +231,12 @@ private
 
   def ensure_kit_type_exists
     if action_name === "kit_show_rails"
-      redirect_to action: "kit_show_react" unless helpers.pb_doc_has_kit_type?(params[:name], "rails")
+      redirect_to action: "kit_show_react" if missing_rails_kit? && missing_react_kit? == false
     elsif action_name === "kit_show_react"
-      redirect_to action: "kit_show_rails" unless helpers.pb_doc_has_kit_type?(params[:name], "react")
+      redirect_to action: "kit_show_rails" if missing_react_kit? && missing_rails_kit? == false
+      redirect_to action: "kit_show_swift" if missing_react_kit? && missing_rails_kit? && missing_swift_kit? == false
     elsif action_name === "kit_show_swift"
-      redirect_to action: "kit_show_react" unless helpers.pb_doc_has_kit_type?(params[:name], "swift")
+      redirect_to action: "kit_show_react" if missing_swift_kit?
     end
   end
 

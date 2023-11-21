@@ -1,7 +1,9 @@
 <div class="pb--kit-show <%=@kit%>-kit">
-  <div class="pb--page--dark-mode-toggle-desktop">
-    <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
-  </div>
+  <%= pb_rails("flex", props: { justify: "end", margin_top: { md: "none", default: "lg", break: "at" }, align_items: "center" }) do %>
+    <div class="pb--page--dark-mode-toggle-desktop">
+      <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
+    </div>
+  <% end %>
   <%= pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: 1, margin_top: "xl" }) %>
   <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
     <%= render_markdown(pb_doc_kit_description(@kit)) %>

@@ -104,7 +104,7 @@ import * as UserBadge from 'pb_user_badge/docs'
 import * as Walkthrough from 'pb_walkthrough/docs'
 import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 
-WebpackerReact.setup({
+WebpackerReact.registerComponents({
   ...Avatar,
   ...AvatarActionButton,
   ...Background,

@@ -11,3 +11,7 @@ examples:
   - message_timestamp: With Timestamp Hover
   - message_hover: Hover
   - message_mentions: Mentions
+
+  swift:
+   - message_default_swift: Default
+   - message_props_swift: ""

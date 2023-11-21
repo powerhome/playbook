@@ -1,7 +1,10 @@
 web: &web ["rails", "react"]
 all: &all ["rails", "react", "swift"]
+rails_swift: &rails_swift ["rails", "swift"]
+react_swift: &react_swift ["swift", "react"]
 rails_only: &rails_only ["rails"]
 react_only: &react_only ["react"]
+swift_only: &swift_only ["swift"]
 
 kits:
   - name: "avatars"
