@@ -6,7 +6,7 @@
           <%= pb_rails("card", props: { padding: "none", hover: { shadow: "deep" }, flex: 1} ) do %>
             <%= pb_rails("background" ) do %>
               <%= pb_rails("flex", props: { justify: "center", padding: "xl"} ) do %>
-                <% 
+                <%
                   if page_name[:frontmatter]['icon']
                     icon = page_name[:frontmatter]['icon']
                   else

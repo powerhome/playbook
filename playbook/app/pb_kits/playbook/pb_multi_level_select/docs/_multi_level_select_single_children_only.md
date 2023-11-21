@@ -1,0 +1,1 @@
+Dynamically control your selectable options by passing `hideRadio: true` to any node within your tree data to omit that node's radio selector. In this example we've hidden all radios except ultimate children (nodes without descendants).

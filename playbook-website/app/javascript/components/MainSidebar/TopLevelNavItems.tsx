@@ -156,7 +156,9 @@ export const TopLevelNavItem = ({
               <>
                 {kits.map((link, index) => (
                   <KitsNavItem
+                    key={index}
                     link={link}
+                    key={`kits-nav-item-${index}`}
                     kitIndex={index}
                     collapsibles={collapsibles}
                     category={category}
