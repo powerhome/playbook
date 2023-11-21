@@ -1,4 +1,4 @@
-
+![text-input-add-on](https://github.com/powerhome/playbook/assets/92755007/65a28e6a-9e65-4ca1-af8d-91dae6eac4f5)
 
 ```swift
 
