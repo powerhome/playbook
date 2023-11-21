@@ -2,7 +2,7 @@
 
 ```swift
 
- PBTextInput(
+PBTextInput(
   "ADD ON WITH DEFAULTS",
   text: $textAddOn,
   style: .rightIcon(.user, divider: true)

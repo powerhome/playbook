@@ -6,8 +6,6 @@
 @State private var textFirstName: String = ""
 @State private var textLastName: String = ""
 @State private var textPhone: String = ""
-@State private var textEmail: String = ""
-@State private var textZip: String = ""
 
 PBTextInput(
   "First name",
@@ -27,20 +25,5 @@ PBTextInput(
   placeholder: "Enter phone number",
   keyboardType: .phonePad
 )
-
-PBTextInput(
-  "Email",
-  text: $textEmail,
-  placeholder: "Enter email address",
-  keyboardType: .emailAddress
-)
-
-PBTextInput(
-  "Zip code",
-  text: $textZip,
-  placeholder: "Enter zip code",
-  keyboardType: .numberPad
-)
-
 
 ```
