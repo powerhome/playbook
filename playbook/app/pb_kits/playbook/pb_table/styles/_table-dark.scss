@@ -1,6 +1,6 @@
 @import "../../tokens/screen_sizes";
 
-$table-dark-card-bg: $bg_dark;
+$table-dark-card-bg: $card_dark;
 
 [class^=pb_table] {
   &.table-sm,
@@ -24,7 +24,6 @@ $table-dark-card-bg: $bg_dark;
 
           td {
             border-color: $border_dark !important;
-            border-bottom-width: 0 !important;
             color: $white;
 
             &:before {
@@ -34,21 +33,6 @@ $table-dark-card-bg: $bg_dark;
           &:first-child {
             td {
               border-top-width: 0 !important;
-            }
-          }
-        }
-      }
-
-      &:not(.no-hover) {
-        tbody {
-          tr {
-            @media (hover:hover) {
-              &:hover {
-                td {
-                  border-color: $border_dark !important;
-                  background: $bg_dark;
-                }
-              }
             }
           }
         }
