@@ -123,7 +123,6 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
               }
             }
           }}
-          // ref={refs.setReference}
           role="tooltip_trigger"
           style={{ display: "inline-flex" }}
           {...ariaProps}
