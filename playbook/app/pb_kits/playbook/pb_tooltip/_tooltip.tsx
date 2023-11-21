@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, forwardRef, ForwardedRef } from "react"
 
 import {
   arrow, 
@@ -28,9 +28,10 @@ type TooltipProps = {
   placement?: Placement,
   position?: "absolute" | "fixed";
   text: string,
+  showTooltip?: boolean,
 } & GlobalProps
 
-const Tooltip = (props: TooltipProps): React.ReactElement => {
+const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): React.ReactElement => {
   const {
     aria = {},
     className,
@@ -42,6 +43,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     placement: preferredPlacement = "top",
     position = "absolute",
     text,
+    showTooltip = true,
     zIndex,
     ...rest
   } = props
@@ -59,10 +61,9 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
 
   const {
     context,
-    floating,
     middlewareData: { arrow: { x: arrowX, y: arrowY } = {},  },
     placement,
-    reference,
+    refs,
     strategy,
     x,
     y,
@@ -82,12 +83,16 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     ],
     open,
     onOpenChange(open) {
-      setOpen(open)
+      if(!showTooltip) {
+        return
+      } else {
+        setOpen(open)
+      }
     },
     placement: preferredPlacement
   })
 
-
+      
   const { getFloatingProps } = useInteractions([
     useHover(context, {
       delay,
@@ -108,7 +113,16 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     <>
       <div
           className={`pb_tooltip_kit ${css}`}
-          ref={reference}
+          ref={(element) => {
+            refs.setReference(element);
+            if (ref) {
+              if (typeof ref === "function") {
+                ref(element);
+              } else if (typeof ref === "object") {
+                ref.current = element;
+              }
+            }
+          }}
           role="tooltip_trigger"
           style={{ display: "inline-flex" }}
           {...ariaProps}
@@ -120,7 +134,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
         <div
             {...getFloatingProps({
               className: `tooltip_tooltip ${placement} visible`,
-              ref: floating,
+              ref: refs.setFloating,
               role: "tooltip",
               style: {
                 position: strategy,
@@ -153,6 +167,8 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
       )}
     </>
   )
-}
+})
+
+Tooltip.displayName = "Tooltip"
 
 export default Tooltip
