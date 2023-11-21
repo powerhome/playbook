@@ -59,13 +59,13 @@ const WelcomeComponent = ({
             text="Playbook makes it easy to support bleeding edge, or legacy systems. Use Playbook’s 200+ components and end-to-end design language to create simple, intuitive and beautiful experiences with ease."
           />
           <Flex paddingY="lg" justifyContent={buttonsAlignment}>
-            {Logos.map(({ text, logo }) => (
-              <>
+            {Logos.map(({ text, logo }, i) => (
+              <React.Fragment key={`flex-${i}`}>
                 <Flex align="center" paddingRight="sm">
                   <Image url={logo} />
                   <Body paddingLeft="xxs" text={text} color="light" />
                 </Flex>
-              </>
+              </React.Fragment>
             ))}
           </Flex>
           <Flex className="welcome_component_buttons" justifyContent={buttonsAlignment} orientation={buttonsFlexDirection}>

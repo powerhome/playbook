@@ -39,6 +39,7 @@
           <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle" }) do %>
             <%= pb_rails("nav/item", props: { text: "Rails", link: "#{sample_show_path(@sample, type: :rails)}", active: current_sample_type.rails? }) %>
             <%= pb_rails("nav/item", props: { text: "React", link: "#{sample_show_path(@sample, type: :react)}", active: current_sample_type.react? }) %>
+            <%= pb_rails("nav/item", props: { text: "Swift", link: "#{sample_show_path(@sample, type: :swift)}", active: current_sample_type.swift? }) if Rails.env.development? %>
           <% end %>
         <% end %>
 
