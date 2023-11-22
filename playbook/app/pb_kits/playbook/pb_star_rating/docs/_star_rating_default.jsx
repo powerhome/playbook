@@ -4,7 +4,7 @@ import StarRating from '../_star_rating'
 
 const StarRatingDefault = (props) => (
   <>
-    <StarRating />
+    <StarRating {...props} />
 
     <br />
 
