@@ -33,6 +33,18 @@ module Playbook
         (denominator_style - rating.floor).negative? ? 0 : denominator_style - rating.floor
       end
 
+      def empty_star_color
+        dark ? "$border_dark" : "#E4E8F0"
+      end
+
+      def outline_star_color
+        dark ? "$text_dk_lighter" : "#C1CDD6"
+      end
+
+      def subtle_star_color
+        dark ? "$text_dk_default" : "#242B42"
+      end
+
       def svg_size
         case size
         when "sx"
