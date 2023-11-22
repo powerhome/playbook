@@ -29,7 +29,7 @@ PBTextInput(
 PBTextInput(
   "LEFT-ALIGNED ADD ON WITH BORDER",
   text: $textAddOnLeftNoBorder,
- style: .leftIcon(.user, divider: true)
+  style: .leftIcon(.user, divider: true)
 )
 
 ```
