@@ -2,6 +2,8 @@
 
 ```swift
 
+let multipleUsers = [andrew, picAndrew, andrew, andrew]
+
 PBDoc(title: "Small") {
   PBMultipleUsers(users: multipleUsers, size: .small)
 }

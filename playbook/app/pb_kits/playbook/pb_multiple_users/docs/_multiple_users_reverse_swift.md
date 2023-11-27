@@ -2,6 +2,9 @@
 
 ```swift
 
+let multipleUsers = [andrew, picAndrew, andrew, andrew]
+let twoUsers = [andrew, picAndrew]
+
 VStack(alignment: .leading, spacing: Spacing.small) {
   PBMultipleUsers(users: multipleUsers, size: .small, reversed: true)
   PBMultipleUsers(users: twoUsers, size: .small, reversed: true)
