@@ -2,6 +2,10 @@
 
 ```swift
 
+let oneUser = [andrew]
+let twoUsers = [andrew, picAndrew]
+let multipleUsers = [andrew, picAndrew, andrew, andrew]
+
  HStack(spacing: Spacing.xSmall) {
   PBMultipleUsersStacked(users: oneUser, size: .xSmall)
   PBMultipleUsersStacked(users: twoUsers, size: .xSmall)
