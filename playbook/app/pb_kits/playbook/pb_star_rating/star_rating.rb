@@ -34,15 +34,15 @@ module Playbook
       end
 
       def empty_star_color
-        dark ? "$border_dark" : "#E4E8F0"
+        dark ? "#CECDD3" : "#E4E8F0"
       end
 
       def outline_star_color
-        dark ? "$text_dk_lighter" : "#C1CDD6"
+        dark ? "rgba(255,255,255,0.4)" : "#C1CDD6"
       end
 
       def subtle_star_color
-        dark ? "$text_dk_default" : "#242B42"
+        dark ? "#FFFFFF" : "#242B42"
       end
 
       def svg_size
