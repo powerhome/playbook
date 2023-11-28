@@ -19,7 +19,7 @@ export default function ComponentList() {
   return (
     <Flex paddingLeft="md">
       {!outlet && (
-        <Flex paddingX="md" orientation="column">
+        <Flex paddingX="md" orientation="column" flex="1">
           {kits.map(({ name, components }, index) => (
             <section
               className="category mb_xl"
@@ -36,8 +36,13 @@ export default function ComponentList() {
               </Link>
               <div className="category-container">
                 {components.map(({ name, description }, index) => (
-                  <NavLink to={name}>
-                    <Card className="category-card" key={`${name}-${index}}`}>
+                  <Card 
+                    className="category-card" key={`${name}-${index}}`}
+                    paddingX={{ xs: "sm", sm: "lg", md: "lg", lg: "lg", xl: "lg" }}
+                    paddingTop={{ xs: "xxs", default: "md"}}
+                    paddingBottom={{ xs: "xxs", default: "lg"}}
+                  >
+                    <NavLink to={name}>
                       <Flex
                         align="center"
                         className="category-card-header"
@@ -48,16 +53,15 @@ export default function ComponentList() {
                           size={{ xs: "4", sm: "3", md: "3", lg: "3", xl: "3" }}
                           truncate="1"
                         />
-                        <div className="icon">
-                          <Icon fixedWidth icon="angle-right" size="2x" />
-                        </div>
+                        <Icon className="icon mobile" fixedWidth icon="angle-right" size="xs" />
+                        <Icon className="icon desktop" fixedWidth icon="angle-right" size="2x" />
                       </Flex>
                       <Body
                         className="category-card-description"
                         text={description}
                       />
-                    </Card>
-                  </NavLink>
+                    </NavLink>
+                  </Card>
                 ))}
               </div>
             </section>
