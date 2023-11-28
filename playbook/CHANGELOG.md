@@ -1,3 +1,43 @@
+
+# Dynamically control your Tooltips!
+##### November 22, 2023
+
+![13120](https://github.com/powerhome/playbook/assets/9158723/918a956f-d10b-404b-8d63-2a8f4c070ba8)
+
+
+Introducing the upgraded Multilevel component with customizable radio selectors🚀🌟 – now with a touch of tech magic! 🪄📻 
+Say goodbye to boring checkboxes and hello to snazzy radio buttons that let you pick just ONE option. Why? Because less is more! 
+📢🚨New Feature Alert! - Hide those unwanted radios from any tree node that's not in the mood to play. 🌳🎩💫 
+Level up your kit with some radio button charm and dynamic hide-and-seek.
+
+[13.12.0](https://github.com/powerhome/playbook/tree/13.12.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Initial State and External Controls for Collapse in Rails [\#2870](https://github.com/powerhome/playbook/pull/2870) ([nidaqg](https://github.com/nidaqg))
+- Use new sorting style [\#2846](https://github.com/powerhome/playbook/pull/2846) ([markdoeswork](https://github.com/markdoeswork))
+- Tooltip for truncated text \(only\) [\#2826](https://github.com/powerhome/playbook/pull/2826) ([augustomallmann](https://github.com/augustomallmann))
+
+**Fixed Bugs:**
+
+- Table kit hover style fixes in Darkmode [\#2872](https://github.com/powerhome/playbook/pull/2872) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Improvements:**
+
+- Linting improvements [\#2885](https://github.com/powerhome/playbook/pull/2885) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Docs: Message [\#2865](https://github.com/powerhome/playbook/pull/2865) ([nickamantia](https://github.com/nickamantia))
+- Console error cleanup: site-wide and homepage [\#2856](https://github.com/powerhome/playbook/pull/2856) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Docs: Label Value [\#2855](https://github.com/powerhome/playbook/pull/2855) ([nickamantia](https://github.com/nickamantia))
+- Docs: Image [\#2851](https://github.com/powerhome/playbook/pull/2851) ([nickamantia](https://github.com/nickamantia))
+- Add a dependencies page [\#2850](https://github.com/powerhome/playbook/pull/2850) ([markdoeswork](https://github.com/markdoeswork))
+- Docs: Icon [\#2838](https://github.com/powerhome/playbook/pull/2838) ([nickamantia](https://github.com/nickamantia))
+- Beta React-Router Scaffold/Setup [\#2810](https://github.com/powerhome/playbook/pull/2810) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.11.1...13.12.0)
+
+
+
 # Multi Level Select with Customizable Radio Button Selectors!
 ##### November 13, 2023
 
