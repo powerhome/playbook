@@ -8,6 +8,27 @@
   align-items: flex-end;
   justify-content: flex-start;
 
+  path {
+    &.suble_star_dark {
+      fill: $text_dk_default; // Replace "red" with your desired color
+    }
+    &.suble_star_light {
+      fill: #242B42; // Replace "red" with your desired color
+    }
+    &.outline_star_dark {
+      stroke: $text_dk_lighter; // Replace "red" with your desired color
+    }
+    &.outline_star_light {
+      stroke: #C1CDD6; // Replace "red" with your desired color
+    }
+    &.empty_star_dark {
+      fill: $border_dark; // Replace "red" with your desired color
+    }
+    &.empty_star_light {
+      fill: #E4E8F0; // Replace "red" with your desired color
+    }
+  }
+
   .number_rails_xs {
     height: 22px !important;
   }
