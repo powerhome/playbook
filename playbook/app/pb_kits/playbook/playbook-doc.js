@@ -39,7 +39,7 @@ import * as FixedConfirmationToast from 'pb_fixed_confirmation_toast/docs'
 import * as Flex from 'pb_flex/docs'
 import * as FormGroup from 'pb_form_group/docs'
 import * as FormPill from 'pb_form_pill/docs'
-import * as Gauge from 'pb_gauge/docs'
+//import * as Gauge from 'pb_gauge/docs'
 import * as Hashtag from 'pb_hashtag/docs'
 import * as Highlight from 'pb_highlight/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
@@ -97,7 +97,7 @@ import * as TitleCount from 'pb_title_count/docs'
 import * as TitleDetail from 'pb_title_detail/docs'
 import * as Toggle from 'pb_toggle/docs'
 import * as Tooltip from 'pb_tooltip/docs'
-import * as TreemapChart from 'pb_treemap_chart/docs'
+//import * as TreemapChart from 'pb_treemap_chart/docs'
 import * as Typeahead from 'pb_typeahead/docs'
 import * as User from 'pb_user/docs'
 import * as UserBadge from 'pb_user_badge/docs'
@@ -140,7 +140,7 @@ WebpackerReact.registerComponents({
   ...Flex,
   ...FormGroup,
   ...FormPill,
-  ...Gauge,
+  //...Gauge,
   ...Hashtag,
   ...Highlight,
   ...HomeAddressStreet,
@@ -198,7 +198,7 @@ WebpackerReact.registerComponents({
   ...TitleDetail,
   ...Toggle,
   ...Tooltip,
-  ...TreemapChart,
+  //...TreemapChart,
   ...Typeahead,
   ...User,
   ...UserBadge,

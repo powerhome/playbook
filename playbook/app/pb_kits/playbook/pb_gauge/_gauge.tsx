@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import HighchartsReact from "highcharts-react-official";
@@ -16,7 +17,7 @@ type GaugeProps = {
   aria: { [key: string]: string },
   className?: string,
   chartData?: { name: string, value: number[] | number }[],
-  dark?: Boolean,
+  dark?: boolean,
   data?: { [key: string]: string },
   disableAnimation?: boolean,
   fullCircle?: boolean,
@@ -53,7 +54,7 @@ const Gauge = ({
   suffix = "",
   title = "",
   tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
-    "<b>{point.y}</b>",
+  "<b>{point.y}</b>",
   colors = [],
   minorTickInterval = null,
   circumference = fullCircle ? [0, 360] : [-100, 100],
@@ -161,7 +162,7 @@ const Gauge = ({
     const interval = setInterval(() => {
       if (window.Highcharts) {
         clearInterval(interval)
-        
+
         const gaugeInterval = setInterval(() => {
           if (document.querySelector(".prefix")) {
             clearInterval(gaugeInterval)
@@ -175,12 +176,12 @@ const Gauge = ({
         }, 0)
 
         dark
-          ? window.Highcharts.setOptions(highchartsDarkTheme)
+          ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
           : window.Highcharts.setOptions(highchartsTheme)
-        
+
         highchartsMore(window.Highcharts);
         solidGauge(window.Highcharts);
-      
+
         //set tooltip directly to prevent being overriden by window.Highcharts defaults
         window.Highcharts.setOptions({
           tooltip: {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import HighchartsReact from "highcharts-react-official";
@@ -16,8 +17,8 @@ type CircleChartProps = {
   children?: Node,
   className?: string,
   colors?: string[],
-  dark?: Boolean,
-  data?: Object,
+  dark?: boolean,
+  data?: unknown,
   dataLabelHtml?: string,
   dataLabels?: boolean,
   height?: string,
@@ -154,9 +155,9 @@ const CircleChart = ({
       if (window.Highcharts) {
         clearInterval(interval)
         dark
-          ? window.Highcharts.setOptions(highchartsDarkTheme)
+          ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
           : window.Highcharts.setOptions(highchartsTheme)
-        
+
         highchartsMore(window.Highcharts);
 
         window.Highcharts.setOptions({

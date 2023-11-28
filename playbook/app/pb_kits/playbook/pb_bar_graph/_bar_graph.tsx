@@ -124,7 +124,7 @@ const BarGraph = ({
       if (window.Highcharts) {
         clearInterval(interval)
         dark
-          ? window.Highcharts.setOptions(highchartsDarkTheme)
+          ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
           : window.Highcharts.setOptions(highchartsTheme)
         setIsHighchartsLoaded(true)
       }

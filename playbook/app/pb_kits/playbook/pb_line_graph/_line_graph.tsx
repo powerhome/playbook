@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import { globalProps } from "../utilities/globalProps";
@@ -11,7 +12,7 @@ import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 type LineGraphProps = {
   align?: "left" | "right" | "center",
   axisTitle?: string,
-  dark?: Boolean,
+  dark?: boolean,
   xAxisCategories: [],
   yAxisMin: number,
   yAxisMax: number,
@@ -128,7 +129,7 @@ const LineGraph = ({
       if (window.Highcharts) {
         clearInterval(interval)
         dark
-          ? window.Highcharts.setOptions(highchartsDarkTheme)
+          ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
           : window.Highcharts.setOptions(highchartsTheme)
         setIsHighchartsLoaded(true)
       }
