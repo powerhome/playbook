@@ -39,10 +39,10 @@
         text: "Full Name",
         colspan: 2,
         sort_menu: [
-          { item: "First Name Descending", link: "?sort=firstname_desc#table-header", active: params["sort"] == "firstname_desc", direction: "desc" },
-          { item: "First Name Ascending", link: "?sort=firstname_asc#table-header", active: params["sort"] == "firstname_asc", direction: "asc" },
-          { item: "Last Name Descending", link: "?sort=lastname_desc#table-header", active: params["sort"] == "lastname_desc", direction: "desc" },
-          { item: "Last Name Ascending", link: "?sort=lastname_asc#table-header", active: params["sort"] == "lastname_asc", direction: "asc" }
+          { item: "First Name", link: "?sort=firstname_desc#table-header", active: params["sort"] == "firstname_desc", direction: "desc" },
+          { item: "First Name", link: "?sort=firstname_asc#table-header", active: params["sort"] == "firstname_asc", direction: "asc" },
+          { item: "Last Name", link: "?sort=lastname_desc#table-header", active: params["sort"] == "lastname_desc", direction: "desc" },
+          { item: "Last Name", link: "?sort=lastname_asc#table-header", active: params["sort"] == "lastname_asc", direction: "asc" }
         ],
       }) %>
       <%= pb_rails("table/table_header", props: {

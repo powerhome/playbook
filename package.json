@@ -5,7 +5,9 @@
     "watch-all": "yarn workspaces foreach -ivp run watch",
     "release-all": "yarn workspaces foreach -iv run release",
     "start-dev": "yarn nf start",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint . --ext .js,.jsx,.tsx,.ts",
+    "lint-fix": "eslint . --ext .js,.jsx,.tsx,.ts --fix"
   },
   "workspaces": {
     "packages": [
@@ -14,12 +16,22 @@
     ]
   },
   "devDependencies": {
+    "@powerhome/eslint-config": "0.1.0",
+    "@typescript-eslint/eslint-plugin": "5.48.2",
+    "@typescript-eslint/parser": "4.33.0",
+    "babel-eslint": "10.1.0",
+    "eslint": "7.1.0",
+    "eslint-plugin-jsx-control-statements": "^3.0.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "foreman": "3.0.1",
     "husky": "6.0.0",
     "lint-staged": "10.5.4"
   },
   "lint-staged": {
-    "*.{js,jsx}": "eslint",
+    "*.{js,jsx,tsx,ts}": "eslint",
     "*.rb": "bundle exec --gemfile=playbook-website/Gemfile rubocop --parallel"
+  },
+  "dependencies": {
+    "eslint-plugin-react": "^7.33.2"
   }
 }

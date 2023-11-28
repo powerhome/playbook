@@ -28,15 +28,16 @@
                                       position: object.placement ,
                                       padding: 'none'}) do %>
         <%= pb_rails("nav", props: {classname: "pb_table_header_dropdown"}) do %>
-          <% object.sort_menu.each_with_index do |item, index| %>
+          <% object.sort_items.each do |sort_item| %>
+            <% item = active_or_first_item(sort_items_for(sort_item)) %>
             <%= pb_rails("nav/item", props: {
               text: item[:item],
-              link: item[:link],
+              link: next_link(sort_item: sort_item),
               highlighted_border: false,
               padding: "xs",
               icon_right: sort_icon(item[:direction], item[:active]),
               active: item[:active],
-              classname: "header_nav_item #{'header_first_item' if index == 0} #{'header_last_item' if index == object.sort_menu.size - 1}"
+              classname: "header_nav_item"
             }) %>
           <% end %>
         <% end %>

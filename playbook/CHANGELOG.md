@@ -1,3 +1,76 @@
+
+# Dynamically Control Your Tooltips!
+##### November 22, 2023
+
+![13120](https://github.com/powerhome/playbook/assets/9158723/7f71bfa5-2354-485e-88cf-587ec30dde9a)
+
+Gone are the days that a tooltip appears on its own. You can now control tooltips' visible state via props, so they are rendered conditionally. Text truncation? Data values? You have the power to dynamically display your Tooltips when and where you need them!
+
+[13.12.0](https://github.com/powerhome/playbook/tree/13.12.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Initial State and External Controls for Collapse in Rails [\#2870](https://github.com/powerhome/playbook/pull/2870) ([nidaqg](https://github.com/nidaqg))
+- Use new sorting style [\#2846](https://github.com/powerhome/playbook/pull/2846) ([markdoeswork](https://github.com/markdoeswork))
+- Tooltip for truncated text \(only\) [\#2826](https://github.com/powerhome/playbook/pull/2826) ([augustomallmann](https://github.com/augustomallmann))
+
+**Fixed Bugs:**
+
+- Table kit hover style fixes in Darkmode [\#2872](https://github.com/powerhome/playbook/pull/2872) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+**Improvements:**
+
+- Linting improvements [\#2885](https://github.com/powerhome/playbook/pull/2885) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Docs: Message [\#2865](https://github.com/powerhome/playbook/pull/2865) ([nickamantia](https://github.com/nickamantia))
+- Console error cleanup: site-wide and homepage [\#2856](https://github.com/powerhome/playbook/pull/2856) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Docs: Label Value [\#2855](https://github.com/powerhome/playbook/pull/2855) ([nickamantia](https://github.com/nickamantia))
+- Docs: Image [\#2851](https://github.com/powerhome/playbook/pull/2851) ([nickamantia](https://github.com/nickamantia))
+- Add a dependencies page [\#2850](https://github.com/powerhome/playbook/pull/2850) ([markdoeswork](https://github.com/markdoeswork))
+- Docs: Icon [\#2838](https://github.com/powerhome/playbook/pull/2838) ([nickamantia](https://github.com/nickamantia))
+- Beta React-Router Scaffold/Setup [\#2810](https://github.com/powerhome/playbook/pull/2810) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.11.1...13.12.0)
+
+
+
+# Multi Level Select with Customizable Radio Button Selectors!
+##### November 13, 2023
+
+![multi-select-radio-3](https://github.com/powerhome/playbook/assets/73710701/76b7f190-94c0-45bc-996d-f89a58d4e552)
+
+Introducing the upgraded Multilevel component with customizable radio selectors🚀🌟 – now with a touch of tech magic! 🪄📻 
+
+Say goodbye to boring checkboxes and hello to snazzy radio buttons that let you pick just ONE option. Why? Because less is more! 
+
+📢🚨New Feature Alert! - Hide those unwanted radios from any tree node that's not in the mood to play. 🌳🎩💫 
+
+Level up your kit with some radio button charm and dynamic hide-and-seek.
+
+[13.11.1](https://github.com/powerhome/playbook/tree/13.11.1) full list of changes:
+
+
+**Kit Enhancements:**
+
+- RTE Kit Tiptap Optional Toolbar [\#2823](https://github.com/powerhome/playbook/pull/2823) ([augustomallmann](https://github.com/augustomallmann))
+- Multilevel Single Select (Phase 2) [\#2809](https://github.com/powerhome/playbook/pull/2809) ([Israel-Molestina](https://github.com/Israel-Molestina))
+
+
+**Improvements:**
+
+- Docs: Icon Circle [\#2844](https://github.com/powerhome/playbook/pull/2844) ([nickamantia](https://github.com/nickamantia))
+- Docs: Checkbox [\#2831](https://github.com/powerhome/playbook/pull/2831) ([nickamantia](https://github.com/nickamantia))
+- Docs: Card [\#2808](https://github.com/powerhome/playbook/pull/2808) ([nickamantia](https://github.com/nickamantia))
+- Website V1 - Getting Started Updated Headers  [\#2806](https://github.com/powerhome/playbook/pull/2806) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Table Kit [Sortable] Table Header Docs [\#2800](https://github.com/powerhome/playbook/pull/2800) ([Israel-Molestina](https://github.com/Israel-Molestina))
+- Docs: Button [\#2798](https://github.com/powerhome/playbook/pull/2798) ([nickamantia](https://github.com/nickamantia))
+- Add Swift to Kits Page [\#2778](https://github.com/powerhome/playbook/pull/2778) ([markdoeswork](https://github.com/markdoeswork))
+- Update Kit Generator [\#2824](https://github.com/powerhome/playbook/pull/2824) ([markdoeswork](https://github.com/markdoeswork))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.10.0...13.11.1)
+
+
 # 13.10.0
 ##### October 19, 2023
 
