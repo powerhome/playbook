@@ -147,6 +147,7 @@ module.exports = {
   },
   externals: {
     'highcharts': 'highcharts',
+    'highcharts-react-official': 'highcharts-react-official',
     'react': 'react',
     'react-dom': 'react-dom',
     'trix': 'trix',
