@@ -21,6 +21,7 @@ const router = createBrowserRouter(
     >
       <Route
           element={<ComponentList />}
+          loader={ComponentsLoader}
           path="kits"
       >
         <Route
