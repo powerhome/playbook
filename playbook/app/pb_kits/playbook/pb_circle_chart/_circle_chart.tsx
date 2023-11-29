@@ -156,7 +156,7 @@ const CircleChart = ({
         clearInterval(interval)
         dark
           ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
-          : window.Highcharts.setOptions(highchartsTheme)
+          : window.Highcharts.setOptions(highchartsTheme(window.Highcharts))
 
         highchartsMore(window.Highcharts);
 

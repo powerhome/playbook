@@ -9,6 +9,8 @@ import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 
 import classnames from "classnames";
 
+
+
 type BarGraphProps = {
   align?: "left" | "right" | "center",
   axisTitle: string,
@@ -125,7 +127,7 @@ const BarGraph = ({
         clearInterval(interval)
         dark
           ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
-          : window.Highcharts.setOptions(highchartsTheme)
+          : window.Highcharts.setOptions(highchartsTheme(window.Highcharts))
         setIsHighchartsLoaded(true)
       }
     }, 0)
