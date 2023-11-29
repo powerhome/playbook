@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Link,
   NavLink,
   Outlet,
   useLoaderData,
@@ -98,14 +97,14 @@ export default function ComponentList() {
                 key={`${name}-${index}`}
                 id={name}
               >
-                <Link to={`kit_category/${name}`}>
+                <NavLink to={`/kit_category/${name}`}>
                   <Title
                     marginBottom="md"
                     size={2}
                     tag="h1"
                     text={linkFormat(name)}
                   />
-                </Link>
+                </NavLink>
                 <div className="category-container">
                   {components.map(({ name, description }, index) => (
                     <Card
@@ -121,7 +120,7 @@ export default function ComponentList() {
                       paddingTop={{ xs: "xxs", default: "md" }}
                       paddingBottom={{ xs: "xxs", default: "lg" }}
                     >
-                      <NavLink to={name}>
+                      <NavLink to={`/kits/${name}`}>
                         <Flex
                           align="center"
                           className="category-card-header"
