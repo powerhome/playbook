@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Link,
   NavLink,
@@ -8,20 +8,32 @@ import {
 } from "react-router-dom";
 import { Background, Body, Card, Flex, Icon, Title } from "playbook-ui";
 import { linkFormat } from "../../../../utilities/website_sidebar_helper";
-// import HeaderMobile from "../../../javascript/images/pb_generic_header.jpg";
-// import HeaderDesktop from "../../../../../javascript/images/pb_generic_header.jpg"
-import HeaderDesktop from "../../../../images/pb_generic_header_desktop.jpg"
-// /Users/augustocmallmann/powerhome/playbook/playbook-website/app/javascript/images/pb_generic_header_desktop.jpg
+import HeaderMobile from "../../../../images/pb_generic_header.jpg";
+import HeaderDesktop from "../../../../images/pb_generic_header_desktop.jpg";
+
 import "../assets/styles.scss";
 
 export default function ComponentList() {
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 575);
+
   const outlet = useOutlet();
   const { kits } = useLoaderData();
 
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setIsMobile(window.innerWidth <= 575);
+    });
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        setIsMobile(window.innerWidth <= 575);
+      });
+    };
+  }, []);
+
   console.log("componentList", kits);
   return (
-    <Flex align="stretch" paddingLeft="md" maxWidth="xxl" marginX="auto" orientation="column">
+    <Flex align="stretch" gap="lg" maxWidth="xxl" marginX="auto" orientation="column">
       {!outlet && (
         <>
           <Background
@@ -56,9 +68,9 @@ export default function ComponentList() {
             backgroundRepeat="no-repeat"
             imageUrl={{
               default: HeaderDesktop,
-              // xs: HeaderMobile,
-              // sm: HeaderMobile,
-              // md: HeaderDesktop,
+              xs: HeaderMobile,
+              sm: HeaderMobile,
+              md: HeaderDesktop,
             }}
           >
             <Title
