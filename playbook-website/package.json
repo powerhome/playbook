@@ -10,7 +10,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-pro": "^6.2.1",
     "@mapbox/mapbox-gl-draw": "^1.4.1",
-    "@rails/webpacker": "5.2.1",
+    "@rails/webpacker": "5.4.4",
     "@tiptap/extension-document": "^2.1.12",
     "@tiptap/extension-highlight": "^2.0.3",
     "@tiptap/extension-horizontal-rule": "^2.0.3",
