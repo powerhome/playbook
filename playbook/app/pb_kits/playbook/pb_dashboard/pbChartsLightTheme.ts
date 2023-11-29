@@ -255,7 +255,7 @@ function highchartsTheme(highcharts: any): ThemeProps {
     credits: {
       enabled: false
     },
-  }
+  } as ThemeProps
 }
 
 export { highchartsTheme }
