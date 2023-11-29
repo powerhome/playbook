@@ -8,9 +8,10 @@ import {
 } from "react-router-dom";
 import { Background, Body, Card, Flex, Icon, Title } from "playbook-ui";
 import { linkFormat } from "../../../../utilities/website_sidebar_helper";
-// import HeaderMobile from "../images/pb_generic_header.jpg"
-// import HeaderDesktop from "../images/pb_generic_header_desktop.jpg"
-
+// import HeaderMobile from "../../../javascript/images/pb_generic_header.jpg";
+// import HeaderDesktop from "../../../../../javascript/images/pb_generic_header.jpg"
+import HeaderDesktop from "../../../../images/pb_generic_header_desktop.jpg"
+// /Users/augustocmallmann/powerhome/playbook/playbook-website/app/javascript/images/pb_generic_header_desktop.jpg
 import "../assets/styles.scss";
 
 export default function ComponentList() {
@@ -20,7 +21,7 @@ export default function ComponentList() {
 
   console.log("componentList", kits);
   return (
-    <Flex paddingLeft="md" maxWidth="xxl">
+    <Flex align="stretch" paddingLeft="md" maxWidth="xxl" marginX="auto" orientation="column">
       {!outlet && (
         <>
           <Background
@@ -54,7 +55,7 @@ export default function ComponentList() {
             backgroundColor="dark"
             backgroundRepeat="no-repeat"
             imageUrl={{
-              // default: HeaderDesktop,
+              default: HeaderDesktop,
               // xs: HeaderMobile,
               // sm: HeaderMobile,
               // md: HeaderDesktop,
@@ -129,7 +130,7 @@ export default function ComponentList() {
                             className="icon mobile"
                             fixedWidth
                             icon="angle-right"
-                            size="xs"
+                            size="sm"
                           />
                           <Icon
                             className="icon desktop"

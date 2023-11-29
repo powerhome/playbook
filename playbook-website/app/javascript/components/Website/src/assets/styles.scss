@@ -25,6 +25,11 @@
     .icon {
       display: none;
       color: $primary;
+      &.mobile {
+        @media screen and (max-width: $screen-xs-min) {
+          display: block;
+        }
+      }
     }
     &-header {
       height: 40px;
@@ -43,12 +48,10 @@
     &:hover {
       box-shadow: $shadow_deeper;
       cursor: pointer;
+      @media screen and (max-width: $screen-xs-min) {
+        box-shadow: none;
+      }
       .icon {
-        &.mobile {
-          @media screen and (max-width: $screen-xs-min) {
-            display: block;
-          }
-        }
         &.desktop {
           @media screen and (min-width: $screen-xs-min) {
             display: block;
