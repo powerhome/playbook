@@ -153,6 +153,7 @@ export default function ComponentList() {
                         </Flex>
                         <Body
                           className="category-card-description"
+                          color="light"
                           text={description}
                         />
                       </NavLink>
