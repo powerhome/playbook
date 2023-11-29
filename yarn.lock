@@ -2037,10 +2037,12 @@
   resolved "https://npm.powerapp.cloud/@popperjs/core/-/core-2.11.7.tgz#ccab5c8f7dc557a52ca3288c10075c9ccd37fff7"
   integrity sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==
 
-"@powerhome/eslint-config@0.1.0":
-  version "0.1.0"
-  resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.1.0.tgz#f1e1151481f51421186ba8caad99fadb24b1fe51"
-  integrity sha512-8e5DRgnKPbJ+ofAtqjUPZTxcgHg/TVf52WeNqAGBUXSS4QWHemL6fj1n/YHfAIvx3aMUhFwrw2lUNofUocgK3A==
+"@powerhome/eslint-config@0.2.2":
+  version "0.2.2"
+  resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.2.2.tgz#0eb361041f9a3d2ab654167d7d88dc1cd3e8c908"
+  integrity sha512-NVzuoK4Z7ovB95WNYtvTLr4aeEjnLQaqA+Liit2lVTjB0wo3g6ylIgU54dA6Pnk2VkMTOsxqBXZfBQ47aZsyMw==
+  dependencies:
+    eslint-config-prettier "^8.6.0"
 
 "@rails/webpacker@5.2.1":
   version "5.2.1"
@@ -6020,6 +6022,11 @@ escodegen@^2.0.0:
     optionator "^0.8.1"
   optionalDependencies:
     source-map "~0.6.1"
+
+eslint-config-prettier@^8.6.0:
+  version "8.10.0"
+  resolved "https://npm.powerapp.cloud/eslint-config-prettier/-/eslint-config-prettier-8.10.0.tgz#3a06a662130807e2502fc3ff8b4143d8a0658e11"
+  integrity sha512-SM8AMJdeQqRYT9O9zguiruQZaN7+z+E4eAP9oiLNGKMtomwaB1E9dcgUD6ZAn/eQAb52USbvezbiljfZUhbJcg==
 
 eslint-plugin-flowtype@5.10.0:
   version "5.10.0"
