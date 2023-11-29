@@ -6,7 +6,7 @@ import { ThemeProps } from './themeTypes'
 //import Highcharts from 'highcharts'
 
 const pbButtonHoverColor = '#004ebb'
-function highchartsTheme(highcharts: any): ThemeProps {
+function highchartsTheme(highcharts: any) {
   return {
     lang: {
       thousandsSep: ',',
@@ -255,7 +255,7 @@ function highchartsTheme(highcharts: any): ThemeProps {
     credits: {
       enabled: false
     },
-  } as ThemeProps
+  }
 }
 
 export { highchartsTheme }
