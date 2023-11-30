@@ -19,7 +19,14 @@ type DateYearStackedProps = {
 }
 
 const DateYearStacked = (props: DateYearStackedProps) => {
-  const { align = 'left', className, dark = false, date, data={} } = props
+  const { 
+    align = 'left', 
+    className, 
+    dark = false, 
+    date, 
+    data={},
+    htmlOptions = {}, 
+  } = props
   const css = classnames(
     buildCss('pb_date_year_stacked', align),
     globalProps(props),

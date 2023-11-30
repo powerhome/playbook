@@ -26,15 +26,18 @@ const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
     date,
     datetime,
     dark,
+    htmlOptions = {},
     timeZone = 'America/New_York',
   } = props
 
   const classes = buildCss('pb_date_time_stacked_kit', globalProps(props))
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
     <Flex
         inline={false}
         vertical="stretch"
+        {...htmlProps}
         {...props}
     >
       <FlexItem>

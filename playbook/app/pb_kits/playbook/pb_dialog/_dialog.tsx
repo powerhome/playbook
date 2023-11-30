@@ -26,6 +26,7 @@ type DialogProps = {
   closeable: boolean;
   confirmButton?: string;
   data?: object;
+  htmlOptions?: { [key: string]: string | number | boolean | Function };
   id?: string;
   fullHeight?: boolean;
   loading?: boolean;

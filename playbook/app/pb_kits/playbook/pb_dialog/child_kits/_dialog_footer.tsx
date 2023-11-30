@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildCss } from '../../utilities/props'
+import { buildCss, buildHtmlProps } from '../../utilities/props'
 import { GlobalProps, globalProps } from '../../utilities/globalProps'
 
 import Flex from '../../pb_flex/_flex'
@@ -27,15 +27,19 @@ const DialogFooter = (props: DialogFooterProps) => {
   const {
     children,
     className,
+    htmlOptions = {},
     spacing = "between",
     separator = false,
   } = props
 
   const footerCSS = buildCss("dialog_footer")
   const footerSpacing = globalProps(props)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
-    <>
+    <div 
+      {...htmlProps}
+    >
       {separator &&
         <SectionSeparator />
       }
@@ -47,7 +51,7 @@ const DialogFooter = (props: DialogFooterProps) => {
       >
         {children}
       </Flex>
-    </>
+    </div>
   )
 }
 
