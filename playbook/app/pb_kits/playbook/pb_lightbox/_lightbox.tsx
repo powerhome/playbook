@@ -36,6 +36,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     currentPhotoIndex,
     data = {},
     description,
+    htmlOptions = {},
     id = '',
     initialPhoto = 0,
     photos,

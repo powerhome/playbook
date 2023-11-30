@@ -6,7 +6,8 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
-, buildHtmlProps } from '../utilities/props'
+  buildHtmlProps
+} from '../utilities/props'
 
 import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'

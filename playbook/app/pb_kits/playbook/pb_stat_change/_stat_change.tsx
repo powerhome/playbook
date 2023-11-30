@@ -28,12 +28,22 @@ type StatChangeProps = {
 }
 
 const StatChange = (props: StatChangeProps): React.ReactElement => {
-  const { change = 'neutral', className, icon, id, value } = props
+  const { 
+    change = 'neutral', 
+    className, 
+    htmlOptions = {},
+    icon, 
+    id, 
+    value 
+  } = props
+
   const status = statusMap[change as keyof typeof statusMap]
   let returnedIcon = iconMap[change as keyof typeof iconMap]
   if (icon) {
     returnedIcon = icon
   }
+
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
     <>
@@ -45,6 +55,7 @@ const StatChange = (props: StatChangeProps): React.ReactElement => {
               className
               )}
             id={id}
+            {...htmlProps}
         >
           <Body status={status}>
             {returnedIcon &&

@@ -6,7 +6,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
-  buildHtmlProps
+  buildHtmlProps,
 } from '../utilities/props'
 
 import { GlobalProps, globalProps } from '../utilities/globalProps'

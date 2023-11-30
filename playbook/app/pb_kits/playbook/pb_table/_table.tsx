@@ -34,6 +34,7 @@ const Table = (props: TableProps) => {
     data = {},
     dataTable = false,
     disableHover = false,
+    htmlOptions = {},
     id,
     responsive = 'collapse',
     singleLine = false,

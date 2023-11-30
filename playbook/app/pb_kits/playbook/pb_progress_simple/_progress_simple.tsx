@@ -24,6 +24,7 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
     className,
     dark = false,
     data ={},
+    htmlOptions = {},
     max,
     muted = false,
     percent = '',
@@ -35,8 +36,8 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
     width: width,
   }
 
-   const dataProps = buildDataProps(data)
-   const htmlProps = buildHtmlProps(htmlOptions)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const variantStyle = variant == 'default' ? '' : variant
 
   const valueStyles = {
