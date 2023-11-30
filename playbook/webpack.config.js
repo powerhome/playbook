@@ -146,8 +146,6 @@ module.exports = {
     'reset': `${SOURCE_PATH}/_reset.scss`,
   },
   externals: {
-    'highcharts': 'highcharts',
-    'highcharts-react-official': 'highcharts-react-official',
     'react': 'react',
     'react-dom': 'react-dom',
     'trix': 'trix',
