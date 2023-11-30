@@ -258,7 +258,7 @@ const pbButtonHoverColor = '#004ebb'
 //   },
 // }
 
-function highchartsDarkTheme(highcharts: any) {
+function highchartsDarkTheme(highcharts: any): ThemeProps {
   return {
     lang: {
       thousandsSep: ',',
