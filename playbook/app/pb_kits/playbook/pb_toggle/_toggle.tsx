@@ -7,7 +7,7 @@ import {
   buildCss,
   buildDataProps,
   buildHtmlProps
-, buildHtmlProps } from '../utilities/props'
+} from '../utilities/props'
 
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 
