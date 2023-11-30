@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import Flex from '../pb_flex/_flex'
 import Card from '../pb_card/_card'
@@ -17,6 +17,7 @@ type TextInputProps = {
   dark?: boolean,
   disabled?: boolean,
   error?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   inline?: boolean,
   name: string,
@@ -43,6 +44,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     data = {},
     disabled,
     error,
+    htmlOptions = {},
     id,
     inline = false,
     name,
@@ -57,6 +59,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const { alignment, border, icon } = addOn
   const addOnAlignment = alignment === 'left' ? 'left' : 'right'
@@ -138,6 +141,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={css}
     >
       {label && 

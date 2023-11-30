@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Caption from '../pb_caption/_caption'
@@ -15,6 +15,7 @@ type NavProps = {
   data?: object,
   dark?: boolean,
   highlight?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   onClick?: React.MouseEventHandler<HTMLElement>,
   orientation?: "vertical" | "horizontal",
@@ -33,6 +34,7 @@ const Nav = (props: NavProps) => {
     data = {},
     dark = false,
     highlight = true,
+    htmlOptions = {},
     id,
     link = '#',
     onClick = () => { },
@@ -44,6 +46,7 @@ const Nav = (props: NavProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const cardCss = classnames(
     buildCss('pb_nav_list', variant, orientation, {
       highlight: highlight,
@@ -70,6 +73,7 @@ const childrenWithProps = React.Children.map(children, (child) => {
     <nav
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={cardCss}
       id={id}
     >

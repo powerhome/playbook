@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
 
@@ -21,6 +21,7 @@ type ButtonPropTypes = {
   form?: string,
   fullWidth?: boolean,
   highlight?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   icon?: string,
   iconRight?: boolean,
   id?: string,
@@ -73,6 +74,7 @@ const Button = (props: ButtonPropTypes) => {
     count,
     data = {},
     disabled,
+    htmlOptions = {},
     icon = null,
     iconRight = false,
     id,
@@ -91,6 +93,8 @@ const Button = (props: ButtonPropTypes) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+
   const css = classnames(
     buttonClassName(props),
     globalProps(props),
@@ -148,6 +152,7 @@ const Button = (props: ButtonPropTypes) => {
         <a
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={css}
           href={link}
           id={id}
@@ -164,6 +169,7 @@ const Button = (props: ButtonPropTypes) => {
         <button
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={css}
           disabled={disabled}
           form={form}
@@ -199,6 +205,7 @@ const Button = (props: ButtonPropTypes) => {
         <button
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={css}
           disabled={disabled}
           form={form}

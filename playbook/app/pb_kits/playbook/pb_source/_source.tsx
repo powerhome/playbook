@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildDataProps, buildAriaProps } from '../utilities/props'
+import { buildDataProps, buildAriaProps, buildHtmlProps } from '../utilities/props'
 import { titleize } from '../utilities/text'
 
 import Avatar, { AvatarProps } from '../pb_avatar/_avatar'
@@ -15,6 +15,7 @@ type SourceProps = {
   className?: string,
   data?: { [key: string]: string },
   hideIcon: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   source?: string,
   type: "events" | "inbound" | "outbound" | "prospecting" | "referral" | "retail" | "user",
@@ -26,12 +27,14 @@ const Source = ({
   className,
   data = {},
   hideIcon = false,
+  htmlOptions = {},
   id,
   source,
   type = 'inbound',
   user = {},
 }: SourceProps) => {
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const ariaProps = buildAriaProps(aria)
 
   const css = classnames([
@@ -71,6 +74,7 @@ const Source = ({
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={css}
       id={id}
     >

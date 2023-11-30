@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Avatar from '../pb_avatar/_avatar'
@@ -13,6 +13,7 @@ type MultipleUsersProps = {
   className?: string,
   dark?: boolean,
   data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   maxDisplayedUsers?: number,
   reverse?: boolean,
@@ -26,6 +27,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     id,
     maxDisplayedUsers = 4,
     reverse = false,
@@ -41,6 +43,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
   const avatarSizeClass = size === 'xxs' ? 'xxs' : 'xs'
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_multiple_users_kit', reverseClass),
     globalProps(props),
@@ -56,6 +59,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

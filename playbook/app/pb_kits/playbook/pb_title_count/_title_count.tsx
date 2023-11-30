@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -16,6 +16,7 @@ type TitleCountProps = {
   count?: number,
   dark?: boolean,
   data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   title?: string,
   size?: "lg" | "sm",
@@ -28,12 +29,14 @@ const TitleCount = (props: TitleCountProps): React.ReactElement => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     count,
     id,
     title,
     size = 'sm' } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const css = classnames(
     buildCss('pb_title_count_kit', align, size),
@@ -47,6 +50,7 @@ const TitleCount = (props: TitleCountProps): React.ReactElement => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={css}
         id={id}
     >

@@ -6,6 +6,7 @@ import Title from '../pb_title/_title'
 
 type StatValueProps = {
   className?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   unit?: string,
   value: string | number,

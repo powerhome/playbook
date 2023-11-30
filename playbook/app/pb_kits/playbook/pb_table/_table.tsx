@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import PbTable from '.'
 
@@ -14,6 +14,7 @@ type TableProps = {
   data?: { [key: string]: string },
   dataTable: boolean,
   disableHover: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   responsive: "collapse" | "scroll" | "none",
   singleLine: boolean,
@@ -43,6 +44,7 @@ const Table = (props: TableProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const tableCollapseCss = responsive !== 'none' ? `table-collapse-${collapse}` : ''
   const verticalBorderCss = verticalBorder ? 'vertical-border' : ''
 
@@ -55,6 +57,7 @@ const Table = (props: TableProps) => {
     <table
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classnames(
         'pb_table',
         `table-${size}`,

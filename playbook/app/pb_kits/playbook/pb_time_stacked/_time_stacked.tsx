@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildCss, buildDataProps } from '../utilities/props'
+import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps } from '../utilities/globalProps'
 import DateTime from '../pb_kit/dateTime';
 
@@ -14,6 +14,7 @@ type TimeStackedProps = {
   dark?: boolean,
   data?: { [key: string]: string },
   date?: Date,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   time?: number | Date,
   timeZone?: string,
@@ -28,6 +29,7 @@ const TimeStackedDefault = (props: TimeStackedProps): React.ReactElement => {
     dark,
     data = {},
     date,
+    htmlOptions = {},
     time,
     timeZone,
   } = props
@@ -37,12 +39,14 @@ const TimeStackedDefault = (props: TimeStackedProps): React.ReactElement => {
     globalProps(props),
     className
   )
-  const dataProps = buildDataProps(data)
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
     <div
         className={classes}
         {...dataProps}
+        {...htmlProps}
     >
       <Body
           className={classnames('pb_time_stacked', 'time-spacing')}

@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Highlight from '../pb_highlight/_highlight'
@@ -15,6 +15,7 @@ type BodyProps = {
   data?: {[key: string]: string},
   highlightedText?: string[],
   highlighting?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   status?: 'neutral' | 'negative' | 'positive',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
@@ -33,6 +34,7 @@ const Body = (props: BodyProps): React.ReactElement => {
     data = {},
     highlightedText = [],
     highlighting = false,
+    htmlOptions = {},
     id = '',
     status = null,
     tag = 'div',
@@ -43,6 +45,7 @@ const Body = (props: BodyProps): React.ReactElement => {
 
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const isTruncated = truncate ? `truncate_${truncate}` : ''
   const classes = classnames(
     buildCss('pb_body_kit', color, variant, status, isTruncated),
@@ -56,6 +59,7 @@ const Body = (props: BodyProps): React.ReactElement => {
     <Tag
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

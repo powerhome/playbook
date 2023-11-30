@@ -3,10 +3,12 @@ import Highlighter from 'react-highlight-words'
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { buildHtmlProps, buildHtmlProps } from '../utilities/props'
 
 type HighlightProps = {
   className?: string,
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   children?: React.ReactChild[] | React.ReactChild | string,
   text?: string,
@@ -19,10 +21,12 @@ const Highlight = (props: HighlightProps): React.ReactElement => {
     className = 'pb_highlight_kit',
     data = {},
     highlightedText = ['highlight'],
+    htmlOptions = {},
     id = '',
     text = '',
   } = props
 
+  const htmlProps = buildHtmlProps(htmlOptions)
   const highlightContent: any = text || children;
 
   return (
@@ -34,6 +38,7 @@ const Highlight = (props: HighlightProps): React.ReactElement => {
         id={id}
         searchWords={highlightedText}
         textToHighlight={highlightContent}
+        {...htmlProps}
     />
   )
 }

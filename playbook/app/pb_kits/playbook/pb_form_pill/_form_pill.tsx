@@ -8,6 +8,7 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type FormPillProps = {
   className?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   text: string,
   name?: string,

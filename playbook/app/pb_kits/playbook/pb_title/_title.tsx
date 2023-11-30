@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, GlobalProps, globalProps } from '../utilities/globalProps'
 
 type SizeType = 1 | 2 | 3 | 4 | "1" | "2" | "3" | "4"
@@ -13,6 +13,7 @@ type TitleProps = {
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   size?: SizeType | SizeResponsiveType,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
@@ -29,6 +30,7 @@ const Title = (props: TitleProps): React.ReactElement => {
     className,
     color,
     data = {},
+    htmlOptions = {},
     id,
     size = 3,
     bold = true,
@@ -40,6 +42,7 @@ const Title = (props: TitleProps): React.ReactElement => {
 
   const ariaProps: {[key: string]: string | number} = buildAriaProps(aria)
   const dataProps: {[key: string]: string | number} = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const getBold = bold ? '' : 'thin'
   const isTruncated = truncate ? `truncate-${truncate}` : null
   const isSizeNumberOrString = typeof size === "number" || typeof size === "string"
@@ -68,6 +71,7 @@ const Title = (props: TitleProps): React.ReactElement => {
     <Tag
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

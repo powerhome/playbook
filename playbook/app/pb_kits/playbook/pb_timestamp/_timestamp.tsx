@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import DateTime from '../pb_kit/dateTime';
 
@@ -16,6 +16,7 @@ type TimestampProps = {
   text: string,
   timestamp: Date | string,
   timezone: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   showDate?: boolean,
   showUser?: boolean,
@@ -32,6 +33,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     text,
     timezone,
     timestamp,
@@ -45,6 +47,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_timestamp_kit', align, {
       dark: dark,
@@ -101,6 +104,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
     >
       <div className="pb_timestamp_kit">

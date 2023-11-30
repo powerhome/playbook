@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildCss, buildDataProps } from '../utilities/props'
+import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -15,6 +15,7 @@ type DateRangeStackedProps = {
   data?: string,
   dark?: boolean,
   endDate: Date,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   startDate: Date,
 }
@@ -26,10 +27,13 @@ const DateRangeStacked = (props: DateRangeStackedProps) => {
     globalProps(props),
     className
   )
-  const dataProps = buildDataProps(data)
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
-    <div {...dataProps}
+    <div 
+        {...dataProps}
+        {...htmlProps}
         className={css}
     >
       <Flex vertical="center">

@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildCss } from '../utilities/props'
+import { buildCss, buildHtmlProps } from '../utilities/props'
 
 import DateStacked from '../pb_date_stacked/_date_stacked'
 import IconCircle from '../pb_icon_circle/_icon_circle'

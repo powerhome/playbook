@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 import DateTime from '../pb_kit/dateTime';
 
@@ -17,6 +17,7 @@ type LabelValueProps = {
   dark?: boolean;
   data?: object;
   date?: Date;
+  htmlOptions?: {[key: string]: string | number | boolean | Function};
   id?: string;
   label: string;
   value?: string;
@@ -42,6 +43,7 @@ const LabelValue = (props: LabelValueProps) => {
     data = {},
     date,
     description,
+    htmlOptions = {},
     icon,
     id,
     label,
@@ -51,7 +53,8 @@ const LabelValue = (props: LabelValueProps) => {
   } = props;
 
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const variantClass = variant === "details" ? "details" : "";
   const classes = classnames(
     buildCss("pb_label_value_kit", variantClass),
@@ -63,6 +66,7 @@ const LabelValue = (props: LabelValueProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
         title={title}

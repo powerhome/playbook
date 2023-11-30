@@ -16,7 +16,7 @@ import Option from './components/Option'
 import Placeholder from './components/Placeholder'
 import ValueContainer from './components/ValueContainer'
 
-import { noop, buildDataProps } from '../utilities/props'
+import { noop, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { Noop } from '../types'
 
 /**
@@ -34,6 +34,7 @@ type TypeaheadProps = {
   dark?: boolean,
   data?: { [key: string]: string },
   error?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   label?: string,
   loadOptions?: string | Noop,
@@ -68,6 +69,7 @@ const Typeahead = ({
   data = {},
   getOptionLabel,
   getOptionValue,
+  htmlOptions = {},
   id,
   loadOptions = noop,
   ...props
@@ -125,6 +127,7 @@ const Typeahead = ({
   }
 
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     'pb_typeahead_kit react-select',
     globalProps(props),
@@ -134,7 +137,9 @@ const Typeahead = ({
   const inlineClass = selectProps.inline ? 'inline' : null
 
   return (
-    <div {...dataProps}
+    <div 
+      {...dataProps}
+      {...htmlProps}
       className={classnames(classes, inlineClass)}
     >
       <Tag

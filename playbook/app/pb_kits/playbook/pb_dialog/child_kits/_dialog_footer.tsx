@@ -13,6 +13,7 @@ type DialogFooterProps = {
   children: React.ReactChild[] | React.ReactChild | string,
   className?: string,
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   padding?: string,
   paddingBottom?: string,

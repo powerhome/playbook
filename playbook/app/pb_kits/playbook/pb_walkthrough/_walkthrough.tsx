@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import Joyride, { TooltipRenderProps } from 'react-joyride'
 import Button from '../pb_button/_button'
@@ -14,6 +14,7 @@ type WalkthroughProps = {
   className?: string,
   continuous?: boolean,
   data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   run?: boolean,
   steps?: [],
@@ -150,6 +151,7 @@ const Walkthrough = (props: WalkthroughProps) => {
     floaterProps = {
       offset: 50,
     },
+    htmlOptions = {},
     id,
     run = false,
     steps,
@@ -163,12 +165,14 @@ const Walkthrough = (props: WalkthroughProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_walkthrough'), globalProps(props), className)
 
   return (
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classes}
       id={id}
     >

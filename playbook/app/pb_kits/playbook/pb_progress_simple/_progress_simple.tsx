@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss, buildDataProps } from '../utilities/props'
+import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type ProgressSimpleProps = {
@@ -8,6 +8,7 @@ type ProgressSimpleProps = {
   className?: string | string[],
   dark?: boolean,
   data?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   max?: number,
   muted: boolean,
@@ -34,7 +35,8 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
     width: width,
   }
 
-  const dataProps = buildDataProps(data)
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions)
   const variantStyle = variant == 'default' ? '' : variant
 
   const valueStyles = {
@@ -53,8 +55,11 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
   )
 
   return (
-    <div {...dataProps}
-      className={wrapperClass}>
+    <div 
+      {...dataProps}
+      {...htmlProps}
+      className={wrapperClass}
+    >
       <div
           className={kitClass}
           data-value={value}

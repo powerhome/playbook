@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildCss } from '../utilities/props'
+import { buildCss, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -22,6 +22,7 @@ type StatChangeProps = {
   change?: 'increase' | 'decrease' | 'neutral',
   className?: string,
   icon?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   value?: string | number,
 }

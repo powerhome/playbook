@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildCss, buildDataProps } from '../utilities/props'
+import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import DateTime from '../pb_kit/dateTime';
 
@@ -14,6 +14,7 @@ type DateYearStackedProps = {
   dark?: boolean,
   data?: string,
   date: Date,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
 }
 
@@ -24,10 +25,13 @@ const DateYearStacked = (props: DateYearStackedProps) => {
     globalProps(props),
     className
   )
-  const dataProps = buildDataProps(data)
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
-    <div {...dataProps}
+    <div 
+        {...dataProps}
+        {...htmlProps}
         className={css}
     >
       <Title

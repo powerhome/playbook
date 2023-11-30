@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Avatar from '../pb_avatar/_avatar'
@@ -21,6 +21,7 @@ type MessageProps = {
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   data?: object,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   label?: string,
   message: string,
@@ -39,6 +40,7 @@ const Message = (props: MessageProps) => {
     children,
     className,
     data = {},
+    htmlOptions = {},
     id,
     label,
     message,
@@ -49,6 +51,7 @@ const Message = (props: MessageProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const shouldDisplayAvatar = avatarUrl || avatarName
   const baseClassName = shouldDisplayAvatar
     ? 'pb_message_kit_avatar'
@@ -64,6 +67,7 @@ const Message = (props: MessageProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >
