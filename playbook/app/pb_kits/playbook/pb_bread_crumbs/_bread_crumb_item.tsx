@@ -8,7 +8,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
-, buildHtmlProps } from '../utilities/props'
+  buildHtmlProps } from '../utilities/props'
 
 type BreadCrumbItemProps = {
   aria?: {[key: string]: string},

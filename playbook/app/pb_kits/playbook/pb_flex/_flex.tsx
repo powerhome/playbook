@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss, buildDataProps, buildHtmlProps, buildHtmlProps } from '../utilities/props'
+import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { Sizes } from '../types'
 
