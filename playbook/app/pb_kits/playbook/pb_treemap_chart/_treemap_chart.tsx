@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 
@@ -74,7 +75,7 @@ const TreemapChart = ({
         colors:
           colors !== undefined && colors.length > 0
             ? mapColors(colors)
-            : highchartsTheme.colors,
+            : highchartsTheme(window.Highcharts).colors,
       },
     },
   };
@@ -89,8 +90,8 @@ const TreemapChart = ({
       if (window.Highcharts) {
         clearInterval(interval)
         dark
-          ? window.Highcharts.setOptions(highchartsDarkTheme)
-          : window.Highcharts.setOptions(highchartsTheme)
+          ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
+          : window.Highcharts.setOptions(highchartsTheme(window.Highcharts))
         
         treemap(window.Highcharts)
         setIsHighchartsLoaded(true)

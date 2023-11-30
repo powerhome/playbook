@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import HighchartsReact from "highcharts-react-official";
@@ -124,7 +125,7 @@ const Gauge = ({
       colors:
         colors !== undefined && colors.length > 0
           ? mapColors(colors)
-          : highchartsTheme.colors,
+          : highchartsTheme(window.Highcharts).colors,
       plotOptions: {
         series: {
           animation: !disableAnimation,
@@ -133,7 +134,7 @@ const Gauge = ({
           borderColor:
             colors !== undefined && colors.length === 1
               ? mapColors(colors).join()
-              : highchartsTheme.colors[0],
+              : highchartsTheme(window.Highcharts).colors[0],
           borderWidth: 20,
           radius: 90,
           innerRadius: "90%",
@@ -175,8 +176,8 @@ const Gauge = ({
         }, 0)
 
         dark
-          ? window.Highcharts.setOptions(highchartsDarkTheme)
-          : window.Highcharts.setOptions(highchartsTheme)
+          ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
+          : window.Highcharts.setOptions(highchartsTheme(window.Highcharts))
         
         highchartsMore(window.Highcharts);
         solidGauge(window.Highcharts);

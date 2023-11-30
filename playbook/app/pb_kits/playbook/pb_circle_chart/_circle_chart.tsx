@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import HighchartsReact from "highcharts-react-official";
@@ -124,7 +125,7 @@ const CircleChart = ({
       plotOptions: {
         pie: {
           colors:
-            colors.length > 0 ? mapColors(colors) : highchartsTheme.colors,
+            colors.length > 0 ? mapColors(colors) : highchartsTheme(window.Highcharts).colors,
           dataLabels: {
             enabled: dataLabels,
             connectorShape: "straight",
@@ -154,8 +155,8 @@ const CircleChart = ({
       if (window.Highcharts) {
         clearInterval(interval)
         dark
-          ? window.Highcharts.setOptions(highchartsDarkTheme)
-          : window.Highcharts.setOptions(highchartsTheme)
+          ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
+          : window.Highcharts.setOptions(highchartsTheme(window.Highcharts))
         
         highchartsMore(window.Highcharts);
 

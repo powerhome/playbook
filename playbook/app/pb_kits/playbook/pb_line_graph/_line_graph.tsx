@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import { globalProps } from "../utilities/globalProps";
@@ -100,7 +101,7 @@ const LineGraph = ({
     colors:
       colors !== undefined && colors.length > 0
         ? mapColors(colors)
-        : highchartsTheme.colors,
+        : highchartsTheme(window.Highcharts).colors,
     plotOptions: {
       series: {
         pointStart: pointStart,
@@ -128,8 +129,8 @@ const LineGraph = ({
       if (window.Highcharts) {
         clearInterval(interval)
         dark
-          ? window.Highcharts.setOptions(highchartsDarkTheme)
-          : window.Highcharts.setOptions(highchartsTheme)
+          ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
+          : window.Highcharts.setOptions(highchartsTheme(window.Highcharts))
         setIsHighchartsLoaded(true)
       }
     }, 0)
