@@ -1,214 +1,214 @@
-/* eslint-disable */
-import React, { useState, useEffect } from "react";
-import classnames from "classnames";
-import HighchartsReact from "highcharts-react-official";
-import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
-import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
-import mapColors from "../pb_dashboard/pbChartsColorsHelper";
-import highchartsMore from "highcharts/highcharts-more";
-import solidGauge from "highcharts/modules/solid-gauge";
-import defaultColors from "../tokens/exports/_colors.scss";
-import typography from "../tokens/exports/_typography.scss";
+// /* eslint-disable */
+// import React, { useState, useEffect } from "react";
+// import classnames from "classnames";
+// import HighchartsReact from "highcharts-react-official";
+// import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
+// import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
+// import mapColors from "../pb_dashboard/pbChartsColorsHelper";
+// import highchartsMore from "highcharts/highcharts-more";
+// import solidGauge from "highcharts/modules/solid-gauge";
+// import defaultColors from "../tokens/exports/_colors.scss";
+// import typography from "../tokens/exports/_typography.scss";
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+// import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+// import { globalProps } from "../utilities/globalProps";
 
-type GaugeProps = {
-  aria: { [key: string]: string },
-  className?: string,
-  chartData?: { name: string, value: number[] | number }[],
-  dark?: Boolean,
-  data?: { [key: string]: string },
-  disableAnimation?: boolean,
-  fullCircle?: boolean,
-  height?: string,
-  id?: string,
-  max?: number,
-  min?: number,
-  prefix?: string,
-  showLabels?: boolean,
-  style?: string,
-  suffix?: string,
-  title?: string,
-  tooltipHtml?: string,
-  colors: string[],
-  minorTickInterval: any,
-  circumference: number[],
-};
+// type GaugeProps = {
+//   aria: { [key: string]: string },
+//   className?: string,
+//   chartData?: { name: string, value: number[] | number }[],
+//   dark?: Boolean,
+//   data?: { [key: string]: string },
+//   disableAnimation?: boolean,
+//   fullCircle?: boolean,
+//   height?: string,
+//   id?: string,
+//   max?: number,
+//   min?: number,
+//   prefix?: string,
+//   showLabels?: boolean,
+//   style?: string,
+//   suffix?: string,
+//   title?: string,
+//   tooltipHtml?: string,
+//   colors: string[],
+//   minorTickInterval: any,
+//   circumference: number[],
+// };
 
-const Gauge = ({
-  aria = {},
-  className,
-  chartData,
-  dark = false,
-  data = {},
-  disableAnimation = false,
-  fullCircle = false,
-  height = null,
-  id,
-  max = 100,
-  min = 0,
-  prefix = "",
-  showLabels = false,
-  style = "solidgauge",
-  suffix = "",
-  title = "",
-  tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
-    "<b>{point.y}</b>",
-  colors = [],
-  minorTickInterval = null,
-  circumference = fullCircle ? [0, 360] : [-100, 100],
-  ...props
-}: GaugeProps) => {
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+// const Gauge = ({
+//   aria = {},
+//   className,
+//   chartData,
+//   dark = false,
+//   data = {},
+//   disableAnimation = false,
+//   fullCircle = false,
+//   height = null,
+//   id,
+//   max = 100,
+//   min = 0,
+//   prefix = "",
+//   showLabels = false,
+//   style = "solidgauge",
+//   suffix = "",
+//   title = "",
+//   tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
+//     "<b>{point.y}</b>",
+//   colors = [],
+//   minorTickInterval = null,
+//   circumference = fullCircle ? [0, 360] : [-100, 100],
+//   ...props
+// }: GaugeProps) => {
+//   const ariaProps = buildAriaProps(aria);
+//   const dataProps = buildDataProps(data);
 
-  const css = buildCss({
-    pb_gauge_kit: true,
-  });
+//   const css = buildCss({
+//     pb_gauge_kit: true,
+//   });
 
-  const [options, setOptions] = useState({});
-  const [isHighchartsLoaded, setIsHighchartsLoaded] = useState(false);
+//   const [options, setOptions] = useState({});
+//   const [isHighchartsLoaded, setIsHighchartsLoaded] = useState(false);
 
-  useEffect(() => {
-    const formattedChartData = chartData.map((obj: any) => {
-      obj.y = obj.value;
-      delete obj.value;
-      return obj;
-    });
+//   useEffect(() => {
+//     const formattedChartData = chartData.map((obj: any) => {
+//       obj.y = obj.value;
+//       delete obj.value;
+//       return obj;
+//     });
 
-    const staticOptions = {
-      chart: {
-        events: {
-          load() {
-            setTimeout(this.reflow.bind(this), 0);
-          },
-        },
-        type: style,
-        height: height,
-      },
-      title: {
-        text: title,
-      },
-      yAxis: {
-        min: min,
-        max: max,
-        lineWidth: 0,
-        tickWidth: 0,
-        minorTickInterval: minorTickInterval,
-        tickAmount: 2,
-        tickPositions: [min, max],
-        labels: {
-          y: 26,
-          enabled: showLabels,
-        },
-      },
-      credits: false,
-      series: [
-        {
-          data: formattedChartData,
-        },
-      ],
-      pane: {
-        center: ["50%", "50%"],
-        size: "90%",
-        startAngle: circumference[0],
-        endAngle: circumference[1],
-        background: {
-          borderWidth: 20,
-          innerRadius: "90%",
-          outerRadius: "90%",
-          shape: "arc",
-          className: "gauge-pane",
-        },
-      },
-      colors:
-        colors !== undefined && colors.length > 0
-          ? mapColors(colors)
-          : highchartsTheme(window.Highcharts).colors,
-      plotOptions: {
-        series: {
-          animation: !disableAnimation,
-        },
-        solidgauge: {
-          borderColor:
-            colors !== undefined && colors.length === 1
-              ? mapColors(colors).join()
-              : highchartsTheme(window.Highcharts).colors[0],
-          borderWidth: 20,
-          radius: 90,
-          innerRadius: "90%",
-          dataLabels: {
-            borderWidth: 0,
-            color: defaultColors.text_lt_default,
-            enabled: true,
-            format:
-              `<span class="prefix">${prefix}</span>` +
-              '<span class="fix">{y:,f}</span>' +
-              `<span class="suffix">${suffix}</span>`,
-            style: {
-              fontFamily: typography.font_family_base,
-              fontWeight: typography.regular,
-              fontSize: typography.heading_2,
-            },
-            y: -26,
-          },
-        },
-      },
-    };
+//     const staticOptions = {
+//       chart: {
+//         events: {
+//           load() {
+//             setTimeout(this.reflow.bind(this), 0);
+//           },
+//         },
+//         type: style,
+//         height: height,
+//       },
+//       title: {
+//         text: title,
+//       },
+//       yAxis: {
+//         min: min,
+//         max: max,
+//         lineWidth: 0,
+//         tickWidth: 0,
+//         minorTickInterval: minorTickInterval,
+//         tickAmount: 2,
+//         tickPositions: [min, max],
+//         labels: {
+//           y: 26,
+//           enabled: showLabels,
+//         },
+//       },
+//       credits: false,
+//       series: [
+//         {
+//           data: formattedChartData,
+//         },
+//       ],
+//       pane: {
+//         center: ["50%", "50%"],
+//         size: "90%",
+//         startAngle: circumference[0],
+//         endAngle: circumference[1],
+//         background: {
+//           borderWidth: 20,
+//           innerRadius: "90%",
+//           outerRadius: "90%",
+//           shape: "arc",
+//           className: "gauge-pane",
+//         },
+//       },
+//       colors:
+//         colors !== undefined && colors.length > 0
+//           ? mapColors(colors)
+//           : highchartsTheme(window.Highcharts).colors,
+//       plotOptions: {
+//         series: {
+//           animation: !disableAnimation,
+//         },
+//         solidgauge: {
+//           borderColor:
+//             colors !== undefined && colors.length === 1
+//               ? mapColors(colors).join()
+//               : highchartsTheme(window.Highcharts).colors[0],
+//           borderWidth: 20,
+//           radius: 90,
+//           innerRadius: "90%",
+//           dataLabels: {
+//             borderWidth: 0,
+//             color: defaultColors.text_lt_default,
+//             enabled: true,
+//             format:
+//               `<span class="prefix">${prefix}</span>` +
+//               '<span class="fix">{y:,f}</span>' +
+//               `<span class="suffix">${suffix}</span>`,
+//             style: {
+//               fontFamily: typography.font_family_base,
+//               fontWeight: typography.regular,
+//               fontSize: typography.heading_2,
+//             },
+//             y: -26,
+//           },
+//         },
+//       },
+//     };
 
-    setOptions({ ...staticOptions });
+//     setOptions({ ...staticOptions });
 
-    const interval = setInterval(() => {
-      if (window.Highcharts) {
-        clearInterval(interval)
+//     const interval = setInterval(() => {
+//       if (window.Highcharts) {
+//         clearInterval(interval)
         
-        const gaugeInterval = setInterval(() => {
-          if (document.querySelector(".prefix")) {
-            clearInterval(gaugeInterval)
-            document.querySelectorAll(".prefix").forEach((prefix) => {
-              prefix.setAttribute("y", "28");
-            });
-            document
-              .querySelectorAll(".fix")
-              .forEach((fix) => fix.setAttribute("y", "38"));
-          }
-        }, 0)
+//         const gaugeInterval = setInterval(() => {
+//           if (document.querySelector(".prefix")) {
+//             clearInterval(gaugeInterval)
+//             document.querySelectorAll(".prefix").forEach((prefix) => {
+//               prefix.setAttribute("y", "28");
+//             });
+//             document
+//               .querySelectorAll(".fix")
+//               .forEach((fix) => fix.setAttribute("y", "38"));
+//           }
+//         }, 0)
 
-        dark
-          ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
-          : window.Highcharts.setOptions(highchartsTheme(window.Highcharts))
+//         dark
+//           ? window.Highcharts.setOptions(highchartsDarkTheme(window.Highcharts))
+//           : window.Highcharts.setOptions(highchartsTheme(window.Highcharts))
         
-        highchartsMore(window.Highcharts);
-        solidGauge(window.Highcharts);
+//         highchartsMore(window.Highcharts);
+//         solidGauge(window.Highcharts);
       
-        //set tooltip directly to prevent being overriden by window.Highcharts defaults
-        window.Highcharts.setOptions({
-          tooltip: {
-            pointFormat: tooltipHtml,
-            followPointer: true,
-          },
-        });
+//         //set tooltip directly to prevent being overriden by window.Highcharts defaults
+//         window.Highcharts.setOptions({
+//           tooltip: {
+//             pointFormat: tooltipHtml,
+//             followPointer: true,
+//           },
+//         });
 
-        setIsHighchartsLoaded(true)
-      }
-    }, 0)
+//         setIsHighchartsLoaded(true)
+//       }
+//     }, 0)
 
-  }, [chartData]);
+//   }, [chartData]);
 
-  return (
-    isHighchartsLoaded &&
-    <HighchartsReact
-      containerProps={{
-        className: classnames(css, globalProps(props)),
-        id: id,
-        ...ariaProps,
-        ...dataProps,
-      }}
-      highcharts={window.Highcharts}
-      options={options}
-    />
-  );
-};
+//   return (
+//     isHighchartsLoaded &&
+//     <HighchartsReact
+//       containerProps={{
+//         className: classnames(css, globalProps(props)),
+//         id: id,
+//         ...ariaProps,
+//         ...dataProps,
+//       }}
+//       highcharts={window.Highcharts}
+//       options={options}
+//     />
+//   );
+// };
 
-export default Gauge;
+// export default Gauge;
