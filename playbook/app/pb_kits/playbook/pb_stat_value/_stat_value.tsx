@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps'
+import { buildHtmlProps } from '../utilities/props'
 import Title from '../pb_title/_title'
 
 type StatValueProps = {
@@ -15,10 +16,13 @@ type StatValueProps = {
 const StatValue = (props: StatValueProps): React.ReactElement => {
   const {
     className,
+    htmlOptions = {},
     id,
     unit,
     value = 0,
   } = props
+
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const displayValue = function(value: string | number) {
     if (value || value === 0) {
@@ -48,6 +52,7 @@ const StatValue = (props: StatValueProps): React.ReactElement => {
     <div
         className={classnames('pb_stat_value_kit', globalProps(props), className)}
         id={id}
+        {...htmlProps}
     >
       <div className="pb_stat_value_wrapper">
         {displayValue(value)}

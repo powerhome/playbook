@@ -24,6 +24,7 @@ type MultiLevelSelectProps = {
   aria?: { [key: string]: string }
   className?: string
   data?: { [key: string]: string }
+  htmlOptions?: {[key: string]: string | number | boolean | Function}
   id?: string
   inputDisplay?: "pills" | "none"
   inputName?: string

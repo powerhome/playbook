@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps'
+import { buildHtmlProps } from '../utilities/props'
 
 type DistributionBarProps = {
   className?: string,
@@ -34,14 +35,19 @@ const barValues = (normalizedValues: number[], colors: []) => {
 
 const DistributionBar = (props: DistributionBarProps) => {
   const {
+    htmlOptions = {},
     size = 'lg',
     widths = [1],
     colors = [],
   } = props
   const normalizedValues = normalizeCharacters(widths)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
-    <div className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}>
+    <div 
+      className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}  
+      {...htmlProps}
+    >
       {barValues(normalizedValues, colors)}
     </div>
   )

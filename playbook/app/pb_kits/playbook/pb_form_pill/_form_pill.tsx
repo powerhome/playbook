@@ -5,6 +5,7 @@ import Title from '../pb_title/_title'
 import Icon from '../pb_icon/_icon'
 import Avatar from '../pb_avatar/_avatar'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { buildHtmlProps } from '../utilities/props'
 
 type FormPillProps = {
   className?: string,
@@ -26,6 +27,7 @@ type FormPillProps = {
 const FormPill = (props: FormPillProps) => {
   const {
     className,
+    htmlOptions = {},
     id,
     text,
     name,
@@ -42,8 +44,11 @@ const FormPill = (props: FormPillProps) => {
     size === 'small' ? 'small' : null,
     textTransform,
   )
+
+  const htmlProps = buildHtmlProps(htmlOptions)
+
   return (
-    <div className={css} id={id}>
+    <div className={css} id={id} {...htmlProps}>
         {name &&
         <>
         <Avatar
