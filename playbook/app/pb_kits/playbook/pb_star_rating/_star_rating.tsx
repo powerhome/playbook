@@ -101,7 +101,7 @@ const StarRating = ({
                 size="xs"
                 paddingRight="xs"
                 dark={dark}
-                className="pb_star_rating_number_s"
+                className="pb_star_rating_number_sm"
               />
             )}
             {size === 'sm' && (
@@ -110,7 +110,7 @@ const StarRating = ({
                 size="xs"
                 paddingRight="xs"
                 dark={dark}
-                className="pb_star_rating_number_s"
+                className="pb_star_rating_number_sm"
               />
             )}
             {size === 'md' && (
@@ -132,9 +132,9 @@ const StarRating = ({
             )}
         </>
       )}
-      <Flex>
-        {[...Array(activeStars)].map((_) => (
-          <>
+      <Flex className="star_flex_area">
+        {[...Array(activeStars)].map((_, index) => (
+          <React.Fragment key={index}>
             {colorOption === 'yellow' && (
               <Icon
                 // @ts-ignore
@@ -163,10 +163,10 @@ const StarRating = ({
                 className={iconSize}
               />
             ) }
-          </>
+          </React.Fragment>
         ))}
-        {[...Array(emptyStars)].map((_) => (
-          <>
+        {[...Array(emptyStars)].map((_, index) => (
+          <React.Fragment key={index}>
             {colorOption === 'outline' && (
               <Icon
                 // @ts-ignore
@@ -181,7 +181,7 @@ const StarRating = ({
                 className={iconSize}
               />
             ) }
-          </>
+          </React.Fragment>
         ))}
       </Flex>
       {layoutOption === "onestar" && (
@@ -191,7 +191,7 @@ const StarRating = ({
                   text={`${rating.toString()} of ${denominator}`}
                   size="xs"
                   dark={dark}
-                  className="pb_star_rating_number_s"
+                  className="pb_star_rating_number_sm"
               />
             )}
             {size === 'sm' && (
@@ -199,7 +199,7 @@ const StarRating = ({
                   text={`${rating.toString()} of ${denominator}`}
                   size="xs"
                   dark={dark}
-                  className="pb_star_rating_number_s"
+                  className="pb_star_rating_number_sm"
               />
             )}
             {size === 'md' && (

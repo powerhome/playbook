@@ -37,12 +37,13 @@ describe("Star Rating Kit", () => {
           data={{ testid: testId }}
           denominator={4}
           rating={2}
+          size="xs"
       />
     )
 
     const kit = screen.getByTestId(testId)
-    const highlight = kit.querySelector(".pb_star_rating_wrapper")
-    const stars = highlight.querySelectorAll(".pb_star_sm")
+    const highlight = kit.querySelector(".star_flex_area")
+    const stars = highlight.querySelectorAll(".pb_star_xs")
     const count = stars.length
 
     expect(count).toBe(4)
@@ -59,12 +60,12 @@ describe("Star Rating Kit", () => {
     )
 
     const kit = screen.getByTestId(testId)
-    const highlight = kit.querySelector(".pb_star_rating_wrapper")
+    const highlight = kit.querySelector(".star_flex_area")
     const title = kit.querySelector(".pb_star_rating_number_lg")
     const stars = highlight.querySelectorAll(".pb_star_lg")
     const count = stars.length
 
-    expect(title.className).toBe("pb_star_rating_number_lg")
+    expect(title.className).toBe("pb_title_kit_size_2 pr_sm pb_star_rating_number_lg")
     expect(count).toBe(5)
   })
 })
