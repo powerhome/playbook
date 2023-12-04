@@ -46,16 +46,11 @@ module Playbook
       end
 
       def svg_size
-        case size
-        when "sx"
-          "pb_star_xs"
-        when "sm"
-          "pb_star_sm"
-        when "md"
-          "pb_star_md"
-        when "lg"
-          "pb_star_lg"
-        end
+        sizes = { "sx": "pb_star_xs",
+                  "sm": "pb_star_sm",
+                  "md": "pb_star_md",
+                  "lg": "pb_star_lg" }
+        sizes[size.to_sym]
       end
 
       def classname
