@@ -1,6 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { get } from 'lodash'
 import classnames from 'classnames'
 
@@ -104,7 +104,7 @@ const Card = (props: CardPropTypes) => {
     })
   }
 
-  const nonHeaderChildren = cardChildren.filter((child: Node) => (get(child, 'type.displayName') !== 'Header'))
+  const nonHeaderChildren = cardChildren.filter((child: ReactNode) => (get(child, 'type.displayName') !== 'Header'))
 
   const tagOptions = ['div', 'section', 'footer', 'header', 'article', 'aside', 'main', 'nav']
   const Tag = tagOptions.includes(tag) ? tag : 'div'

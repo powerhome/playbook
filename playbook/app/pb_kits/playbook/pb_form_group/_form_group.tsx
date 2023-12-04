@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type FormGroupProps = {
   aria?: {[key: string]: string},
-  children?: Node,
+  children?: ReactNode,
   className?: string,
-  data?: object,
+  data?: unknown,
   fullWidth?: boolean,
   id?: string,
 }

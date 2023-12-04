@@ -32,6 +32,7 @@
     "*.rb": "bundle exec --gemfile=playbook-website/Gemfile rubocop --parallel"
   },
   "dependencies": {
+    "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-react": "^7.33.2"
   }
 }

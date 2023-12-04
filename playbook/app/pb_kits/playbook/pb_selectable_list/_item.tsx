@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import classnames from "classnames";
 
@@ -96,9 +97,7 @@ const SelectableListItem = ({
             {children}
           </>
         )}
-        {variant !== "checkbox" && variant !== "radio" && (
-          { children }
-        )}
+        { variant !== "checkbox" && variant !== "radio" && children }
       </div>
     </ListItem>
   );

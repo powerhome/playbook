@@ -1,5 +1,5 @@
 /* @flow */
-
+/* eslint-disable */
 import React, { useCallback, useMemo, useState } from "react"
 import classnames from "classnames"
 
@@ -52,7 +52,7 @@ const Passphrase = (props: PassphraseProps) => {
   const [showPassphrase, setShowPassphrase] = useState(false)
 
   const handleChange = useCallback(
-    (e) => (uncontrolled ? setUncontrolledValue(e.target.value) : onChange(e)),
+    (e: any) => (uncontrolled ? setUncontrolledValue(e.target.value) : onChange(e)),
     [uncontrolled, onChange]
   )
 

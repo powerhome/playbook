@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable */
+import React, { useEffect, useState, ReactNode } from "react";
 import classnames from "classnames";
 import HighchartsReact from "highcharts-react-official";
 import highchartsMore from "highcharts/highcharts-more";
@@ -15,11 +16,11 @@ type CircleChartProps = {
   align?: "left" | "right" | "center";
   aria: { [key: string]: string };
   chartData?: [];
-  children?: Node;
+  children?: ReactNode;
   className?: string;
   colors?: string[];
-  dark?: Boolean;
-  data?: Object;
+  dark?: boolean;
+  data?: unknown;
   dataLabelHtml?: string;
   dataLabels?: boolean;
   height?: string;

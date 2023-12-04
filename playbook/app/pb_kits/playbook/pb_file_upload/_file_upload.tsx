@@ -36,7 +36,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     onFilesRejected = noop,
   } = props
 
-  const onDrop = useCallback((files) => {
+  const onDrop = useCallback((files: any) => {
     onFilesAccepted(files)
   }, [onFilesAccepted])
 

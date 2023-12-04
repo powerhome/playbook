@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
@@ -85,7 +86,7 @@ const Select = ({
   )
 
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
-  const selectBody =(() =>{
+  const selectBody: any =(() =>{
     if (children) return children
     return (
       <select

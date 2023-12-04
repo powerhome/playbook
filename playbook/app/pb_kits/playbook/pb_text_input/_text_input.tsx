@@ -127,7 +127,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     </React.Fragment>
   )
 
-  const render = (() => {
+  const render: any = (() => {
     if(children) return children
     if (shouldShowAddOn) return addOnInput
 
