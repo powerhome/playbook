@@ -137,24 +137,28 @@ const StarRating = ({
           <>
             {colorOption === 'yellow' && (
               <Icon
+                // @ts-ignore
                 customIcon={starYellow}
                 className={iconSize}
               />
             ) }
             {colorOption === 'primary' && (
               <Icon
+                // @ts-ignore
                 customIcon={starPrimary}
                 className={iconSize}
               />
             ) }
             {colorOption === 'outline' && (
               <Icon
+                // @ts-ignore
                 customIcon={starPrimary}
                 className={iconSize}
               />
             ) }
             {colorOption === 'subtle' && (
               <Icon
+                // @ts-ignore
                 customIcon={starSubtle}
                 className={iconSize}
               />
@@ -165,12 +169,14 @@ const StarRating = ({
           <>
             {colorOption === 'outline' && (
               <Icon
+                // @ts-ignore
                 customIcon={starOutline}
                 className={iconSize}
               />
             ) }
             {colorOption !== 'outline' && (
               <Icon
+                // @ts-ignore
                 customIcon={starBackground}
                 className={iconSize}
               />
