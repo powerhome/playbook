@@ -48,15 +48,13 @@ module Playbook
       def svg_size
         case size
         when "sx"
-          14
+          "pb_star_xs"
         when "sm"
-          16
+          "pb_star_sm"
         when "md"
-          24
+          "pb_star_md"
         when "lg"
-          48
-        else
-          16
+          "pb_star_lg"
         end
       end
 

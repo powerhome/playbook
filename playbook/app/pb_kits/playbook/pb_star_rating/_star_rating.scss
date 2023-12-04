@@ -10,86 +10,84 @@
 
   path {
     &.suble_star_dark {
-      fill: $text_dk_default; // Replace "red" with your desired color
+      fill: $text_dk_default;
     }
     &.suble_star_light {
-      fill: #242B42; // Replace "red" with your desired color
+      fill: $text_lt_default;
     }
     &.outline_star_dark {
-      stroke: $text_dk_lighter; // Replace "red" with your desired color
+      stroke: $text_dk_lighter;
     }
     &.outline_star_light {
-      stroke: #C1CDD6; // Replace "red" with your desired color
+      stroke: $text_lt_lighter;
     }
     &.empty_star_dark {
-      fill: $border_dark; // Replace "red" with your desired color
+      fill: $border_dark;
     }
     &.empty_star_light {
-      fill: #E4E8F0; // Replace "red" with your desired color
+      fill: $border_light;
     }
-  }
-
-  .number_rails_xs {
-    height: 22px !important;
-  }
-
-  .number_rails_sm {
-    height: 22px !important;
-  }
-
-  .number_rails_md {
-    height: 26px;
-  }
-
-  .number_rails_lg {
-    height: 38px;
-  }
-
-  .pb_star_rating_wrapper {
-    display: flex;
   }
 
   .pb_star_rating_number_xs {
-    max-height: 16px;
+    max-height: 14px;
   }
 
   .pb_star_rating_number_sm {
-    max-height: 16px;
+    max-height: 14px;
   }
 
   .pb_star_rating_number_md {
-    max-height: 32px;
+    max-height: 24px;
   }
 
   .pb_star_rating_number_lg {
-    max-height: 56px;
+    max-height: 40px;
+    height: 29px;
   }
 
-  .pb_star_xs {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-right: 4px;
+  $star-styles: (
+    pb_star_xs: (font-size: 14px, padding-right: 4px),
+    pb_star_sm: (font-size: 16px, padding-right: 4px),
+    pb_star_md: (font-size: 24px, padding-right: 6px),
+    pb_star_lg: (font-size: 48px, padding-right: 12px)
+  );
+
+  @each $class, $styles in $star-styles {
+    .#{$class} {
+      @each $property, $value in $styles {
+        #{$property}: $value;
+      }
+    }
   }
 
-  .pb_star_sm {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-right: 4px;
+  $star-container: (
+    pb_star_container_xs: (font-size: 14px ),
+    pb_star_container_sm: (font-size: 16px ),
+    pb_star_container_md: (font-size: 24px ),
+    pb_star_container_lg: (font-size: 48px )
+  );
+
+  @each $class, $styles in $star-container {
+    .#{$class} {
+      @each $property, $value in $styles {
+        #{$property}: $value;
+      }
+    }
   }
 
-  .pb_star_md {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-right: 6px;
-  }
+  $star-padding: (
+    pb_star_padding_xs: (padding-right: 4px),
+    pb_star_padding_sm: (padding-right: 4px),
+    pb_star_padding_md: (padding-right: 6px),
+    pb_star_padding_lg: (padding-right: 12px)
+  );
 
-  .pb_star_lg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-right: 12px;
+  @each $class, $styles in $star-padding {
+    .#{$class} {
+      @each $property, $value in $styles {
+        #{$property}: $value;
+      }
+    }
   }
 }
