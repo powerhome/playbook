@@ -11,7 +11,6 @@ const StarRatingNumberConfig = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         denominator={4}
