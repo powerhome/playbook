@@ -11,7 +11,6 @@ const StarRatingSizeOptions = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         rating={3}
