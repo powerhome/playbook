@@ -114,9 +114,9 @@ export { default as WeekdayStacked } from './pb_weekday_stacked/_weekday_stacked
 // ^^^ React Component JSX Imports from the React Kits ^^^
 
 // Dashboard Settings
-export { commonSettings, dataColors } from './pb_dashboard/commonSettings'
-export { default as lineGraphSettings } from './pb_line_graph/lineGraphSettings'
-export { default as barGraphSettings } from './pb_bar_graph/barGraphSettings'
+// export { commonSettings, dataColors } from './pb_dashboard/commonSettings'
+// export { default as lineGraphSettings } from './pb_line_graph/lineGraphSettings'
+// export { default as barGraphSettings } from './pb_bar_graph/barGraphSettings'
 export { default as dashboardValueSettings } from './pb_dashboard_value/dashboardValueSettings'
 
 // Other JS/Plugins
@@ -124,10 +124,14 @@ export { default as datePickerHelper } from './pb_date_picker/date_picker_helper
 export { default as PbPopover } from './pb_popover'
 export { default as PbTable } from './pb_table'
 export { default as PbTextarea } from './pb_textarea'
-export { default as PbTooltip } from './pb_tooltip'
+//export { default as PbTooltip } from './pb_tooltip'
 export { default as PbTypeahead } from './pb_typeahead'
-export { default as dialogHelper } from './pb_dialog/dialogHelper'
+//export { default as dialogHelper } from './pb_dialog/dialogHelper'
 
 //Theming
 export {default as mapTheme} from './pb_map/pbMapTheme'
 export {default as useCollapsible} from './pb_collapsible/useCollapsible'
+
+import * as Types from "./types/colors";
+export { Types };
+//export * from './types/colors'

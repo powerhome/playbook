@@ -34,3 +34,7 @@ export type StatusTextColors = 'success' | 'success_sm' | 'warning' | 'error' | 
 export type Colors = ProductColors & StatusColors & DataColors & ShadowColors & InterfaceColors & MainColors &
     BackgroundKitColors & CardColors & ActiveColors & ActionColors & HoverColors & BorderColors & TextColors &
     CategoryColors & BaseColors & FocusInputColors & StatusTextColors
+
+export function godinho(text: string) {
+    console.log(text)
+}
