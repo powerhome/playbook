@@ -6,7 +6,6 @@ const StarRatingDefault = (props) => (
   <>
     <StarRating {...props} />
 
-    <br />
 
     <StarRating
         rating={0.9}
