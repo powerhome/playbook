@@ -17,8 +17,6 @@ const StarRatingHide = (props) => (
         {...props}
     />
 
-    <br />
-
     <StarRating
         layoutOption={"onestar"}
         rating={3}

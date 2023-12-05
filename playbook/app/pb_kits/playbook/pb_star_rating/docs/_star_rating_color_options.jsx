@@ -17,15 +17,11 @@ const StarRatingColorOptions = (props) => (
         {...props}
     />
 
-    <br />
-
     <StarRating
         colorOption='primary'
         rating={3}
         {...props}
     />
-
-    <br />
 
     <StarRating
         colorOption='subtle'

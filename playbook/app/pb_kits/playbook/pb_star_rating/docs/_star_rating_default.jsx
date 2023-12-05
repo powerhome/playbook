@@ -12,29 +12,20 @@ const StarRatingDefault = (props) => (
         {...props}
     />
 
-    <br />
-
     <StarRating
         rating={1.5}
         {...props}
     />
-
-    <br />
 
     <StarRating
         rating={3}
         {...props}
     />
 
-    <br />
-
     <StarRating
         rating={4.2}
         {...props}
     />
-
-
-    <br />
 
     <StarRating
         rating={5}

@@ -18,7 +18,6 @@ const StarRatingNumberConfig = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         denominator={5}
@@ -26,7 +25,6 @@ const StarRatingNumberConfig = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         denominator={6}
@@ -34,7 +32,6 @@ const StarRatingNumberConfig = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         denominator={7}
@@ -42,7 +39,6 @@ const StarRatingNumberConfig = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         denominator={8}

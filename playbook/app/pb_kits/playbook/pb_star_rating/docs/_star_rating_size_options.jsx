@@ -18,7 +18,6 @@ const StarRatingSizeOptions = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         rating={3}
@@ -26,7 +25,6 @@ const StarRatingSizeOptions = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         rating={3}
@@ -34,7 +32,6 @@ const StarRatingSizeOptions = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         layoutOption="number"
@@ -43,7 +40,6 @@ const StarRatingSizeOptions = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         layoutOption="onestar"
