@@ -10,7 +10,6 @@ const StarRatingColorOptions = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         colorOption='outline'
