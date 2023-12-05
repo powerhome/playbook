@@ -3,7 +3,7 @@
   "version": "13.12.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
-  "types": "./dist/playbook.d.ts",
+  "types": "./dist/types/colors.d.ts",
   "scripts": {
     "flow": "flow",
     "lint": "eslint . --ext .js,.jsx",
