@@ -132,6 +132,6 @@ export { default as PbTypeahead } from './pb_typeahead'
 export {default as mapTheme} from './pb_map/pbMapTheme'
 export {default as useCollapsible} from './pb_collapsible/useCollapsible'
 
-import * as Types from "./types/colors";
-export { Types };
+// import * as Types from "./types/colors";
+// export { Types };
 //export * from './types/colors'
