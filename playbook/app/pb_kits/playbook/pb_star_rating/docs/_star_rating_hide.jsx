@@ -10,7 +10,6 @@ const StarRatingHide = (props) => (
         {...props}
     />
 
-    <br />
 
     <StarRating
         layoutOption={"number"}
