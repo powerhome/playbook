@@ -8,7 +8,7 @@ swift_only: &swift_only ["swift"]
 
 kits:
   - name: alerts_and_dialogs
-    description: 
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "dialog"
         platforms: *web
@@ -35,7 +35,7 @@ kits:
         platforms: *web
         description: When using Icon Circle Button, the icon must be clear a clear indication of what the button does because there is no text. 
   - name: data_visualization
-    description: 
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "map"
         platforms: *react_only
@@ -71,7 +71,7 @@ kits:
         platforms: *web
         description: Treemap charts are used to compare the relative size of groups of data. They can also use a nested data structure, allowing a user to drill down into a group to see its constituent data points.
   - name: date_and_time_text_patterns
-    description: 
+    description: ""
     components:
       - name: "date"
         platforms: *web
@@ -110,7 +110,7 @@ kits:
         platforms: *web
         description: 
   - name: form_and_dashboard_text_patterns
-    description: 
+    description: ""
     components:
       - name: "contact"
         platforms: *web
@@ -152,7 +152,7 @@ kits:
         platforms: *web
         description: This kit can be used in many versatile ways. It consist of a title 4 and light body text kit.
   - name: form_elements
-    description: 
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "file_upload"
         platforms: *web
@@ -170,7 +170,7 @@ kits:
         platforms: *web
         description: 
   - name: form_input
-    description: 
+    description: ""
     components:
       - name: "passphrase"
         platforms: *web
@@ -191,7 +191,7 @@ kits:
         platforms: *web
         description: Typeahead is auto suggestion or completion based on what the user is starting to type, gets refined as the user types more.
   - name: form_selection
-    description: 
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "date_picker"
         platforms: *web
@@ -221,7 +221,7 @@ kits:
         platforms: *web
         description: 
   - name: icons_and_images
-    description: 
+    description: ""
     components:
       - name: "icon"
         platforms: *web
@@ -248,7 +248,7 @@ kits:
         platforms: *web
         description: A component to view other people’s opinions and experiences. Use when you want to show evaluation or a quick quantitative rating. Most effective when paired with reviews.
   - name: layout_and_structure
-    description: 
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "flex"
         platforms: *web
@@ -269,7 +269,7 @@ kits:
         platforms: *web
         description: 
   - name: message_text_patters
-    description: 
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "highlight"
         platforms: *web
@@ -278,7 +278,7 @@ kits:
         platforms: *web
         description: This multi kit consist of a an avatar, a status, a caption, a body text, and a time stamp. All which can be optional.
   - name: navigation
-    description: 
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "bread_crumbs"
         platforms: *web
@@ -290,7 +290,7 @@ kits:
         platforms: *rails_only
         description:
   - name: state_and_progress_indicators
-    description: 
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "loading_inline"
         platforms: *web
@@ -308,7 +308,7 @@ kits:
         platforms: *web
         description:  
   - name: tags
-    description: 
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "badge"
         platforms: *web
@@ -320,7 +320,7 @@ kits:
         platforms: *web
         description: Hashtag is used to display home, project and other forms of IDs. They can be used as a link.
   - name: typography
-    description: 
+    description: ""
     components:
       - name: "body"
         platforms: *web
@@ -335,7 +335,7 @@ kits:
         platforms: *web
         description: Typically used as headers. Follow semantic hierarchy — Title 1s should be followed by Title 2s followed by Title 3s and so on, without skipping any levels.
   - name: user
-    description: 
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "avatar"
         platforms: *all
@@ -353,9 +353,9 @@ kits:
         platforms: *web
         description: This kit was created for having a systematic way of displaying users with avatar, titles, name and territory. This is a versatile kit with features than can be added to display more info.
   - name: "timeline"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
       - name: "timeline"
         platforms: *web
         description: The timeline kit can use two different line styles in the same timeline - solid and dotted line styles.
-  - name: "time_and_date"
-    components:
+
