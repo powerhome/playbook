@@ -1,0 +1,15 @@
+@import "playbook-ui/dist/tokens/screen_sizes";
+
+.hero {
+  @media screen and (max-width: $screen-xs-min) {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 192px;
+  }
+  &-description {
+    @media screen and (max-width: $screen-xs-min) {
+      display: none;
+    }
+  }
+}
