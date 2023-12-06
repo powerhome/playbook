@@ -9,33 +9,34 @@ const StarRatingDefault = (props) => (
         {...props}
     />
 
+
     <StarRating
+        paddingBottom="xs"
         rating={0.9}
-        paddingBottom="xs"
         {...props}
     />
 
     <StarRating
+        paddingBottom="xs"
         rating={1.5}
-        paddingBottom="xs"
         {...props}
     />
 
     <StarRating
+        paddingBottom="xs"
         rating={3}
-        paddingBottom="xs"
         {...props}
     />
 
     <StarRating
+        paddingBottom="xs"
         rating={4.2}
-        paddingBottom="xs"
         {...props}
     />
 
     <StarRating
-        rating={5}
         paddingBottom="xs"
+        rating={5}
         {...props}
     />
   </>
