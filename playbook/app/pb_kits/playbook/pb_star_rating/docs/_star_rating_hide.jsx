@@ -6,7 +6,7 @@ const StarRatingHide = (props) => (
   <>
 
     <StarRating
-    paddingBottom="xs"
+        paddingBottom="xs"
         rating={3}
         {...props}
     />
