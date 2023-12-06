@@ -7,24 +7,28 @@ const StarRatingColorOptions = (props) => (
 
     <StarRating
         rating={3}
+        paddingBottom="xs"
         {...props}
     />
 
 
     <StarRating
         colorOption='outline'
+        paddingBottom="xs"
         rating={3}
         {...props}
     />
 
     <StarRating
         colorOption='primary'
+        paddingBottom="xs"
         rating={3}
         {...props}
     />
 
     <StarRating
         colorOption='subtle'
+        paddingBottom="xs"
         rating={3}
         {...props}
     />

@@ -6,6 +6,7 @@ const StarRatingSizeOptions = (props) => (
   <>
 
     <StarRating
+        paddingBottom="xs"
         rating={3}
         size="xs"
         {...props}
@@ -13,6 +14,7 @@ const StarRatingSizeOptions = (props) => (
 
 
     <StarRating
+        paddingBottom="xs"
         rating={3}
         size="sm"
         {...props}
@@ -20,6 +22,7 @@ const StarRatingSizeOptions = (props) => (
 
 
     <StarRating
+        paddingBottom="xs"
         rating={3}
         size="md"
         {...props}
@@ -27,6 +30,7 @@ const StarRatingSizeOptions = (props) => (
 
 
     <StarRating
+        paddingBottom="xs"
         rating={3}
         size="lg"
         {...props}
@@ -35,6 +39,7 @@ const StarRatingSizeOptions = (props) => (
 
     <StarRating
         layoutOption="number"
+        paddingBottom="xs"
         rating={3}
         size="lg"
         {...props}
@@ -43,6 +48,7 @@ const StarRatingSizeOptions = (props) => (
 
     <StarRating
         layoutOption="onestar"
+        paddingBottom="xs"
         rating={3}
         size="lg"
         {...props}

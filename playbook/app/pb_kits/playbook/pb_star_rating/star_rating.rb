@@ -46,7 +46,7 @@ module Playbook
       end
 
       def svg_size
-        sizes = { "sx": "pb_star_xs",
+        sizes = { "xs": "pb_star_xs",
                   "sm": "pb_star_sm",
                   "md": "pb_star_md",
                   "lg": "pb_star_lg" }

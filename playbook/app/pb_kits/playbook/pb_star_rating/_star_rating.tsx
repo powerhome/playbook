@@ -1,7 +1,9 @@
 import React from "react"
 import classnames from "classnames"
 
-import { buildAriaProps, buildDataProps } from "../utilities/props"
+import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
+
 import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
@@ -21,9 +23,10 @@ type StarRatingProps = {
   denominator: number,
   colorOption?: "yellow" | "primary" | "subtle" | "outline",
   size?: "xs" | "sm" | "md" | "lg";
-};
+} & GlobalProps
 
-const StarRating = ({
+const StarRating = (props: StarRatingProps) => {
+  const {
   aria = {},
   className,
   data = {},
@@ -34,13 +37,11 @@ const StarRating = ({
   denominator = 5,
   colorOption = "yellow",
   size = "sm",
-}: StarRatingProps) => {
+} = props
+
+  const classes = classnames(buildCss('pb_star_rating_kit'), globalProps(props), className)
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const css = classnames([
-    "pb_star_rating_kit", className,
-  ])
-
   const denominatorStyle = layoutOption === "onestar" ? 1 : denominator
   const activeStars = Math.round(rating) > denominatorStyle ? denominatorStyle : Math.round(rating)
   const emptyStars = denominatorStyle - Math.round(rating) < 0 ? 0 : denominatorStyle - Math.round(rating)
@@ -90,7 +91,7 @@ const StarRating = ({
     <div
         {...ariaProps}
         {...dataProps}
-        className={css}
+        className={classes}
         id={id}
     >
       {layoutOption === "number" && (
