@@ -15,6 +15,8 @@ kits:
         platforms: *web
       - name: "multiple_users"
         platforms: *web
+      - name: multiple_users_indicator
+        platforms: *swift_only
       - name: "multiple_users_stacked"
         platforms: *web
       - name: "user"
