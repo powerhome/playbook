@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
 import { Body, Flex, Icon } from "playbook-ui";
 
 import { KitCard } from "../../components/KitCard";
@@ -18,7 +18,9 @@ export default function CategoryShow() {
       <Hero description={description} title={linkFormat(name)} />
       <PageContainer>
         <Flex align="center">
-          <Body color="light">Components</Body>
+          <NavLink to="/beta/kits">
+            <Body color="light">Components</Body>
+          </NavLink>
           <Icon className="category-breadcrumb-icon" icon="angle-right" />
           <Body text={linkFormat(name)} />
         </Flex>

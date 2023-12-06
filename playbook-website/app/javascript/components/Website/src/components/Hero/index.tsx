@@ -1,8 +1,8 @@
 import React from "react";
 import { Background, Title, Body } from "playbook-ui";
 
-import HeaderMobile from "../../../../../images/pb_generic_header.jpg";
-import HeaderDesktop from "../../../../../images/pb_generic_header_desktop.jpg";
+import HeaderMobile from "../../../../../images/pb-hero-mobile.svg";
+import HeaderDesktop from "../../../../../images/pb-hero-desktop.svg";
 
 import "./styles.scss";
 
@@ -22,15 +22,13 @@ export function Hero({ title, description }: HeroProps) {
       paddingTop={{ xs: "lg" }}
       paddingBottom={{ xs: "sm" }}
       backgroundSize={{
-        default: "1105px 243px",
-        xs: "80%",
-        sm: "80%",
-        md: "1105px 243px",
+        xs: "contain",
+        sm: "1320px 245px",
       }}
       backgroundPosition={{
         default: "right bottom",
         xs: "center top",
-        sm: "center top",
+        sm: "right bottom",
         md: "right bottom",
       }}
       backgroundColor="dark"
@@ -38,7 +36,7 @@ export function Hero({ title, description }: HeroProps) {
       imageUrl={{
         default: HeaderDesktop,
         xs: HeaderMobile,
-        sm: HeaderMobile,
+        sm: HeaderDesktop,
         md: HeaderDesktop,
       }}
     >

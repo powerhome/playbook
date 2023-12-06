@@ -1,6 +1,7 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 
 .hero {
+  min-height: 245px;
   @media screen and (max-width: $screen-xs-min) {
     display: flex;
     align-items: flex-end;
