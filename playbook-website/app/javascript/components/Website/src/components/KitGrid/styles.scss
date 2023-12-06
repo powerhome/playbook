@@ -1,0 +1,16 @@
+@import "playbook-ui/dist/tokens/screen_sizes";
+
+.kit-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 16px;
+  @media screen and (max-width: $screen-xl-min) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media screen and (max-width: $screen-md-min) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: $screen-xs-min) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
