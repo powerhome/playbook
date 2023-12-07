@@ -1,7 +1,12 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
+@import "playbook-ui/dist/tokens/border_radius";
 
 .hero {
   min-height: 245px;
+  border-radius: $border_radius_lg;
+  @media screen and (max-width: $screen-md-min) {
+    border-radius: 0;
+  }
   @media screen and (max-width: $screen-xs-min) {
     display: flex;
     align-items: flex-end;

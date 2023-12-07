@@ -17,7 +17,7 @@ export function Hero({ title, description }: HeroProps) {
       alt="background with blue colors fading to darker blue"
       className="hero"
       marginBottom="lg"
-      marginTop={{ md: "none", lg: "none", xl: "none" }}
+      marginX={{ lg: "sm", xl: "sm" }}
       padding={{ md: "xl", default: "xl" }}
       paddingTop={{ xs: "lg" }}
       paddingBottom={{ xs: "sm" }}
