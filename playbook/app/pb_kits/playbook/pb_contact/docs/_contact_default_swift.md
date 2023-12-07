@@ -1,4 +1,3 @@
-
 ![contact-default](https://github.com/powerhome/playbook/assets/92755007/4226a1e0-5f31-4445-a536-57e95b83768a)
 
 ```swift
