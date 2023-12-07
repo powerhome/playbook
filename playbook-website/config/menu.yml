@@ -306,7 +306,10 @@ kits:
         description: "Progress step kit is used to show the progress of a process. There are three types of steps in this kit: completed, active, and inactive."
       - name: "walkthrough"
         platforms: *web
-        description:  
+        description:
+      - name: "timeline"
+        platforms: *web
+        description: The timeline kit can use two different line styles in the same timeline - solid and dotted line styles.
   - name: tags
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     components:
@@ -352,10 +355,3 @@ kits:
       - name: "user"
         platforms: *web
         description: This kit was created for having a systematic way of displaying users with avatar, titles, name and territory. This is a versatile kit with features than can be added to display more info.
-  - name: "timeline"
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-    components:
-      - name: "timeline"
-        platforms: *web
-        description: The timeline kit can use two different line styles in the same timeline - solid and dotted line styles.
-
