@@ -4,7 +4,7 @@
 .hero {
   min-height: 245px;
   border-radius: $border_radius_lg;
-  @media screen and (max-width: $screen-md-min) {
+  @media screen and (max-width: $screen-lg-min) {
     border-radius: 0;
   }
   @media screen and (max-width: $screen-xs-min) {

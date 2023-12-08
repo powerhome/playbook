@@ -16,13 +16,14 @@ export const KitCard = ({ description, name }: KitCardProps) => {
       className="kit-card"
       paddingX={{
         xs: "sm",
-        sm: "lg",
-        md: "lg",
-        lg: "lg",
-        xl: "lg",
+        sm: "md",
+        md: "md",
+        lg: "md",
+        xl: "md",
       }}
       paddingTop={{ xs: "xxs", default: "md" }}
-      paddingBottom={{ xs: "xxs", default: "lg" }}
+      paddingBottom={{ xs: "xxs", default: "md" }}
+      borderRadius="lg"
     >
       <a href={`/kits/${name}`}>
         <Flex align="center" className="kit-card-header" justify="between">

@@ -18,7 +18,7 @@ export function Hero({ title, description }: HeroProps) {
       className="hero"
       marginBottom="lg"
       marginX={{ lg: "sm", xl: "sm" }}
-      padding={{ md: "xl", default: "xl" }}
+      padding="xl"
       paddingTop={{ xs: "lg" }}
       paddingBottom={{ xs: "sm" }}
       backgroundSize={{
