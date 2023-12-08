@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { globalProps, GlobalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import DateTime from '../pb_kit/dateTime';
 
 import Body from '../pb_body/_body'
@@ -12,6 +12,7 @@ import Icon from '../pb_icon/_icon'
 type TimeRangeInlineProps = {
   aria?: { [key: string]: string },
   className?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   data?: { [key: string]: string },
   alignment?: "left" | "center" | "vertical",
@@ -41,6 +42,7 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
     className,
     data = {},
     alignment = 'left',
+    htmlOptions = {},
     size = 'sm',
     dark = false,
     icon = false,
@@ -52,6 +54,7 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
 
   const dataProps: { [key: string]: string } = buildDataProps(data)
   const ariaProps: { [key: string]: string } = buildAriaProps(aria)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const separator = (
     <Body color="light">
@@ -87,6 +90,7 @@ const TimeRangeInline = (props: TimeRangeInlineProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classnames('pb_time_range_inline_kit_' + alignment, globalProps(props), className)}
         id={id}
     >

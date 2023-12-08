@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import { globalProps } from '../utilities/globalProps'
 
@@ -13,6 +13,7 @@ type ButtonToolbarProps = {
   className?: string,
   connected?: boolean,
   data?: object,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   onClick?: React.MouseEventHandler<HTMLSpanElement>,
   orientation?: "horizontal" | "vertical",
@@ -26,6 +27,7 @@ const ButtonToolbar  = (props: ButtonToolbarProps) => {
     children,
     className,
     data = {},
+    htmlOptions = {},
     id,
     orientation = 'horizontal',
     text,
@@ -34,6 +36,7 @@ const ButtonToolbar  = (props: ButtonToolbarProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(
     buildCss('pb_button_toolbar_kit', orientation, variant),
@@ -45,6 +48,7 @@ const ButtonToolbar  = (props: ButtonToolbarProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

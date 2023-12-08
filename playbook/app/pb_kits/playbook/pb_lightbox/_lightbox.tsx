@@ -1,7 +1,7 @@
 import React, { Fragment, useMemo, useRef, useState, useEffect } from 'react'
 import { useKbdControls } from './hooks/useKbdControls'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import LightboxHeader from './Header/_lightbox_header'
 import { LightboxContext } from './_lightbox_context'
@@ -15,6 +15,7 @@ type LightboxType = {
   currentPhotoIndex?: number,
   data?: {[key: string]: string | number},
   description?: string | any,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   photos: [],
   initialPhoto?: number,
@@ -35,6 +36,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     currentPhotoIndex,
     data = {},
     description,
+    htmlOptions = {},
     id = '',
     initialPhoto = 0,
     photos,
@@ -60,6 +62,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_lightbox_kit'),
     globalProps(props),
@@ -96,6 +99,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
         <div
             {...ariaProps}
             {...dataProps}
+            {...htmlProps}
             className={classes}
             id={id}
             ref={lightboxRef}

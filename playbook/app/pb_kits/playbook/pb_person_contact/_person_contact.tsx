@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Caption from '../pb_caption/_caption'
@@ -19,6 +19,7 @@ type PersonContactProps = {
   className?: string | string[],
   data?: object,
   firstName: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   lastName: string,
   contacts?: ContactItem[],
@@ -31,12 +32,14 @@ const PersonContact = (props: PersonContactProps) => {
     contacts = [],
     data = {},
     firstName,
+    htmlOptions = {},
     id,
     lastName,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_person_contact_kit'),
     globalProps(props),
@@ -59,6 +62,7 @@ const PersonContact = (props: PersonContactProps) => {
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classes}
       id={id}
     >
