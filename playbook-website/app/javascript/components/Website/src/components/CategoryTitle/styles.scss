@@ -1,0 +1,25 @@
+@import "playbook-ui/dist/tokens/screen_sizes";
+@import "playbook-ui/dist/tokens/animation-curves";
+@import "playbook-ui/dist/tokens/transition";
+
+.category-title {
+  .icon {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity $transition_default $ease;
+    &.mobile {
+      display: none;
+      @media screen and (max-width: $screen-xs-min) {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+  &:hover {
+    .icon.desktop {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
