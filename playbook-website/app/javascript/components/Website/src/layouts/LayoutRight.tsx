@@ -2,11 +2,11 @@ import React from "react"
 import { Outlet } from "react-router-dom"
 import DarkModeToggle from "../components/DarkModeToggle.jsx"
 
-import { FlexItem, Flex, Button } from "playbook-ui"
+import { Background, Button, FlexItem, Flex } from "playbook-ui"
 
 export default function LayoutRight({ dark }) {
   return (
-    <div className={`pb--page--content--main ${dark}`}>
+    <Background backgroundColor={dark ? "dark" : "white"} className="pb--page--content--main">
       <Flex
         spacing='between'
         vertical='center'
@@ -32,6 +32,6 @@ export default function LayoutRight({ dark }) {
         </FlexItem>
       </Flex>
       <Outlet />
-    </div>
+    </Background>
   )
 }
