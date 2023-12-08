@@ -14,7 +14,7 @@ import {
 
 import classnames from "classnames"
 import { GlobalProps, globalProps } from "../utilities/globalProps"
-import { buildAriaProps, buildDataProps } from "../utilities/props"
+import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props"
 import Flex from "../pb_flex/_flex"
 
 type TooltipProps = {
@@ -23,6 +23,7 @@ type TooltipProps = {
   children: JSX.Element,
   data?: { [key: string]: string },
   delay?: number | Partial<{open: number; close: number}>,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   icon?: string,
   interaction?: boolean,
   placement?: Placement,
@@ -38,6 +39,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     children,
     data = {},
     delay = 0,
+    htmlOptions = {},
     icon = null,
     interaction = false,
     placement: preferredPlacement = "top",
@@ -50,6 +52,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
 
   const dataProps: { [key: string]: any } = buildDataProps(data)
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
+  const htmlProps = buildHtmlProps(htmlOptions)
   
   const css = classnames(
     globalProps({...rest}),
@@ -127,6 +130,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
           style={{ display: "inline-flex" }}
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
       >
         {children}
       </div>

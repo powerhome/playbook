@@ -6,6 +6,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps,
 } from '../utilities/props'
 
 import { GlobalProps, globalProps } from '../utilities/globalProps'
@@ -16,6 +17,7 @@ type Props = {
   children?: React.ReactNode | React.ReactNode[],
   className?: string,
   data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   name?: string,
   onChange?: InputCallback<HTMLInputElement>,
@@ -30,6 +32,7 @@ const Toggle = ({
   className,
   data = {},
   id,
+  htmlOptions = {},
   name,
   onChange = () => { },
   size = 'sm',
@@ -38,6 +41,7 @@ const Toggle = ({
 }: Props) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const css = classnames(
     buildCss('pb_toggle_kit',
       size,
@@ -51,6 +55,7 @@ const Toggle = ({
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classnames(css, globalProps(props), className)}
       id={id}
     >

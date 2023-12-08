@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import  useCollapsible from './useCollapsible'
 
 import { globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import CollapsibleContent from './child_kits/CollapsibleContent'
 import CollapsibleMain from './child_kits/CollapsibleMain'
@@ -22,6 +22,7 @@ type CollapsibleProps = {
   iconSize?: IconSizes,
   onIconClick?: ()=> void,
   onClick?: ()=> void,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
 }
 
@@ -33,6 +34,7 @@ const Collapsible = ({
   children = [],
   collapsed = true,
   data = {},
+  htmlOptions = {},
   icon,
   iconColor = 'default',
   iconSize,
@@ -60,6 +62,7 @@ const Collapsible = ({
   const { children: contentChildren, ...contentProps } = Content.props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_collapsible_kit'),
     globalProps(props),
@@ -70,6 +73,7 @@ const Collapsible = ({
       <div
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={classes}
           id={id}
       >

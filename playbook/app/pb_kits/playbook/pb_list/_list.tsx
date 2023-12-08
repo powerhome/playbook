@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 
 type ListProps = {
@@ -10,6 +10,7 @@ type ListProps = {
   children: React.ReactNode[] | React.ReactNode;
   dark?: boolean;
   data?: object;
+  htmlOptions?: {[key: string]: string | number | boolean | Function};
   id?: string;
   layout?: "" | "left" | "right";
   ordered?: boolean;
@@ -29,6 +30,7 @@ const List = (props: ListProps) => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     id,
     layout = "",
     ordered = false,
@@ -53,7 +55,8 @@ const List = (props: ListProps) => {
     }
   );
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_list_kit", layoutClass[layout], size, {
       dark: dark,
@@ -71,6 +74,7 @@ const List = (props: ListProps) => {
         <ol
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={className}
           id={id}
           role={role}
@@ -82,6 +86,7 @@ const List = (props: ListProps) => {
         <ul
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={className}
           id={id}
           role={role}

@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import Avatar from '../pb_avatar/_avatar'
 import Badge from '../pb_badge/_badge'
@@ -12,6 +12,7 @@ type MultipleUsersStackedProps = {
   className?: string,
   dark?: boolean,
   data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   users: Array<{ [key: string]: string }>,
 }
@@ -22,6 +23,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     id,
     users,
   } = props
@@ -33,6 +35,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
   }
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss(
     'pb_multiple_users_stacked_kit',
     { single: onlyOne }), globalProps(props), className)
@@ -85,6 +88,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classes}
       id={id}
     >

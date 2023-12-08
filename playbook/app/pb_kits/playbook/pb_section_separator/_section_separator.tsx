@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Caption from '../pb_caption/_caption'
@@ -12,6 +12,7 @@ type SectionSeparatorProps = {
   className?: string,
   dark?: boolean,
   data?: { [key: string]: string; },
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   lineStyle?: "solid" | "dashed",
   orientation?: "horizontal" | "vertical",
@@ -25,6 +26,7 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
     children,
     className,
     data = {},
+    htmlOptions = {},
     id,
     lineStyle = 'solid',
     orientation = 'horizontal',
@@ -34,6 +36,7 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, lineStyle === "dashed" ? lineStyle : ""), globalProps(props), className)
 
   return (
@@ -41,6 +44,7 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classes}
       id={id}
     >

@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildCss, buildDataProps } from '../utilities/props'
+import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import Icon from '../pb_icon/_icon'
 
@@ -10,6 +10,7 @@ type ProgressStepItemProps = {
   data?: { [key: string]: string },
   status?: "complete" | "active" | "inactive" | "hidden",
   children?: React.ReactNode | React.ReactNode[],
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   icon?: string,
 }
 
@@ -19,15 +20,18 @@ const ProgressStepItem = (props: ProgressStepItemProps): React.ReactElement => {
     data = {},
     status = 'inactive',
     children,
+    htmlOptions = {},
     icon = 'check',
   } = props
 
   const progressStepItem = buildCss('pb_progress_step_item', status)
-  const dataProps = buildDataProps(data)
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
     <li 
         {...dataProps}
+        {...htmlProps}
         className={classnames(progressStepItem, className)}
     >
       <div className="box">

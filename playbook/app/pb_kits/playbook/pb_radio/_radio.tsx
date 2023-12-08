@@ -3,7 +3,7 @@
 import React, { forwardRef } from 'react'
 import Body from '../pb_body/_body'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type RadioProps = {
@@ -15,6 +15,7 @@ type RadioProps = {
   dark?: boolean,
   data?: {[key: string]: string},
   error?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   label: string,
   name?: string,
@@ -31,6 +32,7 @@ const Radio = ({
   dark = false,
   data = {},
   error = false,
+  htmlOptions = {},
   id,
   label,
   name = 'radio_name',
@@ -41,6 +43,7 @@ const Radio = ({
 }: RadioProps, ref: any) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_radio_kit', alignment ),
     dark ? 'dark': null, error ? 'error': null,
@@ -68,6 +71,7 @@ const Radio = ({
     <label
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         htmlFor={id}
     >

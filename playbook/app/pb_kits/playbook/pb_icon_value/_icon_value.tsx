@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -14,6 +14,7 @@ type IconValueProps = {
   dark?: boolean,
   data?: object,
   icon: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   text: string,
 }
@@ -25,12 +26,14 @@ const IconValue = (props: IconValueProps) => {
     className,
     dark,
     data = {},
+    htmlOptions = {},
     icon,
     id,
     text,
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_icon_value_kit', align),
     globalProps(props),
@@ -41,6 +44,7 @@ const IconValue = (props: IconValueProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

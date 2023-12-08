@@ -9,7 +9,7 @@ import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import { globalProps } from "../utilities/globalProps";
-import { buildAriaProps, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
 
 type CircleChartProps = {
   align?: "left" | "right" | "center";
@@ -23,6 +23,7 @@ type CircleChartProps = {
   dataLabelHtml?: string;
   dataLabels?: boolean;
   height?: string;
+  htmlOptions?: { [key: string]: string | number | boolean | Function };
   id?: string;
   innerSize?: "sm" | "md" | "lg" | "none";
   legend?: boolean;
@@ -71,6 +72,7 @@ const CircleChart = ({
   dataLabelHtml = "<div>{point.name}</div>",
   dataLabels = false,
   height,
+  htmlOptions = {},
   id,
   innerSize = "md",
   legend = false,
@@ -89,7 +91,8 @@ const CircleChart = ({
   ...props
 }: CircleChartProps) => {
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   highchartsMore(Highcharts);
 
   const setupTheme = () => {
@@ -182,6 +185,7 @@ const CircleChart = ({
               id: id,
               ...ariaProps,
               ...dataProps,
+              ...htmlProps,
             }}
             highcharts={Highcharts}
             options={options}
@@ -195,6 +199,7 @@ const CircleChart = ({
             id: id,
             ...ariaProps,
             ...dataProps,
+            ...htmlProps,
           }}
           highcharts={Highcharts}
           options={options}

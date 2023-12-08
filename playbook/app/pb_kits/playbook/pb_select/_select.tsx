@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
 import type { InputCallback } from '../types'
 
@@ -24,6 +24,7 @@ type SelectProps = {
   data?: { [key: string]: string },
   disabled?: boolean,
   error?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   includeBlank?: string,
   inline?: boolean,
@@ -58,6 +59,7 @@ const Select = ({
   disabled = false,
   error,
   label,
+  htmlOptions = {},
   inline = false,
   multiple = false,
   name,
@@ -69,6 +71,7 @@ const Select = ({
 }: SelectProps, ref: React.LegacyRef<HTMLSelectElement>) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const optionsList = createOptions(options)
 
   const inlineClass = inline ? 'inline' : null
@@ -89,6 +92,7 @@ const Select = ({
     if (children) return children
     return (
       <select
+          {...htmlOptions}
           {...domSafeProps(props)}
           disabled={disabled}
           id={name}
@@ -109,6 +113,7 @@ const Select = ({
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
     >
       {label &&

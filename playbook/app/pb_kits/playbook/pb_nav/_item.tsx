@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 
 import Icon from "../pb_icon/_icon";
@@ -21,6 +21,7 @@ type NavItemProps = {
   data?: object;
   dark?: boolean;
   fontSize?: "normal" | "small";
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   iconLeft?: string;
   iconRight?: string | string[];
   onIconRightClick?: () => void;
@@ -67,6 +68,7 @@ const NavItem = (props: NavItemProps) => {
     data = {},
     dark = false,
     fontSize = "normal",
+    htmlOptions = {},
     iconLeft,
     iconRight,
     onIconRightClick,
@@ -158,7 +160,8 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
   const fontWeightClass = fontWeightMapping[fontWeight];
 
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
 
   const tagClasses = classnames(
     collapsible ? "pb_nav_list_item_link_collapsible" : "pb_nav_list_item_link",
@@ -216,6 +219,7 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
               <Tag
                 {...ariaProps}
                 {...dataProps}
+                {...htmlProps}
                 className={classes}
                 id={id}
                 href={link}
@@ -256,6 +260,7 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
         <Tag
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={classes}
           id={id}
           href={link}

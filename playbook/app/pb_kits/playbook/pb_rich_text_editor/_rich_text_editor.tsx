@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildDataProps, noop } from '../utilities/props'
+import { buildAriaProps, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
 
 try {
   const Trix = require('trix')
@@ -35,6 +35,7 @@ type RichTextEditorProps = {
   className?: string,
   data?: { [key: string]: string },
   focus?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   inline?: boolean, 
   extensions?: { [key: string]: string }[],
@@ -58,6 +59,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     className,
     data = {},
     focus = false,
+    htmlOptions = {},
     inline = false,
     extensions,
     name,
@@ -74,8 +76,11 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     dataProps = buildDataProps(data),
     [editor, setEditor] = useState<Editor>()
 
+  const htmlProps = buildHtmlProps(htmlOptions)
+  
   const handleOnEditorReady = (editorInstance: Editor) => setEditor(editorInstance),
     element = editor?.element
+
 
   // DOM manipulation must wait for editor to be ready
   if (editor) {
@@ -161,6 +166,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={css}
     >
       {
