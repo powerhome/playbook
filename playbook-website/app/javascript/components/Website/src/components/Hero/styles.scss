@@ -15,7 +15,7 @@
   }
   &-description {
     @media screen and (max-width: $screen-xs-min) {
-      display: none;
+      display: none !important;
     }
   }
 }

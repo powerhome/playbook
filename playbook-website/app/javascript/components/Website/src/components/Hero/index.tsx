@@ -52,9 +52,9 @@ export function Hero({ title, description }: HeroProps) {
         className="hero-description"
         maxWidth="sm"
         lineHeight="loose"
-        paddingBottom="xl"
         dark
         text={description}
+        truncate="4"
       />
     </Background>
   );
