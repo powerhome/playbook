@@ -11,6 +11,7 @@ const getPositionElement = (element: string | Element) => {
 
 type DatePickerConfig = {
   closeOnSelect?: boolean,
+  customQuickPickDates?: { label: string, dates: Date[] }[],
   disableDate?: number[],
   disableRange?: number[],
   disableWeekdays?: number[],
@@ -121,7 +122,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }
   }
 
-  const setPlugins = (thisRangesEndToday: boolean) => {
+  const setPlugins = (thisRangesEndToday: boolean, customQuickPickDates: any) => {
     const pluginList = []
 
     // month and week selection
@@ -132,7 +133,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
     } else if (selectionType === "quickpick") {
     //------- QUICKPICK VARIANT PLUGIN -------------//
-    pluginList.push(quickPickPlugin(thisRangesEndToday))
+    pluginList.push(quickPickPlugin(thisRangesEndToday, customQuickPickDates))
     }
 
     // time selection
@@ -181,7 +182,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     onYearChange: [() => {
       yearChangeHook()
     }],
-    plugins: setPlugins(thisRangesEndToday),
+    plugins: setPlugins(thisRangesEndToday, config.customQuickPickDates),
     position,
     positionElement: getPositionElement(positionElement),
     prevArrow: '<i class="far fa-angle-left"></i>',

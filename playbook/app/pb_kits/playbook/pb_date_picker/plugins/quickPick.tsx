@@ -21,7 +21,7 @@ type pluginDataType = {
 
 let activeLabel = ""
 
-const quickPickPlugin = (thisRangesEndToday: boolean) => {
+const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates = []) => {
   return function (fp: FpTypes & any): any {
     const today = new Date()
     const yesterday = DateTime.getYesterdayDate(new Date())
@@ -62,6 +62,10 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
 
     // creating the ul element for the nav dropdown and giving it classnames
     const rangesNav = document.createElement('ul');
+
+    customQuickPickDates.forEach(({ label, dates }) => {
+      ranges[label] = dates;
+    });
 
     // creating the pluginData object that will hold the properties of this plugin
     const pluginData: pluginDataType = {
