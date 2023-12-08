@@ -32,15 +32,7 @@
     height: 40px;
   }
   &-description {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
     font-size: $text-small;
-    @media screen and (max-width: $screen-xs-min) {
-      display: none;
-    }
   }
   &:hover {
     box-shadow: $shadow_deeper;
