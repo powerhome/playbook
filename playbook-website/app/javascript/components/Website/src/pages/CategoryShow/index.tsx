@@ -17,9 +17,9 @@ export default function CategoryShow() {
     <>
       <Hero description={description} title={linkFormat(name)} />
       <PageContainer>
-        <Flex align="center">
+        <Flex align="center" className="category-breadcrumb">
           <NavLink to="/beta/kits">
-            <Body color="light">Components</Body>
+            <Body className="previous-route" color="light">Components</Body>
           </NavLink>
           <Icon className="category-breadcrumb-icon" icon="angle-right" />
           <Body text={linkFormat(name)} />
