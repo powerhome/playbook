@@ -21,7 +21,7 @@ type pluginDataType = {
 
 let activeLabel = ""
 
-const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates = []) => {
+const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: { override: boolean, dates: any[] }) => {
   return function (fp: FpTypes & any): any {
     const today = new Date()
     const yesterday = DateTime.getYesterdayDate(new Date())
@@ -46,6 +46,35 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates = [])
     const lastYearStartDate = DateTime.getPreviousYearStartDate(new Date())
     const lastYearEndDate = DateTime.getPreviousYearEndDate(new Date())
 
+    const calculateDateRange = (timePeriod: string, amount: number): Date[] => {
+      const endDate = new Date();
+      let startDate = new Date();
+    
+      switch (timePeriod) {
+        case 'days':
+          startDate.setDate(endDate.getDate() - amount);
+          break;
+        case 'weeks':
+          startDate.setDate(endDate.getDate() - (amount * 7));
+          break;
+        case 'months':
+          startDate.setMonth(endDate.getMonth() - amount);
+          break;
+        case 'quarters':
+          startDate.setMonth(endDate.getMonth() - (amount * 3));
+          break;
+        case 'years':
+          startDate.setFullYear(endDate.getFullYear() - amount);
+          break;
+        default:
+          throw new Error('Invalid time period');
+      }
+      return [startDate, endDate];
+    };
+  
+
+
+
     // variable that holds the ranges available
     const ranges = {
       'Today': [today, today],
@@ -60,18 +89,23 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates = [])
       'Last year': [lastYearStartDate, lastYearEndDate]
     }
 
+ 
+    // {{ I NEED SOME LOGIC HERE TO HOOK IT ALL UP}}
+
+
+
+
+
     // creating the ul element for the nav dropdown and giving it classnames
     const rangesNav = document.createElement('ul');
 
-    customQuickPickDates.forEach(({ label, dates }) => {
-      ranges[label] = dates;
-    });
 
     // creating the pluginData object that will hold the properties of this plugin
     const pluginData: pluginDataType = {
       ranges: ranges,
       rangesNav: rangesNav,
       rangesButtons: [],
+
     };
 
     /**
