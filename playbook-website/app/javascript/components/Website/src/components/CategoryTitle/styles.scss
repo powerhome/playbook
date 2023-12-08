@@ -15,6 +15,11 @@
         opacity: 1;
       }
     }
+    &.desktop {
+      @media screen and (max-width: $screen-xs-min) {
+        display: none;
+      }
+    }
   }
   &:hover {
     .icon.desktop {
