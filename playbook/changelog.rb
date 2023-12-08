@@ -44,3 +44,4 @@ formatted_release.gsub!(/-\s+/, "- ")
 
 # Write the new changelog to a file
 File.write("new-changelog.md", formatted_release)
+puts "🎉 Latest release formatted for Github and saved to new-changelog.md 🎉"
