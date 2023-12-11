@@ -33,7 +33,7 @@ const dateTimeIso = (dateValue: Date) => {
   return DateTime.toIso(dateValue);
 };
 
-const DateRangeInline = (props: DateRangeInlineProps) => {
+const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
   const {
     icon = false,
     dark = false,

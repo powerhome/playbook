@@ -13,14 +13,13 @@ import {
 type BreadCrumbItemProps = {
   aria?: {[key: string]: string},
   className?: string,
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
   component?: "a" | "span",
   [x:string]: any;
 }
 
-
-const BreadCrumbItem = (props: BreadCrumbItemProps) => {
+const BreadCrumbItem = (props: BreadCrumbItemProps): React.ReactElement => {
   const {
     aria = {},
     className,

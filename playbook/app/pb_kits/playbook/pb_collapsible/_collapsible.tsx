@@ -12,11 +12,11 @@ import { IconSizes } from "../pb_icon/_icon"
 
 
 type CollapsibleProps = {
-  children?: JSX.Element | [] | any,
+  children?: React.ReactElement | [] | any,
   aria?: {[key: string]: string},
   className?: string,
   collapsed?: boolean,
-  data?: object,
+  data?: {[key: string]: string},
   icon?: string | string[],
   iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   iconSize?: IconSizes,
@@ -24,8 +24,6 @@ type CollapsibleProps = {
   onClick?: ()=> void,
   id?: string,
 }
-
-
 
 const Collapsible = ({
   aria = {},
@@ -40,14 +38,14 @@ const Collapsible = ({
   onClick,
   id,
   ...props
-}: CollapsibleProps) => {
+}: CollapsibleProps): React.ReactElement => {
   const [isCollapsed, toggle, setIsCollapsed] = useCollapsible(collapsed)
 
   useEffect(()=> {
    setIsCollapsed(collapsed)
   },[collapsed])
 
-  const CollapsibleParent = React.Children.toArray(children) as JSX.Element[]
+  const CollapsibleParent = React.Children.toArray(children) as React.ReactElement[]
 
   if (CollapsibleParent.length !== 2) {
     throw new Error('Collapsible requires <CollapsibleMain> and <CollapsibleContent> to function properly.')

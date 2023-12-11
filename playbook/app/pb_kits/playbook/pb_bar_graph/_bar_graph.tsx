@@ -19,8 +19,8 @@ type BarGraphProps = {
   yAxisMax: number;
   chartData: { name: string; data: number[] }[];
   className?: string;
-  id: any;
-  pointStart: number | any;
+  id: string;
+  pointStart: number;
   subTitle?: string;
   title: string;
   type?: string;

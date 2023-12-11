@@ -18,8 +18,8 @@ type CircleChartProps = {
   children?: Node;
   className?: string;
   colors?: string[];
-  dark?: Boolean;
-  data?: Object;
+  dark?: boolean;
+  data?: {[key: string]: string},
   dataLabelHtml?: string;
   dataLabels?: boolean;
   height?: string;
@@ -177,27 +177,27 @@ const CircleChart = ({
       {children ? (
         <div id={`wrapper-circle-chart-${id}`}>
           <HighchartsReact
-            containerProps={{
+              containerProps={{
               className: classnames("pb_circle_chart", globalProps(props)),
               id: id,
               ...ariaProps,
               ...dataProps,
             }}
-            highcharts={Highcharts}
-            options={options}
+              highcharts={Highcharts}
+              options={options}
           />
           <div className="pb-circle-chart-block">{children}</div>
         </div>
       ) : (
         <HighchartsReact
-          containerProps={{
+            containerProps={{
             className: classnames("pb_circle_chart", globalProps(props)),
             id: id,
             ...ariaProps,
             ...dataProps,
           }}
-          highcharts={Highcharts}
-          options={options}
+            highcharts={Highcharts}
+            options={options}
         />
       )}
     </>

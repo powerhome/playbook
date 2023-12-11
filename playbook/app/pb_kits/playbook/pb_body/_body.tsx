@@ -41,16 +41,15 @@ const Body = (props: BodyProps): React.ReactElement => {
     variant = null,
   } = props
 
-  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
-  const dataProps: {[key: string]: any} = buildDataProps(data)
+  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+  const dataProps: {[key: string]: string} = buildDataProps(data)
   const isTruncated = truncate ? `truncate_${truncate}` : ''
   const classes = classnames(
     buildCss('pb_body_kit', color, variant, status, isTruncated),
     globalProps(props),
     className
   )
-  const Tag: React.ReactElement | any = `${tag}`
-
+  const Tag: keyof JSX.IntrinsicElements = `${tag}`
 
   return (
     <Tag

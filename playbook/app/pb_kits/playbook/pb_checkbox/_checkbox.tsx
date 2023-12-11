@@ -22,7 +22,7 @@ type CheckboxProps = {
   value?: string,
 } & GlobalProps
 
-const Checkbox = (props: CheckboxProps): JSX.Element => {
+const Checkbox = (props: CheckboxProps): React.ReactElement => {
   const {
     aria = {},
     checked = false,
@@ -69,7 +69,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
         tabIndex={tabIndex}
         type="checkbox"
         value={value}
-      />)
+    />)
   }
 
   return (

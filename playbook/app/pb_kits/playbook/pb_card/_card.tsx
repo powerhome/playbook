@@ -68,7 +68,7 @@ const Body = (props: CardBodyProps) => {
   )
 }
 
-const Card = (props: CardPropTypes) => {
+const Card = (props: CardPropTypes): React.ReactElement => {
   const {
     aria = {},
     background = 'none',

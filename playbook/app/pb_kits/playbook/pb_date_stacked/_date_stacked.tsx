@@ -25,7 +25,7 @@ const sizes: {sm: 4, md: 3} = {
   md: 3,
 };
 
-const DateStacked = (props: DateStackedProps) => {
+const DateStacked = (props: DateStackedProps): React.ReactElement => {
   const {
     align = "left",
     bold = false,

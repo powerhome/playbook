@@ -26,7 +26,7 @@ type BadgeProps = {
   text?: string,
   variant?: "error" | "info" | "neutral" | "notification" | "primary" | "success" | "warning",
 } & GlobalProps
-const Badge = (props: BadgeProps) => {
+const Badge = (props: BadgeProps): React.ReactElement => {
   const {
     aria = {},
     className,

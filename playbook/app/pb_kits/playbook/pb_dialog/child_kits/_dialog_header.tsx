@@ -13,7 +13,7 @@ type DialogHeaderProps = {
   children: React.ReactNode[] | React.ReactNode | string,
   className?: string,
   closeable?: boolean,
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
   padding?: string,
   separator?: boolean,
@@ -22,7 +22,7 @@ type DialogHeaderProps = {
   title?: string,
 } & GlobalProps
 
-const DialogHeader = (props: DialogHeaderProps) => {
+const DialogHeader = (props: DialogHeaderProps): React.ReactElement => {
   const {
     aria = {},
     children,
@@ -52,7 +52,7 @@ const DialogHeader = (props: DialogHeaderProps) => {
         {children}
         {closeable &&
           <CloseIcon
-            onClose={api.onClose}
+              onClose={api.onClose}
           />
         }
         

@@ -22,7 +22,7 @@ type DialogFooterProps = {
 } & GlobalProps
 
 // Footer component
-const DialogFooter = (props: DialogFooterProps) => {
+const DialogFooter = (props: DialogFooterProps): React.ReactElement => {
   const {
     children,
     className,
@@ -38,8 +38,7 @@ const DialogFooter = (props: DialogFooterProps) => {
       {separator &&
         <SectionSeparator />
       }
-      <div className="dialog-pseudo-footer">
-      </div>
+      <div className="dialog-pseudo-footer" />
       <Flex
           className={classnames(footerCSS, footerSpacing, className)}
           spacing={spacing}

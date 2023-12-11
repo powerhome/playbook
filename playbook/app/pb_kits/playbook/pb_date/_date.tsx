@@ -23,7 +23,7 @@ type PbDateProps = {
   value: Date;
 };
 
-const PbDate = (props: PbDateProps) => {
+const PbDate = (props: PbDateProps): React.ReactElement => {
   const {
     aria = {},
     alignment = "left",

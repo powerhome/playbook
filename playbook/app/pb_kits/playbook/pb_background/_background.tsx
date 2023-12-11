@@ -62,7 +62,7 @@ const getResponsiveValue = <T extends string | undefined>(prop: ResponsiveProp<T
   return prop?.default || undefined;
 };
 
-const Background = (props: BackgroundProps) => {
+const Background = (props: BackgroundProps): React.ReactElement => {
   const {
     alt = '',
     aria = {},
@@ -141,12 +141,12 @@ const Background = (props: BackgroundProps) => {
  
   return (
     <Tag
-      alt={alt}
-      style={backgroundStyle}
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
-      id={id}
+        alt={alt}
+        style={backgroundStyle}
+        {...ariaProps}
+        {...dataProps}
+        className={classes}
+        id={id}
     >
       {children}
     </Tag>

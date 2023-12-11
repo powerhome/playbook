@@ -19,7 +19,7 @@ type AvatarActionButtonProps = {
   linkAriaLabel?: string,
   className?: string,
   dark?: boolean,
-  data?: Object,
+  data?: {[key: string]: string},
   id?: string,
   imageAlt?: string,
   imageUrl?: string,
@@ -30,7 +30,7 @@ type AvatarActionButtonProps = {
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
 }
 
-const AvatarActionButton = (props: AvatarActionButtonProps) => {
+const AvatarActionButton = (props: AvatarActionButtonProps): React.ReactElement => {
   const {
     action = 'add',
     aria = {},

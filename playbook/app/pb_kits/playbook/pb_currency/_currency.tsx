@@ -33,7 +33,7 @@ const sizes: {lg: 1, md: 3, sm: 4} = {
   sm: 4,
 }
 
-const Currency = (props: CurrencyProps) => {
+const Currency = (props: CurrencyProps): React.ReactElement => {
   const {
     abbreviate = false,
     align = 'left',

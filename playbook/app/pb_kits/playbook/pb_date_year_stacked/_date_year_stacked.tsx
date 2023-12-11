@@ -17,7 +17,7 @@ type DateYearStackedProps = {
   id?: string,
 }
 
-const DateYearStacked = (props: DateYearStackedProps) => {
+const DateYearStacked = (props: DateYearStackedProps): React.ReactElement => {
   const { align = 'left', className, dark = false, date, data={} } = props
   const css = classnames(
     buildCss('pb_date_year_stacked', align),

@@ -50,11 +50,11 @@ type ContactProps = {
   contactDetail?: string,
   contactType?: string,
   contactValue: string,
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
 }
 
-const Contact = (props: ContactProps) => {
+const Contact = (props: ContactProps): React.ReactElement => {
   const {
     aria = {},
     className,

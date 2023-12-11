@@ -38,8 +38,8 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
     status = null,
     dark = false,
   } = props
-  const dataProps: {[key: string]: any} = buildDataProps(data)
-  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
+  const dataProps: {[key: string]: string} = buildDataProps(data)
+  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
   const classes = classnames(
     buildCss('pb_avatar_kit', `size_${size}`),
     globalProps(props),

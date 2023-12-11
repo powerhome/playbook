@@ -43,8 +43,8 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     maxDate,
     minDate,
     mode,
-    onChange = () => {},
-    onClose = () => {},
+    onChange,
+    onClose,
     pickerId,
     plugins,
     position = "auto",
@@ -62,28 +62,11 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
   // |                   Hook Definitions                      |
   // ===========================================================
-
-  const defaultDateGetter = () => {
-    if (defaultDate === '') {
-      return null
-    } else {
-      return defaultDate
-    }
-  }
-  const disabledParser = () => {
-    const disabledArray=[]
-     
-    disableDate && disableDate.length > 0 && disabledArray.push(...disableDate)
-    disableRange && disableRange.length > 0 && disabledArray.push(...disableRange)
-    disableWeekdays && disableWeekdays.length > 0 && disabledArray.push(...disabledWeekDays())
-
-    return disabledArray
-  }
-
+  
   const disabledWeekDays = () => {
     return (
       [
-        (date:any) => {
+        (date: any) => {
           const weekdayObj: {
             [day: string]: number
           } = {
@@ -108,6 +91,24 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       ]
     )
   }
+
+  const defaultDateGetter = () => {
+    if (defaultDate === '') {
+      return null
+    } else {
+      return defaultDate
+    }
+  }
+  const disabledParser = () => {
+    const disabledArray=[]
+     
+    disableDate && disableDate.length > 0 && disabledArray.push(...disableDate)
+    disableRange && disableRange.length > 0 && disabledArray.push(...disableRange)
+    disableWeekdays && disableWeekdays.length > 0 && disabledArray.push(...disabledWeekDays())
+
+    return disabledArray
+  }
+
   const calendarResizer = () => {
     const cal = document.querySelector(`#cal-${pickerId}.open`) as HTMLElement
     const parentInput = cal.parentElement
@@ -150,6 +151,29 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
 
+  // Assign dynamically sourced flatpickr instance to variable
+  const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
+  picker.innerContainer.parentElement.id = `cal-${pickerId}`
+
+  // Attach / detach to / from scroll events
+  const scrollEvent = () => {
+    picker._positionCalendar()
+  }
+  function attachToScroll(scrollParent: string | HTMLElement) {
+    document.querySelectorAll(scrollParent as string)[0]?.addEventListener("scroll", scrollEvent, { passive: true })
+  }
+  function detachFromScroll(scrollParent: string | HTMLElement = document.body) {
+    document.querySelectorAll(scrollParent as string)[0]?.removeEventListener("scroll", scrollEvent)
+  }
+  
+  // variablize each dropdown selector
+  const dropdown = document.querySelector<HTMLElement & { [x: string]: any }>(`#year-${pickerId}`)
+
+  // two way binding
+  const yearChangeHook = () => {
+    dropdown.value = picker.currentYear
+  }
+
   flatpickr(`#${pickerId}`, {
     allowInput,
     closeOnSelect,
@@ -188,21 +212,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     static: staticPosition,
   })
 
-  // Assign dynamically sourced flatpickr instance to variable
-  const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
-  picker.innerContainer.parentElement.id = `cal-${pickerId}`
-
-  // Attach / detach to / from scroll events
-  const scrollEvent = () => {
-    picker._positionCalendar()
-  }
-  function attachToScroll(scrollParent: string | HTMLElement) {
-    document.querySelectorAll(scrollParent as string)[0]?.addEventListener("scroll", scrollEvent, { passive: true })
-  }
-  function detachFromScroll(scrollParent: string | HTMLElement = document.body) {
-    document.querySelectorAll(scrollParent as string)[0]?.removeEventListener("scroll", scrollEvent)
-  }
-
+  
   // replace year selector with dropdown
   picker.yearElements[0].parentElement.innerHTML = `<select class="numInput cur-year" type="number" tabIndex="-1" aria-label="Year" id="year-${pickerId}"></select>`
 
@@ -211,9 +221,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   for (let year = yearRange[1]; year >= yearRange[0]; year--) {
     years += `<option value="${year}">${year}</option>`
   }
-
-  // variablize each dropdown selector
-  const dropdown = document.querySelector<HTMLElement & { [x: string]: any }>(`#year-${pickerId}`)
 
   // inject year options into dropdown and assign it the flatpickr's current year value
   dropdown.innerHTML = years
@@ -239,11 +246,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         }
       }, 0)
     })
-  }
-
-  // two way binding
-  const yearChangeHook = () => {
-    dropdown.value = picker.currentYear
   }
 
   // Adding dropdown icons to year and month selects

@@ -16,7 +16,7 @@ type DetailProps = {
   text?: string,
 } & GlobalProps
 
-const Detail = (props: DetailProps) => {
+const Detail = (props: DetailProps): React.ReactElement => {
   const {
     aria = {},
     bold = false,
@@ -29,8 +29,8 @@ const Detail = (props: DetailProps) => {
     text= ''
   } = props
 
-  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
-  const dataProps: {[key: string]: any} = buildDataProps(data)
+  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+  const dataProps: {[key: string]: string} = buildDataProps(data)
   const isBold = bold ? "bold" : null
   const classes = classnames(
     buildCss('pb_detail_kit', color),

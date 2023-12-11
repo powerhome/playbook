@@ -11,7 +11,7 @@ type DistributionBarProps = {
   widths?: number[],
 }
 
-const normalizeCharacters = (widths:  number[]) => {
+const normalizeCharacters = (widths: number[]) => {
   return widths.map((width) => {
     return parseInt(width.toString().replace(/[^0-9.]/gi, ''))
   })
@@ -31,7 +31,7 @@ const barValues = (normalizedValues: number[], colors: []) => {
   })
 }
 
-const DistributionBar = (props: DistributionBarProps) => {
+const DistributionBar = (props: DistributionBarProps): React.ReactElement => {
   const {
     size = 'lg',
     widths = [1],

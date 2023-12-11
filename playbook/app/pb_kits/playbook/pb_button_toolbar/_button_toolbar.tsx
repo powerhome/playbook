@@ -12,7 +12,7 @@ type ButtonToolbarProps = {
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   connected?: boolean,
-  data?: object,
+  data?: {[key: string]: string},
   id?: string,
   onClick?: React.MouseEventHandler<HTMLSpanElement>,
   orientation?: "horizontal" | "vertical",
@@ -20,7 +20,7 @@ type ButtonToolbarProps = {
  variant?: "primary" | "secondary",
 }
 
-const ButtonToolbar  = (props: ButtonToolbarProps) => {
+const ButtonToolbar  = (props: ButtonToolbarProps): React.ReactElement => {
   const {
     aria = {},
     children,
