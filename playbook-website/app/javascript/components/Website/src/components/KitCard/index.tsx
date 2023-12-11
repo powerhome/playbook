@@ -54,7 +54,6 @@ export const KitCard = ({ description, name }: KitCardProps) => {
         <Body
           className="kit-card-description"
           color="light"
-          display={{ xs: "none", default: "block" }}
           truncate="2"
           text={description}
         />

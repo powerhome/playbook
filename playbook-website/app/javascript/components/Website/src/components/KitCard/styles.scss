@@ -32,7 +32,10 @@
     height: 40px;
   }
   &-description {
-    font-size: $text-small;
+    font-size: $text-small !important;
+    @media screen and (max-width: $screen-xs-min) {
+      display: none;
+    }
   }
   &:hover {
     box-shadow: $shadow_deeper;
