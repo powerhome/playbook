@@ -14,7 +14,7 @@ module Playbook
                            default: "default"
 
       prop :color_option, type: Playbook::Props::Enum,
-                          values: %w[yellow primary subtle outline],
+                          values: %w[yellow primary subtle],
                           default: "yellow"
 
       prop :size, type: Playbook::Props::Enum,
