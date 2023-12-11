@@ -1,15 +1,53 @@
 <%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.classname) do %>
-    <%# Rating value %>
-
-    <%= pb_rails("flex", props: { }) do %>
-      <% object.star_count.times do %>
-          <%= pb_rails("icon", props: { classname: "#{star_color} pb_star_#{size}" , custom_icon: Playbook::Engine.root.join(star_svg_path) } ) %>
-      <% end %>
-      <% object.empty_stars.times do %>
-          <%= pb_rails("icon", props: { classname: "#{background_star_color} pb_star_#{size}", custom_icon: Playbook::Engine.root.join(background_star_path) } ) %>
+  id: object.id,
+  data: object.data,
+  class: object.classname) do %>
+  <% if layout_option == "number" %>
+    <% case object.size %>
+      <% when "xs", "sm" %>
+      <%= pb_rails("caption", props: { text: object.rating,
+                                        size: "sm",
+                                        classname: "pb_star_rating_number_#{size}",
+                                        dark: dark,
+                                        padding_right: "xxs" }) %>
+      <% when "md" %>
+      <%= pb_rails("body", props: { text: object.rating,
+                                    dark: dark,
+                                    classname: "pb_star_rating_number_#{size}",
+                                    padding_right: "xxs" }) %>
+      <% when "lg" %>
+      <%= pb_rails("title", props: { text: object.rating,
+                                      size: 2,
+                                      dark: dark,
+                                      classname: "pb_star_rating_number_#{size}",
+                                      padding_right: "sm" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("flex", props: { }) do %>
+    <% object.star_count.times do %>
+        <%= pb_rails("icon", props: { classname: "#{star_color} pb_star_#{size}" , custom_icon: Playbook::Engine.root.join(star_svg_path) } ) %>
+    <% end %>
+    <% object.empty_stars.times do %>
+        <%= pb_rails("icon", props: { classname: "#{background_star_color} pb_star_#{size}", custom_icon: Playbook::Engine.root.join(background_star_path) } ) %>
+    <% end %>
+  <% end %>
+  <% if layout_option == "onestar" %>
+    <%= content_tag(:div, class: "pb_star_rating_number_#{size}") do %>
+      <% case object.size %>
+        <% when "xs", "sm" %>
+        <%= pb_rails("caption", props: { text: "#{object.rating} of #{object.denominator}",
+                                          size: "sm",
+                                          dark: dark,
+                                          padding_left: "xxs" }) %>
+        <% when "md" %>
+        <%= pb_rails("body", props: { text: "#{object.rating} of #{object.denominator}",
+                                      dark: dark,
+                                      padding_left: "xxs" }) %>
+        <% when "lg" %>
+        <%= pb_rails("title", props: { text: "#{object.rating} of #{object.denominator}",
+                                        size: 2,
+                                        dark: dark }) %>
       <% end %>
     <% end %>
+  <% end %>
 <% end %>

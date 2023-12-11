@@ -129,7 +129,7 @@ const StarRating = (props: StarRatingProps) => {
       )}
       <Flex className="star_flex_area">
         {[...Array(activeStars)].map((_, index) => (
-          <React.Fragment key="index">
+          <React.Fragment key={index}>
             {colorOption === 'yellow' && (
               <Icon
                 // @ts-ignore
@@ -154,7 +154,7 @@ const StarRating = (props: StarRatingProps) => {
           </React.Fragment>
         ))}
         {[...Array(emptyStars)].map((_, index) => (
-          <React.Fragment key="index">
+          <React.Fragment key={index}>
             {backgroundType === 'outline' && (
               <Icon
                 // @ts-ignore
@@ -177,7 +177,7 @@ const StarRating = (props: StarRatingProps) => {
             {size === 'xs' && (
               <Caption
                   text={`${rating.toString()} of ${denominator}`}
-                  size="xs"
+                  size="sm"
                   dark={dark}
                   className="pb_star_rating_number_sm"
               />
@@ -185,7 +185,7 @@ const StarRating = (props: StarRatingProps) => {
             {size === 'sm' && (
               <Caption
                   text={`${rating.toString()} of ${denominator}`}
-                  size="xs"
+                  size="sm"
                   dark={dark}
                   className="pb_star_rating_number_sm"
               />
