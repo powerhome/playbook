@@ -18,7 +18,13 @@ RSpec.describe Playbook::PbStarRating::StarRating do
   it {
     is_expected.to define_enum_prop(:color_option)
       .with_default("yellow")
-      .with_values("yellow", "primary", "subtle", "outline")
+      .with_values("yellow", "primary", "subtle")
+  }
+
+  it {
+    is_expected.to define_enum_prop(:background_type)
+      .with_default("fill")
+      .with_values("fill", "outline")
   }
 
   it {
