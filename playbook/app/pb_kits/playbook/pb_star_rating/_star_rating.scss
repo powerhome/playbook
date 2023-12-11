@@ -48,10 +48,14 @@
 
 
   $star-styles: (
-    yellow_star: (color: #F9BB00 ),
-    primary_star: (fill: #0056CF ),
-    empty_star_dark: (fill: $border_dark, ),
-    empty_star_light: (fill: $border_light, )
+    yellow_star: (color: #F9BB00),
+    primary_star: (color: #0056CF),
+    suble_star_light: (color: $text_lt_default),
+    suble_star_dark: (color: $text_dk_default),
+    empty_star_dark: (color: $border_dark),
+    empty_star_light: (color: $border_light),
+    outline_empty_star_dark: (color: transparent),
+    outline_empty_star_light: (color: transparent)
   );
 
   @each $class, $styles in $star-styles {

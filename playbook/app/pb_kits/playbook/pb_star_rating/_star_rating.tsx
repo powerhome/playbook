@@ -22,6 +22,7 @@ type StarRatingProps = {
   rating: number,
   denominator: number,
   colorOption?: "yellow" | "primary" | "subtle" | "outline",
+  backgroundType?: "fill" | "outline",
   size?: "xs" | "sm" | "md" | "lg";
 } & GlobalProps
 
@@ -36,6 +37,7 @@ const StarRating = (props: StarRatingProps) => {
   rating = 0,
   denominator = 5,
   colorOption = "yellow",
+  backgroundType = "fill",
   size = "sm",
 } = props
 
@@ -127,7 +129,7 @@ const StarRating = (props: StarRatingProps) => {
       )}
       <Flex className="star_flex_area">
         {[...Array(activeStars)].map((_, index) => (
-          <>
+          <React.Fragment key="index">
             {colorOption === 'yellow' && (
               <Icon
                 // @ts-ignore
@@ -142,13 +144,6 @@ const StarRating = (props: StarRatingProps) => {
                 className={iconSize}
               />
             ) }
-            {colorOption === 'outline' && (
-              <Icon
-                // @ts-ignore
-                customIcon={starPrimary}
-                className={iconSize}
-              />
-            ) }
             {colorOption === 'subtle' && (
               <Icon
                 // @ts-ignore
@@ -156,25 +151,25 @@ const StarRating = (props: StarRatingProps) => {
                 className={iconSize}
               />
             ) }
-          </>
+          </React.Fragment>
         ))}
         {[...Array(emptyStars)].map((_, index) => (
-          <>
-            {colorOption === 'outline' && (
+          <React.Fragment key="index">
+            {backgroundType === 'outline' && (
               <Icon
                 // @ts-ignore
                 customIcon={starOutline}
                 className={iconSize}
               />
             ) }
-            {colorOption !== 'outline' && (
+            {backgroundType !== 'outline' && (
               <Icon
                 // @ts-ignore
                 customIcon={starBackground}
                 className={iconSize}
               />
             ) }
-          </>
+          </React.Fragment>
         ))}
       </Flex>
       {layoutOption === "onestar" && (

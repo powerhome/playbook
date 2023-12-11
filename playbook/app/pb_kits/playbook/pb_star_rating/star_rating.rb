@@ -48,8 +48,12 @@ module Playbook
         end
       end
 
-      def outline_star_color
-        dark ? "outline_star_dark" : "outline_star_light"
+      def background_star_color
+        if background_type === "outline"
+          dark ? "outline_empty_star_dark" : "outline_empty_star_light"
+        else
+          dark ? "empty_star_dark" : "empty_star_light"
+        end
       end
 
       def svg_size

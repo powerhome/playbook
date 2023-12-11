@@ -2,7 +2,7 @@ import React from 'react'
 
 import StarRating from '../_star_rating'
 
-const StarRatingColorOptions = (props) => (
+const StarRatingBackgroundOptions = (props) => (
   <>
 
     <StarRating
@@ -13,21 +13,7 @@ const StarRatingColorOptions = (props) => (
 
 
     <StarRating
-        colorOption='outline'
-        paddingBottom="xs"
-        rating={3}
-        {...props}
-    />
-
-    <StarRating
-        colorOption='primary'
-        paddingBottom="xs"
-        rating={3}
-        {...props}
-    />
-
-    <StarRating
-        colorOption='subtle'
+        backgroundType='outline'
         paddingBottom="xs"
         rating={3}
         {...props}
@@ -36,4 +22,4 @@ const StarRatingColorOptions = (props) => (
   </>
 )
 
-export default StarRatingColorOptions
+export default StarRatingBackgroundOptions
