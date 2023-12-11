@@ -29,13 +29,7 @@ export const KitCard = ({ description, name }: KitCardProps) => {
         <Flex align="center" className="kit-card-header" justify="between">
           <Title
             text={linkFormat(name)}
-            size={{
-              xs: "4",
-              sm: "3",
-              md: "3",
-              lg: "3",
-              xl: "3",
-            }}
+            size={4}
             truncate="1"
           />
           <Icon
