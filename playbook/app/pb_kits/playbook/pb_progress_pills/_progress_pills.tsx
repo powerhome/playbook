@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -13,6 +13,7 @@ type ProgressPillsProps = {
   className?: string,
   data?: { [key: string]: string },
   dark?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   steps?: number,
   title?: string,
@@ -43,6 +44,7 @@ const ProgressPills = (props: ProgressPillsProps) => {
     aria = { hidden: 'true' },
     className,
     data = {},
+    htmlOptions = {},
     id,
     steps = 3,
     title,
@@ -52,12 +54,14 @@ const ProgressPills = (props: ProgressPillsProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_progress_pills_kit'), globalProps(props), className)
 
   return (
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classes}
       id={id}
     >

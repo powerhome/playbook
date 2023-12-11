@@ -1,7 +1,7 @@
 import React from "react"
 import classnames from "classnames"
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Caption from '../pb_caption/_caption'
@@ -17,6 +17,7 @@ type StarRatingProps = {
   dark?: boolean,
   fixedWidth?: boolean,
   layoutOption?: "default" | "number" | "onestar",
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   icon?: string,
   id?: string,
   rating: number,
@@ -33,6 +34,7 @@ const StarRating = (props: StarRatingProps) => {
   data = {},
   dark = false,
   layoutOption = "default",
+  htmlOptions = {},
   id,
   rating = 0,
   denominator = 5,
@@ -44,6 +46,7 @@ const StarRating = (props: StarRatingProps) => {
   const classes = classnames(buildCss('pb_star_rating_kit'), globalProps(props), className)
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const denominatorStyle = layoutOption === "onestar" ? 1 : denominator
   const activeStars = Math.round(rating) > denominatorStyle ? denominatorStyle : Math.round(rating)
   const emptyStars = denominatorStyle - Math.round(rating) < 0 ? 0 : denominatorStyle - Math.round(rating)
@@ -85,6 +88,7 @@ const StarRating = (props: StarRatingProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

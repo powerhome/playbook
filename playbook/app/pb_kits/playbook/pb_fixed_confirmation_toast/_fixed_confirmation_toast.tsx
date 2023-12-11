@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 
 import { globalProps } from "../utilities/globalProps";
+import { buildHtmlProps } from '../utilities/props'
 
 import Icon from "../pb_icon/_icon";
 import Title from "../pb_title/_title";
@@ -20,6 +21,7 @@ type FixedConfirmationToastProps = {
   closeable?: boolean,
   data?: string,
   horizontal?: "right" | "left" | "center",
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   multiLine?: boolean,
   onClose?: () => void,
@@ -37,6 +39,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
     className,
     closeable = false,
     horizontal,
+    htmlOptions = {},
     multiLine = false,
     onClose = () => { },
     open = true,
@@ -52,6 +55,8 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
     className
   );
   const icon = iconMap[status];
+
+  const htmlProps = buildHtmlProps(htmlOptions);
 
   const autoCloseToast = () => {
     if (autoClose && open) {
@@ -75,7 +80,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   return (
     <>
       {showToast && (
-        <div className={css} onClick={handleClick}>
+        <div className={css} onClick={handleClick} {...htmlProps}>
           {icon && <Icon className="pb_icon" fixedWidth icon={icon} />}
 
           {

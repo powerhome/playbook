@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 import DateTime from '../pb_kit/dateTime';
 
@@ -15,6 +15,7 @@ type PbDateProps = {
   aria?: { [key: string]: string };
   className?: string;
   data?: { [key: string]: string };
+  htmlOptions?: { [key: string]: string | number | boolean | Function };
   id?: string;
   showDayOfWeek?: boolean;
   showIcon?: boolean;
@@ -29,6 +30,7 @@ const PbDate = (props: PbDateProps) => {
     alignment = "left",
     className,
     data = {},
+    htmlOptions = {},
     id,
     showDayOfWeek = false,
     showIcon = false,
@@ -43,8 +45,9 @@ const PbDate = (props: PbDateProps) => {
   const year = DateTime.toYear(value);
   const currentYear = new Date().getFullYear();
 
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(
     buildCss("pb_date_kit", alignment),
@@ -53,10 +56,12 @@ const PbDate = (props: PbDateProps) => {
   );
 
   return (
-    <div {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
+    <div 
+      {...ariaProps}
+      {...dataProps}
+      {...htmlProps}
+      className={classes}
+      id={id}
     >
       {unstyled
         ? <>

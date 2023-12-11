@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
 
@@ -28,6 +28,7 @@ type IconProps = {
   fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
   icon: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   inverse?: boolean,
   listItem?: boolean,
@@ -55,6 +56,7 @@ const Icon = (props: IconProps) => {
     data = {},
     fixedWidth = true,
     flip = "none",
+    htmlOptions = {},
     icon,
     id,
     inverse = false,
@@ -104,6 +106,7 @@ const Icon = (props: IconProps) => {
   aria.label ? null : aria.label = `${icon} icon`
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   // Add a conditional here to show only the SVG if custom
   const displaySVG = (customIcon: any) => {
@@ -113,6 +116,7 @@ const Icon = (props: IconProps) => {
           {
             React.cloneElement(customIcon, {
               ...dataProps,
+              ...htmlProps,
               className: classes,
               id,
             })
@@ -124,6 +128,7 @@ const Icon = (props: IconProps) => {
         <>
           <span
               {...dataProps}
+              {...htmlProps}
               className={classesEmoji}
               id={id}
           >
@@ -137,6 +142,7 @@ const Icon = (props: IconProps) => {
         <>
           <i
               {...dataProps}
+              {...htmlProps}
               className={classes}
               id={id}
           />

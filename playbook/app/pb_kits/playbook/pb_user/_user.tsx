@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 import Avatar from '../pb_avatar/_avatar'
@@ -16,6 +16,7 @@ type UserProps = {
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   name?: string,
   orientation?: "horizontal" | "vertical",
@@ -34,6 +35,7 @@ const User = (props: UserProps) => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     id,
     name,
     orientation = 'horizontal',
@@ -45,6 +47,7 @@ const User = (props: UserProps) => {
 
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(
     buildCss('pb_user_kit', align, orientation, size),
@@ -58,6 +61,7 @@ const User = (props: UserProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 type BackgroundProps = {
@@ -23,6 +23,7 @@ type BackgroundProps = {
   className?: string,
   customColor?: string,
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col',
@@ -74,6 +75,7 @@ const Background = (props: BackgroundProps) => {
     className,
     customColor,
     data = {},
+    htmlOptions = {},
     id,
     imageUrl = '',
     tag = 'div',
@@ -113,6 +115,7 @@ const Background = (props: BackgroundProps) => {
     imageUrl: resImageUrl,
   } = responsiveProps;
 
+
   // Build CSS classes and styles using responsive values.
   const classes = classnames(
     buildCss('pb_background_kit'),
@@ -137,16 +140,17 @@ const Background = (props: BackgroundProps) => {
   const Tag: React.ReactElement | any = `${tag}`;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
-
- 
+  const htmlProps = buildHtmlProps(htmlOptions);
+  
   return (
     <Tag
-      alt={alt}
-      style={backgroundStyle}
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
+      alt={alt}
       className={classes}
       id={id}
+      style={backgroundStyle}
     >
       {children}
     </Tag>

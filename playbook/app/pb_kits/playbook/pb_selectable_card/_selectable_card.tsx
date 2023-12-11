@@ -9,7 +9,7 @@ import {
   buildCss,
   buildDataProps,
   noop,
-} from '../utilities/props'
+  buildHtmlProps } from '../utilities/props'
 
 import Icon from '../pb_icon/_icon'
 import Checkbox from '../pb_checkbox/_checkbox'
@@ -28,8 +28,9 @@ type SelectableCardProps = {
   disabled?: boolean,
   error?: boolean,
   icon?: boolean,
-  id?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   inputId?: string,
+  id?: string,
   multi?: boolean,
   name?: string,
   onChange: (event: React.FormEvent<HTMLInputElement>) => void,
@@ -48,6 +49,7 @@ const SelectableCard = (props: SelectableCardProps) => {
     data = {},
     disabled = false,
     error = false,
+    htmlOptions = {},
     icon = false,
     inputId = null,
     multi = true,
@@ -59,6 +61,7 @@ const SelectableCard = (props: SelectableCardProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(buildCss('pb_selectable_card_kit',
     {
@@ -109,6 +112,7 @@ const SelectableCard = (props: SelectableCardProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
     >
       <input

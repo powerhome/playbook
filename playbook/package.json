@@ -1,8 +1,9 @@
 {
   "name": "playbook-ui",
-  "version": "13.11.1",
+  "version": "13.13.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
     "flow": "flow",
     "lint": "eslint . --ext .js,.jsx",

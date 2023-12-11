@@ -6,6 +6,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps,
 } from '../utilities/props'
 
 import Body from '../pb_body/_body'
@@ -21,6 +22,7 @@ type SelectableCardIconProps = {
   dark?: boolean,
   data?: { [key: string]: string },
   disabled?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   icon?: string,
   inputId?: string,
   multi?: boolean,
@@ -41,6 +43,7 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
     dark = false,
     data = {},
     disabled = false,
+    htmlOptions = {},
     icon,
     inputId,
     multi = true,
@@ -53,6 +56,7 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(
     buildCss('pb_selectable_card_icon_kit', {
@@ -68,6 +72,7 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classes}
     >
       <SelectableCard
