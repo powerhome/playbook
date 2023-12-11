@@ -46,11 +46,12 @@
     height: 29px;
   }
 
+
   $star-styles: (
-    pb_star_xs: (font-size: $text_small, padding-right: 4px),
-    pb_star_sm: (font-size: $text_base, padding-right: 4px),
-    pb_star_md: (font-size: 24px, padding-right: 6px),
-    pb_star_lg: (font-size: 48px, padding-right: 12px)
+    yellow_star: (color: #F9BB00 ),
+    primary_star: (fill: #0056CF ),
+    empty_star_dark: (fill: $border_dark, ),
+    empty_star_light: (fill: $border_light, )
   );
 
   @each $class, $styles in $star-styles {
@@ -61,14 +62,30 @@
     }
   }
 
-  $star-container: (
-    pb_star_container_xs: (font-size: 14px ),
-    pb_star_container_sm: (font-size: 16px ),
-    pb_star_container_md: (font-size: 24px ),
-    pb_star_container_lg: (font-size: 48px )
+
+  $star-styles: (
+    pb_star_react_xs: (font-size: $text_small, ),
+    pb_star_react_sm: (font-size: $text_base, ),
+    pb_star_react_md: (font-size: 24px, ),
+    pb_star_react_lg: (font-size: 48px, )
   );
 
-  @each $class, $styles in $star-container {
+  @each $class, $styles in $star-styles {
+    .#{$class} {
+      @each $property, $value in $styles {
+        #{$property}: $value;
+      }
+    }
+  }
+
+  $star-styles: (
+    pb_star_xs: (font-size: $text_small, width: 1em, margin-right: 4px),
+    pb_star_sm: (font-size: $text_base, width: 1em, margin-right: 4px),
+    pb_star_md: (font-size: 24px, width: 1em, margin-right: 6px),
+    pb_star_lg: (font-size: 48px, width: 1em, margin-right: 12px)
+  );
+
+  @each $class, $styles in $star-styles {
     .#{$class} {
       @each $property, $value in $styles {
         #{$property}: $value;
@@ -77,10 +94,10 @@
   }
 
   $star-padding: (
-    pb_star_padding_xs: (padding-right: 4px),
-    pb_star_padding_sm: (padding-right: 4px),
-    pb_star_padding_md: (padding-right: 6px),
-    pb_star_padding_lg: (padding-right: 12px)
+    pb_star_padding_xs: (margin-right: 4px),
+    pb_star_padding_sm: (margin-right: 4px),
+    pb_star_padding_md: (margin-right: 6px),
+    pb_star_padding_lg: (margin-right: 12px)
   );
 
   @each $class, $styles in $star-padding {

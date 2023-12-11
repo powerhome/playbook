@@ -21,6 +21,10 @@ module Playbook
                   values: %w[xs sm md lg],
                   default: "sm"
 
+      prop :background_type, type: Playbook::Props::Enum,
+                             values: %w[fill outline],
+                             default: "fill"
+
       def star_count
         rating.floor > denominator_style ? denominator_style : rating.floor
       end
@@ -33,16 +37,19 @@ module Playbook
         (denominator_style - rating.floor).negative? ? 0 : denominator_style - rating.floor
       end
 
-      def empty_star_color
-        dark ? "empty_star_dark" : "empty_star_light"
+      def star_color
+        case color_option
+        when "yellow"
+          "yellow_star"
+        when "primary"
+          "primary_star"
+        when "subtle"
+          dark ? "suble_star_dark" : "suble_star_light"
+        end
       end
 
       def outline_star_color
         dark ? "outline_star_dark" : "outline_star_light"
-      end
-
-      def subtle_star_color
-        dark ? "suble_star_dark" : "suble_star_light"
       end
 
       def svg_size
@@ -51,6 +58,35 @@ module Playbook
                   "md": "pb_star_md",
                   "lg": "pb_star_lg" }
         sizes[size.to_sym]
+      end
+
+      def svg_class
+        "pb_star_#{size}"
+      end
+
+      def background_star_path
+        if background_type === "outline"
+          "app/pb_kits/playbook/pb_star_rating/stars/star_outline.svg"
+        else
+          "app/pb_kits/playbook/pb_star_rating/stars/yellow_star.svg"
+        end
+      end
+
+      def star_svg_path
+        case color_option
+        when "yellow"
+          "app/pb_kits/playbook/pb_star_rating/stars/yellow_star.svg"
+        when "primary"
+          "app/pb_kits/playbook/pb_star_rating/stars/primary_star.svg"
+        when "subtle"
+          if dark == true
+            "app/pb_kits/playbook/pb_star_rating/stars/subtle_dark_star.svg"
+          else
+            "app/pb_kits/playbook/pb_star_rating/stars/subtle_star.svg"
+          end
+        else
+          "app/pb_kits/playbook/pb_star_rating/stars/primary_star.svg"
+        end
       end
 
       def classname
