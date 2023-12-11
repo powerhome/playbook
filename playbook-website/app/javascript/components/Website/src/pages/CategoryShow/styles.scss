@@ -4,9 +4,9 @@
   &-icon {
     color: $text_lt_light;
   }
-  &:hover {
-    .previous-route {
-      color: $text_lt_default ;
+  .previous-route {
+    &:hover {
+      color: $text_lt_default;
     }
   }
 }
