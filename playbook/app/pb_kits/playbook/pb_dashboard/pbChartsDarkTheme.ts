@@ -3,9 +3,9 @@ import typography from '../tokens/exports/_typography.scss'
 
 import { ThemeProps } from './themeTypes'
 
-import Highcharts from 'highcharts'
+// import Highcharts from 'highcharts'
 
-const pbButtonHoverColor = '#004ebb'
+// const pbButtonHoverColor = '#004ebb'
 const highchartsDarkTheme: ThemeProps = {
   lang: {
     thousandsSep: ',',
@@ -22,7 +22,7 @@ const highchartsDarkTheme: ThemeProps = {
   chart: {
     borderWidth: 0,
     borderRadius: 0,
-    plotBackgroundColor: null,
+    plotBackgroundColor: undefined,
     plotShadow: false,
     plotBorderWidth: 0,
   },
@@ -64,7 +64,7 @@ const highchartsDarkTheme: ThemeProps = {
     },
   },
   yAxis: {
-    alternateGridColor: null,
+    alternateGridColor: undefined,
     minorTickInterval: null,
     gridLineColor: colors.border_dark,
     minorGridLineColor: colors.border_dark,
@@ -104,11 +104,11 @@ const highchartsDarkTheme: ThemeProps = {
       color: colors.text_dk_lighter,
     },
   },
-  labels: {
-    style: {
-      color: colors.primary,
-    },
-  },
+  // labels: {
+  //   style: {
+  //     color: colors.primary,
+  //   },
+  // },
   tooltip: {
     backgroundColor: {
       linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
@@ -130,29 +130,29 @@ const highchartsDarkTheme: ThemeProps = {
   // specific to gauge
   // unfilled gauge color
   pane: {
-    background: {
+    background: [{
       borderColor: colors.border_dark,
-    },
+    }],
   },
 
   plotOptions: {
     series: {
       borderColor: colors.bg_dark_card,
       borderWidth: 2,
-      type: 'area',
-      nullColor: colors.text_dk_lighter,
-      fillColor: {
-        linearGradient: {
-          x1: 0,
-          y1: 0,
-          x2: 0,
-          y2: 1,
-        },
-        stops: [
-          [0, Highcharts.getOptions().colors[0]],
-          [1, 'white'],
-        ],
-      },
+      // type: 'area',
+      // nullColor: colors.text_dk_lighter,
+      // fillColor: {
+      //   linearGradient: {
+      //     x1: 0,
+      //     y1: 0,
+      //     x2: 0,
+      //     y2: 1,
+      //   },
+      //   stops: [
+      //     [0, Highcharts.getOptions().colors[0]],
+      //     [1, 'white'],
+      //   ],
+      // },
       threshold: null,
     },
     // PIE STYLES
@@ -184,15 +184,15 @@ const highchartsDarkTheme: ThemeProps = {
       marker: {
         lineColor: colors.border_dark,
       },
-      area: {
-        shadow: false,
-        states: {
-          hover: {
-            lineWidth: 1,
-          },
-        },
-        threshold: null,
-      },
+      // area: {
+      //   shadow: false,
+      //   states: {
+      //     hover: {
+      //       lineWidth: 1,
+      //     },
+      //   },
+      //   threshold: null,
+      // },
     },
 
     //TREEMAP CHART STYLES
@@ -210,7 +210,6 @@ const highchartsDarkTheme: ThemeProps = {
         colors.data_7,
         colors.data_8,
       ],
-      colorByPoint: true,
       dataLabels: {
         enabled: true,
         style: {
@@ -229,27 +228,27 @@ const highchartsDarkTheme: ThemeProps = {
       ],
       traverseUpButton: {
         position: { y: -50 },
-        text: '< Back',
-        theme: {
-          r: 4,
-          states: {
-            hover: {
-              style: {
-                fill: pbButtonHoverColor,
-              },
-            },
-          },
-          style: {
-            fill: colors.royal,
-            color: colors.white,
-            fontSize: `${typography.text_small}`,
-            fontWeight: typography.bold,
-            fontFamily: `${typography.font_family_base}`,
-          },
-          stroke: colors.royal,
-          height: 24,
-          width: 90,
-        },
+        // text: '< Back',
+        // theme: {
+        //   r: 4,
+        //   states: {
+        //     hover: {
+        //       style: {
+        //         fill: pbButtonHoverColor,
+        //       },
+        //     },
+        //   },
+        //   style: {
+        //     fill: colors.royal,
+        //     color: colors.white,
+        //     fontSize: `${typography.text_small}`,
+        //     fontWeight: typography.bold,
+        //     fontFamily: `${typography.font_family_base}`,
+        //   },
+        //   stroke: colors.royal,
+        //   height: 24,
+        //   width: 90,
+        // },
       },
     },
   },
