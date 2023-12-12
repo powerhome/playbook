@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -18,6 +18,7 @@ type CurrencyProps = {
   data?: {[key:string]:string},
   decimals?: 'default' | 'matching',
   emphasized?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   label?: string,
   size?: 'sm' | 'md' | 'lg',
@@ -42,6 +43,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     data = {},
     decimals = 'default',
     emphasized = true,
+    htmlOptions = {},
     id,
     unit,
     className,
@@ -65,6 +67,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
   const [whole, decimal = '00'] = amount.split('.')
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_currency_kit', align, size),
     globalProps(props),
@@ -96,6 +99,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

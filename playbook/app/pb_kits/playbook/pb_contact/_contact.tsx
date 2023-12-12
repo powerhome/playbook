@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -51,6 +51,7 @@ type ContactProps = {
   contactType?: string,
   contactValue: string,
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
 }
 
@@ -62,9 +63,11 @@ const Contact = (props: ContactProps): React.ReactElement => {
     contactType,
     contactValue,
     data = {},
+    htmlOptions = {},
     id } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_contact_kit'),
     globalProps(props),
@@ -74,6 +77,7 @@ const Contact = (props: ContactProps): React.ReactElement => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
 import datePickerHelper from './date_picker_helper'
@@ -25,6 +25,7 @@ type DatePickerProps = {
   format?: string,
   hideIcon?: boolean,
   hideLabel?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   inLine?: boolean,
   inputAria?: { [key: string]: string },
@@ -67,6 +68,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     format = 'm/d/Y',
     hideIcon = false,
     hideLabel = false,
+    htmlOptions = {},
     id,
     inLine = false,
     inputAria = {},
@@ -95,6 +97,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
 
@@ -158,6 +161,7 @@ useEffect(() => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

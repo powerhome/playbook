@@ -10,7 +10,7 @@ import solidGauge from "highcharts/modules/solid-gauge";
 import defaultColors from "../tokens/exports/_colors.scss";
 import typography from "../tokens/exports/_typography.scss";
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 
 type GaugeProps = {
@@ -22,6 +22,7 @@ type GaugeProps = {
   disableAnimation?: boolean;
   fullCircle?: boolean;
   height?: string;
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string;
   max?: number;
   min?: number;
@@ -45,6 +46,7 @@ const Gauge = ({
   disableAnimation = false,
   fullCircle = false,
   height = null,
+  htmlOptions = {},
   id,
   max = 100,
   min = 0,
@@ -61,7 +63,8 @@ const Gauge = ({
   ...props
 }: GaugeProps) => {
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+ const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   highchartsMore(Highcharts);
   solidGauge(Highcharts);
   const setupTheme = () => {
@@ -192,6 +195,7 @@ const Gauge = ({
         id: id,
         ...ariaProps,
         ...dataProps,
+        ...htmlProps,
       }}
       highcharts={Highcharts}
       options={options}

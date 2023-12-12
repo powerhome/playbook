@@ -6,6 +6,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps 
 } from '../utilities/props'
 import Icon from '../pb_icon/_icon'
 import Title from '../pb_title/_title'
@@ -17,6 +18,7 @@ type SelectableIconProps = {
   customIcon?: {[key: string] :SVGElement},
   disabled?: boolean,
   data?: Object,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   icon: string,
   inputId: string,
   inputs: string,
@@ -33,6 +35,7 @@ const SelectableIcon = ({
   customIcon,
   data = {},
   disabled = false,
+  htmlOptions = {},
   icon,
   inputId,
   inputs = 'enabled',
@@ -44,6 +47,7 @@ const SelectableIcon = ({
 }: SelectableIconProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(
     buildCss('pb_selectable_icon_kit', {
@@ -62,6 +66,7 @@ const SelectableIcon = ({
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classes}
     >
       {inputs === 'disabled' && (

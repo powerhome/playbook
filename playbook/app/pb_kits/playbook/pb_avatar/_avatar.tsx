@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Image from '../pb_image/_image'
@@ -12,6 +12,7 @@ export type AvatarProps = {
   className?: string,
   data?: {[key: string]: string},
   dark?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   imageAlt?: string,
   imageUrl?: string,
@@ -30,6 +31,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
     aria = {},
     className,
     data = {},
+    htmlOptions = {},
     name = null,
     id = '',
     imageAlt = '',
@@ -40,6 +42,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
   } = props
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss('pb_avatar_kit', `size_${size}`),
     globalProps(props),
@@ -58,6 +61,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

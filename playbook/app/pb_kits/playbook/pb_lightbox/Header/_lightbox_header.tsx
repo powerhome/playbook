@@ -6,6 +6,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps,
 } from "../../utilities/props";
 import { globalProps, GlobalProps } from "../../utilities/globalProps";
 import { LightboxContext } from "../_lightbox_context";
@@ -23,6 +24,7 @@ type LightboxHeaderProps = {
   className?: string;
   closeable?: boolean;
   data?: { [key: string]: string | number };
+  htmlOptions?: { [key: string]: string | number | boolean | Function };
   icon?: string;
   id?: string;
   onClickRight?: () => void;
@@ -38,6 +40,7 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
     children,
     className,
     data = {},
+    htmlOptions = {},
     onClickRight,
     spacing = "between",
     text,
@@ -48,7 +51,8 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
   } = props;
 
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const api: any = useContext(LightboxContext);
   const headerCSS = buildCss("lightbox_header");
   const headerSpacing = globalProps(props, { paddingY: "sm" });
@@ -112,6 +116,7 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
       <Flex
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classnames(headerCSS, headerSpacing, className)}
         spacing={spacing}
       >

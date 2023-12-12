@@ -8,12 +8,13 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
-} from '../utilities/props'
+  buildHtmlProps } from '../utilities/props'
 
 type BreadCrumbItemProps = {
   aria?: {[key: string]: string},
   className?: string,
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   component?: "a" | "span",
   [x:string]: any;
@@ -24,12 +25,14 @@ const BreadCrumbItem = (props: BreadCrumbItemProps): React.ReactElement => {
     aria = {},
     className,
     data = {},
+    htmlOptions = {},
     id,
     component = 'a',
     ...rest
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const Component = component || 'span';
   const css = classnames(
     buildCss('pb_bread_crumb_item_kit'),
@@ -41,6 +44,7 @@ const BreadCrumbItem = (props: BreadCrumbItemProps): React.ReactElement => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={css}
         id={id}
     >

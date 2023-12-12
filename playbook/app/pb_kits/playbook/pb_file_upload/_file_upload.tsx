@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useRef } from 'react'
 import { useDropzone, DropzoneInputProps, DropzoneRootProps } from 'react-dropzone'
 import classnames from 'classnames'
 
-import { buildCss, buildDataProps, noop } from '../utilities/props'
+import { buildCss, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import type { Callback } from '../types'
 
@@ -14,6 +14,7 @@ type FileUploadProps = {
   className?: string,
   customMessage?: string,
   data?: {[key: string]: string | number},
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   acceptedFilesDescription?: string,
   maxSize?: number,
   onFilesAccepted: Callback<File, File>,
@@ -31,6 +32,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     className,
     customMessage,
     data = {},
+    htmlOptions = {},
     maxSize,
     onFilesAccepted = noop,
     onFilesRejected = noop,
@@ -76,7 +78,8 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     })
   }
 
-  const dataProps = buildDataProps(data)
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions)
 
   const getDescription = () => {
     return customMessage
@@ -88,6 +91,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     <div
         className={classnames(buildCss('pb_file_upload_kit'), globalProps(props), className)}
         {...dataProps}
+        {...htmlProps}
         {...getRootProps()}
     >
       <Card>

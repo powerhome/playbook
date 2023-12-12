@@ -1,7 +1,7 @@
 import React from "react";
 
 import classnames from "classnames";
-import { buildCss, buildDataProps } from "../utilities/props";
+import { buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 import DateTime from '../pb_kit/dateTime';
 
@@ -15,6 +15,7 @@ type DateStackedProps = {
   dark?: boolean;
   data?: string;
   date: Date;
+  htmlOptions?: { [key: string]: string | number | boolean | Function };
   size?: "sm" | "md";
   id?: string;
   reverse?: boolean;
@@ -34,6 +35,7 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
     dark = false,
     date,
     data={},
+    htmlOptions={},
     size = "sm",
   } = props;
   const classes = classnames(
@@ -48,12 +50,15 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
   const currentYear = new Date().getFullYear()
   const inputYear = DateTime.toYear(date);
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
     <>
       {bold == false ? (
-        <div {...dataProps}
-            className={classes}
+        <div 
+          {...dataProps}
+          {...htmlProps}
+          className={classes}
         >
           <div className="pb_date_stacked_day_month">
             <Caption text={DateTime.toMonth(date).toUpperCase()} />
@@ -66,8 +71,10 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
           {currentYear != inputYear && <Caption size="xs">{inputYear}</Caption>}
         </div>
       ) : (
-          <div {...dataProps}
-              className={classes}
+          <div 
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
           >
             <div className="pb_date_stacked_day_month">
               <Title

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { globalProps } from "../utilities/globalProps";
-import { buildAriaProps, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
 
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
@@ -21,6 +21,7 @@ type BarGraphProps = {
   className?: string;
   id: string;
   pointStart: number;
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   subTitle?: string;
   title: string;
   type?: string;
@@ -46,6 +47,7 @@ const BarGraph = ({
   chartData,
   className = "pb_bar_graph",
   colors,
+  htmlOptions = {},
   id,
   pointStart,
   subTitle,
@@ -64,7 +66,8 @@ const BarGraph = ({
   ...props
 }: BarGraphProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const setupTheme = () => {
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
@@ -135,6 +138,7 @@ const BarGraph = ({
           id: id,
           ...ariaProps,
           ...dataProps,
+          ...htmlProps
         }}
         highcharts={Highcharts}
         options={options}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import classnames from "classnames"
 import { globalProps, GlobalProps } from "../utilities/globalProps"
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
 import Checkbox from "../pb_checkbox/_checkbox"
 import Radio from "../pb_radio/_radio"
 import Body from "../pb_body/_body"
@@ -24,6 +24,7 @@ type MultiLevelSelectProps = {
   aria?: { [key: string]: string }
   className?: string
   data?: { [key: string]: string }
+  htmlOptions?: {[key: string]: string | number | boolean | Function}
   id?: string
   inputDisplay?: "pills" | "none"
   inputName?: string
@@ -40,6 +41,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     aria = {},
     className,
     data = {},
+    htmlOptions = {},
     id,
     inputDisplay = "pills",
     inputName,
@@ -53,6 +55,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss("pb_multi_level_select"),
     globalProps(props),
@@ -418,6 +421,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

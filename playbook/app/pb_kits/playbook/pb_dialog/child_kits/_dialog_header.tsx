@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../../utilities/props'
 import { globalProps, GlobalProps } from '../../utilities/globalProps'
 
 import { CloseIcon } from '../_close_icon'
@@ -14,6 +14,7 @@ type DialogHeaderProps = {
   className?: string,
   closeable?: boolean,
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   padding?: string,
   separator?: boolean,
@@ -28,6 +29,7 @@ const DialogHeader = (props: DialogHeaderProps): React.ReactElement => {
     children,
     className,
     data = {},
+    htmlOptions = {},
     spacing = "between",
     closeable = true,
     separator = true,
@@ -35,6 +37,7 @@ const DialogHeader = (props: DialogHeaderProps): React.ReactElement => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const api = useContext(DialogContext)
   const headerCSS = buildCss("dialog_header")
   const headerSpacing = globalProps(props)
@@ -46,6 +49,7 @@ const DialogHeader = (props: DialogHeaderProps): React.ReactElement => {
       <Flex
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={classnames(headerCSS, headerSpacing, className)}
           spacing={spacing}
       >

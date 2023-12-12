@@ -3,7 +3,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import Caption from '../pb_caption/_caption'
 import Title from '../pb_title/_title'
@@ -16,6 +16,7 @@ type WeekdayStackedProps = {
   dark?: boolean,
   data?: object,
   date: Date,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   variant?: "day_only" | "month_day" | "expanded",
   compact?: boolean,
@@ -46,6 +47,7 @@ const WeekdayStacked = (props: WeekdayStackedProps) => {
     dark = false,
     data = {},
     date = new Date(),
+    htmlOptions = {},
     id,
     variant = 'month_day',
     compact = false,
@@ -53,6 +55,7 @@ const WeekdayStacked = (props: WeekdayStackedProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_weekday_stacked_kit', align),
     globalProps(props),
@@ -63,6 +66,7 @@ const WeekdayStacked = (props: WeekdayStackedProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

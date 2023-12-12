@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import classnames from "classnames";
 import Modal from "react-modal";
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 
 import Body from "../pb_body/_body";
@@ -26,6 +26,7 @@ type DialogProps = {
   closeable: boolean;
   confirmButton?: string;
   data?: {[key: string]: string},
+  htmlOptions?: { [key: string]: string | number | boolean | Function };
   id?: string;
   fullHeight?: boolean;
   loading?: boolean;
@@ -51,6 +52,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     confirmButton,
     className,
     data = {},
+    htmlOptions = {},
     id,
     size = "md",
     children,
@@ -69,7 +71,8 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     trigger,
   } = props;
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions);
   const dialogClassNames = {
     base: classnames("pb_dialog", buildCss("pb_dialog", size, placement)),
     afterOpen: "pb_dialog_after_open",
@@ -164,9 +167,11 @@ const Dialog = (props: DialogProps): React.ReactElement => {
 
   return (
     <DialogContext.Provider value={api}>
-      <div {...ariaProps}
-          {...dataProps}
-          className={classes}
+      <div 
+        {...ariaProps} 
+        {...dataProps}
+        {...htmlProps} 
+        className={classes}
       >
         <Modal
             ariaHideApp={false}

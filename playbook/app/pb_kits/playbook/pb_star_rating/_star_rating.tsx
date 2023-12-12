@@ -1,7 +1,7 @@
 import React from "react"
 import classnames from "classnames"
 
-import { buildAriaProps, buildDataProps } from "../utilities/props"
+import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props"
 
 import Icon from "../pb_icon/_icon"
 
@@ -11,6 +11,7 @@ type StarRatingProps = {
   data?: object,
   fixedWidth?: boolean,
   hideRating: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   icon?: string,
   id?: string,
   rating: number,
@@ -20,12 +21,14 @@ const StarRating = ({
   aria = {},
   className,
   data = {},
+  htmlOptions = {},
   hideRating = false,
   id,
   rating = 0,
 }: StarRatingProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const css = classnames([
     "pb_star_rating_kit", className,
   ])
@@ -42,6 +45,7 @@ const StarRating = ({
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={css}
         id={id}
     >

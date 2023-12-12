@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
 
@@ -21,6 +21,7 @@ type ButtonPropTypes = {
   form?: string,
   fullWidth?: boolean,
   highlight?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   icon?: string,
   iconRight?: boolean,
   id?: string,
@@ -73,6 +74,7 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     count,
     data = {},
     disabled,
+    htmlOptions = {},
     icon = null,
     iconRight = false,
     id,
@@ -91,6 +93,8 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+
   const css = classnames(
     buttonClassName(props),
     globalProps(props),
@@ -146,15 +150,16 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     if (link) {
       return (
         <a
-            {...ariaProps}
-            {...dataProps}
-            className={css}
-            href={link}
-            id={id}
-            rel={target !== "child" ? "noreferrer" : null}
-            role="link"
-            tabIndex={tabIndex}
-            target={getTargetAttribute()}
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
+          className={css}
+          href={link}
+          id={id}
+          rel={target !== "child" ? "noreferrer" : null}
+          role="link"
+          tabIndex={tabIndex}
+          target={getTargetAttribute()}
         >
           {ifLoading()}
         </a>
@@ -162,17 +167,18 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     } else if (variant === "reaction") {
       return (
         <button
-            {...ariaProps}
-            {...dataProps}
-            className={css}
-            disabled={disabled}
-            form={form}
-            id={id}
-            onClick={onClick}
-            role="button"
-            tabIndex={tabIndex}
-            type={htmlType}
-            value={value}
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
+          className={css}
+          disabled={disabled}
+          form={form}
+          id={id}
+          onClick={onClick}
+          role="button"
+          tabIndex={tabIndex}
+          type={htmlType}
+          value={value}
         >
           {icon && isValidEmoji(icon) && (
             <Flex align='center'>
@@ -200,17 +206,18 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     } else {
       return (
         <button
-            {...ariaProps}
-            {...dataProps}
-            className={css}
-            disabled={disabled}
-            form={form}
-            id={id}
-            onClick={onClick}
-            role="button"
-            tabIndex={tabIndex}
-            type={htmlType}
-            value={value}
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
+          className={css}
+          disabled={disabled}
+          form={form}
+          id={id}
+          onClick={onClick}
+          role="button"
+          tabIndex={tabIndex}
+          type={htmlType}
+          value={value}
         >
           {ifLoading()}
         </button>

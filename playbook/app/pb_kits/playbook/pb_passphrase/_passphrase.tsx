@@ -3,7 +3,7 @@
 import React, { useCallback, useMemo, useState } from "react"
 import classnames from "classnames"
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
 import { globalProps } from "../utilities/globalProps"
 
 import Body from '../pb_body/_body'
@@ -20,6 +20,7 @@ type PassphraseProps = {
   className?: string,
   data?: object,
   dark?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   inputProps?: {},
   label?: string,
@@ -37,6 +38,7 @@ const Passphrase = (props: PassphraseProps) => {
     confirmation = false,
     data = {},
     dark = false,
+    htmlOptions = {},
     id,
     inputProps = {},
     label = confirmation ? "Confirm Passphrase" : "Passphrase",
@@ -82,7 +84,8 @@ const Passphrase = (props: PassphraseProps) => {
     globalProps(props),
     className
   )
-  const dataProps = buildDataProps(data)
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions)
 
   const popoverReference = (
     <CircleIconButton
@@ -98,6 +101,7 @@ const Passphrase = (props: PassphraseProps) => {
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classes}
       id={id}
     >

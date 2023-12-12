@@ -4,7 +4,7 @@ import React from 'react'
 import { get } from 'lodash'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import type { ProductColors, CategoryColors, BackgroundColors } from '../types/colors'
 
@@ -16,6 +16,7 @@ type CardPropTypes = {
   children: React.ReactChild[] | React.ReactChild | number,
   className?: string,
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   highlight?: {
     position?: "side" | "top",
     color?: string,
@@ -78,6 +79,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
     className,
     data = {},
     highlight = {},
+    htmlOptions = {},
     selected = false,
     tag = 'div',
   } = props
@@ -90,6 +92,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
   })
   const ariaProps: {[key: string]: string} = buildAriaProps(aria)
   const dataProps: {[key: string]: string} = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
 
   // coerce to array
   const cardChildren = React.Children.toArray(children)
@@ -113,6 +116,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
     <Tag
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classnames(cardCss, globalProps(props), className)}
     >
       {subComponentTags('Header')}
