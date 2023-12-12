@@ -2,16 +2,17 @@ import React from "react"
 import DatePicker from "../_date_picker"
 import Caption from "../../pb_caption/_caption"
 
-const DatePickerQuickPickCustom = (props) => (
+const DatePickerQuickPickCustomOverride = (props) => (
   <>
-   <DatePicker
+    <DatePicker
+      marginTop='lg'
       allowInput
       mode='range'
-      pickerId='date-picker-quick-pick-custom-override'
+      pickerId='date-picker-quick-pick-custom'
       placeholder='mm/dd/yyyy to mm/dd/yyyy'
       customQuickPickDates={{
+        override: false,
         dates: [
-          // Allow Playbook to handle the logic...
           {
             label: "Last 15 months",
             value: {
@@ -19,7 +20,6 @@ const DatePickerQuickPickCustom = (props) => (
               amount: 15,
             },
           },
-          // Or, be explicit with an exact date range for more control...
           {
             label: "First Week of June 2022",
             value: ["06/01/2022", "06/07/2022"],
@@ -32,4 +32,4 @@ const DatePickerQuickPickCustom = (props) => (
   </>
 )
 
-export default DatePickerQuickPickCustom
+export default DatePickerQuickPickCustomOverride

@@ -5,6 +5,8 @@ module Playbook
     class DatePicker < Playbook::KitBase
       prop :allow_input, type: Playbook::Props::Boolean,
                          default: false
+      prop :custom_quick_pick_dates, type: Playbook::Props::HashProp,
+                                      default: {}
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
       prop :default_date, type: Playbook::Props::String,
@@ -79,6 +81,7 @@ module Playbook
       def date_picker_config
         {
           allowInput: allow_input,
+          customQuickPickDates: custom_quick_pick_dates,
           defaultDate: default_date,
           disableDate: disable_date,
           disableRange: disable_range,

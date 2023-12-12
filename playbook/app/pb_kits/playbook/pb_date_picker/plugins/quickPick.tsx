@@ -96,31 +96,34 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
 
 
     
-    if (customQuickPickDates.dates.length && customQuickPickDates.override === false) {
-      customQuickPickDates.dates.forEach((dateRange: any) => {
-        if (Array.isArray(dateRange.dates)) {
-          ranges[dateRange.label] = dateRange.dates
-        } else {
-          ranges[dateRange.label] = calculateDateRange(
-            dateRange.dates.timePeriod,
-            dateRange.dates.amount
-          )
-        }
-      })
-    } else if(customQuickPickDates.dates.length && customQuickPickDates.override !== false) {
-     // ignore all the default ranges and use only the custom ranges
-      ranges = {}
-      customQuickPickDates.dates.forEach((dateRange: any) => {
-        if (Array.isArray(dateRange.dates)) {
-          ranges[dateRange.label] = dateRange.dates.map(dateStr => new Date(dateStr));
-        } else {
-          ranges[dateRange.label] = calculateDateRange(
-            dateRange.dates.timePeriod,
-            dateRange.dates.amount
-          )
-        }
-      })
+    if(Object.keys(customQuickPickDates).length !== 0) {
+      if (customQuickPickDates.dates.length && customQuickPickDates.override === false) {
+        customQuickPickDates.dates.forEach((item: any) => {
+          if (Array.isArray(item.value)) {
+            ranges[item.label] = item.value.map(dateStr => new Date(dateStr));
+          } else {
+            ranges[item.label] = calculateDateRange(
+              item.value.timePeriod,
+              item.value.amount
+            )
+          }
+        })
+      } else if(customQuickPickDates.dates.length && customQuickPickDates.override !== false) {
+       // ignore all the default ranges and use only the custom ranges
+        ranges = {}
+        customQuickPickDates.dates.forEach((item: any) => {
+          if (Array.isArray(item.value)) {
+            ranges[item.label] = item.value.map(dateStr => new Date(dateStr));
+          } else {
+            ranges[item.label] = calculateDateRange(
+              item.value.timePeriod,
+              item.value.amount
+            )
+          }
+        })
+      }
     }
+    
 
 
 
