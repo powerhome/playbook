@@ -144,13 +144,13 @@ const Background = (props: BackgroundProps): React.ReactElement => {
   
   return (
     <Tag
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      alt={alt}
-      className={classes}
-      id={id}
-      style={backgroundStyle}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        alt={alt}
+        className={classes}
+        id={id}
+        style={backgroundStyle}
     >
       {children}
     </Tag>

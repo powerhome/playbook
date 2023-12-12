@@ -150,16 +150,16 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     if (link) {
       return (
         <a
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={css}
-          href={link}
-          id={id}
-          rel={target !== "child" ? "noreferrer" : null}
-          role="link"
-          tabIndex={tabIndex}
-          target={getTargetAttribute()}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={css}
+            href={link}
+            id={id}
+            rel={target !== "child" ? "noreferrer" : null}
+            role="link"
+            tabIndex={tabIndex}
+            target={getTargetAttribute()}
         >
           {ifLoading()}
         </a>
@@ -167,18 +167,18 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     } else if (variant === "reaction") {
       return (
         <button
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={css}
-          disabled={disabled}
-          form={form}
-          id={id}
-          onClick={onClick}
-          role="button"
-          tabIndex={tabIndex}
-          type={htmlType}
-          value={value}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={css}
+            disabled={disabled}
+            form={form}
+            id={id}
+            onClick={onClick}
+            role="button"
+            tabIndex={tabIndex}
+            type={htmlType}
+            value={value}
         >
           {icon && isValidEmoji(icon) && (
             <Flex align='center'>
@@ -206,18 +206,18 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     } else {
       return (
         <button
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={css}
-          disabled={disabled}
-          form={form}
-          id={id}
-          onClick={onClick}
-          role="button"
-          tabIndex={tabIndex}
-          type={htmlType}
-          value={value}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={css}
+            disabled={disabled}
+            form={form}
+            id={id}
+            onClick={onClick}
+            role="button"
+            tabIndex={tabIndex}
+            type={htmlType}
+            value={value}
         >
           {ifLoading()}
         </button>
