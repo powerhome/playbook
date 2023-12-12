@@ -1,4 +1,4 @@
-
+![date-alignment](https://github.com/powerhome/playbook/assets/92755007/094761cb-5151-4de5-a8e1-f905455c2aca)
 
 ```swift
 
