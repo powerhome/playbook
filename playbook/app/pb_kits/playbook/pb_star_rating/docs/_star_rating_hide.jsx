@@ -15,6 +15,14 @@ const StarRatingHide = (props) => (
     <StarRating
         layoutOption={"number"}
         paddingBottom="xs"
+        rating={2.8}
+        {...props}
+    />
+
+
+    <StarRating
+        layoutOption={"number"}
+        paddingBottom="xs"
         rating={3}
         {...props}
     />

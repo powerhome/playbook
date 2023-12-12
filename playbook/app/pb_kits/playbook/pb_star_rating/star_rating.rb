@@ -25,8 +25,12 @@ module Playbook
                              values: %w[fill outline],
                              default: "fill"
 
+      def one_decimal_rating
+        rating.to_f.round(1)
+      end
+
       def star_count
-        rating.floor > denominator_style ? denominator_style : rating.floor
+        rating.round > denominator_style ? denominator_style : rating.round
       end
 
       def denominator_style
@@ -34,7 +38,7 @@ module Playbook
       end
 
       def empty_stars
-        (denominator_style - rating.floor).negative? ? 0 : denominator_style - rating.floor
+        (denominator_style - star_count).negative? ? 0 : denominator_style - star_count
       end
 
       def star_color

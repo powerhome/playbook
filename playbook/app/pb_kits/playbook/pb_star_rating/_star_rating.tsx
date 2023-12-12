@@ -50,9 +50,8 @@ const StarRating = (props: StarRatingProps) => {
   const denominatorStyle = layoutOption === "onestar" ? 1 : denominator
   const activeStars = Math.round(rating) > denominatorStyle ? denominatorStyle : Math.round(rating)
   const emptyStars = denominatorStyle - Math.round(rating) < 0 ? 0 : denominatorStyle - Math.round(rating)
-  // let iconSize = ``
+  const oneDecimalRating = rating.toFixed(1)
   let iconSize = `pb_star_${size}`
-  // let iconDivClass = `pb_star_padding_${size}`
 
   const starYellow = (
     <svg className="iamyellow"  viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,7 +95,7 @@ const StarRating = (props: StarRatingProps) => {
         <>
           {size === 'xs' && (
               <Caption
-                text={rating.toString()}
+                text={oneDecimalRating.toString()}
                 size="xs"
                 paddingRight="xs"
                 dark={dark}
@@ -105,7 +104,7 @@ const StarRating = (props: StarRatingProps) => {
             )}
             {size === 'sm' && (
               <Caption
-                text={rating.toString()}
+                text={oneDecimalRating.toString()}
                 size="xs"
                 paddingRight="xs"
                 dark={dark}
@@ -114,18 +113,21 @@ const StarRating = (props: StarRatingProps) => {
             )}
             {size === 'md' && (
               <Body
-                text={rating.toString()}
+                text={oneDecimalRating.toString()}
                 paddingRight="xs"
                 dark={dark}
+                color="light"
                 className="pb_star_rating_number_md"
               />
             )}
             {size === 'lg' && (
               <Title
-                text={rating.toString()}
+                text={oneDecimalRating.toString()}
                 size={2}
                 paddingRight="sm"
                 dark={dark}
+                color="light"
+                bold={false}
                 className="pb_star_rating_number_lg"
               />
             )}
@@ -181,7 +183,7 @@ const StarRating = (props: StarRatingProps) => {
             {size === 'xs' && (
               <Caption
                   text={`${rating.toString()} of ${denominator}`}
-                  size="sm"
+                  size="xs"
                   dark={dark}
                   className="pb_star_rating_number_sm"
               />
@@ -189,7 +191,7 @@ const StarRating = (props: StarRatingProps) => {
             {size === 'sm' && (
               <Caption
                   text={`${rating.toString()} of ${denominator}`}
-                  size="sm"
+                  size="xs"
                   dark={dark}
                   className="pb_star_rating_number_sm"
               />
@@ -198,6 +200,7 @@ const StarRating = (props: StarRatingProps) => {
               <Body
                   text={`${rating.toString()} of ${denominator}`}
                   dark={dark}
+                  color="light"
                   className="pb_star_rating_number_md"
               />
             )}
@@ -206,6 +209,8 @@ const StarRating = (props: StarRatingProps) => {
                   text={`${rating.toString()} of ${denominator}`}
                   size={2}
                   dark={dark}
+                  color="light"
+                  bold={false}
                   className="pb_star_rating_number_lg"
               />
             )}
