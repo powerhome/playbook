@@ -26,7 +26,7 @@ type DialogProps = {
   closeable: boolean;
   confirmButton?: string;
   data?: {[key: string]: string},
-  htmlOptions?: { [key: string]: string | number | boolean | Function };
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   fullHeight?: boolean;
   loading?: boolean;
@@ -168,10 +168,10 @@ const Dialog = (props: DialogProps): React.ReactElement => {
   return (
     <DialogContext.Provider value={api}>
       <div 
-        {...ariaProps} 
-        {...dataProps}
-        {...htmlProps} 
-        className={classes}
+          {...ariaProps} 
+          {...dataProps}
+          {...htmlProps} 
+          className={classes}
       >
         <Modal
             ariaHideApp={false}

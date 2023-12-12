@@ -15,7 +15,7 @@ type PbDateProps = {
   aria?: { [key: string]: string };
   className?: string;
   data?: { [key: string]: string };
-  htmlOptions?: { [key: string]: string | number | boolean | Function };
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   showDayOfWeek?: boolean;
   showIcon?: boolean;
@@ -57,11 +57,11 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
 
   return (
     <div 
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
     >
       {unstyled
         ? <>

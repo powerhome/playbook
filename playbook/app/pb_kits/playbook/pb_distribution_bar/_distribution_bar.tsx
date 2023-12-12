@@ -7,7 +7,7 @@ type DistributionBarProps = {
   className?: string,
   colors: [],
   data?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: "lg" | "sm",
   widths?: number[],
@@ -45,8 +45,8 @@ const DistributionBar = (props: DistributionBarProps): React.ReactElement => {
 
   return (
     <div 
-      className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}  
-      {...htmlProps}
+        className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}  
+        {...htmlProps}
     >
       {barValues(normalizedValues, colors)}
     </div>

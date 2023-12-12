@@ -15,7 +15,7 @@ type DateStackedProps = {
   dark?: boolean;
   data?: string;
   date: Date;
-  htmlOptions?: { [key: string]: string | number | boolean | Function };
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   size?: "sm" | "md";
   id?: string;
   reverse?: boolean;
@@ -56,9 +56,9 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
     <>
       {bold == false ? (
         <div 
-          {...dataProps}
-          {...htmlProps}
-          className={classes}
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
         >
           <div className="pb_date_stacked_day_month">
             <Caption text={DateTime.toMonth(date).toUpperCase()} />
@@ -72,9 +72,9 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
         </div>
       ) : (
           <div 
-            {...dataProps}
-            {...htmlProps}
-            className={classes}
+              {...dataProps}
+              {...htmlProps}
+              className={classes}
           >
             <div className="pb_date_stacked_day_month">
               <Title
