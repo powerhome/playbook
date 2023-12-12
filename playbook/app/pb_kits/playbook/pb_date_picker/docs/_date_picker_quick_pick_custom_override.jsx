@@ -5,12 +5,8 @@ import Caption from "../../pb_caption/_caption"
 const DatePickerQuickPickCustomOverride = (props) => (
   <>
     <DatePicker
-      marginTop='lg'
-      allowInput
-      mode='range'
-      pickerId='date-picker-quick-pick-custom'
-      placeholder='mm/dd/yyyy to mm/dd/yyyy'
-      customQuickPickDates={{
+        allowInput
+        customQuickPickDates={{
         override: false,
         dates: [
           {
@@ -26,8 +22,12 @@ const DatePickerQuickPickCustomOverride = (props) => (
           },
         ],
       }}
-      selectionType='quickpick'
-      {...props}
+        marginTop='lg'
+        mode='range'
+        pickerId='date-picker-quick-pick-custom'
+        placeholder='mm/dd/yyyy to mm/dd/yyyy'
+        selectionType='quickpick'
+        {...props}
     />
   </>
 )

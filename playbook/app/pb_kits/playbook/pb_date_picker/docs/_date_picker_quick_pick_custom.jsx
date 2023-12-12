@@ -5,11 +5,8 @@ import Caption from "../../pb_caption/_caption"
 const DatePickerQuickPickCustom = (props) => (
   <>
    <DatePicker
-      allowInput
-      mode='range'
-      pickerId='date-picker-quick-pick-custom-override'
-      placeholder='mm/dd/yyyy to mm/dd/yyyy'
-      customQuickPickDates={{
+       allowInput
+       customQuickPickDates={{
         dates: [
           // Allow Playbook to handle the logic...
           {
@@ -26,9 +23,12 @@ const DatePickerQuickPickCustom = (props) => (
           },
         ],
       }}
-      selectionType='quickpick'
-      {...props}
-    />
+       mode='range'
+       pickerId='date-picker-quick-pick-custom-override'
+       placeholder='mm/dd/yyyy to mm/dd/yyyy'
+       selectionType='quickpick'
+       {...props}
+   />
   </>
 )
 
