@@ -14,7 +14,7 @@ type WalkthroughProps = {
   className?: string,
   continuous?: boolean,
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   run?: boolean,
   steps?: [],

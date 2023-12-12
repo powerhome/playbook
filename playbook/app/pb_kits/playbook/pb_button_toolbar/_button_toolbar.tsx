@@ -13,7 +13,7 @@ type ButtonToolbarProps = {
   className?: string,
   connected?: boolean,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   onClick?: React.MouseEventHandler<HTMLSpanElement>,
   orientation?: "horizontal" | "vertical",

@@ -21,7 +21,7 @@ type NavItemProps = {
   data?: object;
   dark?: boolean;
   fontSize?: "normal" | "small";
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   iconLeft?: string;
   iconRight?: string | string[];
   onIconRightClick?: () => void;

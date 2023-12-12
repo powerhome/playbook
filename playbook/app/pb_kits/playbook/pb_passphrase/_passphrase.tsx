@@ -20,7 +20,7 @@ type PassphraseProps = {
   className?: string,
   data?: object,
   dark?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   inputProps?: {},
   label?: string,

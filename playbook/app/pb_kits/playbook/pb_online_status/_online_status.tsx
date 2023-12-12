@@ -8,7 +8,7 @@ type OnlineStatusProps = {
   aria?: {[key: string]: string},
   className?: string,
   data?: {[key: string]: string | number},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   status?: "online" | "offline" | "away",
 } & GlobalProps

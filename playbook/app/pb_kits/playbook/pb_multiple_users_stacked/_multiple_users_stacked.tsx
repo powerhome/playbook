@@ -12,7 +12,7 @@ type MultipleUsersStackedProps = {
   className?: string,
   dark?: boolean,
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   users: Array<{ [key: string]: string }>,
 }

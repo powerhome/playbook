@@ -14,7 +14,7 @@ type TimeStackedProps = {
   dark?: boolean,
   data?: { [key: string]: string },
   date?: Date,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   time?: number | Date,
   timeZone?: string,

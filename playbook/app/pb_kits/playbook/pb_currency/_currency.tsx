@@ -18,7 +18,7 @@ type CurrencyProps = {
   data?: {[key:string]:string},
   decimals?: 'default' | 'matching',
   emphasized?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
   size?: 'sm' | 'md' | 'lg',

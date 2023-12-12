@@ -13,7 +13,7 @@ type LegendProps = {
   color?: string,
   dark?: boolean,
   data?: object,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   prefixText?: string,
   text: string,

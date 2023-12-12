@@ -22,7 +22,7 @@ type StatChangeProps = {
   change?: 'increase' | 'decrease' | 'neutral',
   className?: string,
   icon?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   value?: string | number,
 }

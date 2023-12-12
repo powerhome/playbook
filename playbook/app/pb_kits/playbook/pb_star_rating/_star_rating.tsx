@@ -11,7 +11,7 @@ type StarRatingProps = {
   data?: object,
   fixedWidth?: boolean,
   hideRating: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   icon?: string,
   id?: string,
   rating: number,

@@ -10,7 +10,7 @@ type TimelineProps = {
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   orientation?: string,
   showDate?: boolean,

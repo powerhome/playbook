@@ -25,7 +25,7 @@ type TreemapChartProps = {
   drillable: boolean;
   grouped: boolean;
   height?: string;
-  htmlOptions?: {[key: string]: string | number | boolean | Function};
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},;
   id: number | string;
   title?: string;
   tooltipHtml: string;

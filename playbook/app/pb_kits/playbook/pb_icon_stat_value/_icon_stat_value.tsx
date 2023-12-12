@@ -16,7 +16,7 @@ type IconStatValueProps = {
   data?: object,
   dark?: boolean,
   icon: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   orientation?: "vertical" | "horizontal",
   size?: "sm" | "md" | "lg",

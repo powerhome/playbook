@@ -23,7 +23,7 @@ type CircleChartProps = {
   dataLabelHtml?: string;
   dataLabels?: boolean;
   height?: string;
-  htmlOptions?: { [key: string]: string | number | boolean | Function };
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   innerSize?: "sm" | "md" | "lg" | "none";
   legend?: boolean;

@@ -8,7 +8,7 @@ type ListItemProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
   data?: object,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   tabIndex?: number,
 }

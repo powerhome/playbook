@@ -23,7 +23,7 @@ type BackgroundProps = {
   className?: string,
   customColor?: string,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col',

@@ -13,7 +13,7 @@ type TitleProps = {
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   size?: SizeType | SizeResponsiveType,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",

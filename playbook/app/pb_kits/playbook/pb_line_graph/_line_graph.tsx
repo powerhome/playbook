@@ -22,7 +22,7 @@ type LineGraphProps = {
     data: number[];
   }[];
   gradient?: boolean;
-  htmlOptions?: {[key: string]: string | number | boolean | Function};
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},;
   id: string;
   pointStart: number;
   subTitle?: string;

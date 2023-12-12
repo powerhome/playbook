@@ -15,7 +15,7 @@ type BodyProps = {
   data?: {[key: string]: string},
   highlightedText?: string[],
   highlighting?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   status?: 'neutral' | 'negative' | 'positive',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',

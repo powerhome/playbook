@@ -12,7 +12,7 @@ import Icon from '../pb_icon/_icon'
 type TimeRangeInlineProps = {
   aria?: { [key: string]: string },
   className?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   data?: { [key: string]: string },
   alignment?: "left" | "center" | "vertical",

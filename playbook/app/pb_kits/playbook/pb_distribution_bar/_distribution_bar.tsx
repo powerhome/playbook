@@ -7,7 +7,7 @@ type DistributionBarProps = {
   className?: string,
   colors: [],
   data?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   size?: "lg" | "sm",
   widths?: number[],

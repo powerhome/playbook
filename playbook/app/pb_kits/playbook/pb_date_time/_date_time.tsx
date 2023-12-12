@@ -14,7 +14,7 @@ type DateTimeProps = {
   className?: string,
   data?: { [key: string]: string; },
   datetime: Date,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: "sm" | "md",
   showDayOfWeek: boolean,

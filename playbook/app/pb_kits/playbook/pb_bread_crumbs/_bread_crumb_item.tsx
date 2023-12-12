@@ -14,7 +14,7 @@ type BreadCrumbItemProps = {
   aria?: {[key: string]: string},
   className?: string,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   component?: "a" | "span",
   [x:string]: any;

@@ -18,7 +18,7 @@ type HomeAddressStreetProps = {
   data?: { [key: string]: string },
   dark?: boolean,
   emphasis: "street" | "city",
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   homeId: string,
   houseStyle: string,
   homeUrl: string,

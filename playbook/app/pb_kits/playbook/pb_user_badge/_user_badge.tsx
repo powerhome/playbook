@@ -10,7 +10,7 @@ type UserBadgeProps = {
   badge?: "million-dollar" | "veteran",
   className?: string,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   size?: "sm" | "md" | "lg",
 }

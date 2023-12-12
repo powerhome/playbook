@@ -11,7 +11,7 @@ type DetailProps = {
   color?: 'light' | 'default' | 'lighter' | 'link' | 'error' | 'success',
   dark?: boolean,
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,

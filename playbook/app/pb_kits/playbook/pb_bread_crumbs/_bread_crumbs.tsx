@@ -13,7 +13,7 @@ type BreadCrumbsProps = {
   aria?: {[key: string]: string},
   className?: string,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   text?: string,
   children?: React.ReactChild[] | React.ReactNode,

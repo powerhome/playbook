@@ -16,7 +16,7 @@ type UserProps = {
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   name?: string,
   orientation?: "horizontal" | "vertical",

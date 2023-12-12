@@ -12,7 +12,7 @@ export type AvatarProps = {
   className?: string,
   data?: {[key: string]: string},
   dark?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   imageAlt?: string,
   imageUrl?: string,
@@ -32,7 +32,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
     className,
     data = {},
     htmlOptions = {},
-    name = null,
+    name = undefined,
     id = '',
     imageAlt = '',
     imageUrl,
@@ -50,7 +50,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
   )
 
   const initials = name && firstTwoInitials(name)
-  dataProps['data-initials'] = initials
+  dataProps['data-initials'] = (initials as string)
 
   const [error, setError] = useState(false)
   const handleError = () => setError(true)

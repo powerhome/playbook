@@ -22,7 +22,7 @@ type CollapsibleProps = {
   iconSize?: IconSizes,
   onIconClick?: ()=> void,
   onClick?: ()=> void,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
 }
 

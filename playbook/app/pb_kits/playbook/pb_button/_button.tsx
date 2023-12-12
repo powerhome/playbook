@@ -21,7 +21,7 @@ type ButtonPropTypes = {
   form?: string,
   fullWidth?: boolean,
   highlight?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
   iconRight?: boolean,
   id?: string,

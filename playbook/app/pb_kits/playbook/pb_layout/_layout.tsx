@@ -12,7 +12,7 @@ type LayoutPropTypes = {
   dark?: boolean,
   data?: object,
   full?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   position?: "left" | "right",
   responsive?: boolean,
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",

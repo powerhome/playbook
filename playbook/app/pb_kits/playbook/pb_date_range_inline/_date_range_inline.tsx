@@ -16,7 +16,7 @@ type DateRangeInlineProps = {
   align?: "left" | "center" | "vertical";
   size?: "sm" | "xs";
   dark?: boolean;
-  htmlOptions?: {[key: string]: string | number | boolean | Function};
+  htmlOptions?: {[key: string]: string | number | boolean | (() => any)};
   icon?: boolean;
   startDate?: Date;
   endDate?: Date;

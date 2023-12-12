@@ -17,7 +17,7 @@ type TextInputProps = {
   dark?: boolean,
   disabled?: boolean,
   error?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   inline?: boolean,
   name: string,

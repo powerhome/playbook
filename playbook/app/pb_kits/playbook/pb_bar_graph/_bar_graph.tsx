@@ -21,7 +21,7 @@ type BarGraphProps = {
   className?: string;
   id: string;
   pointStart: number;
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   subTitle?: string;
   title: string;
   type?: string;

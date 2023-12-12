@@ -8,7 +8,7 @@ import { buildHtmlProps } from '../utilities/props'
 type HighlightProps = {
   className?: string,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
   id?: string,
   children?: React.ReactChild[] | React.ReactChild | string,
   text?: string,
