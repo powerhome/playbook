@@ -35,6 +35,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   const {
     allowInput,
     closeOnSelect = true,
+    customQuickPickDates = { override: true, dates: [] },
     defaultDate,
     disableDate,
     disableRange,
@@ -181,7 +182,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     onYearChange: [() => {
       yearChangeHook()
     }],
-    plugins: setPlugins(thisRangesEndToday, config.customQuickPickDates),
+    plugins: setPlugins(thisRangesEndToday, customQuickPickDates),
     position,
     positionElement: getPositionElement(positionElement),
     prevArrow: '<i class="far fa-angle-left"></i>',

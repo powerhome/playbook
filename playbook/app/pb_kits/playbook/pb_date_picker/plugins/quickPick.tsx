@@ -19,9 +19,14 @@ type pluginDataType = {
   rangesButtons: [] | any,
 }
 
+type customQuickPickDatesType = {
+  override: boolean,
+  dates: Date[] | Object[]
+}
+
 let activeLabel = ""
 
-const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: { override: boolean, dates: any[] }) => {
+const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: customQuickPickDatesType | undefined) => {
   return function (fp: FpTypes & any): any {
     const today = new Date()
     const yesterday = DateTime.getYesterdayDate(new Date())
@@ -76,7 +81,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: { ov
 
 
     // variable that holds the ranges available
-    const ranges = {
+    let ranges = {
       'Today': [today, today],
       'Yesterday': [yesterday, yesterday],
       'This week': [thisWeekStartDate, thisWeekEndDate],
@@ -89,8 +94,33 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: { ov
       'Last year': [lastYearStartDate, lastYearEndDate]
     }
 
- 
-    // {{ I NEED SOME LOGIC HERE TO HOOK IT ALL UP}}
+
+    
+    if (customQuickPickDates && customQuickPickDates.override === false) {
+      customQuickPickDates.dates.forEach((dateRange: any) => {
+        if (Array.isArray(dateRange.dates)) {
+          ranges[dateRange.label] = dateRange.dates
+        } else {
+          ranges[dateRange.label] = calculateDateRange(
+            dateRange.dates.timePeriod,
+            dateRange.dates.amount
+          )
+        }
+      })
+    } else if(customQuickPickDates && customQuickPickDates.override === true) {
+     // ignore all the default ranges and use only the custom ranges
+      ranges = {}
+      customQuickPickDates.dates.forEach((dateRange: any) => {
+        if (Array.isArray(dateRange.dates)) {
+          ranges[dateRange.label] = dateRange.dates.map(dateStr => new Date(dateStr));
+        } else {
+          ranges[dateRange.label] = calculateDateRange(
+            dateRange.dates.timePeriod,
+            dateRange.dates.amount
+          )
+        }
+      })
+    }
 
 
 

@@ -13,7 +13,7 @@ type DatePickerProps = {
   allowInput?: boolean,
   aria?: { [key: string]: string },
   className?: string,
-  customQuickPickDates: { override: true, dates: Date[] }[],
+  customQuickPickDates: { override: boolean, dates: any[] }[],
   dark?: boolean,
   data?: { [key: string]: string },
   defaultDate?: string,
