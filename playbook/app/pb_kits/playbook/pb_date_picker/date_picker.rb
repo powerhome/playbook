@@ -6,7 +6,7 @@ module Playbook
       prop :allow_input, type: Playbook::Props::Boolean,
                          default: false
       prop :custom_quick_pick_dates, type: Playbook::Props::HashProp,
-                                      default: {}
+                                     default: {}
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
       prop :default_date, type: Playbook::Props::String,
