@@ -21,7 +21,7 @@ type pluginDataType = {
 
 type customQuickPickDatesType = {
   override: boolean,
-  dates: Date[] | Object[]
+  dates: { label: string, value: string[] | { timePeriod: string, amount: number } }[],
 }
 
 let activeLabel = ""
@@ -78,10 +78,11 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
     };
   
 
+    type rangesType = {
+      [key: string]: Date[]
+    };
 
-
-    // variable that holds the ranges available
-    let ranges = {
+    let ranges: rangesType = {
       'Today': [today, today],
       'Yesterday': [yesterday, yesterday],
       'This week': [thisWeekStartDate, thisWeekEndDate],
@@ -92,15 +93,14 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
       'Last month': [lastMonthStartDate, lastMonthEndDate],
       'Last quarter': [lastQuarterStartDate, lastQuarterEndDate],
       'Last year': [lastYearStartDate, lastYearEndDate]
-    }
-
+    };
 
     
-    if(Object.keys(customQuickPickDates).length !== 0) {
+    if (customQuickPickDates && Object.keys(customQuickPickDates).length !== 0) {
       if (customQuickPickDates.dates.length && customQuickPickDates.override === false) {
-        customQuickPickDates.dates.forEach((item: any) => {
+        customQuickPickDates.dates.forEach((item) => {
           if (Array.isArray(item.value)) {
-            ranges[item.label] = item.value.map(dateStr => new Date(dateStr));
+            ranges[item.label] = item.value.map((dateStr: string) => new Date(dateStr));
           } else {
             ranges[item.label] = calculateDateRange(
               item.value.timePeriod,
@@ -109,11 +109,10 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
           }
         })
       } else if(customQuickPickDates.dates.length && customQuickPickDates.override !== false) {
-       // ignore all the default ranges and use only the custom ranges
         ranges = {}
-        customQuickPickDates.dates.forEach((item: any) => {
+        customQuickPickDates.dates.forEach((item) => {
           if (Array.isArray(item.value)) {
-            ranges[item.label] = item.value.map(dateStr => new Date(dateStr));
+            ranges[item.label] = item.value.map((dateStr: string) => new Date(dateStr));
           } else {
             ranges[item.label] = calculateDateRange(
               item.value.timePeriod,
@@ -123,10 +122,6 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
         })
       }
     }
-    
-
-
-
 
 
     // creating the ul element for the nav dropdown and giving it classnames
