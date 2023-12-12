@@ -38,7 +38,7 @@ const DialogFooter = (props: DialogFooterProps): React.ReactElement => {
 
   return (
     <div 
-      {...htmlProps}
+        {...htmlProps}
     >
       {separator &&
         <SectionSeparator />
