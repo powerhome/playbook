@@ -33,6 +33,7 @@ const DatePickerQuickPickCustom = (props) => (
     To append custom dates to the default quick pick dates, set the override prop to false.
 
     <DatePicker
+      marginTop="lg"
       allowInput
       mode='range'
       pickerId='date-picker-quick-pick-custom'

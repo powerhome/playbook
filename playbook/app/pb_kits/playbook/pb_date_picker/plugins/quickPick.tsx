@@ -96,7 +96,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
 
 
     
-    if (customQuickPickDates && customQuickPickDates.override === false) {
+    if (customQuickPickDates.dates.length && customQuickPickDates.override === false) {
       customQuickPickDates.dates.forEach((dateRange: any) => {
         if (Array.isArray(dateRange.dates)) {
           ranges[dateRange.label] = dateRange.dates
@@ -107,7 +107,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
           )
         }
       })
-    } else if(customQuickPickDates && customQuickPickDates.override === true) {
+    } else if(customQuickPickDates.dates.length && customQuickPickDates.override !== false) {
      // ignore all the default ranges and use only the custom ranges
       ranges = {}
       customQuickPickDates.dates.forEach((dateRange: any) => {
