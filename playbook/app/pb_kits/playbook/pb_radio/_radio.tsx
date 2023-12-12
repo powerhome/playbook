@@ -15,7 +15,7 @@ type RadioProps = {
   dark?: boolean,
   data?: {[key: string]: string},
   error?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label: string,
   name?: string,

@@ -9,7 +9,7 @@ import { buildHtmlProps } from '../utilities/props'
 
 type FormPillProps = {
   className?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   text: string,
   name?: string,

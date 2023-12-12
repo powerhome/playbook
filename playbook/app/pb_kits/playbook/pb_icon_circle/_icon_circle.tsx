@@ -13,7 +13,7 @@ type IconCircleProps = {
   dark?: boolean,
   data?: {[key:string]: string},
   icon: string,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: "base" | "xs" | "sm" | "md" | "lg" | "xl",
   variant?: | "default"

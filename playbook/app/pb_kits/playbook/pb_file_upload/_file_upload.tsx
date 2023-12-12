@@ -14,7 +14,7 @@ type FileUploadProps = {
   className?: string,
   customMessage?: string,
   data?: {[key: string]: string | number},
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   acceptedFilesDescription?: string,
   maxSize?: number,
   onFilesAccepted: Callback<File, File>,

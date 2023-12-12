@@ -28,7 +28,7 @@ type SelectableCardProps = {
   disabled?: boolean,
   error?: boolean,
   icon?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   inputId?: string,
   id?: string,
   multi?: boolean,

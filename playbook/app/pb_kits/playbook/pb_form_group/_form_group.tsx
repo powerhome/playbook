@@ -9,7 +9,7 @@ type FormGroupProps = {
   className?: string,
   data?: object,
   fullWidth?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
 }
 

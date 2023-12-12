@@ -15,7 +15,7 @@ type LightboxType = {
   currentPhotoIndex?: number,
   data?: {[key: string]: string | number},
   description?: string | any,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   photos: [],
   initialPhoto?: number,

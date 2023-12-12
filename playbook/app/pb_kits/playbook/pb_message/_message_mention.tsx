@@ -8,7 +8,7 @@ type MessageMentionProps = {
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   data?: object,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   variant: 'user' | 'self',
 }

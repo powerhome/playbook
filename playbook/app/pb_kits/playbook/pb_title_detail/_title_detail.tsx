@@ -13,7 +13,7 @@ type TitleDetailProps = {
   className?: string,
   data?: { [key: string]: string },
   detail: string,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   title: string,
 } & GlobalProps

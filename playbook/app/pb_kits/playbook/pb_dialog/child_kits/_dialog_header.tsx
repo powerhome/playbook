@@ -14,7 +14,7 @@ type DialogHeaderProps = {
   className?: string,
   closeable?: boolean,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   padding?: string,
   separator?: boolean,

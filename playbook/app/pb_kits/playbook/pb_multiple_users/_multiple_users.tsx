@@ -13,7 +13,7 @@ type MultipleUsersProps = {
   className?: string,
   dark?: boolean,
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   maxDisplayedUsers?: number,
   reverse?: boolean,

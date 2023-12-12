@@ -15,7 +15,7 @@ type SourceProps = {
   className?: string,
   data?: { [key: string]: string },
   hideIcon: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   source?: string,
   type: "events" | "inbound" | "outbound" | "prospecting" | "referral" | "retail" | "user",

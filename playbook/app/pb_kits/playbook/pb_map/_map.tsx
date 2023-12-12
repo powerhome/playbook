@@ -10,7 +10,7 @@ type MapProps = {
   children?: React.ReactChild[] | React.ReactNode,
   className?: string,
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   zoomBtns?: boolean,
   flyTo?: boolean, 

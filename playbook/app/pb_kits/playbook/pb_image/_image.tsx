@@ -8,7 +8,7 @@ type ImageType = {
   aria?: {[key: string]: string},
   className?: string,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   onError?: () => void,
   size?: "xs" | "sm" | "md" | "lg" | "xl",

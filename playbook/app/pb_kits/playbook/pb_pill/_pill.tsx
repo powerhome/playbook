@@ -9,7 +9,7 @@ type PillProps = {
   aria?: {[key: string]: string},
   className?: string,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   text: string,
   variant?: "success" | "warning" | "error" | "info" | "neutral" | "primary",

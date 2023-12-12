@@ -25,7 +25,7 @@ type PhoneNumberInputProps = {
   data?: { [key: string]: string },
   disabled?: boolean,
   error?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   initialCountry?: string,
   isValid?: (valid: boolean) => void,

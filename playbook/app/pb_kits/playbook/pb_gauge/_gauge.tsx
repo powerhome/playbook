@@ -22,7 +22,7 @@ type GaugeProps = {
   disableAnimation?: boolean;
   fullCircle?: boolean;
   height?: string;
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   max?: number;
   min?: number;

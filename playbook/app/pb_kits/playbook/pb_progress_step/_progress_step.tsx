@@ -7,7 +7,7 @@ type ProgressStepProps = {
   aria?: { [key: string]: string },
   className?: string,
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   children?: React.ReactChild[] | React.ReactChild,
   orientation?: "horizontal" | "vertical",

@@ -21,7 +21,7 @@ type FixedConfirmationToastProps = {
   closeable?: boolean,
   data?: string,
   horizontal?: "right" | "left" | "center",
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   multiLine?: boolean,
   onClose?: () => void,

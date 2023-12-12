@@ -10,7 +10,7 @@ type ProgressStepItemProps = {
   data?: { [key: string]: string },
   status?: "complete" | "active" | "inactive" | "hidden",
   children?: React.ReactNode | React.ReactNode[],
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
 }
 

@@ -12,7 +12,7 @@ type SectionSeparatorProps = {
   className?: string,
   dark?: boolean,
   data?: { [key: string]: string; },
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   lineStyle?: "solid" | "dashed",
   orientation?: "horizontal" | "vertical",
