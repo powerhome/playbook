@@ -17,7 +17,7 @@ type LabelValueProps = {
   dark?: boolean;
   data?: object;
   date?: Date;
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},;
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   label: string;
   value?: string;
