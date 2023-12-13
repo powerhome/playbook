@@ -1,6 +1,5 @@
 import React from "react"
 import DatePicker from "../_date_picker"
-import Caption from "../../pb_caption/_caption"
 
 const DatePickerQuickPickCustomOverride = (props) => (
   <>
