@@ -1,0 +1,7 @@
+@import "playbook-ui/dist/tokens/screen_sizes";
+
+.kit-container {
+  @media screen and (min-width: $screen-md-min) and (max-width: $screen-xl-max) {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}

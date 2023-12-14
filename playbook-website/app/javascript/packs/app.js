@@ -10,7 +10,8 @@ import {
 import App from '../components/Website'
 import ComponentList from '../components/Website/src/pages/ComponentList'
 import ComponentShow from '../components/Website/src/pages/ComponentShow'
-import { ComponentsLoader } from '../components/Website/src/hooks/loaders'
+import CategoryShow from '../components/Website/src/pages/CategoryShow'
+import { CategoryLoader, ComponentsLoader } from '../components/Website/src/hooks/loaders'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
     >
       <Route
           element={<ComponentList />}
+          loader={ComponentsLoader}
           path="kits"
       >
         <Route
@@ -32,6 +34,12 @@ const router = createBrowserRouter(
             path=":name"
         />
       </Route>
+      <Route
+          element={<CategoryShow />}
+          loader={CategoryLoader}
+          path="kit_category/:name"
+      />
+      
     </Route>
   )
 )
