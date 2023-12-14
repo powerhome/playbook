@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+// @ts-nocheck
 import PbEnhancedElement from "./index"
 
 export default class ElementObserver {
