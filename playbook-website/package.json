@@ -12,7 +12,7 @@
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@rails/webpacker": "5.2.1",
     "@tiptap/extension-document": "^2.1.12",
-    "@tiptap/extension-highlight": "^2.0.3",
+    "@tiptap/extension-highlight": "^2.1.13",
     "@tiptap/extension-horizontal-rule": "^2.0.3",
     "@tiptap/extension-link": "^2.0.2",
     "@tiptap/extension-paragraph": "^2.1.12",
