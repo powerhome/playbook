@@ -12,3 +12,9 @@ examples:
   - home_address_street_modified: Modified
   - home_address_street_link: Link
 
+  swift:
+  - home_address_street_default_swift: Default
+  - home_address_street_emphasis_swift: Emphasis
+  - home_address_street_modified_swift: Modified
+  - home_address_street_link_swift: Link
+  - home_address_street_props_swift: ""
