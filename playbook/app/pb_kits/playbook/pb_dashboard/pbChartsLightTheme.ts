@@ -3,9 +3,6 @@ import typography from '../tokens/exports/_typography.scss'
 
 import { ThemeProps } from './themeTypes'
 
-// import Highcharts from 'highcharts'
-
-// const pbButtonHoverColor = '#004ebb'
 const highchartsTheme: ThemeProps = {
   lang: {
     thousandsSep: ',',
@@ -104,11 +101,6 @@ const highchartsTheme: ThemeProps = {
       color: colors.text_lt_lighter,
     },
   },
-  // labels: {
-  //   style: {
-  //     color: colors.primary,
-  //   },
-  // },
   tooltip: {
     backgroundColor: {
       linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
@@ -137,20 +129,6 @@ const highchartsTheme: ThemeProps = {
 
   plotOptions: {
     series: {
-      // type: 'area',
-      // nullColor: colors.text_lt_lighter,
-      // fillColor: {
-      //   linearGradient: {
-      //     x1: 0,
-      //     y1: 0,
-      //     x2: 0,
-      //     y2: 1,
-      //   },
-      //   stops: [
-      //     [0, Highcharts.getOptions().colors[0]],
-      //     [1, 'white'],
-      //   ],
-      // },
       threshold: null,
     },
     // PIE STYLES
@@ -182,15 +160,6 @@ const highchartsTheme: ThemeProps = {
       marker: {
         lineColor: '#333',
       },
-      // area: {
-      //   shadow: false,
-      //   states: {
-      //     hover: {
-      //       lineWidth: 1,
-      //     },
-      //   },
-      //   threshold: null,
-      // },
     },
 
     //TREEMAP CHART STYLES
@@ -226,27 +195,6 @@ const highchartsTheme: ThemeProps = {
       ],
       traverseUpButton: {
         position: { y: -50 },
-      //   text: '< Back',
-      //   theme: {
-      //     r: 4,
-      //     states: {
-      //       hover: {
-      //         style: {
-      //           fill: pbButtonHoverColor,
-      //         },
-      //       },
-      //     },
-      //     style: {
-      //       fill: colors.royal,
-      //       color: colors.white,
-      //       fontSize: `${typography.text_small}`,
-      //       fontWeight: typography.bold,
-      //       fontFamily: `${typography.font_family_base}`,
-      //     },
-      //     stroke: colors.royal,
-      //     height: 24,
-      //     width: 90,
-      //   },
       },
     },
   },
