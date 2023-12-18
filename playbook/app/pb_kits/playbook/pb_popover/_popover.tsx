@@ -12,6 +12,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps,
   noop,
 } from "../utilities/props";
 
@@ -24,6 +25,7 @@ type PbPopoverProps = {
   className?: string;
   closeOnClick?: "outside" | "inside" | "any";
   data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string;
   offset?: boolean;
   reference: PopperReference & any;
@@ -63,6 +65,7 @@ const Popover = (props: PbPopoverProps) => {
     className,
     children,
     data = {},
+    htmlOptions = {},
     id,
     modifiers,
     offset,
@@ -92,7 +95,8 @@ const Popover = (props: PbPopoverProps) => {
     );
   };
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_popover_kit"),
     globalProps(props),
@@ -110,6 +114,7 @@ const Popover = (props: PbPopoverProps) => {
           <div
               {...ariaProps}
               {...dataProps}
+              {...htmlProps}
               className={classes}
               data-placement={placement}
               id={id}

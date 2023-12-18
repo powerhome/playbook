@@ -5,7 +5,7 @@ import intlTelInput from 'intl-tel-input'
 import 'intl-tel-input/build/css/intlTelInput.css'
 import 'intl-tel-input/build/js/utils.js'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import TextInput from '../pb_text_input/_text_input'
@@ -25,6 +25,7 @@ type PhoneNumberInputProps = {
   data?: { [key: string]: string },
   disabled?: boolean,
   error?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   initialCountry?: string,
   isValid?: (valid: boolean) => void,
@@ -71,6 +72,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
     dark = false,
     data = {},
     disabled = false,
+    htmlOptions = {},
     id = "",
     initialCountry = "",
     isValid = () => {
@@ -90,6 +92,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss("pb_phone_number_input"),
     globalProps(props),
@@ -256,7 +259,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   if (required) textInputProps.required = true
 
   return (
-    <div {...wrapperProps}>
+    <div 
+      {...wrapperProps} 
+      {...htmlProps}
+    >
       <TextInput
           ref={
             inputNode => {

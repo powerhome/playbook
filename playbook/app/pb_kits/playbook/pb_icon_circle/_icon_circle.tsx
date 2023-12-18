@@ -2,7 +2,7 @@ import React from 'react'
 
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Icon from '../pb_icon/_icon'
@@ -13,6 +13,7 @@ type IconCircleProps = {
   dark?: boolean,
   data?: {[key:string]: string},
   icon: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   size?: "base" | "xs" | "sm" | "md" | "lg" | "xl",
   variant?: | "default"
@@ -32,6 +33,7 @@ const IconCircle = (props: IconCircleProps) => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     icon,
     id,
     size = 'md',
@@ -40,6 +42,7 @@ const IconCircle = (props: IconCircleProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_icon_circle_kit', size, variant), globalProps(props), className)
 
 
@@ -47,6 +50,7 @@ const IconCircle = (props: IconCircleProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

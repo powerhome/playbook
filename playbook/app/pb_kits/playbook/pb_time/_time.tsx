@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 
-import { buildCss } from "../utilities/props";
+import { buildCss, buildHtmlProps } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import DateTime from '../pb_kit/dateTime';
 
@@ -16,6 +16,7 @@ type TimeProps = {
   date: Date;
   dark?: boolean;
   id?: string;
+  htmlOptions?: {[key: string]: string | number | boolean | Function};
   showIcon?: boolean;
   size?: "md" | "sm";
   showTimezone?: boolean;
@@ -28,6 +29,7 @@ const Time = (props: TimeProps) => {
     align,
     className,
     date,
+    htmlOptions = {},
     showIcon,
     size,
     timeZone,
@@ -41,8 +43,13 @@ const Time = (props: TimeProps) => {
     className
   );
 
+  const htmlProps = buildHtmlProps(htmlOptions);
+
   return (
-    <div className={classes}>
+    <div 
+      {...htmlProps}
+      className={classes} 
+    >
       {showIcon && (
         unstyled
           ? (

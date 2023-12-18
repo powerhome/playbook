@@ -6,8 +6,8 @@ import classnames from 'classnames'
 import {
   buildAriaProps,
   buildCss,
-  buildDataProps,
-} from '../utilities/props'
+  buildDataProps, 
+  buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Avatar from '../pb_avatar/_avatar'
@@ -20,6 +20,7 @@ type AvatarActionButtonProps = {
   className?: string,
   dark?: boolean,
   data?: Object,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   imageAlt?: string,
   imageUrl?: string,
@@ -38,6 +39,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     id,
     imageAlt = '',
     imageUrl,
@@ -50,6 +52,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(buildCss(
     'pb_avatar_action_button_kit',
@@ -68,6 +71,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

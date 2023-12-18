@@ -4,7 +4,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Badge from '../pb_badge/_badge'
@@ -14,6 +14,7 @@ type HashtagProps = {
   className?: string,
   dark?: boolean,
   data?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   newWindow?: boolean,
   rel?: string,
@@ -35,6 +36,7 @@ const Hashtag = (props: HashtagProps) => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     id,
     newWindow,
     rel,
@@ -45,12 +47,14 @@ const Hashtag = (props: HashtagProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_hashtag_kit'), globalProps(props), className)
 
   return (
     <span
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

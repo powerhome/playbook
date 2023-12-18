@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import PbTextarea from '.'
 import type { InputCallback } from '../types'
 
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -22,6 +22,7 @@ type TextareaProps = {
   data?: {[key: string]: string},
   disabled?: boolean,
   error?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   inline?: boolean,
   object?: string,
@@ -44,6 +45,7 @@ const Textarea = ({
   children,
   data = {},
   disabled,
+  htmlOptions = {},
   inline = false,
   resize = 'none',
   error,
@@ -71,7 +73,7 @@ const Textarea = ({
   const noCount = typeof characterCount !== 'undefined'
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
-
+  const htmlProps = buildHtmlProps(htmlOptions)
   const characterCounter = () => {
     return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
   }
@@ -84,6 +86,7 @@ const Textarea = ({
     <div
       {...ariaProps}
       {...dataProps}
+      {...htmlProps}
       className={classes}
     >
       <Caption text={label} />

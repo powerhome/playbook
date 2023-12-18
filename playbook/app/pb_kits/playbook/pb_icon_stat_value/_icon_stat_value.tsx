@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -16,6 +16,7 @@ type IconStatValueProps = {
   data?: object,
   dark?: boolean,
   icon: string,
+  htmlOptions?: {[key: string]: string | number | boolean | Function},
   id?: string,
   orientation?: "vertical" | "horizontal",
   size?: "sm" | "md" | "lg",
@@ -39,6 +40,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     className,
     data = {},
     dark = false,
+    htmlOptions = {},
     icon,
     id,
     orientation = 'horizontal',
@@ -50,6 +52,7 @@ const IconStatValue = (props: IconStatValueProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_icon_stat_value_kit', orientation, size, variant), globalProps(props),
     className
@@ -89,6 +92,7 @@ const IconStatValue = (props: IconStatValueProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

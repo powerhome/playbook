@@ -1,0 +1,12 @@
+@import "playbook-ui/dist/tokens/colors";
+
+.category-breadcrumb {
+  &-icon {
+    color: $text_lt_light;
+  }
+  .previous-route {
+    &:hover {
+      color: $text_lt_default;
+    }
+  }
+}

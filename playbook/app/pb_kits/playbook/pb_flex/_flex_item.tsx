@@ -1,11 +1,12 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss } from '../utilities/props'
+import { buildCss, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 type FlexItemPropTypes = {
   children: React.ReactNode[] | React.ReactNode,
   fixedSize?: string,
   grow?: boolean,
+  htmlOptions?: { [key: string]: string | number | boolean | Function },
   shrink?: boolean,
   className?: string,
   order?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'first' | 'none',
@@ -19,6 +20,7 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
     className,
     fixedSize,
     grow,
+    htmlOptions = {},
     shrink,
     flex = 'none',
     order = 'none',
@@ -34,8 +36,11 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
     fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
   const orderClass = order !== 'none' ? `order_${order}` : null
 
+  const htmlProps = buildHtmlProps(htmlOptions)
+
   return (
     <div
+        {...htmlProps}
         className={classnames(buildCss('pb_flex_item_kit', growClass, shrinkClass, flexClass, displayFlexClass), orderClass, alignSelfClass, globalProps(props), className)}
         style={fixedStyle}
     >
