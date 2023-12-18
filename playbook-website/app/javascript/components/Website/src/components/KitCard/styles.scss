@@ -1,0 +1,55 @@
+@import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/screen_sizes";
+@import "playbook-ui/dist/tokens/shadows";
+@import "playbook-ui/dist/tokens/typography";
+@import "playbook-ui/dist/tokens/animation-curves";
+@import "playbook-ui/dist/tokens/transition";
+
+.kit-card {
+  @media screen and (min-width: $screen-xs-min) {
+    min-height: 138px;
+  }
+  .icon {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity $transition_default $ease;
+    color: $primary;
+    .mobile {
+      display: none;
+    }
+    @media screen and (max-width: $screen-xs-min) {
+      &.mobile {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+      }
+      &.desktop {
+        display: none;
+      }
+    }
+  }
+  &-header {
+    height: 40px;
+  }
+  &-description {
+    font-size: $text-small !important;
+    @media screen and (max-width: $screen-xs-min) {
+      display: none;
+    }
+  }
+  &:hover {
+    box-shadow: $shadow_deeper;
+    cursor: pointer;
+    @media screen and (max-width: $screen-xs-min) {
+      box-shadow: none;
+    }
+    .icon {
+      &.desktop {
+        @media screen and (min-width: $screen-xs-min) {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

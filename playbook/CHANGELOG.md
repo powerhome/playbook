@@ -1,3 +1,33 @@
+# 13.13.0
+##### December 8, 2023
+
+List of changes:
+
+**Kit Enhancements:**
+
+- Adding Declaration Files [\#2924](https://github.com/powerhome/playbook/pull/2924) ([carloslimasd](https://github.com/carloslimasd))
+- Add Global Htmloptions Prop [\#2907](https://github.com/powerhome/playbook/pull/2907) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Fixed Bugs:**
+
+- Fix Typeahead Kit Doc Props [\#2906](https://github.com/powerhome/playbook/pull/2906) ([israel-molestina](https://github.com/israel-molestina))
+- Safe Check for Type Var [\#2892](https://github.com/powerhome/playbook/pull/2892) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Improvements:**
+
+- Scripts for Quicker Release Formatting [\#2934](https://github.com/powerhome/playbook/pull/2934) ([jasperfurniss](https://github.com/jasperfurniss))
+- Update Filter Docs for "no Filter Selected" [\#2927](https://github.com/powerhome/playbook/pull/2927) ([gavhuang](https://github.com/gavhuang))
+- Docs: Toggle [\#2893](https://github.com/powerhome/playbook/pull/2893) ([nickamantia](https://github.com/nickamantia))
+- Docs: Text Input [\#2887](https://github.com/powerhome/playbook/pull/2887) ([nickamantia](https://github.com/nickamantia))
+- Docs: Textarea [\#2886](https://github.com/powerhome/playbook/pull/2886) ([nickamantia](https://github.com/nickamantia))
+- Docs: Section Separator [\#2884](https://github.com/powerhome/playbook/pull/2884) ([nickamantia](https://github.com/nickamantia))
+- Docs: Multiple Users Stacked [\#2882](https://github.com/powerhome/playbook/pull/2882) ([nickamantia](https://github.com/nickamantia))
+- Docs: Multiple Users [\#2876](https://github.com/powerhome/playbook/pull/2876) ([nickamantia](https://github.com/nickamantia))
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.12.0...13.13.0)
+
 
 # Dynamically Control Your Tooltips!
 ##### November 22, 2023
