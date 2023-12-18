@@ -20,7 +20,7 @@ type AvatarActionButtonProps = {
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | any},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   imageAlt?: string,
   imageUrl?: string,

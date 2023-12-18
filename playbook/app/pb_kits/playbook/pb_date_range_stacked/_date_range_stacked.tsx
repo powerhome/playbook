@@ -20,7 +20,7 @@ type DateRangeStackedProps = {
   startDate: Date,
 }
 
-const DateRangeStacked = (props: DateRangeStackedProps) => {
+const DateRangeStacked = (props: DateRangeStackedProps): React.ReactElement => {
   const { 
     className, 
     dark = false, 

@@ -18,7 +18,7 @@ type DateYearStackedProps = {
   id?: string,
 }
 
-const DateYearStacked = (props: DateYearStackedProps) => {
+const DateYearStacked = (props: DateYearStackedProps): React.ReactElement => {
   const { 
     align = 'left', 
     className, 
