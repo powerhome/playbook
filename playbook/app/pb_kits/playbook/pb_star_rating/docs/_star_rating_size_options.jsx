@@ -2,44 +2,59 @@ import React from 'react'
 
 import StarRating from '../_star_rating'
 
-const StarRatingDefault = (props) => (
+const StarRatingSizeOptions = (props) => (
   <>
-    <StarRating
-        paddingBottom="xs"
-        {...props}
-    />
-
-
-    <StarRating
-        paddingBottom="xs"
-        rating={0.9}
-        {...props}
-    />
-
-    <StarRating
-        paddingBottom="xs"
-        rating={1.5}
-        {...props}
-    />
 
     <StarRating
         paddingBottom="xs"
         rating={3}
+        size="xs"
         {...props}
     />
 
-    <StarRating
-        paddingBottom="xs"
-        rating={4.2}
-        {...props}
-    />
 
     <StarRating
         paddingBottom="xs"
-        rating={5}
+        rating={3}
+        size="sm"
         {...props}
     />
+
+
+    <StarRating
+        paddingBottom="xs"
+        rating={3}
+        size="md"
+        {...props}
+    />
+
+
+    <StarRating
+        paddingBottom="xs"
+        rating={3}
+        size="lg"
+        {...props}
+    />
+
+
+    <StarRating
+        layoutOption="number"
+        paddingBottom="xs"
+        rating={3}
+        size="lg"
+        {...props}
+    />
+
+
+    <StarRating
+        layoutOption="onestar"
+        paddingBottom="xs"
+        rating={3}
+        size="lg"
+        {...props}
+    />
+
   </>
 )
 
-export default StarRatingDefault
+export default StarRatingSizeOptions

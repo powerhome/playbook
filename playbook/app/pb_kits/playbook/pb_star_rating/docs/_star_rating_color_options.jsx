@@ -2,7 +2,7 @@ import React from 'react'
 
 import StarRating from '../_star_rating'
 
-const StarRatingHide = (props) => (
+const StarRatingColorOptions = (props) => (
   <>
 
     <StarRating
@@ -11,24 +11,15 @@ const StarRatingHide = (props) => (
         {...props}
     />
 
-
     <StarRating
-        layoutOption={"number"}
-        paddingBottom="xs"
-        rating={2.8}
-        {...props}
-    />
-
-
-    <StarRating
-        layoutOption={"number"}
+        colorOption='primary'
         paddingBottom="xs"
         rating={3}
         {...props}
     />
 
     <StarRating
-        layoutOption={"onestar"}
+        colorOption='subtle'
         paddingBottom="xs"
         rating={3}
         {...props}
@@ -37,4 +28,4 @@ const StarRatingHide = (props) => (
   </>
 )
 
-export default StarRatingHide
+export default StarRatingColorOptions
