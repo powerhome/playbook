@@ -10641,6 +10641,10 @@ pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
+"playbook-icons@git+ssh://git@github.com/powerhome/playbook-icons#version-1":
+  version "0.0.1"
+  resolved "git+ssh://git@github.com/powerhome/playbook-icons#93691db2144087559181fb35171cd400e4d5ac68"
+
 please-upgrade-node@^3.2.0:
   version "3.2.0"
   resolved "https://npm.powerapp.cloud/please-upgrade-node/-/please-upgrade-node-3.2.0.tgz#aeddd3f994c933e4ad98b99d9a556efa0e2fe942"
