@@ -2,44 +2,57 @@ import React from 'react'
 
 import StarRating from '../_star_rating'
 
-const StarRatingDefault = (props) => (
+const StarRatingNumberConfig = (props) => (
   <>
-    <StarRating
-        paddingBottom="xs"
-        {...props}
-    />
-
 
     <StarRating
-        paddingBottom="xs"
-        rating={0.9}
-        {...props}
-    />
-
-    <StarRating
-        paddingBottom="xs"
-        rating={1.5}
-        {...props}
-    />
-
-    <StarRating
+        denominator={3}
         paddingBottom="xs"
         rating={3}
         {...props}
     />
 
+
     <StarRating
+        denominator={4}
         paddingBottom="xs"
-        rating={4.2}
+        rating={3}
         {...props}
     />
 
+
     <StarRating
+        denominator={5}
         paddingBottom="xs"
-        rating={5}
+        rating={3}
         {...props}
     />
+
+
+    <StarRating
+        denominator={6}
+        paddingBottom="xs"
+        rating={3}
+        {...props}
+    />
+
+
+    <StarRating
+        denominator={7}
+        paddingBottom="xs"
+        rating={3}
+        {...props}
+    />
+
+
+    <StarRating
+        denominator={8}
+        paddingBottom="xs"
+        rating={3}
+        {...props}
+    />
+
   </>
 )
 
-export default StarRatingDefault
+export default StarRatingNumberConfig

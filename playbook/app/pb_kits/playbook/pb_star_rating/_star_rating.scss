@@ -2,61 +2,113 @@
 @import "../tokens/opacity";
 @import "../tokens/spacing";
 
-$pb_star_rating_number_width: 30px;
-$pb_star_rating_wrapper_width: 90px;
-$pb_star_rating_height: 26px;
 
-[class^=pb_star_rating_kit] {
-  position: relative;
-  display: inline-flex;
+[class*=pb_star_rating_kit] {
+  display: flex;
+  align-items: flex-end;
   justify-content: flex-start;
-  align-items: flex-start;
 
-  .pb_star_rating_number {
-    flex-shrink: 0;
-    flex-grow: 0;
-    flex-basis: $pb_star_rating_number_width;
-    width: $pb_star_rating_number_width;
-    min-height: $pb_star_rating_height;
-    padding: 0 $space-xs 0;
-    color: $text_lt_light;
-    font-size: $text-small;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .pb_star_rating_wrapper {
-    position: relative;
-    width: $pb_star_rating_wrapper_width;
-    flex-basis: $pb_star_rating_wrapper_width;
-    flex-shrink: 0;
-    flex-grow: 1;
-    min-height: $pb_star_rating_height;
-
-    .pb_star_rating_highlight {
-      display: flex;
-      position: absolute;
-      top: 5px;
-      left: 0;
-      z-index: 5;
-      color: $yellow;
-      line-height: $pb_star_rating_height;
+  path {
+    &.suble_star_dark {
+      fill: $text_dk_default;
     }
-    .pb_star_rating_base {
-      display: flex;
-      position: absolute;
-      top: 5px;
-      left: 0;
-      z-index: 0;
-      color: rgba($slate, $opacity-4);
-      line-height: $pb_star_rating_height;
+    &.suble_star_light {
+      fill: $text_lt_default;
+    }
+    &.outline_star_dark {
+      stroke: $text_dk_lighter;
+    }
+    &.outline_star_light {
+      stroke: $text_lt_lighter;
+    }
+    &.empty_star_dark {
+      fill: $border_dark;
+    }
+    &.empty_star_light {
+      fill: $border_light;
     }
   }
 
-  &[class*=_hide_rating] {
-    .pb_star_rating_number {
-      display: none;
+  .pb_star_rating_number_xs {
+    max-height: 14px;
+  }
+
+  .pb_star_rating_number_sm {
+    max-height: 14px;
+  }
+
+  .pb_star_rating_number_md {
+    max-height: 24px;
+  }
+
+  .pb_star_rating_number_lg {
+    max-height: 40px;
+    height: 29px;
+  }
+
+
+  $star-styles: (
+    yellow_star: (color: #F9BB00),
+    primary_star: (color: #0056CF),
+    suble_star_light: (color: $text_lt_default),
+    suble_star_dark: (color: $text_dk_default),
+    empty_star_dark: (color: $border_dark),
+    empty_star_light: (color: $border_light),
+    outline_empty_star_dark: (color: transparent),
+    outline_empty_star_light: (color: transparent)
+  );
+
+  @each $class, $styles in $star-styles {
+    .#{$class} {
+      @each $property, $value in $styles {
+        #{$property}: $value;
+      }
+    }
+  }
+
+
+  $star-styles: (
+    pb_star_react_xs: (font-size: $text_small, ),
+    pb_star_react_sm: (font-size: $text_base, ),
+    pb_star_react_md: (font-size: 24px, ),
+    pb_star_react_lg: (font-size: 48px, )
+  );
+
+  @each $class, $styles in $star-styles {
+    .#{$class} {
+      @each $property, $value in $styles {
+        #{$property}: $value;
+      }
+    }
+  }
+
+  $star-styles: (
+    pb_star_xs: (font-size: $text_small, width: 1em, margin-right: 4px),
+    pb_star_sm: (font-size: $text_base, width: 1em, margin-right: 4px),
+    pb_star_md: (font-size: 24px, width: 1em, margin-right: 6px),
+    pb_star_lg: (font-size: 48px, width: 1em, margin-right: 12px)
+  );
+
+  @each $class, $styles in $star-styles {
+    .#{$class} {
+      @each $property, $value in $styles {
+        #{$property}: $value;
+      }
+    }
+  }
+
+  $star-padding: (
+    pb_star_padding_xs: (margin-right: 4px),
+    pb_star_padding_sm: (margin-right: 4px),
+    pb_star_padding_md: (margin-right: 6px),
+    pb_star_padding_lg: (margin-right: 12px)
+  );
+
+  @each $class, $styles in $star-padding {
+    .#{$class} {
+      @each $property, $value in $styles {
+        #{$property}: $value;
+      }
     }
   }
 }

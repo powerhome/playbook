@@ -1,5 +1,5 @@
-import React from 'react'
-import DatePicker from '../_date_picker'
+import React from "react"
+import DatePicker from "../_date_picker"
 
 const DatePickerQuickPickReact = (props) => (
   <>
