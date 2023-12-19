@@ -11,6 +11,7 @@ const getPositionElement = (element: string | Element) => {
 
 type DatePickerConfig = {
   closeOnSelect?: boolean,
+  customQuickPickDates: { override: boolean, dates: any[] },
   disableDate?: number[],
   disableRange?: number[],
   disableWeekdays?: number[],
@@ -34,6 +35,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   const {
     allowInput,
     closeOnSelect = true,
+    customQuickPickDates = { override: true, dates: [] },
     defaultDate,
     disableDate,
     disableRange,
@@ -121,27 +123,26 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }
   }
 
-  const setPlugins = (thisRangesEndToday: boolean) => {
+  const setPlugins = (thisRangesEndToday: boolean, customQuickPickDates: any) => {
     const pluginList = []
-
+  
     // month and week selection
     if (selectionType === "month" || plugins.length > 0) {
       pluginList.push(monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }))
     } else if ( selectionType === "week") {
       pluginList.push(weekSelect())
-
+  
     } else if (selectionType === "quickpick") {
-    //------- QUICKPICK VARIANT PLUGIN -------------//
-    pluginList.push(quickPickPlugin(thisRangesEndToday))
+      //------- QUICKPICK VARIANT PLUGIN -------------//
+      pluginList.push(quickPickPlugin(thisRangesEndToday, customQuickPickDates))
     }
-
+  
     // time selection
     if (enableTime) pluginList.push(timeSelectPlugin({ caption: timeCaption, showTimezone: showTimezone}))
-
-
+  
     return pluginList
   }
-
+  
   const getDateFormat = () => {
     return enableTime ? `${format} ${timeFormat}` : format
   }
@@ -181,7 +182,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     onYearChange: [() => {
       yearChangeHook()
     }],
-    plugins: setPlugins(thisRangesEndToday),
+    plugins: setPlugins(thisRangesEndToday, customQuickPickDates),
     position,
     positionElement: getPositionElement(positionElement),
     prevArrow: '<i class="far fa-angle-left"></i>',
