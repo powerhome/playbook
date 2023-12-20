@@ -6,13 +6,13 @@
   @include pb_detail;
 
   @each $color_name, $color_value in $pb_detail_colors {
-    &[class*=pb_detail_kit_#{$color_name}] {
+    &[class*=color_#{$color_name}] {
       @include pb_detail($color_value);
     }
   }
 
   @each $dark_color_name, $dark_color_value in $pb_dark_detail_colors{
-    &[class*=pb_detail_kit_#{$dark_color_name}][class*=dark]{
+    &[class*=color_#{$dark_color_name}][class*=dark]{
       @include pb_detail($dark_color_value)
     }
   }

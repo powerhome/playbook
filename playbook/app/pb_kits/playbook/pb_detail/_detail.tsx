@@ -11,7 +11,7 @@ type DetailProps = {
   color?: 'light' | 'default' | 'lighter' | 'link' | 'error' | 'success',
   dark?: boolean,
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
@@ -36,7 +36,7 @@ const Detail = (props: DetailProps) => {
   const htmlProps = buildHtmlProps(htmlOptions);
   const isBold = bold ? "bold" : null
   const classes = classnames(
-    buildCss('pb_detail_kit', color),
+    buildCss('pb_detail_kit', `color`, color),
     isBold,
     globalProps(props),
     className
