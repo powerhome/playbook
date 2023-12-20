@@ -6,6 +6,8 @@
 
 Say goodbye to generic date options! Quick Pick Custom Ranges is here, allowing you to define and label your own date presets or add personalized choices to our default selection.
 
+[13.14.0](https://github.com/powerhome/playbook/tree/13.14.0) full list of changes:
+
 **Kit Enhancements:**
 
 - Quick Pick Custom Dates [\#2943](https://github.com/powerhome/playbook/pull/2943) ([jasperfurniss](https://github.com/jasperfurniss))
