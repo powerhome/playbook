@@ -14,7 +14,7 @@ module Playbook
       prop :text
 
       def classname
-        generate_classname("pb_detail_kit", color) + is_bold
+        generate_classname("pb_detail_kit", "color", color) + is_bold
       end
 
       def content
