@@ -13,12 +13,11 @@ type TitleProps = {
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void) | any},
   id?: string,
   size?: SizeType | SizeResponsiveType,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
   text?: string,
-  truncate?: null | "1" | "2" | "3" | "4" | "5",
   variant?: null | "link",
 } & GlobalProps
 
@@ -36,7 +35,6 @@ const Title = (props: TitleProps): React.ReactElement => {
     bold = true,
     tag = 'h3',
     text,
-    truncate = null,
     variant = null,
   } = props
 
@@ -44,7 +42,6 @@ const Title = (props: TitleProps): React.ReactElement => {
   const dataProps: {[key: string]: string | number} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const getBold = bold ? '' : 'thin'
-  const isTruncated = truncate ? `truncate-${truncate}` : null
   const isSizeNumberOrString = typeof size === "number" || typeof size === "string"
 
   const buildResponsiveSizeCss = () => {
@@ -60,7 +57,7 @@ const Title = (props: TitleProps): React.ReactElement => {
   }
 
   const classes = classnames(
-    buildCss('pb_title_kit', isSizeNumberOrString ? `size_${size}` : "", variant, color, getBold, isTruncated),
+    buildCss('pb_title_kit', isSizeNumberOrString ? `size_${size}` : "", variant, color, getBold),
     globalProps(props),
     buildResponsiveSizeCss(),
     className
