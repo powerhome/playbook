@@ -40,7 +40,7 @@
       <% if pb_doc_has_kit_type?(@kit, "react") %>
         <%= pb_rails("nav/item", props: { text: "React", link: kit_show_reacts_path(@kit), active: action_name == 'kit_show_react' }) %>
       <% end %>
-      <% if pb_doc_has_kit_type?(@kit, "swift") && Rails.env.development? %>
+      <% if pb_doc_has_kit_type?(@kit, "swift") %>
           <%= pb_rails("nav/item", props: { text: "Swift", link: kit_show_swift_path(@kit), active: action_name == 'kit_show_swift' }) %>
       <% end %>
     <% end %>

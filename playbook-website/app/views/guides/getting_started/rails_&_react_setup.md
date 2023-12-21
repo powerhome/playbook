@@ -1,7 +1,7 @@
 ---
 title: Ruby & React Setup
 icon: object-intersect
-description: The most flecibility with the fusion of RoR and React and the power of 100+ highly customizable ViewComponents. Build design driven UI in Rails with ViewComponents.
+description: The most flexibility with the fusion of RoR and React and the power of 100+ highly customizable View Components. Build design driven UI in Rails with View Components.
 ---
 
 Integrate Playbook's design system seamlessly into your Rails and React app with the Playbook Ruby Gem and React components. Get started today with our easy-to-follow tutorial.
