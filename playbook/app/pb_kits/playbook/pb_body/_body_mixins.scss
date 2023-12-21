@@ -36,26 +36,6 @@ $pb_body_status: (
   font-family: $font-family-base;
 }
 
-$pb_body_truncate: (
-  truncate_1: 1,
-  truncate_2: 2,
-  truncate_3: 3,
-  truncate_4: 4,
-  truncate_5: 5
-);
-
-@mixin body_truncate {
-  @each $name, $number in $pb_body_truncate {
-    &[class*=_#{$name}] {
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: $number;
-      -webkit-box-orient: vertical; 
-    }
-  }
-}
-
-
 // Colors ======================
 @mixin pb_body_light {
   @include pb_body($text_lt_light);

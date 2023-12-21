@@ -31,10 +31,6 @@
     @include pb_title_thin;
   }
 
-  &[class*=_truncate] {
-    @include title_truncate;
-  }
-
   @each $size, $size_value in $breakpoints_grid {
     @for $title_size_value from 1 through 4 {
       $min_size: map-get($size_value, "min");
@@ -46,7 +42,6 @@
           @else if $title_size_value == 3 { @include pb_title_3; }
           @else if $title_size_value == 4 { @include pb_title_4; }
           @include title_colors;
-          @include title_truncate;
           @if $title_size_value != 4 { @include pb_title_bold; }
         }
       }
