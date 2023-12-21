@@ -20,7 +20,7 @@ export default class PbPopover extends PbEnhancedElement {
     this.moveTooltip()
     this.popper = createPopper (this.triggerElement, this.tooltip, {
       placement: this.position as Placement,
-      strategy: 'fixed',
+      strategy: 'absolute',
       modifiers: [
         {
           name: 'offset',
