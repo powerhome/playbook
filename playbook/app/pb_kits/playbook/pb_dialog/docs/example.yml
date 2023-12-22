@@ -24,6 +24,8 @@ examples:
   - dialog_full_height_placement: Full Height Placement
 
   swift:
-  - dialog_default: Simple
-  - dialog_sizes: Sizes
-  - dialog_status: Status
+  - dialog_default_swift: Simple
+  - dialog_sizes_swift: Sizes
+  - dialog_status_swift: Status
+  - dialog_props_swift: ""
+  
