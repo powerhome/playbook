@@ -9,5 +9,5 @@
 | **cancelButton** | `Action` | Dismisses the dialog |  |  |
 | **confirmButton** | `Action` | Confirms dialog message was received |  |  |
 | **onClose** | `Action` | Starts action when dialog is closed |  | |
-| **size** | `DialogSize` | Determines size of dialog |  `.medium`| `.small, .medium, .large` |
+| **size** | `DialogSize` | Determines size of dialog |  `.medium`| `.small` `.medium` `large` |
 | **shouldCloseOnOverlay** | `Bool` | Determines if overlay should close | `false` | `true` `false`  |
