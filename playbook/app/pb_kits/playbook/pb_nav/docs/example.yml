@@ -42,3 +42,20 @@ examples:
   - block_nav: Block
   - block_no_title_nav: Without Title
   - new_tab: Open in a New Tab
+
+  swift:
+  - nav_horizontal_subtle_no_highlight_swift: Horizontal Subtle No Highlight
+  - nav_vertical_subtle: Vertical Subtle
+  - nav_vertical_subtle_no_highlight: Vertical Subtle No Highlight
+  - nav_horizontal_default: Horizontal Default
+  - nav_vertical_default: Vertical Default
+  - nav_horizontal_bold: Horizontal Bold
+  - nav_horizontal_subtle: Horizontal Subtle
+  - nav_vertical_bold: Vertical Bold
+  - user_props_tables: ""
+
+
+
+  
+
+  
