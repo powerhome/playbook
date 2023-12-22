@@ -22,3 +22,8 @@ examples:
   - dialog_stacked_alert: Stacked Button Alert
   - dialog_full_height: Full Height
   - dialog_full_height_placement: Full Height Placement
+
+  swift:
+  - dialog_default: Simple
+  - dialog_sizes: Sizes
+  - dialog_status: Status
