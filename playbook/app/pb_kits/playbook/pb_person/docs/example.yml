@@ -7,3 +7,7 @@ examples:
   react:
   - person_default: Default
   
+  swift:
+  - person_default_swift: Default
+  - person_props_swift: ""
+  
