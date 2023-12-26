@@ -5,11 +5,15 @@ import React from 'react'
 import {
   Background,
   Title,
+  Body,
+  Flex
 } from 'playbook-ui'
 
 import Example from '../Templates/Example'
 
-const SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] //TODO: investigate using types
+const SIZES = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] //TODO: investigate using types
+
+const pixels = ['360px', '540px', '720px', '960px', '1140px', '1320px']
 
 const MaxWidthDescription = () => (
   <>
@@ -26,7 +30,7 @@ const MaxWidth = ({ example }: {example: string}) => (
       }}
       title="Max Width"
   >
-    {SIZES.map((size: string) => (
+    {SIZES.map((size: string, index: number) => (
       <Background
           backgroundColor="gradient"
           key={size}
@@ -34,12 +38,21 @@ const MaxWidth = ({ example }: {example: string}) => (
           maxWidth={size}
           padding="xs"
       >
-        <Title
+                <Title
             dark
             size={4}
         >
           {size.toUpperCase()}
         </Title>
+        {/* <Flex align='center'>
+
+        <Body
+          dark
+          paddingLeft='xs'
+        >
+          {'-'}{pixels[index]}
+        </Body>
+        </Flex> */}
       </Background>
     ))}
   </Example>
