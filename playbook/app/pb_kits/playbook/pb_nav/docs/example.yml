@@ -52,7 +52,7 @@ examples:
   - nav_horizontal_bold_swift: Horizontal Bold
   - nav_horizontal_subtle_swift: Horizontal Subtle
   - nav_vertical_bold_swift: Vertical Bold
-  - user_props_tables: ""
+  - nav_props_tables: ""
 
 
 
