@@ -23,6 +23,7 @@ const MaxWidthDescription = () => (
 
 const MaxWidth = ({ example }: {example: string}) => (
   <Example
+      backgroundClass='maxwidth-class'
       description={<MaxWidthDescription />}
       example={example}
       globalProps={{
@@ -38,21 +39,13 @@ const MaxWidth = ({ example }: {example: string}) => (
           maxWidth={size}
           padding="xs"
       >
-                <Title
-            dark
-            size={4}
+        <Title
+          dark
+          size={4}
         >
           {size.toUpperCase()}
         </Title>
-        {/* <Flex align='center'>
 
-        <Body
-          dark
-          paddingLeft='xs'
-        >
-          {'-'}{pixels[index]}
-        </Body>
-        </Flex> */}
       </Background>
     ))}
   </Example>
