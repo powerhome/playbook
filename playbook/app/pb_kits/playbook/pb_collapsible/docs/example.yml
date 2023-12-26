@@ -14,3 +14,8 @@ examples:
   - collapsible_color: Icon Color
   - collapsible_icons: Custom Icons
   - collapsible_state: useCollapsible Hook
+
+  swift:
+  - collapsible_default_swift: Default
+  - collapsible_sizes_swift: Sizes
+  - collapsible_colors_swift: Colors
