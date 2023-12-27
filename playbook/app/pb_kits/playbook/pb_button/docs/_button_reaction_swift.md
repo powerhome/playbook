@@ -1,4 +1,4 @@
-![button-reaction](https://github.com/powerhome/playbook/assets/54749071/10d21ee2-4faf-4c18-ab72-242df8f837c4)
+![reaction-button](https://github.com/powerhome/playbook/assets/54749071/10d21ee2-4faf-4c18-ab72-242df8f837c4)
 
 ```swift
 @State private var count: Int = 153
