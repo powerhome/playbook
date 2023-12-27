@@ -1,4 +1,5 @@
-![collapsible-default](https://github.com/powerhome/playbook/assets/54749071/b9aabe70-f2df-4d3e-a66a-cfe91276f368)
+![collapsible-default](https://github.com/powerhome/playbook/assets/54749071/3e97095b-f6bb-45b7-bd33-99ebde0d40fd)
+
 
 ```swift
 let iconSize: PBIcon.IconSize
