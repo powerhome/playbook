@@ -9,6 +9,7 @@ export { default as AvatarActionButton } from './pb_avatar_action_button/_avatar
 export { default as Background } from './pb_background/_background'
 export { default as Badge } from './pb_badge/_badge'
 export { default as BarGraph } from './pb_bar_graph/_bar_graph'
+export { default as BetaIcon } from './pb_beta_icon/_icon'
 export { default as Body } from './pb_body/_body'
 export { default as BreadCrumbItem } from './pb_bread_crumbs/_bread_crumb_item'
 export { default as BreadCrumbs } from './pb_bread_crumbs/_bread_crumbs'

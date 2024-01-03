@@ -1,0 +1,15 @@
+<% if object.custom_icon %>
+  <%= object.render_svg(object.custom_icon) %>
+<% elsif object.valid_emoji(object.icon) %>
+  <span class="pb_icon_kit_emoji"><%= object.icon.html_safe %></span>
+<% else %>
+  <%= content_tag(:i, nil,
+      id: object.id,
+      data: object.data,
+      class: object.classname
+  ) %>
+  <%= content_tag(:span, nil,
+      aria: { label: "#{object.icon} icon" }.merge(object.aria),
+      hidden: true
+  ) %>
+<% end %>
