@@ -32,4 +32,5 @@ examples:
   - button_icon_options_swift: Button Icon Options
   - button_circle_swift: Circle Button
   - button_size_swift: Button Size
+  - button_reaction_swift: Button Reaction
   - button_props_swift: ""
