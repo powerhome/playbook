@@ -5,15 +5,11 @@ import React from 'react'
 import {
   Background,
   Title,
-  Body,
-  Flex
 } from 'playbook-ui'
 
 import Example from '../Templates/Example'
 
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] //TODO: investigate using types
-
-const pixels = ['360px', '540px', '720px', '960px', '1140px', '1320px']
 
 const MaxWidthDescription = () => (
   <>
