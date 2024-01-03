@@ -23,7 +23,7 @@ type TooltipProps = {
   children: JSX.Element,
   data?: { [key: string]: string },
   delay?: number | Partial<{open: number; close: number}>,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
   interaction?: boolean,
   placement?: Placement,

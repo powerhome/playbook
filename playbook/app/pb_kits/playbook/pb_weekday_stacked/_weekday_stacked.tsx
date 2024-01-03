@@ -16,7 +16,7 @@ type WeekdayStackedProps = {
   dark?: boolean,
   data?: object,
   date: Date,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   variant?: "day_only" | "month_day" | "expanded",
   compact?: boolean,

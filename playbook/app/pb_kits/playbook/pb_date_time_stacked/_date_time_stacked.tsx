@@ -11,7 +11,7 @@ import TimeStacked from '../pb_time_stacked/_time_stacked'
 import DateStacked from '../pb_date_stacked/_date_stacked'
 
 type DateTimeStackedProps = {
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   date: Date,
   datetime: Date,

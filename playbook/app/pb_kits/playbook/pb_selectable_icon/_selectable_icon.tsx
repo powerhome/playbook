@@ -18,7 +18,7 @@ type SelectableIconProps = {
   customIcon?: {[key: string] :SVGElement},
   disabled?: boolean,
   data?: Object,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon: string,
   inputId: string,
   inputs: string,

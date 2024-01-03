@@ -26,7 +26,7 @@ type DatePickerProps = {
   format?: string,
   hideIcon?: boolean,
   hideLabel?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   inLine?: boolean,
   inputAria?: { [key: string]: string },

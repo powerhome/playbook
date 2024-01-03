@@ -15,7 +15,7 @@ type BodyProps = {
   data?: {[key: string]: string},
   highlightedText?: string[],
   highlighting?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   status?: 'neutral' | 'negative' | 'positive',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
@@ -43,8 +43,8 @@ const Body = (props: BodyProps): React.ReactElement => {
     variant = null,
   } = props
 
-  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
-  const dataProps: {[key: string]: any} = buildDataProps(data)
+  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+  const dataProps: {[key: string]: string} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions);
   const isTruncated = truncate ? `truncate_${truncate}` : ''
   const classes = classnames(
@@ -52,8 +52,7 @@ const Body = (props: BodyProps): React.ReactElement => {
     globalProps(props),
     className
   )
-  const Tag: React.ReactElement | any = `${tag}`
-
+  const Tag: keyof JSX.IntrinsicElements = `${tag}`
 
   return (
     <Tag

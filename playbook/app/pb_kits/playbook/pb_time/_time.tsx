@@ -16,7 +16,7 @@ type TimeProps = {
   date: Date;
   dark?: boolean;
   id?: string;
-  htmlOptions?: {[key: string]: string | number | boolean | Function};
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   showIcon?: boolean;
   size?: "md" | "sm";
   showTimezone?: boolean;

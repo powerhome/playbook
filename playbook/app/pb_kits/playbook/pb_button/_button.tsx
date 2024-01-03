@@ -21,7 +21,7 @@ type ButtonPropTypes = {
   form?: string,
   fullWidth?: boolean,
   highlight?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
   iconRight?: boolean,
   id?: string,
@@ -66,7 +66,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
   return className
 }
 
-const Button = (props: ButtonPropTypes) => {
+const Button = (props: ButtonPropTypes): React.ReactElement => {
   const {
     aria = {},
     children,
@@ -150,16 +150,16 @@ const Button = (props: ButtonPropTypes) => {
     if (link) {
       return (
         <a
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={css}
-          href={link}
-          id={id}
-          rel={target !== "child" ? "noreferrer" : null}
-          role="link"
-          tabIndex={tabIndex}
-          target={getTargetAttribute()}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={css}
+            href={link}
+            id={id}
+            rel={target !== "child" ? "noreferrer" : null}
+            role="link"
+            tabIndex={tabIndex}
+            target={getTargetAttribute()}
         >
           {ifLoading()}
         </a>
@@ -167,24 +167,27 @@ const Button = (props: ButtonPropTypes) => {
     } else if (variant === "reaction") {
       return (
         <button
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={css}
-          disabled={disabled}
-          form={form}
-          id={id}
-          onClick={onClick}
-          role="button"
-          tabIndex={tabIndex}
-          type={htmlType}
-          value={value}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={css}
+            disabled={disabled}
+            form={form}
+            id={id}
+            onClick={onClick}
+            role="button"
+            tabIndex={tabIndex}
+            type={htmlType}
+            value={value}
         >
           {icon && isValidEmoji(icon) && (
             <Flex align='center'>
               <Icon icon={icon} />
               {count && (
-                <Caption paddingLeft="xxs" size="xs">
+                <Caption 
+                    paddingLeft="xxs"
+                    size="xs"
+                >
                   {count}
                 </Caption>
               )}
@@ -203,18 +206,18 @@ const Button = (props: ButtonPropTypes) => {
     } else {
       return (
         <button
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={css}
-          disabled={disabled}
-          form={form}
-          id={id}
-          onClick={onClick}
-          role="button"
-          tabIndex={tabIndex}
-          type={htmlType}
-          value={value}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={css}
+            disabled={disabled}
+            form={form}
+            id={id}
+            onClick={onClick}
+            role="button"
+            tabIndex={tabIndex}
+            type={htmlType}
+            value={value}
         >
           {ifLoading()}
         </button>

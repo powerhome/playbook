@@ -15,7 +15,7 @@ const CollapsibleContent = ({
   children,
   className,
   ...props
-}: CollapsibleContentProps) => {
+}: CollapsibleContentProps): React.ReactElement => {
   const context: {[key: string]: boolean | string} = useContext(CollapsibleContext)
   const contentCSS = buildCss('pb_collapsible_content_kit')
   const contentSpacing = globalProps(props)
@@ -33,9 +33,10 @@ const CollapsibleContent = ({
   }, [context.collapsed]);
 
   return (
-    <div ref={contentRef}
-      data-collapsible-content="true" 
-      className={classnames(contentCSS, contentSpacing, "toggle-content", className)}>
+    <div className={classnames(contentCSS, contentSpacing, "toggle-content", className)}
+        data-collapsible-content="true" 
+        ref={contentRef}
+    >
       {children}
     </div>
   )

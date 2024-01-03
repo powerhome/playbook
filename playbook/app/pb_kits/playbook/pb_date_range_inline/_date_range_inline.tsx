@@ -16,7 +16,7 @@ type DateRangeInlineProps = {
   align?: "left" | "center" | "vertical";
   size?: "sm" | "xs";
   dark?: boolean;
-  htmlOptions?: {[key: string]: string | number | boolean | Function};
+  htmlOptions?: {[key: string]: string | number | boolean | (() => any)};
   icon?: boolean;
   startDate?: Date;
   endDate?: Date;
@@ -34,7 +34,7 @@ const dateTimeIso = (dateValue: Date) => {
   return DateTime.toIso(dateValue);
 };
 
-const DateRangeInline = (props: DateRangeInlineProps) => {
+const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
   const {
     icon = false,
     dark = false,

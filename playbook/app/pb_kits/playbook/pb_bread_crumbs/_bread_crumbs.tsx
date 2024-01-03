@@ -12,13 +12,13 @@ import {
 type BreadCrumbsProps = {
   aria?: {[key: string]: string},
   className?: string,
-  data?: object,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   text?: string,
   children?: React.ReactChild[] | React.ReactNode,
 }
-const BreadCrumbs = (props: BreadCrumbsProps) => {
+const BreadCrumbs = (props: BreadCrumbsProps): React.ReactElement => {
   const {
     aria = { label: 'Breadcrumb Navigation' },
     className,

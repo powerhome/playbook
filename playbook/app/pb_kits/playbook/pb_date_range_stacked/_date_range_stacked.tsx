@@ -15,12 +15,12 @@ type DateRangeStackedProps = {
   data?: string,
   dark?: boolean,
   endDate: Date,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   startDate: Date,
 }
 
-const DateRangeStacked = (props: DateRangeStackedProps) => {
+const DateRangeStacked = (props: DateRangeStackedProps): React.ReactElement => {
   const { 
     className, 
     dark = false, 
