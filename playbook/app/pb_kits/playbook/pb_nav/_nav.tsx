@@ -15,7 +15,7 @@ type NavProps = {
   data?: object,
   dark?: boolean,
   highlight?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   onClick?: React.MouseEventHandler<HTMLElement>,
   orientation?: "vertical" | "horizontal",

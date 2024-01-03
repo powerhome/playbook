@@ -57,8 +57,8 @@ export const buildCss = (...rules: (string | { [x: string]: string | boolean; })
  * @returns {Object} an object holding the HTML valid props and their values.
  */
 
-export const buildHtmlProps = (htmlOptions: { [key: string]: string | number | boolean | Function }) => {
-  const htmlProps: { [attr: string]: string | number | boolean | Function } = {}
+export const buildHtmlProps = (htmlOptions: { [key: string]: string | number | boolean | (() => void)}) => {
+  const htmlProps: { [attr: string]: string | number | boolean | (() => void) } = {}
   Object.keys(htmlOptions).forEach((key) => {
     htmlProps[key] = htmlOptions[key]
   })

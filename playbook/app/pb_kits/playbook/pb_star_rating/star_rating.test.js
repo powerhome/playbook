@@ -1,24 +1,22 @@
-import React from "react";
-import { render, screen } from "../utilities/test-utils";
+import React from "react"
+import { render, screen } from "../utilities/test-utils"
 
-import StarRating from "./_star_rating";
+import StarRating from "./_star_rating"
 
-const testId = "star-rating-kit";
+const testId = "star-rating-kit"
 
 describe("Star Rating Kit", () => {
   test("Expects to have correct classname", () => {
     render(
       <StarRating
           data={{ testid: testId }}
-          rating={2}
       />
-    );
+    )
 
+    const kit = screen.getByTestId(testId)
+    expect(kit.className).toBe("pb_star_rating_kit")
 
-    const kit = screen.getByTestId(testId);
-    expect(kit).toHaveClass("pb_star_rating_kit");
-
-  });
+  })
 
   test('should render aria-label', () => {
     render(
@@ -27,45 +25,47 @@ describe("Star Rating Kit", () => {
           data={{ testid: testId }}
           rating={2}
       />
-    );
+    )
 
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveAttribute('aria-label', testId)
-  });
+  })
 
-  test("Displays two highlighted stars", () => {
+  test("Displays correct denominator", () => {
     render(
       <StarRating
           data={{ testid: testId }}
+          denominator={4}
           rating={2}
+          size="xs"
       />
-    );
+    )
 
+    const kit = screen.getByTestId(testId)
+    const highlight = kit.querySelector(".star_flex_area")
+    const stars = highlight.querySelectorAll(".pb_star_xs")
+    const count = stars.length
 
-    const kit = screen.getByTestId(testId);
-    const highlight = kit.querySelector(".pb_star_rating_highlight");
-    const stars = highlight.querySelectorAll(".far.fa-star");
-    const count = stars.length;
+    expect(count).toBe(4)
+  })
 
-    expect(count).toBe(2);
-  });
-
-  test("Displays three highlighted stars and a half star", () => {
+  test("Uses correct size", () => {
     render(
       <StarRating
           data={{ testid: testId }}
-          rating={3.5}
+          layoutOption="number"
+          rating={2}
+          size="lg"
       />
-    );
+    )
 
-    const kit = screen.getByTestId(testId);
-    const highlight = kit.querySelector(".pb_star_rating_highlight");
-    const stars = highlight.querySelectorAll(".far.fa-star");
-    const halfStars = highlight.querySelectorAll(".far.fa-star-half");
-    const starCount = stars.length;
-    const halfStarCount = halfStars.length;
+    const kit = screen.getByTestId(testId)
+    const highlight = kit.querySelector(".star_flex_area")
+    const title = kit.querySelector(".pb_star_rating_number_lg")
+    const stars = highlight.querySelectorAll(".pb_star_lg")
+    const count = stars.length
 
-    expect(starCount).toBe(3);
-    expect(halfStarCount).toBe(1);
-  });
-});
+    expect(title.className).toBe("pb_title_kit_size_2_light_thin pr_sm pb_star_rating_number_lg")
+    expect(count).toBe(5)
+  })
+})

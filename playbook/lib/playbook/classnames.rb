@@ -36,6 +36,7 @@ module Playbook
         border_radius_props,
         text_align_props,
         overflow_props,
+        truncate_props,
       ].compact.join(" ")
     end
 

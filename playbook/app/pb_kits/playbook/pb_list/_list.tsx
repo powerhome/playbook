@@ -10,7 +10,7 @@ type ListProps = {
   children: React.ReactNode[] | React.ReactNode;
   dark?: boolean;
   data?: object;
-  htmlOptions?: {[key: string]: string | number | boolean | Function};
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   layout?: "" | "left" | "right";
   ordered?: boolean;

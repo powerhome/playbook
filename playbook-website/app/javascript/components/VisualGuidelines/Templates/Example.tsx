@@ -4,6 +4,7 @@
 import React from 'react'
 
 import {
+  Background,
   Body,
   Caption,
   Card,
@@ -18,6 +19,7 @@ import {
 import PropsValues from './PropsValues'
 
 type ExampleType = {
+  backgroundClass?: string,
   children?: React.ReactChild[] | React.ReactChild,
   // codesandboxExample? : boolean,
   customChildren?: boolean,
@@ -32,6 +34,7 @@ type ExampleType = {
 }
 
 const Example = ({
+  backgroundClass= '',
   children,
   // codesandboxExample,
   customChildren,
@@ -51,6 +54,11 @@ const Example = ({
     defaultTokensDescription = 'Make your own styles using Playbook tokens to keep your site consistent.'
 
   return (
+    <Background
+      backgroundColor="light"
+      className={`${backgroundClass} token-wrapper`}
+      padding="xl"
+    >
     <div id={title?.replace(/\s+/g, '')}>
       {title && (
         <Title
@@ -164,6 +172,7 @@ const Example = ({
         </Card>
       </Card>
     </div>
+    </Background>
   )
 }
 

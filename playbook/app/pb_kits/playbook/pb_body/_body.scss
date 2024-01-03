@@ -37,15 +37,10 @@
     font-size: $font_smaller;
     letter-spacing: $lspace_loose;
   }
-  
-  &[class*=_truncate] {
-    @include body_truncate;
-  }
 
   @each $status_name, $status_value in $pb_body_status {
     &[class*=#{$status_name}] {
       @include pb_body($status_value);
-      @include body_truncate;
     }
   }
 

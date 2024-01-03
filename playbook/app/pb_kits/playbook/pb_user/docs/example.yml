@@ -17,3 +17,10 @@ examples:
   - user_vertical_size: Vertical Size
   - user_subtitle: Subtitle
   - user_block_content_subtitle_react: Block Content Subtitle
+
+  swift:
+  - user_horizontal_swift: Horizontal
+  - user_vertical_size_swift: Vertical
+  - user_text_only_swift: Text Only
+  - user_size_swift: Horizontal Size
+  - user_props_table: ""

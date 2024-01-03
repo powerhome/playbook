@@ -8,7 +8,7 @@ type ProgressSimpleProps = {
   className?: string | string[],
   dark?: boolean,
   data?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   max?: number,
   muted: boolean,

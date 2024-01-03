@@ -49,15 +49,18 @@ const DialogFullHeight = () => {
       <Flex wrap>
         <Button id="sm"
             marginRight="md"
-            onClick={toggleHeaderSeparatorDialog}>
+            onClick={toggleHeaderSeparatorDialog}
+        >
           {"Small Dialog"}
         </Button>
         <Button marginRight="md"
-            onClick={toggleFooterSeparatorDialog}>
+            onClick={toggleFooterSeparatorDialog}
+        >
           {"Medium Dialog"}
         </Button>
         <Button marginRight="md"
-            onClick={toggleBothSeparatorsDialog}>
+            onClick={toggleBothSeparatorsDialog}
+        >
           {"Large Dialog"}
         </Button>
       </Flex>
@@ -89,7 +92,8 @@ const DialogFullHeight = () => {
             <Dialog.Footer>
               <Button onClick={toggle}>{"Send My Issue"}</Button>
               <Button onClick={toggle}
-                  variant="link">
+                  variant="link"
+              >
                 {"Back"}
               </Button>
             </Dialog.Footer>

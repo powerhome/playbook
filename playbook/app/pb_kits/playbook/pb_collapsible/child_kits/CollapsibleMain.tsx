@@ -56,7 +56,7 @@ const ToggleIcon = ({ collapsed, icon, iconSize, iconColor, onIconClick }: IconP
     return icon
   }
 
-  const handleIconClick = (e:any) => {
+  const handleIconClick = (e: React.MouseEvent<HTMLElement>) => {
     if (onIconClick) {
     e.stopPropagation();
     onIconClick()
@@ -67,21 +67,25 @@ const ToggleIcon = ({ collapsed, icon, iconSize, iconColor, onIconClick }: IconP
     <>
       {collapsed ? (
         <div
-          className="icon_wrapper"
-          key={icon ? showIcon(icon)[0] : "chevron-down"}
-          style={{ verticalAlign: "middle", color: color }}
-          onClick={(e)=> handleIconClick(e)}
+            className="icon_wrapper"
+            key={icon ? showIcon(icon)[0] : "chevron-down"}
+            onClick={(e)=> handleIconClick(e)}
+            style={{ verticalAlign: "middle", color: color }}
         >
-          <Icon icon={icon ? showIcon(icon)[0] : "chevron-down"} size={iconSize} />
+          <Icon icon={icon ? showIcon(icon)[0] : "chevron-down"}
+              size={iconSize}
+          />
         </div>
       ) : (
         <div
-          className="icon_wrapper"
-          key={icon ? showIcon(icon)[1] : "chevron-up"}
-          style={{ verticalAlign: "middle", color: color }}
-          onClick={(e)=> handleIconClick(e)}
+            className="icon_wrapper"
+            key={icon ? showIcon(icon)[1] : "chevron-up"}
+            onClick={(e)=> handleIconClick(e)}
+            style={{ verticalAlign: "middle", color: color }}
         >
-          <Icon icon={icon ? showIcon(icon)[1] : "chevron-up"} size={iconSize} />
+          <Icon icon={icon ? showIcon(icon)[1] : "chevron-up"}
+              size={iconSize}
+          />
         </div>
       )}
     </>
@@ -118,9 +122,9 @@ const CollapsibleMain = ({
           <FlexItem>
             <ToggleIcon
                 collapsed={collapsed as () => void}
+                icon={icon as string[] | string}
                 iconColor={iconColor as IconColors}
                 iconSize={iconSize as IconSizes}
-                icon={icon as string[] | string}
                 onIconClick={onIconClick}
             />
             </FlexItem>

@@ -19,9 +19,14 @@ type pluginDataType = {
   rangesButtons: [] | any,
 }
 
+type customQuickPickDatesType = {
+  override: boolean,
+  dates: { label: string, value: string[] | { timePeriod: string, amount: number } }[],
+}
+
 let activeLabel = ""
 
-const quickPickPlugin = (thisRangesEndToday: boolean) => {
+const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: customQuickPickDatesType | undefined) => {
   return function (fp: FpTypes & any): any {
     const today = new Date()
     const yesterday = DateTime.getYesterdayDate(new Date())
@@ -46,8 +51,38 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
     const lastYearStartDate = DateTime.getPreviousYearStartDate(new Date())
     const lastYearEndDate = DateTime.getPreviousYearEndDate(new Date())
 
-    // variable that holds the ranges available
-    const ranges = {
+    const calculateDateRange = (timePeriod: string, amount: number): Date[] => {
+      const endDate = new Date();
+      let startDate = new Date();
+    
+      switch (timePeriod) {
+        case 'days':
+          startDate.setDate(endDate.getDate() - amount);
+          break;
+        case 'weeks':
+          startDate.setDate(endDate.getDate() - (amount * 7));
+          break;
+        case 'months':
+          startDate.setMonth(endDate.getMonth() - amount);
+          break;
+        case 'quarters':
+          startDate.setMonth(endDate.getMonth() - (amount * 3));
+          break;
+        case 'years':
+          startDate.setFullYear(endDate.getFullYear() - amount);
+          break;
+        default:
+          throw new Error('Invalid time period');
+      }
+      return [startDate, endDate];
+    };
+  
+
+    type rangesType = {
+      [key: string]: Date[]
+    };
+
+    let ranges: rangesType = {
       'Today': [today, today],
       'Yesterday': [yesterday, yesterday],
       'This week': [thisWeekStartDate, thisWeekEndDate],
@@ -58,16 +93,47 @@ const quickPickPlugin = (thisRangesEndToday: boolean) => {
       'Last month': [lastMonthStartDate, lastMonthEndDate],
       'Last quarter': [lastQuarterStartDate, lastQuarterEndDate],
       'Last year': [lastYearStartDate, lastYearEndDate]
+    };
+
+    
+    if (customQuickPickDates && Object.keys(customQuickPickDates).length !== 0) {
+      if (customQuickPickDates.dates.length && customQuickPickDates.override === false) {
+        customQuickPickDates.dates.forEach((item) => {
+          if (Array.isArray(item.value)) {
+            ranges[item.label] = item.value.map((dateStr: string) => new Date(dateStr));
+          } else {
+            ranges[item.label] = calculateDateRange(
+              item.value.timePeriod,
+              item.value.amount
+            )
+          }
+        })
+      } else if(customQuickPickDates.dates.length && customQuickPickDates.override !== false) {
+        ranges = {}
+        customQuickPickDates.dates.forEach((item) => {
+          if (Array.isArray(item.value)) {
+            ranges[item.label] = item.value.map((dateStr: string) => new Date(dateStr));
+          } else {
+            ranges[item.label] = calculateDateRange(
+              item.value.timePeriod,
+              item.value.amount
+            )
+          }
+        })
+      }
     }
+
 
     // creating the ul element for the nav dropdown and giving it classnames
     const rangesNav = document.createElement('ul');
+
 
     // creating the pluginData object that will hold the properties of this plugin
     const pluginData: pluginDataType = {
       ranges: ranges,
       rangesNav: rangesNav,
       rangesButtons: [],
+
     };
 
     /**

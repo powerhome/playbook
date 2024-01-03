@@ -14,7 +14,7 @@ type TableProps = {
   data?: { [key: string]: string },
   dataTable: boolean,
   disableHover: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   responsive: "collapse" | "scroll" | "none",
   singleLine: boolean,

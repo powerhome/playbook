@@ -57,7 +57,7 @@ const CardBackground = (props) => {
           background="product_1_background"
           marginBottom="sm"
           {...props}
-        >
+      >
         <Body
             dark
             text="Product 1 Background"
@@ -69,11 +69,12 @@ const CardBackground = (props) => {
       <Card 
           background="product_7_highlight" 
           marginBottom="sm"
-          {...props} >
+          {...props}
+      >
         <Body 
             dark
-            text="Product 7 Highlight"  
-          />
+            text="Product 7 Highlight"
+        />
       </Card>
 
       

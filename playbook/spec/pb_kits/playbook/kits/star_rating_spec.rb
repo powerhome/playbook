@@ -11,8 +11,32 @@ RSpec.describe Playbook::PbStarRating::StarRating do
   }
 
   it {
-    is_expected.to define_prop(:hide_rating)
-      .of_type(Playbook::Props::Boolean)
+    is_expected.to define_prop(:denominator)
+      .of_type(Playbook::Props::Numeric)
+  }
+
+  it {
+    is_expected.to define_enum_prop(:color_option)
+      .with_default("yellow")
+      .with_values("yellow", "primary", "subtle")
+  }
+
+  it {
+    is_expected.to define_enum_prop(:background_type)
+      .with_default("fill")
+      .with_values("fill", "outline")
+  }
+
+  it {
+    is_expected.to define_enum_prop(:layout_option)
+      .with_default("default")
+      .with_values("default", "onestar", "number")
+  }
+
+  it {
+    is_expected.to define_enum_prop(:size)
+      .with_default("sm")
+      .with_values("xs", "sm", "md", "lg")
   }
 
   describe "#classname" do
