@@ -82,13 +82,13 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
 
   describe "#format_date_string" do
     it "returns date in specific format with year" do
-      expect(subject.new(timestamp: future_timestamp).send(:format_date_string)).to eq(future_timestamp.strftime("%b %-d, %Y").to_s)
+      expect(subject.new(timestamp: future_timestamp).send(:format_date_string)).to eq(future_timestamp.strftime("%b %-d").to_s)
     end
   end
 
   describe "#format_datetime_string" do
     it "returns full date and time separated by middot" do
-      expect(subject.new(timestamp: future_timestamp).send(:format_datetime_string)).to eq("Oct 10, 2024 &middot; 4:30p")
+      expect(subject.new(timestamp: future_timestamp).send(:format_datetime_string)).to eq("Oct 10 &middot; 4:30p")
     end
   end
 
@@ -102,7 +102,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
         let(:show_user) { true }
         it "returns last updated with year including user's name" do
           timestamp = DateTime.new(2024, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze
-          date = "Oct 10, 2024"
+          date = "Oct 10"
           time = " 4:30p"
 
           expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).send(:format_updated_string)).to eq("Last updated by #{name} on #{date} at#{time}")
@@ -113,7 +113,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
         let(:show_user) { false }
         it "returns last updated with year without user's name" do
           timestamp = DateTime.new(2024, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze
-          date = "Oct 10, 2024"
+          date = "Oct 10"
           time = " 4:30p"
 
           expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).send(:format_updated_string)).to eq("Last updated on #{date} at#{time}")
