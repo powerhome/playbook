@@ -27,7 +27,7 @@ const MaxWidth = ({ example }: {example: string}) => (
       }}
       title="Max Width"
   >
-    {SIZES.map((size: string, index: number) => (
+    {SIZES.map((size: string) => (
       <Background
           backgroundColor="gradient"
           key={size}
