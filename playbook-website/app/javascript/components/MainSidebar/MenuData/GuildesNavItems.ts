@@ -1,9 +1,5 @@
 export const GuidesNavItems = [
   {
-    name: "HTML & CSS Setup",
-    link: "/guides/getting_started/HTML_&_CSS",
-  },
-  {
     name: "Ruby & React Setup",
     link: "/guides/getting_started/rails_&_react_setup",
   },
@@ -14,5 +10,13 @@ export const GuidesNavItems = [
   {
     name: "Ruby on Rails Setup",
     link: "/guides/getting_started/ruby_on_rails_setup",
+  },
+  {
+    name: "Swift Setup",
+    link: "/guides/getting_started/swift_setup",
+  },
+  {
+    name: "HTML & CSS Setup",
+    link: "/guides/getting_started/HTML_&_CSS",
   },
 ];
