@@ -23,7 +23,7 @@ const MainSidebar = ({
 
   //kits in alphabetical order
   kits.map((obj: {[key: string]: string[]}) => {
-    console.log(obj)
+  
     const key = Object.keys(obj)[0];
     const orderedArray = obj[key].sort((a, b) => a.localeCompare(b));
     return { [key]: orderedArray };
