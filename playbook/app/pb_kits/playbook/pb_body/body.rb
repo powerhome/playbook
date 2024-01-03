@@ -18,21 +18,14 @@ module Playbook
                           default: false
       prop :highlighted_text, type: Playbook::Props::Array,
                               default: []
-      prop :truncate, type: Playbook::Props::Enum,
-                      values: [nil, "1", "2", "3", "4", "5"],
-                      default: nil
 
       def classname
-        generate_classname("pb_body_kit", color_class, status_class, is_truncated)
+        generate_classname("pb_body_kit", color_class, status_class)
       end
 
       def content
         body_text = super.presence || text
         highlighting ? apply_highlight(body_text) : body_text
-      end
-
-      def is_truncated
-        truncate ? "truncate_#{truncate}" : nil
       end
 
     private
