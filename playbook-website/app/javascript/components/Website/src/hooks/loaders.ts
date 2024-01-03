@@ -6,7 +6,7 @@ interface ComponentTypes {
   description: string;
 }
 
-interface CategpryTypes {
+interface CategoryTypes {
   name: string;
   description: string;
   components: ComponentTypes[];
@@ -15,14 +15,14 @@ interface CategpryTypes {
 const sortByName = (a: ComponentTypes, b: ComponentTypes) =>
   a.name.localeCompare(b.name);
 
-export const ComponentsLoader: () => Promise<CategpryTypes[]> = async () => {
+const sortComponentsByName = (kitCategory: CategoryTypes) => {
+  kitCategory.components.sort(sortByName);
+};
+
+export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
   const response = await fetch("/beta/kits.json");
   const data = await response.json();
-
-  const sortComponentsByName = (kitCategory: CategpryTypes) => {
-    kitCategory.components.sort(sortByName);
-  };
-
+ 
   data.kits.sort(sortByName).forEach(sortComponentsByName);
 
   return data;
