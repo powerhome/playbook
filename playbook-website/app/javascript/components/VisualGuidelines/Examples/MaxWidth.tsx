@@ -9,7 +9,7 @@ import {
 
 import Example from '../Templates/Example'
 
-const SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] //TODO: investigate using types
+const SIZES = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] //TODO: investigate using types
 
 const MaxWidthDescription = () => (
   <>
@@ -19,6 +19,7 @@ const MaxWidthDescription = () => (
 
 const MaxWidth = ({ example }: {example: string}) => (
   <Example
+      backgroundClass='maxwidth-class'
       description={<MaxWidthDescription />}
       example={example}
       globalProps={{
@@ -35,11 +36,12 @@ const MaxWidth = ({ example }: {example: string}) => (
           padding="xs"
       >
         <Title
-            dark
-            size={4}
+          dark
+          size={4}
         >
           {size.toUpperCase()}
         </Title>
+
       </Background>
     ))}
   </Example>
