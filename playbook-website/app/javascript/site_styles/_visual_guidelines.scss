@@ -15,15 +15,19 @@
       max-width: 600px;
       margin: auto;
     }
-    @include break_at(breakpoint("sm")){    
+    @include break_at(breakpoint("sm")){
       padding: $space_xl !important;
     }
   }
-  
+
   // Main Sections
   .token-wrapper {
     max-width: 1242px;
     margin: auto;
+  }
+
+  .maxwidth-class {
+    max-width: 1320px !important;
   }
 
   // General Code Round Bottom
