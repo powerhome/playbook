@@ -36,7 +36,7 @@ const Detail = (props: DetailProps): React.ReactElement => {
   const htmlProps = buildHtmlProps(htmlOptions);
   const isBold = bold ? "bold" : null
   const classes = classnames(
-    buildCss('pb_detail_kit', color),
+    buildCss('pb_detail_kit', `color`, color),
     isBold,
     globalProps(props),
     className
