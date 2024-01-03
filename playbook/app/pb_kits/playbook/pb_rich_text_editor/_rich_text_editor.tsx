@@ -35,7 +35,7 @@ type RichTextEditorProps = {
   className?: string,
   data?: { [key: string]: string },
   focus?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   inline?: boolean, 
   extensions?: { [key: string]: string }[],

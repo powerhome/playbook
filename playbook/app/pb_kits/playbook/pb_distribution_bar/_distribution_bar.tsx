@@ -7,13 +7,13 @@ type DistributionBarProps = {
   className?: string,
   colors: [],
   data?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: "lg" | "sm",
   widths?: number[],
 }
 
-const normalizeCharacters = (widths:  number[]) => {
+const normalizeCharacters = (widths: number[]) => {
   return widths.map((width) => {
     return parseInt(width.toString().replace(/[^0-9.]/gi, ''))
   })
@@ -33,7 +33,7 @@ const barValues = (normalizedValues: number[], colors: []) => {
   })
 }
 
-const DistributionBar = (props: DistributionBarProps) => {
+const DistributionBar = (props: DistributionBarProps): React.ReactElement => {
   const {
     htmlOptions = {},
     size = 'lg',
@@ -45,8 +45,8 @@ const DistributionBar = (props: DistributionBarProps) => {
 
   return (
     <div 
-      className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}  
-      {...htmlProps}
+        className={classnames(`pb_distribution_bar_${size}`, globalProps(props))}  
+        {...htmlProps}
     >
       {barValues(normalizedValues, colors)}
     </div>

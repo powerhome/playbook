@@ -34,7 +34,7 @@ type TypeaheadProps = {
   dark?: boolean,
   data?: { [key: string]: string },
   error?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
   loadOptions?: string | Noop,

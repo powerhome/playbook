@@ -13,7 +13,7 @@ type CheckboxProps = {
   dark?: boolean,
   data?: {[key: string]: string},
   error?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   indeterminate?: boolean,
   name?: string,
@@ -23,7 +23,7 @@ type CheckboxProps = {
   value?: string,
 } & GlobalProps
 
-const Checkbox = (props: CheckboxProps): JSX.Element => {
+const Checkbox = (props: CheckboxProps): React.ReactElement => {
   const {
     aria = {},
     checked = false,
@@ -73,7 +73,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
         tabIndex={tabIndex}
         type="checkbox"
         value={value}
-      />)
+    />)
   }
 
   return (

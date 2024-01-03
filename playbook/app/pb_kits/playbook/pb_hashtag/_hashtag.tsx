@@ -14,7 +14,7 @@ type HashtagProps = {
   className?: string,
   dark?: boolean,
   data?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   newWindow?: boolean,
   rel?: string,

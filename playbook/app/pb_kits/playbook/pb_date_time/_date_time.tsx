@@ -14,7 +14,7 @@ type DateTimeProps = {
   className?: string,
   data?: { [key: string]: string; },
   datetime: Date,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: "sm" | "md",
   showDayOfWeek: boolean,
@@ -22,7 +22,7 @@ type DateTimeProps = {
   timeZone?: string
 }
 
-const DateTime = (props: DateTimeProps) => {
+const DateTime = (props: DateTimeProps): React.ReactElement => {
   const {
     align = 'left',
     aria = {},

@@ -192,6 +192,42 @@
 						<%= pb_rails("flex/flex_item", props: {
 							align_self: "stretch"
 						}) do %>
+							<%= link_to "/guides/getting_started/swift_setup" do %>
+								<%= pb_rails("card", props: {
+									padding: "xl",
+									shadow: "deeper",
+									border_radius: "lg",
+									cursor: "pointer",
+									hover: { scale: "sm" }
+								}) do %>
+									<%= pb_rails("image", props: {
+										alt: "swift logo",
+										url: asset_pack_path("media/images/hp-swift-solutions.svg")
+									}) %>
+								<% end %>
+							<% end %>
+						<% end %>
+
+						<%= pb_rails("flex/flex_item", props: {
+							classname: "language-card-text",
+							display: { sm: "none", md: "none", lg: "none", xl: "flex" }
+						}) do %>
+							<%= pb_rails("caption", props: {
+								text: "Finally a Design System built for SwiftUI. Get cross device consistency by using Playbook for SwiftUI.",
+								size: "xs",
+								padding_x: "xxs",
+							}) %>
+						<% end %>
+					<% end %>
+
+					<%= pb_rails("flex", props: {
+						classname: "language-card",
+						orientation: "column",
+						row_gap: "sm",
+					}) do %>
+						<%= pb_rails("flex/flex_item", props: {
+							align_self: "stretch"
+						}) do %>
 							<%= link_to "/guides/getting_started/HTML_&_CSS" do %>
 								<%= pb_rails("card", props: {
 									padding: "xl",

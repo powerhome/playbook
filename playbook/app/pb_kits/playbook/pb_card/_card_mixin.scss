@@ -80,7 +80,6 @@ $pb_card_header_colors: map-merge(map-merge($product_colors, $additional_colors)
   width: $width;
   height: $height;
   background: $background;
-  z-index: 10;
 }
 
 @mixin pb_card_header_color($header_color) {

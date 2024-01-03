@@ -16,10 +16,12 @@ const DialogScrollable = () => {
   return (
     <>
       <Button marginRight="md" 
-          onClick={toggleDialog1}>{'Open Dialog'}
+          onClick={toggleDialog1}
+      >{'Open Dialog'}
       </Button>
       <Button marginRight="md" 
-          onClick={toggleDialog2}>{'Open Full Height Dialog'}
+          onClick={toggleDialog2}
+      >{'Open Full Height Dialog'}
       </Button>
       <Dialog
           cancelButton="Cancel"

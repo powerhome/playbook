@@ -18,7 +18,7 @@ type CurrencyProps = {
   data?: {[key:string]:string},
   decimals?: 'default' | 'matching',
   emphasized?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
   size?: 'sm' | 'md' | 'lg',
@@ -34,7 +34,7 @@ const sizes: {lg: 1, md: 3, sm: 4} = {
   sm: 4,
 }
 
-const Currency = (props: CurrencyProps) => {
+const Currency = (props: CurrencyProps): React.ReactElement => {
   const {
     abbreviate = false,
     align = 'left',

@@ -25,7 +25,7 @@ type PbPopoverProps = {
   className?: string;
   closeOnClick?: "outside" | "inside" | "any";
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   offset?: boolean;
   reference: PopperReference & any;

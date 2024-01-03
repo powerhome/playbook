@@ -23,7 +23,7 @@ type BackgroundProps = {
   className?: string,
   customColor?: string,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col',
@@ -63,7 +63,7 @@ const getResponsiveValue = <T extends string | undefined>(prop: ResponsiveProp<T
   return prop?.default || undefined;
 };
 
-const Background = (props: BackgroundProps) => {
+const Background = (props: BackgroundProps): React.ReactElement => {
   const {
     alt = '',
     aria = {},
@@ -144,13 +144,13 @@ const Background = (props: BackgroundProps) => {
   
   return (
     <Tag
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      alt={alt}
-      className={classes}
-      id={id}
-      style={backgroundStyle}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        alt={alt}
+        className={classes}
+        id={id}
+        style={backgroundStyle}
     >
       {children}
     </Tag>

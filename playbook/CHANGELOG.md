@@ -1,3 +1,34 @@
+# Customize Your Calendar: Introducing Quick Pick Custom Ranges for Tailored Date Selection
+
+##### December 19, 2023
+
+![Screen Recording 2023-12-18 at 03 43 42 PM](https://github.com/powerhome/playbook/assets/73710701/e7bc66ff-4f17-4820-81b1-9c6c7cfe71a5)
+
+Say goodbye to generic date options! Quick Pick Custom Ranges is here, allowing you to define and label your own date presets or add personalized choices to our default selection.
+
+[13.14.0](https://github.com/powerhome/playbook/tree/13.14.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Quick Pick Custom Dates [\#2943](https://github.com/powerhome/playbook/pull/2943) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Fixed Bugs:**
+
+- Card Kit Highlight Z-index Error [\#2935](https://github.com/powerhome/playbook/pull/2935) ([israel-molestina](https://github.com/israel-molestina))
+
+**Improvements:**
+
+- Removing Eslint Disable Tag from Enhanced Element [\#2952](https://github.com/powerhome/playbook/pull/2952) ([carloslimasd](https://github.com/carloslimasd))
+- Docs: Homestreetaddress [\#2946](https://github.com/powerhome/playbook/pull/2946) ([nickamantia](https://github.com/nickamantia))
+- Exporting Css Tokens [\#2945](https://github.com/powerhome/playbook/pull/2945) ([carloslimasd](https://github.com/carloslimasd))
+- Docs: Date [\#2944](https://github.com/powerhome/playbook/pull/2944) ([nickamantia](https://github.com/nickamantia))
+- Docs: Contact [\#2933](https://github.com/powerhome/playbook/pull/2933) ([nickamantia](https://github.com/nickamantia))
+- Website Ps2 - Components - Index Navigation & Cards [\#2899](https://github.com/powerhome/playbook/pull/2899) ([augustomallmann](https://github.com/augustomallmann))
+- Star Kit Upgrade [\#2864](https://github.com/powerhome/playbook/pull/2864) ([markdoeswork](https://github.com/markdoeswork))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.13.0...13.14.0)
+
 # 13.13.0
 ##### December 8, 2023
 

@@ -16,7 +16,7 @@ type CardPropTypes = {
   children: React.ReactChild[] | React.ReactChild | number,
   className?: string,
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   highlight?: {
     position?: "side" | "top",
     color?: string,
@@ -69,7 +69,7 @@ const Body = (props: CardBodyProps) => {
   )
 }
 
-const Card = (props: CardPropTypes) => {
+const Card = (props: CardPropTypes): React.ReactElement => {
   const {
     aria = {},
     background = 'none',

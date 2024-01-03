@@ -13,7 +13,7 @@ type ProgressPillsProps = {
   className?: string,
   data?: { [key: string]: string },
   dark?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   steps?: number,
   title?: string,

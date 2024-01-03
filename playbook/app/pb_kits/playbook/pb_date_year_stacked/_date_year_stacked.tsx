@@ -14,11 +14,11 @@ type DateYearStackedProps = {
   dark?: boolean,
   data?: string,
   date: Date,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
 }
 
-const DateYearStacked = (props: DateYearStackedProps) => {
+const DateYearStacked = (props: DateYearStackedProps): React.ReactElement => {
   const { 
     align = 'left', 
     className, 
