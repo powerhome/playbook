@@ -1,4 +1,4 @@
-export const showElement = (elem:any) => {
+export const showElement = (elem: HTMLElement) => {
   elem.style.display = 'block';
   const height = elem.scrollHeight + 'px'; // Get its height
   elem.style.height = height; // Update the max-height
@@ -11,7 +11,7 @@ export const showElement = (elem:any) => {
   }, 300);
 };
 
-export const hideElement = (elem:any) => {
+export const hideElement = (elem: HTMLElement) => {
   elem.style.height = elem.scrollHeight + 'px';
 
   window.setTimeout(() => {

@@ -2,10 +2,10 @@ import React from 'react'
 import Icon from '../pb_icon/_icon'
 
 type CloseIconProps = {
-  onClose: () => any,
+  onClose: () => void,
 }
 
-export const CloseIcon = (props: CloseIconProps) => {
+export const CloseIcon = (props: CloseIconProps): React.ReactElement => {
   const { onClose } = props
   return (
     <div

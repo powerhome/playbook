@@ -21,7 +21,7 @@ type MessageProps = {
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   data?: object,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
   message: string,

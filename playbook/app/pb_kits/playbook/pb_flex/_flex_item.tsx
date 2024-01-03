@@ -6,7 +6,7 @@ type FlexItemPropTypes = {
   children: React.ReactNode[] | React.ReactNode,
   fixedSize?: string,
   grow?: boolean,
-  htmlOptions?: { [key: string]: string | number | boolean | Function },
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
   shrink?: boolean,
   className?: string,
   order?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'first' | 'none',

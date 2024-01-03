@@ -28,3 +28,8 @@ examples:
   - select_inline: Select Inline
   - select_inline_compact: Select Inline Compact
   - select_multiple: Select Multiple
+
+  swift:
+  - select_default_swift: Default
+  - select_error_swift: Error
+  - select_props_table: ""
