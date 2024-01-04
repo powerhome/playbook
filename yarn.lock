@@ -7778,10 +7778,10 @@ intersection-observer@^0.10.0:
   resolved "https://npm.powerapp.cloud/intersection-observer/-/intersection-observer-0.10.0.tgz#4d11d63c1ff67e21e62987be24d55218da1a1a69"
   integrity sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==
 
-intl-tel-input@^17.0.19:
-  version "17.0.19"
-  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-17.0.19.tgz#4c277e3bf02069fac2ef3821a62a3d7e8b55740a"
-  integrity sha512-GBNoUT4JVgm2e1N+yFMaBQ24g5EQfZhDznGneCM9IEZwfKsMUAUa1dS+v0wOiKpRAZ5IPNLJMIEEFGgqlCI22A==
+intl-tel-input@^18.3.4:
+  version "18.3.4"
+  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-18.3.4.tgz#8426793ca9b8a6f2cb0a7d6d9af0c0c16fb1225e"
+  integrity sha512-syGlrtcSSwA/J05Bv2HSvqrIOh46Ti/zNKrj1/E5T5eBoII4dgW+aG8SSaYqHtu8ZuJDICDXn1140pUgLosk/A==
 
 invariant@^2.2.2:
   version "2.2.4"
