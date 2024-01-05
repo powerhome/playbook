@@ -1,35 +1,37 @@
 import React from "react"
 
 import { Title, Flex, FlexItem, Card } from "playbook-ui"
-import Roofing from "@powerhome/playbook-icons/icons/roofing.svg"
-import Powergon from "@powerhome/playbook-icons/icons/powergon.svg"
-import Nitro from "@powerhome/playbook-icons/icons/nitro.svg"
-import ChevronDown from "@powerhome/playbook-icons/icons/chevron-down.svg"
-import Times from "@powerhome/playbook-icons/icons/times.svg"
-import Bars from "@powerhome/playbook-icons/icons/bars.svg"
-import Calendar from "@powerhome/playbook-icons/icons/calendar.svg"
-import Filter from "@powerhome/playbook-icons/icons/filter.svg"
-import Edit from "@powerhome/playbook-icons/icons/edit.svg"
-import Trash from "@powerhome/playbook-icons/icons/trash.svg"
-import Check from "@powerhome/playbook-icons/icons/check.svg"
-import Plus from "@powerhome/playbook-icons/icons/plus.svg"
-import Search from "@powerhome/playbook-icons/icons/search.svg"
-import ReactPartial from "./ReactPartial"
 
-const Icons = () => {
+import {
+  Roofing,
+  Powergon,
+  Nitro,
+  ChevronDown,
+  Times,
+  Bars,
+  Calendar,
+  Filter,
+  Edit,
+  Trash,
+  Check,
+  Plus,
+  Search,
+} from "@powerhome/playbook-icons-react"
+
+const ReactPartial = () => {
   return (
     <>
-      <Flex justify='center'>
+      <Flex justify='center' marginTop='xl'>
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Title size={1} tag='h1' text='Playbook Icons' />
         </FlexItem>
       </Flex>
-      <Flex justify='center'>
+      <Flex justify='center' marginTop='xl'>
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Title size={3} tag='h3' text='Power Icons' />
         </FlexItem>
       </Flex>
-      <Flex justify='center'>
+      <Flex justify='center' marginTop='xl'>
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Flex>
             <Card
@@ -37,31 +39,31 @@ const Icons = () => {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Roofing} />
+              <Roofing />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Powergon} />
+              <Powergon />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Nitro} />
+              <Nitro />
             </Card>
           </Flex>
         </FlexItem>
       </Flex>
-      <Flex justify='center'>
+      <Flex justify='center' marginTop='xl'>
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Title size={3} tag='h3' text='Interface Core Icons' />
         </FlexItem>
       </Flex>
-      <Flex justify='center'>
+      <Flex justify='center' marginTop='xl'>
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Flex>
             <Card
@@ -69,84 +71,83 @@ const Icons = () => {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={ChevronDown} />
+              <ChevronDown />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Times} />
+              <Times />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Bars} />
+              <Bars />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Times} />
+              <Calendar />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Calendar} />
+              <Filter />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Filter} />
+              <Edit />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Edit} />
+              <Trash />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Trash} />
+              <Check />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Check} />
+              <Plus />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Plus} />
+              <Search />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Search} />
+              <Search />
             </Card>
           </Flex>
         </FlexItem>
       </Flex>
-      <ReactPartial />
     </>
   )
 }
 
-export default Icons
+export default ReactPartial
