@@ -1,3 +1,31 @@
+# 13.15.0
+##### January 5, 2024
+
+List of changes:
+
+**Kit Enhancements:**
+- Convert Truncate Prop to Global [\#2975](https://github.com/powerhome/playbook/pull/2975) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+- Display Prop Responsive Arguments Are Blocking Font Color [\#2973](https://github.com/powerhome/playbook/pull/2973) ([israel-molestina](https://github.com/israel-molestina))
+
+**Improvements:**
+- Docs: Add `xxl` As Max Width Value [\#2986](https://github.com/powerhome/playbook/pull/2986) ([israel-molestina](https://github.com/israel-molestina))
+- Docs: List Nav Items Alphabetically Within Their Categories [\#2977](https://github.com/powerhome/playbook/pull/2977) ([augustomallmann](https://github.com/augustomallmann))
+- Docs: Person [\#2953](https://github.com/powerhome/playbook/pull/2953) ([nickamantia](https://github.com/nickamantia))
+- Docs: User [\#2898](https://github.com/powerhome/playbook/pull/2898) ([nickamantia](https://github.com/nickamantia))
+- Docs: Reaction Button Variant [\#2985](https://github.com/powerhome/playbook/pull/2985) ([rachelradford21](https://github.com/rachelradford21))
+- Docs: Select [\#2983](https://github.com/powerhome/playbook/pull/2983) ([rachelradford21](https://github.com/rachelradford21))
+- Docs: Dialog [\#2979](https://github.com/powerhome/playbook/pull/2979) ([rachelradford21](https://github.com/rachelradford21))
+- Linter Implementation: Kits A - D [\#2942](https://github.com/powerhome/playbook/pull/2942) ([augustomallmann](https://github.com/augustomallmann))
+- Ready Playbook Web for Swift! [\#2978](https://github.com/powerhome/playbook/pull/2978) ([jasoncypret](https://github.com/jasoncypret))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.14.0...13.15.0)
+
+
+
+
 # Customize Your Calendar: Introducing Quick Pick Custom Ranges for Tailored Date Selection
 
 ##### December 19, 2023
