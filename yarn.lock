@@ -2237,15 +2237,10 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-code/-/extension-code-2.0.2.tgz#d1dec289b57cbd73305ee0c37a092fe23e3ac565"
   integrity sha512-YG8BlqK50ZyYpBZ3KtO9/Ao+hQr3Z9wuW0fi7VIlwWferB20Px9WlBolAipRxfCh+oLmiacipHBIdGZGD+rC6A==
 
-"@tiptap/extension-document@^2.0.2":
-  version "2.0.2"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-document/-/extension-document-2.0.2.tgz#b07a4062cc0772e4129621b9b9a2e043a05395a1"
-  integrity sha512-rY87m1sezlD37v5hGndiA/B/3upR3hQurSEsWhWyQE/11lOshPQKCCHfDV6KLwKdjd8lfwfbXueH/SBFHtrYAQ==
-
-"@tiptap/extension-document@^2.1.12":
-  version "2.1.12"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-document/-/extension-document-2.1.12.tgz#e19e4716dfad60cbeb6abaf2f362fed759963529"
-  integrity sha512-0QNfAkCcFlB9O8cUNSwTSIQMV9TmoEhfEaLz/GvbjwEq4skXK3bU+OQX7Ih07waCDVXIGAZ7YAZogbvrn/WbOw==
+"@tiptap/extension-document@^2.0.2", "@tiptap/extension-document@^2.1.14":
+  version "2.1.14"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-document/-/extension-document-2.1.14.tgz#9b5234a7881f8ef222924a67ef771a2bfff8a75e"
+  integrity sha512-plOcTQBCysUyz8AXrkBhhAqa+ALyeGJPOku0L3lS6MCSAPM2/KRW/H4KXcrfW0G1lHKiJ4OkP8oHksxa6Id5zg==
 
 "@tiptap/extension-dropcursor@^2.0.2":
   version "2.0.2"
