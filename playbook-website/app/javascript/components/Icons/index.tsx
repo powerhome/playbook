@@ -144,7 +144,6 @@ const Icons = () => {
           </Flex>
         </FlexItem>
       </Flex>
-      <ReactPartial />
     </>
   )
 }
