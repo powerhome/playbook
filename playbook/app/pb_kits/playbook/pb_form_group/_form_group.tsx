@@ -2,18 +2,19 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GenericObject } from '../types'
 
 type FormGroupProps = {
   aria?: {[key: string]: string},
   children?: Node,
   className?: string,
-  data?: object,
+  data?: GenericObject,
   fullWidth?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
 }
 
-const FormGroup = (props: FormGroupProps) => {
+const FormGroup = (props: FormGroupProps): React.ReactElement => {
   const {
     aria = {},
     className,
