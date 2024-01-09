@@ -51,11 +51,11 @@ const Map = (props: MapProps) => {
       {
         zoomBtns ? (
           <Map.Controls
-          flyTo={flyTo}
-          flyToClick={flyToClick}
-          zoomBtns={zoomBtns}
-          zoomInClick={zoomInClick}
-          zoomOutClick={zoomOutClick}
+              flyTo={flyTo}
+              flyToClick={flyToClick}
+              zoomBtns={zoomBtns}
+              zoomInClick={zoomInClick}
+              zoomOutClick={zoomOutClick}
           />
          ) : null
       }

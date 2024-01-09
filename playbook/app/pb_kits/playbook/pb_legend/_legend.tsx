@@ -64,11 +64,11 @@ const Legend = (props: LegendProps) => {
         {
           prefixText && (
             <Title
-              dark={dark}
-              size={4}
-              tag="span"
-              text={` ${prefixText} `}
-          />
+                dark={dark}
+                size={4}
+                tag="span"
+                text={` ${prefixText} `}
+            />
           )
         }
         {` ${text} `}

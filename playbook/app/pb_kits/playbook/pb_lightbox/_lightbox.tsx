@@ -107,18 +107,18 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
           <div className="carousel">
           <Lightbox.Header
               icon={icon}
-              onClose={onClose}
-              onClickRight={onClickRight}
-              text={description}
               navRight={navRight}
+              onClickRight={onClickRight}
+              onClose={onClose}
+              text={description}
               title={title}
           />
             {children}
             <Carousel
-                setIndex={setActivePhoto}
                 currentIndex={activePhoto}
                 onChange={handleOnSlide}
                 photos={photosMap}
+                setIndex={setActivePhoto}
             />
           </div>
         </div>

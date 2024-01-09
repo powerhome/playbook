@@ -12,7 +12,7 @@ import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 type LineGraphProps = {
   align?: "left" | "right" | "center";
   axisTitle?: string;
-  dark?: Boolean;
+  dark?: boolean;
   xAxisCategories: [];
   yAxisMin: number;
   yAxisMax: number;
@@ -138,15 +138,15 @@ const LineGraph = ({
 
   return (
     <HighchartsReact
-      containerProps={{
+        containerProps={{
         className: classnames(globalProps(props), className),
         id: id,
         ...ariaProps,
         ...dataProps,
         ...htmlProps
       }}
-      highcharts={Highcharts}
-      options={options}
+        highcharts={Highcharts}
+        options={options}
     />
   );
 };

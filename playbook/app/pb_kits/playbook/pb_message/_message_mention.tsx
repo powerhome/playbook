@@ -34,11 +34,11 @@ const MessageMention = (props: MessageMentionProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
     >
       {children}
     </div>

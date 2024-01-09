@@ -9,7 +9,9 @@ type MapCustomButtonTypes = {
 
 const MapCustomButton = ({ onClick, icon }: MapCustomButtonTypes) => {
   return (
-    <Button className="pb_map-custom-button" onClick={onClick}>
+    <Button className="pb_map-custom-button"
+        onClick={onClick}
+    >
       <Icon icon={icon} />
     </Button>
   );
