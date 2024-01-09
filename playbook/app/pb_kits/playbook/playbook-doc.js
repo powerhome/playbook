@@ -9,6 +9,7 @@ import * as AvatarActionButton from 'pb_avatar_action_button/docs'
 import * as Background from 'pb_background/docs'
 import * as Badge from 'pb_badge/docs'
 import * as BarGraphDocs from 'pb_bar_graph/docs'
+import * as BetaIcon from 'pb_beta_icon/docs'
 import * as Body from 'pb_body/docs'
 import * as BreadCrumbs from 'pb_bread_crumbs/docs'
 import * as Button from 'pb_button/docs'
@@ -110,6 +111,7 @@ WebpackerReact.registerComponents({
   ...Background,
   ...Badge,
   ...BarGraphDocs,
+  ...BetaIcon,
   ...Body,
   ...BreadCrumbs,
   ...Button,

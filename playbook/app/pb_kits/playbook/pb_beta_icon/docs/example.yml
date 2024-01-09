@@ -1,0 +1,13 @@
+examples:
+  
+  rails:
+  - beta_icon_default: Default
+  
+  
+  react:
+  - beta_icon_default: Default
+  
+  
+  swift:
+  - beta_icon_default_swift: Default
+  
