@@ -14,7 +14,7 @@ import Trash from "@powerhome/playbook-icons/icons/trash.svg"
 import Check from "@powerhome/playbook-icons/icons/check.svg"
 import Plus from "@powerhome/playbook-icons/icons/plus.svg"
 import Search from "@powerhome/playbook-icons/icons/search.svg"
-import ReactPartial from "./ReactPartial"
+
 
 const Icons = () => {
   return (
