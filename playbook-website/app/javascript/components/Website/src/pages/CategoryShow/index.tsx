@@ -1,21 +1,38 @@
-import React from "react";
-import { NavLink, useLoaderData } from "react-router-dom";
-import { Body, Flex, Icon } from "playbook-ui";
+import React, { useState } from "react"
+import { NavLink, useLoaderData } from "react-router-dom"
+import { Body, Flex, Icon } from "playbook-ui"
 
-import { KitCard } from "../../components/KitCard";
-import { KitGrid } from "../../components/KitGrid";
-import { Hero } from "../../components/Hero";
-import { PageContainer } from "../../components/PageContainer";
-import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
+import { KitCard } from "../../components/KitCard"
+import { KitFilter } from "../../components/KitFilter"
+import { KitGrid } from "../../components/KitGrid"
+import { Hero } from "../../components/Hero"
+import { PageContainer } from "../../components/PageContainer"
+import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
+import { Kit } from "../ComponentList"
 
-import "./styles.scss";
+import "./styles.scss"
 
 export default function CategoryShow() {
-  const { components, name, description } = useLoaderData();
+  const { components, name, description } = useLoaderData()
+  const [kitsToShow, setKitsToShow] = useState(components)
+  const [platform, setPlatform] = useState('react')
 
   return (
     <>
       <Hero description={description} title={linkFormat(name)} />
+
+      <Flex
+        align="center"
+        orientation="column"
+        paddingBottom="lg"
+      >
+        <KitFilter
+          kits={components}
+          setFilteredKits={setKitsToShow}
+          setPlatform={setPlatform}
+        />
+      </Flex>
+
       <PageContainer>
         <Flex align="center" className="category-breadcrumb">
           <NavLink to="/beta/kits">
@@ -25,15 +42,21 @@ export default function CategoryShow() {
           <Body text={linkFormat(name)} />
         </Flex>
         <KitGrid>
-          {components.map(({ description, name }, index) => (
+          {!kitsToShow.length && (
+            <Body
+              text="No Results, Try Again"
+            />
+          )}
+          {kitsToShow.map(({ description, name }: Kit, index: number) => (
             <KitCard
               description={description}
               name={name}
               key={`category-${name}-${index}`}
+              platform={platform}
             />
           ))}
         </KitGrid>
       </PageContainer>
     </>
-  );
+  )
 }
