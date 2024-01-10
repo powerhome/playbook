@@ -122,9 +122,11 @@ const highchartsDarkTheme: ThemeProps = {
   // specific to gauge
   // unfilled gauge color
   pane: {
-    background: [{
+    background: {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment 
+      // @ts-ignore
       borderColor: colors.border_dark,
-    }],
+    },
   },
 
   plotOptions: {
