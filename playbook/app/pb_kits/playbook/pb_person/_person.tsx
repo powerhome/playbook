@@ -17,7 +17,7 @@ type PersonProps = {
   className?: string | string[],
   data?: { [key: string]: string },
   firstName: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   lastName: string,
 }

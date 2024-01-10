@@ -22,7 +22,7 @@ type SelectableCardIconProps = {
   dark?: boolean,
   data?: { [key: string]: string },
   disabled?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
   inputId?: string,
   multi?: boolean,

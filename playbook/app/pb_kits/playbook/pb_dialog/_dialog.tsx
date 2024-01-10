@@ -25,8 +25,8 @@ type DialogProps = {
   className?: string;
   closeable: boolean;
   confirmButton?: string;
-  data?: object;
-  htmlOptions?: { [key: string]: string | number | boolean | Function };
+  data?: {[key: string]: string},
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   fullHeight?: boolean;
   loading?: boolean;
@@ -45,7 +45,7 @@ type DialogProps = {
   trigger?: string;
 };
 
-const Dialog = (props: DialogProps) => {
+const Dialog = (props: DialogProps): React.ReactElement => {
   const {
     aria = {},
     cancelButton,
@@ -59,9 +59,9 @@ const Dialog = (props: DialogProps) => {
     loading = false,
     fullHeight = false,
     opened,
-    onCancel = () => {},
-    onConfirm = () => {},
-    onClose = () => {},
+    onCancel,
+    onConfirm,
+    onClose,
     placement = "center",
     portalClassName,
     shouldCloseOnOverlayClick = true,
@@ -168,22 +168,22 @@ const Dialog = (props: DialogProps) => {
   return (
     <DialogContext.Provider value={api}>
       <div 
-        {...ariaProps} 
-        {...dataProps}
-        {...htmlProps} 
-        className={classes}
+          {...ariaProps} 
+          {...dataProps}
+          {...htmlProps} 
+          className={classes}
       >
         <Modal
-          ariaHideApp={false}
-          className={dialogClassNames}
-          closeTimeoutMS={200}
-          contentLabel="Minimal Modal Example"
-          id={id}
-          isOpen={modalIsOpened}
-          onRequestClose={onClose}
-          overlayClassName={overlayClassNames}
-          portalClassName={portalClassName}
-          shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
+            ariaHideApp={false}
+            className={dialogClassNames}
+            closeTimeoutMS={200}
+            contentLabel="Minimal Modal Example"
+            id={id}
+            isOpen={modalIsOpened}
+            onRequestClose={onClose}
+            overlayClassName={overlayClassNames}
+            portalClassName={portalClassName}
+            shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         >
           <>
             {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}
@@ -193,33 +193,41 @@ const Dialog = (props: DialogProps) => {
                   className="dialog_status_text_align"
                   padding="md"
               >
-                <Flex align="center" orientation="column">
+                <Flex align="center"
+                    orientation="column"
+                >
                   <IconCircle
-                    icon={sweetAlertStatus[status].icon}
-                    size={sweetAlertStatus[status].size}
-                    variant={sweetAlertStatus[status].variant}
+                      icon={sweetAlertStatus[status].icon}
+                      size={sweetAlertStatus[status].size}
+                      variant={sweetAlertStatus[status].variant}
                   />
-                  <Title marginTop="sm" size={3}>
+                  <Title marginTop="sm"
+                      size={3}
+                  >
                     {title}
                   </Title>
-                  <Body marginTop="xs" text={text} />
+                  <Body marginTop="xs"
+                      text={text}
+                  />
                 </Flex>
               </Dialog.Body>
             )}
             {cancelButton && confirmButton ? (
               <Dialog.Footer>
                   <Button
-                    loading={loading}
-                    onClick={onConfirm}
-                    htmlType="button"
-                    variant="primary">
+                      htmlType="button"
+                      loading={loading}
+                      onClick={onConfirm}
+                      variant="primary"
+                  >
                     {confirmButton}
                   </Button>
                   <Button
-                    id="cancel-button"
-                    onClick={onCancel}
-                    variant="link"
-                    htmlType="button">
+                      htmlType="button"
+                      id="cancel-button"
+                      onClick={onCancel}
+                      variant="link"
+                  >
                     {cancelButton}
                   </Button>
               </Dialog.Footer>

@@ -19,7 +19,7 @@ type PersonContactProps = {
   className?: string | string[],
   data?: object,
   firstName: string,
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   lastName: string,
   contacts?: ContactItem[],

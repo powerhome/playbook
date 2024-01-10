@@ -24,7 +24,7 @@ type LightboxHeaderProps = {
   className?: string;
   closeable?: boolean;
   data?: { [key: string]: string | number };
-  htmlOptions?: { [key: string]: string | number | boolean | Function };
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   icon?: string;
   id?: string;
   onClickRight?: () => void;

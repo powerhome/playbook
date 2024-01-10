@@ -16,7 +16,7 @@ type TitleCountProps = {
   count?: number,
   dark?: boolean,
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   title?: string,
   size?: "lg" | "sm",

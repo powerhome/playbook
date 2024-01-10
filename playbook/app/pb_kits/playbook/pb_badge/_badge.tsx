@@ -19,7 +19,7 @@ type BadgeProps = {
     onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
   },
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | Function},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   removeIcon?: boolean,
   removeOnClick?: React.MouseEventHandler<HTMLSpanElement>,
@@ -27,7 +27,7 @@ type BadgeProps = {
   text?: string,
   variant?: "error" | "info" | "neutral" | "notification" | "primary" | "success" | "warning",
 } & GlobalProps
-const Badge = (props: BadgeProps) => {
+const Badge = (props: BadgeProps): React.ReactElement => {
   const {
     aria = {},
     className,

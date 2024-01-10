@@ -24,6 +24,7 @@ require "playbook/hover"
 require "playbook/border_radius"
 require "playbook/text_align"
 require "playbook/overflow"
+require "playbook/truncate"
 
 module Playbook
   class KitBase < ViewComponent::Base
@@ -53,6 +54,7 @@ module Playbook
     include Playbook::BorderRadius
     include Playbook::TextAlign
     include Playbook::Overflow
+    include Playbook::Truncate
 
     prop :id
     prop :data, type: Playbook::Props::HashProp, default: {}
