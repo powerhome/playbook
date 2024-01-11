@@ -112,7 +112,7 @@
     "jest-axe": "4.1.0",
     "jest-fail-on-console": "2.5.0",
     "jsx-control-statements": "^3.2.8",
-    "mini-css-extract-plugin": "0.12.0",
+    "mini-css-extract-plugin": "2.7.7",
     "node-sass": "^4.12.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
