@@ -50,9 +50,14 @@ export default function ComponentList() {
 
           <PageContainer>
             {!kitsToShow.length && (
-              <Body
-                text="No Results, Try Again"
-              />
+              <Flex
+                justify="center"
+                orientation="row"
+              >
+                <Body
+                  text="No Results, Try Again"
+                />
+              </Flex>
             )}
             {kitsToShow.map(({ name, components }: Kit, index: number) => (
               <section

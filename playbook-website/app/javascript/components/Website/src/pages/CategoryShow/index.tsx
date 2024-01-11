@@ -41,12 +41,19 @@ export default function CategoryShow() {
           <Icon className="category-breadcrumb-icon" icon="angle-right" />
           <Body text={linkFormat(name)} />
         </Flex>
-        <KitGrid>
-          {!kitsToShow.length && (
-            <Body
-              text="No Results, Try Again"
-            />
+
+        {!kitsToShow.length && (
+            <Flex
+              justify="center"
+              orientation="row"
+            >
+              <Body
+                text="No Results, Try Again"
+              />
+            </Flex>
           )}
+
+        <KitGrid>
           {kitsToShow.map(({ description, name }: Kit, index: number) => (
             <KitCard
               description={description}

@@ -108,11 +108,13 @@ export const KitFilter = ({ kits, setFilteredKits, setPlatform }: KitFilterProps
       </Nav>
 
       <TextInput
-        addOn={{ icon: 'search', alignment: 'left', border: false }}
+        addOn={{ icon: 'search', alignment: 'left' }}
         className="kit-filter"
         name="search"
         maxWidth="sm"
         onChange={handleOnChange}
+        paddingLeft={{ xs: "sm" }}
+        paddingRight={{ xs: "sm" }}
         placeholder="Filter Components by Name"
         value={search}
       />
