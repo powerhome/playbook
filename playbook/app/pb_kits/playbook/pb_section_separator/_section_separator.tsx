@@ -20,7 +20,7 @@ type SectionSeparatorProps = {
   variant?: "card" | "background",
 }
 
-const SectionSeparator = (props: SectionSeparatorProps) => {
+const SectionSeparator = (props: SectionSeparatorProps): React.ReactElement => {
   const {
     aria = {},
     children,
@@ -42,17 +42,19 @@ const SectionSeparator = (props: SectionSeparatorProps) => {
   return (
 
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
     >
       {
         children && children ||
         text && (
           <span>
-            <Caption text={text} dark={dark} />
+            <Caption dark={dark}
+                text={text}
+            />
           </span>
         )
       }
