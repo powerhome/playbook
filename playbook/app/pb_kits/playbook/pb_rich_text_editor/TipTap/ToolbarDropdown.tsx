@@ -9,7 +9,7 @@ import NavItem from '../../pb_nav/_item'
 
 import { ToolbarTypes } from './EditorTypes'
 
-const ToolbarDropdown = ({editor}: any) => {
+const ToolbarDropdown = ({editor}: any): React.ReactElement => {
   const [showPopover, setShowPopover] = useState(false)
 
 const toolbarDropdownItems = [
@@ -81,11 +81,21 @@ for (const { text, isActive, icon } of toolbarDropdownItems) {
   if (isActive) {
     activeCount ++
     activeItems.push(
-      <Flex align="center" key={icon} gap="xs">
-        <Icon icon={icon} size="lg" />
+      <Flex align="center"
+          gap="xs"
+          key={icon}
+      >
+        <Icon icon={icon}
+            size="lg"
+        />
         <div>{text}</div>
-        <Flex className={showPopover ? "fa-flip-vertical" : ""} display="inline_flex">
-          <Icon fixedWidth icon="angle-down" margin-left="xs" />
+        <Flex className={showPopover ? "fa-flip-vertical" : ""}
+            display="inline_flex"
+        >
+          <Icon fixedWidth
+              icon="angle-down"
+              margin-left="xs"
+          />
         </Flex>
       </Flex>
     );
@@ -93,7 +103,10 @@ for (const { text, isActive, icon } of toolbarDropdownItems) {
 }
 
 const popoverReference = (
-  <Button className="editor-dropdown-button" onClick={handleTogglePopover} variant="secondary">
+  <Button className="editor-dropdown-button"
+      onClick={handleTogglePopover}
+      variant="secondary"
+  >
     {
        activeCount === 2 ? (
         activeItems[1]
@@ -101,11 +114,21 @@ const popoverReference = (
         activeCount === 1 ? (
         activeItems[0] || null
         ) : (
-          <Flex align="center" key="paragraph" gap="xs">
-            <Icon icon="paragraph" size="lg" />
+          <Flex align="center"
+              gap="xs"
+              key="paragraph"
+          >
+            <Icon icon="paragraph"
+                size="lg"
+            />
             <div>Paragraph</div>
-            <Flex className={showPopover ? "fa-flip-vertical" : ""} display="inline_flex">
-              <Icon fixedWidth icon="angle-down" margin-left="xs" />
+            <Flex className={showPopover ? "fa-flip-vertical" : ""}
+                display="inline_flex"
+            >
+              <Icon fixedWidth
+                  icon="angle-down"
+                  margin-left="xs"
+              />
             </Flex>
           </Flex>
         )
@@ -124,21 +147,21 @@ const popoverReference = (
           show={showPopover}
       >
         <Nav 
-          paddingTop="xs"
-          paddingBottom="xs" 
-          variant="subtle"
+            paddingBottom="xs"
+            paddingTop="xs" 
+            variant="subtle"
         >
-          {toolbarDropdownItems.map(({ icon, text, onclick, isActive}:ToolbarTypes, index:number) => (
+          {toolbarDropdownItems.map(({ icon, text, onclick, isActive}: ToolbarTypes, index: number) => (
             <NavItem
-              cursor="pointer"
-              className={`pb_tiptap_toolbar_dropdown_list_item ${isActive ? "is-active" : ""}`}
-              iconLeft={icon}
-              key={`${text}_${index}`}
-              margin='none'
-              onClick={()=> {onclick(); setShowPopover(false)}}
-              text={text}
-              paddingTop='xxs'
-              paddingBottom='xxs'
+                className={`pb_tiptap_toolbar_dropdown_list_item ${isActive ? "is-active" : ""}`}
+                cursor="pointer"
+                iconLeft={icon}
+                key={`${text}_${index}`}
+                margin='none'
+                onClick={()=> {onclick(); setShowPopover(false)}}
+                paddingBottom='xxs'
+                paddingTop='xxs'
+                text={text}
             />
           ))}
         </Nav>
