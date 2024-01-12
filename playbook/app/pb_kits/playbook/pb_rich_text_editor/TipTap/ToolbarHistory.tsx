@@ -3,7 +3,7 @@ import FlexItem from "../../pb_flex/_flex_item";
 import EditorButton from "./EditorButton";
 import { ToolbarTypes } from "./EditorTypes";
 
-const ToolbarHistoryItems = ({editor}:any) => {
+const ToolbarHistoryItems = ({editor}: any): React.ReactElement => {
 
 const toolbarHistoryItems = [
     {
@@ -26,14 +26,14 @@ const toolbarHistoryItems = [
     <>
     <FlexItem displayFlex>
           {toolbarHistoryItems.map(
-            ({ onclick, classname, disable, icon, text }:ToolbarTypes, index:number) => (
+            ({ onclick, classname, disable, icon, text }: ToolbarTypes, index: number) => (
               <EditorButton
-                classname={classname}
-                onclick={onclick}
-                disable={disable}
-                icon={icon}
-                key={index}
-                text={text}
+                  classname={classname}
+                  disable={disable}
+                  icon={icon}
+                  key={index}
+                  onclick={onclick}
+                  text={text}
               />
             )
           )}
