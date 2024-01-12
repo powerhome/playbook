@@ -3,7 +3,7 @@ export type ToolbarTypes = {
     icon?: string,
     isActive?: string | null,
     text?: string,
-    onclick?: () => {}
+    onclick?: () => undefined
     classname?: string
     disable?: boolean
 }
