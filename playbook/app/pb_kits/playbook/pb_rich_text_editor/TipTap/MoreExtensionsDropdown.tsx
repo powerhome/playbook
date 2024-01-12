@@ -20,17 +20,19 @@ const MoreExtensionsDropdown = ({extensions}: any) => {
 
 const popoverReference = (
     <button
-      className="toolbar_button"
-      onClick={handleTogglePopover}
-      role="button"
-      type="button"
+        className="toolbar_button"
+        onClick={handleTogglePopover}
+        role="button"
+        type="button"
     >
     <Flex 
-      align="center"
-      className="toolbar_button_icon"
-      justify="center"
+        align="center"
+        className="toolbar_button_icon"
+        justify="center"
     >
-      <Icon icon="ellipsis" size="lg" />
+      <Icon icon="ellipsis"
+          size="lg"
+      />
     </Flex>
   </button>
 
@@ -46,21 +48,21 @@ const popoverReference = (
           show={showPopover}
       >
         <Nav 
-          paddingTop={extensions.length > 1 ? "xs" : "none"}
-          paddingBottom={extensions.length > 1 ? "xs" : "none"} 
-          variant="subtle"
+            paddingBottom={extensions.length > 1 ? "xs" : "none"}
+            paddingTop={extensions.length > 1 ? "xs" : "none"} 
+            variant="subtle"
         >
-          {extensions && extensions.map(({ icon, text, onclick, isActive}:any, index:number) => ( 
+          {extensions && extensions.map(({ icon, text, onclick, isActive}: any, index: number) => ( 
             <NavItem
-              cursor="pointer"
-              className={`pb_tiptap_toolbar_dropdown_list_item ${isActive ? "is-active" : ""}`}
-              iconLeft={icon}
-              key={`${text}_${index}`}
-              margin='none'
-              onClick={()=> {onclick(); setShowPopover(false)}}
-              text={text}
-              paddingTop='xxs'
-              paddingBottom='xxs'
+                className={`pb_tiptap_toolbar_dropdown_list_item ${isActive ? "is-active" : ""}`}
+                cursor="pointer"
+                iconLeft={icon}
+                key={`${text}_${index}`}
+                margin='none'
+                onClick={()=> {onclick(); setShowPopover(false)}}
+                paddingBottom='xxs'
+                paddingTop='xxs'
+                text={text}
             />
           ))}
         </Nav>
