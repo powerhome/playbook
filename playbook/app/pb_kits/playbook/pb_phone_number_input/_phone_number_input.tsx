@@ -62,6 +62,7 @@ const formatAllCountries = () => {
 formatAllCountries()
 
 const containOnlyNumbers = (value: string) => {
+  // eslint-disable-next-line no-useless-escape
   return /^[()+\-\ .\d]*$/g.test(value)
 }
 
@@ -259,9 +260,9 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   if (required) textInputProps.required = true
 
   return (
-    <div 
-      {...wrapperProps} 
-      {...htmlProps}
+    <div
+        {...wrapperProps}
+        {...htmlProps}
     >
       <TextInput
           ref={
