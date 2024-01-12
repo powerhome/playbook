@@ -95,7 +95,7 @@
     "circular-dependency-plugin": "5.2.2",
     "clean-webpack-plugin": "2.0.2",
     "copy-webpack-plugin": "6.4.1",
-    "css-loader": "3.6.0",
+    "css-loader": "6.9.0",
     "css-modules-flow-types-loader": "0.3.1",
     "es5-shim": "4.6.6",
     "eslint": "6.8.0",
