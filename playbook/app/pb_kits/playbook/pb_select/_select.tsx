@@ -63,7 +63,7 @@ const Select = ({
   inline = false,
   multiple = false,
   name,
-  onChange = () => {},
+  onChange = () => undefined,
   options = [],
   required = false,
   value,
