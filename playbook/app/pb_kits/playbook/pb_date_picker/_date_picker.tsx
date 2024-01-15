@@ -32,6 +32,7 @@ type DatePickerProps = {
   inputAria?: { [key: string]: string },
   inputData?: { [key: string]: string },
   inputOnChange?: (e: React.FormEvent<HTMLInputElement>) => void,
+  inputSpacing?: { [key: string]: string },
   inputValue?: string,
   label?: string,
   maxDate: string,
@@ -76,6 +77,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     inputAria = {},
     inputData = {},
     inputOnChange,
+    inputSpacing = {},
     inputValue,
     label = 'Date Picker',
     maxDate,
@@ -182,7 +184,7 @@ useEffect(() => {
             <div className="date_picker_input_wrapper">
               <input
                   autoComplete="off"
-                  className="date_picker_input"
+                  className={`date_picker_input ${globalProps(inputSpacing)}`}
                   disabled={disableInput}
                   id={pickerId}
                   name={name}
