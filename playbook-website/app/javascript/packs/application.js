@@ -26,6 +26,7 @@ import PbKitPlayground from '../components/PbKitPlayground'
 import AvailableProps from '../components/AvailableProps'
 import MainSidebar from '../components/MainSidebar'
 import HomepageHero from '../components/HomepageHero'
+import Icons from '../components/Icons'
 import AnchorJS from 'anchor-js'
 import { Website } from '../packs/app'
 
@@ -51,6 +52,7 @@ WebpackerReact.registerComponents({
   MainSidebar,
   Website,
   HomepageHero,
+  Icons,
 })
 
 // Produce image assets
