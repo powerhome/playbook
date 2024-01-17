@@ -89,7 +89,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     inputValue,
     label = 'Date Picker',
     margin,
-    marginBottom,
+    marginBottom = "sm",
     marginTop,
     marginRight,
     marginLeft,
