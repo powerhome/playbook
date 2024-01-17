@@ -2042,6 +2042,16 @@
   resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.1.0.tgz#f1e1151481f51421186ba8caad99fadb24b1fe51"
   integrity sha512-8e5DRgnKPbJ+ofAtqjUPZTxcgHg/TVf52WeNqAGBUXSS4QWHemL6fj1n/YHfAIvx3aMUhFwrw2lUNofUocgK3A==
 
+"@powerhome/playbook-icons-react@0.0.1-alpha.2":
+  version "0.0.1-alpha.2"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/c42ced1d7f9be19630cc013075e63238b7d25570#c42ced1d7f9be19630cc013075e63238b7d25570"
+  integrity sha512-Z6SoCndm6HTQav5Up3LxTj+0xW3BOy3pj2WnsdQzCBrPdf9oGR+k7zxvVX3YL8Jgtb6TCK0yr8FVYhnvbp/64A==
+
+"@powerhome/playbook-icons@0.0.1-alpha.2":
+  version "0.0.1-alpha.2"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/5dce20f3dab62a07cb50a9414f08688a8c3cab24#5dce20f3dab62a07cb50a9414f08688a8c3cab24"
+  integrity sha512-DwbvpTfyiK6DHglGwyJ8yt/RRaMHOI51X5zN2cvFyancuwkdhXZy69v9Ii4yrnCfFgiZUbHG6iq4W7S9rrqvfg==
+
 "@rails/webpacker@5.2.1":
   version "5.2.1"
   resolved "https://npm.powerapp.cloud/@rails/webpacker/-/webpacker-5.2.1.tgz#87cdbd4af2090ae2d74bdc51f6f04717d907c5b3"
