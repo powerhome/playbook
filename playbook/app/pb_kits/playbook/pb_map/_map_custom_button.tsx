@@ -3,7 +3,7 @@ import Button from "../pb_button/_button";
 import Icon from "../pb_icon/_icon";
 
 type MapCustomButtonTypes = {
-  onClick?: () => {};
+  onClick?: () => void;
   icon?: string;
 };
 

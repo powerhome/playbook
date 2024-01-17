@@ -7,7 +7,7 @@ type MessageMentionProps = {
   aria: { [key: string]: string },
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
-  data?: object,
+  data?: Record<string, unknown>,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   variant: 'user' | 'self',

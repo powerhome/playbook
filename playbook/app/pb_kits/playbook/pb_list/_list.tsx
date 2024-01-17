@@ -9,7 +9,7 @@ type ListProps = {
   className?: string;
   children: React.ReactNode[] | React.ReactNode;
   dark?: boolean;
-  data?: object;
+  data?: Record<string, unknown>;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   layout?: "" | "left" | "right";

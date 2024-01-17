@@ -12,7 +12,7 @@ type LegendProps = {
   className?: string,
   color?: string,
   dark?: boolean,
-  data?: object,
+  data?: Record<string, unknown>,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   prefixText?: string,

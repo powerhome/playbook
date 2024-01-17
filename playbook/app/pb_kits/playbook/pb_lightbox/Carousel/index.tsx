@@ -20,8 +20,8 @@ type CarouselType = {
 export default function Carousel({
   currentIndex,
   photos,
-  onClick = ()=>{},
-  onChange = ()=>{},
+  onClick,
+  onChange,
   setIndex,
 }: CarouselType): React.ReactElement {
   useEffect(() => {

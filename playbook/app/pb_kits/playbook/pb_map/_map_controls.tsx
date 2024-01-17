@@ -6,9 +6,9 @@ import Flex from "../pb_flex/_flex";
 type MapControlTypes = {
   zoomBtns?: boolean, 
   flyTo?: boolean, 
-  zoomInClick?: () => {},
-  zoomOutClick?: () => {},
-  flyToClick?: () => {},
+  zoomInClick?: () => void,
+  zoomOutClick?: () => void,
+  flyToClick?: () => void,
   children?: React.ReactNode | React.ReactNode[]
 }
 
