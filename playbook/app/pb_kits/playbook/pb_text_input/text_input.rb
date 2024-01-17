@@ -26,7 +26,7 @@ module Playbook
                     nested_kit: Playbook::PbTextInput::AddOn
 
       def default_margin_bottom
-        object.margin_bottom.present? ? " #{object.margin}" : " mb_sm"
+        object.margin_bottom.present? ? "" : " mb_sm"
       end
 
       def classname
