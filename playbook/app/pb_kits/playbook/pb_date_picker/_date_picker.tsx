@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import classnames from 'classnames'
 
+import { Spacing } from "../types"
+
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
@@ -8,6 +10,7 @@ import datePickerHelper from './date_picker_helper'
 import Icon from '../pb_icon/_icon'
 import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
+
 
 type DatePickerProps = {
   allowInput?: boolean,
@@ -34,6 +37,13 @@ type DatePickerProps = {
   inputOnChange?: (e: React.FormEvent<HTMLInputElement>) => void,
   inputValue?: string,
   label?: string,
+  margin?: Spacing;
+  marginBottom?: Spacing;
+  marginTop?: Spacing;
+  marginRight?: Spacing;
+  marginLeft?: Spacing;
+  marginX?: Spacing;
+  marginY?: Spacing;
   maxDate: string,
   minDate: string,
   name: string,
@@ -78,6 +88,13 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     inputOnChange,
     inputValue,
     label = 'Date Picker',
+    margin,
+    marginBottom,
+    marginTop,
+    marginRight,
+    marginLeft,
+    marginX,
+    marginY,
     maxDate,
     minDate,
     mode = 'single',
@@ -134,8 +151,36 @@ useEffect(() => {
     required: false,
   }, scrollContainer)
 })
+
+  const spacingMarginProps = {
+    margin,
+    marginBottom,
+    marginTop,
+    marginRight,
+    marginLeft,
+    marginX,
+    marginY,
+  }
+
   const filteredProps = {...props}
   delete filteredProps?.position
+  delete filteredProps?.margin;
+  delete filteredProps?.marginX;
+  delete filteredProps?.marginY;
+  delete filteredProps?.marginBottom;
+  delete filteredProps?.marginTop;
+  delete filteredProps?.marginRight;
+  delete filteredProps?.marginLeft;
+
+  const inputClasses = classnames(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    globalProps(spacingMarginProps),
+    className
+  )
+
+  console.log(inputClasses)
+  console.log('duckyyyyyy')
 
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
@@ -179,7 +224,7 @@ useEffect(() => {
             text={hideLabel ? null : label}
         />
           <>
-            <div className="date_picker_input_wrapper">
+            <div className={`date_picker_input_wrapper ${inputClasses}`}>
               <input
                   autoComplete="off"
                   className="date_picker_input"

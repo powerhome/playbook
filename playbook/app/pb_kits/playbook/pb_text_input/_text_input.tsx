@@ -70,12 +70,15 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   const shouldShowAddOn = icon !== null
   const addOnCss = shouldShowAddOn ? 'text_input_wrapper_add_on' : ""
   const addOnDarkModeCardCss = (shouldShowAddOn && dark) ? 'add-on-card-dark' : ""
+  const defaultMarginBottom = props.marginBottom ?? "mb_sm"
+
   const css = classnames([
     'pb_text_input_kit',
     inline ? 'inline' : "",
     error ? 'error' : "",
     globalProps(props),
     className,
+    defaultMarginBottom
   ])
   const addOnIcon = (
     <Icon
@@ -144,7 +147,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         {...htmlProps}
         className={css}
     >
-      {label && 
+      {label &&
         <Caption
             className="pb_text_input_kit_label"
             text={label}
