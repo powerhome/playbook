@@ -74,8 +74,22 @@ module Playbook
       prop :year_range, type: Playbook::Props::Array,
                         default: [1900, 2100]
 
+      def margins_to_remove
+        margin_classes_to_remove = []
+        margin_classes_to_remove << "m_#{object.margin}" if object.margin
+        margin_classes_to_remove << "mx_#{object.margin_x}" if object.margin_x
+        margin_classes_to_remove << "my_#{object.margin_y}" if object.margin_y
+        margin_classes_to_remove << "mb_#{object.margin_bottom}" if object.margin_bottom
+        margin_classes_to_remove << "mt_#{object.margin_top}" if object.margin_top
+        margin_classes_to_remove << "mr_#{object.margin_right}" if object.margin_right
+        margin_classes_to_remove << "ml_#{object.margin_left}" if object.margin_left
+        margin_classes_to_remove
+      end
+
       def classname
-        generate_classname("pb_date_picker_kit")
+        regex = Regexp.union(margins_to_remove)
+        classnames = generate_classname("pb_date_picker_kit")
+        classnames.gsub(regex, "").strip.gsub(/\s+/, " ")
       end
 
       def date_picker_config
