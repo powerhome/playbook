@@ -179,9 +179,6 @@ useEffect(() => {
     className
   )
 
-  console.log(inputClasses)
-  console.log('duckyyyyyy')
-
   const classes = classnames(
     buildCss('pb_date_picker_kit'),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
