@@ -40,7 +40,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     id = '',
     initialPhoto = 0,
     photos,
-    onChange,
+    onChange = () => undefined,
     onClose,
     onClickRight,
     icon = 'times',

@@ -21,7 +21,7 @@ export default function Carousel({
   currentIndex,
   photos,
   onClick,
-  onChange,
+  onChange = () => undefined,
   setIndex,
 }: CarouselType): React.ReactElement {
   useEffect(() => {
