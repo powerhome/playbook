@@ -2225,10 +2225,10 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-bold/-/extension-bold-2.0.2.tgz#d0666e50df86791f0acfc56f79968b3de1ec4ae4"
   integrity sha512-WRqc8WeKx3pmi0u0Svre5rhMeTT1c/Vch48BWTkUsmn2PAufg/mrmmR1fJ8Bp5soazEKknOT5LVe69OYKLfHIQ==
 
-"@tiptap/extension-bubble-menu@^2.0.2":
-  version "2.0.2"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-bubble-menu/-/extension-bubble-menu-2.0.2.tgz#7c3fffe0b9c766d5cd7f571bf17e39ccc966a4ca"
-  integrity sha512-cZDAMnf1+E711zY9RApWFajNp+ScRdN3L9+k6XEUnmTHlfVIeE1jsPmpH3PIZpMUpAO4TQ76DvLfEb4hKSu3eQ==
+"@tiptap/extension-bubble-menu@^2.1.16":
+  version "2.1.16"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-bubble-menu/-/extension-bubble-menu-2.1.16.tgz#4997de2811ee96648d1b5ba2148bc223840f7db5"
+  integrity sha512-MwKCmu2kU7+Xln/BvlrolU2hCXgoCoTr4NXJ+3v8A9w7tIq8leADoWacfEee2t3VNnGdXw/Xjza+DAr77JWjGg==
   dependencies:
     tippy.js "^6.3.7"
 
@@ -2262,10 +2262,10 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-dropcursor/-/extension-dropcursor-2.0.2.tgz#fc821e83a35517fbb04eb5b531f2ece9564a2265"
   integrity sha512-jHBq5fAlgUeZBHPtdAeS40Xmx+2sUvzTnHonU6cDKOpD3+dzwNHEqVSk/9vcjEIcqeM5w3eOIS/AGvoFq7RCjA==
 
-"@tiptap/extension-floating-menu@^2.0.2":
-  version "2.0.2"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-floating-menu/-/extension-floating-menu-2.0.2.tgz#837c64817a54b16264a8114a7f603ce4d2d434af"
-  integrity sha512-sYBBmMyjygHimtekZMzOAU1yvHjn36O1tZ+lXR/K2F97WWd5Y9WJo+iUrnbzBDMTXGvPi5ZTByXg36YKFRTmPg==
+"@tiptap/extension-floating-menu@^2.1.16":
+  version "2.1.16"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-floating-menu/-/extension-floating-menu-2.1.16.tgz#1ee53b1244ff23653114fdc248d6856a2eaa7974"
+  integrity sha512-VBT4HBhkKr9S1VExyTb/qfQyZ5F0VJLasUoH8E4kdq3deCeifmTTIOukuXK5QbicFHVQmY2epeU6+w5c/bAcHQ==
   dependencies:
     tippy.js "^6.3.7"
 
@@ -2375,13 +2375,13 @@
     prosemirror-transform "^1.7.0"
     prosemirror-view "^1.28.2"
 
-"@tiptap/react@^2.0.2":
-  version "2.0.2"
-  resolved "https://npm.powerapp.cloud/@tiptap/react/-/react-2.0.2.tgz#a252daf39195afc9cc73f7f48d54a01d6bb23988"
-  integrity sha512-m/id2H5bvdz0X6pW0T/4wsDwp55fBO03iMa6OVsbASmwvQuCLoemthtZrHmhn609UTWYd8CXnSeDht2t5pz03A==
+"@tiptap/react@^2.1.16":
+  version "2.1.16"
+  resolved "https://npm.powerapp.cloud/@tiptap/react/-/react-2.1.16.tgz#20addbd7a0abac8942d2aea83dcb922c44d7ca9a"
+  integrity sha512-ywws50aV/8TNBBlFNXVR/bWpi5n0f+CDiwixsPGzne9T/zMfz30FnXej2xo7Qm1LLBdC0d65Mz7otdz+rn65cA==
   dependencies:
-    "@tiptap/extension-bubble-menu" "^2.0.2"
-    "@tiptap/extension-floating-menu" "^2.0.2"
+    "@tiptap/extension-bubble-menu" "^2.1.16"
+    "@tiptap/extension-floating-menu" "^2.1.16"
 
 "@tiptap/starter-kit@^2.0.2":
   version "2.0.2"
