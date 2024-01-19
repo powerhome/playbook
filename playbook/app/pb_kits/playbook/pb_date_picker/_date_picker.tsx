@@ -88,13 +88,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     inputOnChange,
     inputValue,
     label = 'Date Picker',
-    margin,
     marginBottom = "sm",
-    marginTop,
-    marginRight,
-    marginLeft,
-    marginX,
-    marginY,
     maxDate,
     minDate,
     mode = 'single',
@@ -153,24 +147,12 @@ useEffect(() => {
 })
 
   const spacingMarginProps = {
-    margin,
     marginBottom,
-    marginTop,
-    marginRight,
-    marginLeft,
-    marginX,
-    marginY,
   }
 
   const filteredProps = {...props}
   delete filteredProps?.position
-  delete filteredProps?.margin;
-  delete filteredProps?.marginX;
-  delete filteredProps?.marginY;
   delete filteredProps?.marginBottom;
-  delete filteredProps?.marginTop;
-  delete filteredProps?.marginRight;
-  delete filteredProps?.marginLeft;
 
   const inputClasses = classnames(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
