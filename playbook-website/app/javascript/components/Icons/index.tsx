@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Title, Flex, FlexItem, Card } from "playbook-ui"
+import { Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
 import Roofing from "@powerhome/playbook-icons/icons/roofing.svg"
 import Powergon from "@powerhome/playbook-icons/icons/powergon.svg"
 import Nitro from "@powerhome/playbook-icons/icons/nitro.svg"
@@ -37,21 +37,21 @@ const Icons = () => {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Roofing} />
+              <Icon icon={Roofing}/>
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Powergon} />
+              <Icon icon={Powergon}/>
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Nitro} />
+              <Icon icon={Nitro} />
             </Card>
           </Flex>
         </FlexItem>
@@ -69,77 +69,77 @@ const Icons = () => {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={ChevronDown} />
+              <Icon icon={ChevronDown} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Times} />
+              <Icon icon={Times} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Bars} />
+              <Icon icon={Bars} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Times} />
+              <Icon icon={Times} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Calendar} />
+              <Icon icon={Calendar} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Filter} />
+              <Icon icon={Filter} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Edit} />
+              <Icon icon={Edit} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Trash} />
+              <Icon icon={Trash} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Check} />
+              <Icon icon={Check} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Plus} />
+              <Icon icon={Plus} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Search} />
+              <Icon icon={Search} />
             </Card>
           </Flex>
         </FlexItem>

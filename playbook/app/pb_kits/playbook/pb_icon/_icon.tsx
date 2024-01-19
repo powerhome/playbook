@@ -87,7 +87,7 @@ const Icon = (props: IconProps) => {
   // this ensures the JS will not do any further operations
   // faClasses[`fa-${icon}`] = customIcon ? 'custom' : icon
   if (!customIcon) faClasses[`fa-${icon}`] = icon
-  
+
   const classes = classnames(
     flipMap[flip],
     'pb_icon_kit',
@@ -121,6 +121,19 @@ const Icon = (props: IconProps) => {
               id,
             })
           }
+        </>
+      )
+    else if (icon.endsWith('.svg'))
+      return (
+        <>
+          <span
+              {...dataProps}
+              {...htmlProps}
+              className={classesEmoji}
+              id={id}
+          >
+            <img src={icon} />
+          </span>
         </>
       )
     else if (isValidEmoji(icon))
