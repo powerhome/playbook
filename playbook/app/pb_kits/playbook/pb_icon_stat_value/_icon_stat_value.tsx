@@ -9,11 +9,12 @@ import Caption from '../pb_caption/_caption'
 import Flex from '../pb_flex/_flex'
 import IconCircle from '../pb_icon_circle/_icon_circle'
 import Title from '../pb_title/_title'
+import { GenericObject } from '../types'
 
 type IconStatValueProps = {
   aria?: { [key: string]: string },
   className?: string,
-  data?: object,
+  data?: GenericObject,
   dark?: boolean,
   icon: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -34,7 +35,7 @@ type IconStatValueProps = {
     | "green",
 }
 
-const IconStatValue = (props: IconStatValueProps) => {
+const IconStatValue = (props: IconStatValueProps): React.ReactElement => {
   const {
     aria = {},
     className,
