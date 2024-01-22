@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentType, ReactElement } from 'react';
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
@@ -27,7 +27,7 @@ type IconProps = {
   data?: {[key: string]: string},
   fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
-  icon: string,
+  icon: any,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   inverse?: boolean,
@@ -57,7 +57,7 @@ const Icon = (props: IconProps) => {
     fixedWidth = true,
     flip = "none",
     htmlOptions = {},
-    icon,
+    icon = "",
     id,
     inverse = false,
     listItem = false,
@@ -82,11 +82,14 @@ const Icon = (props: IconProps) => {
 
   }
 
+  const iconString = typeof icon === 'string'
+  const IconFunction = icon
+
   // Lets check and see if the icon prop is referring to a custom Power icon...
   // If so, then set fa-icon to "custom"
   // this ensures the JS will not do any further operations
   // faClasses[`fa-${icon}`] = customIcon ? 'custom' : icon
-  if (!customIcon) faClasses[`fa-${icon}`] = icon
+  if (!customIcon && iconString) faClasses[`fa-${icon}`] = icon
 
   const classes = classnames(
     flipMap[flip],
@@ -123,16 +126,16 @@ const Icon = (props: IconProps) => {
           }
         </>
       )
-    else if (icon.endsWith('.svg'))
+    else if (!iconString)
       return (
         <>
           <span
               {...dataProps}
               {...htmlProps}
-              className={classesEmoji}
+              className="pbiconhere"
               id={id}
           >
-            <img src={icon} />
+            <IconFunction />
           </span>
         </>
       )

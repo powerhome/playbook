@@ -1,20 +1,19 @@
 import React from "react"
 
 import { Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
-import Roofing from "@powerhome/playbook-icons/icons/roofing.svg"
-import Powergon from "@powerhome/playbook-icons/icons/powergon.svg"
-import Nitro from "@powerhome/playbook-icons/icons/nitro.svg"
-import ChevronDown from "@powerhome/playbook-icons/icons/chevron-down.svg"
-import Times from "@powerhome/playbook-icons/icons/times.svg"
-import Bars from "@powerhome/playbook-icons/icons/bars.svg"
-import Calendar from "@powerhome/playbook-icons/icons/calendar.svg"
-import Filter from "@powerhome/playbook-icons/icons/filter.svg"
-import Edit from "@powerhome/playbook-icons/icons/edit.svg"
-import Trash from "@powerhome/playbook-icons/icons/trash.svg"
-import Check from "@powerhome/playbook-icons/icons/check.svg"
-import Plus from "@powerhome/playbook-icons/icons/plus.svg"
-import Search from "@powerhome/playbook-icons/icons/search.svg"
-
+import Roofing from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/roofing.svg"
+import Powergon from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/powergon.svg"
+import Nitro from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/nitro.svg"
+import ChevronDown from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/chevron-down.svg"
+import Times from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/times.svg"
+import Bars from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/bars.svg"
+import Calendar from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/calendar.svg"
+import Filter from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/filter.svg"
+import Edit from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/edit.svg"
+import Trash from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/trash.svg"
+import Check from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/check.svg"
+import Plus from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/plus.svg"
+import Search from "!babel-loader!react-svg-loader!@powerhome/playbook-icons/icons/search.svg"
 
 const Icons = () => {
   return (
