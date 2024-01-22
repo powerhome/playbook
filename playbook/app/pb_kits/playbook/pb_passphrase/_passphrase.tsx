@@ -13,25 +13,26 @@ import Flex from '../pb_flex/_flex'
 import Icon from '../pb_icon/_icon'
 import PbReactPopover from '../pb_popover/_popover'
 import TextInput from '../pb_text_input/_text_input'
+import { GenericObject } from "../types"
 
 type PassphraseProps = {
   aria?: { [key: string]: string },
   confirmation?: boolean,
   className?: string,
-  data?: object,
+  data?: GenericObject,
   dark?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
-  inputProps?: {},
+  inputProps?: GenericObject,
   label?: string,
-  onChange: (inputValue: String) => void,
+  onChange: (inputValue: string) => void,
   showTipsBelow?: "always" | "xs" | "sm" | "md" | "lg" | "xl",
   tips?: Array<string>,
   uncontrolled?: boolean,
   value: string,
 }
 
-const Passphrase = (props: PassphraseProps) => {
+const Passphrase = (props: PassphraseProps): React.ReactElement => {
   const {
     aria = {},
     className,
@@ -42,7 +43,7 @@ const Passphrase = (props: PassphraseProps) => {
     id,
     inputProps = {},
     label = confirmation ? "Confirm Passphrase" : "Passphrase",
-    onChange = () => { },
+    onChange = () => undefined,
     showTipsBelow = "always",
     tips = [],
     uncontrolled = false,
@@ -84,60 +85,60 @@ const Passphrase = (props: PassphraseProps) => {
     globalProps(props),
     className
   )
-   const dataProps = buildDataProps(data)
-   const htmlProps = buildHtmlProps(htmlOptions)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const popoverReference = (
     <CircleIconButton
-      className={tipClass}
-      dark={dark}
-      icon="info-circle"
-      onClick={toggleShowPopover}
-      variant="link"
+        className={tipClass}
+        dark={dark}
+        icon="info-circle"
+        onClick={toggleShowPopover}
+        variant="link"
     />
   )
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
     >
       <label>
         <Flex align="baseline">
           <Caption
-            className="passphrase-label"
-            text={label}
+              className="passphrase-label"
+              text={label}
           />
           {tips.length > 0 && !confirmation &&
             <PbReactPopover
-              className="passphrase-tips"
-              closeOnClick="outside"
-              placement="right"
-              reference={popoverReference}
-              shouldClosePopover={handleShouldClosePopover}
-              show={showPopover}
+                className="passphrase-tips"
+                closeOnClick="outside"
+                placement="right"
+                reference={popoverReference}
+                shouldClosePopover={handleShouldClosePopover}
+                show={showPopover}
             >
               <Flex
-                align="center"
-                orientation="column"
+                  align="center"
+                  orientation="column"
               >
                 <Caption
-                  marginBottom="xs"
-                  text="Tips for a good passphrase"
+                    marginBottom="xs"
+                    text="Tips for a good passphrase"
                 />
                 <div>
                   {tips.map((tip, i) => (
                     <Caption
-                      key={i}
-                      marginBottom="xs"
-                      size="xs"
+                        key={i}
+                        marginBottom="xs"
+                        size="xs"
                     >
                       <Icon
-                        icon="shield-check"
-                        marginRight="xs"
+                          icon="shield-check"
+                          marginRight="xs"
                       />
                       {tip}
                     </Caption>
@@ -149,30 +150,30 @@ const Passphrase = (props: PassphraseProps) => {
         </Flex>
         <div className="passphrase-text-input-wrapper">
           <TextInput
-            className="passphrase-text-input"
-            dark={dark}
-            marginBottom="xs"
-            onChange={handleChange}
-            placeholder="Enter a passphrase..."
-            type={showPassphrase ? "text" : "password"}
-            value={displayValue}
-            {...inputProps}
+              className="passphrase-text-input"
+              dark={dark}
+              marginBottom="xs"
+              onChange={handleChange}
+              placeholder="Enter a passphrase..."
+              type={showPassphrase ? "text" : "password"}
+              value={displayValue}
+              {...inputProps}
           />
           <span
-            className="show-passphrase-icon"
-            onClick={toggleShowPassphrase}
+              className="show-passphrase-icon"
+              onClick={toggleShowPassphrase}
           >
             <Body
-              className={showPassphrase ? "hide-icon" : ""}
-              color="light"
-              dark={dark}
+                className={showPassphrase ? "hide-icon" : ""}
+                color="light"
+                dark={dark}
             >
               <Icon icon="eye-slash" />
             </Body>
             <Body
-              className={showPassphrase ? "" : "hide-icon"}
-              color="light"
-              dark={dark}
+                className={showPassphrase ? "" : "hide-icon"}
+                color="light"
+                dark={dark}
             >
               <Icon icon="eye" />
             </Body>

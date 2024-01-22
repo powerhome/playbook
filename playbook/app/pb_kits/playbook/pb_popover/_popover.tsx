@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import {
@@ -54,7 +55,7 @@ const popoverModifiers = ({
   offset,
 }: {
   modifiers: Modifier<any> & any;
-  offset: {};
+  offset: boolean;
 }) => {
   return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers;
 };
@@ -143,7 +144,7 @@ const Popover = (props: PbPopoverProps) => {
   );
 };
 
-const PbReactPopover = (props: PbPopoverProps) => {
+const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
   const [targetId] = useState(_uniqueId('id-'))
   const {
     className,
@@ -226,9 +227,10 @@ const PbReactPopover = (props: PbPopoverProps) => {
           <PopperReference>
             {({ ref }) => (
               <span
-                  id={"reference-" + targetId}
                   className="pb_popover_reference_wrapper"
-                  ref={ref}>
+                  id={"reference-" + targetId}
+                  ref={ref}
+              >
                 <reference.type {...reference.props} />
               </span>
             )}

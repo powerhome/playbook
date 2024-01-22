@@ -33,7 +33,7 @@ type SelectableCardIconProps = {
   onChange?: (event: React.FormEvent<HTMLInputElement>) => void,
 }
 
-const SelectableCardIcon = (props: SelectableCardIconProps) => {
+const SelectableCardIcon = (props: SelectableCardIconProps): React.ReactElement => {
   const {
     aria = {},
     checkmark = false,
@@ -70,36 +70,37 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
     >
       <SelectableCard
-        checked={checked}
-        customIcon={customIcon}
-        dark={dark}
-        disabled={disabled}
-        icon={checkmark}
-        inputId={inputId}
-        multi={multi}
-        name={name}
-        onChange={onChange}
-        value={value}
+          checked={checked}
+          customIcon={customIcon}
+          dark={dark}
+          disabled={disabled}
+          icon={checkmark}
+          inputId={inputId}
+          multi={multi}
+          name={name}
+          onChange={onChange}
+          value={value}
       >
         {
           <>
             <SelectableIcon
-              customIcon={customIcon}
-              icon={icon}
-              inputId={''}
-              inputs="disabled"
-              name={''}
-              text={titleText} />
+                customIcon={customIcon}
+                icon={icon}
+                inputId={''}
+                inputs="disabled"
+                name={''}
+                text={titleText}
+            />
             <Body
-              color="light"
-              dark={dark}
-              text={bodyText}
+                color="light"
+                dark={dark}
+                text={bodyText}
             />
           </>
         }

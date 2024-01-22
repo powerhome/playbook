@@ -2,7 +2,7 @@ import React, {useCallback} from "react";
 import EditorButton from "./EditorButton";
 import { ToolbarTypes } from "./EditorTypes";
 
-const ToolbarNodes = ({editor}:any) => {
+const ToolbarNodes = ({editor}: any): React.ReactElement => {
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const setLink = useCallback(() => {
@@ -42,13 +42,13 @@ const toolbarNodesItems = [
 
 return (
     <>
-        {toolbarNodesItems.map(({ onclick, icon, text, isActive }:ToolbarTypes, index:number) => (
+        {toolbarNodesItems.map(({ onclick, icon, text, isActive }: ToolbarTypes, index: number) => (
             <EditorButton
-            classname={`toolbar_button ${isActive ? 'is-active' : ''}`}
-            onclick={onclick}
-            icon={icon}
-            key={index}
-            text={text}
+                classname={`toolbar_button ${isActive ? 'is-active' : ''}`}
+                icon={icon}
+                key={index}
+                onclick={onclick}
+                text={text}
             />
         ))}
    </>
