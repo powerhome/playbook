@@ -33,7 +33,7 @@
     "webpacker-react": "^0.3.2",
     "zxcvbn": "^4.4.2",
     "@powerhome/playbook-icons": "0.0.1-alpha.2",
-    "@powerhome/playbook-icons-react": "0.0.1-alpha.2"
+    "@powerhome/playbook-icons-react": "0.0.1-alpha.3"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
