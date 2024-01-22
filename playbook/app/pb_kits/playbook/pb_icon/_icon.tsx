@@ -1,4 +1,4 @@
-import React, { ComponentType, ReactElement } from 'react';
+import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
