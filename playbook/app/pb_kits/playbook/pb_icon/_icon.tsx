@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactSVGElement } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
@@ -27,7 +27,7 @@ type IconProps = {
   data?: {[key: string]: string},
   fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
-  icon: any,
+  icon: string | ReactSVGElement,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   inverse?: boolean,
@@ -79,17 +79,16 @@ const Icon = (props: IconProps) => {
     [`fa-${size}`]: size,
     [`fa-pull-${pull}`]: pull,
     [`fa-rotate-${rotation}`]: rotation,
-
   }
 
-  const iconString = typeof icon === 'string'
-  const IconFunction = icon
-
+  const iconURL = typeof(icon) === 'string' && icon.includes('.svg') ? icon : null
   // Lets check and see if the icon prop is referring to a custom Power icon...
   // If so, then set fa-icon to "custom"
   // this ensures the JS will not do any further operations
   // faClasses[`fa-${icon}`] = customIcon ? 'custom' : icon
-  if (!customIcon && iconString) faClasses[`fa-${icon}`] = icon
+  if (!customIcon && !iconURL) faClasses[`fa-${icon}`] = icon as string
+
+  const iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
 
   const classes = classnames(
     flipMap[flip],
@@ -126,7 +125,7 @@ const Icon = (props: IconProps) => {
           }
         </>
       )
-    else if (!iconString)
+    else if (iconElement)
       return (
         <>
           <span
@@ -135,11 +134,11 @@ const Icon = (props: IconProps) => {
               className="pbiconhere"
               id={id}
           >
-            <IconFunction />
+            { React.cloneElement(iconElement) }
           </span>
         </>
       )
-    else if (isValidEmoji(icon))
+    else if (isValidEmoji(icon as string))
       return (
         <>
           <span
@@ -152,7 +151,19 @@ const Icon = (props: IconProps) => {
           </span>
         </>
       )
-
+    else if (iconURL)
+      return (
+        <>
+          <span
+              {...dataProps}
+              {...htmlProps}
+              className={classesEmoji}
+              id={id}
+          >
+            <img src={iconURL} />
+          </span>
+        </>
+      )
     else
       return (
         <>
