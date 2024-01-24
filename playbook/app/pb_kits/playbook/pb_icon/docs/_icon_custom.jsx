@@ -1,5 +1,7 @@
-import React from 'react'
-import { Icon } from '../../'
+import React, { useState } from 'react'
+import { Button, Icon } from '../../'
+
+import Nitro from "!@svgr/webpack!@powerhome/playbook-icons/icons/nitro.svg"
 
 // import Icons as config from 'power-icons'
 const config = {
@@ -20,14 +22,34 @@ const config = {
 }
 
 const IconCustom = (props) => {
+  const exampleProps = {
+    new: {
+      icon: <Nitro />
+    },
+    old: {
+      customIcon: config.moon
+    },
+  }
+
+  const [showOld, setShowOld] = useState(false)
+  const propAgeTxt = showOld ? 'old' : 'new'
+  const buttonTxt = `Toggle Icon Prop`
+
+  const iconProp = exampleProps[propAgeTxt]
+
   return (
-    <div>
+    <React.Fragment>
       <Icon
-          customIcon={config.moon}
           size="7x"
+          {...iconProp}
           {...props}
       />
-    </div>
+      <br/><br/>
+      <Button
+          onClick={() => setShowOld(!showOld)}
+          text={buttonTxt}
+      />
+    </React.Fragment>
   )
 }
 
