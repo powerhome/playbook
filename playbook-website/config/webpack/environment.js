@@ -13,6 +13,30 @@ environment.loaders.insert('javascript', {
   include: path.resolve(__dirname, '../../app'),
 })
 
+environment.loaders.prepend('svgr', {
+  test: /\.(svg)$/,
+  use: {
+    loader: '@svgr/webpack',
+  },
+  include: [
+    path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons')
+  ],
+})
+
+// Don't let file entry stomp on SVGs
+environment.loaders.get('file').test = /(.jpg|.jpeg|.png|.gif|.tiff|.ico|.eot|.otf|.ttf|.woff|.woff2)$/i
+environment.loaders.get('file').include = path.resolve(__dirname, '../../app')
+
+environment.loaders.append('image', {
+  test: /\.(svg)$/,
+  use: {
+    loader: 'file-loader',
+  },
+  include: [
+    path.resolve(__dirname, '../../app')
+  ],
+})
+
 // Allow ESM modules
 environment.config.merge({
   module: {
