@@ -43,6 +43,9 @@ kits:
       - name: "table"
         platforms: *web
         description: Tables display a collection of structured data and typically have the ability to sort, filter, and paginate data. 
+      - name: "advanced_table"
+        platforms: *react_only
+        description:
       - name: "list"
         platforms: *web
         description: Lists display a vertical set of related content.
