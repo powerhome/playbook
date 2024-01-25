@@ -1,3 +1,31 @@
+# 13.16.0
+##### January 22, 2024
+
+List of changes:
+
+**Fixed Bugs:**
+
+- Fixed Telemetry Links [\#3011](https://github.com/powerhome/playbook/pull/3011) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fixed Broken Gauge Kit [\#3031](https://github.com/powerhome/playbook/pull/3031) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Linter Implementation: Kits P - S [\#3043](https://github.com/powerhome/playbook/pull/3043) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Select Kit: Added Inline Variant With Visible Chevron [\#3037](https://github.com/powerhome/playbook/pull/3037) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Added Components Filter [\#3029](https://github.com/powerhome/playbook/pull/3029) ([carloslimasd](https://github.com/carloslimasd))
+- Linter Implementation: Kits F - J [\#3021](https://github.com/powerhome/playbook/pull/3021) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Linted Date Picker Kit [\#2990](https://github.com/powerhome/playbook/pull/2990) ([markdoeswork](https://github.com/markdoeswork))
+- Website - Icons Index Foundation [\#2965](https://github.com/powerhome/playbook/pull/2965) ([israel-molestina](https://github.com/israel-molestina))
+- Updated Collapsible Docs [\#2984](https://github.com/powerhome/playbook/pull/2984) ([rachelradford21](https://github.com/rachelradford21))
+- Updated Swift Nav Docs [\#2980](https://github.com/powerhome/playbook/pull/2980) ([rachelradford21](https://github.com/rachelradford21))
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.16.0...13.16.0)
+
+
+
+
 # 13.15.0
 ##### January 5, 2024
 
