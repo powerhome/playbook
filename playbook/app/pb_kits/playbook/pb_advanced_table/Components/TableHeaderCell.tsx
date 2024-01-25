@@ -7,6 +7,7 @@ import { ToggleIconButton } from "./ToggleIconButton"
 import { isChrome } from "../Utilities/helper_functions"
 import { DataType } from "../Utilities/types"
 import AdvancedTableContext from "../Context/AdvancedTableContext"
+import { GlobalProps } from "../../utilities/globalProps"
 
 type TableHeaderCellProps = {
   headerChildren?: React.ReactNode | React.ReactNode[]
@@ -17,7 +18,7 @@ type TableHeaderCellProps = {
   headerId?: string
   loading?: boolean
   sortIcon?: string | string[]
-}
+} & GlobalProps
 
 export const TableHeaderCell = ({
   header,
@@ -63,8 +64,8 @@ export const TableHeaderCell = ({
       ) : (
         <Flex
             alignItems="center"
-            justify={header.index === 0 ? "between" : "right"}
-            paddingLeft={loading ? "sm" : ""}
+            justify={header.index === 0 ? "between" : "none"}
+            paddingLeft={loading ? "sm" : "none"}
         >
           {header.index === 0 &&
             !loading &&

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 import Table from '../pb_table/_table'
 import {
   createColumnHelper,
@@ -39,8 +39,7 @@ type AdvancedTableProps = {
   initialLoadingRowsCount?: number
   expandedControl?: DataType
   sortControl?: DataType
-
-}
+} & GlobalProps
 
 const AdvancedTable = (props: AdvancedTableProps) => {
   const {

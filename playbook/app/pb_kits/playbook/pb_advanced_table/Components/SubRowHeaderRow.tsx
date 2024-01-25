@@ -8,6 +8,7 @@ import { renderCollapsibleTrail } from "./CollapsibleTrail"
 
 import { isChrome } from "../Utilities/helper_functions"
 import { DataType } from "../Utilities/types"
+import { GlobalProps } from "../../utilities/globalProps"
 
 interface SubRowHeaderRowProps {
   onClick: (row: Row<DataType>) => void
@@ -25,7 +26,7 @@ export const SubRowHeaderRow = ({
   collapsibleTrail,
   subRowHeaders,
   enableToggleExpansion,
-}: SubRowHeaderRowProps) => {
+}: SubRowHeaderRowProps & GlobalProps) => {
   const numberOfColumns = table.getAllFlatColumns().length
 
   return (
@@ -47,7 +48,7 @@ export const SubRowHeaderRow = ({
               />
             ) : null}
             <Caption
-                marginLeft={row.getCanExpand() ? "" : "xs"}
+                marginLeft={row.getCanExpand() ? "none" : "xs"}
                 text={subRowHeaders[row.depth - 1]}
             />
           </Flex>

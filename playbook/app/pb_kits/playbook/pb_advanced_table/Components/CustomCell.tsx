@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import Flex from "../../pb_flex/_flex";
 import FlexItem from "../../pb_flex/_flex_item";
 import Icon from "../../pb_icon/_icon";
+import { GlobalProps } from "../../utilities/globalProps";
 
 import { Getter, Row } from "@tanstack/react-table";
 import { DataType } from "../Utilities/types";
@@ -13,14 +14,14 @@ interface CustomCellProps {
   getValue?: Getter<string>;
   value?: string;
   onRowToggleClick?: (arg: Row<DataType>) => void;
-}
+} 
 
 export const CustomCell = ({
   row,
   getValue,
   value,
   onRowToggleClick,
-}: CustomCellProps) => {
+}: CustomCellProps & GlobalProps) => {
   const { setExpanded, expanded } = useContext(AdvancedTableContext);
   const RowWithoutChildren = row.originalSubRows === undefined;
 
@@ -49,7 +50,7 @@ export const CustomCell = ({
             )}
           </button>
         ) : null}
-        <FlexItem paddingLeft={!RowWithoutChildren ? "" : "xs"}>
+        <FlexItem paddingLeft={!RowWithoutChildren ? "none" : "xs"}>
           {row.depth === 0 ? getValue() : value}
         </FlexItem>
       </Flex>
