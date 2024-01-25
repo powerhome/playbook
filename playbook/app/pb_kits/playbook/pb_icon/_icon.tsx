@@ -82,18 +82,16 @@ const Icon = (props: IconProps) => {
   }
 
   const iconURL = typeof(icon) === 'string' && icon.includes('.svg') ? icon : null
-  // Lets check and see if the icon prop is referring to a custom Power icon...
-  // If so, then set fa-icon to "custom"
-  // this ensures the JS will not do any further operations
-  // faClasses[`fa-${icon}`] = customIcon ? 'custom' : icon
-  if (!customIcon && !iconURL) faClasses[`fa-${icon}`] = icon as string
-
   const iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
+
+  const isFA = !iconElement && !customIcon && !iconURL
+
+  if (isFA) faClasses[`fa-${icon}`] = icon as string
 
   const classes = classnames(
     flipMap[flip],
     'pb_icon_kit',
-    customIcon ? '' : fontStyle,
+    (iconElement || customIcon) ? '' : fontStyle,
     faClasses,
     globalProps(props),
     className
@@ -112,30 +110,17 @@ const Icon = (props: IconProps) => {
 
   // Add a conditional here to show only the SVG if custom
   const displaySVG = (customIcon: any) => {
-    if (customIcon)
+    if (iconElement || customIcon)
       return (
         <>
           {
-            React.cloneElement(customIcon, {
+            React.cloneElement(iconElement || customIcon, {
               ...dataProps,
               ...htmlProps,
               className: classes,
               id,
             })
           }
-        </>
-      )
-    else if (iconElement)
-      return (
-        <>
-          <span
-              {...dataProps}
-              {...htmlProps}
-              className="pbiconhere"
-              id={id}
-          >
-            { React.cloneElement(iconElement) }
-          </span>
         </>
       )
     else if (isValidEmoji(icon as string))
