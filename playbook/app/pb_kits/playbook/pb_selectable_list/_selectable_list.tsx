@@ -7,12 +7,13 @@ import { SelectableListItemProps } from './_item.js'
 
 import List from  '../pb_list/_list'
 import SelectableListItem from './_item'
+import { GenericObject } from '../types'
 
 type SelectableListProps = {
   aria?: {[key: string]: string },
   children?: React.ReactElement[],
   className?: string,
-  data?: object,
+  data?: GenericObject,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   variant?: 'checkbox' | 'radio',

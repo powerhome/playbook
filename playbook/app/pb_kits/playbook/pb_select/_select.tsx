@@ -36,6 +36,7 @@ type SelectProps = {
   onChange: InputCallback<HTMLSelectElement>,
   options: SelectOption[],
   required?: boolean,
+  showArrow?: boolean,
   value?: string,
 } & GlobalProps
 
@@ -63,9 +64,10 @@ const Select = ({
   inline = false,
   multiple = false,
   name,
-  onChange = () => {},
+  onChange = () => undefined,
   options = [],
   required = false,
+  showArrow = false,
   value,
   ...props
 }: SelectProps, ref: React.LegacyRef<HTMLSelectElement>) => {
@@ -77,15 +79,16 @@ const Select = ({
   const inlineClass = inline ? 'inline' : null
   const compactClass = compact ? 'compact' : null
   const classes = classnames(
-    buildCss('pb_select'),
+    buildCss("pb_select"),
     globalProps({
       ...props,
-      marginBottom: props.marginBottom || props.margin || 'sm',
+      marginBottom: props.marginBottom || props.margin || "sm",
     }),
     className,
     inlineClass,
+    { show_arrow: showArrow },
     compactClass
-  )
+  );
 
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
   const selectBody =(() =>{

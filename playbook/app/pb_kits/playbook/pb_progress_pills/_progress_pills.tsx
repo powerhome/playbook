@@ -20,6 +20,14 @@ type ProgressPillsProps = {
   value?: string,
 }
 
+const ProgressPill = ({ active, dark, steps: step }: ProgressPillsProps) => (
+  <div
+      className={`pb_progress_pill${step <= active ? '_active' : '_inactive'}${dark ? ' dark' : ''
+      }`}
+      key={step}
+  />
+)
+
 const showSteps = (steps: number, active: number, dark: boolean) => {
   const items = []
 
@@ -29,14 +37,6 @@ const showSteps = (steps: number, active: number, dark: boolean) => {
 
   return items
 }
-
-const ProgressPill = ({ active, dark, steps: step }: ProgressPillsProps) => (
-  <div
-    className={`pb_progress_pill${step <= active ? '_active' : '_inactive'}${dark ? ' dark' : ''
-      }`}
-    key={step}
-  />
-)
 
 const ProgressPills = (props: ProgressPillsProps) => {
   const {
@@ -59,24 +59,24 @@ const ProgressPills = (props: ProgressPillsProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
     >
       {title &&
         <div className="progress_pills_status">
           <Title
-            dark={dark}
-            size={4}
-            tag="h4"
-            text={title}
+              dark={dark}
+              size={4}
+              tag="h4"
+              text={title}
           />
           <Body
-            color="light"
-            dark={dark}
-            text={value}
+              color="light"
+              dark={dark}
+              text={value}
           />
         </div>}
       <div className="progress_pills">{showSteps(steps, active, dark)}</div>

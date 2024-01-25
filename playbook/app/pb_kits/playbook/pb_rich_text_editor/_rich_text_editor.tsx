@@ -17,27 +17,27 @@ import { TrixEditor } from "react-trix"
 import EditorToolbar from './TipTap/Toolbar'
 
 type Editor = {
-  attributeIsActive?: Function,
+  attributeIsActive?: ([any]: string) => boolean,
   element?: HTMLElement,
-  getSelectedDocument?: Function,
+  getSelectedDocument?: () => any,
   getSelectedRange?: () => Array<number>,
-  insertHTML?: Function,
-  loadHTML?: Function,
-  setSelectedRange?: (range: Array<number>) => void,  
+  insertHTML?: ([any]: string) => void,
+  loadHTML?: ([any]: string) => void,
+  setSelectedRange?: (range: Array<number>) => void,
 }
 
 type RichTextEditorProps = {
   aria?: { [key: string]: string },
   advancedEditor?: any,
   advancedEditorToolbar?: boolean,
-  toolbarBottom?: Boolean,
+  toolbarBottom?: boolean,
   children?: React.ReactNode | React.ReactNode[]
   className?: string,
   data?: { [key: string]: string },
   focus?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
-  inline?: boolean, 
+  inline?: boolean,
   extensions?: { [key: string]: string }[],
   name?: string,
   onChange: (html: string, text: string) => void,
@@ -49,7 +49,7 @@ type RichTextEditorProps = {
   maxWidth?: string
 } & GlobalProps
 
-const RichTextEditor = (props: RichTextEditorProps) => {
+const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   const {
     aria = {},
     advancedEditor,
@@ -80,7 +80,6 @@ const RichTextEditor = (props: RichTextEditorProps) => {
   
   const handleOnEditorReady = (editorInstance: Editor) => setEditor(editorInstance),
     element = editor?.element
-
 
   // DOM manipulation must wait for editor to be ready
   if (editor) {
@@ -117,6 +116,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     focus
       ? (document.addEventListener('trix-focus', useFocus),
         document.addEventListener('trix-blur', useFocus),
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         useFocus())
       : null
 
@@ -164,10 +164,10 @@ const RichTextEditor = (props: RichTextEditorProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={css}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={css}
     >
       {
         advancedEditor ? (
@@ -175,9 +175,11 @@ const RichTextEditor = (props: RichTextEditorProps) => {
               className={classnames("pb_rich_text_editor_advanced_container", { 
               ["toolbar-active"]: advancedEditorToolbar,
               })}
-            >
+          >
             {advancedEditorToolbar && (
-              <EditorToolbar extensions={extensions} editor={advancedEditor}/>
+              <EditorToolbar editor={advancedEditor}
+                  extensions={extensions}
+              />
             )}
           { children }
           </div>

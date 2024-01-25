@@ -53,8 +53,8 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
 
     const calculateDateRange = (timePeriod: string, amount: number): Date[] => {
       const endDate = new Date();
-      let startDate = new Date();
-    
+      const startDate = new Date();
+
       switch (timePeriod) {
         case 'days':
           startDate.setDate(endDate.getDate() - amount);
@@ -76,7 +76,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
       }
       return [startDate, endDate];
     };
-  
+
 
     type rangesType = {
       [key: string]: Date[]
@@ -95,7 +95,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
       'Last year': [lastYearStartDate, lastYearEndDate]
     };
 
-    
+
     if (customQuickPickDates && Object.keys(customQuickPickDates).length !== 0) {
       if (customQuickPickDates.dates.length && customQuickPickDates.override === false) {
         customQuickPickDates.dates.forEach((item) => {

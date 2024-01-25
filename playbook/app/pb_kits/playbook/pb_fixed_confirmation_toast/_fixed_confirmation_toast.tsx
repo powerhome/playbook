@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 
 import { globalProps } from "../utilities/globalProps";
-import { buildHtmlProps } from '../utilities/props'
+import { buildHtmlProps } from "../utilities/props";
+import { VoidCallback } from "../types";
 
 import Icon from "../pb_icon/_icon";
 import Title from "../pb_title/_title";
@@ -15,23 +16,23 @@ const iconMap = {
 };
 
 type FixedConfirmationToastProps = {
-  autoClose?: number,
-  children?: React.ReactChild[] | React.ReactChild,
-  className?: string,
-  closeable?: boolean,
-  data?: string,
-  horizontal?: "right" | "left" | "center",
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
-  id?: string,
-  multiLine?: boolean,
-  onClose?: () => void,
-  open?: boolean,
-  status?: "success" | "error" | "neutral" | "tip",
-  text?: string,
-  vertical?: "top" | "bottom",
-}
+  autoClose?: number;
+  children?: React.ReactChild[] | React.ReactChild;
+  className?: string;
+  closeable?: boolean;
+  data?: string;
+  horizontal?: "right" | "left" | "center";
+  htmlOptions?: { [key: string]: string | number | boolean | (VoidCallback) };
+  id?: string;
+  multiLine?: boolean;
+  onClose?: VoidCallback;
+  open?: boolean;
+  status?: "success" | "error" | "neutral" | "tip";
+  text?: string;
+  vertical?: "top" | "bottom";
+};
 
-const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
+const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.ReactElement => {
   const [showToast, toggleToast] = useState(true);
   const {
     autoClose = 0,
@@ -41,7 +42,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
     horizontal,
     htmlOptions = {},
     multiLine = false,
-    onClose = () => { },
+    onClose = () => undefined,
     open = true,
     status = "neutral",
     text,
@@ -65,7 +66,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
         onClose();
       }, autoClose);
     }
-  }
+  };
 
   useEffect(() => {
     toggleToast(open);
@@ -80,22 +81,35 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps) => {
   return (
     <>
       {showToast && (
-        <div className={css} onClick={handleClick} {...htmlProps}>
-          {icon && <Icon className="pb_icon" fixedWidth icon={icon} />}
+        <div
+            className={css}
+            onClick={handleClick}
+            {...htmlProps}
+        >
+          {icon && (
+            <Icon
+                className="pb_icon"
+                fixedWidth
+                icon={icon}
+            />
+          )}
 
-          {
-            children && children ||
-            text && (
+          {(children && children) ||
+            (text && (
               <Title
-                className="pb_fixed_confirmation_toast_text"
-                size={4}
-                text={text}
+                  className="pb_fixed_confirmation_toast_text"
+                  size={4}
+                  text={text}
               />
-            )
-          }
+            ))}
 
           {closeable && (
-            <Icon className="pb_icon" cursor="pointer" fixedWidth={false} icon="times" />
+            <Icon
+                className="pb_icon"
+                cursor="pointer"
+                fixedWidth={false}
+                icon="times"
+            />
           )}
         </div>
       )}

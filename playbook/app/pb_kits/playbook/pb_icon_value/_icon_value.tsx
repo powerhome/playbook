@@ -6,20 +6,21 @@ import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
+import { GenericObject } from '../types'
 
 type IconValueProps = {
   align?: "left" | "center" | "right",
   aria?: { [key: string]: string; },
   className?: string,
   dark?: boolean,
-  data?: object,
+  data?: GenericObject,
   icon: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   text: string,
 }
 
-const IconValue = (props: IconValueProps) => {
+const IconValue = (props: IconValueProps): React.ReactElement => {
   const {
     align = 'left',
     aria = {},

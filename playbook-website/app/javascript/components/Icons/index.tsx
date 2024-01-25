@@ -4,16 +4,16 @@ import { Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
 import Roofing from "@powerhome/playbook-icons/icons/roofing.svg"
 import Powergon from "@powerhome/playbook-icons/icons/powergon.svg"
 import Nitro from "@powerhome/playbook-icons/icons/nitro.svg"
-import ChevronDown from "@powerhome/playbook-icons/icons/chevron-down.svg"
-import Times from "@powerhome/playbook-icons/icons/times.svg"
-import Bars from "@powerhome/playbook-icons/icons/bars.svg"
-import Calendar from "@powerhome/playbook-icons/icons/calendar.svg"
-import Filter from "@powerhome/playbook-icons/icons/filter.svg"
-import Edit from "@powerhome/playbook-icons/icons/edit.svg"
-import Trash from "@powerhome/playbook-icons/icons/trash.svg"
-import Check from "@powerhome/playbook-icons/icons/check.svg"
-import Plus from "@powerhome/playbook-icons/icons/plus.svg"
-import Search from "@powerhome/playbook-icons/icons/search.svg"
+import ChevronDown from "!file-loader!@powerhome/playbook-icons/icons/chevron-down.svg"
+import Times from "!file-loader!@powerhome/playbook-icons/icons/times.svg"
+import Bars from "!file-loader!@powerhome/playbook-icons/icons/bars.svg"
+import Calendar from "!file-loader!@powerhome/playbook-icons/icons/calendar.svg"
+import Filter from "!file-loader!@powerhome/playbook-icons/icons/filter.svg"
+import Edit from "!file-loader!@powerhome/playbook-icons/icons/edit.svg"
+import Trash from "!file-loader!@powerhome/playbook-icons/icons/trash.svg"
+import Check from "!file-loader!@powerhome/playbook-icons/icons/check.svg"
+import Plus from "!file-loader!@powerhome/playbook-icons/icons/plus.svg"
+import Search from "!file-loader!@powerhome/playbook-icons/icons/search.svg"
 
 const Icons = () => {
   return (
@@ -36,21 +36,21 @@ const Icons = () => {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Roofing}/>
+              <Icon icon={<Roofing />}/>
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Powergon}/>
+              <Icon icon={<Powergon />}/>
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Nitro} />
+              <Icon icon={<Nitro />} />
             </Card>
           </Flex>
         </FlexItem>

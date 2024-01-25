@@ -22,16 +22,16 @@ type FormPillProps = {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
     onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
-  }, 
+  },
 } & GlobalProps
-const FormPill = (props: FormPillProps) => {
+const FormPill = (props: FormPillProps): React.ReactElement => {
   const {
     className,
     htmlOptions = {},
     id,
     text,
     name,
-    onClick = () => {},
+    onClick = () => undefined,
     avatarUrl,
     closeProps = {},
     size = '',
@@ -48,7 +48,10 @@ const FormPill = (props: FormPillProps) => {
   const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
-    <div className={css} id={id} {...htmlProps}>
+    <div className={css}
+        id={id}
+        {...htmlProps}
+    >
         {name &&
         <>
         <Avatar

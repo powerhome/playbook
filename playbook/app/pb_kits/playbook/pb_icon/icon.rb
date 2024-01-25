@@ -38,7 +38,7 @@ module Playbook
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
 
-      def valid_emoji(icon)
+      def valid_emoji?
         emoji_regex = /\p{Emoji}/
         emoji_regex.match?(icon)
       end
@@ -79,15 +79,15 @@ module Playbook
         )
       end
 
-      def render_svg(path)
-        if File.extname(path) == ".svg"
-          doc = Nokogiri::XML(URI.open(path)) # rubocop:disable Security/Open
-          svg = doc.at_css "svg"
-          svg["class"] = "pb_custom_icon " + object.custom_icon_classname
-          raw doc
-        else
-          raise("Custom icon must be an svg. Please check your path and file type.")
-        end
+      def render_svg
+        doc = Nokogiri::XML(URI.open(icon || custom_icon)) # rubocop:disable Security/Open
+        svg = doc.at_css "svg"
+        svg["class"] = "pb_custom_icon " + object.custom_icon_classname
+        raw doc
+      end
+
+      def is_svg?
+        (icon || custom_icon).include?(".svg")
       end
 
     private

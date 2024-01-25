@@ -102,19 +102,28 @@
     pointer-events: none;
   }
   &.inline {
+    @mixin active_arrow_style {
+      svg {
+        color: $primary !important;
+        font-size: 16px;
+      }
+    }
     &:not(:hover) {
       svg {
         display: none;
       }
     }
+    &.show_arrow:not(:hover) {
+      svg {
+        display: block;
+      }
+      @include active_arrow_style();
+    }
     &:hover {
+      @include active_arrow_style();
       select {
         color: $primary !important;
         background: rgba(0,130,255,0.1);
-      }
-      svg {
-        color: $primary !important;
-        font-size: 16px;
       }
     }
     select {
