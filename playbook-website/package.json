@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint app/ --ext .js,.jsx",
-    "watch": "./bin/webpack-dev-server",
+    "watch": "NODE_OPTIONS=--openssl-legacy-provider ./bin/webpack-dev-server",
     "release": "RAILS_ENV=production NODE_ENV=production ./bin/webpack"
   },
   "dependencies": {
