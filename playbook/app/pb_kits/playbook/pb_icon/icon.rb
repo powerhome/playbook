@@ -87,7 +87,7 @@ module Playbook
       end
 
       def is_svg?
-        (icon || custom_icon).include?(".svg")
+        (icon || custom_icon.to_s).include?(".svg")
       end
 
     private
