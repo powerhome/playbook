@@ -69,9 +69,12 @@ const Icon = (props: IconProps) => {
     spin = false,
   } = props
 
+  const iconURL = typeof(icon) === 'string' && icon.includes('.svg') ? icon : null
+  const iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
+
   const faClasses = {
     'fa-border': border,
-    'fa-fw': fixedWidth,
+    'fa-fw': (iconElement) ? false : fixedWidth,
     'fa-inverse': inverse,
     'fa-li': listItem,
     'fa-pulse': pulse,
@@ -81,9 +84,6 @@ const Icon = (props: IconProps) => {
     [`fa-rotate-${rotation}`]: rotation,
   }
 
-  const iconURL = typeof(icon) === 'string' && icon.includes('.svg') ? icon : null
-  const iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
-
   const isFA = !iconElement && !customIcon && !iconURL
 
   if (isFA) faClasses[`fa-${icon}`] = icon as string
@@ -91,6 +91,7 @@ const Icon = (props: IconProps) => {
   const classes = classnames(
     flipMap[flip],
     'pb_icon_kit',
+    {'pb_custom_icon': !isFA},
     (iconElement || customIcon) ? '' : fontStyle,
     faClasses,
     globalProps(props),
