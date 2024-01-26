@@ -117,7 +117,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   }
 
   //Create column array in format needed by Tanstack
-  const columns = columnDefinitions.map(column => {
+  const columns = columnDefinitions && columnDefinitions.map(column => {
     // Define the base column structure
     const columnStructure = {
       ...columnHelper.accessor(column.accessor, {
