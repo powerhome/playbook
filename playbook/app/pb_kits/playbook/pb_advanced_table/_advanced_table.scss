@@ -1,3 +1,97 @@
-.pb_advanced_table {
+@import "../tokens/colors";
+@import "../tokens/opacity";
+@import "../tokens/border_radius";
+@import "../tokens/spacing";
+@import "./scss_partials/loading";
+@import "./scss_partials/pseudo_states";
 
+.pb_advanced_table {
+  $border-color: 1px solid $border_light !important;
+
+  //animation scss
+  @keyframes wave {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
+  [id$="-span"] {
+    word-wrap: normal;
+  }
+
+  .bg-silver {
+    background-color: lighten($silver, $opacity_7);
+  }
+
+  .bg-white {
+    background-color: $white;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .table-header-cells:first-child {
+    color: $primary !important;
+    min-width: 180px;
+  }
+  // Icons
+  .button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+  }
+
+  .gray-icon {
+    color: $text_lt_light;
+    @extend %primary-color-pseudo;
+  }
+
+  .year-sort-icon {
+    @extend .button-icon;
+    padding: 2px;
+  }
+
+  .time-period-toggle-icon {
+    @extend .button-icon;
+    @extend %primary-color-pseudo;
+    padding: 2px 0;
+
+    &:focus-visible {
+      border-radius: $border_rad_lighter;
+    }
+  }
+
+  .expand-toggle-icon {
+    @extend .button-icon;
+    @extend %primary-color-pseudo;
+    position: relative;
+    bottom: 1px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+  }
+
+  .header-sort-button {
+    @extend %primary-color-pseudo;
+    width: 100%;
+
+    &:focus-visible {
+      border-radius: $border_rad_heavier;
+    }
+  }
+
+  // Vertical separator
+  .table-header-cells:first-child,
+  td:first-child {
+    box-shadow: 1px 0px 0px 0px #e4e8f0 !important;
+  }
+
+  .chrome-styles:first-child {
+    border-right: $border-color;
+  }
 }
