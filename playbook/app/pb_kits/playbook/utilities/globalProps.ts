@@ -17,7 +17,7 @@ type AlignContent = {
 }
 
 type AlignItems = {
-  alignItems?: Alignment & ("flexStart" | "flexEnd" | "stretch" | "baseline")
+  alignItems?: Alignment | ("flexStart" | "flexEnd" | "stretch" | "baseline")
 }
 
 type AlignSelf = {
