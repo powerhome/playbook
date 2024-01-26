@@ -10,7 +10,7 @@ type LayoutPropTypes = {
   className?: string,
   collapse?: "xs" | "sm" | "md" | "lg" | "xl",
   dark?: boolean,
-  data?: object,
+  data?: Record<string, unknown>,
   full?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   position?: "left" | "right",
@@ -168,6 +168,7 @@ const Layout = (props: LayoutPropTypes) => {
         layoutCss,
         layoutCollapseCss,
         className,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         globalProps(filteredProps)
       )}

@@ -14,9 +14,9 @@ type MapProps = {
   id?: string,
   zoomBtns?: boolean,
   flyTo?: boolean, 
-  zoomInClick?: () => {},
-  zoomOutClick?: () => {},
-  flyToClick?: () => {},
+  zoomInClick?: () => void,
+  zoomOutClick?: () => void,
+  flyToClick?: () => void,
 } & GlobalProps
 
 const Map = (props: MapProps) => {
@@ -51,11 +51,11 @@ const Map = (props: MapProps) => {
       {
         zoomBtns ? (
           <Map.Controls
-          flyTo={flyTo}
-          flyToClick={flyToClick}
-          zoomBtns={zoomBtns}
-          zoomInClick={zoomInClick}
-          zoomOutClick={zoomOutClick}
+              flyTo={flyTo}
+              flyToClick={flyToClick}
+              zoomBtns={zoomBtns}
+              zoomInClick={zoomInClick}
+              zoomOutClick={zoomOutClick}
           />
          ) : null
       }
