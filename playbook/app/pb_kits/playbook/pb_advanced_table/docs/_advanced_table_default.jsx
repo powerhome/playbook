@@ -35,11 +35,6 @@ const AdvancedTableDefault = (props) => {
     },
   ];
 
-  //Render the subRow header rows
-  const subRowHeaders = ["Quarter", "Month", "Day"];
-
-
-
   return (
     <div>
       <AdvancedTable
@@ -47,8 +42,8 @@ const AdvancedTableDefault = (props) => {
           tableData={MOCK_DATA}
           {...props}
       >
-        <AdvancedTable.Header />
-        <AdvancedTable.Body subRowHeaders={subRowHeaders} />
+        <AdvancedTable.Header/>
+        <AdvancedTable.Body/>
       </AdvancedTable>
     </div>
   );

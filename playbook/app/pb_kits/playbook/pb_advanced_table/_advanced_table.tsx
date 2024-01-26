@@ -34,6 +34,7 @@ type AdvancedTableProps = {
   onRowToggleClick?: (arg: Row<DataType>) => void;
   onToggleExpansionClick?: (arg: Row<DataType>) => void;
   tableOptions?: DataType;
+  tableProps?: DataType;
   enableToggleExpansion?: "all" | "header";
   toggleExpansionIcon?: string | string[];
   initialLoadingRowsCount?: number;
@@ -54,7 +55,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     columnDefinitions,
     children,
     tableOptions,
-    enableToggleExpansion = "all",
+    tableProps,
+    enableToggleExpansion = "header",
     toggleExpansionIcon = "arrows-from-line",
     initialLoadingRowsCount = 10,
     expandedControl,
@@ -217,11 +219,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       >
         <Table
             className={`${loading && "content-loading"}`}
-            container={false}
             dataTable
             numberSpacing="tabular"
             responsive="none"
-            sticky
+            {...tableProps}
         >
           {children}
         </Table>

@@ -13,7 +13,7 @@ type TableHeaderProps = {
 
 export const TableHeader = ({
   headerId,
-  enableSorting = true,
+  enableSorting = false,
   children,
   sortIcon = ["arrow-up-short-wide", "arrow-down-short-wide"],
 }: TableHeaderProps) => {
