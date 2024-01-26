@@ -74,7 +74,7 @@ const Icon = (props: IconProps) => {
 
   const faClasses = {
     'fa-border': border,
-    'fa-fw': (iconElement) ? false : fixedWidth,
+    'fa-fw': fixedWidth,
     'fa-inverse': inverse,
     'fa-li': listItem,
     'fa-pulse': pulse,

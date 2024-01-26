@@ -36,21 +36,21 @@ const Icons = () => {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />}/>
+              <Icon icon={<Roofing />} fixedWidth={false} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Powergon />}/>
+              <Icon icon={<Powergon />} fixedWidth={false} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Nitro />} />
+              <Icon icon={<Nitro />} fixedWidth={false} />
             </Card>
           </Flex>
         </FlexItem>
