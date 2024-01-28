@@ -27,7 +27,7 @@ const AdvancedTableDefault = (props) => {
     },
     {
       accessor: "classCompletionRate",
-      label: "ClassCompletion Rate",
+      label: "Class Completion Rate",
     },
     {
       accessor: "graduatedStudents",

@@ -46,7 +46,7 @@ export const TableHeaderCell = ({
   return (
     <th
         align="right"
-        className={`table-header-cells ${isChrome() ? "chrome-styles" : ""}`}
+        className={`table-header-cells ${isChrome() ? "chrome-styles" : ""} ${enableSorting ? "table-header-cells-active" : ""}`}
         id={`${
           loading
             ? `loading-${header.id}-${headerId}`
@@ -64,7 +64,7 @@ export const TableHeaderCell = ({
       ) : (
         <Flex
             alignItems="center"
-            justify={header.index === 0 ? "between" : "none"}
+            justify={header.index === 0 && enableSorting ? "between" : header.index === 0 && !enableSorting ? "start" : "end"}
             paddingLeft={loading ? "sm" : "none"}
         >
           {header.index === 0 &&
@@ -97,6 +97,7 @@ export const TableHeaderCell = ({
                   },
                 })}
               justify={header.index === 0 && enableSorting ? "between" : "none"}
+              paddingLeft={enableSorting ? "xxs" : "xs"}
           >
             <div>
               {flexRender(header.column.columnDef.header, header.getContext())}

@@ -34,9 +34,13 @@
   }
 
   .table-header-cells:first-child {
-    color: $primary !important;
     min-width: 180px;
   }
+
+  .table-header-cells-active:first-child {
+    color: $primary !important;
+  }
+
   // Icons
   .button-icon {
     display: flex;
