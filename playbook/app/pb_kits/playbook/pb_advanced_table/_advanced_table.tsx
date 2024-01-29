@@ -224,7 +224,14 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             responsive="none"
             {...tableProps}
         >
-          {children}
+          {children ? (
+            children
+          ) : (
+            <>
+              <TableHeader />
+              <TableBody />
+            </>
+          )}
         </Table>
       </AdvancedTableContext.Provider>
     </div>

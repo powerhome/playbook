@@ -41,10 +41,7 @@ const AdvancedTableDefault = (props) => {
           columnDefinitions={columnDefinitions}
           tableData={MOCK_DATA}
           {...props}
-      >
-        <AdvancedTable.Header/>
-        <AdvancedTable.Body/>
-      </AdvancedTable>
+      />
     </div>
   );
 };
