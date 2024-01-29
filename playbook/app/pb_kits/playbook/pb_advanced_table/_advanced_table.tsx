@@ -219,7 +219,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           }}
       >
         <Table
-            className={`${loading && "content-loading"}`}
+            className={`${loading ? "content-loading" : ""}`}
             dataTable
             numberSpacing="tabular"
             responsive="none"
