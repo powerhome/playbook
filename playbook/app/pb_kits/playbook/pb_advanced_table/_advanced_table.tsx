@@ -24,43 +24,43 @@ import { DataType, ExpandedStateObject } from "./Utilities/types";
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string };
-  className?: string;
-  data?: { [key: string]: string };
-  id?: string;
-  tableData: DataType[];
-  loading?: boolean | string;
-  columnDefinitions: DataType[];
   children?: React.ReactNode | React.ReactNode[];
+  className?: string;
+  columnDefinitions: DataType[];
+  data?: { [key: string]: string };
+  enableToggleExpansion?: "all" | "header";
+  expandedControl?: DataType;
+  id?: string;
+  initialLoadingRowsCount?: number;
+  loading?: boolean | string;
   onRowToggleClick?: (arg: Row<DataType>) => void;
   onToggleExpansionClick?: (arg: Row<DataType>) => void;
+  sortControl?: DataType;
+  tableData: DataType[];
   tableOptions?: DataType;
   tableProps?: DataType;
-  enableToggleExpansion?: "all" | "header";
   toggleExpansionIcon?: string | string[];
-  initialLoadingRowsCount?: number;
-  expandedControl?: DataType;
-  sortControl?: DataType;
 } & GlobalProps;
 
 const AdvancedTable = (props: AdvancedTableProps) => {
   const {
     aria = {},
+    children,
     className,
+    columnDefinitions,
     data = {},
+    enableToggleExpansion = "header",
+    expandedControl,
     id,
-    tableData,
+    initialLoadingRowsCount = 10,
     loading,
     onRowToggleClick,
     onToggleExpansionClick,
-    columnDefinitions,
-    children,
+    sortControl,
+    tableData,
     tableOptions,
     tableProps,
-    enableToggleExpansion = "header",
     toggleExpansionIcon = "arrows-from-line",
-    initialLoadingRowsCount = 10,
-    expandedControl,
-    sortControl,
   } = props;
 
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(

@@ -11,25 +11,25 @@ import AdvancedTableContext from "../Context/AdvancedTableContext"
 import { GlobalProps } from "../../utilities/globalProps"
 
 type TableHeaderCellProps = {
-  headerChildren?: React.ReactNode | React.ReactNode[]
   enableSorting?: boolean
   enableToggleExpansion?: "all" | "header"
   handleExpandOrCollapse?: () => void
   header?: Header<DataType, unknown>
+  headerChildren?: React.ReactNode | React.ReactNode[]
   headerId?: string
   loading?: boolean
   sortIcon?: string | string[]
 } & GlobalProps
 
 export const TableHeaderCell = ({
-  header,
-  headerId,
   enableSorting,
-  sortIcon,
-  headerChildren,
-  loading,
   enableToggleExpansion,
   handleExpandOrCollapse,
+  header,
+  headerChildren,
+  headerId,
+  loading,
+  sortIcon,
 }: TableHeaderCellProps) => {
   const { sortControl } = useContext(AdvancedTableContext)
 

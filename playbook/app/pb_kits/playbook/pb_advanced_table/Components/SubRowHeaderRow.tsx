@@ -11,21 +11,21 @@ import { DataType } from "../Utilities/types"
 import { GlobalProps } from "../../utilities/globalProps"
 
 interface SubRowHeaderRowProps {
+  collapsibleTrail?: boolean
+  enableToggleExpansion?: "all" | "header"
   onClick: (row: Row<DataType>) => void
   row: Row<DataType>
-  table: Table<DataType>
-  collapsibleTrail?: boolean
   subRowHeaders?: string[]
-  enableToggleExpansion?: "all" | "header"
+  table: Table<DataType>
 }
 
 export const SubRowHeaderRow = ({
-  row,
-  table,
-  onClick,
   collapsibleTrail,
-  subRowHeaders,
   enableToggleExpansion,
+  onClick,
+  row,
+  subRowHeaders,
+  table,
 }: SubRowHeaderRowProps & GlobalProps) => {
   const numberOfColumns = table.getAllFlatColumns().length
 

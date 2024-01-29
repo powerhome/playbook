@@ -10,17 +10,17 @@ import { DataType } from "../Utilities/types";
 import AdvancedTableContext from "../Context/AdvancedTableContext";
 
 interface CustomCellProps {
-  row: Row<DataType>;
   getValue?: Getter<string>;
-  value?: string;
   onRowToggleClick?: (arg: Row<DataType>) => void;
+  row: Row<DataType>;
+  value?: string;
 } 
 
 export const CustomCell = ({
-  row,
   getValue,
-  value,
   onRowToggleClick,
+  row,
+  value,
 }: CustomCellProps & GlobalProps) => {
   const { setExpanded, expanded } = useContext(AdvancedTableContext);
   const RowWithoutChildren = row.originalSubRows === undefined;

@@ -19,10 +19,10 @@ export const TableBody = ({
   subRowHeaders,
 }: TableBodyProps) => {
   const {
-    table,
+    enableToggleExpansion,
     handleExpandOrCollapse,
     loading,
-    enableToggleExpansion,
+    table,
   } = useContext(AdvancedTableContext)
   return (
     <>

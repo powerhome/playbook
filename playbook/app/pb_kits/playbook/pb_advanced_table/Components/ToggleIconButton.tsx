@@ -6,8 +6,8 @@ import { DataType } from "../Utilities/types"
 import { displayIcon } from "../Utilities/IconHelpers"
 
 interface ToggleIconButtonProps {
-  row?: Row<DataType>
   onClick: (row: Row<DataType>) => void
+  row?: Row<DataType>
 }
 
 export const ToggleIconButton = ({ row, onClick }: ToggleIconButtonProps) => {

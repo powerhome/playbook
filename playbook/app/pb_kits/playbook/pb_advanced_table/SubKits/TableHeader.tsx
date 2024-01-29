@@ -5,23 +5,23 @@ import { TableHeaderCell } from "../Components/TableHeaderCell"
 import { DataType } from "../Utilities/types"
 
 type TableHeaderProps = {
-  headerId?: string
-  enableSorting?: boolean
-  sortIcon?: string | string[]
   children?: React.ReactNode | React.ReactNode[]
+  enableSorting?: boolean
+  headerId?: string
+  sortIcon?: string | string[]
 }
 
 export const TableHeader = ({
-  headerId,
-  enableSorting = false,
   children,
+  enableSorting = false,
+  headerId,
   sortIcon = ["arrow-up-short-wide", "arrow-down-short-wide"],
 }: TableHeaderProps) => {
   const {
-    table,
+    enableToggleExpansion,
     handleExpandOrCollapse,
     loading,
-    enableToggleExpansion,
+    table,
   } = useContext(AdvancedTableContext)
 
   return (
