@@ -1,10 +1,11 @@
 import React, { useContext } from "react"
+import classnames from "classnames";
 import Flex from "../../pb_flex/_flex"
 import { flexRender, Header } from "@tanstack/react-table"
 
 import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
-import { isChrome } from "../Utilities/helper_functions"
+import { isChrome } from "../Utilities/BrowserCheck"
 import { DataType } from "../Utilities/types"
 import AdvancedTableContext from "../Context/AdvancedTableContext"
 import { GlobalProps } from "../../utilities/globalProps"
@@ -43,15 +44,21 @@ export const TableHeaderCell = ({
     }
   }
 
+const cellClassName = classnames("table-header-cells", 
+  `${isChrome() ? "chrome-styles" : ""}`, 
+  `${enableSorting ? "table-header-cells-active" : ""}`
+);
+
+const cellId = `${loading ? 
+    `loading-${header.id}${headerId ? `-${headerId}` : ""}`
+    : `${header.id}${headerId ? `-${headerId}` : ""}`
+}`;
+
   return (
     <th
         align="right"
-        className={`table-header-cells ${isChrome() ? "chrome-styles" : ""} ${enableSorting ? "table-header-cells-active" : ""}`}
-        id={`${
-          loading
-            ? `loading-${header.id}-${headerId}`
-            : `${header.id}-${headerId}`
-        }`}
+        className={cellClassName}
+        id={cellId}
         key={`${header.id}-header`}
     >
       {header.isPlaceholder ? null : headerChildren && header.index === 0 ? (

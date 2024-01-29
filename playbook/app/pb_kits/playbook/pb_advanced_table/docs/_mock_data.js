@@ -12,7 +12,7 @@ export const MOCK_DATA = [
     graduatedStudents: "19",
     children: [
       {
-        year: "2011",
+        year: "2021",
         quarter: "Q1",
         month: null,
         day: null,
@@ -24,7 +24,7 @@ export const MOCK_DATA = [
         graduatedStudents: "36",
         children: [
           {
-            year: "2011",
+            year: "2021",
             quarter: "Q1",
             month: "January",
             day: null,
@@ -36,7 +36,7 @@ export const MOCK_DATA = [
             graduatedStudents: "28",
             children: [
               {
-                year: "2011",
+                year: "2021",
                 quarter: "Q1",
                 month: "January",
                 day: "10",
@@ -48,7 +48,7 @@ export const MOCK_DATA = [
                 graduatedStudents: "17",
               },
               {
-                year: "2011",
+                year: "2021",
                 quarter: "Q1",
                 month: "January",
                 day: "20",
@@ -62,7 +62,7 @@ export const MOCK_DATA = [
             ],
           },
           {
-            year: "2011",
+            year: "2021",
             quarter: "Q1",
             month: "February",
             day: null,
@@ -96,15 +96,15 @@ export const MOCK_DATA = [
     quarter: null,
     month: null,
     day: null,
-    newEnrollments: "20",
-    scheduledMeetings: "10",
-    attendanceRate: "51%",
-    completedClasses: "3",
-    classCompletionRate: "33%",
-    graduatedStudents: "19",
+    newEnrollments: "25",
+    scheduledMeetings: "17",
+    attendanceRate: "75%",
+    completedClasses: "5",
+    classCompletionRate: "45%",
+    graduatedStudents: "32",
     children: [
       {
-        year: "2011",
+        year: "2022",
         quarter: "Q1",
         month: null,
         day: null,
@@ -116,7 +116,7 @@ export const MOCK_DATA = [
         graduatedStudents: "36",
         children: [
           {
-            year: "2011",
+            year: "2022",
             quarter: "Q1",
             month: "January",
             day: null,
@@ -128,10 +128,10 @@ export const MOCK_DATA = [
             graduatedStudents: "28",
             children: [
               {
-                year: "2011",
+                year: "2022",
                 quarter: "Q1",
                 month: "January",
-                day: "10",
+                day: "15",
                 newEnrollments: "34",
                 scheduledMeetings: "28",
                 attendanceRate: "97%",
@@ -140,10 +140,10 @@ export const MOCK_DATA = [
                 graduatedStudents: "17",
               },
               {
-                year: "2011",
+                year: "2022",
                 quarter: "Q1",
                 month: "January",
-                day: "20",
+                day: "25",
                 newEnrollments: "43",
                 scheduledMeetings: "23",
                 attendanceRate: "66%",
@@ -154,9 +154,9 @@ export const MOCK_DATA = [
             ],
           },
           {
-            year: "2011",
+            year: "2022",
             quarter: "Q1",
-            month: "February",
+            month: "May",
             day: null,
             newEnrollments: "20",
             scheduledMeetings: "41",
@@ -168,8 +168,8 @@ export const MOCK_DATA = [
               {
                 year: "2011",
                 quarter: "Q1",
-                month: "February",
-                day: "15",
+                month: "May",
+                day: "2",
                 newEnrollments: "19",
                 scheduledMeetings: "35",
                 attendanceRate: "69%",
@@ -188,15 +188,15 @@ export const MOCK_DATA = [
     quarter: null,
     month: null,
     day: null,
-    newEnrollments: "20",
-    scheduledMeetings: "10",
-    attendanceRate: "51%",
-    completedClasses: "3",
-    classCompletionRate: "33%",
-    graduatedStudents: "19",
+    newEnrollments: "10",
+    scheduledMeetings: "15",
+    attendanceRate: "65%",
+    completedClasses: "4",
+    classCompletionRate: "49%",
+    graduatedStudents: "29",
     children: [
       {
-        year: "2011",
+        year: "2023",
         quarter: "Q1",
         month: null,
         day: null,
@@ -208,9 +208,9 @@ export const MOCK_DATA = [
         graduatedStudents: "36",
         children: [
           {
-            year: "2011",
+            year: "2023",
             quarter: "Q1",
-            month: "January",
+            month: "March",
             day: null,
             newEnrollments: "16",
             scheduledMeetings: "20",
@@ -220,9 +220,9 @@ export const MOCK_DATA = [
             graduatedStudents: "28",
             children: [
               {
-                year: "2011",
+                year: "2023",
                 quarter: "Q1",
-                month: "January",
+                month: "March",
                 day: "10",
                 newEnrollments: "34",
                 scheduledMeetings: "28",
@@ -232,10 +232,10 @@ export const MOCK_DATA = [
                 graduatedStudents: "17",
               },
               {
-                year: "2011",
+                year: "2023",
                 quarter: "Q1",
-                month: "January",
-                day: "20",
+                month: "March",
+                day: "11",
                 newEnrollments: "43",
                 scheduledMeetings: "23",
                 attendanceRate: "66%",
@@ -246,9 +246,9 @@ export const MOCK_DATA = [
             ],
           },
           {
-            year: "2011",
+            year: "2023",
             quarter: "Q1",
-            month: "February",
+            month: "April",
             day: null,
             newEnrollments: "20",
             scheduledMeetings: "41",
@@ -258,9 +258,9 @@ export const MOCK_DATA = [
             graduatedStudents: "43",
             children: [
               {
-                year: "2011",
+                year: "2023",
                 quarter: "Q1",
-                month: "February",
+                month: "April",
                 day: "15",
                 newEnrollments: "19",
                 scheduledMeetings: "35",

@@ -13,12 +13,12 @@ import {
   Getter,
 } from "@tanstack/react-table";
 
-import { updateExpandAndCollapseState } from "./Utilities/helper_functions";
+import { updateExpandAndCollapseState } from "./Utilities/ExpansionControlHelpers";
 
 import { CustomCell } from "./Components/CustomCell";
 import AdvancedTableContext from "./Context/AdvancedTableContext";
-import { TableHeader } from "./SubComponents/TableHeader";
-import { TableBody } from "./SubComponents/TableBody";
+import { TableHeader } from "./SubKits/TableHeader";
+import { TableBody } from "./SubKits/TableBody";
 
 import { DataType, ExpandedStateObject } from "./Utilities/types";
 
@@ -152,6 +152,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   };
 
+//initialize table
   const table = useReactTable({
     data: loading ? Array(loadingStateRowCount).fill({}) : tableData,
     columns,

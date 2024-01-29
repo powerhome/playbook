@@ -6,7 +6,7 @@ import { SubRowHeaderRow } from "../Components/SubRowHeaderRow"
 import { LoadingCell } from "../Components/LoadingCell"
 import { renderCollapsibleTrail } from "../Components/CollapsibleTrail"
 import AdvancedTableContext from "../Context/AdvancedTableContext"
-import { isChrome } from "../Utilities/helper_functions"
+import { isChrome } from "../Utilities/BrowserCheck"
 import { DataType } from "../Utilities/types"
 
 type TableBodyProps = {
@@ -78,7 +78,7 @@ export const TableBody = ({
                 ))}
               </tr>
 
-              {/* Display LoadingInline if getYearData is querying and there are no children already */}
+              {/* Display LoadingInline if Row Data is querying and there are no children already */}
               {isExpandable && rowHasNoChildren && row.depth === 0 ? (
                 <tr key={`${row.id}-row`}>
                   <td colSpan={numberOfColumns}>

@@ -3,7 +3,7 @@ import Icon from "../../pb_icon/_icon"
 import { Row } from "@tanstack/react-table"
 import AdvancedTableContext from "../Context/AdvancedTableContext"
 import { DataType } from "../Utilities/types"
-import { displayIcon } from "../Utilities/helper_functions"
+import { displayIcon } from "../Utilities/IconHelpers"
 
 interface ToggleIconButtonProps {
   row?: Row<DataType>

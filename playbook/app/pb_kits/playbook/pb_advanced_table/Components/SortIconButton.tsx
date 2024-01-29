@@ -2,7 +2,7 @@ import React from "react"
 import Icon from "../../pb_icon/_icon"
 import { Header } from "@tanstack/react-table"
 import { DataType } from "../Utilities/types"
-import { displayIcon } from "../Utilities/helper_functions"
+import { displayIcon } from "../Utilities/IconHelpers"
 
 type SortIconButtonProps = {
   header: Header<DataType, unknown>

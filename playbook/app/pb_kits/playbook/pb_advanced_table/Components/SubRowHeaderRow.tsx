@@ -6,7 +6,7 @@ import { Row, Table } from "@tanstack/react-table"
 import { ToggleIconButton } from "./ToggleIconButton"
 import { renderCollapsibleTrail } from "./CollapsibleTrail"
 
-import { isChrome } from "../Utilities/helper_functions"
+import { isChrome } from "../Utilities/BrowserCheck"
 import { DataType } from "../Utilities/types"
 import { GlobalProps } from "../../utilities/globalProps"
 

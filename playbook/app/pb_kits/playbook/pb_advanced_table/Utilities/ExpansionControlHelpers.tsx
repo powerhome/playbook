@@ -61,17 +61,3 @@ export const updateExpandAndCollapseState = (
     ...updateExpandedRows,
   })
 }
-
-//Checking browser. Using this to add classname and css for browser specific issues with table borders
-export const isChrome = () => {
-  const userAgent = navigator.userAgent.toLowerCase()
-  return userAgent.includes("chrome") && !userAgent.includes("edg")
-}
-
-// Logic for handling icons related props to allow for string or array of strings
-export const displayIcon = (icon: string | string[]) => {
-  if (typeof icon === "string") {
-    return [icon, icon]
-  }
-  return icon
-}
