@@ -61,23 +61,31 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
 
   const HeaderBody = () => (
     <React.Fragment>
-      <FlexItem flex="1" marginLeft="sm">
+      <FlexItem flex="1"
+          marginLeft="sm"
+      >
         <CircleIconButton
-          onClick={handleOnLightboxClose}
-          dark={true}
-          variant="link"
-          icon={icon}
+            dark
+            icon={icon}
+            onClick={handleOnLightboxClose}
+            variant="link"
         />
       </FlexItem>
       {title && text && (
         <FlexItem flex="5">
           <Flex justify="center">
-            <Flex align="center" orientation="column">
+            <Flex align="center"
+                orientation="column"
+            >
               {typeof title === "string" ? (
-                <Title dark paddingBottom="xxs" size={4} text={title} />
+                <Title dark
+                    paddingBottom="xxs"
+                    size={4}
+                    text={title}
+                />
               ) : (
-                <Flex justify="center"
-                   className="custom-header"
+                <Flex className="custom-header"
+                    justify="center"
                 >
                   {title}
                   </Flex>
@@ -86,8 +94,8 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
               {typeof text === "string" ? (
                 <Caption dark>{text}</Caption>
               ) : (
-                <Flex justify="center"
-                className="custom-header"
+                <Flex className="custom-header"
+                    justify="center"
                 >
                   {text}
                 </Flex>
@@ -99,12 +107,12 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
       <FlexItem flex="1">
         <Flex justify="end">
           <Button
-            className="nav-right-btn"
-            htmlType="button"
-            onClick={onClickRight}
-            dark
-            variant="link"
-            text={navRight}
+              className="nav-right-btn"
+              dark
+              htmlType="button"
+              onClick={onClickRight}
+              text={navRight}
+              variant="link"
           />
         </Flex>
       </FlexItem>
@@ -114,11 +122,11 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
   return (
     <div className="carousel-header">
       <Flex
-        {...ariaProps}
-        {...dataProps}
-        {...htmlProps}
-        className={classnames(headerCSS, headerSpacing, className)}
-        spacing={spacing}
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
+          className={classnames(headerCSS, headerSpacing, className)}
+          spacing={spacing}
       >
         {closeable && <HeaderBody />}
         {children}
