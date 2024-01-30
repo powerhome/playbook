@@ -20,7 +20,7 @@ type MessageProps = {
   avatarUrl?: string,
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
-  data?: object,
+  data?: Record<string, unknown>,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,

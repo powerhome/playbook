@@ -86,6 +86,50 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     item: []
   })
 
+  const modifyRecursive = (tree: { [key: string]: any }[], check: boolean) => {
+    if (!Array.isArray(tree)) {
+      return
+    }
+    return tree.map((item: { [key: string]: any }) => {
+      item.checked = check
+      item.children = modifyRecursive(item.children, check)
+      return item
+    })
+  }
+
+   // Function to map over data and add parent_id + depth property to each item
+  const addCheckedAndParentProperty = (
+    treeData: { [key: string]: any }[],
+    selectedIds: string[],
+    parent_id: string = null,
+    depth = 0,
+  ) => {
+    if (!Array.isArray(treeData)) {
+      return
+    }
+    return treeData.map((item: { [key: string]: any } | any) => {
+      const newItem = {
+        ...item,
+        checked: Boolean(selectedIds && selectedIds.length && selectedIds.includes(item.id)),
+        parent_id,
+        depth,
+      }
+      if (newItem.children && newItem.children.length > 0) {
+        const children =
+          item.checked && !returnAllSelected
+            ? modifyRecursive(item.children, true)
+            : item.children
+        newItem.children = addCheckedAndParentProperty(
+          children,
+          selectedIds,
+          newItem.id,
+          depth + 1
+        )
+      }
+      return newItem
+    })
+  }
+
   useEffect(() => {
     const formattedData = addCheckedAndParentProperty(
       treeData,
@@ -139,16 +183,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     }
   }, [])
 
-  const modifyRecursive = (tree: { [key: string]: any }[], check: boolean) => {
-    if (!Array.isArray(tree)) {
-      return
-    }
-    return tree.map((item: { [key: string]: any }) => {
-      item.checked = check
-      item.children = modifyRecursive(item.children, check)
-      return item
-    })
-  }
+
 
   // Iterate over tree, find item and set checked or unchecked
   const modifyValue = (
@@ -206,38 +241,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return tree
   }
 
-  // Function to map over data and add parent_id + depth property to each item
-  const addCheckedAndParentProperty = (
-    treeData: { [key: string]: any }[],
-    selectedIds: string[],
-    parent_id: string = null,
-    depth = 0,
-  ) => {
-    if (!Array.isArray(treeData)) {
-      return
-    }
-    return treeData.map((item: { [key: string]: any } | any) => {
-      const newItem = {
-        ...item,
-        checked: Boolean(selectedIds && selectedIds.length && selectedIds.includes(item.id)),
-        parent_id,
-        depth,
-      }
-      if (newItem.children && newItem.children.length > 0) {
-        const children =
-          item.checked && !returnAllSelected
-            ? modifyRecursive(item.children, true)
-            : item.children
-        newItem.children = addCheckedAndParentProperty(
-          children,
-          selectedIds,
-          newItem.id,
-          depth + 1
-        )
-      }
-      return newItem
-    })
-  }
+ 
 
   // Click event for x on form pill
   const handlePillClose = (event: any, clickedItem: { [key: string]: any }) => {
