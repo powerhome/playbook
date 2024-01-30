@@ -28,6 +28,9 @@ svg {
         transform: scale($v);
       }
     }
+    &.pb_custom_icon path {
+        fill: currentColor;
+    }
     &.pulse {
       animation-name: pb_icon_spin;
       animation-direction: normal;

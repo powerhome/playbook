@@ -13,6 +13,8 @@ class SamplesController < ApplicationController
     @show_sidebar = true
   end
 
+  def icons; end
+
 private
 
   def current_sample_type
