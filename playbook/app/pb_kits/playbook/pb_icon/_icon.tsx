@@ -140,7 +140,7 @@ const Icon = (props: IconProps) => {
     rotation ? rotateMap[isFA ? 'fa' : 'svg'][rotation] : null,
     spin ? spinMap[isFA ? 'fa' : 'svg'] : null,
   )
-  classes += ` ${transformClasses}`
+  if (transformClasses) classes += ` ${transformClasses}`
 
   if (isFA) {
     const faClassList = {
