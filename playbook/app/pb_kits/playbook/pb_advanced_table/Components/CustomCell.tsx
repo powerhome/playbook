@@ -31,7 +31,7 @@ export const CustomCell = ({
   };
 
   return (
-    <div style={{ paddingLeft: `${row.depth * 2}rem` }}>
+    <div style={{ paddingLeft: `${row.depth * 1.25}rem` }}>
       <Flex alignItems="center" 
           columnGap="xs"
           orientation="row"
