@@ -9,7 +9,7 @@ type ListProps = {
   className?: string;
   children: React.ReactNode[] | React.ReactNode;
   dark?: boolean;
-  data?: object;
+  data?: Record<string, unknown>;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   layout?: "" | "left" | "right";
@@ -72,25 +72,25 @@ const List = (props: ListProps) => {
     <div className={classes}>
       {ordered ? (
         <ol
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={className}
-          id={id}
-          role={role}
-          tabIndex={tabIndex}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={className}
+            id={id}
+            role={role}
+            tabIndex={tabIndex}
         >
           {childrenWithProps}
         </ol>
       ) : (
         <ul
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={className}
-          id={id}
-          role={role}
-          tabIndex={tabIndex}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={className}
+            id={id}
+            role={role}
+            tabIndex={tabIndex}
         >
           {childrenWithProps}
         </ul>

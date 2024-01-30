@@ -18,7 +18,7 @@ type NavItemProps = {
   children?: React.ReactNode[] | React.ReactNode;
   className?: string;
   collapsible?: boolean;
-  data?: object;
+  data?: Record<string, unknown>;
   dark?: boolean;
   fontSize?: "normal" | "small";
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -76,7 +76,7 @@ const NavItem = (props: NavItemProps) => {
     id,
     imageUrl,
     link,
-    onClick = () => {},
+    onClick,
     target = "_self",
     text = "",
     collapsibleTrail,
@@ -205,46 +205,49 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
       {collapsible ? (
         <>
           <Collapsible
-            className={collapsibleClasses}
-            icon={iconRight && iconRight}
-            iconSize="xs"
-            id={id}
-            collapsed={collapsed}
-            onIconClick={onIconRightClick}
-            onClick={onClick}
+              className={collapsibleClasses}
+              collapsed={collapsed}
+              icon={iconRight && iconRight}
+              iconSize="xs"
+              id={id}
+              onClick={onClick}
+              onIconClick={onIconRightClick}
           >
             <Collapsible.Main
-            className={globalProps({ ...finalItemSpacing })}
-            dark={dark}>
+                className={globalProps({ ...finalItemSpacing })}
+                dark={dark}
+            >
               <Tag
-                {...ariaProps}
-                {...dataProps}
-                {...htmlProps}
-                className={classes}
-                id={id}
-                href={link}
-                target={target}
+                  {...ariaProps}
+                  {...dataProps}
+                  {...htmlProps}
+                  className={classes}
+                  href={link}
+                  id={id}
+                  target={target}
               >
                 {imageUrl && (
                   <div
-                    className="pb_nav_list_item_icon_section_collapsible"
-                    key={imageUrl}
-                    onClick={(e) => handleIconClick(e)}
+                      className="pb_nav_list_item_icon_section_collapsible"
+                      key={imageUrl}
+                      onClick={(e) => handleIconClick(e)}
                   >
-                    <Image className="pb_nav_img_wrapper" url={imageUrl} />
+                    <Image className="pb_nav_img_wrapper"
+                        url={imageUrl}
+                    />
                   </div>
                 )}
 
                 {iconLeft && (
                   <div
-                    className="pb_nav_list_item_icon_section_collapsible"
-                    key={iconLeft}
-                    onClick={(e) => handleIconClick(e)}
+                      className="pb_nav_list_item_icon_section_collapsible"
+                      key={iconLeft}
+                      onClick={(e) => handleIconClick(e)}
                   >
                     <Icon
-                      className="pb_nav_list_item_icon_left_collapsible"
-                      fixedWidth
-                      icon={iconLeft}
+                        className="pb_nav_list_item_icon_left_collapsible"
+                        fixedWidth
+                        icon={iconLeft}
                     />
                   </div>
                 )}
@@ -258,27 +261,33 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
         </>
       ) : (
         <Tag
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={classes}
-          id={id}
-          href={link}
-          onClick={onClick}
-          target={target}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
+            href={link}
+            id={id}
+            onClick={onClick}
+            target={target}
         >
           {imageUrl && (
-            <div className="pb_nav_list_item_icon_section" key={imageUrl}>
-              <Image className="pb_nav_img_wrapper" url={imageUrl} />
+            <div className="pb_nav_list_item_icon_section"
+                key={imageUrl}
+            >
+              <Image className="pb_nav_img_wrapper"
+                  url={imageUrl}
+              />
             </div>
           )}
 
           {iconLeft && (
-            <div className="pb_nav_list_item_icon_section" key={iconLeft}>
+            <div className="pb_nav_list_item_icon_section"
+                key={iconLeft}
+            >
               <Icon
-                className="pb_nav_list_item_icon_left"
-                fixedWidth
-                icon={iconLeft}
+                  className="pb_nav_list_item_icon_left"
+                  fixedWidth
+                  icon={iconLeft}
               />
             </div>
           )}
@@ -287,13 +296,13 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
 
           {iconRight && (
             <div
-              className="pb_nav_list_item_icon_section"
-              key={iconRight as string}
+                className="pb_nav_list_item_icon_section"
+                key={iconRight as string}
             >
               <Icon
-                className="pb_nav_list_item_icon_right"
-                fixedWidth
-                icon={iconRight as string}
+                  className="pb_nav_list_item_icon_right"
+                  fixedWidth
+                  icon={iconRight as string}
               />
             </div>
           )}

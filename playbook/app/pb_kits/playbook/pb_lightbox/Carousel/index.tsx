@@ -20,8 +20,8 @@ type CarouselType = {
 export default function Carousel({
   currentIndex,
   photos,
-  onClick = ()=>{},
-  onChange = ()=>{},
+  onClick,
+  onChange = () => undefined,
   setIndex,
 }: CarouselType): React.ReactElement {
   useEffect(() => {
@@ -39,10 +39,10 @@ export default function Carousel({
   return (
     <div className="Lightbox">
       <Slides
-          setIndex={setIndex}
           current={currentIndex}
           onChange={handleChange}
           onClick={onClick}
+          setIndex={setIndex}
           urls={photos.map((photo) => photo.url)}
       />
       {photos.length > 1 ? (

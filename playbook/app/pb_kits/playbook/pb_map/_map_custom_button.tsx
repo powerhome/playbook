@@ -3,13 +3,15 @@ import Button from "../pb_button/_button";
 import Icon from "../pb_icon/_icon";
 
 type MapCustomButtonTypes = {
-  onClick?: () => {};
+  onClick?: () => void;
   icon?: string;
 };
 
 const MapCustomButton = ({ onClick, icon }: MapCustomButtonTypes) => {
   return (
-    <Button className="pb_map-custom-button" onClick={onClick}>
+    <Button className="pb_map-custom-button"
+        onClick={onClick}
+    >
       <Icon icon={icon} />
     </Button>
   );
