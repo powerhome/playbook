@@ -1,9 +1,51 @@
-// Rails custom icon styles
-svg.pb_custom_icon {
-  width: 1em;
-  fill: currentColor;
-  path {
-    fill: currentColor;
+$rotate-list: (90, 180, 270);
+$flip-list: (
+  "horizontal": (-1, 1),
+  "vertical": (1, -1),
+  "both": (-1, -1)
+);
+
+@keyframes pb_icon_spin {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+};
+
+svg {
+  &.pb_icon_kit {
+    @each $r in $rotate-list {
+      &.rotate_#{$r} {
+        transform: rotate(#{$r}deg);
+      }
+    }
+    @each $f, $v in $flip-list {
+      &.flip_#{$f} {
+        transform: scale($v);
+      }
+    }
+    &.pb_custom_icon path {
+        fill: currentColor;
+    }
+    &.pulse {
+      animation-name: pb_icon_spin;
+      animation-direction: normal;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: steps(8);
+    }
+    &.spin {
+      animation-name: pb_icon_spin;
+      animation-delay: 0s;
+      animation-direction: normal;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
   }
 }
 

@@ -17,6 +17,13 @@ environment.loaders.prepend('svgr', {
   test: /\.(svg)$/,
   use: {
     loader: '@svgr/webpack',
+    options: {
+      svgoConfig: {
+        plugins: [
+          { removeViewBox: false }
+        ]
+      }
+    }
   },
   include: [
     path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons')
