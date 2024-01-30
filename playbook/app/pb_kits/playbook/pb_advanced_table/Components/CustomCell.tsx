@@ -42,11 +42,14 @@ export const CustomCell = ({
               onClick={() => handleOnExpand(row)}
           >
             {row.getIsExpanded() ? (
-              <Icon icon="circle-play" 
+              <Icon cursor="pointer"
+                  icon="circle-play"
                   rotation={90}
               />
             ) : (
-              <Icon icon="circle-play" />
+              <Icon cursor="pointer"
+                  icon="circle-play"    
+               />
             )}
           </button>
         ) : null}

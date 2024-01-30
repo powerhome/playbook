@@ -46,12 +46,12 @@
     @extend %primary-color-pseudo;
   }
 
-  .year-sort-icon {
+  .sort-button-icon {
     @extend .button-icon;
     padding: 2px;
   }
 
-  .time-period-toggle-icon {
+  .toggle-all-icon {
     @extend .button-icon;
     @extend %primary-color-pseudo;
     padding: 2px 0;

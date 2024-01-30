@@ -13,13 +13,13 @@ export const SortIconButton = ({ header, sortIcon }: SortIconButtonProps) => {
   return (
     <>
       {header.column.getIsSorted() === "desc" ? (
-        <div className="year-sort-icon" 
+        <div className="sort-button-icon" 
             key={displayIcon(sortIcon)[0]}
         >
           <Icon icon={displayIcon(sortIcon)[0]} />
         </div>
       ) : (
-        <div className="year-sort-icon" 
+        <div className="sort-button-icon" 
             key={displayIcon(sortIcon)[1]}
         >
           <Icon icon={displayIcon(sortIcon)[1]} />

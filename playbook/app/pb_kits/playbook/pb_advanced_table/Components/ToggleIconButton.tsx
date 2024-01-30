@@ -14,7 +14,7 @@ export const ToggleIconButton = ({ row, onClick }: ToggleIconButtonProps) => {
   const { toggleExpansionIcon } = useContext(AdvancedTableContext)
   return (
     <button
-        className="gray-icon time-period-toggle-icon"
+        className="gray-icon toggle-all-icon"
         key={displayIcon(toggleExpansionIcon)[0]}
         onClick={() => onClick(row)}
     >
