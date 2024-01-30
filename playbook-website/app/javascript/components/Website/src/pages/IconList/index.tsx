@@ -21,7 +21,7 @@ export default function IconList() {
 
   return (
     <>
-      <Hero description={"Power Icons"} title={linkFormat("Playbook Icons")} />
+      <Hero description={"Powerhome Icons"} title={linkFormat("Playbook Icons")} />
 
       <Flex
         justify='center'
