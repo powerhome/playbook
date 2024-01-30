@@ -4,7 +4,7 @@ import React from "react"
 const CollapsibleTrail = ({ leftOffset }: { leftOffset: number }) => {
   const style: { [key: string]: string | number } = {
     position: "absolute",
-    left: `${leftOffset}rem`,
+    left: `${leftOffset}em`,
     top: 0,
     bottom: 0,
     width: "2px",

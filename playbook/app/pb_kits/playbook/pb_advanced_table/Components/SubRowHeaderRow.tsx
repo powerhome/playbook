@@ -38,7 +38,7 @@ export const SubRowHeaderRow = ({
           colSpan={1}
       >
         {collapsibleTrail && row.depth > 0 && renderCollapsibleTrail(row.depth)}
-        <div style={{ paddingLeft: `${row.depth * 2}rem` }}>
+        <div style={{ paddingLeft: `${row.depth * 1.25}em` }}>
           <Flex align="center" 
               columnGap="xs"
           >
