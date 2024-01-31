@@ -1,6 +1,6 @@
 examples:
   react:
   - advanced_table_default: Default
-  - advanced_table_sort: All in One
+  # - advanced_table_sort: enableSorting
   
   

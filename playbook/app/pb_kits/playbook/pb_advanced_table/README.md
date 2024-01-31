@@ -5,7 +5,7 @@ The AdvancedTable Kit's `tableData` prop consumes the data that will render the 
 Here is the data structure being used within the kits doc examples:
 
 ```
-MOCK_DATA = [
+const MOCK_DATA = [
   {
     year: "2021",
     quarter: null,
@@ -110,8 +110,85 @@ MOCK_DATA = [
     classCompletionRate: "45%",
     graduatedStudents: "32",
     children: [
-        //similar to chldren above
-    ]
+      {
+        year: "2022",
+        quarter: "Q1",
+        month: null,
+        day: null,
+        newEnrollments: "2",
+        scheduledMeetings: "35",
+        attendanceRate: "32%",
+        completedClasses: "15",
+        classCompletionRate: "52%",
+        graduatedStudents: "36",
+        children: [
+          {
+            year: "2022",
+            quarter: "Q1",
+            month: "January",
+            day: null,
+            newEnrollments: "16",
+            scheduledMeetings: "20",
+            attendanceRate: "11%",
+            completedClasses: "13",
+            classCompletionRate: "47%",
+            graduatedStudents: "28",
+            children: [
+              {
+                year: "2022",
+                quarter: "Q1",
+                month: "January",
+                day: "15",
+                newEnrollments: "34",
+                scheduledMeetings: "28",
+                attendanceRate: "97%",
+                completedClasses: "20",
+                classCompletionRate: "15%",
+                graduatedStudents: "17",
+              },
+              {
+                year: "2022",
+                quarter: "Q1",
+                month: "January",
+                day: "25",
+                newEnrollments: "43",
+                scheduledMeetings: "23",
+                attendanceRate: "66%",
+                completedClasses: "26",
+                classCompletionRate: "47%",
+                graduatedStudents: "9",
+              },
+            ],
+          },
+          {
+            year: "2022",
+            quarter: "Q1",
+            month: "May",
+            day: null,
+            newEnrollments: "20",
+            scheduledMeetings: "41",
+            attendanceRate: "95%",
+            completedClasses: "26",
+            classCompletionRate: "83%",
+            graduatedStudents: "43",
+            children: [
+              {
+                year: "2011",
+                quarter: "Q1",
+                month: "May",
+                day: "2",
+                newEnrollments: "19",
+                scheduledMeetings: "35",
+                attendanceRate: "69%",
+                completedClasses: "8",
+                classCompletionRate: "75%",
+                graduatedStudents: "23",
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     year: "2023",
@@ -125,9 +202,87 @@ MOCK_DATA = [
     classCompletionRate: "49%",
     graduatedStudents: "29",
     children: [
-      //similar to children above
+      {
+        year: "2023",
+        quarter: "Q1",
+        month: null,
+        day: null,
+        newEnrollments: "2",
+        scheduledMeetings: "35",
+        attendanceRate: "32%",
+        completedClasses: "15",
+        classCompletionRate: "52%",
+        graduatedStudents: "36",
+        children: [
+          {
+            year: "2023",
+            quarter: "Q1",
+            month: "March",
+            day: null,
+            newEnrollments: "16",
+            scheduledMeetings: "20",
+            attendanceRate: "11%",
+            completedClasses: "13",
+            classCompletionRate: "47%",
+            graduatedStudents: "28",
+            children: [
+              {
+                year: "2023",
+                quarter: "Q1",
+                month: "March",
+                day: "10",
+                newEnrollments: "34",
+                scheduledMeetings: "28",
+                attendanceRate: "97%",
+                completedClasses: "20",
+                classCompletionRate: "15%",
+                graduatedStudents: "17",
+              },
+              {
+                year: "2023",
+                quarter: "Q1",
+                month: "March",
+                day: "11",
+                newEnrollments: "43",
+                scheduledMeetings: "23",
+                attendanceRate: "66%",
+                completedClasses: "26",
+                classCompletionRate: "47%",
+                graduatedStudents: "9",
+              },
+            ],
+          },
+          {
+            year: "2023",
+            quarter: "Q1",
+            month: "April",
+            day: null,
+            newEnrollments: "20",
+            scheduledMeetings: "41",
+            attendanceRate: "95%",
+            completedClasses: "26",
+            classCompletionRate: "83%",
+            graduatedStudents: "43",
+            children: [
+              {
+                year: "2023",
+                quarter: "Q1",
+                month: "April",
+                day: "15",
+                newEnrollments: "19",
+                scheduledMeetings: "35",
+                attendanceRate: "69%",
+                completedClasses: "8",
+                classCompletionRate: "75%",
+                graduatedStudents: "23",
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 ];
+
 
 ```
