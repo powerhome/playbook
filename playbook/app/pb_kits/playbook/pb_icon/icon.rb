@@ -85,6 +85,7 @@ module Playbook
         svg["class"] = "pb_custom_icon " + object.custom_icon_classname
         svg["height"] = svg_dims[svg_size] * 16
         svg["width"] = svg_dims[svg_size] * 16
+        doc.at_css("path")["fill"] = "currentColor"
         raw doc
       end
 
