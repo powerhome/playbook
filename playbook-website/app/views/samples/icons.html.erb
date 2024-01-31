@@ -9,31 +9,4 @@
   <% end %>
 <% end %>
 
-
-<%= pb_rails("flex", props: {justify: 'center'}) do %>
-  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
-    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { size: "sm", icon: "node_modules/playbook-icons/icons/roofing.svg" }) %>
-    <% end %>
-  <% end %>
-  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
-    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { size: "4x", icon: "node_modules/playbook-icons/icons/powergon.svg" }) %>
-    <% end %>
-  <% end %>
-  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
-    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { icon: "node_modules/playbook-icons/icons/nitro.svg" }) %>
-    <% end %>
-  <% end %>
-  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
-    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { flip: "horizontal", size: "3x", icon: "node_modules/playbook-icons/icons/nitro.svg" } ) %>
-    <% end %>
-  <% end %>
-  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
-    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { spin: true, size: "2x", icon: "node_modules/playbook-icons/icons/nitro.svg" } ) %>
-    <% end %>
-  <% end %>
-<% end %>
+<%= Dir.entries(Rails.root) %></br>||||||||||||
