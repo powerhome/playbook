@@ -1,6 +1,7 @@
 examples:
   react:
   - advanced_table_default: Default
-  # - advanced_table_sort: enableSorting
+  - advanced_table_loading: Loading State
+  - advanced_table_sort: enable Sorting
   
   

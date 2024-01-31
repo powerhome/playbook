@@ -1,0 +1,1 @@
+the `enableSorting` prop is a boolean prop set to false by default. If true, the table will add sort logic linked to the sort button in the header. Clicking the sort button will toggle sort between ascending and descending. Currently this sort functionality is only available on the first column.
