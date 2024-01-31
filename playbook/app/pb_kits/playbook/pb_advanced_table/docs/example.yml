@@ -3,7 +3,8 @@ examples:
   - advanced_table_default: Default
   - advanced_table_loading: Loading State
   - advanced_table_sort: enable Sorting
-  - advanced_table_collapsible_Trail: Collapsible Trail
+  - advanced_table_subrow_headers: SubRow Headers
+  - advanced_table_collapsible_trail: Collapsible Trail
   - advanced_table_table_options: Table Options
   - advanced_table_table_props: Table Props
 
