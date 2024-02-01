@@ -2,4 +2,4 @@
 
 In this example we are showing that if initial expansion state is set, it will render the table expanded according to that state. 
 
-The expanded state must be an object with key/value pairs where the key is the row id and the value is a boolean, true or false. Tanstack by default assigns row ids based on index and depth of the row as can be seen in this example. For for informatino on row ids, see [here](https://tanstack.com/table/v8/docs/api/core/row#id).
+The expanded state must be an object with key/value pairs where the key is the row id and the value is a boolean, true or false. Tanstack by default assigns row ids based on index and depth of the row as can be seen in this example. For more information on row ids, see [here](https://tanstack.com/table/v8/docs/api/core/row#id).
