@@ -9,8 +9,13 @@
   <% end %>
 <% end %>
 
+<%= pb_rails("flex", props: { padding_left: "md"} ) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("title", props: {size: 3, text: "Power Icons", padding_bottom: "sm"})%>
+  <% end %>
+<% end %>
 
-<%= pb_rails("flex", props: {justify: 'center'}) do %>
+<%= pb_rails("flex", props: { padding_left: "md" }) do %>
   <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
     <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
       <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg") }) %>
@@ -18,27 +23,150 @@
   <% end %>
   <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
     <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { size: "2x", icon: image_pack_url("roofing.svg") }) %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("powergon.svg") }) %>
     <% end %>
   <% end %>
   <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
     <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { size: "4x", icon: image_pack_url("roofing.svg") }) %>
-    <% end %>
-  <% end %>
-  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
-    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { icon: image_pack_url("nitro.svg")  }) %>
-    <% end %>
-  <% end %>
-  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
-    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { flip: "horizontal", size: "3x", icon: image_pack_url("nitro.svg") } ) %>
-    <% end %>
-  <% end %>
-  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
-    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { spin: true, size: "2x", icon: image_pack_url("nitro.svg") } ) %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("nitro.svg") }) %>
     <% end %>
   <% end %>
 <% end %>
+
+<%= pb_rails("flex", props: { padding_left: "md"} ) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("title", props: {size: 3, text: "Sizes", padding_bottom: "sm"})%>
+  <% end %>
+<% end %>
+
+<%= pb_rails("flex", props: { padding_left: "md" }) do %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg"), size: "xs" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg"), size: "sm" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg"), size: "lg" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg"), size: "1x" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg"), size: "2x" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg"), size: "3x" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg"), size: "4x" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg"), size: "5x" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg"), size: "6x" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("roofing.svg"), size: "7x" }) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("flex", props: { padding_left: "md"} ) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("title", props: {size: 3, text: "Color", padding_bottom: "sm"})%>
+  <% end %>
+<% end %>
+
+<%= pb_rails("flex", props: { padding_left: "md" }) do %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("body", props: { text: "Color: Blue", classname: "blue_color" }) %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("powergon.svg"), size: "2x", classname: "blue_color" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("body", props: { text: "Color: Blue", classname: "green_color" }) %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("powergon.svg"), size: "2x", classname: "green_color" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("body", props: { text: "Color: Blue", classname: "red_color" }) %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("powergon.svg"), size: "2x", classname: "red_color" }) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+<%= pb_rails("flex", props: { padding_left: "md"} ) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("title", props: {size: 3, text: "Animation & Transformation", padding_bottom: "sm"})%>
+  <% end %>
+<% end %>
+
+<%= pb_rails("flex", props: { padding_left: "md" }) do %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("nitro.svg"), size: "2x", spin: true }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("nitro.svg"), size: "2x", pulse: true }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("nitro.svg"), size: "2x" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("nitro.svg"), size: "2x", rotation: 90 }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("nitro.svg"), size: "2x", rotation: 180 }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: image_pack_url("nitro.svg"), size: "2x", rotation: 270 }) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<style>
+  .blue_color {
+    color: blue
+  }
+  .red_color {
+    color: red
+  }
+  .green_color {
+    color: green
+  }
+</style>

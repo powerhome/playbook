@@ -18,6 +18,9 @@ $flip-list: (
 
 svg {
   &.pb_icon_kit {
+    path {
+      fill: currentColor !important;
+    }
     @each $r in $rotate-list {
       &.rotate_#{$r} {
         transform: rotate(#{$r}deg);

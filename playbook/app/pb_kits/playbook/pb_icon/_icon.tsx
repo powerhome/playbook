@@ -53,7 +53,7 @@ const getSvgDimensions = (aspectRatio = '1:1', size: string): {width: number, he
   if (!size) return null
   const aspect = aspectRatio.split(':')
 
-  const scale = size.toLowerCase().includes('x') ?
+  const scale = size.toLowerCase().endsWith('x') ?
     parseInt(size.replace(/\x/i, '')) :
     iconSizeMap[size as IconSizeNames]
 
