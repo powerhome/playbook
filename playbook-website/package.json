@@ -19,7 +19,7 @@
     "@tiptap/extension-text": "^2.1.12",
     "@tiptap/pm": "^2.0.2",
     "@tiptap/react": "^2.0.2",
-    "@tiptap/starter-kit": "^2.0.2",
+    "@tiptap/starter-kit": "^2.2.1",
     "anchor-js": "^5.0.0",
     "maplibre-gl": "^2.4.0",
     "playbook-ui": ">= 1",
