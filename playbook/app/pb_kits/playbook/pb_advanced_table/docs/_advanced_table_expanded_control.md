@@ -1,0 +1,5 @@
+`expandedControl` is an optional prop that can be used to gain greater control over the expansion state of the Advanced Table. Tanstack handles expansion itself, however it does provide for a way to handle the state manually if needed. Usecases for this include needing to store the expansion state so it persists on page reload, set an initial expansion state, etc. 
+
+In this example we are showing that if initial expansion state is set, it will render the table expanded according to that state. 
+
+The expanded state must be an object with key/value pairs where the key is the row id and the value is a boolean, true or false. Tanstack by default assigns row ids based on index and depth of the row as can be seen in this example. For for informatino on row ids, see [here](https://tanstack.com/table/v8/docs/api/core/row#id).

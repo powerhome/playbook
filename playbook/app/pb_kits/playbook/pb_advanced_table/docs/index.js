@@ -1,6 +1,7 @@
 export { default as AdvancedTableDefault } from './_advanced_table_default.jsx'
 export { default as AdvancedTableSort } from './_advanced_table_sort.jsx'
 export { default as AdvancedTableLoading } from './_advanced_table_loading.jsx'
+export { default as AdvancedTableExpandedControl } from './_advanced_table_expanded_control.jsx'
 export { default as AdvancedTableSubrowHeaders } from './_advanced_table_subrow_headers.jsx'
 export { default as AdvancedTableCollapsibleTrail } from './_advanced_table_collapsible_trail.jsx'
 export { default as AdvancedTableTableOptions } from './_advanced_table_table_options.jsx'
