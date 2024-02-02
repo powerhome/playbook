@@ -44,11 +44,11 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     return users.slice(0, 1).map((userObject, index) => {
       return (
         <Avatar
-          {...userObject}
-          className="pb_multiple_users_stacked_item"
-          dark={dark}
-          key={index}
-          size="xs"
+            {...userObject}
+            className="pb_multiple_users_stacked_item"
+            dark={dark}
+            key={index}
+            size="xs"
         />
       )
     })
@@ -59,11 +59,11 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
       return users.slice(1, 2).map((userObject, index) => {
         return (
           <Avatar
-            {...userObject}
-            className="pb_multiple_users_stacked_item second_item"
-            dark={dark}
-            key={index}
-            size="xs"
+              {...userObject}
+              className="pb_multiple_users_stacked_item second_item"
+              dark={dark}
+              key={index}
+              size="xs"
           />
         )
       })
@@ -74,11 +74,11 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     if (moreThanTwo === true) {
       return (
         <Badge
-          className="pb_multiple_users_stacked_item second_item"
-          dark={dark}
-          rounded
-          text={`+${users.length - displayCount()}`}
-          variant="primary"
+            className="pb_multiple_users_stacked_item second_item"
+            dark={dark}
+            rounded
+            text={`+${users.length - displayCount()}`}
+            variant="primary"
         />
       )
     }
@@ -86,11 +86,11 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
     >
       {firstUser()}
       {secondUser()}

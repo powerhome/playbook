@@ -6,9 +6,9 @@ import Flex from "../pb_flex/_flex";
 type MapControlTypes = {
   zoomBtns?: boolean, 
   flyTo?: boolean, 
-  zoomInClick?: () => {},
-  zoomOutClick?: () => {},
-  flyToClick?: () => {},
+  zoomInClick?: () => void,
+  zoomOutClick?: () => void,
+  flyToClick?: () => void,
   children?: React.ReactNode | React.ReactNode[]
 }
 
@@ -21,19 +21,27 @@ const MapControls = ({
   children,
 }: MapControlTypes) => {
   return (
-    <Flex className="custom-nav-control" orientation="column">
+    <Flex className="custom-nav-control"
+        orientation="column"
+    >
       {zoomBtns ? (
         <>
           <div className="custom-nav-control-zoom">
-            <Button className="map-zoom-in-button" onClick={zoomInClick}>
+            <Button className="map-zoom-in-button"
+                onClick={zoomInClick}
+            >
               <Icon icon="plus" />
             </Button>
-            <Button className="map-zoom-out-button" onClick={zoomOutClick}>
+            <Button className="map-zoom-out-button"
+                onClick={zoomOutClick}
+            >
               <Icon icon="minus" />
             </Button>
           </div>
           {flyTo ? (
-            <Button className="map-flyto-button" onClick={flyToClick}>
+            <Button className="map-flyto-button"
+                onClick={flyToClick}
+            >
               <Icon icon="eye" />
             </Button>
           ) : null}

@@ -12,12 +12,12 @@ type NavProps = {
   borderless?: boolean,
   children?: React.ReactNode[] | React.ReactNode,
   className?: string | string[],
-  data?: object,
+  data?: Record<string, unknown>,
   dark?: boolean,
   highlight?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
-  onClick?: React.MouseEventHandler<HTMLElement>,
+  onClick?: () => void,
   orientation?: "vertical" | "horizontal",
   link?: string,
   title?: string,
@@ -25,7 +25,7 @@ type NavProps = {
   itemSpacing?: SpacingObject
 } & GlobalProps
 
-const Nav = (props: NavProps) => {
+const Nav = (props: NavProps): React.ReactElement => {
   const {
     aria = {},
     borderless = false,
@@ -37,7 +37,7 @@ const Nav = (props: NavProps) => {
     htmlOptions = {},
     id,
     link = '#',
-    onClick = () => { },
+    onClick,
     orientation = 'vertical',
     title = '',
     variant = 'normal',
@@ -71,23 +71,23 @@ const childrenWithProps = React.Children.map(children, (child) => {
 
   return (
     <nav
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={cardCss}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={cardCss}
+        id={id}
     >
       {title &&
         <div className="pb_nav_list_title">
           <a
-            className="pb_nav_list_item_link_text"
-            href={link}
-            onClick={onClick}
+              className="pb_nav_list_item_link_text"
+              href={link}
+              onClick={onClick}
           >
             <Caption
-              dark={dark}
-              size="md"
-              text={`${title}`}
+                dark={dark}
+                size="md"
+                text={`${title}`}
             />
           </a>
         </div>
