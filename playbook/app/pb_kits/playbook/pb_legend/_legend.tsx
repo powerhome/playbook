@@ -12,7 +12,7 @@ type LegendProps = {
   className?: string,
   color?: string,
   dark?: boolean,
-  data?: object,
+  data?: Record<string, unknown>,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   prefixText?: string,
@@ -64,11 +64,11 @@ const Legend = (props: LegendProps) => {
         {
           prefixText && (
             <Title
-              dark={dark}
-              size={4}
-              tag="span"
-              text={` ${prefixText} `}
-          />
+                dark={dark}
+                size={4}
+                tag="span"
+                text={` ${prefixText} `}
+            />
           )
         }
         {` ${text} `}
