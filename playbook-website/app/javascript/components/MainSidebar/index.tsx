@@ -21,6 +21,8 @@ const MainSidebar = ({
   //hook into collapsible logic for all components nested nav items
   const collapsibles = kits.map(() => useCollapsible());
 
+  const filteredSearchList = search_list.filter(obj => obj.label !== "Advanced Table");
+
   //kits in alphabetical order
   kits.map((obj: {[key: string]: string[]}) => {
   
@@ -53,7 +55,7 @@ const MainSidebar = ({
         <KitSearch
           classname="desktop-kit-search"
           id="desktop-kit-search"
-          kits={search_list}
+          kits={filteredSearchList}
         />
       </Flex>
       <Nav dark={dark} variant="bold" paddingTop="xxs">
