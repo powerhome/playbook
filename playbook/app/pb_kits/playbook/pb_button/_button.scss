@@ -24,6 +24,7 @@ $pb_button_sizes: (
     }
   }
 
+
   // Variants =================
   &[class*=_primary]  {
     @include pb_button_primary;
@@ -62,6 +63,17 @@ $pb_button_sizes: (
     padding: ($space_xxs + 1) ($space_sm - 4);
     color: $text_lt_lighter;
   }
+
+  &.rounded {
+    padding: $space_sm;
+    min-height: unset;
+    background-color: transparent;
+    &:hover {
+      color: $primary;
+      background-color: $secondary_action;;
+    }
+  }
+  
 
   // Disabled =================
   &[class*=_disabled]  {

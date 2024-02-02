@@ -42,3 +42,4 @@ export const CategoryLoader: (
 
   return filteredData;
 };
+

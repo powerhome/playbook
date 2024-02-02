@@ -1,39 +1,39 @@
 import React from "react"
-import { Button } from "../../"
+import { Button, Icon, Detail } from "../../"
+import Sandbox from "./sandbox.tsx"
 
 const ButtonDefault = (props) => (
   <div>
     <Button
-        marginRight='lg'
-        onClick={() => alert("button clicked!")}
-        tabIndex={0}
-        text='Button Primary'
-        {...props}
-    />{" "}
+      variant='rounded'
+      onClick={() => alert("button clicked!")}
+      tabIndex={0}
+      {...props}
+    >
+      <Detail color='default'>
+        <Icon icon='arrows-from-line' />
+      </Detail>
+    </Button>
     <Button
-        marginRight='lg'
-        onClick={() => alert("button clicked!")}
-        tabIndex={0}
-        text='Button Secondary'
-        variant='secondary'
-        {...props}
-    />{" "}
+      variant='rounded'
+      onClick={() => alert("button clicked!")}
+      tabIndex={0}
+      {...props}
+    >
+      <Detail color='default'>
+        <Icon icon='copy' />
+      </Detail>
+    </Button>
     <Button
-        marginRight='lg'
-        onClick={() => alert("button clicked!")}
-        tabIndex={0}
-        text='Button Link'
-        variant='link'
-        {...props}
-    />
-    <Button
-        disabled
-        marginRight='lg'
-        onClick={() => alert("button clicked!")}
-        tabIndex={0}
-        text='Button Disabled'
-        {...props}
-    />
+      variant='rounded'
+      onClick={() => alert("button clicked!")}
+      tabIndex={0}
+      {...props}
+    >
+      <Detail>
+        <Icon customIcon={Sandbox()} />
+      </Detail>
+    </Button>
   </div>
 )
 

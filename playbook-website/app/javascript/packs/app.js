@@ -11,7 +11,7 @@ import App from '../components/Website'
 import ComponentList from '../components/Website/src/pages/ComponentList'
 import ComponentShow from '../components/Website/src/pages/ComponentShow'
 import CategoryShow from '../components/Website/src/pages/CategoryShow'
-import { CategoryLoader, ComponentsLoader } from '../components/Website/src/hooks/loaders'
+import { CategoryLoader, ComponentsLoader, KitCodeLoader } from '../components/Website/src/hooks/loaders'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,11 +27,13 @@ const router = createBrowserRouter(
       >
         <Route
             element={<ComponentShow />}
+            loader={ComponentsLoader}
             path=":name"
         />
         <Route
             element={<Navigate to="react" />}
             path=":name"
+            loader={ComponentsLoader}
         />
       </Route>
       <Route
