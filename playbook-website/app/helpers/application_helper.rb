@@ -146,23 +146,6 @@ module ApplicationHelper
     }
   end
 
-  def aggregate_kits
-    all_kits = []
-
-    MENU["kits"].each do |kit|
-      kit_name = kit["name"]
-      components = kit["components"].map { |c| c["name"] }
-
-      all_kits << if components.size == 1
-                    components.first
-                  else
-                    { kit_name => components }
-                  end
-    end
-
-    all_kits
-  end
-
   def aggregate_kits_with_status
     all_kits = []
 
