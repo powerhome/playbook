@@ -4,6 +4,7 @@ import WebpackerReact from 'webpacker-react'
 
 // KIT EXAMPLES
 import 'pb_form/pb_form_validation'
+import * as AdvancedTable from 'pb_advanced_table/docs'
 import * as Avatar from 'pb_avatar/docs'
 import * as AvatarActionButton from 'pb_avatar_action_button/docs'
 import * as Background from 'pb_background/docs'
@@ -105,6 +106,7 @@ import * as Walkthrough from 'pb_walkthrough/docs'
 import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 
 WebpackerReact.registerComponents({
+  ...AdvancedTable,
   ...Avatar,
   ...AvatarActionButton,
   ...Background,
