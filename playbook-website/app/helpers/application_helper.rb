@@ -163,21 +163,47 @@ module ApplicationHelper
     all_kits
   end
 
+  def aggregate_kits_with_status
+    all_kits = []
+
+    MENU["kits"].each do |kit|
+      kit_name = kit["name"]
+      # Modify this line to include both name and status in the components array
+      components = kit["components"].map { |c| { name: c["name"], status: c["status"] } }
+
+      all_kits << if components.size == 1
+                    # For a single-component kit, return the component with its status
+                    components.first
+                  else
+                    # For multi-component kits, return the kit name with the components including their statuses
+                    { kit_name => components }
+                  end
+    end
+
+    all_kits
+  end
+
   def search_list
     all_kits = []
     formatted_kits = []
-    aggregate_kits.each do |kit|
+
+    aggregate_kits_with_status.each do |kit|
       if kit.is_a? Hash
-        kit.values[0].each do |sub_kit|
-          all_kits.push(sub_kit)
+        _kit_name, components = kit.first
+        components.each do |component|
+          all_kits.push(component[:name]) if component[:status] != "beta"
         end
       else
         all_kits.push(kit)
       end
     end
-    all_kits.sort!.each do |sorted_kit|
+
+    all_kits.sort!
+
+    all_kits.each do |sorted_kit|
       formatted_kits.push(format_search_hash(sorted_kit))
     end
+
     formatted_kits
   end
 
