@@ -19,10 +19,11 @@ module Playbook
       prop :name
       prop :onchange
       prop :options, type: Playbook::Props::HashArray, required: false, default: []
+      prop :show_arrow, type: Playbook::Props::Boolean, default: false
       prop :required, type: Playbook::Props::Boolean, default: false
 
       def classnames
-        classname + inline_class + compact_class
+        classname + inline_class + compact_class + show_arrow_class
       end
 
       def all_attributes
@@ -47,6 +48,10 @@ module Playbook
 
       def compact_class
         compact ? "compact" : ""
+      end
+
+      def show_arrow_class
+        show_arrow ? "show_arrow" : ""
       end
 
       def select_wrapper_class

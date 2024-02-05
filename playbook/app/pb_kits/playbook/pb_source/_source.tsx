@@ -32,7 +32,7 @@ const Source = ({
   source,
   type = 'inbound',
   user = {},
-}: SourceProps) => {
+}: SourceProps): React.ReactElement => {
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const ariaProps = buildAriaProps(aria)
@@ -72,11 +72,11 @@ const Source = ({
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={css}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={css}
+        id={id}
     >
 
       <div className="pb__source_layout">
@@ -84,13 +84,13 @@ const Source = ({
           <>
             {showIcon() &&
               <IconCircle
-                icon={typeIconNames[type]}
-                size="sm"
+                  icon={typeIconNames[type]}
+                  size="sm"
               />
             }
             {!showIcon() &&
               <Avatar
-                {...avatar()}
+                  {...avatar()}
               />
             }
           </>
@@ -98,20 +98,20 @@ const Source = ({
 
         <div className="pb__source_content">
           <Title
-            size={4}
-            tag="h4"
-            text={source}
+              size={4}
+              tag="h4"
+              text={source}
           />
 
           <div className="pb__source_value">
             <Body
-              color="light"
-              text={typeText()}
+                color="light"
+                text={typeText()}
             />
 
             {user.userId &&
               <Caption
-                text={user.userId}
+                  text={user.userId}
               />
             }
           </div>

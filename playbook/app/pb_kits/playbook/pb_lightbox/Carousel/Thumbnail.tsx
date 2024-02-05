@@ -16,7 +16,7 @@ export default function Thumbnail({
   alt,
   width,
   url,
-  onClick = ()=>{},
+  onClick,
   buttonRef,
 }: ThumbnailType): React.ReactElement {
   const activeClasses = classnames('Thumbnail', { active })

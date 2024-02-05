@@ -6,11 +6,12 @@ import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import "./styles.scss";
 
 type KitCardProps = {
-  description: string;
-  name: string;
+  description: string,
+  name: string,
+  platform: string,
 };
 
-export const KitCard = ({ description, name }: KitCardProps) => {
+export const KitCard = ({ description, name, platform }: KitCardProps) => {
   return (
     <Card
       className="kit-card"
@@ -25,7 +26,7 @@ export const KitCard = ({ description, name }: KitCardProps) => {
       paddingBottom={{ xs: "xxs", default: "md" }}
       borderRadius="lg"
     >
-      <a href={`/kits/${name}`}>
+      <a href={`/kits/${name}/${platform}`}>
         <Flex align="center" className="kit-card-header" justify="between">
           <Title
             text={linkFormat(name)}

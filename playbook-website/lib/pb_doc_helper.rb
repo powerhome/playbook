@@ -57,10 +57,12 @@ module PlaybookWebsite
 
     # rubocop:disable Style/OptionalBooleanParameter
     def render_pb_doc_kit(kit, type, limit_examples, code = true, dark_mode = false)
-      title = pb_doc_render_clickable_title(kit, type)
-      ui = raw("<div class='pb--docItem-ui'>
-          #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
-      title + ui
+      if kit != "advanced_table"
+        title = pb_doc_render_clickable_title(kit, type)
+        ui = raw("<div class='pb--docItem-ui'>
+            #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
+        title + ui
+      end
     end
   # rubocop:enable Style/OptionalBooleanParameter
 

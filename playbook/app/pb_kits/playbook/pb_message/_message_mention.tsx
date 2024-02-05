@@ -7,7 +7,7 @@ type MessageMentionProps = {
   aria: { [key: string]: string },
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
-  data?: object,
+  data?: Record<string, unknown>,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   variant: 'user' | 'self',
@@ -34,11 +34,11 @@ const MessageMention = (props: MessageMentionProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
     >
       {children}
     </div>

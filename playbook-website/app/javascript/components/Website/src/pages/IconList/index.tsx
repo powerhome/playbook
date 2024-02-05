@@ -1,5 +1,7 @@
 import React from "react"
 
+import { Hero } from "../../components/Hero"
+import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
 import { Title, Flex, FlexItem, Card } from "playbook-ui"
 import Roofing from "@powerhome/playbook-icons/icons/roofing.svg"
 import Powergon from "@powerhome/playbook-icons/icons/powergon.svg"
@@ -15,21 +17,17 @@ import Check from "@powerhome/playbook-icons/icons/check.svg"
 import Plus from "@powerhome/playbook-icons/icons/plus.svg"
 import Search from "@powerhome/playbook-icons/icons/search.svg"
 
+export default function IconList() {
 
-const Icons = () => {
   return (
     <>
-      <Flex justify='center'>
-        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
-          <Title size={1} tag='h1' text='Playbook Icons' />
-        </FlexItem>
-      </Flex>
-      <Flex justify='center'>
-        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
-          <Title size={3} tag='h3' text='Power Icons' />
-        </FlexItem>
-      </Flex>
-      <Flex justify='center'>
+      <Hero description={"Power Icons"} title={linkFormat("Playbook Icons")} />
+
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Flex>
             <Card
@@ -56,12 +54,20 @@ const Icons = () => {
           </Flex>
         </FlexItem>
       </Flex>
-      <Flex justify='center'>
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Title size={3} tag='h3' text='Interface Core Icons' />
         </FlexItem>
       </Flex>
-      <Flex justify='center'>
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Flex>
             <Card
@@ -147,5 +153,3 @@ const Icons = () => {
     </>
   )
 }
-
-export default Icons

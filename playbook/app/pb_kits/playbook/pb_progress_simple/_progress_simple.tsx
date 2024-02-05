@@ -18,7 +18,7 @@ type ProgressSimpleProps = {
   width: string,
 }
 
-const ProgressSimple = (props: ProgressSimpleProps) => {
+const ProgressSimple = (props: ProgressSimpleProps): React.ReactElement => {
   const {
     align,
     className,
@@ -57,9 +57,9 @@ const ProgressSimple = (props: ProgressSimpleProps) => {
 
   return (
     <div 
-      {...dataProps}
-      {...htmlProps}
-      className={wrapperClass}
+        {...dataProps}
+        {...htmlProps}
+        className={wrapperClass}
     >
       <div
           className={kitClass}

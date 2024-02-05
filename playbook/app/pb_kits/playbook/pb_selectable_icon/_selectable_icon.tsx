@@ -6,10 +6,11 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
-  buildHtmlProps 
+  buildHtmlProps
 } from '../utilities/props'
 import Icon from '../pb_icon/_icon'
 import Title from '../pb_title/_title'
+import { GenericObject } from '../types'
 
 type SelectableIconProps = {
   aria?: {[key: string]: string},
@@ -17,7 +18,7 @@ type SelectableIconProps = {
   className?: string,
   customIcon?: {[key: string] :SVGElement},
   disabled?: boolean,
-  data?: Object,
+  data?: GenericObject,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon: string,
   inputId: string,
@@ -44,7 +45,7 @@ const SelectableIcon = ({
   text,
   value,
   ...props
-}: SelectableIconProps) => {
+}: SelectableIconProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -64,22 +65,22 @@ const SelectableIcon = ({
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
     >
       {inputs === 'disabled' && (
         <>
           <Icon
-            customIcon={customIcon}
-            icon={icon}
-            size="2x"
+              customIcon={customIcon}
+              icon={icon}
+              size="2x"
           />
           <Title
-            size={4}
-            tag="h4"
-            text={text}
+              size={4}
+              tag="h4"
+              text={text}
           />
         </>
       )}
@@ -87,24 +88,24 @@ const SelectableIcon = ({
       {inputs === 'enabled' && (
         <>
           <input
-            {...props}
-            checked={checked}
-            disabled={disabled}
-            id={inputIdPresent}
-            name={name}
-            type={inputType}
-            value={value}
+              {...props}
+              checked={checked}
+              disabled={disabled}
+              id={inputIdPresent}
+              name={name}
+              type={inputType}
+              value={value}
           />
           <label htmlFor={inputIdPresent}>
             <Icon
-              customIcon={customIcon}
-              icon={icon}
-              size="2x"
+                customIcon={customIcon}
+                icon={icon}
+                size="2x"
             />
             <Title
-              size={4}
-              tag="h4"
-              text={text}
+                size={4}
+                tag="h4"
+                text={text}
             />
           </label>
         </>

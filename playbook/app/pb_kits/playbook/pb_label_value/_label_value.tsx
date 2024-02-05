@@ -15,7 +15,7 @@ type LabelValueProps = {
   aria?: { [key: string]: string };
   className?: string;
   dark?: boolean;
-  data?: object;
+  data?: Record<string, unknown>;
   date?: Date;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;

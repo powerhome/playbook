@@ -11,7 +11,7 @@ import { ToolbarTypes } from "./EditorTypes";
 import ToolbarHistoryItems from "./ToolbarHistory";
 import MoreExtensionsDropdown from "./MoreExtensionsDropdown";
 
-const EditorToolbar = ({ editor, extensions }:any) => {
+const EditorToolbar = ({ editor, extensions }: any): React.ReactElement => {
   const toolbaritems = [
     {
         icon: "bold",
@@ -34,19 +34,27 @@ const EditorToolbar = ({ editor, extensions }:any) => {
   ]
 
   return (
-    <Background backgroundColor="white" className="toolbar">
-      <Flex flex="0" justify="between" paddingX="sm" paddingY="xxs">
-        <FlexItem className="toolbar_block" displayFlex>
+    <Background backgroundColor="white"
+        className="toolbar"
+    >
+      <Flex flex="0"
+          justify="between"
+          paddingX="sm"
+          paddingY="xxs"
+      >
+        <FlexItem className="toolbar_block"
+            displayFlex
+        >
           <ToolbarDropdown editor={editor}/>
           <SectionSeparator orientation="vertical" />
             {toolbaritems && toolbaritems.map(
-              ({ icon, text, classname, onclick}:ToolbarTypes, index:number) => (
+              ({ icon, text, classname, onclick}: ToolbarTypes, index: number) => (
                 <EditorButton
-                  classname={classname}
-                  icon={icon}
-                  key={index}
-                  text={text}
-                  onclick={onclick}
+                    classname={classname}
+                    icon={icon}
+                    key={index}
+                    onclick={onclick}
+                    text={text}
                 />
               )
             )}
