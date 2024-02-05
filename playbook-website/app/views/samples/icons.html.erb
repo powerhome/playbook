@@ -15,6 +15,33 @@
   <% end %>
 <% end %>
 
+
+<%= form_with(url: samples_icons_path , method: :get) do |form| %>
+  <div class="field">
+    <%= form.label :prepath, "Prepath" %>
+    <%= form.text_field :prepath, value: params[:prepath] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :postpath, "Postpath" %>
+    <%= form.text_field :postpath, value: params[:postpath] %>
+  </div>
+
+  <%= form.submit "Update URL" %>
+<% end %>
+
+<% paretns = params[:prepath].nil? ? 0 :  params[:prepath].to_i %>
+<% postpath = params[:postpath].nil? ? "" :  params[:postpath]%>
+<% path = Rails.root %>
+<% paretns.times { path = path.parent } %>
+
+<%= path.join(postpath) %> </br>
+____________</br>
+<%= Dir.entries(path.join(postpath)) %>
+
+
+
+
 <%= pb_rails("flex", props: { padding_left: "md" }) do %>
   <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
     <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
