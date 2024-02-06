@@ -20,13 +20,23 @@ environment.loaders.prepend('svgr', {
     options: {
       svgoConfig: {
         plugins: [
-          { removeViewBox: false }
-        ]
-      }
-    }
+          { removeViewBox: false },
+          {
+            name: 'removeAttributesBySelector',
+            params: {
+              selectors: [
+                // Remove width and height attributes from all elements
+                { selector: '[width]', attributes: ['width'] },
+                { selector: '[height]', attributes: ['height'] },
+              ],
+            },
+          },
+        ],
+      },
+    },
   },
   include: [
-    path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons')
+    path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons'),
   ],
 })
 

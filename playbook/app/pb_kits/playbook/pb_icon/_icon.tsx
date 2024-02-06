@@ -4,11 +4,10 @@ import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/pro
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
 
-type IconSizeNames = "lg"
+export type IconSizes = "lg"
 | "xs"
 | "sm"
-
-export type IconSizes = IconSizeNames | "1x"
+| "1x"
 | "2x"
 | "3x"
 | "4x"
@@ -22,7 +21,6 @@ export type IconSizes = IconSizeNames | "1x"
 
 type IconProps = {
   aria?: {[key: string]: string},
-  aspectRatio?: string,
   border?: string,
   className?: string,
   customIcon?: {[key: string] :SVGElement},
@@ -42,66 +40,16 @@ type IconProps = {
   spin?: boolean,
 } & GlobalProps
 
-const iconSizeMap = {
-  base: 16,
-  xs: .75,
-  sm: .875,
-  lg: 1.25
-}
-
-const getSvgDimensions = (aspectRatio = '1:1', size: string): {width: number, height: number} | null => {
-  if (!size) return null
-  const aspect = aspectRatio.split(':')
-
-  const scale = size.toLowerCase().endsWith('x') ?
-    parseInt(size.replace(/\x/i, '')) :
-    iconSizeMap[size as IconSizeNames]
-
-  return {
-    width: (iconSizeMap.base * scale) * parseInt(aspect[0]),
-    height: (iconSizeMap.base * scale) * parseInt(aspect[1])
-  }
-}
-
 const flipMap = {
-  fa: {
-    horizontal: 'fa-flip-horizontal',
-    vertical: 'fa-flip-vertical',
-    both: 'fa-flip-horizontal fa-flip-vertical',
-    none: ''
-  },
-  svg: {
-    horizontal: 'flip_horizontal',
-    vertical: 'flip_vertical',
-    both: 'flip_horizontal flip_vertical',
-    none: ''
-  }
-}
-const pulseMap = {
-  fa: 'fa-pulse',
-  svg: 'pulse'
-}
-const spinMap = {
-  fa: 'fa-spin',
-  svg: 'spin'
-}
-const rotateMap = {
-  fa: {
-    90: 'fa-rotate-90',
-    180: 'fa-rotate-180',
-    270: 'fa-rotate-270'
-  },
-  svg: {
-    90: 'rotate_90',
-    180: 'rotate_180',
-    270: 'rotate_270'
-  }
+  horizontal: 'fa-flip-horizontal',
+  vertical: 'fa-flip-vertical',
+  both: 'fa-flip-horizontal fa-flip-vertical',
+  none: ""
 }
 
 const Icon = (props: IconProps) => {
   const {
     aria = {},
-    aspectRatio,
     border = false,
     className,
     customIcon,
@@ -116,7 +64,7 @@ const Icon = (props: IconProps) => {
     pull,
     pulse = false,
     rotation,
-    size = '1x',
+    size,
     fontStyle = 'far',
     spin = false,
   } = props
@@ -124,36 +72,30 @@ const Icon = (props: IconProps) => {
   const iconURL = typeof(icon) === 'string' && icon.includes('.svg') ? icon : null
   const iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
 
-  const isFA = !iconElement && !customIcon && !iconURL
-  const svgProps = isFA ? null : {...{fill: 'currentColor'}, ...getSvgDimensions(aspectRatio, size)}
+  const faClasses = {
+    'fa-border': border,
+    'fa-fw': fixedWidth,
+    'fa-inverse': inverse,
+    'fa-li': listItem,
+    'fa-pulse': pulse,
+    'fa-spin': spin,
+    [`fa-${size}`]: size,
+    [`fa-pull-${pull}`]: pull,
+    [`fa-rotate-${rotation}`]: rotation,
+  }
 
-  let classes = classnames(
+  const isFA = !iconElement && !customIcon && !iconURL
+
+  if (isFA) faClasses[`fa-${icon}`] = icon as string
+
+  const classes = classnames(
+    flipMap[flip],
     'pb_icon_kit',
-    isFA ? fontStyle : null,
+    (iconElement || customIcon) ? '' : fontStyle,
+    faClasses,
     globalProps(props),
     className
   )
-
-  const transformClasses = classnames(
-    flip ? flipMap[isFA ? 'fa' : 'svg'][flip] : null,
-    pulse ? pulseMap[isFA ? 'fa' : 'svg'] : null,
-    rotation ? rotateMap[isFA ? 'fa' : 'svg'][rotation] : null,
-    spin ? spinMap[isFA ? 'fa' : 'svg'] : null,
-  )
-  if (transformClasses) classes += ` ${transformClasses}`
-
-  if (isFA) {
-    const faClassList = {
-      'fa-border': border,
-      'fa-fw': (iconElement) ? false : fixedWidth,
-      'fa-inverse': inverse,
-      'fa-li': listItem,
-      [`fa-${size}`]: size,
-      [`fa-pull-${pull}`]: pull,
-    }
-    faClassList[`fa-${icon}`] = icon as string
-    classes += ` ${classnames(faClassList)}`
-  }
 
   const classesEmoji = classnames(
     'pb_icon_kit_emoji',
@@ -175,9 +117,10 @@ const Icon = (props: IconProps) => {
             React.cloneElement(iconElement || customIcon, {
               ...dataProps,
               ...htmlProps,
-              ...svgProps,
               className: classes,
               id,
+              width: 'auto',
+              height: 'auto',
             })
           }
         </>
@@ -198,14 +141,14 @@ const Icon = (props: IconProps) => {
     else if (iconURL)
       return (
         <>
-          <img
+          <span
               {...dataProps}
               {...htmlProps}
-              {...svgProps}
-              className={classes}
+              className={classesEmoji}
               id={id}
-              src={iconURL}
-          />
+          >
+            <img src={iconURL} />
+          </span>
         </>
       )
     else

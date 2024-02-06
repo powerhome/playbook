@@ -52,21 +52,21 @@ export default function IconList() {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />} fixedWidth={false} />
+              <Icon icon={<Roofing />}  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Powergon />} fixedWidth={false} />
+              <Icon icon={<Powergon />}  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Nitro />} fixedWidth={false} />
+              <Icon icon={<Nitro />}  />
             </Card>
           </Flex>
         </FlexItem>
@@ -195,63 +195,63 @@ export default function IconList() {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />} size="xs" fixedWidth={false} />
+              <Icon icon={<Roofing />} size="xs"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />} size="sm" fixedWidth={false} />
+              <Icon icon={<Roofing />} size="sm"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />} size="lg" fixedWidth={false} />
+              <Icon icon={<Roofing />} size="lg"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />} size="1x" fixedWidth={false} />
+              <Icon icon={<Roofing />} size="1x"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />} size="2x" fixedWidth={false} />
+              <Icon icon={<Roofing />} size="2x"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />} size="3x" fixedWidth={false} />
+              <Icon icon={<Roofing />} size="3x"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />} size="4x" fixedWidth={false} />
+              <Icon icon={<Roofing />} size="4x"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />} size="5x" fixedWidth={false} />
+              <Icon icon={<Roofing />} size="5x"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Roofing />} size="6x" fixedWidth={false} />
+              <Icon icon={<Roofing />} size="6x"  />
             </Card>
           </Flex>
         </FlexItem>
@@ -284,7 +284,7 @@ export default function IconList() {
               className="blue_color"
             >
               <Title size={3} text="Color: Blue" className="blue_color" />
-              <Icon icon={<Powergon />} size="3x" marginTop="sm" marginLeft="lg" fixedWidth={false} />
+              <Icon icon={<Powergon />} size="3x" marginTop="sm" marginLeft="lg"  />
             </Card>
             <Card
               marginRight='sm'
@@ -293,7 +293,7 @@ export default function IconList() {
               className="red_color"
             >
               <Title size={3} text="Color: Red" className="red_color" />
-              <Icon icon={<Powergon />} size="3x" marginTop="sm" marginLeft="lg" fixedWidth={false} />
+              <Icon icon={<Powergon />} size="3x" marginTop="sm" marginLeft="lg"  />
             </Card>
             <Card
               marginRight='sm'
@@ -302,7 +302,7 @@ export default function IconList() {
               className="green_color"
             >
               <Title size={3} text="Color: Green" className="green_color" />
-              <Icon icon={<Powergon />} size="3x" marginTop="sm" marginLeft="lg" fixedWidth={false} />
+              <Icon icon={<Powergon />} size="3x" marginTop="sm" marginLeft="lg"  />
             </Card>
           </Flex>
         </FlexItem>
@@ -333,42 +333,42 @@ export default function IconList() {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Nitro />} size="3x" spin fixedWidth={false} />
+              <Icon icon={<Nitro />} size="3x" spin  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Nitro />} size="3x" pulse fixedWidth={false} />
+              <Icon icon={<Nitro />} size="3x" pulse  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Nitro />} size="3x" fixedWidth={false} />
+              <Icon icon={<Nitro />} size="3x"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Nitro />} size="3x" rotation={90} fixedWidth={false} />
+              <Icon icon={<Nitro />} size="3x" rotation={90}  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Nitro />} size="3x" rotation={180} fixedWidth={false} />
+              <Icon icon={<Nitro />} size="3x" rotation={180}  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Nitro />} size="3x" rotation={270} fixedWidth={false} />
+              <Icon icon={<Nitro />} size="3x" rotation={270}  />
             </Card>
           </Flex>
         </FlexItem>
