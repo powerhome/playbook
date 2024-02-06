@@ -2,7 +2,7 @@ The AdvancedTable kit takes the table data and automatically renders expandable 
 
 ### tableData
 
-`tableData` is the data that the kit needs to consume to render the table. This data will take the structure of an array of objects where each object will be rendered as a row with the key/value pairs being the column values. If an object within that data has children, the kit will automatically create subRows with icon buttons on the parent rows to toggle the subRows open or closed. The toggleExpansionAll button in the first column header can also be used to toggle expansion for the top level parent rows. For a visual of the data structure needed for `tableData`, see [here](https://github.com/powerhome/playbook/blob/PBNTR-177-New-Advanced-Table-Kit/playbook/app/pb_kits/playbook/pb_advanced_table/README.md).
+`tableData` is the data that the kit needs to consume to render the table. This data will take the structure of an array of objects where each object will be rendered as a row with the key/value pairs being the column values. If an object within that data has children, the kit will automatically create subRows with icon buttons on the parent rows to toggle the subRows open or closed. The toggleExpansionAll button in the first column header can also be used to toggle expansion for the top level parent rows. For a visual of the data structure needed for `tableData`, see [here](https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/pb_advanced_table#readme).
 
 ### columnDefinitions
 
