@@ -2111,10 +2111,10 @@
   resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/ce9584c9791ad456298ce2c19e649ccc04509cc7#ce9584c9791ad456298ce2c19e649ccc04509cc7"
   integrity sha512-Bv/filpi3a4ZLusPHTfeedDMK8knsHZ9oUYW6KxTxIzZzXDpbT6QeFLpdwpMB7DMozARkatPXW7SyhdCaUv0/A==
 
-"@powerhome/playbook-icons@0.0.1-alpha.7":
-  version "0.0.1-alpha.7"
-  resolved "https://npm.pkg.github.com/download/@powerhome/playbook-icons/0.0.1-alpha.7/4d3066044efc56bbf82495cd486ac4c9536a150e#4d3066044efc56bbf82495cd486ac4c9536a150e"
-  integrity sha512-+xchVyGlxd2cSD2UQK9c7PSjvqo+2wTInk2z0pTt2gr+dCnZAHTgFRRLY9yDP6kU37Ia3qcZQJUE5foOXWUF/A==
+"@powerhome/playbook-icons@0.0.1-alpha.5":
+  version "0.0.1-alpha.5"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/538d3f60df834f54ccb3f2cda6d16604f2543f67#538d3f60df834f54ccb3f2cda6d16604f2543f67"
+  integrity sha512-+Ql60hiUdGZgwkhMrjlSTkPsg+eKz0gO5KW3gHxCKn5efPWQRxS3wz0S3qwz9+73Eb9qwxxfEeTkgb4qeudy/w==
 
 "@rails/webpacker@5.2.1":
   version "5.2.1"
