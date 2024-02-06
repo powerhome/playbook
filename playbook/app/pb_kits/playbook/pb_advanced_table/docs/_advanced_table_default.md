@@ -1,8 +1,10 @@
-The AdvancedTable kit takes the table data and automatically renders expandable subrows for nested items to any depth needed. In it's simplest form, __the kit has two required props__: 
+The AdvancedTable kit accepts tree data and automatically renders expansion controls for nested subrows, to any depth, based on the data it is given. In it's simplest form, __the kit has two required props__: 
 
 ### tableData
 
-`tableData` is the data that the kit needs to consume to render the table. This data will take the structure of an array of objects where each object will be rendered as a row with the key/value pairs being the column values. If an object within that data has children, the kit will automatically create subRows with icon buttons on the parent rows to toggle the subRows open or closed. The toggleExpansionAll button in the first column header can also be used to toggle expansion for the top level parent rows. For a visual of the data structure needed for `tableData`, see [here](https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/pb_advanced_table#readme).
+`tableData` accepts an array of objects as the table data. Each object is a table row, and each key:value pair within an object is a column value within that row. Nested children within a data object are automatically rendered as subrows under their parent row. Each parent row is prepended with expansion controls for toggling its nested child rows. The `toggleExpansionAll` button in the first column header can also be used to toggle expansion of all parent rows within the table.
+
+For a visual of the data structure needed for `tableData`, see [here](https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/pb_advanced_table#readme).
 
 ### columnDefinitions
 
