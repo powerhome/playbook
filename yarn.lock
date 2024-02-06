@@ -2111,15 +2111,10 @@
   resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/ce9584c9791ad456298ce2c19e649ccc04509cc7#ce9584c9791ad456298ce2c19e649ccc04509cc7"
   integrity sha512-Bv/filpi3a4ZLusPHTfeedDMK8knsHZ9oUYW6KxTxIzZzXDpbT6QeFLpdwpMB7DMozARkatPXW7SyhdCaUv0/A==
 
-"@powerhome/playbook-icons@0.0.1-alpha.4":
-  version "0.0.1-alpha.4"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/6c82bb8cf8440b803019ab344ceac50849fb93bf#6c82bb8cf8440b803019ab344ceac50849fb93bf"
-  integrity sha512-l2y0+dWu21s9mjftaiBI0IQ1xH7pZtiSejjo5D+njTIuCXEyeahTzbZLuMezDSHHOmIKpPPedvP4CMQ2rLIz8w==
-
-"@powerhome/power-fonts@^0.0.1-alpha.3":
-  version "0.0.1-alpha.3"
-  resolved "https://npm.pkg.github.com/download/@powerhome/power-fonts/0.0.1-alpha.3/54611d8835fb506b93d449ee0523b5ba5781baf6#54611d8835fb506b93d449ee0523b5ba5781baf6"
-  integrity sha512-rOdFvxmVNZH5zayaMQrxAoAqoitcn09ZFoPrVFGxlF7wF2YpsuOaLL/agdT2qa0hMeQ+SA5overPQ4dykiwTaA==
+"@powerhome/playbook-icons@0.0.1-alpha.7":
+  version "0.0.1-alpha.7"
+  resolved "https://npm.pkg.github.com/download/@powerhome/playbook-icons/0.0.1-alpha.7/4d3066044efc56bbf82495cd486ac4c9536a150e#4d3066044efc56bbf82495cd486ac4c9536a150e"
+  integrity sha512-+xchVyGlxd2cSD2UQK9c7PSjvqo+2wTInk2z0pTt2gr+dCnZAHTgFRRLY9yDP6kU37Ia3qcZQJUE5foOXWUF/A==
 
 "@rails/webpacker@5.2.1":
   version "5.2.1"
