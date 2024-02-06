@@ -13,10 +13,6 @@ module PlaybookWebsite
         erb.call(template, compiled_source)
       end
 
-      def image_pack_url(name)
-        URI.join(root_url, resolve_path_to_image(name)).to_s
-      end
-
       def self.erb
         @erb ||= ActionView::Template.registered_template_handler(:erb)
       end

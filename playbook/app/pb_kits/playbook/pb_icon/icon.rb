@@ -79,8 +79,15 @@ module Playbook
         )
       end
 
+      def asset_path
+        return unless Rails.application.config.respond_to?(:icon_path)
+        return unless Dir.entries(Rails.application.config.icon_path).include? "#{icon}.svg"
+
+        Rails.root.join(Rails.application.config.icon_path, "#{icon}.svg")
+      end
+
       def render_svg
-        doc = Nokogiri::XML(URI.open(icon || custom_icon)) # rubocop:disable Security/Open
+        doc = Nokogiri::XML(URI.open(asset_path || icon || custom_icon)) # rubocop:disable Security/Open
         svg = doc.at_css "svg"
         svg["class"] = "pb_custom_icon " + object.custom_icon_classname
         svg["height"] = svg_dims[svg_size] * 16
@@ -90,7 +97,7 @@ module Playbook
       end
 
       def is_svg?
-        (icon || custom_icon.to_s).include?(".svg")
+        (icon || custom_icon.to_s).include?(".svg") || asset_path.present?
       end
 
     private
