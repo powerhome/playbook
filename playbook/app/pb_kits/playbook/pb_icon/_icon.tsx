@@ -88,7 +88,7 @@ const Icon = (props: IconProps) => {
 
   const classes = classnames(
     flipMap[flip],
-    (!iconElement && !customIcon) ? 'pb_icon_kit' :'',
+    (!iconElement && !customIcon) ? 'pb_icon_kit' : '',
     (iconElement || customIcon) ? 'pb_custom_icon' : fontStyle,
     faClasses,
     globalProps(props),
