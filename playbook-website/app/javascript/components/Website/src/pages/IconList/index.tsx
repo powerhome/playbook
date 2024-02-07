@@ -1,7 +1,5 @@
 import React from "react"
 
-import './iconList';
-
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
 
 require("!file-loader!@powerhome/playbook-icons/icons/roofing.svg")
@@ -9,20 +7,8 @@ require("!file-loader!@powerhome/playbook-icons/icons/powergon.svg")
 require("!file-loader!@powerhome/playbook-icons/icons/nitro.svg")
 
 import { Hero } from "../../components/Hero"
-import { Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
-import Roofing from "@powerhome/playbook-icons/icons/roofing.svg"
-import Powergon from "@powerhome/playbook-icons/icons/powergon.svg"
-import Nitro from "@powerhome/playbook-icons/icons/nitro.svg"
-import ChevronDown from "!file-loader!@powerhome/playbook-icons/icons/chevron-down.svg"
-import Times from "!file-loader!@powerhome/playbook-icons/icons/times.svg"
-import Bars from "!file-loader!@powerhome/playbook-icons/icons/bars.svg"
-import Calendar from "!file-loader!@powerhome/playbook-icons/icons/calendar.svg"
-import Filter from "!file-loader!@powerhome/playbook-icons/icons/filter.svg"
-import Edit from "!file-loader!@powerhome/playbook-icons/icons/edit.svg"
-import Trash from "!file-loader!@powerhome/playbook-icons/icons/trash.svg"
-import Check from "!file-loader!@powerhome/playbook-icons/icons/check.svg"
-import Plus from "!file-loader!@powerhome/playbook-icons/icons/plus.svg"
-import Search from "!file-loader!@powerhome/playbook-icons/icons/search.svg"
+import { Body, Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
+import { Roofing, Powergon, Nitro, ChevronDown, Times, Bars, Calendar, Filter, Edit, Trash, Check, Plus, Search} from '@powerhome/playbook-icons-react'
 
 export default function IconList() {
 
@@ -95,77 +81,77 @@ export default function IconList() {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={ChevronDown} />
+              <Icon icon={<ChevronDown />} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Times} />
+              <Icon icon={<Times />} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Bars} />
+              <Icon icon={<Bars />} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Times} />
+              <Icon icon={<Times />} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Calendar} />
+              <Icon icon={<Calendar />} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Filter} />
+              <Icon icon={<Filter />} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Edit} />
+              <Icon icon={<Edit />} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Trash} />
+              <Icon icon={<Trash />} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Check} />
+              <Icon icon={<Check />} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Plus} />
+              <Icon icon={<Plus />} />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={Search} />
+              <Icon icon={<Search />} />
             </Card>
           </Flex>
         </FlexItem>
@@ -283,8 +269,9 @@ export default function IconList() {
               cursor='pointer'
               className="blue_color"
             >
-              <Title size={3} text="Color: Blue" className="blue_color" />
-              <Icon icon={<Powergon />} size="3x" marginTop="sm" marginLeft="lg"  />
+              <Body color="error">
+                <Icon icon={<Powergon />} size="3x" />
+              </Body>
             </Card>
             <Card
               marginRight='sm'
@@ -292,8 +279,9 @@ export default function IconList() {
               cursor='pointer'
               className="red_color"
             >
-              <Title size={3} text="Color: Red" className="red_color" />
-              <Icon icon={<Powergon />} size="3x" marginTop="sm" marginLeft="lg"  />
+              <Body color="link">
+                <Icon icon={<Powergon />} size="3x" />
+              </Body>
             </Card>
             <Card
               marginRight='sm'
@@ -301,15 +289,13 @@ export default function IconList() {
               cursor='pointer'
               className="green_color"
             >
-              <Title size={3} text="Color: Green" className="green_color" />
-              <Icon icon={<Powergon />} size="3x" marginTop="sm" marginLeft="lg"  />
+              <Body color="success">
+                <Icon icon={<Powergon />} size="3x" />
+              </Body>
             </Card>
           </Flex>
         </FlexItem>
       </Flex>
-
-
-
 
       <Flex
         justify='center'
@@ -317,7 +303,7 @@ export default function IconList() {
         paddingLeft="xs"
       >
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
-          <Title paddingBottom="sm" size={3} tag='h3' text='Animation & Transformation' />
+          <Title paddingBottom="sm" paddingTop="sm" size={3} tag='h3' text='Animation & Transformation' />
         </FlexItem>
       </Flex>
 
@@ -333,7 +319,7 @@ export default function IconList() {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon={<Nitro />} size="3x" spin  />
+              <Icon icon={<Nitro />} size="6x" spin  />
             </Card>
             <Card
               marginRight='sm'

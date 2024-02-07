@@ -101,20 +101,23 @@
 <%= pb_rails("flex", props: { padding_left: "md" }) do %>
   <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
     <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
-      <%= pb_rails("body", props: { text: "Color: Blue", classname: "blue_color" }) %>
-      <%= pb_rails("icon", props: { icon: "powergon", size: "2x", classname: "blue_color" }) %>
+      <%= pb_rails("body", props: { color: "error" }) do %>
+        <%= pb_rails("icon", props: { icon: "powergon", size: "2x" }) %>
+      <% end %>
     <% end %>
   <% end %>
   <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
     <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
-      <%= pb_rails("body", props: { text: "Color: Blue", classname: "green_color" }) %>
-      <%= pb_rails("icon", props: { icon: "powergon", size: "2x", classname: "green_color" }) %>
+      <%= pb_rails("body", props: { color: "link" }) do %>
+        <%= pb_rails("icon", props: { icon: "powergon", size: "2x" }) %>
+      <% end %>
     <% end %>
   <% end %>
   <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
     <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
-      <%= pb_rails("body", props: { text: "Color: Blue", classname: "red_color" }) %>
-      <%= pb_rails("icon", props: { icon: "powergon", size: "2x", classname: "red_color" }) %>
+      <%= pb_rails("body", props: { color: "success" }) do %>
+        <%= pb_rails("icon", props: { icon: "powergon", size: "2x" }) %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
@@ -158,15 +161,3 @@
     <% end %>
   <% end %>
 <% end %>
-
-<style>
-  .blue_color {
-    color: blue
-  }
-  .red_color {
-    color: red
-  }
-  .green_color {
-    color: green
-  }
-</style>
