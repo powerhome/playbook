@@ -84,14 +84,11 @@ const Icon = (props: IconProps) => {
     [`fa-rotate-${rotation}`]: rotation,
   }
 
-  const isFA = !iconElement && !customIcon && !iconURL
-
-  if (isFA) faClasses[`fa-${icon}`] = icon as string
+  if (!customIcon) faClasses[`fa-${icon}`] = icon as string
 
   const classes = classnames(
     flipMap[flip],
-    'pb_custom_icon',
-    (iconElement || customIcon) ? '' : fontStyle,
+    (iconElement || customIcon) ? 'pb_custom_icon' : fontStyle,
     faClasses,
     globalProps(props),
     className
