@@ -22,6 +22,24 @@ const MOCK_DATA = [
       },
     ],
   },
+  {
+    year: "2022",
+    quarter: null,
+    month: null,
+    day: null,
+    newEnrollments: "20",
+    scheduledMeetings: "10",
+    children: [
+      {
+        year: "2022",
+        quarter: "Q1",
+        month: null,
+        day: null,
+        newEnrollments: "2",
+        scheduledMeetings: "35",
+      },
+    ],
+  },
 ];
 
 const columnDefinitions = [
@@ -106,4 +124,20 @@ test("toggleExpansionAll button exists and toggles subrows open and closed", () 
   toggleButton.click()
   const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
   expect(subRow).toBeInTheDocument()
+});
+
+test("loading state", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        loading
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const kit = screen.getByTestId(testId);
+  const table = kit.querySelector('table')
+  expect(table).toHaveClass('pb_table table-sm table-responsive-none table-card data_table ns_tabular content-loading')
+
 });
