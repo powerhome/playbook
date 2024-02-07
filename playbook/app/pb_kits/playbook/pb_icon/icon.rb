@@ -90,8 +90,8 @@ module Playbook
         doc = Nokogiri::XML(URI.open(asset_path || icon || custom_icon)) # rubocop:disable Security/Open
         svg = doc.at_css "svg"
         svg["class"] = "pb_custom_icon " + object.custom_icon_classname
-        svg["height"] = svg_dims[svg_size] * 16
-        svg["width"] = svg_dims[svg_size] * 16
+        svg["height"] = "auto"
+        svg["width"] = "auto"
         doc.at_css("path")["fill"] = "currentColor"
         raw doc
       end
@@ -104,22 +104,6 @@ module Playbook
 
       def svg_size
         size.nil? ? "1x" : size
-      end
-
-      def svg_dims
-        { "lg" => 1.25,
-          "xs" => 0.75,
-          "sm" => 0.875,
-          "1x" => 1,
-          "2x" => 2,
-          "3x" => 3,
-          "4x" => 4,
-          "5x" => 5,
-          "6x" => 6,
-          "7x" => 7,
-          "8x" => 8,
-          "9x" => 9,
-          "10x" => 10 }
       end
 
       def border_class

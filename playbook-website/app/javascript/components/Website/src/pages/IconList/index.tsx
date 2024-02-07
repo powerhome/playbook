@@ -2,10 +2,6 @@ import React from "react"
 
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
 
-require("!file-loader!@powerhome/playbook-icons/icons/roofing.svg")
-require("!file-loader!@powerhome/playbook-icons/icons/powergon.svg")
-require("!file-loader!@powerhome/playbook-icons/icons/nitro.svg")
-
 import { Hero } from "../../components/Hero"
 import { Body, Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
 import { Roofing, Powergon, Nitro, ChevronDown, Times, Bars, Calendar, Filter, Edit, Trash, Check, Plus, Search} from '@powerhome/playbook-icons-react'
