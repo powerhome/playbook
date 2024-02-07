@@ -58,6 +58,8 @@ const columnDefinitions = [
   },
 ];
 
+const subRowHeaders = ["Quarter"]
+
 const testId = "advanced_table";
 
 test("Generates default kit and classname", () => {
@@ -140,4 +142,25 @@ test("loading state", () => {
   const table = kit.querySelector('table')
   expect(table).toHaveClass('pb_table table-sm table-responsive-none table-card data_table ns_tabular content-loading')
 
+});
+
+test("subRowHeaders are rendered", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    >
+      <AdvancedTable.Header />
+      <AdvancedTable.Body subRowHeaders={subRowHeaders}/>
+    </AdvancedTable>
+    );
+
+  const kit = screen.getByTestId(testId);
+
+  const rowButton = kit.querySelector(".gray-icon.expand-toggle-icon")
+  rowButton.click()
+  
+  const subRowHeader = kit.querySelector(".custom-row.bg-silver")
+  expect(subRowHeader).toBeInTheDocument()
 });
