@@ -13,7 +13,7 @@ const MOCK_DATA = [
     scheduledMeetings: "10",
     children: [
       {
-        year: "2011",
+        year: "2021",
         quarter: "Q1",
         month: null,
         day: null,
@@ -42,7 +42,7 @@ const columnDefinitions = [
 
 const testId = "advanced_table";
 
-test("generated scaffold test", () => {
+test("Generates default kit and classname", () => {
   render(
     <AdvancedTable
         columnDefinitions={columnDefinitions}
@@ -53,4 +53,57 @@ test("generated scaffold test", () => {
 
   const kit = screen.getByTestId(testId);
   expect(kit).toBeInTheDocument();
+  expect(kit).toHaveClass('pb_advanced_table')
+});
+
+test("Generates aria label", () => {
+  render(
+    <AdvancedTable
+        aria={{label:testId}}
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const kit = screen.getByTestId(testId);
+  expect(kit).toHaveAttribute('aria-label', testId)
+});
+
+test("Row toggle button exists and toggles subrows open and closed", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const kit = screen.getByTestId(testId);
+  const rowButton = kit.querySelector(".gray-icon.expand-toggle-icon")
+  expect(rowButton).toBeInTheDocument()
+  const subRow1 = kit.querySelector(".bg-white.depth-sub-row-1")
+  expect(subRow1).not.toBeInTheDocument()
+  rowButton.click()
+  const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
+  expect(subRow).toBeInTheDocument()
+});
+
+test("toggleExpansionAll button exists and toggles subrows open and closed", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const kit = screen.getByTestId(testId);
+  const toggleButton = kit.querySelector(".gray-icon.toggle-all-icon")
+  expect(toggleButton).toBeInTheDocument()
+  const subRow1 = kit.querySelector(".bg-white.depth-sub-row-1")
+  expect(subRow1).not.toBeInTheDocument()
+  toggleButton.click()
+  const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
+  expect(subRow).toBeInTheDocument()
 });
