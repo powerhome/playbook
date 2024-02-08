@@ -82,6 +82,17 @@ return (
 );
 }
 
+const tableOptions = {
+  initialState: {
+      sorting: [
+        {
+          id: "year",
+          desc: true,
+        },
+      ],
+    },
+}
+
 test("Generates default kit and classname", () => {
   render(
     <AdvancedTable
@@ -196,3 +207,19 @@ test("expandControl prop works as expected", () => {
   const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
   expect(subRow).toBeInTheDocument()
 })
+
+test("tableOptions prop functions as expected", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+        tableOptions={tableOptions}
+    />
+  );
+
+  const kit = screen.getByTestId(testId);
+  const row1 = kit.getElementsByTagName('tr')[1]
+  
+  expect(row1.id).toBe("1-1-0-row")
+});
