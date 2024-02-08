@@ -10,6 +10,7 @@ import {
 import { useLoaderData } from "react-router-dom"
 import entryPoint from "./entryPoint"
 
+
 export default function ComponentShow() {
   const { examples } = useLoaderData()
 
@@ -32,6 +33,7 @@ export default function ComponentShow() {
         text={"Component Show Page"}
         size='2'
       />
+<<<<<<< Updated upstream
 
       <SandpackProvider template='react'>
         <SandpackLayout>
@@ -69,6 +71,41 @@ export default function ComponentShow() {
       >
         <Sandbox />
       </SandpackProvider> */}
+=======
+      <div className="sandpack sandpack--playground">
+        <SandpackProvider
+          // files={{
+          //   "/App.js": {
+          //     code: code,
+          //   },
+          //   "/index.js": {
+          //     code: entryPoint,
+          //     hidden: true,
+          //   },
+          // }}
+          // theme="light"
+   
+          // template='react'
+          // customSetup={{
+          //   entry: "/src/index.js",
+          //   dependencies: {
+          //     "playbook-ui": "latest",
+          //   },
+          // }}
+          // options={{
+          //   classes: {
+          //     "sp-preview-actions": "sandbox-button-toolbar",
+          //   },
+          //   externalResources: [
+          //     "https://kit.fontawesome.com/098a1cd4d5.js",
+          //     "https://unpkg.com/playbook-ui@13.16.0/dist/playbook.css",
+          //   ],
+  
+        >
+          <Sandbox />
+        </SandpackProvider>
+      </div>
+>>>>>>> Stashed changes
     </>
   )
 }
