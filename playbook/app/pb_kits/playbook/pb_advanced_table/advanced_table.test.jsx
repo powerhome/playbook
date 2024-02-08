@@ -243,3 +243,42 @@ test("tableProps prop functions as expected", () => {
   const table = kit.querySelector('table')
   expect(table).toHaveClass("pb_table table-sm table-responsive-none data_table sticky-header ns_tabular")
 });
+
+test("enableExpansionIcon changes icon", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+        tableProps={tableProps}
+        toggleExpansionIcon= "chevron-up"
+    />
+  );
+
+  const kit = screen.getByTestId(testId);
+  const tableHead = kit.querySelector('table')
+  const toggleIcon= tableHead.querySelector(".pb_icon_kit")
+  expect(toggleIcon).toHaveClass("fa-chevron-up")
+});
+
+test("sortIcon changes icon", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+        tableProps={tableProps}
+    >
+      <AdvancedTable.Header 
+          enableSorting
+          sortIcon= {["chevron-up","chevron-down"]}
+      />
+      <AdvancedTable.Body />
+    </AdvancedTable>
+  );
+
+  const kit = screen.getByTestId(testId);
+  const sortIcon = kit.querySelector('.sort-button-icon')
+  const icon= sortIcon.querySelector(".pb_icon_kit")
+  expect(icon).toHaveClass("fa-chevron-down")
+});
