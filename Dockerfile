@@ -11,11 +11,11 @@ RUN /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
 
 ENV BUNDLE_TO /usr/local/rvm/gems
-ENV NODE_OPTIONS "--max_old_space_size=8192"
+ENV NODE_OPTIONS "--max-old-space-size=8192"
 ENV NVM_VERSION v0.33.8
-ENV NODE_VERSION v14.18.1
+ENV NODE_VERSION v20.11.0
 ENV NPM_VERSION 6.14.10
-ENV YARN_VERSION 1.22.15
+ENV YARN_VERSION 1.22.19
 ENV NVM_DIR /home/app/.nvm
 ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash \
