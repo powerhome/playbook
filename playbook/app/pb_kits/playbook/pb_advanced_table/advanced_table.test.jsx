@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { render, screen } from "../utilities/test-utils";
 
 import { AdvancedTable } from "../";
@@ -61,6 +61,26 @@ const columnDefinitions = [
 const subRowHeaders = ["Quarter"]
 
 const testId = "advanced_table";
+
+const AdvancedTableExpandControl = () => {
+  const [expanded, setExpanded] = useState({'0': true})
+
+  const expandedControl = {
+    value: expanded,
+    onChange: setExpanded,
+  }
+
+return (
+  <div>
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        expandedControl={expandedControl}
+        tableData={MOCK_DATA}
+    />
+  </div>
+);
+}
 
 test("Generates default kit and classname", () => {
   render(
@@ -128,11 +148,12 @@ test("toggleExpansionAll button exists and toggles subrows open and closed", () 
   expect(subRow).toBeInTheDocument()
 });
 
-test("loading state", () => {
+test("loading state + initialLoadingRowCount prop", () => {
   render(
     <AdvancedTable
         columnDefinitions={columnDefinitions}
         data={{ testid: testId }}
+        initialLoadingRowsCount={13}
         loading
         tableData={MOCK_DATA}
     />
@@ -142,6 +163,9 @@ test("loading state", () => {
   const table = kit.querySelector('table')
   expect(table).toHaveClass('pb_table table-sm table-responsive-none table-card data_table ns_tabular content-loading')
 
+  const tableBody = kit.querySelector('tbody')
+  const tableRows = tableBody.getElementsByTagName('tr')
+  expect(tableRows).toHaveLength(13)
 });
 
 test("subRowHeaders are rendered", () => {
@@ -164,3 +188,11 @@ test("subRowHeaders are rendered", () => {
   const subRowHeader = kit.querySelector(".custom-row.bg-silver")
   expect(subRowHeader).toBeInTheDocument()
 });
+
+test("expandControl prop works as expected", () => {
+  render (<AdvancedTableExpandControl/>)
+
+  const kit = screen.getByTestId(testId);
+  const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
+  expect(subRow).toBeInTheDocument()
+})
