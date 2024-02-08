@@ -93,6 +93,11 @@ const tableOptions = {
     },
 }
 
+const tableProps = {
+  container: false,
+  sticky: true
+}
+
 test("Generates default kit and classname", () => {
   render(
     <AdvancedTable
@@ -222,4 +227,19 @@ test("tableOptions prop functions as expected", () => {
   const row1 = kit.getElementsByTagName('tr')[1]
   
   expect(row1.id).toBe("1-1-0-row")
+});
+
+test("tableProps prop functions as expected", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+        tableProps={tableProps}
+    />
+  );
+
+  const kit = screen.getByTestId(testId);
+  const table = kit.querySelector('table')
+  expect(table).toHaveClass("pb_table table-sm table-responsive-none data_table sticky-header ns_tabular")
 });
