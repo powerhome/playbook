@@ -1,7 +1,12 @@
 import React, { useState } from "react"
 import { Title, Caption, Button } from "playbook-ui"
 import Sandbox from "../components/Sandbox"
-import { SandpackProvider } from "@codesandbox/sandpack-react"
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackPreview,
+} from "@codesandbox/sandpack-react"
 import { useLoaderData } from "react-router-dom"
 import entryPoint from "./entryPoint"
 
@@ -28,7 +33,13 @@ export default function ComponentShow() {
         size='2'
       />
 
-      <SandpackProvider
+      <SandpackProvider template='react'>
+        <SandpackLayout>
+          <SandpackCodeEditor />
+          <SandpackPreview />
+        </SandpackLayout>
+      </SandpackProvider>
+      {/* <SandpackProvider
         files={{
           "/App.js": {
             code: code,
@@ -57,7 +68,7 @@ export default function ComponentShow() {
         }}
       >
         <Sandbox />
-      </SandpackProvider>
+      </SandpackProvider> */}
     </>
   )
 }

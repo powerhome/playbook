@@ -1,0 +1,14 @@
+@import "playbook-ui/dist/tokens/colors";
+
+.sandbox-preview {
+  .sandbox-button-toolbar {
+    background: $white;
+    width: 100%;
+    bottom: 0 !important;
+    justify-content: end;
+  }
+
+  &.expanded .sandbox-button-toolbar {
+    background: $bg_light;
+  }
+}
