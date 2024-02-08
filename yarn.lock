@@ -1320,7 +1320,7 @@
     outvariant "1.4.0"
     static-browser-server "1.0.3"
 
-"@codesandbox/sandpack-react@^2.12.0":
+"@codesandbox/sandpack-react@^2.0.1":
   version "2.12.0"
   resolved "https://npm.powerapp.cloud/@codesandbox/sandpack-react/-/sandpack-react-2.12.0.tgz#35020e8a0dac80a03c10ff1c04bdda7655cfc8db"
   integrity sha512-06o08hdyafGputxFvbPfiQVjWg4ASqQicuZwk5pgp4YfIx9ZZdCHDnVKD8RvTr/+PW41LGGANaimSuaifeNOEA==
