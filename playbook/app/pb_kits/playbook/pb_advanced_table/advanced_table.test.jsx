@@ -82,6 +82,29 @@ return (
 );
 }
 
+const AdvancedTableSortControl = () => {
+  const [isSortDesc, setIsSortDesc] = useState({desc: false})
+
+  const sortControl = {
+    value: isSortDesc,
+    onChange: setIsSortDesc,
+  }
+
+return (
+  <div>
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{testid: testId}}
+        sortControl={sortControl}
+        tableData={MOCK_DATA}
+      >
+        <AdvancedTable.Header enableSorting />
+        <AdvancedTable.Body />
+      </AdvancedTable>
+  </div>
+);
+}
+
 const tableOptions = {
   initialState: {
       sorting: [
@@ -282,3 +305,15 @@ test("sortIcon changes icon", () => {
   const icon= sortIcon.querySelector(".pb_icon_kit")
   expect(icon).toHaveClass("fa-chevron-down")
 });
+
+test("Sort icon renders with enableSorting + sortControl works as expected", () => {
+  render (<AdvancedTableSortControl/>)
+
+  const kit = screen.getByTestId(testId);
+  const sortIcon = kit.querySelector(".sort-button-icon")
+  expect(sortIcon).toBeInTheDocument()
+
+  const row1 = kit.getElementsByTagName('tr')[1]
+  
+  expect(row1.id).toBe("1-1-0-row")
+})
