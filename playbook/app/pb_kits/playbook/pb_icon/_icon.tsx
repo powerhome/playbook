@@ -69,7 +69,6 @@ const Icon = (props: IconProps) => {
     spin = false,
   } = props
 
-  const iconURL = typeof(icon) === 'string' && icon.includes('.svg') ? icon : null
   const iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
 
   const faClasses = {
@@ -133,19 +132,6 @@ const Icon = (props: IconProps) => {
               id={id}
           >
             {icon}
-          </span>
-        </>
-      )
-    else if (iconURL)
-      return (
-        <>
-          <span
-              {...dataProps}
-              {...htmlProps}
-              className={classesEmoji}
-              id={id}
-          >
-            <img src={iconURL} />
           </span>
         </>
       )
