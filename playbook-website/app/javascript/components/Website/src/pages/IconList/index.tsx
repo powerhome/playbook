@@ -6,7 +6,7 @@ import { Hero } from "../../components/Hero"
 import { Body, Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
 import { Roofing, Powergon, Nitro, ChevronDown, Times, Bars, Calendar, Filter, Edit, Trash, Check, Plus, Search} from '@powerhome/playbook-icons-react'
 
-const POWER_ICONS = {
+const PB_ICONS = {
   roofing: Roofing,
   nitro: Nitro,
   powergon: Powergon,
@@ -21,8 +21,8 @@ const POWER_ICONS = {
   plus: Plus,
   search: Search
 }
-
-window.POWER_ICONS = POWER_ICONS;
+2
+window.PB_ICONS = PB_ICONS;
 
 export default function IconList() {
 
