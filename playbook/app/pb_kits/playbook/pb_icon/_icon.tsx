@@ -47,6 +47,12 @@ const flipMap = {
   none: ""
 }
 
+
+declare global {
+  // eslint-disable-next-line no-var
+  var POWER_ICONS: {[key: string]: React.FunctionComponent<any>}
+}
+
 const Icon = (props: IconProps) => {
   const {
     aria = {},
@@ -69,7 +75,7 @@ const Icon = (props: IconProps) => {
     spin = false,
   } = props
 
-  const iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
+  let iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
 
   const faClasses = {
     'fa-border': border,
@@ -83,7 +89,16 @@ const Icon = (props: IconProps) => {
     [`fa-rotate-${rotation}`]: rotation,
   }
 
-  if (!customIcon && !iconElement) faClasses[`fa-${icon}`] = icon as string
+  if (!customIcon && !iconElement) {
+    const PowerIcon: React.FunctionComponent<any> | undefined =
+      window.POWER_ICONS ? window.POWER_ICONS[icon as string] : null
+
+    if (PowerIcon) {
+      iconElement = <PowerIcon /> as ReactSVGElement
+    } else {
+      faClasses[`fa-${icon}`] = icon as string
+    }
+  }
 
   const classes = classnames(
     flipMap[flip],
