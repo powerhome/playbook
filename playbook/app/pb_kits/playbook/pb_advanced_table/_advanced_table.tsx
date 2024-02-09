@@ -162,6 +162,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     getExpandedRowModel: getExpandedRowModel(),
     getSortedRowModel: getSortedRowModel(),
     enableSortingRemoval: false,
+    sortDescFirst: true,
     ...expandAndSortState(),
     ...tableOptions,
   });
