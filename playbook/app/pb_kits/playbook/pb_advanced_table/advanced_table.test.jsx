@@ -318,28 +318,28 @@ test("Sort icon renders with enableSorting + sortControl works as expected", () 
   expect(row1.id).toBe("1-1-0-row")
 })
 
-// test("sort button exists and sorts column data", () => {
-//   render(
-//     <AdvancedTable
-//         columnDefinitions={columnDefinitions}
-//         data={{ testid: testId }}
-//         tableData={MOCK_DATA}
-//     >
-//       <AdvancedTable.Header enableSorting />
-//       <AdvancedTable.Body />
-//     </AdvancedTable>
-//   );
+test("sort button exists and sorts column data", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    >
+      <AdvancedTable.Header enableSorting />
+      <AdvancedTable.Body />
+    </AdvancedTable>
+  );
 
-//   const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId);
 
-//   const sortButton= kit.querySelector(".pb_flex_kit_orientation_row_justify_content_between_align_items_top_spacing_none.pl_xxs.cursor_pointer.header-sort-button.pb_th_link")
-//   expect(sortButton).toBeInTheDocument()
+  const sortButton= kit.querySelector(".pb_flex_kit_orientation_row_justify_content_between_align_items_top_spacing_none.pl_xxs.cursor_pointer.header-sort-button.pb_th_link")
+  expect(sortButton).toBeInTheDocument()
 
-//   const row1 = kit.getElementsByTagName('tr')[1]
+  const row1 = kit.getElementsByTagName('tr')[1]
   
-//   expect(row1.id).toBe("0-0-0-row")
-//   sortButton.click()
+  expect(row1.id).toBe("0-0-0-row")
+  sortButton.click()
 
-//   const row2 = kit.getElementsByTagName('tr')[2]
-//   expect(row2.id).toBe("0-0-0-row")
-// });
+  const row2 = kit.getElementsByTagName('tr')[2]
+  expect(row2.id).toBe("0-0-0-row")
+}); 
