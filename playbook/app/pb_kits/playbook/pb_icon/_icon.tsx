@@ -47,10 +47,9 @@ const flipMap = {
   none: ""
 }
 
-
 declare global {
   // eslint-disable-next-line no-var
-  var POWER_ICONS: {[key: string]: React.FunctionComponent<any>}
+  var PB_ICONS: {[key: string]: React.FunctionComponent<any>}
 }
 
 const Icon = (props: IconProps) => {
@@ -91,7 +90,7 @@ const Icon = (props: IconProps) => {
 
   if (!customIcon && !iconElement) {
     const PowerIcon: React.FunctionComponent<any> | undefined =
-      window.POWER_ICONS ? window.POWER_ICONS[icon as string] : null
+      window.PB_ICONS ? window.PB_ICONS[icon as string] : null
 
     if (PowerIcon) {
       iconElement = <PowerIcon /> as ReactSVGElement

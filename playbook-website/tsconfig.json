@@ -21,6 +21,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "exclude": ["node_modules/**/*"],
   "include": ["./app/**/*"]
 }

@@ -3,10 +3,10 @@ import React from "react"
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
 
 import { Hero } from "../../components/Hero"
-import { Body, Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
 import { Roofing, Powergon, Nitro, ChevronDown, Times, Bars, Calendar, Filter, Edit, Trash, Check, Plus, Search} from '@powerhome/playbook-icons-react'
+import { Body, Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
 
-const PB_ICONS = {
+const pbIcons = {
   roofing: Roofing,
   nitro: Nitro,
   powergon: Powergon,
@@ -21,15 +21,14 @@ const PB_ICONS = {
   plus: Plus,
   search: Search
 }
-2
-window.PB_ICONS = PB_ICONS;
+
+window.PB_ICONS = pbIcons
 
 export default function IconList() {
 
   return (
     <>
       <Hero description={"Powerhome Icons"} title={linkFormat("Playbook Icons")} />
-
       <Flex
         justify='center'
         marginX={{ lg: "sm", xl: "sm" }}
