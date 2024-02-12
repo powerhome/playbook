@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack');
 
 const { environment } = require('@rails/webpacker')
 
@@ -18,6 +19,8 @@ environment.loaders.prepend('svgr', {
   use: {
     loader: '@svgr/webpack',
     options: {
+      name: '[name].[ext]', // Use the original name and extension
+      outputPath: 'images/', // Optional: specify a directory within the output path
       svgoConfig: {
         plugins: [
           { removeViewBox: false }
@@ -26,7 +29,8 @@ environment.loaders.prepend('svgr', {
     }
   },
   include: [
-    path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons')
+    path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons'),
+    path.resolve(__dirname, '../../app')
   ],
 })
 
