@@ -68,7 +68,7 @@
   },
   "ignorePatterns": [
     "**/*.d.ts",
-    "flow-typed/**/*",
+    "flow-typed/**/*"
   ],
   "overrides": [
     {
