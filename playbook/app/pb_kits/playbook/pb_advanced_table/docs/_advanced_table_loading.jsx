@@ -1,8 +1,12 @@
-import React from "react";
-import { AdvancedTable } from "../..";
+import React, { useState } from "react";
+import { AdvancedTable } from "../../";
+import { Button } from "../../"
 import { MOCK_DATA } from "./_mock_data";
 
-const AdvancedTableSort = (props) => {
+const AdvancedTableLoading = (props) => {
+
+const [isloading, setIsLoading] = useState(true)
+
   const columnDefinitions = [
     {
       accessor: "year",
@@ -37,16 +41,20 @@ const AdvancedTableSort = (props) => {
 
   return (
     <div>
+      <Button marginBottom="md" 
+          onClick={()=> setIsLoading(!isloading)}
+          text="Toggle Loading State"
+          variant="secondary"
+          {...props}
+      />
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          loading={isloading}
           tableData={MOCK_DATA}
           {...props}
-      >
-        <AdvancedTable.Header enableSorting />
-        <AdvancedTable.Body />
-      </AdvancedTable>
+      />
     </div>
   );
 };
 
-export default AdvancedTableSort;
+export default AdvancedTableLoading;

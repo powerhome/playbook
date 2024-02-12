@@ -55,11 +55,12 @@
   }
 
   .loading-toggle-icon {
-    width: $space_sm - 1;
-    height: $space_sm - 1;
+    width: $space_sm - 3;
+    height: $space_sm - 4;
+    margin-right: $space_xxs;
     margin-bottom: $space_xxs + 2;
     &::after {
-      height: $space_sm - 1;
+      height: $space_sm - 4;
       border-radius: $border_radius_rounded;
     }
   }

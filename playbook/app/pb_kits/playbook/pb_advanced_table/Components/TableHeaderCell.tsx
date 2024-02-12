@@ -72,7 +72,6 @@ const cellId = `${loading ?
         <Flex
             alignItems="center"
             justify={header.index === 0 && enableSorting ? "between" : header.index === 0 && !enableSorting ? "start" : "end"}
-            paddingLeft={loading ? "sm" : "none"}
         >
           {header.index === 0 &&
             !loading &&
@@ -114,7 +113,7 @@ const cellId = `${loading ?
               header.column.getCanSort() &&
               enableSorting &&
               (loading ? (
-                <div className="loading-toggle-icon header-sort-icon" />
+                <div className="loading-toggle-icon" />
               ) : (
                 <SortIconButton header={header} 
                     sortIcon={sortIcon} 
