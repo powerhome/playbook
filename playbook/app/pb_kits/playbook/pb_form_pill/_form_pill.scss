@@ -55,7 +55,7 @@ $form_pill_colors: (
     height: fit-content;
     height: -moz-fit-content;
     .pb_form_pill_text, .pb_form_pill_close, .pb_form_pill_tag {
-      font-size: 16px;
+      font-size: $font_base;
       font-weight: $regular;
     }
     .pb_form_pill_text, .pb_form_pill_tag {
