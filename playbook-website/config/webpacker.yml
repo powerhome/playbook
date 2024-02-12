@@ -71,10 +71,7 @@ development:
     quiet: false
     pretty: false
     headers:
-      'Access-Control-Allow-Origin': '*'
-    watch_options:
-      ignored: '**/node_modules/**'
-
+      "Access-Control-Allow-Origin": "*"
 
 test:
   <<: *default
