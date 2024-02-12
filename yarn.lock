@@ -2348,6 +2348,11 @@
   resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/5dce20f3dab62a07cb50a9414f08688a8c3cab24#5dce20f3dab62a07cb50a9414f08688a8c3cab24"
   integrity sha512-DwbvpTfyiK6DHglGwyJ8yt/RRaMHOI51X5zN2cvFyancuwkdhXZy69v9Ii4yrnCfFgiZUbHG6iq4W7S9rrqvfg==
 
+"@powerhome/playbook-icons@^0.0.1-alpha.5":
+  version "0.0.1-alpha.5"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/538d3f60df834f54ccb3f2cda6d16604f2543f67#538d3f60df834f54ccb3f2cda6d16604f2543f67"
+  integrity sha512-+Ql60hiUdGZgwkhMrjlSTkPsg+eKz0gO5KW3gHxCKn5efPWQRxS3wz0S3qwz9+73Eb9qwxxfEeTkgb4qeudy/w==
+
 "@rails/webpacker@5.2.1":
   version "5.2.1"
   resolved "https://npm.powerapp.cloud/@rails/webpacker/-/webpacker-5.2.1.tgz#87cdbd4af2090ae2d74bdc51f6f04717d907c5b3"

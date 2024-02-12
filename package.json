@@ -25,7 +25,9 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "foreman": "3.0.1",
     "husky": "6.0.0",
-    "lint-staged": "10.5.4"
+    "lint-staged": "10.5.4",
+    "@powerhome/playbook-icons": "0.0.1-alpha.2",
+    "@powerhome/playbook-icons-react": "0.0.1-alpha.2"
   },
   "lint-staged": {
     "*.{js,jsx,tsx,ts}": "eslint",
