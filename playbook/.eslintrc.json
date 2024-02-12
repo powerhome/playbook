@@ -68,7 +68,8 @@
   },
   "ignorePatterns": [
     "**/*.d.ts",
-    "flow-typed/**/*"
+    "flow-typed/**/*",
+    "node_modules/**/*"
   ],
   "overrides": [
     {
