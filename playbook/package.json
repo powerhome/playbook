@@ -13,7 +13,7 @@
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
     "watch": "NODE_OPTIONS=--openssl-legacy-provider webpack --watch --mode=development",
-    "release": "webpack --mode=production"
+    "release": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode=production"
   },
   "repository": {
     "type": "git",
