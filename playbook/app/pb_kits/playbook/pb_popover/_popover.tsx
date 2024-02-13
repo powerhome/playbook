@@ -171,29 +171,27 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
 
     document.body.addEventListener(
       "click",
-      ({ target }) => {
+      (e: MouseEvent) => {
+        const target = e.target as HTMLElement
+
         const targetIsPopover =
-          (target as HTMLElement).closest("#" + targetId) !==
-          null;
+          target.closest("#" + targetId) !== null;
         const targetIsReference =
-          (target as HTMLElement).closest("#reference-" + targetId) !==
-          null;
+          target.closest("#reference-" + targetId) !== null;
+
+        const shouldClose = () => {
+          setTimeout(() => shouldClosePopover(true), 0);
+        }
 
         switch (closeOnClick) {
           case "outside":
-            if (!targetIsPopover && !targetIsReference) {
-              shouldClosePopover(true);
-            }
+            if (!targetIsPopover && !targetIsReference) shouldClose();
             break;
           case "inside":
-            if (targetIsPopover) {
-              shouldClosePopover(true);
-            }
+            if (targetIsPopover) shouldClose();
             break;
           case "any":
-            if (targetIsPopover || !targetIsPopover && !targetIsReference) {
-              shouldClosePopover(true);
-            }
+            if (targetIsPopover || !targetIsPopover && !targetIsReference) shouldClose();
             break;
         }
       },
