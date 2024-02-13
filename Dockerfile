@@ -66,6 +66,8 @@ COPY --link --chown=9999:9999 --from=jspackages /home/app/src /home/app/src
 RUN --mount=id=yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
     yarn install --frozen-lockfile
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
+RUN echo 'mark look here'
+RUN cp -r node_modules node_modulestwo
 
 FROM jsdeps AS release
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
@@ -78,6 +80,5 @@ FROM base AS prod
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
 COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
-COPY --link --chown=9999:9999 icons /home/app/src/node_modules/@powerhome/playbook-icons/icons
 COPY --link --from=release /home/app/src/playbook/dist /home/app/src/playbook/dist
 COPY --link --from=release /home/app/src/playbook-website/public /home/app/src/playbook-website/public
