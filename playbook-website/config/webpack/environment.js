@@ -16,7 +16,7 @@ environment.loaders.insert('javascript', {
 environment.loaders.prepend('svgr', {
   test: /\.(svg)$/,
   use: {
-    loader: '@svgr/webpack[name].[ext]',
+    loader: '@svgr/webpack?name=[name].[ext]',
     options: {
       svgoConfig: {
         plugins: [
