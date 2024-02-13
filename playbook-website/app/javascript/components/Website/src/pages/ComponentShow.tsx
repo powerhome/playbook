@@ -6,12 +6,16 @@ import {
   SandpackLayout,
   SandpackCodeEditor,
   SandpackPreview,
+  
 } from "@codesandbox/sandpack-react"
 import { useLoaderData } from "react-router-dom"
 import entryPoint from "./entryPoint"
+import Fonts from "./Fonts"
+import Styles from "./Styles"
+
 
 export default function ComponentShow() {
-  const { examples } = useLoaderData()
+  const { examples, css } = useLoaderData()
 
   const source = examples[0].source
 
@@ -27,19 +31,7 @@ export default function ComponentShow() {
 
   return (
     <>
-      <Title
-        paddingTop={{ xs: "md", sm: "md", md: "md", default: "none" }}
-        text={"Component Show Page"}
-        size='2'
-      />
-
-      <SandpackProvider template="react">
-        {/* <SandpackLayout> */}
-        <SandpackCodeEditor />
-        <SandpackPreview />
-        {/* </SandpackLayout> */}
-      </SandpackProvider>
-      {/* <SandpackProvider
+      <SandpackProvider
         files={{
           "/App.js": {
             code: code,
@@ -48,8 +40,15 @@ export default function ComponentShow() {
             code: entryPoint,
             hidden: true,
           },
+          // "public/fonts.scss": {
+          //   code: Fonts,
+          //   hidden: true,
+          // },
+          "styles.scss": {
+            code: Styles,
+            hidden: true,
+          }
         }}
-        theme='dark'
         template='react'
         customSetup={{
           entry: "/src/index.js",
@@ -60,15 +59,17 @@ export default function ComponentShow() {
         options={{
           externalResources: [
             "https://kit.fontawesome.com/098a1cd4d5.js",
-            "https://unpkg.com/playbook-ui@13.16.0/dist/playbook.css",
+            "https://unpkg.com/playbook-ui@latest/dist/playbook.css",
+            // `${css}`,
           ],
           classes: {
-            "sp-loading": "alksdhgklasdhkjlahsdfkjlhasdkjlfhahkljsdf",
+            "sp-preview-actions": "sandbox-button-toolbar",
+            "sp-preview-iframe": "sandbox-preview-iframe",
           },
         }}
       >
         <Sandbox />
-      </SandpackProvider> */}
+      </SandpackProvider>
     </>
   )
 }

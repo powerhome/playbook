@@ -1,5 +1,6 @@
-@import "./tokens/typography";
-@import "./tokens/colors";
+const Styles = `
+@import "playbook-ui/dist/tokens/typography";
+@import "playbook-ui/dist/tokens/colors";
 
 * {
   box-sizing: border-box;
@@ -21,7 +22,6 @@ body {
   font-family: $font_family_base;
   font-size: $font_base;
   line-height: 1.5;
-  background-color: $bg-light;
   height: 100%;
   letter-spacing: $lspace_normal;
   font-weight: $regular;
@@ -39,8 +39,6 @@ body {
 a {
   text-decoration: none;
   color: $primary;
-}
+}`
 
-.sandbox-preview-iframe body {
-  background-color: black !important;
-}
+export default Styles

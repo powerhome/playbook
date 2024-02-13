@@ -19,6 +19,7 @@ class PagesController < ApplicationController
     @kit = params[:name] || "avatar"
     @params = params
     @examples = pb_doc_kit_examples(@kit, @type)
+    @css = view_context.asset_pack_url("application.css")
 
     # first example from each kit
     examples = @examples.map do |example|
@@ -29,7 +30,7 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
-      format.json { render json: { kits: @kits, dark: @dark, type: @type, examples: examples, kit: @kit, params: @params } }
+      format.json { render json: { kits: @kits, dark: @dark, type: @type, examples: examples, kit: @kit, params: @params, css: @css } }
     end
   end
 

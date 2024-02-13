@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button, Detail, Icon, Flex, Tooltip } from "playbook-ui"
 import CodesandboxIcon from "../../assets/sandbox"
 import {
@@ -6,50 +6,68 @@ import {
   SandpackPreview,
   SandpackCodeEditor,
   useActiveCode,
+  useLoadingOverlayState,
   UnstyledOpenInCodeSandboxButton,
+  LoadingOverlay,
+  useSandpack,
 } from "@codesandbox/sandpack-react"
+
+import { useClipboard } from "../../hooks/useClipboard"
 
 import "./styles.scss"
 
-export default function Sandbox() {
-  const { loading } = useActiveCode()
-  // const loadingWords = () => <div>loading.........</div>
+export default function Sandbox({ backgroundColor = "white" }) {
+  const { code } = useActiveCode()
+  const loadingOverlayState = useLoadingOverlayState()
   const [isExpanded, setIsExpanded] = useState(false)
-  const [isCopied, setIsCopied] = useState(false)
+  const { setValue, hasCopied, onCopy } = useClipboard(code)
+  const [isOtherTooltipHovered, setIsOtherTooltipHovered] = useState(false)
+  useEffect(() => {
+    setValue(code)
+  }, [code])
+
+  const handleOtherTooltipHover = (hoverState) => {
+    setIsOtherTooltipHovered(hoverState)
+  }
 
   const SandboxButtons = () => {
     return (
       <Flex>
+        <span
+          onMouseEnter={() => handleOtherTooltipHover(true)}
+          onMouseLeave={() => handleOtherTooltipHover(false)}
+        >
+          <Tooltip
+            placement='top'
+            text={isExpanded ? "Hide Code" : "Show Code"}
+            zIndex={10}
+          >
+            <Button
+              variant='rounded'
+              onClick={() => setIsExpanded(!isExpanded)}
+              tabIndex={0}
+            >
+              <Detail color='default'>
+                <Icon icon='arrows-from-line' />
+              </Detail>
+            </Button>
+          </Tooltip>
+        </span>
         <Tooltip
           placement='top'
-          text={isExpanded ? "Hide Code" : "Show Code"}
+          text={hasCopied ? "Copied!" : "Copy Code"}
           zIndex={10}
+          delay={{
+            close: isOtherTooltipHovered ? 0 : 3000,
+          }}
         >
-          <Button
-            variant='rounded'
-            onClick={() => setIsExpanded(!isExpanded)}
-            tabIndex={0}
-          >
-            <Detail color='default'>
-              <Icon icon='arrows-from-line' />
-            </Detail>
-          </Button>
-        </Tooltip>
-        <Tooltip
-          placement='top'
-          text={isCopied ? "Copied!" : "Copy Code"}
-          zIndex={10}
-        >
-          <Button
-            variant='rounded'
-            onClick={() => setIsCopied(true)}
-            tabIndex={0}
-          >
+          <Button variant='rounded' onClick={onCopy} tabIndex={0}>
             <Detail color='default'>
               <Icon icon='copy' />
             </Detail>
           </Button>
         </Tooltip>
+
         <Tooltip placement='top' text={"Open in CodeSandbox"} zIndex={10}>
           <UnstyledOpenInCodeSandboxButton
             style={{
@@ -58,7 +76,6 @@ export default function Sandbox() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              // reset button styles
               background: "none",
               border: "none",
               padding: 0,
@@ -80,28 +97,22 @@ export default function Sandbox() {
 
   return (
     <SandpackLayout
-      className='sandbox-layout'
+      className={`sandbox-layout`}
       style={{
-        backgroundColor: "white",
         border: "none",
         fontFamily: "Proxima Nova",
         width: "100%",
       }}
     >
-      {/* {loading && <h1 style={{ backgroundColor: "orange" }}>Loading...</h1>} */}
-
       <Flex orientation='column'>
-        {!loading && (
-          <SandpackPreview
-            className={`sandbox-preview ${isExpanded ? "expanded" : ""}`}
-            showOpenInCodeSandbox={false}
-            showRefreshButton={false}
-            // style={{ backgroundColor: "white" }}
-            actionsChildren={<SandboxButtons />}
-          ></SandpackPreview>
-        )}
-
-        {isExpanded && <SandpackCodeEditor  style={{ height: "auto" }} />}
+        <SandpackPreview
+          className={`sandbox-preview ${isExpanded ? "expanded" : ""}`}
+          showOpenInCodeSandbox={false}
+          showRefreshButton={false}
+          style={{ backgroundColor: backgroundColor }}
+          actionsChildren={<SandboxButtons />}
+        />
+        {isExpanded && <SandpackCodeEditor style={{ height: "auto" }} />}
       </Flex>
     </SandpackLayout>
   )

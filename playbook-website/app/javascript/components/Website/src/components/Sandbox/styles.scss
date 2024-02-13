@@ -1,14 +1,42 @@
 @import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/typography";
+@import "playbook-ui/dist/tokens/line_height";
 
+.sandbox-layout {
+  margin-left: 16px;
+
+}
 .sandbox-preview {
+  border: 1px solid $border_light;
+  min-height: 250px;
+  min-width: 900px;
+
   .sandbox-button-toolbar {
     background: $white;
     width: 100%;
     bottom: 0 !important;
     justify-content: end;
+    position: unset;
   }
 
   &.expanded .sandbox-button-toolbar {
     background: $bg_light;
+    position: unset;
+  }
+
+  .sp-preview-container {
+    background: transparent;
+  }
+  .sp-loading:before {
+    color: $text_lt_default;
+    line-height: $lh_tight;
+    font-size: $text_default;
+    font-weight: $regular;
+    font-family: $font-family-base;
+    content: "Loading...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
