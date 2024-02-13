@@ -78,5 +78,6 @@ FROM base AS prod
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
 COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
+COPY --link --chown=9999:9999 icons /home/app/src/node_modules/@powerhome/playbook-icons/icons
 COPY --link --from=release /home/app/src/playbook/dist /home/app/src/playbook/dist
 COPY --link --from=release /home/app/src/playbook-website/public /home/app/src/playbook-website/public
