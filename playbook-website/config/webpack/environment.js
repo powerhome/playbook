@@ -14,19 +14,29 @@ environment.loaders.insert('javascript', {
 })
 
 environment.loaders.prepend('svgr', {
-  test: /\.(svg)$/,
-  use: {
-    loader: '@svgr/webpack[name].[ext]',
-    options: {
-      svgoConfig: {
-        plugins: [
-          { removeViewBox: false }
-        ]
+  test: /\.svg$/,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]',
+        outputPath: 'packs/images', // Optionally specify a directory within the output path
+      }
+    },
+    {
+      loader: '@svgr/webpack',
+      options: {
+        svgoConfig: {
+          plugins: [
+            { removeViewBox: false }
+          ]
+        }
       }
     }
-  },
+  ],
   include: [
-    path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons')
+    path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons'),
+    path.resolve(__dirname, '../../public'),
   ],
 })
 
@@ -65,5 +75,6 @@ environment.config.merge({
     removeEmptyChunks: true,
   },
 })
+
 
 module.exports = environment
