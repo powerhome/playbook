@@ -1,8 +1,8 @@
 import React from "react";
-import { AdvancedTable } from "../..";
+import { AdvancedTable } from "../../";
 import { MOCK_DATA } from "./_mock_data";
 
-const AdvancedTableSort = (props) => {
+const AdvancedTableTableOptions = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -35,18 +35,27 @@ const AdvancedTableSort = (props) => {
     },
   ];
 
+  const tableOptions = {
+    initialState: {
+        sorting: [
+          {
+            id: "year",
+            desc: true,
+          },
+        ],
+      },
+  }
+
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           tableData={MOCK_DATA}
+          tableOptions={tableOptions}
           {...props}
-      >
-        <AdvancedTable.Header enableSorting />
-        <AdvancedTable.Body />
-      </AdvancedTable>
+      />
     </div>
   );
 };
 
-export default AdvancedTableSort;
+export default AdvancedTableTableOptions;

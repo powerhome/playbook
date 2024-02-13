@@ -2,7 +2,7 @@ import React from "react";
 import { AdvancedTable } from "../..";
 import { MOCK_DATA } from "./_mock_data";
 
-const AdvancedTableSort = (props) => {
+const AdvancedTableSubrowHeaders = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -35,18 +35,23 @@ const AdvancedTableSort = (props) => {
     },
   ];
 
+  //Render the subRow header rows
+  const subRowHeaders = ["Quarter", "Month", "Day"]
+
+
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          enableToggleExpansion="all"
           tableData={MOCK_DATA}
           {...props}
       >
-        <AdvancedTable.Header enableSorting />
-        <AdvancedTable.Body />
+        <AdvancedTable.Header />
+        <AdvancedTable.Body subRowHeaders={subRowHeaders}/>
       </AdvancedTable>
     </div>
   );
 };
 
-export default AdvancedTableSort;
+export default AdvancedTableSubrowHeaders;

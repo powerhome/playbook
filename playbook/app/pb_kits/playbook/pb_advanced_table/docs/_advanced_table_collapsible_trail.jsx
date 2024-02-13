@@ -1,8 +1,8 @@
 import React from "react";
-import { AdvancedTable } from "../..";
+import { AdvancedTable } from "../../";
 import { MOCK_DATA } from "./_mock_data";
 
-const AdvancedTableSort = (props) => {
+const AdvancedTableCollapsibleTrail = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -42,11 +42,11 @@ const AdvancedTableSort = (props) => {
           tableData={MOCK_DATA}
           {...props}
       >
-        <AdvancedTable.Header enableSorting />
-        <AdvancedTable.Body />
+        <AdvancedTable.Header />
+        <AdvancedTable.Body collapsibleTrail={false} />
       </AdvancedTable>
     </div>
   );
 };
 
-export default AdvancedTableSort;
+export default AdvancedTableCollapsibleTrail;
