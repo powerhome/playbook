@@ -17,10 +17,10 @@ environment.loaders.insert('javascript', {
 environment.loaders.prepend('svgr', {
   test: /\.(svg)$/,
   use: {
-    loader: '@svgr/webpack',
+    loader: '@svgr/webpack?name=[name].[ext]',
     options: {
-      name: '[name].[ext]', // Use the original name and extension
-      outputPath: 'images/', // Optional: specify a directory within the output path
+      // name: '[name].[ext]', // Use the original name and extension
+      // outputPath: 'images/', // Optional: specify a directory within the output path
       svgoConfig: {
         plugins: [
           { removeViewBox: false }
@@ -35,18 +35,18 @@ environment.loaders.prepend('svgr', {
 })
 
 // Don't let file entry stomp on SVGs
-environment.loaders.get('file').test = /(.jpg|.jpeg|.png|.gif|.tiff|.ico|.eot|.otf|.ttf|.woff|.woff2)$/i
-environment.loaders.get('file').include = path.resolve(__dirname, '../../app')
+// environment.loaders.get('file').test = /(.jpg|.jpeg|.png|.gif|.tiff|.ico|.eot|.otf|.ttf|.woff|.woff2)$/i
+// environment.loaders.get('file').include = path.resolve(__dirname, '../../app')
 
-environment.loaders.append('image', {
-  test: /\.(svg)$/,
-  use: {
-    loader: 'file-loader',
-  },
-  include: [
-    path.resolve(__dirname, '../../app')
-  ],
-})
+// environment.loaders.append('image', {
+//   test: /\.(svg)$/,
+//   use: {
+//     loader: 'file-loader',
+//   },
+//   include: [
+//     path.resolve(__dirname, '../../app')
+//   ],
+// })
 
 // Allow ESM modules
 environment.config.merge({
