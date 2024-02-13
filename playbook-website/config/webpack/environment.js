@@ -23,11 +23,11 @@ environment.loaders.prepend('svgr', {
           { removeViewBox: false }
         ]
       }
-    },
-    include: [
-      path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons'),
-    ]
-  }
+    }
+  },
+  include: [
+    path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons')
+  ],
 })
 
 // Don't let file entry stomp on SVGs
@@ -65,6 +65,5 @@ environment.config.merge({
     removeEmptyChunks: true,
   },
 })
-
 
 module.exports = environment
