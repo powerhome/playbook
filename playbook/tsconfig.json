@@ -22,6 +22,9 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
+  "exclude": [
+    "node_modules/**/*"
+  ],
   "include": [
     "app/pb_kits/playbook",
   ]

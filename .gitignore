@@ -11,4 +11,3 @@ node_modules
 yarn-error.log
 playbook/stats.json
 *.dec.*
-node_modules
