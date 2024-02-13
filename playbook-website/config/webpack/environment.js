@@ -1,5 +1,4 @@
 const path = require('path')
-const webpack = require('webpack');
 
 const { environment } = require('@rails/webpacker')
 
@@ -16,28 +15,18 @@ environment.loaders.insert('javascript', {
 
 environment.loaders.prepend('svgr', {
   test: /\.(svg)$/,
-  use: [
-    {
-      loader: 'file-loader',
-      options: {
-        name: '[name].[ext]',
-        outputPath: 'images/',
-      },
-    },
-    {
-      loader: '@svgr/webpack',
-      options: {
-        svgoConfig: {
-          plugins: [
-            { removeViewBox: false }
-          ]
-        }
+  use: {
+    loader: '@svgr/webpack[name].[ext]',
+    options: {
+      svgoConfig: {
+        plugins: [
+          { removeViewBox: false }
+        ]
       }
     }
-  ],
+  },
   include: [
-    path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons'),
-    path.resolve(__dirname, '../../app')
+    path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons')
   ],
 })
 
