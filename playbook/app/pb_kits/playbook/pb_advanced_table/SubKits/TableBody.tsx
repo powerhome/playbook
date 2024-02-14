@@ -19,6 +19,7 @@ export const TableBody = ({
   subRowHeaders,
 }: TableBodyProps) => {
   const {
+    columnDefinitions,
     enableToggleExpansion,
     handleExpandOrCollapse,
     loading,
@@ -32,7 +33,7 @@ export const TableBody = ({
           const isFirstChildofSubrow = row.depth > 0 && row.index === 0
           const rowHasNoChildren = !row.original.children?.length
           const numberOfColumns = table.getAllFlatColumns().length
-          const isDataLoading = isExpandable && rowHasNoChildren && (row.depth < subRowHeaders.length)
+          const isDataLoading = isExpandable && rowHasNoChildren && (row.depth < columnDefinitions[0].cellAccessors?.length)
 
           return (
             <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>

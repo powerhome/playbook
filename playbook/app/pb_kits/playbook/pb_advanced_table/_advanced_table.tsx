@@ -212,14 +212,15 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     >
       <AdvancedTableContext.Provider
           value={{
-            table,
+            columnDefinitions,
+            enableToggleExpansion,
+            expanded,
             handleExpandOrCollapse,
             loading,
-            enableToggleExpansion,
-            toggleExpansionIcon,
             setExpanded,
-            expanded,
             sortControl,
+            table,
+            toggleExpansionIcon,
           }}
       >
         <Table
