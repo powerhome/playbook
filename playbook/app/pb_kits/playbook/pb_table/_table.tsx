@@ -20,6 +20,7 @@ type TableProps = {
   singleLine?: boolean,
   size?: "sm" | "md" | "lg",
   sticky?: boolean,
+  striped?: boolean,
   verticalBorder?: boolean,
 } & GlobalProps
 
@@ -40,6 +41,7 @@ const Table = (props: TableProps) => {
     singleLine = false,
     size = 'sm',
     sticky = false,
+    striped = false,
     verticalBorder = false,
   } = props
 
@@ -70,6 +72,7 @@ const Table = (props: TableProps) => {
             'single-line': singleLine,
             'no-hover': disableHover,
             'sticky-header': sticky,
+            'striped': striped,
           },
           globalProps(props),
           tableCollapseCss,

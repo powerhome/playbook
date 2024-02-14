@@ -23,6 +23,7 @@ examples:
     - table_icon_buttons: Table with Icon Buttons
     - table_with_background_kit: Table With Background Kit
     - table_vertical_border: Vertical Borders
+    - table_striped: Striped Table
 
   react:
     - table_sm: Small
@@ -47,3 +48,4 @@ examples:
     - table_icon_buttons: Table with Icon Buttons
     - table_with_background_kit: Table With Background Kit
     - table_vertical_border: Vertical Borders
+    - table_striped: Striped Table
