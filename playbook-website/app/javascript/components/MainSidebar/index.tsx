@@ -10,7 +10,7 @@ const MainSidebar = ({
   type,
   category,
   kit,
-  kits,
+  kits_with_status,
   PBversion,
   search_list,
   samples,
@@ -18,10 +18,25 @@ const MainSidebar = ({
   //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
 
+  const transformKitsData = (kitsArray) => {
+    return kitsArray.map(kit => {
+      // There's only one key per object, so we get the kit name and its components
+      const kitName = Object.keys(kit)[0];
+      const components = kit[kitName];
+  
+      // Filter out any components with status 'beta', then map to get their names
+      const componentNames = components
+        .filter(component => component.status !== 'beta')
+        .map(component => component.name);
+  
+      return { [kitName]: componentNames };
+    });
+  };
+  
+  const kits = transformKitsData(kits_with_status);
+  
   //hook into collapsible logic for all components nested nav items
   const collapsibles = kits.map(() => useCollapsible());
-
-  const filteredSearchList = search_list.filter(obj => obj.label !== "Advanced Table");
 
   //kits in alphabetical order
   kits.map((obj: {[key: string]: string[]}) => {
@@ -55,7 +70,7 @@ const MainSidebar = ({
         <KitSearch
           classname="desktop-kit-search"
           id="desktop-kit-search"
-          kits={filteredSearchList}
+          kits={search_list}
         />
       </Flex>
       <Nav dark={dark} variant="bold" paddingTop="xxs">
