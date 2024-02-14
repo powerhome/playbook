@@ -28,6 +28,12 @@ export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
   return data;
 };
 
+export const ComponentShowLoader = async ({ params }) => {
+  const response = await fetch(`/beta/kits/${params.name}.json`);
+  const data = await response.json();
+  return data; 
+};
+
 export const CategoryLoader: (
   props: LoaderFunctionArgs
 ) => Promise<ComponentTypes> = async ({ params }) => {

@@ -6,10 +6,7 @@ import {
   SandpackPreview,
   SandpackCodeEditor,
   useActiveCode,
-  useLoadingOverlayState,
   UnstyledOpenInCodeSandboxButton,
-  LoadingOverlay,
-  useSandpack,
 } from "@codesandbox/sandpack-react"
 
 import { useClipboard } from "../../hooks/useClipboard"
@@ -18,7 +15,6 @@ import "./styles.scss"
 
 export default function Sandbox({ backgroundColor = "white" }) {
   const { code } = useActiveCode()
-  const loadingOverlayState = useLoadingOverlayState()
   const [isExpanded, setIsExpanded] = useState(false)
   const { setValue, hasCopied, onCopy } = useClipboard(code)
   const [isOtherTooltipHovered, setIsOtherTooltipHovered] = useState(false)

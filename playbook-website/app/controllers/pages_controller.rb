@@ -16,7 +16,7 @@ class PagesController < ApplicationController
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
     @type = params[:type] || "react"
-    @kit = params[:name] || "avatar"
+    @kit = params[:name]
     @params = params
     @examples = pb_doc_kit_examples(@kit, @type)
     @css = view_context.asset_pack_url("application.css")

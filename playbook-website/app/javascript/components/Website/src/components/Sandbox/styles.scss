@@ -4,8 +4,9 @@
 
 .sandbox-layout {
   margin-left: 16px;
-
+  background-color: transparent !important;
 }
+
 .sandbox-preview {
   border: 1px solid $border_light;
   min-height: 250px;
@@ -27,6 +28,7 @@
   .sp-preview-container {
     background: transparent;
   }
+
   .sp-loading:before {
     color: $text_lt_default;
     line-height: $lh_tight;

@@ -1,24 +1,16 @@
-import React, { useState } from "react"
-import { Title, Caption, Button } from "playbook-ui"
+import React from "react"
+
 import Sandbox from "../components/Sandbox"
-import {
-  SandpackProvider,
-  SandpackLayout,
-  SandpackCodeEditor,
-  SandpackPreview,
-  
-} from "@codesandbox/sandpack-react"
+import { SandpackProvider } from "@codesandbox/sandpack-react"
 import { useLoaderData } from "react-router-dom"
 import entryPoint from "./entryPoint"
-import Fonts from "./Fonts"
 import Styles from "./Styles"
 
-
 export default function ComponentShow() {
-  const { examples, css } = useLoaderData()
+  const { examples } = useLoaderData()
 
   const source = examples[0].source
-
+  
   const code = source
     .replace(
       /import (\w+) from ('|")\.\.\/_(\w+)('|")/g,
@@ -40,14 +32,10 @@ export default function ComponentShow() {
             code: entryPoint,
             hidden: true,
           },
-          // "public/fonts.scss": {
-          //   code: Fonts,
-          //   hidden: true,
-          // },
           "styles.scss": {
             code: Styles,
             hidden: true,
-          }
+          },
         }}
         template='react'
         customSetup={{
@@ -60,7 +48,6 @@ export default function ComponentShow() {
           externalResources: [
             "https://kit.fontawesome.com/098a1cd4d5.js",
             "https://unpkg.com/playbook-ui@latest/dist/playbook.css",
-            // `${css}`,
           ],
           classes: {
             "sp-preview-actions": "sandbox-button-toolbar",
