@@ -1,4 +1,7 @@
 import React, { useContext } from "react"
+import classnames from "classnames";
+import { buildCss } from "../../utilities/props";
+import { globalProps } from "../../utilities/globalProps";
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import { flexRender, Row } from "@tanstack/react-table"
 
@@ -10,14 +13,20 @@ import { isChrome } from "../Utilities/BrowserCheck"
 import { DataType } from "../Utilities/types"
 
 type TableBodyProps = {
+  className?: string;
   collapsibleTrail?: boolean
+  id?: string;
   subRowHeaders?: string[]
 }
 
 export const TableBody = ({
+  className,
   collapsibleTrail = true,
+  id,
   subRowHeaders,
+  ...props
 }: TableBodyProps) => {
+
   const {
     columnDefinitions,
     enableToggleExpansion,
@@ -25,9 +34,18 @@ export const TableBody = ({
     loading,
     table,
   } = useContext(AdvancedTableContext)
+
+  const classes = classnames(
+    buildCss("pb_advanced_table_body"),
+    globalProps(props),
+    className
+  );
+
   return (
     <>
-      <tbody>
+      <tbody className={classes} 
+          id={id}
+      >
         {table.getRowModel().rows.map((row: Row<DataType>) => {
           const isExpandable = row.getIsExpanded()
           const isFirstChildofSubrow = row.depth > 0 && row.index === 0
