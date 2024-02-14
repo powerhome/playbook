@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get "home",                     to: "pages#home"
   get "visual_guidelines",        to: redirect("/visual_guidelines/colors")
   get "visual_guidelines/:name",  to: "pages#visual_guidelines"
-  get "icons",                    to: "pages#icons"
   get "changelog",                to: "pages#changelog"
 
   # Kits

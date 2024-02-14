@@ -1,0 +1,1 @@
+`collapsibleTrail` is an optional prop that is set to 'true' by default. If set to 'false', it will remove the trail on the left of rows when subRows are toggled open.

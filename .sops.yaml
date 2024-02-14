@@ -1,3 +1,4 @@
+# Managed by https://github.com/powerhome/software. Do not make changes here, they will be reverted.
 creation_rules:
   - path_regex: production
     key_groups:

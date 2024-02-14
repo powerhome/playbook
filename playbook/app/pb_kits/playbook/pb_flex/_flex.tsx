@@ -10,7 +10,7 @@ type FlexProps = {
   data?: GenericObject,
   horizontal?: "left" | "center" | "right" | "stretch" | "none",
   justify?: "start" | "center" | "end" | "around" | "between" | "evenly" | "none",
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void) | ((arg?: unknown) => void)},
   id?: string,
   inline?: boolean,
   orientation?: "row" | "column",

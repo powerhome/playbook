@@ -19,7 +19,7 @@ type LightboxType = {
   id?: string,
   photos: [],
   initialPhoto?: number,
-  onChange?: (index: number)=> {},
+  onChange?: (index: number)=> void,
   onClickRight?: () => void,
   onClose?: () => void,
   icon: string,
@@ -40,7 +40,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     id = '',
     initialPhoto = 0,
     photos,
-    onChange = ()=>{},
+    onChange = () => undefined,
     onClose,
     onClickRight,
     icon = 'times',
@@ -107,18 +107,18 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
           <div className="carousel">
           <Lightbox.Header
               icon={icon}
-              onClose={onClose}
-              onClickRight={onClickRight}
-              text={description}
               navRight={navRight}
+              onClickRight={onClickRight}
+              onClose={onClose}
+              text={description}
               title={title}
           />
             {children}
             <Carousel
-                setIndex={setActivePhoto}
                 currentIndex={activePhoto}
                 onChange={handleOnSlide}
                 photos={photosMap}
+                setIndex={setActivePhoto}
             />
           </div>
         </div>

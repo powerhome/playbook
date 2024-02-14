@@ -7,7 +7,7 @@ type ListItemProps = {
   aria?: { [key: string]: string },
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
-  data?: object,
+  data?: Record<string, unknown>,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   tabIndex?: number,

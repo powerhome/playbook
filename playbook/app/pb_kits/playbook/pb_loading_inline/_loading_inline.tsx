@@ -37,18 +37,18 @@ const LoadingInline = (props: LoadingInlineProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
     >
       <Body color="light">
         <Icon
-          aria={{ label: 'loading icon' }}
-          fixedWidth
-          icon="spinner"
-          pulse
+            aria={{ label: 'loading icon' }}
+            fixedWidth
+            icon="spinner"
+            pulse
         />
         {' Loading'}
       </Body>

@@ -56,15 +56,15 @@ const arrowRight = () => setIndex(current < urls.length - 1 ? current + 1 : urls
   return (
     <div
         className="Slides"
-        onTouchStart={onTouchStart} 
+        onTouchEnd={onTouchEnd} 
         onTouchMove={onTouchMove} 
-        onTouchEnd={onTouchEnd}
+        onTouchStart={onTouchStart}
     >
       {
         urls.length > 1 && (
         <CircleIconButton
             className='carousel-arrow-left'
-            dark={true}
+            dark
             icon="chevron-left"
             onClick={arrowLeft}
             variant="link"
@@ -81,7 +81,7 @@ const arrowRight = () => setIndex(current < urls.length - 1 ? current + 1 : urls
         urls.length > 1 && (
         <CircleIconButton
             className='carousel-arrow-right'
-            dark={true}
+            dark
             icon="chevron-right"
             onClick={arrowRight}
             variant="link"
