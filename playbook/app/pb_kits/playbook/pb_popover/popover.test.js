@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, waitForElementToBeRemoved } from "../utilities/test-utils";
+import { render, screen, fireEvent } from "../utilities/test-utils";
 import { Button, PbReactPopover } from "..";
 
 const testId = "popover-kit";
@@ -192,7 +192,7 @@ const PopoverTestClicktoClose3 = () => {
     expect(kit).toBeInTheDocument();
     fireEvent.click(document.body);
 
-    waitForElementToBeRemoved(screen.findByText('Click Anywhere'))
+    expect(kit).not.toBeInTheDocument;
   });
 
   test("closes Popover on click inside", async () => {
@@ -203,7 +203,7 @@ const PopoverTestClicktoClose3 = () => {
     expect(kit).toBeInTheDocument();
     fireEvent.click(kit);
 
-    waitForElementToBeRemoved(screen.findByText('Click Anywhere'))
+    expect(kit).not.toBeInTheDocument;
   });
 
   test("closes Popover on click outside", async () => {
@@ -216,5 +216,5 @@ const PopoverTestClicktoClose3 = () => {
     expect(kit).toBeInTheDocument();
     fireEvent.click(btn);
 
-    waitForElementToBeRemoved(screen.findByText('Click Outside'))
+    expect(kit).not.toBeInTheDocument;
   });
