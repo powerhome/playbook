@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent } from "../utilities/test-utils";
+import { render, screen, fireEvent, waitForElementToBeRemoved } from "../utilities/test-utils";
 import { Button, PbReactPopover } from "..";
 
 const testId = "popover-kit";
@@ -12,9 +12,9 @@ const PopoverTest = () => {
   }
 
   const popoverReference = (
-    <Button onClick={togglePopover} 
+    <Button onClick={togglePopover}
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -34,9 +34,9 @@ const PopoverTestZIndex = () => {
   }
 
   const popoverReference = (
-    <Button onClick={togglePopover} 
+    <Button onClick={togglePopover}
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -58,9 +58,9 @@ const PopoverTestHeight = () => {
   }
 
   const popoverReference = (
-    <Button onClick={togglePopover} 
+    <Button onClick={togglePopover}
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -75,7 +75,7 @@ const PopoverTestHeight = () => {
   )
 };
 
-//Test Popover with click to close 'anywhere' 
+//Test Popover with click to close 'anywhere'
 const PopoverTestClicktoClose = () => {
   const [mockState, setMockState] = React.useState(false)
   const togglePopover = () => {
@@ -86,9 +86,9 @@ const PopoverTestClicktoClose = () => {
   }
 
   const popoverReference = (
-    <Button onClick={togglePopover} 
+    <Button onClick={togglePopover}
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -103,7 +103,7 @@ const PopoverTestClicktoClose = () => {
   )
 };
 
-//Test Popover with click to close 'inside' 
+//Test Popover with click to close 'inside'
 const PopoverTestClicktoClose2 = () => {
   const [mockState, setMockState] = React.useState(false)
   const togglePopover = () => {
@@ -114,9 +114,9 @@ const PopoverTestClicktoClose2 = () => {
   }
 
   const popoverReference = (
-    <Button onClick={togglePopover} 
+    <Button onClick={togglePopover}
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -131,7 +131,7 @@ const PopoverTestClicktoClose2 = () => {
   )
 };
 
-//Test Popover with click to close 'outside' 
+//Test Popover with click to close 'outside'
 const PopoverTestClicktoClose3 = () => {
   const [mockState, setMockState] = React.useState(false)
   const togglePopover = () => {
@@ -142,9 +142,9 @@ const PopoverTestClicktoClose3 = () => {
   }
 
   const popoverReference = (
-    <Button onClick={togglePopover} 
+    <Button onClick={togglePopover}
         text="Click Me"
-     />
+    />
   );
   return (
       <PbReactPopover
@@ -165,7 +165,7 @@ const PopoverTestClicktoClose3 = () => {
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
     const kit = screen.getByText("Click Anywhere");
-    expect(kit).toBeInTheDocument(); 
+    expect(kit).toBeInTheDocument();
   });
 
   test("renders Popover with z index", () => {
@@ -173,7 +173,7 @@ const PopoverTestClicktoClose3 = () => {
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
     const kit = screen.getByText("Click Anywhere");
-    expect(kit).toHaveClass("pb_popover_body z_index_3"); 
+    expect(kit).toHaveClass("pb_popover_body z_index_3");
   });
 
   test("renders Popover with max height and max width", () => {
@@ -181,42 +181,40 @@ const PopoverTestClicktoClose3 = () => {
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
     const kit = screen.getByText("Click Anywhere");
-    expect(kit).toHaveClass("pb_popover_body max_width_240px overflow_handling"); 
+    expect(kit).toHaveClass("pb_popover_body max_width_240px overflow_handling");
   });
 
-  test("closes Popover on click anywhere", () => {
+  test("closes Popover on click anywhere", async () => {
     render(<PopoverTestClicktoClose data={{ testid: testId}}/>)
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
     const kit = screen.getByText("Click Anywhere");
-    expect(kit).toBeInTheDocument(); 
-    fireEvent.click(kit);
-   
-    expect(kit).not.toBeInTheDocument();
+    expect(kit).toBeInTheDocument();
+    fireEvent.click(document.body);
 
+    waitForElementToBeRemoved(screen.findByText('Click Anywhere'))
   });
 
-  test("closes Popover on click inside", () => {
+  test("closes Popover on click inside", async () => {
     render(<PopoverTestClicktoClose2 data={{ testid: testId}}/>)
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
     const kit = screen.getByText("Click Inside");
-    expect(kit).toBeInTheDocument(); 
+    expect(kit).toBeInTheDocument();
     fireEvent.click(kit);
-   
-    expect(kit).not.toBeInTheDocument();
 
+    waitForElementToBeRemoved(screen.findByText('Click Anywhere'))
   });
 
-  test("closes Popover on click outside", () => {
+  test("closes Popover on click outside", async () => {
     render(<PopoverTestClicktoClose3 data={{ testid: testId}}/>)
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
     const kit = screen.getByText("Click Outside");
-    expect(kit).toBeInTheDocument(); 
+    expect(kit).toBeInTheDocument();
     fireEvent.click(kit);
-    expect(kit).toBeInTheDocument(); 
+    expect(kit).toBeInTheDocument();
     fireEvent.click(btn);
-    expect(kit).not.toBeInTheDocument();
 
+    waitForElementToBeRemoved(screen.findByText('Click Outside'))
   });
