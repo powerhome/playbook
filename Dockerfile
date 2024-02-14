@@ -66,7 +66,6 @@ COPY --link --chown=9999:9999 --from=jspackages /home/app/src /home/app/src
 RUN --mount=id=yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
     yarn install --frozen-lockfile
 RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
-RUN echo 'mark look here'
 RUN cp -r node_modules node_modulestwo
 
 FROM jsdeps AS release
