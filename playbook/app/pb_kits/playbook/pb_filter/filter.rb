@@ -10,6 +10,7 @@ module Playbook
                       values: %w[default single filter_only sort_only],
                       default: "default"
       prop :background, type: Playbook::Props::Boolean, default: true
+      prop :max_height
       prop :min_width, default: "auto"
       prop :placement, type: Playbook::Props::Enum,
                        values: %w[top bottom left right top-start top-end bottom-start bottom-end right-start right-end left-start left-end],
@@ -31,7 +32,7 @@ module Playbook
       end
 
       def wrapper(&block)
-        if object.background
+        if background
           pb_rails("card", props: { padding: "none" }, &block)
         else
           capture(&block)
@@ -46,6 +47,29 @@ module Playbook
           "sort-amount-down"
         else
           ""
+        end
+      end
+
+      def popover_props
+        if template != "sort_only"
+          {
+            max_height: max_height,
+            min_width: min_width,
+            close_on_click: "outside",
+            trigger_element_id: "filter#{id}",
+            tooltip_id: "filter-form#{id}",
+            position: placement,
+          }
+        elsif template != "filter_only"
+          {
+            max_height: max_height,
+            classname: "pb_filter_sort_menu",
+            close_on_click: "outside",
+            trigger_element_id: "sort-button#{id}",
+            tooltip_id: "sort-filter-btn-tooltip#{id}",
+            position: placement,
+            padding: "none",
+          }
         end
       end
     end
