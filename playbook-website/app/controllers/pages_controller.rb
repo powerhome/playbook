@@ -192,10 +192,12 @@ private
 
   def all_kits
     group_components = []
-    aggregate_kits.each do |category|
-      group_components.push(category["components"])
+    aggregate_kits.each do |kit|
+      group_components.push(kit["components"].map do |component|
+        { name: component["name"], status: component["status"] }
+      end)
     end
-    group_components.flatten.map { |item| item["name"] }
+    group_components.flatten
   end
 
   def set_js
@@ -218,8 +220,11 @@ private
   end
 
   def set_kit
-    if all_kits.include?(params[:name])
-      @kit = params[:name]
+    matching_kit = all_kits.find { |kit| kit[:name] == params[:name] }
+
+    if matching_kit
+      @kit = matching_kit[:name]
+      @kit_status = matching_kit[:status]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
     end

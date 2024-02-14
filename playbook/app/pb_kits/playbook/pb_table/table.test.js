@@ -15,3 +15,8 @@ test("when sticky is true", () => {
   const kit = renderKit(Table, props, { sticky: true })
   expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card sticky-header table-collapse-sm")
 })
+
+test("when striped is true", () => {
+  const kit = renderKit(Table, props, { striped: true })
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card striped table-collapse-sm")
+})
