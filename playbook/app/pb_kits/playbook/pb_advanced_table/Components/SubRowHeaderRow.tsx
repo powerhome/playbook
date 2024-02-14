@@ -28,6 +28,7 @@ export const SubRowHeaderRow = ({
   table,
 }: SubRowHeaderRowProps & GlobalProps) => {
   const numberOfColumns = table.getAllFlatColumns().length
+  const canExpand = row.depth < subRowHeaders.length
 
   return (
     <tr className="custom-row bg-silver">
@@ -42,13 +43,13 @@ export const SubRowHeaderRow = ({
           <Flex align="center" 
               columnGap="xs"
           >
-            {enableToggleExpansion === "all" && row.getCanExpand() ? (
+            {enableToggleExpansion === "all" && canExpand ? (
               <ToggleIconButton onClick={onClick} 
                   row={row}
               />
             ) : null}
             <Caption
-                marginLeft={row.getCanExpand() ? "none" : "xs"}
+                marginLeft={canExpand ? "none" : "xs"}
                 text={subRowHeaders[row.depth - 1]}
             />
           </Flex>

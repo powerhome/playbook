@@ -32,6 +32,7 @@ export const TableBody = ({
           const isFirstChildofSubrow = row.depth > 0 && row.index === 0
           const rowHasNoChildren = !row.original.children?.length
           const numberOfColumns = table.getAllFlatColumns().length
+          const isDataLoading = isExpandable && rowHasNoChildren && (row.depth < subRowHeaders.length)
 
           return (
             <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -79,9 +80,11 @@ export const TableBody = ({
               </tr>
 
               {/* Display LoadingInline if Row Data is querying and there are no children already */}
-              {isExpandable && rowHasNoChildren && row.depth === 0 ? (
+              {isDataLoading ? (
                 <tr key={`${row.id}-row`}>
-                  <td colSpan={numberOfColumns}>
+                  <td colSpan={numberOfColumns}
+                      style={{ paddingLeft: `${row.depth === 0 ? 0.5 : (row.depth * 2)}em` }}
+                  >
                     <LoadingInline />
                   </td>
                 </tr>

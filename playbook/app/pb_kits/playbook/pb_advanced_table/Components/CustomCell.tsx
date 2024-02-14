@@ -10,6 +10,7 @@ import { DataType } from "../Utilities/types";
 import AdvancedTableContext from "../Context/AdvancedTableContext";
 
 interface CustomCellProps {
+  addExpandButton?: boolean;
   getValue?: Getter<string>;
   onRowToggleClick?: (arg: Row<DataType>) => void;
   row: Row<DataType>;
@@ -17,13 +18,13 @@ interface CustomCellProps {
 } 
 
 export const CustomCell = ({
+  addExpandButton = true,
   getValue,
   onRowToggleClick,
   row,
   value,
 }: CustomCellProps & GlobalProps) => {
   const { setExpanded, expanded } = useContext(AdvancedTableContext);
-  const RowWithoutChildren = row.originalSubRows === undefined;
 
   const handleOnExpand = (row: Row<DataType>) => {
     onRowToggleClick && onRowToggleClick(row);
@@ -36,7 +37,7 @@ export const CustomCell = ({
           columnGap="xs"
           orientation="row"
       >
-        {!RowWithoutChildren ? (
+        {addExpandButton ? (
           <button
               className="gray-icon expand-toggle-icon"
               onClick={() => handleOnExpand(row)}
@@ -53,7 +54,7 @@ export const CustomCell = ({
             )}
           </button>
         ) : null}
-        <FlexItem paddingLeft={!RowWithoutChildren ? "none" : "xs"}>
+        <FlexItem paddingLeft={addExpandButton? "none" : "xs"}>
           {row.depth === 0 ? getValue() : value}
         </FlexItem>
       </Flex>
