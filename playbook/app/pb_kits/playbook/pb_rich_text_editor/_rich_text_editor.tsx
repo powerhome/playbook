@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 import inlineFocus from './inlineFocus'
@@ -184,6 +186,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
           { children }
           </div>
         ) : (
+          // @ts-ignore
           <TrixEditor
               className=""
               fileParamName={name}

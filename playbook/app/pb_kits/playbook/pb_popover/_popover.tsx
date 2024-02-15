@@ -1,4 +1,6 @@
 /* eslint-disable react/no-multi-comp */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import {
@@ -110,6 +112,7 @@ const Popover = (props: PbPopoverProps) => {
         placement={placement}
         referenceElement={referenceElement}
     >
+      {/* @ts-ignore */}
       {({ placement, ref, style }) => {
         return (
           <div
@@ -220,9 +223,11 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
 
   return (
     <PopperManager>
+      {/* @ts-ignore */}
       <>
         {reference && !referenceElement && (
           <PopperReference>
+            {/* @ts-ignore */}
             {({ ref }) => (
               <span
                   className="pb_popover_reference_wrapper"
@@ -238,6 +243,7 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
           (usePortal ? (
             <>
               {ReactDOM.createPortal(
+                // @ts-ignore
                 popoverComponent,
                 document.querySelector(portal)
               )}

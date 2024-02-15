@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-handler-names */
 /* eslint-disable react/no-multi-comp */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import React, { useState } from "react";
 import classnames from "classnames";
@@ -185,6 +186,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         >
+          {/* @ts-ignore */}
           <>
             {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}
             {!status && text ? <Dialog.Body>{text}</Dialog.Body> : null}

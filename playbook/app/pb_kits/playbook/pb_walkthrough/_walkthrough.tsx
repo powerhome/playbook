@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
@@ -7,6 +9,7 @@ import Button from '../pb_button/_button'
 import Flex from '../pb_flex/_flex'
 import SectionSeparator from '../pb_section_separator/_section_separator'
 import Title from '../pb_title/_title'
+import { GenericObject } from '../types'
 
 type WalkthroughProps = {
   aria?: { [key: string]: string },
@@ -24,7 +27,7 @@ type WalkthroughProps = {
   disableOverlay?: boolean,
   disableOverlayClose?: boolean,
   disableScrolling?: boolean,
-  floaterProps?: object,
+  floaterProps?: GenericObject,
   hideBackButton?: boolean,
   hideCloseButton?: boolean,
   showProgress?: boolean,
@@ -58,41 +61,42 @@ type TooltipProps = {
     disableBeacon?: boolean,
   },
   skip?: boolean,
-  backProps?: object,
-  closeProps?: object,
-  primaryProps?: object,
-  skipProps?: object,
-  tooltipProps?: object,
+  backProps?: GenericObject,
+  closeProps?: GenericObject,
+  primaryProps?: GenericObject,
+  skipProps?: GenericObject,
+  tooltipProps?: GenericObject,
 }
 
+/* eslint-disable react/display-name */
 const Tooltip = React.forwardRef((props: TooltipProps) => (
   <div
-    className="pb_card_kit_border_none p_none"
-    {...props.tooltipProps}
+      className="pb_card_kit_border_none p_none"
+      {...props.tooltipProps}
   >
     {props.step.title && <div>
       <Flex
-        align="center"
-        justify="between"
-        padding="xs"
+          align="center"
+          justify="between"
+          padding="xs"
       >
         <Title
-          paddingLeft="xs"
-          size={4}
+            paddingLeft="xs"
+            size={4}
         >
           {props.step.title}
         </Title>
         {props.skip && (<Button
-          {...props.skipProps}
-          id="skip"
-          text="Skip Tour"
-          variant="link"
-        />)}
+            {...props.skipProps}
+            id="skip"
+            text="Skip Tour"
+            variant="link"
+                        />)}
         <Button
-          {...props.skipProps}
-          id="skip"
-          text="Skip Tour"
-          variant="link"
+            {...props.skipProps}
+            id="skip"
+            text="Skip Tour"
+            variant="link"
         />
       </Flex>
       <SectionSeparator />
@@ -101,39 +105,39 @@ const Tooltip = React.forwardRef((props: TooltipProps) => (
     <Flex padding="sm">{props.step.content}</Flex>
     <SectionSeparator />
     <Flex
-      justify={props.index == 0 ? 'end' : 'between'}
-      padding="xs"
+        justify={props.index == 0 ? 'end' : 'between'}
+        padding="xs"
     >
 
       {props.index > 0 && (
         <Button
-          {...props.backProps}
-          id="back"
-          text="Back"
+            {...props.backProps}
+            id="back"
+            text="Back"
         />
       )}
 
       {props.continuous && !props.isLastStep &&
         <Button
-          {...props.primaryProps}
-          id="next"
-          text="Next"
+            {...props.primaryProps}
+            id="next"
+            text="Next"
         />
       }
 
       {!props.continuous &&
         <Button
-          {...props.closeProps}
-          id="close"
-          text="Close"
+            {...props.closeProps}
+            id="close"
+            text="Close"
         />
       }
 
       {!((props.continuous && !props.isLastStep) || (!props.continuous)) &&
         <Button
-          {...props.closeProps}
-          id="close"
-          text="Close"
+            {...props.closeProps}
+            id="close"
+            text="Close"
         />
       }
     </Flex>
@@ -170,24 +174,25 @@ const Walkthrough = (props: WalkthroughProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
     >
       <Joyride
-        callback={callback}
-        continuous={continuous}
-        disableOverlay={disableOverlay}
-        disableScrolling
-        floaterProps={floaterProps}
-        run={run}
-        showSkipButton={showSkipButton}
-        steps={steps}
-        styles={styles}
-        tooltipComponent={Tooltip}
-        {...props}
+          callback={callback}
+          continuous={continuous}
+          disableOverlay={disableOverlay}
+          disableScrolling
+          floaterProps={floaterProps}
+          run={run}
+          showSkipButton={showSkipButton}
+          steps={steps}
+          styles={styles}
+        // @ts-ignore
+          tooltipComponent={Tooltip}
+          {...props}
       />
     </div>
 

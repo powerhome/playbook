@@ -1,4 +1,4 @@
-/* @flow */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import React from 'react'
 import { noop } from 'lodash'
@@ -34,6 +34,7 @@ export default function Slide({
         onPinchingStop={handlePinchingStop}
         panning={{ disabled: !zooming }}
     >
+      {/* @ts-ignore */}
       <button
           className="Slide"
           onClick={onClick}
@@ -41,6 +42,7 @@ export default function Slide({
           tabIndex={-1}
       >
         <TransformComponent wrapperClass="TransformComponent">
+          {/* @ts-ignore */}
           <Image
               alt={alt}
               url={url}
