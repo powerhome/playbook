@@ -15,3 +15,11 @@ examples:
   - time_timezone: Handling Timezones
   - time_align: Alignment
   - time_unstyled: Unstyled
+
+ swift:
+  - time_default_swift: Simple
+  - time_sizes_swift: Sizes
+  - time_timezone_swift: Status
+  - time_alignment_swift: Alignment
+  - time_unstyled_swift: Unstyled
+  - time_props_table: ""
