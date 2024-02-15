@@ -11,10 +11,6 @@ List of changes:
 
 - Move Icon Page [\#3072](https://github.com/powerhome/playbook/pull/3072) ([markdoeswork](https://github.com/markdoeswork))
 - Linting Implementation: Kits K - O [\#3046](https://github.com/powerhome/playbook/pull/3046) ([jasperfurniss](https://github.com/jasperfurniss))
-- Linter Implementation: Kits P - S [\#3043](https://github.com/powerhome/playbook/pull/3043) ([thestephenmarshall](https://github.com/thestephenmarshall))
-- Select Kit: Add Inline Variant With Visible Chevron [\#3037](https://github.com/powerhome/playbook/pull/3037) ([thestephenmarshall](https://github.com/thestephenmarshall))
-- Adding Components Filter [\#3029](https://github.com/powerhome/playbook/pull/3029) ([carloslimasd](https://github.com/carloslimasd))
-- Linter Implementation: Kits F - J [\#3021](https://github.com/powerhome/playbook/pull/3021) ([thestephenmarshall](https://github.com/thestephenmarshall))
 - Upgrade React-Select [\#3030](https://github.com/powerhome/playbook/pull/3030) ([dhhuynh2](https://github.com/dhhuynh2))
 
 
