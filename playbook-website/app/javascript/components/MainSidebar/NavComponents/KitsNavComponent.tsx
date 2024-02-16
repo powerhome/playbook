@@ -160,24 +160,18 @@ export const KitsNavItem = ({
         text={linkFormat(categoryKey)}
       >
         {sublinks.map((sublink, j) => (
-          <>
-            {
-              sublink !== "advanced_table" && (
-                <NavItem
-                  active={calculateIsActiveCategory(j, null, sublink)}
-                  cursor="pointer"
-                  dark={dark}
-                  fontSize="small"
-                  key={`${sublink}-${j}`}
-                  link={generateLink(categoryKey, sublink, type)}
-                  marginY="none"
-                  onClick={() => handleSubItemClick(j, sublink, kitIndex)}
-                  paddingY="xxs"
-                  text={linkFormat(sublink)}
-                />
-              )
-            }
-          </>
+          <NavItem
+            active={calculateIsActiveCategory(j, null, sublink)}
+            cursor="pointer"
+            dark={dark}
+            fontSize="small"
+            key={`${sublink}-${j}`}
+            link={generateLink(categoryKey, sublink, type)}
+            marginY="none"
+            onClick={() => handleSubItemClick(j, sublink, kitIndex)}
+            paddingY="xxs"
+            text={linkFormat(sublink)}
+          />
         ))}
       </NavItem>
     );
