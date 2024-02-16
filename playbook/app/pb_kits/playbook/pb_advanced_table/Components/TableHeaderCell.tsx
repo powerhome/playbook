@@ -12,7 +12,7 @@ import { GlobalProps } from "../../utilities/globalProps"
 
 type TableHeaderCellProps = {
   enableSorting?: boolean
-  enableToggleExpansion?: "all" | "header"
+  enableToggleExpansion?: "all" | "header" | "none"
   handleExpandOrCollapse?: () => void
   header?: Header<DataType, unknown>
   headerChildren?: React.ReactNode | React.ReactNode[]
@@ -52,6 +52,18 @@ const cellId = `${loading ?
     : `${header.id}`
 }`;
 
+const isToggleExpansionEnabledLoading =
+  header.index === 0 &&
+  loading &&
+  (enableToggleExpansion === "all" || "header") &&
+  enableToggleExpansion !== "none";
+  
+const isToggleExpansionEnabled =
+  header.index === 0 &&
+  !loading &&
+  (enableToggleExpansion === "all" || "header") &&
+  enableToggleExpansion !== "none";
+
   return (
     <th
         align="right"
@@ -71,15 +83,11 @@ const cellId = `${loading ?
             alignItems="center"
             justify={header.index === 0 && enableSorting ? "between" : header.index === 0 && !enableSorting ? "start" : "end"}
         >
-          {header.index === 0 &&
-            !loading &&
-            (enableToggleExpansion === "all" || "header") && (
+          {isToggleExpansionEnabled && (
               <ToggleIconButton onClick={handleExpandOrCollapse} />
             )}
 
-          {header.index === 0 &&
-            loading &&
-            (enableToggleExpansion === "all" || "header") && (
+          {isToggleExpansionEnabledLoading &&(
               <div className="loading-toggle-icon header-toggle-icon" />
             )}
 

@@ -12,7 +12,7 @@ import { GlobalProps } from "../../utilities/globalProps"
 
 interface SubRowHeaderRowProps {
   collapsibleTrail?: boolean
-  enableToggleExpansion?: "all" | "header"
+  enableToggleExpansion?: "all" | "header" | "none"
   onClick: (row: Row<DataType>) => void
   row: Row<DataType>
   subRowHeaders?: string[]

@@ -28,7 +28,7 @@ type AdvancedTableProps = {
   className?: string;
   columnDefinitions: DataType[];
   data?: { [key: string]: string };
-  enableToggleExpansion?: "all" | "header";
+  enableToggleExpansion?: "all" | "header" | "none";
   expandedControl?: DataType;
   id?: string;
   initialLoadingRowsCount?: number;
