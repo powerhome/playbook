@@ -1,62 +1,54 @@
-import React from 'react'
-import { Avatar } from '../../'
+import React from "react"
+import { Avatar, Badge, Flex } from "../../"
 
 const AvatarDefault = (props) => {
   return (
     <div>
-      <Avatar
-          imageAlt="Terry Johnson Standing"
-          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
-          name="Terry Johnson"
-          size="xxs"
-          status="online"
-          {...props}
-      />
-      <br />
-      <Avatar
-          imageAlt="Terry Johnson Standing"
-          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
-          name="Terry Johnson"
-          size="xs"
-          status="online"
-          {...props}
-      />
-      <br />
-      <Avatar
-          imageAlt="Terry Johnson Standing"
-          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
-          name="Terry Johnson"
-          size="sm"
-          status="online"
-          {...props}
-      />
-      <br />
-      <Avatar
-          imageAlt="Terry Johnson Standing"
-          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
-          name="Terry Johnson"
-          size="md"
-          status="away"
-          {...props}
-      />
-      <br />
-      <Avatar
-          imageAlt="Terry Johnson Standing"
-          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
-          name="Terry Johnson"
-          size="lg"
-          status="offline"
-          {...props}
-      />
-      <br />
-      <Avatar
-          imageAlt="Terry Johnson Standing"
-          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
-          name="Terry Johnson"
-          size="xl"
-          status="offline"
-          {...props}
-      />
+      <Flex columnGap="md">
+        <Avatar
+          imageAlt='Terry Johnson Standing'
+          imageUrl='https://randomuser.me/api/portraits/men/44.jpg'
+          name='Terry Johnson'
+          size='xl'
+        >
+          <Badge
+            text='12'
+            variant='number'
+            position='absolute'
+            top='4px'
+            left='8px'
+          />
+        </Avatar>
+
+        <Avatar
+          imageAlt='Terry Johnson Standing'
+          imageUrl='https://randomuser.me/api/portraits/men/44.jpg'
+          name='Terry Johnson'
+          size='xl'
+        >
+          <Badge
+            text='12'
+            variant='number'
+            position='absolute'
+            top='4px'
+            left='8px'
+          />
+        </Avatar>
+        <Avatar
+          imageAlt='Terry Johnson Standing'
+          imageUrl='https://randomuser.me/api/portraits/men/44.jpg'
+          name='Terry Johnson'
+          size='xl'
+        >
+          <Badge
+            text='12'
+            variant='number'
+            position='absolute'
+            top='4px'
+            left='8px'
+          />
+        </Avatar>
+      </Flex>
     </div>
   )
 }

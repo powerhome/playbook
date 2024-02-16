@@ -1,5 +1,6 @@
 import { omit } from 'lodash'
 import { camelToSnakeCase } from './text'
+import { CSSProperties } from 'react';
 
 import {
   BitValues,
@@ -118,6 +119,15 @@ type Position = {
   position?: "relative" | "absolute" | "fixed" | "sticky" | "static",
 }
 
+type PositioningProps = {
+  top?: CSSProperties['top'],
+  left?: CSSProperties['left'],
+  bottom?: CSSProperties['bottom'],
+  right?: CSSProperties['right'],
+  position?: CSSProperties['position'],
+};
+
+
 type Shadow = {
   shadow?: "none" | "deep" | "deeper" | "deepest",
 }
@@ -151,7 +161,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & ZIndex & { hover?: string };
+  Position & Shadow & TextAlign & Truncate & ZIndex & { hover?: string } & PositioningProps;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -435,12 +445,41 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
 
 type DefaultProps = {[key: string]: string} | Record<string, unknown>
 
+// export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {}): string => {
+//   const allProps = { ...props, ...defaultProps }
+//   return Object.keys(PROP_CATEGORIES).map((key) => {
+//     return PROP_CATEGORIES[key](allProps)
+//   }).filter((value) => value?.length > 0).join(" ")
+// }
+
+// Modify the globalProps function to include the logic for handling positioning props
 export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {}): string => {
-  const allProps = { ...props, ...defaultProps }
+  // Extract the positioning props
+  const { top, left, bottom, right, position, ...restProps } = { ...props, ...defaultProps };
+
+  // Prepare the inline style object for positioning
+  const positioningStyles = { top, left, bottom, right, position };
+
+  // Check if any of the positioning props are defined and should be included in the style
+  const hasPositioningProps = Object.values(positioningStyles).some(value => value !== undefined);
+
+  // If positioning props are defined, merge them into htmlOptions.style
+  if (hasPositioningProps) {
+    restProps.htmlOptions = {
+      ...restProps.htmlOptions,
+      style: {
+        ...restProps.htmlOptions?.style,
+        ...positioningStyles,
+      },
+    };
+  }
+
+  // Continue with the existing logic to generate classes
   return Object.keys(PROP_CATEGORIES).map((key) => {
-    return PROP_CATEGORIES[key](allProps)
-  }).filter((value) => value?.length > 0).join(" ")
-}
+    return PROP_CATEGORIES[key](restProps);
+  }).filter((value) => value?.length > 0).join(" ");
+};
+
 
 
 export const deprecatedProps = (): void => {
