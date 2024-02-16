@@ -5,10 +5,11 @@
 @mixin pb_title(
     $fontSize: $heading_1,
     $fontWeight: $lighter,
-    $lineHeight: $lh_tighter
+    $lineHeight: $lh_tighter,
+    $letterSpacing: $lspace_tight
 ){
   font-size: $fontSize;
-  letter-spacing: $lspace_tight;
+  letter-spacing: $letterSpacing;
   font-weight: $fontWeight;
   color: $text_lt_default;
   margin: 0;
@@ -29,8 +30,7 @@
 }
 
 @mixin pb_title_4 {
-  @include pb_title($heading_4, $bolder);
-  letter-spacing: -0.03em;
+  @include pb_title($heading_4, $bolder, $letterSpacing: $lspace_normal);
 }
 
 @mixin pb_title_dark {
