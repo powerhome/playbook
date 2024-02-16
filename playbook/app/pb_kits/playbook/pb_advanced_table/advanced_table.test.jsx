@@ -343,3 +343,39 @@ test("sort button exists and sorts column data", () => {
   const row2 = kit.getElementsByTagName('tr')[2]
   expect(row2.id).toBe("0-0-0-row")
 }); 
+
+test("Generates Table.Header default + custom classname", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    >
+      <AdvancedTable.Header className="custom-header" />
+      <AdvancedTable.Body />
+
+    </AdvancedTable>
+  );
+
+  const kit = screen.getByTestId(testId);
+  const tableHeader = kit.querySelector('thead')
+  expect(tableHeader).toHaveClass('pb_advanced_table_header custom-header')
+});
+
+test("Generates Table.Body default + custom classname", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    >
+      <AdvancedTable.Header />
+      <AdvancedTable.Body className="custom-body-classname"/>
+
+    </AdvancedTable>
+  );
+
+  const kit = screen.getByTestId(testId);
+  const tableHeader = kit.querySelector('tbody')
+  expect(tableHeader).toHaveClass('pb_advanced_table_body custom-body-classname')
+});
