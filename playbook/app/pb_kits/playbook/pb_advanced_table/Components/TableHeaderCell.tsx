@@ -16,7 +16,6 @@ type TableHeaderCellProps = {
   handleExpandOrCollapse?: () => void
   header?: Header<DataType, unknown>
   headerChildren?: React.ReactNode | React.ReactNode[]
-  headerId?: string
   loading?: boolean
   sortIcon?: string | string[]
 } & GlobalProps
@@ -27,7 +26,6 @@ export const TableHeaderCell = ({
   handleExpandOrCollapse,
   header,
   headerChildren,
-  headerId,
   loading,
   sortIcon,
 }: TableHeaderCellProps) => {
@@ -50,8 +48,8 @@ const cellClassName = classnames("table-header-cells",
 );
 
 const cellId = `${loading ? 
-    `loading-${header.id}${headerId ? `-${headerId}` : ""}`
-    : `${header.id}${headerId ? `-${headerId}` : ""}`
+    `loading-${header.id}`
+    : `${header.id}`
 }`;
 
   return (
