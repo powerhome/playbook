@@ -49,7 +49,7 @@ export const TableBody = ({
         {table.getRowModel().rows.map((row: Row<DataType>) => {
           const isExpandable = row.getIsExpanded()
           const isFirstChildofSubrow = row.depth > 0 && row.index === 0
-          const rowHasNoChildren = !row.original.children?.length
+          const rowHasNoChildren = row.original.children && !row.original.children.length ? true : false
           const numberOfColumns = table.getAllFlatColumns().length
           const isDataLoading = isExpandable && rowHasNoChildren && (row.depth < columnDefinitions[0].cellAccessors?.length)
 

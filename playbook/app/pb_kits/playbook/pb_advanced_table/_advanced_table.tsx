@@ -103,9 +103,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           // Handle other depths based on cellAccessors
           const depthAccessor = cellAccessors[row.depth - 1]; // Adjust index for depth
           const accessorValue = rowData[depthAccessor];
-          const addExpandButton = row.depth < cellAccessors.length
           return accessorValue ? (
-            <CustomCell addExpandButton={addExpandButton}
+            <CustomCell
                 onRowToggleClick={onRowToggleClick}
                 row={row} 
                 value={accessorValue} 
