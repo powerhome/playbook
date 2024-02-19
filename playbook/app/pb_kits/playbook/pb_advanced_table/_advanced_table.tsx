@@ -33,6 +33,7 @@ type AdvancedTableProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   initialLoadingRowsCount?: number;
+  inlineRowLoading?: boolean;
   loading?: boolean | string;
   onRowToggleClick?: (arg: Row<DataType>) => void;
   onToggleExpansionClick?: (arg: Row<DataType>) => void;
@@ -55,6 +56,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     htmlOptions = {},
     id,
     initialLoadingRowsCount = 10,
+    inlineRowLoading = false,
     loading,
     onRowToggleClick,
     onToggleExpansionClick,
@@ -219,6 +221,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             enableToggleExpansion,
             expanded,
             handleExpandOrCollapse,
+            inlineRowLoading,
             loading,
             setExpanded,
             sortControl,

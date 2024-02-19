@@ -31,6 +31,7 @@ export const TableBody = ({
     columnDefinitions,
     enableToggleExpansion,
     handleExpandOrCollapse,
+    inlineRowLoading,
     loading,
     table,
   } = useContext(AdvancedTableContext)
@@ -51,7 +52,7 @@ export const TableBody = ({
           const isFirstChildofSubrow = row.depth > 0 && row.index === 0
           const rowHasNoChildren = row.original.children && !row.original.children.length ? true : false
           const numberOfColumns = table.getAllFlatColumns().length
-          const isDataLoading = isExpandable && rowHasNoChildren && (row.depth < columnDefinitions[0].cellAccessors?.length)
+          const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && (row.depth < columnDefinitions[0].cellAccessors?.length)
 
           return (
             <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>

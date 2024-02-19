@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 import Flex from "../../pb_flex/_flex"
 import Caption from "../../pb_caption/_caption"
 import { Row, Table } from "@tanstack/react-table"
 
+import AdvancedTableContext from "../Context/AdvancedTableContext";
 import { ToggleIconButton } from "./ToggleIconButton"
 import { renderCollapsibleTrail } from "./CollapsibleTrail"
 
@@ -27,8 +28,11 @@ export const SubRowHeaderRow = ({
   subRowHeaders,
   table,
 }: SubRowHeaderRowProps & GlobalProps) => {
+  const { inlineRowLoading } = useContext(AdvancedTableContext);
+
   const numberOfColumns = table.getAllFlatColumns().length
-  const canExpand = row.original.children ? true : false
+  const rowHasChildren = row.original.children ? true : false
+  const canExpand = inlineRowLoading ? rowHasChildren : row.getCanExpand()
 
   return (
     <tr className="custom-row bg-silver">
