@@ -1,17 +1,19 @@
 @import "playbook-ui/dist/tokens/colors";
 @import "playbook-ui/dist/tokens/typography";
 @import "playbook-ui/dist/tokens/line_height";
+@import "playbook-ui/dist/tokens/screen_sizes";
+@import "playbook-ui/dist/tokens/spacing";
 
 .sandbox-layout {
-  margin-left: 16px;
+  padding: $space_md;
+  width: 100%;
   background-color: transparent !important;
+  display: block !important;
 }
 
 .sandbox-preview {
   border: 1px solid $border_light;
   min-height: 250px;
-  min-width: 900px;
-
   .sandbox-button-toolbar {
     background: $white;
     width: 100%;

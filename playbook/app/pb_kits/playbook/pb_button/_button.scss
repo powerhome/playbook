@@ -65,12 +65,19 @@ $pb_button_sizes: (
   }
 
   &.rounded {
-    padding: $space_sm;
+    padding: $space_xs;
     min-height: unset;
     background-color: transparent;
+    border-radius: $border_radius_lg;
     &:hover {
       color: $primary;
-      background-color: $secondary_action;;
+      background-color: $secondary_action;
+      [class^=pb_detail_kit][class*=color_default] {
+        color: $primary;
+      }
+      &:active {
+        color: $text_lt_default;
+      }
     }
   }
   

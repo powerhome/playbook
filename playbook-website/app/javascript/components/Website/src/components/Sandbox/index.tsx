@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Button, Detail, Icon, Flex, Tooltip } from "playbook-ui"
+import { Button, Detail, Icon, Flex, Tooltip, FlexItem } from "playbook-ui"
 import CodesandboxIcon from "../../assets/sandbox"
 import {
   SandpackLayout,
@@ -17,74 +17,67 @@ export default function Sandbox({ backgroundColor = "white" }) {
   const { code } = useActiveCode()
   const [isExpanded, setIsExpanded] = useState(false)
   const { setValue, hasCopied, onCopy } = useClipboard(code)
-  const [isOtherTooltipHovered, setIsOtherTooltipHovered] = useState(false)
   useEffect(() => {
     setValue(code)
   }, [code])
 
-  const handleOtherTooltipHover = (hoverState) => {
-    setIsOtherTooltipHovered(hoverState)
+  const [showCopyTooltip, setShowCopyTooltip] = useState(true)
+
+  const handleCopy = () => {
+    onCopy()
+    setShowCopyTooltip(true)
   }
 
   const SandboxButtons = () => {
     return (
       <Flex>
-        <span
-          onMouseEnter={() => handleOtherTooltipHover(true)}
-          onMouseLeave={() => handleOtherTooltipHover(false)}
+        <Tooltip
+          placement='top'
+          text={isExpanded ? "Hide Code" : "Show Code"}
+          zIndex={10}
         >
-          <Tooltip
-            placement='top'
-            text={isExpanded ? "Hide Code" : "Show Code"}
-            zIndex={10}
+          <Button
+            margin='xs'
+            variant='rounded'
+            onClick={() => setIsExpanded(!isExpanded)}
+            tabIndex={0}
           >
-            <Button
-              variant='rounded'
-              onClick={() => setIsExpanded(!isExpanded)}
-              tabIndex={0}
-            >
-              <Detail color='default'>
-                <Icon icon='arrows-from-line' />
-              </Detail>
-            </Button>
-          </Tooltip>
-        </span>
+            <Detail color='default'>
+              <Icon icon='arrows-from-line' />
+            </Detail>
+          </Button>
+        </Tooltip>
         <Tooltip
           placement='top'
           text={hasCopied ? "Copied!" : "Copy Code"}
           zIndex={10}
+          showTooltip={showCopyTooltip}
           delay={{
-            close: isOtherTooltipHovered ? 0 : 3000,
+            close: hasCopied ? 3000 : 0,
           }}
         >
-          <Button variant='rounded' onClick={onCopy} tabIndex={0}>
+          <Button
+            margin='xs'
+            variant='rounded'
+            onClick={handleCopy}
+            tabIndex={0}
+          >
             <Detail color='default'>
               <Icon icon='copy' />
             </Detail>
           </Button>
         </Tooltip>
 
-        <Tooltip placement='top' text={"Open in CodeSandbox"} zIndex={10}>
-          <UnstyledOpenInCodeSandboxButton
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "none",
-              border: "none",
-              padding: 0,
-              margin: 0,
-              outline: "none",
-              cursor: "pointer",
-            }}
-          >
-            <Button variant='rounded' tabIndex={0}>
-              <Detail>
-                <Icon customIcon={CodesandboxIcon()} />
-              </Detail>
-            </Button>
+        <Tooltip
+          placement='top'
+          text={"Open in Sandbox"}
+          position='fixed'
+          zIndex={10}
+        >
+          <UnstyledOpenInCodeSandboxButton className='pb_button_kit_rounded_inline_enabled rounded m_xs'>
+            <Detail>
+              <Icon customIcon={CodesandboxIcon()} />
+            </Detail>
           </UnstyledOpenInCodeSandboxButton>
         </Tooltip>
       </Flex>
@@ -97,10 +90,9 @@ export default function Sandbox({ backgroundColor = "white" }) {
       style={{
         border: "none",
         fontFamily: "Proxima Nova",
-        width: "100%",
       }}
     >
-      <Flex orientation='column'>
+      <Flex orientation='column' alignSelf='stretch'>
         <SandpackPreview
           className={`sandbox-preview ${isExpanded ? "expanded" : ""}`}
           showOpenInCodeSandbox={false}
@@ -108,6 +100,7 @@ export default function Sandbox({ backgroundColor = "white" }) {
           style={{ backgroundColor: backgroundColor }}
           actionsChildren={<SandboxButtons />}
         />
+
         {isExpanded && <SandpackCodeEditor style={{ height: "auto" }} />}
       </Flex>
     </SandpackLayout>

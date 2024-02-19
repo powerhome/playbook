@@ -1353,10 +1353,10 @@
     outvariant "1.4.0"
     static-browser-server "1.0.3"
 
-"@codesandbox/sandpack-react@^2.12.0":
-  version "2.12.0"
-  resolved "https://npm.powerapp.cloud/@codesandbox/sandpack-react/-/sandpack-react-2.12.0.tgz#35020e8a0dac80a03c10ff1c04bdda7655cfc8db"
-  integrity sha512-06o08hdyafGputxFvbPfiQVjWg4ASqQicuZwk5pgp4YfIx9ZZdCHDnVKD8RvTr/+PW41LGGANaimSuaifeNOEA==
+"@codesandbox/sandpack-react@^2.12.1":
+  version "2.12.1"
+  resolved "https://npm.powerapp.cloud/@codesandbox/sandpack-react/-/sandpack-react-2.12.1.tgz#d7e8bfdd9e85220c6443efeb6798687dad9409be"
+  integrity sha512-/xCbeO25+SHli2+VhgHw4b3QQS4bc4KQL38OBvqoRqSb5JjVsnOs+nrKG6SFNTWz8mBhbzE20K4UxhLFRXY9rw==
   dependencies:
     "@codemirror/autocomplete" "^6.4.0"
     "@codemirror/commands" "^6.1.3"
