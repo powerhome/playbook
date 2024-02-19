@@ -1,0 +1,5 @@
+As a default, the kit assumes that the dataset provided to it at first render is the complete dataset and renders the row level expansion buttons, the toggleAllExpansion buttons in the subrow headers (if any), etc based on that dataset. However, if the dev wants to set up a more complicated querying logic that for instance, runs a query on each expansion button click, then they can use the `inlineRowLoading` prop. This prop, if present, assumes that any item in the dataset that has an empty children array WILL have children even if it does not have any on first render. The kit therefore renders the correct buttons as well as adding an inline Loading state for the row with that empty children array. 
+
+In this code example, 2021 has an empty children array. Toggle it open to see the inline loading state. Once the correct data loads, this state will be replaced with the correct data rows. 
+
+This prop is set to `false` by default. 
