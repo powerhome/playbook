@@ -28,7 +28,7 @@ export const SubRowHeaderRow = ({
   table,
 }: SubRowHeaderRowProps & GlobalProps) => {
   const numberOfColumns = table.getAllFlatColumns().length
-  const canExpand = row.depth < subRowHeaders.length
+  const canExpand = row.original.children ? true : false
 
   return (
     <tr className="custom-row bg-silver">
