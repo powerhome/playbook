@@ -1,0 +1,19 @@
+[class^=pb_table] {
+  &.striped {
+    tbody {
+      tr:nth-child(odd) {
+        background-color: $bg_light;
+      }
+    }
+  }
+
+  &.dark {
+    &.striped {
+      tbody {
+        tr:nth-child(odd) {
+          background-color: $bg_dark;
+        }
+      }
+    }
+  }
+}

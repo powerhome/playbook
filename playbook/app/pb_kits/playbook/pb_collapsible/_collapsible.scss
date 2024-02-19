@@ -1,5 +1,5 @@
-@import "./tokens/colors";
-@import "./tokens/spacing";
+@import "tokens/colors";
+@import "tokens/spacing";
 
 [class^=pb_collapsible_kit] {
   padding: $space_md;

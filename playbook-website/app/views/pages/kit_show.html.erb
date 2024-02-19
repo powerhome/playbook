@@ -6,7 +6,7 @@
   <% end %>
   <%= pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: 1, margin_top: "xl" }) %>
 
-  <% if @kit === "advanced_table" %> 
+  <% if @kit_status === "beta" %> 
     <%= pb_rails("card", props: {highlight: {position: "side", color:"primary", shadow:"deep"}, margin_y: "md", padding: "sm"}) do %>
       <%= pb_rails("flex", props:{ align: "center" }) do %>
         <%= pb_rails("body", props:{color: "light"}) do %>

@@ -25,12 +25,14 @@ module Playbook
                     default: false
       prop :vertical_border, type: Playbook::Props::Boolean,
                              default: false
+      prop :striped, type: Playbook::Props::Boolean,
+                     default: false
 
       def classname
         generate_classname(
           "pb_table", "table-#{size}", single_line_class, dark_class,
           disable_hover_class, container_class, data_table_class, sticky_class, collapse_class,
-          vertical_border_class, "table-responsive-#{responsive}", separator: " "
+          vertical_border_class, striped_class, "table-responsive-#{responsive}", separator: " "
         )
       end
 
@@ -62,6 +64,10 @@ module Playbook
 
       def sticky_class
         sticky ? "sticky-header" : nil
+      end
+
+      def striped_class
+        striped ? "striped" : nil
       end
 
       def vertical_border_class

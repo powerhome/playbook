@@ -33,7 +33,7 @@ module PlaybookWebsite
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit, type, limit_examples, false, dark_mode) if pb_doc_has_kit_type?(sub_kit, type)
+            display_kits << render_pb_doc_kit(sub_kit[:name], type, limit_examples, false, dark_mode) if sub_kit[:status] != "beta" && pb_doc_has_kit_type?(sub_kit[:name], type)
           end
         elsif pb_doc_has_kit_type?(kit, type)
           display_kits << render_pb_doc_kit(kit, type, limit_examples, false, dark_mode)
@@ -45,8 +45,7 @@ module PlaybookWebsite
 
     # rubocop:disable Naming/AccessorMethodName
     def get_kits(_type = "rails")
-      aggregate_kits || []
-      # Filter kits that have at least one component compatible with the type
+      aggregate_kits_with_status || []
     end
 
     def get_kits_pb_website
@@ -57,12 +56,10 @@ module PlaybookWebsite
 
     # rubocop:disable Style/OptionalBooleanParameter
     def render_pb_doc_kit(kit, type, limit_examples, code = true, dark_mode = false)
-      if kit != "advanced_table"
-        title = pb_doc_render_clickable_title(kit, type)
-        ui = raw("<div class='pb--docItem-ui'>
-            #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
-        title + ui
-      end
+      title = pb_doc_render_clickable_title(kit, type)
+      ui = raw("<div class='pb--docItem-ui'>
+          #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
+      title + ui
     end
   # rubocop:enable Style/OptionalBooleanParameter
 
