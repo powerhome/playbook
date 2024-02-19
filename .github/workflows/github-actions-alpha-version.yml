@@ -58,17 +58,19 @@ jobs:
           gem install bundler
           bundle
           bin/rails pb_release:action[${{env.new_ruby_alpha_version}}]
-      - name: Version Up, Distribute and Publish
+      - name: Version Up, Distribute and Publish (NPM)
         run: |
           yarn install
           yarn version --new-version ${{ env.new_npm_alpha_version }}
           bundle
           yarn release
           npm pack
+          npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_alpha_version }}.tgz --tag alpha
+      - name: Version Up, Distribute and Publish (RubyGems)
+        run: |
           gem build playbook_ui.gemspec
           gem build lib/playbook_ui_docs.gemspec
           rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
-          npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_alpha_version }}.tgz --tag alpha
           echo "${{ env.new_ruby_alpha_version }}"
           gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
           gem push playbook_ui_docs-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
