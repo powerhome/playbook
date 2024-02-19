@@ -53,6 +53,7 @@ export const TableBody = ({
           const rowHasNoChildren = row.original.children && !row.original.children.length ? true : false
           const numberOfColumns = table.getAllFlatColumns().length
           const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && (row.depth < columnDefinitions[0].cellAccessors?.length)
+          const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren))
 
           return (
             <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -68,7 +69,7 @@ export const TableBody = ({
               )}
 
               <tr
-                  className={`${isExpandable ? "bg-silver" : "bg-white"} ${
+                  className={`${rowBackground ? "bg-silver" : "bg-white"} ${
                     row.depth > 0 ? `depth-sub-row-${row.depth}` : ""
                   }`}
                   id={`${row.index}-${row.id}-${row.depth}-row`}
