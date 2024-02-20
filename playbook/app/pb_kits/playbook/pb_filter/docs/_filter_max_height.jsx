@@ -18,6 +18,7 @@ const FilterMaxHeight = (props) => {
           'City': 'San Francisco',
         }}
         maxHeight="360px"
+        minWidth="360px"
         results={1}
         sortOptions={{
           popularity: 'Popularity',

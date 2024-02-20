@@ -8,7 +8,7 @@ type FilterProps =
       double?: boolean,
     })
 
-const Filter = ({ 
+const Filter = ({
   double = false,
   ...templateProps
   }: FilterProps): React.ReactElement => {

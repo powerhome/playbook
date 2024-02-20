@@ -49,29 +49,6 @@ module Playbook
           ""
         end
       end
-
-      def popover_props
-        if template != "sort_only"
-          {
-            max_height: max_height,
-            min_width: min_width,
-            close_on_click: "outside",
-            trigger_element_id: "filter#{id}",
-            tooltip_id: "filter-form#{id}",
-            position: placement,
-          }
-        elsif template != "filter_only"
-          {
-            max_height: max_height,
-            classname: "pb_filter_sort_menu",
-            close_on_click: "outside",
-            trigger_element_id: "sort-button#{id}",
-            tooltip_id: "sort-filter-btn-tooltip#{id}",
-            position: placement,
-            padding: "none",
-          }
-        end
-      end
     end
   end
 end

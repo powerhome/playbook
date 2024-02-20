@@ -15,7 +15,7 @@ import Flex from '../../pb_flex/_flex'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
 
 export type FilterDoubleProps = {
-  children?: React.ReactChild[] | React.ReactChild, 
+  children?: React.ReactChild[] | React.ReactChild,
   filters?: FilterDescription,
   onSortChange?: SortingChangeCallback,
   results?: number,
@@ -31,6 +31,7 @@ const FilterDouble = ({
   results,
   children,
   dark,
+  maxHeight,
   minWidth,
   placement,
   ...bgProps
@@ -45,6 +46,7 @@ const FilterDouble = ({
     >
       <FiltersPopover
           dark={dark}
+          maxHeight={maxHeight}
           minWidth={minWidth}
           placement={placement}
       >
