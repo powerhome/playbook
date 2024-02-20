@@ -6,7 +6,7 @@
   <% end %>
   <%= pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: 1, margin_top: "xl" }) %>
 
-  <% if @kit_status === "beta" %> 
+  <% if @kit_status === "beta" %>
     <%= pb_rails("card", props: {highlight: {position: "side", color:"primary", shadow:"deep"}, margin_y: "md", padding: "sm"}) do %>
       <%= pb_rails("flex", props:{ align: "center" }) do %>
         <%= pb_rails("body", props:{color: "light"}) do %>
@@ -127,9 +127,6 @@
     <% elsif (action_name == "kit_show_react") %>
       <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
         <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm", margin_top: "sm" }) %>
-        <%= react_component("AvailableProps",
-          source: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "react").tsx_source )
-        %>
       </div>
     <% end %>
 </div>
