@@ -17,24 +17,20 @@ environment.loaders.insert('javascript', {
 environment.config.merge({
   module: {
     rules: [
-      // Existing rule for .mjs files
       {
         test: /\.mjs$/,
         include: /node_modules/,
         type: 'javascript/auto',
       },
-      // Adding babel-loader for JS and MJS files
       {
         test: /\.(js|mjs)$/,
-        exclude: /node_modules/, // You might want to process some node_modules with Babel, adjust as needed
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: [
               '@babel/preset-env',
-              // Add '@babel/preset-react' here if you're working with React
             ],
-            // You can add more Babel plugins here if needed
           },
         },
       },
