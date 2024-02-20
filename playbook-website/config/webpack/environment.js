@@ -1,38 +1,54 @@
-import React, { useState } from 'react'
-import { Card, Nav, SectionSeparator, NavItem } from 'playbook-ui'
-import GlobalProps from './globalProps'
-import KitProps from './kitProps'
+const path = require('path')
 
-const reactDocgen = require('react-docgen')
+const { environment } = require('@rails/webpacker')
 
-const AvailableProps = ({ source, darkMode }) => {
-  const globalProps = ['aria', 'className', 'data', 'dark', 'id']
-  let showKitPropsTable = true, filteredProps = []
+environment.loaders.insert('javascript', {
+  test: /\.(js|jsx)$/,
+  use: {
+    loader: 'babel-loader',
+    options: {
+      cacheDirectory: true,
+    },
+  },
+  include: path.resolve(__dirname, '../../app'),
+})
 
-  try {
-    const documentation = reactDocgen.parse(source)
-    filteredProps = Object.entries(documentation.props).filter(([key, value]) => !globalProps.includes(key))
-  } catch (e) {
-    showKitPropsTable = false
-  }
+// Allow ESM modules
+environment.config.merge({
+  module: {
+    rules: [
+      // Existing rule for .mjs files
+      {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+      },
+      // Adding babel-loader for JS and MJS files
+      {
+        test: /\.(js|mjs)$/,
+        exclude: /node_modules/, // You might want to process some node_modules with Babel, adjust as needed
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              // Add '@babel/preset-react' here if you're working with React
+            ],
+            // You can add more Babel plugins here if needed
+          },
+        },
+      },
+    ],
+  },
+});
 
-  const [showKitTab, setShowKitTab] = useState(showKitPropsTable)
+environment.config.merge({
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: { chunks: 'all' },
+    removeAvailableModules: false,
+    removeEmptyChunks: true,
+  },
+})
 
-  return (
-    <>
-      <Card padding="none" dark={darkMode}>
-        <Card.Body padding="sm">
-          <Nav orientation="horizontal" variant="subtle" dark={darkMode}>
-            {showKitPropsTable && <NavItem text="Kit Props" active={showKitTab} onClick={() => setShowKitTab(true)} cursor="pointer" dark={darkMode}/>}
-            <NavItem text="Global Props" active={!showKitTab || !showKitPropsTable} onClick={() => setShowKitTab(false)} cursor="pointer" dark={darkMode} />
-          </Nav>
-        </Card.Body>
-        <SectionSeparator  dark={darkMode} />
-        {showKitTab && <KitProps kitPropsValues={filteredProps} darkMode={darkMode} />}
-        {!showKitTab && <GlobalProps darkMode={darkMode}/>}
-      </Card>
-    </>
-  )
-}
-
-export default AvailableProps
+module.exports = environment
