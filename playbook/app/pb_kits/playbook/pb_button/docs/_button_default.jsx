@@ -5,30 +5,30 @@ import Sandbox from "./sandbox.tsx"
 const ButtonDefault = (props) => (
   <div>
     <Button
-      variant='rounded'
-      onClick={() => alert("button clicked!")}
-      tabIndex={0}
-      {...props}
+        onClick={() => alert("button clicked!")}
+        tabIndex={0}
+        variant='rounded'
+        {...props}
     >
       <Detail color='default'>
         <Icon icon='arrows-from-line' />
       </Detail>
     </Button>
     <Button
-      variant='rounded'
-      onClick={() => alert("button clicked!")}
-      tabIndex={0}
-      {...props}
+        onClick={() => alert("button clicked!")}
+        tabIndex={0}
+        variant='rounded'
+        {...props}
     >
       <Detail color='default'>
         <Icon icon='copy' />
       </Detail>
     </Button>
     <Button
-      variant='rounded'
-      onClick={() => alert("button clicked!")}
-      tabIndex={0}
-      {...props}
+        onClick={() => alert("button clicked!")}
+        tabIndex={0}
+        variant='rounded'
+        {...props}
     >
       <Detail>
         <Icon customIcon={Sandbox()} />
