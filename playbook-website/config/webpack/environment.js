@@ -36,7 +36,7 @@ environment.config.merge({
       },
     ],
   },
-});
+})
 
 environment.config.merge({
   optimization: {
