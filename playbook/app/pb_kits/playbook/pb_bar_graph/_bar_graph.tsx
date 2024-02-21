@@ -19,6 +19,7 @@ type BarGraphProps = {
   yAxisMax: number;
   chartData: { name: string; data: number[] }[];
   className?: string;
+  customOptions?: Partial<Highcharts.Options>;
   id: string;
   pointStart: number;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -48,6 +49,7 @@ const BarGraph = ({
   className = "pb_bar_graph",
   colors,
   htmlOptions = {},
+  customOptions = {},
   id,
   pointStart,
   subTitle,
@@ -128,7 +130,7 @@ const BarGraph = ({
   const [options, setOptions] = useState({});
 
   useEffect(() => {
-    setOptions({ ...staticOptions });
+    setOptions({ ...staticOptions, ...customOptions });
   }, [chartData]);
 
   return (
