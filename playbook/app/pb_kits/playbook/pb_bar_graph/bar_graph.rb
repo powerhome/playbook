@@ -9,6 +9,7 @@ module Playbook
       prop :axis_title
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
+      prop :custom_options, default: {}
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
                          default: "vertical"
@@ -39,7 +40,7 @@ module Playbook
         orientation == "horizontal" ? "bar" : "column"
       end
 
-      def chart_options
+      def standard_options
         {
           align: align,
           id: id,
@@ -63,6 +64,10 @@ module Playbook
           x: x,
           y: y,
         }
+      end
+
+      def chart_options
+        standard_options.deep_merge(custom_options)
       end
 
       def classname

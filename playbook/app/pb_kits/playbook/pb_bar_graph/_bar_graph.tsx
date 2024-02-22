@@ -7,6 +7,7 @@ import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
+import { merge } from 'lodash'
 
 import classnames from "classnames";
 
@@ -130,8 +131,10 @@ const BarGraph = ({
   const [options, setOptions] = useState({});
 
   useEffect(() => {
-    setOptions({ ...staticOptions, ...customOptions });
+    setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
+
+  console.log(options, "options inside playbook")
 
   return (
     <HighchartsReact
