@@ -134,8 +134,6 @@ const BarGraph = ({
     setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
-  console.log(options, "options inside playbook")
-
   return (
     <HighchartsReact
         containerProps={{
