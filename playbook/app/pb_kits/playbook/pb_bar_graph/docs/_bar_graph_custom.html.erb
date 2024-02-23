@@ -17,11 +17,22 @@
 
 <% custom_options = {
     customOptions: {
-          subtitle: {
+        subtitle: {
             text: "Overwritten subtitle",
             style: {
-                color: "red",
-                fontSize: 20
+                color: "red"
+            }
+        },
+        xAxis: {
+            categories: [
+                '<i class="far fa-apple-whole"></i> Jan',
+                '<i class="far fa-strawberry"></i> Feb',
+                '<i class="far fa-lemon"></i> Mar',
+                '<i class="far fa-pear"></i> Apr',
+                '<i class="far fa-peach"></i> May'
+            ],
+            labels: {
+                useHTML: true,
             }
         }
     }
@@ -32,7 +43,6 @@
     chart_data: data,
     id: "bar-default",
     y_axis_min: 0,
-    x_axis_categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
     subtitle: 'Subtitle to replace',
     title: 'Bar Graph with Custom Overrides',
     custom_options: custom_options

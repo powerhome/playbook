@@ -21,7 +21,10 @@ const chartData = [{
 
 const barGraphOptions = {
   subtitle: {
-    text: "Overwritten subtitle"
+    text: "Overwritten subtitle",
+    style: {
+      color: "red"
+    }
   },
   xAxis: {
       labels: {
@@ -29,7 +32,7 @@ const barGraphOptions = {
           formatter: function() {
               switch (this.value) {
                   case 'Jan':
-                      return `<i class="fa-regular fa-apple-whole"></i> ${this.value}`
+                      return `<i class="far fa-apple-whole"></i> ${this.value}`
                   case 'Feb':
                       return `<i class="far fa-strawberry"></i> ${this.value}`
                   case 'Mar':
