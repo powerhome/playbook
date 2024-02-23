@@ -13,7 +13,8 @@
 
 .sandbox-preview {
   border: 1px solid $border_light;
-  min-height: 250px;
+
+
   .sandbox-button-toolbar {
     background: $white;
     width: 100%;
@@ -29,6 +30,7 @@
 
   .sp-preview-container {
     background: transparent;
+    display: block;
   }
 
   .sp-loading:before {

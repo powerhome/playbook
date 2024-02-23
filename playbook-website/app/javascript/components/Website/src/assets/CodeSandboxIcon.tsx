@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function CodesandboxIcon() {
+export default function CodeSandboxIcon() {
   return (
     <svg
       width='13'

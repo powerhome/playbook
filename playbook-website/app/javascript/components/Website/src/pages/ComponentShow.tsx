@@ -53,6 +53,7 @@ export default function ComponentShow() {
             "sp-preview-actions": "sandbox-button-toolbar",
             "sp-preview-iframe": "sandbox-preview-iframe",
           },
+       
         }}
       >
         <Sandbox />
