@@ -1,9 +1,8 @@
-const entryPoint = `import React from "react";
+const sandpackIndexFile = `import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import "./styles.scss";
 import "playbook-ui/dist/playbook.css";
-
 
 
 
@@ -16,4 +15,4 @@ ReactDOM.render(
 );
 `
 
-export default entryPoint
+export default sandpackIndexFile

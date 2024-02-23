@@ -1,4 +1,4 @@
-const Styles = `
+const sandpackResetStyles = `
 @import "playbook-ui/dist/tokens/typography";
 @import "playbook-ui/dist/tokens/colors";
 
@@ -41,4 +41,4 @@ a {
   color: $primary;
 }`
 
-export default Styles
+export default sandpackResetStyles

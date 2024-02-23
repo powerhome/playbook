@@ -3,8 +3,8 @@ import React from "react"
 import Sandbox from "../components/Sandbox"
 import { SandpackProvider } from "@codesandbox/sandpack-react"
 import { useLoaderData } from "react-router-dom"
-import entryPoint from "./entryPoint"
-import Styles from "./Styles"
+import sandpackIndexFile from "./sandpackIndexFile"
+import sandpackResetStyles from "./sandpackResetStyles"
 
 export default function ComponentShow() {
   const { examples } = useLoaderData()
@@ -29,11 +29,11 @@ export default function ComponentShow() {
             code: code,
           },
           "/index.js": {
-            code: entryPoint,
+            code: sandpackIndexFile,
             hidden: true,
           },
           "styles.scss": {
-            code: Styles,
+            code: sandpackResetStyles,
             hidden: true,
           },
         }}
@@ -47,7 +47,6 @@ export default function ComponentShow() {
         options={{
           externalResources: [
             "https://kit.fontawesome.com/098a1cd4d5.js",
-            "https://unpkg.com/playbook-ui@latest/dist/playbook.css",
           ],
           classes: {
             "sp-preview-actions": "sandbox-button-toolbar",
