@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import classnames from "classnames";
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import Table from "../pb_table/_table";
 import {
@@ -28,10 +28,12 @@ type AdvancedTableProps = {
   className?: string;
   columnDefinitions: DataType[];
   data?: { [key: string]: string };
-  enableToggleExpansion?: "all" | "header";
+  enableToggleExpansion?: "all" | "header" | "none";
   expandedControl?: DataType;
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   initialLoadingRowsCount?: number;
+  inlineRowLoading?: boolean;
   loading?: boolean | string;
   onRowToggleClick?: (arg: Row<DataType>) => void;
   onToggleExpansionClick?: (arg: Row<DataType>) => void;
@@ -51,8 +53,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     data = {},
     enableToggleExpansion = "header",
     expandedControl,
+    htmlOptions = {},
     id,
     initialLoadingRowsCount = 10,
+    inlineRowLoading = false,
     loading,
     onRowToggleClick,
     onToggleExpansionClick,
@@ -104,7 +108,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           const depthAccessor = cellAccessors[row.depth - 1]; // Adjust index for depth
           const accessorValue = rowData[depthAccessor];
           return accessorValue ? (
-            <CustomCell row={row} 
+            <CustomCell
+                onRowToggleClick={onRowToggleClick}
+                row={row} 
                 value={accessorValue} 
             />
           ) : (
@@ -195,6 +201,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_advanced_table"),
     globalProps(props),
@@ -204,19 +211,22 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   return (
     <div {...ariaProps} 
         {...dataProps} 
+        {...htmlProps}
         className={classes} 
         id={id}
     >
       <AdvancedTableContext.Provider
           value={{
-            table,
-            handleExpandOrCollapse,
-            loading,
+            columnDefinitions,
             enableToggleExpansion,
-            toggleExpansionIcon,
-            setExpanded,
             expanded,
+            handleExpandOrCollapse,
+            inlineRowLoading,
+            loading,
+            setExpanded,
             sortControl,
+            table,
+            toggleExpansionIcon,
           }}
       >
         <Table

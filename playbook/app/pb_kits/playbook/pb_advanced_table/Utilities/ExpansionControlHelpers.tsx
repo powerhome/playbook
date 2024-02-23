@@ -24,10 +24,9 @@ export const updateExpandAndCollapseState = (
   // Update isExpansionConsistent variable
   for (const row of rows) {
     if (
-      row.getCanExpand() &&
-      (targetParent === undefined
+      targetParent === undefined
         ? row.depth === 0
-        : targetParent === row.parentId)
+        : targetParent === row.parentId
     ) {
       areRowsExpanded.add(row.getIsExpanded())
       if (areRowsExpanded.size > 1) {
@@ -48,7 +47,7 @@ export const updateExpandAndCollapseState = (
     })
   } else {
     for (const row of rows) {
-      if (row.getCanExpand() && targetParent === row.parentId) {
+      if (targetParent === row.parentId) {
         updateExpandedRows[row.id] = !isExpansionConsistent
           ? true
           : !row.getIsExpanded()
