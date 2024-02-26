@@ -1,59 +1,33 @@
 import React from 'react'
 import { Icon } from '../../'
 
+// import Icons as config from 'power-icons'
 const config = {
-  icon: (
-    <svg viewBox="0 -256 1792 1792"
+  moon: (
+    <svg
+        ariaHidden="true"
+        focusable="false"
+        role="img"
+        viewBox="0 0 512 512"
         xmlns="http://www.w3.org/2000/svg"
     >
-      <g transform="matrix(1,0,0,-1,53.152542,1217.0847)">
-          <path d="m 384,64 q 0,26 -19,45 -19,19 -45,19 -26,0 -45,-19 -19,-19 -19,-45 0,-26 19,-45 19,-19 45,-19 26,0 45,19 19,19 19,45 z m 644,420 -682,-682 q -37,-37 -90,-37 -52,0 -91,37 L 59,-90 Q 21,-54 21,0 21,53 59,91 L 740,772 Q 779,674 854.5,598.5 930,523 1028,484 z m 634,435 q 0,-39 -23,-106 Q 1592,679 1474.5,595.5 1357,512 1216,512 1031,512 899.5,643.5 768,775 768,960 q 0,185 131.5,316.5 131.5,131.5 316.5,131.5 58,0 121.5,-16.5 63.5,-16.5 107.5,-46.5 16,-11 16,-28 0,-17 -16,-28 L 1152,1120 V 896 l 193,-107 q 5,3 79,48.5 74,45.5 135.5,81 61.5,35.5 70.5,35.5 15,0 23.5,-10 8.5,-10 8.5,-25 z" />
-      </g>
+      <path
+          d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 7.1 5.8 12 12 12 2.4 0 4.9-.7 7.1-2.4L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64zm16 352c0 8.8-7.2 16-16 16H288l-12.8 9.6L208 428v-60H64c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16h384c8.8 0 16 7.2 16 16v288zM336 184h-56v-56c0-8.8-7.2-16-16-16h-16c-8.8 0-16 7.2-16 16v56h-56c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h56v56c0 8.8 7.2 16 16 16h16c8.8 0 16-7.2 16-16v-56h56c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16z"
+          fill="currentColor"
+      />
     </svg>
   ),
 }
 
 const IconCustom = (props) => {
   return (
-    <React.Fragment>
-      <p>
-        <Icon
-            icon={config.icon}
-            {...props}
-        />
-      </p>
-      <p>
-        <Icon
-            icon={config.icon}
-            rotation={90}
-            size="2x"
-            {...props}
-        />
-      </p>
-      <p>
-        <Icon
-            icon={config.icon}
-            size="3x"
-            spin
-            {...props}
-        />
-      </p>
-      <p>
-        <Icon
-            icon={config.icon}
-            size="5x"
-            {...props}
-        />
-      </p>
-      <p>
-        <Icon
-            flip="horizontal"
-            icon={config.icon}
-            size="5x"
-            {...props}
-        />
-      </p>
-    </React.Fragment>
+    <div>
+      <Icon
+          customIcon={config.moon}
+          size="7x"
+          {...props}
+      />
+    </div>
   )
 }
 

@@ -38,7 +38,7 @@ module Playbook
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
 
-      def valid_emoji?
+      def valid_emoji(icon)
         emoji_regex = /\p{Emoji}/
         emoji_regex.match?(icon)
       end
@@ -79,32 +79,18 @@ module Playbook
         )
       end
 
-      def asset_path
-        return unless Rails.application.config.respond_to?(:icon_path)
-        return unless Dir.entries(Rails.application.config.icon_path).include? "#{icon}.svg"
-
-        Rails.root.join(Rails.application.config.icon_path, "#{icon}.svg")
-      end
-
-      def render_svg
-        doc = Nokogiri::XML(URI.open(asset_path || icon || custom_icon)) # rubocop:disable Security/Open
-        svg = doc.at_css "svg"
-        svg["class"] = "pb_custom_icon " + object.custom_icon_classname
-        svg["height"] = "auto"
-        svg["width"] = "auto"
-        doc.at_css("path")["fill"] = "currentColor"
-        raw doc
-      end
-
-      def is_svg?
-        (icon || custom_icon.to_s).include?(".svg") || asset_path.present?
+      def render_svg(path)
+        if File.extname(path) == ".svg"
+          doc = Nokogiri::XML(URI.open(path)) # rubocop:disable Security/Open
+          svg = doc.at_css "svg"
+          svg["class"] = "pb_custom_icon " + object.custom_icon_classname
+          raw doc
+        else
+          raise("Custom icon must be an svg. Please check your path and file type.")
+        end
       end
 
     private
-
-      def svg_size
-        size.nil? ? "1x" : size
-      end
 
       def border_class
         border ? "fa-border" : nil
