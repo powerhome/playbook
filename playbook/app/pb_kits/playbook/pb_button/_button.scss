@@ -63,23 +63,6 @@ $pb_button_sizes: (
     padding: ($space_xxs + 1) ($space_sm - 4);
     color: $text_lt_lighter;
   }
-
-  &.rounded {
-    padding: $space_xs;
-    min-height: unset;
-    background-color: transparent;
-    border-radius: $border_radius_lg;
-    &:hover {
-      color: $primary;
-      background-color: $secondary_action;
-      [class^=pb_detail_kit][class*=color_default] {
-        color: $primary;
-      }
-      &:active {
-        color: $text_lt_default;
-      }
-    }
-  }
   
 
   // Disabled =================

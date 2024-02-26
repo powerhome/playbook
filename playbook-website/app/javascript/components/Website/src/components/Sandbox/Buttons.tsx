@@ -2,6 +2,7 @@ import React from "react"
 import { Button, Detail, Icon, Flex, Tooltip } from "playbook-ui"
 import { UnstyledOpenInCodeSandboxButton } from "@codesandbox/sandpack-react"
 import CodeSandboxIcon from "../../assets/CodeSandboxIcon"
+import "./styles.scss"
 export const Buttons = ({
   isExpanded,
   setIsExpanded,
@@ -18,7 +19,7 @@ export const Buttons = ({
       >
         <Button
           margin='xs'
-          variant='rounded'
+          className='rounded'
           onClick={() => setIsExpanded(!isExpanded)}
           tabIndex={0}
         >
@@ -36,7 +37,7 @@ export const Buttons = ({
           close: hasCopied ? 3000 : 0,
         }}
       >
-        <Button margin='xs' variant='rounded' onClick={handleCopy} tabIndex={0}>
+        <Button margin='xs' className='rounded' onClick={handleCopy} tabIndex={0}>
           <Detail color='default'>
             <Icon icon='copy' />
           </Detail>
@@ -49,7 +50,7 @@ export const Buttons = ({
         position='fixed'
         zIndex={10}
       >
-        <UnstyledOpenInCodeSandboxButton className='pb_button_kit_rounded_inline_enabled rounded m_xs'>
+        <UnstyledOpenInCodeSandboxButton className='pb_button_kit_inline_enabled rounded m_xs'>
           <Detail>
             <Icon customIcon={CodeSandboxIcon()} />
           </Detail>

@@ -4,13 +4,12 @@ import Sandbox from "../components/Sandbox"
 import { SandpackProvider } from "@codesandbox/sandpack-react"
 import { useLoaderData } from "react-router-dom"
 import sandpackIndexFile from "./sandpackIndexFile"
-import sandpackResetStyles from "./sandpackResetStyles"
 
 export default function ComponentShow() {
   const { examples } = useLoaderData()
 
   const source = examples[0].source
-  
+
   const code = source
     .replace(
       /import (\w+) from ('|")\.\.\/_(\w+)('|")/g,
@@ -32,10 +31,6 @@ export default function ComponentShow() {
             code: sandpackIndexFile,
             hidden: true,
           },
-          "styles.scss": {
-            code: sandpackResetStyles,
-            hidden: true,
-          },
         }}
         template='react'
         customSetup={{
@@ -45,14 +40,11 @@ export default function ComponentShow() {
           },
         }}
         options={{
-          externalResources: [
-            "https://kit.fontawesome.com/098a1cd4d5.js",
-          ],
+          externalResources: ["https://kit.fontawesome.com/098a1cd4d5.js"],
           classes: {
             "sp-preview-actions": "sandbox-button-toolbar",
             "sp-preview-iframe": "sandbox-preview-iframe",
           },
-       
         }}
       >
         <Sandbox />

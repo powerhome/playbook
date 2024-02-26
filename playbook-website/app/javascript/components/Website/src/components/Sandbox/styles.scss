@@ -3,6 +3,7 @@
 @import "playbook-ui/dist/tokens/line_height";
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/spacing";
+@import "playbook-ui/dist/tokens/border_radius";
 
 .sandbox-layout {
   padding: $space_md;
@@ -14,13 +15,33 @@
 .sandbox-preview {
   border: 1px solid $border_light;
 
-
   .sandbox-button-toolbar {
     background: $white;
     width: 100%;
     bottom: 0 !important;
     justify-content: end;
     position: unset;
+
+    .rounded {
+      padding: $space_xs;
+      min-height: unset;
+      background-color: transparent;
+      border-radius: $border_radius_lg;
+
+      &:hover {
+        color: $primary;
+        background-color: $secondary_action;
+
+        [class^=pb_detail_kit][class*=color_default] {
+          color: $primary;
+        }
+
+        &:active {
+          color: $text_lt_default;
+        }
+      }
+    }
+
   }
 
   &.expanded .sandbox-button-toolbar {

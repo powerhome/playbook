@@ -36,7 +36,7 @@ type ButtonPropTypes = {
   type?: 'inline' | null,
   htmlType?: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
-  variant?: 'primary' | 'secondary' | 'link'| 'reaction' | 'rounded',
+  variant?: 'primary' | 'secondary' | 'link'| 'reaction',
   wrapperClass?: string,
 } & GlobalProps
 
@@ -62,7 +62,6 @@ const buttonClassName = (props: ButtonPropTypes) => {
   className += `${size !== null ? ` size_${size}` : ''}`
   className += `${variant === 'reaction' && !isValidEmoji(icon) ? ` reaction_default` : ''}`
   className += `${variant === 'reaction' && highlight ? ` active` : ''}`
-  className += `${variant === 'rounded' ? ` rounded` : ''}`
 
   return className
 }
