@@ -24,7 +24,6 @@ $pb_button_sizes: (
     }
   }
 
-
   // Variants =================
   &[class*=_primary]  {
     @include pb_button_primary;
@@ -63,7 +62,6 @@ $pb_button_sizes: (
     padding: ($space_xxs + 1) ($space_sm - 4);
     color: $text_lt_lighter;
   }
-  
 
   // Disabled =================
   &[class*=_disabled]  {
