@@ -48,6 +48,8 @@ module.exports = function (api) {
     ].filter(Boolean),
     plugins: [
       'babel-plugin-macros',
+      '@babel/plugin-proposal-nullish-coalescing-operator',
+      '@babel/plugin-proposal-optional-chaining',
       '@babel/plugin-syntax-dynamic-import',
       isTestEnv && 'babel-plugin-dynamic-import-node',
       '@babel/plugin-transform-destructuring',
