@@ -7,6 +7,7 @@ import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
+import { merge } from 'lodash'
 
 import classnames from "classnames";
 
@@ -19,6 +20,7 @@ type BarGraphProps = {
   yAxisMax: number;
   chartData: { name: string; data: number[] }[];
   className?: string;
+  customOptions?: Partial<Highcharts.Options>;
   id: string;
   pointStart: number;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -48,6 +50,7 @@ const BarGraph = ({
   className = "pb_bar_graph",
   colors,
   htmlOptions = {},
+  customOptions = {},
   id,
   pointStart,
   subTitle,
@@ -128,7 +131,7 @@ const BarGraph = ({
   const [options, setOptions] = useState({});
 
   useEffect(() => {
-    setOptions({ ...staticOptions });
+    setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
   return (

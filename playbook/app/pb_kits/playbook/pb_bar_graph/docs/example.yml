@@ -8,6 +8,7 @@ examples:
   - bar_graph_height: Height
   - bar_graph_spline: Spline
   - bar_graph_colors: Color Overrides
+  - bar_graph_custom: Custom Overrides
 
 
   react:
@@ -18,3 +19,4 @@ examples:
   - bar_graph_height: Height
   - bar_graph_spline: Spline
   - bar_graph_colors: Color Overrides
+  - bar_graph_custom: Custom Overrides

@@ -5,3 +5,4 @@ export { default as BarGraphLegendNonClickable } from './_bar_graph_legend_non_c
 export { default as BarGraphHeight } from './_bar_graph_height.jsx'
 export { default as BarGraphSpline } from './_bar_graph_spline.jsx'
 export { default as BarGraphColors } from './_bar_graph_colors.jsx'
+export { default as BarGraphCustom } from './_bar_graph_custom.jsx'
