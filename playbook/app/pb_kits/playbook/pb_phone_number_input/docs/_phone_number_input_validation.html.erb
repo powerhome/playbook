@@ -3,12 +3,10 @@
     <%= pb_rails("button", props: {html_type: "submit", text: "Save Phone Number"}) %>
 </form>
 
-<% content_for(:pb_js) do %>
-    <%= javascript_tag do %>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelector('#example-form-validation').addEventListener('submit', function (e) {
-                if (e.target.querySelectorAll('[error]:not([error=""])').length > 0) e.preventDefault();
-            })
+<%= javascript_tag do %>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('#example-form-validation').addEventListener('submit', function (e) {
+            if (e.target.querySelectorAll('[error]:not([error=""])').length > 0) e.preventDefault();
         })
-    <% end %>
+    })
 <% end %>

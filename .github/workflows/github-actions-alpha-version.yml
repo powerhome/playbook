@@ -23,9 +23,9 @@ jobs:
           echo "//registry.npmjs.org/:_authToken="$(echo -n '${{ secrets.NPM_TOKEN }}')"" >> ~/.npmrc
           echo "//npm.powerapp.cloud/:_auth="$(echo -n 'gh-actions:${{ secrets.POWERHOME_NPM_REGISTRY_PASSWORD }}' | base64)"" >> ~/.npmrc
           echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 20.11.0
       - name: Ruby Setup
         uses: ruby/setup-ruby@v1
         with:
@@ -33,7 +33,7 @@ jobs:
       - name: Python Setup
         uses: actions/setup-python@v4 
         with: 
-          python-version: '3.x'
+          python-version: '3.9'
       - name: Set Git Config
         run: |
           git config --local user.name "${{ github.actor }}"

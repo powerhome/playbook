@@ -42,6 +42,36 @@ const MOCK_DATA = [
   },
 ];
 
+const MOCK_DATA_LOADING = [
+  {
+    year: "2021",
+    quarter: null,
+    month: null,
+    day: null,
+    newEnrollments: "20",
+    scheduledMeetings: "10",
+    children: [],
+  },
+  {
+    year: "2022",
+    quarter: null,
+    month: null,
+    day: null,
+    newEnrollments: "20",
+    scheduledMeetings: "10",
+    children: [
+      {
+        year: "2022",
+        quarter: "Q1",
+        month: null,
+        day: null,
+        newEnrollments: "2",
+        scheduledMeetings: "35",
+      },
+    ],
+  },
+];
+
 const columnDefinitions = [
   {
     accessor: "year",
@@ -343,3 +373,57 @@ test("sort button exists and sorts column data", () => {
   const row2 = kit.getElementsByTagName('tr')[2]
   expect(row2.id).toBe("0-0-0-row")
 }); 
+
+test("Generates Table.Header default + custom classname", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    >
+      <AdvancedTable.Header className="custom-header" />
+      <AdvancedTable.Body />
+
+    </AdvancedTable>
+  );
+
+  const kit = screen.getByTestId(testId);
+  const tableHeader = kit.querySelector('thead')
+  expect(tableHeader).toHaveClass('pb_advanced_table_header custom-header')
+});
+
+test("Generates Table.Body default + custom classname", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    >
+      <AdvancedTable.Header />
+      <AdvancedTable.Body className="custom-body-classname"/>
+
+    </AdvancedTable>
+  );
+
+  const kit = screen.getByTestId(testId);
+  const tableHeader = kit.querySelector('tbody')
+  expect(tableHeader).toHaveClass('pb_advanced_table_body custom-body-classname')
+});
+
+test("inlineRowLoading prop renders inline loading if true", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        inlineRowLoading
+        tableData={MOCK_DATA_LOADING}
+    />
+  );
+
+  const kit = screen.getByTestId(testId);
+  const rowButton = kit.querySelector(".gray-icon.expand-toggle-icon")
+  expect(rowButton).toBeInTheDocument()
+  rowButton.click()
+  const inlineLoading = kit.querySelector(".fa-spinner")
+  expect(inlineLoading).toBeInTheDocument()
+});

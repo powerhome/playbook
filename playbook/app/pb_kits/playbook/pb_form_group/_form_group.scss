@@ -57,6 +57,10 @@
     margin-bottom: 16px;
   }
 
+  &[class*=rails] > [class^=pb_date_picker_kit] {
+    margin-bottom: 0px;
+  }
+
   & > [class^=pb_date_picker_kit]:not(:last-child) {
     .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .flatpickr-wrapper {
       border-bottom-right-radius: 0;

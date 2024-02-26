@@ -1,3 +1,21 @@
+# 13.17.0
+##### February 2, 2024
+
+List of changes:
+
+**New Kits:**
+
+- New Kit: Advanced Table [\#3084](https://github.com/powerhome/playbook/pull/3084) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Move Icon Page [\#3072](https://github.com/powerhome/playbook/pull/3072) ([markdoeswork](https://github.com/markdoeswork))
+- Linting Implementation: Kits K - O [\#3046](https://github.com/powerhome/playbook/pull/3046) ([jasperfurniss](https://github.com/jasperfurniss))
+- Upgrade React-Select [\#3030](https://github.com/powerhome/playbook/pull/3030) ([dhhuynh2](https://github.com/dhhuynh2))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.16.0...13.17.0)
+
 # 13.16.0
 ##### January 22, 2024
 
@@ -21,7 +39,7 @@ List of changes:
 
 
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/13.16.0...13.16.0)
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.15.0...13.16.0)
 
 
 

@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 import Flex from "../../pb_flex/_flex"
 import Caption from "../../pb_caption/_caption"
 import { Row, Table } from "@tanstack/react-table"
 
+import AdvancedTableContext from "../Context/AdvancedTableContext";
 import { ToggleIconButton } from "./ToggleIconButton"
 import { renderCollapsibleTrail } from "./CollapsibleTrail"
 
@@ -12,7 +13,7 @@ import { GlobalProps } from "../../utilities/globalProps"
 
 interface SubRowHeaderRowProps {
   collapsibleTrail?: boolean
-  enableToggleExpansion?: "all" | "header"
+  enableToggleExpansion?: "all" | "header" | "none"
   onClick: (row: Row<DataType>) => void
   row: Row<DataType>
   subRowHeaders?: string[]
@@ -27,7 +28,11 @@ export const SubRowHeaderRow = ({
   subRowHeaders,
   table,
 }: SubRowHeaderRowProps & GlobalProps) => {
+  const { inlineRowLoading } = useContext(AdvancedTableContext);
+
   const numberOfColumns = table.getAllFlatColumns().length
+  const rowHasChildren = row.original.children ? true : false
+  const canExpand = inlineRowLoading ? rowHasChildren : row.getCanExpand()
 
   return (
     <tr className="custom-row bg-silver">
@@ -42,13 +47,13 @@ export const SubRowHeaderRow = ({
           <Flex align="center" 
               columnGap="xs"
           >
-            {enableToggleExpansion === "all" && row.getCanExpand() ? (
+            {enableToggleExpansion === "all" && canExpand ? (
               <ToggleIconButton onClick={onClick} 
                   row={row}
               />
             ) : null}
             <Caption
-                marginLeft={row.getCanExpand() ? "none" : "xs"}
+                marginLeft={canExpand ? "none" : "xs"}
                 text={subRowHeaders[row.depth - 1]}
             />
           </Flex>

@@ -7,3 +7,4 @@ export { default as AdvancedTableSubrowHeaders } from './_advanced_table_subrow_
 export { default as AdvancedTableCollapsibleTrail } from './_advanced_table_collapsible_trail.jsx'
 export { default as AdvancedTableTableOptions } from './_advanced_table_table_options.jsx'
 export { default as AdvancedTableTableProps } from './_advanced_table_table_props.jsx'
+export { default as AdvancedTableInlineRowLoading } from './_advanced_table_inline_row_loading.jsx'
