@@ -87,6 +87,7 @@ For more complex data visualizations or diverse design needs, Playbook offers 21
 |----------|-------------|------|
 | Image | DEFAULT <br/> $text_lt_default <br/> $text_dk_default | Primary text color for all general use cases |
 
+
 ## Color Accessibility Standards
 
 Accessibility refers to the practice of designing digital products in a way that ensures they can be used and enjoyed by all individuals.
