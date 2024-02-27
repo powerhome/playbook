@@ -18,6 +18,8 @@ Other colors within our design system are used sparingly and intentionally to co
 
 These decisions creates a balanced UI that fosters user understanding without unnecessary distractions.
 
+![Color Guideline Image](https://github.com/powerhome/playbook/assets/89551222/e1cc85e8-2582-4662-a71d-f63867cc02e1) 
+
 ---
 
 ## Color Palette & Usage: Best Practices
