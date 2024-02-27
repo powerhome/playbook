@@ -1,13 +1,11 @@
-# Color Guidelines
-
 For all our Color Tokens refer to [Colors](https://playbook.powerapp.cloud/visual_guidelines/colors) in [Tokens & Guidelines](https://playbook.powerapp.cloud/visual_guidelines)
 
 #### Index
-Color Palette & Usage: Best Practices
-1. Text Colors
-   * Status Colors
-   * Interface Colors
-   * Data Visualization Colors
+1. Color Palette & Usage: Best Practices
+2. Text Colors
+3. Status Colors
+4. Interface Colors
+5. Data Visualization Colors
 2. Color Accessibility Standards
 
 As a design system primarily used for business software applications, we use color to enhance user comprehension, not as ornament. 
@@ -87,6 +85,7 @@ For more complex data visualizations or diverse design needs, Playbook offers 21
 |----------|-------------|------|
 | Image | DEFAULT <br/> $text_lt_default <br/> $text_dk_default | Primary text color for all general use cases |
 
+---
 
 ## Color Accessibility Standards
 
@@ -99,8 +98,8 @@ WCAG guidelines are a set of international standards developed by the World Wide
 
 The AA level WCAG guidelines for graphical objects and large text is a contrast ratio of at least 3:1 and  4.5:1 for normal text. 
 
-Our text colors are chosen to meet these guidelines, with a contrast ratio of at least 4.5:1 for normal text.
-We try to ensure that text and graphical elements have sufficient contrast against their background to be easily distinguishable.
+* Our text colors are chosen to meet these guidelines, with a contrast ratio of at least 4.5:1 for normal text.
+* We try to ensure that text and graphical elements have sufficient contrast against their background to be easily distinguishable.
 
 #### Exceptions and Recommendations
 
