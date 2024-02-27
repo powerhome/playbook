@@ -1,3 +1,27 @@
+# 13.18.0
+##### February 17, 2024
+
+List of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table Jest Tests [\#3128](https://github.com/powerhome/playbook/pull/3128) ([nidaqg](https://github.com/nidaqg))
+- Adding Striped Option to Table [\#3127](https://github.com/powerhome/playbook/pull/3127) ([carloslimasd](https://github.com/carloslimasd))
+- Add Status Flag to Menu.yml [\#3119](https://github.com/powerhome/playbook/pull/3119) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table Docs [\#3102](https://github.com/powerhome/playbook/pull/3102) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fix Popover Test [\#3139](https://github.com/powerhome/playbook/pull/3139) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix Buttons Malfunctioning In a Popover [\#3135](https://github.com/powerhome/playbook/pull/3135) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Improvements:**
+
+- Upgrade Nodejs to V20 Lts [\#3085](https://github.com/powerhome/playbook/pull/3085) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.17.0...13.18.0)
+
 # 13.17.0
 ##### February 2, 2024
 
