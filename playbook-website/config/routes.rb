@@ -42,7 +42,6 @@ Rails.application.routes.draw do
 
   # Samples
   get "samples", to: "samples#index"
-  get "samples/icons", to: "samples#icons"
   get "samples/:name(/:type)", defaults: { type: "rails" },
                                to: "samples#show",
                                as: "sample_show"
