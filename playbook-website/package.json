@@ -13,7 +13,7 @@
     "@powerhome/playbook-icons": "0.0.1-alpha.2",
     "@powerhome/playbook-icons-react": "0.0.1-alpha.2",
     "@rails/webpacker": "5.4.3",
-    "@svgr/webpack": "5.5.0",
+    "@svgr/webpack": "8.1.0",
     "@tiptap/extension-document": "^2.1.12",
     "@tiptap/extension-highlight": "^2.0.3",
     "@tiptap/extension-horizontal-rule": "^2.0.3",
