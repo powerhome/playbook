@@ -11,11 +11,7 @@ module Playbook
                   values: ["lg", "xs", "sm", "1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", nil],
                   default: nil
       def data
-        puts Hash(prop(:data))
-        puts "markmark"
-        xx = Hash(prop(:data)).merge(collapsible_main: true)
-        puts xx
-        xx
+        Hash(prop(:data)).merge(collapsible_main: true)
       end
 
       def classname
