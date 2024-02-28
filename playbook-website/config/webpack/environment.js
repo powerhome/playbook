@@ -54,8 +54,6 @@ environment.loaders.append('image', {
   ],
 })
 
-console.log(environment.loaders)
-
 environment.config.merge({
   optimization: {
     runtimeChunk: 'single',
