@@ -10,7 +10,7 @@ const AvailableProps = ({ source, darkMode }) => {
   let showKitPropsTable = true, filteredProps = []
 
   try {
-    const documentation = reactDocgen.parse(source)
+    const documentation = reactDocgen.parse(source)[0]
     filteredProps = Object.entries(documentation.props).filter(([key, value]) => !globalProps.includes(key))
   } catch (e) {
     showKitPropsTable = false
