@@ -22,13 +22,14 @@ export const CustomCell = ({
   row,
   value,
 }: CustomCellProps & GlobalProps) => {
-  const { setExpanded, expanded } = useContext(AdvancedTableContext);
-  const RowWithoutChildren = row.originalSubRows === undefined;
+  const { setExpanded, expanded, inlineRowLoading } = useContext(AdvancedTableContext);
 
   const handleOnExpand = (row: Row<DataType>) => {
     onRowToggleClick && onRowToggleClick(row);
     setExpanded({ ...expanded, [row.id]: !row.getIsExpanded() });
   };
+  const RowHasChildren = row.original.children ? true : false
+  const renderButton = inlineRowLoading ? RowHasChildren : row.getCanExpand()
 
   return (
     <div style={{ paddingLeft: `${row.depth * 1.25}em` }}>
@@ -36,7 +37,7 @@ export const CustomCell = ({
           columnGap="xs"
           orientation="row"
       >
-        {!RowWithoutChildren ? (
+        {renderButton ? (
           <button
               className="gray-icon expand-toggle-icon"
               onClick={() => handleOnExpand(row)}
@@ -53,7 +54,7 @@ export const CustomCell = ({
             )}
           </button>
         ) : null}
-        <FlexItem paddingLeft={!RowWithoutChildren ? "none" : "xs"}>
+        <FlexItem paddingLeft={renderButton? "none" : "xs"}>
           {row.depth === 0 ? getValue() : value}
         </FlexItem>
       </Flex>
