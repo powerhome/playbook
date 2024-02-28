@@ -14,6 +14,7 @@ import '../site_styles/main.scss'
 
 // CopyContent
 import copyContent from '../components/copyCode'
+
 window.copyContent = copyContent
 
 import DarkModeToggle from '../components/Website/src/components/DarkModeToggle'
