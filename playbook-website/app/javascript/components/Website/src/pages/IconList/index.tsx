@@ -1,21 +1,27 @@
 import React from "react"
 
-import { Hero } from "../../components/Hero"
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
-import { Title, Flex, FlexItem, Card } from "playbook-ui"
-import Roofing from "@powerhome/playbook-icons/icons/roofing.svg"
-import Powergon from "@powerhome/playbook-icons/icons/powergon.svg"
-import Nitro from "@powerhome/playbook-icons/icons/nitro.svg"
-import ChevronDown from "@powerhome/playbook-icons/icons/chevron-down.svg"
-import Times from "@powerhome/playbook-icons/icons/times.svg"
-import Bars from "@powerhome/playbook-icons/icons/bars.svg"
-import Calendar from "@powerhome/playbook-icons/icons/calendar.svg"
-import Filter from "@powerhome/playbook-icons/icons/filter.svg"
-import Edit from "@powerhome/playbook-icons/icons/edit.svg"
-import Trash from "@powerhome/playbook-icons/icons/trash.svg"
-import Check from "@powerhome/playbook-icons/icons/check.svg"
-import Plus from "@powerhome/playbook-icons/icons/plus.svg"
-import Search from "@powerhome/playbook-icons/icons/search.svg"
+import { Hero } from "../../components/Hero"
+import { Roofing, Powergon, Nitro, ChevronDown, Times, Bars, Calendar, Filter, Edit, Trash, Check, Plus, Search} from '@powerhome/playbook-icons-react'
+import { Body, Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
+
+const pbIcons = {
+  roofing: Roofing,
+  nitro: Nitro,
+  powergon: Powergon,
+  chevrondown: ChevronDown,
+  times: Times,
+  bars: Bars,
+  calendar: Calendar,
+  filter: Filter,
+  edit: Edit,
+  trash: Trash,
+  check: Check,
+  plus: Plus,
+  search: Search
+}
+
+window.PB_ICONS = pbIcons
 
 export default function IconList() {
 
@@ -153,3 +159,4 @@ export default function IconList() {
     </>
   )
 }
+
