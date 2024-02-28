@@ -90,6 +90,9 @@ module Playbook
         doc = Nokogiri::XML(URI.open(asset_path || icon || custom_icon)) # rubocop:disable Security/Open
         svg = doc.at_css "svg"
         svg["class"] = "pb_custom_icon " + object.custom_icon_classname
+        svg["id"] = object.id
+        svg["data"] = object.data
+        svg["aria"] = object.aria
         svg["height"] = "auto"
         svg["width"] = "auto"
         doc.at_css("path")["fill"] = "currentColor"
