@@ -2,9 +2,9 @@
   &.table-sm,
   &.table-md,
   &.table-lg {
-    tbody {
-      tr {
-        td {
+    tbody, .tbody {
+      tr, .tr {
+        td, .td {
           font-size: $default-font-size;
         }
       }

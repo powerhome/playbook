@@ -1,5 +1,6 @@
 examples:
   rails:
+    - table_div: Div
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
@@ -26,6 +27,7 @@ examples:
     - table_striped: Striped Table
 
   react:
+    - table_div: Div
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large

@@ -6,9 +6,9 @@
     background-color: unset;
     background: unset;
 
-    thead {
-      tr {
-        th {
+    thead, .thead {
+      tr, .tr {
+        th, .th {
           text-align: left;
         }
       }

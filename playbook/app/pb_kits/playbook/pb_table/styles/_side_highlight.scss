@@ -8,11 +8,11 @@ $pb_table_row_kit_side_highlight_colors: map-merge(map-merge($status_colors, $pr
 }
 
 [class^=pb_table] {
-  tbody {
+  tbody, .tbody {
     [class^=pb_table_row_kit] {
       @each $color_name, $color_value in $pb_table_row_kit_side_highlight_colors {
         &[class*=_side_highlight_#{$color_name}] {
-          td {
+          td, .td {
             &:first-child {
               @include pb_table_row_kit_side_highlight($color_value);
             }

@@ -4,9 +4,9 @@
     max-width: 100vw;
     table-layout: fixed;
 
-    tbody {
-      tr {
-        td {
+    tbody, .tbody {
+      tr, .tr {
+        td, .td {
           white-space: nowrap;
           text-overflow: ellipsis;
 
@@ -20,7 +20,7 @@
             display: block !important;
           }
 
-          br {
+          br, .br {
             content:' ' !important;
 
             &::after {

@@ -1,13 +1,12 @@
 [class^=pb_table] {
   &.vertical-border {
-    td,
-    th {
+    td, th, .td, .th {
       border-right: 1px solid $border_light !important;
     }
 
     @media screen and (min-width: $screen-xs-min) {
-      tr:hover {
-        td:last-child {
+      tr:hover, .tr:hover {
+        td:last-child, .td:last-child {
           border-right-color: darken($border_light, 10%) !important;
         }
       }

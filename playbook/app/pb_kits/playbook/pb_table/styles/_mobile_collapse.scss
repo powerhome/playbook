@@ -10,21 +10,21 @@
       width: 100%;
       background: none !important;
 
-      thead {
-        tr {
+      thead, .thead {
+        tr, .tr {
           left: $offscreen;
           position: absolute;
           top: $offscreen;
 
-          th {
+          th, .th {
             display: block;
             visibility: visible;
           }
         }
       }
-      tbody {
-        tr {
-          td {
+      tbody, .tbody {
+        tr, .tr {
+          td, .td {
             display: block;
             visibility: visible;
             border-left-width: 1px !important;
@@ -63,7 +63,7 @@
           }
 
           &:first-child {
-            td {
+            td, .td {
               &:first-child {
                 margin-top: $space-xs !important;
               }
@@ -74,9 +74,9 @@
       &.table-card {
         background: none !important;
 
-        tbody {
-          tr {
-            td {
+        tbody, .tbody {
+          tr, .tr {
+            td, .td {
               background: $white !important;
               border-left-width: 1px !important;
               border-right-width: 1px !important;
@@ -98,8 +98,8 @@
       }
       @media (hover:hover) {
         &:hover {
-          tbody {
-            tr {
+          tbody, .tbody {
+            tr, .tr {
               box-shadow: 0 0 0 $white !important;
             }
           }
@@ -108,9 +108,9 @@
       // reset the first and last to normalize
       @each $name, $value in $cell-pad-list {
         &.#{$name} {
-          tbody {
-            tr {
-              td {
+          tbody, .tbody {
+            tr, .tr {
+              td, .td {
                 &:first-child,
                 &:last-child {
                   padding: $value $cell-gutter !important;

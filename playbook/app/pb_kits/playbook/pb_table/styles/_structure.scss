@@ -4,9 +4,9 @@
   @each $name, $value in $cell-pad-list {
     &.#{$name} {
       width: 100%;
-      thead {
-        tr {
-          th {
+      thead, .thead {
+        tr, .tr {
+          th, .th {
             padding: $cell-pad-md $cell-gutter;
 
             &:first-child {
@@ -18,9 +18,9 @@
           }
         }
       }
-      tbody {
-        tr {
-          td {
+      tbody, .tbody {
+        tr, .tr {
+          td, .td {
             border-color: $border_light;
             border-style: solid;
             border-width: 0 0 1px;

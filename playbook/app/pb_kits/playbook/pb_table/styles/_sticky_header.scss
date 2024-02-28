@@ -2,7 +2,7 @@
 
 [class^="pb_table"] {
   &.sticky-header {
-    thead {
+    thead, .thead {
       background: $white;
       position: sticky;
       top: 0;
@@ -12,7 +12,7 @@
 
   &.dark {
     &.sticky-header {
-      thead {
+      thead, .thead {
         background: $bg_dark;
         position: sticky;
         top: 0;

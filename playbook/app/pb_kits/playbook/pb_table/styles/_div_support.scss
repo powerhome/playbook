@@ -1,0 +1,22 @@
+[class^=pb_table] {
+  .table {
+    display: table;
+    width: 100%;
+  }
+
+  .thead {
+    display: table-header-group;
+  }
+
+  .tbody {
+    display: table-row-group;
+  }
+
+  .tr {
+    display: table-row;
+  }
+
+  .th, .td {
+    display: table-cell;
+  }
+}

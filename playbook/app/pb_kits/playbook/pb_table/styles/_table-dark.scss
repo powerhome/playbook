@@ -7,22 +7,22 @@ $table-dark-card-bg: $card_dark;
   &.table-md,
   &.table-lg {
     &.table-dark {
-      thead {
-        tr {
+      thead, .thead {
+        tr, .tr {
           border-color: $border_dark !important;
 
-          th {
+          th, .th {
             border-color: $border_dark !important;
             color: $text_dk_light;
           }
         }
       }
-      tbody {
-        tr {
+      tbody, .tbody {
+        tr, .tr {
           border-color: $border_dark;
           transition: none !important;
 
-          td {
+          td, .td {
             border-color: $border_dark !important;
             color: $white;
 
@@ -31,7 +31,7 @@ $table-dark-card-bg: $card_dark;
             }
           }
           &:first-child {
-            td {
+            td, .td {
               border-top-width: 0 !important;
             }
           }
@@ -54,9 +54,9 @@ $table-dark-card-bg: $card_dark;
         &.table-dark {
           background: none !important;
 
-          tbody {
-            tr {
-              td {
+          tbody, .tbody {
+            tr, .tr {
+              td, .td {
                 background: $table-dark-card-bg !important;
               }
             }
@@ -64,15 +64,15 @@ $table-dark-card-bg: $card_dark;
         }
       }
       &.table-dark {
-        tbody {
-          tr {
-            td {
+        tbody, .tbody {
+          tr, .tr {
+            td, .td {
               &:first-child {
                 border-top-color: $border_dark !important;
               }
             }
             &:first-child {
-              td {
+              td, .td {
                 border-top-width: 1px !important;
               }
             }
