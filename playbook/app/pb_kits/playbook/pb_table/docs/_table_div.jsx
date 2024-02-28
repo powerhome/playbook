@@ -5,7 +5,6 @@ const TableDiv = (props) => {
   return (
     <Table
         size="sm"
-        striped
         {...props}
     >
       <div className="thead">
