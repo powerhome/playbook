@@ -39,7 +39,7 @@ module PlaybookWebsite
           display_kits << render_pb_doc_kit(kit, type, limit_examples, false, dark_mode)
         end
       end
-      raw("<div class='pb--docItem'>" + display_kits.join("</div><div class='pb--docItem'>") + "</div>")
+      raw("<div class='pb--docItem'>" + display_kits.first(75).join("</div><div class='pb--docItem'>") + "</div>")
     end
     # rubocop:enable Style/StringConcatenation
 
