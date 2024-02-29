@@ -10,7 +10,7 @@ $text_align_values: (
 );
 
 [class^=pb_table] {
-  thead, .thead {
+  thead, .pb_table_thead {
     [class^=pb_table_header_kit] {
       @each $align_name, $align_value in $text_align_values {
         &[class*=_align_#{$align_name}] {
@@ -32,7 +32,7 @@ $text_align_values: (
 }
 
 [class^=pb_table] {
-  thead, .thead {
+  thead, .pb_table_thead {
     [class^=pb_th_active] {
       color: $primary !important;
     }

@@ -1,12 +1,19 @@
 @import "../../tokens/colors";
 
 [class^=pb_table] {
+  display: table;
+
   @each $name, $value in $cell-pad-list {
     &.#{$name} {
       width: 100%;
-      thead, .thead {
-        tr, .tr {
-          th, .th {
+      thead, .pb_table_thead {
+        display: table-header-group;
+
+        tr, .pb_table_tr {
+          display: table-row;
+
+          th, .pb_table_th {
+            display: table-cell;
             padding: $cell-pad-md $cell-gutter;
 
             &:first-child {
@@ -18,9 +25,14 @@
           }
         }
       }
-      tbody, .tbody {
-        tr, .tr {
-          td, .td {
+      tbody, .pb_table_tbody {
+        display: table-row-group;
+
+        tr, .pb_table_tr {
+          display: table-row;
+
+          td, .pb_table_td {
+            display: table-cell;
             border-color: $border_light;
             border-style: solid;
             border-width: 0 0 1px;

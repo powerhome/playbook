@@ -5,38 +5,39 @@ const TableDiv = (props) => {
   return (
     <Table
         size="sm"
+        tag="div"
         {...props}
     >
-      <div className="thead">
-        <div className="tr">
-          <div className="th">{'Column 1'}</div>
-          <div className="th">{'Column 2'}</div>
-          <div className="th">{'Column 3'}</div>
-          <div className="th">{'Column 4'}</div>
-          <div className="th">{'Column 5'}</div>
+      <div className="pb_table_thead">
+        <div className="pb_table_tr">
+          <div className="pb_table_th">{'Column 1'}</div>
+          <div className="pb_table_th">{'Column 2'}</div>
+          <div className="pb_table_th">{'Column 3'}</div>
+          <div className="pb_table_th">{'Column 4'}</div>
+          <div className="pb_table_th">{'Column 5'}</div>
         </div>
       </div>
-      <div className="tbody">
-        <div className="tr">
-          <div className="td">{'Value 1'}</div>
-          <div className="td">{'Value 2'}</div>
-          <div className="td">{'Value 3'}</div>
-          <div className="td">{'Value 4'}</div>
-          <div className="td">{'Value 5'}</div>
+      <div className="pb_table_tbody">
+        <div className="pb_table_tr">
+          <div className="pb_table_td">{'Value 1'}</div>
+          <div className="pb_table_td">{'Value 2'}</div>
+          <div className="pb_table_td">{'Value 3'}</div>
+          <div className="pb_table_td">{'Value 4'}</div>
+          <div className="pb_table_td">{'Value 5'}</div>
         </div>
-        <div className="tr">
-          <div className="td">{'Value 1'}</div>
-          <div className="td">{'Value 2'}</div>
-          <div className="td">{'Value 3'}</div>
-          <div className="td">{'Value 4'}</div>
-          <div className="td">{'Value 5'}</div>
+        <div className="pb_table_tr">
+          <div className="pb_table_td">{'Value 1'}</div>
+          <div className="pb_table_td">{'Value 2'}</div>
+          <div className="pb_table_td">{'Value 3'}</div>
+          <div className="pb_table_td">{'Value 4'}</div>
+          <div className="pb_table_td">{'Value 5'}</div>
         </div>
-        <div className="tr">
-          <div className="td">{'Value 1'}</div>
-          <div className="td">{'Value 2'}</div>
-          <div className="td">{'Value 3'}</div>
-          <div className="td">{'Value 4'}</div>
-          <div className="td">{'Value 5'}</div>
+        <div className="pb_table_tr">
+          <div className="pb_table_td">{'Value 1'}</div>
+          <div className="pb_table_td">{'Value 2'}</div>
+          <div className="pb_table_td">{'Value 3'}</div>
+          <div className="pb_table_td">{'Value 4'}</div>
+          <div className="pb_table_td">{'Value 5'}</div>
         </div>
       </div>
     </Table>

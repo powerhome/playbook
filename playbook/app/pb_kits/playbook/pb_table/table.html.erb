@@ -13,9 +13,7 @@
       class: object.classname,
       data: object.data,
       id: object.id) do %>
-      <%= content_tag(:div, class: "div-table") do %>
-        <%= content.presence %>
-      <% end %>
+      <%= content.presence %>
     <% end %>
   <% end %>
 <% end %>
