@@ -45,16 +45,27 @@ By applying these text colors, designers can create intuitive interfaces that ef
 
 | Text Colors | Name & Token                                                                        | Contrast Ratio      | Usage                                                                                    |
 | ----------- | ----------------------------------------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------- |
-| Image       | <small> DEFAULT <br/> $text_lt_default <br/> $text_dk_default</small>               | 14:1 <br/> 19.73:1  | Primary text color for all general use cases.                                            |
-| Image       | <small> LIGHT <br/> $text_lt_light <br/> $text_dk_light</small>                     | 4.54:1 <br/> 7.23:1 | Best for captions, secondary text and labels.                                            |
-| Image       | <small> LIGHTER <br/> $text_lt_lighter <br/> $text_dk_lighter</small>               | 1.16:1 <br/> 3.71:1 | Used for low priority text content not crucial for the user.                             |
-| Image       | <small> PRIMARY ACTION <br/> $primary_action <br/> $active_dark</small>             | 6.49:1 <br/> 5.29:1 | Link text color to indicate interactivity.                                               |
-| Image       | <small> SUCCESS SMALL <br/> $$text_lt_success_sm <br/> $$text_dk_success_sm</small> | 5.04:1 <br/> 9.11:1 | Used for regular or thin weight text under 16pt when a success state should be conveyed. |
-| Image       | <small> ERROR <br/> $error <br/> $error_dark </small>                               | 5.26:1 <br/> 5.96:1 | Can be applied to any text size when an error state should be conveyed.                  |
+| ![text default](https://github.com/powerhome/playbook/assets/89551222/98823fdc-96d8-4359-bf6d-37f83e17d010) | <small> DEFAULT <br/> $text_lt_default <br/> $text_dk_default</small>               | 14:1 <br/> 19.73:1  | Primary text color for all general use cases.                                            |
+| ![text light](https://github.com/powerhome/playbook/assets/89551222/9cfc38ac-e9a0-49ff-8974-39f6997241b8) | <small> LIGHT <br/> $text_lt_light <br/> $text_dk_light</small>                     | 4.54:1 <br/> 7.23:1 | Best for captions, secondary text and labels.                                            |
+| ![text lighter](https://github.com/powerhome/playbook/assets/89551222/c41a3e62-2bdc-49eb-8336-1bf3c9b8d7fb) | <small> LIGHTER <br/> $text_lt_lighter <br/> $text_dk_lighter</small>               | 1.16:1 <br/> 3.71:1 | Used for low priority text content not crucial for the user.                             |
+| ![text link](https://github.com/powerhome/playbook/assets/89551222/342eb35d-9e53-4d84-8ffc-245bac270378) | <small> PRIMARY ACTION <br/> $primary_action <br/> $active_dark</small>             | 6.49:1 <br/> 5.29:1 | Link text color to indicate interactivity.                                               |
+| ![text success](https://github.com/powerhome/playbook/assets/89551222/c4856675-f22c-47cf-9cba-3bc1570aff1e) | <small> SUCCESS SMALL <br/> $$text_lt_success_sm <br/> $$text_dk_success_sm</small> | 5.04:1 <br/> 9.11:1 | Used for regular or thin weight text under 16pt when a success state should be conveyed. |
+| ![text error](https://github.com/powerhome/playbook/assets/89551222/64fae88e-92a5-44ad-aaa6-515b0a340781) | <small> ERROR <br/> $error <br/> $error_dark </small>                               | 5.26:1 <br/> 5.96:1 | Can be applied to any text size when an error state should be conveyed.                  |
 
 #### Status Colors
 
 Status colors quickly convey different states and messages that provide users with vital system feedback. These colors can be used to indicate the successful completion of a task, caution and warn when an error has occurred, or highlight informative notifications. Playbook offers six main status colors, complemented by five subtle status colors for backgrounds, creating a cohesive system that guides user interactions and ensures clear communication throughout the interface.
+![status warning](https://github.com/powerhome/playbook/assets/89551222/b0da050f-bddf-4f66-b5d2-f66aa94e410c)
+![status warning subtle](https://github.com/powerhome/playbook/assets/89551222/2834f7d4-23ae-467c-ba64-cc89749598e9)
+![status success](https://github.com/powerhome/playbook/assets/89551222/b9460ada-534c-4c22-bb05-ce9209db4b67)
+![status success subtle](https://github.com/powerhome/playbook/assets/89551222/c50baca4-d68a-485a-a2e5-2fca4a30a140)
+![status primary](https://github.com/powerhome/playbook/assets/89551222/930b063e-f8f9-4683-aa38-8cbf7c7f45b6)
+![status neutral](https://github.com/powerhome/playbook/assets/89551222/2ca2d5b1-f959-4cc8-b33e-cf23d62d2245)
+![status neutral subtle](https://github.com/powerhome/playbook/assets/89551222/4835d501-4f08-4b89-8eff-5d89faaf2caf)
+![status info](https://github.com/powerhome/playbook/assets/89551222/abcb2c7c-ac4d-4750-b6d3-93b6d0f5c8a6)
+![status info subtle](https://github.com/powerhome/playbook/assets/89551222/87bbfe96-062a-4e0c-a386-fb1fc82c9eb9)
+![status error](https://github.com/powerhome/playbook/assets/89551222/6e835fca-5356-4110-bfaa-f5ef902d425a)
+![status error subtle](https://github.com/powerhome/playbook/assets/89551222/e3092044-43cf-4766-a5d5-5b475a76d170)
 
 | Status Colors | Name & Token                                          | Contrast Ratio | Usage                                                                               |
 | ------------- | ----------------------------------------------------- | :------------: | ----------------------------------------------------------------------------------- |
@@ -79,6 +90,13 @@ Playbook’s primary blue color is used as a main or accent color to show active
 Playbook primarily uses either a light or white background color. They can be used to differentiate elements on the page, with white elements on a white or light background. Do not stack elements of the same color on top of each other, and ideally no background light elements taking majority space on a white background.
 
 Our $border_lt border color is used as a way to delineate space such as in kits like our card as a border our Section Separator and Line separator for lists and Nav items. We also utilize our shadow color with our shadow props to help differentiate objects and create visual hierarchy.
+![Interface shadow](https://github.com/powerhome/playbook/assets/89551222/b9b712d4-7178-4990-9f07-5a74a80f7971)
+![Interface secondary](https://github.com/powerhome/playbook/assets/89551222/2d06f413-2e6e-4029-80be-5ce68577bae8)
+![Interface Primary](https://github.com/powerhome/playbook/assets/89551222/a7bb3262-8b75-489c-942e-74e7c8969501)
+![Interface focus input](https://github.com/powerhome/playbook/assets/89551222/c666ee85-6c40-438a-8982-4a2eba7a8387)
+![Interface card](https://github.com/powerhome/playbook/assets/89551222/da3544e5-e3a8-483a-b31c-089ac5e75b67)
+![Interface border](https://github.com/powerhome/playbook/assets/89551222/12eae32a-386f-422b-a9b6-fe3665f325e5)
+![Interface background](https://github.com/powerhome/playbook/assets/89551222/d4951749-801b-4756-91c8-7862f07db8d5)
 
 | Interface Layout Colors | Name & Token                                                   |   Contrast Ratio    | Usage                                                                                                  |
 | ----------------------- | -------------------------------------------------------------- | :-----------------: | ------------------------------------------------------------------------------------------------------ |
@@ -93,6 +111,11 @@ Our $border_lt border color is used as a way to delineate space such as in kits 
 #### Data Visualization and Additional Palettes
 
 In data visualization, color plays a crucial role in conveying insights clearly and effectively. Playbook offers a diverse color palette designed to enhance the clarity and impact of graphics, graphs, and diagrams. Each color was selected with intentionality to ensure high contrast for easy comprehension.
+
+![Product Highlight](https://github.com/powerhome/playbook/assets/89551222/43b5012c-c27d-4587-9e72-5fff35785c82)
+![Product Background](https://github.com/powerhome/playbook/assets/89551222/9729ae41-c614-4436-a79d-c2962e804bde)
+![Data colors](https://github.com/powerhome/playbook/assets/89551222/bffda6f9-cffe-42d4-9925-3bcb66cfbc20)
+![Category colors](https://github.com/powerhome/playbook/assets/89551222/52804810-8f1b-43ec-bf4b-b82ad4c6a548)
 
 #### Data Colors
 
