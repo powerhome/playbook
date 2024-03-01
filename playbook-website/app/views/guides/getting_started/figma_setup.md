@@ -35,4 +35,5 @@ Playbook utilizes [Font Awesome 6 Pro](https://fontawesome.com/icons) for its ic
 
 ### Updates
 
-The playbook team periodically updates the library. Check back on the [library page](https://www.figma.com/file/Zj4FIeaa9fyMn2LcuL15hG/Playbook-Design-System-Library?type=design&node-id=2835%3A3797&mode=design&t=IULi1xCo6qxrxM2H-1) in Figma to see our change log and make sure to keep your files updated.
+The playbook team periodically updates the library. Check back on the [library page](https://www.figma.com/community/file/1320084191991515570/playbook-design-system
+) in Figma to see our change log and make sure to keep your files updated.
