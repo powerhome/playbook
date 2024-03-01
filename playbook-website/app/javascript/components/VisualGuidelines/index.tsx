@@ -78,8 +78,8 @@ const VisualGuidelines = ({
         return <Overflow example={examples.overflow_jsx} 
                          tokensExample={examples.overflow_token} />
       case "truncate":
-        return <Truncate example={examples.overflow_jsx}
-                         tokensExample={examples.overflow_token} />
+        return <Truncate example={examples.truncate_jsx} />
+                         
 
       default:
         return <Colors/>;
