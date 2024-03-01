@@ -1,6 +1,7 @@
 examples:
   rails:
     - table_div: Div
+    - table_with_subcomponents: Table with Sub Components
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
