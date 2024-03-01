@@ -17,12 +17,12 @@ For all our Color Tokens refer to [Colors](https://playbook.powerapp.cloud/visua
 
 <br/>
 
-<div style="display: flex">
-<p style="padding-right: 80px">
+<div class="color-guidelines">
+<p>
 As a design system primarily used for business software applications, we use color to enhance user comprehension, not as ornament.
 <br/>
 <br/>
-Our design system components use neutrals and muted tones with pops of our primary blue to create a clear hierarchy.
+Our design system components use neutrals and muted tones with pops of our primary blue to create a sclear hierarchy.
 <br/>
 <br/>
 Other colors within our design system are used sparingly and intentionally to communicate system feedback.
