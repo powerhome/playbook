@@ -6,7 +6,7 @@ description: Figma offers a 1:1 match to our open-source platform, offering comp
 
 Playbook seamlessly integrates with Figma, providing a 1:1 match to our open-source platform. The library offers meticulously crafted components with adjustable properties, allowing designers to quickly build out complex designs straight out of the box.
 
-![Button](https://github.com/powerhome/playbook/assets/146777111/00b493fc-02d4-435d-ae6c-df3c664d0e89)
+![Button](https://github.com/powerhome/playbook/assets/146777111/621b1b1d-37ce-4904-86fc-36e9ee1205b3)
 
 
 1. **Go to the Playbook Design System on the [community page](https://www.figma.com/community/file/1320084191991515570/playbook-design-system) and add it to your team. Make sure to add the library to individual projects.**  
@@ -20,7 +20,8 @@ Playbook seamlessly integrates with Figma, providing a 1:1 match to our open-sou
 
 This library allows designers to quickly build and customize UI. Every component created makes use of Figma’s advanced features like auto-layout, properties, and nested instances, ensuring precise design quality and efficiency. With this, components are instantly ready to use, with all variants included and available without the need to detach instances. In addition, global variables, typography styles, and color tokens allow for quick customizability throughout the entire library.
 
-![Figma](https://github.com/powerhome/playbook/assets/146777111/23198546-1a7f-4f11-84c0-f2d9a824cd81)
+![figma](https://github.com/powerhome/playbook/assets/146777111/d3e634b4-1b10-46d9-a14b-4f471ddf0752)
+
 
 
 ### Dependencies
