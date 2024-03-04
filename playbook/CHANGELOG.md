@@ -1,3 +1,33 @@
+# 🌳 Explore Data Depths with the New Advanced Table Component in Playbook!
+
+##### February 27, 2024
+
+![13 9 Banner](https://github.com/powerhome/playbook/assets/9158723/e60df47f-4896-4959-ba33-d449f586846b)
+
+Explore depths of nested data effortlessly. This latest addition to Playbook's design system brings clarity and control, transforming complex tables into intuitive insights.
+
+
+**Kit Enhancements:**
+
+- Bargraph Customoptions Prop [\#3169](https://github.com/powerhome/playbook/pull/3169) ([dhhuynh2](https://github.com/dhhuynh2))
+- Fix Filter Dropdown Height Exceeding Page Height [\#3159](https://github.com/powerhome/playbook/pull/3159) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Advanced Table Final Fixes [\#3138](https://github.com/powerhome/playbook/pull/3138) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fixed Rails Kit Form Group Datepicker [\#3165](https://github.com/powerhome/playbook/pull/3165) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Sandbox for Examples [\#3137](https://github.com/powerhome/playbook/pull/3137) ([jasperfurniss](https://github.com/jasperfurniss))
+- Gh Release Workflow Fixes [\#3160](https://github.com/powerhome/playbook/pull/3160) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Upgrade Alpha Script's Node Version [\#3153](https://github.com/powerhome/playbook/pull/3153) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.18.0...13.19.0)
+
+
 # 13.18.0
 ##### February 17, 2024
 
