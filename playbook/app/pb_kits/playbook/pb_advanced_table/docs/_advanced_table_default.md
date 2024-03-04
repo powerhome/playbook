@@ -8,7 +8,7 @@ For a visual of the data structure needed for `tableData`, see [here](https://gi
 
 ### columnDefinitions
 
-`columnDefinitions` maps to the columns prop on the Tanstack table. Column definitions are the single most important part of building a table as they are responsible for building the underlying data model that is used for all sorting, expansion, etc. `ColumnDefinitions` in the AdvancedTable kit is a array of objects as seen in the code snippet below. Each object within the array has two REQUIRED items:
+`columnDefinitions` maps to the columns prop on the Tanstack table. Column definitions are the single most important part of building a table as they are responsible for building the underlying data model that is used for all sorting, expansion, etc. `ColumnDefinitions` in the AdvancedTable kit is an array of objects as seen in the code snippet below. Each object within the array has two REQUIRED items:
 
 - `accessor`: this is the key from your data for the value you want rendered in that column
 - `label`: this is what will be rendered as the column header label
