@@ -20,7 +20,7 @@ import AdvancedTableContext from "./Context/AdvancedTableContext";
 import { TableHeader } from "./SubKits/TableHeader";
 import { TableBody } from "./SubKits/TableBody";
 
-import { DataType, ExpandedStateObject } from "./Utilities/types";
+import { DataType } from "./Utilities/types";
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string };
@@ -80,7 +80,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     ? expandedControl.onChange
     : setLocalExpanded;
 
-  const columnHelper = createColumnHelper<DataType>();
+  const columnHelper = createColumnHelper();
 
   //Create cells for first columns
   const createCellFunction = (cellAccessors: string[]) => {
@@ -163,7 +163,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     data: loading ? Array(loadingStateRowCount).fill({}) : tableData,
     columns,
     onExpandedChange: setExpanded,
-    getSubRows: (row) => row.children,
+    getSubRows: (row: DataType) => row.children,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -192,7 +192,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const handleExpandOrCollapse = (row: Row<DataType>) => {
     onToggleExpansionClick && onToggleExpansionClick(row);
 
-    const expandedState = expanded as ExpandedStateObject;
+    const expandedState = expanded;
     const targetParent = row?.parentId;
     return setExpanded(
       updateExpandAndCollapseState(tableRows, expandedState, targetParent)
