@@ -10,11 +10,15 @@ module Playbook
                  default: "table"
 
       def classname
-        generate_classname("pb_table_row_kit", "pb_table_tr", side_highlight_class)
+        generate_classname("pb_table_row_kit", side_highlight_class) + tag_class
       end
 
       def side_highlight_class
         side_highlight_color.present? ? "side_highlight_#{side_highlight_color}" : nil
+      end
+
+      def tag_class
+        tag == "div" ? " pb_table_tr" : ""
       end
     end
   end

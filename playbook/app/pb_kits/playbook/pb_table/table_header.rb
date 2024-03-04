@@ -28,7 +28,11 @@ module Playbook
                  default: "table"
 
       def classname
-        generate_classname("pb_table_header_kit", "pb_table_theader", align_class)
+        generate_classname("pb_table_header_kit", align_class) + tag_class
+      end
+
+      def tag_class
+        tag == "div" ? " pb_table_th" : ""
       end
 
       def align_class
