@@ -32,7 +32,7 @@ module Playbook
       end
 
       def tag_class
-        tag == "div" ? " pb_table_th" : ""
+        " pb_table_th"
       end
 
       def align_class

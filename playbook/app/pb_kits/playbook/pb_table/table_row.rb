@@ -18,7 +18,7 @@ module Playbook
       end
 
       def tag_class
-        tag == "div" ? " pb_table_tr" : ""
+        " pb_table_tr"
       end
     end
   end
