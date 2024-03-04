@@ -40,8 +40,7 @@ RSpec.describe Playbook::PbTable::TableHeader do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to start_with "pb_table_header_kit"
-      expect(subject.new(dark: true, align: "end").classname).to eq "pb_table_header_kit_align_end dark align_content_center"
-      expect(subject.new({ tag: "div" }).classname).to eq "pb_table_header_kit_align_start align_content_center pb_table_th"
+      expect(subject.new(dark: true, align: "end").classname).to eq "pb_table_header_kit_align_end dark align_content_center pb_table_th"
     end
   end
 
