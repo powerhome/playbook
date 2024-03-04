@@ -55,10 +55,10 @@ RSpec.describe Playbook::PbIcon::Icon do
   describe "#custom_icon" do
     it "returns an icon with custom data-collapsible-main attribute", :aggregate_failures do
       icon = "user.svg"
-      data = { collapsible_main: false }
+      data = { collapsible_main: true }
       id = "iconid"
 
-      expect(subject.new(icon: icon, data: data).data).to eq({ collapsible_main: false })
+      expect(subject.new(icon: icon, data: data).data).to eq({ collapsible_main: true })
       expect(subject.new(icon: icon, id: id).id).to eq("iconid")
     end
   end
