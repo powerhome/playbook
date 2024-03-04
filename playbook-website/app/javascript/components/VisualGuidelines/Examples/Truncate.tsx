@@ -18,19 +18,24 @@ const TOKENS = {
 '$auto': 'auto'
 }
 const lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, minus. Nisi beatae voluptatum labore sequi. Nemo accusantium corrupti, reiciendis magnam tenetur perferendis esse pariatur voluptas eaque hic vel rem nihil quidem dolorum ex dolor, libero ullam placeat, sapiente eos. Cumque obcaecati dignissimos molestiae, minima quibusdam sint maxime libero accusantium animi quis quia maiores enim ipsum, esse, modi laudantium illum error!"
+const TruncateDescription = () => (
+  <>
+    The truncate prop truncates overflowing text up to a maximum of five rows and adds an ellipsis at the end. This prop only works for the <a href="https://playbook.powerapp.cloud/kit_category/typography?type=react" target="_blank">Typography</a> kits (Title, Body, Caption, Detail)
+  </>
+)
 
 const Truncate  = ({ example, tokensExample }: { lorem: lorem, example: string, tokensExample?: string }) => (
   <React.Fragment>
     <Example
-      description="The truncate prop truncates overflowing text up to a maximum of five rows and adds an ellipsis at the end. This prop only works for the following kits (Title, Body, Caption, Detail)"
+      description={<TruncateDescription />}
       example={example}
       title="Truncate"
     >
     <SpacingProps propValues={truncate_values} propNames={PROPNAMES} />
     </Example>
         <Background
-        margin="xl"
-        paddingX="xl"
+        className="token-wrapper"
+        padding="xl"
     >
     <Card>
   <Flex
