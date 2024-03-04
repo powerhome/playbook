@@ -6,6 +6,7 @@ RSpec.describe Playbook::PbTable::TableRow do
   subject { Playbook::PbTable::TableRow }
 
   it { is_expected.to define_string_prop(:side_highlight_color) }
+  it { is_expected.to define_enum_prop(:tag).with_default("table").with_values("div", "table") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -19,6 +20,7 @@ RSpec.describe Playbook::PbTable::TableRow do
       expect(subject.new({ side_highlight_color: "category_1" }).classname).to eq "pb_table_row_kit_side_highlight_category_1"
       expect(subject.new({ side_highlight_color: "category_2" }).classname).to eq "pb_table_row_kit_side_highlight_category_2"
       expect(subject.new({ side_highlight_color: "category_3" }).classname).to eq "pb_table_row_kit_side_highlight_category_3"
+      expect(subject.new({ tag: "div" }).classname).to eq "pb_table_row_kit_side_highlight_none pb_table_tr"
     end
   end
 end
