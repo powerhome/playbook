@@ -29,6 +29,8 @@ examples:
     - table_striped: Striped Table
 
   react:
+    - table_with_subcomponents: Table with Sub Components (Table Elements)
+    - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
     # - table_div: Div
     - table_sm: Small
     - table_md: Medium
