@@ -27,7 +27,7 @@ type TextInputProps = {
   required?: boolean,
   type: string,
   value: string | number,
-  children: Node,
+  children: React.ReactElement,
   addOn?: {
     icon?: string,
     alignment?: "right" | "left",
@@ -85,8 +85,10 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         icon={icon}
     />
   )
+
   const textInput = (
-    <input
+    children ? React.cloneElement(children, { className: "text_input" }) :
+    (<input
         {...domSafeProps(props)}
         className="text_input"
         disabled={disabled}
@@ -99,7 +101,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         required={required}
         type={type}
         value={value}
-    />
+    />)
   )
 
   const addOnInput = (
@@ -131,7 +133,6 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   )
 
   const render = (() => {
-    if(children) return children
     if (shouldShowAddOn) return addOnInput
 
     return textInput
@@ -144,7 +145,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         {...htmlProps}
         className={css}
     >
-      {label && 
+      {label &&
         <Caption
             className="pb_text_input_kit_label"
             text={label}
