@@ -86,8 +86,10 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     />
   )
 
+  const childInput = children ? children.type === "input" : undefined
+
   const textInput = (
-    children ? React.cloneElement(children, { className: "text_input" }) :
+    childInput ? React.cloneElement(children, { className: "text_input" }) :
     (<input
         {...domSafeProps(props)}
         className="text_input"
@@ -133,6 +135,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   )
 
   const render = (() => {
+    if (children && !childInput) return children
     if (shouldShowAddOn) return addOnInput
 
     return textInput
