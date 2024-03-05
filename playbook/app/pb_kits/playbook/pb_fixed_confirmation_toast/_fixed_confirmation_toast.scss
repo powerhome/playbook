@@ -50,10 +50,19 @@ $confirmation_toast_colors: (
       right: auto;
     }
 
+
     &.center {
-      left: 50%;
-      right: auto;
-      transform: translateX(-50%);
+      max-width: 99%;
+      right: 20%;
+      left: 20%;
+    }
+
+    @media only screen and (max-width: 600px) {
+      &.center {
+        max-width: 99%;
+        right: 5%;
+        left: 5%;
+      }
     }
 
     &.right {
