@@ -91,8 +91,11 @@ $confirmation_toast_colors: (
       &[class*=_multi_line] .pb_fixed_confirmation_toast_text {
         color: $white;
         margin: 0 $space_md 0 $space_md;
-        max-width: 100%;
-        white-space: break-spaces;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical; 
+        white-space: normal;
       }
     }
   }
