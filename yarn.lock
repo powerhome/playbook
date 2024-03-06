@@ -138,6 +138,27 @@
     json5 "^2.2.3"
     semver "^6.3.1"
 
+"@babel/core@^7.4.5":
+  version "7.24.0"
+  resolved "https://npm.powerapp.cloud/@babel/core/-/core-7.24.0.tgz#56cbda6b185ae9d9bed369816a8f4423c5f2ff1b"
+  integrity sha512-fQfkg0Gjkza3nf0c7/w6Xf34BW4YvzNfACRLmmb7XRLa6XHdR+K9AlJlxneFfWYf6uhOzuzZVTjF/8KfndZANw==
+  dependencies:
+    "@ampproject/remapping" "^2.2.0"
+    "@babel/code-frame" "^7.23.5"
+    "@babel/generator" "^7.23.6"
+    "@babel/helper-compilation-targets" "^7.23.6"
+    "@babel/helper-module-transforms" "^7.23.3"
+    "@babel/helpers" "^7.24.0"
+    "@babel/parser" "^7.24.0"
+    "@babel/template" "^7.24.0"
+    "@babel/traverse" "^7.24.0"
+    "@babel/types" "^7.24.0"
+    convert-source-map "^2.0.0"
+    debug "^4.1.0"
+    gensync "^1.0.0-beta.2"
+    json5 "^2.2.3"
+    semver "^6.3.1"
+
 "@babel/generator@^7.20.7":
   version "7.20.7"
   resolved "https://npm.powerapp.cloud/@babel/generator/-/generator-7.20.7.tgz#f8ef57c8242665c5929fe2e8d82ba75460187b4a"
@@ -2066,6 +2087,15 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
+"@babel/types@^7.12.6", "@babel/types@^7.23.4", "@babel/types@^7.24.0":
+  version "7.24.0"
+  resolved "https://npm.powerapp.cloud/@babel/types/-/types-7.24.0.tgz#3b951f435a92e7333eba05b7566fd297960ea1bf"
+  integrity sha512-+j7a5c253RfKh8iABBhywc8NSfP5LURe7Uh4qpsh6jc+aLJguvmIUBdjSdEMQv2bENrCR5MfRdjGo7vzS/ob7w==
+  dependencies:
+    "@babel/helper-string-parser" "^7.23.4"
+    "@babel/helper-validator-identifier" "^7.22.20"
+    to-fast-properties "^2.0.0"
+
 "@babel/types@^7.22.15":
   version "7.23.6"
   resolved "https://npm.powerapp.cloud/@babel/types/-/types-7.23.6.tgz#be33fdb151e1f5a56877d704492c240fc71c7ccd"
@@ -2079,15 +2109,6 @@
   version "7.23.9"
   resolved "https://npm.powerapp.cloud/@babel/types/-/types-7.23.9.tgz#1dd7b59a9a2b5c87f8b41e52770b5ecbf492e002"
   integrity sha512-dQjSq/7HaSjRM43FFGnv5keM2HsxpmyV1PfaSVm0nzzjwwTmjOe6J4bC8e3+pTEIgHaHj+1ZlLThRJ2auc/w1Q==
-  dependencies:
-    "@babel/helper-string-parser" "^7.23.4"
-    "@babel/helper-validator-identifier" "^7.22.20"
-    to-fast-properties "^2.0.0"
-
-"@babel/types@^7.24.0":
-  version "7.24.0"
-  resolved "https://npm.powerapp.cloud/@babel/types/-/types-7.24.0.tgz#3b951f435a92e7333eba05b7566fd297960ea1bf"
-  integrity sha512-+j7a5c253RfKh8iABBhywc8NSfP5LURe7Uh4qpsh6jc+aLJguvmIUBdjSdEMQv2bENrCR5MfRdjGo7vzS/ob7w==
   dependencies:
     "@babel/helper-string-parser" "^7.23.4"
     "@babel/helper-validator-identifier" "^7.22.20"
@@ -3406,15 +3427,10 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-ordered-list/-/extension-ordered-list-2.0.2.tgz#6e6cc993725aaab6c0b146fb1b7df8e4dc855bcb"
   integrity sha512-fgWIQNDlC2pYNnS9Iqw2UZaNIInfks3mZm0Aj9DQ78LbTYDAcGvHcWaulLkd0CcfD6smTYwi9oBzP3dpPbcPTw==
 
-"@tiptap/extension-paragraph@^2.0.2":
-  version "2.0.2"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-paragraph/-/extension-paragraph-2.0.2.tgz#40ee9e9ac2c06a8bf81a0371e191b328936c85e6"
-  integrity sha512-BuiUV8Wh8DjRrNmmk5sIlVlk0V8P4BT2fCB4H7Ar+QDUPKY1g0djB/5g3F70iZh1Z7CiY1ctoL8VQznvtb0KsQ==
-
-"@tiptap/extension-paragraph@^2.1.12":
-  version "2.1.12"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-paragraph/-/extension-paragraph-2.1.12.tgz#922447b2aa1c7184787d351ceec593a74d24ed03"
-  integrity sha512-hoH/uWPX+KKnNAZagudlsrr4Xu57nusGekkJWBcrb5MCDE91BS+DN2xifuhwXiTHxnwOMVFjluc0bPzQbkArsw==
+"@tiptap/extension-paragraph@^2.0.2", "@tiptap/extension-paragraph@^2.2.4":
+  version "2.2.4"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-paragraph/-/extension-paragraph-2.2.4.tgz#9126fafbf984e324bfb3fab34deb689def7eb98d"
+  integrity sha512-m1KwyvTNJxsq7StbspbcOhxO4Wk4YpElDbqOouWi+H4c8azdpI5Pn96ZqhFeE9bSyjByg6OcB/wqoJsLbeFWdQ==
 
 "@tiptap/extension-strike@^2.0.2":
   version "2.0.2"
