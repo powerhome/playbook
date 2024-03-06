@@ -15,6 +15,7 @@ type TableCellPropTypes = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   tag?: "table" | "div";
+  text?: string
 };
 
 const TableCell = (props: TableCellPropTypes) => {
@@ -26,6 +27,7 @@ const TableCell = (props: TableCellPropTypes) => {
     htmlOptions = {},
     id,
     tag = "table",
+    text,
   } = props;
 
   const ariaProps = buildAriaProps(aria);
@@ -44,7 +46,7 @@ const TableCell = (props: TableCellPropTypes) => {
             className={classes}
             id={id}
         >
-          {children}
+          {text || children}
         </td>
       ) : (
         <div
@@ -54,7 +56,7 @@ const TableCell = (props: TableCellPropTypes) => {
             className={classes}
             id={id}
         >
-          {children}
+          {text || children}
         </div>
       )}
     </>

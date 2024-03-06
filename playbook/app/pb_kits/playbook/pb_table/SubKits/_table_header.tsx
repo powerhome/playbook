@@ -15,6 +15,7 @@ type TableHeaderPropTypes = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   tag?: "table" | "div";
+  text?: string;
 };
 
 const TableHeader = (props: TableHeaderPropTypes) => {
@@ -26,6 +27,7 @@ const TableHeader = (props: TableHeaderPropTypes) => {
     htmlOptions = {},
     id,
     tag = "table",
+    text
   } = props;
 
   const ariaProps = buildAriaProps(aria);
@@ -44,7 +46,7 @@ const TableHeader = (props: TableHeaderPropTypes) => {
             className={classes}
             id={id}
         >
-          {children}
+          {text || children}
         </th>
       ) : (
         <div
@@ -54,7 +56,7 @@ const TableHeader = (props: TableHeaderPropTypes) => {
             className={classes}
             id={id}
         >
-          {children}
+          {text || children}
         </div>
       )}
     </>
