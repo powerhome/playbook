@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get "kit_playground_rails",       to: "pages#kit_playground_rails", as: "kit_playground_rails"
   post "rails_pg_render",           to: "pages#rails_pg_render",      as: "rails_pg_render"
 
+  get "full_list", to: "pages#full_list", as: "full_list"
   # Docs
   get "guides/:parent",         to: "guides#md_doc", as: "guides_parent"
   get "guides/:parent/:page",   to: "guides#md_doc", as: "guides_parent_page"
