@@ -1,0 +1,1 @@
+In addition to using the Table kit with html table elements, it can also be used with our custom subcomponents, each of which maps to it's corresponding table element.

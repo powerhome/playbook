@@ -1,0 +1,1 @@
+When using subcomponents with our Table kit, there is the additional ability to render a table with divs instead of table elements. To do so, devs can use the `tag` prop that is available with each of the subcomponents. By default this prop is set to `table` but can also be set to `div`.
