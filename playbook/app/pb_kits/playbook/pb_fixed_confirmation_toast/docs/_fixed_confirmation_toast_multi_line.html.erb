@@ -1,5 +1,36 @@
+<%= pb_rails("button", props: { text: "Multiline Example", variant: "primary", data: { toast: "#toast-top-center-multi" } }) %>
+
 <%= pb_rails("fixed_confirmation_toast", props: {
+  classname: "toast-to-hide",
+  closeable: true,
+  id: "toast-top-center-multi",
   multi_line: true,
-  text: "Scan to Assign Selected Items. Click here to generate report",
+  text: "Multi-line is used when the given text will not fit on one line. Using Multi Line allows the height of the confirmation toast to grow. Simply resize the screen to see the fixed confirmation toast wrap the text.",
   status: "tip",
+  vertical: "top",
+  horizontal: "center"
 }) %>
+
+<script type="text/javascript">
+  const alltoasts = document.queryselectorall(".toast-to-hide")
+  const allbuttons = document.queryselectorall("button[data-toast]")
+
+  const hidealltoasts = () => {
+    alltoasts.foreach((toast) => {
+      toast.style.display = "none"
+    })
+  }
+
+  hidealltoasts()
+
+  allbuttons.foreach((button) => {
+    button.onclick = () => {
+      hidealltoasts()
+      let toast = document.queryselector(button.getattribute("data-toast"))
+
+      if (toast) {
+        toast.style.display = "flex"
+      }
+    }
+  })
+</script>
