@@ -1,3 +1,10 @@
+SHELL=/bin/bash -o pipefail
+namespace ?= playbook-${environment}
+
+cluster=${shell playbook-website/bin/deployer bin/cluster_for_review_stack $(environment)}
+cluster_short_name=${shell playbook-website/bin/deployer bin/cluster_for_review_stack $(environment) short}
+review_cluster = ${shell playbook-website/bin/deployer bin/cluster_for_review_stack pr$(pr)}
+
 start:
 	docker compose up
 
@@ -21,6 +28,10 @@ test:
 
 shell:
 	docker compose run web /bin/bash --login
+
+time-to-live ?= 3h
+reviewShell: ## Opens a shell in the given environment (i.e.: make reviewShell pr=14166)
+	./playbook-website/bin/deployer bash -lc "playbook-website/bin/remote_exec --time-to-live $(time-to-live) --cluster $(review_cluster) --namespace playbook-pr$(pr) bash --login"
 
 console:
 	docker compose run web bin/rails console
