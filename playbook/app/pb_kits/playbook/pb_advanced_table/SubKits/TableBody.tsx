@@ -15,6 +15,7 @@ import { DataType } from "../Utilities/types"
 type TableBodyProps = {
   className?: string;
   collapsibleTrail?: boolean
+  dark?: boolean,
   id?: string;
   subRowHeaders?: string[]
 }
@@ -22,6 +23,7 @@ type TableBodyProps = {
 export const TableBody = ({
   className,
   collapsibleTrail = true,
+  dark = false,
   id,
   subRowHeaders,
   ...props
@@ -60,6 +62,7 @@ export const TableBody = ({
               {isFirstChildofSubrow && subRowHeaders && (
                 <SubRowHeaderRow
                     collapsibleTrail={collapsibleTrail}
+                    dark={dark}
                     enableToggleExpansion={enableToggleExpansion}
                     onClick={handleExpandOrCollapse}
                     row={row}

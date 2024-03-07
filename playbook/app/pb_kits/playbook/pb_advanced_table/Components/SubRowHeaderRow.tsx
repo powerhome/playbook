@@ -13,6 +13,7 @@ import { GlobalProps } from "../../utilities/globalProps"
 
 interface SubRowHeaderRowProps {
   collapsibleTrail?: boolean
+  dark?: boolean,
   enableToggleExpansion?: "all" | "header" | "none"
   onClick: (row: Row<DataType>) => void
   row: Row<DataType>
@@ -22,6 +23,7 @@ interface SubRowHeaderRowProps {
 
 export const SubRowHeaderRow = ({
   collapsibleTrail,
+  dark,
   enableToggleExpansion,
   onClick,
   row,
@@ -53,6 +55,7 @@ export const SubRowHeaderRow = ({
               />
             ) : null}
             <Caption
+                dark={dark}
                 marginLeft={canExpand ? "none" : "xs"}
                 text={subRowHeaders[row.depth - 1]}
             />

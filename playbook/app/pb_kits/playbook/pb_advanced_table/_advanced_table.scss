@@ -95,4 +95,11 @@
       border-right: $transparent !important;
     }
   }
+
+  &.dark {
+    .bg-white, .bg-silver {
+      background: $bg_dark_card;
+    }
+
+  }
 }
