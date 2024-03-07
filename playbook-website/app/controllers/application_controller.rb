@@ -3,9 +3,8 @@
 class ApplicationController < ActionController::Base
   before_action :set_app_js
 
-  helper Webpacker::Helper
-  helper Playbook::PbDocHelper
-  helper Playbook::Markdown::Helper
+  include PlaybookWebsite::Markdown::Helper
+
   helper ApplicationHelper
   helper SampleHelper
 

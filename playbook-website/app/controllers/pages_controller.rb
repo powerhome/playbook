@@ -1,23 +1,38 @@
 # frozen_string_literal: true
 
-require "yaml"
-require "redcarpet"
-require "rouge"
 require "will_paginate"
 require "playbook/pagination_renderer"
-require "will_paginate/array" # Needed to show a fake pagination example
-
-require_relative "application_controller"
+require "will_paginate/array"
 
 class PagesController < ApplicationController
   before_action :set_js, only: %i[visual_guidelines]
-  before_action :set_kit, only: %i[kit_show_rails kit_show_react]
-  before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react]
-  before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react]
+  before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
+  before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
+  before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react kit_category_show_swift]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
+  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo kit_show_new visual_guidelines home]
 
-  include Playbook::PbDocHelper
-  include Playbook::PbKitHelper
+  def application_beta
+    @kits = MENU["kits"]
+    @dark = cookies[:dark_mode] == "true"
+    @type = params[:type] || "react"
+    @kit = params[:name]
+    @params = params
+    @examples = pb_doc_kit_examples(@kit, @type)
+    @css = view_context.asset_pack_url("application.css")
+
+    # first example from each kit
+    examples = @examples.map do |example|
+      example_key = example.keys.first.to_s
+      source_code = get_source(example_key)
+      { example_key: example_key, title: example.values.first, source: source_code }
+    end
+
+    respond_to do |format|
+      format.html { render layout: "application_beta", inline: "" }
+      format.json { render json: { kits: @kits, dark: @dark, type: @type, examples: examples, kit: @kit, params: @params, css: @css } }
+    end
+  end
 
   def disable_dark_mode
     cookies[:dark_mode] = {
@@ -33,72 +48,61 @@ class PagesController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def getting_started
-    render "pages/getting_started/index"
-  end
-
-  def getting_started_rails
-    @rails_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_getting_started.md").read
-    render "pages/getting_started/rails"
-  end
-
-  def getting_started_react
-    @react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_react_getting_started.md").read
-    render "pages/getting_started/react"
-  end
-
-  def getting_started_rails_react
-    @rails_react_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_rails_react_getting_started.md").read
-    render "pages/getting_started/rails_react"
-  end
-
-  def getting_started_html_css
-    @html_css_getting_started = Rails.root.join("app/views/pages/getting_started_partials/_html_css_getting_started.md").read
-    render "pages/getting_started/html"
+  def home
+    @data = Playbook::Engine.root.join("CHANGELOG.md").read
+    @structured_data = extract_changelog_data(@data)
   end
 
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
+    @page_title = "What's New"
+    @show_sidebar = true
+    @front_matter = nil
+    render layout: "docs"
   end
-
-  def grid
-    render layout: "layouts/grid"
-  end
-
-  def home; end
 
   def kits
     params[:type] ||= "react"
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    render layout: "layouts/kits"
-  end
-
-  def all_kit_examples
-    params[:type] ||= "react"
-    @type = params[:type]
-    render layout: "layouts/kits"
   end
 
   def kit_category_show_rails
     params[:type] ||= "rails"
     @type = params[:type]
-    render template: "pages/kit_category_show", layout: "layouts/kits"
+    render template: "pages/kit_category_show"
   end
 
   def kit_category_show_react
-    render template: "pages/kit_category_show", layout: "layouts/kits"
+    render template: "pages/kit_category_show"
   end
 
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    render "pages/kit_show", layout: "layouts/kits"
+    render "pages/kit_show"
   end
 
   def kit_show_react
     @type = "react"
-    render template: "pages/kit_show", layout: "layouts/kits"
+    render template: "pages/kit_show"
+  end
+
+  def kit_show_swift
+    @type = "swift"
+    render "pages/kit_show"
+  end
+
+  def kit_collection_show_rails
+    handle_kit_collection("rails")
+  end
+
+  def kit_collection_show_react
+    handle_kit_collection("react")
+  end
+
+  def kit_collection_show
+    handle_kit_collection(params[:type])
   end
 
   def kit_playground_rails
@@ -133,19 +137,13 @@ class PagesController < ApplicationController
                                            dark: false,
                                            show_raw: true,
                                          })
-    render "pages/rails_in_react", layout: "layouts/kits"
-  end
-
-  def kit_show_demo
-    @kit = params[:name]
-    @examples = kit_examples
-    render "pages/kit_show_demo", layout: "layouts/kits"
+    render "pages/rails_in_react"
   end
 
   def kit_show_new
     @kit = params[:name]
     @examples = kit_examples
-    render "pages/kit_show_new", layout: "layouts/kits"
+    render "pages/kit_show_new"
   end
 
   def rails_raw
@@ -165,17 +163,14 @@ class PagesController < ApplicationController
 
   # TODO: rename this method once all guidelines are completed
   def visual_guidelines
-    formatter = Rouge::Formatters::HTML.new
-    lexer = Rouge::Lexer.find("react")
     kit_examples = {}
     Dir.glob(Rails.root.join("app/views/pages/code_snippets/*.txt")).each do |example_path|
       example_txt = File.read(example_path)
-
-      formatted_example_txt = formatter.format(lexer.lex(example_txt))
+      formatted_example_txt = render_code(example_txt, "react")
       kit_examples[example_path.split("/").last.sub(".txt", "")] = formatted_example_txt
     end
     @kit_examples_json = kit_examples
-    render "pages/visual_guidelines", layout: "layouts/visual_guidelines"
+    render "pages/visual_guidelines"
   end
 
   def get_source(example)
@@ -186,37 +181,78 @@ class PagesController < ApplicationController
 
 private
 
+  def missing_rails_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "rails") == false
+  end
+
+  def missing_react_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "react") == false
+  end
+
+  def missing_swift_kit?
+    helpers.pb_doc_has_kit_type?(params[:name], "swift") == false
+  end
+
+  def aggregate_kits
+    MENU["kits"]
+  end
+
+  def categories
+    aggregate_kits.map { |item| item["name"] }
+  end
+
+  def all_kits
+    group_components = []
+    aggregate_kits.each do |kit|
+      group_components.push(kit["components"].map do |component|
+        { name: component["name"], status: component["status"] }
+      end)
+    end
+    group_components.flatten
+  end
+
   def set_js
     @application_js.concat ["visual_guidelines"]
   end
 
   def set_category
-    categories = MENU["kits"].map { |link| link.first.first if link.is_a?(Hash) }.compact
     @category = params[:name]
-    if categories.flatten.include?(@category)
-      @category_kits = MENU["kits"].map { |link| link.first.last if link.is_a?(Hash) && link.first.first == @category }.compact.flatten
+    if categories.include?(@category) && helpers.category_has_kits?(category_kits: kit_categories, type: params[:type])
+      @category_kits = kit_categories
       @kits = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
     end
   end
 
+  def kit_categories
+    @category = params[:name]
+    aggregate_kits.find { |item| item["name"] == @category }["components"].map { |component| component["name"] }
+  end
+
   def set_kit
-    menu = MENU["kits"].map { |link| link.is_a?(Hash) ? link.first.last : link }
-    if menu.flatten.include?(params[:name])
-      @kit = params[:name]
+    matching_kit = all_kits.find { |kit| kit[:name] == params[:name] }
+
+    if matching_kit
+      @kit = matching_kit[:name]
+      @kit_status = matching_kit[:status]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
     end
   end
 
+  def set_show_sidebar
+    @show_sidebar = true
+  end
+
   def ensure_kit_type_exists
-    # TODO: unsure why we cannot simply use the helpers that are included in ApplicationController - fix this
-    is_rails_kit = action_name == "kit_show_rails"
-    files = is_rails_kit ? File.join("**", "*.erb") : File.join("**", "*.jsx")
-    kit_files = Dir.glob(files, base: "#{Playbook::Engine.root}/app/pb_kits/playbook/pb_#{@kit}/docs").present?
-    unless kit_files.present?
-      redirect_to action: is_rails_kit ? "kit_show_react" : "kit_show_rails"
+    if action_name === "kit_show_rails"
+      redirect_to action: "kit_show_react" if missing_rails_kit? && missing_react_kit? == false
+    elsif action_name === "kit_show_react"
+      redirect_to action: "kit_show_rails" if missing_react_kit? && missing_rails_kit? == false
+      redirect_to action: "kit_show_swift" if missing_react_kit? && missing_rails_kit? && missing_swift_kit? == false
+    elsif action_name === "kit_show_swift"
+      redirect_to action: "kit_show_react" if missing_swift_kit?
     end
   end
 
@@ -235,6 +271,48 @@ private
     end
   end
 
+  def to_url_format(text)
+    text.gsub(/[^a-zA-Z0-9]+/, "-").strip.gsub(/\s+/, "-")
+  end
+
+  def extract_changelog_data(changelog)
+    releases = []
+
+    changelog.split(/^# /).each do |section|
+      break if releases.size == 2
+
+      next unless section.strip.length.positive?
+
+      title_match = section.match(/(.+?)\n/)
+      next unless title_match
+
+      title = title_match[1].strip
+
+      date_match = section.match(/####? (.+?)\n/)
+      date = date_match ? date_match[1].strip : nil
+
+      image_match = section.match(/!\[.+?\]\((.+?)\)/)
+      next unless image_match
+
+      image = image_match[1].strip
+
+      description_match = section.match(/!\[.*?\]\(.*?\)\n\n(.*?)\n\n\[.*?\]\(.*?\)/m)
+      description = description_match ? description_match[1].strip : nil
+
+      link = to_url_format(title).to_s
+
+      releases << {
+        title: title,
+        date: date,
+        image: image,
+        description: description,
+        link: link,
+      }
+    end
+
+    releases
+  end
+
   def kit_examples
     pb_doc_kit_examples(params[:name], "rails")
   end
@@ -246,5 +324,15 @@ private
   def read_kit_file(*args)
     path = ::Playbook.kit_path(@kit, "docs", *args)
     path.exist? ? path.read : ""
+  end
+
+  def handle_kit_collection(type)
+    @kits = params[:names].split("%26")
+    @kits_array = @kits.first.split("&")
+    params[:name] ||= @kits_array[0]
+    @selected_kit = params[:name]
+    @type = type
+
+    render template: "pages/kit_collection", layout: "layouts/fullscreen"
   end
 end

@@ -4,9 +4,9 @@
   &.table-sm,
   &.table-md,
   &.table-lg {
-    thead {
-      tr {
-        th {
+    thead, .pb_table_thead {
+      tr, .pb_table_tr {
+        th, .pb_table_th {
           @include caption;
           border-bottom: 1px solid $border_light;
         }

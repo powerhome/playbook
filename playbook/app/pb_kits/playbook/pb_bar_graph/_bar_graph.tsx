@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { globalProps } from "../utilities/globalProps";
-import { buildAriaProps, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
 
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
+import { merge } from 'lodash'
 
 import classnames from "classnames";
 
@@ -19,8 +20,10 @@ type BarGraphProps = {
   yAxisMax: number;
   chartData: { name: string; data: number[] }[];
   className?: string;
-  id: any;
-  pointStart: number | any;
+  customOptions?: Partial<Highcharts.Options>;
+  id: string;
+  pointStart: number;
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   subTitle?: string;
   title: string;
   type?: string;
@@ -46,6 +49,8 @@ const BarGraph = ({
   chartData,
   className = "pb_bar_graph",
   colors,
+  htmlOptions = {},
+  customOptions = {},
   id,
   pointStart,
   subTitle,
@@ -64,7 +69,8 @@ const BarGraph = ({
   ...props
 }: BarGraphProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const setupTheme = () => {
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
@@ -125,7 +131,7 @@ const BarGraph = ({
   const [options, setOptions] = useState({});
 
   useEffect(() => {
-    setOptions({ ...staticOptions });
+    setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
   return (
@@ -135,6 +141,7 @@ const BarGraph = ({
           id: id,
           ...ariaProps,
           ...dataProps,
+          ...htmlProps
         }}
         highcharts={Highcharts}
         options={options}

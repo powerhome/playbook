@@ -16,6 +16,9 @@ import Display from "../VisualGuidelines/Examples/Display";
 import Cursor from "../VisualGuidelines/Examples/Cursor";
 import FlexBox from "../VisualGuidelines/Examples/FlexBox";
 import Position from "../VisualGuidelines/Examples/Position";
+import Hover from "../VisualGuidelines/Examples/Hover";
+import TextAlign from "../VisualGuidelines/Examples/TextAlign";
+import Overflow from "./Examples/Overflow";
 
 const VisualGuidelines = ({
   examples,
@@ -48,7 +51,7 @@ const VisualGuidelines = ({
                    tokensExample={examples.shadow_erb}
                />;
       case "spacing":
-        return <Spacing 
+        return <Spacing
                   example={examples.spacing_global_props_jsx}
                   tokensExample={examples.spacing_tokens_jsx}
                />;
@@ -66,6 +69,14 @@ const VisualGuidelines = ({
         return <Position example={examples.position_jsx}
                    tokensExample={examples.position_token}
                />;
+      case "hover":
+        return <Hover example={examples.hover_jsx}/>;
+      case "text_align":
+        return <TextAlign example={examples.text_align_jsx} />
+        case "overflow":
+          return <Overflow example={examples.overflow_jsx} 
+                    tokensExample={examples.overflow_token}
+                 />
 
       default:
         return <Colors/>;

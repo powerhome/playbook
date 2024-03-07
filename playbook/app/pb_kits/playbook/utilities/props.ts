@@ -49,3 +49,19 @@ export const buildDataProps = (data: {[key: string]: any}) => buildPrefixedProps
  */
 export const buildCss = (...rules: (string | { [x: string]: string | boolean; })[]): string => classnames(rules).replace(/\s/g, '_')
 
+/**
+ * Maps a given data object into HTML valid attributes and their values.
+ * This is a more general version of what buildAriaProps and buildDataProps do.
+ * It is used to map any arbitrary prop into a valid HTML attribute.
+ *  
+ * @returns {Object} an object holding the HTML valid props and their values.
+ */
+
+export const buildHtmlProps = (htmlOptions: { [key: string]: string | number | boolean | (() => void)}) => {
+  const htmlProps: { [attr: string]: string | number | boolean | (() => void) } = {}
+  Object.keys(htmlOptions).forEach((key) => {
+    htmlProps[key] = htmlOptions[key]
+  })
+  return htmlProps
+}
+

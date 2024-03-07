@@ -1,0 +1,24 @@
+<% if @navigation.present? %>
+  <%= pb_rails("nav", props: { orientation: "vertical", variant: "bold", padding_y: "sm" }) do %>
+    <%= pb_rails("nav/item", props: {
+        link: "/#{@navigation[:url]}",
+        margin_bottom: "none",
+        margin_x: "xs",
+        icon_left: "angle-down",
+        active: @page.nil?,
+      }) do %>
+      <%= pb_rails("caption", props: { size: "xs", color:"default", text: @navigation[:title], dark: @page.nil? }) %>
+    <% end %>
+    <% @navigation[:pages].each do |page_name| %>
+      <%= pb_rails("nav/item", props: {
+        link: "/#{page_name[:url]}",
+        margin_y: "none",
+        margin_left: "lg",
+        margin_right: "xs",
+        active: (@page.present? && @page == page_name[:page_id]),
+      }) do %>
+        <%= pb_rails("caption", props: { size: "xs", color:"default", text: page_name[:title], dark: (@page.present? && @page == page_name[:page_id]) }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

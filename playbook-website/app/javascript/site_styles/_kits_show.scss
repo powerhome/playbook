@@ -1,4 +1,5 @@
 @import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/typography";
 
 .kit-show-wrapper {
   .sample-card-grid-override {
@@ -17,4 +18,33 @@
       align-self: center;
     }
   }
+  .kearning {
+    letter-spacing: $lspace_looser;
+  }
+  .card {
+    max-width: fit-content;
+  }
+  .kit_show_swift & {
+    p {
+      a {
+        background-color: $bg_light;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: $border_radius_lg;
+        box-shadow: inset $shadow_deep;
+        img {
+          max-width: 250px;
+          height: auto;
+          position: relative;
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.multi-kits-container {
+  width: 100%;
 }

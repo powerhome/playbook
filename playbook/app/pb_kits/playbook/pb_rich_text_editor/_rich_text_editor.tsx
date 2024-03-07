@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
-import { globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildDataProps, noop } from '../utilities/props'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { buildAriaProps, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
 
 try {
   const Trix = require('trix')
@@ -14,25 +14,31 @@ try {
 } catch (_e) { /* do nothing */ }
 
 import { TrixEditor } from "react-trix"
+import EditorToolbar from './TipTap/Toolbar'
 
 type Editor = {
-  attributeIsActive?: Function,
+  attributeIsActive?: ([any]: string) => boolean,
   element?: HTMLElement,
-  getSelectedDocument?: Function,
+  getSelectedDocument?: () => any,
   getSelectedRange?: () => Array<number>,
-  insertHTML?: Function,
-  loadHTML?: Function,
-  setSelectedRange?: (range: Array<number>) => void,  
+  insertHTML?: ([any]: string) => void,
+  loadHTML?: ([any]: string) => void,
+  setSelectedRange?: (range: Array<number>) => void,
 }
 
 type RichTextEditorProps = {
   aria?: { [key: string]: string },
-  toolbarBottom?: Boolean,
+  advancedEditor?: any,
+  advancedEditorToolbar?: boolean,
+  toolbarBottom?: boolean,
+  children?: React.ReactNode | React.ReactNode[]
   className?: string,
   data?: { [key: string]: string },
   focus?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   inline?: boolean,
+  extensions?: { [key: string]: string }[],
   name?: string,
   onChange: (html: string, text: string) => void,
   placeholder?: string,
@@ -40,16 +46,22 @@ type RichTextEditorProps = {
   sticky?: boolean,
   template: string,
   value?: string,
-}
+  maxWidth?: string
+} & GlobalProps
 
-const RichTextEditor = (props: RichTextEditorProps) => {
+const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   const {
     aria = {},
+    advancedEditor,
+    advancedEditorToolbar = true,
     toolbarBottom = false,
+    children,
     className,
     data = {},
     focus = false,
+    htmlOptions = {},
     inline = false,
+    extensions,
     name,
     onChange = noop,
     placeholder,
@@ -57,12 +69,15 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     sticky = false,
     template = '',
     value = '',
+    maxWidth="md"
   } = props
 
   const ariaProps = buildAriaProps(aria),
     dataProps = buildDataProps(data),
     [editor, setEditor] = useState<Editor>()
 
+  const htmlProps = buildHtmlProps(htmlOptions)
+  
   const handleOnEditorReady = (editorInstance: Editor) => setEditor(editorInstance),
     element = editor?.element
 
@@ -101,6 +116,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     focus
       ? (document.addEventListener('trix-focus', useFocus),
         document.addEventListener('trix-blur', useFocus),
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         useFocus())
       : null
 
@@ -135,7 +151,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
     inlineClass = inline ? 'inline' : '',
     toolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
 
-  let css = classnames(globalProps(props), className)
+  let css = classnames(globalProps(props, {maxWidth}), className)
   css = classnames(
     richTextEditorClass,
     simpleClass,
@@ -148,19 +164,37 @@ const RichTextEditor = (props: RichTextEditorProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      className={css}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={css}
     >
-      <TrixEditor
-        className=""
-        fileParamName={name}
-        mergeTags={[]}
-        onChange={onChange}
-        onEditorReady={handleOnEditorReady}
-        placeholder={placeholder}
-        value={value}
-      />
+      {
+        advancedEditor ? (
+          <div 
+              className={classnames("pb_rich_text_editor_advanced_container", { 
+              ["toolbar-active"]: advancedEditorToolbar,
+              })}
+          >
+            {advancedEditorToolbar && (
+              <EditorToolbar editor={advancedEditor}
+                  extensions={extensions}
+              />
+            )}
+          { children }
+          </div>
+        ) : (
+          <TrixEditor
+              className=""
+              fileParamName={name}
+              mergeTags={[]}
+              onChange={onChange}
+              onEditorReady={handleOnEditorReady}
+              placeholder={placeholder}
+              value={value}
+          />
+        )
+      }
     </div>
   )
 }

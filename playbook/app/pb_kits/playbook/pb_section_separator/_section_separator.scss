@@ -45,6 +45,13 @@ $section_colors_dark: (
     }
   }
 
+  &[class*=_dashed] {
+    &::before, &::after {
+      border: 1px dashed $border_light;
+      background: none;
+    }
+  }
+
   // Dark =========================
 
   &.dark {

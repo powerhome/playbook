@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+/* eslint-disable react/no-multi-comp */
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import {
   Popper,
@@ -12,17 +13,20 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps,
   noop,
 } from "../utilities/props";
 
 import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
+import _uniqueId from 'lodash/uniqueId';
 
 type PbPopoverProps = {
   aria?: { [key: string]: string };
   className?: string;
   closeOnClick?: "outside" | "inside" | "any";
   data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   offset?: boolean;
   reference: PopperReference & any;
@@ -51,7 +55,7 @@ const popoverModifiers = ({
   offset,
 }: {
   modifiers: Modifier<any> & any;
-  offset: {};
+  offset: boolean;
 }) => {
   return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers;
 };
@@ -62,6 +66,7 @@ const Popover = (props: PbPopoverProps) => {
     className,
     children,
     data = {},
+    htmlOptions = {},
     id,
     modifiers,
     offset,
@@ -72,6 +77,7 @@ const Popover = (props: PbPopoverProps) => {
     maxWidth,
     minHeight,
     minWidth,
+    targetId,
   } = props;
 
   const popoverSpacing =
@@ -90,7 +96,8 @@ const Popover = (props: PbPopoverProps) => {
     );
   };
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_popover_kit"),
     globalProps(props),
@@ -108,6 +115,7 @@ const Popover = (props: PbPopoverProps) => {
           <div
               {...ariaProps}
               {...dataProps}
+              {...htmlProps}
               className={classes}
               data-placement={placement}
               id={id}
@@ -123,6 +131,7 @@ const Popover = (props: PbPopoverProps) => {
                     popoverSpacing,
                     overflowHandling
                   )}
+                  id={targetId}
                   style={widthHeightStyles()}
               >
                 {children}
@@ -135,7 +144,8 @@ const Popover = (props: PbPopoverProps) => {
   );
 };
 
-const PbReactPopover = (props: PbPopoverProps) => {
+const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
+  const [targetId] = useState(_uniqueId('id-'))
   const {
     className,
     children,
@@ -161,27 +171,27 @@ const PbReactPopover = (props: PbPopoverProps) => {
 
     document.body.addEventListener(
       "click",
-      ({ target }) => {
+      (e: MouseEvent) => {
+        const target = e.target as HTMLElement
+
         const targetIsPopover =
-          (target as HTMLElement).closest("[class^=pb_popover_tooltip]") !==
-          null;
+          target.closest("#" + targetId) !== null;
         const targetIsReference =
-          (target as HTMLElement).closest(".pb_popover_reference_wrapper") !==
-          null;
+          target.closest("#reference-" + targetId) !== null;
+
+        const shouldClose = () => {
+          setTimeout(() => shouldClosePopover(true), 0);
+        }
 
         switch (closeOnClick) {
           case "outside":
-            if (!targetIsPopover || targetIsReference) {
-              shouldClosePopover(true);
-            }
+            if (!targetIsPopover && !targetIsReference) shouldClose();
             break;
           case "inside":
-            if (targetIsPopover || targetIsReference) {
-              shouldClosePopover(true);
-            }
+            if (targetIsPopover) shouldClose();
             break;
           case "any":
-            shouldClosePopover(true);
+            if (targetIsPopover || !targetIsPopover && !targetIsReference) shouldClose();
             break;
         }
       },
@@ -200,6 +210,7 @@ const PbReactPopover = (props: PbPopoverProps) => {
         offset={offset}
         placement={placement}
         referenceElement={referenceElement}
+        targetId={targetId}
         zIndex={zIndex}
         {...props}
     >
@@ -215,7 +226,9 @@ const PbReactPopover = (props: PbPopoverProps) => {
             {({ ref }) => (
               <span
                   className="pb_popover_reference_wrapper"
-                  ref={ref}>
+                  id={"reference-" + targetId}
+                  ref={ref}
+              >
                 <reference.type {...reference.props} />
               </span>
             )}

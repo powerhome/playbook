@@ -2,7 +2,7 @@
 
 module Playbook
   module Props
-    class Hash < Playbook::Props::Base
+    class HashProp < Playbook::Props::Base
       def validate(value)
         value.is_a?(::Hash)
       end

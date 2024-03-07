@@ -9,7 +9,7 @@ import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import { globalProps } from "../utilities/globalProps";
-import { buildAriaProps, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
 
 type CircleChartProps = {
   align?: "left" | "right" | "center";
@@ -18,11 +18,12 @@ type CircleChartProps = {
   children?: Node;
   className?: string;
   colors?: string[];
-  dark?: Boolean;
-  data?: Object;
+  dark?: boolean;
+  data?: {[key: string]: string},
   dataLabelHtml?: string;
   dataLabels?: boolean;
   height?: string;
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   innerSize?: "sm" | "md" | "lg" | "none";
   legend?: boolean;
@@ -71,6 +72,7 @@ const CircleChart = ({
   dataLabelHtml = "<div>{point.name}</div>",
   dataLabels = false,
   height,
+  htmlOptions = {},
   id,
   innerSize = "md",
   legend = false,
@@ -89,7 +91,8 @@ const CircleChart = ({
   ...props
 }: CircleChartProps) => {
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   highchartsMore(Highcharts);
 
   const setupTheme = () => {
@@ -177,27 +180,29 @@ const CircleChart = ({
       {children ? (
         <div id={`wrapper-circle-chart-${id}`}>
           <HighchartsReact
-            containerProps={{
+              containerProps={{
               className: classnames("pb_circle_chart", globalProps(props)),
               id: id,
               ...ariaProps,
               ...dataProps,
+              ...htmlProps,
             }}
-            highcharts={Highcharts}
-            options={options}
+              highcharts={Highcharts}
+              options={options}
           />
           <div className="pb-circle-chart-block">{children}</div>
         </div>
       ) : (
         <HighchartsReact
-          containerProps={{
+            containerProps={{
             className: classnames("pb_circle_chart", globalProps(props)),
             id: id,
             ...ariaProps,
             ...dataProps,
+            ...htmlProps,
           }}
-          highcharts={Highcharts}
-          options={options}
+            highcharts={Highcharts}
+            options={options}
         />
       )}
     </>

@@ -16,8 +16,11 @@ module Playbook
       prop :new_window, type: Playbook::Props::Boolean,
                         default: false
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[primary secondary link],
+                     values: %w[primary secondary link reaction],
                      default: "primary"
+      prop :count, type: Playbook::Props::Number
+      prop :highlight, type: Playbook::Props::Boolean,
+                       default: false
       prop :target
       prop :text
       prop :type
@@ -26,6 +29,9 @@ module Playbook
                   values: ["sm", "md", "lg", nil],
                   default: nil
       prop :form, default: nil
+      prop :icon_font_family, type: Playbook::Props::Enum,
+                              values: %w[far fas fab fak],
+                              default: "far"
 
       def options
         {
@@ -63,9 +69,14 @@ module Playbook
         link ? "a" : "button"
       end
 
+      def valid_emoji(icon)
+        emoji_regex = /\p{Emoji}/
+        emoji_regex.match?(icon)
+      end
+
       def classname
         button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
-        button_class + size_class
+        button_class + size_class + default_reaction_class + highlight_active
       end
 
     private
@@ -84,6 +95,14 @@ module Playbook
 
       def size_class
         size ? " size_#{size}" : ""
+      end
+
+      def default_reaction_class
+        variant === "reaction" && !object.valid_emoji(object.icon) ? " reaction_default" : ""
+      end
+
+      def highlight_active
+        variant === "reaction" && object.highlight ? " active" : ""
       end
     end
   end

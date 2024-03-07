@@ -1,6 +1,7 @@
 @import "playbook-ui/dist/tokens/colors";
 @import "playbook-ui/dist/tokens/spacing";
 
+
 .pb--doc {
   margin-bottom: 20px;
   border-radius: 6px;
@@ -32,18 +33,19 @@
     justify-content: center;
     align-items: center;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: $bold;
   }
 
-  .pb--kit-example, .pb--kit-example-markdown {
-    &.dark {
-      color: $text_dk_light;
-      a {
-        color: $primary_action;
-      }
-    }
-    padding: calc(2rem + 4px) 2rem 1rem;
+  .pb--copy-code {
+    position: absolute;
+    right: $space_xs;
+    top: $space_xs;
+    display: block;
+  }
 
+
+  .pb--kit-example, .pb--kit-example-markdown {
+    padding: calc(2rem + 4px) 2rem 1rem;
     &.sandpack-markdown {
       padding-bottom: 0;
       padding-top: 0;
@@ -73,7 +75,7 @@
       align-items: center;
       list-style: none;
       margin: 0;
-      padding: 0 20px;
+      padding: 0 10px;
 
       li {
         font-size: 12px;
@@ -100,7 +102,7 @@
         }
 
         &.active {
-          font-weight: 600;
+          font-weight: $bold;
 
           &::after {
             background-color: $primary_action;
@@ -117,7 +119,12 @@
     display: none;
     overflow-x: auto;
     border-radius: 0 0 6px 6px;
-    background:tint($bg_dark,10);
+    background: $bg_dark;
+  }
+
+  .fa-code {
+    display: block;
+    margin: 0 auto;
   }
 
   &.dark_ui {
@@ -136,8 +143,4 @@
       }
     }
   }
-}
-
-pre.highlight {
-  padding: $space_xl;
 }

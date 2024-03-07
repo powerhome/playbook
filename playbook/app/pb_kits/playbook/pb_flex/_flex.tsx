@@ -1,15 +1,16 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildCss, buildDataProps } from '../utilities/props'
+import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
-import { Sizes } from '../types'
+import { GenericObject, Sizes } from '../types'
 
 type FlexProps = {
   children: React.ReactChild[] | React.ReactNode,
   className?: string,
-  data?: object,
+  data?: GenericObject,
   horizontal?: "left" | "center" | "right" | "stretch" | "none",
   justify?: "start" | "center" | "end" | "around" | "between" | "evenly" | "none",
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void) | ((arg?: unknown) => void)},
   id?: string,
   inline?: boolean,
   orientation?: "row" | "column",
@@ -24,7 +25,7 @@ type FlexProps = {
   alignSelf?: "start" | "end" | "center" | "stretch" | "none"
 } & GlobalProps
 
-const Flex = (props: FlexProps) => {
+const Flex = (props: FlexProps): React.ReactElement => {
   const {
     align = 'none',
     children,
@@ -32,6 +33,7 @@ const Flex = (props: FlexProps) => {
     data = {},
     inline = false,
     horizontal = 'left',
+    htmlOptions = {},
     justify = 'none',
     orientation = 'row',
     spacing = 'none',
@@ -43,7 +45,7 @@ const Flex = (props: FlexProps) => {
     wrap = false,
     alignSelf = 'none',
   } = props
-  
+
   const orientationClass =
     orientation !== undefined ? `orientation_${orientation}` : ''
   const justifyClass =
@@ -58,6 +60,8 @@ const Flex = (props: FlexProps) => {
   const reverseClass = reverse === true ? 'reverse' : ''
   const alignSelfClass = alignSelf !== 'none' ? `align_self_${alignSelf}` : ''
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+
 
   return (
     <div
@@ -80,6 +84,7 @@ const Flex = (props: FlexProps) => {
         className
       )}
         {...dataProps}
+        {...htmlProps}
     >
       {children}
     </div>

@@ -2,8 +2,8 @@ import PbEnhancedElement from '../pb_enhanced_element'
 
 const MAIN_SELECTOR = '[data-collapsible-main]'
 const CONTENT_SELECTOR = '[data-collapsible-content]'
-const DOWN_ARROW_SELECTOR = '.fa-chevron-down'
-const UP_ARROW_SELECTOR = '.fa-chevron-up'
+const DOWN_ARROW_SELECTOR = '#collapsible_open_icon'
+const UP_ARROW_SELECTOR = '#collapsible_close_icon'
 
 export default class PbCollapsible extends PbEnhancedElement {
   static get selector() {
@@ -15,6 +15,10 @@ export default class PbCollapsible extends PbEnhancedElement {
       this.toggleElement(this.target)
     })
     this.displayDownArrow()
+    // Listen for a custom event to toggle the collapsible
+    document.addEventListener(`${this.target.id}`, () => {
+      this.toggleElement(this.target)
+    })
   }
 
   get target() {
@@ -33,10 +37,12 @@ export default class PbCollapsible extends PbEnhancedElement {
     const height = getHeight()
     elem.classList.add('is-visible')
     elem.style.height = height // Update the max-height
+    elem.style.overflow = "hidden"
 
     // Once the transition is complete, remove the inline max-height so the content can scale responsively
     window.setTimeout(() => {
       elem.style.height = ''
+      elem.style.overflow = "visible"
     }, 300)
   }
 
@@ -48,11 +54,13 @@ export default class PbCollapsible extends PbEnhancedElement {
       elem.style.height = '0'
       elem.style.paddingTop = '0'
       elem.style.paddingBottom = '0'
+      elem.style.overflow = "hidden"
     }, 1)
 
     // When the transition is complete, hide it
     window.setTimeout(() => {
       elem.classList.remove('is-visible')
+      elem.style.overflow = ""
     }, 300)
   }
 
@@ -75,5 +83,5 @@ export default class PbCollapsible extends PbEnhancedElement {
   displayUpArrow() {
     this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'inline-block'
     this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'none'
-  }
+   }
 }

@@ -1,0 +1,87 @@
+<%= pb_rails("background", props: {
+    display: { xs: "flex", sm: "none", md: "none", lg: "none", xl: "none" },
+    justify_content: "center",
+    background_color: "white",
+}) do %>
+    <%= pb_rails("flex", props: {
+        classname: "width-full",
+        max_width: "xl",
+        horizontal: "center",
+        wrap: true
+    }) do %>
+        <%= pb_rails("background", props: {
+            classname: "width-full",
+            background_color: "dark",
+        }) do %>
+
+            <%= pb_rails("flex", props: {
+                padding_top: "md",
+                orientation: "column",
+                justify: "center",
+                align: "center"
+            }) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("body", props: {
+                        text: "BY THE NUMBERS",
+                        color: "link",
+                        dark: true
+                    }) %>
+                <% end %>
+            <% end %>
+
+            <%= pb_rails("flex", props: {
+                padding_top: "md",
+                padding_bottom: "xl",
+                padding_left: "sm",
+                padding_right: "sm",
+                horizontal: "center",
+                spacing: "between",
+                wrap: true
+            }) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("flex", props: { orientation: "column" }) do %>
+                        <%= pb_rails("title", props: {
+                            text: "200＋",
+                            tag: "h3",
+                            size: 3,
+                            dark: true
+                        }) %>
+                        <%= pb_rails("caption", props: {
+                            text: "components",
+                            dark: true
+                            }) %>
+                    <% end %>
+                <% end %>
+                <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("flex", props: { orientation: "column" }) do %>
+                        <%= pb_rails("title", props: {
+                            text: "1M＋",
+                            tag: "h3",
+                            size: 3,
+                            dark: true
+                        }) %>
+                        <%= pb_rails("caption", props: {
+                            text: "downloads",
+                            dark: true
+                        }) %>
+                    <% end %>
+                <% end %>
+                <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("flex", props: { orientation: "column" }) do %>
+                        <%= pb_rails("title", props: {
+                            text: "Weekly",
+                            tag: "h3",
+                            size: 3,
+                            dark: true
+                        }) %>
+                        <%= pb_rails("caption", props: {
+                            text: "release updates",
+                            dark: true
+                        }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+
+        <% end %>
+    <% end %>
+<% end %>

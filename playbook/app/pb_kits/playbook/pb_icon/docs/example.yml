@@ -8,6 +8,7 @@ examples:
   - icon_border: Icon Border
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
+  - icon_fa_kit: Icon with FontAwesome Kit
 
   react:
   - icon_default: Icon Default
@@ -18,3 +19,12 @@ examples:
   - icon_border: Icon Border
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
+  - icon_fa_kit: Icon with FontAwesome Kit
+
+  swift:
+  - icon_default_swift: Icon Default
+  - icon_rotate_swift: Icon Rotate
+  - icon_flip_swift: Icon Flip
+  - icon_border_swift: Icon Border
+  - icon_sizes_swift: Icon Sizes
+  - icon_props_swift: Props

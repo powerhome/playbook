@@ -70,11 +70,13 @@ const TypeaheadWithHighlight = (props) => {
   }
 
   const customComponents = {
-    Option: (props: OptionProps) => (
-      <components.Option {...props}/>
+    Option: (highlightProps: OptionProps) => (
+      <components.Option {...highlightProps}/>
     ),
-    SingleValue: ({ data }: any) => (
-      <span>{data.name}</span>
+    SingleValue: ({ ...props }) => (
+      <components.SingleValue {...props}>
+        <span>{props.data.name}</span>
+      </components.SingleValue>
     )
   }
 

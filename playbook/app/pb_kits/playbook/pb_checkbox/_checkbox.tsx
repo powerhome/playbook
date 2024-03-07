@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import classnames from 'classnames'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
@@ -13,6 +13,7 @@ type CheckboxProps = {
   dark?: boolean,
   data?: {[key: string]: string},
   error?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   indeterminate?: boolean,
   name?: string,
@@ -22,7 +23,7 @@ type CheckboxProps = {
   value?: string,
 } & GlobalProps
 
-const Checkbox = (props: CheckboxProps): JSX.Element => {
+const Checkbox = (props: CheckboxProps): React.ReactElement => {
   const {
     aria = {},
     checked = false,
@@ -31,6 +32,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
     dark = false,
     data = {},
     error = false,
+    htmlOptions = {},
     id,
     indeterminate = false,
     name = '',
@@ -41,8 +43,10 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
   } = props
 
   const checkRef = useRef(null)
-  const dataProps = buildDataProps(data)
   const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+
   const classes = classnames(
     buildCss('pb_checkbox_kit', checked ? 'checked' : null, error ? 'error' : null, indeterminate? 'indeterminate' : null),
     globalProps(props),
@@ -69,13 +73,14 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
         tabIndex={tabIndex}
         type="checkbox"
         value={value}
-      />)
+    />)
   }
 
   return (
     <label
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

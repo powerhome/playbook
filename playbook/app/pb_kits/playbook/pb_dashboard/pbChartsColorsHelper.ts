@@ -2,7 +2,7 @@ import colors from "../tokens/exports/_colors.scss";
 
 
 // Map Data Color String Props to our SCSS Variables
-const mapColors = (array: string[]) => {
+const mapColors = (array: string[]): string[] => {
     const regex = /(data)\-[1-8]/; //eslint-disable-line
   
     const newArray = array.map((item) => {

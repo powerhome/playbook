@@ -1,7 +1,7 @@
 import React, { Fragment, useMemo, useRef, useState, useEffect } from 'react'
 import { useKbdControls } from './hooks/useKbdControls'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import LightboxHeader from './Header/_lightbox_header'
 import { LightboxContext } from './_lightbox_context'
@@ -15,10 +15,11 @@ type LightboxType = {
   currentPhotoIndex?: number,
   data?: {[key: string]: string | number},
   description?: string | any,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   photos: [],
   initialPhoto?: number,
-  onChange?: (index: number)=> {},
+  onChange?: (index: number)=> void,
   onClickRight?: () => void,
   onClose?: () => void,
   icon: string,
@@ -35,10 +36,11 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
     currentPhotoIndex,
     data = {},
     description,
+    htmlOptions = {},
     id = '',
     initialPhoto = 0,
     photos,
-    onChange = ()=>{},
+    onChange = () => undefined,
     onClose,
     onClickRight,
     icon = 'times',
@@ -47,16 +49,20 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
   } = props
 
   const [activePhoto, setActivePhoto] = useState(initialPhoto)
+
   useEffect(() => {
     onChange(activePhoto)
   },[activePhoto])
 
   useEffect(() => {
+    currentPhotoIndex !== undefined && currentPhotoIndex !== null && (
     setActivePhoto(currentPhotoIndex)
+    )
   },[currentPhotoIndex])
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_lightbox_kit'),
     globalProps(props),
@@ -93,6 +99,7 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
         <div
             {...ariaProps}
             {...dataProps}
+            {...htmlProps}
             className={classes}
             id={id}
             ref={lightboxRef}
@@ -100,18 +107,18 @@ const Lightbox = (props: LightboxType): React.ReactNode => {
           <div className="carousel">
           <Lightbox.Header
               icon={icon}
-              onClose={onClose}
-              onClickRight={onClickRight}
-              text={description}
               navRight={navRight}
+              onClickRight={onClickRight}
+              onClose={onClose}
+              text={description}
               title={title}
           />
             {children}
             <Carousel
-                setIndex={setActivePhoto}
                 currentIndex={activePhoto}
                 onChange={handleOnSlide}
                 photos={photosMap}
+                setIndex={setActivePhoto}
             />
           </div>
         </div>

@@ -11,7 +11,7 @@ module Playbook
       prop :error
       prop :inline, type: Playbook::Props::Boolean,
                     default: false
-      prop :input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
       prop :label
       prop :name
@@ -19,7 +19,7 @@ module Playbook
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :type, default: "text"
-      prop :validation, type: Playbook::Props::Hash,
+      prop :validation, type: Playbook::Props::HashProp,
                         default: {}
       prop :value
       prop :add_on, type: Playbook::Props::NestedProps,
@@ -60,7 +60,7 @@ module Playbook
           required: required,
           type: type,
           value: value,
-        }
+        }.merge(input_options)
       end
 
       def validation_message

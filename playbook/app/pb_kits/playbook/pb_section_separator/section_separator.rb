@@ -12,9 +12,12 @@ module Playbook
                          default: "horizontal"
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
+      prop :line_style, type: Playbook::Props::Enum,
+                        values: %w[dashed solid],
+                        default: "solid"
 
       def classname
-        generate_classname("pb_section_separator_kit", variant, orientation)
+        generate_classname("pb_section_separator_kit", variant, orientation, line_style == "dashed" ? "dashed" : nil)
       end
 
     private

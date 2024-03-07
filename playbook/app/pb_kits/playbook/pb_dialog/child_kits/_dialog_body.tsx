@@ -10,10 +10,10 @@ type DialogBodyProps = {
 } 
 
 // Body component
-const DialogBody = (props: DialogBodyProps) => {
-  const { children, padding = "sm", className } = props
+const DialogBody = (props: DialogBodyProps): React.ReactElement => {
+  const { children, className } = props
   const bodyCSS = buildCss("dialog_body")
-  const bodySpacing = globalProps(props, { padding })
+  const bodySpacing = globalProps(props)
 
   return (
     <div className={classnames(bodyCSS, bodySpacing, className)}>

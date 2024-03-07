@@ -5,7 +5,10 @@ import NavItem from '../_item'
 
 const SubtleNav = (props) => {
   return (
-    <Nav variant="subtle">
+    <Nav 
+        variant="subtle"
+        {...props}
+    >
       <NavItem
           link="#"
           text="Overview"

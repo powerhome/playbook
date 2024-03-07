@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import classnames from "classnames";
 import Modal from "react-modal";
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 
 import Body from "../pb_body/_body";
@@ -25,7 +25,8 @@ type DialogProps = {
   className?: string;
   closeable: boolean;
   confirmButton?: string;
-  data?: object;
+  data?: {[key: string]: string},
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   fullHeight?: boolean;
   loading?: boolean;
@@ -44,22 +45,23 @@ type DialogProps = {
   trigger?: string;
 };
 
-const Dialog = (props: DialogProps) => {
+const Dialog = (props: DialogProps): React.ReactElement => {
   const {
     aria = {},
     cancelButton,
     confirmButton,
     className,
     data = {},
+    htmlOptions = {},
     id,
     size = "md",
     children,
     loading = false,
     fullHeight = false,
     opened,
-    onCancel = () => {},
-    onConfirm = () => {},
-    onClose = () => {},
+    onCancel,
+    onConfirm,
+    onClose,
     placement = "center",
     portalClassName,
     shouldCloseOnOverlayClick = true,
@@ -69,7 +71,8 @@ const Dialog = (props: DialogProps) => {
     trigger,
   } = props;
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions);
   const dialogClassNames = {
     base: classnames("pb_dialog", buildCss("pb_dialog", size, placement)),
     afterOpen: "pb_dialog_after_open",
@@ -164,51 +167,67 @@ const Dialog = (props: DialogProps) => {
 
   return (
     <DialogContext.Provider value={api}>
-      <div {...ariaProps} {...dataProps} className={classes}>
+      <div 
+          {...ariaProps} 
+          {...dataProps}
+          {...htmlProps} 
+          className={classes}
+      >
         <Modal
-          ariaHideApp={false}
-          className={dialogClassNames}
-          closeTimeoutMS={200}
-          contentLabel="Minimal Modal Example"
-          id={id}
-          isOpen={modalIsOpened}
-          onRequestClose={onClose}
-          overlayClassName={overlayClassNames}
-          portalClassName={portalClassName}
-          shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
+            ariaHideApp={false}
+            className={dialogClassNames}
+            closeTimeoutMS={200}
+            contentLabel="Minimal Modal Example"
+            id={id}
+            isOpen={modalIsOpened}
+            onRequestClose={onClose}
+            overlayClassName={overlayClassNames}
+            portalClassName={portalClassName}
+            shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         >
           <>
             {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}
             {!status && text ? <Dialog.Body>{text}</Dialog.Body> : null}
             {status && (
-              <Dialog.Body padding="md">
-                <Flex align="center" orientation="column">
+              <Dialog.Body
+                  className="dialog_status_text_align"
+                  padding="md"
+              >
+                <Flex align="center"
+                    orientation="column"
+                >
                   <IconCircle
-                    icon={sweetAlertStatus[status].icon}
-                    size={sweetAlertStatus[status].size}
-                    variant={sweetAlertStatus[status].variant}
+                      icon={sweetAlertStatus[status].icon}
+                      size={sweetAlertStatus[status].size}
+                      variant={sweetAlertStatus[status].variant}
                   />
-                  <Title marginTop="sm" size={3}>
+                  <Title marginTop="sm"
+                      size={3}
+                  >
                     {title}
                   </Title>
-                  <Body marginTop="xs" text={text} />
+                  <Body marginTop="xs"
+                      text={text}
+                  />
                 </Flex>
               </Dialog.Body>
             )}
             {cancelButton && confirmButton ? (
               <Dialog.Footer>
-                  <Button 
-                    loading={loading} 
-                    onClick={onConfirm} 
-                    htmlType="button" 
-                    variant="primary">
+                  <Button
+                      htmlType="button"
+                      loading={loading}
+                      onClick={onConfirm}
+                      variant="primary"
+                  >
                     {confirmButton}
                   </Button>
-                  <Button 
-                    id="cancel-button" 
-                    onClick={onCancel} 
-                    variant="link" 
-                    htmlType="button">
+                  <Button
+                      htmlType="button"
+                      id="cancel-button"
+                      onClick={onCancel}
+                      variant="link"
+                  >
                     {cancelButton}
                   </Button>
               </Dialog.Footer>

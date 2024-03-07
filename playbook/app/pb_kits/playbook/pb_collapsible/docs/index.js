@@ -1,3 +1,5 @@
 export { default as CollapsibleDefault } from './_collapsible_default.jsx'
 export { default as CollapsibleSize } from './_collapsible_size.jsx'
 export { default as CollapsibleColor } from './_collapsible_color.jsx'
+export { default as CollapsibleIcons } from './_collapsible_icons.jsx'
+export {default as CollapsibleState } from './_collapsible_state.jsx'

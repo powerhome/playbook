@@ -6,6 +6,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps,
 } from '../utilities/props'
 
 import Body from '../pb_body/_body'
@@ -21,6 +22,7 @@ type SelectableCardIconProps = {
   dark?: boolean,
   data?: { [key: string]: string },
   disabled?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
   inputId?: string,
   multi?: boolean,
@@ -31,7 +33,7 @@ type SelectableCardIconProps = {
   onChange?: (event: React.FormEvent<HTMLInputElement>) => void,
 }
 
-const SelectableCardIcon = (props: SelectableCardIconProps) => {
+const SelectableCardIcon = (props: SelectableCardIconProps): React.ReactElement => {
   const {
     aria = {},
     checkmark = false,
@@ -41,6 +43,7 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
     dark = false,
     data = {},
     disabled = false,
+    htmlOptions = {},
     icon,
     inputId,
     multi = true,
@@ -53,6 +56,7 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(
     buildCss('pb_selectable_card_icon_kit', {
@@ -66,35 +70,37 @@ const SelectableCardIcon = (props: SelectableCardIconProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      className={classes}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
     >
       <SelectableCard
-        checked={checked}
-        customIcon={customIcon}
-        dark={dark}
-        disabled={disabled}
-        icon={checkmark}
-        inputId={inputId}
-        multi={multi}
-        name={name}
-        onChange={onChange}
-        value={value}
+          checked={checked}
+          customIcon={customIcon}
+          dark={dark}
+          disabled={disabled}
+          icon={checkmark}
+          inputId={inputId}
+          multi={multi}
+          name={name}
+          onChange={onChange}
+          value={value}
       >
         {
           <>
             <SelectableIcon
-              customIcon={customIcon}
-              icon={icon}
-              inputId={''}
-              inputs="disabled"
-              name={''}
-              text={titleText} />
+                customIcon={customIcon}
+                icon={icon}
+                inputId={''}
+                inputs="disabled"
+                name={''}
+                text={titleText}
+            />
             <Body
-              color="light"
-              dark={dark}
-              text={bodyText}
+                color="light"
+                dark={dark}
+                text={bodyText}
             />
           </>
         }

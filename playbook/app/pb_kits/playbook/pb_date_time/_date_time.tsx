@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Flex from '../pb_flex/_flex'
@@ -13,7 +13,8 @@ type DateTimeProps = {
   aria?: { [key: string]: string; },
   className?: string,
   data?: { [key: string]: string; },
-  datetime: string,
+  datetime: Date,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: "sm" | "md",
   showDayOfWeek: boolean,
@@ -21,12 +22,13 @@ type DateTimeProps = {
   timeZone?: string
 }
 
-const DateTime = (props: DateTimeProps) => {
+const DateTime = (props: DateTimeProps): React.ReactElement => {
   const {
     align = 'left',
     aria = {},
     className,
     data = {},
+    htmlOptions = {},
     showDayOfWeek = false,
     datetime,
     id,
@@ -37,6 +39,7 @@ const DateTime = (props: DateTimeProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_date_time', size),
     globalProps(props),
@@ -47,6 +50,7 @@ const DateTime = (props: DateTimeProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

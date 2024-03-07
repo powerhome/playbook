@@ -9,6 +9,10 @@ examples:
   - subtle_with_icons_nav: Subtle With Icons
   - subtle_no_highlight_nav: Subtle No Highlight
   - bold_vertical_nav: Bold Variant
+  - nav_with_spacing_control: Nav with Spacing Control
+  - nav_with_font_control: Nav With Font Control
+  - collapsible_nav: Collapsible Nav
+  - collapsible_nav_with_all_options: Collapsible Nav With Options
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
@@ -26,9 +30,32 @@ examples:
   - subtle_with_icons_nav: Subtle With Icons
   - subtle_no_highlight_nav: Subtle No Highlight
   - bold_vertical_nav: Bold Variant
+  - nav_with_spacing_control: Nav with Spacing Control
+  - nav_with_font_control: Nav With Font Control
+  - collapsible_nav: Collapsible Nav
+  - collapsible_nav_with_all_options: Collapsible Nav With Options
+  - collapsible_nav_item_spacing: Collapsible Nav With ItemSpacing
+  - collapsible_nav_custom: Collapsible Nav With Custom Toggling
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
   - block_nav: Block
   - block_no_title_nav: Without Title
   - new_tab: Open in a New Tab
+
+  swift:
+  - nav_vertical_default_swift: Vertical Default
+  - nav_vertical_subtle_swift: Vertical Subtle
+  - nav_vertical_subtle_no_highlight_swift: Vertical Subtle No Highlight
+  - nav_vertical_bold_swift: Vertical Bold
+  - nav_horizontal_default_swift: Horizontal Default
+  - nav_horizontal_subtle_swift: Horizontal Subtle
+  - nav_horizontal_subtle_no_highlight_swift: Horizontal Subtle No Highlight
+  - nav_horizontal_bold_swift: Horizontal Bold
+  - nav_props_swift: ""
+
+
+
+  
+
+  

@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -12,7 +12,8 @@ type LegendProps = {
   className?: string,
   color?: string,
   dark?: boolean,
-  data?: object,
+  data?: Record<string, unknown>,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   prefixText?: string,
   text: string,
@@ -25,6 +26,7 @@ const Legend = (props: LegendProps) => {
     color = 'data_1',
     dark = false,
     data = {},
+    htmlOptions = {},
     id,
     prefixText,
     text,
@@ -32,6 +34,7 @@ const Legend = (props: LegendProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const customColor = color.charAt(0) === '#' && color
 
@@ -50,6 +53,7 @@ const Legend = (props: LegendProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={bodyCss}
         id={id}
     >
@@ -60,11 +64,11 @@ const Legend = (props: LegendProps) => {
         {
           prefixText && (
             <Title
-              dark={dark}
-              size={4}
-              tag="span"
-              text={` ${prefixText} `}
-          />
+                dark={dark}
+                size={4}
+                tag="span"
+                text={` ${prefixText} `}
+            />
           )
         }
         {` ${text} `}

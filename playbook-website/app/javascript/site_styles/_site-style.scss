@@ -3,6 +3,7 @@
 @import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/dist/tokens/border_radius";
 @import "playbook-ui/dist/tokens/shadows";
+@import "playbook-ui/dist/tokens/typography";
 
 $selector: ".pb--page";
 $nav_breakpoint: breakpoint("lg");
@@ -12,96 +13,50 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  &.visual_guidelines,
-  &.kits {
-    overflow-y: hidden;
-  }
 }
 
 .pb--page {
-  &--topNav {
-    flex: 0 0;
-    padding: $space_sm $space_md $space_xs $space_md;
-    background: $white;
-    position: relative;
-    h1 {
-      display: flex;
-      align-items: center;
-      img {
-        display: flex;
-      }
-    }
-    &--separator {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
-    }
-    &.dark{
-      background: tint(#0a0527, 10);
-    }
-    .desktop-kit-search {
-      width: 33vw;
-      max-width: 300px;
-      [class*=_label] {
-        margin-bottom: 0 !important;
-      }
-      .text_input_wrapper {
-        margin-bottom: 0 !important;
-      }
-    }
-    .mobile-kit-search {
+  &--dark-mode-toggle-desktop {
+    display: flex;
+    justify-content: flex-end;
+    @include break_at($nav_breakpoint) {
       display: none;
     }
-    .pb-version-tag {
-      text-align: right;
-      position: relative;
-      bottom: $space_md - 4;
-    }
-    .separator-explicit-height {
-      height: $space_xl + 5;
-      margin-left: $space_xs;
-      margin-right: $space_xs;
-    }
-    // Mobile Overrides
+  }
+  &--dark-mode-toggle-mobile {
+    position: fixed;
+    top: $space_lg;
+    right: $space_xl;
+    display: none;
+    z-index: 100;
     @include break_at($nav_breakpoint) {
-      .full-size-nav, .github-nav-icon {
-        display: none;
-      }
-      .toggle-wrapper {
-        margin-right: 65px;
-      }
-    }
-    @include break_at(breakpoint("sm")) {
-      .desktop-kit-search, .separator-explicit-height {
-        display: none;
-      }
-      .mobile-kit-search {
-        display: block;
-      }
-    }
-    @include break_at(375px) {
-      .toggle-wrapper {
-        display: none;
-      }
+      display: block;
     }
   }
-
   &--content {
     min-height: calc(100vh - 89px);
     @include break_at($nav_breakpoint) {
       grid-template-columns: auto !important;
     }
+    &.no-sidebar {
+      grid-template-columns: 0 auto !important;
+      @include break_at($nav_breakpoint) {
+        grid-template-columns: auto !important;
+      }
+    }
     &--main {
       flex-grow: 1;
-      padding: 0 60px 40px;
-      height: calc(100vh - 89px);
+      height: 100vh;
       overflow: auto;
-      @include break_at($nav_breakpoint) {
-        padding: $space-lg $space-xl;
+      .pb--kits,
+      .pb--kit-show,
+      .kit-show-wrapper {
+        padding: 0 ($space_xl + $space_md) $space_xl;
+        @include break_at($nav_breakpoint) {
+          padding: $space-lg;
+        }
       }
-      &.dark{
+      &.dark {
         background: #0a0527;
       }
       &.height-override {
@@ -113,6 +68,11 @@ body {
       &.smooth-scroll {
         scroll-behavior: smooth;
       }
+
+      &--guides {
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
   &--hamburger {
@@ -120,7 +80,7 @@ body {
   }
   &--hamburger, &--checkbox {
     position: absolute;
-    right: $space-xl;
+    left: $space-xl;
     top: 30px;
     display: none;
     font-size: $space-xl;
@@ -128,6 +88,7 @@ body {
     height: 30px;
     color: $primary;
     cursor: pointer;
+    z-index: 1;
     @include break_at($nav_breakpoint) {
       display: block;
     }
@@ -138,12 +99,12 @@ body {
       @include break_at($nav_breakpoint) {
         position: absolute;
         transform-origin: 0% 0%;
-        transform: translate(110%, 0);
+        transform: translate(-110%, 0);
         transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
         border-radius: $border_rad_heavier;
         box-shadow: $shadow_deepest;
         top: 100px;
-        right: 0;
+        left: 0;
         min-width: 200px;
         width: auto !important;
         z-index: 1000;
@@ -151,64 +112,41 @@ body {
     }
     &:checked ~ #{$selector}--sideNav {
       @include break_at($nav_breakpoint) {
-        transform: translate(-10%, 0);
+        transform: translate(10%, 0);
       }
     }
   }
 
   &--footer {
-    background-color: $royal;
-    padding: $space_lg * 2 $space_lg * 3;
+    background-color: $bg_dark;
+    padding: $space_lg * 2 0 40px;
     margin-top: auto;
     .inner-footer-wrapper {
-      max-width: 1350px;
       margin: 0 auto;
+    }
+    .link-container {
+      width: 100%;
     }
     .footer-logo-block {
       text-align: center;
     }
     .copyright-tag {
       text-align: center;
-      margin-top: $space_xl * 3;
     }
     // reformat footer links on smaller screens
     @include break_at(650px){
       [class^=pb_flex_kit] {
-        flex-direction: column !important;
         align-content: center;
       }
-      text-align: center;
       [class^="pb_caption_kit"] {
         margin-top: $space_lg;
       }
     }
   }
 
-  &--sideNav.non-kit {
-    background-color: $white;
-    display: none;
-    height: auto !important;
-    overflow: hidden;
-    @include break_at($nav_breakpoint) {
-      display: block;
-    }
-  }
-
   &--sideNav {
-    height: calc(100vh - 89px);
+    height: 100vh;
     overflow: auto;
-    .category_section {
-      &.active {
-        padding: $space_xs 0;
-        background: $bg_light;
-      }
-      .sub_category {
-        padding-left: $space_md;
-      }
-    }
-    &[class*=dark]{
-      border-color: $border_dark;
-    }
     .mobile-sidebar-pages {
       display: none;
     }
@@ -218,8 +156,40 @@ body {
       }
     }
   }
+
+  &--mobileNav {
+    position: relative;
+    height: 100px;
+    background-color: $white;
+    width: 100%;
+    display: none;
+    z-index: 1;
+    &.dark {
+      background: tint(#0a0527, 10);
+    }
+    @include break_at($nav_breakpoint) {
+        display: flex;
+    }
+  }
+  
 }
-#toggle-modes{
+
+.guides--page {
+  height: 100vh;
+  overflow: auto;
+}
+
+.h100 {
+  height: 100%;
+}
+.w100 {
+  width: 100%;
+}
+.minw0 {
+  min-width: 0;
+}
+
+#toggle-modes {
   display: flex;
   margin-right: 80px;
 }
@@ -227,7 +197,6 @@ body {
 .pb--kit-type-nav {
   margin: 20px 0 30px;
   line-height: 34px;
-  border-bottom: 2px solid rgba($border_light, 0.6);
 
   &.sample {
     margin: 0;
@@ -239,7 +208,7 @@ body {
     padding: 0 10px;
     line-height: 34px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: $regular;
     display: inline-block;
     position: relative;
 
@@ -256,7 +225,7 @@ body {
     }
 
     &.active {
-      font-weight: 600;
+      font-weight: $bold;
 
       &::after {
         background: $primary;

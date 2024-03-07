@@ -9,12 +9,10 @@ const TooltipDefaultReact = (props) => {
    <Flex 
        flexDirection='row'
        gap='md'
-       justifyContent='center'
        wrap
    >
     <FlexItem>
       <Tooltip 
-          className={"customClassNameHere"}
           placement='top' 
           text="Whoa. I'm a Tooltip" 
           zIndex={10}

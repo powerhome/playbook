@@ -1,9 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 
-import DateTime from "../pb_kit/dateTime";
-import { buildCss } from "../utilities/props";
+import { buildCss, buildHtmlProps } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
+import DateTime from '../pb_kit/dateTime';
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -13,13 +13,15 @@ type TimeProps = {
   align?: "left" | "center" | "right";
   className?: string | string[];
   data?: string;
-  date: string;
+  date: Date;
   dark?: boolean;
   id?: string;
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   showIcon?: boolean;
   size?: "md" | "sm";
   showTimezone?: boolean;
   timeZone?: string;
+  unstyled?: boolean;
 } & GlobalProps
 
 const Time = (props: TimeProps) => {
@@ -27,62 +29,101 @@ const Time = (props: TimeProps) => {
     align,
     className,
     date,
+    htmlOptions = {},
     showIcon,
     size,
     timeZone,
+    unstyled = false,
     showTimezone = true,
   } = props;
+
   const classes = classnames(
     buildCss("pb_time_kit", align, size),
     globalProps(props),
     className
   );
 
-  const dateTimestamp = new DateTime({ value: date, zone: timeZone });
+  const htmlProps = buildHtmlProps(htmlOptions);
 
   return (
-    <div className={classes}>
+    <div 
+      {...htmlProps}
+      className={classes} 
+    >
       {showIcon && (
-        <>
-          <Body color="light" tag="span">
-            <Icon fixedWidth icon="clock" size={size === "md" ? "" : "sm"} />
-          </Body>{" "}
-        </>
+        unstyled
+          ? (
+              <span>
+                <Icon fixedWidth
+                    icon="clock"
+                />
+                {" "}
+              </span>
+            )
+          : (
+            <>
+              <Body color="light"
+                  tag="span"
+              >
+                <Icon fixedWidth
+                    icon="clock"
+                    size={size === "md" ? "" : "sm"}
+                />
+                {" "}
+              </Body>
+            </>
+            )
       )}
 
-      <time dateTime={date}>
+      <time dateTime={date.toLocaleString()}>
         <span>
-          {size === "md" ? (
-            <>
-              <Body
-                className="pb_time"
-                tag="span"
-                text={dateTimestamp.toTimeWithMeridian()}
-              />{" "}
-              {showTimezone && (
-                <Body
-                  color="light"
-                  tag="span"
-                  text={dateTimestamp.toTimezone()}
-                />
-              )}
-            </>
-          ) : (
-            <>
-              <Caption
-                color="light"
-                tag="span"
-                text={dateTimestamp.toTimeWithMeridian()}
-              />{" "}
-              {showTimezone && (
-                <Caption
-                  color="light"
-                  tag="span"
-                  text={dateTimestamp.toTimezone()}
-                />
-              )}
-            </>
-          )}
+          {unstyled
+            ? (
+                <>
+                  <span>
+                    {DateTime.toTimeWithMeridiem(date, timeZone)}
+                  </span>
+                  {" "}
+                  {showTimezone && (
+                    <span>
+                      {DateTime.toTimeZone(date, timeZone)}
+                    </span>
+                  )}
+                </>
+              )
+            : size === "md"
+              ? (
+                  <>
+                    <Body
+                        className="pb_time"
+                        tag="span"
+                        text={DateTime.toTimeWithMeridiem(date, timeZone)}
+                    />{" "}
+                    {showTimezone && (
+                      <Body
+                          color="light"
+                          tag="span"
+                          text={DateTime.toTimeZone(date, timeZone)}
+                      />
+                    )}
+                  </>
+                )
+              : (
+                  <>
+                    <Caption
+                        color="light"
+                        tag="span"
+                        text={DateTime.toTimeWithMeridiem(date, timeZone)}
+                    />{" "}
+                    {showTimezone && (
+                      <Caption
+                          color="light"
+                          tag="span"
+                          text={DateTime.toTimeZone(date, timeZone)}
+                      />
+                    )}
+                  </>
+                )}
         </span>
       </time>
     </div>

@@ -6,8 +6,8 @@ import classnames from 'classnames'
 import {
   buildAriaProps,
   buildCss,
-  buildDataProps,
-} from '../utilities/props'
+  buildDataProps, 
+  buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Avatar from '../pb_avatar/_avatar'
@@ -19,7 +19,8 @@ type AvatarActionButtonProps = {
   linkAriaLabel?: string,
   className?: string,
   dark?: boolean,
-  data?: Object,
+  data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   imageAlt?: string,
   imageUrl?: string,
@@ -30,7 +31,7 @@ type AvatarActionButtonProps = {
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
 }
 
-const AvatarActionButton = (props: AvatarActionButtonProps) => {
+const AvatarActionButton = (props: AvatarActionButtonProps): React.ReactElement => {
   const {
     action = 'add',
     aria = {},
@@ -38,6 +39,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     id,
     imageAlt = '',
     imageUrl,
@@ -50,6 +52,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(buildCss(
     'pb_avatar_action_button_kit',
@@ -68,6 +71,7 @@ const AvatarActionButton = (props: AvatarActionButtonProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

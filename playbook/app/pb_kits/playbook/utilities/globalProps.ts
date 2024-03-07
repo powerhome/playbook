@@ -2,6 +2,7 @@ import { omit } from 'lodash'
 import { camelToSnakeCase } from './text'
 
 import {
+  BitValues,
   Binary,
   Display,
   DisplaySizes,
@@ -16,13 +17,13 @@ type AlignContent = {
 }
 
 type AlignItems = {
-  alignItems?: Alignment & ("flexStart" | "flexEnd" | "stretch" | "baseline")
+  alignItems?: Alignment | ("flexStart" | "flexEnd" | "stretch" | "baseline")
 }
 
 type AlignSelf = {
   alignSelf?: Alignment & ("auto" | "stretch" | "baseline")
 }
-type AllSizes = None | Sizes
+type AllSizes = None | Sizes | "auto" | "initial" | "inherit"
 
 type BorderRadius = {
   borderRadius?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "rounded",
@@ -48,7 +49,7 @@ type FlexDirection = {
 }
 
 type FlexGrow = {
-  flexGrow?: 0 | 1
+  flexGrow?: Binary
 }
 
 type FlexShrink = {
@@ -57,6 +58,12 @@ type FlexShrink = {
 
 type FlexWrap = {
   flexWrap?: "wrap" | "nowrap" | "wrapReverse"
+}
+
+type Hover = Shadow & {
+  background?: string,
+  color?: string,
+  scale?: "sm" | "md" | "lg"
 }
 
 type JustifyContent = {
@@ -79,6 +86,8 @@ type Margin = {
   marginX?: AllSizes,
   marginY?: AllSizes,
   margin?: AllSizes,
+  break?: string,
+  default?: string
 }
 
 type MaxWidth = {
@@ -101,6 +110,8 @@ type Padding = {
   paddingX?: AllSizes,
   paddingY?: AllSizes,
   padding?: AllSizes,
+  break?: string,
+  default?: string
 }
 
 type Position = {
@@ -113,16 +124,34 @@ type Shadow = {
 
 type Space = "spaceBetween" | "spaceAround" | "spaceEvenly"
 
-type ZIndex = {
-  zIndex?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
+type TextAlign = {
+  textAlign?: "start" | "end" | "left" | "right" | "center" | "justify" | "justifyAll" | "matchParent",
 }
+
+type OverflowTypes = "scroll" | "visible" | "hidden" | "auto"
+type Overflow = {
+overflowX?: OverflowTypes,
+overflowY?: OverflowTypes,
+overflow?: OverflowTypes
+}
+
+type TruncateType = None | 1 | 2 | 3 | 4 | 5
+type Truncate = {
+  truncate?: TruncateType
+}
+
+type ZIndexType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+type ZIndexResponsiveType = {[key: string]: ZIndexType}
+type ZIndex = {
+  zIndex?: ZIndexType,
+} | ZIndexResponsiveType
 
 // keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
-  LineHeight & Margin & MaxWidth & NumberSpacing & Order & Padding &
-  Position & Shadow & ZIndex
+  LineHeight & Margin & MaxWidth & NumberSpacing & Order & Overflow & Padding &
+  Position & Shadow & TextAlign & Truncate & ZIndex & { hover?: string };
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -134,6 +163,17 @@ const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: st
 
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
+
+  hoverProps: ({ hover }: { hover?: Hover }) => {
+      let css = '';
+      if (!hover) return css;
+      css += hover.shadow ? `hover_shadow_${hover.shadow} ` : '';
+      css += hover.background ? `hover_background_${hover.background } ` : '';
+      css += hover.scale ? `hover_scale_${hover.scale} ` : '';
+      css += hover.color ? `hover_color_${hover.color } ` : '';
+      return css;
+  },
+
   spacingProps: ({
     marginRight,
     marginLeft,
@@ -151,21 +191,95 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     padding,
   }: Margin & Padding) => {
     let css = ''
-    css += marginRight ? `mr_${marginRight} ` : ''
-    css += marginLeft ? `ml_${marginLeft} ` : ''
-    css += marginTop ? `mt_${marginTop} ` : ''
-    css += marginBottom ? `mb_${marginBottom} ` : ''
-    css += marginX ? `mx_${marginX} ` : ''
-    css += marginY ? `my_${marginY} ` : ''
-    css += margin ? `m_${margin} ` : ''
-    css += paddingRight ? `pr_${paddingRight} ` : ''
-    css += paddingLeft ? `pl_${paddingLeft} ` : ''
-    css += paddingTop ? `pt_${paddingTop} ` : ''
-    css += paddingBottom ? `pb_${paddingBottom} ` : ''
-    css += paddingX ? `px_${paddingX} ` : ''
-    css += paddingY ? `py_${paddingY} ` : ''
-    css += padding ? `p_${padding} ` : ''
+    const spacingProps = {
+      marginRight,
+      marginLeft,
+      marginTop,
+      marginBottom,
+      marginX,
+      marginY,
+      margin,
+      paddingRight,
+      paddingLeft,
+      paddingTop,
+      paddingBottom,
+      paddingX,
+      paddingY,
+      padding,
+    };
+
+    const screenSizeValues = ["xs", "sm", "md", "lg", "xl"]
+
+    function handleObjectValue(properties: Margin | Padding, prefix: string) {
+      let classResult = '';
+
+      const breakValue = properties.break || "on";
+      const defaultValue = properties.default || null;
+
+      Object.entries(properties).forEach(([key, value]) => {
+        if (screenSizeValues.includes(key)) {
+          classResult += `break_${breakValue}_${key}:${prefix}_${value} `;
+        }
+      });
+
+      if (defaultValue) {
+        classResult += `${prefix}_${defaultValue} `;
+      }
+
+      return classResult;
+    }
+
+    function getPrefix(key: string) {
+      const prefixes: Record<string, string> = {
+        marginRight: 'mr',
+        marginLeft: 'ml',
+        marginTop: 'mt',
+        marginBottom: 'mb',
+        marginX: 'mx',
+        marginY: 'my',
+        margin: 'm',
+        paddingRight: 'pr',
+        paddingLeft: 'pl',
+        paddingTop: 'pt',
+        paddingBottom: 'pb',
+        paddingX: 'px',
+        paddingY: 'py',
+        padding: 'p',
+      };
+
+      return prefixes[key];
+    }
+
+    Object.entries(spacingProps).forEach(([key, value]) => {
+      if (value) {
+        if (typeof value === 'object') {
+          css += handleObjectValue(value, getPrefix(key));
+        } else {
+          const prefix = getPrefix(key);
+          css += `${prefix}_${value} `;
+        }
+      }
+    });
+    return css.trim();
+  },
+  borderRadiusProps: ({ borderRadius }: BorderRadius) => {
+    let css = ''
+    css += borderRadius ? `border_radius_${borderRadius} ` : ''
     return css
+  },
+  overflowProps: ({ overflow, overflowX, overflowY }: Overflow) => {
+    let css = ''
+    css += overflow ? `overflow_${overflow}` : ''
+    css += overflowX ? `overflow_x_${overflowX}` : ''
+    css += overflowY ? `overflow_y_${overflowY}` : ''
+    return css
+  },
+  truncateProps: ({ truncate }: Truncate) => {
+    if (typeof truncate === 'object') {
+      return ''
+    } else {
+      return truncate ? `truncate_${truncate}` : ''
+    }
   },
   darkProps: ({ dark }: Dark) => dark ? 'dark' : '',
   numberSpacingProps: ({ numberSpacing }: NumberSpacing) => {
@@ -178,9 +292,19 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += maxWidth ? `max_width_${maxWidth } ` : ''
     return css
   },
-  zIndexProps: ({ zIndex }: ZIndex) => {
+  zIndexProps: (zIndex: ZIndex) => {
     let css = ''
-    css += zIndex ? `z_index_${zIndex } ` : ''
+    Object.entries(zIndex).forEach((zIndexEntry) => {
+      if (zIndexEntry[0] == "zIndex") {
+        if (typeof zIndexEntry[1] == "number") {
+          css += `z_index_${zIndexEntry[1]} `
+        } else if (typeof zIndexEntry[1] == "object") {
+          Object.entries(zIndexEntry[1]).forEach((zIndexObj) => {
+            css += `z_index_${zIndexObj[0]}_${zIndexObj[1]} `
+          })
+        }
+      }
+    })
     return css
   },
   shadowProps: ({ shadow }: Shadow) => {
@@ -259,15 +383,19 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   flexGrowProps: ({ flexGrow }: FlexGrow) => {
     if (typeof flexGrow == 'object') {
       return getResponsivePropClasses(flexGrow, 'flex_grow')
+    } else if (BitValues.includes(flexGrow)) {
+      return `flex_grow_${flexGrow}`
     } else {
-      return flexGrow ? `flex_grow_${flexGrow}` : ''
+      return ''
     }
   },
   flexShrinkProps: ({ flexShrink }: FlexShrink) => {
     if (typeof flexShrink == 'object') {
       return getResponsivePropClasses(flexShrink, 'flex_shrink')
+    } else if (BitValues.includes(flexShrink)) {
+      return `flex_shrink_${flexShrink}`
     } else {
-      return flexShrink ? `flex_shrink_${flexShrink}` : ''
+      return ''
     }
   },
   justifyContentProps: ({ justifyContent }: JustifyContent) => {
@@ -290,12 +418,19 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     } else {
       return order ? `flex_order_${order}` : ''
     }
-  }, 
+  },
   positionProps: ({ position }: Position) => {
     let css = ''
     css += position && position !== 'static' ? `position_${position}` : ''
     return css
   },
+  textAlignProps: ({ textAlign }: TextAlign) => {
+    if (typeof textAlign === 'object') {
+      return getResponsivePropClasses(textAlign, 'text_align')
+    } else {
+      return textAlign ? `text_align_${textAlign} ` : ''
+    }
+  }
 }
 
 type DefaultProps = {[key: string]: string} | Record<string, unknown>
@@ -307,13 +442,14 @@ export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {})
   }).filter((value) => value?.length > 0).join(" ")
 }
 
-export const deprecatedProps = (kit: string, props: string[] = []): void => {
-  if (process.env.NODE_ENV === 'development') {
-    /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-    props.forEach((prop) => {
-      console.warn(`${kit} Kit: The prop '${prop}' is deprecated and will be removed in a future release!`)
-    })
-  }
+
+export const deprecatedProps = (): void => {
+  // if (process.env.NODE_ENV === 'development') {
+  //   /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+  //   props.forEach((prop) => {
+  //     console.warn(`${kit} Kit: The prop '${prop}' is deprecated and will be removed in a future release!`)
+  //   })
+  // }
 }
 
 export const domSafeProps = (props: {[key: string]: string}): {[key: string]: string} => {

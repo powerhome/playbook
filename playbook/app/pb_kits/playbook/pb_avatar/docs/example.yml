@@ -9,3 +9,7 @@ examples:
     - avatar_monogram: Monogram
     - avatar_no_image: "Bad Image Link"
     - avatar_status: Status
+  swift:
+    - avatar_default_swift: Default
+    - avatar_monogram_swift: Monogram
+    - avatar_props_swift: ""

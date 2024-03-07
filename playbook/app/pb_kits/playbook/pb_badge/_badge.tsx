@@ -6,7 +6,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
-} from '../utilities/props'
+  buildHtmlProps } from '../utilities/props'
 
 import Icon from '../pb_icon/_icon'
 
@@ -19,19 +19,21 @@ type BadgeProps = {
     onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
   },
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   removeIcon?: boolean,
   removeOnClick?: React.MouseEventHandler<HTMLSpanElement>,
   rounded?: boolean,
   text?: string,
-  variant?: "error" | "info" | "neutral" | "primary" | "success" | "warning",
+  variant?: "error" | "info" | "neutral" | "notification" | "primary" | "success" | "warning",
 } & GlobalProps
-const Badge = (props: BadgeProps) => {
+const Badge = (props: BadgeProps): React.ReactElement => {
   const {
     aria = {},
     className,
     closeProps = {},
     data = {},
+    htmlOptions = {},
     id,
     removeIcon = false,
     removeOnClick,
@@ -41,6 +43,7 @@ const Badge = (props: BadgeProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const css = classnames(
     buildCss('pb_badge_kit', variant === "success" ? "success_sm" : variant, rounded ? 'rounded' : null),
     globalProps(props),
@@ -51,6 +54,7 @@ const Badge = (props: BadgeProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={css}
         id={id}
     >

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import { globalProps } from "../utilities/globalProps";
-import { buildAriaProps, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
 
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
@@ -12,7 +12,7 @@ import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 type LineGraphProps = {
   align?: "left" | "right" | "center";
   axisTitle?: string;
-  dark?: Boolean;
+  dark?: boolean;
   xAxisCategories: [];
   yAxisMin: number;
   yAxisMax: number;
@@ -22,6 +22,7 @@ type LineGraphProps = {
     data: number[];
   }[];
   gradient?: boolean;
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id: string;
   pointStart: number;
   subTitle?: string;
@@ -47,6 +48,7 @@ const LineGraph = ({
   dark = false,
   gradient = false,
   type = "line",
+  htmlOptions = {},
   id,
   legend = false,
   toggleLegendClick = true,
@@ -66,8 +68,11 @@ const LineGraph = ({
   colors = [],
   ...props
 }: LineGraphProps) => {
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+
   const setupTheme = () => {
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
@@ -133,14 +138,15 @@ const LineGraph = ({
 
   return (
     <HighchartsReact
-      containerProps={{
+        containerProps={{
         className: classnames(globalProps(props), className),
         id: id,
         ...ariaProps,
         ...dataProps,
+        ...htmlProps
       }}
-      highcharts={Highcharts}
-      options={options}
+        highcharts={Highcharts}
+        options={options}
     />
   );
 };

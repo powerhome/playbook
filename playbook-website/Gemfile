@@ -7,29 +7,23 @@ ruby "3.1.2"
 
 gem "playbook_ui", path: "../playbook"
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.1.6.1"
-# Use Puma as the app server
-gem "puma", "~> 5.6"
-gem "slim-rails", "~> 3.2"
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem "webpacker", "4.3.0"
+gem "puma", "~> 6.3"
+gem "webpacker", "5.4.4"
 # Make Compatible with Ruby 3.1.0 Upgrade
 gem "psych", "< 4"
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.1.0", require: false
 
 # livenessProbe and readinessProbe. See: https://github.com/powerhome/playbook/blob/master/playbook/config/deploy/templates/deployment.yaml.erb
 gem "health_check"
 
+gem "redcarpet", "~> 3.6"
+gem 'front_matter_parser', "~> 1.0.1" 
+gem "rouge", "~> 3.15"
 gem "faker"
 gem "will_paginate"
+gem "sentry-ruby"
+gem "sentry-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

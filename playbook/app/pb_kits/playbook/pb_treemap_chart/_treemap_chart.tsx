@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 
 import { globalProps } from "../utilities/globalProps";
-import { buildAriaProps, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
 
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
@@ -25,6 +25,7 @@ type TreemapChartProps = {
   drillable: boolean;
   grouped: boolean;
   height?: string;
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id: number | string;
   title?: string;
   tooltipHtml: string;
@@ -42,14 +43,18 @@ const TreemapChart = ({
   drillable = false,
   grouped = false,
   height,
+  htmlOptions = {},
   id,
   title = "",
   tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: <b>{point.value}</b>',
   type = "treemap",
   ...props
 }: TreemapChartProps) => {
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+
   const setupTheme = () => {
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
@@ -101,6 +106,7 @@ const TreemapChart = ({
         id: id,
         ...ariaProps,
         ...dataProps,
+        ...htmlProps
       }}
       highcharts={Highcharts}
       options={options}

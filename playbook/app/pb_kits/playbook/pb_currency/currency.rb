@@ -40,6 +40,9 @@ module Playbook
                       values: %w[default matching],
                       default: "default"
 
+      prop :unstyled, type: Playbook::Props::Boolean,
+                      default: false
+
       def classname
         generate_classname("pb_currency_kit", align, size, dark_class)
       end
@@ -48,6 +51,13 @@ module Playbook
         {
           classname: "dollar_sign",
           color: "light",
+          dark: dark,
+        }
+      end
+
+      def caption_props
+        {
+          text: label,
           dark: dark,
         }
       end
@@ -75,8 +85,6 @@ module Playbook
       end
 
       def variant_class
-        return unless size == "sm"
-
         case variant
         when "light"
           "_light"

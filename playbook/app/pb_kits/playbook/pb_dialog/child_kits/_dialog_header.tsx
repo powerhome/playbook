@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../../utilities/props'
 import { globalProps, GlobalProps } from '../../utilities/globalProps'
 
 import { CloseIcon } from '../_close_icon'
@@ -13,7 +13,8 @@ type DialogHeaderProps = {
   children: React.ReactNode[] | React.ReactNode | string,
   className?: string,
   closeable?: boolean,
-  data?: object,
+  data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   padding?: string,
   separator?: boolean,
@@ -22,13 +23,13 @@ type DialogHeaderProps = {
   title?: string,
 } & GlobalProps
 
-const DialogHeader = (props: DialogHeaderProps) => {
+const DialogHeader = (props: DialogHeaderProps): React.ReactElement => {
   const {
     aria = {},
     children,
     className,
     data = {},
-    padding = "sm",
+    htmlOptions = {},
     spacing = "between",
     closeable = true,
     separator = true,
@@ -36,9 +37,10 @@ const DialogHeader = (props: DialogHeaderProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const api = useContext(DialogContext)
   const headerCSS = buildCss("dialog_header")
-  const headerSpacing = globalProps(props, { padding })
+  const headerSpacing = globalProps(props)
 
   /* eslint-disable react/jsx-handler-names */
 
@@ -47,13 +49,14 @@ const DialogHeader = (props: DialogHeaderProps) => {
       <Flex
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={classnames(headerCSS, headerSpacing, className)}
           spacing={spacing}
       >
         {children}
         {closeable &&
           <CloseIcon
-            onClose={api.onClose}
+              onClose={api.onClose}
           />
         }
         

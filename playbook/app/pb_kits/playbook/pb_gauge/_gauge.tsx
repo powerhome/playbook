@@ -10,18 +10,20 @@ import solidGauge from "highcharts/modules/solid-gauge";
 import defaultColors from "../tokens/exports/_colors.scss";
 import typography from "../tokens/exports/_typography.scss";
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
+import { GenericObject } from "../types";
 
 type GaugeProps = {
   aria: { [key: string]: string };
   className?: string;
   chartData?: { name: string; value: number[] | number }[];
-  dark?: Boolean;
+  dark?: boolean;
   data?: { [key: string]: string };
   disableAnimation?: boolean;
   fullCircle?: boolean;
   height?: string;
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   max?: number;
   min?: number;
@@ -32,19 +34,19 @@ type GaugeProps = {
   title?: string;
   tooltipHtml?: string;
   colors: string[];
-  minorTickInterval: any;
+  minorTickInterval?: number;
   circumference: number[];
 };
 
 const Gauge = ({
   aria = {},
-  className,
   chartData,
   dark = false,
   data = {},
   disableAnimation = false,
   fullCircle = false,
   height = null,
+  htmlOptions = {},
   id,
   max = 100,
   min = 0,
@@ -59,9 +61,10 @@ const Gauge = ({
   minorTickInterval = null,
   circumference = fullCircle ? [0, 360] : [-100, 100],
   ...props
-}: GaugeProps) => {
+}: GaugeProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   highchartsMore(Highcharts);
   solidGauge(Highcharts);
   const setupTheme = () => {
@@ -86,7 +89,7 @@ const Gauge = ({
   const [options, setOptions] = useState({});
 
   useEffect(() => {
-    const formattedChartData = chartData.map((obj: any) => {
+    const formattedChartData = chartData.map((obj: GenericObject) => {
       obj.y = obj.value;
       delete obj.value;
       return obj;
@@ -182,19 +185,20 @@ const Gauge = ({
         .querySelectorAll(".fix")
         .forEach((fix) => fix.setAttribute("y", "38"));
     }
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartData]);
 
   return (
     <HighchartsReact
-      containerProps={{
+        containerProps={{
         className: classnames(css, globalProps(props)),
         id: id,
         ...ariaProps,
         ...dataProps,
+        ...htmlProps,
       }}
-      highcharts={Highcharts}
-      options={options}
+        highcharts={Highcharts}
+        options={options}
     />
   );
 };

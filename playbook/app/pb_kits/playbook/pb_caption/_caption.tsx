@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
 type CaptionProps = {
@@ -9,6 +9,7 @@ type CaptionProps = {
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: "xs" | "sm" | "md" | "lg" | "xl",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "caption",
@@ -17,13 +18,14 @@ type CaptionProps = {
 } & GlobalProps;
 
 const Caption = (props: CaptionProps): React.ReactElement => {
-  if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
+  if (props.variant) deprecatedProps() //variant prop is deprecated, use color instead
   const {
     aria = {},
     children,
     className,
     color,
     data = {},
+    htmlOptions = {},
     id,
     size = 'md',
     tag = 'div',
@@ -47,6 +49,8 @@ const Caption = (props: CaptionProps): React.ReactElement => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+
   const css = classnames(
     buildCss('pb_caption_kit', size, variant, color),
     globalProps(props),
@@ -57,6 +61,7 @@ const Caption = (props: CaptionProps): React.ReactElement => {
     <Tag
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={css}
         id={id}
     >

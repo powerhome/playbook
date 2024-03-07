@@ -93,3 +93,16 @@ test('displays success variant', () => {
     cleanup()
 
 })
+
+test('displays notification variant', () => {
+  render(
+    <Badge
+        data={{ testid: testId }}
+        text="1"
+        variant="notification"
+    />
+  )
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass(`pb_badge_kit_notification`)
+  cleanup()
+})

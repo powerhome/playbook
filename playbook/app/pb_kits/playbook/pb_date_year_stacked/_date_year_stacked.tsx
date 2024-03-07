@@ -1,9 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import DateTime from '../pb_kit/dateTime'
-import { buildCss, buildDataProps } from '../utilities/props'
+import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import DateTime from '../pb_kit/dateTime';
 
 import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
@@ -13,31 +13,40 @@ type DateYearStackedProps = {
   className?: string | string[],
   dark?: boolean,
   data?: string,
-  date: string,
+  date: Date,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
 }
 
-const DateYearStacked = (props: DateYearStackedProps) => {
-  const { align = 'left', className, dark = false, date, data={} } = props
-  const dateTimestamp = new DateTime({ value: date })
+const DateYearStacked = (props: DateYearStackedProps): React.ReactElement => {
+  const { 
+    align = 'left', 
+    className, 
+    dark = false, 
+    date, 
+    data={},
+    htmlOptions = {}, 
+  } = props
   const css = classnames(
     buildCss('pb_date_year_stacked', align),
     globalProps(props),
     className
   )
-  const dataProps = buildDataProps(data)
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
-    <div {...dataProps}
-    className={css}>
+    <div 
+        {...dataProps}
+        {...htmlProps}
+        className={css}
+    >
       <Title
           dark={dark}
           size={4}
-          text={`${dateTimestamp.toDay()} ${dateTimestamp
-          .toMonth()
-          .toUpperCase()}`}
+          text={`${DateTime.toDay(date)} ${DateTime.toMonth(date).toUpperCase()}`}
       />
-      <Body color="light">{dateTimestamp.toYear()}</Body>
+      <Body color="light">{DateTime.toYear(date)}</Body>
     </div>
   )
 }

@@ -5,12 +5,19 @@ class KitGenerator < Rails::Generators::NamedBase
   desc "This generator creates a new Playbook Kit"
   source_root File.expand_path("templates", __dir__)
   class_option :props, type: :array, default: []
+  class_option :rails, type: :boolean, default: false, desc: "Creates the boilerplate files for Rails"
+  class_option :react, type: :boolean, default: false, desc: "Creates the boilerplate files for React"
+  class_option :swift, type: :boolean, default: false, desc: "Creates the boilerplate files for Swift"
 
   REACT_EXAMPLES_PATH = "app/pb_kits/playbook/playbook-doc.js"
   REACT_INDEX_PATH = "app/pb_kits/playbook/index.js"
 
   def create_templates
     kit_name = name.strip.downcase
+    all_kits = (options[:rails] == false && options[:react] == false && options[:swift] == false)
+    @rails_kit = all_kits ? true : options[:rails]
+    @react_kit = all_kits ? true : options[:react]
+    @swift_kit = all_kits ? true : options[:swift]
     @kit_name_uppercase = kit_name.upcase
     @kit_name_lowercase = kit_name
     @kit_name_capitalize = kit_name.capitalize
@@ -43,17 +50,27 @@ class KitGenerator < Rails::Generators::NamedBase
     else
 
       # Generate SCSS files ==============================
-      template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
-      open("app/pb_kits/playbook/_playbook.scss", "a") do |f|
-        f.puts "\n@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
-      end
-      say_status  "complete",
-                  "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
-                  :green
+      unless platforms == "swift_only"
+        template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
+        open("app/pb_kits/playbook/_playbook.scss", "a") do |f|
+          f.puts "\n@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
+        end
+        scss_file = "app/pb_kits/playbook/_playbook.scss"
 
-      # Ask user if Rails version should be generated ======
-      if yes?("Create RAILS #{@kit_name_underscore} kit? (y/N)")
-        @rails_kit = true
+        # Sort kit names alphabetically
+        lines = File.readlines(scss_file)
+        utilities_lines = lines.select { |line| line.include?("utilities") }
+        remaining_lines = lines.reject { |line| line.include?("utilities") }.sort
+        sorted_lines = remaining_lines + utilities_lines
+        File.open(scss_file, "w") { |f| f.puts sorted_lines.join }
+
+        say_status  "complete",
+                    "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
+                    :green
+      end
+
+      # Code for Rails kit
+      if @rails_kit
         template "kit_ruby.erb", "#{full_kit_directory}/#{@kit_name_underscore}.rb"
         template "kit_html.erb", "#{full_kit_directory}/#{@kit_name_underscore}.html.erb"
         template "kit_example_rails.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.html.erb"
@@ -63,9 +80,8 @@ class KitGenerator < Rails::Generators::NamedBase
                     :green
       end
 
-      # Ask user if React version should be generated ======
-      if yes?("Create REACT #{@kit_name_pascal} kit? (y/N)")
-        @react_kit = true
+      # Code for React kit
+      if @react_kit
         template "kit_jsx.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.tsx"
         template "kit_jsx_test.erb", "#{full_kit_directory}/#{@kit_name_underscore}.test.jsx"
         template "kit_example_react.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default.jsx"
@@ -90,6 +106,9 @@ class KitGenerator < Rails::Generators::NamedBase
                     :green
       end
 
+      # Code for Swift kit
+      template "kit_example_swift.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default_swift.md" if @swift_kit
+
       # Create kit example.yml
       template "kit_example_yml.erb", "#{full_kit_directory}/docs/example.yml"
 
@@ -97,7 +116,10 @@ class KitGenerator < Rails::Generators::NamedBase
 
       # Add kit to Playbook menu ==========================
       open("../playbook-website/config/menu.yml", "a") do |f|
-        f.puts "  - #{@kit_name_underscore}"
+        f.puts "  - name: #{@kit_name_underscore}"
+        f.puts "    components:"
+        f.puts "      - name: #{@kit_name_underscore}"
+        f.puts "        platforms: *#{platforms}"
       end
 
       say_status  "complete",
@@ -108,6 +130,24 @@ class KitGenerator < Rails::Generators::NamedBase
 
 # rubocop:enable Style/StringConcatenation
 private
+
+  def platforms
+    if @react_kit && @rails_kit && @swift_kit
+      "all"
+    elsif @react_kit && @rails_kit
+      "web"
+    elsif @react_kit && @swift_kit
+      "react_swift"
+    elsif @rails_kit && @swift_kit
+      "rails_swift"
+    elsif @react_kit
+      "react_only"
+    elsif @rails_kit
+      "rails_only"
+    elsif @swift_kit
+      "swift_only"
+    end
+  end
 
   def react_imports_page(path:, import_statement:, webpack_statement:, import_area_indicator:)
     re_array = File.readlines(path)
@@ -123,7 +163,7 @@ private
     sorted_file_array = re_array[0..(re_array.index(import_area_indicator) + 1)]
     sorted_file_array += example_components
     sorted_file_array << "\n"
-    sorted_file_array << "WebpackerReact.setup({\n"
+    sorted_file_array << "WebpackerReact.registerComponents({\n"
     sorted_file_array += webpack_components
     sorted_file_array << "})\n"
 

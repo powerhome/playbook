@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, forwardRef, ForwardedRef } from "react"
 
 import {
   arrow, 
@@ -6,7 +6,7 @@ import {
   offset, 
   Placement, 
   safePolygon, 
-  shift, 
+  shift,
   useFloating, 
   useHover, 
   useInteractions,
@@ -14,11 +14,8 @@ import {
 
 import classnames from "classnames"
 import { GlobalProps, globalProps } from "../utilities/globalProps"
-import { buildAriaProps, buildDataProps } from "../utilities/props"
+import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props"
 import Flex from "../pb_flex/_flex"
-
-
-
 
 type TooltipProps = {
   aria?: { [key: string]: string },
@@ -26,48 +23,55 @@ type TooltipProps = {
   children: JSX.Element,
   data?: { [key: string]: string },
   delay?: number | Partial<{open: number; close: number}>,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
   interaction?: boolean,
   placement?: Placement,
+  position?: "absolute" | "fixed";
   text: string,
-  zIndex?: Pick<GlobalProps, "ZIndex">,
+  showTooltip?: boolean,
 } & GlobalProps
 
-const Tooltip = (props: TooltipProps): React.ReactElement => {
+const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): React.ReactElement => {
   const {
     aria = {},
     className,
     children,
     data = {},
     delay = 0,
+    htmlOptions = {},
     icon = null,
     interaction = false,
     placement: preferredPlacement = "top",
+    position = "absolute",
     text,
+    showTooltip = true,
     zIndex,
     ...rest
   } = props
 
   const dataProps: { [key: string]: any } = buildDataProps(data)
   const ariaProps: { [key: string]: any } = buildAriaProps(aria)
-
+  const htmlProps = buildHtmlProps(htmlOptions)
+  
   const css = classnames(
     globalProps({...rest}),
     className,
   )
   const [open, setOpen] = useState(false)
   const arrowRef = useRef(null)
-  const {
 
+
+  const {
     context,
-    floating,
-    middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+    middlewareData: { arrow: { x: arrowX, y: arrowY } = {},  },
     placement,
-    reference,
+    refs,
     strategy,
     x,
     y,
   } = useFloating({
+    strategy: position,
     middleware: [
       arrow({
         element: arrowRef,
@@ -82,11 +86,16 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     ],
     open,
     onOpenChange(open) {
-      setOpen(open)
+      if(!showTooltip) {
+        return
+      } else {
+        setOpen(open)
+      }
     },
     placement: preferredPlacement
   })
 
+      
   const { getFloatingProps } = useInteractions([
     useHover(context, {
       delay,
@@ -107,11 +116,21 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
     <>
       <div
           className={`pb_tooltip_kit ${css}`}
-          ref={reference}
+          ref={(element) => {
+            refs.setReference(element);
+            if (ref) {
+              if (typeof ref === "function") {
+                ref(element);
+              } else if (typeof ref === "object") {
+                ref.current = element;
+              }
+            }
+          }}
           role="tooltip_trigger"
           style={{ display: "inline-flex" }}
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
       >
         {children}
       </div>
@@ -119,7 +138,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
         <div
             {...getFloatingProps({
               className: `tooltip_tooltip ${placement} visible`,
-              ref: floating,
+              ref: refs.setFloating,
               role: "tooltip",
               style: {
                 position: strategy,
@@ -142,7 +161,7 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
               className="arrow_bg"
               ref={arrowRef}
               style={{
-                position: strategy,
+                position: "absolute",
                 left: arrowX != null ? `${arrowX}px` : "",
                 top: arrowY != null ? `${arrowY}px` : "",
                 [staticSide]: "-5px",
@@ -152,6 +171,8 @@ const Tooltip = (props: TooltipProps): React.ReactElement => {
       )}
     </>
   )
-}
+})
+
+Tooltip.displayName = "Tooltip"
 
 export default Tooltip

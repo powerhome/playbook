@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 
 type ListProps = {
@@ -9,7 +9,8 @@ type ListProps = {
   className?: string;
   children: React.ReactNode[] | React.ReactNode;
   dark?: boolean;
-  data?: object;
+  data?: Record<string, unknown>;
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   layout?: "" | "left" | "right";
   ordered?: boolean;
@@ -29,6 +30,7 @@ const List = (props: ListProps) => {
     className,
     dark = false,
     data = {},
+    htmlOptions = {},
     id,
     layout = "",
     ordered = false,
@@ -53,7 +55,8 @@ const List = (props: ListProps) => {
     }
   );
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_list_kit", layoutClass[layout], size, {
       dark: dark,
@@ -69,23 +72,25 @@ const List = (props: ListProps) => {
     <div className={classes}>
       {ordered ? (
         <ol
-          {...ariaProps}
-          {...dataProps}
-          className={className}
-          id={id}
-          role={role}
-          tabIndex={tabIndex}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={className}
+            id={id}
+            role={role}
+            tabIndex={tabIndex}
         >
           {childrenWithProps}
         </ol>
       ) : (
         <ul
-          {...ariaProps}
-          {...dataProps}
-          className={className}
-          id={id}
-          role={role}
-          tabIndex={tabIndex}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={className}
+            id={id}
+            role={role}
+            tabIndex={tabIndex}
         >
           {childrenWithProps}
         </ul>

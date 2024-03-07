@@ -1,12 +1,18 @@
 @import "playbook-ui/dist/tokens/spacing";
+@import "playbook-ui/dist/tokens/typography";
 
-.changelog-card-collection {
-  max-width: 650px;
-  margin: auto;
-  h2 {
-    margin-top: $space_xl;
-    &:first-child {
-      margin-top: 0;
+.changelog {
+  .no-sidebar {
+    grid-template-columns: 0 auto !important;
+    @include break_at($nav_breakpoint) {
+      grid-template-columns: auto !important;
+    }
+  }
+  h1 {
+    padding-top: $space_xl*3;
+    border-top: 1px solid $border_light;
+    &:first-of-type  {
+      padding-top: $space_xl;
     }
   }
 }

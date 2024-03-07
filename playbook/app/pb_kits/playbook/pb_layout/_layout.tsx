@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import { globalProps } from '../utilities/globalProps'
 
@@ -10,8 +10,9 @@ type LayoutPropTypes = {
   className?: string,
   collapse?: "xs" | "sm" | "md" | "lg" | "xl",
   dark?: boolean,
-  data?: object,
+  data?: Record<string, unknown>,
   full?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   position?: "left" | "right",
   responsive?: boolean,
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
@@ -106,6 +107,7 @@ const Layout = (props: LayoutPropTypes) => {
     dark = false,
     data = {},
     full = false,
+    htmlOptions = {},
     position = 'left',
     responsive = false,
     size = 'md',
@@ -116,6 +118,8 @@ const Layout = (props: LayoutPropTypes) => {
   const responsiveClass = responsive ? '_responsive' : ''
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+
   const layoutCss =
     layout == 'collection'
       ? `pb_layout_kit_${layout}`
@@ -159,10 +163,12 @@ const Layout = (props: LayoutPropTypes) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classnames(
         layoutCss,
         layoutCollapseCss,
         className,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         globalProps(filteredProps)
       )}

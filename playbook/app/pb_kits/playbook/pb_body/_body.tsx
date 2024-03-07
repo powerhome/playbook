@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Highlight from '../pb_highlight/_highlight'
@@ -15,6 +15,7 @@ type BodyProps = {
   data?: {[key: string]: string},
   highlightedText?: string[],
   highlighting?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   status?: 'neutral' | 'negative' | 'positive',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
@@ -23,7 +24,7 @@ type BodyProps = {
 } & GlobalProps
 
 const Body = (props: BodyProps): React.ReactElement => {
-  if (props.variant) deprecatedProps("Body", ["status"]) //status prop is deprecated, use color instead please
+  if (props.variant) deprecatedProps() //status prop is deprecated, use color instead please
   const {
     aria = {},
     children,
@@ -32,6 +33,7 @@ const Body = (props: BodyProps): React.ReactElement => {
     data = {},
     highlightedText = [],
     highlighting = false,
+    htmlOptions = {},
     id = '',
     status = null,
     tag = 'div',
@@ -39,20 +41,21 @@ const Body = (props: BodyProps): React.ReactElement => {
     variant = null,
   } = props
 
-  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
-  const dataProps: {[key: string]: any} = buildDataProps(data)
+  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+  const dataProps: {[key: string]: string} = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss('pb_body_kit', color, variant, status),
     globalProps(props),
     className
   )
-  const Tag: React.ReactElement | any = `${tag}`
-
+  const Tag: keyof JSX.IntrinsicElements = `${tag}`
 
   return (
     <Tag
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
@@ -12,6 +12,7 @@ type DashboardValueProps = {
   aria?: { [key: string]: string },
   className?: string,
   data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   statChange?: {
     change? : 'increase' | 'decrease' | 'neutral',
@@ -30,6 +31,7 @@ const DashboardValue = (props: DashboardValueProps): React.ReactElement => {
     aria = {},
     className,
     data = {},
+    htmlOptions = {},
     id,
     statChange = {},
     statLabel,
@@ -38,6 +40,7 @@ const DashboardValue = (props: DashboardValueProps): React.ReactElement => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_dashboard_value_kit', align),
     globalProps(props),
@@ -48,6 +51,7 @@ const DashboardValue = (props: DashboardValueProps): React.ReactElement => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

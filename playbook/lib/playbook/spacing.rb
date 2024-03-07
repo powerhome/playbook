@@ -20,6 +20,16 @@ module Playbook
       base.prop :padding_y
     end
 
+    def max_width_options
+      {
+        max_width: "mw",
+      }
+    end
+
+    def max_width_values
+      %w[xs sm md lg xl xxl 0 none]
+    end
+
     def spacing_options
       {
         margin: "m",
@@ -40,17 +50,41 @@ module Playbook
     end
 
     def spacing_values
-      %w[none xxs xs sm md lg xl]
+      %w[none xxs xs sm md lg xl auto initial inherit]
+    end
+
+    def screen_size_values
+      %w[xs sm md lg xl default]
+    end
+
+    def break_method_values
+      %w[on at]
     end
 
     def spacing_props
       selected_props = spacing_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 
-      selected_props.map do |k|
-        spacing_value = send(k)
-        "#{spacing_options[k]}_#{spacing_value}" if spacing_values.include? spacing_value
-      end.compact.join(" ")
+      css = ""
+      selected_props.each do |prop|
+        responsive = try(prop).is_a?(::Hash)
+        spacing_value = send(prop)
+        prefix = spacing_options[prop]
+
+        if responsive
+          default_value = spacing_value.delete(:default) || nil
+          break_value = spacing_value.delete(:break) || break_method_values.first
+          spacing_value.each do |key, value|
+            css += "break_#{break_value}_#{key}\:#{prefix}_#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
+          end
+
+          css += "#{prefix}_#{default_value} " if spacing_values.include?(default_value)
+        elsif spacing_values.include?(spacing_value)
+          css += "#{prefix}_#{spacing_value} "
+        end
+      end
+
+      css.strip unless css.blank?
     end
 
     def max_width_props
@@ -61,16 +95,6 @@ module Playbook
         width_value = send(k)
         "max_width_#{width_value}" if max_width_values.include? width_value
       end.compact.join(" ")
-    end
-
-    def max_width_options
-      {
-        max_width: "mw",
-      }
-    end
-
-    def max_width_values
-      %w[xs sm md lg xl 0 none]
     end
   end
 end

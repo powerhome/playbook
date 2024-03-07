@@ -9,13 +9,13 @@ import {
   buildCss,
   buildDataProps,
   noop,
-} from '../utilities/props'
+  buildHtmlProps } from '../utilities/props'
 
 import Icon from '../pb_icon/_icon'
 import Checkbox from '../pb_checkbox/_checkbox'
-import Card from '../pb_card/_card'
 import Flex from '../pb_flex/_flex'
 import Radio from '../pb_radio/_radio'
+import Card from '../pb_card/_card'
 
 type SelectableCardProps = {
   aria?: { [key: string]: string },
@@ -28,8 +28,9 @@ type SelectableCardProps = {
   disabled?: boolean,
   error?: boolean,
   icon?: boolean,
-  id?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   inputId?: string,
+  id?: string,
   multi?: boolean,
   name?: string,
   onChange: (event: React.FormEvent<HTMLInputElement>) => void,
@@ -48,6 +49,7 @@ const SelectableCard = (props: SelectableCardProps) => {
     data = {},
     disabled = false,
     error = false,
+    htmlOptions = {},
     icon = false,
     inputId = null,
     multi = true,
@@ -59,6 +61,7 @@ const SelectableCard = (props: SelectableCardProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(buildCss('pb_selectable_card_kit',
     {
@@ -109,6 +112,7 @@ const SelectableCard = (props: SelectableCardProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
     >
       <input
@@ -149,13 +153,15 @@ const SelectableCard = (props: SelectableCardProps) => {
                   </Input>
                 </Flex>
                 <div className="separator" />
-                <Card.Body
+                <div className="psuedo_separator"/>
+                <Card
+                    borderNone
                     dark={dark}
                     padding="sm"
                     status={error ? 'negative' : null}
                 >
                   {text ||props.children}
-                </Card.Body>
+                </Card>
               </Flex>
               :
             text || props.children

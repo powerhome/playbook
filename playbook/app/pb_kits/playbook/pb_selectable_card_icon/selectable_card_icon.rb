@@ -4,6 +4,8 @@ module Playbook
   module PbSelectableCardIcon
     class SelectableCardIcon < Playbook::KitBase
       # Icon and text props
+      prop :custom_icon, type: Playbook::Props::String,
+                         default: nil
       prop :icon, type: Playbook::Props::String
       prop :title_text, type: Playbook::Props::String
       prop :body_text, type: Playbook::Props::String
@@ -21,7 +23,7 @@ module Playbook
                        default: false
       prop :value
 
-      prop :input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
 
       def classname

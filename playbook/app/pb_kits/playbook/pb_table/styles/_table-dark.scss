@@ -1,30 +1,29 @@
 @import "../../tokens/screen_sizes";
 
-$table-dark-card-bg: $bg_dark;
+$table-dark-card-bg: $card_dark;
 
 [class^=pb_table] {
   &.table-sm,
   &.table-md,
   &.table-lg {
     &.table-dark {
-      thead {
-        tr {
+      thead, .pb_table_thead {
+        tr, .pb_table_tr {
           border-color: $border_dark !important;
 
-          th {
+          th, .pb_table_th {
             border-color: $border_dark !important;
             color: $text_dk_light;
           }
         }
       }
-      tbody {
-        tr {
+      tbody, .pb_table_tbody {
+        tr, .pb_table_tr {
           border-color: $border_dark;
           transition: none !important;
 
-          td {
+          td, .pb_table_td {
             border-color: $border_dark !important;
-            border-bottom-width: 0 !important;
             color: $white;
 
             &:before {
@@ -32,23 +31,8 @@ $table-dark-card-bg: $bg_dark;
             }
           }
           &:first-child {
-            td {
+            td, .pb_table_td {
               border-top-width: 0 !important;
-            }
-          }
-        }
-      }
-
-      &:not(.no-hover) {
-        tbody {
-          tr {
-            @media (hover:hover) {
-              &:hover {
-                td {
-                  border-color: $border_dark !important;
-                  background: $bg_dark;
-                }
-              }
             }
           }
         }
@@ -70,9 +54,9 @@ $table-dark-card-bg: $bg_dark;
         &.table-dark {
           background: none !important;
 
-          tbody {
-            tr {
-              td {
+          tbody, .pb_table_tbody {
+            tr, .pb_table_tr {
+              td, .pb_table_td {
                 background: $table-dark-card-bg !important;
               }
             }
@@ -80,15 +64,15 @@ $table-dark-card-bg: $bg_dark;
         }
       }
       &.table-dark {
-        tbody {
-          tr {
-            td {
+        tbody, .pb_table_tbody {
+          tr, .pb_table_tr {
+            td, .pb_table_td {
               &:first-child {
                 border-top-color: $border_dark !important;
               }
             }
             &:first-child {
-              td {
+              td, .pb_table_td {
                 border-top-width: 1px !important;
               }
             }

@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { buildCss } from '../../utilities/props'
+import { buildCss, buildHtmlProps } from '../../utilities/props'
 import { GlobalProps, globalProps } from '../../utilities/globalProps'
 
 import Flex from '../../pb_flex/_flex'
@@ -13,6 +13,7 @@ type DialogFooterProps = {
   children: React.ReactChild[] | React.ReactChild | string,
   className?: string,
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   padding?: string,
   paddingBottom?: string,
@@ -22,34 +23,34 @@ type DialogFooterProps = {
 } & GlobalProps
 
 // Footer component
-const DialogFooter = (props: DialogFooterProps) => {
+const DialogFooter = (props: DialogFooterProps): React.ReactElement => {
   const {
     children,
-    padding = "sm",
-    paddingBottom = "sm",
-    paddingX = "sm",
     className,
+    htmlOptions = {},
     spacing = "between",
     separator = false,
   } = props
 
   const footerCSS = buildCss("dialog_footer")
-  const footerSpacing = globalProps(props, { padding, paddingBottom, paddingX })
+  const footerSpacing = globalProps(props)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
-    <>
+    <div 
+        {...htmlProps}
+    >
       {separator &&
         <SectionSeparator />
       }
-      <div className="dialog-pseudo-footer">
-      </div>
+      <div className="dialog-pseudo-footer" />
       <Flex
           className={classnames(footerCSS, footerSpacing, className)}
           spacing={spacing}
       >
         {children}
       </Flex>
-    </>
+    </div>
   )
 }
 

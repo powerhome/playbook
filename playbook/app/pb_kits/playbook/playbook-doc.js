@@ -4,6 +4,7 @@ import WebpackerReact from 'webpacker-react'
 
 // KIT EXAMPLES
 import 'pb_form/pb_form_validation'
+import * as AdvancedTable from 'pb_advanced_table/docs'
 import * as Avatar from 'pb_avatar/docs'
 import * as AvatarActionButton from 'pb_avatar_action_button/docs'
 import * as Background from 'pb_background/docs'
@@ -30,6 +31,7 @@ import * as DateStacked from 'pb_date_stacked/docs'
 import * as DateTime from 'pb_date_time/docs'
 import * as DateTimeStacked from 'pb_date_time_stacked/docs'
 import * as DateYearStacked from 'pb_date_year_stacked/docs'
+import * as Detail from 'pb_detail/docs'
 import * as Dialog from 'pb_dialog/docs'
 import * as DistributionBarDocs from 'pb_distribution_bar/docs'
 import * as FileUpload from 'pb_file_upload/docs'
@@ -103,7 +105,8 @@ import * as UserBadge from 'pb_user_badge/docs'
 import * as Walkthrough from 'pb_walkthrough/docs'
 import * as WeekdayStacked from 'pb_weekday_stacked/docs'
 
-WebpackerReact.setup({
+WebpackerReact.registerComponents({
+  ...AdvancedTable,
   ...Avatar,
   ...AvatarActionButton,
   ...Background,
@@ -130,6 +133,7 @@ WebpackerReact.setup({
   ...DateTime,
   ...DateTimeStacked,
   ...DateYearStacked,
+  ...Detail,
   ...Dialog,
   ...DistributionBarDocs,
   ...FileUpload,

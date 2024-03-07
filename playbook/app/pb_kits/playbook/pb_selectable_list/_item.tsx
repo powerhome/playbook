@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 
 import Checkbox from "../pb_checkbox/_checkbox";
@@ -15,6 +15,7 @@ export type SelectableListItemProps = {
   className?: string;
   data?: object;
   defaultChecked?: boolean;
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   label?: string;
   text?: string;
@@ -31,6 +32,7 @@ const SelectableListItem = ({
   className,
   data = {},
   defaultChecked,
+  htmlOptions = {},
   id,
   label,
   text = "",
@@ -41,7 +43,8 @@ const SelectableListItem = ({
   ...props
 }: SelectableListItemProps) => {
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_selectable_list_item_kit"),
     globalProps(props),
@@ -61,7 +64,12 @@ const SelectableListItem = ({
       {...props}
       className={classnames(checkedState ? "checked_item" : "", className)}
     >
-      <div {...ariaProps} {...dataProps} className={classes}>
+      <div 
+        {...ariaProps} 
+        {...dataProps}
+        {...htmlProps} 
+        className={classes}
+      >
         {variant == "checkbox" && (
           <>
             <Checkbox

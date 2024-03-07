@@ -10,6 +10,7 @@ module Playbook
                       values: %w[default single filter_only sort_only],
                       default: "default"
       prop :background, type: Playbook::Props::Boolean, default: true
+      prop :max_height
       prop :min_width, default: "auto"
       prop :placement, type: Playbook::Props::Enum,
                        values: %w[top bottom left right top-start top-end bottom-start bottom-end right-start right-end left-start left-end],
@@ -31,7 +32,7 @@ module Playbook
       end
 
       def wrapper(&block)
-        if object.background
+        if background
           pb_rails("card", props: { padding: "none" }, &block)
         else
           capture(&block)

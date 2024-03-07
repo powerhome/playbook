@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-import { buildCss } from '../utilities/props'
+import { buildCss, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps } from '../utilities/globalProps'
 
 import Flex from '../pb_flex/_flex'
@@ -11,29 +11,33 @@ import TimeStacked from '../pb_time_stacked/_time_stacked'
 import DateStacked from '../pb_date_stacked/_date_stacked'
 
 type DateTimeStackedProps = {
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
-  date: string,
-  datetime: string,
+  date: Date,
+  datetime: Date,
   dark: boolean,
   timeZone?: string,
 }
 
 const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
-  if (props.date) deprecatedProps('Date Time Stacked', ['date'])
+  if (props.date) deprecatedProps()
 
   const {
     date,
     datetime,
     dark,
+    htmlOptions = {},
     timeZone = 'America/New_York',
   } = props
 
   const classes = buildCss('pb_date_time_stacked_kit', globalProps(props))
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
     <Flex
         inline={false}
         vertical="stretch"
+        {...htmlProps}
         {...props}
     >
       <FlexItem>

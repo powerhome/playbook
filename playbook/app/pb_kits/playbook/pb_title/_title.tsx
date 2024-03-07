@@ -1,7 +1,10 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, GlobalProps, globalProps } from '../utilities/globalProps'
+
+type SizeType = 1 | 2 | 3 | 4 | "1" | "2" | "3" | "4"
+type SizeResponsiveType = {[key: string]: SizeType}
 
 type TitleProps = {
   aria?: {[key: string]: string},
@@ -10,24 +13,26 @@ type TitleProps = {
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
-  size?: 1 | 2| 3| 4 | "1" | "2" | "3" | "4",
+  size?: SizeType | SizeResponsiveType,
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
   text?: string,
   variant?: null | "link",
 } & GlobalProps
 
 const Title = (props: TitleProps): React.ReactElement => {
-  if (props.variant) deprecatedProps('Title', ['variant']) //variant prop is deprecated, use color instead
+  if (props.variant) deprecatedProps() //variant prop is deprecated, use color instead
   const {
     aria = {},
-    bold = true,
     children,
     className,
     color,
     data = {},
+    htmlOptions = {},
     id,
     size = 3,
+    bold = true,
     tag = 'h3',
     text,
     variant = null,
@@ -35,11 +40,27 @@ const Title = (props: TitleProps): React.ReactElement => {
 
   const ariaProps: {[key: string]: string | number} = buildAriaProps(aria)
   const dataProps: {[key: string]: string | number} = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const getBold = bold ? '' : 'thin'
+  const isSizeNumberOrString = typeof size === "number" || typeof size === "string"
+
+  const buildResponsiveSizeCss = () => {
+    let css = ''
+
+    if (!isSizeNumberOrString) {
+      Object.entries(size).forEach((sizeObj) => {
+        css += `pb_title_kit_${sizeObj[0]}_${sizeObj[1]} `
+      })
+    }
+
+    return css.trim()
+  }
+
   const classes = classnames(
-    buildCss('pb_title_kit', `size_${size}`, variant, color, getBold),
+    buildCss('pb_title_kit', isSizeNumberOrString ? `size_${size}` : "", variant, color, getBold),
     globalProps(props),
-    className,
+    buildResponsiveSizeCss(),
+    className
   )
   const Tag: React.ReactElement | any = `${tag}`
 
@@ -47,6 +68,7 @@ const Title = (props: TitleProps): React.ReactElement => {
     <Tag
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

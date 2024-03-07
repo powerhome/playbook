@@ -7,7 +7,8 @@ import { globalProps } from '../utilities/globalProps'
 import Body from '../pb_body/_body'
 import Hashtag from '../pb_hashtag/_hashtag'
 import Title from '../pb_title/_title'
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
+import { GenericObject } from '../types'
 
 type HomeAddressStreetProps = {
   aria?: { [key: string]: string },
@@ -18,6 +19,7 @@ type HomeAddressStreetProps = {
   data?: { [key: string]: string },
   dark?: boolean,
   emphasis: "street" | "city",
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   homeId: string,
   houseStyle: string,
   homeUrl: string,
@@ -27,7 +29,7 @@ type HomeAddressStreetProps = {
   territory: string,
 }
 
-const HomeAddressStreet = (props: HomeAddressStreetProps) => {
+const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement => {
   const {
     address,
     addressCont,
@@ -37,6 +39,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
     data = {},
     dark = false,
     emphasis = 'street',
+    htmlOptions = {},
     homeId,
     homeUrl,
     newWindow,
@@ -56,12 +59,17 @@ const HomeAddressStreet = (props: HomeAddressStreetProps) => {
       className
     )
 
-  const dataProps: { [key: string]: any } = buildDataProps(data)
-  const ariaProps: { [key: string]: any } = buildAriaProps(aria)
-  
+  const dataProps: GenericObject = buildDataProps(data)
+  const ariaProps: GenericObject = buildAriaProps(aria)
+  const htmlProps = buildHtmlProps(htmlOptions)
   return (
-    <div className={classes(className, dark)} {...ariaProps} {...dataProps}>
-      {emphasis == 'street' && 
+    <div
+        className={classes(className, dark)}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+    >
+      {emphasis == 'street' &&
         <div>
           <Title
               className="pb_home_address_street_address"

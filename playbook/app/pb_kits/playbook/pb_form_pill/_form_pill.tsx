@@ -5,12 +5,14 @@ import Title from '../pb_title/_title'
 import Icon from '../pb_icon/_icon'
 import Avatar from '../pb_avatar/_avatar'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { buildHtmlProps } from '../utilities/props'
 
 type FormPillProps = {
   className?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   text: string,
-  name: string,
+  name?: string,
   onClick?: React.MouseEventHandler<HTMLSpanElement>,
   avatar?: boolean,
   avatarUrl?: string,
@@ -20,14 +22,16 @@ type FormPillProps = {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
     onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
-  }, 
+  },
 } & GlobalProps
-const FormPill = (props: FormPillProps) => {
+const FormPill = (props: FormPillProps): React.ReactElement => {
   const {
     className,
+    htmlOptions = {},
+    id,
     text,
     name,
-    onClick = () => {},
+    onClick = () => undefined,
     avatarUrl,
     closeProps = {},
     size = '',
@@ -40,8 +44,14 @@ const FormPill = (props: FormPillProps) => {
     size === 'small' ? 'small' : null,
     textTransform,
   )
+
+  const htmlProps = buildHtmlProps(htmlOptions)
+
   return (
-    <div className={css}>
+    <div className={css}
+        id={id}
+        {...htmlProps}
+    >
         {name &&
         <>
         <Avatar

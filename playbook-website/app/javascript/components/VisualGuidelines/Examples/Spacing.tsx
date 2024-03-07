@@ -12,7 +12,7 @@ import {
 import Example from '../Templates/Example'
 import SpacingProps from '../Templates/SpacingProps'
 
-const PROPVALUES = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl']
+const PROPVALUES = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'auto', 'initial', 'inherit']
 const PROPNAMES = [
   'margin', 
   'marginLeft', 
@@ -38,14 +38,20 @@ const TOKENS = {
   'X Large': 'space_xl',
 }
 
+const screenSizeProps = {
+  display: ['xs', 'sm', 'md', 'lg', 'xl', 'default']
+}
+
 const Spacing = ({ example, tokensExample }: {example: string, tokensExample?: string}) => (
   <React.Fragment>
     <Example
       description="Used for building Kits: Spacing is sized by 8px which serves as the starting point and base that all spacing options follow."
+      // codesandboxExample
       example={example}
+      screenSizes={screenSizeProps}
       title="Spacing"
     >
-      <SpacingProps propValues={PROPVALUES} propNames={PROPNAMES} />
+      <SpacingProps propValues={PROPVALUES} propNames={PROPNAMES} screenSizes={screenSizeProps} />
     </Example>
     <Example
         example={tokensExample}

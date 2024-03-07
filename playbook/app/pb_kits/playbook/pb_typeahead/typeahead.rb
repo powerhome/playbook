@@ -19,7 +19,7 @@ module Playbook
       prop :name
       prop :options, type: Playbook::Props::HashArray,
                      default: []
-      prop :input_options, type: Playbook::Props::Hash,
+      prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
 
       prop :is_multi, type: Playbook::Props::Boolean,

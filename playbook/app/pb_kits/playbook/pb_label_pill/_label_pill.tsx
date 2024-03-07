@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps'
 
-import { buildAriaProps, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import Pill from '../pb_pill/_pill'
 import Caption from '../pb_caption/_caption'
@@ -11,6 +11,7 @@ type LabelPillProps = {
   aria?: {[key: string]:string},
   className?: string,
   data?: {[key: string]:string},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
   pillValue?: string,
@@ -22,6 +23,7 @@ const LabelPill = (props: LabelPillProps) => {
     aria = {},
     className,
     data = {},
+    htmlOptions = {},
     id,
     label,
     pillValue,
@@ -29,6 +31,7 @@ const LabelPill = (props: LabelPillProps) => {
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const css = classnames(
     'pb_label_pill_kit',
     globalProps(props),
@@ -39,6 +42,7 @@ const LabelPill = (props: LabelPillProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={css}
         id={id}
     >

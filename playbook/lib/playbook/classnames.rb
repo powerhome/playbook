@@ -32,6 +32,11 @@ module Playbook
         flex_shrink_props,
         order_props,
         position_props,
+        hover_props,
+        border_radius_props,
+        text_align_props,
+        overflow_props,
+        truncate_props,
       ].compact.join(" ")
     end
 

@@ -5,6 +5,21 @@
 @import "./_pb_map_button_mixin.scss";
 
 [class*="pb_map"] {
+  .pb_map-custom-button {
+    @include pb_map_button;
+    position: relative;
+    margin-top: $space_xs;
+    box-shadow: $shadow_deep;
+    .pb_icon_kit {
+      width: $space_sm - 2;
+      height: $space_sm;
+    }
+
+    .pb_button_content {
+      height: $space_sm;
+    }
+  }
+
   .mapboxgl-map,
   .maplibregl-map {
     font-family: $font_family_base !important;
@@ -126,6 +141,10 @@
     .map-flyto-button {
       @include pb_map_button;
 
+      .pb_button_content {
+        height: $space_sm;
+      }
+
       svg {
         width: $space_xs + 6;
         height: $space_sm;
@@ -185,7 +204,7 @@
     }
     .map-zoom-in-button,
     .map-zoom-out-button,
-    .map-flyto-button {
+    .map-flyto-button, .pb_map-custom-button {
       @include pb_map_button_dark;
     }
 

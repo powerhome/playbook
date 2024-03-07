@@ -6,16 +6,8 @@ module Playbook
       base.prop :z_index
     end
 
-  private
-
-    def z_index_props
-      selected_index_props = z_index_options.keys.select { |sk| try(sk) }
-      return nil unless selected_index_props.present?
-
-      selected_index_props.map do |k|
-        index_value = send(k)
-        "z_index_#{index_value}" if z_index_values.include? index_value
-      end.compact.join(" ")
+    def z_index_values
+      %w[1 2 3 4 5 6 7 8 9 10]
     end
 
     def z_index_options
@@ -24,8 +16,29 @@ module Playbook
       }
     end
 
-    def z_index_values
-      %w[1 2 3 4 5 6 7 8 9 10]
+    def screen_size_values
+      %w[xs sm md lg xl]
+    end
+
+    def z_index_props
+      selected_props = z_index_options.keys.select { |sk| try(sk) }
+      return nil unless selected_props.present?
+
+      responsive = selected_props.present? && try(:z_index).is_a?(::Hash)
+      css = ""
+      if responsive
+        z_index_value = send(:z_index)
+        z_index_value.each do |key, value|
+          css += "z_index_#{key}_#{value} " if screen_size_values.include?(key.to_s) && z_index_values.include?(value.to_s)
+        end
+      else
+        selected_props.each do |k|
+          z_index_value = send(k)
+          css += "z_index_#{z_index_value} " if z_index_values.include? z_index_value
+        end
+      end
+
+      css unless css.blank?
     end
   end
 end

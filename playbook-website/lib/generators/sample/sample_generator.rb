@@ -37,7 +37,7 @@ class SampleGenerator < Rails::Generators::NamedBase
     append_to_file(
       "app/javascript/packs/samples.js",
       "  #{@react_comp},\n",
-      after: "WebpackerReact.setup({\n"
+      after: "WebpackerReact.registerComponents({\n"
     )
   end
 end

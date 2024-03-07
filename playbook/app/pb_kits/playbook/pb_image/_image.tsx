@@ -1,13 +1,14 @@
 import React from 'react'
 import classnames from 'classnames'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 type ImageType = {
   alt?: string,
   aria?: {[key: string]: string},
   className?: string,
   data?: {[key: string]: string},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   onError?: () => void,
   size?: "xs" | "sm" | "md" | "lg" | "xl",
@@ -22,6 +23,7 @@ const Image = (props: ImageType): React.ReactElement => {
     aria = {},
     className,
     data = {},
+    htmlOptions = {},
     id,
     onError = null,
     rounded = false,
@@ -40,11 +42,14 @@ const Image = (props: ImageType): React.ReactElement => {
     className
   )
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+
 
   return (
     <img
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         alt={alt}
         className={classes}
         data-src={url}

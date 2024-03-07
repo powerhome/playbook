@@ -6,6 +6,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps
 } from '../utilities/props'
 
 import Body from '../pb_body/_body'
@@ -16,6 +17,7 @@ type PersonProps = {
   className?: string | string[],
   data?: { [key: string]: string },
   firstName: string,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   lastName: string,
 }
@@ -25,12 +27,14 @@ const Person = (props: PersonProps): React.ReactElement => {
     aria = {},
     className,
     data = {},
+    htmlOptions = {},
     firstName,
     id,
     lastName } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_person_kit'),
     globalProps(props),
@@ -41,6 +45,7 @@ const Person = (props: PersonProps): React.ReactElement => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

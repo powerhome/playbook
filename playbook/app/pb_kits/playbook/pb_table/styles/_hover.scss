@@ -1,6 +1,7 @@
 @import "../../tokens/opacity";
 
 $transition-speed: 0.2s;
+$border_hover_color_dark: lighten($border_dark, 5%);
 
 [class^=pb_table] {
   &.table-sm,
@@ -8,17 +9,17 @@ $transition-speed: 0.2s;
   &.table-lg {
     &:not(.no-hover) {
       border-collapse: collapse;
-      tbody {
-        tr {
+      tbody, .pb_table_tbody {
+        tr, .pb_table_tr {
           box-shadow: 0 0 0 $white;
           transition: box-shadow $transition-speed ease;
-          td {
+          td, .pb_table_td {
             border-top-color: transparent;
             border-top-width: 0;
-            transition: all $transition-speed ease; 
+            transition: all $transition-speed ease;
           }
-          @media (hover:hover) { 
-            td {
+          @media (hover:hover) {
+            td, .pb_table_td {
               position: relative;
               &:after {
                 transition: background-color $transition-speed ease, height $transition-speed ease;
@@ -40,7 +41,7 @@ $transition-speed: 0.2s;
             }
             &:hover {
               box-shadow: 0 2px 10px 0 rgba($slate, $opacity-6);
-              td {
+              td, .pb_table_td {
                 border-color: darken($border_light, 10%);
                 border-top-width: 0;
                 border-top-color: transparent;
@@ -56,9 +57,9 @@ $transition-speed: 0.2s;
       }
       &.table-card {
         border-collapse: separate;
-        tbody {
-          tr {
-            td {
+        tbody, .pb_table_tbody {
+          tr, .pb_table_tr {
+            td, .pb_table_td {
               &:first-child {
                 border-left-width: 1px;
               }
@@ -69,6 +70,29 @@ $transition-speed: 0.2s;
           }
         }
       }
+
+      &.dark  {
+        tbody, .pb_table_tbody {
+          tr, .pb_table_tr {
+            @media (hover:hover) {
+              &:hover {
+                box-shadow: 0 2px 10px 0 $shadow_dark;
+                td, .pb_table_td {
+                  border-top-width: 0;
+                  border-top-color: transparent;
+                  border-color: $border_hover_color_dark !important;
+                  &:after {
+                    transition: background-color $transition-speed ease, height $transition-speed ease;
+                    background-color: $border_hover_color_dark !important;
+                    height: 1px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
     }
   }
 }

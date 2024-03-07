@@ -3,13 +3,23 @@ import React from 'react'
 import { fireEvent, render, screen, waitFor, within } from '../utilities/test-utils'
 
 import DatePicker from './_date_picker'
+import DateTime from "../pb_kit/dateTime.ts"
 import { getTimezoneText } from './plugins/timeSelect'
-
-
 
 jest.setSystemTime(new Date('01/01/2020'));
 const DEFAULT_DATE = new Date()
 
+const formatDate = (date) => {
+  const month = (date.getMonth() + 1).toString().padStart(2, "0")
+  const day = (date.getDate()).toString().padStart(2, "0")
+  const year = date.getFullYear()
+
+  return `${month}/${day}/${year}`
+}
+
+Date.prototype.formatDate = function () {
+  return formatDate(this)
+}
 
 describe('DatePicker Kit', () => {
   beforeEach(() => {
@@ -156,6 +166,89 @@ describe('DatePicker Kit', () => {
     )
     await waitFor(() => {
       expect(input).toHaveValue('01/01/2020 at 12:00 PM')
+    })
+  })
+
+  test('shows DatePicker QuickPick dropdown and adds correct date to input', async () => {
+    const testId = 'datepicker-quick-pick'
+    render(
+      <DatePicker
+          allowInput
+          data={{ testid: testId }}
+          mode="range"
+          pickerId="date-picker-quick-pick"
+          placeholder="mm/dd/yyyy to mm/dd/yyyy"
+          selectionType="quickpick"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('mm/dd/yyyy to mm/dd/yyyy')
+
+    fireEvent(
+      input,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    const today = within(kit).getByText('Today')
+    const thisYear = within(kit).getByText('This year')
+    await waitFor(() => {
+      expect(today).toBeInTheDocument()
+      expect(thisYear).toBeInTheDocument()
+    })
+
+    fireEvent(
+      thisYear,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+
+    await waitFor(() => {
+      expect(input).toHaveValue(DateTime.getYearStartDate(new Date()).formatDate() + " to " + DateTime.getYearEndDate(new Date()).formatDate())
+    })
+  })
+
+  test('shows DatePicker QuickPick ranges ending today', async () => {
+    const testId = 'datepicker-quick-pick-ends-today'
+    render(
+      <DatePicker
+          allowInput
+          data={{ testid: testId }}
+          mode="range"
+          pickerId="date-picker-quick-pick"
+          placeholder="mm/dd/yyyy to mm/dd/yyyy"
+          selectionType="quickpick"
+          thisRangesEndToday
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('mm/dd/yyyy to mm/dd/yyyy')
+
+    fireEvent(
+      input,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+
+    const thisYear = within(kit).getByText('This year')
+
+    fireEvent(
+      thisYear,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+
+    await waitFor(() => {
+      expect(input).toHaveValue(DateTime.getYearStartDate(new Date()).formatDate() + " to " + new Date().formatDate())
     })
   })
 })

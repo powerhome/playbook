@@ -1,9 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 
-import DateTime from "../pb_kit/dateTime";
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
+import DateTime from '../pb_kit/dateTime';
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -15,35 +15,39 @@ type PbDateProps = {
   aria?: { [key: string]: string };
   className?: string;
   data?: { [key: string]: string };
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   showDayOfWeek?: boolean;
   showIcon?: boolean;
   size?: "sm" | "md" | "lg";
-  value: string | Date;
+  unstyled?: boolean;
+  value: Date;
 };
 
-const PbDate = (props: PbDateProps) => {
+const PbDate = (props: PbDateProps): React.ReactElement => {
   const {
     aria = {},
     alignment = "left",
     className,
     data = {},
+    htmlOptions = {},
     id,
     showDayOfWeek = false,
     showIcon = false,
     size = "md",
+    unstyled = false,
     value,
   } = props;
 
-  const dateTimestamp = new DateTime({ value: value });
-  const weekday = dateTimestamp.toWeekday();
-  const month = dateTimestamp.toMonth();
-  const day = dateTimestamp.toDay();
-  const year = dateTimestamp.toYear();
-  const currentYear = new Date().getFullYear().toString();
+  const weekday = DateTime.toWeekday(value);
+  const month = DateTime.toMonth(value);
+  const day = DateTime.toDay(value);
+  const year = DateTime.toYear(value);
+  const currentYear = new Date().getFullYear();
 
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(
     buildCss("pb_date_kit", alignment),
@@ -52,48 +56,102 @@ const PbDate = (props: PbDateProps) => {
   );
 
   return (
-    <div {...ariaProps} {...dataProps} className={classes} id={id}>
-      {size == "md" || size == "lg" ? (
-        <Title size={4} tag="h4">
-          {showIcon && (
-            <Body className="pb_icon_kit_container" color="light" tag="span">
-              <Icon fixedWidth icon="calendar-alt" />
-            </Body>
-          )}
+    <div 
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
+    >
+      {unstyled
+        ? <>
+            {showIcon && (
+              <div>
+                <Icon fixedWidth
+                    icon="calendar-alt"
+                />
+              </div>
+            )}
 
-          {showDayOfWeek && (
-            <>
-              {weekday}
-              <Body color="light" tag="span" text=" • " />
-            </>
-          )}
+            {showDayOfWeek && (
+              <>
+                <div>
+                  {weekday}
+                </div>
 
-          <span>
-            {month} {day}
-          </span>
-          {currentYear != year && <span>{`, ${year}`}</span>}
-        </Title>
-      ) : (
-        <>
-          {showIcon && (
-            <Caption className="pb_icon_kit_container" tag="span">
-              <Icon fixedWidth icon="calendar-alt" size="sm" />
-            </Caption>
-          )}
+                <div>{"•"}</div>
+              </>
+            )}
 
-          {showDayOfWeek && (
-            <>
-              <Caption tag="div">{weekday}</Caption>
-              <Caption color="light" tag="div" text=" • " />
-            </>
-          )}
+            <span>
+              <span>
+                {month} {day}
+              </span>
 
-          <Caption tag="span">
-            {month} {day}
-            {currentYear != year && <>{`, ${year}`}</>}
-          </Caption>
-        </>
-      )}
+              {currentYear != year && <span>{`, ${year}`}</span>}
+            </span>
+          </>
+        : size == "md" || size == "lg"
+          ? (
+            <Title size={4}
+                tag="h4"
+            >
+              {showIcon && (
+                <Body className="pb_icon_kit_container"
+                    color="light"
+                    tag="span"
+                >
+                  <Icon fixedWidth
+                      icon="calendar-alt"
+                  />
+                </Body>
+              )}
+
+              {showDayOfWeek && (
+                <>
+                  {weekday}
+                  <Body color="light"
+                      tag="span"
+                      text=" • "
+                  />
+                </>
+              )}
+
+              <span>
+                {month} {day}
+              </span>
+              {currentYear != year && <span>{`, ${year}`}</span>}
+            </Title>
+            )
+          : (
+              <>
+                {showIcon && (
+                  <Caption className="pb_icon_kit_container"
+                      tag="span"
+                  >
+                    <Icon fixedWidth
+                        icon="calendar-alt"
+                        size="sm"
+                    />
+                  </Caption>
+                )}
+
+                {showDayOfWeek && (
+                  <>
+                    <Caption tag="div">{weekday}</Caption>
+                    <Caption color="light"
+                        tag="div"
+                        text=" • "
+                    />
+                  </>
+                )}
+
+                <Caption tag="span">
+                  {month} {day}
+                  {currentYear != year && <>{`, ${year}`}</>}
+                </Caption>
+              </>
+            )}
     </div>
   );
 };

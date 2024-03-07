@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -18,12 +18,14 @@ type CurrencyProps = {
   data?: {[key:string]:string},
   decimals?: 'default' | 'matching',
   emphasized?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
   size?: 'sm' | 'md' | 'lg',
   symbol?: string,
   variant?: 'default' | 'light' | 'bold',
   unit?: string,
+  unstyled?: boolean,
 }
 
 const sizes: {lg: 1, md: 3, sm: 4} = {
@@ -32,7 +34,7 @@ const sizes: {lg: 1, md: 3, sm: 4} = {
   sm: 4,
 }
 
-const Currency = (props: CurrencyProps) => {
+const Currency = (props: CurrencyProps): React.ReactElement => {
   const {
     abbreviate = false,
     align = 'left',
@@ -41,6 +43,7 @@ const Currency = (props: CurrencyProps) => {
     data = {},
     decimals = 'default',
     emphasized = true,
+    htmlOptions = {},
     id,
     unit,
     className,
@@ -49,22 +52,22 @@ const Currency = (props: CurrencyProps) => {
     symbol = '$',
     variant = 'default',
     dark = false,
+    unstyled = false,
   } = props
 
   const emphasizedClass = emphasized ? '' : '_deemphasized'
 
   let variantClass
-  if (size === 'sm') {
-    if (variant === 'light') {
-      variantClass = '_light'
-    } else if (variant === 'bold') {
-      variantClass = '_bold'
-    }
+  if (variant === 'light') {
+    variantClass = '_light'
+  } else if (variant === 'bold') {
+    variantClass = '_bold'
   }
 
   const [whole, decimal = '00'] = amount.split('.')
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_currency_kit', align, size),
     globalProps(props),
@@ -96,47 +99,50 @@ const Currency = (props: CurrencyProps) => {
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >
-      <Caption>{label}</Caption>
+      <Caption dark={dark}>{label}</Caption>
 
       <div className={`pb_currency_wrapper${variantClass || emphasizedClass}`}>
-        <Body
-            className="dollar_sign"
-            color="light"
-            dark={dark}
-        >
-          {symbol}
-        </Body>
+        {unstyled ? (
+          <>
+            <div>{symbol}</div>
+            <div>{getAmount}</div>
+            <div>
+              {getAbbreviation}
+              {unit ? unit : getDecimalValue}
+            </div>
+          </>
+        ) : (
+          <>
+            <Body
+                className="dollar_sign"
+                color="light"
+                dark={dark}
+            >
+              {symbol}
+            </Body>
 
-        <Title
-            className="pb_currency_value"
-            dark={dark}
-            size={sizes[size]}
-        >
-          {getAmount}
-        </Title>
+            <Title
+                className="pb_currency_value"
+                dark={dark}
+                size={sizes[size]}
+            >
+              {getAmount}
+            </Title>
 
-        <Body
-            className="unit"
-            color="light"
-            dark={dark}
-        >
-          {getAbbreviation}
-          {
-            unit ? (
-              <>
-              {unit}
-              </>
-            ) : (
-              <>
-              {getDecimalValue}
-              </>
-            )
-          }
-          
-        </Body>
+            <Body
+                className="unit"
+                color="light"
+                dark={dark}
+            >
+              {getAbbreviation}
+              {unit ? unit : getDecimalValue}
+            </Body>
+          </>
+        )}
       </div>
     </div>
   )

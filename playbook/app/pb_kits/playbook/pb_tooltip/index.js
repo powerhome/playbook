@@ -54,6 +54,8 @@ export default class PbTooltip extends PbEnhancedElement {
   }
 
   showTooltip(trigger) {
+    if (this.shouldShowTooltip === "false") return
+
     this.popper = createPopper(trigger, this.tooltip, {
       placement: this.position,
       modifiers: [
@@ -126,5 +128,9 @@ export default class PbTooltip extends PbEnhancedElement {
 
   get triggerElementSelector() {
     return this.element.dataset.pbTooltipTriggerElementSelector
+  }
+
+  get shouldShowTooltip() {
+    return this.element.dataset.pbTooltipShowTooltip
   }
 }

@@ -1,13 +1,14 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type ListItemProps = {
   aria?: { [key: string]: string },
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
-  data?: object,
+  data?: Record<string, unknown>,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   tabIndex?: number,
 }
@@ -18,12 +19,14 @@ const ListItem = (props: ListItemProps) => {
     children,
     className,
     data = {},
+    htmlOptions = {},
     id,
     tabIndex,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss('pb_item_kit'),
     globalProps(props),
@@ -35,6 +38,7 @@ const ListItem = (props: ListItemProps) => {
       <li
           {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={classes}
           id={id}
           tabIndex={tabIndex}

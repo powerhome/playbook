@@ -46,7 +46,18 @@ module Playbook
     # rubocop:disable Naming/AccessorMethodName
     def get_kits
       menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
-      menu["kits"]
+      all_kits = []
+      menu["kits"].each do |kit|
+        kit_name = kit["name"]
+        components = kit["components"].map { |c| c["name"] }
+
+        all_kits << if components.size == 1
+                      components.first
+                    else
+                      { kit_name => components }
+                    end
+      end
+      all_kits
     end
 
     def get_kits_pb_website
@@ -84,8 +95,11 @@ module Playbook
     def pb_doc_render_clickable_title(kit, type)
       url = "#"
       begin
-        url = if type == "react"
+        url = case type
+              when "react"
                 kit_show_reacts_path(kit)
+              when "swift"
+                kit_show_swift_path(kit)
               else
                 kit_show_path(kit)
               end

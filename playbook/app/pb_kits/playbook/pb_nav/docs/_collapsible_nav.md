@@ -1,0 +1,1 @@
+The `collapsible` prop allows users to create a nested, collapsible nav. Pass `collapsible` to any NavItem and pass that navItem any number of NavItems as children to create a collapsible nav.

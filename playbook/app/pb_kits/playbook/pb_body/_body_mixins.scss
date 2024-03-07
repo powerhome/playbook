@@ -15,6 +15,7 @@ $pb_dark_body_colors: (
   default:        $text_dk_default,
   light:          $text_dk_light,
   lighter:        $text_dk_lighter,
+  link:           $primary_action_dark,
   error:          $error,
   success:        $text_dk_success_sm,
 );
@@ -34,7 +35,6 @@ $pb_body_status: (
   font-weight: $regular;
   font-family: $font-family-base;
 }
-
 
 // Colors ======================
 @mixin pb_body_light {

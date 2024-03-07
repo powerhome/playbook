@@ -9,7 +9,7 @@ RSpec.describe Playbook::PbBackground::Background do
   it {
     is_expected.to define_enum_prop(:tag)
       .with_default("div")
-      .with_values("h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "div", "tr", "td", "th")
+      .with_values("h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "div", "tr", "td", "th", "thead", "col")
   }
   it {
     is_expected.to define_enum_prop(:background_color)
@@ -46,11 +46,11 @@ RSpec.describe Playbook::PbBackground::Background do
     end
   end
 
-  describe "#custom_background_color" do
+  describe "#custom_background_color_and_position" do
     it "returns a hash with a hex value assigned to the background-color" do
-      kit = subject.new(custom_color: "#1d99a8")
+      kit = subject.new(custom_color: "#1d99a8", background_position: "center right")
 
-      expect(kit.custom_background_color).to eq "background-color: #1d99a8;"
+      expect(kit.custom_background_color).to eq "background-color: #1d99a8;\n        background-position: center right"
     end
   end
 end

@@ -10,7 +10,10 @@ examples:
   - select_custom_select: Custom Select
   - select_error: Select w/ Error
   - select_inline: Select Inline
+  - select_inline_show_arrow: Select Inline (Always Show Arrow)
   - select_inline_compact: Select Inline Compact
+  - select_attributes: Select W/ Attributes
+  - select_multiple: Select Multiple
 
 
 
@@ -24,4 +27,11 @@ examples:
   - select_custom_select: Custom Select
   - select_error: Select w/ Error
   - select_inline: Select Inline
+  - select_inline_show_arrow: Select Inline (Always Show Arrow)
   - select_inline_compact: Select Inline Compact
+  - select_multiple: Select Multiple
+
+  swift:
+  - select_default_swift: Default
+  - select_error_swift: Error
+  - select_props_table: ""

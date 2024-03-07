@@ -1,12 +1,13 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type ProgressStepProps = {
   aria?: { [key: string]: string },
   className?: string,
   data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   children?: React.ReactChild[] | React.ReactChild,
   orientation?: "horizontal" | "vertical",
@@ -24,6 +25,7 @@ const ProgressStep = (props: ProgressStepProps): React.ReactElement => {
     color,
     data = {},
     orientation = 'horizontal',
+    htmlOptions = {},
     icon = false,
     showIcon = false,
     variant,
@@ -31,6 +33,7 @@ const ProgressStep = (props: ProgressStepProps): React.ReactElement => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const iconStyle = icon === true || showIcon === true ? 'icon' : ''
   const progressStepCss = buildCss(
     'pb_progress_step_kit',
@@ -44,6 +47,7 @@ const ProgressStep = (props: ProgressStepProps): React.ReactElement => {
     <ul
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classnames(progressStepCss, globalProps(props), className)}
     >
       {children}

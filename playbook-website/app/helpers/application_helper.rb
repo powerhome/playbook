@@ -1,14 +1,19 @@
 # frozen_string_literal: true
 
+require "pb_doc_helper"
+
 module ApplicationHelper
   include ::Webpacker::React::Helpers
+  include ::Webpacker::Helper
   include ::Playbook::PbFormsHelper
   include ::Playbook::PbKitHelper
+  include ::PlaybookWebsite::Markdown::Helper
+  include ::PlaybookWebsite::PbDocHelper
 
   def pb_category_kits(category_kits: [], type: "rails")
     display_kits = []
     category_kits.each do |kit|
-      display_kits << render_pb_doc_kit(kit, type, false)
+      display_kits << render_pb_doc_kit(kit, type, false) if pb_doc_has_kit_type?(kit, type)
     end
     raw("<div class='pb--docItem'>#{display_kits.join("</div><div class='pb--docItem'>")}</div>")
   end
@@ -28,10 +33,31 @@ module ApplicationHelper
   end
 
   def pb_doc_has_kit_type?(kit, type = "rails")
-    extension = type == "react" ? "jsx" : "erb"
+    case type
+    when "rails"
+      extension = "erb"
+      query_string = extension
+    when "react"
+      extension = "jsx"
+      query_string = extension
+    when "swift"
+      extension = "md"
+      query_string = "_swift"
+    end
+
     Playbook.kit_path(kit, "docs")
             .glob("**/*.#{extension}")
+            .any? { |path| path.basename.to_s.include?(query_string) }
             .present?
+  end
+
+  def category_has_kits?(category_kits: [], type: "rails")
+    display_kits = []
+    category_kits.each do |kit|
+      display_kits.push(pb_doc_has_kit_type?(kit, type))
+      display_kits.push(pb_doc_has_kit_type?(kit, type))
+    end
+    display_kits.include?(true)
   end
 
   def nav_hash_category(link)
@@ -55,19 +81,42 @@ module ApplicationHelper
   end
 
   def sub_category_link(type, link)
-    if type == "react"
+    case type
+    when "react"
       kit_show_reacts_path(link)
+    when "swift"
+      kit_show_swift_path(link)
     else
       kit_show_path(link)
     end
   end
 
   def kit_link(type, link)
-    if type == "react"
+    case type
+    when "react"
       kit_show_reacts_path(link)
+    when "swift"
+      kit_show_swift_path(link)
     else
       kit_show_path(link)
     end
+  end
+
+  def doc_link(parent, page = nil)
+    if page.nil?
+      guides_parent_path(parent)
+    else
+      guides_parent_page_path(parent, page)
+    end
+  end
+
+  def gh_edit_link(parent, page, link_extension)
+    gh_link = "https://github.com/powerhome/playbook/edit/master/playbook-website/app/views/guides/"
+    gh_link + if page.nil?
+                link_extension
+              else
+                "#{parent}/#{link_extension}"
+              end
   end
 
   def all_active(controller_name, action_name)
@@ -89,25 +138,55 @@ module ApplicationHelper
   def format_search_hash(kit)
     {
       label: kit.to_s.titleize,
-      value: @type == "react" || @type.nil? ? "/kits/#{kit}/react" : "/kits/#{kit}",
+      value: if @type == "react" || @type.nil?
+               "/kits/#{kit}/react"
+             else
+               @type == "swift" ? "/kits/#{kit}/swift" : "/kits/#{kit}"
+             end,
     }
+  end
+
+  def aggregate_kits_with_status
+    all_kits = []
+
+    MENU["kits"].each do |kit|
+      kit_name = kit["name"]
+      # Modify this line to include both name and status in the components array
+      components = kit["components"].map { |c| { name: c["name"], status: c["status"] } }
+
+      all_kits << if components.size == 1
+                    # For a single-component kit, return the component with its status
+                    components.first
+                  else
+                    # For multi-component kits, return the kit name with the components including their statuses
+                    { kit_name => components }
+                  end
+    end
+
+    all_kits
   end
 
   def search_list
     all_kits = []
     formatted_kits = []
-    MENU["kits"].each do |kit|
+
+    aggregate_kits_with_status.each do |kit|
       if kit.is_a? Hash
-        kit.values[0].each do |sub_kit|
-          all_kits.push(sub_kit)
+        _kit_name, components = kit.first
+        components.each do |component|
+          all_kits.push(component[:name]) if component[:status] != "beta"
         end
       else
         all_kits.push(kit)
       end
     end
-    all_kits.sort!.each do |sorted_kit|
+
+    all_kits.sort!
+
+    all_kits.each do |sorted_kit|
       formatted_kits.push(format_search_hash(sorted_kit))
     end
+
     formatted_kits
   end
 
