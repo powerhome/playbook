@@ -40,7 +40,7 @@ export default function ComponentShow() {
           },
         }}
         options={{
-          bundlerURL: "http://localhost:8000/",
+          bundlerURL: "http://pr3210.playbook.beta.gm.powerapp.cloud/",
           // externalResources: ["https://kit.fontawesome.com/098a1cd4d5.js"],
           classes: {
             "sp-preview-actions": "sandbox-button-toolbar",

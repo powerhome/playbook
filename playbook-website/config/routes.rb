@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get "kits/:name/rails_raw",       to: "pages#rails_raw",            as: "rails_raw"
   get "kit_playground_rails",       to: "pages#kit_playground_rails", as: "kit_playground_rails"
   post "rails_pg_render",           to: "pages#rails_pg_render",      as: "rails_pg_render"
+  get "sandpack_bundler",           to: "pages#sandpack_bundler",     as: "sandpack_bundler"
 
   # Docs
   get "guides/:parent",         to: "guides#md_doc", as: "guides_parent"
