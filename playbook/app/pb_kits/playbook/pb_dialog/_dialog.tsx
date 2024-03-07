@@ -9,7 +9,7 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../uti
 import { globalProps } from "../utilities/globalProps";
 
 import Body from "../pb_body/_body";
-import Button from "../pb_button/_button";
+import Button, { PlaybookButton, PlaybookButtonProps } from "../pb_button/_button";
 import DialogHeader from "./child_kits/_dialog_header";
 import DialogFooter from "./child_kits/_dialog_footer";
 import DialogBody from "./child_kits/_dialog_body";
@@ -17,14 +17,17 @@ import Flex from "../pb_flex/_flex";
 import IconCircle from "../pb_icon_circle/_icon_circle";
 import Title from "../pb_title/_title";
 import { DialogContext } from "./_dialog_context";
+import { ReactButton } from "../types";
+
+type DialogButton = PlaybookButton | ReactButton
 
 type DialogProps = {
   aria?: { [key: string]: string };
-  cancelButton?: string;
+  cancelButton?: string | DialogButton;
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
   closeable: boolean;
-  confirmButton?: string;
+  confirmButton?: string | DialogButton;
   data?: {[key: string]: string},
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
@@ -71,8 +74,8 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     trigger,
   } = props;
   const ariaProps = buildAriaProps(aria);
-   const dataProps = buildDataProps(data)
-   const htmlProps = buildHtmlProps(htmlOptions);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const dialogClassNames = {
     base: classnames("pb_dialog", buildCss("pb_dialog", size, placement)),
     afterOpen: "pb_dialog_after_open",
@@ -165,6 +168,33 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     },
   };
 
+  const renderButton = (dialogButton: DialogButton, props: PlaybookButtonProps) => {
+    if (typeof(dialogButton) === "string") return (<Button {...props}>{dialogButton}</Button>)
+
+    if (["button", "input"].includes(dialogButton.type as string)) return dialogButton
+
+    return React.cloneElement(
+      dialogButton as PlaybookButton,
+      {...props, ...dialogButton.props} as PlaybookButtonProps
+    )
+  }
+
+  const renderConfirmButton = () =>
+    renderButton(confirmButton as DialogButton, {
+      htmlType: "button",
+      loading,
+      onClick: onConfirm,
+      variant: "primary"
+    })
+
+  const renderCancelButton = () =>
+    renderButton(cancelButton as DialogButton, {
+      htmlType: "button",
+      id: "cancel-button",
+      onClick: onCancel,
+      variant: "link"
+    })
+
   return (
     <DialogContext.Provider value={api}>
       <div 
@@ -214,22 +244,8 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             )}
             {cancelButton && confirmButton ? (
               <Dialog.Footer>
-                  <Button
-                      htmlType="button"
-                      loading={loading}
-                      onClick={onConfirm}
-                      variant="primary"
-                  >
-                    {confirmButton}
-                  </Button>
-                  <Button
-                      htmlType="button"
-                      id="cancel-button"
-                      onClick={onCancel}
-                      variant="link"
-                  >
-                    {cancelButton}
-                  </Button>
+                { renderConfirmButton() }
+                { renderCancelButton() }
               </Dialog.Footer>
             ) : null}
             {children}

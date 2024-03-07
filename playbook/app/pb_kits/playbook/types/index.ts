@@ -1,4 +1,5 @@
 export * from './base'
+export * from './buttons'
 export * from './colors'
 export * from './data'
 export * from './display'

@@ -10,7 +10,7 @@ import Flex from "../pb_flex/_flex"
 
 type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
-type ButtonPropTypes = {
+export type PlaybookButtonProps = {
   aria?: { [key: string]: string },
   children?: React.ReactChild[] | React.ReactChild,
   className?: string | string[],
@@ -40,7 +40,9 @@ type ButtonPropTypes = {
   wrapperClass?: string,
 } & GlobalProps
 
-const buttonClassName = (props: ButtonPropTypes) => {
+export type PlaybookButton = React.ReactElement<PlaybookButtonProps>
+
+const buttonClassName = (props: PlaybookButtonProps) => {
   const {
     disabled = false,
     fullWidth = false,
@@ -66,7 +68,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
   return className
 }
 
-const Button = (props: ButtonPropTypes): React.ReactElement => {
+const Button = (props: PlaybookButtonProps): PlaybookButton => {
   const {
     aria = {},
     children,
