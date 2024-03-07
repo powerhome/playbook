@@ -173,8 +173,6 @@ class PagesController < ApplicationController
     render "pages/visual_guidelines"
   end
 
-  def full_list; end
-
   def get_source(example)
     read_kit_file("_#{example}.jsx")
   end
