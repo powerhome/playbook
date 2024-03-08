@@ -101,5 +101,16 @@
       background: $bg_dark_card;
     }
 
+    .table-header-cells:first-child, td:first-child {
+      box-shadow: 1px 0px 0px 0px $border_dark !important;
+    }
+
+    .collapsible-trail {
+      background-color: $border_dark !important;
+    }
+
+    .sort-button-icon, .header-sort-button > div {
+        color: $white !important;
+    }
   }
 }
