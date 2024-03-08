@@ -19,6 +19,7 @@ import Position from "../VisualGuidelines/Examples/Position";
 import Hover from "../VisualGuidelines/Examples/Hover";
 import TextAlign from "../VisualGuidelines/Examples/TextAlign";
 import Overflow from "./Examples/Overflow";
+import Truncate from "./Examples/Truncate";
 
 const VisualGuidelines = ({
   examples,
@@ -73,10 +74,12 @@ const VisualGuidelines = ({
         return <Hover example={examples.hover_jsx}/>;
       case "text_align":
         return <TextAlign example={examples.text_align_jsx} />
-        case "overflow":
-          return <Overflow example={examples.overflow_jsx} 
-                    tokensExample={examples.overflow_token}
-                 />
+      case "overflow":
+        return <Overflow example={examples.overflow_jsx} 
+                         tokensExample={examples.overflow_token} />
+      case "truncate":
+        return <Truncate example={examples.truncate_jsx} />
+                         
 
       default:
         return <Colors/>;

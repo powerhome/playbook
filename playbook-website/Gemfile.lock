@@ -251,6 +251,10 @@ GEM
     thor (1.2.1)
     tilt (2.3.0)
     timeout (0.3.2)
+    turbo-rails (1.4.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2022.1)
@@ -314,6 +318,7 @@ DEPENDENCIES
   sentry-ruby
   spring
   spring-watcher-listen (~> 2.1.0)
+  turbo-rails (~> 1.4.0)
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (= 5.4.4)
