@@ -7,9 +7,9 @@
       border-spacing: 0;
       background: $white;
 
-      thead {
-        tr {
-          th {
+      thead, .pb_table_thead {
+        tr, .pb_table_tr {
+          th, .pb_table_th {
             border-color: $border_light;
             border-style: solid;
             border-width: 1px 0 1px 0;
@@ -26,9 +26,9 @@
         }
       }
 
-      tbody {
-        tr {
-          td {
+      tbody, .pb_table_tbody {
+        tr, .pb_table_tr {
+          td, .pb_table_td {
             border-color: $border_light;
             border-style: solid;
             border-width: 0 0 1px 0;
@@ -42,7 +42,7 @@
           }
 
           &:last-child {
-            td {
+            td, .pb_table_td {
               border-width: 0 0 1px 0;
 
               &:first-child {

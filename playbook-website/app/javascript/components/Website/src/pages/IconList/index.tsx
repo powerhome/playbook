@@ -1,27 +1,43 @@
 import React from "react"
 
-import { Hero } from "../../components/Hero"
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
-import { Title, Flex, FlexItem, Card } from "playbook-ui"
-import Roofing from "@powerhome/playbook-icons/icons/roofing.svg"
-import Powergon from "@powerhome/playbook-icons/icons/powergon.svg"
-import Nitro from "@powerhome/playbook-icons/icons/nitro.svg"
-import ChevronDown from "@powerhome/playbook-icons/icons/chevron-down.svg"
-import Times from "@powerhome/playbook-icons/icons/times.svg"
-import Bars from "@powerhome/playbook-icons/icons/bars.svg"
-import Calendar from "@powerhome/playbook-icons/icons/calendar.svg"
-import Filter from "@powerhome/playbook-icons/icons/filter.svg"
-import Edit from "@powerhome/playbook-icons/icons/edit.svg"
-import Trash from "@powerhome/playbook-icons/icons/trash.svg"
-import Check from "@powerhome/playbook-icons/icons/check.svg"
-import Plus from "@powerhome/playbook-icons/icons/plus.svg"
-import Search from "@powerhome/playbook-icons/icons/search.svg"
+
+import { Hero } from "../../components/Hero"
+import { Roofing, Powergon, Nitro, ChevronDown, Times, Bars, Calendar, Filter, Edit, Trash, Check, Plus, Search} from '@powerhome/playbook-icons-react'
+import { Body, Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
+
+const pbIcons = {
+  roofing: Roofing,
+  nitro: Nitro,
+  powergon: Powergon,
+  chevrondown: ChevronDown,
+  times: Times,
+  bars: Bars,
+  calendar: Calendar,
+  filter: Filter,
+  edit: Edit,
+  trash: Trash,
+  check: Check,
+  plus: Plus,
+  search: Search
+}
+
+window.PB_ICONS = pbIcons
 
 export default function IconList() {
 
   return (
     <>
-      <Hero description={"Power Icons"} title={linkFormat("Playbook Icons")} />
+      <Hero description={"Powerhome Icons"} title={linkFormat("Playbook Icons")} />
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Title paddingBottom="sm" size={3} tag='h3' text='Power Icons' />
+        </FlexItem>
+      </Flex>
 
       <Flex
         justify='center'
@@ -35,32 +51,35 @@ export default function IconList() {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Roofing} />
+              <Icon icon="roofing"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Powergon} />
+              <Icon icon="powergon"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Nitro} />
+              <Icon icon="nitro"  />
             </Card>
           </Flex>
         </FlexItem>
       </Flex>
+
+
       <Flex
         justify='center'
         marginX={{ lg: "sm", xl: "sm" }}
         paddingLeft="xs"
+        paddingTop="sm"
       >
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
-          <Title size={3} tag='h3' text='Interface Core Icons' />
+          <Title paddingBottom="sm" size={3} tag='h3' text='Interface Core Icons' />
         </FlexItem>
       </Flex>
       <Flex
@@ -75,77 +94,280 @@ export default function IconList() {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={ChevronDown} />
+              <Icon icon="chevrondown" />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Times} />
+              <Icon icon="times" />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Bars} />
+              <Icon icon="bars" />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Times} />
+              <Icon icon="times" />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Calendar} />
+              <Icon icon="calendar" />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Filter} />
+              <Icon icon="filter" />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Edit} />
+              <Icon icon="edit" />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Trash} />
+              <Icon icon="trash" />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Check} />
+              <Icon icon="check" />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Plus} />
+              <Icon icon="plus" />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <img src={Search} />
+              <Icon icon="search" />
+            </Card>
+          </Flex>
+        </FlexItem>
+      </Flex>
+
+
+
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+        paddingTop="sm"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Title paddingBottom="sm" size={3} tag='h3' text='Sizes' />
+        </FlexItem>
+      </Flex>
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Flex>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="xs"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="sm"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="lg"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="1x"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="2x"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="3x"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="4x"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="5x"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="6x"  />
+            </Card>
+          </Flex>
+        </FlexItem>
+      </Flex>
+
+
+
+
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Title paddingBottom="sm" size={3} tag='h3' text='Color' />
+        </FlexItem>
+      </Flex>
+
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Flex>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+              className="blue_color"
+            >
+              <Body color="error">
+                <Icon icon="powergon" size="3x" />
+              </Body>
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+              className="red_color"
+            >
+              <Body color="link">
+                <Icon icon="powergon" size="3x" />
+              </Body>
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+              className="green_color"
+            >
+              <Body color="success">
+                <Icon icon="powergon" size="3x" />
+              </Body>
+            </Card>
+          </Flex>
+        </FlexItem>
+      </Flex>
+
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Title paddingBottom="sm" paddingTop="sm" size={3} tag='h3' text='Animation & Transformation' />
+        </FlexItem>
+      </Flex>
+
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Flex>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="nitro" size="6x" spin  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="nitro" size="3x" pulse  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="nitro" size="3x"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="nitro" size="3x" rotation={90}  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="nitro" size="3x" rotation={180}  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="nitro" size="3x" rotation={270}  />
             </Card>
           </Flex>
         </FlexItem>

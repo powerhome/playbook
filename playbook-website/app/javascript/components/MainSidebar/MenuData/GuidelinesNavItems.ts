@@ -63,4 +63,8 @@ export const VisualGuidelinesItems = [
         name: "Overflow",
         link: "/visual_guidelines/overflow"
     },
+    {
+        name: "Truncate",
+        link: "/visual_guidelines/truncate"
+    },
   ];
