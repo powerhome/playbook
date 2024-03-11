@@ -31,7 +31,7 @@ Built and maintained by the User Experience Team at [Power Home Remodeling](http
 
 # Code Format
 
-Playbook Swift enforces a indentation width of 2 spaces.
+Playbook Swift enforces an indentation width of 2 spaces.
 
 ## Component Examples via PlaybookShowcase
 
