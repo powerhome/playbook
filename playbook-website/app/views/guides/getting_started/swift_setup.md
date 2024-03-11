@@ -17,11 +17,10 @@ Built and maintained by the User Experience Team at [Power Home Remodeling](http
 ### Prerequisites
 
 - [Xcode 15](https://developer.apple.com/xcode/)
-- [Homebrew](https://brew.sh/)
 
 ### Playbook Swift can be added via the Swift Package Manager
 
-1. Search for: `git@github.com:powerhome/PlaybookSwift.git`
+1. Search for: `git@github.com:powerhome/playbook-swift.git`
 1. Choose `Add Package`
 2. Choose `Packages > Resolve Package Versions`
 3. In your Swift view file:
@@ -30,24 +29,15 @@ Built and maintained by the User Experience Team at [Power Home Remodeling](http
     ```
 5. Build the project
 
-### Install [`pre-commit`](https://pre-commit.com/#install) via `brew install pre-commit`
-  1. In the Playbook Swift root directory, run `pre-commit install` to set up the git hook scripts
+# Code Format
 
-# Code Format & Linting
-
-See the [Editing Linting, Formatting, and Auto Correction](LINTING.md) doc for more information.
+Playbook Swift enforces a indentation width of 2 spaces.
 
 ## Component Examples via PlaybookShowcase
 
 Playbook Swift contains the app named `PlaybookShowcase`; providing examples of each component. PlaybookShowcase can be launched within the XCode simulator, side-loaded, or downloaded to your device.
 
-# Note: YAML Configuration Files
+You can find Playbook Swift documentation for a particular component following this example path in the playbook-website repo: playbook/app/pb_kits/playbook/pb_[COMPONENT_NAME]/docs. The relevant files will end with _swift.md.
 
-- You may need to add the package like so:
-
-```yaml
-packages:
-  Playbook:
-    url: git@github.com:powerhome/PlaybookSwift.git
-    version x.x.x // Where x.x.x is the desired version
-```
+# Contribution Documentation
+Contribution documentation can be found [here](https://github.com/powerhome/playbook-swift/blob/main/Contribution.md).
