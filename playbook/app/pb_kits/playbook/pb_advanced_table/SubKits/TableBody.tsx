@@ -62,7 +62,6 @@ export const TableBody = ({
               {isFirstChildofSubrow && subRowHeaders && (
                 <SubRowHeaderRow
                     collapsibleTrail={collapsibleTrail}
-                    dark={dark}
                     enableToggleExpansion={enableToggleExpansion}
                     onClick={handleExpandOrCollapse}
                     row={row}
