@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { AdvancedTable } from "../../";
-import { MOCK_DATA } from "./_mock_data";
+import React, { useState } from "react"
+import { AdvancedTable } from "../../"
+import { MOCK_DATA } from "./_mock_data"
 
 const AdvancedTableExpandedControl = (props) => {
   const columnDefinitions = [
@@ -33,7 +33,7 @@ const AdvancedTableExpandedControl = (props) => {
       accessor: "graduatedStudents",
       label: "Graduated Students",
     },
-  ];
+  ]
 
   //State for manually effecting what is expanded
   const [expanded, setExpanded] = useState({'0': true, '0.0': true, '0.0.1': true})
@@ -53,7 +53,7 @@ const AdvancedTableExpandedControl = (props) => {
           {...props}
       />
     </div>
-  );
-};
+  )
+}
 
-export default AdvancedTableExpandedControl;
+export default AdvancedTableExpandedControl

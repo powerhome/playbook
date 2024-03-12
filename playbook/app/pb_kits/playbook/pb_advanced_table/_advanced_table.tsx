@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
-import classnames from "classnames";
-import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
-import { globalProps, GlobalProps } from "../utilities/globalProps";
-import Table from "../pb_table/_table";
+import React, { useState, useEffect, useCallback } from "react"
+import classnames from "classnames"
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
+import { globalProps, GlobalProps } from "../utilities/globalProps"
+import Table from "../pb_table/_table"
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -11,38 +11,38 @@ import {
   Row,
   useReactTable,
   Getter,
-} from "@tanstack/react-table";
+} from "@tanstack/react-table"
 
-import { updateExpandAndCollapseState } from "./Utilities/ExpansionControlHelpers";
+import { updateExpandAndCollapseState } from "./Utilities/ExpansionControlHelpers"
 
-import { CustomCell } from "./Components/CustomCell";
-import AdvancedTableContext from "./Context/AdvancedTableContext";
-import { TableHeader } from "./SubKits/TableHeader";
-import { TableBody } from "./SubKits/TableBody";
+import { CustomCell } from "./Components/CustomCell"
+import AdvancedTableContext from "./Context/AdvancedTableContext"
+import { TableHeader } from "./SubKits/TableHeader"
+import { TableBody } from "./SubKits/TableBody"
 
-import { GenericObject } from "../types";
+import { GenericObject } from "../types"
 
 type AdvancedTableProps = {
-  aria?: { [key: string]: string };
-  children?: React.ReactNode | React.ReactNode[];
-  className?: string;
-  columnDefinitions: GenericObject[];
-  data?: { [key: string]: string };
-  enableToggleExpansion?: "all" | "header" | "none";
-  expandedControl?: GenericObject;
+  aria?: { [key: string]: string }
+  children?: React.ReactNode | React.ReactNode[]
+  className?: string
+  columnDefinitions: GenericObject[]
+  data?: { [key: string]: string }
+  enableToggleExpansion?: "all" | "header" | "none"
+  expandedControl?: GenericObject
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
-  id?: string;
-  initialLoadingRowsCount?: number;
-  inlineRowLoading?: boolean;
-  loading?: boolean | string;
-  onRowToggleClick?: (arg: Row<GenericObject>) => void;
-  onToggleExpansionClick?: (arg: Row<GenericObject>) => void;
-  sortControl?: GenericObject;
-  tableData: GenericObject[];
-  tableOptions?: GenericObject;
-  tableProps?: GenericObject;
-  toggleExpansionIcon?: string | string[];
-} & GlobalProps;
+  id?: string
+  initialLoadingRowsCount?: number
+  inlineRowLoading?: boolean
+  loading?: boolean | string
+  onRowToggleClick?: (arg: Row<GenericObject>) => void
+  onToggleExpansionClick?: (arg: Row<GenericObject>) => void
+  sortControl?: GenericObject
+  tableData: GenericObject[]
+  tableOptions?: GenericObject
+  tableProps?: GenericObject
+  toggleExpansionIcon?: string | string[]
+} & GlobalProps
 
 const AdvancedTable = (props: AdvancedTableProps) => {
   const {
@@ -65,22 +65,22 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     tableOptions,
     tableProps,
     toggleExpansionIcon = "arrows-from-line",
-  } = props;
+  } = props
 
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(
     initialLoadingRowsCount
-  );
+  )
 
   // Create a local state for expanded and setExpanded if expandedControl not used
-  const [localExpanded, setLocalExpanded] = useState({});
+  const [localExpanded, setLocalExpanded] = useState({})
 
   // Determine whether to use the prop or the local state
-  const expanded = expandedControl ? expandedControl.value : localExpanded;
+  const expanded = expandedControl ? expandedControl.value : localExpanded
   const setExpanded = expandedControl
     ? expandedControl.onChange
-    : setLocalExpanded;
+    : setLocalExpanded
 
-  const columnHelper = createColumnHelper();
+  const columnHelper = createColumnHelper()
 
   //Create cells for first columns
   const createCellFunction = (cellAccessors: string[]) => {
@@ -88,10 +88,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       row,
       getValue,
     }: {
-      row: Row<GenericObject>;
-      getValue: Getter<string>;
+      row: Row<GenericObject>
+      getValue: Getter<string>
     }) => {
-      const rowData = row.original;
+      const rowData = row.original
 
       switch (row.depth) {
         case 0: {
@@ -101,12 +101,12 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                 onRowToggleClick={onRowToggleClick}
                 row={row}
             />
-          );
+          )
         }
         default: {
           // Handle other depths based on cellAccessors
-          const depthAccessor = cellAccessors[row.depth - 1]; // Adjust index for depth
-          const accessorValue = rowData[depthAccessor];
+          const depthAccessor = cellAccessors[row.depth - 1] // Adjust index for depth
+          const accessorValue = rowData[depthAccessor]
           return accessorValue ? (
             <CustomCell
                 onRowToggleClick={onRowToggleClick}
@@ -115,13 +115,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             />
           ) : (
             "N/A"
-          );
+          )
         }
       }
-    };
+    }
 
-    return columnCells;
-  };
+    return columnCells
+  }
 
   //Create column array in format needed by Tanstack
   const columns =
@@ -132,12 +132,12 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         ...columnHelper.accessor(column.accessor, {
           header: column.label,
         }),
-      };
-      if (column.cellAccessors) {
-        columnStructure.cell = createCellFunction(column.cellAccessors);
       }
-      return columnStructure;
-    });
+      if (column.cellAccessors) {
+        columnStructure.cell = createCellFunction(column.cellAccessors)
+      }
+      return columnStructure
+    })
 
   //Syntax for sorting Array if we want to manage state ourselves
   const sorting = [
@@ -148,15 +148,15 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           ? !sortControl.value.desc
           : false,
     },
-  ];
+  ]
 
   const expandAndSortState = () => {
     if (sortControl) {
-      return { state: { expanded, sorting } };
+      return { state: { expanded, sorting } }
     } else {
-      return { state: { expanded } };
+      return { state: { expanded } }
     }
-  };
+  }
 
 //initialize table
   const table = useReactTable({
@@ -171,42 +171,42 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     sortDescFirst: true,
     ...expandAndSortState(),
     ...tableOptions,
-  });
+  })
 
-  const tableRows = table.getRowModel();
+  const tableRows = table.getRowModel()
 
   // Set table row count for loading state
   const updateLoadingStateRowCount = useCallback(() => {
-    const rowsCount = table.getRowModel().rows.length;
+    const rowsCount = table.getRowModel().rows.length
     if (rowsCount !== loadingStateRowCount && rowsCount !== 0) {
-      setLoadingStateRowCount(rowsCount);
+      setLoadingStateRowCount(rowsCount)
     }
-  }, [tableData, loadingStateRowCount]);
+  }, [tableData, loadingStateRowCount])
 
   useEffect(() => {
     if (!loading) {
-      updateLoadingStateRowCount();
+      updateLoadingStateRowCount()
     }
-  }, [loading, updateLoadingStateRowCount]);
+  }, [loading, updateLoadingStateRowCount])
 
   const handleExpandOrCollapse = (row: Row<GenericObject>) => {
-    onToggleExpansionClick && onToggleExpansionClick(row);
+    onToggleExpansionClick && onToggleExpansionClick(row)
 
-    const expandedState = expanded;
-    const targetParent = row?.parentId;
+    const expandedState = expanded
+    const targetParent = row?.parentId
     return setExpanded(
       updateExpandAndCollapseState(tableRows, expandedState, targetParent)
-    );
-  };
+    )
+  }
 
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
-  const htmlProps = buildHtmlProps(htmlOptions);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss("pb_advanced_table"),
     globalProps(props),
     className
-  );
+  )
 
   return (
     <div {...ariaProps} 
@@ -247,10 +247,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         </Table>
       </AdvancedTableContext.Provider>
     </div>
-  );
-};
+  )
+}
 
-AdvancedTable.Header = TableHeader;
-AdvancedTable.Body = TableBody;
+AdvancedTable.Header = TableHeader
+AdvancedTable.Body = TableBody
 
-export default AdvancedTable;
+export default AdvancedTable
