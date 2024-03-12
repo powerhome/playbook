@@ -23,4 +23,5 @@ examples:
   - user_vertical_size_swift: Vertical
   - user_text_only_swift: Text Only
   - user_size_swift: Horizontal Size
+  - user_presence_indicator_swift: Presence Indicator
   - user_props_table: ""

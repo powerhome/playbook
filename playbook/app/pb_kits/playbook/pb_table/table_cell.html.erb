@@ -1,10 +1,10 @@
 <% if object.tag == "table" %>
-    <%= content_tag(:tr,
+    <%= content_tag(:td,
       aria: object.aria,
       class: object.classname,
       data: object.data,
       id: object.id) do %>
-      <%= content.presence %>
+      <%= content.presence || object.text %>
     <% end %>
 <% else %>
     <%= content_tag(:div,
@@ -12,6 +12,6 @@
       class: object.classname,
       data: object.data,
       id: object.id) do %>
-      <%= content.presence %>
+      <%= content.presence || object.text %>
     <% end %>
 <% end %>

@@ -23,9 +23,16 @@ module Playbook
                   default: ""
       prop :sort_dropdown, type: Playbook::Props::Boolean,
                            default: false
+      prop :tag, type: Playbook::Props::Enum,
+                 values: %w[table div],
+                 default: "table"
 
       def classname
-        generate_classname("pb_table_header_kit", align_class)
+        generate_classname("pb_table_header_kit", align_class) + tag_class
+      end
+
+      def tag_class
+        " pb_table_th"
       end
 
       def align_class
