@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react"
 import classnames from "classnames"
-import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
-import { globalProps, GlobalProps } from "../utilities/globalProps"
-import Table from "../pb_table/_table"
+
+import { GenericObject } from "../types"
+
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -13,14 +13,18 @@ import {
   Getter,
 } from "@tanstack/react-table"
 
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
+import { globalProps, GlobalProps } from "../utilities/globalProps"
+
+import Table from "../pb_table/_table"
+
+import AdvancedTableContext from "./Context/AdvancedTableContext"
+
 import { updateExpandAndCollapseState } from "./Utilities/ExpansionControlHelpers"
 
 import { CustomCell } from "./Components/CustomCell"
-import AdvancedTableContext from "./Context/AdvancedTableContext"
 import { TableHeader } from "./SubKits/TableHeader"
 import { TableBody } from "./SubKits/TableBody"
-
-import { GenericObject } from "../types"
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string }

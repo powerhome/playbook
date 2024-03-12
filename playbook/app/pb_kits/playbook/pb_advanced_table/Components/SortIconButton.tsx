@@ -1,7 +1,10 @@
 import React from "react"
-import Icon from "../../pb_icon/_icon"
 import { Header } from "@tanstack/react-table"
+
 import { GenericObject } from "../../types"
+
+import Icon from "../../pb_icon/_icon"
+
 import { displayIcon } from "../Utilities/IconHelpers"
 
 type SortIconButtonProps = {
