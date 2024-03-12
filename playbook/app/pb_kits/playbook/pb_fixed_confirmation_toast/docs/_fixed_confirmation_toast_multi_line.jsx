@@ -5,35 +5,35 @@ import FixedConfirmationToast from '../_fixed_confirmation_toast'
 
 const FixedConfirmationToastMultiLine = (props) => {
 
-    const [open, setOpen] = useState(false)
-    const [openCloseable, setOpenCloseable] = useState(false)
+    const [openShort, setOpenShort] = useState(false)
+    const [openLong, setOpenLong] = useState(false)
 
-    const handleClick = () => {
-        setOpen(true)
+    const handleClickShort = () => {
+        setOpenShort(true)
     }
-    const handleClickCloseable = () => {
-        setOpenCloseable(true)
-    }
-
-    const handleClose = () => {
-        setOpen(false)
+    const handleClickLong= () => {
+        setOpenLong(true)
     }
 
-    const handleCloseCloseable = () => {
-        setOpenCloseable(false)
+    const handleCloseShort = () => {
+        setOpenShort(false)
+    }
+
+    const handleCloseLong= () => {
+        setOpenLong(false)
     }
 
     return (
         <>
             <Button
-                onClick={handleClick}
+                onClick={handleClickShort}
                 text="Short Multiline"
                 variant="secondary"
                 {...props}
             />
             {' '}
             <Button
-                onClick={handleClickCloseable}
+                onClick={handleClickLong}
                 text="Long Multiline"
                 variant="secondary"
                 {...props}
@@ -43,8 +43,8 @@ const FixedConfirmationToastMultiLine = (props) => {
                 closeable 
                 horizontal='center'
                 multiLine
-                onClose={handleClose}
-                open={open}
+                onClose={handleCloseShort}
+                open={openShort}
                 status='tip'
                 text='Multi-line is used when the given text will not fit on one line.'
                 vertical='top'
@@ -55,8 +55,8 @@ const FixedConfirmationToastMultiLine = (props) => {
                 closeable
                 horizontal='center'
                 multiLine
-                onClose={handleCloseCloseable}
-                open={openCloseable}
+                onClose={handleCloseLong}
+                open={openLong}
                 status='tip'
                 text='Multi-line is used when the given text will not fit on one line. Using Multi Line allows the height of the confirmation toast to grow. Simply resize the screen to see the fixed confirmation toast wrap the text.'
                 vertical='top'

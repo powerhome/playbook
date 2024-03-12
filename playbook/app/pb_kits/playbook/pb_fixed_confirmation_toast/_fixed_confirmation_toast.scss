@@ -36,6 +36,8 @@ $confirmation_toast_colors: (
     z-index: $z_9;
     display: flex;
     justify-content: space-around;
+    max-width: max-content;
+    width: 90%;
 
     &.top {
       top: $space_md;
@@ -54,14 +56,6 @@ $confirmation_toast_colors: (
       left: 50%;
       right: auto;
       transform: translateX(-50%);
-    }
-
-    @media only screen and (max-width: 600px) {
-      &.center {
-      left: 5%;
-      right: 5%;
-      transform: translateX(-0%);
-      }
     }
 
     &.right {
@@ -90,10 +84,9 @@ $confirmation_toast_colors: (
 
       &[class*=_multi_line] .pb_fixed_confirmation_toast_text {
         color: $white;
-        margin: 0 $space_md 0 $space_md;
         overflow: hidden;
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical; 
         white-space: normal;
       }
