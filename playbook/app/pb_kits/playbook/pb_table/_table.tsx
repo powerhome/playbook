@@ -9,7 +9,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
-} from "./subkits";
+} from "./subcomponents";
 
 type TableProps = {
     aria?: { [key: string]: string },
