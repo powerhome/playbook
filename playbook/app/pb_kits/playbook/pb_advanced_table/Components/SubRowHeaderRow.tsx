@@ -53,7 +53,6 @@ export const SubRowHeaderRow = ({
               />
             ) : null}
             <Caption
-                dark={dark}
                 marginLeft={canExpand ? "none" : "xs"}
                 text={subRowHeaders[row.depth - 1]}
             />
