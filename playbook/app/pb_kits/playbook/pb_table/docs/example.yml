@@ -27,6 +27,9 @@ examples:
     - table_with_background_kit: Table With Background Kit
     - table_vertical_border: Vertical Borders
     - table_striped: Striped Table
+    - table_with_subcomponents: Table with Sub Components (Table Elements)
+    - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
+
 
   react:
     # - table_div: Div
