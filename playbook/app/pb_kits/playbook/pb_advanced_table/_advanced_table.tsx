@@ -20,27 +20,27 @@ import AdvancedTableContext from "./Context/AdvancedTableContext";
 import { TableHeader } from "./SubKits/TableHeader";
 import { TableBody } from "./SubKits/TableBody";
 
-import { DataType } from "./Utilities/types";
+import { GenericObject } from "../types";
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string };
   children?: React.ReactNode | React.ReactNode[];
   className?: string;
-  columnDefinitions: DataType[];
+  columnDefinitions: GenericObject[];
   data?: { [key: string]: string };
   enableToggleExpansion?: "all" | "header" | "none";
-  expandedControl?: DataType;
+  expandedControl?: GenericObject;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   initialLoadingRowsCount?: number;
   inlineRowLoading?: boolean;
   loading?: boolean | string;
-  onRowToggleClick?: (arg: Row<DataType>) => void;
-  onToggleExpansionClick?: (arg: Row<DataType>) => void;
-  sortControl?: DataType;
-  tableData: DataType[];
-  tableOptions?: DataType;
-  tableProps?: DataType;
+  onRowToggleClick?: (arg: Row<GenericObject>) => void;
+  onToggleExpansionClick?: (arg: Row<GenericObject>) => void;
+  sortControl?: GenericObject;
+  tableData: GenericObject[];
+  tableOptions?: GenericObject;
+  tableProps?: GenericObject;
   toggleExpansionIcon?: string | string[];
 } & GlobalProps;
 
@@ -88,7 +88,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       row,
       getValue,
     }: {
-      row: Row<DataType>;
+      row: Row<GenericObject>;
       getValue: Getter<string>;
     }) => {
       const rowData = row.original;
@@ -163,7 +163,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     data: loading ? Array(loadingStateRowCount).fill({}) : tableData,
     columns,
     onExpandedChange: setExpanded,
-    getSubRows: (row: DataType) => row.children,
+    getSubRows: (row: GenericObject) => row.children,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -189,7 +189,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }, [loading, updateLoadingStateRowCount]);
 
-  const handleExpandOrCollapse = (row: Row<DataType>) => {
+  const handleExpandOrCollapse = (row: Row<GenericObject>) => {
     onToggleExpansionClick && onToggleExpansionClick(row);
 
     const expandedState = expanded;
