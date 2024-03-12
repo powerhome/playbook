@@ -6,13 +6,13 @@ import Icon from "../../pb_icon/_icon";
 import { GlobalProps } from "../../utilities/globalProps";
 
 import { Getter, Row } from "@tanstack/react-table";
-import { DataType } from "../Utilities/types";
+import { GenericObject } from "../../types";
 import AdvancedTableContext from "../Context/AdvancedTableContext";
 
 interface CustomCellProps {
   getValue?: Getter<string>;
-  onRowToggleClick?: (arg: Row<DataType>) => void;
-  row: Row<DataType>;
+  onRowToggleClick?: (arg: Row<GenericObject>) => void;
+  row: Row<GenericObject>;
   value?: string;
 } 
 
@@ -24,7 +24,7 @@ export const CustomCell = ({
 }: CustomCellProps & GlobalProps) => {
   const { setExpanded, expanded, inlineRowLoading } = useContext(AdvancedTableContext);
 
-  const handleOnExpand = (row: Row<DataType>) => {
+  const handleOnExpand = (row: Row<GenericObject>) => {
     onRowToggleClick && onRowToggleClick(row);
     setExpanded({ ...expanded, [row.id]: !row.getIsExpanded() });
   };

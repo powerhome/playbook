@@ -8,16 +8,16 @@ import { ToggleIconButton } from "./ToggleIconButton"
 import { renderCollapsibleTrail } from "./CollapsibleTrail"
 
 import { isChrome } from "../Utilities/BrowserCheck"
-import { DataType } from "../Utilities/types"
+import { GenericObject } from "../../types";
 import { GlobalProps } from "../../utilities/globalProps"
 
 interface SubRowHeaderRowProps {
   collapsibleTrail?: boolean
   enableToggleExpansion?: "all" | "header" | "none"
-  onClick: (row: Row<DataType>) => void
-  row: Row<DataType>
+  onClick: (row: Row<GenericObject>) => void
+  row: Row<GenericObject>
   subRowHeaders?: string[]
-  table: Table<DataType>
+  table: Table<GenericObject>
 }
 
 export const SubRowHeaderRow = ({

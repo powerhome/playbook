@@ -6,7 +6,7 @@ import { flexRender, Header } from "@tanstack/react-table"
 import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
 import { isChrome } from "../Utilities/BrowserCheck"
-import { DataType } from "../Utilities/types"
+import { GenericObject } from "../../types";
 import AdvancedTableContext from "../Context/AdvancedTableContext"
 import { GlobalProps } from "../../utilities/globalProps"
 
@@ -14,7 +14,7 @@ type TableHeaderCellProps = {
   enableSorting?: boolean
   enableToggleExpansion?: "all" | "header" | "none"
   handleExpandOrCollapse?: () => void
-  header?: Header<DataType, unknown>
+  header?: Header<GenericObject, unknown>
   headerChildren?: React.ReactNode | React.ReactNode[]
   loading?: boolean
   sortIcon?: string | string[]

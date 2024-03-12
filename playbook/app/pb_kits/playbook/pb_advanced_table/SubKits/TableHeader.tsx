@@ -5,7 +5,7 @@ import { globalProps } from "../../utilities/globalProps";
 import { HeaderGroup } from "@tanstack/react-table"
 import AdvancedTableContext from "../Context/AdvancedTableContext"
 import { TableHeaderCell } from "../Components/TableHeaderCell"
-import { DataType } from "../Utilities/types"
+import { GenericObject } from "../../types";
 
 type TableHeaderProps = {
   children?: React.ReactNode | React.ReactNode[]
@@ -43,7 +43,7 @@ export const TableHeader = ({
           id={id}
       >
         {/* Get the header groups (only one in this example) */}
-        {table.getHeaderGroups().map((headerGroup: HeaderGroup<DataType>) => (
+        {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
           <tr key={`${headerGroup.id}-headerGroup`}>
             {headerGroup.headers.map(header => (
               <TableHeaderCell

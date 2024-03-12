@@ -10,7 +10,7 @@ import { LoadingCell } from "../Components/LoadingCell"
 import { renderCollapsibleTrail } from "../Components/CollapsibleTrail"
 import AdvancedTableContext from "../Context/AdvancedTableContext"
 import { isChrome } from "../Utilities/BrowserCheck"
-import { DataType } from "../Utilities/types"
+import { GenericObject } from "../../types";
 
 type TableBodyProps = {
   className?: string;
@@ -47,7 +47,7 @@ export const TableBody = ({
       <tbody className={classes} 
           id={id}
       >
-        {table.getRowModel().rows.map((row: Row<DataType>) => {
+        {table.getRowModel().rows.map((row: Row<GenericObject>) => {
           const isExpandable = row.getIsExpanded()
           const isFirstChildofSubrow = row.depth > 0 && row.index === 0
           const rowHasNoChildren = row.original.children && !row.original.children.length ? true : false
