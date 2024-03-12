@@ -118,6 +118,22 @@ type Position = {
   position?: "relative" | "absolute" | "fixed" | "sticky" | "static",
 }
 
+type Top = {
+  top?: Sizes,
+}
+
+type Right = {
+  right?: Sizes,
+}
+
+type Bottom = {
+  bottom?: Sizes,
+}
+
+type Left = {
+  left?: Sizes,
+}
+
 type Shadow = {
   shadow?: "none" | "deep" | "deeper" | "deepest",
 }
@@ -151,7 +167,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & ZIndex & { hover?: string };
+  Position & Shadow & TextAlign & Truncate & ZIndex & { hover?: string } & Top & Right & Bottom & Left;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -424,6 +440,12 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += position && position !== 'static' ? `position_${position}` : ''
     return css
   },
+
+  topProps: ({ top }: Top) => top ? `top_${top}` : '',
+  rightProps: ({ right }: Right) => right ? `right_${right}` : '',
+  bottomProps: ({ bottom }: Bottom) => bottom ? `bottom_${bottom}` : '',
+  leftProps: ({ left }: Left) => left ? `left_${left}` : '',
+
   textAlignProps: ({ textAlign }: TextAlign) => {
     if (typeof textAlign === 'object') {
       return getResponsivePropClasses(textAlign, 'text_align')
