@@ -1,15 +1,19 @@
 import React, { useContext } from "react"
-import Flex from "../../pb_flex/_flex"
-import Caption from "../../pb_caption/_caption"
 import { Row, Table } from "@tanstack/react-table"
 
-import AdvancedTableContext from "../Context/AdvancedTableContext";
+import { GenericObject } from "../../types"
+
+import { GlobalProps } from "../../utilities/globalProps"
+
+import Flex from "../../pb_flex/_flex"
+import Caption from "../../pb_caption/_caption"
+
 import { ToggleIconButton } from "./ToggleIconButton"
 import { renderCollapsibleTrail } from "./CollapsibleTrail"
 
 import { isChrome } from "../Utilities/BrowserCheck"
-import { GenericObject } from "../../types";
-import { GlobalProps } from "../../utilities/globalProps"
+
+import AdvancedTableContext from "../Context/AdvancedTableContext"
 
 interface SubRowHeaderRowProps {
   collapsibleTrail?: boolean
@@ -28,7 +32,7 @@ export const SubRowHeaderRow = ({
   subRowHeaders,
   table,
 }: SubRowHeaderRowProps & GlobalProps) => {
-  const { inlineRowLoading } = useContext(AdvancedTableContext);
+  const { inlineRowLoading } = useContext(AdvancedTableContext)
 
   const numberOfColumns = table.getAllFlatColumns().length
   const rowHasChildren = row.original.children ? true : false

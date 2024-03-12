@@ -1,9 +1,13 @@
 import React, { useContext } from "react"
-import Icon from "../../pb_icon/_icon"
 import { Row } from "@tanstack/react-table"
-import AdvancedTableContext from "../Context/AdvancedTableContext"
+
 import { GenericObject } from "../../types"
+
+import Icon from "../../pb_icon/_icon"
+
 import { displayIcon } from "../Utilities/IconHelpers"
+
+import AdvancedTableContext from "../Context/AdvancedTableContext"
 
 interface ToggleIconButtonProps {
   onClick: (row: Row<GenericObject>) => void

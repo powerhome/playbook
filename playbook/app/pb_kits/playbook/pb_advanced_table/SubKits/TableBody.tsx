@@ -1,21 +1,25 @@
 import React, { useContext } from "react"
-import classnames from "classnames";
-import { buildCss } from "../../utilities/props";
-import { globalProps } from "../../utilities/globalProps";
-import LoadingInline from "../../pb_loading_inline/_loading_inline"
+import classnames from "classnames"
 import { flexRender, Row } from "@tanstack/react-table"
+
+import { GenericObject } from "../../types"
+
+import { buildCss } from "../../utilities/props"
+import { globalProps } from "../../utilities/globalProps"
+import { isChrome } from "../Utilities/BrowserCheck"
+
+import LoadingInline from "../../pb_loading_inline/_loading_inline"
 
 import { SubRowHeaderRow } from "../Components/SubRowHeaderRow"
 import { LoadingCell } from "../Components/LoadingCell"
 import { renderCollapsibleTrail } from "../Components/CollapsibleTrail"
+
 import AdvancedTableContext from "../Context/AdvancedTableContext"
-import { isChrome } from "../Utilities/BrowserCheck"
-import { GenericObject } from "../../types";
 
 type TableBodyProps = {
-  className?: string;
+  className?: string
   collapsibleTrail?: boolean
-  id?: string;
+  id?: string
   subRowHeaders?: string[]
 }
 
@@ -40,7 +44,7 @@ export const TableBody = ({
     buildCss("pb_advanced_table_body"),
     globalProps(props),
     className
-  );
+  )
 
   return (
     <>
