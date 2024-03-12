@@ -17,7 +17,9 @@ const DefaultImage = () => {
     <>
       <br />
 
-      <Flex marginBottom='lg'>
+      <Flex marginBottom='lg'
+          orientation='column'
+      >
         <Caption
             paddingBottom='md'
             text='EXAMPLE 1 without tweaking Image kit:'
@@ -30,18 +32,24 @@ const DefaultImage = () => {
               size='xs'
               url='https://unsplash.it/500/400/?image=634'
           />
-          <Badge
+          <Card
+              borderNone
+              padding='none'
               position='absolute'
               right='xs'
-              rounded
-              text='1'
               top='xs'
-              variant='notification'
-          />
+          >
+            <Badge rounded
+                text='1'
+                variant='notification'
+            />
+          </Card>
         </Flex>
       </Flex>
 
-      <Flex marginBottom='lg'>
+      <Flex marginBottom='lg'
+          orientation='column'
+      >
         <Caption
             paddingBottom='md'
             text='EXAMPLE 2 with no Flex, BUT requires expanding our Image kit itself:'
@@ -54,39 +62,52 @@ const DefaultImage = () => {
             size='xs'
             url='https://unsplash.it/500/400/?image=634'
         >
-          <Badge
-              layerPosition='top-left'
+          <Card
+              borderNone
+              padding='none'
               position='absolute'
               right='xs'
-              text='+1'
               top='xs'
-              variant='primary'
-          />
+          >
+            <Badge text='+1'
+                variant='primary'
+            />
+          </Card>
         </Image>
       </Flex>
 
-      <Caption
-          paddingBottom='md'
-          text='EXAMPLE 3 with Card with Badge (no kit changes needed):'
-      />
-      <Flex marginBottom='lg'>
+      <Flex marginBottom='lg'
+          orientation='column'
+      >
+        <Caption
+            paddingBottom='md'
+            text='EXAMPLE 3 with Card with Badge (no kit changes needed):'
+        />
+        {/* Example 3 */}
         <Card position='relative'>
           A bunch of awesome content goes here. Yeah! It sure does! Okay!
-          <Badge
+          <Card
+              borderNone
               bottom='xs'
               left='xs'
+              padding='none'
               position='absolute'
-              text='+1'
-              variant='primary'
-          />
+          >
+            <Badge text='+1'
+                variant='primary'
+            />
+          </Card>
         </Card>
       </Flex>
 
-      <Caption
-          paddingBottom='md'
-          text='EXAMPLE 4 with Card with IconCircle (no kit changes needed):'
-      />
-      <Flex marginBottom='lg'>
+      <Flex marginBottom='lg'
+          orientation='column'
+      >
+        <Caption
+            paddingBottom='md'
+            text='EXAMPLE 4 with Card with IconCircle (no kit changes needed):'
+        />
+        {/* Example 4 */}
         <Card position='relative'>
           A bunch of awesome content goes here. Yeah! It sure does! Okay!
           <Card
@@ -105,11 +126,14 @@ const DefaultImage = () => {
         </Card>
       </Flex>
 
-      <Caption
-          paddingBottom='md'
-          text='EXAMPLE 5 with NavItem (no kit changes needed):'
-      />
-      <Flex marginBottom='lg'>
+      <Flex marginBottom='lg'
+          orientation='column'
+      >
+        <Caption
+            paddingBottom='md'
+            text='EXAMPLE 5 with NavItem (no kit changes needed):'
+        />
+        {/* Example 5 */}
         <Nav link='#'
             orientation='horizontal'
         >
@@ -118,10 +142,10 @@ const DefaultImage = () => {
               First
               <Badge
                   position='absolute'
-                  right='xs'
+                  right='sm'
                   rounded
                   text='1'
-                  top='md'
+                  top='xs'
                   variant='notification'
               />
             </Flex>
@@ -136,7 +160,9 @@ const DefaultImage = () => {
         </Nav>
       </Flex>
 
-      <Flex marginBottom='lg'>
+      <Flex marginBottom='lg'
+          orientation='column'
+      >
         <Caption paddingBottom='md'
             text='EXAMPLE 6: Avatar with a Badge'
         />
@@ -159,7 +185,9 @@ const DefaultImage = () => {
         </Flex>
       </Flex>
 
-      <Flex marginBottom='lg'>
+      <Flex marginBottom='lg'
+          orientation='column'
+      >
         <Caption
             paddingBottom='md'
             text='EXAMPLE 7: Avatar with a Card (with a Badge)'
