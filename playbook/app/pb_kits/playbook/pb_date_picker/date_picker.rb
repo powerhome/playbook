@@ -76,7 +76,7 @@ module Playbook
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
-        generate_classname("pb_date_picker_kit", default_margin_bottom)
+        generate_classname("pb_date_picker_kit") + default_margin_bottom
       end
 
       def date_picker_config
