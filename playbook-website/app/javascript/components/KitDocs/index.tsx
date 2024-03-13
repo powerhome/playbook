@@ -46,7 +46,7 @@ const KitDocs = ({ source, exampleTitle, css }) => {
         options={{
           externalResources: [
             "https://kit.fontawesome.com/098a1cd4d5.js",
-            `${css}`,
+            `https://unpkg.com/playbook-ui@13.17.0/dist/playbook.css`,
           ],
         }}
       >

@@ -14,7 +14,7 @@ import SortMenu, {
 } from './SortMenu'
 
 export type FilterSingleProps = {
-  children?: React.ReactChild[] | React.ReactChild, 
+  children?: React.ReactChild[] | React.ReactChild,
   filters?: FilterDescription,
   onSortChange?: SortingChangeCallback,
   results?: number,
@@ -30,6 +30,7 @@ const FilterSingle = ({
   results,
   children,
   dark,
+  maxHeight,
   minWidth,
   placement,
   ...bgProps
@@ -48,6 +49,7 @@ const FilterSingle = ({
           <>
             <FiltersPopover
                 dark={dark}
+                maxHeight={maxHeight}
                 minWidth={minWidth}
                 placement={placement}
             >

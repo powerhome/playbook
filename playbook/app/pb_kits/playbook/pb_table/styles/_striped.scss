@@ -1,7 +1,7 @@
 [class^=pb_table] {
   &.striped {
-    tbody {
-      tr:nth-child(odd) {
+    tbody, .pb_table_tbody {
+      tr:nth-child(odd), .pb_table_tr:nth-child(odd) {
         background-color: $bg_light;
       }
     }
@@ -9,8 +9,8 @@
 
   &.dark {
     &.striped {
-      tbody {
-        tr:nth-child(odd) {
+      tbody, .pb_table_tbody {
+        tr:nth-child(odd), .pb_table_tr:nth-child(odd) {
           background-color: $bg_dark;
         }
       }

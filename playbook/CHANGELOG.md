@@ -1,3 +1,75 @@
+# 🌳 Explore Data Depths with the New Advanced Table Component in Playbook!
+
+##### February 27, 2024
+
+![13 9 Banner](https://github.com/powerhome/playbook/assets/9158723/e60df47f-4896-4959-ba33-d449f586846b)
+
+Explore depths of nested data effortlessly. This latest addition to Playbook's design system brings clarity and control, transforming complex tables into intuitive insights.
+
+
+**Kit Enhancements:**
+
+- Bargraph Customoptions Prop [\#3169](https://github.com/powerhome/playbook/pull/3169) ([dhhuynh2](https://github.com/dhhuynh2))
+- Fix Filter Dropdown Height Exceeding Page Height [\#3159](https://github.com/powerhome/playbook/pull/3159) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Advanced Table Final Fixes [\#3138](https://github.com/powerhome/playbook/pull/3138) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fixed Rails Kit Form Group Datepicker [\#3165](https://github.com/powerhome/playbook/pull/3165) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Sandbox for Examples [\#3137](https://github.com/powerhome/playbook/pull/3137) ([jasperfurniss](https://github.com/jasperfurniss))
+- Gh Release Workflow Fixes [\#3160](https://github.com/powerhome/playbook/pull/3160) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Upgrade Alpha Script's Node Version [\#3153](https://github.com/powerhome/playbook/pull/3153) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.18.0...13.19.0)
+
+
+# 13.18.0
+##### February 17, 2024
+
+List of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table Jest Tests [\#3128](https://github.com/powerhome/playbook/pull/3128) ([nidaqg](https://github.com/nidaqg))
+- Adding Striped Option to Table [\#3127](https://github.com/powerhome/playbook/pull/3127) ([carloslimasd](https://github.com/carloslimasd))
+- Add Status Flag to Menu.yml [\#3119](https://github.com/powerhome/playbook/pull/3119) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table Docs [\#3102](https://github.com/powerhome/playbook/pull/3102) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fix Popover Test [\#3139](https://github.com/powerhome/playbook/pull/3139) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix Buttons Malfunctioning In a Popover [\#3135](https://github.com/powerhome/playbook/pull/3135) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+**Improvements:**
+
+- Upgrade Nodejs to V20 Lts [\#3085](https://github.com/powerhome/playbook/pull/3085) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.17.0...13.18.0)
+
+# 13.17.0
+##### February 2, 2024
+
+List of changes:
+
+**New Kits:**
+
+- New Kit: Advanced Table [\#3084](https://github.com/powerhome/playbook/pull/3084) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Move Icon Page [\#3072](https://github.com/powerhome/playbook/pull/3072) ([markdoeswork](https://github.com/markdoeswork))
+- Linting Implementation: Kits K - O [\#3046](https://github.com/powerhome/playbook/pull/3046) ([jasperfurniss](https://github.com/jasperfurniss))
+- Upgrade React-Select [\#3030](https://github.com/powerhome/playbook/pull/3030) ([dhhuynh2](https://github.com/dhhuynh2))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.16.0...13.17.0)
+
 # 13.16.0
 ##### January 22, 2024
 
@@ -21,7 +93,7 @@ List of changes:
 
 
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/13.16.0...13.16.0)
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.15.0...13.16.0)
 
 
 

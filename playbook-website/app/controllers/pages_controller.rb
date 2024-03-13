@@ -15,11 +15,22 @@ class PagesController < ApplicationController
   def application_beta
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
-    @type = params[:type]
+    @type = params[:type] || "react"
+    @kit = params[:name]
+    @params = params
+    @examples = pb_doc_kit_examples(@kit, @type)
+    @css = view_context.asset_pack_url("application.css")
+
+    # first example from each kit
+    examples = @examples.map do |example|
+      example_key = example.keys.first.to_s
+      source_code = get_source(example_key)
+      { example_key: example_key, title: example.values.first, source: source_code }
+    end
 
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
-      format.json { render json: { kits: @kits, dark: @dark, type: @type } }
+      format.json { render json: { kits: @kits, dark: @dark, type: @type, examples: examples, kit: @kit, params: @params, css: @css } }
     end
   end
 

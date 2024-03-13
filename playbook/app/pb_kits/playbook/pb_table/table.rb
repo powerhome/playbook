@@ -27,6 +27,9 @@ module Playbook
                              default: false
       prop :striped, type: Playbook::Props::Boolean,
                      default: false
+      prop :tag, type: Playbook::Props::Enum,
+                 values: %w[table div],
+                 default: "table"
 
       def classname
         generate_classname(

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   # Kits
 
   ## Beta View
-  get "beta/*path", to: "pages#application_beta"
+  get "beta/kits", to: "pages#application_beta"
+  get "beta/kits/:name", to: "pages#application_beta"
 
   # Legacy View
   get "kits", to: "pages#kits"
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
 
   # Samples
   get "samples", to: "samples#index"
+  get "samples/icons", to: "samples#icons"
   get "samples/:name(/:type)", defaults: { type: "rails" },
                                to: "samples#show",
                                as: "sample_show"

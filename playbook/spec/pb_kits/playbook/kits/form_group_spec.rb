@@ -9,8 +9,8 @@ RSpec.describe Playbook::PbFormGroup::FormGroup do
 
   describe "#classname" do
     it "returns namespaced class name" do
-      expect(subject.new({}).classname).to eq "pb_form_group_kit"
-      expect(subject.new(full_width: true).classname).to eq "pb_form_group_kit_full"
+      expect(subject.new({}).classname).to eq "pb_form_group_kit rails"
+      expect(subject.new(full_width: true).classname).to eq "pb_form_group_kit_full rails"
     end
   end
 end

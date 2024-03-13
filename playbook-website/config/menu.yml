@@ -55,7 +55,7 @@ kits:
       - name: "advanced_table"
         platforms: *react_only
         description: The Advanced Table can be used to display complex, nested data in a way that allows for expansion and/or sorting.
-        status: "beta" 
+        status: "stable" 
       - name: "list"
         platforms: *web
         description: Lists display a vertical set of related content.
