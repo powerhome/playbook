@@ -35,11 +35,12 @@ RSpec.describe Playbook::PbTable::TableHeader do
       .with_default(false)
   }
   it { is_expected.to define_prop(:text).with_default("") }
+  it { is_expected.to define_enum_prop(:tag).with_default("table").with_values("div", "table") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to start_with "pb_table_header_kit"
-      expect(subject.new(dark: true, align: "end").classname).to eq "pb_table_header_kit_align_end dark align_content_center"
+      expect(subject.new(dark: true, align: "end").classname).to eq "pb_table_header_kit_align_end dark align_content_center pb_table_th"
     end
   end
 

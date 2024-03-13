@@ -8,3 +8,4 @@
 | **size** | `UserAvatarSize` | Changes the size of the User | `.medium` | `.small` `.medium` `.large` |
 | **territory** | `String` | Adds the User's territory |  |  |
 | **title** | `String` | Adds a title |  |  |
+| **status** | `PBAvatar.PresenceStatus?` | An idicator for the current status of the user | `.none` | `.online` `.away` `.offline` |
