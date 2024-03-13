@@ -124,5 +124,20 @@
     .sticky-header {
       background-color: $bg_dark_card;
     }
+
+    .loading-toggle-icon,
+    .loading-cell {
+      &::after {
+        background-color: $bg_dark !important;
+        background-image: linear-gradient(
+          to left,
+          $bg_dark 0%,
+          lighten($bg_dark, 1%) 50%,
+          lighten($bg_dark, 2%) 60%,
+          $bg_dark 80%,
+          $bg_dark 100%
+        ) !important;
+      }
+    }
   }
 }
