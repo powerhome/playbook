@@ -21,44 +21,77 @@
 .z_index_1 {
   z-index: 100;
 }
+
 .z_index_2 {
   z-index: 200;
 }
+
 .z_index_3 {
   z-index: 300;
 }
+
 .z_index_4 {
   z-index: 400;
 }
+
 .z_index_5 {
   z-index: 500;
 }
+
 .z_index_6 {
   z-index: 600;
 }
+
 .z_index_7 {
   z-index: 700;
 }
+
 .z_index_8 {
   z-index: 800;
 }
+
 .z_index_9 {
   z-index: 900;
 }
+
 .z_index_10 {
   z-index: 1000;
 }
 
 $zIndex_values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
-    
+
 @each $size, $size_value in $breakpoints_grid {
   @each $zIndex_value in $zIndex_values {
-      $min_size: map-get($size_value, "min");
-      $max_size: map-get($size_value, "max");
-      .z_index_#{$size}_#{$zIndex_value} {
-        @include break_on($min_size, $max_size) {
-          z-index: #{$zIndex_value * 100} !important;
-        }
+    $min_size: map-get($size_value, "min");
+    $max_size: map-get($size_value, "max");
+
+    .z_index_#{$size}_#{$zIndex_value} {
+      @include break_on($min_size, $max_size) {
+        z-index: #{$zIndex_value * 100} !important;
       }
+    }
+  }
+}
+
+$space_classes: (
+  xxs: $space_xxs,
+  xs: $space_xs,
+  sm: $space_sm,
+  md: $space_md,
+  lg: $space_lg,
+  xl: $space_xl,
+  none: 0,
+  auto: auto,
+  initial: initial,
+  inherit: inherit
+);
+
+$positions: "top", "right", "bottom", "left";
+
+@each $position in $positions {
+  @each $space_name, $space in $space_classes {
+    .#{$position}_#{$space_name} {
+      #{$position}: #{-$space} !important;
+    }
   }
 }
