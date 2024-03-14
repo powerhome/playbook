@@ -43,34 +43,9 @@ const GlobalPositioning = () => {
       <Flex marginBottom='lg' orientation='column'>
         <Caption
           paddingBottom='md'
-          text='EXAMPLE 2 with no Flex, BUT requires expanding our Image kit itself:'
+          text='EXAMPLE 2 with Card with Badge (no kit changes needed):'
         />
-
         {/* Example 2 */}
-        <Image
-          alt='picture of a misty forest'
-          position='relative'
-          size='xs'
-          url='https://unsplash.it/500/400/?image=634'
-        >
-          <Card
-            borderNone
-            padding='none'
-            position='absolute'
-            right='xs'
-            top='xs'
-          >
-            <Badge text='+1' variant='primary' />
-          </Card>
-        </Image>
-      </Flex>
-
-      <Flex marginBottom='lg' orientation='column'>
-        <Caption
-          paddingBottom='md'
-          text='EXAMPLE 3 with Card with Badge (no kit changes needed):'
-        />
-        {/* Example 3 */}
         <Card position='relative'>
           A bunch of awesome content goes here. Yeah! It sure does! Okay!
           <Card
@@ -88,9 +63,9 @@ const GlobalPositioning = () => {
       <Flex marginBottom='lg' orientation='column'>
         <Caption
           paddingBottom='md'
-          text='EXAMPLE 4 with Card with IconCircle (no kit changes needed):'
+          text='EXAMPLE 3 with Card with IconCircle (no kit changes needed):'
         />
-        {/* Example 4 */}
+        {/* Example 3 */}
         <Card position='relative'>
           A bunch of awesome content goes here. Yeah! It sure does! Okay!
           <Card
@@ -109,9 +84,9 @@ const GlobalPositioning = () => {
       <Flex marginBottom='lg' orientation='column'>
         <Caption
           paddingBottom='md'
-          text='EXAMPLE 5 with NavItem (no kit changes needed):'
+          text='EXAMPLE 4 with NavItem (no kit changes needed):'
         />
-        {/* Example 5 */}
+        {/* Example 4 */}
         <Nav link='#' orientation='horizontal'>
           <NavItem link='#'>
             <Flex position='relative'>
@@ -132,8 +107,8 @@ const GlobalPositioning = () => {
       </Flex>
 
       <Flex marginBottom='lg' orientation='column'>
-        <Caption paddingBottom='md' text='EXAMPLE 6: Avatar with a Badge' />
-        {/* Example 6 */}
+        <Caption paddingBottom='md' text='EXAMPLE 5: Avatar with a Badge' />
+        {/* Example 5 */}
         <Flex position='relative'>
           <Avatar
             imageAlt='Terry Johnson Standing'
@@ -155,9 +130,9 @@ const GlobalPositioning = () => {
       <Flex marginBottom='lg' orientation='column'>
         <Caption
           paddingBottom='md'
-          text='EXAMPLE 7: Avatar with a Card (with a Badge)'
+          text='EXAMPLE 6: Avatar with a Card (with a Badge)'
         />
-        {/* Example 7 */}
+        {/* Example 6 */}
         <Flex justify='center' position='relative'>
           <Avatar
             imageAlt='Terry Johnson Standing'

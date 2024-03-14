@@ -11,19 +11,8 @@
     <% end %>
 
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 2 with no Flex, BUT requires expanding our Image kit itself:"}) %>
-        <%# EXAMPLE 2 with no Flex, BUT requires expanding our Image kit itself: %>
-        <%= pb_rails("image", props: {alt: "picture of a misty forest", size: "xs", url: "https://unsplash.it/500/400/?image=634"}) do %>
-            <%= pb_rails("card", props: {border_none: true, padding: "none", position: "absolute", right: "xs", top: "xs"}) do %>
-                <%= pb_rails("badge", props: {rounded: true, text: "1", variant: "notification"}) %>
-            <% end %>
-        <% end %>
-
-    <% end %>
-
-    <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 3 with Card with Badge (no kit changes needed):"}) %>
-        <%# EXAMPLE 3 with Card with Badge (no kit changes needed): %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 2 with Card with Badge (no kit changes needed):"}) %>
+        <%# EXAMPLE 2 with Card with Badge (no kit changes needed): %>
         <%= pb_rails("card", props: {position: "relative"}) do %>
             A bunch of awesome content goes here. Yeah! It sure does! Okay!
             <%= pb_rails("card", props: {border_none: true, bottom: "xs", left: "xs", padding: "none", position: "absolute"}) do %>
@@ -33,8 +22,8 @@
     <% end %>
 
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 4 with Card with IconCircle (no kit changes needed):"}) %>
-        <%# EXAMPLE 4 with Card with IconCircle (no kit changes needed): %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 3 with Card with IconCircle (no kit changes needed):"}) %>
+        <%# EXAMPLE 3 with Card with IconCircle (no kit changes needed): %>
         <%= pb_rails("card", props: {position: "relative"}) do %>
             A bunch of awesome content goes here. Yeah! It sure does! Okay!
             <%= pb_rails("card", props: {border_none: true, border_radius: "rounded", bottom: "sm", left: "sm", padding: "none", position: "absolute"}) do %>
@@ -44,8 +33,8 @@
     <% end %>
 
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 5 with NavItem (no kit changes needed):"}) %>
-        <%# EXAMPLE 5 with NavItem (no kit changes needed): %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 4 with NavItem (no kit changes needed):"}) %>
+        <%# EXAMPLE 4 with NavItem (no kit changes needed): %>
         <%= pb_rails("nav", props: {link: "#", orientation: "horizontal"}) do %>
             <%= pb_rails("nav/item", props: {link: "#"}) do %>
             <%= pb_rails("flex", props: {position: "relative"}) do %>
@@ -60,8 +49,8 @@
     <% end %>
 
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 6: Avatar with a Badge"}) %>
-        <%# EXAMPLE 6: Avatar with a Badge %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 5: Avatar with a Badge"}) %>
+        <%# EXAMPLE 5: Avatar with a Badge %>
         <%= pb_rails("flex", props: {position: "relative"}) do %>
             <%= pb_rails("avatar", props: {image_alt: "Terry Johnson Standing", image_url: "https://randomuser.me/api/portraits/women/90.jpg", name: "Terry Johnson", size: "lg"}) %>
             <%= pb_rails("badge", props: {position: "absolute", right: "none", rounded: true, text: "5", top: "none", variant: "notification"}) %>
@@ -69,8 +58,8 @@
     <% end %>
 
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 7: Avatar with a Card (with a Badge)"}) %>
-        <%# EXAMPLE 7: Avatar with a Card (with a Badge) %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 6: Avatar with a Card (with a Badge)"}) %>
+        <%# EXAMPLE 6: Avatar with a Card (with a Badge) %>
         <%= pb_rails("flex", props: {justify: "center", position: "relative"}) do %>
             <%= pb_rails("avatar", props: {image_alt: "Terry Johnson Standing", image_url: "https://randomuser.me/api/portraits/women/90.jpg", name: "Terry Johnson", size: "lg"}) %>
             <%= pb_rails("card", props: {border_none: true, border_radius: "rounded", bottom: "none", padding: "none", position: "absolute"}) do %>
