@@ -21,6 +21,7 @@ import PropsValues from './PropsValues'
 type ExampleType = {
   backgroundClass?: string,
   children?: React.ReactChild[] | React.ReactChild,
+  captionTitle?: string,
   // codesandboxExample? : boolean,
   customChildren?: boolean,
   description?: React.ReactChild[] | React.ReactChild | string | (() => JSX.Element),
@@ -35,6 +36,7 @@ type ExampleType = {
 
 const Example = ({
   backgroundClass= '',
+  captionTitle="Visual Guide",
   children,
   // codesandboxExample,
   customChildren,
@@ -113,7 +115,7 @@ const Example = ({
             <Card.Body>
               <Caption
                   marginBottom="xs"
-                  text="Visual Guide"
+                  text={captionTitle}
               />
               { children }
             </Card.Body>

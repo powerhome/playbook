@@ -1,0 +1,17 @@
+<Flex justify='center' position='relative'>
+  <Avatar
+    imageAlt='Terry Johnson Standing'
+    imageUrl='https://randomuser.me/api/portraits/men/44.jpg'
+    name='Terry Johnson'
+    size='lg'
+  />
+  <Card
+    borderNone
+    borderRadius='rounded'
+    bottom='none'
+    padding='none'
+    position='absolute'
+  >
+    <Badge rounded text='On Roadtrip' variant='neutral' />
+  </Card>
+</Flex>
