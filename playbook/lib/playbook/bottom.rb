@@ -7,7 +7,7 @@ module Playbook
     end
 
     def bottom_values
-      %w[none xxs xs sm md lg xl auto initial inherit]
+      %w[0 xxs xs sm md lg xl auto initial inherit]
     end
 
     def bottom_options

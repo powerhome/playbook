@@ -62,7 +62,7 @@
         <%# EXAMPLE 6: Avatar with a Card (with a Badge) %>
         <%= pb_rails("flex", props: {justify: "center", position: "relative"}) do %>
             <%= pb_rails("avatar", props: {image_alt: "Terry Johnson Standing", image_url: "https://randomuser.me/api/portraits/women/90.jpg", name: "Terry Johnson", size: "lg"}) %>
-            <%= pb_rails("card", props: {border_none: true, border_radius: "rounded", bottom: "none", padding: "none", position: "absolute"}) do %>
+            <%= pb_rails("card", props: {border_none: true, border_radius: "rounded", bottom: "0", padding: "none", position: "absolute"}) do %>
                 <%= pb_rails("badge", props: {rounded: true, text: "On Roadtrip", variant: "neutral"}) %>
             <% end %>
         <% end %>

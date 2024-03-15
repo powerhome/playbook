@@ -1,7 +1,7 @@
 import React from "react"
 import Example from "../Templates/Example"
 import SpacingProps from "../Templates/SpacingProps"
-import { Flex, Avatar, Card, Badge, Caption } from "playbook-ui"
+import { Flex, Avatar, Card, Badge } from "playbook-ui"
 
 const POSITION = ["relative", "absolute", "fixed", "sticky", "static"]
 const TOKENS = {
@@ -13,20 +13,46 @@ const TOKENS = {
 }
 
 const PROPVALUES = [
-  "none",
+  "0",
   "xs",
   "sm",
   "md",
   "lg",
   "xl",
+  "auto",
+  "initial",
+  "inherit",
 ]
 
-const PROPNAMES = ["top", "left", "right", "bottom"]
+const globalPositionExample = `
+<Flex justify='center' position='relative'>
+  <Avatar
+    imageAlt='Terry Johnson Standing'
+    imageUrl='https://randomuser.me/api/portraits/men/44.jpg'
+    name='Terry Johnson'
+    size='lg'
+  />
+  <Card
+    borderNone
+    borderRadius='rounded'
+    padding='none'
 
+    // ✨ global positioning ✨
+    position='absolute'
+    bottom="0"
+  >
+    <Badge rounded text='On Roadtrip' variant='neutral' />
+  </Card>
+</Flex>
+`
+
+
+const PROPNAMES = ["top", "left", "right", "bottom"]
 
 const Position = ({
   example,
   tokensExample,
+  secondExample
 }: {
   example: string,
   tokensExample?: string
@@ -41,7 +67,7 @@ const Position = ({
       title='Position'
     />
     <Example example={tokensExample} tokens={TOKENS} />
-    <Example captionTitle='Avatar with a Card (with a Badge)' example={example}>
+    <Example captionTitle='Avatar with a Card (with a Badge)' example={secondExample}>
       <Flex marginBottom='lg' orientation='column'>
         <Flex justify='center' position='relative'>
           <Avatar
@@ -53,9 +79,10 @@ const Position = ({
           <Card
             borderNone
             borderRadius='rounded'
-            bottom='none'
             padding='none'
+            // ✨ global positioning ✨
             position='absolute'
+            bottom='0'
           >
             <Badge rounded text='On Roadtrip' variant='neutral' />
           </Card>

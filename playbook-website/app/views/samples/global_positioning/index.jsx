@@ -143,9 +143,11 @@ const GlobalPositioning = () => {
           <Card
             borderNone
             borderRadius='rounded'
-            bottom='none'
             padding='none'
+
+            // ✨ global positioning ✨
             position='absolute'
+            bottom='0'
           >
             <Badge rounded text='On Roadtrip' variant='neutral' />
           </Card>

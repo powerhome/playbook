@@ -80,7 +80,7 @@ $space_classes: (
   md: $space_md,
   lg: $space_lg,
   xl: $space_xl,
-  none: 0,
+  0: 0,
   auto: auto,
   initial: initial,
   inherit: inherit
@@ -91,7 +91,15 @@ $positions: "top", "right", "bottom", "left";
 @each $position in $positions {
   @each $space_name, $space in $space_classes {
     .#{$position}_#{$space_name} {
-      #{$position}: #{-$space} !important;
+      @if $space_name == "0" {
+        #{$position}: 0 !important;
+      }
+      @else if $space_name == "auto" or $space_name == "initial" or $space_name == "inherit" {
+        #{$position}: #{$space} !important;
+      }
+      @else {
+        #{$position}: #{-$space} !important;
+      }
     }
   }
 }

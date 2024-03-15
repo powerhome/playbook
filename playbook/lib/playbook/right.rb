@@ -7,7 +7,7 @@ module Playbook
     end
 
     def right_values
-      %w[none xxs xs sm md lg xl auto initial inherit]
+      %w[0 xxs xs sm md lg xl auto initial inherit]
     end
 
     def right_options
