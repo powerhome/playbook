@@ -1,9 +1,9 @@
-<%= pb_rails("button", props: { text: "Short Multiline", variant: "secondary", data: { toast: "#toast-top-center-multi-short" } }) %>
+<%= pb_rails("button", props: { text: "Short Multiline", variant: "secondary", data: { multitoast: "#toast-short" } }) %>
 
 <%= pb_rails("fixed_confirmation_toast", props: {
-  classname: "toast-to-hide",
+  classname: "multitoast-to-hide",
   closeable: true,
-  id: "toast-top-center-multi-short",
+  id: "toast-short",
   multi_line: true,
   text: "Multi-line is used when the given text will not fit on one line.",
   status: "tip",
@@ -11,12 +11,12 @@
   horizontal: "center"
 }) %>
 
-<%= pb_rails("button", props: { text: "Long Multiline", variant: "secondary", data: { toast: "#toast-top-center-multi-long" } }) %>
+<%= pb_rails("button", props: { text: "Long Multiline", variant: "secondary", data: { multitoast: "#toast-long" } }) %>
 
 <%= pb_rails("fixed_confirmation_toast", props: {
-  classname: "toast-to-hide",
+  classname: "multitoast-to-hide",
   closeable: true,
-  id: "toast-top-center-multi-long",
+  id: "toast-long",
   multi_line: true,
   text: "Multi-line is used when the given text will not fit on one line. Using Multi Line allows the height of the confirmation toast to grow. Simply resize the screen to see the fixed confirmation toast wrap the text.",
   status: "tip",
@@ -24,22 +24,21 @@
   horizontal: "center"
 }) %>
 
-<script type="text/javascript">
-  const alltoasts = document.queryselectorall(".toast-to-hide")
-  const allbuttons = document.queryselectorall("button[data-toast]")
 
-  const hidealltoasts = () => {
-    alltoasts.foreach((toast) => {
+<script type="text/javascript">
+  const multitoasts = document.querySelectorAll(".multitoast-to-hide")
+  const multibuttons = document.querySelectorAll("button[data-multitoast]")
+
+  const hideMultiToasts = () => {
+    multitoasts.forEach((toast) => {
       toast.style.display = "none"
     })
   }
 
-  hidealltoasts()
-
-  allbuttons.foreach((button) => {
+  multibuttons.forEach((button) => {
     button.onclick = () => {
-      hidealltoasts()
-      let toast = document.queryselector(button.getattribute("data-toast"))
+      hideMultiToasts()
+      let toast = document.querySelector(button.getAttribute("data-multitoast"))
 
       if (toast) {
         toast.style.display = "flex"
@@ -47,3 +46,10 @@
     }
   })
 </script>
+
+<!-- hiding toast on page load -->
+<style>
+  #toast-long, #toast-short {
+    display: none;
+  }
+</style>
