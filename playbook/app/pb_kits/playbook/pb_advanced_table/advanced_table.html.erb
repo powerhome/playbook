@@ -4,25 +4,7 @@
       data: object.data,
       id: object.id) do %>
         <%= pb_rails("table", props: { size: "sm", tag:"div", data_table: true, number_spacing:"tabular", responsive:"none" }) do %>
-            <%= pb_rails("table/table_head", props: {tag:"div", classname:"pb_advanced_table_header"}) do %>
-                <%= pb_rails("table/table_row", props: {tag:"div"}) do %>
-                    <% object.column_definitions.each do |item| %>
-                        <%= pb_rails("table/table_header", props: { tag:"div", id:item[:accessor]}) do %>
-                            <%= item[:label] %>
-                        <% end %>
-                    <% end %>
-                 <% end %>
-            <% end %>
-            <%= pb_rails("table/table_body", props: {tag:"div"}) do %>
-                <% object.table_data.each do |data| %>
-                    <%= pb_rails("table/table_row", props: {tag:"div"}) do %>
-                        <% object.column_definitions.each do |column| %>
-                            <%= pb_rails("table/table_cell", props: { tag:"div"}) do %>
-                                <%= data[column[:accessor].to_sym] %>
-                            <% end %>
-                    <% end %>
-                <% end %>
-            <% end %>
-        <% end %>
+            <%= pb_rails("advanced_table/advanced_table_header", props: {column_definitions: object.column_definitions}) %>
+            <%= pb_rails("advanced_table/advanced_table_body", props: {table_data: object.table_data, column_definitions: object.column_definitions}) %>
         <% end %>
 <% end %>

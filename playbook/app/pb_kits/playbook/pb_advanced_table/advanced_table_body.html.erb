@@ -1,0 +1,15 @@
+<%= content_tag(:div,
+      aria: object.aria,
+      class: object.classname,
+      data: object.data,
+      id: object.id) do %>
+        <% object.table_data.each do |data| %>
+            <%= pb_rails("table/table_row", props: {tag:"div", classname:"bg-white"}) do %>
+                <% object.column_definitions.each do |column| %>
+                    <%= pb_rails("table/table_cell", props: { tag:"div", classname:"id-cell chrome-styles"}) do %>
+                        <%= data[column[:accessor].to_sym] %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+<% end %>
