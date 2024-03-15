@@ -17,11 +17,10 @@ Built and maintained by the User Experience Team at [Power Home Remodeling](http
 ### Prerequisites
 
 - [Xcode 15](https://developer.apple.com/xcode/)
-- [Homebrew](https://brew.sh/)
 
 ### Playbook Swift can be added via the Swift Package Manager
 
-1. Search for: `git@github.com:powerhome/PlaybookSwift.git`
+1. Search for: `git@github.com:powerhome/playbook-swift.git`
 1. Choose `Add Package`
 2. Choose `Packages > Resolve Package Versions`
 3. In your Swift view file:
@@ -30,24 +29,12 @@ Built and maintained by the User Experience Team at [Power Home Remodeling](http
     ```
 5. Build the project
 
-### Install [`pre-commit`](https://pre-commit.com/#install) via `brew install pre-commit`
-  1. In the Playbook Swift root directory, run `pre-commit install` to set up the git hook scripts
-
-# Code Format & Linting
-
-See the [Editing Linting, Formatting, and Auto Correction](LINTING.md) doc for more information.
-
 ## Component Examples via PlaybookShowcase
 
-Playbook Swift contains the app named `PlaybookShowcase`; providing examples of each component. PlaybookShowcase can be launched within the XCode simulator, side-loaded, or downloaded to your device.
+The Playbook Swift repo contains the `PlaybookShowcase` app, which provides interactive examples of each component.
 
-# Note: YAML Configuration Files
+You can find further Playbook Swift component documentation within Playbook website's [component library](https://playbook.powerapp.cloud/kits?type=swift).
 
-- You may need to add the package like so:
+# Contribution Documentation 
+Once you've installed Playbook Swift into your project and kicked its tires a bit, you may find that you'd like to contribute to its growth and development to better-serve your needs (and all other Playbook users), and we'd love to hear from you! Please see our [contribution docs](https://github.com/powerhome/playbook-swift/blob/main/Contribution.md) for more information on how to help us continuing growing Playbook Swift.
 
-```yaml
-packages:
-  Playbook:
-    url: git@github.com:powerhome/PlaybookSwift.git
-    version x.x.x // Where x.x.x is the desired version
-```

@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Table from '../_table'
-import TableRow from '../_table_row'
 
 const TableSideHighlight = (props) => {
   return (
@@ -20,7 +19,7 @@ const TableSideHighlight = (props) => {
           </tr>
         </thead>
         <tbody>
-          <TableRow
+          <Table.Row
               sideHighlightColor="product_1_highlight"
               {...props}
           >
@@ -29,8 +28,8 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
-          <TableRow
+          </Table.Row>
+          <Table.Row
               sideHighlightColor="product_2_highlight"
               {...props}
           >
@@ -39,8 +38,8 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
-          <TableRow
+          </Table.Row>
+          <Table.Row
               sideHighlightColor="product_3_highlight"
               {...props}
           >
@@ -49,8 +48,8 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
-          <TableRow
+          </Table.Row>
+          <Table.Row
               sideHighlightColor="none"
               {...props}
           >
@@ -59,7 +58,7 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
+          </Table.Row>
         </tbody>
       </Table>
 
@@ -79,7 +78,7 @@ const TableSideHighlight = (props) => {
           </tr>
         </thead>
         <tbody>
-          <TableRow
+          <Table.Row
               sideHighlightColor="success"
               {...props}
           >
@@ -88,8 +87,8 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
-          <TableRow
+          </Table.Row>
+          <Table.Row
               sideHighlightColor="warning"
               {...props}
           >
@@ -98,8 +97,8 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
-          <TableRow
+          </Table.Row>
+          <Table.Row
               sideHighlightColor="error"
               {...props}
           >
@@ -108,8 +107,8 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
-          <TableRow
+          </Table.Row>
+          <Table.Row
               sideHighlightColor="none"
               {...props}
           >
@@ -118,7 +117,7 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
+          </Table.Row>
         </tbody>
       </Table>
 
@@ -138,7 +137,7 @@ const TableSideHighlight = (props) => {
           </tr>
         </thead>
         <tbody>
-          <TableRow
+          <Table.Row
               sideHighlightColor="category_1"
               {...props}
           >
@@ -147,8 +146,8 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
-          <TableRow
+          </Table.Row>
+          <Table.Row
               sideHighlightColor="category_2"
               {...props}
           >
@@ -157,8 +156,8 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
-          <TableRow
+          </Table.Row>
+          <Table.Row
               sideHighlightColor="category_3"
               {...props}
           >
@@ -167,8 +166,8 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
-          <TableRow
+          </Table.Row>
+          <Table.Row
               sideHighlightColor="none"
               {...props}
           >
@@ -177,7 +176,7 @@ const TableSideHighlight = (props) => {
             <td>{'Value 3'}</td>
             <td>{'Value 4'}</td>
             <td>{'Value 5'}</td>
-          </TableRow>
+          </Table.Row>
         </tbody>
       </Table>
     </div>

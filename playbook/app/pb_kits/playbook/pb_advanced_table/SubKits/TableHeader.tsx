@@ -10,6 +10,7 @@ import { DataType } from "../Utilities/types"
 type TableHeaderProps = {
   children?: React.ReactNode | React.ReactNode[]
   className?: string
+  dark?: boolean,
   enableSorting?: boolean
   id?: string;
   sortIcon?: string | string[]
@@ -18,6 +19,7 @@ type TableHeaderProps = {
 export const TableHeader = ({
   children,
   className,
+  dark = false,
   enableSorting = false,
   id,
   sortIcon = ["arrow-up-short-wide", "arrow-down-short-wide"],

@@ -17,6 +17,7 @@ RSpec.describe Playbook::PbTable::Table do
   it { is_expected.to define_boolean_prop(:container).with_default(true) }
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_boolean_prop(:sticky).with_default(false) }
+  it { is_expected.to define_enum_prop(:tag).with_default("table").with_values("div", "table") }
 
   describe "#container" do
     it "returns false when it is specified" do
