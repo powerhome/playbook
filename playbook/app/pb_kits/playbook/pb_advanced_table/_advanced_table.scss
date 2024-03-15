@@ -95,4 +95,8 @@
       border-right: $transparent !important;
     }
   }
+
+  tr:hover {
+    position: relative;
+  }
 }
