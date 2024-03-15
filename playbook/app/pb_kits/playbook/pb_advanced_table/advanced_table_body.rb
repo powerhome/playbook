@@ -7,6 +7,9 @@ module Playbook
                         default: []
       prop :column_definitions, type: Playbook::Props::Array,
                                 default: []
+      def td_classname
+        generate_classname("id-cell", "chrome-styles", separator: " ")
+      end
 
       def classname
         generate_classname("pb_advanced_table_body", "pb_table_tbody", separator: " ")
