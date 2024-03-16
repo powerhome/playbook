@@ -7,8 +7,19 @@ module Playbook
                         default: []
       prop :column_definitions, type: Playbook::Props::Array,
                                 default: []
-      def td_classname
-        generate_classname("id-cell", "chrome-styles", separator: " ")
+
+      def render_row_and_children(row, column_definitions)
+        output = ActiveSupport::SafeBuffer.new
+
+        output << pb_rails("advanced_table/advanced_table_row", props: { row: row, column_definitions: column_definitions })
+
+        if row[:children].present?
+          row[:children].each do |child_row|
+            output << render_row_and_children(child_row, column_definitions)
+          end
+        end
+
+        output
       end
 
       def classname
