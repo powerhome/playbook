@@ -6,7 +6,7 @@
         <%= pb_rails("table/table_row", props: {tag:"div"}) do %>
             <% object.column_definitions.each_with_index do |item, index| %>
                 <%= pb_rails("table/table_header", props: { tag:"div", id:item[:accessor], classname:object.th_classname}) do %>
-                    <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end" }) do %>
+                    <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end", text_align:"end" }) do %>
                         <%= item[:label] %>
                     <% end %>
                 <% end %>
