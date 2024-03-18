@@ -3,6 +3,13 @@ import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import PbTable from '.'
+import {
+  TableHead,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "./subcomponents";
 
 type TableProps = {
     aria?: { [key: string]: string },
@@ -104,5 +111,11 @@ const Table = (props: TableProps) => {
         </>
     )
 }
+
+Table.Head = TableHead
+Table.Header = TableHeader
+Table.Body = TableBody
+Table.Row = TableRow
+Table.Cell = TableCell
 
 export default Table

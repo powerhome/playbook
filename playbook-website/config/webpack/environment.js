@@ -2,15 +2,25 @@ const path = require('path')
 
 const { environment } = require('@rails/webpacker')
 
-environment.loaders.insert('javascript', {
-  test: /\.(js|jsx)$/,
+const babelLoader = environment.loaders.get('babel')
+babelLoader.test = /\.(js|jsx|ts|tsx)?(\.erb)?$/
+
+const nodeLoader = environment.loaders.get('nodeModules')
+nodeLoader.exclude = [
+  nodeLoader.exclude,
+  /node_modules\/@powerhome\/playbook-icons-react/
+]
+
+environment.loaders.prepend('ESM', {
+  test: /\.mjs$/,
   use: {
     loader: 'babel-loader',
     options: {
       cacheDirectory: true,
     },
   },
-  include: path.resolve(__dirname, '../../app'),
+  // include: /node_modules/,
+  type: 'javascript/auto',
 })
 
 environment.loaders.prepend('svgr', {
@@ -42,19 +52,6 @@ environment.loaders.append('image', {
   include: [
     path.resolve(__dirname, '../../app')
   ],
-})
-
-// Allow ESM modules
-environment.config.merge({
-  module: {
-    rules: [
-      {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: 'javascript/auto',
-      },
-    ],
-  },
 })
 
 environment.config.merge({

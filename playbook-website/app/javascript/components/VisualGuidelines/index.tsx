@@ -67,8 +67,10 @@ const VisualGuidelines = ({
       case "flex_box":
         return <FlexBox example={examples.justify_self_jsx}/>;
       case "position":
-        return <Position example={examples.position_jsx}
+        return <Position 
+                   example={examples.position_jsx}
                    tokensExample={examples.position_token}
+                   secondExample={examples.global_positioning}
                />;
       case "hover":
         return <Hover example={examples.hover_jsx}/>;
