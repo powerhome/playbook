@@ -31,6 +31,7 @@ type AdvancedTableProps = {
   children?: React.ReactNode | React.ReactNode[]
   className?: string
   columnDefinitions: GenericObject[]
+  dark?: boolean
   data?: { [key: string]: string }
   enableToggleExpansion?: "all" | "header" | "none"
   expandedControl?: GenericObject
@@ -54,6 +55,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     children,
     className,
     columnDefinitions,
+    dark = false,
     data = {},
     enableToggleExpansion = "header",
     expandedControl,
@@ -235,6 +237,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       >
         <Table
             className={`${loading ? "content-loading" : ""}`}
+            dark={dark}
             dataTable
             numberSpacing="tabular"
             responsive="none"

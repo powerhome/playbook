@@ -11,7 +11,12 @@ const CollapsibleTrail = ({ leftOffset }: { leftOffset: number }) => {
     backgroundColor: "#E4E8F0",
   }
 
-  return <div style={style} />
+  return (
+    <div 
+        className="collapsible-trail" 
+        style={style} 
+    />
+  )
 }
 
 // Updated function to render multiple trails depending on depth

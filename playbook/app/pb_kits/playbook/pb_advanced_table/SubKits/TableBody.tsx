@@ -19,6 +19,7 @@ import AdvancedTableContext from "../Context/AdvancedTableContext"
 type TableBodyProps = {
   className?: string
   collapsibleTrail?: boolean
+  dark?: boolean
   id?: string
   subRowHeaders?: string[]
 }
@@ -26,6 +27,7 @@ type TableBodyProps = {
 export const TableBody = ({
   className,
   collapsibleTrail = true,
+  dark = false,
   id,
   subRowHeaders,
   ...props

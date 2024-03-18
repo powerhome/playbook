@@ -10,6 +10,7 @@ import TrendingRepositories from '../../views/samples/trending_repositories'
 import CrowdsourcedPosts from '../../views/samples/crowdsourced_posts'
 import CardDashboard from '../../views/samples/card_dashboard'
 import MusicApp from '../../views/samples/music_app'
+import GlobalPositioning from "../../views/samples/global_positioning"
 
 WebpackerReact.registerComponents({
   AnalyticsDashboard,
@@ -20,4 +21,5 @@ WebpackerReact.registerComponents({
   NewsMagazine,
   MusicApp,
   TrendingRepositories,
+  GlobalPositioning
 })

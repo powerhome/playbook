@@ -30,7 +30,7 @@ const SpacingProps = ({ propNames, propValues, screenSizes }: Props): React.Reac
       vertical="stretch"
     >
       <FlexItem flex={1}>
-        <Card.Body>
+        <Card.Body paddingLeft="none">
           <Caption marginBottom="sm" text="Props" />
           {propNames.map((prop) => (
             <Pill
