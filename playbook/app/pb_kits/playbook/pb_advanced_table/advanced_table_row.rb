@@ -16,6 +16,12 @@ module Playbook
         generate_classname("id-cell", "chrome-styles", separator: " ")
       end
 
+      def depth_accessors
+        column_definitions.flat_map do |column|
+          column[:cellAccessors] if column.key?(:cellAccessors)
+        end.compact
+      end
+
     private
 
       def subrow_depth_classname

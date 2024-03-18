@@ -7,7 +7,20 @@
             <%= pb_rails("table/table_cell", props: { tag:"div", classname:object.td_classname}) do %>
                 <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end" }) do %>
                     <div style="padding-left: <%= depth * 1.25 %>em">
-                        <%= object.row[column[:accessor].to_sym] %>
+                        <% if index.zero? %>
+                            <% if object.depth.zero? %>
+                                <%= object.row[column[:accessor].to_sym] %>
+                            <% else %>
+                                <% object.depth_accessors.each_with_index do |item, accessor_index| %>
+                                    <% if object.depth - 1 == accessor_index %>
+                                        <% key = item.to_sym %>
+                                        <%= object.row[key] %>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                        <% else %>
+                            <%= object.row[column[:accessor].to_sym] %>
+                        <% end %>
                     </div>
                 <% end %>
             <% end %>
