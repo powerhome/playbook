@@ -2,7 +2,7 @@
 
 module Playbook
   module PbAdvancedTable
-    class AdvancedTableRow < Playbook::KitBase
+    class TableRow < Playbook::KitBase
       prop :column_definitions, type: Playbook::Props::Array,
                                 default: []
       prop :row

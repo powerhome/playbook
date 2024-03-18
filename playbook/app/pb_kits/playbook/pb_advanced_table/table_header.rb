@@ -2,7 +2,7 @@
 
 module Playbook
   module PbAdvancedTable
-    class AdvancedTableHeader < Playbook::KitBase
+    class TableHeader < Playbook::KitBase
       prop :column_definitions, type: Playbook::Props::Array,
                                 default: []
 

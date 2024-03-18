@@ -2,7 +2,7 @@
 
 module Playbook
   module PbAdvancedTable
-    class AdvancedTableBody < Playbook::KitBase
+    class TableBody < Playbook::KitBase
       prop :table_data, type: Playbook::Props::Array,
                         default: []
       prop :column_definitions, type: Playbook::Props::Array,
@@ -11,7 +11,7 @@ module Playbook
       def render_row_and_children(row, column_definitions, current_depth = 0)
         output = ActiveSupport::SafeBuffer.new
 
-        output << pb_rails("advanced_table/advanced_table_row", props: { row: row, column_definitions: column_definitions, depth: current_depth })
+        output << pb_rails("advanced_table/table_row", props: { row: row, column_definitions: column_definitions, depth: current_depth })
 
         if row[:children].present?
           row[:children].each do |child_row|

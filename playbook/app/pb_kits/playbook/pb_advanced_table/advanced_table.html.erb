@@ -4,7 +4,7 @@
       data: object.data,
       id: object.id) do %>
         <%= pb_rails("table", props: { size: "sm", tag:"div", data_table: true, number_spacing:"tabular", responsive:"none" }) do %>
-            <%= pb_rails("advanced_table/advanced_table_header", props: {column_definitions: object.column_definitions}) %>
-            <%= pb_rails("advanced_table/advanced_table_body", props: {table_data: object.table_data, column_definitions: object.column_definitions}) %>
+            <%= pb_rails("advanced_table/table_header", props: {column_definitions: object.column_definitions}) %>
+            <%= pb_rails("advanced_table/table_body", props: {table_data: object.table_data, column_definitions: object.column_definitions}) %>
         <% end %>
 <% end %>
