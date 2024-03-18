@@ -4,7 +4,8 @@
     class: object.classname,
     data: object.data,
     id: object.id,
-    value: object.value) do %>
+    value: object.value,
+    **combined_html_options) do %>
 
     <% if content.present? %>
       <%= content %>

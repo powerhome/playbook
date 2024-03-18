@@ -2,6 +2,7 @@
     aria: object.aria,
     class: object.classname,
     data: object.data,
-    id: object.id) do %>
+    id: object.id,
+    **combined_html_options) do %>
   <%= pb_rails("title", props: { text: object.display_text, tag: "div", size: 4, classname: "pb_pill_text" }) %>
 <% end %>

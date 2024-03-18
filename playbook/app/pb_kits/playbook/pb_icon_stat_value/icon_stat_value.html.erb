@@ -2,7 +2,8 @@
     aria: object.aria,
     id: object.id,
     data: object.data,
-    class: object.classname) do %>
+    class: object.classname,
+    **combined_html_options) do %>
 
     <%= pb_rails("icon_circle", props: {
         dark: object.dark,
