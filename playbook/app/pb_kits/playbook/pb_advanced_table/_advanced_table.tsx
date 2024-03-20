@@ -195,7 +195,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     const expandedState = expanded;
     const targetParent = row?.parentId;
     const updatedRows = await updateExpandAndCollapseState(tableRows, expandedState, targetParent);
-    setExpanded(updatedRows);
+    return setExpanded(updatedRows);
   };
 
   const ariaProps = buildAriaProps(aria);
