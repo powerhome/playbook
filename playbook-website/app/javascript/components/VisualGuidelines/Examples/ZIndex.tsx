@@ -5,6 +5,7 @@ import {
   Body,
   Caption,
   Card,
+  Flex,
   Title,
   Table,
 } from 'playbook-ui'
@@ -53,6 +54,10 @@ const tokensDescription = (
 
 const ZIndex = ({ example, tokensExample }: { example: string, tokensExample?: string }) => (
   <React.Fragment>
+    {/* <Background
+      margin="xl"
+      padding="xl"
+    > */}
     <Example
       description="If you're using Position, you might also find it useful to specify a z-index. We have multiple ways to use z-index, take a look at the examples below:"
       example={example}
@@ -63,18 +68,28 @@ const ZIndex = ({ example, tokensExample }: { example: string, tokensExample?: s
       screenSizes={screenSizeProps}
       title="Z-Index"
     />
-    <Background
-      margin="xl"
-    >
+    {/* <Background
+      // margin="xl"
+      padding="xl"
+    > */}
+    {/* <Flex orientation='column'> */}
+
+    
+
+    
+    {/* <Example
+      description="Just want the raw classes? We got you. All of our global props are simple CSS utilities available through classes."
+      title="Utility Classes"
+      > */}
       <Title
         marginTop='sm'
         size={4}
         text='Utility Classes'
-      />
+        />
       <Body
         text='Just want the raw classes? We got you. All of our global props are simple CSS utilities available through classes.'
         marginBottom='sm'
-      />
+        />
       <Caption
         text='Visual Guide'
         marginBottom='sm'
@@ -110,7 +125,9 @@ const ZIndex = ({ example, tokensExample }: { example: string, tokensExample?: s
           ))}
         </tbody>
       </Table>
-    </Background>
+      {/* </Flex> */}
+      {/* </Example> */}
+    {/* </Background> */}
     <Example
       example={tokensExample}
       tokens={TOKENS}
@@ -130,6 +147,8 @@ const ZIndex = ({ example, tokensExample }: { example: string, tokensExample?: s
         ))}
       </div>
     </Example>
+
+    {/* </Background> */}
   </React.Fragment>
 )
 

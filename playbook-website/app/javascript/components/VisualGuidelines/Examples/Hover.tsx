@@ -22,9 +22,11 @@ const scaleObj = { 'sm': '@1.05', 'md': '@1.10', 'lg': '@1.15' }
 const Hover = ({ example }: { example: string }) => (
   <React.Fragment>
     <Background
-      margin="xl"
+      className={`pb_background_kit token-wrapper`}
+      paddingRight="xl"
+      paddingLeft="xl"
+      paddingTop="xl"
     >
-
       <Title
         marginBottom="sm"
         size={1}
@@ -172,7 +174,6 @@ const Hover = ({ example }: { example: string }) => (
     <Background
       margin="xl"
     >
-
       <Card
         marginTop="md"
         shadow="deep"

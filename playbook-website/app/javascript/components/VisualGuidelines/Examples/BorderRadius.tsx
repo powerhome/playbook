@@ -33,7 +33,10 @@ const DATASET = [
 const BorderRadius = ({tokensExample}: { tokensExample: string }) => (
   <React.Fragment>
     <Background
-      margin="xl"
+      className={`pb_background_kit token-wrapper`}
+      paddingRight="xl"
+      paddingLeft="xl"
+      paddingTop="xl"
     >
       <Title
           size={1}
