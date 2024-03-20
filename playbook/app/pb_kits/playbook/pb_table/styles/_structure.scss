@@ -48,7 +48,8 @@
         }
       }
       &.data_table {
-        thead tr th {
+        thead tr th,
+        .pb_table_thead .pb_table_tr .pb_table_th {
           padding-top: $cell-pad-sm;
           padding-bottom: $cell-pad-sm;
           &:first-child {
@@ -58,7 +59,8 @@
             padding-right: $cell-pad-sm;
           }
         }
-        tbody tr td {
+        tbody tr td,
+        .pb_table_tbody .pb_table_tr .pb_table_td  {
           padding-top: $cell-pad-sm;
           padding-bottom: $cell-pad-sm;
           &:first-child {

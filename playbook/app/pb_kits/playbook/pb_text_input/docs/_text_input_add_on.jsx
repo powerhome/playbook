@@ -60,6 +60,16 @@ const TextInputAddOn = (props) => {
       </div>
       <div>
         <TextInput
+            addOn={{ icon: 'frog', alignment: 'right', border: true }}
+            label="Right-Aligned Add On With Child Input"
+            onChange={handleUpdateFourthInput}
+            {...props}
+        >
+          <input />
+        </TextInput>
+      </div>
+      <div>
+        <TextInput
             addOn={{ icon: 'percent', alignment: 'left', border: false }}
             label="Left-Aligned Add On With No Border"
             onChange={handleUpdateSecondInput}
@@ -75,6 +85,16 @@ const TextInputAddOn = (props) => {
             value={fourthInput}
             {...props}
         />
+      </div>
+      <div>
+        <TextInput
+            addOn={{ icon: 'frog', alignment: 'left', border: true }}
+            label="Left-Aligned Add On With Child Input"
+            onChange={handleUpdateFourthInput}
+            {...props}
+        >
+          <input />
+        </TextInput>
       </div>
     </>
   )

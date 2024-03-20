@@ -1,7 +1,17 @@
-<%= content_tag(:tr,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id) do %>
-  <%= content.presence %>
+<% if object.tag == "table" %>
+    <%= content_tag(:tr,
+      aria: object.aria,
+      class: object.classname,
+      data: object.data,
+      id: object.id) do %>
+      <%= content.presence %>
+    <% end %>
+<% else %>
+    <%= content_tag(:div,
+      aria: object.aria,
+      class: object.classname,
+      data: object.data,
+      id: object.id) do %>
+      <%= content.presence %>
+    <% end %>
 <% end %>
