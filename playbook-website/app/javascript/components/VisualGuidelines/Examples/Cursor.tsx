@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, Caption, FlexItem, Flex, Body } from 'playbook-ui'
+import { Background, Card, Caption, FlexItem, Flex, Body } from 'playbook-ui'
 import Example from '../Templates/Example'
 
 const CURSOR = [
@@ -18,32 +18,36 @@ const Cursor = ({ example }: { example: string }) => (
       }}
       title="Cursor"
     />
-    <Card
-      marginTop="md"
-      padding="none"
-      rounded
-      shadow="deeper"
+    <Background
+      margin="xl"
     >
-      <FlexItem>
-        <Card.Body>
-          <Caption
-            marginBottom="xs"
-            text="Visual Guide"
-          />
+      <Card
+        marginTop="md"
+        padding="none"
+        rounded
+        shadow="deeper"
+      >
+        <FlexItem>
+          <Card.Body>
+            <Caption
+              marginBottom="xs"
+              text="Visual Guide"
+            />
 
-          <Body text="Hover over any card below to display its cursor." marginBottom="sm" />
+            <Body text="Hover over any card below to display its cursor." marginBottom="sm" />
 
-          <Flex gap="xxs" wrap>
-            {CURSOR.map(function (cursor, i) {
-              return <Card borderRadius="none" padding="xs" cursor={cursor} key={i}>
-                {cursor}
-              </Card>
-            })}
-          </Flex>
+            <Flex gap="xxs" wrap>
+              {CURSOR.map(function (cursor, i) {
+                return <Card borderRadius="none" padding="xs" cursor={cursor} key={i}>
+                  {cursor}
+                </Card>
+              })}
+            </Flex>
           </Card.Body>
-      </FlexItem>
-    </Card>
+        </FlexItem>
+      </Card>
+    </Background>
   </>
-  )
+)
 
-  export default Cursor
+export default Cursor
