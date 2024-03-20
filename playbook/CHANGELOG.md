@@ -1,3 +1,21 @@
+# 13.20.0
+##### March 05, 2024
+
+List of changes:
+
+**Kit Enhancements:**
+
+- Adding Div Support for Table Kit [\#3188](https://github.com/powerhome/playbook/pull/3188) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+
+- Fixing Kit Props Table for Advanced Table [\#3183](https://github.com/powerhome/playbook/pull/3183) ([carloslimasd](https://github.com/carloslimasd))
+- Fixes for Spelling Errors In Advanced Table Docs [\#3190](https://github.com/powerhome/playbook/pull/3190) ([nidaqg](https://github.com/nidaqg))
+- Fix Icon Kit for Playbook Icons Usage [\#3201](https://github.com/powerhome/playbook/pull/3201) ([markdoeswork](https://github.com/markdoeswork))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.19.0...13.20.0)
+
+
 # 🌳 Explore Data Depths with the New Advanced Table Component in Playbook!
 
 ##### February 27, 2024
@@ -6,6 +24,7 @@
 
 Explore depths of nested data effortlessly. This latest addition to Playbook's design system brings clarity and control, transforming complex tables into intuitive insights.
 
+[13.19.0](https://github.com/powerhome/playbook/tree/13.19.0) full list of changes:
 
 **Kit Enhancements:**
 
