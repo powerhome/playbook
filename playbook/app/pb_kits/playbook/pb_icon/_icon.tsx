@@ -103,6 +103,7 @@ const Icon = (props: IconProps) => {
     flipMap[flip],
     (!iconElement && !customIcon) ? 'pb_icon_kit' : '',
     (iconElement || customIcon) ? 'pb_custom_icon' : fontStyle,
+    iconElement ? 'svg-inline--fa' : '',
     faClasses,
     globalProps(props),
     className
