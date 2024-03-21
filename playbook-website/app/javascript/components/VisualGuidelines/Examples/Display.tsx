@@ -34,7 +34,8 @@ const Display = ({ example }: { example: string }) => (
       title='Display'
     />
     <Background
-      margin="xl"
+      className="token-wrapper"
+      padding="xl"
     >
       <Title
         size={4}

@@ -22,7 +22,7 @@ const scaleObj = { 'sm': '@1.05', 'md': '@1.10', 'lg': '@1.15' }
 const Hover = ({ example }: { example: string }) => (
   <React.Fragment>
     <Background
-      className={`pb_background_kit token-wrapper`}
+      className="token-wrapper"
       paddingRight="xl"
       paddingLeft="xl"
       paddingTop="xl"
@@ -172,7 +172,8 @@ const Hover = ({ example }: { example: string }) => (
       </Flex>
     </Example>
     <Background
-      margin="xl"
+      className="token-wrapper"
+      padding="xl"
     >
       <Card
         marginTop="md"
@@ -181,6 +182,7 @@ const Hover = ({ example }: { example: string }) => (
         <Flex
           orientation="column"
           wrap
+          maxWidth="xl"
         >
           <FlexItem paddingBottom="xs">
             <Caption

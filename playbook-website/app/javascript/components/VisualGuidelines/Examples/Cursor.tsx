@@ -19,7 +19,8 @@ const Cursor = ({ example }: { example: string }) => (
       title="Cursor"
     />
     <Background
-      margin="xl"
+      className="token-wrapper"
+      padding="xl"
     >
       <Card
         marginTop="md"
@@ -27,24 +28,29 @@ const Cursor = ({ example }: { example: string }) => (
         rounded
         shadow="deeper"
       >
-        <FlexItem>
-          <Card.Body>
-            <Caption
-              marginBottom="xs"
-              text="Visual Guide"
-            />
+        <Flex
+          maxWidth="xl"
+          orientation="column"
+        >
+          <FlexItem>
+            <Card.Body>
+              <Caption
+                marginBottom="xs"
+                text="Visual Guide"
+              />
 
-            <Body text="Hover over any card below to display its cursor." marginBottom="sm" />
+              <Body text="Hover over any card below to display its cursor." marginBottom="sm" />
 
-            <Flex gap="xxs" wrap>
-              {CURSOR.map(function (cursor, i) {
-                return <Card borderRadius="none" padding="xs" cursor={cursor} key={i}>
-                  {cursor}
-                </Card>
-              })}
-            </Flex>
-          </Card.Body>
-        </FlexItem>
+              <Flex gap="xxs" wrap>
+                {CURSOR.map(function (cursor, i) {
+                  return <Card borderRadius="none" padding="xs" cursor={cursor} key={i}>
+                    {cursor}
+                  </Card>
+                })}
+              </Flex>
+            </Card.Body>
+          </FlexItem>
+        </Flex>
       </Card>
     </Background>
   </>
