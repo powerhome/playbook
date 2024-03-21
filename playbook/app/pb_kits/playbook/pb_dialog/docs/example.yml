@@ -2,6 +2,7 @@ examples:
 
   rails:
   - dialog_default: Simple
+  - dialog_button_types: Set Button Types
   - dialog_compound_components: Complex
   - dialog_sizes: Sizes
   - dialog_scrollable: Scrollable
@@ -14,6 +15,7 @@ examples:
 
   react:
   - dialog_default: Simple
+  - dialog_button_types: Set Button Types
   - dialog_compound_components: Complex
   - dialog_sizes: Sizes
   - dialog_scrollable: Scrollable

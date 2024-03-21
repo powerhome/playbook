@@ -17,17 +17,14 @@ import Flex from "../pb_flex/_flex";
 import IconCircle from "../pb_icon_circle/_icon_circle";
 import Title from "../pb_title/_title";
 import { DialogContext } from "./_dialog_context";
-import { ReactButton } from "../types";
-
-type DialogButton = PlaybookButton | ReactButton
 
 type DialogProps = {
   aria?: { [key: string]: string };
-  cancelButton?: string | DialogButton;
+  cancelButton?: string | PlaybookButton;
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
   closeable: boolean;
-  confirmButton?: string | DialogButton;
+  confirmButton?: string | PlaybookButton;
   data?: {[key: string]: string},
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
@@ -168,7 +165,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     },
   };
 
-  const renderButton = (dialogButton: DialogButton, props: PlaybookButtonProps) => {
+  const renderButton = (dialogButton: PlaybookButton, props: PlaybookButtonProps) => {
     if (typeof(dialogButton) === "string") return (<Button {...props}>{dialogButton}</Button>)
 
     if (["button", "input"].includes(dialogButton.type as string)) return dialogButton
@@ -180,7 +177,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
   }
 
   const renderConfirmButton = () =>
-    renderButton(confirmButton as DialogButton, {
+    renderButton(confirmButton as PlaybookButton, {
       htmlType: "button",
       loading,
       onClick: onConfirm,
@@ -188,7 +185,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     })
 
   const renderCancelButton = () =>
-    renderButton(cancelButton as DialogButton, {
+    renderButton(cancelButton as PlaybookButton, {
       htmlType: "button",
       id: "cancel-button",
       onClick: onCancel,
@@ -197,10 +194,10 @@ const Dialog = (props: DialogProps): React.ReactElement => {
 
   return (
     <DialogContext.Provider value={api}>
-      <div 
-          {...ariaProps} 
+      <div
+          {...ariaProps}
           {...dataProps}
-          {...htmlProps} 
+          {...htmlProps}
           className={classes}
       >
         <Modal

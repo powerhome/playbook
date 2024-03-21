@@ -14,7 +14,9 @@ module Playbook
       prop :title
       prop :text
       prop :confirm_button
+      prop :confirm_button_type, default: "submit"
       prop :cancel_button
+      prop :cancel_button_type
       prop :status, type: Playbook::Props::Enum,
                     values: ["info", "caution", "delete", "error", "success", "default", ""],
                     default: ""

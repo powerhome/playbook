@@ -1,0 +1,18 @@
+<%= pb_rails("button", props: { text: "Open Feedback Dialog", data:{"open-dialog": "dialog-button-types"} }) %>
+
+<%= pb_rails("dialog", props: { id: "dialog-button-types", size: "md" }) do %>
+    <form action="./dialog" method="get">
+      <%= pb_rails("dialog/dialog_header", props: { id: "dialog-button-types" } ) do %>
+          <%= pb_rails("body", props: { text: "Please take moment to provide your feedback." }) %>
+      <% end %>
+      <%= pb_rails("dialog/dialog_body") do %>
+          <%= pb_rails("caption", props: { text: "How did we do?", margin_bottom: "xs" }) %>
+          <%= pb_rails("rich_text_editor", props: {id: "default", value: "Tell us what you think"}) %>
+
+      <% end %>
+      <%= pb_rails("dialog/dialog_footer", props: {
+        cancel_button: "Back", cancel_button_type: "button", confirm_button: "Send",
+        confirm_button_type: "submit", confirm_button_id:"confirm-button-types", id: "dialog-button-types"
+      }) %>
+    </form>
+<% end %>

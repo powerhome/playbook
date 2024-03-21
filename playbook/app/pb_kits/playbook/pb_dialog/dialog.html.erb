@@ -26,7 +26,9 @@
             <% if object.cancel_button && object.confirm_button %>
                         <%= pb_rails("dialog/dialog_footer", props: {
                             cancel_button: object.cancel_button,
+                            cancel_button_type: object.cancel_button_type,
                             confirm_button: object.confirm_button,
+                            confirm_button_type: object.confirm_button_type,
                             id: object.id
                         }) %>
             <% end %>
