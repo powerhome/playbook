@@ -1,4 +1,5 @@
 import flatpickr from 'flatpickr'
+import { Instance } from "flatpickr/dist/types/instance"
 import { BaseOptions } from 'flatpickr/dist/types/options'
 import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
 import weekSelect from "flatpickr/dist/plugins/weekSelect/weekSelect"
@@ -165,9 +166,9 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   }
 
   // two way binding
-  const initialDropdown = document.querySelector<HTMLElement & { [x: string]: any }>(`#year-${pickerId}`)
-  const yearChangeHook = () => {
-    initialDropdown.value = initialPicker.currentYear
+  const yearChangeHook = (fp: Instance) => {
+      const yearInput = document.querySelector(`#year-${fp.input.id}`) as HTMLInputElement
+      yearInput.value = fp.currentYear?.toString()
   }
 
   // ===========================================================
@@ -199,11 +200,12 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
       onClose(selectedDates, dateStr)
     }],
-    onChange: [(selectedDates, dateStr) => {
+    onChange: [(selectedDates, dateStr, fp) => {
+      yearChangeHook(fp)
       onChange(dateStr, selectedDates)
     }],
-    onYearChange: [() => {
-      yearChangeHook()
+    onYearChange: [(_selectedDates, _dateStr, fp) => {
+      yearChangeHook(fp)
     }],
     plugins: setPlugins(thisRangesEndToday, customQuickPickDates),
     position,
@@ -248,7 +250,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         /* Reset date picker to default value on form.reset() */
         if (defaultDate){
           picker.setDate(defaultDate)
-          yearChangeHook()
+          yearChangeHook(picker)
         }
       }, 0)
     })
