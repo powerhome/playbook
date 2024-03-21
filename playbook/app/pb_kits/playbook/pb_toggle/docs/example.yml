@@ -10,6 +10,7 @@ examples:
 
   react:
   - toggle_default: Default State
+  - toggle_disabled: Disabled Prop
   - toggle_name: Name and Value
   - toggle_custom: Custom checkbox input
   - toggle_custom_radio: Custom radio inputs

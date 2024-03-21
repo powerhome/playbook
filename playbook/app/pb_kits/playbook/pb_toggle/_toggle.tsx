@@ -17,6 +17,7 @@ type Props = {
   children?: React.ReactNode | React.ReactNode[],
   className?: string,
   data?: { [key: string]: string },
+  disabled?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   name?: string,
@@ -31,10 +32,13 @@ const Toggle = ({
   children,
   className,
   data = {},
+  disabled = false,
   id,
   htmlOptions = {},
   name,
-  onChange = () => { },
+  onChange = (): void => {
+  // Function body here
+  },
   size = 'sm',
   value,
   ...props
@@ -53,23 +57,24 @@ const Toggle = ({
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classnames(css, globalProps(props), className)}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classnames(css, globalProps(props), className)}
+        id={id}
     >
       <label className="pb_toggle_wrapper">
         {children && children}
 
         {!children &&
           <input
-            {...props}
-            defaultChecked={checked}
-            name={name}
-            onChange={onChange}
-            type="checkbox"
-            value={value}
+              {...props}
+              defaultChecked={checked}
+              disabled={disabled}
+              name={name}
+              onChange={onChange}
+              type="checkbox"
+              value={value}
           />
         }
         <div className="pb_toggle_control" />
