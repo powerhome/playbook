@@ -3041,10 +3041,10 @@
   resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.1.0.tgz#f1e1151481f51421186ba8caad99fadb24b1fe51"
   integrity sha512-8e5DRgnKPbJ+ofAtqjUPZTxcgHg/TVf52WeNqAGBUXSS4QWHemL6fj1n/YHfAIvx3aMUhFwrw2lUNofUocgK3A==
 
-"@powerhome/playbook-icons-react@0.0.1-alpha.8":
-  version "0.0.1-alpha.8"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/d71ffd31679c57b3a7358718ce84b2f9e5f0c577#d71ffd31679c57b3a7358718ce84b2f9e5f0c577"
-  integrity sha512-SUM1/MsJb4nnNEz2A9PMXa8hgBeCdGCNQWEdrozy1l2/1GZOkiw28aGIUZZN3LAR2+0hRRNhVhcetfpuGCZcFg==
+"@powerhome/playbook-icons-react@0.0.1-alpha.9":
+  version "0.0.1-alpha.9"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/55964099a20d56498cc8a534f690519f9a187f25#55964099a20d56498cc8a534f690519f9a187f25"
+  integrity sha512-otAGik+ixqI2nT4LrLACOQSLrHKB1b+0CILYH5tVEYy9vlaO2YIbvzPCGa7UrZ6ffkgnAq7y84YRtpbZ9Ho+PA==
 
 "@powerhome/playbook-icons@0.0.1-alpha.8":
   version "0.0.1-alpha.8"
