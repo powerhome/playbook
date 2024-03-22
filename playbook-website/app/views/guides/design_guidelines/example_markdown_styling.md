@@ -91,4 +91,4 @@ Example tables are used to display data in a clear and organized way. They help 
 
 ### Horizontal Rules
 
-Horizontal rules are used to separate sections of content visually. They help break up long blocks of text and make it easier for users
+Horizontal rules are used to visually separate sections of content. They help break up long blocks of text, making it easier for users to navigate.
