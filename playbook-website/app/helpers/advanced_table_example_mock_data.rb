@@ -1,16 +1,11 @@
-# Advanced Table Kit Data Structure
+# frozen_string_literal: true
 
-The AdvancedTable Kit's `tableData` prop consumes the data that will render the table and as such has a specific structure. It must be an array of objects, where the key/value pairs will become the values rendered within each column. If children are present, they must also take the form of an array of objects. The kit will automatically render `children` as subRows.
-
-Here is the data structure being used within the kits doc examples:
-
-```
-const MOCK_DATA = [
+TABLE_DATA = [
   {
     year: "2021",
-    quarter: null,
-    month: null,
-    day: null,
+    quarter: nil,
+    month: nil,
+    day: nil,
     newEnrollments: "20",
     scheduledMeetings: "10",
     attendanceRate: "51%",
@@ -21,8 +16,8 @@ const MOCK_DATA = [
       {
         year: "2021",
         quarter: "Q1",
-        month: null,
-        day: null,
+        month: nil,
+        day: nil,
         newEnrollments: "2",
         scheduledMeetings: "35",
         attendanceRate: "32%",
@@ -34,7 +29,7 @@ const MOCK_DATA = [
             year: "2021",
             quarter: "Q1",
             month: "January",
-            day: null,
+            day: nil,
             newEnrollments: "16",
             scheduledMeetings: "20",
             attendanceRate: "11%",
@@ -72,7 +67,7 @@ const MOCK_DATA = [
             year: "2021",
             quarter: "Q1",
             month: "February",
-            day: null,
+            day: nil,
             newEnrollments: "20",
             scheduledMeetings: "41",
             attendanceRate: "95%",
@@ -100,9 +95,9 @@ const MOCK_DATA = [
   },
   {
     year: "2022",
-    quarter: null,
-    month: null,
-    day: null,
+    quarter: nil,
+    month: nil,
+    day: nil,
     newEnrollments: "25",
     scheduledMeetings: "17",
     attendanceRate: "75%",
@@ -113,8 +108,8 @@ const MOCK_DATA = [
       {
         year: "2022",
         quarter: "Q1",
-        month: null,
-        day: null,
+        month: nil,
+        day: nil,
         newEnrollments: "2",
         scheduledMeetings: "35",
         attendanceRate: "32%",
@@ -126,7 +121,7 @@ const MOCK_DATA = [
             year: "2022",
             quarter: "Q1",
             month: "January",
-            day: null,
+            day: nil,
             newEnrollments: "16",
             scheduledMeetings: "20",
             attendanceRate: "11%",
@@ -164,7 +159,7 @@ const MOCK_DATA = [
             year: "2022",
             quarter: "Q1",
             month: "May",
-            day: null,
+            day: nil,
             newEnrollments: "20",
             scheduledMeetings: "41",
             attendanceRate: "95%",
@@ -192,9 +187,9 @@ const MOCK_DATA = [
   },
   {
     year: "2023",
-    quarter: null,
-    month: null,
-    day: null,
+    quarter: nil,
+    month: nil,
+    day: nil,
     newEnrollments: "10",
     scheduledMeetings: "15",
     attendanceRate: "65%",
@@ -205,8 +200,8 @@ const MOCK_DATA = [
       {
         year: "2023",
         quarter: "Q1",
-        month: null,
-        day: null,
+        month: nil,
+        day: nil,
         newEnrollments: "2",
         scheduledMeetings: "35",
         attendanceRate: "32%",
@@ -218,7 +213,7 @@ const MOCK_DATA = [
             year: "2023",
             quarter: "Q1",
             month: "March",
-            day: null,
+            day: nil,
             newEnrollments: "16",
             scheduledMeetings: "20",
             attendanceRate: "11%",
@@ -256,7 +251,7 @@ const MOCK_DATA = [
             year: "2023",
             quarter: "Q1",
             month: "April",
-            day: null,
+            day: nil,
             newEnrollments: "20",
             scheduledMeetings: "41",
             attendanceRate: "95%",
@@ -282,7 +277,4 @@ const MOCK_DATA = [
       },
     ],
   },
-];
-
-
-```
+].freeze
