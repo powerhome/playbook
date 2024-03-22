@@ -96,6 +96,10 @@
     }
   }
 
+  tr:hover {
+    position: relative;
+  }
+
   &.dark {
     .bg-white {
       background: $bg_dark_card;
