@@ -9,3 +9,9 @@ examples:
   - date_time_default: Default
   - date_time_align: Alignment
   - date_time_size: Size
+
+  swift:
+  - date_time_default_swift: Default
+  - date_time_alignment_swift: Alignment
+  - date_time_size_swift: Size
+  - date_time_props_swift: ""
