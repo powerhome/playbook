@@ -4,6 +4,7 @@
 @import "../tokens/spacing";
 @import "./scss_partials/loading";
 @import "./scss_partials/pseudo_states";
+@import "./scss_partials/chrome_styles";
 
 .pb_advanced_table {
   $border-color: 1px solid $border_light !important;
@@ -86,14 +87,10 @@
     box-shadow: 1px 0px 0px 0px #e4e8f0 !important;
   }
 
-  .chrome-styles:first-child {
-    border-right: $border-color;
-  }
+  @include chrome_styles($border-color);
 
-  .table-card {
-    .chrome-styles:first-child {
-      border-right: $transparent !important;
-    }
+  tr:hover {
+    position: relative;
   }
 
   &.dark {

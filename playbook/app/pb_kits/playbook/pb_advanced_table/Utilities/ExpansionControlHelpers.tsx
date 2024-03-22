@@ -1,5 +1,6 @@
 import { RowModel } from "@tanstack/react-table"
-import { DataType, ExpandedStateObject } from "./types"
+import { ExpandedStateObject } from "./types"
+import { GenericObject } from "../../types"
 
 const filterExpandableRows = (expandedState: Record<string, boolean>) => {
   for (const expandedRow in expandedState) {
@@ -11,7 +12,7 @@ const filterExpandableRows = (expandedState: Record<string, boolean>) => {
 }
 
 export const updateExpandAndCollapseState = (
-  tableRows: RowModel<DataType>,
+  tableRows: RowModel<GenericObject>,
   expanded: Record<string, boolean>,
   targetParent: string
 ) => {
