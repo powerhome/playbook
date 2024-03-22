@@ -2,7 +2,8 @@
     aria: object.aria,
     class: object.classname + object.error_class,
     data: object.data,
-    id: object.id) do %>
+    id: object.id,
+    **combined_html_options) do %>
   <div class="input_wrapper">
     <% if content.present? %>
       <%= content %>

@@ -2,7 +2,8 @@
   aria: object.aria,
   class: object.classname,
   data: object.data,
-  id: object.id) do %>
+  id: object.id,
+  **combined_html_options) do %>
   <%= pb_rails("avatar", props: object.users[0].merge({size: "xs", classname: "pb_multiple_users_stacked_item", dark: object.dark}) ) %>
 
   <% unless object.only_one %>

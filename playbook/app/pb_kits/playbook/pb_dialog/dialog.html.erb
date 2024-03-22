@@ -3,7 +3,8 @@
         aria: object.aria,
         data: object.data,
         id: object.id,
-        class: object.classname) do %>
+        class: object.classname,
+        **combined_html_options) do %>
             <% if object.status === "" && object.title %>
                 <%= pb_rails("dialog/dialog_header", props: { title: object.title, id: object.id }) %>
             <% end %>

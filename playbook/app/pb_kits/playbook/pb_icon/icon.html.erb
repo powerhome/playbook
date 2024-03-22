@@ -8,7 +8,8 @@
   <%= content_tag(:i, nil,
       id: object.id,
       data: object.data,
-      class: object.classname
+      class: object.classname,
+      **combined_html_options
   ) %>
   <%= content_tag(:span, nil,
       aria: { label: "#{object.icon} icon" }.merge(object.aria),

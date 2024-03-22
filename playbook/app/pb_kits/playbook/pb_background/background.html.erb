@@ -7,7 +7,8 @@
       style: "background-image: url('#{object.image_url}');
               background-repeat: #{object.background_repeat};
               background-size: #{object.background_size};
-              background-position: #{object.background_position};"
+              background-position: #{object.background_position};",
+      **combined_html_options
   ) do %>
     <%= content.presence %>
   <% end %>
