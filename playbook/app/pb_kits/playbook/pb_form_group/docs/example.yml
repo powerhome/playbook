@@ -9,6 +9,7 @@ examples:
   - form_group_select: Select
   - form_group_selectable_card: Selectable Card
   - form_group_selectable_card_icon: Selectable Card Icon
+  - form_group_phone_number_input: Phone Number Input
 
 
   react:
@@ -20,3 +21,4 @@ examples:
   - form_group_select: Select
   - form_group_selectable_card: Selectable Card
   - form_group_selectable_card_icon: Selectable Card Icon
+  - form_group_phone_number_input: Phone Number Input

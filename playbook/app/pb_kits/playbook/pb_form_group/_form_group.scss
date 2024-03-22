@@ -57,6 +57,28 @@
     margin-bottom: 16px;
   }
 
+  & > [class^=pb_phone_number_input]:not(:last-child) {
+    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right-width: 0;
+    }
+  }
+
+  & > [class^=pb_phone_number_input]:not(:first-child) {
+    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+
+  & > div > [class^=pb_phone_number_input]:last-child {
+    .text_input {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+
   &[class*=rails] > [class^=pb_date_picker_kit] {
     margin-bottom: 0px;
   }
