@@ -19,12 +19,12 @@ RSpec.describe Playbook::PbTextInput::TextInput do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_text_input_kit"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_text_input_kit additional_class"
-      expect(subject.new({ dark: true }).classname).to eq "pb_text_input_kit dark"
-      expect(subject.new({ inline: true }).classname).to eq "pb_text_input_kit inline"
-      expect(subject.new({ error: "Please enter a valid email" }).classname).to eq "pb_text_input_kit error"
-      expect(subject.new({ dark: true, error: "Please enter a valid email" }).classname).to eq "pb_text_input_kit dark error"
+      expect(subject.new({}).classname).to eq "pb_text_input_kit mb_sm"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_text_input_kit additional_class mb_sm"
+      expect(subject.new({ dark: true }).classname).to eq "pb_text_input_kit dark mb_sm"
+      expect(subject.new({ inline: true }).classname).to eq "pb_text_input_kit mb_sm inline"
+      expect(subject.new({ error: "Please enter a valid email" }).classname).to eq "pb_text_input_kit mb_sm error"
+      expect(subject.new({ dark: true, error: "Please enter a valid email" }).classname).to eq "pb_text_input_kit dark mb_sm error"
       expect(subject.new({ margin_bottom: "lg" }).classname).to eq "pb_text_input_kit mb_lg"
     end
   end
