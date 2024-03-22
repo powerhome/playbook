@@ -1,18 +1,22 @@
 import React, { useContext } from "react"
-import classnames from "classnames";
-import { buildCss } from "../../utilities/props";
-import { globalProps } from "../../utilities/globalProps";
+import classnames from "classnames"
 import { HeaderGroup } from "@tanstack/react-table"
-import AdvancedTableContext from "../Context/AdvancedTableContext"
+
+import { GenericObject } from "../../types"
+
+import { buildCss } from "../../utilities/props"
+import { globalProps } from "../../utilities/globalProps"
+
 import { TableHeaderCell } from "../Components/TableHeaderCell"
-import { DataType } from "../Utilities/types"
+
+import AdvancedTableContext from "../Context/AdvancedTableContext"
 
 type TableHeaderProps = {
   children?: React.ReactNode | React.ReactNode[]
   className?: string
   dark?: boolean,
   enableSorting?: boolean
-  id?: string;
+  id?: string
   sortIcon?: string | string[]
 }
 
@@ -36,7 +40,7 @@ export const TableHeader = ({
     buildCss("pb_advanced_table_header"),
     globalProps(props),
     className
-  );
+  )
 
 
   return (
@@ -45,7 +49,7 @@ export const TableHeader = ({
           id={id}
       >
         {/* Get the header groups (only one in this example) */}
-        {table.getHeaderGroups().map((headerGroup: HeaderGroup<DataType>) => (
+        {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
           <tr key={`${headerGroup.id}-headerGroup`}>
             {headerGroup.headers.map(header => (
               <TableHeaderCell

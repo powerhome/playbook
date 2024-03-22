@@ -1,20 +1,25 @@
 import React, { useContext } from "react"
-import classnames from "classnames";
-import Flex from "../../pb_flex/_flex"
+import classnames from "classnames"
 import { flexRender, Header } from "@tanstack/react-table"
+
+import { GenericObject } from "../../types"
+
+import { GlobalProps } from "../../utilities/globalProps"
+
+import Flex from "../../pb_flex/_flex"
 
 import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
+
 import { isChrome } from "../Utilities/BrowserCheck"
-import { DataType } from "../Utilities/types"
+
 import AdvancedTableContext from "../Context/AdvancedTableContext"
-import { GlobalProps } from "../../utilities/globalProps"
 
 type TableHeaderCellProps = {
   enableSorting?: boolean
   enableToggleExpansion?: "all" | "header" | "none"
   handleExpandOrCollapse?: () => void
-  header?: Header<DataType, unknown>
+  header?: Header<GenericObject, unknown>
   headerChildren?: React.ReactNode | React.ReactNode[]
   loading?: boolean
   sortIcon?: string | string[]
@@ -45,24 +50,24 @@ export const TableHeaderCell = ({
 const cellClassName = classnames("table-header-cells", 
   `${isChrome() ? "chrome-styles" : ""}`, 
   `${enableSorting ? "table-header-cells-active" : ""}`
-);
+)
 
 const cellId = `${loading ? 
     `loading-${header.id}`
     : `${header.id}`
-}`;
+}`
 
 const isToggleExpansionEnabledLoading =
   header.index === 0 &&
   loading &&
   (enableToggleExpansion === "all" || "header") &&
-  enableToggleExpansion !== "none";
+  enableToggleExpansion !== "none"
   
 const isToggleExpansionEnabled =
   header.index === 0 &&
   !loading &&
   (enableToggleExpansion === "all" || "header") &&
-  enableToggleExpansion !== "none";
+  enableToggleExpansion !== "none"
 
   return (
     <th
