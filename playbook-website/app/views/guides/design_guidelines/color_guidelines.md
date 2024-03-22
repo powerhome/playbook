@@ -96,7 +96,7 @@ In data visualization, color plays a crucial role in conveying insights clearly 
 
 #### Data Colors
 
-These eight tokens are Playbook’s core set of data viz colors. Designed to be used in sequence, these colors provide a go-to palette for representing data with clarity and consistency.
+These eight tokens are Playbook’s core set of data visualization colors. Designed to be used in sequence, these colors provide a go-to palette for representing data with clarity and consistency.
 
 | Data Colors                                                                                                | Name & Token                                      | Usage                       |
 | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | --------------------------- |
