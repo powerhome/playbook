@@ -31,16 +31,16 @@ Gem::Specification.new do |s|
   #   (file == "docs") || (file.include? "docs")
   # end
 
-  s.add_dependency "actionpack", ">= 5.2.4.5"
-  s.add_dependency "actionview", ">= 5.2.4.5"
-  s.add_dependency "activesupport", ">= 5.2.4.5"
+  s.add_dependency "actionpack", ">= 6.1.7.7"
+  s.add_dependency "actionview", ">= 6.1.7.7"
+  s.add_dependency "activesupport", ">= 6.1.7.7"
   s.add_dependency "react-rails", "2.6.1"
   s.add_dependency "view_component", "2.55.0"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 
-  s.add_development_dependency "byebug", "11.0.0"
+  s.add_development_dependency "byebug", "11.1.3"
   s.add_development_dependency "github_changelog_generator", "1.15.2"
-  s.add_development_dependency "rails", ">= 5.2.4.5"
+  s.add_development_dependency "rails", ">= 6.1.7.7"
   s.add_development_dependency "rspec-html-matchers", "0.9.1"
   s.add_development_dependency "rspec-rails", "~> 3.8", ">= 3.8.0"
   s.add_development_dependency "rubocop", "1.23.0"
