@@ -18,7 +18,6 @@ const FormGroupPhoneNumberInput = () => {
     <FormGroup>
         <Select
             blankSelection="Phone"
-            marginBottom="none"
             options={options}
             />
         <PhoneNumberInput
