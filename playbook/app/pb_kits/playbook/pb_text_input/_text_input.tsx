@@ -62,7 +62,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   const htmlProps = buildHtmlProps(htmlOptions)
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {
-     fitleredProps.marginBottom = "sm"
+     filteredProps.marginBottom = "sm"
   }
 
   const { alignment, border, icon } = addOn
