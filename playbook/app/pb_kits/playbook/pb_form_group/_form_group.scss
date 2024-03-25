@@ -72,10 +72,18 @@
     }
   }
 
-  & > div > [class^=pb_phone_number_input]:last-child {
+  & > div:not(:first-child) > [class^=pb_phone_number_input] {
     .text_input {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
+    }
+  }
+
+  & > div:not(:last-child) > [class^=pb_phone_number_input] {
+    .text_input {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right: none;
     }
   }
 
