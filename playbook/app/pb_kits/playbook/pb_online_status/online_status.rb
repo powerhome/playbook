@@ -4,7 +4,7 @@ module Playbook
   module PbOnlineStatus
     class OnlineStatus < Playbook::KitBase
       prop :status, type: Playbook::Props::Enum,
-                    values: %w[online offline away],
+                    values: %w[online offline away success warning error info neutral primary],
                     default: "offline"
 
       def classname

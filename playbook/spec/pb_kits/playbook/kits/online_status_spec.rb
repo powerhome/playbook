@@ -8,7 +8,7 @@ RSpec.describe Playbook::PbOnlineStatus::OnlineStatus do
   it {
     is_expected.to define_enum_prop(:status)
       .with_default("offline")
-      .with_values("online", "offline", "away")
+      .with_values("online", "offline", "away", "error", "neutral", "success", "warning", "info", "primary")
   }
 
   describe "#classname" do
