@@ -2,7 +2,8 @@
     aria: object.aria,
     id: object.id,
     data: object.data,
-    class: object.classname) do %>
+    class: object.classname,
+    **combined_html_options) do %>
     <% if object.valid? %>
       <%= pb_rails("avatar", props: {
         name: object.avatar_name,

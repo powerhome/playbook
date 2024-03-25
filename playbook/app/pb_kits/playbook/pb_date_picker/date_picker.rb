@@ -75,8 +75,7 @@ module Playbook
                         default: [1900, 2100]
 
       def classname
-        default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
-        generate_classname("pb_date_picker_kit") + default_margin_bottom
+        generate_classname("pb_date_picker_kit")
       end
 
       def date_picker_config

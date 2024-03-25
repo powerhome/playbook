@@ -195,14 +195,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }, [loading, updateLoadingStateRowCount])
 
-  const handleExpandOrCollapse = (row: Row<GenericObject>) => {
+  const handleExpandOrCollapse = async (row: Row<GenericObject>) => {
     onToggleExpansionClick && onToggleExpansionClick(row)
-
-    const expandedState = expanded
-    const targetParent = row?.parentId
-    return setExpanded(
-      updateExpandAndCollapseState(tableRows, expandedState, targetParent)
-    )
+  
+    const expandedState = expanded;
+    const targetParent = row?.parentId;
+    const updatedRows = await updateExpandAndCollapseState(tableRows, expandedState, targetParent)
+    setExpanded(updatedRows)
   }
 
   const ariaProps = buildAriaProps(aria)

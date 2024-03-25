@@ -1,0 +1,37 @@
+<%= content_tag(:div,
+      aria: object.aria,
+      class: object.classname,
+      data: object.data,
+      id: object.id) do %>
+        <% object.column_definitions.each_with_index do |column, index| %>
+            <%= pb_rails("table/table_cell", props: { tag:"div", classname:object.td_classname}) do %>
+                <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end" }) do %>
+                    <div style="padding-left: <%= depth * 1.25 %>em">
+                        <%= pb_rails("flex", props:{align: "center", column_gap: "xs"}) do %>
+                            <% if index.zero? && object.row[:children].present? %>
+                                <button class="gray-icon expand-toggle-icon">
+                                    <%= pb_rails("icon", props: { icon: "circle-play", cursor: "pointer" }) %>
+                                </button>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item", props:{padding_left: index.zero? && object.row[:children].present? ? "none" : "xs"}) do %>
+                                <% if index.zero? %>
+                                    <% if object.depth.zero? %>
+                                        <%= object.row[column[:accessor].to_sym] %>
+                                    <% else %>
+                                        <% object.depth_accessors.each_with_index do |item, accessor_index| %>
+                                            <% if object.depth - 1 == accessor_index %>
+                                                <% key = item.to_sym %>
+                                                <%= object.row[key] %>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                <% else %>
+                                    <%= object.row[column[:accessor].to_sym] %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+<% end %>
