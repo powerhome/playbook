@@ -60,6 +60,10 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
+  const filteredProps = {...props}
+  if (filteredProps.marginBottom === undefined) {
+     filteredProps.marginBottom = "sm"
+  }
 
   const { alignment, border, icon } = addOn
   const addOnAlignment = alignment === 'left' ? 'left' : 'right'
@@ -74,7 +78,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     'pb_text_input_kit',
     inline ? 'inline' : "",
     error ? 'error' : "",
-    globalProps(props),
+    globalProps(filteredProps),
     className,
   ])
   const addOnIcon = (

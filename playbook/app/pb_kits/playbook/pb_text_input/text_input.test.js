@@ -16,7 +16,7 @@ test('returns namespaced class name', () => {
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit).toHaveClass(kitClass)
+  expect(kit).toHaveClass(`${kitClass} mb_sm`)
 })
 
 test('returns additional class name', () => {
