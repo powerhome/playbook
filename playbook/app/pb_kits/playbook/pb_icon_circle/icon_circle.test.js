@@ -74,6 +74,7 @@ describe("IconCircle Kit", () => {
 
       test('displays size as expected', () => {
         [
+          "xxs",
           "xs",
           "sm",
           "md",

@@ -5,6 +5,7 @@
 @import "../pb_icon/icon";
 
 $pb_icon_circle_sizes: (
+  "xxs":  16px,
   "xs":   28px,
   "sm":   38px,
   "md":   60px,
@@ -62,5 +63,11 @@ $pb_icon_circle_sizes: (
         background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
       }
     }
+  }
+}
+
+[class^=pb_icon_circle_kit_xxs] {
+  svg {
+    width: 10px !important;
   }
 }
