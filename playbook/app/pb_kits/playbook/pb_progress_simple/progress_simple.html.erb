@@ -3,7 +3,8 @@
   id: object.id,
   data: object.data_values,
   class: object.classname,
-  style: object.style) do %>
+  style: object.style,
+  **combined_html_options) do %>
     <%= content_tag(:div, "",
       class: "progress_simple_value",
       style: object.value_style) %>

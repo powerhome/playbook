@@ -1,7 +1,8 @@
 <%= content_tag(:span,
     id: object.id,
     data: object.data,
-    class: object.classname) do %>
+    class: object.classname,
+    **combined_html_options) do %>
     <mark>
       <%= content.presence || object.text %>
     </mark>

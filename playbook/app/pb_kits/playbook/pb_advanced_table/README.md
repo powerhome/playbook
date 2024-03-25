@@ -81,7 +81,7 @@ const MOCK_DATA = [
             graduatedStudents: "43",
             children: [
               {
-                year: "2011",
+                year: "2021",
                 quarter: "Q1",
                 month: "February",
                 day: "15",
@@ -173,7 +173,7 @@ const MOCK_DATA = [
             graduatedStudents: "43",
             children: [
               {
-                year: "2011",
+                year: "2022",
                 quarter: "Q1",
                 month: "May",
                 day: "2",

@@ -2,7 +2,8 @@
     aria: object.aria,
     id: object.id,
     data: object.data,
-    class: object.classname) do %>
+    class: object.classname,
+    **combined_html_options) do %>
   <%= pb_rails("body", props: { 
         tag: "span", 
         classname: "pb_contact_kit", 

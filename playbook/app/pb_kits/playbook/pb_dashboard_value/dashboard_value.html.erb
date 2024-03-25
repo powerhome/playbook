@@ -2,7 +2,8 @@
     aria: object.aria,
     class: object.classname,
     data: object.data,
-    id: object.id) do %>
+    id: object.id,
+    **combined_html_options) do %>
   <% if object.stat_label.present? %>
     <%= pb_rails("body", props: { color: "light", text: object.stat_label } ) %>
   <% end %>

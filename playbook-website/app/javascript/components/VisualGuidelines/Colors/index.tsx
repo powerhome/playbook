@@ -25,8 +25,8 @@ import {
 const Colors = (): React.ReactElement => (
   <React.Fragment>
     <Background
-        margin="xl"
-        paddingX="xl"
+        className="token-wrapper"
+        padding="xl"
     >
       <Title
           marginBottom="lg"

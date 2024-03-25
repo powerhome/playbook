@@ -1,5 +1,6 @@
 <%= content_tag(object.tag,
-    object.tag == "button" ? object.options : object.link_options) do %>
+                object.tag == "button" ? object.options : object.link_options,
+                **combined_html_options) do %>
     <% if object.variant === "reaction" %>
         <% if icon && object.valid_emoji(object.icon) %>
             <%= pb_rails("flex", props:{ align: "center" }) do %>

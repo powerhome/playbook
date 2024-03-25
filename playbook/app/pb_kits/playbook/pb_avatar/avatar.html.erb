@@ -2,7 +2,8 @@
     id: object.id,
     data: object.data.merge(initials: object.initials),
     class: object.classname,
-    aria: object.aria) do %>
+    aria: object.aria,
+    **combined_html_options) do %>
   <%= content_tag(:div, data: { initials: object.initials }, class: "avatar_wrapper") do %>
     <%= pb_rails("image", props: { alt: object.alt_text, url: object.image_url, on_error: object.handle_img_error }) if object.image_url.present? %>
   <% end %>

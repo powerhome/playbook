@@ -67,10 +67,28 @@ module Playbook
     prop :id
     prop :data, type: Playbook::Props::HashProp, default: {}
     prop :aria, type: Playbook::Props::HashProp, default: {}
+    prop :html_options, type: Playbook::Props::HashProp, default: {}
     prop :children, type: Playbook::Props::Proc
 
     def object
       self
+    end
+
+    def combined_html_options
+      default_html_options.merge(html_options.deep_merge(data_attributes))
+    end
+
+  private
+
+    def default_html_options
+      {}
+    end
+
+    def data_attributes
+      {
+        data: data,
+        aria: aria,
+      }.transform_keys { |key| key.to_s.tr("_", "-") }
     end
   end
 end
