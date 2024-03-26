@@ -58,7 +58,7 @@ module SampleHelper
   def render_sample_ui(sample, type)
     case type
     when "rails"
-      render template: "samples/#{sample}/index.html.erb"
+      render template: "samples/#{sample}/index"
     when "react"
       react_component(sample.titleize.delete(" ").to_s)
     end

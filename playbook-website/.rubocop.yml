@@ -1,10 +1,16 @@
-inherit_from: ../.rubocop.yml
+inherit_from:
+  - ../.rubocop.yml
 
-require: 
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
   - rubocop-performance
 
 AllCops:
   Exclude:
+    - "config/**/*"
     - "bin/*"
     - "node_modules/**/*"
     - "vendor/**/*"
