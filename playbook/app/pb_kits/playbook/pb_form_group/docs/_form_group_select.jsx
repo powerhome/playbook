@@ -1,7 +1,7 @@
 import React from 'react'
 
 import FormGroup from '../_form_group'
-
+import PhoneNumberInput from '../../pb_phone_number_input/_phone_number_input'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
 
@@ -22,7 +22,6 @@ const FormGroupSelect = (props) => {
     <div>
       <FormGroup>
         <TextInput
-            label="Artist"
             placeholder="Enter Artist Name"
             {...props}
         />
@@ -32,6 +31,17 @@ const FormGroupSelect = (props) => {
             {...props}
         />
       </FormGroup>
+      <br />
+      <br />
+      <FormGroup>
+        <Select
+            blankSelection="Phone"
+            options={options}
+            />
+        <PhoneNumberInput
+            id='default'
+        />
+    </FormGroup>
     </div>
   )
 }
