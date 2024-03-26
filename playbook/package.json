@@ -40,7 +40,7 @@
     "@popperjs/core": "^2.6.0",
     "@tanstack/react-table": "8.9.2",
     "classnames": "^2.2.6",
-    "core-js": "3.29.1",
+    "core-js": "3.36.1",
     "file-loader": "^6.2.0",
     "flatpickr": "^4.6.13",
     "highcharts": "^9.0.0",
