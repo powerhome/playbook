@@ -13,7 +13,7 @@ const NUMBERS = ['$1,231,123,123.00', '$7,444,112,512.00']
 
 const NumberSpacing = ({ example }: {example: string}) => (
   <Example
-      description="When dealing with numbers it can be helpful to controll the way the font handles number spacing. A font like proxima nova is an open type face that enables us to use tabular spacing for example. This alligns the numbers equally to make those numbers in a table easier to compare. This is avaliable in EVERY kit as a global prop. See example:"
+      description="When dealing with numbers it can be helpful to control the way the font handles number spacing. A font like Proxima Nova is an open type face that enables us to use tabular spacing for example. This aligns the numbers equally to make those numbers in a table easier to compare. This is available in EVERY kit as a global prop. See example:"
       example={example}
       globalProps={{
         numberSpacing: ['tabular'],
