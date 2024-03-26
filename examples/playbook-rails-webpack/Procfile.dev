@@ -1,2 +1,2 @@
 web: bin/rails server -p 3000
-js: yarn build --watch
+js: NODE_OPTIONS=--openssl-legacy-provider yarn build --watch
