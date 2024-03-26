@@ -57,6 +57,26 @@ const AvatarDefault = (props) => {
           status="offline"
           {...props}
       />
+      <br/>
+      <Avatar
+          imageAlt="Terry Johnson Standing"
+          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+          name="Terry Johnson"
+          overlay={{component:"badge", text: "6", variant: "notification", placement:"top-right"}}
+          size="lg"
+          status="offline"
+          {...props}
+      />
+      <br/>
+      <Avatar
+          imageAlt="Terry Johnson Standing"
+          imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+          name="Terry Johnson"
+          overlay={{component:"icon", icon:"plus", variant:"royal", placement:"bottom-left"}}
+          size="xl"
+          status="offline"
+          {...props}
+      />
     </div>
   )
 }
