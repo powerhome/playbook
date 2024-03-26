@@ -42,15 +42,15 @@ module Playbook
 
       def chart_options
         {
-          align: align,
-          id: id,
-          colors: colors,
+          align:,
+          id:,
+          colors:,
           chartData: chart_data,
           dark: dark ? "dark" : "",
-          title: title,
-          height: height,
+          title:,
+          height:,
           type: style,
-          legend: legend,
+          legend:,
           dataLabelHtml: data_label_html,
           dataLabels: data_labels,
           tooltipHtml: tooltip_html,
@@ -60,11 +60,11 @@ module Playbook
           innerSize: inner_size,
           zMin: z_min,
           startAngle: start_angle,
-          rounded: rounded,
-          layout: layout,
+          rounded:,
+          layout:,
           verticalAlign: vertical_align,
-          x: x,
-          y: y,
+          x:,
+          y:,
         }
       end
 

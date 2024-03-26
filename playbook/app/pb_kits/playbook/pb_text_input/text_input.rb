@@ -42,7 +42,7 @@ module Playbook
       end
 
       def add_on_props
-        { dark: dark }.merge(add_on || {})
+        { dark: }.merge(add_on || {})
       end
 
     private
@@ -52,14 +52,14 @@ module Playbook
           autocomplete: autocomplete ? nil : "off",
           class: "text_input #{input_options.dig(:classname) || ''}",
           data: validation_data,
-          disabled: disabled,
+          disabled:,
           id: input_options.dig(:id) || id,
-          name: name,
+          name:,
           pattern: validation_pattern,
-          placeholder: placeholder,
-          required: required,
-          type: type,
-          value: value,
+          placeholder:,
+          required:,
+          type:,
+          value:,
         }.merge(input_options)
       end
 

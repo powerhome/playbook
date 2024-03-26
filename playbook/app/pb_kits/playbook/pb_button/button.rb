@@ -36,13 +36,13 @@ module Playbook
       def options
         options = {
           class: classname,
-          disabled: disabled,
-          id: id,
+          disabled:,
+          id:,
           role: "button",
           tabindex: 0,
-          type: type,
-          value: value,
-          form: form,
+          type:,
+          value:,
+          form:,
         }.compact
         combined_html_options.merge!(options) if combined_html_options.present?
       end

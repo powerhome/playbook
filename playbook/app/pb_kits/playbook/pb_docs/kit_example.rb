@@ -16,7 +16,7 @@ module Playbook
         if type == "rails"
           render inline: source
         elsif type == "react"
-          react_component example_key.camelize, { dark: dark }
+          react_component example_key.camelize, { dark: }
         elsif type == "swift"
           ## render the markdown file
           render inline: source

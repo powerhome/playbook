@@ -39,16 +39,16 @@ module Playbook
 
       def rich_text_options
         {
-          id: id,
-          inline: inline,
+          id:,
+          inline:,
           className: classname,
-          focus: focus,
-          simple: simple,
-          sticky: sticky,
+          focus:,
+          simple:,
+          sticky:,
           toolbarBottom: toolbar_bottom,
-          value: value,
-          template: template,
-          placeholder: placeholder,
+          value:,
+          template:,
+          placeholder:,
         }
       end
     end

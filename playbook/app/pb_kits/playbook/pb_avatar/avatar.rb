@@ -22,7 +22,7 @@ module Playbook
       end
 
       def online_status_props
-        { status: status, classname: "size_#{size}" }
+        { status:, classname: "size_#{size}" }
       end
 
       def alt_text

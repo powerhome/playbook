@@ -42,7 +42,7 @@ module Playbook
       def additional_input_options
         input_options.merge(
           id: input_id_present,
-          disabled: disabled
+          disabled:
         )
       end
 

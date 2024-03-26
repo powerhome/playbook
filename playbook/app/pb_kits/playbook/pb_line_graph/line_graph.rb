@@ -40,27 +40,27 @@ module Playbook
 
       def chart_options
         {
-          align: align,
-          id: id,
+          align:,
+          id:,
           className: classname,
           chartData: chart_data,
           dark: dark ? "dark" : "",
           type: chart_type,
-          title: title,
+          title:,
           subTitle: subtitle,
           axisTitle: axis_title,
           pointStart: point_start,
           xAxisCategories: x_axis_categories,
           yAxisMin: y_axis_min,
           yAxisMax: y_axis_max,
-          legend: legend,
+          legend:,
           toggleLegendClick: toggle_legend_click,
-          height: height,
-          colors: colors,
-          layout: layout,
+          height:,
+          colors:,
+          layout:,
           verticalAlign: vertical_align,
-          x: x,
-          y: y,
+          x:,
+          y:,
         }
       end
 

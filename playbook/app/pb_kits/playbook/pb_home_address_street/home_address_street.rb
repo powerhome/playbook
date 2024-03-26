@@ -49,28 +49,28 @@ module Playbook
 
       def city_emphasis_props
         {
-          address_house_style: address_house_style,
-          address_house_style2: address_house_style2,
-          city_state: city_state,
-          dark: dark,
-          home_id: home_id,
-          home_url: home_url,
-          new_window: new_window,
-          territory: territory,
-          zip: zip,
+          address_house_style:,
+          address_house_style2:,
+          city_state:,
+          dark:,
+          home_id:,
+          home_url:,
+          new_window:,
+          territory:,
+          zip:,
         }
       end
 
       def street_emphasis_props
         {
-          address_house_style: address_house_style,
-          address_house_style2: address_house_style2,
-          city_state_zip: city_state_zip,
-          dark: dark,
-          home_id: home_id,
-          home_url: home_url,
-          new_window: new_window,
-          territory: territory,
+          address_house_style:,
+          address_house_style2:,
+          city_state_zip:,
+          dark:,
+          home_id:,
+          home_url:,
+          new_window:,
+          territory:,
         }
       end
 

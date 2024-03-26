@@ -28,13 +28,13 @@ module Playbook
 
       def all_attributes
         {
-          id: id,
+          id:,
           prompt: blank_selection,
-          disabled: disabled,
-          required: required,
-          multiple: multiple,
-          onchange: onchange,
-          include_blank: include_blank,
+          disabled:,
+          required:,
+          multiple:,
+          onchange:,
+          include_blank:,
         }.merge(attributes)
       end
 

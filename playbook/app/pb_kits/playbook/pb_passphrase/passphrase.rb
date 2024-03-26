@@ -18,15 +18,15 @@ module Playbook
 
       def passphrase_options
         {
-          dark: dark,
-          id: id,
-          confirmation: confirmation,
+          dark:,
+          id:,
+          confirmation:,
           inputProps: input_props,
-          label: label,
+          label:,
           showTipsBelow: show_tips_below,
-          tips: tips,
+          tips:,
           uncontrolled: true,
-          value: value,
+          value:,
         }.compact
       end
     end
