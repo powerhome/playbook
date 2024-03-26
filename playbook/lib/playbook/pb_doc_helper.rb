@@ -11,11 +11,11 @@ module Playbook
       examples = examples.first(1) if limit_examples
       examples.map do |example|
         pb_rails "docs/kit_example", props: {
-          kit: kit,
+          kit:,
           example_title: example.values.first,
           example_key: example.keys.first,
-          show_code: show_code,
-          type: type,
+          show_code:,
+          type:,
           dark: dark_mode,
         }
       end.join.yield_self(&method(:raw))
@@ -70,10 +70,10 @@ module Playbook
     def render_pb_doc_kit(kit, type, limit_examples, code = true, dark_mode = false)
       title = pb_doc_render_clickable_title(kit, type)
       ui = raw("<div class='pb--docItem-ui'>
-          #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
+          #{pb_kit(kit:, type:, show_code: code, limit_examples:, dark_mode:)}</div>")
       title + ui
     end
-  # rubocop:enable Style/OptionalBooleanParameter
+    # rubocop:enable Style/OptionalBooleanParameter
 
   private
 

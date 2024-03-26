@@ -10,9 +10,9 @@ module Playbook
     private
 
       def numeric_in_range?(value)
-        (value.is_a?(::Numeric) &&
+        value.is_a?(::Numeric) &&
           value <= 100 &&
-          value >= 0)
+          value >= 0
       end
     end
   end

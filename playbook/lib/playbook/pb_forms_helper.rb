@@ -27,7 +27,7 @@ module Playbook
       classname = ["pb-form", kwargs[:class]].join(" ")
       options = kwargs.merge(
         class: classname,
-        data: data,
+        data:,
         builder: ::Playbook::Forms::Builder
       )
 

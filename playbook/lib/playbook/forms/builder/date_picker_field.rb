@@ -28,7 +28,7 @@ module Playbook
           }
         )
 
-        @template.pb_rails("date_picker", props: props) do
+        @template.pb_rails("date_picker", props:) do
           input
         end
       end

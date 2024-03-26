@@ -13,12 +13,12 @@ module Playbook
           props[:type] ||= "submit"
           props[:text] ||= value || submit_default_value
 
-          button(value, props: props)
+          button(value, props:)
         end
 
         def button(_value = nil, props:)
           view_context.content_tag(:li) do
-            view_context.pb_rails("button", props: props)
+            view_context.pb_rails("button", props:)
           end
         end
 

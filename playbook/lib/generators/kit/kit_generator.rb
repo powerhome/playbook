@@ -14,7 +14,7 @@ class KitGenerator < Rails::Generators::NamedBase
 
   def create_templates
     kit_name = name.strip.downcase
-    all_kits = (options[:rails] == false && options[:react] == false && options[:swift] == false)
+    all_kits = options[:rails] == false && options[:react] == false && options[:swift] == false
     @rails_kit = all_kits ? true : options[:rails]
     @react_kit = all_kits ? true : options[:react]
     @swift_kit = all_kits ? true : options[:swift]
@@ -128,7 +128,7 @@ class KitGenerator < Rails::Generators::NamedBase
     end
   end
 
-# rubocop:enable Style/StringConcatenation
+  # rubocop:enable Style/StringConcatenation
 private
 
   def platforms
@@ -178,7 +178,7 @@ private
 
     components << export_statement
     components.sort!
-    file_array = file_array[0..start] + components + file_array[finish..-1]
+    file_array = file_array[0..start] + components + file_array[finish..]
 
     File.open(path, "w+") { |f| f.write(file_array.join) }
   end

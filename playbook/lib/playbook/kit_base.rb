@@ -86,8 +86,8 @@ module Playbook
 
     def data_attributes
       {
-        data: data,
-        aria: aria,
+        data:,
+        aria:,
       }.transform_keys { |key| key.to_s.gsub("_", "-") }
     end
   end
