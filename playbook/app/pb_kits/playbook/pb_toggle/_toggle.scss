@@ -48,6 +48,21 @@ $transition: .2s ease-in-out;
     input {
       display: none;
 
+      &:disabled + .pb_toggle_control {
+        cursor: not-allowed;
+        opacity: 0.5; 
+        border: 3px solid $border_light;
+        background-color: $border_light;
+
+        &:after {
+          background-color: darken($neutral, 15%);
+        }
+      }
+    }
+
+    input:checked {
+      display: none;
+
       &:checked + .pb_toggle_control {
         border: $border_success;
         background-color: $color_checkbox_success;
@@ -61,11 +76,11 @@ $transition: .2s ease-in-out;
       &:disabled + .pb_toggle_control {
         cursor: not-allowed;
         opacity: 0.5; 
-        border: 3px solid $color_disabled;
-        background-color: $color_disabled;
+        border: 3px solid $text_lt_light;
+        background-color: $text_lt_light;
 
         &:after {
-          background-color: darken($color_disabled, 15%);
+          background-color: $neutral;
         }
       }
     }
