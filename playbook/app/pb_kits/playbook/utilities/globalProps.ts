@@ -119,19 +119,19 @@ type Position = {
 }
 
 type Top = {
-  top?: Sizes,
+  top?: Sizes | {value: string, inset: boolean},
 }
 
 type Right = {
-  right?: Sizes,
+  right?: Sizes | {value: string, inset: boolean},
 }
 
 type Bottom = {
-  bottom?: Sizes,
+  bottom?: Sizes | {value: string, inset: boolean},
 }
 
 type Left = {
-  left?: Sizes,
+  left?: Sizes | {value: string, inset: boolean},
 }
 
 type Shadow = {
@@ -441,11 +441,54 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     return css
   },
 
-  topProps: ({ top }: Top) => top ? `top_${top}` : '',
-  rightProps: ({ right }: Right) => right ? `right_${right}` : '',
-  bottomProps: ({ bottom }: Bottom) => bottom ? `bottom_${bottom}` : '',
-  leftProps: ({ left }: Left) => left ? `left_${left}` : '',
-
+  topProps: ({ top }) => {
+    let css = "";
+    if (typeof top === 'string') {
+      css += `top_${top}`;
+    } else if (typeof top === 'object' && top.inset) {
+      css += `top_${top.value}_inset`;
+    } else if (typeof top === 'object' && !top.inset) {
+      css += `top_${top.value}`;
+    }
+    return css;
+  },
+  
+  rightProps: ({ right }) => {
+    let css = "";
+    if (typeof right === 'string') {
+      css += `right_${right}`;
+    } else if (typeof right === 'object' && right.inset) {
+      css += `right_${right.value}_inset`;
+    } else if (typeof right === 'object' && !right.inset) {
+      css += `right_${right.value}`;
+    }
+    return css;
+  },
+  
+  bottomProps: ({ bottom }) => {
+    let css = "";
+    if (typeof bottom === 'string') {
+      css += `bottom_${bottom}`;
+    } else if (typeof bottom === 'object' && bottom.inset) {
+      css += `bottom_${bottom.value}_inset`;
+    } else if (typeof bottom === 'object' && !bottom.inset) {
+      css += `bottom_${bottom.value}`;
+    }
+    return css;
+  },
+  
+  leftProps: ({ left }) => {
+    let css = "";
+    if (typeof left === 'string') {
+      css += `left_${left}`;
+    } else if (typeof left === 'object' && left.inset) {
+      css += `left_${left.value}_inset`;
+    }else if (typeof left === 'object' && !left.inset) {
+      css += `left_${left.value}`;
+    }
+    return css;
+  },
+  
   textAlignProps: ({ textAlign }: TextAlign) => {
     if (typeof textAlign === 'object') {
       return getResponsivePropClasses(textAlign, 'text_align')

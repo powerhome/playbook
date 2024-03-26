@@ -55,7 +55,8 @@ const Position = ({
   secondExample
 }: {
   example: string,
-  tokensExample?: string
+  tokensExample?: string,
+  secondExample?: string
 }) => (
   <React.Fragment>
     <Example
