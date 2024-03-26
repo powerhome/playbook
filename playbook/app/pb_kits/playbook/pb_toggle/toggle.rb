@@ -15,13 +15,14 @@ module Playbook
                   values: %w[sm md],
                   default: "sm"
       prop :value
+      prop :disabled, type: Playbook::Props::Boolean, default: false
 
       def classname
         generate_classname("pb_toggle_kit", size, checked_class)
       end
 
       def input
-        check_box_tag(name, value, checked, input_options)
+        check_box_tag(name, value, checked, input_options.merge(disabled: disabled))
       end
 
     private

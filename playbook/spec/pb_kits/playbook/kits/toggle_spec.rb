@@ -12,6 +12,7 @@ RSpec.describe Playbook::PbToggle::Toggle do
   }
   it { is_expected.to define_boolean_prop(:checked).with_default(false) }
   it { is_expected.to define_prop(:name) }
+  it { is_expected.to define_prop(:disabled).with_default(false) }
   it { is_expected.to define_prop(:value) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
 
@@ -21,6 +22,7 @@ RSpec.describe Playbook::PbToggle::Toggle do
       expect(subject.new(classname: "additional_class").classname).to eq "pb_toggle_kit_sm_off additional_class"
       expect(subject.new(size: "md").classname).to eq "pb_toggle_kit_md_off"
       expect(subject.new(checked: true).classname).to eq "pb_toggle_kit_sm_on"
+      expect(subject.new(disabled: true).disabled).to eq true
     end
   end
 end
