@@ -24,9 +24,12 @@ module Playbook
 
       selected_props.map do |k|
         value = send(k)
-        return nil unless top_values.include? value
-
-        "top_#{value}"
+        css = if value.is_a?(Hash) && value[:inset] && top_values.include?(value[:value])
+                "top_#{value[:value]}_inset"
+              elsif top_values.include?(value)
+                "top_#{value}"
+              end
+        css
       end.compact.join(" ")
     end
   end
