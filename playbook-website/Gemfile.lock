@@ -2,9 +2,9 @@ PATH
   remote: ../playbook
   specs:
     playbook_ui (13.21.0)
-      actionpack (>= 7.0.8)
-      actionview (>= 7.0.8)
-      activesupport (>= 7.0.8)
+      actionpack (>= 7.0.8, >= 6.1.7.7)
+      actionview (>= 7.0.8, >= 6.1.7.7)
+      activesupport (>= 7.0.8, >= 6.1.7.7)
       react-rails (= 2.6.1)
       view_component (= 2.55.0)
       webpacker-react (~> 0.3.2)
