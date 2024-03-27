@@ -18,6 +18,7 @@ ENV NPM_VERSION 6.14.10
 ENV YARN_VERSION 1.22.19
 ENV NVM_DIR /home/app/.nvm
 ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash \
     && . $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
@@ -29,6 +30,9 @@ RUN apt-get update -y \
     && apt-get install -y shared-mime-info=1.15-1\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN bundle config --global silence_root_warning 1
+RUN bundle config --global path $BUNDLE_TO
 
 RUN bundle config --global silence_root_warning 1
 
