@@ -177,6 +177,19 @@ const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: st
   }).join(" ")
 }
 
+//reusable function for top, bottom, right and left props
+const getPositioningPropsClasses = (position: string, value: Sizes | {value: string, inset: boolean} ) => {
+  let css = "";
+  if (typeof value === 'string') {
+    css += `${position}_${value}`;
+  } else if (typeof value === 'object' && value.inset) {
+    css += `${position}_${value.value}_inset`;
+  } else if (typeof value === 'object') {
+    css += `${position}_${value.value}`;
+  }
+  return css;
+};
+
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
 
@@ -441,53 +454,15 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     return css
   },
 
-  topProps: ({ top }) => {
-    let css = "";
-    if (typeof top === 'string') {
-      css += `top_${top}`;
-    } else if (typeof top === 'object' && top.inset) {
-      css += `top_${top.value}_inset`;
-    } else if (typeof top === 'object' && !top.inset) {
-      css += `top_${top.value}`;
-    }
-    return css;
-  },
+
+  topProps: ({top}) => getPositioningPropsClasses('top', top), 
+
+  rightProps: ({right}) => getPositioningPropsClasses('right', right), 
+
+  bottomProps:({bottom}) =>  getPositioningPropsClasses('bottom', bottom), 
   
-  rightProps: ({ right }) => {
-    let css = "";
-    if (typeof right === 'string') {
-      css += `right_${right}`;
-    } else if (typeof right === 'object' && right.inset) {
-      css += `right_${right.value}_inset`;
-    } else if (typeof right === 'object' && !right.inset) {
-      css += `right_${right.value}`;
-    }
-    return css;
-  },
-  
-  bottomProps: ({ bottom }) => {
-    let css = "";
-    if (typeof bottom === 'string') {
-      css += `bottom_${bottom}`;
-    } else if (typeof bottom === 'object' && bottom.inset) {
-      css += `bottom_${bottom.value}_inset`;
-    } else if (typeof bottom === 'object' && !bottom.inset) {
-      css += `bottom_${bottom.value}`;
-    }
-    return css;
-  },
-  
-  leftProps: ({ left }) => {
-    let css = "";
-    if (typeof left === 'string') {
-      css += `left_${left}`;
-    } else if (typeof left === 'object' && left.inset) {
-      css += `left_${left.value}_inset`;
-    }else if (typeof left === 'object' && !left.inset) {
-      css += `left_${left.value}`;
-    }
-    return css;
-  },
+  leftProps: ({left}) => getPositioningPropsClasses('left', left),
+    
   
   textAlignProps: ({ textAlign }: TextAlign) => {
     if (typeof textAlign === 'object') {

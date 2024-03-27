@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require "playbook/position_props_css"
+
 module Playbook
   module Top
+    include Playbook::PositionPropsCss
+
     def self.included(base)
       base.prop :top
     end
@@ -24,11 +28,7 @@ module Playbook
 
       selected_props.map do |k|
         value = send(k)
-        css = if value.is_a?(Hash) && value[:inset] && top_values.include?(value[:value])
-                "top_#{value[:value]}_inset"
-              elsif top_values.include?(value)
-                "top_#{value}"
-              end
+        css = positioning_css("top", value) if top.present?
         css
       end.compact.join(" ")
     end
