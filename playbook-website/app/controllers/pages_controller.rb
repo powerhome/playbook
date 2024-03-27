@@ -70,6 +70,7 @@ class PagesController < ApplicationController
   def kit_category_show_rails
     params[:type] ||= "rails"
     @type = params[:type]
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     render template: "pages/kit_category_show"
   end
 
