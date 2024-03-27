@@ -119,19 +119,19 @@ type Position = {
 }
 
 type Top = {
-  top?: Sizes,
+  top?: Sizes | {value: string, inset: boolean},
 }
 
 type Right = {
-  right?: Sizes,
+  right?: Sizes | {value: string, inset: boolean},
 }
 
 type Bottom = {
-  bottom?: Sizes,
+  bottom?: Sizes | {value: string, inset: boolean},
 }
 
 type Left = {
-  left?: Sizes,
+  left?: Sizes | {value: string, inset: boolean},
 }
 
 type Shadow = {
@@ -176,6 +176,19 @@ const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: st
     return `${classPrefix}_${size}_${propValue}`
   }).join(" ")
 }
+
+//reusable function for top, bottom, right and left props
+const getPositioningPropsClasses = (position: string, value: Sizes | {value: string, inset: boolean} ) => {
+  let css = "";
+  if (typeof value === 'string') {
+    css += `${position}_${value}`;
+  } else if (typeof value === 'object' && value.inset) {
+    css += `${position}_${value.value}_inset`;
+  } else if (typeof value === 'object') {
+    css += `${position}_${value.value}`;
+  }
+  return css;
+};
 
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
@@ -441,11 +454,16 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     return css
   },
 
-  topProps: ({ top }: Top) => top ? `top_${top}` : '',
-  rightProps: ({ right }: Right) => right ? `right_${right}` : '',
-  bottomProps: ({ bottom }: Bottom) => bottom ? `bottom_${bottom}` : '',
-  leftProps: ({ left }: Left) => left ? `left_${left}` : '',
 
+  topProps: ({top}) => getPositioningPropsClasses('top', top), 
+
+  rightProps: ({right}) => getPositioningPropsClasses('right', right), 
+
+  bottomProps:({bottom}) =>  getPositioningPropsClasses('bottom', bottom), 
+  
+  leftProps: ({left}) => getPositioningPropsClasses('left', left),
+    
+  
   textAlignProps: ({ textAlign }: TextAlign) => {
     if (typeof textAlign === 'object') {
       return getResponsivePropClasses(textAlign, 'text_align')
