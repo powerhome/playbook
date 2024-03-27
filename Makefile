@@ -1,9 +1,9 @@
 SHELL=/bin/bash -o pipefail
 namespace ?= playbook-${environment}
 
-cluster=${shell playbook-website/bin/deployer bin/cluster_for_review_stack $(environment)}
-cluster_short_name=${shell playbook-website/bin/deployer bin/cluster_for_review_stack $(environment) short}
-review_cluster = ${shell playbook-website/bin/deployer bin/cluster_for_review_stack pr$(pr)}
+cluster=${shell playbook-website/bin/deployer playbook-website/bin/cluster_for_review_stack $(environment)}
+cluster_short_name=${shell playbook-website/bin/deployer playbook-website/bin/cluster_for_review_stack $(environment) short}
+review_cluster = ${shell playbook-website/bin/deployer playbook-website/bin/cluster_for_review_stack pr$(pr)}
 
 start:
 	docker compose up
