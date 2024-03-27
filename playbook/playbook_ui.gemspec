@@ -45,8 +45,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-rails", "~> 3.8", ">= 3.8.0"
   s.add_development_dependency "rubocop"
   s.add_development_dependency "rubocop-performance", "~> 1.11.5"
-  s.add_development_dependency "spring"
-  s.add_development_dependency "spring-watcher-listen"
   s.add_development_dependency "tzinfo-data", "1.2018.9"
   s.add_development_dependency "will_paginate", "3.3.1"
 end
