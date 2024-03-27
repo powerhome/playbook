@@ -32,9 +32,6 @@ RUN apt-get update -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN bundle config --global silence_root_warning 1
-RUN bundle config --global path $BUNDLE_TO
-
-RUN bundle config --global silence_root_warning 1
 
 # Setup service
 COPY --link playbook-website/services/puma.sh /home/app/src/playbook-website/services/puma.sh
