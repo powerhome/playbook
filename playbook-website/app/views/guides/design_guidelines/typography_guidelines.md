@@ -16,7 +16,7 @@ For our Typography Tokens refer to [Typography](https://playbook.powerapp.cloud/
 ‣ [Typography in Tables](#Typography-in-Tables)
 [Typography Accessibility Standards](#Typography-Accessibility-Standards)
 
-Typography serves as the backbone of any design system. It’s not just page titles and copy, typography is everywhere, in navigation labels, buttons, captions, form fields and more. It is essential for providing context, guiding users and delivering the core content of an application.
+Typography serves as the backbone of any design system. It’s not just for page titles and copy; typography is everywhere, from navigation labels to buttons, captions, form fields, and more. It is essential for providing context, guiding users, and delivering the core content of an application.
 
 Playbook’s typography plays a crucial role in shaping the user experience. As a design system primarily used for business software applications, we know that readability is vital for effortless navigation and easy comprehension. To achieve this Playbook uses a professional, unembellished san-serif front and prioritizes intuitive hierarchy in our typography styles. 
 
