@@ -11,7 +11,7 @@ module Playbook
         if precision.nil?
           number_with_delimiter(value, delimiter: ",", separator: ".")
         else
-          number_with_precision(value, precision:, delimiter: ",", separator: ".")
+          number_with_precision(value, precision: precision, delimiter: ",", separator: ".")
         end
       end
 

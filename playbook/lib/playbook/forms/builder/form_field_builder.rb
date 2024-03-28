@@ -21,7 +21,7 @@ module Playbook
 
             input = super(name, **options, &block)
 
-            @template.pb_rails(kit_name, props:) do
+            @template.pb_rails(kit_name, props: props) do
               input
             end
           end

@@ -23,9 +23,9 @@ module Playbook
 
       def chart_options
         {
-          size:,
-          widths:,
-          colors:,
+          size: size,
+          widths: widths,
+          colors: colors,
         }
       end
     end

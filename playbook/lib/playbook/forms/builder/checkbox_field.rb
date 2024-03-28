@@ -18,11 +18,11 @@ module Playbook
 
         if props[:label]
           @template.pb_rails("caption", props: { text: label_text, margin_bottom: "xs" }) +
-            @template.pb_rails("checkbox", props:) do
+            @template.pb_rails("checkbox", props: props) do
               input
             end
         else
-          @template.pb_rails("checkbox", props:) do
+          @template.pb_rails("checkbox", props: props) do
             input
           end
         end

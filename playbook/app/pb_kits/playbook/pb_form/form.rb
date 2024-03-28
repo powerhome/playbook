@@ -18,11 +18,11 @@ module Playbook
 
       def form_options
         {
-          id:,
-          aria:,
+          id: id,
+          aria: aria,
           class: classname,
-          data:,
-          validate:,
+          data: data,
+          validate: validate,
         }.merge(prop(:options) || prop(:form_system_options) || {})
       end
     end

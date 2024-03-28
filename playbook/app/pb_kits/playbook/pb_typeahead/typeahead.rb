@@ -57,17 +57,17 @@ module Playbook
 
       def typeahead_react_options
         base_options = {
-          dark:,
+          dark: dark,
           defaultValue: default_options,
-          error:,
-          id:,
-          inline:,
+          error: error,
+          id: id,
+          inline: inline,
           isMulti: is_multi,
-          label:,
+          label: label,
           multiKit: multi_kit,
-          name:,
-          options:,
-          placeholder:,
+          name: name,
+          options: options,
+          placeholder: placeholder,
           plusIcon: plus_icon,
         }
 

@@ -51,14 +51,14 @@ module Playbook
         {
           classname: "dollar_sign",
           color: "light",
-          dark:,
+          dark: dark,
         }
       end
 
       def caption_props
         {
           text: label,
-          dark:,
+          dark: dark,
         }
       end
 
@@ -67,7 +67,7 @@ module Playbook
           size: size_value,
           text: abbreviate ? abbreviated_value : whole_value,
           classname: "pb_currency_value",
-          dark:,
+          dark: dark,
         }
       end
 
@@ -76,7 +76,7 @@ module Playbook
           text: units_element,
           color: "light",
           classname: "unit",
-          dark:,
+          dark: dark,
         }
       end
 

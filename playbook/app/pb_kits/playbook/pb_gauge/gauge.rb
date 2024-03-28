@@ -24,22 +24,22 @@ module Playbook
 
       def chart_options
         {
-          id:,
+          id: id,
           chartData: chart_data,
           circumference: full_circle ? [0, 360] : [-100, 100],
           dark: dark ? "dark" : "",
           disableAnimation: disable_animation,
-          height:,
-          min:,
-          max:,
-          title:,
-          suffix:,
-          prefix:,
+          height: height,
+          min: min,
+          max: max,
+          title: title,
+          suffix: suffix,
+          prefix: prefix,
           showLabels: show_labels,
-          style:,
+          style: style,
           tooltipHtml: tooltip_html,
           type: style,
-          colors:,
+          colors: colors,
         }
       end
 

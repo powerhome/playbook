@@ -28,17 +28,17 @@ module Playbook
 
       def phone_number_input_options
         {
-          id:,
-          dark:,
-          disabled:,
-          error:,
+          id: id,
+          dark: dark,
+          disabled: disabled,
+          error: error,
           initialCountry: initial_country,
-          label:,
-          name:,
+          label: label,
+          name: name,
           onlyCountries: only_countries,
           preferredCountries: preferred_countries,
-          required:,
-          value:,
+          required: required,
+          value: value,
         }
       end
     end

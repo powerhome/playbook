@@ -5,7 +5,7 @@ module Playbook
     class Builder
       def typeahead(name, _options = {}, _html_options = {}, props: {})
         props[:name] = name
-        @template.pb_rails("typeahead", props:)
+        @template.pb_rails("typeahead", props: props)
       end
     end
   end

@@ -26,14 +26,14 @@ module Playbook
 
       def multi_level_select_options
         {
-          id:,
+          id: id,
           inputDisplay: input_display,
-          name:,
+          name: name,
           treeData: tree_data,
           returnAllSelected: return_all_selected,
           selectedIds: selected_ids,
-          input_name:,
-          variant:,
+          input_name: input_name,
+          variant: variant,
         }
       end
     end

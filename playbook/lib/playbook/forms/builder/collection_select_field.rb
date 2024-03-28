@@ -10,7 +10,7 @@ module Playbook
         html_options[:required] = "required" if props[:required]
         input = super(name, collection, value_method, text_method, options, html_options)
 
-        @template.pb_rails("select", props:) do
+        @template.pb_rails("select", props: props) do
           input
         end
       end
