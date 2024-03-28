@@ -524,3 +524,12 @@ Processing by PagesController#index as HTML
 Completed 200 OK in 5665ms (Views: 5654.3ms | ActiveRecord: 0.0ms | Allocations: 418485)
 
 
+Started GET "/" for ::1 at 2024-03-26 17:07:43 -0400
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 24.5ms | Allocations: 11065)
+  Rendered layout layouts/application.html.erb (Duration: 5048.9ms | Allocations: 651940)
+Completed 200 OK in 5065ms (Views: 5052.3ms | ActiveRecord: 0.0ms | Allocations: 658595)
+
+

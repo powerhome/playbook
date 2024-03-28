@@ -73,7 +73,7 @@ module Playbook
           #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
       title + ui
     end
-  # rubocop:enable Style/OptionalBooleanParameter
+    # rubocop:enable Style/OptionalBooleanParameter
 
   private
 

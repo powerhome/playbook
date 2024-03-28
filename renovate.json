@@ -13,7 +13,6 @@
         "@rails/webpacker",
         "babel",
         "bundler",
-        "node-sass",
         "rails",
         "react",
         "react-dom",

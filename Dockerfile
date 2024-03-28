@@ -6,7 +6,7 @@ RUN mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
     apt update && apt install -y ca-certificates && \
     mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d
 
-RUN bash -lc 'rvm remove all --force && rvm install ruby-3.3.0 && rvm --default use ruby-3.3.0 && gem install bundler -v 2.2.31'
+RUN bash -lc 'rvm remove all --force && rvm install ruby-3.3.0 && rvm --default use ruby-3.3.0 && gem install bundler -v 2.5.3'
 RUN /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
 
@@ -18,6 +18,7 @@ ENV NPM_VERSION 6.14.10
 ENV YARN_VERSION 1.22.19
 ENV NVM_DIR /home/app/.nvm
 ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash \
     && . $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
@@ -65,7 +66,6 @@ COPY --link --chown=9999:9999 --from=jspackages /home/app/src /home/app/src
 # Build Library
 RUN --mount=id=yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
     yarn install --frozen-lockfile
-RUN curl https://github.com/sass/node-sass/releases/download/v4.13.0/linux-x64-64_binding.node -o node_modules/node-sass/vendor/linux-x64-64_binding.node
 
 FROM jsdeps AS release
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO

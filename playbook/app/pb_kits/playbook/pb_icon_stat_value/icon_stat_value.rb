@@ -33,7 +33,6 @@ module Playbook
       end
 
       def title_size
-        # rubocop:disable Style/CaseLikeIf
         if size == "lg"
           1
         elsif size == "md"
@@ -41,7 +40,6 @@ module Playbook
         else
           3
         end
-        # rubocop:enable Style/CaseLikeIf
       end
     end
   end

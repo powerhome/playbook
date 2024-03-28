@@ -72,7 +72,10 @@ Optional:
 
 Example:
 
+  app bin/container/remote_exec --namespace=nitro-web-pr12345 --cluster=app-beta-gm bash -l
   app bin/container/remote_exec --namespace=playbook-pr12345 --cluster=app-beta-gm bash -l
+  playbook-website/bin/deployer bash -lc "playbook-website/bin/remote_exec --time-to-live $(time-to-live) --cluster $(review_cluster) --namespace nitro-web-pr$(pr) bundle exec rails console"
+
 
 EOF
     exit

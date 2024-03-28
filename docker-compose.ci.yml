@@ -3,5 +3,3 @@ services:
     build:
       target: prod
     volumes: []
-  webpacker:
-    volumes: []
