@@ -1,3 +1,5 @@
+**NOTE**: If using `expandedControl` the dev is expected to manage the row level expansion state themselves, the kit itself will NOT do it by default.
+
 `expandedControl` is an optional prop that can be used to gain greater control over the expansion state of the Advanced Table. Tanstack handles expansion itself, however it does provide for a way to handle the state manually if needed. Usecases for this include needing to store the expansion state so it persists on page reload, set an initial expansion state, etc. 
 
 In this example we are showing that if initial expansion state is set, it will render the table expanded according to that state. 

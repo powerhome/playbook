@@ -24,12 +24,16 @@ export const CustomCell = ({
   row,
   value,
 }: CustomCellProps & GlobalProps) => {
-  const { setExpanded, expanded, inlineRowLoading } = useContext(AdvancedTableContext)
+  const { setExpanded, expanded, expandedControl, inlineRowLoading } = useContext(AdvancedTableContext);
 
   const handleOnExpand = (row: Row<GenericObject>) => {
-    onRowToggleClick && onRowToggleClick(row)
-    setExpanded({ ...expanded, [row.id]: !row.getIsExpanded() })
-  }
+    onRowToggleClick && onRowToggleClick(row);
+    
+    if (!expandedControl) {
+      setExpanded({ ...expanded, [row.id]: !row.getIsExpanded() });
+    }
+  };
+
   const RowHasChildren = row.original.children ? true : false
   const renderButton = inlineRowLoading ? RowHasChildren : row.getCanExpand()
 

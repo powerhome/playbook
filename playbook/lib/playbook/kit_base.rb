@@ -88,7 +88,7 @@ module Playbook
       {
         data: data,
         aria: aria,
-      }.transform_keys { |key| key.to_s.gsub("_", "-") }
+      }.transform_keys { |key| key.to_s.tr("_", "-") }
     end
   end
 end

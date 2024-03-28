@@ -44,11 +44,16 @@ const AdvancedTableExpandedControl = (props) => {
     onChange: setExpanded,
   }
 
+  const onRowToggleClick = (row) => {
+    setExpanded({ ...expanded, [row.id]: !expanded[row.id] })
+  }
+
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           expandedControl={expandedControl}
+          onRowToggleClick={onRowToggleClick}
           tableData={MOCK_DATA}
           {...props}
       />
