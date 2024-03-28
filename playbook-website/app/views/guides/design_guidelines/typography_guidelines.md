@@ -4,7 +4,7 @@ description: Typography serves as the backbone of any design system. It’s not 
 icon: font-case
 ---
 
-For our Typography Tokens refer to [Typography]https://playbook.powerapp.cloud/visual_guidelines/typography in [Tokens & Guidelines](https://playbook.powerapp.cloud/visual_guidelines)
+For our Typography Tokens refer to [Typography](https://playbook.powerapp.cloud/visual_guidelines/typography) in [Tokens & Guidelines](https://playbook.powerapp.cloud/visual_guidelines)
 
 #### Index
 
@@ -28,99 +28,102 @@ When swapping out the default Playbook font, we recommend using a simple sans-se
 
 ## Typography Usage & Best Practices
 
-#### Typography Styles
+### Typography Styles
 
 Playbook offers 13 different text styles within four different text components. Each component is built for a specific purpose that helps ensure consistency of usage. 
 
-| Typography                           |  Usage                                                                                                     |
-|--------------------------------------|------------------------------------------------------------------------------------------------------------|
-| Title 1                              |  <small> Largest font size used for banners and covers on homepages. </small> |
-| Title 1 Light                        |  <small> Light alternative to default Title 1 </small> |
-| Title 2                              |  <small> Secondary title size used for regular page titles </small> |
-| Title 2 Light                        |  <small> Less emphasis than Title 2, good for main callouts that are not the page’s title, ie. dashboard numbers. </small> |
-| Title 3                              |  <small> An h3 title size </small> |
-| Title 3 Light                        |  <small> Light alternative to default Title 3 </small> |
-| Title 4                              |  <small> Useful as a header 4 for subsection titles or emphasis in a table row </small> |
-| Large Caption                        |  <small> A larger caption style that can be used sparingly as a subsection title or large label. </small> |
-| Body                                 |  <small> Default body text size, used for paragraphs and main text content. </small> |
-| Caption                              |  <small> Default caption styling, often used underneath a title for a singular phrase or sentence </small> |
-| Subcaption                           |  <small> A smaller caption style for information not key to the page’s function </small> |
-| Detail Bold                          |  <small> Used sparingly for emphasis on secondary information </small> |
-| Detail                               |  <small> Used for secondary information. Useful in information dense tables </small> |
+| Typography                                                     |  Usage                                                                                                     |
+|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| <p class="pb_title_kit_size_1"> Title 1 </p>                   | Largest font size used for banners and covers on homepages. |
+| <p class="pb_title_kit_size_1_thin"> Title 1 Light </p>        | Light alternative to default Title 1 |
+| <p class="pb_title_kit_size_2"> Title 2 </p>                   | Secondary title size used for regular page titles |
+| <p class="pb_title_kit_size_2_thin"> Title 2 Light </p>        | Less emphasis than Title 2, good for main callouts that are not the page’s title, ie. dashboard numbers. |
+| <p class="pb_title_kit_size_3"> Title 3 </p>                   | An h3 title size |
+| <p class="pb_title_kit_size_3_thin"> Title 3 Light </p>        | Light alternative to default Title 3 |
+| <p class="pb_title_kit_size_4"> Title 4 </p>                   | Useful as a header 4 for subsection titles or emphasis in a table row |
+| <p class="pb_caption_kit_lg_color_default mt_xxs"> Large Caption </p> | A larger caption style that can be used sparingly as a subsection title or large label. |
+| <p class="pb_body_kit mt_xxs"> Body </p>                             | Default body text size, used for paragraphs and main text content. |
+| <p class="pb_caption_kit_md_color_default mt_xxs"> Caption </p>      | Default caption styling, often used underneath a title for a singular phrase or sentence |
+| <p class="pb_caption_kit_xs_color_default mt_xxs"> Subcaption </p>   | A smaller caption style for information not key to the page’s function |
+| <p class="pb_detail_kit_color_default bold mt_xxs"> Detail Bold </p> | Used sparingly for emphasis on secondary information |
+| <p class="pb_detail_kit_color_default mt_xxs"> Detail </p>           | Used for secondary information. Useful in information dense tables |
 
 Some Playbook components such as our button and badge, use variations of our text styles with slightly different kerning or font sizes. Differentiating these components text styles give visual cues to the user that they are conveying different information. 
 
-<img src="https://github.com/powerhome/playbook/assets/48187916/6acfdc97-be32-47f6-b955-7c80c871414f" alt="Button Imagery">
+<img style="margin:auto; display: block;" src="https://github.com/powerhome/playbook/assets/48187916/6acfdc97-be32-47f6-b955-7c80c871414f" alt="Button Imagery">
 
-#### Creating Visual Hierarchy with Typography
+### Creating Visual Hierarchy with Typography
 
 Typography hierarchy plays a key role in guiding users through interfaces and ensuring important information is not overlooked. Using the following concepts, Playbook establishes a clear hierarchy to effectively guide the viewer's attention and create a seamless experience.
 
+
+<div class="typography-guidelines">
+
 <div class="typography-principle">
+
 <div>
-<h4>
-Weight
-</h4>
- * Bolder weights command attention and signify importance.
- * Lighter weights are often employed for supporting content or lesser emphasis.
+<p class="pb_caption_kit_md"> Weight </p>
+ <li> Bolder weights command attention and signify importance. </li>
+ <li> Lighter weights are often employed for supporting content or lesser emphasis. </li>
 </div>
-<img src="https://github.com/powerhome/playbook/assets/48187916/a18ea880-ef8b-4feb-b662-47c06d0667e6" width="338" alt="Example of font weight usage">
+<img  src="https://github.com/powerhome/playbook/assets/48187916/a18ea880-ef8b-4feb-b662-47c06d0667e6" alt="Example of font weight usage">
 </div>
 
 <div class="typography-principle">
-<div>
-  <h4>
-  Case
-</h4>
- * Uppercase text can convey formality and importance; it is used most commonly as labels and to designate sections.
- * Sentence case or lowercase text is generally easier to read and is suitable for longer passages.
-</div>
-<img src="https://github.com/powerhome/playbook/assets/48187916/62196a7c-2ddf-45e4-a6dd-825b8680b704" width="338" alt="Example of font case usage">
-</div>
 
-<div class="typography-principle">
 <div>
-  <h4>
-  Size
-</h4>
- * Larger font sizes denote importance and hierarchy.
- * Smaller font sizes are typically used for secondary information or details.
+<p class="pb_caption_kit_md"> Case </p>
+<li> Uppercase text can convey formality and importance; it is used most commonly as labels and to designate sections.</li>
+<li> Sentence case or lowercase text is generally easier to read and is suitable for longer passages. </li>
 </div>
-<img src="https://github.com/powerhome/playbook/assets/48187916/24dcea48-4180-47fc-9cc4-65c81e252c6a" width="338" alt="Example of font size usage">
+<img src="https://github.com/powerhome/playbook/assets/48187916/62196a7c-2ddf-45e4-a6dd-825b8680b704" alt="Example of font case usage">
 </div>
 
 <div class="typography-principle">
 <div>
-  <h4>
-  Position
-</h4>
- * Text positioned prominently at the top or center tends to grab attention and signal importance.
- * Secondary information may be placed off to the side or at the bottom for less emphasis.
+<p class="pb_caption_kit_md"> Size </p>
+
+ <li> Larger font sizes denote importance and hierarchy. </li>
+ <li> Smaller font sizes are typically used for secondary information or details. </li>
 </div>
-<img src="https://github.com/powerhome/playbook/assets/48187916/e004f99e-4ad1-4ba2-8065-09f5b9f50773" width="338" alt="Example of font position">
+<img src="https://github.com/powerhome/playbook/assets/48187916/24dcea48-4180-47fc-9cc4-65c81e252c6a" alt="Example of font size usage">
+</div>
+
+<div class="typography-principle">
+<div>
+<p class="pb_caption_kit_md"> Position </p>
+<li> Text positioned prominently at the top or center tends to grab attention and signal importance.
+</li>
+<li>
+Secondary information may be placed off to the side or at the bottom for less emphasis.
+</li>
+</div>
+<img src="https://github.com/powerhome/playbook/assets/48187916/e004f99e-4ad1-4ba2-8065-09f5b9f50773" alt="Example of font position">
 </div>
 
 
 <div class="typography-principle">
 <div>
-  <h4>
-  Alignment
-</h4>
- * Centered or justified alignment can impart a formal or structured appearance.
- * Left-aligned text is often easier to read and lends a more casual or contemporary feel.
+<p class="pb_caption_kit_md"> Alignment </p>
+ <li> Centered or justified alignment can impart a formal or structured appearance. </li>
+ <li> Left-aligned text is often easier to read and lends a more casual or contemporary feel. </li>
 </div>
-<img src="https://github.com/powerhome/playbook/assets/48187916/d2c95e5e-5350-411f-b179-85859729425f" width="338" alt="Example of font alignment">
+<img src="https://github.com/powerhome/playbook/assets/48187916/d2c95e5e-5350-411f-b179-85859729425f" alt="Example of font alignment">
 </div>
 
-
-<small>
+<p>
+<small style="text-align: center; display: block">
 Example UI Using Clear Text Hierarchy
 </small>
-<img src="https://github.com/powerhome/playbook/assets/48187916/eab5e8fd-7434-4e92-81d8-553d42867618" width="850" alt="Example UI Layout">
+<img style="margin:0px;" src="https://github.com/powerhome/playbook/assets/48187916/eab5e8fd-7434-4e92-81d8-553d42867618" alt="Example UI Layout">
+</p>
+
+</div>
+
 
 Incorporating these concepts into our typography components and styles ensures effective communication of content hierarchy and enhances overall usability.
 
-#### Text Modifiers
+### Text Modifiers
 
 Outside of the given typography styles above, there are many other ways to create different styles. These can involve adding a different style tag, adjusting font weights, and adding tabular number spacing.
 
@@ -128,15 +131,15 @@ Outside of the given typography styles above, there are many other ways to creat
 
 While the Body kit supports using style tags within the kit, these tags can be used anywhere for custom cases.
 
-| Style                           | Tag                                  |  Definition                                                              |
-|---------------------------------|--------------------------------------|--------------------------------------------------------------------------|
-| <b> Bold </b>                   | <small>```<b>``` </small>            |  <small> Bolds text </small> |
-| <strong> Strong </strong>       | <small>```<strong>``` </small>       |  <small> Bolds text </small> |
-| <a> Link </a>                   | <small>```<a>``` </small>            |  <small> Changes to primary color to indicate text is clickable </small> |
-| <i> Italicized </i>             | <small>```<i>``` </small>            |  <small> Italicizes text </small> |
-| <em> Emphasized </em>           | <small>```<em>``` </small>           |  <small> Emphasis used on titles </small> |
-| <small> Small </small>          | <small>```<small>``` </small>        |  <small> Reduces font size </small> |
-| <u> Underlined </u>             | <small>```<u>``` </small>            |  <small> Underlines text </small> |
+| Style                           | Tag              |  Definition                                             |
+|---------------------------------|------------------|---------------------------------------------------------|
+| <b> Bold </b>                   | ```<b>```        |  Bolds text |
+| <strong> Strong </strong>       | ```<strong>```   |  Bolds text |
+| <a> Link </a>                   | ```<a>```        |  Changes to primary color to indicate text is clickable |
+| <i> Italicized </i>             | ```<i>```        |  Italicizes text |
+| <em> Emphasized </em>           | ```<em>```       |  Emphasis used on titles |
+| <small> Small </small>          | ```<small>```    |  Reduces font size |
+| <u> Underlined </u>             | ```<u>```        |  Underlines text |
 
 ##### Font Weights
 
@@ -144,22 +147,22 @@ Using font weights is crucial for typography and hierarchy because they play a s
 
 | Font Weight                      | Usage                                                                   |
 |----------------------------------|--------------------------------------------------------------------------|
-| Font Light                       |  <small> Good as a light option for titles with lower hierarchy </small> |
-| Font Regular                     |  <small> Used for common body text content and general usage </small> |
-| Font Bold                        |  <small> Default bold value used for general emphasis, pairs well with a smaller font size to act as a caption  </small> |
+| <p class="pb_body_kit mt_xxs typography-weight-100"> Font Thin </p>  | Good as a light option for titles with lower hierarchy |
+| <p class="pb_body_kit mt_xxs"> Font Regular </p>                     | Used for common body text content and general usage |
+| <p class="pb_body_kit mt_xxs typography-weight-600"> Font Bold </p>  | Default bold value used for general emphasis, pairs well with a smaller font size to act as a caption |
 
-#### Tabular Number Spacing
-<div class="color-guidelines">
+##### Tabular Number Spacing
+<div class="typography-principle">
 <p>
 Tabular number spacing, also known as monospacing, is a typographic feature where each digit occupies the same amount of horizontal space. This uniform spacing ensures that numbers align properly in columns, making it a particularly powerful format in data tables.
 <br/>
 <br/>
 Ensuring readable numbers is so crucial for business operations that Playbook offers tabular number spacing as a global prop within the library. It’s recommended on any numeric values for display on any typographic style.
 </p>
-<img src="https://github.com/powerhome/playbook/assets/48187916/ec72abe4-02b7-4a41-a2fe-60c13f7762c0" width="325" alt="Tabular Number Spacing">
+<img src="https://github.com/powerhome/playbook/assets/48187916/ec72abe4-02b7-4a41-a2fe-60c13f7762c0" width="325px" alt="Tabular Number Spacing">
 </div>
 
-#### Typography Kits
+### Typography Kits
 
 Playbook offers a range of ready-to-use typography layouts that prioritize displaying clear and concise information.   
 Designed to make the best use of the library’s typography options, layouts offered can be used for date and time formats, contact details, addresses, and label/value groupings. 
@@ -167,7 +170,7 @@ Through strategic use of color, font size, and font weight, Playbook establishes
 
 <img src="https://github.com/powerhome/playbook/assets/48187916/550ddd79-932f-4245-82c1-09b02de35345" alt="Tabular Number Spacing">
 
-#### Typography in Tables
+### Typography in Tables
 
 When working with complex tables, the UI is susceptible to becoming information dense and harder to read. Use the following best practices to create clear, readable tables.
 
@@ -179,7 +182,7 @@ When working with complex tables, the UI is susceptible to becoming information 
      1.  Emphasize primary content using Title 4 or heavier font weights for better clarity and emphasis.
      2.  Use subcaption, detail or other light weight, smaller font sizes for sub-copy or details.
 
-<img src="https://github.com/powerhome/playbook/assets/48187916/4dbcaace-0ce9-43b2-b6f8-9534f278d2b7" width="750" alt="Example table UI">
+<img style="margin:auto; display: block;" src="https://github.com/powerhome/playbook/assets/48187916/4dbcaace-0ce9-43b2-b6f8-9534f278d2b7" width="750" alt="Example table UI">
 
 ## Typography Accessibility Standards
 
@@ -200,10 +203,7 @@ Prioritizing the following within Playbook helps our design system be more acces
 Incorporate these typography best practices to optimize readability and comprehension, ensuring that UI remains clear and accessible. 
 
 For more information on accessibility in typography review these resources. 
-<br/>
-[https://accessibility.digital.gov/visual-design/typography/](https://accessibility.digital.gov/visual-design/typography/)
-<br/>
-[https://designsystem.digital.gov/components/typography/](https://designsystem.digital.gov/components/typography/)
-<br/>
+https://accessibility.digital.gov/visual-design/typography/
+https://designsystem.digital.gov/components/typography/
 https://webaim.org/standards/wcag/checklist
 

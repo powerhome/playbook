@@ -15,7 +15,7 @@
   line-height: $lh_loose;
   h4,h5,h6,ul,ol,blockquote,p {
     margin: 1rem 0 0 0;
-  }
+  }                    
   h1 {
     font-size: $text_larger;
     line-height: $text_larger;
@@ -156,4 +156,41 @@
       color: #faf6e4;
     }
   }
+
+  .typography-principle {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    column-gap: $space_xl;
+
+    div:first-child {
+      flex:2;
+      min-width: 250px;
+    }
+
+    img {
+      width: 340px;
+      margin: 0 auto;
+      flex:1;
+    }
+
+    @media screen and (max-width: $screen-md-min) {
+      flex-wrap: wrap;
+
+      img{
+      max-width: 340px;
+      }
+    }
+  }
 }
+
+.typography-weight-100 {
+font-weight: 100;
+}
+
+.typography-weight-600 {
+font-weight: 600;
+}
+
+
