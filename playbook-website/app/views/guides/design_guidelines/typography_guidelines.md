@@ -178,7 +178,7 @@ Through strategic use of color, font size, and font weight, Playbook establishes
 
 ### Typography in Tables
 
-When working with complex tables, the UI is susceptible to becoming information dense and harder to read. Use the following best practices to create clear, readable tables.
+When working with complex tables, the UI is susceptible to becoming information-dense and harder to read. Use the following best practices to create clear, readable tables.
 
 <div class="typography-list">
 <ul>
