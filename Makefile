@@ -31,7 +31,7 @@ shell:
 
 time-to-live ?= 3h
 reviewShell: ## Opens a shell in the given environment (i.e.: make reviewShell pr=14166)
-	./playbook-website/bin/deployer bash -lc "playbook-website/bin/remote_exec --time-to-live $(time-to-live) --cluster $(review_cluster) --namespace playbook-pr$(pr) bash --login"
+	./playbook-website/bin/deployer bash -lc "./playbook-website/bin/remote_exec --time-to-live $(time-to-live) --cluster $(review_cluster) --namespace playbook-pr$(pr) bash --login"
 
 console:
 	docker compose run web bin/rails console
