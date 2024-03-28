@@ -16,9 +16,6 @@ For our Typography Tokens refer to [Typography](https://playbook.powerapp.cloud/
 ‣ [Typography in Tables](#Typography-in-Tables)
 [Typography Accessibility Standards](#Typography-Accessibility-Standards)
 
-<br/>
-
-
 Typography serves as the backbone of any design system. It’s not just page titles and copy, typography is everywhere, in navigation labels, buttons, captions, form fields and more. It is essential for providing context, guiding users and delivering the core content of an application.
 
 Playbook’s typography plays a crucial role in shaping the user experience. As a design system primarily used for business software applications, we know that readability is vital for effortless navigation and easy comprehension. To achieve this Playbook uses a professional, unembellished san-serif front and prioritizes intuitive hierarchy in our typography styles. 
@@ -63,8 +60,10 @@ Typography hierarchy plays a key role in guiding users through interfaces and en
 
 <div>
 <p class="pb_caption_kit_md"> Weight </p>
+<ul>
  <li> Bolder weights command attention and signify importance. </li>
  <li> Lighter weights are often employed for supporting content or lesser emphasis. </li>
+</ul>
 </div>
 <img  src="https://github.com/powerhome/playbook/assets/48187916/a18ea880-ef8b-4feb-b662-47c06d0667e6" alt="Example of font weight usage">
 </div>
@@ -73,8 +72,10 @@ Typography hierarchy plays a key role in guiding users through interfaces and en
 
 <div>
 <p class="pb_caption_kit_md"> Case </p>
+<ul>
 <li> Uppercase text can convey formality and importance; it is used most commonly as labels and to designate sections.</li>
 <li> Sentence case or lowercase text is generally easier to read and is suitable for longer passages. </li>
+</ul>
 </div>
 <img src="https://github.com/powerhome/playbook/assets/48187916/62196a7c-2ddf-45e4-a6dd-825b8680b704" alt="Example of font case usage">
 </div>
@@ -82,9 +83,10 @@ Typography hierarchy plays a key role in guiding users through interfaces and en
 <div class="typography-principle">
 <div>
 <p class="pb_caption_kit_md"> Size </p>
-
+<ul>
  <li> Larger font sizes denote importance and hierarchy. </li>
  <li> Smaller font sizes are typically used for secondary information or details. </li>
+<ul>
 </div>
 <img src="https://github.com/powerhome/playbook/assets/48187916/24dcea48-4180-47fc-9cc4-65c81e252c6a" alt="Example of font size usage">
 </div>
@@ -92,11 +94,13 @@ Typography hierarchy plays a key role in guiding users through interfaces and en
 <div class="typography-principle">
 <div>
 <p class="pb_caption_kit_md"> Position </p>
+<ul>
 <li> Text positioned prominently at the top or center tends to grab attention and signal importance.
 </li>
 <li>
 Secondary information may be placed off to the side or at the bottom for less emphasis.
 </li>
+</ul>
 </div>
 <img src="https://github.com/powerhome/playbook/assets/48187916/e004f99e-4ad1-4ba2-8065-09f5b9f50773" alt="Example of font position">
 </div>
@@ -105,8 +109,10 @@ Secondary information may be placed off to the side or at the bottom for less em
 <div class="typography-principle">
 <div>
 <p class="pb_caption_kit_md"> Alignment </p>
+<ul>
  <li> Centered or justified alignment can impart a formal or structured appearance. </li>
  <li> Left-aligned text is often easier to read and lends a more casual or contemporary feel. </li>
+</ul>
 </div>
 <img src="https://github.com/powerhome/playbook/assets/48187916/d2c95e5e-5350-411f-b179-85859729425f" alt="Example of font alignment">
 </div>
@@ -174,13 +180,20 @@ Through strategic use of color, font size, and font weight, Playbook establishes
 
 When working with complex tables, the UI is susceptible to becoming information dense and harder to read. Use the following best practices to create clear, readable tables.
 
-1. Keep your typography choices simple. Avoid overwhelming the design with excessive options. 
-2. Maintain consistency in column headers and body content throughout to ensure coherence. 
-3. Avoid overly large titles or font sizes; instead, rely more on font weight and color variations to establish visual hierarchy effectively. 
-4. If your content is data heavy, consider utilizing the Detail kit over the Body kit. 
-5. For multi-line cells, make use of styles to create readability. 
-     1.  Emphasize primary content using Title 4 or heavier font weights for better clarity and emphasis.
-     2.  Use subcaption, detail or other light weight, smaller font sizes for sub-copy or details.
+<div class="typography-list">
+<ul>
+<li> Keep your typography choices simple. Avoid overwhelming the design with excessive options.  </li>
+<li> Maintain consistency in column headers and body content throughout to ensure coherence.  </li>
+<li> Avoid overly large titles or font sizes; instead, rely more on font weight and color variations to establish visual hierarchy effectively.  </li>
+<li> If your content is data heavy, consider utilizing the Detail kit over the Body kit.  </li>
+<li> For multi-line cells, make use of styles to create readability. </li>
+<ul>
+     <li> Emphasize primary content using Title 4 or heavier font weights for better clarity and emphasis. </li>
+     <li> Use subcaption, detail or other light weight, smaller font sizes for sub-copy or details. </li>
+</ul>
+</ul>
+
+</div>
 
 <img style="margin:auto; display: block;" src="https://github.com/powerhome/playbook/assets/48187916/4dbcaace-0ce9-43b2-b6f8-9534f278d2b7" width="750" alt="Example table UI">
 
@@ -192,14 +205,17 @@ Accessibility in typography is critical to ensuring inclusivity in usability, as
 There is no perfect font for accessibility, so it is important to follow best practices. 
 Prioritizing the following within Playbook helps our design system be more accessible.
 
-1. Ensure individual letterforms are distinct in shape to avoid confusion between characters like I, l, and 1, or 0 and O.
-2. Kerning and line height should be appropriate, too little or too much space will reduce readability.
-3. Sans-serif fonts are preferred for their simplicity and clarity, particularly on screens or at smaller sizes.
-4. Bolder weights can improve legibility, but excessive thickness may hinder readability, especially for longer passages. Avoid very light or bold font weights for text under 16px.
-5. Larger font sizes aid readability, particularly for users with visual impairments or on smaller screens. Important content should be displayed with a font size of 16px or larger.
-6. Ensure paragraphs and larger text blocks are scannable, with text blocks containing 45-80 characters.
-7. Consider WCAG guidelines when implementing color in typography. Text size 16px and below requires 4.5:1 color contrast between text and background, and 3:1 for 16px bold or larger text.
-
+<div class="typography-list">
+<ul>
+<li> Ensure individual letterforms are distinct in shape to avoid confusion between characters like I, l, and 1, or 0 and O. </li>
+<li> Kerning and line height should be appropriate, too little or too much space will reduce readability. </li>
+<li> Sans-serif fonts are preferred for their simplicity and clarity, particularly on screens or at smaller sizes. </li>
+<li> Bolder weights can improve legibility, but excessive thickness may hinder readability, especially for longer passages. Avoid very light or bold font weights for text under 16px. </li>
+<li> Larger font sizes aid readability, particularly for users with visual impairments or on smaller screens. Important content should be displayed with a font size of 16px or larger. </li>
+<li> Ensure paragraphs and larger text blocks are scannable, with text blocks containing 45-80 characters. </li>
+<li> Consider WCAG guidelines when implementing color in typography. Text size 16px and below requires 4.5:1 color contrast between text and background, and 3:1 for 16px bold or larger text. </li>
+</ul>
+</div>
 Incorporate these typography best practices to optimize readability and comprehension, ensuring that UI remains clear and accessible. 
 
 For more information on accessibility in typography review these resources. 
