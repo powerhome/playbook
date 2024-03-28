@@ -20,7 +20,7 @@ Typography serves as the backbone of any design system. It’s not just page tit
 
 Playbook’s typography plays a crucial role in shaping the user experience. As a design system primarily used for business software applications, we know that readability is vital for effortless navigation and easy comprehension. To achieve this Playbook uses a professional, unembellished san-serif front and prioritizes intuitive hierarchy in our typography styles. 
 
-When swapping out the default Playbook font, we recommend using a simple sans-serif font such as Proxima Nova or Ariel.
+When swapping out the default Playbook font, we recommend using a simple sans-serif font such as Proxima Nova or Arial.
 
 
 ## Typography Usage & Best Practices
