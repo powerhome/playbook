@@ -1,10 +1,6 @@
-import React from "react"
-import { AdvancedTable } from "../../"
-import MOCK_DATA from "./advanced_table_mock_data.json"
+<% require '../playbook/app/pb_kits/playbook/pb_advanced_table/docs/advanced_table_example_mock_data.rb' %>
 
-const AdvancedTableDefault = (props) => {
-  const columnDefinitions = [
-    {
+<% columnDefinitions = [{
       accessor: "year",
       label: "Year",
       cellAccessors: ["quarter", "month", "day"],
@@ -32,18 +28,6 @@ const AdvancedTableDefault = (props) => {
     {
       accessor: "graduatedStudents",
       label: "Graduated Students",
-    },
-  ]
+    }] %>
 
-  return (
-    <div>
-      <AdvancedTable
-          columnDefinitions={columnDefinitions}
-          tableData={MOCK_DATA}
-          {...props}
-      />
-    </div>
-  )
-}
-
-export default AdvancedTableDefault
+<%= pb_rails("advanced_table", props: {table_data: TABLE_DATA, column_definitions: columnDefinitions}) %>
