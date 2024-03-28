@@ -7879,10 +7879,10 @@ flatten@^1.0.2:
   resolved "https://npm.powerapp.cloud/flatten/-/flatten-1.0.3.tgz#c1283ac9f27b368abc1e36d1ff7b04501a30356b"
   integrity sha512-dVsPA/UwQ8+2uoFe5GHtiBMu48dWLTdsuEd7CKGlZlD78r1TTWBvDuFaFGKCo/ZfEr95Uk56vZoX86OsHkUeIg==
 
-flow-bin@0.198.1:
-  version "0.198.1"
-  resolved "https://npm.powerapp.cloud/flow-bin/-/flow-bin-0.198.1.tgz#5fdad4d572bdc76f9ab24890c335e1f7addcecd4"
-  integrity sha512-9jWC1GJgV5QyeBxvT0GtTQtaw55imDRIh//C5WaS/dijl7IP34CrNY2NgBSwzif516SktkG8KylQWJaslZI2QA==
+flow-bin@0.232.0:
+  version "0.232.0"
+  resolved "https://npm.powerapp.cloud/flow-bin/-/flow-bin-0.232.0.tgz#80587406cbb3a74577151ad27c6058b2a468c215"
+  integrity sha512-7uOycTN+Ys2nYRJRig5S2yN41ZokW7bC4K1GC4nCDa/3FAZLP5/mQbee6UjxFBP9MC4yUYi17bdFTFzCH8bHeg==
 
 flow-config-parser@^0.3.0:
   version "0.3.0"
@@ -10765,7 +10765,7 @@ minimist-options@4.1.0:
 
 minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.6:
   version "1.2.7"
-  resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.7.tgz#daa1c4d91f507390437c6a8bc01078e7000c4d18"
+  resolved "https://npm.powerapp.cloud/minimist/-/minimist-1.2.7.tgz#daa1c4d91f507390437c6a8bc01078e7000c4d18"
   integrity sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==
 
 minipass-collect@^1.0.2:
