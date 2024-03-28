@@ -14,6 +14,16 @@ $pb_icon_circle_sizes: (
   "xl":   100px,
 );
 
+@mixin svg_size($name, $match, $adjust) {
+  @if $name == $match {
+    $svg_xy: $adjust;
+    & > svg {
+      width: #{$svg_xy};
+      height: #{$svg_xy};
+    }
+  }
+}
+
 [class^=pb_icon_circle_kit] {
   display: flex;
   justify-content: center;
@@ -52,6 +62,8 @@ $pb_icon_circle_sizes: (
       flex-shrink: 0;
       flex-grow: 0;
       flex-basis: $size;
+
+      @include svg_size($name, "xxs", $size - 6px);
     }
   }
 
@@ -66,9 +78,3 @@ $pb_icon_circle_sizes: (
   }
 }
 
-[class^=pb_icon_circle_kit_xxs] {
-  svg {
-    width: 10px !important;
-    height: 10px !important;
-  }
-}
