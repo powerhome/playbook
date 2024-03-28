@@ -18,6 +18,12 @@ const FormGroupSelect = (props) => {
     { value: 'Other' },
   ]
 
+  const phoneOPtions = [
+    { value: 'Cell' },
+    { value: 'Work' },
+    { value: 'Home' },
+  ]
+
   return (
     <div>
       <FormGroup>
@@ -36,7 +42,7 @@ const FormGroupSelect = (props) => {
       <FormGroup>
         <Select
             blankSelection="Phone"
-            options={options}
+            options={phoneOPtions}
             />
         <PhoneNumberInput
             id='default'
