@@ -201,7 +201,7 @@ When working with complex tables, the UI is susceptible to becoming information-
 
 #### Color Accessibility Standards
 
-Accessibility in typography is critical to ensuring inclusivity in usability, as text is such atn integral part of any interface. 
+Accessibility in typography is critical to ensuring inclusivity in usability, as text is such an integral part of any interface. 
 There is no perfect font for accessibility, so it is important to follow best practices. 
 Prioritizing the following within Playbook helps our design system be more accessible.
 
