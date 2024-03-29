@@ -186,3 +186,44 @@
     }
   }
 }
+
+
+.guidelines-spacing-square {
+  margin: $space_xs !important;
+}
+
+.spacing-principle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  column-gap: $space_xl;
+
+  ul {
+    list-style-position: outside;
+    margin: $space-sm;
+  }
+
+  div:first-child {
+    flex:2;
+    min-width: 250px;
+  }
+
+  img {
+    width: 340px;
+    margin: 0 auto;
+    flex:1;
+  }
+
+  [class^=pb_card_kit]{
+    width: 340px;
+  }
+
+  @media screen and (max-width: $screen-md-min) {
+    flex-wrap: wrap;
+
+    img{
+    max-width: 340px;
+    }
+  }
+}
