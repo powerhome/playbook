@@ -1,7 +1,5 @@
 <%= pb_form_with(method: :get, multipart: true) do |form| %>
-  <%= form.text_field :name, style: "width: 20%", props: { placeholder: "Name" } %>
+  <%= form.text_field :name, style: "width: 140px", props: { placeholder: "Name" } %>
   <%= pb_rails("file_upload", props: {id: "import_file ", input_options: { name: "import_file" }}) %>
-  <div>
-    <%= pb_rails("button", props: { text: "Upload File" } ) %>
-  </div>
+  <%= pb_rails("button", props: { text: "Submit" } ) %>
 <% end %>

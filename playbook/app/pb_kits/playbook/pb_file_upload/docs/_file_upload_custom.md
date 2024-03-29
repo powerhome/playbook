@@ -1,5 +1,3 @@
-The `id` for the File Upload and the existing input you are choosing to wrap with our Kit with should match each other. This will ensure that the click on the button a.k.a, the underlying label's `for`, triggers the File Upload. Leverage the `input_options` global prop in order to do so.
-
 Leverage the `input_options` global prop in order to make the `id` for the File Upload and the existing input you are choosing to wrap with our Kit with match each other, which is a requirement. This will ensure that the click on the button a.k.a, the underlying label's `for`, triggers the File Upload. 
 
 This example shows a functioning upload within a form group (be sure to remove `method: :get`) using `input_options` to connect `name` to File Upload's `id` (`id` is outside of `input_options` so that both "Upload File" secondary button and the "No file chosen" text area pop up the finder window). 
