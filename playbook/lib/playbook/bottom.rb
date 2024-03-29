@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require "playbook/position_props_css"
+
 module Playbook
   module Bottom
+    include Playbook::PositionPropsCss
+
     def self.included(base)
       base.prop :bottom
     end
@@ -24,9 +28,8 @@ module Playbook
 
       selected_props.map do |k|
         value = send(k)
-        return nil unless bottom_values.include? value
-
-        "bottom_#{value}"
+        css = positioning_css("bottom", value) if bottom.present?
+        css
       end.compact.join(" ")
     end
   end
