@@ -80,10 +80,9 @@ Group related elements closely together and create space between distinct sectio
 Optimize spacing for diverse screens, adjusting proportionally to maintain legibility and hierarchy, ensuring a consistent interfaces.Playbook's library supports responsive layout in all components.
 </div>
 <span class="pb_card_kit_deselected_border_radius_xl shadow_deep p_md m_xs">
-<img width="356" alt="responsive spacing example" src="https://github.com/powerhome/playbook/assets/48187916/d3faa882-19f6-4ff2-bfd6-06ec4fd4e4b2">
+<img width="356" alt="responsive spacing example" src="https://github.com/powerhome/playbook/assets/48187916/38974b79-8e27-4517-8780-deb8c38a1792">
 </span>
 </div>
-
 
 <div class="spacing-principle">
 
