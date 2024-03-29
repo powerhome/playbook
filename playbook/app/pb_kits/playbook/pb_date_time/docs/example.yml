@@ -11,7 +11,7 @@ examples:
   - date_time_size: Size
 
   swift:
-  - dateTime_default_swift: Default
-  - dateTime_alignment_swift: Alignment
-  - dateTime_size_swift: Size
-  - dateTime_props_swift: ""
+  - date_time_default_swift: Default
+  - date_time_alignment_swift: Alignment
+  - date_time_size_swift: Size
+  - date_time_props_swift: ""
