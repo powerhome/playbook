@@ -407,6 +407,10 @@ kits:
         platforms: *web
         description: Badges can be used for notification, tags, and status. They are used for count and numbers.
         status: "stable"
+      - name: "online_status"
+        platforms: *web
+        description: Online Status is a small indicator that lets the user know the status of a person or item. 
+        status: "stable"
       - name: "pill"
         platforms: *all
         description: A pill uses both a keyword and a specific color to categorize an item. 
