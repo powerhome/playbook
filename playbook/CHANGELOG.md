@@ -1,7 +1,13 @@
-# 13.22.0
+# 🔨 Squashing Bugs, Enhancing Kits, and Introducing New Features! 🔨
+
 ##### March 27, 2024
 
-List of changes:
+![bugs](https://github.com/powerhome/playbook/assets/9158723/131d1168-3bf5-4e6d-8ea9-fd4f5e30b0e0)
+
+We squashed a lot of bugs, and spruced up Playbook as a whole by upgrading to Ruby 3.3.0. 
+We're also proud to announce that we will be upgrading Rails to 7.0.8 in the next release. 🙌
+
+[13.22.0](https://github.com/powerhome/playbook/tree/13.22.0) full list of changes:
 
 **Kit Enhancements:**
 
