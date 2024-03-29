@@ -77,9 +77,9 @@ Group related elements closely together and create space between distinct sectio
 <div class="spacing-principle">
 <div>
 <p class="pb_caption_kit_md"> Responsive Spacing </p>
-Optimize spacing for diverse screens, adjusting proportionally to maintain legibility and hierarchy, ensuring a consistent interfaces.Playbook's library supports responsive layout in all components.
+Optimize spacing for diverse screens, adjusting proportionally to maintain legibility and hierarchy, ensuring a consistent interfaces. Playbook's library supports responsive layout in all components.
 </div>
-<span class="pb_card_kit_deselected_border_radius_xl shadow_deep p_md m_xs">
+<span class="pb_card_kit_deselected_border_none_border_radius_xl shadow_deep py_none m_xs">
 <img width="356" alt="responsive spacing example" src="https://github.com/powerhome/playbook/assets/48187916/38974b79-8e27-4517-8780-deb8c38a1792">
 </span>
 </div>
@@ -95,7 +95,7 @@ Utilize intentional whitespace to delineate elements, establish hierarchy, preve
 
 
 
-## Accessibility
+## Accessibility Standards
 
 Improving accessibility via spacing design tokens ensures consistency, scalability, and adaptability across different screen sizes. Ample spacing facilitates smoother navigation.
 

@@ -216,7 +216,11 @@
   }
 
   [class^=pb_card_kit]{
-    width: 340px;
+    width: 322px;
+
+    img {
+      width: 175px;
+    }
   }
 
   @media screen and (max-width: $screen-md-min) {
