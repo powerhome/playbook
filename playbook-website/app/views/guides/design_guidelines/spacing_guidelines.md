@@ -14,7 +14,7 @@ For our Spacing Tokens refer to [Spacing](https://playbook.powerapp.cloud/visual
 [Layout Guidelines](#Layout-Guidelines)
 [Accessibility Standards](#Accessibility-Standards)
 
-Effective spacing in product design is key for user-friendliness. 
+Effective spacing in product design is key for user-friendliness.  
 Playbook uses spacing tokens for consistency, simplifying design and enabling clear, functional layouts. 
 Various spacing types contribute to a structured hierarchy. Consistency ensures precision and user-friendly design.
 
