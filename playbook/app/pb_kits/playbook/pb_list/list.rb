@@ -41,7 +41,6 @@ module Playbook
         dark ? "dark" : nil
       end
 
-      # rubocop:disable Style/CaseLikeIf
       def layout_class
         if layout == "right"
           "layout_right"
@@ -51,7 +50,6 @@ module Playbook
           ""
         end
       end
-      # rubocop:enable Style/CaseLikeIf
 
       def size_class
         size ? "large" : nil
