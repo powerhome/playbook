@@ -225,6 +225,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             columnDefinitions,
             enableToggleExpansion,
             expanded,
+            expandedControl,
             handleExpandOrCollapse,
             inlineRowLoading,
             loading,

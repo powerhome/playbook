@@ -60,6 +60,13 @@ test('should have sm size by default', () => {
     expect(kit).toHaveClass('pb_toggle_kit_sm_off')
 })
 
+test('should pass disabled prop', () => {
+    render(<ToggleDefault disabled />)
+    const kit = screen.getByTestId(testId)
+    const input = kit.querySelector('input')
+    expect(input).toHaveAttribute('disabled')
+})  
+
 test('should pass size prop', () => {
     render(<ToggleDefault size='md' />)
     const kit = screen.getByTestId(testId)

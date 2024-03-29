@@ -57,6 +57,36 @@
     margin-bottom: 16px;
   }
 
+  & > [class^=pb_phone_number_input]:not(:last-child) {
+    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right-width: 0;
+    }
+  }
+
+  & > [class^=pb_phone_number_input]:not(:first-child) {
+    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+
+  & > div:not(:first-child) > [class^=pb_phone_number_input] {
+    .text_input {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+
+  & > div:not(:last-child) > [class^=pb_phone_number_input] {
+    .text_input {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right: none;
+    }
+  }
+
   &[class*=rails] > [class^=pb_date_picker_kit] {
     margin-bottom: 0px;
   }
@@ -82,6 +112,10 @@
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
+      &:focus {
+        outline: $primary solid 1px;
+        outline-offset: -1px;
+      }
     }
   }
 

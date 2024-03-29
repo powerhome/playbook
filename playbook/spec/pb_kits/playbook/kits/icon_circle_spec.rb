@@ -9,7 +9,7 @@ RSpec.describe Playbook::PbIconCircle::IconCircle do
   it {
     is_expected.to define_enum_prop(:size)
       .with_default("md")
-      .with_values("xs", "sm", "md", "base", "lg", "xl")
+      .with_values("xxs", "xs", "sm", "md", "base", "lg", "xl")
   }
   it {
     is_expected.to define_enum_prop(:variant)
