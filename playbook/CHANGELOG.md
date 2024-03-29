@@ -1,3 +1,37 @@
+# 13.22.0
+##### March 27, 2024
+
+List of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table Kit: Further Improve "expand All" Subrows Expansion Speed [\#3258](https://github.com/powerhome/playbook/pull/3258) ([nickamantia](https://github.com/nickamantia))
+- Add Global Html Options for Rails Kits [\#3247](https://github.com/powerhome/playbook/pull/3247) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fix for Datepicker Year Bug [\#3268](https://github.com/powerhome/playbook/pull/3268) ([nidaqg](https://github.com/nidaqg))
+- Make Border Of Breadcrumbs Kit Transparent [\#3246](https://github.com/powerhome/playbook/pull/3246) ([elisashapiro](https://github.com/elisashapiro))
+- Fixing Advanced Table Hover [\#3240](https://github.com/powerhome/playbook/pull/3240) ([carloslimasd](https://github.com/carloslimasd))
+- Fix Confirmation Toast Bobile Bug [\#3203](https://github.com/powerhome/playbook/pull/3203) ([markdoeswork](https://github.com/markdoeswork))
+- Fix Bottom Margin Datepicker [\#3280](https://github.com/powerhome/playbook/pull/3280) ([markdoeswork](https://github.com/markdoeswork))
+- Aligned Spacing Around Icons Correctly [\#3256](https://github.com/powerhome/playbook/pull/3256) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix Broken Doc Page Layouts [\#3257](https://github.com/powerhome/playbook/pull/3257) ([elisashapiro](https://github.com/elisashapiro))
+
+**New Kits:**
+
+- Advanced Table Kit: Rails [\#3238](https://github.com/powerhome/playbook/pull/3238) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Ruby 3.3.0 Upgrade [\#3254](https://github.com/powerhome/playbook/pull/3254) ([jasperfurniss](https://github.com/jasperfurniss))
+- Adding Advanced Table Improvements [\#3241](https://github.com/powerhome/playbook/pull/3241) ([carloslimasd](https://github.com/carloslimasd))
+- Enable Remote Shell [\#3217](https://github.com/powerhome/playbook/pull/3217) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.21.0...13.22.0)
+
+
+
 # ✨ Enhance Your UI Flexibility with Absolute Positioning in Global Props for Advanced Kit Layering ✨
 
 ##### March 18, 2024
