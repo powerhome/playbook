@@ -1,4 +1,4 @@
-`selected_ids` (Rails) / `selectedIds` (React) is an optional prop that accepts an array of ids that, if present, will mark the corresponding nodes on the treeData as checked on page load. 
+`selected_ids` is an optional prop that accepts an array of ids that, if present, will mark the corresponding nodes on the treeData as checked on page load. 
 
 Items that include `checked:true` on the treeData itself will also be selected on page load, even without being passed to `selectedIds`.
 
