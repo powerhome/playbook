@@ -10,7 +10,7 @@ type OnlineStatusProps = {
   data?: {[key: string]: string | number},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
-  status?: "online" | "offline" | "away",
+  status?: "away" | "error" | "info" | "neutral" | "offline" |"online" | "primary"| "success" | "warning",
 } & GlobalProps
 
 const OnlineStatus = (props: OnlineStatusProps) => {

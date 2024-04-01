@@ -16,42 +16,27 @@ export const updateExpandAndCollapseState = (
   expanded: Record<string, boolean>,
   targetParent: string
 ) => {
-  const updateExpandedRows: Record<string, boolean> = {}
-  const rows = tableRows.flatRows
-  // Variable checks if all rows in a section have same expansion state or not
-  let isExpansionConsistent = true
-  const areRowsExpanded = new Set<boolean>()
+  const updateExpandedRows: Record<string, boolean> = {};
+  const rows = tableRows.rows;
 
-  // Update isExpansionConsistent variable
+  let isExpansionConsistent = true;
+  const areRowsExpanded = new Set<boolean>();
+
   for (const row of rows) {
-    if (
-      targetParent === undefined
-        ? row.depth === 0
-        : targetParent === row.parentId
-    ) {
-      areRowsExpanded.add(row.getIsExpanded())
-      if (areRowsExpanded.size > 1) {
-        isExpansionConsistent = false
-        break
-      }
-    }
-  }
+    const shouldBeUpdated = targetParent === undefined ? row.depth === 0 : targetParent === row.parentId;
+    
+    if (shouldBeUpdated) {
+      const isExpanded = row.getIsExpanded();
+      areRowsExpanded.add(isExpanded);
 
-  // The if statement runs only for row depth 0, the else statement for the rest
-  if (targetParent === undefined) {
-    rows.forEach(row => {
-      if (row.depth === 0) {
-        updateExpandedRows[row.id] = !isExpansionConsistent
-          ? true
-          : !row.getIsExpanded()
-      }
-    })
-  } else {
-    for (const row of rows) {
-      if (targetParent === row.parentId) {
-        updateExpandedRows[row.id] = !isExpansionConsistent
-          ? true
-          : !row.getIsExpanded()
+      updateExpandedRows[row.id] = !isExpansionConsistent ? true : !isExpanded;
+
+      if (areRowsExpanded.size > 1) {
+        isExpansionConsistent = false;
+        // If expansion inconsistent, ensure all target rows are set to expand
+        for (const key in updateExpandedRows) {
+          updateExpandedRows[key] = true;
+        }
       }
     }
   }
@@ -59,5 +44,5 @@ export const updateExpandAndCollapseState = (
   return filterExpandableRows({
     ...(expanded as ExpandedStateObject),
     ...updateExpandedRows,
-  })
-}
+  });
+};

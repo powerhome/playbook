@@ -17,13 +17,6 @@ const DatePickerDefaultDate = (props) => (
         {...props}
     />
     <DatePicker
-        defaultDate={[new Date(), new Date().fp_incr(7)]}
-        label="Default Date Range"
-        mode="range"
-        pickerId="date-picker-default-date3"
-        {...props}
-    />
-    <DatePicker
         label="Default Behavior"
         pickerId="date-picker-default-date4"
         {...props}

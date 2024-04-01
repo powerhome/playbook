@@ -23,4 +23,3 @@ for cluster in ${clusters[@]}
 do
   find_cluster_for_review_stack $cluster
 done
-

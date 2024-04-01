@@ -7,6 +7,12 @@ $pb_online_status_statuses: (
   online: $success,
   away: $warning,
   offline: $neutral,
+  success: $success,
+  warning: $warning,
+  error: $error,
+  info: $info,
+  neutral: $neutral,
+  primary: $primary,
 );
 
 @mixin pb_online_status($background: $neutral) {
@@ -23,16 +29,4 @@ $pb_online_status_statuses: (
   border-style: solid;
   border-radius: 50%;
   background: $background;
-}
-
-@mixin pb_online_status_away {
-  @include pb_online_status($warning);
-}
-
-@mixin pb_online_status_online {
-  @include pb_online_status($success);
-}
-
-@mixin pb_online_status_offline {
-  @include pb_online_status($neutral);
 }

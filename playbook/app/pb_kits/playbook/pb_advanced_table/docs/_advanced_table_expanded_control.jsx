@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { AdvancedTable } from "../../"
-import { MOCK_DATA } from "./_mock_data"
+import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableExpandedControl = (props) => {
   const columnDefinitions = [
@@ -44,11 +44,16 @@ const AdvancedTableExpandedControl = (props) => {
     onChange: setExpanded,
   }
 
+  const onRowToggleClick = (row) => {
+    setExpanded({ ...expanded, [row.id]: !expanded[row.id] })
+  }
+
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           expandedControl={expandedControl}
+          onRowToggleClick={onRowToggleClick}
           tableData={MOCK_DATA}
           {...props}
       />
