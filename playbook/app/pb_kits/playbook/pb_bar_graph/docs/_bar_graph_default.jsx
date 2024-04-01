@@ -19,12 +19,10 @@ const chartData = [{
   data: [1111, 677, 3245, 500, 200],
 }]
 
-const Titles = [ {name: "title 1"}]
-
 const BarGraphDefault = (props) => (
   <div>
     <BarGraph
-        axisTitle = {Titles}
+        axisTitle="Number of Employees"
         chartData={chartData}
         id="bar-default"
         subTitle="Source: thesolarfoundation.com"

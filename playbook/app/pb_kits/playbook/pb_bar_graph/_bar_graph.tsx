@@ -125,8 +125,6 @@ const BarGraph = ({
     credits: false,
   };
 
-
-// Conditionally add second yAxis if axisTitle[1].name exists
 if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
   staticOptions.yAxis.push({
     min: yAxisMin,

@@ -8,11 +8,12 @@ const chartData = [{
 }, {
   type: 'spline',
   name: 'Trend Line',
-  data: [1975, 600, 2500, 924, 500],
+  data: [8975, 600, 2500, 924, 500],
   color: '#F9BB00',
+  yAxis: 1
 }]
 
-const Titles = [ {name: "title 1"}, {name: "title 2"}]
+const Titles = [ {name: "Number of Installations"}, {name: " "}]
 
 const BarGraphSpline = (props) => (
   <div>
