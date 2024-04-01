@@ -1,7 +1,7 @@
-<%= pb_form_with(method: :get, multipart: true) do |form| %>
-  <%= pb_rails("file_upload", props: {id: "import_file", input_options: { name: "import_file" }}) %>
-  <%= pb_rails("button", props: { text: "Submit" } ) %>
+<%= pb_rails("file_upload", props: {id: "import_file"}) do %>
+  <input
+    id="import_file"
+    type="file"
+    name="import_file"
+  />
 <% end %>
-<script>
-  document.getElementById("import_file").addEventListener("change", function(e) {console.log(e.target.files[0])})
-</script>
