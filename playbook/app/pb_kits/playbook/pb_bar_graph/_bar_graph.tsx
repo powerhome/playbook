@@ -13,12 +13,12 @@ import classnames from "classnames";
 
 type BarGraphProps = {
   align?: "left" | "right" | "center";
-  axisTitle: string;
+  axisTitle: { name: string; }[] | string;
   dark?: boolean;
   xAxisCategories: [];
   yAxisMin: number;
   yAxisMax: number;
-  chartData: { name: string; data: number[] }[];
+  chartData: { name: string; data: number[], yAxis: number }[];
   className?: string;
   customOptions?: Partial<Highcharts.Options>;
   id: string;
@@ -89,13 +89,14 @@ const BarGraph = ({
     subtitle: {
       text: subTitle,
     },
-    yAxis: {
+    yAxis: [{
       min: yAxisMin,
       max: yAxisMax,
+      opposite: false,
       title: {
-        text: axisTitle,
-      },
-    },
+        text: typeof axisTitle === 'string' ? axisTitle : axisTitle[0].name,
+      }
+    }],
     xAxis: {
       categories: xAxisCategories,
     },
@@ -123,6 +124,19 @@ const BarGraph = ({
     series: chartData,
     credits: false,
   };
+
+
+// Conditionally add second yAxis if axisTitle[1].name exists
+if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
+  staticOptions.yAxis.push({
+    min: yAxisMin,
+    max: yAxisMax,
+    opposite: true,
+    title: {
+      text: axisTitle[1].name,
+    }
+  });
+}
 
   if (!toggleLegendClick) {
     staticOptions.plotOptions.series.events = { legendItemClick: () => false };

@@ -12,10 +12,12 @@ const chartData = [{
   color: '#F9BB00',
 }]
 
+const Titles = [ {name: "title 1"}, {name: "title 2"}]
+
 const BarGraphSpline = (props) => (
   <div>
     <BarGraph
-        axisTitle="Number of Employees"
+        axisTitle={Titles}
         chartData={chartData}
         id="bar-spline"
         legend
