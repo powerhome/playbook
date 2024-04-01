@@ -6,6 +6,12 @@ const IconCircleSizes = (props) => {
     <div>
       <IconCircle
           icon="rocket"
+          size="xxs"
+          {...props}
+      />
+      <br />
+      <IconCircle
+          icon="rocket"
           size="xs"
           {...props}
       />

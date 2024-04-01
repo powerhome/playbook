@@ -11,13 +11,6 @@
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  default_date: [DateTime.current.utc.iso8601, (DateTime.current + 7.day).utc.iso8601],
-  label: "Default Date Range",
-  mode: "range",
-  picker_id: "date-picker-default-date3"
-}) %>
-
-<%= pb_rails("date_picker", props: {
   label: "Default Behavior",
   picker_id: "date-picker-default-date4"
 }) %>
