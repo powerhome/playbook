@@ -8654,10 +8654,10 @@ intersection-observer@^0.10.0:
   resolved "https://npm.powerapp.cloud/intersection-observer/-/intersection-observer-0.10.0.tgz#4d11d63c1ff67e21e62987be24d55218da1a1a69"
   integrity sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==
 
-intl-tel-input@^17.0.19:
-  version "17.0.19"
-  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-17.0.19.tgz#4c277e3bf02069fac2ef3821a62a3d7e8b55740a"
-  integrity sha512-GBNoUT4JVgm2e1N+yFMaBQ24g5EQfZhDznGneCM9IEZwfKsMUAUa1dS+v0wOiKpRAZ5IPNLJMIEEFGgqlCI22A==
+intl-tel-input@^21.0.0:
+  version "21.0.0"
+  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-21.0.0.tgz#468aa7bbc685400e9e48dc19dadab8a01a7302a4"
+  integrity sha512-6scYYSugMR+SLvkCsXeqwUQF8yfFU57sQAOGcJ16LajsslZlQMYpr141AOCl6mfelBysA/eXjUM0KZdb8W57VA==
 
 invariant@^2.2.2:
   version "2.2.4"
@@ -10399,7 +10399,7 @@ minimatch@^5.1.0:
 
 minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.6:
   version "1.2.7"
-  resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.7.tgz#daa1c4d91f507390437c6a8bc01078e7000c4d18"
+  resolved "https://npm.powerapp.cloud/minimist/-/minimist-1.2.7.tgz#daa1c4d91f507390437c6a8bc01078e7000c4d18"
   integrity sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==
 
 minipass-collect@^1.0.2:
