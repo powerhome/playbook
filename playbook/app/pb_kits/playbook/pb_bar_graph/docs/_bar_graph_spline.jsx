@@ -13,7 +13,7 @@ const chartData = [{
   yAxis: 1
 }]
 
-const Titles = [ {name: "Number of Installations"}, {name: " "}]
+const Titles = [ {name: "Number of Installations"}, {name: "Trend Line"}]
 
 const BarGraphSpline = (props) => (
   <div>

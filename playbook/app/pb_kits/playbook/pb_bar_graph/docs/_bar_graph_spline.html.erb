@@ -6,10 +6,13 @@
     name: 'Trend Line',
     data: [1975, 600, 2500, 924, 500],
     color: '#F9BB00',
+    yAxis: 1
 }] %>
 
+<% titles = [ {name: "Number of Installations"}, {name: "Trend Line "}] %>
+
 <%= pb_rails("bar_graph", props: {
-    axis_title: 'Number of Employees',
+    axis_title: titles,
     chart_data: data,
     id: "bar-spline",
     y_axis_min: 0,
