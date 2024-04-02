@@ -7,17 +7,19 @@ import { get, isString, uniqueId } from 'lodash'
 import { globalProps } from '../utilities/globalProps'
 import classnames from 'classnames'
 
-import Control from './components/Control'
-import ClearIndicator from './components/ClearIndicator'
-import IndicatorsContainer from './components/IndicatorsContainer'
-import MenuList from './components/MenuList'
-import MultiValue from './components/MultiValue'
-import Option from './components/Option'
-import Placeholder from './components/Placeholder'
-import ValueContainer from './components/ValueContainer'
+import {
+  Control,
+  ClearIndicator,
+  IndicatorsContainer,
+  MenuList,
+  MultiValue,
+  Option,
+  Placeholder,
+  ValueContainer,
+} from "./components"
 
 import { noop, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { Noop } from '../types'
+import { GenericObject, Noop } from '../types'
 
 /**
  * @typedef {object} Props
@@ -29,7 +31,7 @@ import { Noop } from '../types'
 type TypeaheadProps = {
   async?: boolean,
   className?: string,
-  components?: object,
+  components?: GenericObject,
   createable?: boolean,
   dark?: boolean,
   data?: { [key: string]: string },
@@ -100,7 +102,7 @@ const Typeahead = ({
     multiKit: '',
     onCreateOption: null as null,
     plusIcon: false,
-    onMultiValueClick: (_option: SelectValueType) => { },
+    onMultiValueClick: (_option: SelectValueType): any => undefined,
     ...props,
   }
 
@@ -137,19 +139,21 @@ const Typeahead = ({
   const inlineClass = selectProps.inline ? 'inline' : null
 
   return (
-    <div 
-      {...dataProps}
-      {...htmlProps}
-      className={classnames(classes, inlineClass)}
+    <div
+        {...dataProps}
+        {...htmlProps}
+        className={classnames(classes, inlineClass)}
     >
       <Tag
-        classNamePrefix="typeahead-kit-select"
-        error={error}
-        onChange={handleOnChange}
-        {...selectProps}
+          classNamePrefix="typeahead-kit-select"
+          error={error}
+          onChange={handleOnChange}
+          {...selectProps}
       />
     </div>
   )
 }
+
+export * as TypeaheadComponents from "./components"
 
 export default Typeahead
