@@ -15,14 +15,14 @@ const chartData = [{
 
 const axisTitles = [ {name: "Number of Installations"}, {name: "Trend Line"}]
 
-const BarGraphCustomYAxis= (props) => (
+const BarGraphSecondaryYAxis= (props) => (
   <div>
     <BarGraph
         axisTitle={axisTitles}
         chartData={chartData}
         id="bar-spline"
         legend
-        title="Bar Graph with Custom Y-Axis"
+        title="Bar Graph with Secondary Y-axis"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
         yAxisMin={0}
         {...props}
@@ -30,4 +30,4 @@ const BarGraphCustomYAxis= (props) => (
   </div>
 )
 
-export default BarGraphCustomYAxis
+export default BarGraphSecondaryYAxis
