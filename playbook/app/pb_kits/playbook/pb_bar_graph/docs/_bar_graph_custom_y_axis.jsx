@@ -8,18 +8,21 @@ const chartData = [{
 }, {
   type: 'spline',
   name: 'Trend Line',
-  data: [1975, 600, 2500, 924, 500],
+  data: [8975, 600, 2500, 924, 500],
   color: '#F9BB00',
+  yAxis: 1
 }]
 
-const BarGraphSpline = (props) => (
+const axisTitles = [ {name: "Number of Installations"}, {name: "Trend Line"}]
+
+const BarGraphCustomYAxis= (props) => (
   <div>
     <BarGraph
-        axisTitle="Number of Employees"
+        axisTitle={axisTitles}
         chartData={chartData}
         id="bar-spline"
         legend
-        title="Bar Graph with Spline"
+        title="Bar Graph with Custom Y-Axis"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
         yAxisMin={0}
         {...props}
@@ -27,4 +30,4 @@ const BarGraphSpline = (props) => (
   </div>
 )
 
-export default BarGraphSpline
+export default BarGraphCustomYAxis
