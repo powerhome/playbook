@@ -97,6 +97,11 @@ const BarGraph = ({
       title: {
         text: axisTitle,
       },
+      plotLines: typeof yAxisMin !== 'undefined' && yAxisMin !== null ? [] : [{
+        value: 0,
+        zIndex: 10,
+        color: "#E4E8F0"
+    }],
     },
     xAxis: {
       categories: xAxisCategories,
@@ -117,6 +122,7 @@ const BarGraph = ({
       series: {
         stacking: stacking ? "normal" : "",
         pointStart: pointStart,
+        borderWidth: stacking ? 0 : "",
         events: {},
         dataLabels: {
           enabled: false,

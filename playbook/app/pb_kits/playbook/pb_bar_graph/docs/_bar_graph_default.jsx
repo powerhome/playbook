@@ -30,7 +30,7 @@ const BarGraphDefault = (props) => (
         subTitle="Source: thesolarfoundation.com"
         title="Solar Employment Growth by Sector, 2010-2016"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
+        // yAxisMin={0}
         {...props}
     />
   </div>
