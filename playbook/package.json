@@ -45,7 +45,7 @@
     "flatpickr": "^4.6.13",
     "highcharts": "^9.0.0",
     "highcharts-react-official": "^3.2.0",
-    "intl-tel-input": "^17.0.19",
+    "intl-tel-input": "^21.0.1",
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.19",
     "react-animate-height": "^2.0.23",
