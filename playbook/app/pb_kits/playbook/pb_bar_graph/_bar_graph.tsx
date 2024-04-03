@@ -37,7 +37,7 @@ type BarGraphProps = {
   y?: number;
   aria?: { [key: string]: string };
   data?: { [key: string]: string };
-  stacking: boolean
+  stacked: boolean
 };
 
 
@@ -54,7 +54,7 @@ const BarGraph = ({
   customOptions = {},
   id,
   pointStart,
-  stacking,
+  stacked,
   subTitle,
   type = "column",
   title = "Title",
@@ -120,9 +120,9 @@ const BarGraph = ({
         : highchartsTheme.colors,
     plotOptions: {
       series: {
-        stacking: stacking ? "normal" : "",
+        stacking: stacked ? "normal" : "",
         pointStart: pointStart,
-        borderWidth: stacking ? 0 : "",
+        borderWidth: stacked ? 0 : "",
         events: {},
         dataLabels: {
           enabled: false,
