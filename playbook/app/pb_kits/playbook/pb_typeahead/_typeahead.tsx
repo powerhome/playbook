@@ -18,6 +18,8 @@ import {
   ValueContainer,
 } from "./components"
 
+import * as kitComponents from "./components"
+
 import { noop, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GenericObject, Noop } from '../types'
 
@@ -154,6 +156,8 @@ const Typeahead = ({
   )
 }
 
-Typeahead.MenuList = MenuList
+Object.keys(kitComponents).forEach((k) => {
+  (Typeahead as GenericObject)[k] = (kitComponents as {[key: string]: unknown})[k]
+})
 
 export default Typeahead
