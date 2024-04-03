@@ -37,6 +37,7 @@ type BarGraphProps = {
   y?: number;
   aria?: { [key: string]: string };
   data?: { [key: string]: string };
+  axisFormat?: { format: string; }[] | string;
 };
 
 
@@ -51,6 +52,7 @@ const BarGraph = ({
   colors,
   htmlOptions = {},
   customOptions = {},
+  axisFormat,
   id,
   pointStart,
   subTitle,
@@ -67,7 +69,7 @@ const BarGraph = ({
   x = 0,
   y = 0,
   ...props
-}: BarGraphProps): React.ReactElement => {
+}: BarGraphProps): React.ReactElement => { 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions);
@@ -90,6 +92,10 @@ const BarGraph = ({
       text: subTitle,
     },
     yAxis: [{
+      labels: {
+        format: typeof axisFormat === 'string' ? axisFormat : (axisFormat && axisFormat[0] ? axisFormat[0].format : "")
+
+      },
       min: yAxisMin,
       max: yAxisMax,
       opposite: false,
@@ -127,6 +133,9 @@ const BarGraph = ({
 
 if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
   staticOptions.yAxis.push({
+    labels: {
+      format: typeof axisFormat !== 'string' ? axisFormat[1].format : "",
+    },
     min: yAxisMin,
     max: yAxisMax,
     opposite: true,
