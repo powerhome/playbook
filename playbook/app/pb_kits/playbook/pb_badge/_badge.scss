@@ -33,10 +33,6 @@
         color: map-get($status_color_text, $color_name);
       }
     }
-    // &[class*=_#{$color_name}]  {
-    //   background: rgba($color_value, $opacity_1);
-    //   color: map-get($status_color_text, $color_name);
-    // }
   }
 
   &[class*=_rounded] {
