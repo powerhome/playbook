@@ -3,15 +3,18 @@
     data: [1475,200,3000,654,656]
 }, {
     type: 'spline',
-    name: 'Trend Line',
-    data: [8975, 600, 2500, 924, 500],
+    name: 'Percentage',
+    data: [48, 70, 25, 55, 72],
     color: '#F9BB00',
     yAxis: 1
 }] %>
 
-<% axis_titles = [ {name: "Number of Installations"}, {name: "Trend Line "}] %>
+<% axis_titles = [{name: "Number of Installations"}, {name: "Percentage"}] %>
+
+<% axis_formats = [{format: ""}, {format: "{value}%"}] %>
 
 <%= pb_rails("bar_graph", props: {
+    axis_format: axis_formats,
     axis_title: axis_titles,
     chart_data: data,
     id: "bar-spline",

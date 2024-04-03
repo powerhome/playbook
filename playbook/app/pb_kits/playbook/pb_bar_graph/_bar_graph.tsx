@@ -134,7 +134,7 @@ const BarGraph = ({
 if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
   staticOptions.yAxis.push({
     labels: {
-      format: typeof axisFormat !== 'string' ? axisFormat[1].format : "",
+      format: typeof axisFormat === 'string' ? axisFormat : axisFormat[1].format,
     },
     min: yAxisMin,
     max: yAxisMax,

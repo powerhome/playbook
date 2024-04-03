@@ -7,6 +7,7 @@ module Playbook
                    values: %w[left right center],
                    default: "center"
       prop :axis_title
+      prop :axis_format
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
       prop :custom_options, default: {}
@@ -51,6 +52,7 @@ module Playbook
           title: title,
           subTitle: subtitle,
           axisTitle: axis_title,
+          axisFormat: axis_format,
           pointStart: point_start,
           xAxisCategories: x_axis_categories,
           yAxisMin: y_axis_min,
