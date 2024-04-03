@@ -4,7 +4,7 @@ import {
   Button,
 } from '../..'
 
-import Typeahead, { TypeaheadComponents } from '../_typeahead'
+import Typeahead from '../_typeahead'
 
 const options = [
   { label: 'Orange', value: '#FFA500' },
@@ -32,7 +32,7 @@ const TypeaheadCustomMenuList = (props) => {
   }
 
   const MenuList = (props) => (
-    <TypeaheadComponents.MenuList
+    <Typeahead.MenuList
         {...menuListProps}
         {...props}
     />

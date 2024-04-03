@@ -154,6 +154,6 @@ const Typeahead = ({
   )
 }
 
-export * as TypeaheadComponents from "./components"
+Typeahead.MenuList = MenuList
 
 export default Typeahead
