@@ -22,7 +22,7 @@ const BarGraphStacked = (props) => (
         chartData={chartData}
         id="bar-default"
         legend
-        stacked
+        stacking="normal"
         title="Bar Graph with Stacked Columns"
         xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
         yAxisMin={0}

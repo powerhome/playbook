@@ -14,7 +14,7 @@ module Playbook
                          values: %w[vertical horizontal],
                          default: "vertical"
       prop :point_start, type: Playbook::Props::Numeric
-      prop :stacked
+      prop :stacking
       prop :subtitle
       prop :title
       prop :x_axis_categories, type: Playbook::Props::Array,
@@ -50,7 +50,7 @@ module Playbook
           dark: dark ? "dark" : "",
           type: chart_type,
           title: title,
-          stacked: stacked,
+          stacking: stacking,
           subTitle: subtitle,
           axisTitle: axis_title,
           pointStart: point_start,
