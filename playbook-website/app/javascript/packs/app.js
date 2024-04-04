@@ -44,7 +44,7 @@ const router = createBrowserRouter(
       />
       <Route
           element={<IconList />}
-          path=":name"
+          path="icons"
       />
 
     </Route>

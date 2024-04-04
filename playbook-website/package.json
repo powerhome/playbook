@@ -10,8 +10,8 @@
   "dependencies": {
     "@fortawesome/fontawesome-pro": "^6.2.1",
     "@mapbox/mapbox-gl-draw": "^1.4.1",
-    "@powerhome/playbook-icons": "0.0.1-alpha.2",
-    "@powerhome/playbook-icons-react": "0.0.1-alpha.2",
+    "@powerhome/playbook-icons": "0.0.1-alpha.8",
+    "@powerhome/playbook-icons-react": "0.0.1-alpha.8",
     "@rails/webpacker": "5.4.3",
     "@svgr/webpack": "5.5.0",
     "@tiptap/extension-document": "^2.1.12",
@@ -41,6 +41,7 @@
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/preset-flow": "^7.12.1",
     "@babel/preset-react": "^7.13.13",
+    "@hotwired/turbo-rails": "^7.3.0",
     "axe-core": "4.4.3",
     "babel-plugin-flow-runtime": "^0.11.1",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",

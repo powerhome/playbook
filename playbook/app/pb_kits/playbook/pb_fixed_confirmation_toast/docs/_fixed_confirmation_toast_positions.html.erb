@@ -75,8 +75,6 @@
     })
   }
 
-  hideToasts()
-
   buttons.forEach((button) => {
     button.onclick = () => {
       hideToasts()
@@ -88,3 +86,10 @@
     }
   })
 </script>
+
+<!-- hiding toast on page load -->
+<style>
+  #toast-top-center, #toast-top-right, #toast-top-left, #toast-bottom-center, #toast-bottom-right, #toast-bottom-left {
+    display: none;
+  }
+</style>

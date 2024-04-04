@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/StringConcatenation, Style/HashLikeCase
+# rubocop:disable Style/HashLikeCase
 
 require "open-uri"
 
@@ -89,7 +89,7 @@ module Playbook
       def render_svg
         doc = Nokogiri::XML(URI.open(asset_path || icon || custom_icon)) # rubocop:disable Security/Open
         svg = doc.at_css "svg"
-        svg["class"] = "pb_custom_icon " + object.custom_icon_classname
+        svg["class"] = %w[pb_custom_icon svg-inline--fa].concat([object.custom_icon_classname]).join(" ")
         svg["id"] = object.id
         svg["data"] = object.data
         svg["aria"] = object.aria
@@ -167,4 +167,4 @@ module Playbook
   end
 end
 
-# rubocop:enable Style/StringConcatenation, Style/HashLikeCase
+# rubocop:enable Style/HashLikeCase

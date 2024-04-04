@@ -98,6 +98,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
             (text && (
               <Title
                   className="pb_fixed_confirmation_toast_text"
+                  flex="1"
                   size={4}
                   text={text}
               />

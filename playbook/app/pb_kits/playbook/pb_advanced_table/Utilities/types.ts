@@ -4,5 +4,3 @@ export type ExpandedStateObject = Extract<
   ExpandedState,
   Record<string, boolean>
 >
-
-export type DataType = { [key: string]: any }

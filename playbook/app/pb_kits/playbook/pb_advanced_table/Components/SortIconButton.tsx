@@ -1,11 +1,14 @@
 import React from "react"
-import Icon from "../../pb_icon/_icon"
 import { Header } from "@tanstack/react-table"
-import { DataType } from "../Utilities/types"
+
+import { GenericObject } from "../../types"
+
+import Icon from "../../pb_icon/_icon"
+
 import { displayIcon } from "../Utilities/IconHelpers"
 
 type SortIconButtonProps = {
-  header: Header<DataType, unknown>
+  header: Header<GenericObject, unknown>
   sortIcon?: string | string[]
 }
 export const SortIconButton = ({ header, sortIcon }: SortIconButtonProps) => {

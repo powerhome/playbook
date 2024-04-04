@@ -196,5 +196,5 @@ export const MOCK_DATA_INLINE_LOADING = [
         },
       ],
     },
-  ];
+  ]
   

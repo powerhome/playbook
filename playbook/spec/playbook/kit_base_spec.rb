@@ -5,6 +5,7 @@ RSpec.describe Playbook::KitBase do
 
   it { is_expected.to define_prop(:id) }
   it { is_expected.to define_hash_prop(:data).with_default({}) }
+  it { is_expected.to define_hash_prop(:html_options).with_default({}) }
   it { is_expected.to define_prop(:classname) }
   it { is_expected.to define_hash_prop(:aria).with_default({}) }
   it { is_expected.to define_prop(:margin) }
@@ -37,6 +38,7 @@ RSpec.describe Playbook::KitBase do
   it { is_expected.to define_prop(:flex_grow) }
   it { is_expected.to define_prop(:flex_shrink) }
   it { is_expected.to define_prop(:order) }
+  it { is_expected.to define_prop(:truncate) }
 
   describe "#children" do
     it "allows to be passed as prop" do

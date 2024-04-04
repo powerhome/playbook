@@ -2,7 +2,8 @@
     aria: object.aria,
     class: object.classname + object.error_class,
     data: object.data,
-    id: object.id) do %>
+    id: object.id,
+    **combined_html_options) do %>
   <div class="input_wrapper">
     <% if content.present? %>
       <%= content %>
@@ -16,6 +17,7 @@
         error: object.error,
         id: object.picker_id,
         label: object.hide_label ? nil : object.label,
+        margin_bottom: "none",
         name: object.name,
         placeholder: object.placeholder,
         required: object.required,

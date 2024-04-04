@@ -1,3 +1,59 @@
+# ✨ Enhance Your UI Flexibility with Absolute Positioning in Global Props for Advanced Kit Layering ✨
+
+##### March 18, 2024
+
+![5348fdac-67c3-4398-bb46-83f9dbc76c56](https://github.com/powerhome/playbook/assets/73710701/5477a01f-8178-47e0-8f02-8d518b8c8fc4)
+
+Take your UI design to the next level! Our latest update introduces absolute positioning in our global position props, empowering you to seamlessly arrange and layer kits. Great for intuitive status indication, notification placement, and overall enhanced user experience. 💅🎨
+
+[13.21.0](https://github.com/powerhome/playbook/tree/13.21.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Global Position Props & Examples [\#3228](https://github.com/powerhome/playbook/pull/3228) ([jasperfurniss](https://github.com/jasperfurniss))
+- Add Advanced Table Kit Dark Mode Styles [\#3219](https://github.com/powerhome/playbook/pull/3219) ([nickamantia](https://github.com/nickamantia))
+- Table Kit Subcomponents React [\#3204](https://github.com/powerhome/playbook/pull/3204) ([nidaqg](https://github.com/nidaqg))
+- Table Kit Sub Components for Rails [\#3198](https://github.com/powerhome/playbook/pull/3198) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fix Colors Guidelines Layout [\#3196](https://github.com/powerhome/playbook/pull/3196) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix Addon Input Child [\#3202](https://github.com/powerhome/playbook/pull/3202) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix Bold Nav Icon Color [\#3218](https://github.com/powerhome/playbook/pull/3218) ([markdoeswork](https://github.com/markdoeswork))
+- Fix Message Kit Description Typos [\#3239](https://github.com/powerhome/playbook/pull/3239) ([co1in-1ewis](https://github.com/co1in-1ewis))
+
+**Improvements:**
+
+
+- Add Turbo to Playbook [\#3211](https://github.com/powerhome/playbook/pull/3211) ([nickamantia](https://github.com/nickamantia))
+- Figma Library Getting Started Markdown - Create Figma\_setup.md [\#3195](https://github.com/powerhome/playbook/pull/3195) ([bianca0303](https://github.com/bianca0303))
+- Date Doc Update [\#3235](https://github.com/powerhome/playbook/pull/3235) ([rachelradford21](https://github.com/rachelradford21))
+- Update Setup Guide [\#3226](https://github.com/powerhome/playbook/pull/3226) ([elisashapiro](https://github.com/elisashapiro))
+- User Presence Docs [\#3200](https://github.com/powerhome/playbook/pull/3200) ([rachelradford21](https://github.com/rachelradford21))
+- Rebuild Playbook-icons-react for Use In Nitro [\#3199](https://github.com/powerhome/playbook/pull/3199) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Docs: Add Truncate Global Prop Doc [\#3197](https://github.com/powerhome/playbook/pull/3197) ([markdoeswork](https://github.com/markdoeswork))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.20.0...13.21.0)
+
+# 13.20.0
+##### March 05, 2024
+
+List of changes:
+
+**Kit Enhancements:**
+
+- Adding Div Support for Table Kit [\#3188](https://github.com/powerhome/playbook/pull/3188) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+
+- Fixing Kit Props Table for Advanced Table [\#3183](https://github.com/powerhome/playbook/pull/3183) ([carloslimasd](https://github.com/carloslimasd))
+- Fixes for Spelling Errors In Advanced Table Docs [\#3190](https://github.com/powerhome/playbook/pull/3190) ([nidaqg](https://github.com/nidaqg))
+- Fix Icon Kit for Playbook Icons Usage [\#3201](https://github.com/powerhome/playbook/pull/3201) ([markdoeswork](https://github.com/markdoeswork))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.19.0...13.20.0)
+
+
 # 🌳 Explore Data Depths with the New Advanced Table Component in Playbook!
 
 ##### February 27, 2024
@@ -6,6 +62,7 @@
 
 Explore depths of nested data effortlessly. This latest addition to Playbook's design system brings clarity and control, transforming complex tables into intuitive insights.
 
+[13.19.0](https://github.com/powerhome/playbook/tree/13.19.0) full list of changes:
 
 **Kit Enhancements:**
 

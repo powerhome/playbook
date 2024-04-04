@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { AdvancedTable } from "../..";
-import { MOCK_DATA } from "./_mock_data";
+import React, { useState } from "react"
+import { AdvancedTable } from "../.."
+import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableSortControl = (props) => {
   const columnDefinitions = [
@@ -33,7 +33,7 @@ const AdvancedTableSortControl = (props) => {
       accessor: "graduatedStudents",
       label: "Graduated Students",
     },
-  ];
+  ]
 
   //State for sort direction
   const [isSortDesc, setIsSortDesc] = useState({desc: false})
@@ -57,7 +57,7 @@ const AdvancedTableSortControl = (props) => {
         <AdvancedTable.Body />
       </AdvancedTable>
     </div>
-  );
-};
+  )
+}
 
-export default AdvancedTableSortControl;
+export default AdvancedTableSortControl

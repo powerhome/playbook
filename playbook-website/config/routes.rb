@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   ## Beta View
   get "beta/kits", to: "pages#application_beta"
   get "beta/kits/:name", to: "pages#application_beta"
+  get "beta/icons", to: "pages#application_beta"
 
   # Legacy View
   get "kits", to: "pages#kits"
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
   get "kit_collection/*names/:name/rails",    to: "pages#kit_collection_show_rails",                        as: "kit_collection_show_rails"
   get "kit_collection/*names/:name/react",    to: "pages#kit_collection_show_react",                        as: "kit_collection_show_react"
   get "kit_collection/*names/:name/swift",    to: "pages#kit_collection_show_swift",                        as: "kit_collection_show_swift"
-  get "kit_collection/*names/(/:name)(/:type)",  to: "pages#kit_collection_show_rails", defaults: { type: "rails" }, as: "kit_collection_show"
+  get "kit_collection/*names/(/:name)(/:type)", to: "pages#kit_collection_show_rails", defaults: { type: "rails" }, as: "kit_collection_show"
 
   # Experiments
   #

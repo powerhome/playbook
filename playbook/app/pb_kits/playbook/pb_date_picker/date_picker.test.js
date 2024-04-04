@@ -37,7 +37,7 @@ describe('DatePicker Kit', () => {
     )
 
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass('pb_date_picker_kit')
+    expect(kit).toHaveClass('pb_date_picker_kit mb_sm')
   })
 
   test('shows DatePicker date format m/d/Y', async () => {

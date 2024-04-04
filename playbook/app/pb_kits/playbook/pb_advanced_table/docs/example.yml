@@ -1,4 +1,6 @@
 examples:
+  # rails:
+  # - advanced_table_default: Default (Required Props)
   react:
   - advanced_table_default: Default (Required Props)
   - advanced_table_loading: Loading State

@@ -2,15 +2,34 @@
 
 
 ```swift
-
 VStack(alignment: .leading, spacing: Spacing.small) {
-  PBDate(Date(), variant: .short)
-  PBDate(Date(), variant: .dayDate)
-  PBDate(Date(), variant: .standard)
+  PBDate(
+    Date(),
+    variant: .short
+  )
+  PBDate(
+    Date().makeDate(year: 2012, month: 8, day: 3),
+    variant: .standard
+  )
+  PBDate(
+    Date().makeDate(year: 2017, month: 12, day: 3),
+    variant: .dayDate(showYear: true)
+  )
   Spacer()
-  PBDate(Date(), variant: .short, typography: .title4)
-  PBDate(Date(), variant: .dayDate, typography: .title4)
-  PBDate(Date(), variant: .standard, typography: .title4)
+  PBDate(
+    Date(),
+    variant: .short, 
+    typography: .title4
+  )
+  PBDate(
+    Date().makeDate(year: 2012, month: 8, day: 3),
+    variant: .standard, 
+    typography: .title4
+  )
+  PBDate(
+    Date().makeDate(year: 2017, month: 12, day: 3),
+    variant: .dayDate(showYear: true),
+    typography: .title4
+  )
 }
-
 ```

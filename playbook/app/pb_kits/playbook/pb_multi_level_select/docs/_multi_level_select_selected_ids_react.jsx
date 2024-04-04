@@ -68,7 +68,7 @@ const treeData = [
   },
 ];
 
-const MultiLevelSelectSelectedIds = (props) => {
+const MultiLevelSelectSelectedIdsReact = (props) => {
   return (
     <div>
       <MultiLevelSelect
@@ -85,4 +85,4 @@ const MultiLevelSelectSelectedIds = (props) => {
   );
 };
 
-export default MultiLevelSelectSelectedIds;
+export default MultiLevelSelectSelectedIdsReact;

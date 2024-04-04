@@ -1,47 +1,59 @@
-<%= content_tag(:th,
-    colspan: object.colspan,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: "pb-th#{object.id}" ) do %>
-  <% unless sorting_style? %>
-    <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon, classname: "pb_th_nolink" }) do %>
-      <%= content.presence || object.text %>
-    <% end %>
-  <% else %>
-    <%= link_to next_link, style: link_style do %>
-      <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon, classname: "pb_th_link" }) do %>
+<% if object.tag == "table" %>  
+  <%= content_tag(:th,
+      colspan: object.colspan,
+      aria: object.aria,
+      class: object.classname,
+      data: object.data,
+      id: "pb-th#{object.id}",
+      **combined_html_options) do %>
+    <% unless sorting_style? %>
+      <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon, classname: "pb_th_nolink" }) do %>
         <%= content.presence || object.text %>
-          <% if sorting_style? %>
-            <%= pb_rails("icon", props: { icon: object.sort_icon(active_item[:direction], active_item[:active]),
-                                          fixed_width: true,
-                                          classname: active_item.any? ? "pb_th_active" : "",
-                                          padding_left: "xs" }) %>
+      <% end %>
+    <% else %>
+      <%= link_to next_link, style: link_style do %>
+        <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon, classname: "pb_th_link" }) do %>
+          <%= content.presence || object.text %>
+            <% if sorting_style? %>
+              <%= pb_rails("icon", props: { icon: object.sort_icon(active_item[:direction], active_item[:active]),
+                                            fixed_width: true,
+                                            classname: active_item.any? ? "pb_th_active" : "",
+                                            padding_left: "xs" }) %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-    <% if use_dropdown_select %>
-      <%= pb_rails("popover", props: { classname: "pb_filter_sort_menu",
-                                      close_on_click: "outside",
-                                      trigger_element_id: "pb-th#{object.id}",
-                                      tooltip_id: "sort-filter-btn-tooltip#{object.id}",
-                                      position: object.placement ,
-                                      padding: 'none'}) do %>
-        <%= pb_rails("nav", props: {classname: "pb_table_header_dropdown"}) do %>
-          <% object.sort_items.each do |sort_item| %>
-            <% item = active_or_first_item(sort_items_for(sort_item)) %>
-            <%= pb_rails("nav/item", props: {
-              text: item[:item],
-              link: next_link(sort_item: sort_item),
-              highlighted_border: false,
-              padding: "xs",
-              icon_right: sort_icon(item[:direction], item[:active]),
-              active: item[:active],
-              classname: "header_nav_item"
-            }) %>
+      <% if use_dropdown_select %>
+        <%= pb_rails("popover", props: { classname: "pb_filter_sort_menu",
+                                        close_on_click: "outside",
+                                        trigger_element_id: "pb-th#{object.id}",
+                                        tooltip_id: "sort-filter-btn-tooltip#{object.id}",
+                                        position: object.placement ,
+                                        padding: 'none'}) do %>
+          <%= pb_rails("nav", props: {classname: "pb_table_header_dropdown"}) do %>
+            <% object.sort_items.each do |sort_item| %>
+              <% item = active_or_first_item(sort_items_for(sort_item)) %>
+              <%= pb_rails("nav/item", props: {
+                text: item[:item],
+                link: next_link(sort_item: sort_item),
+                highlighted_border: false,
+                padding: "xs",
+                icon_right: sort_icon(item[:direction], item[:active]),
+                active: item[:active],
+                classname: "header_nav_item"
+              }) %>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
     <% end %>
+  <% end %>
+<% else %>
+  <%= content_tag(:div,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id,
+    **combined_html_options) do %>
+      <%= content.presence || object.text %>
   <% end %>
 <% end %>

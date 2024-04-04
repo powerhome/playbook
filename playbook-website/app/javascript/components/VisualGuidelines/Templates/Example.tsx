@@ -21,6 +21,7 @@ import PropsValues from './PropsValues'
 type ExampleType = {
   backgroundClass?: string,
   children?: React.ReactChild[] | React.ReactChild,
+  captionTitle?: string,
   // codesandboxExample? : boolean,
   customChildren?: boolean,
   description?: React.ReactChild[] | React.ReactChild | string | (() => JSX.Element),
@@ -28,6 +29,7 @@ type ExampleType = {
   globalProps?: { [key: string]: string[] | number[] },
   globalPropsDescription?: React.ReactElement | React.ReactElement[] | string,
   screenSizes?: { [key: string]: string[] | number[] },
+  secondExample?: string,
   title?: string,
   tokens?: { [key: string]: string | number },
   tokensDescription?: React.ReactElement | React.ReactElement[] | string,
@@ -35,11 +37,13 @@ type ExampleType = {
 
 const Example = ({
   backgroundClass= '',
+  captionTitle="Visual Guide",
   children,
   // codesandboxExample,
   customChildren,
   description,
   example = '',
+  secondExample ='', 
   globalProps,
   globalPropsDescription = '',
   screenSizes,
@@ -113,7 +117,7 @@ const Example = ({
             <Card.Body>
               <Caption
                   marginBottom="xs"
-                  text="Visual Guide"
+                  text={captionTitle}
               />
               { children }
             </Card.Body>

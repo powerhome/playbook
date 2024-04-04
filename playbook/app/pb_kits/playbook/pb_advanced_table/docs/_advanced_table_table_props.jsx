@@ -1,6 +1,6 @@
-import React from "react";
-import { AdvancedTable } from "../../";
-import { MOCK_DATA } from "./_mock_data";
+import React from "react"
+import { AdvancedTable } from "../../"
+import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableTableProps = (props) => {
   const columnDefinitions = [
@@ -33,7 +33,7 @@ const AdvancedTableTableProps = (props) => {
       accessor: "graduatedStudents",
       label: "Graduated Students",
     },
-  ];
+  ]
 
   const tableProps = {
     container: false,
@@ -49,7 +49,7 @@ const AdvancedTableTableProps = (props) => {
           {...props}
       />
     </div>
-  );
-};
+  )
+}
 
-export default AdvancedTableTableProps;
+export default AdvancedTableTableProps

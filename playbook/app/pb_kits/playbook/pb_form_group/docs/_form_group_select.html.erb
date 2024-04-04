@@ -1,6 +1,7 @@
 <div>
+
   <%= pb_rails("form_group") do %>
-    <%= pb_rails("text_input", props: { label: "Artist", placeholder: "Enter Artist Name" }) %>
+    <%= pb_rails("text_input", props: { placeholder: "Enter Artist Name" }) %>
     <%= pb_rails("select", props: {
       blank_selection: "Genre",
       options: [
@@ -14,6 +15,21 @@
         { value: "Indie" },
         { value: "Other" },
       ]
+    }) %>
+  <% end %>
+  <br>
+  <br>
+  <%= pb_rails("form_group") do %>
+    <%= pb_rails("select", props: {
+        blank_selection: "Phone",
+        options: [
+          { value: "Cell" },
+          { value: "Work" },
+          { value: "Home" },
+        ]
+      }) %>
+      <%= pb_rails("phone_number_input", props: {
+        id: "phone"
     }) %>
   <% end %>
 </div>

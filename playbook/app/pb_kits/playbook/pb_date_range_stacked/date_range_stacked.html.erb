@@ -1,7 +1,8 @@
 <%= content_tag(:div,
     id: object.id,
     data: object.data,
-    class: object.classname) do %>
+    class: object.classname,
+    **combined_html_options) do %>
 
     <%= pb_rails("flex", props: {vertical: "center"}) do %>
       <%= pb_rails("flex/flex_item") do %>

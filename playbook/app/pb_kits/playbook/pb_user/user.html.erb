@@ -2,7 +2,8 @@
     aria: object.aria,
     class: object.classname,
     data: object.data,
-    id: object.id) do %>
+    id: object.id,
+    **combined_html_options) do %>
   <% if object.avatar_url.present? || object.avatar %>
     <%= pb_rails("avatar", props: {
       name: object.name,

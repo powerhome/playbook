@@ -1,19 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext } from "react"
+import { Getter, Row } from "@tanstack/react-table"
 
-import Flex from "../../pb_flex/_flex";
-import FlexItem from "../../pb_flex/_flex_item";
-import Icon from "../../pb_icon/_icon";
-import { GlobalProps } from "../../utilities/globalProps";
+import { GenericObject } from "../../types"
 
-import { Getter, Row } from "@tanstack/react-table";
-import { DataType } from "../Utilities/types";
-import AdvancedTableContext from "../Context/AdvancedTableContext";
+import { GlobalProps } from "../../utilities/globalProps"
+
+import Flex from "../../pb_flex/_flex"
+import FlexItem from "../../pb_flex/_flex_item"
+import Icon from "../../pb_icon/_icon"
+
+import AdvancedTableContext from "../Context/AdvancedTableContext"
 
 interface CustomCellProps {
-  getValue?: Getter<string>;
-  onRowToggleClick?: (arg: Row<DataType>) => void;
-  row: Row<DataType>;
-  value?: string;
+  getValue?: Getter<string>
+  onRowToggleClick?: (arg: Row<GenericObject>) => void
+  row: Row<GenericObject>
+  value?: string
 } 
 
 export const CustomCell = ({
@@ -22,12 +24,16 @@ export const CustomCell = ({
   row,
   value,
 }: CustomCellProps & GlobalProps) => {
-  const { setExpanded, expanded, inlineRowLoading } = useContext(AdvancedTableContext);
+  const { setExpanded, expanded, expandedControl, inlineRowLoading } = useContext(AdvancedTableContext);
 
-  const handleOnExpand = (row: Row<DataType>) => {
+  const handleOnExpand = (row: Row<GenericObject>) => {
     onRowToggleClick && onRowToggleClick(row);
-    setExpanded({ ...expanded, [row.id]: !row.getIsExpanded() });
+    
+    if (!expandedControl) {
+      setExpanded({ ...expanded, [row.id]: !row.getIsExpanded() });
+    }
   };
+
   const RowHasChildren = row.original.children ? true : false
   const renderButton = inlineRowLoading ? RowHasChildren : row.getCanExpand()
 
@@ -59,5 +65,5 @@ export const CustomCell = ({
         </FlexItem>
       </Flex>
     </div>
-  );
-};
+  )
+}

@@ -2,7 +2,8 @@
     id: object.id,
     data: object.data,
     aria: object.aria,
-    class: object.classname) do %>
+    class: object.classname,
+    **combined_html_options) do %>
   <label class="pb_toggle_wrapper">
     <%= content.presence || object.input %>
     <div class="pb_toggle_control"></div>

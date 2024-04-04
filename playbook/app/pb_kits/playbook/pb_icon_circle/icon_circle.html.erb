@@ -2,6 +2,7 @@
     aria: object.aria,
     class: object.classname,
     data: object.data,
-    id: object.id) do %>
+    id: object.id,
+    **combined_html_options) do %>
     <%= pb_rails("icon", props: { dark: object.dark, icon: object.icon, fixed_width: true }) %>
 <% end %>

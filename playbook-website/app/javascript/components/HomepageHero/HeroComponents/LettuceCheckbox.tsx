@@ -32,7 +32,7 @@ const LettuceCheckboxCard = () => {
             paddingY="xs"
             checked
             tabIndex={1}
-            text="Chopped Romain"
+            text="Chopped Romaine"
             hover={{ background: "active_light" }}
           />
           <SectionSeparator />

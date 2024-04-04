@@ -28,6 +28,10 @@ import MainSidebar from '../components/MainSidebar'
 import HomepageHero from '../components/HomepageHero'
 import AnchorJS from 'anchor-js'
 import { Website } from '../packs/app'
+import { Turbo } from "@hotwired/turbo-rails"
+// Disable Turbo Drive by default (Turbo Drive is equivalent to Turbolinks)
+Turbo.session.drive = false
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const anchors = new AnchorJS()

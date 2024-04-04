@@ -22,3 +22,5 @@ export { default as TableWithBackgroundKit } from './_table_with_background_kit.
 export { default as TableVerticalBorder } from './_table_vertical_border.jsx'
 export { default as TableStriped } from './_table_striped.jsx'
 export { default as TableDiv } from './_table_div.jsx'
+export { default as TableWithSubcomponents } from './_table_with_subcomponents.jsx'
+export { default as TableWithSubcomponentsAsDivs } from './_table_with_subcomponents_as_divs.jsx'

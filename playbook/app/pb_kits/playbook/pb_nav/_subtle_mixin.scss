@@ -40,6 +40,10 @@
     &[class*="_active"] {
       color: $primary;
       letter-spacing: normal;
+
+      [class*="_icon_right"] {
+        color: $white;
+      }
     }
     &[class*="dark"] {
       [class*="_item_text"],
