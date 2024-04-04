@@ -12,7 +12,6 @@
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@powerhome/playbook-icons": "0.0.1-alpha.8",
     "@powerhome/playbook-icons-react": "0.0.1-alpha.8",
-    "@powerhome/powerfonts": "0.0.1-alpha.7",
     "@rails/webpacker": "5.4.3",
     "@svgr/webpack": "5.5.0",
     "@tiptap/extension-document": "^2.1.12",
@@ -55,5 +54,8 @@
     "style-loader": "2.0.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "postinstall": "npm install @powerhome/powerfonts@0.0.1-alpha.7 --registry=https://npm.pkg.github.com"
   }
 }
