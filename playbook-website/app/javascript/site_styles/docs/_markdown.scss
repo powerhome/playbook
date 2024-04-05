@@ -22,7 +22,7 @@
   blockquote,
   p {
     margin: 1rem 0 0 0;
-  }
+  }                    
   h1 {
     font-size: $text_larger;
     line-height: $text_larger;
@@ -185,49 +185,54 @@
       display: block;
     }
   }
-}
 
+  .typography-principle {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    column-gap: $space_xl;
 
-.guidelines-spacing-square {
-  margin: $space_xs !important;
-}
+    ul {
+      list-style-position: outside;
+      margin: $space-sm;
+    }
 
-.spacing-principle {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  column-gap: $space_xl;
-
-  ul {
-    list-style-position: outside;
-    margin: $space-sm;
-  }
-
-  div:first-child {
-    flex:2;
-    min-width: 250px;
-  }
-
-  img {
-    width: 340px;
-    margin: 0 auto;
-    flex:1;
-  }
-
-  [class^=pb_card_kit]{
-    width: 322px;
+    div:first-child {
+      flex:2;
+      min-width: 250px;
+    }
 
     img {
-      width: 175px;
+      width: 340px;
+      margin: 0 auto;
+      flex:1;
+    }
+
+    @media screen and (max-width: $screen-md-min) {
+      flex-wrap: wrap;
+
+      img{
+      max-width: 340px;
+      }
     }
   }
+}
 
-  @media screen and (max-width: $screen-md-min) {
-    flex-wrap: wrap;
+.typography-weight-100 {
+font-weight: $lighter;
+}
 
-    img{
-    max-width: 340px;
+.typography-weight-600 {
+font-weight: $bold;
+}
+
+.typography-list {
+  ul {
+    margin-left: $space-sm;
+    list-style-position: outside;
+    ul {
+      margin-top: 0px;
     }
   }
 }
