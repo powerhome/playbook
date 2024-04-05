@@ -3035,6 +3035,11 @@
   resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/ab390d12f3621b45d7238f51995545c1d52f33e0#ab390d12f3621b45d7238f51995545c1d52f33e0"
   integrity sha512-TX4GWwhU909LEzhJo8Eb/e3IBLFJu+2K5DeRffvDI5XaNxhFXZKfsgcgDtxsDPOmx/7Owk+Qs+IFJjwhZ6sbxw==
 
+"@powerhome/powerfonts@0.0.1-alpha.10":
+  version "0.0.1-alpha.10"
+  resolved "https://npm.pkg.github.com/download/@powerhome/powerfonts/0.0.1-alpha.10/421bf7d129bc3be82093293b6c37e991d75856c9#421bf7d129bc3be82093293b6c37e991d75856c9"
+  integrity sha512-B6O7jKbVm/rq14CoFWdrwGvczT2EPajY9Z1nP6+j8spvfGoqiin+M6KkS7ZdSunuH5OySZ6KaJmV8aASkllVLw==
+
 "@rails/actioncable@^7.0":
   version "7.1.3"
   resolved "https://npm.powerapp.cloud/@rails/actioncable/-/actioncable-7.1.3.tgz#4db480347775aeecd4dde2405659eef74a458881"
