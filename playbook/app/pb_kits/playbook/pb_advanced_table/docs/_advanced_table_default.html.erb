@@ -1,9 +1,3 @@
-<%
-=begin%>
- <% require '../playbook/app/pb_kits/playbook/pb_advanced_table/docs/advanced_table_example_mock_data.rb' %> 
-<%
-=end%>
-
 <% columnDefinitions = [{
       accessor: "year",
       label: "Year",
@@ -34,4 +28,4 @@
       label: "Graduated Students",
     }] %>
 
-<%= pb_rails("advanced_table", props: {table_data: [], column_definitions: columnDefinitions}) %>
+<%= pb_rails("advanced_table", props: {table_data: @table_data, column_definitions: columnDefinitions}) %>
