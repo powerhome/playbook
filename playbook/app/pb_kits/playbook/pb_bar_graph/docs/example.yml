@@ -9,6 +9,7 @@ examples:
   - bar_graph_spline: Spline
   - bar_graph_colors: Color Overrides
   - bar_graph_custom: Custom Overrides
+  - bar_graph_secondary_y_axis: Secondary Y-Axis
 
 
   react:
@@ -20,3 +21,4 @@ examples:
   - bar_graph_spline: Spline
   - bar_graph_colors: Color Overrides
   - bar_graph_custom: Custom Overrides
+  - bar_graph_secondary_y_axis: Secondary Y-Axis
