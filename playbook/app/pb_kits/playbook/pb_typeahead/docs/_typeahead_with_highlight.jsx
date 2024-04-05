@@ -46,7 +46,7 @@ const TypeaheadWithHighlight = (props) => {
       if (!inputValue.length) return text
       return text.replace(
         new RegExp(inputValue, 'gi'),
-        highlighted => `<mark>${highlighted}</mark>`
+        (highlighted) => `<mark>${highlighted}</mark>`
       )
     }
     return (
