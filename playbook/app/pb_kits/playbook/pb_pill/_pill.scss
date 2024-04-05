@@ -25,13 +25,9 @@ $pb_pill_height: 22px;
   @each $color_name, $color_value in $status_color_text {
     &[class*=_#{$color_name}]  {
         background: rgba($color_value, $opacity-1);
+
       .pb_pill_text {
-        @if $color_name=="neutral" {
-          color: $text_lt_light !important
-        }
-        @else {
-          color: $color_value !important;
-        }
+        color: $color_value !important;
       }
     }
   }
