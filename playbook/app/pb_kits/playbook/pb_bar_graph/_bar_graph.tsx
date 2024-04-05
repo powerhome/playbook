@@ -13,12 +13,12 @@ import classnames from "classnames";
 
 type BarGraphProps = {
   align?: "left" | "right" | "center";
-  axisTitle: string;
+  axisTitle: { name: string; }[] | string;
   dark?: boolean;
   xAxisCategories: [];
   yAxisMin: number;
   yAxisMax: number;
-  chartData: { name: string; data: number[] }[];
+  chartData: { name: string; data: number[], yAxis: number }[];
   className?: string;
   customOptions?: Partial<Highcharts.Options>;
   id: string;
@@ -37,6 +37,7 @@ type BarGraphProps = {
   y?: number;
   aria?: { [key: string]: string };
   data?: { [key: string]: string };
+  axisFormat?: { format: string; }[] | string;
 };
 
 
@@ -51,6 +52,7 @@ const BarGraph = ({
   colors,
   htmlOptions = {},
   customOptions = {},
+  axisFormat,
   id,
   pointStart,
   subTitle,
@@ -67,7 +69,7 @@ const BarGraph = ({
   x = 0,
   y = 0,
   ...props
-}: BarGraphProps): React.ReactElement => {
+}: BarGraphProps): React.ReactElement => { 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions);
@@ -89,13 +91,18 @@ const BarGraph = ({
     subtitle: {
       text: subTitle,
     },
-    yAxis: {
+    yAxis: [{
+      labels: {
+        format: typeof axisFormat === 'string' ? axisFormat : (axisFormat && axisFormat[0] ? axisFormat[0].format : "")
+
+      },
       min: yAxisMin,
       max: yAxisMax,
+      opposite: false,
       title: {
-        text: axisTitle,
-      },
-    },
+        text: typeof axisTitle === 'string' ? axisTitle : axisTitle[0].name,
+      }
+    }],
     xAxis: {
       categories: xAxisCategories,
     },
@@ -123,6 +130,20 @@ const BarGraph = ({
     series: chartData,
     credits: false,
   };
+
+if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
+  staticOptions.yAxis.push({
+    labels: {
+      format: typeof axisFormat === 'string' ? axisFormat : axisFormat[1].format,
+    },
+    min: yAxisMin,
+    max: yAxisMax,
+    opposite: true,
+    title: {
+      text: axisTitle[1].name,
+    }
+  });
+}
 
   if (!toggleLegendClick) {
     staticOptions.plotOptions.series.events = { legendItemClick: () => false };
