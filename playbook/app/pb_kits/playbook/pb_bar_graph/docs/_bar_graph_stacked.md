@@ -1,0 +1,1 @@
+The `stacking` prop can be used for a stacked bar graph. The prop allows for `normal` or `percent` as options. 

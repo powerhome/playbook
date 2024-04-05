@@ -37,6 +37,7 @@ type BarGraphProps = {
   y?: number;
   aria?: { [key: string]: string };
   data?: { [key: string]: string };
+  stacking?: "normal" | "percent" 
   axisFormat?: { format: string; }[] | string;
 };
 
@@ -55,6 +56,7 @@ const BarGraph = ({
   axisFormat,
   id,
   pointStart,
+  stacking,
   subTitle,
   type = "column",
   title = "Title",
@@ -101,7 +103,12 @@ const BarGraph = ({
       opposite: false,
       title: {
         text: typeof axisTitle === 'string' ? axisTitle : axisTitle[0].name,
-      }
+      },
+      plotLines: typeof yAxisMin !== 'undefined' && yAxisMin !== null ? [] : [{
+        value: 0,
+        zIndex: 10,
+        color: "#E4E8F0"
+    }],
     }],
     xAxis: {
       categories: xAxisCategories,
@@ -120,7 +127,9 @@ const BarGraph = ({
         : highchartsTheme.colors,
     plotOptions: {
       series: {
+        stacking: stacking,
         pointStart: pointStart,
+        borderWidth: stacking ? 0 : "",
         events: {},
         dataLabels: {
           enabled: false,
@@ -141,7 +150,12 @@ if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
     opposite: true,
     title: {
       text: axisTitle[1].name,
-    }
+    }, 
+    plotLines: typeof yAxisMin !== 'undefined' && yAxisMin !== null ? [] : [{
+      value: 0,
+      zIndex: 10,
+      color: "#E4E8F0"
+  }],
   });
 }
 

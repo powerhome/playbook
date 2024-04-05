@@ -9,6 +9,8 @@ examples:
   - bar_graph_spline: Spline
   - bar_graph_colors: Color Overrides
   - bar_graph_custom: Custom Overrides
+  - bar_graph_stacked: Stacked
+  - bar_graph_negative_numbers: Negative Numbers
   - bar_graph_secondary_y_axis: Secondary Y-Axis
 
 
@@ -21,4 +23,6 @@ examples:
   - bar_graph_spline: Spline
   - bar_graph_colors: Color Overrides
   - bar_graph_custom: Custom Overrides
+  - bar_graph_stacked: Stacked
+  - bar_graph_negative_numbers: Negative Numbers
   - bar_graph_secondary_y_axis: Secondary Y-Axis
