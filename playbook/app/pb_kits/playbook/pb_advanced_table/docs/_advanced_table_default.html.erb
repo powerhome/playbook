@@ -1,0 +1,33 @@
+<% require '../playbook/app/pb_kits/playbook/pb_advanced_table/docs/advanced_table_example_mock_data.rb' %>
+
+<% columnDefinitions = [{
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    }] %>
+
+<%= pb_rails("advanced_table", props: {table_data: TABLE_DATA, column_definitions: columnDefinitions}) %>

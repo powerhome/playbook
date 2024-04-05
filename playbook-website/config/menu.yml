@@ -53,7 +53,7 @@ kits:
         description: Tables display a collection of structured data and typically have the ability to sort, filter, and paginate data. 
         status: "stable"
       - name: "advanced_table"
-        platforms: *react_only
+        platforms: *web
         description: The Advanced Table can be used to display complex, nested data in a way that allows for expansion and/or sorting.
         status: "stable" 
       - name: "list"
