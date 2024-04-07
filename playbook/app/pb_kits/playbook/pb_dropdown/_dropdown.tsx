@@ -99,7 +99,7 @@ const Dropdown = (props: DropdownProps) => {
             handleWrapperClick
           }}
       >
-        <div className="typeahead_wrapper" 
+        <div className="dropdown_wrapper" 
             ref={dropdownRef}
         >
           {children ? (

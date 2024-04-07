@@ -2,24 +2,17 @@
 @import "../tokens/spacing";
 @import "../tokens/typography";
 @import "../tokens/border_radius";
+@import "../pb_body/body_mixins";
 
 .pb_dropdown {
-  .typeahead_wrapper {
+  .dropdown_wrapper {
     position: relative;
-    .typeahead_input_wrapper {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+    .dropdown_trigger_wrapper {
+      @include pb_body;
       border: 1px solid $border_light;
-      border-radius: $border_rad_heavier;
-      font-family: $font_family_base;
-      font-size: $font_base;
-      padding: 0 $space_xs;
-      cursor: text;
 
-      .typeahead_input {
-        font-family: $font_family_base;
-        font-size: $font_base;
+      .dropdown_input {
+        @include pb_body;
         border: unset;
         border-radius: $border_rad_heavier;
         padding: $space_xs 0;
@@ -39,14 +32,18 @@
       z-index: 3;
       width: 100%;
 
+      .pb_dropdown_option {
+        :hover {
+          background-color: $border_light;
+        }
+      }
+
       .dropdown_option {
         width: 100%;
       }
 
       .dropdown_option_list {
-        :hover {
-          background-color: $bg_light;
-        }
+        border-bottom: 1px solid $border_light;
       }
       .dropdown_option_selected {
         background-color: $primary;

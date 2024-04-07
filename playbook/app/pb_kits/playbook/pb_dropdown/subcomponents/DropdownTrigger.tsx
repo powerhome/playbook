@@ -10,6 +10,9 @@ import { globalProps } from "../../utilities/globalProps";
 import DropdownContext from "../context";
 
 import Body from "../../pb_body/_body";
+import Icon from "../../pb_icon/_icon";
+import Flex from "../../pb_flex/_flex";
+import FlexItem from "../../pb_flex/_flex_item";
 
 type DropdownTriggerProps = {
   aria?: { [key: string]: string };
@@ -56,20 +59,40 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
         </div>
       ) : (
         <>
-          <div className="typeahead_input_wrapper" 
-              onClick={handleWrapperClick}
+          <Flex align="center"
+              borderRadius="lg"
+              className="dropdown_trigger_wrapper" 
+              cursor="text"
+              htmlOptions={{ onClick: () => handleWrapperClick() }}
+              justify="between"
+              paddingX="sm"
+              paddingY="xs"
           >
-            {selected.label && <Body text={selected.label} />}
-            <input
-                className="typeahead_input"
-                onChange={handleChange}
-                onClick={() => setIsDropDownClosed(!isDropDownClosed)}
-                onKeyDown={(e) => handleOnKeyDown(e.key)}
-                placeholder={selected.label ? "" : "Select..."}
-                ref={inputRef}
-                value={filterItem}
-            />
-          </div>
+            <FlexItem>
+                <Flex align="center">
+                    {selected.label && <Body text={selected.label} />}
+                    <input
+                        className="dropdown_input"
+                        onChange={handleChange}
+                        onClick={() => setIsDropDownClosed(!isDropDownClosed)}
+                        onKeyDown={(e) => handleOnKeyDown(e.key)}
+                        placeholder={selected.label ? "" : "Select..."}
+                        ref={inputRef}
+                        value={filterItem}
+                    />
+                </Flex>
+            </FlexItem>
+            <FlexItem>
+                <Body color="light" 
+                    key={`${isDropDownClosed ? "chevron-down" : 'chevron-up'}`}
+                >
+                    <Icon cursor="pointer"
+                        icon={`${isDropDownClosed ? "chevron-down" : 'chevron-up'}`}
+                        size="lg" 
+                    />
+                </Body>
+            </FlexItem>
+          </Flex>
         </>
       )}
     </div>
