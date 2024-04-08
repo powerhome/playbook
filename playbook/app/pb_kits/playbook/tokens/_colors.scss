@@ -213,7 +213,7 @@ $status_color_text: (
   warning:            darken($warning, 10%),
   error:              $error,
   info:               $info,
-  neutral:            darken($neutral, 15%),
+  neutral:            $text_lt_light,
   primary:            $primary
 );
 
