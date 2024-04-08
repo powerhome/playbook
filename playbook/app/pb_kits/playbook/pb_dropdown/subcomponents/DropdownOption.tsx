@@ -35,10 +35,16 @@ const DropdownOption = (props: DropdownOptionProps) => {
     return null;
   }
 
+  const selectedClass = `${
+    selected.label === option.label
+        ? "dropdown_option_selected"
+        : "dropdown_option_list"
+  }`
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const classes = classnames(
     buildCss("pb_dropdown_option"),
+    selectedClass,
     globalProps(props),
     className
   );
@@ -51,11 +57,6 @@ const DropdownOption = (props: DropdownOptionProps) => {
         key={key}
     >
       <ListItem
-          className={`${
-            selected.label === option.label
-                ? "dropdown_option_selected"
-                : "dropdown_option_list"
-          }`}
           cursor="pointer"
           data-name={option.value}
           htmlOptions={{ onClick: () => handleOptionClick(option) }}
