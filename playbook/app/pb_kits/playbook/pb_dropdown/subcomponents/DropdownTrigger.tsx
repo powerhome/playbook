@@ -16,14 +16,15 @@ import FlexItem from "../../pb_flex/_flex_item";
 
 type DropdownTriggerProps = {
   aria?: { [key: string]: string };
-  className?: string;
   children?: React.ReactChild[] | React.ReactChild;
+  className?: string;
+  customDisplay?: React.ReactChild[] | React.ReactChild;
   data?: { [key: string]: string };
   id?: string;
 };
 
 const DropdownTrigger = (props: DropdownTriggerProps) => {
-  const { aria = {}, className, children, data = {}, id } = props;
+  const { aria = {}, className, children, customDisplay, data = {}, id } = props;
 
   const {
     handleWrapperClick,
@@ -70,7 +71,17 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
           >
             <FlexItem>
                 <Flex align="center">
-                    {selected.label && <Body text={selected.label} />}
+                    {customDisplay ? (
+                      <Flex align="center">
+                          {customDisplay}
+                          <Body paddingLeft="xs">
+                              <b>{selected.label}</b>
+                          </Body>
+                      </Flex>
+                      ) : (
+                        selected.label && <Body text={selected.label} />
+                      )
+                    }
                     <input
                         className="dropdown_input"
                         onChange={handleChange}

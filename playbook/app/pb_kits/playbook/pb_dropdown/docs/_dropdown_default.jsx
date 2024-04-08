@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Dropdown, Icon, Body, FlexItem, Flex } from '../../'
 
 const DropdownDefault = (props) => {
-  const [selectedOption, setSelectedOption] = useState();
 
   const options = [
     {
@@ -31,16 +30,8 @@ const DropdownDefault = (props) => {
 
   return (
   <div>
-    {
-      selectedOption &&
-      <Flex paddingY="md">
-          <Icon icon={selectedOption.icon}/>
-          <Body paddingLeft="xs">{selectedOption.label}</Body>
-      </Flex>
-    }
-    
     <Dropdown
-        onSelect={(selectedItem) => setSelectedOption(selectedItem)}
+        onSelect={(selectedItem) => console.log(selectedItem)}
         options={options}
         {...props}
     >

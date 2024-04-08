@@ -3,5 +3,6 @@ examples:
   
   react:
   - dropdown_default: Default
+  - dropdown_with_custom_display: Custom Display
   
   
