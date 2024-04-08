@@ -65,7 +65,7 @@ const getResponsiveValue = <T extends string | undefined>(prop: ResponsiveProp<T
 
 const Background = (props: BackgroundProps): React.ReactElement => {
   const {
-    alt = '',
+    alt = undefined,
     aria = {},
     backgroundColor = 'light',
     backgroundPosition = '',
