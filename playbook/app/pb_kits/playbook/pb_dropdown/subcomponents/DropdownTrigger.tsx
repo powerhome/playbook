@@ -99,7 +99,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                 >
                     <Icon cursor="pointer"
                         icon={`${isDropDownClosed ? "chevron-down" : 'chevron-up'}`}
-                        size="lg" 
+                        size="sm" 
                     />
                 </Body>
             </FlexItem>

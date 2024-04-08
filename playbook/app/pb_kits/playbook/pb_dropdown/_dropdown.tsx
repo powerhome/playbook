@@ -69,7 +69,8 @@ const Dropdown = (props: DropdownProps) => {
 
   const handleOnKeyDown = (key: string) => {
     if (key === "Backspace" || key === "Delete") {
-      setSelected({ label: "", value: "" });
+      setSelected({})
+      onSelect(null)
     }
   };
 

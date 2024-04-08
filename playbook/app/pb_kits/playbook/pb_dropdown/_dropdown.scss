@@ -23,7 +23,7 @@
         @include pb_body;
         border: unset;
         border-radius: $border_rad_heavier;
-        padding: $space_xs 0;
+        padding: 0;
 
         &:focus-visible {
           outline: none;
