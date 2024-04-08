@@ -257,7 +257,7 @@ kits:
       - name: dropdown
         platforms: *react_only
         description: ""
-        status: "stable"
+        status: "beta"
       - name: "multi_level_select"
         platforms: *web
         description: The MultiLevelSelect kit renders a multi leveled select dropdown based on data from the user. 
