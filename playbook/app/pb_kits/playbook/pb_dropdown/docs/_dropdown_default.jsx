@@ -33,7 +33,7 @@ const DropdownDefault = (props) => {
   <div>
     {
       selectedOption &&
-      <Flex paddingX="md">
+      <Flex paddingY="md">
           <Icon icon={selectedOption.icon}/>
           <Body paddingLeft="xs">{selectedOption.label}</Body>
       </Flex>

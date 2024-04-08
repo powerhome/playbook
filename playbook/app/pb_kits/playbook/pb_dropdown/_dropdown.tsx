@@ -3,6 +3,8 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
+import Body from '../pb_body/_body'
+
 import DropdownContainer from './subcomponents/DropdownContainer'
 import DropdownOption from './subcomponents/DropdownOption'
 import DropdownTrigger from './subcomponents/DropdownTrigger'
@@ -107,7 +109,15 @@ const Dropdown = (props: DropdownProps) => {
           ) : (
             <>
               <DropdownTrigger />
-              <DropdownContainer/>
+              <DropdownContainer>
+              {options.map((option: GenericObject) => (
+                <Dropdown.Option key={option.id} 
+                    option={option}
+                >
+                    <Body text={option.label}/>
+                </Dropdown.Option>
+              ))}
+              </DropdownContainer>
             </>
           )}
         </div>
