@@ -125,17 +125,25 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     {
       [`pb_background_color_${resBackgroundColor}`]: resBackgroundColor && !customColor,
       [`pb_background_custom_color`]: !!customColor,
+      // [`pb_background_position_${resBackgroundPosition}`]: !resBackgroundPosition,
     },
     className
   );
 
-  const backgroundStyle = {
-    backgroundImage: resImageUrl ? `url(${resImageUrl})` : undefined,
-    backgroundRepeat: resBackgroundRepeat || undefined,
-    backgroundSize: resBackgroundSize || undefined,
-    backgroundPosition: resBackgroundPosition || undefined,
-    backgroundColor: customColor || undefined,
-  };
+  const backgroundStyle =
+    (resImageUrl !== '') ? {
+      backgroundImage: resImageUrl ? `url(${resImageUrl})` : undefined,
+      backgroundRepeat: resBackgroundRepeat || undefined,
+      backgroundPosition: resBackgroundPosition || undefined,
+      backgroundSize: resBackgroundSize || undefined,
+      backgroundColor: customColor || undefined,
+    } : {
+      backgroundColor: customColor || undefined,
+      // backgroundPosition: resBackgroundPosition == "" ? null : (resBackgroundPosition || undefined),
+    }
+  ;
+  // console.log(backgroundPosition, resBackgroundPosition);
+  // debugger
 
   const Tag: React.ReactElement | any = `${tag}`;
   const ariaProps = buildAriaProps(aria);
@@ -151,6 +159,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
         className={classes}
         id={id}
         style={backgroundStyle}
+        // style={{backgroundColor: customColor || undefined,}}
     >
       {children}
     </Tag>
