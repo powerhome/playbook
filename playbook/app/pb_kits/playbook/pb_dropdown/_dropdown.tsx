@@ -110,7 +110,7 @@ const Dropdown = (props: DropdownProps) => {
             <>
               <DropdownTrigger />
               <DropdownContainer>
-              {options.map((option: GenericObject) => (
+              {options && options?.map((option: GenericObject) => (
                 <Dropdown.Option key={option.id} 
                     option={option}
                 >
