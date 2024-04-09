@@ -10,8 +10,8 @@ const {
   setFocusedOptionIndex,
   handleOptionClick,
   setIsDropDownClosed,
-  handleBackspace
-
+  handleBackspace,
+  selected
 }= useContext(DropdownContext)
 
   return (e: React.KeyboardEvent) => {
@@ -42,6 +42,12 @@ const {
         setFocusedOptionIndex(-1)
       }
       break;
+    default:
+        if (selected && selected.label) {
+          e.preventDefault();
+          handleBackspace();
+        }
+        break;
   }
 }
 };

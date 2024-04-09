@@ -71,7 +71,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         </TextInput>
       )}
       <List>{
-        filteredOptions.length === 0 ? (
+        filteredOptions?.length === 0 ? (
           <ListItem
               display="flex"
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
