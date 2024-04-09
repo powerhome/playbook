@@ -35,6 +35,8 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     setIsDropDownClosed,
     isDropDownClosed,
     inputRef,
+    isInputFocused,
+    setIsInputFocused
   } = useContext(DropdownContext);
   
   const handleKeyDown = useHandleOnKeyDown();
@@ -64,7 +66,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
         <>
           <Flex align="center"
               borderRadius="lg"
-              className="dropdown_trigger_wrapper" 
+              className={`dropdown_trigger_wrapper ${isInputFocused && 'dropdown_trigger_wrapper_focus'}`}
               cursor="text"
               htmlOptions={{ onClick: () => handleWrapperClick(), tabIndex:"0" }}
               justify="between"
@@ -88,6 +90,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         className="dropdown_input"
                         onChange={handleChange}
                         onClick={() => setIsDropDownClosed(!isDropDownClosed)}
+                        onFocus={() => setIsInputFocused(true)}
                         onKeyDown={handleKeyDown}
                         placeholder={selected.label ? "" : "Select..."}
                         ref={inputRef}

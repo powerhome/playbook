@@ -39,6 +39,7 @@ const Dropdown = (props: DropdownProps) => {
   const [isDropDownClosed, setIsDropDownClosed] = useState(true);
   const [filterItem, setFilterItem] = useState("");
   const [selected, setSelected] = useState({});
+  const [isInputFocused, setIsInputFocused] = useState(false);
   //state for keyboard events
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
 
@@ -50,6 +51,7 @@ const Dropdown = (props: DropdownProps) => {
     const handleClickOutside = (event: any) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropDownClosed(true);
+        setIsInputFocused(false)
       }
     };
     window.addEventListener("click", handleClickOutside);
@@ -109,7 +111,9 @@ const Dropdown = (props: DropdownProps) => {
             focusedOptionIndex,
             setFocusedOptionIndex,
             filteredOptions,
-            handleBackspace
+            handleBackspace,
+            isInputFocused,
+            setIsInputFocused
           }}
       >
         <div className="dropdown_wrapper" 
