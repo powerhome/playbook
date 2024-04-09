@@ -26,7 +26,7 @@ type DropdownOptionProps = {
 const DropdownOption = (props: DropdownOptionProps) => {
   const { aria = {}, className, children, data = {}, id, option, key } = props;
 
-  const { handleOptionClick, selected, filterItem } =
+  const { handleOptionClick, selected, filterItem, filteredOptions, focusedOptionIndex } =
     useContext(DropdownContext);
   const isItemMatchingFilter = (option: GenericObject) =>
     option?.label.toLowerCase().includes(filterItem.toLowerCase());
@@ -34,6 +34,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
   if (!isItemMatchingFilter(option)) {
     return null;
   }
+  const isFocused = focusedOptionIndex >= 0 && filteredOptions[focusedOptionIndex].label === option.label
+  const focusedClass = isFocused && "dropdown_option_focused"
 
   const selectedClass = `${
     selected.label === option.label
@@ -45,6 +47,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
   const classes = classnames(
     buildCss("pb_dropdown_option"),
     selectedClass,
+    focusedClass,
     globalProps(props),
     className
   );

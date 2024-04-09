@@ -39,6 +39,9 @@ const Dropdown = (props: DropdownProps) => {
   const [isDropDownClosed, setIsDropDownClosed] = useState(true);
   const [filterItem, setFilterItem] = useState("");
   const [selected, setSelected] = useState({});
+  //state for keyboard events
+  const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
+
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -55,6 +58,7 @@ const Dropdown = (props: DropdownProps) => {
     };
   }, []);
 
+
   const handleChange = (e: any) => {
     setFilterItem(e.target.value);
     setIsDropDownClosed(false);
@@ -67,19 +71,20 @@ const Dropdown = (props: DropdownProps) => {
     setIsDropDownClosed(true);
   };
 
-  const handleOnKeyDown = (key: string) => {
-    if (key === "Backspace" || key === "Delete") {
-      setSelected({})
-      onSelect(null)
-    }
-  };
 
   const handleWrapperClick = () => {
     inputRef.current.focus();
     setIsDropDownClosed(!isDropDownClosed);
   };
 
+  const handleBackspace = () => {
+    setSelected({})
+    onSelect(null)
+  }
 
+  const filteredOptions = options.filter((option: any) =>
+  option.label.toLowerCase().includes(filterItem.toLowerCase())
+);
 
   return (
     <div
@@ -92,14 +97,18 @@ const Dropdown = (props: DropdownProps) => {
           value={{
             handleOptionClick,
             selected,
+            setSelected,
             options,
             filterItem,
             handleChange,
-            handleOnKeyDown,
             setIsDropDownClosed,
             isDropDownClosed,
             inputRef,
-            handleWrapperClick
+            handleWrapperClick,
+            focusedOptionIndex,
+            setFocusedOptionIndex,
+            filteredOptions,
+            handleBackspace
           }}
       >
         <div className="dropdown_wrapper" 

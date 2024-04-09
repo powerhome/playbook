@@ -6,6 +6,7 @@ import {
   buildDataProps,
 } from "../../utilities/props";
 import { globalProps } from "../../utilities/globalProps";
+import { handleOnKeyDown } from "./keyboardAccessibility";
 
 import DropdownContext from "../context";
 
@@ -31,10 +32,14 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     selected,
     filterItem,
     handleChange,
-    handleOnKeyDown,
     setIsDropDownClosed,
     isDropDownClosed,
     inputRef,
+    focusedOptionIndex,
+    filteredOptions,
+    setFocusedOptionIndex,
+    handleOptionClick,
+    handleBackspace
   } = useContext(DropdownContext);
 
   const ariaProps = buildAriaProps(aria);
@@ -86,7 +91,17 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         className="dropdown_input"
                         onChange={handleChange}
                         onClick={() => setIsDropDownClosed(!isDropDownClosed)}
-                        onKeyDown={(e) => handleOnKeyDown(e.key)}
+                        onKeyDown={(e) =>
+                          handleOnKeyDown({
+                            e,
+                            focusedOptionIndex,
+                            filteredOptions,
+                            setFocusedOptionIndex,
+                            handleOptionClick,
+                            setIsDropDownClosed,
+                            handleBackspace
+                        })
+                        }
                         placeholder={selected.label ? "" : "Select..."}
                         ref={inputRef}
                         value={filterItem}
