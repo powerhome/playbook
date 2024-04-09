@@ -30,6 +30,11 @@
           outline: none;
         }
       }
+      &:focus {
+        box-shadow: 0px 0px 0 1px $primary;
+        outline: unset;
+        transition: box-shadow .10s ease-in-out;
+      }
     }
 
     .pb_dropdown_container {

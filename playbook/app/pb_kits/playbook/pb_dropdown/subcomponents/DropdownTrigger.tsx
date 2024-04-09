@@ -66,7 +66,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
               borderRadius="lg"
               className="dropdown_trigger_wrapper" 
               cursor="text"
-              htmlOptions={{ onClick: () => handleWrapperClick() }}
+              htmlOptions={{ onClick: () => handleWrapperClick(), tabindex:"0" }}
               justify="between"
               paddingX="sm"
               paddingY="xs"

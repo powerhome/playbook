@@ -73,7 +73,7 @@ const Dropdown = (props: DropdownProps) => {
 
 
   const handleWrapperClick = () => {
-    inputRef.current.focus();
+    // inputRef.current.focus();
     setIsDropDownClosed(!isDropDownClosed);
   };
 
@@ -83,7 +83,7 @@ const Dropdown = (props: DropdownProps) => {
     setFocusedOptionIndex(-1)
   }
 
-  const filteredOptions = options?.filter((option: any) =>
+  const filteredOptions = options?.filter((option: GenericObject) =>
   option.label.toLowerCase().includes(filterItem.toLowerCase())
 );
 

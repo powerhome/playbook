@@ -28,6 +28,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
 
   const { handleOptionClick, selected, filterItem, filteredOptions, focusedOptionIndex } =
     useContext(DropdownContext);
+
   const isItemMatchingFilter = (option: GenericObject) =>
     option?.label.toLowerCase().includes(filterItem.toLowerCase());
 
