@@ -6,7 +6,7 @@ import {
   buildDataProps,
 } from "../../utilities/props";
 import { globalProps } from "../../utilities/globalProps";
-import { useHandleOnKeyDown } from "../utilities/keyboardAccessibility";
+import { useHandleOnKeyDown } from "../hooks/useHandleOnKeydown";
 
 import DropdownContext from "../context";
 
@@ -32,7 +32,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     selected,
     filterItem,
     handleChange,
-    setIsDropDownClosed,
+    toggleDropdown,
     isDropDownClosed,
     inputRef,
     isInputFocused,
@@ -57,7 +57,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     >
       {children ? (
         <div
-            onClick={() => setIsDropDownClosed(!isDropDownClosed)}
+            onClick={() => toggleDropdown()}
             style={{ display: "inline-block" }}
         >
           {children}
@@ -89,7 +89,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                     <input
                         className="dropdown_input"
                         onChange={handleChange}
-                        onClick={() => setIsDropDownClosed(!isDropDownClosed)}
+                        onClick={() => toggleDropdown()}
                         onFocus={() => setIsInputFocused(true)}
                         onKeyDown={handleKeyDown}
                         placeholder={selected.label ? "" : "Select..."}

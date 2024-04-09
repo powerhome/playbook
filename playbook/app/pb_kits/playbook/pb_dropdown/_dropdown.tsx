@@ -9,6 +9,7 @@ import DropdownContainer from './subcomponents/DropdownContainer'
 import DropdownOption from './subcomponents/DropdownOption'
 import DropdownTrigger from './subcomponents/DropdownTrigger'
 import DropdownContext from './context'
+import useDropdown from './hooks/useDropdown'
 import { GenericObject } from '../types'
 
 type DropdownProps = {
@@ -36,7 +37,8 @@ const Dropdown = (props: DropdownProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_dropdown'), globalProps(props), className)
 
-  const [isDropDownClosed, setIsDropDownClosed] = useState(true);
+  const [ isDropDownClosed, setIsDropDownClosed, toggleDropdown ] = useDropdown()
+
   const [filterItem, setFilterItem] = useState("");
   const [selected, setSelected] = useState({});
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -76,7 +78,7 @@ const Dropdown = (props: DropdownProps) => {
 
   const handleWrapperClick = () => {
     inputRef.current.focus();
-    setIsDropDownClosed(!isDropDownClosed);
+    toggleDropdown();
   };
 
   const handleBackspace = () => {
@@ -98,22 +100,24 @@ const Dropdown = (props: DropdownProps) => {
     >
       <DropdownContext.Provider
           value={{
-            handleOptionClick,
-            selected,
-            setSelected,
-            options,
-            filterItem,
-            handleChange,
-            setIsDropDownClosed,
-            isDropDownClosed,
-            inputRef,
-            handleWrapperClick,
-            focusedOptionIndex,
-            setFocusedOptionIndex,
             filteredOptions,
+            filterItem,
+            focusedOptionIndex,
             handleBackspace,
+            handleChange,
+            handleOptionClick,
+            handleWrapperClick,
+            inputRef,
             isInputFocused,
-            setIsInputFocused
+            options,
+            selected,
+            setFocusedOptionIndex,
+            setIsInputFocused,
+            setSelected,
+            isDropDownClosed,
+            setIsDropDownClosed,
+            toggleDropdown
+        
           }}
       >
         <div className="dropdown_wrapper" 

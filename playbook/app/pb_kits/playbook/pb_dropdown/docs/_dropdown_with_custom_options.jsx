@@ -1,7 +1,7 @@
 import React from 'react'
-import { Dropdown } from '../../'
+import { Dropdown, Icon, Body, FlexItem, Flex } from '../..'
 
-const DropdownDefault = (props) => {
+const DropdownWithCustomOptions = (props) => {
 
   const options = [
     {
@@ -40,7 +40,23 @@ const DropdownDefault = (props) => {
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}
-          /> 
+          >
+            <>
+              <FlexItem>
+                <Flex>
+                  <Icon icon={option.icon} 
+                      paddingRight="xs"
+                  />
+                  <Body text={option.label} />
+                </Flex>
+              </FlexItem>
+              <FlexItem>
+                <Body color="light" 
+                    text={option.areaCode} 
+                />
+              </FlexItem>
+            </>
+          </Dropdown.Option>
         ))}
       </Dropdown.Container>
     </Dropdown>
@@ -48,4 +64,4 @@ const DropdownDefault = (props) => {
   )
 }
 
-export default DropdownDefault
+export default  DropdownWithCustomOptions
