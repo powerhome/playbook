@@ -63,7 +63,7 @@
       }
       .dropdown_option_selected {
         background-color: $primary;
-        [class^="pb_body"] {
+        [class^="pb_body"], [class^="pb_title_kit"] {
           color: $white !important;
         }
         :hover {

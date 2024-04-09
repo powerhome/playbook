@@ -44,6 +44,7 @@ export const handleOnKeyDown = ({
       if (focusedOptionIndex !== -1) {
         e.preventDefault();
         handleOptionClick(filteredOptions[focusedOptionIndex]);
+        setFocusedOptionIndex(-1)
       }
       break;
   }

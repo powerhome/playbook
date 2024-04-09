@@ -80,9 +80,10 @@ const Dropdown = (props: DropdownProps) => {
   const handleBackspace = () => {
     setSelected({})
     onSelect(null)
+    setFocusedOptionIndex(-1)
   }
 
-  const filteredOptions = options.filter((option: any) =>
+  const filteredOptions = options?.filter((option: any) =>
   option.label.toLowerCase().includes(filterItem.toLowerCase())
 );
 

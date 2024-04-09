@@ -60,6 +60,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         {...dataProps} 
         className={classes} 
         id={id}
+        onMouseEnter={() => setFocusedOptionIndex(-1)}
     >
       {searchbar && (
         <TextInput paddingTop="xs" 
@@ -78,7 +79,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
                     handleBackspace
                 })
                 }
-                placeholder="Search..."
+                placeholder="Select..."
                 ref={inputRef}
                 value={filterItem}
             />
