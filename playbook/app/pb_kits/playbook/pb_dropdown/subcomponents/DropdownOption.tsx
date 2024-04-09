@@ -10,6 +10,7 @@ import { globalProps } from "../../utilities/globalProps";
 import DropdownContext from "../context";
 
 import Flex from "../../pb_flex/_flex";
+import Body from "../../pb_body/_body";
 import ListItem from "../../pb_list/_list_item";
 import { GenericObject } from "../../types";
 
@@ -74,7 +75,13 @@ const DropdownOption = (props: DropdownOptionProps) => {
             paddingX="sm"
             paddingY="xxs"
         >
-          {children}
+          {
+            children ? (
+              children
+            ) : (
+              <Body text={option.label}/>
+            )
+          }
         </Flex>
       </ListItem>
     </div>
