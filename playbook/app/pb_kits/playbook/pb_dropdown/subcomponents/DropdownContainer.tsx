@@ -10,7 +10,9 @@ import { globalProps } from "../../utilities/globalProps";
 import DropdownContext from "../context";
 
 import List from "../../pb_list/_list";
+import ListItem from "../../pb_list/_list_item";
 import TextInput from "../../pb_text_input/_text_input";
+import Body from "../../pb_body/_body";
 
 type DropdownContainerProps = {
   aria?: { [key: string]: string };
@@ -35,6 +37,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     isDropDownClosed,
     handleChange,
     filterItem,
+    filteredOptions,
     inputRef,
     setFocusedOptionIndex,
   } = useContext(DropdownContext);
@@ -67,7 +70,22 @@ const DropdownContainer = (props: DropdownContainerProps) => {
             />
         </TextInput>
       )}
-      <List>{children}</List>
+      <List>{
+        filteredOptions.length === 0 ? (
+          <ListItem
+              display="flex"
+              justifyContent="center"
+              padding="xs"
+          >
+            <Body color="light" 
+                text="no option"
+            />
+          </ListItem>
+        ): (
+          children
+        )
+        }
+        </List>
     </div>
   );
 };
