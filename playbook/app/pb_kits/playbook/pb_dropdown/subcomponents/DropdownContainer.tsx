@@ -8,7 +8,6 @@ import {
 import { globalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
-import { handleOnKeyDown } from "./keyboardAccessibility";
 
 import List from "../../pb_list/_list";
 import TextInput from "../../pb_text_input/_text_input";
@@ -37,13 +36,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     handleChange,
     filterItem,
     inputRef,
-    focusedOptionIndex,
-    filteredOptions,
     setFocusedOptionIndex,
-    handleOptionClick,
-    setIsDropDownClosed,
-    handleBackspace
-
   } = useContext(DropdownContext);
 
   const ariaProps = buildAriaProps(aria);
@@ -68,17 +61,6 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         >
             <input
                 onChange={handleChange}
-                onKeyDown={(e) =>
-                  handleOnKeyDown({
-                    e,
-                    focusedOptionIndex,
-                    filteredOptions,
-                    setFocusedOptionIndex,
-                    handleOptionClick,
-                    setIsDropDownClosed,
-                    handleBackspace
-                })
-                }
                 placeholder="Select..."
                 ref={inputRef}
                 value={filterItem}

@@ -1,26 +1,21 @@
-import { GenericObject } from "../../types";
+import React, { useContext } from "react";
+import DropdownContext from "../context";
 
-type KeydownProps ={
-    e: any
-    setSelected?: (arg:GenericObject)=> void,
-    focusedOptionIndex?: number,
-    filteredOptions?: GenericObject,
-    setFocusedOptionIndex?: (arg: number)=> void,
-    handleOptionClick?: (arg: GenericObject) => void,
-    setIsDropDownClosed?: (arg:boolean) => void
-    handleBackspace?: () => void
-}
 
-export const handleOnKeyDown = ({
-  e,
+export const useHandleOnKeyDown = () => {
+
+const {
   focusedOptionIndex,
   filteredOptions,
   setFocusedOptionIndex,
   handleOptionClick,
   setIsDropDownClosed,
   handleBackspace
-}: KeydownProps) => {
-  switch (e.key) {
+
+}= useContext(DropdownContext)
+
+  return (e: React.KeyboardEvent) => {
+    switch (e.key) {
     case "Backspace":
     case "Delete":
       handleBackspace();
@@ -48,4 +43,5 @@ export const handleOnKeyDown = ({
       }
       break;
   }
+}
 };
