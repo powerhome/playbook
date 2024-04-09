@@ -74,6 +74,8 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         filteredOptions.length === 0 ? (
           <ListItem
               display="flex"
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               justifyContent="center"
               padding="xs"
           >
