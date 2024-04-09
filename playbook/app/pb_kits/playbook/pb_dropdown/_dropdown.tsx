@@ -73,7 +73,7 @@ const Dropdown = (props: DropdownProps) => {
 
 
   const handleWrapperClick = () => {
-    // inputRef.current.focus();
+    inputRef.current.focus();
     setIsDropDownClosed(!isDropDownClosed);
   };
 
