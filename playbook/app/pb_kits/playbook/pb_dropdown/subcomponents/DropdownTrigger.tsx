@@ -6,7 +6,7 @@ import {
   buildDataProps,
 } from "../../utilities/props";
 import { globalProps } from "../../utilities/globalProps";
-import { useHandleOnKeyDown } from "./keyboardAccessibility";
+import { useHandleOnKeyDown } from "../utilities/keyboardAccessibility";
 
 import DropdownContext from "../context";
 
