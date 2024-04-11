@@ -44,6 +44,8 @@ const Dropdown = (props: DropdownProps) => {
   const [filterItem, setFilterItem] = useState("");
   const [selected, setSelected] = useState({});
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [hasTriggerSubkit, setHasTriggerSubkit] = useState(true)
+
   //state for keyboard events
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
 
@@ -62,6 +64,19 @@ const Dropdown = (props: DropdownProps) => {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
+  }, []);
+
+  const hasDropdownTriggerChild = React.Children.toArray(props.children).some(child => {
+    if (React.isValidElement(child)) {
+      return child.type === DropdownTrigger;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (!hasDropdownTriggerChild) {
+      setHasTriggerSubkit(false)
+    }
   }, []);
 
 
@@ -127,7 +142,10 @@ const Dropdown = (props: DropdownProps) => {
             ref={dropdownRef}
         >
           {children ? (
-            children
+            <>
+              {!hasTriggerSubkit && <DropdownTrigger />}
+              {children}
+            </>
           ) : (
             <>
               <DropdownTrigger />

@@ -37,7 +37,6 @@ const DropdownWithCustomOptions = (props) => {
         options={options}
         {...props}
     >
-      <Dropdown.Trigger/>
       <Dropdown.Container>
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
