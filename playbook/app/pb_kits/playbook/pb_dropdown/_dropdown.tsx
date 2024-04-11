@@ -14,17 +14,19 @@ import { GenericObject } from '../types'
 
 type DropdownProps = {
   aria?: { [key: string]: string },
+  autocomplete?: boolean,
   className?: string,
   data?: { [key: string]: string },
   id?: string,
   children?: React.ReactChild[] | React.ReactChild,
-  options?: GenericObject,
+  options: GenericObject,
   onSelect?: (arg:GenericObject) => null
 }
 
 const Dropdown = (props: DropdownProps) => {
   const {
     aria = {},
+    autocomplete = false,
     children,
     className,
     data = {},
@@ -77,7 +79,7 @@ const Dropdown = (props: DropdownProps) => {
 
 
   const handleWrapperClick = () => {
-    inputRef.current.focus();
+    autocomplete && inputRef.current.focus();
     toggleDropdown();
   };
 
@@ -100,6 +102,7 @@ const Dropdown = (props: DropdownProps) => {
     >
       <DropdownContext.Provider
           value={{
+            autocomplete,
             filteredOptions,
             filterItem,
             focusedOptionIndex,

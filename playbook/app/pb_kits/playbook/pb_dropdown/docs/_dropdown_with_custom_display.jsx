@@ -46,7 +46,7 @@ const DropdownWithCustomDisplay = (props) => {
         selectedOption && (
             <Avatar
                 name={selectedOption.label}
-                size="sm"
+                size="xs"
             />
         )
       }

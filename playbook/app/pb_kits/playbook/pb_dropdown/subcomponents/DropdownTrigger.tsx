@@ -28,6 +28,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   const { aria = {}, className, children, customDisplay, data = {}, id } = props;
 
   const {
+    autocomplete,
     handleWrapperClick,
     selected,
     filterItem,
@@ -68,7 +69,11 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
               borderRadius="lg"
               className={`dropdown_trigger_wrapper ${isInputFocused && 'dropdown_trigger_wrapper_focus'}`}
               cursor="text"
-              htmlOptions={{ onClick: () => handleWrapperClick(), tabIndex:"0" }}
+              htmlOptions={{ 
+                onClick: () => handleWrapperClick(), 
+                onKeyDown: handleKeyDown,
+                tabIndex:"0",
+              }}
               justify="between"
               paddingX="sm"
               paddingY="xs"
@@ -86,16 +91,21 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         selected.label && <Body text={selected.label} />
                       )
                     }
-                    <input
-                        className="dropdown_input"
-                        onChange={handleChange}
-                        onClick={() => toggleDropdown()}
-                        onFocus={() => setIsInputFocused(true)}
-                        onKeyDown={handleKeyDown}
-                        placeholder={selected.label ? "" : "Select..."}
-                        ref={inputRef}
-                        value={filterItem}
-                    />
+                    {
+                      autocomplete && (
+                        <input
+                            className="dropdown_input"
+                            onChange={handleChange}
+                            onClick={() => toggleDropdown()}
+                            onFocus={() => setIsInputFocused(true)}
+                            onKeyDown={handleKeyDown}
+                            placeholder={selected.label ? "" : "Select..."}
+                            ref={inputRef}
+                            value={filterItem}
+                        />
+                      )
+                    }
+                    
                 </Flex>
             </FlexItem>
             <FlexItem>
