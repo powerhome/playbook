@@ -1,9 +1,5 @@
-<%= content_tag(:div,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: object.id) do %>
-        <% object.table_data.each do |row| %>
-          <%= render_row_and_children(row, object.column_definitions) %>
-        <% end %>
+<%= pb_content_tag(:div) do %>
+  <% object.table_data.each do |row| %>
+    <%= render_row_and_children(row, object.column_definitions) %>
+  <% end %>
 <% end %>

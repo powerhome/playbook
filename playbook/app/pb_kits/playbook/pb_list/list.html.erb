@@ -1,12 +1,7 @@
 <%= content_tag(:div, class: object.list_classname) do %>
-  <%= content_tag(:"#{object.ordered_class}",
-                  aria: object.aria,
-                  class: object.classname,
-                  data: object.data,
-                  id: object.id,
+  <%= pb_content_tag(:"#{object.ordered_class}",
                   role: object.role,
                   tabindex: object.tabindex,
-                  **combined_html_options
     ) do %>
       <%= content.presence %>
   <% end %>
