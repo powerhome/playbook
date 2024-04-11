@@ -71,8 +71,8 @@ const Dropdown = (props: DropdownProps) => {
   const handleOptionClick = (selectedItem: GenericObject) => {
     setSelected(selectedItem);
     setFilterItem("");
-    onSelect(selectedItem);
     setIsDropDownClosed(true);
+    onSelect(selectedItem);
   };
 
 

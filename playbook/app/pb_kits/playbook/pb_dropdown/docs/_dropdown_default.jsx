@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dropdown } from '../../'
 
 const DropdownDefault = (props) => {
+// eslint-disable-next-line no-unused-vars
+const [selectedOption, setSelectedOption] = useState();
 
   const options = [
     {
@@ -31,6 +33,7 @@ const DropdownDefault = (props) => {
   return (
   <div>
     <Dropdown
+        onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
         {...props}
     >
