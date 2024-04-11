@@ -31,12 +31,11 @@ const DropdownDefault = (props) => {
   return (
   <div>
     <Dropdown
-        onSelect={(selectedItem) => console.log(selectedItem)}
         options={options}
         {...props}
     >
       <Dropdown.Trigger/>
-      <Dropdown.Container search>
+      <Dropdown.Container>
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}

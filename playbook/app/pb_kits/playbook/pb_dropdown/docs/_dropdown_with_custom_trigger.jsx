@@ -47,7 +47,7 @@ const [selectedOption, setSelectedOption] = useState();
             </div>
         </Dropdown.Trigger>
 
-      <Dropdown.Container search>
+      <Dropdown.Container>
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}
