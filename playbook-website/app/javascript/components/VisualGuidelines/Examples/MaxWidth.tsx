@@ -4,12 +4,21 @@ import React from 'react'
 
 import {
   Background,
+  Detail,
+  Flex,
   Title,
 } from 'playbook-ui'
 
 import Example from '../Templates/Example'
 
-const SIZES = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] //TODO: investigate using types
+const SIZES: { [size: string]: string } = {
+  'xs': '360px max',
+  'sm': '540px max',
+  'md': '720px max',
+  'lg': '960px max',
+  'xl': '1140px max',
+  'xxl': '1320px max',
+}
 
 const MaxWidthDescription = () => (
   <>
@@ -23,11 +32,11 @@ const MaxWidth = ({ example }: {example: string}) => (
       description={<MaxWidthDescription />}
       example={example}
       globalProps={{
-        maxWidth: SIZES,
+        maxWidth: Object.keys(SIZES),
       }}
       title="Max Width"
   >
-    {SIZES.map((size: string) => (
+    {Object.keys(SIZES).map((size: string) => (
       <Background
           backgroundColor="gradient"
           key={size}
@@ -35,13 +44,18 @@ const MaxWidth = ({ example }: {example: string}) => (
           maxWidth={size}
           padding="xs"
       >
-        <Title
-          dark
-          size={4}
-        >
-          {size.toUpperCase()}
-        </Title>
-
+        <Flex gap="sm">
+          <Title
+            dark
+            size={4}
+            htmlOptions={{style: {minWidth:"30px"}}}
+          >
+            {size.toUpperCase()}
+          </Title>
+          <Detail color="lighter">
+            {SIZES[size]}
+          </Detail>
+        </Flex>
       </Background>
     ))}
   </Example>
