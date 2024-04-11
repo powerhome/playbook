@@ -83,12 +83,12 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                     {customDisplay ? (
                       <Flex align="center">
                           {customDisplay}
-                          <Body paddingLeft="xs">
-                              <b>{selected.label}</b>
+                          <Body paddingLeft={`${selected.label ? "xs" : "none"}`}>
+                            {selected.label ? <b>{selected.label}</b> : autocomplete ? "" : "Select..." }
                           </Body>
                       </Flex>
                       ) : (
-                        selected.label && <Body text={selected.label} />
+                        <Body text={selected.label ? selected.label : autocomplete ? "" : "Select..."} />
                       )
                     }
                     {
