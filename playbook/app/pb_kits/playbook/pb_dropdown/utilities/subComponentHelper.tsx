@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import DropdownTrigger from "../subcomponents/DropdownTrigger";
 import DropdownContainer from "../subcomponents/DropdownContainer";
 
 type PrepareComponentsProps = {
-  children: any;
+  children: React.ReactChild[] | React.ReactChild;
   hasTriggerSubcomponent: boolean;
   hasContainerSubcomponent: boolean;
   trigger: React.ReactChild;
@@ -11,15 +11,15 @@ type PrepareComponentsProps = {
   otherChildren: React.ReactChild[];
 };
 
-export const separateChildComponents = (children: any) => {
+export const separateChildComponents = (children: React.ReactChild[] | React.ReactChild | ReactElement[]) => {
   let trigger: React.ReactChild = null;
   let container: React.ReactChild = null;
   const otherChildren: React.ReactChild[] = [];
 
   React.Children.forEach(children, (child) => {
-    if (child && child.type === DropdownTrigger) {
+    if (child && (child as ReactElement).type === DropdownTrigger) {
       trigger = child;
-    } else if (child && child.type === DropdownContainer) {
+    } else if (child && (child as ReactElement).type === DropdownContainer) {
       container = child;
     } else {
       otherChildren.push(child);
@@ -29,7 +29,7 @@ export const separateChildComponents = (children: any) => {
   return { trigger, container, otherChildren };
 };
 
-export const prepareComponents = ({
+export const prepareSubcomponents = ({
   children,
   hasTriggerSubcomponent,
   hasContainerSubcomponent,

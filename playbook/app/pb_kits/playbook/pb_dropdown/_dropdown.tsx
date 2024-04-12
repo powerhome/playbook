@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, ReactElement } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -13,7 +13,7 @@ import useDropdown from "./hooks/useDropdown";
 
 import {
   separateChildComponents,
-  prepareComponents,
+  prepareSubcomponents,
 } from "./utilities/subComponentHelper";
 import { GenericObject } from "../types";
 
@@ -23,7 +23,7 @@ type DropdownProps = {
   className?: string;
   data?: { [key: string]: string };
   id?: string;
-  children?: React.ReactChild[] | React.ReactChild;
+  children?: React.ReactChild[] | React.ReactChild | ReactElement[];
   options: GenericObject;
   onSelect?: (arg: GenericObject) => null;
 };
@@ -68,7 +68,7 @@ const Dropdown = (props: DropdownProps) => {
 
   // useEffect to handle clicks outside the dropdown
   useEffect(() => {
-    const handleClickOutside = (e: any) => {
+    const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setIsDropDownClosed(true);
         setIsInputFocused(false);
@@ -85,7 +85,7 @@ const Dropdown = (props: DropdownProps) => {
     setHasContainerSubcomponent(!!container);
   }, []);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilterItem(e.target.value);
     setIsDropDownClosed(false);
   };
@@ -112,7 +112,7 @@ const Dropdown = (props: DropdownProps) => {
     option.label.toLowerCase().includes(filterItem.toLowerCase())
   );
 
-  const componentsToRender = prepareComponents({
+  const componentsToRender = prepareSubcomponents({
     children,
     hasTriggerSubcomponent,
     hasContainerSubcomponent,
