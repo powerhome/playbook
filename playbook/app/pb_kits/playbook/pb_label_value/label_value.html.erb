@@ -1,9 +1,4 @@
-<%= content_tag(:div,
-    aria: object.aria,
-    id: object.id,
-    data: object.data,
-    class: object.classname,
-    **combined_html_options) do %>
+<%= pb_content_tag(:div, **combined_html_options) do %>
     <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) %>
     <% if object.variant == "details" %>
         <%= pb_rails("flex", props: {inline: true, vertical: "center"}) do %>

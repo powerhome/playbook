@@ -1,10 +1,6 @@
 <%= content_tag(:div) do %>
   <% if object.tag == "table" %>
-    <%= content_tag(:table,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: object.id,
+    <%= pb_content_tag(:table,
       **combined_html_options) do %>
       <%= content.presence %>
     <% end %>

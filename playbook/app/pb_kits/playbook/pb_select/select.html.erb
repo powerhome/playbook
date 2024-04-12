@@ -1,8 +1,4 @@
-<%= content_tag(:div,
-  aria: object.aria,
-  data: object.data,
-  class: object.classnames,
-  **combined_html_options) do %>
+<%= pb_content_tag(:div, **combined_html_options) do %>
   <% if object.label %>
     <label class="pb_select_kit_label" for="<%= object.name %>">
       <%= pb_rails("caption", props: { text: object.label }) %>

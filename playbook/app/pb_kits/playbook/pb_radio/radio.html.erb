@@ -1,10 +1,5 @@
-<%= content_tag(:label,
-    aria: object.aria,
+<%= pb_content_tag(:label,
     checked: object.checked,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    value: object.value,
     **combined_html_options) do %>
 
     <% if content.present? %>

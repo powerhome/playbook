@@ -1,8 +1,4 @@
-<%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.classname,
-    **combined_html_options) do %>
+<%= pb_content_tag(:div, **combined_html_options) do %>
       <%= pb_rails("body", props: { status: object.status }) do %>
         <%= pb_rails("icon", props: { fixed_width: true, icon: object.returned_icon }) if object.returned_icon %>
         <%= "#{object.value}%" if object.value %>

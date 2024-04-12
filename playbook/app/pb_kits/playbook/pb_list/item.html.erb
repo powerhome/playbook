@@ -1,5 +1,5 @@
 <%= pb_content_tag(:li,
-                tabindex: object.tabindex,
-  ) do %>
+                   tabindex: object.tabindex,
+                   **combined_html_options) do %>
     <%= content.presence %>
 <% end %>

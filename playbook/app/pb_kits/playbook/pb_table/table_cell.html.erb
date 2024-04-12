@@ -1,19 +1,9 @@
 <% if object.tag == "table" %>
-    <%= content_tag(:td,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: object.id,
-      **combined_html_options) do %>
-      <%= content.presence || object.text %>
-    <% end %>
+  <%= pb_content_tag(:td, **combined_html_options) do %>
+    <%= content.presence || object.text %>
+  <% end %>
 <% else %>
-    <%= content_tag(:div,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: object.id,
-      **combined_html_options) do %>
-      <%= content.presence || object.text %>
-    <% end %>
+  <%= pb_content_tag(:div, **combined_html_options) do %>
+    <%= content.presence || object.text %>
+  <% end %>
 <% end %>

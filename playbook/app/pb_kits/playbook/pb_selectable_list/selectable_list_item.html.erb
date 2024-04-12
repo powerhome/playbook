@@ -1,9 +1,4 @@
-<%= content_tag(:li,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    **combined_html_options) do %>
+<%= pb_content_tag(:li, **combined_html_options) do %>
   <% if object.variant == "radio"%>
     <%= pb_rails("radio", props: { text: object.text, checked: object.checked, input_options: object.input_options } ) %>
     <% if content.present? %>

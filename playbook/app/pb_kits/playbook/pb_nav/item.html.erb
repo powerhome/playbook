@@ -1,12 +1,8 @@
   <% if object.collapsible %>
     <%= pb_rails("collapsible", props: { name: "collapsible-nav-example", classname: object.collapsible_nav_classname }) do %>
       <%= pb_rails("collapsible/collapsible_main", props: { name: "default-collapsible-nav", icon: object.collapsible_icons, size: "xs", dark: object.dark, classname:object.margin_classes }) do %>
-        <%= content_tag(object.tag,
-          aria: object.aria,
-          class: object.classname,
-          data: object.data,
+        <%= pb_content_tag(object.tag,
           dark: object.dark,
-          id: object.id,
           href: object.link && object.link,
           target: object.link && object.target,
           **combined_html_options
@@ -27,13 +23,9 @@
       <% end %>
     <% end %>
   <% else %>
-    <%= content_tag(object.tag,
-      aria: object.aria,
-      class: object.classname,
+    <%= pb_content_tag(object.tag,
       **combined_html_options,
-      data: object.data,
       dark: object.dark,
-      id: object.id,
       href: object.link && object.link,
       target: object.link && object.target
       ) do %>

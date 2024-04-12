@@ -1,4 +1,4 @@
-<%= content_tag(object.tag,
+<%= pb_content_tag(object.tag,
                 object.tag == "button" ? object.options : object.link_options,
                 **combined_html_options) do %>
     <% if object.variant === "reaction" %>

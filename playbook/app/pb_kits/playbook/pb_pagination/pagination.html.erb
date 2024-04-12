@@ -1,8 +1,3 @@
-<%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    **combined_html_options) do %>
+<%= pb_content_tag(:div, **combined_html_options) do %>
      <%= will_paginate object.model, renderer: Playbook::Pagination::Rails %>
 <% end %>

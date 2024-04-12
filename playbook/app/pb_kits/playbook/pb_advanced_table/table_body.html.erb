@@ -1,4 +1,4 @@
-<%= pb_content_tag(:div) do %>
+<%= pb_content_tag(:div, **combined_html_options) do %>
   <% object.table_data.each do |row| %>
     <%= render_row_and_children(row, object.column_definitions) %>
   <% end %>
