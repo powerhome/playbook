@@ -37,13 +37,11 @@ const [selectedOption, setSelectedOption] = useState();
         options={options}
         {...props}
     >
-      <Dropdown.Container>
-        {options.map((option) => (
-          <Dropdown.Option key={option.id} 
-              option={option}
-          /> 
-        ))}
-      </Dropdown.Container>
+      {options.map((option) => (
+        <Dropdown.Option key={option.id} 
+            option={option}
+        /> 
+      ))}
     </Dropdown>
   </div>
   )

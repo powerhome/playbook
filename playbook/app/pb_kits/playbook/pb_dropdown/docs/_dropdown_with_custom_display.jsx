@@ -63,7 +63,6 @@ const DropdownWithCustomDisplay = (props) => {
         {...props}
     >
       <Dropdown.Trigger customDisplay={customDisplay()}/>
-      <Dropdown.Container>
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}
@@ -95,7 +94,6 @@ const DropdownWithCustomDisplay = (props) => {
             </>
           </Dropdown.Option>
         ))}
-      </Dropdown.Container>
     </Dropdown>
   </div>
   )

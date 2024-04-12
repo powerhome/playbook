@@ -37,7 +37,6 @@ const DropdownWithCustomOptions = (props) => {
         options={options}
         {...props}
     >
-      <Dropdown.Container>
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}
@@ -59,7 +58,6 @@ const DropdownWithCustomOptions = (props) => {
             </>
           </Dropdown.Option>
         ))}
-      </Dropdown.Container>
     </Dropdown>
   </div>
   )

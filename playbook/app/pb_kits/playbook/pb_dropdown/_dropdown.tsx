@@ -41,10 +41,11 @@ const Dropdown = (props: DropdownProps) => {
 
   const [ isDropDownClosed, setIsDropDownClosed, toggleDropdown ] = useDropdown()
 
-  const [filterItem, setFilterItem] = useState("");
-  const [selected, setSelected] = useState({});
-  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [filterItem, setFilterItem] = useState("")
+  const [selected, setSelected] = useState({})
+  const [isInputFocused, setIsInputFocused] = useState(false)
   const [hasTriggerSubkit, setHasTriggerSubkit] = useState(true)
+  const [hasContainerSubkit, setHasContainerSubkit] = useState(true)
 
   //state for keyboard events
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
@@ -66,17 +67,29 @@ const Dropdown = (props: DropdownProps) => {
     };
   }, []);
 
-  const hasDropdownTriggerChild = React.Children.toArray(props.children).some(child => {
-    if (React.isValidElement(child)) {
-      return child.type === DropdownTrigger;
-    }
-    return false;
-  });
 
-  useEffect(() => {
-    if (!hasDropdownTriggerChild) {
-      setHasTriggerSubkit(false)
-    }
+  const separateChildComponents = (children: any) => {
+    let trigger: React.ReactChild = null;
+    let container: React.ReactChild = null;
+    const otherChildren: React.ReactChild[] = [];
+  
+    React.Children.forEach(children, child => {
+      if (child && child.type === DropdownTrigger) {
+        trigger = child;
+      } else if (child && child.type === DropdownContainer) {
+        container = child;
+      } else {
+        otherChildren.push(child);
+      }
+    });
+  
+    return { trigger, container, otherChildren };
+  };
+    useEffect(() => {
+    const { trigger, container } = separateChildComponents(children);
+    setHasTriggerSubkit(!!trigger);
+    setHasContainerSubkit(!!container);
+
   }, []);
 
 
@@ -107,6 +120,8 @@ const Dropdown = (props: DropdownProps) => {
   const filteredOptions = options?.filter((option: GenericObject) =>
   option.label.toLowerCase().includes(filterItem.toLowerCase())
 );
+
+const { trigger, container, otherChildren } = separateChildComponents(children);
 
   return (
     <div
@@ -143,8 +158,34 @@ const Dropdown = (props: DropdownProps) => {
         >
           {children ? (
             <>
-              {!hasTriggerSubkit && <DropdownTrigger />}
+              {!hasTriggerSubkit && hasContainerSubkit &&  (
+              <>
+              <DropdownTrigger />
               {children}
+              </>
+              )}
+              { !hasContainerSubkit && !hasTriggerSubkit && (
+                <>
+                <DropdownTrigger />
+                <DropdownContainer>{children}</DropdownContainer>
+                </>
+              )}
+              {
+                hasTriggerSubkit && hasContainerSubkit && (
+                  <>
+                  {trigger}
+                  {container}
+                </>                
+                )
+              }
+              {
+                hasTriggerSubkit && !hasContainerSubkit && (
+                  <>
+                  {trigger}
+                  <DropdownContainer>{otherChildren}</DropdownContainer>
+                  </>
+                )
+              }
             </>
           ) : (
             <>
