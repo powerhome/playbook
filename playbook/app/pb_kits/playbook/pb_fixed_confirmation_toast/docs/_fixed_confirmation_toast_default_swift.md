@@ -1,4 +1,4 @@
-![Default-Toast](https://github.com/powerhome/playbook/assets/54749071/81db49f3-67b0-4ce2-99cd-7b71140ef0ef)
+![Default-Toast](https://github.com/powerhome/playbook-swift/assets/54749071/cc465b1b-85ba-4492-a832-b06b842a1555)
 
 ```swift
 VStack(alignment: .leading) {
