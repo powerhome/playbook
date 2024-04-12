@@ -68,7 +68,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
           <Flex align="center"
               borderRadius="lg"
               className={`dropdown_trigger_wrapper ${isInputFocused && 'dropdown_trigger_wrapper_focus'}`}
-              cursor="text"
+              cursor="pointer"
               htmlOptions={{ 
                 onClick: () => handleWrapperClick(), 
                 onKeyDown: handleKeyDown,
@@ -109,7 +109,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                 </Flex>
             </FlexItem>
             <FlexItem>
-                <Body color="light" 
+                <Body display="flex"
                     key={`${isDropDownClosed ? "chevron-down" : 'chevron-up'}`}
                 >
                     <Icon cursor="pointer"
