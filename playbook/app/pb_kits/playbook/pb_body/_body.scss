@@ -19,7 +19,7 @@
     }
   }
   b, strong {
-    @include pb_title_4
+    font-weight: $bold;
   }
 
   a {
@@ -29,8 +29,8 @@
     }
   }
 
-  em {
-    font-weight: $bold;
+  em, i {
+    font-style: italic;
   }
 
   small {
