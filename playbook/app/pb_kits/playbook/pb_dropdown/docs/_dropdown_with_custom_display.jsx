@@ -62,7 +62,9 @@ const DropdownWithCustomDisplay = (props) => {
         options={options}
         {...props}
     >
-      <Dropdown.Trigger customDisplay={customDisplay()}/>
+      <Dropdown.Trigger customDisplay={customDisplay()}
+          placeholder="Select a User"
+      />
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}
