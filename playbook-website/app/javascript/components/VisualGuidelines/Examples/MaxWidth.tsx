@@ -44,15 +44,19 @@ const MaxWidth = ({ example }: {example: string}) => (
           maxWidth={size}
           padding="xs"
       >
-        <Flex gap="sm">
+        <Flex>
           <Title
             dark
             size={4}
+            flex={1}
             htmlOptions={{style: {minWidth:"30px"}}}
           >
             {size.toUpperCase()}
           </Title>
-          <Detail color="lighter">
+          <Detail 
+            flex={0}
+            color="lighter"
+          >
             {SIZES[size]}
           </Detail>
         </Flex>
