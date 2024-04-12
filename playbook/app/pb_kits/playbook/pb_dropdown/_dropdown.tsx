@@ -10,6 +10,8 @@ import DropdownOption from './subcomponents/DropdownOption'
 import DropdownTrigger from './subcomponents/DropdownTrigger'
 import DropdownContext from './context'
 import useDropdown from './hooks/useDropdown'
+
+import { separateChildComponents } from './utilities/subComponentHelper'
 import { GenericObject } from '../types'
 
 type DropdownProps = {
@@ -55,8 +57,8 @@ const Dropdown = (props: DropdownProps) => {
 
   // useEffect to handle clicks outside the dropdown
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (e: any) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setIsDropDownClosed(true);
         setIsInputFocused(false)
       }
@@ -67,29 +69,10 @@ const Dropdown = (props: DropdownProps) => {
     };
   }, []);
 
-
-  const separateChildComponents = (children: any) => {
-    let trigger: React.ReactChild = null;
-    let container: React.ReactChild = null;
-    const otherChildren: React.ReactChild[] = [];
-  
-    React.Children.forEach(children, child => {
-      if (child && child.type === DropdownTrigger) {
-        trigger = child;
-      } else if (child && child.type === DropdownContainer) {
-        container = child;
-      } else {
-        otherChildren.push(child);
-      }
-    });
-  
-    return { trigger, container, otherChildren };
-  };
-    useEffect(() => {
+  useEffect(() => {
     const { trigger, container } = separateChildComponents(children);
     setHasTriggerSubcomponent(!!trigger);
     setHasContainerSubcomponent(!!container);
-
   }, []);
 
 
@@ -104,7 +87,6 @@ const Dropdown = (props: DropdownProps) => {
     setIsDropDownClosed(true);
     onSelect(selectedItem);
   };
-
 
   const handleWrapperClick = () => {
     autocomplete && inputRef.current.focus();
