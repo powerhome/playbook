@@ -44,8 +44,8 @@ const Dropdown = (props: DropdownProps) => {
   const [filterItem, setFilterItem] = useState("")
   const [selected, setSelected] = useState({})
   const [isInputFocused, setIsInputFocused] = useState(false)
-  const [hasTriggerSubkit, setHasTriggerSubkit] = useState(true)
-  const [hasContainerSubkit, setHasContainerSubkit] = useState(true)
+  const [hasTriggerSubcomponent, setHasTriggerSubcomponent] = useState(true)
+  const [hasContainerSubcomponent, setHasContainerSubcomponent] = useState(true)
 
   //state for keyboard events
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
@@ -87,8 +87,8 @@ const Dropdown = (props: DropdownProps) => {
   };
     useEffect(() => {
     const { trigger, container } = separateChildComponents(children);
-    setHasTriggerSubkit(!!trigger);
-    setHasContainerSubkit(!!container);
+    setHasTriggerSubcomponent(!!trigger);
+    setHasContainerSubcomponent(!!container);
 
   }, []);
 
@@ -158,20 +158,20 @@ const { trigger, container, otherChildren } = separateChildComponents(children);
         >
           {children ? (
             <>
-              {!hasTriggerSubkit && hasContainerSubkit &&  (
+              {!hasTriggerSubcomponent && hasContainerSubcomponent &&  (
               <>
               <DropdownTrigger />
               {children}
               </>
               )}
-              { !hasContainerSubkit && !hasTriggerSubkit && (
+              { !hasContainerSubcomponent && !hasTriggerSubcomponent && (
                 <>
                 <DropdownTrigger />
                 <DropdownContainer>{children}</DropdownContainer>
                 </>
               )}
               {
-                hasTriggerSubkit && hasContainerSubkit && (
+                hasTriggerSubcomponent && hasContainerSubcomponent && (
                   <>
                   {trigger}
                   {container}
@@ -179,7 +179,7 @@ const { trigger, container, otherChildren } = separateChildComponents(children);
                 )
               }
               {
-                hasTriggerSubkit && !hasContainerSubkit && (
+                hasTriggerSubcomponent && !hasContainerSubcomponent && (
                   <>
                   {trigger}
                   <DropdownContainer>{otherChildren}</DropdownContainer>
