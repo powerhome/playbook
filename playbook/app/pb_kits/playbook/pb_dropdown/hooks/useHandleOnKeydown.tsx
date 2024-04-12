@@ -5,6 +5,7 @@ import DropdownContext from "../context";
 export const useHandleOnKeyDown = () => {
 
 const {
+  autocomplete,
   focusedOptionIndex,
   filteredOptions,
   setFocusedOptionIndex,
@@ -18,7 +19,9 @@ const {
     switch (e.key) {
     case "Backspace":
     case "Delete":
+      if (autocomplete) {
       handleBackspace();
+      }
       break;
     case "ArrowDown": {
       e.preventDefault();
