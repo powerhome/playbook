@@ -1,0 +1,92 @@
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/typography";
+@import "../tokens/border_radius";
+@import "../tokens/shadows";
+@import "../tokens/positioning";
+@import "../pb_body/body_mixins";
+
+.pb_dropdown {
+  .dropdown_wrapper {
+    position: relative;
+    .dropdown_trigger_wrapper {
+      @include pb_body;
+      border: 1px solid $border_light;
+      background-color: $white;
+      &:hover {
+        background-color: rgba($focus_input_light, $opacity_5);
+        input {
+          background-color: rgba($focus_input_light, $opacity_5);
+        }
+      }
+
+      .dropdown_input {
+        @include pb_body;
+        border: unset;
+        border-radius: $border_rad_heavier;
+        padding: 0;
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
+      &:focus {
+        box-shadow: 0px 0px 0 1px $primary;
+        outline: unset;
+        transition: box-shadow .15s ease-in-out;
+      }
+    }
+
+    .dropdown_trigger_wrapper_focus {
+      box-shadow: 0px 0px 0 1px $primary;
+      transition: box-shadow .10s ease-in-out;
+    }
+
+    .pb_dropdown_container {
+      background-color: $white;
+      overflow:hidden;
+      box-shadow: $shadow_deep;
+      border-radius: $border_rad_heavier;
+      border: 1px solid $border_light;
+      margin-top: $space_xs;
+      position: absolute;
+      z-index: $z_1;
+      width: 100%;
+      transition: opacity .25s ease-in-out;
+
+      .pb_dropdown_option {
+        :hover {
+          background-color: $border_light;
+        }
+      }
+
+      .dropdown_option_focused {
+        background-color: $border_light;
+      }
+
+      .dropdown_option {
+        width: 100%;
+      }
+
+      .dropdown_option_list {
+        border-bottom: 1px solid $border_light;
+      }
+      .dropdown_option_selected {
+        background-color: $primary;
+        [class^="pb_body"], [class^="pb_title_kit"] {
+          color: $white !important;
+        }
+        :hover {
+          background-color: unset;
+        }
+      }
+    }
+    .close {
+      display: none;
+    }
+
+    .open {
+      display: block;
+    }
+  }
+}

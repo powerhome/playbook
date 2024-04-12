@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type ListItemProps = {
   aria?: { [key: string]: string },
@@ -11,7 +11,7 @@ type ListItemProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   tabIndex?: number,
-}
+} & GlobalProps
 
 const ListItem = (props: ListItemProps) => {
   const {
