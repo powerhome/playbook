@@ -45,12 +45,6 @@ const {
         setFocusedOptionIndex(-1)
       }
       break;
-    default:
-        if (selected && selected.label) {
-          e.preventDefault();
-          handleBackspace();
-        }
-        break;
   }
 }
 };
