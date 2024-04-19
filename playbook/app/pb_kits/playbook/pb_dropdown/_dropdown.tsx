@@ -102,7 +102,6 @@ const Dropdown = (props: DropdownProps) => {
 
   const handleWrapperClick = () => {
     autocomplete && inputRef.current.focus();
-    console.log("here")
     toggleDropdown();
   };
 
@@ -155,6 +154,15 @@ const Dropdown = (props: DropdownProps) => {
           }}
       >
         <div className="dropdown_wrapper" 
+            onBlur={() => {
+                // Debounce to delay the execution to prevent jumpiness in Focus state
+                setTimeout(() => {
+                    if (!dropdownRef.current.contains(document.activeElement)) {
+                        setIsInputFocused(false);
+                    }
+                }, 0);
+            }}
+            onFocus={() => setIsInputFocused(true)}
             ref={dropdownRef}
         >
           {children ? (
