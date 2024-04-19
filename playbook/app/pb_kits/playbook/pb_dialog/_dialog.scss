@@ -238,26 +238,24 @@
           position: fixed;
           bottom: 0;
           background-color: $white;
+          max-width: 100%;
         }
         &[class*="_sm"] {
           width: $medium;
           .dialog_footer {
             width: $medium;
-            max-width: 100%;
           }
         }
         &[class*="_md"] {
           width: $large;
           .dialog_footer {
             width: $large;
-            max-width: 100%;
           }
         }
         &[class*="_lg"] {
           width: $xlarge;
           .dialog_footer {
             width: $xlarge;
-            max-width: 100%;
           }
         }
       }
@@ -311,7 +309,7 @@
       border-radius: 0;
       height: 100% !important;
       max-height: 100% !important;
-      max-width: none;
+      max-width: 100%;
       // This empty div only has height when dialog is full height.
       // Fix for dialog body content disappearing behind sticky footer
       .dialog-pseudo-footer {
@@ -321,26 +319,24 @@
         position:fixed;
         bottom: 0;
         background-color: $white;
+        max-width: 100%;
       }
       &[class*="_sm"] {
         width: $medium;
         .dialog_footer {
           width: $medium;
-          max-width: 100%;
         }
       }
       &[class*="_md"] {
         width: $large;
         .dialog_footer {
           width: $large;
-          max-width: 100%;
         }
       }
       &[class*="_lg"] {
         width: $xlarge;
         .dialog_footer {
           width: $xlarge;
-          max-width: 100%;
         }
       }
     }
