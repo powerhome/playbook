@@ -228,7 +228,6 @@
         border-radius: 0;
         height: 100%;
         max-height: 100%;
-        // width: calc(100vw - #{$gutter * 4});
         max-width: none;
         // This empty div only has height when dialog is full height
         // Fix for dialog body content disappearing behind sticky footer
@@ -241,103 +240,30 @@
           background-color: $white;
         }
         &[class*="_sm"] {
-          width: calc(#{$small} - #{$gutter * 2});
+          width: $medium;
           .dialog_footer {
-            width: calc(#{$small} - #{$gutter * 2});
+            width: $medium;
             max-width: 100%;
           }
         }
         &[class*="_md"] {
-          width: calc(#{$medium} - #{$gutter * 2});
+          width: $large;
           .dialog_footer {
-            width: calc(#{$medium} - #{$gutter * 2});
+            width: $large;
             max-width: 100%;
-
           }
         }
         &[class*="_lg"] {
-          width: calc(#{$large} - #{$gutter * 2});
+          width: $xlarge;
           .dialog_footer {
-            width: calc(#{$large}  - #{$gutter * 2});
+            width: $xlarge;
             max-width: 100%;
-
           }
         }
-        // &[class*="_sm"] {
-        //   width: $medium;
-        //   .dialog_footer {
-        //     // width: $medium;
-        //     width: calc(100%- #{$gutter * 2 });
-        //   }
-        // }
-        // &[class*="_md"] {
-        //   width: $large;
-        //   .dialog_footer {
-        //     // width: $large;
-        //     width: calc(100%- #{$gutter * 2 });
-
-        //   }
-        // }
-        // &[class*="_lg"] {
-        //   width: $xlarge;
-        //   .dialog_footer {
-        //     // width: $xlarge;
-        //     width: calc(100% - #{$gutter * 2 });
-
-        //   }
-        // }
-        // &[class*="_sm"] {
-        //   width: 450px;
-        //   .dialog_footer {
-        //     max-width: $medium;
-        //   }
-        // }
-        // &[class*="_md"] {
-        //   width: 750px;
-        //   .dialog_footer {
-        //     max-width: $large;
-        //   }
-        // }
-        // &[class*="_lg"] {
-        //   width: 1100px;
-        //   .dialog_footer {
-        //     max-width: $xlarge;
-        //   }
-        // }
-
       }
     }
   }
 }
-
-// @media screen and (max-width: 768px) {
-//   .pb_dialog {
-//     &_overlay {
-//       &[class*="full_height"] {
-//         .pb_dialog {
-//           &[class*="_sm"] {
-//             width: $medium;
-//             .dialog_footer {
-//               width: $small;
-//             }
-//           }
-//           &[class*="_md"] {
-//             width: $large;
-//             .dialog_footer {
-//               width: $medium;
-//             }
-//           }
-//           &[class*="_lg"] {
-//             width: $xlarge;
-//             .dialog_footer {
-//               width: $large;
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
 
 [class*="dialog_body"] {
   padding: $space_sm;
