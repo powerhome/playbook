@@ -12,7 +12,6 @@ const {
   handleOptionClick,
   setIsDropDownClosed,
   handleBackspace,
-  selected
 }= useContext(DropdownContext)
 
   return (e: React.KeyboardEvent) => {
