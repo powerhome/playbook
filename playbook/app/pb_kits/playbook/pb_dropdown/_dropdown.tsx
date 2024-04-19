@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, ReactElement } from "react";
 import classnames from "classnames";
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 
 import Body from "../pb_body/_body";
@@ -22,6 +22,7 @@ type DropdownProps = {
   autocomplete?: boolean;
   className?: string;
   data?: { [key: string]: string };
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   children?: React.ReactChild[] | React.ReactChild | ReactElement[];
   options: GenericObject;
@@ -35,6 +36,7 @@ const Dropdown = (props: DropdownProps) => {
     children,
     className,
     data = {},
+    htmlOptions = {},
     id,
     options,
     onSelect,
@@ -42,6 +44,7 @@ const Dropdown = (props: DropdownProps) => {
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_dropdown"),
     globalProps(props),
@@ -125,6 +128,7 @@ const Dropdown = (props: DropdownProps) => {
   return (
     <div {...ariaProps} 
         {...dataProps} 
+        {...htmlProps}
         className={classes} 
         id={id}
     >

@@ -4,6 +4,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps
 } from "../../utilities/props";
 import { globalProps } from "../../utilities/globalProps";
 import { useHandleOnKeyDown } from "../hooks/useHandleOnKeydown";
@@ -21,6 +22,7 @@ type DropdownTriggerProps = {
   className?: string;
   customDisplay?: React.ReactChild[] | React.ReactChild;
   data?: { [key: string]: string };
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   placeholder?: string;
 };
@@ -32,6 +34,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     children,
     customDisplay,
     data = {},
+    htmlOptions = {},
     id,
     placeholder,
   } = props;
@@ -53,6 +56,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_dropdown_trigger"),
     globalProps(props),
@@ -84,6 +88,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   return (
     <div {...ariaProps} 
         {...dataProps} 
+        {...htmlProps}
         className={classes} 
         id={id}
     >
