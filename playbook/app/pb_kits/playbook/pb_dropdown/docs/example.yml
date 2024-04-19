@@ -7,4 +7,5 @@ examples:
   - dropdown_with_custom_display: Custom Display
   - dropdown_with_custom_trigger: Custom Trigger
   - dropdown_with_autocomplete: Autocomplete
+  - dropdown_with_custom_padding: Custom Padding for Dropdown Options
 
