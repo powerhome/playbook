@@ -99,6 +99,7 @@ const Dropdown = (props: DropdownProps) => {
 
   const handleWrapperClick = () => {
     autocomplete && inputRef.current.focus();
+    console.log("here")
     toggleDropdown();
   };
 

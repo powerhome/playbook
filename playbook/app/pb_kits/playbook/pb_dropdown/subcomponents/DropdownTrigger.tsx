@@ -142,9 +142,11 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                 )}
               </Flex>
             </FlexItem>
-            <FlexItem>
               <Body
                   display="flex"
+                  htmlOptions={{
+                    onClick: (e: Event) => {e.stopPropagation();handleWrapperClick()}
+                  }}
                   key={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
               >
                 <Icon
@@ -153,7 +155,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                     size="sm"
                 />
               </Body>
-            </FlexItem>
           </Flex>
         </>
       )}
