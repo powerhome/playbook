@@ -95,7 +95,9 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
       {children ? (
         <div
             onClick={() => toggleDropdown()}
+            onKeyDown= {handleKeyDown}
             style={{ display: "inline-block" }}
+            tabIndex= {0}
         >
           {children}
         </div>
