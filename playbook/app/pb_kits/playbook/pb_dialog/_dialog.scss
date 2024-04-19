@@ -228,8 +228,8 @@
         border-radius: 0;
         height: 100%;
         max-height: 100%;
-        width: 100vw;
-        // max-width: none;
+        // width: calc(100vw - #{$gutter * 4});
+        max-width: none;
         // This empty div only has height when dialog is full height
         // Fix for dialog body content disappearing behind sticky footer
         .dialog-pseudo-footer {
@@ -241,21 +241,26 @@
           background-color: $white;
         }
         &[class*="_sm"] {
-          width: calc(100vw - #{$gutter});
+          width: calc(#{$small} - #{$gutter * 2});
           .dialog_footer {
-            width: inherit;
+            width: calc(#{$small} - #{$gutter * 2});
+            max-width: 100%;
           }
         }
         &[class*="_md"] {
-          width: calc(100vw - #{$gutter});
+          width: calc(#{$medium} - #{$gutter * 2});
           .dialog_footer {
-            width: inherit;
+            width: calc(#{$medium} - #{$gutter * 2});
+            max-width: 100%;
+
           }
         }
         &[class*="_lg"] {
-          width: calc(100vw - #{$gutter});
+          width: calc(#{$large} - #{$gutter * 2});
           .dialog_footer {
-            width: inherit;
+            width: calc(#{$large}  - #{$gutter * 2});
+            max-width: 100%;
+
           }
         }
         // &[class*="_sm"] {
