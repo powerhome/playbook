@@ -40,6 +40,7 @@ const [selectedOption, setSelectedOption] = useState();
       {options.map((option) => (
         <Dropdown.Option key={option.id} 
             option={option}
+            padding="sm"
         /> 
       ))}
     </Dropdown>

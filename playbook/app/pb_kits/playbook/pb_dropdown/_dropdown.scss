@@ -64,7 +64,8 @@
       transition: opacity 0.25s ease-in-out;
 
       .pb_dropdown_option {
-        :hover {
+        cursor: pointer;
+        &:hover {
           background-color: $border_light;
         }
       }
@@ -86,8 +87,8 @@
         [class^="pb_title_kit"] {
           color: $white !important;
         }
-        :hover {
-          background-color: unset;
+        &:hover {
+          background-color: $primary !important;
         }
       }
     }

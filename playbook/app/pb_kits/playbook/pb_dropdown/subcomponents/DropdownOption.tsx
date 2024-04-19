@@ -6,7 +6,7 @@ import {
   buildDataProps,
   buildHtmlProps,
 } from "../../utilities/props";
-import { globalProps } from "../../utilities/globalProps";
+import { globalProps, GlobalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
 
@@ -24,7 +24,8 @@ type DropdownOptionProps = {
   id?: string;
   option?: GenericObject;
   key?: string;
-};
+  padding?: string;
+}  & GlobalProps;
 
 const DropdownOption = (props: DropdownOptionProps) => {
   const {
@@ -36,6 +37,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
     id,
     option,
     key,
+    padding = "xs",
   } = props;
 
   const {
@@ -69,7 +71,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
     buildCss("pb_dropdown_option"),
     selectedClass,
     focusedClass,
-    globalProps(props),
+    globalProps(props, {padding}),
     className
   );
 
@@ -81,13 +83,13 @@ const DropdownOption = (props: DropdownOptionProps) => {
         className={classes}
         id={id}
         key={key}
+        onClick= {() => handleOptionClick(option)}
     >
       <ListItem
           cursor="pointer"
           data-name={option.value}
-          htmlOptions={{ onClick: () => handleOptionClick(option) }}
           key={option.label}
-          padding="xs"
+          padding="none"
       >
         <Flex
             align="center"
