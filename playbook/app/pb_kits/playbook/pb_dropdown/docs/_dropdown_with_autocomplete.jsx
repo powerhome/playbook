@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dropdown, Icon, Body, FlexItem, Flex } from '../..'
+import { Dropdown, User, Badge, FlexItem } from '../..'
 
 const DropdownWithAutocomplete = (props) => {
 // eslint-disable-next-line no-unused-vars
@@ -7,27 +7,38 @@ const DropdownWithAutocomplete = (props) => {
 
   const options = [
     {
-      label: "United States",
-      value: "United States",
-      areaCode: "+1",
-      icon: "🇺🇸",
-      id: "United-states"
+      label: "Jasper Furniss",
+      value: "Jasper Furniss",
+      territory: "PHL",
+      title: "Senior UX Engineer",
+      id: "jasper-furniss",
+      status: "Offline"
     },
     {
-      label: "Ukraine",
-      value: "Ukraine",
-      areaCode: "+380",
-      icon: "🇺🇦",
-      id: "ukraine"
+      label: "Ramon Ruiz",
+      value: "Ramon Ruiz",
+      territory: "PHL",
+      title: "Senior UX Desinger",
+      id: "ramon-ruiz",
+      status: "Away"
     },
     {
-      label: "Pakistan",
-      value: "Pakistan",
-      areaCode: "+92",
-      icon: "🇵🇰",
-      id: "pakistan"
+      label: "Jason Cypret",
+      value: "Jason Cypret",
+      territory: "PHL",
+      title: "VP of User Experience",
+      id: "jason-cypret",
+      status: "Online"
+    },
+    {
+      label: "Courtney Long",
+      value: "Courtney Long",
+      territory: "PHL",
+      title: "UX Design Mentor",
+      id: "courtney-long",
+      status: "Online"
     }
-  ];  
+  ];
 
 
   return (
@@ -37,23 +48,32 @@ const DropdownWithAutocomplete = (props) => {
         options={options}
         {...props}
     >
-        <Dropdown.Trigger placeholder="Select Country"/>
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}
           >
             <>
               <FlexItem>
-                <Flex>
-                  <Icon icon={option.icon} 
-                      paddingRight="xs"
-                  />
-                  <Body text={option.label} />
-                </Flex>
+                <User
+                    align="left"
+                    avatar
+                    name={option.label}
+                    orientation="horizontal"
+                    territory={option.territory}
+                    title={option.title}
+                />
               </FlexItem>
               <FlexItem>
-                <Body color="light" 
-                    text={option.areaCode} 
+                <Badge
+                    rounded
+                    text={option.status}
+                    variant={`${
+                        option.status === "Offline"
+                        ? "neutral"
+                        : option.status === "Online"
+                        ? "success"
+                        : "warning"
+                    }`}
                 />
               </FlexItem>
             </>

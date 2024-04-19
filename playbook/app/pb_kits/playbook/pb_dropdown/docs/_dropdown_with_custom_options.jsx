@@ -14,11 +14,11 @@ const DropdownWithCustomOptions = (props) => {
       id: "United-states"
     },
     {
-      label: "Ukraine",
-      value: "Ukraine",
-      areaCode: "+380",
-      icon: "🇺🇦",
-      id: "ukraine"
+      label: "Canada",
+      value: "Canada",
+      areaCode: "+1",
+      icon: "🇨🇦",
+      id: "canada"
     },
     {
       label: "Pakistan",
