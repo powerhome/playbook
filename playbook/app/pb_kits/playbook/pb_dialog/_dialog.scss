@@ -228,40 +228,111 @@
         border-radius: 0;
         height: 100%;
         max-height: 100%;
-        max-width: none;
+        width: 100vw;
+        // max-width: none;
         // This empty div only has height when dialog is full height
         // Fix for dialog body content disappearing behind sticky footer
         .dialog-pseudo-footer {
           height: $space_xl * 2;
         }
         .dialog_footer {
-          position:fixed;
+          position: fixed;
           bottom: 0;
           background-color: $white;
         }
-
         &[class*="_sm"] {
-          width: $medium;
+          width: calc(100vw - #{$gutter});
           .dialog_footer {
-            width: $medium;
+            width: inherit;
           }
         }
         &[class*="_md"] {
-          width: $large;
+          width: calc(100vw - #{$gutter});
           .dialog_footer {
-            width: $large;
+            width: inherit;
           }
         }
         &[class*="_lg"] {
-          width: $xlarge;
+          width: calc(100vw - #{$gutter});
           .dialog_footer {
-            width: $xlarge;
+            width: inherit;
           }
         }
+        // &[class*="_sm"] {
+        //   width: $medium;
+        //   .dialog_footer {
+        //     // width: $medium;
+        //     width: calc(100%- #{$gutter * 2 });
+        //   }
+        // }
+        // &[class*="_md"] {
+        //   width: $large;
+        //   .dialog_footer {
+        //     // width: $large;
+        //     width: calc(100%- #{$gutter * 2 });
+
+        //   }
+        // }
+        // &[class*="_lg"] {
+        //   width: $xlarge;
+        //   .dialog_footer {
+        //     // width: $xlarge;
+        //     width: calc(100% - #{$gutter * 2 });
+
+        //   }
+        // }
+        // &[class*="_sm"] {
+        //   width: 450px;
+        //   .dialog_footer {
+        //     max-width: $medium;
+        //   }
+        // }
+        // &[class*="_md"] {
+        //   width: 750px;
+        //   .dialog_footer {
+        //     max-width: $large;
+        //   }
+        // }
+        // &[class*="_lg"] {
+        //   width: 1100px;
+        //   .dialog_footer {
+        //     max-width: $xlarge;
+        //   }
+        // }
+
       }
     }
   }
 }
+
+// @media screen and (max-width: 768px) {
+//   .pb_dialog {
+//     &_overlay {
+//       &[class*="full_height"] {
+//         .pb_dialog {
+//           &[class*="_sm"] {
+//             width: $medium;
+//             .dialog_footer {
+//               width: $small;
+//             }
+//           }
+//           &[class*="_md"] {
+//             width: $large;
+//             .dialog_footer {
+//               width: $medium;
+//             }
+//           }
+//           &[class*="_lg"] {
+//             width: $xlarge;
+//             .dialog_footer {
+//               width: $large;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 [class*="dialog_body"] {
   padding: $space_sm;
@@ -372,3 +443,4 @@
     cursor: pointer;
   }
 }
+
