@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import { render, screen } from "../utilities/test-utils"
+import { render, screen, waitFor } from "../utilities/test-utils"
 
 import { AdvancedTable } from "../"
 
@@ -198,7 +198,7 @@ test("Row toggle button exists and toggles subrows open and closed", () => {
   expect(subRow).toBeInTheDocument()
 })
 
-test("toggleExpansionAll button exists and toggles subrows open and closed", () => {
+test("toggleExpansionAll button exists and toggles subrows open and closed", async () => {
   render(
     <AdvancedTable
         columnDefinitions={columnDefinitions}
@@ -207,15 +207,21 @@ test("toggleExpansionAll button exists and toggles subrows open and closed", () 
     />
   )
 
-  const kit = screen.getByTestId(testId)
-  const toggleButton = kit.querySelector(".gray-icon.toggle-all-icon")
-  expect(toggleButton).toBeInTheDocument()
-  const subRow1 = kit.querySelector(".bg-white.depth-sub-row-1")
-  expect(subRow1).not.toBeInTheDocument()
-  toggleButton.click()
-  const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
-  expect(subRow).toBeInTheDocument()
+  const kit = screen.getByTestId(testId);
+  const toggleButton = kit.querySelector(".gray-icon.toggle-all-icon");
+  expect(toggleButton).toBeInTheDocument();
+
+  const subRow1 = kit.querySelector(".bg-white.depth-sub-row-1");
+  expect(subRow1).not.toBeInTheDocument();
+
+  toggleButton.click();
+
+  await waitFor(() => {
+    const subRow = kit.querySelector(".bg-white.depth-sub-row-1");
+    expect(subRow).toBeInTheDocument();
+  })
 })
+
 
 test("loading state + initialLoadingRowCount prop", () => {
   render(

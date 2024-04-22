@@ -2,6 +2,7 @@
 @import "playbook-ui/dist/tokens/typography";
 @import "playbook-ui/dist/tokens/spacing";
 @import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/screen_sizes";
 @import "playbook-ui/app/pb_kits/playbook/pb_caption/_caption_mixin.scss";
 
 .markdown_title {
@@ -13,9 +14,15 @@
 
 .markdown {
   line-height: $lh_loose;
-  h4,h5,h6,ul,ol,blockquote,p {
+  h4,
+  h5,
+  h6,
+  ul,
+  ol,
+  blockquote,
+  p {
     margin: 1rem 0 0 0;
-  }
+  }                    
   h1 {
     font-size: $text_larger;
     line-height: $text_larger;
@@ -40,13 +47,19 @@
   h5 {
     @include caption;
   }
-  h4, h6 {
+  h4,
+  h6 {
     font-size: $text_base;
     line-height: $text_base;
     letter-spacing: $lspace_tight;
     font-weight: $bolder;
   }
-  h1,h2,h3,h4,h5,h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     .markdown-header-anchor {
       opacity: 0;
       transition: 0.2s all ease-in-out;
@@ -54,7 +67,7 @@
         color: $text_lt_default;
       }
     }
-    &:hover .markdown-header-anchor{
+    &:hover .markdown-header-anchor {
       opacity: 1;
       transition: 0.1s all ease-in-out;
     }
@@ -95,7 +108,8 @@
       color: #faf6e4;
     }
   }
-  ul, ol {
+  ul,
+  ol {
     margin: 1rem 0 0 0;
     padding: 0;
   }
@@ -140,8 +154,13 @@
     color: $text_lt_light;
   }
   &.dark {
-    color: $text_dk_default ;
-    h1,h2,h3,h4,h5,h6 {
+    color: $text_dk_default;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       color: $text_dk_default;
     }
     a {
@@ -154,6 +173,66 @@
     }
     pre code {
       color: #faf6e4;
+    }
+  }
+
+  .color-guidelines {
+    display: flex;
+    align-items: center;
+    column-gap: $space_xl;
+
+    @media screen and (max-width: $screen-md-min) {
+      display: block;
+    }
+  }
+
+  .typography-principle {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    column-gap: $space_xl;
+
+    ul {
+      list-style-position: outside;
+      margin: $space-sm;
+    }
+
+    div:first-child {
+      flex:2;
+      min-width: 250px;
+    }
+
+    img {
+      width: 340px;
+      margin: 0 auto;
+      flex:1;
+    }
+
+    @media screen and (max-width: $screen-md-min) {
+      flex-wrap: wrap;
+
+      img{
+      max-width: 340px;
+      }
+    }
+  }
+}
+
+.typography-weight-100 {
+font-weight: $lighter;
+}
+
+.typography-weight-600 {
+font-weight: $bold;
+}
+
+.typography-list {
+  ul {
+    margin-left: $space-sm;
+    list-style-position: outside;
+    ul {
+      margin-top: 0px;
     }
   }
 }

@@ -15,7 +15,7 @@ type IconCircleProps = {
   icon: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
-  size?: "base" | "xs" | "sm" | "md" | "lg" | "xl",
+  size?: "base" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
   variant?: | "default"
     | "royal"
     | "blue"
@@ -43,7 +43,7 @@ const IconCircle = (props: IconCircleProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const classes = classnames(buildCss('pb_icon_circle_kit', size, variant), globalProps(props), className)
+  const classes = classnames(buildCss('pb_icon_circle_kit', `size_${size}`, variant), globalProps(props), className)
 
 
   return (

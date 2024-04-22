@@ -38,15 +38,13 @@ Gem::Specification.new do |s|
   s.add_dependency "view_component", "2.55.0"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 
-  s.add_development_dependency "byebug", "11.0.0"
+  s.add_development_dependency "byebug", ">= 11.0.0"
   s.add_development_dependency "github_changelog_generator", "1.15.2"
   s.add_development_dependency "rails", ">= 5.2.4.5"
   s.add_development_dependency "rspec-html-matchers", "0.9.1"
   s.add_development_dependency "rspec-rails", "~> 3.8", ">= 3.8.0"
-  s.add_development_dependency "rubocop", "1.23.0"
+  s.add_development_dependency "rubocop"
   s.add_development_dependency "rubocop-performance", "~> 1.11.5"
-  s.add_development_dependency "spring", "2.0.2"
-  s.add_development_dependency "spring-watcher-listen", "2.0.1"
   s.add_development_dependency "tzinfo-data", "1.2018.9"
   s.add_development_dependency "will_paginate", "3.3.1"
 end

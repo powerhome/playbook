@@ -7,14 +7,14 @@ module Playbook
       prop :emoji, type: Playbook::Props::String,
                    default: ""
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[xs sm md base lg xl],
+                  values: %w[xxs xs sm md base lg xl],
                   default: "md"
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default royal blue orange purple teal red yellow green orange],
                      default: "default"
 
       def classname
-        generate_classname("pb_icon_circle_kit", size, variant)
+        generate_classname("pb_icon_circle_kit", "size_#{size}", variant)
       end
     end
   end

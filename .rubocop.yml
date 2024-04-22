@@ -1,7 +1,10 @@
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 3.3
 
 Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Style/HashSyntax:
   Enabled: false
 
 Layout/AccessModifierIndentation:
