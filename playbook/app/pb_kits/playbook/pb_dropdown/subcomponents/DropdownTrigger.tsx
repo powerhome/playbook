@@ -28,6 +28,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   const { aria = {}, className, children, customDisplay, data = {}, id } = props;
 
   const {
+    autocomplete,
     handleWrapperClick,
     selected,
     filterItem,
@@ -67,8 +68,12 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
           <Flex align="center"
               borderRadius="lg"
               className={`dropdown_trigger_wrapper ${isInputFocused && 'dropdown_trigger_wrapper_focus'}`}
-              cursor="text"
-              htmlOptions={{ onClick: () => handleWrapperClick(), tabIndex:"0" }}
+              cursor="pointer"
+              htmlOptions={{ 
+                onClick: () => handleWrapperClick(), 
+                onKeyDown: handleKeyDown,
+                tabIndex:"0",
+              }}
               justify="between"
               paddingX="sm"
               paddingY="xs"
@@ -78,28 +83,33 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                     {customDisplay ? (
                       <Flex align="center">
                           {customDisplay}
-                          <Body paddingLeft="xs">
-                              <b>{selected.label}</b>
+                          <Body paddingLeft={`${selected.label ? "xs" : "none"}`}>
+                            {selected.label ? <b>{selected.label}</b> : autocomplete ? "" : "Select..." }
                           </Body>
                       </Flex>
                       ) : (
-                        selected.label && <Body text={selected.label} />
+                        <Body text={selected.label ? selected.label : autocomplete ? "" : "Select..."} />
                       )
                     }
-                    <input
-                        className="dropdown_input"
-                        onChange={handleChange}
-                        onClick={() => toggleDropdown()}
-                        onFocus={() => setIsInputFocused(true)}
-                        onKeyDown={handleKeyDown}
-                        placeholder={selected.label ? "" : "Select..."}
-                        ref={inputRef}
-                        value={filterItem}
-                    />
+                    {
+                      autocomplete && (
+                        <input
+                            className="dropdown_input"
+                            onChange={handleChange}
+                            onClick={() => toggleDropdown()}
+                            onFocus={() => setIsInputFocused(true)}
+                            onKeyDown={handleKeyDown}
+                            placeholder={selected.label ? "" : "Select..."}
+                            ref={inputRef}
+                            value={filterItem}
+                        />
+                      )
+                    }
+                    
                 </Flex>
             </FlexItem>
             <FlexItem>
-                <Body color="light" 
+                <Body display="flex"
                     key={`${isDropDownClosed ? "chevron-down" : 'chevron-up'}`}
                 >
                     <Icon cursor="pointer"

@@ -46,8 +46,7 @@ const [selectedOption, setSelectedOption] = useState();
                 />
             </div>
         </Dropdown.Trigger>
-
-      <Dropdown.Container>
+      <Dropdown.Container maxWidth="xs">
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}
