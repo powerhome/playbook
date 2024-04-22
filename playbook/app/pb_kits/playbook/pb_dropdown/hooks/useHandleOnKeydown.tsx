@@ -54,6 +54,7 @@ const {
       break;
       case "Tab":
         setIsDropDownClosed(true);
+        setFocusedOptionIndex(-1)
         break;
   }
 }

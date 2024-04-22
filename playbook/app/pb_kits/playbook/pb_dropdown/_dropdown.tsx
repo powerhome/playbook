@@ -54,7 +54,7 @@ const Dropdown = (props: DropdownProps) => {
   const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown();
 
   const [filterItem, setFilterItem] = useState("");
-  const [selected, setSelected] = useState({});
+  const [selected, setSelected] = useState<GenericObject>({});
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [hasTriggerSubcomponent, setHasTriggerSubcomponent] = useState(true);
   const [hasContainerSubcomponent, setHasContainerSubcomponent] =
@@ -74,6 +74,7 @@ const Dropdown = (props: DropdownProps) => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setIsDropDownClosed(true);
+        setFocusedOptionIndex(-1)
         setIsInputFocused(false);
       }
     };
@@ -87,6 +88,24 @@ const Dropdown = (props: DropdownProps) => {
     setHasTriggerSubcomponent(!!trigger);
     setHasContainerSubcomponent(!!container);
   }, []);
+
+
+  const filteredOptions = options?.filter((option: GenericObject) =>
+    option.label.toLowerCase().includes(filterItem.toLowerCase())
+  );
+
+  useEffect(() => {
+    if (!isDropDownClosed) { 
+        let newIndex = 0; 
+        if (selected && selected?.label) {
+            const selectedIndex = filteredOptions.findIndex((option: GenericObject) => option.label === selected.label);
+            if (selectedIndex >= 0) {
+                newIndex = selectedIndex;
+            }
+        }
+        setFocusedOptionIndex(newIndex);
+    }
+}, [isDropDownClosed]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilterItem(e.target.value);
@@ -110,10 +129,6 @@ const Dropdown = (props: DropdownProps) => {
     onSelect(null);
     setFocusedOptionIndex(-1);
   };
-
-  const filteredOptions = options?.filter((option: GenericObject) =>
-    option.label.toLowerCase().includes(filterItem.toLowerCase())
-  );
 
   const componentsToRender = prepareSubcomponents({
     children,
