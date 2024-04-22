@@ -14,6 +14,7 @@ import Card from "../pb_card/_card";
 export type AvatarProps = {
   aria?: {[key: string]: string},
   className?: string,
+  componentOverlay: {[key: string]: string},
   data?: {[key: string]: string},
   dark?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -37,7 +38,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
     data = {},
     htmlOptions = {},
     name = undefined,
-    overlay,
+    componentOverlay,
     id = '',
     imageAlt = '',
     imageUrl,
@@ -74,6 +75,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
   return placementMapping[placement] || {};
   }
 
+  console.log(componentOverlay)
   return (
     <div
         {...ariaProps}
@@ -82,7 +84,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
         className={classes}
         id={id}
     >
-      {overlay ? (
+      {componentOverlay ? (
         <Flex display="display_inline_block" 
             position="relative"
         >
@@ -98,27 +100,27 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
             )}
           </div>
 
-          {overlay.component === "badge" && (
+          {componentOverlay.component === "badge" && (
             <Badge
                 position="absolute"
                 rounded
-                text={overlay.text}
-                variant={overlay.variant}
-                {...getPlacementProps(overlay.placement)}
+                text={componentOverlay.text}
+                variant={componentOverlay.variant}
+                {...getPlacementProps(componentOverlay.placement)}
             />
           )}
-          {overlay.component === "icon" && (
+          {componentOverlay.component === "iconCircle" && (
             <Card
                 borderNone
                 borderRadius="rounded"
                 padding="xxs"
                 position="absolute"
-                {...getPlacementProps(overlay.placement)}
+                {...getPlacementProps(componentOverlay.placement)}
             >
               <IconCircle
-                  icon={overlay.icon}
-                  size="xs"
-                  variant={overlay.variant}
+                  icon={componentOverlay.icon}
+                  size="xxs"
+                  variant={componentOverlay.variant}
               />
             </Card>
           )}
