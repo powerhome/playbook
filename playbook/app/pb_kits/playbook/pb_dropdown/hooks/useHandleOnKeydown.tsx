@@ -12,9 +12,15 @@ const {
   handleOptionClick,
   setIsDropDownClosed,
   handleBackspace,
+  selected,
 }= useContext(DropdownContext)
 
   return (e: React.KeyboardEvent) => {
+
+    if (e.key !== "Tab" && autocomplete && selected && selected.label) {
+      handleBackspace();
+    }
+
     switch (e.key) {
     case "Backspace":
     case "Delete":
