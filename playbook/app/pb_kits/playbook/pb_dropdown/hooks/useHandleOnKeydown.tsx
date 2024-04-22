@@ -48,8 +48,13 @@ const {
         e.preventDefault();
         handleOptionClick(filteredOptions[focusedOptionIndex]);
         setFocusedOptionIndex(-1)
+      } else if (focusedOptionIndex === -1) {
+        setIsDropDownClosed(false)
       }
       break;
+      case "Tab":
+        setIsDropDownClosed(true);
+        break;
   }
 }
 };
