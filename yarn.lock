@@ -2837,10 +2837,10 @@
   resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/d71ffd31679c57b3a7358718ce84b2f9e5f0c577#d71ffd31679c57b3a7358718ce84b2f9e5f0c577"
   integrity sha512-SUM1/MsJb4nnNEz2A9PMXa8hgBeCdGCNQWEdrozy1l2/1GZOkiw28aGIUZZN3LAR2+0hRRNhVhcetfpuGCZcFg==
 
-"@powerhome/playbook-icons@0.0.1-alpha.8":
-  version "0.0.1-alpha.8"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/ab390d12f3621b45d7238f51995545c1d52f33e0#ab390d12f3621b45d7238f51995545c1d52f33e0"
-  integrity sha512-TX4GWwhU909LEzhJo8Eb/e3IBLFJu+2K5DeRffvDI5XaNxhFXZKfsgcgDtxsDPOmx/7Owk+Qs+IFJjwhZ6sbxw==
+"@powerhome/playbook-icons@0.0.1-alpha.14":
+  version "0.0.1-alpha.14"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/3d046f70c90951ac28cef5bdc242667f648355c4#3d046f70c90951ac28cef5bdc242667f648355c4"
+  integrity sha512-ZEeuL29mvbP82a7HpIvcnjRN8TmtnMCYMwr7hn3DpBmNZpkTksmaHvxSsRV/pSvPteGqPd9no0uRm03k2Azl8A==
 
 "@rails/actioncable@^7.0":
   version "7.1.3"
