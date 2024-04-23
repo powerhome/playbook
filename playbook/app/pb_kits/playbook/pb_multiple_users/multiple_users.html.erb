@@ -1,4 +1,4 @@
-<%= pb_content_tag(:div) do %>
+<%= pb_content_tag do %>
     <% object.users.take(object.display_count).each do |user| %>
       <%= pb_rails("avatar", props: user.merge({size: object.size, classname: "pb_multiple_users_item", dark: object.dark}) ) %>
     <% end %>

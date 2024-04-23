@@ -1,4 +1,4 @@
-<%= pb_content_tag(:div) do %>
+<%= pb_content_tag do %>
     <% if object.confirm_button && object.cancel_button %>
         <div class="dialog-pseudo-footer"></div>
         <%= pb_rails("flex", props: { classname:object.classname, spacing:"between", padding_x:"sm", padding:"sm", padding_bottom:"sm" }) do %>

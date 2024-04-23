@@ -1,4 +1,4 @@
-<%= pb_content_tag(:div) do %>
+<%= pb_content_tag do %>
 <%= content_tag(object.link ? 'a' : 'span', class: 'bread_crumb_item', href: object.link) do %>
     <%= content.presence %>
 <% end %>
