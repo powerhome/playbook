@@ -31,6 +31,8 @@ require "playbook/right"
 require "playbook/bottom"
 
 module Playbook
+  include ActionView::Helpers
+
   class KitBase < ViewComponent::Base
     include Playbook::PbKitHelper
     include Playbook::Props
@@ -78,7 +80,25 @@ module Playbook
       default_html_options.merge(html_options.deep_merge(data_attributes))
     end
 
+    # rubocop:disable Style/OptionalBooleanParameter
+    def pb_content_tag(name, content_or_options_with_block = nil, options = {}, escape = true, &block)
+      combined_options = options
+                         .merge(combined_html_options)
+                         .merge(default_options.merge(content_or_options_with_block))
+      content_tag(name, combined_options, options, escape, &block)
+    end
+    # rubocop:enable Style/OptionalBooleanParameter
+
   private
+
+    def default_options
+      {
+        id: id,
+        data: data,
+        class: classname,
+        aria: aria,
+      }
+    end
 
     def default_html_options
       {}
@@ -88,7 +108,7 @@ module Playbook
       {
         data: data,
         aria: aria,
-      }.transform_keys { |key| key.to_s.tr("_", "-") }
+      }.transform_keys { |key| key.to_s.tr("_", "-").to_sym }
     end
   end
 end

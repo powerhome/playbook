@@ -14,7 +14,7 @@ module Playbook
                      default: "default"
 
       def classname
-        generate_classname("pb_icon_circle_kit", size, variant)
+        generate_classname("pb_icon_circle_kit", "size_#{size}", variant)
       end
     end
   end

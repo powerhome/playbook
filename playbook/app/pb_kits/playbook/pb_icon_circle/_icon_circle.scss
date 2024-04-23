@@ -51,7 +51,7 @@ $pb_icon_circle_sizes: (
   }
 
   @each $name, $size in $pb_icon_circle_sizes {
-    &[class*=_#{$name}] {
+    &[class*=_size_#{$name}] {
       width: $size;
       height: $size;
       border-radius: $size/2;
