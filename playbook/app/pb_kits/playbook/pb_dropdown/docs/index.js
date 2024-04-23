@@ -5,3 +5,4 @@ export { default as DropdownWithCustomTrigger } from './_dropdown_with_custom_tr
 export { default as DropdownWithAutocomplete } from './_dropdown_with_autocomplete.jsx'
 export { default as DropdownWithAutocompleteAndCustomDisplay } from './_dropdown_with_autocomplete_and_custom_display.jsx'
 export { default as DropdownWithCustomPadding } from './_dropdown_with_custom_padding.jsx'
+export { default as DropdownWithLabel } from './_dropdown_with_label.jsx'

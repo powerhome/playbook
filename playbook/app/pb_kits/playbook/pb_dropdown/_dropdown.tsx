@@ -4,6 +4,7 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../uti
 import { globalProps } from "../utilities/globalProps";
 
 import Body from "../pb_body/_body";
+import Caption from "../pb_caption/_caption";
 
 import DropdownContainer from "./subcomponents/DropdownContainer";
 import DropdownOption from "./subcomponents/DropdownOption";
@@ -25,6 +26,7 @@ type DropdownProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   children?: React.ReactChild[] | React.ReactChild | ReactElement[];
+  label?: string;
   options: GenericObject;
   onSelect?: (arg: GenericObject) => null;
 };
@@ -38,6 +40,7 @@ const Dropdown = (props: DropdownProps) => {
     data = {},
     htmlOptions = {},
     id,
+    label,
     options,
     onSelect,
   } = props;
@@ -168,6 +171,12 @@ const Dropdown = (props: DropdownProps) => {
               toggleDropdown,
           }}
       >
+        {label &&
+        <Caption
+            marginBottom="xs"
+            text={label}
+        />
+        }
         <div className="dropdown_wrapper" 
             onBlur={() => {
                 // Debounce to delay the execution to prevent jumpiness in Focus state

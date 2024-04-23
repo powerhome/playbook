@@ -3,6 +3,7 @@ examples:
   
   react:
   - dropdown_default: Default
+  - dropdown_with_label: With Label
   - dropdown_with_custom_options: Custom Options
   - dropdown_with_custom_display: Custom Display
   - dropdown_with_custom_trigger: Custom Trigger
