@@ -95,6 +95,7 @@ class PagesController < ApplicationController
   end
 
   def kit_collection_show_rails
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     handle_kit_collection("rails")
   end
 
