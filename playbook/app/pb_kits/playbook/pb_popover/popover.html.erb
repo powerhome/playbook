@@ -1,4 +1,4 @@
-<%= pb_content_tag(:div, **combined_html_options) do %>
+<%= pb_content_tag(:div) do %>
   <div class="pb_popover_tooltip hide" id="<%= object.tooltip_id %>" role="tooltip" style="<%= object.z_index_helper %>">
     <div class="pb_popover_body <%= object.width_height_class_helper %> <%= object.popover_spacing_helper %>" style="<%= object.width_height_helper %>">
       <%= content.presence %>

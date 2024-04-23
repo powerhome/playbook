@@ -1,9 +1,9 @@
 <% if object.tag == "table" %>
-  <%= pb_content_tag(:tbody, **combined_html_options) do %>
+  <%= pb_content_tag(:tbody) do %>
     <%= content.presence %>
   <% end %>
 <% else %>
-  <%= pb_content_tag(:div, **combined_html_options) do %>
+  <%= pb_content_tag(:div) do %>
     <%= content.presence %>
   <% end %>
 <% end %>

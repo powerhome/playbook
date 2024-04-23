@@ -5,8 +5,7 @@
           dark: object.dark,
           href: object.link && object.link,
           target: object.link && object.target,
-          **combined_html_options
-          ) do %>
+         ) do %>
           <% if object.image_url %>
             <%= pb_rails("image", props: { url: object.image_url, classname: "pb_nav_img_wrapper_collapsible" }) %>
           <% end %>
@@ -24,8 +23,6 @@
     <% end %>
   <% else %>
     <%= pb_content_tag(object.tag,
-      **combined_html_options,
-      dark: object.dark,
       href: object.link && object.link,
       target: object.link && object.target
       ) do %>

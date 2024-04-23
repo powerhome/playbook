@@ -1,5 +1,5 @@
 <div class="pb_dialog_wrapper_rails <%= object.full_height_style %>" data-overlay-click= <%= object.overlay_close %> >
-    <%= pb_content_tag(:dialog, **combined_html_options) do %>
+    <%= pb_content_tag(:dialog) do %>
             <% if object.status === "" && object.title %>
                 <%= pb_rails("dialog/dialog_header", props: { title: object.title, id: object.id }) %>
             <% end %>

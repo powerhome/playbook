@@ -1,6 +1,5 @@
 <%= pb_content_tag(:div,
-    aria: object.aria_attributes,
-    **combined_html_options) do %>
+    aria: object.aria_attributes) do %>
 
     <div class="progress_pills_status">
       <% object.with_status do |status| %>

@@ -1,4 +1,4 @@
-<%= pb_content_tag(:label, **combined_html_options) do %>
+<%= pb_content_tag(:label) do %>
   <%= content.presence || object.input %>
   <% if object.indeterminate %>
     <span class="pb_checkbox_indeterminate">

@@ -1,4 +1,4 @@
-<%= pb_content_tag(:li, **combined_html_options) do %>
+<%= pb_content_tag(:li) do %>
   <div class="box" style="max-width: min-content;" id="<%= object.tooltip_trigger_class %>">
     <div class="circle">
       <%= pb_rails("icon", props: { icon: object.icon, size: "xs" }) if object.icon.present? %>

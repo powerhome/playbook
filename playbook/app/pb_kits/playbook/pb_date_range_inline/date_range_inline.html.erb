@@ -1,4 +1,4 @@
-<%= pb_content_tag(:div, **combined_html_options) do %>
+<%= pb_content_tag(:div) do %>
   <div class="pb_date_range_inline_wrapper">
     <% if object.icon == true %>
       <%= pb_rails(object.text_kit, props: { tag: "span", dark: object.dark, color: object.icon_color, text: pb_rails("icon", props: { icon: "calendar-alt", fixed_width: true, size: object.size, classname: "pb_date_range_inline_icon" }) }) %>

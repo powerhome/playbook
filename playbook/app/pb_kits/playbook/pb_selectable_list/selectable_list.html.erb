@@ -1,4 +1,4 @@
-<%= pb_content_tag(:div, **combined_html_options) do %>
+<%= pb_content_tag(:div) do %>
   <%= pb_rails("list") do %>
     <% object.items.each do |item| %>
       <%= pb_rails("selectable_list/selectable_list_item", props: item.merge(variant: object.variant, id: object.get_id(item)) )%>
