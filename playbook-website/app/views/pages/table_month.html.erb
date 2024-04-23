@@ -1,0 +1,13 @@
+<%= turbo_frame_tag 'test' do %>
+  <p>
+    This is Turbo!!!
+  </p>
+<% end %>
+
+<%
+=begin%>
+ <%= turbo_frame_tag 'test[month]' do %>
+  <%= pb_rails("playbook/advance_table_row", props: { kit: @selected_kit, dark: dark_mode? }) %>
+<% end %> 
+<%
+=end%>

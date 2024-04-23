@@ -51,11 +51,5 @@ Rails.application.routes.draw do
   get "/disable_dark_mode", to: "pages#disable_dark_mode", as: "disable_dark_mode"
 
   # Advanced Table
-  get "full_list", to: "pages#full_list", as: "full_list"
-  get "/advanced_table_table", to: "advanced_table#table", as: :kpi_table
-  get "/net_sales_kpi_list", to: "advanced_table#list", as: :kpi_list
-  get "/advanced_table_quarter", to: "advanced_table#quarter", as: :kpi_quarter
-  get "/advanced_table_months", to: "advanced_table#month", as: :kpi_monthly
-  get "/advanced_table_daily", to: "advanced_table#day", as: :kpi_daily
-  get "/advanced_table_cumulated", to: "advanced_table_cumulated#index"
+  get "table_month", to: "pages#table_month", as: "table_month"
 end

@@ -6,7 +6,7 @@
         <% object.table_data.each do |row| %>
           <%= render_row_and_children(row, object.column_definitions) %>
         <% end %>
-        <%= turbo_frame_tag 'godinho' do %>
-          <%= link_to "Click here for Turbo!", full_list_path %>
+        <%= turbo_frame_tag 'test' do %>
+          <%= link_to "Click here for Turbo!", table_month_path %>
         <% end %>
 <% end %>

@@ -3,6 +3,8 @@
 module Playbook
   module PbAdvancedTable
     class TableBody < Playbook::KitBase
+      include Turbo::FramesHelper
+
       prop :table_data, type: Playbook::Props::Array,
                         default: []
       prop :column_definitions, type: Playbook::Props::Array,
