@@ -2844,7 +2844,7 @@
 
 "@powerhome/power-fonts@0.0.1-alpha.2":
   version "0.0.1-alpha.2"
-  resolved "https://npm.pkg.github.com/download/@powerhome/power-fonts/0.0.1-alpha.2/79616e02868338b58a1b00c7cd666e966ed9bf86#79616e02868338b58a1b00c7cd666e966ed9bf86"
+  resolved "https://npm.powerapp.cloud/@powerhome/power-fonts/-/79616e02868338b58a1b00c7cd666e966ed9bf86#79616e02868338b58a1b00c7cd666e966ed9bf86"
   integrity sha512-GLUQvu8M7TmfZEh/AkAQdowfNk27xwTEANdXvdh/8m4ZkhxeGJihbCif0OWxK68/QSYYjLFwrAtm9EDJVYg7Ug==
 
 "@rails/actioncable@^7.0":
