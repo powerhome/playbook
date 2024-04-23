@@ -68,6 +68,8 @@ const Dropdown = (props: DropdownProps) => {
 
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
+  const inputWrapperRef = useRef(null);
+  const dropdownContainerRef = useRef(null);
 
   const { trigger, container, otherChildren } =
     separateChildComponents(children);
@@ -75,7 +77,9 @@ const Dropdown = (props: DropdownProps) => {
   // useEffect to handle clicks outside the dropdown
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      if (inputWrapperRef.current && !inputWrapperRef.current.contains(e.target) &&
+      (dropdownContainerRef.current && !dropdownContainerRef.current.contains(e.target))
+      ) {
         setIsDropDownClosed(true);
         setFocusedOptionIndex(-1)
         setIsInputFocused(false);
@@ -152,6 +156,7 @@ const Dropdown = (props: DropdownProps) => {
       <DropdownContext.Provider
           value={{
               autocomplete,
+              dropdownContainerRef,
               filteredOptions,
               filterItem,
               focusedOptionIndex,
@@ -160,6 +165,7 @@ const Dropdown = (props: DropdownProps) => {
               handleOptionClick,
               handleWrapperClick,
               inputRef,
+              inputWrapperRef,
               isDropDownClosed,
               isInputFocused,
               options,

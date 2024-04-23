@@ -48,6 +48,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     toggleDropdown,
     isDropDownClosed,
     inputRef,
+    inputWrapperRef,
     isInputFocused,
     setIsInputFocused,
   } = useContext(DropdownContext);
@@ -96,6 +97,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
         <div
             onClick={() => toggleDropdown()}
             onKeyDown= {handleKeyDown}
+            ref={inputWrapperRef}
             style={{ display: "inline-block" }}
             tabIndex= {0}
         >
@@ -112,6 +114,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                 onClick: () => handleWrapperClick(),
                 onKeyDown: handleKeyDown,
                 tabIndex: "0",
+                ref:inputWrapperRef
               }}
               justify="between"
               paddingX="sm"

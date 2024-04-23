@@ -39,6 +39,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
   const {
     isDropDownClosed,
     handleChange,
+    dropdownContainerRef,
     filterItem,
     filteredOptions,
     inputRef,
@@ -62,6 +63,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         className={classes} 
         id={id}
         onMouseEnter={() => setFocusedOptionIndex(-1)}
+        ref={dropdownContainerRef}
     >
       {searchbar && (
         <TextInput paddingTop="xs" 
