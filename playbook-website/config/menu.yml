@@ -254,6 +254,10 @@ kits:
         platforms: *web
         description: Playbook's date picker is built using flatpickr, a vanilla js library. Common date picker use cases and features have been adapted into simple prop based configuration detailed in the docs below.
         status: "stable"
+      - name: dropdown
+        platforms: *react_only
+        description: ""
+        status: "beta"
       - name: "multi_level_select"
         platforms: *web
         description: The MultiLevelSelect kit renders a multi leveled select dropdown based on data from the user. 
