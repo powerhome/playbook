@@ -12,7 +12,7 @@
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@powerhome/playbook-icons": "0.0.1-alpha.8",
     "@powerhome/playbook-icons-react": "0.0.1-alpha.8",
-    "@powerhome/power-fonts": "0.0.1-alpha.3",
+    "@powerhome/power-fonts": "0.0.1-alpha.4",
     "@rails/webpacker": "5.4.3",
     "@svgr/webpack": "5.5.0",
     "@tiptap/extension-document": "^2.1.12",
