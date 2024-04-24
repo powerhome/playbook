@@ -1,4 +1,8 @@
-<%= pb_content_tag do %>
+<%= content_tag(:div,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    **combined_html_options) do %>
   <% if object.label.present? %>
     <%= pb_rails("caption", props: { text: object.label, dark: object.dark, classname: "pb_text_input_kit_label" }) %>
   <% end %>
