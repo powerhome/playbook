@@ -103,10 +103,6 @@ class PagesController < ApplicationController
     handle_kit_collection("react")
   end
 
-  def kit_collection_show
-    handle_kit_collection(params[:type])
-  end
-
   def kit_playground_rails
     @kit = "avatar"
     @examples = pb_doc_kit_examples(@kit, "rails")
