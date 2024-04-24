@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Dropdown, useDropdown, Button } from '../../'
+import { Dropdown, useDropdown, CircleIconButton } from '../..'
 
-const DropdownWithExternalControl = (props) => {
+const DropdownWithHook = (props) => {
 // eslint-disable-next-line no-unused-vars
 const [selectedOption, setSelectedOption] = useState();
 const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
@@ -32,22 +32,19 @@ const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
 
   return (
   <div>
-    <Button
-        data={{dropdown:'pb-dropdown-trigger'}}
-        htmlOptions={{ref:{triggerRef}}}
-        marginBottom='sm'
-        onClick={() => setIsDropdownClosed(!isDropDownClosed)}
-        padding="none"
-        tabIndex={0}
-        variant="link"
-    >
-      {isDropDownClosed ? "Open Dropdown" : "Close Dropdown"}
-    </Button>
+   <div key={selectedOption ? selectedOption.icon : "flag"}>
+       <CircleIconButton
+           icon={selectedOption ? selectedOption.icon : "flag"}
+           onClick={() => setIsDropdownClosed(!isDropDownClosed)}
+           variant="secondary"
+       />
+    </div>
 
     <Dropdown
         isClosed={isDropDownClosed}
         onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
+        triggerNone
         {...props}
     >
       {options.map((option) => (
@@ -60,4 +57,4 @@ const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
   )
 }
 
-export default DropdownWithExternalControl
+export default DropdownWithHook

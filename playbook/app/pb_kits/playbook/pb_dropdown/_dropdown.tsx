@@ -30,6 +30,7 @@ type DropdownProps = {
   options: GenericObject;
   onSelect?: (arg: GenericObject) => null;
   isClosed?: boolean;
+  triggerNone?: boolean;
 };
 
 const Dropdown = (props: DropdownProps) => {
@@ -45,6 +46,7 @@ const Dropdown = (props: DropdownProps) => {
     options,
     onSelect,
     isClosed = true,
+    triggerNone = false,
   } = props;
 
   const ariaProps = buildAriaProps(aria);
@@ -79,14 +81,27 @@ const Dropdown = (props: DropdownProps) => {
   // useEffect to handle clicks outside the dropdown
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (inputWrapperRef.current && !inputWrapperRef.current.contains(e.target) &&
-      (dropdownContainerRef.current && !dropdownContainerRef.current.contains(e.target))
+      // Check if the clicked element or any of its parents have the specified data attribute
+      let targetElement = e.target as HTMLElement;
+      let shouldClose = true;
+  
+      while (targetElement && shouldClose) {
+        if (targetElement.getAttribute('data-dropdown') === 'pb-dropdown-trigger') {
+          shouldClose = false;
+        }
+        targetElement = targetElement.parentElement as HTMLElement;
+      }
+      if (
+        inputWrapperRef.current && !inputWrapperRef.current.contains(e.target) &&
+        (dropdownContainerRef.current && !dropdownContainerRef.current.contains(e.target)) &&
+        shouldClose
       ) {
         setIsDropDownClosed(true);
-        setFocusedOptionIndex(-1)
+        setFocusedOptionIndex(-1);
         setIsInputFocused(false);
       }
     };
+  
     window.addEventListener("click", handleClickOutside);
     return () => {
       window.removeEventListener("click", handleClickOutside);
@@ -181,6 +196,7 @@ const Dropdown = (props: DropdownProps) => {
               setIsInputFocused,
               setSelected,
               toggleDropdown,
+              triggerNone
           }}
       >
         {label &&

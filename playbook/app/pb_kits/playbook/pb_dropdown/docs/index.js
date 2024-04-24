@@ -7,3 +7,4 @@ export { default as DropdownWithAutocompleteAndCustomDisplay } from './_dropdown
 export { default as DropdownWithCustomPadding } from './_dropdown_with_custom_padding.jsx'
 export { default as DropdownWithLabel } from './_dropdown_with_label.jsx'
 export { default as DropdownWithExternalControl } from './_dropdown_with_external_control.jsx'
+export { default as DropdownWithHook } from './_dropdown_with_hook.jsx'
