@@ -65,7 +65,7 @@ const getResponsiveValue = <T extends string | undefined>(prop: ResponsiveProp<T
 
 const Background = (props: BackgroundProps): React.ReactElement => {
   const {
-    alt = '',
+    alt = undefined,
     aria = {},
     backgroundColor = 'light',
     backgroundPosition = '',
@@ -130,11 +130,13 @@ const Background = (props: BackgroundProps): React.ReactElement => {
   );
 
   const backgroundStyle = {
-    backgroundImage: resImageUrl ? `url(${resImageUrl})` : undefined,
-    backgroundRepeat: resBackgroundRepeat || undefined,
-    backgroundSize: resBackgroundSize || undefined,
-    backgroundPosition: resBackgroundPosition || undefined,
     backgroundColor: customColor || undefined,
+    ...(resImageUrl !== '' ? {
+      backgroundImage: resImageUrl ? `url(${resImageUrl})` : undefined,
+      backgroundRepeat: resBackgroundRepeat || undefined,
+      backgroundPosition: resBackgroundPosition || undefined,
+      backgroundSize: resBackgroundSize || undefined,
+    } : {})
   };
 
   const Tag: React.ReactElement | any = `${tag}`;

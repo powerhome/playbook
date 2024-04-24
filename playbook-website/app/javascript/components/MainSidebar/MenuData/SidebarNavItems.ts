@@ -34,11 +34,11 @@ export const SideBarNavItems = [
         children: true,
         leftIcon:"vial"
     },
-    {
-        name: "Playground",
-        key: "top-nav-item-6",
-        link: "/kit_playground_rails",
-        children: false,
-        leftIcon:"laptop-code"
-    }
+    // {
+    //     name: "Playground",
+    //     key: "top-nav-item-6",
+    //     link: "/kit_playground_rails",
+    //     children: false,
+    //     leftIcon:"laptop-code"
+    // }
 ]
