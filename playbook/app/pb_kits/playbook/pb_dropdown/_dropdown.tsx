@@ -29,6 +29,7 @@ type DropdownProps = {
   label?: string;
   options: GenericObject;
   onSelect?: (arg: GenericObject) => null;
+  isClosed?: boolean;
 };
 
 const Dropdown = (props: DropdownProps) => {
@@ -43,6 +44,7 @@ const Dropdown = (props: DropdownProps) => {
     label,
     options,
     onSelect,
+    isClosed = true,
   } = props;
 
   const ariaProps = buildAriaProps(aria);
@@ -54,7 +56,7 @@ const Dropdown = (props: DropdownProps) => {
     className
   );
 
-  const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown();
+  const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
 
   const [filterItem, setFilterItem] = useState("");
   const [selected, setSelected] = useState<GenericObject>({});
@@ -96,6 +98,10 @@ const Dropdown = (props: DropdownProps) => {
     setHasContainerSubcomponent(!!container);
   }, []);
 
+// dropdown to toggle with external control
+  useEffect(()=> {
+    setIsDropDownClosed(isClosed)
+   },[isClosed])
 
   const filteredOptions = options?.filter((option: GenericObject) =>
     option.label.toLowerCase().includes(filterItem.toLowerCase())
