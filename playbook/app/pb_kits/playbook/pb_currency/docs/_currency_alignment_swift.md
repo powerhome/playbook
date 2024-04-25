@@ -1,5 +1,4 @@
-
-[!Currency-Alignment](https://github.com/powerhome/playbook/assets/112719604/b4e2b69e-b132-44c5-a68e-c330b3e94718)
+[!Currency-Alignment](https://github.com/powerhome/playbook-swift/assets/112719604/d74a9c5a-c606-4cd0-bf70-20e9297ec246)
 
 ```swift
 VStack(alignment: .leading, spacing: Spacing.small) {
