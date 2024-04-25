@@ -1,3 +1,6 @@
+
+[!Currency-Alignment](https://github.com/powerhome/playbook/assets/112719604/b4e2b69e-b132-44c5-a68e-c330b3e94718)
+
 ```swift
 VStack(alignment: .leading, spacing: Spacing.small) {
   HStack {
