@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, ReactElement } from "react";
+import ReactDOM from 'react-dom';
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -30,7 +31,7 @@ type DropdownProps = {
   options: GenericObject;
   onSelect?: (arg: GenericObject) => null;
   isClosed?: boolean;
-  triggerNone?: boolean;
+  triggerRef?: any;
 };
 
 const Dropdown = (props: DropdownProps) => {
@@ -46,7 +47,7 @@ const Dropdown = (props: DropdownProps) => {
     options,
     onSelect,
     isClosed = true,
-    triggerNone = false,
+    triggerRef
   } = props;
 
   const ariaProps = buildAriaProps(aria);
@@ -69,7 +70,7 @@ const Dropdown = (props: DropdownProps) => {
 
   //state for keyboard events
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
-
+  const mainRef = useRef(null);
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
   const inputWrapperRef = useRef(null);
@@ -78,10 +79,20 @@ const Dropdown = (props: DropdownProps) => {
   const { trigger, container, otherChildren } =
     separateChildComponents(children);
 
+
+  // Adjust dropdown position based on the anchor element
+  useEffect(() => {
+    if (mainRef.current && triggerRef?.current) {
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+      mainRef.current.style.top = `${triggerRect.y + triggerRect.height}px`;
+      mainRef.current.style.left = `${triggerRect.left}px`;
+    }
+  }, [isDropDownClosed, triggerRef]);
+  
+
   // useEffect to handle clicks outside the dropdown
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      // Check if the clicked element or any of its parents have the specified data attribute
       let targetElement = e.target as HTMLElement;
       let shouldClose = true;
   
@@ -167,12 +178,15 @@ const Dropdown = (props: DropdownProps) => {
     otherChildren,
   });
 
-  return (
+
+  const dropdownContent = (
     <div {...ariaProps} 
         {...dataProps} 
         {...htmlProps}
         className={classes} 
         id={id}
+        ref={triggerRef && mainRef}
+        style={triggerRef ? { position: "absolute"} : { position: "relative"}}
     >
       <DropdownContext.Provider
           value={{
@@ -196,7 +210,7 @@ const Dropdown = (props: DropdownProps) => {
               setIsInputFocused,
               setSelected,
               toggleDropdown,
-              triggerNone
+              triggerRef
           }}
       >
         {label &&
@@ -241,7 +255,12 @@ const Dropdown = (props: DropdownProps) => {
         </div>
       </DropdownContext.Provider>
     </div>
-  );
+  )
+
+  return triggerRef ? ReactDOM.createPortal(
+    dropdownContent,
+    document.body
+  ) : dropdownContent;
 };
 
 Dropdown.Option = DropdownOption;

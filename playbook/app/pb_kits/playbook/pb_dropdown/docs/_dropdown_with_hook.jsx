@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Dropdown, useDropdown, CircleIconButton } from '../..'
 
 const DropdownWithHook = (props) => {
 // eslint-disable-next-line no-unused-vars
 const [selectedOption, setSelectedOption] = useState();
 const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
+const buttonRef = useRef(null);
 
   const options = [
     {
@@ -33,18 +34,25 @@ const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
   return (
   <div>
    <div key={selectedOption ? selectedOption.icon : "flag"}>
-       <CircleIconButton
-           icon={selectedOption ? selectedOption.icon : "flag"}
-           onClick={() => setIsDropdownClosed(!isDropDownClosed)}
+      <CircleIconButton
+          htmlOptions={{ ref: buttonRef }}
+          icon={selectedOption ? selectedOption.icon : "flag"}
+          onClick={() => setIsDropdownClosed(!isDropDownClosed)}
+          variant="secondary"
+      />
+    </div>
+
+    {/* <CircleIconButton
+           icon={"flag"}
            variant="secondary"
        />
-    </div>
+ */}
 
     <Dropdown
         isClosed={isDropDownClosed}
         onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
-        triggerNone
+        triggerRef={buttonRef}
         {...props}
     >
       {options.map((option) => (

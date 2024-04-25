@@ -44,6 +44,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     filteredOptions,
     inputRef,
     setFocusedOptionIndex,
+    triggerRef
   } = useContext(DropdownContext);
 
   const ariaProps = buildAriaProps(aria);
@@ -64,6 +65,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         id={id}
         onMouseEnter={() => setFocusedOptionIndex(-1)}
         ref={dropdownContainerRef}
+        style={triggerRef ? {} : { position: "absolute"}}
     >
       {searchbar && (
         <TextInput paddingTop="xs" 

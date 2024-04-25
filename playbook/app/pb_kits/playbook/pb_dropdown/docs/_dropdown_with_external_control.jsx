@@ -34,7 +34,6 @@ const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
   <div>
     <Button
         data={{dropdown:'pb-dropdown-trigger'}}
-        htmlOptions={{ref:{triggerRef}}}
         marginBottom='sm'
         onClick={() => setIsDropdownClosed(!isDropDownClosed)}
         padding="none"
