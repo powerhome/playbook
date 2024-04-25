@@ -65,20 +65,6 @@ $transition: $transition_cubic;
         background-color: $primary_action;
         border-color: $primary_action;
       }
-
-
-      &:disabled 
-      // ~ .pb_checkbox_checkmark,
-      // & ~ .pb_checkbox_indeterminate 
-      {
-        cursor: not-allowed;
-        // border: 2px solid $border-light;
-        border: 2px solid red;
-        background-color: $neutral; 
-        & ~ .pb_checkbox_label{
-          color: $text_lt_light;
-        }
-      }
     }
     &:checked ~ .pb_checkbox_checkmark,
     & ~ .pb_checkbox_indeterminate {
@@ -88,19 +74,25 @@ $transition: $transition_cubic;
         opacity: $opacity_10;
       }
     }
-    &:disabled ~ .pb_checkbox_checkmark,
-    & ~ .pb_checkbox_indeterminate {
+    &:disabled ~ .pb_checkbox_checkmark {
       cursor: not-allowed;
-      border: 2px solid $border-light;
-      // border: 2px solid red;
+      // background-color: blue;
       background-color: #f4f4f6; 
       & ~ .pb_checkbox_label {
         color: $text_lt_light;
+        &.dark {
+          // color: orange;
+          color: $text_dk_light;
+        }
         // color: red;
       }
       & ~ .pb_checkbox_label .pb_body_kit {
         color: $text_lt_light;
         // color: blue;
+        &.dark {
+          // color: pink;
+          color: $text_dk_light;
+        }
       }
     }
   }
@@ -110,6 +102,21 @@ $transition: $transition_cubic;
       &:focus ~ .pb_checkbox_checkmark {
         box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;      
       }
+      &:disabled ~ .pb_checkbox_checkmark {
+        border: 2px solid $border_dark;
+        // border: 2px solid red;
+        background-color: #66697f; 
+        // background-color: blue;
+        cursor: not-allowed;
+        // font stuff not allowed here due to code copied error??? put in &.dark above
+        // & ~ .pb_checkbox_label {
+        //   // color: $text_dk_light;
+        //   color: orange;
+        // }
+        // & ~ .pb_checkbox_label .pb_body_kit {
+        //   // color: $text_dk_light;
+        //   color: pink;
+        }
     }
     
     @media (hover:hover) {
