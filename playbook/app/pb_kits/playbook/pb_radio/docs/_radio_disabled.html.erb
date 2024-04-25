@@ -1,0 +1,13 @@
+<%= pb_rails("radio", props: {
+  text: "Disabled unchecked"
+}) do %>
+  <input type="radio" name="DisabledGroup" value="Disabled unchecked" disabled>
+<% end %>
+
+<br>
+
+<%= pb_rails("radio", props: {
+  text: "TBDisabled checked also example may need to be changed"
+}) do %>
+  <input type="radio"  name="DisabledGroup" value="TBDisabled checked" checked>
+<% end %>
