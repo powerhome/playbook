@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Dropdown, useDropdown, CircleIconButton } from '../..'
+import { Dropdown, useDropdown, CircleIconButton, Icon, Body, FlexItem, Flex  } from '../..'
 
 const DropdownWithHook = (props) => {
 // eslint-disable-next-line no-unused-vars
@@ -33,21 +33,12 @@ const buttonRef = useRef(null);
 
   return (
   <div>
-   <div key={selectedOption ? selectedOption.icon : "flag"}>
       <CircleIconButton
-          htmlOptions={{ ref: buttonRef }}
-          icon={selectedOption ? selectedOption.icon : "flag"}
+          htmlOptions={{ref: buttonRef}}
+          icon={"flag"}
           onClick={() => setIsDropdownClosed(!isDropDownClosed)}
           variant="secondary"
       />
-    </div>
-
-    {/* <CircleIconButton
-           icon={"flag"}
-           variant="secondary"
-       />
- */}
-
     <Dropdown
         isClosed={isDropDownClosed}
         onSelect={(selectedItem) => setSelectedOption(selectedItem)}
@@ -58,7 +49,23 @@ const buttonRef = useRef(null);
       {options.map((option) => (
         <Dropdown.Option key={option.id} 
             option={option}
-        /> 
+        > 
+        <>
+          <FlexItem>
+              <Flex paddingRight='md'>
+                <Icon icon={option.icon} 
+                    paddingRight="xs"
+                />
+                <Body text={option.label} />
+              </Flex>
+          </FlexItem>
+              <FlexItem>
+                <Body color="light" 
+                    text={option.areaCode} 
+                />
+              </FlexItem>
+            </>
+        </Dropdown.Option>
       ))}
     </Dropdown>
   </div>
