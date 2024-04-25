@@ -39,8 +39,36 @@
       & ~ .pb_radio_button {
         border: 6px solid $primary;
       }
+      // &:disabled {
+      //   cursor: not-allowed;
+      //   border: 2px solid green;
+      //   background-color: red;
+      // }
+    }
+    &:disabled + .pb_radio_button {
+      cursor: not-allowed;
+      border: 2px solid $border-light;
+      // red;
+      background-color: #f4f4f6; 
+      // without ^ this only see disabled background when hover but colors don't quite match
+      // label {
+      //   color: $text_lt_light;
+      // }
+      & ~ .pb_body_kit {
+        color: $text_lt_light;
+      }
     }
   }
+
+  // .disabled {
+  //   cursor: not-allowed;
+  //   // border: 2px solid $border-light;
+  //   border: 2px solid red;
+  //   background-color: #f4f4f6; 
+  //   & ~ .pb_body_kit {
+  //     color: $text_lt_light;
+  //   }
+  // }
 
   &[class*=vertical] {
     flex-direction: column;
@@ -66,6 +94,10 @@
           border: 6px solid $primary;
         }
       }
+      // &:disabled {
+      //   border: 2px solid green;
+      //   background-color: $neutral;
+      // }
     }
 
     @media (hover:hover) {

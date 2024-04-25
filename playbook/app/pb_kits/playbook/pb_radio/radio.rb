@@ -19,9 +19,10 @@ module Playbook
                   default: "Radio Text"
       prop :value, type: Playbook::Props::String,
                    default: "radio_text"
+      prop :disabled, type: Playbook::Props::Boolean, default: false
 
       def classname
-        generate_classname("pb_radio_kit") + error_class + alignment_class
+        generate_classname("pb_radio_kit") + error_class + alignment_class + disabled_class
       end
 
       def selected
@@ -40,6 +41,10 @@ module Playbook
 
       def alignment_class
         alignment == "vertical" ? " vertical" : ""
+      end
+
+      def disabled_class
+        disabled ? " disabled" : ""
       end
     end
   end

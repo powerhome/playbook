@@ -65,6 +65,20 @@ $transition: $transition_cubic;
         background-color: $primary_action;
         border-color: $primary_action;
       }
+
+
+      &:disabled 
+      // ~ .pb_checkbox_checkmark,
+      // & ~ .pb_checkbox_indeterminate 
+      {
+        cursor: not-allowed;
+        // border: 2px solid $border-light;
+        border: 2px solid red;
+        background-color: $neutral; 
+        & ~ .pb_checkbox_label{
+          color: $text_lt_light;
+        }
+      }
     }
     &:checked ~ .pb_checkbox_checkmark,
     & ~ .pb_checkbox_indeterminate {
@@ -72,6 +86,21 @@ $transition: $transition_cubic;
       .check_icon,
       .indeterminate_icon {
         opacity: $opacity_10;
+      }
+    }
+    &:disabled ~ .pb_checkbox_checkmark,
+    & ~ .pb_checkbox_indeterminate {
+      cursor: not-allowed;
+      border: 2px solid $border-light;
+      // border: 2px solid red;
+      background-color: #f4f4f6; 
+      & ~ .pb_checkbox_label {
+        color: $text_lt_light;
+        // color: red;
+      }
+      & ~ .pb_checkbox_label .pb_body_kit {
+        color: $text_lt_light;
+        // color: blue;
       }
     }
   }
