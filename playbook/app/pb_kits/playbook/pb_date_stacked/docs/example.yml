@@ -18,8 +18,8 @@ examples:
 
  swift:
  - date_stacked_default_swift: Default
- - date_stacked_not_current_year_swift: Default
- - date_stacked_reversed_swift: Default
- - date_stacked_sizes_swift: Default
- - date_stacked_bold_swift: Default
+ - date_stacked_not_current_year_swift: Not Current Year
+ - date_stacked_reversed_swift: Day & Month Reverse
+ - date_stacked_sizes_swift: Sizes
+ - date_stacked_bold_swift: Bold
  - date_stacked_props_swift: ""
