@@ -4,6 +4,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps
 } from "../../utilities/props";
 import { globalProps } from "../../utilities/globalProps";
 
@@ -19,6 +20,7 @@ type DropdownContainerProps = {
   className?: string;
   children?: React.ReactChild[] | React.ReactChild;
   data?: { [key: string]: string };
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   searchbar?: boolean;
 };
@@ -29,6 +31,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     className,
     children,
     data = {},
+    htmlOptions = {},
     id,
     searchbar = false,
   } = props;
@@ -44,6 +47,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_dropdown_container"),
     `${isDropDownClosed ? "close" : "open"}`,
@@ -54,6 +58,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
   return (
     <div {...ariaProps} 
         {...dataProps} 
+        {...htmlProps}
         className={classes} 
         id={id}
         onMouseEnter={() => setFocusedOptionIndex(-1)}

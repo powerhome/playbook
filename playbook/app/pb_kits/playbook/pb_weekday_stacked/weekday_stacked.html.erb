@@ -1,9 +1,4 @@
-<%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    **combined_html_options) do %>
+<%= pb_content_tag do %>
     <%= pb_rails("caption", props: {dark: object.dark, text: object.day_of_week}) %>
     <%= pb_rails("title", props: {dark: object.dark, size: 4, tag: "span", text: object.formatted_month_and_day}) %>
 <% end %>

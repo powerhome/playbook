@@ -1,8 +1,4 @@
-<%= content_tag(:div,
-  id: object.id,
-  data: object.data,
-  class: object.classname,
-  **combined_html_options) do %>
+<%= pb_content_tag do %>
   <div class="tooltip_tooltip" id="<%= object.tooltip_id %>" role="tooltip">
     <%= content.presence %>
     <div class="arrow" id="<%= object.tooltip_id %>-arrow"></div>
