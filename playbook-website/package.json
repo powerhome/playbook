@@ -12,6 +12,7 @@
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@powerhome/playbook-icons": "0.0.1-alpha.8",
     "@powerhome/playbook-icons-react": "0.0.1-alpha.8",
+    "@powerhome/power-fonts": "0.0.1-alpha.4",
     "@rails/webpacker": "5.4.3",
     "@svgr/webpack": "5.5.0",
     "@tiptap/extension-document": "^2.1.12",
@@ -37,7 +38,7 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.16",
+    "@babel/core": "^7.24.4",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/preset-flow": "^7.12.1",
     "@babel/preset-react": "^7.13.13",

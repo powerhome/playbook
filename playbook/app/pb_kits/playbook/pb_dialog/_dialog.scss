@@ -235,11 +235,11 @@
           height: $space_xl * 2;
         }
         .dialog_footer {
-          position:fixed;
+          position: fixed;
           bottom: 0;
           background-color: $white;
+          max-width: 100%;
         }
-
         &[class*="_sm"] {
           width: $medium;
           .dialog_footer {
@@ -319,6 +319,7 @@
         position:fixed;
         bottom: 0;
         background-color: $white;
+        max-width: 100%;
       }
       &[class*="_sm"] {
         width: $medium;
@@ -372,3 +373,4 @@
     cursor: pointer;
   }
 }
+

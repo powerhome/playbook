@@ -17,7 +17,7 @@ $pb_button_sizes: (
   @each $name, $size in $pb_button_sizes {
     &[class*=size_#{$name}] {
       font-size: $size;
-      padding: calc(#{$size} / 2) calc(#{$size} * 2.42) !important;
+      padding: calc(#{$size} / 2) calc(#{$size} * 2.42);
       @if $name == "sm" {
         min-height: 0;
       }

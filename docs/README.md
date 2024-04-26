@@ -26,6 +26,10 @@ Playbook is the first design system built for both Rails & React interfaces. Ins
 1. From the top-level playbook folder run `yarn start-dev` This may take a little while.
 1. Once you see the "compiled successfully" message in your terminal, navigate to [http://localhost:3000](http://localhost:3000) and you should see the playbook website.
 
+### Post Installation Startup
+
+Use `./run.sh` to run the application in one step. This will handle dependency updates then start the server. Helpful for fast start-up without bootstrapping especially when switching branches. 🚀
+
 ### Running Library Tests
 
 1. `cd playbook && ./test.sh`

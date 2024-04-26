@@ -52,13 +52,13 @@ test('should pass source prop', () => {
 test('should not hide icon by default', () => {
     render(<SourceDefault />)
     const kit = screen.getByTestId(testId)
-    expect(kit.querySelector('.pb_icon_circle_kit_sm_default')).toBeTruthy()
+    expect(kit.querySelector('.pb_icon_circle_kit_size_sm_default')).toBeTruthy()
 })
 
 test('should hide icon', () => {
     render(<SourceDefault hideIcon />)
     const kit = screen.getByTestId(testId)
-    expect(kit.querySelector('.pb_icon_circle_kit_sm_default')).toBeFalsy()
+    expect(kit.querySelector('.pb_icon_circle_kit_size_sm_default')).toBeFalsy()
 })
 
 test('should pass user prop', () => {

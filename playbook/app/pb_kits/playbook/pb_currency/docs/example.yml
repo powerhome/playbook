@@ -17,3 +17,8 @@ examples:
   - currency_abbreviated: Abbreviate Larger Amounts
   - currency_matching_decimals: Matching Decimals
   - currency_unstyled: Unstyled
+
+  swift:
+  - currency_size_swift: Size
+  - currency_alignment_swift: Alignment
+  - currency_props_swift: ""
