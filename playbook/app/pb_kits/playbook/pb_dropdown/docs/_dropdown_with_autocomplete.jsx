@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Dropdown, User, FlexItem, Badge, Avatar } from '../../'
+import { Dropdown, User, Badge, FlexItem } from '../..'
 
-const DropdownWithCustomDisplay = (props) => {
+const DropdownWithAutocomplete = (props) => {
+// eslint-disable-next-line no-unused-vars
   const [selectedOption, setSelectedOption] = useState();
 
   const options = [
@@ -39,32 +40,14 @@ const DropdownWithCustomDisplay = (props) => {
     }
   ];
 
-  const CustomDisplay = () => {
-    return (
-      <>
-      {
-        selectedOption && (
-            <Avatar
-                name={selectedOption.label}
-                size="xs"
-            />
-        )
-      }
-    </>
-    )
-  };
-
 
   return (
   <div>
-    <Dropdown
+    <Dropdown autocomplete
         onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
         {...props}
     >
-      <Dropdown.Trigger customDisplay={<CustomDisplay/>}
-          placeholder="Select a User"
-      />
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}
@@ -101,4 +84,4 @@ const DropdownWithCustomDisplay = (props) => {
   )
 }
 
-export default DropdownWithCustomDisplay
+export default  DropdownWithAutocomplete

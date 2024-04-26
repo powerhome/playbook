@@ -4,8 +4,9 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps,
 } from "../../utilities/props";
-import { globalProps } from "../../utilities/globalProps";
+import { globalProps, GlobalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
 
@@ -19,16 +20,33 @@ type DropdownOptionProps = {
   className?: string;
   children?: React.ReactChild[] | React.ReactChild;
   data?: { [key: string]: string };
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   option?: GenericObject;
   key?: string;
-};
+  padding?: string;
+}  & GlobalProps;
 
 const DropdownOption = (props: DropdownOptionProps) => {
-  const { aria = {}, className, children, data = {}, id, option, key } = props;
+  const {
+    aria = {},
+    className,
+    children,
+    data = {},
+    htmlOptions = {},
+    id,
+    option,
+    key,
+    padding = "xs",
+  } = props;
 
-  const { handleOptionClick, selected, filterItem, filteredOptions, focusedOptionIndex } =
-    useContext(DropdownContext);
+  const {
+    handleOptionClick,
+    selected,
+    filterItem,
+    filteredOptions,
+    focusedOptionIndex,
+  } = useContext(DropdownContext);
 
   const isItemMatchingFilter = (option: GenericObject) =>
     option?.label.toLowerCase().includes(filterItem.toLowerCase());
@@ -36,37 +54,42 @@ const DropdownOption = (props: DropdownOptionProps) => {
   if (!isItemMatchingFilter(option)) {
     return null;
   }
-  const isFocused = focusedOptionIndex >= 0 && filteredOptions[focusedOptionIndex].label === option.label
-  const focusedClass = isFocused && "dropdown_option_focused"
+  const isFocused =
+    focusedOptionIndex >= 0 &&
+    filteredOptions[focusedOptionIndex].label === option.label;
+  const focusedClass = isFocused && "dropdown_option_focused";
 
   const selectedClass = `${
     selected.label === option.label
-        ? "dropdown_option_selected"
-        : "dropdown_option_list"
-  }`
+      ? "dropdown_option_selected"
+      : "dropdown_option_list"
+  }`;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_dropdown_option"),
     selectedClass,
     focusedClass,
-    globalProps(props),
+    globalProps(props, {padding}),
     className
   );
 
   return (
-    <div {...ariaProps} 
-        {...dataProps} 
-        className={classes} 
-        id={id} 
+    <div
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
         key={key}
+        onClick= {() => handleOptionClick(option)}
     >
       <ListItem
           cursor="pointer"
           data-name={option.value}
-          htmlOptions={{ onClick: () => handleOptionClick(option) }}
           key={option.label}
-          padding="xs"
+          padding="none"
       >
         <Flex
             align="center"
@@ -75,13 +98,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
             paddingX="sm"
             paddingY="xxs"
         >
-          {
-            children ? (
-              children
-            ) : (
-              <Body text={option.label}/>
-            )
-          }
+          {children ? children : <Body text={option.label} />}
         </Flex>
       </ListItem>
     </div>

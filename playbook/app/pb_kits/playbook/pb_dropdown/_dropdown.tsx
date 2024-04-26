@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, ReactElement } from "react";
 import classnames from "classnames";
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 
 import Body from "../pb_body/_body";
@@ -22,6 +22,7 @@ type DropdownProps = {
   autocomplete?: boolean;
   className?: string;
   data?: { [key: string]: string };
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   children?: React.ReactChild[] | React.ReactChild | ReactElement[];
   options: GenericObject;
@@ -35,6 +36,7 @@ const Dropdown = (props: DropdownProps) => {
     children,
     className,
     data = {},
+    htmlOptions = {},
     id,
     options,
     onSelect,
@@ -42,6 +44,7 @@ const Dropdown = (props: DropdownProps) => {
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_dropdown"),
     globalProps(props),
@@ -51,7 +54,7 @@ const Dropdown = (props: DropdownProps) => {
   const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown();
 
   const [filterItem, setFilterItem] = useState("");
-  const [selected, setSelected] = useState({});
+  const [selected, setSelected] = useState<GenericObject>({});
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [hasTriggerSubcomponent, setHasTriggerSubcomponent] = useState(true);
   const [hasContainerSubcomponent, setHasContainerSubcomponent] =
@@ -71,6 +74,7 @@ const Dropdown = (props: DropdownProps) => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setIsDropDownClosed(true);
+        setFocusedOptionIndex(-1)
         setIsInputFocused(false);
       }
     };
@@ -84,6 +88,24 @@ const Dropdown = (props: DropdownProps) => {
     setHasTriggerSubcomponent(!!trigger);
     setHasContainerSubcomponent(!!container);
   }, []);
+
+
+  const filteredOptions = options?.filter((option: GenericObject) =>
+    option.label.toLowerCase().includes(filterItem.toLowerCase())
+  );
+
+  useEffect(() => {
+    if (!isDropDownClosed) { 
+        let newIndex = 0; 
+        if (selected && selected?.label) {
+            const selectedIndex = filteredOptions.findIndex((option: GenericObject) => option.label === selected.label);
+            if (selectedIndex >= 0) {
+                newIndex = selectedIndex;
+            }
+        }
+        setFocusedOptionIndex(newIndex);
+    }
+}, [isDropDownClosed]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilterItem(e.target.value);
@@ -108,10 +130,6 @@ const Dropdown = (props: DropdownProps) => {
     setFocusedOptionIndex(-1);
   };
 
-  const filteredOptions = options?.filter((option: GenericObject) =>
-    option.label.toLowerCase().includes(filterItem.toLowerCase())
-  );
-
   const componentsToRender = prepareSubcomponents({
     children,
     hasTriggerSubcomponent,
@@ -124,6 +142,7 @@ const Dropdown = (props: DropdownProps) => {
   return (
     <div {...ariaProps} 
         {...dataProps} 
+        {...htmlProps}
         className={classes} 
         id={id}
     >
@@ -150,6 +169,15 @@ const Dropdown = (props: DropdownProps) => {
           }}
       >
         <div className="dropdown_wrapper" 
+            onBlur={() => {
+                // Debounce to delay the execution to prevent jumpiness in Focus state
+                setTimeout(() => {
+                    if (!dropdownRef.current.contains(document.activeElement)) {
+                        setIsInputFocused(false);
+                    }
+                }, 0);
+            }}
+            onFocus={() => setIsInputFocused(true)}
             ref={dropdownRef}
         >
           {children ? (

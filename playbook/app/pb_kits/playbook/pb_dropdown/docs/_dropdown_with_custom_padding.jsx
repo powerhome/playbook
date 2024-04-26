@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Dropdown } from '../../'
+import { Dropdown } from '../..'
 
-const DropdownDefault = (props) => {
+const DropdownWithCustomPadding = (props) => {
 // eslint-disable-next-line no-unused-vars
 const [selectedOption, setSelectedOption] = useState();
 
@@ -40,6 +40,7 @@ const [selectedOption, setSelectedOption] = useState();
       {options.map((option) => (
         <Dropdown.Option key={option.id} 
             option={option}
+            padding="sm"
         /> 
       ))}
     </Dropdown>
@@ -47,4 +48,4 @@ const [selectedOption, setSelectedOption] = useState();
   )
 }
 
-export default DropdownDefault
+export default DropdownWithCustomPadding
