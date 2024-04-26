@@ -31,6 +31,14 @@ const RadioDisabled = () => {
           name="DisabledGroup"
           value="TBDisabled selected with default checked true"
       /> */}
+      <Radio
+        //   defaultChecked={true}
+          checked 
+          disabled
+          label="TBDisabled selected with default checked true"
+          name="DisabledGroup"
+          value="TBDisabled selected with default checked true"
+      />
     </div>
   )
 }
