@@ -1,3 +1,4 @@
+![Date-Time-Sizes](https://github.com/powerhome/playbook-swift/assets/54749071/59b2394d-cf25-46b5-a634-ca0721a7b3b0)
 ```swift
 VStack(alignment: .leading, spacing: Spacing.xSmall) {
   PBDateTime(
