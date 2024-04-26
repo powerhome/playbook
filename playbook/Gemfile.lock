@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    playbook_ui (13.22.0)
-      actionpack (>= 5.2.4.5, <= 7.0.8.1)
-      actionview (>= 5.2.4.5, <= 7.0.8.1)
-      activesupport (>= 5.2.4.5, <= 7.0.8.1)
+    playbook_ui (13.25.0)
+      actionpack (>= 5.2.4.5)
+      actionview (>= 5.2.4.5)
+      activesupport (>= 5.2.4.5)
       react-rails (= 2.6.1)
       view_component (= 2.55.0)
       webpacker-react (~> 0.3.2)
@@ -290,7 +290,7 @@ DEPENDENCIES
   byebug (>= 11.0.0)
   github_changelog_generator (= 1.15.2)
   playbook_ui!
-  rails (>= 5.2.4.5, <= 7.0.8.1)
+  rails (>= 5.2.4.5)
   rspec-html-matchers (= 0.9.1)
   rspec-rails (~> 3.8, >= 3.8.0)
   rubocop

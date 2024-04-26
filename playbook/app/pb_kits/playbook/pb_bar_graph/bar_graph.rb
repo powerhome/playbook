@@ -7,6 +7,7 @@ module Playbook
                    values: %w[left right center],
                    default: "center"
       prop :axis_title
+      prop :axis_format
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
       prop :custom_options, default: {}
@@ -14,6 +15,7 @@ module Playbook
                          values: %w[vertical horizontal],
                          default: "vertical"
       prop :point_start, type: Playbook::Props::Numeric
+      prop :stacking
       prop :subtitle
       prop :title
       prop :x_axis_categories, type: Playbook::Props::Array,
@@ -49,8 +51,10 @@ module Playbook
           dark: dark ? "dark" : "",
           type: chart_type,
           title: title,
+          stacking: stacking,
           subTitle: subtitle,
           axisTitle: axis_title,
+          axisFormat: axis_format,
           pointStart: point_start,
           xAxisCategories: x_axis_categories,
           yAxisMin: y_axis_min,
