@@ -41,6 +41,7 @@ $transition: $transition_cubic;
   @media (hover:hover) {
     &:hover input ~ .pb_checkbox_checkmark {
       background-color: $bg_light;
+      // background-color: red;
     }
   }
 
@@ -62,8 +63,15 @@ $transition: $transition_cubic;
       border-color: $primary_action;
 
       &:hover {
+        // background-color: orange;
+        // border-color: green;
         background-color: $primary_action;
         border-color: $primary_action;
+        // &:disabled ~ .pb_checkbox_checkmark {
+          // background-color: pink;
+          // border-color: $primary_action;
+          // border-color: black;
+        // }
       }
     }
     &:checked ~ .pb_checkbox_checkmark,
@@ -76,24 +84,28 @@ $transition: $transition_cubic;
     }
     &:disabled ~ .pb_checkbox_checkmark {
       cursor: not-allowed;
-      // background-color: blue;
       background-color: #f4f4f6; 
       & ~ .pb_checkbox_label {
         color: $text_lt_light;
         &.dark {
-          // color: orange;
           color: $text_dk_light;
         }
-        // color: red;
       }
       & ~ .pb_checkbox_label .pb_body_kit {
+        // cursor: not-allowed;
         color: $text_lt_light;
-        // color: blue;
         &.dark {
-          // color: pink;
           color: $text_dk_light;
         }
       }
+    }
+    &:disabled:checked ~ .pb_checkbox_checkmark {
+      background-color: $neutral;
+      border-color: $neutral;
+    }
+    &:disabled:checked:hover ~ .pb_checkbox_checkmark {
+      background-color: $neutral;
+      border-color: $neutral;
     }
   }
 
@@ -104,19 +116,17 @@ $transition: $transition_cubic;
       }
       &:disabled ~ .pb_checkbox_checkmark {
         border: 2px solid $border_dark;
-        // border: 2px solid red;
         background-color: #66697f; 
-        // background-color: blue;
         cursor: not-allowed;
-        // font stuff not allowed here due to code copied error??? put in &.dark above
-        // & ~ .pb_checkbox_label {
-        //   // color: $text_dk_light;
-        //   color: orange;
-        // }
-        // & ~ .pb_checkbox_label .pb_body_kit {
-        //   // color: $text_dk_light;
-        //   color: pink;
         }
+      &:disabled:checked ~ .pb_checkbox_checkmark {
+        background-color: #66697F;
+        border-color: #66697F;
+      }
+      &:disabled:checked:hover ~ .pb_checkbox_checkmark {
+        background-color: #66697F;
+        border-color: #66697F;
+      }
     }
     
     @media (hover:hover) {
