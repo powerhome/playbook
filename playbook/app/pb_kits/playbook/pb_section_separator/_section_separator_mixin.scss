@@ -21,3 +21,13 @@
         background: $border_dark;
     }
 }
+
+@mixin section_separator_dashed($dark: false) {
+    @if $dark == false {
+        border: 1px dashed $border_light;
+        background: none;
+    } @else {
+        border: 1px dashed $border_dark;
+        background: none;
+    }
+}
