@@ -1,9 +1,4 @@
-<%= content_tag("div",
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    **combined_html_options) do %>
+<%= pb_content_tag do %>
       <%= pb_rails("form_group", props: {cursor: "pointer", full_width: object.full_width}) do %>
         <label for="upload-<%= object.id %>" class="pb_button_kit_secondary_inline_enabled"><%= "#{object.label}" %></label>
         <%= pb_rails("text_input", props: {

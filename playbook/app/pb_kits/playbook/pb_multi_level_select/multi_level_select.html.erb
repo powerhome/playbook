@@ -1,8 +1,3 @@
-<%= content_tag(:div,
-      aria: object.aria,
-      data: object.data,
-      id: object.id,
-      class: object.classname,
-      **combined_html_options) do %>
+<%= pb_content_tag do %>
   <%= react_component("MultiLevelSelect", object.multi_level_select_options)  %>
 <% end %>

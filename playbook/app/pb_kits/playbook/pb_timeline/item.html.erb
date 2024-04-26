@@ -1,8 +1,4 @@
-<%= content_tag(:div,
-  id: object.id,
-  data: object.data,
-  class: object.classname,
-  **combined_html_options) do %>
+<%= pb_content_tag do %>
 
   <div class="pb_timeline_item_left_block">
     <% if object.date.present? %>
@@ -11,7 +7,7 @@
         size: "sm",
         align: "center"
       }) %>
-    <% end %>
+  <% end %>
   </div>
 
   <div class="pb_timeline_item_step">
@@ -20,7 +16,7 @@
       variant: object.icon_color,
       size: "xs"
     }) %>
-    <div class="pb_timeline_item_connector"></div>
+  <div class="pb_timeline_item_connector"></div>
   </div>
 
   <div class="pb_timeline_item_right_block">
