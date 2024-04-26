@@ -2,7 +2,7 @@ import React from 'react'
 
 import Radio from '../_radio'
 
-const RadioDisabled = () => {
+const RadioDisabled = (props) => {
   const ref = React.createRef()
 
   return (
@@ -14,30 +14,16 @@ const RadioDisabled = () => {
           ref={ref}
           tabIndex={0}
           value="Disabled unselected no checked info"
+          {...props}
       />
       <br />
       <Radio
-          defaultChecked={false}
-          disabled
-          label="Disabled unselected with default checked false"
-          name="DisabledGroup"
-          value="Disabled unselected with default checked false"
-      />
-      <br />
-      {/* <Radio
-          defaultChecked={choice === 'TBDisabled selected with default checked true'}
-          disabled
-          label="TBDisabled selected with default checked true"
-          name="DisabledGroup"
-          value="TBDisabled selected with default checked true"
-      /> */}
-      <Radio
-        //   defaultChecked={true}
           checked 
           disabled
           label="TBDisabled selected with default checked true"
           name="DisabledGroup"
           value="TBDisabled selected with default checked true"
+          {...props}
       />
     </div>
   )
