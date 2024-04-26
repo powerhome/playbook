@@ -2842,6 +2842,11 @@
   resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/ab390d12f3621b45d7238f51995545c1d52f33e0#ab390d12f3621b45d7238f51995545c1d52f33e0"
   integrity sha512-TX4GWwhU909LEzhJo8Eb/e3IBLFJu+2K5DeRffvDI5XaNxhFXZKfsgcgDtxsDPOmx/7Owk+Qs+IFJjwhZ6sbxw==
 
+"@powerhome/power-fonts@0.0.1-alpha.4":
+  version "0.0.1-alpha.4"
+  resolved "https://npm.powerapp.cloud/@powerhome/power-fonts/-/2db6ab57032de4685fb9d221fd92b4a4aca7f92e#2db6ab57032de4685fb9d221fd92b4a4aca7f92e"
+  integrity sha512-Oc6KNQt6kw8AKFMK8oPWTkUQotRkqvawzAWiYXDlP2cdoxIyTfBEqtYgQj8MbLcpYynPm0WjQHegQnxAwtNorQ==
+
 "@rails/actioncable@^7.0":
   version "7.1.3"
   resolved "https://npm.powerapp.cloud/@rails/actioncable/-/actioncable-7.1.3.tgz#4db480347775aeecd4dde2405659eef74a458881"
