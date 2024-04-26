@@ -1,3 +1,5 @@
+![Date-Time-Alignment](https://github.com/powerhome/playbook-swift/assets/54749071/9d1e08ac-4906-406f-b81d-1edf0a09e2e3)
+
 ```swift
 VStack(spacing: Spacing.small) {
   HStack {
