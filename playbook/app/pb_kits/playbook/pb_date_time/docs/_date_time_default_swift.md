@@ -1,3 +1,4 @@
+![Date-Time-Default](https://github.com/powerhome/playbook-swift/assets/54749071/f9ea63f9-81bd-41a9-8171-8a213c55ccfe)
 ```swift
 VStack(alignment: .leading, spacing: Spacing.small) {
   PBDateTime(
