@@ -1,9 +1,4 @@
-<%= content_tag(:nav,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    **combined_html_options) do %>
+<%= pb_content_tag(:nav) do %>
   <% if object.title %>
     <%= content_tag(:div, class: "pb_nav_list_title") do %>
       <%= content_tag(:a, class: "pb_nav_list_item_link_text", href: object.link) do %>

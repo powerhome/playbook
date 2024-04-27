@@ -1,3 +1,48 @@
+# Upgrade Your Data Game: Explore the Enhanced Features of Bar Charts!
+
+##### April 22, 2024
+
+![chart](https://github.com/powerhome/playbook/assets/9158723/43a3d714-8ddb-4579-9cb6-2bd154f1a60c)
+
+
+Say hello to a whole new level of versatility! With our new updates, you can showcase negative values, stack data for clearer insights, and effortlessly integrate a secondary yAxis for comprehensive data representation—all in a single, dynamic graph. Elevate your data visualization game and unlock limitless possibilities with Playbook's enhanced Bar Chart.
+
+**Kit Enhancements:**
+
+- Dropdown Kit V2 [\#3355](https://github.com/powerhome/playbook/pull/3355) ([nidaqg](https://github.com/nidaqg))
+- Update Badge Color for Readability [\#3347](https://github.com/powerhome/playbook/pull/3347) ([elisashapiro](https://github.com/elisashapiro))
+- POC Bar Chart: Show Negative Numbers, a Median Line, and Stacked Bar Data [\#3332](https://github.com/powerhome/playbook/pull/3332) ([nickamantia](https://github.com/nickamantia))
+- Investigation: Test Typeahead With Consideration for New Prop for Menulist [\#3324](https://github.com/powerhome/playbook/pull/3324) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Investigation: Displaying Numbers on the Right Side of the Bar Chart Graph [\#3319](https://github.com/powerhome/playbook/pull/3319) ([nickamantia](https://github.com/nickamantia))
+
+**Fixed Bugs:**
+
+- Circle Icon Kit: Fix Sizing Error When Global Spacing Props Are Used [\#3352](https://github.com/powerhome/playbook/pull/3352) ([elisashapiro](https://github.com/elisashapiro))
+- Background Kit Remove Empty Inline Styles/attributes [\#3348](https://github.com/powerhome/playbook/pull/3348) ([elisashapiro](https://github.com/elisashapiro))
+- Update Text Styles to Prevent Inconsistent Tiptap Output [\#3340](https://github.com/powerhome/playbook/pull/3340) ([elisashapiro](https://github.com/elisashapiro))
+
+**New Kits:**
+
+- New Kit: Dropdown [\#3343](https://github.com/powerhome/playbook/pull/3343) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Add Px to Max Width Global Prop Values Left Aligned [\#3356](https://github.com/powerhome/playbook/pull/3356) ([elisashapiro](https://github.com/elisashapiro))
+- Verified Version Of Typography Guidelines [\#3346](https://github.com/powerhome/playbook/pull/3346) ([jasperfurniss](https://github.com/jasperfurniss))
+- Design Guidelines: Spacing [\#3309](https://github.com/powerhome/playbook/pull/3309) ([kristiflin](https://github.com/kristiflin))
+- Dry Up the Content Tag Portion Of Rails Kits: Avatar [\#3331](https://github.com/powerhome/playbook/pull/3331) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Add Run.sh [\#3351](https://github.com/powerhome/playbook/pull/3351) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Dialog Docs [\#3349](https://github.com/powerhome/playbook/pull/3349) ([rachelradford21](https://github.com/rachelradford21))
+- Bump @babel/core from 7.20.12 to 7.24.4 [\#3338](https://github.com/powerhome/playbook/pull/3338) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Jest-fail-on-console from 2.5.0 to 3.2.0 [\#3337](https://github.com/powerhome/playbook/pull/3337) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.24.0...13.25.0)
+
+
 # 🙌 Teamwork Makes the Dream Work 🙌
 
 ##### April 02, 2024
