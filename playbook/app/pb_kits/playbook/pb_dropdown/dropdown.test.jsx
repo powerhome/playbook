@@ -185,3 +185,24 @@ test('generated custom Trigger', () => {
   const customTrigger = trigger.querySelector('.fa-home.pb_icon_kit.fa-fw')
   expect(customTrigger).toBeInTheDocument()
 })
+
+test('selected option on click', () => {  
+  render (
+    <Dropdown
+        data={{ testid: testId }}
+        onSelect={(selectedItem) => {selectedItem}}
+        options={options}
+    >
+      {options.map((option) => (
+      <Dropdown.Option key={option.id} 
+          option={option}
+      /> 
+    ))}
+    </Dropdown>
+  )
+
+  const kit = screen.getByTestId(testId)
+  const option = kit.querySelector('.pb_dropdown_option')
+  option.click()
+  expect(option).toHaveClass('pb_dropdown_option dropdown_option_selected p_xs')
+})
