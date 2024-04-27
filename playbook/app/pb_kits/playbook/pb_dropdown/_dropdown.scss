@@ -6,9 +6,27 @@
 @import "../tokens/positioning";
 @import "../pb_body/body_mixins";
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
 .pb_dropdown {
   .dropdown_wrapper {
-    // position: relative;
     .dropdown_trigger_wrapper {
       @include pb_body;
       border: 1px solid $border_light;
@@ -58,7 +76,6 @@
       border-radius: $border_rad_heavier;
       border: 1px solid $border_light;
       margin-top: $space_xs;
-      // position: absolute;
       z-index: $z_1;
       width: 100%;
       transition: opacity 0.25s ease-in-out;
@@ -94,10 +111,18 @@
     }
     .close {
       display: none;
+      animation-name: fadeOut;
+      animation-duration: 150ms;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
     }
 
     .open {
       display: block;
+      animation-name: fadeIn;
+      animation-duration: 150ms;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
     }
   }
 }
