@@ -20,6 +20,7 @@ type DropdownOptionProps = {
   className?: string;
   children?: React.ReactChild[] | React.ReactChild;
   data?: { [key: string]: string };
+  dark?: boolean;
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   option?: GenericObject;
@@ -33,6 +34,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
     className,
     children,
     data = {},
+    dark = false,
     htmlOptions = {},
     id,
     option,
@@ -87,6 +89,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
     >
       <ListItem
           cursor="pointer"
+          dark={dark}
           data-name={option.value}
           key={option.label}
           padding="none"
@@ -98,7 +101,12 @@ const DropdownOption = (props: DropdownOptionProps) => {
             paddingX="sm"
             paddingY="xxs"
         >
-          {children ? children : <Body text={option.label} />}
+          {children ? 
+              children : 
+              <Body dark={dark} 
+                  text={option.label} 
+              />
+          }
         </Flex>
       </ListItem>
     </div>

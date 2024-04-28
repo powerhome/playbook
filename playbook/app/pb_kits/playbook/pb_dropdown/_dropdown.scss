@@ -5,6 +5,7 @@
 @import "../tokens/shadows";
 @import "../tokens/positioning";
 @import "../pb_body/body_mixins";
+@import "../pb_textarea/textarea_mixin";
 
 @keyframes fadeIn {
   from {
@@ -24,6 +25,7 @@
     opacity: 0;
   }
 }
+$dark_hover: #3b3752;
 
 .pb_dropdown {
   .dropdown_wrapper {
@@ -78,7 +80,6 @@
       margin-top: $space_xs;
       z-index: $z_1;
       width: 100%;
-      transition: opacity 0.25s ease-in-out;
 
       .pb_dropdown_option {
         cursor: pointer;
@@ -123,6 +124,51 @@
       animation-duration: 150ms;
       animation-timing-function: linear;
       animation-fill-mode: forwards;
+    }
+  }
+
+  &.dark {
+    .dropdown_wrapper {
+      .dropdown_trigger_wrapper {
+        @include pb_body_light_dark;
+        background-color: rgba($white, 0.1) !important;
+        background: none;
+        border-color: rgba($white, 0.15);
+        @media (hover: hover) {
+          &:hover,
+          &:active,
+          &:focus {
+            background-color: rgba($white, 0.05) !important;
+          }
+        }
+        [class^="pb_body"] {
+          color: $white;
+        }
+      }
+    }
+    .dropdown_trigger_wrapper_select_only {
+      box-shadow: inset 0 -11px 20px rgba($white, 0.05) !important;
+    }
+    .pb_dropdown_container {
+      background-color: $bg_dark !important;
+      border-color: rgba($white, 0.15);
+      color: $white;
+      .dropdown_option_list {
+        border-color: rgba($white, 0.15);
+      }
+      [class^="pb_body"],
+      [class^="pb_title_kit"] {
+        color: $white !important;
+      }
+
+      .pb_dropdown_option {
+        &:hover {
+          background-color: $dark_hover;
+        }
+      }
+      .dropdown_option_focused {
+        background-color: $dark_hover;
+      }
     }
   }
 }

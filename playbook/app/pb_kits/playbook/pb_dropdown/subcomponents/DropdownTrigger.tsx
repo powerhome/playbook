@@ -22,6 +22,7 @@ type DropdownTriggerProps = {
   className?: string;
   customDisplay?: React.ReactChild[] | React.ReactChild;
   data?: { [key: string]: string };
+  dark?: boolean;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   placeholder?: string;
@@ -34,6 +35,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     children,
     customDisplay,
     data = {},
+    dark = false,
     htmlOptions = {},
     id,
     placeholder,
@@ -128,12 +130,16 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                     {customDisplay ? (
                       <Flex align="center">
                         {customDisplay}
-                        <Body paddingLeft={`${selected.label ? "xs" : "none"}`}>
+                        <Body dark={dark} 
+                            paddingLeft={`${selected.label ? "xs" : "none"}`}
+                        >
                           {customDisplayPlaceholder}
                         </Body>
                       </Flex>
                     ) : (
-                      <Body text={defaultDisplayPlaceholder} />
+                      <Body dark={dark} 
+                          text={defaultDisplayPlaceholder} 
+                      />
                     )}
                     {autocomplete && (
                       <input
@@ -156,6 +162,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   </Flex>
                 </FlexItem>
                   <Body
+                      dark={dark}
                       display="flex"
                       htmlOptions={{
                         onClick: (e: Event) => {e.stopPropagation();handleWrapperClick()}
@@ -164,6 +171,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   >
                     <Icon
                         cursor="pointer"
+                        dark={dark}
                         icon={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
                         size="sm"
                     />

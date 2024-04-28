@@ -81,7 +81,7 @@ const DropdownWithCustomDisplay = (props) => {
                 />
               </FlexItem>
               <FlexItem>
-                <Badge
+                <Badge dark
                     rounded
                     text={option.status}
                     variant={`${

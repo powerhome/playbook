@@ -9,6 +9,7 @@ type PrepareComponentsProps = {
   trigger: React.ReactChild;
   container: React.ReactChild;
   otherChildren: React.ReactChild[];
+  dark?: boolean;
 };
 
 export const separateChildComponents = (children: React.ReactChild[] | React.ReactChild | ReactElement[]) => {
@@ -36,19 +37,20 @@ export const prepareSubcomponents = ({
   trigger,
   container,
   otherChildren,
+  dark
 }: PrepareComponentsProps) => {
   const componentsToRender = [];
 
   if (!hasTriggerSubcomponent && !hasContainerSubcomponent) {
-    componentsToRender.push(<DropdownTrigger />);
-    componentsToRender.push(<DropdownContainer>{children}</DropdownContainer>);
+    componentsToRender.push(<DropdownTrigger dark={dark}/>);
+    componentsToRender.push(<DropdownContainer dark={dark}>{children}</DropdownContainer>);
   } else if (!hasTriggerSubcomponent && hasContainerSubcomponent) {
-    componentsToRender.push(<DropdownTrigger />);
+    componentsToRender.push(<DropdownTrigger dark={dark}/>);
     componentsToRender.push(children);
   } else if (hasTriggerSubcomponent && !hasContainerSubcomponent) {
     componentsToRender.push(trigger);
     componentsToRender.push(
-      <DropdownContainer>{otherChildren}</DropdownContainer>
+      <DropdownContainer dark={dark}>{otherChildren}</DropdownContainer>
     );
   } else {
     componentsToRender.push(trigger);

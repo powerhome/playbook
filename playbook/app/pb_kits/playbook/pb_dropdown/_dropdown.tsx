@@ -23,6 +23,7 @@ type DropdownProps = {
   autocomplete?: boolean;
   className?: string;
   data?: { [key: string]: string };
+  dark?: boolean;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   children?: React.ReactChild[] | React.ReactChild | ReactElement[];
@@ -40,6 +41,7 @@ const Dropdown = (props: DropdownProps) => {
     children,
     className,
     data = {},
+    dark = false,
     htmlOptions = {},
     id,
     label,
@@ -170,6 +172,7 @@ const Dropdown = (props: DropdownProps) => {
     trigger,
     container,
     otherChildren,
+    dark
   });
 
 
@@ -208,6 +211,7 @@ const Dropdown = (props: DropdownProps) => {
       >
         {label &&
         <Caption
+            dark={dark}
             marginBottom="xs"
             text={label}
         />
