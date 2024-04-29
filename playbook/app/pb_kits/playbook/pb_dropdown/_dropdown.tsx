@@ -155,7 +155,7 @@ const Dropdown = (props: DropdownProps) => {
     setSelected(selectedItem);
     setFilterItem("");
     setIsDropDownClosed(true);
-    onSelect(selectedItem);
+    onSelect && onSelect(selectedItem);
   };
 
   const handleWrapperClick = () => {
@@ -165,7 +165,7 @@ const Dropdown = (props: DropdownProps) => {
 
   const handleBackspace = () => {
     setSelected({});
-    onSelect(null);
+    onSelect && onSelect(null);
     setFocusedOptionIndex(-1);
   };
 

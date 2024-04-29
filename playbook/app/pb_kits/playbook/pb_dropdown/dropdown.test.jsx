@@ -190,7 +190,6 @@ test('selected option on click', () => {
   render (
     <Dropdown
         data={{ testid: testId }}
-        onSelect={(selectedItem) => {selectedItem}}
         options={options}
     >
       {options.map((option) => (
