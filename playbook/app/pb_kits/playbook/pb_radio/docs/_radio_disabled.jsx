@@ -9,20 +9,20 @@ const RadioDisabled = (props) => {
     <div>
       <Radio
           disabled
-          label="Disabled unselected no checked info"
+          label="Disabled unselected"
           name="DisabledGroup"
           ref={ref}
           tabIndex={0}
-          value="Disabled unselected no checked info"
+          value="Disabled unselected"
           {...props}
       />
       <br />
       <Radio
           checked 
           disabled
-          label="TBDisabled selected with default checked true"
+          label="Disabled selected"
           name="DisabledGroup"
-          value="TBDisabled selected with default checked true"
+          value="Disabled selected"
           {...props}
       />
     </div>

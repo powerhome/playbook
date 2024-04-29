@@ -40,31 +40,22 @@
         border: 6px solid $primary;
       }
     }
-    &:disabled:checked {
-      & ~ .pb_radio_button {
-        // cursor: not-allowed;
-        border: 6px solid $neutral;
-        // background-color: red;
-      }
-    }
+
     &:disabled + .pb_radio_button {
       cursor: not-allowed;
-      background-color: #f4f4f6; 
-      // background-color: blue;
-        // &.dark {
-          // border: 2px solid $border_dark;
-          // border: 2px solid red;
-          // background-color: blue;
-          // background-color: #66697f; 
-        // }
+      background-color: mix($charcoal, $white, 5%);
+      border-color: $border_light;
+
       & ~ .pb_body_kit {
-        // cursor: not-allowed;
+        cursor: not-allowed;
         color: $text_lt_light;
-        &.dark {
-          // color: orange;
-          color: $text_dk_light;
-        }
       }
+    }
+
+    &:disabled:checked + .pb_radio_button{
+      cursor: not-allowed;
+      background-color: $white;
+      border: 6px solid $neutral;
     }
   }
 
@@ -92,24 +83,22 @@
           border: 6px solid $primary;
         }
       }
+
       &:disabled + .pb_radio_button {
-        border: 2px solid $border_dark;
-        // border: 2px solid red;
-        // background-color: blue;
-        background-color: #66697F; 
         cursor: not-allowed;
-        // & ~ .pb_body_kit {
-        //   color: pink;
-        //   // color: $text_dk_light;
-        // }
+        background-color: mix($charcoal, $white, 80%);
+        border: 2px solid $border_dark;
+
+        & ~ .pb_body_kit {
+          cursor: not-allowed;
+          color: $text_dk_light;
+        }
       }
+
       &:disabled:checked {
         & ~ .pb_radio_button {
-          // border: 6px solid $text_dk_lighter;
-          border: 6px solid #66697F;
-          // border: 6px solid $default;
-          // background-color: red;
-          background-color: $bg_light;
+          background-color: mix($charcoal, $white, 80%);
+          border: 6px solid $border_dark;
         }
       }
     }

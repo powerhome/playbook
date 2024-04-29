@@ -14,7 +14,6 @@ const CheckboxDisabled = (props) => {
           {...props}
       />
       <br />
-      <br />
       <Checkbox
           checked
           disabled

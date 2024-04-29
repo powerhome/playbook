@@ -41,7 +41,6 @@ $transition: $transition_cubic;
   @media (hover:hover) {
     &:hover input ~ .pb_checkbox_checkmark {
       background-color: $bg_light;
-      // background-color: red;
     }
   }
 
@@ -63,15 +62,8 @@ $transition: $transition_cubic;
       border-color: $primary_action;
 
       &:hover {
-        // background-color: orange;
-        // border-color: green;
         background-color: $primary_action;
         border-color: $primary_action;
-        // &:disabled ~ .pb_checkbox_checkmark {
-          // background-color: pink;
-          // border-color: $primary_action;
-          // border-color: black;
-        // }
       }
     }
     &:checked ~ .pb_checkbox_checkmark,
@@ -82,27 +74,27 @@ $transition: $transition_cubic;
         opacity: $opacity_10;
       }
     }
+
     &:disabled ~ .pb_checkbox_checkmark {
       cursor: not-allowed;
-      background-color: #f4f4f6; 
+      background-color: mix($charcoal, $white, 5%);
+      border-color: $border_light;
+
       & ~ .pb_checkbox_label {
+        cursor: not-allowed;
         color: $text_lt_light;
-        &.dark {
-          color: $text_dk_light;
-        }
       }
       & ~ .pb_checkbox_label .pb_body_kit {
-        // cursor: not-allowed;
+        cursor: not-allowed;
         color: $text_lt_light;
-        &.dark {
-          color: $text_dk_light;
-        }
       }
     }
+
     &:disabled:checked ~ .pb_checkbox_checkmark {
       background-color: $neutral;
       border-color: $neutral;
     }
+
     &:disabled:checked:hover ~ .pb_checkbox_checkmark {
       background-color: $neutral;
       border-color: $neutral;
@@ -114,18 +106,29 @@ $transition: $transition_cubic;
       &:focus ~ .pb_checkbox_checkmark {
         box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;      
       }
+
       &:disabled ~ .pb_checkbox_checkmark {
-        border: 2px solid $border_dark;
-        background-color: #66697f; 
         cursor: not-allowed;
+        background-color: mix($charcoal, $white, 80%);
+        border: 2px solid $border_dark;
+
+        & ~ .pb_checkbox_label {
+          cursor: not-allowed;
+          color: $text_dk_light;
         }
-      &:disabled:checked ~ .pb_checkbox_checkmark {
-        background-color: #66697F;
-        border-color: #66697F;
+        & ~ .pb_checkbox_label .pb_body_kit {
+          cursor: not-allowed;
+          color: $text_dk_light;
+        }
       }
+
+      &:disabled:checked ~ .pb_checkbox_checkmark {
+        background-color: $border_dark;
+      }
+
       &:disabled:checked:hover ~ .pb_checkbox_checkmark {
-        background-color: #66697F;
-        border-color: #66697F;
+        background-color: $border_dark;
+        border-color: $border_dark;
       }
     }
     
