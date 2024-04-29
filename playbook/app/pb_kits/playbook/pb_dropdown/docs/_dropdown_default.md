@@ -1,0 +1,1 @@
+`options` for the Dropdown and `option` for the Dropdown.Option are the only required props for this kit. `options` must be an array of objects. Each object can contain any key/value pairs needed but 'label' and 'value' are required.

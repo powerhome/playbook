@@ -1,31 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Dropdown } from '../..'
 
 const DropdownDefault = (props) => {
-// eslint-disable-next-line no-unused-vars
-const [selectedOption, setSelectedOption] = useState();
 
   const options = [
     {
       label: "United States",
       value: "United States",
-      areaCode: "+1",
-      icon: "🇺🇸",
-      id: "United-states"
     },
     {
       label: "Canada",
       value: "Canada",
-      areaCode: "+1",
-      icon: "🇨🇦",
-      id: "canada"
     },
     {
       label: "Pakistan",
       value: "Pakistan",
-      areaCode: "+92",
-      icon: "🇵🇰",
-      id: "pakistan"
     }
   ];  
 
@@ -34,7 +23,6 @@ const [selectedOption, setSelectedOption] = useState();
   <div>
     <Dropdown
         label="Select a Country"
-        onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
         {...props}
     >
