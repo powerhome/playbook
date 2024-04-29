@@ -67,9 +67,11 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     className
   );
 
-  const triggerWrapperClasses = `dropdown_trigger_wrapper ${
-    isInputFocused && "dropdown_trigger_wrapper_focus"
-  } ${!autocomplete && "dropdown_trigger_wrapper_select_only"}`;
+  const triggerWrapperClasses = buildCss(
+    "dropdown_trigger_wrapper",
+    isInputFocused && "focus",
+    !autocomplete && "select_only"
+  );
 
   const customDisplayPlaceholder = selected.label ? (
     <b>{selected.label}</b>
