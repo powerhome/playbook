@@ -26,8 +26,6 @@
   }
 }
 
-$dark_hover: #3b3752;
-
 .pb_dropdown {
   .dropdown_wrapper {
     .dropdown_trigger_wrapper {
@@ -164,11 +162,11 @@ $dark_hover: #3b3752;
 
       .pb_dropdown_option {
         &:hover {
-          background-color: $dark_hover;
+          background-color: $hover_dark;
         }
       }
       .dropdown_option_focused {
-        background-color: $dark_hover;
+        background-color: $hover_dark;
       }
       .dropdown_option_selected {
         background-color: $primary;
