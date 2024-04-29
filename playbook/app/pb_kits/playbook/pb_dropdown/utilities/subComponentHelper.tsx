@@ -4,12 +4,12 @@ import DropdownContainer from "../subcomponents/DropdownContainer";
 
 type PrepareComponentsProps = {
   children: React.ReactChild[] | React.ReactChild;
-  hasTriggerSubcomponent: boolean;
-  hasContainerSubcomponent: boolean;
-  trigger: React.ReactChild;
   container: React.ReactChild;
-  otherChildren: React.ReactChild[];
   dark?: boolean;
+  hasContainerSubcomponent: boolean;
+  hasTriggerSubcomponent: boolean;
+  otherChildren: React.ReactChild[];
+  trigger: React.ReactChild;
 };
 
 export const separateChildComponents = (children: React.ReactChild[] | React.ReactChild | ReactElement[]) => {

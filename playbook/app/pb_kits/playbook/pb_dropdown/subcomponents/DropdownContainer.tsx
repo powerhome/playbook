@@ -17,8 +17,8 @@ import Body from "../../pb_body/_body";
 
 type DropdownContainerProps = {
   aria?: { [key: string]: string };
-  className?: string;
   children?: React.ReactChild[] | React.ReactChild;
+  className?: string;
   dark?: boolean;
   data?: { [key: string]: string };
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -29,22 +29,22 @@ type DropdownContainerProps = {
 const DropdownContainer = (props: DropdownContainerProps) => {
   const {
     aria = {},
-    className,
     children,
-    data = {},
+    className,
     dark = false,
+    data = {},
     htmlOptions = {},
     id,
     searchbar = false,
   } = props;
 
   const {
-    isDropDownClosed,
-    handleChange,
     dropdownContainerRef,
-    filterItem,
     filteredOptions,
+    filterItem,
+    handleChange,
     inputRef,
+    isDropDownClosed,
     setFocusedOptionIndex,
     triggerRef
   } = useContext(DropdownContext);

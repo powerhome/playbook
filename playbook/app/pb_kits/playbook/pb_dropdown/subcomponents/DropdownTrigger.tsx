@@ -21,8 +21,8 @@ type DropdownTriggerProps = {
   children?: React.ReactChild[] | React.ReactChild;
   className?: string;
   customDisplay?: React.ReactChild[] | React.ReactChild;
-  data?: { [key: string]: string };
   dark?: boolean;
+  data?: { [key: string]: string };
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   placeholder?: string;
@@ -31,11 +31,11 @@ type DropdownTriggerProps = {
 const DropdownTrigger = (props: DropdownTriggerProps) => {
   const {
     aria = {},
-    className,
     children,
+    className,
     customDisplay,
-    data = {},
     dark = false,
+    data = {},
     htmlOptions = {},
     id,
     placeholder,
@@ -43,16 +43,16 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const {
     autocomplete,
-    handleWrapperClick,
-    selected,
     filterItem,
     handleChange,
-    toggleDropdown,
-    isDropDownClosed,
+    handleWrapperClick,
     inputRef,
     inputWrapperRef,
+    isDropDownClosed,
     isInputFocused,
+    selected,
     setIsInputFocused,
+    toggleDropdown,
     triggerRef,
   } = useContext(DropdownContext);
 

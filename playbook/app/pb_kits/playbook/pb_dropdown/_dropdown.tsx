@@ -21,16 +21,16 @@ import { GenericObject } from "../types";
 type DropdownProps = {
   aria?: { [key: string]: string };
   autocomplete?: boolean;
+  children?: React.ReactChild[] | React.ReactChild | ReactElement[];
   className?: string;
-  data?: { [key: string]: string };
   dark?: boolean;
+  data?: { [key: string]: string };
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
-  children?: React.ReactChild[] | React.ReactChild | ReactElement[];
-  label?: string;
-  options: GenericObject;
-  onSelect?: (arg: GenericObject) => null;
   isClosed?: boolean;
+  label?: string;
+  onSelect?: (arg: GenericObject) => null;
+  options: GenericObject;
   triggerRef?: any;
 };
 
@@ -40,14 +40,14 @@ const Dropdown = (props: DropdownProps) => {
     autocomplete = false,
     children,
     className,
-    data = {},
     dark = false,
+    data = {},
     htmlOptions = {},
     id,
-    label,
-    options,
-    onSelect,
     isClosed = true,
+    label,
+    onSelect,
+    options,
     triggerRef
   } = props;
 
@@ -68,9 +68,9 @@ const Dropdown = (props: DropdownProps) => {
   const [hasTriggerSubcomponent, setHasTriggerSubcomponent] = useState(true);
   const [hasContainerSubcomponent, setHasContainerSubcomponent] =
     useState(true);
-
   //state for keyboard events
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
+
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
   const inputWrapperRef = useRef(null);
@@ -81,6 +81,7 @@ const Dropdown = (props: DropdownProps) => {
 
   useEffect(() => {
     // Set the parent element of the trigger to relative to allow for absolute positioning of the dropdown
+    //Only needed for when useDropdown hook used with external trigger
     if (triggerRef?.current) {
       const parentElement = triggerRef.current.parentNode;
       if (parentElement) {
@@ -93,6 +94,7 @@ const Dropdown = (props: DropdownProps) => {
       let shouldClose = true;
   
       while (targetElement && shouldClose) {
+        //Only needed for when useDropdown hook used with external trigger
         if (targetElement.getAttribute('data-dropdown') === 'pb-dropdown-trigger') {
           shouldClose = false;
         }
@@ -129,6 +131,7 @@ const Dropdown = (props: DropdownProps) => {
     option.label.toLowerCase().includes(filterItem.toLowerCase())
   );
 
+// For keyboard accessibility: Set focus within dropdown to selected item if it exists
   useEffect(() => {
     if (!isDropDownClosed) { 
         let newIndex = 0; 
@@ -141,6 +144,7 @@ const Dropdown = (props: DropdownProps) => {
         setFocusedOptionIndex(newIndex);
     }
 }, [isDropDownClosed]);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilterItem(e.target.value);

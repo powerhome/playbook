@@ -17,37 +17,37 @@ import { GenericObject } from "../../types";
 
 type DropdownOptionProps = {
   aria?: { [key: string]: string };
-  className?: string;
   children?: React.ReactChild[] | React.ReactChild;
-  data?: { [key: string]: string };
+  className?: string;
   dark?: boolean;
+  data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
-  option?: GenericObject;
   key?: string;
+  option?: GenericObject;
   padding?: string;
 }  & GlobalProps;
 
 const DropdownOption = (props: DropdownOptionProps) => {
   const {
     aria = {},
-    className,
     children,
-    data = {},
+    className,
     dark = false,
+    data = {},
     htmlOptions = {},
     id,
-    option,
     key,
+    option,
     padding = "xs",
   } = props;
 
   const {
+    filteredOptions,
+    filterItem,
+    focusedOptionIndex,
     handleOptionClick,
     selected,
-    filterItem,
-    filteredOptions,
-    focusedOptionIndex,
   } = useContext(DropdownContext);
 
   const isItemMatchingFilter = (option: GenericObject) =>
