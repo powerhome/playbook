@@ -24,13 +24,7 @@ const DropdownDefault = (props) => {
     <Dropdown
         options={options}
         {...props}
-    >
-      {options.map((option) => (
-        <Dropdown.Option key={option.id} 
-            option={option}
-        /> 
-      ))}
-    </Dropdown>
+    />
   </div>
   )
 }

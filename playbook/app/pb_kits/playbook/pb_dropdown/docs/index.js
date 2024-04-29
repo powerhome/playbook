@@ -8,3 +8,4 @@ export { default as DropdownWithCustomPadding } from './_dropdown_with_custom_pa
 export { default as DropdownWithLabel } from './_dropdown_with_label.jsx'
 export { default as DropdownWithExternalControl } from './_dropdown_with_external_control.jsx'
 export { default as DropdownWithHook } from './_dropdown_with_hook.jsx'
+export { default as DropdownSubcomponentStructure } from './_dropdown_subcomponent_structure.jsx'
