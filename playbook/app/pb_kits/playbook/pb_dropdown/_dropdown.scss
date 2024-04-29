@@ -25,6 +25,7 @@
     opacity: 0;
   }
 }
+
 $dark_hover: #3b3752;
 
 .pb_dropdown {
@@ -168,6 +169,9 @@ $dark_hover: #3b3752;
       }
       .dropdown_option_focused {
         background-color: $dark_hover;
+      }
+      .dropdown_option_selected {
+        background-color: $primary;
       }
     }
   }
