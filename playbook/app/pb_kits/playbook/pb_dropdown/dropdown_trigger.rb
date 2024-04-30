@@ -7,8 +7,14 @@ module Playbook
                      default: []
       prop :id, type: Playbook::Props::String,
                 default: ""
+      prop :placeholder, type: Playbook::Props::String
+
       def classname
         generate_classname("pb_dropdown_trigger")
+      end
+
+      def default_display_placeholder
+        placeholder || "Select..."
       end
 
       def trigger_wrapper_classes

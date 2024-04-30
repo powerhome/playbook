@@ -9,7 +9,7 @@
         padding_y:"xs"}) do %>
         <%= pb_rails("flex/flex_item") do %>
             <%= pb_rails("flex", props: {align: "center"}) do %>
-                <%= pb_rails("body", props: {text: "Select..."}) %>
+                <%= pb_rails("body", props: {text: object.default_display_placeholder}) %>
             <% end %>
         <% end %>
             <%= pb_rails("body", props: {display: "flex"}) do  %>
