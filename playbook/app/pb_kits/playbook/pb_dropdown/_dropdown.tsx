@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, ReactElement } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
+import { GenericObject } from "../types";
 
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
@@ -16,7 +17,7 @@ import {
   separateChildComponents,
   prepareSubcomponents,
 } from "./utilities/subComponentHelper";
-import { GenericObject } from "../types";
+import { handleClickOutside } from "./utilities/clickOutsideHelper";
 
 type DropdownProps = {
   aria?: { [key: string]: string };
@@ -89,31 +90,17 @@ const Dropdown = (props: DropdownProps) => {
       }
   }
   // Handle clicks outside the dropdown
-    const handleClickOutside = (e: MouseEvent) => {
-      let targetElement = e.target as HTMLElement;
-      let shouldClose = true;
+  const handleClick = handleClickOutside({
+    inputWrapperRef,
+    dropdownContainerRef,
+    setIsDropDownClosed,
+    setFocusedOptionIndex,
+    setIsInputFocused,
+  });
   
-      while (targetElement && shouldClose) {
-        //Only needed for when useDropdown hook used with external trigger
-        if (targetElement.getAttribute('data-dropdown') === 'pb-dropdown-trigger') {
-          shouldClose = false;
-        }
-        targetElement = targetElement.parentElement as HTMLElement;
-      }
-      if (
-        inputWrapperRef.current && !inputWrapperRef.current.contains(e.target) &&
-        (dropdownContainerRef.current && !dropdownContainerRef.current.contains(e.target)) &&
-        shouldClose
-      ) {
-        setIsDropDownClosed(true);
-        setFocusedOptionIndex(-1);
-        setIsInputFocused(false);
-      }
-    };
-  
-    window.addEventListener("click", handleClickOutside);
+    window.addEventListener("click", handleClick);
     return () => {
-      window.removeEventListener("click", handleClickOutside);
+      window.removeEventListener("click", handleClick);
     };
   }, []);
 
