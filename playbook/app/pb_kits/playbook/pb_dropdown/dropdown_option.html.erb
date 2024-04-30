@@ -2,7 +2,7 @@
     <%= pb_rails("list/item", props: {
         display: "flex", 
         justify_content: "center", 
-        padding:"none", 
+        padding:"xs", 
         cursor: "pointer"
         }) do %> 
             <%= pb_rails("flex", props: {
@@ -12,7 +12,7 @@
                 padding_x:"sm",
                 padding_y:"xxs",
                 }) do %>
-                <%= pb_rails("body", props: {text: "Hello"}) %>
+                <%= pb_rails("body", props: {text: object.option[:label]}) %>
             <% end %>
     <% end %>
 <% end %>
