@@ -1,9 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import { Dropdown, useDropdown, CircleIconButton, Icon, Body, FlexItem, Flex  } from '../..'
 
 const DropdownWithHook = (props) => {
-// eslint-disable-next-line no-unused-vars
-const [selectedOption, setSelectedOption] = useState();
 const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
 const buttonRef = useRef(null);
 
@@ -41,7 +39,6 @@ const buttonRef = useRef(null);
       />
     <Dropdown
         isClosed={isDropDownClosed}
-        onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
         triggerRef={buttonRef}
         {...props}

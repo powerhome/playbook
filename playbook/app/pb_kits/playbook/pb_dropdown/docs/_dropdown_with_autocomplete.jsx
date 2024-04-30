@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Dropdown, User, Badge, FlexItem } from '../..'
 
 const DropdownWithAutocomplete = (props) => {
-// eslint-disable-next-line no-unused-vars
-  const [selectedOption, setSelectedOption] = useState();
 
   const options = [
     {
@@ -44,7 +42,6 @@ const DropdownWithAutocomplete = (props) => {
   return (
   <div>
     <Dropdown autocomplete
-        onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
         {...props}
     >

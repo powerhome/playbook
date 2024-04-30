@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Dropdown, useDropdown, Button } from '../../'
 
 const DropdownWithExternalControl = (props) => {
-// eslint-disable-next-line no-unused-vars
-const [selectedOption, setSelectedOption] = useState();
 const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
 
   const options = [
@@ -45,7 +43,6 @@ const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
 
     <Dropdown
         isClosed={isDropDownClosed}
-        onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
         {...props}
     >

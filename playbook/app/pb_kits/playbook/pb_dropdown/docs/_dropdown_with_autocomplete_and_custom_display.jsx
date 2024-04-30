@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Dropdown, User, Badge, FlexItem, Avatar } from '../..'
 
 const DropdownWithAutocompleteAndCustomDisplay = (props) => {
-// eslint-disable-next-line no-unused-vars
   const [selectedOption, setSelectedOption] = useState();
 
   const options = [
