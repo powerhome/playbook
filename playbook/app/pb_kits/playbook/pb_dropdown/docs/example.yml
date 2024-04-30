@@ -1,6 +1,7 @@
 examples:
-  
-  
+  rails:
+  - dropdown_default: Default
+
   react:
   - dropdown_default: Default
   - dropdown_subcomponent_structure: Subcomponent Structure

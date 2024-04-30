@@ -1,0 +1,20 @@
+<%= pb_content_tag do %>
+    <%= pb_rails("flex", props: {
+        align: "center", 
+        border_radius:"lg", 
+        classname: object.trigger_wrapper_classes, 
+        cursor: "pointer", 
+        justify: "between", 
+        padding_x:"sm", 
+        padding_y:"xs"}) do %>
+        <%= pb_rails("flex/flex_item") do %>
+            <%= pb_rails("flex", props: {align: "center"}) do %>
+                <%= pb_rails("body", props: {text: "Select..."}) %>
+            <% end %>
+        <% end %>
+            <%= pb_rails("body", props: {display: "flex"}) do  %>
+                <%= pb_rails("icon", props: {icon: "chevron-down", cursor: "pointer", size:"sm"}) %>
+            <% end %>
+    <% end %>
+    <% end %>
+      
