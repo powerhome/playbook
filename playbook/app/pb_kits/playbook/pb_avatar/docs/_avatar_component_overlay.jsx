@@ -252,8 +252,94 @@ const AvatarComponentOverlay = () => {
               />
  <br />
 
+        <Caption text= "Small"/>
+            <Avatar
+                componentOverlay={{
+                    component: "badge",
+                    variant:"error",
+                    placement: "top-right",
+                    text: "12"
+                }}
+                imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+                size="xxs"
+            />
+             <br />
+              <Avatar
+                  componentOverlay={{
+                    component: "badge",
+                    placement: "top-left",
+                    text: "12"
+                }}
+                  imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+                  size="xxs"
+              />
+             <br />
+              <Avatar
+                  componentOverlay={{
+                    component: "badge",
+                    placement: "bottom-right",
+                    text: "12"
+                }}
+                  imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+                  size="xxs"
+              />
+             <br />
+              <Avatar
+                  componentOverlay={{
+                    component: "badge",
+                    placement: "top-left",
+                    text: "12"
+                }}
+                  imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+                  size="xxs"
+              />
+            <br />
 
-<Caption text= "Small"/>
+        <Caption text= "Small"/>
+            <Avatar
+                componentOverlay={{
+                    component: "badge",
+                    variant:"error",
+                    placement: "top-right",
+                    text: "12"
+                }}
+                imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+                size="xs"
+            />
+             <br />
+              <Avatar
+                  componentOverlay={{
+                    component: "badge",
+                    placement: "top-left",
+                    text: "12"
+                }}
+                  imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+                  size="xs"
+              />
+             <br />
+              <Avatar
+                  componentOverlay={{
+                    component: "badge",
+                    placement: "bottom-right",
+                    text: "12"
+                }}
+                  imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+                  size="xs"
+              />
+             <br />
+              <Avatar
+                  componentOverlay={{
+                    component: "badge",
+                    placement: "top-left",
+                    text: "12"
+                }}
+                  imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+                  size="xs"
+              />
+            <br />
+
+
+        <Caption text= "Small"/>
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -335,7 +421,7 @@ const AvatarComponentOverlay = () => {
                   imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
                   size="md"
               />
- <br />
+            <br />
             <Caption text= "Large"/>
              <Avatar
                  componentOverlay={{
@@ -379,7 +465,7 @@ const AvatarComponentOverlay = () => {
                   imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
                   size="lg"
               />
- <br />
+         <br />
             <Caption text= "Extra Large"/>
              <Avatar
                  componentOverlay={{

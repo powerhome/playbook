@@ -22,7 +22,7 @@ const chartData = [{
 const BarGraphDefault = (props) => (
   <div>
     <BarGraph
-      
+        axisTitle="Number of Employees"
         chartData={chartData}
         id="bar-default"
         subTitle="Source: thesolarfoundation.com"
