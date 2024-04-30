@@ -1,3 +1,4 @@
+
 @import "../pb_caption/caption";
 
 
@@ -14,3 +15,114 @@
     text-align: center;
     pointer-events: none;
 }
+
+@import 'https://code.highcharts.com/css/highcharts.css';
+// /* This will re-declare variables globally */
+:root {
+  --highcharts-color-0: #f45b5b;
+}
+
+/* This will use a different variable for some elements, in this case a more
+contrasted color variation for the axis labels */
+// .highcharts-axis-labels {
+//   fill: var(--highcharts-neutral-color-100);
+// }
+// /* Example of individual components overriding variables */
+// .highcharts-title {
+//   fill: black;
+//   font-size: 26px;
+//   font-weight: bold;
+// }
+
+/* CSS Variables for Typography */
+:root {
+    --font-family-base: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-large: 28px;
+    --font-base: 16px;
+    --font-small: 14px;
+    --font-smaller: 12px;
+
+    --font-weight-regular: 400;
+    --font-weight-bold: 600;
+
+    /* CSS Variables for Colors */
+    --color-data-1: #86a8d8; /* Royal */
+    --color-data-2: #463707; /* Yellow */
+    --color-data-3: #95b453; /* Purple */
+    --color-data-4: #b7e5cd; /* Green */
+    --color-data-5: #2c0f02; /* Orange */
+    --color-data-6: #144075; /* Custom Blue */
+    --color-data-7: #00C4D7; /* Teal */
+    --color-text-light: #687887;
+    --color-text-default: #242B42; /* Charcoal */
+    --color-text-dk-default: #FFFFFF; /* White */
+    --color-bg-dark: #0a0527;
+    --color-border-light: #E4E8F0;
+}
+
+/* Chart Container */
+.highcharts-root {
+    font-family: var(--font-family-base);
+}
+
+/* Colors for Data Series */
+.highcharts-color-0 { fill: var(--color-data-1); }
+.highcharts-color-1 { fill: var(--color-data-2); }
+.highcharts-color-2 { fill: var(--color-data-3); }
+.highcharts-color-3 { fill: var(--color-data-4); }
+.highcharts-color-4 { fill: var(--color-data-5); }
+.highcharts-color-5 { fill: var(--color-data-6); }
+.highcharts-color-6 { fill: var(--color-data-7); }
+
+/* Titles and Subtitles */
+.highcharts-title {
+    fill: var(--color-text-default);
+    font-size: var(--font-large);
+    font-weight: var(--font-weight-regular);
+}
+
+.highcharts-subtitle {
+    fill: var(--color-text-light);
+    font-size: var(--font-base);
+    font-weight: var(--font-weight-regular);
+}
+
+/* Axis Styling */
+.highcharts-axis path,
+.highcharts-axis line {
+    stroke: var(--color-border-light);
+}
+
+.highcharts-axis-labels {
+    fill: var(--color-text-light);
+    font-size: var(--font-smaller);
+    font-weight: var(--font-weight-bold);
+}
+
+.highcharts-axis-title {
+    fill: var(--color-text-default);
+    font-size: var(--font-base);
+    font-weight: var(--font-weight-regular);
+}
+
+/* Legend */
+.highcharts-legend-item {
+    fill: var(--color-text-light);
+    font-size: var(--font-smaller);
+    font-weight: var(--font-weight-regular);
+}
+
+/* Tooltip */
+.highcharts-tooltip {
+    fill: var(--color-bg-dark);
+    border-radius: 10px;
+    border: none;
+}
+
+.highcharts-tooltip text {
+    fill: var(--color-text-dk-default);
+    font-size: var(--font-smaller);
+    font-weight: var(--font-weight-regular);
+}
+
+/* Additional rules for other chart types and interactive elements can be added as needed */
