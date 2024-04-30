@@ -62,20 +62,58 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
   const handleError = () => setError(true)
 
   const canShowImage = imageUrl && !error
-
-  //example of placement configurations, will need to account for different Avatar sizes + will be different for badge vs IconCircle
+  
   const getPlacementProps = (placement: string) => {
-  const placementMapping: any = {
-    'top-right': { top: '0', right: '0' },
-    'bottom-left': { bottom: '0', left: '0' },
-    'top-left': { top: '0', left: '0' },
-    'bottom-right': { bottom: '0', right: '0' },
-  }
+    let placementMapping: any;
+  
+    if (size === 'xxs') {
+      placementMapping = {
+        'top-right': { top: 'xs', right: 'xs' },
+        'bottom-left': { bottom: 'xs', left: 'xs' },
+        'top-left': { top: 'xs', left: 'xs' },
+        'bottom-right': { bottom: 'xs', right: 'xs' },
+      };
+    } else if (size === 'xs') {
+      placementMapping = {
+        'top-right': { top: 'xs', right: 'xs' },
+        'bottom-left': { bottom: 'xs', left: 'xs' },
+        'top-left': { top: 'xs', left: 'xs' },
+        'bottom-right': { bottom: 'xs', right: 'xs' },
+      };
+    } else if (size === 'sm') {
+      placementMapping = {
+        'top-right': { top: '0', right: 'xs' },
+        'bottom-left': { bottom: '0', left: 'xs' },
+        'top-left': { top: '0', left: 'xs' },
+        'bottom-right': { bottom: '0', right: 'xs' },
+      };
+    } else if (size === 'md') {
+      placementMapping = {
+        'top-right': { top: '0', right: '0' },
+        'bottom-left': { bottom: '0', left: '0' },
+        'top-left': { top: '0', left: '0' },
+        'bottom-right': { bottom: '0', right: '0' },
+      };
+    } else if (size === 'lg') {
+      placementMapping = {
+        'top-right': { top: '0', right: '0' },
+        'bottom-left': { bottom: '0', left: '0' },
+        'top-left': { top: '0', left: '0' },
+        'bottom-right': { bottom: '0', right: '0' },
+      };
+    } else if (size === 'xl') {
+      placementMapping = {
+        'top-right': { top: { value: "xxs", inset: true }, right: { value: "xxs", inset: true } },
+        'bottom-left': { bottom: { value: "xxs", inset: true }, left: { value: "xxs", inset: true } },
+        'top-left': { top: { value: "xxs", inset: true }, left: { value: "xxs", inset: true } },
+        'bottom-right': { bottom: { value: "xxs", inset: true }, right: { value: "xxs", inset: true } },
+      };
+    }
+  
+    // Return the specific placement mapping or an empty object if placement is not found
+    return placementMapping[placement] || {};
+  };
 
-  return placementMapping[placement] || {};
-  }
-
-  console.log(componentOverlay)
   return (
     <div
         {...ariaProps}
@@ -101,19 +139,27 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
           </div>
 
           {componentOverlay.component === "badge" && (
+             <Card
+                 borderNone
+                 borderRadius="rounded"
+                 padding="none"
+                 position="absolute"
+                 {...getPlacementProps(componentOverlay.placement)}
+             >
+    
             <Badge
-                position="absolute"
                 rounded
                 text={componentOverlay.text}
                 variant={componentOverlay.variant}
-                {...getPlacementProps(componentOverlay.placement)}
+              
             />
+            </Card>
           )}
           {componentOverlay.component === "iconCircle" && (
             <Card
                 borderNone
                 borderRadius="rounded"
-                padding="xxs"
+                htmlOptions={{style: {padding:"2px"}}}
                 position="absolute"
                 {...getPlacementProps(componentOverlay.placement)}
             >
