@@ -9,6 +9,10 @@ module Playbook
                 default: ""
       prop :placeholder, type: Playbook::Props::String
 
+      def data
+        Hash(prop(:data)).merge(dropdown_trigger: true)
+      end
+
       def classname
         generate_classname("pb_dropdown_trigger")
       end

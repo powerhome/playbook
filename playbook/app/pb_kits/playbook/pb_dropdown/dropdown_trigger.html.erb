@@ -13,7 +13,8 @@
             <% end %>
         <% end %>
             <%= pb_rails("body", props: {display: "flex"}) do  %>
-                <%= pb_rails("icon", props: {icon: "chevron-down", cursor: "pointer", size:"sm"}) %>
+                <%= pb_rails("icon", props: {icon: "chevron-down", cursor: "pointer", size:"sm", id: "dropdown_open_icon"}) %>
+                <%= pb_rails("icon", props: {icon: "chevron-up", cursor: "pointer", size:"sm", id: "dropdown_close_icon"}) %>
             <% end %>
     <% end %>
     <% end %>
