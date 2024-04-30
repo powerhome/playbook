@@ -127,6 +127,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
             }
           }}
           role="tooltip_trigger"
+          style={{ display: "inline-block" }}
           {...ariaProps}
           {...dataProps}
           {...htmlProps}
