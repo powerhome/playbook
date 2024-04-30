@@ -33,12 +33,12 @@
   letter-spacing: -0.03em;
 }
 
-@mixin pb_title_dark($name: "") {
-  @if $name == 'link' {
-    color: $active_dark !important;
-  } @else {
+@mixin pb_title_dark {
     color: $text_dk_default;
-  }
+} 
+
+@mixin pb_title_dark_link {
+    color: $active_dark;
 }
 
 @mixin pb_title_bold {

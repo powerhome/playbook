@@ -52,7 +52,7 @@
     @include pb_title_dark; 
   }
 
-  &[class*=_link] { 
-    @include pb_title_dark('link'); 
+  &.dark[class*=_link] { 
+    @include pb_title_dark_link; 
   }
 }
