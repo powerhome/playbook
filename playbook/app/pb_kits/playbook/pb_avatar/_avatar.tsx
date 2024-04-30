@@ -14,16 +14,16 @@ import Card from "../pb_card/_card";
 export type AvatarProps = {
   aria?: {[key: string]: string},
   className?: string,
-    componentOverlay: {[key: string]: any},
-    data?: {[key: string]: string},
-    dark?: boolean,
-    htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
-    id?: string,
-    imageAlt?: string,
-    imageUrl?: string,
-    name?: string,
-    size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
-    status?: "away" | "offline" | "online",
+  componentOverlay?: {[key: string]: any},
+  data?: {[key: string]: string},
+  dark?: boolean,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  id?: string,
+  imageAlt?: string,
+  imageUrl?: string,
+  name?: string,
+  size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
+  status?: "away" | "offline" | "online",
   } & GlobalProps
 
 const firstTwoInitials = (name: string) =>
