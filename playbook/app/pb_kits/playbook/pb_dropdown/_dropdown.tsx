@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, ReactElement } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -8,21 +8,21 @@ import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
 
 import DropdownContainer from "./subcomponents/DropdownContainer";
+import DropdownContext from "./context";
 import DropdownOption from "./subcomponents/DropdownOption";
 import DropdownTrigger from "./subcomponents/DropdownTrigger";
-import DropdownContext from "./context";
 import useDropdown from "./hooks/useDropdown";
 
 import {
   separateChildComponents,
   prepareSubcomponents,
-} from "./utilities/subComponentHelper";
-import { handleClickOutside } from "./utilities/clickOutsideHelper";
+  handleClickOutside,
+} from "./utilities";
 
 type DropdownProps = {
   aria?: { [key: string]: string };
   autocomplete?: boolean;
-  children?: React.ReactChild[] | React.ReactChild | ReactElement[];
+  children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
   className?: string;
   dark?: boolean;
   data?: { [key: string]: string };
