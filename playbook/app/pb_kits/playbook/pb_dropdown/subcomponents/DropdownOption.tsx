@@ -59,20 +59,22 @@ const DropdownOption = (props: DropdownOptionProps) => {
   const isFocused =
     focusedOptionIndex >= 0 &&
     filteredOptions[focusedOptionIndex].label === option.label;
-  const focusedClass = isFocused && "dropdown_option_focused";
+  const focusedClass = isFocused && "focused";
 
   const selectedClass = `${
     selected.label === option.label
-      ? "dropdown_option_selected"
-      : "dropdown_option_list"
+      ? "selected"
+      : "list"
   }`;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
-    buildCss("pb_dropdown_option"),
-    selectedClass,
-    focusedClass,
+    buildCss(
+      "pb_dropdown_option",
+      selectedClass,
+      focusedClass,
+    ),
     globalProps(props, {padding}),
     className
   );
@@ -96,7 +98,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
       >
         <Flex
             align="center"
-            className="dropdown_option"
+            className="dropdown_option_wrapper"
             justify="between"
             paddingX="sm"
             paddingY="xxs"
