@@ -6,25 +6,25 @@ const RadioDisabled = (props) => {
   const ref = React.createRef()
 
   return (
-    <div>
-      <Radio
-          disabled
-          label="Disabled unselected"
-          name="DisabledGroup"
-          ref={ref}
-          tabIndex={0}
-          value="Disabled unselected"
-          {...props}
-      />
-      <br />
-      <Radio
-          checked 
-          disabled
-          label="Disabled selected"
-          name="DisabledGroup"
-          value="Disabled selected"
-          {...props}
-      />
+    <div style={{ display: "flex", flexDirection: "column" }}>
+        <Radio 
+            disabled
+            label="Disabled unselected"
+            marginBottom="xs"
+            name="DisabledGroup"
+            ref={ref}
+            tabIndex={0}
+            value="Disabled unselected"
+            {...props}
+        />
+        <Radio
+            checked 
+            disabled
+            label="Disabled selected"
+            name="DisabledGroup"
+            value="Disabled selected"
+            {...props}
+        />
     </div>
   )
 }
