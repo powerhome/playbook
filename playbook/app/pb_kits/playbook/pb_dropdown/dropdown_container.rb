@@ -6,6 +6,10 @@ module Playbook
       def classname
         generate_classname("pb_dropdown_container")
       end
+
+      def container_style
+        "position: absolute"
+      end
     end
   end
 end

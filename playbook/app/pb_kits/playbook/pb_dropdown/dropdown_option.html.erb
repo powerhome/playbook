@@ -1,0 +1,18 @@
+<%= pb_content_tag do %>
+    <%= pb_rails("list/item", props: {
+        display: "flex", 
+        justify_content: "center", 
+        padding:"none", 
+        cursor: "pointer"
+        }) do %> 
+            <%= pb_rails("flex", props: {
+                align: "center",
+                classname:"dropdown_option_wrapper",
+                justify: "between",
+                padding_x:"sm",
+                padding_y:"xxs",
+                }) do %>
+                <%= pb_rails("body", props: {text: "Hello"}) %>
+            <% end %>
+    <% end %>
+<% end %>
