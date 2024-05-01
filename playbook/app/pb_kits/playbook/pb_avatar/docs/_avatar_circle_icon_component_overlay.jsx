@@ -1,13 +1,9 @@
 import React from "react";
-import { Avatar, Caption } from '../..'
+import { Avatar } from '../..'
 
 const AvatarCircleIconComponentOverlay = () => {
     return (
         <div>
-            <Caption 
-                marginBottom="sm" 
-                text= "Circle Icon"
-            />
             <Avatar
                 componentOverlay={{
                     component: "iconCircle",

@@ -58,11 +58,13 @@ module Playbook
       end
 
       def placement_styles(offset)
-        if offset == "xs"
-          top_bottom_offset = "xs"
-        elsif offset == { value: "xxs", inset: true }
-          top_bottom_offset = { value: "xxs", inset: true }
-        end
+        top_bottom_offset = if offset == "xs"
+                              "xs"
+                            elsif offset == { value: "xxs", inset: true }
+                              { value: "xxs", inset: true }
+                            else
+                              "0"
+                            end
 
         {
           "top-right" => { top: top_bottom_offset, right: offset },

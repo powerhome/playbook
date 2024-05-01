@@ -1,24 +1,9 @@
 import React from "react";
-import { Avatar, Caption } from '../..'
+import { Avatar } from '../..'
 
 const AvatarBadgeComponentOverlay = () => {
     return (
         <div>
-            <Avatar
-                componentOverlay={{
-                    component: "iconCircle",
-                    icon: "plus",
-                    placement: "top-right"
-                }}
-                imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
-                marginBottom="sm"
-                size="xl"
-            />
-
-            <Caption 
-                marginBottom="sm" 
-                text= "Badge"
-            />
             <Avatar
                 componentOverlay={{
                     component: "badge",
