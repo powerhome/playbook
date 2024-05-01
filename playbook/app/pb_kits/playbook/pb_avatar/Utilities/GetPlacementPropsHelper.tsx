@@ -39,12 +39,6 @@ export const getPlacementProps = (placement: string, size?: "md" | "lg" | "sm" |
               'bottom-right': { bottom: { value: "xxs", inset: true }, right: { value: "xxs", inset: true } },
           };
           break;
-
-      default:
-          // Return an empty object if size is not recognized
-          break;
   }
-
-  // Return the specific placement mapping or an empty object if placement is not found
   return placementMapping[placement] || {};
 };
