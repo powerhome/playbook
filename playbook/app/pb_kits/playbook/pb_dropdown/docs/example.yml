@@ -3,6 +3,8 @@ examples:
   - dropdown_default: Default
   - dropdown_subcomponent_structure: Subcomponent Structure
   - dropdown_with_label: With Label
+  - dropdown_with_custom_options: Custom Options
+
 
   react:
   - dropdown_default: Default

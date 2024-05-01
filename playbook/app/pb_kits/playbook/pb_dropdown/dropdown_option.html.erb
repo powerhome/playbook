@@ -12,7 +12,11 @@
                 padding_x:"sm",
                 padding_y:"xxs",
                 }) do %>
-                <%= pb_rails("body", props: {text: object.option[:label]}) %>
+                <% if content.present? %>
+                    <%= content.presence %>
+                <% else %>
+                    <%= pb_rails("body", props: {text: object.option[:label]}) %>
+                <% end %>
             <% end %>
     <% end %>
 <% end %>
