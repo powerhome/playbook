@@ -1,20 +1,47 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 
-const TRIGGER_SELECTOR = '[data-dropdown-trigger]'
+const DROPDOWN_SELECTOR = '[data-pb-dropdown]'
+// const TRIGGER_SELECTOR = '[data-dropdown-trigger]'
 const CONTAINER_SELECTOR = '[data-dropdown-container]'
 const DOWN_ARROW_SELECTOR = '#dropdown_open_icon'
 const UP_ARROW_SELECTOR = '#dropdown_close_icon'
+const OPTION_SELECTOR = '[data-dropdown-option-label]'
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
-    return TRIGGER_SELECTOR
+    return DROPDOWN_SELECTOR
   }
 
   connect() {
     this.element.addEventListener('click', () => {
       this.toggleElement(this.target)
     })
+    this.target.addEventListener('click', this.handleOptionClick.bind(this))
     this.displayDownArrow()
+  }
+
+  handleOptionClick(event) {
+    const option = event.target.closest(OPTION_SELECTOR);
+    if (option) {
+      const value = option.dataset.dropdownOptionLabel;
+      this.onOptionSelected(value, option);
+    }
+  }
+
+  onOptionSelected(value, selectedOption) {
+    const triggerElement = this.element.querySelector('#dropdown_trigger_display');
+    if (triggerElement) {
+      const selectedLabel = JSON.parse(value).label;
+      triggerElement.textContent = selectedLabel;
+    }
+
+    const options = this.element.querySelectorAll(OPTION_SELECTOR);
+    options.forEach(option => {
+        option.classList.remove('pb_dropdown_option_selected');
+    });
+    selectedOption.classList.add('pb_dropdown_option_selected');
+
+    console.log(`Selected value: ${value}`);
   }
 
   get target() {

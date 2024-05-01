@@ -9,7 +9,7 @@
         padding_y:"xs"}) do %>
         <%= pb_rails("flex/flex_item") do %>
             <%= pb_rails("flex", props: {align: "center"}) do %>
-                <%= pb_rails("body", props: {text: object.default_display_placeholder}) %>
+                <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
             <% end %>
         <% end %>
             <%= pb_rails("body", props: {display: "flex"}) do  %>
@@ -17,5 +17,5 @@
                 <%= pb_rails("icon", props: {icon: "chevron-up", cursor: "pointer", size:"sm", id: "dropdown_close_icon"}) %>
             <% end %>
     <% end %>
-    <% end %>
+<% end %>
       
