@@ -16,6 +16,7 @@ export default class PbDropdown extends PbEnhancedElement {
       this.toggleElement(this.target)
     })
     this.target.addEventListener('click', this.handleOptionClick.bind(this))
+    document.addEventListener('click', this.handleDocumentClick.bind(this), true);
     this.displayDownArrow()
   }
 
@@ -26,6 +27,17 @@ export default class PbDropdown extends PbEnhancedElement {
       this.onOptionSelected(value, option);
     }
   }
+
+  handleDocumentClick(event) {
+    if (this.isClickOutside(event) && this.target.classList.contains('open')) {
+        this.hideElement(this.target);
+        this.displayDownArrow();
+    }
+}
+
+isClickOutside(event) {
+    return !this.element.contains(event.target);
+}
 
   onOptionSelected(value, selectedOption) {
     const triggerElement = this.element.querySelector('#dropdown_trigger_display');
