@@ -2837,10 +2837,15 @@
   resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/d71ffd31679c57b3a7358718ce84b2f9e5f0c577#d71ffd31679c57b3a7358718ce84b2f9e5f0c577"
   integrity sha512-SUM1/MsJb4nnNEz2A9PMXa8hgBeCdGCNQWEdrozy1l2/1GZOkiw28aGIUZZN3LAR2+0hRRNhVhcetfpuGCZcFg==
 
-"@powerhome/playbook-icons@0.0.1-alpha.8":
-  version "0.0.1-alpha.8"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/ab390d12f3621b45d7238f51995545c1d52f33e0#ab390d12f3621b45d7238f51995545c1d52f33e0"
-  integrity sha512-TX4GWwhU909LEzhJo8Eb/e3IBLFJu+2K5DeRffvDI5XaNxhFXZKfsgcgDtxsDPOmx/7Owk+Qs+IFJjwhZ6sbxw==
+"@powerhome/playbook-icons@0.0.1-alpha.16":
+  version "0.0.1-alpha.16"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/273baad6202de2736f9e38287e5589e00f47dfb8#273baad6202de2736f9e38287e5589e00f47dfb8"
+  integrity sha512-Kim7OqGxotUuhcxHBQI8a1M184DvzSyHU3ZmN/B6JANcw2jIOVL9z0f+qa9Trgij1cmyY444WC51LDbYaGvEug==
+
+"@powerhome/power-fonts@0.0.1-alpha.4":
+  version "0.0.1-alpha.4"
+  resolved "https://npm.powerapp.cloud/@powerhome/power-fonts/-/2db6ab57032de4685fb9d221fd92b4a4aca7f92e#2db6ab57032de4685fb9d221fd92b4a4aca7f92e"
+  integrity sha512-Oc6KNQt6kw8AKFMK8oPWTkUQotRkqvawzAWiYXDlP2cdoxIyTfBEqtYgQj8MbLcpYynPm0WjQHegQnxAwtNorQ==
 
 "@rails/actioncable@^7.0":
   version "7.1.3"

@@ -4,6 +4,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps
 } from "../../utilities/props";
 import { globalProps } from "../../utilities/globalProps";
 import { useHandleOnKeyDown } from "../hooks/useHandleOnKeydown";
@@ -21,11 +22,22 @@ type DropdownTriggerProps = {
   className?: string;
   customDisplay?: React.ReactChild[] | React.ReactChild;
   data?: { [key: string]: string };
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
+  placeholder?: string;
 };
 
 const DropdownTrigger = (props: DropdownTriggerProps) => {
-  const { aria = {}, className, children, customDisplay, data = {}, id } = props;
+  const {
+    aria = {},
+    className,
+    children,
+    customDisplay,
+    data = {},
+    htmlOptions = {},
+    id,
+    placeholder,
+  } = props;
 
   const {
     autocomplete,
@@ -37,87 +49,119 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     isDropDownClosed,
     inputRef,
     isInputFocused,
-    setIsInputFocused
+    setIsInputFocused,
   } = useContext(DropdownContext);
-  
+
   const handleKeyDown = useHandleOnKeyDown();
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_dropdown_trigger"),
     globalProps(props),
     className
   );
 
+  const triggerWrapperClasses = `dropdown_trigger_wrapper ${
+    isInputFocused && "dropdown_trigger_wrapper_focus"
+  } ${!autocomplete && "dropdown_trigger_wrapper_select_only"}`;
+
+  const customDisplayPlaceholder = selected.label ? (
+    <b>{selected.label}</b>
+  ) : autocomplete ? (
+    ""
+  ) : placeholder ? (
+    placeholder
+  ) : (
+    "Select..."
+  );
+
+  const defaultDisplayPlaceholder = selected.label
+    ? selected.label
+    : autocomplete
+    ? ""
+    : placeholder
+    ? placeholder
+    : "Select...";
+
   return (
     <div {...ariaProps} 
         {...dataProps} 
+        {...htmlProps}
         className={classes} 
         id={id}
     >
       {children ? (
         <div
             onClick={() => toggleDropdown()}
+            onKeyDown= {handleKeyDown}
             style={{ display: "inline-block" }}
+            tabIndex= {0}
         >
           {children}
         </div>
       ) : (
         <>
-          <Flex align="center"
+          <Flex
+              align="center"
               borderRadius="lg"
-              className={`dropdown_trigger_wrapper ${isInputFocused && 'dropdown_trigger_wrapper_focus'}`}
-              cursor="pointer"
-              htmlOptions={{ 
-                onClick: () => handleWrapperClick(), 
+              className={triggerWrapperClasses}
+              cursor={`${autocomplete ? "text" : "pointer"}`}
+              htmlOptions={{
+                onClick: () => handleWrapperClick(),
                 onKeyDown: handleKeyDown,
-                tabIndex:"0",
+                tabIndex: "0",
               }}
               justify="between"
               paddingX="sm"
               paddingY="xs"
           >
             <FlexItem>
-                <Flex align="center">
-                    {customDisplay ? (
-                      <Flex align="center">
-                          {customDisplay}
-                          <Body paddingLeft={`${selected.label ? "xs" : "none"}`}>
-                            {selected.label ? <b>{selected.label}</b> : autocomplete ? "" : "Select..." }
-                          </Body>
-                      </Flex>
-                      ) : (
-                        <Body text={selected.label ? selected.label : autocomplete ? "" : "Select..."} />
-                      )
-                    }
-                    {
-                      autocomplete && (
-                        <input
-                            className="dropdown_input"
-                            onChange={handleChange}
-                            onClick={() => toggleDropdown()}
-                            onFocus={() => setIsInputFocused(true)}
-                            onKeyDown={handleKeyDown}
-                            placeholder={selected.label ? "" : "Select..."}
-                            ref={inputRef}
-                            value={filterItem}
-                        />
-                      )
-                    }
-                    
-                </Flex>
+              <Flex align="center">
+                {customDisplay ? (
+                  <Flex align="center">
+                    {customDisplay}
+                    <Body paddingLeft={`${selected.label ? "xs" : "none"}`}>
+                      {customDisplayPlaceholder}
+                    </Body>
+                  </Flex>
+                ) : (
+                  <Body text={defaultDisplayPlaceholder} />
+                )}
+                {autocomplete && (
+                  <input
+                      className="dropdown_input"
+                      onChange={handleChange}
+                      onClick={() => toggleDropdown()}
+                      onFocus={() => setIsInputFocused(true)}
+                      onKeyDown={handleKeyDown}
+                      placeholder={
+                        selected.label
+                          ? ""
+                          : placeholder
+                          ? placeholder
+                          : "Select..."
+                      }
+                      ref={inputRef}
+                      value={filterItem}
+                  />
+                )}
+              </Flex>
             </FlexItem>
-            <FlexItem>
-                <Body display="flex"
-                    key={`${isDropDownClosed ? "chevron-down" : 'chevron-up'}`}
-                >
-                    <Icon cursor="pointer"
-                        icon={`${isDropDownClosed ? "chevron-down" : 'chevron-up'}`}
-                        size="sm" 
-                    />
-                </Body>
-            </FlexItem>
+              <Body
+                  display="flex"
+                  htmlOptions={{
+                    onClick: (e: Event) => {e.stopPropagation();handleWrapperClick()}
+                  }}
+                  key={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
+              >
+                <Icon
+                    cursor="pointer"
+                    icon={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
+                    size="sm"
+                />
+              </Body>
           </Flex>
         </>
       )}

@@ -1,10 +1,4 @@
-<%= content_tag(:li,
-                aria: object.aria,
-                class: object.classname,
-                data: object.data,
-                id: object.id,
-                tabindex: object.tabindex,
-                **combined_html_options
-  ) do %>
+<%= pb_content_tag(:li,
+                   tabindex: object.tabindex) do %>
     <%= content.presence %>
 <% end %>
