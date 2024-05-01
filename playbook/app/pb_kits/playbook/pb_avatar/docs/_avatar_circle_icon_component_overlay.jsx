@@ -30,7 +30,7 @@ const AvatarCircleIconComponentOverlay = () => {
                 componentOverlay={{
                     component: "iconCircle",
                     icon: "plus",
-                    placement: "bottom-right"
+                    placement: "bottom-right",
                 }}
                 imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
                 marginBottom="sm"

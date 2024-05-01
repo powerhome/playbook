@@ -107,8 +107,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
             <Badge
                 rounded
                 text={componentOverlay.text}
-              
-              
+                variant={componentOverlay.variant as "error" | "info" | "neutral" | "primary" | "success" | "warning" | "notification"}
             />
             </Card>
           )}
@@ -123,7 +122,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
               <IconCircle
                   icon={componentOverlay.icon}
                   size="xxs"
-                
+                  variant={componentOverlay.variant as "default" | "royal" | "blue" | "purple" | "teal" | "red" | "yellow" | "orange" | "green"}
               />
             </Card>
           )}
