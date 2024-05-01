@@ -29,6 +29,7 @@ gem "sassc-rails"
 ```scss
 # app/assets/stylesheets/application.scss
 
+ @import "reset";
  @import "playbook";
 ```
 
