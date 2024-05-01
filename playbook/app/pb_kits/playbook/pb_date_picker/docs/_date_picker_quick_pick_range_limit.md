@@ -1,1 +1,1 @@
-Applying `this_ranges_end_today` (Rails) or `thisRangesEndToday` (React) causes all “This” preset ranges (i.e., this week, this month, this quarter, this year) to use an endDate of today, instead of their natural end date in the future.
+Because the Quick Pick variant has `allowInput` set to `true` by default, use the `onClose` handler function to access the startDate and endDate values. See the `onClose` example for details.
