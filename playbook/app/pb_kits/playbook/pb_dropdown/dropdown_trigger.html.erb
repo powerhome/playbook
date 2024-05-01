@@ -14,7 +14,16 @@
         padding_y:"xs"}) do %>
         <%= pb_rails("flex/flex_item") do %>
             <%= pb_rails("flex", props: {align: "center"}) do %>
+                <% if object.custom_display.present?  %>
+                    <%= pb_rails("flex", props: {align: "center"}) do %>
+                        <div id="dropdown_trigger_custom_display" style="display: none;"> 
+                            <%= object.custom_display %>
+                        </div>
+                        <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
+                    <% end %>
+                <% else %>
                 <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
+                <% end %>
             <% end %>
         <% end %>
             <%= pb_rails("body", props: {display: "flex"}) do  %>

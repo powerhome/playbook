@@ -1,7 +1,6 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 
 const DROPDOWN_SELECTOR = '[data-pb-dropdown]'
-// const TRIGGER_SELECTOR = '[data-dropdown-trigger]'
 const CONTAINER_SELECTOR = '[data-dropdown-container]'
 const DOWN_ARROW_SELECTOR = '#dropdown_open_icon'
 const UP_ARROW_SELECTOR = '#dropdown_close_icon'
@@ -30,9 +29,14 @@ export default class PbDropdown extends PbEnhancedElement {
 
   onOptionSelected(value, selectedOption) {
     const triggerElement = this.element.querySelector('#dropdown_trigger_display');
+    const customDisplayElement = this.element.querySelector('#dropdown_trigger_custom_display');
     if (triggerElement) {
       const selectedLabel = JSON.parse(value).label;
       triggerElement.textContent = selectedLabel;
+      if (customDisplayElement) {
+        customDisplayElement.style.display = 'block';
+        customDisplayElement.style.paddingRight = '8px';
+    }
     }
 
     const options = this.element.querySelectorAll(OPTION_SELECTOR);

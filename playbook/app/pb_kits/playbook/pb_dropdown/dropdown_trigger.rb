@@ -8,6 +8,7 @@ module Playbook
       prop :id, type: Playbook::Props::String,
                 default: ""
       prop :placeholder, type: Playbook::Props::String
+      prop :custom_display
 
       def data
         Hash(prop(:data)).merge(dropdown_trigger: true)
