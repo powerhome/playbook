@@ -1,4 +1,7 @@
 <%= pb_content_tag do %>
+    <% if object.label.present? %>
+        <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
+    <% end %>
     <div class="dropdown_wrapper" style="position: relative">
     <% if content.present? %>
         <%= content.presence %>

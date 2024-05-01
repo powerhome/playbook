@@ -5,6 +5,7 @@ module Playbook
     class Dropdown < Playbook::KitBase
       prop :options, type: Playbook::Props::Array,
                      default: []
+      prop :label, type: Playbook::Props::String
 
       def data
         Hash(prop(:data)).merge(pb_dropdown: true)
