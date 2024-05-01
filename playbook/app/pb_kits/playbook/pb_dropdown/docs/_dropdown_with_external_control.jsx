@@ -1,7 +1,8 @@
 import React from 'react'
-import { Dropdown } from '../..'
+import { Dropdown, useDropdown, Button } from '../../'
 
-const DropdownWithCustomPadding = (props) => {
+const DropdownWithExternalControl = (props) => {
+const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
 
   const options = [
     {
@@ -27,17 +28,27 @@ const DropdownWithCustomPadding = (props) => {
     }
   ];  
 
-
   return (
   <div>
+    <Button
+        data={{dropdown:'pb-dropdown-trigger'}}
+        marginBottom='sm'
+        onClick={() => setIsDropdownClosed(!isDropDownClosed)}
+        padding="none"
+        tabIndex={0}
+        variant="link"
+    >
+      {isDropDownClosed ? "Open Dropdown" : "Close Dropdown"}
+    </Button>
+
     <Dropdown
+        isClosed={isDropDownClosed}
         options={options}
         {...props}
     >
       {options.map((option) => (
         <Dropdown.Option key={option.id} 
             option={option}
-            padding="sm"
         /> 
       ))}
     </Dropdown>
@@ -45,4 +56,4 @@ const DropdownWithCustomPadding = (props) => {
   )
 }
 
-export default DropdownWithCustomPadding
+export default DropdownWithExternalControl

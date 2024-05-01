@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Dropdown, Icon, Body, FlexItem, Flex } from '../..'
 
 const DropdownWithCustomOptions = (props) => {
-// eslint-disable-next-line no-unused-vars
-  const [selectedOption, setSelectedOption] = useState();
 
   const options = [
     {
@@ -33,7 +31,6 @@ const DropdownWithCustomOptions = (props) => {
   return (
   <div>
     <Dropdown
-        onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
         {...props}
     >

@@ -6,13 +6,13 @@ export const useHandleOnKeyDown = () => {
 
 const {
   autocomplete,
-  focusedOptionIndex,
   filteredOptions,
-  setFocusedOptionIndex,
-  handleOptionClick,
-  setIsDropDownClosed,
+  focusedOptionIndex,
   handleBackspace,
+  handleOptionClick,
   selected,
+  setFocusedOptionIndex,
+  setIsDropDownClosed,
 }= useContext(DropdownContext)
 
   return (e: React.KeyboardEvent) => {

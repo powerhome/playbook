@@ -3,10 +3,14 @@ examples:
   
   react:
   - dropdown_default: Default
+  - dropdown_subcomponent_structure: Subcomponent Structure
+  - dropdown_with_label: With Label
   - dropdown_with_custom_options: Custom Options
   - dropdown_with_custom_display: Custom Display
   - dropdown_with_custom_trigger: Custom Trigger
-  - dropdown_with_autocomplete: Autocomplete
-  - dropdown_with_autocomplete_and_custom_display: Autocomplete with Custom Display
   - dropdown_with_custom_padding: Custom Padding for Dropdown Options
+  # - dropdown_with_autocomplete: Autocomplete
+  # - dropdown_with_autocomplete_and_custom_display: Autocomplete with Custom Display
+  # - dropdown_with_external_control: useDropdown Hook
+  # - dropdown_with_hook: useDropdown Hook with Any Trigger
 
