@@ -33,6 +33,9 @@ PbTable.start()
 import PbTextarea from './pb_textarea'
 PbTextarea.start()
 
+import PbAdvancedTable from './pb_advanced_table'
+PbAdvancedTable.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====
