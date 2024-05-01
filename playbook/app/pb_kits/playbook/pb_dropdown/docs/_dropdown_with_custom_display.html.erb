@@ -1,0 +1,54 @@
+<% 
+  options = [
+    {
+      label: "Jasper Furniss",
+      value: "Jasper Furniss",
+      territory: "PHL",
+      title: "Senior UX Engineer",
+      id: "jasper-furniss",
+      status: "Offline"
+    },
+    {
+      label: "Ramon Ruiz",
+      value: "Ramon Ruiz",
+      territory: "PHL",
+      title: "Senior UX Designer",
+      id: "ramon-ruiz",
+      status: "Away"
+    },
+    {
+      label: "Jason Cypret",
+      value: "Jason Cypret",
+      territory: "PHL",
+      title: "VP of User Experience",
+      id: "jason-cypret",
+      status: "Online"
+    },
+    {
+      label: "Courtney Long",
+      value: "Courtney Long",
+      territory: "PHL",
+      title: "UX Design Mentor",
+      id: "courtney-long",
+      status: "Online"
+    }
+  ]
+
+%>
+
+
+<%= pb_rails("dropdown", props: {options: options}) do %>
+    <%= pb_rails("dropdown/dropdown_trigger", props: {placeholder: "Select a User"}) %>
+    <%= pb_rails("dropdown/dropdown_container") do %>
+        <% options.each do |option| %>
+            <%= pb_rails("dropdown/dropdown_option", props: {option: option}) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("user", props: {name: option[:label], align:"left", avatar: true, orientation:"horizontal", territory:option[:territory], title: option[:title]}) %>
+                <% end %>
+                <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("badge", props: {rounded: true, text: option[:status], variant: option[:status] == "Offline" ? "neutral" : option[:status] == "Online" ? "success" : "warning" }) %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>

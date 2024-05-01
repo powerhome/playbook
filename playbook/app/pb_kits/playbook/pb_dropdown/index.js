@@ -102,12 +102,22 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   displayDownArrow() {
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'inline-block'
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'none'
+    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR)
+    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR)
+    if (!downArrow || !upArrow) {
+      return
+    }
+    downArrow.style.display = 'inline-block'
+    upArrow.style.display = 'none'
   }
 
   displayUpArrow() {
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'inline-block'
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'none'
+    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR)
+    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR)
+    if (!downArrow || !upArrow) {
+      return
+    }
+    upArrow.style.display = 'inline-block'
+    downArrow.style.display = 'none'
    }
 }
