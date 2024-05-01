@@ -1,1 +1,0 @@
-The AdvancedTable kit uses the [Tanstack Table v8](https://tanstack.com/table/v8/docs/introduction) under the hood to render advanced tables that allow for complex, nested data structures with expansion and sort options. 
