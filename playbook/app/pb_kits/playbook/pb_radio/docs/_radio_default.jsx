@@ -2,7 +2,7 @@ import React from 'react'
 
 import Radio from '../_radio'
 
-const RadioDefault = () => {
+const RadioDefault = (props) => {
   const ref = React.createRef()
 
   return (
@@ -13,6 +13,7 @@ const RadioDefault = () => {
           ref={ref}
           tabIndex={0}
           value="Power"
+          {...props}
       />
       <br />
       <Radio
@@ -20,6 +21,7 @@ const RadioDefault = () => {
           label="Nitro"
           name="Group2"
           value="Nitro"
+          {...props}
       />
       <br />
       <Radio
@@ -27,6 +29,7 @@ const RadioDefault = () => {
           label="Google"
           name="Group2"
           value="Google"
+          {...props}
       />
     </div>
   )
