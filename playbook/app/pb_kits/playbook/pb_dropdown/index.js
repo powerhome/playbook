@@ -1,10 +1,12 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 
 const DROPDOWN_SELECTOR = '[data-pb-dropdown]'
+const TRIGGER_SELECTOR = '[data-dropdown-trigger]'
 const CONTAINER_SELECTOR = '[data-dropdown-container]'
 const DOWN_ARROW_SELECTOR = '#dropdown_open_icon'
 const UP_ARROW_SELECTOR = '#dropdown_close_icon'
 const OPTION_SELECTOR = '[data-dropdown-option-label]'
+const CUSTOM_DISPLAY_SELECTOR = '[data-dropdown-custom-trigger]'
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
@@ -12,9 +14,17 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   connect() {
+    const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR)
+    if (!customTrigger) {
     this.element.addEventListener('click', () => {
       this.toggleElement(this.target)
     })
+  } else {  
+    customTrigger.addEventListener('click', () => {
+      this.toggleElement(this.target)
+    } )
+  }
+
     this.target.addEventListener('click', this.handleOptionClick.bind(this))
     document.addEventListener('click', this.handleDocumentClick.bind(this), true);
     this.displayDownArrow()
@@ -36,7 +46,18 @@ export default class PbDropdown extends PbEnhancedElement {
 }
 
 isClickOutside(event) {
-    return !this.element.contains(event.target);
+  const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);
+  if (customTrigger) {
+      return !customTrigger.contains(event.target);
+  } else {
+      const triggerElement = this.element.querySelector(TRIGGER_SELECTOR);
+      const containerElement = this.element.parentNode.querySelector(CONTAINER_SELECTOR);
+
+      const isOutsideTrigger = triggerElement ? !triggerElement.contains(event.target) : true;
+      const isOutsideContainer = containerElement ? !containerElement.contains(event.target) : true;
+
+      return isOutsideTrigger && isOutsideContainer;
+  }
 }
 
   onOptionSelected(value, selectedOption) {
@@ -50,6 +71,15 @@ isClickOutside(event) {
         customDisplayElement.style.paddingRight = '8px';
     }
     }
+
+    const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR)
+    if (customTrigger) {
+        if (this.target.classList.contains('open')) {
+          this.hideElement(this.target)
+          this.displayDownArrow()
+        }
+    }
+
 
     const options = this.element.querySelectorAll(OPTION_SELECTOR);
     options.forEach(option => {

@@ -1,6 +1,6 @@
 <%= pb_content_tag do %>
     <% if content.present? %>
-        <div style="display: inline-block" tab-index= 0>
+        <div style="display: inline-block" tab-index= 0 data-dropdown-custom-trigger>
           <%= content.presence %>
         </div>
     <% else %>
