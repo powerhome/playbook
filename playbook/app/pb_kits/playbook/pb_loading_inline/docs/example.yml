@@ -2,8 +2,10 @@ examples:
   
   rails:
   - loading_inline_light: Light
+  - loading_inline_custom: Custom Text
 
   
   
   react:
   - loading_inline_light: Default
+  - loading_inline_custom: Custom Text
