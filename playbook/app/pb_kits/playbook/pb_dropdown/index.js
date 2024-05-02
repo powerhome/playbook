@@ -16,20 +16,16 @@ export default class PbDropdown extends PbEnhancedElement {
 
   connect() {
     this.keyboardHandler = new PbDropdownKeyboard(this);
-    const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR)
-    if (!customTrigger) {
-    this.element.addEventListener('click', () => {
-      this.toggleElement(this.target)
-    })
-  } else {  
-    customTrigger.addEventListener('click', () => {
-      this.toggleElement(this.target)
-    } )
+    this.bindEventListeners();
+    this.updateArrowDisplay(false);
   }
 
-    this.target.addEventListener('click', this.handleOptionClick.bind(this))
+  bindEventListeners() {
+    const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR) || this.element;
+    customTrigger.addEventListener('click', () => this.toggleElement(this.target));
+    
+    this.target.addEventListener('click', this.handleOptionClick.bind(this));
     document.addEventListener('click', this.handleDocumentClick.bind(this), true);
-    this.displayDownArrow()
   }
 
   handleOptionClick(event) {
@@ -43,7 +39,7 @@ export default class PbDropdown extends PbEnhancedElement {
   handleDocumentClick(event) {
     if (this.isClickOutside(event) && this.target.classList.contains('open')) {
         this.hideElement(this.target);
-        this.displayDownArrow();
+        this.updateArrowDisplay(false);
     }
 }
 
@@ -78,7 +74,7 @@ isClickOutside(event) {
     if (customTrigger) {
         if (this.target.classList.contains('open')) {
           this.hideElement(this.target)
-          this.displayDownArrow()
+          this.updateArrowDisplay(false);
         }
     }
 
@@ -121,18 +117,10 @@ isClickOutside(event) {
   toggleElement(elem) {
     if (elem.classList.contains('open')) {
       this.hideElement(elem)
-      this.displayDownArrow()
+      this.updateArrowDisplay(false);
       return
     }
     this.showElement(elem)
-    this.displayUpArrow()
-  }
-
-  displayDownArrow() {
-    this.updateArrowDisplay(false);
-  }
-
-  displayUpArrow() {
     this.updateArrowDisplay(true);
   }
 

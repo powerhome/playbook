@@ -18,7 +18,7 @@ export class PbDropdownKeyboard {
                 event.preventDefault();
                 if (!this.dropdown.target.classList.contains('open')) {
                   this.dropdown.showElement(this.dropdown.target);
-                  this.dropdown.displayUpArrow();
+                  this.dropdown.updateArrowDisplay(true);
               }
                 this.moveFocus(1);
                 break;
@@ -33,7 +33,7 @@ export class PbDropdownKeyboard {
               } else {
                   if (!this.dropdown.target.classList.contains('open')) {
                       this.dropdown.showElement(this.dropdown.target);
-                      this.dropdown.displayUpArrow();
+                      this.dropdown.updateArrowDisplay(true);
                   }
               }
               break;
@@ -42,7 +42,7 @@ export class PbDropdownKeyboard {
                 break;
                 case 'Tab':
                   this.dropdown.hideElement(this.dropdown.target);
-                  this.dropdown.displayDownArrow();
+                  this.dropdown.updateArrowDisplay(false);
                   this.resetFocus();
                   break;
             default:
