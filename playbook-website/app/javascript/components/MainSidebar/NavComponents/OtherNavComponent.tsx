@@ -1,7 +1,6 @@
 import React from "react";
 import { NavItem } from "playbook-ui";
 import { VisualGuidelinesItems } from "../MenuData/GuidelinesNavItems";
-import { GuidesNavItems } from "../MenuData/GuildesNavItems";
 
 export const OtherNavItems = ({
   name,
@@ -11,7 +10,8 @@ export const OtherNavItems = ({
   setIsActive,
   isActive,
   updateTopLevelNav,
-  parentIndex
+  parentIndex,
+  getting_started
 }) => {
   //transform text from samples yml
   const transformMenuTitle = (link) => {
@@ -34,6 +34,11 @@ export const OtherNavItems = ({
     }
   }
   let menuItems: { [key: string]: string }[] | string[] = [];
+  
+  const guidesNavItems = getting_started["pages"].map(guide => ({
+    name: guide.title,
+    link: `/${guide.url}`
+  }));
 
   //conditionally render navitems depending on name
   if (name === "Tokens & Guidelines") {
@@ -41,7 +46,7 @@ export const OtherNavItems = ({
   } else if (name === "UI Samples" && samples) {
     menuItems = samplesMenu;
   } else if (name === "Getting Started") {
-    menuItems = GuidesNavItems;
+    menuItems = guidesNavItems;
   }
 
   const handleItemClick = (link, i) => {
