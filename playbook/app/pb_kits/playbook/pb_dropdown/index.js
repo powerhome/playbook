@@ -95,45 +95,17 @@ isClickOutside(event) {
   }
 
   showElement(elem) {
-  // Get the natural height of the element
-    const getHeight = () => {
-      elem.style.display = 'block'
-      const height = elem.scrollHeight + 'px' // Get it's height
-      elem.style.display = '' //  Hide it again
-      return height
-    }
-
-    const height = getHeight()
-    elem.classList.add('open')
-    elem.classList.remove('close')
-
-    elem.style.height = height // Update the max-height
-    elem.style.overflow = "hidden"
-
-    // Once the transition is complete, remove the inline max-height so the content can scale responsively
-    window.setTimeout(() => {
-      elem.style.height = ''
-      elem.style.overflow = "visible"
-    }, 300)
+    elem.classList.remove('close');
+    elem.classList.add('open');
+    elem.style.height = elem.scrollHeight + 'px';
   }
 
   hideElement(elem) {
-    // Give the element a height to change from
-    elem.style.height = elem.scrollHeight + 'px'
-
+    elem.style.height = elem.scrollHeight + 'px';
     window.setTimeout(() => {
-      elem.style.height = '0'
-      elem.style.paddingTop = '0'
-      elem.style.paddingBottom = '0'
-      elem.style.overflow = "hidden"
-    }, 0)
-
-    // When the transition is complete, hide it
-    window.setTimeout(() => {
-      elem.classList.add("close")
-      elem.classList.remove('open')
-      elem.style.overflow = ""
-    }, 0)
+      elem.classList.add('close');
+      elem.classList.remove('open');
+    }, 0);
   }
 
   toggleElement(elem) {
@@ -142,28 +114,24 @@ isClickOutside(event) {
       this.displayDownArrow()
       return
     }
-    // Otherwise, show it
     this.showElement(elem)
     this.displayUpArrow()
   }
 
   displayDownArrow() {
-    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR)
-    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR)
-    if (!downArrow || !upArrow) {
-      return
-    }
-    downArrow.style.display = 'inline-block'
-    upArrow.style.display = 'none'
+    this.updateArrowDisplay(false);
   }
 
   displayUpArrow() {
-    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR)
-    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR)
-    if (!downArrow || !upArrow) {
-      return
+    this.updateArrowDisplay(true);
+  }
+
+  updateArrowDisplay(isOpen) {
+    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR);
+    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR);
+    if (downArrow && upArrow) {
+      downArrow.style.display = isOpen ? 'none' : 'inline-block';
+      upArrow.style.display = isOpen ? 'inline-block' : 'none';
     }
-    upArrow.style.display = 'inline-block'
-    downArrow.style.display = 'none'
-   }
+  }
 }
