@@ -102,7 +102,7 @@ const BarGraph = ({
       max: yAxisMax,
       opposite: false,
       title: {
-        text: typeof axisTitle === 'string' ? axisTitle : axisTitle[0].name,
+        text: Array.isArray(axisTitle) ? (axisTitle.length > 0 ? axisTitle[0].name : null) : axisTitle,
       },
       plotLines: typeof yAxisMin !== 'undefined' && yAxisMin !== null ? [] : [{
         value: 0,

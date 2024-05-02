@@ -48,7 +48,7 @@ module Playbook
       end
 
       def wrapper_classname
-        "pb_progress_simple_wrapper_#{align}"
+        generate_classname("pb_progress_simple_wrapper_#{align}")
       end
 
       def classname

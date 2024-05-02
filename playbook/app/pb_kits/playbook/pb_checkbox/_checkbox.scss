@@ -74,12 +74,61 @@ $transition: $transition_cubic;
         opacity: $opacity_10;
       }
     }
+
+    &:disabled ~ .pb_checkbox_checkmark {
+      cursor: not-allowed;
+      background-color: mix($charcoal, $white, 5%);
+      border-color: $border_light;
+
+      & ~ .pb_checkbox_label {
+        cursor: not-allowed;
+        color: $text_lt_light;
+      }
+      & ~ .pb_checkbox_label .pb_body_kit {
+        cursor: not-allowed;
+        color: $text_lt_light;
+      }
+    }
+
+    &:disabled:checked ~ .pb_checkbox_checkmark {
+      background-color: $neutral;
+      border-color: $neutral;
+    }
+
+    &:disabled:checked:hover ~ .pb_checkbox_checkmark {
+      background-color: $neutral;
+      border-color: $neutral;
+    }
   }
 
   &.dark {
     input {
       &:focus ~ .pb_checkbox_checkmark {
         box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;      
+      }
+
+      &:disabled ~ .pb_checkbox_checkmark {
+        cursor: not-allowed;
+        background-color: mix($charcoal, $white, 80%);
+        border: 2px solid $border_dark;
+
+        & ~ .pb_checkbox_label {
+          cursor: not-allowed;
+          color: $text_dk_light;
+        }
+        & ~ .pb_checkbox_label .pb_body_kit {
+          cursor: not-allowed;
+          color: $text_dk_light;
+        }
+      }
+
+      &:disabled:checked ~ .pb_checkbox_checkmark {
+        background-color: $border_dark;
+      }
+
+      &:disabled:checked:hover ~ .pb_checkbox_checkmark {
+        background-color: $border_dark;
+        border-color: $border_dark;
       }
     }
     
