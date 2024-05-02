@@ -1,6 +1,6 @@
 <%= pb_content_tag do %>
     <% if content.present? %>
-        <div style="display: inline-block" tab-index= 0 data-dropdown-custom-trigger>
+        <div style="display: inline-block" tabindex="0" data-dropdown-custom-trigger>
           <%= content.presence %>
         </div>
     <% else %>
@@ -11,7 +11,9 @@
         cursor: "pointer", 
         justify: "between", 
         padding_x:"sm", 
-        padding_y:"xs"}) do %>
+        padding_y:"xs",
+        html_options: {tabindex:"0"}
+        }) do %>
         <%= pb_rails("flex/flex_item") do %>
             <%= pb_rails("flex", props: {align: "center"}) do %>
                 <% if object.custom_display.present?  %>
