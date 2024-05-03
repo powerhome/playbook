@@ -17,7 +17,7 @@ const DropdownWithAutocompleteAndCustomDisplay = (props) => {
       label: "Ramon Ruiz",
       value: "Ramon Ruiz",
       territory: "PHL",
-      title: "Senior UX Desinger",
+      title: "Senior UX Designer",
       id: "ramon-ruiz",
       status: "Away"
     },
