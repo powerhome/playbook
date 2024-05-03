@@ -1,3 +1,5 @@
+![Date-Range-Inline-Default](https://github.com/powerhome/playbook-swift/assets/54749071/793dc133-b2a8-4283-96e1-c8b19065392d)
+
 ```swift
 VStack(alignment: .leading, spacing: Spacing.large) {
   VStack(alignment: .leading, spacing: Spacing.small) {
