@@ -52,7 +52,7 @@
                     <%= pb_rails("user", props: {name: option[:label], align:"left", avatar: true, orientation:"horizontal", territory:option[:territory], title: option[:title]}) %>
                 <% end %>
                 <%= pb_rails("flex/flex_item") do %>
-                    <%= pb_rails("badge", props: {rounded: true, text: option[:status], variant: option[:status] == "Offline" ? "neutral" : option[:status] == "Online" ? "success" : "warning" }) %>
+                    <%= pb_rails("badge", props: {rounded: true, dark: true, text: option[:status], variant: option[:status] == "Offline" ? "neutral" : option[:status] == "Online" ? "success" : "warning" }) %>
                 <% end %>
             <% end %>
         <% end %>
