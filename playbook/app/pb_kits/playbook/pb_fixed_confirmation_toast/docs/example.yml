@@ -22,4 +22,4 @@ examples:
   #- fixed_confirmation_toast_positions_swift: Click to Show Positions
   - fixed_confirmation_toast_children_swift: Children
   #- fixed_confirmation_toast_dismiss_with_timer_swift: Timer
-  - fixed_confirmation_toast_props_swift: “”
+  - fixed_confirmation_toast_props_swift: ""
