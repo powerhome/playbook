@@ -33,6 +33,9 @@ PbTable.start()
 import PbTextarea from './pb_textarea'
 PbTextarea.start()
 
+import PbDropdown from './pb_dropdown'
+PbDropdown.start()
+
 import PbAdvancedTable from './pb_advanced_table'
 PbAdvancedTable.start()
 
