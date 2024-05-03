@@ -181,6 +181,35 @@ const CardHeader = (props) => {
                     />
                 </Card.Body>
             </Card>
+
+            <Title
+                {...props}
+                marginBottom='sm'
+                size={4}
+                tag="h4"
+                text="Subtle Status Colors"
+            />
+
+            <Card
+                {...props}
+                marginBottom='sm'
+                padding="none"
+            >
+                <Card.Header
+                    headerColor="error_subtle"
+                >
+                    <Body
+                        {...props}
+                        text="Error Subtle"
+                    />
+                </Card.Header>
+                <Card.Body>
+                    <Body
+                        {...props}
+                        text="Body"
+                    />
+                </Card.Body>
+            </Card>
         </>
     )
 }
