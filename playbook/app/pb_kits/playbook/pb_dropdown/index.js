@@ -37,8 +37,10 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleOptionClick(event) {
     const option = event.target.closest(OPTION_SELECTOR);
+    const hiddenInput = this.element.querySelector("#dropdown-selected-option");
     if (option) {
       const value = option.dataset.dropdownOptionLabel;
+      hiddenInput.value = JSON.parse(value).id;
       this.onOptionSelected(value, option);
     }
   }
