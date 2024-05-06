@@ -1,4 +1,8 @@
-<%= pb_content_tag do %>
+<%= content_tag(:div,
+      aria: object.aria,
+      class: object.classname,
+      data: object.data,
+      id: object.id) do %>
         <%= pb_rails("table/table_row", props: {tag:"div"}) do %>
             <% object.column_definitions.each_with_index do |item, index| %>
                 <%= pb_rails("table/table_header", props: { tag:"div", id:item[:accessor], classname:object.th_classname}) do %>

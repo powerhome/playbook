@@ -1,4 +1,8 @@
-<%= pb_content_tag do %>
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname,
+    **combined_html_options) do %>
 
     <%= pb_rails("body", props: { color: "light", dark: object.dark, classname: "pb_time_stacked time-spacing" }) do %>
       <time>

@@ -1,10 +1,20 @@
 <%= content_tag(:div) do %>
   <% if object.tag == "table" %>
-    <%= pb_content_tag(:table) do %>
+    <%= content_tag(:table,
+      aria: object.aria,
+      class: object.classname,
+      data: object.data,
+      id: object.id,
+      **combined_html_options) do %>
       <%= content.presence %>
     <% end %>
   <% else %>
-    <%= pb_content_tag do %>
+    <%= content_tag(:div,
+      aria: object.aria,
+      class: object.classname,
+      data: object.data,
+      id: object.id,
+      **combined_html_options) do %>
       <%= content.presence %>
     <% end %>
   <% end %>
