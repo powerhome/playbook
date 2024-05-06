@@ -68,14 +68,3 @@
     Body
   <% end %>
 <% end %>
-
-<%= pb_rails("title", props: { text: "Subtle Status Colors", tag: "h4", size: 4, margin_bottom: "sm" }) %>
-
-<%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
-  <%= pb_rails("card/card_header", props: { padding: "sm", header_color: "error_subtle" }) do %>
-    <%= pb_rails("body", props: { text: "Error Subtle", }) %>
-  <% end %>
-  <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-    Body
-  <% end %>
-<% end %>
