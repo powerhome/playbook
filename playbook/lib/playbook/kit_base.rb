@@ -81,7 +81,7 @@ module Playbook
     end
 
     # rubocop:disable Style/OptionalBooleanParameter
-    def pb_content_tag(name = :div, content_or_options_with_block = {}, options = {}, escape = true, &block)
+    def pb_content_tag(name, content_or_options_with_block = nil, options = {}, escape = true, &block)
       combined_options = options
                          .merge(combined_html_options)
                          .merge(default_options.merge(content_or_options_with_block))

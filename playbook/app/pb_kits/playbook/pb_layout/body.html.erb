@@ -1,3 +1,7 @@
-<%= pb_content_tag(object.tag) do %>
+<%= content_tag(object.tag,
+    id: object.id,
+    data: object.data,
+    class: object.classname,
+    **combined_html_options) do %>
   <%= content.presence %>
 <% end %>

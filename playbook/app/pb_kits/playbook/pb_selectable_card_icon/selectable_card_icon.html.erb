@@ -1,4 +1,7 @@
-<%= pb_content_tag do %>
+<%= content_tag(:div,
+    data: object.data,
+    class: object.classname,
+    **combined_html_options) do %>
 
   <%= pb_rails("selectable_card", props: {
     input_id: object.input_id,

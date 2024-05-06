@@ -1,4 +1,4 @@
-<%= pb_content_tag(:div, class: object.classname + object.size_class) do %>
+<%= content_tag(:div, id: object.id, data: object.data, class: object.classname + object.size_class, **combined_html_options) do %>
   <% if object.name.present? %>
     <%= pb_rails("avatar", props: { name: object.name, image_url: object.avatar_url, size: "xs" }) %>
       <%= pb_rails("title", props: { text: object.name, size: 4, classname: "pb_form_pill_text" }) %>

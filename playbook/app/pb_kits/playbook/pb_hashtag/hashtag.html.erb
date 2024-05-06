@@ -1,4 +1,9 @@
-<%= pb_content_tag(:span) do %>
+<%= content_tag(:span,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id,
+    **combined_html_options) do %>
   <%= link_to object.url, target: object.link_option do %>
     <%= pb_rails("badge", props: { dark: object.dark, variant: "primary", text: object.hashtag_text }) %>
   <% end %>
