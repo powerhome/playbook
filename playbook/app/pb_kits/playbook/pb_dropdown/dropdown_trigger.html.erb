@@ -1,4 +1,9 @@
-<%= pb_content_tag do %>
+<%= content_tag(:div,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id,
+    **combined_html_options) do %>
     <% if content.present? %>
         <div style="display: inline-block" tabindex="0" data-dropdown-custom-trigger>
           <%= content.presence %>
