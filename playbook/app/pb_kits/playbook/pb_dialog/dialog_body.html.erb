@@ -1,3 +1,8 @@
-<%= pb_content_tag do %>
-  <%= content.presence || object.text %>
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname,
+    aria: object.aria,
+    **combined_html_options) do %>
+        <%= content.presence || object.text %>
 <% end %>

@@ -1,14 +1,23 @@
 <% if object.image_url.present? %>
-  <%= pb_content_tag(object.tag,
+  <%= content_tag(object.tag,
+      aria: object.aria,
+      data: object.data,
+      id: object.id,
+      class: object.classname,
       style: "background-image: url('#{object.image_url}');
               background-repeat: #{object.background_repeat};
               background-size: #{object.background_size};
               background-position: #{object.background_position};",
+      **combined_html_options
   ) do %>
     <%= content.presence %>
   <% end %>
 <% else %>
-  <%= pb_content_tag(object.tag,
+  <%= content_tag(object.tag,
+      aria: object.aria,
+      data: object.data,
+      id: object.id,
+      class: object.classname,
       style: object.custom_background_color
   ) do %>
     <%= content.presence %>

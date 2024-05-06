@@ -1,11 +1,16 @@
   <% if object.collapsible %>
     <%= pb_rails("collapsible", props: { name: "collapsible-nav-example", classname: object.collapsible_nav_classname }) do %>
       <%= pb_rails("collapsible/collapsible_main", props: { name: "default-collapsible-nav", icon: object.collapsible_icons, size: "xs", dark: object.dark, classname:object.margin_classes }) do %>
-        <%= pb_content_tag(object.tag,
+        <%= content_tag(object.tag,
+          aria: object.aria,
+          class: object.classname,
+          data: object.data,
           dark: object.dark,
+          id: object.id,
           href: object.link && object.link,
           target: object.link && object.target,
-         ) do %>
+          **combined_html_options
+          ) do %>
           <% if object.image_url %>
             <%= pb_rails("image", props: { url: object.image_url, classname: "pb_nav_img_wrapper_collapsible" }) %>
           <% end %>
@@ -22,7 +27,13 @@
       <% end %>
     <% end %>
   <% else %>
-    <%= pb_content_tag(object.tag,
+    <%= content_tag(object.tag,
+      aria: object.aria,
+      class: object.classname,
+      **combined_html_options,
+      data: object.data,
+      dark: object.dark,
+      id: object.id,
       href: object.link && object.link,
       target: object.link && object.target
       ) do %>
