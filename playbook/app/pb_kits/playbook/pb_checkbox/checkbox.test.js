@@ -92,3 +92,17 @@ test('has checked attribute', () => {
   const kit = screen.getByTestId(testId)
   expect(kit.getElementsByTagName('input')[0]).toHaveAttribute('checked')
 })
+
+test('has disabled attribute', () => {
+  render(
+    <Checkbox
+        data={{ testid: testId }}
+        disabled
+        name="checkbox-name"
+        text="Checkbox"
+        value="check-box value"
+    />)
+  const kit = screen.getByTestId(testId)
+  const input = kit.querySelector('input')
+  expect(input).toHaveAttribute('disabled')
+}) 

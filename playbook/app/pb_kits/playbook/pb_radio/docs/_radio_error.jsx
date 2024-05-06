@@ -1,7 +1,7 @@
 import React from 'react'
 import { Radio } from '../..'
 
-const RadioError = () => {
+const RadioError = (props) => {
   return (
     <div>
       <Radio
@@ -9,6 +9,7 @@ const RadioError = () => {
           label="Power"
           name="Group2"
           value="Power"
+          {...props}
       />
     </div>
   )

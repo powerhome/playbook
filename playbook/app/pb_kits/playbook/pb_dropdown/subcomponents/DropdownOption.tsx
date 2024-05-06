@@ -17,35 +17,37 @@ import { GenericObject } from "../../types";
 
 type DropdownOptionProps = {
   aria?: { [key: string]: string };
-  className?: string;
   children?: React.ReactChild[] | React.ReactChild;
+  className?: string;
+  dark?: boolean;
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
-  option?: GenericObject;
   key?: string;
+  option?: GenericObject;
   padding?: string;
 }  & GlobalProps;
 
 const DropdownOption = (props: DropdownOptionProps) => {
   const {
     aria = {},
-    className,
     children,
+    className,
+    dark = false,
     data = {},
     htmlOptions = {},
     id,
-    option,
     key,
+    option,
     padding = "xs",
   } = props;
 
   const {
+    filteredOptions,
+    filterItem,
+    focusedOptionIndex,
     handleOptionClick,
     selected,
-    filterItem,
-    filteredOptions,
-    focusedOptionIndex,
   } = useContext(DropdownContext);
 
   const isItemMatchingFilter = (option: GenericObject) =>
@@ -57,20 +59,22 @@ const DropdownOption = (props: DropdownOptionProps) => {
   const isFocused =
     focusedOptionIndex >= 0 &&
     filteredOptions[focusedOptionIndex].label === option.label;
-  const focusedClass = isFocused && "dropdown_option_focused";
+  const focusedClass = isFocused && "focused";
 
   const selectedClass = `${
     selected.label === option.label
-      ? "dropdown_option_selected"
-      : "dropdown_option_list"
+      ? "selected"
+      : "list"
   }`;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
-    buildCss("pb_dropdown_option"),
-    selectedClass,
-    focusedClass,
+    buildCss(
+      "pb_dropdown_option",
+      selectedClass,
+      focusedClass,
+    ),
     globalProps(props, {padding}),
     className
   );
@@ -87,18 +91,24 @@ const DropdownOption = (props: DropdownOptionProps) => {
     >
       <ListItem
           cursor="pointer"
+          dark={dark}
           data-name={option.value}
           key={option.label}
           padding="none"
       >
         <Flex
             align="center"
-            className="dropdown_option"
+            className="dropdown_option_wrapper"
             justify="between"
             paddingX="sm"
             paddingY="xxs"
         >
-          {children ? children : <Body text={option.label} />}
+          {children ? 
+              children : 
+              <Body dark={dark} 
+                  text={option.label} 
+              />
+          }
         </Flex>
       </ListItem>
     </div>

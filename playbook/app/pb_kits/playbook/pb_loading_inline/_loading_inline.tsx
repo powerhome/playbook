@@ -14,6 +14,7 @@ type LoadingInlineProps = {
   data?: { [key: string]: string },
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
+  text?: string,
 }
 
 const LoadingInline = (props: LoadingInlineProps) => {
@@ -24,6 +25,7 @@ const LoadingInline = (props: LoadingInlineProps) => {
     data = {},
     htmlOptions = {},
     id,
+    text = ' Loading',
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -50,7 +52,7 @@ const LoadingInline = (props: LoadingInlineProps) => {
             icon="spinner"
             pulse
         />
-        {' Loading'}
+        {text}
       </Body>
     </div>
   )

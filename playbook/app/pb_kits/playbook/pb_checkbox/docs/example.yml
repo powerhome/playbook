@@ -6,6 +6,7 @@ examples:
     - checkbox_error: Default w/ Error
     - checkbox_options: Checkbox w/ Options
     - checkbox_indeterminate: Indeterminate Checkbox
+    - checkbox_disabled: Disabled Checkbox
 
   react:
   - checkbox_default: Default
@@ -13,6 +14,7 @@ examples:
   - checkbox_custom: Custom Checkbox
   - checkbox_error: Default w/ Error
   - checkbox_indeterminate: Indeterminate Checkbox
+  - checkbox_disabled: Disabled Checkbox
 
   swift:
     - checkbox_default_swift: Default

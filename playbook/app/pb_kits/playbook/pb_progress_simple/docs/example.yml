@@ -3,6 +3,7 @@ examples:
   rails:
   - progress_simple_default: Default
   - progress_simple_value: Setting Values
+  - progress_simple_flex: Within a Flex  
   - progress_simple_width: Progress Bar Width
   - progress_simple_variants: Variants
   - progress_simple_muted: Muted
@@ -12,6 +13,7 @@ examples:
   react:
   - progress_simple_default: Default
   - progress_simple_value: Setting Values
+  - progress_simple_flex: Within a Flex  
   - progress_simple_width: Progress Bar Width
   - progress_simple_variants: Variants
   - progress_simple_muted: Muted

@@ -11,6 +11,7 @@ RSpec.describe Playbook::PbLoadingInline::LoadingInline do
       .with_default("left")
       .with_values("left", "center", "right")
   }
+  it { is_expected.to define_prop(:text).with_default("Loading") }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_loading_inline_kit_left"

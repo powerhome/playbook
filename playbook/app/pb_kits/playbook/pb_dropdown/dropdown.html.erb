@@ -1,0 +1,20 @@
+<%= pb_content_tag do %>
+    <% if object.label.present? %>
+        <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
+    <% end %>
+    <div class="dropdown_wrapper" style="position: relative">
+    <% if content.present? %>
+        <%= content.presence %>
+    <% else %>
+        <%= pb_rails("dropdown/dropdown_trigger") %>
+        <%= pb_rails("dropdown/dropdown_container") do %>
+            <% if object.options.present? %>
+                <% object.options.each do |option| %>
+                    <%= pb_rails("dropdown/dropdown_option", props: {option: option}) %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+    </div>
+<% end %>
+  

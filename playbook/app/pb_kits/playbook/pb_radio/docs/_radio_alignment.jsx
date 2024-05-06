@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Radio } from '../../'
 
-const RadioAlignment = () => {
+const RadioAlignment = (props) => {
   return (
     <Flex>
       <Radio
@@ -11,6 +11,7 @@ const RadioAlignment = () => {
           name="Group2"
           tabIndex={0}
           value="Power"
+          {...props}
       />
       <br />
       <Radio
@@ -20,6 +21,7 @@ const RadioAlignment = () => {
           marginRight="sm"
           name="Group2"
           value="Nitro"
+          {...props}
       />
       <br />
       <Radio
@@ -28,6 +30,7 @@ const RadioAlignment = () => {
           label="Google"
           name="Group2"
           value="Google"
+          {...props}
       />
     </Flex>
   )
