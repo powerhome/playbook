@@ -1,3 +1,8 @@
+**NOTE:** The Advanced Table kit uses the [Tanstack Table v8](https://tanstack.com/table/v8/docs/introduction) under the hood to render advanced tables that allow for complex, nested data structures with expansion and sort options.
+<br />
+<br />
+<br />
+
 The AdvancedTable kit accepts tree data and automatically renders expansion controls for nested subrows, to any depth, based on the data it is given. In it's simplest form, __the kit has two required props__: 
 
 ### tableData

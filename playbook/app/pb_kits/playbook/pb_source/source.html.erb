@@ -1,4 +1,8 @@
-<%= pb_content_tag do %>
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname,
+    **combined_html_options) do %>
   <div class="pb__source_layout">
     <% if !object.hide_icon %>
       <% if object.show_icon? %>
