@@ -101,7 +101,6 @@ export default class PbDropdown extends PbEnhancedElement {
       option.classList.remove("pb_dropdown_option_selected");
     });
     selectedOption.classList.add("pb_dropdown_option_selected");
-    console.log(`Selected value: ${value}`);
   }
 
   get target() {
