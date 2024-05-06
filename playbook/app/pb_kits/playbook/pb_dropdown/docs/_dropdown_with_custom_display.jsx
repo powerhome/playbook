@@ -17,7 +17,7 @@ const DropdownWithCustomDisplay = (props) => {
       label: "Ramon Ruiz",
       value: "Ramon Ruiz",
       territory: "PHL",
-      title: "Senior UX Desinger",
+      title: "Senior UX Designer",
       id: "ramon-ruiz",
       status: "Away"
     },
@@ -39,7 +39,7 @@ const DropdownWithCustomDisplay = (props) => {
     }
   ];
 
-  const customDisplay = () => {
+  const CustomDisplay = () => {
     return (
       <>
       {
@@ -62,7 +62,9 @@ const DropdownWithCustomDisplay = (props) => {
         options={options}
         {...props}
     >
-      <Dropdown.Trigger customDisplay={customDisplay()}/>
+      <Dropdown.Trigger customDisplay={<CustomDisplay/>}
+          placeholder="Select a User"
+      />
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}
@@ -79,7 +81,7 @@ const DropdownWithCustomDisplay = (props) => {
                 />
               </FlexItem>
               <FlexItem>
-                <Badge
+                <Badge dark
                     rounded
                     text={option.status}
                     variant={`${

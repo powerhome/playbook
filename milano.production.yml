@@ -13,8 +13,9 @@ rollback:
   <<: *deploy
 
 links:
-  logs: "https://logging.prod.hq.powerapp.cloud/app/kibana#/discover?_g=()&_a=(columns:!(_source),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:c18d3bb0-80c3-11ed-928d-67e2505d2bc3,key:kubernetes.namespace_name,negate:!f,params:(query:playbook-$ENVIRONMENT,type:phrase),type:phrase,value:playbook-$ENVIRONMENT),query:(match:(kubernetes.namespace_name:(query:playbook-$ENVIRONMENT,type:phrase))))),index:c18d3bb0-80c3-11ed-928d-67e2505d2bc3,interval:auto,query:(language:lucene,query:''),sort:!(time,desc))"
-  metrics: "https://metrics.powerapp.cloud/d/s9c8D_K7k/pod-resource-usage?orgId=1&refresh=10s&var-datasource=prometheus-app-prod-hq&var-namespace=playbook-$ENVIRONMENT&var-filter=.%2B&var-pod=All"
+  logs: "https://splunk.powerapp.cloud/en-US/app/search/search?q=search%20k8s.namespace.name%3D%22$GITHUB_REPO_NAME-$ENVIRONMENT%22&earliest=-15m&latest=now"
+  metrics_hq: "https://metrics.powerapp.cloud/d/s9c8D_K7k/pod-resource-usage?orgId=1&refresh=1m&var-datasource=prometheus-app-prod-hq&var-namespace=playbook-production&var-filter=.*&var-pod=All"
+  metrics_gotham: "https://metrics.powerapp.cloud/d/s9c8D_K7k/pod-resource-usage?orgId=1&var-datasource=prometheus-app-prod-gm&var-namespace=playbook-production&var-filter=.*&var-pod=All&refresh=1m"
 
 ci:
   require:

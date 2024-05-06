@@ -75,7 +75,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="xl"
         /> 
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -98,7 +97,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="xxs"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -110,7 +108,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="xxs"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -122,7 +119,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="xxs"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -145,7 +141,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="xs"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -157,7 +152,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="xs"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -169,7 +163,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="xs"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -192,7 +185,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="sm"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -204,7 +196,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="sm"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -216,7 +207,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="sm"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -239,7 +229,6 @@ const AvatarCircleIconComponentOverlay = () => {
         size="md"
     />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -251,7 +240,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="md"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -263,7 +251,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="md"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -286,7 +273,7 @@ const AvatarCircleIconComponentOverlay = () => {
             marginBottom="sm"
             size="lg"
         />
-        {/* New code */}
+
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -298,7 +285,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="lg"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -310,7 +296,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="lg"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -333,7 +318,6 @@ const AvatarCircleIconComponentOverlay = () => {
         size="xl"
     />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",
@@ -345,7 +329,6 @@ const AvatarCircleIconComponentOverlay = () => {
             size="xl"
         />
 
-        {/* New code */}
         <Avatar
             componentOverlay={{
                 component: "iconCircle",

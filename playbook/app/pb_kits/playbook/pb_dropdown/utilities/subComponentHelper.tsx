@@ -4,11 +4,12 @@ import DropdownContainer from "../subcomponents/DropdownContainer";
 
 type PrepareComponentsProps = {
   children: React.ReactChild[] | React.ReactChild;
-  hasTriggerSubcomponent: boolean;
-  hasContainerSubcomponent: boolean;
-  trigger: React.ReactChild;
   container: React.ReactChild;
+  dark?: boolean;
+  hasContainerSubcomponent: boolean;
+  hasTriggerSubcomponent: boolean;
   otherChildren: React.ReactChild[];
+  trigger: React.ReactChild;
 };
 
 export const separateChildComponents = (children: React.ReactChild[] | React.ReactChild | ReactElement[]) => {
@@ -36,19 +37,20 @@ export const prepareSubcomponents = ({
   trigger,
   container,
   otherChildren,
+  dark
 }: PrepareComponentsProps) => {
   const componentsToRender = [];
 
   if (!hasTriggerSubcomponent && !hasContainerSubcomponent) {
-    componentsToRender.push(<DropdownTrigger />);
-    componentsToRender.push(<DropdownContainer>{children}</DropdownContainer>);
+    componentsToRender.push(<DropdownTrigger dark={dark}/>);
+    componentsToRender.push(<DropdownContainer dark={dark}>{children}</DropdownContainer>);
   } else if (!hasTriggerSubcomponent && hasContainerSubcomponent) {
-    componentsToRender.push(<DropdownTrigger />);
+    componentsToRender.push(<DropdownTrigger dark={dark}/>);
     componentsToRender.push(children);
   } else if (hasTriggerSubcomponent && !hasContainerSubcomponent) {
     componentsToRender.push(trigger);
     componentsToRender.push(
-      <DropdownContainer>{otherChildren}</DropdownContainer>
+      <DropdownContainer dark={dark}>{otherChildren}</DropdownContainer>
     );
   } else {
     componentsToRender.push(trigger);

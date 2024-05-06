@@ -14,8 +14,10 @@ module Playbook
         output << pb_rails("advanced_table/table_row", props: { row: row, column_definitions: column_definitions, depth: current_depth })
 
         if row[:children].present?
-          row[:children].each do |child_row|
-            output << render_row_and_children(child_row, column_definitions, current_depth + 1)
+          output << content_tag(:div, class: "toggle-content", data: { advanced_table_content: row.object_id }) do
+            row[:children].map do |child_row|
+              render_row_and_children(child_row, column_definitions, current_depth + 1)
+            end.join.html_safe
           end
         end
 

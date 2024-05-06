@@ -133,6 +133,7 @@ export { default as dialogHelper } from './pb_dialog/dialogHelper'
 //Theming
 export {default as mapTheme} from './pb_map/pbMapTheme'
 export {default as useCollapsible} from './pb_collapsible/useCollapsible'
+export {default as useDropdown } from './pb_dropdown/hooks/useDropdown'
 
 // CSS Tokens
 export { default as borderRadius } from './tokens/exports/_border_radius.scss'

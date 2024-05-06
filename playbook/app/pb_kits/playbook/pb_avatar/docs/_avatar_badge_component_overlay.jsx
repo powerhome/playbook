@@ -75,7 +75,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="xl"
             /> 
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -98,7 +98,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="xxs"
             />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -110,7 +110,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="xxs"
             />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -122,7 +122,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="xxs"
             />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -145,7 +145,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="xs"
             />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -157,7 +157,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="xs"
             />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -169,7 +169,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="xs"
             />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -192,7 +192,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="sm"
             />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -204,7 +204,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="sm"
             />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -216,7 +216,6 @@ const AvatarBadgeComponentOverlay = () => {
                 size="sm"
             />
 
-            {/* New code */}
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -239,7 +238,7 @@ const AvatarBadgeComponentOverlay = () => {
             size="md"
         />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -251,7 +250,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="md"
             />
 
-            {/* New code */}
+ 
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -286,7 +285,7 @@ const AvatarBadgeComponentOverlay = () => {
                 marginBottom="sm"
                 size="lg"
             />
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -298,7 +297,6 @@ const AvatarBadgeComponentOverlay = () => {
                 size="lg"
             />
 
-            {/* New code */}
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -310,7 +308,6 @@ const AvatarBadgeComponentOverlay = () => {
                 size="lg"
             />
 
-            {/* New code */}
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -333,7 +330,7 @@ const AvatarBadgeComponentOverlay = () => {
             size="xl"
         />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",
@@ -345,7 +342,7 @@ const AvatarBadgeComponentOverlay = () => {
                 size="xl"
             />
 
-            {/* New code */}
+
             <Avatar
                 componentOverlay={{
                     component: "badge",

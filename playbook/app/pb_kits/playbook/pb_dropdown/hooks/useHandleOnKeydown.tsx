@@ -6,16 +6,21 @@ export const useHandleOnKeyDown = () => {
 
 const {
   autocomplete,
-  focusedOptionIndex,
   filteredOptions,
-  setFocusedOptionIndex,
-  handleOptionClick,
-  setIsDropDownClosed,
+  focusedOptionIndex,
   handleBackspace,
-  selected
+  handleOptionClick,
+  selected,
+  setFocusedOptionIndex,
+  setIsDropDownClosed,
 }= useContext(DropdownContext)
 
   return (e: React.KeyboardEvent) => {
+
+    if (e.key !== "Tab" && autocomplete && selected && selected.label) {
+      handleBackspace();
+    }
+
     switch (e.key) {
     case "Backspace":
     case "Delete":
@@ -43,13 +48,13 @@ const {
         e.preventDefault();
         handleOptionClick(filteredOptions[focusedOptionIndex]);
         setFocusedOptionIndex(-1)
+      } else if (focusedOptionIndex === -1) {
+        setIsDropDownClosed(false)
       }
       break;
-    default:
-        if (selected && selected.label) {
-          e.preventDefault();
-          handleBackspace();
-        }
+      case "Tab":
+        setIsDropDownClosed(true);
+        setFocusedOptionIndex(-1)
         break;
   }
 }

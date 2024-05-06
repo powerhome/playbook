@@ -94,6 +94,20 @@
     position: relative;
   }
 
+  .toggle-content {
+    display: none;
+    height: 0;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    overflow: hidden;
+    transition: height 300ms, padding 300ms ease-in-out;
+  }
+
+  .toggle-content.is-visible {
+    display: contents;
+    height: auto;
+  }
+
   &.dark {
     .bg-white {
       background: $bg_dark_card;

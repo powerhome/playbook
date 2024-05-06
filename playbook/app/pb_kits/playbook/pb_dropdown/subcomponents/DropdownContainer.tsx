@@ -4,6 +4,7 @@ import {
   buildAriaProps,
   buildCss,
   buildDataProps,
+  buildHtmlProps
 } from "../../utilities/props";
 import { globalProps } from "../../utilities/globalProps";
 
@@ -16,9 +17,11 @@ import Body from "../../pb_body/_body";
 
 type DropdownContainerProps = {
   aria?: { [key: string]: string };
-  className?: string;
   children?: React.ReactChild[] | React.ReactChild;
+  className?: string;
+  dark?: boolean;
   data?: { [key: string]: string };
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   searchbar?: boolean;
 };
@@ -26,24 +29,29 @@ type DropdownContainerProps = {
 const DropdownContainer = (props: DropdownContainerProps) => {
   const {
     aria = {},
-    className,
     children,
+    className,
+    dark = false,
     data = {},
+    htmlOptions = {},
     id,
     searchbar = false,
   } = props;
 
   const {
-    isDropDownClosed,
-    handleChange,
-    filterItem,
+    dropdownContainerRef,
     filteredOptions,
+    filterItem,
+    handleChange,
     inputRef,
+    isDropDownClosed,
     setFocusedOptionIndex,
+    triggerRef
   } = useContext(DropdownContext);
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_dropdown_container"),
     `${isDropDownClosed ? "close" : "open"}`,
@@ -54,12 +62,16 @@ const DropdownContainer = (props: DropdownContainerProps) => {
   return (
     <div {...ariaProps} 
         {...dataProps} 
+        {...htmlProps}
         className={classes} 
         id={id}
         onMouseEnter={() => setFocusedOptionIndex(-1)}
+        ref={dropdownContainerRef}
+        style={triggerRef ? {} : { position: "absolute"}}
     >
       {searchbar && (
-        <TextInput paddingTop="xs" 
+        <TextInput dark={dark}
+            paddingTop="xs" 
             paddingX="xs"
         >
             <input
@@ -70,9 +82,10 @@ const DropdownContainer = (props: DropdownContainerProps) => {
             />
         </TextInput>
       )}
-      <List>{
+      <List dark={dark}>
+        {
         filteredOptions?.length === 0 ? (
-          <ListItem
+          <ListItem dark={dark}
               display="flex"
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
@@ -80,6 +93,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
               padding="xs"
           >
             <Body color="light" 
+                dark={dark}
                 text="no option"
             />
           </ListItem>

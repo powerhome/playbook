@@ -1,0 +1,1 @@
+The optional `label` prop takes a string value that if present will render that string as the label for the Dropdown.
