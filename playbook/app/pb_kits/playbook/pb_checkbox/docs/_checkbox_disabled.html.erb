@@ -1,0 +1,23 @@
+<%= pb_rails("flex", props: {orientation: "column"}) do %>
+    <%= pb_rails("flex/flex_item") do %>
+        <%= pb_rails("checkbox" , props: {
+            input_options: { tabindex: 0 },
+            margin_bottom: "xs",
+            text: "Disabled unchecked",
+            value: "checkbox-value",
+            disabled: true,
+            name: "checkbox-name"
+        }) %>
+    <% end %>
+    <%= pb_rails("flex/flex_item") do %>
+        <%= pb_rails("checkbox" , props: {
+            input_options: { tabindex: 0 },
+            text: "Disabled checked",
+            value: "checkbox-value",
+            disabled: true,
+            checked: true,
+            name: "checkbox-name"
+        }) %>
+    <% end %>
+<% end %>
+

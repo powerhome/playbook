@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Dropdown, User, Badge, FlexItem, Avatar } from '../..'
 
 const DropdownWithAutocompleteAndCustomDisplay = (props) => {
-// eslint-disable-next-line no-unused-vars
   const [selectedOption, setSelectedOption] = useState();
 
   const options = [
@@ -18,7 +17,7 @@ const DropdownWithAutocompleteAndCustomDisplay = (props) => {
       label: "Ramon Ruiz",
       value: "Ramon Ruiz",
       territory: "PHL",
-      title: "Senior UX Desinger",
+      title: "Senior UX Designer",
       id: "ramon-ruiz",
       status: "Away"
     },

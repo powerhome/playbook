@@ -11,6 +11,7 @@ RSpec.describe Playbook::PbRadio::Radio do
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_prop(:value) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
+  it { is_expected.to define_prop(:disabled).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -21,6 +22,7 @@ RSpec.describe Playbook::PbRadio::Radio do
       expect(subject.new(dark: true, checked: true).classname).to eq "pb_radio_kit dark"
       expect(subject.new(checked: false, error: true).classname).to eq "pb_radio_kit error"
       expect(subject.new(alignment: "vertical", checked: false, dark: true, error: true).classname).to eq "pb_radio_kit dark error vertical"
+      expect(subject.new(disabled: true).disabled).to eq true
     end
   end
 end

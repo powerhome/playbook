@@ -14,6 +14,7 @@ type RadioProps = {
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
+  disabled?: boolean,
   error?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -31,6 +32,7 @@ const Radio = ({
   className,
   dark = false,
   data = {},
+  disabled = false,
   error = false,
   htmlOptions = {},
   id,
@@ -56,6 +58,7 @@ const Radio = ({
     else
     return (
     <input
+        disabled={disabled}
         id={id}
         name={name}
         onChange={onChange}

@@ -17,7 +17,7 @@ const DropdownWithCustomDisplay = (props) => {
       label: "Ramon Ruiz",
       value: "Ramon Ruiz",
       territory: "PHL",
-      title: "Senior UX Desinger",
+      title: "Senior UX Designer",
       id: "ramon-ruiz",
       status: "Away"
     },
@@ -81,7 +81,7 @@ const DropdownWithCustomDisplay = (props) => {
                 />
               </FlexItem>
               <FlexItem>
-                <Badge
+                <Badge dark
                     rounded
                     text={option.status}
                     variant={`${

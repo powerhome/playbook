@@ -69,3 +69,20 @@ test('returns dark + error class name', () => {
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveClass(`${kitClass} dark error`)
 })
+
+test('has disabled attribute', () => {
+  render(
+    <Radio
+        data={{ testid: testId }}
+        disabled
+        label="Power"
+        name="Group2"
+        value="Power"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = kit.querySelector('input')
+  expect(input).toHaveAttribute('disabled')
+})
+

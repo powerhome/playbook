@@ -11,6 +11,7 @@ module Playbook
                      default: false
       prop :error, type: Playbook::Props::Boolean,
                    default: false
+      prop :disabled, type: Playbook::Props::Boolean, default: false
       prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
       prop :name, type: Playbook::Props::String,
@@ -30,6 +31,10 @@ module Playbook
 
       def body_status
         error ? "negative" : nil
+      end
+
+      def input
+        radio_button_tag(name, value, checked, input_options.merge(disabled: disabled))
       end
 
     private

@@ -9,6 +9,7 @@ module Playbook
       prop :text
       prop :value
       prop :name
+      prop :disabled, type: Playbook::Props::Boolean, default: false
 
       prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
@@ -26,7 +27,7 @@ module Playbook
       end
 
       def input
-        check_box_tag(name, value, checked, input_options)
+        check_box_tag(name, value, checked, input_options.merge(disabled: disabled))
       end
 
       def checkbox_label_status

@@ -6,12 +6,14 @@ examples:
   - radio_error: With Error
   - radio_options: With Options
   - radio_alignment: Alignment
+  - radio_disabled: Disabled
 
   react:
   - radio_default: Default
   - radio_custom: Custom
   - radio_error: With Error
   - radio_alignment: Alignment
+  - radio_disabled: Disabled
 
   swift:
   - radio_default_swift: Default

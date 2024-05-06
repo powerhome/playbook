@@ -12,6 +12,7 @@ type CheckboxProps = {
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
+  disabled?: boolean,
   error?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -31,6 +32,7 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
     className,
     dark = false,
     data = {},
+    disabled = false,
     error = false,
     htmlOptions = {},
     id,
@@ -67,6 +69,7 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
     return (
     <input
         defaultChecked={checked}
+        disabled={disabled}
         name={name}
         onChange={onChange}
         ref={checkRef}
