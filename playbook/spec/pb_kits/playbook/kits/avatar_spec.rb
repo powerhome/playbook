@@ -31,4 +31,32 @@ RSpec.describe Playbook::PbAvatar::Avatar do
       expect(image.alt_text).to eq "Terry Johnson"
     end
   end
+
+  describe "with badge overlay" do
+    it "renders with badge configuration" do
+      avatar = subject.new(image_alt: "Terry Johnson", name: "Terry Johnson", componentOverlay: {
+                             component: "badge",
+                             placement: "top-right",
+                             text: "New",
+                             variant: "error",
+                           })
+      expect(avatar.componentOverlay[:text]).to eq "New"
+      expect(avatar.componentOverlay[:variant]).to eq "error"
+      expect(avatar.componentOverlay[:placement]).to eq "top-right"
+    end
+  end
+
+  describe "with iconCircle overlay" do
+    it "renders with iconCircle configuration" do
+      avatar = subject.new(image_alt: "Terry Johnson", name: "Terry Johnson", componentOverlay: {
+                             component: "iconCircle",
+                             placement: "bottom-left",
+                             icon: "plus",
+                             variant: "blue",
+                           })
+      expect(avatar.componentOverlay[:icon]).to eq "plus"
+      expect(avatar.componentOverlay[:variant]).to eq "blue"
+      expect(avatar.componentOverlay[:placement]).to eq "bottom-left"
+    end
+  end
 end
