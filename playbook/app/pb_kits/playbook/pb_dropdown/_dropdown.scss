@@ -77,8 +77,9 @@
         }
         &[class*="selected"] {
           background-color: $primary;
+          color: $white;
           [class^="pb_body"],
-          [class^="pb_title_kit"] {
+          [class^="pb_title_kit"], a {
             color: $white !important;
           }
           &:hover {
