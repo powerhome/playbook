@@ -1,0 +1,53 @@
+name: Create PR in chrome-connect on Tag with New Branch
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  triggerOnLabel:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'nitro')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Git
+        run: |
+          git config --global user.email "mark@does.work"
+          git config --global user.name "Mark Rosenberg"
+
+      - name: Generate branch name
+        id: branch_name
+        run: echo "::set-output name=branch::$(date +'%Y-%m-%d-%H-%M-%S')-feature"
+
+      - name: Create new branch in chrome-connect
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const repo = 'chrome-connect';
+            const owner = 'markdoeswork';
+            const branch = ${{ steps.branch_name.outputs.branch }};
+            const mainSha = await github.rest.repos.getBranch({
+              owner,
+              repo,
+              branch: 'master',
+            }).then(data => data.data.commit.sha);
+            await github.rest.git.createRef({
+              owner,
+              repo,
+              ref: `refs/heads/${branch}`,
+              sha: mainSha
+            });
+
+      - name: Create Pull Request in chrome-connect
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ steps.branch_name.outputs.branch }}
+          destination_branch: "master"  # Default branch in chrome-connect
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "Automated PR from Repo A"
+          pr_body: "This is an automated pull request."
+          destination_repo: "markdoeswork/chrome-connect"
+
