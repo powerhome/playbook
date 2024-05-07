@@ -20,7 +20,6 @@ jobs:
       - name: Generate branch name
         id: branch_name
         run: echo "::set-output name=branch::$(date +'%Y-%m-%d-%H-%M-%S')-feature"
-
       - name: Create new branch in chrome-connect
         uses: actions/github-script@v5
         with:
@@ -28,7 +27,7 @@ jobs:
           script: |
             const repo = 'chrome-connect';
             const owner = 'markdoeswork';
-            const branch = ${{ steps.branch_name.outputs.branch }};
+            const branch = '${{ steps.branch_name.outputs.branch }}';  // Correct usage of template literals
             const mainSha = await github.rest.repos.getBranch({
               owner,
               repo,
@@ -46,7 +45,6 @@ jobs:
         with:
           source_branch: ${{ steps.branch_name.outputs.branch }}
           destination_branch: "master"  # Default branch in chrome-connect
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: "Automated PR from Repo A"
           pr_body: "This is an automated pull request."
           destination_repo: "markdoeswork/chrome-connect"
