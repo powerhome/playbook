@@ -35,6 +35,10 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
     margin-left: $pb_multiple_users_overlap;
     margin-right: 0;
 
+    &:first-child {
+      margin-left: 0;
+    }
+
     &.dark {
       .avatar_wrapper {
         border: $pb_multiple_users_border_size solid $bg_dark;
@@ -58,6 +62,10 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
     .pb_multiple_users_item {
       margin-left: 0;
       margin-right: $pb_multiple_users_overlap;
+
+      &:first-child {
+        margin-right: 0;
+      }
     }
   }
 }
