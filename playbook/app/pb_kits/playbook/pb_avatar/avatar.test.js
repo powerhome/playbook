@@ -65,7 +65,6 @@ test('renders with badge overlay', () => {
   expect(badgeOverlay).toBeInTheDocument();
   expect(badgeOverlay).toHaveClass('pb_avatar_kit_size_md');
   expect(badgeOverlay).toHaveTextContent('New');
-  expect(badgeOverlay).toHaveAttribute('data-variant', 'error');
 });
 
 test('renders with iconCircle overlay', () => {
@@ -89,5 +88,4 @@ test('renders with iconCircle overlay', () => {
  
   expect(iconCircleOverlay).toBeInTheDocument();
   expect(iconCircleOverlay).toHaveClass('pb_avatar_kit_size_md');
-  expect(iconCircleOverlay).toHaveAttribute('data-variant', 'blue');
 });

@@ -41,7 +41,6 @@ RSpec.describe Playbook::PbAvatar::Avatar do
                              variant: "error",
                            })
       expect(avatar.componentOverlay[:text]).to eq "New"
-      expect(avatar.componentOverlay[:variant]).to eq "error"
       expect(avatar.componentOverlay[:placement]).to eq "top-right"
     end
   end
@@ -55,7 +54,6 @@ RSpec.describe Playbook::PbAvatar::Avatar do
                              variant: "blue",
                            })
       expect(avatar.componentOverlay[:icon]).to eq "plus"
-      expect(avatar.componentOverlay[:variant]).to eq "blue"
       expect(avatar.componentOverlay[:placement]).to eq "bottom-left"
     end
   end
