@@ -1,4 +1,4 @@
-name: Create PR in chrome-connect on Tag with New Branch
+name: Create PR in Nitro 
 
 on:
   pull_request:
@@ -7,27 +7,28 @@ on:
 jobs:
   triggerOnLabel:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'nitro')
+    if: contains(github.event.pull_request.labels.*.name, 'Nitro')
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Setup Git
         run: |
-          git config --global user.email "mark@does.work"
-          git config --global user.name "Mark Rosenberg"
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
 
       - name: Generate branch name
         id: branch_name
         run: echo "::set-output name=branch::$(date +'%Y-%m-%d-%H-%M-%S')-feature"
-      - name: Create new branch in chrome-connect
+
+      - name: Create new branch in Nitro 
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const repo = 'chrome-connect';
-            const owner = 'markdoeswork';
-            const branch = '${{ steps.branch_name.outputs.branch }}';  // Correct usage of template literals
+            const repo = 'nitro-web';
+            const owner = 'powerhome';
+            const branch = ${{ steps.branch_name.outputs.branch }};
             const mainSha = await github.rest.repos.getBranch({
               owner,
               repo,
@@ -40,12 +41,13 @@ jobs:
               sha: mainSha
             });
 
-      - name: Create Pull Request in chrome-connect
+      - name: Create Pull Request in Nitro
         uses: repo-sync/pull-request@v2
         with:
           source_branch: ${{ steps.branch_name.outputs.branch }}
-          destination_branch: "master"  # Default branch in chrome-connect
+          destination_branch: "master"  # Default branch in Nitro 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: "Automated PR from Repo A"
           pr_body: "This is an automated pull request."
-          destination_repo: "markdoeswork/chrome-connect"
+          destination_repo: "powerhome/nitro-web"
 
