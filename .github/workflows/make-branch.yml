@@ -1,0 +1,54 @@
+name: create pr in nitro 
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  triggeronlabel:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'nitro')
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: setup git
+        run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "your name"
+      - name: generate branch name
+        id: branch_name
+        run: |
+          echo "original branch: ${github_ref#refs/heads/}"
+          new_branch="${github_ref#refs/heads/}_alpha"
+          echo "::set-output name=branch::${new_branch}"
+      - name: create new branch in nitro 
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const repo = 'chrome-connect';
+          const owner = 'markdoeswork';
+          const branchName = 'merge_alpha'; // Simple branch name
+          const mainSha = await github.rest.repos.getBranch({
+            owner,
+            repo,
+            branch: 'master',
+          }).then(data => data.data.commit.sha);
+          await github.rest.git.createRef({
+            owner,
+            repo,
+            ref: `refs/heads/${branchName}`,
+            sha: mainSha
+          });
+        
+      - name: create pull request in nitro
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ steps.branch_name.outputs.branch }}
+          destination_branch: "master"  
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "automated pr from repo a"
+          pr_body: "this is an automated pull request."
+          destination_repo: "markdoeswork/chrome-connect"
+
