@@ -33,10 +33,25 @@
         outline-offset: -1px;
       }
     }
+    .text_input_wrapper_add_on .add-on-right [class^=pb_card_kit] {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right-width: 0;
+    }
+    .text_input_wrapper_add_on .add-on-right.border_left_on .card-right-aligned {
+      border-left: 1px $border_light solid;
+      &.dark {
+        border-left: 1px rgba($white, 0.15) solid;
+      }
+    }
   }
 
   & > [class^=pb_text_input_kit]:not(:first-child) {
     .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+    .text_input_wrapper_add_on .add-on-left [class^=pb_card_kit] {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }
