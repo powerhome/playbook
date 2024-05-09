@@ -1,89 +1,55 @@
-name: Alpha Version
-run-name: ${{ github.actor }} is creating an Alpha Version 🚀
+name: create pr in nitro 
+
 on:
   pull_request:
-    types: [ labeled ]
+    types: [labeled]
+
 jobs:
-  Creating-Alpha-Version:
-    if: github.event.label.name == 'alpha'
+  triggeronlabel:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./playbook
-    env:
-      # Set an environment variable for the branch name
-      BRANCH_NAME: ${{ github.head_ref }}
-      GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+    if: contains(github.event.pull_request.labels.*.name, 'nitro')
     steps:
-      - uses: actions/checkout@v3
-      - name: 'Enable registry auth'
-        shell: bash
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: setup git
         run: |
-          echo "//registry.npmjs.org/:_authToken="$(echo -n '${{ secrets.NPM_TOKEN }}')"" >> ~/.npmrc
-          echo "//npm.powerapp.cloud/:_auth="$(echo -n 'gh-actions:${{ secrets.POWERHOME_NPM_REGISTRY_PASSWORD }}' | base64)"" >> ~/.npmrc
-          echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
-      - uses: actions/setup-node@v4
+          git config --global user.email "you@example.com"
+          git config --global user.name "your name"
+
+      - name: generate branch name
+        id: branch_name
+        run: |
+          echo "original branch: ${github_ref#refs/heads/}"
+          new_branch="${github_ref#refs/heads/}_alpha"
+          echo "::set-output name=branch::${new_branch}"
+
+      - name: create new branch in nitro 
+        uses: actions/github-script@v5
         with:
-          node-version: 20.11.0
-      - name: Ruby Setup
-        uses: ruby/setup-ruby@v1
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const repo = 'chrome-connect';
+            const owner = 'markdoeswork';
+            const branch = 'refs/pull/3398/merge_alpha';
+            const mainSha = await github.rest.repos.getBranch({
+              owner,
+              repo,
+              branch: 'master',
+            }).then(data => data.data.commit.sha);
+            await github.rest.git.createRef({
+              owner,
+              repo,
+              ref: `refs/heads/${branch}`,
+              sha: mainSha
+            });
+
+      - name: create pull request in nitro
+        uses: repo-sync/pull-request@v2
         with:
-          bundler-cache: true
-      - name: Python Setup
-        uses: actions/setup-python@v4 
-        with: 
-          python-version: '3.9'
-      - name: Set Git Config
-        run: |
-          git config --local user.name "${{ github.actor }}"
-          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-      - name: Grab Current Version
-        run: |
-          playbook_npm_version=$(node -pe "require('./package.json').version")
-          echo "playbook_npm_version=${playbook_npm_version}" >> $GITHUB_ENV
-          playbook_ruby_version=$(ruby -r ./lib/playbook/version.rb -e "puts Playbook::VERSION")
-          echo "playbook_ruby_version=${playbook_ruby_version}" >> $GITHUB_ENV
-      - name: Set New Alpha Version
-        id: grab-package-version
-        run: |
-          formatted_branch=$(echo "${{ env.BRANCH_NAME }}" | tr -cd '[:alnum:]')
-          npm_alpha_version="${{ env.playbook_npm_version }}-alpha.${formatted_branch}${{ github.run_number }}"
-          ruby_alpha_version="${{ env.playbook_ruby_version }}.pre.alpha.${formatted_branch}${{ github.run_number }}"
-          echo "new_npm_alpha_version=${npm_alpha_version}" >> $GITHUB_ENV
-          echo "new_ruby_alpha_version=${ruby_alpha_version}" >> $GITHUB_ENV
-      - name: Update Version.rb
-        id: update-version-rb
-        run: |
-          gem install bundler
-          bundle
-          bin/rails pb_release:action[${{env.new_ruby_alpha_version}}]
-      - name: Version Up, Distribute and Publish (NPM)
-        run: |
-          yarn install
-          yarn version --new-version ${{ env.new_npm_alpha_version }}
-          bundle
-          yarn release
-          npm pack
-          npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_alpha_version }}.tgz --tag alpha
-      - name: Version Up, Distribute and Publish (RubyGems)
-        run: |
-          gem build playbook_ui.gemspec
-          gem build lib/playbook_ui_docs.gemspec
-          rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
-          echo "${{ env.new_ruby_alpha_version }}"
-          gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
-          gem push playbook_ui_docs-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
-      - name: Leave PR comment
-        env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUBY_GEM_VERSION: ${{ env.new_ruby_alpha_version }}
-          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_alpha_version}}
-          NPM_VERSION: ${{ env.new_npm_alpha_version }}
-          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_alpha_version}}
-        run: |
-          curl -H "Authorization: token ${GITHUB_TOKEN}" \
-              -X POST \
-              -d '{"body": "🎉 Congratulations on creating an Alpha Version! \n\n Your Alpha for Ruby Gems is [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}}) \n\n Your Alpha for NPM is [${{env.NPM_VERSION}}](${{env.NPM_LINK}}) "}' \
-                "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
+          source_branch: ${{ steps.branch_name.outputs.branch }}
+          destination_branch: "master"  
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "automated pr from repo a"
+          pr_body: "this is an automated pull request."
+          destination_repo: "markdoeswork/chrome-connect"
