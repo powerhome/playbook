@@ -15,7 +15,7 @@
 
 <%= pb_form_with(scope: :example, method: :get, url: "", validate: true) do |form| %>
   <%= form.text_field :example_text_field, props: { label: true, required: true } %>
-  <%= form.telephone_field :example_phone_field, props: { label: true, required: true, validation: { pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", message: "Please enter a valid phone number (example: 888-888-8888)." } } %>
+  <%= form.phone_number_field :example_phone_number_field, props: { label: "EXAMPLE PHONE FIELD" } %>
   <%= form.email_field :example_email_field, props: { label: true, required: true } %>
   <%= form.number_field :example_number_field, props: { label: true, required: true } %>
   <%= form.search_field :example_project_number, props: { label: true, required: true, validation: { pattern: "[0-9]{2}-[0-9]{5}", message: "Please enter a valid project number (example: 33-12345)." } } %>
