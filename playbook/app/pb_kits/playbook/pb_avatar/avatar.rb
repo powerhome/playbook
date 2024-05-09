@@ -71,10 +71,10 @@ module Playbook
           "bottom-left" => { bottom: top_bottom_offset, left: offset },
           "top-left" => { top: top_bottom_offset, left: offset },
           "bottom-right" => { bottom: top_bottom_offset, right: offset },
-          "bottom-center" => { bottom: "xs", html_options: { style: "left:50%;transform:translateX(-50%);padding:2px;" } },
-          "top-center" => { top: "xs", html_options: { style: "left:50%;transform:translateX(-50%);padding:2px;" } },
-          "left-center" => { left: "sm", html_options: { style: "top:50%;transform:translateY(-50%);padding:2px;" } },
-          "right-center" => { right: "sm", html_options: { style: "top:50%;transform:translateY(-50%);padding:2px;" } },
+          "bottom-center" => { bottom: "xs", classname: "overlay_bottom_center" },
+          "top-center" => { top: "xs", classname: "overlay_top_center" },
+          "left-center" => { left: "sm", classname: "overlay_left_center" },
+          "right-center" => { right: "sm", classname: "overlay_right_center" },
         }
       end
     end
