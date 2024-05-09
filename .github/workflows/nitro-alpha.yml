@@ -19,7 +19,10 @@ jobs:
 
       - name: Generate branch name
         id: branch_name
-        run: echo "::set-output name=branch::$(date +'%Y-%m-%d-%H-%M-%S')-feature"
+        run: |
+          echo "Original branch: ${GITHUB_REF#refs/heads/}"
+          NEW_BRANCH="${GITHUB_REF#refs/heads/}_alpha"
+          echo "::set-output name=branch::${NEW_BRANCH}"
 
       - name: Create new branch in Nitro 
         uses: actions/github-script@v5
