@@ -20,8 +20,8 @@ jobs:
       - name: Generate branch name
         id: branch_name
         run: |
-          echo "Original branch: ${GITHUB_REF}"
-          NEW_BRANCH="${GITHUB_REF}_alpha"
+          echo "Original branch: ${GITHUB_REF#refs/heads/}"
+          NEW_BRANCH="${GITHUB_REF#refs/heads/}_alpha"
           echo "::set-output name=branch::${NEW_BRANCH}"
 
       - name: Create new branch in Nitro 
@@ -40,7 +40,7 @@ jobs:
             await github.rest.git.createRef({
               owner,
               repo,
-              ref: `${branch}`,
+              ref: `refs/heads/${branch}`,
               sha: mainSha
             });
 
