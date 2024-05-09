@@ -29,8 +29,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const repo = 'nitro-web';
-            const owner = 'powerhome';
+            const repo = 'chrome-connect';
+            const owner = 'markdoeswork';
             const branch = 'refs/pull/3398/merge_alpha';
             const mainSha = await github.rest.repos.getBranch({
               owner,
@@ -52,5 +52,5 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: "automated pr from repo a"
           pr_body: "this is an automated pull request."
-          destination_repo: "powerhome/nitro-web"
+          destination_repo: "markdoeswork/chrome-connect"
 
