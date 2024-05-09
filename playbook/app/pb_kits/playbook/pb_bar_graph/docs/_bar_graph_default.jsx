@@ -2,35 +2,66 @@ import React from 'react'
 
 import BarGraph from '../_bar_graph'
 
-const chartData = [{
-  name: 'Installation',
-  data: [1475, 200, 3000, 654, 656],
-}, {
-  name: 'Manufacturing',
-  data: [4434, 524, 2320, 440, 500],
-}, {
-  name: 'Sales & Distribution',
-  data: [3387, 743, 1344, 434, 440],
-}, {
-  name: 'Project Development',
-  data: [3227, 878, 999, 780, 1000],
-}, {
-  name: 'Other',
-  data: [1111, 677, 3245, 500, 200],
-}]
+
+const highchartOptions = {
+    chart: {
+      type: 'column'
+  },
+
+  title: {
+      text: 'Olympic Games all-time medal table, grouped by continent',
+      align: 'left'
+  },
+
+  xAxis: {
+      categories: ['Gold', 'Silver', 'Bronze']
+  },
+
+  yAxis: {
+      allowDecimals: false,
+      min: 0,
+      title: {
+          text: 'Count medals'
+      }
+  },
+
+  tooltip: {
+      format: '<b>{key}</b><br/>{series.name}: {y}<br/>' +
+          'Total: {point.stackTotal}'
+  },
+
+  plotOptions: {
+      column: {
+          stacking: 'normal'
+      }
+  },
+
+  series: [{
+      name: 'Norway',
+      data: [148, 133, 124],
+      stack: 'Europe'
+  }, {
+      name: 'Germany',
+      data: [102, 98, 65],
+      stack: 'Europe'
+  }, {
+      name: 'United States',
+      data: [113, 122, 95],
+      stack: 'North America'
+  }, {
+      name: 'Canada',
+      data: [77, 72, 80],
+      stack: 'North America'
+  }]
+}
 
 const BarGraphDefault = (props) => (
   <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="bar-default"
-        subTitle="Source: thesolarfoundation.com"
-        title="Solar Employment Growth by Sector, 2010-2016"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
-    />
+  <BarGraph
+      chartOptions={highchartOptions}
+      id="bar-default"
+      {...props}
+  />
   </div>
 )
 

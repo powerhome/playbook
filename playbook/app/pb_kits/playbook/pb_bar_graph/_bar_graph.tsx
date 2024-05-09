@@ -15,10 +15,12 @@ type BarGraphProps = {
   align?: "left" | "right" | "center";
   axisTitle: { name: string; }[] | string;
   dark?: boolean;
+  exporting?: boolean;
   xAxisCategories: [];
   yAxisMin: number;
   yAxisMax: number;
   chartData: { name: string; data: number[], yAxis: number }[];
+  chartOptions?: { [key: string]: string | number | boolean | (() => void)}
   className?: string;
   customOptions?: Partial<Highcharts.Options>;
   id: string;
@@ -37,7 +39,6 @@ type BarGraphProps = {
   y?: number;
   aria?: { [key: string]: string };
   data?: { [key: string]: string };
-  stacking?: "normal" | "percent" 
   axisFormat?: { format: string; }[] | string;
 };
 
@@ -47,16 +48,17 @@ const BarGraph = ({
   data = {},
   align = "center",
   axisTitle,
+  exporting = false,
   dark = false,
   chartData,
   className = "pb_bar_graph",
+  chartOptions = {},
   colors,
   htmlOptions = {},
   customOptions = {},
   axisFormat,
   id,
   pointStart,
-  stacking,
   subTitle,
   type = "column",
   title = "Title",
@@ -83,6 +85,9 @@ const BarGraph = ({
   setupTheme();
 
   const staticOptions = {
+    exporting: {
+      enabled: exporting
+  },
     title: {
       text: title,
     },
@@ -127,9 +132,8 @@ const BarGraph = ({
         : highchartsTheme.colors,
     plotOptions: {
       series: {
-        stacking: stacking,
         pointStart: pointStart,
-        borderWidth: stacking ? 0 : "",
+     
         events: {},
         dataLabels: {
           enabled: false,
@@ -162,13 +166,13 @@ if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
   if (!toggleLegendClick) {
     staticOptions.plotOptions.series.events = { legendItemClick: () => false };
   }
-
   const [options, setOptions] = useState({});
+  const mergedOptions = {...options, ...(chartOptions || {})};
+  console.log(mergedOptions)
 
   useEffect(() => {
     setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
-
   return (
     <HighchartsReact
         containerProps={{
@@ -179,7 +183,7 @@ if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
           ...htmlProps
         }}
         highcharts={Highcharts}
-        options={options}
+        options={mergedOptions}
     />
   );
 };
