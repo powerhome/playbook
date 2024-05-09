@@ -28,22 +28,22 @@ jobs:
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const repo = 'chrome-connect';
-            const owner = 'markdoeswork';
-            const branch = 'refs/pull/3398/merge_alpha';
-            const mainSha = await github.rest.repos.getBranch({
-              owner,
-              repo,
-              branch: 'master',
-            }).then(data => data.data.commit.sha);
-            await github.rest.git.createRef({
-              owner,
-              repo,
-              ref: `refs/heads/${branch}`,
-              sha: mainSha
-            });
-
+        script: |
+          const repo = 'chrome-connect';
+          const owner = 'markdoeswork';
+          const branchName = 'merge_alpha'; // Simple branch name
+          const mainSha = await github.rest.repos.getBranch({
+            owner,
+            repo,
+            branch: 'master',
+          }).then(data => data.data.commit.sha);
+          await github.rest.git.createRef({
+            owner,
+            repo,
+            ref: `refs/heads/${branchName}`,
+            sha: mainSha
+          });
+        
       - name: create pull request in nitro
         uses: repo-sync/pull-request@v2
         with:
