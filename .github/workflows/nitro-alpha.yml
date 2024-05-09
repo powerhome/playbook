@@ -1,37 +1,38 @@
-name: Create PR in Nitro 
+name: create pr in nitro 
 
 on:
   pull_request:
     types: [labeled]
 
 jobs:
-  triggerOnLabel:
+  triggeronlabel:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'Nitro')
+    if: contains(github.event.pull_request.labels.*.name, 'nitro')
     steps:
-      - name: Checkout code
+      - name: checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Git
+      - name: setup git
         run: |
           git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.name "your name"
 
-      - name: Generate branch name
+      - name: generate branch name
         id: branch_name
         run: |
-          echo "Original branch: ${GITHUB_REF#refs/heads/}"
-          NEW_BRANCH="${GITHUB_REF#refs/heads/}_alpha"
-          echo "::set-output name=branch::${NEW_BRANCH}"
+          echo "original branch: ${github_ref#refs/heads/}"
+          new_branch="${github_ref#refs/heads/}_alpha"
+          echo "::set-output name=branch::${new_branch}"
 
-      - name: Create new branch in Nitro 
+      - name: create new branch in nitro 
         uses: actions/github-script@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.github_token }}
           script: |
             const repo = 'nitro-web';
             const owner = 'powerhome';
-            const branch = ${{ steps.branch_name.outputs.branch }};
+            // Correct the branch definition by using a string
+            const branch = 'refs/pull/3398/merge_alpha';
             const mainSha = await github.rest.repos.getBranch({
               owner,
               repo,
@@ -44,13 +45,13 @@ jobs:
               sha: mainSha
             });
 
-      - name: Create Pull Request in Nitro
+      - name: create pull request in nitro
         uses: repo-sync/pull-request@v2
         with:
           source_branch: ${{ steps.branch_name.outputs.branch }}
-          destination_branch: "master"  # Default branch in Nitro 
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "Automated PR from Repo A"
-          pr_body: "This is an automated pull request."
+          destination_branch: "master"  
+          github_token: ${{ secrets.github_token }}
+          pr_title: "automated pr from repo a"
+          pr_body: "this is an automated pull request."
           destination_repo: "powerhome/nitro-web"
 
