@@ -4,14 +4,14 @@ examples:
     - avatar_monogram: Monogram
     - avatar_no_image: "Bad Image Link"
     - avatar_status: Status
-    - avatar_circle_icon_component_overlay: Circle Icon Component Overlay
+    - avatar_circle_icon_component_overlay: Icon Circle Component Overlay
     - avatar_badge_component_overlay: Badge Component Overlay
   react:
     - avatar_default: Default
     - avatar_monogram: Monogram
     - avatar_no_image: "Bad Image Link"
     - avatar_status: Status
-    - avatar_circle_icon_component_overlay: Circle Icon Component Overlay
+    - avatar_circle_icon_component_overlay: Icon Circle Component Overlay
     - avatar_badge_component_overlay: Badge Component Overlay
   swift:
     - avatar_default_swift: Default
