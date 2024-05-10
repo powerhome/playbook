@@ -49,6 +49,10 @@
   }
 
   &.dark {
-    @include pb_title_dark;
+    @include pb_title_dark; 
+  }
+
+  &.dark[class*=_link] { 
+    @include pb_title_dark_link; 
   }
 }

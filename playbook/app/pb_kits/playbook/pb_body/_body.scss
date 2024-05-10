@@ -45,6 +45,9 @@
   }
 
   &[class*=dark] {
+    a {
+      color: $active_dark;
+    }
     @include pb_body_dark();
     @each $dark_color_name, $dark_color_value in $pb_dark_body_colors{
       &[class*=_#{$dark_color_name}][class*=dark]{
