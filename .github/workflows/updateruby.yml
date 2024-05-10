@@ -1,0 +1,30 @@
+jobs:
+  Creating-Alpha-Version:
+    if: github.event.label.name == 'nitro'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./playbook
+    env:
+      BRANCH_NAME: ${{ github.head_ref }}
+      GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+
+      - name: Update Gem Description
+        run: |
+          today=$(date +"%B %d")
+          sed -i "s|spec.description = .*|spec.description = 'This gem was last updated on $today'|g" playbook_ui.gemspec
+          sed -i "s|spec.description = .*|spec.description = 'This gem was last updated on $today'|g" lib/playbook_ui_docs.gemspec
+      - name: Build and push gems
+        run: |
+          gem build playbook_ui.gemspec
+          gem push playbook_ui-*.gem --key $GEM_HOST_API_KEY
+          gem build lib/playbook_ui_docs.gemspec
+          gem push playbook_ui_docs-*.gem --key $GEM_HOST_API_KEY
