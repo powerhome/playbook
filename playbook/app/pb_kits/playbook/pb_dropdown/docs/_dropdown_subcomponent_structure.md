@@ -1,7 +1,6 @@
-The dropdown comes with the following subcomponents that can be used to achieve various levels of customization:
+The dropdown is built using all of the following subcomponents:
 
-`Dropdown. Trigger` / `dropdown/dropdown_trigger`
-`Dropdown.Container`/ `dropdown/dropdown_container`
-`Dropdown.Option` / `dropdown/dropdown_option`
-
-See the code snippet below for a visual on how to use the kit with subcomponents. Each subcomponent allows for GlobalProps in addition to any subcomponent specfic props. 
+`Dropdown.Trigger` is the UI component that users interact with to toggle the dropdown. 
+`Dropdown.Container` is the floating container that wraps the list of dropdown options. 
+`Dropdown.Option` renders options that are passed to the container. 
+Each of these subcomponents can be altered using global props and/or their respective props. See doc examples below for more information on each.

@@ -1,1 +1,1 @@
-The Dropdown also allows for custom options that can be passed in as children to the `Dropdown.Option` subcomponent. If no children are passed to `Dropdown.Option`, the kit will render each option as text within a Body kit by default. 
+`Dropdown.Option` subcomponent accepts any child components to customize the options' contents and display. By default, options are Body kit text that is set by the `label` value from the `option` object.

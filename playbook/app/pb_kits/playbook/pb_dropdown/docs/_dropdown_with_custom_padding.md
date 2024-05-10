@@ -1,1 +1,1 @@
-By default, the padding on each option in the dropdown is set to `xs`. The `padding` Global Props however can be used to override this default. In this example, we are setting padding to `sm`.
+By default, dropdown option padding is set to `xs`, but this padding can be overridden using our global prop spacing token. In this example we are increasing the option padding to `sm`.

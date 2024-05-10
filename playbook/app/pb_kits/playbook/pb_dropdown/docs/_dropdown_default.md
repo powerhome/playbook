@@ -1,1 +1,1 @@
-The Dropdown kit accepts an `options` array and renders each object from that array as a selectable option within a dropdown container. `options` is a required prop and must be an array of objects. Each object can contain as many key/value pairs as needed but MUST contain 'label' and 'value' as the only required items within each object.
+This kit's `options` prop requires an array of objects, each of which will be used as the selectable options within the dropdown. Each option object can support any number of key-value pairs, but each must contain `label` and `value`.

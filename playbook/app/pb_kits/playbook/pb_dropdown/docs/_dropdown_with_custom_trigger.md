@@ -1,1 +1,1 @@
-The Dropdown can also be given a custom Trigger by passing children to the `Dropdown.Trigger` subcomponent as shown in this example. Here we are using the IconCircle kit. 
+Optionally replace the default trigger's select element by passing child components directly to the `Dropdown.Trigger`.
