@@ -42,3 +42,23 @@
     dark: true
   }) %>
 <% end %>
+
+<%= pb_rails("title", props: { text: "Subtle Status Colors", tag: "h4", size: 4, margin_bottom: "sm" }) %>
+
+<%= pb_rails("card", props: { background: "success_subtle", margin_bottom: "sm" })  do %>
+  <%= pb_rails("body", props: {
+    text: "Success Subtle"
+  }) %>
+<% end %>
+
+<%= pb_rails("card", props: { background: "warning_subtle", margin_bottom: "sm" })  do %>
+  <%= pb_rails("body", props: {
+    text: "Warning Subtle"
+  }) %>
+<% end %>
+
+<%= pb_rails("card", props: { background: "info_subtle", margin_bottom: "sm" })  do %>
+  <%= pb_rails("body", props: {
+    text: "Info Subtle"
+  }) %>
+<% end %>

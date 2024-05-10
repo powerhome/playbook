@@ -90,7 +90,47 @@ const CardBackground = (props) => {
         />
       </Card>
 
-      
+
+      <Title
+          {...props}
+          marginBottom="sm"
+          size={4}
+          tag="h4"
+          text="Subtle Status Colors"
+      />
+
+      <Card
+          background="success_subtle"
+          marginBottom="sm"
+          {...props}
+      >
+        <Body
+            text="Success Subtle"
+            {...props}  
+        />
+      </Card>
+
+      <Card
+          background="warning_subtle"
+          marginBottom="sm"
+          {...props}
+      >
+        <Body
+            text="Warning Subtle"
+            {...props}
+        />
+      </Card>
+
+      <Card
+          background="info_subtle"
+          marginBottom="sm"
+          {...props}
+      >
+        <Body
+            text="Info Subtle"
+            {...props}
+        />
+      </Card>
     </div>
   )
 }

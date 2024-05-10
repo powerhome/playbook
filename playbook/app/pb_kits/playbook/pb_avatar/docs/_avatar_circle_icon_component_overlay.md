@@ -1,0 +1,3 @@
+NOTE: All `componentOverlay` implementations require a `placement` prop, that accepts any of the following values: `top-right`, `top-left`, `bottom-right`, `bottom-left`, `top-center`, `bottom-center`, `left-center`, and `right-center`.
+
+When passing the `iconCircle` component as an overlay, you must also specify an `icon`, and you may optionally control the color by passing an [approved value](https://playbook.powerapp.cloud/kits/icon_circle/rails#color) as a `variant`.

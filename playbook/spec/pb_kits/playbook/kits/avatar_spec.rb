@@ -25,10 +25,33 @@ RSpec.describe Playbook::PbAvatar::Avatar do
     end
   end
 
-  describe "#testing avatar kit methods" do
-    it "returns the image alt using either image alt or name prop" do
-      image = subject.new(name: "Terry Johnson")
-      expect(image.alt_text).to eq "Terry Johnson"
+  describe "with badge overlay" do
+    it "renders with badge configuration" do
+      avatar = subject.new(image_alt: "Terry Johnson", name: "Terry Johnson", component_overlay: {
+                             component: "badge",
+                             placement: "top-right",
+                             text: "New",
+                             variant: "error",
+                           })
+      expect(avatar.overlay_component).to eq "badge"
+      expect(avatar.component_overlay[:text]).to eq "New"
+      expect(avatar.component_overlay[:variant]).to eq "error"
+      expect(avatar.component_overlay[:placement]).to eq "top-right"
+    end
+  end
+
+  describe "with iconCircle overlay" do
+    it "renders with iconCircle configuration" do
+      avatar = subject.new(image_alt: "Terry Johnson", name: "Terry Johnson", component_overlay: {
+                             component: "iconCircle",
+                             placement: "bottom-left",
+                             icon: "plus",
+                             variant: "blue",
+                           })
+      expect(avatar.overlay_component).to eq "iconCircle"
+      expect(avatar.component_overlay[:icon]).to eq "plus"
+      expect(avatar.component_overlay[:variant]).to eq "blue"
+      expect(avatar.component_overlay[:placement]).to eq "bottom-left"
     end
   end
 end

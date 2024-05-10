@@ -7,28 +7,6 @@ const AvatarBadgeComponentOverlay = () => {
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    placement: "top-left",
-                    text: "12"
-                }}
-                imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
-                marginBottom="sm"
-                size="xxs"
-            />
-
-            <Avatar
-                componentOverlay={{
-                    component: "badge",
-                    placement: "top-right",
-                    text: "12"
-                }}
-                imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
-                marginBottom="sm"
-                size="xs"
-            />
-
-            <Avatar
-                componentOverlay={{
-                    component: "badge",
                     placement: "bottom-right",
                     text: "12"
                 }}
@@ -40,7 +18,7 @@ const AvatarBadgeComponentOverlay = () => {
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    placement: "bottom-left",
+                    placement: "top-left",
                     text: "12"
                 }}
                 imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
@@ -51,8 +29,9 @@ const AvatarBadgeComponentOverlay = () => {
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    placement: "top-left",
-                    text: "12"
+                    placement: "top-center",
+                    text: "On Roadtip",
+                    variant: "info"
                 }}
                 imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
                 marginBottom="sm"
@@ -62,14 +41,14 @@ const AvatarBadgeComponentOverlay = () => {
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    placement: "top-right",
-                    text: "12"
+                    placement: "bottom-center",
+                    text: "Out of Office",
+                    variant: "error"
                 }}
                 imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
                 marginBottom="sm"
                 size="xl"
-            />    
-
+            /> 
         </div>
     )
 }
