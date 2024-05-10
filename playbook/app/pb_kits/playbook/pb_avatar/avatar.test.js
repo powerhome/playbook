@@ -42,3 +42,50 @@ test('uses the name prop as the alt property if no imageAlt prop is passed in', 
 
   expect(image).toHaveAttribute('alt', name)
 })
+
+test('renders with badge overlay', () => {
+  const componentOverlay = {
+    component: "badge",
+    placement: "top-right",
+    text: "New",
+    variant: "error"
+  };
+  render(
+    <Avatar
+        componentOverlay={componentOverlay}
+        data={{ testid: testId }}
+        imageAlt={imageAlt}
+        imageUrl={imageUrl}
+        name={name}
+    />
+  );
+
+  const badgeOverlay = screen.getByTestId(testId);
+ 
+  expect(badgeOverlay).toBeInTheDocument();
+  expect(badgeOverlay).toHaveClass('pb_avatar_kit_size_md');
+  expect(badgeOverlay).toHaveTextContent('New');
+});
+
+test('renders with iconCircle overlay', () => {
+  const componentOverlay = {
+    component: "iconCircle",
+    placement: "bottom-left",
+    icon: "plus",
+    variant: "blue"
+  };
+  render(
+    <Avatar
+        componentOverlay={componentOverlay}
+        data={{ testid: testId }}
+        imageAlt={imageAlt}
+        imageUrl={imageUrl}
+        name={name}
+    />
+  );
+
+  const iconCircleOverlay = screen.getByTestId(testId);
+ 
+  expect(iconCircleOverlay).toBeInTheDocument();
+  expect(iconCircleOverlay).toHaveClass('pb_avatar_kit_size_md');
+});
