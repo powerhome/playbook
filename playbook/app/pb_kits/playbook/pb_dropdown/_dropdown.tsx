@@ -114,8 +114,10 @@ const Dropdown = (props: DropdownProps) => {
     setIsDropDownClosed(isClosed)
    },[isClosed])
 
-  const filteredOptions = options?.filter((option: GenericObject) =>
-    option.label.toLowerCase().includes(filterItem.toLowerCase())
+  const filteredOptions = options?.filter((option: GenericObject) => {
+    const label = typeof option.label === 'string' ? option.label.toLowerCase() : option.label;
+    return String(label).toLowerCase().includes(filterItem.toLowerCase());
+  }
   );
 
 // For keyboard accessibility: Set focus within dropdown to selected item if it exists

@@ -2,7 +2,7 @@
     aria: object.aria,
     class: object.classname,
     data: object.data,
-    id: object.id,
+    id: object.option[:id],
     **combined_html_options) do %>
     <%= pb_rails("list/item", props: {
         display: "flex", 

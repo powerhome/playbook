@@ -50,8 +50,10 @@ const DropdownOption = (props: DropdownOptionProps) => {
     selected,
   } = useContext(DropdownContext);
 
-  const isItemMatchingFilter = (option: GenericObject) =>
-    option?.label.toLowerCase().includes(filterItem.toLowerCase());
+  const isItemMatchingFilter = (option: GenericObject) => {
+    const label = typeof option.label === 'string' ? option.label.toLowerCase() : option.label;
+    return String(label).toLowerCase().includes(filterItem.toLowerCase());
+  }
 
   if (!isItemMatchingFilter(option)) {
     return null;
