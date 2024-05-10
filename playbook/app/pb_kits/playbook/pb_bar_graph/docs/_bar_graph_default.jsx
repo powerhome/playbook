@@ -55,6 +55,7 @@ const highchartOptions = {
   }]
 }
 
+
 const BarGraphDefault = (props) => (
   <div>
   <BarGraph
