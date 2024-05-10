@@ -1,8 +1,4 @@
-<%= content_tag(:div,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: object.id) do %>
+<%= pb_content_tag do %>
         <%= pb_rails("table", props: { size: "sm", tag:"div", data_table: true, number_spacing:"tabular", responsive:"none" }) do %>
           <% if content.present? %>
             <% content.presence %>
