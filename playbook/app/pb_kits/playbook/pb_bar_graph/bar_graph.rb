@@ -10,6 +10,7 @@ module Playbook
       prop :axis_format
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
+      prop :all_options, default: {}
       prop :custom_options, default: {}
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
@@ -48,6 +49,7 @@ module Playbook
           id: id,
           className: classname,
           chartData: chart_data,
+          allOptions: all_options,
           dark: dark ? "dark" : "",
           type: chart_type,
           title: title,

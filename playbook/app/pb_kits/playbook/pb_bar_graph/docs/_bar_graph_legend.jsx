@@ -16,9 +16,9 @@ const highchartOptions = {
 const BarGraphLegend = (props) => (
   <div>
     <BarGraph
+        allOptions={highchartOptions}
         axisTitle="Number of Employees"
         chartData={chartData}
-        chartOptions={highchartOptions}
         id="bar-test-2"
         legend
         title="Bar Graph with Legend"

@@ -1,26 +1,78 @@
 <% data = [{
     name: 'Installation',
-    data: [1475,200,3000,654,656]
+    data: [1475, 200, 3000, 654, 656]
 }, {
     name: 'Manufacturing',
-    data: [4434,524,2320,440,500]
+    data: [4434, 524, 2320, 440, 500]
 }, {
     name: 'Sales & Distribution',
-    data: [3387,743,1344,434,440,]
+    data: [3387, 743, 1344, 434, 440]
 }, {
     name: 'Project Development',
-    data: [3227,878,999,780,1000]
+    data: [3227, 878, 999, 780, 1000]
 }, {
     name: 'Other',
-    data: [1111,677,3245,500,200]
+    data: [1111, 677, 3245, 500, 200]
 }] %>
+
+<% highchart_options = {
+    chart: {
+      type: 'column'
+  },
+
+  title: {
+      text: 'Olympic Games all-time medal table, grouped by continent',
+      align: 'left'
+  },
+
+  xAxis: {
+      categories: ['Gold', 'Silver', 'Bronze']
+  },
+
+  yAxis: {
+      allowDecimals: false,
+      min: 0,
+      title: {
+          text: 'Count medals'
+      }
+  },
+
+  tooltip: {
+      format: '<b>{key}</b><br/>{series.name}: {y}<br/>' +
+          'Total: {point.stackTotal}'
+  },
+
+  plotOptions: {
+      column: {
+          stacking: 'normal'
+      }
+  },
+
+  series: [{
+      name: 'Norway',
+      data: [148, 133, 124],
+      stack: 'Europe'
+  }, {
+      name: 'Germany',
+      data: [102, 98, 65],
+      stack: 'Europe'
+  }, {
+      name: 'United States',
+      data: [113, 122, 95],
+      stack: 'North America'
+  }, {
+      name: 'Canada',
+      data: [77, 72, 80],
+      stack: 'North America'
+  }]
+} %>
 
 <%= pb_rails("bar_graph", props: {
     axis_title: 'Number of Employees',
     chart_data: data,
+    all_options: highchart_options,
     id: "bar-default",
     y_axis_min: 0,
-    x_axis_categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
     subtitle: 'Source: thesolarfoundation.com',
     title: 'Solar Employment Growth by Sector, 2010-2016',
 }) %>

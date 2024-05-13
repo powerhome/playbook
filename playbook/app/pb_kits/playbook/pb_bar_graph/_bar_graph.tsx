@@ -20,7 +20,7 @@ type BarGraphProps = {
   yAxisMin: number;
   yAxisMax: number;
   chartData: { name: string; data: number[], yAxis: number }[];
-  chartOptions?: { [key: string]: string | number | boolean | (() => void)}
+  allOptions?: { [key: string]: string | number | boolean | (() => void)}
   className?: string;
   customOptions?: Partial<Highcharts.Options>;
   id: string;
@@ -52,7 +52,7 @@ const BarGraph = ({
   dark = false,
   chartData,
   className = "pb_bar_graph",
-  chartOptions = {},
+  allOptions = {},
   colors,
   htmlOptions = {},
   customOptions = {},
@@ -167,7 +167,7 @@ if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
     staticOptions.plotOptions.series.events = { legendItemClick: () => false };
   }
   const [options, setOptions] = useState({});
-  const mergedOptions = {...options, ...(chartOptions || {})};
+  const mergedOptions = {...options, ...(allOptions || {})};
   console.log(mergedOptions)
 
   useEffect(() => {
