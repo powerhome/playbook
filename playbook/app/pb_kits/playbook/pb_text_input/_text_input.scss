@@ -76,6 +76,25 @@
         .text_input {
           border-color: $error_dark;
         }
+        [class*=pb_body_kit_negative] {
+          color: $error_dark;
+        }
+      }
+      .text_input_wrapper_add_on {
+        .add-on {
+          &-right {
+            .add-on-card {
+              border: 1px solid $error_dark;
+              border-left: 0;
+            }
+          }
+          &-left {
+            .add-on-card {
+              border: 1px solid $error_dark;
+              border-right: 0;
+            }
+          }
+        }
       }
     }
   }
