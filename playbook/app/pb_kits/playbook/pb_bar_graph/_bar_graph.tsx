@@ -15,7 +15,6 @@ type BarGraphProps = {
   align?: "left" | "right" | "center";
   axisTitle: { name: string; }[] | string;
   dark?: boolean;
-  exporting?: boolean;
   xAxisCategories: [];
   yAxisMin: number;
   yAxisMax: number;
@@ -48,7 +47,6 @@ const BarGraph = ({
   data = {},
   align = "center",
   axisTitle,
-  exporting = false,
   dark = false,
   chartData,
   className = "pb_bar_graph",
@@ -85,9 +83,6 @@ const BarGraph = ({
   setupTheme();
 
   const staticOptions = {
-    exporting: {
-      enabled: exporting
-  },
     title: {
       text: title,
     },
