@@ -1,0 +1,41 @@
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      - dependency-name: "*"
+    allow:
+      - dependency-name: "will_paginate"
+      - dependency-name: "view_component"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      - dependency-name: "*"
+    allow:
+      - dependency-name: "@babel/runtime"
+      - dependency-name: "@floating-ui/react"
+      - dependency-name: "@fortawesome/fontawesome-free"
+      - dependency-name: "@popperjs/core"
+      - dependency-name: "@tanstack/react-table"
+      - dependency-name: "classnames"
+      - dependency-name: "core-js"
+      - dependency-name: "file-loader"
+      - dependency-name: "flatpickr"
+      - dependency-name: "highcharts"
+      - dependency-name: "highcharts-react-official"
+      - dependency-name: "intl-tel-input"
+      - dependency-name: "lazysizes"
+      - dependency-name: "lodash"
+      - dependency-name: "react-animate-height"
+      - dependency-name: "react-dropzone"
+      - dependency-name: "react-highlight-words"
+      - dependency-name: "react-joyride"
+      - dependency-name: "react-modal"
+      - dependency-name: "react-popper"
+      - dependency-name: "react-select"
+      - dependency-name: "react-trix"
+      - dependency-name: "react-zoom-pan-pinch"
