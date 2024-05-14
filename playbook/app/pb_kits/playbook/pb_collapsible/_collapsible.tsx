@@ -52,12 +52,15 @@ const Collapsible = ({
   if (CollapsibleParent.length !== 2) {
     throw new Error('Collapsible requires <CollapsibleMain> and <CollapsibleContent> to function properly.')
   }
+  const FirstChild = CollapsibleParent[0]
+  const SecondChild = CollapsibleParent[1]
 
-  const Main = CollapsibleParent[0]
-  const Content = CollapsibleParent[1]
+  const Main = FirstChild.type === CollapsibleMain ? FirstChild : null
+  const Content = SecondChild.type === CollapsibleContent ? SecondChild : null
 
-  const { children: mainChildren, ...mainProps } = Main.props
-  const { children: contentChildren, ...contentProps } = Content.props
+
+  const { children: mainChildren, ...mainProps } = Main ? Main.props : {}
+  const { children: contentChildren, ...contentProps } = Content ? Content.props : {}
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -75,13 +78,19 @@ const Collapsible = ({
           className={classes}
           id={id}
       >
-        <CollapsibleMain {...mainProps}>
-          {mainChildren}
-        </CollapsibleMain>
+        {Main ? (
+          <CollapsibleMain {...mainProps}>
+            {mainChildren}
+          </CollapsibleMain>
+        ) : (
+          FirstChild
+        )}
 
-        <CollapsibleContent {...contentProps}>
-          {contentChildren}
-        </CollapsibleContent>
+        {Content && (
+          <CollapsibleContent {...contentProps}>
+            {contentChildren}
+          </CollapsibleContent>
+        )}
       </div>
     </CollapsibleContext.Provider>
   )

@@ -1,19 +1,108 @@
 import React from 'react'
-import { Collapsible } from '../..'
+import { Collapsible, useCollapsible, Button, Background, Flex, Title, IconCircle, List, ListItem, Checkbox, TextInput } from '../..'
 
-const CollapsibleDefault = (props) => (
-  <Collapsible >
-    <Collapsible.Main {...props}>
-      <div>{'Main Section'}</div>
-    </Collapsible.Main>
-    <Collapsible.Content>
-      <div>
-        {
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel erat sed purus hendrerit viverra. Duis et vestibulum metus. Sed consequat ut ante non vehicula. Etiam nunc massa, pharetra vel quam id, posuere rhoncus quam. Quisque imperdiet arcu enim, nec aliquet justo auctor eget. Curabitur in metus nec nunc rhoncus faucibus vitae ac elit. Nulla facilisi. Vestibulum quis pretium nulla. Nulla ut accumsan velit. Duis varius urna sed sem tempor, sit amet fermentum nibh auctor. Praesent lorem arcu, egestas non ante quis, placerat pellentesque lectus.Vestibulum lacinia ipsum quis venenatis tristique. Vivamus suscipit, libero eu fringilla egestas, orci urna commodo arcu, vel gravida turpis ipsum molestie nibh. Donec cursus eu ante sagittis ultrices. Phasellus id sagittis risus. Mauris dapibus neque faucibus, tempor ligula vel, cursus ante. Donec faucibus gravida porta. Nullam egestas est quis aliquam feugiat. Sed eget metus diam. Cras eget placerat libero.'
-        }
-      </div>
-    </Collapsible.Content>
-  </Collapsible>
-)
+const CollapsibleDefault = () => {
+  const [isCollapsed, setIsCollapsed] = useCollapsible(true)
+
+  return (
+  <>
+    <Button
+        onClick={() => setIsCollapsed(!isCollapsed)}
+        padding="none"
+        variant="link"
+    >
+      {isCollapsed ? "Expand All" : "Collapse All"}
+    </Button>
+
+    <Collapsible
+        collapsed={isCollapsed}
+        icon={["plus", "minus"]}
+        padding="none"
+    >
+      <Background 
+          backgroundColor="white" 
+          padding="sm"
+          position="sticky" 
+          top="0" 
+      >
+          <Flex 
+              align="center" 
+              gap="sm"
+              justify="between" 
+          >
+            <Title 
+                size={4} 
+                text="Section title" 
+            />
+            <IconCircle 
+                icon="check" 
+                size="xs" 
+            />
+          </Flex>
+      </Background>
+          
+      <Collapsible.Content padding="none">
+          <div>
+          <List>
+              <ListItem 
+                  align="stretch"
+                  flexDirection="column" 
+                  padding="none" 
+              >
+                <Checkbox 
+                    padding="sm" 
+                    text="checklist item" 
+                />
+              </ListItem>
+              <ListItem 
+                  align="stretch"
+                  flexDirection="column" 
+                  padding="none" 
+              >
+                <Checkbox 
+                    padding="sm" 
+                    text="checklist item" 
+                />
+              </ListItem><ListItem 
+                  align="stretch"
+                  flexDirection="column" 
+                  padding="none" 
+              >
+                <Checkbox 
+                    padding="sm" 
+                    text="checklist item" 
+                />
+              </ListItem><ListItem 
+                  align="stretch"
+                  flexDirection="column" 
+                  padding="none" 
+              >
+                <Checkbox 
+                    padding="sm" 
+                    text="checklist item" 
+                />
+              </ListItem>
+              <ListItem 
+                  align="stretch"
+                  flexDirection="column" 
+                  padding="none" 
+              >
+                <Checkbox 
+                    padding="sm" 
+                    text="checklist item" 
+                />
+                <TextInput 
+                    marginX="sm" 
+                    placeholder="Describe location" 
+                />
+              </ListItem>
+            </List>
+          </div>
+      </Collapsible.Content>
+    </Collapsible>
+   
+  </>
+  )
+}
 
 export default CollapsibleDefault
