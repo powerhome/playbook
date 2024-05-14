@@ -3,7 +3,7 @@
 module Playbook
   module PbDropdown
     class DropdownOption < Playbook::KitBase
-      prop :option, type: Playbook::Props::String
+      prop :option, type: Playbook::Props::HashProp
       prop :id, type: Playbook::Props::String
 
       def data
