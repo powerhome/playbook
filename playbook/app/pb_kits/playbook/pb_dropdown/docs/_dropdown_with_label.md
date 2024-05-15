@@ -1,0 +1,1 @@
+The top-level Dropdown component optionally accepts any string through a `label` prop to produce a label above your trigger element.

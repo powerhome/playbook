@@ -2,6 +2,7 @@
     aria: object.aria,
     class: object.classname,
     data: object.data,
-    id: object.id) do %>
+    id: object.id,
+    **combined_html_options) do %>
   <%= content_tag(:div, object.display_badge, class: "pb_user_badge_wrapper") %>
 <% end %>

@@ -1,0 +1,13 @@
+@import "../../tokens/colors";
+
+@mixin chrome_styles($border-color) {
+  .chrome-styles:first-child {
+    border-right: $border-color;
+  }
+
+  .table-card {
+    .chrome-styles:first-child {
+      border-right: $transparent !important;
+    }
+  }
+}

@@ -16,7 +16,7 @@ describe("IconCircle Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("pb_icon_circle_kit_md_default")
+        expect(kit).toHaveClass("pb_icon_circle_kit_size_md_default")
     })
 
     test("renders icon", () => {
@@ -66,7 +66,7 @@ describe("IconCircle Kit", () => {
             />
           )
           const kit = screen.getByTestId(testId)
-          expect(kit).toHaveClass(`pb_icon_circle_kit_sm_${colorVariant}`)
+          expect(kit).toHaveClass(`pb_icon_circle_kit_size_sm_${colorVariant}`)
       
           cleanup()
         })
@@ -74,6 +74,7 @@ describe("IconCircle Kit", () => {
 
       test('displays size as expected', () => {
         [
+          "xxs",
           "xs",
           "sm",
           "md",
@@ -88,7 +89,7 @@ describe("IconCircle Kit", () => {
             />
           )
           const kit = screen.getByTestId(testId)
-          expect(kit).toHaveClass(`pb_icon_circle_kit_${sizeVariant}_default`)
+          expect(kit).toHaveClass(`pb_icon_circle_kit_size_${sizeVariant}_default`)
       
           cleanup()
         })

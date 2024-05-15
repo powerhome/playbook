@@ -11,6 +11,6 @@ DEPLOYER_IMAGE="image-registry.powerapp.cloud/app/deployer:master-467d8015ffc91f
 DEPLOYER_MOUNTS="${AWS_CREDS_MOUNT} --mount type=bind,source=$(pwd),destination=/app --mount type=bind,source=${HOME}/.kube,destination=/root/.kube"
 RUN_DEPLOYER="docker run --tty ${INTERACTIVE} ${EXTRA_ARGS} --rm --env AWS_ACCESS_KEY_ID --env AWS_SECRET_ACCESS_KEY ${DEPLOYER_MOUNTS} ${DEPLOYER_IMAGE}"
 
-docker pull --quiet $DEPLOYER_IMAGE
+docker image inspect $DEPLOYER_IMAGE > /dev/null 2>&1 || docker pull $DEPLOYER_IMAGE > /dev/null
 
 ${RUN_DEPLOYER} "$@"

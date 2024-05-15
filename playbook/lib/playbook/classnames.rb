@@ -37,6 +37,10 @@ module Playbook
         text_align_props,
         overflow_props,
         truncate_props,
+        left_props,
+        top_props,
+        right_props,
+        bottom_props,
       ].compact.join(" ")
     end
 

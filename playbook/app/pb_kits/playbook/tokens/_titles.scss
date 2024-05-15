@@ -34,7 +34,11 @@
 }
 
 @mixin pb_title_dark {
-  color: $text_dk_default;
+    color: $text_dk_default;
+} 
+
+@mixin pb_title_dark_link {
+    color: $active_dark;
 }
 
 @mixin pb_title_bold {

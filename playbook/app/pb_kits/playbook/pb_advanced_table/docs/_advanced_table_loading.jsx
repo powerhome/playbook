@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { AdvancedTable } from "../../";
+import React, { useState } from "react"
+import { AdvancedTable } from "../../"
 import { Button } from "../../"
-import { MOCK_DATA } from "./_mock_data";
+import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableLoading = (props) => {
 
@@ -37,7 +37,7 @@ const [isloading, setIsLoading] = useState(true)
       accessor: "graduatedStudents",
       label: "Graduated Students",
     },
-  ];
+  ]
 
   return (
     <div>
@@ -54,7 +54,7 @@ const [isloading, setIsLoading] = useState(true)
           {...props}
       />
     </div>
-  );
-};
+  )
+}
 
-export default AdvancedTableLoading;
+export default AdvancedTableLoading

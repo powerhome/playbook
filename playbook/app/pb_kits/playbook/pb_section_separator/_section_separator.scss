@@ -47,8 +47,7 @@ $section_colors_dark: (
 
   &[class*=_dashed] {
     &::before, &::after {
-      border: 1px dashed $border_light;
-      background: none;
+      @include section_separator_dashed(false);
     }
   }
 
@@ -64,6 +63,11 @@ $section_colors_dark: (
     &[class*=_vertical] {
       &::after {
         @include section_separator_vertical(true);
+      }
+    }
+    &[class*=_dashed] {
+      &::before, &::after {
+        @include section_separator_dashed(true);
       }
     }
   }

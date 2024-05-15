@@ -1,0 +1,27 @@
+<%= content_tag(:div,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.option[:id],
+    **combined_html_options) do %>
+    <%= pb_rails("list/item", props: {
+        display: "flex", 
+        justify_content: "center", 
+        padding:"none", 
+        cursor: "pointer"
+        }) do %> 
+            <%= pb_rails("flex", props: {
+                align: "center",
+                classname:"dropdown_option_wrapper",
+                justify: "between",
+                padding_x:"sm",
+                padding_y:"xxs",
+                }) do %>
+                <% if content.present? %>
+                    <%= content.presence %>
+                <% else %>
+                    <%= pb_rails("body", props: {text: object.option[:label]}) %>
+                <% end %>
+            <% end %>
+    <% end %>
+<% end %>

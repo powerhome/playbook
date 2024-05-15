@@ -17,6 +17,11 @@ $additional_colors: (
   "light": $bg_light,
   "white": $white,
   "none": none,
+  "success_subtle": $success_subtle,
+  "warning_subtle": $warning_subtle,
+  "error_subtle": $error_subtle,
+  "info_subtle": $info_subtle,
+  "neutral_subtle": $neutral_subtle,
 );
 $background_colors: map-merge($product_colors, $additional_colors);
 $pb_card_header_colors: map-merge(map-merge($product_colors, $additional_colors), $category_colors);

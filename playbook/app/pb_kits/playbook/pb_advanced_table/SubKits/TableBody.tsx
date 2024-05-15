@@ -1,27 +1,33 @@
 import React, { useContext } from "react"
-import classnames from "classnames";
-import { buildCss } from "../../utilities/props";
-import { globalProps } from "../../utilities/globalProps";
-import LoadingInline from "../../pb_loading_inline/_loading_inline"
+import classnames from "classnames"
 import { flexRender, Row } from "@tanstack/react-table"
+
+import { GenericObject } from "../../types"
+
+import { buildCss } from "../../utilities/props"
+import { globalProps } from "../../utilities/globalProps"
+import { isChrome } from "../Utilities/BrowserCheck"
+
+import LoadingInline from "../../pb_loading_inline/_loading_inline"
 
 import { SubRowHeaderRow } from "../Components/SubRowHeaderRow"
 import { LoadingCell } from "../Components/LoadingCell"
 import { renderCollapsibleTrail } from "../Components/CollapsibleTrail"
+
 import AdvancedTableContext from "../Context/AdvancedTableContext"
-import { isChrome } from "../Utilities/BrowserCheck"
-import { DataType } from "../Utilities/types"
 
 type TableBodyProps = {
-  className?: string;
+  className?: string
   collapsibleTrail?: boolean
-  id?: string;
+  dark?: boolean
+  id?: string
   subRowHeaders?: string[]
 }
 
 export const TableBody = ({
   className,
   collapsibleTrail = true,
+  dark = false,
   id,
   subRowHeaders,
   ...props
@@ -40,14 +46,14 @@ export const TableBody = ({
     buildCss("pb_advanced_table_body"),
     globalProps(props),
     className
-  );
+  )
 
   return (
     <>
       <tbody className={classes} 
           id={id}
       >
-        {table.getRowModel().rows.map((row: Row<DataType>) => {
+        {table.getRowModel().rows.map((row: Row<GenericObject>) => {
           const isExpandable = row.getIsExpanded()
           const isFirstChildofSubrow = row.depth > 0 && row.index === 0
           const rowHasNoChildren = row.original.children && !row.original.children.length ? true : false

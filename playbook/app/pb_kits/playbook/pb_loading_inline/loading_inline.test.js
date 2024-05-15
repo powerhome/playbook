@@ -39,3 +39,17 @@ test('should render aria-label', () => {
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveAttribute('aria-label', testId)
 })
+
+
+test('displays custom text content', () => {
+    render(
+        <LoadingInline
+            aria={{ label: testId }}
+            data={{ testid: testId }}
+            text=' Saving'
+        />
+    )
+  
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveTextContent('Saving')
+})

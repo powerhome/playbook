@@ -135,6 +135,9 @@ useEffect(() => {
   }, scrollContainer)
 })
   const filteredProps = {...props}
+  if (filteredProps.marginBottom === undefined) {
+    filteredProps.marginBottom = "sm"
+  } 
   delete filteredProps?.position
 
   const classes = classnames(

@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Background,
   Body,
   Button,
   Caption,
@@ -20,79 +21,86 @@ const scaleObj = { 'sm': '@1.05', 'md': '@1.10', 'lg': '@1.15' }
 
 const Hover = ({ example }: { example: string }) => (
   <React.Fragment>
-    <Title
+    <Background
+      className="token-wrapper"
+      paddingRight="xl"
+      paddingLeft="xl"
+      paddingTop="xl"
+    >
+      <Title
         marginBottom="sm"
         size={1}
         tag="h1"
         text="Hover"
-    />
-    <Body
+      />
+      <Body
         paddingBottom="xxs"
         text="Adding our hover prop is useful for easily customizing UI for kit interactions."
-    />
-    <Button
+      />
+      <Button
         link="https://codesandbox.io/s/playbook-global-hover-prop-example-forked-mhssmm?file=/src/App.js"
         newWindow
         padding="none"
         tabIndex={0}
         variant="link"
-    >
-      <Body
-          variant="link"
       >
-        {'See this prop in action in our sample UI'}
-        <Icon
+        <Body
+          variant="link"
+        >
+          {'See this prop in action in our sample UI'}
+          <Icon
             fixedWidth
             icon="angle-right"
-        />
-      </Body>
-    </Button>
-    <Title
+          />
+        </Body>
+      </Button>
+      <Title
         marginBottom="xs"
         marginTop="md"
         size={4}
         tag="h4"
         text="Global Props"
-    />
-    <Body
+      />
+      <Body
         marginBottom="md"
         text="Available in every kit. These are added globally as they are most flexible when developing."
-    />
+      />
+    </Background>
     <Example
-        customChildren
-        example={example}
+      customChildren
+      example={example}
     >
       <Flex
-          paddingBottom="sm"
-          vertical="stretch"
+        paddingBottom="sm"
+        vertical="stretch"
       >
         <Card.Body
-            marginRight="xl"
-            paddingRight="xl"
+          marginRight="xl"
+          paddingRight="xl"
         >
           <Caption
-              marginBottom="sm"
-              text="Props"
+            marginBottom="sm"
+            text="Props"
           />
           <Pill
-              text="hover"
-              textTransform="none"
+            text="hover"
+            textTransform="none"
           />
         </Card.Body>
         <SectionSeparator
-            marginBottom="xs"
-            marginLeft="xl"
-            marginTop="md"
-            orientation="vertical"
-            paddingLeft="xl"
-            variant="card"
+          marginBottom="xs"
+          marginLeft="xl"
+          marginTop="md"
+          orientation="vertical"
+          paddingLeft="xl"
+          variant="card"
         />
         <Table
-            container={false}
-            dataTable
-            marginTop="sm"
-            marginX="sm"
-            size="sm"
+          container={false}
+          dataTable
+          marginTop="sm"
+          marginX="sm"
+          size="sm"
         >
           <thead>
             <tr>
@@ -104,35 +112,35 @@ const Hover = ({ example }: { example: string }) => (
             <tr>
               <td>
                 <Pill
-                    text="background"
-                    textTransform="none"
-                    variant="warning"
+                  text="background"
+                  textTransform="none"
+                  variant="warning"
                 />
               </td>
               <td>
                 <Pill
-                    text="${color}"
-                    textTransform="none"
-                    variant="warning"
+                  text="${color}"
+                  textTransform="none"
+                  variant="warning"
                 />
               </td>
             </tr>
             <tr>
               <td>
                 <Pill
-                    text="shadow"
-                    textTransform="none"
-                    variant="warning"
+                  text="shadow"
+                  textTransform="none"
+                  variant="warning"
                 />
               </td>
               <td>
                 {shadowArr.map((value) => {
                   return (
                     <Pill
-                        key={value}
-                        text={value}
-                        textTransform="none"
-                        variant="warning"
+                      key={value}
+                      text={value}
+                      textTransform="none"
+                      variant="warning"
                     />
                   )
                 })}
@@ -141,19 +149,19 @@ const Hover = ({ example }: { example: string }) => (
             <tr>
               <td>
                 <Pill
-                    text="scale"
-                    textTransform="none"
-                    variant="warning"
+                  text="scale"
+                  textTransform="none"
+                  variant="warning"
                 />
               </td>
               <td>
                 {Object.entries(scaleObj).map(([key]) => {
                   return (
                     <Pill
-                        key={key}
-                        text={key}
-                        textTransform="none"
-                        variant="warning"
+                      key={key}
+                      text={key}
+                      textTransform="none"
+                      variant="warning"
                     />
                   )
                 })}
@@ -163,81 +171,86 @@ const Hover = ({ example }: { example: string }) => (
         </Table>
       </Flex>
     </Example>
-
-    <Card
+    <Background
+      className="token-wrapper"
+      padding="xl"
+    >
+      <Card
         marginTop="md"
         shadow="deep"
-    >
-      <Flex
+      >
+        <Flex
           orientation="column"
           wrap
-      >
-        <FlexItem paddingBottom="xs">
-          <Caption
+          maxWidth="xl"
+        >
+          <FlexItem paddingBottom="xs">
+            <Caption
               text="Visual Guide"
-          />
-        </FlexItem>
-        <FlexItem>
-          <Body
+            />
+          </FlexItem>
+          <FlexItem>
+            <Body
               text="Hover over any card below to view hover property."
-          />
-        </FlexItem>
-        <FlexItem paddingY="sm">
-          <Flex
+            />
+          </FlexItem>
+          <FlexItem paddingY="sm">
+            <Flex
               gap="sm"
               wrap
-          >
-            <Card
+            >
+              <Card
                 hover={{ background: 'success_subtle' }}
                 padding="xs"
-            >
-              <Body
+              >
+                <Body
                   text="background color*"
-              />
-            </Card>
-            {shadowArr.map((value) => {
-              return (
-                <Card
+                />
+              </Card>
+              {shadowArr.map((value) => {
+                return (
+                  <Card
                     hover={{ shadow: value }}
                     key={value}
                     padding="xs"
-                >
-                  <Body
+                  >
+                    <Body
                       text={`shadow ${value}`}
-                  />
-                </Card>
-              )
-            })}
-            {Object.entries(scaleObj).map(([key, value]) => {
-              return (
-                <Card
+                    />
+                  </Card>
+                )
+              })}
+              {Object.entries(scaleObj).map(([key, value]) => {
+                return (
+                  <Card
                     hover={{ scale: key }}
                     key={key}
                     padding="xs"
-                >
-                  <Flex align="center">
-                    <Body
+                  >
+                    <Flex align="center">
+                      <Body
                         paddingRight="xxs"
                         text={`scale ${key}`}
-                    />
-                    <Caption
+                      />
+                      <Caption
                         size="xs"
                         text={value}
-                    />
-                  </Flex>
-                </Card>
-              )
-            })}
-          </Flex>
-        </FlexItem>
-        <FlexItem>
-          <Caption
+                      />
+                    </Flex>
+                  </Card>
+                )
+              })}
+            </Flex>
+          </FlexItem>
+          <FlexItem>
+            <Caption
               size="xs"
               text="*background accepts any color token"
-          />
-        </FlexItem>
-      </Flex>
-    </Card>
+            />
+          </FlexItem>
+        </Flex>
+      </Card>
+    </Background>
   </React.Fragment>
 )
 

@@ -2,7 +2,8 @@
     aria: object.aria,
     id: object.id,
     data: object.data,
-    class: object.classname) do %>
+    class: object.classname,
+    **combined_html_options) do %>
   <%= pb_rails("caption", props: object.caption_props) %>
 
   <div class=<%= "pb_currency_wrapper#{object.variant_class || object.emphasized_class}" %>>

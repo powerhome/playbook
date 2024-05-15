@@ -1,6 +1,6 @@
-import React from "react";
-import { AdvancedTable } from "../..";
-import { MOCK_DATA_INLINE_LOADING } from "./_mock_data_inline_loading";
+import React from "react"
+import { AdvancedTable } from "../.."
+import { MOCK_DATA_INLINE_LOADING } from "./_mock_data_inline_loading"
 
 const AdvancedTableInlineRowLoading = (props) => {
   const columnDefinitions = [
@@ -33,7 +33,7 @@ const AdvancedTableInlineRowLoading = (props) => {
       accessor: "graduatedStudents",
       label: "Graduated Students",
     },
-  ];
+  ]
 
   //Render the subRow header rows
   const subRowHeaders = ["Quarter", "Month", "Day"]
@@ -52,7 +52,7 @@ const AdvancedTableInlineRowLoading = (props) => {
         <AdvancedTable.Body subRowHeaders={subRowHeaders}/>
       </AdvancedTable>
     </div>
-  );
-};
+  )
+}
 
-export default AdvancedTableInlineRowLoading;
+export default AdvancedTableInlineRowLoading

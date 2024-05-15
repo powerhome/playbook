@@ -118,6 +118,22 @@ type Position = {
   position?: "relative" | "absolute" | "fixed" | "sticky" | "static",
 }
 
+type Top = {
+  top?: Sizes | {value: string, inset: boolean},
+}
+
+type Right = {
+  right?: Sizes | {value: string, inset: boolean},
+}
+
+type Bottom = {
+  bottom?: Sizes | {value: string, inset: boolean},
+}
+
+type Left = {
+  left?: Sizes | {value: string, inset: boolean},
+}
+
 type Shadow = {
   shadow?: "none" | "deep" | "deeper" | "deepest",
 }
@@ -151,7 +167,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & ZIndex & { hover?: string };
+  Position & Shadow & TextAlign & Truncate & ZIndex & { hover?: string } & Top & Right & Bottom & Left;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -160,6 +176,19 @@ const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: st
     return `${classPrefix}_${size}_${propValue}`
   }).join(" ")
 }
+
+//reusable function for top, bottom, right and left props
+const getPositioningPropsClasses = (position: string, value: Sizes | {value: string, inset: boolean} ) => {
+  let css = "";
+  if (typeof value === 'string') {
+    css += `${position}_${value}`;
+  } else if (typeof value === 'object' && value.inset) {
+    css += `${position}_${value.value}_inset`;
+  } else if (typeof value === 'object') {
+    css += `${position}_${value.value}`;
+  }
+  return css;
+};
 
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
@@ -424,6 +453,17 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += position && position !== 'static' ? `position_${position}` : ''
     return css
   },
+
+
+  topProps: ({top}) => getPositioningPropsClasses('top', top), 
+
+  rightProps: ({right}) => getPositioningPropsClasses('right', right), 
+
+  bottomProps:({bottom}) =>  getPositioningPropsClasses('bottom', bottom), 
+  
+  leftProps: ({left}) => getPositioningPropsClasses('left', left),
+    
+  
   textAlignProps: ({ textAlign }: TextAlign) => {
     if (typeof textAlign === 'object') {
       return getResponsivePropClasses(textAlign, 'text_align')

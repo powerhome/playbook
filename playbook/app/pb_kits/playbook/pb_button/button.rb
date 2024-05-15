@@ -34,10 +34,8 @@ module Playbook
                               default: "far"
 
       def options
-        {
-          aria: aria,
+        options = {
           class: classname,
-          data: data,
           disabled: disabled,
           id: id,
           role: "button",
@@ -46,6 +44,7 @@ module Playbook
           value: value,
           form: form,
         }.compact
+        combined_html_options.merge!(options) if combined_html_options.present?
       end
 
       def target_attribute

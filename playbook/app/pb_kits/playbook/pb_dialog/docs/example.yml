@@ -27,5 +27,5 @@ examples:
   - dialog_default_swift: Simple
   - dialog_sizes_swift: Sizes
   - dialog_status_swift: Status
-  - dialog_props_table: ""
+  - dialog_props_swift: ""
   

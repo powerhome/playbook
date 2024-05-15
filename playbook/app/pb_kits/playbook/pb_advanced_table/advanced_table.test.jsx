@@ -1,7 +1,7 @@
-import React, {useState} from "react";
-import { render, screen } from "../utilities/test-utils";
+import React, {useState} from "react"
+import { render, screen, waitFor } from "../utilities/test-utils"
 
-import { AdvancedTable } from "../";
+import { AdvancedTable } from "../"
 
 const MOCK_DATA = [
   {
@@ -40,7 +40,7 @@ const MOCK_DATA = [
       },
     ],
   },
-];
+]
 
 const MOCK_DATA_LOADING = [
   {
@@ -70,7 +70,7 @@ const MOCK_DATA_LOADING = [
       },
     ],
   },
-];
+]
 
 const columnDefinitions = [
   {
@@ -86,11 +86,11 @@ const columnDefinitions = [
     accessor: "scheduledMeetings",
     label: "Scheduled Meetings",
   },
-];
+]
 
 const subRowHeaders = ["Quarter"]
 
-const testId = "advanced_table";
+const testId = "advanced_table"
 
 const AdvancedTableExpandControl = () => {
   const [expanded, setExpanded] = useState({'0': true})
@@ -109,7 +109,7 @@ return (
         tableData={MOCK_DATA}
     />
   </div>
-);
+)
 }
 
 const AdvancedTableSortControl = () => {
@@ -132,7 +132,7 @@ return (
         <AdvancedTable.Body />
       </AdvancedTable>
   </div>
-);
+)
 }
 
 const tableOptions = {
@@ -158,12 +158,12 @@ test("Generates default kit and classname", () => {
         data={{ testid: testId }}
         tableData={MOCK_DATA}
     />
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
-  expect(kit).toBeInTheDocument();
+  const kit = screen.getByTestId(testId)
+  expect(kit).toBeInTheDocument()
   expect(kit).toHaveClass('pb_advanced_table')
-});
+})
 
 test("Generates aria label", () => {
   render(
@@ -173,11 +173,11 @@ test("Generates aria label", () => {
         data={{ testid: testId }}
         tableData={MOCK_DATA}
     />
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   expect(kit).toHaveAttribute('aria-label', testId)
-});
+})
 
 test("Row toggle button exists and toggles subrows open and closed", () => {
   render(
@@ -186,9 +186,9 @@ test("Row toggle button exists and toggles subrows open and closed", () => {
         data={{ testid: testId }}
         tableData={MOCK_DATA}
     />
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const rowButton = kit.querySelector(".gray-icon.expand-toggle-icon")
   expect(rowButton).toBeInTheDocument()
   const subRow1 = kit.querySelector(".bg-white.depth-sub-row-1")
@@ -196,26 +196,32 @@ test("Row toggle button exists and toggles subrows open and closed", () => {
   rowButton.click()
   const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
   expect(subRow).toBeInTheDocument()
-});
+})
 
-test("toggleExpansionAll button exists and toggles subrows open and closed", () => {
+test("toggleExpansionAll button exists and toggles subrows open and closed", async () => {
   render(
     <AdvancedTable
         columnDefinitions={columnDefinitions}
         data={{ testid: testId }}
         tableData={MOCK_DATA}
     />
-  );
+  )
 
   const kit = screen.getByTestId(testId);
-  const toggleButton = kit.querySelector(".gray-icon.toggle-all-icon")
-  expect(toggleButton).toBeInTheDocument()
-  const subRow1 = kit.querySelector(".bg-white.depth-sub-row-1")
-  expect(subRow1).not.toBeInTheDocument()
-  toggleButton.click()
-  const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
-  expect(subRow).toBeInTheDocument()
-});
+  const toggleButton = kit.querySelector(".gray-icon.toggle-all-icon");
+  expect(toggleButton).toBeInTheDocument();
+
+  const subRow1 = kit.querySelector(".bg-white.depth-sub-row-1");
+  expect(subRow1).not.toBeInTheDocument();
+
+  toggleButton.click();
+
+  await waitFor(() => {
+    const subRow = kit.querySelector(".bg-white.depth-sub-row-1");
+    expect(subRow).toBeInTheDocument();
+  })
+})
+
 
 test("loading state + initialLoadingRowCount prop", () => {
   render(
@@ -226,16 +232,16 @@ test("loading state + initialLoadingRowCount prop", () => {
         loading
         tableData={MOCK_DATA}
     />
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const table = kit.querySelector('table')
   expect(table).toHaveClass('pb_table table-sm table-responsive-none table-card data_table ns_tabular content-loading')
 
   const tableBody = kit.querySelector('tbody')
   const tableRows = tableBody.getElementsByTagName('tr')
   expect(tableRows).toHaveLength(13)
-});
+})
 
 test("subRowHeaders are rendered", () => {
   render(
@@ -247,21 +253,21 @@ test("subRowHeaders are rendered", () => {
       <AdvancedTable.Header />
       <AdvancedTable.Body subRowHeaders={subRowHeaders}/>
     </AdvancedTable>
-    );
+    )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
 
   const rowButton = kit.querySelector(".gray-icon.expand-toggle-icon")
   rowButton.click()
   
   const subRowHeader = kit.querySelector(".custom-row.bg-silver")
   expect(subRowHeader).toBeInTheDocument()
-});
+})
 
 test("expandControl prop works as expected", () => {
   render (<AdvancedTableExpandControl/>)
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
   expect(subRow).toBeInTheDocument()
 })
@@ -274,13 +280,13 @@ test("tableOptions prop functions as expected", () => {
         tableData={MOCK_DATA}
         tableOptions={tableOptions}
     />
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const row1 = kit.getElementsByTagName('tr')[1]
   
   expect(row1.id).toBe("1-1-0-row")
-});
+})
 
 test("tableProps prop functions as expected", () => {
   render(
@@ -290,12 +296,12 @@ test("tableProps prop functions as expected", () => {
         tableData={MOCK_DATA}
         tableProps={tableProps}
     />
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const table = kit.querySelector('table')
   expect(table).toHaveClass("pb_table table-sm table-responsive-none data_table sticky-header ns_tabular")
-});
+})
 
 test("enableExpansionIcon changes icon", () => {
   render(
@@ -306,13 +312,13 @@ test("enableExpansionIcon changes icon", () => {
         tableProps={tableProps}
         toggleExpansionIcon= "chevron-up"
     />
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const tableHead = kit.querySelector('table')
   const toggleIcon= tableHead.querySelector(".pb_icon_kit")
   expect(toggleIcon).toHaveClass("fa-chevron-up")
-});
+})
 
 test("sortIcon changes icon", () => {
   render(
@@ -328,18 +334,18 @@ test("sortIcon changes icon", () => {
       />
       <AdvancedTable.Body />
     </AdvancedTable>
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const sortIcon = kit.querySelector('.sort-button-icon')
   const icon= sortIcon.querySelector(".pb_icon_kit")
   expect(icon).toHaveClass("fa-chevron-down")
-});
+})
 
 test("Sort icon renders with enableSorting + sortControl works as expected", () => {
   render (<AdvancedTableSortControl/>)
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const sortIcon = kit.querySelector(".sort-button-icon")
   expect(sortIcon).toBeInTheDocument()
 
@@ -358,9 +364,9 @@ test("sort button exists and sorts column data", () => {
       <AdvancedTable.Header enableSorting />
       <AdvancedTable.Body />
     </AdvancedTable>
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
 
   const sortButton= kit.querySelector(".pb_flex_kit_orientation_row_justify_content_between_align_items_top_spacing_none.pl_xxs.cursor_pointer.header-sort-button.pb_th_link")
   expect(sortButton).toBeInTheDocument()
@@ -372,7 +378,7 @@ test("sort button exists and sorts column data", () => {
 
   const row2 = kit.getElementsByTagName('tr')[2]
   expect(row2.id).toBe("0-0-0-row")
-}); 
+}) 
 
 test("Generates Table.Header default + custom classname", () => {
   render(
@@ -385,12 +391,12 @@ test("Generates Table.Header default + custom classname", () => {
       <AdvancedTable.Body />
 
     </AdvancedTable>
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const tableHeader = kit.querySelector('thead')
   expect(tableHeader).toHaveClass('pb_advanced_table_header custom-header')
-});
+})
 
 test("Generates Table.Body default + custom classname", () => {
   render(
@@ -403,12 +409,12 @@ test("Generates Table.Body default + custom classname", () => {
       <AdvancedTable.Body className="custom-body-classname"/>
 
     </AdvancedTable>
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const tableHeader = kit.querySelector('tbody')
   expect(tableHeader).toHaveClass('pb_advanced_table_body custom-body-classname')
-});
+})
 
 test("inlineRowLoading prop renders inline loading if true", () => {
   render(
@@ -418,12 +424,12 @@ test("inlineRowLoading prop renders inline loading if true", () => {
         inlineRowLoading
         tableData={MOCK_DATA_LOADING}
     />
-  );
+  )
 
-  const kit = screen.getByTestId(testId);
+  const kit = screen.getByTestId(testId)
   const rowButton = kit.querySelector(".gray-icon.expand-toggle-icon")
   expect(rowButton).toBeInTheDocument()
   rowButton.click()
   const inlineLoading = kit.querySelector(".fa-spinner")
   expect(inlineLoading).toBeInTheDocument()
-});
+})

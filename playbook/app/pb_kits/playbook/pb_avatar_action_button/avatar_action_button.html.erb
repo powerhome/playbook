@@ -2,7 +2,8 @@
     aria: object.aria,
     id: object.id,
     data: object.data,
-    class: object.classname) do %>
+    class: object.classname,
+    **combined_html_options) do %>
     <% if object.tooltip_text.present? %>
         <%= pb_rails("tooltip", props: {
           trigger_element_id: object.tooltip_id,

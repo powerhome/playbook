@@ -72,10 +72,6 @@ const Footer = () => {
             flexDirection={{ xs: "row" }}
           >
             <Flex maxWidth='sm' paddingTop='xl' display={{ xs: "none" }}>
-              {/* <img
-                src='media/images/power-subtract-logo.svg'
-                alt='Power Subtract Logo'
-              /> */}
               <FlexItem alignSelf='center'>
                 <Body
                   dark

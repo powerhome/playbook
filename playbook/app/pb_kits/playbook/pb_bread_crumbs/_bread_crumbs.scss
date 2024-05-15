@@ -1,4 +1,3 @@
-@import "../tokens/border_radius";
 @import "../tokens/colors";
 @import "../tokens/opacity";
 @import "../tokens/spacing";
@@ -10,11 +9,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: $border_rad_light;
   padding: 0 $space_xs/2;
-  border-width: 1px;
-  border-style: solid;
-  border-color: $card_light;
 
   svg {
    margin-right: 8px;
@@ -44,8 +39,6 @@
   }
 
   &.dark {
-    border-width: 0;
-
     @each $color_name, $color_value in $status_colors {
       &[class*=_#{$color_name}]  {
         background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);

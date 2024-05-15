@@ -14,10 +14,10 @@ const MainSidebar = ({
   PBversion,
   search_list,
   samples,
+  getting_started,
 }) => {
   //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
-
   const transformKitsData = (kitsArray) => {
     return kitsArray.map(kit => {
       // There's only one key per object, so we get the kit name and its components
@@ -84,6 +84,7 @@ const MainSidebar = ({
           category={category}
           collapsibles={collapsibles}
           samples={samples}
+          getting_started={getting_started}
         />
       </Nav>
     </>

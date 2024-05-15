@@ -1,7 +1,7 @@
 <% if @navigation.present? %>
   <%= pb_rails("layout", props: { layout: "collection", margin_y: "xl", padding_bottom: "xl" }) do %>
     <%= pb_rails("layout/body") do %>
-      <% @navigation[:pages].partition { |page| page[:title] != "HTML & CSS Setup" }.flatten(1).each do |page_name| %>
+      <% @navigation[:pages].each do |page_name| %>
         <%= link_to "/#{page_name[:url]}", class: "display_flex align_items_stretch" do %>
           <%= pb_rails("card", props: { padding: "none", hover: { shadow: "deep" }, flex: 1} ) do %>
             <%= pb_rails("background" ) do %>

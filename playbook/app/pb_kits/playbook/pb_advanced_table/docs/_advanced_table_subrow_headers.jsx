@@ -1,6 +1,6 @@
-import React from "react";
-import { AdvancedTable } from "../..";
-import { MOCK_DATA } from "./_mock_data";
+import React from "react"
+import { AdvancedTable } from "../.."
+import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableSubrowHeaders = (props) => {
   const columnDefinitions = [
@@ -33,7 +33,7 @@ const AdvancedTableSubrowHeaders = (props) => {
       accessor: "graduatedStudents",
       label: "Graduated Students",
     },
-  ];
+  ]
 
   //Render the subRow header rows
   const subRowHeaders = ["Quarter", "Month", "Day"]
@@ -51,7 +51,7 @@ const AdvancedTableSubrowHeaders = (props) => {
         <AdvancedTable.Body subRowHeaders={subRowHeaders}/>
       </AdvancedTable>
     </div>
-  );
-};
+  )
+}
 
-export default AdvancedTableSubrowHeaders;
+export default AdvancedTableSubrowHeaders

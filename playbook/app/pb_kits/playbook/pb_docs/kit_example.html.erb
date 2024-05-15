@@ -23,11 +23,11 @@
         <ul>
           <% hide_button = type == "rails" ? 'flex' : 'none' %>
             <li>
-            <%= pb_rails("button", props: { id:"copy-html-#{example_key}", icon: "copy", text: "Copy HTML", variant: "link", size: "sm", display: hide_button }) %>
+            <%= pb_rails("button", props: { id:"copy-html-#{example_key}", icon: "copy", text: "Copy HTML", classname: dark ? "dark" : "", variant: "link", size: "sm", display: hide_button }) %>
             </li>
           <li>
-            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-opened", text: "Close Code", variant: "link", size: "sm", display: "none" }) %>
-            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-closed", text: "Show Code", variant: "link", size: "sm" }) %>
+            <%= pb_rails("button", props: { icon: "code", classname: dark ? "dark" : "", id:"toggle-open-opened", text: "Close Code", variant: "link", size: "sm", display: "none" }) %>
+            <%= pb_rails("button", props: { icon: "code", classname: dark ? "dark" : "", id:"toggle-open-closed", text: "Show Code", variant: "link", size: "sm" }) %>
           </li>
         </ul>
       </div>

@@ -26,7 +26,8 @@ module Playbook
                     nested_kit: Playbook::PbTextInput::AddOn
 
       def classname
-        generate_classname("pb_text_input_kit") + error_class + inline_class
+        default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
+        generate_classname("pb_text_input_kit") + default_margin_bottom + error_class + inline_class
       end
 
       def input_tag

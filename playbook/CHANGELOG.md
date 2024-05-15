@@ -1,3 +1,191 @@
+# Upgrade Your Data Game: Explore the Enhanced Features of Bar Charts!
+
+##### April 22, 2024
+
+![chart](https://github.com/powerhome/playbook/assets/9158723/43a3d714-8ddb-4579-9cb6-2bd154f1a60c)
+
+
+Say hello to a whole new level of versatility! With our new updates, you can showcase negative values, stack data for clearer insights, and effortlessly integrate a secondary yAxis for comprehensive data representation—all in a single, dynamic graph. Elevate your data visualization game and unlock limitless possibilities with Playbook's enhanced Bar Chart.
+
+**Kit Enhancements:**
+
+- Dropdown Kit V2 [\#3355](https://github.com/powerhome/playbook/pull/3355) ([nidaqg](https://github.com/nidaqg))
+- Update Badge Color for Readability [\#3347](https://github.com/powerhome/playbook/pull/3347) ([elisashapiro](https://github.com/elisashapiro))
+- POC Bar Chart: Show Negative Numbers, a Median Line, and Stacked Bar Data [\#3332](https://github.com/powerhome/playbook/pull/3332) ([nickamantia](https://github.com/nickamantia))
+- Investigation: Test Typeahead With Consideration for New Prop for Menulist [\#3324](https://github.com/powerhome/playbook/pull/3324) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Investigation: Displaying Numbers on the Right Side of the Bar Chart Graph [\#3319](https://github.com/powerhome/playbook/pull/3319) ([nickamantia](https://github.com/nickamantia))
+
+**Fixed Bugs:**
+
+- Circle Icon Kit: Fix Sizing Error When Global Spacing Props Are Used [\#3352](https://github.com/powerhome/playbook/pull/3352) ([elisashapiro](https://github.com/elisashapiro))
+- Background Kit Remove Empty Inline Styles/attributes [\#3348](https://github.com/powerhome/playbook/pull/3348) ([elisashapiro](https://github.com/elisashapiro))
+- Update Text Styles to Prevent Inconsistent Tiptap Output [\#3340](https://github.com/powerhome/playbook/pull/3340) ([elisashapiro](https://github.com/elisashapiro))
+
+**New Kits:**
+
+- New Kit: Dropdown [\#3343](https://github.com/powerhome/playbook/pull/3343) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Add Px to Max Width Global Prop Values Left Aligned [\#3356](https://github.com/powerhome/playbook/pull/3356) ([elisashapiro](https://github.com/elisashapiro))
+- Verified Version Of Typography Guidelines [\#3346](https://github.com/powerhome/playbook/pull/3346) ([jasperfurniss](https://github.com/jasperfurniss))
+- Design Guidelines: Spacing [\#3309](https://github.com/powerhome/playbook/pull/3309) ([kristiflin](https://github.com/kristiflin))
+- Dry Up the Content Tag Portion Of Rails Kits: Avatar [\#3331](https://github.com/powerhome/playbook/pull/3331) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Add Run.sh [\#3351](https://github.com/powerhome/playbook/pull/3351) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Dialog Docs [\#3349](https://github.com/powerhome/playbook/pull/3349) ([rachelradford21](https://github.com/rachelradford21))
+- Bump @babel/core from 7.20.12 to 7.24.4 [\#3338](https://github.com/powerhome/playbook/pull/3338) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Jest-fail-on-console from 2.5.0 to 3.2.0 [\#3337](https://github.com/powerhome/playbook/pull/3337) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.24.0...13.25.0)
+
+
+# 🙌 Teamwork Makes the Dream Work 🙌
+
+##### April 02, 2024
+
+![workinghard](https://github.com/powerhome/playbook/assets/9158723/675fdac5-daf4-4a3d-8e1c-d609925942b0)
+
+
+We’ve been hard at work to ship requests from teams! To keep you up to date, our latest release, 13.23.0, is live in nitro-web, so keep an eye out for that.
+
+In an effort to keep supporting all of you great developers, we're excited to announce that we shipped 2 feature requests to teams, as well as fixed 5 bugs! In addition to that, we have also made a huge improvement to our system by upgrading to rails 7.0.8.1.
+
+Lastly, we're continuing to monitor and upgrade key parts of our system to keep Playbook up-to-date, so you can keep shipping great work!
+
+[13.23.0](https://github.com/powerhome/playbook/tree/13.23.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Add Xxs Icon Circle Size Variant [\#3290](https://github.com/powerhome/playbook/pull/3290) ([nickamantia](https://github.com/nickamantia))
+- Global Positioning Props to Allow Inset Value [\#3289](https://github.com/powerhome/playbook/pull/3289) ([nidaqg](https://github.com/nidaqg))
+- Make Rails Disable Prop for Toggle Kit [\#3266](https://github.com/powerhome/playbook/pull/3266) ([markdoeswork](https://github.com/markdoeswork))
+- Enable Online Status & New Colors + Hide Date Range Picker Docs [\#3260](https://github.com/powerhome/playbook/pull/3260) ([jasoncypret](https://github.com/jasoncypret))
+
+**Fixed Bugs:**
+
+- Hotfix: Fix Advanced Table Doc [\#3318](https://github.com/powerhome/playbook/pull/3318) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix UI Samples Code View [\#3308](https://github.com/powerhome/playbook/pull/3308) ([nickamantia](https://github.com/nickamantia))
+- Fix Formgroup Kit Breaking Borders Between Phone Number Input and Selects [\#3275](https://github.com/powerhome/playbook/pull/3275) ([nickamantia](https://github.com/nickamantia))
+- Default Cancel and Close Button Type to Prevent Submission [\#3273](https://github.com/powerhome/playbook/pull/3273) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix Nav Category Page [\#3296](https://github.com/powerhome/playbook/pull/3296) ([markdoeswork](https://github.com/markdoeswork))
+
+**Improvements:**
+
+- Playbook Designer Guideline -  Markdown Create Color Guidelines [\#3305](https://github.com/powerhome/playbook/pull/3305) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Moving Advanced Table Mock Data [\#3300](https://github.com/powerhome/playbook/pull/3300) ([carloslimasd](https://github.com/carloslimasd))
+- Fix Typos: Phone Number Input Kit Error Message [\#3283](https://github.com/powerhome/playbook/pull/3283) ([co1in-1ewis](https://github.com/co1in-1ewis))
+- Fix Typos: Homepage + Number Spacing [\#3282](https://github.com/powerhome/playbook/pull/3282) ([co1in-1ewis](https://github.com/co1in-1ewis))
+- Upgrade Rails [\#3281](https://github.com/powerhome/playbook/pull/3281) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Update Multilevel React Doc for Clarity on Selectedids [\#3277](https://github.com/powerhome/playbook/pull/3277) ([elisashapiro](https://github.com/elisashapiro))
+- Letting User Reset Row Expansion In Advanced Table [\#3269](https://github.com/powerhome/playbook/pull/3269) ([carloslimasd](https://github.com/carloslimasd))
+
+
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.22.0...13.23.0)
+
+
+# 🔨 Squashing Bugs, Enhancing Kits, and Introducing New Features! 🔨
+
+##### March 27, 2024
+
+![bugs](https://github.com/powerhome/playbook/assets/9158723/131d1168-3bf5-4e6d-8ea9-fd4f5e30b0e0)
+
+We squashed a lot of bugs, and spruced up Playbook as a whole by upgrading to Ruby 3.3.0. 
+We're also proud to announce that we will be upgrading Rails to 7.0.8 in the next release. 🙌
+
+[13.22.0](https://github.com/powerhome/playbook/tree/13.22.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table Kit: Further Improve "expand All" Subrows Expansion Speed [\#3258](https://github.com/powerhome/playbook/pull/3258) ([nickamantia](https://github.com/nickamantia))
+- Add Global Html Options for Rails Kits [\#3247](https://github.com/powerhome/playbook/pull/3247) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fix for Datepicker Year Bug [\#3268](https://github.com/powerhome/playbook/pull/3268) ([nidaqg](https://github.com/nidaqg))
+- Make Border Of Breadcrumbs Kit Transparent [\#3246](https://github.com/powerhome/playbook/pull/3246) ([elisashapiro](https://github.com/elisashapiro))
+- Fixing Advanced Table Hover [\#3240](https://github.com/powerhome/playbook/pull/3240) ([carloslimasd](https://github.com/carloslimasd))
+- Fix Confirmation Toast Bobile Bug [\#3203](https://github.com/powerhome/playbook/pull/3203) ([markdoeswork](https://github.com/markdoeswork))
+- Fix Bottom Margin Datepicker [\#3280](https://github.com/powerhome/playbook/pull/3280) ([markdoeswork](https://github.com/markdoeswork))
+- Aligned Spacing Around Icons Correctly [\#3256](https://github.com/powerhome/playbook/pull/3256) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix Broken Doc Page Layouts [\#3257](https://github.com/powerhome/playbook/pull/3257) ([elisashapiro](https://github.com/elisashapiro))
+
+**New Kits:**
+
+- Advanced Table Kit: Rails [\#3238](https://github.com/powerhome/playbook/pull/3238) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Ruby 3.3.0 Upgrade [\#3254](https://github.com/powerhome/playbook/pull/3254) ([jasperfurniss](https://github.com/jasperfurniss))
+- Adding Advanced Table Improvements [\#3241](https://github.com/powerhome/playbook/pull/3241) ([carloslimasd](https://github.com/carloslimasd))
+- Enable Remote Shell [\#3217](https://github.com/powerhome/playbook/pull/3217) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.21.0...13.22.0)
+
+
+
+# ✨ Enhance Your UI Flexibility with Absolute Positioning in Global Props for Advanced Kit Layering ✨
+
+##### March 18, 2024
+
+![5348fdac-67c3-4398-bb46-83f9dbc76c56](https://github.com/powerhome/playbook/assets/73710701/5477a01f-8178-47e0-8f02-8d518b8c8fc4)
+
+Take your UI design to the next level! Our latest update introduces absolute positioning in our global position props, empowering you to seamlessly arrange and layer kits. Great for intuitive status indication, notification placement, and overall enhanced user experience. 💅🎨
+
+[13.21.0](https://github.com/powerhome/playbook/tree/13.21.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Global Position Props & Examples [\#3228](https://github.com/powerhome/playbook/pull/3228) ([jasperfurniss](https://github.com/jasperfurniss))
+- Add Advanced Table Kit Dark Mode Styles [\#3219](https://github.com/powerhome/playbook/pull/3219) ([nickamantia](https://github.com/nickamantia))
+- Table Kit Subcomponents React [\#3204](https://github.com/powerhome/playbook/pull/3204) ([nidaqg](https://github.com/nidaqg))
+- Table Kit Sub Components for Rails [\#3198](https://github.com/powerhome/playbook/pull/3198) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fix Colors Guidelines Layout [\#3196](https://github.com/powerhome/playbook/pull/3196) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix Addon Input Child [\#3202](https://github.com/powerhome/playbook/pull/3202) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Fix Bold Nav Icon Color [\#3218](https://github.com/powerhome/playbook/pull/3218) ([markdoeswork](https://github.com/markdoeswork))
+- Fix Message Kit Description Typos [\#3239](https://github.com/powerhome/playbook/pull/3239) ([co1in-1ewis](https://github.com/co1in-1ewis))
+
+**Improvements:**
+
+
+- Add Turbo to Playbook [\#3211](https://github.com/powerhome/playbook/pull/3211) ([nickamantia](https://github.com/nickamantia))
+- Figma Library Getting Started Markdown - Create Figma\_setup.md [\#3195](https://github.com/powerhome/playbook/pull/3195) ([bianca0303](https://github.com/bianca0303))
+- Date Doc Update [\#3235](https://github.com/powerhome/playbook/pull/3235) ([rachelradford21](https://github.com/rachelradford21))
+- Update Setup Guide [\#3226](https://github.com/powerhome/playbook/pull/3226) ([elisashapiro](https://github.com/elisashapiro))
+- User Presence Docs [\#3200](https://github.com/powerhome/playbook/pull/3200) ([rachelradford21](https://github.com/rachelradford21))
+- Rebuild Playbook-icons-react for Use In Nitro [\#3199](https://github.com/powerhome/playbook/pull/3199) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- Docs: Add Truncate Global Prop Doc [\#3197](https://github.com/powerhome/playbook/pull/3197) ([markdoeswork](https://github.com/markdoeswork))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.20.0...13.21.0)
+
+# 13.20.0
+##### March 05, 2024
+
+List of changes:
+
+**Kit Enhancements:**
+
+- Adding Div Support for Table Kit [\#3188](https://github.com/powerhome/playbook/pull/3188) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+
+- Fixing Kit Props Table for Advanced Table [\#3183](https://github.com/powerhome/playbook/pull/3183) ([carloslimasd](https://github.com/carloslimasd))
+- Fixes for Spelling Errors In Advanced Table Docs [\#3190](https://github.com/powerhome/playbook/pull/3190) ([nidaqg](https://github.com/nidaqg))
+- Fix Icon Kit for Playbook Icons Usage [\#3201](https://github.com/powerhome/playbook/pull/3201) ([markdoeswork](https://github.com/markdoeswork))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.19.0...13.20.0)
+
+
 # 🌳 Explore Data Depths with the New Advanced Table Component in Playbook!
 
 ##### February 27, 2024
@@ -6,6 +194,7 @@
 
 Explore depths of nested data effortlessly. This latest addition to Playbook's design system brings clarity and control, transforming complex tables into intuitive insights.
 
+[13.19.0](https://github.com/powerhome/playbook/tree/13.19.0) full list of changes:
 
 **Kit Enhancements:**
 

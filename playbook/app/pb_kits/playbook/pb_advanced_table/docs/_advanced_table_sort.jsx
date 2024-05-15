@@ -1,6 +1,6 @@
-import React from "react";
-import { AdvancedTable } from "../..";
-import { MOCK_DATA } from "./_mock_data";
+import React from "react"
+import { AdvancedTable } from "../.."
+import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableSort = (props) => {
   const columnDefinitions = [
@@ -33,7 +33,7 @@ const AdvancedTableSort = (props) => {
       accessor: "graduatedStudents",
       label: "Graduated Students",
     },
-  ];
+  ]
 
   return (
     <div>
@@ -46,7 +46,7 @@ const AdvancedTableSort = (props) => {
         <AdvancedTable.Body />
       </AdvancedTable>
     </div>
-  );
-};
+  )
+}
 
-export default AdvancedTableSort;
+export default AdvancedTableSort

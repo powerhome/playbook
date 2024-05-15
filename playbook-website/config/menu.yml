@@ -53,7 +53,7 @@ kits:
         description: Tables display a collection of structured data and typically have the ability to sort, filter, and paginate data. 
         status: "stable"
       - name: "advanced_table"
-        platforms: *react_only
+        platforms: *web
         description: The Advanced Table can be used to display complex, nested data in a way that allows for expansion and/or sorting.
         status: "stable" 
       - name: "list"
@@ -254,6 +254,10 @@ kits:
         platforms: *web
         description: Playbook's date picker is built using flatpickr, a vanilla js library. Common date picker use cases and features have been adapted into simple prop based configuration detailed in the docs below.
         status: "stable"
+      - name: dropdown
+        platforms: *web
+        description: ""
+        status: "stable"
       - name: "multi_level_select"
         platforms: *web
         description: The MultiLevelSelect kit renders a multi leveled select dropdown based on data from the user. 
@@ -406,6 +410,10 @@ kits:
       - name: "badge"
         platforms: *web
         description: Badges can be used for notification, tags, and status. They are used for count and numbers.
+        status: "stable"
+      - name: "online_status"
+        platforms: *web
+        description: Online Status is a small indicator that lets the user know the status of a person or item. 
         status: "stable"
       - name: "pill"
         platforms: *all

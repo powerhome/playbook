@@ -40,6 +40,23 @@
         border: 6px solid $primary;
       }
     }
+
+    &:disabled + .pb_radio_button {
+      cursor: not-allowed;
+      background-color: mix($charcoal, $white, 5%);
+      border-color: $border_light;
+
+      & ~ .pb_body_kit {
+        cursor: not-allowed;
+        color: $text_lt_light;
+      }
+    }
+
+    &:disabled:checked + .pb_radio_button{
+      cursor: not-allowed;
+      background-color: $white;
+      border: 6px solid $neutral;
+    }
   }
 
   &[class*=vertical] {
@@ -64,6 +81,24 @@
       &:checked {
         & ~ .pb_radio_button {
           border: 6px solid $primary;
+        }
+      }
+
+      &:disabled + .pb_radio_button {
+        cursor: not-allowed;
+        background-color: mix($charcoal, $white, 80%);
+        border: 2px solid $border_dark;
+
+        & ~ .pb_body_kit {
+          cursor: not-allowed;
+          color: $text_dk_light;
+        }
+      }
+
+      &:disabled:checked {
+        & ~ .pb_radio_button {
+          background-color: mix($charcoal, $white, 80%);
+          border: 6px solid $border_dark;
         }
       }
     }

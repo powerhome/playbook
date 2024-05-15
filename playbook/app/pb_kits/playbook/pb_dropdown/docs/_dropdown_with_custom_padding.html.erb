@@ -1,0 +1,17 @@
+<% 
+  options = [
+    { label: 'United States', value: 'United States', id: 'us' },
+    { label: 'Canada', value: 'Canada', id: 'ca' },
+    { label: 'Pakistan', value: 'Pakistan', id: 'pk' },
+  ]
+
+%>
+
+<%= pb_rails("dropdown", props: {options: options}) do %>
+    <%= pb_rails("dropdown/dropdown_trigger") %>
+    <%= pb_rails("dropdown/dropdown_container") do %>
+        <% options.each do |option| %>
+            <%= pb_rails("dropdown/dropdown_option", props: {option: option, padding:"sm"}) %>
+        <% end %>
+    <% end %>
+<% end %>

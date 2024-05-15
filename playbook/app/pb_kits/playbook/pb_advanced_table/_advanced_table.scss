@@ -4,6 +4,7 @@
 @import "../tokens/spacing";
 @import "./scss_partials/loading";
 @import "./scss_partials/pseudo_states";
+@import "./scss_partials/chrome_styles";
 
 .pb_advanced_table {
   $border-color: 1px solid $border_light !important;
@@ -82,17 +83,73 @@
 
   // Vertical separator
   .table-header-cells:first-child,
-  td:first-child {
-    box-shadow: 1px 0px 0px 0px #e4e8f0 !important;
+  td:first-child,
+  .pb_table_td:first-child {
+    box-shadow: 1px 0px 0px 0px $border_light !important;
   }
 
-  .chrome-styles:first-child {
-    border-right: $border-color;
+  @include chrome_styles($border-color);
+
+  tr:hover {
+    position: relative;
   }
 
-  .table-card {
-    .chrome-styles:first-child {
-      border-right: $transparent !important;
+  .toggle-content {
+    display: none;
+    height: 0;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    overflow: hidden;
+    transition: height 300ms, padding 300ms ease-in-out;
+  }
+
+  .toggle-content.is-visible {
+    display: contents;
+    height: auto;
+  }
+
+  &.dark {
+    .bg-white {
+      background: $bg_dark_card;
+    }
+
+    .bg-silver {
+      background: $bg_dark;
+    }
+
+    .table-header-cells:first-child, td:first-child {
+      box-shadow: 1px 0px 0px 0px $border_dark !important;
+    }
+
+    .collapsible-trail {
+      background-color: $border_dark !important;
+    }
+
+    .sort-button-icon, .header-sort-button > div {
+      color: $white !important;
+    }
+
+    .gray-icon {
+      color:  $text_dk_light !important;
+    }
+
+    .sticky-header {
+      background-color: $bg_dark_card;
+    }
+
+    .loading-toggle-icon,
+    .loading-cell {
+      &::after {
+        background-color: $bg_dark !important;
+        background-image: linear-gradient(
+          to left,
+          $bg_dark 0%,
+          lighten($bg_dark, 1%) 50%,
+          lighten($bg_dark, 2%) 60%,
+          $bg_dark 80%,
+          $bg_dark 100%
+        ) !important;
+      }
     }
   }
 }

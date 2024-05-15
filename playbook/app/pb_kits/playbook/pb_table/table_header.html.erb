@@ -4,7 +4,8 @@
       aria: object.aria,
       class: object.classname,
       data: object.data,
-      id: "pb-th#{object.id}" ) do %>
+      id: "pb-th#{object.id}",
+      **combined_html_options) do %>
     <% unless sorting_style? %>
       <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon, classname: "pb_th_nolink" }) do %>
         <%= content.presence || object.text %>
@@ -51,7 +52,8 @@
     aria: object.aria,
     class: object.classname,
     data: object.data,
-    id: object.id) do %>
+    id: object.id,
+    **combined_html_options) do %>
       <%= content.presence || object.text %>
   <% end %>
 <% end %>

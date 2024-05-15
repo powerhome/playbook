@@ -26,6 +26,22 @@ $avatar-sizes: (
       flex-grow: 0;
       flex-basis: $size;
 
+      & > [class^=pb_flex_kit] {
+        [class^=pb_card_kit].overlay_bottom_center,
+        [class^=pb_card_kit].overlay_top_center {
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 2px !important;
+        }
+
+        [class^=pb_card_kit].overlay_left_center,
+        [class^=pb_card_kit].overlay_right_center {
+          top: 50%;
+          transform: translateY(-50%);
+          padding: 2px !important;
+        }
+      }
+
       .avatar_wrapper {
         width: $size;
         height: $size;
