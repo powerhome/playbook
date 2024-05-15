@@ -1,46 +1,39 @@
 import React from 'react'
-import { Collapsible, useCollapsible, Button, Background, Flex, Title, IconCircle, List, ListItem, Checkbox, TextInput } from '../..'
+import { Collapsible, useCollapsible, Background, Flex, Title, IconCircle, List, ListItem, Checkbox, TextInput } from '../..'
 
 const CollapsibleDefault = () => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
 
   return (
   <>
-    <Button
-        onClick={() => setIsCollapsed(!isCollapsed)}
-        padding="none"
-        variant="link"
-    >
-      {isCollapsed ? "Expand All" : "Collapse All"}
-    </Button>
-
     <Collapsible
         collapsed={isCollapsed}
-        icon={["plus", "minus"]}
         padding="none"
     >
-      <Background 
-          backgroundColor="white" 
-          padding="sm"
-          position="sticky" 
-          top="0" 
-      >
-          <Flex 
-              align="center" 
-              gap="sm"
-              justify="between" 
+      <div onClick={() => setIsCollapsed(!isCollapsed)}>
+          <Background 
+              backgroundColor="white" 
+              cursor="pointer"
+              padding="sm"
+              position="sticky" 
+              top="0" 
           >
-            <Title 
-                size={4} 
-                text="Section title" 
-            />
-            <IconCircle 
-                icon="check" 
-                size="xs" 
-            />
-          </Flex>
-      </Background>
-          
+              <Flex 
+                  align="center" 
+                  gap="sm"
+                  justify="between" 
+              >
+                <Title 
+                    size={4} 
+                    text="Section title" 
+                />
+                <IconCircle 
+                    icon="check" 
+                    size="xs" 
+                />
+              </Flex>
+          </Background>
+      </div>  
       <Collapsible.Content padding="none">
           <div>
           <List>
