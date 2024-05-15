@@ -10,10 +10,10 @@ const CollapsibleDefault = () => {
         collapsed={isCollapsed}
         padding="none"
     >
-      <div onClick={() => setIsCollapsed(!isCollapsed)}>
           <Background 
               backgroundColor="white" 
               cursor="pointer"
+              htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
               padding="sm"
               position="sticky" 
               top="0" 
@@ -33,7 +33,6 @@ const CollapsibleDefault = () => {
                 />
               </Flex>
           </Background>
-      </div>  
       <Collapsible.Content padding="none">
           <div>
           <List>
