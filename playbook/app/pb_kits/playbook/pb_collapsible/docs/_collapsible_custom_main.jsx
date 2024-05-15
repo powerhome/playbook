@@ -1,5 +1,5 @@
 import React from 'react'
-import { Collapsible, useCollapsible, Background, Flex, Title, IconCircle, List, ListItem, Checkbox, TextInput } from '../..'
+import { Collapsible, useCollapsible, Background, Flex, Title, IconCircle, List, ListItem } from '../..'
 
 const CollapsibleCustomMain = () => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
@@ -8,13 +8,11 @@ const CollapsibleCustomMain = () => {
   <>
     <Collapsible
         collapsed={isCollapsed}
-        padding="none"
     >
           <Background 
               backgroundColor="white" 
               cursor="pointer"
               htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
-              padding="sm"
               position="sticky" 
               top="0" 
           >
@@ -25,7 +23,7 @@ const CollapsibleCustomMain = () => {
               >
                 <Title 
                     size={4} 
-                    text="Section title" 
+                    text="Custom Main Section" 
                 />
                 <IconCircle 
                     icon="check" 
@@ -39,54 +37,32 @@ const CollapsibleCustomMain = () => {
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
-                  padding="none" 
               >
-                <Checkbox 
-                    padding="sm" 
-                    text="checklist item" 
-                />
+                Checklist item
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
-                  padding="none" 
               >
-                <Checkbox 
-                    padding="sm" 
-                    text="checklist item" 
-                />
-              </ListItem><ListItem 
-                  align="stretch"
-                  flexDirection="column" 
-                  padding="none" 
-              >
-                <Checkbox 
-                    padding="sm" 
-                    text="checklist item" 
-                />
-              </ListItem><ListItem 
-                  align="stretch"
-                  flexDirection="column" 
-                  padding="none" 
-              >
-                <Checkbox 
-                    padding="sm" 
-                    text="checklist item" 
-                />
+                Checklist item
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
-                  padding="none" 
               >
-                <Checkbox 
-                    padding="sm" 
-                    text="checklist item" 
-                />
-                <TextInput 
-                    marginX="sm" 
-                    placeholder="Describe location" 
-                />
+                Checklist item
+              </ListItem>
+              <ListItem 
+                  align="stretch"
+                  flexDirection="column" 
+              >
+                Checklist item
+              </ListItem>
+              <ListItem 
+                  align="stretch"
+                  flexDirection="column" 
+              >
+                Checklist item
               </ListItem>
             </List>
           </div>
