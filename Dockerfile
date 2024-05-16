@@ -75,9 +75,9 @@ RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=99
 FROM jsdeps AS release
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
+COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
 RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
     cd playbook; NODE_OPTIONS=$NODE_OPTIONS yarn release
-COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
 RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
     cd playbook-website; NODE_OPTIONS=$NODE_OPTIONS yarn release
 
