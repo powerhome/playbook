@@ -7,7 +7,7 @@ examples:
   - collapsible_icons: Custom Icons
   - collapsible_external_controls: Toggle Collapsible With External Controls
   - collapsible_external_controls_multiple: Toggle All Collapsibles With One Control
-  - collapsible_custom_main: Custom Main
+  - collapsible_custom_main_rails: Custom Main Section
 
   react:
   - collapsible_default: Default
@@ -15,7 +15,7 @@ examples:
   - collapsible_color: Icon Color
   - collapsible_icons: Custom Icons
   - collapsible_state: useCollapsible Hook
-  - collapsible_custom_main: Custom Main
+  - collapsible_custom_main: Custom Main Section
 
 
   swift:
