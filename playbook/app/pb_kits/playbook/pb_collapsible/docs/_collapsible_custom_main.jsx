@@ -1,5 +1,5 @@
 import React from 'react'
-import { Collapsible, useCollapsible, Background, Flex, Title, IconCircle, List, ListItem } from '../..'
+import { Collapsible, useCollapsible, Background, Flex, Title, List, ListItem } from '../..'
 
 const CollapsibleCustomMain = () => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
@@ -25,10 +25,7 @@ const CollapsibleCustomMain = () => {
                     size={4} 
                     text="Custom Main Section" 
                 />
-                <IconCircle 
-                    icon="check" 
-                    size="xs" 
-                />
+                <Collapsible.Icon collapsed={isCollapsed}/>
               </Flex>
           </Background>
       <Collapsible.Content padding="none">

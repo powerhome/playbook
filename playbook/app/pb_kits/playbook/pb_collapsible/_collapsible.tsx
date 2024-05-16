@@ -9,6 +9,7 @@ import CollapsibleContent from './child_kits/CollapsibleContent'
 import CollapsibleMain from './child_kits/CollapsibleMain'
 import CollapsibleContext from './context'
 import { IconSizes } from "../pb_icon/_icon"
+import CollapsibleIcon from './child_kits/CollapsibleIcon'
 
 
 type CollapsibleProps = {
@@ -98,5 +99,6 @@ const Collapsible = ({
 
 Collapsible.Main = CollapsibleMain
 Collapsible.Content = CollapsibleContent
+Collapsible.Icon = CollapsibleIcon
 
 export default Collapsible
