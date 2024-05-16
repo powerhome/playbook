@@ -10,7 +10,9 @@ RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locke
     mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d
 
 RUN bash -lc 'rvm remove all --force && rvm install ruby-3.3.0 && rvm --default use ruby-3.3.0 && gem install bundler -v 2.5.3'
-RUN /pd_build/ruby_support/install_ruby_utils.sh
+RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
+    /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
 
 ENV BUNDLE_TO /usr/local/rvm/gems
@@ -74,9 +76,8 @@ FROM jsdeps AS release
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
 COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
-RUN --mount=id=nitro-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
-dc
-RUN cd playbook-website; NODE_OPTIONS=$NODE_OPTIONS yarn release
+RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
+    cd playbook-website; NODE_OPTIONS=$NODE_OPTIONS yarn release
 
 FROM base AS prod
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
