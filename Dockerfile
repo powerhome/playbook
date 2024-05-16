@@ -4,7 +4,7 @@ FROM phusion/passenger-customizable:1.0.19 AS base
 
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
-    apt-get update -y \
+    apt-get update -y && \
     mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
     apt update && apt install -y ca-certificates && \
     mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d
