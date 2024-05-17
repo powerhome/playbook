@@ -31,7 +31,7 @@ Customize your Avatars with our new, innovative component overlay feature. Seaml
 
 
 # 13.26.0
-##### March 05, 2024
+##### May 01, 2024
 
 List of changes:
 
