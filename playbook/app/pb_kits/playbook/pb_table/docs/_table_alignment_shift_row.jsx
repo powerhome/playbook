@@ -7,57 +7,39 @@ const TableAlignmentShiftRow = (props) => {
     <Table
         {...props}
     >
-      <thead>
-        <tr>
-          <th>{'Column 1'}</th>
-          <th>{'Column 2'}</th>
-          <th>{'Column 3'}</th>
-          <th>{'Column 4'}</th>
-          <th>{'Column 5'}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            {'Value 1a'}
-            <br />
-            {'Value 1a'}
-            <br />
-            {'Value 1a'}
-          </td>
-          <td>{'Value 2a'}</td>
-          <td>{'Value 3a'}</td>
-          <td>{'Value 4a'}</td>
-          <td>{'Value 5a'}</td>
-        </tr>
-        <tr shift="middle">
-          <td>
-            {'Value 1b'}
-            <br />
-            {'Value 1b'}
-            <br />
-            {'Value 1b'}
-          </td>
-          <td>{'Value 2b'}</td>
-          <td>{'Value 3b'}</td>
-          <td>{'Value 4b'}</td>
-          <td>{'Value 5b'}</td>
-        </tr>
-        <tr shift="down">
-          <td>
-            {'Value 1c'}
-            <br />
-            {'Value 1c'}
-            <br />
-            {'Value 1c'}
-          </td>
-          <td>{'Value 2c'}</td>
-          <td>{'Value 3c'}</td>
-          <td>{'Value 4c'}</td>
-          <td>{'Value 5c'}</td>
-        </tr>
-      </tbody>
-    </Table>
+  <Table.Head>
+    <Table.Row>
+      <Table.Header>{'Column 1'}</Table.Header>
+      <Table.Header>{'Column 2'}</Table.Header>
+      <Table.Header>{'Column 3'}</Table.Header>
+      <Table.Header>{'Column 4'}</Table.Header>
+      <Table.Header>{'Column 5'}</Table.Header>
+    </Table.Row>
+  </Table.Head>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>{'Value 1'}</Table.Cell>
+      <Table.Cell>{'Value 2'}</Table.Cell>
+      <Table.Cell>{'Value 3'}</Table.Cell>
+      <Table.Cell>{'Value 4'}</Table.Cell>
+      <Table.Cell>{'Value 5'}</Table.Cell>
+    </Table.Row>
+    <Table.Row shift="middle">
+      <Table.Cell>{'Value 1'}</Table.Cell>
+      <Table.Cell>{'Value 2'}</Table.Cell>
+      <Table.Cell>{'Value 3'}</Table.Cell>
+      <Table.Cell>{'Value 4'}</Table.Cell>
+      <Table.Cell>{'Value 5'}</Table.Cell>
+    </Table.Row>
+    <Table.Row shift="down">
+      <Table.Cell>{'Value 1'}</Table.Cell>
+      <Table.Cell>{'Value 2'}</Table.Cell>
+      <Table.Cell>{'Value 3'}</Table.Cell>
+      <Table.Cell>{'Value 4'}</Table.Cell>
+      <Table.Cell>{'Value 5'}</Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
   )
 }
 
