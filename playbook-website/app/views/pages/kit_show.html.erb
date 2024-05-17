@@ -23,7 +23,7 @@
     <% end %>
   <% end %>
 
-  <div class="markdown <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
+  <div class="markdown kit-show-description <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
     <%= render_markdown(pb_doc_kit_description(@kit)) %>
   </div>
 </div>
