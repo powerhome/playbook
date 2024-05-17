@@ -63,15 +63,13 @@
   }
 
   &[class*=_highlight] {
-    // overflow: hidden;
+    overflow: hidden;
   }
 
   &[class*=_highlight_top] {
     @each $color_name, $color_value in $pb_card_highlight_colors {
       &[class*=_highlight_#{$color_name}]::before {
         @include pb_card_highlight(100%, $pb_card_highlight_size, $color_value);
-        border-top-left-radius: $pb_card_border_radius;
-        border-top-right-radius: $pb_card_border_radius;
       }
     }
   }
@@ -80,8 +78,6 @@
     @each $color_name, $color_value in $pb_card_highlight_colors {
       &[class*=_highlight_#{$color_name}]::before {
         @include pb_card_highlight($pb_card_highlight_size, 100%, $color_value);
-        border-top-left-radius: $pb_card_border_radius;
-        border-bottom-left-radius: $pb_card_border_radius;
       }
     }
   }
