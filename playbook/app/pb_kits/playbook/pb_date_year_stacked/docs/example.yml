@@ -5,3 +5,7 @@ examples:
 
   react:
   - date_year_stacked_default: Default
+
+ swift:
+  - date_year_stacked_default_swift: Default
+  - date_year_stacked_props_swift: ""
