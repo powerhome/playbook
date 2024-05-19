@@ -38,7 +38,6 @@ const DropdownOption = (props: DropdownOptionProps) => {
     id,
     key,
     option,
-    padding = "xs",
   } = props;
 
   const {
@@ -76,7 +75,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
       selectedClass,
       focusedClass,
     ),
-    globalProps(props, {padding}),
+    globalProps(props),
     className
   );
 
