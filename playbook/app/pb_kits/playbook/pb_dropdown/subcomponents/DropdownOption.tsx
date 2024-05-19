@@ -10,7 +10,6 @@ import { globalProps, GlobalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
 
-import Flex from "../../pb_flex/_flex";
 import Body from "../../pb_body/_body";
 import ListItem from "../../pb_list/_list_item";
 import { GenericObject } from "../../types";
@@ -98,20 +97,12 @@ const DropdownOption = (props: DropdownOptionProps) => {
           key={option.label}
           padding="none"
       >
-        <Flex
-            align="center"
-            className="dropdown_option_wrapper"
-            justify="between"
-            paddingX="sm"
-            paddingY="xxs"
-        >
           {children ? 
-              children : 
+          <div className="dropdown_option_wrapper">{children}</div> :
               <Body dark={dark} 
                   text={option.label} 
               />
           }
-        </Flex>
       </ListItem>
     </div>
   );
