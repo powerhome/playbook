@@ -75,13 +75,23 @@ export default class PbCollapsible extends PbEnhancedElement {
     this.displayUpArrow()
   }
 
-  displayDownArrow() {
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'inline-block'
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'none'
+  toggleArrows(showDownArrow) {
+    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR);
+    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR);
+  
+    if (downArrow) {
+      downArrow.style.display = showDownArrow ? 'inline-block' : 'none';
+    }
+    if (upArrow) {
+      upArrow.style.display = showDownArrow ? 'none' : 'inline-block';
+    }
   }
-
+  
+  displayDownArrow() {
+    this.toggleArrows(true);
+  }
+  
   displayUpArrow() {
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'inline-block'
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'none'
-   }
+    this.toggleArrows(false);
+  }
 }

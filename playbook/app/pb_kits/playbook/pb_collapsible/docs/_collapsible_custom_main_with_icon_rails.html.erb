@@ -1,0 +1,20 @@
+<%= pb_rails("collapsible", props: { name: "default-example" }) do %>
+    <%= pb_rails("background", props: { background_color: "white", position: "sticky", top: "0", cursor:"pointer", data: {"collapsible-main": "true"} }) do %>
+      <%= pb_rails("flex", props: {align:"center", gap:"sm", justify:"between"}) do %>
+        <%= pb_rails("title", props: { text: "Custom Main Section", tag: "h4", size: 4 }) %>
+    <%= pb_rails("collapsible/collapsible_icon") %>
+     <% end %>
+      <% end %>
+     <%= pb_rails("flex", props: { align: "center", justify: "between" }) do %>
+    <% end %>
+      <%= pb_rails("collapsible/collapsible_content", props: { padding: "none"  }) do %>
+        <%= pb_rails("list", props: {ordered: false, dark: false, borderless: false}) do %>
+            <%= pb_rails("list/item") do %> Checklist Item <% end %>
+            <%= pb_rails("list/item") do %> Checklist Item <% end %>
+            <%= pb_rails("list/item") do %> Checklist Item <% end %>
+            <%= pb_rails("list/item") do %> Checklist Item <% end %>
+            <%= pb_rails("list/item") do %> Checklist Item <% end %>
+            <% end %>
+      <% end %>
+    <% end %>
+    
