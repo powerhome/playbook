@@ -2,7 +2,8 @@
 
 ##### May 06, 2024
 
-![michael](https://github.com/powerhome/playbook/assets/9158723/343b8b81-0cab-4c2a-b6e1-945990093b21)
+![variants](https://github.com/powerhome/playbook/assets/9158723/083a534f-e704-43a2-bc0c-a2ae53da7ede)
+
 
 Customize your Avatars with our new, innovative component overlay feature. Seamlessly integrate essential information and interactive elements with an intuitive prop API to effortlessly enhance your Avatar kits. 
 
