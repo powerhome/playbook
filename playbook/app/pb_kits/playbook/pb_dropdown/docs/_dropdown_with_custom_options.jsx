@@ -38,7 +38,10 @@ const DropdownWithCustomOptions = (props) => {
           <Dropdown.Option key={option.id} 
               option={option}
           >
-            <>
+            <Flex
+                align="center"
+                justify="between"
+            >
               <FlexItem>
                 <Flex>
                   <Icon icon={option.icon} 
@@ -52,7 +55,7 @@ const DropdownWithCustomOptions = (props) => {
                     text={option.areaCode} 
                 />
               </FlexItem>
-            </>
+            </Flex>
           </Dropdown.Option>
         ))}
     </Dropdown>

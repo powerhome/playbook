@@ -63,6 +63,10 @@
       width: 100%;
 
       [class*="pb_dropdown_option"] {
+        padding-left: $space_sm;
+        padding-right: $space_sm;
+        padding-top: $space_xs;
+        padding-bottom: $space_xs;
         cursor: pointer;
         &:hover {
           background-color: $border_light;
