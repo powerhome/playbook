@@ -47,7 +47,7 @@ const Collapsible = ({
    setIsCollapsed(collapsed)
   },[collapsed])
 
-  const CollapsibleParent = React.Children.toArray(children) as React.ReactElement[]
+  const CollapsibleParent = React.Children.toArray(children)
 
   if (CollapsibleParent.length !== 2) {
     throw new Error('Collapsible requires <CollapsibleMain> and <CollapsibleContent> to function properly.')
