@@ -1,16 +1,33 @@
-const path = require('path')
+const path = require('path');
+const { environment } = require('@rails/webpacker');
 
-const { environment } = require('@rails/webpacker')
+// Get the existing Babel loader
+const babelLoader = environment.loaders.get('babel');
+babelLoader.test = /\.(js|jsx|ts|tsx)?(\.erb)?$/;
 
-const babelLoader = environment.loaders.get('babel')
-babelLoader.test = /\.(js|jsx|ts|tsx)?(\.erb)?$/
+// Ensure Babel processes TypeScript files
+babelLoader.use = [
+  {
+    loader: 'babel-loader',
+    options: {
+      cacheDirectory: true,
+      presets: [
+        '@babel/preset-env',
+        '@babel/preset-react',
+        '@babel/preset-typescript' // Add this line
+      ]
+    }
+  }
+];
 
-const nodeLoader = environment.loaders.get('nodeModules')
+// Get the existing nodeModules loader and update its exclude pattern
+const nodeLoader = environment.loaders.get('nodeModules');
 nodeLoader.exclude = [
   nodeLoader.exclude,
   /node_modules\/@powerhome\/playbook-icons-react/
-]
+];
 
+// Prepend ESM loader
 environment.loaders.prepend('ESM', {
   test: /\.mjs$/,
   use: {
@@ -19,10 +36,10 @@ environment.loaders.prepend('ESM', {
       cacheDirectory: true,
     },
   },
-  // include: /node_modules/,
   type: 'javascript/auto',
-})
+});
 
+// Prepend SVGR loader
 environment.loaders.prepend('svgr', {
   test: /\.(svg)$/,
   use: {
@@ -38,12 +55,13 @@ environment.loaders.prepend('svgr', {
   include: [
     path.resolve(__dirname, '../../../node_modules/@powerhome/playbook-icons/icons')
   ],
-})
+});
 
-// Don't let file entry stomp on SVGs
-environment.loaders.get('file').test = /(.jpg|.jpeg|.png|.gif|.tiff|.ico|.eot|.otf|.ttf|.woff|.woff2)$/i
-environment.loaders.get('file').include = path.resolve(__dirname, '../../app')
+// Update file loader test pattern
+environment.loaders.get('file').test = /(.jpg|.jpeg|.png|.gif|.tiff|.ico|.eot|.otf|.ttf|.woff|.woff2)$/i;
+environment.loaders.get('file').include = path.resolve(__dirname, '../../app');
 
+// Append image loader
 environment.loaders.append('image', {
   test: /\.(svg)$/,
   use: {
@@ -52,8 +70,9 @@ environment.loaders.append('image', {
   include: [
     path.resolve(__dirname, '../../app')
   ],
-})
+});
 
+// Merge additional configuration
 environment.config.merge({
   optimization: {
     runtimeChunk: 'single',
@@ -61,6 +80,6 @@ environment.config.merge({
     removeAvailableModules: false,
     removeEmptyChunks: true,
   },
-})
+});
 
-module.exports = environment
+module.exports = environment;

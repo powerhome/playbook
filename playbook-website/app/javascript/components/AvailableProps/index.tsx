@@ -5,9 +5,18 @@ import KitProps from './kitProps'
 
 const reactDocgen = require('react-docgen')
 
+
+import ReactDOM from 'react-dom';
+
+
+
 const AvailableProps = ({ source, darkMode }) => {
   const globalProps = ['aria', 'className', 'data', 'dark', 'id']
   let showKitPropsTable = true, filteredProps = []
+
+
+    const doc= reactDocgen.parse(source)[0]
+    console.log(doc)
 
   try {
     const documentation = reactDocgen.parse(source)[0]

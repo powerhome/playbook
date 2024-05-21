@@ -1,35 +1,44 @@
-import React, { useEffect } from 'react'
-import classnames from 'classnames'
-import  useCollapsible from './useCollapsible'
+import React, { useEffect, ReactElement } from 'react';
+import classnames from 'classnames';
+import useCollapsible from './useCollapsible';
 
-import { globalProps } from '../utilities/globalProps'
-import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps';
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props';
 
-import CollapsibleContent from './child_kits/CollapsibleContent'
-import CollapsibleMain from './child_kits/CollapsibleMain'
-import CollapsibleContext from './context'
-import { IconSizes } from "../pb_icon/_icon"
+import CollapsibleContent from './child_kits/CollapsibleContent';
+import CollapsibleMain from './child_kits/CollapsibleMain';
+import CollapsibleContext from './context';
+import { IconSizes } from '../pb_icon/_icon';
 
+type CollapsibleMainProps = {
+  children: React.ReactNode;
+  // other props for CollapsibleMain
+};
+
+type CollapsibleContentProps = {
+  children: React.ReactNode;
+  // other props for CollapsibleContent
+};
 
 type CollapsibleProps = {
-  children?: React.ReactElement | [] | any,
-  aria?: {[key: string]: string},
-  className?: string,
-  collapsed?: boolean,
-  data?: {[key: string]: string},
-  icon?: string | string[],
-  iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
-  iconSize?: IconSizes,
-  onIconClick?: ()=> void,
-  onClick?: ()=> void,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
-  id?: string,
-}
+  children: [ReactElement<CollapsibleMainProps>, ReactElement<CollapsibleContentProps>];
+  aria?: { [key: string]: string };
+  className?: string;
+  collapsed?: boolean;
+  data?: { [key: string]: string };
+  icon?: string | string[];
+  iconColor?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success';
+  iconSize?: IconSizes;
+  onIconClick?: () => void;
+  onClick?: () => void;
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
+  id?: string;
+};
 
 const Collapsible = ({
   aria = {},
   className,
-  children = [],
+  children,
   collapsed = true,
   data = {},
   htmlOptions = {},
@@ -41,23 +50,20 @@ const Collapsible = ({
   id,
   ...props
 }: CollapsibleProps): React.ReactElement => {
-  const [isCollapsed, toggle, setIsCollapsed] = useCollapsible(collapsed)
+  const [isCollapsed, toggle, setIsCollapsed] = useCollapsible(collapsed);
 
-  useEffect(()=> {
-   setIsCollapsed(collapsed)
-  },[collapsed])
+  useEffect(() => {
+    setIsCollapsed(collapsed);
+  }, [collapsed]);
 
-  const CollapsibleParent = React.Children.toArray(children)
-
-  if (CollapsibleParent.length !== 2) {
-    throw new Error('Collapsible requires <CollapsibleMain> and <CollapsibleContent> to function properly.')
+  if (children.length !== 2) {
+    throw new Error('Collapsible requires <CollapsibleMain> and <CollapsibleContent> to function properly.');
   }
 
-  const Main = CollapsibleParent[0]
-  const Content = CollapsibleParent[1]
+  const [Main, Content] = children;
 
-  const { children: mainChildren, ...mainProps } = Main.props
-  const { children: contentChildren, ...contentProps } = Content.props
+  const { children: mainChildren, ...mainProps } = Main.props;
+  const { children: contentChildren, ...contentProps } = Content.props;
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
