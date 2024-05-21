@@ -4,7 +4,6 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../uti
 import { globalProps } from "../utilities/globalProps";
 import { GenericObject } from "../types";
 
-import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
 
 import DropdownContainer from "./subcomponents/DropdownContainer";
@@ -235,9 +234,7 @@ const Dropdown = (props: DropdownProps) => {
                   options?.map((option: GenericObject) => (
                     <Dropdown.Option key={option.id} 
                         option={option}
-                    >
-                      <Body text={option.label} />
-                    </Dropdown.Option>
+                    /> 
                   ))}
               </DropdownContainer>
             </>

@@ -19,7 +19,6 @@
   color: $white;
 }
 
-
 .kit_show_swift {
   p {
     a {
@@ -35,6 +34,16 @@
         position: relative;
         margin-top: 0;
         margin-bottom: 0;
+      }
+    }
+  }
+  .kit-show-description {
+    p {
+      a {
+        background-color: initial;
+        display: initial;
+        border-radius: initial;
+        box-shadow: initial;
       }
     }
   }

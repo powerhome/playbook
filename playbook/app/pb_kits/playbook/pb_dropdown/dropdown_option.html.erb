@@ -10,18 +10,12 @@
         padding:"none", 
         cursor: "pointer"
         }) do %> 
-            <%= pb_rails("flex", props: {
-                align: "center",
-                classname:"dropdown_option_wrapper",
-                justify: "between",
-                padding_x:"sm",
-                padding_y:"xxs",
-                }) do %>
+            <div class="dropdown_option_wrapper">
                 <% if content.present? %>
                     <%= content.presence %>
                 <% else %>
                     <%= pb_rails("body", props: {text: object.option[:label]}) %>
                 <% end %>
-            <% end %>
+            </div>
     <% end %>
 <% end %>

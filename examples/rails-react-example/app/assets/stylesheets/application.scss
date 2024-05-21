@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+
+// Playbook App Configuration for Font Family
+$font_family_base: 'Montserrat';
+
+// Enabled Weights in Montserat
+$lighter:       200;
+$light:         200;
+$regular:       500;
+$bold:          700;
+$bolder:        700;
+$boldest:       700;
+$extrabold:     700;
+
+
+@import "reset";
+@import "playbook";

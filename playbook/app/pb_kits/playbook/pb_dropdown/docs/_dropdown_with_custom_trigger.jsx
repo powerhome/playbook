@@ -51,7 +51,10 @@ const [selectedOption, setSelectedOption] = useState();
           <Dropdown.Option key={option.id} 
               option={option}
           >
-            <>
+            <Flex
+                align="center"
+                justify="between"
+            >
               <FlexItem>
                 <Flex>
                   <Icon icon={option.icon} 
@@ -65,7 +68,7 @@ const [selectedOption, setSelectedOption] = useState();
                     text={option.areaCode} 
                 />
               </FlexItem>
-            </>
+            </Flex>
           </Dropdown.Option>
         ))}
       </Dropdown.Container>
