@@ -20,7 +20,6 @@ $transition: $transition_cubic;
     border: solid $border_light 2px;
     border-radius: $border_rad_light;
     height: 22px;
-    position: relative;
     transition: background $transition_default ease, box-shadow $transition_default ease;
     width: 22px;
     .check_icon,
@@ -28,7 +27,6 @@ $transition: $transition_cubic;
       color: $white;
       height: 16px;
       left: 1px;
-      position: relative;
       display: flex;
       opacity: 0;
       width: 16px;
