@@ -10,7 +10,7 @@ const TableAlignmentRow = (props) => {
     >
     <Table.Head>
       <Table.Row>
-        <Table.Header textAlign="center">{'Column 1'}</Table.Header>
+        <Table.Header>{'Column 1'}</Table.Header>
         <Table.Header>{'Column 2'}</Table.Header>
         <Table.Header>{'Column 3'}</Table.Header>
         <Table.Header>{'Column 4'}</Table.Header>
@@ -19,20 +19,20 @@ const TableAlignmentRow = (props) => {
     </Table.Head>
     <Table.Body>
       <Table.Row>
-        <Table.Cell >{'Value 1'}</Table.Cell>
-        <Table.Cell>{'Value 2'}</Table.Cell>
-        <Table.Cell>{'Value 3'}</Table.Cell>
-        <Table.Cell>{'Value 4'}</Table.Cell>
-        <Table.Cell>{'Value 5'}</Table.Cell>
-      </Table.Row>
-      <Table.Row align="center">
         <Table.Cell>{'Value 1'}</Table.Cell>
         <Table.Cell>{'Value 2'}</Table.Cell>
         <Table.Cell>{'Value 3'}</Table.Cell>
         <Table.Cell>{'Value 4'}</Table.Cell>
         <Table.Cell>{'Value 5'}</Table.Cell>
       </Table.Row>
-      <Table.Row align="right">
+      <Table.Row textAlign="center">
+        <Table.Cell>{'Value 1'}</Table.Cell>
+        <Table.Cell>{'Value 2'}</Table.Cell>
+        <Table.Cell>{'Value 3'}</Table.Cell>
+        <Table.Cell>{'Value 4'}</Table.Cell>
+        <Table.Cell>{'Value 5'}</Table.Cell>
+      </Table.Row>
+      <Table.Row  textAlign="right">
         <Table.Cell>{'Value 1'}</Table.Cell>
         <Table.Cell>{'Value 2'}</Table.Cell>
         <Table.Cell>{'Value 3'}</Table.Cell>

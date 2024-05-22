@@ -28,7 +28,7 @@
   <% end %>
   <%= pb_rails("table/table_body") do %>
     <%= pb_rails("table/table_row") do %>
-      <%= pb_rails("table/table_cell", props: { text: "Cappuccino", shift: "up" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Cappuccino", vertical_align: "top" }) %>
       <%= pb_rails("table/table_cell") do %>
         Espresso<br/>
         Steamed Milk<br/>
@@ -36,14 +36,14 @@
       <% end %>
     <% end %>
     <%= pb_rails("table/table_row") do %>
-      <%= pb_rails("table/table_cell", props: { text: "Macchiato", shift: "up" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Macchiato", vertical_align: "top" }) %>
       <%= pb_rails("table/table_cell") do %>
         Espresso<br/>
         Steamed Milk
       <% end %>
     <% end %>
     <%= pb_rails("table/table_row") do %>
-      <%= pb_rails("table/table_cell", props: { text: "Mocha", shift: "up" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Mocha", vertical_align: "top" }) %>
       <%= pb_rails("table/table_cell") do %>
         Espresso<br/>
         Hot Chocolate<br/>

@@ -5,41 +5,43 @@ import Table from '../_table'
 const TableAlignmentColumn = (props) => {
   return (
     <Table
+
         {...props}
     >
-      <thead>
-        <tr>
-          <th>{'Column 1'}</th>
-          <th>{'Column 2'}</th>
-          <th>{'Column 3'}</th>
-          <th align="center">{'Rating'}</th>
-          <th align="right">{'Money'}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{'Value 1'}</td>
-          <td>{'Value 2'}</td>
-          <td>{'Value 3'}</td>
-          <td align="center">{'3'}</td>
-          <td align="right">{'$57.32'}</td>
-        </tr>
-        <tr>
-          <td>{'Value 1'}</td>
-          <td>{'Value 2'}</td>
-          <td>{'Value 3'}</td>
-          <td align="center">{'2'}</td>
-          <td align="right">{'$5,657.08'}</td>
-        </tr>
-        <tr>
-          <td>{'Value 1'}</td>
-          <td>{'Value 2'}</td>
-          <td>{'Value 3'}</td>
-          <td align="center">{'4'}</td>
-          <td align="right">{'$358.77'}</td>
-        </tr>
-      </tbody>
+        <Table.Head>
+            <Table.Row>
+                <Table.Header>{'Column 1'}</Table.Header>
+                <Table.Header>{'Column 2'}</Table.Header>
+                <Table.Header>{'Column 3'}</Table.Header>
+                <Table.Header textAlign="center">{'Rating'}</Table.Header>
+                <Table.Header textAlign="right">{'Money'}</Table.Header>
+            </Table.Row>
+        </Table.Head>
+        <Table.Body>
+            <Table.Row>
+                <Table.Cell>{'Value 1'}</Table.Cell>
+                <Table.Cell>{'Value 2'}</Table.Cell>
+                <Table.Cell>{'Value 3'}</Table.Cell>
+                <Table.Cell textAlign="center">{'3'}</Table.Cell>
+                <Table.Cell textAlign="right">{'$57.32'}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+                <Table.Cell>{'Value 1'}</Table.Cell>
+                <Table.Cell>{'Value 2'}</Table.Cell>
+                <Table.Cell>{'Value 3'}</Table.Cell>
+                <Table.Cell textAlign="center">{'2'}</Table.Cell>
+                <Table.Cell textAlign="right">{'$5,657.08'}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+                <Table.Cell>{'Value 1'}</Table.Cell>
+                <Table.Cell>{'Value 2'}</Table.Cell>
+                <Table.Cell>{'Value 3'}</Table.Cell>
+                <Table.Cell textAlign="center">{'4'}</Table.Cell>
+                <Table.Cell textAlign="right">{'$358.77'}</Table.Cell>
+            </Table.Row>
+        </Table.Body>
     </Table>
+
   )
 }
 
