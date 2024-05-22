@@ -15,7 +15,6 @@ type TableRowPropTypes = {
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
-  shift?: "middle" | "down" | "up";
   sideHighlightColor: string;
   tag?: "table" | "div";
 };
