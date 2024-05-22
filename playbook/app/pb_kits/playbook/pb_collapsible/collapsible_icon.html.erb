@@ -1,11 +1,10 @@
-<%= pb_content_tag do %>
-
-    <%= pb_rails("flex", props: {vertical: "center", spacing: "between", cursor: "pointer"}) do %>
-      <%= pb_rails("flex/flex_item") do %>
-        <%= content.presence %>
-      <% end %>
-      <%= pb_rails("flex/flex_item") do %>
-        <div style="color: <%= object.icon_color %>" class="icon_wrapper" >
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname,
+    aria: object.aria,
+    style: "color: #{object.icon_color};",
+    **combined_html_options) do %>
         <% if object.icon.present? %>
           <%= pb_rails("icon", props: { icon: object.show_icon(object.icon)[0], id:"collapsible_open_icon", size: object.size }) %>
           <%= pb_rails("icon", props: { icon: object.show_icon(object.icon)[1], id:"collapsible_close_icon", size: object.size }) %>
@@ -13,7 +12,4 @@
           <%= pb_rails("icon", props: { icon: "chevron-down", id:"collapsible_open_icon", size: object.size }) %>
           <%= pb_rails("icon", props: { icon: "chevron-up", id:"collapsible_close_icon", size: object.size }) %>
         <% end %>
-        </div>
-      <% end %>
-    <% end %>
 <% end %>
