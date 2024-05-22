@@ -32,7 +32,7 @@ const TableAlignmentRow = (props) => {
         <Table.Cell>{'Value 4'}</Table.Cell>
         <Table.Cell>{'Value 5'}</Table.Cell>
       </Table.Row>
-      <Table.Row  textAlign="right">
+      <Table.Row textAlign="right">
         <Table.Cell>{'Value 1'}</Table.Cell>
         <Table.Cell>{'Value 2'}</Table.Cell>
         <Table.Cell>{'Value 3'}</Table.Cell>

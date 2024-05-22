@@ -8,7 +8,6 @@ import {
 import { globalProps } from "../../utilities/globalProps";
 
 type TableHeaderPropTypes = {
-  align?: "center" | "right";
   aria?: { [key: string]: string };
   children: React.ReactNode[] | React.ReactNode;
   className: string;
@@ -21,7 +20,6 @@ type TableHeaderPropTypes = {
 
 const TableHeader = (props: TableHeaderPropTypes) => {
   const {
-    align,
     aria = {},
     children,
     className,
@@ -35,8 +33,7 @@ const TableHeader = (props: TableHeaderPropTypes) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-  const alignProp = align ? `align_${align}` : null;
-  const classes = classnames("pb_table_th", alignProp, globalProps(props), className);
+  const classes = classnames("pb_table_th", globalProps(props), className);
   const isTableTag = tag === "table";
 
   return (

@@ -9,7 +9,6 @@ import {
 import { globalProps } from "../../utilities/globalProps";
 
 type TableRowPropTypes = {
-  align?: "center" | "right";
   aria?: { [key: string]: string };
   children: React.ReactNode[] | React.ReactNode;
   className: string;
@@ -23,14 +22,12 @@ type TableRowPropTypes = {
 
 const TableRow = (props: TableRowPropTypes) => {
   const {
-    align,
     aria = {},
     children,
     className,
     data = {},
     htmlOptions = {},
     id,
-    shift,
     sideHighlightColor = "none",
     tag = "table",
   } = props;
@@ -38,15 +35,11 @@ const TableRow = (props: TableRowPropTypes) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-  const alignProp = align ? `align_${align}` : null;
-  const shiftProp = shift ? `shift_${shift}` : null;
   const sideHighlightClass =
     sideHighlightColor != "" ? `side_highlight_${sideHighlightColor}` : null;
   const classes = classnames(
     buildCss("pb_table_row_kit", sideHighlightClass),
     "pb_table_tr",
-    alignProp,
-    shiftProp,
     globalProps(props),
     className
   );

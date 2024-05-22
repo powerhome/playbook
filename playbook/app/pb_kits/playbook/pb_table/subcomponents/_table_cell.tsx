@@ -8,7 +8,6 @@ import {
 import { globalProps } from "../../utilities/globalProps";
 
 type TableCellPropTypes = {
-  align?: "center" | "right";
   aria?: { [key: string]: string };
   children: React.ReactNode[] | React.ReactNode;
   className: string;
@@ -21,7 +20,6 @@ type TableCellPropTypes = {
 
 const TableCell = (props: TableCellPropTypes) => {
   const {
-    align,
     aria = {},
     children,
     className,
@@ -35,8 +33,7 @@ const TableCell = (props: TableCellPropTypes) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-  const alignProp = align ? `align_${align}` : null;
-  const classes = classnames("pb_table_td", alignProp, globalProps(props), className);
+  const classes = classnames("pb_table_td", globalProps(props), className);
   const isTableTag = tag === "table";
 
   return (
