@@ -1,11 +1,11 @@
-<%= pb_rails("table", props: {tag: "div"}) do %>
+<%= pb_rails("table") do %>
   <%= pb_rails("table/table_head") do %>
     <%= pb_rails("table/table_row") do %>
       <%= pb_rails("table/table_header", props: { text: "Column 1" }) %>
       <%= pb_rails("table/table_header", props: { text: "Column 2" }) %>
       <%= pb_rails("table/table_header", props: { text: "Column 3" }) %>
-      <%= pb_rails("table/table_header", props: { text: "Rating", text_align: "center", tag: "div" }) %>
-      <%= pb_rails("table/table_header", props: { text: "Money", text_align: "right", tag: "div" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Rating" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Money" }) %>
     <% end %>
   <% end %>
   <%= pb_rails("table/table_body") do %>

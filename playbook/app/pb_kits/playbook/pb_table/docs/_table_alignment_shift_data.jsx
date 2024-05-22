@@ -17,7 +17,7 @@ const TableAlignmentShiftData = (props) => {
         </Table.Head>
         <Table.Body>
           <Table.Row>
-            <Table.Cell shift="down">{'Total'}</Table.Cell>
+            <Table.Cell verticalAlign="bottom">{'Total'}</Table.Cell>
             <Table.Cell>
               {'$12'}
               <br />
@@ -44,8 +44,7 @@ const TableAlignmentShiftData = (props) => {
       </Table.Head>
       <Table.Body>
         <Table.Row>
-          <Table.Cell shift="up">{'Cappuccino'} </Table.Cell>
-          
+          <Table.Cell verticalAlign="top">{'Cappuccino'} </Table.Cell>
           <Table.Cell>
           {'Steamed Milk'}
           <br />
@@ -53,10 +52,10 @@ const TableAlignmentShiftData = (props) => {
           </Table.Cell>
         </Table.Row>
         <Table.Row>
-          <Table.Cell shift="up">
+          <Table.Cell verticalAlign="top">
             {'Macchiato'}
             </Table.Cell>
-            <Table.Cell shift="up">
+            <Table.Cell verticalAlign="top">
             {'Espresso'}
             <br />
             {'Steamed Milk'}
