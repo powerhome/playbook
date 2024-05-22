@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, ReactElement } from 'react'
 import classnames from 'classnames'
 import  useCollapsible from './useCollapsible'
 
@@ -11,9 +11,16 @@ import CollapsibleContext from './context'
 import { IconSizes } from "../pb_icon/_icon"
 import CollapsibleIcon from './child_kits/CollapsibleIcon'
 
+type CollapsibleMainProps = {
+  children: React.ReactNode
+}
+
+type CollapsibleContentProps = {
+  children: React.ReactNode
+}
 
 type CollapsibleProps = {
-  children?: React.ReactElement | [] | any,
+  children?: [ReactElement<CollapsibleMainProps>, ReactElement<CollapsibleContentProps>],
   aria?: {[key: string]: string},
   className?: string,
   collapsed?: boolean,
@@ -30,7 +37,7 @@ type CollapsibleProps = {
 const Collapsible = ({
   aria = {},
   className,
-  children = [],
+  children,
   collapsed = true,
   data = {},
   htmlOptions = {},
@@ -48,13 +55,12 @@ const Collapsible = ({
    setIsCollapsed(collapsed)
   },[collapsed])
 
-  const CollapsibleParent = React.Children.toArray(children) as React.ReactElement[]
-
-  if (CollapsibleParent.length !== 2) {
+  if (children.length !== 2) {
     throw new Error('Collapsible requires <CollapsibleMain> and <CollapsibleContent> to function properly.')
   }
-  const FirstChild = CollapsibleParent[0]
-  const SecondChild = CollapsibleParent[1]
+
+  const FirstChild = children[0]
+  const SecondChild = children[1]
 
   const Main = FirstChild.type === CollapsibleMain ? FirstChild : null
   const Content = SecondChild.type === CollapsibleContent ? SecondChild : null
