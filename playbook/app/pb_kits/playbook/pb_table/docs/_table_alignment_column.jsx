@@ -5,7 +5,6 @@ import Table from '../_table'
 const TableAlignmentColumn = (props) => {
   return (
     <Table
-
         {...props}
     >
         <Table.Head>

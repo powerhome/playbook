@@ -1,11 +1,11 @@
-<%= pb_rails("table", props: { size: "sm" }) do %>
+<%= pb_rails("table") do %>
   <%= pb_rails("table/table_head") do %>
       <%= pb_rails("table/table_row") do %>
           <%= pb_rails("table/table_header", props: { text: "Column 1"}) %>
           <%= pb_rails("table/table_header", props: { text: "Column 2"}) %>
           <%= pb_rails("table/table_header", props: { text: "Column 3"}) %>
           <%= pb_rails("table/table_header", props: { text: "Column 4"}) %>
-          <%= pb_rails("table/table_header", props: { text: "Column 5"}) %>       
+          <%= pb_rails("table/table_header", props: { text: "Column 5"}) %>
        <% end %>
   <% end %>
   <%= pb_rails("table/table_body") do %>
