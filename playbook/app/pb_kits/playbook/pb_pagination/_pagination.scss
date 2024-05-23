@@ -11,7 +11,7 @@ $top_bottom_radius: 0px;
   border-radius: $border_rad_light;
   border: $border_rad_lightest solid $border_light;
   background-color: $white;
-  padding: $space_xxs 0px;
+  padding: $space_xxs 0px !important;
   li {
     display: inline;
     > a, li > span {

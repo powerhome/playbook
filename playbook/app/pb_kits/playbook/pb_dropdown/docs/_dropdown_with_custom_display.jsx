@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dropdown, User, FlexItem, Badge, Avatar } from '../../'
+import { Dropdown, User, Flex, FlexItem, Badge, Avatar } from '../../'
 
 const DropdownWithCustomDisplay = (props) => {
   const [selectedOption, setSelectedOption] = useState();
@@ -69,7 +69,10 @@ const DropdownWithCustomDisplay = (props) => {
           <Dropdown.Option key={option.id} 
               option={option}
           >
-            <>
+            <Flex
+                align="center"
+                justify="between"
+            >
               <FlexItem>
                 <User
                     align="left"
@@ -93,7 +96,7 @@ const DropdownWithCustomDisplay = (props) => {
                     }`}
                 />
               </FlexItem>
-            </>
+            </Flex>
           </Dropdown.Option>
         ))}
     </Dropdown>
