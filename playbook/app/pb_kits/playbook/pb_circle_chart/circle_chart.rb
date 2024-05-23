@@ -68,6 +68,22 @@ module Playbook
         }
       end
 
+      def vertical_align_props
+        if vertical_align
+          if object.vertical_align
+            original_result = super
+            class_to_remove = "vertical_align_#{object.vertical_align}"
+
+            original_result.gsub!(class_to_remove, "")
+            original_result.strip
+          else
+            super
+          end
+        else
+          super
+        end
+      end
+
       def classname
         generate_classname("pb_circle_chart")
       end
