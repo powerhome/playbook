@@ -28,6 +28,7 @@ $transition: $transition_cubic;
       height: 16px;
       left: 1px;
       display: flex;
+      margin: auto;
       opacity: 0;
       width: 16px;
       &.hidden {
