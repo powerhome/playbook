@@ -15,7 +15,7 @@ module Playbook
       prop :subrow_headers, type: Playbook::Props::Array,
                             default: []
 
-      def render_row_and_children(row, column_definitions, current_depth = 0, first_parent_child: false)
+      def render_row_and_children(row, column_definitions, current_depth, first_parent_child)
         output = ActiveSupport::SafeBuffer.new
         is_first_child_of_subrow = current_depth.positive? && first_parent_child && subrow_headers[current_depth - 1].present?
 
