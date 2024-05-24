@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '../utilities/test-utils';
-import BarGraph from './_bar_graph';
+import CircleChart from './_circle_chart';
 
 beforeEach(() => {
   // Silences error logs within the test suite.
@@ -15,17 +15,31 @@ afterEach(() => {
   console.warn.mockRestore();
 });
 
-const testId = 'bargraph1';
+const testId = 'circlechart1';
 
-test('bargraph uses exact classname', () => {
+test('uses exact classname', () => {
+  const data = [
+    {
+      name: 'Waiting for Calls',
+      value: 41,
+    },
+    {
+      name: 'On Call',
+      value: 49,
+    },
+    {
+      name: 'After call',
+      value: 10,
+    },
+  ]
   render(
-    <BarGraph
-        className='super_important_class'
+    <CircleChart
+        chartData={data}
         data={{ testid: testId }}
-        id='bar-default'
+        id='circlechartid'
     />
   );
  
   const kit = screen.getByTestId(testId);
-  expect(kit).toHaveClass('super_important_class');
+  expect(kit).toHaveClass('pb_circle_chart');
 });

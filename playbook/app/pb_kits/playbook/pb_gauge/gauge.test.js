@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '../utilities/test-utils';
-import BarGraph from './_bar_graph';
+import Gauge from './_gauge';
 
 beforeEach(() => {
   // Silences error logs within the test suite.
@@ -15,17 +15,21 @@ afterEach(() => {
   console.warn.mockRestore();
 });
 
-const testId = 'bargraph1';
+const testId = 'gauge1';
 
-test('bargraph uses exact classname', () => {
+test('uses exact classname', () => {
+  const data = [
+    { name: 'Name', value: 45 },
+  ]
   render(
-    <BarGraph
-        className='super_important_class'
+    <Gauge
+        chartData={data}
         data={{ testid: testId }}
-        id='bar-default'
+        id='gaugeid'
     />
   );
  
   const kit = screen.getByTestId(testId);
-  expect(kit).toHaveClass('super_important_class');
+  expect(kit).toHaveClass('pb_gauge_kit');
 });
+
