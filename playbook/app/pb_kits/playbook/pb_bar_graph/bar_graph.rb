@@ -78,7 +78,7 @@ module Playbook
         if vertical_align
           if object.vertical_align
             original_result = super
-            class_to_remove = " vertical_align_#{object.vertical_align}"
+            class_to_remove = "vertical_align_#{object.vertical_align}"
 
             original_result.gsub!(class_to_remove, "")
             original_result.strip
