@@ -35,6 +35,7 @@ export { default as DateYearStacked } from './pb_date_year_stacked/_date_year_st
 export { default as Detail} from './pb_detail/_detail'
 export { default as Dialog } from './pb_dialog/_dialog'
 export { default as DistributionBar } from './pb_distribution_bar/_distribution_bar'
+export { default as Draggable} from './pb_draggable/_draggable'
 export { default as Dropdown} from './pb_dropdown/_dropdown'
 export { default as FileUpload } from './pb_file_upload/_file_upload'
 export { default as Filter } from './pb_filter/_filter'
