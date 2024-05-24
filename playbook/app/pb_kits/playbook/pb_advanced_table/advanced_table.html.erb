@@ -3,8 +3,8 @@
           <% if content.present? %>
             <% content.presence %>
           <% else %>
-            <%= pb_rails("advanced_table/table_header", props: {column_definitions: object.column_definitions, enable_toggle_expansion: object.enable_toggle_expansion }) %>
-            <%= pb_rails("advanced_table/table_body", props: {table_data: object.table_data, column_definitions: object.column_definitions}) %>
+            <%= pb_rails("advanced_table/table_header", props: { column_definitions: object.column_definitions, enable_toggle_expansion: object.enable_toggle_expansion }) %>
+            <%= pb_rails("advanced_table/table_body", props: { id: object.id, table_data: object.table_data, column_definitions: object.column_definitions }) %>
           <% end %>
         <% end %>
 <% end %>

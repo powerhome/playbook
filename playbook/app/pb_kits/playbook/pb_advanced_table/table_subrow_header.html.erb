@@ -1,0 +1,34 @@
+<%= content_tag(:div,
+      aria: object.aria,
+      class: object.classname,
+      data: object.data,
+      id: object.id) do %>
+        <% object.column_definitions.each_with_index do |column, index| %>
+            <%= pb_rails("table/table_cell", props: { tag: "div", classname: object.td_classname}) do %>
+                <%= pb_rails("flex", props:{ align: "center", justify: "start" }) do %>
+                    <div style="padding-left: <%= depth * 1.25 %>em">
+                        <%= pb_rails("flex", props:{align: "center", column_gap: "xs"}) do %>
+                            <% if index.zero? && object.row[:children].present? %>
+                                <button class="gray-icon toggle-all-icon" onclick="expandAllSubRows(this, <%= depth %>)">
+                                    <%= pb_rails("icon", props: { icon: "arrows-from-line", cursor: "pointer", fixed_width: true, padding_right:"xs" }) %>
+                                </button>
+                            <% end %>
+                            <%= pb_rails("flex/flex_item") do %>
+                                <% if index.zero? %>
+                                    <%= pb_rails("caption", props: { margin_left: object.row[:children].present? ? "none" : "xs", text: object.subrow_header }) %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+<% end %>
+
+<script type="text/javascript">
+    var expandAllSubRows = (element, rowDepth) => {
+        element.closest(".toggle-content").querySelectorAll('.depth-sub-row-' + rowDepth + ' [data-advanced-table]').forEach((button) => {
+            button.dispatchEvent(new Event('click'));
+        });
+    };
+</script>
