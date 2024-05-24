@@ -157,6 +157,7 @@ const highchartsTheme: ThemeProps = {
           fontSize: typography.text_smaller,
           color: colors.text_lt_light,
           fontWeight: typography.regular,
+          textOutline: '2px $white',
         },
       },
     },
