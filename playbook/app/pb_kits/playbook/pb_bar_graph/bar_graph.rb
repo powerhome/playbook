@@ -79,13 +79,14 @@ module Playbook
           if object.vertical_align
             original_result = super
             class_to_remove = "vertical_align_#{object.vertical_align}"
-            original_result = original_result.gsub(/(\s*#{class_to_remove}\s*)/, " ").strip
-            original_result.strip
+
+            modified_result = original_result.gsub(class_to_remove, "").strip
+            modified_result.empty? ? nil : modified_result
           else
-            super.strip
+            super
           end
         else
-          super.strip
+          super
         end
       end
 
