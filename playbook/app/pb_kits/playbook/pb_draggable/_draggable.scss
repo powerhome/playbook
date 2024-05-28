@@ -1,3 +1,10 @@
-.pb_draggable {
+@import "../tokens/colors";
 
+.pb_draggable {
+  .is_dragging {
+    opacity: 40%;
+  }
+  .active {
+    opacity: 60%;
+  }
 }

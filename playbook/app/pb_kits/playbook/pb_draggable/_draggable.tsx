@@ -1,37 +1,62 @@
-import React from 'react'
-import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import React, { useEffect } from "react";
+import classnames from "classnames";
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { globalProps } from "../utilities/globalProps";
+import DraggableContainer from "./subcomponents/DraggableContainer";
+import DraggableItem from "./subcomponents/DraggableItem";
+import { DraggableContext } from "./context";
 
 type DraggableProps = {
-  aria?: { [key: string]: string },
-  className?: string,
-  data?: { [key: string]: string },
-  id?: string,
-}
+  aria?: { [key: string]: string };
+  className?: string;
+  children?: React.ReactNode;
+  data?: { [key: string]: string };
+  id?: string;
+  draggableItems?: any;
+  onDragChange?: (items: any) => void;
+};
 
 const Draggable = (props: DraggableProps) => {
   const {
     aria = {},
-  className,
-  data = {},
-  id,
-  } = props
+    className,
+    children,
+    data = {},
+    id,
+    draggableItems,
+    onDragChange,
+  } = props;
 
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_draggable'), globalProps(props), className)
+  const { items, setItems } = DraggableContext();
+
+  const ariaProps = buildAriaProps(aria);
+  const dataProps = buildDataProps(data);
+  const classes = classnames(
+    buildCss("pb_draggable"),
+    globalProps(props),
+    className
+  );
+
+  useEffect(() => {
+    setItems(draggableItems);
+  }, [draggableItems]);
+
+  useEffect(() => {
+    onDragChange(items);
+  }, [items]);
 
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
+    <div {...ariaProps} 
+        {...dataProps} 
+        className={classes} 
         id={id}
     >
-      {className}
+      {children}
     </div>
-  )
-}
+  );
+};
 
-export default Draggable
+Draggable.Container = DraggableContainer;
+Draggable.Item = DraggableItem;
+
+export default Draggable;
