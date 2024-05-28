@@ -31,8 +31,8 @@ module Playbook
                  values: %w[table div],
                  default: "table"
       prop :outer_padding, type: Playbook::Props::Enum,
-                           values: %w[none xxs xs sm md lg xl],
-                           default: "none"
+                           values: ["none", "xxs", "xs", "sm", "md", "lg", "xl", nil],
+                           default: nil
 
       def classname
         generate_classname(
@@ -82,7 +82,12 @@ module Playbook
       end
 
       def outer_padding_class
-        outer_padding != "none" ? "outer_padding_space_#{outer_padding}" : nil
+        if outer_padding.nil?
+          outer_padding
+        else
+          space_css_name = outer_padding != "none" ? "space_" : ""
+          outer_padding.present? ? "outer_padding_#{space_css_name}#{outer_padding}" : nil
+        end
       end
     end
   end
