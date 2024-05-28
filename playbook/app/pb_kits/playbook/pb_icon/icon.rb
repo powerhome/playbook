@@ -81,9 +81,10 @@ module Playbook
 
       def asset_path
         return unless Rails.application.config.respond_to?(:icon_path)
-        return unless Dir.entries(Rails.application.config.icon_path).include? "#{icon}.svg"
 
-        Rails.root.join(Rails.application.config.icon_path, "#{icon}.svg")
+        base_path = Rails.application.config.icon_path
+        icon_path = Dir.glob(Rails.root.join(base_path, "**", "#{icon}.svg")).first
+        icon_path if icon_path && File.exist?(icon_path)
       end
 
       def render_svg
