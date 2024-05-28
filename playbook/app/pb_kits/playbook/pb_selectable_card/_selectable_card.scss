@@ -28,7 +28,7 @@ $pb_selectable_card_border: 2px;
     padding: $space_sm;
     margin-bottom: $space_sm;
     cursor: pointer;
-    outline: 1px solid transparant;
+    outline: 1px solid transparent; 
 
     @media (hover:hover) {
       &:hover {
