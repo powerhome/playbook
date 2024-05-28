@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
