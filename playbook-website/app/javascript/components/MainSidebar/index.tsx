@@ -15,6 +15,7 @@ const MainSidebar = ({
   search_list,
   samples,
   getting_started,
+  design_guidelines,
 }) => {
   //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
@@ -85,6 +86,7 @@ const MainSidebar = ({
           collapsibles={collapsibles}
           samples={samples}
           getting_started={getting_started}
+          design_guidelines={design_guidelines}
         />
       </Nav>
     </>
