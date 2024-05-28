@@ -42,6 +42,7 @@ import * as Flex from 'pb_flex/docs'
 import * as FormGroup from 'pb_form_group/docs'
 import * as FormPill from 'pb_form_pill/docs'
 import * as Gauge from 'pb_gauge/docs'
+import * as GradientOverlay from 'pb_gradient_overlay/docs'
 import * as Hashtag from 'pb_hashtag/docs'
 import * as Highlight from 'pb_highlight/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
@@ -145,6 +146,7 @@ WebpackerReact.registerComponents({
   ...FormGroup,
   ...FormPill,
   ...Gauge,
+  ...GradientOverlay,
   ...Hashtag,
   ...Highlight,
   ...HomeAddressStreet,

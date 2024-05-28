@@ -352,6 +352,9 @@ kits:
         platforms: *web
         description: 
         status: "stable"
+      - name: gradient_overlay
+        platforms: *react_only
+        status: "beta"
   - name: message_text_patterns
     description: 
     components:
