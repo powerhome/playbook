@@ -26,7 +26,7 @@ examples:
     - table_striped: Striped Table
     - table_with_subcomponents_rails: Table with Sub Components (Table Elements)
     - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
-
+    - table_outer_padding: Outer Padding
 
   react:
     - table_sm: Small
@@ -54,4 +54,4 @@ examples:
     - table_striped: Striped Table
     - table_with_subcomponents: Table with Sub Components (Table Elements)
     - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
-
+    - table_outer_padding: Outer Padding

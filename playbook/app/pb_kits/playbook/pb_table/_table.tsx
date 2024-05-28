@@ -23,6 +23,7 @@ type TableProps = {
     disableHover?: boolean,
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string,
+    outerPadding?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
     responsive?: "collapse" | "scroll" | "none",
     singleLine?: boolean,
     size?: "sm" | "md" | "lg",
@@ -45,6 +46,7 @@ const Table = (props: TableProps) => {
         disableHover = false,
         htmlOptions = {},
         id,
+        outerPadding = 'none',
         responsive = 'collapse',
         singleLine = false,
         size = 'sm',
@@ -59,6 +61,7 @@ const Table = (props: TableProps) => {
     const htmlProps = buildHtmlProps(htmlOptions)
     const tableCollapseCss = responsive !== 'none' ? `table-collapse-${collapse}` : ''
     const verticalBorderCss = verticalBorder ? 'vertical-border' : ''
+    const outerPaddingCss = outerPadding !== 'none' ? `outer_padding_space_${outerPadding}` : ''
     const isTableTag = tag === 'table'
 
     const classNames = classnames(
@@ -73,6 +76,7 @@ const Table = (props: TableProps) => {
             'no-hover': disableHover,
             'sticky-header': sticky,
             'striped': striped,
+            [outerPaddingCss]: outerPadding !== 'none',
         },
         globalProps(props),
         tableCollapseCss,
