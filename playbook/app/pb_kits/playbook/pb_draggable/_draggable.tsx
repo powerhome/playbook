@@ -4,7 +4,6 @@ import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 import DraggableContainer from "./subcomponents/DraggableContainer";
 import DraggableItem from "./subcomponents/DraggableItem";
-import { DraggableContext } from "./context";
 
 type DraggableProps = {
   aria?: { [key: string]: string };
@@ -12,7 +11,6 @@ type DraggableProps = {
   children?: React.ReactNode;
   data?: { [key: string]: string };
   id?: string;
-  onDragChange?: (items: {[key: string]: string }[]) => void;
 };
 
 const Draggable = (props: DraggableProps) => {
@@ -22,10 +20,8 @@ const Draggable = (props: DraggableProps) => {
     children,
     data = {},
     id,
-    onDragChange,
   } = props;
 
-  const { items } = DraggableContext();
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -34,10 +30,6 @@ const Draggable = (props: DraggableProps) => {
     globalProps(props),
     className
   );
-
-  useEffect(() => {
-    onDragChange(items);
-  }, [items]);
 
   return (
     <div {...ariaProps} 

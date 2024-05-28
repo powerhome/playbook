@@ -6,7 +6,7 @@ export const DraggableContext = () => {
   return useContext(DragContext);
 };
 
-export const DraggableProvider = ({ children, initialItems }: any) => {
+export const DraggableProvider = ({ children, initialItems, onChange }: any) => {
   const [items, setItems] = useState([]);
   const [dragData, setDragData] = useState<{ [key: string]: any }>({});
   const [isDragging, setIsDragging] = useState("");
@@ -16,6 +16,9 @@ export const DraggableProvider = ({ children, initialItems }: any) => {
     setItems(initialItems);
   }, [initialItems]);
 
+  useEffect(() => {
+    onChange(items);
+  }, [items]);
 
   const handleDragStart = (id: string, container: string) => {
     setDragData({ id: id, initialGroup: container });

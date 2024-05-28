@@ -69,7 +69,7 @@ const data = [
 ];
 
 const DraggableMultipleContainer = (props) => {
-  const [initialItems, setInitialItems] = useState(data);
+  const [initialState, setInitialState] = useState(data);
 
   const badgeText = (container) => {
     return container === "To Do"
@@ -88,10 +88,12 @@ const DraggableMultipleContainer = (props) => {
   };
 
   return (
-    <DraggableProvider initialItems={data} >
+    <DraggableProvider initialItems={data}
+        onChange={(items) => setInitialState(items)}
+    >
       <Draggable
           onDragChange={(items)=> 
-          setInitialItems(items)} 
+          setInitialState(items)} 
           {...props}
       >
         <Flex
@@ -113,7 +115,7 @@ const DraggableMultipleContainer = (props) => {
                     alignItems="stretch"
                     orientation="column" 
                 >
-                  {initialItems
+                  {initialState
                     .filter((item) => item.container === container)
                     .map(
                       ({
