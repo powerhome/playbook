@@ -12,8 +12,8 @@ type DraggableProps = {
   children?: React.ReactNode;
   data?: { [key: string]: string };
   id?: string;
-  draggableItems?: any;
-  onDragChange?: (items: any) => void;
+  draggableItems?: { [key: string]: string }[];
+  onDragChange?: (items: {[key: string]: string }[]) => void;
 };
 
 const Draggable = (props: DraggableProps) => {

@@ -10,7 +10,7 @@ import {
   Title,
   Body,
   Draggable,
-  DragProvider,
+  DraggableProvider,
 } from "../../";
 
 // Initial groups to drag between
@@ -88,7 +88,7 @@ const DraggableDefault = (props) => {
   };
 
   return (
-    <DragProvider>
+    <DraggableProvider>
       <Draggable draggableItems={data} 
           onDragChange={(items)=> 
           setInitialItems(items)} 
@@ -166,7 +166,7 @@ const DraggableDefault = (props) => {
           ))}
         </Flex>
       </Draggable>
-    </DragProvider>
+    </DraggableProvider>
   );
 };
 

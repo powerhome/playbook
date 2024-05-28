@@ -6,18 +6,18 @@ export const DraggableContext = () => {
   return useContext(DragContext);
 };
 
-export const DragProvider = ({ children }: any) => {
+export const DraggableProvider = ({ children }: any) => {
   const [items, setItems] = useState([]);
   const [dragData, setDragData] = useState<{ [key: string]: any }>({});
   const [isDragging, setIsDragging] = useState("");
   const [activeContainer, setActiveContainer] = useState("");
 
-  const handleDragStart = (e: any, id: string, container: string) => {
+  const handleDragStart = (id: string, container: string) => {
     setDragData({ id: id, initialGroup: container });
     setIsDragging(id);
   };
 
-  const handleDragEnter = (e: any, id: string, container: string) => {
+  const handleDragEnter = (id: string, container: string) => {
     if (dragData?.id !== id) {
       const newItems = [...items];
       const draggedItem = newItems.find((item) => item.id === dragData.id);
@@ -32,7 +32,7 @@ export const DragProvider = ({ children }: any) => {
     }
   };
 
-  const handleDragEnd = (e: any) => {
+  const handleDragEnd = () => {
     setIsDragging("");
     setActiveContainer("");
   };
@@ -48,14 +48,14 @@ export const DragProvider = ({ children }: any) => {
     setItems(updatedItems);
   };
 
-  const handleDrop = (e: any, container: string) => {
+  const handleDrop = (container: string) => {
     setIsDragging("");
     setActiveContainer("");
     const selected = dragData.id;
     changeCategory(selected, container);
   };
 
-  const handleDragOver = (e: any, container: string) => {
+  const handleDragOver = (e: Event, container: string) => {
     e.preventDefault();
     setActiveContainer(container);
   };

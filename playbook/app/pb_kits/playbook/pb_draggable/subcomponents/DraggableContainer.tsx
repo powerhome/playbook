@@ -40,7 +40,7 @@ const DraggableContainer = (props: DraggableContainerProps) => {
         id={id}
         key={container}
         onDragOver={(e) => handleDragOver(e, container)}
-        onDrop={(e) => handleDrop(e, container)}
+        onDrop={() => handleDrop(container)}
     >
       {children}
     </div>

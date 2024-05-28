@@ -40,9 +40,9 @@ const DraggableItem = (props: DraggableItemProps) => {
         draggable
         id={id}
         key={id}
-        onDragEnd={(e) => handleDragEnd(e)}
-        onDragEnter={(e) => handleDragEnter(e, id, container)}
-        onDragStart={(e) => handleDragStart(e, id, container)}
+        onDragEnd={() => handleDragEnd()}
+        onDragEnter={() => handleDragEnter(id, container)}
+        onDragStart={() => handleDragStart(id, container)}
     >
       {children}
     </div>
