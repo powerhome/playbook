@@ -1,5 +1,5 @@
 ---
-title: Color Guidelines
+title: Color
 description: As a design system primarily used for business software applications, we use color to enhance user comprehension, not as ornament.
 icon: palette
 ---

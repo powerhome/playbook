@@ -1,5 +1,5 @@
 ---
-title: Spacing Guidelines
+title: Spacing
 description: Playbook uses spacing tokens for consistency, simplifying design and enabling clear, functional layouts.
 icon: distribute-spacing-horizontal
 ---
