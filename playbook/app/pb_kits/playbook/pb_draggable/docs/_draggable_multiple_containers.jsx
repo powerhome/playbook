@@ -92,8 +92,6 @@ const DraggableMultipleContainer = (props) => {
         onChange={(items) => setInitialState(items)}
     >
       <Draggable
-          onDragChange={(items)=> 
-          setInitialState(items)} 
           {...props}
       >
         <Flex
