@@ -3,5 +3,6 @@ examples:
   
   react:
   - draggable_default: Default
+  - draggable_multiple_containers: Dragging Across Multiple Containers
   
   
