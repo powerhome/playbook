@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const DragContext = createContext<any>({});
 
@@ -6,11 +6,16 @@ export const DraggableContext = () => {
   return useContext(DragContext);
 };
 
-export const DraggableProvider = ({ children }: any) => {
+export const DraggableProvider = ({ children, initialItems }: any) => {
   const [items, setItems] = useState([]);
   const [dragData, setDragData] = useState<{ [key: string]: any }>({});
   const [isDragging, setIsDragging] = useState("");
   const [activeContainer, setActiveContainer] = useState("");
+
+  useEffect(() => {
+    setItems(initialItems);
+  }, [initialItems]);
+
 
   const handleDragStart = (id: string, container: string) => {
     setDragData({ id: id, initialGroup: container });

@@ -12,7 +12,6 @@ type DraggableProps = {
   children?: React.ReactNode;
   data?: { [key: string]: string };
   id?: string;
-  draggableItems?: { [key: string]: string }[];
   onDragChange?: (items: {[key: string]: string }[]) => void;
 };
 
@@ -23,11 +22,10 @@ const Draggable = (props: DraggableProps) => {
     children,
     data = {},
     id,
-    draggableItems,
     onDragChange,
   } = props;
 
-  const { items, setItems } = DraggableContext();
+  const { items } = DraggableContext();
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -36,10 +34,6 @@ const Draggable = (props: DraggableProps) => {
     globalProps(props),
     className
   );
-
-  useEffect(() => {
-    setItems(draggableItems);
-  }, [draggableItems]);
 
   useEffect(() => {
     onDragChange(items);

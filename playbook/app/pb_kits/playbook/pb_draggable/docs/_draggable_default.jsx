@@ -25,9 +25,8 @@ const DraggableDefault = (props) => {
   const [initialItems, setInitialItems] = useState(data);
 
   return (
-    <DraggableProvider>
+    <DraggableProvider initialItems={data}>
       <Draggable
-          draggableItems={data}
           onDragChange={(items) => setInitialItems(items)}
           {...props}
       >

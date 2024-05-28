@@ -88,8 +88,8 @@ const DraggableMultipleContainer = (props) => {
   };
 
   return (
-    <DraggableProvider>
-      <Draggable draggableItems={data} 
+    <DraggableProvider initialItems={data} >
+      <Draggable
           onDragChange={(items)=> 
           setInitialItems(items)} 
           {...props}
