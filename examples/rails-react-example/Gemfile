@@ -13,6 +13,8 @@ gem "react-rails"
 gem "sprockets-rails"
 gem "webpacker"
 
+gem "sass-rails"
+
 # Use sqlite3 as the database for Active Record
 gem "sqlite3"
 
@@ -45,6 +47,8 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+gem "playbook_ui", "~> 13.27.0"
 
 # Use Sass to process CSS
 # gem "sassc-rails"

@@ -10,12 +10,8 @@ module Playbook
         Hash(prop(:data)).merge("dropdown_option_label": option)
       end
 
-      def padding_helper
-        " p_xs"
-      end
-
       def classname
-        generate_classname("pb_dropdown_option", "list") + padding_helper
+        generate_classname("pb_dropdown_option", "list")
       end
     end
   end

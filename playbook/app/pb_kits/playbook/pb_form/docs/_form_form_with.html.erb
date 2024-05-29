@@ -13,16 +13,26 @@
   ]
 %>
 
+<% 
+  example_dropdown_options = [
+    { label: 'United States', value: 'United States', id: 'us' },
+    { label: 'Canada', value: 'Canada', id: 'ca' },
+    { label: 'Pakistan', value: 'Pakistan', id: 'pk' },
+  ]
+
+%>
+
 <%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
   <%= form.typeahead :example_user, props: { data: { typeahead_example1: true, user: {} }, placeholder: "Search for a user" } %>
   <%= form.text_field :example_text_field, props: { label: true } %>
-  <%= form.telephone_field :example_phone_field, props: { label: true } %>
+  <%= form.phone_number_field :example_phone_number_field, props: { label: "Example phone field" } %>
   <%= form.email_field :example_email_field, props: { label: true } %>
   <%= form.number_field :example_number_field, props: { label: true } %>
   <%= form.search_field :example_search_field, props: { label: true } %>
   <%= form.password_field :example_password_field, props: { label: true } %>
   <%= form.url_field :example_url_field, props: { label: true } %>
   <%= form.text_area :example_text_area, props: { label: true } %>
+  <%= form.dropdown_field :example_dropdown, props: { label: true, options: example_dropdown_options } %>
   <%= form.select :example_select, [ ["Yes", 1], ["No", 2] ], props: { label: true } %>
   <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
   <%= form.check_box :example_checkbox,

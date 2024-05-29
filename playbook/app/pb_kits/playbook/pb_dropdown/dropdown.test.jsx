@@ -203,5 +203,5 @@ test('selected option on click', () => {
   const kit = screen.getByTestId(testId)
   const option = kit.querySelector('.pb_dropdown_option_list')
   option.click()
-  expect(option).toHaveClass('pb_dropdown_option_selected p_xs')
+  expect(option).toHaveClass('pb_dropdown_option_selected')
 })

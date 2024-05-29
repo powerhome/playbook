@@ -1,6 +1,7 @@
 examples:
   rails:
   - advanced_table_beta: Default (Required Props)
+  - advanced_table_beta_subrow_headers: SubRow Headers
   react:
   - advanced_table_default: Default (Required Props)
   - advanced_table_loading: Loading State
@@ -12,4 +13,3 @@ examples:
   - advanced_table_table_options: Table Options
   - advanced_table_table_props: Table Props
   - advanced_table_inline_row_loading: inline Row Loading
-
