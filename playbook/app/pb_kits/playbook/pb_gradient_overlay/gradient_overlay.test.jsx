@@ -1,17 +1,66 @@
-import { renderKit } from '../utilities/test-utils'
+import React from 'react'
 
+import { render, screen } from '../utilities/test-utils'
 import { GradientOverlay } from '../'
 
-/* See these resources for more testing info:
-  - https://github.com/testing-library/jest-dom#usage for useage and examples
-  - https://jestjs.io/docs/en/using-matchers
-*/
+const testId = "gradient-overlay"
+const children = "This is the Gradient Overlay children"
 
-test('generated scaffold test - update me', () => {
+test('should pass data prop', () => {
   const props = {
-    data: { testid: 'default' }
+    children,
+    data: { testid: testId }
   }
 
-  const kit = renderKit(GradientOverlay , props)
+  render(<GradientOverlay {...props} />)
+  const kit = screen.getByTestId(testId)
   expect(kit).toBeInTheDocument()
+})
+
+test("should pass className prop", () => {
+  const className = "custom-class-name";
+  const props = {
+      className,
+      children,
+      data: { testid: testId },
+  }
+
+  render(<GradientOverlay {...props} />)
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass(className)
+})
+
+test('should pass aria prop', () => {
+  const props = {
+    aria: { label: testId },
+    children,
+    data: { testid: testId },
+  }
+
+  render(<GradientOverlay {...props} />)
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveAttribute('aria-label', testId)
+})
+
+test('should pass id prop', () => {
+  const props = {
+    children,
+    data: { testid: testId },
+    id: testId
+  }
+
+  render(<GradientOverlay {...props} />)
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveAttribute('id', testId)
+})
+
+test('should render children', () => {
+  const props = {
+    children,
+    data: { testid: testId }
+  }
+
+  render(<GradientOverlay {...props} />)
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveTextContent(props.children)
 })
