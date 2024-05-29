@@ -7548,10 +7548,10 @@ flatten@^1.0.2:
   resolved "https://npm.powerapp.cloud/flatten/-/flatten-1.0.3.tgz#c1283ac9f27b368abc1e36d1ff7b04501a30356b"
   integrity sha512-dVsPA/UwQ8+2uoFe5GHtiBMu48dWLTdsuEd7CKGlZlD78r1TTWBvDuFaFGKCo/ZfEr95Uk56vZoX86OsHkUeIg==
 
-flow-bin@0.198.1:
-  version "0.198.1"
-  resolved "https://npm.powerapp.cloud/flow-bin/-/flow-bin-0.198.1.tgz#5fdad4d572bdc76f9ab24890c335e1f7addcecd4"
-  integrity sha512-9jWC1GJgV5QyeBxvT0GtTQtaw55imDRIh//C5WaS/dijl7IP34CrNY2NgBSwzif516SktkG8KylQWJaslZI2QA==
+flow-bin@0.237.0:
+  version "0.237.0"
+  resolved "https://npm.powerapp.cloud/flow-bin/-/flow-bin-0.237.0.tgz#ffc9527eb7097fee5ef56069f8a9e305d1faa209"
+  integrity sha512-9Ptw37AHz6rtrVnBQdVJXJCFurraeczxCD+g4L9bzXUOcKUwLPWfiYWQGKaFpb2dlj+9a0YK+YbpzOqj0oeknQ==
 
 flow-config-parser@^0.3.0:
   version "0.3.0"
