@@ -8,9 +8,9 @@ type GradientOverlayProps = {
     className?: string,
     children: React.ReactNode[] | React.ReactNode,
     data?: { [key: string]: string },
-    direction: "right" | "left" | "bottom" | "top",
+    direction: "right" | "left" | "bottom" | "top" | "sides" | "sandwich",
     end: string,
-    gradientColors: [string, string],
+    gradientColors?: [string, string],
     id?: string,
     start: string,
 }
@@ -28,10 +28,28 @@ const GradientOverlay = (props: GradientOverlayProps) => {
         start = "0%",
     } = props
 
+    const getPreviousGradientDirection = () => {
+        return direction === "sides" ? "right" : direction === "sandwich" ? "top" : direction;
+    }
+
+    const getSubsequentGradientDirection = () => {
+        return direction === "sides" ? "left" : direction === "sandwich" ? "bottom" : direction;
+    }
+
     const ariaProps = buildAriaProps(aria)
     const dataProps = buildDataProps(data)
     const classes = classnames(buildCss('pb_gradient_overlay'), globalProps(props), className)
-    const gradient = `linear-gradient(to ${direction}, ${gradientColors[0]} ${start}, ${gradientColors[1]} ${end})`
+
+    const hasSubsequentGradient = direction === "sides" || direction === "sandwich"
+
+    const previousGradientDirection = getPreviousGradientDirection()
+    const subsequentGradientDirection = getSubsequentGradientDirection()
+
+    const firstGradientColor = hasSubsequentGradient ? gradientColors[1] : gradientColors[0]
+    const secondGradientColor = hasSubsequentGradient ? gradientColors[0] : gradientColors[1]
+
+    const previousGradient = `linear-gradient(to ${previousGradientDirection}, ${firstGradientColor} ${start}, ${secondGradientColor} ${end})`
+    const subsequentGradient = `linear-gradient(to ${subsequentGradientDirection}, ${firstGradientColor} ${start}, ${secondGradientColor} ${end})`
 
     return (
         <div
@@ -42,8 +60,14 @@ const GradientOverlay = (props: GradientOverlayProps) => {
         >
             <div className="gradient-overlay-container">
                 <div className="gradient-overlay"
-                    style={{ background: gradient }} />
+                    style={{ background: previousGradient }} />
+
                 {children}
+
+                { hasSubsequentGradient &&
+                    <div className="gradient-overlay"
+                        style={{ background: subsequentGradient }} />
+                }
             </div>
         </div>
     )

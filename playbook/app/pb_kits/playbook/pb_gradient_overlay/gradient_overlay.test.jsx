@@ -18,7 +18,7 @@ test('should pass data prop', () => {
 })
 
 test("should pass className prop", () => {
-    const className = "custom-class-name";
+    const className = "custom-class-name"
     const props = {
         className,
         children,
