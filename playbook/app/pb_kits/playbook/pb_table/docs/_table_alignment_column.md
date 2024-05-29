@@ -1,2 +1,2 @@
-You can individually align a piece of table data, but a more practical use would be applied to align a column.
+Pass our `textAlign` / `text_align` global prop to any `table.cell` / `table/table_cell` subcomponent to change the text alignment of individual cells, or apply this prop persistently to align entire columns.
 In the table above the "Rating" column contents is centered and the "Money" column contents is right aligned.

@@ -7,8 +7,8 @@ examples:
     - table_header: Table Header
     - table_alignment_row: Row Alignment
     - table_alignment_column: Column Alignment
-    - table_alignment_shift_row: Shift Row
-    - table_alignment_shift_data: Shift Column Data
+    - table_alignment_shift_row: Row Shift
+    - table_alignment_shift_data: Cell Shift
     - table_side_highlight: Side Highlight
     - table_container: Table Container Off
     - table_disable_hover: Disable Hover
@@ -34,9 +34,9 @@ examples:
     - table_lg: Large
     - table_sticky: Sticky Header
     - table_alignment_row: Row Alignment
-    - table_alignment_column: Column Alignment
-    - table_alignment_shift_row: Shift Row
-    - table_alignment_shift_data: Shift Column Data
+    - table_alignment_column: Cell Alignment
+    - table_alignment_shift_row: Row Shift
+    - table_alignment_shift_data: Cell Shift
     - table_side_highlight: Side Highlight
     - table_container: Table Container Off
     - table_disable_hover: Disable Hover
