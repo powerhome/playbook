@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Flex,
-  Background,
   Caption,
   Card,
   FlexItem,
@@ -92,22 +91,16 @@ const DraggableMultipleContainer = (props) => {
         onChange={(items) => setInitialState(items)}
     >
       <Draggable
+          display="flex"
+          justifyContent="center"
           {...props}
       >
-        <Flex
-            justifyContent="center"
-            margin="xs"
-            padding="xs"
-        >
           {containers?.map((container) => (
             <Draggable.Container 
                 container={container}
                 key={container} 
+                padding="sm"
             >
-              <Background
-                  backgroundColor="white"
-                  padding="sm"
-              >
                 <Caption textAlign="center">{container}</Caption>
                 <Flex 
                     alignItems="stretch"
@@ -161,10 +154,8 @@ const DraggableMultipleContainer = (props) => {
                       )
                     )}
                 </Flex>
-              </Background>
             </Draggable.Container>
           ))}
-        </Flex>
       </Draggable>
     </DraggableProvider>
   );

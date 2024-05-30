@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props";
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 import DraggableContainer from "./subcomponents/DraggableContainer";
 import DraggableItem from "./subcomponents/DraggableItem";
@@ -10,6 +10,7 @@ type DraggableProps = {
   className?: string;
   children?: React.ReactNode;
   data?: { [key: string]: string };
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
 };
 
@@ -19,12 +20,15 @@ const Draggable = (props: DraggableProps) => {
     className,
     children,
     data = {},
+    htmlOptions = {},
     id,
   } = props;
 
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
+
   const classes = classnames(
     buildCss("pb_draggable"),
     globalProps(props),
@@ -34,6 +38,7 @@ const Draggable = (props: DraggableProps) => {
   return (
     <div {...ariaProps} 
         {...dataProps} 
+        {...htmlProps}
         className={classes} 
         id={id}
     >
