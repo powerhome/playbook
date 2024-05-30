@@ -26,7 +26,6 @@ const DraggableContainer = (props: DraggableContainerProps) => {
   const dataProps = buildDataProps(data);
   const classes = classnames(
     buildCss("pb_draggable_container"),
-    "container",
     `${activeContainer === container ? "active" : ""}`,
     globalProps(props),
     className
