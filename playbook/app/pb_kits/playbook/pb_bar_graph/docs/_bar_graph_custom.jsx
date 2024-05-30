@@ -49,7 +49,6 @@ const BarGraphCustom = (props) => (
   <div>
     <BarGraph
         axisTitle="Number of Employees"
-        // chartData={chartData}
         customOptions={barGraphOptions}
         id="bar-custom"
         subTitle="Subtitle to replace"
