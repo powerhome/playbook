@@ -70,20 +70,15 @@ const data = [
 const DraggableMultipleContainer = (props) => {
   const [initialState, setInitialState] = useState(data);
 
-  const badgeText = (container) => {
-    return container === "To Do"
-      ? "queue"
-      : container === "In Progress"
-      ? "progress"
-      : "done";
-  };
-
-  const badgeColor = (container) => {
-    return container === "To Do"
-      ? "warning"
-      : container === "In Progress"
-      ? "primary"
-      : "success";
+  const badgeProperties = (container) => {
+    switch (container) {
+      case "To Do":
+        return { text: "queue", color: "warning" };
+      case "In Progress":
+        return { text: "progress", color: "primary" };
+      default:
+        return { text: "done", color: "success" };
+    }
   };
 
   return (
@@ -135,15 +130,15 @@ const DraggableMultipleContainer = (props) => {
                                   />
                                   <Title paddingLeft="xs" 
                                       size={4}
-                                  >
-                                    {title}
-                                  </Title>
+                                      text={title}
+                                  />
                                 </Flex>
                               </FlexItem>
                               <Badge
+                                  marginLeft="sm"
                                   rounded
-                                  text={badgeText(container)}
-                                  variant={badgeColor(container)}
+                                  text={badgeProperties(container).text}
+                                  variant={badgeProperties(container).color}
                               />
                             </Flex>
                             <Body paddingTop="xs"
