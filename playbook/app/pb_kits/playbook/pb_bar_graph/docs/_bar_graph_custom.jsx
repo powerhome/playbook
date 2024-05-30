@@ -28,7 +28,6 @@ const barGraphOptions = {
           }
       }
   },
-
   series: [{
       data: [{
           y: 29.9,
