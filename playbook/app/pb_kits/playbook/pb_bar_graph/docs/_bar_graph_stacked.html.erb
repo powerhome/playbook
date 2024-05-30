@@ -20,3 +20,7 @@
     title: 'Bar Graph with Stacked Columns',
     legend: true,
 }) %>
+
+if (!toggleLegendClick) {
+  staticOptions.plotOptions.series.events = { legendItemClick: () => false };
+}
