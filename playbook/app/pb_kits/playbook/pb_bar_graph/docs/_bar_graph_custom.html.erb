@@ -1,38 +1,40 @@
-
-
 <% bar_graph_options = {
     customOptions: {
         chart: {
             type: 'column'
-          },
-          subtitle: {
+        },
+        subtitle: {
             text: "Overridden Subtitle",
-          },
-          xAxis: {
-              type: 'category',
-              categories: ['USA', 'Canada', 'Brazil']
-          },
-        
-          plotOptions: {
-              series: {
-                  cursor: 'pointer',
-              }
-          },
-          series: [{
-              data: [{
-                  y: 29.9,
-                  name: 'USA',
-                  key: 'United_States'
-              }, {
-                  y: 71.5,
-                  name: 'Canada',
-                  key: 'Canada'
-              }, {
-                  y: 106.4,
-                  name: 'Brazil',
-                  key: 'Brazil'
-              }]
-          }]
+        },
+        xAxis: {
+            type: 'category',
+            categories: ['USA', 'Canada', 'Brazil']
+        },
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                events: {
+                    click: function() {
+                        location.href = 'https://en.wikipedia.org/wiki/' + this.options.key;
+                    }
+                }
+            }
+        },
+        series: [{
+            data: [{
+                y: 29.9,
+                name: 'USA',
+                key: 'United_States'
+            }, {
+                y: 71.5,
+                name: 'Canada',
+                key: 'Canada'
+            }, {
+                y: 106.4,
+                name: 'Brazil',
+                key: 'Brazil'
+            }]
+        }]
     }
 } %>
 
