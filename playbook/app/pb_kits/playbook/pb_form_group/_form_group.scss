@@ -107,7 +107,7 @@
   }
 
   & > [class^=pb_date_picker_kit]:not(:last-child) {
-    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .flatpickr-wrapper {
+    .input_wrapper input, [class^=pb_text_input_kit] .date_picker_input_wrapper .flatpickr-wrapper {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
@@ -115,7 +115,7 @@
   }
 
   & > [class^=pb_date_picker_kit]:not(:first-child) {
-    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .flatpickr-wrapper {
+    .input_wrapper input, [class^=pb_text_input_kit] .date_picker_input_wrapper .flatpickr-wrapper {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }
