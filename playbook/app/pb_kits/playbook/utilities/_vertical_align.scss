@@ -1,0 +1,16 @@
+@import "../tokens/vertical_align";
+
+
+$vertical_align_classes: (
+  vertical_align_baseline: $vertical_align_baseline,
+  vertical_align_sub: $vertical_align_sub,
+  vertical_align_super: $vertical_align_super,
+  vertical_align_text_top: $vertical_align_text_top,
+  vertical_align_text_bottom: $vertical_align_text_bottom,
+  vertical_align_middle: $vertical_align_middle,
+  vertical_align_top: $vertical_align_top,
+  vertical_align_bottom: $vertical_align_bottom,
+);
+
+
+@include global_props_responsive_css($vertical_align, 'vertical_align', 'vertical-align');
