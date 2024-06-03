@@ -118,6 +118,9 @@ const CircleChart = ({
     innerSizes[size];
 
 
+  const filteredProps: any = {...props};
+  delete filteredProps.verticalAlign;
+
   const [options, setOptions] = useState({});
 
   useEffect(() => {
@@ -184,7 +187,7 @@ const CircleChart = ({
         <div id={`wrapper-circle-chart-${id}`}>
           <HighchartsReact
               containerProps={{
-              className: classnames("pb_circle_chart", globalProps(props)),
+              className: classnames("pb_circle_chart", globalProps(filteredProps)),
               id: id,
               ...ariaProps,
               ...dataProps,
@@ -198,7 +201,7 @@ const CircleChart = ({
       ) : (
         <HighchartsReact
             containerProps={{
-            className: classnames("pb_circle_chart", globalProps(props)),
+            className: classnames("pb_circle_chart", globalProps(filteredProps)),
             id: id,
             ...ariaProps,
             ...dataProps,

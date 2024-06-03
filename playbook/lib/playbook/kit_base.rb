@@ -29,6 +29,7 @@ require "playbook/left"
 require "playbook/top"
 require "playbook/right"
 require "playbook/bottom"
+require "playbook/vertical_align"
 
 module Playbook
   include ActionView::Helpers
@@ -65,6 +66,7 @@ module Playbook
     include Playbook::Top
     include Playbook::Right
     include Playbook::Bottom
+    include Playbook::VerticalAlign
 
     prop :id
     prop :data, type: Playbook::Props::HashProp, default: {}

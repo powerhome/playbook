@@ -69,6 +69,22 @@ module Playbook
         standard_options.deep_merge(custom_options)
       end
 
+      def vertical_align_props
+        if vertical_align
+          if object.vertical_align
+            original_result = super
+            class_to_remove = "vertical_align_#{object.vertical_align}"
+
+            modified_result = original_result.gsub(class_to_remove, "").strip
+            modified_result.empty? ? nil : modified_result
+          else
+            super
+          end
+        else
+          super
+        end
+      end
+
       def classname
         generate_classname("pb_line_graph")
       end

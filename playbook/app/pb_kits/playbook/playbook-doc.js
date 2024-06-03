@@ -34,6 +34,7 @@ import * as DateYearStacked from 'pb_date_year_stacked/docs'
 import * as Detail from 'pb_detail/docs'
 import * as Dialog from 'pb_dialog/docs'
 import * as DistributionBarDocs from 'pb_distribution_bar/docs'
+import * as Draggable from 'pb_draggable/docs'
 import * as Dropdown from 'pb_dropdown/docs'
 import * as FileUpload from 'pb_file_upload/docs'
 import * as Filter from 'pb_filter/docs'
@@ -137,6 +138,7 @@ WebpackerReact.registerComponents({
   ...Detail,
   ...Dialog,
   ...DistributionBarDocs,
+  ...Draggable,
   ...Dropdown,
   ...FileUpload,
   ...Filter,

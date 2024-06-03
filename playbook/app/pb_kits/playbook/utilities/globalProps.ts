@@ -156,6 +156,10 @@ type Truncate = {
   truncate?: TruncateType
 }
 
+type VerticalAlign =  {
+  verticalAlign?: "baseline" | "super" | "top" | "middle" | "bottom" | "sub" | "text-top" | "text-bottom"
+}
+
 type ZIndexType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 type ZIndexResponsiveType = {[key: string]: ZIndexType}
 type ZIndex = {
@@ -167,7 +171,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MaxWidth & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & ZIndex & { hover?: string } & Top & Right & Bottom & Left;
+  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -469,6 +473,13 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       return getResponsivePropClasses(textAlign, 'text_align')
     } else {
       return textAlign ? `text_align_${textAlign} ` : ''
+    }
+  },
+  verticalAlignProps: ({ verticalAlign }: VerticalAlign) => {
+    if (typeof verticalAlign === 'object') {
+      return getResponsivePropClasses(verticalAlign, 'vertical_align')
+    } else {
+      return verticalAlign ? `vertical_align_${verticalAlign} ` : ''
     }
   }
 }
