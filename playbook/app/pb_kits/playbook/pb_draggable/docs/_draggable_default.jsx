@@ -28,10 +28,7 @@ const DraggableDefault = (props) => {
     <DraggableProvider initialItems={data}
         onChange={(items) => setInitialState(items)}
     >
-      <Draggable
-          {...props}
-      >
-        <Draggable.Container>
+        <Draggable.Container {...props}>
           <SelectableList variant="checkbox">
             {initialState.map(({ id, text }) => (
               <Draggable.Item id={id} 
@@ -45,7 +42,6 @@ const DraggableDefault = (props) => {
             ))}
           </SelectableList>
         </Draggable.Container>
-      </Draggable>
     </DraggableProvider>
   );
 };
