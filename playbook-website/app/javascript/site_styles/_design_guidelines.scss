@@ -1,0 +1,4 @@
+// This makes the Design Guidelines page have 3 columns - remove class from here and ../guides/_design_docs_index_list.html.erb when a fourth is added so it mirrors Getting Started page
+.design-guidelines-grid-override {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+}

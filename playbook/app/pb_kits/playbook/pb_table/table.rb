@@ -30,12 +30,16 @@ module Playbook
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[table div],
                  default: "table"
+      prop :outer_padding, type: Playbook::Props::Enum,
+                           values: ["none", "xxs", "xs", "sm", "md", "lg", "xl", nil],
+                           default: nil
 
       def classname
         generate_classname(
           "pb_table", "table-#{size}", single_line_class, dark_class,
           disable_hover_class, container_class, data_table_class, sticky_class, collapse_class,
-          vertical_border_class, striped_class, "table-responsive-#{responsive}", separator: " "
+          vertical_border_class, striped_class, outer_padding_class,
+          "table-responsive-#{responsive}", separator: " "
         )
       end
 
@@ -75,6 +79,15 @@ module Playbook
 
       def vertical_border_class
         vertical_border ? "vertical-border" : nil
+      end
+
+      def outer_padding_class
+        if outer_padding.nil?
+          outer_padding
+        else
+          space_css_name = outer_padding != "none" ? "space_" : ""
+          outer_padding.present? ? "outer_padding_#{space_css_name}#{outer_padding}" : nil
+        end
       end
     end
   end

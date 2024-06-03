@@ -3,6 +3,7 @@
 class GuidesController < ApplicationController
   layout "docs"
   before_action :set_page_vars
+  before_action :delete_dark_mode_cookie
 
   def md_doc
     @show_sidebar = true

@@ -11,7 +11,8 @@ export const OtherNavItems = ({
   isActive,
   updateTopLevelNav,
   parentIndex,
-  getting_started
+  getting_started,
+  design_guidelines,
 }) => {
   //transform text from samples yml
   const transformMenuTitle = (link) => {
@@ -40,6 +41,11 @@ export const OtherNavItems = ({
     link: `/${guide.url}`
   }));
 
+  const designGuidesNavItems = design_guidelines["pages"].map(guide => ({
+    name: guide.title,
+    link: `/${guide.url}`
+  }));
+
   //conditionally render navitems depending on name
   if (name === "Tokens & Guidelines") {
     menuItems = VisualGuidelinesItems;
@@ -47,6 +53,8 @@ export const OtherNavItems = ({
     menuItems = samplesMenu;
   } else if (name === "Getting Started") {
     menuItems = guidesNavItems;
+  } else if (name === "Design Guidelines") {
+    menuItems = designGuidesNavItems
   }
 
   const handleItemClick = (link, i) => {

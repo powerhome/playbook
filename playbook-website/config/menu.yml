@@ -352,6 +352,10 @@ kits:
         platforms: *web
         description: 
         status: "stable"
+      - name: "draggable"
+        platforms: *react_only
+        description:
+        status: "beta"
   - name: message_text_patterns
     description: 
     components:
@@ -464,4 +468,3 @@ kits:
       - name: "user"
         platforms: *web
         description: This kit was created for having a systematic way of displaying users with avatar, titles, name and territory. This is a versatile kit with features than can be added to display more info.
-        status: "stable"

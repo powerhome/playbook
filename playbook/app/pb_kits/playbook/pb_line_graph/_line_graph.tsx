@@ -130,6 +130,9 @@ const LineGraph = ({
     staticOptions.plotOptions.series.events = { legendItemClick: () => false };
   }
 
+  const filteredProps: any = {...props};
+ delete filteredProps.verticalAlign;
+
   const [options, setOptions] = useState({});
 
   useEffect(() => {
@@ -139,7 +142,7 @@ const LineGraph = ({
   return (
     <HighchartsReact
         containerProps={{
-        className: classnames(globalProps(props), className),
+        className: classnames(globalProps(filteredProps), className),
         id: id,
         ...ariaProps,
         ...dataProps,
