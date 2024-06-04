@@ -10,7 +10,7 @@ const VerticalAlign = ({
 }) => (
   <>
     <Example
-      description='Specifying position can be useful for customizing page elements and layouts. The examples below demonstrate how you can apply (or override) position:'
+      description='Vertical alignment is an important aspect of layout, particularly for inline text and table cells, where Flex Box support can be limited. Our global prop allows you to quickly apply vertical alignment when and where you need it.'
       example={example}
       globalProps={{
         verticalAlign: VALUES,
