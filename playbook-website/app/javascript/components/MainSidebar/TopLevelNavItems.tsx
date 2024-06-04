@@ -16,7 +16,8 @@ export const TopLevelNavItem = ({
   category,
   collapsibles,
   samples,
-  getting_started
+  getting_started,
+  design_guidelines,
 }) => {
   //hook into collapsible logic for top level item
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
@@ -184,6 +185,7 @@ export const TopLevelNavItem = ({
                 updateTopLevelNav={updateTopLevelNav}
                 parentIndex={i}
                 getting_started={getting_started}
+                design_guidelines={design_guidelines}
               />
             )}
           </>

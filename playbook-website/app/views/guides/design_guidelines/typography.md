@@ -1,7 +1,7 @@
 ---
-title: Typography Guidelines
+title: Typography
 description: Typography serves as the backbone of any design system. It’s not just page titles and copy, typography is everywhere, in navigation labels, buttons, captions, form fields and more. 
-icon: font-case
+icon: text
 ---
 
 For our Typography Tokens refer to [Typography](https://playbook.powerapp.cloud/visual_guidelines/typography) in [Tokens & Guidelines](https://playbook.powerapp.cloud/visual_guidelines)
