@@ -6,7 +6,7 @@
     </Table.Row>
     </Table.Head>
     <Table.Body>
-    <Table.Row>
+    <Table.Row verticalAlign="middle">
         <Table.Cell>
         {'Value 1a'}
         <br />
@@ -16,7 +16,7 @@
         </Table.Cell>
         <Table.Cell>{'Value 2a'}</Table.Cell>
     </Table.Row>
-    <Table.Row verticalAlign="middle">
+    <Table.Row>
         <Table.Cell>
         {'Value 1b'}
         <br />
@@ -24,17 +24,7 @@
         <br />
         {'Value 1b'}
         </Table.Cell>
-        <Table.Cell>{'Value 2b'}</Table.Cell>
-    </Table.Row>
-    <Table.Row verticalAlign="bottom">
-        <Table.Cell>
-        {'Value 1c'}
-        <br />
-        {'Value 1c'}
-        <br />
-        {'Value 1c'}
-        </Table.Cell>
-        <Table.Cell>{'Value 2c'}</Table.Cell>
+        <Table.Cell verticalAlign="bottom">{'Value 2b'}</Table.Cell>
     </Table.Row>
     </Table.Body>
 </Table>
