@@ -12,6 +12,10 @@ export const VisualGuidelinesItems = [
         link: "/visual_guidelines/position"
     },
     {
+        name: "Vertical Align",
+        link: "/visual_guidelines/vertical_align"
+    },
+    {
         name: "Z-Index",
         link: "/visual_guidelines/z_index"
     },
