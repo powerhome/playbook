@@ -1,33 +1,24 @@
-const path = require('path')
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
-const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CircularDependencyPlugin = require('circular-dependency-plugin')
-const FileManagerPlugin = require('filemanager-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
-
-const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook')
-const DIST_PATH = path.resolve(__dirname, 'dist')
-const NODE_MODULES_PATH = path.resolve(__dirname, '../node_modules')
-const WEBSITE = path.resolve(__dirname, '../playbook-website')
-const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
+const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook');
+const DIST_PATH = path.resolve(__dirname, 'dist');
+const NODE_MODULES_PATH = path.resolve(__dirname, '../node_modules');
+const WEBSITE = path.resolve(__dirname, '../playbook-website');
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 const CIRCULAR_DEPENDENCY_PLUGIN = new CircularDependencyPlugin({
-  // exclude detection of files based on a RegExp
   exclude: /node_modules/,
-  // add errors to webpack instead of warnings
   failOnError: true,
-  // allow import cycles that include an asyncronous import,
-  // e.g. via import(/* webpackMode: "weak" */ './file.js')
   allowAsyncCycles: false,
-  // set the current working directory for displaying module paths
   cwd: process.cwd(),
-})
-
+});
 
 const COPY_PLUGIN = new CopyPlugin({
   patterns: [
-    // Copy tokens and fonts to dist
     {
       from: `${SOURCE_PATH}/tokens`,
       globOptions: {
@@ -35,31 +26,27 @@ const COPY_PLUGIN = new CopyPlugin({
       },
       to: `${DIST_PATH}/tokens`,
       transformPath(targetPath) {
-        return targetPath.replace(/^tokens\/_/, 'tokens/')
+        return targetPath.replace(/^tokens\/_/, 'tokens/');
       },
     },
-    // Copy menu.yml to dist for dev_docs
     {
       from: `${WEBSITE}/config/menu.yml`,
-      to:`${DIST_PATH}/`
+      to: `${DIST_PATH}/`
     },
-    // Copy Doc Display Helper Files
     {
       from: `${WEBSITE}/app/components/playbook/pb_docs`,
-      to:`${DIST_PATH}/app/components/playbook/pb_docs`
+      to: `${DIST_PATH}/app/components/playbook/pb_docs`
     },
-    // Copy Doc Helper
     {
       from: `${WEBSITE}/lib/pb_doc_helper.rb`,
-      to:`${DIST_PATH}/`
+      to: `${DIST_PATH}/`
     }
   ],
   options: {
     concurrency: 100,
   },
-})
+});
 
-// Remove extra css and js created by webpack
 const CLEAN_DIST_PLUGIN = new FileManagerPlugin({
   events: {
     onEnd: {
@@ -70,14 +57,23 @@ const CLEAN_DIST_PLUGIN = new FileManagerPlugin({
       ],
     },
   },
-})
+});
 
-const JS_LOADER = {
-  test: /\.(js|jsx|mjs)$/,
-  use: 'babel-loader',
-  include: SOURCE_PATH,
-  exclude: /node_modules/,
-}
+const JS_LOADER = [
+  {
+    test: /\.(js|jsx|mjs)$/,
+    use: 'babel-loader',
+    include: SOURCE_PATH,
+    exclude: /node_modules/,
+  },
+  {
+    test: /\.js$/,
+    include: /node_modules\/intl-tel-input/,
+    use: {
+      loader: 'babel-loader',
+    },
+  }
+];
 
 const TS_LOADER = {
   test: /\.(ts|tsx)$/,
@@ -91,7 +87,7 @@ const TS_LOADER = {
   ],
   include: SOURCE_PATH,
   exclude: /node_modules/,
-}
+};
 
 const CSS_LOADER = {
   loader: 'css-loader',
@@ -102,7 +98,7 @@ const CSS_LOADER = {
     },
     sourceMap: true,
   },
-}
+};
 
 const SASS_LOADER = {
   loader: 'sass-loader',
@@ -111,7 +107,7 @@ const SASS_LOADER = {
       includePaths: [NODE_MODULES_PATH],
     },
   },
-}
+};
 
 const SVG_URL_LOADER = {
   test: /\.svg$/,
@@ -125,11 +121,7 @@ const SVG_URL_LOADER = {
       },
     },
   ],
-}
-
-new webpack.DefinePlugin({
-  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-})
+};
 
 module.exports = {
   watchOptions: {
@@ -152,22 +144,11 @@ module.exports = {
     'webpacker-react': 'webpacker-react',
   },
   resolve: {
-    // Extensions used (in the specified order order)to resolve imports w/o an explicit extension
-    extensions: [
-      '.ts',
-      '.tsx',
-      '.js',
-      '.jsx',
-    ],
-    modules: [
-      SOURCE_PATH,
-      NODE_MODULES_PATH,
-    ],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    modules: [SOURCE_PATH, NODE_MODULES_PATH],
   },
   resolveLoader: {
-    modules: [
-      NODE_MODULES_PATH,
-    ],
+    modules: [NODE_MODULES_PATH],
   },
   optimization: { minimize: !IS_DEVELOPMENT },
   output: {
@@ -197,11 +178,11 @@ module.exports = {
       },
       {
         test: /\.png$/,
-        use: 'file-loader'
+        use: 'file-loader',
       },
       TS_LOADER,
-      JS_LOADER,
+      ...JS_LOADER,  // Spread the JS_LOADER array here
       SVG_URL_LOADER,
     ],
   },
-}
+};
