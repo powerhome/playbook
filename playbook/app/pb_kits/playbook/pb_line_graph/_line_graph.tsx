@@ -8,6 +8,7 @@ import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
+import { merge } from 'lodash'
 
 type LineGraphProps = {
   align?: "left" | "right" | "center";
@@ -21,6 +22,7 @@ type LineGraphProps = {
     name: string;
     data: number[];
   }[];
+  customOptions?: Partial<Highcharts.Options>;
   gradient?: boolean;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id: string;
@@ -45,6 +47,7 @@ const LineGraph = ({
   data = {},
   align = "center",
   className = "pb_bar_graph",
+  customOptions = {},
   dark = false,
   gradient = false,
   type = "line",
@@ -136,7 +139,7 @@ const LineGraph = ({
   const [options, setOptions] = useState({});
 
   useEffect(() => {
-    setOptions({ ...staticOptions });
+    setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
   return (
