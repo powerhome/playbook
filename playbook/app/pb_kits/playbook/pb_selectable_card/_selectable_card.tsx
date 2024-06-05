@@ -131,43 +131,41 @@ const SelectableCard = (props: SelectableCardProps) => {
           className={globalProps(labelProps)}
           htmlFor={inputIdPresent}
       >
-        <div className="buffer">
-              {variant === 'displayInput' ? 
-              <Flex vertical="center">
-                <Flex
-                    orientation="column"
-                    padding="sm"
-                    paddingRight="xs"
-                    vertical="center"
-                >
-                  <Input
-                      dark={dark}
-                  >
-                    <input
-                        checked={checked}
-                        disabled={disabled}
-                        onClick={handleClick}
-                        readOnly
-                        type={inputType}
-                    />
-                  </Input>
-                </Flex>
-                <div className="separator" />
-                <div className="psuedo_separator"/>
-                <Card
-                    borderNone
+          {variant === 'displayInput' ? 
+            <Flex vertical="center">
+              <Flex
+                  orientation="column"
+                  padding="sm"
+                  paddingRight="xs"
+                  vertical="center"
+              >
+                <Input
                     dark={dark}
-                    padding="sm"
-                    status={error ? 'negative' : null}
                 >
-                  {text ||props.children}
-                </Card>
+                  <input
+                      checked={checked}
+                      disabled={disabled}
+                      onClick={handleClick}
+                      readOnly
+                      type={inputType}
+                  />
+                </Input>
               </Flex>
-              :
+              <div className="separator" />
+              <div className="psuedo_separator"/>
+              <Card
+                  borderNone
+                  dark={dark}
+                  padding="sm"
+                  status={error ? 'negative' : null}
+              >
+                {text ||props.children}
+              </Card>
+            </Flex>
+          :
             text || props.children
-              }
+             }
           {displayIcon()}
-        </div>
       </label>
     </div>
   )
