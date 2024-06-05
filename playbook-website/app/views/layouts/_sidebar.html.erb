@@ -1,1 +1,12 @@
-<%= react_component("MainSidebar", dark: dark_mode?, type: @type, category: @category, kit: @kit, kits_with_status: aggregate_kits_with_status, PBversion: Playbook::VERSION, search_list: search_list, samples: SAMPLES, getting_started: DOCS[:getting_started], design_guidelines: DOCS[:design_guidelines]) %>
+<%= react_component("MainSidebar",
+                    dark: dark_mode?,
+                    type: @type,
+                    category: @category,
+                    kit: @kit,
+                    kits_with_status: aggregate_kits_with_status,
+                    PBversion: Playbook::VERSION,
+                    search_list: search_list,
+                    samples: SAMPLES,
+                    getting_started: DOCS[:getting_started],
+                    design_guidelines: DOCS[:design_guidelines],
+                    whats_new: DOCS[:playbook]) %>

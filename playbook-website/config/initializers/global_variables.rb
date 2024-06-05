@@ -5,8 +5,9 @@ SAMPLES = Rails.cache.fetch("samples_yml") { YAML.load_file(Rails.root.join("con
 
 require "markdown_helper"
 search_path = File.join(Rails.root, "/app/views/guides")
+playbook_path = File.join(Rails.root, "../playbook")
 navigation = {}
-Dir.glob("#{search_path}/**/*.md") do |filename|
+Dir.glob([File.join(search_path, "**/*.md"), File.join(playbook_path, "**/*.md")]) do |filename|
   dir_path = File.dirname(filename)
   dir = File.basename(dir_path)
   title = File.basename(filename).sub(/(?<=.)\..*/, "")
@@ -19,7 +20,6 @@ Dir.glob("#{search_path}/**/*.md") do |filename|
     "#{dir}": { url: "", title: "", filepath: "", frontmatter: {}, pages: [] },
   }
   navigation.merge!(dir_hash) unless navigation[:"#{dir}"] || dir == "guides"
-
   if dir == "guides"
     # LOGIC FOR TOP LEVEL PARENT
     directory = navigation[:"#{title}"]
@@ -30,8 +30,9 @@ Dir.glob("#{search_path}/**/*.md") do |filename|
   else
     # LOGIC FOR DOC PAGES
     directory = navigation[:"#{dir}"]
+    url = url.start_with?("playbook/") ? title.downcase : "guides/#{url}"
     directory[:pages] << {
-      url: "guides/#{url}",
+      url: url,
       title: display_title,
       page_id: title,
       filepath: filename,
