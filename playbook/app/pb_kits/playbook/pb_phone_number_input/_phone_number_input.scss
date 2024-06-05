@@ -30,7 +30,7 @@ $flag-min-resolution: 192dpi;
 
   .iti__selected-flag {
     padding: 0 $space_xxs 0 $space_sm;
-    border-radius: $space_xxs; // Add border-radius to selected flag
+    border-radius: $space_xxs; 
 
     &[aria-expanded="true"] {
       color: $primary_action;
@@ -105,20 +105,17 @@ $flag-min-resolution: 192dpi;
     color: $primary_action;
   }
 
-  /* Apply flexbox to all li elements within the country list */
   .iti__country-list .iti__country {
     display: flex;
     align-items: center;
   }
 
-  /* Ensure the flag box, country name, and dial code are left-aligned */
   .iti__flag-box,
   .iti__country-name,
   .iti__dial-code {
     flex-grow: 0;
   }
 
-  /* Push the ::after pseudo-element to the right */
   .iti__country-list .iti__country.iti__active::after {
     content: "";
     margin-left: auto;
@@ -130,9 +127,8 @@ $flag-min-resolution: 192dpi;
     border-radius: 1px;
   }
 
-  /* Dropdown styling */
   .iti__dropdown-content {
-    border-radius: $space_xxs; // Ensure the dropdown has border-radius
+    border-radius: $space_md; 
     border: 1px solid $border_light !important;
   }
 
@@ -158,10 +154,18 @@ $flag-min-resolution: 192dpi;
       color: $white;
     }
 
+    .iti__dropdown-content {
+      border-radius: $space_md; 
+      border: 1px solid $border_dark !important;
+    }
+
+    .iti__divider {
+      border-bottom: 1px solid $border_dark !important;  
+    }
+
     .iti__country-list {
       background-color: $bg_dark;
       border: 1px solid $border_dark;
-
 
       .iti__highlight {
         background-color: $hover_dark;

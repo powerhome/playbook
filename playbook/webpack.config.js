@@ -1,21 +1,21 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CircularDependencyPlugin = require('circular-dependency-plugin');
-const FileManagerPlugin = require('filemanager-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CircularDependencyPlugin = require('circular-dependency-plugin')
+const FileManagerPlugin = require('filemanager-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
-const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook');
-const DIST_PATH = path.resolve(__dirname, 'dist');
-const NODE_MODULES_PATH = path.resolve(__dirname, '../node_modules');
-const WEBSITE = path.resolve(__dirname, '../playbook-website');
-const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook')
+const DIST_PATH = path.resolve(__dirname, 'dist')
+const NODE_MODULES_PATH = path.resolve(__dirname, '../node_modules')
+const WEBSITE = path.resolve(__dirname, '../playbook-website')
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
 const CIRCULAR_DEPENDENCY_PLUGIN = new CircularDependencyPlugin({
   exclude: /node_modules/,
   failOnError: true,
   allowAsyncCycles: false,
   cwd: process.cwd(),
-});
+})
 
 const COPY_PLUGIN = new CopyPlugin({
   patterns: [
@@ -26,7 +26,7 @@ const COPY_PLUGIN = new CopyPlugin({
       },
       to: `${DIST_PATH}/tokens`,
       transformPath(targetPath) {
-        return targetPath.replace(/^tokens\/_/, 'tokens/');
+        return targetPath.replace(/^tokens\/_/, 'tokens/')
       },
     },
     {
@@ -45,7 +45,7 @@ const COPY_PLUGIN = new CopyPlugin({
   options: {
     concurrency: 100,
   },
-});
+})
 
 const CLEAN_DIST_PLUGIN = new FileManagerPlugin({
   events: {
@@ -57,7 +57,7 @@ const CLEAN_DIST_PLUGIN = new FileManagerPlugin({
       ],
     },
   },
-});
+})
 
 const JS_LOADER = [
   {
@@ -73,7 +73,7 @@ const JS_LOADER = [
       loader: 'babel-loader',
     },
   }
-];
+]
 
 const TS_LOADER = {
   test: /\.(ts|tsx)$/,
@@ -87,7 +87,7 @@ const TS_LOADER = {
   ],
   include: SOURCE_PATH,
   exclude: /node_modules/,
-};
+}
 
 const CSS_LOADER = {
   loader: 'css-loader',
@@ -98,7 +98,7 @@ const CSS_LOADER = {
     },
     sourceMap: true,
   },
-};
+}
 
 const SASS_LOADER = {
   loader: 'sass-loader',
@@ -107,7 +107,7 @@ const SASS_LOADER = {
       includePaths: [NODE_MODULES_PATH],
     },
   },
-};
+}
 
 const SVG_URL_LOADER = {
   test: /\.svg$/,
@@ -121,7 +121,7 @@ const SVG_URL_LOADER = {
       },
     },
   ],
-};
+}
 
 module.exports = {
   watchOptions: {
@@ -185,4 +185,4 @@ module.exports = {
       SVG_URL_LOADER,
     ],
   },
-};
+}
