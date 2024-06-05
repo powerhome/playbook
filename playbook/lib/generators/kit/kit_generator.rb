@@ -120,6 +120,7 @@ class KitGenerator < Rails::Generators::NamedBase
         f.puts "    components:"
         f.puts "      - name: #{@kit_name_underscore}"
         f.puts "        platforms: *#{platforms}"
+        f.puts "        status: \"beta\""
       end
 
       say_status  "complete",
