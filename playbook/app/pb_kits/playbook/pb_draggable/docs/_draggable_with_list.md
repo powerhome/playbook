@@ -1,0 +1,1 @@
+For a simplified version of the Draggable API fro the List kit, use the DraggableProvider to wrap the List use the `draggable` prop on List. The dev must manage state as shown and pass in id to the ListItem.

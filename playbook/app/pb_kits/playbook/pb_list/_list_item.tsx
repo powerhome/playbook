@@ -2,12 +2,16 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import Icon from '../pb_icon/_icon'
+import Body from '../pb_body/_body'
+import Draggable from '../pb_draggable/_draggable'
 
 type ListItemProps = {
   aria?: { [key: string]: string },
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
   data?: Record<string, unknown>,
+  dragHandle?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   tabIndex?: number,
@@ -19,6 +23,8 @@ const ListItem = (props: ListItemProps) => {
     children,
     className,
     data = {},
+    draggable = false,
+    dragHandle = true,
     htmlOptions = {},
     id,
     tabIndex,
@@ -35,16 +41,46 @@ const ListItem = (props: ListItemProps) => {
 
   return (
     <>
-      <li
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={classes}
-          id={id}
-          tabIndex={tabIndex}
-      >
-        {children}
-      </li>
+    {
+      draggable ? (
+        <Draggable.Item id={id}>
+        <li
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
+            id={id}
+            tabIndex={tabIndex}
+        >
+          {
+            dragHandle && (
+              <span style={{verticalAlign: 'middle'}}>
+                <Body color="lighter">
+                <Icon 
+                    icon="grip-dots-vertical"
+                    verticalAlign="middle" 
+                />
+                </Body>
+              </span>
+            )
+          }
+          {children}
+        </li>
+        </Draggable.Item>
+        ) : (
+        <li
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
+            id={id}
+            tabIndex={tabIndex}
+        >
+          {children}
+        </li>
+      )
+    }
+      
     </>
   )
 }

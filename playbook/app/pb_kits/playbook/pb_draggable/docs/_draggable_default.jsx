@@ -25,6 +25,7 @@ const DraggableDefault = (props) => {
   const [initialState, setInitialState] = useState(data);
 
   return (
+    <>
     <DraggableProvider initialItems={data}
         onChange={(items) => setInitialState(items)}
     >
@@ -34,7 +35,8 @@ const DraggableDefault = (props) => {
               <Draggable.Item id={id} 
                   key={id}
               >
-                <SelectableList.Item label={text} 
+                <SelectableList.Item dragHandle
+                    label={text} 
                     name={id} 
                     value={id} 
                 />
@@ -43,6 +45,8 @@ const DraggableDefault = (props) => {
           </SelectableList>
         </Draggable.Container>
     </DraggableProvider>
+    </>
+
   );
 };
 
