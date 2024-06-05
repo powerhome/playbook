@@ -1,4 +1,4 @@
-<%%= content_tag(:div,
+<%%= pb_content_tag(:div,
     aria: object.aria,
     class: object.classname,
     data: object.data,
