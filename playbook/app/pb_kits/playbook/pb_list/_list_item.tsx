@@ -55,7 +55,7 @@ const ListItem = (props: ListItemProps) => {
           {
             dragHandle && (
               <span style={{verticalAlign: 'middle'}}>
-                <Body color="lighter">
+                <Body color="light">
                 <Icon 
                     icon="grip-dots-vertical"
                     verticalAlign="middle" 

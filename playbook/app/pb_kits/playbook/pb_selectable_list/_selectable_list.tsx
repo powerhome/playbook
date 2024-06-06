@@ -14,6 +14,7 @@ type SelectableListProps = {
   children?: React.ReactElement[],
   className?: string,
   data?: GenericObject,
+  draggable?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   variant?: 'checkbox' | 'radio',
@@ -25,6 +26,7 @@ const SelectableList = (props: SelectableListProps) => {
     children,
     className,
     data = {},
+    draggable = false,
     htmlOptions = {},
     id,
   } = props
@@ -66,7 +68,9 @@ const SelectableList = (props: SelectableListProps) => {
         className={classes}
         id={id}
     >
-      <List variant={props.variant}>
+      <List draggable={draggable}
+          variant={props.variant}
+      >
         {selectableListItems}
       </List>
     </div>
