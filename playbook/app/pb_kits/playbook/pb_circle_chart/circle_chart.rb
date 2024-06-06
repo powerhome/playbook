@@ -6,6 +6,7 @@ module Playbook
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left right center],
                    default: "center"
+      prop :border_width, type: Playbook::Props::Numeric
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
       prop :custom_options, default: {}
@@ -44,6 +45,7 @@ module Playbook
       def standard_options
         {
           align: align,
+          borderWidth: border_width,
           id: id,
           colors: colors,
           chartData: chart_data,
