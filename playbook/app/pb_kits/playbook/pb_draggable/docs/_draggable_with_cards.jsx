@@ -34,8 +34,7 @@ const DraggableWithCards = (props) => {
         initialItems={data}
         onChange={(items) => setInitialState(items)}
     >
-      <Draggable {...props}>
-        <Draggable.Container>
+        <Draggable.Container  {...props}>
           {initialState.map(({ id, text }) => (
             <Draggable.Item id={id} 
                 key={id}
@@ -113,7 +112,6 @@ const DraggableWithCards = (props) => {
             </Draggable.Item>
           ))}
         </Draggable.Container>
-      </Draggable>
     </DraggableProvider>
   );
 };
