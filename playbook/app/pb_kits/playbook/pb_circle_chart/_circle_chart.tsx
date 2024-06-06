@@ -10,6 +10,7 @@ import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
+import { merge } from 'lodash'
 
 type CircleChartProps = {
   align?: "left" | "right" | "center";
@@ -18,6 +19,7 @@ type CircleChartProps = {
   children?: Node;
   className?: string;
   colors?: string[];
+  customOptions?: Partial<Highcharts.Options>;
   dark?: boolean;
   data?: {[key: string]: string},
   dataLabelHtml?: string;
@@ -67,6 +69,7 @@ const CircleChart = ({
   children,
   className,
   colors = [],
+  customOptions = {},
   dark = false,
   data = {},
   dataLabelHtml = "<div>{point.name}</div>",
@@ -174,7 +177,7 @@ const CircleChart = ({
       ],
       credits: false,
     };
-    setOptions({ ...staticOptions });
+    setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
 

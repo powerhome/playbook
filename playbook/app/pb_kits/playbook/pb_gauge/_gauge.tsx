@@ -13,11 +13,13 @@ import typography from "../tokens/exports/_typography.scss";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 import { GenericObject } from "../types";
+import { merge } from 'lodash'
 
 type GaugeProps = {
   aria: { [key: string]: string };
   className?: string;
   chartData?: { name: string; value: number[] | number }[];
+  customOptions?: Partial<Highcharts.Options>;
   dark?: boolean;
   data?: { [key: string]: string };
   disableAnimation?: boolean;
@@ -41,6 +43,7 @@ type GaugeProps = {
 const Gauge = ({
   aria = {},
   chartData,
+  customOptions = {},
   dark = false,
   data = {},
   disableAnimation = false,
@@ -175,7 +178,7 @@ const Gauge = ({
       },
     };
 
-    setOptions({ ...staticOptions });
+    setOptions(merge(staticOptions, customOptions));
 
     if (document.querySelector(".prefix")) {
       document.querySelectorAll(".prefix").forEach((prefix) => {

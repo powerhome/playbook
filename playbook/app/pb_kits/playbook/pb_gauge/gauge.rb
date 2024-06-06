@@ -5,6 +5,7 @@ module Playbook
     class Gauge < Playbook::KitBase
       prop :chart_data, type: Playbook::Props::Array,
                         default: [{ name: "Name", value: 0 }]
+      prop :custom_options, default: {}
       prop :style, type: Playbook::Props::Enum,
                    values: %w[solidgauge],
                    default: "solidgauge"
@@ -22,7 +23,7 @@ module Playbook
       prop :max, type: Playbook::Props::Numeric, default: 100
       prop :colors, type: Playbook::Props::Array, default: []
 
-      def chart_options
+      def standard_options
         {
           id: id,
           chartData: chart_data,
@@ -41,6 +42,10 @@ module Playbook
           type: style,
           colors: colors,
         }
+      end
+
+      def chart_options
+        standard_options.deep_merge(custom_options)
       end
 
       def classname

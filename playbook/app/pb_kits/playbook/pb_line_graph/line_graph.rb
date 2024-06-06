@@ -9,6 +9,7 @@ module Playbook
       prop :axis_title
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
+      prop :custom_options, default: {}
       prop :gradient, type: Playbook::Props::Boolean,
                       default: false
       prop :point_start, type: Playbook::Props::Numeric
@@ -38,7 +39,7 @@ module Playbook
         gradient ? "area" : "line"
       end
 
-      def chart_options
+      def standard_options
         {
           align: align,
           id: id,
@@ -62,6 +63,10 @@ module Playbook
           x: x,
           y: y,
         }
+      end
+
+      def chart_options
+        standard_options.deep_merge(custom_options)
       end
 
       def vertical_align_props
