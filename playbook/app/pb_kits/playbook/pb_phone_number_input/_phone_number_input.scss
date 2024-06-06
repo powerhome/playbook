@@ -114,8 +114,12 @@ $flag-min-resolution: 192dpi;
   .iti__country-name,
   .iti__dial-code {
     flex-grow: 0;
-    margin-right: $space_md;
   }
+
+  .iti__dial-code {
+    margin-right: $space_sm;
+  }
+
 
   .iti__country-list .iti__country.iti__active::after {
     content: "";
@@ -177,6 +181,7 @@ $flag-min-resolution: 192dpi;
 
         .iti__dial-code {
           color: $text_lt_lighter;
+          margin-right: $space_sm;
         }
       }
     }
