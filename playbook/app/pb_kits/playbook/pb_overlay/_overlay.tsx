@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import defaultColors from "../tokens/exports/_colors.scss";
 
@@ -10,6 +10,7 @@ type OverlayProps = {
     children: React.ReactNode[] | React.ReactNode,
     color: "white" | "bg_light" | "card_dark" | "bg_dark",
     data?: { [key: string]: string },
+    htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
     id?: string,
     layout: { [key: string]: string },
 }
@@ -35,6 +36,7 @@ const Overlay = (props: OverlayProps) => {
         children,
         color = "white",
         data = {},
+        htmlOptions = {},
         id,
         layout = { "bottom": "100%" },
     } = props
@@ -42,6 +44,7 @@ const Overlay = (props: OverlayProps) => {
     const ariaProps = buildAriaProps(aria)
     const dataProps = buildDataProps(data)
     const classes = classnames(buildCss('pb_overlay'), globalProps(props), className)
+    const htmlProps = buildHtmlProps(htmlOptions)
 
     const getPosition = () => {
         return Object.keys(layout)[0]
@@ -68,6 +71,7 @@ const Overlay = (props: OverlayProps) => {
         <div
             {...ariaProps}
             {...dataProps}
+            {...htmlProps}
             className={classes}
             id={id}
         >
