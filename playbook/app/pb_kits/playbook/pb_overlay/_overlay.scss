@@ -1,9 +1,9 @@
-[class^=pb_gradient_overlay] {
-  .gradient-overlay-container {
+[class^=pb_overlay] {
+  .overlay-container {
     position: relative;
   }
 
-  .gradient-overlay {
+  .overlay {
     position: absolute;
     inset: 0;
     pointer-events: none;

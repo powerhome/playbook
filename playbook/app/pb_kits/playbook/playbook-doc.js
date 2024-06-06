@@ -43,7 +43,6 @@ import * as Flex from 'pb_flex/docs'
 import * as FormGroup from 'pb_form_group/docs'
 import * as FormPill from 'pb_form_pill/docs'
 import * as Gauge from 'pb_gauge/docs'
-import * as GradientOverlay from 'pb_gradient_overlay/docs'
 import * as Hashtag from 'pb_hashtag/docs'
 import * as Highlight from 'pb_highlight/docs'
 import * as HomeAddressStreet from 'pb_home_address_street/docs'
@@ -67,6 +66,7 @@ import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
 import * as Nav from 'pb_nav/docs'
 import * as OnlineStatus from 'pb_online_status/docs'
+import * as Overlay from 'pb_overlay/docs'
 import * as Passphrase from 'pb_passphrase/docs'
 import * as PbReactPopover from 'pb_popover/docs'
 import * as Person from 'pb_person/docs'
@@ -148,7 +148,6 @@ WebpackerReact.registerComponents({
   ...FormGroup,
   ...FormPill,
   ...Gauge,
-  ...GradientOverlay,
   ...Hashtag,
   ...Highlight,
   ...HomeAddressStreet,
@@ -172,6 +171,7 @@ WebpackerReact.registerComponents({
   ...MultipleUsersStacked,
   ...Nav,
   ...OnlineStatus,
+  ...Overlay,
   ...Passphrase,
   ...PbReactPopover,
   ...Person,
