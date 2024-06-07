@@ -1,3 +1,44 @@
+# Level up your UI with our NEW Dropdown kit!
+
+##### May 21, 2024
+
+![frame-288](https://github.com/powerhome/playbook/assets/73710701/7f917554-b816-4bd6-9269-eaf76d329993)
+
+Our new Dropdown kit was carefully crafted without third-party dependencies or config requirements to ensure ease of use. In fact, the only thing easier than implementing our dropdown is customizing it; custom triggers, multi-component options with complex layouts, custom displays for select options, and much more are easier done than said. Experience unparalleled customization with Playbook's meticulously crafted Dropdown kit!
+
+[13.28.0](https://github.com/powerhome/playbook/tree/13.28.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Dropdown Custom Option Padding [\#3416](https://github.com/powerhome/playbook/pull/3416) ([nidaqg](https://github.com/nidaqg))
+- Collapsible Kit With Custom Collapsible.main [\#3410](https://github.com/powerhome/playbook/pull/3410) ([nidaqg](https://github.com/nidaqg))
+- Dry Up the Content\_tag Portion Of Rails Kits: "simple Kits" [\#3405](https://github.com/powerhome/playbook/pull/3405) ([elisashapiro](https://github.com/elisashapiro))
+- Dropdown Doc Examples Cleanup [\#3402](https://github.com/powerhome/playbook/pull/3402) ([nidaqg](https://github.com/nidaqg))
+- Making Phone Number Input Kit Compatible With Pb\_form\_with [\#3399](https://github.com/powerhome/playbook/pull/3399) ([carloslimasd](https://github.com/carloslimasd))
+- Avatar Overlaycomponent Variant \[center Positions\] [\#3395](https://github.com/powerhome/playbook/pull/3395) ([nickamantia](https://github.com/nickamantia))
+- Card Kit Subtle Backgrounds [\#3393](https://github.com/powerhome/playbook/pull/3393) ([elisashapiro](https://github.com/elisashapiro))
+- Dropdown Rails V2 [\#3389](https://github.com/powerhome/playbook/pull/3389) ([nidaqg](https://github.com/nidaqg))
+- Change Darkmode Button and Link Color [\#3373](https://github.com/powerhome/playbook/pull/3373) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fix for Nitro Style Bleed With Pagination Kit [\#3408](https://github.com/powerhome/playbook/pull/3408) ([nidaqg](https://github.com/nidaqg))
+- Fix Text Input Add-on Dark Mode Border and Message Color [\#3407](https://github.com/powerhome/playbook/pull/3407) ([elisashapiro](https://github.com/elisashapiro))
+- Fix Text Input Addon Border Radius Within a Form Group [\#3400](https://github.com/powerhome/playbook/pull/3400) ([elisashapiro](https://github.com/elisashapiro))
+- Fix Multiple Users Padding Overflow [\#3396](https://github.com/powerhome/playbook/pull/3396) ([elisashapiro](https://github.com/elisashapiro))
+- Fixed Styling When Select Kit Is Used Within a Flex Kit [\#3414](https://github.com/powerhome/playbook/pull/3414) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Update _button_mixins.scss to Remove Underline for Users Not Including Reset.css [\#3390](https://github.com/powerhome/playbook/pull/3390) ([jasoncypret](https://github.com/jasoncypret))
+- Fixed Confirmation Toast Docs [\#3353](https://github.com/powerhome/playbook/pull/3353) ([rachelradford21](https://github.com/rachelradford21))
+- Date Time Docs [\#3314](https://github.com/powerhome/playbook/pull/3314) ([rachelradford21](https://github.com/rachelradford21))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.27.0...13.28.0)
+
+
+
 # ⛰️ Elevate Your Avatars With Our Latest Component Overlays! ⛰️
 
 ##### May 06, 2024
