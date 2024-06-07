@@ -26,7 +26,6 @@ type CircleChartProps = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   innerSize?: "sm" | "md" | "lg" | "none";
-  itemToMove?: HTMLElement;
   legend?: boolean;
   maxPointSize?: number;
   minPointSize?: number;
@@ -44,6 +43,8 @@ type CircleChartProps = {
   borderColor?: string;
   borderWidth?: number;
 };
+
+
 
 const alignBlockElement = (event: any) => {
   const itemToMove = document.querySelector<HTMLElement>(
