@@ -1,5 +1,5 @@
-# Go to pb_content_tag definition in kit_base.rb for usage information. Commented out options are default (showing the default shape), and each can be deleted if not customizing that param. 
-# If using nonstandard params please un-comment out and replace with your custom params.
+<%# Go to pb_content_tag definition in kit_base.rb for usage information. Commented out options are default (showing the default shape), and each can be deleted if not customizing that param. %>
+<%# If using nonstandard params please un-comment out and replace with your custom params. %>
 <%%= pb_content_tag(
     # :div,
     # aria: object.aria,
