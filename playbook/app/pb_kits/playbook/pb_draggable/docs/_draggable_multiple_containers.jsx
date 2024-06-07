@@ -85,8 +85,7 @@ const DraggableMultipleContainer = (props) => {
     <DraggableProvider initialItems={data}
         onChange={(items) => setInitialState(items)}
     >
-      <Draggable
-          display="flex"
+      <Flex
           justifyContent="center"
           {...props}
       >
@@ -151,7 +150,7 @@ const DraggableMultipleContainer = (props) => {
                 </Flex>
             </Draggable.Container>
           ))}
-      </Draggable>
+      </Flex>
     </DraggableProvider>
   );
 };
