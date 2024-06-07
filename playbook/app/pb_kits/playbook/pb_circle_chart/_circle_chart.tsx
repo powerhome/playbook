@@ -79,7 +79,6 @@ const CircleChart = ({
   htmlOptions = {},
   id,
   innerSize = "md",
-  itemToMove,
   legend = false,
   maxPointSize = null,
   minPointSize = null,
