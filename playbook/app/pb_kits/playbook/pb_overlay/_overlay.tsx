@@ -2,31 +2,25 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import defaultColors from "../tokens/exports/_colors.scss";
+import OverlayPercentage from './subcomponents/_overlay_percentage'
+import OverlayToken from './subcomponents/_overlay_token'
+
+export type OverlayChildrenProps = {
+    children: React.ReactNode[] | React.ReactNode,
+    color: "card_light" | "bg_light" | "card_dark" | "bg_dark",
+    position: string,
+    size: string,
+}
 
 type OverlayProps = {
     aria?: { [key: string]: string },
     className?: string,
     children: React.ReactNode[] | React.ReactNode,
-    color: "white" | "bg_light" | "card_dark" | "bg_dark",
+    color: "card_light" | "bg_light" | "card_dark" | "bg_dark",
     data?: { [key: string]: string },
-    htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+    htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string,
     layout: { [key: string]: string },
-}
-
-const previousOverlayDirectionMap: { [key: string]: string } = {
-    "bottom": "to top",
-    "top": "to bottom",
-    "left-right": "to right",
-    "top-bottom": "to top",
-}
-
-const subsequentOverlayDirectionMap: { [key: string]: string } = {
-    "bottom": "to top",
-    "top": "to bottom",
-    "left-right": "to left",
-    "top-bottom": "to bottom",
 }
 
 const Overlay = (props: OverlayProps) => {
@@ -34,11 +28,11 @@ const Overlay = (props: OverlayProps) => {
         aria = {},
         className,
         children,
-        color = "white",
+        color = "card_light",
         data = {},
         htmlOptions = {},
         id,
-        layout = { "bottom": "100%" },
+        layout = { "bottom": "xl" },
     } = props
 
     const ariaProps = buildAriaProps(aria)
@@ -54,18 +48,7 @@ const Overlay = (props: OverlayProps) => {
         return Object.values(layout)[0]
     }
 
-    const getPreviousOverlayDirection = () => {
-        return previousOverlayDirectionMap[getPosition()]
-    }
-
-    const getSubsequentOverlayDirection = () => {
-        return subsequentOverlayDirectionMap[getPosition()]
-    }
-
-    const hasSubsequentOverlay = getPosition() === "left-right" || getPosition() === "top-bottom"
-
-    const previousOverlay = `linear-gradient(${getPreviousOverlayDirection()}, ${defaultColors[color]} 0%, transparent ${getSize()})`
-    const subsequentOverlay = `linear-gradient(${getSubsequentOverlayDirection()}, ${defaultColors[color]} 0%, transparent ${getSize()})`
+    const isSizePercentage = getSize().includes("%")
 
     return (
         <div
@@ -75,17 +58,19 @@ const Overlay = (props: OverlayProps) => {
             className={classes}
             id={id}
         >
-            <div className="overlay-container">
-                <div className="overlay"
-                    style={{ background: previousOverlay }} />
-
-                {children}
-
-                { hasSubsequentOverlay &&
-                    <div className="overlay"
-                        style={{ background: subsequentOverlay }} />
-                }
-            </div>
+            {isSizePercentage ?
+                OverlayPercentage({
+                    children,
+                    color,
+                    position: getPosition(),
+                    size: getSize()
+                }) : OverlayToken({
+                    children,
+                    color,
+                    position: getPosition(),
+                    size: getSize()
+                })
+            }
         </div>
     )
 }

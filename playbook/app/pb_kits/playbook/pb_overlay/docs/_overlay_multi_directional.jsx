@@ -25,8 +25,8 @@ const InlineCardsExample = () => {
 const OverlayMultiDirectional = () => (
     <>
         <Overlay
-            color="white"
-            layout={{"left-right": "10%"}}
+            color="card_light"
+            layout={{"x": "xl"}}
         >
             <InlineCardsExample />
         </Overlay>
