@@ -59,7 +59,7 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__flag {
-    background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.0.3/img/flags.png");
+    background-image: url("https://intl-tel-input.com/intl-tel-input/img/flags.png");
     border-radius: 1px;
   }
 
@@ -199,7 +199,7 @@ $flag-min-resolution: 192dpi;
 
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: $flag-min-resolution) {
     .iti__flag {
-      background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.0.3/img/flags.png");
+      background-image: url("https://intl-tel-input.com/intl-tel-input/img/flags.png");
     }
   }
 }
