@@ -31,12 +31,10 @@ const DefaultDraggableKit = () => {
   return (
     <DraggableProvider
         initialItems={data}
-        onChange={(items) => setInitialState(items)}
+        onReorder={(items) => setInitialState(items)}
     >
       <Draggable
           data={{ testid: testId }}
-          draggableItems={data}
-          onDragChange={(items) => setInitialItems(items)}
       >
         <Draggable.Container>
           <SelectableList variant="checkbox">
