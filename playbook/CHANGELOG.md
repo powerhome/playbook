@@ -1,4 +1,44 @@
-# Level up your UI with our NEW Dropdown kit!
+##### June 07, 2024 
+
+[12.39.0](https://github.com/powerhome/playbook/tree/12.39.0) full list of changes:
+
+
+**Kit Enhancements:**
+
+- Add border_width prop to CircleChart Rails [\#3457](https://github.com/powerhome/playbook/pull/3457) ([nickamantia](https://github.com/nickamantia))
+- Draggable Kit v2 (Beta) [\#3447](https://github.com/powerhome/playbook/pull/3447) ([nidaqg](https://github.com/nidaqg))
+- Accept all Highcharts Props in Chart Kits [\#3443](https://github.com/powerhome/playbook/pull/3443) ([nickamantia](https://github.com/nickamantia))
+- Fix for Icon Rails Kit based on Subdirectory Structure [\#3438](https://github.com/powerhome/playbook/pull/3438) ([jasperfurniss](https://github.com/jasperfurniss))
+- Remove Extra Div from SelectableCard Kit [\#3437](https://github.com/powerhome/playbook/pull/3437) ([markdoeswork](https://github.com/markdoeswork))
+- Adding outerPadding Prop to Table Kit [\#3435](https://github.com/powerhome/playbook/pull/3435) ([carloslimasd](https://github.com/carloslimasd))
+- Table kit Subcomponent Alignment + Shift [\#3426](https://github.com/powerhome/playbook/pull/3426) ([nickamantia](https://github.com/nickamantia))
+- Adding enableToggleExpansion and subrowHeaders Prop to Advanced Table [\#3429](https://github.com/powerhome/playbook/pull/3429) ([carloslimasd](https://github.com/carloslimasd))
+- Dropdown Kit with Form Builder [\#3425](https://github.com/powerhome/playbook/pull/3425) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fix Form Group DatePicker Border Radius Bug in React [\#3431](https://github.com/powerhome/playbook/pull/3431) ([elisashapiro](https://github.com/elisashapiro))
+- Card Kit Highlight Overflow w/ Tooltip Error [\#3419](https://github.com/powerhome/playbook/pull/3419) ([elisashapiro](https://github.com/elisashapiro))
+- Replace Broken Links on Playbook Website [\#3434](https://github.com/powerhome/playbook/pull/3434) ([elisashapiro](https://github.com/elisashapiro))
+- Checkbox z-index Issue with Sticky [\#3423](https://github.com/powerhome/playbook/pull/3423) ([elisashapiro](https://github.com/elisashapiro))
+
+**Improvements:**
+
+- Adding Vertical Align Global Prop Doc [\#3450](https://github.com/powerhome/playbook/pull/3450)  ([carloslimasd](https://github.com/carloslimasd))
+- Upgrade Highcharts [\#3427](https://github.com/powerhome/playbook/pull/3427)([markdoeswork](https://github.com/markdoeswork))
+- Make New Designer Guidelines Public Facing [\#3436](https://github.com/powerhome/playbook/pull/3436) ([elisashapiro](https://github.com/elisashapiro))
+- Fix React Props Table Collapsible kit [\#3421](https://github.com/powerhome/playbook/pull/3421) ([markdoeswork](https://github.com/markdoeswork))
+- Release Notes Generator [\#3424](https://github.com/powerhome/playbook/pull/3424) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**New Kits:**
+
+- Draggable Kit  v1 (Beta) [\#3433](https://github.com/powerhome/playbook/pull/3433) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/12.38.0...12.39.0)
+
+
+# Level Up Your UI With Our NEW Dropdown Kit!
 
 ##### May 21, 2024
 
