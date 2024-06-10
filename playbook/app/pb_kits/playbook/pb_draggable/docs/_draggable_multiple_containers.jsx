@@ -83,7 +83,7 @@ const DraggableMultipleContainer = (props) => {
 
   return (
     <DraggableProvider initialItems={data}
-        onChange={(items) => setInitialState(items)}
+        onReorder={(items) => setInitialState(items)}
     >
       <Flex
           justifyContent="center"

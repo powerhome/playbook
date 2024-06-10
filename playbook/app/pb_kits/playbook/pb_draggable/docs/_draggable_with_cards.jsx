@@ -32,7 +32,7 @@ const DraggableWithCards = (props) => {
   return (
     <DraggableProvider
         initialItems={data}
-        onChange={(items) => setInitialState(items)}
+        onReorder={(items) => setInitialState(items)}
     >
         <Draggable.Container  {...props}>
           {initialState.map(({ id, text }) => (
