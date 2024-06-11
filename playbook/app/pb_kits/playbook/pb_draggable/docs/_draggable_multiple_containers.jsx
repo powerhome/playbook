@@ -92,6 +92,7 @@ const DraggableMultipleContainer = (props) => {
           {containers?.map((container) => (
             <Draggable.Container 
                 container={container}
+                htmlOptions={{style:{ width: "200px", height: "70vh"}}}
                 key={container} 
                 padding="sm"
             >
