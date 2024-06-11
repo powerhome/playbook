@@ -32,7 +32,7 @@ const Overlay = (props: OverlayProps) => {
         data = {},
         htmlOptions = {},
         id,
-        layout = { "bottom": "xl" },
+        layout = { "bottom": "full" },
     } = props
 
     const ariaProps = buildAriaProps(aria)
