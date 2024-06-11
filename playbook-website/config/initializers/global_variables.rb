@@ -50,14 +50,14 @@ navigation[:whats_new] = {
   pages: [
     {
       url: "changelog_web",
-      title: "Changelog",
+      title: "Web Changelog",
       page_id: "CHANGELOG",
       filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/CHANGELOG.md",
       frontmatter: {},
     },
     {
       url: "changelog_figma",
-      title: "Figma",
+      title: "Figma Changelog",
       page_id: "FIGMA",
       filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/FIGMA.md",
       frontmatter: {},
