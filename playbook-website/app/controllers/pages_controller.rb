@@ -53,6 +53,24 @@ class PagesController < ApplicationController
     @structured_data = extract_changelog_data(@data)
   end
 
+  def changelog_web
+    @data = Playbook::Engine.root.join("CHANGELOG.md").read
+    @page_title = "Changelog"
+    @page = "changelog_web"
+    @show_sidebar = true
+    @front_matter = {}
+    render layout: "docs"
+  end
+
+  def changelog_figma
+    @data = Playbook::Engine.root.join("FIGMA.md").read
+    @page_title = "Figma Changelog"
+    @page = "changelog_figma"
+    @show_sidebar = true
+    @front_matter = {}
+    render layout: "docs"
+  end
+
   def changelog
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
     @page_title = "What's New"

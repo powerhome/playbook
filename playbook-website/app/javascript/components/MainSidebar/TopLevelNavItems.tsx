@@ -73,6 +73,8 @@ export const TopLevelNavItem = ({
   const kitCategoryPage = currentURL.match(/^\/([^/]{3})/);
   // if url matches /guides, than relevant collapsible nav to be toggled open on first render
   const guidesPage = currentURL.split("/").slice(0, 3).join("/");
+  // if changelog_ is in the current url
+  const changelogPage = currentURL.includes("changelog_");
 
   //extract render logic out of return for better performance
   const renderTopItems = (name, key, children, leftIcon, link, i) => {
@@ -89,8 +91,9 @@ export const TopLevelNavItem = ({
         (kitsPage && kitsPage[0] === link);
 
       const guidesMatch = guidesPage === link;
+      const changelogMatch = changelogPage === true;
 
-      return categoryMatch || guidesMatch ? true : false;
+      return categoryMatch || guidesMatch || changelogMatch ? true : false;
     };
 
     //use state to handle toggle logic to make sure both main click and right icon click works as expected

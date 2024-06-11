@@ -5,9 +5,8 @@ SAMPLES = Rails.cache.fetch("samples_yml") { YAML.load_file(Rails.root.join("con
 
 require "markdown_helper"
 search_path = File.join(Rails.root, "/app/views/guides")
-playbook_path = File.join(Rails.root, "../playbook")
 navigation = {}
-Dir.glob([File.join(search_path, "**/*.md"), File.join(playbook_path, "**/*.md")]) do |filename|
+Dir.glob("#{search_path}/**/*.md") do |filename|
   dir_path = File.dirname(filename)
   dir = File.basename(dir_path)
   title = File.basename(filename).sub(/(?<=.)\..*/, "")
@@ -20,6 +19,7 @@ Dir.glob([File.join(search_path, "**/*.md"), File.join(playbook_path, "**/*.md")
     "#{dir}": { url: "", title: "", filepath: "", frontmatter: {}, pages: [] },
   }
   navigation.merge!(dir_hash) unless navigation[:"#{dir}"] || dir == "guides"
+
   if dir == "guides"
     # LOGIC FOR TOP LEVEL PARENT
     directory = navigation[:"#{title}"]
@@ -30,9 +30,8 @@ Dir.glob([File.join(search_path, "**/*.md"), File.join(playbook_path, "**/*.md")
   else
     # LOGIC FOR DOC PAGES
     directory = navigation[:"#{dir}"]
-    url = url.start_with?("playbook/") ? title.downcase : "guides/#{url}"
     directory[:pages] << {
-      url: url,
+      url: "guides/#{url}",
       title: display_title,
       page_id: title,
       filepath: filename,
@@ -40,6 +39,31 @@ Dir.glob([File.join(search_path, "**/*.md"), File.join(playbook_path, "**/*.md")
     }
   end
 end
+
+# Manually Set custom names for Changelog
+
+navigation[:whats_new] = {
+  url: "",
+  title: "",
+  filepath: "",
+  frontmatter: {},
+  pages: [
+    {
+      url: "changelog_web",
+      title: "Changelog",
+      page_id: "CHANGELOG",
+      filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/CHANGELOG.md",
+      frontmatter: {},
+    },
+    {
+      url: "changelog_figma",
+      title: "Figma",
+      page_id: "FIGMA",
+      filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/FIGMA.md",
+      frontmatter: {},
+    },
+  ],
+}
 
 # Move HTML figma to the end
 
