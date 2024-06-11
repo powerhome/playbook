@@ -122,10 +122,6 @@ const SASS_LOADER = {
   },
 }
 
-new webpack.DefinePlugin({
-  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-})
-
 const SVG_URL_LOADER = {
   test: /\.svg$/,
   include: SOURCE_PATH,
@@ -139,6 +135,10 @@ const SVG_URL_LOADER = {
     },
   ],
 }
+
+new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+})
 
 module.exports = {
   watchOptions: {
