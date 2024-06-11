@@ -23,7 +23,7 @@ const ListItem = (props: ListItemProps) => {
     children,
     className,
     data = {},
-    enableDrag = false,
+    draggable = false,
     dragHandle = true,
     htmlOptions = {},
     id,
@@ -42,7 +42,7 @@ const ListItem = (props: ListItemProps) => {
   return (
     <>
     {
-      enableDrag ? (
+      draggable ? (
         <Draggable.Item id={id}>
         <li
             {...ariaProps}

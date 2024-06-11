@@ -10,7 +10,7 @@ type ListProps = {
   className?: string;
   children: React.ReactNode[] | React.ReactNode;
   dark?: boolean;
-  enableDrag?: boolean;
+  draggable?: boolean;
   data?: Record<string, unknown>;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
@@ -32,7 +32,7 @@ const List = (props: ListProps) => {
     className,
     dark = false,
     data = {},
-    enableDrag = false,
+    draggable = false,
     htmlOptions = {},
     id,
     layout = "",
@@ -54,7 +54,7 @@ const List = (props: ListProps) => {
   const childrenWithProps = React.Children.map(
     children,
     (child: React.ReactElement) => {
-      return React.cloneElement(child, { text, variant, enableDrag });
+      return React.cloneElement(child, { text, variant, draggable });
     }
   );
   const ariaProps = buildAriaProps(aria);
@@ -74,7 +74,7 @@ const List = (props: ListProps) => {
   return (
     <>
     {
-      enableDrag ? (
+      draggable ? (
         <Draggable.Container>
      <div className={classes}>
       {ordered ? (
