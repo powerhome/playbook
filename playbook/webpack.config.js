@@ -24,6 +24,7 @@ const CIRCULAR_DEPENDENCY_PLUGIN = new CircularDependencyPlugin({
   cwd: process.cwd(),
 })
 
+
 const COPY_PLUGIN = new CopyPlugin({
   patterns: [
     // Copy tokens and fonts to dist
@@ -42,10 +43,12 @@ const COPY_PLUGIN = new CopyPlugin({
       from: `${WEBSITE}/config/menu.yml`,
       to: `${DIST_PATH}/`
     },
+    // Copy Doc Display Helper Files
     {
       from: `${WEBSITE}/app/components/playbook/pb_docs`,
       to: `${DIST_PATH}/app/components/playbook/pb_docs`
     },
+    // Copy Doc Helper
     {
       from: `${WEBSITE}/lib/pb_doc_helper.rb`,
       to: `${DIST_PATH}/`
@@ -99,10 +102,6 @@ const TS_LOADER = {
   exclude: /node_modules/,
 }
 
-new webpack.DefinePlugin({
-  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-})
-
 const CSS_LOADER = {
   loader: 'css-loader',
   options: {
@@ -113,6 +112,10 @@ const CSS_LOADER = {
     sourceMap: true,
   },
 }
+
+new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+})
 
 const SASS_LOADER = {
   loader: 'sass-loader',
