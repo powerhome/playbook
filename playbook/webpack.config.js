@@ -113,10 +113,6 @@ const CSS_LOADER = {
   },
 }
 
-new webpack.DefinePlugin({
-  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-})
-
 const SASS_LOADER = {
   loader: 'sass-loader',
   options: {
@@ -125,6 +121,10 @@ const SASS_LOADER = {
     },
   },
 }
+
+new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+})
 
 const SVG_URL_LOADER = {
   test: /\.svg$/,
