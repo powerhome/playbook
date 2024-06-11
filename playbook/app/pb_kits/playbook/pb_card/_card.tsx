@@ -8,6 +8,10 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import type { ProductColors, CategoryColors, BackgroundColors } from '../types/colors'
 
+import Icon from '../pb_icon/_icon'
+import Flex from '../pb_flex/_flex'
+import Draggable from '../pb_draggable/_draggable'
+
 type CardPropTypes = {
   aria?: {[key: string]: string},
   background?: BackgroundColors | ProductColors | "none",
@@ -16,11 +20,14 @@ type CardPropTypes = {
   children: React.ReactChild[] | React.ReactChild | number,
   className?: string,
   data?: {[key: string]: string},
+  draggableItem?: boolean,
+  dragHandle?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   highlight?: {
     position?: "side" | "top",
     color?: string,
   },
+  id?: string,
   length?: number,
   padding?: string,
   selected?: boolean,
@@ -78,8 +85,11 @@ const Card = (props: CardPropTypes): React.ReactElement => {
     children,
     className,
     data = {},
+    dragHandle = false,
+    draggableItem = false,
     highlight = {},
     htmlOptions = {},
+    id,
     selected = false,
     tag = 'div',
   } = props
@@ -113,15 +123,52 @@ const Card = (props: CardPropTypes): React.ReactElement => {
   const Tag = tagOptions.includes(tag) ? tag : 'div'
 
   return (
-    <Tag
-        {...ariaProps}
-        {...dataProps}
-        {...htmlProps}
-        className={classnames(cardCss, globalProps(props), className)}
-    >
-      {subComponentTags('Header')}
-      {nonHeaderChildren}
-    </Tag>
+    <>
+    {
+      draggableItem ? (
+        <Draggable.Item id={id} 
+            key={id}
+        >
+        <Tag
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={classnames(cardCss, globalProps(props), className)}
+        >
+          {subComponentTags('Header')}
+          {
+            dragHandle ? (
+              <Flex>
+                <span className="card_draggable_handle">
+                  <Icon 
+                      icon="grip-dots-vertical"
+                      paddingRight="xs"
+                      verticalAlign="middle"
+                  />
+                </span>
+                <div>
+                  {nonHeaderChildren}
+                </div>
+              </Flex>
+              ) : (
+                nonHeaderChildren
+              )
+          }
+        </Tag>
+        </Draggable.Item>
+        ) : (
+          <Tag
+              {...ariaProps}
+              {...dataProps}
+              {...htmlProps}
+              className={classnames(cardCss, globalProps(props), className)}
+            >
+              {subComponentTags('Header')}
+              {nonHeaderChildren}
+            </Tag>
+              )
+      }
+    </>
   )
 }
 

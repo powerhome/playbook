@@ -36,48 +36,31 @@ const DraggableWithCards = (props) => {
     >
         <Draggable.Container  {...props}>
           {initialState.map(({ id, text }) => (
-            <Draggable.Item id={id} 
-                key={id}
-			>
               <Card
-                  highlight={{ position: "side", color: "primary" }}
+                  dragHandle
+                  draggableItem
+                  highlight={{ color: "primary", position: "side" }}
+                  id={id}
+                  key={id}
                   marginBottom="xs"
+                  padding="xs"
               >
                 <Flex alignItems="stretch" 
                     flexDirection="column"
-				>
+                >
                   <Flex gap="xs">
                     <Title size={4} 
                         text={text} 
-					/>
+                    />
                     <Badge 
                         text="35-12345" 
                         variant="primary" 
-					/>
+                    />
                   </Flex>
-
-                  <Flex 
-                      gap="sm" 
-                      spacing="between"
-                  >
-                    <Caption 
-                        size="xs" 
-                        text="8:00A" 
-					/>
-                    <Flex gap="xxs">
                       <Caption 
                           size="xs" 
-                          text="Township Name" 
+                          text="8:00A • Township Name • 90210" 
                       />
-                      <Caption size="xs" 
-                          text="•" 
-                      />
-                      <Caption size="xs" 
-                          text="90210" 
-                      />
-                    </Flex>
-                  </Flex>
-
                   <Flex gap="xxs" 
                       spacing="between"
                   >
@@ -109,7 +92,6 @@ const DraggableWithCards = (props) => {
                   </Flex>
                 </Flex>
               </Card>
-            </Draggable.Item>
           ))}
         </Draggable.Container>
     </DraggableProvider>
