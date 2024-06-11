@@ -85,7 +85,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
     children,
     className,
     data = {},
-    dragHandle = false,
+    dragHandle = true,
     draggableItem = false,
     highlight = {},
     htmlOptions = {},
@@ -146,7 +146,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
                       verticalAlign="middle"
                   />
                 </span>
-                <div>
+                <div style={{width: '100%'}}>
                   {nonHeaderChildren}
                 </div>
               </Flex>
