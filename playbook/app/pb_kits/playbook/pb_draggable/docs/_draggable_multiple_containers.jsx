@@ -18,7 +18,7 @@ const containers = ["To Do", "In Progress", "Done"];
 // Initial items to be dragged
 const data = [
   {
-    id: "1",
+    id: "11",
     container: "To Do",
     title: "Task 1",
     description: "Bug fixes",
@@ -26,7 +26,7 @@ const data = [
     assignee_img: "https://randomuser.me/api/portraits/men/44.jpg",
   },
   {
-    id: "2",
+    id: "12",
     container: "To Do",
     title: "Task 2",
     description: "Documentation",
@@ -34,7 +34,7 @@ const data = [
     assignee_img: "https://randomuser.me/api/portraits/women/8.jpg",
   },
   {
-    id: "3",
+    id: "13",
     container: "In Progress",
     title: "Task 3",
     description: "Add a variant",
@@ -42,7 +42,7 @@ const data = [
     assignee_img: "https://randomuser.me/api/portraits/women/10.jpg",
   },
   {
-    id: "4",
+    id: "14",
     container: "To Do",
     title: "Task 4",
     description: "Add jest tests",
@@ -50,7 +50,7 @@ const data = [
     assignee_img: "https://randomuser.me/api/portraits/men/8.jpg",
   },
   {
-    id: "5",
+    id: "15",
     container: "Done",
     title: "Task 5",
     description: "Alpha testing",
@@ -58,7 +58,7 @@ const data = [
     assignee_img: "https://randomuser.me/api/portraits/men/18.jpg",
   },
   {
-    id: "6",
+    id: "16",
     container: "In Progress",
     title: "Task 6",
     description: "Release",

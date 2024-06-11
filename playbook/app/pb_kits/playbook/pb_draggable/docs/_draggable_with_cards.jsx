@@ -13,15 +13,15 @@ import {
 // Initial items to be dragged
 const data = [
   {
-    id: "1",
+    id: "21",
     text: "Joe Black",
   },
   {
-    id: "2",
+    id: "22",
     text: "Nancy White",
   },
   {
-    id: "3",
+    id: "23",
     text: "Bill Green",
   },
 ];
