@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # rubocop:disable Style/CaseLikeIf
-
 module Playbook
   module PbDocs
     class KitExample < Playbook::KitBase
@@ -11,6 +10,8 @@ module Playbook
       prop :show_code, type: Playbook::Props::Boolean, default: true
       prop :type, type: Playbook::Props::Enum, values: %w[rails react swift], default: "rails"
       prop :dark, type: Playbook::Props::Boolean, default: false
+
+      include PlaybookWebsite::Markdown::Helper
 
       def example
         if type == "rails"
@@ -60,6 +61,7 @@ module Playbook
                                            .gsub("'../..'", "'playbook-ui'")
                                            .gsub(%r{from "../.*}, "from 'playbook-ui'")
                                            .gsub(%r{from '../.*}, "from 'playbook-ui'")
+                                           .gsub("'../../../../../../playbook-website/app/javascript/scripts/custom-icons'", "'your-directory/custom-icons.js'")
         stringified_code = dark ? stringified_code.gsub("{...props}", "dark") : stringified_code.gsub(/\s*{...props}\s*\n/, "\n")
         if stringified_code.include?("props: { ")
           stringified_code = stringified_code.gsub("props: {", "props: {dark: true,") if type == "rails" && dark
