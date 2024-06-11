@@ -1,4 +1,6 @@
 const path = require('path')
+
+const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CircularDependencyPlugin = require('circular-dependency-plugin')
 const FileManagerPlugin = require('filemanager-webpack-plugin')
@@ -11,14 +13,20 @@ const WEBSITE = path.resolve(__dirname, '../playbook-website')
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
 const CIRCULAR_DEPENDENCY_PLUGIN = new CircularDependencyPlugin({
+  // exclude detection of files based on a RegExp
   exclude: /node_modules/,
+  // add errors to webpack instead of warnings
   failOnError: true,
+  // allow import cycles that include an asyncronous import,
+  // e.g. via import(/* webpackMode: "weak" */ './file.js')
   allowAsyncCycles: false,
+  // set the current working directory for displaying module paths
   cwd: process.cwd(),
 })
 
 const COPY_PLUGIN = new CopyPlugin({
   patterns: [
+    // Copy tokens and fonts to dist
     {
       from: `${SOURCE_PATH}/tokens`,
       globOptions: {
@@ -29,6 +37,7 @@ const COPY_PLUGIN = new CopyPlugin({
         return targetPath.replace(/^tokens\/_/, 'tokens/')
       },
     },
+    // Copy menu.yml to dist for dev_docs
     {
       from: `${WEBSITE}/config/menu.yml`,
       to: `${DIST_PATH}/`
@@ -47,6 +56,7 @@ const COPY_PLUGIN = new CopyPlugin({
   },
 })
 
+// Remove extra css and js created by webpack
 const CLEAN_DIST_PLUGIN = new FileManagerPlugin({
   events: {
     onEnd: {
@@ -88,6 +98,10 @@ const TS_LOADER = {
   include: SOURCE_PATH,
   exclude: /node_modules/,
 }
+
+new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+})
 
 const CSS_LOADER = {
   loader: 'css-loader',
@@ -144,6 +158,7 @@ module.exports = {
     'webpacker-react': 'webpacker-react',
   },
   resolve: {
+    // Extensions used (in the specified order order)to resolve imports w/o an explicit extension
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     modules: [SOURCE_PATH, NODE_MODULES_PATH],
   },
@@ -181,7 +196,7 @@ module.exports = {
         use: 'file-loader',
       },
       TS_LOADER,
-      ...JS_LOADER,  // Spread the JS_LOADER array here
+      ...JS_LOADER,
       SVG_URL_LOADER,
     ],
   },
