@@ -75,7 +75,6 @@ export const TopLevelNavItem = ({
   const guidesPage = currentURL.split("/").slice(0, 3).join("/");
   // if changelog_ is in the current url
   const changelogPage = currentURL.includes("changelog_");
-
   //extract render logic out of return for better performance
   const renderTopItems = (name, key, children, leftIcon, link, i) => {
     const [collapsed] = topLevelCollapsibles[i];
@@ -91,9 +90,8 @@ export const TopLevelNavItem = ({
         (kitsPage && kitsPage[0] === link);
 
       const guidesMatch = guidesPage === link;
-      const changelogMatch = changelogPage === true;
 
-      return categoryMatch || guidesMatch || changelogMatch ? true : false;
+      return categoryMatch || guidesMatch ? true : false;
     };
 
     //use state to handle toggle logic to make sure both main click and right icon click works as expected
@@ -134,7 +132,7 @@ export const TopLevelNavItem = ({
         }
       });
     };
-    
+
     return (
       <NavItem
         active={activeTopLevel(key, link)}

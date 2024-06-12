@@ -63,11 +63,11 @@ class PagesController < ApplicationController
   end
 
   def changelog_figma
-    @data = Playbook::Engine.root.join("FIGMA.md").read
+    @data = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
     @page_title = "What's New"
     @page = "changelog_figma"
     @show_sidebar = true
-    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/FIGMA.md"
+    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/FIGMA_CHANGELOG.md"
     render layout: "changelog"
   end
 

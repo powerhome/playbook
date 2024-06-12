@@ -49,17 +49,17 @@ navigation[:whats_new] = {
   frontmatter: {},
   pages: [
     {
-      url: "changelog_web",
+      url: "changelog/web",
       title: "Web Changelog",
       page_id: "CHANGELOG",
       filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/CHANGELOG.md",
       frontmatter: {},
     },
     {
-      url: "changelog_figma",
+      url: "changelog/figma",
       title: "Figma Changelog",
       page_id: "FIGMA",
-      filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/FIGMA.md",
+      filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/FIGMA_CHANGELOG.md",
       frontmatter: {},
     },
   ],

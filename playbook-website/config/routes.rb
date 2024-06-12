@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   get "home",                     to: "pages#home"
   get "visual_guidelines",        to: redirect("/visual_guidelines/colors")
   get "visual_guidelines/:name",  to: "pages#visual_guidelines"
-  get "changelog_web",            to: "pages#changelog_web"
-  get "changelog_figma",          to: "pages#changelog_figma"
-  get "changelog",                to: redirect("changelog_web")
+  get "changelog/web",            to: "pages#changelog_web"
+  get "changelog/figma",          to: "pages#changelog_figma"
+  get "changelog",                to: redirect("changelog/web")
 
   # Kits
 
