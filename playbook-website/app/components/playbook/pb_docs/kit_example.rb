@@ -68,30 +68,23 @@ module Playbook
       end
 
       def read_kit_file(folder, file_name)
-        # puts *args.inspect
-        # byebug
-        # path = ::Playbook.kit_path(kit, folder, *args)
-        # path.exist? ? path.read : ""
         name_array = file_name.split(".")
+        path = ::Playbook.kit_path(kit, folder, file_name)
         if name_array[1] != "md"
-          path = ::Playbook.kit_path(kit, folder, file_name)
-          path.exist? ? path.read : ""
+          (path.exist? ? path.read : "")
         else
-          puts file_name
-          path = ::Playbook.kit_path(kit, folder, file_name)
           if path.exist?
             path.read
           elsif type == "rails"
             name_array[0] += "_rails"
             file_name = name_array.join(".")
             path = ::Playbook.kit_path(kit, folder, file_name)
-            path.exist? ? path.read : ""
           elsif type == "react"
             name_array[0] += "_react"
             file_name = name_array.join(".")
             path = ::Playbook.kit_path(kit, folder, file_name)
-            path.exist? ? path.read : ""
           end
+          (path.exist? ? path.read : "")
         end
       end
     end
