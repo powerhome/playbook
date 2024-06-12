@@ -1,1 +1,1 @@
-For a simplified version of the Draggable API for the List kit, use the DraggableProvider to wrap the List kit and use the `draggable` prop on List. The dev must manage state as shown and pass in id to the ListItem.
+For a simplified version of the Draggable API for the List kit, use the DraggableProvider to wrap the List kit and use the `draggable` prop on List. The dev must manage state as shown and pass in id to the ListItem for dragging to work.
