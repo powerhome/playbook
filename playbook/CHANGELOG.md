@@ -6,7 +6,7 @@
 
 Our latest addition simplifies customizations for all of our chart kits by allowing users to pass any settings accepted by Highcharts through a single prop. This enhancement ensures you have complete control over your chart’s appearance and behavior without the hassle of managing multiple properties or needing custom, 1-to-1 props to support your unique chart requirements.
 
-[12.39.0](https://github.com/powerhome/playbook/tree/12.39.0) full list of changes:
+[13.29.0](https://github.com/powerhome/playbook/tree/13.29.0) full list of changes:
 
 
 **Kit Enhancements:**
@@ -41,7 +41,7 @@ Our latest addition simplifies customizations for all of our chart kits by allow
 - Draggable Kit  v1 (Beta) [\#3433](https://github.com/powerhome/playbook/pull/3433) ([nidaqg](https://github.com/nidaqg))
 
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/12.38.0...12.39.0)
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.28.0...13.29.0)
 
 
 # Level Up Your UI With Our NEW Dropdown Kit!
