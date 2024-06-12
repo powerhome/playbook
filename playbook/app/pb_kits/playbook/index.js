@@ -72,6 +72,7 @@ export { default as MultipleUsersStacked } from './pb_multiple_users_stacked/_mu
 export { default as Nav } from './pb_nav/_nav'
 export { default as NavItem } from './pb_nav/_item'
 export { default as OnlineStatus } from './pb_online_status/_online_status'
+export { default as Overlay} from './pb_overlay/_overlay'
 export { default as Passphrase } from './pb_passphrase/_passphrase'
 export { default as PbReactPopover } from './pb_popover/_popover'
 export { default as Person } from './pb_person/_person'

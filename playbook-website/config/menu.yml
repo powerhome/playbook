@@ -352,6 +352,9 @@ kits:
         platforms: *web
         description: 
         status: "stable"
+      - name: "overlay"
+        platforms: *react_only
+        status: "beta"
       - name: "draggable"
         platforms: *react_only
         description:
