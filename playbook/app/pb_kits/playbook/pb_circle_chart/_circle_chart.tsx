@@ -46,16 +46,20 @@ type CircleChartProps = {
   borderWidth?: number;
 };
 
-// Adjust Circle Chart Block Kit Dimensions to Match the Chart for Centering
+
+
 const alignBlockElement = (event: any) => {
-  const itemToMove = document.querySelector(
+  const itemToMove = document.querySelector<HTMLElement>(
     `#wrapper-circle-chart-${event.target.renderTo.id} .pb-circle-chart-block`
-  ) as HTMLElement;
+  );
   const chartContainer = document.querySelector(`#${event.target.renderTo.id}`);
-  if (itemToMove !== null) {
+
+  if (itemToMove !== null && chartContainer !== null) {
     itemToMove.style.height = `${event.target.chartHeight}px`;
     itemToMove.style.width = `${event.target.chartWidth}px`;
-    chartContainer.firstChild.before(itemToMove);
+    if (chartContainer.firstChild !== null) {
+      chartContainer.firstChild.before(itemToMove);
+    }
   }
 };
 
