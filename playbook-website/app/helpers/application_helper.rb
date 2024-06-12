@@ -120,19 +120,19 @@ module ApplicationHelper
   end
 
   def all_active(controller_name, action_name)
-    (controller_name == "pages" && action_name == "kits")
+    controller_name == "pages" && action_name == "kits"
   end
 
   def category_active(category, link)
-    (!category.nil? && category == nav_hash_category(link))
+    !category.nil? && category == nav_hash_category(link)
   end
 
   def kit_active(kit, link)
-    (!kit.nil? && kit == link)
+    !kit.nil? && kit == link
   end
 
   def sub_category_active(kit, link)
-    (!kit.nil? && @kit == link)
+    !kit.nil? && @kit == link
   end
 
   def format_search_hash(kit)
@@ -154,13 +154,7 @@ module ApplicationHelper
       # Modify this line to include both name and status in the components array
       components = kit["components"].map { |c| { name: c["name"], status: c["status"] } }
 
-      all_kits << if components.size == 1
-                    # For a single-component kit, return the component with its status
-                    components.first
-                  else
-                    # For multi-component kits, return the kit name with the components including their statuses
-                    { kit_name => components }
-                  end
+      all_kits << { kit_name => components }
     end
 
     all_kits
