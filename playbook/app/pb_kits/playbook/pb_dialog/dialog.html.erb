@@ -37,7 +37,6 @@
 </div>
 
 <%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => {
-        dialogHelper()
-    })
+    window.addEventListener("DOMContentLoaded", () => dialogHelper())
+    window.addEventListener("turbo:frame-load", () => dialogHelper())
 <% end %>
