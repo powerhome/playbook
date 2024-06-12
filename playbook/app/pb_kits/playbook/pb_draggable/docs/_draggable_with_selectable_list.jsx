@@ -4,19 +4,19 @@ import { SelectableList, DraggableProvider } from "../../";
 // Initial items to be dragged
 const data = [
   {
-    id: "1",
+    id: "41",
     text: "Task 1",
   },
   {
-    id: "2",
+    id: "42",
     text: "Task 2",
   },
   {
-    id: "3",
+    id: "43",
     text: "Task 3",
   },
   {
-    id: "4",
+    id: "44",
     text: "Task 4",
   },
 ];
@@ -27,7 +27,7 @@ const DraggableWithSelectableList = (props) => {
   return (
     <>
     <DraggableProvider initialItems={data}
-        onChange={(items) => setInitialState(items)}
+        onReorder={(items) => setInitialState(items)}
     >
           <SelectableList draggable 
               variant="checkbox"

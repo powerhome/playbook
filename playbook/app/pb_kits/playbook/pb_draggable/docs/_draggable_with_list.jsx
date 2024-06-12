@@ -4,19 +4,19 @@ import { DraggableProvider, List, ListItem } from "../../";
 // Initial items to be dragged
 const data = [
   {
-    id: "1",
+    id: "31",
     text: "Philadelphia",
   },
   {
-    id: "2",
+    id: "32",
     text: "New Jersey",
   },
   {
-    id: "3",
+    id: "33",
     text: "Maryland",
   },
   {
-    id: "4",
+    id: "34",
     text: "Connecticut",
   },
 ];
@@ -28,7 +28,7 @@ const DraggableWithList = (props) => {
   return (
     <>
     <DraggableProvider initialItems={data}
-        onChange={(items) => setInitialState(items)}
+        onReorder={(items) => setInitialState(items)}
     >
         <List draggable
             {...props}

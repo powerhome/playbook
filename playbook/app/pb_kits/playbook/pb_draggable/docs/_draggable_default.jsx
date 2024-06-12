@@ -27,7 +27,7 @@ const DraggableDefault = (props) => {
   return (
     <>
     <DraggableProvider initialItems={data}
-        onChange={(items) => setInitialState(items)}
+        onReorder={(items) => setInitialState(items)}
     >
         <Draggable.Container {...props}>
           <SelectableList variant="checkbox">
