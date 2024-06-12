@@ -1,4 +1,12 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useReducer, useContext, useEffect } from "react";
+import draggableContextReducer, { State } from "../reducers/draggableContextReducer";
+
+const initialState: State = {
+  items: [],
+  dragData: { id: "", initialGroup: "" },
+  isDragging: "",
+  activeContainer: "",
+};
 
 const DragContext = createContext<any>({});
 
@@ -7,10 +15,24 @@ export const DraggableContext = () => {
 };
 
 export const DraggableProvider = ({ children, initialItems, onReorder }: any) => {
-  const [items, setItems] = useState([]);
-  const [dragData, setDragData] = useState<{ [key: string]: any }>({});
-  const [isDragging, setIsDragging] = useState("");
-  const [activeContainer, setActiveContainer] = useState("");
+  const [state, dispatch] = useReducer(draggableContextReducer, { ...initialState, items: initialItems });
+  const { items, dragData, isDragging, activeContainer } = state;
+
+  const setItems = (items: any[]) => {
+    dispatch({ type: "SET_ITEMS", payload: items });
+  };
+
+  const setDragData = (data: { id: string; initialGroup: string }) => {
+    dispatch({ type: "SET_DRAG_DATA", payload: data });
+  }
+
+  const setIsDragging = (id: string) => {
+    dispatch({ type: "SET_IS_DRAGGING", payload: id });
+  }
+
+  const setActiveContainer = (container: string) => {
+    dispatch({ type: "SET_ACTIVE_CONTAINER", payload: container });
+  }
 
   useEffect(() => {
     setItems(initialItems);
@@ -21,8 +43,7 @@ export const DraggableProvider = ({ children, initialItems, onReorder }: any) =>
   }, [items]);
 
   const handleDragStart = (id: string, container: string) => {
-    setDragData({ id: id, initialGroup: container });
-    setIsDragging(id);
+    dispatch({ type: "ALL", payload: { isDragging: id, dragData: { id: id, initialGroup: container } } });
   };
 
   const handleDragEnter = (id: string, container: string) => {
@@ -35,14 +56,12 @@ export const DraggableProvider = ({ children, initialItems, onReorder }: any) =>
       newItems.splice(draggedIndex, 1);
       newItems.splice(targetIndex, 0, draggedItem);
 
-      setItems(newItems);
-      setDragData({ id: dragData.id, initialGroup: container });
+      dispatch({ type: "ALL", payload: { items: newItems, dragData: { id: dragData.id, initialGroup: container } } });
     }
   };
 
   const handleDragEnd = () => {
-    setIsDragging("");
-    setActiveContainer("");
+    dispatch({ type: "ALL", payload: { isDragging: "", activeContainer: "" } });
   };
 
   const changeCategory = (itemId: string, container: string) => {
@@ -57,18 +76,15 @@ export const DraggableProvider = ({ children, initialItems, onReorder }: any) =>
   };
 
   const handleDrop = (container: string) => {
-    setIsDragging("");
-    setActiveContainer("");
+    dispatch({ type: "ALL", payload: { isDragging: "", activeContainer: "" } })
     const selected = dragData.id;
     changeCategory(selected, container);
   };
 
   const handleDragOver = (e: Event, container: string) => {
     e.preventDefault();
-    setActiveContainer(container);
+    dispatch({ type: "SET_ACTIVE_CONTAINER", payload: container });
   };
-
-  
 
   const contextValue = {
     items,
