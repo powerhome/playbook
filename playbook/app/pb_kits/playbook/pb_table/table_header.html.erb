@@ -7,9 +7,7 @@
       id: "pb-th#{object.id}",
       **combined_html_options) do %>
     <% unless sorting_style? %>
-      <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon, classname: "pb_th_nolink" }) do %>
         <%= content.presence || object.text %>
-      <% end %>
     <% else %>
       <%= link_to next_link, style: link_style do %>
         <%= pb_rails("flex", props:{ align: object.align_content, justify: object.justify_sort_icon, classname: "pb_th_link" }) do %>
