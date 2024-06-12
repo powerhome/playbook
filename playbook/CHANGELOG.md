@@ -1,4 +1,10 @@
+# Unlock Ultimate Customization with a Single Prop for All Chart Kits! 
+
 ##### June 07, 2024 
+
+![frame-3](https://github.com/powerhome/playbook/assets/73710701/dcca5348-fc0c-4645-a8d1-0aead59da578)
+
+Our latest addition simplifies customizations for all of our chart kits by allowing users to pass any settings accepted by Highcharts through a single prop. This enhancement ensures you have complete control over your chart’s appearance and behavior without the hassle of managing multiple properties or needing custom, 1-to-1 props to support your unique chart requirements.
 
 [12.39.0](https://github.com/powerhome/playbook/tree/12.39.0) full list of changes:
 
