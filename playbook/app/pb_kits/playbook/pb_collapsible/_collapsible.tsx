@@ -60,14 +60,13 @@ const Collapsible = ({
   }
 
   const FirstChild = children[0]
-  const SecondChild = children[1]
 
   const Main = FirstChild.type === CollapsibleMain ? FirstChild : null
-  const Content = SecondChild.type === CollapsibleContent ? SecondChild : null
+  const Content = children[1]
 
 
   const { children: mainChildren = null, ...mainProps } = Main ? Main.props : {}
-  const { children: contentChildren = null, ...contentProps } = Content ? Content.props : {}
+  const { children: contentChildren, ...contentProps } = Content.props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -92,12 +91,9 @@ const Collapsible = ({
         ) : (
           FirstChild
         )}
-
-        {Content && (
           <CollapsibleContent {...contentProps}>
             {contentChildren}
           </CollapsibleContent>
-        )}
       </div>
     </CollapsibleContext.Provider>
   )
