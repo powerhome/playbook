@@ -41,17 +41,17 @@ const COPY_PLUGIN = new CopyPlugin({
     // Copy menu.yml to dist for dev_docs
     {
       from: `${WEBSITE}/config/menu.yml`,
-      to:`${DIST_PATH}/`
+      to: `${DIST_PATH}/`
     },
     // Copy Doc Display Helper Files
     {
       from: `${WEBSITE}/app/components/playbook/pb_docs`,
-      to:`${DIST_PATH}/app/components/playbook/pb_docs`
+      to: `${DIST_PATH}/app/components/playbook/pb_docs`
     },
     // Copy Doc Helper
     {
       from: `${WEBSITE}/lib/pb_doc_helper.rb`,
-      to:`${DIST_PATH}/`
+      to: `${DIST_PATH}/`
     }
   ],
   options: {
@@ -72,12 +72,21 @@ const CLEAN_DIST_PLUGIN = new FileManagerPlugin({
   },
 })
 
-const JS_LOADER = {
-  test: /\.(js|jsx|mjs)$/,
-  use: 'babel-loader',
-  include: SOURCE_PATH,
-  exclude: /node_modules/,
-}
+const JS_LOADER = [
+  {
+    test: /\.(js|jsx|mjs)$/,
+    use: 'babel-loader',
+    include: SOURCE_PATH,
+    exclude: /node_modules/,
+  },
+  {
+    test: /\.js$/,
+    include: /node_modules\/intl-tel-input/,
+    use: {
+      loader: 'babel-loader',
+    },
+  }
+]
 
 const TS_LOADER = {
   test: /\.(ts|tsx)$/,
@@ -153,21 +162,11 @@ module.exports = {
   },
   resolve: {
     // Extensions used (in the specified order order)to resolve imports w/o an explicit extension
-    extensions: [
-      '.ts',
-      '.tsx',
-      '.js',
-      '.jsx',
-    ],
-    modules: [
-      SOURCE_PATH,
-      NODE_MODULES_PATH,
-    ],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    modules: [SOURCE_PATH, NODE_MODULES_PATH],
   },
   resolveLoader: {
-    modules: [
-      NODE_MODULES_PATH,
-    ],
+    modules: [NODE_MODULES_PATH],
   },
   optimization: { minimize: !IS_DEVELOPMENT },
   output: {
@@ -197,10 +196,10 @@ module.exports = {
       },
       {
         test: /\.png$/,
-        use: 'file-loader'
+        use: 'file-loader',
       },
       TS_LOADER,
-      JS_LOADER,
+      ...JS_LOADER,
       SVG_URL_LOADER,
     ],
   },
