@@ -19,8 +19,8 @@
                   <%= pb_rails("background", props: { max_width: 'md' , background_color: "white" }) do %>
                     <%= pb_rails("title", props: {  text: @page_title , tag: "h1", size: 1 }) %>
                     <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
-                      <%= pb_rails("nav/item", props: { text: "Web", link: "/changelog_web", active: action_name == "changelog_web"}) %>
-                      <%= pb_rails("nav/item", props: { text: "Figma", link: "/changelog_figma", active: action_name == "changelog_figma" }) %>
+                      <%= pb_rails("nav/item", props: { text: "Web", link: "/changelog/web", active: action_name == "changelog_web"}) %>
+                      <%= pb_rails("nav/item", props: { text: "Figma", link: "/changelog/figma", active: action_name == "changelog_figma" }) %>
                     <% end %>
                     <%= pb_rails("section_separator", props: { flex_grow: 1 }) %>
                     <%= yield %>
