@@ -43,22 +43,26 @@ const DraggableWithCards = (props) => {
                   key={id}
                   marginBottom="xs"
                   padding="xs"
+                  {...props}
               >
                 <Flex alignItems="stretch" 
                     flexDirection="column"
                 >
                   <Flex gap="xs">
                     <Title size={4} 
-                        text={text} 
+                        text={text}
+                        {...props} 
                     />
                     <Badge 
                         text="35-12345" 
                         variant="primary" 
+                        {...props}
                     />
                   </Flex>
                       <Caption 
                           size="xs" 
                           text="8:00A • Township Name • 90210" 
+                          {...props}
                       />
                   <Flex gap="xxs" 
                       spacing="between"
@@ -66,6 +70,7 @@ const DraggableWithCards = (props) => {
                     <Flex gap="xxs">
                       <Caption color="error" 
                           size="xs"
+                          {...props}
                       >
                         <Icon icon="house-circle-exclamation" />
                       </Caption>
@@ -78,14 +83,17 @@ const DraggableWithCards = (props) => {
                       <Badge rounded 
                           text="Schedule QA" 
                           variant="warning" 
+                          {...props}
                        />
                       <Badge rounded 
                           text="Flex" 
-                          variant="primary" 
+                          variant="primary"
+                          {...props} 
                       />
                       <Badge rounded 
                           text="R99" 
                           variant="primary" 
+                          {...props}
                       />
                     </Flex>
                   </Flex>

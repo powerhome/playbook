@@ -39,6 +39,7 @@ const DraggableDefault = (props) => {
                     label={text} 
                     name={id} 
                     value={id} 
+                    {...props}
                 />
               </Draggable.Item>
             ))}
