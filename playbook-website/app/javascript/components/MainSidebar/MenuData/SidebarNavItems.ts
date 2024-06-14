@@ -3,7 +3,7 @@ export const SideBarNavItems = [
         name: "What's New",
         key: "top-nav-item-1",
         link: "/changelog",
-        children: false,
+        children: true,
         leftIcon: "sparkles",
     },
     {
