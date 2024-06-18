@@ -1,0 +1,15 @@
+<%= pb_content_tag(:div,
+aria: object.aria,
+class: object.classname,
+data: object.data,
+id: object.id,
+**combined_html_options) do %>
+<%= object.layout %>
+    # If size includes a percentage, do functionaly from overlay_percetage.tsx 
+    <div class="overlay_linear_gradient" style=""></div>
+
+    # else, do functionaly from overlay_token.tsx 
+    <div class=""></div>
+
+    <%= content.presence %>
+<% end %>
