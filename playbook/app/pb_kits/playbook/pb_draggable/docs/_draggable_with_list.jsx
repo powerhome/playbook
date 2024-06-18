@@ -30,7 +30,7 @@ const DraggableWithList = (props) => {
     <DraggableProvider initialItems={data}
         onReorder={(items) => setInitialState(items)}
     >
-        <List draggable
+        <List enableDrag
             {...props}
         >
             {initialState.map(({ id, text }) => (

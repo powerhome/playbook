@@ -520,6 +520,7 @@ export const domSafeProps = (props: {[key: string]: string}): {[key: string]: st
     'paddingY',
     'padding',
     'dark',
+    'enableDrag',
   ]
   return omit(props, notSafeProps)
 }

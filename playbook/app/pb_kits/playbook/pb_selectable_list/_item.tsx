@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classnames from "classnames";
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import { globalProps, domSafeProps } from "../utilities/globalProps";
 
 import Checkbox from "../pb_checkbox/_checkbox";
 import ListItem from "../pb_list/_list_item";
@@ -67,7 +67,7 @@ const SelectableListItem = ({
         {...props}
         className={classnames(checkedState ? "checked_item" : "", className)}
         dragHandle={dragHandle}
-        id={id}
+        id={variant == "checkbox" ? id : null}
     >
       <div 
           {...ariaProps} 
@@ -106,7 +106,7 @@ const SelectableListItem = ({
                 text={label}
                 type="radio"
                 value={value}
-                {...props}
+                {...domSafeProps(props)}
             />
             {children}
           </>
