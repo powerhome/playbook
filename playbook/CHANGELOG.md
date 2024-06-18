@@ -1,3 +1,33 @@
+# 13.30.0
+
+##### June 12, 2024
+
+List of changes:
+
+**Kit Enhancements:**
+
+- Add Turbo Frame Event Listener to Dialog Kit [\#3451](https://github.com/powerhome/playbook/pull/3451) ([augustomallmann](https://github.com/augustomallmann))
+- Table_header Flex Removal [\#3452](https://github.com/powerhome/playbook/pull/3452) ([nickamantia](https://github.com/nickamantia))
+- Draggable v3 (Beta) [\#3463](https://github.com/powerhome/playbook/pull/3463) ([nidaqg](https://github.com/nidaqg))
+
+
+**Fixed Bugs:**
+
+- Fix Kit Generator in Playbook [\#3459](https://github.com/powerhome/playbook/pull/3459) ([elisashapiro](https://github.com/elisashapiro))
+- Fix Kit Props Table Circle Chart [\#3448](https://github.com/powerhome/playbook/pull/3448) ([markdoeswork](https://github.com/markdoeswork))
+- Fix for Collapsible Kit Local Env Rendering Issue [\#3464](https://github.com/powerhome/playbook/pull/3464) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Upgrade Phone Number Library [\#3453](https://github.com/powerhome/playbook/pull/3453) ([markdoeswork](https://github.com/markdoeswork))
+- Horizontal Bar Graph Doc Examples [\#3460](https://github.com/powerhome/playbook/pull/3460) ([nickamantia](https://github.com/nickamantia))
+
+**New Kits:**
+
+- Overlay Kit (Beta) [\#3441](https://github.com/powerhome/playbook/pull/3441) ([carloslimasd](https://github.com/carloslimasd))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.29.0...13.30.0)
+
 # Unlock Ultimate Customization with a Single Prop for All Chart Kits! 
 
 ##### June 07, 2024 
