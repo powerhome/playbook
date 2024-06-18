@@ -32,6 +32,19 @@ import { Turbo } from "@hotwired/turbo-rails"
 // Disable Turbo Drive by default (Turbo Drive is equivalent to Turbolinks)
 Turbo.session.drive = false
 
+// Icons from playbook-icons-react for testing PLAY-1316
+import * as icons from "@powerhome/playbook-icons-react"
+
+window.PB_ICONS = {}
+
+function pascalToKebabCase(str) {
+  return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()
+}
+
+Object.entries(icons).forEach(([key, value]) => {
+  const iconName = pascalToKebabCase(key)
+  window.PB_ICONS[iconName] = value
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   const anchors = new AnchorJS()

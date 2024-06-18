@@ -4,52 +4,52 @@ import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
 
 import { Hero } from "../../components/Hero"
 import {
-  Roofing,
-  Powergon,
-  Nitro,
-  ChevronDown,
-  Times,
-  Bars,
-  Calendar,
-  Filter,
-  Edit,
-  Trash,
-  Check,
-  Plus,
-  Search
+  // Roofing,
+  // Powergon,
+  // Nitro,
+  // ChevronDown,
+  // Times,
+  // Bars,
+  // Calendar,
+  // Filter,
+  // Edit,
+  // Trash,
+  // Check,
+  // Plus,
+  // Search
 } from '@powerhome/playbook-icons-react'
 
 import { Body, Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
 
-const pbIcons = {
-  roofing: Roofing,
-  nitro: Nitro,
-  powergon: Powergon,
-  chevrondown: ChevronDown,
-  times: Times,
-  bars: Bars,
-  calendar: Calendar,
-  filter: Filter,
-  edit: Edit,
-  trash: Trash,
-  check: Check,
-  plus: Plus,
-  search: Search
-}
+// const pbIcons = {
+//   roofing: Roofing,
+//   nitro: Nitro,
+//   powergon: Powergon,
+//   chevrondown: ChevronDown,
+//   times: Times,
+//   bars: Bars,
+//   calendar: Calendar,
+//   filter: Filter,
+//   edit: Edit,
+//   trash: Trash,
+//   check: Check,
+//   plus: Plus,
+//   search: Search
+// }
 
-window.PB_ICONS = pbIcons
+// window.PB_ICONS = pbIcons
 
 export default function IconList() {
 
   return (
     <>
       <Hero description={"Powerhome Icons"} title={linkFormat("Playbook Icons")} />
-      <Flex
+      {/* <Flex
         justify='center'
         marginX={{ lg: "sm", xl: "sm" }}
         paddingLeft="xs"
-      >
-        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+      > */}
+        {/* <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Title paddingBottom="sm" size={3} tag='h3' text='Power Icons' />
         </FlexItem>
       </Flex>
@@ -383,6 +383,174 @@ export default function IconList() {
               cursor='pointer'
             >
               <Icon icon="nitro" size="3x" rotation={270}  />
+            </Card>
+          </Flex>
+        </FlexItem>
+      </Flex> */}
+
+
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Title paddingBottom="sm" paddingTop="sm" size={3} tag='h3' text='PLAY-1316 Products Batch Testing' />
+        </FlexItem>
+      </Flex>
+
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Flex>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="circle-product-accessories" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="circle-product-attic-insulation" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="circle-product-doors" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="circle-product-roofing" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="circle-product-siding" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="circle-product-solar" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="circle-product-windows" />
+            </Card>
+          </Flex>
+        </FlexItem>
+      </Flex>
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Flex>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="product-accessories" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="product-attic-insulation" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="product-doors" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="product-gutters-1" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="product-gutters" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="product-roofing" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="product-siding" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="product-solar" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="product-windows" />
+            </Card>
+          </Flex>
+        </FlexItem>
+      </Flex>
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Flex>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="circle-estimate-photos" />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="estimate-photos" />
             </Card>
           </Flex>
         </FlexItem>
