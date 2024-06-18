@@ -33,12 +33,28 @@ module Playbook
         "linear-gradient(#{subsequent_overlay_direction}, #{color_map[color.to_sym]} 0%, transparent #{size})"
       end
 
+      def previous_overlay_class_name
+        "overlay_#{color}_#{previous_overlay_direction_token}_#{size}"
+      end
+
+      def subsequent_overlay_class_name
+        "overlay_#{color}_#{subsequent_overlay_direction_token}_#{size}"
+      end
+
       def previous_overlay_direction
         previous_overlay_direction_map[position.to_sym]
       end
 
       def subsequent_overlay_direction
         subsequent_overlay_direction_map[position.to_sym]
+      end
+
+      def previous_overlay_direction_token
+        has_subsequent_overlay ? previous_overlay_direction_map_token[position.to_sym] : position
+      end
+
+      def subsequent_overlay_direction_token
+        has_subsequent_overlay ? subsequent_overlay_direction_map_token[position.to_sym] : position
       end
 
       def previous_overlay_direction_map
@@ -60,6 +76,20 @@ module Playbook
           "right": "to left",
           "x": "to left",
           "y": "to bottom",
+        }
+      end
+
+      def previous_overlay_direction_map_token
+        {
+          "x": "left",
+          "y": "top",
+        }
+      end
+
+      def subsequent_overlay_direction_map_token
+        {
+          "x": "right",
+          "y": "bottom",
         }
       end
 
