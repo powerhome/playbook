@@ -31,7 +31,7 @@ const TableExample = () => {
 
 const OverlayDefault = () => (
     <>
-        <Overlay>
+        <Overlay layout={{"y":"100%"}}>
             <TableExample />
         </Overlay>
     </>

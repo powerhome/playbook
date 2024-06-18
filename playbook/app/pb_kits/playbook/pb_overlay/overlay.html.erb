@@ -4,12 +4,21 @@ class: object.classname,
 data: object.data,
 id: object.id,
 **combined_html_options) do %>
-<%= object.layout %>
-    # If size includes a percentage, do functionaly from overlay_percetage.tsx 
-    <div class="overlay_linear_gradient" style=""></div>
 
-    # else, do functionaly from overlay_token.tsx 
-    <div class=""></div>
+    <% if is_size_percentage %>
+        <div class="overlay_linear_gradient"
+        style="background: <%= previous_overlay %>"></div>
 
-    <%= content.presence %>
+        <%= content.presence %>
+
+        <% if has_subsequent_overlay %>
+            <div class="overlay_linear_gradient"
+            style="background: <%= subsequent_overlay %>"></div>
+        <% end %>
+    <% else %>
+
+        <%= content.presence %>
+        <%= "hello Nick" %>
+            <div class=""></div>
+    <% end %>
 <% end %>
