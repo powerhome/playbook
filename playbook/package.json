@@ -108,7 +108,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-webpack-plugin": "2.7.0",
     "filemanager-webpack-plugin": "4.0.0",
-    "flow-bin": "0.198.1",
+    "flow-bin": "0.238.1",
     "flow-runtime": "0.17.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "26.6.3",
