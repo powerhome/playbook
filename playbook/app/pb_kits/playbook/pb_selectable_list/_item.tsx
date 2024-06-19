@@ -106,6 +106,8 @@ const SelectableListItem = ({
                 text={label}
                 type="radio"
                 value={value}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-ignore
                 {...domSafeProps(props)}
             />
             {children}
