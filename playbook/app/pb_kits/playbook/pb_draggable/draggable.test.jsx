@@ -5,8 +5,8 @@ import {
   Draggable,
   DraggableProvider,
   SelectableList,
-  // List,
-  // ListItem,
+  List,
+  ListItem,
   Card,
 } from "../";
 
@@ -59,51 +59,51 @@ const DefaultDraggableKit = () => {
   );
 };
 
-// const DraggableKitWithList = () => {
-//   const [initialState, setInitialState] = useState(data);
-//   return (
-//     <div data-testid="draggable">
-//       <DraggableProvider
-//           initialItems={data}
-//           onReorder={(items) => setInitialState(items)}
-//       >
-//         <List draggable>
-//           {initialState.map(({ id, text }) => (
-//             <ListItem id={id} 
-//                 key={id}
-//             >
-//               {text}
-//             </ListItem>
-//           ))}
-//         </List>
-//       </DraggableProvider>
-//     </div>
-//   );
-// };
+const DraggableKitWithList = () => {
+  const [initialState, setInitialState] = useState(data);
+  return (
+    <div data-testid="draggable">
+      <DraggableProvider
+          initialItems={data}
+          onReorder={(items) => setInitialState(items)}
+      >
+        <List enableDrag>
+          {initialState.map(({ id, text }) => (
+            <ListItem id={id} 
+                key={id}
+            >
+              {text}
+            </ListItem>
+          ))}
+        </List>
+      </DraggableProvider>
+    </div>
+  );
+};
 
-// const DraggableKitWithSelectableList = () => {
-//   const [initialState, setInitialState] = useState(data);
-//   return (
-//     <div data-testid="draggable">
-//       <DraggableProvider
-//           initialItems={data}
-//           onReorder={(items) => setInitialState(items)}
-//       >
-//         <SelectableList draggable>
-//           {initialState.map(({ id, text }) => (
-//             <SelectableList.Item
-//                 id={id}
-//                 key={id}
-//                 label={text}
-//                 name={id}
-//                 value={id}
-//             />
-//           ))}
-//         </SelectableList>
-//       </DraggableProvider>
-//     </div>
-//   );
-// };
+const DraggableKitWithSelectableList = () => {
+  const [initialState, setInitialState] = useState(data);
+  return (
+    <div data-testid="draggable">
+      <DraggableProvider
+          initialItems={data}
+          onReorder={(items) => setInitialState(items)}
+      >
+        <SelectableList enableDrag>
+          {initialState.map(({ id, text }) => (
+            <SelectableList.Item
+                id={id}
+                key={id}
+                label={text}
+                name={id}
+                value={id}
+            />
+          ))}
+        </SelectableList>
+      </DraggableProvider>
+    </div>
+  );
+};
 
 const DraggableKitWithCard = () => {
   const [initialState, setInitialState] = useState(data);
@@ -159,25 +159,25 @@ test("Attached draggable HTML attributes", () => {
   expect(item).toHaveAttribute("draggable");
 });
 
-// test("generated dragHandle with List", () => {
-//   render(<DraggableKitWithList />);
-//   const kit = screen.getByTestId(testId);
+test("generated dragHandle with List", () => {
+  render(<DraggableKitWithList />);
+  const kit = screen.getByTestId(testId);
 
-//   const list = kit.querySelector(".pb_list_kit");
-//   expect(list).toBeInTheDocument();
-//   const dragHandle = list.querySelector(".fa-grip-dots-vertical");
-//   expect(dragHandle).toBeInTheDocument();
-// });
+  const list = kit.querySelector(".pb_list_kit");
+  expect(list).toBeInTheDocument();
+  const dragHandle = list.querySelector(".fa-grip-dots-vertical");
+  expect(dragHandle).toBeInTheDocument();
+});
 
-// test("generated dragHandle with SelectableList", () => {
-//   render(<DraggableKitWithSelectableList />);
-//   const kit = screen.getByTestId(testId);
+test("generated dragHandle with SelectableList", () => {
+  render(<DraggableKitWithSelectableList />);
+  const kit = screen.getByTestId(testId);
 
-//   const selectabellist = kit.querySelector(".pb_selectable_list_kit");
-//   expect(selectabellist).toBeInTheDocument();
-//   const dragHandle = selectabellist.querySelector(".fa-grip-dots-vertical");
-//   expect(dragHandle).toBeInTheDocument();
-// });
+  const selectabellist = kit.querySelector(".pb_selectable_list_kit");
+  expect(selectabellist).toBeInTheDocument();
+  const dragHandle = selectabellist.querySelector(".fa-grip-dots-vertical");
+  expect(dragHandle).toBeInTheDocument();
+});
 
 test("generated dragHandle with Card", () => {
   render(<DraggableKitWithCard />);
