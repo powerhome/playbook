@@ -34,7 +34,7 @@ const DraggableWithList = (props) => {
             {...props}
         >
             {initialState.map(({ id, text }) => (
-                <ListItem id={id}
+                <ListItem dragId={id}
                     key={id}
                 >
                     {text}

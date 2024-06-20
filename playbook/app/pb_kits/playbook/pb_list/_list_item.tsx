@@ -11,6 +11,7 @@ type ListItemProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
   data?: Record<string, unknown>,
+  dragId?: string,
   dragHandle?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -24,6 +25,7 @@ const ListItem = (props: ListItemProps) => {
     className,
     data = {},
     enableDrag,
+    dragId, 
     dragHandle = true,
     htmlOptions = {},
     id,
@@ -44,7 +46,7 @@ const ListItem = (props: ListItemProps) => {
     {
       enableDrag ? (
         <Draggable.Item 
-            id={id}
+            dragId={dragId}
         >
         <li
             {...ariaProps}

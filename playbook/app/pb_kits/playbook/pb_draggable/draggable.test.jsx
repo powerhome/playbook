@@ -43,7 +43,7 @@ const DefaultDraggableKit = () => {
         <Draggable.Container>
           <SelectableList variant="checkbox">
             {initialState.map(({ id, text }) => (
-              <Draggable.Item id={id} 
+              <Draggable.Item dragId={id} 
                   key={id}
               >
                 <SelectableList.Item label={text} 
@@ -69,7 +69,7 @@ const DraggableKitWithList = () => {
       >
         <List enableDrag>
           {initialState.map(({ id, text }) => (
-            <ListItem id={id} 
+            <ListItem dragId={id} 
                 key={id}
             >
               {text}
@@ -92,7 +92,7 @@ const DraggableKitWithSelectableList = () => {
         <SelectableList enableDrag>
           {initialState.map(({ id, text }) => (
             <SelectableList.Item
-                id={id}
+                dragId={id}
                 key={id}
                 label={text}
                 name={id}
@@ -115,8 +115,8 @@ const DraggableKitWithCard = () => {
       >
         <Draggable.Container>
           {initialState.map(({ id, text }) => (
-            <Card draggableItem 
-                id={id} 
+            <Card dragId={id} 
+                draggableItem 
                 key={id}
             >
               {text}

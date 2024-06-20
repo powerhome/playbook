@@ -36,10 +36,9 @@ const DraggableWithCards = (props) => {
     >
         <Draggable.Container  {...props}>
           {initialState.map(({ id, text }) => (
-              <Card
+              <Card dragId={id}
                   draggableItem
                   highlight={{ color: "primary", position: "side" }}
-                  id={id}
                   key={id}
                   marginBottom="xs"
                   padding="xs"

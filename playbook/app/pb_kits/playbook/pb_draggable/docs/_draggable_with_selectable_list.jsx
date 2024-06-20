@@ -30,15 +30,15 @@ const DraggableWithSelectableList = (props) => {
         onReorder={(items) => setInitialState(items)}
     >
           <SelectableList enableDrag
-              variant="checkbox"
+              variant="radio"
               {...props}
               >
             {initialState.map(({ id, text }) => (
                 <SelectableList.Item 
-                    id={id}
+                    dragId={id}
                     key={id}
                     label={text} 
-                    name="radio" 
+                    name="radio-test" 
                     value={id}
                     {...props}
                 />

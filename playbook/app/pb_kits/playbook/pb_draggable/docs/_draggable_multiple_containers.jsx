@@ -113,7 +113,7 @@ const DraggableMultipleContainer = (props) => {
                       }) => (
                         <Draggable.Item 
                             container={container}
-                            id={id} 
+                            dragId={id} 
                             key={id}
                         >
                           <Card
