@@ -6,42 +6,41 @@ RSpec.describe Playbook::PbOverlay::Overlay do
   subject { Playbook::PbOverlay::Overlay }
 
   let(:test_id) { "overlay" }
-  let(:children) { "This is the Overlay children" }
 
   describe "data prop" do
     it "passes data prop" do
-      props = { children: children, data: { testid: test_id } }
+      props = { data: { testid: test_id } }
       kit = subject.new(props)
 
-      expect(kit).to be_in_the_document
+      expect(kit.data[:testid]).to eq(test_id)
     end
   end
 
   describe "className prop" do
     it "passes className prop" do
-      class_name = "custom-class-name"
-      props = { className: class_name, children: children, data: { testid: test_id } }
+      classname = "custom-class-name"
+      props = { classname: classname, data: { testid: test_id } }
       kit = subject.new(props)
 
-      expect(kit.classname).to include(class_name)
+      expect(kit.classname).to include(classname)
     end
   end
 
   describe "aria prop" do
     it "passes aria prop" do
-      props = { aria: { label: test_id }, children: children, data: { testid: test_id } }
+      props = { aria: { label: test_id }, data: { testid: test_id } }
       kit = subject.new(props)
 
-      expect(kit.attributes["aria-label"]).to eq(test_id)
+      expect(kit.aria[:label]).to eq(test_id)
     end
   end
 
   describe "id prop" do
     it "passes id prop" do
-      props = { children: children, data: { testid: test_id }, id: test_id }
+      props = { data: { testid: test_id }, id: test_id }
       kit = subject.new(props)
 
-      expect(kit.attributes["id"]).to eq(test_id)
+      expect(kit.id).to eq(test_id)
     end
   end
 end
