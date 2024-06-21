@@ -6,9 +6,9 @@ window.zxcvbn = zxcvbn
 
 import 'playbook-ui/dist/playbook-rails'
 import 'playbook-ui/dist/playbook-doc' // playbook-react doc components
-import '@fortawesome/fontawesome-pro/js/fontawesome.min.js'
-import '@fortawesome/fontawesome-pro/js/regular.min.js'
-import '@fortawesome/fontawesome-pro/js/brands.min.js'
+// import '@fortawesome/fontawesome-pro/js/fontawesome.min.js'
+// import '@fortawesome/fontawesome-pro/js/regular.min.js'
+// import '@fortawesome/fontawesome-pro/js/brands.min.js'
 
 import '../site_styles/main.scss'
 
@@ -31,6 +31,20 @@ import { Website } from '../packs/app'
 import { Turbo } from "@hotwired/turbo-rails"
 // Disable Turbo Drive by default (Turbo Drive is equivalent to Turbolinks)
 Turbo.session.drive = false
+
+// Icons from playbook-icons-react for testing
+import * as icons from "@powerhome/playbook-icons-react"
+
+window.PB_ICONS = {}
+
+function pascalToKebabCase(str) {
+  return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()
+}
+
+Object.entries(icons).forEach(([key, value]) => {
+  const iconName = pascalToKebabCase(key)
+  window.PB_ICONS[iconName] = value
+})
 
 
 document.addEventListener('DOMContentLoaded', () => {

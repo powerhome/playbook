@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     "dist/reset.css",
     "dist/playbook-rails.js",
     "dist/menu.yml",
+    "dist/icon_aliases.yml"
   ] + ["Rakefile"]
 
   # s.files += Dir.glob("app/pb_kits/playbook/pb_*/**/*").reject do |file|
