@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 import TimelineItem from './_item'
 
@@ -14,7 +15,7 @@ type TimelineProps = {
   id?: string,
   orientation?: string,
   showDate?: boolean,
-}
+} & GlobalProps
 
 const Timeline = ({
   aria = {},
@@ -25,6 +26,7 @@ const Timeline = ({
   id,
   orientation = 'horizontal',
   showDate = false,
+  ...props
 }: TimelineProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -33,11 +35,11 @@ const Timeline = ({
   const timelineCss = buildCss('pb_timeline_kit', `_${orientation}`, dateStyle)
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classnames(timelineCss, className)}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classnames(timelineCss, globalProps(props), className)}
+        id={id}
     >
       {children}
     </div>
