@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
-import aliases from '../../../../lib/icon_aliases.json' // Adjust the path as needed
+import aliasesJson from '../../../../lib/icon_aliases.json' 
 
 export type IconSizes = "lg"
 | "xs"
@@ -41,6 +41,19 @@ type IconProps = {
   spin?: boolean,
 } & GlobalProps
 
+type AliasType = string | string[];
+
+interface Aliases {
+  [key: string]: AliasType;
+}
+
+interface AliasesJson {
+  aliases: Aliases;
+}
+
+const aliases: AliasesJson = aliasesJson;
+
+
 const flipMap = {
   horizontal: 'fa-flip-horizontal',
   vertical: 'fa-flip-vertical',
@@ -55,15 +68,19 @@ declare global {
 
 // Resolve alias function
 const resolveAlias = (icon: string): string => {
-  if (aliases.aliases[icon]) {
-    if (Array.isArray(aliases.aliases[icon])) {
-      return aliases.aliases[icon][0] // Use the first alias if multiple
+  const alias = aliases.aliases[icon];
+
+  if (alias) {
+    if (Array.isArray(alias)) {
+      return alias[0];
     } else {
-      return aliases.aliases[icon]
+      return alias;
     }
   }
-  return icon
-}
+
+  return icon;
+};
+
 
 const Icon = (props: IconProps) => {
   const {
