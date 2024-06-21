@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.4.1",
-    "@powerhome/playbook-icons": "0.0.1-alpha.16",
-    "@powerhome/playbook-icons-react": "0.0.1-alpha.8",
+    "@powerhome/playbook-icons": "0.0.1-alpha.25",
+    "@powerhome/playbook-icons-react": "0.0.1-alpha.25",
     "@powerhome/power-fonts": "0.0.1-alpha.4",
     "@rails/webpacker": "5.4.3",
     "@svgr/webpack": "5.5.0",
