@@ -409,6 +409,7 @@ export default function IconList() {
             <Icon icon="circle-product-accessories" />
             <Icon icon="circle-product-attic-insulation" />
             <Icon icon="circle-product-doors" />
+            <Icon icon="circle-product-gutters" />
             <Icon icon="circle-product-roofing" />
             <Icon icon="circle-product-siding" />
             <Icon icon="circle-product-solar" />
@@ -426,7 +427,6 @@ export default function IconList() {
             <Icon icon="product-accessories" />
             <Icon icon="product-attic-insulation" />
             <Icon icon="product-doors" />
-            <Icon icon="product-gutters-1" />
             <Icon icon="product-gutters" />
             <Icon icon="product-roofing" />
             <Icon icon="product-siding" />
