@@ -43,7 +43,7 @@ export default function IconList() {
 
   return (
     <>
-      <Hero description={"Powerhome Icons"} title={linkFormat("Playbook Icons")} />
+      {/* <Hero description={"Powerhome Icons"} title={linkFormat("Playbook Icons")} /> */}
       {/* <Flex
         justify='center'
         marginX={{ lg: "sm", xl: "sm" }}
@@ -406,55 +406,13 @@ export default function IconList() {
       >
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Flex>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="circle-product-accessories" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="circle-product-attic-insulation" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="circle-product-doors" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="circle-product-roofing" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="circle-product-siding" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="circle-product-solar" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="circle-product-windows" />
-            </Card>
+            <Icon icon="circle-product-accessories" />
+            <Icon icon="circle-product-attic-insulation" />
+            <Icon icon="circle-product-doors" />
+            <Icon icon="circle-product-roofing" />
+            <Icon icon="circle-product-siding" />
+            <Icon icon="circle-product-solar" />
+            <Icon icon="circle-product-windows" />
           </Flex>
         </FlexItem>
       </Flex>
@@ -465,69 +423,15 @@ export default function IconList() {
       >
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Flex>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="product-accessories" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="product-attic-insulation" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="product-doors" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="product-gutters-1" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="product-gutters" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="product-roofing" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="product-siding" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="product-solar" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="product-windows" />
-            </Card>
+            <Icon icon="product-accessories" />
+            <Icon icon="product-attic-insulation" />
+            <Icon icon="product-doors" />
+            <Icon icon="product-gutters-1" />
+            <Icon icon="product-gutters" />
+            <Icon icon="product-roofing" />
+            <Icon icon="product-siding" />
+            <Icon icon="product-solar" />
+            <Icon icon="product-windows" />
           </Flex>
         </FlexItem>
       </Flex>
@@ -538,20 +442,8 @@ export default function IconList() {
       >
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Flex>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="circle-estimate-photos" />
-            </Card>
-            <Card
-              marginRight='sm'
-              hover={{ shadow: "deeper" }}
-              cursor='pointer'
-            >
-              <Icon icon="estimate-photos" />
-            </Card>
+            <Icon icon="circle-estimate-photos" />      
+            <Icon icon="estimate-photos" />
           </Flex>
         </FlexItem>
       </Flex>
