@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classnames from "classnames";
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import { globalProps, domSafeProps } from "../utilities/globalProps";
 
 import Checkbox from "../pb_checkbox/_checkbox";
 import ListItem from "../pb_list/_list_item";
@@ -16,6 +16,7 @@ export type SelectableListItemProps = {
   className?: string;
   data?: GenericObject;
   defaultChecked?: boolean;
+  dragId?: string;
   dragHandle?: boolean;
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
@@ -33,6 +34,7 @@ const SelectableListItem = ({
   children,
   className,
   data = {},
+  dragId,
   dragHandle = true,
   defaultChecked,
   htmlOptions = {},
@@ -67,7 +69,7 @@ const SelectableListItem = ({
         {...props}
         className={classnames(checkedState ? "checked_item" : "", className)}
         dragHandle={dragHandle}
-        id={id}
+        dragId={dragId}
     >
       <div 
           {...ariaProps} 
@@ -106,7 +108,9 @@ const SelectableListItem = ({
                 text={label}
                 type="radio"
                 value={value}
-                {...props}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-ignore
+                {...domSafeProps(props)}
             />
             {children}
           </>

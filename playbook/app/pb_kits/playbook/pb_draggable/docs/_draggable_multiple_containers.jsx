@@ -113,12 +113,13 @@ const DraggableMultipleContainer = (props) => {
                       }) => (
                         <Draggable.Item 
                             container={container}
-                            id={id} 
+                            dragId={id} 
                             key={id}
                         >
                           <Card
                               marginBottom="sm"
                               padding="sm"
+                              {...props}
                           >
                             <Flex justify="between">
                               <FlexItem>
@@ -131,6 +132,7 @@ const DraggableMultipleContainer = (props) => {
                                   <Title paddingLeft="xs" 
                                       size={4}
                                       text={title}
+                                      {...props}
                                   />
                                 </Flex>
                               </FlexItem>
@@ -139,10 +141,12 @@ const DraggableMultipleContainer = (props) => {
                                   rounded
                                   text={badgeProperties(container).text}
                                   variant={badgeProperties(container).color}
+                                  {...props}
                               />
                             </Flex>
                             <Body paddingTop="xs"
                                 text={description} 
+                                {...props}
                             />
                           </Card>
                         </Draggable.Item>

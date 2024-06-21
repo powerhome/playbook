@@ -32,13 +32,14 @@ const DraggableDefault = (props) => {
         <Draggable.Container {...props}>
           <SelectableList variant="checkbox">
             {initialState.map(({ id, text }) => (
-              <Draggable.Item id={id} 
+              <Draggable.Item dragId={id} 
                   key={id}
               >
                 <SelectableList.Item
                     label={text} 
                     name={id} 
                     value={id} 
+                    {...props}
                 />
               </Draggable.Item>
             ))}

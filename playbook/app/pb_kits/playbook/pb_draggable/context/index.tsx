@@ -1,90 +1,110 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useReducer, useContext, useEffect, useMemo } from "react";
+import { InitialStateType, ActionType, DraggableProviderType } from "./types";
 
+const initialState: InitialStateType = {
+  items: [],
+  dragData: { id: "", initialGroup: "" },
+  isDragging: "",
+  activeContainer: ""
+};
+
+const reducer = (state: InitialStateType, action: ActionType) => {
+  switch (action.type) {
+    case 'SET_ITEMS':
+      return { ...state, items: action.payload };
+    case 'SET_DRAG_DATA':
+      return { ...state, dragData: action.payload };
+    case 'SET_IS_DRAGGING':
+      return { ...state, isDragging: action.payload };
+    case 'SET_ACTIVE_CONTAINER':
+      return { ...state, activeContainer: action.payload };
+    case 'CHANGE_CATEGORY':
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.id === action.payload.itemId
+            ? { ...item, container: action.payload.container }
+            : item
+        )
+      };
+    case 'REORDER_ITEMS': {
+      const { dragId, targetId } = action.payload;
+      const newItems = [...state.items];
+      const draggedItem = newItems.find(item => item.id === dragId);
+      const draggedIndex = newItems.indexOf(draggedItem);
+      const targetIndex = newItems.findIndex(item => item.id === targetId);
+
+      newItems.splice(draggedIndex, 1);
+      newItems.splice(targetIndex, 0, draggedItem);
+
+      return { ...state, items: newItems };
+    }
+    default:
+      return state;
+  }
+};
+
+// Context and Provider
 const DragContext = createContext<any>({});
 
 export const DraggableContext = () => {
   return useContext(DragContext);
 };
 
-export const DraggableProvider = ({ children, initialItems, onReorder }: any) => {
-  const [items, setItems] = useState([]);
-  const [dragData, setDragData] = useState<{ [key: string]: any }>({});
-  const [isDragging, setIsDragging] = useState("");
-  const [activeContainer, setActiveContainer] = useState("");
+export const DraggableProvider = ({ children, initialItems, onReorder }: DraggableProviderType) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    setItems(initialItems);
+    dispatch({ type: 'SET_ITEMS', payload: initialItems });
   }, [initialItems]);
 
   useEffect(() => {
-    onReorder(items);
-  }, [items]);
+    onReorder(state.items);
+  }, [state.items]);
 
   const handleDragStart = (id: string, container: string) => {
-    setDragData({ id: id, initialGroup: container });
-    setIsDragging(id);
+    dispatch({ type: 'SET_DRAG_DATA', payload: { id: id, initialGroup: container } });
+    dispatch({ type: 'SET_IS_DRAGGING', payload: id });
   };
 
   const handleDragEnter = (id: string, container: string) => {
-    if (dragData?.id !== id) {
-      const newItems = [...items];
-      const draggedItem = newItems.find((item) => item.id === dragData.id);
-      const draggedIndex = newItems.indexOf(draggedItem);
-      const targetIndex = newItems.findIndex((item) => item.id === id);
-
-      newItems.splice(draggedIndex, 1);
-      newItems.splice(targetIndex, 0, draggedItem);
-
-      setItems(newItems);
-      setDragData({ id: dragData.id, initialGroup: container });
+    if (state.dragData.id !== id) {
+      dispatch({ type: 'REORDER_ITEMS', payload: { dragId: state.dragData.id, targetId: id } });
+      dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container } });
     }
   };
 
   const handleDragEnd = () => {
-    setIsDragging("");
-    setActiveContainer("");
+    dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+    dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
   };
 
   const changeCategory = (itemId: string, container: string) => {
-    const updatedItems = items.map((item) => {
-      if (item.id === itemId) {
-        return { ...item, container: container };
-      }
-      return item;
-    });
-
-    setItems(updatedItems);
+    dispatch({ type: 'CHANGE_CATEGORY', payload: { itemId, container } });
   };
 
   const handleDrop = (container: string) => {
-    setIsDragging("");
-    setActiveContainer("");
-    const selected = dragData.id;
-    changeCategory(selected, container);
+    dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+    dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+    changeCategory(state.dragData.id, container);
   };
 
   const handleDragOver = (e: Event, container: string) => {
     e.preventDefault();
-    setActiveContainer(container);
+    dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
   };
 
-  
-
-  const contextValue = {
-    items,
-    setItems,
-    dragData,
-    setDragData,
-    isDragging,
-    setIsDragging,
-    activeContainer,
-    setActiveContainer,
+  const contextValue = useMemo(() => ({
+    items: state.items,
+    dragData: state.dragData,
+    isDragging: state.isDragging,
+    activeContainer: state.activeContainer,
     handleDragStart,
     handleDragEnter,
     handleDragEnd,
     handleDrop,
-    handleDragOver,
-  };
+    handleDragOver
+  }), [state]);
 
   return (
     <DragContext.Provider value={contextValue}>{children}</DragContext.Provider>

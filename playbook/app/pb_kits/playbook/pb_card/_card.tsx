@@ -20,6 +20,7 @@ type CardPropTypes = {
   children: React.ReactChild[] | React.ReactChild | number,
   className?: string,
   data?: {[key: string]: string},
+  dragId?: string,
   draggableItem?: boolean,
   dragHandle?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -85,11 +86,11 @@ const Card = (props: CardPropTypes): React.ReactElement => {
     children,
     className,
     data = {},
+    dragId,
     dragHandle = true,
     draggableItem = false,
     highlight = {},
     htmlOptions = {},
-    id,
     selected = false,
     tag = 'div',
   } = props
@@ -126,8 +127,8 @@ const Card = (props: CardPropTypes): React.ReactElement => {
     <>
     {
       draggableItem ? (
-        <Draggable.Item id={id} 
-            key={id}
+        <Draggable.Item dragId={dragId} 
+            key={dragId}
         >
         <Tag
             {...ariaProps}
