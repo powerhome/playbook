@@ -23,6 +23,7 @@ type FixedConfirmationToastProps = {
   data?: string;
   horizontal?: "right" | "left" | "center";
   htmlOptions?: { [key: string]: string | number | boolean | (VoidCallback) };
+  icon?: string,
   id?: string;
   multiLine?: boolean;
   onClose?: VoidCallback;
@@ -41,6 +42,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
     closeable = false,
     horizontal,
     htmlOptions = {},
+    icon,
     multiLine = false,
     onClose = () => undefined,
     open = true,
@@ -48,14 +50,18 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
     text,
     vertical,
   } = props;
+
+  const returnedIcon = icon || iconMap[status]
+  const iconClass = icon ? "custom_icon" : ""
+
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}`,
     { _multi_line: multiLine },
     { [`positioned_toast ${vertical} ${horizontal}`]: vertical && horizontal },
+    `${iconClass}`,
     globalProps(props),
     className
   );
-  const icon = iconMap[status];
 
   const htmlProps = buildHtmlProps(htmlOptions);
 
@@ -86,11 +92,11 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
             onClick={handleClick}
             {...htmlProps}
         >
-          {icon && (
+          {returnedIcon && (
             <Icon
                 className="pb_icon"
                 fixedWidth
-                icon={icon}
+                icon={returnedIcon}
             />
           )}
 

@@ -8,29 +8,33 @@ const FixedConfirmationToastDefault = (props) => {
       <div>
         <FixedConfirmationToast
             closeable
+            icon="wrench"
             status="error"
-            text="Error Message"
+            text="Fix before proceeding"
             {...props}
         />
       </div>
       <div>
         <FixedConfirmationToast
+            icon="star"
             status="success"
-            text="Items Successfully Moved"
+            text="Thank you for completing the form!"
             {...props}
         />
       </div>
       <div>
         <FixedConfirmationToast
+            icon="file-pdf"
             status="neutral"
-            text="Scan to Assign Selected Items"
+            text="Saved as PDF"
             {...props}
         />
       </div>
       <div>
         <FixedConfirmationToast
+            icon="arrow-down"
             status="tip"
-            text="Primary Blue example"
+            text="New Messages"
             {...props}
         />
       </div>
