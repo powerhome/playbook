@@ -54,7 +54,7 @@ const KitDocs = ({ source, exampleTitle, css }) => {
           style={{
             backgroundColor: "white",
             border: "none",
-            fontFamily: "Proxima Nova",
+            fontFamily: "Power Centra",
           }}
         >
           <div style={{ width: "100%" }}>

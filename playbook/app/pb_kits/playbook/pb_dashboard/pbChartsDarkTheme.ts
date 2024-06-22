@@ -33,7 +33,7 @@ const highchartsDarkTheme: ThemeProps = {
     style: {
       color: colors.text_dk_default,
       fontFamily: typography.font_family_base,
-      fontWeight: typography.regular,
+      fontWeight: typography.bold,
       fontSize: typography.heading_3,
     },
   },

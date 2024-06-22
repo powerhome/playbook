@@ -24,7 +24,7 @@ $pb_dark_caption_colors: (
   color: $text_lt_light;
   text-transform: uppercase;
   font-size: $font_size;
-  letter-spacing: $lspace_looser;
+  letter-spacing: $lspace_loosest;
 }
 
 @mixin caption_color($color: $text_lt_light) {

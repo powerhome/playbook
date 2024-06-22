@@ -1,11 +1,11 @@
-$font_family_base: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans_serif !default;
+$font_family_base: "Power Centra", "Helvetica Neue", Helvetica, Arial, sans_serif !default;
 
 /* CLEAN UP AND REMOVE */
 $font_jumbo:        36px !default;
 $font_largest:      32px !default;
-$font_larger:       28px !default;
+$font_larger:       27px !default;
 $font_large:        20px !default;
-$font_base:         16px !default;
+$font_base:         15.5px !default;
 $font_default:      $font_base !default;
 $font_normal:       $font_base !default;
 $font_medium:       $font_base !default;
@@ -26,8 +26,8 @@ $text_smaller:      $font_smaller !default;
 $text_smallest:     $font_smallest !default;
 
 /* Headings */
-$heading_1: 46px !default;
-$heading_2: 34px !default;
+$heading_1: 44px !default;
+$heading_2: 32px !default;
 $heading_3: $font_larger !default;
 $heading_4: $font_base !default;
 
@@ -35,19 +35,19 @@ $heading_4: $font_base !default;
 $lspace_tightest:         -.1em !default;
 $lspace_tighter:          -.07em !default;
 $lspace_tight:            -.01em !default;
-$lspace_normal:           0 !default;
+$lspace_normal:           .003em !default;
 $lspace_loose:            .03em !default;
 $lspace_looser:           .07em !default;
 $lspace_loosest:          .1em !default;
 $lspace_super_loosest:    .2em !default;
 
 /* Standard Font Weights */
-$bold:          600 !default;
+$bold:          700 !default;
 $regular:       400 !default;
 
 /* Non_Standard Font Weights */
-$extrabold:     900 !default;
-$boldest:       800 !default;
+$extrabold:     700 !default;
+$boldest:       700 !default;
 $bolder:        700 !default;
 $light:         300 !default;
-$lighter:       100 !default;
+$lighter:       300 !default;

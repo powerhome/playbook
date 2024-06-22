@@ -31,7 +31,7 @@ export default function Sandbox({ backgroundColor = "white" }) {
       className={`sandbox-layout`}
       style={{
         border: "none",
-        fontFamily: "Proxima Nova",
+        fontFamily: "Power Centra",
       }}
     >
       <Flex orientation='column' alignSelf='stretch'>
