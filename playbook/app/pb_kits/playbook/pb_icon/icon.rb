@@ -39,7 +39,7 @@ module Playbook
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
 
-      ALIASES = JSON.parse(File.read(Playbook::Engine.root.join("dist/icon_aliases.json")))["aliases"].freeze
+      ALIASES = JSON.parse(File.read(Playbook::Engine.root.join("dist/icon_aliases.json")))
 
       def valid_emoji?
         emoji_regex = /\p{Emoji}/
