@@ -56,7 +56,7 @@ const COPY_PLUGIN = new CopyPlugin({
     },
     // Copy Icon Aliases to dist
     {
-      from: ICON_ALIAS_PATH,
+      from: `${ICON_ALIAS_PATH}`,
       to: `${DIST_PATH}/`,
     },
   ],
