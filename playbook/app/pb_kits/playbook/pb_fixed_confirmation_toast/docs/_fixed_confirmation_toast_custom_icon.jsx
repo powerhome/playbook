@@ -2,7 +2,7 @@ import React from 'react'
 
 import FixedConfirmationToast from '../_fixed_confirmation_toast'
 
-const FixedConfirmationToastDefault = (props) => {
+const FixedConfirmationToastCustomIcon = (props) => {
   return (
     <div>
       <div>
@@ -42,4 +42,4 @@ const FixedConfirmationToastDefault = (props) => {
   )
 }
 
-export default FixedConfirmationToastDefault
+export default FixedConfirmationToastCustomIcon
