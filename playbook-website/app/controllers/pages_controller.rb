@@ -135,8 +135,24 @@ class PagesController < ApplicationController
     render "pages/rails_in_react_playground", layout: "layouts/fullscreen"
   end
 
+  def validate_pb_rails(string)
+    pattern = /<%=?\s*(.*?)\s*%>/
+    non_matching = []
+
+    string.scan(pattern).each do |match|
+      non_matching << match.first.strip unless match.first.strip.start_with?("pb_rails")
+    end
+
+    non_matching.empty? ? true : non_matching
+  end
+
   def rails_pg_render
-    render inline: erb_code_params
+    code_as_string = if validate_pb_rails(erb_code_params) == true
+                       erb_code_params
+                     else
+                       "Invalid erb because of #{validate_pb_rails(erb_code_params)}"
+                     end
+    render inline: code_as_string
   rescue => e
     render json: { error: e }, status: 400
   end
