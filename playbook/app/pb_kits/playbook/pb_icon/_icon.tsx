@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
-import aliasesJson from '../../../../lib/icon_aliases.json' 
+import aliasesJson from './icon_aliases.json'
 
 export type IconSizes = "lg"
 | "xs"
