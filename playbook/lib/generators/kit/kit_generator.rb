@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require "psych"
+
 # rubocop:disable Style/StringConcatenation
 class KitGenerator < Rails::Generators::NamedBase
   desc "This generator creates a new Playbook Kit"
   source_root File.expand_path("templates", __dir__)
+  class_option :category, type: :string, default: "", desc: "Adds category name"
   class_option :props, type: :array, default: []
   class_option :rails, type: :boolean, default: false, desc: "Creates the boilerplate files for Rails"
   class_option :react, type: :boolean, default: false, desc: "Creates the boilerplate files for React"
@@ -23,6 +26,7 @@ class KitGenerator < Rails::Generators::NamedBase
     @kit_name_capitalize = kit_name.capitalize
     @kit_name_underscore = kit_name.parameterize.underscore
     @kit_name_pascal = kit_name.titleize.gsub(/\s+/, "")
+    @kit_category = options[:category]
 
     kit_props = options[:props].concat(%w[id:string classname:string data:object aria:object])
     @kit_props = kit_props.map { |hash| [hash.partition(":").first, hash.partition(":").last] }.to_h
@@ -48,6 +52,28 @@ class KitGenerator < Rails::Generators::NamedBase
                   :red
       nil
     else
+
+      # If category given, validate against existing categories in MENU yaml =========
+      if @kit_category.nil? || @kit_category.empty?
+        say_status  "No category given.",
+                    "Proceeding to generate files.",
+                    :yellow
+      else
+        file_path = "../playbook-website/config/menu.yml"
+        yaml_data = File.read(file_path)
+        parsed_data = Psych.safe_load(yaml_data, aliases: true)
+        existing_categories = parsed_data["kits"].map { |kit| kit["name"] } if parsed_data["kits"].is_a?(Array)
+        if existing_categories && !existing_categories.include?(options[:category])
+          say_status  "#{@kit_category} does not match an existing category.",
+                      "Please choose another category or manually sort without using the category flag.",
+                      :red
+          exit 1
+        end
+        # else
+        #   say_status  "#{@kit_category} matches an existing category.",
+        #               "Proceeding to generate files.",
+        #               :green
+      end
 
       # Generate SCSS files ==============================
       unless platforms == "swift_only"
