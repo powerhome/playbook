@@ -12,6 +12,7 @@ RSpec.describe Playbook::PbNav::Item do
   it { is_expected.to define_prop(:icon_right) }
   it { is_expected.to define_prop(:image_url) }
   it { is_expected.to define_prop(:collapsible) }
+  it { is_expected.to define_prop(:collapsed) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
