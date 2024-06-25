@@ -1,0 +1,39 @@
+{
+    "aliases": {
+      "arrow-alt-circle-right": "circle-right",
+      "angles-down": "angle-double-down",
+      "arrow-alt-down": "down",
+      "arrow-alt-up": "up",
+      "arrow-right-long": "long-arrow-right",
+      "arrow-to-bottom": "arrow-down-to-line",
+      "arrows-h": "arrows-left-right",
+      "calendar-days": "calendar-alt",
+      "circle-arrow-right": "arrow-circle-right",
+      "clock-rotate-left": "history",
+      "close": [
+        "times",
+        "xmark"
+      ],
+      "ellipsis-h": "ellipsis",
+      "exclamation-circle": "circle-exclamation",
+      "external-link": "arrow-up-right-from-square",
+      "file-lines": "file-alt",
+      "gear": "cog",
+      "home": "house",
+      "info-circle": "circle-info",
+      "map-o": "map",
+      "message": "comment-alt",
+      "minus-circle": "circle-minus",
+      "money": "money-bill",
+      "mouse-pointer": "arrow-pointer",
+      "nitro": "Nitro-n",
+      "play-circle": "circle-play",
+      "plus-circle": "circle-plus",
+      "plus-square": "square-plus",
+      "powergon": "Powergon-p",
+      "question-circle": "circle-question",
+      "roofing": "Product-roofing",
+      "shelves": "inventory",
+      "th-list": "table-list"
+    }
+  }
