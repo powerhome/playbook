@@ -205,3 +205,18 @@ test('selected option on click', () => {
   option.click()
   expect(option).toHaveClass('pb_dropdown_option_selected')
 })
+
+test('show error message', () => {
+  const errorMessage = 'Please make a valid selection'
+
+  render (
+    <Dropdown
+        data={{ testid: testId }}
+        error={errorMessage}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveTextContent(errorMessage)
+})
