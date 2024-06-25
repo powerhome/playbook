@@ -39,7 +39,7 @@ module Playbook
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
 
-      # ALIASES = JSON.parse(File.read(Playbook::Engine.root.join("dist/icon_aliases.json")))
+      ALIASES = JSON.parse(File.read(Playbook::Engine.root.join("dist/icon_aliases.json")))
 
       def valid_emoji?
         emoji_regex = /\p{Emoji}/
@@ -86,7 +86,8 @@ module Playbook
         return unless Rails.application.config.respond_to?(:icon_path)
 
         base_path = Rails.application.config.icon_path
-        icon_path = Dir.glob(Rails.root.join(base_path, "**", "#{icon}.svg")).first
+        resolved_icon = resolve_alias(icon)
+        icon_path = Dir.glob(Rails.root.join(base_path, "**", "#{resolved_icon}.svg")).first
         icon_path if icon_path && File.exist?(icon_path)
       end
 
@@ -109,21 +110,21 @@ module Playbook
 
     private
 
-      # def resolve_alias(icon)
-      #   aliases = ALIASES[icon]
-      #   return icon unless aliases
+      def resolve_alias(icon)
+        aliases = ALIASES[icon]
+        return icon unless aliases
 
-      #   if aliases.is_a?(Array)
-      #     aliases.find { |alias_name| file_exists?(alias_name) } || icon
-      #   else
-      #     aliases
-      #   end
-      # end
+        if aliases.is_a?(Array)
+          aliases.find { |alias_name| file_exists?(alias_name) } || icon
+        else
+          aliases
+        end
+      end
 
-      # def file_exists?(alias_name)
-      #   base_path = Rails.application.config.icon_path
-      #   File.exist?(Dir.glob(Rails.root.join(base_path, "**", "#{alias_name}.svg")).first)
-      # end
+      def file_exists?(alias_name)
+        base_path = Rails.application.config.icon_path
+        File.exist?(Dir.glob(Rails.root.join(base_path, "**", "#{alias_name}.svg")).first)
+      end
 
       def svg_size
         size.nil? ? "1x" : size
