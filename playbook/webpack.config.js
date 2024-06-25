@@ -7,7 +7,6 @@ const FileManagerPlugin = require('filemanager-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 const SOURCE_PATH = path.resolve(__dirname, 'app/pb_kits/playbook')
-const ICON_ALIAS_PATH = path.resolve(__dirname, 'lib/icon_aliases.json')
 const DIST_PATH = path.resolve(__dirname, 'dist')
 const NODE_MODULES_PATH = path.resolve(__dirname, '../node_modules')
 const WEBSITE = path.resolve(__dirname, '../playbook-website')
@@ -53,12 +52,7 @@ const COPY_PLUGIN = new CopyPlugin({
     {
       from: `${WEBSITE}/lib/pb_doc_helper.rb`,
       to: `${DIST_PATH}/`
-    },
-    // Copy Icon Aliases to dist
-    {
-      from: `${ICON_ALIAS_PATH}`,
-      to: `${DIST_PATH}/`,
-    },
+    }
   ],
   options: {
     concurrency: 100,

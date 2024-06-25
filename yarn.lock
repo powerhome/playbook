@@ -2201,10 +2201,10 @@
   resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.1.tgz#344baf6ff9eaad7a73cff067d8c56bfc11ae5304"
   integrity sha512-viouXhegu/TjkvYQoiRZK3aax69dGXxgEjpvZW81wIJdxm5Fnvp3VVIP4VHKqX4SvFw6qpmkILkD4RJWAdrt7A==
 
-"@fortawesome/fontawesome-pro@^6.2.1":
-  version "6.5.2"
-  resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-pro/-/fontawesome-pro-6.5.2.tgz#aea8a43f1f86e29c40fbf6a119c331311967f867"
-  integrity sha512-C12SvO3F42wPWEMM/+r75oAdljD3qv3K5MALPZWfK4I7OEkF+teT9UB3XvpNK+FBOtBkg/BxHTDQJ3MYpbfLYg==
+"@fortawesome/fontawesome-pro@6.2.1":
+  version "6.2.1"
+  resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-pro/-/fontawesome-pro-6.2.1.tgz#1cd5b79d93fdb955ef8a04996fef20a44207a6f0"
+  integrity sha512-dHk7iiCf5MCmoUvmrYzfN/I3gebpgpA1oqlOffgOThnsaAR4kpaQ5YMTdkdG99Of1hnN0Bok6R+HE28zXb3SOg==
 
 "@gar/promisify@^1.0.1":
   version "1.1.3"
@@ -9523,13 +9523,6 @@ js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://npm.powerapp.cloud/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
   integrity sha512-RjTcuD4xjtthQkaWH7dFlH85L+QaVtSoOyGdZ3g6HFhS9dFNDfLyqgm2NFe2X6cQpeFmt0452FJjFG5UameExg==
-
-js-yaml@4.1.0:
-  version "4.1.0"
-  resolved "https://npm.powerapp.cloud/js-yaml/-/js-yaml-4.1.0.tgz#c1fb65f8f5017901cdd2c951864ba18458a10602"
-  integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
-  dependencies:
-    argparse "^2.0.1"
 
 js-yaml@^3.13.1, js-yaml@^3.14.1:
   version "3.14.1"
