@@ -7,7 +7,7 @@ react_only: &react_only ["react"]
 swift_only: &swift_only ["swift"]
 
 kits:
-  - name: alerts_and_dialogs
+  - category: alerts_and_dialogs
     description: 
     components:
       - name: "dialog"
@@ -26,7 +26,7 @@ kits:
         platforms: *web
         description:
         status: "stable"
-  - name: buttons
+  - category: buttons
     description: Buttons are used primarily for actions, such as “Save” and “Cancel”. Link Buttons are used for less important or less commonly used actions, such as “view shipping settings”.
     components:
       - name: "button"
@@ -41,7 +41,7 @@ kits:
         platforms: *web
         description: When using Icon Circle Button, the icon must be clear a clear indication of what the button does because there is no text. 
         status: "stable"
-  - name: data_visualization
+  - category: data_visualization
     description: 
     components:
       - name: "map"
@@ -92,7 +92,7 @@ kits:
         platforms: *web
         description: Treemap charts are used to compare the relative size of groups of data. They can also use a nested data structure, allowing a user to drill down into a group to see its constituent data points.
         status: "stable"
-  - name: date_and_time_text_patterns
+  - category: date_and_time_text_patterns
     description: ""
     components:
       - name: "date"
@@ -142,7 +142,7 @@ kits:
         platforms: *web
         description: 
         status: "stable"
-  - name: form_and_dashboard_text_patterns
+  - category: form_and_dashboard_text_patterns
     description: ""
     components:
       - name: "contact"
@@ -197,7 +197,7 @@ kits:
         platforms: *web
         description: This kit can be used in many versatile ways. It consist of a title 4 and light body text kit.
         status: "stable"
-  - name: form_elements
+  - category: form_elements
     description: 
     components:
       - name: "file_upload"
@@ -220,7 +220,7 @@ kits:
         platforms: *web
         description: 
         status: "stable"
-  - name: form_input
+  - category: form_input
     description: ""
     components:
       - name: "passphrase"
@@ -247,7 +247,7 @@ kits:
         platforms: *web
         description: Typeahead is auto suggestion or completion based on what the user is starting to type, gets refined as the user types more.
         status: "stable"
-  - name: form_selection
+  - category: form_selection
     description: 
     components:
       - name: "date_picker"
@@ -290,7 +290,7 @@ kits:
         platforms: *web
         description: 
         status: "stable"
-  - name: icons_and_images
+  - category: icons_and_images
     description: ""
     components:
       - name: "icon"
@@ -325,7 +325,7 @@ kits:
         platforms: *web
         description: A component to view other people’s opinions and experiences. Use when you want to show evaluation or a quick quantitative rating. Most effective when paired with reviews.
         status: "stable"
-  - name: layout_and_structure
+  - category: layout_and_structure
     description: 
     components:
       - name: "flex"
@@ -359,7 +359,7 @@ kits:
         platforms: *react_only
         description:
         status: "beta"
-  - name: message_text_patterns
+  - category: message_text_patterns
     description: 
     components:
       - name: "highlight"
@@ -370,7 +370,7 @@ kits:
         platforms: *web
         description: This multi kit consist of a an avatar, a status, a caption, a body text, and a time stamp. All which can be optional.
         status: "stable"
-  - name: navigation
+  - category: navigation
     description: 
     components:
       - name: "bread_crumbs"
@@ -385,7 +385,7 @@ kits:
         platforms: *rails_only
         description:
         status: "stable"
-  - name: state_and_progress_indicators
+  - category: state_and_progress_indicators
     description: 
     components:
       - name: "loading_inline"
@@ -411,7 +411,7 @@ kits:
         platforms: *web
         description: The timeline kit can use two different line styles in the same timeline - solid and dotted line styles.
         status: "stable"
-  - name: tags
+  - category: tags
     description: 
     components:
       - name: "badge"
@@ -430,7 +430,7 @@ kits:
         platforms: *web
         description: Hashtag is used to display home, project and other forms of IDs. They can be used as a link.
         status: "stable"
-  - name: typography
+  - category: typography
     description: ""
     components:
       - name: "body"
@@ -449,7 +449,7 @@ kits:
         platforms: *web
         description: Typically used as headers. Follow semantic hierarchy — Title 1s should be followed by Title 2s followed by Title 3s and so on, without skipping any levels.
         status: "stable"
-  - name: user
+  - category: user
     description: 
     components:
       - name: "avatar"
