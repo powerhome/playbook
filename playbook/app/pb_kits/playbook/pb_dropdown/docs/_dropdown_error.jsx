@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dropdown } from '../../'
 
 const DropdownError = (props) => {
+    const [selectedOption, setSelectedOption] = useState()
+    const error = selectedOption?.value ? null : "Please make a valid selection"
     const options = [
         {
             label: "United States",
@@ -15,12 +17,13 @@ const DropdownError = (props) => {
             label: "Pakistan",
             value: "Pakistan",
         }
-    ];
+    ]
 
     return (
         <>
             <Dropdown
-                error="Please make a valid selection"
+                error={error}
+                onSelect={(selectedItem) => setSelectedOption(selectedItem)}
                 options={options}
                 {...props}
             />
