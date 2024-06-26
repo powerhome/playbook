@@ -41,10 +41,38 @@ type IconProps = {
 } & GlobalProps
 
 const flipMap = {
-  horizontal: 'fa-flip-horizontal',
-  vertical: 'fa-flip-vertical',
-  both: 'fa-flip-horizontal fa-flip-vertical',
-  none: ""
+  fa: {
+    horizontal: 'fa-flip-horizontal',
+    vertical: 'fa-flip-vertical',
+    both: 'fa-flip-horizontal fa-flip-vertical',
+    none: ''
+  },
+  svg: {
+    horizontal: 'flip_horizontal',
+    vertical: 'flip_vertical',
+    both: 'flip_horizontal flip_vertical',
+    none: ''
+  }
+}
+const pulseMap = {
+  fa: 'fa-pulse',
+  svg: 'pulse'
+}
+const spinMap = {
+  fa: 'fa-spin',
+  svg: 'spin'
+}
+const rotateMap = {
+  fa: {
+    90: 'fa-rotate-90',
+    180: 'fa-rotate-180',
+    270: 'fa-rotate-270'
+  },
+  svg: {
+    90: 'rotate_90',
+    180: 'rotate_180',
+    270: 'rotate_270'
+  }
 }
 
 declare global {
@@ -99,15 +127,37 @@ const Icon = (props: IconProps) => {
     }
   }
 
-  const classes = classnames(
-    flipMap[flip],
+  const isFA = !iconElement && !customIcon 
+
+  let classes = classnames(
     (!iconElement && !customIcon) ? 'pb_icon_kit' : '',
     (iconElement || customIcon) ? 'pb_custom_icon' : fontStyle,
     iconElement ? 'svg-inline--fa' : '',
-    faClasses,
+    isFA? fontStyle : null, 
     globalProps(props),
     className
   )
+
+  const transformClasses = classnames(
+    flip ? flipMap[isFA ? 'fa' : 'svg'][flip] : null,
+    pulse ? pulseMap[isFA ? 'fa' : 'svg'] : null,
+    rotation ? rotateMap[isFA ? 'fa' : 'svg'][rotation] : null,
+    spin ? spinMap[isFA ? 'fa' : 'svg'] : null,
+  )
+  classes += ` ${transformClasses}`
+
+  if (isFA) {
+    const faClassList = {
+      'fa-border': border,
+      'fa-fw': (iconElement) ? false : fixedWidth,
+      'fa-inverse': inverse,
+      'fa-li': listItem,
+      [`fa-${size}`]: size,
+      [`fa-pull-${pull}`]: pull,
+    }
+    faClassList[`fa-${icon}`] = icon as string
+    classes += ` ${classnames(faClassList)}`
+  }
 
   const classesEmoji = classnames(
     'pb_icon_kit_emoji',

@@ -146,15 +146,27 @@ module Playbook
       end
 
       def pulse_class
-        pulse ? "fa-pulse" : nil
+        if is_svg?
+          pulse ? "pulse" : nil
+        else
+          pulse ? "fa-pulse" : nil
+        end
       end
 
       def rotation_class
-        rotation ? "fa-rotate-#{rotation}" : nil
+        if is_svg?
+          rotation ? "rotate_#{rotation}" : nil
+        else
+          rotation ? "fa-rotate-#{rotation}" : nil
+        end
       end
 
       def size_class
-        size ? "fa-#{size}" : nil
+        if is_svg?
+          size ? "svg_#{size}" : nil
+        else
+          size ? "fa-#{size}" : nil
+        end
       end
 
       def font_style_class
@@ -162,10 +174,13 @@ module Playbook
       end
 
       def spin_class
-        spin ? "fa-spin" : nil
+        if is_svg?
+          spin ? "spin" : nil
+        else
+          spin ? "fa-spin" : nil
+        end
       end
     end
   end
 end
-
 # rubocop:enable Style/HashLikeCase
