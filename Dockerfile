@@ -1,5 +1,4 @@
-# syntax = docker/dockerfile:1.7.0
-
+# syntax = docker/dockerfile:1.8.1
 FROM phusion/passenger-customizable:1.0.19 AS base
 
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
