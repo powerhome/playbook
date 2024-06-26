@@ -1,14 +1,10 @@
-<%= content_tag(:div,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: object.id) do %>
+<%= pb_content_tag do %>
         <%= pb_rails("table/table_row", props: {tag:"div"}) do %>
             <% object.column_definitions.each_with_index do |item, index| %>
                 <%= pb_rails("table/table_header", props: { tag:"div", id:item[:accessor], classname:object.th_classname}) do %>
                     <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end", text_align:"end" }) do %>
                         <% if index.zero? && (object.enable_toggle_expansion == "header" || object.enable_toggle_expansion == "all") %>
-                            <button class="gray-icon toggle-all-icon">
+                            <button class="gray-icon toggle-all-icon" onclick="expandAllRows(this)">
                                 <%= pb_rails("icon", props: { icon: "arrows-from-line", cursor: "pointer", fixed_width: true, padding_right:"xs" }) %>
                             </button>
                         <% end %>
@@ -18,3 +14,11 @@
             <% end %>
         <% end %>
 <% end %>
+
+<script type="text/javascript">
+    var expandAllRows = (element) => {
+        element.closest('.pb_table').querySelectorAll('.pb_advanced_table_body > .pb_table_tr [data-advanced-table]').forEach((button) => {
+            button.dispatchEvent(new Event('click'));
+        });
+    };
+</script>

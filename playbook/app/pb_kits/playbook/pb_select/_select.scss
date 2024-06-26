@@ -102,6 +102,9 @@
     pointer-events: none;
   }
   &.inline {
+    svg {
+      right: 6px;
+    }
     @mixin active_arrow_style {
       svg {
         color: $primary !important;
@@ -130,6 +133,7 @@
       box-shadow: none;
       border-color: transparent;
       padding: 4px 8px;
+      padding-right: $space_lg; 
       border-radius: 4px;
       option {
         background-color: $white;
@@ -213,6 +217,9 @@
     }
   }
   &.inline {
+    svg {
+      right: 6px;
+    }
     &:not(:hover) {
       svg {
         display: none;
@@ -233,6 +240,7 @@
       border-color: transparent;
       background: transparent;
       padding: 4px 8px;
+      padding-right: $space_lg; 
       border-radius: 4px;
       option {
         background-color: $white;

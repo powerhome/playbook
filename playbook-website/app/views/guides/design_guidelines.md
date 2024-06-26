@@ -2,10 +2,8 @@
 title: Design Guidelines
 ---
 
-This is the starter of the new area what will be for designers. Right now it's just showing the things it can do.
-
-On the left, the navigation is rendered automatically based on the files that are available.
+Playbook’s Design Guidelines outline best practices for utilizing elements like color, spacing, and typography within our design system. These guidelines help users to make informed decisions to ensure consistency, usability, accessibility and effectiveness in their design work across various digital platforms.
 
 <div>
-  <%= render partial: 'guides/docs_index_list'%>
+  <%= render partial: 'guides/design_docs_index_list'%>
 </div>

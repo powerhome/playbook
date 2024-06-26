@@ -10,6 +10,7 @@ import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import treemap from 'highcharts/modules/treemap'
+import { merge } from 'lodash'
 
 type TreemapChartProps = {
   chartData: {
@@ -21,6 +22,7 @@ type TreemapChartProps = {
   }[];
   className?: string;
   colors: string[];
+  customOptions?: Partial<Highcharts.Options>;
   dark?: boolean;
   drillable: boolean;
   grouped: boolean;
@@ -39,6 +41,7 @@ const TreemapChart = ({
   data = {},
   chartData,
   colors,
+  customOptions = {},
   dark = false,
   drillable = false,
   grouped = false,
@@ -96,20 +99,20 @@ const TreemapChart = ({
 
   useEffect(() => {
     
-    setOptions({ ...staticOptions });
+    setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
   return (
     <HighchartsReact
-      containerProps={{
-        className: classnames(globalProps(props), "pb_treemap_chart"),
-        id: id,
-        ...ariaProps,
-        ...dataProps,
-        ...htmlProps
+        containerProps={{
+          className: classnames(globalProps(props), "pb_treemap_chart"),
+          id: id,
+          ...ariaProps,
+          ...dataProps,
+          ...htmlProps
       }}
-      highcharts={Highcharts}
-      options={options}
+        highcharts={Highcharts}
+        options={options}
     />
   );
 };

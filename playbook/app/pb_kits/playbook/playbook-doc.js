@@ -34,6 +34,7 @@ import * as DateYearStacked from 'pb_date_year_stacked/docs'
 import * as Detail from 'pb_detail/docs'
 import * as Dialog from 'pb_dialog/docs'
 import * as DistributionBarDocs from 'pb_distribution_bar/docs'
+import * as Draggable from 'pb_draggable/docs'
 import * as Dropdown from 'pb_dropdown/docs'
 import * as FileUpload from 'pb_file_upload/docs'
 import * as Filter from 'pb_filter/docs'
@@ -65,6 +66,7 @@ import * as MultipleUsers from 'pb_multiple_users/docs'
 import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
 import * as Nav from 'pb_nav/docs'
 import * as OnlineStatus from 'pb_online_status/docs'
+import * as Overlay from 'pb_overlay/docs'
 import * as Passphrase from 'pb_passphrase/docs'
 import * as PbReactPopover from 'pb_popover/docs'
 import * as Person from 'pb_person/docs'
@@ -137,6 +139,7 @@ WebpackerReact.registerComponents({
   ...Detail,
   ...Dialog,
   ...DistributionBarDocs,
+  ...Draggable,
   ...Dropdown,
   ...FileUpload,
   ...Filter,
@@ -168,6 +171,7 @@ WebpackerReact.registerComponents({
   ...MultipleUsersStacked,
   ...Nav,
   ...OnlineStatus,
+  ...Overlay,
   ...Passphrase,
   ...PbReactPopover,
   ...Person,

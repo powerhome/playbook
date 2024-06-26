@@ -53,13 +53,25 @@ class PagesController < ApplicationController
     @structured_data = extract_changelog_data(@data)
   end
 
-  def changelog
+  def changelog_web
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
     @page_title = "What's New"
+    @page = "changelog_web"
     @show_sidebar = true
-    @front_matter = nil
-    render layout: "docs"
+    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md"
+    render layout: "changelog"
   end
+
+  def changelog_figma
+    @data = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
+    @page_title = "What's New"
+    @page = "changelog_figma"
+    @show_sidebar = true
+    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/FIGMA_CHANGELOG.md"
+    render layout: "changelog"
+  end
+
+  def changelog; end
 
   def kits
     params[:type] ||= "react"

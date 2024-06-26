@@ -163,6 +163,9 @@ if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
     staticOptions.plotOptions.series.events = { legendItemClick: () => false };
   }
 
+  const filteredProps: any = {...props};
+  delete filteredProps.verticalAlign;
+
   const [options, setOptions] = useState({});
 
   useEffect(() => {
@@ -172,7 +175,7 @@ if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
   return (
     <HighchartsReact
         containerProps={{
-          className: classnames(globalProps(props), className),
+          className: classnames(globalProps(filteredProps), className),
           id: id,
           ...ariaProps,
           ...dataProps,

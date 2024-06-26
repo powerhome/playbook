@@ -14,3 +14,12 @@ examples:
   - fixed_confirmation_toast_positions: Click to Show Positions
   - fixed_confirmation_toast_auto_close: Click to Show Auto Close
   - fixed_confirmation_toast_children: Children
+
+  swift:
+  - fixed_confirmation_toast_default_swift: Default
+  - fixed_confirmation_toast_multi_line_swift: Multi Line
+  #- fixed_confirmation_toast_close_swift: Click to Close
+  #- fixed_confirmation_toast_positions_swift: Click to Show Positions
+  - fixed_confirmation_toast_children_swift: Children
+  #- fixed_confirmation_toast_dismiss_with_timer_swift: Timer
+  - fixed_confirmation_toast_props_swift: ""

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, ReactElement } from 'react'
 import classnames from 'classnames'
 import  useCollapsible from './useCollapsible'
 
@@ -9,10 +9,18 @@ import CollapsibleContent from './child_kits/CollapsibleContent'
 import CollapsibleMain from './child_kits/CollapsibleMain'
 import CollapsibleContext from './context'
 import { IconSizes } from "../pb_icon/_icon"
+import CollapsibleIcon from './child_kits/CollapsibleIcon'
 
+type CollapsibleMainProps = {
+  children: React.ReactNode
+}
+
+type CollapsibleContentProps = {
+  children: React.ReactNode
+}
 
 type CollapsibleProps = {
-  children?: React.ReactElement | [] | any,
+  children?: [ReactElement<CollapsibleMainProps>, ReactElement<CollapsibleContentProps>],
   aria?: {[key: string]: string},
   className?: string,
   collapsed?: boolean,
@@ -29,7 +37,7 @@ type CollapsibleProps = {
 const Collapsible = ({
   aria = {},
   className,
-  children = [],
+  children,
   collapsed = true,
   data = {},
   htmlOptions = {},
@@ -47,16 +55,17 @@ const Collapsible = ({
    setIsCollapsed(collapsed)
   },[collapsed])
 
-  const CollapsibleParent = React.Children.toArray(children) as React.ReactElement[]
-
-  if (CollapsibleParent.length !== 2) {
+  if (children.length !== 2) {
     throw new Error('Collapsible requires <CollapsibleMain> and <CollapsibleContent> to function properly.')
   }
 
-  const Main = CollapsibleParent[0]
-  const Content = CollapsibleParent[1]
+  const FirstChild = children[0]
 
-  const { children: mainChildren, ...mainProps } = Main.props
+  const Main = FirstChild.type === CollapsibleMain ? FirstChild : null
+  const Content = children[1]
+
+
+  const { children: mainChildren = null, ...mainProps } = Main ? Main.props : {}
   const { children: contentChildren, ...contentProps } = Content.props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -75,13 +84,16 @@ const Collapsible = ({
           className={classes}
           id={id}
       >
-        <CollapsibleMain {...mainProps}>
-          {mainChildren}
-        </CollapsibleMain>
-
-        <CollapsibleContent {...contentProps}>
-          {contentChildren}
-        </CollapsibleContent>
+        {Main ? (
+          <CollapsibleMain {...mainProps}>
+            {mainChildren}
+          </CollapsibleMain>
+        ) : (
+          FirstChild
+        )}
+          <CollapsibleContent {...contentProps}>
+            {contentChildren}
+          </CollapsibleContent>
       </div>
     </CollapsibleContext.Provider>
   )
@@ -89,5 +101,6 @@ const Collapsible = ({
 
 Collapsible.Main = CollapsibleMain
 Collapsible.Content = CollapsibleContent
+Collapsible.Icon = CollapsibleIcon
 
 export default Collapsible

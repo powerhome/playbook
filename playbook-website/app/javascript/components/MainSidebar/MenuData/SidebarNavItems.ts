@@ -3,7 +3,7 @@ export const SideBarNavItems = [
         name: "What's New",
         key: "top-nav-item-1",
         link: "/changelog",
-        children: false,
+        children: true,
         leftIcon: "sparkles",
     },
     {
@@ -28,12 +28,20 @@ export const SideBarNavItems = [
         leftIcon:"shapes"
     },
     {
-        name: "UI Samples",
+        name: "Design Guidelines",
         key: "top-nav-item-5",
+        link: "/guides/design_guidelines",
+        children: true,
+        leftIcon:"palette"
+    },
+    {
+        name: "UI Samples",
+        key: "top-nav-item-6",
         link: "/samples",
         children: true,
         leftIcon:"vial"
     },
+
     // {
     //     name: "Playground",
     //     key: "top-nav-item-6",

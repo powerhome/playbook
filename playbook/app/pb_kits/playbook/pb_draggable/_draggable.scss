@@ -1,0 +1,11 @@
+@import "../tokens/colors";
+@import "../tokens/opacity";
+
+.pb_draggable_container {
+  .is_dragging {
+    opacity: $opacity_4;
+  }
+  .pb_draggable_item:hover {
+    cursor: grab;
+  }
+}

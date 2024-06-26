@@ -8,6 +8,7 @@ import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
+import { merge } from 'lodash'
 
 type LineGraphProps = {
   align?: "left" | "right" | "center";
@@ -21,6 +22,7 @@ type LineGraphProps = {
     name: string;
     data: number[];
   }[];
+  customOptions?: Partial<Highcharts.Options>;
   gradient?: boolean;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id: string;
@@ -45,6 +47,7 @@ const LineGraph = ({
   data = {},
   align = "center",
   className = "pb_bar_graph",
+  customOptions = {},
   dark = false,
   gradient = false,
   type = "line",
@@ -130,16 +133,19 @@ const LineGraph = ({
     staticOptions.plotOptions.series.events = { legendItemClick: () => false };
   }
 
+  const filteredProps: any = {...props};
+ delete filteredProps.verticalAlign;
+
   const [options, setOptions] = useState({});
 
   useEffect(() => {
-    setOptions({ ...staticOptions });
+    setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
   return (
     <HighchartsReact
         containerProps={{
-        className: classnames(globalProps(props), className),
+        className: classnames(globalProps(filteredProps), className),
         id: id,
         ...ariaProps,
         ...dataProps,

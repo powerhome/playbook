@@ -11,7 +11,6 @@
   <% end %>
 
   <label class="<%= object.label_class %>" for="<%= object.input_id_present %>">
-    <div class="buffer">
       <% if object.variant == "display_input" %>
         <%= pb_rails("flex", props: { vertical: "center" }) do %>
           <%= pb_rails("flex", props: {
@@ -46,7 +45,6 @@
           </div>
         <% end %>
       <% end %>
-    </div>
   </label>
 
   <% if object.variant == "display_input" %>

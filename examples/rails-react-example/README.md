@@ -4,92 +4,43 @@ Rails gives us many options when it comes to configuring the frontend of our app
 
 ## Getting Started
 
-First create a new rails app by using the following command:
+Now we can get started installing and running the application. Carefully review each step below then proceed to the next section.
 
-```
-rails new my-app
+### Dependencies
 
-```
+1. [Install asdf version manager](https://asdf-vm.com/guide/getting-started.html) (Bash & Git instructions)
+1. Run `asdf install` to install dependencies
+1. Confirm you are running `ruby` version `3.3.0` by running `ruby -v`
+1. Confirm you are running `bundler` version `2.3.14` by running `bundle -v`
+1. Confirm you are running `yarn` version `1.22.15` by running `yarn -v`
+1. Install gem dependencies `bundle`
+1. Install yarn dependencies `yarn`
 
-## Add React-Rails  to your Gemfile:
-```
-gem 'react-rails'
-```
+### Run the Application
 
-## Run the Installers: 
+1. `yarn watch` will take care of any React component changes
+1. `bin/rails s` will start the Rails application
+1. Navigate to [localhost:3000](http://localhost:3000)
 
-```
-$ bundle install
-$ rails webpacker:install         
-$ rails webpacker:install:react   
-$ rails generate react:install
-```
+## Creating React UI Components
 
-If  *rails webpacker:install*  throws an error, you may have to add  *gem ‘webpacker’* to your Gemfile and run *bundle install*.
+There are multiple ways to create React UI components in the app. You can choose to make a full React application by continuing to develop from `app/javascript/components/App.tsx` or you could choose to only make individual React components for certain portions of the page.
 
-You App should now include:
+### React Components Location:
 
-* *app/javascript/components/* directory for your React components
-*  [ReactRailsUJS](https://github.com/reactjs/react-rails#ujs)  setup in *app/javascript/packs/application.js*
-* *app/javascript/packs/server_rendering.js* for  server-side rendering [server-side rendering](https://github.com/reactjs/react-rails#server-side-rendering)
+All React components are transpiled by Webpack via the Rails [Webpacker](https://github.com/rails/webpacker) gem which is already setup for you.
 
-## Create Your First Component:
-Within the javascript/components folder, create a new file called HelloWorld.jsx.
+With this in place, you should know that any new components you create will need to live inside of `app/javascript/components` and any *packs* you may need to create will need to live inside of `app/javascript/packs`.
 
-Write React code within it. To display this file in the  Rails view, first generate a rails controller and View. You can use the following command:
+Follow this link to learn more about [Webpacker](https://github.com/rails/webpacker).
 
-```
-bin/rails generate controller Pages index
-```
+#### Working with WebpackerReact (webpacker-react)
 
-In the newly created views/pages/index.html.erb file, paste the following to see your react component:
+This library is a simple container for use with Rails which provides a view helper that can allow you to easily add React components to any Rails ERB template (`.html.erb`). If you view `app/views/pages/index.html.erb`, you will see that we were able to render the `app/javascript/components/App.tsx` React component into the `pages#index` view with a simple ERB tag like so:
 
-```
-<%= react_component("HelloWorld") %>
+```erb
+<%= react_component("App") %>
 ```
 
-Make sure the route in your routes.rb file is correct:
-
-```
-  get 'pages', to: 'pages#index'
-
-```
-Also add the following to the head of your views/layouts/application.html.erb file. 
-
-```
-<%= javascript_pack_tag 'application' %>
-
-```
-
-Start your servers using ``` bin/rails s``` and navigate to http://localhost:3000/pages to see your react component rendered on the screen!
-
-## Add Playbook to your App
-
-To add Playbook to yuor newly created app, you must install the Playbook NPM package.
-
-```
-yarn add "playbook-ui"
-```
-After installation is complete, import Playbook styles into your top level app component. For the purposes of this example, we will import into HelloWorld.jsx
-
-```
-import 'playbook-ui/dist/playbook.css';
-```
-
-### Install Fontawesome:
-
-Our Icon kits make use of fontawesome. To install fontawesome free, follow the instructions on the [fontawesome website](https://fontawesome.com/v6/docs/web/use-with/react/). Commands to run:
-
-```
-yarn add @fortawesome/fontawesome-free
-```
-
-Include fontawesome CSS import to your top level app component (in this example, the HelloWorld.jsx file)
-
-```
-import '@fortawesome/fontawesome-free/css/all.css';
-```
-
-Free Users: currently only Free Regular is supported in our icon component structure. To gain access to Solid, etc Icons, you can use the Pro version of fontawesome. To set it up follow the instructions [here](https://fontawesome.com/v6/docs/web/setup/packages#set-up-npm-token-for-a-specific-project).
-
+Follow this link to learn more about [`webpacker-react`](https://github.com/renchap/webpacker-react).
 

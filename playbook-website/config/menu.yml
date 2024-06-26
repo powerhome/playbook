@@ -352,6 +352,13 @@ kits:
         platforms: *web
         description: 
         status: "stable"
+      - name: "overlay"
+        platforms: *web
+        status: "stable"
+      - name: "draggable"
+        platforms: *react_only
+        description:
+        status: "beta"
   - name: message_text_patterns
     description: 
     components:
