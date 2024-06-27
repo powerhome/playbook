@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
+import aliasesJson from './icon_aliases.json'
 
 export type IconSizes = "lg"
 | "xs"
@@ -40,6 +41,19 @@ type IconProps = {
   spin?: boolean,
 } & GlobalProps
 
+type AliasType = string | string[];
+
+interface Aliases {
+  [key: string]: AliasType;
+}
+
+interface AliasesJson {
+  aliases: Aliases;
+}
+
+const aliases: AliasesJson = aliasesJson;
+
+
 const flipMap = {
   horizontal: 'fa-flip-horizontal',
   vertical: 'fa-flip-vertical',
@@ -51,6 +65,22 @@ declare global {
   // eslint-disable-next-line no-var
   var PB_ICONS: {[key: string]: React.FunctionComponent<any>}
 }
+
+// Resolve alias function
+const resolveAlias = (icon: string): string => {
+  const alias = aliases.aliases[icon];
+
+  if (alias) {
+    if (Array.isArray(alias)) {
+      return alias[0];
+    } else {
+      return alias;
+    }
+  }
+
+  return icon;
+};
+
 
 const Icon = (props: IconProps) => {
   const {
@@ -74,7 +104,8 @@ const Icon = (props: IconProps) => {
     spin = false,
   } = props
 
-  let iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
+  const resolvedIcon = resolveAlias(icon as string)
+  let iconElement: ReactSVGElement | null = typeof(resolvedIcon) === "object" ? resolvedIcon : null
 
   const faClasses = {
     'fa-border': border,
@@ -90,12 +121,12 @@ const Icon = (props: IconProps) => {
 
   if (!customIcon && !iconElement) {
     const PowerIcon: React.FunctionComponent<any> | undefined =
-      window.PB_ICONS ? window.PB_ICONS[icon as string] : null
+      window.PB_ICONS ? window.PB_ICONS[resolvedIcon as string] : null
 
     if (PowerIcon) {
       iconElement = <PowerIcon /> as ReactSVGElement
     } else {
-      faClasses[`fa-${icon}`] = icon as string
+      faClasses[`fa-${resolvedIcon}`] = resolvedIcon as string
     }
   }
 
@@ -115,7 +146,7 @@ const Icon = (props: IconProps) => {
     className
   )
 
-  aria.label ? null : aria.label = `${icon} icon`
+  aria.label ? null : aria.label = `${resolvedIcon} icon`
   const ariaProps: {[key: string]: any} = buildAriaProps(aria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -137,7 +168,7 @@ const Icon = (props: IconProps) => {
           }
         </>
       )
-    else if (isValidEmoji(icon as string))
+    else if (isValidEmoji(resolvedIcon as string))
       return (
         <>
           <span
@@ -146,7 +177,7 @@ const Icon = (props: IconProps) => {
               className={classesEmoji}
               id={id}
           >
-            {icon}
+            {resolvedIcon}
           </span>
         </>
       )
