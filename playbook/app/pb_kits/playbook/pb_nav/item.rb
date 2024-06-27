@@ -12,6 +12,7 @@ module Playbook
                          default: "regular"
       prop :highlighted_border, type: Playbook::Props::Boolean, default: true
       prop :collapsible, type: Playbook::Props::Boolean, default: false
+      prop :collapsed, type: Playbook::Props::Boolean, default: true
       prop :link
       prop :text
       prop :collapsible_trail, type: Playbook::Props::Boolean, default: false

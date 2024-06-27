@@ -9,6 +9,7 @@ const CollapsibleNav = (props) => {
     >
       <NavItem
           active
+          collapsed={false}
           collapsible 
           iconLeft="city" 
           link="#" 
