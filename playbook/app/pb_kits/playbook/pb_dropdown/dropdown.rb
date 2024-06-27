@@ -7,6 +7,7 @@ module Playbook
                      default: []
       prop :label, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String
+      prop :error, type: Playbook::Props::String
 
       def data
         Hash(prop(:data)).merge(pb_dropdown: true)
@@ -14,6 +15,12 @@ module Playbook
 
       def classname
         generate_classname("pb_dropdown")
+      end
+
+    private
+
+      def error_class
+        error.present? ? " error" : ""
       end
     end
   end
