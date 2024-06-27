@@ -75,6 +75,41 @@ const rotateMap = {
   }
 }
 
+const sizeMap = {
+  fa: {
+    "lg": "fa-lg",
+    "xs": "fa-xs",
+    "sm": "fa-sm",
+    "1x": "fa-1x",
+    "2x": "fa-2x",
+    "3x": "fa-3x",
+    "4x": "fa-4x",
+    "5x": "fa-5x",
+    "6x": "fa-6x",
+    "7x": "fa-7x",
+    "8x": "fa-8x",
+    "9x": "fa-9x",
+    "10x": "fa-10x",
+    "": ""
+  },
+  svg: {
+    "lg": "svg_lg",
+    "xs": "svg_xs",
+    "sm": "svg_sm",
+    "1x": "svg_1x",
+    "2x": "svg_2x",
+    "3x": "svg_3x",
+    "4x": "svg_4x",
+    "5x": "svg_5x",
+    "6x": "svg_6x",
+    "7x": "svg_7x",
+    "8x": "svg_8x",
+    "9x": "svg_9x",
+    "10x": "svg_10x",
+    "": ""
+  }
+}
+
 declare global {
   // eslint-disable-next-line no-var
   var PB_ICONS: {[key: string]: React.FunctionComponent<any>}
@@ -143,6 +178,12 @@ const Icon = (props: IconProps) => {
     pulse ? pulseMap[isFA ? 'fa' : 'svg'] : null,
     rotation ? rotateMap[isFA ? 'fa' : 'svg'][rotation] : null,
     spin ? spinMap[isFA ? 'fa' : 'svg'] : null,
+    size ? sizeMap[isFA ? 'fa' : 'svg'][size] : null,
+    border ? isFA ? 'fa-border' : 'svg_border' : null,
+    fixedWidth ? isFA ? 'fa-fw' : 'svg_fw' : null,
+    inverse ? isFA ? 'fa-inverse' : 'svg_inverse' : null,
+    listItem ? isFA ? 'fa-li' : 'svg_li' : null,
+    pull ? isFA ? `fa-pull-${pull}` : `pull_${pull}` : null,
   )
   classes += ` ${transformClasses}`
 

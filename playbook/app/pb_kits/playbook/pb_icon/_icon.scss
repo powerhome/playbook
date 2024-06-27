@@ -30,7 +30,8 @@ $flip-list: (
 };
 
 svg {
-  &.pb_icon_kit {
+  &.pb_icon_kit,
+  &.pb_custom_icon{
     @each $r in $rotate-list {
       &.rotate_#{$r} {
         transform: rotate(#{$r}deg);

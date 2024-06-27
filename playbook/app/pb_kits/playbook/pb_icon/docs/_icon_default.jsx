@@ -7,8 +7,7 @@ const IconDefault = (props) => {
     <div>
       <Icon
           fixedWidth
-          icon="nitro-n"
-          spin='true'
+          icon="user"
           {...props}
       />
     </div>
