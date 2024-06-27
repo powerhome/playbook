@@ -7,6 +7,7 @@ examples:
   - dropdown_with_custom_display_rails: Custom Display
   - dropdown_with_custom_trigger_rails: Custom Trigger
   - dropdown_with_custom_padding: Custom Option Padding
+  - dropdown_error: Dropdown with Error
 
   react:
   - dropdown_default: Default
@@ -16,6 +17,7 @@ examples:
   - dropdown_with_custom_display: Custom Display
   - dropdown_with_custom_trigger: Custom Trigger
   - dropdown_with_custom_padding: Custom Option Padding
+  - dropdown_error: Dropdown with Error
   # - dropdown_with_autocomplete: Autocomplete
   # - dropdown_with_autocomplete_and_custom_display: Autocomplete with Custom Display
   # - dropdown_with_external_control: useDropdown Hook

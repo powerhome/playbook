@@ -1,1 +1,3 @@
 The `collapsible` prop allows users to create a nested, collapsible nav. Pass `collapsible` to any NavItem and pass that navItem any number of NavItems as children to create a collapsible nav.
+
+The optional `collapsed` prop can also be used to set the default state for the collapsed nav on first render of the page. `collapsed` takes a boolean value that is set to true (meaning nav is collapsed) by default. Set it to false as shown here to have the nav open on first render.

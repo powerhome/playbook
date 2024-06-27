@@ -44,6 +44,7 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       expect(subject.new(status: "error").icon_value).to eq "exclamation-triangle"
       expect(subject.new(status: "neutral").icon_value).to eq "info-circle"
       expect(subject.new(status: "tip").icon_value).to eq "info-circle"
+      expect(subject.new(status: "tip", icon: "arrow-down").icon_value).to eq "arrow-down"
     end
   end
 
@@ -68,6 +69,7 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       expect(subject.new(text: text, status: "error", multi_line: true).classname).to eq "pb_fixed_confirmation_toast_kit_error_multi_line"
       expect(subject.new(text: text, status: "neutral", vertical: "top").classname).to eq "pb_fixed_confirmation_toast_kit_neutral"
       expect(subject.new(text: text, status: "neutral", vertical: "top", horizontal: "center").classname).to eq "pb_fixed_confirmation_toast_kit_neutral positioned_toast top center"
+      expect(subject.new(text: text, status: "tip", icon: "arrow-down").classname).to eq "pb_fixed_confirmation_toast_kit_tip custom_icon"
     end
   end
 end
