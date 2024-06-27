@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/HashLikeCase
-
 require "open-uri"
 
 module Playbook
@@ -111,11 +109,13 @@ module Playbook
       end
 
       def border_class
-        border ? "fa-border" : nil
+        prefix = is_svg? ? "svg_border" : "fa-border"
+        border ? prefix : nil
       end
 
       def fixed_width_class
-        fixed_width ? "fa-fw" : nil
+        prefix = is_svg? ? "svg_fw" : "fa-fw"
+        fixed_width ? prefix : nil
       end
 
       def icon_class
@@ -123,26 +123,30 @@ module Playbook
       end
 
       def inverse_class
-        inverse ? "fa-inverse" : nil
+        class_name = is_svg? ? "svg_inverse" : "fa-inverse"
+        inverse ? class_name : nil
       end
 
       def list_item_class
-        list_item ? "fa-li" : nil
+        prefix = is_svg? ? "svg_" : "fa-"
+        list_item ? "#{prefix}li" : nil
       end
 
       def flip_class
+        prefix = is_svg? ? "flip_" : "fa-flip-"
         case flip
         when "horizontal"
-          "fa-flip-horizontal"
+          "#{prefix}horizontal"
         when "vertical"
-          "fa-flip-vertical"
+          "#{prefix}vertical"
         when "both"
-          "fa-flip-horizontal fa-flip-vertical"
+          "#{prefix}horizontal #{prefix}vertical"
         end
       end
 
       def pull_class
-        pull ? "fa-pull-#{pull}" : nil
+        classname = is_svg? ? "pull_#{pull}" : "fa-pull-#{pull}"
+        pull ? classname : nil
       end
 
       def pulse_class
@@ -183,4 +187,3 @@ module Playbook
     end
   end
 end
-# rubocop:enable Style/HashLikeCase
