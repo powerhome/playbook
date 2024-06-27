@@ -14,9 +14,44 @@ svg.pb_custom_icon {
 svg {
   &.pb_icon_kit,
   &.pb_custom_icon {
-    // Rotate Classes
-    &.rotate_90 {
-      transform: rotate(90deg);
+    &.svg_xs {
+      font-size: 0.75em;
+    }
+    &.svg_sm {
+      font-size: 0.875em;
+    }
+    &.svg_lg {
+      font-size: 1.25em;
+    }
+    &.svg_1x {
+      font-size: 1em;
+    }
+    &.svg_2x {
+      font-size: 2em;
+    }
+    &.svg_3x {
+      font-size: 3em;
+    }
+    &.svg_4x {
+      font-size: 4em;
+    }
+    &.svg_5x {
+      font-size: 5em;
+    }
+    &.svg_6x {
+      font-size: 6em;
+    }
+    &.svg_7x {
+      font-size: 7em;
+    }
+    &.svg_8x {
+      font-size: 8em;
+    }
+    &.svg_9x {
+      font-size: 9em;
+    }
+    &.svg_10x {
+      font-size: 10em;
     }
   }
 }
