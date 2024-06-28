@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# require "psych"
 require "yaml"
 
 # rubocop:disable Style/StringConcatenation
@@ -55,15 +54,12 @@ class KitGenerator < Rails::Generators::NamedBase
       nil
     else
 
-      # If category given, validate against existing categories in MENU yaml =========
+      # If category prop given, validate against existing categories in Playbook menu =========
       if @kit_category.nil? || @kit_category.empty?
         say_status  "No category given.",
                     "Proceeding to generate files.",
                     :yellow
       else
-        # file_path = "../playbook-website/config/menu.yml"
-        # yaml_data = File.read(file_path)
-        # parsed_data = Psych.safe_load(yaml_data, aliases: true)
         file_path = "../playbook-website/config/menu.yml"
         yaml_data = YAML.load_file(file_path, aliases: true)
         existing_categories = yaml_data["kits"].map { |kit| kit["category"] } if yaml_data["kits"].is_a?(Array)
@@ -72,7 +68,6 @@ class KitGenerator < Rails::Generators::NamedBase
                       "Please choose another category or manually sort without using the category flag.",
                       :red
           exit 1
-        # end
         else
           say_status  "#{@kit_category_capitalize} matches an existing category.",
                       "Proceeding to generate files.",
@@ -145,7 +140,7 @@ class KitGenerator < Rails::Generators::NamedBase
 
       `rubocop --safe-auto-correct #{full_kit_directory}`
 
-      # Add kit with category to Playbook menu =============
+      # Add kit with category given to Playbook menu (sort to category section) =============
       if !@kit_category.nil? && !@kit_category.empty?
         file_path = "../playbook-website/config/menu.yml"
         yaml_data = YAML.load_file(file_path, aliases: true)
@@ -155,11 +150,6 @@ class KitGenerator < Rails::Generators::NamedBase
           new_kit = { "name" => @kit_name_underscore, "platforms" => platforms }
           kit["components"] << new_kit
           break
-
-          # if kit["category"] == @kit_category
-          #   new_kit = { "name" => @kit_name_underscore, "platforms" => platforms }
-          #   kit["components"] << new_kit
-          # end
         end
 
         File.open(file_path, "w") do |f|
@@ -170,12 +160,12 @@ class KitGenerator < Rails::Generators::NamedBase
                     "#{@kit_name_capitalize} kit added to Playbook menu under #{@kit_category_capitalize}.",
                     :green
       else
-        # Add kit to Playbook menu ==========================
+        # Add kit without category given to Playbook menu (append to end) ====================
         open("../playbook-website/config/menu.yml", "a") do |f|
-          f.puts "  - category: #{@kit_name_underscore}"
-          f.puts "    components:"
-          f.puts "      - name: #{@kit_name_underscore}"
-          f.puts "        platforms: *#{platforms}"
+          f.puts "- category: #{@kit_name_underscore}"
+          f.puts "  components:"
+          f.puts "    - name: #{@kit_name_underscore}"
+          f.puts "      platforms: #{platforms}"
         end
 
         say_status  "complete",
