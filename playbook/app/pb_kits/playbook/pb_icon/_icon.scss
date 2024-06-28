@@ -41,6 +41,36 @@ svg {
         transform: scale($v);
       }
     }
+    &.svg_inverse {
+      color: #fff;
+    }
+    &.svg_border {
+    	border-color: #eee;
+    	border-radius: .1em;
+    	border-style: solid;
+    	border-width: .08em;
+    	padding: .2em .25em .15em;
+    }
+    &.svg_fw {
+    	text-align: center;
+    	width: 1.25em
+    }
+    &.svg_li {
+    	left: calc(2em * -1);
+    	position: absolute;
+    	text-align: center;
+    	width: 2em;
+    	line-height: inherit
+    }
+    &.pull_left {
+    	float: left;
+    	margin-right: .3em;
+    }
+
+    &.pull_right {
+    	float: right;
+    	margin-left: .3em;
+    }
     &.pulse {
       animation-name: pb_icon_spin;
       animation-direction: normal;
