@@ -34,6 +34,16 @@ svg {
     &.flip_both {
       transform: scale(-1, -1);
     }
+    &.svg_fw {
+      text-align: center;
+      width: 1.25em;
+    }
+    &.pulse {
+      animation: pulse_animation 1s steps(8) infinite normal;
+    }
+    &.spin {
+      animation: spin_animation 2s linear infinite normal;
+    }
     &.svg_sm {
       font-size: 0.875em;
     }
@@ -70,5 +80,28 @@ svg {
     &.svg_10x {
       font-size: 10em;
     }
+  }
+}
+
+// Inline animations
+@keyframes pulse_animation {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin_animation {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
