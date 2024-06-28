@@ -25,15 +25,6 @@ svg {
     }  &.svg_xs {
       font-size: 0.75em;
     }
-    &.flip_horizontal {
-      transform: scale(-1, 1);
-    }
-    &.flip_vertical {
-      transform: scale(1, -1);
-    }
-    &.flip_both {
-      transform: scale(-1, -1);
-    }
     &.svg_inverse {
       color: var(--svg_inverse, #fff);
     }
