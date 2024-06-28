@@ -1,4 +1,3 @@
-// Rails custom icon styles
 svg.pb_custom_icon {
   width: 1em;
   fill: currentColor;
@@ -6,70 +5,108 @@ svg.pb_custom_icon {
     fill: currentColor;
   }
 }
+
 .pb_icon_kit_emoji {
   font-family: monospace;
 }
+
+$rotate-list: (90, 180, 270);
+$flip-list: (
+"horizontal": (-1, 1),
+"vertical": (1, -1),
+"both": (-1, -1)
+);
+
+@keyframes pb_icon_spin {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+};
+
 svg {
   &.pb_icon_kit,
-  &.pb_custom_icon {
+  &.pb_custom_icon{
+    @each $r in $rotate-list {
+      &.rotate_#{$r} {
+        transform: rotate(#{$r}deg);
+      }
+    }
+    @each $f, $v in $flip-list {
+      &.flip_#{$f} {
+        transform: scale($v);
+      }
+    }
+    &.pulse {
+      animation-name: pb_icon_spin;
+      animation-direction: normal;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: steps(8);
+    }
+    &.spin {
+      animation-name: pb_icon_spin;
+      animation-delay: 0s;
+      animation-direction: normal;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
     &.svg_xs {
-      &.rotate_90 {
-        transform: rotate(90deg);
-      }
-      &.rotate_180 {
-        transform: rotate(180deg);
-      }
-      &.rotate_270 {
-        transform: rotate(270deg);
-      }
-      &.svg_xs {
-        font-size: 0.75em;
-      }
-      &.flip_horizontal {
-        transform: scale(-1, 1);
-      }
-      &.flip_vertical {
-        transform: scale(1, -1);
-      }
-      &.flip_both {
-        transform: scale(-1, -1);
-      }
-      &.svg_sm {
-        font-size: 0.875em;
-      }
-      &.svg_lg {
-        font-size: 1.25em;
-      }
-      &.svg_1x {
-        font-size: 1em;
-      }
-      &.svg_2x {
-        font-size: 2em;
-      }
-      &.svg_3x {
-        font-size: 3em;
-      }
-      &.svg_4x {
-        font-size: 4em;
-      }
-      &.svg_5x {
-        font-size: 5em;
-      }
-      &.svg_6x {
-        font-size: 6em;
-      }
-      &.svg_7x {
-        font-size: 7em;
-      }
-      &.svg_8x {
-        font-size: 8em;
-      }
-      &.svg_9x {
-        font-size: 9em;
-      }
-      &.svg_10x {
-        font-size: 10em;
-      }
+      font-size: 0.75em
+    }
+
+    &.svg_sm {
+      font-size: 0.875em
+    }
+
+    &.svg_lg {
+      font-size: 1.25em
+    }
+
+    &.svg_1x {
+      font-size: 1em
+    }
+
+    &.svg_2x {
+      font-size: 2em
+    }
+
+    &.svg_3x {
+      font-size: 3em
+    }
+
+    &.svg_4x {
+      font-size: 4em
+    }
+
+    &.svg_5x {
+      font-size: 5em
+    }
+
+    &.svg_6x {
+      font-size: 6em
+    }
+
+    &.svg_7x {
+      font-size: 7em
+    }
+
+    &.svg_8x {
+      font-size: 8em
+    }
+
+    &.svg_9x {
+      font-size: 9em
+    }
+
+    &.svg_10x {
+      font-size: 10em
     }
   }
 }
