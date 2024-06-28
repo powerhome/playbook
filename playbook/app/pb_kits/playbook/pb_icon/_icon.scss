@@ -14,8 +14,25 @@ svg.pb_custom_icon {
 svg {
   &.pb_icon_kit,
   &.pb_custom_icon {
-    &.svg_xs {
+    &.rotate_90 {
+      transform: rotate(90deg);
+    }
+    &.rotate_180 {
+      transform: rotate(180deg);
+    }
+    &.rotate_270 {
+      transform: rotate(270deg);
+    }  &.svg_xs {
       font-size: 0.75em;
+    }
+    &.flip_horizontal {
+      transform: scale(-1, 1);
+    }
+    &.flip_vertical {
+      transform: scale(1, -1);
+    }
+    &.flip_both {
+      transform: scale(-1, -1);
     }
     &.svg_sm {
       font-size: 0.875em;
