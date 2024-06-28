@@ -6,5 +6,5 @@
   <body class="fullscreen <%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= yield %>
   </body>
-  <%= javascript_packs_with_chunks_tag 'application', 'site' %>
+  <%= vite_javascript_tag 'application', 'site' %>
 </html>

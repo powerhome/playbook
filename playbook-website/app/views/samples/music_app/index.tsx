@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 /* @flow */
 
 import React from 'react'
@@ -6,7 +7,7 @@ import { Background, Body, Caption, Card, Flex, FlexItem, Icon, Image, Layout, P
 const yourLibraryLinks = ['Made For You', 'Recently Played', 'Liked Songs', 'Albums', 'Artists', 'Podcasts']
 const playlists = ['podcasts', 'THENX', 'Adrenaline Workout', 'New Music Friday', 'RetroWave / Outrun', 'Tiki Torch']
 
-const randomImageUrl = (id) => `https://picsum.photos/id/${id}/175`
+const randomImageUrl = (id: number) => `https://picsum.photos/id/${id}/175`
 const playlistCardSubtext = 'A daily show for anyone who works a regular job and wants to start an income-earning pr...'
 const playlistCardTitles = ['Side Hustle School', 'The Devslopes Podcast with Mark Wahlbeck', 'Borrasca',
   'Philosophize This!', 'How I Built This With Guy Raz']
@@ -34,7 +35,7 @@ const BottomRightIcon = ({ icon }: any) =>  (
 const MusicApp = () => {
   window.addEventListener('DOMContentLoaded', () => {
     const fullHeightElems = document.querySelectorAll('.fullHeight')
-    fullHeightElems.forEach((elem) => elem.style.height = '100%')
+    fullHeightElems.forEach((elem: HTMLDivElement) => elem.style.height = '100%')
   })
 
   return (

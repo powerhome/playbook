@@ -1,9 +1,9 @@
-@import "playbook-ui/dist/tokens/colors";
-@import "playbook-ui/dist/tokens/typography";
-@import "playbook-ui/dist/tokens/line_height";
-@import "playbook-ui/dist/tokens/screen_sizes";
-@import "playbook-ui/dist/tokens/spacing";
-@import "playbook-ui/dist/tokens/border_radius";
+@import "playbook-tokens/colors";
+@import "playbook-tokens/typography";
+@import "playbook-tokens/line_height";
+@import "playbook-tokens/screen_sizes";
+@import "playbook-tokens/spacing";
+@import "playbook-tokens/border_radius";
 
 .sandbox-layout {
   padding: $space_md;

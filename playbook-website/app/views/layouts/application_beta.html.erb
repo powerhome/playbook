@@ -19,8 +19,12 @@
       <%= react_component("Website") %>
     <% end %>
   </body>
-  <%= javascript_pack_tag('app') %>
-  <%= javascript_packs_with_chunks_tag(*@application_js) %>
+  <%= vite_javascript_tag('app') %>
+
+  <%# TODO: Replace with helper method %>
+  <%= vite_javascript_tag(*@application_js) %>
+  <%# TODO: Replace with helper method %>
+
   <%= yield :pb_js if @type != 'react' %>
   <%= render 'layouts/ga'%>
 </html>

@@ -3,16 +3,7 @@
   <head>
     <%= render 'layouts/head'%>
     <%= vite_client_tag %>
-    <%= vite_javascript_tag 'application' %>
-    <!--
-      If using a TypeScript entrypoint file:
-        vite_typescript_tag 'application'
-
-      If using a .jsx or .tsx entrypoint, add the extension:
-        vite_javascript_tag 'application.jsx'
-
-      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
-    -->
+    <%= vite_javascript_tag(*@application_js) %>
 
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
@@ -38,7 +29,7 @@
       <% end %>
     <%end%>
   </body>
-  <%= javascript_packs_with_chunks_tag(*@application_js) %>
+
   <%= yield :pb_js if @type != 'react' %>
   <%= render 'layouts/ga'%>
 </html>
