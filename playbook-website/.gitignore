@@ -23,10 +23,15 @@ public/assets
 # Ignore master key for decrypting credentials and more.
 config/master.key
 
-public/packs
-public/packs-test
 node_modules
 yarn-error.log
 yarn-debug.log*
 .yarn-integrity
 .npmrc
+
+# Vite Ruby
+/public/vite*
+# Vite uses dotenv and suggests to ignore local-only env files. See
+# https://vitejs.dev/guide/env-and-mode.html#env-files
+*.local
+

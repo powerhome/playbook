@@ -1,0 +1,23 @@
+{
+  "all": {
+    "sourceCodeDir": "app/javascript",
+    "watchAdditionalPaths": [],
+    "additionalEntrypoints": [
+      "app/javascript/components/**/*.{ts,js,tsx,jsx}",
+      "app/javascript/images/*svg",
+      "app/javascript/scripts/*.{ts,js}",
+      "app/javascript/site_styles/**/*.{scss,css}",
+      "app/javascript/utilities/*.{ts,js}"
+    ]
+  },
+  "development": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-dev",
+    "port": 3036
+  },
+  "test": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-test",
+    "port": 3037
+  }
+}
