@@ -1,37 +1,37 @@
 <div class="pb_dialog_wrapper_rails <%= object.full_height_style %>" data-overlay-click= <%= object.overlay_close %> >
-  <%= pb_content_tag(:dialog) do %>
-    <% if object.status === "" && object.title %>
-      <%= pb_rails("dialog/dialog_header", props: { title: object.title, id: object.id }) %>
-    <% end %>
-    <% if object.status === "" && object.text %>
-      <%= pb_rails("dialog/dialog_body", props: { text: object.text }) %>
-    <% end %>
-    <% if object.status != "" %>
-      <%= pb_rails("dialog/dialog_body", props: { classname: "dialog_status_text_align" ,padding: "md" }) do %>
-        <%= pb_rails("flex", props: { align: "center", orientation: "column" }) do %>
-          <%= pb_rails("icon_circle", props: {
-            icon: object.status_alerts[0],
-            variant: object.status_alerts[1],
-            size: "lg"
-          }) %>
-        <%= pb_rails("title", props: { text: object.title, tag: "h1", size: 3, margin_top: "sm" }) %>
-        <%= pb_rails("body", props: { text: object.text, margin_top: "sm" }) %>
-      <% end %>
-    <% end %>
-  <% end %>
-  <% if object.cancel_button && object.confirm_button %>
-    <%= pb_rails("dialog/dialog_footer", props: {
-      cancel_button: object.cancel_button,
-      confirm_button: object.confirm_button,
-      id: object.id
-    }) %>
-<% end %>
+    <%= pb_content_tag(:dialog) do %>
+            <% if object.status === "" && object.title %>
+                <%= pb_rails("dialog/dialog_header", props: { title: object.title, id: object.id }) %>
+            <% end %>
+            <% if object.status === "" && object.text %>
+                <%= pb_rails("dialog/dialog_body", props: { text: object.text }) %>
+            <% end %>
+            <% if object.status != "" %>
+                <%= pb_rails("dialog/dialog_body", props: { classname: "dialog_status_text_align" ,padding: "md" }) do %>
+                    <%= pb_rails("flex", props: { align: "center", orientation: "column" }) do %>
+                        <%= pb_rails("icon_circle", props: {
+                                icon: object.status_alerts[0],
+                                variant: object.status_alerts[1],
+                                size: "lg"
+                            }) %>
+                        <%= pb_rails("title", props: { text: object.title, tag: "h1", size: 3, margin_top: "sm" }) %>
+                        <%= pb_rails("body", props: { text: object.text, margin_top: "sm" }) %>
+                    <% end %>
+                <% end %>
+            <% end %>
+            <% if object.cancel_button && object.confirm_button %>
+                        <%= pb_rails("dialog/dialog_footer", props: {
+                            cancel_button: object.cancel_button,
+                            confirm_button: object.confirm_button,
+                            id: object.id
+                        }) %>
+            <% end %>
 
-<%= content %>
+            <%= content %>
     <% end %>
 </div>
 
 <%= javascript_tag do %>
-  window.addEventListener("DOMContentLoaded", () => dialogHelper())
-  window.addEventListener("turbo:frame-load", () => dialogHelper())
+    window.addEventListener("DOMContentLoaded", () => dialogHelper())
+    window.addEventListener("turbo:frame-load", () => dialogHelper())
 <% end %>
