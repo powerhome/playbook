@@ -1,8 +1,11 @@
-@import "playbook-ui/dist/tokens/spacing";
-@import "playbook-ui/dist/tokens/typography";
+@import "playbook-tokens/colors";
+@import "playbook-tokens/spacing";
+@import "playbook-tokens/typography";
+@import "playbook-tokens/screen_sizes";
 
 .changelog {
   .no-sidebar {
+    $nav_breakpoint: breakpoint("lg");
     grid-template-columns: 0 auto !important;
     @include break_at($nav_breakpoint) {
       grid-template-columns: auto !important;
