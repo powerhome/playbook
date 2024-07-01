@@ -3,3 +3,9 @@
 <%= pb_rails("button", props: { text: "Button Link", variant: "link", margin_right: "lg" }) %>
 <%= pb_rails("button", props: { text: "Button Disabled", disabled: true, margin_right: "lg" }) %>
 
+  <button data-controller="button"
+          data-button-enabled-class="pb_button_kit_secondary_block_enabled"
+          data-button-disabled-class="pb_button_kit_secondary_block_disabled"
+          data-target="button.button">
+    Toggle Button
+  </button>

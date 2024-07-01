@@ -32,6 +32,17 @@ import { Turbo } from "@hotwired/turbo-rails"
 // Disable Turbo Drive by default (Turbo Drive is equivalent to Turbolinks)
 Turbo.session.drive = false
 
+import { Application } from "@hotwired/stimulus"
+import HelloController from "../controllers/hello_controller"
+
+const application = Application.start()
+
+application.debug = false
+window.Stimulus   = application
+application.register("hello", HelloController)
+
+
+
 // Icons from playbook-icons-react for testing
 import * as icons from "@powerhome/playbook-icons-react"
 
