@@ -9,7 +9,7 @@ const chartData = [{
 const BarGraphLegend = (props) => (
   <div>
     <BarGraph
-        axisTitle="Number of Employees"
+        axisTitle="Number of Employees!"
         chartData={chartData}
         id="bar-test-2"
         legend
