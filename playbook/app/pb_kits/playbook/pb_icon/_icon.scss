@@ -160,26 +160,26 @@ svg {
     }
     &.fa-pull-left {
       float: left;
-      margin-right: var(--fa-pull-margin, .3em)
+      margin-right: .3em;
     }
 
     &.fa-pull-right {
       float: right;
-      margin-left: var(--fa-pull-margin, .3em)
+      margin-left: .3em;
     }
     &.fa-li {
-      left: calc(var(--fa-li-width, 2em) * -1);
+      left: calc(2em * -1);
       position: absolute;
       text-align: center;
-      width: var(--fa-li-width, 2em);
+      width: 2em;
       line-height: inherit
     }
     &.svg-inline--fa.fa-li {
-      width: var(--fa-li-width, 2em);
+      width: 2em;
       top: .25em
     }
     &.svg-inline--fa.fa-fw {
-      width: var(--fa-fw-width, 1.25em)
+      width: 1.25em;
     }
     &.fa-fw {
       text-align: center;
