@@ -50,31 +50,31 @@ svg {
       color: #fff;
     }
     &.svg_border {
-    	border-color: #eee;
-    	border-radius: .1em;
-    	border-style: solid;
-    	border-width: .08em;
-    	padding: .2em .25em .15em;
+      border-color: #eee;
+      border-radius: .1em;
+      border-style: solid;
+      border-width: .08em;
+      padding: .2em .25em .15em;
     }
     &.svg_fw {
-    	text-align: center;
-    	width: 1.25em
+      text-align: center;
+      width: 1.25em
     }
     &.svg_li {
-    	left: calc(2em * -1);
-    	position: absolute;
-    	text-align: center;
-    	width: 2em;
-    	line-height: inherit
+      left: calc(2em * -1);
+      position: absolute;
+      text-align: center;
+      width: 2em;
+      line-height: inherit
     }
     &.pull_left {
-    	float: left;
-    	margin-right: .3em;
+      float: left;
+      margin-right: .3em;
     }
 
     &.pull_right {
-    	float: right;
-    	margin-left: .3em;
+      float: right;
+      margin-left: .3em;
     }
     &.pulse {
       animation-name: pb_icon_spin;
@@ -142,6 +142,93 @@ svg {
 
     &.svg_10x {
       font-size: 10em
+    }
+    &.fa-xs {
+      font-size: .75em;
+      line-height: .0833333337em;
+      vertical-align: .125em
+    }
+    &.fa-sm {
+      font-size: .875em;
+      line-height: .0714285718em;
+      vertical-align: .0535714295em
+    }
+    &.fa-lg {
+      font-size: 1.25em;
+      line-height: .05em;
+      vertical-align: -.075em
+    }
+    &.fa-pull-left {
+      float: left;
+      margin-right: var(--fa-pull-margin, .3em)
+    }
+
+    &.fa-pull-right {
+      float: right;
+      margin-left: var(--fa-pull-margin, .3em)
+    }
+    &.fa-li {
+      left: calc(var(--fa-li-width, 2em) * -1);
+      position: absolute;
+      text-align: center;
+      width: var(--fa-li-width, 2em);
+      line-height: inherit
+    }
+    &.svg-inline--fa.fa-li {
+      width: var(--fa-li-width, 2em);
+      top: .25em
+    }
+    &.svg-inline--fa.fa-fw {
+      width: var(--fa-fw-width, 1.25em)
+    }
+    &.fa-fw {
+      text-align: center;
+      width: 1.25em
+    }
+    &.fa-layers {
+      display: inline-block;
+      height: 1em;
+      position: relative;
+      text-align: center;
+      vertical-align: -.125em;
+      width: 1em
+    }
+    &.fa-2x {
+      font-size: 2em
+    }
+    &.fa-3x {
+      font-size: 3em
+    }
+    &.fa-flip {
+      -webkit-animation-name: fa-flip;
+      animation-name: fa-flip;
+      -webkit-animation-delay:  0s;
+      animation-delay: 0s;
+      -webkit-animation-direction: normal;
+      animation-direction: normal;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+    }
+    &.fa-spin {
+      -webkit-animation-name: fa-spin;
+      animation-name: fa-spin;
+      -webkit-animation-delay: 0s;
+      animation-delay: 0s;
+      -webkit-animation-direction: normal;
+      animation-direction: normal;
+      -webkit-animation-duration: 2s;
+      animation-duration: 2s;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+      animation-timing-function: linear;
+    }
+    &.fa-pulse {
+      animation: fa-spin 1s infinite linear;
     }
   }
 }
