@@ -237,12 +237,54 @@ export default function IconList() {
       </Flex>
 
 
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+        paddingTop="sm"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Title paddingBottom="sm" size={3} tag='h3' text='Other Props' />
+        </FlexItem>
+      </Flex>
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Flex>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="2x" pull="left"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="2x" pull="right"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="2x" fixedWidth  />
+            </Card>
+          </Flex>
+        </FlexItem>
+      </Flex>
 
 
       <Flex
         justify='center'
         marginX={{ lg: "sm", xl: "sm" }}
         paddingLeft="xs"
+        paddingTop="sm"
       >
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Title paddingBottom="sm" size={3} tag='h3' text='Color' />
