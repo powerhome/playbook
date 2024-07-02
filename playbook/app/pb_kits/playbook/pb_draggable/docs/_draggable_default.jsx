@@ -1,23 +1,19 @@
 import React, { useState } from "react";
-import { SelectableList, Draggable, DraggableProvider } from "../../";
+import { Flex, Image, Draggable, DraggableProvider } from "../../";
 
 // Initial items to be dragged
 const data = [
   {
-    id: "1",
-    text: "Task 1",
+    id: "21",
+    url: "https://unsplash.it/500/400/?image=633",
   },
   {
-    id: "2",
-    text: "Task 2",
+    id: "22",
+    url: "https://unsplash.it/500/400/?image=634",
   },
   {
-    id: "3",
-    text: "Task 3",
-  },
-  {
-    id: "4",
-    text: "Task 4",
+    id: "23",
+    url: "https://unsplash.it/500/400/?image=637",
   },
 ];
 
@@ -30,20 +26,19 @@ const DraggableDefault = (props) => {
         onReorder={(items) => setInitialState(items)}
     >
         <Draggable.Container {...props}>
-          <SelectableList variant="checkbox">
-            {initialState.map(({ id, text }) => (
+        <Flex>
+            {initialState.map(({ id, url }) => (
               <Draggable.Item dragId={id} 
                   key={id}
               >
-                <SelectableList.Item
-                    label={text} 
-                    name={id} 
-                    value={id} 
-                    {...props}
+                <Image alt={id} 
+                    margin="xs"
+                    size="md" 
+                    url={url} 
                 />
               </Draggable.Item>
             ))}
-          </SelectableList>
+         </Flex>
         </Draggable.Container>
     </DraggableProvider>
     </>
