@@ -200,31 +200,19 @@ svg {
       font-size: 3em
     }
     &.fa-flip {
-      -webkit-animation-name: fa-flip;
       animation-name: fa-flip;
-      -webkit-animation-delay:  0s;
       animation-delay: 0s;
-      -webkit-animation-direction: normal;
       animation-direction: normal;
-      -webkit-animation-duration: 1s;
       animation-duration: 1s;
-      -webkit-animation-iteration-count: infinite;
       animation-iteration-count: infinite;
-      -webkit-animation-timing-function: ease-in-out;
       animation-timing-function: ease-in-out;
     }
     &.fa-spin {
-      -webkit-animation-name: fa-spin;
       animation-name: fa-spin;
-      -webkit-animation-delay: 0s;
       animation-delay: 0s;
-      -webkit-animation-direction: normal;
       animation-direction: normal;
-      -webkit-animation-duration: 2s;
       animation-duration: 2s;
-      -webkit-animation-iteration-count: infinite;
       animation-iteration-count: infinite;
-      -webkit-animation-timing-function: linear;
       animation-timing-function: linear;
     }
     &.fa-pulse {
