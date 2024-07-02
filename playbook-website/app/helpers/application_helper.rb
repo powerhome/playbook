@@ -150,11 +150,11 @@ module ApplicationHelper
     all_kits = []
 
     MENU["kits"].each do |kit|
-      kit_name = kit["name"]
+      kit_category = kit["category"]
       # Modify this line to include both name and status in the components array
       components = kit["components"].map { |c| { name: c["name"], status: c["status"] } }
 
-      all_kits << { kit_name => components }
+      all_kits << { kit_category => components }
     end
 
     all_kits
@@ -166,7 +166,7 @@ module ApplicationHelper
 
     aggregate_kits_with_status.each do |kit|
       if kit.is_a? Hash
-        _kit_name, components = kit.first
+        _kit_category, components = kit.first
         components.each do |component|
           all_kits.push(component[:name]) if component[:status] != "beta"
         end
