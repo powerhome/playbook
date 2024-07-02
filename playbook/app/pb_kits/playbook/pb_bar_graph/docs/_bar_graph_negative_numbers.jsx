@@ -21,7 +21,7 @@ const chartData = [{
 const BarGraphStacked = (props) => (
   <div>
     <BarGraph
-        axisTitle="Number of Employees"
+        axisTitle="Number of Employees ***"
         chartData={chartData}
         id="bar-default"
         legend
