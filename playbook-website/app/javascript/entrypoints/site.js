@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
     openToggleClosed.addEventListener('click', () => toggleLambda(codeDrawer))
   })
 
-  if (process.env.NODE_ENV === 'development') {
-    require('../utilities/accessibility').runAxe()
-  }
+  // if (process.env.NODE_ENV === 'development') {
+  //   require('../utilities/accessibility').runAxe()
+  // }
 })

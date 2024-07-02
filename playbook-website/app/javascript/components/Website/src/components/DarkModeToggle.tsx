@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Body, Flex, FlexItem, Icon, Toggle } from 'playbook-ui'
 
 type ToggleProps = {
-  initMode: String,
+  initMode: string,
 }
 const DarkModeToggle = ({ initMode }: ToggleProps) => {
   const [darkMode, toggleDarkMode] = useState(initMode ? JSON.parse(initMode) : false)
@@ -26,7 +26,7 @@ const DarkModeToggle = ({ initMode }: ToggleProps) => {
         spacing="between"
         vertical="center"
     >
-      <If condition={loading}>
+      {loading && (
         <FlexItem>
           <Body
               color={darkMode ? 'lighter' : ''}
@@ -42,8 +42,8 @@ const DarkModeToggle = ({ initMode }: ToggleProps) => {
             />
           </Body>
         </FlexItem>
-      </If>
-      <If condition={!loading}>
+      )}
+      {!loading && (
         <a
             onClick={iconClickHandler}
             style={{ cursor: 'pointer' }}
@@ -63,7 +63,7 @@ const DarkModeToggle = ({ initMode }: ToggleProps) => {
             </Body>
           </FlexItem>
         </a>
-      </If>
+      )}
       <FlexItem>
         <Toggle>
           <input

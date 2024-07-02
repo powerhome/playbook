@@ -5,7 +5,7 @@ import { Typeahead } from 'playbook-ui'
 
 type KitSearchProps = {
   classname: String,
-  kits: Array,
+  kits: [],
   id: String,
 }
 const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
@@ -13,14 +13,14 @@ const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
     if (id === 'desktop-kit-search') {
       window.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.key === 'k') {
-          const kitSearch = document.querySelector('#desktop-kit-search #react-select-2-input')
+          const kitSearch = document.querySelector('#desktop-kit-search #react-select-2-input') as HTMLInputElement
           kitSearch === document.activeElement ? kitSearch.blur() : kitSearch.focus()
         }
       })
     }
   }, [ id ])
 
-  const handleChange = (selection) => {
+  const handleChange = (selection: any) => {
     if (selection) {
       window.location = selection.value
     }

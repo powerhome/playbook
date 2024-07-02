@@ -1,8 +1,8 @@
-@import "playbook-ui/dist/tokens/spacing";
-@import "playbook-ui/dist/tokens/colors";
-@import "playbook-ui/dist/tokens/border_radius";
-@import "playbook-ui/dist/tokens/screen_sizes";
-@import "playbook-ui/dist/tokens/shadows";
+@import "playbook-tokens/spacing";
+@import "playbook-tokens/colors";
+@import "playbook-tokens/border_radius";
+@import "playbook-tokens/screen_sizes";
+@import "playbook-tokens/shadows";
 
 .samples_index {
   .header-text {

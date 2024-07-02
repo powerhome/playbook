@@ -7,12 +7,12 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import App from '../components/Website'
-import ComponentList from '../components/Website/src/pages/ComponentList'
-import ComponentShow from '../components/Website/src/pages/ComponentShow'
-import CategoryShow from '../components/Website/src/pages/CategoryShow'
-import IconList from '../components/Website/src/pages/IconList'
-import { CategoryLoader, ComponentsLoader, ComponentShowLoader, } from '../components/Website/src/hooks/loaders'
+import App from './Website'
+import ComponentList from './Website/src/pages/ComponentList'
+import ComponentShow from './Website/src/pages/ComponentShow'
+import CategoryShow from './Website/src/pages/CategoryShow'
+import IconList from './Website/src/pages/IconList'
+import { CategoryLoader, ComponentsLoader, ComponentShowLoader, } from './Website/src/hooks/loaders'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,8 +33,8 @@ const router = createBrowserRouter(
         />
         <Route
             element={<Navigate to="react" />}
-            path=":name"
             loader={ComponentShowLoader}
+            path=":name"
         />
       </Route>
       <Route

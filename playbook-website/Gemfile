@@ -10,7 +10,7 @@ gem "playbook_ui", path: "../playbook"
 gem "rails", "~> 7.0.8"
 gem "turbo-rails", "~> 1.4.0"
 gem "puma", "~> 6.3"
-gem "webpacker", "5.4.4"
+gem "vite_rails"
 # Make Compatible with Ruby 3.1.0 Upgrade
 gem "psych", "< 4"
 gem "bootsnap", ">= 1.1.0", require: false
