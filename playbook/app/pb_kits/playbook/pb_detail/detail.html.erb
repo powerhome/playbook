@@ -1,8 +1,3 @@
-<%= content_tag(object.tag,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    **combined_html_options) do %>
+<%= pb_content_tag(object.tag) do %>
   <%= object.content %>
 <% end %>
