@@ -7,12 +7,17 @@ import { SelectValueType } from '../_typeahead'
 
 type Props = {
   data: SelectValueType,
-  multiValueTemplate: any,
-  removeProps: any,
-  selectProps: any,
+  removeProps?: {
+    onClick?: React.MouseEventHandler<HTMLSpanElement>,
+    onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
+    onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
+  },
+  selectProps: {
+    multiKit?: string,
+  },
 }
 
-const MultiValue = (props: Props) => {
+const MultiValue = (props: Props): React.ReactElement => {
   const { removeProps } = props
   const { imageUrl, label } = props.data
   const { multiKit } = props.selectProps
@@ -27,36 +32,36 @@ const MultiValue = (props: Props) => {
 
   return (
     <components.MultiValueContainer
-      className="text_input_multivalue_container"
-      {...props}
+        className="text_input_multivalue_container"
+        {...props}
     >
       {multiKit === 'badge' &&
         <Badge
-          closeProps={removeProps}
-          removeIcon
-          text={label}
-          variant="primary"
+            closeProps={removeProps}
+            removeIcon
+            text={label}
+            variant="primary"
         />
       }
 
       {multiKit !== 'badge' && imageUrl &&
         <FormPill
-          avatarUrl={imageUrl}
-          closeProps={removeProps}
-          marginRight="xs"
-          name={label}
-          size={multiKit === 'smallPill' ? 'small' : ''}
-          text=''
+            avatarUrl={imageUrl}
+            closeProps={removeProps}
+            marginRight="xs"
+            name={label}
+            size={multiKit === 'smallPill' ? 'small' : ''}
+            text=''
         />
       }
 
       {multiKit !== 'badge' && !imageUrl &&
         <FormPill
-          closeProps={removeProps}
-          marginRight="xs"
-          name=''
-          size={multiKit === 'smallPill' ? 'small' : ''}
-          text={label}
+            closeProps={removeProps}
+            marginRight="xs"
+            name=''
+            size={multiKit === 'smallPill' ? 'small' : ''}
+            text={label}
         />
       }
     </components.MultiValueContainer>

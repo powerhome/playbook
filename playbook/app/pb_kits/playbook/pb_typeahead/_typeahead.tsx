@@ -42,8 +42,8 @@ type TypeaheadProps = {
   id?: string,
   label?: string,
   loadOptions?: string | Noop,
-  getOptionLabel?: string | (() => any),
-  getOptionValue?: string | (() => any),
+  getOptionLabel?: string | (() => string),
+  getOptionValue?: string | (() => string),
   name?: string,
 }
 
@@ -77,7 +77,7 @@ const Typeahead = ({
   id,
   loadOptions = noop,
   ...props
-}: TypeaheadProps) => {
+}: TypeaheadProps): React.ReactElement => {
   const selectProps = {
     cacheOptions: true,
     components: {
@@ -104,7 +104,8 @@ const Typeahead = ({
     multiKit: '',
     onCreateOption: null as null,
     plusIcon: false,
-    onMultiValueClick: (_option: SelectValueType): any => undefined,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onMultiValueClick: (_option: SelectValueType): void => undefined,
     ...props,
   }
 

@@ -14,6 +14,12 @@ import {
   Typeahead,
 } from '../..'
 
+type TypeAheadWithHighlightProps = {
+  data: {
+    name: String,
+  },
+};
+
 const USERS = [
   {
     name: "Wade Winningham",
@@ -37,7 +43,7 @@ const USERS = [
   },
 ];
 
-const TypeaheadWithHighlight = (props) => {
+const TypeaheadWithHighlight = (props: TypeAheadWithHighlightProps) => {
   const [selectedUser, setSelectedUser] = useState()
 
   const formatOptionLabel = ({name, territory, title}, {inputValue}) => {

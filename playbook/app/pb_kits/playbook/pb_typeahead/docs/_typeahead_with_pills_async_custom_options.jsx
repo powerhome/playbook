@@ -48,7 +48,7 @@ const promiseOptions = (inputValue) =>
 
 const TypeaheadWithPillsAsyncCustomOptions = (props) => {
   const [users, setUsers] = useState([])
-  const handleOnChange = (value) => setUsers(value)
+  const handleOnChange = (value) => {setUsers(value)}
 
   /**
    *
