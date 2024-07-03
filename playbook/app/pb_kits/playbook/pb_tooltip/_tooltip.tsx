@@ -20,7 +20,7 @@ import Flex from "../pb_flex/_flex"
 type TooltipProps = {
   aria?: { [key: string]: string },
   className?: string | string[],
-  children: JSX.Element,
+  children: React.ReactNode,
   data?: { [key: string]: string },
   delay?: number | Partial<{open: number; close: number}>,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -50,8 +50,8 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     ...rest
   } = props
 
-  const dataProps: { [key: string]: any } = buildDataProps(data)
-  const ariaProps: { [key: string]: any } = buildAriaProps(aria)
+  const dataProps: { [key: string]: string } = buildDataProps(data)
+  const ariaProps: { [key: string]: string } = buildAriaProps(aria)
   const htmlProps = buildHtmlProps(htmlOptions)
   
   const css = classnames(
