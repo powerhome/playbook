@@ -200,7 +200,6 @@ const Icon = (props: IconProps) => {
     (!iconElement && !customIcon) ? 'pb_icon_kit' : '',
     (iconElement || customIcon) ? 'pb_custom_icon' : fontStyle,
     iconElement ? 'svg-inline--fa' : '',
-    isFA? fontStyle : null, 
     globalProps(props),
     className
   )
