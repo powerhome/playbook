@@ -52,7 +52,7 @@ const TreemapChart = ({
   tooltipHtml = '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: <b>{point.value}</b>',
   type = "treemap",
   ...props
-}: TreemapChartProps) => {
+}: TreemapChartProps): React.ReactElement => {
   
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -95,11 +95,10 @@ const TreemapChart = ({
     },
   };
 
-  const [options, setOptions] = useState({});
+  const [options, setOptions] = useState(() => merge(staticOptions, customOptions));
 
   useEffect(() => {
-    
-    setOptions(merge(staticOptions, customOptions));
+    setOptions(prevOptions => merge(prevOptions, { series: [{ data: chartData }] }));
   }, [chartData]);
 
   return (
