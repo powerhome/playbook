@@ -18,6 +18,7 @@ type FormPillProps = {
   avatarUrl?: string,
   size?: string,
   textTransform?: 'none' | 'lowercase',
+  color?: "primary" | "neutral",
   closeProps?: {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
@@ -36,9 +37,10 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     closeProps = {},
     size = '',
     textTransform = 'none',
+    color = "primary",
   } = props
   const css = classnames(
-    `pb_form_pill_kit_${'primary'}`,
+    `pb_form_pill_kit_${color}`,
     globalProps(props),
     className,
     size === 'small' ? 'small' : null,

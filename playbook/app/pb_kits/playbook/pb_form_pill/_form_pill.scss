@@ -5,9 +5,10 @@
 @import "../pb_avatar/avatar";
 
 $selector: ".pb_form_pill";
-$pb_form_pill_height: 37px;
+$pb_form_pill_height: 27px;
 $form_pill_colors: (
   primary: map-get($status_color_text, "primary"),
+  neutral: map-get($status_color_text, "neutral"),
 );
 
 
@@ -23,33 +24,69 @@ $form_pill_colors: (
   cursor: pointer;
   @each $color_name, $color_value in $form_pill_colors {
     &[class*=_#{$color_name}]  {
-      background-color: rgba($color_value, $opacity-1);
+      background-color: mix($color_value, $card_light, 10%);
+      @if ($color_name == "neutral") {
+        background-color: $white;
+        border: 1px solid $border_light;
+      }
       transition: background-color 0.2s ease;
       box-shadow: none;
       @media (hover:hover) {
         &:hover {
-          background-color: rgba($color_value, $opacity-2);
+          background-color: mix($color_value, $card_light, 20%);
+          @if ($color_name == "neutral") {
+            background-color: mix($neutral, $card_light, 20%);
+            border: 1px solid $border_light;
+          }
         }
+        &:active {
+          background-color: mix($color_value, $card_light, 30%);
+          @if ($color_name == "neutral") {
+            background-color: mix($neutral, $card_light, 30%);
+          }
+        }
+        // &:hover #{$selector}_close {
+        //   background-color: mix($color_value, $card_light, 40%);
+        //   // border-radius: 70px;
+        //   // border-radius: $border_radius_rounded;
+        //   @if ($color_name == "neutral") {
+        //     background-color: mix($neutral, $card_light, 90%);
+        //   }
+        // }
       }
       #{$selector}_text {
         color: $color_value;
+        @if ($color_name == "neutral") {
+          color: $text_lt_default;
+        }
         padding-left: $space-sm;
-        padding-right: $space-sm/4;
+        padding-right: $space-sm/2;
       }
       #{$selector}_close {
         color: $color_value;
-        padding-left: $space-sm/2;
+        padding-left: $space-sm/4;
         padding-right: $space-sm/4;
         display: flex;
         align-items: center;
         height: 100%;
         cursor: pointer;
-      }
+        border-radius: 70px;
+        // border-radius: $border_radius_rounded;
+        &:hover {
+          background-color: mix($color_value, $card_light, 40%);
+          // border-radius: 70px;
+          // border-radius: $border_radius_rounded;
+            @if ($color_name == "neutral") {
+              background-color: mix($neutral, $card_light, 60%);
+              // border: 1px solid $border_light;
+            }
+        }
       #{$selector}_tag {
         color: $color_value;
         padding-left: $space-sm;
       }
     }
+  }
   }
   &.small {
     height: fit-content;
