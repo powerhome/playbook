@@ -52,13 +52,13 @@ const Textarea = ({
   label,
   maxCharacters,
   name,
-  onChange = () => {},
+  onChange,
   placeholder,
   required,
   rows = 4,
   value,
   ...props
-}: TextareaProps, ref: any) => {
+}: TextareaProps, ref: React.LegacyRef<HTMLTextAreaElement>) => {
   ref = useRef<HTMLTextAreaElement>(null)
   useEffect(() => {
     if (ref.current && resize === 'auto') {
@@ -71,58 +71,75 @@ const Textarea = ({
   const resizeClass = `resize_${resize}`
   const classes = classnames('pb_textarea_kit', errorClass, inlineClass, resizeClass, globalProps(props), className)
   const noCount = typeof characterCount !== 'undefined'
-  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
-  const dataProps: {[key: string]: any} = buildDataProps(data)
+  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+  const dataProps: {[key: string]: string} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
+  const checkIfZero = (characterCount: string | number) => {
+    return characterCount == 0 ? characterCount.toString() : characterCount
+  }
   const characterCounter = () => {
     return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
   }
 
-  const checkIfZero = (characterCount: string | number) => {
-    return characterCount == 0 ? characterCount.toString() : characterCount
-  }
-
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
     >
       <Caption text={label} />
       {children || (
         <textarea
-          className="pb_textarea_kit"
-          disabled={disabled}
-          name={name}
-          onChange={onChange}
-          placeholder={placeholder}
-          ref={ref}
-          required={required}
-          rows={rows}
-          value={value}
-          {...props}
+            className="pb_textarea_kit"
+            disabled={disabled}
+            name={name}
+            onChange={onChange}
+            placeholder={placeholder}
+            ref={ref}
+            required={required}
+            rows={rows}
+            value={value}
+            {...props}
         />
       )}
 
       {error ? (
         <>
           {characterCount ? (
-            <Flex spacing="between" vertical="center">
+            <Flex 
+                spacing="between" 
+                vertical="center"
+            >
               <FlexItem>
-                <Body margin="none" status="negative" text={error} />
+                <Body 
+                    margin="none"
+                    status="negative"
+                    text={error} 
+                />
               </FlexItem>
               <FlexItem>
-                <Caption margin="none" size="xs" text={characterCounter()} />
+                <Caption 
+                    margin="none"
+                    size="xs"
+                    text={characterCounter()}
+                />
               </FlexItem>
             </Flex>
           ) : (
-            <Body status="negative" text={error} />
+            <Body 
+                status="negative"
+                text={error}
+            />
           )}
         </>
       ) : (
          noCount && (
-          <Caption margin="none" size="xs" text={characterCounter()} />
+          <Caption 
+              margin="none"
+              size="xs"
+              text={characterCounter()}
+          />
         )
       )}
     </div>
