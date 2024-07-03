@@ -221,7 +221,6 @@ const Icon = (props: IconProps) => {
   if (isFA) {
     const faClassList = {
       'fa-border': border,
-      'fa-fw': (iconElement) ? false : fixedWidth,
       'fa-inverse': inverse,
       'fa-li': listItem,
       [`fa-${size}`]: size,
