@@ -5,7 +5,7 @@
 @import "../pb_avatar/avatar";
 
 $selector: ".pb_form_pill";
-$pb_form_pill_height: 27px;
+$pb_form_pill_height: 37px;
 $form_pill_colors: (
   primary: map-get($status_color_text, "primary"),
   neutral: map-get($status_color_text, "neutral"),
@@ -45,14 +45,6 @@ $form_pill_colors: (
             background-color: mix($neutral, $card_light, 30%);
           }
         }
-        // &:hover #{$selector}_close {
-        //   background-color: mix($color_value, $card_light, 40%);
-        //   // border-radius: 70px;
-        //   // border-radius: $border_radius_rounded;
-        //   @if ($color_name == "neutral") {
-        //     background-color: mix($neutral, $card_light, 90%);
-        //   }
-        // }
       }
       #{$selector}_text {
         color: $color_value;
@@ -71,22 +63,21 @@ $form_pill_colors: (
         height: 100%;
         cursor: pointer;
         border-radius: 70px;
-        // border-radius: $border_radius_rounded;
         &:hover {
           background-color: mix($color_value, $card_light, 40%);
-          // border-radius: 70px;
-          // border-radius: $border_radius_rounded;
-            @if ($color_name == "neutral") {
-              background-color: mix($neutral, $card_light, 60%);
-              // border: 1px solid $border_light;
-            }
+          @if ($color_name == "neutral") {
+            background-color: mix($neutral, $card_light, 60%);
+          }
         }
+      }
       #{$selector}_tag {
         color: $color_value;
         padding-left: $space-sm;
+        @if ($color_name == "neutral") {
+          color: $text_lt_default;
+        }
       }
     }
-  }
   }
   &.small {
     height: fit-content;
@@ -107,6 +98,71 @@ $form_pill_colors: (
       &::before { line-height: 21px; }
     }
   }
+  &.dark {
+    @each $color_name, $color_value in $form_pill_colors {
+      // In dark mode, the base patterns below are needed for the next tickets for success, warning, error, info. 
+      // Primary and Neutral are exceptions to the general rule in the handoff 
+      &[class*=_#{$color_name}]  {
+      //   background-color: mix($color_value, $card_dark, 10%);
+        // .pb_form_pill_tag {
+        //   color: $color_name;
+        // }
+        // .pb_form_pill_close {
+        //   color: $color_name;
+        //   &:hover {
+        //     background-color: mix($color_value, $card_dark, 40%);
+        //   }
+        // }
+        // &:hover {
+        //   background-color: mix($color_value, $card_dark, 20%);
+        // }
+        // &:active {
+        //   background-color: mix($color_value, $card_dark, 30%);
+        // }
+        @if ($color_name == "neutral") {
+          background-color: transparent;
+          border: 1px solid $border_dark;
+          .pb_form_pill_text, .pb_form_pill_tag {
+            color: $text_dk_default;
+          }
+          .pb_form_pill_close {
+            color: $text_dk_default;
+            &:hover {
+              background-color: mix($neutral, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($white, $card_dark, 10%);
+          }
+          &:active {
+            background-color: mix($white, $card_dark, 20%);
+          }
+          &:focus {
+            border: 1px solid $primary;
+          }
+        }
+        @if ($color_name == "primary") {
+          background-color: mix($active_dark, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag {
+            color: $active_dark;
+          }
+          .pb_form_pill_close {
+            color: $active_dark;
+            &:hover {
+              background-color: mix($active_dark, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($active_dark, $card_dark, 20px);
+          }
+          &:active {
+            background-color: mix($active_dark, $card_dark, 30%);
+          }
+        }
+      }
+    }
+  }
+
   &[class*=lowercase] {
     text-transform: lowercase;
   }
