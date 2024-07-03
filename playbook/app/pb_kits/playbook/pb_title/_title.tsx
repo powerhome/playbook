@@ -62,7 +62,8 @@ const Title = (props: TitleProps): React.ReactElement => {
     buildResponsiveSizeCss(),
     className
   )
-  const Tag: React.ReactElement | any = `${tag}`
+  // eslint-disable-next-line jsx-control-statements/jsx-jcs-no-undef
+  const Tag: keyof JSX.IntrinsicElements = `${tag}`
 
   return (
     <Tag
