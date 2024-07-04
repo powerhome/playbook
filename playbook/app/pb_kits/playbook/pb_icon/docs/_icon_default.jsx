@@ -1,6 +1,5 @@
-import React from 'react'
-
-import Icon from '../_icon'
+import React from "react"
+import Icon from "../_icon"
 
 const IconDefault = (props) => {
   return (

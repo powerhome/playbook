@@ -20,6 +20,7 @@ module Playbook
                       values: [nil, "top", "bottom"],
                       default: nil
       prop :auto_close, type: Playbook::Props::Number
+      prop :icon, type: Playbook::Props::String
 
       def show_text?
         text.present?
@@ -42,20 +43,24 @@ module Playbook
       end
 
       def icon_value
-        case status
-        when "success"
-          "check"
-        when "error"
-          "exclamation-triangle"
-        when "neutral"
-          "info-circle"
-        when "tip"
-          "info-circle"
-        end
+        icon || case status
+                when "success"
+                  "check"
+                when "error"
+                  "exclamation-triangle"
+                when "neutral"
+                  "info-circle"
+                when "tip"
+                  "info-circle"
+                end
+      end
+
+      def icon_class
+        icon.present? ? " custom_icon" : ""
       end
 
       def classname
-        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + auto_close_class
+        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + auto_close_class + icon_class
       end
     end
   end
