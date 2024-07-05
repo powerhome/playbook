@@ -1,3 +1,43 @@
+# 🌁 Introducing the New Overlay Kit — A Seamless Way to Implement Overlays! ‍🌁
+
+##### June 28, 2024
+
+![Release Banner 13 31 0](https://github.com/powerhome/playbook/assets/73710701/0a5f9f29-c316-4ecc-94bc-aa2e78f19eee)
+
+Our latest Overlay component provides depth and dynamic feel to otherwise flat page elements. From artfully containing overflowing content, to improving page readability, to directing your users' attention to important content and actions; our Overlays give you even more power to expertly control your users' experience.
+
+[13.31.0](https://github.com/powerhome/playbook/tree/13.31.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Adding Error State to the Dropdown Kit [\#3485](https://github.com/powerhome/playbook/pull/3485) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Collapsed Prop to Collapsible Nav on Rails [\#3483](https://github.com/powerhome/playbook/pull/3483) ([nidaqg](https://github.com/nidaqg))
+- Adding Column Sort to Advanced Table Kit [\#3481](https://github.com/powerhome/playbook/pull/3481) ([carloslimasd](https://github.com/carloslimasd))
+- Support Aliasing for Playbook-icons [\#3479](https://github.com/powerhome/playbook/pull/3479) ([jasperfurniss](https://github.com/jasperfurniss))
+- Allow Any Icon to Be Used In Fixed Confirmation Toast [\#3478](https://github.com/powerhome/playbook/pull/3478) ([elisashapiro](https://github.com/elisashapiro))
+- Draggable V4 \(beta\) [\#3472](https://github.com/powerhome/playbook/pull/3472) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Loading Advanced Table Mock Data In All Pages We Need [\#3480](https://github.com/powerhome/playbook/pull/3480) ([carloslimasd](https://github.com/carloslimasd))
+- Fix Timeline Kit \(react\) Not Accepting Global Props [\#3475](https://github.com/powerhome/playbook/pull/3475) ([elisashapiro](https://github.com/elisashapiro))
+
+**Improvements:**
+
+- Website: Allow Type-specific Kit Doc Description Markdown [\#3466](https://github.com/powerhome/playbook/pull/3466) ([elisashapiro](https://github.com/elisashapiro))
+- Figma Changelog [\#3454](https://github.com/powerhome/playbook/pull/3454) ([markdoeswork](https://github.com/markdoeswork))
+- Date Time Stacked Docs [\#3486](https://github.com/powerhome/playbook/pull/3486) ([rachelradford21](https://github.com/rachelradford21))
+
+**New Kits:**
+
+- Overlay Kit In Rails [\#3474](https://github.com/powerhome/playbook/pull/3474) ([nickamantia](https://github.com/nickamantia))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.30.0...13.31.0)
+
+
+_______
+
 # 13.30.0
 
 ##### June 12, 2024
