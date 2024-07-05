@@ -5,7 +5,6 @@ const DateYearStackedDefault = (props) => {
   return (
     <div>
       <DateYearStacked
-          align="left"
           date={new Date()}
           {...props}
       />
