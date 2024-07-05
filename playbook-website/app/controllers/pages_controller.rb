@@ -77,12 +77,14 @@ class PagesController < ApplicationController
     params[:type] ||= "react"
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @table_data = advanced_table_mock_data
   end
 
   def kit_category_show_rails
     params[:type] ||= "rails"
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @table_data = advanced_table_mock_data
     render template: "pages/kit_category_show"
   end
 
@@ -93,12 +95,7 @@ class PagesController < ApplicationController
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-
-    if @kit == "advanced_table"
-      advanced_table_mock_data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data.json"))
-      @table_data = JSON.parse(advanced_table_mock_data, object_class: OpenStruct)
-    end
-
+    @table_data = advanced_table_mock_data if @kit == "advanced_table"
     render "pages/kit_show"
   end
 
@@ -350,5 +347,10 @@ private
     @type = type
 
     render template: "pages/kit_collection", layout: "layouts/fullscreen"
+  end
+
+  def advanced_table_mock_data
+    advanced_table_mock_data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data.json"))
+    JSON.parse(advanced_table_mock_data, object_class: OpenStruct)
   end
 end
