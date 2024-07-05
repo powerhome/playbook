@@ -67,6 +67,7 @@ type TooltipProps = {
   tooltipProps?: Record<string, unknown>,
 }
 
+// eslint-disable-next-line react/display-name
 const Tooltip = React.forwardRef((props: TooltipProps) => (
 <div
     className="pb_card_kit_border_none p_none"
@@ -142,9 +143,7 @@ const Tooltip = React.forwardRef((props: TooltipProps) => (
   }
   </Flex>
 </div>
-)) as React.ForwardRefRenderFunction<HTMLDivElement, TooltipRenderProps>
-
-Tooltip.displayName = 'Walkthrough Tooltip';
+)) as unknown as React.ForwardRefRenderFunction<HTMLDivElement, TooltipRenderProps>
 
 const Walkthrough = (props: WalkthroughProps): React.ReactElement => {
   const {

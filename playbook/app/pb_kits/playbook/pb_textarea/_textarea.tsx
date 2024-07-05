@@ -58,8 +58,8 @@ const Textarea = ({
   rows = 4,
   value,
   ...props
-}: TextareaProps, ref: React.LegacyRef<HTMLTextAreaElement>) => {
-  ref = useRef<HTMLTextAreaElement>(null)
+}: TextareaProps) => {
+  const ref = useRef<HTMLTextAreaElement>(null)
   useEffect(() => {
     if (ref.current && resize === 'auto') {
       PbTextarea.addMatch(ref.current)
