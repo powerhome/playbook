@@ -8,6 +8,7 @@ examples:
   - dropdown_with_custom_trigger_rails: Custom Trigger
   - dropdown_with_custom_padding: Custom Option Padding
   - dropdown_error: Dropdown with Error
+  - dropdown_default_value: Default Value
 
   react:
   - dropdown_default: Default
