@@ -26,6 +26,7 @@ type DropdownProps = {
     className?: string;
     dark?: boolean;
     data?: { [key: string]: string };
+    defaultValue?: GenericObject;
     error?: string;
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string;
@@ -44,6 +45,7 @@ const Dropdown = (props: DropdownProps) => {
         className,
         dark = false,
         data = {},
+        defaultValue = {},
         error,
         htmlOptions = {},
         id,
@@ -66,7 +68,7 @@ const Dropdown = (props: DropdownProps) => {
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
 
     const [filterItem, setFilterItem] = useState("");
-    const [selected, setSelected] = useState<GenericObject>({});
+    const [selected, setSelected] = useState<GenericObject>(defaultValue);
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [hasTriggerSubcomponent, setHasTriggerSubcomponent] = useState(true);
     const [hasContainerSubcomponent, setHasContainerSubcomponent] =
