@@ -1,7 +1,5 @@
-For a simplified version of the Draggable API for the SelectableList kit, use the DraggableProvider to wrap the SelectableList kit and use the `enableDrag` prop. 
+For a simplified version of the Draggable API for the SelectableList kit, you can do the following:
 
-In addition to the above `dragId` is a REQUIRED prop to be passed to the SelectableList kit when implementing dragging.
+Use `DraggableProvider` and manage state as shown.
 
-The dev must manage state as shown.
-
-The dragHandle is added by default but this can be opted out of by setting `dragHandle` to false on the SelectableList kit.
+The SelectableList kit is optimized to work with the draggable kit. To enable drag, use the `enableDrag` prop on SelectableList kit AND `dragId` prop on SelectableList.Item. An additional optional boolean prop (set to true by default) of `dragHandle` is also available on SelectableList kit to show the drag handle icon.
