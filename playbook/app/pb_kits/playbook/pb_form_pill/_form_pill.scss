@@ -60,9 +60,11 @@ $form_pill_colors: (
         padding-right: $space-sm/4;
         display: flex;
         align-items: center;
-        height: 100%;
-        cursor: pointer;
+        // I had to temporarily change height to 27px so new hover state darker background forms a circle not an oval
+        // before size change (ticket 2 of 4) - change back to 100% when $pb_form_pill_height changed to 27px from 37px
+        height: 27px;
         border-radius: 70px;
+        cursor: pointer;
         &:hover {
           background-color: mix($color_value, $card_light, 40%);
           @if ($color_name == "neutral") {
