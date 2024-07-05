@@ -1,9 +1,4 @@
-<%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.sticky_header,
-    aria: object.aria,
-    **combined_html_options) do %>
+<%= pb_content_tag(:div, class: object.sticky_header) do %>
         <%= pb_rails("flex", props: {classname:object.classname, spacing:"between", padding:"sm", align:"center"}) do %>
             <%= content.presence || object.title %>
 
