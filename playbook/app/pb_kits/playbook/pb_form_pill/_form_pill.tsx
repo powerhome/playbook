@@ -5,7 +5,7 @@ import Title from '../pb_title/_title'
 import Icon from '../pb_icon/_icon'
 import Avatar from '../pb_avatar/_avatar'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
-import { buildHtmlProps } from '../utilities/props'
+import { buildDataProps, buildHtmlProps } from '../utilities/props'
 
 type FormPillProps = {
   className?: string,
@@ -19,6 +19,7 @@ type FormPillProps = {
   size?: string,
   textTransform?: 'none' | 'lowercase',
   color?: "primary" | "neutral",
+  data?: {[key: string]: string},
   tabIndex?: number,
   closeProps?: {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
@@ -39,6 +40,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     size = '',
     textTransform = 'none',
     color = "primary",
+    data = {},
     tabIndex,
   } = props
   const css = classnames(
@@ -49,12 +51,14 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     textTransform,
   )
 
+  const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
     <div className={css}
         id={id}
         tabIndex={tabIndex}
+        {...dataProps}
         {...htmlProps}
     >
         {name &&
