@@ -14,6 +14,7 @@ module Playbook
       prop :color, type: Playbook::Props::Enum,
                    values: %w[primary neutral],
                    default: "primary"
+      prop :tabindex
 
       def classname
         generate_classname("pb_form_pill_kit", color, name, text, text_transform)

@@ -79,6 +79,14 @@ $form_pill_colors: (
       }
     }
   }
+  &:focus {
+    outline: $primary solid 2px;
+    outline-offset: -1px;
+  }
+  &:focus-visible {
+    outline: $primary solid 2px;
+    outline-offset: -1px;
+  }
   &.small {
     height: fit-content;
     height: -moz-fit-content;

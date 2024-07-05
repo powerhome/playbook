@@ -19,6 +19,7 @@ type FormPillProps = {
   size?: string,
   textTransform?: 'none' | 'lowercase',
   color?: "primary" | "neutral",
+  tabIndex?: number,
   closeProps?: {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
@@ -38,6 +39,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     size = '',
     textTransform = 'none',
     color = "primary",
+    tabIndex,
   } = props
   const css = classnames(
     `pb_form_pill_kit_${color}`,
@@ -52,6 +54,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
   return (
     <div className={css}
         id={id}
+        tabIndex={tabIndex}
         {...htmlProps}
     >
         {name &&
