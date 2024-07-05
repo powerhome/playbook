@@ -86,32 +86,17 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     const toolbarElement = element.parentElement.querySelector('trix-toolbar') as HTMLElement,
       blockCodeButton = toolbarElement.querySelector('[data-trix-attribute=code]') as HTMLElement
 
+    // replace default trix "block code" button with "inline code" button
     let inlineCodeButton = toolbarElement.querySelector('[data-trix-attribute=inlineCode]') as HTMLElement
-    if (!inlineCodeButton) inlineCodeButton = blockCodeButton.cloneNode(true) as HTMLElement
-
-    // set button attributes
-    inlineCodeButton.dataset.trixAttribute = 'inlineCode'
-    blockCodeButton.insertAdjacentElement('afterend', inlineCodeButton)
+    if (!inlineCodeButton) {
+      inlineCodeButton = blockCodeButton.cloneNode(true) as HTMLElement
+      blockCodeButton.hidden = true
+      // set button attributes
+      inlineCodeButton.dataset.trixAttribute = 'inlineCode'
+      blockCodeButton.insertAdjacentElement('afterend', inlineCodeButton)
+    } 
 
     if (toolbarBottom) editor.element.after(toolbarElement)
-
-    const getCodeFormattingType = (): string => {
-      if (editor.attributeIsActive('code')) return 'block'
-      if (editor.attributeIsActive('inlineCode')) return 'inline'
-
-      const range = editor.getSelectedRange()
-      if (range[0] == range[1]) return 'block'
-
-      const text = editor.getSelectedDocument().toString().trim()
-      return /\n/.test(text) ? 'block' : 'inline'
-    }
-
-    // DOM event listeners
-    element.addEventListener('trix-selection-change', () => {
-      const type = getCodeFormattingType()
-      blockCodeButton.hidden = type == 'inline'
-      inlineCodeButton.hidden = type == 'block'
-    })
 
     focus
       ? (document.addEventListener('trix-focus', useFocus),
