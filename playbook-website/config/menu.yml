@@ -357,8 +357,8 @@ kits:
         status: "stable"
       - name: "draggable"
         platforms: *react_only
-        description:
-        status: "beta"
+        description: The draggable kit is used to make kits draggable within a specified container.
+        status: "stable"
   - name: message_text_patterns
     description: 
     components:
