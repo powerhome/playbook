@@ -52,7 +52,8 @@ const Textarea = ({
   label,
   maxCharacters,
   name,
-  onChange,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChange = () => {},
   placeholder,
   required,
   rows = 4,
