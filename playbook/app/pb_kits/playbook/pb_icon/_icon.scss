@@ -11,11 +11,6 @@ svg.pb_custom_icon {
 }
 
 $rotate-list: (90, 180, 270);
-$flip-list: (
-"horizontal": (-1, 1),
-"vertical": (1, -1),
-"both": (-1, -1)
-);
 
 @keyframes pb_icon_spin {
   0% {
@@ -36,10 +31,14 @@ svg {
         transform: rotate(#{$r}deg);
       }
     }
-    @each $f, $v in $flip-list {
-      &.flip_#{$f} {
-        transform: scale($v);
-      }
+    &.flip_horizontal {
+      transform: scaleX(-1);
+    }
+    &.flip_vertical {
+      transform: scaleY(-1);
+    }
+    &.flip_horizontal.flip_vertical {
+      transform: scaleX(-1) scaleY(-1);
     }
     &.svg-inline--fa {
       height: 1em;
