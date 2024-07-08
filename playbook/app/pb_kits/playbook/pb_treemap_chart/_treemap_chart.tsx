@@ -95,10 +95,10 @@ const TreemapChart = ({
     },
   };
 
-  const [options, setOptions] = useState(() => merge(staticOptions, customOptions));
+  const [options, setOptions] = useState({});
 
   useEffect(() => {
-    setOptions(prevOptions => merge(prevOptions, { series: [{ data: chartData }] }));
+    setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
   return (

@@ -7,14 +7,8 @@ import { SelectValueType } from '../_typeahead'
 
 type Props = {
   data: SelectValueType,
-  removeProps?: {
-    onClick?: React.MouseEventHandler<HTMLSpanElement>,
-    onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
-    onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
-  },
-  selectProps: {
-    multiKit?: string,
-  },
+  removeProps: any,
+  selectProps: any,
 }
 
 const MultiValue = (props: Props): React.ReactElement => {

@@ -97,7 +97,7 @@ export default class PbTypeahead extends PbEnhancedElement {
     this.resultsElement.innerHTML = ''
   }
 
-  newResultOption(content: DocumentFragment | Node): Element {
+  newResultOption(content: DocumentFragment) {
     const resultOption = (this.resultOptionTemplate as HTMLTemplateElement).content.cloneNode(true) as Element
     resultOption.querySelector('slot[name="content"]').replaceWith(content)
     return resultOption
@@ -186,7 +186,7 @@ export default class PbTypeahead extends PbEnhancedElement {
     )
   }
 
-  get resultsOptionCache(): Map<string, Array<DocumentFragment>> {
+  get resultsOptionCache() {
     return this._resultsOptionCache = (
       this._resultsOptionCache ||
       new Map

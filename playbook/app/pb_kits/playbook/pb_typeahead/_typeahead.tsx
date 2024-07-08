@@ -104,8 +104,7 @@ const Typeahead = ({
     multiKit: '',
     onCreateOption: null as null,
     plusIcon: false,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onMultiValueClick: (_option: SelectValueType): void => undefined,
+    onMultiValueClick: (_option: SelectValueType): any => undefined,
     ...props,
   }
 

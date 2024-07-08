@@ -20,7 +20,7 @@ import Flex from "../pb_flex/_flex"
 type TooltipProps = {
   aria?: { [key: string]: string },
   className?: string | string[],
-  children: React.ReactNode,
+  children: JSX.Element,
   data?: { [key: string]: string },
   delay?: number | Partial<{open: number; close: number}>,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
