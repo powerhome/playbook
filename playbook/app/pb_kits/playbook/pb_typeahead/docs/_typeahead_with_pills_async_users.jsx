@@ -6,7 +6,7 @@ import {
   Caption,
   Typeahead,
   User,
-} from '../..'
+} from 'playbook-ui'
 
 /**
  *

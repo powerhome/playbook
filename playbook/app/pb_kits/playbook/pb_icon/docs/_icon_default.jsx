@@ -1,7 +1,7 @@
 import React from "react"
 
 import Icon from "../_icon"
-import {Caption} from "../.."
+import {Caption} from "playbook-ui"
 
 const IconDefault = (props) => {
   return (

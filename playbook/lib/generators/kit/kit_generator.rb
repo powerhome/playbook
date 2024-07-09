@@ -52,10 +52,10 @@ class KitGenerator < Rails::Generators::NamedBase
       # Generate SCSS files ==============================
       unless platforms == "swift_only"
         template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
-        open("app/pb_kits/playbook/_playbook.scss", "a") do |f|
+        open("app/pb_kits/playbook/playbook.scss", "a") do |f|
           f.puts "\n@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
         end
-        scss_file = "app/pb_kits/playbook/_playbook.scss"
+        scss_file = "app/pb_kits/playbook/playbook.scss"
 
         # Sort kit names alphabetically
         lines = File.readlines(scss_file)

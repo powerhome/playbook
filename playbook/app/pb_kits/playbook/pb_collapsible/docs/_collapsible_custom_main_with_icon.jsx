@@ -1,5 +1,5 @@
 import React from 'react'
-import { Collapsible, useCollapsible, Background, Flex, Title, List, ListItem } from '../..'
+import { Collapsible, useCollapsible, Background, Flex, Title, List, ListItem } from 'playbook-ui'
 
 const CollapsibleCustomMainWithIcon = () => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)

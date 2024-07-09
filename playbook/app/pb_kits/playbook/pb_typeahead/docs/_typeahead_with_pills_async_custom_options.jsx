@@ -6,7 +6,7 @@ import {
   Caption,
   Typeahead,
   User,
-} from '../..'
+} from 'playbook-ui'
 
 /**
  *
@@ -16,13 +16,6 @@ import {
  * `value` and `label` among other possible fields
  * @summary - for doc example purposes only
  */
-
-type UserProps = {
-  imageUrl?: String,
-  label?: String,
-  territory?: String,
-  type?: String,
-}
 
 const filterResults = (results) =>
   results.items.map((result) => {
@@ -93,7 +86,7 @@ const TypeaheadWithPillsAsyncCustomOptions = (props) => {
           onChange={handleOnChange}
           onMultiValueClick={handleOnMultiValueClick}
           placeholder="type the name of a Github user"
-          valueComponent={(props: UserProps) => (
+          valueComponent={(props) => (
             <User
                 avatar
                 avatarUrl={props.imageUrl}

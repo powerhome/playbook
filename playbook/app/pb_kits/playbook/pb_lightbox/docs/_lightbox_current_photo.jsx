@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint-disable jsx-control-statements/jsx-use-if-tag */
 import React, { useState } from 'react'
-import { Flex, Image, Button, Body, FlexItem } from '../../'
+import { Flex, Image, Button, Body, FlexItem } from 'playbook-ui'
 import Lightbox from '../_lightbox.tsx'
 
 const LightboxCurrentPhoto = (props) => {

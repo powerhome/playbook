@@ -1,5 +1,5 @@
 import React from 'react'
-import { Gauge } from '../../'
+import { Gauge } from 'playbook-ui'
 
 const data = [{
   name: 'Rating', value: 4.5,

@@ -3,7 +3,7 @@
 /* @flow */
 
 import React, { useState } from 'react'
-import { components, OptionProps } from 'react-select'
+import { components } from 'react-select'
 
 import {
   Avatar,
@@ -12,7 +12,7 @@ import {
   FlexItem,
   Title,
   Typeahead,
-} from '../..'
+} from 'playbook-ui'
 
 const USERS = [
   {
@@ -42,7 +42,7 @@ const TypeaheadWithHighlight = (props) => {
 
   const formatOptionLabel = ({name, territory, title}, {inputValue}) => {
 
-    const highlighted = (text: string) => {
+    const highlighted = (text) => {
       if (!inputValue.length) return text
       return text.replace(
         new RegExp(inputValue, 'gi'),
@@ -70,7 +70,7 @@ const TypeaheadWithHighlight = (props) => {
   }
 
   const customComponents = {
-    Option: (highlightProps: OptionProps) => (
+    Option: (highlightProps) => (
       <components.Option {...highlightProps}/>
     ),
     SingleValue: ({ ...props }) => (

@@ -3,7 +3,7 @@ import {
   Button,
   Card,
   RichTextEditor,
-} from '../../'
+} from 'playbook-ui'
 
 const RichTextEditorPreview = (props) => {
   const [showPreview, setShowPreview] = useState(false)

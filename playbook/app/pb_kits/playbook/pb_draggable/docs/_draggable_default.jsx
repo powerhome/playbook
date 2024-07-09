@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SelectableList, Draggable, DraggableProvider } from "../../";
+import { SelectableList, Draggable, DraggableProvider } from "playbook-ui";
 
 // Initial items to be dragged
 const data = [

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { Tooltip, Flex, CircleIconButton } from '../..'
+import { Tooltip, Flex, CircleIconButton } from 'playbook-ui'
 
 const TooltipMargin = (props) => {
   return (

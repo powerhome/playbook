@@ -2,9 +2,9 @@
 /* @flow */
 
 import React, { useState } from "react";
-import { FileUpload, List, ListItem } from "../..";
+import { FileUpload, List, ListItem } from "playbook-ui";
 
-const AcceptedFilesList = ({ files }: FileList) => (
+const AcceptedFilesList = ({ files }) => (
   <List>
     {files.map((file) => (
       <ListItem key={file.name}>{file.name}</ListItem>

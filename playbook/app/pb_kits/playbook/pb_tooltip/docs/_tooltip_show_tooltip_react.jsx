@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useState } from 'react'
-import {  Button, Body, Flex, FlexItem, Tooltip } from '../..'
+import {  Button, Body, Flex, FlexItem, Tooltip } from 'playbook-ui'
 
 const TooltipShowTooltipReact = (props) => {
   const [showTooltip, setShowTooltip] = useState(true);

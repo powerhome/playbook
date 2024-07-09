@@ -7,7 +7,7 @@ import {
   Flex,
   RichTextEditor,
   Typeahead,
-} from "../..";
+} from "playbook-ui";
 
 const useDialog = (visible = false) => {
   const [opened, setOpened] = useState(visible);

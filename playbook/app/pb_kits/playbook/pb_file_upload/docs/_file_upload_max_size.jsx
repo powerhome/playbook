@@ -7,16 +7,16 @@ import {
   FileUpload,
   List,
   ListItem,
-} from '../..'
+} from 'playbook-ui'
 
-const AcceptedFilesList = ({ files }: FileList) => (
+const AcceptedFilesList = ({ files }) => (
   <List>
     {files.map((file) => (
       <ListItem key={file.name}>{file.name}</ListItem>
     ))}
   </List>
 )
-const RejectedFilesList = ({ files }: FileList) => (
+const RejectedFilesList = ({ files }) => (
   <List>
     {files.map((file) => (
       <ListItem key={file.name}><Body color="error">{`${file.name} (file too large)`}</Body></ListItem>

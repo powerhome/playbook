@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon } from '../../'
+import { Icon } from 'playbook-ui'
 
 const config = {
   icon: (

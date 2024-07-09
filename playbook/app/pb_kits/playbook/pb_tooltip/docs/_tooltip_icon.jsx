@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { Tooltip, Button, Flex } from '../..'
+import { Tooltip, Button, Flex } from 'playbook-ui'
 
 const TooltipIcon = (props) => {
   return (

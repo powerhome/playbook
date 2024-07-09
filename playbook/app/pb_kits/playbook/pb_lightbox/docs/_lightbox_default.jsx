@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint-disable jsx-control-statements/jsx-use-if-tag */
 import React, { useState } from 'react'
-import { Flex, Image } from '../../'
+import { Flex, Image } from 'playbook-ui'
 import Lightbox from '../_lightbox.tsx'
 
 const LightboxDefault = (props) => {
