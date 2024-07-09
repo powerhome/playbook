@@ -10,7 +10,7 @@ module Playbook
       prop :error, type: Playbook::Props::String
       prop :required, type: Playbook::Props::Boolean,
                       default: false
-      prop :defaultValue
+      prop :default_value
 
       def data
         Hash(prop(:data)).merge(pb_dropdown: true)
@@ -27,7 +27,7 @@ module Playbook
       end
 
       def input_default_value
-        defaultValue.present? ? defaultValue.transform_keys(&:to_s) : ""
+        default_value.present? ? default_value.transform_keys(&:to_s) : ""
       end
     end
   end
