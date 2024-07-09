@@ -50,6 +50,11 @@ Object.entries(icons).forEach(([key, value]) => {
 document.addEventListener('DOMContentLoaded', () => {
   const anchors = new AnchorJS()
   anchors.add('.pb--kit-example > .pb_caption_kit_md:first-child')
+  const variantAnchors = new AnchorJS()
+  variantAnchors.options = {
+    class: 'props-variant-anchor',
+  }
+  variantAnchors.add('.pb--kit-example .pb_title_kit_size_4');
   const propsTableAnchors = new AnchorJS()
   propsTableAnchors.options = {
     class: 'props-table-anchor',
