@@ -2,19 +2,22 @@ import React, { useState } from "react";
 import classnames from "classnames";
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import { globalProps, domSafeProps } from "../utilities/globalProps";
 
 import Checkbox from "../pb_checkbox/_checkbox";
 import ListItem from "../pb_list/_list_item";
 import Radio from "../pb_radio/_radio";
+import { GenericObject } from "../types";
 
 export type SelectableListItemProps = {
   aria?: { [key: string]: string };
   children: React.ReactNode[] | React.ReactNode;
   checked?: boolean;
   className?: string;
-  data?: object;
+  data?: GenericObject;
   defaultChecked?: boolean;
+  dragId?: string;
+  dragHandle?: boolean;
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   label?: string;
@@ -31,6 +34,8 @@ const SelectableListItem = ({
   children,
   className,
   data = {},
+  dragId,
+  dragHandle = true,
   defaultChecked,
   htmlOptions = {},
   id,
@@ -39,7 +44,7 @@ const SelectableListItem = ({
   name = "",
   value = "",
   variant = "checkbox",
-  onChange = () => {},
+  onChange = () => {void 0},
   ...props
 }: SelectableListItemProps) => {
   const ariaProps = buildAriaProps(aria);
@@ -61,28 +66,31 @@ const SelectableListItem = ({
 
   return (
     <ListItem
-      {...props}
-      className={classnames(checkedState ? "checked_item" : "", className)}
+        {...props}
+        className={classnames(checkedState ? "checked_item" : "", className)}
+        dragHandle={dragHandle}
+        dragId={dragId}
     >
       <div 
-        {...ariaProps} 
-        {...dataProps}
-        {...htmlProps} 
-        className={classes}
+          {...ariaProps} 
+          {...dataProps}
+          {...htmlProps} 
+          className={classes}
       >
         {variant == "checkbox" && (
           <>
             <Checkbox
-              checked={checkedState}
-              id={id}
-              name={name}
-              onChange={handleChecked}
-              // eslint suppressor, text is needed to display on screen
-              //@ts-ignore
-              text={label || (text && false)}
-              type="checkbox"
-              value={value}
-              {...props}
+                checked={checkedState}
+                id={id}
+                name={name}
+                onChange={handleChecked}
+                // eslint suppressor, text is needed to display on screen
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-ignore
+                text={label || (text && false)}
+                type="checkbox"
+                value={value}
+                {...props}
             />
             {children}
           </>
@@ -90,16 +98,19 @@ const SelectableListItem = ({
         {variant == "radio" && (
           <>
             <Radio
-              defaultChecked={defaultChecked}
-              id={id}
-              label={label}
-              name={name}
-              onChange={onChange}
-              //@ts-ignore
-              text={label}
-              type="radio"
-              value={value}
-              {...props}
+                defaultChecked={defaultChecked}
+                id={id}
+                label={label}
+                name={name}
+                onChange={onChange}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-ignore
+                text={label}
+                type="radio"
+                value={value}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-ignore
+                {...domSafeProps(props)}
             />
             {children}
           </>

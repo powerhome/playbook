@@ -170,7 +170,7 @@ test('generated custom Trigger', () => {
         options={options}
     >
       <Dropdown.Trigger>
-          <Icon icon="home" />
+          <Icon icon="elephant" />
       </Dropdown.Trigger>
       {options.map((option) => (
       <Dropdown.Option key={option.id} 
@@ -182,7 +182,7 @@ test('generated custom Trigger', () => {
 
   const kit = screen.getByTestId(testId)
   const trigger = kit.querySelector('.pb_dropdown_trigger')
-  const customTrigger = trigger.querySelector('.fa-home.pb_icon_kit.fa-fw')
+  const customTrigger = trigger.querySelector('.fa-elephant.pb_icon_kit.fa-fw')
   expect(customTrigger).toBeInTheDocument()
 })
 
@@ -203,5 +203,20 @@ test('selected option on click', () => {
   const kit = screen.getByTestId(testId)
   const option = kit.querySelector('.pb_dropdown_option_list')
   option.click()
-  expect(option).toHaveClass('pb_dropdown_option_selected p_xs')
+  expect(option).toHaveClass('pb_dropdown_option_selected')
+})
+
+test('show error message', () => {
+  const errorMessage = 'Please make a valid selection'
+
+  render (
+    <Dropdown
+        data={{ testid: testId }}
+        error={errorMessage}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveTextContent(errorMessage)
 })

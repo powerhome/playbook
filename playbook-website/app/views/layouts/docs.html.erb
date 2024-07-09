@@ -13,8 +13,7 @@
       <% end %>
       <%= pb_rails("layout/body") do %>
         <div class="pb--page--content--main">
-          <% unless action_name == 'changelog' %>
-            <%= pb_rails("background", props: {
+          <%= pb_rails("background", props: {
               background_color: "dark",
               image_url: @front_matter['header'] || asset_pack_url("getting-started.svg"),
               background_repeat: "no-repeat",
@@ -22,16 +21,15 @@
               background_position: "center"
             }) do %>
               <div style="height:250px"></div>
-            <% end %>
           <% end %>
           <%= pb_rails("flex", props:{orientation: "column", align:"center"}) do %>
               <%= pb_rails("flex/flex_item", props: { classname: "minw0 w100" }) do %>
                 <%= pb_rails("background", props: { display: "flex", justify_content:"center",classname: "markdown w100", background_color: "white", padding_x: "sm", padding_y: "md" }) do %>
-                  <%= pb_rails("background", props: { max_width: action_name == 'changelog' ? 'md' : 'lg', background_color: "white" }) do %>
+                  <%= pb_rails("background", props: { max_width: 'lg', background_color: "white" }) do %>
                     <div class="markdown_title"><%= @page_title %></div>
                     <%= yield %>
                     <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
-                    <%= link_to action_name == 'changelog' ? "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md" : gh_edit_link(@parent, @page, @link_extension) do %>
+                    <%= link_to gh_edit_link(@parent, @page, @link_extension) do %>
                       <%= pb_rails("caption", props: {
                         text: "Edit this page",
                         color: "link",

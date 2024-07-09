@@ -3,6 +3,7 @@
 # rubocop:disable Style/HashLikeCase
 
 require "open-uri"
+require "json"
 
 module Playbook
   module PbIcon
@@ -37,6 +38,8 @@ module Playbook
                         default: "far"
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
+
+      ALIASES = JSON.parse(File.read(Playbook::Engine.root.join("app/pb_kits/playbook/pb_icon/icon_aliases.json")))["aliases"].freeze
 
       def valid_emoji?
         emoji_regex = /\p{Emoji}/
@@ -81,9 +84,11 @@ module Playbook
 
       def asset_path
         return unless Rails.application.config.respond_to?(:icon_path)
-        return unless Dir.entries(Rails.application.config.icon_path).include? "#{icon}.svg"
 
-        Rails.root.join(Rails.application.config.icon_path, "#{icon}.svg")
+        base_path = Rails.application.config.icon_path
+        resolved_icon = resolve_alias(icon)
+        icon_path = Dir.glob(Rails.root.join(base_path, "**", "#{resolved_icon}.svg")).first
+        icon_path if icon_path && File.exist?(icon_path)
       end
 
       def render_svg
@@ -104,6 +109,22 @@ module Playbook
       end
 
     private
+
+      def resolve_alias(icon)
+        aliases = ALIASES[icon]
+        return icon unless aliases
+
+        if aliases.is_a?(Array)
+          aliases.find { |alias_name| file_exists?(alias_name) } || icon
+        else
+          aliases
+        end
+      end
+
+      def file_exists?(alias_name)
+        base_path = Rails.application.config.icon_path
+        File.exist?(Dir.glob(Rails.root.join(base_path, "**", "#{alias_name}.svg")).first)
+      end
 
       def svg_size
         size.nil? ? "1x" : size

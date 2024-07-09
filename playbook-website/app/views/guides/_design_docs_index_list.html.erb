@@ -1,0 +1,31 @@
+<% if @navigation.present? %>
+  <%= pb_rails("layout", props: { layout: "collection", margin_y: "xl", padding_bottom: "xl" }) do %>
+    <%= pb_rails("layout/body", props: { classname: "design-guidelines-grid-override" }) do %>
+      <% @navigation[:pages].each do |page_name| %>
+        <%= link_to "/#{page_name[:url]}", class: "display_flex align_items_stretch" do %>
+          <%= pb_rails("card", props: { padding: "none", hover: { shadow: "deep" }, flex: 1} ) do %>
+            <%= pb_rails("background" ) do %>
+              <%= pb_rails("flex", props: { justify: "center", padding: "xl"} ) do %>
+                <%
+                  if page_name[:frontmatter]['icon']
+                    icon = page_name[:frontmatter]['icon']
+                  else
+                    icon = "files"
+                  end
+                %>
+                <%= pb_rails("icon_circle", props: { icon: icon, variant: "royal" }) %>
+              <% end %>
+            <% end %>
+            <%= pb_rails("flex", props: {  justify: "between", align: "center", padding: "sm"} ) do %>
+              <%= pb_rails("title", props: { size: 4, color: "link", text: page_name[:title] }) %>
+              <%= pb_rails("title", props: { size: 4, color: "link" }) do %>
+                <%= pb_rails("icon", props: { icon: "arrow-right-long" }) %>
+              <% end %>
+            <% end %>
+            <%= pb_rails("body", props: { text: page_name[:frontmatter]['description'], truncate: "4", color: "light", margin_x: "sm", margin_bottom: "sm" }) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

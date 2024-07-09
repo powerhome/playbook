@@ -53,24 +53,38 @@ class PagesController < ApplicationController
     @structured_data = extract_changelog_data(@data)
   end
 
-  def changelog
+  def changelog_web
     @data = Playbook::Engine.root.join("CHANGELOG.md").read
     @page_title = "What's New"
+    @page = "changelog_web"
     @show_sidebar = true
-    @front_matter = nil
-    render layout: "docs"
+    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md"
+    render layout: "changelog"
   end
+
+  def changelog_figma
+    @data = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
+    @page_title = "What's New"
+    @page = "changelog_figma"
+    @show_sidebar = true
+    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/FIGMA_CHANGELOG.md"
+    render layout: "changelog"
+  end
+
+  def changelog; end
 
   def kits
     params[:type] ||= "react"
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @table_data = advanced_table_mock_data
   end
 
   def kit_category_show_rails
     params[:type] ||= "rails"
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @table_data = advanced_table_mock_data
     render template: "pages/kit_category_show"
   end
 
@@ -81,12 +95,7 @@ class PagesController < ApplicationController
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-
-    if @kit == "advanced_table"
-      advanced_table_mock_data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data.json"))
-      @table_data = JSON.parse(advanced_table_mock_data, object_class: OpenStruct)
-    end
-
+    @table_data = advanced_table_mock_data if @kit == "advanced_table"
     render "pages/kit_show"
   end
 
@@ -202,7 +211,7 @@ private
   end
 
   def categories
-    aggregate_kits.map { |item| item["name"] }
+    aggregate_kits.map { |item| item["category"] }
   end
 
   def all_kits
@@ -220,7 +229,7 @@ private
   end
 
   def set_category
-    @category = params[:name]
+    @category = params[:category]
     if categories.include?(@category) && helpers.category_has_kits?(category_kits: kit_categories, type: params[:type])
       @category_kits = kit_categories
       @kits = params[:name]
@@ -230,8 +239,8 @@ private
   end
 
   def kit_categories
-    @category = params[:name]
-    aggregate_kits.find { |item| item["name"] == @category }["components"].map { |component| component["name"] }
+    @category = params[:category]
+    aggregate_kits.find { |item| item["category"] == @category }["components"].map { |component| component["name"] }
   end
 
   def set_kit
@@ -338,5 +347,10 @@ private
     @type = type
 
     render template: "pages/kit_collection", layout: "layouts/fullscreen"
+  end
+
+  def advanced_table_mock_data
+    advanced_table_mock_data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data.json"))
+    JSON.parse(advanced_table_mock_data, object_class: OpenStruct)
   end
 end

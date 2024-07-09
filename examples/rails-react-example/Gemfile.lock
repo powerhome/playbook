@@ -95,6 +95,7 @@ GEM
       reline (>= 0.3.8)
     erubi (1.12.0)
     execjs (2.9.1)
+    ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.4)
@@ -140,6 +141,13 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.3-x86_64-linux)
       racc (~> 1.4)
+    playbook_ui (13.27.0)
+      actionpack (>= 5.2.4.5)
+      actionview (>= 5.2.4.5)
+      activesupport (>= 5.2.4.5)
+      react-rails (= 2.6.1)
+      view_component (= 2.55.0)
+      webpacker-react (~> 0.3.2)
     psych (5.1.2)
       stringio
     public_suffix (5.0.4)
@@ -182,7 +190,7 @@ GEM
     rake (13.1.0)
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
-    react-rails (3.2.0)
+    react-rails (2.6.1)
       babel-transpiler (>= 0.7.0)
       connection_pool
       execjs
@@ -193,6 +201,16 @@ GEM
       io-console (~> 0.5)
     rexml (3.2.6)
     rubyzip (2.3.2)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (4.18.1)
       base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
@@ -221,6 +239,9 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    view_component (2.55.0)
+      activesupport (>= 5.0.0, < 8.0)
+      method_source (~> 1.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -235,6 +256,8 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
+    webpacker-react (0.3.2)
+      webpacker
     websocket (1.2.10)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -254,9 +277,11 @@ DEPENDENCIES
   debug
   importmap-rails
   jbuilder
+  playbook_ui (~> 13.27.0)
   puma (~> 5.6)
   rails (~> 7.0.8)
   react-rails
+  sass-rails
   selenium-webdriver
   sprockets-rails
   sqlite3

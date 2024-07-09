@@ -40,6 +40,31 @@ Dir.glob("#{search_path}/**/*.md") do |filename|
   end
 end
 
+# Manually Set custom names for Changelog
+
+navigation[:whats_new] = {
+  url: "",
+  title: "",
+  filepath: "",
+  frontmatter: {},
+  pages: [
+    {
+      url: "changelog/web",
+      title: "Web Changelog",
+      page_id: "CHANGELOG",
+      filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/CHANGELOG.md",
+      frontmatter: {},
+    },
+    {
+      url: "changelog/figma",
+      title: "Figma Changelog",
+      page_id: "FIGMA",
+      filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/FIGMA_CHANGELOG.md",
+      frontmatter: {},
+    },
+  ],
+}
+
 # Move HTML figma to the end
 
 move_pages = navigation[:getting_started][:pages].select { |page| ["HTML&_CSS", "Figma_setup", "figma_setup"].include?(page[:page_id]) }

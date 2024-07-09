@@ -10,6 +10,7 @@ import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
+import { merge } from 'lodash'
 
 type CircleChartProps = {
   align?: "left" | "right" | "center";
@@ -18,6 +19,7 @@ type CircleChartProps = {
   children?: Node;
   className?: string;
   colors?: string[];
+  customOptions?: Partial<Highcharts.Options>;
   dark?: boolean;
   data?: {[key: string]: string},
   dataLabelHtml?: string;
@@ -44,16 +46,20 @@ type CircleChartProps = {
   borderWidth?: number;
 };
 
-// Adjust Circle Chart Block Kit Dimensions to Match the Chart for Centering
+
+
 const alignBlockElement = (event: any) => {
-  const itemToMove = document.querySelector(
+  const itemToMove = document.querySelector<HTMLElement>(
     `#wrapper-circle-chart-${event.target.renderTo.id} .pb-circle-chart-block`
-  ) as HTMLElement;
+  );
   const chartContainer = document.querySelector(`#${event.target.renderTo.id}`);
-  if (itemToMove !== null) {
+
+  if (itemToMove !== null && chartContainer !== null) {
     itemToMove.style.height = `${event.target.chartHeight}px`;
     itemToMove.style.width = `${event.target.chartWidth}px`;
-    chartContainer.firstChild.before(itemToMove);
+    if (chartContainer.firstChild !== null) {
+      chartContainer.firstChild.before(itemToMove);
+    }
   }
 };
 
@@ -67,6 +73,7 @@ const CircleChart = ({
   children,
   className,
   colors = [],
+  customOptions = {},
   dark = false,
   data = {},
   dataLabelHtml = "<div>{point.name}</div>",
@@ -114,6 +121,9 @@ const CircleChart = ({
   const innerSizeFormat = (size: "sm" | "md" | "lg" | "none") =>
     innerSizes[size];
 
+
+  const filteredProps: any = {...props};
+  delete filteredProps.verticalAlign;
 
   const [options, setOptions] = useState({});
 
@@ -171,7 +181,7 @@ const CircleChart = ({
       ],
       credits: false,
     };
-    setOptions({ ...staticOptions });
+    setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
 
@@ -181,7 +191,7 @@ const CircleChart = ({
         <div id={`wrapper-circle-chart-${id}`}>
           <HighchartsReact
               containerProps={{
-              className: classnames("pb_circle_chart", globalProps(props)),
+              className: classnames("pb_circle_chart", globalProps(filteredProps)),
               id: id,
               ...ariaProps,
               ...dataProps,
@@ -195,7 +205,7 @@ const CircleChart = ({
       ) : (
         <HighchartsReact
             containerProps={{
-            className: classnames("pb_circle_chart", globalProps(props)),
+            className: classnames("pb_circle_chart", globalProps(filteredProps)),
             id: id,
             ...ariaProps,
             ...dataProps,

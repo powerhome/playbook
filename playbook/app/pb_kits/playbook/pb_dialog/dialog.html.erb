@@ -1,10 +1,5 @@
 <div class="pb_dialog_wrapper_rails <%= object.full_height_style %>" data-overlay-click= <%= object.overlay_close %> >
-    <%= content_tag(:dialog,
-        aria: object.aria,
-        data: object.data,
-        id: object.id,
-        class: object.classname,
-        **combined_html_options) do %>
+    <%= pb_content_tag(:dialog) do %>
             <% if object.status === "" && object.title %>
                 <%= pb_rails("dialog/dialog_header", props: { title: object.title, id: object.id }) %>
             <% end %>
@@ -37,7 +32,6 @@
 </div>
 
 <%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => {
-        dialogHelper()
-    })
+    window.addEventListener("DOMContentLoaded", () => dialogHelper())
+    window.addEventListener("turbo:frame-load", () => dialogHelper())
 <% end %>

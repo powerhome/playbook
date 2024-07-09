@@ -1,5 +1,5 @@
 <%= pb_rails("nav", props: { variant: "bold" }) do %>
-    <%= pb_rails("nav/item", props: { text: "Overview", link: "#", collapsible: true, icon_left:"city" }) do %>
+    <%= pb_rails("nav/item", props: { text: "Overview", link: "#", collapsible: true, icon_left:"city", collapsed: false }) do %>
         <%= pb_rails("nav", props: { variant: "bold" }) do %>
             <%= pb_rails("nav/item", props: { text: "City", link: "#" }) %>
             <%= pb_rails("nav/item", props: { text: "People", link: "#" }) %>

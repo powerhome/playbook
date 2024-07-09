@@ -2201,9 +2201,9 @@
   resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.1.tgz#344baf6ff9eaad7a73cff067d8c56bfc11ae5304"
   integrity sha512-viouXhegu/TjkvYQoiRZK3aax69dGXxgEjpvZW81wIJdxm5Fnvp3VVIP4VHKqX4SvFw6qpmkILkD4RJWAdrt7A==
 
-"@fortawesome/fontawesome-pro@^6.2.1":
+"@fortawesome/fontawesome-pro@6.2.1":
   version "6.2.1"
-  resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-pro/-/6.2.1/fontawesome-pro-6.2.1.tgz#1cd5b79d93fdb955ef8a04996fef20a44207a6f0"
+  resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-pro/-/fontawesome-pro-6.2.1.tgz#1cd5b79d93fdb955ef8a04996fef20a44207a6f0"
   integrity sha512-dHk7iiCf5MCmoUvmrYzfN/I3gebpgpA1oqlOffgOThnsaAR4kpaQ5YMTdkdG99Of1hnN0Bok6R+HE28zXb3SOg==
 
 "@gar/promisify@^1.0.1":
@@ -2832,15 +2832,15 @@
   resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.1.0.tgz#f1e1151481f51421186ba8caad99fadb24b1fe51"
   integrity sha512-8e5DRgnKPbJ+ofAtqjUPZTxcgHg/TVf52WeNqAGBUXSS4QWHemL6fj1n/YHfAIvx3aMUhFwrw2lUNofUocgK3A==
 
-"@powerhome/playbook-icons-react@0.0.1-alpha.8":
-  version "0.0.1-alpha.8"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/d71ffd31679c57b3a7358718ce84b2f9e5f0c577#d71ffd31679c57b3a7358718ce84b2f9e5f0c577"
-  integrity sha512-SUM1/MsJb4nnNEz2A9PMXa8hgBeCdGCNQWEdrozy1l2/1GZOkiw28aGIUZZN3LAR2+0hRRNhVhcetfpuGCZcFg==
+"@powerhome/playbook-icons-react@0.0.1-alpha.25":
+  version "0.0.1-alpha.25"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/3a700f9b6d6427aefe0fb94039e292cea462fe9e#3a700f9b6d6427aefe0fb94039e292cea462fe9e"
+  integrity sha512-0h53TdW/PrUrwYFxonE0dIN9vupqAVLwBv70hSrRkrKb8chuLc/+kBtL15MeSJ+9cWIXF0ocFOHBlNTc25hmyw==
 
-"@powerhome/playbook-icons@0.0.1-alpha.16":
-  version "0.0.1-alpha.16"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/273baad6202de2736f9e38287e5589e00f47dfb8#273baad6202de2736f9e38287e5589e00f47dfb8"
-  integrity sha512-Kim7OqGxotUuhcxHBQI8a1M184DvzSyHU3ZmN/B6JANcw2jIOVL9z0f+qa9Trgij1cmyY444WC51LDbYaGvEug==
+"@powerhome/playbook-icons@0.0.1-alpha.25":
+  version "0.0.1-alpha.25"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/261d2f40561f1d4d0505e4af18892916941ed1a0#261d2f40561f1d4d0505e4af18892916941ed1a0"
+  integrity sha512-LtnN8E/yHaXzjQG+sZfpUbGA9Xdqpwhx8aFSPvg0lGf7phOoNFHSmjXhK0a36bZnPn0tIGBct9LhSzp6zhyVBA==
 
 "@powerhome/power-fonts@0.0.1-alpha.6":
   version "0.0.1-alpha.6"
@@ -8106,10 +8106,10 @@ highcharts-react-official@^3.2.0:
   resolved "https://npm.powerapp.cloud/highcharts-react-official/-/highcharts-react-official-3.2.0.tgz#42f8f237d73eec6791318efb41237067000cf815"
   integrity sha512-71IJZsLmEboYFjONpwC3NRsg6JKvtKYtS5Si3e6s6MLRSOFNOY8KILTkzvO36kjpeR/A0X3/kvvewE+GMPpkjw==
 
-highcharts@^9.0.0:
-  version "9.3.3"
-  resolved "https://npm.powerapp.cloud/highcharts/-/highcharts-9.3.3.tgz#ae62178de788fd7934431aa26b8e250b8073c541"
-  integrity sha512-QeOvm6cifeZYYdTLm4IxZsXcOE9c4xqfs0z0OJJ0z7hhA9WG0rmcVAyuIp5HBl/znjA/ayYHmpYjBYD/9PG4Fg==
+highcharts@^10.0.0:
+  version "10.3.3"
+  resolved "https://npm.powerapp.cloud/highcharts/-/highcharts-10.3.3.tgz#b8acca24f2d4b1f2f726540734166e59e07b35c4"
+  integrity sha512-r7wgUPQI9tr3jFDn3XT36qsNwEIZYcfgz4mkKEA6E4nn5p86y+u1EZjazIG4TRkl5/gmGRtkBUiZW81g029RIw==
 
 highlight-words-core@^1.2.0:
   version "1.2.2"
@@ -8466,10 +8466,10 @@ intersection-observer@^0.10.0:
   resolved "https://npm.powerapp.cloud/intersection-observer/-/intersection-observer-0.10.0.tgz#4d11d63c1ff67e21e62987be24d55218da1a1a69"
   integrity sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==
 
-intl-tel-input@^17.0.19:
-  version "17.0.19"
-  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-17.0.19.tgz#4c277e3bf02069fac2ef3821a62a3d7e8b55740a"
-  integrity sha512-GBNoUT4JVgm2e1N+yFMaBQ24g5EQfZhDznGneCM9IEZwfKsMUAUa1dS+v0wOiKpRAZ5IPNLJMIEEFGgqlCI22A==
+intl-tel-input@^18.0.15:
+  version "18.5.3"
+  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-18.5.3.tgz#20b18431cb802d33c118f52e332e218e641ec09b"
+  integrity sha512-ncFqSpkdGf2YC/FvAiwBH44KAeRG8L7aqDODEpOvMAT3ZpBtvc/WtwaQ/6X4+HKDTlGkobdBjr6P3nAMwO8jtA==
 
 invariant@^2.2.2:
   version "2.2.4"

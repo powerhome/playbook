@@ -8,11 +8,11 @@
     "release": "RAILS_ENV=production NODE_ENV=production ./bin/webpack"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-pro": "^6.2.1",
+    "@fortawesome/fontawesome-pro": "6.2.1",
     "@mapbox/mapbox-gl-draw": "^1.4.1",
-    "@powerhome/playbook-icons": "0.0.1-alpha.16",
-    "@powerhome/playbook-icons-react": "0.0.1-alpha.8",
-    "@powerhome/power-fonts": "0.0.1-alpha.6",
+    "@powerhome/playbook-icons": "0.0.1-alpha.25",
+    "@powerhome/playbook-icons-react": "0.0.1-alpha.25",
+    "@powerhome/power-fonts": "0.0.1-alpha.4",
     "@rails/webpacker": "5.4.3",
     "@svgr/webpack": "5.5.0",
     "@tiptap/extension-document": "^2.1.12",
@@ -51,8 +51,8 @@
     "copy-to-clipboard": "^3.3.3",
     "eslint": "6.8.0",
     "react-svg-loader": "^3.0.3",
-    "webpack": "4.46.0",
     "style-loader": "2.0.0",
+    "webpack": "4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.2"
   }

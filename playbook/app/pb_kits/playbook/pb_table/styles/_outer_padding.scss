@@ -1,0 +1,21 @@
+@import "../../tokens/spacing";
+
+[class^=pb_table] {
+  @each $name, $value in $spaces {
+    &.outer_padding_#{$name} {
+      td:first-child,
+      th:first-child,
+      .pb_table_td:first-child,
+      .pb_table_th:first-child {
+        padding-left: #{$value} !important;
+      }
+  
+      td:last-child,
+      th:last-child,
+      .pb_table_td:last-child,
+      .pb_table_th:last-child {
+        padding-right: #{$value} !important;
+      }
+    }
+  }
+}

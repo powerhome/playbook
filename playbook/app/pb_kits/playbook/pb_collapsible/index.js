@@ -14,7 +14,12 @@ export default class PbCollapsible extends PbEnhancedElement {
     this.element.addEventListener('click', () => {
       this.toggleElement(this.target)
     })
-    this.displayDownArrow()
+     // Check the initial state of the collapsible content and set the arrow accordingly
+     if (this.target.classList.contains('is-visible')) {
+      this.displayUpArrow()
+    } else {
+      this.displayDownArrow()
+    }
     // Listen for a custom event to toggle the collapsible
     document.addEventListener(`${this.target.id}`, () => {
       this.toggleElement(this.target)
@@ -75,13 +80,23 @@ export default class PbCollapsible extends PbEnhancedElement {
     this.displayUpArrow()
   }
 
-  displayDownArrow() {
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'inline-block'
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'none'
+  toggleArrows(showDownArrow) {
+    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR);
+    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR);
+  
+    if (downArrow) {
+      downArrow.style.display = showDownArrow ? 'inline-block' : 'none';
+    }
+    if (upArrow) {
+      upArrow.style.display = showDownArrow ? 'none' : 'inline-block';
+    }
   }
-
+  
+  displayDownArrow() {
+    this.toggleArrows(true);
+  }
+  
   displayUpArrow() {
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'inline-block'
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'none'
-   }
+    this.toggleArrows(false);
+  }
 }

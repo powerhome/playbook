@@ -15,3 +15,7 @@ test('generated scaffold test - update me', () => {
   const kit = renderKit(<%= @kit_name_pascal %> , props)
   expect(kit).toBeInTheDocument()
 })
+
+it("should be accessible", async () => {
+  ensureAccessible(<%= @kit_name_pascal %>, props)
+})

@@ -8,16 +8,22 @@ const DOWN_ARROW_SELECTOR = "#dropdown_open_icon";
 const UP_ARROW_SELECTOR = "#dropdown_close_icon";
 const OPTION_SELECTOR = "[data-dropdown-option-label]";
 const CUSTOM_DISPLAY_SELECTOR = "[data-dropdown-custom-trigger]";
+const INPUT_FORM_VALIDATION = "#dropdown-form-validation";
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
     return DROPDOWN_SELECTOR;
   }
 
+  get target() {
+    return this.element.parentNode.querySelector(CONTAINER_SELECTOR);
+  }
+
   connect() {
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.bindEventListeners();
     this.updateArrowDisplay(false);
+    this.handleFormValidation();
   }
 
   bindEventListeners() {
@@ -38,9 +44,13 @@ export default class PbDropdown extends PbEnhancedElement {
   handleOptionClick(event) {
     const option = event.target.closest(OPTION_SELECTOR);
     const hiddenInput = this.element.querySelector("#dropdown-selected-option");
+    const inputFormValidation = this.element.querySelector(INPUT_FORM_VALIDATION);
+
     if (option) {
       const value = option.dataset.dropdownOptionLabel;
       hiddenInput.value = JSON.parse(value).id;
+      inputFormValidation.value = JSON.parse(value).id;
+      this.clearFormValidation(inputFormValidation);
       this.onOptionSelected(value, option);
     }
   }
@@ -103,10 +113,6 @@ export default class PbDropdown extends PbEnhancedElement {
     selectedOption.classList.add("pb_dropdown_option_selected");
   }
 
-  get target() {
-    return this.element.parentNode.querySelector(CONTAINER_SELECTOR);
-  }
-
   showElement(elem) {
     elem.classList.remove("close");
     elem.classList.add("open");
@@ -148,6 +154,29 @@ export default class PbDropdown extends PbEnhancedElement {
     if (downArrow && upArrow) {
       downArrow.style.display = isOpen ? "none" : "inline-block";
       upArrow.style.display = isOpen ? "inline-block" : "none";
+    }
+  }
+
+  handleFormValidation() {
+    const inputFormValidation = this.element.querySelector(INPUT_FORM_VALIDATION);
+
+    inputFormValidation.addEventListener("invalid", function (event) {
+      if (inputFormValidation.hasAttribute("required") && inputFormValidation.value === "") {
+        event.preventDefault();
+        inputFormValidation.closest(".dropdown_wrapper").classList.add("error");
+      }
+    }, true);
+  }
+
+  clearFormValidation(input) {
+    if (input.checkValidity()) {
+      const dropdownWrapperElement = input.closest(".dropdown_wrapper");
+      dropdownWrapperElement.classList.remove("error");
+
+      const errorLabelElement = dropdownWrapperElement.querySelector(".pb_body_kit_negative");
+      if (errorLabelElement) {
+        errorLabelElement.remove();
+      }
     }
   }
 }

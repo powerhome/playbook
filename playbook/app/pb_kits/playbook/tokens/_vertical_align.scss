@@ -1,0 +1,18 @@
+$vertical_align_baseline:   baseline !default;
+$vertical_align_sub:         sub !default;
+$vertical_align_super:       super !default;
+$vertical_align_text_top:    text-top !default; 
+$vertical_align_text_bottom: text-bottom !default;
+$vertical_align_middle:      middle !default;
+$vertical_align_top:         top !default;
+$vertical_align_bottom:      bottom !default;
+$vertical_align: (
+  baseline:         $vertical_align_baseline,
+  sub:              $vertical_align_sub,
+  super:            $vertical_align_super,
+  text_top:         $vertical_align_text_top,
+  text_bottom:      $vertical_align_text_bottom,
+  middle:           $vertical_align_middle,
+  top:              $vertical_align_top,
+  bottom:           $vertical_align_bottom
+);

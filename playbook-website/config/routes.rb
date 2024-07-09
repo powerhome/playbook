@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get "home",                     to: "pages#home"
   get "visual_guidelines",        to: redirect("/visual_guidelines/colors")
   get "visual_guidelines/:name",  to: "pages#visual_guidelines"
-  get "changelog",                to: "pages#changelog"
+  get "changelog/web",            to: "pages#changelog_web"
+  get "changelog/figma",          to: "pages#changelog_figma"
+  get "changelog",                to: redirect("changelog/web")
 
   # Kits
 
@@ -20,10 +22,10 @@ Rails.application.routes.draw do
   get "kits/:name/rails",           to: "pages#kit_show_rails",           as: "kit_show_rails"
   get "kits/:name/react",           to: "pages#kit_show_react",           as: "kit_show_reacts"
   get "kits/:name/swift",           to: "pages#kit_show_swift",           as: "kit_show_swift"
-  get "kit_category/:name",         to: "pages#kit_category_show_rails",  as: "kit_category_show"
-  get "kit_category/:name/rails",   to: "pages#kit_category_show_rails",  as: "kit_category_show_rails"
-  get "kit_category/:name/react",   to: "pages#kit_category_show_react",  as: "kit_category_show_reacts"
-  get "kit_category/:name/swift",   to: "pages#kit_category_show_swift",  as: "kit_category_show_swift"
+  get "kit_category/:category",         to: "pages#kit_category_show_rails",  as: "kit_category_show"
+  get "kit_category/:category/rails",   to: "pages#kit_category_show_rails",  as: "kit_category_show_rails"
+  get "kit_category/:category/react",   to: "pages#kit_category_show_react",  as: "kit_category_show_reacts"
+  get "kit_category/:category/swift",   to: "pages#kit_category_show_swift",  as: "kit_category_show_swift"
   get "kit_collection/*names/:name/rails",    to: "pages#kit_collection_show_rails",                        as: "kit_collection_show_rails"
   get "kit_collection/*names/:name/react",    to: "pages#kit_collection_show_react",                        as: "kit_collection_show_react"
   get "kit_collection/*names/:name/swift",    to: "pages#kit_collection_show_swift",                        as: "kit_collection_show_swift"

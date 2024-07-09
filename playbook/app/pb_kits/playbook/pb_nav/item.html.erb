@@ -22,7 +22,7 @@
           </span>
         <% end %>    
        <% end %>
-      <%= pb_rails("collapsible/collapsible_content") do %>
+      <%= pb_rails("collapsible/collapsible_content", props: {collapsed: object.collapsed}) do %>
         <%= content.presence %>
       <% end %>
     <% end %>

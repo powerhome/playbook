@@ -20,6 +20,7 @@ import Hover from "../VisualGuidelines/Examples/Hover";
 import TextAlign from "../VisualGuidelines/Examples/TextAlign";
 import Overflow from "./Examples/Overflow";
 import Truncate from "./Examples/Truncate";
+import VerticalAlign from "./Examples/VerticalAlign";
 
 const VisualGuidelines = ({
   examples,
@@ -72,6 +73,8 @@ const VisualGuidelines = ({
                    tokensExample={examples.position_token}
                    secondExample={examples.global_positioning}
                />;
+      case "vertical_align":
+        return <VerticalAlign example={examples.vertical_align_jsx}/>;
       case "hover":
         return <Hover example={examples.hover_jsx}/>;
       case "text_align":
