@@ -25,6 +25,10 @@ module Playbook
                              values: %w[fill outline],
                              default: "fill"
 
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[display interactive],
+                     default: "display"
+
       def one_decimal_rating
         rating.to_f.round(1)
       end

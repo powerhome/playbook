@@ -28,13 +28,28 @@
     <% end %>
   <% end %>
   <%= pb_rails("flex", props: { }) do %>
-    <% object.star_count.times do %>
-        <%= pb_rails("icon", props: { classname: "#{star_color} pb_star_#{size}" , custom_icon: Playbook::Engine.root.join(star_svg_path) } ) %>
-    <% end %>
-    <% object.empty_stars.times do %>
-        <%= pb_rails("icon", props: { classname: "#{background_star_color} pb_star_#{size}", custom_icon: Playbook::Engine.root.join(background_star_path) } ) %>
+
+    <% if object.variant == "display" %>
+
+      <% object.star_count.times do %>
+          <%= pb_rails("icon", props: { classname: "#{star_color} pb_star_#{size}" , custom_icon: Playbook::Engine.root.join(star_svg_path) } ) %>
+      <% end %>
+      <% object.empty_stars.times do %>
+          <%= pb_rails("icon", props: { classname: "#{background_star_color} pb_star_#{size}", custom_icon: Playbook::Engine.root.join(background_star_path) } ) %>
+      <% end %>
+  
+    <% else %>
+      <input type="hidden" id="star-rating-input" value="" />
+      <% object.denominator.times do |index| %>
+        <div data-pb-star-rating id="<%= index + 1 %>">
+          <%= pb_rails("icon", props: { classname: "#{background_star_color} pb_star_#{size} interactive-star-icon", custom_icon: Playbook::Engine.root.join(background_star_path)} ) %>
+        </div>
+      <% end %>
+
     <% end %>
   <% end %>
+
+
   <% if layout_option == "onestar" %>
     <%= content_tag(:div, class: "pb_star_rating_number_#{size}") do %>
       <% case object.size %>
