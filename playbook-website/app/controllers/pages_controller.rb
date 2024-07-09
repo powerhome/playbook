@@ -240,7 +240,8 @@ private
 
   def kit_categories
     @category = params[:category]
-    aggregate_kits.find { |item| item["category"] == @category }["components"].map { |component| component["name"] }
+    components = aggregate_kits.find { |item| item["category"] == @category }["components"]
+    components.reject { |component| component["status"] == "beta" }.map { |component| component["name"] }
   end
 
   def set_kit
