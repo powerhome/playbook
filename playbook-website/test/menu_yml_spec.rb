@@ -2,7 +2,7 @@
 
 require "yaml"
 
-yaml_file_path = File.expand_path("../../config/menu.yml", __dir__)
+yaml_file_path = File.expand_path("../../../playbook/playbook-website/config/menu.yml", __dir__)
 
 RSpec.describe "Menu YAML File" do
   let(:data) { YAML.safe_load(File.read(yaml_file_path), aliases: true) }
