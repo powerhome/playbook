@@ -39,8 +39,6 @@ module Playbook
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
 
-      ALIASES = JSON.parse(File.read(Playbook::Engine.root.join("app/pb_kits/playbook/pb_icon/icon_aliases.json")))["aliases"].freeze
-
       def valid_emoji?
         emoji_regex = /\p{Emoji}/
         emoji_regex.match?(icon)
@@ -82,6 +80,14 @@ module Playbook
         )
       end
 
+      def icon_alias_map
+        return unless Rails.application.config.respond_to?(:icon_alias_map_path)
+
+        base_path = Rails.application.config.icon_alias_map_path
+        json = File.read(Rails.root.join(base_path))
+        JSON.parse(json)["aliases"].freeze
+      end
+
       def asset_path
         return unless Rails.application.config.respond_to?(:icon_path)
 
@@ -111,7 +117,7 @@ module Playbook
     private
 
       def resolve_alias(icon)
-        aliases = ALIASES[icon]
+        aliases = icon_alias_map[icon]
         return icon unless aliases
 
         if aliases.is_a?(Array)

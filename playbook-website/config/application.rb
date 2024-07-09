@@ -28,6 +28,7 @@ module PlaybookWebsite
     config.load_defaults 7.0
 
     config.icon_path = Rails.env.production? ? "app/javascript/images/" : "../node_modules/@powerhome/playbook-icons/icons"
+    config.icon_alias_map_path = "../node_modules/@powerhome/playbook-icons/icon_aliases.json"
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
