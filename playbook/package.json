@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "13.31.0",
+  "version": "13.32.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
