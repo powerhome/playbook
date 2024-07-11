@@ -427,7 +427,7 @@ kits:
   - name: draggable
     platforms: *2
     description:
-    status: beta
+    status: stable
 - category: message_text_patterns
   description:
   components:
