@@ -1,4 +1,4 @@
 //Theming
-export {default as mapTheme} from 'kits/pb_map/pbMapTheme'
-export {default as useCollapsible} from 'kits/pb_collapsible/useCollapsible'
-export {default as useDropdown } from 'kits/pb_dropdown/hooks/useDropdown'
+export {default as mapTheme} from '../pb_kits/playbook/pb_map/pbMapTheme'
+export {default as useCollapsible} from '../pb_kits/playbook/pb_collapsible/useCollapsible'
+export {default as useDropdown } from '../pb_kits/playbook/pb_dropdown/hooks/useDropdown'
