@@ -21,7 +21,6 @@ const config = {
   ],
   resolve: {
     alias: {
-      // '@fonts': '../node_modules/@powerhome/power-fonts/fonts',
       'fonts': resolve(__dirname, 'app/javascript/site_styles/fonts'),
       'site_styles': resolve(__dirname, 'app/javascript/site_styles'),
       'components': resolve(__dirname, 'app/javascript/components'),
