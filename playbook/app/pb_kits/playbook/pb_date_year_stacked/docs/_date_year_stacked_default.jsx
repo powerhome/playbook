@@ -4,9 +4,7 @@ import { DateYearStacked } from '../../'
 const DateYearStackedDefault = (props) => {
   return (
     <div>
-      <DateYearStacked 
-          date={new Date()} 
-          {...props} />
+      <DateYearStacked date={new Date()} />
       <DateYearStacked
           align="center"
           date={new Date()}
