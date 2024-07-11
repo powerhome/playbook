@@ -28,6 +28,8 @@ module Playbook
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[display interactive],
                      default: "display"
+      prop :label, type: Playbook::Props::String
+      prop :name, type: Playbook::Props::String
 
       def one_decimal_rating
         rating.to_f.round(1)
