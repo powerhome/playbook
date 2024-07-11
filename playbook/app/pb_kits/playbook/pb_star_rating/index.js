@@ -17,7 +17,6 @@ export default class PbStarRating extends PbEnhancedElement {
   }
 
   updateStarColors(clickedStarId) {
-    // Get all star elements
     const allStars = document.querySelectorAll(STAR_RATING_SELECTOR);
 
     allStars.forEach(star => {
@@ -26,9 +25,17 @@ export default class PbStarRating extends PbEnhancedElement {
 
       if (icon) {
         if (starId <= clickedStarId) {
-          icon.classList.add("selected-star-color");
+          if (star.classList.contains("yellow_star")) {
+            icon.classList.add("yellow-star-selected");
+          } else if (star.classList.contains("primary_star")) {
+            icon.classList.add("primary-star-selected");
+          } else if (star.classList.contains("suble_star_light")) {
+            icon.classList.add("suble-star-selected");
+          } else {
+            icon.classList.add("yellow-star-selected");
+          }
         } else {
-          icon.classList.remove("selected-star-color");
+          icon.classList.remove("yellow-star-selected", "primary-star-selected", "suble-star-selected");
         }
       }
     });
@@ -41,4 +48,3 @@ export default class PbStarRating extends PbEnhancedElement {
     }
   }
 }
-

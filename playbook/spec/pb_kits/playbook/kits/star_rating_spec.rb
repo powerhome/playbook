@@ -39,6 +39,12 @@ RSpec.describe Playbook::PbStarRating::StarRating do
       .with_values("xs", "sm", "md", "lg")
   }
 
+  it {
+    is_expected.to define_enum_prop(:variant)
+      .with_default("display")
+      .with_values("display", "interactive")
+  }
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_star_rating_kit"

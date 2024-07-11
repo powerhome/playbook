@@ -111,7 +111,13 @@
       }
     }
   }
-  .selected-star-color {
+  .yellow-star-selected {
     color: #F9BB00; 
+  }
+  .primary-star-selected {
+    color: #0056CF; 
+  }
+  .suble-star-selected {
+    color: $text_lt_default;
   }
 }
