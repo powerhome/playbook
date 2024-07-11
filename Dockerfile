@@ -15,7 +15,7 @@ RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locke
 RUN /pd_build/ruby_support/finalize.sh
 
 ENV BUNDLE_TO /usr/local/rvm/gems
-ENV NODE_OPTIONS "--openssl-legacy-provider --max-old-space-size=8192"
+# ENV NODE_OPTIONS "--openssl-legacy-provider --max-old-space-size=8192"
 ENV NVM_VERSION v0.33.8
 ENV NODE_VERSION v20.11.0
 ENV NPM_VERSION 6.14.10
@@ -76,9 +76,9 @@ COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
 COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
 RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
-    cd playbook; NODE_OPTIONS=$NODE_OPTIONS yarn release
+    cd playbook; yarn release
 RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
-    cd playbook-website; NODE_OPTIONS=$NODE_OPTIONS yarn release
+    cd playbook-website; yarn release
 
 FROM base AS prod
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
