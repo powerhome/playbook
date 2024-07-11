@@ -5,8 +5,8 @@ import WebpackerReact from 'webpacker-react'
 import zxcvbn from 'zxcvbn'
 window.zxcvbn = zxcvbn
 
-import 'playbook-ui/dist/playbook-rails'
-import 'playbook-ui/dist/playbook-doc'
+import 'playbook-ui/dist/playbook-rails.js'
+import 'playbook-ui/dist/playbook-doc.js'
 import '@fortawesome/fontawesome-pro/js/fontawesome.min.js'
 import '@fortawesome/fontawesome-pro/js/regular.min.js'
 import '@fortawesome/fontawesome-pro/js/brands.min.js'
@@ -23,7 +23,7 @@ import KitDocs from 'components/KitDocs'
 import PbKitReact from 'components/PbKitReact'
 import PbKitFetch from 'components/PbKitFetch'
 import PbKitPlayground from 'components/PbKitPlayground'
-import AvailableProps from 'components/AvailableProps'
+// import AvailableProps from 'components/AvailableProps'
 import MainSidebar from 'components/MainSidebar'
 import HomepageHero from 'components/HomepageHero'
 import AnchorJS from 'anchor-js'
@@ -64,7 +64,6 @@ WebpackerReact.registerComponents({
   PbKitReact,
   PbKitFetch,
   PbKitPlayground,
-  AvailableProps,
   MainSidebar,
   Website,
   HomepageHero,

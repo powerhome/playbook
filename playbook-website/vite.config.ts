@@ -1,7 +1,6 @@
 import { resolve } from 'path';
 import Buffer from 'buffer';
 import RubyPlugin from 'vite-plugin-ruby';
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 
 const config = {
   define: {
@@ -18,9 +17,7 @@ const config = {
     manifest: true,
   },
   plugins: [
-    // react(),
     RubyPlugin(),
-    viteCommonjs(),
   ],
   resolve: {
     alias: {

@@ -56,28 +56,30 @@ const TypeaheadWithPillsAsyncCustomOptions = (props) => {
 
   return (
     <>
-      <If condition={users && users.length > 0}>
-        <Caption
-            marginBottom="xs"
-            text="State (Users)"
-            {...props}
-        />
-        <For
-            each="user"
-            of={users}
-        >
-          <User
-              align="left"
-              avatar
-              avatarUrl={user.imageUrl}
-              key={user.value}
-              marginBottom="md"
-              name={user.label}
-              orientation="horizontal"
+      {users && users.length > 0 && (
+        <React.Fragment>
+          <Caption
+              marginBottom="xs"
+              text="State (Users)"
               {...props}
           />
-        </For>
-      </If>
+          <For
+              each="user"
+              of={users}
+          >
+            <User
+                align="left"
+                avatar
+                avatarUrl={user.imageUrl}
+                key={user.value}
+                marginBottom="md"
+                name={user.label}
+                orientation="horizontal"
+                {...props}
+            />
+          </For>
+        </React.Fragment>
+      )}
       <Typeahead
           async
           isMulti

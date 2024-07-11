@@ -1,0 +1,13 @@
+@import "../scale";
+
+:export {
+  @mixin export-hover-scale-classes($scales-list) {
+    @each $name, $scale in $scales-list {
+      .hover_#{$name}:hover {
+        transform: $scale;
+      }
+    }
+  }
+  
+  @include export-hover-scale-classes($scales);
+}

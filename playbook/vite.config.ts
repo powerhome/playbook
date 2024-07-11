@@ -2,18 +2,79 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path';
 import RubyPlugin from 'vite-plugin-ruby'
 import react from '@vitejs/plugin-react'
-import cssExport from 'vite-plugin-css-export'
+import copy from 'rollup-plugin-copy'
+import typescript from '@rollup/plugin-typescript'
+import consolidate from './app/javascript/rollup/rollup-consolidate-plugin';
 
 export default defineConfig({
   build: {
-    manifest: true,
-    outDir: resolve(__dirname, './vite-build'),
+    minify: false,
+    rollupOptions: {
+      input: {
+        'chunks/vendor.js': resolve(__dirname, 'app/entrypoints/playbook.js'),
+      },
+      output: {
+        assetFileNames: ({name}) => {
+          if (name?.endsWith('.css')) {
+            const updatedName = name.replace('entrypoints/', '')
+            if (updatedName.charAt(0) === '_') return `styles/${name.slice(1)}`
+            return updatedName
+          }
+          return 'assets/[name].[ext]'
+        },
+        entryFileNames: ({name}) => {
+          let updatedName = `${name.replace('entrypoints/', '')}`
+          const [fileName, ext] = updatedName.split('.')
+          if (['tsx', 'ts', 'jsx'].includes(ext)) updatedName = `${fileName}.js`
+          return updatedName
+        },
+        chunkFileNames: 'chunks/[name].js',
+        dir: resolve(__dirname, 'dist'),
+        sourcemap: false, //TODO: only do this in dev mode
+        manualChunks: {
+          'lib': [
+            resolve(__dirname, 'app/javascript/dashboard.js'),
+            resolve(__dirname, 'app/javascript/plugins.js'),
+            resolve(__dirname, 'app/javascript/tokens.js'),
+            resolve(__dirname, 'app/javascript/theme.js'),
+          ],
+        },
+      },
+      external: ['react', 'react-dom', 'webpacker-react'],
+    },
+  },
+  css: {
+    modules: {
+      generateScopedName: '[name]__[local]___[hash:base64:5]',
+    },
   },
   plugins: [
     react(),
     RubyPlugin(),
-    cssExport({
-      include: resolve(__dirname, 'app/pb_kits/playbook/tokens/exports/*.scss'),
+    copy({
+      targets: [
+        {
+          src: resolve(__dirname, 'app/pb_kits/playbook/tokens/*.scss'),
+          dest: 'dist/tokens',
+          rename: (name, extension) => `${name.replace('_', '')}.${extension}`
+        },
+      ]
+    }),
+    typescript({
+      tsconfig: resolve(__dirname, 'tsconfig.json'),
+      declarationDir: resolve(__dirname, 'dist'),
+      declaration: true,
+    }),
+    consolidate({
+      groups: [
+        {
+            files: [
+              resolve(__dirname, 'dist/playbook.css'),
+              resolve(__dirname, 'dist/lib.css'),
+            ],
+            outputFile: resolve(__dirname, 'dist/playbook.css'),
+        }
+      ],
     }),
   ],
   resolve: {
@@ -21,7 +82,7 @@ export default defineConfig({
       'kits': resolve(__dirname, 'app/pb_kits/playbook'),
       'tokens': resolve(__dirname, 'app/pb_kits/playbook/tokens'),
       'utilities': resolve(__dirname, 'app/pb_kits/playbook/utilities'),
-      'playbook-ui': resolve(__dirname, 'app/entrypoints/index'),
+      'playbook-ui': resolve(__dirname, 'app/entrypoints/playbook'),
     },
   },
 })

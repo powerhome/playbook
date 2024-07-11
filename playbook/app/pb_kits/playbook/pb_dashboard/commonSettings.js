@@ -1,5 +1,5 @@
-import colors from '../tokens/exports/_colors.scss'
-import typography from '../tokens/exports/_typography.scss'
+import colors from '../tokens/exports/_colors.module.scss'
+import typography from '../tokens/exports/_typography.module.scss'
 
 const dataColors = [
   colors.data_1,

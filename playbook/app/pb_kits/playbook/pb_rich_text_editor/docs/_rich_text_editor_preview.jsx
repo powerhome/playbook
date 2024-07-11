@@ -21,7 +21,7 @@ const RichTextEditorPreview = (props) => {
           onChange={handleChange}
           {...props}
       />
-      <If condition={showPreview}>
+      {showPreview && (
         <Card marginTop="md">
           <div
               className="trix-content"
@@ -30,9 +30,10 @@ const RichTextEditorPreview = (props) => {
               id="preview-content"
           />
         </Card>
-        <Else />
+      )}
+      {!showPreview && (
         <div />
-      </If>
+      )}
       <Button
           id="preview-button"
           marginTop="md"

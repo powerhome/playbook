@@ -1,7 +1,14 @@
 {
   "all": {
     "sourceCodeDir": "app",
-    "watchAdditionalPaths": []
+    "watchAdditionalPaths": [
+      "app/pb_kits/playbook/**/*.tsx",
+      "app/pb_kits/playbook/**/*.ts",
+      "app/pb_kits/playbook/**/*.js",
+      "app/pb_kits/playbook/**/*.jsx",
+      "app/pb_kits/playbook/**/*.scss",
+      "app/pb_kits/playbook/**/*.module.scss"
+    ]
   },
   "development": {
     "autoBuild": true,
