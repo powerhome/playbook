@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { render, cleanup, waitFor, fireEvent } from "../utilities/test-utils";
-import { Dialog, Button } from '../'
+import { Dialog, Button } from 'playbook-ui'
 
 const text="Hello Body Text, Nice to meet ya."
 const title="Header Title is the Title Prop"

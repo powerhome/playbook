@@ -1,5 +1,5 @@
 import { ensureAccessible, renderKit } from '../utilities/test-utils'
-import { DateTimeStacked } from '../'
+import { DateTimeStacked } from 'playbook-ui'
 
 /* eslint-disable jsx-control-statements/jsx-jcs-no-undef */
 const currentDate = new Date()

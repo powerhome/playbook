@@ -49,7 +49,6 @@ module.exports = function(api) {
       '@babel/plugin-proposal-export-default-from',
       require('babel-plugin-macros'),
       require('@babel/plugin-syntax-dynamic-import').default,
-      isTestEnv && require('babel-plugin-dynamic-import-node'),
       require('@babel/plugin-transform-destructuring').default,
       [
         require('@babel/plugin-proposal-class-properties').default,
