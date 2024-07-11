@@ -1,0 +1,12 @@
+<%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle", tabbing: true }) do %>
+  <%= pb_rails("nav/item", props: { text: "About", active: true, data: { pb_nav_item_tab: "about" }, cursor: "pointer" }) %>
+  <%= pb_rails("nav/item", props: { text: "Case Studies", data: { pb_nav_item_tab: "case_studies" }, cursor: "pointer" }) %>
+<% end %>
+
+<div id="about">
+  This is about!
+</div>
+
+<div id="case_studies">
+  This is case studies!
+</div>
