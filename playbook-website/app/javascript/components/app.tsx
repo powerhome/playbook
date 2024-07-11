@@ -12,6 +12,7 @@ import ComponentList from './Website/src/pages/ComponentList'
 import ComponentShow from './Website/src/pages/ComponentShow'
 import CategoryShow from './Website/src/pages/CategoryShow'
 import IconList from './Website/src/pages/IconList'
+import Error from './Error'
 import { CategoryLoader, ComponentsLoader, ComponentShowLoader, } from './Website/src/hooks/loaders'
 
 const router = createBrowserRouter(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
         element={<App />}
         loader={ComponentsLoader}
         path="/beta"
+        errorElement={<Error />}
     >
       <Route
           element={<ComponentList />}

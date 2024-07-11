@@ -16,6 +16,11 @@ const config = {
   build: {
     manifest: true,
   },
+  css: {
+    modules: {
+      generateScopedName: '[name]__[local]___[hash:base64:5]',
+    },
+  },
   plugins: [
     RubyPlugin(),
   ],
