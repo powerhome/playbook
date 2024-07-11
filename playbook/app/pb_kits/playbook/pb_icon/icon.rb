@@ -81,9 +81,9 @@ module Playbook
       end
 
       def icon_alias_map
-        return unless Rails.application.config.respond_to?(:icon_alias_map_path)
+        return unless Rails.application.config.respond_to?(:icon_alias_path)
 
-        base_path = Rails.application.config.icon_alias_map_path
+        base_path = Rails.application.config.icon_alias_path
         json = File.read(Rails.root.join(base_path))
         JSON.parse(json)["aliases"].freeze
       end
