@@ -8,6 +8,8 @@ module Playbook
       prop :label, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String
       prop :error, type: Playbook::Props::String
+      prop :required, type: Playbook::Props::Boolean,
+                      default: false
 
       def data
         Hash(prop(:data)).merge(pb_dropdown: true)

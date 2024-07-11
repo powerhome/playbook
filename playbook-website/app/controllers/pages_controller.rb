@@ -213,7 +213,7 @@ private
   end
 
   def categories
-    aggregate_kits.map { |item| item["name"] }
+    aggregate_kits.map { |item| item["category"] }
   end
 
   def all_kits
@@ -231,7 +231,7 @@ private
   end
 
   def set_category
-    @category = params[:name]
+    @category = params[:category]
     if categories.include?(@category) && helpers.category_has_kits?(category_kits: kit_categories, type: params[:type])
       @category_kits = kit_categories
       @kits = params[:name]
@@ -241,8 +241,8 @@ private
   end
 
   def kit_categories
-    @category = params[:name]
-    aggregate_kits.find { |item| item["name"] == @category }["components"].map { |component| component["name"] }
+    @category = params[:category]
+    aggregate_kits.find { |item| item["category"] == @category }["components"].map { |component| component["name"] }
   end
 
   def set_kit

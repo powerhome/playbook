@@ -6,103 +6,38 @@
 // EXTRABOLD 800;
 // BLACK 900;
 
-// THIN
-@font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Thin.woff') format('woff');
-  font-family: 'Proxima Nova';
-  font-style: normal;
-  font-weight: 100;
-}
-@font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Thin-It.woff') format('woff');
-  font-family: 'Proxima Nova';
-  font-style: italic;
-  font-weight: 100;
-}
 
-// LIGHT
 @font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Light.woff') format('woff');
-  font-family: 'Proxima Nova';
+  src: url('@fonts/PowerCentra-Light.woff') format('woff');
+  font-family: 'Power Centra';
   font-style: normal;
   font-weight: 300;
 }
-@font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Light-It.woff') format('woff');
-  font-family: 'Proxima Nova';
-  font-style: italic;
-  font-weight: 300;
-}
 
-// REGULAR
 @font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Reg.woff') format('woff');
-  font-family: 'Proxima Nova';
+  src: url('@fonts/PowerCentra-Book.woff') format('woff');
+  font-family: 'Power Centra';
   font-style: normal;
   font-weight: 400;
 }
+
 @font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Reg-It.woff') format('woff');
-  font-family: 'Proxima Nova';
+  src: url('@fonts/PowerCentra-BookItalic.woff') format('woff');
+  font-family: 'Power Centra';
   font-style: italic;
   font-weight: 400;
 }
 
-// MEDIUM
-// NOT USED BUT EQUAL TO 500
-
-// SEMIBOLD
 @font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Sbold.woff') format('woff');
-  font-family: 'Proxima Nova';
-  font-style: normal;
-  font-weight: 600;
-}
-@font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Sbold-It.woff') format('woff');
-  font-family: 'Proxima Nova';
-  font-style: italic;
-  font-weight: 600;
-}
-
-// BOLD
-@font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Bold.woff') format('woff');
-  font-family: 'Proxima Nova';
+  src: url('@fonts/PowerCentra-Bold.woff') format('woff');
+  font-family: 'Power Centra';
   font-style: normal;
   font-weight: 700;
 }
+
 @font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Bold-It.woff') format('woff');
-  font-family: 'Proxima Nova';
+  src: url('@fonts/PowerCentra-BoldItalic.woff') format('woff');
+  font-family: 'Power Centra';
   font-style: italic;
   font-weight: 700;
-}
-
-// EXTRABOLD
-@font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Xbold.woff') format('woff');
-  font-family: 'Proxima Nova';
-  font-style: normal;
-  font-weight: 800;
-}
-@font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Xbold-It.woff') format('woff');
-  font-family: 'Proxima Nova';
-  font-style: italic;
-  font-weight: 800;
-}
-
-// BLACK
-@font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Black.woff') format('woff');
-  font-family: 'Proxima Nova';
-  font-style: normal;
-  font-weight: 900;
-}
-@font-face {
-  src: url('@fonts/proxima_nova/Proxima-Nova-Black-It.woff') format('woff');
-  font-family: 'Proxima Nova';
-  font-style: italic;
-  font-weight: 900;
 }
