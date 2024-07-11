@@ -1,7 +1,7 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 
 const STAR_RATING_SELECTOR = "[data-pb-star-rating]";
-const STAR_RATING_INPUT_ID = "star-rating-input"; // ID of your hidden input field
+const STAR_RATING_INPUT_ID = "star-rating-input";
 
 export default class PbStarRating extends PbEnhancedElement {
   static get selector() {
