@@ -15,13 +15,14 @@ if (!kitPath) {
 }
 
 // cache handling
-const tempDir = resolve(__dirname, `../tmp/cache/playbook`);
+const CACHE_DIR = '../public/cache/playbook'
+const tempDir = resolve(__dirname, CACHE_DIR);
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir, { recursive: true });
 }
 
 const kitFileName = kitPath.split('/').reverse()[0].split('.')[0];
-const cachedKit = resolve(__dirname, '../tmp/cache/playbook', `${kitFileName}.json`);
+const cachedKit = resolve(tempDir, `${kitFileName}.json`);
 
 // use cache if it exists
 if (fs.existsSync(cachedKit)) {
