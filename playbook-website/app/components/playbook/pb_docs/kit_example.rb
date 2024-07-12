@@ -49,8 +49,14 @@ module Playbook
       end
 
       def available_props
+        target_kit_path = ::Playbook.kit_path(kit, "", "_#{example_key}.tsx")
+        if File.exist?(cached_kit_target)
+          puts "AvailableProps: Using cached JSON for #{target_kit_path}"
+          return cached_kit_json
+        end
+
         exec_in_fork do
-          `node scripts/react-docgen.mjs #{::Playbook.kit_path(kit, "", "_#{example_key}.tsx")}`
+          `node scripts/react-docgen.mjs #{target_kit_path}`
         end
       end
 
@@ -73,6 +79,14 @@ module Playbook
         Process.wait(pid)
 
         result
+      end
+
+      def cached_kit_json
+        File.read(cached_kit_target)
+      end
+
+      def cached_kit_target
+        Rails.root.join("public", "cache", "playbook", "_#{example_key}.json")
       end
 
       def sanitize_code(stringified_code)
