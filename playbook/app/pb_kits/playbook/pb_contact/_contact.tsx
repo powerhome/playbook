@@ -8,23 +8,23 @@ import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
 import Icon from '../pb_icon/_icon'
 
-const contactTypeMap: { [key: string]: string; } = {
+const contactTypeMap: { [key: string]: string } = {
   'cell': 'mobile',
   'email': 'envelope',
+  'extension': 'phone-plus',
   'home': 'phone',
   'work': 'phone-office',
   'work-cell': 'phone-laptop',
   'wrong-phone': 'phone-slash',
-  'extension': 'phone-plus',
 }
 
 const formatContact = (contactString: string, contactType: string) => {
-  if (contactType == 'email') return contactString
+  if (contactType === 'email') return contactString
 
   const cleaned = contactString.replace(/\D/g, '')
   const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
 
-  if(contactType == 'extension') {
+  if (contactType === 'extension') {
     return cleaned.match(/^\d{4}$/)
   }
 
@@ -40,19 +40,20 @@ const formatContact = (contactString: string, contactType: string) => {
       phoneNumber[4],
     ].join('')
   }
-  
+
   return null
 }
 
 type ContactProps = {
-  aria?: { [key: string]: string; },
-  className?: string | string[],
-  contactDetail?: string,
-  contactType?: string,
-  contactValue: string,
-  data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
-  id?: string,
+  aria?: { [key: string]: string }
+  className?: string | string[]
+  contactDetail?: string
+  contactType?: string
+  contactValue: string
+  data?: { [key: string]: string }
+  dark?: boolean
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
+  id?: string
 }
 
 const Contact = (props: ContactProps): React.ReactElement => {
@@ -63,8 +64,10 @@ const Contact = (props: ContactProps): React.ReactElement => {
     contactType,
     contactValue,
     data = {},
+    dark = false,
     htmlOptions = {},
-    id } = props
+    id,
+  } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -73,6 +76,7 @@ const Contact = (props: ContactProps): React.ReactElement => {
     globalProps(props),
     className
   )
+
   return (
     <div
         {...ariaProps}
@@ -83,22 +87,24 @@ const Contact = (props: ContactProps): React.ReactElement => {
     >
       <Body
           className="pb_contact_kit"
-          color="light"
+          color={dark ? "lighter" : "default"} // Adjust color based on dark mode
+          dark={dark}
           tag="span"
       >
         <Icon
+            dark={dark}
             fixedWidth
             icon={contactTypeMap[contactType] || 'phone'}
         />
         {` ${formatContact(contactValue, contactType)} `}
-        {
-          contactDetail &&
+        {contactDetail && (
           <Caption
+              dark={dark}
               size="xs"
               tag="span"
               text={contactDetail}
           />
-        }
+        )}
       </Body>
     </div>
   )
