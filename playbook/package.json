@@ -13,7 +13,7 @@
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
     "release": "rm -rf dist; npx vite build",
-    "watch": "rm -rf dist; npx vite build --watch"
+    "watch": "npx vite build --watch"
   },
   "repository": {
     "type": "git",

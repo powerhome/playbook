@@ -1,11 +1,37 @@
+/*
+Description:
+  This script uses react-docgen-typescript to parse a typescript file and extract the props from a React component.
+  In production, the script will cache the results to avoid re-parsing the same file multiple times.
+  The script can be run against a single file or all files in the playbook app.
+
+Dependencies:
+  - react-docgen-typescript
+  - typescript
+  - scripts/global-props.mjs
+    - Runs at app startup to generate a list of global prop names to filter out of the results.
+
+Environment Variables:
+  - PB_DOCGEN_CACHE: true
+    - Used to determine if the script should cache the results. Default is false.
+      You can set this to true to enable/test caching in development.
+
+Arguments:
+  - Provide the absolute path to a typescript kit file to parse.
+  - Use '--all-kits' to run against all kits in the playbook app. This will always cache the results.
+
+Example CLI Usage:
+  (cd playbook-website; node scripts/react-docgen.mjs /your/path/to/playbook/playbook/app/pb_kits/playbook/pb_background/_background.tsx)
+*/
+
 import { withCustomConfig } from 'react-docgen-typescript';
-import { argv } from 'process';
+import { argv, env } from 'process';
 import fs from 'fs';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 import globalPropNames from '../../playbook/app/pb_kits/playbook/utilities/globalPropNames.mjs';
 
+const isProduction = env.RAILS_ENV === 'production';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PB_KITS = '../../playbook/app/pb_kits/playbook';
@@ -53,7 +79,8 @@ function processKit({ kitPath }) {
   const result = JSON.stringify(parsed[0].props);
 
   // cache the result
-  fs.writeFileSync(cachedKit, result);
+  if (!isProduction && env.PB_DOCGEN_CACHE == 'true') fs.writeFileSync(cachedKit, result);
+
   return result;
 }
 
