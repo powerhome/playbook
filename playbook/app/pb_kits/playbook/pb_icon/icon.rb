@@ -117,6 +117,8 @@ module Playbook
     private
 
       def resolve_alias(icon)
+        return icon unless icon_alias_map
+
         aliases = icon_alias_map[icon]
         return icon unless aliases
 
