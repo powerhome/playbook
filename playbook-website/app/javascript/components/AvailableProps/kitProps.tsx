@@ -19,6 +19,21 @@ const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
     }
     return typeName
   }
+
+  const getTypeValue = (val: any) => {
+    const type = val.type
+    if (type.value) {
+      if (type.value.length > 2) {
+        return type.value.map((item: any) => item.value).join(' | ')
+      } else {
+        return val.type.value[1].value
+      }
+    } else {
+      if (type.name === 'string') return ''
+      return val.type.name
+    }
+  }
+
   return (
     <>
       <Card.Body
@@ -83,7 +98,7 @@ const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
                               className="kearning"
                               dark={darkMode}
                           >
-                           {propsValue.type.name}
+                           {getTypeValue(propsValue)}
                           </Body>
                         </Card>
                         ) : null

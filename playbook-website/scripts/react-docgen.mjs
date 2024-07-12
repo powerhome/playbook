@@ -1,4 +1,4 @@
-import { parse } from 'react-docgen-typescript';
+import { withCustomConfig } from 'react-docgen-typescript';
 import { argv } from 'process';
 import fs from 'fs';
 import path, { resolve } from 'path';
@@ -31,14 +31,19 @@ if (fs.existsSync(cachedKit)) {
 }
 
 const PARSER_OPTIONS = {
-  shouldExtractValuesFromUnion: false,
+  shouldExtractValuesFromUnion: true,
+  shouldExtractLiteralValuesFromEnum: true,
   savePropValueAsString: true,
   shouldIncludePropTagMap: true,
   shouldIncludeExpression: true,
   propFilter: ({name}) => !globalPropNames.includes(name),
 }
 
-const parsed = parse(kitPath, PARSER_OPTIONS)[0].props,
+const tsconfigPath = resolve(__dirname, '../../playbook/tsconfig.json');
+
+const parser = withCustomConfig(tsconfigPath, PARSER_OPTIONS);
+
+const parsed = parser.parse(kitPath, PARSER_OPTIONS)[0].props,
       result = JSON.stringify(parsed)
 
 // cache the result
