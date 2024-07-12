@@ -48,7 +48,32 @@ module Playbook
         read_kit_file("", "_#{example_key}.tsx")
       end
 
+      def available_props
+        exec_in_fork do
+          `node scripts/react-docgen.mjs #{::Playbook.kit_path(kit, "", "_#{example_key}.tsx")}`
+        end
+      end
+
     private
+
+      def exec_in_fork
+        read, write = IO.pipe
+
+        pid = fork do
+          read.close
+          result = yield
+          write.write(result)
+          write.close
+          exit!(0)
+        end
+
+        write.close
+        result = read.read
+        read.close
+        Process.wait(pid)
+
+        result
+      end
 
       def sanitize_code(stringified_code)
         stringified_code = stringified_code.gsub('"../.."', '"playbook-ui"')

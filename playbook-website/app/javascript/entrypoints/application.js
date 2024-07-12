@@ -23,7 +23,7 @@ import KitDocs from 'components/KitDocs'
 import PbKitReact from 'components/PbKitReact'
 import PbKitFetch from 'components/PbKitFetch'
 import PbKitPlayground from 'components/PbKitPlayground'
-// import AvailableProps from 'components/AvailableProps'
+import AvailableProps from 'components/AvailableProps'
 import MainSidebar from 'components/MainSidebar'
 import HomepageHero from 'components/HomepageHero'
 import AnchorJS from 'anchor-js'
@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 WebpackerReact.registerComponents({
+  AvailableProps,
   DarkModeToggle,
   KitSearch,
   SnippetToggle,

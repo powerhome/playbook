@@ -1,7 +1,24 @@
 import React from 'react'
 import { Body, Card, Table, Title } from 'playbook-ui'
 
-const KitProps = ({ kitPropsValues, darkMode }) => {
+type KitPropsType = {
+  kitPropsValues: {[key: string]: any},
+  darkMode: boolean
+}
+
+const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
+  const getTypeName = (typeName: string) => {
+    if (typeName.indexOf('{') !== -1) {
+      return 'object'
+    }
+    if (typeName.indexOf('|') !== -1) {
+      return 'union'
+    }
+    if (typeName.indexOf('=>') !== -1) {
+      return 'function'
+    }
+    return typeName
+  }
   return (
     <>
       <Card.Body
@@ -22,7 +39,7 @@ const KitProps = ({ kitPropsValues, darkMode }) => {
             </tr>
           </thead>
           <tbody>
-            {kitPropsValues.map(([propName, propsValue]) => (
+            {Object.entries(kitPropsValues).map(([propName, propsValue]) => (
               <>
                 <tr>
                   <td>
@@ -45,16 +62,14 @@ const KitProps = ({ kitPropsValues, darkMode }) => {
                           className="kearning"
                           dark={darkMode}
                       >
-                        {
-                          propsValue.flowType.name === 'signature' ? propsValue.flowType.type : propsValue.flowType.name
-                        }
+                        {getTypeName(propsValue.type.name)}
                       </Body>
                     </Card>
                   </td>
                   <td>
                     {
                       // eslint-disable-next-line jsx-control-statements/jsx-use-if-tag
-                      propsValue.flowType.raw ? (
+                      propsValue.type.name ? (
                         <Card
                             background={darkMode ? 'dark' : 'light'}
                             borderNone
@@ -68,7 +83,7 @@ const KitProps = ({ kitPropsValues, darkMode }) => {
                               className="kearning"
                               dark={darkMode}
                           >
-                            {propsValue.flowType.name === 'union' && propsValue.flowType.raw}
+                           {propsValue.type.name}
                           </Body>
                         </Card>
                         ) : null

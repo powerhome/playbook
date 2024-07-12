@@ -26,6 +26,7 @@
     "node_modules/**/*"
   ],
   "include": [
+    "app/pb_kits/playbook/utilities/globalProps.ts",
     "app/javascript/*.js",
     "app/pb_kits/playbook",
     "app/javascript/kits.js",
