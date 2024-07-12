@@ -8,29 +8,9 @@ import globalPropNames from '../../playbook/app/pb_kits/playbook/utilities/globa
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const kitPath = argv[2];
-if (!kitPath) {
-  console.error('ReactDocgen: Please provide a path to a typescript file');
-  process.exit(1);
-}
-
-// cache handling
-const CACHE_DIR = '../public/cache/playbook'
-const tempDir = resolve(__dirname, CACHE_DIR);
-if (!fs.existsSync(tempDir)) {
-  fs.mkdirSync(tempDir, { recursive: true });
-}
-
-const kitFileName = kitPath.split('/').reverse()[0].split('.')[0];
-const cachedKit = resolve(tempDir, `${kitFileName}.json`);
-
-// use cache if it exists
-if (fs.existsSync(cachedKit)) {
-  const cachedKitContent = fs.readFileSync(cachedKit, 'utf8');
-  console.log(cachedKitContent);
-  process.exit(0);
-}
-
+const PB_KITS = '../../playbook/app/pb_kits/playbook';
+const CACHE_DIR = resolve(__dirname, '../public/cache/playbook');
+const TSCONFIG_PATH = resolve(__dirname, '../../playbook/tsconfig.json');
 const PARSER_OPTIONS = {
   shouldExtractValuesFromUnion: true,
   shouldExtractLiteralValuesFromEnum: true,
@@ -38,18 +18,61 @@ const PARSER_OPTIONS = {
   shouldIncludePropTagMap: true,
   shouldIncludeExpression: true,
   propFilter: ({name}) => !globalPropNames.includes(name),
+};
+
+// check for kit path
+const kitPath = argv[2];
+if (!kitPath) {
+  console.error('ReactDocgen: Please provide a path to a typescript file');
+  process.exit(1);
 }
 
-const tsconfigPath = resolve(__dirname, '../../playbook/tsconfig.json');
+// cache handling
+if (!fs.existsSync(CACHE_DIR)) {
+  fs.mkdirSync(CACHE_DIR, { recursive: true });
+}
 
-const parser = withCustomConfig(tsconfigPath, PARSER_OPTIONS);
+function processKit({ kitPath }) {
+  const kitFileName = kitPath.split('/').reverse()[0].split('.')[0],
+        cachedKit = resolve(CACHE_DIR, `${kitFileName}.json`);
 
-const parsed = parser.parse(kitPath, PARSER_OPTIONS)[0].props,
-      result = JSON.stringify(parsed)
+  // use cache if it exists
+  if (fs.existsSync(cachedKit)) {
+    const cachedKitContent = fs.readFileSync(cachedKit, 'utf8');
+    return cachedKitContent;
+  }
 
-// cache the result
-fs.writeFileSync(cachedKit, result);
+  const parser = withCustomConfig(TSCONFIG_PATH, PARSER_OPTIONS);
+  const parsed = parser.parse(kitPath, PARSER_OPTIONS);
 
-console.log(result)
+  if (!parsed.length) {
+    fs.writeFileSync(cachedKit, '{}');
+    return `ReactDocgen: Failed to parse ${kitPath}`;
+  }
 
-process.exit(0);
+  const result = JSON.stringify(parsed[0].props);
+
+  // cache the result
+  fs.writeFileSync(cachedKit, result);
+  return result;
+}
+
+if (kitPath === '--all-kits') {
+  // run against all kits
+  console.info('ReactDocgen: Running against all kits...');
+
+  const kits = fs.readdirSync(resolve(__dirname, PB_KITS))
+  kits.forEach(kit => {
+    const kitFileName = resolve(__dirname, PB_KITS, kit, `${kit.replace('pb', '')}.tsx`);
+    console.log(kitFileName);
+    if (fs.existsSync(kitFileName)) processKit({ kitPath: kitFileName });
+  })
+
+  console.info('ReactDocgen: Done!');
+  process.exit(0);
+} else {
+  // run against a single kit
+  const result = processKit({ kitPath })
+  console.log(result);
+  process.exit(0);
+}
