@@ -23,4 +23,9 @@ export interface ItemType {
       children: React.ReactNode;
       initialItems: ItemType[];
       onReorder: (items: ItemType[]) => void;
+      onDragStart?: (id: string, container: string) => void; 
+      onDragEnter?: (id: string, container: string) => void;
+      onDragEnd?: () => void; 
+      onDrop?: (container: string) => void; 
+      onDragOver?: (e: Event, container: string) => void;
     }

@@ -51,7 +51,16 @@ export const DraggableContext = () => {
   return useContext(DragContext);
 };
 
-export const DraggableProvider = ({ children, initialItems, onReorder }: DraggableProviderType) => {
+export const DraggableProvider = ({ 
+  children, 
+  initialItems, 
+  onReorder,
+  onDragStart, 
+  onDragEnter, 
+  onDragEnd, 
+  onDrop, 
+  onDragOver 
+}: DraggableProviderType) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -65,6 +74,7 @@ export const DraggableProvider = ({ children, initialItems, onReorder }: Draggab
   const handleDragStart = (id: string, container: string) => {
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: id, initialGroup: container } });
     dispatch({ type: 'SET_IS_DRAGGING', payload: id });
+    if (onDragStart) onDragStart(id, container);
   };
 
   const handleDragEnter = (id: string, container: string) => {
@@ -72,11 +82,13 @@ export const DraggableProvider = ({ children, initialItems, onReorder }: Draggab
       dispatch({ type: 'REORDER_ITEMS', payload: { dragId: state.dragData.id, targetId: id } });
       dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container } });
     }
+    if (onDragEnter) onDragEnter(id, container);
   };
 
   const handleDragEnd = () => {
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+    if (onDragEnd) onDragEnd();
   };
 
   const changeCategory = (itemId: string, container: string) => {
@@ -87,11 +99,13 @@ export const DraggableProvider = ({ children, initialItems, onReorder }: Draggab
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     changeCategory(state.dragData.id, container);
+    if (onDrop) onDrop(container);
   };
 
   const handleDragOver = (e: Event, container: string) => {
     e.preventDefault();
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
+    if (onDragOver) onDragOver(e, container);
   };
 
   const contextValue = useMemo(() => ({
