@@ -2,6 +2,9 @@
 @import "../tokens/opacity";
 @import "../tokens/spacing";
 
+$yellow_star: #F9BB00;
+$primary_star: #0056CF;
+
 
 [class*=pb_star_rating_kit] {
   display: flex;
@@ -48,8 +51,8 @@
 
 
   $star-styles: (
-    yellow_star: (color: #F9BB00),
-    primary_star: (color: #0056CF),
+    yellow_star: (color: $yellow),
+    primary_star: (color: $royal),
     suble_star_light: (color: $text_lt_default),
     suble_star_dark: (color: $text_dk_default),
     empty_star_dark: (color: $border_dark),
@@ -112,10 +115,10 @@
     }
   }
   .yellow-star-selected {
-    color: #F9BB00; 
+    color: $yellow; 
   }
   .primary-star-selected {
-    color: #0056CF; 
+    color: $royal 
   }
   .suble-star-selected {
     color: $text_lt_default;
