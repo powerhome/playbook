@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cp ../playbook-website/config/menu.yml dist/menu.yml
+
+time $(gem build playbook_ui.gemspec)
+
+rm dist/menu.yml
