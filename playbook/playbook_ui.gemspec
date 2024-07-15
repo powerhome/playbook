@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir[
     "app/pb_kits/playbook/pb_*/**/*",
+    "app/pb_kits/playbook/_*.scss",
     "app/pb_kits/playbook/{plugins,tokens,utilities}/**/*",
     "app/assets/images/*",
     "fonts/**/*",
