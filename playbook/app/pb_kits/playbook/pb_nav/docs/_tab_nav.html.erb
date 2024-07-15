@@ -1,8 +1,8 @@
 <%= pb_rails("nav", props: { orientation: "horizontal", tabbing: true, padding_bottom: "sm" }) do %>
-  <%= pb_rails("nav/item", props: { text: "About", active: true, data: { pb_nav_item_tab: "about" }, cursor: "pointer" }) %>
-  <%= pb_rails("nav/item", props: { text: "Case Studies", data: { pb_nav_item_tab: "case_studies" }, cursor: "pointer" }) %>
-  <%= pb_rails("nav/item", props: { text: "Service", data: { pb_nav_item_tab: "service" }, cursor: "pointer" }) %>
-  <%= pb_rails("nav/item", props: { text: "Contacts", data: { pb_nav_item_tab: "contacts" }, cursor: "pointer" }) %>
+  <%= pb_rails("nav/item", props: { text: "About", active: true, data: { pb_tab_target: "about" }, cursor: "pointer" }) %>
+  <%= pb_rails("nav/item", props: { text: "Case Studies", data: { pb_tab_target: "case_studies" }, cursor: "pointer" }) %>
+  <%= pb_rails("nav/item", props: { text: "Service", data: { pb_tab_target: "service" }, cursor: "pointer" }) %>
+  <%= pb_rails("nav/item", props: { text: "Contacts", data: { pb_tab_target: "contacts" }, cursor: "pointer" }) %>
 <% end %>
 
 <div id="about">
@@ -24,7 +24,7 @@
 <script>
   const navItemClass = "pb_nav_list_kit_item"
   const navItemActiveClass = "pb_nav_list_kit_item_active"
-  const dataNavItems = "[data-pb-nav-item-tab]"
+  const dataNavItems = "[data-pb-tab-target]"
 
   const navItemTabs = document.querySelectorAll(dataNavItems)
   navItemTabs.forEach(navItemTab => {
