@@ -2,11 +2,11 @@
 
 @mixin hover-color-classes($colors-list) {
     @each $name, $color in $colors-list {
-      .hover_background_#{$name}:hover {
+      .hover_background_#{"" + $name}:hover {
         background-color: $color !important;
         transition: background-color $transition-speed ease;
       }
-      .hover_color_#{$name}:hover {
+      .hover_color_#{"" + $name}:hover {
         color: $color !important;
         transition: color $transition-speed ease;
       }
@@ -15,7 +15,7 @@
   
   @mixin hover-shadow-classes($shadows-list) {
     @each $name, $shadow in $shadows-list {
-      .hover_#{$name}:hover {
+      .hover_#{"" + $name}:hover {
         box-shadow: $shadow;
         transition: box-shadow $transition-speed ease;
       }
@@ -24,7 +24,7 @@
   
   @mixin hover-scale-classes($scales-list) {
     @each $name, $scale in $scales-list {
-      .hover_#{$name}:hover {
+      .hover_#{"" + $name}:hover {
         transform: $scale;
         transition: transform $transition-speed ease;
       }

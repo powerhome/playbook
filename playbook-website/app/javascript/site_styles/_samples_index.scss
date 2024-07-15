@@ -27,8 +27,8 @@
     margin-right: $space_lg;
   }
   .sample_screenshot {
-    width: (1168px / 4);
-    height: (815px / 4);
+    width: calc(1168px / 4);
+    height: calc(815px / 4);
     border-radius: $border_rad_heaviest;
     box-shadow: $shadow_deep;
   }

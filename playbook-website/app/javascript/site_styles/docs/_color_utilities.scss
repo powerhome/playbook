@@ -5,7 +5,7 @@
 // Creates color classes for color utilities.
 @mixin doc-color($colors-list) {
   @each $name, $color in $colors-list {
-    .pb--color_#{$name} {
+    .pb--color_#{"" + $name} {
       background-color: $color !important;
     }
   }
