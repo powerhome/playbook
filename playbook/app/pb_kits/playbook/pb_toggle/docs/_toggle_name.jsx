@@ -1,5 +1,3 @@
-// @flow
-
 import React, { useState } from 'react'
 import { Caption, Title, Toggle } from 'playbook-ui'
 

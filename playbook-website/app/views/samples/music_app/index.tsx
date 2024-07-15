@@ -1,6 +1,4 @@
 /* eslint-disable react/no-multi-comp */
-/* @flow */
-
 import React from 'react'
 import { Background, Body, Caption, Card, Flex, FlexItem, Icon, Image, Layout, ProgressSimple, SectionSeparator, Table, TableRow, TextInput, Title, User }  from 'playbook-ui'
 

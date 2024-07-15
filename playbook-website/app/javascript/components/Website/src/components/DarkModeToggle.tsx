@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import { useState } from 'react'
 import { Body, Flex, FlexItem, Icon, Toggle } from 'playbook-ui'

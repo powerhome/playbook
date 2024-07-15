@@ -1,5 +1,4 @@
 /* eslint-disable react/no-multi-comp */
-/* @flow */
 
 import React, { useState } from "react";
 import { FileUpload, List, ListItem } from "playbook-ui";

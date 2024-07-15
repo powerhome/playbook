@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-handler-names */
-/* @flow */
 
 import React, { useState } from "react"
 import { Button, Dialog, Flex } from "playbook-ui"

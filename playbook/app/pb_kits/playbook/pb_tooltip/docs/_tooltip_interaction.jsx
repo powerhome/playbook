@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 import { Tooltip, Button, Flex, FlexItem } from 'playbook-ui';
 

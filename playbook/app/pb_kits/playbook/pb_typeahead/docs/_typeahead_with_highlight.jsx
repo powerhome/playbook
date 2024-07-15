@@ -1,6 +1,5 @@
 /* eslint-disable react/no-danger */
 /* eslint-disable react/no-multi-comp */
-/* @flow */
 
 import React, { useState } from 'react'
 import { components } from 'react-select'

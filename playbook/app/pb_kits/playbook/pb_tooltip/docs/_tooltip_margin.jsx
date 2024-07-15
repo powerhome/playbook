@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 import { Tooltip, Flex, CircleIconButton } from 'playbook-ui'
 
