@@ -22,6 +22,7 @@ import {
 type DropdownProps = {
     aria?: { [key: string]: string };
     autocomplete?: boolean;
+    blankSelection?: string;
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
     className?: string;
     dark?: boolean;
@@ -41,6 +42,7 @@ const Dropdown = (props: DropdownProps) => {
     const {
         aria = {},
         autocomplete = false,
+        blankSelection = '',
         children,
         className,
         dark = false,
@@ -118,11 +120,12 @@ const Dropdown = (props: DropdownProps) => {
         setIsDropDownClosed(isClosed)
     }, [isClosed])
 
-    const filteredOptions = options?.filter((option: GenericObject) => {
+    const blankSelectionOption: GenericObject = blankSelection ? [{ label: blankSelection, value: "" }] : [];
+    const optionsWithBlankSelection = blankSelectionOption.concat(options);
+    const filteredOptions = optionsWithBlankSelection?.filter((option: GenericObject) => {
         const label = typeof option.label === 'string' ? option.label.toLowerCase() : option.label;
         return String(label).toLowerCase().includes(filterItem.toLowerCase());
-    }
-    );
+    });    
 
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {
@@ -196,7 +199,7 @@ const Dropdown = (props: DropdownProps) => {
                     inputWrapperRef,
                     isDropDownClosed,
                     isInputFocused,
-                    options,
+                    optionsWithBlankSelection,
                     selected,
                     setFocusedOptionIndex,
                     setIsDropDownClosed,
@@ -235,8 +238,8 @@ const Dropdown = (props: DropdownProps) => {
                         <>
                             <DropdownTrigger />
                             <DropdownContainer>
-                                {options &&
-                                    options?.map((option: GenericObject) => (
+                                {optionsWithBlankSelection &&
+                                    optionsWithBlankSelection?.map((option: GenericObject) => (
                                         <Dropdown.Option key={option.id}
                                             option={option}
                                         />

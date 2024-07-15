@@ -25,6 +25,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.bindEventListeners();
     this.updateArrowDisplay(false);
     this.handleFormValidation();
+    this.handleFormReset();
   }
 
   bindEventListeners() {
@@ -203,5 +204,24 @@ export default class PbDropdown extends PbEnhancedElement {
       hiddenInput.value = defaultValue.id;
       inputFormValidation.value = defaultValue.id;
     }
+  }
+
+  handleFormReset() {
+    const form = this.element.closest("form");
+
+    if (form) {
+      form.addEventListener("reset", () => {
+        console.log("reset");
+        this.resetDropdownValue();
+      });
+    }
+  }
+
+  resetDropdownValue() {
+    const hiddenInput = this.element.querySelector("#dropdown-selected-option");
+    const inputFormValidation = this.element.querySelector(INPUT_FORM_VALIDATION);
+
+    hiddenInput.value = "";
+    inputFormValidation.value = "";
   }
 }

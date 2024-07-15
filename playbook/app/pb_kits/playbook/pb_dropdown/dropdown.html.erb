@@ -17,8 +17,8 @@
         <% else %>
             <%= pb_rails("dropdown/dropdown_trigger") %>
             <%= pb_rails("dropdown/dropdown_container") do %>
-                <% if object.options.present? %>
-                    <% object.options.each do |option| %>
+                <% if options_with_blank.present? %>
+                    <% options_with_blank.each do |option| %>
                         <%= pb_rails("dropdown/dropdown_option", props: {option: option}) %>
                     <% end %>
                 <% end %>
