@@ -24,14 +24,13 @@ Example CLI Usage:
 */
 
 import { withCustomConfig } from 'react-docgen-typescript';
-import { argv, env } from 'process';
+import { argv } from 'process';
 import fs from 'fs';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 import globalPropNames from '../../playbook/app/pb_kits/playbook/utilities/globalPropNames.mjs';
 
-const isProduction = env.RAILS_ENV === 'production';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PB_KITS = '../../playbook/app/pb_kits/playbook';
@@ -78,8 +77,7 @@ function processKit({ kitPath }) {
 
   const result = JSON.stringify(parsed[0].props);
 
-  // cache the result
-  if (!isProduction && env.PB_DOCGEN_CACHE == 'true') fs.writeFileSync(cachedKit, result);
+  fs.writeFileSync(cachedKit, result);
 
   return result;
 }
