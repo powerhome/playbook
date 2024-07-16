@@ -38,6 +38,7 @@ module Playbook
                         default: "far"
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
+      prop :color, type: Playbook::Props::String
 
       ALIASES = JSON.parse(File.read(Playbook::Engine.root.join("app/pb_kits/playbook/pb_icon/icon_aliases.json")))["aliases"].freeze
 
@@ -49,6 +50,7 @@ module Playbook
       def classname
         generate_classname(
           "pb_icon_kit",
+          color_class,
           font_style_class,
           icon_class,
           border_class,
@@ -69,6 +71,7 @@ module Playbook
         generate_classname(
           "pb_icon_kit",
           border_class,
+          color_class,
           fixed_width_class,
           flip_class,
           inverse_class,
@@ -100,7 +103,8 @@ module Playbook
         svg["aria"] = object.aria
         svg["height"] = "auto"
         svg["width"] = "auto"
-        doc.at_css("path")["fill"] = "currentColor"
+        fill_color = object.color || "currentColor"
+        doc.at_css("path")["fill"] = fill_color
         raw doc
       end
 
@@ -183,6 +187,10 @@ module Playbook
 
       def spin_class
         spin ? "fa-spin" : nil
+      end
+
+      def color_class
+        color ? "color_#{color}" : nil
       end
     end
   end

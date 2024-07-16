@@ -5,7 +5,7 @@ const IconDefault = (props) => {
   return (
     <div>
       <Icon
-          color="$primary"
+          color="primary"
           fixedWidth
           icon="user"
           {...props}
@@ -17,7 +17,7 @@ const IconDefault = (props) => {
           {...props}
       />
       <Icon
-          color="$primary"
+          color="success"
           fixedWidth
           icon="vial"
           {...props}
