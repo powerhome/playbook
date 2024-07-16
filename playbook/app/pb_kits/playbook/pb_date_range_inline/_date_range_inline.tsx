@@ -122,7 +122,7 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
           <>
             {icon && (
               <Body 
-                  color={dark ? "light" : "default"} 
+                  color={"light"} 
                   dark={dark}
                   tag="span">
                 <Icon
@@ -141,6 +141,7 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
               {renderTime(startDate!)}
             </Body>
             <Body 
+                color={"light"} 
                 dark={dark} 
                 tag="span">
               <Icon
