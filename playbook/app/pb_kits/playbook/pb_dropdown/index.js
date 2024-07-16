@@ -9,6 +9,8 @@ const UP_ARROW_SELECTOR = "#dropdown_close_icon";
 const OPTION_SELECTOR = "[data-dropdown-option-label]";
 const CUSTOM_DISPLAY_SELECTOR = "[data-dropdown-custom-trigger]";
 const INPUT_FORM_VALIDATION = "#dropdown-form-validation";
+const DROPDOWN_TRIGGER_DISPLAY = "#dropdown_trigger_display";
+const DROPDOWN_PLACEHOLDER = "[data-dropdown-placeholder]";
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
@@ -85,9 +87,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   onOptionSelected(value, selectedOption) {
-    const triggerElement = this.element.querySelector(
-      "#dropdown_trigger_display"
-    );
+    const triggerElement = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
     const customDisplayElement = this.element.querySelector(
       "#dropdown_trigger_custom_display"
     );
@@ -196,10 +196,7 @@ export default class PbDropdown extends PbEnhancedElement {
         }
       });
 
-      const triggerElement = this.element.querySelector("#dropdown_trigger_display");
-      if (triggerElement) {
-        triggerElement.textContent = defaultValue.label;
-      }
+      this.setTriggerElementText(defaultValue.label);
 
       hiddenInput.value = defaultValue.id;
       inputFormValidation.value = defaultValue.id;
@@ -211,7 +208,6 @@ export default class PbDropdown extends PbEnhancedElement {
 
     if (form) {
       form.addEventListener("reset", () => {
-        console.log("reset");
         this.resetDropdownValue();
       });
     }
@@ -223,5 +219,15 @@ export default class PbDropdown extends PbEnhancedElement {
 
     hiddenInput.value = "";
     inputFormValidation.value = "";
+
+    const defaultPlaceholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
+    this.setTriggerElementText(defaultPlaceholder.dataset.dropdownPlaceholder);
+  }
+
+  setTriggerElementText(text) {
+    const triggerElement = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
+    if (triggerElement) {
+      triggerElement.textContent = text;
+    }
   }
 }
