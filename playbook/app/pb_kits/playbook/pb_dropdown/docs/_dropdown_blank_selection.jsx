@@ -15,17 +15,12 @@ const DropdownBlankSelection = (props) => {
       label: "Pakistan",
       value: "Pakistan",
     }
-  ]; 
-  
-  const onChange = (value) => {
-    console.log(value)
-  }
+  ];
 
   return (
   <>
     <Dropdown
         blankSelection="Select one..."
-        onSelect={onChange}
         options={options}
         {...props}
     />
