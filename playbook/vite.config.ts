@@ -5,10 +5,13 @@ import react from '@vitejs/plugin-react'
 import copy from 'rollup-plugin-copy'
 import typescript from '@rollup/plugin-typescript'
 import consolidate from './app/javascript/rollup/rollup-consolidate-plugin';
+import { env } from 'process';
+
+const isProduction = env.NODE_ENV === 'production'
 
 export default defineConfig({
   build: {
-    minify: false,
+    minify: isProduction,
     rollupOptions: {
       input: {
         'chunks/vendor.js': resolve(__dirname, 'app/entrypoints/playbook.js'),
@@ -30,7 +33,7 @@ export default defineConfig({
         },
         chunkFileNames: 'chunks/[name].js',
         dir: resolve(__dirname, 'dist'),
-        sourcemap: false, //TODO: only do this in dev mode
+        sourcemap: !isProduction,
         manualChunks: {
           'lib': [
             resolve(__dirname, 'app/javascript/dashboard.js'),

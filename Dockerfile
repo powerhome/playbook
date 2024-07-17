@@ -75,9 +75,9 @@ COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
 COPY --link --chown=9999:9999 playbook-website /home/app/src/playbook-website
 RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
-    cd playbook; yarn release
+    cd playbook; NODE_ENV=production; yarn release
 RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
-    cd playbook-website; yarn release
+    cd playbook-website; NODE_ENV=production; yarn release
 RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
     cd playbook-website; node /home/app/src/playbook-website/scripts/react-docgen.mjs --all-kits
 
