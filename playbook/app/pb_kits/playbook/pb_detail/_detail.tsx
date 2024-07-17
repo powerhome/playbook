@@ -1,26 +1,20 @@
-import React, { useEffect } from "react"
-import classnames from "classnames"
-import {
-  buildAriaProps,
-  buildCss,
-  buildDataProps,
-  buildHtmlProps,
-} from "../utilities/props"
-import { globalProps, GlobalProps } from "../utilities/globalProps"
-import CustomTable from "./test_detail.js"
+import React from 'react'
+import classnames from 'classnames'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type DetailProps = {
-  aria?: { [key: string]: string }
-  bold?: boolean
-  children?: React.ReactChild[] | React.ReactChild
-  className?: string
-  color?: "light" | "default" | "lighter" | "link" | "error" | "success"
-  dark?: boolean
-  data?: { [key: string]: string }
-  htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
-  id?: string
-  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div"
-  text?: string
+  aria?: { [key: string]: string },
+  bold?: boolean,
+  children?: React.ReactChild[] | React.ReactChild,
+  className?: string,
+  color?: 'light' | 'default' | 'lighter' | 'link' | 'error' | 'success',
+  dark?: boolean,
+  data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  id?: string,
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
+  text?: string,
 } & GlobalProps
 
 const Detail = (props: DetailProps): React.ReactElement => {
@@ -29,26 +23,20 @@ const Detail = (props: DetailProps): React.ReactElement => {
     bold = false,
     children,
     className,
-    color = "light",
+    color = 'light',
     data = {},
     htmlOptions = {},
-    id = "",
-    tag = "div",
-    text = "",
+    id = '',
+    tag = 'div',
+    text= ''
   } = props
 
-  useEffect(() => {
-    const table = new CustomTable()
-    table.connect()
-    table.customMethod() // Call custom method to test
-  }, [])
-
-  const ariaProps: { [key: string]: string } = buildAriaProps(aria)
-  const dataProps: { [key: string]: string } = buildDataProps(data)
-  const htmlProps = buildHtmlProps(htmlOptions)
+  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+  const dataProps: {[key: string]: string} = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const isBold = bold ? "bold" : null
   const classes = classnames(
-    buildCss("pb_detail_kit", `color`, color),
+    buildCss('pb_detail_kit', `color`, color),
     isBold,
     globalProps(props),
     className

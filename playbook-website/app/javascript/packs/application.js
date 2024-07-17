@@ -33,13 +33,14 @@ import { Turbo } from "@hotwired/turbo-rails"
 Turbo.session.drive = false
 
 import { Application } from "@hotwired/stimulus"
-import HelloController from "../controllers/hello_controller"
+import { ButtonController } from 'playbook-ui'
 
 const application = Application.start()
 
 application.debug = false
 window.Stimulus   = application
-application.register("hello", HelloController)
+
+application.register("button", ButtonController)
 
 
 

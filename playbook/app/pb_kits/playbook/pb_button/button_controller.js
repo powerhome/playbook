@@ -1,24 +1,21 @@
-// app/javascript/controllers/button_controller.js
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["button"]
+  static targets = ["primaryButton"]
 
   toggle() {
-    this.buttonTarget.disabled = !this.buttonTarget.disabled
+    this.primaryButtonTarget.disabled = !this.primaryButtonTarget.disabled
     this.updateButtonClass()
+    console.log("Button is now " + (this.primaryButtonTarget.disabled ? "disabled" : "enabled"))
   }
 
   updateButtonClass() {
-    const enabledClass = this.data.get("enabledClass")
-    const disabledClass = this.data.get("disabledClass")
-
-    if (this.buttonTarget.disabled) {
-      this.buttonTarget.classList.remove(enabledClass)
-      this.buttonTarget.classList.add(disabledClass)
+    if (this.primaryButtonTarget.disabled) {
+      this.primaryButtonTarget.classList.remove("pb_button_kit_primary_inline_enabled")
+      this.primaryButtonTarget.classList.add("pb_button_kit_primary_inline_disabled")
     } else {
-      this.buttonTarget.classList.remove(disabledClass)
-      this.buttonTarget.classList.add(enabledClass)
+      this.primaryButtonTarget.classList.remove("pb_button_kit_primary_inline_disabled")
+      this.primaryButtonTarget.classList.add("pb_button_kit_primary_inline_enabled")
     }
   }
 }

@@ -1,12 +1,6 @@
 <!-- playbook/app/pb_kits/playbook/pb_button/button.html.erb -->
-<div data-controller="button" data-action="click->button#toggle">
 <%= content_tag(object.tag,
                 object.tag == "button" ? object.options : object.link_options,
-                 data: {
-                    target: "button.button",
-                    button_enabled_class: "pb_button_kit_secondary_block_enabled",
-                    button_disabled_class: "pb_button_kit_secondary_block_disabled"
-                  },
                 **combined_html_options) do %>
     <% if object.variant === "reaction" %>
         <% if icon && object.valid_emoji(object.icon) %>
@@ -37,6 +31,5 @@
         </span>
     <% end %>
     <% end %>
-
 <% end %>
-</div>
+
