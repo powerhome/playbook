@@ -10,7 +10,7 @@ const CollapsibleCustomMainWithIcon = () => {
         collapsed={isCollapsed}
     >
           <Background 
-              backgroundColor="white" 
+              backgroundColor="clear" 
               cursor="pointer"
               htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
               position="sticky" 
@@ -23,7 +23,7 @@ const CollapsibleCustomMainWithIcon = () => {
               >
                 <Title 
                     size={4} 
-                    text="Custom Main Section" 
+                    text="Custom Main Section"
                 />
                 <Collapsible.Icon collapsed={isCollapsed}/>
               </Flex>
