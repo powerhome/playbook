@@ -28,7 +28,7 @@
   "include": [
     "app/pb_kits/playbook/utilities/globalProps.ts",
     "app/javascript/*.js",
-    "app/pb_kits/playbook",
+    "app/pb_kits/playbook/**/*.ts",
     "app/javascript/kits.js",
     "app/entrypoints/playbook.js",
     "app/entrypoints/playbook-doc.js",
