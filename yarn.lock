@@ -5228,11 +5228,6 @@ core-js-pure@^3.25.1:
   resolved "https://npm.powerapp.cloud/core-js-pure/-/core-js-pure-3.27.1.tgz#ede4a6b8440585c7190062757069c01d37a19dca"
   integrity sha512-BS2NHgwwUppfeoqOXqi08mUqS5FiZpuRuJJpKsaME7kJz0xxuk0xkhDdfMIlP/zLa80krBqss1LtD7f889heAw==
 
-core-js@3.29.1:
-  version "3.29.1"
-  resolved "https://npm.powerapp.cloud/core-js/-/core-js-3.29.1.tgz#40ff3b41588b091aaed19ca1aa5cb111803fa9a6"
-  integrity sha512-+jwgnhg6cQxKYIIjGtAHq2nwUOolo9eoFZ4sHfUH09BLXBgxnH4gA0zEd+t+BO2cNB8idaBtZFcFTRjQJRJmAw==
-
 core-util-is@~1.0.0:
   version "1.0.3"
   resolved "https://npm.powerapp.cloud/core-util-is/-/core-util-is-1.0.3.tgz#a6042d3634c2b27e9328f837b965fac83808db85"
@@ -6077,11 +6072,6 @@ eslint-plugin-jsx-control-statements@2.2.1:
   version "2.2.1"
   resolved "https://npm.powerapp.cloud/eslint-plugin-jsx-control-statements/-/eslint-plugin-jsx-control-statements-2.2.1.tgz#864c311d201b0b09aa47669b23755cd18d2ecf92"
   integrity sha512-BkqbYSu7KuOwsmxmmD9mi1KLz3cAXqXvDSN/Re+yKnIAO6SGRAx3aiUmsjOWAAGJonfhtNZCCTN9jfzQ5hto+Q==
-
-eslint-plugin-jsx-control-statements@^3.0.0:
-  version "3.0.0"
-  resolved "https://npm.powerapp.cloud/eslint-plugin-jsx-control-statements/-/eslint-plugin-jsx-control-statements-3.0.0.tgz#89d29cb0d167a6ba301f41dee948bb114a8a73b4"
-  integrity sha512-OAlTFVT6jyLXO6BVwYnlE95wKsT9LLRDs57+eOaDZjymTks7OYo0QEIfokKLfGrhfdgzAQz9Gsk5GqnVJbT/wg==
 
 eslint-plugin-react-hooks@4.6.0, eslint-plugin-react-hooks@^4.6.0:
   version "4.6.0"
