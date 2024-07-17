@@ -1,5 +1,6 @@
 @import "../tokens/colors";
 
+// All the merges below create $icon_colors, a map of all color tokens in colors.scss
 $merge_kits1: map-merge($status_colors, $category_colors);
 $merge_kits2: map-merge($merge_kits1, $product_colors);
 $merge_kits3: map-merge($merge_kits2, $text_colors);
@@ -15,70 +16,13 @@ $merge_kits12: map-merge($merge_kits11, $status_color_text);
 $merge_kits13: map-merge($merge_kits12, $status_color_text_dark);
 $icon_colors: map-merge($merge_kits13, $colors);
 
-
-// @mixin apply-color-from-class($class-name) {
-  //   $hash-index: str-index($class-name, '#');
-  //   $hexcode: str-slice($class-name, $hash-index + 1, $hash-index + 7);
-  //   color: unquote("#{$hexcode}");
-  // }
-  // @mixin apply-color($hexcode) {
-    //   color: $hexcode;
-    // }
-    
-    // @function sanitize-hex($hex) {
-      //   @return str-slice($hex, 2);
-      // }
-      
-// @use "sass:selector";
-
-// @mixin extractColor($className){
-//   // $startIndex: str-index($className, "color_#") + 7;
-//   // $hexCode: str-slice($className, $startIndex, 7);
-//   $startIndex: str-index($className, "color_#") + 6;
-//   $hexCode: str-slice($className, $startIndex);
-//   color: #{$hexCode};
-// }
-
-// [class^=pb_custom_icon]
-// [class*=pb_icon_kit] {
 .pb_custom_icon, .pb_icon_kit {
   @each $color_name, $color_value in $icon_colors {
     &[class*="#{$color_name}"] {
       color: $color_value;
     }
-    // &.#{$color_name} {
-    //   color: $color_value;
-    // }
   }
-  // @mixin dynamic-color($color) {
-  //   .color_##{$color} {
-  //     @include apply-color($color);
-  //   }
-  // }
-// .pb_custom_icon, .pb_icon_kit {
-  // &[class*="color_#"] {
-    // @debug selector.parse(".color_#");
-    // @debug "color: $hexCode";
-    // @include extractColor(&);
-    // @include extractColor($hexCode);
-    // color: #{$hexCode};
-    // color: #FF0000;
-  // }
-  // &[class*="color_#"] {
-  //   // @include extractColor(&)
-  //   // @include apply-color-from-class(($class-name))
-  //   $current-class: &;
-  //   @include apply-color-from-class($current-class);
-  // }
 }
-// Testing if the str- functions work
-// $className: "color_#FF0000";
-// $startIndex: str-index($className, "color_#") + 6;
-// $hexCode: str-slice($className, $startIndex);
-// [class*="color_#FF0000"] {
-//   color: #{$hexCode};
-// }
-
 
 // Rails custom icon styles
 svg.pb_custom_icon {

@@ -3,29 +3,40 @@ import Icon from "../_icon"
 
 const IconDefault = (props) => {
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column"}}>
       <Icon
           color="primary"
           fixedWidth
           icon="user"
+          size="2x"
           {...props}
       />
       <Icon
-          color="#FF0000"
+          color="info"
           fixedWidth
-          icon="user"
+          icon="recycle"
+          size="2x"
           {...props}
       />
       <Icon
-          color="success"
+          color="data_4"
+          fixedWidth
+          icon="frog"
+          size="2x"
+          {...props}
+          />
+      <Icon
+          color="text_lt_lighter"
           fixedWidth
           icon="vial"
+          size="2x"
           {...props}
       />
       <Icon
-          color="#FF0000"
+          color="roofing"
           fixedWidth
-          icon="vial"
+          icon="product-roofing"
+          size="2x"
           {...props}
       />
     </div>
