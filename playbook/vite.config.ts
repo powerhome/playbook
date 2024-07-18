@@ -4,7 +4,8 @@ import RubyPlugin from 'vite-plugin-ruby'
 import react from '@vitejs/plugin-react'
 import copy from 'rollup-plugin-copy'
 import typescript from '@rollup/plugin-typescript'
-import consolidate from './app/javascript/rollup/rollup-consolidate-plugin';
+import consolidate from './app/javascript/rollup/consolidate-plugin';
+import cssUrl from './app/javascript/rollup/css-url-plugin';
 import { env } from 'process';
 
 const isProduction = env.NODE_ENV === 'production'
@@ -43,13 +44,13 @@ export default defineConfig({
           ],
         },
       },
-      external: ['react', 'react-dom', 'webpacker-react'],
+      external: ['react', 'react/jsx-runtime', 'react-dom', 'react-is', 'webpacker-react'],
     },
   },
   css: {
     modules: {
       generateScopedName: '[name]__[local]___[hash:base64:5]',
-    },
+    }
   },
   plugins: [
     react(),
@@ -79,8 +80,10 @@ export default defineConfig({
         }
       ],
     }),
+    cssUrl(),
   ],
   resolve: {
+    dedupe: ['playbook'],
     alias: {
       'kits': resolve(__dirname, 'app/pb_kits/playbook'),
       'tokens': resolve(__dirname, 'app/pb_kits/playbook/tokens'),
