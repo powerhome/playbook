@@ -11,6 +11,8 @@ module Playbook
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :default_value
+      prop :blank_selection, type: Playbook::Props::String,
+                             default: ""
 
       def data
         Hash(prop(:data)).merge(pb_dropdown: true)
@@ -28,6 +30,10 @@ module Playbook
 
       def input_default_value
         default_value.present? ? default_value.transform_keys(&:to_s) : ""
+      end
+
+      def options_with_blank
+        blank_selection.present? ? [{ id: "", value: "", label: blank_selection }] + options : options
       end
     end
   end
