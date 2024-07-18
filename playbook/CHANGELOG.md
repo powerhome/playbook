@@ -1,3 +1,34 @@
+# Headline: 🐉 Effortless Drag and Drop Functionality with the NEW Draggable Kit! ⬆️⬇️
+##### July 10, 2024
+
+![13-32-0](https://github.com/user-attachments/assets/c93a0344-ef0a-4fd2-be48-62fb5bf95f1e)
+
+
+We are excited to introduce the new Draggable kit, a highly flexible solution for all your drag-and-drop needs! Use the simple subcomponent structure for greater flexibility or use the customized solutions for the List, Selectable List or Card kits for super easy implementation out of the box!
+
+[13.32.0](https://github.com/powerhome/playbook/tree/13.32.0) full list of changes:
+
+**Kit Enhancements:**
+- Implementing Dropdown Form Validation [\#3507](https://github.com/powerhome/playbook/pull/3507) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+- Remove Duplicate "block" Button in RTE on Start [\#3501](https://github.com/powerhome/playbook/pull/3501) ([kangaree](https://github.com/kangaree))
+- Hide Beta Versions of Kits within Beta Index (with menu.yml) [\#3500](https://github.com/powerhome/playbook/pull/3500) ([elisashapiro](https://github.com/elisashapiro)) 
+- Date Year Stacked Left Align Text Color Bug [\#3508](https://github.com/powerhome/playbook/pull/3508) ([anthonymig88](https://github.com/anthonymig88))
+
+**Improvements:**
+- Power Centra in Playbook Part 2 (Change Variable Settings) [\#3134](https://github.com/powerhome/playbook/pull/3134) ([jasoncypret](https://github.com/jasoncypret))
+- Add Category to Playbook Kit Generator [\#3488](https://github.com/powerhome/playbook/pull/3488) ([elisashapiro](https://github.com/elisashapiro))
+- Bump ci-kubed v8.2.0 and Convert to use Remote buildkit cache mounts [\#3413](https://github.com/powerhome/playbook/pull/3413) ([TeamTeaTime](https://github.com/TeamTeaTime))
+
+**New Kits:**
+- Draggable Kit [\#3487](https://github.com/powerhome/playbook/pull/3487) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.31.0...13.32.0)
+
+
+
 # 🌁 Introducing the New Overlay Kit — A Seamless Way to Implement Overlays! ‍🌁
 
 ##### June 28, 2024
