@@ -1,4 +1,4 @@
-# Headline: 🐉 Effortless Drag and Drop Functionality with the NEW Draggable Kit! ⬆️⬇️
+# 🐉 Effortless Drag and Drop Functionality with the NEW Draggable Kit! ⬆️⬇️
 ##### July 10, 2024
 
 ![13-32-0](https://github.com/user-attachments/assets/c93a0344-ef0a-4fd2-be48-62fb5bf95f1e)
