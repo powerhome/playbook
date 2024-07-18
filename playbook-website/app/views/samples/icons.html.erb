@@ -94,6 +94,39 @@
 
 <%= pb_rails("flex", props: { padding_left: "md"} ) do %>
   <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("title", props: {size: 3, text: "Pull/Width", padding_bottom: "sm"})%>
+  <% end %>
+<% end %>
+<%= pb_rails("flex", props: { padding_left: "md" }) do %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "powergon-p", size: "2x", pull: "right" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "powergon-p", size: "2x", pull: "left" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "powergon-p", size: "2x", fixed_width: true }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "powergon-p", size: "2x", fixed_width: false }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "powergon-p", size: "2x", border: true }) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("flex", props: { padding_left: "md"} ) do %>
+  <%= pb_rails("flex/flex_item") do %>
     <%= pb_rails("title", props: {size: 3, text: "Color", padding_bottom: "sm"})%>
   <% end %>
 <% end %>
