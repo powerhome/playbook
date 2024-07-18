@@ -8,6 +8,7 @@ const IconDefault = (props) => {
           color="primary"
           fixedWidth
           icon="user"
+          paddingBottom="sm"
           size="2x"
           {...props}
       />
@@ -15,6 +16,7 @@ const IconDefault = (props) => {
           color="info"
           fixedWidth
           icon="recycle"
+          paddingBottom="sm"
           size="2x"
           {...props}
       />
@@ -22,6 +24,7 @@ const IconDefault = (props) => {
           color="data_4"
           fixedWidth
           icon="frog"
+          paddingBottom="sm"
           size="2x"
           {...props}
           />
@@ -29,6 +32,7 @@ const IconDefault = (props) => {
           color="text_lt_lighter"
           fixedWidth
           icon="vial"
+          paddingBottom="sm"
           size="2x"
           {...props}
       />
