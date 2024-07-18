@@ -3,13 +3,16 @@ import React from 'react'
 import {
   Background,
   Body,
+  Button,
   Caption,
   Flex,
+  Icon,
   Title,
 } from 'playbook-ui'
 
 import Example from '../Templates/Example'
 
+const BORDER_RADIUS_VALUES = [ "none", "extra small", "small", "medium", "large", "extra large", "rounded" ]
 const TOKENS = {
   'Rounded': '$border_radius_rounded',
   'Extra Large': '$border_radius_xl',
@@ -30,7 +33,7 @@ const DATASET = [
   { name: 'None', class: 'border_radius_none' },
 ]
 
-const BorderRadius = ({ tokensExample }: { tokensExample: string }) => (
+const BorderRadius = ({ example, tokensExample }: { example: string, tokensExample: string }) => (
   <React.Fragment>
     <Background
       className="token-wrapper"
@@ -43,11 +46,34 @@ const BorderRadius = ({ tokensExample }: { tokensExample: string }) => (
         text='Border Radius'
       />
       <Body
-        marginBottom='lg'
+        marginBottom='xxs'
         marginTop='xs'
         text='We have very specific settings for border radius to keep the interface looking consistent and clean. If you ever need to access these to build new things here are examples for how to do that.'
       />
+      <Button
+        link="https://playbook.powerapp.cloud/kits/card/react#border-radius"
+        newWindow
+        padding="none"
+        tabIndex={0}
+        variant="link"
+      >
+        <Body
+          variant="link"
+        >
+          {'See this prop in action in our Card Kit'}
+          <Icon
+            fixedWidth
+            icon="angle-right"
+          />
+        </Body>
+      </Button>
     </Background>
+    <Example
+        example={example}
+        globalProps={{
+          borderRadius: BORDER_RADIUS_VALUES,
+        }}
+    />
     <Example
       example={tokensExample}
       tokens={TOKENS}

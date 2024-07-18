@@ -1,0 +1,12 @@
+<Card borderRadius="md"> {'Medium (6px)'} </Card>
+
+<Card
+  borderRadius={{
+    none: "none",
+    xs: "extra small",
+    sm: "small",
+    lg: "large",
+    xl: "extra large",
+    rounded: "rounded"
+  }}
+/>
