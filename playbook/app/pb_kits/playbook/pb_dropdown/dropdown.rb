@@ -10,6 +10,7 @@ module Playbook
       prop :error, type: Playbook::Props::String
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :default_value
 
       def data
         Hash(prop(:data)).merge(pb_dropdown: true)
@@ -23,6 +24,10 @@ module Playbook
 
       def error_class
         error.present? ? " error" : ""
+      end
+
+      def input_default_value
+        default_value.present? ? default_value.transform_keys(&:to_s) : ""
       end
     end
   end

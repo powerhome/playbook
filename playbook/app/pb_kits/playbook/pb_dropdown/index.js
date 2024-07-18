@@ -21,6 +21,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   connect() {
     this.keyboardHandler = new PbDropdownKeyboard(this);
+    this.setDefaultValue();
     this.bindEventListeners();
     this.updateArrowDisplay(false);
     this.handleFormValidation();
@@ -177,6 +178,30 @@ export default class PbDropdown extends PbEnhancedElement {
       if (errorLabelElement) {
         errorLabelElement.remove();
       }
+    }
+  }
+
+  setDefaultValue() {
+    const hiddenInput = this.element.querySelector("#dropdown-selected-option");
+
+    if (hiddenInput.value) {
+      const inputFormValidation = this.element.querySelector(INPUT_FORM_VALIDATION);
+      const defaultValue = JSON.parse(hiddenInput.value.replaceAll("=>", ":"));
+      const options = this.element.querySelectorAll(OPTION_SELECTOR);
+
+      options.forEach((option) => {
+        if (defaultValue.id === JSON.parse(option.dataset.dropdownOptionLabel).id) {
+          option.classList.add("pb_dropdown_option_selected");
+        }
+      });
+
+      const triggerElement = this.element.querySelector("#dropdown_trigger_display");
+      if (triggerElement) {
+        triggerElement.textContent = defaultValue.label;
+      }
+
+      hiddenInput.value = defaultValue.id;
+      inputFormValidation.value = defaultValue.id;
     }
   }
 }

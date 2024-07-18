@@ -10,3 +10,4 @@ export { default as DropdownWithExternalControl } from './_dropdown_with_externa
 export { default as DropdownWithHook } from './_dropdown_with_hook.jsx'
 export { default as DropdownSubcomponentStructure } from './_dropdown_subcomponent_structure.jsx'
 export { default as DropdownError } from './_dropdown_error.jsx'
+export { default as DropdownDefaultValue } from './_dropdown_default_value.jsx'
