@@ -1,7 +1,7 @@
 import React from 'react'
 import { Collapsible, useCollapsible, Background, Flex, Title, List, ListItem } from '../..'
 
-const CollapsibleCustomMainWithIcon = () => {
+const CollapsibleCustomMainWithIcon = (props) => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
 
   return (
@@ -21,7 +21,8 @@ const CollapsibleCustomMainWithIcon = () => {
                   gap="sm"
                   justify="between" 
               >
-                <Title 
+                <Title
+                    dark={props.dark}
                     size={4} 
                     text="Custom Main Section"
                 />
