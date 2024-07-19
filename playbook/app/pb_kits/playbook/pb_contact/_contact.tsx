@@ -87,7 +87,7 @@ const Contact = (props: ContactProps): React.ReactElement => {
     >
       <Body
           className="pb_contact_kit"
-          color={dark ? "light" : "default"} 
+          color={"light"} 
           dark={dark}
           tag="span"
       >
