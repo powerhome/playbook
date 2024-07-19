@@ -39,6 +39,9 @@ PbDropdown.start()
 import PbAdvancedTable from './pb_advanced_table'
 PbAdvancedTable.start()
 
+import PbStarRating from './pb_star_rating'
+PbStarRating.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====
