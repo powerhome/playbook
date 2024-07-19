@@ -10,7 +10,7 @@ const MoreExtensionsDropdown = ({extensions}: any) => {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleTogglePopover = () => {
-    setShowPopover(true)
+    setShowPopover(!showPopover)
   }
 
   const handlePopoverClose = (shouldClosePopover: boolean) => {
