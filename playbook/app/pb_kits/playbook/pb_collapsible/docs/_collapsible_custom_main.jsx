@@ -26,7 +26,6 @@ const CollapsibleCustomMain = (props) => {
                     size={4} 
                     text="Custom Main Section"
                 />
-                <Collapsible.Icon collapsed={isCollapsed}/>
               </Flex>
           </Background>
       <Collapsible.Content padding="none">
