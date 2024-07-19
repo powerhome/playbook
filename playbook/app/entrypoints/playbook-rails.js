@@ -39,7 +39,7 @@ PbDropdown.start()
 import PbAdvancedTable from 'kits/pb_advanced_table'
 PbAdvancedTable.start()
 
-import PbNav from './pb_nav'
+import PbNav from 'kits/pb_nav'
 PbNav.start()
 
 import 'flatpickr'
