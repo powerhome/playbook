@@ -12,7 +12,7 @@ import {
 
 import Example from '../Templates/Example'
 
-const BORDER_RADIUS_VALUES = [ "none", "extra small", "small", "medium", "large", "extra large", "rounded" ]
+const BORDER_RADIUS_VALUES = [ "none", "xs", "sm", "md", "lg", "xl", "rounded" ]
 const TOKENS = {
   'Rounded': '$border_radius_rounded',
   'Extra Large': '$border_radius_xl',
