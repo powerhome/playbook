@@ -48,8 +48,8 @@
 
 
   $star-styles: (
-    yellow_star: (color: #F9BB00),
-    primary_star: (color: #0056CF),
+    yellow_star: (color: $yellow),
+    primary_star: (color: $royal),
     suble_star_light: (color: $text_lt_default),
     suble_star_dark: (color: $text_dk_default),
     empty_star_dark: (color: $border_dark),
@@ -110,5 +110,14 @@
         #{$property}: $value;
       }
     }
+  }
+  .yellow-star-selected {
+    color: $yellow; 
+  }
+  .primary-star-selected {
+    color: $royal 
+  }
+  .suble-star-selected {
+    color: $text_lt_default;
   }
 }

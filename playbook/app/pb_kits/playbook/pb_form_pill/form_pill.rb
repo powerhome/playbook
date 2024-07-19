@@ -11,9 +11,13 @@ module Playbook
       prop :text_transform, type: Playbook::Props::Enum,
                             values: %w[none lowercase],
                             default: "none"
+      prop :color, type: Playbook::Props::Enum,
+                   values: %w[primary neutral],
+                   default: "primary"
+      prop :tabindex
 
       def classname
-        generate_classname("pb_form_pill_kit", "primary", name, text, text_transform)
+        generate_classname("pb_form_pill_kit", color, name, text, text_transform)
       end
 
       def display_text

@@ -7,13 +7,14 @@ interface ComponentTypes {
 }
 
 interface CategoryTypes {
-  name: string;
+  category: string;
   description: string;
   components: ComponentTypes[];
 }
 
-const sortByName = (a: ComponentTypes, b: ComponentTypes) =>
-  a.name.localeCompare(b.name);
+const sortByName = (a: ComponentTypes, b: ComponentTypes): number => {
+  return a.name.localeCompare(b.name);
+}
 
 const sortComponentsByName = (kitCategory: CategoryTypes) => {
   kitCategory.components.sort(sortByName);
@@ -22,8 +23,8 @@ const sortComponentsByName = (kitCategory: CategoryTypes) => {
 export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
   const response = await fetch("/beta/kits.json");
   const data = await response.json();
- 
-  data.kits.sort(sortByName).forEach(sortComponentsByName);
+
+  data.kits.forEach(sortComponentsByName);
 
   return data;
 };
@@ -40,9 +41,9 @@ export const CategoryLoader: (
   const response = await fetch("/beta/kits.json");
   const { kits } = await response.json();
 
-  const filteredData = kits.filter(
-    (kit: ComponentTypes) => kit.name === params.name
-  )[0];
+  const filteredData = kits.find(
+    (kit: CategoryTypes) => kit.category === params.category
+  );
 
   filteredData.components.sort(sortByName);
 

@@ -6,6 +6,7 @@ const FormPillExample = (props) => {
     <div>
       <FormPill
           onClick={() => alert('Click!')}
+          tabIndex={0}
           text="THIS IS A TAG"
           textTransform="lowercase"
           {...props}

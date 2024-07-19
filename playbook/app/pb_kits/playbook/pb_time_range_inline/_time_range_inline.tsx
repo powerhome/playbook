@@ -36,7 +36,7 @@ const dateTimeIso = (dateValue: Date) => {
   return DateTime.toIso(dateValue)
 }
 
-const TimeRangeInline = (props: TimeRangeInlineProps) => {
+const TimeRangeInline = (props: TimeRangeInlineProps): React.ReactElement => {
   const {
     aria = {},
     className,

@@ -9,6 +9,7 @@ const FormPillSize = (props) => {
           avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
           name="Anna Black"
           size="small"
+          tabIndex={0}
           {...props}
       />
       <br />
@@ -16,6 +17,7 @@ const FormPillSize = (props) => {
       <FormPill
           name="Anna Black"
           size="small"
+          tabIndex={0}
           {...props}
       />
     </div>

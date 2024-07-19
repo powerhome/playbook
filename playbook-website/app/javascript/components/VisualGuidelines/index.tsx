@@ -60,7 +60,9 @@ const VisualGuidelines = ({
       case "typography":
         return <Typography example={examples.typography_tokens}/>;
       case "border_radius":
-        return <BorderRadius tokensExample={examples.border_radius_tokens}/>;
+        return <BorderRadius example={examples.border_radius_jsx}
+                  tokensExample={examples.border_radius_tokens}
+                />;
       case "display":
         return <Display example={examples.display_in_use_jsx}/>;
       case "cursor":

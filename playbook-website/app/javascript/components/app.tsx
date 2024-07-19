@@ -42,7 +42,7 @@ const router = createBrowserRouter(
       <Route
           element={<CategoryShow />}
           loader={CategoryLoader}
-          path="kit_category/:name"
+          path="kit_category/:category"
       />
       <Route
           element={<IconList />}
