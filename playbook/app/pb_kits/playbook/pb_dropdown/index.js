@@ -8,9 +8,9 @@ const DOWN_ARROW_SELECTOR = "#dropdown_open_icon";
 const UP_ARROW_SELECTOR = "#dropdown_close_icon";
 const OPTION_SELECTOR = "[data-dropdown-option-label]";
 const CUSTOM_DISPLAY_SELECTOR = "[data-dropdown-custom-trigger]";
-const INPUT_FORM_VALIDATION = "#dropdown-form-validation";
 const DROPDOWN_TRIGGER_DISPLAY = "#dropdown_trigger_display";
 const DROPDOWN_PLACEHOLDER = "[data-dropdown-placeholder]";
+const DROPDOWN_INPUT = "#dropdown-selected-option";
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
@@ -47,14 +47,13 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleOptionClick(event) {
     const option = event.target.closest(OPTION_SELECTOR);
-    const hiddenInput = this.element.querySelector("#dropdown-selected-option");
-    const inputFormValidation = this.element.querySelector(INPUT_FORM_VALIDATION);
+    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
 
     if (option) {
       const value = option.dataset.dropdownOptionLabel;
       hiddenInput.value = JSON.parse(value).id;
-      inputFormValidation.value = JSON.parse(value).id;
-      this.clearFormValidation(inputFormValidation);
+      this.clearFormValidation(hiddenInput);
+
       this.onOptionSelected(value, option);
     }
   }
@@ -160,14 +159,18 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   handleFormValidation() {
-    const inputFormValidation = this.element.querySelector(INPUT_FORM_VALIDATION);
+    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
 
-    inputFormValidation.addEventListener("invalid", function (event) {
-      if (inputFormValidation.hasAttribute("required") && inputFormValidation.value === "") {
-        event.preventDefault();
-        inputFormValidation.closest(".dropdown_wrapper").classList.add("error");
-      }
-    }, true);
+    hiddenInput.addEventListener(
+      "invalid",
+      function (event) {
+        if (hiddenInput.hasAttribute("required") && hiddenInput.value === "") {
+          event.preventDefault();
+          hiddenInput.closest(".dropdown_wrapper").classList.add("error");
+        }
+      },
+      true
+    );
   }
 
   clearFormValidation(input) {
@@ -175,7 +178,9 @@ export default class PbDropdown extends PbEnhancedElement {
       const dropdownWrapperElement = input.closest(".dropdown_wrapper");
       dropdownWrapperElement.classList.remove("error");
 
-      const errorLabelElement = dropdownWrapperElement.querySelector(".pb_body_kit_negative");
+      const errorLabelElement = dropdownWrapperElement.querySelector(
+        ".pb_body_kit_negative"
+      );
       if (errorLabelElement) {
         errorLabelElement.remove();
       }
@@ -183,15 +188,16 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   setDefaultValue() {
-    const hiddenInput = this.element.querySelector("#dropdown-selected-option");
+    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
 
     if (hiddenInput.value) {
-      const inputFormValidation = this.element.querySelector(INPUT_FORM_VALIDATION);
       const defaultValue = JSON.parse(hiddenInput.value.replaceAll("=>", ":"));
       const options = this.element.querySelectorAll(OPTION_SELECTOR);
 
       options.forEach((option) => {
-        if (defaultValue.id === JSON.parse(option.dataset.dropdownOptionLabel).id) {
+        if (
+          defaultValue.id === JSON.parse(option.dataset.dropdownOptionLabel).id
+        ) {
           option.classList.add("pb_dropdown_option_selected");
         }
       });
@@ -199,7 +205,6 @@ export default class PbDropdown extends PbEnhancedElement {
       this.setTriggerElementText(defaultValue.label);
 
       hiddenInput.value = defaultValue.id;
-      inputFormValidation.value = defaultValue.id;
     }
   }
 
@@ -214,11 +219,13 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   resetDropdownValue() {
-    const hiddenInput = this.element.querySelector("#dropdown-selected-option");
-    const inputFormValidation = this.element.querySelector(INPUT_FORM_VALIDATION);
+    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const options = this.element.querySelectorAll(OPTION_SELECTOR);
+    options.forEach((option) => {
+      option.classList.remove("pb_dropdown_option_selected");
+    });
 
     hiddenInput.value = "";
-    inputFormValidation.value = "";
 
     const defaultPlaceholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
     this.setTriggerElementText(defaultPlaceholder.dataset.dropdownPlaceholder);
