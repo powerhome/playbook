@@ -12,7 +12,11 @@ const isProduction = env.NODE_ENV === 'production'
 
 export default defineConfig({
   build: {
-    minify: isProduction,
+    minify: isProduction ? 'terser' : false,
+    terserOptions: {
+      mangle: false,
+      compress: false,
+    },
     rollupOptions: {
       input: {
         'chunks/vendor.js': resolve(__dirname, 'app/entrypoints/playbook.js'),
@@ -44,7 +48,7 @@ export default defineConfig({
           ],
         },
       },
-      external: ['react', 'react/jsx-runtime', 'react-dom', 'react-is', 'webpacker-react'],
+      external: ['react', 'react/jsx-runtime', 'react-dom', 'react-is', 'trix', 'webpacker-react'],
     },
   },
   css: {
