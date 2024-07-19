@@ -27,7 +27,7 @@ const Timeline = ({
   orientation = 'horizontal',
   showDate = false,
   ...props
-}: TimelineProps) => {
+}: TimelineProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
