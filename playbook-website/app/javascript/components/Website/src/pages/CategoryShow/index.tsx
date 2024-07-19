@@ -13,13 +13,13 @@ import { Kit } from "../ComponentList"
 import "./styles.scss"
 
 export default function CategoryShow() {
-  const { components, name, description } = useLoaderData()
+  const { components, category, description } = useLoaderData()
   const [kitsToShow, setKitsToShow] = useState(components)
   const [platform, setPlatform] = useState('react')
 
   return (
     <>
-      <Hero description={description} title={linkFormat(name)} />
+      <Hero description={description} title={linkFormat(category)} />
 
       <Flex
         align="center"
@@ -39,7 +39,7 @@ export default function CategoryShow() {
             <Body className="previous-route" color="light">Components</Body>
           </NavLink>
           <Icon className="category-breadcrumb-icon" icon="angle-right" />
-          <Body text={linkFormat(name)} />
+          <Body text={linkFormat(category)} />
         </Flex>
 
         {!kitsToShow.length && (
@@ -54,14 +54,17 @@ export default function CategoryShow() {
           )}
 
         <KitGrid>
-          {kitsToShow.map(({ description, name }: Kit, index: number) => (
-            <KitCard
-              description={description}
-              name={name}
-              key={`category-${name}-${index}`}
-              platform={platform}
-            />
-          ))}
+          {kitsToShow.filter(component => component.status === "stable")
+          .map(({ description, name }: Kit, index: number) => {
+            return(
+              <KitCard
+                description={description}
+                name={name}
+                key={`category-${name}-${index}`}
+                platform={platform}
+              />
+            )
+          })}
         </KitGrid>
       </PageContainer>
     </>
