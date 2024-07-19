@@ -1,4 +1,4 @@
-@import "../tokens/exports/scale";
+@import "../tokens/exports/scale.module";
 
 @mixin hover-color-classes($colors-list) {
     @each $name, $color in $colors-list {
