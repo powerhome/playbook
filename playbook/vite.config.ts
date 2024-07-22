@@ -48,7 +48,15 @@ export default defineConfig({
           ],
         },
       },
-      external: ['react', 'react/jsx-runtime', 'react-dom', 'react-is', 'trix', 'webpacker-react'],
+      external: [
+        'react',
+        'react/jsx-runtime',
+        'react-dom',
+        'react-is',
+        'trix',
+        'react-trix',
+        'webpacker-react',
+      ],
     },
   },
   css: {
