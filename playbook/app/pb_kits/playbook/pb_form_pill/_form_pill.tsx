@@ -65,34 +65,60 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
         {...dataProps}
         {...htmlProps}
     >
-        {name &&
+      {((name && !icon && !text) || (name && !icon && text)) && (
         <>
-        <Avatar
-            imageUrl={avatarUrl}
-            name={name}
-            size="xs"
-            status={null}
-        />
-        <Title
-            className="pb_form_pill_text"
-            size={4}
-            text={name}
-        />
+          <Avatar
+              imageUrl={avatarUrl}
+              name={name}
+              size="xs"
+              status={null}
+          />
+          <Title
+              className="pb_form_pill_text"
+              size={4}
+              text={name}
+          />
         </>
-        }
-      {icon && 
-        <Icon
-            className="pb_form_pill_icon"
-            icon={icon}
-        />
-      }
-      {text &&
+      )}
+      {((name && icon && !text) || (name && icon && text)) && (
+        <>
+          <Avatar
+              imageUrl={avatarUrl}
+              name={name}
+              size="xs"
+              status={null}
+          />
+          <Title
+              className="pb_form_pill_text"
+              size={4}
+              text={name}
+          />
+          <Icon
+              className="pb_form_pill_icon"
+              icon={icon}
+          />
+        </>
+      )}
+      {(!name && icon && text) && (
+        <>
+          <Icon
+              className="pb_form_pill_icon"
+              icon={icon}
+          />
+          <Title
+              className="pb_form_pill_tag"
+              size={4}
+              text={text}
+          />
+        </>
+      )}
+      {(!name && !icon && text) && (
         <Title
             className="pb_form_pill_tag"
             size={4}
             text={text}
         />
-      }
+      )}
       <div
           className="pb_form_pill_close"
           onClick={onClick}
