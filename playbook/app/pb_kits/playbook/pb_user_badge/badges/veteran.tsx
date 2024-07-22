@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const Veteran = () => (
+const Veteran = (): React.ReactElement => (
     <svg
         viewBox="0 0 200 250"
         xmlSpace="preserve"

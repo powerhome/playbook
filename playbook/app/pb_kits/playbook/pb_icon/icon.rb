@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/HashLikeCase
-
 require "open-uri"
 require "json"
 
@@ -39,8 +37,6 @@ module Playbook
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
       prop :color, type: Playbook::Props::String
-
-      ALIASES = JSON.parse(File.read(Playbook::Engine.root.join("app/pb_kits/playbook/pb_icon/icon_aliases.json")))["aliases"].freeze
 
       def valid_emoji?
         emoji_regex = /\p{Emoji}/
@@ -85,6 +81,14 @@ module Playbook
         )
       end
 
+      def icon_alias_map
+        return unless Rails.application.config.respond_to?(:icon_alias_path)
+
+        base_path = Rails.application.config.icon_alias_path
+        json = File.read(Rails.root.join(base_path))
+        JSON.parse(json)["aliases"].freeze
+      end
+
       def asset_path
         return unless Rails.application.config.respond_to?(:icon_path)
 
@@ -115,7 +119,9 @@ module Playbook
     private
 
       def resolve_alias(icon)
-        aliases = ALIASES[icon]
+        return icon unless icon_alias_map
+
+        aliases = icon_alias_map[icon]
         return icon unless aliases
 
         if aliases.is_a?(Array)
@@ -135,11 +141,13 @@ module Playbook
       end
 
       def border_class
-        border ? "fa-border" : nil
+        prefix = is_svg? ? "svg_border" : "fa-border"
+        border ? prefix : nil
       end
 
       def fixed_width_class
-        fixed_width ? "fa-fw" : nil
+        prefix = is_svg? ? "svg_fw" : "fa-fw"
+        fixed_width ? prefix : nil
       end
 
       def icon_class
@@ -147,38 +155,45 @@ module Playbook
       end
 
       def inverse_class
-        inverse ? "fa-inverse" : nil
+        class_name = is_svg? ? "svg_inverse" : "fa-inverse"
+        inverse ? class_name : nil
       end
 
       def list_item_class
-        list_item ? "fa-li" : nil
+        class_name = is_svg? ? "svg_li" : "fa-li"
+        list_item ? class_name : nil
       end
 
       def flip_class
+        prefix = is_svg? ? "flip_" : "fa-flip-"
         case flip
         when "horizontal"
-          "fa-flip-horizontal"
+          "#{prefix}horizontal"
         when "vertical"
-          "fa-flip-vertical"
+          "#{prefix}vertical"
         when "both"
-          "fa-flip-horizontal fa-flip-vertical"
+          "#{prefix}horizontal #{prefix}vertical"
         end
       end
 
       def pull_class
-        pull ? "fa-pull-#{pull}" : nil
+        class_name = is_svg? ? "pull_#{pull}" : "fa-pull-#{pull}"
+        pull ? class_name : nil
       end
 
       def pulse_class
-        pulse ? "fa-pulse" : nil
+        class_name = is_svg? ? "pulse" : "fa-pulse"
+        pulse ? class_name : nil
       end
 
       def rotation_class
-        rotation ? "fa-rotate-#{rotation}" : nil
+        class_name = is_svg? ? "rotate_#{rotation}" : "fa-rotate-#{rotation}"
+        rotation ? class_name : nil
       end
 
       def size_class
-        size ? "fa-#{size}" : nil
+        class_name = is_svg? ? "svg_#{size}" : "fa-#{size}"
+        size ? class_name : nil
       end
 
       def font_style_class
@@ -186,7 +201,8 @@ module Playbook
       end
 
       def spin_class
-        spin ? "fa-spin" : nil
+        class_name = is_svg? ? "spin" : "fa-spin"
+        spin ? class_name : nil
       end
 
       def color_class
@@ -195,5 +211,3 @@ module Playbook
     end
   end
 end
-
-# rubocop:enable Style/HashLikeCase
