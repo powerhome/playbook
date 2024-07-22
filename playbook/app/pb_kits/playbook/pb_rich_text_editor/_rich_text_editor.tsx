@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
-import Trix from "trix/dist/trix"
+import Trix from "trix"
 import { TrixEditor } from "react-trix"
 
 import inlineFocus from './inlineFocus'
