@@ -21,6 +21,7 @@ type FormPillProps = {
   color?: "primary" | "neutral",
   data?: {[key: string]: string},
   tabIndex?: number,
+  icon?: string,
   closeProps?: {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
@@ -42,9 +43,12 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     color = "primary",
     data = {},
     tabIndex,
+    icon = "",
   } = props
+
+  const iconClass = icon ? "_icon" : ""
   const css = classnames(
-    `pb_form_pill_kit_${color}`,
+    `pb_form_pill_kit_${color}${iconClass}`,
     globalProps(props),
     className,
     size === 'small' ? 'small' : null,
@@ -76,7 +80,12 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
         />
         </>
         }
-
+      {icon && 
+        <Icon
+            className="pb_form_pill_icon"
+            icon={icon}
+        />
+      }
       {text &&
         <Title
             className="pb_form_pill_tag"
