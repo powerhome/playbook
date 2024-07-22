@@ -28,7 +28,7 @@ exports[`html structure is correct 1`] = `
               style="vertical-align: middle; color: rgb(193, 205, 214);"
             >
               <i
-                class="pb_icon_kit far fa-fw fa-lg fa-chevron-down"
+                class="pb_icon_kit far fa-lg fa-fw fa-lg fa-chevron-down"
               />
               <span
                 aria-label="chevron-down icon"

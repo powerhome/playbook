@@ -8,6 +8,8 @@ examples:
   - dropdown_with_custom_trigger_rails: Custom Trigger
   - dropdown_with_custom_padding: Custom Option Padding
   - dropdown_error: Dropdown with Error
+  - dropdown_default_value: Default Value
+  - dropdown_blank_selection: Blank Selection
 
   react:
   - dropdown_default: Default
@@ -18,6 +20,8 @@ examples:
   - dropdown_with_custom_trigger: Custom Trigger
   - dropdown_with_custom_padding: Custom Option Padding
   - dropdown_error: Dropdown with Error
+  - dropdown_default_value: Default Value
+  - dropdown_blank_selection: Blank Selection
   # - dropdown_with_autocomplete: Autocomplete
   # - dropdown_with_autocomplete_and_custom_display: Autocomplete with Custom Display
   # - dropdown_with_external_control: useDropdown Hook

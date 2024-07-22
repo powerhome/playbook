@@ -9,6 +9,8 @@ const UP_ARROW_SELECTOR = "#dropdown_close_icon";
 const OPTION_SELECTOR = "[data-dropdown-option-label]";
 const CUSTOM_DISPLAY_SELECTOR = "[data-dropdown-custom-trigger]";
 const INPUT_FORM_VALIDATION = "#dropdown-form-validation";
+const DROPDOWN_TRIGGER_DISPLAY = "#dropdown_trigger_display";
+const DROPDOWN_PLACEHOLDER = "[data-dropdown-placeholder]";
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
@@ -21,9 +23,11 @@ export default class PbDropdown extends PbEnhancedElement {
 
   connect() {
     this.keyboardHandler = new PbDropdownKeyboard(this);
+    this.setDefaultValue();
     this.bindEventListeners();
     this.updateArrowDisplay(false);
     this.handleFormValidation();
+    this.handleFormReset();
   }
 
   bindEventListeners() {
@@ -83,9 +87,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   onOptionSelected(value, selectedOption) {
-    const triggerElement = this.element.querySelector(
-      "#dropdown_trigger_display"
-    );
+    const triggerElement = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
     const customDisplayElement = this.element.querySelector(
       "#dropdown_trigger_custom_display"
     );
@@ -177,6 +179,55 @@ export default class PbDropdown extends PbEnhancedElement {
       if (errorLabelElement) {
         errorLabelElement.remove();
       }
+    }
+  }
+
+  setDefaultValue() {
+    const hiddenInput = this.element.querySelector("#dropdown-selected-option");
+
+    if (hiddenInput.value) {
+      const inputFormValidation = this.element.querySelector(INPUT_FORM_VALIDATION);
+      const defaultValue = JSON.parse(hiddenInput.value.replaceAll("=>", ":"));
+      const options = this.element.querySelectorAll(OPTION_SELECTOR);
+
+      options.forEach((option) => {
+        if (defaultValue.id === JSON.parse(option.dataset.dropdownOptionLabel).id) {
+          option.classList.add("pb_dropdown_option_selected");
+        }
+      });
+
+      this.setTriggerElementText(defaultValue.label);
+
+      hiddenInput.value = defaultValue.id;
+      inputFormValidation.value = defaultValue.id;
+    }
+  }
+
+  handleFormReset() {
+    const form = this.element.closest("form");
+
+    if (form) {
+      form.addEventListener("reset", () => {
+        this.resetDropdownValue();
+      });
+    }
+  }
+
+  resetDropdownValue() {
+    const hiddenInput = this.element.querySelector("#dropdown-selected-option");
+    const inputFormValidation = this.element.querySelector(INPUT_FORM_VALIDATION);
+
+    hiddenInput.value = "";
+    inputFormValidation.value = "";
+
+    const defaultPlaceholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
+    this.setTriggerElementText(defaultPlaceholder.dataset.dropdownPlaceholder);
+  }
+
+  setTriggerElementText(text) {
+    const triggerElement = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
+    if (triggerElement) {
+      triggerElement.textContent = text;
     }
   }
 }

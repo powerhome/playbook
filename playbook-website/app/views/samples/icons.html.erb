@@ -28,7 +28,7 @@
   <% end %>
   <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
     <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
-      <%= pb_rails("icon", props: { icon: "nitro" }) %>
+      <%= pb_rails("icon", props: { icon: "nitro-n" }) %>
     <% end %>
   <% end %>
 <% end %>
@@ -88,6 +88,39 @@
   <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
     <%= pb_rails("card/card_body", props: { padding: "md",  }) do %>
       <%= pb_rails("icon", props: { icon: "roofing", size: "7x" }) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("flex", props: { padding_left: "md"} ) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("title", props: {size: 3, text: "Pull/Width", padding_bottom: "sm"})%>
+  <% end %>
+<% end %>
+<%= pb_rails("flex", props: { padding_left: "md" }) do %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "powergon-p", size: "2x", pull: "right" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "powergon-p", size: "2x", pull: "left" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "powergon-p", size: "2x", fixed_width: true }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "powergon-p", size: "2x", fixed_width: false }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "powergon-p", size: "2x", border: true }) %>
     <% end %>
   <% end %>
 <% end %>
@@ -158,6 +191,36 @@
   <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
     <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
       <%= pb_rails("icon", props: { icon: "nitro", size: "2x", rotation: 270 }) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+<%= pb_rails("flex", props: { padding_left: "md"} ) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("title", props: {size: 3, text: "Aliases", padding_bottom: "sm"})%>
+  <% end %>
+<% end %>
+
+<%= pb_rails("flex", props: { padding_left: "md" }) do %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "house", size: "2x", spin: true }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "home", size: "2x", pulse: true }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "gear", size: "2x", spin: true }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("card", props: { padding: "none", header: true, margin_bottom: "sm"}) do %>
+    <%= pb_rails("card/card_body", props: { padding: "md" }) do %>
+      <%= pb_rails("icon", props: { icon: "cog", size: "2x", pulse: true }) %>
     <% end %>
   <% end %>
 <% end %>
