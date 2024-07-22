@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
+import Trix from "trix/dist/trix"
+import { TrixEditor } from "react-trix"
+
 import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
 
-try {
-  const Trix = require('trix')
-  Trix.config.textAttributes.inlineCode = {
-    tagName: 'code',
-    inheritable: true,
-  }
-} catch (_e) { /* do nothing */ }
+Trix.config.textAttributes.inlineCode = {
+  tagName: 'code',
+  inheritable: true,
+}
 
-import { TrixEditor } from "react-trix"
 import EditorToolbar from './TipTap/Toolbar'
 
 type Editor = {
