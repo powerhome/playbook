@@ -13,7 +13,7 @@ const IconDefault = (props) => {
           {...props}
       />
       <Icon
-          color="info"
+          color="data_4"
           fixedWidth
           icon="recycle"
           paddingBottom="sm"
@@ -21,23 +21,7 @@ const IconDefault = (props) => {
           {...props}
       />
       <Icon
-          color="data_4"
-          fixedWidth
-          icon="frog"
-          paddingBottom="sm"
-          size="2x"
-          {...props}
-          />
-      <Icon
-          color="text_lt_lighter"
-          fixedWidth
-          icon="vial"
-          paddingBottom="sm"
-          size="2x"
-          {...props}
-      />
-      <Icon
-          color="roofing"
+          color="product_5_background"
           fixedWidth
           icon="product-roofing"
           size="2x"
