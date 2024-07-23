@@ -33,7 +33,7 @@ $confirmation_toast_colors: (
 
   &.positioned_toast {
     position: fixed;
-    z-index: $z_10;
+    z-index: $z_10 !important;
     display: flex;
     justify-content: space-around;
     max-width: max-content;
