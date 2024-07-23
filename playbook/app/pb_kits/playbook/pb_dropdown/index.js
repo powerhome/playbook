@@ -189,22 +189,21 @@ export default class PbDropdown extends PbEnhancedElement {
 
   setDefaultValue() {
     const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const options = this.element.querySelectorAll(OPTION_SELECTOR);
 
-    if (hiddenInput.value) {
-      const defaultValue = JSON.parse(hiddenInput.value.replaceAll("=>", ":"));
-      const options = this.element.querySelectorAll(OPTION_SELECTOR);
+    const defaultValue = hiddenInput.dataset.defaultValue || "";
+    hiddenInput.value = defaultValue;
 
-      options.forEach((option) => {
-        if (
-          defaultValue.id === JSON.parse(option.dataset.dropdownOptionLabel).id
-        ) {
-          option.classList.add("pb_dropdown_option_selected");
-        }
+    if (defaultValue) {
+      const selectedOption = Array.from(options).find((option) => {
+        return (
+          JSON.parse(option.dataset.dropdownOptionLabel).id === defaultValue
+        );
       });
-
-      this.setTriggerElementText(defaultValue.label);
-
-      hiddenInput.value = defaultValue.id;
+      selectedOption.classList.add("pb_dropdown_option_selected");
+      this.setTriggerElementText(
+        JSON.parse(selectedOption.dataset.dropdownOptionLabel).label
+      );
     }
   }
 
