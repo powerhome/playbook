@@ -2,9 +2,10 @@
 <html>
   <head>
     <%= render 'layouts/head'%>
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag 'application', 'site' %>
   </head>
   <body class="fullscreen <%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= yield %>
   </body>
-  <%= vite_javascript_tag 'application', 'site' %>
 </html>

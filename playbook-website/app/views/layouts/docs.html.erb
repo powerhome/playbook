@@ -2,6 +2,8 @@
 <html>
   <head>
     <%= render 'layouts/head'%>
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag(*@application_js) %>
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
   <%= render 'layouts/mobile_nav'%>
@@ -48,8 +50,6 @@
       <% end %>
     <% end %>
   </body>
-
-  <%= vite_javascript_tag(*@application_js) %>
 
   <%= yield :pb_js %>
   <%= render 'layouts/ga'%>

@@ -2,6 +2,8 @@
 <html>
   <head>
     <%= render 'layouts/head'%>
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag(*@application_js) %>
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= render 'layouts/mobile_nav'%>
@@ -19,10 +21,6 @@
       <%= react_component("Website") %>
     <% end %>
   </body>
-  <%= vite_javascript_tag('app') %>
-
-  <%= vite_javascript_tag(*@application_js) %>
-
   <%= yield :pb_js if @type != 'react' %>
   <%= render 'layouts/ga'%>
 </html>
