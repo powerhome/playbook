@@ -15,7 +15,7 @@ type UserBadgeProps = {
   size?: "sm" | "md" | "lg",
 }
 
-const UserBadge = (props: UserBadgeProps): React.ReactElement => {
+const UserBadge = (props: UserBadgeProps) => {
   const {
     aria = {},
     badge = 'million-dollar',
@@ -38,11 +38,11 @@ const UserBadge = (props: UserBadgeProps): React.ReactElement => {
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        {...htmlProps}
-        className={classes}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      {...htmlProps}
+      className={classes}
+      id={id}
     >
       <div className="pb_user_badge_wrapper">
         {image}
