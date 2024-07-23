@@ -18,7 +18,7 @@ type TitleDetailProps = {
   title: string,
 } & GlobalProps
 
-const TitleDetail = (props: TitleDetailProps): React.ReactElement => {
+const TitleDetail = (props: TitleDetailProps) => {
   const {
     align = "left",
     aria = {},
@@ -37,19 +37,19 @@ const TitleDetail = (props: TitleDetailProps): React.ReactElement => {
 
   return (
     <div
-        {...ariaProps}
-        {...dataProps}
-        {...htmlProps}
-        className={classnames(pbCss, globalProps(props), className)}
-        id={id}
+      {...ariaProps}
+      {...dataProps}
+      {...htmlProps}
+      className={classnames(pbCss, globalProps(props), className)}
+      id={id}
     >
       <Title
-          size={4}
-          text={title}
+        size={4}
+        text={title}
       />
       <Body
-          color="light"
-          text={detail}
+        color="light"
+        text={detail}
       />
     </div>
   )

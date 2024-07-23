@@ -4,24 +4,24 @@ import { debounce } from 'lodash'
 export default class PbTypeahead extends PbEnhancedElement {
   _searchInput: HTMLInputElement
   _resultsElement: HTMLElement
-  _debouncedSearch: () => void
+  _debouncedSearch: Function
   _resultsLoadingIndicator: HTMLElement
   _resultOptionTemplate: HTMLElement
   _resultsOptionCache: Map<string, Array<DocumentFragment>>
   _searchContext: string
 
-  static get selector(): string {
+  static get selector() {
     return '[data-pb-typeahead-kit]'
   }
 
-  connect(): void {
+  connect() {
     this.element.addEventListener('keydown', (event: KeyboardEvent) => this.handleKeydown(event))
-    this.searchInput.addEventListener('focus', () => this.debouncedSearch)
-    this.searchInput.addEventListener('input', () => this.debouncedSearch)
+    this.searchInput.addEventListener('focus', () => this.debouncedSearch())
+    this.searchInput.addEventListener('input', () => this.debouncedSearch())
     this.resultsElement.addEventListener('click', (event: MouseEvent) => this.optionSelected(event))
   }
 
-  handleKeydown(event: KeyboardEvent): void {
+  handleKeydown(event: KeyboardEvent) {
     if (event.key === 'ArrowUp') {
       event.preventDefault()
       this.focusPreviousOption()
@@ -31,7 +31,7 @@ export default class PbTypeahead extends PbEnhancedElement {
     }
   }
 
-  search(): void {
+  search() {
     if (this.searchTerm.length < parseInt(this.searchTermMinimumLength)) return this.clearResults()
 
     this.toggleResultsLoadingIndicator(true)
@@ -49,7 +49,7 @@ export default class PbTypeahead extends PbEnhancedElement {
     this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-search', { bubbles: true, detail: search }))
   }
 
-  resultsCacheUpdate(searchTerm: string, searchContext: string, results: Array<DocumentFragment>): void {
+  resultsCacheUpdate(searchTerm: string, searchContext: string, results: Array<DocumentFragment>) {
     const searchTermAndContext = this.cacheKeyFor(searchTerm, searchContext)
     if (this.resultsOptionCache.has(searchTermAndContext)) this.resultsOptionCache.delete(searchTermAndContext)
     if (this.resultsOptionCache.size > 32) this.resultsOptionCache.delete(this.resultsOptionCache.keys().next().value)
@@ -58,18 +58,18 @@ export default class PbTypeahead extends PbEnhancedElement {
     this.showResults()
   }
 
-  resultsCacheClear(): void {
+  resultsCacheClear() {
     this.resultsOptionCache.clear()
   }
 
-  get debouncedSearch(): void {
+  get debouncedSearch() {
     return this._debouncedSearch = (
       this._debouncedSearch ||
       debounce(this.search, parseInt(this.searchDebounceTimeout)).bind(this)
     )
   }
 
-  showResults(): void {
+  showResults() {
     if (!this.resultsOptionCache.has(this.searchTermAndContext)) return
 
     this.toggleResultsLoadingIndicator(false)
@@ -82,7 +82,7 @@ export default class PbTypeahead extends PbEnhancedElement {
     }
   }
 
-  optionSelected(event: MouseEvent): void {
+  optionSelected(event: MouseEvent) {
     const resultOption = (event.target as Element).closest('[data-result-option-item]')
     if (!resultOption) return
 
@@ -93,7 +93,7 @@ export default class PbTypeahead extends PbEnhancedElement {
     this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-result-option-selected', { bubbles: true, detail: { selected: resultOption, typeahead: this } }))
   }
 
-  clearResults(): void {
+  clearResults() {
     this.resultsElement.innerHTML = ''
   }
 
@@ -103,7 +103,7 @@ export default class PbTypeahead extends PbEnhancedElement {
     return resultOption
   }
 
-  focusPreviousOption(): void {
+  focusPreviousOption() {
     const currentIndex = this.resultOptionItems.indexOf(this.currentSelectedResultOptionItem)
     const previousIndex = currentIndex - 1
     const previousOptionItem = (
@@ -113,7 +113,7 @@ export default class PbTypeahead extends PbEnhancedElement {
     (previousOptionItem as HTMLElement).focus()
   }
 
-  focusNextOption(): void {
+  focusNextOption() {
     const currentIndex = this.resultOptionItems.indexOf(this.currentSelectedResultOptionItem)
     const nextIndex = currentIndex + 1
     const nextOptionItem = (
@@ -123,23 +123,23 @@ export default class PbTypeahead extends PbEnhancedElement {
     (nextOptionItem as HTMLElement).focus()
   }
 
-  get resultOptionItems(): HTMLElement[] {
+  get resultOptionItems() {
     return Array.from(this.resultsElement.querySelectorAll('[data-result-option-item]'))
   }
 
-  get currentSelectedResultOptionItem(): HTMLElement | null {
+  get currentSelectedResultOptionItem() {
     return document.activeElement.closest('[data-result-option-item]')
   }
 
-  get searchInput(): HTMLInputElement | null {
+  get searchInput() {
     return this._searchInput = (this._searchInput || this.element.querySelector('input[type="search"]'))
   }
 
-  get searchTerm(): string {
+  get searchTerm() {
     return this.searchInput.value
   }
 
-  get searchContext(): string | null {
+  get searchContext() {
     if (this._searchContext) return this._searchContext
 
     const selector = (this.element as HTMLElement).dataset.searchContextValueSelector
@@ -151,35 +151,35 @@ export default class PbTypeahead extends PbEnhancedElement {
     return null
   }
 
-  set searchContext(value: string) {
+  set searchContext(value) {
     this._searchContext = value
   }
 
-  get searchTermAndContext(): string {
+  get searchTermAndContext() {
     return this.cacheKeyFor(this.searchTerm, this.searchContext)
   }
 
-  cacheKeyFor(searchTerm: string, searchContext: string): string {
+  cacheKeyFor(searchTerm: string, searchContext: string) {
     return [searchTerm, JSON.stringify(searchContext)].join()
   }
 
-  searchInputClear(): void {
+  searchInputClear() {
     this.searchInput.value = ''
   }
 
-  get searchTermMinimumLength(): string | undefined {
+  get searchTermMinimumLength() {
     return (this.element as HTMLElement).dataset.pbTypeaheadKitSearchTermMinimumLength
   }
 
-  get searchDebounceTimeout(): string | undefined {
+  get searchDebounceTimeout() {
     return (this.element as HTMLElement).dataset.pbTypeaheadKitSearchDebounceTimeout
   }
 
-  get resultsElement(): HTMLElement | null {
+  get resultsElement() {
     return this._resultsElement = (this._resultsElement || this.element.querySelector('[data-pb-typeahead-kit-results]'))
   }
 
-  get resultOptionTemplate(): HTMLElement | null {
+  get resultOptionTemplate() {
     return this._resultOptionTemplate = (
       this._resultOptionTemplate ||
       this.element.querySelector('template[data-pb-typeahead-kit-result-option]')
@@ -193,15 +193,15 @@ export default class PbTypeahead extends PbEnhancedElement {
     )
   }
 
-  get resultsLoadingIndicator(): HTMLElement | null {
+  get resultsLoadingIndicator() {
     return this._resultsLoadingIndicator = (
       this._resultsLoadingIndicator ||
       this.element.querySelector('[data-pb-typeahead-kit-loading-indicator]')
     )
   }
 
-  toggleResultsLoadingIndicator(visible: boolean): void {
-    let visibilityProperty = '0'
+  toggleResultsLoadingIndicator(visible: boolean) {
+    var visibilityProperty = '0'
     if (visible) visibilityProperty = '1'
     this.resultsLoadingIndicator.style.opacity = visibilityProperty
   }

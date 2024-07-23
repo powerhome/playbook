@@ -14,7 +14,7 @@ type WeekdayStackedProps = {
   aria?: {[key:string]:string },
   className?: string,
   dark?: boolean,
-  data?: Record<string, unknown>,
+  data?: object,
   date: Date,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -39,7 +39,7 @@ const getFormattedDate = (value: Date, variant: "day_only" | "month_day" | "expa
   }
 }
 
-const WeekdayStacked = (props: WeekdayStackedProps): React.ReactElement => {
+const WeekdayStacked = (props: WeekdayStackedProps) => {
   const {
     align = 'left',
     aria = {},

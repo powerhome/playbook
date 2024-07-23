@@ -18,7 +18,7 @@ type TableHeaderPropTypes = {
   text?: string;
 };
 
-const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
+const TableHeader = (props: TableHeaderPropTypes) => {
   const {
     aria = {},
     children,

@@ -1,19 +1,19 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 
 export default class PbTable extends PbEnhancedElement {
-  static get selector(): string {
+  static get selector() {
     return '.table-responsive-collapse'
   }
 
-  connect(): void {
+  connect() {
     const tables = document.querySelectorAll('.table-responsive-collapse');
 
     // Each Table
     [].forEach.call(tables, (table: HTMLTableElement) => {
       // Header Titles
-      const headers: string[] = [];
+      let headers: string[] = [];
       [].forEach.call(table.querySelectorAll('th'), (header: HTMLTableCellElement) => {
-        const colSpan = header.colSpan
+        let colSpan = header.colSpan
         for (let i = 0; i < colSpan; i++) {
           headers.push(header.textContent.replace(/\r?\n|\r/, ''));
         }

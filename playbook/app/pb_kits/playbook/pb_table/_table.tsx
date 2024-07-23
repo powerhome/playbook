@@ -33,7 +33,7 @@ type TableProps = {
     verticalBorder?: boolean,
 } & GlobalProps
 
-const Table = (props: TableProps): React.ReactElement => {
+const Table = (props: TableProps) => {
     const {
         aria = {},
         children,
