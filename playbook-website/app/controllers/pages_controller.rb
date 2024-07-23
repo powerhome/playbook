@@ -21,7 +21,7 @@ class PagesController < ApplicationController
     @kit = params[:name]
     @params = params
     @examples = pb_doc_kit_examples(@kit, @type)
-    @css = view_context.vite_asset_path("application.css")
+    @css = view_context.vite_asset_path("site_styles/main.scss")
 
     # first example from each kit
     examples = @examples.map do |example|
