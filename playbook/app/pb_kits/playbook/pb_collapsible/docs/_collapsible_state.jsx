@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { Collapsible, useCollapsible, Button } from '../..'
 
 const CollapsibleState = (props) => {
@@ -7,6 +8,7 @@ const CollapsibleState = (props) => {
   return (
   <>
     <Button
+        dark={props.dark}
         onClick={() => setIsCollapsed(!isCollapsed)}
         padding="none"
         variant="link"
@@ -73,6 +75,10 @@ const CollapsibleState = (props) => {
     </Collapsible>
   </>
   )
+}
+
+CollapsibleState.propTypes = {
+  dark: PropTypes.bool,
 }
 
 export default CollapsibleState
