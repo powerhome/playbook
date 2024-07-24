@@ -97,7 +97,7 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
             <Caption 
                 dark={dark} 
                 tag="span">
-              {renderTime(startDate!)}
+              {renderTime(startDate)}
             </Caption>
             <Caption 
                 dark={dark} 
@@ -113,7 +113,7 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
             <Caption 
                 dark={dark} 
                 tag="span">
-              {renderTime(endDate!)}
+              {renderTime(endDate)}
             </Caption>
           </>
         )}
@@ -138,7 +138,7 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
             <Body 
                 dark={dark} 
                 tag="span">
-              {renderTime(startDate!)}
+              {renderTime(startDate)}
             </Body>
             <Body 
                 color={"light"} 
@@ -155,7 +155,7 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
             <Body 
                 dark={dark} 
                 tag="span">
-              {renderTime(endDate!)}
+              {renderTime(endDate)}
             </Body>
           </>
         )}
