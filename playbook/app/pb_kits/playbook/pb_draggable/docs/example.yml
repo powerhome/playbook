@@ -1,5 +1,6 @@
 examples:
-  
+  rails:
+  - draggable_default: Default
   
   react:
   - draggable_default: Default
@@ -7,5 +8,3 @@ examples:
   - draggable_with_selectable_list: Draggable with SelectableList Kit
   - draggable_with_cards: Draggable with Cards
   - draggable_multiple_containers: Dragging Across Multiple Containers
-  
-  
