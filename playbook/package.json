@@ -64,6 +64,7 @@
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.15.0",
     "@codesandbox/sandpack-react": "^2.12.1",
+    "@haxtheweb/deduping-fix": "^9.0.1",
     "@rollup/plugin-typescript": "^11.1.6",
     "@rollup/pluginutils": "^5.1.0",
     "@testing-library/jest-dom": "5.16.4",

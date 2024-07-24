@@ -2616,6 +2616,11 @@
   resolved "https://npm.powerapp.cloud/@gilbarbara/deep-equal/-/deep-equal-0.1.2.tgz#1a106721368dba5e7e9fb7e9a3a6f9efbd8df36d"
   integrity sha512-jk+qzItoEb0D0xSSmrKDDzf9sheQj/BAPxlgNxgmOaA3mxpUa6ndJLYGZKsJnIVEQSD8zcTbyILz7I0HcnBCRA==
 
+"@haxtheweb/deduping-fix@^9.0.1":
+  version "9.0.1"
+  resolved "https://npm.powerapp.cloud/@haxtheweb/deduping-fix/-/deduping-fix-9.0.1.tgz#1e03e2ba0dd066bc414ee38002c58b8c8f6d5532"
+  integrity sha512-X0z4rTTrKQ+DoDPe5VfWkzIVrb0DQTOEaXaOxQ5WNRi90PkF8yXwl09jm81qUQHNcyVChc1MXZkc9qPuYgAm1g==
+
 "@hotwired/turbo-rails@^7.3.0":
   version "7.3.0"
   resolved "https://npm.powerapp.cloud/@hotwired/turbo-rails/-/turbo-rails-7.3.0.tgz#422c21752509f3edcd6c7b2725bbe9e157815f51"
