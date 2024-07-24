@@ -2201,11 +2201,6 @@
   resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.1.tgz#344baf6ff9eaad7a73cff067d8c56bfc11ae5304"
   integrity sha512-viouXhegu/TjkvYQoiRZK3aax69dGXxgEjpvZW81wIJdxm5Fnvp3VVIP4VHKqX4SvFw6qpmkILkD4RJWAdrt7A==
 
-"@fortawesome/fontawesome-pro@6.2.1":
-  version "6.2.1"
-  resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-pro/-/fontawesome-pro-6.2.1.tgz#1cd5b79d93fdb955ef8a04996fef20a44207a6f0"
-  integrity sha512-dHk7iiCf5MCmoUvmrYzfN/I3gebpgpA1oqlOffgOThnsaAR4kpaQ5YMTdkdG99Of1hnN0Bok6R+HE28zXb3SOg==
-
 "@gar/promisify@^1.0.1":
   version "1.1.3"
   resolved "https://npm.powerapp.cloud/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
@@ -2832,15 +2827,15 @@
   resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.1.0.tgz#f1e1151481f51421186ba8caad99fadb24b1fe51"
   integrity sha512-8e5DRgnKPbJ+ofAtqjUPZTxcgHg/TVf52WeNqAGBUXSS4QWHemL6fj1n/YHfAIvx3aMUhFwrw2lUNofUocgK3A==
 
-"@powerhome/playbook-icons-react@0.0.1-alpha.29":
-  version "0.0.1-alpha.29"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/ce27570207d2c1381e225ecb4266cb0c7e391e17#ce27570207d2c1381e225ecb4266cb0c7e391e17"
-  integrity sha512-GwsEN+rgyJejOCw1a0lwLCwXIjd20F19SiWC3YpzQSPiDYJQ8dCrZeFAt3K0ulttPIzZ0j7rCayN9A0Yy9ISiw==
+"@powerhome/playbook-icons-react@0.0.1-alpha.34":
+  version "0.0.1-alpha.34"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/496e27c5e2a25c169ae1e6b04f59c6546a7a4ae8#496e27c5e2a25c169ae1e6b04f59c6546a7a4ae8"
+  integrity sha512-7/ebVnkdjKF895fIWKrcmZ4IjAMqVmCLsaovF5601eqDs842spy5wngc9XAbFjRduZBdJEcGpXKEfxz2pWNwcA==
 
-"@powerhome/playbook-icons@0.0.1-alpha.29":
-  version "0.0.1-alpha.29"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/a2e3f857e6c0c6a3ca601f391e66a77cc54f759d#a2e3f857e6c0c6a3ca601f391e66a77cc54f759d"
-  integrity sha512-IqhDXWZe2+Oeggka5thMt0scmQylFVrCDzXlymjwd6uxsjFNiejaUi8sV+rrJ73TTTdCAAOzKLj3K8F4yZcboQ==
+"@powerhome/playbook-icons@0.0.1-alpha.34":
+  version "0.0.1-alpha.34"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/b58391d08a03b5cebea49a1f1978b98309325487#b58391d08a03b5cebea49a1f1978b98309325487"
+  integrity sha512-sdb73RU9xmDyrn0iTbw0nrOdE4/XFM34dIYtya2YkwmfgNUILmHFR1ue1V2MTsk/yqCoJkT4mH78UlSg0YEwdQ==
 
 "@powerhome/power-fonts@0.0.1-alpha.6":
   version "0.0.1-alpha.6"
