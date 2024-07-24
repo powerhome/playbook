@@ -1,5 +1,9 @@
-# 13.33.0
+# 🗂️ Tabbing Your Way Through Rails! 🛤️
 ##### July 19, 2024
+
+![13 33 0](https://github.com/user-attachments/assets/a5519122-1f6b-4a21-9016-0da53a2e39c2)
+
+Hey Rails devs! 🎉 Our Nav Kit just got an upgrade with a new tabbing variant! Now, you can navigate dynamic content like a pro. Dive in and let your content flow! 📚✨ Happy coding! 💻🎨
 
 [13.33.0](https://github.com/powerhome/playbook/tree/13.33.0) full list of changes:
 
