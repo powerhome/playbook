@@ -17,7 +17,7 @@ type TableBodyPropTypes = {
   tag?: "table" | "div";
 };
 
-const TableBody = (props: TableBodyPropTypes): React.ReactElement => {
+const TableBody = (props: TableBodyPropTypes) => {
   const {
     aria = {},
     children,

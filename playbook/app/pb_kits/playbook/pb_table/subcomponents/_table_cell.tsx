@@ -18,7 +18,7 @@ type TableCellPropTypes = {
   text?: string
 };
 
-const TableCell = (props: TableCellPropTypes): React.ReactElement => {
+const TableCell = (props: TableCellPropTypes) => {
   const {
     aria = {},
     children,

@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import React from 'react';
 import { render, screen } from '../utilities/test-utils';
 import TreemapChart from './_treemap_chart';

@@ -38,7 +38,7 @@ const getFormattedDate = (value: Date, variant: "day_only" | "month_day" | "expa
   }
 }
 
-const WeekdayStacked = (props: WeekdayStackedProps): React.ReactElement => {
+const WeekdayStacked = (props: WeekdayStackedProps) => {
   const {
     align = 'left',
     aria = {},
