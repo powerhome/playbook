@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Collapsible, useCollapsible, Flex, Title, List, ListItem } from '../..'
 
 const CollapsibleCustomMain = (props) => {
@@ -8,52 +9,52 @@ const CollapsibleCustomMain = (props) => {
     <>
       <Collapsible collapsed={isCollapsed}>
         <Flex
-          align="center"
-          gap="sm"
-          justify="between"
-          position="sticky"
-          top="0"
-          cursor="pointer"
-          htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
-          >
+            align="center"
+            cursor="pointer"
+            gap="sm"
+            htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
+            justify="between"
+            position="sticky"
+            top="0"
+        >
           <Title 
-            dark={props.dark} 
-            size={4} 
-            text="Custom Main Section" />
+              dark={props.dark} 
+              size={4} 
+              text="Custom Main Section" />
         </Flex>
         <Collapsible.Content 
-          padding="none">
+            padding="none">
           <div>
             <List>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
             </List>
           </div>
@@ -61,6 +62,10 @@ const CollapsibleCustomMain = (props) => {
     </Collapsible>
   </>
   )
+}
+
+CollapsibleCustomMain.propTypes = {
+  dark: PropTypes.bool,
 }
 
 export default CollapsibleCustomMain
