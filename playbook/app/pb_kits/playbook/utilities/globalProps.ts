@@ -94,6 +94,10 @@ type MaxWidth = {
   maxWidth?: Sizes,
 }
 
+type MinWidth = {
+  minWidth?: Sizes,
+}
+
 type NumberSpacing = {
   numberSpacing?: "tabular",
 }
@@ -170,7 +174,7 @@ type ZIndex = {
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
-  LineHeight & Margin & MaxWidth & NumberSpacing & Order & Overflow & Padding &
+  LineHeight & Margin & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
@@ -318,6 +322,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   numberSpacingProps: ({ numberSpacing }: NumberSpacing) => {
     let css = ''
     css += numberSpacing ? `ns_${numberSpacing} ` : ''
+    return css
+  },
+  minWidthProps: ({ minWidth }: MinWidth) => {
+    let css = ''
+    css += minWidth ? `min_width_${minWidth } ` : ''
     return css
   },
   maxWidthProps: ({ maxWidth }: MaxWidth) => {

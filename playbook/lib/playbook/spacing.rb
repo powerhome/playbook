@@ -104,7 +104,6 @@ module Playbook
 
       selected_minw_props.map do |k|
         width_value = send(k)
-        puts "min_width_value: ", width_value
         "min_width_#{width_value}" if min_width_values.include? width_value
       end.compact.join(" ")
     end
@@ -115,7 +114,6 @@ module Playbook
 
       selected_mw_props.map do |k|
         width_value = send(k)
-        puts "max_width_value: ", width_value
         "max_width_#{width_value}" if max_width_values.include? width_value
       end.compact.join(" ")
     end
