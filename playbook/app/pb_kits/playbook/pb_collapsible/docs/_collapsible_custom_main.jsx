@@ -5,28 +5,26 @@ const CollapsibleCustomMain = (props) => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
 
   return (
-  <>
-    <Collapsible
-        collapsed={isCollapsed}
-    >
-        <Flex 
-            position="sticky" 
-            top="0" 
-            cursor="pointer"
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            align="center" 
-            gap="sm"
-            justify="between" 
-        >
-            <Title 
-                dark={props.dark}
-                size={4} 
-                text="Custom Main Section"
-            />
+    <>
+      <Collapsible collapsed={isCollapsed}>
+        <Flex
+          align="center"
+          gap="sm"
+          justify="between"
+          position="sticky"
+          top="0"
+          cursor="pointer"
+          htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
+          >
+          <Title 
+            dark={props.dark} 
+            size={4} 
+            text="Custom Main Section" />
         </Flex>
-      <Collapsible.Content padding="none">
+        <Collapsible.Content 
+          padding="none">
           <div>
-          <List>
+            <List>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
