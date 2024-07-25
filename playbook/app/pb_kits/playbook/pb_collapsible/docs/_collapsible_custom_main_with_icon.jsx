@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Collapsible, useCollapsible, Flex, Title, List, ListItem } from '../..'
 
 const CollapsibleCustomMainWithIcon = (props) => {
@@ -8,13 +9,13 @@ const CollapsibleCustomMainWithIcon = (props) => {
     <>
       <Collapsible collapsed={isCollapsed}>
         <Flex
-          align="center"
-          gap="sm"
-          justify="between"
-          position="sticky"
-          top="0"
-          cursor="pointer"
-          htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
+            align="center"
+            gap="sm"
+            cursor="pointer"
+            htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
+            justify="between"
+            position="sticky"
+            top="0"
         >
           <Title
             dark={props.dark}
@@ -32,31 +33,31 @@ const CollapsibleCustomMainWithIcon = (props) => {
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
             </List>
           </div>
@@ -64,6 +65,10 @@ const CollapsibleCustomMainWithIcon = (props) => {
     </Collapsible>
   </>
   )
+}
+
+CollapsibleCustomMainWithIcon.propTypes = {
+  dark: PropTypes.bool,
 }
 
 export default CollapsibleCustomMainWithIcon
