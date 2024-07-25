@@ -1,5 +1,5 @@
 import React from 'react'
-import { Collapsible, useCollapsible, Background, Flex, Title, List, ListItem } from '../..'
+import { Collapsible, useCollapsible, Flex, Title, List, ListItem } from '../..'
 
 const CollapsibleCustomMain = (props) => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
@@ -9,25 +9,21 @@ const CollapsibleCustomMain = (props) => {
     <Collapsible
         collapsed={isCollapsed}
     >
-          <Background 
-              backgroundColor="clear" 
-              cursor="pointer"
-              htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
-              position="sticky" 
-              top="0" 
-          >
-              <Flex 
-                  align="center" 
-                  gap="sm"
-                  justify="between" 
-              >
-                <Title 
-                    dark={props.dark}
-                    size={4} 
-                    text="Custom Main Section"
-                />
-              </Flex>
-          </Background>
+        <Flex 
+            position="sticky" 
+            top="0" 
+            cursor="pointer"
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            align="center" 
+            gap="sm"
+            justify="between" 
+        >
+            <Title 
+                dark={props.dark}
+                size={4} 
+                text="Custom Main Section"
+            />
+        </Flex>
       <Collapsible.Content padding="none">
           <div>
           <List>
@@ -65,7 +61,6 @@ const CollapsibleCustomMain = (props) => {
           </div>
       </Collapsible.Content>
     </Collapsible>
-   
   </>
   )
 }
