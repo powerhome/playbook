@@ -11,6 +11,7 @@ module Playbook
       base.prop :margin_x
       base.prop :margin_y
       base.prop :max_width
+      base.prop :min_width
       base.prop :padding
       base.prop :padding_bottom
       base.prop :padding_left
@@ -23,6 +24,12 @@ module Playbook
     def max_width_options
       {
         max_width: "mw",
+      }
+    end
+
+    def min_width_options
+      {
+        min_width: "minw",
       }
     end
 
@@ -87,11 +94,25 @@ module Playbook
       css.strip unless css.blank?
     end
 
+    def min_width_props
+      selected_minw_props = min_width_options.keys.select { |sk| try(sk) }
+      return nil unless selected_minw_props.present?
+
+      selected_minw_props.map do |k|
+        puts "k: ", k
+        puts "min"
+        width_value = send(k)
+        "min_width_#{width_value}" if max_width_values.include? width_value
+      end.compact.join(" ")
+    end
+
     def max_width_props
       selected_mw_props = max_width_options.keys.select { |sk| try(sk) }
       return nil unless selected_mw_props.present?
 
       selected_mw_props.map do |k|
+        puts "k: ", k
+        puts "max"
         width_value = send(k)
         "max_width_#{width_value}" if max_width_values.include? width_value
       end.compact.join(" ")
