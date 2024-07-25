@@ -90,3 +90,7 @@ COPY --link --from=release /home/app/src/playbook-website/public /home/app/src/p
 COPY --link --from=release /home/app/src/node_modules/@powerhome/playbook-icons/icons /home/app/src/temp-icons
 RUN cp -r /home/app/src/temp-icons/* /home/app/src/playbook-website/app/javascript/images/
 RUN rm -rf /home/app/src/temp-icons
+
+COPY --link --from=release /home/app/src/node_modules/@powerhome/playbook-icons/aliases.json /home/app/src/aliases.json
+RUN cp /home/app/src/aliases.json /home/app/src/playbook-website/app/javascript/aliases.json
+RUN rm /home/app/src/aliases.json

@@ -1,3 +1,65 @@
+# 🗂️ Tabbing Your Way Through Rails! 🛤️
+##### July 19, 2024
+
+![13 33 0](https://github.com/user-attachments/assets/a5519122-1f6b-4a21-9016-0da53a2e39c2)
+
+Hey Rails devs! 🎉 Our Nav Kit just got an upgrade with a new tabbing variant! Now, you can navigate dynamic content like a pro. Dive in and let your content flow! 📚✨ Happy coding! 💻🎨
+
+[13.33.0](https://github.com/powerhome/playbook/tree/13.33.0) full list of changes:
+
+**Kit Enhancements:**
+- Adding Tabbing Prop to the Nav Kit [\#3521](https://github.com/powerhome/playbook/pull/3521) ([carloslimasd](https://github.com/carloslimasd))
+- Star Rating Kit: Interactive Form Variant (Rails) [\#3523](https://github.com/powerhome/playbook/pull/3523) ([nickamantia](https://github.com/nickamantia))
+- Form Pills: Match Handoff (Primary + Default) [#3505](https://github.com/powerhome/playbook/pull/3505) ([elisashapiro](https://github.com/elisashapiro))
+- Implementing Form Resetting and Blank Selection Prop [\#3529)](https://github.com/powerhome/playbook/pull/3529) ([carloslimasd](https://github.com/carloslimasd))
+- Implementing Default Value for Dropdown Kit [\#3510](https://github.com/powerhome/playbook/pull/3510) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+- RTE Custom Extension Dropdown Button Bug Fix [#3528](https://github.com/powerhome/playbook/pull/3528) ([anthonymig88](https://github.com/anthonymig88))
+- Improve Consistency in Docs for Default Variant of Typeahead [\#3511](https://github.com/powerhome/playbook/pull/3511) ([anthonymig88](https://github.com/anthonymig88))
+
+**Improvements:**
+- Create a Doc for Border Radius Global Props [\#3534](https://github.com/powerhome/playbook/pull/3534) ([elisashapiro](https://github.com/elisashapiro))
+- Update Highcharts CustomOptions Formatting Note [\#3515](https://github.com/powerhome/playbook/pull/3515) ([anthonymig88](https://github.com/anthonymig88))
+- Add Alias Map Entrypoint [\#3514](https://github.com/powerhome/playbook/pull/3514) ([markdoeswork](https://github.com/markdoeswork))
+- Hide Beta Versions of Kits within Kit Categories (with menu.yml) [\#3513](https://github.com/powerhome/playbook/pull/3513) ([elisashapiro](https://github.com/elisashapiro))
+- Linter implementation: kits T - W [\#3504](https://github.com/powerhome/playbook/pull/3504) ([kangaree](https://github.com/kangaree))
+- Playbook Icons Styles [\#3491](https://github.com/powerhome/playbook/pull/3491) ([markdoeswork](https://github.com/markdoeswork))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.32.0...13.33.0)
+
+
+# 🐉 Effortless Drag and Drop Functionality with the NEW Draggable Kit! ⬆️⬇️
+##### July 10, 2024
+
+![13-32-0](https://github.com/user-attachments/assets/c93a0344-ef0a-4fd2-be48-62fb5bf95f1e)
+
+
+We are excited to introduce the new Draggable kit, a highly flexible solution for all your drag-and-drop needs! Use the simple subcomponent structure for greater flexibility or use the customized solutions for the List, Selectable List or Card kits for super easy implementation out of the box!
+
+[13.32.0](https://github.com/powerhome/playbook/tree/13.32.0) full list of changes:
+
+**Kit Enhancements:**
+- Implementing Dropdown Form Validation [\#3507](https://github.com/powerhome/playbook/pull/3507) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+- Remove Duplicate "block" Button in RTE on Start [\#3501](https://github.com/powerhome/playbook/pull/3501) ([kangaree](https://github.com/kangaree))
+- Hide Beta Versions of Kits within Beta Index (with menu.yml) [\#3500](https://github.com/powerhome/playbook/pull/3500) ([elisashapiro](https://github.com/elisashapiro)) 
+- Date Year Stacked Left Align Text Color Bug [\#3508](https://github.com/powerhome/playbook/pull/3508) ([anthonymig88](https://github.com/anthonymig88))
+
+**Improvements:**
+- Power Centra in Playbook Part 2 (Change Variable Settings) [\#3134](https://github.com/powerhome/playbook/pull/3134) ([jasoncypret](https://github.com/jasoncypret))
+- Add Category to Playbook Kit Generator [\#3488](https://github.com/powerhome/playbook/pull/3488) ([elisashapiro](https://github.com/elisashapiro))
+- Bump ci-kubed v8.2.0 and Convert to use Remote buildkit cache mounts [\#3413](https://github.com/powerhome/playbook/pull/3413) ([TeamTeaTime](https://github.com/TeamTeaTime))
+
+**New Kits:**
+- Draggable Kit [\#3487](https://github.com/powerhome/playbook/pull/3487) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.31.0...13.32.0)
+
+
+
 # 🌁 Introducing the New Overlay Kit — A Seamless Way to Implement Overlays! ‍🌁
 
 ##### June 28, 2024

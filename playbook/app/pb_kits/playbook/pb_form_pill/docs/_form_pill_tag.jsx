@@ -6,8 +6,9 @@ const FormPillDefault = (props) => {
     <div>
       <FormPill
           onClick={() => {
-alert('Click!')
-}}
+            alert('Click!')
+          }}
+          tabIndex={0}
           text="this is a tag"
           {...props}
       />

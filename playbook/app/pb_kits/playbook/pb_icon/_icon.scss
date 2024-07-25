@@ -1,3 +1,19 @@
+@import "../tokens/colors";
+
+// All the merges below create $icon_colors, a map of all color tokens in colors.scss
+$merge_kits1: map-merge($status_colors, $category_colors);
+$merge_kits2: map-merge($merge_kits1, $product_colors);
+$merge_kits3: map-merge($merge_kits2, $text_colors);
+$icon_colors: map-merge($merge_kits3, $data_colors);
+
+.pb_custom_icon, .pb_icon_kit {
+  @each $color_name, $color_value in $icon_colors {
+    &[class*="#{$color_name}"] {
+      color: $color_value;
+    }
+  }
+}
+
 // Rails custom icon styles
 svg.pb_custom_icon {
   width: 1em;
@@ -9,4 +25,214 @@ svg.pb_custom_icon {
 
 .pb_icon_kit_emoji {
   font-family: monospace;
+}
+
+$rotate-list: (90, 180, 270);
+
+@keyframes pb_icon_spin {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+};
+
+svg {
+  &.pb_icon_kit,
+  &.pb_custom_icon{
+    @each $r in $rotate-list {
+      &.rotate_#{$r} {
+        transform: rotate(#{$r}deg);
+      }
+    }
+    &.flip_horizontal {
+      transform: scaleX(-1);
+    }
+    &.flip_vertical {
+      transform: scaleY(-1);
+    }
+    &.flip_horizontal.flip_vertical {
+      transform: scaleX(-1) scaleY(-1);
+    }
+    &.svg-inline--fa {
+      height: 1em;
+      overflow: visible;
+      vertical-align: -.125em
+    }
+    &.svg_inverse {
+      color: #fff;
+    }
+    &.svg_border {
+      border-color: #eee;
+      border-radius: .1em;
+      border-style: solid;
+      border-width: .08em;
+      padding: .2em .25em .15em;
+    }
+    &.svg_fw {
+      text-align: center;
+      width: 1.25em
+    }
+    &.svg_li {
+      left: calc(2em * -1);
+      position: absolute;
+      text-align: center;
+      width: 2em;
+      line-height: inherit
+    }
+    &.pull_left {
+      float: left;
+      margin-right: .3em;
+    }
+
+    &.pull_right {
+      float: right;
+      margin-left: .3em;
+    }
+    &.pulse {
+      animation-name: pb_icon_spin;
+      animation-direction: normal;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: steps(8);
+    }
+    &.spin {
+      animation-name: pb_icon_spin;
+      animation-delay: 0s;
+      animation-direction: normal;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    &.svg_xs {
+      font-size: 0.75em
+    }
+
+    &.svg_sm {
+      font-size: 0.875em
+    }
+
+    &.svg_lg {
+      font-size: 1.25em
+    }
+
+    &.svg_1x {
+      font-size: 1em
+    }
+
+    &.svg_2x {
+      font-size: 2em
+    }
+
+    &.svg_3x {
+      font-size: 3em
+    }
+
+    &.svg_4x {
+      font-size: 4em
+    }
+
+    &.svg_5x {
+      font-size: 5em
+    }
+
+    &.svg_6x {
+      font-size: 6em
+    }
+
+    &.svg_7x {
+      font-size: 7em
+    }
+
+    &.svg_8x {
+      font-size: 8em
+    }
+
+    &.svg_9x {
+      font-size: 9em
+    }
+
+    &.svg_10x {
+      font-size: 10em
+    }
+    &.fa-xs {
+      font-size: .75em;
+      line-height: .0833333337em;
+      vertical-align: .125em
+    }
+    &.fa-sm {
+      font-size: .875em;
+      line-height: .0714285718em;
+      vertical-align: .0535714295em
+    }
+    &.fa-lg {
+      font-size: 1.25em;
+      line-height: .05em;
+      vertical-align: -.075em
+    }
+    &.fa-pull-left {
+      float: left;
+      margin-right: .3em;
+    }
+
+    &.fa-pull-right {
+      float: right;
+      margin-left: .3em;
+    }
+    &.fa-li {
+      left: calc(2em * -1);
+      position: absolute;
+      text-align: center;
+      width: 2em;
+      line-height: inherit
+    }
+    &.svg-inline--fa.fa-li {
+      width: 2em;
+      top: .25em
+    }
+    &.svg-inline--fa.fa-fw {
+      width: 1.25em;
+    }
+    &.fa-fw {
+      text-align: center;
+      width: 1.25em
+    }
+    &.fa-layers {
+      display: inline-block;
+      height: 1em;
+      position: relative;
+      text-align: center;
+      vertical-align: -.125em;
+      width: 1em
+    }
+    &.fa-2x {
+      font-size: 2em
+    }
+    &.fa-3x {
+      font-size: 3em
+    }
+    &.fa-flip {
+      animation-name: fa-flip;
+      animation-delay: 0s;
+      animation-direction: normal;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+    &.fa-spin {
+      animation-name: fa-spin;
+      animation-delay: 0s;
+      animation-direction: normal;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+    &.fa-pulse {
+      animation: fa-spin 1s infinite linear;
+    }
+  }
 }
