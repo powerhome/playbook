@@ -37,6 +37,10 @@ module Playbook
       %w[xs sm md lg xl xxl 0 none]
     end
 
+    def min_width_values
+      %w[xs sm md lg xl xxl 0 none]
+    end
+
     def spacing_options
       {
         margin: "m",
@@ -99,10 +103,9 @@ module Playbook
       return nil unless selected_minw_props.present?
 
       selected_minw_props.map do |k|
-        puts "k: ", k
-        puts "min"
         width_value = send(k)
-        "min_width_#{width_value}" if max_width_values.include? width_value
+        puts "min_width_value: ", width_value
+        "min_width_#{width_value}" if min_width_values.include? width_value
       end.compact.join(" ")
     end
 
@@ -111,9 +114,8 @@ module Playbook
       return nil unless selected_mw_props.present?
 
       selected_mw_props.map do |k|
-        puts "k: ", k
-        puts "max"
         width_value = send(k)
+        puts "max_width_value: ", width_value
         "max_width_#{width_value}" if max_width_values.include? width_value
       end.compact.join(" ")
     end
