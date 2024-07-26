@@ -34,11 +34,11 @@ module Playbook
     end
 
     def max_width_values
-      %w[xs sm md lg xl xxl 0 none]
+      %w[0% xs sm md lg xl xxl 0 none 100%]
     end
 
     def min_width_values
-      %w[xs sm md lg xl xxl 0 none]
+      %w[0% xs sm md lg xl xxl 0 none 100%]
     end
 
     def spacing_options
@@ -98,13 +98,21 @@ module Playbook
       css.strip unless css.blank?
     end
 
+    def filter_classname(value)
+      if value.include?("%")
+        value.gsub("%", "_percent")
+      else
+        value
+      end
+    end
+
     def min_width_props
       selected_minw_props = min_width_options.keys.select { |sk| try(sk) }
       return nil unless selected_minw_props.present?
 
       selected_minw_props.map do |k|
         width_value = send(k)
-        "min_width_#{width_value}" if min_width_values.include? width_value
+        "min_width_#{filter_classname(width_value)}" if min_width_values.include? width_value
       end.compact.join(" ")
     end
 
@@ -114,7 +122,7 @@ module Playbook
 
       selected_mw_props.map do |k|
         width_value = send(k)
-        "max_width_#{width_value}" if max_width_values.include? width_value
+        "max_width_#{filter_classname(width_value)}" if max_width_values.include? width_value
       end.compact.join(" ")
     end
   end

@@ -12,36 +12,42 @@ import {
 import Example from '../Templates/Example'
 
 const SIZES: { [size: string]: string } = {
-  'xs': '360px max',
-  'sm': '540px max',
-  'md': '720px max',
-  'lg': '960px max',
-  'xl': '1140px max',
-  'xxl': '1320px max',
+  '0%': '0px min',
+  'xs': '360px min',
+  'sm': '540px min',
+  'md': '720px min',
+  'lg': '960px min',
+  'xl': '1140px min',
+  'xxl': '1320px min ',
+  '100%': '100% min',
 }
 
-const MaxWidthDescription = () => (
+const MinWidthDescription = () => (
   <>
-    When building your interface it is common to add max width to specific kits so the interface looks good at all sizes. For articles we recommend pairing a "medium" width with "loose" line height. See our <a href="https://playbook.powerapp.cloud/kits/body/react" target="_blank">Body Kit</a> for an example. We've made it easy to add max with ANY kit through our global props. See below:
+    We've made it easy to add min with ANY kit through our global props (except the popover kit). See below:
   </>
 )
 
 const MinWidth = ({ example }: {example: string}) => (
   <Example
-      backgroundClass='maxwidth-class'
-      description={<MaxWidthDescription />}
+      backgroundClass='minwidth-class'
+      description={<MinWidthDescription />}
       example={example}
       globalProps={{
-        maxWidth: Object.keys(SIZES),
+        minWidth: Object.keys(SIZES),
       }}
       title="Min Width"
+  >
+  <Background
+      backgroundColor="dark"
+      maxWidth="xs"
   >
     {Object.keys(SIZES).map((size: string) => (
       <Background
           backgroundColor="gradient"
           key={size}
           marginBottom="xs"
-          maxWidth={size}
+          minWidth={size}
           padding="xs"
       >
         <Flex>
@@ -62,6 +68,7 @@ const MinWidth = ({ example }: {example: string}) => (
         </Flex>
       </Background>
     ))}
+  </Background>
   </Example>
 )
 

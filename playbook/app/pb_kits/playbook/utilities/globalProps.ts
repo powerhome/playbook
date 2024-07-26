@@ -198,6 +198,14 @@ const getPositioningPropsClasses = (position: string, value: Sizes | {value: str
   return css;
 };
 
+const filterClassName = (value: string): string => {
+  if (value.includes("%")) {
+    return value.replace("%", "_percent");
+  } else {
+    return value;
+  }
+};
+
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
 
@@ -326,12 +334,12 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   minWidthProps: ({ minWidth }: MinWidth) => {
     let css = ''
-    css += minWidth ? `min_width_${minWidth } ` : ''
+    css += minWidth ? `min_width_${filterClassName(minWidth) } ` : ''
     return css
   },
   maxWidthProps: ({ maxWidth }: MaxWidth) => {
     let css = ''
-    css += maxWidth ? `max_width_${maxWidth } ` : ''
+    css += maxWidth ? `max_width_${filterClassName(maxWidth) } ` : ''
     return css
   },
   zIndexProps: (zIndex: ZIndex) => {
