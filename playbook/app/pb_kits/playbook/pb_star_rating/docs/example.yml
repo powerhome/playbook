@@ -8,7 +8,6 @@ examples:
     - star_rating_size_options: Size Options
 
   react:
-    - star_rating_interactive: Interactive
     - star_rating_default: Default
     - star_rating_color_options: Color Options
     - star_rating_background_options: Background Options
