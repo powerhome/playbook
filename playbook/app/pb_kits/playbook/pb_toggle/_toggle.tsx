@@ -42,7 +42,7 @@ const Toggle = ({
   size = 'sm',
   value,
   ...props
-}: Props): React.ReactElement => {
+}: Props) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)

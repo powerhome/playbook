@@ -349,6 +349,7 @@ private
     @kits_array = @kits.first.split("&")
     params[:name] ||= @kits_array[0]
     @selected_kit = params[:name]
+    @variants = params[:variants].present? ? params[:variants].split("&") : []
     @type = type
 
     render template: "pages/kit_collection", layout: "layouts/fullscreen"

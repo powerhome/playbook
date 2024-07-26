@@ -1,3 +1,34 @@
+# 🗂️ Tabbing Your Way Through Rails! 🛤️
+##### July 19, 2024
+
+![13 33 0](https://github.com/user-attachments/assets/a5519122-1f6b-4a21-9016-0da53a2e39c2)
+
+Hey Rails devs! 🎉 Our Nav Kit just got an upgrade with a new tabbing variant! Now, you can navigate dynamic content like a pro. Dive in and let your content flow! 📚✨ Happy coding! 💻🎨
+
+[13.33.0](https://github.com/powerhome/playbook/tree/13.33.0) full list of changes:
+
+**Kit Enhancements:**
+- Adding Tabbing Prop to the Nav Kit [\#3521](https://github.com/powerhome/playbook/pull/3521) ([carloslimasd](https://github.com/carloslimasd))
+- Star Rating Kit: Interactive Form Variant (Rails) [\#3523](https://github.com/powerhome/playbook/pull/3523) ([nickamantia](https://github.com/nickamantia))
+- Form Pills: Match Handoff (Primary + Default) [#3505](https://github.com/powerhome/playbook/pull/3505) ([elisashapiro](https://github.com/elisashapiro))
+- Implementing Form Resetting and Blank Selection Prop [\#3529)](https://github.com/powerhome/playbook/pull/3529) ([carloslimasd](https://github.com/carloslimasd))
+- Implementing Default Value for Dropdown Kit [\#3510](https://github.com/powerhome/playbook/pull/3510) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+- RTE Custom Extension Dropdown Button Bug Fix [#3528](https://github.com/powerhome/playbook/pull/3528) ([anthonymig88](https://github.com/anthonymig88))
+- Improve Consistency in Docs for Default Variant of Typeahead [\#3511](https://github.com/powerhome/playbook/pull/3511) ([anthonymig88](https://github.com/anthonymig88))
+
+**Improvements:**
+- Create a Doc for Border Radius Global Props [\#3534](https://github.com/powerhome/playbook/pull/3534) ([elisashapiro](https://github.com/elisashapiro))
+- Update Highcharts CustomOptions Formatting Note [\#3515](https://github.com/powerhome/playbook/pull/3515) ([anthonymig88](https://github.com/anthonymig88))
+- Add Alias Map Entrypoint [\#3514](https://github.com/powerhome/playbook/pull/3514) ([markdoeswork](https://github.com/markdoeswork))
+- Hide Beta Versions of Kits within Kit Categories (with menu.yml) [\#3513](https://github.com/powerhome/playbook/pull/3513) ([elisashapiro](https://github.com/elisashapiro))
+- Linter implementation: kits T - W [\#3504](https://github.com/powerhome/playbook/pull/3504) ([kangaree](https://github.com/kangaree))
+- Playbook Icons Styles [\#3491](https://github.com/powerhome/playbook/pull/3491) ([markdoeswork](https://github.com/markdoeswork))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.32.0...13.33.0)
+
+
 # 🐉 Effortless Drag and Drop Functionality with the NEW Draggable Kit! ⬆️⬇️
 ##### July 10, 2024
 

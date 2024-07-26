@@ -47,6 +47,8 @@ const promiseOptions = (inputValue) =>
 
 const TypeaheadWithPillsAsync = (props) => {
   const [users, setUsers] = useState([])
+  const handleOnChange = (value) => setUsers(formatUsers(value))
+  const formatValue = (users) => formatUsers(users)
   const formatUsers = (users) => {
     const results = () => (users.map((user) => {
       if (Object.keys(user)[0] === 'name' || Object.keys(user)[1] === 'id'){
@@ -57,8 +59,6 @@ const TypeaheadWithPillsAsync = (props) => {
     }))
     return results()
   }
-  const handleOnChange = (value) => setUsers(formatUsers(value))
-  const formatValue = (users) => formatUsers(users)
 
   return (
     <>

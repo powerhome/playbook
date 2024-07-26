@@ -1,12 +1,7 @@
 import React from 'react'
 import { components } from 'react-select'
 
-type MenuListProps = {
-  children: React.ReactNode,
-  footer: React.ReactNode,
-}
-
-const MenuList = (props: MenuListProps): React.ReactElement => {
+const MenuList = (props: any) => {
   return (
   <components.MenuList {...props}>
     {props.children}

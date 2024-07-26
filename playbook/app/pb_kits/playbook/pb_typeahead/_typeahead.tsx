@@ -42,8 +42,8 @@ type TypeaheadProps = {
   id?: string,
   label?: string,
   loadOptions?: string | Noop,
-  getOptionLabel?: string | (() => string),
-  getOptionValue?: string | (() => string),
+  getOptionLabel?: string | (() => any),
+  getOptionValue?: string | (() => any),
   name?: string,
 }
 
@@ -77,7 +77,7 @@ const Typeahead = ({
   id,
   loadOptions = noop,
   ...props
-}: TypeaheadProps): React.ReactElement => {
+}: TypeaheadProps) => {
   const selectProps = {
     cacheOptions: true,
     components: {
