@@ -10,17 +10,17 @@ const CollapsibleCustomMainWithIcon = (props) => {
       <Collapsible collapsed={isCollapsed}>
         <Flex
             align="center"
-            gap="sm"
             cursor="pointer"
+            gap="sm"
             htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
             justify="between"
             position="sticky"
             top="0"
         >
           <Title
-            dark={props.dark}
-            size={4}
-            text="Custom Main Section"
+              dark={props.dark}
+              size={4}
+              text="Custom Main Section"
           />
           <Collapsible.Icon collapsed={isCollapsed} />
         </Flex>
