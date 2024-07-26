@@ -1,3 +1,26 @@
+# 13.34.0
+##### July 26, 2024
+
+[13.34.0](https://github.com/powerhome/playbook/tree/13.34.0) full list of changes:
+
+**Kit Enhancements:**
+- Implementing Star Rating Interactive Variant for React [\#3550](https://github.com/powerhome/playbook/pull/3550) ([carloslimasd](https://github.com/carloslimasd))
+- Use New Content Tag [\#3548](https://github.com/powerhome/playbook/pull/3548) ([markdoeswork](https://github.com/markdoeswork))
+- Form pills 2 of 5:Add Icon Prop [\#3540](https://github.com/powerhome/playbook/pull/3540) ([elisashapiro](https://github.com/elisashapiro))
+- Icon Kit: Add a Color Prop [\#3527](https://github.com/powerhome/playbook/pull/3527) ([elisashapiro](https://github.com/elisashapiro))
+
+**Fixed Bugs:**
+- Fix Dark Mode Styles: Collapsible Kit [\#3530](https://github.com/powerhome/playbook/pull/3530) ([anthonymig88](https://github.com/anthonymig88))
+- Dark Mode Fix: Contact and DateRangeInline [\#3526](https://github.com/powerhome/playbook/pull/3526) ([anthonymig88](https://github.com/anthonymig88))
+- Dropdown Kit in Rails Form Fixes [\#3536](https://github.com/powerhome/playbook/pull/3536) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+- Icons Batch 8 [\#3541](https://github.com/powerhome/playbook/pull/3541) ([markdoeswork](https://github.com/markdoeswork))
+- Add Variants Specification to Kit Collection View [\#3516](https://github.com/powerhome/playbook/pull/3516) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.33.0...13.34.0)
+
+
 # 🗂️ Tabbing Your Way Through Rails! 🛤️
 ##### July 19, 2024
 
