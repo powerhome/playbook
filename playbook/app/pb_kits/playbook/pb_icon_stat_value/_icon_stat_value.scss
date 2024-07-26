@@ -34,20 +34,4 @@
       margin-bottom: $space-xs;
     }
   }
-
-  &[class*=_horizontal]  {
-    align-items: center;
-
-    &[class*=_center]  {
-      justify-content: center;
-    }
-
-    &[class*=_right]  {
-      justify-content: flex-end;
-    }
-
-    [class^=pb_icon_circle] {
-      margin-right: $space-sm;
-    }
-  }
 }
