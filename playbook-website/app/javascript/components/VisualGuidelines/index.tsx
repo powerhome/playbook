@@ -40,7 +40,7 @@ const VisualGuidelines = ({
       case "max_width":
         return <MaxWidth example={examples.width_jsx}/>;
       case "min_width":
-        return <MinWidth example={examples.width_jsx}/>;
+        return <MinWidth example={examples.min_width_jsx}/>;
       case "z_index":
         return <ZIndex example={examples.z_index_jsx}
                   tokensExample={examples.z_index_token}
