@@ -334,13 +334,13 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   minWidthProps: ({ minWidth }: MinWidth) => {
     let css = ''
-    css += minWidth ? `min_width_${filterClassName(minWidth) } ` : ''
-    return css
+    css += minWidth ? `min_width_${filterClassName(minWidth)} ` : ''
+    return css.trimEnd()
   },
   maxWidthProps: ({ maxWidth }: MaxWidth) => {
     let css = ''
-    css += maxWidth ? `max_width_${filterClassName(maxWidth) } ` : ''
-    return css
+    css += maxWidth ? `max_width_${filterClassName(maxWidth)} ` : ''
+    return css.trimEnd()
   },
   zIndexProps: (zIndex: ZIndex) => {
     let css = ''
