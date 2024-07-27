@@ -36,7 +36,7 @@ export default defineConfig({
           if (['tsx', 'ts', 'jsx'].includes(ext)) updatedName = `${fileName}.js`
           return updatedName
         },
-        chunkFileNames: 'chunks/[name].js',
+        chunkFileNames: 'chunks/[name]-[hash].js',
         dir: resolve(__dirname, 'dist'),
         sourcemap: !isProduction,
         manualChunks: {
@@ -102,6 +102,7 @@ export default defineConfig({
       'tokens': resolve(__dirname, 'app/pb_kits/playbook/tokens'),
       'utilities': resolve(__dirname, 'app/pb_kits/playbook/utilities'),
       'playbook-ui': resolve(__dirname, 'app/entrypoints/playbook'),
+      'lodash': 'lodash-es',
     },
   },
 })
