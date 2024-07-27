@@ -1,6 +1,6 @@
 import { filter } from 'lodash'
 
-const isEmpty = (value: string | unknown): boolean => value === ''
+const isEmpty = (value: string | unknown): boolean => !value || value == ''
 
 const titleizedWord = (word: string): string => (
   word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
