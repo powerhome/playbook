@@ -8,7 +8,7 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
 
 import Trix from 'trix'
-import '@haxtheweb/deduping-fix'
+import './_dedupe_trix_toolbar'
 
 Trix.config.textAttributes.inlineCode = {
   tagName: 'code',
