@@ -61,10 +61,7 @@ const TypeaheadWithPillsAsyncCustomOptions = (props) => {
               text="State (Users)"
               {...props}
           />
-          <For
-              each="user"
-              of={users}
-          >
+          {users.map((user) => (
             <User
                 align="left"
                 avatar
@@ -75,7 +72,7 @@ const TypeaheadWithPillsAsyncCustomOptions = (props) => {
                 orientation="horizontal"
                 {...props}
             />
-          </For>
+          ))}
         </React.Fragment>
       )}
       <Typeahead
