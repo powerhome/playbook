@@ -49,6 +49,7 @@ export default defineConfig({
         },
       },
       external: [
+        'maplibre-gl',
         'react',
         'react/jsx-runtime',
         'react-dom',
