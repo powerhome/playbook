@@ -29,7 +29,7 @@ module Playbook
       end
 
       def input_default_value
-        default_value.present? ? default_value.transform_keys(&:to_s) : ""
+        default_value.present? ? default_value.transform_keys(&:to_s)["id"] : ""
       end
 
       def options_with_blank

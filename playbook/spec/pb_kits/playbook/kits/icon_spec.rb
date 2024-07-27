@@ -51,6 +51,11 @@ RSpec.describe Playbook::PbIcon::Icon do
     is_expected.to define_prop(:spin)
       .of_type(Playbook::Props::Boolean)
   }
+  it {
+    is_expected.to define_prop(:color)
+      .of_type(Playbook::Props::String)
+      .with_default(nil)
+  }
 
   describe "#custom_icon" do
     it "returns an icon with custom data-collapsible-main attribute", :aggregate_failures do
@@ -82,6 +87,17 @@ RSpec.describe Playbook::PbIcon::Icon do
       expect(subject.new(icon: icon, size: size).classname).to eq "pb_icon_kit far fa-user fa-#{size}"
       expect(subject.new(icon: icon, spin: true).classname).to eq "pb_icon_kit far fa-user fa-spin"
       expect(subject.new(icon: icon, classname: "additional_class").classname).to eq "pb_icon_kit far fa-user additional_class"
+    end
+    it "includes color class when color prop is provided", :aggregate_failures do
+      icon = "user"
+      color = "primary"
+
+      expect(subject.new(icon: icon, color: color).classname).to include "color_primary"
+    end
+    it "does not include color class when color prop is not provided", :aggregate_failures do
+      icon = "user"
+
+      expect(subject.new(icon: icon).classname).not_to include "color_"
     end
   end
 end

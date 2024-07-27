@@ -89,6 +89,10 @@ $form_pill_colors: (
     outline: $primary solid 2px;
     outline-offset: -1px;
   }
+  .pb_form_pill_icon {
+    height: 12px !important;
+    width: 12px !important;
+  }
   &.small {
     height: fit-content;
     height: -moz-fit-content;
