@@ -7,6 +7,10 @@
   display: flex;
   align-items: baseline;
 
+  i {
+    color: $text_lt_light;
+  }
+
   &[class*=_vertical]  {
     flex-direction: column;
 
