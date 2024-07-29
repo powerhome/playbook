@@ -10,7 +10,7 @@ module Playbook
                   values: %w[xxs xs sm md base lg xl],
                   default: "md"
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[default royal blue orange purple teal red yellow green orange],
+                     values: %w[default royal blue orange purple teal red yellow green orange lighter],
                      default: "default"
 
       def classname
