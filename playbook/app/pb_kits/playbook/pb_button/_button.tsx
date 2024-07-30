@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
+import { getAllIcons } from "../utilities/icons/allicons"
 
 import Icon from '../pb_icon/_icon'
 import Caption from "../pb_caption/_caption"
@@ -65,6 +66,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
 
   return className
 }
+const spinnerIcon = getAllIcons()["spinner"]
 
 const Button = (props: ButtonPropTypes): React.ReactElement => {
   const {
@@ -103,8 +105,10 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
   const loadingIcon = (
     <div className="loading-icon">
       <Icon
+          className="svg-inline--fa"
+          customIcon={spinnerIcon.icon as unknown as { [key: string]: SVGElement }}
           fixedWidth
-          icon="spinner"
+          icon=""
           pulse
       />
     </div>
