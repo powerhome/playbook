@@ -45,12 +45,14 @@ const AdvancedTableResponsive = (props) => {
       />
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          paddingTop="sm"
           responsive="scroll"
           tableData={MOCK_DATA}
           {...props}
       />
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          paddingTop="sm"
           tableData={MOCK_DATA}
           {...props}
       >

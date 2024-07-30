@@ -134,17 +134,20 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   //Create column array in format needed by Tanstack
   const columns =
     columnDefinitions &&
-    columnDefinitions.map((column, index) => {
+    // columnDefinitions.map((column, index) => {
+      columnDefinitions.map((column) => {
       // Define the base column structure
       const columnStructure = {
         ...columnHelper.accessor(column.accessor, {
           header: column.label,
         }),
-        id: column.id || `${index + 1}`,
+        // id: column.id || `${index + 1}`,
       }
       if (column.cellAccessors) {
         columnStructure.cell = createCellFunction(column.cellAccessors)
       }
+      console.log(columnDefinitions, "definitions")
+      console.log(columnStructure, "structure")
       return columnStructure
     })
 
@@ -167,33 +170,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }
 
-  // Sticky Column for Responsive from tanstack docs
-  // const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
-  //   left: [columns[0].id],
-  //   // right: [],
-  // })
-  // console.log(columns, "columns")
-  // console.log(columns[0], "first column in array")
+  // Sticky Column for Responsive - from tanstack docs
   const [columnPinning, setColumnPinning] = useState({ left: [columns[0].id] });
-  // console.log(columnPinning, "pinning")
-  // const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setIsSmallScreen(window.innerWidth < 1200);
-  //   };
-
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (responsive === "scroll") {
-  //     setColumnPinning(prev => ({
-  //       ...prev,
-  //       left: isSmallScreen ? [columns[0].id] : [],
-  //     }));
-  //   }
-  // }, [isSmallScreen, responsive, columns]);
 
 //initialize table
   const table = useReactTable({
@@ -206,12 +184,12 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     getSortedRowModel: getSortedRowModel(),
     enableSortingRemoval: false,
     sortDescFirst: true,
-    ...expandAndSortState(),
-    ...tableOptions,
     state: {
       columnPinning,
     },
     onColumnPinningChange: setColumnPinning,
+    ...expandAndSortState(),
+    ...tableOptions,
   })
 
   const tableRows = table.getRowModel()
@@ -277,8 +255,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             dark={dark}
             dataTable
             numberSpacing="tabular"
-            // may need conditional here to ensure table default behavior and new adv table don't conflict
-            responsive={responsive}
+            responsive="none"
             {...tableProps}
         >
           {children ? (

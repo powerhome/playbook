@@ -152,15 +152,18 @@
         ) !important;
       }
     }
-
+    @media only screen and (max-width: $screen-xl-min) {
     &[class*="table-responsive-scroll"] {
       .table-header-cells:first-child,
       td:first-child,
       .pb_table_td:first-child,
       [class*="pinned-left"] {
         background-color: $bg_dark_card;
+        // box-shadow: 0 4px 10px 0 rgba($shadow, 0.16) !important;
         box-shadow: 0 4px 10px 0 rgba($shadow_dark, 0.16) !important;
+        // scrollbar-color: $border_dark
       }
+    }
     }
   }
 
@@ -168,10 +171,8 @@
   @media only screen and (max-width: $screen-xl-min) {  
     &[class*="table-responsive-scroll"] {
       display: block;
-      // min-width: 420px;
       overflow-x: scroll;
       width: 100%;
-      // color: blue;
       .table-header-cells:first-child,
       td:first-child,
       .pb_table_td:first-child,
@@ -182,19 +183,11 @@
           left: 0;
           z-index: 2;
       }
-      // .pb_advanced_table_kit > .table-responsive-collapse, .table-collapse-md,
-      // .pb_advanced_table_kit > .table-responsive-collapse, .table-collapse-sm {
-        // width: 100% !important;
-        // min-width: 420px; 
-        // overflow-x: auto; 
-        // background: none !important;
-      // }
     }
   }
   @media only screen and (min-width: $screen-xl-min) {
     &[class*="table-responsive-scroll"] {
       overflow-x: visible;
-      // color: red;
     }
   }
 }
