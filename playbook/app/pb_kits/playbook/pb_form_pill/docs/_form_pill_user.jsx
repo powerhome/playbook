@@ -9,6 +9,7 @@ const FormPillDefault = (props) => {
           avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
           name="Anna Black"
           onClick={() => alert('Click!')}
+          tabIndex={0}
           {...props}
       />
       <br />
@@ -16,6 +17,7 @@ const FormPillDefault = (props) => {
       <FormPill
           name="Anna Black"
           onClick={() => alert('Click!')}
+          tabIndex={0}
           {...props}
       />
     </div>

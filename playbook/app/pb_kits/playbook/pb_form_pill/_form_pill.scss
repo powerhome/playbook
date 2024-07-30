@@ -8,6 +8,7 @@ $selector: ".pb_form_pill";
 $pb_form_pill_height: 37px;
 $form_pill_colors: (
   primary: map-get($status_color_text, "primary"),
+  neutral: map-get($status_color_text, "neutral"),
 );
 
 
@@ -23,33 +24,74 @@ $form_pill_colors: (
   cursor: pointer;
   @each $color_name, $color_value in $form_pill_colors {
     &[class*=_#{$color_name}]  {
-      background-color: rgba($color_value, $opacity-1);
+      background-color: mix($color_value, $card_light, 10%);
+      @if ($color_name == "neutral") {
+        background-color: $white;
+        border: 1px solid $border_light;
+      }
       transition: background-color 0.2s ease;
       box-shadow: none;
       @media (hover:hover) {
         &:hover {
-          background-color: rgba($color_value, $opacity-2);
+          background-color: mix($color_value, $card_light, 20%);
+          @if ($color_name == "neutral") {
+            background-color: mix($neutral, $card_light, 20%);
+            border: 1px solid $border_light;
+          }
+        }
+        &:active {
+          background-color: mix($color_value, $card_light, 30%);
+          @if ($color_name == "neutral") {
+            background-color: mix($neutral, $card_light, 30%);
+          }
         }
       }
       #{$selector}_text {
         color: $color_value;
+        @if ($color_name == "neutral") {
+          color: $text_lt_default;
+        }
         padding-left: $space-sm;
-        padding-right: $space-sm/4;
+        padding-right: $space-sm/2;
       }
       #{$selector}_close {
         color: $color_value;
-        padding-left: $space-sm/2;
+        padding-left: $space-sm/4;
         padding-right: $space-sm/4;
         display: flex;
         align-items: center;
-        height: 100%;
+        // I had to temporarily change height to 27px so new hover state darker background forms a circle not an oval
+        // before size change (ticket 2 of 4) - change back to 100% when $pb_form_pill_height changed to 27px from 37px
+        height: 27px;
+        border-radius: 70px;
         cursor: pointer;
+        &:hover {
+          background-color: mix($color_value, $card_light, 40%);
+          @if ($color_name == "neutral") {
+            background-color: mix($neutral, $card_light, 60%);
+          }
+        }
       }
       #{$selector}_tag {
         color: $color_value;
         padding-left: $space-sm;
+        @if ($color_name == "neutral") {
+          color: $text_lt_default;
+        }
       }
     }
+  }
+  &:focus {
+    outline: $primary solid 2px;
+    outline-offset: -1px;
+  }
+  &:focus-visible {
+    outline: $primary solid 2px;
+    outline-offset: -1px;
+  }
+  .pb_form_pill_icon {
+    height: 12px !important;
+    width: 12px !important;
   }
   &.small {
     height: fit-content;
@@ -70,6 +112,71 @@ $form_pill_colors: (
       &::before { line-height: 21px; }
     }
   }
+  &.dark {
+    @each $color_name, $color_value in $form_pill_colors {
+      // In dark mode, the base patterns below are needed for the next tickets for success, warning, error, info. 
+      // Primary and Neutral are exceptions to the general rule in the handoff 
+      &[class*=_#{$color_name}]  {
+      //   background-color: mix($color_value, $card_dark, 10%);
+        // .pb_form_pill_tag {
+        //   color: $color_name;
+        // }
+        // .pb_form_pill_close {
+        //   color: $color_name;
+        //   &:hover {
+        //     background-color: mix($color_value, $card_dark, 40%);
+        //   }
+        // }
+        // &:hover {
+        //   background-color: mix($color_value, $card_dark, 20%);
+        // }
+        // &:active {
+        //   background-color: mix($color_value, $card_dark, 30%);
+        // }
+        @if ($color_name == "neutral") {
+          background-color: transparent;
+          border: 1px solid $border_dark;
+          .pb_form_pill_text, .pb_form_pill_tag {
+            color: $text_dk_default;
+          }
+          .pb_form_pill_close {
+            color: $text_dk_default;
+            &:hover {
+              background-color: mix($neutral, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($white, $card_dark, 10%);
+          }
+          &:active {
+            background-color: mix($white, $card_dark, 20%);
+          }
+          &:focus {
+            border: 1px solid $primary;
+          }
+        }
+        @if ($color_name == "primary") {
+          background-color: mix($active_dark, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag {
+            color: $active_dark;
+          }
+          .pb_form_pill_close {
+            color: $active_dark;
+            &:hover {
+              background-color: mix($active_dark, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($active_dark, $card_dark, 20px);
+          }
+          &:active {
+            background-color: mix($active_dark, $card_dark, 30%);
+          }
+        }
+      }
+    }
+  }
+
   &[class*=lowercase] {
     text-transform: lowercase;
   }

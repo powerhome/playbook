@@ -19,6 +19,7 @@ examples:
   - block_nav: Block
   - block_no_title_nav: Without Title
   - new_tab: Open in a New Tab
+  - tab_nav: Tab Nav
 
   react:
   - default_nav: Default

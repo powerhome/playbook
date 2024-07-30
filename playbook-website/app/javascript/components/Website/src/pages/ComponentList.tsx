@@ -10,7 +10,7 @@ import { PageContainer } from "../components/PageContainer"
 import { CategoryTitle } from "../components/CategoryTitle"
 
 export type Kit = {
-  name: string;
+  category: string;
   components: {
     name: string;
     description: string;
@@ -65,14 +65,14 @@ export default function ComponentList() {
                 />
               </Flex>
             ) : (
-              kitsToShow.map(({ name, components }: Kit, index: number) => (
+              kitsToShow.map(({ category, components }: Kit, index: number) => (
                 <section
                   className="category mb_xl"
-                  key={`${name}-${index}`}
-                  id={name}
+                  key={`${category}-${index}`}
+                  id={category}
                 >
-                  <NavLink to={`/beta/kit_category/${name}`}>
-                    <CategoryTitle name={name} />
+                  <NavLink to={`/beta/kit_category/${category}`}>
+                    <CategoryTitle category={category} />
                   </NavLink>
                   <KitGrid>
                     {components

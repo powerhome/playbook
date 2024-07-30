@@ -8,17 +8,21 @@
         <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
     <% end %>
     <div class="dropdown_wrapper<%= error_class %>" style="position: relative">
-        <input type="hidden" name="<%= object.name %>" id="dropdown-selected-option" value="" />
-        <input id="dropdown-form-validation" name="<%= object.name %>_form_validation" value="" style="display: none" <%= object.required ? "required" : ""%> />
-
+        <input 
+            data-default-value="<%= input_default_value %>" 
+            id="dropdown-selected-option" 
+            name="<%= object.name %>" 
+            style="display: none" 
+            <%= object.required ? "required" : ""%> 
+        />
         <% if content.present? %>
             <%= content.presence %>
             <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
         <% else %>
             <%= pb_rails("dropdown/dropdown_trigger") %>
             <%= pb_rails("dropdown/dropdown_container") do %>
-                <% if object.options.present? %>
-                    <% object.options.each do |option| %>
+                <% if options_with_blank.present? %>
+                    <% options_with_blank.each do |option| %>
                         <%= pb_rails("dropdown/dropdown_option", props: {option: option}) %>
                     <% end %>
                 <% end %>

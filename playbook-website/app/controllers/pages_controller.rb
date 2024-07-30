@@ -240,7 +240,12 @@ private
 
   def kit_categories
     @category = params[:category]
-    aggregate_kits.find { |item| item["category"] == @category }["components"].map { |component| component["name"] }
+    components = aggregate_kits.find { |item| item["category"] == @category }["components"]
+    filter_kits_by_status(components, status: "beta").map { |component| component["name"] }
+  end
+
+  def filter_kits_by_status(components, status: nil)
+    components.reject { |component| status && component["status"] == status }
   end
 
   def set_kit
@@ -344,6 +349,7 @@ private
     @kits_array = @kits.first.split("&")
     params[:name] ||= @kits_array[0]
     @selected_kit = params[:name]
+    @variants = params[:variants].present? ? params[:variants].split("&") : []
     @type = type
 
     render template: "pages/kit_collection", layout: "layouts/fullscreen"
