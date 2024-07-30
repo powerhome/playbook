@@ -13,8 +13,8 @@ RSpec.describe Playbook::PbIconStatValue::IconStatValue do
   }
   it {
     is_expected.to define_enum_prop(:variant)
-      .with_default("lighter")
-      .with_values("default", "royal", "blue", "purple", "teal", "red", "yellow", "green", "orange", lighter)
+      .with_default("default")
+      .with_values("default", "royal", "blue", "purple", "teal", "red", "yellow", "green", "orange", "lighter")
   }
 
   describe "#classname" do
