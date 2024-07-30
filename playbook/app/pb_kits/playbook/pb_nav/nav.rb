@@ -13,9 +13,18 @@ module Playbook
                      default: "normal"
       prop :highlight, type: Playbook::Props::Boolean, default: true
       prop :borderless, type: Playbook::Props::Boolean, default: false
+      prop :tabbing, type: Playbook::Props::Boolean, default: false
 
       def classname
         generate_classname("pb_nav_list", variant, orientation, highlight_class, borderless_class)
+      end
+
+      def data
+        if tabbing
+          Hash(prop(:data)).merge(pb_nav_tab: true)
+        else
+          prop(:data)
+        end
       end
 
       def highlight_class

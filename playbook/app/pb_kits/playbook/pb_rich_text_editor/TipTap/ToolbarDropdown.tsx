@@ -67,7 +67,7 @@ const toolbarDropdownItems = [
 
 
   const handleTogglePopover = () => {
-    setShowPopover(true)
+    setShowPopover(!showPopover)
   }
 
   const handlePopoverClose = (shouldClosePopover: boolean) => {
