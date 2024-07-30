@@ -43,7 +43,7 @@ const Time = (props: TimeProps) => {
     globalProps(props),
     className
   );
-  const clockIcon = getClockIconObject()
+  const clockIcon = getClockIconObject()["clock"]
   const htmlProps = buildHtmlProps(htmlOptions);
 
   return (

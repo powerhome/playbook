@@ -17,6 +17,8 @@ const clock = (
 export const getClockIconObject = () => {
 
     return {
+        clock: {
             icon: clock
+        },
     }
 }
