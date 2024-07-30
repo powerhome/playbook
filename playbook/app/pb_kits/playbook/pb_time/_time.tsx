@@ -1,6 +1,8 @@
 import React from "react";
 import classnames from "classnames";
 
+import { getClockIconObject } from "./clock"
+
 import { buildCss, buildHtmlProps } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import DateTime from '../pb_kit/dateTime';
@@ -42,21 +44,23 @@ const Time = (props: TimeProps) => {
     globalProps(props),
     className
   );
-
+  const clockIcon = getClockIconObject()
   const htmlProps = buildHtmlProps(htmlOptions);
 
   return (
     <div 
-      {...htmlProps}
-      className={classes} 
+        {...htmlProps}
+        className={classes} 
     >
       {showIcon && (
         unstyled
           ? (
               <span>
-                <Icon fixedWidth
-                    icon="clock"
-                />
+                    <Icon
+                        className="svg-inline--fa"
+                        customIcon={clockIcon.icon as unknown as { [key: string]: SVGElement }}
+                        icon=""
+                    />
                 {" "}
               </span>
             )
@@ -65,10 +69,13 @@ const Time = (props: TimeProps) => {
               <Body color="light"
                   tag="span"
               >
-                <Icon fixedWidth
-                    icon="clock"
-                    size={size === "md" ? "" : "sm"}
-                />
+              <Icon
+                  className="svg-inline--fa"
+                  customIcon={clockIcon.icon as unknown as { [key: string]: SVGElement }}
+                  fixedWidth
+                  icon=""
+                  size={size === "md" ? "" : "sm"}
+              />
                 {" "}
               </Body>
             </>
