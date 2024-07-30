@@ -14,7 +14,7 @@ const clock = (
     </svg>
 )
 
-export const getClockIconObject = () => {
+export const getAllIcons = () => {
 
     return {
         clock: {

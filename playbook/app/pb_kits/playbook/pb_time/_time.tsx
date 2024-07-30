@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 
-import { getClockIconObject       } from "../utilities/icons/allicons"
+import { getAllIcons } from "../utilities/icons/allicons"
 import { buildCss, buildHtmlProps } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import DateTime from '../pb_kit/dateTime';
@@ -43,7 +43,7 @@ const Time = (props: TimeProps) => {
     globalProps(props),
     className
   );
-  const clockIcon = getClockIconObject()["clock"]
+  const clockIcon = getAllIcons()["clock"]
   const htmlProps = buildHtmlProps(htmlOptions);
 
   return (
