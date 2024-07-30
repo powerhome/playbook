@@ -40,7 +40,7 @@ module Playbook
       end
 
       def clock_icon
-        "app/pb_kits/playbook/pb_time/clock.svg"
+        "app/pb_kits/playbook/utilities/icons/clock.svg"
       end
     end
   end
