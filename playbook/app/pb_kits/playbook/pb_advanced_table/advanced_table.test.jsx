@@ -300,7 +300,7 @@ test("tableProps prop functions as expected", () => {
 
   const kit = screen.getByTestId(testId)
   const table = kit.querySelector('table')
-  expect(table).toHaveClass("pb_table table-sm table-responsive-none data_table sticky-header ns_tabular")
+  expect(table).toHaveClass("pb_table table-sm table-responsive-scroll data_table sticky-header ns_tabular")
 })
 
 test("enableExpansionIcon changes icon", () => {
@@ -432,4 +432,36 @@ test("inlineRowLoading prop renders inline loading if true", () => {
   rowButton.click()
   const inlineLoading = kit.querySelector(".fa-spinner")
   expect(inlineLoading).toBeInTheDocument()
+})
+
+test("responsive prop functions as expected", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        responsive="scroll"
+        tableData={MOCK_DATA}
+        tableProps={tableProps}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const table = kit.querySelector('table')
+  expect(table).toHaveClass("pb_table table-sm table-responsive-scroll data_table sticky-header ns_tabular")
+})
+
+test("responsive none prop functions as expected", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        responsive="none"
+        tableData={MOCK_DATA}
+        tableProps={tableProps}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const table = kit.querySelector('table')
+  expect(table).toHaveClass("pb_table table-sm table-responsive-none data_table sticky-header ns_tabular")
 })
