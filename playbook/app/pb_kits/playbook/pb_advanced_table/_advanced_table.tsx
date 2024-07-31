@@ -134,20 +134,16 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   //Create column array in format needed by Tanstack
   const columns =
     columnDefinitions &&
-    // columnDefinitions.map((column, index) => {
       columnDefinitions.map((column) => {
       // Define the base column structure
       const columnStructure = {
         ...columnHelper.accessor(column.accessor, {
           header: column.label,
         }),
-        // id: column.id || `${index + 1}`,
       }
       if (column.cellAccessors) {
         columnStructure.cell = createCellFunction(column.cellAccessors)
       }
-      console.log(columnDefinitions, "definitions")
-      console.log(columnStructure, "structure")
       return columnStructure
     })
 
@@ -170,9 +166,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }
 
-  // Sticky Column for Responsive - from tanstack docs
-  const [columnPinning, setColumnPinning] = useState({ left: [columns[0].id] });
-
 //initialize table
   const table = useReactTable({
     data: loading ? Array(loadingStateRowCount).fill({}) : tableData,
@@ -184,10 +177,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     getSortedRowModel: getSortedRowModel(),
     enableSortingRemoval: false,
     sortDescFirst: true,
-    state: {
-      columnPinning,
-    },
-    onColumnPinningChange: setColumnPinning,
     ...expandAndSortState(),
     ...tableOptions,
   })

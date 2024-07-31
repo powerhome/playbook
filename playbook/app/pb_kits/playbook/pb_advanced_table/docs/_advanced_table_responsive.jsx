@@ -1,5 +1,6 @@
 import React from "react"
 import { AdvancedTable } from "../.."
+import Title from '../../pb_title/_title'
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableResponsive = (props) => {
@@ -37,22 +38,37 @@ const AdvancedTableResponsive = (props) => {
 
   return (
     <div>
+      <Title
+          size={4}
+          text="Not Responsive"
+          {...props}
+      />
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           responsive="none"
           tableData={MOCK_DATA}
           {...props}
       />
-      <AdvancedTable
-          columnDefinitions={columnDefinitions}
+      <Title
           paddingTop="sm"
-          responsive="scroll"
-          tableData={MOCK_DATA}
+          size={4}
+          text="Responsive with Prop"
           {...props}
       />
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          responsive="scroll"
+          tableData={MOCK_DATA}
+          {...props}
+      />
+      <Title
           paddingTop="sm"
+          size={4}
+          text="Responsive as Default"
+          {...props}
+      />
+      <AdvancedTable
+          columnDefinitions={columnDefinitions}
           tableData={MOCK_DATA}
           {...props}
       >

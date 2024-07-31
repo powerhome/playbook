@@ -6,6 +6,7 @@
 @import "./scss_partials/pseudo_states";
 @import "./scss_partials/chrome_styles";
 @import "../tokens/screen_sizes";
+@import "../tokens/shadows";
 
 .pb_advanced_table {
   $border-color: 1px solid $border_light !important;
@@ -109,6 +110,36 @@
     height: auto;
   }
 
+  // Responsive Styles
+  @media only screen and (max-width: $screen-xl-min) {  
+    &[class*="table-responsive-scroll"] {
+      display: block;
+      overflow-x: scroll;
+      width: 100%;
+      .table-header-cells:first-child,
+      td:first-child,
+      .pb_table_td:first-child,
+      [class*="pinned-left"] {
+          background-color: $white;
+          box-shadow: $shadow_deep !important;
+          position: sticky !important;
+          left: 0;
+          z-index: 2;
+      }
+      .bg-silver td:first-child {
+        background-color: lighten($silver, $opacity_7);
+      }
+      .bg-white td:first-child {
+          background-color: $white;
+      }
+    }
+  }
+  @media only screen and (min-width: $screen-xl-min) {
+    &[class*="table-responsive-scroll"] {
+      overflow-x: visible;
+    }
+  }
+
   &.dark {
     .bg-white {
       background: $bg_dark_card;
@@ -152,42 +183,28 @@
         ) !important;
       }
     }
+    // Dark Mode Responsive Styles
     @media only screen and (max-width: $screen-xl-min) {
-    &[class*="table-responsive-scroll"] {
-      .table-header-cells:first-child,
-      td:first-child,
-      .pb_table_td:first-child,
-      [class*="pinned-left"] {
-        background-color: $bg_dark_card;
-        // box-shadow: 0 4px 10px 0 rgba($shadow, 0.16) !important;
-        box-shadow: 0 4px 10px 0 rgba($shadow_dark, 0.16) !important;
-        // scrollbar-color: $border_dark
-      }
-    }
-    }
-  }
-
-  // Responsive Styles
-  @media only screen and (max-width: $screen-xl-min) {  
-    &[class*="table-responsive-scroll"] {
-      display: block;
-      overflow-x: scroll;
-      width: 100%;
-      .table-header-cells:first-child,
-      td:first-child,
-      .pb_table_td:first-child,
-      [class*="pinned-left"] {
-          background-color: $white;
-          box-shadow: 0 4px 10px 0 rgba($shadow, 0.16) !important;
+      &[class*="table-responsive-scroll"] {
+        display: block;
+        overflow-x: scroll;
+        width: 100%;
+        .table-header-cells:first-child,
+        td:first-child,
+        .pb_table_td:first-child,
+        [class*="pinned-left"] {
+          background: $bg_dark_card;
+          border-right: $border_dark;
+          box-shadow: $shadow_dark !important;
           position: sticky !important;
-          left: 0;
-          z-index: 2;
+        }
+        .bg-silver td:first-child {
+          background-color: $bg_dark;
+        }
+        .bg-white td:first-child {
+          background-color: $bg_dark_card;
+        }
       }
-    }
-  }
-  @media only screen and (min-width: $screen-xl-min) {
-    &[class*="table-responsive-scroll"] {
-      overflow-x: visible;
     }
   }
 }
