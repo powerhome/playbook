@@ -1,11 +1,38 @@
-@import "online_status_mixins";
+@import "../tokens/colors";
+
+$pb_online_status_size: 10px;
+$pb_online_status_border: 2px;
+
+$pb_online_status_statuses: (
+  online: $success,
+  away: $warning,
+  offline: $neutral,
+  success: $success,
+  warning: $warning,
+  error: $error,
+  info: $info,
+  neutral: $neutral,
+  primary: $primary,
+);
 
 [class^=pb_online_status_kit] {
-  @include pb_online_status;
+  &.dark {
+    border-color: $bg_dark;
+  }
+  width: $pb_online_status_size;
+  height: $pb_online_status_size;
+  flex-basis: $pb_online_status_size;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border-width: $pb_online_status_border;
+  border-color: $white;
+  border-style: solid;
+  border-radius: 50%;
+  background: $neutral; // Default status color
 
   @each $status_name, $status_value in $pb_online_status_statuses {
-    &[class*=_#{$status_name}]  {
-      @include pb_online_status($status_value);
+    &[class*=_#{$status_name}] {
+      background: $status_value;
     }
   }
 }
