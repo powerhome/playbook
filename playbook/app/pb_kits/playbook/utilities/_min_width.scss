@@ -1,14 +1,16 @@
+@import "playbook-ui/dist/tokens/spacing";
+
 .min_width_xs {
   min-width: 360px;
 }
 .min_width_0 {
-  min-width: 0;
+  min-width: map-get($spaces, 'none');
 }
 .min_with_0_percent {
   min-width: 0%;
 }
 .min_width_100_percent {
-  min-width: 100%;
+  min-width: $space_max;
 }
 .min_width_none {
   min-width: none;

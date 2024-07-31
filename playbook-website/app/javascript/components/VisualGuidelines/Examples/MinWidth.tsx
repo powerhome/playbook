@@ -39,8 +39,8 @@ const MinWidth = ({ example }: {example: string}) => (
       title="Min Width"
   >
   <Background
-      backgroundColor="dark"
       maxWidth="xs"
+      overflow="scroll"
   >
     {Object.keys(SIZES).map((size: string) => (
       <Background
