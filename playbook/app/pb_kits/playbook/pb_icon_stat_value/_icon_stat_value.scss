@@ -7,10 +7,6 @@
   display: flex;
   align-items: baseline;
 
-  .pb_icon_kit {
-    color: $text_lt_light;
-  }
-
   &[class*=_vertical]  {
     flex-direction: column;
 
