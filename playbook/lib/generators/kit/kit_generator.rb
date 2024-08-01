@@ -12,8 +12,8 @@ class KitGenerator < Rails::Generators::NamedBase
   class_option :react, type: :boolean, default: false, desc: "Creates the boilerplate files for React"
   class_option :swift, type: :boolean, default: false, desc: "Creates the boilerplate files for Swift"
 
-  REACT_EXAMPLES_PATH = "app/pb_kits/playbook/playbook-doc.js"
-  REACT_INDEX_PATH = "app/pb_kits/playbook/index.js"
+  REACT_EXAMPLES_PATH = "app/entrypoints/playbook-doc.js"
+  REACT_INDEX_PATH = "app/javascript/kits.js"
 
   def create_templates
     kit_name = name.strip.downcase
