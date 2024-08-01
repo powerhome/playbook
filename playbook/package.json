@@ -104,6 +104,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
+    "react-trix": "0.10.1",
     "trix": "^1.3.2",
     "webpacker-react": "^0.3.2"
   },
