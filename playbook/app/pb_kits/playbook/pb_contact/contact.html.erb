@@ -2,18 +2,21 @@
   <%= pb_rails("body", props: { 
         tag: "span", 
         classname: "pb_contact_kit", 
-        color: "light" 
+        color: "light",
+        dark: object.dark
       }) do %>
     <%= pb_rails("icon", props: { 
           icon: object.contact_icon, 
-          fixed_width: true 
+          fixed_width: true,
+          dark: object.dark
         }) %>
     <%= object.formatted_contact_value if object.contact_value %>
 
     <%= pb_rails("caption", props: { 
           text: object.contact_detail, 
           tag: 'span', 
-          size: 'xs'
+          size: 'xs',
+          dark: object.dark
         }) if object.contact_detail %>
   <% end %>
 <% end %>

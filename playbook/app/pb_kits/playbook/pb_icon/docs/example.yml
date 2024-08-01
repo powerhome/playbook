@@ -9,6 +9,7 @@ examples:
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
   - icon_fa_kit: Icon with FontAwesome Kit
+  - icon_color: Icon Color
 
   react:
   - icon_default: Icon Default
@@ -20,6 +21,7 @@ examples:
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
   - icon_fa_kit: Icon with FontAwesome Kit
+  - icon_color: Icon Color
 
   swift:
   - icon_default_swift: Icon Default

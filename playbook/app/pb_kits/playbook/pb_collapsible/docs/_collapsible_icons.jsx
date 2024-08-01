@@ -7,6 +7,7 @@ const CollapsibleIcons = (props) => {
   <>
   <Collapsible
       icon={['plus','minus']}
+      iconColor='white'
   >
     <Collapsible.Main {...props}>
       <div>{'Main Section'}</div>

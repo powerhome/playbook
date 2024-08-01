@@ -12,7 +12,7 @@ describe("Icon Kit", () => {
                 data={{ testid: testId }}
                 fixedWidth
                 icon="user"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -27,7 +27,7 @@ describe("Icon Kit", () => {
                 fixedWidth
                 icon="user"
                 rotation={rotateProp}
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -44,7 +44,7 @@ describe("Icon Kit", () => {
                 fixedWidth
                 flip="horizontal"
                 icon="user"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -59,7 +59,7 @@ describe("Icon Kit", () => {
                 fixedWidth
                 icon="spinner"
                 spin
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -73,7 +73,7 @@ describe("Icon Kit", () => {
                 fixedWidth
                 icon="arrow-left"
                 pull="left"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -87,7 +87,7 @@ describe("Icon Kit", () => {
                 fixedWidth
                 icon="arrow-left"
                 pull="left"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -101,7 +101,7 @@ describe("Icon Kit", () => {
                 data={{ testid: testId }}
                 fixedWidth
                 icon="user"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
@@ -128,7 +128,7 @@ describe("Icon Kit", () => {
                     data={{ testid: testId }}
                     icon="user"
                     size={sizeProp}
-          />
+                />
             )
     
             const kit = screen.getByTestId(testId)
@@ -145,11 +145,24 @@ describe("Icon Kit", () => {
                 fixedWidth
                 fontStyle="fas"
                 icon="user"
-      />
+            />
         )
 
         const kit = screen.getByTestId(testId)
         expect(kit).toHaveClass("fa-user pb_icon_kit fa-fw fas")
+    })
+
+    test("renders with color prop", () => {
+        render(
+            <Icon
+                color="primary"
+                data={{ testid: testId }}
+                icon="user"
+            />
+        )
+
+        const kit = screen.getByTestId(testId)
+        expect(kit).toHaveClass("color_primary")
     })
 
 })

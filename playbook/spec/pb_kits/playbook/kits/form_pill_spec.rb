@@ -10,12 +10,14 @@ RSpec.describe Playbook::PbFormPill::FormPill do
   it { is_expected.to define_prop(:avatar_url) }
   it { is_expected.to define_prop(:size) }
   it { is_expected.to define_prop(:color) }
+  it { is_expected.to define_prop(:icon) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_form_pill_kit_primary_none"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_form_pill_kit_primary_none additional_class"
       expect(subject.new(color: "neutral").classname).to eq "pb_form_pill_kit_neutral_none"
+      expect(subject.new(icon: "user").classname).to eq "pb_form_pill_kit_primary_icon_none"
     end
   end
 end

@@ -1,73 +1,74 @@
 import React from 'react'
-import { Collapsible, useCollapsible, Background, Flex, Title, List, ListItem } from '../..'
+import PropTypes from 'prop-types'
+import { Collapsible, useCollapsible, Flex, Title, List, ListItem } from '../..'
 
-const CollapsibleCustomMainWithIcon = () => {
+const CollapsibleCustomMainWithIcon = (props) => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
 
   return (
-  <>
-    <Collapsible
-        collapsed={isCollapsed}
-    >
-          <Background 
-              backgroundColor="white" 
-              cursor="pointer"
-              htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
-              position="sticky" 
-              top="0" 
-          >
-              <Flex 
-                  align="center" 
-                  gap="sm"
-                  justify="between" 
-              >
-                <Title 
-                    size={4} 
-                    text="Custom Main Section" 
-                />
-                <Collapsible.Icon collapsed={isCollapsed}/>
-              </Flex>
-          </Background>
-      <Collapsible.Content padding="none">
+    <>
+      <Collapsible collapsed={isCollapsed}>
+        <Flex
+            align="center"
+            cursor="pointer"
+            gap="sm"
+            htmlOptions={{onClick:() => setIsCollapsed(!isCollapsed)}}
+            justify="between"
+            position="sticky"
+            top="0"
+        >
+          <Title
+              dark={props.dark}
+              size={4}
+              text="Custom Main Section"
+          />
+          <Collapsible.Icon collapsed={isCollapsed} />
+        </Flex>
+        <Collapsible.Content 
+            padding="none"
+        >
           <div>
           <List>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
               <ListItem 
                   align="stretch"
                   flexDirection="column" 
               >
-                Checklist item
+                {"Checklist item"}
               </ListItem>
             </List>
           </div>
       </Collapsible.Content>
     </Collapsible>
-   
   </>
   )
+}
+
+CollapsibleCustomMainWithIcon.propTypes = {
+  dark: PropTypes.bool,
 }
 
 export default CollapsibleCustomMainWithIcon

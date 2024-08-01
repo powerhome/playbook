@@ -2,4 +2,4 @@ export { default as FormPillUser } from './_form_pill_user.jsx'
 export { default as FormPillSize } from './_form_pill_size.jsx'
 export { default as FormPillTag } from './_form_pill_tag.jsx'
 export { default as FormPillExample } from './_form_pill_example.jsx'
-
+export { default as FormPillIcon } from './_form_pill_icon.jsx'

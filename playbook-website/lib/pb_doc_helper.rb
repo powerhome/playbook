@@ -6,8 +6,9 @@ module PlaybookWebsite
       title.remove("pb_").titleize.tr("_", " ")
     end
 
-    def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false, dark_mode: false)
+    def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false, dark_mode: false, variants: [])
       examples = pb_doc_kit_examples(kit, type)
+      examples.select! { |elem| variants.any? { |variant| elem.key?(variant) } } unless variants.empty?
       examples = examples.first(1) if limit_examples
       examples.map do |example|
         pb_rails "docs/kit_example", props: {
@@ -61,7 +62,7 @@ module PlaybookWebsite
           #{pb_kit(kit: kit, type: type, show_code: code, limit_examples: limit_examples, dark_mode: dark_mode)}</div>")
       title + ui
     end
-  # rubocop:enable Style/OptionalBooleanParameter
+    # rubocop:enable Style/OptionalBooleanParameter
 
   private
 

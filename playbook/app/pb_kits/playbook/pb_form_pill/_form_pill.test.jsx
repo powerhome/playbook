@@ -51,3 +51,14 @@ test('displays size variant', () => {
     const kit = screen.getByTestId('formpill')
     expect(kit).toHaveClass(`pb_form_pill_kit_primary small none`)
 });
+
+test('displays icon', () => {
+    render(
+        <FormPill            
+            data={{ testid: testId }}
+            icon={"test"}
+        />
+    )
+    const kit = screen.getByTestId('formpill')
+    expect(kit).toHaveClass(`pb_form_pill_kit_primary_icon none`)
+});

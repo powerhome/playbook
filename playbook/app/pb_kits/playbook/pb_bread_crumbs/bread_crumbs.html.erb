@@ -1,8 +1,3 @@
-<%= content_tag(:nav,
-    aria: object.aria,
-    id: object.id,
-    data: object.data,
-    class: object.classname,
-    **combined_html_options) do %>
+<%= pb_content_tag(:nav) do %>
       <%= content.presence %>
 <% end %>

@@ -1,3 +1,20 @@
+@import "../tokens/colors";
+
+// All the merges below create $icon_colors, a map of all color tokens in colors.scss
+$merge_kits1: map-merge($status_colors, $category_colors);
+$merge_kits2: map-merge($merge_kits1, $product_colors);
+$merge_kits3: map-merge($merge_kits2, $text_colors);
+$icon_colors: map-merge($merge_kits3, $data_colors);
+
+.pb_custom_icon, .pb_icon_kit {
+  @each $color_name, $color_value in $icon_colors {
+    &[class*="#{$color_name}"] {
+      color: $color_value;
+    }
+  }
+}
+
+// Rails custom icon styles
 svg.pb_custom_icon {
   width: 1em;
   fill: currentColor;
