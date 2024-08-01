@@ -11,6 +11,8 @@ type OnlineStatusProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   status?: "away" | "error" | "info" | "neutral" | "offline" |"online" | "primary"| "success" | "warning",
+  size?: "sm" | "md" | "lg",
+  noBorder?: boolean,
 } & GlobalProps
 
 const OnlineStatus = (props: OnlineStatusProps) => {
@@ -21,6 +23,8 @@ const OnlineStatus = (props: OnlineStatusProps) => {
     htmlOptions = {},
     id,
     status = 'offline',
+    size = 'md',
+    noBorder = false,
   } = props
 
   aria.label = status
@@ -28,7 +32,8 @@ const OnlineStatus = (props: OnlineStatusProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const classes = classnames(buildCss('pb_online_status_kit', status), globalProps(props), className)
+  const getBorder = noBorder ? 'no_border' : ''
+  const classes = classnames(buildCss('pb_online_status_kit', status, getBorder, size), globalProps(props), className)
 
   return (
     <div

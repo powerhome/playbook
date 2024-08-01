@@ -2,6 +2,11 @@
 
 $pb_online_status_size: 10px;
 $pb_online_status_border: 2px;
+$pb_online_status_sizes: (
+  "sm": 8px,
+  "md": 10px,
+  "lg": 12px,
+);
 
 $pb_online_status_statuses: (
   online: $success,
@@ -16,9 +21,7 @@ $pb_online_status_statuses: (
 );
 
 [class^=pb_online_status_kit] {
-  &.dark {
-    border-color: $bg_dark;
-  }
+  box-sizing: border-box;
   width: $pb_online_status_size;
   height: $pb_online_status_size;
   flex-basis: $pb_online_status_size;
@@ -28,11 +31,28 @@ $pb_online_status_statuses: (
   border-color: $white;
   border-style: solid;
   border-radius: 50%;
-  background: $neutral; // Default status color
+  background: $neutral;
+
+  &.dark {
+    border-color: $bg_dark;
+  }
 
   @each $status_name, $status_value in $pb_online_status_statuses {
     &[class*=_#{$status_name}] {
       background: $status_value;
     }
+  }
+
+  @each $size, $value in $pb_online_status_sizes {
+    &[class*=_#{$size}] {
+      width: $value;
+      height: $value;
+      flex-basis: $value;
+    }
+  }
+
+  &[class*=_no_border] {
+    border-width: 0;
+    border-style: none;
   }
 }
