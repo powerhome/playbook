@@ -21,7 +21,7 @@ $pb_online_status_statuses: (
 );
 
 [class^=pb_online_status_kit] {
-  box-sizing: border-box;
+  box-sizing: content-box;
   width: $pb_online_status_size;
   height: $pb_online_status_size;
   flex-basis: $pb_online_status_size;
