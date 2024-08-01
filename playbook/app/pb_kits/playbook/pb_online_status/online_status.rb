@@ -9,7 +9,7 @@ module Playbook
 
       prop :size, type: Playbook::Props::Enum,
                   values: %w[sm md lg],
-                  default: "md"
+                  default: "sm"
 
       prop :no_border, type: Playbook::Props::Boolean, default: false
 

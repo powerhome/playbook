@@ -23,7 +23,7 @@ const OnlineStatus = (props: OnlineStatusProps) => {
     htmlOptions = {},
     id,
     status = 'offline',
-    size = 'md',
+    size = 'sm',
     noBorder = false,
   } = props
 
