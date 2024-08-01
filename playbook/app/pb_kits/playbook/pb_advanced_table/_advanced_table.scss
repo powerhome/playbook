@@ -9,7 +9,7 @@
 @import "../tokens/shadows";
 
 .pb_advanced_table {
-  $border-color: 1px solid $border_light !important;
+  $border-color: 1px solid $border_light;
 
   [id$="-span"] {
     word-wrap: normal;
@@ -113,9 +113,24 @@
   // Responsive Styles
   @media only screen and (max-width: $screen-xl-min) {  
     &[class*="table-responsive-scroll"] {
+      border-radius: 4px;
+      box-shadow: 1px 0 0 0px $border_light,
+                  -1px 0 0 0px $border_light;
       display: block;
-      overflow-x: scroll;
+      overflow-x: auto;
       width: 100%;
+      [class^=pb_table].table-sm.table-card thead tr th:first-child,
+      [class^=pb_table].table-sm:not(.no-hover).table-card tbody tr td:first-child {
+        border-left-width: 0px;
+      }
+      [class^=pb_table].table-sm.table-card thead tr th:last-child,
+      [class^=pb_table].table-sm:not(.no-hover).table-card tbody tr td:last-child {
+        border-right-width: 0px;
+      }
+      [class^=pb_table].table-sm.table-card tbody tr:last-child td:first-child,
+      [class^=pb_table].table-sm.table-card tbody tr:last-child td:last-child {
+          border-radius: 0 0 0 0;
+        }
       .table-header-cells:first-child,
       td:first-child,
       .pb_table_td:first-child,
@@ -186,9 +201,24 @@
     // Dark Mode Responsive Styles
     @media only screen and (max-width: $screen-xl-min) {
       &[class*="table-responsive-scroll"] {
+        border-radius: 4px;
+        box-shadow: 1px 0 0 0px $border_dark,
+                    -1px 0 0 0px $border_dark;
         display: block;
         overflow-x: scroll;
         width: 100%;
+        [class^=pb_table].table-sm.table-card thead tr th:first-child,
+        [class^=pb_table].table-sm:not(.no-hover).table-card tbody tr td:first-child {
+          border-left-width: 0px;
+        }
+        [class^=pb_table].table-sm.table-card thead tr th:last-child,
+        [class^=pb_table].table-sm:not(.no-hover).table-card tbody tr td:last-child {
+          border-right-width: 0px;
+        }
+        [class^=pb_table].table-sm.table-card tbody tr:last-child td:first-child,
+        [class^=pb_table].table-sm.table-card tbody tr:last-child td:last-child {
+            border-radius: 0 0 0 0;
+        }
         .table-header-cells:first-child,
         td:first-child,
         .pb_table_td:first-child,
