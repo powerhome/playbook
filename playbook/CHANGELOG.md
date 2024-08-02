@@ -1,7 +1,14 @@
-# 13.34.0
-##### July 26, 2024
+# 🎨 Icon Colors Made Easy! 🌈
+##### July 31, 2024
 
-[13.34.0](https://github.com/powerhome/playbook/tree/13.34.0) full list of changes:
+![release](https://github.com/user-attachments/assets/47d99126-8e90-4bcb-8fe0-37771181619d)
+
+
+Customize icons effortlessly with the new color prop! 🎨 Apply any text, status, data, product, or category color with just a prop—no more custom CSS or text wrapping. Enjoy instant, hassle-free updates! 🚀🌟
+
+[13.34.1](https://github.com/powerhome/playbook/tree/13.34.1) full list of changes:
+
+
 
 **Kit Enhancements:**
 - Implementing Star Rating Interactive Variant for React [\#3550](https://github.com/powerhome/playbook/pull/3550) ([carloslimasd](https://github.com/carloslimasd))
@@ -10,6 +17,7 @@
 - Icon Kit: Add a Color Prop [\#3527](https://github.com/powerhome/playbook/pull/3527) ([elisashapiro](https://github.com/elisashapiro))
 
 **Fixed Bugs:**
+- Fix for Color Icon Scss [\#3562](https://github.com/powerhome/playbook/pull/3562) ([jasperfurniss](https://github.com/jasperfurniss))
 - Fix Dark Mode Styles: Collapsible Kit [\#3530](https://github.com/powerhome/playbook/pull/3530) ([anthonymig88](https://github.com/anthonymig88))
 - Dark Mode Fix: Contact and DateRangeInline [\#3526](https://github.com/powerhome/playbook/pull/3526) ([anthonymig88](https://github.com/anthonymig88))
 - Dropdown Kit in Rails Form Fixes [\#3536](https://github.com/powerhome/playbook/pull/3536) ([nidaqg](https://github.com/nidaqg))
@@ -18,7 +26,7 @@
 - Icons Batch 8 [\#3541](https://github.com/powerhome/playbook/pull/3541) ([markdoeswork](https://github.com/markdoeswork))
 - Add Variants Specification to Kit Collection View [\#3516](https://github.com/powerhome/playbook/pull/3516) ([kangaree](https://github.com/kangaree))
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/13.33.0...13.34.0)
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.33.0...13.34.1)
 
 
 # 🗂️ Tabbing Your Way Through Rails! 🛤️
