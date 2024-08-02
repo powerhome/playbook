@@ -39,6 +39,12 @@ const firstTwoInitials = (name: string) =>
     .join('')
     .substring(0, 2)
 
+const onlineStatusSize = (size: string): 'sm' | 'md' | 'lg' =>
+  ['xxs', 'xs'].includes(size) ? 'sm' :
+    ['sm', 'md'].includes(size) ? 'md' :
+      ['lg', 'xl'].includes(size) ? 'lg' :
+        'sm';
+
 const Avatar = (props: AvatarProps): React.ReactElement => {
   const {
     aria = {},
@@ -144,6 +150,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
             <OnlineStatus
                 className={`size_${size}`}
                 dark={dark}
+                size={onlineStatusSize(size)}
                 status={status}
             />
           )}

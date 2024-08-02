@@ -23,7 +23,7 @@ module Playbook
       end
 
       def online_status_props
-        { status: status, classname: "size_#{size}" }
+        { status: status, classname: "size_#{size}", size: online_status_size }
       end
 
       def alt_text
@@ -55,6 +55,19 @@ module Playbook
           "lg" => placement_styles("0"),
           "xl" => placement_styles({ value: "xxs", inset: true }),
         }
+      end
+
+      def online_status_size
+        case size
+        when "xxs", "xs"
+          "sm"
+        when "sm", "md"
+          "md"
+        when "lg", "xl"
+          "lg"
+        else
+          "sm"
+        end
       end
 
       def placement_styles(offset)
