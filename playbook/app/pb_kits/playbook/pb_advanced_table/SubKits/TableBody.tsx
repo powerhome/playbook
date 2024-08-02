@@ -20,7 +20,6 @@ type TableBodyProps = {
   className?: string
   collapsibleTrail?: boolean
   dark?: boolean
-  isPinnedLeft?: boolean,
   id?: string
   subRowHeaders?: string[]
 }
