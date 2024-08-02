@@ -2,6 +2,8 @@
 <html>
   <head>
     <%= render 'layouts/head'%>
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag(*@application_js) %>
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
   <%= render 'layouts/mobile_nav'%>
@@ -15,7 +17,7 @@
         <div class="pb--page--content--main">
           <%= pb_rails("background", props: {
               background_color: "dark",
-              image_url: @front_matter['header'] || asset_pack_url("getting-started.svg"),
+              image_url: @front_matter['header'] || vite_asset_path("images/getting-started.svg"),
               background_repeat: "no-repeat",
               background_size: "contain",
               background_position: "center"
@@ -48,7 +50,7 @@
       <% end %>
     <% end %>
   </body>
-  <%= javascript_packs_with_chunks_tag(*@application_js) %>
+
   <%= yield :pb_js %>
   <%= render 'layouts/ga'%>
 </html>

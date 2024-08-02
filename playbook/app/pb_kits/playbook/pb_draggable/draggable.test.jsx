@@ -8,7 +8,7 @@ import {
   List,
   ListItem,
   Card,
-} from "../";
+} from "playbook-ui";
 
 const testId = "draggable";
 

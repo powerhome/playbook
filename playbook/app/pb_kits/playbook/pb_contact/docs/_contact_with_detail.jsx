@@ -1,5 +1,5 @@
 import React from 'react'
-import { Contact } from '../../'
+import { Contact } from 'playbook-ui'
 
 const ContactDefault = (props) => {
   return (

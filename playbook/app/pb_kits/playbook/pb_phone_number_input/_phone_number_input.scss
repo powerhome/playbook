@@ -1,3 +1,4 @@
+@import "intl-tel-input/build/css/intlTelInput.css";
 @import "../tokens/colors";
 
 $transform-rotate-deg: 135deg;
@@ -100,7 +101,7 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__arrow.iti__arrow--up::before {
-    transform: rotate(-($transform-rotate-deg/3));
+    transform: rotate(-(calc($transform-rotate-deg/3)));
     top: $space_xs + 4px;
     color: $primary_action;
   }
