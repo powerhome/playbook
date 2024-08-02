@@ -3,6 +3,8 @@ import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
+import { buttonVariants, buttonSizes, buttonDisabled, buttonBlock, buttonLoading } from './button.css';
+import { defaultButtonTheme } from './buttonTheme.css.ts';
 
 import Icon from '../pb_icon/_icon'
 import Caption from "../pb_caption/_caption"
@@ -74,6 +76,8 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     count,
     data = {},
     disabled,
+    form = null,
+    fullWidth = false,
     htmlOptions = {},
     icon = null,
     iconRight = false,
@@ -87,16 +91,25 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     text,
     htmlType = 'button',
     value,
-    variant,
-    form = null
+    variant = 'primary',
+    size = null,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
 
+  const buttonClass = [
+    defaultButtonTheme,
+    buttonVariants[variant],
+    buttonSizes[size],
+    disabled && buttonDisabled,
+    fullWidth && buttonBlock,
+    loading && buttonLoading,
+  ].filter(Boolean).join(' ');
+
   const css = classnames(
-    buttonClassName(props),
+    buttonClass,
     globalProps(props),
     className
   )

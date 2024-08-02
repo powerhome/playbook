@@ -1,0 +1,1 @@
+{"version":3,"file":"validEmojiChecker.js","sourceRoot":"","sources":["validEmojiChecker.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,YAAY,GAAG,CAAC,KAAa,EAAE,EAAE;IAC1C,iFAAiF;IACjF,MAAM,UAAU,GAAG,sCAAsC,CAAC;IAC1D,OAAO,UAAU,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC;AAChC,CAAC,CAAC"}

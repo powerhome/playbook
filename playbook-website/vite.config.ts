@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import Buffer from 'buffer';
 import RubyPlugin from 'vite-plugin-ruby';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 const config = {
   define: {
@@ -23,6 +24,7 @@ const config = {
   },
   plugins: [
     RubyPlugin(),
+    vanillaExtractPlugin(),
   ],
   resolve: {
     alias: {

@@ -7,6 +7,8 @@ import typescript from '@rollup/plugin-typescript'
 import consolidate from './app/javascript/rollup/consolidate-plugin';
 import cssUrl from './app/javascript/rollup/css-url-plugin';
 import { env } from 'process';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import { vanillaExtractPlugin as veEsbuildPlugin } from "@vanilla-extract/esbuild-plugin";
 
 const isProduction = env.NODE_ENV === 'production'
 
@@ -65,6 +67,11 @@ export default defineConfig({
       generateScopedName: '[name]__[local]___[hash:base64:5]',
     }
   },
+  optimizeDeps: {
+    esbuildOptions: {
+      plugins: [veEsbuildPlugin({ runtime: true })],
+    },
+  },
   plugins: [
     react(),
     RubyPlugin(),
@@ -94,6 +101,7 @@ export default defineConfig({
       ],
     }),
     cssUrl(),
+    vanillaExtractPlugin(),
   ],
   resolve: {
     dedupe: ['playbook'],
