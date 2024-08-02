@@ -52,18 +52,6 @@ const AdvancedTableResponsive = (props) => {
       <Title
           paddingTop="sm"
           size={4}
-          text="Responsive with Prop"
-          {...props}
-      />
-      <AdvancedTable
-          columnDefinitions={columnDefinitions}
-          responsive="scroll"
-          tableData={MOCK_DATA}
-          {...props}
-      />
-      <Title
-          paddingTop="sm"
-          size={4}
           text="Responsive as Default"
           {...props}
       />
@@ -71,10 +59,7 @@ const AdvancedTableResponsive = (props) => {
           columnDefinitions={columnDefinitions}
           tableData={MOCK_DATA}
           {...props}
-      >
-        <AdvancedTable.Header />
-        <AdvancedTable.Body />
-      </AdvancedTable>
+      />
     </div>
   )
 }

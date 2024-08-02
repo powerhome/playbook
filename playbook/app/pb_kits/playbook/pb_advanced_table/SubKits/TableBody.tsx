@@ -92,9 +92,9 @@ export const TableBody = ({
                   <td
                       align="right"
                       className={classnames(
-                        `${cell.id}-cell`,
-                        isPinnedLeft && 'pinned-left',
-                        isChrome() ? "chrome-styles" : ""
+                        `${cell.id}-cell position_relative`,
+                        isChrome() ? "chrome-styles" : "",
+                        isPinnedLeft && 'pinned-left'
                       )}
                       key={`${cell.id}-data`}
                   >
