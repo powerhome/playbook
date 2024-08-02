@@ -83,7 +83,6 @@ const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
                   </td>
                   <td>
                     {
-                      // eslint-disable-next-line jsx-control-statements/jsx-use-if-tag
                       propsValue.type.name ? (
                         <Card
                             background={darkMode ? 'dark' : 'light'}
