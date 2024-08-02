@@ -1,1 +1,1 @@
-The responsive prop can be set to "scroll" or "none", and is set to "scroll" by default to make Advanced Tables responsive. To disable, set responsive="none".
+The `responsive` prop can be set to "scroll" or "none", and is set to "scroll" by default to make Advanced Tables responsive. To disable, set `responsive="none"`.
