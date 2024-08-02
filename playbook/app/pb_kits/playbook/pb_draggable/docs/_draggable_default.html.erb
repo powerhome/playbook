@@ -1,0 +1,28 @@
+<% 
+  items = [
+    {
+      id: "21",
+      url: "https://unsplash.it/500/400/?image=633",
+    },
+    {
+      id: "22",
+      url: "https://unsplash.it/500/400/?image=634",
+    },
+    {
+      id: "23",
+      url: "https://unsplash.it/500/400/?image=637",
+    },
+  ]
+%>
+
+<%= pb_rails("draggable", props: { initial_items: items }) do %>
+  <%= pb_rails("draggable/draggable_container") do %>
+    <%= pb_rails("flex") do %>
+      <% items.each do |item| %>
+        <%= pb_rails("draggable/draggable_item", props: { drag_id: item[:id], container: "carlos" }) do %>
+          <%= pb_rails("image", props: { alt: item[:id], margin: "xs", size: "md", url: item[:url] }) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

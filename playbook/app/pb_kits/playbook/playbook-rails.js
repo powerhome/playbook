@@ -45,6 +45,9 @@ PbNav.start()
 import PbStarRating from './pb_star_rating'
 PbStarRating.start()
 
+import PbDraggable from './pb_draggable'
+PbDraggable.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====
