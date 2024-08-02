@@ -133,6 +133,9 @@ export { default as PbTooltip } from './pb_tooltip'
 export { default as PbTypeahead } from './pb_typeahead'
 export { default as dialogHelper } from './pb_dialog/dialogHelper'
 
+// Stimulus Controllers
+export { default as ButtonController } from './pb_button/button_controller'
+
 //Theming
 export {default as mapTheme} from './pb_map/pbMapTheme'
 export {default as useCollapsible} from './pb_collapsible/useCollapsible'

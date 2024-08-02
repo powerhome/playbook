@@ -47,6 +47,10 @@ module Playbook
         combined_html_options.merge!(options) if combined_html_options.present?
       end
 
+      # def data
+      #   Hash(prop(:data)).merge(controller: "button")
+      # end
+
       def target_attribute
         if target && link
           target
