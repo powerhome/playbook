@@ -1,6 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useState } from 'react'
-import { DatePicker,LabelValue } from '../..'
+import { DatePicker,LabelValue } from 'playbook-ui'
 
 
 const DatePickerOnClose = (props) => {

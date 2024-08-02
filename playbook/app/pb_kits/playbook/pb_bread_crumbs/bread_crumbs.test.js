@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 import BreadCrumbs from './_bread_crumbs'
 import BreadCrumbItem from './_bread_crumb_item'
-import { Icon, Title } from '../'
+import { Icon, Title } from 'playbook-ui'
 
 it('should render bread crumbs', () => {
   const testId = 'breadCrumbs'

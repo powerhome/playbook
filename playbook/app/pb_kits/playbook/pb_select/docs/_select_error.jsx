@@ -1,5 +1,5 @@
 import React from 'react'
-import { Body, Select } from '../..'
+import { Body, Select } from 'playbook-ui'
 
 const SelectError = (props) => {
   const options = [

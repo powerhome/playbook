@@ -1,5 +1,5 @@
 import React from 'react'
-import { LabelValue } from '../../'
+import { LabelValue } from 'playbook-ui'
 
 const LabelValueDefault = (props) => {
   return (

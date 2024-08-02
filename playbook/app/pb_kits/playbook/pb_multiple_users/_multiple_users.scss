@@ -18,7 +18,7 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
     justify-content: center;
     width: $pb_multiple_users_size;
     height: $pb_multiple_users_size;
-    border-radius: ($pb_multiple_users_size/2) + 2;
+    border-radius: calc($pb_multiple_users_size/2) + 2;
     background: tint($primary, 90%);
     border: $pb_multiple_users_border_size solid $white;
     color: $primary;

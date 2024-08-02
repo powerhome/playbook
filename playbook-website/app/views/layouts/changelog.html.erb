@@ -44,7 +44,9 @@
       <% end %>
     <% end %>
   </body>
-  <%= javascript_packs_with_chunks_tag(*@application_js) %>
+
+  <%= vite_javascript_tag(*@application_js) %>
+
   <%= yield :pb_js %>
   <%= render 'layouts/ga'%>
 </html>

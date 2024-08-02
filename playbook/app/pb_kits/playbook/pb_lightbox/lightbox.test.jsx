@@ -1,7 +1,7 @@
 import React from 'react'
 import { cleanup, fireEvent, render, screen } from '../utilities/test-utils'
 
-import { Lightbox } from '../'
+import { Lightbox } from 'playbook-ui'
 
 const testId = 'customId',
   kitClass = 'pb_lightbox_kit',

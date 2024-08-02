@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Filter, Flex, Select, TextInput } from '../..'
+import { Button, Filter, Flex, Select, TextInput } from 'playbook-ui'
 
 const SortingChangeCallback = (sortOptions) => {
   alert(JSON.stringify(sortOptions[0]))

@@ -1,5 +1,5 @@
 import React from 'react'
-import { RichTextEditor } from '../..'
+import { RichTextEditor } from 'playbook-ui'
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 import Link from '@tiptap/extension-link'

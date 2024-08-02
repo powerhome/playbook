@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown } from '../../'
+import { Dropdown } from 'playbook-ui'
 
 const DropdownDefaultValue = (props) => {
   const options = [

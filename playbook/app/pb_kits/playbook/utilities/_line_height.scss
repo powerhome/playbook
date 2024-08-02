@@ -1,4 +1,4 @@
-@import "../tokens/exports/line_height";
+@import "../tokens/exports/line_height.module";
 
 @mixin line-height-classes($line-height-list) {
   @each $name, $line-height in $line-height-list {

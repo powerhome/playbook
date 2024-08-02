@@ -1,7 +1,5 @@
-/* @flow */
-
 import React from 'react'
-import { Typeahead } from '../..'
+import { Typeahead } from 'playbook-ui'
 
 const options = [
   { label: 'Windows', value: '#FFA500' },

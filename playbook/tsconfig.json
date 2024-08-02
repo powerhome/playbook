@@ -7,12 +7,12 @@
     "declaration": true,
     "declarationDir": "./dist",
     "declarationMap": false,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "lib": ["dom", "es2015", "es2016", "es2019", "dom.iterable"],
     "module": "es2015",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "preserveConstEnums": true,
     "removeComments": false,
@@ -26,6 +26,13 @@
     "node_modules/**/*"
   ],
   "include": [
-    "app/pb_kits/playbook",
+    "app/pb_kits/playbook/utilities/globalProps.ts",
+    "app/javascript/*.js",
+    "app/pb_kits/playbook/**/*.ts",
+    "app/javascript/kits.js",
+    "app/entrypoints/playbook.js",
+    "app/entrypoints/playbook-doc.js",
+    "app/entrypoints/playbook-rails-react-bindings.js",
+    "app/entrypoints/playbook-rails.js",
   ]
 }

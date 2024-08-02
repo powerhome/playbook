@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Vite backwards compatibility
+cp ../playbook-website/config/menu.yml dist/menu.yml
+cat ../playbook/app/entrypoints/playbook.scss|awk '{sub(/kits\//,""); print}' >> ../playbook/app/pb_kits/playbook/_playbook.scss
+cp ../playbook/app/entrypoints/reset.scss ../playbook/app/pb_kits/playbook/_reset.scss
+
+gem build playbook_ui.gemspec
+
+# Cleanup for Vite
+rm dist/menu.yml
+rm "../playbook/app/pb_kits/playbook/_playbook.scss"
+rm "../playbook/app/pb_kits/playbook/_reset.scss"

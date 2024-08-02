@@ -1,5 +1,5 @@
 import React from 'react'
-import { Radio } from '../..'
+import { Radio } from 'playbook-ui'
 
 const RadioError = (props) => {
   return (

@@ -6,7 +6,7 @@ import {
   Dialog,
   RichTextEditor,
   Typeahead,
-} from '../../'
+} from 'playbook-ui'
 
 const DialogCompound = () => {
   const [isOpen, setIsOpen] = useState(false)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { RichTextEditor } from '../../'
+import { RichTextEditor } from 'playbook-ui'
 
 const RichTextEditorDefault = (props) => {
   const [value, setValue] = useState('Add your text here. You can format your text, add links, quotes, and bullets.'),

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Caption } from '../../'
+import { Caption } from 'playbook-ui'
 
 const CaptionColors = (props) => {
   return (

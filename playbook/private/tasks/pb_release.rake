@@ -96,7 +96,7 @@ namespace :pb_release do
 
     # RubyGems
     puts "\nCreating Gem..."
-    `gem build playbook_ui.gemspec`
+    `bin/build_gem`
     puts "\nCreating Docs Gem..."
     `gem build lib/playbook_ui_docs.gemspec`
     # Publish to RubyGems

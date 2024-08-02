@@ -12,8 +12,8 @@ class KitGenerator < Rails::Generators::NamedBase
   class_option :react, type: :boolean, default: false, desc: "Creates the boilerplate files for React"
   class_option :swift, type: :boolean, default: false, desc: "Creates the boilerplate files for Swift"
 
-  REACT_EXAMPLES_PATH = "app/pb_kits/playbook/playbook-doc.js"
-  REACT_INDEX_PATH = "app/pb_kits/playbook/index.js"
+  REACT_EXAMPLES_PATH = "app/entrypoints/playbook-doc.js"
+  REACT_INDEX_PATH = "app/javascript/kits.js"
 
   def create_templates
     kit_name = name.strip.downcase
@@ -78,10 +78,10 @@ class KitGenerator < Rails::Generators::NamedBase
       # Generate SCSS files ==============================
       unless platforms == "swift_only"
         template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
-        open("app/pb_kits/playbook/_playbook.scss", "a") do |f|
+        open("app/pb_kits/playbook/playbook.scss", "a") do |f|
           f.puts "\n@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
         end
-        scss_file = "app/pb_kits/playbook/_playbook.scss"
+        scss_file = "app/pb_kits/playbook/playbook.scss"
 
         # Sort kit names alphabetically
         lines = File.readlines(scss_file)

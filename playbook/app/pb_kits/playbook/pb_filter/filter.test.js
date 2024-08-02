@@ -4,7 +4,7 @@ import {
   screen,
   fireEvent,
 } from "../utilities/test-utils";
-import { Button, Filter, Flex, Select, TextInput } from "..";
+import { Button, Filter, Flex, Select, TextInput } from "playbook-ui";
 
 function FilterTest(props) {
   const SortingChangeCallback = (sortOptions) => {

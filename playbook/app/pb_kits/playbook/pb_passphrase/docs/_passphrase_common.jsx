@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import {Body, Caption, Passphrase, ProgressSimple} from '../..'
+import {Body, Caption, Passphrase, ProgressSimple} from 'playbook-ui'
 import zxcvbn from 'zxcvbn'
 
 const PassphraseCommon = (props) => {

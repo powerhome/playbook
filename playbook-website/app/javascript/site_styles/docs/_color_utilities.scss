@@ -1,11 +1,11 @@
-@import "playbook-ui/dist/tokens/colors";
-@import "playbook-ui/dist/tokens/typography";
+@import "playbook-tokens/colors";
+@import "playbook-tokens/typography";
 
 // Only used for our documentation site.
 // Creates color classes for color utilities.
 @mixin doc-color($colors-list) {
   @each $name, $color in $colors-list {
-    .pb--color_#{$name} {
+    .pb--color_#{"" + $name} {
       background-color: $color !important;
     }
   }

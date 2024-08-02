@@ -3,32 +3,26 @@ import { Card, Nav, SectionSeparator, NavItem } from 'playbook-ui'
 import GlobalProps from './globalProps'
 import KitProps from './kitProps'
 
-const reactDocgen = require('react-docgen')
+type AvailablePropsType = {
+  availableProps: any,
+  darkMode: boolean
+}
 
-const AvailableProps = ({ source, darkMode }) => {
-  const globalProps = ['aria', 'className', 'data', 'dark', 'id']
-  let showKitPropsTable = true, filteredProps = []
-
-  try {
-    const documentation = reactDocgen.parse(source)[0]
-    filteredProps = Object.entries(documentation.props).filter(([key, value]) => !globalProps.includes(key))
-  } catch (e) {
-    showKitPropsTable = false
-  }
-
-  const [showKitTab, setShowKitTab] = useState(showKitPropsTable)
+const AvailableProps = ({ availableProps, darkMode }: AvailablePropsType) => {
+  const props = JSON.parse(availableProps)
+  const [showKitTab, setShowKitTab] = useState(true)
 
   return (
     <>
       <Card padding="none" dark={darkMode}>
         <Card.Body padding="sm">
           <Nav orientation="horizontal" variant="subtle" dark={darkMode}>
-            {showKitPropsTable && <NavItem text="Kit Props" active={showKitTab} onClick={() => setShowKitTab(true)} cursor="pointer" dark={darkMode}/>}
-            <NavItem text="Global Props" active={!showKitTab || !showKitPropsTable} onClick={() => setShowKitTab(false)} cursor="pointer" dark={darkMode} />
+            <NavItem text="Kit Props" active={showKitTab} onClick={() => setShowKitTab(true)} cursor="pointer" dark={darkMode}/>
+            <NavItem text="Global Props" active={!showKitTab} onClick={() => setShowKitTab(false)} cursor="pointer" dark={darkMode} />
           </Nav>
         </Card.Body>
         <SectionSeparator  dark={darkMode} />
-        {showKitTab && <KitProps kitPropsValues={filteredProps} darkMode={darkMode} />}
+        {showKitTab && <KitProps kitPropsValues={props} darkMode={darkMode} />}
         {!showKitTab && <GlobalProps darkMode={darkMode}/>}
       </Card>
     </>

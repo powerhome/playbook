@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconCircle } from '../..'
+import { IconCircle } from 'playbook-ui'
 
 const IconCircleSizes = (props) => {
   return (

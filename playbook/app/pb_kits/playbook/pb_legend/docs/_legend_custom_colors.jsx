@@ -1,5 +1,5 @@
 import React from 'react'
-import { Legend } from '../..'
+import { Legend } from 'playbook-ui'
 
 const LegendCustomColors = (props) => (
   <div>

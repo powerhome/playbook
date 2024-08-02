@@ -1,0 +1,160 @@
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+/* CLEAN UP AND REMOVE */
+/* Headings */
+/* Standard Font Weights */
+/* Non_Standard Font Weights */
+/* Default Equations */
+/* Penner Equations (approximated) originally created by @robpenner */
+@media screen and (min-width: 575px) {
+  .kit-card {
+    min-height: 138px; } }
+.kit-card .icon {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  color: #0056CF; }
+.kit-card .icon .mobile {
+    display: none; }
+@media screen and (max-width: 575px) {
+    .kit-card .icon.mobile {
+      display: block;
+      visibility: visible;
+      opacity: 1; }
+    .kit-card .icon.desktop {
+      display: none; } }
+.kit-card-header {
+  height: 40px; }
+.kit-card-description {
+  font-size: 14px !important; }
+@media screen and (max-width: 575px) {
+    .kit-card-description {
+      display: none; } }
+.kit-card:hover {
+  box-shadow: 0 12px 28px 0 rgba(60, 106, 172, 0.18);
+  cursor: pointer; }
+@media screen and (max-width: 575px) {
+    .kit-card:hover {
+      box-shadow: none; } }
+@media screen and (min-width: 575px) {
+    .kit-card:hover .icon.desktop {
+      visibility: visible;
+      opacity: 1; } }
+
+.kit-filter {
+  width: 100%; }
+
+.hero {
+  min-height: 245px;
+  border-radius: 8px; }
+  @media screen and (max-width: 992px) {
+    .hero {
+      border-radius: 0; } }
+  @media screen and (max-width: 575px) {
+    .hero {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      min-height: 192px; } }
+  @media screen and (max-width: 575px) {
+    .hero-description {
+      display: none !important; } }
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .kit-container {
+    grid-template-columns: repeat(3, 1fr) !important; } }
+
+/* Default Equations */
+/* Penner Equations (approximated) originally created by @robpenner */
+.category-title .icon {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); }
+.category-title .icon.mobile {
+    display: none; }
+@media screen and (max-width: 575px) {
+      .category-title .icon.mobile {
+        display: block;
+        visibility: visible;
+        opacity: 1; } }
+@media screen and (max-width: 575px) {
+    .category-title .icon.desktop {
+      display: none; } }
+.category-title:hover .icon.desktop {
+  visibility: visible;
+  opacity: 1; }
+
+/*=====================================
+Base colors should not be documented.
+Only document color use.
+
+Colors -----------------------------*/
+/* Specialty Gradient -----------------*/
+/* Interface colors -------------------*/
+/* Main colors ------------------------*/
+/*=====================================
+
+Background colors ------------------*/
+/* Card colors ------------------*/
+/* Active colors ----------------------*/
+/* Hover colors -----------------------*/
+/* Focus colors -----------------------*/
+/* Border colors ----------------------*/
+/* Shadow colors ----------------------*/
+/* Text colors ------------------------*/
+/* Data colors ------------------------*/
+/* Status colors ----------------------*/
+/* Link colors ------------------------*/
+/* Product colors ---------------------*/
+/* Category colors ---------------------*/
+.category-breadcrumb-icon {
+  color: #687887; }
+.category-breadcrumb .previous-route:hover {
+  color: #242B42; }
+
+
+/*# sourceMappingURL=app~application-f8eb9d6c.chunk.css.map*/

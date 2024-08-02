@@ -1,6 +1,5 @@
 /* eslint-disable flowtype/no-types-missing-file-annotation */
 /* eslint-disable comma-dangle */
-/* eslint-disable jsx-control-statements/jsx-use-if-tag */
 /* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react'
 

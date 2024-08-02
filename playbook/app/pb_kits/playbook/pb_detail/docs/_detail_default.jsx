@@ -1,5 +1,5 @@
 import React from 'react'
-import { Detail } from '../..'
+import { Detail } from 'playbook-ui'
 
 const DetailDefault = (props) => (
   <div>

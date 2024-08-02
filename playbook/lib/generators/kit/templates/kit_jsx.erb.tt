@@ -32,9 +32,6 @@ props_names = @kit_props.keys.map do |key|
               end
 
 %>
-
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'

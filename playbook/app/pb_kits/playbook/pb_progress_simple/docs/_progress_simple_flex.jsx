@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, ProgressSimple } from '../..'
+import { Flex, ProgressSimple } from 'playbook-ui'
 
 const ProgressSimpleFlex = () => {
   return (

@@ -1,5 +1,3 @@
-// @flow
-
 import React, { useState, useEffect } from 'react'
 
 import Typeahead from '../_typeahead'

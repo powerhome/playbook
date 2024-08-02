@@ -1,5 +1,5 @@
 import React from 'react'
-import { PhoneNumberInput } from '../../'
+import { PhoneNumberInput } from 'playbook-ui'
 
 const PhoneNumberInputPreferredCountries = (props) => (
   <>

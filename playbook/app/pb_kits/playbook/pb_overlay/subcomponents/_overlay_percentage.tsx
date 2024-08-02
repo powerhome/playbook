@@ -1,5 +1,5 @@
 import React from 'react'
-import defaultColors from "../../tokens/exports/_colors.scss";
+import defaultColors from "../../tokens/exports/_colors.module.scss";
 import { OverlayChildrenProps } from '../_overlay';
 
 

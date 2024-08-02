@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ButtonToolbar } from '../..'
+import { Button, ButtonToolbar } from 'playbook-ui'
 
 const ButtonToolbarSecondary = (props) => (
   <div className="pb--doc-demo-row">

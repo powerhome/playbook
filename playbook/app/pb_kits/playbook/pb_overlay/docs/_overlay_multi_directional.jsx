@@ -4,7 +4,7 @@ import {
     Card,
     Flex,
     FlexItem,
-} from '../..'
+} from 'playbook-ui'
 
 const InlineCardsExample = () => {
     return (

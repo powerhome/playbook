@@ -1,5 +1,5 @@
 import React from "react"
-import { Nav, NavItem, useCollapsible } from "../.."
+import { Nav, NavItem, useCollapsible } from "playbook-ui"
 
 const CollapsibleNavCustom = (props) => {
   const navItems = ["Overview", "Albums", "Similar Artists"]

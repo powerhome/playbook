@@ -1,6 +1,6 @@
 import React from "react";
 import { cleanup, render, screen, fireEvent, waitFor } from "../utilities/test-utils";
-import { Button, Tooltip } from "..";
+import { Button, Tooltip } from "playbook-ui";
 
 function TooltipTest() {
   const text = "this is a text",

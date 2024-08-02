@@ -4,7 +4,7 @@ import {
   Button,
   PbReactPopover,
   Title,
-} from '../..'
+} from 'playbook-ui'
 
 const PopoverScrollHeight = (props) => {
   const [showPopover, setShowPopover] = useState(false)

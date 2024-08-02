@@ -2,7 +2,7 @@ import React from 'react'
 import {
     Overlay,
     Table,
-} from '../..'
+} from 'playbook-ui'
 
 const TableExample = () => {
     return (

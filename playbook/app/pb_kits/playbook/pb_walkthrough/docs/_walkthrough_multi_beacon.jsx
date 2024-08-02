@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Walkthrough } from '../../'
+import { Button, Walkthrough } from 'playbook-ui'
 
 const WalkthroughMultiBeacon = (props) => {
   const [stateA, setStateA] = useState({

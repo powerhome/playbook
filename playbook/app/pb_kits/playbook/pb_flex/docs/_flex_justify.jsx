@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, FlexItem, Title } from  '../..'
+import { Flex, FlexItem, Title } from 'playbook-ui'
 
 const FlexJustify = (props) => {
   return (
