@@ -15,9 +15,10 @@ module Playbook
                    values: %w[primary neutral],
                    default: "primary"
       prop :tabindex
+      prop :icon
 
       def classname
-        generate_classname("pb_form_pill_kit", color, name, text, text_transform)
+        generate_classname("pb_form_pill_kit", color, icon_class, name, text, text_transform)
       end
 
       def display_text
@@ -26,6 +27,10 @@ module Playbook
 
       def size_class
         size == "small" ? " small" : ""
+      end
+
+      def icon_class
+        icon ? "icon" : nil
       end
     end
   end
