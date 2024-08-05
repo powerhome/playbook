@@ -10,7 +10,7 @@ import {
   Body,
   Draggable,
   DraggableProvider,
-} from "../../";
+} from "playbook-ui";
 
 // Initial groups to drag between
 const containers = ["To Do", "In Progress", "Done"];

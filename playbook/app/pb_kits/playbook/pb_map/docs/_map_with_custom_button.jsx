@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Map, mapTheme, MapCustomButton } from '../..'
+import { Map, mapTheme, MapCustomButton } from 'playbook-ui'
 import maplibregl from 'maplibre-gl'
 
 const MapWithCustomButton = (props) => {

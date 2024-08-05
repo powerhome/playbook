@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-handler-names */
-/* @flow */
 
 import React, { useState } from "react"
-import { Button, Dialog, Flex } from "../.."
+import { Button, Dialog, Flex } from "playbook-ui"
 
 const useDialog = (visible = false) => {
   const [opened, setOpened] = useState(visible)
@@ -133,33 +132,35 @@ const DialogStatus = () => {
               text={dialog.text}
               title={dialog.title}
           >
-          <Dialog.Footer
-              paddingBottom="md"
-              paddingX="md"
-          >
-            <If condition={!dialog.buttonTwoText}>
-              <Button
-                  fullWidth
-                  onClick={dialog.toggle}
-              >
-              {dialog.buttonOneText}
-              </Button>
-            </If>
-            <If condition={dialog.buttonTwoText}>
-              <Button
-                  onClick={dialog.toggle}
-                  paddingRight="xl"
-              >
-              {dialog.buttonOneText}
-              </Button>
-              <Button
-                  onClick={dialog.toggle}
-                  variant="secondary"
-              >
-              {dialog.buttonTwoText}
-              </Button>
-            </If>
-          </Dialog.Footer>
+            <Dialog.Footer
+                paddingBottom="md"
+                paddingX="md"
+            >
+              {!dialog.buttonTwoText && (
+                <Button
+                    fullWidth
+                    onClick={dialog.toggle}
+                >
+                {dialog.buttonOneText}
+                </Button>
+              )}
+              {dialog.buttonTwoText && (
+                <React.Fragment>
+                  <Button
+                      onClick={dialog.toggle}
+                      paddingRight="xl"
+                  >
+                  {dialog.buttonOneText}
+                  </Button>
+                  <Button
+                      onClick={dialog.toggle}
+                      variant="secondary"
+                  >
+                  {dialog.buttonTwoText}
+                  </Button>
+                </React.Fragment>
+              )}
+            </Dialog.Footer>
           </Dialog>
         ))}
       </Flex>

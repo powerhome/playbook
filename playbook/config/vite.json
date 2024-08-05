@@ -1,0 +1,23 @@
+{
+  "all": {
+    "sourceCodeDir": "app",
+    "watchAdditionalPaths": [
+      "app/pb_kits/playbook/**/*.tsx",
+      "app/pb_kits/playbook/**/*.ts",
+      "app/pb_kits/playbook/**/*.js",
+      "app/pb_kits/playbook/**/*.jsx",
+      "app/pb_kits/playbook/**/*.scss",
+      "app/pb_kits/playbook/**/*.module.scss"
+    ]
+  },
+  "development": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-dev",
+    "port": 3038
+  },
+  "test": {
+    "autoBuild": true,
+    "publicOutputDir": "vite-test",
+    "port": 3039
+  }
+}

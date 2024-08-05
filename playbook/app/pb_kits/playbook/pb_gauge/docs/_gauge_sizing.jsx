@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, FlexItem, Gauge } from '../../'
+import { Flex, FlexItem, Gauge } from 'playbook-ui'
 
 const GaugeSizing = (props) => (
   <div>

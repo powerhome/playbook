@@ -3,7 +3,7 @@ import {
   Button,
   Flex,
   PbReactPopover,
-} from '../..'
+} from 'playbook-ui'
 
 const PopoverClose = (props) => {
   const [showInsidePopover, setInsideShowPopover] = useState(false)

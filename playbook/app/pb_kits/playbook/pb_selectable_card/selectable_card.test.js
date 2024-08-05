@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { render, screen } from '../utilities/test-utils'
 import SelectableCard from './_selectable_card'
-import { Body, Title, Image } from '../'
+import { Body, Title, Image } from 'playbook-ui'
 
 const SelectableCardMultiSelect = () => {
   const [selected, setSelected] = useState(true)

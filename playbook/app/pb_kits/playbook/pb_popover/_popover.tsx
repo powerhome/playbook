@@ -19,7 +19,7 @@ import {
 
 import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
-import _uniqueId from 'lodash/uniqueId';
+import { uniqueId } from 'lodash';
 
 type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth'>
 
@@ -150,7 +150,7 @@ const Popover = (props: PbPopoverProps) => {
 };
 
 const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
-  const [targetId] = useState(_uniqueId('id-'))
+  const [targetId] = useState(uniqueId('id-'))
   const {
     className,
     children,

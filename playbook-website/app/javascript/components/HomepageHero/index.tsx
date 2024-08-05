@@ -27,18 +27,18 @@ const HomepageHero = () => {
   }, []);
   return (
     <Background
-      backgroundColor="white"
-      className="homepage_hero_wrapper"
-      display="flex"
-      justifyContent="center"
+        backgroundColor="white"
+        className="homepage_hero_wrapper"
+        display="flex"
+        justifyContent="center"
     >
       <Flex
-        className="homepage_hero_container"
-        marginX="md"
-        maxWidth="xl"
-        orientation="column"
-        paddingTop="xl"
-        position="relative"
+          className="homepage_hero_container"
+          marginX="md"
+          maxWidth="xl"
+          orientation="column"
+          paddingTop="xl"
+          position="relative"
       >
         {isMax ? (
           <MaxScreen />

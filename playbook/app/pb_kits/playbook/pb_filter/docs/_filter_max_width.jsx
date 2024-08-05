@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Filter, Flex, Select } from '../../'
+import { Button, Filter, Flex, Select } from 'playbook-ui'
 
 const FilterMaxWidth = (props) => {
   const options = [

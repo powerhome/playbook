@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps, domSafeProps } from '../utilities/globalProps'

@@ -41,7 +41,7 @@
   &.error {
     .date_picker_input_wrapper {
       [class*=pb_body_kit] {
-        margin-top: $space_xs / 2;
+        margin-top: calc($space_xs / 2);
       }
 
       input,

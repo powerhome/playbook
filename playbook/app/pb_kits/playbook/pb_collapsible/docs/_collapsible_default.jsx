@@ -1,5 +1,5 @@
 import React from 'react'
-import { Collapsible } from '../..'
+import { Collapsible } from 'playbook-ui'
 
 const CollapsibleDefault = (props) => (
   <Collapsible >

@@ -1,4 +1,4 @@
-@import "../tokens/exports/shadows";
+@import "../tokens/exports/shadows.module";
 
 @mixin shadow-classes($shadows-list) {
   @each $name, $shadow in $shadows-list {

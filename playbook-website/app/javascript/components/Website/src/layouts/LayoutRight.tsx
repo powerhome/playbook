@@ -1,32 +1,35 @@
 import React from "react"
 import { Outlet } from "react-router-dom"
-import DarkModeToggle from "../components/DarkModeToggle.jsx"
+import DarkModeToggle from "../components/DarkModeToggle.js"
 
 import { Background, Button, FlexItem, Flex } from "playbook-ui"
 
-export default function LayoutRight({ dark }) {
+export default function LayoutRight({ dark }: { dark: string }) {
   return (
-    <Background backgroundColor={dark ? "dark" : "white"} className="pb--page--content--main">
+    <Background
+        backgroundColor={dark ? "dark" : "white"}
+        className="pb--page--content--main"
+    >
       <Flex
-        spacing='between'
-        vertical='center'
-        display={{ xs: "none", sm: "none", md: "none", default: "none", lg: "flex" }}
+          display={{ xs: "none", sm: "none", md: "none", default: "none", lg: "flex" }}
+          spacing='between'
+          vertical='center'
       >
         <Button
-          text='Back to Legacy View'
-          variant='link'
-          icon='circle-left'
-          tag='h1'
-          marginY='xs'
-          paddingLeft='none'
-          marginBottom='none'
-          paddingBottom='none'
-          link='/kits'
-          marginLeft='md'
+            icon='circle-left'
+            link='/kits'
+            marginBottom='none'
+            marginLeft='md'
+            marginY='xs'
+            paddingBottom='none'
+            paddingLeft='none'
+            tag='h1'
+            text='Back to Legacy View'
+            variant='link'
         />
         <FlexItem
-          marginRight='md'
-          className='pb--page--dark-mode-toggle-desktop'
+            className='pb--page--dark-mode-toggle-desktop'
+            marginRight='md'
         >
           <DarkModeToggle initMode={dark} />
         </FlexItem>

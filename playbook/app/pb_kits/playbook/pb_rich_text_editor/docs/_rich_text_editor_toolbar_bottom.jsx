@@ -1,5 +1,5 @@
 import React from 'react'
-import { RichTextEditor } from '../../'
+import { RichTextEditor } from 'playbook-ui'
 
 const RichTextEditorToolbarBottom = (props) => (
   <div>

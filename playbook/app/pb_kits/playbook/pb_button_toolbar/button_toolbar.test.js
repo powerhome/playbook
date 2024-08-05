@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 
-import { Button, ButtonToolbar } from '../'
+import { Button, ButtonToolbar } from 'playbook-ui'
 
 test('default test', () => {
   render(

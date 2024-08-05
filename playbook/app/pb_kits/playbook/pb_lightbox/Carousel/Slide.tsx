@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import { noop } from 'lodash'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'

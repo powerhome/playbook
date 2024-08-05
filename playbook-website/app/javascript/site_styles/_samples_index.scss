@@ -1,8 +1,8 @@
-@import "playbook-ui/dist/tokens/spacing";
-@import "playbook-ui/dist/tokens/colors";
-@import "playbook-ui/dist/tokens/border_radius";
-@import "playbook-ui/dist/tokens/screen_sizes";
-@import "playbook-ui/dist/tokens/shadows";
+@import "playbook-tokens/spacing";
+@import "playbook-tokens/colors";
+@import "playbook-tokens/border_radius";
+@import "playbook-tokens/screen_sizes";
+@import "playbook-tokens/shadows";
 
 .samples_index {
   .header-text {
@@ -27,8 +27,8 @@
     margin-right: $space_lg;
   }
   .sample_screenshot {
-    width: (1168px / 4);
-    height: (815px / 4);
+    width: calc(1168px / 4);
+    height: calc(815px / 4);
     border-radius: $border_rad_heaviest;
     box-shadow: $shadow_deep;
   }

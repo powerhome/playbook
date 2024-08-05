@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps'
@@ -8,13 +6,14 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 import Caption from '../pb_caption/_caption'
 import Title from '../pb_title/_title'
 import DateTime from '../pb_kit/dateTime';
+import { GenericObject } from '../types'
 
 type WeekdayStackedProps = {
   align?: "left" | "center" | "right",
   aria?: {[key:string]:string },
   className?: string,
   dark?: boolean,
-  data?: object,
+  data?: GenericObject,
   date: Date,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,

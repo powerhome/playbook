@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (13.34.0)
+    playbook_ui (13.34.1)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
@@ -91,6 +91,7 @@ GEM
     crass (1.0.6)
     date (3.3.4)
     diff-lcs (1.4.4)
+    dry-cli (1.0.0)
     erubi (1.12.0)
     execjs (2.9.1)
     faraday (1.10.3)
@@ -270,6 +271,13 @@ GEM
     view_component (2.55.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
+    vite_rails (3.0.17)
+      railties (>= 5.1, < 8)
+      vite_ruby (~> 3.0, >= 3.2.2)
+    vite_ruby (3.6.0)
+      dry-cli (>= 0.7, < 2)
+      rack-proxy (~> 0.6, >= 0.6.1)
+      zeitwerk (~> 2.2)
     webpacker (5.4.4)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
@@ -296,6 +304,7 @@ DEPENDENCIES
   rubocop
   rubocop-performance (~> 1.11.5)
   tzinfo-data (= 1.2018.9)
+  vite_rails
   will_paginate (= 3.3.1)
 
 BUNDLED WITH

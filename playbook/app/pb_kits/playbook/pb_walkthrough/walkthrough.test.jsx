@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { ensureAccessible, render, renderKit, screen } from '../utilities/test-utils'
 import React from 'react'
-import { Walkthrough } from '../'
+import { Walkthrough } from 'playbook-ui'
 
 /* See these resources for more testing info:
   - https://github.com/testing-library/jest-dom#usage for useage and examples

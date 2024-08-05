@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Dropdown, useDropdown, CircleIconButton, Icon, Body, FlexItem, Flex  } from '../..'
+import { Dropdown, useDropdown, CircleIconButton, Icon, Body, FlexItem, Flex  } from 'playbook-ui'
 
 const DropdownWithHook = (props) => {
 const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);

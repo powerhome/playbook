@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Checkbox, Table } from '../..'
+import { Checkbox, Table } from 'playbook-ui'
 
 const CheckboxIndeterminate = (props) => {
   const [checkboxes, setCheckboxes] = useState([

@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, cleanup } from "../utilities/test-utils";
 
-import { HomeAddressStreet } from "..";
+import { HomeAddressStreet } from "playbook-ui";
 
 
 const testId = "primary-test"

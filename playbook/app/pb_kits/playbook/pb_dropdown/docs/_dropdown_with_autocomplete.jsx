@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown, User, Badge, FlexItem } from '../..'
+import { Dropdown, User, Badge, FlexItem } from 'playbook-ui'
 
 const DropdownWithAutocomplete = (props) => {
 

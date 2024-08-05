@@ -1,5 +1,5 @@
 import React from 'react'
-import { BarGraph, Title } from '../..'
+import { BarGraph, Title } from 'playbook-ui'
 
 const chartData = [{
   name: 'Installation',

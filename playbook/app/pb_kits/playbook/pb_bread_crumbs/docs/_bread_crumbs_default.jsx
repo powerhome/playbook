@@ -1,6 +1,6 @@
 import React from 'react'
 import BreadCrumbs from '../_bread_crumbs'
-import { Icon, Title } from '../../'
+import { Icon, Title } from 'playbook-ui'
 import BreadCrumbItem from '../_bread_crumb_item'
 
 const Link = (props) => <BreadCrumbItem {...props} />

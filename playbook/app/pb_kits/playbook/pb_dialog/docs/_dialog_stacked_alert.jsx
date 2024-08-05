@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-handler-names */
 import React, { useState } from "react"
-import { Button, Dialog, Flex} from "../.."
+import { Button, Dialog, Flex} from "playbook-ui"
 
 const useDialog = (visible = false) => {
   const [opened, setOpened] = useState(visible)

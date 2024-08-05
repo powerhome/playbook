@@ -1,11 +1,11 @@
 @import "../pb_button/button";
 @import "../pb_button/button_mixins";
 
-$pb_button_styles: [
+$pb_button_styles: (
   "primary",
   "secondary",
   "link",
-];
+);
 
 @mixin pb_circle_icon_button {
   position: relative;
@@ -16,7 +16,7 @@ $pb_button_styles: [
   flex-grow: 0;
   width: $pb_button_size;
   height: $pb_button_size;
-  border-radius: $pb_button_size/2;
+  border-radius: calc($pb_button_size/2);
   line-height: $pb_button_size;
   flex-basis: $pb_button_size;
   min-width: $pb_button_size;

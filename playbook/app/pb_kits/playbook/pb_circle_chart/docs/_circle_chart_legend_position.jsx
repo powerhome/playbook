@@ -2,7 +2,7 @@ import React from 'react'
 
 import CircleChart from '../_circle_chart'
 
-import {Title} from '../..'
+import {Title} from 'playbook-ui'
 
 const data = [
   {

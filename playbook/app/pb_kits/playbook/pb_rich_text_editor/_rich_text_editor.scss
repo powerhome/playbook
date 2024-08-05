@@ -106,7 +106,7 @@
     .trix-button--icon {
       height: $space_lg;
       width: $space_lg;
-      margin: $space_xs / 2;
+      margin: calc($space_xs / 2);
       border-radius: $border_rad_heavier;
       &::before {
         background-size: auto;
@@ -116,7 +116,7 @@
       background: $white;
       border: 1px solid #E4E8F0;
       border-bottom: none;
-      padding: $space_xs / 2;
+      padding: calc($space_xs / 2);
       border-top-left-radius: $border_rad_heavier;
       border-top-right-radius: $border_rad_heavier;
       .trix-button-group {

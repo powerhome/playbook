@@ -1,5 +1,5 @@
 import React from 'react'
-import { User } from '../../'
+import { User } from 'playbook-ui'
 
 const UserWithTerritory = (props) => {
   return (

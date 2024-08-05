@@ -1,5 +1,5 @@
 import React from 'react'
-import { Body, Flex, FlexItem, Title } from  '../..'
+import { Body, Flex, FlexItem, Title } from 'playbook-ui'
 
 const FlexWrap = (props) => {
   return (

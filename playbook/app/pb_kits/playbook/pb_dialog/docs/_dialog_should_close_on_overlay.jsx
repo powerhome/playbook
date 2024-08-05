@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Dialog } from '../../'
+import { Button, Dialog } from 'playbook-ui'
 
 const DialogShouldCloseOnOverlay = () => {
   const [isOpen, setIsOpen] = useState(false)
