@@ -25,6 +25,7 @@ export default [
   "order",
   "numberSpacing",
   "maxWidth",
+  "minWidth",
   "marginRight",
   "marginLeft",
   "marginTop",
