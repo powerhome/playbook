@@ -69,6 +69,7 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                         }}
                         icon=""
                         key={index}
+                        tabIndex={0}
                     />
                 );
             })}

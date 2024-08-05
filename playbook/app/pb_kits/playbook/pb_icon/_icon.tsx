@@ -39,6 +39,7 @@ type IconProps = {
   size?: IconSizes,
   fontStyle?: 'far' | 'fas' | 'fab' | 'fak',
   spin?: boolean,
+  tabIndex?: number,
 } & GlobalProps
 
 const flipMap = {
@@ -138,6 +139,7 @@ const Icon = (props: IconProps) => {
     size,
     fontStyle = 'far',
     spin = false,
+    tabIndex,
   } = props
 
   let iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
@@ -226,7 +228,7 @@ const Icon = (props: IconProps) => {
               id,
               width: 'auto',
               height: 'auto',
-              tabIndex: '0',
+              ...(props.tabIndex !== undefined && { tabIndex }),
             })
           }
         </>

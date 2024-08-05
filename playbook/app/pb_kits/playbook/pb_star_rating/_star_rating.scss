@@ -153,7 +153,7 @@
     }
   }
 
-  // Rails select styles only if React hover styles are state managed hover (initially both)
+  // Rails select styles if React hover styles are state-managed (was initially both)
   .yellow-star-selected {
     color: $yellow; 
   }
@@ -192,13 +192,11 @@
     }
   }
 
-  // Focus states
+  // Focus styles
   .pb_custom_icon {
-    // &:focus {
-    //   border-radius: 2px;
-    //   outline: 1px solid $primary;
-    //   outline-offset: 2px;
-    // }
+    &:focus {
+      outline: none;
+    }
     &:focus-visible {
       border-radius: 2px;
       outline: 1px solid $primary;
@@ -207,11 +205,9 @@
   }
   &.dark {
     .pb_custom_icon {
-      // &:focus {
-      //   border-radius: 2px;
-      //   outline: 1px solid $active_dark;
-      //   outline-offset: 2px;
-      // }
+      &:focus {
+        outline: none;
+      }   
       &:focus-visible {
         border-radius: 2px;
         outline: 1px solid $active_dark;
