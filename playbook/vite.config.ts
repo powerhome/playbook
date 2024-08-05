@@ -6,7 +6,10 @@ import copy from 'rollup-plugin-copy'
 import typescript from '@rollup/plugin-typescript'
 import consolidate from './app/javascript/rollup/consolidate-plugin';
 import cssUrl from './app/javascript/rollup/css-url-plugin';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import { patchCssModules } from 'vite-css-modules'
 import { env } from 'process';
+import { glob } from 'glob';
 
 const isProduction = env.NODE_ENV === 'production'
 
@@ -22,6 +25,7 @@ export default defineConfig({
         'chunks/vendor.js': resolve(__dirname, 'app/entrypoints/playbook.js'),
       },
       output: {
+        inlineDynamicImports: true,
         assetFileNames: ({name}) => {
           if (name?.endsWith('.css')) {
             const updatedName = name.replace('entrypoints/', '')
@@ -40,6 +44,7 @@ export default defineConfig({
         dir: resolve(__dirname, 'dist'),
         sourcemap: !isProduction,
         manualChunks: {
+          'theme': glob.sync(resolve(__dirname, 'app/pb_kits/playbook/**/*.css.ts')),
           'lib': [
             resolve(__dirname, 'app/javascript/dashboard.js'),
             resolve(__dirname, 'app/javascript/plugins.js'),
@@ -62,12 +67,15 @@ export default defineConfig({
   },
   css: {
     modules: {
+      scopeBehaviour: 'local',
       generateScopedName: '[name]__[local]___[hash:base64:5]',
     }
   },
   plugins: [
     react(),
     RubyPlugin(),
+    patchCssModules(),
+    vanillaExtractPlugin(),
     copy({
       targets: [
         {

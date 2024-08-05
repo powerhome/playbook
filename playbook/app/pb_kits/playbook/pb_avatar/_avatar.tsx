@@ -12,6 +12,8 @@ import Badge from "../pb_badge/_badge";
 import IconCircle from "../pb_icon_circle/_icon_circle";
 import Card from "../pb_card/_card";
 
+import { container } from './avatar.css.ts'
+
 export type AvatarProps = {
   aria?: {[key: string]: string},
   className?: string,
@@ -80,10 +82,11 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
         id={id}
     >
       {componentOverlay ? (
-        <Flex display="display_inline_block" 
+        <Flex
+            display="display_inline_block"
             position="relative"
         >
-          <div className="avatar_wrapper" 
+          <div className="avatar_wrapper"
               data-initials={initials}
           >
             {canShowImage && (
@@ -129,7 +132,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
         </Flex>
       ) : (
         <>
-          <div className="avatar_wrapper" 
+          <div className={classnames("avatar_wrapper", container)}
               data-initials={initials}
           >
             {canShowImage && (
