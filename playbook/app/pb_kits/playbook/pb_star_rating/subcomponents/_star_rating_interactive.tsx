@@ -23,40 +23,55 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
         size,
     } = props
     const [interactiveStarValue, setInteractiveStarValue] = useState(0)
+    const [hoverStarValue, setHoverStarValue] = useState<number | null>(null)
     const starIcon = getStarIconObject(backgroundType, colorOption, dark, size)
 
     const handleOnClick = (interactiveStarValue: number) => {
         setInteractiveStarValue(interactiveStarValue)
         onClick && onClick(interactiveStarValue)
     }
+    const handleMouseEnter = (value: number) => {
+        setHoverStarValue(value);
+    }
+    const handleMouseLeave = () => {
+        setHoverStarValue(null);
+    }
 
     return (
         <Flex className="star_flex_area">
-            {[...Array(denominator)].map((_, index) => (
-                <React.Fragment key={index}>
-                    {index + 1 <= interactiveStarValue && (
-                        <Icon
-                            className={starIcon[colorOption].className}
-                            cursor="pointer"
-                            customIcon={starIcon[colorOption].icon  as unknown as { [key: string]: SVGElement }}
-                            htmlOptions={{ onClick: () => handleOnClick(index + 1) }}
-                            icon=""
-                        />
-                    )}
+            {[...Array(denominator)].map((_, index) => {
+                const starIndex = index + 1
+                const isFilled = starIndex <= interactiveStarValue
+                const isHovered = hoverStarValue !== null && starIndex > interactiveStarValue && starIndex <= hoverStarValue
 
-                    {index + 1 > interactiveStarValue && (
-                        <React.Fragment key={index}>
-                            <Icon
-                                className={starIcon[backgroundType].className}
-                                cursor="pointer"
-                                customIcon={starIcon[backgroundType].icon  as unknown as { [key: string]: SVGElement }}
-                                htmlOptions={{ onClick: () => handleOnClick(index + 1) }}
-                                icon=""
-                            />
-                        </React.Fragment>
-                    )}
-                </React.Fragment>
-            ))}
+                const baseClass = dark 
+                    ? starIcon[backgroundType].className.replace('empty_star_light', 'empty_star_dark')
+                    : starIcon[backgroundType].className
+                
+                let starClass = baseClass
+                if (isFilled) {
+                    starClass = starClass.replace(/(empty_star_light|empty_star_dark)/, '')
+                    starClass += ` ${starIcon[colorOption].className}`
+                }
+                if (isHovered) {
+                    starClass += ' star-hovered'
+                }
+
+                return (
+                    <Icon
+                        className={starClass.trim()}
+                        cursor={starIndex <= interactiveStarValue ? 'default' : 'pointer'}
+                        customIcon={starIcon[backgroundType].icon as unknown as { [key: string]: SVGElement }}
+                        htmlOptions={{
+                            onClick: () => handleOnClick(starIndex),
+                            onMouseEnter: () => handleMouseEnter(starIndex),
+                            onMouseLeave: () => handleMouseLeave()
+                        }}
+                        icon=""
+                        key={index}
+                    />
+                );
+            })}
         </Flex>
     )
 }

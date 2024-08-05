@@ -23,11 +23,52 @@
     }
     &.empty_star_dark {
       fill: $border_dark;
+      // &:hover{
+        // fill: mix($active_dark, $bg_dark, 50%);
+        // border: 1px solid red;
+      // }
     }
     &.empty_star_light {
       fill: $border_light;
+      // &:hover{
+        // fill: mix($primary, $white, 20%);
+        // fill: red;
+      // }
     }
   }
+  // @media (hover: hover) {
+  //   &:hover {
+  //   // &:active,
+  //   // &:focus {
+  //     // background-color: mix($primary, $white, 20%);
+  //     input {
+  //       background-color: mix($primary, $white, 20%);
+  //     }
+  //   }
+  // }
+  // svg {
+    // svg.interactive-star-icon:hover {
+  // [class*="interactive-star-icon"] {
+  //   fill: red;
+  //   @media (hover: hover) {
+  //     &:hover {
+  //       fill: mix($primary, $white, 20%) !important;
+  //     }
+  //   }
+  // }
+  // .interactive-star-icon{
+  //   &:hover,&.hovered {
+  //     fill: mix($primary, $white, 20%) !important;
+  //   }
+  // }
+  // .interactive-star-icon {
+  //   &:not(.yellow-star-selected) {
+  //     &:hover {
+  //       // fill: mix($primary, $white, 20%);
+  //       fill: blue;
+  //     }
+  //   }
+// }
 
   .pb_star_rating_number_xs {
     max-height: 14px;
@@ -111,6 +152,8 @@
       }
     }
   }
+
+  // Rails select styles only if React hover styles are state managed hover (initially both)
   .yellow-star-selected {
     color: $yellow; 
   }
@@ -120,4 +163,61 @@
   .suble-star-selected {
     color: $text_lt_default;
   }
+
+  // React interactivity styles 
+  path {
+    transition: fill 0.2s;
+  }
+  &.star-selected {
+    .yellow-star-selected {
+      color: $yellow; 
+    }
+    .primary-star-selected {
+      color: $royal 
+    }
+    .suble-star-selected {
+      color: $text_lt_default;
+    }
+  }
+  .star-hovered {
+    path {
+      fill: mix($primary, $white, 20%);
+    }
+  }
+  &.dark{
+    .star-hovered {
+      path {
+        fill: mix($active_dark, $bg_dark, 50%);
+      }
+    }
+  }
+
+  // Focus states
+  .pb_custom_icon {
+    // &:focus {
+    //   border-radius: 2px;
+    //   outline: 1px solid $primary;
+    //   outline-offset: 2px;
+    // }
+    &:focus-visible {
+      border-radius: 2px;
+      outline: 1px solid $primary;
+      outline-offset: 2px;
+    }
+  }
+  &.dark {
+    .pb_custom_icon {
+      // &:focus {
+      //   border-radius: 2px;
+      //   outline: 1px solid $active_dark;
+      //   outline-offset: 2px;
+      // }
+      &:focus-visible {
+        border-radius: 2px;
+        outline: 1px solid $active_dark;
+        outline-offset: 2px;
+      }
+    }
+  }
 }
+
