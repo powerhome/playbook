@@ -1,5 +1,5 @@
 import React from 'react'
-import { Date as FormattedDate } from '../..'
+import { Date as FormattedDate } from 'playbook-ui'
 
 const DateVariants = (props) => {
   return (

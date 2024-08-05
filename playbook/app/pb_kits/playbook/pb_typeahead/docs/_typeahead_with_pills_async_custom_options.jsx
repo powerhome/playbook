@@ -1,12 +1,10 @@
-/* @flow */
-
 import React, { useState } from 'react'
 
 import {
   Caption,
   Typeahead,
   User,
-} from '../..'
+} from 'playbook-ui'
 
 /**
  *
@@ -16,13 +14,6 @@ import {
  * `value` and `label` among other possible fields
  * @summary - for doc example purposes only
  */
-
-type UserProps = {
-  imageUrl?: String,
-  label?: String,
-  territory?: String,
-  type?: String,
-}
 
 const filterResults = (results) =>
   results.items.map((result) => {
@@ -63,28 +54,27 @@ const TypeaheadWithPillsAsyncCustomOptions = (props) => {
 
   return (
     <>
-      <If condition={users && users.length > 0}>
-        <Caption
-            marginBottom="xs"
-            text="State (Users)"
-            {...props}
-        />
-        <For
-            each="user"
-            of={users}
-        >
-          <User
-              align="left"
-              avatar
-              avatarUrl={user.imageUrl}
-              key={user.value}
-              marginBottom="md"
-              name={user.label}
-              orientation="horizontal"
+      {users && users.length > 0 && (
+        <React.Fragment>
+          <Caption
+              marginBottom="xs"
+              text="State (Users)"
               {...props}
           />
-        </For>
-      </If>
+          {users.map((user) => (
+            <User
+                align="left"
+                avatar
+                avatarUrl={user.imageUrl}
+                key={user.value}
+                marginBottom="md"
+                name={user.label}
+                orientation="horizontal"
+                {...props}
+            />
+          ))}
+        </React.Fragment>
+      )}
       <Typeahead
           async
           isMulti
@@ -93,7 +83,7 @@ const TypeaheadWithPillsAsyncCustomOptions = (props) => {
           onChange={handleOnChange}
           onMultiValueClick={handleOnMultiValueClick}
           placeholder="type the name of a Github user"
-          valueComponent={(props: UserProps) => (
+          valueComponent={(props) => (
             <User
                 avatar
                 avatarUrl={props.imageUrl}

@@ -1,4 +1,4 @@
-import colors from '../tokens/exports/_colors.scss'
+import colors from '../tokens/exports/_colors.module.scss'
 
 const mapTheme = {
     marker : colors.primary_action,

@@ -5,6 +5,8 @@ require "playbook/pagination_renderer"
 require "will_paginate/array"
 
 class PagesController < ApplicationController
+  include ::ViteRails::TagHelpers
+
   before_action :set_js, only: %i[visual_guidelines]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
@@ -19,7 +21,7 @@ class PagesController < ApplicationController
     @kit = params[:name]
     @params = params
     @examples = pb_doc_kit_examples(@kit, @type)
-    @css = view_context.asset_pack_url("application.css")
+    @css = view_context.vite_asset_path("site_styles/main.scss")
 
     # first example from each kit
     examples = @examples.map do |example|
@@ -211,7 +213,7 @@ private
   end
 
   def categories
-    aggregate_kits.map { |item| item["name"] }
+    aggregate_kits.map { |item| item["category"] }
   end
 
   def all_kits
@@ -229,7 +231,7 @@ private
   end
 
   def set_category
-    @category = params[:name]
+    @category = params[:category]
     if categories.include?(@category) && helpers.category_has_kits?(category_kits: kit_categories, type: params[:type])
       @category_kits = kit_categories
       @kits = params[:name]
@@ -239,8 +241,13 @@ private
   end
 
   def kit_categories
-    @category = params[:name]
-    aggregate_kits.find { |item| item["name"] == @category }["components"].map { |component| component["name"] }
+    @category = params[:category]
+    components = aggregate_kits.find { |item| item["category"] == @category }["components"]
+    filter_kits_by_status(components, status: "beta").map { |component| component["name"] }
+  end
+
+  def filter_kits_by_status(components, status: nil)
+    components.reject { |component| status && component["status"] == status }
   end
 
   def set_kit
@@ -344,6 +351,7 @@ private
     @kits_array = @kits.first.split("&")
     params[:name] ||= @kits_array[0]
     @selected_kit = params[:name]
+    @variants = params[:variants].present? ? params[:variants].split("&") : []
     @type = type
 
     render template: "pages/kit_collection", layout: "layouts/fullscreen"

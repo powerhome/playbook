@@ -2,7 +2,6 @@ import React, { forwardRef, useEffect, useRef, useState, useImperativeHandle } f
 import classnames from 'classnames'
 
 import intlTelInput from 'intl-tel-input'
-import 'intl-tel-input/build/css/intlTelInput.css'
 import 'intl-tel-input/build/js/utils.js'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'

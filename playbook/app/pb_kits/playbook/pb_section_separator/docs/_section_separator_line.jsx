@@ -1,5 +1,5 @@
 import React from 'react'
-import { SectionSeparator } from '../../'
+import { SectionSeparator } from 'playbook-ui'
 
 const SectionSeparatorLine = (props) => {
   return (

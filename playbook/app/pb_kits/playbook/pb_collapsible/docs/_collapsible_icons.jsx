@@ -1,5 +1,5 @@
 import React from 'react'
-import { Collapsible } from '../..'
+import { Collapsible } from 'playbook-ui'
 
 const CollapsibleIcons = (props) => {
 
@@ -7,6 +7,7 @@ const CollapsibleIcons = (props) => {
   <>
   <Collapsible
       icon={['plus','minus']}
+      iconColor='white'
   >
     <Collapsible.Main {...props}>
       <div>{'Main Section'}</div>

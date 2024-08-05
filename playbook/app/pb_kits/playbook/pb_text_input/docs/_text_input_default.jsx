@@ -92,9 +92,9 @@ const TextInputDefault = (props) => {
           {...props}
       />
 
-      <If condition={firstName !== ''}>
-        {`First name is: ${firstName}`}
-      </If>
+      {firstName !== '' && (
+        <React.Fragment>{`First name is: ${firstName}`}</React.Fragment>
+      )}
     </div>
   )
 }

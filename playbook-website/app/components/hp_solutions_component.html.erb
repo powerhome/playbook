@@ -130,7 +130,7 @@
 								}) do %>
 									<%= pb_rails("image", props: {
 										alt: "React logo",
-										url: asset_pack_path("hp-react-solutions.svg")
+										url: vite_asset_path("images/hp-react-solutions.svg")
 									}) %>
 								<% end %>
 							<% end %>
@@ -166,7 +166,7 @@
 								}) do %>
 									<%= pb_rails("image", props: {
 										alt: "Rails logo",
-										url: asset_pack_path("hp-rails-solutions.svg")
+										url: vite_asset_path("images/hp-rails-solutions.svg")
 									}) %>
 								<% end %>
 							<% end %>
@@ -202,7 +202,7 @@
 								}) do %>
 									<%= pb_rails("image", props: {
 										alt: "swift logo",
-										url: asset_pack_path("hp-swift-solutions.svg")
+										url: vite_asset_path("images/hp-swift-solutions.svg")
 									}) %>
 								<% end %>
 							<% end %>
@@ -238,7 +238,7 @@
 								}) do %>
 									<%= pb_rails("image", props: {
 										alt: "HTML-CSS logo",
-										url: asset_pack_path("hp-htmlcss-solutions.svg")
+										url: vite_asset_path("images/hp-htmlcss-solutions.svg")
 									}) %>
 								<% end %>
 							<% end %>
@@ -275,4 +275,4 @@
 	<% end %>
 <% end %>
 
-<%= javascript_pack_tag 'imageComparsionSlider' %>
+<%= vite_javascript_tag 'imageComparsionSlider' %>

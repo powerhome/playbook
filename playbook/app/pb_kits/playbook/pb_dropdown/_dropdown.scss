@@ -115,7 +115,7 @@
 
     &.error {
       [class*=pb_body_kit] {
-        margin-top: $space_xs / 2;
+        margin-top: calc($space_xs / 2);
       }
 
       [class*="dropdown_trigger_wrapper"] {

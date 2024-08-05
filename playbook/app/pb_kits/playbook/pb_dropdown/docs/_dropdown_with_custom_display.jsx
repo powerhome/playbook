@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dropdown, User, Flex, FlexItem, Badge, Avatar } from '../../'
+import { Dropdown, User, Flex, FlexItem, Badge, Avatar } from 'playbook-ui'
 
 const DropdownWithCustomDisplay = (props) => {
   const [selectedOption, setSelectedOption] = useState();

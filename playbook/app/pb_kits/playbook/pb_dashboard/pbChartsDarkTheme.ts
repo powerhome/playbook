@@ -1,5 +1,5 @@
-import colors from '../tokens/exports/_colors.scss'
-import typography from '../tokens/exports/_typography.scss'
+import colors from '../tokens/exports/_colors.module.scss'
+import typography from '../tokens/exports/_typography.module.scss'
 
 import { ThemeProps } from './themeTypes'
 
@@ -33,7 +33,7 @@ const highchartsDarkTheme: ThemeProps = {
     style: {
       color: colors.text_dk_default,
       fontFamily: typography.font_family_base,
-      fontWeight: typography.regular,
+      fontWeight: typography.bold,
       fontSize: typography.heading_3,
     },
   },
