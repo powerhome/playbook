@@ -226,6 +226,7 @@ const Icon = (props: IconProps) => {
               id,
               width: 'auto',
               height: 'auto',
+              tabIndex: '0',
             })
           }
         </>
