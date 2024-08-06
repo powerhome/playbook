@@ -9,10 +9,10 @@
   justify-content: flex-start;
 
   path {
-    &.suble_star_dark {
+    &.subtle_star_dark {
       fill: $text_dk_default;
     }
-    &.suble_star_light {
+    &.subtle_star_light {
       fill: $text_lt_default;
     }
     &.outline_star_dark {
@@ -50,8 +50,8 @@
   $star-styles: (
     yellow_star: (color: $yellow),
     primary_star: (color: $royal),
-    suble_star_light: (color: $text_lt_default),
-    suble_star_dark: (color: $text_dk_default),
+    subtle_star_light: (color: $text_lt_default),
+    subtle_star_dark: (color: $text_dk_default),
     empty_star_dark: (color: $border_dark),
     empty_star_light: (color: $border_light),
     outline_empty_star_dark: (color: transparent),
@@ -125,8 +125,16 @@
   .primary-star-selected {
     color: $royal 
   }
-  .suble-star-selected {
+  .subtle-star-selected {
     color: $text_lt_default;
+  }
+  &.dark {
+    // .primary-star-selected {
+    //   color: $active_dark; 
+    // }
+    .subtle-star-selected {
+      color: $text_dk_default;
+    }
   }
   // React selected styles
   &.star-selected {
@@ -138,7 +146,7 @@
       color: $royal;
       // animation: enlarge .5s ease-in-out forwards;
     }
-    .suble-star-selected {
+    .subtle-star-selected {
       color: $text_lt_default;
       // animation: enlarge .5s ease-in-out forwards;
     }

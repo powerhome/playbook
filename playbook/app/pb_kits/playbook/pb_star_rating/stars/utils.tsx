@@ -53,7 +53,7 @@ const starOutline = (
 )
 
 export const getStarIconObject = (backgroundType: string, color: string, dark: boolean, size: string) => {
-    const colorClassName = color === "subtle" ? (dark ? "suble_star_dark" : "suble_star_light") : `${color}_star`
+    const colorClassName = color === "subtle" ? (dark ? "subtle_star_dark" : "subtle_star_light") : `${color}_star`
     const backgroundClassName = backgroundType === "outline" ? (dark ? "outline_empty_star_dark" : "outline_empty_star_light") : (dark ? "empty_star_dark" : "empty_star_light")
 
     return {
