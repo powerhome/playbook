@@ -8,7 +8,7 @@ import {
   DraggableProvider,
   Card,
   Caption,
-} from "../../";
+} from "playbook-ui";
 
 // Initial items to be dragged
 const data = [

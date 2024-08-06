@@ -6,7 +6,7 @@ import {
   ListItem,
   PbReactPopover,
   Flex,
-} from '../..'
+} from 'playbook-ui'
 
 const PopoverWithButton = (props) => {
   const [showPopover, setShowPopover] = useState(false)

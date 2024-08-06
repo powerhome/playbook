@@ -2,7 +2,7 @@
 import React from 'react'
 import { render, screen, cleanup } from "../utilities/test-utils";
 
-import { Hashtag } from "..";
+import { Hashtag } from "playbook-ui";
 
 
 const testId = "primary-test"

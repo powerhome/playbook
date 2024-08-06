@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Flex, Image, Draggable, DraggableProvider } from "../../";
+import { Flex, Image, Draggable, DraggableProvider } from "playbook-ui";
 
 // Initial items to be dragged
 const data = [

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, FlexItem } from  '../../'
+import { Flex, FlexItem } from 'playbook-ui'
 
 const FlexGap = (props) => {
   const count = () => {

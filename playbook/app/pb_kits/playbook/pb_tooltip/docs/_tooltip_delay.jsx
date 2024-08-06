@@ -1,7 +1,5 @@
-// @flow
-
 import React from 'react'
-import { Button, Tooltip, Flex, FlexItem } from '../..';
+import { Button, Tooltip, Flex, FlexItem } from 'playbook-ui';
 
 const TooltipDelay = (props) => {
 

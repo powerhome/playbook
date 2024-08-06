@@ -8,7 +8,7 @@ $icon_colors: map-merge($merge_kits3, $data_colors);
 
 .pb_custom_icon, .pb_icon_kit {
   @each $color_name, $color_value in $icon_colors {
-    &[class*="#{$color_name}"] {
+    &[class*="color_#{$color_name}"]{
       color: $color_value;
     }
   }
