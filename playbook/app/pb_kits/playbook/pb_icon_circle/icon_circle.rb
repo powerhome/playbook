@@ -10,8 +10,8 @@ module Playbook
                   values: %w[xxs xs sm md base lg xl],
                   default: "md"
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[default royal blue orange purple teal red yellow green orange],
-                     default: "default"
+                     values: %w[default royal blue orange purple teal red yellow green orange lighter],
+                     default: "lighter"
 
       def classname
         generate_classname("pb_icon_circle_kit", "size_#{size}", variant)

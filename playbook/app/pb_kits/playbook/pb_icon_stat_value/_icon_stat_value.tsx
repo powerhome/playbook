@@ -32,7 +32,8 @@ type IconStatValueProps = {
     | "red"
     | "yellow"
     | "orange"
-    | "green",
+    | "green"
+    | "lighter",
 }
 
 const IconStatValue = (props: IconStatValueProps): React.ReactElement => {
@@ -49,7 +50,7 @@ const IconStatValue = (props: IconStatValueProps): React.ReactElement => {
     text = '',
     unit = '',
     value = 0,
-    variant = 'default',
+    variant = 'lighter',
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)

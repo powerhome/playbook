@@ -18,7 +18,7 @@ describe("IconStatValue Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("pb_icon_stat_value_kit_horizontal_sm_default")
+        expect(kit).toHaveClass("pb_icon_stat_value_kit_horizontal_sm_lighter")
     })
 
     test("renders icon", () => {
@@ -101,7 +101,7 @@ describe("IconStatValue Kit", () => {
             )
     
             const kit = screen.getByTestId(testId)
-            expect(kit).toHaveClass(`pb_icon_stat_value_kit_horizontal_${sizeProp}_default`)
+            expect(kit).toHaveClass(`pb_icon_stat_value_kit_horizontal_${sizeProp}_lighter`)
 
             cleanup()
         })
@@ -115,7 +115,8 @@ describe("IconStatValue Kit", () => {
         "teal",
         "red",
         "yellow",
-        "green"].forEach(
+        "green",
+        "lighter"].forEach(
             (colorProp) => {
             render(
                 <IconStatValue
@@ -148,7 +149,7 @@ describe("IconStatValue Kit", () => {
             )
     
             const kit = screen.getByTestId(testId)
-            expect(kit).toHaveClass("pb_icon_stat_value_kit_vertical_sm_default")
+            expect(kit).toHaveClass("pb_icon_stat_value_kit_vertical_sm_lighter")
     })
 
 })
