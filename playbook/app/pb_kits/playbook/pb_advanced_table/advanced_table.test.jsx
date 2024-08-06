@@ -433,3 +433,33 @@ test("inlineRowLoading prop renders inline loading if true", () => {
   const inlineLoading = kit.querySelector(".fa-spinner")
   expect(inlineLoading).toBeInTheDocument()
 })
+
+test("responsive prop functions as expected", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        responsive="scroll"
+        tableData={MOCK_DATA}
+        tableProps={tableProps}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass("pb_advanced_table table-responsive-scroll")
+})
+
+test("responsive none prop functions as expected", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        responsive="none"
+        tableData={MOCK_DATA}
+        tableProps={tableProps}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass("pb_advanced_table table-responsive-none")
+})

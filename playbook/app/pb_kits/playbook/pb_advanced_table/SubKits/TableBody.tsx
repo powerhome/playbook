@@ -37,16 +37,21 @@ export const TableBody = ({
     columnDefinitions,
     enableToggleExpansion,
     handleExpandOrCollapse,
+    isPinnedLeft = false,
     inlineRowLoading,
     loading,
+    responsive,
     table,
   } = useContext(AdvancedTableContext)
 
   const classes = classnames(
     buildCss("pb_advanced_table_body"),
+    { 'pinned-left': responsive === "scroll" && isPinnedLeft },
     globalProps(props),
     className
   )
+
+  const columnPinning = table.getState().columnPinning;
 
   return (
     <>
@@ -73,38 +78,37 @@ export const TableBody = ({
                     table={table}
                 />
               )}
+            <tr
+                className={`${rowBackground ? "bg-silver" : "bg-white"} ${
+                  row.depth > 0 ? `depth-sub-row-${row.depth}` : ""
+              }`}
+                id={`${row.index}-${row.id}-${row.depth}-row`}
+            >
+              {row.getVisibleCells().map((cell, i) => {
+                const isPinnedLeft = columnPinning.left.includes(cell.column.id)
 
-              <tr
-                  className={`${rowBackground ? "bg-silver" : "bg-white"} ${
-                    row.depth > 0 ? `depth-sub-row-${row.depth}` : ""
-                  }`}
-                  id={`${row.index}-${row.id}-${row.depth}-row`}
-              >
-                {row.getVisibleCells().map((cell, i) => (
+                return (
                   <td
                       align="right"
-                      className={`${cell.id}-cell position_relative ${
-                      isChrome() ? "chrome-styles" : ""
-                      }`}
+                      className={classnames(
+                        `${cell.id}-cell position_relative`,
+                        isChrome() ? "chrome-styles" : "",
+                        isPinnedLeft && 'pinned-left'
+                      )}
                       key={`${cell.id}-data`}
                   >
-                    {collapsibleTrail &&
-                      i === 0 &&
-                      row.depth > 0 &&
-                      renderCollapsibleTrail(row.depth)}
+                    {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
                     <span id={`${cell.id}-span`}>
                       {loading ? (
                         <LoadingCell />
                       ) : (
-                        flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )
+                        flexRender(cell.column.columnDef.cell, cell.getContext())
                       )}
                     </span>
                   </td>
-                ))}
-              </tr>
+                )
+              })}
+            </tr>
 
               {/* Display LoadingInline if Row Data is querying and there are no children already */}
               {isDataLoading ? (
