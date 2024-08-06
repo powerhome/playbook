@@ -14,7 +14,7 @@ module Playbook
       prop :no_border, type: Playbook::Props::Boolean, default: false
 
       def classname
-        generate_classname("pb_online_status_kit", status, is_no_border, size)
+        generate_classname("pb_online_status_kit", status, is_no_border, "size", size)
       end
 
       def is_no_border

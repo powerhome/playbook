@@ -44,7 +44,7 @@ $pb_online_status_statuses: (
   }
 
   @each $size, $value in $pb_online_status_sizes {
-    &[class*=_#{$size}] {
+    &[class*=_size_#{$size}] {
       width: $value;
       height: $value;
       flex-basis: $value;
