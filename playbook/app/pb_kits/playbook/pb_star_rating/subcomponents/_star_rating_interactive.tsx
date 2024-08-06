@@ -56,6 +56,9 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                 if (isHovered) {
                     starClass += ' star-hovered'
                 }
+                if (isFilled && starIndex === interactiveStarValue) {
+                    starClass += ' star-selected'
+                }
 
                 return (
                     <Icon

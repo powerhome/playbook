@@ -23,52 +23,11 @@
     }
     &.empty_star_dark {
       fill: $border_dark;
-      // &:hover{
-        // fill: mix($active_dark, $bg_dark, 50%);
-        // border: 1px solid red;
-      // }
     }
     &.empty_star_light {
       fill: $border_light;
-      // &:hover{
-        // fill: mix($primary, $white, 20%);
-        // fill: red;
-      // }
     }
   }
-  // @media (hover: hover) {
-  //   &:hover {
-  //   // &:active,
-  //   // &:focus {
-  //     // background-color: mix($primary, $white, 20%);
-  //     input {
-  //       background-color: mix($primary, $white, 20%);
-  //     }
-  //   }
-  // }
-  // svg {
-    // svg.interactive-star-icon:hover {
-  // [class*="interactive-star-icon"] {
-  //   fill: red;
-  //   @media (hover: hover) {
-  //     &:hover {
-  //       fill: mix($primary, $white, 20%) !important;
-  //     }
-  //   }
-  // }
-  // .interactive-star-icon{
-  //   &:hover,&.hovered {
-  //     fill: mix($primary, $white, 20%) !important;
-  //   }
-  // }
-  // .interactive-star-icon {
-  //   &:not(.yellow-star-selected) {
-  //     &:hover {
-  //       // fill: mix($primary, $white, 20%);
-  //       fill: blue;
-  //     }
-  //   }
-// }
 
   .pb_star_rating_number_xs {
     max-height: 14px;
@@ -153,7 +112,13 @@
     }
   }
 
-  // Rails select styles if React hover styles are state-managed (was initially both)
+  // Interactivity 
+  path {
+    transition: fill 0.2s
+    // transition: fill 0.2s, transform 0.5s ease-in-out;
+    // transition: transform 0.5s ease-in-out;
+  }
+  // Rails selected styles
   .yellow-star-selected {
     color: $yellow; 
   }
@@ -163,20 +128,19 @@
   .suble-star-selected {
     color: $text_lt_default;
   }
-
-  // React interactivity styles 
-  path {
-    transition: fill 0.2s;
-  }
+  // React selected styles
   &.star-selected {
     .yellow-star-selected {
       color: $yellow; 
+      // animation: enlarge .5s ease-in-out forwards;
     }
     .primary-star-selected {
-      color: $royal 
+      color: $royal;
+      // animation: enlarge .5s ease-in-out forwards;
     }
     .suble-star-selected {
       color: $text_lt_default;
+      // animation: enlarge .5s ease-in-out forwards;
     }
   }
   .star-hovered {
@@ -216,4 +180,16 @@
     }
   }
 }
+// Animation stuff
+// @keyframes enlarge {
+//   0% {
+//     transform: scale(0);
+//   }
+//   70% {
+//     transform: scale(1.05);
+//   }
+//   100% {
+//     transform: scale(1);
+//   }
+// }
 
