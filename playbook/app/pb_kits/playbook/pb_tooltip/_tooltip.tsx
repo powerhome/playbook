@@ -50,8 +50,8 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     ...rest
   } = props
 
-  const dataProps: { [key: string]: any } = buildDataProps(data)
-  const ariaProps: { [key: string]: any } = buildAriaProps(aria)
+  const dataProps: { [key: string]: string } = buildDataProps(data)
+  const ariaProps: { [key: string]: string } = buildAriaProps(aria)
   const htmlProps = buildHtmlProps(htmlOptions)
   
   const css = classnames(

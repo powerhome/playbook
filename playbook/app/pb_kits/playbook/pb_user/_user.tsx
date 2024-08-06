@@ -26,7 +26,7 @@ type UserProps = {
   title?: string,
 } & GlobalProps
 
-const User = (props: UserProps) => {
+const User = (props: UserProps): React.ReactElement => {
   const {
     align = 'left',
     aria = {},

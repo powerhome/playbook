@@ -17,7 +17,7 @@ type TableHeadPropTypes = {
   tag?: "table" | "div";
 };
 
-const TableHead = (props: TableHeadPropTypes) => {
+const TableHead = (props: TableHeadPropTypes): React.ReactElement => {
   const {
     aria = {},
     children,

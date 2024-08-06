@@ -1,3 +1,5 @@
+/* eslint-disable react/no-multi-comp */
+
 import React from "react";
 import { ensureAccessible, renderKit, render, screen } from "../utilities/test-utils"
 

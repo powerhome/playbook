@@ -107,7 +107,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         required={required}
         type={type}
         value={value}
-    />)
+     />)
   )
 
   const addOnInput = (

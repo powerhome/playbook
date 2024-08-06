@@ -19,7 +19,7 @@ type TableRowPropTypes = {
   tag?: "table" | "div";
 };
 
-const TableRow = (props: TableRowPropTypes) => {
+const TableRow = (props: TableRowPropTypes): React.ReactElement => {
   const {
     aria = {},
     children,

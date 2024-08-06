@@ -1,3 +1,5 @@
+/* eslint-disable react/no-multi-comp */
+
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
@@ -24,7 +26,7 @@ type WalkthroughProps = {
   disableOverlay?: boolean,
   disableOverlayClose?: boolean,
   disableScrolling?: boolean,
-  floaterProps?: object,
+  floaterProps?: Record<string, unknown>,
   hideBackButton?: boolean,
   hideCloseButton?: boolean,
   showProgress?: boolean,
@@ -58,89 +60,92 @@ type TooltipProps = {
     disableBeacon?: boolean,
   },
   skip?: boolean,
-  backProps?: object,
-  closeProps?: object,
-  primaryProps?: object,
-  skipProps?: object,
-  tooltipProps?: object,
+  backProps?: Record<string, unknown>,
+  closeProps?: Record<string, unknown>,
+  primaryProps?: Record<string, unknown>,
+  skipProps?: Record<string, unknown>,
+  tooltipProps?: Record<string, unknown>,
 }
 
+// eslint-disable-next-line react/display-name
 const Tooltip = React.forwardRef((props: TooltipProps) => (
-  <div
+<div
     className="pb_card_kit_border_none p_none"
     {...props.tooltipProps}
+>
+  {props.step.title && <div>
+  <Flex
+      align="center"
+      justify="between"
+      padding="xs"
   >
-    {props.step.title && <div>
-      <Flex
-        align="center"
-        justify="between"
-        padding="xs"
-      >
-        <Title
+      <Title
           paddingLeft="xs"
           size={4}
-        >
-          {props.step.title}
-        </Title>
-        {props.skip && (<Button
+      >
+      {props.step.title}
+      </Title>
+      {props.skip && (
+      <Button
           {...props.skipProps}
           id="skip"
           text="Skip Tour"
           variant="link"
-        />)}
-        <Button
+      />
+      )}
+      <Button
           {...props.skipProps}
           id="skip"
           text="Skip Tour"
           variant="link"
-        />
-      </Flex>
-      <SectionSeparator />
-    </div>}
+      />
+  </Flex>
+  <SectionSeparator />
+  </div>}
 
-    <Flex padding="sm">{props.step.content}</Flex>
-    <SectionSeparator />
-    <Flex
+  <Flex padding="sm">{props.step.content}</Flex>
+  <SectionSeparator />
+  <Flex
       justify={props.index == 0 ? 'end' : 'between'}
       padding="xs"
-    >
+  >
 
-      {props.index > 0 && (
-        <Button
+  {props.index > 0 && (
+      <Button
           {...props.backProps}
           id="back"
           text="Back"
-        />
-      )}
+      />
+  )}
 
-      {props.continuous && !props.isLastStep &&
-        <Button
+  {props.continuous && !props.isLastStep &&
+      <Button
           {...props.primaryProps}
           id="next"
           text="Next"
-        />
-      }
+      />
+  }
 
-      {!props.continuous &&
-        <Button
+  {!props.continuous &&
+      <Button
           {...props.closeProps}
           id="close"
           text="Close"
-        />
-      }
+      />
+  }
 
-      {!((props.continuous && !props.isLastStep) || (!props.continuous)) &&
-        <Button
+  {!((props.continuous && !props.isLastStep) || (!props.continuous)) &&
+      <Button
           {...props.closeProps}
           id="close"
           text="Close"
-        />
-      }
-    </Flex>
-  </div>
+      />
+  }
+  </Flex>
+</div>
 )) as unknown as React.ForwardRefRenderFunction<HTMLDivElement, TooltipRenderProps>
 
-const Walkthrough = (props: WalkthroughProps) => {
+const Walkthrough = (props: WalkthroughProps): React.ReactElement => {
   const {
     aria = {},
     callback,
@@ -170,24 +175,24 @@ const Walkthrough = (props: WalkthroughProps) => {
 
   return (
     <div
-      {...ariaProps}
-      {...dataProps}
-      {...htmlProps}
-      className={classes}
-      id={id}
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
     >
       <Joyride
-        callback={callback}
-        continuous={continuous}
-        disableOverlay={disableOverlay}
-        disableScrolling
-        floaterProps={floaterProps}
-        run={run}
-        showSkipButton={showSkipButton}
-        steps={steps}
-        styles={styles}
-        tooltipComponent={Tooltip}
-        {...props}
+          callback={callback}
+          continuous={continuous}
+          disableOverlay={disableOverlay}
+          disableScrolling
+          floaterProps={floaterProps}
+          run={run}
+          showSkipButton={showSkipButton}
+          steps={steps}
+          styles={styles}
+          tooltipComponent={Tooltip}
+          {...props}
       />
     </div>
 
