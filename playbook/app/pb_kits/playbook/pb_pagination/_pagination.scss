@@ -11,28 +11,29 @@ $top_bottom_radius: 0px;
   border-radius: $border_rad_light;
   border: $border_rad_lightest solid $border_light;
   background-color: $white;
-  padding: $space_xxs 0px !important;
-  li {
+  padding: $space_xs 0px !important;
+  li, .pagination-number {
     display: inline;
-    > a, li > span {
+    > a, li > span, .pagination-number {
     padding: $pagination_padding;
     text-decoration: none;
   }}
-  li:first-child > a, li:first-child > span  {
+  li:first-child > a, li:first-child > span, .pagination-number, .pagination-left {   
+    background-color: $white;
     padding: $pagination_padding;
     border-right: $border_rad_lightest solid $border_light;
     z-index: 2;
     border-top-right-radius: $top_bottom_radius;
     border-bottom-right-radius: $top_bottom_radius;
   }
-  li:last-child > a, li:last-child > span {
+  li:last-child > a, li:last-child > span, .pagination-number, .pagination-right {
     padding: $pagination_padding;
     border-left: $border_rad_lightest solid $border_light;
     z-index: 2;
     border-top-left-radius: $top_bottom_radius;
     border-bottom-left-radius: $top_bottom_radius;
   }
-  a {
+  a, .pagination-number {
     color: $text_lt_default;
     font-size: $text_small;
     font-weight: $regular;
@@ -52,8 +53,8 @@ $top_bottom_radius: 0px;
       transition: none;
     }
   }
-  .active > span {
-    background-color: $primary;
+  .active > span, .pagination-number.active {
+    background-color: $primary !important;
     border-radius: $border_rad_light;
     color: #fff;
     padding: $pagination_padding;
@@ -61,9 +62,24 @@ $top_bottom_radius: 0px;
     text-decoration: none;
     font-weight: $bold;
     font-size: $text_small;
+    height: 29px;
   }
   .disabled > span {
     padding: $pagination_padding;
     font-size: $text_small;
+  }
+
+  .pagination-right, .pagination-left {
+    background-color: $white;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .pagination-left {
+    border-left: none;
+  }
+
+  .pagination-right {
+    border-right: none;
   }
 }

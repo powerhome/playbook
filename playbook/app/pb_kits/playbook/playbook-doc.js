@@ -67,6 +67,7 @@ import * as MultipleUsersStacked from 'pb_multiple_users_stacked/docs'
 import * as Nav from 'pb_nav/docs'
 import * as OnlineStatus from 'pb_online_status/docs'
 import * as Overlay from 'pb_overlay/docs'
+import * as Pagination from 'pb_pagination/docs'
 import * as Passphrase from 'pb_passphrase/docs'
 import * as PbReactPopover from 'pb_popover/docs'
 import * as Person from 'pb_person/docs'
@@ -172,6 +173,7 @@ WebpackerReact.registerComponents({
   ...Nav,
   ...OnlineStatus,
   ...Overlay,
+  ...Pagination,
   ...Passphrase,
   ...PbReactPopover,
   ...Person,

@@ -2,16 +2,18 @@ import React from 'react'
 
 import Pagination from '../_pagination'
 
-const PaginationDefault = (props) => (
+const PaginationDefault = (props) => {
+
+    return (
   <>
-  {"hello"}
      <Pagination
-         defaultPage={1}
-         pageRange={6}
+         defaultPage={3}
+         pageRange={5}
          totalPages={10}
          {...props}
       />
   </>
-)
+    )
+}
 
 export default PaginationDefault
