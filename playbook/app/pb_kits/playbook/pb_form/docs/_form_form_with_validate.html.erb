@@ -41,3 +41,31 @@
     <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
   <% end %>
 <% end %>
+
+<%= pb_rails("button", props: { text: "Open Complex Dialog", data:{"open-dialog": "dialog-complex"} }) %>
+<%= pb_rails("dialog", props: { id:"dialog-complex", size: "lg", full_height: true }) do %>
+    <%= pb_rails("dialog/dialog_header", props: { id: "dialog-complex" } ) do %>
+      <%= pb_rails("body", props: { text: "What do you need us to take care of?" }) %>
+    <% end %>
+    <%= pb_rails("dialog/dialog_body") do %>
+      <%= pb_form_with(scope: :example, method: :get, url: "", validate: true) do |form| %>
+        <%= form.text_field :example_text_field, props: { label: true, required: true } %>
+        <%= form.phone_number_field :example_phone_number_field, props: { label: "Example phone field" } %>
+        <%= form.email_field :example_email_field, props: { label: true, required: true } %>
+        <%= form.number_field :example_number_field, props: { label: true, required: true } %>
+        <%= form.search_field :example_project_number, props: { label: true, required: true, validation: { pattern: "[0-9]{2}-[0-9]{5}", message: "Please enter a valid project number (example: 33-12345)." } } %>
+        <%= form.password_field :example_password_field, props: { label: true, required: true } %>
+        <%= form.url_field :example_url_field, props: { label: true, required: true } %>
+        <%= form.text_area :example_text_area, props: { label: true, required: true } %>
+        <%= form.select :example_select, [ ["Yes", 1], ["No", 2] ], props: { label: true, blank_selection: "Select One...", required: true } %>
+        <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true, blank_selection: "Select One...", required: true } %>
+        <%= form.check_box :example_checkbox, props: { text: "Example Checkbox", label: true, required: true } %>
+        <%= form.date_picker :example_date_picker_2, props: { label: true, required: true } %>
+        <%= form.actions do |action| %>
+          <%= action.submit %>
+          <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Back", confirm_button: "Send my Issue", confirm_button_id:"confirm-complex", id: "dialog-complex"}) %>
+<% end %>
