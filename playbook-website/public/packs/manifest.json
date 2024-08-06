@@ -1,0 +1,237 @@
+{
+  "HTML5Logo.svg": "/packs/39fe06a975a465101658faa6fabde37b.svg",
+  "LargeBackgroundGrid.svg": "/packs/d2661db8f278e43cee4822182831be18.svg",
+  "MediumBackgroundGrid.svg": "/packs/4719c3eb47f3e343819b792fd28ac07b.svg",
+  "PurpleUnderline.svg": "/packs/cd83d8d16d5d50ee78e0ea5d462b3935.svg",
+  "RailsLogo.svg": "/packs/aff57bd495aaee006ea34f6c7d06850e.svg",
+  "ReactLogo.svg": "/packs/6fbe62ce4f8aa227ed76be076a673b15.svg",
+  "SmallBackgroundGrid.svg": "/packs/33951b411ebda23b00a741c37e800959.svg",
+  "SwiftLogo.svg": "/packs/a636f13d0d60d668f21dca9955d10c73.svg",
+  "app.js": "/packs/js/app-baad4b88829ca5e90ad9.chunk.js",
+  "app.js.map": "/packs/js/app-baad4b88829ca5e90ad9.chunk.js.map",
+  "application.js": "/packs/js/application-2575eff03fdbc56f6f02.chunk.js",
+  "application.js.map": "/packs/js/application-2575eff03fdbc56f6f02.chunk.js.map",
+  "application~main_sidebar.js": "/packs/js/application~main_sidebar-4a3515506cf17c4dfc25.chunk.js",
+  "application~main_sidebar.js.map": "/packs/js/application~main_sidebar-4a3515506cf17c4dfc25.chunk.js.map",
+  "app~application.css": "/packs/css/app~application-e361fa7e.chunk.css",
+  "app~application.css.map": "/packs/css/app~application-e361fa7e.chunk.css.map",
+  "app~application.js": "/packs/js/app~application-04c665146ef798059a62.chunk.js",
+  "app~application.js.map": "/packs/js/app~application-04c665146ef798059a62.chunk.js.map",
+  "app~application~main_sidebar~samples~visual_guidelines.js": "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js",
+  "app~application~main_sidebar~samples~visual_guidelines.js.map": "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js.map",
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/packs/runtime-39510128e62c1c12499e.js",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js",
+        "/packs/js/vendors~app~application-fad47c49789ae6a51efa.chunk.js",
+        "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js",
+        "/packs/js/app~application-04c665146ef798059a62.chunk.js",
+        "/packs/js/app-baad4b88829ca5e90ad9.chunk.js"
+      ],
+      "js.map": [
+        "/packs/runtime-39510128e62c1c12499e.js.map",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js.map",
+        "/packs/js/vendors~app~application-fad47c49789ae6a51efa.chunk.js.map",
+        "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js.map",
+        "/packs/js/app~application-04c665146ef798059a62.chunk.js.map",
+        "/packs/js/app-baad4b88829ca5e90ad9.chunk.js.map"
+      ],
+      "css": [
+        "/packs/css/app~application-e361fa7e.chunk.css"
+      ],
+      "css.map": [
+        "/packs/css/app~application-e361fa7e.chunk.css.map"
+      ]
+    },
+    "application": {
+      "js": [
+        "/packs/runtime-39510128e62c1c12499e.js",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js",
+        "/packs/js/vendors~application~main_sidebar~samples~visual_guidelines-d957ed654f0168343841.chunk.js",
+        "/packs/js/vendors~app~application-fad47c49789ae6a51efa.chunk.js",
+        "/packs/js/vendors~application-433f35d7e62fa0a3fa03.chunk.js",
+        "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js",
+        "/packs/js/app~application-04c665146ef798059a62.chunk.js",
+        "/packs/js/application~main_sidebar-4a3515506cf17c4dfc25.chunk.js",
+        "/packs/js/application-2575eff03fdbc56f6f02.chunk.js"
+      ],
+      "js.map": [
+        "/packs/runtime-39510128e62c1c12499e.js.map",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js.map",
+        "/packs/js/vendors~application~main_sidebar~samples~visual_guidelines-d957ed654f0168343841.chunk.js.map",
+        "/packs/js/vendors~app~application-fad47c49789ae6a51efa.chunk.js.map",
+        "/packs/js/vendors~application-433f35d7e62fa0a3fa03.chunk.js.map",
+        "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js.map",
+        "/packs/js/app~application-04c665146ef798059a62.chunk.js.map",
+        "/packs/js/application~main_sidebar-4a3515506cf17c4dfc25.chunk.js.map",
+        "/packs/js/application-2575eff03fdbc56f6f02.chunk.js.map"
+      ],
+      "css": [
+        "/packs/css/vendors~application-b5a2ab76.chunk.css",
+        "/packs/css/app~application-e361fa7e.chunk.css"
+      ],
+      "css.map": [
+        "/packs/css/vendors~application-b5a2ab76.chunk.css.map",
+        "/packs/css/app~application-e361fa7e.chunk.css.map"
+      ]
+    },
+    "imageComparsionSlider": {
+      "js": [
+        "/packs/runtime-39510128e62c1c12499e.js",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js",
+        "/packs/js/imageComparsionSlider-b09f4538b36addc6f820.chunk.js"
+      ],
+      "js.map": [
+        "/packs/runtime-39510128e62c1c12499e.js.map",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js.map",
+        "/packs/js/imageComparsionSlider-b09f4538b36addc6f820.chunk.js.map"
+      ]
+    },
+    "main_sidebar": {
+      "js": [
+        "/packs/runtime-39510128e62c1c12499e.js",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js",
+        "/packs/js/vendors~application~main_sidebar~samples~visual_guidelines-d957ed654f0168343841.chunk.js",
+        "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js",
+        "/packs/js/application~main_sidebar-4a3515506cf17c4dfc25.chunk.js",
+        "/packs/js/main_sidebar-0c8d49ed24e8566a969e.chunk.js"
+      ],
+      "js.map": [
+        "/packs/runtime-39510128e62c1c12499e.js.map",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js.map",
+        "/packs/js/vendors~application~main_sidebar~samples~visual_guidelines-d957ed654f0168343841.chunk.js.map",
+        "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js.map",
+        "/packs/js/application~main_sidebar-4a3515506cf17c4dfc25.chunk.js.map",
+        "/packs/js/main_sidebar-0c8d49ed24e8566a969e.chunk.js.map"
+      ]
+    },
+    "sample-show": {
+      "js": [
+        "/packs/runtime-39510128e62c1c12499e.js",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js",
+        "/packs/js/sample-show-8f074f8acd584ca39d0c.chunk.js"
+      ],
+      "js.map": [
+        "/packs/runtime-39510128e62c1c12499e.js.map",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js.map",
+        "/packs/js/sample-show-8f074f8acd584ca39d0c.chunk.js.map"
+      ]
+    },
+    "samples": {
+      "js": [
+        "/packs/runtime-39510128e62c1c12499e.js",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js",
+        "/packs/js/vendors~application~main_sidebar~samples~visual_guidelines-d957ed654f0168343841.chunk.js",
+        "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js",
+        "/packs/js/samples-20fb2976601eaa77c6c4.chunk.js"
+      ],
+      "js.map": [
+        "/packs/runtime-39510128e62c1c12499e.js.map",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js.map",
+        "/packs/js/vendors~application~main_sidebar~samples~visual_guidelines-d957ed654f0168343841.chunk.js.map",
+        "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js.map",
+        "/packs/js/samples-20fb2976601eaa77c6c4.chunk.js.map"
+      ]
+    },
+    "site": {
+      "js": [
+        "/packs/runtime-39510128e62c1c12499e.js",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js",
+        "/packs/js/vendors~site-eb777aa3df5873bc6dea.chunk.js",
+        "/packs/js/site-61d61b37a69ab7d8265b.chunk.js"
+      ],
+      "js.map": [
+        "/packs/runtime-39510128e62c1c12499e.js.map",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js.map",
+        "/packs/js/vendors~site-eb777aa3df5873bc6dea.chunk.js.map",
+        "/packs/js/site-61d61b37a69ab7d8265b.chunk.js.map"
+      ]
+    },
+    "visual_guidelines": {
+      "js": [
+        "/packs/runtime-39510128e62c1c12499e.js",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js",
+        "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js",
+        "/packs/js/vendors~application~main_sidebar~samples~visual_guidelines-d957ed654f0168343841.chunk.js",
+        "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js",
+        "/packs/js/visual_guidelines-217a53db1a3f0b21357c.chunk.js"
+      ],
+      "js.map": [
+        "/packs/runtime-39510128e62c1c12499e.js.map",
+        "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js.map",
+        "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js.map",
+        "/packs/js/vendors~application~main_sidebar~samples~visual_guidelines-d957ed654f0168343841.chunk.js.map",
+        "/packs/js/app~application~main_sidebar~samples~visual_guidelines-596af807003b0c001eba.chunk.js.map",
+        "/packs/js/visual_guidelines-217a53db1a3f0b21357c.chunk.js.map"
+      ]
+    }
+  },
+  "getting-started.svg": "/packs/5e9acb8fcb107865d50dbe8ab2d31f56.svg",
+  "github-brands.svg": "/packs/7f18d876f4e08f7dca1b2ce7ff002c94.svg",
+  "hp-htmlcss-solutions.svg": "/packs/b29805d086fb8374e8b0e916fa7b4170.svg",
+  "hp-rails-solutions.svg": "/packs/6cb8f8382d3c33edea1e7787173516d5.svg",
+  "hp-react-solutions.svg": "/packs/22e4350f69976f93948cb4add7acb792.svg",
+  "hp-swift-solutions.svg": "/packs/edeb06850f17d0cff423fa46028f2e7e.svg",
+  "imageComparsionSlider.js": "/packs/js/imageComparsionSlider-b09f4538b36addc6f820.chunk.js",
+  "imageComparsionSlider.js.map": "/packs/js/imageComparsionSlider-b09f4538b36addc6f820.chunk.js.map",
+  "landing-background.svg": "/packs/c57720b3bebb33aafd1571918ab2628a.svg",
+  "landing-image.svg": "/packs/24d56da56e72c1dcc65e5bc23b2ded0b.svg",
+  "main_sidebar.js": "/packs/js/main_sidebar-0c8d49ed24e8566a969e.chunk.js",
+  "main_sidebar.js.map": "/packs/js/main_sidebar-0c8d49ed24e8566a969e.chunk.js.map",
+  "media/images/hp-social-proof-background.png": "/packs/media/images/hp-social-proof-background-f13a2fde387a584742d377a430ba481b.png",
+  "pb-hero-desktop.svg": "/packs/5a9fcb37de0c0aa2cb3bbacecf418224.svg",
+  "pb-hero-mobile.svg": "/packs/f103a685af562beac0b85fb8a208b7c7.svg",
+  "pb-logo-mobile.svg": "/packs/5225b1de66b837d015d793563ae50779.svg",
+  "pb-logo.svg": "/packs/7c6d08a9717b9aeec0c40f3e68eb80fd.svg",
+  "pb-white-logo.svg": "/packs/1c553c1e3ab3c9ddf837b1ef4c115f72.svg",
+  "power-subtract-logo.svg": "/packs/7e5c42250c315f5e1ffc8bcd9bde11dd.svg",
+  "runtime.js": "/packs/runtime-39510128e62c1c12499e.js",
+  "runtime.js.map": "/packs/runtime-39510128e62c1c12499e.js.map",
+  "sample-show.js": "/packs/js/sample-show-8f074f8acd584ca39d0c.chunk.js",
+  "sample-show.js.map": "/packs/js/sample-show-8f074f8acd584ca39d0c.chunk.js.map",
+  "samples.js": "/packs/js/samples-20fb2976601eaa77c6c4.chunk.js",
+  "samples.js.map": "/packs/js/samples-20fb2976601eaa77c6c4.chunk.js.map",
+  "site.js": "/packs/js/site-61d61b37a69ab7d8265b.chunk.js",
+  "site.js.map": "/packs/js/site-61d61b37a69ab7d8265b.chunk.js.map",
+  "vendors~actioncable.js": "/packs/js/vendors~actioncable-c3b7157c987c650ce9c7.chunk.js",
+  "vendors~actioncable.js.map": "/packs/js/vendors~actioncable-c3b7157c987c650ce9c7.chunk.js.map",
+  "vendors~application.css": "/packs/css/vendors~application-b5a2ab76.chunk.css",
+  "vendors~application.css.map": "/packs/css/vendors~application-b5a2ab76.chunk.css.map",
+  "vendors~application.js": "/packs/js/vendors~application-433f35d7e62fa0a3fa03.chunk.js",
+  "vendors~application.js.map": "/packs/js/vendors~application-433f35d7e62fa0a3fa03.chunk.js.map",
+  "vendors~application~main_sidebar~samples~visual_guidelines.js": "/packs/js/vendors~application~main_sidebar~samples~visual_guidelines-d957ed654f0168343841.chunk.js",
+  "vendors~application~main_sidebar~samples~visual_guidelines.js.map": "/packs/js/vendors~application~main_sidebar~samples~visual_guidelines-d957ed654f0168343841.chunk.js.map",
+  "vendors~app~application.js": "/packs/js/vendors~app~application-fad47c49789ae6a51efa.chunk.js",
+  "vendors~app~application.js.map": "/packs/js/vendors~app~application-fad47c49789ae6a51efa.chunk.js.map",
+  "vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines.js": "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js",
+  "vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines.js.map": "/packs/js/vendors~app~application~imageComparsionSlider~main_sidebar~sample-show~samples~site~visual_guidelines-bc8bcb18c5d0cb00ce9a.chunk.js.map",
+  "vendors~app~application~main_sidebar~samples~site~visual_guidelines.js": "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js",
+  "vendors~app~application~main_sidebar~samples~site~visual_guidelines.js.map": "/packs/js/vendors~app~application~main_sidebar~samples~site~visual_guidelines-cb7d30e7e3959845e5ff.chunk.js.map",
+  "vendors~app~application~main_sidebar~samples~visual_guidelines.js": "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js",
+  "vendors~app~application~main_sidebar~samples~visual_guidelines.js.map": "/packs/js/vendors~app~application~main_sidebar~samples~visual_guidelines-fd34495bfbf351c722e9.chunk.js.map",
+  "vendors~site.js": "/packs/js/vendors~site-eb777aa3df5873bc6dea.chunk.js",
+  "vendors~site.js.map": "/packs/js/vendors~site-eb777aa3df5873bc6dea.chunk.js.map",
+  "visual_guidelines.js": "/packs/js/visual_guidelines-217a53db1a3f0b21357c.chunk.js",
+  "visual_guidelines.js.map": "/packs/js/visual_guidelines-217a53db1a3f0b21357c.chunk.js.map"
+}
