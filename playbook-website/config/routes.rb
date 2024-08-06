@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "visual_guidelines/:name",  to: "pages#visual_guidelines"
   get "changelog/web",            to: "pages#changelog_web"
   get "changelog/figma",          to: "pages#changelog_figma"
+  get "changelog/swift",          to: "pages#changelog_swift"
   get "changelog",                to: redirect("changelog/web")
 
   # Kits
