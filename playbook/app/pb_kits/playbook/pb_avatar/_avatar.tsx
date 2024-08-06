@@ -39,12 +39,6 @@ const firstTwoInitials = (name: string) =>
     .join('')
     .substring(0, 2)
 
-const onlineStatusSize = (size: string): 'sm' | 'md' | 'lg' =>
-  ['xxs', 'xs'].includes(size) ? 'sm' :
-    ['sm', 'md'].includes(size) ? 'md' :
-      ['lg', 'xl'].includes(size) ? 'lg' :
-        'sm';
-
 const Avatar = (props: AvatarProps): React.ReactElement => {
   const {
     aria = {},
@@ -76,6 +70,16 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
   const handleError = () => setError(true)
 
   const canShowImage = imageUrl && !error
+
+  const onlineStatusSize = 
+    ['xxs', 'xs'].includes(size) ? 'sm' :
+      ['sm', 'md'].includes(size) ? 'md' :
+        ['lg', 'xl'].includes(size) ? 'lg' :
+          'sm';
+
+  const onlineStatusVerticalProp = (["xxs", "xs", "sm"].includes(size))
+    ? { top: { inset: true, value: "0" } }
+    : { bottom: { inset: true, value: "0" } };
 
   return (
     <div
@@ -148,10 +152,15 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
           </div>
           {status && (
             <OnlineStatus
-                className={`size_${size}`}
                 dark={dark}
-                size={onlineStatusSize(size)}
+                position="absolute"
+                right={{
+                  inset: ["md", "lg", "xl"].includes(size),
+                  value: size === "xl" ? "sm" : size === "lg" ? "xs" : "xxs"
+                }}
+                size={onlineStatusSize}
                 status={status}
+                {...onlineStatusVerticalProp}
             />
           )}
         </>

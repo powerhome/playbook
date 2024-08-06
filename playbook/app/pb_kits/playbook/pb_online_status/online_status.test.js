@@ -11,7 +11,7 @@ test('renders online status with defaults', () => {
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit).toHaveClass('pb_online_status_kit_offline_sm')
+  expect(kit).toHaveClass('pb_online_status_kit_offline_size_sm')
 })
 
 test('renders online status with props', () => {
@@ -27,5 +27,5 @@ test('renders online status with props', () => {
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit).toHaveClass('pb_online_status_kit_online_no_border_lg dark additional_class')
+  expect(kit).toHaveClass('pb_online_status_kit_online_no_border_size_lg dark additional_class')
 })
