@@ -93,19 +93,23 @@ $avatar-sizes: (
           right: -4px;
         }
 
+        &.size_sm {
+          right: -3px;
+        }
+
         &.size_md {
           top: auto;
-          bottom: 6px;
+          bottom: 4px;
         }
 
         &.size_lg {
           top: auto;
-          bottom: 14px;
+          bottom: 8px;
         }
 
         &.size_xl {
           top: auto;
-          bottom: 22px;
+          bottom: 16px;
         }
       }
     }
