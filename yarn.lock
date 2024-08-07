@@ -7955,10 +7955,10 @@ jest-environment-node@^26.6.2:
     jest-mock "^26.6.2"
     jest-util "^26.6.2"
 
-jest-fail-on-console@3.2.0:
-  version "3.2.0"
-  resolved "https://npm.powerapp.cloud/jest-fail-on-console/-/jest-fail-on-console-3.2.0.tgz#05fbf7d6084d04af7955aa8eb5a80fbc7cf46fa1"
-  integrity sha512-GSqvjURdT/U+yu9JEr3EUTEB4kZi9feXMWS/jXGXB/lsnXXHcdU9Xsm2tEupSdqSEtrhTjOCqEJseFMrQ1ryvg==
+jest-fail-on-console@3.3.0:
+  version "3.3.0"
+  resolved "https://npm.powerapp.cloud/jest-fail-on-console/-/jest-fail-on-console-3.3.0.tgz#5952b4706faf91584009b4e27f7d60a930c85b11"
+  integrity sha512-J9rnFQvQwkcGJw01zCEKe2Uag+E926lFgIyaQGep2LqhQH7OCRHyD+tm/jnNoKlSRnOBO60DmzMjeQAVI3f5cw==
 
 jest-get-type@^25.2.6:
   version "25.2.6"
