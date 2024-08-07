@@ -4,6 +4,8 @@ module Playbook
   module PbAvatar
     class Avatar < Playbook::KitBase
       prop :component_overlay
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
       prop :image_url, type: Playbook::Props::String
       prop :image_alt, type: Playbook::Props::String,
                        default: ""
@@ -24,6 +26,7 @@ module Playbook
 
       def online_status_props
         props = {
+          dark: dark,
           status: status,
           size: online_status_size,
           position: "absolute",
