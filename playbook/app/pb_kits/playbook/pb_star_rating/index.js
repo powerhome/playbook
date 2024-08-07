@@ -24,7 +24,19 @@ export default class PbStarRating extends PbEnhancedElement {
       star.addEventListener("mouseleave", () => {
         this.removeStarHoverColors();
       })
+
+      star.addEventListener("keydown", (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          this.handleStarClick(star.id);
+        }
+      })
     })
+  }
+
+  handleStarClick(starId) {
+    this.updateStarColors(starId);
+    this.updateHiddenInputValue(starId);
   }
 
   updateStarColors(clickedStarId) {

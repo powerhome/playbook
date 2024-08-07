@@ -36,6 +36,12 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
     const handleMouseLeave = () => {
         setHoverStarValue(null);
     }
+    const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, starIndex: number) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault()
+            handleOnClick(starIndex)
+        }
+    }
 
     return (
         <Flex className="star_flex_area">
@@ -45,7 +51,7 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                 const isHovered = hoverStarValue !== null && starIndex > interactiveStarValue && starIndex <= hoverStarValue
 
                 const baseClass = dark 
-                    ? starIcon[backgroundType].className.replace('empty_star_light', 'empty_star_dark')
+                    ? starIcon[backgroundType].className.replace("empty_star_light", "empty_star_dark")
                     : starIcon[backgroundType].className
                 
                 let starClass = baseClass
@@ -54,21 +60,22 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                     starClass += ` ${starIcon[colorOption].className}`
                 }
                 if (isHovered) {
-                    starClass += ' star-hovered'
+                    starClass += " star-hovered"
                 }
                 if (isFilled && starIndex === interactiveStarValue) {
-                    starClass += ' star-selected'
+                    starClass += " star-selected"
                 }
 
                 return (
                     <Icon
                         className={starClass.trim()}
-                        cursor={starIndex <= interactiveStarValue ? 'default' : 'pointer'}
+                        cursor="pointer"
                         customIcon={starIcon[backgroundType].icon as unknown as { [key: string]: SVGElement }}
                         htmlOptions={{
                             onClick: () => handleOnClick(starIndex),
+                            onKeyDown: (event) => handleOnKeyDown(event as React.KeyboardEvent<HTMLDivElement>, starIndex),
                             onMouseEnter: () => handleMouseEnter(starIndex),
-                            onMouseLeave: () => handleMouseLeave()
+                            onMouseLeave: () => handleMouseLeave(),
                         }}
                         icon=""
                         key={index}

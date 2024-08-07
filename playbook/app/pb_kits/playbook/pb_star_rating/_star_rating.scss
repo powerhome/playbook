@@ -118,6 +118,9 @@
     transition: fill 0.2s
   }
   // Rails selected styles
+  .interactive-star-icon {
+    cursor: pointer;
+  }
   .yellow-star-selected {
     color: $yellow; 
   }
