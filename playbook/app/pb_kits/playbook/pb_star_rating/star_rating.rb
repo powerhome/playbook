@@ -52,7 +52,7 @@ module Playbook
         when "yellow"
           "yellow_star"
         when "primary"
-          "primary_star"
+          dark ? "primary_star_dark" : "primary_star_light"
         when "subtle"
           dark ? "subtle_star_dark" : "subtle_star_light"
         end

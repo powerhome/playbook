@@ -11,7 +11,6 @@ export default class PbStarRating extends PbEnhancedElement {
   connect() {
     this.element.addEventListener("click", (event) => {
       const clickedStarId = event.currentTarget.id;
-      console.log(clickedStarId, "check click")
       this.updateStarColors(clickedStarId);
       this.updateHiddenInputValue(clickedStarId);
     });
@@ -19,11 +18,11 @@ export default class PbStarRating extends PbEnhancedElement {
     document.querySelectorAll(STAR_RATING_SELECTOR).forEach(star => {
       star.addEventListener("mouseenter", (event) => {
         const hoveredStarId = event.currentTarget.id
-        this.updateStarHoverColors(hoveredStarId)
+        this.updateStarHoverColors(hoveredStarId);
       })
 
       star.addEventListener("mouseleave", () => {
-        this.removeStarHoverColors()
+        this.removeStarHoverColors();
       })
     })
   }
@@ -39,7 +38,9 @@ export default class PbStarRating extends PbEnhancedElement {
         if (starId <= clickedStarId) {
           if (star.classList.contains("yellow_star")) {
             icon.classList.add("yellow-star-selected");
-          } else if (star.classList.contains("primary_star")) {
+          } else if (star.classList.contains("primary_star_light")) {
+            icon.classList.add("primary-star-selected");
+          } else if (star.classList.contains("primary_star_dark")) {
             icon.classList.add("primary-star-selected");
           } else if (star.classList.contains("subtle_star_light")) {
             icon.classList.add("subtle-star-selected");
@@ -51,7 +52,7 @@ export default class PbStarRating extends PbEnhancedElement {
         } else {
           icon.classList.remove("yellow-star-selected", "primary-star-selected", "subtle-star-selected");
         }
-        icon.classList.remove("star-hovered")
+        icon.classList.remove("star-hovered");
       }
     });
   }

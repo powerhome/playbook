@@ -49,7 +49,8 @@
 
   $star-styles: (
     yellow_star: (color: $yellow),
-    primary_star: (color: $royal),
+    primary_star_light: (color: $royal),
+    primary_star_dark: (color: $active_dark),
     subtle_star_light: (color: $text_lt_default),
     subtle_star_dark: (color: $text_dk_default),
     empty_star_dark: (color: $border_dark),
@@ -115,8 +116,6 @@
   // Interactivity 
   path {
     transition: fill 0.2s
-    // transition: fill 0.2s, transform 0.5s ease-in-out;
-    // transition: transform 0.5s ease-in-out;
   }
   // Rails selected styles
   .yellow-star-selected {
@@ -129,28 +128,37 @@
     color: $text_lt_default;
   }
   &.dark {
-    // .primary-star-selected {
-    //   color: $active_dark; 
-    // }
+    .primary-star-selected {
+      color: $active_dark; 
+    }
     .subtle-star-selected {
       color: $text_dk_default;
     }
   }
   // React selected styles
   &.star-selected {
+    path {
+      animation: growColor 0.3s forwards;
+    }
     .yellow-star-selected {
       color: $yellow; 
-      // animation: enlarge .5s ease-in-out forwards;
     }
     .primary-star-selected {
       color: $royal;
-      // animation: enlarge .5s ease-in-out forwards;
     }
     .subtle-star-selected {
       color: $text_lt_default;
-      // animation: enlarge .5s ease-in-out forwards;
+    }
+    &.dark {
+      .primary-star-selected {
+        color: $active_dark; 
+      }
+      .subtle-star-selected {
+        color: $text_dk_default;
+      }
     }
   }
+  // Hover styles
   .star-hovered {
     path {
       fill: mix($primary, $white, 20%);
@@ -163,7 +171,6 @@
       }
     }
   }
-
   // Focus styles
   .pb_custom_icon {
     &:focus {
@@ -188,16 +195,3 @@
     }
   }
 }
-// Animation stuff
-// @keyframes enlarge {
-//   0% {
-//     transform: scale(0);
-//   }
-//   70% {
-//     transform: scale(1.05);
-//   }
-//   100% {
-//     transform: scale(1);
-//   }
-// }
-
