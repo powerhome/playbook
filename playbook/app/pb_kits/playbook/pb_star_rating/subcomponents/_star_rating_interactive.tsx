@@ -36,12 +36,6 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
     const handleMouseLeave = () => {
         setHoverStarValue(null);
     }
-    const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, starIndex: number) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault()
-            handleOnClick(starIndex)
-        }
-    }
 
     return (
         <Flex className="star_flex_area">
@@ -73,7 +67,6 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                         customIcon={starIcon[backgroundType].icon as unknown as { [key: string]: SVGElement }}
                         htmlOptions={{
                             onClick: () => handleOnClick(starIndex),
-                            onKeyDown: (event) => handleOnKeyDown(event as React.KeyboardEvent<HTMLDivElement>, starIndex),
                             onMouseEnter: () => handleMouseEnter(starIndex),
                             onMouseLeave: () => handleMouseLeave(),
                         }}
