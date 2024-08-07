@@ -94,6 +94,10 @@ type MaxWidth = {
   maxWidth?: Sizes,
 }
 
+type MinWidth = {
+  minWidth?: Sizes,
+}
+
 type NumberSpacing = {
   numberSpacing?: "tabular",
 }
@@ -170,7 +174,7 @@ type ZIndex = {
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
-  LineHeight & Margin & MaxWidth & NumberSpacing & Order & Overflow & Padding &
+  LineHeight & Margin & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
@@ -192,6 +196,14 @@ const getPositioningPropsClasses = (position: string, value: Sizes | {value: str
     css += `${position}_${value.value}`;
   }
   return css;
+};
+
+const filterClassName = (value: string): string => {
+  if (value.includes("%")) {
+    return value.replace("%", "_percent");
+  } else {
+    return value;
+  }
 };
 
 // Prop categories
@@ -320,10 +332,15 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += numberSpacing ? `ns_${numberSpacing} ` : ''
     return css
   },
+  minWidthProps: ({ minWidth }: MinWidth) => {
+    let css = ''
+    css += minWidth ? `min_width_${filterClassName(minWidth)} ` : ''
+    return css.trimEnd()
+  },
   maxWidthProps: ({ maxWidth }: MaxWidth) => {
     let css = ''
-    css += maxWidth ? `max_width_${maxWidth } ` : ''
-    return css
+    css += maxWidth ? `max_width_${filterClassName(maxWidth)} ` : ''
+    return css.trimEnd()
   },
   zIndexProps: (zIndex: ZIndex) => {
     let css = ''

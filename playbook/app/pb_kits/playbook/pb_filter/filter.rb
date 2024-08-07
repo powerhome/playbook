@@ -17,7 +17,7 @@ module Playbook
                        default: "bottom-start"
 
       def classname
-        generate_classname("pb_filter_kit")
+        generate_classname("pb_filter_kit").rstrip
       end
 
       def result_text

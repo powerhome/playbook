@@ -4,6 +4,7 @@
 import React from "react";
 
 import Colors from "../VisualGuidelines/Colors";
+import MinWidth from "../VisualGuidelines/Examples/MinWidth";
 import MaxWidth from "../VisualGuidelines/Examples/MaxWidth";
 import ZIndex from "../VisualGuidelines/Examples/ZIndex";
 import LineHeight from "../VisualGuidelines/Examples/LineHeight";
@@ -38,6 +39,8 @@ const VisualGuidelines = ({
         return <Colors />;
       case "max_width":
         return <MaxWidth example={examples.width_jsx}/>;
+      case "min_width":
+        return <MinWidth example={examples.min_width_jsx}/>;
       case "z_index":
         return <ZIndex example={examples.z_index_jsx}
                   tokensExample={examples.z_index_token}
