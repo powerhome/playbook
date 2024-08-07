@@ -19,55 +19,66 @@
 }
 
 .z_index_1 {
-  z-index: 100;
+  z-index: $z_1 !important;
 }
 
 .z_index_2 {
-  z-index: 200;
+  z-index: $z_2 !important;
 }
 
 .z_index_3 {
-  z-index: 300;
+  z-index: $z_3 !important;
 }
 
 .z_index_4 {
-  z-index: 400;
+  z-index: $z_4 !important;
 }
 
 .z_index_5 {
-  z-index: 500;
+  z-index: $z_5 !important;
 }
 
 .z_index_6 {
-  z-index: 600;
+  z-index: $z_6 !important;
 }
 
 .z_index_7 {
-  z-index: 700;
+  z-index: $z_7 !important;
 }
 
 .z_index_8 {
-  z-index: 800;
+  z-index: $z_8 !important;
 }
 
 .z_index_9 {
-  z-index: 900;
+  z-index: $z_9 !important;
 }
 
 .z_index_10 {
-  z-index: 1000;
+  z-index: $z_10 !important;
 }
 
-$zIndex_values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+$zIndex_values: (
+  1: $z_1,
+  2: $z_2,
+  3: $z_3,
+  4: $z_4,
+  5: $z_5,
+  6: $z_6,
+  7: $z_7,
+  8: $z_8,
+  9: $z_9,
+  10: $z_10
+);
 
 @each $size, $size_value in $breakpoints_grid {
-  @each $zIndex_value in $zIndex_values {
+  @each $zIndex_value, $zIndex_variable in $zIndex_values {
     $min_size: map-get($size_value, "min");
     $max_size: map-get($size_value, "max");
 
     .z_index_#{$size}_#{$zIndex_value} {
       @include break_on($min_size, $max_size) {
-        z-index: #{$zIndex_value * 100} !important;
+        z-index: $zIndex_variable !important;
       }
     }
   }
