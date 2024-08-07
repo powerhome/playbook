@@ -77,9 +77,15 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
         ['lg', 'xl'].includes(size) ? 'lg' :
           'sm';
 
-  const onlineStatusVerticalProp = (["xxs", "xs", "sm"].includes(size))
-    ? { top: { inset: true, value: "0" } }
-    : { bottom: { inset: true, value: "0" } };
+  const onlineStatusPositionProps = (["xxs", "xs", "sm"].includes(size)) ? 
+    {
+      top: { inset: true, value: "0" },
+      right: { inset: false, value: "xxs" }
+    }
+    : {
+      bottom: { inset: true, value: "0" },
+      right: { inset: true, value: size === "xl" ? "sm" : size === "lg" ? "xs" : "xxs" }
+    };
 
   return (
     <div
@@ -154,13 +160,9 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
             <OnlineStatus
                 dark={dark}
                 position="absolute"
-                right={{
-                  inset: ["md", "lg", "xl"].includes(size),
-                  value: size === "xl" ? "sm" : size === "lg" ? "xs" : "xxs"
-                }}
                 size={onlineStatusSize}
                 status={status}
-                {...onlineStatusVerticalProp}
+                {...onlineStatusPositionProps}
             />
           )}
         </>
