@@ -1,5 +1,4 @@
 /* eslint-disable react/no-multi-comp */
-/* @flow */
 import React, { useContext } from "react";
 import classnames from "classnames";
 import {

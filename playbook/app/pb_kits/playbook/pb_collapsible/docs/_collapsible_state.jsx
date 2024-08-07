@@ -1,5 +1,6 @@
 import React from 'react'
-import { Collapsible, useCollapsible, Button } from '../..'
+import PropTypes from 'prop-types';
+import { Collapsible, useCollapsible, Button } from 'playbook-ui'
 
 const CollapsibleState = (props) => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
@@ -7,6 +8,7 @@ const CollapsibleState = (props) => {
   return (
   <>
     <Button
+        dark={props.dark}
         onClick={() => setIsCollapsed(!isCollapsed)}
         padding="none"
         variant="link"
@@ -17,6 +19,7 @@ const CollapsibleState = (props) => {
     <Collapsible
         collapsed={isCollapsed}
         icon={["plus", "minus"]}
+        iconColor='white'
         padding="none"
     >
       <Collapsible.Main padding="sm" 
@@ -35,6 +38,7 @@ const CollapsibleState = (props) => {
     <Collapsible
         collapsed={isCollapsed}
         icon={["plus", "minus"]}
+        iconColor='white'
         padding="none"
     >
       <Collapsible.Main padding="sm" 
@@ -53,6 +57,7 @@ const CollapsibleState = (props) => {
     <Collapsible
         collapsed={isCollapsed}
         icon={["plus", "minus"]}
+        iconColor='white'
         padding="none"
     >
         <Collapsible.Main padding="sm" 
@@ -70,6 +75,10 @@ const CollapsibleState = (props) => {
     </Collapsible>
   </>
   )
+}
+
+CollapsibleState.propTypes = {
+  dark: PropTypes.bool,
 }
 
 export default CollapsibleState

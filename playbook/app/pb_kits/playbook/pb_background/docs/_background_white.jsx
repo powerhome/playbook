@@ -1,5 +1,5 @@
 import React from 'react'
-import { Background } from '../..'
+import { Background } from 'playbook-ui'
 
 const BackgroundWhite = (props) => (
   <div>

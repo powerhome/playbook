@@ -23,6 +23,7 @@ type IconProps = {
   aria?: {[key: string]: string},
   border?: string,
   className?: string,
+  color?: string,
   customIcon?: {[key: string] :SVGElement},
   data?: {[key: string]: string},
   fixedWidth?: boolean,
@@ -121,6 +122,7 @@ const Icon = (props: IconProps) => {
     aria = {},
     border = false,
     className,
+    color,
     customIcon,
     data = {},
     fixedWidth = true,
@@ -169,6 +171,7 @@ const Icon = (props: IconProps) => {
     (!iconElement && !customIcon) ? 'pb_icon_kit' : '',
     (iconElement || customIcon) ? 'pb_custom_icon' : fontStyle,
     iconElement ? 'svg-inline--fa' : '',
+    color ? `color_${color}` : '',
     globalProps(props),
     className
   )

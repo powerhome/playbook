@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Body, SelectableCard, Title } from '../..'
+import { Body, SelectableCard, Title } from 'playbook-ui'
 
 const SelectableCardError = (props) => {
   const [football, setFootball] = useState(false)

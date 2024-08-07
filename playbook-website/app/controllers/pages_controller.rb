@@ -5,6 +5,8 @@ require "playbook/pagination_renderer"
 require "will_paginate/array"
 
 class PagesController < ApplicationController
+  include ::ViteRails::TagHelpers
+
   before_action :set_js, only: %i[visual_guidelines]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
@@ -19,7 +21,7 @@ class PagesController < ApplicationController
     @kit = params[:name]
     @params = params
     @examples = pb_doc_kit_examples(@kit, @type)
-    @css = view_context.asset_pack_url("application.css")
+    @css = view_context.vite_asset_path("site_styles/main.scss")
 
     # first example from each kit
     examples = @examples.map do |example|
@@ -349,6 +351,7 @@ private
     @kits_array = @kits.first.split("&")
     params[:name] ||= @kits_array[0]
     @selected_kit = params[:name]
+    @variants = params[:variants].present? ? params[:variants].split("&") : []
     @type = type
 
     render template: "pages/kit_collection", layout: "layouts/fullscreen"
