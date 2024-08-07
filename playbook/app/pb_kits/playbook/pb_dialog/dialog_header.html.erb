@@ -3,7 +3,7 @@
             <%= content.presence || object.title %>
 
             <button class="dialog-button-class" type="button" data-close-dialog= <%= object.id %> >
-                <%= pb_rails("icon", props:{icon: "times"}) %>
+                <%= pb_rails("icon", props: { custom_icon: Playbook::Engine::root.join(times_icon) }) %>
             </button>
         <% end %>
         <%= pb_rails("section_separator") %>

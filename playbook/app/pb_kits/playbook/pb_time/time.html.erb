@@ -13,7 +13,7 @@
   <% if object.unstyled %>
     <% if object.show_icon %>
       <span>
-        <%= pb_rails("icon", props: { icon: "clock", fixed_width: true }) %>
+        <%= pb_rails("icon", props: { custom_icon: Playbook::Engine.root.join(clock_icon), fixed_width: true }) %>
       </span>
     <% end %>
 
@@ -27,7 +27,7 @@
   <% elsif size == "md" %>
     <% if object.show_icon %>
       <%= pb_rails("body", props: { color: "light", tag: "span"}) do %>
-        <%= pb_rails("icon", props: { icon: "clock", fixed_width: true }) %>
+        <%= pb_rails("icon", props: { custom_icon: Playbook::Engine.root.join(clock_icon), fixed_width: true }) %>
       <% end %>
     <% end %>
 
@@ -41,7 +41,7 @@
   <% else %>
     <% if object.show_icon %>
       <%= pb_rails("body", props: { color: "light", tag: "span"}) do %>
-        <%= pb_rails("icon", props: { icon: "clock", fixed_width: true, size: "sm" }) %>
+        <%= pb_rails("icon", props: { custom_icon: Playbook::Engine.root.join(clock_icon), fixed_width: true, size: "sm" }) %>
       <% end %>
     <% end %>
 

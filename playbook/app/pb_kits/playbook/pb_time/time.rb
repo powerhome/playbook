@@ -38,6 +38,10 @@ module Playbook
       def pb_date_time
         Playbook::PbKit::PbDateTime.new(time, timezone)
       end
+
+      def clock_icon
+        "app/pb_kits/playbook/utilities/icons/clock.svg"
+      end
     end
   end
 end

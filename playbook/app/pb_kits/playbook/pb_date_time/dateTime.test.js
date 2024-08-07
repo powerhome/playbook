@@ -57,7 +57,7 @@ describe('DateTime Kit', () => {
 
     const kit = screen.getByTestId(testId)
     const text = kit.querySelector('.pb_time_kit_md.ml_sm')
-    const clock = kit.querySelector('.pb_icon_kit.far.fa-fw.fa-clock')
+    const clock = kit.querySelector('.pb_custom_icon.svg-inline--fa.clock')
 
     expect(clock).toBeInTheDocument()
     expect(text.textContent).toEqual(' 12:00a EST')
@@ -72,7 +72,7 @@ describe('DateTime Kit', () => {
     )
 
     const kit = screen.getByTestId(testId)
-    const clock = kit.querySelector('.pb_icon_kit.far.fa-fw.fa-clock')
+    const clock = kit.querySelector('.pb_custom_icon.svg-inline--fa.clock')
 
     expect(clock).toBeNull()
   })
