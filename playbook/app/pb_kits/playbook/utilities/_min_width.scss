@@ -1,37 +1,45 @@
-@import "../tokens/spacing";
+@import "../tokens/container";
+
+.min_width_0 {
+  min-width: map-get($containers, 'none');
+}
+
+.min_with_0_percent {
+  min-width: $container_0;
+}
+
+.min_width_xxs {
+  min-width: $container_xxs;
+}
 
 .min_width_xs {
-  min-width: 360px;
-}
-.min_width_0 {
-  min-width: map-get($spaces, 'none');
-}
-.min_with_0_percent {
-  min-width: 0%;
-}
-.min_width_100_percent {
-  min-width: $space_max;
-}
-.min_width_none {
-  min-width: none;
+  min-width: $container_xs;
 }
 
 .min_width_sm {
-  min-width: 540px;
+  min-width: $container_sm;
 }
 
 .min_width_md {
-  min-width: 720px;
+  min-width: $container_md;
 }
 
 .min_width_lg {
-  min-width: 960px;
+  min-width: $container_lg;
 }
 
 .min_width_xl {
-  min-width: 1140px;
+  min-width: $container_xl;
 }
 
 .min_width_xxl {
-  min-width: 1320px;
+  min-width: $container_xxl;
+}
+
+.min_width_100_percent {
+  min-width: $container_100;
+}
+
+.minwidth-resize {
+  resize: horizontal;
 }
