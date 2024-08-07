@@ -37,6 +37,7 @@ module Playbook
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
       prop :color, type: Playbook::Props::String
+      prop :tabindex
 
       def valid_emoji?
         emoji_regex = /\p{Emoji}/
@@ -107,6 +108,7 @@ module Playbook
         svg["aria"] = object.aria
         svg["height"] = "auto"
         svg["width"] = "auto"
+        svg["tabindex"] = object.tabindex
         fill_color = object.color || "currentColor"
         doc.at_css("path")["fill"] = fill_color
         raw doc

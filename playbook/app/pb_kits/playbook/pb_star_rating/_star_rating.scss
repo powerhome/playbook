@@ -9,10 +9,10 @@
   justify-content: flex-start;
 
   path {
-    &.suble_star_dark {
+    &.subtle_star_dark {
       fill: $text_dk_default;
     }
-    &.suble_star_light {
+    &.subtle_star_light {
       fill: $text_lt_default;
     }
     &.outline_star_dark {
@@ -49,9 +49,10 @@
 
   $star-styles: (
     yellow_star: (color: $yellow),
-    primary_star: (color: $royal),
-    suble_star_light: (color: $text_lt_default),
-    suble_star_dark: (color: $text_dk_default),
+    primary_star_light: (color: $royal),
+    primary_star_dark: (color: $active_dark),
+    subtle_star_light: (color: $text_lt_default),
+    subtle_star_dark: (color: $text_dk_default),
     empty_star_dark: (color: $border_dark),
     empty_star_light: (color: $border_light),
     outline_empty_star_dark: (color: transparent),
@@ -111,13 +112,89 @@
       }
     }
   }
+
+  // Interactivity 
+  path {
+    transition: fill 0.2s
+  }
+  // Rails selected styles
+  .interactive-star-icon {
+    cursor: pointer;
+  }
   .yellow-star-selected {
     color: $yellow; 
   }
   .primary-star-selected {
     color: $royal 
   }
-  .suble-star-selected {
+  .subtle-star-selected {
     color: $text_lt_default;
+  }
+  &.dark {
+    .primary-star-selected {
+      color: $active_dark; 
+    }
+    .subtle-star-selected {
+      color: $text_dk_default;
+    }
+  }
+  // React selected styles
+  &.star-selected {
+    path {
+      animation: growColor 0.3s forwards;
+    }
+    .yellow-star-selected {
+      color: $yellow; 
+    }
+    .primary-star-selected {
+      color: $royal;
+    }
+    .subtle-star-selected {
+      color: $text_lt_default;
+    }
+    &.dark {
+      .primary-star-selected {
+        color: $active_dark; 
+      }
+      .subtle-star-selected {
+        color: $text_dk_default;
+      }
+    }
+  }
+  // Hover styles
+  .star-hovered {
+    path {
+      fill: mix($primary, $white, 20%);
+    }
+  }
+  &.dark{
+    .star-hovered {
+      path {
+        fill: mix($active_dark, $bg_dark, 50%);
+      }
+    }
+  }
+  // Focus styles
+  .pb_custom_icon {
+    &:focus {
+      outline: none;
+    }
+    &:focus-visible {
+      border-radius: 2px;
+      outline: 1px solid $primary;
+      outline-offset: 2px;
+    }
+  }
+  &.dark {
+    .pb_custom_icon {
+      &:focus {
+        outline: none;
+      }   
+      &:focus-visible {
+        border-radius: 2px;
+        outline: 1px solid $active_dark;
+        outline-offset: 2px;
+      }
+    }
   }
 }
