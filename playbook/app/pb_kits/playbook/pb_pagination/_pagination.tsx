@@ -2,19 +2,24 @@ import React, { useState } from "react";
 import Icon from '../pb_icon/_icon';
 
 type PaginationProps = {
+  defaultPage?: number;
+  onPageChange?: any;
   pageRange?: number;
   totalPages?: number;
 };
 
 const Pagination = ({
+  defaultPage = 1,
+  onPageChange,
   pageRange = 5,
   totalPages = 1,
 }: PaginationProps) => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(defaultPage);
 
   const handlePageChange = (pageNumber: number) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
+      onPageChange(pageNumber);
     }
   };
 

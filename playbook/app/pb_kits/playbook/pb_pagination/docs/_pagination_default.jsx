@@ -7,6 +7,7 @@ const PaginationDefault = (props) => {
     return (
   <>
      <Pagination
+         defaultPage={3}
          pageRange={5}
          totalPages={10}
          {...props}
