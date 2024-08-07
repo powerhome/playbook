@@ -89,3 +89,20 @@ test('renders with iconCircle overlay', () => {
   expect(iconCircleOverlay).toBeInTheDocument();
   expect(iconCircleOverlay).toHaveClass('pb_avatar_kit_size_md');
 });
+
+
+test('renders with online status', () => {
+  render(
+    <Avatar
+        data={{ testid: testId }}
+        imageAlt={imageAlt}
+        imageUrl={imageUrl}
+        name={name}
+        status="online"
+    />
+  );
+
+  const onlineStatusAvatar = screen.getByTestId(testId);
+  const onlineStatus = onlineStatusAvatar.querySelector('.pb_online_status_kit_online_size_md')
+  expect(onlineStatus).toBeInTheDocument();
+});

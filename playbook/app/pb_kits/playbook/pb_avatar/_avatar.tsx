@@ -71,6 +71,22 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
 
   const canShowImage = imageUrl && !error
 
+  const onlineStatusSize = 
+    ['xxs', 'xs'].includes(size) ? 'sm' :
+      ['sm', 'md'].includes(size) ? 'md' :
+        ['lg', 'xl'].includes(size) ? 'lg' :
+          'sm';
+
+  const onlineStatusPositionProps = (["xxs", "xs", "sm"].includes(size)) ? 
+    {
+      top: { inset: true, value: "0" },
+      right: { inset: false, value: "xxs" }
+    }
+    : {
+      bottom: { inset: true, value: "0" },
+      right: { inset: true, value: size === "xl" ? "sm" : size === "lg" ? "xs" : "xxs" }
+    };
+
   return (
     <div
         {...ariaProps}
@@ -142,9 +158,11 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
           </div>
           {status && (
             <OnlineStatus
-                className={`size_${size}`}
                 dark={dark}
+                position="absolute"
+                size={onlineStatusSize}
                 status={status}
+                {...onlineStatusPositionProps}
             />
           )}
         </>

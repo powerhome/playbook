@@ -4,6 +4,8 @@ module Playbook
   module PbAvatar
     class Avatar < Playbook::KitBase
       prop :component_overlay
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
       prop :image_url, type: Playbook::Props::String
       prop :image_alt, type: Playbook::Props::String,
                        default: ""
@@ -23,7 +25,22 @@ module Playbook
       end
 
       def online_status_props
-        { status: status, classname: "size_#{size}" }
+        props = {
+          dark: dark,
+          status: status,
+          size: online_status_size,
+          position: "absolute",
+          right: online_status_right_position,
+        }
+
+        case size
+        when "xxs", "xs", "sm"
+          props[:top] = { value: "0", inset: true }
+        else
+          props[:bottom] = { value: "0", inset: true }
+        end
+
+        props
       end
 
       def alt_text
@@ -55,6 +72,32 @@ module Playbook
           "lg" => placement_styles("0"),
           "xl" => placement_styles({ value: "xxs", inset: true }),
         }
+      end
+
+      def online_status_size
+        case size
+        when "xxs", "xs"
+          "sm"
+        when "sm", "md"
+          "md"
+        when "lg", "xl"
+          "lg"
+        else
+          "sm"
+        end
+      end
+
+      def online_status_right_position
+        case size
+        when "xxs", "xs", "sm"
+          "xxs"
+        when "md"
+          { value: "xxs", inset: true }
+        when "lg"
+          { value: "xs", inset: true }
+        when "xl"
+          { value: "sm", inset: true }
+        end
       end
 
       def placement_styles(offset)

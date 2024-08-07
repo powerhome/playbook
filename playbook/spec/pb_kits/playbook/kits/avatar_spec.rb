@@ -54,4 +54,12 @@ RSpec.describe Playbook::PbAvatar::Avatar do
       expect(avatar.component_overlay[:placement]).to eq "bottom-left"
     end
   end
+
+  describe "with status" do
+    it "renders with online status" do
+      avatar = subject.new(image_alt: "Terry Johnson", name: "Terry Johnson", size: "xs", status: "online")
+      expect(avatar.online_status_props[:status]).to eq "online"
+      expect(avatar.online_status_props[:size]).to eq "sm"
+    end
+  end
 end
