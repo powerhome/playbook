@@ -1,0 +1,1 @@
+You can use the `onPageChange` prop to control the state of your table.

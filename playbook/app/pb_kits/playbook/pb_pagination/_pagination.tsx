@@ -3,7 +3,7 @@ import Icon from '../pb_icon/_icon';
 
 type PaginationProps = {
   defaultPage?: number;
-  onPageChange?: any;
+  onPageChange?: (pageNumber: number) => void;
   pageRange?: number;
   totalPages?: number;
 };
@@ -19,7 +19,9 @@ const Pagination = ({
   const handlePageChange = (pageNumber: number) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
-      onPageChange(pageNumber);
+      if (onPageChange) {
+        onPageChange(pageNumber);
+      }
     }
   };
 
