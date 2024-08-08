@@ -5,14 +5,14 @@ import Pagination from '../_pagination'
 const PaginationDefault = (props) => {
 
     return (
-  <>
-     <Pagination
-         current={1}
-         range={5}
-         total={10}
-         {...props}
-      />
-  </>
+      <>
+        <Pagination
+            current={1}
+            range={5}
+            total={10}
+            {...props}
+          />
+      </>
     )
 }
 

@@ -25,13 +25,13 @@ const Pagination = ({
     }
   };
 
-  const renderPageButtons = () => {
-    const buttons = [];
-
+  const renderPageButtons = (): JSX.Element[] => {
+    const buttons: JSX.Element[] = [];
+  
     // Calculate pagination range with let
     let rangeStart = Math.max(1, currentPage - Math.floor(range / 2));
     let rangeEnd = Math.min(total, rangeStart + range - 1);
-
+  
     // Adjust range if it's too short to fit the range
     if (rangeEnd - rangeStart + 1 < range) {
       if (rangeStart > 1) {
@@ -53,7 +53,7 @@ const Pagination = ({
         </button>
       );
     }
-
+  
     // Always display the second page button
     if (rangeStart > 2) {
       buttons.push(
@@ -108,6 +108,7 @@ const Pagination = ({
 
     return buttons;
   };
+  
 
   return (
     <div className="pb_pagination">
