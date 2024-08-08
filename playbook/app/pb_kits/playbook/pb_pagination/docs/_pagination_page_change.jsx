@@ -49,10 +49,10 @@ const PaginationPageChange = (props) => {
       </Table>
  
       <Pagination
-          defaultPage={1}
-          onPageChange={onPageChange}
-          pageRange={5}
-          totalPages={totalPages}
+          current={1}
+          onChange={onPageChange}
+          range={5}
+          total={totalPages}
           {...props}
       />
     </div>

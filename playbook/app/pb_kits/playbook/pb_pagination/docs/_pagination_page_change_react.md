@@ -1,1 +1,1 @@
-You can use the `onPageChange` prop to control the state of your table.
+You can use the `onPageChange` prop to control the data of your table. This prop is callback function that will allow you control the state.

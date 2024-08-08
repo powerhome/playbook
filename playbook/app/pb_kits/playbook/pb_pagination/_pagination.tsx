@@ -2,25 +2,25 @@ import React, { useState } from "react";
 import Icon from '../pb_icon/_icon';
 
 type PaginationProps = {
-  defaultPage?: number;
-  onPageChange?: (pageNumber: number) => void;
-  pageRange?: number;
-  totalPages?: number;
+  current?: number;
+  onChange?: (pageNumber: number) => void;
+  range?: number;
+  total?: number;
 };
 
 const Pagination = ({
-  defaultPage = 1,
-  onPageChange,
-  pageRange = 5,
-  totalPages = 1,
+  current = 1,
+  onChange,
+  range = 5,
+  total = 1,
 }: PaginationProps) => {
-  const [currentPage, setCurrentPage] = useState(defaultPage);
+  const [currentPage, setCurrentPage] = useState(current);
 
   const handlePageChange = (pageNumber: number) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
+    if (pageNumber >= 1 && pageNumber <= total) {
       setCurrentPage(pageNumber);
-      if (onPageChange) {
-        onPageChange(pageNumber);
+      if (onChange) {
+        onChange(pageNumber);
       }
     }
   };
@@ -29,15 +29,15 @@ const Pagination = ({
     const buttons = [];
 
     // Calculate pagination range with let
-    let rangeStart = Math.max(1, currentPage - Math.floor(pageRange / 2));
-    let rangeEnd = Math.min(totalPages, rangeStart + pageRange - 1);
+    let rangeStart = Math.max(1, currentPage - Math.floor(range / 2));
+    let rangeEnd = Math.min(total, rangeStart + range - 1);
 
-    // Adjust range if it's too short to fit the pageRange
-    if (rangeEnd - rangeStart + 1 < pageRange) {
+    // Adjust range if it's too short to fit the range
+    if (rangeEnd - rangeStart + 1 < range) {
       if (rangeStart > 1) {
-        rangeStart = Math.max(1, rangeEnd - pageRange + 1);
+        rangeStart = Math.max(1, rangeEnd - range + 1);
       } else {
-        rangeEnd = Math.min(totalPages, rangeStart + pageRange - 1);
+        rangeEnd = Math.min(total, rangeStart + range - 1);
       }
     }
 
@@ -81,27 +81,27 @@ const Pagination = ({
     }
 
     // Always display the second-to-last page button
-    if (rangeEnd < totalPages - 1) {
+    if (rangeEnd < total - 1) {
       buttons.push(
         <button
-            className={`pagination-number ${totalPages - 1 === currentPage ? "active" : ""}`}
-            key={totalPages - 1}
-            onClick={() => handlePageChange(totalPages - 1)}
+            className={`pagination-number ${total - 1 === currentPage ? "active" : ""}`}
+            key={total - 1}
+            onClick={() => handlePageChange(total - 1)}
         >
-          {totalPages - 1}
+          {total - 1}
         </button>
       );
     }
 
     // Always display the last page button
-    if (rangeEnd < totalPages) {
+    if (rangeEnd < total) {
       buttons.push(
         <button
-            className={`pagination-number ${totalPages === currentPage ? "active" : ""}`}
-            key={totalPages}
-            onClick={() => handlePageChange(totalPages)}
+            className={`pagination-number ${total === currentPage ? "active" : ""}`}
+            key={total}
+            onClick={() => handlePageChange(total)}
         >
-          {totalPages}
+          {total}
         </button>
       );
     }
@@ -121,7 +121,7 @@ const Pagination = ({
       {renderPageButtons()}
       <button
           className="pagination-right"
-          disabled={currentPage === totalPages}
+          disabled={currentPage === total}
           onClick={() => handlePageChange(currentPage + 1)}
       >
         <Icon icon="chevron-right" />
