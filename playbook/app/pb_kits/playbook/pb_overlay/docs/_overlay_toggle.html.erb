@@ -1,32 +1,32 @@
 <div id="outer-container">
     <%= pb_rails("overlay", props: { id: "overlay-container", overflow: "hidden" }) do %>
         <div id="underlying-table">
-        <%= pb_rails("table", props: { size: "sm" }) do %>
-            <thead>
-                <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
-                    <th>Column 3</th>
-                    <th>Column 4</th>
-                    <th>Column 5</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% 7.times do %>
+            <%= pb_rails("table", props: { size: "sm" }) do %>
+                <thead>
                     <tr>
-                        <td>Value 1</td>
-                        <td>Value 2</td>
-                        <td>Value 3</td>
-                        <td>Value 4</td>
-                        <td>Value 5</td>
+                        <th>Column 1</th>
+                        <th>Column 2</th>
+                        <th>Column 3</th>
+                        <th>Column 4</th>
+                        <th>Column 5</th>
                     </tr>
-                <% end %>   
-            </tbody>
-        <% end %>
+                </thead>
+                <tbody>
+                    <% 7.times do %>
+                        <tr>
+                            <td>Value 1</td>
+                            <td>Value 2</td>
+                            <td>Value 3</td>
+                            <td>Value 4</td>
+                            <td>Value 5</td>
+                        </tr>
+                    <% end %>   
+                </tbody>
+            <% end %>
         </div>
     <% end %>
-    <%= pb_rails("button", props: { text: "Show More", id: "show-more-button", full_width: true, icon: "chevron-down", icon_right: true, variant: "link" }) %>
-    <%= pb_rails("button", props: { text: "Show Less", id: "show-less-button", full_width: true, icon: "chevron-up", icon_right: true, variant: "link" }) %>
+    <%= pb_rails("button", props: { text: "Show More", id: "show-more-button", variant: "link", full_width: true, icon: "chevron-down", icon_right: true }) %>
+    <%= pb_rails("button", props: { text: "Show Less", id: "show-less-button", variant: "link", full_width: true, icon: "chevron-up", icon_right: true }) %>
 </div>
 
 <script type="text/javascript">
@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const showLess = () => {
     overlayContainer.appendChild(underlyingTable);
-    showLessButton.style.display = "none";
     showMoreButton.style.display = "flex";
+    showLessButton.style.display = "none";
     underlyingTable.style.height = "200px";
   };
 
