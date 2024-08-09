@@ -8,4 +8,4 @@ To learn more [visit flatpickr's docs](https://flatpickr.js.org/instance-methods
 
 The Date Picker works best with Javascript Date Objects or ISO Date strings.  If you're programming in js use Date Objects.  If you're using rails convert your date object (with timezone) to UTC and then to an ISO Date string.  For example, `DateTime.now.utc.iso8601`.  This ensures that the string passed to the Date Picker kit behaves as expected.
 
-The Date Picker expects a return in the format of `MM/DD/YYYY` by default. If a different date format (e.g. `DD/MM/YYYY`, etc.) is used, the component will not know how to handle it and use a default date instead. To change the date format used, read more [here](#format).
+The Date Picker expects a date format of `MM/DD/YYYY` by default. If a different date format (e.g. `DD/MM/YYYY`, `m/d/y`, etc.) is used, the component will not know how to handle it and use a default date instead. To change the date format used, read more [here](#format).
