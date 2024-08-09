@@ -1,0 +1,34 @@
+@import "../tokens/border_radius";
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/typography";
+
+@mixin preview_blockquote {
+    font-size: $font_larger;
+    padding: $space_sm $space_md;
+    font-style: italic;
+    p {
+        margin: 0;
+    }
+}
+
+@mixin preview_codeblock {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    font-family: monospace;
+    font-size: 0.9em;
+    padding: 0.5em;
+    overflow-x: auto;
+    background: $bg_dark;
+    padding: $space_sm;
+    border-radius: $border_rad_heaviest;
+    margin: 1.5rem 0 2rem 0;
+
+    code {
+        background: transparent !important;
+        box-shadow: none;
+        border: 0;
+        color: #faf6e4;
+    }
+}

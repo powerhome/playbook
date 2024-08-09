@@ -12,7 +12,6 @@ const RichTextEditorAdvancedPreview = (props) => {
           StarterKit,
           Link
       ],
-      content:"Add your text here. You can format your text, add links, quotes, and bullets."
   })
 
   const [showPreview, setShowPreview] = useState(false)
@@ -41,20 +40,20 @@ const RichTextEditorAdvancedPreview = (props) => {
           {...props}
       >
         <EditorContent editor={editor}/>
+        {showPreview && (
+          <Card marginTop="md">
+            <div
+                className="tiptap-content"
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: previewText }}
+                id="advanced-preview-content"
+            />
+          </Card>
+        )}
+        {!showPreview && (
+          <div />
+        )}
       </RichTextEditor>
-      {showPreview && (
-        <Card marginTop="md">
-          <div
-              className="tiptap-content"
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{ __html: previewText }}
-              id="advanced-preview-content"
-          />
-        </Card>
-      )}
-      {!showPreview && (
-        <div />
-      )}
       <Button
           id="preview-button"
           marginTop="md"

@@ -6,6 +6,7 @@
 @import "../tokens/typography";
 @import "../tokens/shadows";
 @import "../tokens/transition";
+@import "tiptap_mixin";
 
 [class^="pb_rich_text_editor_kit"] {
   .toolbar_button {
@@ -190,6 +191,15 @@
       }
     }
   }
+
+  .tiptap-content {
+    blockquote {
+      @include preview_blockquote;
+    }
+    pre {
+      @include preview_codeblock;
+    }
+  }
 }
 
 .pb_tiptap_toolbar_dropdown_list_item {
@@ -230,38 +240,6 @@
       border-top: none;
       border-top-left-radius: initial;
       border-top-right-radius: initial;
-    }
-  }
-}
-
-.tiptap-content {
-  blockquote {
-    font-size: $font_larger;
-    padding: $space_sm $space_md;
-    font-style: italic;
-    p {
-      margin: 0;
-    }
-  }
-  
-  pre {
-    display: inline-block;
-    width: 100%;
-    vertical-align: top;
-    font-family: monospace;
-    font-size: 0.9em;
-    padding: 0.5em;
-    overflow-x: auto;
-    background: $bg_dark;
-    padding: $space_sm;
-    border-radius: $border_rad_heaviest;
-    margin: 1.5rem 0 2rem 0;
-
-    code {
-      background: transparent !important;
-      box-shadow: none;
-      border: 0;
-      color: #faf6e4;
     }
   }
 }
