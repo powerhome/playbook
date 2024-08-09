@@ -1,9 +1,10 @@
-@import "playbook-ui/dist/tokens/titles";
-@import "playbook-ui/dist/tokens/typography";
-@import "playbook-ui/dist/tokens/spacing";
-@import "playbook-ui/dist/tokens/colors";
-@import "playbook-ui/dist/tokens/screen_sizes";
-@import "playbook-ui/app/pb_kits/playbook/pb_caption/_caption_mixin.scss";
+@import "playbook-tokens/titles";
+@import "playbook-tokens/typography";
+@import "playbook-tokens/spacing";
+@import "playbook-tokens/colors";
+@import "playbook-tokens/screen_sizes";
+@import "playbook-tokens/border_radius";
+@import "playbook-kits/pb_caption/_caption_mixin.scss";
 
 .markdown_title {
   @include pb_title_1;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Radio } from '../../'
+import { Flex, Radio } from 'playbook-ui'
 
 const RadioAlignment = (props) => {
   return (

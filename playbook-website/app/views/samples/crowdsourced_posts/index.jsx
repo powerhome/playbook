@@ -885,9 +885,9 @@ const CrowdsourcedPosts = () => {
                             />
                           </FlexItem>
                         </Flex>
-                        <If condition={community !== communities[communities.length - 1]}>
+                        {community !== communities[communities.length - 1] && (
                           <SectionSeparator />
-                        </If>
+                        )}
                       </>
                     ))}
 

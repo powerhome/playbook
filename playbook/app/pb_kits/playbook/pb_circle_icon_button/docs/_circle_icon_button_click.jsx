@@ -1,5 +1,5 @@
 import React from 'react'
-import { CircleIconButton } from '../..'
+import { CircleIconButton } from 'playbook-ui'
 
 const CircleIconButtonClick = (props) => (
   <div>

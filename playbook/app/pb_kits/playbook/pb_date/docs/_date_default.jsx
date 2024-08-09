@@ -1,5 +1,5 @@
 import React from 'react'
-import { Date as FormattedDate, Caption, Title } from '../../'
+import { Date as FormattedDate, Caption, Title } from 'playbook-ui'
 
 const DateDefault = (props) => {
   return (
@@ -80,4 +80,4 @@ const DateDefault = (props) => {
 export default DateDefault
 
 // *Development Note* -  We are reviewing this kit for a potential name change due to naming collisions when `new Date()` is used.
-// To avoid this bug, please use name spacing as shown in the code examples. ie `import { Date as AliasedComponentName } from '../../'
+// To avoid this bug, please use name spacing as shown in the code examples. ie `import { Date as AliasedComponentName } from 'playbook-ui'

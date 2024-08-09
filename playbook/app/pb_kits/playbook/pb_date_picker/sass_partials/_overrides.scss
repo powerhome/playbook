@@ -1,15 +1,13 @@
 @media (min-width: 500px) {
   .flatpickr-calendar {
     padding: $space_xs;
-    // width: 323.88px;
   }
   .dayContainer {
     width: 315.88px
   }
   .flatpickr-months {
-    margin-left: $space_xs / 4;
-    margin-top: $space_xs / 3;
-    // width: 323.88px;
+    margin-left: calc($space_xs / 4);
+    margin-top: calc($space_xs / 3);
   }
 }
 @media (max-width: 499px) {

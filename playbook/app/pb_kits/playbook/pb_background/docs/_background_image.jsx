@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Background } from '../..'
-import { Card, Flex, FlexItem, Select, Title } from '../..'
+import { Background } from 'playbook-ui'
+import { Card, Flex, FlexItem, Select, Title } from 'playbook-ui'
 
 const BackgroundImage = (props) => {
   const [transition, setTransition] = useState('')

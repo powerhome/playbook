@@ -1,5 +1,5 @@
 import React from 'react'
-import { Caption, Date as FormattedDate, Title } from '../../'
+import { Caption, Date as FormattedDate, Title } from 'playbook-ui'
 
 const DateUnstyled = (props) => {
   return (
