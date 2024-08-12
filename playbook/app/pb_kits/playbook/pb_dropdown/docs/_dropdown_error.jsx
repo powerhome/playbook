@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dropdown } from '../../'
+import { Dropdown } from 'playbook-ui'
 
 const DropdownError = (props) => {
     const [selectedOption, setSelectedOption] = useState()

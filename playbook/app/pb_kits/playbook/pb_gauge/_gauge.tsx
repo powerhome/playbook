@@ -7,8 +7,8 @@ import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import highchartsMore from "highcharts/highcharts-more";
 import solidGauge from "highcharts/modules/solid-gauge";
-import defaultColors from "../tokens/exports/_colors.scss";
-import typography from "../tokens/exports/_typography.scss";
+import defaultColors from "../tokens/exports/_colors.module.scss";
+import typography from "../tokens/exports/_typography.module.scss";
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";

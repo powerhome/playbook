@@ -8,7 +8,7 @@ import {
   SectionSeparator,
   Body,
   Caption,
-} from "../..";
+} from "playbook-ui";
 
 const data = [{ name: "Name", value: 10 }];
 

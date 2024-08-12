@@ -3,7 +3,7 @@ import {
   Body,
   Button,
   PbReactPopover,
-} from '../..'
+} from 'playbook-ui'
 
 const PopoverZIndex = (props) => {
   const [showPopover, setShowPopover] = useState(false)

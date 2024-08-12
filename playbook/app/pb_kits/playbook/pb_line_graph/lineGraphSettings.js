@@ -1,5 +1,5 @@
 import { commonSettings } from '../pb_dashboard/commonSettings.js'
-import typography from '../tokens/exports/_typography.scss'
+import typography from '../tokens/exports/_typography.module.scss'
 
 const markerStyles = (highchart) => {
   highchart.plotOptions.line.marker.enabled = true
