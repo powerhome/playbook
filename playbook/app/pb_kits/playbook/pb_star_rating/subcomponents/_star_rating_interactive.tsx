@@ -36,6 +36,12 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
     const handleMouseLeave = () => {
         setHoverStarValue(null);
     }
+    const handleOnKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, starIndex: number) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault()
+            handleOnClick(starIndex)
+        }
+    }
 
     return (
         <Flex className="star_flex_area">
@@ -61,19 +67,23 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                 }
 
                 return (
-                    <Icon
-                        className={starClass.trim()}
-                        cursor="pointer"
-                        customIcon={starIcon[backgroundType].icon as unknown as { [key: string]: SVGElement }}
-                        htmlOptions={{
-                            onClick: () => handleOnClick(starIndex),
-                            onMouseEnter: () => handleMouseEnter(starIndex),
-                            onMouseLeave: () => handleMouseLeave(),
-                        }}
-                        icon=""
+                    <div
                         key={index}
-                        tabIndex={0}
-                    />
+                        onKeyDown={(event) => handleOnKeyDown(event, starIndex)}
+                    >
+                        <Icon
+                            className={starClass.trim()}
+                            cursor="pointer"
+                            customIcon={starIcon[backgroundType].icon as unknown as { [key: string]: SVGElement }}
+                            htmlOptions={{
+                                onClick: () => handleOnClick(starIndex),
+                                onMouseEnter: () => handleMouseEnter(starIndex),
+                                onMouseLeave: () => handleMouseLeave(),
+                            }}
+                            icon=""
+                            tabIndex={0}
+                        />
+                    </div>
                 );
             })}
         </Flex>
