@@ -86,109 +86,44 @@
     }
 
     code {
-      font-family: monospace;
-      background: $bg_light;
-      padding: 0.1rem 0.3rem;
-      margin: 0 5px;
-      box-shadow: 0 2px 10px $shadow;
-      border-radius: 0.25rem;
-      overflow: hidden;
-      font-size: ($text_small - 1px);
+      @include preview_code;
     }
 
     pre {
-      background: $bg_dark;
-      padding: $space_sm;
-      border-radius: $border_rad_heaviest;
-      margin: 1.5rem 0 2rem 0;
-      code {
-        background: transparent;
-        box-shadow: none;
-        border: 0;
-        color: #faf6e4;
-      }
+      @include preview_pre_codeblock;
     }
     a {
-      color: $primary;
-      border-bottom: 1px solid $primary;
-      &:hover {
-        color: $text_lt_default;
-        border-bottom: 1px solid $text_lt_default;
-      }
+      @include preview_a;
     }
     blockquote {
-      font-size: $font_larger;
-      padding: $space_sm $space_md;
-      font-style: italic;
-      p {
-        margin: 0;
-      }
+      @include preview_blockquote;
     }
     &:focus-visible {
       outline: unset;
       @include transition_default;
     }
     h1 {
-      font-size: $text_largest;
-      line-height: $text_larger;
-      font-weight: $bolder;
-      letter-spacing: $lspace_tight;
-      margin: 2.1rem 0 0 0;
+      @include preview_h1;
     }
     h2 {
-      font-size: $text_larger;
-      line-height: $text_larger;
-      font-weight: $bolder;
-      letter-spacing: $lspace_tight;
-      margin: 1.9rem 0 0 0;
+      @include preview_h2;
     }
     h3 {
-      font-size: $text_large;
-      line-height: $text_large;
-      font-weight: $bolder;
-      letter-spacing: $lspace_tight;
-      margin: 1.7rem 0 0 0;
+      @include preview_h3;
     }
     h4,
     h5,
     h6 {
-      font-size: $text_base;
-      line-height: $text_base;
-      letter-spacing: $lspace_tight;
-      font-weight: $bolder;
+      @include preview_smaller_headings;
     }
     hr {
-      margin: 2.2rem 0;
-      box-sizing: content-box;
-      overflow: hidden;
-      background: transparent;
-      border-bottom: 1px solid $transparent;
-      height: 1px;
-      padding: 0;
-      background-color: $border_light;
-      border: 0;
+      @include preview_hr;
     }
     ol {
-      margin: 1rem 0 0 0;
-      padding-left: $space_md;
-      list-style: decimal;
-      li {
-        margin: 2px 0;
-        p {
-          margin: 0;
-        }
-      }
+      @include preview_ol;
     }
     ul {
-      list-style-position: disc;
-      margin: 1rem 0 0 0;
-      padding-left: $space_md;
-      li {
-        margin: 2px 0;
-        p {
-          margin: 0;
-        }
-      }
+      @include preview_ul;
     }
   }
 
@@ -197,7 +132,7 @@
       @include preview_blockquote;
     }
     pre {
-      @include preview_codeblock;
+      @include preview_pre_codeblock;
     }
   }
 }

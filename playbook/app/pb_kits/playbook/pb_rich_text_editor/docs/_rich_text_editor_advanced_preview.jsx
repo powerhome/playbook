@@ -12,6 +12,7 @@ const RichTextEditorAdvancedPreview = (props) => {
           StarterKit,
           Link
       ],
+      content: "Add text here, format it, and press \"Preview Output\" to see what your stylized output will look like on the page."
   })
 
   const [showPreview, setShowPreview] = useState(false)
