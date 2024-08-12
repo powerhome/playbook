@@ -85,7 +85,6 @@ $top_bottom_radius: 0px;
       @include hover-state;
     }
   }
-
   .pagination-left {
     border-left: none;
     margin-right: $space_xxs;
@@ -94,5 +93,10 @@ $top_bottom_radius: 0px;
   .pagination-right {
     border-right: none;
     margin-left: $space_xxs;
+  }
+  &:has(.pagination-left) {
+    .pb_pagination {
+      padding: 0px 0px !important;
+    }
   }
 }
