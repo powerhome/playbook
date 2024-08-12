@@ -27,3 +27,11 @@ spec_results/
 spec/examples.txt
 dist
 .npmrc
+
+# Vite Ruby
+.vite-build
+node_modules
+# Vite uses dotenv and suggests to ignore local-only env files. See
+# https://vitejs.dev/guide/env-and-mode.html#env-files
+*.local
+

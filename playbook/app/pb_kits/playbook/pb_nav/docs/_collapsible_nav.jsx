@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, NavItem } from '../..'
+import { Nav, NavItem } from 'playbook-ui'
 
 const CollapsibleNav = (props) => {
   return (

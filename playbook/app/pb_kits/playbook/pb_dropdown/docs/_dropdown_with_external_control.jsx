@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown, useDropdown, Button } from '../../'
+import { Dropdown, useDropdown, Button } from 'playbook-ui'
 
 const DropdownWithExternalControl = (props) => {
 const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-control-statements/jsx-use-if-tag */
 import React, { useEffect } from 'react'
 import Slides from './Slides'
 import Thumbnails from './Thumbnails'

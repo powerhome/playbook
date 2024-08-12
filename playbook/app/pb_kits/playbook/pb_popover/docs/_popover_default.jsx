@@ -4,7 +4,7 @@ import {
   CircleIconButton,
   Flex,
   PbReactPopover,
-} from '../..'
+} from 'playbook-ui'
 
 const PopoverDefault = (props) => {
   const [showPopover, setShowPopover] = useState(false)

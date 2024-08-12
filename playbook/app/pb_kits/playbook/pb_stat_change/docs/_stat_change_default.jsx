@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatChange } from '../../'
+import { StatChange } from 'playbook-ui'
 
 const StatChangeDefault = (props) => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProgressSimple } from '../..'
+import { ProgressSimple } from 'playbook-ui'
 
 const ProgressSimpleValue = () => {
   return (

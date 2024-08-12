@@ -1,7 +1,5 @@
-// @flow
-
 import React, { useState } from 'react'
-import { Caption, Title, Toggle } from '../..'
+import { Caption, Title, Toggle } from 'playbook-ui'
 
 const ToggleCustomRadio = () => {
   const [choice, setChoice] = useState('walk')

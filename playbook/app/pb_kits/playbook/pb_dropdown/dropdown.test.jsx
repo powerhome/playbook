@@ -1,7 +1,7 @@
 import React from "react"
 import { render, screen } from "../utilities/test-utils"
 
-import { Dropdown, Icon } from '../'
+import { Dropdown, Icon } from 'playbook-ui'
 
 
 const testId = 'dropdown'
