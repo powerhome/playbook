@@ -37,7 +37,7 @@ const StarRatingDisplay = (props: StarRatingDisplayProps) => {
                         className={starIcon[colorOption].className}
                         customIcon={starIcon[colorOption].icon as unknown as { [key: string]: SVGElement }}
                         icon=""
-                        tabIndex={0}
+                        // tabIndex={0}
                     />
                 </React.Fragment>
             ))}
@@ -47,7 +47,7 @@ const StarRatingDisplay = (props: StarRatingDisplayProps) => {
                         className={starIcon[backgroundType].className}
                         customIcon={starIcon[backgroundType].icon  as unknown as { [key: string]: SVGElement }}
                         icon=""
-                        tabIndex={0}
+                        // tabIndex={0}
                     />
                 </React.Fragment>
             ))}
