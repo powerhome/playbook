@@ -1,5 +1,5 @@
 import React from "react"
-import { AdvancedTable } from "../.."
+import { AdvancedTable } from "playbook-ui"
 import Title from '../../pb_title/_title'
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
