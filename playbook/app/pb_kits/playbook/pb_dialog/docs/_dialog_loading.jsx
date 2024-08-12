@@ -12,9 +12,15 @@ const DialogLoading = () => {
   const [isLoading, setIsLoading] = useState(false)
   const submit = async () => {
     setIsLoading(true)
-    await new Promise((r) => setTimeout(r, 3000))
-    setIsLoading(false)
-    setIsOpen(false)
+
+    try {
+      await new Promise((r) => setTimeout(r, 3000))
+      setIsOpen(false)
+    } catch (error) {
+      console.error("An error occurred.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
