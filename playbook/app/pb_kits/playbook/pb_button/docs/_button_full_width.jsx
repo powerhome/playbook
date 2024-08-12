@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../../'
+import { Button } from 'playbook-ui'
 
 const ButtonFullWidth = (props) => (
   <div>

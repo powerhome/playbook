@@ -16,20 +16,22 @@ Gem::Specification.new do |s|
 
   s.files = Dir[
     "app/pb_kits/playbook/pb_*/**/*",
+    "app/pb_kits/playbook/_*.scss",
     "app/pb_kits/playbook/{plugins,tokens,utilities}/**/*",
-    "app/pb_kits/playbook/*.{scss,js,rb}",
     "app/assets/images/*",
     "fonts/**/*",
     "lib/*.rb",
     "lib/playbook/**/*",
+    "dist/chunks/*",
+    "dist/playbook.css",
     "dist/reset.css",
+    "dist/playbook-doc.js",
     "dist/playbook-rails.js",
+    "dist/playbook-rails-react-bindings.js",
     "dist/menu.yml",
   ] + ["Rakefile"]
 
-  # s.files += Dir.glob("app/pb_kits/playbook/pb_*/**/*").reject do |file|
-  #   (file == "docs") || (file.include? "docs")
-  # end
+  s.files.reject! { |file| file == "dist/chunks/lib.js" }
 
   s.add_dependency "actionpack", ">= 5.2.4.5"
   s.add_dependency "actionview", ">= 5.2.4.5"

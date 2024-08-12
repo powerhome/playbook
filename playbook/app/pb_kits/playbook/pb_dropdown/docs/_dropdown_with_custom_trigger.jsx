@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dropdown, Icon, Body, FlexItem, Flex, IconCircle } from '../..'
+import { Dropdown, Icon, Body, FlexItem, Flex, IconCircle } from 'playbook-ui'
 
 const DropdownWithCustomTrigger = (props) => {
 

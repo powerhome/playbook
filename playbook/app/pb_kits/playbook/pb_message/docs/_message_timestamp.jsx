@@ -1,5 +1,5 @@
 import React from 'react'
-import { Message } from '../../'
+import { Message } from 'playbook-ui'
 
 const MessageTimestamp = (props) => {
   return (

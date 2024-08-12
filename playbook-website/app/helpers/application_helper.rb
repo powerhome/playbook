@@ -3,8 +3,7 @@
 require "pb_doc_helper"
 
 module ApplicationHelper
-  include ::Webpacker::React::Helpers
-  include ::Webpacker::Helper
+  include ::ViteRails::TagHelpers
   include ::Playbook::PbFormsHelper
   include ::Playbook::PbKitHelper
   include ::PlaybookWebsite::Markdown::Helper

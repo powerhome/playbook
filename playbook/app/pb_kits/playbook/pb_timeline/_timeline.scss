@@ -4,9 +4,9 @@
 @import "../tokens/typography";
 
 $connector_width: 2px;
-$icon_margin: $space_xs/2;
+$icon_margin: calc($space_xs/2);
 $icon_height: 28px;
-$height_from_top: $icon_height/2 - $connector_width/2;
+$height_from_top: calc($icon_height/2) - calc($connector_width/2);
 
 @mixin pb_timeline_line_solid($width, $height, $margin) {
     width: $width;

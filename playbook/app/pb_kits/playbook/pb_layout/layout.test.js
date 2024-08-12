@@ -1,6 +1,6 @@
 import React from "react"
 import { render, cleanup } from "../utilities/test-utils"
-import { Layout, Card } from ".."
+import { Layout, Card } from "playbook-ui"
 
 function LayoutTest(props) {
   return (

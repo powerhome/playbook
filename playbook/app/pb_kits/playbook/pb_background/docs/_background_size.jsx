@@ -1,5 +1,5 @@
 import React, { Fragment as F } from 'react'
-import { Background } from '../..'
+import { Background } from 'playbook-ui'
 
 const BackgroundSize = (props) => (
   <F>
