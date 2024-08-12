@@ -17,7 +17,7 @@ $top_bottom_radius: 0px;
   border-radius: $border_rad_light;
   border: $border_rad_lightest solid $border_light;
   background-color: $white;
-  padding: $space_xxs 0px !important;
+  padding: $space_xs 0px !important;
   li, .pagination-number {
     display: inline;
     > a, li > span, .pagination-number {
@@ -72,6 +72,10 @@ $top_bottom_radius: 0px;
     padding: $pagination_padding;
     font-size: $text_small;
   }
+  
+  &.react_pagination {
+    padding: $space_xxs 0px !important;
+  }
 
   .pagination-right, 
   .pagination-left {
@@ -93,10 +97,5 @@ $top_bottom_radius: 0px;
   .pagination-right {
     border-right: none;
     margin-left: $space_xxs;
-  }
-  &:has(.pagination-left) {
-    .pb_pagination {
-      padding: 0px 0px !important;
-    }
   }
 }

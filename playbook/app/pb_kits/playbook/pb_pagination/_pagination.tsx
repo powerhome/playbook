@@ -111,22 +111,24 @@ const Pagination = ({
   
 
   return (
-    <div className="pb_pagination">
-      <button
-          className="pagination-left"
-          disabled={currentPage === 1}
-          onClick={() => handlePageChange(currentPage - 1)}
-      >
-        <Icon icon="chevron-left" />
-      </button>
-      {renderPageButtons()}
-      <button
-          className="pagination-right"
-          disabled={currentPage === total}
-          onClick={() => handlePageChange(currentPage + 1)}
-      >
-        <Icon icon="chevron-right" />
-      </button>
+    <div className="pb_paginate">
+      <div className="pb_pagination react_pagination">
+        <button
+            className="pagination-left"
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+        >
+          <Icon icon="chevron-left" />
+        </button>
+        {renderPageButtons()}
+        <button
+            className="pagination-right"
+            disabled={currentPage === total}
+            onClick={() => handlePageChange(currentPage + 1)}
+        >
+          <Icon icon="chevron-right" />
+        </button>
+      </div>
     </div>
   );
 };
