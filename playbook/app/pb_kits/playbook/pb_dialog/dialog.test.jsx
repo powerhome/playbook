@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { render, cleanup, waitFor, fireEvent } from "../utilities/test-utils";
+import { render, cleanup, waitFor, fireEvent, screen } from "../utilities/test-utils";
 import { Dialog, Button } from 'playbook-ui'
 
 const text="Hello Body Text, Nice to meet ya."
@@ -110,3 +110,22 @@ test("renders the right placement dialog", async () => {
   cleanup()
 });
 
+test('renders loading dialog with disabled buttons', async () => {
+
+  const { queryByText } = render(<DialogTest />);
+
+  fireEvent.click(queryByText('Open Dialog'));
+
+  await waitFor(() => expect(queryByText("Okay")).toHaveTextContent(confirmButton));
+  await waitFor(() => expect(queryByText("Cancel Button")).toHaveTextContent(cancelButton));
+
+  fireEvent.click(queryByText('Okay'));
+
+  const loadingIconDiv = document.querySelector('.loading-icon');
+  expect(loadingIconDiv).toBeInTheDocument();
+
+  const cancelBtn = screen.getByRole('button', { name: cancelButton });
+  expect(cancelBtn).toBeDisabled();
+
+  cleanup()
+})
