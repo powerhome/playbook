@@ -2,7 +2,9 @@ examples:
   react:
   - overlay_default: Default
   - overlay_multi_directional: Multi-directional
+  - overlay_toggle: Toggle
 
   rails:
-    - overlay_default: Default
-    - overlay_multi_directional: Multi-directional
+  - overlay_default: Default
+  - overlay_multi_directional: Multi-directional
+  - overlay_toggle: Toggle
