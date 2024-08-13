@@ -11,7 +11,7 @@ $selector: ".pb_nav_list";
 [class^="pb_nav_list"][class*="_horizontal"] {
   .pb_nav_wrapper {
     display: flex;
-    align-items: center;
+    align-items: end;
     padding: 0;
     margin: 0;
     list-style: none;
