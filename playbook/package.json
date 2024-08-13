@@ -52,7 +52,7 @@
     "@rollup/plugin-typescript": "^11.1.6",
     "@rollup/pluginutils": "^5.1.0",
     "@tanstack/react-table": "8.9.2",
-    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/jest-dom": "6.4.8",
     "@testing-library/react": "11.2.7",
     "@types/flatpickr": "3.1.2",
     "@types/jest": "26.0.14",
