@@ -1,19 +1,33 @@
 import React, { useState } from "react";
+import classnames from 'classnames'
+import { globalProps } from '../utilities/globalProps'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import Icon from '../pb_icon/_icon';
 
 type PaginationProps = {
+  aria?: { [key: string]: string },
+  className?: string,
+  data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  id?: string,
   current?: number;
   onChange?: (pageNumber: number) => void;
   range?: number;
   total?: number;
 };
 
-const Pagination = ({
-  current = 1,
-  onChange,
-  range = 5,
-  total = 1,
-}: PaginationProps) => {
+const Pagination = ( props: PaginationProps) => {
+  const {
+    aria = {},
+    className,
+    data = {},
+    htmlOptions = {},
+    id,
+    current = 1,
+    onChange,
+    range = 5,
+    total = 1,
+  } = props
   const [currentPage, setCurrentPage] = useState(current);
 
   const handlePageChange = (pageNumber: number) => {
@@ -106,12 +120,28 @@ const Pagination = ({
       );
     }
 
+    
     return buttons;
   };
   
 
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+  const classes = classnames(
+    buildCss('pb_paginate'),
+    globalProps(props),
+    className
+  )
+
   return (
-    <div className="pb_paginate">
+    <div 
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
+    >
       <div className="pb_pagination react_pagination">
         <button
             className="pagination-left"
