@@ -42,6 +42,7 @@ export const TableHeader = ({
     className
   )
 
+  const columnPinning = table.getState().columnPinning;
 
   return (
     <>
@@ -51,18 +52,22 @@ export const TableHeader = ({
         {/* Get the header groups (only one in this example) */}
         {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
           <tr key={`${headerGroup.id}-headerGroup`}>
-            {headerGroup.headers.map(header => (
-              <TableHeaderCell
-                  enableSorting={enableSorting}
-                  enableToggleExpansion={enableToggleExpansion}
-                  handleExpandOrCollapse={handleExpandOrCollapse}
-                  header={header}
-                  headerChildren={children}
-                  key={`${header.id}-header`}
-                  loading={loading}
-                  sortIcon={sortIcon}
-              />
-            ))}
+            {headerGroup.headers.map(header => {
+              const isPinnedLeft = columnPinning.left.includes(header.id)
+              return (
+                <TableHeaderCell
+                    enableSorting={enableSorting}
+                    enableToggleExpansion={enableToggleExpansion}
+                    handleExpandOrCollapse={handleExpandOrCollapse}
+                    header={header}
+                    headerChildren={children}
+                    isPinnedLeft={isPinnedLeft}
+                    key={`${header.id}-header`}
+                    loading={loading}
+                    sortIcon={sortIcon}
+                />
+              )
+            })}
           </tr>
         ))}
       </thead>
