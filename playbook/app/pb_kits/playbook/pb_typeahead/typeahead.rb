@@ -57,6 +57,7 @@ module Playbook
 
       def typeahead_react_options
         base_options = {
+          className: classname,
           dark: dark,
           defaultValue: default_options,
           error: error,

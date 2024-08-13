@@ -4,7 +4,7 @@ import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
 import AsyncCreateableSelect from 'react-select/async-creatable'
 import { get, isString, uniqueId } from 'lodash'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 import classnames from 'classnames'
 
 import {
@@ -45,7 +45,7 @@ type TypeaheadProps = {
   getOptionLabel?: string | (() => any),
   getOptionValue?: string | (() => any),
   name?: string,
-}
+} & GlobalProps
 
 export type SelectValueType = {
   label: string,
