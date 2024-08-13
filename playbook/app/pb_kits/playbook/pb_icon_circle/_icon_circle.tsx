@@ -24,7 +24,8 @@ type IconCircleProps = {
     | "red"
     | "yellow"
     | "orange"
-    | "green",
+    | "green"
+    | "lighter",
 }
 
 const IconCircle = (props: IconCircleProps) => {

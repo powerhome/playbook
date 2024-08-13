@@ -52,14 +52,18 @@ navigation[:whats_new] = {
       url: "changelog/web",
       title: "Web Changelog",
       page_id: "CHANGELOG",
-      filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/CHANGELOG.md",
+      frontmatter: {},
+    },
+    {
+      url: "changelog/swift",
+      title: "Swift Changelog",
+      page_id: "SWIFT",
       frontmatter: {},
     },
     {
       url: "changelog/figma",
       title: "Figma Changelog",
       page_id: "FIGMA",
-      filepath: "/Users/mark.rosenberg/projects/playbook/playbook-website/../playbook/FIGMA_CHANGELOG.md",
       frontmatter: {},
     },
   ],
@@ -67,8 +71,8 @@ navigation[:whats_new] = {
 
 # Move HTML figma to the end
 
-move_pages = navigation[:getting_started][:pages].select { |page| ["HTML&_CSS", "Figma_setup", "figma_setup"].include?(page[:page_id]) }
-navigation[:getting_started][:pages].reject! { |page| ["HTML&_CSS", "Figma_setup", "figma_setup"].include?(page[:page_id]) }
+move_pages = navigation[:getting_started][:pages].select { |page| ["HTML&_CSS", "figma_setup", "how_to_theme"].include?(page[:page_id]) }
+navigation[:getting_started][:pages].reject! { |page| ["HTML&_CSS", "figma_setup", "how_to_theme"].include?(page[:page_id]) }
 navigation[:getting_started][:pages].concat(move_pages)
 
 DOCS = navigation
