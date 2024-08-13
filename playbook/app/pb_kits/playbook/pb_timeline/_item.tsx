@@ -26,7 +26,7 @@ const TimelineItem = ({
   iconColor = 'default',
   lineStyle = 'solid',
   ...props
-}: ItemProps) => {
+}: ItemProps): React.ReactElement => {
   const timelineItemCss = buildCss('pb_timeline_item_kit', lineStyle)
 
   const htmlProps = buildHtmlProps(htmlOptions)
