@@ -1,5 +1,5 @@
 import React from "react"
-import { Caption, Contact, Flex, Icon, User } from "../.."
+import { Caption, Contact, Flex, Icon, User } from "playbook-ui"
 
 const MentorSubtitle = (
   <Flex>

@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import { render, screen, waitFor } from "../utilities/test-utils"
 
-import { AdvancedTable } from "../"
+import { AdvancedTable } from "playbook-ui"
 
 const MOCK_DATA = [
   {

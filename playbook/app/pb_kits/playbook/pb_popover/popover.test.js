@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "../utilities/test-utils";
-import { Button, PbReactPopover } from "..";
+import { Button, PbReactPopover } from "playbook-ui";
 
 const testId = "popover-kit";
 

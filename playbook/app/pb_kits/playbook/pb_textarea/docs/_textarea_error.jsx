@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Textarea } from '../..'
+import { Textarea } from 'playbook-ui'
 
 const TextareaError = (props) => {
   const [value, setValue] = useState('default value text')

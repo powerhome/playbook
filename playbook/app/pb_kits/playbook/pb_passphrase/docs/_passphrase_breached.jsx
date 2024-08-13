@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { Caption, Passphrase, ProgressSimple } from '../..'
+import { Caption, Passphrase, ProgressSimple } from 'playbook-ui'
 import zxcvbn from 'zxcvbn'
 
 const PassphraseBreached = (props) => {

@@ -1,7 +1,5 @@
-// @flow
-
 import React, { useState } from 'react'
-import { Caption, Title, Toggle } from '../..'
+import { Caption, Title, Toggle } from 'playbook-ui'
 
 const ToggleName = () => {
   const [choice, setChoice] = useState(false)

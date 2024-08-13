@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, FixedConfirmationToast, PhoneNumberInput } from "../../";
+import { Button, FixedConfirmationToast, PhoneNumberInput } from "playbook-ui";
 
 const PhoneNumberInputValidation = (props) => {
     const [formErrors, setFormErrors] = useState("");

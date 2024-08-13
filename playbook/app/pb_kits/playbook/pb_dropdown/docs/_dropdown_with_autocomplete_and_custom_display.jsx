@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dropdown, User, Badge, FlexItem, Avatar } from '../..'
+import { Dropdown, User, Badge, FlexItem, Avatar } from 'playbook-ui'
 
 const DropdownWithAutocompleteAndCustomDisplay = (props) => {
   const [selectedOption, setSelectedOption] = useState();
