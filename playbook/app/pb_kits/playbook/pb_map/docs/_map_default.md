@@ -1,4 +1,4 @@
-This kit provides a wrapping class to place around the MapLibre library. Complete docs for using the library can be found [here](https://maplibre.org/maplibre-gl-js-docs/api/).
+This kit kit provides a wrapping class to place around the MapLibre library. Complete docs for using the library can be found [here](https://maplibre.org/maplibre-gl-js-docs/api/).
 
 Basic setup to start using MapLibre:
 - Install the npm package using `yarn add maplibre-gl`
