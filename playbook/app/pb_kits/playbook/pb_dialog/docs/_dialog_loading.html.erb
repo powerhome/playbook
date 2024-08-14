@@ -6,6 +6,7 @@
     title: "Loading Exmaple", 
     text: "Make a 3 second request?", 
     cancel_button: "Cancel Button", 
+    cancel_button_id: "cancel-button-loading",
     confirm_button: "Okay", 
     confirm_button_id: "confirm-button-loading",
 }) %>
@@ -13,11 +14,27 @@
 <script>
   document.getElementById("confirm-button-loading").addEventListener("click", function() {
     let okayLoadingButton = document.getElementById("confirm-button-loading");
+    let cancelButton = document.getElementById("cancel-button-loading");
     let currentClass = okayLoadingButton.className;
+    let cancelClass = cancelButton.className;
     let newClass = currentClass.replace("_enabled", "_disabled_loading");
+    let newCancelClass = cancelClass.replace("_enabled", "_disabled");
+
+    // Disable the buttons
+    okayLoadingButton.disabled = true;
+    cancelButton.disabled = true;
+
     okayLoadingButton.className = newClass;
+    cancelButton.className = newCancelClass;
+
     setTimeout(() => {
+      // Re-enable the buttons
+      okayLoadingButton.disabled = false;
+      cancelButton.disabled = false;
+
+      // Restore original classes
       okayLoadingButton.className = currentClass;
+      cancelButton.className = cancelClass;
     }, 3000);
   });
 </script>

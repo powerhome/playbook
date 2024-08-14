@@ -14,8 +14,8 @@ module Playbook
       prop :title
       prop :text
       prop :confirm_button
-      prop :cancel_button
       prop :confirm_button_id
+      prop :cancel_button
       prop :cancel_button_id
       prop :status, type: Playbook::Props::Enum,
                     values: ["info", "caution", "delete", "error", "success", "default", ""],
