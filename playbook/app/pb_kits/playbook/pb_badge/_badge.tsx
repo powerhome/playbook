@@ -47,7 +47,7 @@ const Badge = (props: BadgeProps): React.ReactElement => {
   const css = classnames(
     buildCss('pb_badge_kit',
       variant === "success" ? "success_sm" : variant === "notificationError" ? "notification_error" : variant,
-      rounded ? 'rounded' : null),
+      rounded ? 'rounded' : ''),
     globalProps(props),
     className
   )
