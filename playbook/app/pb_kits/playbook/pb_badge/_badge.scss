@@ -42,6 +42,12 @@
     color: $white;
   }
 
+
+  &[class*=_notification_error] {
+    background: $error;
+    color: $white;
+  }
+
   &.dark {
     border-width: 0;
 

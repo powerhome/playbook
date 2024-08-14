@@ -4,20 +4,39 @@ import Badge from '../_badge'
 const BadgeNotification = (props) => {
   return (
     <>
-      <Badge
-          rounded
-          text="1"
-          variant="notification"
-          {...props}
-      />
+      <div>
+        <Badge
+            rounded
+            text="1"
+            variant="notification"
+            {...props}
+        />
 
-      &nbsp;
+        &nbsp;
 
-      <Badge
-          text="4"
-          variant="notification"
-          {...props}
-      />
+        <Badge
+            text="4"
+            variant="notification"
+            {...props}
+        />
+      </div>
+
+      <div>
+        <Badge
+            rounded
+            text="1"
+            variant="notificationError"
+            {...props}
+        />
+
+        &nbsp;
+
+        <Badge
+            text="4"
+            variant="notificationError"
+            {...props}
+        />
+      </div>
     </>
   )
 }
