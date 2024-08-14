@@ -58,65 +58,65 @@ const Pagination = ( props: PaginationProps) => {
     // Always display the first page button
     if (rangeStart > 1) {
       buttons.push(
-        <button
+        <li
             className="pagination-number"
             key={1}
             onClick={() => handlePageChange(1)}
         >
           1
-        </button>
+        </li>
       );
     }
   
     // Always display the second page button
     if (rangeStart > 2) {
       buttons.push(
-        <button
+        <li
             className="pagination-number"
             key={2}
             onClick={() => handlePageChange(2)}
         >
           2
-        </button>
+        </li>
       );
     }
 
     // Display page buttons within the calculated range
     for (let i = rangeStart; i <= rangeEnd; i++) {
       buttons.push(
-        <button
+        <li
             className={`pagination-number ${i === currentPage ? "active" : ""}`}
             key={i}
             onClick={() => handlePageChange(i)}
         >
           {i}
-        </button>
+        </li>
       );
     }
 
     // Always display the second-to-last page button
     if (rangeEnd < total - 1) {
       buttons.push(
-        <button
+        <li
             className={`pagination-number ${total - 1 === currentPage ? "active" : ""}`}
             key={total - 1}
             onClick={() => handlePageChange(total - 1)}
         >
           {total - 1}
-        </button>
+        </li>
       );
     }
 
     // Always display the last page button
     if (rangeEnd < total) {
       buttons.push(
-        <button
+        <li
             className={`pagination-number ${total === currentPage ? "active" : ""}`}
             key={total}
             onClick={() => handlePageChange(total)}
         >
           {total}
-        </button>
+        </li>
       );
     }
 
@@ -142,22 +142,20 @@ const Pagination = ( props: PaginationProps) => {
         className={classes}
         id={id}
     >
-      <div className="pb_pagination react_pagination">
-        <button
-            className="pagination-left"
-            disabled={currentPage === 1}
+      <div className="pb_pagination">
+        <li
+            className={`pagination-left ${currentPage === 1 ? 'disabled' : ''}`}
             onClick={() => handlePageChange(currentPage - 1)}
         >
           <Icon icon="chevron-left" />
-        </button>
+        </li>
         {renderPageButtons()}
-        <button
-            className="pagination-right"
-            disabled={currentPage === total}
+        <li
+            className={`pagination-right ${currentPage === total ? 'disabled' : ''}`}
             onClick={() => handlePageChange(currentPage + 1)}
         >
           <Icon icon="chevron-right" />
-        </button>
+        </li>
       </div>
     </div>
   );

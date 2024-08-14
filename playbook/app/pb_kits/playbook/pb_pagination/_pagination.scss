@@ -3,6 +3,7 @@
 @import "../tokens/border_radius";
 @import "../tokens/shadows";
 
+
 $pagination_padding: 7px 13px 6px 13px;
 $top_bottom_radius: 0px;
 
@@ -72,10 +73,6 @@ $top_bottom_radius: 0px;
     padding: $pagination_padding;
     font-size: $text_small;
   }
-  
-  &.react_pagination {
-    padding: $space_xxs 0px !important;
-  }
 
   .pagination-right, 
   .pagination-left {
@@ -97,5 +94,11 @@ $top_bottom_radius: 0px;
   .pagination-right {
     border-right: none;
     margin-left: $space_xxs;
+  }
+
+  .disabled {
+    pointer-events: none;
+    opacity: 0.5;        
+    color: grey;     
   }
 }
