@@ -8,6 +8,9 @@ import Icon from '../pb_icon/_icon'
 import Caption from "../pb_caption/_caption"
 import Flex from "../pb_flex/_flex"
 
+import { buttonVariants, buttonSizes, buttonDisabled, buttonBlock, buttonLoading } from './button.css';
+import { defaultButtonTheme } from './buttonTheme.css.ts';
+
 type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
 type ButtonPropTypes = {
@@ -74,6 +77,7 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     count,
     data = {},
     disabled,
+    fullWidth = false,
     htmlOptions = {},
     icon = null,
     iconRight = false,
@@ -87,7 +91,8 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
     text,
     htmlType = 'button',
     value,
-    variant,
+    variant = 'primary',
+    size = null,
     form = null
   } = props
 
@@ -95,8 +100,17 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
 
+  const buttonClass = [
+    defaultButtonTheme,
+    buttonVariants[variant],
+    buttonSizes[size],
+    disabled && buttonDisabled,
+    fullWidth && buttonBlock,
+    loading && buttonLoading,
+  ].filter(Boolean).join(' ');
+
   const css = classnames(
-    buttonClassName(props),
+    buttonClass,
     globalProps(props),
     className
   )

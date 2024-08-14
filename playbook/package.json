@@ -36,6 +36,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@popperjs/core": "^2.6.0",
+    "@vanilla-extract/css": "^1.15.3",
     "flatpickr": "^4.6.13",
     "highcharts": "^10.0.0",
     "highcharts-react-official": "^3.2.0",
@@ -63,6 +64,7 @@
     "@types/react-modal": "3.13.1",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
+    "@vanilla-extract/vite-plugin": "^4.0.13",
     "@vitejs/plugin-react": "^4.3.1",
     "axe-core": "4.4.3",
     "classnames": "^2.2.6",
