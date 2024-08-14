@@ -23,6 +23,7 @@ const RichTextEditorAdvancedPreview = (props) => {
       setPreviewText(editor.getHTML())
     }
   }
+
   const handleClick = () => {
     handleChange()
     setShowPreview(true)
@@ -41,20 +42,23 @@ const RichTextEditorAdvancedPreview = (props) => {
           {...props}
       >
         <EditorContent editor={editor}/>
-        {showPreview && (
-          <Card marginTop="md">
-            <div
-                className="tiptap-content"
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{ __html: previewText }}
-                id="advanced-preview-content"
-            />
-          </Card>
-        )}
-        {!showPreview && (
-          <div />
-        )}
       </RichTextEditor>
+      {showPreview && (
+        <Card 
+            marginTop="md"
+            maxWidth="md"
+        >
+          <div
+              className="tiptap-content"
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: previewText }}
+              id="advanced-preview-content"
+          />
+        </Card>
+      )}
+      {!showPreview && (
+        <div />
+      )}
       <Button
           id="preview-button"
           marginTop="md"

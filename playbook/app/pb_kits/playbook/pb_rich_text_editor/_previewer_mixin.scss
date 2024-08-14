@@ -3,6 +3,16 @@
 @import "../tokens/spacing";
 @import "../tokens/typography";
 
+@mixin preview_first_child {
+    :first-child {
+        margin-top: 0;
+    }
+}
+
+@mixin preview_p {
+    margin: 1rem 0 0 0;
+    min-height: 1rem;
+}
 
 @mixin preview_code {
     font-family: monospace;
@@ -49,6 +59,7 @@
     font-size: $font_larger;
     padding: $space_sm $space_md;
     font-style: italic;
+    margin: 1rem 0 0 0;
     p {
         margin: 0;
     }
@@ -83,6 +94,7 @@
     line-height: $text_base;
     letter-spacing: $lspace_tight;
     font-weight: $bolder;
+    margin: 1rem 0 0 0;
 }
 
 @mixin preview_hr {

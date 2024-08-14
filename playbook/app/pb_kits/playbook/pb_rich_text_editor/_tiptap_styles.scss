@@ -6,7 +6,7 @@
 @import "../tokens/typography";
 @import "../tokens/shadows";
 @import "../tokens/transition";
-@import "tiptap_mixin";
+@import "previewer_mixin";
 
 [class^="pb_rich_text_editor_kit"] {
   .toolbar_button {
@@ -126,15 +126,6 @@
       @include preview_ul;
     }
   }
-
-  .tiptap-content {
-    blockquote {
-      @include preview_blockquote;
-    }
-    pre {
-      @include preview_pre_codeblock;
-    }
-  }
 }
 
 .pb_tiptap_toolbar_dropdown_list_item {
@@ -176,5 +167,43 @@
       border-top-left-radius: initial;
       border-top-right-radius: initial;
     }
+  }
+}
+.tiptap-content {
+  @include preview_first_child;
+  a {
+    @include preview_a;
+  }
+  blockquote {
+    @include preview_blockquote;
+  }
+  h1 {
+    @include preview_h1;
+  }
+  h2 {
+    @include preview_h2;
+  }
+  h3 {
+    @include preview_h3;
+  }
+  h4,
+  h5,
+  h6 {
+    @include preview_smaller_headings;
+  }
+  hr {
+    @include preview_hr;
+  }
+  ol {
+    @include preview_ol;
+  }
+  p {
+    @include preview_p;
+  }
+  pre {
+    @include preview_pre_codeblock;
+  }
+  ul {
+    @include preview_ul;
   }
 }
