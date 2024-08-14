@@ -69,9 +69,15 @@ $top_bottom_radius: 0px;
     font-weight: $bold;
     font-size: $text_small;
   }
-  .disabled > span {
-    padding: $pagination_padding;
-    font-size: $text_small;
+  .disabled {
+    pointer-events: none;
+    opacity: 0.5;        
+    color: grey; 
+
+    & > span {
+      padding: $pagination_padding;
+      font-size: $text_small;
+    }
   }
 
   .pagination-right, 
@@ -81,10 +87,7 @@ $top_bottom_radius: 0px;
     border-bottom: none;
     cursor: pointer;
     padding: 7px 11px 6px;
-  
-    &:not(:disabled):hover {
-      @include hover-state;
-    }
+    font-size: $text_small;
   }
   .pagination-left {
     border-left: none;
@@ -94,11 +97,5 @@ $top_bottom_radius: 0px;
   .pagination-right {
     border-right: none;
     margin-left: $space_xxs;
-  }
-
-  .disabled {
-    pointer-events: none;
-    opacity: 0.5;        
-    color: grey;     
   }
 }
