@@ -8,7 +8,7 @@ $pagination_padding: 7px 13px 6px 13px;
 $top_bottom_radius: 0px;
 
 @mixin hover-state {
-  background-color: $active_light;
+  background-color: $active_light !important;
   color: $primary;
   border-radius: $border_rad_light;
 }
@@ -88,6 +88,10 @@ $top_bottom_radius: 0px;
     cursor: pointer;
     padding: 7px 11px 6px;
     font-size: $text_small;
+    
+    &:hover {
+      @include hover-state;
+    }
   }
   .pagination-left {
     border-left: none;
