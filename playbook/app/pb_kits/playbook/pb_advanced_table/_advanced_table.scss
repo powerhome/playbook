@@ -157,7 +157,7 @@
 
   &.dark {
     .bg-white {
-      background-color: $bg_dark_card !important;
+      background-color: $bg_dark_card;
     }
 
     .bg-silver {
@@ -166,14 +166,6 @@
 
     .table-header-cells:first-child, td:first-child {
       box-shadow: 1px 0px 0px 0px $border_dark !important;
-    }
-
-    .table-header-cells {
-      background-color: $bg_dark_card !important;
-    }
-    
-    .table-header-cells:first-child {
-      background-color: $bg_dark_card !important;
     }
 
     .collapsible-trail {
