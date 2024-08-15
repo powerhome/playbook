@@ -42,10 +42,8 @@
     color: $white;
   }
 
-
   &[class*=_notification_error] {
     background: $error;
-    color: $white;
   }
 
   &.dark {
@@ -56,6 +54,11 @@
         background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
         color: map-get($status_color_text_dark, $color_name);
       }
+    }
+
+    &[class*=_notification_error]  {
+      background: $error_dark;
+      color: $white;
     }
   }
 }
