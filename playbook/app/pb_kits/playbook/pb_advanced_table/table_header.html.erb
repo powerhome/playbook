@@ -11,8 +11,7 @@
                        props: { 
                          align: "center", 
                          justify: index.zero? ? "start" : "end", 
-                         text_align: "end", 
-                         classname: "table-header-cells" }) do %>
+                         text_align: "end"}) do %>
             <% if index.zero? && (object.enable_toggle_expansion == "header" || object.enable_toggle_expansion == "all") %>
               <button class="gray-icon toggle-all-icon" onclick="expandAllRows(this)">
                 <%= pb_rails("icon", 
