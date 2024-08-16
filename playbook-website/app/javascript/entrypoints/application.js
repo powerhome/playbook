@@ -33,18 +33,7 @@ import { Turbo } from "@hotwired/turbo-rails"
 Turbo.session.drive = false
 
 // Icons from playbook-icons-react for testing
-import * as icons from "@powerhome/playbook-icons-react"
 
-window.PB_ICONS = {}
-
-function pascalToKebabCase(str) {
-  return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()
-}
-
-Object.entries(icons).forEach(([key, value]) => {
-  const iconName = pascalToKebabCase(key)
-  window.PB_ICONS[iconName] = value
-})
 
 document.addEventListener('DOMContentLoaded', () => {
   const anchors = new AnchorJS()
