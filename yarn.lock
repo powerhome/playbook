@@ -7314,10 +7314,10 @@ intersection-observer@^0.10.0:
   resolved "https://npm.powerapp.cloud/intersection-observer/-/intersection-observer-0.10.0.tgz#4d11d63c1ff67e21e62987be24d55218da1a1a69"
   integrity sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==
 
-intl-tel-input@^18.0.15:
-  version "18.5.3"
-  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-18.5.3.tgz#20b18431cb802d33c118f52e332e218e641ec09b"
-  integrity sha512-ncFqSpkdGf2YC/FvAiwBH44KAeRG8L7aqDODEpOvMAT3ZpBtvc/WtwaQ/6X4+HKDTlGkobdBjr6P3nAMwO8jtA==
+intl-tel-input@^23.9.0:
+  version "23.9.0"
+  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-23.9.0.tgz#4e89d073b3d6c423316b8ec6a2004c76f8d49c9e"
+  integrity sha512-sYiMaKYi94E9D9Fh4l3zkjTLDjEelBIXZoYP9O2kBsoWj99R4Un0th4sBWkaptv6KeWtDHqjzJGmolRqb3DapQ==
 
 is-accessor-descriptor@^0.1.6:
   version "0.1.6"
