@@ -18,11 +18,9 @@
     font-family: monospace;
     background: $bg_light;
     padding: 0.1rem 0.3rem;
-    margin: 0 5px;
     box-shadow: 0 2px 10px $shadow;
     border-radius: 0.25rem;
     overflow: hidden;
-    font-size: ($text_small - 1px);
 }
 
 @mixin preview_pre_codeblock {
