@@ -46,6 +46,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
   } = props
 
   const iconClass = icon ? "_icon" : ""
+  const closeIconSize = size === "small" ? "xs" : "sm"
   const css = classnames(
     `pb_form_pill_kit_${color}${iconClass}`,
     globalProps(props),
@@ -69,7 +70,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
           <Avatar
               imageUrl={avatarUrl}
               name={name}
-              size="xs"
+              size="xxs"
               status={null}
           />
           <Title
@@ -84,7 +85,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
           <Avatar
               imageUrl={avatarUrl}
               name={name}
-              size="xs"
+              size="xxs"
               status={null}
           />
           <Title
@@ -126,6 +127,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
         <Icon
             fixedWidth
             icon="times"
+            size={closeIconSize}
         />
       </div>
     </div>
