@@ -15,7 +15,6 @@ type KitDocsType = {
   exampleTitle: string,
 }
 
-const FA_JS = "https://kit.fontawesome.com/098a1cd4d5.js"
 const PB_JS = "https://unpkg.com/playbook-ui@13.17.0/dist/playbook.css"
 
 const KitDocs = ({ source, exampleTitle }: KitDocsType) => {
@@ -58,7 +57,6 @@ const KitDocs = ({ source, exampleTitle }: KitDocsType) => {
         }}
         options={{
           externalResources: [
-            FA_JS,
             PB_JS,
           ],
         }}

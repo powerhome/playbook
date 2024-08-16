@@ -7,9 +7,6 @@ window.zxcvbn = zxcvbn
 
 import 'playbook-ui/dist/playbook-rails.js'
 import 'playbook-ui/dist/playbook-doc.js'
-import '@fortawesome/fontawesome-pro/js/fontawesome.min.js'
-import '@fortawesome/fontawesome-pro/js/regular.min.js'
-import '@fortawesome/fontawesome-pro/js/brands.min.js'
 
 import '../site_styles/main.scss'
 

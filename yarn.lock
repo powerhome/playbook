@@ -2601,16 +2601,6 @@
   resolved "https://npm.powerapp.cloud/@floating-ui/utils/-/utils-0.2.1.tgz#16308cea045f0fc777b6ff20a9f25474dd8293d2"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
-"@fortawesome/fontawesome-free@^6.2.1":
-  version "6.2.1"
-  resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.1.tgz#344baf6ff9eaad7a73cff067d8c56bfc11ae5304"
-  integrity sha512-viouXhegu/TjkvYQoiRZK3aax69dGXxgEjpvZW81wIJdxm5Fnvp3VVIP4VHKqX4SvFw6qpmkILkD4RJWAdrt7A==
-
-"@fortawesome/fontawesome-pro@6.2.1":
-  version "6.2.1"
-  resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-pro/-/fontawesome-pro-6.2.1.tgz#1cd5b79d93fdb955ef8a04996fef20a44207a6f0"
-  integrity sha512-dHk7iiCf5MCmoUvmrYzfN/I3gebpgpA1oqlOffgOThnsaAR4kpaQ5YMTdkdG99Of1hnN0Bok6R+HE28zXb3SOg==
-
 "@gilbarbara/deep-equal@^0.1.1":
   version "0.1.2"
   resolved "https://npm.powerapp.cloud/@gilbarbara/deep-equal/-/deep-equal-0.1.2.tgz#1a106721368dba5e7e9fb7e9a3a6f9efbd8df36d"

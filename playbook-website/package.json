@@ -7,7 +7,6 @@
     "release": "bin/vite build"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-pro": "6.2.1",
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@powerhome/power-fonts": "0.0.1-alpha.6",
     "anchor-js": "^5.0.0",
