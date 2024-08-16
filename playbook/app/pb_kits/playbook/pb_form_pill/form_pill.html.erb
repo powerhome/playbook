@@ -3,11 +3,11 @@
     <%= pb_rails("avatar", props: { name: object.name, image_url: object.avatar_url, size: "xxs" }) %>
     <%= pb_rails("title", props: { text: object.name, size: 4, classname: "pb_form_pill_text" }) %>
     <% if object.icon.present? %>
-      <%= pb_rails("icon", props: { classname: "pb_form_pill_icon", icon: object.icon }) %>
+      <%= pb_rails("icon", props: { classname: "pb_form_pill_icon", color: object.color, icon: object.icon }) %>
     <% end %>
   <% elsif object.text.present? %>
       <% if object.icon.present? %>
-        <%= pb_rails("icon", props: { classname: "pb_form_pill_icon", icon: object.icon }) %>
+        <%= pb_rails("icon", props: { classname: "pb_form_pill_icon", color: object.color, icon: object.icon }) %>
       <% end %>
       <% if object.text.present? %>
         <%= pb_rails("title", props: { text: object.text, size: 4, classname: "pb_form_pill_tag" }) %>

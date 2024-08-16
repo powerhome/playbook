@@ -95,6 +95,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
           />
           <Icon
               className="pb_form_pill_icon"
+              color={color}
               icon={icon}
           />
         </>
@@ -103,6 +104,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
         <>
           <Icon
               className="pb_form_pill_icon"
+              color={color}
               icon={icon}
           />
           <Title
