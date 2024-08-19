@@ -27,6 +27,15 @@ module Playbook
                      values: %w[default elapsed updated],
                      default: "default"
 
+      # Variables to use with pb_time_ago method
+      SECS_PER_MIN  = 60
+      SECS_PER_HOUR = 60 * SECS_PER_MIN
+      SECS_PER_DAY  = 24 * SECS_PER_HOUR
+      SECS_PER_WEEK = 7 * SECS_PER_DAY
+      SECS_PER_MONTH = 4 * SECS_PER_WEEK
+      SECS_PER_YEAR = 12 * SECS_PER_MONTH
+      SECS_PER_CENT = 100 * SECS_PER_YEAR
+
       def classname
         generate_classname("pb_timestamp_kit", variant_class, align)
       end
@@ -73,10 +82,36 @@ module Playbook
 
       def format_elapsed_string
         user_string = show_user ? " by #{text}" : ""
-        datetime_string = " #{time_ago_in_words(pb_date_time.convert_to_timestamp)} ago"
+        datetime_string = " #{pb_time_ago(pb_date_time.convert_to_timestamp)} ago"
         updated_string = hide_updated ? "" : "Last updated"
 
         "#{updated_string}#{user_string}#{datetime_string}"
+      end
+
+      def pb_time_ago(value)
+        time_ago = DateTime.now.to_i - value.to_i
+        case time_ago
+        when (0...SECS_PER_MIN)
+          time_ago == 1 ? "1 second" : "#{time_ago} seconds"
+        when (SECS_PER_MIN...SECS_PER_HOUR)
+          time = time_ago / SECS_PER_MIN
+          time == 1 ? "1 minute" : "#{time_ago / SECS_PER_MIN} minutes"
+        when (SECS_PER_HOUR...SECS_PER_DAY)
+          time = time_ago / SECS_PER_HOUR
+          time == 1 ? "1 hour" : "#{time_ago / SECS_PER_HOUR} hours"
+        when (SECS_PER_DAY...SECS_PER_WEEK)
+          time = time_ago / SECS_PER_DAY
+          time == 1 ? "1 day" : "#{time_ago / SECS_PER_DAY} days"
+        when (SECS_PER_WEEK...SECS_PER_MONTH)
+          time = time_ago / SECS_PER_WEEK
+          time == 1 ? "1 week" : "#{time_ago / SECS_PER_WEEK} weeks"
+        when (SECS_PER_MONTH...SECS_PER_YEAR)
+          time = time_ago / SECS_PER_MONTH
+          time == 1 ? "1 month" : "#{time_ago / SECS_PER_MONTH} months"
+        when (SECS_PER_YEAR...SECS_PER_CENT)
+          time = time_ago / SECS_PER_YEAR
+          time == 1 ? "1 year" : "#{time_ago / SECS_PER_YEAR} years"
+        end
       end
 
       def datetime_or_text
