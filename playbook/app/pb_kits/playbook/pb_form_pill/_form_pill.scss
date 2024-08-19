@@ -32,6 +32,9 @@ $form_pill_colors: (
       @if ($color_name == "neutral") {
         background-color: $white;
         border: 1px solid $border_light;
+        .pb_form_pill_icon {
+          color: $text_lt_default;
+        }
       }
       transition: background-color 0.2s ease;
       box-shadow: none;
@@ -64,6 +67,9 @@ $form_pill_colors: (
         height: 17px;
         border-radius: calc(50%);
         cursor: pointer;
+        @if ($color_name == "neutral") {
+          color: $text_lt_default;
+        }
         &:hover {
           background-color: mix($color_value, $card_light, 40%);
           @if ($color_name == "neutral") {
@@ -130,7 +136,7 @@ $form_pill_colors: (
       // Primary and Neutral are exceptions to the general rule in the handoff 
       &[class*=_#{$color_name}]  {
       //   background-color: mix($color_value, $card_dark, 10%);
-        // .pb_form_pill_tag {
+        // .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
         //   color: $color_name;
         // }
         // .pb_form_pill_close {
@@ -148,7 +154,7 @@ $form_pill_colors: (
         @if ($color_name == "neutral") {
           background-color: transparent;
           border: 1px solid $border_dark;
-          .pb_form_pill_text, .pb_form_pill_tag {
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
             color: $text_dk_default;
           }
           .pb_form_pill_close {
@@ -169,7 +175,7 @@ $form_pill_colors: (
         }
         @if ($color_name == "primary") {
           background-color: mix($active_dark, $card_dark, 10%);
-          .pb_form_pill_text, .pb_form_pill_tag {
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
             color: $active_dark;
           }
           .pb_form_pill_close {
