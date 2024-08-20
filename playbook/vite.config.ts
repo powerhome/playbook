@@ -9,7 +9,6 @@ import cssUrl from './app/javascript/rollup/css-url-plugin';
 import { env } from 'process';
 
 const isProduction = env.NODE_ENV === 'production'
-const NODE_MODULES_PATH = resolve(__dirname, '../node_modules')
 
 export default defineConfig({
   build: {
@@ -64,12 +63,7 @@ export default defineConfig({
   css: {
     modules: {
       generateScopedName: '[name]__[local]___[hash:base64:5]',
-    },
-    preprocessorOptions: {
-      scss: {
-        includePaths: [NODE_MODULES_PATH],
-      },
-    },
+    }
   },
   plugins: [
     react(),
