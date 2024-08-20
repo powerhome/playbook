@@ -63,7 +63,12 @@ export default defineConfig({
   css: {
     modules: {
       generateScopedName: '[name]__[local]___[hash:base64:5]',
-    }
+    },
+    preprocessorOptions: {
+      scss: {
+        includePaths: [resolve(__dirname, 'node_modules')],
+      },
+    },
   },
   plugins: [
     react(),
