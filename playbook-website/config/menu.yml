@@ -566,3 +566,7 @@ kits:
       with avatar, titles, name and territory. This is a versatile kit with features
       than can be added to display more info.
     status: stable
+- category: gantt_chart
+  components:
+    - name: gantt_chart
+      platforms: react_only
