@@ -78,7 +78,7 @@ const GanttChart = (props: GanttChartProps) => {
     ],
   };
 
-  const [options, setOptions] = useState();
+  const [options, setOptions] = useState<Highcharts.Options | undefined>(customOptions);
 
   useEffect(() => {
     setOptions(customOptions);
