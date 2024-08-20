@@ -4,6 +4,8 @@ import RubyPlugin from 'vite-plugin-ruby'
 import react from '@vitejs/plugin-react'
 import copy from 'rollup-plugin-copy'
 import typescript from '@rollup/plugin-typescript'
+import consolidate from './app/javascript/rollup/consolidate-plugin';
+import cssUrl from './app/javascript/rollup/css-url-plugin';
 import { env } from 'process';
 
 const isProduction = env.NODE_ENV === 'production'
@@ -80,6 +82,18 @@ export default defineConfig({
       declarationDir: resolve(__dirname, 'dist'),
       declaration: true,
     }),
+    consolidate({
+      groups: [
+        {
+            files: [
+              resolve(__dirname, 'dist/playbook.css'),
+              resolve(__dirname, 'dist/lib.css'),
+            ],
+            outputFile: resolve(__dirname, 'dist/playbook.css'),
+        }
+      ],
+    }),
+    cssUrl(),
   ],
   resolve: {
     dedupe: ['playbook'],
