@@ -1,467 +1,568 @@
-web: &web ["rails", "react"]
-all: &all ["rails", "react", "swift"]
-rails_swift: &rails_swift ["rails", "swift"]
-react_swift: &react_swift ["swift", "react"]
-rails_only: &rails_only ["rails"]
-react_only: &react_only ["react"]
-swift_only: &swift_only ["swift"]
-
+---
+web: &1
+- rails
+- react
+all: &3
+- rails
+- react
+- swift
+rails_swift:
+- rails
+- swift
+react_swift:
+- swift
+- react
+rails_only: &4
+- rails
+react_only: &2
+- react
+swift_only:
+- swift
 kits:
-  - name: alerts_and_dialogs
-    description: 
-    components:
-      - name: "dialog"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "fixed_confirmation_toast"
-        platforms: *web
-        description: Fixed Confirmation Toast is used as an alert. Success is used when a user successfully completes an action. Error is used when there is an error and the user cannot proceed. Neutral is used to display information to a user to complete a task.
-        status: "stable"
-      - name: "popover"
-        platforms: *web
-        description: A popover is a way to toggle content on top of other content. It can be used for small texts, small forms, or even dropdowns. By default, popover will toggle open/closed by simply clicking the trigger element.
-        status: "stable"
-      - name: "tooltip"
-        platforms: *web
-        description:
-        status: "stable"
-  - name: buttons
-    description: Buttons are used primarily for actions, such as “Save” and “Cancel”. Link Buttons are used for less important or less commonly used actions, such as “view shipping settings”.
-    components:
-      - name: "button"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "button_toolbar"
-        platforms: *web
-        description: This kit should primarily hold the most commonly used buttons.
-        status: "stable"
-      - name: "circle_icon_button"
-        platforms: *web
-        description: When using Icon Circle Button, the icon must be clear a clear indication of what the button does because there is no text. 
-        status: "stable"
-  - name: data_visualization
-    description: 
-    components:
-      - name: "map"
-        platforms: *react_only
-        description: This kit provides a wrapping class to place around the MapLibre library.
-        status: "stable"
-      - name: "table"
-        platforms: *web
-        description: Tables display a collection of structured data and typically have the ability to sort, filter, and paginate data. 
-        status: "stable"
-      - name: "advanced_table"
-        platforms: *web
-        description: The Advanced Table can be used to display complex, nested data in a way that allows for expansion and/or sorting.
-        status: "stable" 
-      - name: "list"
-        platforms: *web
-        description: Lists display a vertical set of related content.
-        status: "stable"
-      - name: "filter"
-        platforms: *web
-        description: This kit can be implemented in a variety of ways. To see examples of how to implement this kit in production visit the /dev_docs/search page in production.
-        status: "stable"
-      - name: "distribution_bar"
-        platforms: *web
-        description: Can be used in the same way a pie chart can be used. By default, Distribution Bar comparatively represents data without numbers. 
-        status: "stable"
-      - name: "legend"
-        platforms: *web
-        description: A key used to compare the variables and their value in any given graph.
-        status: "stable"
-      - name: "gauge"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "bar_graph"
-        platforms: *web
-        description: Bar graphs are used to compare data. Bar graphs are not typically used to show percentages.
-        status: "stable"
-      - name: "circle_chart"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "line_graph"
-        platforms: *web
-        description: Line graphs are used to show changes in data over time.
-        status: "stable"
-      - name: "treemap_chart"
-        platforms: *web
-        description: Treemap charts are used to compare the relative size of groups of data. They can also use a nested data structure, allowing a user to drill down into a group to see its constituent data points.
-        status: "stable"
-  - name: date_and_time_text_patterns
-    description: ""
-    components:
-      - name: "date"
-        platforms: *web
-        description: Use to display the date. Year will not display if it is the current year.
-        status: "stable"
-      - name: "date_range_inline"
-        platforms: *web
-        description: Use to display a date range. Year will not show if it is the current year.
-        status: "stable"
-      - name: "date_range_stacked"
-        platforms: *web
-        description:
-        status: "stable" 
-      - name: "date_stacked"
-        platforms: *web
-        description: Use to display the date, stacking month and day. Year will not show if it is the current year.
-        status: "stable"
-      - name: "date_time"
-        platforms: *web
-        description: Date Time is a composite kit that leverages the Date and Time kits. The Date Time kit is affected by time zones and defaults to "America/New_York".
-      - name: "date_time_stacked"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "date_year_stacked"
-        platforms: *web
-        description: This kit is a simple option for displaying dates in a month, day and the year format.
-        status: "stable"
-      - name: "time"
-        platforms: *web
-        description: This kit consist of large display and table display format. It includes and icon, and a time zone.
-        status: "stable"
-      - name: "time_range_inline"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "time_stacked"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "timestamp"
-        platforms: *all
-        description: This low profile kit displays time. Elapsed, current, future, or otherwise.
-        status: "stable"
-      - name: "weekday_stacked"
-        platforms: *web
-        description: 
-        status: "stable"
-  - name: form_and_dashboard_text_patterns
-    description: ""
-    components:
-      - name: "contact"
-        platforms: *web
-        description: Use to display customer's or user's contact information.
-        status: "stable"
-      - name: "currency"
-        platforms: *web
-        description: Use to display monetary amounts, typically on dashboards or other layouts to show an overview or summary. User understanding increase when paired with labels.
-        status: "stable"
-      - name: "home_address_street"
-        platforms: *web
-        description: This kit can be used to display the address for a homeowner/project. It contains street address, APT format, City, state and zip. A Project hashtag can be used as a prop to link back to a project.
-        status: "stable"
-      - name: "label_pill"
-        platforms: *web
-        description: This kit combines the caption and pill kit with all its variants.
-        status: "stable"
-      - name: "label_value"
-        platforms: *web
-        description: This kit can be very versatile when used to display text data.
-        status: "stable"
-      - name: "person"
-        platforms: *web
-        description: This kit is broken down into a first name last name format with normal and bold weighted text.
-        status: "stable"
-      - name: "person_contact"
-        platforms: *web
-        description: This kit can be used to display a person contact information. 
-        status: "stable"
-      - name: "source"
-        platforms: *web
-        description: General use is to describe the discovery of businesses, customers, etc. This kit can also be used for other purposes as well.
-        status: "stable"
-      - name: "dashboard_value"
-        platforms: *web
-        description: Use in dashboards to give the viewer a quick overview of important metrics. If want to show currency, use Currency Kit.
-        status: "stable"
-      - name: "stat_change"
-        platforms: *web
-        description: Displays the increase, decrease, or neutral change in data.
-        status: "stable"
-      - name: "stat_value"
-        platforms: *web
-        description: This kit was cerated for the main use as a dashboard display for numbers. A large label is an optional part if it needs more clarity.
-        status: "stable"
-      - name: "title_count"
-        platforms: *web
-        description: This kits consists of title kit and body text. It is used to display a title and a count (numbers). It has a base size and a large formation for dashboard use.
-        status: "stable"
-      - name: "title_detail"
-        platforms: *web
-        description: This kit can be used in many versatile ways. It consist of a title 4 and light body text kit.
-        status: "stable"
-  - name: form_elements
-    description: 
-    components:
-      - name: "file_upload"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "toggle"
-        platforms: *web
-        description: Physical switch that allows users to turn things on or off. Used for applying system states, presenting binary options and activating a state.
-        status: "stable"
-      - name: "form_pill"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "form"
-        platforms: *rails_only
-        description: The form kit provides consumers with a convenient, consistently styled <form> wrapper.
-        status: "stable"
-      - name: "form_group"
-        platforms: *web
-        description: 
-        status: "stable"
-  - name: form_input
-    description: ""
-    components:
-      - name: "passphrase"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "phone_number_input"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "text_input"
-        platforms: *web
-        description: Area where user can enter small amount of text. Commonly used in forms.
-        status: "stable"
-      - name: "rich_text_editor"
-        platforms: *web
-        description:
-        status: "stable" 
-      - name: "textarea"
-        platforms: *web
-        description: Area where user can enter larger amounts of text. Commonly used in forms.
-        status: "stable"
-      - name: "typeahead"
-        platforms: *web
-        description: Typeahead is auto suggestion or completion based on what the user is starting to type, gets refined as the user types more.
-        status: "stable"
-  - name: form_selection
-    description: 
-    components:
-      - name: "date_picker"
-        platforms: *web
-        description: Playbook's date picker is built using flatpickr, a vanilla js library. Common date picker use cases and features have been adapted into simple prop based configuration detailed in the docs below.
-        status: "stable"
-      - name: dropdown
-        platforms: *web
-        description: ""
-        status: "stable"
-      - name: "multi_level_select"
-        platforms: *web
-        description: The MultiLevelSelect kit renders a multi leveled select dropdown based on data from the user. 
-        status: "stable"
-      - name: "select"
-        platforms: *web
-        description: Select displays multiple options for a user to pick from in a dropdown menu. User selects one option.
-        status: "stable"
-      - name: "selectable_card"
-        platforms: *web
-        description: Cards for information/content that can be selected. There is design for unselected and selected states. Typically used as a form element.
-        status: "stable"
-      - name: "selectable_card_icon"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "selectable_icon"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "radio"
-        platforms: *all
-        description: Radio is a control that allows the user to only choose one predefined option.
-        status: "stable"
-      - name: "checkbox"
-        platforms: *web
-        description: Checkbox is used for a list of selections that are meant to have one or more options checked.
-        status: "stable"
-      - name: "selectable_list"
-        platforms: *web
-        description: 
-        status: "stable"
-  - name: icons_and_images
-    description: ""
-    components:
-      - name: "icon"
-        platforms: *web
-        description: An icon is a graphic symbol that represents an object (ie a file) or a function. They can be used to give the user feedback.
-        status: "stable"
-      - name: "icon_circle"
-        platforms: *web
-        description: Similar to Icon, Icon Circle is a graphical symbol within a circle used to visually indicate an object or function.
-        status: "stable"
-      - name: "icon_stat_value"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "icon_value"
-        platforms: *web
-        description: Icon Value leverages our icon kit, to display a value of some sort in the interface. Typically, this includes a numerical value.
-        status: "stable"
-      - name: "user_badge"
-        platforms: *web
-        description: This kit was created to display employee icons related to a Nitro user. Currently there is the PVI logo and the Million Dollar Rep Icon.
-        status: "stable"
-      - name: "image"
-        platforms: *web
-        description: A responsive image component.
-        status: "stable"
-      - name: "lightbox"
-        platforms: *react_only
-        description: The Lightbox kit is a popup window overlay that will appear on top of your webpage and cover the entirety of the screen. 
-        status: "stable"
-      - name: "star_rating"
-        platforms: *web
-        description: A component to view other people’s opinions and experiences. Use when you want to show evaluation or a quick quantitative rating. Most effective when paired with reviews.
-        status: "stable"
-  - name: layout_and_structure
-    description: 
-    components:
-      - name: "flex"
-        platforms: *web
-        description: This kit is used to build most of the complex interfaces. The Flex Kit is used the same way flex box is used.
-        status: "stable"
-      - name: "layout"
-        platforms: *web
-        description: Layouts used for positioning content inside of pages, cards, or containers.
-        status: "stable"
-      - name: "card"
-        platforms: *all
-        description: 
-        status: "stable"
-      - name: "section_separator"
-        platforms: *web
-        description: Section separator is a divider line that compartmentalizes content, typically used on cards or white backgrounds.
-        status: "stable"
-      - name: "background"
-        platforms: *web
-        description: The background kit is used for adding a background to a page or to any container.
-        status: "stable"
-      - name: "collapsible"
-        platforms: *web
-        description: 
-        status: "stable"
-  - name: message_text_patterns
-    description: 
-    components:
-      - name: "highlight"
-        platforms: *web
-        description: Highlight is used to pick out or emphasize content.
-        status: "stable"
-      - name: "message"
-        platforms: *web
-        description: This multi kit consist of a an avatar, a status, a caption, a body text, and a time stamp. All which can be optional.
-        status: "stable"
-  - name: navigation
-    description: 
-    components:
-      - name: "bread_crumbs"
-        platforms: *web
-        description: BreadCrumbs can be used for keeping a user aware of their route location.
-        status: "stable"
-      - name: "nav"
-        platforms: *web
-        description: The nav is a grouped set of links that take the user to another page, or tab through parts of a page. It comes in horizontal or vertical with several different variants.
-        status: "stable"
-      - name: "pagination"
-        platforms: *rails_only
-        description:
-        status: "stable"
-  - name: state_and_progress_indicators
-    description: 
-    components:
-      - name: "loading_inline"
-        platforms: *web
-        description: The loading kit is used to indicate to users that a page is still loading, or an action is still being processed.
-        status: "stable"
-      - name: "progress_pills"
-        platforms: *web
-        description: Progress pills indicate a specific point in time of a series of sequential steps. They are used to track progress of something over time.
-        status: "stable"
-      - name: "progress_simple"
-        platforms: *web
-        description: Displays the current progress of an operation flow. User understanding increases when paired with labels or numbers.
-      - name: "progress_step"
-        platforms: *web
-        description: "Progress step kit is used to show the progress of a process. There are three types of steps in this kit: completed, active, and inactive."
-        status: "stable"
-      - name: "walkthrough"
-        platforms: *web
-        description:
-        status: "stable"
-      - name: "timeline"
-        platforms: *web
-        description: The timeline kit can use two different line styles in the same timeline - solid and dotted line styles.
-        status: "stable"
-  - name: tags
-    description: 
-    components:
-      - name: "badge"
-        platforms: *web
-        description: Badges can be used for notification, tags, and status. They are used for count and numbers.
-        status: "stable"
-      - name: "online_status"
-        platforms: *web
-        description: Online Status is a small indicator that lets the user know the status of a person or item. 
-        status: "stable"
-      - name: "pill"
-        platforms: *all
-        description: A pill uses both a keyword and a specific color to categorize an item. 
-        status: "stable"
-      - name: "hashtag"
-        platforms: *web
-        description: Hashtag is used to display home, project and other forms of IDs. They can be used as a link.
-        status: "stable"
-  - name: typography
-    description: ""
-    components:
-      - name: "body"
-        platforms: *web
-        description: Default text style for paragraphs. Follow hiearchy when using "light" or "lighter" variants to deemphasize text — default style should be followed by "light" followed by "lighter".
-        status: "stable"
-      - name: "caption"
-        platforms: *web
-        description: Use to provide supplementary context. Default size is best when providing supplementary context to a small section (i.e. label for a text input, label for a paragraph). Use large caption when supplementary text covers more content.
-        status: "stable"
-      - name: "detail"
-        platforms: *web
-        description: Used for tables or designs with large amounts of data or text.
-        status: "stable"
-      - name: "title"
-        platforms: *web
-        description: Typically used as headers. Follow semantic hierarchy — Title 1s should be followed by Title 2s followed by Title 3s and so on, without skipping any levels.
-        status: "stable"
+- category: alerts_and_dialogs
+  description:
+  components:
+  - name: dialog
+    platforms: *1
+    description:
+    status: stable
+  - name: fixed_confirmation_toast
+    platforms: *1
+    description: Fixed Confirmation Toast is used as an alert. Success is used when
+      a user successfully completes an action. Error is used when there is an error
+      and the user cannot proceed. Neutral is used to display information to a user
+      to complete a task.
+    status: stable
+  - name: popover
+    platforms: *1
+    description: A popover is a way to toggle content on top of other content. It
+      can be used for small texts, small forms, or even dropdowns. By default, popover
+      will toggle open/closed by simply clicking the trigger element.
+    status: stable
+  - name: tooltip
+    platforms: *1
+    description:
+    status: stable
+- category: buttons
+  description: Buttons are used primarily for actions, such as “Save” and “Cancel”.
+    Link Buttons are used for less important or less commonly used actions, such as
+    “view shipping settings”.
+  components:
+  - name: button
+    platforms: *1
+    description:
+    status: stable
+  - name: button_toolbar
+    platforms: *1
+    description: This kit should primarily hold the most commonly used buttons.
+    status: stable
+  - name: circle_icon_button
+    platforms: *1
+    description: When using Icon Circle Button, the icon must be clear a clear indication
+      of what the button does because there is no text.
+    status: stable
+- category: data_visualization
+  description:
+  components:
+  - name: map
+    platforms: *2
+    description: This kit provides a wrapping class to place around the MapLibre library.
+    status: stable
+  - name: table
+    platforms: *1
+    description: Tables display a collection of structured data and typically have
+      the ability to sort, filter, and paginate data.
+    status: stable
+  - name: advanced_table
+    platforms: *1
+    description: The Advanced Table can be used to display complex, nested data in
+      a way that allows for expansion and/or sorting.
+    status: stable
+  - name: list
+    platforms: *1
+    description: Lists display a vertical set of related content.
+    status: stable
+  - name: filter
+    platforms: *1
+    description: This kit can be implemented in a variety of ways. To see examples
+      of how to implement this kit in production visit the /dev_docs/search page in
+      production.
+    status: stable
+  - name: distribution_bar
+    platforms: *1
+    description: Can be used in the same way a pie chart can be used. By default,
+      Distribution Bar comparatively represents data without numbers.
+    status: stable
+  - name: legend
+    platforms: *1
+    description: A key used to compare the variables and their value in any given
+      graph.
+    status: stable
+  - name: gauge
+    platforms: *1
+    description:
+    status: stable
+  - name: bar_graph
+    platforms: *1
+    description: Bar graphs are used to compare data. Bar graphs are not typically
+      used to show percentages.
+    status: stable
+  - name: circle_chart
+    platforms: *1
+    description:
+    status: stable
+  - name: line_graph
+    platforms: *1
+    description: Line graphs are used to show changes in data over time.
+    status: stable
+  - name: treemap_chart
+    platforms: *1
+    description: Treemap charts are used to compare the relative size of groups of
+      data. They can also use a nested data structure, allowing a user to drill down
+      into a group to see its constituent data points.
+    status: stable
+- category: date_and_time_text_patterns
+  description: ''
+  components:
+  - name: date
+    platforms: *1
+    description: Use to display the date. Year will not display if it is the current
+      year.
+    status: stable
+  - name: date_range_inline
+    platforms: *1
+    description: Use to display a date range. Year will not show if it is the current
+      year.
+    status: stable
+  - name: date_range_stacked
+    platforms: *1
+    description:
+    status: stable
+  - name: date_stacked
+    platforms: *1
+    description: Use to display the date, stacking month and day. Year will not show
+      if it is the current year.
+    status: stable
+  - name: date_time
+    platforms: *1
+    description: Date Time is a composite kit that leverages the Date and Time kits.
+      The Date Time kit is affected by time zones and defaults to "America/New_York".
+  - name: date_time_stacked
+    platforms: *1
+    description:
+    status: stable
+  - name: date_year_stacked
+    platforms: *1
+    description: This kit is a simple option for displaying dates in a month, day
+      and the year format.
+    status: stable
+  - name: time
+    platforms: *1
+    description: This kit consist of large display and table display format. It includes
+      and icon, and a time zone.
+    status: stable
+  - name: time_range_inline
+    platforms: *1
+    description:
+    status: stable
+  - name: time_stacked
+    platforms: *1
+    description:
+    status: stable
+  - name: timestamp
+    platforms: *3
+    description: This low profile kit displays time. Elapsed, current, future, or
+      otherwise.
+    status: stable
+  - name: weekday_stacked
+    platforms: *1
+    description:
+    status: stable
+- category: form_and_dashboard_text_patterns
+  description: ''
+  components:
+  - name: contact
+    platforms: *1
+    description: Use to display customer's or user's contact information.
+    status: stable
+  - name: currency
+    platforms: *1
+    description: Use to display monetary amounts, typically on dashboards or other
+      layouts to show an overview or summary. User understanding increase when paired
+      with labels.
+    status: stable
+  - name: home_address_street
+    platforms: *1
+    description: This kit can be used to display the address for a homeowner/project.
+      It contains street address, APT format, City, state and zip. A Project hashtag
+      can be used as a prop to link back to a project.
+    status: stable
+  - name: label_pill
+    platforms: *1
+    description: This kit combines the caption and pill kit with all its variants.
+    status: stable
+  - name: label_value
+    platforms: *1
+    description: This kit can be very versatile when used to display text data.
+    status: stable
+  - name: person
+    platforms: *1
+    description: This kit is broken down into a first name last name format with normal
+      and bold weighted text.
+    status: stable
+  - name: person_contact
+    platforms: *1
+    description: This kit can be used to display a person contact information.
+    status: stable
+  - name: source
+    platforms: *1
+    description: General use is to describe the discovery of businesses, customers,
+      etc. This kit can also be used for other purposes as well.
+    status: stable
+  - name: dashboard_value
+    platforms: *1
+    description: Use in dashboards to give the viewer a quick overview of important
+      metrics. If want to show currency, use Currency Kit.
+    status: stable
+  - name: stat_change
+    platforms: *1
+    description: Displays the increase, decrease, or neutral change in data.
+    status: stable
+  - name: stat_value
+    platforms: *1
+    description: This kit was cerated for the main use as a dashboard display for
+      numbers. A large label is an optional part if it needs more clarity.
+    status: stable
+  - name: title_count
+    platforms: *1
+    description: This kits consists of title kit and body text. It is used to display
+      a title and a count (numbers). It has a base size and a large formation for
+      dashboard use.
+    status: stable
+  - name: title_detail
+    platforms: *1
+    description: This kit can be used in many versatile ways. It consist of a title
+      4 and light body text kit.
+    status: stable
+- category: form_elements
+  description:
+  components:
+  - name: file_upload
+    platforms: *1
+    description:
+    status: stable
+  - name: toggle
+    platforms: *1
+    description: Physical switch that allows users to turn things on or off. Used
+      for applying system states, presenting binary options and activating a state.
+    status: stable
+  - name: form_pill
+    platforms: *1
+    description:
+    status: stable
+  - name: form
+    platforms: *4
+    description: The form kit provides consumers with a convenient, consistently styled
+      <form> wrapper.
+    status: stable
+  - name: form_group
+    platforms: *1
+    description:
+    status: stable
+- category: form_input
+  description: ''
+  components:
+  - name: passphrase
+    platforms: *1
+    description:
+    status: stable
+  - name: phone_number_input
+    platforms: *1
+    description:
+    status: stable
+  - name: text_input
+    platforms: *1
+    description: Area where user can enter small amount of text. Commonly used in
+      forms.
+    status: stable
+  - name: rich_text_editor
+    platforms: *1
+    description:
+    status: stable
+  - name: textarea
+    platforms: *1
+    description: Area where user can enter larger amounts of text. Commonly used in
+      forms.
+    status: stable
+  - name: typeahead
+    platforms: *1
+    description: Typeahead is auto suggestion or completion based on what the user
+      is starting to type, gets refined as the user types more.
+    status: stable
+- category: form_selection
+  description:
+  components:
+  - name: date_picker
+    platforms: *1
+    description: Playbook's date picker is built using flatpickr, a vanilla js library.
+      Common date picker use cases and features have been adapted into simple prop
+      based configuration detailed in the docs below.
+    status: stable
+  - name: dropdown
+    platforms: *1
+    description: ''
+    status: stable
+  - name: multi_level_select
+    platforms: *1
+    description: The MultiLevelSelect kit renders a multi leveled select dropdown
+      based on data from the user.
+    status: stable
+  - name: select
+    platforms: *1
+    description: Select displays multiple options for a user to pick from in a dropdown
+      menu. User selects one option.
+    status: stable
+  - name: selectable_card
+    platforms: *1
+    description: Cards for information/content that can be selected. There is design
+      for unselected and selected states. Typically used as a form element.
+    status: stable
+  - name: selectable_card_icon
+    platforms: *1
+    description:
+    status: stable
+  - name: selectable_icon
+    platforms: *1
+    description:
+    status: stable
+  - name: radio
+    platforms: *3
+    description: Radio is a control that allows the user to only choose one predefined
+      option.
+    status: stable
+  - name: checkbox
+    platforms: *1
+    description: Checkbox is used for a list of selections that are meant to have
+      one or more options checked.
+    status: stable
+  - name: selectable_list
+    platforms: *1
+    description:
+    status: stable
+- category: icons_and_images
+  description: ''
+  components:
+  - name: icon
+    platforms: *1
+    description: An icon is a graphic symbol that represents an object (ie a file)
+      or a function. They can be used to give the user feedback.
+    status: stable
+  - name: icon_circle
+    platforms: *1
+    description: Similar to Icon, Icon Circle is a graphical symbol within a circle
+      used to visually indicate an object or function.
+    status: stable
+  - name: icon_stat_value
+    platforms: *1
+    description:
+    status: stable
+  - name: icon_value
+    platforms: *1
+    description: Icon Value leverages our icon kit, to display a value of some sort
+      in the interface. Typically, this includes a numerical value.
+    status: stable
+  - name: user_badge
+    platforms: *1
+    description: This kit was created to display employee icons related to a Nitro
+      user. Currently there is the PVI logo and the Million Dollar Rep Icon.
+    status: stable
+  - name: image
+    platforms: *1
+    description: A responsive image component.
+    status: stable
+  - name: lightbox
+    platforms: *2
+    description: The Lightbox kit is a popup window overlay that will appear on top
+      of your webpage and cover the entirety of the screen.
+    status: stable
+  - name: star_rating
+    platforms: *1
+    description: A component to view other people’s opinions and experiences. Use
+      when you want to show evaluation or a quick quantitative rating. Most effective
+      when paired with reviews.
+    status: stable
+- category: layout_and_structure
+  description:
+  components:
+  - name: flex
+    platforms: *1
+    description: This kit is used to build most of the complex interfaces. The Flex
+      Kit is used the same way flex box is used.
+    status: stable
+  - name: layout
+    platforms: *1
+    description: Layouts used for positioning content inside of pages, cards, or containers.
+    status: stable
+  - name: card
+    platforms: *3
+    description:
+    status: stable
+  - name: section_separator
+    platforms: *1
+    description: Section separator is a divider line that compartmentalizes content,
+      typically used on cards or white backgrounds.
+    status: stable
+  - name: background
+    platforms: *1
+    description: The background kit is used for adding a background to a page or to
+      any container.
+    status: stable
+  - name: collapsible
+    platforms: *1
+    description:
+    status: stable
+  - name: overlay
+    platforms: *1
+    status: stable
+  - name: draggable
+    platforms: *2
+    description:
+    status: stable
+- category: message_text_patterns
+  description:
+  components:
+  - name: highlight
+    platforms: *1
+    description: Highlight is used to pick out or emphasize content.
+    status: stable
+  - name: message
+    platforms: *1
+    description: This multi kit consist of a an avatar, a status, a caption, a body
+      text, and a time stamp. All which can be optional.
+    status: stable
+- category: navigation
+  description:
+  components:
+  - name: bread_crumbs
+    platforms: *1
+    description: BreadCrumbs can be used for keeping a user aware of their route location.
+    status: stable
+  - name: nav
+    platforms: *1
+    description: The nav is a grouped set of links that take the user to another page,
+      or tab through parts of a page. It comes in horizontal or vertical with several
+      different variants.
+    status: stable
+  - name: pagination
+    platforms: *4
+    description:
+    status: stable
+- category: state_and_progress_indicators
+  description:
+  components:
+  - name: loading_inline
+    platforms: *1
+    description: The loading kit is used to indicate to users that a page is still
+      loading, or an action is still being processed.
+    status: stable
+  - name: progress_pills
+    platforms: *1
+    description: Progress pills indicate a specific point in time of a series of sequential
+      steps. They are used to track progress of something over time.
+    status: stable
+  - name: progress_simple
+    platforms: *1
+    description: Displays the current progress of an operation flow. User understanding
+      increases when paired with labels or numbers.
+  - name: progress_step
+    platforms: *1
+    description: 'Progress step kit is used to show the progress of a process. There
+      are three types of steps in this kit: completed, active, and inactive.'
+    status: stable
+  - name: walkthrough
+    platforms: *1
+    description:
+    status: stable
+  - name: timeline
+    platforms: *1
+    description: The timeline kit can use two different line styles in the same timeline
+      - solid and dotted line styles.
+    status: stable
+- category: tags
+  description:
+  components:
+  - name: badge
+    platforms: *1
+    description: Badges can be used for notification, tags, and status. They are used
+      for count and numbers.
+    status: stable
+  - name: online_status
+    platforms: *1
+    description: Online Status is a small indicator that lets the user know the status
+      of a person or item.
+    status: stable
+  - name: pill
+    platforms: *3
+    description: A pill uses both a keyword and a specific color to categorize an
+      item.
+    status: stable
+  - name: hashtag
+    platforms: *1
+    description: Hashtag is used to display home, project and other forms of IDs.
+      They can be used as a link.
+    status: stable
+- category: typography
+  description: ''
+  components:
+  - name: body
+    platforms: *1
+    description: Default text style for paragraphs. Follow hiearchy when using "light"
+      or "lighter" variants to deemphasize text — default style should be followed
+      by "light" followed by "lighter".
+    status: stable
+  - name: caption
+    platforms: *1
+    description: Use to provide supplementary context. Default size is best when providing
+      supplementary context to a small section (i.e. label for a text input, label
+      for a paragraph). Use large caption when supplementary text covers more content.
+    status: stable
+  - name: detail
+    platforms: *1
+    description: Used for tables or designs with large amounts of data or text.
+    status: stable
+  - name: title
+    platforms: *1
+    description: Typically used as headers. Follow semantic hierarchy — Title 1s should
+      be followed by Title 2s followed by Title 3s and so on, without skipping any
+      levels.
+    status: stable
+- category: user
+  description:
+  components:
+  - name: avatar
+    platforms: *3
+    description: Avatar displays a user's picture. This helps aid easy recognition
+      of the user. This kit is normally not used by itself, but rather used within
+      other kits. The only time Avatar should be used instead of the User kit is when
+      you are not going to display the user's name.
+    status: stable
+  - name: avatar_action_button
+    platforms: *1
+    description:
+    status: stable
+  - name: multiple_users
+    platforms: *1
+    description: The multiple users kit is used to show that more than one user is
+      associated to an action or item.
+    status: stable
+  - name: multiple_users_stacked
+    platforms: *1
+    description: Multiple users stacked is used in tight spaces, where we need to
+      indicate that multiple users are associated to a specific action or item.
+    status: stable
   - name: user
-    description: 
-    components:
-      - name: "avatar"
-        platforms: *all
-        description: Avatar displays a user's picture. This helps aid easy recognition of the user. This kit is normally not used by itself, but rather used within other kits. The only time Avatar should be used instead of the User kit is when you are not going to display the user's name.
-        status: "stable"
-      - name: "avatar_action_button"
-        platforms: *web
-        description: 
-        status: "stable"
-      - name: "multiple_users"
-        platforms: *web
-        description: The multiple users kit is used to show that more than one user is associated to an action or item.
-        status: "stable"
-      - name: "multiple_users_stacked"
-        platforms: *web
-        description: Multiple users stacked is used in tight spaces, where we need to indicate that multiple users are associated to a specific action or item.
-        status: "stable"
-      - name: "user"
-        platforms: *web
-        description: This kit was created for having a systematic way of displaying users with avatar, titles, name and territory. This is a versatile kit with features than can be added to display more info.
-        status: "stable"
+    platforms: *1
+    description: This kit was created for having a systematic way of displaying users
+      with avatar, titles, name and territory. This is a versatile kit with features
+      than can be added to display more info.
+    status: stable

@@ -6,8 +6,10 @@ module Playbook
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left right center],
                    default: "center"
+      prop :border_width, type: Playbook::Props::Numeric
       prop :chart_data, type: Playbook::Props::Array,
                         default: []
+      prop :custom_options, default: {}
       prop :style, type: Playbook::Props::Enum,
                    values: %w[pie],
                    default: "pie"
@@ -40,9 +42,10 @@ module Playbook
       prop :x, type: Playbook::Props::Numeric
       prop :y, type: Playbook::Props::Numeric
 
-      def chart_options
+      def standard_options
         {
           align: align,
+          borderWidth: border_width,
           id: id,
           colors: colors,
           chartData: chart_data,
@@ -66,6 +69,26 @@ module Playbook
           x: x,
           y: y,
         }
+      end
+
+      def chart_options
+        standard_options.deep_merge(custom_options)
+      end
+
+      def vertical_align_props
+        if vertical_align
+          if object.vertical_align
+            original_result = super
+            class_to_remove = "vertical_align_#{object.vertical_align}"
+
+            modified_result = original_result.gsub(class_to_remove, "").strip
+            modified_result.empty? ? nil : modified_result
+          else
+            super
+          end
+        else
+          super
+        end
       end
 
       def classname

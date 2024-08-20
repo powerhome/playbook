@@ -96,6 +96,7 @@
         width: 100%;
       }
     }
+
     .close {
       display: none;
       animation-name: fadeOut;
@@ -110,6 +111,17 @@
       animation-duration: 150ms;
       animation-timing-function: linear;
       animation-fill-mode: forwards;
+    }
+
+    &.error {
+      [class*=pb_body_kit] {
+        margin-top: calc($space_xs / 2);
+      }
+
+      [class*="dropdown_trigger_wrapper"] {
+        border-color: $error;
+        box-shadow: none !important;
+      }
     }
   }
 
@@ -136,6 +148,12 @@
         .dropdown_input {
           background-color: unset;
           color: $white;
+        }
+      }
+
+      &.error {
+        [class*="dropdown_trigger_wrapper"] {
+          border-color: $error_dark;
         }
       }
     }

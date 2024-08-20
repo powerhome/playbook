@@ -9,16 +9,16 @@ const TableAlignmentShiftData = (props) => {
           marginBottom="md"
           {...props}
       >
-        <thead>
-          <tr>
-            <th>&nbsp;</th>
-            <th>{'Price'}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td shift="down">{'Total'}</td>
-            <td>
+        <Table.Head>
+          <Table.Row>
+            <Table.Header>&nbsp;</Table.Header>
+            <Table.Header>{'Price'}</Table.Header>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell verticalAlign="bottom">{'Total'}</Table.Cell>
+            <Table.Cell>
               {'$12'}
               <br />
               {'$46'}
@@ -28,50 +28,51 @@ const TableAlignmentShiftData = (props) => {
               {'-------'}
               <br />
               {'$83'}
-            </td>
-          </tr>
-        </tbody>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
       </Table>
+
       <Table
           {...props}
       >
-        <thead>
-          <tr>
-            <th>{'Espresso Drinks'}</th>
-            <th>{'Ingredients'}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td shift="up">{'Cappuccino'}</td>
-            <td>
-              {'Espresso'}
-              <br />
-              {'Steamed Milk'}
-              <br />
-              {'Milk Foam'}
-            </td>
-          </tr>
-          <tr>
-            <td shift="up">{'Macchiato'}</td>
-            <td>
-              {'Espresso'}
-              <br />
-              {'Steamed Milk'}
-            </td>
-          </tr>
-          <tr>
-            <td shift="up">{'Mocha'}</td>
-            <td>
-              {'Espresso'}
-              <br />
-              {'Hot Chocolate'}
-              <br />
-              {'Steamed Milk'}
-            </td>
-          </tr>
-        </tbody>
-      </Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>{'Espresso Drinks'}</Table.Header>
+          <Table.Header>{'Ingredients'}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell verticalAlign="top">{'Cappuccino'} </Table.Cell>
+          <Table.Cell>
+          {'Steamed Milk'}
+          <br />
+          {'Milk Foam'}
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell verticalAlign="top">
+            {'Macchiato'}
+            </Table.Cell>
+            <Table.Cell verticalAlign="top">
+            {'Espresso'}
+            <br />
+            {'Steamed Milk'}
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>
+            {'Mocha'}
+            </Table.Cell>
+          <Table.Cell>
+            {'Hot Chocolate'}
+            <br />
+            {'Steamed Milk'}
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
     </div>
   )
 }

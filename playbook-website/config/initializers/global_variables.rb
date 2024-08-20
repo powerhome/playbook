@@ -40,10 +40,39 @@ Dir.glob("#{search_path}/**/*.md") do |filename|
   end
 end
 
+# Manually Set custom names for Changelog
+
+navigation[:whats_new] = {
+  url: "",
+  title: "",
+  filepath: "",
+  frontmatter: {},
+  pages: [
+    {
+      url: "changelog/web",
+      title: "Web Changelog",
+      page_id: "CHANGELOG",
+      frontmatter: {},
+    },
+    {
+      url: "changelog/swift",
+      title: "Swift Changelog",
+      page_id: "SWIFT",
+      frontmatter: {},
+    },
+    {
+      url: "changelog/figma",
+      title: "Figma Changelog",
+      page_id: "FIGMA",
+      frontmatter: {},
+    },
+  ],
+}
+
 # Move HTML figma to the end
 
-move_pages = navigation[:getting_started][:pages].select { |page| ["HTML&_CSS", "Figma_setup", "figma_setup"].include?(page[:page_id]) }
-navigation[:getting_started][:pages].reject! { |page| ["HTML&_CSS", "Figma_setup", "figma_setup"].include?(page[:page_id]) }
+move_pages = navigation[:getting_started][:pages].select { |page| ["HTML&_CSS", "figma_setup", "how_to_theme"].include?(page[:page_id]) }
+navigation[:getting_started][:pages].reject! { |page| ["HTML&_CSS", "figma_setup", "how_to_theme"].include?(page[:page_id]) }
 navigation[:getting_started][:pages].concat(move_pages)
 
 DOCS = navigation

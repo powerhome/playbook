@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Body, Caption, Passphrase, ProgressSimple, TextInput } from '../..'
+import { Body, Caption, Passphrase, ProgressSimple, TextInput } from 'playbook-ui'
 import zxcvbn from 'zxcvbn'
 
 

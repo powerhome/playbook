@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'layouts/head'%>
+  </head>
+  <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
+  <%= render 'layouts/mobile_nav'%>
+    <%= render 'layouts/mobile_hamburger'%>
+    <%= pb_rails("layout", props: {classname: "pb--page--content #{'no-sidebar' if !@show_sidebar}"}) do %>
+      <%= render 'layouts/mobile_hamburger' %>
+      <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav"}) do %>
+        <% render partial: "layouts/sidebar"%>
+      <% end %>
+      <%= pb_rails("layout/body") do %>
+        <div class="pb--page--content--main">
+          <%= pb_rails("flex", props:{orientation: "column", align:"center"}) do %>
+              <%= pb_rails("flex/flex_item", props: { classname: "minw0 w100" }) do %>
+                <%= pb_rails("background", props: { display: "flex", justify_content: "center", classname: "markdown w100", background_color: "white", padding_x: "sm", padding_y: "md" }) do %>
+                  <%= pb_rails("background", props: { max_width: 'md' , background_color: "white" }) do %>
+                    <%= pb_rails("title", props: {  text: @page_title , tag: "h1", size: 1 }) %>
+                    <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
+                      <%= pb_rails("nav/item", props: { text: "Web", link: "/changelog/web", active: action_name == "changelog_web"}) %>
+                      <%= pb_rails("nav/item", props: { text: "Swift", link: "/changelog/swift", active: action_name == "changelog_swift" }) %>
+                      <%= pb_rails("nav/item", props: { text: "Figma", link: "/changelog/figma", active: action_name == "changelog_figma" }) %>
+                    <% end %>
+                    <%= pb_rails("section_separator", props: { flex_grow: 1 }) %>
+                    <%= yield %>
+                    <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
+                    <%= link_to @link_extension do %>
+                      <%= pb_rails("caption", props: {
+                        text: "Edit this page",
+                        color: "link",
+                        size: "xs"
+                      }) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <%= pb_rails("flex/flex_item", props:{classname: "w100"}) do %>
+                <%= render 'layouts/footer'%>
+              <% end %>
+          <% end %>
+
+        </div>
+      <% end %>
+    <% end %>
+  </body>
+
+  <%= vite_javascript_tag(*@application_js) %>
+
+  <%= yield :pb_js %>
+  <%= render 'layouts/ga'%>
+</html>

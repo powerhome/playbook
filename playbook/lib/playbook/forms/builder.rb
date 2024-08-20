@@ -13,6 +13,8 @@ module Playbook
       require_relative "builder/intl_telephone_field"
       require_relative "builder/multi_level_select_field"
       require_relative "builder/phone_number_field"
+      require_relative "builder/dropdown_field"
+      require_relative "builder/star_rating_field"
 
       prepend(FormFieldBuilder.new(:email_field, kit_name: "text_input"))
       prepend(FormFieldBuilder.new(:number_field, kit_name: "text_input"))

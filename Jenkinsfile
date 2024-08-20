@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library 'github.com/powerhome/ci-kubed@v6.10.1'
+library 'github.com/powerhome/ci-kubed@v8.3.0'
 
 app.build(
   resources: [
@@ -12,15 +12,14 @@ app.build(
 ) {
   app.composeBuild(
     appRepo: "image-registry.powerapp.cloud/playbook/playbook",
-    files: ["docker-compose.yml", "docker-compose.ci.yml"],
-    bakeFiles: ['docker-bake.hcl']
+    files: ["docker-compose.yml", "docker-compose.ci.yml"]
   ) { compose ->
     stage('Image Build') {
-      compose.bake()
+      compose.bake(bakeFiles: ['docker-bake.hcl'])
     }
 
     stage('Test') {
-      compose.command "run --workdir /home/app/src/playbook web ./test.sh"
+      shell "docker compose run --workdir /home/app/src/playbook web ./test.sh"
     }
   }
 }

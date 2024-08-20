@@ -1,3 +1,273 @@
+# 🎨 Playbook, Now With Vite! 🌈
+##### August 5, 2024
+
+
+![running](https://github.com/user-attachments/assets/6d645d8e-6f20-4813-804f-0b44ba4861a3)
+
+
+With 14.0.0, Playbook is now Vite-driven! This means that devs can continue to ship code faster and more efficiently, and it makes contributing to Playbook even easier! Additionally, our bundle size decreased by 24%! Enjoy this new, faster and more efficient Playbook experience!
+
+[14.0.0](https://github.com/powerhome/playbook/tree/14.0.0) full list of changes:
+
+
+**Improvements:**
+- ViteJS in Playbook [\#3520](https://github.com/powerhome/playbook/pull/3520) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.34.1...14.0.0)
+
+
+
+
+# 🎨 Icon Colors Made Easy! 🌈
+##### July 31, 2024
+
+![release](https://github.com/user-attachments/assets/47d99126-8e90-4bcb-8fe0-37771181619d)
+
+
+Customize icons effortlessly with the new color prop! 🎨 Apply any text, status, data, product, or category color with just a prop—no more custom CSS or text wrapping. Enjoy instant, hassle-free updates! 🚀🌟
+
+[13.34.1](https://github.com/powerhome/playbook/tree/13.34.1) full list of changes:
+
+
+
+**Kit Enhancements:**
+- Implementing Star Rating Interactive Variant for React [\#3550](https://github.com/powerhome/playbook/pull/3550) ([carloslimasd](https://github.com/carloslimasd))
+- Use New Content Tag [\#3548](https://github.com/powerhome/playbook/pull/3548) ([markdoeswork](https://github.com/markdoeswork))
+- Form pills 2 of 5:Add Icon Prop [\#3540](https://github.com/powerhome/playbook/pull/3540) ([elisashapiro](https://github.com/elisashapiro))
+- Icon Kit: Add a Color Prop [\#3527](https://github.com/powerhome/playbook/pull/3527) ([elisashapiro](https://github.com/elisashapiro))
+
+**Fixed Bugs:**
+- Fix for Color Icon Scss [\#3562](https://github.com/powerhome/playbook/pull/3562) ([jasperfurniss](https://github.com/jasperfurniss))
+- Fix Dark Mode Styles: Collapsible Kit [\#3530](https://github.com/powerhome/playbook/pull/3530) ([anthonymig88](https://github.com/anthonymig88))
+- Dark Mode Fix: Contact and DateRangeInline [\#3526](https://github.com/powerhome/playbook/pull/3526) ([anthonymig88](https://github.com/anthonymig88))
+- Dropdown Kit in Rails Form Fixes [\#3536](https://github.com/powerhome/playbook/pull/3536) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+- Icons Batch 8 [\#3541](https://github.com/powerhome/playbook/pull/3541) ([markdoeswork](https://github.com/markdoeswork))
+- Add Variants Specification to Kit Collection View [\#3516](https://github.com/powerhome/playbook/pull/3516) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.33.0...13.34.1)
+
+
+# 🗂️ Tabbing Your Way Through Rails! 🛤️
+##### July 19, 2024
+
+![13 33 0](https://github.com/user-attachments/assets/a5519122-1f6b-4a21-9016-0da53a2e39c2)
+
+Hey Rails devs! 🎉 Our Nav Kit just got an upgrade with a new tabbing variant! Now, you can navigate dynamic content like a pro. Dive in and let your content flow! 📚✨ Happy coding! 💻🎨
+
+[13.33.0](https://github.com/powerhome/playbook/tree/13.33.0) full list of changes:
+
+**Kit Enhancements:**
+- Adding Tabbing Prop to the Nav Kit [\#3521](https://github.com/powerhome/playbook/pull/3521) ([carloslimasd](https://github.com/carloslimasd))
+- Star Rating Kit: Interactive Form Variant (Rails) [\#3523](https://github.com/powerhome/playbook/pull/3523) ([nickamantia](https://github.com/nickamantia))
+- Form Pills: Match Handoff (Primary + Default) [#3505](https://github.com/powerhome/playbook/pull/3505) ([elisashapiro](https://github.com/elisashapiro))
+- Implementing Form Resetting and Blank Selection Prop [\#3529)](https://github.com/powerhome/playbook/pull/3529) ([carloslimasd](https://github.com/carloslimasd))
+- Implementing Default Value for Dropdown Kit [\#3510](https://github.com/powerhome/playbook/pull/3510) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+- RTE Custom Extension Dropdown Button Bug Fix [#3528](https://github.com/powerhome/playbook/pull/3528) ([anthonymig88](https://github.com/anthonymig88))
+- Improve Consistency in Docs for Default Variant of Typeahead [\#3511](https://github.com/powerhome/playbook/pull/3511) ([anthonymig88](https://github.com/anthonymig88))
+
+**Improvements:**
+- Create a Doc for Border Radius Global Props [\#3534](https://github.com/powerhome/playbook/pull/3534) ([elisashapiro](https://github.com/elisashapiro))
+- Update Highcharts CustomOptions Formatting Note [\#3515](https://github.com/powerhome/playbook/pull/3515) ([anthonymig88](https://github.com/anthonymig88))
+- Add Alias Map Entrypoint [\#3514](https://github.com/powerhome/playbook/pull/3514) ([markdoeswork](https://github.com/markdoeswork))
+- Hide Beta Versions of Kits within Kit Categories (with menu.yml) [\#3513](https://github.com/powerhome/playbook/pull/3513) ([elisashapiro](https://github.com/elisashapiro))
+- Linter implementation: kits T - W [\#3504](https://github.com/powerhome/playbook/pull/3504) ([kangaree](https://github.com/kangaree))
+- Playbook Icons Styles [\#3491](https://github.com/powerhome/playbook/pull/3491) ([markdoeswork](https://github.com/markdoeswork))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.32.0...13.33.0)
+
+
+# 🐉 Effortless Drag and Drop Functionality with the NEW Draggable Kit! ⬆️⬇️
+##### July 10, 2024
+
+![13-32-0](https://github.com/user-attachments/assets/c93a0344-ef0a-4fd2-be48-62fb5bf95f1e)
+
+
+We are excited to introduce the new Draggable kit, a highly flexible solution for all your drag-and-drop needs! Use the simple subcomponent structure for greater flexibility or use the customized solutions for the List, Selectable List or Card kits for super easy implementation out of the box!
+
+[13.32.0](https://github.com/powerhome/playbook/tree/13.32.0) full list of changes:
+
+**Kit Enhancements:**
+- Implementing Dropdown Form Validation [\#3507](https://github.com/powerhome/playbook/pull/3507) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+- Remove Duplicate "block" Button in RTE on Start [\#3501](https://github.com/powerhome/playbook/pull/3501) ([kangaree](https://github.com/kangaree))
+- Hide Beta Versions of Kits within Beta Index (with menu.yml) [\#3500](https://github.com/powerhome/playbook/pull/3500) ([elisashapiro](https://github.com/elisashapiro)) 
+- Date Year Stacked Left Align Text Color Bug [\#3508](https://github.com/powerhome/playbook/pull/3508) ([anthonymig88](https://github.com/anthonymig88))
+
+**Improvements:**
+- Power Centra in Playbook Part 2 (Change Variable Settings) [\#3134](https://github.com/powerhome/playbook/pull/3134) ([jasoncypret](https://github.com/jasoncypret))
+- Add Category to Playbook Kit Generator [\#3488](https://github.com/powerhome/playbook/pull/3488) ([elisashapiro](https://github.com/elisashapiro))
+- Bump ci-kubed v8.2.0 and Convert to use Remote buildkit cache mounts [\#3413](https://github.com/powerhome/playbook/pull/3413) ([TeamTeaTime](https://github.com/TeamTeaTime))
+
+**New Kits:**
+- Draggable Kit [\#3487](https://github.com/powerhome/playbook/pull/3487) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.31.0...13.32.0)
+
+
+
+# 🌁 Introducing the New Overlay Kit — A Seamless Way to Implement Overlays! ‍🌁
+
+##### June 28, 2024
+
+![Release Banner 13 31 0](https://github.com/powerhome/playbook/assets/73710701/0a5f9f29-c316-4ecc-94bc-aa2e78f19eee)
+
+Our latest Overlay component provides depth and dynamic feel to otherwise flat page elements. From artfully containing overflowing content, to improving page readability, to directing your users' attention to important content and actions; our Overlays give you even more power to expertly control your users' experience.
+
+[13.31.0](https://github.com/powerhome/playbook/tree/13.31.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Adding Error State to the Dropdown Kit [\#3485](https://github.com/powerhome/playbook/pull/3485) ([carloslimasd](https://github.com/carloslimasd))
+- Adding Collapsed Prop to Collapsible Nav on Rails [\#3483](https://github.com/powerhome/playbook/pull/3483) ([nidaqg](https://github.com/nidaqg))
+- Adding Column Sort to Advanced Table Kit [\#3481](https://github.com/powerhome/playbook/pull/3481) ([carloslimasd](https://github.com/carloslimasd))
+- Support Aliasing for Playbook-icons [\#3479](https://github.com/powerhome/playbook/pull/3479) ([jasperfurniss](https://github.com/jasperfurniss))
+- Allow Any Icon to Be Used In Fixed Confirmation Toast [\#3478](https://github.com/powerhome/playbook/pull/3478) ([elisashapiro](https://github.com/elisashapiro))
+- Draggable V4 \(beta\) [\#3472](https://github.com/powerhome/playbook/pull/3472) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Loading Advanced Table Mock Data In All Pages We Need [\#3480](https://github.com/powerhome/playbook/pull/3480) ([carloslimasd](https://github.com/carloslimasd))
+- Fix Timeline Kit \(react\) Not Accepting Global Props [\#3475](https://github.com/powerhome/playbook/pull/3475) ([elisashapiro](https://github.com/elisashapiro))
+
+**Improvements:**
+
+- Website: Allow Type-specific Kit Doc Description Markdown [\#3466](https://github.com/powerhome/playbook/pull/3466) ([elisashapiro](https://github.com/elisashapiro))
+- Figma Changelog [\#3454](https://github.com/powerhome/playbook/pull/3454) ([markdoeswork](https://github.com/markdoeswork))
+- Date Time Stacked Docs [\#3486](https://github.com/powerhome/playbook/pull/3486) ([rachelradford21](https://github.com/rachelradford21))
+
+**New Kits:**
+
+- Overlay Kit In Rails [\#3474](https://github.com/powerhome/playbook/pull/3474) ([nickamantia](https://github.com/nickamantia))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.30.0...13.31.0)
+
+
+_______
+
+# 13.30.0
+
+##### June 12, 2024
+
+List of changes:
+
+**Kit Enhancements:**
+
+- Add Turbo Frame Event Listener to Dialog Kit [\#3451](https://github.com/powerhome/playbook/pull/3451) ([augustomallmann](https://github.com/augustomallmann))
+- Table_header Flex Removal [\#3452](https://github.com/powerhome/playbook/pull/3452) ([nickamantia](https://github.com/nickamantia))
+- Draggable v3 (Beta) [\#3463](https://github.com/powerhome/playbook/pull/3463) ([nidaqg](https://github.com/nidaqg))
+
+
+**Fixed Bugs:**
+
+- Fix Kit Generator in Playbook [\#3459](https://github.com/powerhome/playbook/pull/3459) ([elisashapiro](https://github.com/elisashapiro))
+- Fix Kit Props Table Circle Chart [\#3448](https://github.com/powerhome/playbook/pull/3448) ([markdoeswork](https://github.com/markdoeswork))
+- Fix for Collapsible Kit Local Env Rendering Issue [\#3464](https://github.com/powerhome/playbook/pull/3464) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Upgrade Phone Number Library [\#3453](https://github.com/powerhome/playbook/pull/3453) ([markdoeswork](https://github.com/markdoeswork))
+- Horizontal Bar Graph Doc Examples [\#3460](https://github.com/powerhome/playbook/pull/3460) ([nickamantia](https://github.com/nickamantia))
+
+**New Kits:**
+
+- Overlay Kit (Beta) [\#3441](https://github.com/powerhome/playbook/pull/3441) ([carloslimasd](https://github.com/carloslimasd))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.29.0...13.30.0)
+
+# Unlock Ultimate Customization with a Single Prop for All Chart Kits! 
+
+##### June 07, 2024 
+
+![frame-3](https://github.com/powerhome/playbook/assets/73710701/dcca5348-fc0c-4645-a8d1-0aead59da578)
+
+Our latest addition simplifies customizations for all of our chart kits by allowing users to pass any settings accepted by Highcharts through a single prop. This enhancement ensures you have complete control over your chart’s appearance and behavior without the hassle of managing multiple properties or needing custom, 1-to-1 props to support your unique chart requirements.
+
+[13.29.0](https://github.com/powerhome/playbook/tree/13.29.0) full list of changes:
+
+
+**Kit Enhancements:**
+
+- Add border_width prop to CircleChart Rails [\#3457](https://github.com/powerhome/playbook/pull/3457) ([nickamantia](https://github.com/nickamantia))
+- Draggable Kit v2 (Beta) [\#3447](https://github.com/powerhome/playbook/pull/3447) ([nidaqg](https://github.com/nidaqg))
+- Accept all Highcharts Props in Chart Kits [\#3443](https://github.com/powerhome/playbook/pull/3443) ([nickamantia](https://github.com/nickamantia))
+- Fix for Icon Rails Kit based on Subdirectory Structure [\#3438](https://github.com/powerhome/playbook/pull/3438) ([jasperfurniss](https://github.com/jasperfurniss))
+- Remove Extra Div from SelectableCard Kit [\#3437](https://github.com/powerhome/playbook/pull/3437) ([markdoeswork](https://github.com/markdoeswork))
+- Adding outerPadding Prop to Table Kit [\#3435](https://github.com/powerhome/playbook/pull/3435) ([carloslimasd](https://github.com/carloslimasd))
+- Table kit Subcomponent Alignment + Shift [\#3426](https://github.com/powerhome/playbook/pull/3426) ([nickamantia](https://github.com/nickamantia))
+- Adding enableToggleExpansion and subrowHeaders Prop to Advanced Table [\#3429](https://github.com/powerhome/playbook/pull/3429) ([carloslimasd](https://github.com/carloslimasd))
+- Dropdown Kit with Form Builder [\#3425](https://github.com/powerhome/playbook/pull/3425) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Fix Form Group DatePicker Border Radius Bug in React [\#3431](https://github.com/powerhome/playbook/pull/3431) ([elisashapiro](https://github.com/elisashapiro))
+- Card Kit Highlight Overflow w/ Tooltip Error [\#3419](https://github.com/powerhome/playbook/pull/3419) ([elisashapiro](https://github.com/elisashapiro))
+- Replace Broken Links on Playbook Website [\#3434](https://github.com/powerhome/playbook/pull/3434) ([elisashapiro](https://github.com/elisashapiro))
+- Checkbox z-index Issue with Sticky [\#3423](https://github.com/powerhome/playbook/pull/3423) ([elisashapiro](https://github.com/elisashapiro))
+
+**Improvements:**
+
+- Adding Vertical Align Global Prop Doc [\#3450](https://github.com/powerhome/playbook/pull/3450)  ([carloslimasd](https://github.com/carloslimasd))
+- Upgrade Highcharts [\#3427](https://github.com/powerhome/playbook/pull/3427)([markdoeswork](https://github.com/markdoeswork))
+- Make New Designer Guidelines Public Facing [\#3436](https://github.com/powerhome/playbook/pull/3436) ([elisashapiro](https://github.com/elisashapiro))
+- Fix React Props Table Collapsible kit [\#3421](https://github.com/powerhome/playbook/pull/3421) ([markdoeswork](https://github.com/markdoeswork))
+- Release Notes Generator [\#3424](https://github.com/powerhome/playbook/pull/3424) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**New Kits:**
+
+- Draggable Kit  v1 (Beta) [\#3433](https://github.com/powerhome/playbook/pull/3433) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.28.0...13.29.0)
+
+
+# Level Up Your UI With Our NEW Dropdown Kit!
+
+##### May 21, 2024
+
+![frame-288](https://github.com/powerhome/playbook/assets/73710701/7f917554-b816-4bd6-9269-eaf76d329993)
+
+Our new Dropdown kit was carefully crafted without third-party dependencies or config requirements to ensure ease of use. In fact, the only thing easier than implementing our dropdown is customizing it; custom triggers, multi-component options with complex layouts, custom displays for select options, and much more are easier done than said. Experience unparalleled customization with Playbook's meticulously crafted Dropdown kit!
+
+[13.28.0](https://github.com/powerhome/playbook/tree/13.28.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Dropdown Custom Option Padding [\#3416](https://github.com/powerhome/playbook/pull/3416) ([nidaqg](https://github.com/nidaqg))
+- Collapsible Kit With Custom Collapsible.main [\#3410](https://github.com/powerhome/playbook/pull/3410) ([nidaqg](https://github.com/nidaqg))
+- Dry Up the Content\_tag Portion Of Rails Kits: "simple Kits" [\#3405](https://github.com/powerhome/playbook/pull/3405) ([elisashapiro](https://github.com/elisashapiro))
+- Dropdown Doc Examples Cleanup [\#3402](https://github.com/powerhome/playbook/pull/3402) ([nidaqg](https://github.com/nidaqg))
+- Making Phone Number Input Kit Compatible With Pb\_form\_with [\#3399](https://github.com/powerhome/playbook/pull/3399) ([carloslimasd](https://github.com/carloslimasd))
+- Avatar Overlaycomponent Variant \[center Positions\] [\#3395](https://github.com/powerhome/playbook/pull/3395) ([nickamantia](https://github.com/nickamantia))
+- Card Kit Subtle Backgrounds [\#3393](https://github.com/powerhome/playbook/pull/3393) ([elisashapiro](https://github.com/elisashapiro))
+- Dropdown Rails V2 [\#3389](https://github.com/powerhome/playbook/pull/3389) ([nidaqg](https://github.com/nidaqg))
+- Change Darkmode Button and Link Color [\#3373](https://github.com/powerhome/playbook/pull/3373) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fix for Nitro Style Bleed With Pagination Kit [\#3408](https://github.com/powerhome/playbook/pull/3408) ([nidaqg](https://github.com/nidaqg))
+- Fix Text Input Add-on Dark Mode Border and Message Color [\#3407](https://github.com/powerhome/playbook/pull/3407) ([elisashapiro](https://github.com/elisashapiro))
+- Fix Text Input Addon Border Radius Within a Form Group [\#3400](https://github.com/powerhome/playbook/pull/3400) ([elisashapiro](https://github.com/elisashapiro))
+- Fix Multiple Users Padding Overflow [\#3396](https://github.com/powerhome/playbook/pull/3396) ([elisashapiro](https://github.com/elisashapiro))
+- Fixed Styling When Select Kit Is Used Within a Flex Kit [\#3414](https://github.com/powerhome/playbook/pull/3414) ([jasperfurniss](https://github.com/jasperfurniss))
+
+**Improvements:**
+
+- Update _button_mixins.scss to Remove Underline for Users Not Including Reset.css [\#3390](https://github.com/powerhome/playbook/pull/3390) ([jasoncypret](https://github.com/jasoncypret))
+- Fixed Confirmation Toast Docs [\#3353](https://github.com/powerhome/playbook/pull/3353) ([rachelradford21](https://github.com/rachelradford21))
+- Date Time Docs [\#3314](https://github.com/powerhome/playbook/pull/3314) ([rachelradford21](https://github.com/rachelradford21))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.27.0...13.28.0)
+
+
+
 # ⛰️ Elevate Your Avatars With Our Latest Component Overlays! ⛰️
 
 ##### May 06, 2024

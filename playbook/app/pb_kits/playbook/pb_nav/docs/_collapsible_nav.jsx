@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, NavItem } from '../..'
+import { Nav, NavItem } from 'playbook-ui'
 
 const CollapsibleNav = (props) => {
   return (
@@ -9,6 +9,7 @@ const CollapsibleNav = (props) => {
     >
       <NavItem
           active
+          collapsed={false}
           collapsible 
           iconLeft="city" 
           link="#" 

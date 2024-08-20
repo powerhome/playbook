@@ -2,6 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
+import Draggable from "../pb_draggable/_draggable";
 
 type ListProps = {
   aria?: { [key: string]: string };
@@ -9,6 +10,7 @@ type ListProps = {
   className?: string;
   children: React.ReactNode[] | React.ReactNode;
   dark?: boolean;
+  enableDrag?: boolean;
   data?: Record<string, unknown>;
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
@@ -30,6 +32,7 @@ const List = (props: ListProps) => {
     className,
     dark = false,
     data = {},
+    enableDrag = false,
     htmlOptions = {},
     id,
     layout = "",
@@ -51,7 +54,7 @@ const List = (props: ListProps) => {
   const childrenWithProps = React.Children.map(
     children,
     (child: React.ReactElement) => {
-      return React.cloneElement(child, { text, variant });
+      return React.cloneElement(child, { text, variant, enableDrag });
     }
   );
   const ariaProps = buildAriaProps(aria);
@@ -69,7 +72,11 @@ const List = (props: ListProps) => {
   );
 
   return (
-    <div className={classes}>
+    <>
+    {
+      enableDrag ? (
+        <Draggable.Container>
+     <div className={classes}>
       {ordered ? (
         <ol
             {...ariaProps}
@@ -96,6 +103,40 @@ const List = (props: ListProps) => {
         </ul>
       )}
     </div>
+        </Draggable.Container>
+      ) :
+      (
+<div className={classes}>
+      {ordered ? (
+        <ol
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={className}
+            id={id}
+            role={role}
+            tabIndex={tabIndex}
+        >
+          {childrenWithProps}
+        </ol>
+      ) : (
+        <ul
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={className}
+            id={id}
+            role={role}
+            tabIndex={tabIndex}
+        >
+          {childrenWithProps}
+        </ul>
+      )}
+    </div>
+      )
+    }
+    
+    </>
   );
 };
 

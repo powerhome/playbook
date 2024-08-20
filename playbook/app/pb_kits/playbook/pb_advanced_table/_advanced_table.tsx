@@ -42,6 +42,7 @@ type AdvancedTableProps = {
   loading?: boolean | string
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
+  responsive?: "scroll" | "none",
   sortControl?: GenericObject
   tableData: GenericObject[]
   tableOptions?: GenericObject
@@ -66,6 +67,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     loading,
     onRowToggleClick,
     onToggleExpansionClick,
+    responsive = "scroll",
     sortControl,
     tableData,
     tableOptions,
@@ -132,7 +134,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   //Create column array in format needed by Tanstack
   const columns =
     columnDefinitions &&
-    columnDefinitions.map((column) => {
+      columnDefinitions.map((column) => {
       // Define the base column structure
       const columnStructure = {
         ...columnHelper.accessor(column.accessor, {
@@ -209,6 +211,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss("pb_advanced_table"),
+    `table-responsive-${responsive}`,
     globalProps(props),
     className
   )
@@ -229,6 +232,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             handleExpandOrCollapse,
             inlineRowLoading,
             loading,
+            responsive,
             setExpanded,
             sortControl,
             table,

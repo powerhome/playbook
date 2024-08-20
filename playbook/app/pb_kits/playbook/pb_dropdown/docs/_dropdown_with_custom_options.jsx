@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown, Icon, Body, FlexItem, Flex } from '../..'
+import { Dropdown, Icon, Body, FlexItem, Flex } from 'playbook-ui'
 
 const DropdownWithCustomOptions = (props) => {
 

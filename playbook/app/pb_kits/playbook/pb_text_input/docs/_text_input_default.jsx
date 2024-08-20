@@ -5,12 +5,12 @@ import TextInput from '../../pb_text_input/_text_input'
 import Title from '../../pb_title/_title'
 
 const TextInputDefault = (props) => {
+  const [firstName, setFirstName] = useState('')
   const handleOnChangeFirstName = ({ target }) => {
     setFirstName(target.value)
   }
   const ref = React.createRef()
 
-  const [firstName, setFirstName] = useState('')
   const [formFields, setFormFields] = useState({
     firstName: 'Jane',
     lastName: 'Doe',
@@ -92,9 +92,9 @@ const TextInputDefault = (props) => {
           {...props}
       />
 
-      <If condition={firstName !== ''}>
-        {`First name is: ${firstName}`}
-      </If>
+      {firstName !== '' && (
+        <React.Fragment>{`First name is: ${firstName}`}</React.Fragment>
+      )}
     </div>
   )
 }

@@ -1,10 +1,13 @@
 import React from 'react'
-import { DateYearStacked } from '../../'
+import { DateYearStacked } from 'playbook-ui'
 
 const DateYearStackedDefault = (props) => {
   return (
     <div>
-      <DateYearStacked date={new Date()} />
+      <DateYearStacked
+          date={new Date()}
+          {...props}
+      />
       <DateYearStacked
           align="center"
           date={new Date()}

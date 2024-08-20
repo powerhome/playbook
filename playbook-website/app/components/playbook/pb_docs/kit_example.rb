@@ -48,7 +48,46 @@ module Playbook
         read_kit_file("", "_#{example_key}.tsx")
       end
 
+      def available_props
+        target_kit_path = ::Playbook.kit_path(kit, "", "_#{example_key}.tsx")
+        if File.exist?(cached_kit_target)
+          puts "AvailableProps: Using cached JSON for #{target_kit_path}"
+          return cached_kit_json
+        end
+
+        exec_in_fork do
+          `node scripts/react-docgen.mjs #{target_kit_path}`
+        end
+      end
+
     private
+
+      def exec_in_fork
+        read, write = IO.pipe
+
+        pid = fork do
+          read.close
+          result = yield
+          write.write(result)
+          write.close
+          exit!(0)
+        end
+
+        write.close
+        result = read.read
+        read.close
+        Process.wait(pid)
+
+        result
+      end
+
+      def cached_kit_json
+        File.read(cached_kit_target)
+      end
+
+      def cached_kit_target
+        Rails.root.join("public", "cache", "playbook", "_#{example_key}.json")
+      end
 
       def sanitize_code(stringified_code)
         stringified_code = stringified_code.gsub('"../.."', '"playbook-ui"')
@@ -67,9 +106,25 @@ module Playbook
         stringified_code.gsub(" {...props}", "")
       end
 
-      def read_kit_file(folder, *args)
-        path = ::Playbook.kit_path(kit, folder, *args)
-        path.exist? ? path.read : ""
+      def read_kit_file(folder, file_name)
+        name_array = file_name.split(".")
+        path = ::Playbook.kit_path(kit, folder, file_name)
+        if name_array[1] != "md"
+          (path.exist? ? path.read : "")
+        else
+          if path.exist?
+            path.read
+          elsif type == "rails"
+            name_array[0] += "_rails"
+            file_name = name_array.join(".")
+            path = ::Playbook.kit_path(kit, folder, file_name)
+          elsif type == "react"
+            name_array[0] += "_react"
+            file_name = name_array.join(".")
+            path = ::Playbook.kit_path(kit, folder, file_name)
+          end
+          (path.exist? ? path.read : "")
+        end
       end
     end
   end

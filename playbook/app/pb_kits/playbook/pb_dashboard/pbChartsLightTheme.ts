@@ -1,7 +1,14 @@
-import colors from '../tokens/exports/_colors.scss'
-import typography from '../tokens/exports/_typography.scss'
+import colors from '../tokens/exports/_colors.module.scss'
+import typography from '../tokens/exports/_typography.module.scss'
 
 import { ThemeProps } from './themeTypes'
+
+interface CustomTreemapOptions extends Highcharts.SeriesTreemapOptions {
+  traverseUpButton?: {
+    position: { y: number };
+  };
+}
+
 
 const highchartsTheme: ThemeProps = {
   lang: {
@@ -27,7 +34,7 @@ const highchartsTheme: ThemeProps = {
     style: {
       color: colors.text_lt_default,
       fontFamily: typography.font_family_base,
-      fontWeight: typography.regular,
+      fontWeight: typography.bold,
       fontSize: typography.heading_3,
     },
   },
@@ -150,6 +157,7 @@ const highchartsTheme: ThemeProps = {
           fontSize: typography.text_smaller,
           color: colors.text_lt_light,
           fontWeight: typography.regular,
+          textOutline: '2px $white',
         },
       },
     },
@@ -198,7 +206,7 @@ const highchartsTheme: ThemeProps = {
       traverseUpButton: {
         position: { y: -50 },
       },
-    },
+    } as CustomTreemapOptions,
   },
   credits: {
     enabled: false

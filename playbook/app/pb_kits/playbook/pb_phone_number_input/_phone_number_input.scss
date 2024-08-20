@@ -1,3 +1,4 @@
+@import "intl-tel-input/build/css/intlTelInput.css";
 @import "../tokens/colors";
 
 $transform-rotate-deg: 135deg;
@@ -24,8 +25,13 @@ $flag-min-resolution: 192dpi;
     transition: $transition_default;
   }
 
+  .iti__divider {
+    border-bottom: 1px solid $border_light !important;  
+  }
+
   .iti__selected-flag {
     padding: 0 $space_xxs 0 $space_sm;
+    border-radius: $space_xxs; 
 
     &[aria-expanded="true"] {
       color: $primary_action;
@@ -33,7 +39,6 @@ $flag-min-resolution: 192dpi;
 
     &:focus-visible {
       outline-style: solid;
-      border-radius: $space_xxs 0px 0px $space_xxs;
       outline-color: $primary;
     }
   }
@@ -55,7 +60,7 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__flag {
-    background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags.png");
+    background-image: url("https://intl-tel-input.com/intl-tel-input/img/flags.png");
     border-radius: 1px;
   }
 
@@ -96,33 +101,41 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__arrow.iti__arrow--up::before {
-    transform: rotate(-($transform-rotate-deg/3));
+    transform: rotate(-(calc($transform-rotate-deg/3)));
     top: $space_xs + 4px;
     color: $primary_action;
   }
 
-  .iti__active::after {
-    float: right;
+  .iti__country-list .iti__country {
+    display: flex;
+    align-items: center;
+  }
+
+  .iti__flag-box,
+  .iti__country-name,
+  .iti__dial-code {
+    flex-grow: 0;
+  }
+
+  .iti__dial-code {
+    margin-right: $space_sm;
+  }
+
+
+  .iti__country-list .iti__country.iti__active::after {
     content: "";
-    margin-top: $space_xxs + 1px;
-    transform: rotate($transform-rotate-deg/3);
-    height: $space_xs + 4px;
-    width: $space_xxs + 2px;
+    margin-left: auto;
+    transform: rotate(45deg);
+    height: 12px;
+    width: 6px;
     border-bottom: 2px solid;
     border-right: 2px solid;
     border-radius: 1px;
   }
 
-  .iti__country-list {
-    min-width: $dropdown-min-width;
-    border-radius: $border_radius_md;
-    border: 1px solid $border_light;
-    box-shadow: $shadow_deep;
-    margin-top: 1px;
-  }
-
-  .iti__divider {
-    border-bottom: 1px solid $border_light;
+  .iti__dropdown-content {
+    border-radius: $space_xs; 
+    border: 1px solid $border_light !important;
   }
 
   &.dark {
@@ -147,6 +160,15 @@ $flag-min-resolution: 192dpi;
       color: $white;
     }
 
+    .iti__dropdown-content {
+      border-radius: $space_xs; 
+      border: 1px solid $border_dark !important;
+    }
+
+    .iti__divider {
+      border-bottom: 1px solid $border_dark !important;  
+    }
+
     .iti__country-list {
       background-color: $bg_dark;
       border: 1px solid $border_dark;
@@ -157,15 +179,12 @@ $flag-min-resolution: 192dpi;
         .iti__country-name {
           color: $text_dk_default;
         }
-  
+
         .iti__dial-code {
           color: $text_lt_lighter;
+          margin-right: $space_sm;
         }
       }
-    }
-
-    .iti__divider {
-      border-bottom: 1px solid $border_dark;
     }
 
     .iti__arrow.iti__arrow--up::before {
@@ -178,10 +197,10 @@ $flag-min-resolution: 192dpi;
       }
     }
   }
-  
+
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: $flag-min-resolution) {
     .iti__flag {
-      background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/img/flags@2x.png");
+      background-image: url("https://intl-tel-input.com/intl-tel-input/img/flags.png");
     }
   }
 }

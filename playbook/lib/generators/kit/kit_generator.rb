@@ -1,16 +1,19 @@
 # frozen_string_literal: true
 
+require "yaml"
+
 # rubocop:disable Style/StringConcatenation
 class KitGenerator < Rails::Generators::NamedBase
   desc "This generator creates a new Playbook Kit"
   source_root File.expand_path("templates", __dir__)
+  class_option :category, type: :string, default: "", desc: "Adds category name"
   class_option :props, type: :array, default: []
   class_option :rails, type: :boolean, default: false, desc: "Creates the boilerplate files for Rails"
   class_option :react, type: :boolean, default: false, desc: "Creates the boilerplate files for React"
   class_option :swift, type: :boolean, default: false, desc: "Creates the boilerplate files for Swift"
 
-  REACT_EXAMPLES_PATH = "app/pb_kits/playbook/playbook-doc.js"
-  REACT_INDEX_PATH = "app/pb_kits/playbook/index.js"
+  REACT_EXAMPLES_PATH = "app/entrypoints/playbook-doc.js"
+  REACT_INDEX_PATH = "app/javascript/kits.js"
 
   def create_templates
     kit_name = name.strip.downcase
@@ -23,6 +26,8 @@ class KitGenerator < Rails::Generators::NamedBase
     @kit_name_capitalize = kit_name.capitalize
     @kit_name_underscore = kit_name.parameterize.underscore
     @kit_name_pascal = kit_name.titleize.gsub(/\s+/, "")
+    @kit_category = options[:category]
+    @kit_category_capitalize = options[:category].capitalize
 
     kit_props = options[:props].concat(%w[id:string classname:string data:object aria:object])
     @kit_props = kit_props.map { |hash| [hash.partition(":").first, hash.partition(":").last] }.to_h
@@ -49,13 +54,34 @@ class KitGenerator < Rails::Generators::NamedBase
       nil
     else
 
+      # If category prop given, validate against existing categories in Playbook menu =========
+      if @kit_category.nil? || @kit_category.empty?
+        say_status  "No category given.",
+                    "Proceeding to generate files.",
+                    :yellow
+      else
+        file_path = "../playbook-website/config/menu.yml"
+        yaml_data = YAML.load_file(file_path, aliases: true)
+        existing_categories = yaml_data["kits"].map { |kit| kit["category"] } if yaml_data["kits"].is_a?(Array)
+        if existing_categories && !existing_categories.include?(options[:category])
+          say_status  "#{@kit_category_capitalize} does not match an existing category.",
+                      "Please choose another category or manually sort without using the category flag.",
+                      :red
+          exit 1
+        else
+          say_status  "#{@kit_category_capitalize} matches an existing category.",
+                      "Proceeding to generate files.",
+                      :green
+        end
+      end
+
       # Generate SCSS files ==============================
       unless platforms == "swift_only"
         template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
-        open("app/pb_kits/playbook/_playbook.scss", "a") do |f|
+        open("app/pb_kits/playbook/playbook.scss", "a") do |f|
           f.puts "\n@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
         end
-        scss_file = "app/pb_kits/playbook/_playbook.scss"
+        scss_file = "app/pb_kits/playbook/playbook.scss"
 
         # Sort kit names alphabetically
         lines = File.readlines(scss_file)
@@ -114,17 +140,38 @@ class KitGenerator < Rails::Generators::NamedBase
 
       `rubocop --safe-auto-correct #{full_kit_directory}`
 
-      # Add kit to Playbook menu ==========================
-      open("../playbook-website/config/menu.yml", "a") do |f|
-        f.puts "  - name: #{@kit_name_underscore}"
-        f.puts "    components:"
-        f.puts "      - name: #{@kit_name_underscore}"
-        f.puts "        platforms: *#{platforms}"
-      end
+      # Add kit with category given to Playbook menu (sort to category section) =============
+      if !@kit_category.nil? && !@kit_category.empty?
+        file_path = "../playbook-website/config/menu.yml"
+        yaml_data = YAML.load_file(file_path, aliases: true)
+        yaml_data["kits"].each do |kit|
+          next unless kit["category"] == @kit_category
 
-      say_status  "complete",
-                  "#{@kit_name_capitalize} kit added to Playbook menu.",
-                  :green
+          new_kit = { "name" => @kit_name_underscore, "platforms" => platforms }
+          kit["components"] << new_kit
+          break
+        end
+
+        File.open(file_path, "w") do |f|
+          f.write(yaml_data.to_yaml)
+        end
+
+        say_status  "complete",
+                    "#{@kit_name_capitalize} kit added to Playbook menu under #{@kit_category_capitalize}.",
+                    :green
+      else
+        # Add kit without category given to Playbook menu (append to end) ====================
+        open("../playbook-website/config/menu.yml", "a") do |f|
+          f.puts "- category: #{@kit_name_underscore}"
+          f.puts "  components:"
+          f.puts "    - name: #{@kit_name_underscore}"
+          f.puts "      platforms: #{platforms}"
+        end
+
+        say_status  "complete",
+                    "#{@kit_name_capitalize} kit added to Playbook menu.",
+                    :green
+      end
     end
   end
 

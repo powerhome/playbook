@@ -6,6 +6,7 @@ examples:
   - fixed_confirmation_toast_close: Click to Close
   - fixed_confirmation_toast_positions: Click to Show Positions
   - fixed_confirmation_toast_children: Children
+  - fixed_confirmation_toast_custom_icon: Custom Icon
   
   react:
   - fixed_confirmation_toast_default: Default
@@ -14,6 +15,7 @@ examples:
   - fixed_confirmation_toast_positions: Click to Show Positions
   - fixed_confirmation_toast_auto_close: Click to Show Auto Close
   - fixed_confirmation_toast_children: Children
+  - fixed_confirmation_toast_custom_icon: Custom Icon
 
   swift:
   - fixed_confirmation_toast_default_swift: Default

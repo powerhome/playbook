@@ -24,7 +24,7 @@ type TimeProps = {
   unstyled?: boolean;
 } & GlobalProps
 
-const Time = (props: TimeProps) => {
+const Time = (props: TimeProps): React.ReactElement => {
   const {
     align,
     className,
@@ -47,8 +47,8 @@ const Time = (props: TimeProps) => {
 
   return (
     <div 
-      {...htmlProps}
-      className={classes} 
+        {...htmlProps}
+        className={classes} 
     >
       {showIcon && (
         unstyled

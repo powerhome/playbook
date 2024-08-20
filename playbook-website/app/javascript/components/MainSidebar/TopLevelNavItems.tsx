@@ -16,7 +16,9 @@ export const TopLevelNavItem = ({
   category,
   collapsibles,
   samples,
-  getting_started
+  getting_started,
+  design_guidelines,
+  whats_new,
 }) => {
   //hook into collapsible logic for top level item
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
@@ -71,7 +73,8 @@ export const TopLevelNavItem = ({
   const kitCategoryPage = currentURL.match(/^\/([^/]{3})/);
   // if url matches /guides, than relevant collapsible nav to be toggled open on first render
   const guidesPage = currentURL.split("/").slice(0, 3).join("/");
-
+  // if changelog_ is in the current url
+  const changelogPage = currentURL.includes("changelog_");
   //extract render logic out of return for better performance
   const renderTopItems = (name, key, children, leftIcon, link, i) => {
     const [collapsed] = topLevelCollapsibles[i];
@@ -129,7 +132,7 @@ export const TopLevelNavItem = ({
         }
       });
     };
-    
+
     return (
       <NavItem
         active={activeTopLevel(key, link)}
@@ -157,7 +160,6 @@ export const TopLevelNavItem = ({
               <>
                 {kits.map((link, index) => (
                   <KitsNavItem
-                    key={index}
                     link={link}
                     key={`kits-nav-item-${index}`}
                     kitIndex={index}
@@ -184,6 +186,8 @@ export const TopLevelNavItem = ({
                 updateTopLevelNav={updateTopLevelNav}
                 parentIndex={i}
                 getting_started={getting_started}
+                design_guidelines={design_guidelines}
+                whats_new={whats_new}
               />
             )}
           </>

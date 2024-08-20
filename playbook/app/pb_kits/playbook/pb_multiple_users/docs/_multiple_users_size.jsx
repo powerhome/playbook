@@ -1,5 +1,5 @@
 import React from 'react'
-import { Body, MultipleUsers } from '../../'
+import { Body, MultipleUsers } from 'playbook-ui'
 
 const MultipleUsersSize = (props) => {
   return (

@@ -7,6 +7,7 @@ module Playbook
                         default: []
       prop :colors, type: Playbook::Props::Array,
                     default: []
+      prop :custom_options, default: {}
       prop :drillable, type: Playbook::Props::Boolean, default: false
       prop :grouped, type: Playbook::Props::Boolean, default: false
       prop :height
@@ -19,7 +20,7 @@ module Playbook
         "treemap"
       end
 
-      def chart_options
+      def standard_options
         {
           chartData: chart_data,
           className: classname,
@@ -33,6 +34,10 @@ module Playbook
           tooltipHtml: tooltip_html,
           type: chart_type,
         }
+      end
+
+      def chart_options
+        standard_options.deep_merge(custom_options)
       end
 
       def classname

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-multi-comp */
+
 import React from "react";
 import { ensureAccessible, renderKit, render, screen } from "../utilities/test-utils"
 
@@ -51,7 +53,6 @@ const TableTagTable = () => {
     </>
   );
 };
-
 
 const props = {
   data: { testid: "table" },
@@ -160,4 +161,9 @@ test("Renders Table.Cell subkit for HTML Table elements Table", () => {
   const head = kit.querySelector(".pb_table_td")
   expect(head).toBeInTheDocument()
   expect(head.tagName).toBe("TD")
+})
+
+test("Should have outerPadding class", () => {
+  const kit = renderKit(Table, props, { outerPadding: "sm" })
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card outer_padding_space_sm table-collapse-sm")
 })

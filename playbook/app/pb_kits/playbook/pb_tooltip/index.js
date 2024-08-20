@@ -58,6 +58,7 @@ export default class PbTooltip extends PbEnhancedElement {
 
     this.popper = createPopper(trigger, this.tooltip, {
       placement: this.position,
+      strategy: 'fixed',
       modifiers: [
         {
           name: 'offset',

@@ -20,6 +20,7 @@ import Hover from "../VisualGuidelines/Examples/Hover";
 import TextAlign from "../VisualGuidelines/Examples/TextAlign";
 import Overflow from "./Examples/Overflow";
 import Truncate from "./Examples/Truncate";
+import VerticalAlign from "./Examples/VerticalAlign";
 
 const VisualGuidelines = ({
   examples,
@@ -59,7 +60,9 @@ const VisualGuidelines = ({
       case "typography":
         return <Typography example={examples.typography_tokens}/>;
       case "border_radius":
-        return <BorderRadius tokensExample={examples.border_radius_tokens}/>;
+        return <BorderRadius example={examples.border_radius_jsx}
+                  tokensExample={examples.border_radius_tokens}
+                />;
       case "display":
         return <Display example={examples.display_in_use_jsx}/>;
       case "cursor":
@@ -72,6 +75,8 @@ const VisualGuidelines = ({
                    tokensExample={examples.position_token}
                    secondExample={examples.global_positioning}
                />;
+      case "vertical_align":
+        return <VerticalAlign example={examples.vertical_align_jsx}/>;
       case "hover":
         return <Hover example={examples.hover_jsx}/>;
       case "text_align":

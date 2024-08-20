@@ -1,0 +1,1 @@
+Pass our `verticalAlign` global prop to any `table.row` subcomponent to change the vertical alignment of all cells within that row.

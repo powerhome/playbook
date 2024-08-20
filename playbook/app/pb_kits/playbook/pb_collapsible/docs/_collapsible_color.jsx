@@ -1,5 +1,5 @@
 import React from 'react'
-import { Collapsible } from '../..'
+import { Collapsible } from 'playbook-ui'
 
 const CollapsibleColor = (props) => (
   <div>
@@ -19,7 +19,7 @@ const CollapsibleColor = (props) => (
       </Collapsible.Content>
     </Collapsible>
     <Collapsible
-        iconColor='light'
+        iconColor='lighter'
         marginBottom="xs"
     >
       <Collapsible.Main>
@@ -34,7 +34,7 @@ const CollapsibleColor = (props) => (
       </Collapsible.Content>
     </Collapsible>
     <Collapsible
-        iconColor='lighter'
+        iconColor='light'
         marginBottom="xs"
     >
       <Collapsible.Main>

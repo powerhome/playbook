@@ -13,6 +13,15 @@
   ]
 %>
 
+<% 
+  example_dropdown_options = [
+    { label: 'United States', value: 'United States', id: 'us' },
+    { label: 'Canada', value: 'Canada', id: 'ca' },
+    { label: 'Pakistan', value: 'Pakistan', id: 'pk' },
+  ]
+
+%>
+
 <%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
   <%= form.typeahead :example_user, props: { data: { typeahead_example1: true, user: {} }, placeholder: "Search for a user" } %>
   <%= form.text_field :example_text_field, props: { label: true } %>
@@ -23,6 +32,7 @@
   <%= form.password_field :example_password_field, props: { label: true } %>
   <%= form.url_field :example_url_field, props: { label: true } %>
   <%= form.text_area :example_text_area, props: { label: true } %>
+  <%= form.dropdown_field :example_dropdown, props: { label: true, options: example_dropdown_options } %>
   <%= form.select :example_select, [ ["Yes", 1], ["No", 2] ], props: { label: true } %>
   <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
   <%= form.check_box :example_checkbox,
@@ -35,6 +45,7 @@
     class: "checkbox-class"
   %>
   <%= form.date_picker :example_date_picker_1, props: { label: true } %>
+  <%= form.star_rating_field :example_star_rating, props: { variant: "interactive", label: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

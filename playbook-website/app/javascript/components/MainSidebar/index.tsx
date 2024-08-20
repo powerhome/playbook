@@ -15,11 +15,13 @@ const MainSidebar = ({
   search_list,
   samples,
   getting_started,
-}) => {
+  design_guidelines,
+  whats_new,
+}: any) => {
   //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
-  const transformKitsData = (kitsArray) => {
-    return kitsArray.map(kit => {
+  const transformKitsData = (kitsArray: any) => {
+    return kitsArray.map((kit: any) => {
       // There's only one key per object, so we get the kit name and its components
       const kitName = Object.keys(kit)[0];
       const components = kit[kitName];
@@ -85,6 +87,8 @@ const MainSidebar = ({
           collapsibles={collapsibles}
           samples={samples}
           getting_started={getting_started}
+          design_guidelines={design_guidelines}
+          whats_new={whats_new}
         />
       </Nav>
     </>

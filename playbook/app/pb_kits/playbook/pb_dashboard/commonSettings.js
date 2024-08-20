@@ -1,5 +1,5 @@
-import colors from '../tokens/exports/_colors.scss'
-import typography from '../tokens/exports/_typography.scss'
+import colors from '../tokens/exports/_colors.module.scss'
+import typography from '../tokens/exports/_typography.module.scss'
 
 const dataColors = [
   colors.data_1,
@@ -53,7 +53,7 @@ const adjustAxisStyle = (axis) => {
   /* Change axis label styles */
   axis.labels.style.fontFamily = typography.font_family_base
   axis.labels.style.color = colors.charcoal
-  axis.labels.style.fontWeight = typography.light
+  axis.labels.style.fontWeight = typography.regular
   axis.labels.style.fontSize = typography.font_small
 }
 

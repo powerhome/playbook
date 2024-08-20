@@ -29,6 +29,7 @@ require "playbook/left"
 require "playbook/top"
 require "playbook/right"
 require "playbook/bottom"
+require "playbook/vertical_align"
 
 module Playbook
   include ActionView::Helpers
@@ -65,6 +66,7 @@ module Playbook
     include Playbook::Top
     include Playbook::Right
     include Playbook::Bottom
+    include Playbook::VerticalAlign
 
     prop :id
     prop :data, type: Playbook::Props::HashProp, default: {}
@@ -79,6 +81,25 @@ module Playbook
     def combined_html_options
       default_html_options.merge(html_options.deep_merge(data_attributes))
     end
+
+    # rubocop:disable Layout/CommentIndentation
+    # pb_content_tag information (potentially to be abstracted into its own dev doc in the future)
+    # The pb_content_tag generates HTML content tags for rails kits with flexible options.
+    # Modify a generated kit.html.erb file accordingly (the default_options listed below no longer need to be explictly outlined in that file, only modifications).
+    # name - the first argument is for HTML tag. The default is :div.
+    # content_or_options_with_block - additional content or options for the tag (i.e., the customizations a dev adds to kit.html.erb).
+    # options - Within combined_options, the empty options hash allows for customizations to
+        # merge with the default_options and combined_html_options.
+    # escape - set to true, this allows for HTML-escape.
+    # block - an optional block for content inside the tag.
+    # The return is a HTML tag that includes any provided customizations. If nothing is specified in kit.html.erb, the default shape is:
+        # :div,
+        # aria: object.aria,
+        # class: object.classname,
+        # data: object.data,
+        # id: object.id,
+        # **combined_html_options
+    # rubocop:enable Layout/CommentIndentation
 
     # rubocop:disable Style/OptionalBooleanParameter
     def pb_content_tag(name = :div, content_or_options_with_block = {}, options = {}, escape = true, &block)

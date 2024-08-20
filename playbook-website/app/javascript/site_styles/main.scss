@@ -26,10 +26,13 @@
 // VISUAL GUIDELINES PAGE STYLES
 @import "./visual_guidelines";
 
+// DESIGN GUIDELINES PAGE STYLES
+@import "./design_guidelines";
+
 // CHANGELOG STYLES
 @import "./changelog";
 
-@import "@powerhome/power-fonts/fonts/proxima-nova";
+@import "@powerhome/power-fonts/fonts/power_centra/power-centra.scss";
 
 //Map Kit styles
 @import "./map_styles/map_default";

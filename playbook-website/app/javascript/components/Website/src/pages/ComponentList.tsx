@@ -10,16 +10,21 @@ import { PageContainer } from "../components/PageContainer"
 import { CategoryTitle } from "../components/CategoryTitle"
 
 export type Kit = {
-  name: string;
+  category: string;
   components: {
     name: string;
     description: string;
     platforms: string[];
+    status: "stable" | "beta";
   }[];
   description: string;
 };
 
 export type Kits = Kit[];
+
+export interface Component {
+  status: string;
+}
 
 const description =
   "Components are the reusable building blocks of our design system. Each component meets a specific interaction or UI need, and has been specifically created to work together to create patterns and intuitive user experiences."
@@ -49,7 +54,8 @@ export default function ComponentList() {
           </Flex>
 
           <PageContainer>
-            {!kitsToShow.length && (
+            {kitsToShow.filter(({ components }: {components: Component[] }) => 
+            components.some((component: Component) => component.status === "stable")).length === 0 ? (
               <Flex
                 justify="center"
                 orientation="row"
@@ -58,28 +64,31 @@ export default function ComponentList() {
                   text="No Results, Try Again"
                 />
               </Flex>
+            ) : (
+              kitsToShow.map(({ category, components }: Kit, index: number) => (
+                <section
+                  className="category mb_xl"
+                  key={`${category}-${index}`}
+                  id={category}
+                >
+                  <NavLink to={`/beta/kit_category/${category}`}>
+                    <CategoryTitle category={category} />
+                  </NavLink>
+                  <KitGrid>
+                    {components
+                    .filter(component => component.status === "stable")
+                    .map(({ name, description }, index) => (
+                      <KitCard
+                        description={description}
+                        name={name}
+                        key={`${name}-${index}`}
+                        platform={platform}
+                      />
+                    ))}
+                  </KitGrid>
+                </section>
+              ))
             )}
-            {kitsToShow.map(({ name, components }: Kit, index: number) => (
-              <section
-                className="category mb_xl"
-                key={`${name}-${index}`}
-                id={name}
-              >
-                <NavLink to={`/beta/kit_category/${name}`}>
-                  <CategoryTitle name={name} />
-                </NavLink>
-                <KitGrid>
-                  {components.map(({ name, description }, index) => (
-                    <KitCard
-                      description={description}
-                      name={name}
-                      key={`${name}-${index}`}
-                      platform={platform}
-                    />
-                  ))}
-                </KitGrid>
-              </section>
-            ))}
           </PageContainer>
         </>
       )}

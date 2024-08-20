@@ -1,43 +1,8 @@
 import React from "react"
-
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
-
 import { Hero } from "../../components/Hero"
-import {
-  Roofing,
-  Powergon,
-  Nitro,
-  ChevronDown,
-  Times,
-  Bars,
-  Calendar,
-  Filter,
-  Edit,
-  Trash,
-  Check,
-  Plus,
-  Search
-} from '@powerhome/playbook-icons-react'
-
 import { Body, Icon, Title, Flex, FlexItem, Card } from "playbook-ui"
 
-const pbIcons = {
-  roofing: Roofing,
-  nitro: Nitro,
-  powergon: Powergon,
-  chevrondown: ChevronDown,
-  times: Times,
-  bars: Bars,
-  calendar: Calendar,
-  filter: Filter,
-  edit: Edit,
-  trash: Trash,
-  check: Check,
-  plus: Plus,
-  search: Search
-}
-
-window.PB_ICONS = pbIcons
 
 export default function IconList() {
 
@@ -66,14 +31,14 @@ export default function IconList() {
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon="roofing"  />
+              <Icon icon="circle-arrow-right"  />
             </Card>
             <Card
               marginRight='sm'
               hover={{ shadow: "deeper" }}
               cursor='pointer'
             >
-              <Icon icon="powergon"  />
+              <Icon icon="arrow-circle-right"  />
             </Card>
             <Card
               marginRight='sm'
@@ -272,12 +237,54 @@ export default function IconList() {
       </Flex>
 
 
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+        paddingTop="sm"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Title paddingBottom="sm" size={3} tag='h3' text='Other Props' />
+        </FlexItem>
+      </Flex>
+      <Flex
+        justify='center'
+        marginX={{ lg: "sm", xl: "sm" }}
+        paddingLeft="xs"
+      >
+        <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
+          <Flex>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="2x" pull="left"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="2x" pull="right"  />
+            </Card>
+            <Card
+              marginRight='sm'
+              hover={{ shadow: "deeper" }}
+              cursor='pointer'
+            >
+              <Icon icon="roofing" size="2x" fixedWidth  />
+            </Card>
+          </Flex>
+        </FlexItem>
+      </Flex>
 
 
       <Flex
         justify='center'
         marginX={{ lg: "sm", xl: "sm" }}
         paddingLeft="xs"
+        paddingTop="sm"
       >
         <FlexItem alignSelf='stretch' maxWidth='xxl' flexGrow={1}>
           <Title paddingBottom="sm" size={3} tag='h3' text='Color' />

@@ -25,6 +25,12 @@ module Playbook
                              values: %w[fill outline],
                              default: "fill"
 
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[display interactive],
+                     default: "display"
+      prop :label, type: Playbook::Props::String
+      prop :name, type: Playbook::Props::String
+
       def one_decimal_rating
         rating.to_f.round(1)
       end
@@ -46,9 +52,9 @@ module Playbook
         when "yellow"
           "yellow_star"
         when "primary"
-          "primary_star"
+          dark ? "primary_star_dark" : "primary_star_light"
         when "subtle"
-          dark ? "suble_star_dark" : "suble_star_light"
+          dark ? "subtle_star_dark" : "subtle_star_light"
         end
       end
 

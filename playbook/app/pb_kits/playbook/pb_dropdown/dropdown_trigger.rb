@@ -11,7 +11,7 @@ module Playbook
       prop :custom_display
 
       def data
-        Hash(prop(:data)).merge(dropdown_trigger: true)
+        Hash(prop(:data)).merge(dropdown_trigger: true, dropdown_placeholder: default_display_placeholder)
       end
 
       def classname
