@@ -82,7 +82,6 @@ export default defineConfig({
       declarationDir: resolve(__dirname, 'dist'),
       declaration: true,
     }),
-    cssUrl(),
     consolidate({
       groups: [
         {
@@ -94,6 +93,7 @@ export default defineConfig({
         }
       ],
     }),
+    cssUrl(),
   ],
   resolve: {
     dedupe: ['playbook'],
