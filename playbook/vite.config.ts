@@ -63,11 +63,6 @@ export default defineConfig({
   css: {
     modules: {
       generateScopedName: '[name]__[local]___[hash:base64:5]',
-    },
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "${resolve(__dirname, 'app/pb_kits/playbook/tokens/index.scss')}";`
-      }
     }
   },
   plugins: [
