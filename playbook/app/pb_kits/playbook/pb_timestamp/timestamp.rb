@@ -83,7 +83,7 @@ module Playbook
       def format_elapsed_string
         user_string = show_user ? " by #{text}" : ""
         datetime_string = " #{pb_time_ago(pb_date_time.convert_to_timestamp)} ago"
-        datetime_string[0] = hide_updated ? datetime_string[0].upcase : datetime_string[0]
+        datetime_string[1] = hide_updated ? datetime_string[1].upcase : datetime_string[1]
         updated_string = hide_updated ? "" : "Last updated"
         "#{updated_string}#{user_string}#{datetime_string}"
       end
