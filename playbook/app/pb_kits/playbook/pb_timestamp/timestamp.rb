@@ -92,25 +92,25 @@ module Playbook
         time_ago = DateTime.now.to_i - value.to_i
         case time_ago
         when (0...SECS_PER_MIN)
-          time_ago == 1 ? "1 second" : "#{time_ago} seconds"
+          "A few seconds ago"
         when (SECS_PER_MIN...SECS_PER_HOUR)
           time = time_ago / SECS_PER_MIN
-          time == 1 ? "1 minute" : "#{time_ago / SECS_PER_MIN} minutes"
+          time == 1 ? "a minute" : "#{time_ago / SECS_PER_MIN} minutes"
         when (SECS_PER_HOUR...SECS_PER_DAY)
           time = time_ago / SECS_PER_HOUR
-          time == 1 ? "1 hour" : "#{time_ago / SECS_PER_HOUR} hours"
+          time == 1 ? "an hour" : "#{time_ago / SECS_PER_HOUR} hours"
         when (SECS_PER_DAY...SECS_PER_WEEK)
           time = time_ago / SECS_PER_DAY
-          time == 1 ? "1 day" : "#{time_ago / SECS_PER_DAY} days"
+          time == 1 ? "a day" : "#{time_ago / SECS_PER_DAY} days"
         when (SECS_PER_WEEK...SECS_PER_MONTH)
           time = time_ago / SECS_PER_WEEK
-          time == 1 ? "1 week" : "#{time_ago / SECS_PER_WEEK} weeks"
+          time == 1 ? "a week" : "#{time_ago / SECS_PER_WEEK} weeks"
         when (SECS_PER_MONTH...SECS_PER_YEAR)
           time = time_ago / SECS_PER_MONTH
-          time == 1 ? "1 month" : "#{time_ago / SECS_PER_MONTH} months"
+          time == 1 ? "a month" : "#{time_ago / SECS_PER_MONTH} months"
         when (SECS_PER_YEAR...SECS_PER_CENT)
           time = time_ago / SECS_PER_YEAR
-          time == 1 ? "1 year" : "#{time_ago / SECS_PER_YEAR} years"
+          time == 1 ? "a year" : "#{time_ago / SECS_PER_YEAR} years"
         end
       end
 
