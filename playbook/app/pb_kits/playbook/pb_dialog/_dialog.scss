@@ -103,11 +103,11 @@
 
   // Local Variables
   $gutter: $space_lg;
-  $small: 300px;
-  $status_size: 375px;
-  $medium: 500px;
-  $large: 800px;
-  $xlarge: 1150px;
+  $xsmall: 64px;
+  $small: 200px;
+  $medium: 250px;
+  $large: 300px;
+  $xlarge: 365px;
   $animation-duration: .2s;
   $z-index: 100;
   $opacity_visible: 1;
@@ -118,10 +118,6 @@
     top: 0;
     background-color: $white;
     z-index: $z_8;
-  }
-
-  .dialog_status_text_align {
-    text-align: center;
   }
 
   // @include pb_card;
@@ -155,8 +151,8 @@
     }
   }
 
-  &[class*="_status_size"] {
-    width: $status_size;
+  &[class*="_xs"] {
+    width: $xsmall;
   }
 
   &[class*="_sm"] {
@@ -281,10 +277,6 @@
   $medium: 500px;
   $large: 800px;
   $xlarge: 1150px;
-
-  .dialog_status_text_align {
-    text-align: center;
-  }
 
   &[class*="full_height"] {
     &[class*="_left"]{

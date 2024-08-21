@@ -70,10 +70,23 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     trigger,
   } = props;
   const ariaProps = buildAriaProps(aria);
-   const dataProps = buildDataProps(data)
-   const htmlProps = buildHtmlProps(htmlOptions);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
+
+  let globalPropsString: string = globalProps(props);
+
+  // Check if the string contains any of the prefixes
+  const containsPrefix = ['p_', 'pb_', 'pt_', 'pl_', 'pr_', 'px_', 'py_'].some((prefix) =>
+    globalPropsString.includes(prefix)
+  );
+
+  // If none of the prefixes are found, append 'p_sm' to the string
+  if (!containsPrefix) {
+    globalPropsString += ' p_sm';
+  }
+
   const dialogClassNames = {
-    base: classnames("pb_dialog", buildCss("pb_dialog", size, placement)),
+    base: `${classnames("pb_dialog", buildCss("pb_dialog", size, placement))} ${globalPropsString}`,
     afterOpen: "pb_dialog_after_open",
     beforeClose: "pb_dialog_before_close",
   };
@@ -92,7 +105,6 @@ const Dialog = (props: DialogProps): React.ReactElement => {
 
   const classes = classnames(
     buildCss("pb_dialog_wrapper"),
-    globalProps(props),
     className
   );
 

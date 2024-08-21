@@ -53,8 +53,10 @@ const DialogFullHeightPlacement = () => {
               onClose={toggle}
               opened={visible}
               placement={placement}
-              size={"sm"}
-          />
+              size={"lg"}
+          >
+          Test me 
+          </Dialog>
         ))}
       </Flex>
     </>
