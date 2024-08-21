@@ -14,7 +14,6 @@ import DialogHeader from "./child_kits/_dialog_header";
 import DialogFooter from "./child_kits/_dialog_footer";
 import DialogBody from "./child_kits/_dialog_body";
 import Flex from "../pb_flex/_flex";
-import IconCircle from "../pb_icon_circle/_icon_circle";
 import Title from "../pb_title/_title";
 import { DialogContext } from "./_dialog_context";
 
@@ -38,7 +37,7 @@ type DialogProps = {
   portalClassName?: string;
   placement?: "left" | "center" | "right";
   shouldCloseOnOverlayClick: boolean;
-  size?: "sm" | "md" | "lg" | "xl" | "status_size" | "content";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" 
   status?: "info" | "caution" | "delete" | "error" | "success";
   text?: string;
   title?: string;
@@ -124,47 +123,6 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     );
   }
 
-  type sweetAlertStatusProps = {
-    [key: string]: {
-      icon: string,
-      variant: "default" | "yellow" | "red" | "green" | "royal" | "blue" | "purple" | "teal",
-      size: "sm" | "md" | "lg" | "base" | "xs" | "xl";
-    }
-  }
-
-  const sweetAlertStatus: sweetAlertStatusProps = {
-    default: {
-      icon: "exclamation-circle",
-      variant: "default",
-      size: "lg",
-    },
-    info: {
-      icon: "info-circle",
-      variant: "default",
-      size: "lg",
-    },
-    caution: {
-      icon: "exclamation-triangle",
-      variant: "yellow",
-      size: "lg",
-    },
-    delete: {
-      icon: "trash-alt",
-      variant: "red",
-      size: "lg",
-    },
-    error: {
-      icon: "times-circle",
-      variant: "red",
-      size: "lg",
-    },
-    success: {
-      icon: "check-circle",
-      variant: "green",
-      size: "lg",
-    },
-  };
-
   return (
     <DialogContext.Provider value={api}>
       <div 
@@ -196,11 +154,6 @@ const Dialog = (props: DialogProps): React.ReactElement => {
                 <Flex align="center"
                     orientation="column"
                 >
-                  <IconCircle
-                      icon={sweetAlertStatus[status].icon}
-                      size={sweetAlertStatus[status].size}
-                      variant={sweetAlertStatus[status].variant}
-                  />
                   <Title marginTop="sm"
                       size={3}
                   >
