@@ -83,8 +83,8 @@ module Playbook
       def format_elapsed_string
         user_string = show_user ? " by #{text}" : ""
         datetime_string = " #{pb_time_ago(pb_date_time.convert_to_timestamp)} ago"
+        datetime_string[0] = hide_updated ? datetime_string[0].upcase : datetime_string[0]
         updated_string = hide_updated ? "" : "Last updated"
-
         "#{updated_string}#{user_string}#{datetime_string}"
       end
 
@@ -92,7 +92,7 @@ module Playbook
         time_ago = DateTime.now.to_i - value.to_i
         case time_ago
         when (0...SECS_PER_MIN)
-          "A few seconds ago"
+          "a few seconds"
         when (SECS_PER_MIN...SECS_PER_HOUR)
           time = time_ago / SECS_PER_MIN
           time == 1 ? "a minute" : "#{time_ago / SECS_PER_MIN} minutes"
