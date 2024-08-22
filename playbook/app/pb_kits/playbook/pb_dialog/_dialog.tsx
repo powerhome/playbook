@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-handler-names */
 /* eslint-disable react/no-multi-comp */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import Modal from "react-modal";
 
@@ -19,6 +19,7 @@ import { DialogContext } from "./_dialog_context";
 
 type DialogProps = {
   aria?: { [key: string]: string };
+  behavior?: "floating" | "push";
   cancelButton?: string;
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
@@ -47,6 +48,7 @@ type DialogProps = {
 const Dialog = (props: DialogProps): React.ReactElement => {
   const {
     aria = {},
+    behavior = "floating",
     cancelButton,
     confirmButton,
     className,
@@ -93,7 +95,6 @@ const Dialog = (props: DialogProps): React.ReactElement => {
 
   const fullHeightClassNames = () => {
     if(!fullHeight) return null
-    if(size === "xl") return `full_height_center`
     return `full_height_${placement}`
   }
 
@@ -108,8 +109,34 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     className
   );
 
+
   const [triggerOpened, setTriggerOpened] = useState(false),
     modalIsOpened = trigger ? triggerOpened : opened;
+
+  useEffect(() => {
+
+    const sizeMap: Record<Props['size'], string> = {
+      lg: '300px',
+      md: '250px',
+      sm: '200px',
+      xl: '365px',
+      xs: '64px',
+    };
+    const body = document.querySelector('body');
+
+    if (modalIsOpened && behavior === 'push' && body) {
+      if (placement === 'left') {
+        body.style.cssText = `margin-left: ${sizeMap[size]} !important; margin-right: '' !important;`;
+      } else if (placement === 'right') {
+        body.style.cssText = `margin-right: ${sizeMap[size]} !important; margin-left: '' !important;`;
+      }
+
+      body.classList.add('ReactModal__Body--open');
+    } else if (body) {
+      body.style.cssText = ''; // Clear the styles when modal is closed or behavior is not 'floating'
+      body.classList.remove('ReactModal__Body--open');
+    }
+  }, [modalIsOpened, behavior, placement, size]);
 
   const api = {
     onClose: trigger
@@ -154,6 +181,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             overlayClassName={overlayClassNames}
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
+            style={{ marginLeft: "auto" }}
         >
           <>
             {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}

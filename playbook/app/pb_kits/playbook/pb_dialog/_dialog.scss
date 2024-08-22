@@ -9,6 +9,12 @@
 
 // Dialog animations
 // Dialog animations for fading in and out from the center
+
+
+body.ReactModal__Body--open {
+  transition: margin-left 0.3s ease-in-out, margin-right 0.3s ease-in-out;
+}
+
 @keyframes modalFadeIn {
   from {
     transform: translate3d(0, -100%, 0);
@@ -31,51 +37,20 @@
   }
 }
 
-// Dialog animations for fading in and out from the left side
-@keyframes modalFadeInLeft {
-  from {
-    transform: translate3d(-100%, 0, 0);
-    opacity: 0;
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
+.pb_dialog {
+  transition: transform 0.3s ease-in-out;
 }
 
-@keyframes modalFadeOutLeft {
-  from {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-    opacity: 0;
-  }
+.pb_dialog_lg_left.pb_dialog {
+  transform: translateX(-100%);
 }
 
-
-// Dialog animations for fading in and out from the right side
-@keyframes modalFadeInRight {
-  from {
-    transform: translate3d(100%, 0, 0);
-    opacity: 0;
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
+.pb_dialog_lg_right.pb_dialog {
+  transform: translateX(100%);
 }
 
-@keyframes modalFadeOutRight {
-  from {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  to {
-    transform: translate3d(50%, 0, 0);
-    opacity: 0;
-  }
+.pb_dialog.pb_dialog_after_open {
+  transform: translateX(0); /* Slide in */
 }
 
 @keyframes overlayFade {
@@ -153,18 +128,27 @@
 
   &[class*="_xs"] {
     width: $xsmall;
+    max-width: $xsmall;
   }
 
   &[class*="_sm"] {
     width: $small;
+    max-width: $small;
   }
 
   &[class*="_md"] {
     width: $medium;
+    max-width: $medium;
   }
 
   &[class*="_lg"] {
     width: $large;
+    max-width: $large; 
+  }
+
+  &[class*="_xl"] {
+    width: $xlarge;
+    max-width: $xlarge; 
   }
 
   &_body_open {
@@ -236,19 +220,31 @@
           background-color: $white;
           max-width: 100%;
         }
+        &[class*="_xs"] {
+          width: $xsmall;
+          .dialog_footer {
+            width: $xsmall;
+          }
+        }
         &[class*="_sm"] {
+          width: $small;
+          .dialog_footer {
+            width: $small;
+          }
+        }
+        &[class*="_md"] {
           width: $medium;
           .dialog_footer {
             width: $medium;
           }
         }
-        &[class*="_md"] {
+        &[class*="_lg"] {
           width: $large;
           .dialog_footer {
             width: $large;
           }
         }
-        &[class*="_lg"] {
+        &[class*="_xl"] {
           width: $xlarge;
           .dialog_footer {
             width: $xlarge;
