@@ -3,6 +3,7 @@
 require "will_paginate"
 require "playbook/pagination_renderer"
 require "will_paginate/array"
+require "safe_ruby"
 
 class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
@@ -129,6 +130,27 @@ class PagesController < ApplicationController
     handle_kit_collection("react")
   end
 
+  def safe_ruby
+    erb_code_params = params[:erb_code]
+    puts "Received ERB code:"
+    puts erb_code_params
+    puts "mark"
+    puts SafeRuby.eval(erb_code_params)
+
+    # Check if the code is safe
+    if puts "Code is safe, evaluating:"
+      result = SafeRuby.eval(erb_code_params)
+      puts result
+      result
+    else
+      puts "Code is unsafe"
+      "Error: Invalid Ruby code"
+    end
+  rescue => e
+    puts "An error occurred: #{e.message}"
+    "Error: #{e.message}"
+  end
+
   def kit_playground_rails
     @kit = "avatar"
     @examples = pb_doc_kit_examples(@kit, "rails")
@@ -144,7 +166,7 @@ class PagesController < ApplicationController
   end
 
   def rails_pg_render
-    render inline: erb_code_params
+    render inline: safe_ruby
   rescue => e
     render json: { error: e }, status: 400
   end
