@@ -108,7 +108,6 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
           className="svg-inline--fa"
           customIcon={spinnerIcon.icon as unknown as { [key: string]: SVGElement }}
           fixedWidth
-          icon=""
           pulse
       />
     </div>

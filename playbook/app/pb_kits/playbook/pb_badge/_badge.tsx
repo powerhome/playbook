@@ -72,7 +72,6 @@ const Badge = (props: BadgeProps): React.ReactElement => {
                 className="svg-inline--fa"
                 customIcon={timesIcon.icon as unknown as { [key: string]: SVGElement }}
                 fixedWidth
-                icon=""
             />
           </span>
         )}

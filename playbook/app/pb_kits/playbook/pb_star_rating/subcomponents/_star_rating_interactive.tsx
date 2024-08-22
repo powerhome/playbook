@@ -40,7 +40,6 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                             cursor="pointer"
                             customIcon={starIcon[colorOption].icon  as unknown as { [key: string]: SVGElement }}
                             htmlOptions={{ onClick: () => handleOnClick(index + 1) }}
-                            icon=""
                         />
                     )}
 
@@ -51,7 +50,6 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                                 cursor="pointer"
                                 customIcon={starIcon[backgroundType].icon  as unknown as { [key: string]: SVGElement }}
                                 htmlOptions={{ onClick: () => handleOnClick(index + 1) }}
-                                icon=""
                             />
                         </React.Fragment>
                     )}

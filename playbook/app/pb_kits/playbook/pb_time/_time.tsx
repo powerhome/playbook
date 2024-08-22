@@ -58,7 +58,6 @@ const Time = (props: TimeProps) => {
                     <Icon
                         className="svg-inline--fa clock"
                         customIcon={clockIcon.icon as unknown as { [key: string]: SVGElement }}
-                        icon=""
                     />
                 {" "}
               </span>
@@ -72,7 +71,6 @@ const Time = (props: TimeProps) => {
                   className="svg-inline--fa clock"
                   customIcon={clockIcon.icon as unknown as { [key: string]: SVGElement }}
                   fixedWidth
-                  icon=""
                   size={size === "md" ? "" : "sm"}
               />
                 {" "}
