@@ -48,10 +48,12 @@ const DialogFullHeightPlacement = () => {
       <Flex>
         {dialogs.map(({toggle, visible, placement }, index) => (
           <Dialog
+              behavior={"push"}
               fullHeight
               key={index}
               onClose={toggle}
               opened={visible}
+              overlay={false}
               placement={placement}
               size={"lg"}
           >

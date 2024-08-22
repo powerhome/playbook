@@ -35,6 +35,7 @@ type DialogProps = {
   onClose?: () => void;
   onConfirm?: () => void;
   opened: boolean;
+  overlay: boolean;
   portalClassName?: string;
   placement?: "left" | "center" | "right";
   shouldCloseOnOverlayClick: boolean;
@@ -63,6 +64,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     onCancel,
     onConfirm,
     onClose,
+    overlay = true,
     placement = "center",
     portalClassName,
     shouldCloseOnOverlayClick = true,
@@ -82,9 +84,17 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     globalPropsString.includes(prefix)
   );
 
+  const containsBR = ['border_radius'].some((prefix) =>
+    globalPropsString.includes(prefix)
+  );
+
   // If none of the prefixes are found, append 'p_sm' to the string
   if (!containsPrefix) {
     globalPropsString += ' p_sm';
+  }
+
+  if (!containsBR) {
+    globalPropsString += ' border_radius_none';
   }
 
   const dialogClassNames = {
@@ -99,7 +109,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
   }
 
   const overlayClassNames = {
-    base: `pb_dialog_overlay ${fullHeight !== null && fullHeightClassNames() }`,
+    base: `pb_dialog_overlay ${fullHeight !== null && fullHeightClassNames()} ${!overlay ? 'no-background' : ''}`,
     afterOpen: "pb_dialog_overlay_after_open",
     beforeClose: "pb_dialog_overlay_before_close",
   };
