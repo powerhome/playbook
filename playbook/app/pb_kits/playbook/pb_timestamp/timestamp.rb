@@ -28,13 +28,16 @@ module Playbook
                      default: "default"
 
       # Variables to use with pb_time_ago method
+      SECS_FORTY_FIVE = 45
       SECS_PER_MIN  = 60
-      SECS_PER_HOUR = 60 * SECS_PER_MIN
-      SECS_PER_DAY  = 24 * SECS_PER_HOUR
-      SECS_PER_WEEK = 7 * SECS_PER_DAY
-      SECS_PER_MONTH = 4 * SECS_PER_WEEK
-      SECS_PER_YEAR = 12 * SECS_PER_MONTH
-      SECS_PER_CENT = 100 * SECS_PER_YEAR
+      SECS_PER_HOUR = 60 * SECS_PER_MIN # 3,600 seconds
+      SECS_PER_DAY  = 24 * SECS_PER_HOUR # 86,400 seconds
+      SECS_PER_WEEK = 7 * SECS_PER_DAY # 604,800 seconds
+      SECS_PER_26 = 26 * SECS_PER_DAY # 26 days = 2,246,400 seconds
+      SECS_PER_MONTH = 4 * SECS_PER_WEEK # 2,419,200 seconds
+      SECS_PER_YEAR = 12 * SECS_PER_MONTH # 29,030,400 seconds
+      SECS_PER_320 = 320 * SECS_PER_DAY # 320 days = 27,648,000 seconds
+      SECS_PER_CENT = 100 * SECS_PER_YEAR # 3,153,600,000 seconds
 
       def classname
         generate_classname("pb_timestamp_kit", variant_class, align)
@@ -91,8 +94,10 @@ module Playbook
       def pb_time_ago(value)
         time_ago = DateTime.now.to_i - value.to_i
         case time_ago
-        when (0...SECS_PER_MIN)
+        when (0...SECS_FORTY_FIVE)
           "a few seconds"
+        when (SECS_FORTY_FIVE...SECS_PER_MIN)
+          "a minute"
         when (SECS_PER_MIN...SECS_PER_HOUR)
           time = time_ago / SECS_PER_MIN
           time == 1 ? "a minute" : "#{time_ago / SECS_PER_MIN} minutes"
@@ -102,12 +107,16 @@ module Playbook
         when (SECS_PER_DAY...SECS_PER_WEEK)
           time = time_ago / SECS_PER_DAY
           time == 1 ? "a day" : "#{time_ago / SECS_PER_DAY} days"
-        when (SECS_PER_WEEK...SECS_PER_MONTH)
+        when (SECS_PER_WEEK...SECS_PER_26)
           time = time_ago / SECS_PER_WEEK
           time == 1 ? "a week" : "#{time_ago / SECS_PER_WEEK} weeks"
-        when (SECS_PER_MONTH...SECS_PER_YEAR)
+        when (SECS_PER_26...SECS_PER_MONTH)
+          "a month"
+        when (SECS_PER_MONTH...SECS_PER_320)
           time = time_ago / SECS_PER_MONTH
           time == 1 ? "a month" : "#{time_ago / SECS_PER_MONTH} months"
+        when (SECS_PER_320...SECS_PER_YEAR)
+          "a year"
         when (SECS_PER_YEAR...SECS_PER_CENT)
           time = time_ago / SECS_PER_YEAR
           time == 1 ? "a year" : "#{time_ago / SECS_PER_YEAR} years"
