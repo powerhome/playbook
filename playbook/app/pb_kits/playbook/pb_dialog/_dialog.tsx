@@ -20,6 +20,7 @@ import { DialogContext } from "./_dialog_context";
 type DialogProps = {
   aria?: { [key: string]: string };
   behavior?: "floating" | "push";
+  border?: "full" | "none" | "right" | "left";
   cancelButton?: string;
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
@@ -50,6 +51,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
   const {
     aria = {},
     behavior = "floating",
+    border = "none",
     cancelButton,
     confirmButton,
     className,
@@ -84,21 +86,21 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     globalPropsString.includes(prefix)
   );
 
-  const containsBR = ['border_radius'].some((prefix) =>
-    globalPropsString.includes(prefix)
-  );
-
   // If none of the prefixes are found, append 'p_sm' to the string
   if (!containsPrefix) {
     globalPropsString += ' p_sm';
   }
 
-  if (!containsBR) {
-    globalPropsString += ' border_radius_none';
-  }
-
   const dialogClassNames = {
-    base: `${classnames("pb_dialog", buildCss("pb_dialog", size, placement))} ${globalPropsString}`,
+    base: `${classnames(
+      "pb_dialog",
+      buildCss("pb_dialog", size, placement),
+      {
+        "drawer_border_full": border === "full",
+        "drawer_border_right": border === "right",
+        "drawer_border_left": border === "left",
+      }
+    )} ${globalPropsString}`,
     afterOpen: "pb_dialog_after_open",
     beforeClose: "pb_dialog_before_close",
   };

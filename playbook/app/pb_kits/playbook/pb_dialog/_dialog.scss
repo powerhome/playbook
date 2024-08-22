@@ -99,7 +99,6 @@ body.ReactModal__Body--open {
   background-color: $white;
   box-shadow: $shadow_deepest;
   border: 0;
-  border-radius: $border_radius_md;
   max-height: calc(100vh - #{$gutter * 2});
   max-width: calc(100vw - #{$gutter * 2});
   overflow: auto;
@@ -107,6 +106,18 @@ body.ReactModal__Body--open {
   animation-duration: $animation-duration;
   outline: none;
   animation-timing-function: $easeInOutQuint;
+
+  &.drawer_border_full {
+    box-shadow: none;
+  }
+
+  &.drawer_border_right {
+    border-right: 2px solid #f3f7fb; // Replace $border-color with your desired color
+  }
+
+  &.drawer_border_left {
+    border-left: 2px solid #f3f7fb; // Replace $border-color with your desired color
+  }
 
   &[class*="_left"] {
     animation-name: modalFadeInLeft;
@@ -297,7 +308,6 @@ body.ReactModal__Body--open {
     }
 
     .pb_dialog {
-      border-radius: 0;
       height: 100% !important;
       max-height: 100% !important;
       max-width: 100%;
