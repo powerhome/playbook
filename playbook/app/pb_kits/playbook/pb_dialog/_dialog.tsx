@@ -40,8 +40,7 @@ type DialogProps = {
   portalClassName?: string;
   placement?: "left" | "center" | "right";
   shouldCloseOnOverlayClick: boolean;
-  size?: "xs" | "sm" | "md" | "lg" | "xl" 
-  status?: "info" | "caution" | "delete" | "error" | "success";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   text?: string;
   title?: string;
   trigger?: string;
