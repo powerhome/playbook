@@ -164,7 +164,7 @@
       background: $bg_dark;
     }
 
-    .table-header-cells:first-child, td:first-child {
+    .table-header-cells:first-child, td:first-child, .pb_table_td:first-child {
       box-shadow: 1px 0px 0px 0px $border_dark !important;
     }
 
@@ -172,7 +172,7 @@
       background-color: $border_dark !important;
     }
 
-    .sort-button-icon, .header-sort-button > div {
+    .sort-button-icon, .header-sort-button > div, .pb_th_link {
       color: $white !important;
     }
 
