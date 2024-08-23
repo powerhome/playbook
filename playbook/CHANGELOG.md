@@ -1,3 +1,31 @@
+# 14.1.0
+
+##### August 13, 2024
+
+**Kit Enhancements:**
+
+- Swift Changelog [\#3580](https://github.com/powerhome/playbook/pull/3580) ([skduncan](https://github.com/skduncan))
+- Star Rating Kit: Add Styles and Animation [\#3566](https://github.com/powerhome/playbook/pull/3566) ([elisashapiro](https://github.com/elisashapiro))
+- Online Status Kit Props: Size and No Border [\#3563](https://github.com/powerhome/playbook/pull/3563) ([kangaree](https://github.com/kangaree))
+- Responsive Version Of Advancedtable Kit \(react\) [\#3559](https://github.com/powerhome/playbook/pull/3559) ([elisashapiro](https://github.com/elisashapiro))
+- Fix Zindex Global Prop Issues In Playbook \(and Nitro\) [\#3545](https://github.com/powerhome/playbook/pull/3545) ([kangaree](https://github.com/kangaree))
+
+**Fixed Bugs:**
+
+- Horizontal Default Nav - Fix Alignment [\#3582](https://github.com/powerhome/playbook/pull/3582) ([skduncan](https://github.com/skduncan))
+- Updating Datepicker Doc for Rails for Formatting Issue [\#3581](https://github.com/powerhome/playbook/pull/3581) ([skduncan](https://github.com/skduncan))
+- Rails Typeahead Does Not Accept Global Props If Ismulti=false [\#3575](https://github.com/powerhome/playbook/pull/3575) ([elisashapiro](https://github.com/elisashapiro))
+- Stat Value Kit Inconsistencies [\#3553](https://github.com/powerhome/playbook/pull/3553) ([anthonymig88](https://github.com/anthonymig88))
+
+**Improvements:**
+
+- Add Toggle \("show More"\) Example to Overlay Kit [\#3577](https://github.com/powerhome/playbook/pull/3577) ([kangaree](https://github.com/kangaree))
+- Linter: Kits T - W \(except Typeahead\) [\#3573](https://github.com/powerhome/playbook/pull/3573) ([kangaree](https://github.com/kangaree))
+- Document How to Theme Within Playbook [\#3561](https://github.com/powerhome/playbook/pull/3561) ([kangaree](https://github.com/kangaree))
+- Pulling Fonts from Power-fonts [\#3574](https://github.com/powerhome/playbook/pull/3574) ([jasperfurniss](https://github.com/jasperfurniss))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.0.0...14.1.0)
+
 # 🎨 Playbook, Now With Vite! 🌈
 ##### August 5, 2024
 
