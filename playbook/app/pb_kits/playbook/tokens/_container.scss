@@ -1,0 +1,21 @@
+$container_0:     0% !default;
+$container_xxs:   320px !default;
+$container_xs:    360px !default;
+$container_sm:    540px !default;
+$container_md:    720px !default;
+$container_lg:    960px !default;
+$container_xl:    1140px !default;
+$container_xxl:   1320px !default;
+$container_100:   100% !default;
+$containers: (
+  container_0:    $container_0,
+  container_xxs:  $container_xxs,
+  container_xs:   $container_xs,
+  container_sm:   $container_sm,
+  container_md:   $container_md,
+  container_lg:   $container_lg,
+  container_xl:   $container_xl,
+  container_xxl:  $container_xxl,
+  container_100:  $container_100,
+  none:           0,
+);

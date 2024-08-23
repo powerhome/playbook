@@ -64,6 +64,15 @@ class PagesController < ApplicationController
     render layout: "changelog"
   end
 
+  def changelog_swift
+    @data = Playbook::Engine.root.join("SWIFT_CHANGELOG.md").read
+    @page_title = "What's New"
+    @page = "changelog_swift"
+    @show_sidebar = true
+    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/SWIFT_CHANGELOG.md"
+    render layout: "changelog"
+  end
+
   def changelog_figma
     @data = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
     @page_title = "What's New"

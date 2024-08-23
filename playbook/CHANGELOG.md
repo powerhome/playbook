@@ -1,3 +1,23 @@
+# 🎨 Playbook, Now With Vite! 🌈
+##### August 5, 2024
+
+
+![running](https://github.com/user-attachments/assets/6d645d8e-6f20-4813-804f-0b44ba4861a3)
+
+
+With 14.0.0, Playbook is now Vite-driven! This means that devs can continue to ship code faster and more efficiently, and it makes contributing to Playbook even easier! Additionally, our bundle size decreased by 24%! Enjoy this new, faster and more efficient Playbook experience!
+
+[14.0.0](https://github.com/powerhome/playbook/tree/14.0.0) full list of changes:
+
+
+**Improvements:**
+- ViteJS in Playbook [\#3520](https://github.com/powerhome/playbook/pull/3520) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.34.1...14.0.0)
+
+
+
+
 # 🎨 Icon Colors Made Easy! 🌈
 ##### July 31, 2024
 

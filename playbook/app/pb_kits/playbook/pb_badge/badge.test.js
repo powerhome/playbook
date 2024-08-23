@@ -94,15 +94,21 @@ test('displays success variant', () => {
 
 })
 
-test('displays notification variant', () => {
-  render(
-    <Badge
-        data={{ testid: testId }}
-        text="1"
-        variant="notification"
-    />
-  )
-  const kit = screen.getByTestId(testId)
-  expect(kit).toHaveClass(`pb_badge_kit_notification`)
-  cleanup()
+test('displays notification variants', () => {
+  [
+    "notification",
+    "notificationError"
+  ].forEach((colorVariant) => {
+    render(
+      <Badge
+          data={{ testid: testId }}
+          text={colorVariant}
+          variant={colorVariant}
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass(`pb_badge_kit_${colorVariant === "notificationError" ? "notification_error" : "notification"}`)
+
+    cleanup()
+  })
 })

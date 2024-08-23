@@ -25,7 +25,7 @@ type TimeProps = {
   unstyled?: boolean;
 } & GlobalProps
 
-const Time = (props: TimeProps) => {
+const Time = (props: TimeProps): React.ReactElement => {
   const {
     align,
     className,

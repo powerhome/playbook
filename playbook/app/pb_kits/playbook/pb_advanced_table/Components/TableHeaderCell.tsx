@@ -21,6 +21,7 @@ type TableHeaderCellProps = {
   handleExpandOrCollapse?: () => void
   header?: Header<GenericObject, unknown>
   headerChildren?: React.ReactNode | React.ReactNode[]
+  isPinnedLeft?: boolean
   loading?: boolean
   sortIcon?: string | string[]
 } & GlobalProps
@@ -31,10 +32,11 @@ export const TableHeaderCell = ({
   handleExpandOrCollapse,
   header,
   headerChildren,
+  isPinnedLeft = false,
   loading,
   sortIcon,
 }: TableHeaderCellProps) => {
-  const { sortControl } = useContext(AdvancedTableContext)
+  const { sortControl, responsive } = useContext(AdvancedTableContext)
 
   const toggleSortButton = (event: React.SyntheticEvent) => {
     if (sortControl) {
@@ -49,7 +51,8 @@ export const TableHeaderCell = ({
 
 const cellClassName = classnames("table-header-cells", 
   `${isChrome() ? "chrome-styles" : ""}`, 
-  `${enableSorting ? "table-header-cells-active" : ""}`
+  `${enableSorting ? "table-header-cells-active" : ""}`,
+  { 'pinned-left': responsive === "scroll" && isPinnedLeft },
 )
 
 const cellId = `${loading ? 
