@@ -1,6 +1,11 @@
-# 14.1.0
-
+# ⏫ Leveling Up: Enhancements, Bug Fixes, and More! ⏫
 ##### August 13, 2024
+
+![happy](https://github.com/user-attachments/assets/c36e7e9b-b85c-4915-963e-bc08c2d9095a)
+
+
+As always, we’ve been hard at work to bring you new features, bug fixes, and improvements that not only improves our platforms quality and usability but will help you create even better UI and experiences! Here’s everything that shipped on 14.1.0:
+
 
 **Kit Enhancements:**
 
