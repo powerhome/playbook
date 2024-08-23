@@ -13,8 +13,11 @@ module Playbook
       prop :should_close_on_overlay_click, type: Playbook::Props::Boolean, default: true
       prop :title
       prop :text
+      prop :loading
       prop :confirm_button
+      prop :confirm_button_id
       prop :cancel_button
+      prop :cancel_button_id
       prop :status, type: Playbook::Props::Enum,
                     values: ["info", "caution", "delete", "error", "success", "default", ""],
                     default: ""
