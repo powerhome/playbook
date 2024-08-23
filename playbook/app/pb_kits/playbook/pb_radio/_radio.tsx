@@ -1,4 +1,4 @@
-import React, { forwardRef, isValidElement } from 'react'
+import React, { forwardRef, isValidElement, useRef } from 'react'
 import Body from '../pb_body/_body'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
@@ -41,6 +41,8 @@ const Radio = ({
   onChange = () => { void 0 },
   ...props
 }: RadioProps, ref: any) => {
+  const radioRef = useRef(null);
+  
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -50,50 +52,48 @@ const Radio = ({
     globalProps(props),
     className)
 
-    const displayRadio = (props: RadioProps & any) => {
-      if (isValidElement(children) && children.type === 'input') {
-        return React.cloneElement(children, { ...props, ref });
-      } else if (isValidElement(children) && children.type !== 'input' || !children) {
-        return (
-          <input
-              disabled={disabled}
-              id="hello"
-              name={name}
-              onChange={onChange}
-              ref={ref}
-              text={text}
-              type="radio"
-              value={value}
-              {...props}
-          />
-        );
-      }
-    };
-
-    const handleContainerClick = (event) => {
-      // Check if the click originated from the div (custom component)
-      if (
-        event.target.id === 'custom-div-component' ||
-        event.target.closest('#custom-div-component')
-      ) {
-        // Trigger the radio button click
-        document.getElementById('hello').click();
-      }
+  const displayRadio = (props: RadioProps & any) => {
+    if (isValidElement(children) && children.type === 'input') {
+      return React.cloneElement(children, { ...props, ref: radioRef });
+    } else if (isValidElement(children) && children.type !== 'input' || !children) {
+      return (
+        <input
+            disabled={disabled}
+            id="hello"
+            name={name}
+            onChange={onChange}
+            ref={radioRef}
+            text={text}
+            type="radio"
+            value={value}
+            {...props}
+        />
+      );
     }
+  };
+
+  const handleContainerClick = (event) => {
+    // Check if the click originated from the div (custom component)
+    if (
+      event.target.id === 'custom-div-component' ||
+      event.target.closest('#custom-div-component')
+    ) {
+      // Trigger the radio button click using the ref
+      radioRef.current?.click();
+    }
+  }
 
   return (
     <div 
         id="radio-container"
         onClick={handleContainerClick}
     >
-
       <label
           {...ariaProps}
           {...dataProps}
           {...htmlProps}
           className={classes}
           htmlFor="hello"
-   
       >
         <>{displayRadio(props)}</>
         <span className="pb_radio_button" />
@@ -108,12 +108,10 @@ const Radio = ({
           />
         )}
       </label>
-
-        {children && isValidElement(children) && children.type !== 'input' && (
-            <div id="custom-div-component"> {children} </div>
-        )}
-        </div>
-
+      {children && isValidElement(children) && children.type !== 'input' && (
+        <div id="custom-div-component"> {children} </div>
+      )}
+    </div>
   )
 }
 
