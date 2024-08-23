@@ -6,7 +6,7 @@ PATH
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
       react-rails (= 2.6.1)
-      view_component (= 2.55.0)
+      view_component (= 2.83.0)
       webpacker-react (~> 0.3.2)
 
 GEM
@@ -260,8 +260,9 @@ GEM
     tzinfo-data (1.2022.1)
       tzinfo (>= 1.0.0)
     unicode-display_width (2.5.0)
-    view_component (2.55.0)
-      activesupport (>= 5.0.0, < 8.0)
+    view_component (2.83.0)
+      activesupport (>= 5.2.0, < 8.0)
+      concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
     vite_rails (3.0.17)
       railties (>= 5.1, < 8)
