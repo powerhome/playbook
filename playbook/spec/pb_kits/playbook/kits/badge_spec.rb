@@ -11,7 +11,7 @@ RSpec.describe Playbook::PbBadge::Badge do
   it {
     is_expected.to define_enum_prop(:variant)
       .with_default("neutral")
-      .with_values("success", "warning", "error", "info", "neutral", "notification", "primary")
+      .with_values("success", "warning", "error", "info", "neutral", "notification", "notification_error", "primary")
   }
 
   describe "#classname" do
@@ -23,6 +23,7 @@ RSpec.describe Playbook::PbBadge::Badge do
       expect(subject.new(variant: "error", rounded: true).classname).to eq "pb_badge_kit_error_rounded"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_badge_kit_neutral additional_class"
       expect(subject.new(variant: "notification").classname).to eq "pb_badge_kit_notification"
+      expect(subject.new(variant: "notification_error").classname).to eq "pb_badge_kit_notification_error"
     end
   end
 end
