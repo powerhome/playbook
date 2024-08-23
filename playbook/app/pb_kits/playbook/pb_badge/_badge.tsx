@@ -7,6 +7,7 @@ import {
   buildCss,
   buildDataProps,
   buildHtmlProps } from '../utilities/props'
+import { getAllIcons } from "../utilities/icons/allicons"
 
 import Icon from '../pb_icon/_icon'
 
@@ -51,6 +52,7 @@ const Badge = (props: BadgeProps): React.ReactElement => {
     globalProps(props),
     className
   )
+  const timesIcon = getAllIcons()["times"]
 
   return (
     <div
@@ -69,8 +71,9 @@ const Badge = (props: BadgeProps): React.ReactElement => {
               {...closeProps}
           >
             <Icon
+                className="svg-inline--fa"
+                customIcon={timesIcon.icon as unknown as { [key: string]: SVGElement }}
                 fixedWidth
-                icon="times"
             />
           </span>
         )}
