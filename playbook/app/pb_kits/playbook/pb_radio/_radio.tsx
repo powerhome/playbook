@@ -84,7 +84,7 @@ const Radio = ({
     }
   };
 
-  const handleContainerClick = (event) => {
+  const handleContainerClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (
       event.target.id === 'children-wrapper' ||
       event.target.closest('#children-wrapper')
