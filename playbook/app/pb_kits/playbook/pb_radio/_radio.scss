@@ -8,16 +8,16 @@
   display: inline-flex;
   cursor: pointer;
 
-    .pb_radio_button{
-      width: 22px;
-      min-width: 22px;
-      height: 22px;
-      box-sizing: border-box;
-      border-radius: 1000px;
-      border: 2px solid $border_light;
-      margin-right: $space_xs;
-      transition: background $transition_default ease, box-shadow $transition_default ease, border-color $transition_default ease;
-    }
+  .pb_radio_button{
+    width: 22px;
+    min-width: 22px;
+    height: 22px;
+    box-sizing: border-box;
+    border-radius: 1000px;
+    border: 2px solid $border_light;
+    margin-right: $space_xs;
+    transition: background $transition_default ease, box-shadow $transition_default ease, border-color $transition_default ease;
+  }
   
   @media (hover:hover) {
     &:hover .pb_radio_button {
