@@ -17,16 +17,13 @@ const RadioChildren = (props) => {
   return (
     <div>
       <Radio
-          className="nida-rules"
           label="Power"
           name="Group2"
-          paddingBottom="sm"
           tabIndex={0}
           value="Power"
           {...props}
       >
         <Dropdown options={options}/>
-
       </Radio>
       <br />
       <Radio
