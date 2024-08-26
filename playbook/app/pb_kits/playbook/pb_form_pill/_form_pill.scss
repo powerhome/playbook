@@ -7,11 +7,47 @@
 
 $selector: ".pb_form_pill";
 $pb_form_pill_height: 27px;
-$form_pill_colors: (
-  primary: map-get($status_color_text, "primary"),
-  neutral: map-get($status_color_text, "neutral"),
-);
+// $form_pill_colors: (
+//   primary: map-get($status_color_text, "primary"),
+//   neutral: map-get($status_color_text, "neutral"),
+// );
+// $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $product_colors));
+$form_pill_colors: map-merge($status_color_text, $data_colors);
 
+$product_colors_map: (
+  windows: (
+    light: map-get($product_1_background, "windows_light"),
+    dark: map-get($product_1_highlight, "windows_dark"),
+  ),
+  siding: (
+    light: map-get($product_2_background, "siding_light"),
+    dark: map-get($product_2_highlight, "siding_dark"),
+  ),
+  roofing: (
+    light: map-get($product_5_background, "roofing_light"),
+    dark: map-get($product_5_highlight, "roofing_dark"),
+  ),
+  doors: (
+    light: map-get($product_3_background, "doors_light"),
+    dark: map-get($product_3_highlight, "doors_dark"),
+  ),
+  gutters: (
+    light: map-get($product_6_background, "gutters_light"),
+    dark: map-get($product_6_highlight, "gutters_dark"),
+  ),
+  solar: (
+    light: map-get($product_4_background, "solar_light"),
+    dark: map-get($product_4_highlight, "solar_dark"),
+  ),
+  attic_insulation: (
+    light: map-get($product_7_background, "attic_insulation_light"),
+    dark: map-get($product_7_highlight, "attic_insulation_dark"),
+  ),
+  accessories: (
+    light: map-get($product_8_background, "accessories_light"),
+    dark: map-get($product_8_highlight, "accessories_dark"),
+  ),
+);
 
 [class^=pb_form_pill_kit] {
   display: inline-flex;
@@ -86,6 +122,42 @@ $form_pill_colors: (
       }
     }
   }
+  //products light
+  @each $color_name, $color_value in $product_colors_map {
+    $color_value: map-get($colors, light);
+    &[class*=_#{$color_name}]  {
+      background-color: mix($color_value, $card_light, 10%);
+      transition: background-color 0.2s ease;
+      box-shadow: none;
+      @media (hover:hover) {
+        &:hover {
+          background-color: mix($color_value, $card_light, 20%);
+        }
+        &:active {
+          background-color: mix($color_value, $card_light, 30%);
+        }
+      }
+      #{$selector}_text {
+        color: $color_value;
+        padding: 0 $space-xs;
+      }
+      #{$selector}_close {
+        color: $color_value;
+        display: flex;
+        align-items: center;
+        height: 17px;
+        border-radius: calc(50%);
+        cursor: pointer;
+        &:hover {
+          background-color: mix($color_value, $card_light, 40%);
+        }
+      }
+      #{$selector}_tag {
+        color: $color_value;
+        padding: 0 $space-xs;
+      }
+    }
+  }
   &:focus {
     outline: $primary solid 2px;
     outline-offset: -1px;
@@ -132,25 +204,23 @@ $form_pill_colors: (
   }
   &.dark {
     @each $color_name, $color_value in $form_pill_colors {
-      // In dark mode, the base patterns below are needed for the next tickets for success, warning, error, info. 
-      // Primary and Neutral are exceptions to the general rule in the handoff 
       &[class*=_#{$color_name}]  {
-      //   background-color: mix($color_value, $card_dark, 10%);
-        // .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
-        //   color: $color_name;
-        // }
-        // .pb_form_pill_close {
-        //   color: $color_name;
-        //   &:hover {
-        //     background-color: mix($color_value, $card_dark, 40%);
-        //   }
-        // }
-        // &:hover {
-        //   background-color: mix($color_value, $card_dark, 20%);
-        // }
-        // &:active {
-        //   background-color: mix($color_value, $card_dark, 30%);
-        // }
+        background-color: mix($color_value, $card_dark, 10%);
+        .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+          color: $color_name;
+        }
+        .pb_form_pill_close {
+          color: $color_name;
+          &:hover {
+            background-color: mix($color_value, $card_dark, 40%);
+          }
+        }
+        &:hover {
+          background-color: mix($color_value, $card_dark, 20%);
+        }
+        &:active {
+          background-color: mix($color_value, $card_dark, 30%);
+        }
         @if ($color_name == "neutral") {
           background-color: transparent;
           border: 1px solid $border_dark;
@@ -189,6 +259,96 @@ $form_pill_colors: (
           }
           &:active {
             background-color: mix($active_dark, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "data_1") {
+          background-color: mix($active_dark, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: mix($active_dark, $card_light, 90%);
+          }
+          .pb_form_pill_close {
+            color: mix($active_dark, $card_light, 90%);
+            &:hover {
+              background-color: mix($active_dark, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($active_dark, $card_dark, 20px);
+          }
+          &:active {
+            background-color: mix($data_1, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "data_6") {
+          background-color: mix($data_6, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $text_dk_light;
+          }
+          .pb_form_pill_close {
+            color: $text_dk_light;
+            &:hover {
+              background-color: mix($text_dk_light, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($data_6, $card_dark, 20px);
+          }
+          &:active {
+            background-color: mix($data_6, $card_dark, 30%);
+          }
+        }
+      }
+    }
+    // product dark
+    @each $color_name, $color_value in $product_colors_map {
+      $color_value: map-get($colors, dark);
+      &[class*=_#{$color_name}]  {
+        background-color: mix($color_value, $card_light, 10%);
+        transition: background-color 0.2s ease;
+        box-shadow: none;
+        @media (hover:hover) {
+          &:hover {
+            background-color: mix($color_value, $card_light, 20%);
+          }
+          &:active {
+            background-color: mix($color_value, $card_light, 30%);
+          }
+        }
+        #{$selector}_text {
+          color: $color_value;
+          padding: 0 $space-xs;
+        }
+        #{$selector}_close {
+          color: $color_value;
+          display: flex;
+          align-items: center;
+          height: 17px;
+          border-radius: calc(50%);
+          cursor: pointer;
+          &:hover {
+            background-color: mix($color_value, $card_light, 40%);
+          }
+        }
+        #{$selector}_tag {
+          color: $color_value;
+          padding: 0 $space-xs;
+        }
+        @if ($color_name == "accessories") {
+          background-color: mix($color_value, $card_light, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $text_dk_light;
+          }
+          .pb_form_pill_close {
+            color: $text_dk_light;
+            &:hover {
+              background-color: mix($color_value, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($color_value, $card_dark, 20px);
+          }
+          &:active {
+            background-color: mix($color_value, $card_dark, 30%);
           }
         }
       }
