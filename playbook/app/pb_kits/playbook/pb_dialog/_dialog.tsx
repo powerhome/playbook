@@ -183,7 +183,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             onRequestClose={onClose}
             overlayClassName={overlayClassNames}
             portalClassName={portalClassName}
-            shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
+            shouldCloseOnOverlayClick={shouldCloseOnOverlayClick && !loading}
         >
           <>
             {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}
@@ -215,6 +215,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             {cancelButton && confirmButton ? (
               <Dialog.Footer>
                   <Button
+                      disabled={loading}
                       htmlType="button"
                       loading={loading}
                       onClick={onConfirm}
@@ -223,6 +224,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
                     {confirmButton}
                   </Button>
                   <Button
+                      disabled={loading}
                       htmlType="button"
                       id="cancel-button"
                       onClick={onCancel}

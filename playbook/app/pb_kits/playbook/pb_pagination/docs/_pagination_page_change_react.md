@@ -1,0 +1,1 @@
+You can use the `onChange` prop to control the data of your table. This prop is callback function that will allow you control the state.

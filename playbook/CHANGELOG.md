@@ -1,3 +1,56 @@
+# ⏫ Leveling Up: Enhancements, Bug Fixes, and More! ⏫
+##### August 13, 2024
+
+![happy](https://github.com/user-attachments/assets/c36e7e9b-b85c-4915-963e-bc08c2d9095a)
+
+
+As always, we’ve been hard at work to bring you new features, bug fixes, and improvements that not only improves our platforms quality and usability but will help you create even better UI and experiences! Here’s everything that shipped on 14.1.0:
+
+
+**Kit Enhancements:**
+
+- Swift Changelog [\#3580](https://github.com/powerhome/playbook/pull/3580) ([skduncan](https://github.com/skduncan))
+- Star Rating Kit: Add Styles and Animation [\#3566](https://github.com/powerhome/playbook/pull/3566) ([elisashapiro](https://github.com/elisashapiro))
+- Online Status Kit Props: Size and No Border [\#3563](https://github.com/powerhome/playbook/pull/3563) ([kangaree](https://github.com/kangaree))
+- Responsive Version Of Advancedtable Kit \(react\) [\#3559](https://github.com/powerhome/playbook/pull/3559) ([elisashapiro](https://github.com/elisashapiro))
+- Fix Zindex Global Prop Issues In Playbook \(and Nitro\) [\#3545](https://github.com/powerhome/playbook/pull/3545) ([kangaree](https://github.com/kangaree))
+
+**Fixed Bugs:**
+
+- Horizontal Default Nav - Fix Alignment [\#3582](https://github.com/powerhome/playbook/pull/3582) ([skduncan](https://github.com/skduncan))
+- Updating Datepicker Doc for Rails for Formatting Issue [\#3581](https://github.com/powerhome/playbook/pull/3581) ([skduncan](https://github.com/skduncan))
+- Rails Typeahead Does Not Accept Global Props If Ismulti=false [\#3575](https://github.com/powerhome/playbook/pull/3575) ([elisashapiro](https://github.com/elisashapiro))
+- Stat Value Kit Inconsistencies [\#3553](https://github.com/powerhome/playbook/pull/3553) ([anthonymig88](https://github.com/anthonymig88))
+
+**Improvements:**
+
+- Add Toggle \("show More"\) Example to Overlay Kit [\#3577](https://github.com/powerhome/playbook/pull/3577) ([kangaree](https://github.com/kangaree))
+- Linter: Kits T - W \(except Typeahead\) [\#3573](https://github.com/powerhome/playbook/pull/3573) ([kangaree](https://github.com/kangaree))
+- Document How to Theme Within Playbook [\#3561](https://github.com/powerhome/playbook/pull/3561) ([kangaree](https://github.com/kangaree))
+- Pulling Fonts from Power-fonts [\#3574](https://github.com/powerhome/playbook/pull/3574) ([jasperfurniss](https://github.com/jasperfurniss))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.0.0...14.1.0)
+
+# 🎨 Playbook, Now With Vite! 🌈
+##### August 5, 2024
+
+
+![running](https://github.com/user-attachments/assets/6d645d8e-6f20-4813-804f-0b44ba4861a3)
+
+
+With 14.0.0, Playbook is now Vite-driven! This means that devs can continue to ship code faster and more efficiently, and it makes contributing to Playbook even easier! Additionally, our bundle size decreased by 24%! Enjoy this new, faster and more efficient Playbook experience!
+
+[14.0.0](https://github.com/powerhome/playbook/tree/14.0.0) full list of changes:
+
+
+**Improvements:**
+- ViteJS in Playbook [\#3520](https://github.com/powerhome/playbook/pull/3520) ([thestephenmarshall](https://github.com/thestephenmarshall))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/13.34.1...14.0.0)
+
+
+
+
 # 🎨 Icon Colors Made Easy! 🌈
 ##### July 31, 2024
 

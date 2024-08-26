@@ -1,0 +1,84 @@
+name: Release Candidate
+run-name: ${{ github.actor }} is creating a Release Candidate 🚀
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  Creating-Release-Candidate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./playbook
+    env:
+      GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+    steps:
+      - uses: actions/checkout@v3
+      - name: 'Enable registry auth'
+        shell: bash
+        run: |
+          echo "//registry.npmjs.org/:_authToken="$(echo -n '${{ secrets.NPM_TOKEN }}')"" >> ~/.npmrc
+          echo "//npm.powerapp.cloud/:_auth="$(echo -n 'gh-actions:${{ secrets.POWERHOME_NPM_REGISTRY_PASSWORD }}' | base64)"" >> ~/.npmrc
+          echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.11.0
+      - name: Ruby Setup
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Python Setup
+        uses: actions/setup-python@v4 
+        with: 
+          python-version: '3.9'
+      - name: Set Git Config
+        run: |
+          git config --local user.name "${{ github.actor }}"
+          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Grab Current Version and Set New RC Version
+        id: set-version
+        run: |
+          current_npm_version=$(node -pe "require('./package.json').version")
+          current_ruby_version=$(ruby -r ./lib/playbook/version.rb -e "puts Playbook::VERSION")
+          
+          # Check if current version already has an RC
+          if [[ $current_npm_version == *"-rc."* ]]; then
+            new_npm_version=$(npm version prerelease --preid=rc)
+          else
+            new_npm_version=$(npm version preminor --preid=rc)
+          fi
+          
+          new_npm_version=${new_npm_version#v}
+          new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
+          
+          echo "new_npm_version=${new_npm_version}" >> $GITHUB_ENV
+          echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
+      - name: Update Version.rb
+        run: |
+          gem install bundler
+          bundle
+          bin/rails pb_release:action[${{env.new_ruby_version}}]
+      - name: Distribute and Publish (NPM)
+        run: |
+          yarn install
+          bundle
+          yarn release
+          npm pack
+          npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_version }}.tgz --tag rc
+      - name: Distribute and Publish (RubyGems)
+        run: |
+          bin/build_gem
+          gem build lib/playbook_ui_docs.gemspec
+          rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
+          gem push playbook_ui-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
+          gem push playbook_ui_docs-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v${{ env.new_npm_version }} \
+            --title "Release Candidate v${{ env.new_npm_version }}" \
+            --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
+            --prerelease
