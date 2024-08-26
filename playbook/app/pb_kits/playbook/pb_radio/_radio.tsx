@@ -85,12 +85,14 @@ const Radio = ({
   };
 
   const handleContainerClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent> | undefined) => {
-    const target = event.target as HTMLElement;
-    if (
-      target.id === 'children-wrapper' ||
-      target.closest('#children-wrapper')
-    ) {
-      radioRef.current?.click();
+    if (event) {
+      const target = event.target as HTMLElement;
+      if (
+        target.id === 'children-wrapper' ||
+        target.closest('#children-wrapper')
+      ) {
+        radioRef.current?.click();
+      }
     }
   };
 
@@ -104,7 +106,7 @@ const Radio = ({
           className={classesCustom}
           cursor='pointer'
           htmlFor={id}
-          htmlOptions={{onClick: () => handleContainerClick(event)}}
+          htmlOptions={{onClick: (event) => handleContainerClick(event)}}
           id="radio-container"
       >
         <label className={buildCss('pb_radio_kit', alignment)}>
