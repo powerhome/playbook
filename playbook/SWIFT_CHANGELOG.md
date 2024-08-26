@@ -1,3 +1,30 @@
+# 6.1.0
+##### August 26, 2024
+
+## Spot Everyone at a Glance: Meet the New Multiple Users Component
+![Image](https://github.com/user-attachments/assets/97773730-cccf-44f9-b2f1-0f047eeee171)
+### We've added a fresh option to our Multiple Users component with the new bubble variant. This update showcases full user avatars in a sleek, Apple-inspired grid layout, enhancing recognition and clarity. It's a versatile addition to your toolkit, offering a refined way to display multiple users.
+
+### 🔍 Enhancements: 
+- Progress Simple Width [#457](https://github.com/powerhome/playbook-swift/pull/457) ([Rachel Radford](https://github.com/RachelRadford21))
+- Section Separator Color [#437](https://github.com/powerhome/playbook-swift/pull/437) ([Rachel Radford](https://github.com/RachelRadford21)) 
+
+### 🛠️ Improvements: 
+- Update Multi User Indicator [#446](https://github.com/powerhome/playbook-swift/pull/446) ([Rachel Radford](https://github.com/RachelRadford21))
+
+### 🐛 Fixed Bugs: 
+- macOS Dialog Sizes [#473](https://github.com/powerhome/playbook-swift/pull/473) ([Rachel Radford](https://github.com/RachelRadford21))
+- Dark mode color exception handling [#432](https://github.com/powerhome/playbook-swift/pull/432) ([Isis Silva](https://github.com/isismsilva)) 
+- Fix typeahead rendering position for iOS [#436](https://github.com/powerhome/playbook-swift/pull/436) ([Isis Silva](https://github.com/isismsilva)) 
+- Fixed Confirmation Toast Children Fix [#472](https://github.com/powerhome/playbook-swift/pull/472) ([Rachel Radford](https://github.com/RachelRadford21))
+ - Typeahead manager fix [#467](https://github.com/powerhome/playbook-swift/pull/467) ([Isis Silva](https://github.com/isismsilva))
+
+### ✨ New Kits: 
+- Progress Simple Kit [#456](https://github.com/powerhome/playbook-swift/pull/456) ([Rachel Radford](https://github.com/RachelRadford21)) 
+- Progress Step Kit [#453](https://github.com/powerhome/playbook-swift/pull/453) ([Rachel Radford](https://github.com/RachelRadford21))
+- Multiple Users Small Bubble Variant [#448](https://github.com/powerhome/playbook-swift/pull/448) ([Rachel Radford](https://github.com/RachelRadford21))
+
+
 # 6.0.2
 #####  July 17, 2024
 
