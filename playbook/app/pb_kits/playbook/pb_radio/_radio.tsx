@@ -84,10 +84,11 @@ const Radio = ({
     }
   };
 
-  const handleContainerClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleContainerClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent> | undefined) => {
+    const target = event.target as HTMLElement;
     if (
-      event.target.id === 'children-wrapper' ||
-      event.target.closest('#children-wrapper')
+      target.id === 'children-wrapper' ||
+      target.closest('#children-wrapper')
     ) {
       radioRef.current?.click();
     }
