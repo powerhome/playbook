@@ -106,7 +106,11 @@ const Radio = ({
           className={classesCustom}
           cursor='pointer'
           htmlFor={id}
-          htmlOptions={{onClick: (event) => handleContainerClick(event)}}
+          htmlOptions={{
+            onClick: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+              handleContainerClick(event);
+            }) as unknown as () => void
+          }}
           id="radio-container"
       >
         <label className={buildCss('pb_radio_kit', alignment)}>
