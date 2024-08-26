@@ -23,7 +23,10 @@ const RadioChildren = (props) => {
           value="Power"
           {...props}
       >
-        <Dropdown options={options}/>
+        <Dropdown 
+            minWidth="xs"
+            options={options}
+        />
       </Radio>
       <br />
       <Radio
@@ -33,7 +36,10 @@ const RadioChildren = (props) => {
           value="Nitro"
           {...props}
       >
-        <Typeahead options={options} />
+        <Typeahead 
+            minWidth="xs"
+            options={options}
+         />
       </Radio>
       <br />
       <Radio
