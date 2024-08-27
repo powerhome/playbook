@@ -129,7 +129,7 @@ export default class PbStarRating extends PbEnhancedElement {
     const form = this.element.closest("form")
     if (form) {
       form.addEventListener("reset", () => {
-        this.updateHiddenInputValue("")
+        this.element.querySelector(STAR_RATING_INPUT_DATA_SELECTOR)?.setAttribute("value","")
         this.resetStarRatingValues()
       })
     }
