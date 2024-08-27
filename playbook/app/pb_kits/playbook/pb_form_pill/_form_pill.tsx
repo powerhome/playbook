@@ -39,7 +39,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     closeProps = {},
     size = '',
     textTransform = 'none',
-    color = "primary",
+    color = "neutral",
     data = {},
     tabIndex,
     icon = "",

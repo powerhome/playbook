@@ -11,7 +11,6 @@ const FormPillColors = (props) => {
           {...props}
       />
       <FormPill
-          color="neutral"
           onClick={() => {
             alert('Click!')
           }}
@@ -20,6 +19,7 @@ const FormPillColors = (props) => {
           {...props}
       />
       <FormPill
+          color="primary"
           onClick={() => {
             alert('Click!')
           }}
