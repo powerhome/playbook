@@ -8,6 +8,7 @@ const FormPillColors = (props) => {
           marginBottom="sm"
           size={4}
           text="Status Colors"
+          {...props}
       />
       <FormPill
           color="neutral"
@@ -67,6 +68,7 @@ const FormPillColors = (props) => {
           marginTop="md"
           size={4}
           text="Data Colors"
+          {...props}
       />
       <FormPill
           color="data_1"
@@ -123,7 +125,7 @@ const FormPillColors = (props) => {
           {...props}
       />
       <FormPill
-          color="primary"
+          color="data_7"
           onClick={() => {
             alert('Click!')
           }}
@@ -145,6 +147,7 @@ const FormPillColors = (props) => {
           marginTop="md"
           size={4}
           text="Product Colors"
+          {...props}
       />
       <FormPill
           color="windows"
@@ -201,12 +204,12 @@ const FormPillColors = (props) => {
           {...props}
       />
       <FormPill
-          color="attic_insulation"
+          color="insulation"
           onClick={() => {
             alert('Click!')
           }}
           tabIndex={0}
-          text="Attic Insulation"
+          text="Insulation"
           {...props}
       />
       <FormPill
