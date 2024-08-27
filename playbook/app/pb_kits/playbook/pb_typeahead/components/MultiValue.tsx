@@ -8,6 +8,7 @@ import { SelectValueType } from '../_typeahead'
 type Props = {
   data: SelectValueType,
   multiValueTemplate: any,
+  pillColor?: "neutral" | "primary" | "neutral" | "success" | "warning" | "error",
   removeProps: any,
   selectProps: any,
 }
@@ -15,7 +16,7 @@ type Props = {
 const MultiValue = (props: Props) => {
   const { removeProps } = props
   const { imageUrl, label } = props.data
-  const { multiKit } = props.selectProps
+  const { multiKit, pillColor } = props.selectProps
 
   const formPillProps = {
     marginRight: 'xs',
@@ -27,36 +28,40 @@ const MultiValue = (props: Props) => {
 
   return (
     <components.MultiValueContainer
-      className="text_input_multivalue_container"
-      {...props}
+        className="text_input_multivalue_container"
+        {...props}
     >
       {multiKit === 'badge' &&
         <Badge
-          closeProps={removeProps}
-          removeIcon
-          text={label}
-          variant="primary"
+            closeProps={removeProps}
+            removeIcon
+            text={label}
+            variant="primary"
         />
       }
 
       {multiKit !== 'badge' && imageUrl &&
         <FormPill
-          avatarUrl={imageUrl}
-          closeProps={removeProps}
-          marginRight="xs"
-          name={label}
-          size={multiKit === 'smallPill' ? 'small' : ''}
-          text=''
+            avatarUrl={imageUrl}
+            closeProps={removeProps}
+            color={pillColor}
+            marginRight="xs"
+            name={label}
+            size={multiKit === 'smallPill' ? 'small' : ''}
+            text=''
+            {...props}
         />
       }
 
       {multiKit !== 'badge' && !imageUrl &&
         <FormPill
-          closeProps={removeProps}
-          marginRight="xs"
-          name=''
-          size={multiKit === 'smallPill' ? 'small' : ''}
-          text={label}
+            closeProps={removeProps}
+            color={pillColor}
+            marginRight="xs"
+            name=''
+            size={multiKit === 'smallPill' ? 'small' : ''}
+            text={label}
+            {...props}
         />
       }
     </components.MultiValueContainer>
