@@ -15,7 +15,17 @@ app.build(
     files: ["docker-compose.yml", "docker-compose.ci.yml"]
   ) { compose ->
     stage('Image Build') {
-      compose.bake(bakeFiles: ['docker-bake.hcl'])
+      compose.bake(bakeFiles: ['docker-bake.hcl'], remoteConfig: [
+        resourceQuota: [
+            requests: [
+            cpu: '2',
+            memory: '10Gi',
+            ],
+            limits: [
+            memory: '10Gi',
+            ]
+        ],
+      ])
     }
 
     stage('Test') {
