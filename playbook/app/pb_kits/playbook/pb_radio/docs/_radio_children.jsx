@@ -1,20 +1,21 @@
 import React from 'react'
 import Radio from '../_radio'
-import Dropdown from '../../pb_dropdown/_dropdown'
+import Select from '../../pb_select/_select'
 import Title from '../../pb_title/_title'
 
 const RadioChildren = (props) => {
 
 
   const options = [
-    { label: 'Orange', value: '#FFA500' },
-    { label: 'Red', value: '#FF0000' },
-    { label: 'Green', value: '#00FF00' },
-    { label: 'Blue', value: '#0000FF' },
+    { label: 'Orange', value: 'Orange' },
+    { label: 'Red', value: 'Red' },
+    { label: 'Green', value: 'Green' },
+    { label: 'Blue', value: 'Blue' },
   ]
 
   return (
     <div>
+        
       <Radio
           label="Power"
           name="Group2"
@@ -22,7 +23,7 @@ const RadioChildren = (props) => {
           value="Power"
           {...props}
       >
-        <Dropdown 
+        <Select 
             minWidth="xs"
             options={options}
         />

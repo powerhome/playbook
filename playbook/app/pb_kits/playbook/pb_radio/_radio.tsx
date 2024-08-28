@@ -88,8 +88,8 @@ const Radio = ({
     if (event) {
       const target = event.target as HTMLElement;
       if (
-        target.id === 'children-wrapper' ||
-        target.closest('#children-wrapper')
+        target.id === 'pb-radio-children-wrapper' ||
+        target.closest('#pb-radio-children-wrapper')
       ) {
         radioRef.current?.click();
       }
@@ -117,7 +117,7 @@ const Radio = ({
           <>{displayRadio(props)}</>
           <span className="pb_radio_button" />
         </label>
-        <div id="children-wrapper"> {children} </div>
+        <div id="pb-radio-children-wrapper"> {children} </div>
       </Flex>
     ) : (
       <label
