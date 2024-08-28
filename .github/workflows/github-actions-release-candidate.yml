@@ -45,9 +45,9 @@ jobs:
           
           # Check if current version already has an RC
           if [[ $current_npm_version == *"-rc."* ]]; then
-            new_npm_version=$(npm version prerelease --preid=rc)
+            new_npm_version=$(yarn version --prerelease --preid rc)
           else
-            new_npm_version=$(npm version preminor --preid=rc)
+            new_npm_version=$(yarn version --preminor --preid rc)
           fi
           
           new_npm_version=${new_npm_version#v}
