@@ -23,7 +23,7 @@
     position: absolute;
     background-color: $white;
     border-radius: $icon_size;
-    font-size: calc($icon_size - $border_size * 2);
+    font-size: ($icon_size - $border_size * 2);
     display: flex;
     justify-content: center;
     align-items: center;
