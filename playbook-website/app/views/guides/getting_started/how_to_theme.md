@@ -63,10 +63,10 @@ The order in which you assign variables is crucial when using `!default`. Ensure
 
 If you declare variables after importing Playbook, the default values will remain unchanged.
 
-For example, if you first declare `@import 'playbook'` and then set `$primary` to another color, Playbook components will use the default color instead of your custom color:
+For example, if you first declare `@import 'playbook.scss'` and then set `$primary` to another color, Playbook components will use the default color instead of your custom color:
 
 ```scss
-@import 'playbook';
+@import 'playbook.scss';
 
  // _colors.scss
  $primary: $royal !default;
