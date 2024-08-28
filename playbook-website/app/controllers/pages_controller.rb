@@ -3,7 +3,6 @@
 require "will_paginate"
 require "playbook/pagination_renderer"
 require "will_paginate/array"
-require "safe_ruby"
 require "parser/current"
 require "erb"
 
@@ -77,7 +76,6 @@ class PagesController < ApplicationController
   end
 
   def changelog_figma
-    console
     @data = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
     @page_title = "What's New"
     @page = "changelog_figma"
@@ -189,7 +187,7 @@ class PagesController < ApplicationController
     if is_erb_safe?(erb_code_params)
       erb_code_params
     else
-      "Error: The code contains unsafe Ruby methods: #{unsafe_code.join(', ')}"
+      "The code provided can't be run please remove these methods: #{unsafe_code.join(', ')}"
     end
   end
 
