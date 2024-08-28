@@ -174,9 +174,32 @@ class PagesController < ApplicationController
     %i[<< to_s pb_rails +@ freeze]
   end
 
+  # Define methods outside of the main method
+  def add_xstr_node(node, xstr_nodes)
+    xstr_nodes << node if node.type == :xstr
+  end
+
+  def traverse_node(node, xstr_nodes)
+    case node
+    when Parser::AST::Node
+      add_xstr_node(node, xstr_nodes)
+      # Recur for each child node
+      node.children.each do |child|
+        traverse_node(child, xstr_nodes)
+      end
+    end
+  end
+
+  def detect_xstr_nodes(ast_node)
+    xstr_nodes = []
+    # Start traversing from the root node
+    traverse_node(ast_node, xstr_nodes)
+    xstr_nodes
+  end
+
   def is_erb_safe?(code)
     node = parse_erb(code)
-    detect_ruby_methods(node) - white_list == []
+    detect_ruby_methods(node) - white_list == [] && detect_xstr_nodes(parse_erb(erb_code_params)).empty?
   end
 
   def unsafe_code
@@ -186,8 +209,10 @@ class PagesController < ApplicationController
   def playground_response
     if is_erb_safe?(erb_code_params)
       erb_code_params
-    else
+    elsif unsafe_code.any?
       "The code provided can't be run please remove these methods: #{unsafe_code.join(', ')}"
+    else
+      "The code provided can't be run. Only use pb_rails."
     end
   end
 
