@@ -1,0 +1,1 @@
+<Card minWidth="xxs">{'Card content'}</Card>

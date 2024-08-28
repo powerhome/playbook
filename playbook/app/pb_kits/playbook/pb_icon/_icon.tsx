@@ -28,7 +28,7 @@ type IconProps = {
   data?: {[key: string]: string},
   fixedWidth?: boolean,
   flip?: "horizontal" | "vertical" | "both" | "none",
-  icon: string | ReactSVGElement,
+  icon?: string | ReactSVGElement,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   inverse?: boolean,

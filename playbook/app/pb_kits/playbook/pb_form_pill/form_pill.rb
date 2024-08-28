@@ -32,6 +32,10 @@ module Playbook
       def icon_class
         icon ? "icon" : nil
       end
+
+      def close_icon_size
+        size == "small" ? "xs" : "sm"
+      end
     end
   end
 end

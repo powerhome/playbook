@@ -11,6 +11,7 @@ class KitGenerator < Rails::Generators::NamedBase
   class_option :rails, type: :boolean, default: false, desc: "Creates the boilerplate files for Rails"
   class_option :react, type: :boolean, default: false, desc: "Creates the boilerplate files for React"
   class_option :swift, type: :boolean, default: false, desc: "Creates the boilerplate files for Swift"
+  class_option :beta, type: :boolean, default: true, desc: "Adds status flag to determine if kit is in beta"
 
   REACT_EXAMPLES_PATH = "app/entrypoints/playbook-doc.js"
   REACT_INDEX_PATH = "app/javascript/kits.js"
@@ -21,6 +22,7 @@ class KitGenerator < Rails::Generators::NamedBase
     @rails_kit = all_kits ? true : options[:rails]
     @react_kit = all_kits ? true : options[:react]
     @swift_kit = all_kits ? true : options[:swift]
+    @kit_status = options[:beta] ? "beta" : "stable"
     @kit_name_uppercase = kit_name.upcase
     @kit_name_lowercase = kit_name
     @kit_name_capitalize = kit_name.capitalize
@@ -78,10 +80,10 @@ class KitGenerator < Rails::Generators::NamedBase
       # Generate SCSS files ==============================
       unless platforms == "swift_only"
         template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
-        open("app/pb_kits/playbook/playbook.scss", "a") do |f|
+        open("app/entrypoints/playbook.scss", "a") do |f|
           f.puts "\n@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
         end
-        scss_file = "app/pb_kits/playbook/playbook.scss"
+        scss_file = "app/entrypoints/playbook.scss"
 
         # Sort kit names alphabetically
         lines = File.readlines(scss_file)
@@ -147,7 +149,7 @@ class KitGenerator < Rails::Generators::NamedBase
         yaml_data["kits"].each do |kit|
           next unless kit["category"] == @kit_category
 
-          new_kit = { "name" => @kit_name_underscore, "platforms" => platforms }
+          new_kit = { "name" => @kit_name_underscore, "platforms" => platforms, "status" => @kit_status }
           kit["components"] << new_kit
           break
         end
@@ -166,6 +168,7 @@ class KitGenerator < Rails::Generators::NamedBase
           f.puts "  components:"
           f.puts "    - name: #{@kit_name_underscore}"
           f.puts "      platforms: #{platforms}"
+          f.puts "      status: #{@kit_status}"
         end
 
         say_status  "complete",
