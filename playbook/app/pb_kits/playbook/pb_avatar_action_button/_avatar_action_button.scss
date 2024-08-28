@@ -14,22 +14,6 @@
     }
   }
   
-  @mixin icon-base {
-    &.dark{
-        background-color: $bg_dark
-    }
-    width: $icon_size;
-    height: $icon_size;
-    position: absolute;
-    background-color: $white;
-    border-radius: $icon_size;
-    font-size: ($icon_size - $border_size * 2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-  }
-
   @each $name, $size in $avatar-sizes {
     
     &[class*=_#{$name}] {
@@ -48,14 +32,51 @@
       }
     
       &[class*=_bottom] .icon {
-        @include icon-base;
+        &.dark {
+          background-color: $bg_dark;
+        }
+        width: $icon_size;
+        height: $icon_size;
+        position: absolute;
+        background-color: $white;
+        border-radius: $icon_size;
+        font-size: calc($icon_size - $border_size * 2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
         top: $icon_size * 1.27;
       }
       &[class*=_top] .icon {
-        @include icon-base;
+        &.dark {
+          background-color: $bg_dark;
+        }
+        width: $icon_size;
+        height: $icon_size;
+        position: absolute;
+        background-color: $white;
+        border-radius: $icon_size;
+        font-size: calc($icon_size - $border_size * 2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
         bottom: $icon_size * 1.27;
       }
       &[class*=_right] .icon {
+        &.dark {
+          background-color: $bg_dark;
+        }
+        width: $icon_size;
+        height: $icon_size;
+        position: absolute;
+        background-color: $white;
+        border-radius: $icon_size;
+        font-size: calc($icon_size - $border_size * 2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
         left: $icon_size * 1.5;
       }
       &[class*=_left] [class^=pb_avatar_kit] {
