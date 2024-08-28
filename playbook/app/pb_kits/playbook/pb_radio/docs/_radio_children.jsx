@@ -1,6 +1,6 @@
 import React from 'react'
 import Radio from '../_radio'
-import Select from '../../pb_select/_select'
+import Typeahead from '../../pb_typeahead/_typeahead'
 import Title from '../../pb_title/_title'
 
 const RadioChildren = (props) => {
@@ -23,7 +23,7 @@ const RadioChildren = (props) => {
           value="Power"
           {...props}
       >
-        <Select 
+        <Typeahead 
             minWidth="xs"
             options={options}
         />
