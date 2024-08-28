@@ -4,6 +4,8 @@ require "will_paginate"
 require "playbook/pagination_renderer"
 require "will_paginate/array"
 require "safe_ruby"
+require "parser/current"
+require "erb"
 
 class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
@@ -75,6 +77,7 @@ class PagesController < ApplicationController
   end
 
   def changelog_figma
+    console
     @data = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
     @page_title = "What's New"
     @page = "changelog_figma"
@@ -130,28 +133,8 @@ class PagesController < ApplicationController
     handle_kit_collection("react")
   end
 
-  def safe_ruby
-    erb_code_params = params[:erb_code]
-    puts "Received ERB code:"
-    puts erb_code_params
-    puts "mark"
-    puts SafeRuby.eval(erb_code_params)
-
-    # Check if the code is safe
-    if puts "Code is safe, evaluating:"
-      result = SafeRuby.eval(erb_code_params)
-      puts result
-      result
-    else
-      puts "Code is unsafe"
-      "Error: Invalid Ruby code"
-    end
-  rescue => e
-    puts "An error occurred: #{e.message}"
-    "Error: #{e.message}"
-  end
-
   def kit_playground_rails
+    console
     @kit = "avatar"
     @examples = pb_doc_kit_examples(@kit, "rails")
     @raw_example = view_context.pb_rails("docs/kit_example", props: {
@@ -165,8 +148,53 @@ class PagesController < ApplicationController
     render "pages/rails_in_react_playground", layout: "layouts/fullscreen"
   end
 
+  def parse_erb(code)
+    erb = ERB.new(code).src
+    Parser::CurrentRuby.parse(erb)
+  end
+
+  def detect_ruby_methods(root_node)
+    stack = [root_node] # Initialize the stack with the root node
+    methods = []
+    until stack.empty?
+      node = stack.pop # Get the current node from the stack
+
+      next unless node.is_a?(Parser::AST::Node)
+
+      # Check if the current node is a `:send` node and has `:system` as the method name
+      if node.type == :send
+        puts node.children[1] # Print the method name
+        methods.push(node.children[1])
+      end
+      # Push all child nodes onto the stack
+      stack.concat(node.children)
+    end
+    methods
+  end
+
+  def white_list
+    %i[<< to_s pb_rails +@ freeze]
+  end
+
+  def is_erb_safe?(code)
+    node = parse_erb(code)
+    detect_ruby_methods(node) - white_list == []
+  end
+
+  def unsafe_code
+    detect_ruby_methods(parse_erb(erb_code_params)).uniq - white_list
+  end
+
+  def playground_response
+    if is_erb_safe?(erb_code_params)
+      erb_code_params
+    else
+      "Error: The code contains unsafe Ruby methods: #{unsafe_code.join(', ')}"
+    end
+  end
+
   def rails_pg_render
-    render inline: safe_ruby
+    render inline: playground_response
   rescue => e
     render json: { error: e }, status: 400
   end
