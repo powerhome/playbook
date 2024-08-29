@@ -54,7 +54,7 @@ $pb_icon_circle_sizes: (
     &[class*=_size_#{$name}] {
       width: $size;
       height: $size;
-      border-radius: calc($size/2);
+      border-radius: $size/2;
       background: $silver;
       color: $text_lt_light;
       font-size: $size * 0.38;

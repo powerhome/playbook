@@ -27,7 +27,7 @@ $transition: .2s ease-in-out;
       &:after {
         transition: $transition;
         content: "";
-        width: calc($width / 2) - 4px;
+        width: $width / 2 - 4px;
         height: $height - 4px;
         background-color: $color_checkbox_default;
         border-radius: 50%;
@@ -68,7 +68,7 @@ $transition: .2s ease-in-out;
         background-color: $color_checkbox_success;
 
         &:after {
-          left: calc($width / 2) + 2px;
+          left: $width / 2 + 2px;
           background-color: $white;
         }
       }

@@ -59,7 +59,7 @@
         left: $icon_size * 1.5;
       }
       &[class*=_left] [class^=pb_avatar_kit] {
-        padding-left: calc($icon_size / 2);
+        padding-left: $icon_size / 2;
       }
     }
   }
