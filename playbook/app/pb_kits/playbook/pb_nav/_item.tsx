@@ -200,6 +200,17 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
 
   const collapsibleClasses = buildCss("collapsible_nav_wrapper", activeClass, highlightedBorderClass, collapsibleTrailClass)
 
+  const showIconRight = (icon: string | string[] | undefined) => {
+    if (icon === "none") {
+      return [];
+    } else if (typeof icon === "string") {
+      return [icon];
+    } else {
+      return icon || [];
+    }
+  };
+  const icons = showIconRight(iconRight)
+
   return (
     <>
       {collapsible ? (
@@ -294,15 +305,15 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
 
           <span className="pb_nav_list_item_text">{text || children}</span>
 
-          {iconRight && (
+          {icons.length > 0 && (
             <div
                 className="pb_nav_list_item_icon_section"
-                key={iconRight as string}
+                key={icons[0] as string}
             >
               <Icon
                   className="pb_nav_list_item_icon_right"
                   fixedWidth
-                  icon={iconRight as string}
+                  icon={icons[0] as string}
               />
             </div>
           )}
