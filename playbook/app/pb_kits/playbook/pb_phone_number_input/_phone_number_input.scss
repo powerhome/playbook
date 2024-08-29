@@ -60,6 +60,7 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__flag {
+    background-image: url("./flags.png");
     border-radius: 1px;
   }
 
@@ -194,6 +195,12 @@ $flag-min-resolution: 192dpi;
       .text_input {
         background-color: rgba($white, 0.025) !important;
       }
+    }
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: $flag-min-resolution) {
+    .iti__flag {
+      background-image: url("./flags.png");
     }
   }
 }
