@@ -22,7 +22,7 @@
             <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, margin_right: "xs", font_style: object.icon_font_family }) %>
         </span>
     <% end %>
-    <%= pb_rails("icon", props: { icon: "spinner", pulse: true, fixed_width: true, classname: "loading-icon" }) %>
+    <%= pb_rails("icon", props: { custom_icon: Playbook::Engine::root.join(spinner_path), pulse: true, fixed_width: true, classname: "loading-icon" }) %>
     <span class="pb_button_content"><%= content.presence || object.text %></span>
     <% if object.icon && object.icon_right %>
         <span>

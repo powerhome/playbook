@@ -21,6 +21,8 @@ import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import { uniqueId } from 'lodash';
 
+type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth'>
+
 type PbPopoverProps = {
   aria?: { [key: string]: string };
   className?: string;
@@ -32,7 +34,7 @@ type PbPopoverProps = {
   reference: PopperReference & any;
   show?: boolean;
   shouldClosePopover?: (arg0: boolean) => void;
-} & GlobalProps & Omit<PopperProps<any>, 'children'>
+} & ModifiedGlobalProps & Omit<PopperProps<any>, 'children'>
 & { children?: React.ReactChild[] | React.ReactChild }
 
 // Prop enabled default modifiers here
@@ -80,10 +82,13 @@ const Popover = (props: PbPopoverProps) => {
     targetId,
   } = props;
 
+  const items = globalProps(props).split(' ')
+  const filteredItems = items.filter(item => !item.includes('min_width'))
+  const filteredGlobalProps = filteredItems.join(' ')
   const popoverSpacing =
-    globalProps(props).includes("dark") || !globalProps(props)
+    filteredGlobalProps.includes("dark") || !filteredGlobalProps
       ? "p_sm"
-      : globalProps(props);
+      : filteredGlobalProps 
   const overflowHandling = maxHeight || maxWidth ? "overflow_handling" : "";
   const zIndexStyle = zIndex ? { zIndex: zIndex } : {};
   const widthHeightStyles = () => {
@@ -100,7 +105,7 @@ const Popover = (props: PbPopoverProps) => {
   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_popover_kit"),
-    globalProps(props),
+    filteredGlobalProps,
     className
   );
 

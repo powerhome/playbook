@@ -469,7 +469,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                       <FormPill
                           key={index}
                           onClick={(event: any) => handlePillClose(event, item)}
-                          size="small"
                           text={item.label}
                       />
                     ))
@@ -482,7 +481,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                       <FormPill
                           key={index}
                           onClick={(event: any) => handlePillClose(event, item)}
-                          size="small"
                           text={item.label}
                       />
                     ))

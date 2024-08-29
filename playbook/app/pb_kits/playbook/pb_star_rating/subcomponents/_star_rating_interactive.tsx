@@ -80,7 +80,6 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                                 onMouseEnter: () => handleMouseEnter(starIndex),
                                 onMouseLeave: () => handleMouseLeave(),
                             }}
-                            icon=""
                             tabIndex={0}
                         />
                     </div>

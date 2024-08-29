@@ -12,6 +12,10 @@ module Playbook
       def sticky_header
         "dialog_sticky_header"
       end
+
+      def times_icon
+        "app/pb_kits/playbook/utilities/icons/times.svg"
+      end
     end
   end
 end

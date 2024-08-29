@@ -43,13 +43,12 @@ jobs:
           current_npm_version=$(node -pe "require('./package.json').version")
           current_ruby_version=$(ruby -r ./lib/playbook/version.rb -e "puts Playbook::VERSION")
           
-          # Check if current version already has an RC
           if [[ $current_npm_version == *"-rc."* ]]; then
-            new_npm_version=$(npm version prerelease --preid=rc)
+            new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           else
-            new_npm_version=$(npm version preminor --preid=rc)
+            new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           fi
-          
+                    
           new_npm_version=${new_npm_version#v}
           new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
           

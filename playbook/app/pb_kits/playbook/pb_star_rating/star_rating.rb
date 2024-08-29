@@ -30,6 +30,10 @@ module Playbook
                      default: "display"
       prop :label, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String
+      prop :required, type: Playbook::Props::Boolean,
+                      default: false
+      prop :input_options, type: Playbook::Props::HashProp,
+                           default: {}
 
       def one_decimal_rating
         rating.to_f.round(1)
@@ -105,6 +109,19 @@ module Playbook
 
       def classname
         generate_classname("pb_star_rating_kit")
+      end
+
+      def hidden_input_tag
+        tag(:input, all_input_options)
+      end
+
+      def all_input_options
+        input_options.merge(
+          data: { "pb-star-rating-input": true },
+          name: name,
+          required: required,
+          style: "display: none"
+        )
       end
     end
   end

@@ -42,6 +42,7 @@ import * as FixedConfirmationToast from 'kits/pb_fixed_confirmation_toast/docs'
 import * as Flex from 'kits/pb_flex/docs'
 import * as FormGroup from 'kits/pb_form_group/docs'
 import * as FormPill from 'kits/pb_form_pill/docs'
+import * as GanttChart from 'kits/pb_gantt_chart/docs'
 import * as Gauge from 'kits/pb_gauge/docs'
 import * as Hashtag from 'kits/pb_hashtag/docs'
 import * as Highlight from 'kits/pb_highlight/docs'
@@ -67,6 +68,7 @@ import * as MultipleUsersStacked from 'kits/pb_multiple_users_stacked/docs'
 import * as Nav from 'kits/pb_nav/docs'
 import * as OnlineStatus from 'kits/pb_online_status/docs'
 import * as Overlay from 'kits/pb_overlay/docs'
+import * as Pagination from 'kits/pb_pagination/docs'
 import * as Passphrase from 'kits/pb_passphrase/docs'
 import * as PbReactPopover from 'kits/pb_popover/docs'
 import * as Person from 'kits/pb_person/docs'
@@ -147,6 +149,7 @@ WebpackerReact.registerComponents({
   ...Flex,
   ...FormGroup,
   ...FormPill,
+  ...GanttChart,
   ...Gauge,
   ...Hashtag,
   ...Highlight,
@@ -172,6 +175,7 @@ WebpackerReact.registerComponents({
   ...Nav,
   ...OnlineStatus,
   ...Overlay,
+  ...Pagination,
   ...Passphrase,
   ...PbReactPopover,
   ...Person,

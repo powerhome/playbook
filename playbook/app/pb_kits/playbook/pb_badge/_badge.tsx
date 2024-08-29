@@ -7,6 +7,7 @@ import {
   buildCss,
   buildDataProps,
   buildHtmlProps } from '../utilities/props'
+import { getAllIcons } from "../utilities/icons/allicons"
 
 import Icon from '../pb_icon/_icon'
 
@@ -25,7 +26,7 @@ type BadgeProps = {
   removeOnClick?: React.MouseEventHandler<HTMLSpanElement>,
   rounded?: boolean,
   text?: string,
-  variant?: "error" | "info" | "neutral" | "notification" | "primary" | "success" | "warning",
+  variant?: "error" | "info" | "neutral" | "notification" | "notificationError" | "primary" | "success" | "warning",
 } & GlobalProps
 const Badge = (props: BadgeProps): React.ReactElement => {
   const {
@@ -45,10 +46,13 @@ const Badge = (props: BadgeProps): React.ReactElement => {
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const css = classnames(
-    buildCss('pb_badge_kit', variant === "success" ? "success_sm" : variant, rounded ? 'rounded' : null),
+    buildCss('pb_badge_kit',
+      variant === "success" ? "success_sm" : variant === "notificationError" ? "notification_error" : variant,
+      rounded ? 'rounded' : ''),
     globalProps(props),
     className
   )
+  const timesIcon = getAllIcons()["times"]
 
   return (
     <div
@@ -67,8 +71,9 @@ const Badge = (props: BadgeProps): React.ReactElement => {
               {...closeProps}
           >
             <Icon
+                className="svg-inline--fa"
+                customIcon={timesIcon.icon as unknown as { [key: string]: SVGElement }}
                 fixedWidth
-                icon="times"
             />
           </span>
         )}
