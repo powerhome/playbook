@@ -1,7 +1,61 @@
-<%= pb_rails("checkbox" , props: {
-  text: "Select ",
+
+<%= pb_rails("checkbox", props: {
+  text: "Select All",
   value: "checkbox-value",
   name: "main",
   indeterminate: true,
   id: "test-indeterminate-js"
 }) %>
+
+<%= pb_rails("table", props: { container: false, size: "md" }) do %>
+  <tbody>
+    <% checkboxes = [
+      { name: 'Coffee', id: 'coffee' },
+      { name: 'Ice Cream', id: 'ice-cream' },
+      { name: 'Ice 2', id: 'ice-2' },
+      { name: 'Chocolate', id: 'chocolate' }
+    ] %>
+    <% checkboxes.each do |checkbox| %>
+      <tr>
+        <td>
+          <%= pb_rails("checkbox", props: {
+            text: checkbox[:name],
+            value: checkbox[:id],
+            name: "#{checkbox[:id]}-indeterminate-checkbox",
+            id: "#{checkbox[:id]}-indeterminate-checkbox",
+          }) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+<% end %>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mainCheckbox = document.getElementById('test-indeterminate-js');
+  const childCheckboxes = document.querySelectorAll('input[type="checkbox"][id$="indeterminate-checkbox"]');
+
+
+
+  mainCheckbox.addEventListener('change', function() {
+    const checkedCount = Array.from(childCheckboxes).filter(cb => cb.checked).length;
+    const isChecked = this.checked;
+    this.indeterminate = false;
+    console.log("first hello?????")
+    childCheckboxes.forEach(cb => cb.checked = checkedCount == 0 ? true : false);
+
+  });
+
+  childCheckboxes.forEach(cb => {
+    cb.addEventListener('change', function() {
+    console.log("second hello?????")
+  
+    });
+  });
+
+
+
+});
+
+
+</script>

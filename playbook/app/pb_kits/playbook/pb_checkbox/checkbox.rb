@@ -27,7 +27,19 @@ module Playbook
       end
 
       def input
-        check_box_tag(name, value, checked, input_options.merge(disabled: disabled))
+        input_html = check_box_tag(name, value, checked, input_options.merge(disabled: disabled))
+        indeterminate ? input_html + indeterminate_js_script : input_html
+      end
+
+      def indeterminate_js_script
+        "<script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var checkbox = document.querySelector('input[name=\"#{name}\"]');
+            if (checkbox) {
+              checkbox.indeterminate = #{indeterminate};
+            }
+          });
+        </script>".html_safe
       end
 
       def checkbox_label_status
