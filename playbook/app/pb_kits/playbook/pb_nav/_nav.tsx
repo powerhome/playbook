@@ -23,7 +23,6 @@ type NavProps = {
   title?: string,
   variant?: "normal" | "subtle",
   itemSpacing?: SpacingObject,
-  icon?: string | string[] | "none",
 } & GlobalProps
 
 const Nav = (props: NavProps): React.ReactElement => {
@@ -43,7 +42,6 @@ const Nav = (props: NavProps): React.ReactElement => {
     title = '',
     variant = 'normal',
     itemSpacing,
-    icon,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -64,8 +62,7 @@ const childrenWithProps = React.Children.map(children, (child) => {
     const childProps: NavChildProps = {
       orientation: orientation,
       variant: variant,
-      itemSpacing: itemSpacing,
-      iconRight: icon,
+      itemSpacing: itemSpacing
     };
     return React.cloneElement(child, childProps);
   }

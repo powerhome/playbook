@@ -4,7 +4,6 @@ import { Nav, NavItem } from 'playbook-ui'
 const CollapsibleNavNoIcon = (props) => {
   return (
     <Nav 
-        icon="none"
         variant="bold"
         {...props}
     >
@@ -13,6 +12,7 @@ const CollapsibleNavNoIcon = (props) => {
           collapsed={false}
           collapsible 
           iconLeft="city" 
+          iconRight="none"
           link="#" 
           text="Overview" 
           {...props}
@@ -36,6 +36,7 @@ const CollapsibleNavNoIcon = (props) => {
       <NavItem 
           collapsible 
           iconLeft="theater-masks"
+          iconRight="none"
           link="#" 
           text="Albums" 
           {...props}
@@ -59,6 +60,7 @@ const CollapsibleNavNoIcon = (props) => {
       <NavItem 
           collapsible 
           iconLeft="city" 
+          iconRight="none"
           link="#" 
           text="Similar Artists" 
           {...props}
