@@ -132,7 +132,6 @@ class PagesController < ApplicationController
   end
 
   def kit_playground_rails
-    console
     @kit = "avatar"
     @examples = pb_doc_kit_examples(@kit, "rails")
     @raw_example = view_context.pb_rails("docs/kit_example", props: {
