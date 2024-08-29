@@ -52,8 +52,8 @@ $pb_selectable_card_border: 2px;
       font-size: $font_smaller;
       text-align: center;
       position: absolute;
-      top: -(calc($pb_selectable_card_indicator_size/2));
-      right: -(calc($pb_selectable_card_indicator_size/2));
+      top: -calc($pb_selectable_card_indicator_size/2);
+      right: -calc($pb_selectable_card_indicator_size/2);
       opacity: 0;
     }
   }
