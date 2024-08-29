@@ -1,5 +1,6 @@
 import React from 'react'
 import Radio from '../_radio'
+import Select from '../../pb_select/_select'
 import Typeahead from '../../pb_typeahead/_typeahead'
 import Title from '../../pb_title/_title'
 
@@ -15,12 +16,23 @@ const RadioChildren = (props) => {
 
   return (
     <div>
-        
       <Radio
-          label="Power"
-          name="Group2"
+          label="Select"
+          name="Group1"
           tabIndex={0}
-          value="Power"
+          value="Select"
+          {...props}
+      >
+        <Select 
+            minWidth="xs"
+            options={options}
+        />
+      </Radio>
+      <Radio
+          label="Typeahead"
+          name="Group1"
+          tabIndex={0}
+          value="Typeahead"
           {...props}
       >
         <Typeahead 
@@ -31,9 +43,9 @@ const RadioChildren = (props) => {
       <br />
       <Radio
           defaultChecked={false}
-          label="Google"
-          name="Group2"
-          value="Google"
+          label="Typography"
+          name="Group1"
+          value="Typography"
           {...props}
       >
         <Title text="Custom Typography" />
