@@ -137,7 +137,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 
 // Right
 [class^="pb_tooltip_kit"] .tooltip_tooltip {
-  $arrow_vertical_offset: calc(50% - #{$space_xs * 1.2});
+  $arrow_vertical_offset: 50% - $space_xs * 1.2;
 
   &[data-popper-placement="right"] {
     box-shadow: -8px 0 28px 0 $tooltip_shadow;

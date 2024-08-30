@@ -129,8 +129,8 @@
   box-shadow: $shadow_deepest;
   border: 0;
   border-radius: $border_radius_md;
-  max-height: calc(100vh - #{$gutter * 2});
-  max-width: calc(100vw - #{$gutter * 2});
+  max-height: 100vh - $gutter * 2;
+  max-width: 100vw - $gutter * 2;
   overflow: auto;
   animation-name: modalFadeIn;
   animation-duration: $animation-duration;
