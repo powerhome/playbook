@@ -10,3 +10,4 @@ export { default as RichTextEditorPreview } from './_rich_text_editor_preview.js
 export { default as RichTextEditorAdvancedDefault } from './_rich_text_editor_advanced_default.jsx'
 export { default as RichTextEditorMoreExtensions } from './_rich_text_editor_more_extensions.jsx'
 export { default as RichTextEditorToolbarDisabled } from './_rich_text_editor_toolbar_disabled.jsx'
+export { default as RichTextEditorAdvancedPreview } from './_rich_text_editor_advanced_preview.jsx'

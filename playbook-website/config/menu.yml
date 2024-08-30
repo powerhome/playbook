@@ -111,6 +111,9 @@ kits:
     platforms: *1
     description:
     status: stable
+  - name: gantt_chart
+    platforms: *2
+    status: beta
   - name: line_graph
     platforms: *1
     description: Line graphs are used to show changes in data over time.
@@ -566,3 +569,4 @@ kits:
       with avatar, titles, name and territory. This is a versatile kit with features
       than can be added to display more info.
     status: stable
+

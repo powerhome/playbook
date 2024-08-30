@@ -103,6 +103,10 @@ module Playbook
       def highlight_active
         variant === "reaction" && object.highlight ? " active" : ""
       end
+
+      def spinner_path
+        "app/pb_kits/playbook/utilities/icons/spinner.svg"
+      end
     end
   end
 end
