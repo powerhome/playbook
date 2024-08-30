@@ -10,7 +10,7 @@ $secondary_dark:      rgba($bg_dark, $opacity_2);
 @mixin toolbar_border($horizontal: true, $color: $color) {
     @if $horizontal == true {
         height: 2px;
-        width: 100% + $space_md * 2;
+        width: calc(100% + #{$space_md} + #{$space_md});
         top: -$space_xs - 1px;
         left: -$space_md;
     } @else {
