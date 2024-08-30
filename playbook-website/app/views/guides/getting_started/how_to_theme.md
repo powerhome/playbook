@@ -90,7 +90,7 @@ Assign the variable before importing Playbook:
 
 ```scss
 $z_10: 1000000;
- @import 'playbook';
+ @import 'playbook.scss';
 ```
 
 Alternatively, if you use the `@use` rule:
