@@ -22,7 +22,7 @@ type NavProps = {
   link?: string,
   title?: string,
   variant?: "normal" | "subtle",
-  itemSpacing?: SpacingObject,
+  itemSpacing?: SpacingObject
 } & GlobalProps
 
 const Nav = (props: NavProps): React.ReactElement => {

@@ -15,8 +15,8 @@ export { default as BoldHorizontalNav } from './_bold_horizontal_nav.jsx'
 export { default as BoldVerticalNav } from './_bold_vertical_nav.jsx'
 export { default as CollapsibleNav } from './_collapsible_nav.jsx'
 export { default as CollapsibleNavCustom } from './_collapsible_nav_custom.jsx'
-export {default as CollapsibleNavWithAllOptions} from "./_collapsible_nav_with_all_options.jsx"
+export { default as CollapsibleNavWithAllOptions} from "./_collapsible_nav_with_all_options.jsx"
 export { default as NavWithFontControl } from "./_nav_with_font_control.jsx"
-export {default as NavWithSpacingControl } from "./_nav_with_spacing_control.jsx"
-export {default as CollapsibleNavItemSpacing } from "./_collapsible_nav_item_spacing.jsx"
-export {default as CollapsibleNavNoIcon } from "./_collapsible_nav_no_icon.jsx"
+export { default as NavWithSpacingControl } from "./_nav_with_spacing_control.jsx"
+export { default as CollapsibleNavItemSpacing } from "./_collapsible_nav_item_spacing.jsx"
+export { default as CollapsibleNavNoIcon } from "./_collapsible_nav_no_icon.jsx"
