@@ -27,7 +27,7 @@
       top: $space-xxs;
       left: 0;
       width: 100%;
-      height: 100% - $space-xxs * 2;
+      height: calc(100% - #{$space-xxs * 2});
       display: block;
       border-radius: $border-rad-light;
       animation-duration: 1.5s;
