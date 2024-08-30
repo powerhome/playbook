@@ -1,1 +1,0 @@
-Optionally remove the exapnd/collapse icon(s) from any collapsible nav item by passing "none" to the `icon` prop on that nav item.
