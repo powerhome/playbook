@@ -14,6 +14,9 @@ module Playbook
                     default: false
       prop :label
       prop :load_options
+      prop :margin_bottom, type: Playbook::Props::Enum,
+                           values: %w[none xxs xs sm md lg xl],
+                           default: "sm"
       prop :multi_kit, type: Playbook::Props::String,
                        default: ""
       prop :name
@@ -66,6 +69,7 @@ module Playbook
           inline: inline,
           isMulti: is_multi,
           label: label,
+          marginBottom: margin_bottom,
           multiKit: multi_kit,
           name: name,
           options: options,
