@@ -98,6 +98,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
   )
 
   const shieldIcon = getAllIcons()["shieldCheck"]
+  const eyeIcon = getAllIcons()["eye"]
 
   return (
     <div
@@ -177,7 +178,9 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
                 color="light"
                 dark={dark}
             >
-              <Icon icon="eye" />
+            <Icon  
+                customIcon={eyeIcon.icon as unknown as { [key: string]: SVGElement }}
+            />
             </Body>
           </span>
         </div>
