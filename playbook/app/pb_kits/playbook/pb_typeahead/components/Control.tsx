@@ -6,7 +6,7 @@ import TextInput from '../../pb_text_input/_text_input'
 
 type Props = {
   selectProps: any,
-  marginBottom?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
+  marginBottom?: string,
 }
 
 const TypeaheadControl = (props: Props) => {

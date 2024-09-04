@@ -137,11 +137,15 @@ const Typeahead = ({
     }
   }
 
+  const filteredProps = {...props}
+  if (filteredProps.marginBottom === undefined) {
+     filteredProps.marginBottom = "sm"
+  }
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     'pb_typeahead_kit react-select',
-    globalProps(props),
+    globalProps(filteredProps),
     className
   )
 

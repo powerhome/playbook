@@ -1,0 +1,205 @@
+<%= pb_rails("caption", props: { margin_bottom: "sm", text: "Margin Bottom Examples - React Rendered Rails" }) %>
+<%
+  options = [
+    { label: 'Orange', value: '#FFA500' },
+    { label: 'Red', value: '#FF0000' },
+    { label: 'Green', value: '#00FF00' },
+    { label: 'Blue', value: '#0000FF' },
+  ]
+%>
+
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-default",
+    placeholder: "All Colors",
+    options: options,
+    label: "None",
+    name: :foo,
+    is_multi: false,
+    margin_bottom: "none",
+  })
+%>
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-default",
+    placeholder: "All Colors",
+    options: options,
+    label: "XXS",
+    name: :foo,
+    is_multi: false,
+    margin_bottom: "xxs",
+  })
+%>
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-default",
+    placeholder: "All Colors",
+    options: options,
+    label: "XS",
+    name: :foo,
+    is_multi: false,
+    margin_bottom: "xs",
+  })
+%>
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-default",
+    placeholder: "All Colors",
+    options: options,
+    label: "Default - SM",
+    name: :foo,
+    is_multi: false,
+  })
+%>
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-default",
+    placeholder: "All Colors",
+    options: options,
+    label: "MD",
+    name: :foo,
+    is_multi: false,
+    margin_bottom: "md",
+  })
+%>
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-default",
+    placeholder: "All Colors",
+    options: options,
+    label: "LG",
+    name: :foo,
+    is_multi: false,
+    margin_bottom: "lg",
+  })
+%>
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-default",
+    placeholder: "All Colors",
+    options: options,
+    label: "XL",
+    name: :foo,
+    is_multi: false,
+    margin_bottom: "xl",
+  })
+%>
+
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("pb-typeahead-kit-typeahead-default-result-option-select", function(event) {
+    console.log('Single Option selected')
+    console.dir(event.detail)
+  })
+  document.addEventListener("pb-typeahead-kit-typeahead-default-result-clear", function() {
+    console.log('All options cleared')
+  })
+<% end %>
+
+<%= pb_rails("caption", props: { margin_bottom: "sm", text: "Margin Bottom Examples - Rails" }) %>
+
+<%= pb_rails("select", props: {
+  label: "Colors",
+  name: "foo",
+  data: { context_select: true },
+  options: [
+    { value: "red", value_text: "Red" },
+    { value: "orange", value_text: "Orange" },
+    { value: "yellow", value_text: "Yellow" },
+    { value: "green", value_text: "Green" },
+    { value: "blue", value_text: "Blue" },
+    { value: "purple", value_text: "Purple" },
+  ]
+  }) %>
+
+  <%= pb_rails("typeahead", props: {
+    label: "None",
+    name: :foo,
+    margin_bottom: "none",
+    data: {
+      typeahead_example9: true,
+      search_context_value_selector: "[data-context-select] select"
+      }
+  }) %>
+  <%= pb_rails("typeahead", props: {
+    label: "XXS",
+    name: :foo,
+    margin_bottom: "xxs",
+    data: {
+      typeahead_example9: true,
+      search_context_value_selector: "[data-context-select] select"
+      }
+  }) %>
+  <%= pb_rails("typeahead", props: {
+    label: "XS",
+    name: :foo,
+    margin_bottom: "xs",
+    data: {
+      typeahead_example9: true,
+      search_context_value_selector: "[data-context-select] select"
+      }
+  }) %>
+  <%= pb_rails("typeahead", props: {
+    label: "Default - SM",
+    name: :foo,
+    data: {
+      typeahead_example9: true,
+      search_context_value_selector: "[data-context-select] select"
+      }
+  }) %>
+  <%= pb_rails("typeahead", props: {
+    label: "MD",
+    name: :foo,
+    margin_bottom: "md",
+    data: {
+      typeahead_example9: true,
+      search_context_value_selector: "[data-context-select] select"
+      }
+  }) %>
+  <%= pb_rails("typeahead", props: {
+    label: "LG",
+    name: :foo,
+    margin_bottom: "lg",
+    data: {
+      typeahead_example9: true,
+      search_context_value_selector: "[data-context-select] select"
+      }
+  }) %>
+  <%= pb_rails("typeahead", props: {
+    label: "XL",
+    name: :foo,
+    margin_bottom: "xl",
+    data: {
+      typeahead_example9: true,
+      search_context_value_selector: "[data-context-select] select"
+      }
+  }) %>
+
+<br><br><br>
+
+<%= javascript_tag defer: "defer" do %>
+
+  document.addEventListener("pb-typeahead-kit-search", function(event) {
+    if (!event.target.dataset || !event.target.dataset.typeaheadExample9) return;
+
+    const fuzzyMatch = function(string, term) {
+      const ratio = 0.5;
+      string = string.toLowerCase();
+      const compare = term.toLowerCase();
+      let matches = 0;
+
+      if (string.indexOf(compare) > -1) return true;
+
+      for (let index = 0; index < compare.length; index++) {
+        if (string.indexOf(compare[index]) > -1) {
+          matches += 1
+        } else {
+          matches -=1;
+        }
+      }
+
+      return (matches / string.length >= ratio || term == "")
+    };
+
+    const colors = { red: ["Red", "Scarlet", "Chestnut", "Mahogany"],
+                     orange: ["Orange", "Apricot", "Peach", "Melon", "Burnt Sienna", "Macaroni and Cheese"],
+                     yellow: ["Yellow", "Gold", "Goldenrod", "Canary", "Laser Lemon"],
+                     green: ["Green", "Olive Green", "Granny Smith Apple", "Spring Green", "Sea Green"],
+                     blue: ["Blue", "Cerulean", "Bluetiful", "Sky Blue", "Cadet Blue", "Cornflower"],
+                     purple: ["Violet", "Indigo", "Wisteria", "Purple Mountain Majesty", "Lavender"] };
+
+    event.detail.setResults(colors[event.detail.searchingContext].filter((color) => fuzzyMatch(color, event.detail.searchingFor)).map((color) => document.createTextNode(color)));
+  })
+<% end %>
