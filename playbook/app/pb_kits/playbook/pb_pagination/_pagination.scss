@@ -33,6 +33,7 @@ $top_bottom_radius: 0px;
     border-top-right-radius: $top_bottom_radius;
     border-bottom-right-radius: $top_bottom_radius;
     cursor: pointer;
+    transition: background-color $transition_default ease-out, color $transition_default ease-out;
   }
   li:last-child > a, li:last-child > span, .pagination-number, .pagination-right {
     padding: $pagination_padding;
@@ -40,6 +41,7 @@ $top_bottom_radius: 0px;
     z-index: 2;
     border-top-left-radius: $top_bottom_radius;
     border-bottom-left-radius: $top_bottom_radius;
+    transition: background-color $transition_default ease-out, color $transition_default ease-out;
   }
   a, .pagination-number {
     color: $text_lt_default;
