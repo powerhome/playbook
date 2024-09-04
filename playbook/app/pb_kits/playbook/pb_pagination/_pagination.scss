@@ -46,6 +46,7 @@ $top_bottom_radius: 0px;
     font-size: $text_small;
     font-weight: $regular;
     border: none;
+    transition: background-color $transition_default ease-out, color $transition_default ease-out, border-color $transition_default ease-out;
 
     &:hover {
       @include hover-state;
