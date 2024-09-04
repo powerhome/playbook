@@ -41,18 +41,26 @@ jobs:
         id: set-version
         run: |
           current_npm_version=$(node -pe "require('./package.json').version")
-          current_ruby_version=$(ruby -r ./lib/playbook/version.rb -e "puts Playbook::VERSION")
           
           if [[ $current_npm_version == *"-rc."* ]]; then
             new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           else
             new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           fi
-                    
+          
           new_npm_version=${new_npm_version#v}
           new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
           
           echo "new_npm_version=${new_npm_version}" >> $GITHUB_ENV
+          echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
+      - name: Check if version exists and increment if necessary
+        run: |
+          while npm view playbook-ui@${{ env.new_npm_version }} version &>/dev/null; do
+            new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+            new_npm_version=${new_npm_version#v}
+            echo "new_npm_version=${new_npm_version}" >> $GITHUB_ENV
+          done
+          new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
       - name: Update Version.rb
         run: |
