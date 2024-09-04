@@ -131,6 +131,21 @@ const arrowDownShortWide = (
   </svg>
 )
 
+const angleDown = (
+  <svg
+      fill="none"
+      height="1.5em"
+      viewBox="0 0 30 24"
+      width="1.5em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    <path
+        d="M6.543 7.69a1.125 1.125 0 011.59.034L15 14.884l6.866-7.16A1.125 1.125 0 1123.49 9.28l-7.407 7.725a1.5 1.5 0 01-2.166 0L6.51 9.281a1.125 1.125 0 01.033-1.59z"
+        fill="#242B42"
+    />
+  </svg>
+)
+
 export const getAllIcons = () => {
 
     return {
@@ -157,6 +172,9 @@ export const getAllIcons = () => {
         },
         arrowDownShortWide: {
             icon: arrowDownShortWide
+        },
+        angleDown: {
+            icon: angleDown
         }
     }
 }

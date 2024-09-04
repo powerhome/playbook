@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { getAllIcons } from "../../utilities/icons/allicons"
+
 import Flex from '../../pb_flex/_flex'
 import PbReactPopover from '../../pb_popover/_popover'
 import Button from '../../pb_button/_button'
@@ -65,6 +67,7 @@ const toolbarDropdownItems = [
     },
 ]
 
+  const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
 
   const handleTogglePopover = () => {
     setShowPopover(!showPopover)
@@ -92,8 +95,9 @@ for (const { text, isActive, icon } of toolbarDropdownItems) {
         <Flex className={showPopover ? "fa-flip-vertical" : ""}
             display="inline_flex"
         >
-          <Icon fixedWidth
-              icon="angle-down"
+          <Icon 
+              customIcon={angleDown}
+              fixedWidth
               margin-left="xs"
           />
         </Flex>
@@ -125,8 +129,9 @@ const popoverReference = (
             <Flex className={showPopover ? "fa-flip-vertical" : ""}
                 display="inline_flex"
             >
-              <Icon fixedWidth
-                  icon="angle-down"
+              <Icon 
+                  customIcon={angleDown}
+                  fixedWidth
                   margin-left="xs"
               />
             </Flex>

@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
+import { getAllIcons } from "../utilities/icons/allicons"
 
 import datePickerHelper from './date_picker_helper'
 import Icon from '../pb_icon/_icon'
@@ -161,7 +162,7 @@ useEffect(() => {
     }
     return base
   }
-
+  const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
 
   return (
     <div
@@ -232,7 +233,7 @@ useEffect(() => {
                 >
                   <Icon
                       className="angle_down_icon"
-                      icon="angle-down"
+                      customIcon={angleDown}
                   />
                 </div>
               </div>

@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
 import type { InputCallback } from '../types'
+import { getAllIcons } from "../utilities/icons/allicons"
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -90,6 +91,8 @@ const Select = ({
     compactClass
   );
 
+  const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
+
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
   const selectBody =(() =>{
     if (children) return children
@@ -135,8 +138,8 @@ const Select = ({
         { multiple !== true ?
           <Icon
               className="pb_select_kit_caret"
+              customIcon={angleDown}
               fixedWidth
-              icon="angle-down"
           />
           :
           null
