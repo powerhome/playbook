@@ -3,9 +3,11 @@
 require "will_paginate"
 require "playbook/pagination_renderer"
 require "will_paginate/array"
+require "ostruct"
 
 class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
+  rescue_from ActionView::MissingTemplate, :with => :page_not_found
 
   before_action :set_js, only: %i[visual_guidelines]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
@@ -369,5 +371,9 @@ private
   def advanced_table_mock_data
     advanced_table_mock_data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data.json"))
     JSON.parse(advanced_table_mock_data, object_class: OpenStruct)
+  end
+
+  def page_not_found
+    redirect_to root_path, flash: { error: "The kit (#{params[:name]}) was not found." }
   end
 end
