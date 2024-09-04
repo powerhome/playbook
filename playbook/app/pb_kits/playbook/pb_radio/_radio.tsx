@@ -41,7 +41,7 @@ const Radio = ({
   value = 'radio_text',
   onChange = () => { void 0 },
   ...props
-}: RadioProps ) => {
+}: RadioProps, ref: any ) => {
   const radioRef = useRef(null);
 
   const ariaProps = buildAriaProps(aria);
@@ -66,7 +66,7 @@ const Radio = ({
 
   const displayRadio = (props: RadioProps & any) => {
     if (isValidElement(children) && children.type === 'input') {
-      return React.cloneElement(children, { ...props, ref: radioRef });
+      return children;
     } else if (isCustomChild || !children) {
       return (
         <input
