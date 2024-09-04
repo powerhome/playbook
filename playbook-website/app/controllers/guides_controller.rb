@@ -7,12 +7,14 @@ class GuidesController < ApplicationController
 
   def md_doc
     @show_sidebar = true
-    if @parent && @guide_exists
+    if @guide_exists
       if @page
         render template: "guides/#{@parent}/#{@page}"
       else
         render template: "guides/#{@parent}"
       end
+    elsif @parent_not_found
+      redirect_to root_path, flash: { error: "That doc does not exist" }
     else
       redirect_to "/guides/#{@parent}", flash: { error: "That doc does not exist" }
     end
@@ -30,6 +32,10 @@ private
            else
              Dir.glob("#{Dir[search_path].first}*.md").first
            end
+    if file == "README.md"
+      file = nil
+      @parent_not_found = true
+    end
     if file
       @link_extension = File.basename(file)
       @front_matter = render_frontmatter(file)
