@@ -11,8 +11,8 @@ const HomeAddressStreetLink= (props) => {
         homeId={8250263}
         homeUrl="https://powerhrg.com/"
         houseStyle="Colonial"
-        newWindow
         state="PA"
+        target="_blank"
         territory="PHL"
         zipcode="19382"
         {...props}

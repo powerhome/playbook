@@ -23,6 +23,7 @@ type HomeAddressStreetProps = {
   homeId: string,
   houseStyle: string,
   homeUrl: string,
+  target: string,
   newWindow: boolean,
   state: string,
   zipcode: string,
@@ -42,6 +43,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
     htmlOptions = {},
     homeId,
     homeUrl,
+    target,
     newWindow,
     houseStyle,
     state,
@@ -62,6 +64,17 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
   const dataProps: GenericObject = buildDataProps(data)
   const ariaProps: GenericObject = buildAriaProps(aria)
   const htmlProps = buildHtmlProps(htmlOptions)
+
+  const getTargetAttribute = () => {
+    if (target && homeUrl) {
+      return target
+    } else if (newWindow) {
+      return '_blank'
+    }
+
+    return null
+  }
+
   return (
     <div
         className={classes(className, dark)}
@@ -120,6 +133,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
             dark={dark}
             marginRight="xxs"
             newWindow={newWindow}
+            target={getTargetAttribute()}
             text={homeId}
             type="home"
             url={homeUrl || '#'}
