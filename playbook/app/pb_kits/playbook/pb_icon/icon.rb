@@ -9,7 +9,7 @@ module Playbook
       prop :border, type: Playbook::Props::Boolean,
                     default: false
       prop :fixed_width, type: Playbook::Props::Boolean,
-                         default: false
+                         default: true
       prop :flip, type: Playbook::Props::Enum,
                   values: ["horizontal", "vertical", "both", nil],
                   default: nil
