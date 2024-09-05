@@ -33,10 +33,9 @@ private
              Dir.glob("#{Dir[search_path].first}*.md").first
            end
     if file == "README.md"
-      file = nil
       @parent_not_found = true
-    end
-    if file
+      @guide_exists = false
+    elsif file
       @link_extension = File.basename(file)
       @front_matter = render_frontmatter(file)
       @page_title = @front_matter["title"] || File.basename(file, ".*").split(".")[0].tr("_", " ")
