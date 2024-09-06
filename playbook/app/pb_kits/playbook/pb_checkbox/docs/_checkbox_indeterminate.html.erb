@@ -35,26 +35,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const mainCheckbox = document.getElementById('test-indeterminate-js');
   const childCheckboxes = document.querySelectorAll('input[type="checkbox"][id$="indeterminate-checkbox"]');
 
-
-
   mainCheckbox.addEventListener('change', function() {
     const checkedCount = Array.from(childCheckboxes).filter(cb => cb.checked).length;
     const isChecked = this.checked;
     this.indeterminate = false;
-    console.log("first hello?????")
     childCheckboxes.forEach(cb => cb.checked = checkedCount == 0 ? true : false);
 
   });
 
   childCheckboxes.forEach(cb => {
     cb.addEventListener('change', function() {
-    console.log("second hello?????")
-  
+
     });
   });
-
-
-
 });
 
 
