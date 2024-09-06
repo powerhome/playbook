@@ -45,6 +45,7 @@ type TypeaheadProps = {
   getOptionLabel?: string | (() => any),
   getOptionValue?: string | (() => any),
   name?: string,
+  marginBottom?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
 } & GlobalProps
 
 export type SelectValueType = {
@@ -76,12 +77,18 @@ const Typeahead = ({
   htmlOptions = {},
   id,
   loadOptions = noop,
+  marginBottom = "sm",
   ...props
 }: TypeaheadProps) => {
   const selectProps = {
     cacheOptions: true,
     components: {
-      Control,
+      Control: (controlProps: any) => (
+        <Control 
+            {...controlProps} 
+            marginBottom={marginBottom} 
+        />
+      ),
       ClearIndicator,
       IndicatorsContainer,
       IndicatorSeparator: null as null,

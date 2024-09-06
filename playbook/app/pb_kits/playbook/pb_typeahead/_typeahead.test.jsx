@@ -108,3 +108,16 @@ test('should pass className prop', () => {
   const kit = screen.getByTestId('typeahead-test')
   expect(kit).toHaveClass(className)
 })
+
+test('typeahead textinput has mb_sm class by default', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'default-mb-test' }}
+        options={options} 
+    />
+  )
+
+  const kit = screen.getByTestId('default-mb-test')
+  const textInput = kit.querySelector(".pb_text_input_kit")
+  expect(textInput).toHaveClass("mb_sm")
+})

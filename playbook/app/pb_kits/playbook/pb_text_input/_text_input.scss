@@ -45,7 +45,6 @@
       }
     }
     .text_input_wrapper {
-      margin-bottom: 1rem;
       input::placeholder,
       .text_input .placeholder {
         @include pb_body_light_dark;
