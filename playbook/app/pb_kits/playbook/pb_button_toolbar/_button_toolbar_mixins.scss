@@ -11,13 +11,13 @@ $secondary_dark:      rgba($bg_dark, $opacity_2);
     @if $horizontal == true {
         height: 2px;
         width: calc(100% + #{$space_md} + #{$space_md});
-        top: calc(-#{$space_xs} - 1px);
+        top: -$space_xs - 1px;
         left: -$space_md;
     } @else {
         width: 2px;
         height: $space_md;
         top: 0;
-        right: calc(#{$space_lg} + 2px);
+        right: $space_lg + 2px;
     }
     background-color: $color;
     content: '';

@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   border-radius: $border_rad_light;
-  padding: 0 calc($space_xs/2);
+  padding: 0 $space_xs/2;
   border-width: 1px;
   border-style: solid;
   border-color: $card_light;
@@ -34,7 +34,7 @@
     height: $pb_badge_height;
     min-height: $pb_badge_height;
     min-width: $pb_badge_height;
-    border-radius: calc($pb_badge_height / 2);
+    border-radius: $pb_badge_height / 2;
   }
 
   &[class*=_notification] {
