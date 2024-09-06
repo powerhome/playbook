@@ -1,3 +1,41 @@
+# 14.3.0
+##### September 6, 2024 
+
+
+[14.3.0](https://github.com/powerhome/playbook/tree/14.3.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Expose Margin Bottom on Text Input within Typeahead [\#3654](https://github.com/powerhome/playbook/pull/3654) ([elisashapiro](https://github.com/elisashapiro))
+- Add all Target Options to the Hashtag and Home Address Street Kits [\#3650](https://github.com/powerhome/playbook/pull/3650) ([skduncan](https://github.com/skduncan))
+- Adding Default Value Prop to Rails Star Rating Kit [\#3629](https://github.com/powerhome/playbook/pull/3629) ([carloslimasd](https://github.com/carloslimasd))
+- Collapsible Optional Icon [\#3643](https://github.com/powerhome/playbook/pull/3643) ([elisashapiro](https://github.com/elisashapiro))
+- Enable Kits Instead of Text for Radio label [\#3612](https://github.com/powerhome/playbook/pull/3612) ([nickamantia](https://github.com/nickamantia))
+- Add "loading" Variant to Circle Icon Button [\#3633](https://github.com/powerhome/playbook/pull/3633) ([kangaree](https://github.com/kangaree))
+
+**Fixed Bugs:**
+
+- Return empty string for SVG with HTTP errors [\404s, timeouts] [\#3658](https://github.com/powerhome/playbook/pull/3658) ([kangaree](https://github.com/kangaree))
+- Redirect If Guide Doesn't Exist [\#3653](https://github.com/powerhome/playbook/pull/3653) ([kangaree](https://github.com/kangaree))
+- React pagination glitchiness [\#3647](https://github.com/powerhome/playbook/pull/3647) ([elisashapiro](https://github.com/elisashapiro))
+- Fix @import playbook.scss Errors - Fix Theming / Overriding SCSS Variables [\#3608](https://github.com/powerhome/playbook/pull/3608) ([kangaree](https://github.com/kangaree))
+- Timestamp Kit Rails: Elapsed Time Variant Issue [\#3606](https://github.com/powerhome/playbook/pull/3606) ([skduncan](https://github.com/skduncan))
+- Fix Github Action Bug that Breaks Build [\#3655](https://github.com/powerhome/playbook/pull/3655) ([jasperfurniss](https://github.com/jasperfurniss))
+- Testing Incrementing for Github Action RC [\#3651](https://github.com/powerhome/playbook/pull/3651) ([jasperfurniss](https://github.com/jasperfurniss))
+- Fix Missing Template Error in PagesController [\#3645](https://github.com/powerhome/playbook/pull/3645) ([skduncan](https://github.com/skduncan))
+
+**Improvements:**
+
+- Fixes RC Github Action Limit [\#3666](https://github.com/powerhome/playbook/pull/3666) ([jasperfurniss](https://github.com/jasperfurniss))
+- Fix Kebab Logic [\#3649](https://github.com/powerhome/playbook/pull/3649) ([markdoeswork](https://github.com/markdoeswork))
+- Dialog Disable Rails - Remove Duplicate Data [\#3646](https://github.com/powerhome/playbook/pull/3646) ([markdoeswork](https://github.com/markdoeswork))
+- RTE Previewer + Output Rails [\#3625] ([elisashapiro](https://github.com/elisashapiro))(https://github.com/powerhome/playbook/pull/3625)
+- Implement Error Handling and Additions for Github Action [\#3652](https://github.com/powerhome/playbook/pull/3652) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.2.1...14.3.0)
+
+
 # ⭐ Improving Usability, Flexibility, and Accessibility ⭐
 ##### August 31st, 2024
 
