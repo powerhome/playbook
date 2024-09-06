@@ -1,1 +1,1 @@
-Change the form pill color by passing the optional `color` prop. Product, Data, and Status colors are available options. Check them out <a href="https://playbook.powerapp.cloud/kits/form_pill#form-pill-colors" target="_blank">here</a> in the Form Pill colors example.
+Change the form pill color by passing the optional `pill_color` prop. Product, Data, and Status colors are available options. Check them out <a href="https://playbook.powerapp.cloud/kits/form_pill#form-pill-colors" target="_blank">here</a> in the Form Pill colors example.

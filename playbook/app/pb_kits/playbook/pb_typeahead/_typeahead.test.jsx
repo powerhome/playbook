@@ -112,11 +112,11 @@ test('should pass className prop', () => {
 test('typeahead with colored pills', () => {
   render(
     <Typeahead
-        color="primary"
         data={{ testid: 'pills-color-test' }}
         defaultValue={[options[0]]}
         isMulti
         options={options}
+        pillColor="primary"
     />
   )
 

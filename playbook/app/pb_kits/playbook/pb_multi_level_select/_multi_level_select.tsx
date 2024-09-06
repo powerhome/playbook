@@ -34,7 +34,7 @@ type MultiLevelSelectProps = {
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[]
   variant?: "multi" | "single"
-  color?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
+  pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
 } & GlobalProps
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
@@ -52,7 +52,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     onSelect = () => null,
     selectedIds,
     variant = "multi",
-    color = "neutral"
+    pillColor = "neutral"
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -469,7 +469,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 inputDisplay === "pills"
                   ? returnedArray.map((item, index) => (
                       <FormPill
-                          color={color}
+                          color={pillColor}
                           key={index}
                           onClick={(event: any) => handlePillClose(event, item)}
                           text={item.label}
@@ -482,7 +482,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 inputDisplay === "pills"
                   ? defaultReturn.map((item, index) => (
                       <FormPill
-                          color={color}
+                          color={pillColor}
                           key={index}
                           onClick={(event: any) => handlePillClose(event, item)}
                           text={item.label}

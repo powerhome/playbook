@@ -12,10 +12,10 @@ const TypeaheadWithPills = (props) => {
   return (
     <>
       <Typeahead
-          color="primary"
           isMulti
           label="Colors"
           options={options}
+          pillColor="primary"
           placeholder=""
           {...props}
       />

@@ -73,7 +73,6 @@ const MultiLevelSelectColor = (props) => {
   return (
     <div>
       <MultiLevelSelect
-          color="primary"
           id='multiselect-color'
           onSelect={(selectedNodes) =>
             console.log(
@@ -81,6 +80,7 @@ const MultiLevelSelectColor = (props) => {
               selectedNodes
             )
           }
+          pillColor="primary"
           treeData={treeData}
           {...props}
       />
