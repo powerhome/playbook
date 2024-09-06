@@ -49,7 +49,7 @@ const RadioChildren = (props) => {
           {...props}
       >
         <Title text="Custom Typography" />
-        </Radio>
+      </Radio>
     </div>
   )
 }

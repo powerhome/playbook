@@ -41,7 +41,7 @@ const Radio = ({
   value = 'radio_text',
   onChange = () => { void 0 },
   ...props
-}: RadioProps, ref: any ) => {
+}: RadioProps ) => {
   const radioRef = useRef(null);
 
   const ariaProps = buildAriaProps(aria);
