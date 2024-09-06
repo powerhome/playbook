@@ -3,18 +3,20 @@
 @import "../tokens/spacing";
 @import "../tokens/typography";
 
-@mixin preview_first_child {
+
+// Tiptap mixins section (React Advanced Editor)
+@mixin preview_tiptap_first_child {
     :first-child {
         margin-top: 0;
     }
 }
 
-@mixin preview_p {
+@mixin preview_tiptap_p {
     margin: 1rem 0 0 0;
     min-height: 1rem;
 }
 
-@mixin preview_code {
+@mixin preview_tiptap_code {
     font-family: monospace;
     background: $bg_light;
     padding: 0.1rem 0.3rem;
@@ -23,7 +25,7 @@
     overflow: hidden;
 }
 
-@mixin preview_pre_codeblock {
+@mixin preview_tiptap_pre_codeblock {
     display: inline-block;
     width: 100%;
     vertical-align: top;
@@ -44,7 +46,7 @@
     }
 }
 
-@mixin preview_a {
+@mixin preview_tiptap_a {
     color: $primary;
     border-bottom: 1px solid $primary;
     &:hover {
@@ -53,7 +55,7 @@
     }
 }
 
-@mixin preview_blockquote {
+@mixin preview_tiptap_blockquote {
     font-size: $font_larger;
     padding: $space_sm $space_md;
     font-style: italic;
@@ -63,7 +65,7 @@
     }
 }
 
-@mixin preview_h1 {
+@mixin preview_tiptap_h1 {
     font-size: $text_largest;
     line-height: $text_larger;
     font-weight: $bolder;
@@ -71,7 +73,7 @@
     margin: 2.1rem 0 0 0;
 }
 
-@mixin preview_h2 {
+@mixin preview_tiptap_h2 {
     font-size: $text_larger;
     line-height: $text_larger;
     font-weight: $bolder;
@@ -79,7 +81,7 @@
     margin: 1.9rem 0 0 0;
 }
 
-@mixin preview_h3 {
+@mixin preview_tiptap_h3 {
     font-size: $text_large;
     line-height: $text_large;
     font-weight: $bolder;
@@ -87,7 +89,7 @@
     margin: 1.7rem 0 0 0;
 }
 
-@mixin preview_smaller_headings {
+@mixin preview_tiptap_smaller_headings {
     font-size: $text_base;
     line-height: $text_base;
     letter-spacing: $lspace_tight;
@@ -95,7 +97,7 @@
     margin: 1rem 0 0 0;
 }
 
-@mixin preview_hr {
+@mixin preview_tiptap_hr {
     margin: 2.2rem 0;
     box-sizing: content-box;
     overflow: hidden;
@@ -107,7 +109,7 @@
     border: 0; 
 }
 
-@mixin preview_ol {
+@mixin preview_tiptap_ol {
     margin: 1rem 0 0 0;
     padding-left: $space_md;
     list-style: decimal;
@@ -119,7 +121,7 @@
     }
 }
 
-@mixin preview_ul {
+@mixin preview_tiptap_ul {
     list-style-position: disc;
     margin: 1rem 0 0 0;
     padding-left: $space_md;
@@ -129,4 +131,38 @@
         margin: 0;
       }
     }
+}
+
+// Trix mixins section (Rails and React default editor)
+@mixin preview_trix_div {
+    line-height: 1.4;
+}
+
+@mixin preview_trix_h1 {
+    font-size: 2em;
+    line-height: 1.4; 
+}
+@mixin preview_trix_blockquote {
+    border: 0 solid #ccc;
+    border-left-width: 0.3em;
+    margin-left: 0.3em;
+    padding-left: 0.6em; 
+    line-height: 1.4;
+}
+
+@mixin preview_trix_li {
+    line-height: 1.4;
+    margin-left: $space_sm;
+}
+
+@mixin preview_trix_pre {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    font-family: monospace;
+    font-size: 0.9em;
+    padding: 0.5em;
+    white-space: pre;
+    background-color: #eee;
+    overflow-x: auto; 
 }
