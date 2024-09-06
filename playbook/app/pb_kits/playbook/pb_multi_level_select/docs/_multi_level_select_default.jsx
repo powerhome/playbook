@@ -1,5 +1,6 @@
 import React from "react";
 import MultiLevelSelect from "../_multi_level_select";
+import Badge from "../../pb_badge/_badge";
 
 const treeData = [
   {
@@ -13,6 +14,10 @@ const treeData = [
         value: "People",
         id: "people1",
         expanded: true,
+        // indicator: {
+        text: "3",
+        variant: "info",
+        // },
         children: [
           {
             label: "Talent Acquisition",
@@ -23,6 +28,11 @@ const treeData = [
             label: "Business Affairs",
             value: "Business Affairs",
             id: "business1",
+            // indicator: {
+            text: "5",
+            variant: "primary",
+            // },
+
             children: [
               {
                 label: "Initiatives",
@@ -47,6 +57,10 @@ const treeData = [
         label: "Contact Center",
         value: "Contact Center",
         id: "contact1",
+        // indicator: {
+        text: "66",
+        variant: "error",
+        // },
         children: [
           {
             label: "Appointment Management",
@@ -73,18 +87,34 @@ const MultiLevelSelectDefault = (props) => {
   return (
     <div>
       <MultiLevelSelect
-          id='multiselect-default'
+          id="multiselect-default"
           onSelect={(selectedNodes) =>
-          console.log(
-            "Selected Items",
-            selectedNodes
-          )
-        }
+            console.log("Selected Items", selectedNodes)
+          }
           treeData={treeData}
           {...props}
       />
+      <br />
+      <br />
+      <MultiLevelSelect
+          id="multiselect-default-2"
+          onSelect={(selectedNodes) =>
+            console.log("Selected Items", selectedNodes)
+          }
+          treeData={treeData}
+          {...props}
+      >
+        {(item) => (
+          <div>
+            <Badge 
+                text={item.text} 
+                variant={item.variant} 
+            />
+          </div>
+        )}
+      </MultiLevelSelect>
     </div>
-  )
+  );
 };
 
 export default MultiLevelSelectDefault;
