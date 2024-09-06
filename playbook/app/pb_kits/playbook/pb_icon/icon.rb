@@ -102,6 +102,11 @@ module Playbook
       def render_svg
         doc = Nokogiri::XML(URI.open(asset_path || icon || custom_icon)) # rubocop:disable Security/Open
         svg = doc.at_css "svg"
+
+        unless svg
+          return "" # Return an empty string if SVG element is not found
+        end
+
         svg["class"] = %w[pb_custom_icon svg-inline--fa].concat([object.custom_icon_classname]).join(" ")
         svg["id"] = object.id
         svg["data"] = object.data
@@ -112,6 +117,9 @@ module Playbook
         fill_color = object.color || "currentColor"
         doc.at_css("path")["fill"] = fill_color
         raw doc
+      rescue OpenURI::HTTPError, StandardError
+        # Handle any exceptions and return an empty string
+        ""
       end
 
       def is_svg?

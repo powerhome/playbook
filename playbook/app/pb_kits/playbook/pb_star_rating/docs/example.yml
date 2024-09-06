@@ -7,6 +7,7 @@ examples:
     - star_rating_number_config: Number Config
     - star_rating_size_options: Size Options
     - star_rating_interactive: Interactive
+    - star_rating_default_value: Default Value
 
   react:
     - star_rating_default: Default

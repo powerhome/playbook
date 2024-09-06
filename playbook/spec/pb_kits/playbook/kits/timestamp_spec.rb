@@ -128,7 +128,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
         it "returns time elaspsed string including user's name" do
           timestamp = DateTime.new(2020, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).send(:format_elapsed_string)).to eq("Last updated by #{name} #{time_ago_in_words(timestamp)} ago")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).send(:format_elapsed_string)).to eq("Last updated by #{name} #{subject.new.send(:pb_time_ago, timestamp)} ago")
         end
       end
 
@@ -137,7 +137,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
         it "returns time elaspsed string sans user's name" do
           timestamp = DateTime.new(2020, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).send(:format_elapsed_string)).to eq("Last updated #{time_ago_in_words(timestamp)} ago")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).send(:format_elapsed_string)).to eq("Last updated #{subject.new.send(:pb_time_ago, timestamp)} ago")
         end
       end
     end
