@@ -70,6 +70,8 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
       return target
     } else if (newWindow) {
       return '_blank'
+    } else {
+      return '_self'
     }
 
     return null

@@ -57,6 +57,8 @@ const Hashtag = (props: HashtagProps) => {
       return target
     } else if (newWindow) {
       return '_blank'
+    } else {
+      return '_self'
     }
 
     return null
