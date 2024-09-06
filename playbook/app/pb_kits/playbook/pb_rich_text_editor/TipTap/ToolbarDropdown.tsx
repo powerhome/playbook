@@ -96,6 +96,7 @@ for (const { text, isActive, icon } of toolbarDropdownItems) {
             display="inline_flex"
         >
           <Icon 
+              className="svg-inline--fa"
               customIcon={angleDown}
               fixedWidth
               margin-left="xs"
@@ -130,6 +131,7 @@ const popoverReference = (
                 display="inline_flex"
             >
               <Icon 
+                  className="svg-inline--fa"
                   customIcon={angleDown}
                   fixedWidth
                   margin-left="xs"

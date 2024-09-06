@@ -27,7 +27,10 @@ const downIcon = getAllIcons()["arrowDownShortWide"].icon as unknown as { [key: 
             key={firstIcon}
         >
         { firstIcon === "arrow-up-short-wide" ? (
-          <Icon customIcon={upIcon} /> ) : (
+          <Icon 
+              className="svg-inline--fa"
+              customIcon={upIcon}
+          /> ) : (
           <Icon icon={firstIcon} />
         )}
         </div>
@@ -36,7 +39,10 @@ const downIcon = getAllIcons()["arrowDownShortWide"].icon as unknown as { [key: 
             key={secondIcon}
         >
         { secondIcon === "arrow-down-short-wide" ? (
-          <Icon customIcon={downIcon} /> ) : (
+          <Icon 
+              className="svg-inline--fa"
+              customIcon={downIcon}
+          /> ) : (
           <Icon icon={secondIcon} />
         )}
         </div>

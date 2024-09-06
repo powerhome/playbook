@@ -179,6 +179,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
                 dark={dark}
             >
             <Icon  
+                className="svg-inline--fa"
                 customIcon={eyeIcon.icon as unknown as { [key: string]: SVGElement }}
             />
             </Body>

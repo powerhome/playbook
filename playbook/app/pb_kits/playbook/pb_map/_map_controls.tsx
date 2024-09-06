@@ -45,7 +45,10 @@ const MapControls = ({
             <Button className="map-flyto-button"
                 onClick={flyToClick}
             >
-              <Icon customIcon={eyeIcon.icon as unknown as { [key: string]: SVGElement }} />
+              <Icon 
+                  className="svg-inline--fa"
+                  customIcon={eyeIcon.icon as unknown as { [key: string]: SVGElement }} 
+              />
             </Button>
           ) : null}
         </>

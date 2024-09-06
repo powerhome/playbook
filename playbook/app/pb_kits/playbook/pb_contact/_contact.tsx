@@ -96,7 +96,7 @@ const Contact = (props: ContactProps): React.ReactElement => {
       >
           {contactType === 'email' ? (
             <Icon 
-                className="envelope"
+                className="svg-inline--fa envelope"
                 customIcon={envelopeIcon} 
                 dark={dark} 
                 fixedWidth 

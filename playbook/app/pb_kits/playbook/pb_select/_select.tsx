@@ -137,7 +137,7 @@ const Select = ({
         {selectBody}
         { multiple !== true ?
           <Icon
-              className="pb_select_kit_caret"
+              className="pb_select_kit_caret svg-inline--fa"
               customIcon={angleDown}
               fixedWidth
           />

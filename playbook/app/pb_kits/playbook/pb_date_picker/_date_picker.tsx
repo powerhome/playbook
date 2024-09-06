@@ -232,7 +232,7 @@ useEffect(() => {
                     id={`${pickerId}-angle-down`}
                 >
                   <Icon
-                      className="angle_down_icon"
+                      className="angle_down_icon svg-inline--fa"
                       customIcon={angleDown}
                   />
                 </div>
