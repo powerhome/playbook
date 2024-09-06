@@ -28,4 +28,11 @@ RSpec.describe Playbook::PbHomeAddressStreet::HomeAddressStreet do
       expect(subject.new(classname: "additional_class").classname).to eq "pb_home_address_street_kit additional_class"
     end
   end
+
+  describe "#window_target" do
+    it "should allow links to open in a new window", :aggregate_failures do
+      expect(subject.new({}).target_option).to eq "_self"
+      expect(subject.new(home_url: "Google.com", target: "_blank").target_option).to eq "_blank"
+    end
+  end
 end
