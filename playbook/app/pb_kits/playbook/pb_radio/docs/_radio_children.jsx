@@ -18,29 +18,32 @@ const RadioChildren = (props) => {
     <div>
       <Radio
           label="Select"
+          marginBottom="sm"
           name="Group1"
           tabIndex={0}
           value="Select"
           {...props}
       >
         <Select 
+            marginBottom="none"
             minWidth="xs"
             options={options}
         />
       </Radio>
       <Radio
           label="Typeahead"
+          marginBottom="sm"
           name="Group1"
           tabIndex={0}
           value="Typeahead"
           {...props}
       >
         <Typeahead 
+            marginBottom="none"
             minWidth="xs"
             options={options}
         />
       </Radio>
-      <br />
       <Radio
           defaultChecked={false}
           label="Typography"
