@@ -20,6 +20,8 @@ module Playbook
 
       def show_icon(icon)
         case icon
+        when "none"
+          []
         when ::String
           [icon, icon]
         when ::Array

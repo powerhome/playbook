@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-target-blank */
-/* eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
+/* eslint-disable react/no-multi-comp */
 
 import React from 'react'
 import classnames from 'classnames'
@@ -18,6 +18,7 @@ type HashtagProps = {
   id?: string,
   newWindow?: boolean,
   rel?: string,
+  target?: string,
   text?: string,
   type: "default" | "home" | "project" | "appointment",
   url?: string,
@@ -40,6 +41,7 @@ const Hashtag = (props: HashtagProps) => {
     id,
     newWindow,
     rel,
+    target,
     text,
     type = 'default',
     url,
@@ -49,6 +51,18 @@ const Hashtag = (props: HashtagProps) => {
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_hashtag_kit'), globalProps(props), className)
+
+  const getTargetAttribute = () => {
+    if (target && url) {
+      return target
+    } else if (newWindow) {
+      return '_blank'
+    } else {
+      return '_self'
+    }
+
+    return null
+  }
 
   return (
     <span
@@ -61,7 +75,7 @@ const Hashtag = (props: HashtagProps) => {
       <a
           href={url}
           rel={(newWindow ? "noreferrer" : rel)}
-          target={(newWindow ? '_blank' : '_self')}
+          target={getTargetAttribute()}
       >
         <Badge
             dark={dark}

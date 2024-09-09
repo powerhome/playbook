@@ -34,6 +34,7 @@ module Playbook
                       default: false
       prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
+      prop :default_value
 
       def one_decimal_rating
         rating.to_f.round(1)
@@ -120,7 +121,8 @@ module Playbook
           data: { "pb-star-rating-input": true },
           name: name,
           required: required,
-          style: "display: none"
+          style: "display: none",
+          value: default_value || ""
         )
       end
     end
