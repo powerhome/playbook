@@ -32,7 +32,7 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_typeahead_kit mb_sm"
+      expect(subject.new({}).classname).to eq "pb_typeahead_kit"
     end
   end
 end

@@ -14,9 +14,6 @@ module Playbook
                     default: false
       prop :label
       prop :load_options
-      prop :margin_bottom, type: Playbook::Props::Enum,
-                           values: %w[none xxs xs sm md lg xl],
-                           default: "sm"
       prop :multi_kit, type: Playbook::Props::String,
                        default: ""
       prop :name
@@ -39,8 +36,7 @@ module Playbook
       prop :value
 
       def classname
-        default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
-        generate_classname("pb_typeahead_kit") + default_margin_bottom
+        generate_classname("pb_typeahead_kit")
       end
 
       def inline_class
@@ -69,7 +65,6 @@ module Playbook
           inline: inline,
           isMulti: is_multi,
           label: label,
-          marginBottom: margin_bottom,
           multiKit: multi_kit,
           name: name,
           options: options,
