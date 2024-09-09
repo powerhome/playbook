@@ -159,10 +159,7 @@ class PagesController < ApplicationController
       next unless node.is_a?(Parser::AST::Node)
 
       # Check if the current node is a `:send` node and has `:system` as the method name
-      if node.type == :send
-        puts node.children[1] # Print the method name
-        methods.push(node.children[1])
-      end
+      methods.push(node.children[1]) if node.type == :send
       # Push all child nodes onto the stack
       stack.concat(node.children)
     end
@@ -196,9 +193,27 @@ class PagesController < ApplicationController
     xstr_nodes
   end
 
+  def detect_gvar_nodes(ast_node)
+    gvar_nodes = []
+    traverse_node_for_gvar(ast_node, gvar_nodes)
+    gvar_nodes
+  end
+
+  def traverse_node_for_gvar(node, gvar_nodes)
+    # If the current node is a `gvar`, add it to the list
+    gvar_nodes << node if node.type == :gvar
+
+    # Recursively check child nodes
+    node.children.each do |child|
+      traverse_node_for_gvar(child, gvar_nodes) if child.is_a?(Parser::AST::Node)
+    end
+  end
+
   def is_erb_safe?(code)
     node = parse_erb(code)
-    detect_ruby_methods(node) - white_list == [] && detect_xstr_nodes(parse_erb(erb_code_params)).empty?
+    detect_gvar_nodes(node).empty? &&
+      detect_ruby_methods(node) - white_list == [] &&
+      detect_xstr_nodes(parse_erb(erb_code_params)).empty?
   end
 
   def unsafe_code
