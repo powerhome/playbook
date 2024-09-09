@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.2.0",
     "@rails/webpacker": "5.4.4",
     "playbook-ui": "^13.27.0",
     "react": "^18.2.0",

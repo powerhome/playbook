@@ -40,7 +40,6 @@ export default function ComponentShow() {
           },
         }}
         options={{
-          externalResources: ["https://kit.fontawesome.com/098a1cd4d5.js"],
           classes: {
             "sp-preview-actions": "sandbox-button-toolbar",
             "sp-preview-iframe": "sandbox-preview-iframe",
