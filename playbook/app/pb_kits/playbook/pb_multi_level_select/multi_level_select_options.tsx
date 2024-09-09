@@ -9,7 +9,7 @@ import Body from "../pb_body/_body";
 const MultiLevelSelectOptions = ({
   items,
   children,
-  ...props
+  // ...props
 }: any) => {
   // const {
   //   aria = {},
