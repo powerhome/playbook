@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOMServer from 'react-dom/server';
 
 const spinner = (
     <svg 
@@ -174,7 +175,8 @@ export const getAllIcons = () => {
             icon: arrowDownShortWide
         },
         angleDown: {
-            icon: angleDown
+            icon: angleDown,
+            string: ReactDOMServer.renderToStaticMarkup(angleDown)
         }
     }
 }
