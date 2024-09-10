@@ -1,3 +1,48 @@
+# ⭐ Improving Usability, Flexibility, and Accessibility ⭐
+##### August 31st, 2024
+
+![funny](https://github.com/user-attachments/assets/43b0dce2-70a4-4ea1-a6c8-15472cbf6150)
+
+
+This release brings several enhancements and new kits aimed at improving user experience, customization, and visual clarity!
+To make things easier on devs, Playbook now allows you to import our custom themes directly into your apps to style Highcharts charts. In this release, we also introduced different size options for form pills, offering more flexibility for you. We added a new form control for star ratings, provided a new error variant for badge notifications to bring clarity for error states, and added a loading state for buttons in the Dialog. Check out all the other great improvements in 14.2.1 here:
+
+**Kit Enhancements:**
+
+- Export Highchart Theming Files [\#3615](https://github.com/powerhome/playbook/pull/3615) ([nidaqg](https://github.com/nidaqg))
+- Form Pill 3 Of 5: Sizes [\#3607](https://github.com/powerhome/playbook/pull/3607) ([elisashapiro](https://github.com/elisashapiro))
+- Adding Star Rating Form Controls [\#3600](https://github.com/powerhome/playbook/pull/3600) ([carloslimasd](https://github.com/carloslimasd))
+- Badge Notification Error Variant [\#3596](https://github.com/powerhome/playbook/pull/3596) ([kangaree](https://github.com/kangaree))
+- Add Beta Flag to Kit Generator In Playbook [\#3589](https://github.com/powerhome/playbook/pull/3589) ([skduncan](https://github.com/skduncan))
+- Loading State Of a Button Within a Dialog \(react\) [\#3579](https://github.com/powerhome/playbook/pull/3579) ([kangaree](https://github.com/kangaree))
+- Add Minwidth Global Prop [\#3551](https://github.com/powerhome/playbook/pull/3551) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fixing Phone Number Input Kit Flag Misalignment [\#3626](https://github.com/powerhome/playbook/pull/3626) ([carloslimasd](https://github.com/carloslimasd))
+- Bug Fix: Rails Advanced Table Dark Mode [\#3602](https://github.com/powerhome/playbook/pull/3602) ([anthonymig88](https://github.com/anthonymig88))
+
+**New Kits:**
+
+- Gantt Chart Beta Kit [\#3614](https://github.com/powerhome/playbook/pull/3614) ([nidaqg](https://github.com/nidaqg))
+- New Pagination Kit In React [\#3552](https://github.com/powerhome/playbook/pull/3552) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Upgrade View\_component Gem [\#3613](https://github.com/powerhome/playbook/pull/3613) ([phylum](https://github.com/phylum))
+- Initial Rc Github Action [\#3611](https://github.com/powerhome/playbook/pull/3611) ([jasperfurniss](https://github.com/jasperfurniss))
+- Rte Advanced Previewer + Output Styles \(react\) [\#3578](https://github.com/powerhome/playbook/pull/3578) ([elisashapiro](https://github.com/elisashapiro))
+- Bumping Axecore Dependency to 4.10.0 [\#3620](https://github.com/powerhome/playbook/pull/3620) ([jasperfurniss](https://github.com/jasperfurniss))([skduncan](https://github.com/skduncan))
+- Testing Dependency Update with New Release Flow [\#3617](https://github.com/powerhome/playbook/pull/3617) ([jasperfurniss](https://github.com/jasperfurniss))
+- Dialog Kit Loading State Buttons [\#3599](https://github.com/powerhome/playbook/pull/3599) ([markdoeswork](https://github.com/markdoeswork))
+- Bump React-joyride from 2.5.3 to 2.8.2 [\#3594](https://github.com/powerhome/playbook/pull/3594) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Upgrade Ci-kubed to 8.3.0 [\#3585](https://github.com/powerhome/playbook/pull/3585) ([benlangfeld](https://github.com/benlangfeld))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.1.0...14.2.1)
+
+
+
 # ⏫ Leveling Up: Enhancements, Bug Fixes, and More! ⏫
 ##### August 13, 2024
 

@@ -55,7 +55,7 @@ jobs:
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
       - name: Check if version exists and increment if necessary
         run: |
-          max_attempts=10
+          max_attempts=100
           attempt=0
           current_version="${{ env.new_npm_version }}"
           while [ $attempt -lt $max_attempts ]; do
