@@ -38,7 +38,11 @@ import * as icons from "@powerhome/playbook-icons-react"
 window.PB_ICONS = {}
 
 function pascalToKebabCase(str) {
-  return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()
+  return str
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/([a-zA-Z])([0-9])/g, '$1-$2')
+    .replace(/([0-9])([a-zA-Z])/g, '$1-$2')
+    .toLowerCase(); 
 }
 
 Object.entries(icons).forEach(([key, value]) => {

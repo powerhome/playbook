@@ -6,8 +6,8 @@
     width: 315.88px
   }
   .flatpickr-months {
-    margin-left: calc($space_xs / 4);
-    margin-top: calc($space_xs / 3);
+    margin-left: $space_xs / 4;
+    margin-top: $space_xs / 3;
   }
 }
 @media (max-width: 499px) {

@@ -13,6 +13,7 @@ examples:
   - nav_with_font_control: Nav With Font Control
   - collapsible_nav: Collapsible Nav
   - collapsible_nav_with_all_options: Collapsible Nav With Options
+  - collapsible_nav_no_icon: Collapsible Nav No Icon
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
@@ -37,6 +38,7 @@ examples:
   - collapsible_nav_with_all_options: Collapsible Nav With Options
   - collapsible_nav_item_spacing: Collapsible Nav With ItemSpacing
   - collapsible_nav_custom: Collapsible Nav With Custom Toggling
+  - collapsible_nav_no_icon: Collapsible Nav No Icon
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
