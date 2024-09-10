@@ -14,6 +14,7 @@ module Playbook
       prop :house_style
       prop :new_window, type: Playbook::Props::Boolean,
                         default: false
+      prop :target
       prop :state
       prop :zipcode
       prop :territory
@@ -55,6 +56,7 @@ module Playbook
           dark: dark,
           home_id: home_id,
           home_url: home_url,
+          target: target_option,
           new_window: new_window,
           territory: territory,
           zip: zip,
@@ -69,9 +71,20 @@ module Playbook
           dark: dark,
           home_id: home_id,
           home_url: home_url,
+          target: target_option,
           new_window: new_window,
           territory: territory,
         }
+      end
+
+      def target_option
+        if target && home_url
+          target
+        elsif new_window
+          "_blank"
+        else
+          "_self"
+        end
       end
 
     private
