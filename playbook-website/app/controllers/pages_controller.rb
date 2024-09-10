@@ -146,8 +146,8 @@ class PagesController < ApplicationController
   end
 
   def parse_erb(code)
-    erb = ERB.new(code).src
-    Parser::CurrentRuby.parse(erb)
+    code = code.scan(/<%=?\s*(.*?)\s*%>/).flatten.join("\n")
+    Parser::CurrentRuby.parse(code)
   end
 
   def detect_ruby_methods(root_node)
