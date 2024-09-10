@@ -3,7 +3,6 @@ import { components } from 'react-select'
 
 import Flex from '../../pb_flex/_flex'
 import TextInput from '../../pb_text_input/_text_input'
-import { MarginBottomType } from '../_typeahead'
 
 
 type Props = {
