@@ -45,6 +45,7 @@ type TypeaheadProps = {
   getOptionLabel?: string | (() => any),
   getOptionValue?: string | (() => any),
   name?: string,
+  marginBottom?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
 } & GlobalProps
 
 export type SelectValueType = {
@@ -76,6 +77,7 @@ const Typeahead = ({
   htmlOptions = {},
   id,
   loadOptions = noop,
+  marginBottom = "sm",
   ...props
 }: TypeaheadProps) => {
   const selectProps = {
@@ -134,6 +136,7 @@ const Typeahead = ({
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     'pb_typeahead_kit react-select',
+    `mb_${marginBottom}`,
     globalProps(props),
     className
   )
