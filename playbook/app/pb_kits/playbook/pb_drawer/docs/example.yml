@@ -6,8 +6,3 @@ examples:
   
   react:
   - drawer_default: Default
-  
-  
-  swift:
-  - drawer_default_swift: Default
-  
