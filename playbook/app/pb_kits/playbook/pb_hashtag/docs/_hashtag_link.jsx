@@ -13,7 +13,7 @@ const HashtagLink = (props) => {
       <br />
       <br />
       <Hashtag
-          newWindow
+          target="_blank"
           text="Open in a new window"
           type="project"
           url="https://google.com"
