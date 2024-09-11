@@ -1,18 +1,42 @@
-<%= content_tag(:label,
-    aria: object.aria,
-    checked: object.checked,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    value: object.value,
-    **combined_html_options) do %>
-
-    <% if content.present? %>
-      <%= content %>
-    <% else %>
-      <%= radio_button_tag object.name, object.value, object.selected, object.input_options %>
+<% if object.custom_children %>
+  <div data-pb-radio-children="true">
+    <%= pb_rails("flex", props: {
+      aria: object.aria,
+      align: "center",
+      class: object.classname,
+      cursor: "pointer",
+      **combined_html_options
+    }) do %>
+      <%= content_tag(:label,
+        checked: object.checked,
+        class: object.classname,
+        data: object.data,
+        id: object.id,
+        value: object.value,
+        **combined_html_options) do %>
+        <%= input %>
+        <span class="pb_radio_button"></span>
+      <% end %>
+      <div data-pb-radio-children-wrapper="true"> <%= content %> </div>
     <% end %>
+  </div>
+<% else %>
+  <%= content_tag(:label,
+      aria: object.aria,
+      checked: object.checked,
+      class: object.classname,
+      data: object.data,
+      id: object.id,
+      value: object.value,
+      **combined_html_options) do %>
 
-    <span class="pb_radio_button"></span>
-    <%= pb_rails("body", props: { status: object.body_status, text: object.text, dark: object.dark }) %>
+      <% if content.present? %>
+        <%= content %>
+      <% else %>
+        <%= radio_button_tag object.name, object.value, object.selected, object.input_options %>
+      <% end %>
+
+      <span class="pb_radio_button"></span>
+      <%= pb_rails("body", props: { status: object.body_status, text: object.text, dark: object.dark }) %>
+  <% end %>
 <% end %>
