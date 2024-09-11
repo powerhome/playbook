@@ -9,6 +9,7 @@ examples:
     - typeahead_inline: Inline
     - typeahead_multi_kit: Multi Kit Options
     - typeahead_error_state: Error State
+    - typeahead_margin_bottom: Margin Bottom
 
   react:
     - typeahead_default: Default
