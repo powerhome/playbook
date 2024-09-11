@@ -146,8 +146,8 @@ class PagesController < ApplicationController
   end
 
   def parse_erb(code)
-    code = code.scan(/<%=?\s*(.*?)\s*%>/).flatten.join("\n")
-    Parser::CurrentRuby.parse(code)
+    parsed = code.scan(/<%=?\s*(.*?)\s*%>/).flatten.join("\n")
+    Parser::CurrentRuby.parse(parsed)
   end
 
   def detect_ruby_methods(root_node)
@@ -175,6 +175,28 @@ class PagesController < ApplicationController
     xstr_nodes << node if node.type == :xstr
   end
 
+  def add_gvar_node(node, gvar_nodes)
+    gvar_nodes << node if node.type == :gvar
+  end
+
+  def traverse_node_gvar(node, xstr_nodes)
+    case node
+    when Parser::AST::Node
+      add_gvar_node(node, xstr_nodes)
+      # Recur for each child node
+      node.children.each do |child|
+        traverse_node_gvar(child, xstr_nodes)
+      end
+    end
+  end
+
+  def detect_gvar_nodes(ast_node)
+    gvar_nodes = []
+    # Start traversing from the root node
+    traverse_node_gvar(ast_node, gvar_nodes)
+    gvar_nodes
+  end
+
   def traverse_node(node, xstr_nodes)
     case node
     when Parser::AST::Node
@@ -193,25 +215,9 @@ class PagesController < ApplicationController
     xstr_nodes
   end
 
-  def detect_gvar_nodes(ast_node)
-    gvar_nodes = []
-    traverse_node_for_gvar(ast_node, gvar_nodes)
-    gvar_nodes
-  end
-
-  def traverse_node_for_gvar(node, gvar_nodes)
-    # If the current node is a `gvar`, add it to the list
-    gvar_nodes << node if node.type == :gvar
-
-    # Recursively check child nodes
-    node.children.each do |child|
-      traverse_node_for_gvar(child, gvar_nodes) if child.is_a?(Parser::AST::Node)
-    end
-  end
-
   def is_erb_safe?(code)
     node = parse_erb(code)
-    detect_gvar_nodes(node).empty? &&
+    detect_gvar_nodes(parse_erb(erb_code_params)).empty? &&
       detect_ruby_methods(node) - white_list == [] &&
       detect_xstr_nodes(parse_erb(erb_code_params)).empty?
   end
