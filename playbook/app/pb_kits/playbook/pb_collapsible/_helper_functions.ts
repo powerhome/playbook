@@ -6,6 +6,10 @@ export const showElement = (elem: HTMLElement) => {
   elem.style.overflow = "hidden"
   // Once the transition is complete, remove the inline max-height so the content can scale responsively
   window.setTimeout(() => {
+    // If a user toggles multiple times quickly in a row, 'is-visible' can be removed by hideElement's timeout
+    if (!elem.classList.contains('is-visible')) {
+      elem.classList.add('is-visible')
+    }
     elem.style.height = '';
     elem.style.overflow = "visible"
   }, 300);
