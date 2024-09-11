@@ -18,11 +18,11 @@ app.build(
       compose.bake(bakeFiles: ['docker-bake.hcl'], remoteConfig: [
         resourceQuota: [
             requests: [
-            cpu: '2',
-            memory: '10Gi',
+                cpu: '2',
+                memory: '10Gi',
             ],
             limits: [
-            memory: '10Gi',
+                memory: '10Gi',
             ]
         ],
       ])
