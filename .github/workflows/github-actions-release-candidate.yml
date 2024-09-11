@@ -55,12 +55,26 @@ jobs:
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
       - name: Check if version exists and increment if necessary
         run: |
-          while npm view playbook-ui@${{ env.new_npm_version }} version &>/dev/null; do
-            new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-            new_npm_version=${new_npm_version#v}
-            echo "new_npm_version=${new_npm_version}" >> $GITHUB_ENV
+          max_attempts=100
+          attempt=0
+          current_version="${{ env.new_npm_version }}"
+          while [ $attempt -lt $max_attempts ]; do
+            if npm view playbook-ui@$current_version version &>/dev/null; then
+              echo "Version $current_version already exists. Incrementing..."
+              current_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+              current_version=${current_version#v}
+            else
+              echo "Version $current_version is available."
+              break
+            fi
+            attempt=$((attempt+1))
           done
-          new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
+          if [ $attempt -eq $max_attempts ]; then
+            echo "Error: Maximum attempts reached. Unable to find an available version."
+            exit 1
+          fi
+          echo "new_npm_version=${current_version}" >> $GITHUB_ENV
+          new_ruby_version=$(echo $current_version | sed 's/-rc\./.pre.rc./')
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
       - name: Update Version.rb
         run: |

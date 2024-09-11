@@ -12,6 +12,8 @@ module Playbook
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
       prop :icon, required: true
+      prop :loading, type: Playbook::Props::Boolean,
+                     default: false
       prop :link
       prop :new_window, type: Playbook::Props::Boolean,
                         default: false

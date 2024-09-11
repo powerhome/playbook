@@ -60,7 +60,7 @@
 
   &.error {
     [class*=pb_body_kit] {
-      margin-top: calc($space_xs / 2);
+      margin-top: $space_xs / 2;
     }
     textarea {
       border-color: $error;

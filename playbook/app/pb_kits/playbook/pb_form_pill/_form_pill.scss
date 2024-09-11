@@ -17,9 +17,9 @@ $form_pill_colors: (
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0 calc($space-md/2);
+  padding: 0 $space-md/2;
   height: $pb_form_pill_height;
-  border-radius: calc($pb_form_pill_height/2);
+  border-radius: $pb_form_pill_height/2;
   margin-bottom: 2px;
   margin-top: 2px;
   cursor: pointer;
