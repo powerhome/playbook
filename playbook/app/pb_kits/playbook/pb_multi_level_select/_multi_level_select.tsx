@@ -258,7 +258,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
-    e.stopPropagation()
     if (
       e.target.id === "multiselect_input" ||
       e.target.classList.contains("pb_form_pill_tag")
@@ -266,6 +265,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       return
     }
     setIsDropdownClosed(!isDropdownClosed)
+    e.stopPropagation()
   }
 
   // Main function to handle any click inside dropdown
