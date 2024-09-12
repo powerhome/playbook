@@ -17,6 +17,7 @@ import { GlobalProps, globalProps } from "../utilities/globalProps"
 import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props"
 import Flex from "../pb_flex/_flex"
 import { getAllIcons } from "../utilities/icons/allicons"
+import Icon from '../pb_icon/_icon'
 
 type TooltipProps = {
   aria?: { [key: string]: string },
@@ -156,7 +157,9 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
           >
             {icon && (
             <i className={`pb_icon_kit`}>
-              {icon}
+              <Icon
+                  icon={icon}
+              />
             </i>)}
             {text}
           </Flex>
