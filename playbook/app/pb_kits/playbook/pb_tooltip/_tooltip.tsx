@@ -63,8 +63,6 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
   const [open, setOpen] = useState(false)
   const arrowRef = useRef(null)
 
-  const paperPlane = getAllIcons()["paperPlane"].icon as unknown as { [key: string]: SVGElement }
-
   const {
     context,
     middlewareData: { arrow: { x: arrowX, y: arrowY } = {},  },
