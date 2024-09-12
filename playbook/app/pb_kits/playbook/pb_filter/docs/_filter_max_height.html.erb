@@ -35,7 +35,11 @@
     <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: {max_width: "sm", label: true } %>
 
     <%= form.actions do |action| %>
-      <%= action.submit props: { text: "Apply", data: { disable_with: "<i class='far fa-spinner fa-spin mr-3'></i>Searching...".html_safe },}%>
+      <%= action.submit props: {
+        text: "Apply",
+        data: {
+          disable_with: "<i class='mr-3'>pb_rails('icon', props: { icon: 'spinner', fixed_width: true })</i>Searching...".html_safe
+      },}%>
       <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
     <% end %>
   <% end %>

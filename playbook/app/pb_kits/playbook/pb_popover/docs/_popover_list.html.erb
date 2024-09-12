@@ -18,18 +18,22 @@
 
 
 <script type="text/javascript">
+import { getAllIcons } from "../../utilities/icons/allicons"
+
+const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
+  const angleDown = getAllIcons()["angleUp"].icon as unknown as { [key: string]: SVGElement }
 const button = document.querySelector("#list")
 let buttonClicked = false
 
 const arrowDiv = document.querySelector("#arrow-icon")
-arrowDiv.innerHTML = '<i class="far fa-angle-down"></i>'
+arrowDiv.innerHTML = '<i class="angle_down_icon svg-inline--fa">{angleDown}</i>'
 
 button.onclick = () => {
-    buttonClicked = !buttonClicked    
+    buttonClicked = !buttonClicked
     if (buttonClicked) {
-        arrowDiv.innerHTML = '<i class="far fa-angle-up"></i>'
+        arrowDiv.innerHTML = '<i class="angle_down_icon svg-inline--fa">{angleUp}</i>'
     } else {
-        arrowDiv.innerHTML = '<i class="far fa-angle-down"></i>'
+        arrowDiv.innerHTML = '<i class="angle_down_icon svg-inline--fa">{angleDown}</i>'
     }
 }
 </script>

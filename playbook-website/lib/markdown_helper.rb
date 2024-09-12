@@ -135,7 +135,7 @@ module PlaybookWebsite
         end
         @headers << permalink
         permalink_markup = %(<a name="#{permalink}" class="markdown-header-anchor" )
-        permalink_markup += %(href="##{permalink}"><span class="far fa-link markdown-header-anchor-icon"></span></a>)
+        permalink_markup += %(href="##{permalink}"><span class="markdown-header-anchor-icon">pb_rails('icon', props: { icon: 'link', fixed_width: true })</span></a>)
         %(\n<h#{level} id="#{permalink}">#{title} #{permalink_markup}</h#{level}>\n)
       end
 

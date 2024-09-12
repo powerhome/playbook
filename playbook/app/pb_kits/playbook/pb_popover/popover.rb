@@ -53,6 +53,14 @@ module Playbook
           pb_popover_close_on_click: close_on_click
         )
       end
+
+      def angle_down_path
+        "app/pb_kits/playbook/utilities/icons/angle-down.svg"
+      end
+
+      def angle_up_path
+        "app/pb_kits/playbook/utilities/icons/angle-up.svg"
+      end
     end
   end
 end
