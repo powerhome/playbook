@@ -1,16 +1,17 @@
-# 14.3.0
+# Star Ratings and Page-Turning Upgrades 💫
 ##### September 6, 2024 
 
+![anouncement](https://github.com/user-attachments/assets/d10fdaa7-3961-4d16-9e65-ce9a282c0188)
 
-[14.3.0](https://github.com/powerhome/playbook/tree/14.3.0) full list of changes:
+Our Star Rating kit now shines brighter with added interactivity and hover effects! ⭐ And don’t forget to flip through content with our Pagination kit, now available in React in addition to Rails.
+
+[14.3.2](https://github.com/powerhome/playbook/tree/14.3.2) full list of changes:
 
 **Kit Enhancements:**
 
-- Expose Margin Bottom on Text Input within Typeahead [\#3654](https://github.com/powerhome/playbook/pull/3654) ([elisashapiro](https://github.com/elisashapiro))
 - Add all Target Options to the Hashtag and Home Address Street Kits [\#3650](https://github.com/powerhome/playbook/pull/3650) ([skduncan](https://github.com/skduncan))
 - Adding Default Value Prop to Rails Star Rating Kit [\#3629](https://github.com/powerhome/playbook/pull/3629) ([carloslimasd](https://github.com/carloslimasd))
 - Collapsible Optional Icon [\#3643](https://github.com/powerhome/playbook/pull/3643) ([elisashapiro](https://github.com/elisashapiro))
-- Enable Kits Instead of Text for Radio label [\#3612](https://github.com/powerhome/playbook/pull/3612) ([nickamantia](https://github.com/nickamantia))
 - Add "loading" Variant to Circle Icon Button [\#3633](https://github.com/powerhome/playbook/pull/3633) ([kangaree](https://github.com/kangaree))
 
 **Fixed Bugs:**
@@ -23,6 +24,8 @@
 - Fix Github Action Bug that Breaks Build [\#3655](https://github.com/powerhome/playbook/pull/3655) ([jasperfurniss](https://github.com/jasperfurniss))
 - Testing Incrementing for Github Action RC [\#3651](https://github.com/powerhome/playbook/pull/3651) ([jasperfurniss](https://github.com/jasperfurniss))
 - Fix Missing Template Error in PagesController [\#3645](https://github.com/powerhome/playbook/pull/3645) ([skduncan](https://github.com/skduncan))
+- Fixing TextArea Duplicated Classname [\#3660](https://github.com/powerhome/playbook/pull/3660) ([carloslimasd](https://github.com/carloslimasd))
+- Fix Collapsible Glitchiness When State Changes Quickly [\#3664](https://github.com/powerhome/playbook/pull/3664) ([kangaree](https://github.com/kangaree))
 
 **Improvements:**
 
@@ -33,7 +36,7 @@
 - Implement Error Handling and Additions for Github Action [\#3652](https://github.com/powerhome/playbook/pull/3652) ([jasperfurniss](https://github.com/jasperfurniss))
 
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/14.2.1...14.3.0)
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.3.0...14.3.2)
 
 
 # ⭐ Improving Usability, Flexibility, and Accessibility ⭐
