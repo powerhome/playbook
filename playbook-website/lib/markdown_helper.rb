@@ -72,6 +72,9 @@ module PlaybookWebsite
       def render_code(text, language)
         formatter = Rouge::Formatters::HTML.new(scope: ".highlight")
         lexer = Rouge::Lexer.find(language)
+
+        lexer = Rouge::Lexers::PlainText.new if lexer.nil?
+
         formatter.format(lexer.lex(text))
       end
 
