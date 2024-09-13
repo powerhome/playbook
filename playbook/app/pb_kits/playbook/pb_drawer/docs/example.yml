@@ -6,3 +6,4 @@ examples:
   
   react:
   - drawer_default: Default
+  - drawer_sizes: Sizes

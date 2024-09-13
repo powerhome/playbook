@@ -54,7 +54,7 @@
 }
 
 body.ReactModal__Body--open {
-  transition: margin-left 0.5s ease-in-out, margin-right 0.5s ease-in-out;
+  transition: margin-left 0.3s ease-in-out, margin-right 0.3s ease-in-out;
 }
 
 .pb_drawer_lg_left.pb_drawer {
@@ -101,7 +101,7 @@ body.ReactModal__Body--open {
   animation-duration: $animation-duration;
   outline: none;
   animation-timing-function: $easeInOutQuint;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 
   &.drawer_border_full {
     box-shadow: none;
@@ -133,27 +133,27 @@ body.ReactModal__Body--open {
     }
   }
 
-  &[class*="_xs"] {
+  &[class*="_xs_"] {
     width: $xsmall;
     max-width: $xsmall;
   }
 
-  &[class*="_sm"] {
+  &[class*="_sm_"] {
     width: $small;
     max-width: $small;
   }
 
-  &[class*="_md"] {
+  &[class*="_md_"] {
     width: $medium;
     max-width: $medium;
   }
 
-  &[class*="_lg"] {
+  &[class*="_lg_"] {
     width: $large;
     max-width: $large; 
   }
 
-  &[class*="_xl"] {
+  &[class*="_xl_"] {
     width: $xlarge;
     max-width: $xlarge; 
   }
@@ -230,31 +230,31 @@ body.ReactModal__Body--open {
           background-color: $white;
           max-width: 100%;
         }
-        &[class*="_xs"] {
+        &[class*="_xs_"] {
           width: $xsmall;
           .dialog_footer {
             width: $xsmall;
           }
         }
-        &[class*="_sm"] {
+        &[class*="_sm_"] {
           width: $small;
           .dialog_footer {
             width: $small;
           }
         }
-        &[class*="_md"] {
+        &[class*="_md_"] {
           width: $medium;
           .dialog_footer {
             width: $medium;
           }
         }
-        &[class*="_lg"] {
+        &[class*="_lg_"] {
           width: $large;
           .dialog_footer {
             width: $large;
           }
         }
-        &[class*="_xl"] {
+        &[class*="_xl_"] {
           width: $xlarge;
           .dialog_footer {
           width: $xlarge;

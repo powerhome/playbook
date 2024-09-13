@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-handler-names */
 /* eslint-disable react/no-multi-comp */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import Modal from "react-modal";
 
@@ -14,12 +14,13 @@ import DialogHeader from "../pb_dialog/child_kits/_dialog_header";
 import DialogFooter from "../pb_dialog/child_kits/_dialog_footer";
 import DialogBody from "../pb_dialog/child_kits/_dialog_body";
 import Flex from "../pb_flex/_flex";
-import IconCircle from "../pb_icon_circle/_icon_circle";
 import Title from "../pb_title/_title";
 import { DialogContext } from "../pb_dialog/_dialog_context";
 
 type DrawerProps = {
   aria?: { [key: string]: string };
+  behavior?: "floating" | "push";
+  border?: "full" | "none" | "right" | "left";
   cancelButton?: string;
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
@@ -35,10 +36,11 @@ type DrawerProps = {
   onClose?: () => void;
   onConfirm?: () => void;
   opened: boolean;
+  overlay: boolean;
   portalClassName?: string;
-  placement?: "left" | "center" | "right";
+  placement?: "left" | "right";
   shouldCloseOnOverlayClick: boolean;
-  size?: "sm" | "md" | "lg" | "xl" | "status_size" | "content";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   status?: "info" | "caution" | "delete" | "error" | "success";
   text?: string;
   title?: string;
@@ -48,6 +50,8 @@ type DrawerProps = {
 const Drawer = (props: DrawerProps): React.ReactElement => {
   const {
     aria = {},
+    behavior = "floating",
+    border = "none",
     cancelButton,
     confirmButton,
     className,
@@ -62,7 +66,8 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     onCancel,
     onConfirm,
     onClose,
-    placement = "center",
+    overlay = true,
+    placement = "left",
     portalClassName,
     shouldCloseOnOverlayClick = true,
     status,
@@ -71,34 +76,78 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     trigger,
   } = props;
   const ariaProps = buildAriaProps(aria);
-   const dataProps = buildDataProps(data)
-   const htmlProps = buildHtmlProps(htmlOptions);
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
+
+  let globalPropsString: string = globalProps(props);
+
+  // Check if the string contains any of the prefixes
+  const containsPrefix = ['p_', 'pb_', 'pt_', 'pl_', 'pr_', 'px_', 'py_'].some((prefix) =>
+    globalPropsString.includes(prefix)
+  );
+
+  // If none of the prefixes are found, append 'p_sm' to the string
+  if (!containsPrefix) {
+    globalPropsString += ' p_sm';
+  }
+
   const drawerClassNames = {
-    base: classnames("pb_drawer", buildCss("pb_drawer", size, placement)),
+    base: `${classnames(
+      "pb_drawer",
+      buildCss("pb_drawer", size, placement),
+      {
+        "drawer_border_full": border === "full",
+        "drawer_border_right": border === "right",
+        "drawer_border_left": border === "left",
+      }
+    )} ${globalPropsString}`,
     afterOpen: "pb_drawer_after_open",
     beforeClose: "pb_drawer_before_close",
   };
 
   const fullHeightClassNames = () => {
     if(!fullHeight) return null
-    if(size === "xl") return `full_height_center`
     return `full_height_${placement}`
   }
 
   const overlayClassNames = {
-    base: `pb_drawer_overlay ${fullHeight !== null && fullHeightClassNames() }`,
+    base: `pb_drawer_overlay ${fullHeight !== null && fullHeightClassNames()} ${!overlay ? 'no-background' : ''}`,
     afterOpen: "pb_drawer_overlay_after_open",
     beforeClose: "pb_drawer_overlay_before_close",
   };
 
   const classes = classnames(
     buildCss("pb_drawer_wrapper"),
-    globalProps(props),
     className
   );
 
   const [triggerOpened, setTriggerOpened] = useState(false),
     modalIsOpened = trigger ? triggerOpened : opened;
+
+  useEffect(() => {
+
+    const sizeMap: Record<Props['size'], string> = {
+      xl: '365px',
+      lg: '300px',
+      md: '250px',
+      sm: '200px',
+      xs: '64px',
+    };
+    const body = document.querySelector('body');
+
+    if (modalIsOpened && behavior === 'push' && body) {
+      if (placement === 'left') {
+        body.style.cssText = `margin-left: ${sizeMap[size]} !important; margin-right: '' !important;`;
+      } else if (placement === 'right') {
+        body.style.cssText = `margin-right: ${sizeMap[size]} !important; margin-left: '' !important;`;
+      }
+
+      body.classList.add('ReactModal__Body--open');
+    } else if (body) {
+      body.style.cssText = ''; // Clear the styles when modal is closed or behavior is not 'floating'
+      body.classList.remove('ReactModal__Body--open');
+    }
+  }, [modalIsOpened, behavior, placement, size]);
 
   const api = {
     onClose: trigger
@@ -124,47 +173,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     );
   }
 
-  type sweetAlertStatusProps = {
-    [key: string]: {
-      icon: string,
-      variant: "default" | "yellow" | "red" | "green" | "royal" | "blue" | "purple" | "teal",
-      size: "sm" | "md" | "lg" | "base" | "xs" | "xl";
-    }
-  }
-
-  const sweetAlertStatus: sweetAlertStatusProps = {
-    default: {
-      icon: "exclamation-circle",
-      variant: "default",
-      size: "lg",
-    },
-    info: {
-      icon: "info-circle",
-      variant: "default",
-      size: "lg",
-    },
-    caution: {
-      icon: "exclamation-triangle",
-      variant: "yellow",
-      size: "lg",
-    },
-    delete: {
-      icon: "trash-alt",
-      variant: "red",
-      size: "lg",
-    },
-    error: {
-      icon: "times-circle",
-      variant: "red",
-      size: "lg",
-    },
-    success: {
-      icon: "check-circle",
-      variant: "green",
-      size: "lg",
-    },
-  };
-
   return (
     <DialogContext.Provider value={api}>
       <div 
@@ -184,6 +192,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
             overlayClassName={overlayClassNames}
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick && !loading}
+            style={{ marginLeft: "auto" }}
         >
           <>
             {title && !status ? <Drawer.Header>{title}</Drawer.Header> : null}
@@ -196,11 +205,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
                 <Flex align="center"
                     orientation="column"
                 >
-                  <IconCircle
-                      icon={sweetAlertStatus[status].icon}
-                      size={sweetAlertStatus[status].size}
-                      variant={sweetAlertStatus[status].variant}
-                  />
                   <Title marginTop="sm"
                       size={3}
                   >
