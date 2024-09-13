@@ -92,7 +92,6 @@ const Textarea = ({
       <Caption text={label} />
       {children || (
         <textarea
-            className="pb_textarea_kit"
             disabled={disabled}
             name={name}
             onChange={onChange}

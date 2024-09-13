@@ -10,18 +10,6 @@
 @import "./trix_styles";
 @import "./tiptap_styles";
 
-.trix-content pre {
-  display: inline-block;
-  width: 100%;
-  vertical-align: top;
-  font-family: monospace;
-  font-size: 0.9em;
-  padding: 0.5em;
-  white-space: pre;
-  background-color: #ccc !important;
-  color: black !important;
-  overflow-x: auto;
-}
 [class^=pb_rich_text_editor_kit] {
   // Disables File Attatchment Button in Toolbar
   trix-toolbar [data-trix-button-group="file-tools"] {
@@ -106,7 +94,7 @@
     .trix-button--icon {
       height: $space_lg;
       width: $space_lg;
-      margin: calc($space_xs / 2);
+      margin: $space_xs / 2;
       border-radius: $border_rad_heavier;
       &::before {
         background-size: auto;
@@ -116,7 +104,7 @@
       background: $white;
       border: 1px solid #E4E8F0;
       border-bottom: none;
-      padding: calc($space_xs / 2);
+      padding: $space_xs / 2;
       border-top-left-radius: $border_rad_heavier;
       border-top-right-radius: $border_rad_heavier;
       .trix-button-group {

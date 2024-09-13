@@ -86,44 +86,44 @@
     }
 
     code {
-      @include preview_code;
+      @include preview_tiptap_code;
     }
 
     pre {
-      @include preview_pre_codeblock;
+      @include preview_tiptap_pre_codeblock;
     }
     a {
-      @include preview_a;
+      @include preview_tiptap_a;
     }
     blockquote {
-      @include preview_blockquote;
+      @include preview_tiptap_blockquote;
     }
     &:focus-visible {
       outline: unset;
       @include transition_default;
     }
     h1 {
-      @include preview_h1;
+      @include preview_tiptap_h1;
     }
     h2 {
-      @include preview_h2;
+      @include preview_tiptap_h2;
     }
     h3 {
-      @include preview_h3;
+      @include preview_tiptap_h3;
     }
     h4,
     h5,
     h6 {
-      @include preview_smaller_headings;
+      @include preview_tiptap_smaller_headings;
     }
     hr {
-      @include preview_hr;
+      @include preview_tiptap_hr;
     }
     ol {
-      @include preview_ol;
+      @include preview_tiptap_ol;
     }
     ul {
-      @include preview_ul;
+      @include preview_tiptap_ul;
     }
   }
 }
@@ -170,40 +170,40 @@
   }
 }
 .tiptap-content {
-  @include preview_first_child;
+  @include preview_tiptap_first_child;
   a {
-    @include preview_a;
+    @include preview_tiptap_a;
   }
   blockquote {
-    @include preview_blockquote;
+    @include preview_tiptap_blockquote;
   }
   h1 {
-    @include preview_h1;
+    @include preview_tiptap_h1;
   }
   h2 {
-    @include preview_h2;
+    @include preview_tiptap_h2;
   }
   h3 {
-    @include preview_h3;
+    @include preview_tiptap_h3;
   }
   h4,
   h5,
   h6 {
-    @include preview_smaller_headings;
+    @include preview_tiptap_smaller_headings;
   }
   hr {
-    @include preview_hr;
+    @include preview_tiptap_hr;
   }
   ol {
-    @include preview_ol;
+    @include preview_tiptap_ol;
   }
   p {
-    @include preview_p;
+    @include preview_tiptap_p;
   }
   pre {
-    @include preview_pre_codeblock;
+    @include preview_tiptap_pre_codeblock;
   }
   ul {
-    @include preview_ul;
+    @include preview_tiptap_ul;
   }
 }

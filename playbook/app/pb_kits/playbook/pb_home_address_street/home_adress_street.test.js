@@ -23,10 +23,10 @@ function HomeAdressStreetTest(props) {
             territory="PHL"
             zipcode="19382"
             {...props}
-    />
+        />
     );
   }
-  
+
   test("renders the component", () => {
     render(<HomeAdressStreetTest />);
     const kit = screen.getByTestId("primary-test");
