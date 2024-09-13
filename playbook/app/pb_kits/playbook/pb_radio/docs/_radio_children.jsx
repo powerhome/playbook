@@ -17,6 +17,7 @@ const RadioChildren = (props) => {
   return (
     <div>
       <Radio
+          customChildren
           label="Select"
           name="Group1"
           tabIndex={0}
@@ -29,6 +30,7 @@ const RadioChildren = (props) => {
         />
       </Radio>
       <Radio
+          customChildren
           label="Typeahead"
           name="Group1"
           tabIndex={0}
@@ -42,6 +44,7 @@ const RadioChildren = (props) => {
       </Radio>
       <br />
       <Radio
+          customChildren
           defaultChecked={false}
           label="Typography"
           name="Group1"

@@ -10,6 +10,7 @@ type RadioProps = {
   alignment?: string,
   checked?: boolean,
   children?: React.ReactChild[] | React.ReactChild,
+  customChildren?: boolean,
   className?: string,
   dark?: boolean,
   data?: { [key: string]: string },
@@ -18,7 +19,7 @@ type RadioProps = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
   id?: string,
   label: string,
-  name?: string,
+  name?: string,erd4
   value?: string,
   text?: string,
   onChange: (event: React.FormEvent<HTMLInputElement> | null) => void,
@@ -29,6 +30,7 @@ const Radio = ({
   alignment,
   children,
   className,
+  customChildren,
   dark = false,
   disabled = false,
   error = false,
@@ -41,7 +43,7 @@ const Radio = ({
   value = 'radio_text',
   onChange = () => { void 0 },
   ...props
-}: RadioProps ) => {
+}: RadioProps, ref: any) => {
   const radioRef = useRef(null);
 
   const ariaProps = buildAriaProps(aria);
@@ -62,27 +64,23 @@ const Radio = ({
     className
   );
 
-  const isCustomChild = children && isValidElement(children) && children.type !== 'input';
-
   const displayRadio = (props: RadioProps & any) => {
-    if (isValidElement(children) && children.type === 'input') {
-      return children;
-    } else if (isCustomChild || !children) {
-      return (
-        <input
-            disabled={disabled}
-            id={id}
-            name={name}
-            onChange={onChange}
-            ref={radioRef}
-            text={text}
-            type="radio"
-            value={value}
-            {...props}
-        />
-      );
-    }
-  };
+    if (children && customChildren == false)
+      return (children)
+    else
+    return (
+    <input
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={onChange}
+        ref={ref}
+        text={text}
+        type="radio"
+        value={value}
+        {...props}
+    />
+  )}
 
   const handleContainerClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent> | undefined) => {
     if (event) {
@@ -97,7 +95,7 @@ const Radio = ({
   };
 
   return (
-    isCustomChild ? (
+    customChildren ? (
       <Flex 
           {...ariaProps}
           {...dataProps}
@@ -114,19 +112,29 @@ const Radio = ({
           id="radio-container"
       >
         <label className={buildCss('pb_radio_kit', alignment)}>
-          <>{displayRadio(props)}</>
+        <input
+            disabled={disabled}
+            id={id}
+            name={name}
+            onChange={onChange}
+            ref={radioRef}
+            text={text}
+            type="radio"
+            value={value}
+            {...props}
+        />
           <span className="pb_radio_button" />
         </label>
         <div id="pb-radio-children-wrapper"> {children} </div>
       </Flex>
     ) : (
-      <label
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={classes}
-          htmlFor={id}
-      >
+        <label
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
+            htmlFor={id}
+        >
         <>{displayRadio(props)}</>
         <span className="pb_radio_button" />
         <Body
