@@ -14,6 +14,7 @@ examples:
   - radio_error: With Error
   - radio_alignment: Alignment
   - radio_disabled: Disabled
+  - radio_custom_children: Custom Children
 
   swift:
   - radio_default_swift: Default
