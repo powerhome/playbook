@@ -19,7 +19,7 @@ type RadioProps = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
   id?: string,
   label: string,
-  name?: string,erd4
+  name?: string,
   value?: string,
   text?: string,
   onChange: (event: React.FormEvent<HTMLInputElement> | null) => void,
