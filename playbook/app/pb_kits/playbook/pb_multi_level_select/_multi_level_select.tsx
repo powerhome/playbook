@@ -265,7 +265,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       return
     }
     setIsDropdownClosed(!isDropdownClosed)
-    e.stopPropagation()
   }
 
   // Main function to handle any click inside dropdown
