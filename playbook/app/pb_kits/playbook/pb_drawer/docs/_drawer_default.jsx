@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Drawer,
-  Flex,
-} from "playbook-ui";
+import { Button, Drawer, Flex } from "playbook-ui";
 
 const useDrawer = (visible = false) => {
   const [opened, setOpened] = useState(visible);
@@ -13,56 +9,55 @@ const useDrawer = (visible = false) => {
 };
 
 const DrawerDefault = () => {
-  const [headerSeparatorDrawerOpened, toggleHeaderSeparatorDrawer] =
-    useDrawer();
+  const [headerSeparatorDrawerOpened, toggleHeaderSeparatorDrawer] = useDrawer();
   const [bothSeparatorsDrawerOpened, toggleBothSeparatorsDrawer] = useDrawer();
-
-  const drawers = [
-    {
-      toggle: toggleHeaderSeparatorDrawer,
-      visible: headerSeparatorDrawerOpened,
-      placement: "left",
-    },
-    {
-      toggle: toggleBothSeparatorsDrawer,
-      visible: bothSeparatorsDrawerOpened,
-      placement: "right",
-    },
-  ];
 
   return (
     <>
       <Flex wrap>
-        <Button id="sm"
+        <Button
+            id="sm"
             marginRight="md"
             onClick={toggleHeaderSeparatorDrawer}
         >
           {"Left Drawer"}
         </Button>
-        <Button marginRight="xl"
+        <Button
+            marginRight="xl"
             onClick={toggleBothSeparatorsDrawer}
         >
           {"Right Drawer"}
         </Button>
       </Flex>
       <Flex>
-        {drawers.map(({toggle, visible, placement }, index) => (
-          <Drawer
-              behavior={"push"}
-              fullHeight
-              key={index}
-              onClose={toggle}
-              opened={visible}
-              overlay={false}
-              placement={placement}
-              size={"lg"}
-          >
-          Test me 
-          </Drawer>
-        ))}
+        {/* Left Drawer */}
+        <Drawer
+            behavior={"push"}
+            fullHeight
+            onClose={toggleHeaderSeparatorDrawer}
+            opened={headerSeparatorDrawerOpened}
+            overlay={false}
+            placement={"left"}
+            size={"lg"}
+        >
+          Test me (Left Drawer)
+        </Drawer>
+
+        {/* Right Drawer */}
+        <Drawer
+            behavior={"push"}
+            fullHeight
+            onClose={toggleBothSeparatorsDrawer}
+            opened={bothSeparatorsDrawerOpened}
+            overlay={false}
+            placement={"right"}
+            size={"lg"}
+        >
+          Test me (Right Drawer)
+        </Drawer>
       </Flex>
     </>
   );
 };
 
-export default DrawerDefault
+export default DrawerDefault;
