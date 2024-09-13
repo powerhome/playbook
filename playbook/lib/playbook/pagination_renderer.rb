@@ -29,12 +29,20 @@ module Playbook
 
       def previous_page
         num = @collection.current_page > 1 && @collection.current_page - 1
-        previous_or_next_page(num, "<i class='far fa-chevron-left fa-xs'></i>", "prev")
+        previous_or_next_page(
+          num,
+          "<i> pb_rails('icon', props: { icon: 'chevron-left', fixed_width: true, size: 'xs' }) </i>",
+          "prev"
+        )
       end
 
       def next_page
         num = @collection.current_page < @collection.total_pages && @collection.current_page + 1
-        previous_or_next_page(num, "<i class='far fa-chevron-right fa-xs'></i>", "next")
+        previous_or_next_page(
+          num,
+          "<i> pb_rails('icon', props: { icon: 'chevron-right', fixed_width: true, size: 'xs' }) </i>",
+          "next"
+        )
       end
     end
   end
