@@ -9,7 +9,7 @@ export default class PbRadio extends PbEnhancedElement {
   }
 
   connect() {
-    const radioWrapperElement = this.element.querySelector(RADIO_WRAPPER_SELECTOR)
+    const radioWrapperElement = this.element.parentElement.querySelector(RADIO_WRAPPER_SELECTOR)
     radioWrapperElement.addEventListener("click", () => {
       this.element.querySelector("input[type='radio']").click()
     })

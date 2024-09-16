@@ -1,25 +1,23 @@
 <% if object.custom_children %>
-  <div data-pb-radio-children="true">
-    <%= pb_rails("flex", props: {
-      aria: object.aria,
-      align: "center",
+  <%= pb_rails("flex", props: {
+    aria: object.aria,
+    align: "center",
+    class: object.classname,
+    cursor: "pointer",
+    data: object.data,
+    **combined_html_options
+  }) do %>
+    <%= content_tag(:label,
+      'data-pb-radio-children': 'true',
+      checked: object.checked,
       class: object.classname,
-      cursor: "pointer",
-      **combined_html_options
-    }) do %>
-      <%= content_tag(:label,
-        checked: object.checked,
-        class: object.classname,
-        data: object.data,
-        id: object.id,
-        value: object.value,
-        **combined_html_options) do %>
-        <%= input %>
-        <span class="pb_radio_button"></span>
-      <% end %>
-      <div data-pb-radio-children-wrapper="true"> <%= content %> </div>
+      id: object.id,
+      value: object.value) do %>
+      <%= input %>
+      <span class="pb_radio_button"></span>
     <% end %>
-  </div>
+    <div data-pb-radio-children-wrapper="true"> <%= content %> </div>
+  <% end %>
 <% else %>
   <%= content_tag(:label,
       aria: object.aria,
