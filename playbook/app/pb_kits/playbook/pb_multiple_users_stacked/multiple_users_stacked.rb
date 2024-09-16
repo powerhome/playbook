@@ -5,6 +5,10 @@ module Playbook
     class MultipleUsersStacked < Playbook::KitBase
       prop :users, type: Playbook::Props::HashArray, required: true
 
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[default bubble],
+                     default: "default"
+
       def more_than_two
         users.count > 2
       end
@@ -18,13 +22,17 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_multiple_users_stacked_kit", single_class)
+        generate_classname("pb_multiple_users_stacked_kit", single_class, bubble_class)
       end
 
     private
 
       def single_class
         only_one ? "single" : nil
+      end
+
+      def bubble_class
+        variant == "bubble" ? "bubble" : nil
       end
     end
   end

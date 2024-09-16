@@ -2,10 +2,12 @@ examples:
 
   rails:
   - multiple_users_stacked_default: Default
+  - multiple_users_stacked_bubble: Bubble
 
 
   react:
   - multiple_users_stacked_default: Default
+  - multiple_users_stacked_bubble: Bubble
 
   swift: 
   - multiple_users_stacked_default_swift: Default
