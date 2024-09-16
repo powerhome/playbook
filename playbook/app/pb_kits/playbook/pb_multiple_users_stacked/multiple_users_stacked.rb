@@ -21,6 +21,18 @@ module Playbook
         more_than_two ? 1 : users.count
       end
 
+      def bubble
+        variant == "bubble"
+      end
+
+      def triple_bubble
+        bubble && users.count === 3
+      end
+
+      def quadruple_bubble
+        bubble && users.count > 3
+      end
+
       def classname
         generate_classname("pb_multiple_users_stacked_kit", single_class, bubble_class)
       end
@@ -32,7 +44,7 @@ module Playbook
       end
 
       def bubble_class
-        variant == "bubble" ? "bubble" : nil
+        bubble ? "bubble" : nil
       end
     end
   end
