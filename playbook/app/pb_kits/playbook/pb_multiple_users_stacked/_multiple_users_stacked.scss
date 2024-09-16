@@ -3,12 +3,6 @@
 @import "../tokens/opacity";
 @import "../pb_avatar/avatar";
 
-@mixin avatar-wrapper($size, $border-color: $white) {
-  height: $size;
-  width: $size;
-  border: $border_size solid $border-color;
-}
-
 [class^=pb_multiple_users_stacked_kit] {
   $container_size: map-get($avatar-sizes, "xs");
   $bubble_container_size: map-get($avatar-sizes, "sm");
@@ -24,26 +18,31 @@
   flex-shrink: 0;
   flex-grow: 0;
   [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
-    @include avatar-wrapper($stacked_size);
-
-    &.dark {
+    height: $stacked_size;
+    width: $stacked_size;
+      &.dark {
+        .avatar_wrapper {
+          border: $pb_multiple_users_border_size solid $bg_dark;
+        }
+      }
       .avatar_wrapper {
-        border-color: $bg_dark;
+        border: $border_size solid $white;
+        height: $stacked_size;
+        width: $stacked_size;
+        img {
+          z-index: 0;
+        }
       }
     }
-    .avatar_wrapper {
-      @include avatar-wrapper($stacked_size);
-      img {
-        z-index: 0;
-      }
-    }
-  }
   &[class*=_single] .pb_multiple_users_stacked_item {
-    @include avatar-wrapper($container_size);
+    width: $container_size;
+    height: $container_size;
+    .avatar_wrapper {
+      width: $container_size;
+      height: $container_size;
+    }
   }
-
-  [class^=pb_avatar_kit].second_item,
-  [class^=pb_badge_kit].second_item {
+  [class^=pb_avatar_kit].second_item, [class^=pb_badge_kit].second_item {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -54,10 +53,13 @@
     span {
       transform: translateY(0);
     }
+    .avatar_wrapper {
+      border: $border_size solid $white;
+      height: $stacked_size;
+      width: $stacked_size;
 
-    @include avatar-wrapper($stacked_size);
+    }
   }
-
   .stacked_item .avatar_wrapper::before {
     font-size: 0;
     color: transparent;
@@ -72,40 +74,63 @@
       background-color: $card_dark;
     }
 
-    [class^=pb_avatar_kit] {
-      &.first_item {
-        top: 3px;
-        left: 5px;
-        @include avatar-wrapper(20px);
-
-        &.three_or_more {
-          @include avatar-wrapper(16px);
-        }
+    [class^=pb_avatar_kit].first_item {
+      top: 3px;
+      left: 5px;
+      height: 20px;
+      width: 20px;
+      .avatar_wrapper {
+        height: 20px;
+        width: 20px;
       }
 
-      &.second_item {
-        bottom: 7px;
-        right: 5px;
-        @include avatar-wrapper(12px);
-
-        &.double {
-          bottom: 5px;
-          right: 5px;
+      &.three_or_more {
+        height: 16px;
+        width: 16px;
+        .avatar_wrapper {
+          height: 16px;
+          width: 16px;
         }
       }
+    }
 
-      &.third_item {
-        position: absolute;
+    [class^=pb_avatar_kit].second_item {
+      bottom: 7px;
+      right: 5px;
+      height: 12px;
+      width: 12px;
+      .avatar_wrapper {
+        height: 12px;
+        width: 12px;
+      }
+
+      &.double {
         bottom: 5px;
-        left: 8px;
-        @include avatar-wrapper(10px);
+        right: 5px;
       }
+    }
 
-      &.fourth_item {
-        position: absolute;
-        top: 7px;
-        right: 4px;
-        @include avatar-wrapper(8px);
+    [class^=pb_avatar_kit].third_item {
+      position: absolute;
+      bottom: 5px;
+      left: 8px;
+      height: 10px;
+      width: 10px;
+      .avatar_wrapper {
+        height: 10px;
+        width: 10px;
+      }
+    }
+
+    [class^=pb_avatar_kit].fourth_item {
+      position: absolute;
+      top: 7px;
+      right: 4px;
+      height: 8px;
+      width: 8px;
+      .avatar_wrapper {
+        height: 8px;
+        width: 8px;
       }
     }
   }
@@ -114,7 +139,10 @@
     [class^=pb_avatar_kit].first_item {
       top: 0;
       left: 0;
-      @include avatar-wrapper($bubble_container_size);
+      .avatar_wrapper {
+        height: $bubble_container_size;
+        width: $bubble_container_size;
+      }
     }
   }
 }
