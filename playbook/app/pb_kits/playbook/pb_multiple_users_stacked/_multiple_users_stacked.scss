@@ -5,6 +5,7 @@
 
 [class^=pb_multiple_users_stacked_kit] {
   $container_size: map-get($avatar-sizes, "xs");
+  $bubble_container_size: map-get($avatar-sizes, "sm");
   $overlap: -15px;
   $border_size: 1px;
   $stacked_size: 18px;
@@ -62,5 +63,86 @@
   .stacked_item .avatar_wrapper::before {
     font-size: 0;
     color: transparent;
+  }
+
+  &[class*=_bubble] {
+    width: $bubble_container_size;
+    height: $bubble_container_size;
+    background-color: $bg_light;
+    border-radius: 50%;
+    &.dark {
+      background-color: $card_dark;
+    }
+
+    [class^=pb_avatar_kit].first_item {
+      top: 3px;
+      left: 5px;
+      height: 20px;
+      width: 20px;
+      .avatar_wrapper {
+        height: 20px;
+        width: 20px;
+      }
+
+      &.three_or_more {
+        height: 16px;
+        width: 16px;
+        .avatar_wrapper {
+          height: 16px;
+          width: 16px;
+        }
+      }
+    }
+
+    [class^=pb_avatar_kit].second_item {
+      bottom: 7px;
+      right: 5px;
+      height: 12px;
+      width: 12px;
+      .avatar_wrapper {
+        height: 12px;
+        width: 12px;
+      }
+
+      &.double {
+        bottom: 5px;
+        right: 5px;
+      }
+    }
+
+    [class^=pb_avatar_kit].third_item {
+      position: absolute;
+      bottom: 5px;
+      left: 8px;
+      height: 10px;
+      width: 10px;
+      .avatar_wrapper {
+        height: 10px;
+        width: 10px;
+      }
+    }
+
+    [class^=pb_avatar_kit].fourth_item {
+      position: absolute;
+      top: 7px;
+      right: 4px;
+      height: 8px;
+      width: 8px;
+      .avatar_wrapper {
+        height: 8px;
+        width: 8px;
+      }
+    }
+  }
+
+  &[class*=_single_bubble] {
+    [class^=pb_avatar_kit].first_item {
+      top: 0;
+      left: 0;
+      .avatar_wrapper {
+        height: $bubble_container_size;
+        width: $bubble_container_size;
+      }
+    }
   }
 }
