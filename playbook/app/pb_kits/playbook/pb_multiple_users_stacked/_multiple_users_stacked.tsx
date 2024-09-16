@@ -50,7 +50,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
       return (
         <Avatar
             {...userObject}
-            className={`pb_multiple_users_stacked_item first_item${bubbleThreeOrMore && " three_or_more"}`}
+            className={`pb_multiple_users_stacked_item first_item${bubbleThreeOrMore ? " three_or_more" : ""}`}
             dark={dark}
             key={index}
             size={isBubble ? "sm" : "xs"}
@@ -65,7 +65,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
         return (
           <Avatar
               {...userObject}
-              className={`pb_multiple_users_stacked_item second_item${bubbleDouble && " double"}`}
+              className={`pb_multiple_users_stacked_item second_item${bubbleDouble ? " double" : ""}`}
               dark={dark}
               key={index}
               size="xs"
