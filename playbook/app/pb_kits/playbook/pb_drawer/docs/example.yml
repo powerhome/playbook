@@ -7,3 +7,4 @@ examples:
   react:
   - drawer_default: Default
   - drawer_sizes: Sizes
+  - drawer_overlay: Overlay

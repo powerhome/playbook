@@ -36,7 +36,7 @@ const DrawerDefault = () => {
             fullHeight
             onClose={toggleHeaderSeparatorDrawer}
             opened={headerSeparatorDrawerOpened}
-            overlay={false}
+            overlay
             placement={"left"}
             size={"lg"}
         >
@@ -49,7 +49,7 @@ const DrawerDefault = () => {
             fullHeight
             onClose={toggleBothSeparatorsDrawer}
             opened={bothSeparatorsDrawerOpened}
-            overlay={false}
+            overlay
             placement={"right"}
             size={"lg"}
         >

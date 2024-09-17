@@ -39,7 +39,6 @@ type DrawerProps = {
   overlay: boolean;
   portalClassName?: string;
   placement?: "left" | "right";
-  shouldCloseOnOverlayClick: boolean;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   status?: "info" | "caution" | "delete" | "error" | "success";
   text?: string;
@@ -69,7 +68,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     overlay = true,
     placement = "left",
     portalClassName,
-    shouldCloseOnOverlayClick = true,
     status,
     text,
     title,
@@ -111,7 +109,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
   }
 
   const overlayClassNames = {
-    base: `pb_drawer_overlay ${fullHeight !== null && fullHeightClassNames()} ${!overlay ? 'no-background' : ''}`,
+    base: `pb_drawer${overlay ? '_overlay' : '_no_overlay'} ${fullHeight !== null && fullHeightClassNames()} ${!overlay ? 'no-background' : ''}`,
     afterOpen: "pb_drawer_overlay_after_open",
     beforeClose: "pb_drawer_overlay_before_close",
   };
@@ -191,7 +189,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
             onRequestClose={onClose}
             overlayClassName={overlayClassNames}
             portalClassName={portalClassName}
-            shouldCloseOnOverlayClick={shouldCloseOnOverlayClick && !loading}
+            shouldCloseOnOverlayClick={overlay && !loading}
             style={{ marginLeft: "auto" }}
         >
           <>

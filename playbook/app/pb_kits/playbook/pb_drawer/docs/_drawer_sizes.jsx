@@ -52,7 +52,7 @@ const DrawerSizes = () => {
           fullHeight
           onClose={toggleXsDrawer}
           opened={openedXsDrawer}
-          overlay={false}
+          overlay
           placement="right"
           size="xs"
       >
@@ -64,7 +64,7 @@ const DrawerSizes = () => {
           fullHeight
           onClose={toggleSmDrawer}
           opened={openedSmDrawer}
-          overlay={false}
+          overlay
           placement="right"
           size="sm"
       >
@@ -76,7 +76,7 @@ const DrawerSizes = () => {
           fullHeight
           onClose={toggleMdDrawer}
           opened={openedMdDrawer}
-          overlay={false}
+          overlay
           placement="right"
           size="md"
       >
@@ -88,7 +88,7 @@ const DrawerSizes = () => {
           fullHeight
           onClose={toggleLgDrawer}
           opened={openedLgDrawer}
-          overlay={false}
+          overlay
           placement="right"
           size="lg"
       >
@@ -100,7 +100,7 @@ const DrawerSizes = () => {
           fullHeight
           onClose={toggleXlDrawer}
           opened={openedXlDrawer}
-          overlay={false}
+          overlay
           placement="right"
           size="xl"
       >
