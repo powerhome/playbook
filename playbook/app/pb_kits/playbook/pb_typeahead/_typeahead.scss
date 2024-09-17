@@ -68,7 +68,6 @@
     opacity: 0;
   }
   [class^=pb_list_kit] {
-    margin-top: -$space-sm;
     li {
       transition: background-color .25s ease-in-out;
     }
