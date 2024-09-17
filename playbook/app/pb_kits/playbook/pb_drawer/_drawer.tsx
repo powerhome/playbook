@@ -8,33 +8,22 @@ import Modal from "react-modal";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 
-import Body from "../pb_body/_body";
-import Button from "../pb_button/_button";
-import DialogHeader from "../pb_dialog/child_kits/_dialog_header";
-import DialogFooter from "../pb_dialog/child_kits/_dialog_footer";
-import DialogBody from "../pb_dialog/child_kits/_dialog_body";
-import Flex from "../pb_flex/_flex";
-import Title from "../pb_title/_title";
 import { DialogContext } from "../pb_dialog/_dialog_context";
 
 type DrawerProps = {
   aria?: { [key: string]: string };
   behavior?: "floating" | "push";
   border?: "full" | "none" | "right" | "left";
-  cancelButton?: string;
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
   closeable: boolean;
-  confirmButton?: string;
   data?: {[key: string]: string},
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   fullHeight?: boolean;
   loading?: boolean;
-  onCancel?: () => void;
   onChange?: () => void;
   onClose?: () => void;
-  onConfirm?: () => void;
   opened: boolean;
   overlay: boolean;
   portalClassName?: string;
@@ -42,7 +31,6 @@ type DrawerProps = {
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   status?: "info" | "caution" | "delete" | "error" | "success";
   text?: string;
-  title?: string;
   trigger?: string;
 };
 
@@ -51,8 +39,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     aria = {},
     behavior = "floating",
     border = "none",
-    cancelButton,
-    confirmButton,
     className,
     data = {},
     htmlOptions = {},
@@ -62,15 +48,10 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     loading = false,
     fullHeight = false,
     opened,
-    onCancel,
-    onConfirm,
     onClose,
     overlay = true,
     placement = "left",
     portalClassName,
-    status,
-    text,
-    title,
     trigger,
   } = props;
   const ariaProps = buildAriaProps(aria);
@@ -155,22 +136,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       : onClose,
   };
 
-  if (trigger) {
-    const modalTrigger = document.querySelector(trigger);
-    modalTrigger.addEventListener(
-      "click",
-      () => {
-        setTriggerOpened(true);
-        document
-          .querySelector("#cancel-button")
-          .addEventListener("click", () => {
-            setTriggerOpened(false);
-          });
-      },
-      { once: true }
-    );
-  }
-
   return (
     <DialogContext.Provider value={api}>
       <div 
@@ -193,49 +158,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
             style={{ marginLeft: "auto" }}
         >
           <>
-            {title && !status ? <Drawer.Header>{title}</Drawer.Header> : null}
-            {!status && text ? <Drawer.Body>{text}</Drawer.Body> : null}
-            {status && (
-              <Drawer.Body
-                  className="drawer_status_text_align"
-                  padding="md"
-              >
-                <Flex align="center"
-                    orientation="column"
-                >
-                  <Title marginTop="sm"
-                      size={3}
-                  >
-                    {title}
-                  </Title>
-                  <Body marginTop="xs"
-                      text={text}
-                  />
-                </Flex>
-              </Drawer.Body>
-            )}
-            {cancelButton && confirmButton ? (
-              <Drawer.Footer>
-                  <Button
-                      disabled={loading}
-                      htmlType="button"
-                      loading={loading}
-                      onClick={onConfirm}
-                      variant="primary"
-                  >
-                    {confirmButton}
-                  </Button>
-                  <Button
-                      disabled={loading}
-                      htmlType="button"
-                      id="cancel-button"
-                      onClick={onCancel}
-                      variant="link"
-                  >
-                    {cancelButton}
-                  </Button>
-              </Drawer.Footer>
-            ) : null}
             {children}
           </>
         </Modal>
@@ -243,8 +165,5 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     </DialogContext.Provider>
   );
 };
-Drawer.Header = DialogHeader;
-Drawer.Body = DialogBody;
-Drawer.Footer = DialogFooter;
 
 export default Drawer;
