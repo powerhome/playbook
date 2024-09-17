@@ -155,7 +155,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
             overlayClassName={overlayClassNames}
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={overlay && !loading}
-            style={{ marginLeft: "auto" }}
         >
           <>
             {children}
