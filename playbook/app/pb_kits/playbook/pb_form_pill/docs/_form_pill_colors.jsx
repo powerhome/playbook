@@ -15,16 +15,16 @@ const FormPillColors = (props) => {
             alert('Click!')
           }}
           tabIndex={0}
-          text="Neutral"
+          text="Primary"
           {...props}
       />
       <FormPill
-          color="primary"
+          color="neutral"
           onClick={() => {
             alert('Click!')
           }}
           tabIndex={0}
-          text="Primary"
+          text="Neutral"
           {...props}
       />
       <FormPill

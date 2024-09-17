@@ -17,7 +17,7 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
   it { is_expected.to define_prop(:plus_icon).with_default(false) }
   it { is_expected.to define_prop(:search_term_minimum_length).with_default(3) }
   it { is_expected.to define_prop(:search_debounce_timeout).with_default(250) }
-  it { is_expected.to define_prop(:pill_color).with_default("neutral") }
+  it { is_expected.to define_prop(:pill_color).with_default("primary") }
 
   describe "#typeahead_with_pills_options" do
     before(:each) do

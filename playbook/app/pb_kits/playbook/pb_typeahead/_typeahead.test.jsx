@@ -63,7 +63,7 @@ test('typeahead with pills', () => {
   )
 
   const kit = screen.getByTestId('pills-test')
-  const pill = kit.querySelector(".pb_form_pill_kit_neutral")
+  const pill = kit.querySelector(".pb_form_pill_kit_primary")
   expect(pill).toBeInTheDocument()
 })
 
@@ -89,7 +89,7 @@ test('typeahead multi select with badges and small pills', () => {
   )
 
   const kit = screen.getByTestId('small-pill-test')
-  const badge = kit.querySelector(".pb_form_pill_kit_neutral.mr_xs.small")
+  const badge = kit.querySelector(".pb_form_pill_kit_primary.mr_xs.small")
   expect(badge).toBeInTheDocument()
 })
 
@@ -116,11 +116,11 @@ test('typeahead with colored pills', () => {
         defaultValue={[options[0]]}
         isMulti
         options={options}
-        pillColor="primary"
+        pillColor="neutral"
     />
   )
 
   const kit = screen.getByTestId('pills-color-test')
-  const pill = kit.querySelector(".pb_form_pill_kit_primary")
+  const pill = kit.querySelector(".pb_form_pill_kit_neutral")
   expect(pill).toBeInTheDocument()
 })

@@ -15,7 +15,7 @@ const TypeaheadWithPills = (props) => {
           isMulti
           label="Colors"
           options={options}
-          pillColor="primary"
+          pillColor="neutral"
           placeholder=""
           {...props}
       />

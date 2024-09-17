@@ -36,7 +36,7 @@ module Playbook
       prop :value
       prop :pill_color, type: Playbook::Props::Enum,
                         values: %w[primary neutral success warning error info data_1 data_2 data_3 data_4 data_5 data_6 data_7 data_8 windows siding roofing doors gutters solar insulation accessories],
-                        default: "neutral"
+                        default: "primary"
 
       def classname
         generate_classname("pb_typeahead_kit")

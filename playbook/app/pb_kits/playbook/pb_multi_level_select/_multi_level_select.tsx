@@ -52,7 +52,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     onSelect = () => null,
     selectedIds,
     variant = "multi",
-    pillColor = "neutral"
+    pillColor = "primary"
   } = props
 
   const ariaProps = buildAriaProps(aria)

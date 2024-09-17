@@ -80,7 +80,7 @@ const MultiLevelSelectColor = (props) => {
               selectedNodes
             )
           }
-          pillColor="primary"
+          pillColor="neutral"
           treeData={treeData}
           {...props}
       />
