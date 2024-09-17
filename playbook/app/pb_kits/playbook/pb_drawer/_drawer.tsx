@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-handler-names */
-/* eslint-disable react/no-multi-comp */
-
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import Modal from "react-modal";
@@ -17,7 +14,7 @@ type DrawerProps = {
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
   closeable: boolean;
-  data?: {[key: string]: string},
+  data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   fullHeight?: boolean;
@@ -55,7 +52,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     trigger,
   } = props;
   const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data)
+  const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
 
   let globalPropsString: string = globalProps(props);
@@ -85,9 +82,9 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
   };
 
   const fullHeightClassNames = () => {
-    if(!fullHeight) return null
-    return `full_height_${placement}`
-  }
+    if (!fullHeight) return null;
+    return `full_height_${placement}`;
+  };
 
   const overlayClassNames = {
     base: `pb_drawer${overlay ? '_overlay' : '_no_overlay'} ${fullHeight !== null && fullHeightClassNames()} ${!overlay ? 'no-background' : ''}`,
@@ -104,8 +101,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     modalIsOpened = trigger ? triggerOpened : opened;
 
   useEffect(() => {
-
-    const sizeMap: Record<Props['size'], string> = {
+    const sizeMap: Record<DrawerProps['size'], string> = {
       xl: '365px',
       lg: '300px',
       md: '250px',
@@ -123,7 +119,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
 
       body.classList.add('ReactModal__Body--open');
     } else if (body) {
-      body.style.cssText = ''; // Clear the styles when modal is closed or behavior is not 'floating'
+      body.style.cssText = ''; // Clear the styles when modal is closed or behavior is not 'push'
       body.classList.remove('ReactModal__Body--open');
     }
   }, [modalIsOpened, behavior, placement, size]);
@@ -138,10 +134,10 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
 
   return (
     <DialogContext.Provider value={api}>
-      <div 
-          {...ariaProps} 
+      <div
+          {...ariaProps}
           {...dataProps}
-          {...htmlProps} 
+          {...htmlProps}
           className={classes}
       >
         <Modal
