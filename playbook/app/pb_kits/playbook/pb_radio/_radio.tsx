@@ -1,4 +1,6 @@
-import React, { forwardRef, isValidElement, useRef } from 'react'
+/*eslint-disable react/no-multi-comp */
+
+import React, { forwardRef, useRef } from 'react'
 import Body from '../pb_body/_body'
 import Flex from '../pb_flex/_flex'
 import classnames from 'classnames'
