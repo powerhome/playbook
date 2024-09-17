@@ -118,7 +118,6 @@ const Radio = ({
             name={name}
             onChange={onChange}
             ref={radioRef}
-            text={text}
             type="radio"
             value={value}
             {...props}
