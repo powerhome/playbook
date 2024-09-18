@@ -4,28 +4,79 @@
       <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
     </div>
   <% end %>
-  <%= pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: 1, margin_top: "xl" }) %>
+  <%= pb_rails("flex", props: { justify: "between", align_items: "center" }) do %>
+    <%= pb_rails("flex/flex_item", props: { flex: "9"}) do %>
+      <%= pb_rails("flex", props: { orientation: "column"}) do %>
+        <%= pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: 1, margin_top: "xl" }) %>
 
-  <% if @kit_status === "beta" %> 
-    <%= pb_rails("card", props: {highlight: {position: "side", color:"primary", shadow:"deep"}, margin_y: "md", padding: "sm"}) do %>
-      <%= pb_rails("flex", props:{ align: "center" }) do %>
-        <%= pb_rails("body", props:{color: "light"}) do %>
-        <%= pb_rails("icon", props: { icon: "info-circle", fixed_width: true, padding_right:"xs" }) %>
+        <% if @kit_status === "beta" %>
+          <%= pb_rails("card", props: {highlight: {position: "side", color:"primary", shadow:"deep"}, margin_y: "md", padding: "sm"}) do %>
+            <%= pb_rails("flex", props:{ align: "center" }) do %>
+              <%= pb_rails("body", props:{color: "light"}) do %>
+              <%= pb_rails("icon", props: { icon: "info-circle", fixed_width: true, padding_right:"xs" }) %>
+              <% end %>
+              <%= pb_rails("flex/flex_item") do %>
+                <%= pb_rails("title", props: { text: "Beta Kit", tag: "h4", size: 4 , padding_bottom:"xxs"}) %>
+                <%= pb_rails("body", props: {
+                  text: "This kit is currently under development. Some features may not work as expected, and breaking changes may still occur; use with caution.",
+                  color: "light"
+                }) %>
+              <% end %>
+            <% end %>
+          <% end %>
         <% end %>
-        <%= pb_rails("flex/flex_item") do %>
-          <%= pb_rails("title", props: { text: "Beta Kit", tag: "h4", size: 4 , padding_bottom:"xxs"}) %>
-          <%= pb_rails("body", props: {
-            text: "This kit is currently under development. Some features may not work as expected, and breaking changes may still occur; use with caution.",
-            color: "light"
-          }) %>
+
+        <div class="markdown kit-show-description <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
+          <%= render_markdown(pb_doc_kit_description(@kit)) %>
+        </div>
+      <% end %>
+    <% end %>
+    <%= pb_rails("flex/flex_item", props: { flex: "2" }) do %>
+      <%= pb_rails("flex", props: { orientation: "column", align: "stretch" }) do %>
+        <%= pb_rails("caption", props: { size: 'sm', margin: "xxs" }) do %>
+          Summary
         <% end %>
+
+        <!-- Condition to check menu.yml if icon_use is true -->
+        <%= pb_rails("flex", props: { inline: true, align: "center" }) do %>
+          <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+            <%= pb_rails("icon", props: { icon: "question-circle" }) %>
+          <% end %>
+          <%= pb_rails("flex/flex_item", props: { align_items: "start", flex: "8" }) do %>
+            <%= pb_rails("detail", props: { text: "Uses Icons", size: 'xs', margin: "xxs" }) %>
+          <% end %>
+          <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+            <%= pb_rails("icon", props: { icon: "chevron-right", size: "xs" }) %>
+          <% end %>
+        <% end %>
+        <!-- Condition to check menu.yml if react_use is true -->
+        <%= pb_rails("flex", props: { inline: true, align: "center" }) do %>
+          <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+            <%= pb_rails("icon", props: { icon: "question-circle" }) %>
+          <% end %>
+          <%= pb_rails("flex/flex_item", props: { align_items: "start", flex: "8" }) do %>
+            <%= pb_rails("detail", props: { text: "React Rendered", size: 'xs', margin: "xxs" }) %>
+          <% end %>
+          <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+            <%= pb_rails("icon", props: { icon: "chevron-right", size: "xs" }) %>
+          <% end %>
+        <% end %>
+        <!-- Condition to check menu.yml if javascript_use is true -->
+        <%= pb_rails("flex", props: { inline: true, align: "center" }) do %>
+          <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+            <%= pb_rails("icon", props: { icon: "question-circle" }) %>
+          <% end %>
+          <%= pb_rails("flex/flex_item", props: { align_items: "start", flex: "8" }) do %>
+            <%= pb_rails("detail", props: { text: "Javascript Enhanced", size: 'xs', margin: "xxs" }) %>
+          <% end %>
+          <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+            <%= pb_rails("icon", props: { icon: "chevron-right", size: "xs" }) %>
+          <% end %>
+        <% end %>
+
       <% end %>
     <% end %>
   <% end %>
-
-  <div class="markdown kit-show-description <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
-    <%= render_markdown(pb_doc_kit_description(@kit)) %>
-  </div>
 </div>
 <div class="kit-show-wrapper">
   <div class="pb--kit-type-nav">
