@@ -10,7 +10,7 @@ $height_from_top: $icon_height/2 - $connector_width/2;
 
 @mixin pb_timeline_line_solid($width, $height, $margin) {
     width: $width;
-    height: 333px; 
+    height: $height;
     background-color: $border_light;
     margin: $margin;
     flex-grow: 1;
@@ -18,15 +18,15 @@ $height_from_top: $icon_height/2 - $connector_width/2;
 
 @mixin pb_timeline_line_dotted_horizontal($width, $height, $margin) {
     width: $width;
-    height: 444px;
+    height: $height;
     background: repeating-linear-gradient(to right, $border_light 0px ,$border_light 2px, transparent 3px, transparent 10px);
     margin: $margin;
     flex-grow: 1;
 }
 
-@mixin pb_timeline_line_dotted_vertical($width, $margin) {
+@mixin pb_timeline_line_dotted_vertical($width, $height, $margin) {
     width: $width;
-    height: 444px; 
+    height: $height;
     background: repeating-linear-gradient(0deg, $border_light 0px ,$border_light 2px, transparent 3px, transparent 10px);
     margin: $margin;
     flex-grow: 1;
