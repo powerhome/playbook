@@ -34,6 +34,7 @@ const TimelineWithDate = (props) => (
           icon="check"
           iconColor="teal"
           lineStyle="dotted"
+          marginBottom="lg"
           {...props}
       >
         <TitleDetail
