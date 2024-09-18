@@ -2,6 +2,14 @@ import React from 'react'
 
 import Timeline from '../_timeline'
 import TitleDetail from '../../pb_title_detail/_title_detail'
+import Pill from '../../pb_pill/_pill'
+
+const UserAvatar = () => (
+      <Pill
+          text="success"
+          variant="success"
+      />
+)
 
 const TimelineWithDate = (props) => (
   <div>
@@ -58,9 +66,9 @@ const TimelineWithDate = (props) => (
         {...props}
     >
       <Timeline.Item
-          date={new Date()}
           icon="user"
           iconColor="royal"
+          leftContent={<UserAvatar />}
           {...props}
       >
         <TitleDetail

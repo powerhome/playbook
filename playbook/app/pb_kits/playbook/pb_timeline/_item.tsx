@@ -11,7 +11,8 @@ type ItemProps = {
   className?: string,
   children?: React.ReactNode[] | React.ReactNode,
   date?: Date,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  leftContent?: React.ReactNode,
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
   icon?: string,
   iconColor?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
   lineStyle?: 'solid' | 'dotted',
@@ -21,6 +22,7 @@ const TimelineItem = ({
   className,
   children,
   date,
+  leftContent,
   htmlOptions = {},
   icon = 'user',
   iconColor = 'default',
@@ -37,13 +39,15 @@ const TimelineItem = ({
         className={classnames(timelineItemCss, globalProps(props), className)}
     >
       <div className="pb_timeline_item_left_block">
-        {date &&
+        {leftContent ? (
+          leftContent
+        ) : date ? (
           <DateStacked
               align="center"
               date={date}
               size="sm"
           />
-        }
+        ) : null}
       </div>
       <div className="pb_timeline_item_step">
         <IconCircle

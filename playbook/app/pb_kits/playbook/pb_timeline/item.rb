@@ -4,6 +4,7 @@ module Playbook
   module PbTimeline
     class Item < Playbook::KitBase
       prop :date
+      prop :left_content, type: Playbook::Props::String
       prop :icon, type: Playbook::Props::String,
                   default: "user"
       prop :icon_color, type: Playbook::Props::Enum,

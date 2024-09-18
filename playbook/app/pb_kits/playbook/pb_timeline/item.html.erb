@@ -1,7 +1,8 @@
 <%= pb_content_tag do %>
-
   <div class="pb_timeline_item_left_block">
-    <% if object.date.present? %>
+    <% if object.left_content.present? %>
+      <%= object.left_content.html_safe %>
+    <% elsif object.date.present? %>
       <%= pb_rails("date_stacked", props: {
         date: object.date,
         size: "sm",
