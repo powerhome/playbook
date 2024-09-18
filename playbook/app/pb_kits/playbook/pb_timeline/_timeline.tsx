@@ -10,6 +10,7 @@ type TimelineProps = {
   aria?: { [key: string]: string },
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
+  gap?: 'sm' | 'md' | 'lg',
   data?: { [key: string]: string },
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -21,6 +22,7 @@ const Timeline = ({
   aria = {},
   className,
   children,
+  gap = 'md',
   data = {},
   htmlOptions = {},
   id,
@@ -32,7 +34,7 @@ const Timeline = ({
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const dateStyle = showDate === true ? '_with_date' : ''
-  const timelineCss = buildCss('pb_timeline_kit', `_${orientation}`, dateStyle)
+  const timelineCss = buildCss('pb_timeline_kit', `_gap_${gap}`, `_${orientation}`, dateStyle)
   return (
     <div
         {...ariaProps}

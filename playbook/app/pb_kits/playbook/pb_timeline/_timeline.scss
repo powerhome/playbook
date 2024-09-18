@@ -58,11 +58,13 @@ $height_from_top: $icon_height/2 - $connector_width/2;
             }
         }
         [class*=pb_timeline_item_kit] {
+            &[class*=_gap_md] {
+                [class=line_connector] {
+                    height: $medium_space;
+                }
+            }
             &[class*=_solid] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_left_block] {
-                    height: 0px;
-                }
                 [class=pb_timeline_item_step] {
                     @include flex_wrapper(row);
                     margin-top: $space_xs;

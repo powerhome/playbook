@@ -10,6 +10,7 @@ import IconCircle from '../pb_icon_circle/_icon_circle'
 type ItemProps = {
   className?: string,
   children?: React.ReactNode[] | React.ReactNode,
+  gap?: 'sm' | 'md' | 'lg',
   date?: Date,
   leftContent?: React.ReactNode,
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
@@ -21,6 +22,7 @@ type ItemProps = {
 const TimelineItem = ({
   className,
   children,
+  gap = 'md',
   date,
   leftContent,
   htmlOptions = {},
@@ -55,7 +57,7 @@ const TimelineItem = ({
             size="xs"
             variant={iconColor}
         />
-        <div className="pb_timeline_item_connector" />
+        <div className={`pb_timeline_item_connector ${gap}`} />
       </div>
       <div className="pb_timeline_item_right_block">
         {children}
