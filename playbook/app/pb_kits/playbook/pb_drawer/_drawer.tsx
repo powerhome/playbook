@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import classnames from "classnames";
 import Modal from "react-modal";
 
@@ -11,6 +11,7 @@ type DrawerProps = {
   aria?: { [key: string]: string };
   behavior?: "floating" | "push";
   border?: "full" | "none" | "right" | "left";
+  breakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
   data?: { [key: string]: string };
@@ -31,6 +32,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     aria = {},
     behavior = "floating",
     border = "none",
+    breakpoint = "none",
     className,
     data = {},
     htmlOptions = {},
@@ -90,8 +92,50 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     className
   );
 
-  const [triggerOpened, setTriggerOpened] = useState(false),
-    modalIsOpened = trigger ? triggerOpened : opened;
+const [triggerOpened, setTriggerOpened] = useState(false);
+const [modalIsOpened, setModalIsOpened] = useState(trigger ? triggerOpened : opened);
+
+const breakpointValues = {
+  xs: 575,
+  sm: 767,
+  md: 991,
+  lg: 1199,
+  xl: 1200,
+};
+
+const handleResize = useCallback(() => {
+  const width = window.innerWidth;
+
+  if (breakpoint !== 'none') {
+    if (width <= breakpointValues.xs) {
+      if (breakpoint === 'sm') {
+        setModalIsOpened(false); // Update the state instead of reassigning
+      }
+    } else if (width <= breakpointValues.sm) {
+      if (breakpoint === 'sm') {
+        setModalIsOpened(true); // Update the state instead of reassigning
+      }
+    } else if (width <= breakpointValues.md) {
+      if (breakpoint === 'sm') {
+        setModalIsOpened(false); // Update the state instead of reassigning
+      }
+    } else if (width <= breakpointValues.lg) {
+      if (breakpoint === 'sm') {
+        setModalIsOpened(false); // Update the state instead of reassigning
+      }
+    } else if (width > breakpointValues.lg) {
+      if (breakpoint === 'sm') {
+        setModalIsOpened(false); // Update the state instead of reassigning
+      }
+    }
+  }
+}, [breakpoint, breakpointValues]);
+
+// Optionally use useEffect to trigger handleResize on window resize
+useEffect(() => {
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, [handleResize]);
 
   useEffect(() => {
     const sizeMap: Record<DrawerProps['size'], string> = {

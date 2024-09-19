@@ -33,6 +33,7 @@ const DrawerDefault = () => {
         {/* Left Drawer */}
         <Drawer
             behavior={"push"}
+            breakpoint={"sm"}
             fullHeight
             onClose={toggleHeaderSeparatorDrawer}
             opened={headerSeparatorDrawerOpened}
