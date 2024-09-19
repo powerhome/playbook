@@ -32,7 +32,7 @@ const Radio = ({
   alignment,
   children,
   className,
-  customChildren,
+  customChildren= false,
   dark = false,
   disabled = false,
   error = false,
