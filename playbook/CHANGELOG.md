@@ -1,5 +1,9 @@
-# 14.4.0
+# Spot Everyone at a Glance: Meet the New Multiple Users Component!
 ##### September 18, 2024 
+
+![14 4 0](https://github.com/user-attachments/assets/9e1a90e9-7a5c-4e43-8192-8fbe74c8de28)
+
+We've added a fresh option to our MultipleUsersStacked component with the new bubble variant! This update showcases full user avatars in a sleek, Apple-inspired grid layout, enhancing recognition and clarity. It's a versatile addition to your toolkit, offering a refined way to display multiple users!
 
 [14.4.0](https://github.com/powerhome/playbook/tree/14.4.0) full list of changes:
 
