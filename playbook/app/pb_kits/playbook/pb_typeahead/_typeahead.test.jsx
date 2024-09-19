@@ -108,3 +108,19 @@ test('should pass className prop', () => {
   const kit = screen.getByTestId('typeahead-test')
   expect(kit).toHaveClass(className)
 })
+
+test('typeahead with colored pills', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'pills-color-test' }}
+        defaultValue={[options[0]]}
+        isMulti
+        options={options}
+        pillColor="neutral"
+    />
+  )
+
+  const kit = screen.getByTestId('pills-color-test')
+  const pill = kit.querySelector(".pb_form_pill_kit_neutral")
+  expect(pill).toBeInTheDocument()
+})

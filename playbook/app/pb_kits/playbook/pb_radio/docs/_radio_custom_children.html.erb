@@ -1,0 +1,48 @@
+<%
+  options = [
+    { label: "Orange", value: "Orange" },
+    { label: "Red", value: "Red" },
+    { label: "Green", value: "Green" },
+    { label: "Blue", value: "Blue" },
+  ]
+%>
+
+<%= pb_rails("radio", props: {
+  custom_children: true,
+  label: "Select",
+  name: "Group1",
+  value: "Select",
+}) do %>
+  <%= pb_rails("select", props: {
+    min_width: "xs",
+    options: options,
+  }) %>
+<% end %>
+
+<%= pb_rails("radio", props: {
+  custom_children: true,
+  label: "Typeahead",
+  name: "Group1",
+  value: "Typeahead",
+}) do %>
+  <%= pb_rails("typeahead", props: {
+      id: "typeahead-radio",
+      is_multi: false,
+      min_width: "xs",
+      options: options,
+      placeholder: "Select...",
+    })
+  %>
+<% end %>
+
+<%= pb_rails("radio", props: {
+  custom_children: true,
+  label: "Typography",
+  name: "Group1",
+  value: "Typography",
+}) do %>
+  <%= pb_rails("title", props: {
+      text: "Custom Typography",
+    })
+  %>
+<% end %>
