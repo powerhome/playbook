@@ -13,20 +13,15 @@ type DrawerProps = {
   border?: "full" | "none" | "right" | "left";
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
-  closeable: boolean;
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   fullHeight?: boolean;
-  loading?: boolean;
-  onChange?: () => void;
   onClose?: () => void;
   opened: boolean;
   overlay: boolean;
-  portalClassName?: string;
   placement?: "left" | "right";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
-  status?: "info" | "caution" | "delete" | "error" | "success";
   text?: string;
   trigger?: string;
 };
@@ -42,13 +37,11 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     id,
     size = "md",
     children,
-    loading = false,
     fullHeight = false,
     opened,
     onClose,
     overlay = true,
     placement = "left",
-    portalClassName,
     trigger,
   } = props;
   const ariaProps = buildAriaProps(aria);
@@ -149,8 +142,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
             isOpen={modalIsOpened}
             onRequestClose={onClose}
             overlayClassName={overlayClassNames}
-            portalClassName={portalClassName}
-            shouldCloseOnOverlayClick={overlay && !loading}
+            shouldCloseOnOverlayClick={overlay}
         >
           <>
             {children}
