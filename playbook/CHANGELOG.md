@@ -1,3 +1,30 @@
+# Spot Everyone at a Glance: Meet the New Multiple Users Component!
+##### September 18, 2024 
+
+![14 4 0](https://github.com/user-attachments/assets/9e1a90e9-7a5c-4e43-8192-8fbe74c8de28)
+
+We've added a fresh option to our MultipleUsersStacked component with the new bubble variant! This update showcases full user avatars in a sleek, Apple-inspired grid layout, enhancing recognition and clarity. It's a versatile addition to your toolkit, offering a refined way to display multiple users!
+
+[14.4.0](https://github.com/powerhome/playbook/tree/14.4.0) full list of changes:
+
+**Kit Enhancements:**
+- Bubble Variant to Multiple Users Stacked [\#3692](https://github.com/powerhome/playbook/pull/3692) ([kangaree](https://github.com/kangaree))
+- Form Pills: Add All Color Options [\#3636](https://github.com/powerhome/playbook/pull/3636) ([elisashapiro](https://github.com/elisashapiro))
+- Implementing Radio customChildren Prop [\#3685](https://github.com/powerhome/playbook/pull/3685) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+- Fix Undefined Method Error in SamplesController#show [\#3675](https://github.com/powerhome/playbook/pull/3675) ([skduncan](https://github.com/skduncan))
+- Make Rails Icons fixed-width [\#3656](https://github.com/powerhome/playbook/pull/3656) ([skduncan](https://github.com/skduncan))
+
+**Improvements:**
+- Remove Bad UTF-8 Character [\#3679](https://github.com/powerhome/playbook/pull/3679) ([@dhhuynh2](https://github.com/dhhuynh2))
+- Playground Sanitization Security [\#3624](https://github.com/powerhome/playbook/pull/3624) 
+- Upgraded Popper and React-Popper [\#3681](https://github.com/powerhome/playbook/pull/3681) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.3.2...14.4.0)
+
+
 # Star Ratings and Page-Turning Upgrades 💫
 ##### September 6, 2024 
 
@@ -32,7 +59,7 @@ Our Star Rating kit now shines brighter with added interactivity and hover effec
 - Fixes RC Github Action Limit [\#3666](https://github.com/powerhome/playbook/pull/3666) ([jasperfurniss](https://github.com/jasperfurniss))
 - Fix Kebab Logic [\#3649](https://github.com/powerhome/playbook/pull/3649) ([markdoeswork](https://github.com/markdoeswork))
 - Dialog Disable Rails - Remove Duplicate Data [\#3646](https://github.com/powerhome/playbook/pull/3646) ([markdoeswork](https://github.com/markdoeswork))
-- RTE Previewer + Output Rails [\#3625] ([elisashapiro](https://github.com/elisashapiro))(https://github.com/powerhome/playbook/pull/3625)
+- RTE Previewer + Output Rails [\#3625](https://github.com/powerhome/playbook/pull/3625) ([elisashapiro](https://github.com/elisashapiro))
 - Implement Error Handling and Additions for Github Action [\#3652](https://github.com/powerhome/playbook/pull/3652) ([jasperfurniss](https://github.com/jasperfurniss))
 
 
