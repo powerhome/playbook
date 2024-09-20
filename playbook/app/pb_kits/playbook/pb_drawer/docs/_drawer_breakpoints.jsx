@@ -29,7 +29,7 @@ const DrawerBreakpoints = () => {
             fullHeight
             onClose={toggleSmallDrawer}
             opened={smallDrawerOpened}
-            overlay
+            overlay={false}
             placement={"right"}
             size={"lg"}
         >
