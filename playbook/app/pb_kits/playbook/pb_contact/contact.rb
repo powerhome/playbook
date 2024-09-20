@@ -44,6 +44,10 @@ module Playbook
         end
       end
 
+      def envelope_path
+        "app/pb_kits/playbook/utilities/icons/envelope.svg"
+      end
+
     private
 
       def formatted_value

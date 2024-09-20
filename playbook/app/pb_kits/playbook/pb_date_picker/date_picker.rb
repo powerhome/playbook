@@ -118,6 +118,10 @@ module Playbook
         class_string += error_class
         class_string
       end
+
+      def angle_down_path
+        "app/pb_kits/playbook/utilities/icons/angle-down.svg"
+      end
     end
   end
 end

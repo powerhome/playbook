@@ -45,6 +45,9 @@ PbNav.start()
 import PbStarRating from 'kits/pb_star_rating'
 PbStarRating.start()
 
+import PbRadio from 'kits/pb_radio'
+PbRadio.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====
