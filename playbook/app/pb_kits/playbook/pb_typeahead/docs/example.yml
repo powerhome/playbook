@@ -10,6 +10,7 @@ examples:
     - typeahead_multi_kit: Multi Kit Options
     - typeahead_error_state: Error State
     - typeahead_margin_bottom: Margin Bottom
+    - typeahead_with_pills_color: With Pills (Custom Color)
 
   react:
     - typeahead_default: Default
@@ -25,3 +26,4 @@ examples:
     - typeahead_error_state: Error State
     - typeahead_custom_menu_list: Custom MenuList
     - typeahead_margin_bottom: Margin Bottom
+    - typeahead_with_pills_color: With Pills (Custom Color)

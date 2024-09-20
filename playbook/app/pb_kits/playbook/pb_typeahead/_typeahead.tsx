@@ -46,12 +46,14 @@ type TypeaheadProps = {
   getOptionValue?: string | (() => any),
   name?: string,
   marginBottom?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
+  pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
 } & GlobalProps
 
 export type SelectValueType = {
   label: string,
   value: string,
   imageUrl?: string,
+  pillColor?: string,
 }
 
 type TagOnChangeValues = {
@@ -78,6 +80,7 @@ const Typeahead = ({
   id,
   loadOptions = noop,
   marginBottom = "sm",
+  pillColor,
   ...props
 }: TypeaheadProps) => {
   const selectProps = {
@@ -107,6 +110,7 @@ const Typeahead = ({
     onCreateOption: null as null,
     plusIcon: false,
     onMultiValueClick: (_option: SelectValueType): any => undefined,
+    pillColor: pillColor,
     ...props,
   }
 

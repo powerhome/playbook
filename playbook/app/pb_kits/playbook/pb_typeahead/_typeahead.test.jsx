@@ -121,4 +121,19 @@ test('typeahead textinput has mb_sm class by default', () => {
   expect(kit).toHaveClass("pb_typeahead_kit mb_sm")
   const textInput = kit.querySelector(".pb_text_input_kit")
   expect(textInput).toHaveClass("mb_none")
+
+test('typeahead with colored pills', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'pills-color-test' }}
+        defaultValue={[options[0]]}
+        isMulti
+        options={options}
+        pillColor="neutral"
+    />
+  )
+
+  const kit = screen.getByTestId('pills-color-test')
+  const pill = kit.querySelector(".pb_form_pill_kit_neutral")
+  expect(pill).toBeInTheDocument()
 })
