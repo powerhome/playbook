@@ -9,3 +9,4 @@ examples:
   - drawer_sizes: Sizes
   - drawer_overlay: Overlay
   - drawer_borders: Borders 
+  - drawer_breakpoints: Open on Breakpoints 
