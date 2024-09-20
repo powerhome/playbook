@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Card, Nav, SectionSeparator, NavItem } from 'playbook-ui'
 import GlobalProps from './globalProps'
 import KitProps from './kitProps'
+import globalPropsValues from './globalPropsValues'
 
 type AvailablePropsType = {
   availableProps: any,
@@ -10,8 +11,15 @@ type AvailablePropsType = {
 
 const AvailableProps = ({ availableProps, darkMode }: AvailablePropsType) => {
   const props = JSON.parse(availableProps)
-  const [showKitTab, setShowKitTab] = useState(true)
+  const globalPropsNames = globalPropsValues.map(prop => prop.prop)
 
+  for(var propName in props) {
+    if(globalPropsNames.includes(propName)) {
+      delete props[propName]
+    }
+  }
+
+  const [showKitTab, setShowKitTab] = useState(true)
   return (
     <>
       <Card padding="none" dark={darkMode}>

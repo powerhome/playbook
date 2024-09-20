@@ -1,13 +1,10 @@
 import React from 'react'
 import { Body, Card, Table, Title } from 'playbook-ui'
-import globalPropsValues from './globalPropsValues'
 
 type KitPropsType = {
   kitPropsValues: {[key: string]: any},
   darkMode: boolean
 }
-
-const globalPropNames = globalPropsValues.map(prop => prop.prop)
 
 const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
   const getTypeName = (typeName: string) => {
@@ -59,7 +56,6 @@ const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
           <tbody>
             {Object.entries(kitPropsValues).map(([propName, propsValue]) => (
               <>
-               { globalPropNames.includes(propName) ? null :
                   <tr>
                     <td>
                       <Title
@@ -109,7 +105,6 @@ const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
 
                     </td>
                   </tr>
-                }
               </>
             ))}
           </tbody>
