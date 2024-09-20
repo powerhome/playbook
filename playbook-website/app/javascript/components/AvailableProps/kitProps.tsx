@@ -1,10 +1,13 @@
 import React from 'react'
 import { Body, Card, Table, Title } from 'playbook-ui'
+import globalPropsValues from './globalPropsValues'
 
 type KitPropsType = {
   kitPropsValues: {[key: string]: any},
   darkMode: boolean
 }
+
+const globalPropNames = globalPropsValues.map(prop => prop.prop)
 
 const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
   const getTypeName = (typeName: string) => {
@@ -56,55 +59,57 @@ const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
           <tbody>
             {Object.entries(kitPropsValues).map(([propName, propsValue]) => (
               <>
-                <tr>
-                  <td>
-                    <Title
-                        dark={darkMode}
-                        size={4}
-                        tag="h4"
-                        text={propName}
-                    />
-                  </td>
-                  <td>
-                    <Card
-                        background={darkMode ? 'dark' : 'light'}
-                        borderNone
-                        borderRadius="sm"
-                        display="inline_block"
-                        padding="xxs"
-                    >
-                      <Body
-                          className="kearning"
+               { globalPropNames.includes(propName) ? null :
+                  <tr>
+                    <td>
+                      <Title
                           dark={darkMode}
+                          size={4}
+                          tag="h4"
+                          text={propName}
+                      />
+                    </td>
+                    <td>
+                      <Card
+                          background={darkMode ? 'dark' : 'light'}
+                          borderNone
+                          borderRadius="sm"
+                          display="inline_block"
+                          padding="xxs"
                       >
-                        {getTypeName(propsValue.type.name)}
-                      </Body>
-                    </Card>
-                  </td>
-                  <td>
-                    {
-                      propsValue.type.name ? (
-                        <Card
-                            background={darkMode ? 'dark' : 'light'}
-                            borderNone
-                            borderRadius="sm"
-                            display="inline_block"
-                            flexDirection="row"
-                            margin="xxs"
-                            padding="xxs"
+                        <Body
+                            className="kearning"
+                            dark={darkMode}
                         >
-                          <Body
-                              className="kearning"
-                              dark={darkMode}
+                          {getTypeName(propsValue.type.name)}
+                        </Body>
+                      </Card>
+                    </td>
+                    <td>
+                      {
+                        propsValue.type.name ? (
+                          <Card
+                              background={darkMode ? 'dark' : 'light'}
+                              borderNone
+                              borderRadius="sm"
+                              display="inline_block"
+                              flexDirection="row"
+                              margin="xxs"
+                              padding="xxs"
                           >
-                           {getTypeValue(propsValue)}
-                          </Body>
-                        </Card>
-                        ) : null
-                    }
+                            <Body
+                                className="kearning"
+                                dark={darkMode}
+                            >
+                            {getTypeValue(propsValue)}
+                            </Body>
+                          </Card>
+                          ) : null
+                      }
 
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
+                }
               </>
             ))}
           </tbody>
