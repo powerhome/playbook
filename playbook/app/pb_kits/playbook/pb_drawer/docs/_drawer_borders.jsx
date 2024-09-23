@@ -106,7 +106,9 @@ const DrawerBorders = () => {
           placement="right"
           size="lg"
       >
+      <div style={{ paddingTop: '100px', paddingLeft: '12px' }}>
         This is a Rounded Drawer
+      </div>
       </Drawer>
     </>
   );

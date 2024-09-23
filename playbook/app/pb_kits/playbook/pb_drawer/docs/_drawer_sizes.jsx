@@ -56,7 +56,7 @@ const DrawerSizes = () => {
           placement="right"
           size="xs"
       >
-        This is an XS Drawer
+        XS 
       </Drawer>
 
       <Drawer
@@ -104,7 +104,7 @@ const DrawerSizes = () => {
           placement="right"
           size="xl"
       >
-        This is an LG Drawer
+        This is an XL Drawer
       </Drawer>
     </>
   );

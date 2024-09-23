@@ -62,11 +62,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     globalPropsString += ' p_sm';
   }
 
-  const breakpointClassNames = () =>{
-    if (breakpoint === "none") return null;
-    return `breakpoint_${breakpoint}`;
-  }
-
   const drawerClassNames = {
     base: `${classnames(
       "pb_drawer",
@@ -76,7 +71,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
         "drawer_border_right": border === "right",
         "drawer_border_left": border === "left",
       }
-    )} ${globalPropsString} ${breakpointClassNames}`,
+    )} ${globalPropsString}`,
     afterOpen: "pb_drawer_after_open",
     beforeClose: "pb_drawer_before_close",
   };
