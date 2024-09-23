@@ -1,7 +1,8 @@
 name: Comment on Push better
 
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   add-comment:
@@ -19,4 +20,4 @@ jobs:
           curl -H "Authorization: token ${GITHUB_TOKEN}" \
               -X POST \
               -d '{"body": "🎉 Congratulations "}' \
-                "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
+              "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
