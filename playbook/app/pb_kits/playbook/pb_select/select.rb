@@ -84,6 +84,10 @@ module Playbook
         end
       end
 
+      def angle_down_path
+        "app/pb_kits/playbook/utilities/icons/angle-down.svg"
+      end
+
     private
 
       def error_class
