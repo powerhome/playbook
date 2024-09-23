@@ -6,44 +6,35 @@ jobs:
   leave-pr-comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.11.0'
-
-      - name: Install Dependencies
-        run: |
-          yarn install
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Get Current Version
         id: get-version
         run: |
-          current_npm_version=$(node -pe "require('./package.json').version")
+          current_npm_version=$(jq -r '.version' package.json)
           echo "current_npm_version=${current_npm_version}" >> $GITHUB_ENV
-          current_ruby_version=$(echo $current_npm_version | sed 's/-rc\./.pre.rc./')
+          current_ruby_version=$(echo "${current_npm_version}" | sed 's/-rc\./.pre.rc./')
           echo "current_ruby_version=${current_ruby_version}" >> $GITHUB_ENV
 
-      - name: Get PR number from commit SHA
+      - name: Get PR Number from Commit SHA
         id: get_pr_number
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { data: prs } = await github.repos.listPullRequestsAssociatedWithCommit({
+            const prs = await github.repos.listPullRequestsAssociatedWithCommit({
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: context.sha,
             });
-            if (prs.length > 0) {
-              const pr_number = prs[0].number;
-              core.setOutput('pr_number', pr_number.toString());
+            if (prs.data.length > 0) {
+              core.setOutput('pr_number', prs.data[0].number.toString());
             } else {
               core.setOutput('pr_number', '');
             }
 
-      - name: Leave PR comment
+      - name: Leave PR Comment
         if: steps.get_pr_number.outputs.pr_number != ''
         env:
           PR_NUMBER: ${{ steps.get_pr_number.outputs.pr_number }}
@@ -55,5 +46,5 @@ jobs:
         run: |
           curl -H "Authorization: token ${GITHUB_TOKEN}" \
             -X POST \
-            -d '{"body": "🚀 **Current Version Information**\n\n🔹 **RubyGems Version:** [${{ env.RUBY_GEM_VERSION }}](${{ env.RUBY_GEM_LINK }})\n🔹 **NPM Version:** [${{ env.NPM_VERSION }}](${{ env.NPM_LINK }})"}' \
+            -d "{\"body\": \"🚀 **Current Version Information**\n\n🔹 **RubyGems Version:** [${RUBY_GEM_VERSION}](${RUBY_GEM_LINK})\n🔹 **NPM Version:** [${NPM_VERSION}](${NPM_LINK})\"}" \
             "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
