@@ -1,4 +1,4 @@
-name: Comment on Push
+name: Comment on Push better
 
 on:
   push:
@@ -11,20 +11,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Add Comment to Commit
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const branchName = '${{ github.ref_name }}';
-            const commitSha = '${{ github.sha }}';
-            const commentBody = `Hello ${branchName}`;
-
-            await github.rest.repos.createCommitComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: commitSha,
-              body: commentBody
-            });
-
-            console.log(`Comment added to commit ${commitSha} on branch ${branchName}`);
+      - name: Leave PR comment
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -H "Authorization: token ${GITHUB_TOKEN}" \
+              -X POST \
+              -d '{"body": "🎉 Congratulations "}' \
+                "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
