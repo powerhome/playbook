@@ -12,6 +12,7 @@ import Icon from '../pb_icon/_icon'
 import PbReactPopover from '../pb_popover/_popover'
 import TextInput from '../pb_text_input/_text_input'
 import { GenericObject } from "../types"
+import { getAllIcons } from "../utilities/icons/allicons"
 
 type PassphraseProps = {
   aria?: { [key: string]: string },
@@ -96,6 +97,9 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
     />
   )
 
+  const shieldIcon = getAllIcons()["shieldCheck"]
+  const eyeIcon = getAllIcons()["eye"]
+
   return (
     <div
         {...ariaProps}
@@ -135,7 +139,8 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
                         size="xs"
                     >
                       <Icon
-                          icon="shield-check"
+                          className="svg-inline--fa"
+                          customIcon={shieldIcon.icon as unknown as { [key: string]: SVGElement }}
                           marginRight="xs"
                       />
                       {tip}
@@ -173,7 +178,10 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
                 color="light"
                 dark={dark}
             >
-              <Icon icon="eye" />
+            <Icon  
+                className="svg-inline--fa"
+                customIcon={eyeIcon.icon as unknown as { [key: string]: SVGElement }}
+            />
             </Body>
           </span>
         </div>

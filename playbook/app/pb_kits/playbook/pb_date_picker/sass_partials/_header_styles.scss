@@ -76,7 +76,11 @@
   pointer-events: none;
   color: $text_lt_light;
 }
-
+.year-dropdown-icon svg, .month-dropdown-icon svg {
+  width: 16px;
+  margin-top: 6px;
+  margin-left: -2px;
+}
 // Left - Right Arrow Styling
 .flatpickr-prev-month {
   display: flex;

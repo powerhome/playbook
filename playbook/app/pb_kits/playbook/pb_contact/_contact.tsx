@@ -7,6 +7,7 @@ import { globalProps } from '../utilities/globalProps'
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
 import Icon from '../pb_icon/_icon'
+import { getAllIcons } from "../utilities/icons/allicons"
 
 const contactTypeMap: { [key: string]: string } = {
   'cell': 'mobile',
@@ -17,6 +18,8 @@ const contactTypeMap: { [key: string]: string } = {
   'work-cell': 'phone-laptop',
   'wrong-phone': 'phone-slash',
 }
+
+const envelopeIcon = getAllIcons()["envelope"].icon as unknown as { [key: string]: SVGElement }
 
 const formatContact = (contactString: string, contactType: string) => {
   if (contactType === 'email') return contactString
@@ -91,11 +94,20 @@ const Contact = (props: ContactProps): React.ReactElement => {
           dark={dark}
           tag="span"
       >
-        <Icon
-            dark={dark}
-            fixedWidth
-            icon={contactTypeMap[contactType] || 'phone'}
-        />
+          {contactType === 'email' ? (
+            <Icon 
+                className="svg-inline--fa envelope"
+                customIcon={envelopeIcon} 
+                dark={dark} 
+                fixedWidth 
+            />
+          ) : (
+            <Icon
+                dark={dark}
+                fixedWidth
+                icon={contactTypeMap[contactType] || 'phone'}
+            />
+          )}
         {` ${formatContact(contactValue, contactType)} `}
         {contactDetail && (
           <Caption
