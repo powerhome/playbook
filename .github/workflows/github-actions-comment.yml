@@ -1,0 +1,59 @@
+name: Leave PR Comment on Push
+on:
+  push
+
+jobs:
+  leave-pr-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.0'
+
+      - name: Install Dependencies
+        run: |
+          yarn install
+
+      - name: Get Current Version
+        id: get-version
+        run: |
+          current_npm_version=$(node -pe "require('./package.json').version")
+          echo "current_npm_version=${current_npm_version}" >> $GITHUB_ENV
+          current_ruby_version=$(echo $current_npm_version | sed 's/-rc\./.pre.rc./')
+          echo "current_ruby_version=${current_ruby_version}" >> $GITHUB_ENV
+
+      - name: Get PR number from commit SHA
+        id: get_pr_number
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: prs } = await github.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+            });
+            if (prs.length > 0) {
+              const pr_number = prs[0].number;
+              core.setOutput('pr_number', pr_number.toString());
+            } else {
+              core.setOutput('pr_number', '');
+            }
+
+      - name: Leave PR comment
+        if: steps.get_pr_number.outputs.pr_number != ''
+        env:
+          PR_NUMBER: ${{ steps.get_pr_number.outputs.pr_number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUBY_GEM_VERSION: ${{ env.current_ruby_version }}
+          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{ env.current_ruby_version }}
+          NPM_VERSION: ${{ env.current_npm_version }}
+          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{ env.current_npm_version }}
+        run: |
+          curl -H "Authorization: token ${GITHUB_TOKEN}" \
+            -X POST \
+            -d '{"body": "🚀 **Current Version Information**\n\n🔹 **RubyGems Version:** [${{ env.RUBY_GEM_VERSION }}](${{ env.RUBY_GEM_LINK }})\n🔹 **NPM Version:** [${{ env.NPM_VERSION }}](${{ env.NPM_LINK }})"}' \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
