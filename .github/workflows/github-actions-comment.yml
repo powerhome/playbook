@@ -21,7 +21,7 @@ jobs:
           RUBY_GEM_VERSION: '1.0.0' 
           RUBY_GEM_LINK: 'https://rubygems.org/gems/playbook-ui/versions/1.0.0' 
           NPM_VERSION: '1.0.0' 
-          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/1.0.0'
+          NPM_LINK: 'https://www.npmjs.com/package/playbook-ui/v/1.0.0'
         run: |
           curl -H "Authorization: token ${GITHUB_TOKEN}" \
               -X POST \
