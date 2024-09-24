@@ -1,4 +1,4 @@
-/*eslint-disable react/no-multi-comp */
+/*eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
 
 import React, { forwardRef } from 'react'
 import Body from '../pb_body/_body'
