@@ -5,39 +5,15 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  add-comment:
+  comment:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: Test
-        uses: actions/github-script@0.3.0
-        id: get_issue_number
+      - uses: actions/github-script@v7
         with:
-              script: |
-                if (context.issue.number) {
-                  // Return issue number if present
-                  return context.issue.number;
-                } else {
-                  // Otherwise return issue number from commit
-                  return (
-                    await github.rest.repos.listPullRequestsAssociatedWithCommit({
-                      commit_sha: context.sha,
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                    })
-                  ).data[0].number;
-                }
-              result-encoding: string
-      - name: Issue number
-        run: echo '${{steps.get_issue_number.outputs.result}}'
-      - name: Leave PR comment
-        env:
-          PR_NUMBER: ${{ steps.get_issue_number.outputs.result }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          curl -H "Authorization: token ${GITHUB_TOKEN}" \
-              -X POST \
-              -d '{"body": "🎉 Congratulations "}' \
-              "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Context test'
+            })
