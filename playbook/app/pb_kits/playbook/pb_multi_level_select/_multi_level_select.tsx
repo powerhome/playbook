@@ -34,6 +34,7 @@ type MultiLevelSelectProps = {
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[]
   variant?: "multi" | "single"
+  pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
 } & GlobalProps
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
@@ -50,7 +51,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     treeData,
     onSelect = () => null,
     selectedIds,
-    variant = "multi"
+    variant = "multi",
+    pillColor = "primary"
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -85,6 +87,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     value: "",
     item: []
   })
+
+  const arrowDownElementId = `arrow_down_${id}`
+  const arrowUpElementId = `arrow_up_${id}`
 
   const modifyRecursive = (tree: { [key: string]: any }[], check: boolean) => {
     if (!Array.isArray(tree)) {
@@ -171,7 +176,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   useEffect(() => {
     // Function to handle clicks outside the dropdown
     const handleClickOutside = (event: any) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        event.target.id !== arrowDownElementId &&
+        event.target.id !== arrowUpElementId
+      ) {
         setIsDropdownClosed(true)
       }
     }
@@ -258,7 +268,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
-    e.stopPropagation()
     if (
       e.target.id === "multiselect_input" ||
       e.target.classList.contains("pb_form_pill_tag")
@@ -467,6 +476,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 inputDisplay === "pills"
                   ? returnedArray.map((item, index) => (
                       <FormPill
+                          color={pillColor}
                           key={index}
                           onClick={(event: any) => handlePillClose(event, item)}
                           text={item.label}
@@ -479,6 +489,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 inputDisplay === "pills"
                   ? defaultReturn.map((item, index) => (
                       <FormPill
+                          color={pillColor}
                           key={index}
                           onClick={(event: any) => handlePillClose(event, item)}
                           text={item.label}
@@ -514,16 +525,20 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           </div>
 
           {isDropdownClosed ? (
-            <div key="chevron-down">
+            <div id={arrowDownElementId}
+                key="chevron-down">
               <Icon
                   icon="chevron-down"
+                  id={arrowDownElementId}
                   size="xs"
               />
             </div>
           ) : (
-            <div key="chevron-up">
+            <div id={arrowUpElementId}
+                key="chevron-up">
               <Icon
                   icon="chevron-up"
+                  id={arrowUpElementId}
                   size="xs"
               />
             </div>

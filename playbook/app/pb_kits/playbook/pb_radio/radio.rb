@@ -20,6 +20,8 @@ module Playbook
                   default: "Radio Text"
       prop :value, type: Playbook::Props::String,
                    default: "radio_text"
+      prop :custom_children, type: Playbook::Props::Boolean,
+                             default: false
 
       def classname
         generate_classname("pb_radio_kit") + error_class + alignment_class
@@ -34,7 +36,7 @@ module Playbook
       end
 
       def input
-        radio_button_tag(name, value, checked, input_options.merge(disabled: disabled))
+        radio_button_tag(name, value, checked, input_options.merge(disabled: disabled || input_options[:disabled]))
       end
 
     private

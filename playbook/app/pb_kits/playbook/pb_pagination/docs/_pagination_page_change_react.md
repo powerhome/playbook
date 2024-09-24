@@ -1,1 +1,3 @@
 You can use the `onChange` prop to control the data of your table. This prop is callback function that will allow you control the state.
+
+To ensure synchronization between multiple pagination components on a single page, use unique, dynamic keys for each pagination instance. Each Pagination component should have its own dynamic key that reflects the current active page: this example uses `pagination-top-${activePage}` and `pagination-bottom-${activePage}`.

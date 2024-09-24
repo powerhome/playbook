@@ -259,6 +259,7 @@ $solar:                 $product_4_background !default; // deprecated
 $roofing:               $product_5_background !default; // deprecated
 $gutters:               $product_6_background !default; // deprecated
 $insulation:            $product_7_background !default; // deprecated
+$accessories:           $product_8_background !default; // added specifically for form_pill product map
 $product_colors: (
   windows:                $windows,
   siding:                 $siding,
@@ -267,6 +268,7 @@ $product_colors: (
   roofing:                $roofing,
   gutters:                $gutters,
   insulation:             $insulation,
+  accessories:            $accessories,
   product_1_background:   $product_1_background,
   product_1_highlight:    $product_1_highlight,
   product_2_background:   $product_2_background,

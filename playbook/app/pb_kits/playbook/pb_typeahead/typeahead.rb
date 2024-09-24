@@ -34,9 +34,16 @@ module Playbook
       prop :search_term_minimum_length, default: 3
       prop :search_debounce_timeout, default: 250
       prop :value
+      prop :margin_bottom, type: Playbook::Props::Enum,
+                           values: %w[none xxs xs sm md lg xl],
+                           default: "sm"
+      prop :pill_color, type: Playbook::Props::Enum,
+                        values: %w[primary neutral success warning error info data_1 data_2 data_3 data_4 data_5 data_6 data_7 data_8 windows siding roofing doors gutters solar insulation accessories],
+                        default: "primary"
 
       def classname
-        generate_classname("pb_typeahead_kit")
+        default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
+        generate_classname("pb_typeahead_kit") + default_margin_bottom
       end
 
       def inline_class
@@ -58,6 +65,7 @@ module Playbook
       def typeahead_react_options
         base_options = {
           className: classname,
+          pillColor: pill_color,
           dark: dark,
           defaultValue: default_options,
           error: error,
@@ -65,6 +73,7 @@ module Playbook
           inline: inline,
           isMulti: is_multi,
           label: label,
+          marginBottom: margin_bottom,
           multiKit: multi_kit,
           name: name,
           options: options,
