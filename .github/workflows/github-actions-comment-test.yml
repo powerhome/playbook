@@ -13,17 +13,29 @@ jobs:
         uses: actions/checkout@v3
       - name: Test
         uses: actions/github-script@0.3.0
+        id: get_issue_number
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const core = require('@actions/core')
-            const prNumber = context.payload.number;
-            core.exportVariable('PULL_NUMBER', prNumber);
+              script: |
+                if (context.issue.number) {
+                  // Return issue number if present
+                  return context.issue.number;
+                } else {
+                  // Otherwise return issue number from commit
+                  return (
+                    await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                      commit_sha: context.sha,
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                    })
+                  ).data[0].number;
+                }
+              result-encoding: string
+      - name: Issue number
+        run: echo '${{steps.get_issue_number.outputs.result}}'
       - name: Leave PR comment
         env:
-          PR_NUMBER: ${{ PULL_NUMBER }}
+          PR_NUMBER: ${{ steps.get_issue_number.outputs.result }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
         run: |
           curl -H "Authorization: token ${GITHUB_TOKEN}" \
               -X POST \
