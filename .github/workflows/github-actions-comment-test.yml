@@ -1,0 +1,29 @@
+name: Comment on Push better
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  add-comment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Get Pull Request Number
+        id: pr
+        run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Leave PR comment
+        env:
+          PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        run: |
+          curl -H "Authorization: token ${GITHUB_TOKEN}" \
+              -X POST \
+              -d '{"body": "🎉 Congratulations "}' \
+              "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
