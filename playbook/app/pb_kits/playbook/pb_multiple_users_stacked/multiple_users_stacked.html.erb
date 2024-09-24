@@ -1,14 +1,18 @@
 <%= pb_content_tag do %>
-  <%= pb_rails("avatar", props: object.users[0].merge({size: "xs", classname: "pb_multiple_users_stacked_item", dark: object.dark}) ) %>
+  <%= pb_rails("avatar", props: object.users[0].merge({size: object.bubble ? "sm" : "xs", classname: "pb_multiple_users_stacked_item first_item#{object.triple_bubble ? " triple_bubble" : ""}#{object.quadruple_bubble ? " quadruple_bubble" : ""}", dark: object.dark}) ) %>
 
   <% unless object.only_one %>
-    <% if object.more_than_two %>
+    <% if object.more_than_two && !object.bubble %>
       <%= pb_rails("badge", props: {
         dark: object.dark,
         text: "+#{object.users.count - object.display_count}",
         variant: "primary",
         rounded: true,
         classname: "pb_multiple_users_stacked_item second_item" }) %>
+    <% elsif object.bubble %>
+      <% object.users.slice(1,3).each_with_index do |item, idx| %>
+        <%= pb_rails("avatar", props: item.merge({size: "xs", classname: "pb_multiple_users_stacked_item #{idx == 0 ? "second_item#{object.triple_bubble ? " triple_bubble" : ""}#{object.quadruple_bubble ? " quadruple_bubble" : ""}" : idx == 1 ? "third_item#{object.quadruple_bubble ? " quadruple_bubble" : ""}" : "fourth_item"}", dark: object.dark}) ) %>
+      <% end %>
     <% else %>
       <%= pb_rails("avatar", props: object.users[1].merge({size: "xs", classname: "pb_multiple_users_stacked_item second_item", dark: object.dark}) ) %>
     <% end %>

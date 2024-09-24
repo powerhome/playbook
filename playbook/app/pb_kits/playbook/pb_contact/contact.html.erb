@@ -4,12 +4,20 @@
         classname: "pb_contact_kit", 
         color: "light",
         dark: object.dark
-      }) do %>
-    <%= pb_rails("icon", props: { 
-          icon: object.contact_icon, 
-          fixed_width: true,
-          dark: object.dark
-        }) %>
+  }) do %>
+    <% if contact_type == "email" %>
+      <%= pb_rails("icon", props: { 
+            custom_icon: Playbook::Engine::root.join(envelope_path),
+            fixed_width: true,
+            dark: object.dark
+      }) %>
+    <% else %>
+      <%= pb_rails("icon", props: { 
+            icon: object.contact_icon, 
+            fixed_width: true,
+            dark: object.dark
+      }) %>
+    <% end %>
     <%= object.formatted_contact_value if object.contact_value %>
 
     <%= pb_rails("caption", props: { 
