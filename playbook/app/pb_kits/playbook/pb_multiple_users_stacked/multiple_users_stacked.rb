@@ -5,8 +5,8 @@ module Playbook
     class MultipleUsersStacked < Playbook::KitBase
       prop :users, type: Playbook::Props::HashArray, required: true
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[sm md lg xl],
-                  default: "md"
+                  values: %w[xs sm md lg xl],
+                  default: "xs"
 
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default bubble],
@@ -34,6 +34,20 @@ module Playbook
 
       def quadruple_bubble
         bubble && users.count > 3
+      end
+
+      def other_users_size
+        bubble_size_map[size.to_sym]
+      end
+
+      def bubble_size_map
+        {
+          "xs": %w[xs xxs],
+          "sm": %w[xs xxs],
+          "md": %w[sm xs],
+          "lg": %w[md sm],
+          "xl": %w[lg md],
+        }
       end
 
       def classname
