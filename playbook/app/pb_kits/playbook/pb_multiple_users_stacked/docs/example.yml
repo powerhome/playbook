@@ -3,6 +3,7 @@ examples:
   rails:
   - multiple_users_stacked_default: Default
   - multiple_users_stacked_bubble: Bubble
+  - multiple_users_stacked_size: Sizes
 
 
   react:

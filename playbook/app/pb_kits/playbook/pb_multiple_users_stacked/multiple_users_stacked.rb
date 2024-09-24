@@ -4,6 +4,9 @@ module Playbook
   module PbMultipleUsersStacked
     class MultipleUsersStacked < Playbook::KitBase
       prop :users, type: Playbook::Props::HashArray, required: true
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[sm md lg xl],
+                  default: "md"
 
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default bubble],
@@ -34,7 +37,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_multiple_users_stacked_kit", single_class, bubble_class)
+        generate_classname("pb_multiple_users_stacked_kit", single_class, bubble_class, "size_#{size}")
       end
 
     private
