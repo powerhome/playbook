@@ -8,8 +8,8 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - name: comment-two
-        uses: actions/checkout@v3
+      - name: Leave PR comment
+        uses: actions/github-script@v7
         env:
           AVAR: '789'
         with:
