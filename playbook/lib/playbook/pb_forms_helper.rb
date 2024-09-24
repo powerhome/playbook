@@ -22,8 +22,9 @@ module Playbook
     # @param data [Hash] hash of data attributes
     # @param validate [Boolean] whether validation should be triggered or not
     # @see [#form_with] for other options
-    def pb_form_with(data: {}, validate: false, **kwargs, &block)
+    def pb_form_with(data: {}, validate: false, loading: false, **kwargs, &block)
       data = data.merge("pb-form-validation" => validate)
+      data = data.merge("pb-form-loading" => loading)
       classname = ["pb-form", kwargs[:class]].join(" ")
       options = kwargs.merge(
         class: classname,
