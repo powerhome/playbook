@@ -29,7 +29,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Here is the link to your Ruby Gem: ${env.RUBY_GEM_VERSION}'
+              body: `Here is the link to your Ruby Gem: ${process.env.RUBY_GEM_VERSION}`
             })
 
 
