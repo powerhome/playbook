@@ -8,14 +8,18 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      - name: set versions
+        run: |
+          new_ruby_version="123"
+          new_npm_version="456"
       - name: Leave PR comment
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUBY_GEM_VERSION: '123' 
-          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.RUBY_GEM_VERSION}}
-          NPM_VERSION: '456' 
-          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.NPM_VERSION}}
+          RUBY_GEM_VERSION: ${{ env.new_ruby_version }} 
+          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_version}}
+          NPM_VERSION: ${{ env.new_npm_version }} 
+          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_version}}
         run: |
           curl -H "Authorization: token ${GITHUB_TOKEN}" \
               -X POST \
@@ -29,7 +33,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "Here is the link to your Ruby Gem: ${{env.RUBY_GEM_VERSION}}"
+              body: "Here is the link to your Ruby Gem: ${{env.new_ruby_version}} "
             })
 
 
