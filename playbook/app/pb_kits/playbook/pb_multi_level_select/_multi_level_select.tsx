@@ -88,6 +88,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     item: []
   })
 
+  const arrowDownElementId = `arrow_down_${id}`
+  const arrowUpElementId = `arrow_up_${id}`
+
   const modifyRecursive = (tree: { [key: string]: any }[], check: boolean) => {
     if (!Array.isArray(tree)) {
       return
@@ -173,7 +176,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   useEffect(() => {
     // Function to handle clicks outside the dropdown
     const handleClickOutside = (event: any) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        event.target.id !== arrowDownElementId &&
+        event.target.id !== arrowUpElementId
+      ) {
         setIsDropdownClosed(true)
       }
     }
@@ -260,7 +268,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
-    e.stopPropagation()
     if (
       e.target.id === "multiselect_input" ||
       e.target.classList.contains("pb_form_pill_tag")
@@ -518,16 +525,20 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           </div>
 
           {isDropdownClosed ? (
-            <div key="chevron-down">
+            <div id={arrowDownElementId}
+                key="chevron-down">
               <Icon
                   icon="chevron-down"
+                  id={arrowDownElementId}
                   size="xs"
               />
             </div>
           ) : (
-            <div key="chevron-up">
+            <div id={arrowUpElementId}
+                key="chevron-up">
               <Icon
                   icon="chevron-up"
+                  id={arrowUpElementId}
                   size="xs"
               />
             </div>
