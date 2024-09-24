@@ -11,15 +11,17 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: Get Pull Request Number
-        id: pr
-        run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Test
+        uses: actions/github-script@0.3.0
+        with:
+          github-token: ${{github.token}}
+          script: |
+            const core = require('@actions/core')
+            const prNumber = context.payload.number;
+            core.exportVariable('PULL_NUMBER', prNumber);
       - name: Leave PR comment
         env:
-          PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
+          PR_NUMBER: ${{ PULL_NUMBER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         run: |
