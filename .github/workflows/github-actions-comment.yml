@@ -6,7 +6,7 @@ jobs:
   update-file:
     runs-on: ubuntu-latest 
     steps:
-      - name: Get Commit Info and Find Pull Request for Comment
+      - name: aGet Commit Info and Find Pull Request for Comment
         uses: actions/github-script@v6
         env:
           AENV: 'thisisenvvar' 
@@ -40,7 +40,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: `You merged this this pr to master branch: 
-                - Ruby Gem: ${{env.AENV}}
+                - Ruby Gem: [${{env.AENV}}](${{env.AENV}})
                 - NPM: ${{env.AENVTWO}}`
               });
             } else {
