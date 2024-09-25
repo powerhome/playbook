@@ -34,6 +34,8 @@ jobs:
         run: |
           current_npm_version=$(node -pe "require('./package.json').version")
       - name: Get Commit Info and Find Pull Request for Comment
+        env:
+          PR_NUMBER: ${{ current_npm_version }}
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -64,8 +66,8 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: `You merged this this pr to master branch: 
-                - Ruby Gem: ${current_ruby_version}
-                - NPM: ${current_npm_version}`
+                - Ruby Gem: ${PR_NUMBER}
+                - NPM: ${PR_NUMBER}`
               });
             } else {
               console.log('No pull request found for this commit.');
