@@ -1,4 +1,5 @@
-name: Update File with Current Time
+name: Add Comment on Push 
+run-name: ${{ github.actor }} is trying to add a comment on push 
 
 on: [push]
 
