@@ -20,126 +20,123 @@
 }
 
 [class^=pb_multiple_users_stacked_kit] {
-  @each $name, $size in $avatar-sizes {
-    &[class*=_size_#{$name}] {
-      $container_size: $size; 
-      $bubble_container_size: $size; 
-      $overlap: -15px;
-      $border_size: 1px;
-      $stacked_size: 18px;
-      $max_to_display: 1, 2;
-      display: inline-flex;
-      width: $container_size;
-      height: $container_size;
-      flex-basis: $container_size;
-      position: relative;
-      flex-shrink: 0;
-      flex-grow: 0;
-      [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
-        @include avatar-size($stacked_size);
-        &.dark {
-          .avatar_wrapper {
-            border: $border_size solid $bg_dark;
-          }
-        }
+  $container_size: map-get($avatar-sizes, "xs");
+  $bubble_container_size: map-get($avatar-sizes, "sm");
+  $overlap: -15px;
+  $border_size: 1px;
+  $stacked_size: 18px;
+  $max_to_display: 1, 2;
+  display: inline-flex;
+  width: $container_size;
+  height: $container_size;
+  flex-basis: $container_size;
+  position: relative;
+  flex-shrink: 0;
+  flex-grow: 0;
+  [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
+    @include avatar-size($stacked_size);
+    &.dark {
+      .avatar_wrapper {
+        border: $border_size solid $bg_dark;
+      }
+    }
+    .avatar_wrapper {
+      border: $border_size solid $white;
+      img {
+        z-index: 0;
+      }
+    }
+  }
+  &[class*=_single] .pb_multiple_users_stacked_item {
+    @include avatar-size($container_size);
+  }
+  [class^=pb_avatar_kit].second_item, [class^=pb_badge_kit].second_item {
+    @include position((bottom: 0, right: 0));
+    z-index: 2;
+    background: tint($primary, 90%);
+    border-radius: $border_rad_mega;
+    padding: 0;
+    span {
+      transform: translateY(0);
+    }
+    .avatar_wrapper {
+      border: $border_size solid $white;
+      height: $stacked_size;
+      width: $stacked_size;
+
+    }
+  }
+  .stacked_item .avatar_wrapper::before {
+    font-size: 0;
+    color: transparent;
+  }
+
+  &[class*=_bubble] {
+    @include avatar-size($bubble_container_size);
+    background-color: $bg_light;
+    border-radius: 50%;
+
+    &.dark {
+      background-color: $card_dark;
+    }
+    
+    [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
+      &.dark {
         .avatar_wrapper {
-          border: $border_size solid $white;
-          img {
-            z-index: 0;
-          }
+          border: $border_size solid $border_dark;
         }
       }
-      &[class*=_single] .pb_multiple_users_stacked_item {
-      }
-      [class^=pb_avatar_kit].second_item, [class^=pb_badge_kit].second_item {
-        @include position((bottom: 0, right: 0));
-        z-index: 2;
-        background: tint($primary, 90%);
-        border-radius: $border_rad_mega;
-        padding: 0;
-        span {
-          transform: translateY(0);
-        }
-        .avatar_wrapper {
-          border: $border_size solid $white;
-          height: $stacked_size;
-          width: $stacked_size;
+    }
 
-        }
-      }
-      .stacked_item .avatar_wrapper::before {
-        font-size: 0;
-        color: transparent;
-      }
+    [class^=pb_avatar_kit] {
+      &.first_item {
+        @include position((top: 4px, left: 3px));
+        @include avatar-size(20px);
 
-      &[class*=_bubble] {
-        @include avatar-size($bubble_container_size);
-        background-color: $bg_light;
-        border-radius: 50%;
-
-        &.dark {
-          background-color: $card_dark;
-        }
-        
-        [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
-          &.dark {
-            .avatar_wrapper {
-              border: $border_size solid $border_dark;
-            }
-          }
+        &.triple_bubble {
+          @include position((top: 4px, left: 4px));
+          @include avatar-size(16px);
         }
 
-        [class^=pb_avatar_kit] {
-          &.first_item {
-            @include position((top: 4px, left: 3px));
-            @include avatar-size(20px);
-
-            &.triple_bubble {
-              @include position((top: 4px, left: 4px));
-              @include avatar-size(16px);
-            }
-
-            &.quadruple_bubble {
-              @include position((top: 5px, left: 3px));
-              @include avatar-size(16px);
-            }
-          }
-
-          &.second_item {
-            @include position((bottom: 5px, right: 4px));
-            @include avatar-size(12px);
-
-            &.triple_bubble {
-              @include position((top: 13px, right: 2px));
-            }
-
-            &.quadruple_bubble {
-              @include position((bottom: 9px, right: 4px));
-            }
-          }
-
-          &.third_item {
-            @include position((bottom: 3px, left: 11px));
-            @include avatar-size(10px);
-
-            &.quadruple_bubble {
-              @include position((bottom: 3px, left: 9px));
-            }
-          }
-
-          &.fourth_item {
-            @include position((top: 5px, right: 6px));
-            @include avatar-size(8px);
-          }
+        &.quadruple_bubble {
+          @include position((top: 5px, left: 3px));
+          @include avatar-size(16px);
         }
       }
 
-      &[class*=_single_bubble] {
-        [class^=pb_avatar_kit].first_item {
-          @include position((top: 0, left: 0));
-          @include avatar-size($bubble_container_size);
+      &.second_item {
+        @include position((bottom: 5px, right: 4px));
+        @include avatar-size(12px);
+
+        &.triple_bubble {
+          @include position((top: 13px, right: 2px));
+        }
+
+        &.quadruple_bubble {
+          @include position((bottom: 9px, right: 4px));
         }
       }
+
+      &.third_item {
+        @include position((bottom: 3px, left: 11px));
+        @include avatar-size(10px);
+
+        &.quadruple_bubble {
+          @include position((bottom: 3px, left: 9px));
+        }
+      }
+
+      &.fourth_item {
+        @include position((top: 5px, right: 6px));
+        @include avatar-size(8px);
+      }
+    }
+  }
+
+  &[class*=_single_bubble] {
+    [class^=pb_avatar_kit].first_item {
+      @include position((top: 0, left: 0));
+      @include avatar-size($bubble_container_size);
     }
   }
 }
