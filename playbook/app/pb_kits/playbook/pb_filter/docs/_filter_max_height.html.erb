@@ -38,7 +38,7 @@
       <%= action.submit props: {
         text: "Apply",
         data: {
-          disable_with: "<i>pb_rails('icon', props: { icon: 'spinner', spin: true, fixed_width: true })</i>Searching...".html_safe
+          disable_with: "pb_rails('icon', props: { icon: 'spinner', spin: true, fixed_width: true })Searching...".html_safe
       },}%>
       <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
     <% end %>

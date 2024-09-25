@@ -2,7 +2,9 @@
     <%= pb_rails("flex", props: {align: "center"}) do %>
         Filter By
         <%= pb_rails("flex/flex_item", props: {margin_left: "xxs"}) do %>
-        <div id="arrow-icon" style="display: flex"></div>
+            <div id="arrow-icon" style="display: flex">
+                <%= pb_rails("icon", props: { icon: "chevron-down", fixed_width: true }) %>
+            </div>
         <% end %>
     <% end %>
 <% end %>
@@ -18,18 +20,17 @@
 
 
 <script type="text/javascript">
-const button = document.querySelector("#list")
-let buttonClicked = false
+    const popoverButton = document.querySelector("#list")
+    let buttonClicked = false
 
-const arrowDiv = document.querySelector("#arrow-icon")
-arrowDiv.innerHTML = '<i> pb_rails("icon", props: { icon: "arrow-down", fixed_width: true }) </i>'
+    const arrowDiv = document.querySelector("#arrow-icon")
 
-button.onclick = () => {
-    buttonClicked = !buttonClicked
-    if (buttonClicked) {
-        arrowDiv.innerHTML = '<i> pb_rails("icon", props: { icon: "arrow-up", fixed_width: true }) </i>'
-    } else {
-        arrowDiv.innerHTML = '<i> pb_rails("icon", props: { icon: "arrow-down", fixed_width: true }) </i>'
+    popoverButton.onclick = () => {
+        buttonClicked = !buttonClicked
+        if (buttonClicked) {
+            arrowDiv.innerHTML = '<i class="far fa-angle-up"></i>'
+        } else {
+            arrowDiv.innerHTML = '<i class="far fa-angle-down"></i>'
+        }
     }
-}
 </script>
