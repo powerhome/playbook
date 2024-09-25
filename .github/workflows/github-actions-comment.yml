@@ -1,0 +1,71 @@
+name: Update File with Current Time
+
+on: [push]
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v3
+      - name: 'Enable registry auth'
+        shell: bash
+        run: |
+          echo "//registry.npmjs.org/:_authToken="$(echo -n '${{ secrets.NPM_TOKEN }}')"" >> ~/.npmrc
+          echo "//npm.powerapp.cloud/:_auth="$(echo -n 'gh-actions:${{ secrets.POWERHOME_NPM_REGISTRY_PASSWORD }}' | base64)"" >> ~/.npmrc
+          echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.11.0
+      - name: Ruby Setup
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Python Setup
+        uses: actions/setup-python@v4 
+        with: 
+          python-version: '3.9'
+      - name: Set Git Config
+        run: |
+          git config --local user.name "${{ github.actor }}"
+          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Grab Current Version and Set New RC Version
+        id: set-version
+        run: |
+          current_npm_version=$(node -pe "require('./package.json').version")
+      - name: Get Commit Info and Find Pull Request for Comment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const commitSha = context.payload.head_commit.id;
+            const commitMessage = context.payload.head_commit.message;
+            const commitAuthor = context.payload.head_commit.author.name;
+            const commitUrl = context.payload.head_commit.url;
+
+            console.log(`Commit message: ${commitMessage}`);
+            console.log(`Commit author: ${commitAuthor}`);
+            console.log(`Commit URL: ${commitUrl}`);
+
+            // Get the PR related to this commit using octokit API
+            const pullRequests = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: commitSha
+            });
+
+            if (pullRequests.data.length > 0) {
+              const pullRequestNumber = pullRequests.data[0].number;
+              console.log(`Found pull request #${pullRequestNumber} for commit ${commitSha}`);
+
+              // Add a comment to the pull request
+              await github.rest.issues.createComment({
+                issue_number: pullRequestNumber,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `You merged this this pr to master branch: 
+                - Ruby Gem: ${commitMessage}
+                - NPM: ${commitAuthor}`
+              });
+            } else {
+              console.log('No pull request found for this commit.');
+            }
