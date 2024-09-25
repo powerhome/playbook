@@ -1,5 +1,4 @@
-name: Add Comment on Push 
-run-name: ${{ github.actor }} is trying to add a comment on push 
+name: Update File with Current Time
 
 on: [push]
 
@@ -7,34 +6,11 @@ jobs:
   update-file:
     runs-on: ubuntu-latest 
     steps:
-      - uses: actions/checkout@v3
-      - name: 'Enable registry auth'
-        shell: bash
-        run: |
-          echo "//registry.npmjs.org/:_authToken="$(echo -n '${{ secrets.NPM_TOKEN }}')"" >> ~/.npmrc
-          echo "//npm.powerapp.cloud/:_auth="$(echo -n 'gh-actions:${{ secrets.POWERHOME_NPM_REGISTRY_PASSWORD }}' | base64)"" >> ~/.npmrc
-          echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20.11.0
-      - name: Ruby Setup
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: Python Setup
-        uses: actions/setup-python@v4 
-        with: 
-          python-version: '3.9'
-      - name: Set Git Config
-        run: |
-          git config --local user.name "${{ github.actor }}"
-          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-      - name: Grab Current Version and Set New RC Version
-        id: set-version
-        run: |
-          current_npm_version=$(node -pe "require('./package.json').version")
       - name: Get Commit Info and Find Pull Request for Comment
         uses: actions/github-script@v6
+        env:
+          AENV: 'thisisenvvar' 
+          AENVTWO: 'thisanotherisenvvar' 
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -64,8 +40,8 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: `You merged this this pr to master branch: 
-                - Ruby Gem: ${commitMessage}
-                - NPM: ${current_npm_version}`
+                - Ruby Gem: ${AENV}
+                - NPM: ${AENVTWO}`
               });
             } else {
               console.log('No pull request found for this commit.');
