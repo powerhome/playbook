@@ -145,5 +145,5 @@ jobs:
                 - NPM: [${{env.NPM_VERSION}}](${{env.NPM_LINK}})`
               });
             } else {
-              console.log('No pull request found for this commit.');
+              console.log('No pull request found for this commit');
             }
