@@ -40,8 +40,8 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: `You merged this this pr to master branch: 
-                - Ruby Gem: ${env.AENV}
-                - NPM: ${env.AENVTWO}`
+                - Ruby Gem: ${{env.AENV}}
+                - NPM: ${{env.AENVTWO}}`
               });
             } else {
               console.log('No pull request found for this commit.');
