@@ -64,8 +64,8 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: `You merged this this pr to master branch: 
-                - Ruby Gem: ${commitMessage}
-                - NPM: ${commitAuthor}`
+                - Ruby Gem: ${current_ruby_version}
+                - NPM: ${current_npm_version}`
               });
             } else {
               console.log('No pull request found for this commit.');
