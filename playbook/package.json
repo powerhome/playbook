@@ -50,7 +50,7 @@
     "@codesandbox/sandpack-react": "^2.12.1",
     "@floating-ui/react": "^0.22.2",
     "@rollup/plugin-typescript": "^11.1.6",
-    "@rollup/pluginutils": "^5.1.0",
+    "@rollup/pluginutils": "^5.1.2",
     "@tanstack/react-table": "8.9.2",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "11.2.7",
