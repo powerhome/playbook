@@ -36,7 +36,7 @@ type DropdownProps = {
     onSelect?: (arg: GenericObject) => null;
     options: GenericObject;
     triggerRef?: any;
-    variant?: string;
+    variant?: "primary" | "subtle";
 };
 
 const Dropdown = (props: DropdownProps) => {
@@ -57,7 +57,7 @@ const Dropdown = (props: DropdownProps) => {
         onSelect,
         options,
         triggerRef,
-        variant
+        variant = "primary"
     } = props;
 
     const ariaProps = buildAriaProps(aria);

@@ -20,13 +20,13 @@ const DropdownSubtleVariant = (props) => {
 
 
   return (
-  <div>
-    <Dropdown
-        options={options}
-        variant="subtle"
-        {...props}
-    />
-  </div>
+    <>
+      <Dropdown
+          options={options}
+          variant="subtle"
+          {...props}
+      />
+    </>
   )
 }
 
