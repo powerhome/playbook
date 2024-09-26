@@ -66,8 +66,8 @@ const Dropdown = (props: DropdownProps) => {
     const classes = classnames(
         buildCss("pb_dropdown"),
         globalProps(props),
-        className,
-        variant
+        variant,
+        className
     );
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
