@@ -28,6 +28,10 @@ module Playbook
         variant == "bubble"
       end
 
+      def double_bubble
+        bubble && users.count === 2
+      end
+
       def triple_bubble
         bubble && users.count === 3
       end

@@ -92,90 +92,104 @@ $avatar-sizes: (
     color: transparent;
   }
 
-  // Iterate over each size to adjust the bubble container
+  // Iterate over each size to adjust the bubble container only when class contains "_bubble_"
   @each $size_name, $size_value in $avatar-sizes {
-    &[class*=_size_#{$size_name}] {
-      // Set bubble container size based on the class
-      $bubble_container_size: $size_value;
-      $container_size: $size_value;
-
-      // Apply the bubble container size
-      @include avatar-size($bubble_container_size);
-      width: $bubble_container_size;
-      height: $bubble_container_size;
-      flex-basis: $bubble_container_size;
-
-      background-color: $bg_light;
-      border-radius: 50%;
-
-      &.dark {
-        background-color: $card_dark;
-      }
-
-      [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
-        @include avatar-size($bubble_container_size * 0.45); // Adjust the size of stacked avatars
-
+      &[class*=_bubble_][class*=_size_#{$size_name}] {
+        // Set bubble container size based on the class
+        $bubble_container_size: $size_value;
+        $container_size: $size_value;
+  
+        // Apply the bubble container size
+        @include avatar-size($bubble_container_size);
+        width: $bubble_container_size;
+        height: $bubble_container_size;
+        flex-basis: $bubble_container_size;
+  
+        background-color: $bg_light;
+        border-radius: 50%;
+  
         &.dark {
+          background-color: $card_dark;
+        }
+  
+        [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
+          @include avatar-size($bubble_container_size * 0.45); // Adjust the size of stacked avatars
+  
+          &.dark {
+            .avatar_wrapper {
+              border: $border_size solid $border_dark;
+            }
+          }
+  
           .avatar_wrapper {
-            border: $border_size solid $border_dark;
+            border: $border_size solid $white;
           }
         }
-
-        .avatar_wrapper {
-          border: $border_size solid $white;
-        }
-      }
-
-      [class^=pb_avatar_kit] {
-        &.first_item {
-          @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
-          @include avatar-size($bubble_container_size * 0.5); // Adjust factor as needed
-
-          &.triple_bubble {
+  
+        [class^=pb_avatar_kit] {
+          // First Item
+          &.first_item {
             @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
-            @include avatar-size($bubble_container_size * 0.4);
+            @include avatar-size($bubble_container_size * 0.5);
+  
+            &.double_bubble {
+              @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
+              @include avatar-size($bubble_container_size * 0.5);
+            }
+  
+            &.triple_bubble {
+              @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
+              @include avatar-size($bubble_container_size * 0.4);
+            }
+  
+            &.quadruple_bubble {
+              @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
+              @include avatar-size($bubble_container_size * 0.4);
+            }
           }
-
-          &.quadruple_bubble {
-            @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
-            @include avatar-size($bubble_container_size * 0.4);
+  
+          // Second Item
+          &.second_item {
+            @include position((bottom: $bubble_container_size * 0.1, right: $bubble_container_size * 0.1));
+            @include avatar-size($bubble_container_size * 0.3);
+  
+            &.double_bubble {
+              @include position((bottom: $bubble_container_size * 0.1, right: $bubble_container_size * 0.1));
+              @include avatar-size($bubble_container_size * 0.3);
+            }
+  
+            &.triple_bubble {
+              @include position((top: $bubble_container_size * 0.2, right: $bubble_container_size * 0.05));
+            }
+  
+            &.quadruple_bubble {
+              @include position((bottom: $bubble_container_size * 0.15, right: $bubble_container_size * 0.1));
+            }
+          }
+  
+          // Third Item
+          &.third_item {
+            @include position((bottom: $bubble_container_size * 0.05, left: $bubble_container_size * 0.3));
+            @include avatar-size($bubble_container_size * 0.25);
+  
+            &.quadruple_bubble {
+              @include position((bottom: $bubble_container_size * 0.05, left: $bubble_container_size * 0.25));
+            }
+          }
+  
+          // Fourth Item
+          &.fourth_item {
+            @include position((top: $bubble_container_size * 0.1, right: $bubble_container_size * 0.15));
+            @include avatar-size($bubble_container_size * 0.2);
           }
         }
-
-        &.second_item {
-          @include position((bottom: $bubble_container_size * 0.1, right: $bubble_container_size * 0.1));
-          @include avatar-size($bubble_container_size * 0.3);
-
-          &.triple_bubble {
-            @include position((top: $bubble_container_size * 0.2, right: $bubble_container_size * 0.05));
+  
+        &[class*=_single_bubble] {
+          [class^=pb_avatar_kit].first_item {
+            @include position((top: 0, left: 0));
+            @include avatar-size($bubble_container_size);
           }
-
-          &.quadruple_bubble {
-            @include position((bottom: $bubble_container_size * 0.15, right: $bubble_container_size * 0.1));
-          }
-        }
-
-        &.third_item {
-          @include position((bottom: $bubble_container_size * 0.05, left: $bubble_container_size * 0.3));
-          @include avatar-size($bubble_container_size * 0.25);
-
-          &.quadruple_bubble {
-            @include position((bottom: $bubble_container_size * 0.05, left: $bubble_container_size * 0.25));
-          }
-        }
-
-        &.fourth_item {
-          @include position((top: $bubble_container_size * 0.1, right: $bubble_container_size * 0.15));
-          @include avatar-size($bubble_container_size * 0.2);
-        }
-      }
-
-      &[class*=_single_bubble] {
-        [class^=pb_avatar_kit].first_item {
-          @include position((top: 0, left: 0));
-          @include avatar-size($bubble_container_size);
         }
       }
     }
   }
-}

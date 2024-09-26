@@ -1,5 +1,15 @@
 <%= pb_content_tag do %>
-  <%= pb_rails("avatar", props: object.users[0].merge({size: object.bubble ? other_users_size[0] : other_users_size[1], classname: "pb_multiple_users_stacked_item first_item#{object.triple_bubble ? " triple_bubble" : ""}#{object.quadruple_bubble ? " quadruple_bubble" : ""}", dark: object.dark}) ) %>
+  <%= pb_rails(
+    "avatar",
+    props: object.users[0].merge({
+      size: object.bubble ? other_users_size[0] : other_users_size[1],
+      classname: "pb_multiple_users_stacked_item first_item" +
+                 (object.double_bubble ? " double_bubble" : "") +
+                 (object.triple_bubble ? " triple_bubble" : "") +
+                 (object.quadruple_bubble ? " quadruple_bubble" : ""),
+      dark: object.dark
+    })
+  ) %>
 
   <% unless object.only_one %>
     <% if object.more_than_two && !object.bubble %>
@@ -8,14 +18,41 @@
         text: "+#{object.users.count - object.display_count}",
         variant: "primary",
         rounded: true,
-        classname: "pb_multiple_users_stacked_item second_item" }) %>
+        classname: "pb_multiple_users_stacked_item second_item"
+      }) %>
     <% elsif object.bubble %>
-      <% object.users.slice(1,3).each_with_index do |item, idx| %>
-        <%= pb_rails("avatar", props: item.merge({size: other_users_size[0], classname: "pb_multiple_users_stacked_item #{idx == 0 ? "second_item#{object.triple_bubble ? " triple_bubble" : ""}#{object.quadruple_bubble ? " quadruple_bubble" : ""}" : idx == 1 ? "third_item#{object.quadruple_bubble ? " quadruple_bubble" : ""}" : "fourth_item"}", dark: object.dark}) ) %>
+      <% object.users.slice(1, 3).each_with_index do |item, idx| %>
+        <% classname = "pb_multiple_users_stacked_item " %>
+        <% if idx == 0 %>
+          <% classname += "second_item" %>
+          <% classname += " double_bubble" if object.double_bubble %>
+          <% classname += " triple_bubble" if object.triple_bubble %>
+          <% classname += " quadruple_bubble" if object.quadruple_bubble %>
+        <% elsif idx == 1 %>
+          <% classname += "third_item" %>
+          <% classname += " quadruple_bubble" if object.quadruple_bubble %>
+        <% else %>
+          <% classname += "fourth_item" %>
+        <% end %>
+
+        <%= pb_rails(
+          "avatar",
+          props: item.merge({
+            size: other_users_size[0],
+            classname: classname,
+            dark: object.dark
+          })
+        ) %>
       <% end %>
     <% else %>
-      <%= pb_rails("avatar", props: object.users[1].merge({size: other_users_size[0], classname: "pb_multiple_users_stacked_item second_item", dark: object.dark}) ) %>
+      <%= pb_rails(
+        "avatar",
+        props: object.users[1].merge({
+          size: other_users_size[0],
+          classname: "pb_multiple_users_stacked_item second_item",
+          dark: object.dark
+        })
+      ) %>
     <% end %>
   <% end %>
-
 <% end %>
