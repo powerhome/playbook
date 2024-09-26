@@ -7,19 +7,16 @@
 
 $selector: ".pb_form_pill";
 $pb_form_pill_height: 27px;
-$form_pill_colors: (
-  primary: map-get($status_color_text, "primary"),
-  neutral: map-get($status_color_text, "neutral"),
-);
+$form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $product_colors));
 
 
 [class^=pb_form_pill_kit] {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0 calc($space-md/2);
+  padding: 0 $space-md/2;
   height: $pb_form_pill_height;
-  border-radius: calc($pb_form_pill_height/2);
+  border-radius: $pb_form_pill_height/2;
   margin-bottom: 2px;
   margin-top: 2px;
   cursor: pointer;
@@ -36,6 +33,18 @@ $form_pill_colors: (
           color: $text_lt_default;
         }
       }
+      @if ($color_name == "warning") {
+        background-color: mix($yellow, $card_light, 10%);
+        .pb_form_pill_icon {
+          color: $yellow;
+        }
+      }
+      @if ($color_name == "accessories") {
+        background-color: mix($product_8_background, $card_light, 10%);
+        .pb_form_pill_icon {
+          color: $product_8_background;
+        }
+      }
       transition: background-color 0.2s ease;
       box-shadow: none;
       @media (hover:hover) {
@@ -45,11 +54,23 @@ $form_pill_colors: (
             background-color: mix($neutral, $card_light, 20%);
             border: 1px solid $border_light;
           }
+          @if ($color_name == "warning") {
+            background-color: mix($yellow, $card_light, 20%);
+          }
+          @if ($color_name == "accessories") {
+            background-color: mix($product_8_background, $card_light, 20%);
+          }
         }
         &:active {
           background-color: mix($color_value, $card_light, 30%);
           @if ($color_name == "neutral") {
             background-color: mix($neutral, $card_light, 30%);
+          }
+          @if ($color_name == "warning") {
+            background-color: mix($yellow, $card_light, 30%);
+          }
+          @if ($color_name == "accessories") {
+            background-color: mix($product_8_background, $card_light, 30%);
           }
         }
       }
@@ -57,6 +78,9 @@ $form_pill_colors: (
         color: $color_value;
         @if ($color_name == "neutral") {
           color: $text_lt_default;
+        }
+        @if ($color_name == "warning") {
+          color: $yellow;
         }
         padding: 0 $space-xs;
       }
@@ -76,12 +100,32 @@ $form_pill_colors: (
             background-color: mix($neutral, $card_light, 60%);
           }
         }
+        @if ($color_name == "warning") {
+          color: $yellow;
+        }
+        &:hover {
+          background-color: mix($color_value, $card_light, 40%);
+          @if ($color_name == "warning") {
+            background-color: mix($yellow, $card_light, 40%);
+          }
+        }
+        @if ($color_name == "accessories") {
+          color: $product_8_background;
+        }
+        &:hover {
+          @if ($color_name == "accessories") {
+            background-color: mix($product_8_background, $card_light, 40%);
+          }
+        }
       }
       #{$selector}_tag {
         color: $color_value;
         padding: 0 $space-xs;
         @if ($color_name == "neutral") {
           color: $text_lt_default;
+        }
+        @if ($color_name == "warning") {
+          color: $yellow;
         }
       }
     }
@@ -132,25 +176,23 @@ $form_pill_colors: (
   }
   &.dark {
     @each $color_name, $color_value in $form_pill_colors {
-      // In dark mode, the base patterns below are needed for the next tickets for success, warning, error, info. 
-      // Primary and Neutral are exceptions to the general rule in the handoff 
       &[class*=_#{$color_name}]  {
-      //   background-color: mix($color_value, $card_dark, 10%);
-        // .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
-        //   color: $color_name;
-        // }
-        // .pb_form_pill_close {
-        //   color: $color_name;
-        //   &:hover {
-        //     background-color: mix($color_value, $card_dark, 40%);
-        //   }
-        // }
-        // &:hover {
-        //   background-color: mix($color_value, $card_dark, 20%);
-        // }
-        // &:active {
-        //   background-color: mix($color_value, $card_dark, 30%);
-        // }
+        background-color: mix($color_value, $card_dark, 10%);
+        .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+          color: $color_name;
+        }
+        .pb_form_pill_close {
+          color: $color_name;
+          &:hover {
+            background-color: mix($color_value, $card_dark, 40%);
+          }
+        }
+        &:hover {
+          background-color: mix($color_value, $card_dark, 20%);
+        }
+        &:active {
+          background-color: mix($color_value, $card_dark, 30%);
+        }
         @if ($color_name == "neutral") {
           background-color: transparent;
           border: 1px solid $border_dark;
@@ -185,10 +227,190 @@ $form_pill_colors: (
             }
           }
           &:hover {
-            background-color: mix($active_dark, $card_dark, 20px);
+            background-color: mix($active_dark, $card_dark, 20%);
           }
           &:active {
             background-color: mix($active_dark, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "data_1") {
+          background-color: mix($active_dark, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: mix($active_dark, $card_light, 90%);
+          }
+          .pb_form_pill_close {
+            color: mix($active_dark, $card_light, 90%);
+            &:hover {
+              background-color: mix($active_dark, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($active_dark, $card_dark, 20%);
+          }
+          &:active {
+            background-color: mix($data_1, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "data_6") {
+          background-color: mix($data_6, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $text_dk_light;
+          }
+          .pb_form_pill_close {
+            color: $text_dk_light;
+            &:hover {
+              background-color: mix($text_dk_light, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($data_6, $card_dark, 20%);
+          }
+          &:active {
+            background-color: mix($data_6, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "windows") {
+          background-color: mix($product_1_highlight, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $product_1_highlight;
+          }
+          .pb_form_pill_close {
+            color: $product_1_highlight;
+            &:hover {
+              background-color: mix($product_1_highlight, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($product_1_highlight, $card_dark, 20%);
+          }
+          &:active {
+            background-color: mix($product_1_highlight, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "siding") {
+          background-color: mix($product_2_highlight, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $product_2_highlight;
+          }
+          .pb_form_pill_close {
+            color: $product_2_highlight;
+            &:hover {
+              background-color: mix($product_2_highlight, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($product_2_highlight, $card_dark, 20%);
+          }
+          &:active {
+            background-color: mix($product_2_highlight, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "roofing") {
+          background-color: mix($product_5_highlight, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $product_5_highlight;
+          }
+          .pb_form_pill_close {
+            color: $product_5_highlight;
+            &:hover {
+              background-color: mix($product_5_highlight, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($product_5_highlight, $card_dark, 20%);
+          }
+          &:active {
+            background-color: mix($product_5_highlight, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "doors") {
+          background-color: mix($product_3_highlight, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $product_3_highlight;
+          }
+          .pb_form_pill_close {
+            color: $product_3_highlight;
+            &:hover {
+              background-color: mix($product_3_highlight, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($product_3_highlight, $card_dark, 20%);
+          }
+          &:active {
+            background-color: mix($product_3_highlight, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "gutters") {
+          background-color: mix($product_6_highlight, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $product_6_highlight;
+          }
+          .pb_form_pill_close {
+            color: $product_6_highlight;
+            &:hover {
+              background-color: mix($product_6_highlight, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($product_6_highlight, $card_dark, 20%);
+          }
+          &:active {
+            background-color: mix($product_6_highlight, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "solar") {
+          background-color: mix($product_4_highlight, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $product_4_highlight;
+          }
+          .pb_form_pill_close {
+            color: $product_4_highlight;
+            &:hover {
+              background-color: mix($product_4_highlight, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($product_4_highlight, $card_dark, 20%);
+          }
+          &:active {
+            background-color: mix($product_4_highlight, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "insulation") {
+          background-color: mix($product_7_highlight, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $product_7_highlight;
+          }
+          .pb_form_pill_close {
+            color: $product_7_highlight;
+            &:hover {
+              background-color: mix($product_7_highlight, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($product_7_highlight, $card_dark, 20%);
+          }
+          &:active {
+            background-color: mix($product_7_highlight, $card_dark, 30%);
+          }
+        }
+        @if ($color_name == "accessories") {
+          background-color: mix($product_8_highlight, $card_dark, 10%);
+          .pb_form_pill_text, .pb_form_pill_tag, .pb_form_pill_icon {
+            color: $text_dk_light;
+          }
+          .pb_form_pill_close {
+            color: $text_dk_light;
+            &:hover {
+              background-color: mix($product_8_highlight, $card_dark, 40%);
+            }
+          }
+          &:hover {
+            background-color: mix($product_8_highlight, $card_dark, 20%);
+          }
+          &:active {
+            background-color: mix($product_8_highlight, $card_dark, 30%);
           }
         }
       }

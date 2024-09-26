@@ -28,21 +28,21 @@ import {
 } from "./_helper_functions";
 
 type MultiLevelSelectProps = {
-  aria?: { [key: string]: string };
-  className?: string;
-  data?: { [key: string]: string };
-  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
-  id?: string;
-  inputDisplay?: "pills" | "none";
-  inputName?: string;
-  name?: string;
-  returnAllSelected?: boolean;
-  treeData?: { [key: string]: string }[];
-  onSelect?: (prop: { [key: string]: any }) => void;
-  selectedIds?: string[];
-  variant?: "multi" | "single";
-  children?: any;
-} & GlobalProps;
+  aria?: { [key: string]: string }
+  className?: string
+  data?: { [key: string]: string }
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  id?: string
+  inputDisplay?: "pills" | "none"
+  inputName?: string
+  name?: string
+  returnAllSelected?: boolean
+  treeData?: { [key: string]: string }[]
+  onSelect?: (prop: { [key: string]: any }) => void
+  selectedIds?: string[]
+  variant?: "multi" | "single"
+  pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
+} & GlobalProps
 
 const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const {
@@ -60,7 +60,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     selectedIds,
     variant = "multi",
     children,
-  } = props;
+    pillColor = "primary"
+  } = props
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -94,6 +95,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     value: "",
     item: [],
   });
+
+  const arrowDownElementId = `arrow_down_${id}`
+  const arrowUpElementId = `arrow_up_${id}`
 
   const modifyRecursive = (tree: { [key: string]: any }[], check: boolean) => {
     if (!Array.isArray(tree)) {
@@ -185,8 +189,13 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   useEffect(() => {
     // Function to handle clicks outside the dropdown
     const handleClickOutside = (event: any) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownClosed(true);
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        event.target.id !== arrowDownElementId &&
+        event.target.id !== arrowUpElementId
+      ) {
+        setIsDropdownClosed(true)
       }
     };
     // Attach the event listener
@@ -268,7 +277,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
 
   // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
-    e.stopPropagation();
     if (
       e.target.id === "multiselect_input" ||
       e.target.classList.contains("pb_form_pill_tag")
@@ -428,6 +436,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 inputDisplay === "pills"
                   ? returnedArray.map((item, index) => (
                       <FormPill
+                          color={pillColor}
                           key={index}
                           onClick={(event: any) => handlePillClose(event, item)}
                           text={item.label}
@@ -440,6 +449,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 inputDisplay === "pills"
                   ? defaultReturn.map((item, index) => (
                       <FormPill
+                          color={pillColor}
                           key={index}
                           onClick={(event: any) => handlePillClose(event, item)}
                           text={item.label}
@@ -477,16 +487,22 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           </div>
 
           {isDropdownClosed ? (
-            <div key="chevron-down">
-                <Icon icon="chevron-down" 
-                    size="xs" 
-                />
+            <div id={arrowDownElementId}
+                key="chevron-down">
+              <Icon
+                  icon="chevron-down"
+                  id={arrowDownElementId}
+                  size="xs"
+              />
             </div>
           ) : (
-            <div key="chevron-up">
-                <Icon icon="chevron-up" 
-                    size="xs" 
-                />
+            <div id={arrowUpElementId}
+                key="chevron-up">
+              <Icon
+                  icon="chevron-up"
+                  id={arrowUpElementId}
+                  size="xs"
+              />
             </div>
           )}
         </div>

@@ -11,14 +11,15 @@ type Props = {
 const TypeaheadControl = (props: Props) => (
   <div className="pb_typeahead_wrapper">
     <TextInput
-      dark={props.selectProps.dark}
-      error={props.selectProps.error}
-      label={props.selectProps.label}
+        dark={props.selectProps.dark}
+        error={props.selectProps.error}
+        label={props.selectProps.label}
+        marginBottom="none"
     >
       <Flex>
         <components.Control
-          className="text_input"
-          {...props}
+            className="text_input"
+            {...props}
         />
       </Flex>
     </TextInput>

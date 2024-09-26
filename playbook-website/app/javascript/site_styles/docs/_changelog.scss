@@ -6,7 +6,7 @@
     blockquote {
         position: relative;
         font-style: normal;
-        padding: 0px 0px 0px calc(#{$space_md} - 1px);
+        padding: 0 0 0 $space_md - 1px;
 
         &::before {
             content: '';

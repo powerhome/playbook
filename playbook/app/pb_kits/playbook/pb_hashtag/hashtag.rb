@@ -10,6 +10,7 @@ module Playbook
                   values: %w[default project home appointment],
                   default: "default"
       prop :url
+      prop :target
 
       def classname
         generate_classname("pb_hastag_kit")
@@ -19,8 +20,14 @@ module Playbook
         type_text + text
       end
 
-      def link_option
-        new_window ? "_blank" : "_self"
+      def target_option
+        if target && url
+          target
+        elsif new_window
+          "_blank"
+        else
+          "_self"
+        end
       end
 
     private

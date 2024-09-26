@@ -45,7 +45,9 @@ const CollapsibleIcon = ({
   const color = colorMap[iconColor];
 
   const showIcon = (icon: string | string[]) => {
-    if (typeof icon === "string") {
+    if (icon === "none") {
+      return []
+    } else if (typeof icon === "string") {
       return [icon, icon];
     }
     return icon;
@@ -60,30 +62,34 @@ const CollapsibleIcon = ({
 
   return (
     <>
-      {collapsed ? (
-        <div
-            className="icon_wrapper"
-            key={icon ? showIcon(icon)[0] : "chevron-down"}
-            onClick={(e) => handleIconClick(e)}
-            style={{ verticalAlign: "middle", color: color }}
-        >
-          <Icon
-              icon={icon ? showIcon(icon)[0] : "chevron-down"}
-              size={iconSize}
-          />
-        </div>
+      {(icon !== "none") ? (  
+        collapsed ? (
+          <div
+              className="icon_wrapper"
+              key={icon ? showIcon(icon)[0] : "chevron-down"}
+              onClick={(e) => handleIconClick(e)}
+              style={{ verticalAlign: "middle", color: color }}
+          >
+            <Icon
+                icon={icon ? showIcon(icon)[0] : "chevron-down"}
+                size={iconSize}
+            />
+          </div>
+        ) : (
+          <div
+              className="icon_wrapper"
+              key={icon ? showIcon(icon)[1] : "chevron-up"}
+              onClick={(e) => handleIconClick(e)}
+              style={{ verticalAlign: "middle", color: color }}
+          >
+            <Icon
+                icon={icon ? showIcon(icon)[1] : "chevron-up"}
+                size={iconSize}
+            />
+          </div>
+        )
       ) : (
-        <div
-            className="icon_wrapper"
-            key={icon ? showIcon(icon)[1] : "chevron-up"}
-            onClick={(e) => handleIconClick(e)}
-            style={{ verticalAlign: "middle", color: color }}
-        >
-          <Icon
-              icon={icon ? showIcon(icon)[1] : "chevron-up"}
-              size={iconSize}
-          />
-        </div>
+        <div/>
       )}
     </>
   );

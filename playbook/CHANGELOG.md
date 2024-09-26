@@ -1,3 +1,116 @@
+# Spot Everyone at a Glance: Meet the New Multiple Users Component!
+##### September 18, 2024 
+
+![14 4 0](https://github.com/user-attachments/assets/9e1a90e9-7a5c-4e43-8192-8fbe74c8de28)
+
+We've added a fresh option to our MultipleUsersStacked component with the new bubble variant! This update showcases full user avatars in a sleek, Apple-inspired grid layout, enhancing recognition and clarity. It's a versatile addition to your toolkit, offering a refined way to display multiple users!
+
+[14.4.0](https://github.com/powerhome/playbook/tree/14.4.0) full list of changes:
+
+**Kit Enhancements:**
+- Bubble Variant to Multiple Users Stacked [\#3692](https://github.com/powerhome/playbook/pull/3692) ([kangaree](https://github.com/kangaree))
+- Form Pills: Add All Color Options [\#3636](https://github.com/powerhome/playbook/pull/3636) ([elisashapiro](https://github.com/elisashapiro))
+- Implementing Radio customChildren Prop [\#3685](https://github.com/powerhome/playbook/pull/3685) ([carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+- Fix Undefined Method Error in SamplesController#show [\#3675](https://github.com/powerhome/playbook/pull/3675) ([skduncan](https://github.com/skduncan))
+- Make Rails Icons fixed-width [\#3656](https://github.com/powerhome/playbook/pull/3656) ([skduncan](https://github.com/skduncan))
+
+**Improvements:**
+- Remove Bad UTF-8 Character [\#3679](https://github.com/powerhome/playbook/pull/3679) ([@dhhuynh2](https://github.com/dhhuynh2))
+- Playground Sanitization Security [\#3624](https://github.com/powerhome/playbook/pull/3624) 
+- Upgraded Popper and React-Popper [\#3681](https://github.com/powerhome/playbook/pull/3681) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.3.2...14.4.0)
+
+
+# Star Ratings and Page-Turning Upgrades 💫
+##### September 6, 2024 
+
+![anouncement](https://github.com/user-attachments/assets/d10fdaa7-3961-4d16-9e65-ce9a282c0188)
+
+Our Star Rating kit now shines brighter with added interactivity and hover effects! ⭐ And don’t forget to flip through content with our Pagination kit, now available in React in addition to Rails.
+
+[14.3.2](https://github.com/powerhome/playbook/tree/14.3.2) full list of changes:
+
+**Kit Enhancements:**
+
+- Add all Target Options to the Hashtag and Home Address Street Kits [\#3650](https://github.com/powerhome/playbook/pull/3650) ([skduncan](https://github.com/skduncan))
+- Adding Default Value Prop to Rails Star Rating Kit [\#3629](https://github.com/powerhome/playbook/pull/3629) ([carloslimasd](https://github.com/carloslimasd))
+- Collapsible Optional Icon [\#3643](https://github.com/powerhome/playbook/pull/3643) ([elisashapiro](https://github.com/elisashapiro))
+- Add "loading" Variant to Circle Icon Button [\#3633](https://github.com/powerhome/playbook/pull/3633) ([kangaree](https://github.com/kangaree))
+
+**Fixed Bugs:**
+
+- Return empty string for SVG with HTTP errors [\404s, timeouts] [\#3658](https://github.com/powerhome/playbook/pull/3658) ([kangaree](https://github.com/kangaree))
+- Redirect If Guide Doesn't Exist [\#3653](https://github.com/powerhome/playbook/pull/3653) ([kangaree](https://github.com/kangaree))
+- React pagination glitchiness [\#3647](https://github.com/powerhome/playbook/pull/3647) ([elisashapiro](https://github.com/elisashapiro))
+- Fix @import playbook.scss Errors - Fix Theming / Overriding SCSS Variables [\#3608](https://github.com/powerhome/playbook/pull/3608) ([kangaree](https://github.com/kangaree))
+- Timestamp Kit Rails: Elapsed Time Variant Issue [\#3606](https://github.com/powerhome/playbook/pull/3606) ([skduncan](https://github.com/skduncan))
+- Fix Github Action Bug that Breaks Build [\#3655](https://github.com/powerhome/playbook/pull/3655) ([jasperfurniss](https://github.com/jasperfurniss))
+- Testing Incrementing for Github Action RC [\#3651](https://github.com/powerhome/playbook/pull/3651) ([jasperfurniss](https://github.com/jasperfurniss))
+- Fix Missing Template Error in PagesController [\#3645](https://github.com/powerhome/playbook/pull/3645) ([skduncan](https://github.com/skduncan))
+- Fixing TextArea Duplicated Classname [\#3660](https://github.com/powerhome/playbook/pull/3660) ([carloslimasd](https://github.com/carloslimasd))
+- Fix Collapsible Glitchiness When State Changes Quickly [\#3664](https://github.com/powerhome/playbook/pull/3664) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Fixes RC Github Action Limit [\#3666](https://github.com/powerhome/playbook/pull/3666) ([jasperfurniss](https://github.com/jasperfurniss))
+- Fix Kebab Logic [\#3649](https://github.com/powerhome/playbook/pull/3649) ([markdoeswork](https://github.com/markdoeswork))
+- Dialog Disable Rails - Remove Duplicate Data [\#3646](https://github.com/powerhome/playbook/pull/3646) ([markdoeswork](https://github.com/markdoeswork))
+- RTE Previewer + Output Rails [\#3625](https://github.com/powerhome/playbook/pull/3625) ([elisashapiro](https://github.com/elisashapiro))
+- Implement Error Handling and Additions for Github Action [\#3652](https://github.com/powerhome/playbook/pull/3652) ([jasperfurniss](https://github.com/jasperfurniss))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.3.0...14.3.2)
+
+
+# ⭐ Improving Usability, Flexibility, and Accessibility ⭐
+##### August 31st, 2024
+
+![funny](https://github.com/user-attachments/assets/43b0dce2-70a4-4ea1-a6c8-15472cbf6150)
+
+
+This release brings several enhancements and new kits aimed at improving user experience, customization, and visual clarity!
+To make things easier on devs, Playbook now allows you to import our custom themes directly into your apps to style Highcharts charts. In this release, we also introduced different size options for form pills, offering more flexibility for you. We added a new form control for star ratings, provided a new error variant for badge notifications to bring clarity for error states, and added a loading state for buttons in the Dialog. Check out all the other great improvements in 14.2.1 here:
+
+**Kit Enhancements:**
+
+- Export Highchart Theming Files [\#3615](https://github.com/powerhome/playbook/pull/3615) ([nidaqg](https://github.com/nidaqg))
+- Form Pill 3 Of 5: Sizes [\#3607](https://github.com/powerhome/playbook/pull/3607) ([elisashapiro](https://github.com/elisashapiro))
+- Adding Star Rating Form Controls [\#3600](https://github.com/powerhome/playbook/pull/3600) ([carloslimasd](https://github.com/carloslimasd))
+- Badge Notification Error Variant [\#3596](https://github.com/powerhome/playbook/pull/3596) ([kangaree](https://github.com/kangaree))
+- Add Beta Flag to Kit Generator In Playbook [\#3589](https://github.com/powerhome/playbook/pull/3589) ([skduncan](https://github.com/skduncan))
+- Loading State Of a Button Within a Dialog \(react\) [\#3579](https://github.com/powerhome/playbook/pull/3579) ([kangaree](https://github.com/kangaree))
+- Add Minwidth Global Prop [\#3551](https://github.com/powerhome/playbook/pull/3551) ([markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+
+- Fixing Phone Number Input Kit Flag Misalignment [\#3626](https://github.com/powerhome/playbook/pull/3626) ([carloslimasd](https://github.com/carloslimasd))
+- Bug Fix: Rails Advanced Table Dark Mode [\#3602](https://github.com/powerhome/playbook/pull/3602) ([anthonymig88](https://github.com/anthonymig88))
+
+**New Kits:**
+
+- Gantt Chart Beta Kit [\#3614](https://github.com/powerhome/playbook/pull/3614) ([nidaqg](https://github.com/nidaqg))
+- New Pagination Kit In React [\#3552](https://github.com/powerhome/playbook/pull/3552) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Upgrade View\_component Gem [\#3613](https://github.com/powerhome/playbook/pull/3613) ([phylum](https://github.com/phylum))
+- Initial Rc Github Action [\#3611](https://github.com/powerhome/playbook/pull/3611) ([jasperfurniss](https://github.com/jasperfurniss))
+- Rte Advanced Previewer + Output Styles \(react\) [\#3578](https://github.com/powerhome/playbook/pull/3578) ([elisashapiro](https://github.com/elisashapiro))
+- Bumping Axecore Dependency to 4.10.0 [\#3620](https://github.com/powerhome/playbook/pull/3620) ([jasperfurniss](https://github.com/jasperfurniss))([skduncan](https://github.com/skduncan))
+- Testing Dependency Update with New Release Flow [\#3617](https://github.com/powerhome/playbook/pull/3617) ([jasperfurniss](https://github.com/jasperfurniss))
+- Dialog Kit Loading State Buttons [\#3599](https://github.com/powerhome/playbook/pull/3599) ([markdoeswork](https://github.com/markdoeswork))
+- Bump React-joyride from 2.5.3 to 2.8.2 [\#3594](https://github.com/powerhome/playbook/pull/3594) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Upgrade Ci-kubed to 8.3.0 [\#3585](https://github.com/powerhome/playbook/pull/3585) ([benlangfeld](https://github.com/benlangfeld))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.1.0...14.2.1)
+
+
+
 # ⏫ Leveling Up: Enhancements, Bug Fixes, and More! ⏫
 ##### August 13, 2024
 

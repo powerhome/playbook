@@ -8,6 +8,7 @@ import { SelectValueType } from '../_typeahead'
 type Props = {
   data: SelectValueType,
   multiValueTemplate: any,
+  pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
   removeProps: any,
   selectProps: any,
 }
@@ -15,48 +16,55 @@ type Props = {
 const MultiValue = (props: Props) => {
   const { removeProps } = props
   const { imageUrl, label } = props.data
-  const { multiKit } = props.selectProps
+  const { dark, multiKit, pillColor } = props.selectProps
 
   const formPillProps = {
     marginRight: 'xs',
     name: label,
     avatarUrl: '',
+    dark,
   }
 
   if (typeof imageUrl === 'string') formPillProps.avatarUrl = imageUrl
 
   return (
     <components.MultiValueContainer
-      className="text_input_multivalue_container"
-      {...props}
+        className="text_input_multivalue_container"
+        {...props}
     >
       {multiKit === 'badge' &&
         <Badge
-          closeProps={removeProps}
-          removeIcon
-          text={label}
-          variant="primary"
+            closeProps={removeProps}
+            removeIcon
+            text={label}
+            variant="primary"
         />
       }
 
       {multiKit !== 'badge' && imageUrl &&
         <FormPill
-          avatarUrl={imageUrl}
-          closeProps={removeProps}
-          marginRight="xs"
-          name={label}
-          size={multiKit === 'smallPill' ? 'small' : ''}
-          text=''
+            avatarUrl={imageUrl}
+            closeProps={removeProps}
+            color={pillColor}
+            dark={dark}
+            marginRight="xs"
+            name={label}
+            size={multiKit === 'smallPill' ? 'small' : ''}
+            text=''
+            {...props}
         />
       }
 
       {multiKit !== 'badge' && !imageUrl &&
         <FormPill
-          closeProps={removeProps}
-          marginRight="xs"
-          name=''
-          size={multiKit === 'smallPill' ? 'small' : ''}
-          text={label}
+            closeProps={removeProps}
+            color={pillColor}
+            dark={dark}
+            marginRight="xs"
+            name=''
+            size={multiKit === 'smallPill' ? 'small' : ''}
+            text={label}
+            {...props}
         />
       }
     </components.MultiValueContainer>

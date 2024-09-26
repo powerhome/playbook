@@ -3,6 +3,27 @@ const dialogHelper = () => {
   const closeTrigger = document.querySelectorAll("[data-close-dialog]");
   const dialogs = document.querySelectorAll(".pb_dialog_rails")
 
+  const loadingButton = document.querySelector('[data-disable-with="Loading"]');
+  if (loadingButton) {
+    loadingButton.addEventListener("click", function() {
+      const okayLoadingButton = document.querySelector('[data-disable-with="Loading"]');
+      const cancelButton = document.querySelector('[data-disable-cancel-with="Loading"]');
+      let currentClass = okayLoadingButton.className;
+      let cancelClass = cancelButton ? cancelButton.className : "";
+
+      let newClass = currentClass.replace("_enabled", "_disabled_loading");
+      let newCancelClass = cancelClass.replace("_enabled", "_disabled");
+
+      // Disable the buttons
+      okayLoadingButton.disabled = true;
+      if (cancelButton) cancelButton.disabled = true;
+
+      okayLoadingButton.className = newClass;
+      if (cancelButton) cancelButton.className = newCancelClass;
+    });
+  }
+
+
   openTrigger.forEach((open) => {
     open.addEventListener("click", () => {
       var openTriggerData = open.dataset.openDialog;

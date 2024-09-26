@@ -45,7 +45,6 @@
       }
     }
     .text_input_wrapper {
-      margin-bottom: 1rem;
       input::placeholder,
       .text_input .placeholder {
         @include pb_body_light_dark;
@@ -101,7 +100,7 @@
   &.error {
     .text_input_wrapper {
       [class*="pb_body_kit"] {
-        margin-top: calc($space_xs / 2);
+        margin-top: $space_xs / 2;
       }
       input,
       .text_input {

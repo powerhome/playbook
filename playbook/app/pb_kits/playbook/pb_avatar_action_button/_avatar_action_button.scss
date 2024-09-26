@@ -35,8 +35,8 @@
     &[class*=_#{$name}] {
       
       $avatar_size: map-get($avatar-sizes, $name);
-      $icon_size: calc($avatar_size / 2);
-      $border_size: calc($icon_size / 10);
+      $icon_size: $avatar_size / 2;
+      $border_size: $icon_size / 10;
 
       position: relative;
       width: $avatar_size * 1.25;
@@ -59,7 +59,7 @@
         left: $icon_size * 1.5;
       }
       &[class*=_left] [class^=pb_avatar_kit] {
-        padding-left: calc($icon_size / 2);
+        padding-left: $icon_size / 2;
       }
     }
   }

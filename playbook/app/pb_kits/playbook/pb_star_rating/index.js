@@ -12,6 +12,7 @@ export default class PbStarRating extends PbEnhancedElement {
   connect() {
     this.addEventListeners()
     this.handleFormReset()
+    this.setDefaultValue()
   }
 
   addEventListeners() {
@@ -128,7 +129,7 @@ export default class PbStarRating extends PbEnhancedElement {
     const form = this.element.closest("form")
     if (form) {
       form.addEventListener("reset", () => {
-        this.updateHiddenInputValue("")
+        this.element.querySelector(STAR_RATING_INPUT_DATA_SELECTOR)?.setAttribute("value","")
         this.resetStarRatingValues()
       })
     }
@@ -151,6 +152,15 @@ export default class PbStarRating extends PbEnhancedElement {
       if (errorLabelElement) {
         errorLabelElement.remove()
       }
+    }
+  }
+
+  setDefaultValue() {
+    const hiddenInput = this.element.querySelector(STAR_RATING_INPUT_DATA_SELECTOR)
+    const defaultValue = hiddenInput.value
+
+    if (defaultValue) {
+      this.updateStarColors(defaultValue)
     }
   }
 }

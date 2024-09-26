@@ -55,12 +55,26 @@ jobs:
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
       - name: Check if version exists and increment if necessary
         run: |
-          while npm view playbook-ui@${{ env.new_npm_version }} version &>/dev/null; do
-            new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-            new_npm_version=${new_npm_version#v}
-            echo "new_npm_version=${new_npm_version}" >> $GITHUB_ENV
+          max_attempts=100
+          attempt=0
+          current_version="${{ env.new_npm_version }}"
+          while [ $attempt -lt $max_attempts ]; do
+            if npm view playbook-ui@$current_version version &>/dev/null; then
+              echo "Version $current_version already exists. Incrementing..."
+              current_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+              current_version=${current_version#v}
+            else
+              echo "Version $current_version is available."
+              break
+            fi
+            attempt=$((attempt+1))
           done
-          new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
+          if [ $attempt -eq $max_attempts ]; then
+            echo "Error: Maximum attempts reached. Unable to find an available version."
+            exit 1
+          fi
+          echo "new_npm_version=${current_version}" >> $GITHUB_ENV
+          new_ruby_version=$(echo $current_version | sed 's/-rc\./.pre.rc./')
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
       - name: Update Version.rb
         run: |
@@ -89,3 +103,16 @@ jobs:
             --title "Release Candidate v${{ env.new_npm_version }}" \
             --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
             --prerelease
+      - name: Leave PR comment
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUBY_GEM_VERSION: ${{ env.new_ruby_version }}
+          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_version}}
+          NPM_VERSION: ${{ env.new_npm_version }}
+          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_version}}
+        run: |
+          curl -H "Authorization: token ${GITHUB_TOKEN}" \
+              -X POST \
+              -d '{"body": "Release Candidate Created \n\n Your RC for Ruby Gems is [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}}) \n\n Your RC for NPM is [${{env.NPM_VERSION}}](${{env.NPM_LINK}}) "}' \
+                "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
