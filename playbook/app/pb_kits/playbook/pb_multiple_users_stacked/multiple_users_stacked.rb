@@ -5,8 +5,8 @@ module Playbook
     class MultipleUsersStacked < Playbook::KitBase
       prop :users, type: Playbook::Props::HashArray, required: true
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[xs sm md lg xl],
-                  default: "xs"
+                  values: %w[sm md lg xl],
+                  default: "sm"
 
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default bubble],
