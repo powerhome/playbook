@@ -128,23 +128,25 @@ $avatar-sizes: (
   
         [class^=pb_avatar_kit] {
           // First Item
-          &.first_item {
-            @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
-            @include avatar-size($bubble_container_size * 0.5);
-  
-            &.double_bubble {
+          &.double_bubble {
+            &.first_item {
               @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
               @include avatar-size($bubble_container_size * 0.5);
-            }
   
-            &.triple_bubble {
-              @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
-              @include avatar-size($bubble_container_size * 0.4);
-            }
+              &.double_bubble {
+                @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
+                @include avatar-size($bubble_container_size * 0.5);
+              }
   
-            &.quadruple_bubble {
-              @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
-              @include avatar-size($bubble_container_size * 0.4);
+              &.triple_bubble {
+                @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
+                @include avatar-size($bubble_container_size * 0.4);
+              }
+  
+              &.quadruple_bubble {
+                @include position((top: $bubble_container_size * 0.1, left: $bubble_container_size * 0.1));
+                @include avatar-size($bubble_container_size * 0.4);
+              }
             }
           }
   
