@@ -13,13 +13,16 @@ module Playbook
       prop :default_value
       prop :blank_selection, type: Playbook::Props::String,
                              default: ""
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[primary subtle],
+                     default: "primary"
 
       def data
         Hash(prop(:data)).merge(pb_dropdown: true)
       end
 
       def classname
-        generate_classname("pb_dropdown")
+        generate_classname("pb_dropdown", variant, separator: " ")
       end
 
     private

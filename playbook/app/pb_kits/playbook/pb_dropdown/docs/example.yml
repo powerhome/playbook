@@ -10,6 +10,7 @@ examples:
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
   - dropdown_blank_selection: Blank Selection
+  - dropdown_subtle_variant: Subtle Variant
 
   react:
   - dropdown_default: Default
@@ -22,6 +23,7 @@ examples:
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
   - dropdown_blank_selection: Blank Selection
+  - dropdown_subtle_variant: Subtle Variant
   # - dropdown_with_autocomplete: Autocomplete
   # - dropdown_with_autocomplete_and_custom_display: Autocomplete with Custom Display
   # - dropdown_with_external_control: useDropdown Hook

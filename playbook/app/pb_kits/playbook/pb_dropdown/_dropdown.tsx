@@ -36,6 +36,7 @@ type DropdownProps = {
     onSelect?: (arg: GenericObject) => null;
     options: GenericObject;
     triggerRef?: any;
+    variant?: string;
 };
 
 const Dropdown = (props: DropdownProps) => {
@@ -55,7 +56,8 @@ const Dropdown = (props: DropdownProps) => {
         label,
         onSelect,
         options,
-        triggerRef
+        triggerRef,
+        variant
     } = props;
 
     const ariaProps = buildAriaProps(aria);
@@ -64,7 +66,8 @@ const Dropdown = (props: DropdownProps) => {
     const classes = classnames(
         buildCss("pb_dropdown"),
         globalProps(props),
-        className
+        className,
+        variant
     );
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);

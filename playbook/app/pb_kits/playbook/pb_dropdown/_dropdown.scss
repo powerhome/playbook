@@ -78,6 +78,12 @@
 
         &[class*="_list"] {
           border-bottom: 1px solid $border_light;
+
+          &:hover, &:focus {
+            .pb_body_kit {
+              color: $primary;
+            }
+          }
         }
         &[class*="selected"] {
           background-color: $primary;
@@ -87,7 +93,7 @@
             color: $white !important;
           }
           &:hover {
-            background-color: $primary !important;
+            background-color: $product_1_background !important;
           }
         }
       }
@@ -180,6 +186,20 @@
         }
         &[class*="selected"] {
           background-color: $primary;
+        }
+      }
+    }
+  }
+
+  &.subtle {
+    .dropdown_wrapper {
+      .pb_dropdown_container {
+        [class*="pb_dropdown_option"] {
+          padding-left: $space_xs;
+          padding-right: $space_xs;
+          padding-top: $space_xxs;
+          padding-bottom: $space_xxs;
+          border: none;
         }
       }
     }
