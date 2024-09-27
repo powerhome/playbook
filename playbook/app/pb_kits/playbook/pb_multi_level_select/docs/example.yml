@@ -15,3 +15,4 @@ examples:
   - multi_level_select_return_all_selected: Return All Selected
   - multi_level_select_selected_ids_react: Selected Ids
   - multi_level_select_color: With Pills (Custom Color)
+  - multi_level_select_with_children: With Children
