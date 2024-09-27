@@ -19,12 +19,14 @@ const RadioChildren = (props) => {
       <Radio
           customChildren
           label="Select"
+          marginBottom="sm"
           name="Group1"
           tabIndex={0}
           value="Select"
           {...props}
       >
-        <Select 
+        <Select
+            marginBottom="none"
             minWidth="xs"
             options={options}
         />
@@ -32,17 +34,18 @@ const RadioChildren = (props) => {
       <Radio
           customChildren
           label="Typeahead"
+          marginBottom="sm"
           name="Group1"
           tabIndex={0}
           value="Typeahead"
           {...props}
       >
         <Typeahead 
+            marginBottom="none"
             minWidth="xs"
             options={options}
         />
       </Radio>
-      <br />
       <Radio
           customChildren
           defaultChecked={false}
