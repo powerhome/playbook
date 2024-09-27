@@ -81,7 +81,7 @@ const MultipleUsersStackedSingleBubble = () => {
 test('should have a single bubble', () => {
     render(<MultipleUsersStackedSingleBubble />)
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass("pb_multiple_users_stacked_kit_single_bubble")
+    expect(kit).toHaveClass("pb_multiple_users_stacked_kit_single_bubble_size_md")
 
     const firstItem = kit.querySelector('.first_item');
     expect(firstItem).toBeInTheDocument();
@@ -113,7 +113,7 @@ const MultipleUsersStackedDoubleBubble = () => {
 test('should have a double bubble', () => {
     render(<MultipleUsersStackedDoubleBubble />)
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass("pb_multiple_users_stacked_kit_bubble")
+    expect(kit).toHaveClass("pb_multiple_users_stacked_kit_bubble_size_md")
 
     const firstItem = kit.querySelector('.first_item');
     expect(firstItem).toBeInTheDocument();
@@ -153,7 +153,7 @@ const MultipleUsersStackedTripleBubble = () => {
 test('should have a triple bubble', () => {
     render(<MultipleUsersStackedTripleBubble />)
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass("pb_multiple_users_stacked_kit_bubble")
+    expect(kit).toHaveClass("pb_multiple_users_stacked_kit_bubble_size_md")
 
     const firstItem = kit.querySelector('.first_item');
     expect(firstItem).toBeInTheDocument();
@@ -208,7 +208,7 @@ const MultipleUsersStackedQuadrupleBubble = () => {
 test('should have a quadruple bubble', () => {
     render(<MultipleUsersStackedQuadrupleBubble />)
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass("pb_multiple_users_stacked_kit_bubble")
+    expect(kit).toHaveClass("pb_multiple_users_stacked_kit_bubble_size_md")
 
     const firstItem = kit.querySelector('.first_item');
     expect(firstItem).toBeInTheDocument();
