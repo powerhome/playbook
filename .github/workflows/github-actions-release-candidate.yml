@@ -103,3 +103,16 @@ jobs:
             --title "Release Candidate v${{ env.new_npm_version }}" \
             --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
             --prerelease
+      - name: Leave PR comment
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUBY_GEM_VERSION: ${{ env.new_ruby_version }}
+          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_version}}
+          NPM_VERSION: ${{ env.new_npm_version }}
+          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_version}}
+        run: |
+          curl -H "Authorization: token ${GITHUB_TOKEN}" \
+              -X POST \
+              -d '{"body": "Release Candidate Created \n\n Your RC for Ruby Gems is [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}}) \n\n Your RC for NPM is [${{env.NPM_VERSION}}](${{env.NPM_LINK}}) "}' \
+                "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
