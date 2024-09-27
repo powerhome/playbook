@@ -2,7 +2,6 @@
   <%= pb_rails(
     "avatar",
     props: object.users[0].merge({
-      size: object.bubble ? other_users_size[0] : other_users_size[1],
       classname: "pb_multiple_users_stacked_item first_item" +
                  (object.double_bubble ? " double_bubble" : "") +
                  (object.triple_bubble ? " triple_bubble" : "") +
@@ -38,7 +37,6 @@
         <%= pb_rails(
           "avatar",
           props: item.merge({
-            size: other_users_size[0],
             classname: classname,
             dark: object.dark
           })
@@ -48,7 +46,6 @@
       <%= pb_rails(
         "avatar",
         props: object.users[1].merge({
-          size: other_users_size[0],
           classname: "pb_multiple_users_stacked_item second_item",
           dark: object.dark
         })
