@@ -7,12 +7,8 @@ import {
   buildDataProps,
   buildHtmlProps,
 } from "../utilities/props";
-// import Checkbox from "../pb_checkbox/_checkbox";
-// import Radio from "../pb_radio/_radio";
-// import Body from "../pb_body/_body";
 import Icon from "../pb_icon/_icon";
 import FormPill from "../pb_form_pill/_form_pill";
-// import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button";
 import { cloneDeep } from "lodash";
 import MultiLevelSelectOptions from "./multi_level_select_options";
 import MultiLevelSelectContext from "./context";
@@ -37,9 +33,9 @@ type MultiLevelSelectProps = {
   inputName?: string
   name?: string
   returnAllSelected?: boolean
-  treeData?: { [key: string]: string }[]
+  treeData?: { [key: string]: string; }[] | any
   onSelect?: (prop: { [key: string]: any }) => void
-  selectedIds?: string[]
+  selectedIds?: string[] | any
   variant?: "multi" | "single"
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
 } & GlobalProps
@@ -114,7 +110,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const addCheckedAndParentProperty = (
     treeData: { [key: string]: any }[],
     selectedIds: string[],
-    parent_id: string = null,
+    parent_id: string | null = null,
     depth = 0
   ) => {
     if (!Array.isArray(treeData)) {

@@ -1,23 +1,40 @@
 import React, {useContext} from "react";
+import classnames from "classnames";
 import MultiLevelSelectContext from "./context";
-
+import { globalProps, GlobalProps } from "../utilities/globalProps";
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+  buildHtmlProps,
+} from "../utilities/props";
 import Checkbox from "../pb_checkbox/_checkbox";
 import Radio from "../pb_radio/_radio";
 import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button";
 import Body from "../pb_body/_body";
 
+
+type MultiLevelSelectOptionsProps = {
+  aria?: { [key: string]: string },
+  children?: any,
+  className?: string,
+  dark?: boolean,
+  data?: { [key: string]: string },
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  items: { [key: string]: string }[],
+} & GlobalProps;
+
 const MultiLevelSelectOptions = ({
   items,
   children,
-  // ...props
-}: any) => {
-  // const {
-  //   aria = {},
-  //   className,
-  //   dark = false,
-  //   data = {},
-  //   htmlOptions = {},
-  // } = props;
+  ...props
+}: MultiLevelSelectOptionsProps) => {
+  const {
+    aria = {},
+    className,
+    data = {},
+    htmlOptions = {},
+  } = props;
 
 const {
   variant,
@@ -30,8 +47,23 @@ const {
   filterItem,
 } =useContext(MultiLevelSelectContext);
 
+const ariaProps = buildAriaProps(aria);
+const dataProps = buildDataProps(data);
+const htmlProps = buildHtmlProps(htmlOptions);
+const classes = classnames(
+  buildCss("pb_multi_level_select_options"),
+  globalProps(props),
+  className
+);
+
+
   return (
-    <ul>
+    <ul
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+    >
       {Array.isArray(items) &&
         items.map((item: { [key: string]: any }) => {
           return (
@@ -98,7 +130,7 @@ const {
                       />
                     </Checkbox>
                   )}
-                  {/* Render children next to the checkbox/radio */}
+                  {/* Render children next to the checkbox */}
                   {children && (
                     typeof children === "function" && children(item)                   
                   )}
