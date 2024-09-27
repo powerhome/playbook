@@ -38,6 +38,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
   const doubleBubble = isBubble && users.length === 2
   const tripleBubble = isBubble && users.length === 3
   const quadrupleBubble = isBubble && users.length > 3
+  const sizeClass = isBubble ? `size_${size}` : ""  
   const displayCount = () => {
     return moreThanTwo ? 1 : users.length
   }
@@ -46,7 +47,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss(
     'pb_multiple_users_stacked_kit',
-    { single: onlyOne, bubble: isBubble }, `size_${size}`),
+    { single: onlyOne, bubble: isBubble }, sizeClass),
     globalProps(props),
     className)
 

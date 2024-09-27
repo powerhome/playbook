@@ -40,8 +40,12 @@ module Playbook
         bubble && users.count > 3
       end
 
+      def size_class
+        "size_#{size}" if bubble
+      end
+
       def classname
-        generate_classname("pb_multiple_users_stacked_kit", single_class, bubble_class, "size_#{size}")
+        generate_classname("pb_multiple_users_stacked_kit", single_class, bubble_class, size_class)
       end
 
     private
