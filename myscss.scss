@@ -334,53 +334,63 @@ $first-item-position-quadruple-bubble: (
 }
 
 [class^=pb_multiple_users_stacked_kit] {
+  // Default variables
   $container_size: map-get($avatar-sizes, "xs");
   $bubble_container_size: map-get($avatar-sizes, "sm");
   $overlap: -15px;
   $border_size: 1px;
   $stacked_size: 18px;
   $max_to_display: 1, 2;
+
   display: inline-flex;
-  width: 28px;
-  height: 28px;
+  width: $container_size;
+  height: $container_size;
   flex-basis: $container_size;
   position: relative;
   flex-shrink: 0;
   flex-grow: 0;
+
   [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
     @include avatar-size($stacked_size);
+
     &.dark {
       .avatar_wrapper {
         border: $border_size solid $bg_dark;
       }
     }
+
     .avatar_wrapper {
       border: $border_size solid $white;
+
       img {
         z-index: 0;
       }
     }
   }
+
   &[class*=_single] .pb_multiple_users_stacked_item {
-    @include avatar-size(28px);
-    max-width: 28px;
+    @include avatar-size($container_size);
   }
-  [class^=pb_avatar_kit].second_item, [class^=pb_badge_kit].second_item {
+
+  [class^=pb_avatar_kit].second_item,
+  [class^=pb_badge_kit].second_item {
     @include position((bottom: 0, right: 0));
     z-index: 2;
     background: tint($primary, 90%);
     border-radius: $border_rad_mega;
     padding: 0;
+
     span {
       transform: translateY(0);
     }
+
     .avatar_wrapper {
       border: $border_size solid $white;
       height: $stacked_size;
       width: $stacked_size;
-
     }
   }
+
   .stacked_item .avatar_wrapper::before {
     font-size: 0;
     color: transparent;
@@ -424,7 +434,7 @@ $first-item-position-quadruple-bubble: (
           // First Item
             &.first_item {
               @include position(map-get($first-item-position-double-bubble, $size_name));
-              @include avatar-size(map-get($first-item-sizes-double-bubble, $size_name ));
+              @include avatar-size(map-get($avatar-sizes, $size_name));
   
               &.double_bubble {
                 @include position(map-get($first-item-position-double-bubble, $size_name));
