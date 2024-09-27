@@ -103,4 +103,3 @@ jobs:
             --title "Release Candidate v${{ env.new_npm_version }}" \
             --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
             --prerelease
-
