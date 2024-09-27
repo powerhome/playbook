@@ -9,6 +9,7 @@ examples:
   react:
   - multiple_users_stacked_default: Default
   - multiple_users_stacked_bubble: Bubble
+  - multiple_users_stacked_size: Sizes
 
   swift: 
   - multiple_users_stacked_default_swift: Default

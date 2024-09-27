@@ -14,6 +14,7 @@ type MultipleUsersStackedProps = {
   data?: { [key: string]: string },
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
+  size?: "md" | "lg" | "sm" | "xl" 
   users: Array<{ [key: string]: string }>,
   variant: "default" | "bubble",
 }
@@ -27,12 +28,14 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     htmlOptions = {},
     id,
     users,
+    size = "md",
     variant = "default",
   } = props
 
   const moreThanTwo = users.length > 2
   const onlyOne = users.length == 1
   const isBubble = variant === "bubble"
+  const doubleBubble = isBubble && users.length === 2
   const tripleBubble = isBubble && users.length === 3
   const quadrupleBubble = isBubble && users.length > 3
   const displayCount = () => {
@@ -43,6 +46,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss(
     'pb_multiple_users_stacked_kit',
+    `size_${size}`,
     { single: onlyOne, bubble: isBubble }), globalProps(props), className)
 
   const firstUser = () => {
@@ -50,7 +54,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
       return (
         <Avatar
             {...userObject}
-            className={`pb_multiple_users_stacked_item first_item${tripleBubble ? " triple_bubble" : ""}${quadrupleBubble ? " quadruple_bubble" : ""}`}
+            className={`pb_multiple_users_stacked_item first_item${doubleBubble ? "double_bubble" : ""}${tripleBubble ? " triple_bubble" : ""}${quadrupleBubble ? " quadruple_bubble" : ""}`}
             dark={dark}
             key={index}
             size={isBubble ? "sm" : "xs"}
@@ -65,7 +69,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
         return (
           <Avatar
               {...userObject}
-              className={`pb_multiple_users_stacked_item second_item${tripleBubble ? " triple_bubble" : ""}${quadrupleBubble ? " quadruple_bubble" : ""}`}
+              className={`pb_multiple_users_stacked_item second_item${doubleBubble ? "double_bubble" : ""}${tripleBubble ? " triple_bubble" : ""}${quadrupleBubble ? " quadruple_bubble" : ""}`}
               dark={dark}
               key={index}
               size="xs"
@@ -81,7 +85,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
         return (
           <Avatar
               {...userObject}
-              className={`pb_multiple_users_stacked_item third_item${quadrupleBubble ? " quadruple_bubble" : ""}`}
+              className={`pb_multiple_users_stacked_item third_item${doubleBubble ? "double_bubble" : ""}${quadrupleBubble ? " quadruple_bubble" : ""}`}
               dark={dark}
               key={index}
               size="xs"
@@ -97,7 +101,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
         return (
           <Avatar
               {...userObject}
-              className="pb_multiple_users_stacked_item fourth_item"
+              className="pb_multiple_users_stacked_item fourth_item quadruple_bubble"
               dark={dark}
               key={index}
               size="xs"

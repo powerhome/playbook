@@ -40,20 +40,6 @@ module Playbook
         bubble && users.count > 3
       end
 
-      def other_users_size
-        bubble_size_map[size.to_sym]
-      end
-
-      def bubble_size_map
-        {
-          "xs": %w[xs xxs],
-          "sm": %w[xs xxs],
-          "md": %w[sm xs],
-          "lg": %w[md sm],
-          "xl": %w[lg md],
-        }
-      end
-
       def classname
         generate_classname("pb_multiple_users_stacked_kit", single_class, bubble_class, "size_#{size}")
       end
