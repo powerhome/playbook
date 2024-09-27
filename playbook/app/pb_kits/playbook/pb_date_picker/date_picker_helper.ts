@@ -5,6 +5,9 @@ import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
 import weekSelect from "flatpickr/dist/plugins/weekSelect/weekSelect"
 import timeSelectPlugin from './plugins/timeSelect'
 import quickPickPlugin from './plugins/quickPick'
+import { getAllIcons } from '../utilities/icons/allicons';
+
+const angleDown = getAllIcons().angleDown.string
 
 const getPositionElement = (element: string | Element) => {
   return (typeof element === 'string') ? document.querySelectorAll(element)[0] : element
@@ -256,10 +259,10 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     })
   }
 
-  // Adding dropdown icons to year and month selects
-  dropdown.insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
+  // Adding dropdown icons to year and month select
+  dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDown}</i>`)
   if (picker.monthElements[0].parentElement) {
-    return picker.monthElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down month-dropdown-icon"></i>')}
+    return picker.monthElements[0].insertAdjacentHTML('afterend', `<i class="month-dropdown-icon">${angleDown}</i>`)}
   // if (picker.weekElements[0].parentElement){
   //   return  picker.weekElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
   // }

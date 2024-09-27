@@ -26,7 +26,7 @@
       <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
     <% end %>
     <% if object.multiple != true %>
-      <%= pb_rails("icon", props: { icon: "angle-down", fixed_width: true, classname: "pb_select_kit_caret"}) %>
+      <%= pb_rails("icon", props: { custom_icon: Playbook::Engine::root.join(angle_down_path), fixed_width: true, classname: "pb_select_kit_caret"}) %>
     <% end %>
   </label>
 <% end %>

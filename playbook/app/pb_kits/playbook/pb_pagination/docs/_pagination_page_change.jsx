@@ -22,6 +22,16 @@ const PaginationPageChange = (props) => {
 
     return (
       <div className="App">
+      <Pagination
+          current={activePage}
+          key={`pagination-top-${activePage}`}
+          marginBottom="xs"
+          onChange={onPageChange}
+          range={5}
+          total={totalPages}
+          {...props}
+      />
+
       <Table 
           marginBottom="xs"
           responsive="none" 
@@ -49,7 +59,8 @@ const PaginationPageChange = (props) => {
       </Table>
  
       <Pagination
-          current={1}
+          current={activePage}
+          key={`pagination-bottom-${activePage}`}
           onChange={onPageChange}
           range={5}
           total={totalPages}

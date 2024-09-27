@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../pb_button/_button";
 import Icon from "../pb_icon/_icon";
 import Flex from "../pb_flex/_flex";
+import { getAllIcons } from "../utilities/icons/allicons"
 
 type MapControlTypes = {
   zoomBtns?: boolean, 
@@ -11,6 +12,8 @@ type MapControlTypes = {
   flyToClick?: () => void,
   children?: React.ReactNode | React.ReactNode[]
 }
+
+const eyeIcon = getAllIcons()["eye"]
 
 const MapControls = ({
   zoomBtns,
@@ -42,7 +45,10 @@ const MapControls = ({
             <Button className="map-flyto-button"
                 onClick={flyToClick}
             >
-              <Icon icon="eye" />
+              <Icon 
+                  className="svg-inline--fa"
+                  customIcon={eyeIcon.icon as unknown as { [key: string]: SVGElement }} 
+              />
             </Button>
           ) : null}
         </>
