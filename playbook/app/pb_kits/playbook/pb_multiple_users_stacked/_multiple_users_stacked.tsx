@@ -87,7 +87,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
         return (
           <Avatar
               {...userObject}
-              className={`pb_multiple_users_stacked_item third_item ${doubleBubble ? "double_bubble" : ""}${quadrupleBubble ? " quadruple_bubble" : ""}`}
+              className={`pb_multiple_users_stacked_item third_item ${doubleBubble ? "double_bubble" : ""}${tripleBubble ? " triple_bubble" : ""}${quadrupleBubble ? " quadruple_bubble" : ""}`}
               dark={dark}
               key={index}
               size="md"
