@@ -28,7 +28,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
     htmlOptions = {},
     id,
     users,
-    size = "md",
+    size = "sm",
     variant = "default",
   } = props
 
