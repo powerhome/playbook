@@ -16,8 +16,8 @@ RSpec.describe Playbook::PbMultipleUsersStacked::MultipleUsersStacked do
       expect(subject.new(users: [{ name: "1", image_url: "1" }]).classname).to eq "pb_multiple_users_stacked_kit_single"
       expect(subject.new(users: [], classname: "additional_class").classname).to eq "pb_multiple_users_stacked_kit additional_class"
       expect(subject.new(users: [], dark: true).classname).to eq "pb_multiple_users_stacked_kit dark"
-      expect(subject.new(users: [], variant: "bubble").classname).to eq "pb_multiple_users_stacked_kit_bubble"
-      expect(subject.new(users: [{ name: "1", image_url: "1" }], variant: "bubble").classname).to eq "pb_multiple_users_stacked_kit_single_bubble"
+      expect(subject.new(users: [], variant: "bubble").classname).to eq "pb_multiple_users_stacked_kit_bubble_size_sm"
+      expect(subject.new(users: [{ name: "1", image_url: "1" }], variant: "bubble").classname).to eq "pb_multiple_users_stacked_kit_single_bubble_size_sm"
     end
   end
 
