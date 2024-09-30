@@ -16,7 +16,7 @@ type GanttChartProps = {
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
-  ref?: HighchartsReactRefObject;
+  ref?: React.RefAttributes<HighchartsReactRefObject>;
 };
 
 const GanttChart = (props: GanttChartProps) => {
@@ -28,6 +28,7 @@ const GanttChart = (props: GanttChartProps) => {
     data = {},
     htmlOptions = {},
     id,
+    ref,
   } = props;
 
   const ariaProps = buildAriaProps(aria);
