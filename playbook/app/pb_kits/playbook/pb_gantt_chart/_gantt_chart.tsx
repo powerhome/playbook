@@ -16,7 +16,7 @@ type GanttChartProps = {
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
-  ref?: HighchartsReact.RefObject;
+  ref?: any
 };
 
 const GanttChart = (props: GanttChartProps) => {
