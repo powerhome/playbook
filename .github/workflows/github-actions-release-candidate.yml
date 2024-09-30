@@ -140,7 +140,7 @@ jobs:
                 issue_number: pullRequestNumber,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: `You merged this this pr to master branch: 
+                body: `You merged this pr to master branch: 
                 - Ruby Gem: [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}})
                 - NPM: [${{env.NPM_VERSION}}](${{env.NPM_LINK}})`
               });
