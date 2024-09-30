@@ -69,11 +69,11 @@
         padding-bottom: $space_xs;
         cursor: pointer;
         &:hover {
-          background-color: $border_light;
+          background-color: $bg_light;
         }
 
         &[class*="_focused"] {
-          background-color: $border_light;
+          background-color: $bg_light;
         }
 
         &[class*="_list"] {
@@ -196,18 +196,22 @@
       .pb_dropdown_container {
 
         [class*="pb_dropdown_option"]:first-child {
-          padding-top: $space_xs;
+          margin-top: $space_xs;
         }
 
         [class*="pb_dropdown_option"]:last-child {
-          padding-bottom: $space_xs;
+          margin-bottom: $space_xs;
         }
 
         [class*="pb_dropdown_option"] {
           padding-left: $space_xs;
           padding-right: $space_xs;
-          padding-top: 2px;
-          padding-bottom: 2px;
+          padding-top: $space_xxs;
+          padding-bottom: $space_xxs;
+          margin-left: $space_xs;
+          margin-right: $space_xs;
+          margin-top: $space_xxs;
+          margin-bottom: $space_xxs;
           border: none;
         }
       }
