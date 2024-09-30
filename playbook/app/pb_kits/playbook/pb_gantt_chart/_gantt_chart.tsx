@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
-import HighchartsReact from "highcharts-react-official";
+import HighchartsReact, { HighchartsReactRefObject } from "highcharts-react-official";
 import Highcharts from "highcharts/highcharts-gantt";
 
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
@@ -16,6 +16,7 @@ type GanttChartProps = {
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
+  ref?: HighchartsReactRefObject;
 };
 
 const GanttChart = (props: GanttChartProps) => {
@@ -64,6 +65,7 @@ const GanttChart = (props: GanttChartProps) => {
           }}
           highcharts={Highcharts}
           options={options}
+          ref={ref}
       />
     </div>
   );
