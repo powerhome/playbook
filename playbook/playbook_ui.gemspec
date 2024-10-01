@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "dist/playbook.css",
     "dist/reset.css",
     "dist/playbook-doc.js",
+    "dist/mark.js",
     "dist/playbook-rails.js",
     "dist/playbook-rails-friendly.js",
     "dist/playbook-rails-react-bindings.js",
