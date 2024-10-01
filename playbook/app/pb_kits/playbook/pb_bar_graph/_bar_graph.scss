@@ -29,3 +29,10 @@
     font-size: $heading_3;
     color: $text_lt_default;
 }
+
+.highcharts-subtitle {
+    font-family: $font_family_base;
+    color: $text_lt_light;
+    font-weight: $regular;
+    font-size: $text_base;
+}
