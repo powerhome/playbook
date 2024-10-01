@@ -1,4 +1,5 @@
 @import "../tokens/colors";
+@import "../tokens/typography";
 
 .pb_bar_graph {
     rect.highcharts-background {
@@ -23,5 +24,8 @@
 }
 
 .highcharts-title {
-    font-family: "Power Centra", "Helvetica Neue", Helvetica, Arial, sans_serif;
+    font-family: $font_family_base;
+    font-weight: $bold;
+    font-size: $heading_3;
+    color: $text_lt_default;
 }
