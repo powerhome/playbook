@@ -170,12 +170,16 @@ type ZIndex = {
   zIndex?: ZIndexType,
 } | ZIndexResponsiveType
 
+type Height = {
+  height?: string | number;
+}
+
 // keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left;
+  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -498,6 +502,9 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     } else {
       return verticalAlign ? `vertical_align_${verticalAlign} ` : ''
     }
+  },
+  heightProps: ({ height }: Height) => {
+    return height ? { height } : {}; // Return height as an object
   }
 }
 
@@ -508,6 +515,16 @@ export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {})
   return Object.keys(PROP_CATEGORIES).map((key) => {
     return PROP_CATEGORIES[key](allProps)
   }).filter((value) => value?.length > 0).join(" ")
+}
+
+// New function for inline styles
+export const globalInlineProps = (props: GlobalProps): React.CSSProperties => {
+  const styles = Object.keys(PROP_CATEGORIES).reduce((acc, key) => {
+    const result = PROP_CATEGORIES[key](props);
+    return { ...acc, ...(typeof result === 'object' ? result : {}) }; // Ensure result is an object before spreading
+  }, {});
+
+  return styles; // Return the styles object directly
 }
 
 
