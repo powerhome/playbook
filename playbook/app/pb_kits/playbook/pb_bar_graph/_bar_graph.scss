@@ -1,6 +1,31 @@
+@import "../tokens/colors";
+
 .pb_bar_graph {
     rect.highcharts-background {
         fill: #0000 !important;
     }
 }
 
+@import url("https://code.highcharts.com/css/highcharts.css");
+
+// @import "highcharts/css/highcharts";
+// @import "highcharts/highcharts.css";
+
+:root {
+    --highcharts-color-0: #{$data_1};
+    --highcharts-color-1: #{$data_2};
+    --highcharts-color-2: #{$data_3};
+    --highcharts-color-3: #{$data_4};
+    --highcharts-color-4: #{$data_5};
+    --highcharts-color-5: #{$data_6};
+    --highcharts-color-6: #{$data_7};
+    --highcharts-color-7: #{$data_8};
+}
+
+.highcharts-title {
+    // However, layout and positioning of elements like the title or legend cannot be controlled by CSS. 
+    // This is a limitation of CSS for SVG, that does not (yet - SVG 2 Geometric Style Properties) allow geometric attributes like x, y, width or height.
+    font-size: 100px;
+
+    font-family: "Power Centra", "Helvetica Neue", Helvetica, Arial, sans_serif;
+}
