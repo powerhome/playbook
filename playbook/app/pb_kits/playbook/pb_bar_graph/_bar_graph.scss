@@ -54,3 +54,7 @@
     font-weight: $bold;
     font-size: $text_smaller;
 }
+
+.highcharts-grid-line {
+    stroke: $border_light;
+}
