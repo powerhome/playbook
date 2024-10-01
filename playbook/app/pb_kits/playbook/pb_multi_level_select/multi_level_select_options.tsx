@@ -132,7 +132,7 @@ const classes = classnames(
                   )}
                   {/* Render children next to the checkbox */}
                   {children && (
-                    typeof children === "function" && children(item)                   
+                    typeof children === "function" ? children(item) : children                  
                   )}
                 </div>
                 {isTreeRowExpanded(item) &&

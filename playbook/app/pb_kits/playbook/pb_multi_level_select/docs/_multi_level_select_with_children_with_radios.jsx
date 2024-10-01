@@ -76,7 +76,7 @@ const treeData = [
   },
 ];
 
-const MultiLevelSelectWithChildren = (props) => {
+const MultiLevelSelectWithChildrenWithRadios = (props) => {
   return (
     <div>
       <MultiLevelSelect
@@ -85,6 +85,7 @@ const MultiLevelSelectWithChildren = (props) => {
             console.log("Selected Items", selectedNodes)
           }
           treeData={treeData}
+          variant="single"
           {...props}
       >
         {(item) => (
@@ -101,4 +102,4 @@ const MultiLevelSelectWithChildren = (props) => {
   );
 };
 
-export default MultiLevelSelectWithChildren;
+export default MultiLevelSelectWithChildrenWithRadios;
