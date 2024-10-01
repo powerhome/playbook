@@ -46,3 +46,11 @@
     font-weight: $bold;
     font-size: $text_smaller;
 }
+
+.highcharts-axis-labels {
+    font-family: $font_family_base;
+    color: $text_lt_lighter;
+    fill: $text_lt_lighter;
+    font-weight: $bold;
+    font-size: $text_smaller;
+}
