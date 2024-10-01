@@ -84,9 +84,9 @@ module Playbook
     def pb_doc_kit_examples(kit, type)
       example_file = pb_doc_kit_path(kit, "example.yml")
       if File.exist?(example_file)
-        examples_list = ActiveSupport::ConfigurationFile.parse(example_file)
-                            .inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
-        examples_list.dig(:examples, type) || []
+        ActiveSupport::ConfigurationFile.parse(example_file)
+                                        .transform_keys(&:to_sym)
+                                        .dig(:examples, type) || []
       else
         []
       end
