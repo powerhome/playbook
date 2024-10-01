@@ -1,3 +1,35 @@
+# 14.5.0
+##### October 1, 2024 
+
+[14.5.0](https://github.com/powerhome/playbook/tree/14.5.0) full list of changes:
+
+**Kit Enhancements:**
+- Enable Kits Instead of Text for Radio Label - React Only [\#3691](https://github.com/powerhome/playbook/pull/3691) ([nickamantia](https://github.com/nickamantia))
+- Remove marginBottom from Typeahead Kit [\#3680](https://github.com/powerhome/playbook/pull/3680) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Fixed Bugs:**
+- Fixing Minimizing the Dropdown When Clicking Outside [\#3688](https://github.com/powerhome/playbook/pull/3688) ([carloslimasd](https://github.com/carloslimasd))
+- Make Dialog Close 'x' Icons Same Size [\#3706](https://github.com/powerhome/playbook/pull/3706) ([kangaree](https://github.com/kangaree))
+
+
+
+**Improvements:**
+- Bump Highcharts Packages to Latest [\#3708](https://github.com/powerhome/playbook/pull/3708) ([kangaree](https://github.com/kangaree))
+- Remove FA from the Playbook Website [\#3687](https://github.com/powerhome/playbook/pull/3687) ([skduncan](https://github.com/skduncan))
+- Add Comment When Merge to Master for RC [\#3727](https://github.com/powerhome/playbook/pull/3727) ([markdoeswork](https://github.com/markdoeswork))
+- Fix Spacing on Radio kit Children Doc Example [\#3730](https://github.com/powerhome/playbook/pull/3730) ([elisashapiro](https://github.com/elisashapiro))
+- Add Multiple Pagination Components Example and Dynamic Key Copy [\#3715](https://github.com/powerhome/playbook/pull/3715) ([elisashapiro](https://github.com/elisashapiro))
+- Bump to ci-kubed v8.6.0 [no-cache] [\#3639](https://github.com/powerhome/playbook/pull/3639) ([TeamTeaTime](https://github.com/TeamTeaTime))
+- Add Comment Script for RCs [\#3717](https://github.com/powerhome/playbook/pull/3717) ([markdoeswork](https://github.com/markdoeswork))
+- Use New Icons [\#3648](https://github.com/powerhome/playbook/pull/3648) ([markdoeswork](https://github.com/markdoeswork))
+
+**New Kits:**
+- Drawer Beta Kit [\#3686](https://github.com/powerhome/playbook/pull/3686) ([markdoeswork](https://github.com/markdoeswork))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.4.0...14.5.0)
+
 # Spot Everyone at a Glance: Meet the New Multiple Users Component!
 ##### September 18, 2024 
 
