@@ -10,7 +10,7 @@ import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 
 type GanttChartProps = {
   aria?: { [key: string]: string };
-  chartRef?: any;
+  chartRef?: { chart: Highcharts.Chart, container: React.RefObject<HTMLDivElement> };
   className?: string;
   customOptions: Partial<Highcharts.Options>;
   dark?: boolean;
