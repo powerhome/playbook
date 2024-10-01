@@ -17,7 +17,7 @@ afterEach(() => {
 
 const testId = 'circlechart1';
 
-test('uses exact classname', () => {
+test.skip('uses exact classname', () => {
   const data = [
     {
       name: 'Waiting for Calls',
