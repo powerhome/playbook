@@ -24,8 +24,8 @@ module Playbook
     # @see [#form_with] for other options
     def pb_form_with(data: {}, validate: false, loading: false, **kwargs, &block)
       data = data.merge("pb-form-validation" => validate)
-      data = data.merge("pb-form-loading" => loading)
       classname = ["pb-form", kwargs[:class]].join(" ")
+      classname += " pb_form_loading" if loading
       options = kwargs.merge(
         class: classname,
         data: data,
@@ -34,6 +34,8 @@ module Playbook
 
       content_for(:pb_js, javascript_tag(<<~JS))
         window.addEventListener("DOMContentLoaded", function() { PbFormValidation.start() })
+        window.addEventListener("DOMContentLoaded", () => formHelper())
+        window.addEventListener("turbo:frame-load", () => formHelper())
       JS
 
       form_with(**options, &block)
