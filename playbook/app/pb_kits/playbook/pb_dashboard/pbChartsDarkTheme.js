@@ -1,11 +1,7 @@
 import colors from '../tokens/exports/_colors.module.scss'
 import typography from '../tokens/exports/_typography.module.scss'
 
-import { ThemeProps } from './themeTypes'
-
-import { PlotTreemapOptions } from "highcharts";
-
-const highchartsDarkTheme: ThemeProps = {
+const highchartsDarkTheme = {
   lang: {
     thousandsSep: ',',
   },
@@ -202,7 +198,7 @@ const highchartsDarkTheme: ThemeProps = {
       traverseUpButton: {
         position: { y: -50 },
       },
-    } as PlotTreemapOptions,
+    },
   },
   credits: {
     enabled: false
