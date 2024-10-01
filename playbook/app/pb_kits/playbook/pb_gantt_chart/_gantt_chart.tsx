@@ -10,13 +10,13 @@ import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 
 type GanttChartProps = {
   aria?: { [key: string]: string };
+  chartRef?: any;
   className?: string;
   customOptions: Partial<Highcharts.Options>;
   dark?: boolean;
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
-  ref?: any
 };
 
 const GanttChart = (props: GanttChartProps) => {
@@ -28,7 +28,7 @@ const GanttChart = (props: GanttChartProps) => {
     data = {},
     htmlOptions = {},
     id,
-    ref,
+    chartRef,
   } = props;
 
   const ariaProps = buildAriaProps(aria);
@@ -66,7 +66,7 @@ const GanttChart = (props: GanttChartProps) => {
           }}
           highcharts={Highcharts}
           options={options}
-          ref={ref}
+          ref={chartRef}
       />
     </div>
   );
