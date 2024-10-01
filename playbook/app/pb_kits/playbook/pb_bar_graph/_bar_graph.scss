@@ -23,9 +23,5 @@
 }
 
 .highcharts-title {
-    // However, layout and positioning of elements like the title or legend cannot be controlled by CSS. 
-    // This is a limitation of CSS for SVG, that does not (yet - SVG 2 Geometric Style Properties) allow geometric attributes like x, y, width or height.
-    font-size: 100px;
-
     font-family: "Power Centra", "Helvetica Neue", Helvetica, Arial, sans_serif;
 }
