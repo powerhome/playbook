@@ -34,6 +34,7 @@
     "app/entrypoints/playbook-doc.js",
     "app/entrypoints/playbook-rails-react-bindings.js",
     "app/entrypoints/playbook-rails.js",
-    "app/entrypoints/mark.js",
+    "app/entrypoints/playbook-rails-friendly.js",
+    "app/entrypoints/mark.js"
   ]
 }

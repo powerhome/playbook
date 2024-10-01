@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
     "dist/playbook-doc.js",
     "dist/mark.js",
     "dist/playbook-rails.js",
+    "dist/playbook-rails-friendly.js",
     "dist/playbook-rails-react-bindings.js",
     "dist/menu.yml",
   ] + ["Rakefile"]
