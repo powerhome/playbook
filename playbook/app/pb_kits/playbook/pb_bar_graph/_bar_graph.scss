@@ -28,11 +28,21 @@
     font-weight: $bold;
     font-size: $heading_3;
     color: $text_lt_default;
+    fill: $text_lt_default;
 }
 
 .highcharts-subtitle {
     font-family: $font_family_base;
     color: $text_lt_light;
+    fill: $text_lt_light;
     font-weight: $regular;
     font-size: $text_base;
+}
+
+.highcharts-yaxis > .highcharts-axis-title {
+    color: $text_lt_lighter;
+    fill: $text_lt_lighter;
+    font-family: $font_family_base;
+    font-weight: $bold;
+    font-size: $text_smaller;
 }
