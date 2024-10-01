@@ -45,7 +45,7 @@ module Playbook
 
     # rubocop:disable Naming/AccessorMethodName
     def get_kits
-      menu = YAML.load_file(Playbook::Engine.root.join("dist/menu.yml"))
+      menu = ActiveSupport::ConfigurationFile.parse(Playbook::Engine.root.join("dist/menu.yml"))
       all_kits = []
       menu["kits"].each do |kit|
         kit_name = kit["name"]
@@ -61,7 +61,7 @@ module Playbook
     end
 
     def get_kits_pb_website
-      menu = YAML.load_file(Rails.root.join("config/menu.yml"))
+      menu = ActiveSupport::ConfigurationFile.parse(Rails.root.join("config/menu.yml"))
       menu["kits"]
     end
     # rubocop:enable Naming/AccessorMethodName
@@ -84,7 +84,7 @@ module Playbook
     def pb_doc_kit_examples(kit, type)
       example_file = pb_doc_kit_path(kit, "example.yml")
       if File.exist?(example_file)
-        examples_list = YAML.load_file(example_file)
+        examples_list = ActiveSupport::ConfigurationFile.parse(example_file)
                             .inject({}) { |item, (k, v)| item[k.to_sym] = v; item }
         examples_list.dig(:examples, type) || []
       else
