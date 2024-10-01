@@ -1,14 +1,14 @@
 import React, { useRef, useState, forwardRef, ForwardedRef } from "react"
 
 import {
-  arrow, 
-  flip, 
-  offset, 
-  Placement, 
-  safePolygon, 
+  arrow,
+  flip,
+  offset,
+  Placement,
+  safePolygon,
   shift,
-  useFloating, 
-  useHover, 
+  useFloating,
+  useHover,
   useInteractions,
 } from "@floating-ui/react"
 
@@ -16,6 +16,8 @@ import classnames from "classnames"
 import { GlobalProps, globalProps } from "../utilities/globalProps"
 import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props"
 import Flex from "../pb_flex/_flex"
+import { getAllIcons } from "../utilities/icons/allicons"
+import Icon from '../pb_icon/_icon'
 
 type TooltipProps = {
   aria?: { [key: string]: string },
@@ -53,14 +55,13 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
   const dataProps: { [key: string]: string } = buildDataProps(data)
   const ariaProps: { [key: string]: string } = buildAriaProps(aria)
   const htmlProps = buildHtmlProps(htmlOptions)
-  
+
   const css = classnames(
     globalProps({...rest}),
     className,
   )
   const [open, setOpen] = useState(false)
   const arrowRef = useRef(null)
-
 
   const {
     context,
@@ -95,7 +96,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     placement: preferredPlacement
   })
 
-      
+
   const { getFloatingProps } = useInteractions([
     useHover(context, {
       delay,
@@ -148,13 +149,16 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
               },
             })}
         >
-          <Flex 
+          <Flex
               align="center"
               gap="xs"
           >
             {icon && (
-            <i className={`pb_icon_kit far fa-${icon} fa-fw`} />
-            )}
+            <i className={`pb_icon_kit`}>
+              <Icon
+                  icon={icon}
+              />
+            </i>)}
             {text}
           </Flex>
           <div

@@ -104,6 +104,7 @@ jobs:
             --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
             --prerelease
       - name: Leave PR comment
+        uses: actions/github-script@v6
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -111,9 +112,38 @@ jobs:
           RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_version}}
           NPM_VERSION: ${{ env.new_npm_version }}
           NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_version}}
-        run: |
-          curl -H "Authorization: token ${GITHUB_TOKEN}" \
-              -X POST \
-              -d '{"body": "Release Candidate Created \n\n Your RC for Ruby Gems is [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}}) \n\n Your RC for NPM is [${{env.NPM_VERSION}}](${{env.NPM_LINK}}) "}' \
-                "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
-                
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const commitSha = context.payload.head_commit.id;
+            const commitMessage = context.payload.head_commit.message;
+            const commitAuthor = context.payload.head_commit.author.name;
+            const commitUrl = context.payload.head_commit.url;
+
+            console.log(`Commit message: ${commitMessage}`);
+            console.log(`Commit author: ${commitAuthor}`);
+            console.log(`Commit URL: ${commitUrl}`);
+
+            // Get the PR related to this commit using octokit API
+            const pullRequests = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: commitSha
+            });
+
+            if (pullRequests.data.length > 0) {
+              const pullRequestNumber = pullRequests.data[0].number;
+              console.log(`Found pull request #${pullRequestNumber} for commit ${commitSha}`);
+
+              // Add a comment to the pull request
+              await github.rest.issues.createComment({
+                issue_number: pullRequestNumber,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `You merged this pr to master branch: 
+                - Ruby Gem: [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}})
+                - NPM: [${{env.NPM_VERSION}}](${{env.NPM_LINK}})`
+              });
+            } else {
+              console.log('No pull request found for this commit');
+            }

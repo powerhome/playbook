@@ -3,11 +3,7 @@ import typography from '../tokens/exports/_typography.module.scss'
 
 import { ThemeProps } from './themeTypes'
 
-interface CustomTreemapOptions extends Highcharts.SeriesTreemapOptions {
-  traverseUpButton?: {
-    position: { y: number };
-  };
-}
+import { PlotTreemapOptions } from "highcharts";
 
 const highchartsDarkTheme: ThemeProps = {
   lang: {
@@ -206,7 +202,7 @@ const highchartsDarkTheme: ThemeProps = {
       traverseUpButton: {
         position: { y: -50 },
       },
-    } as CustomTreemapOptions,
+    } as PlotTreemapOptions,
   },
   credits: {
     enabled: false

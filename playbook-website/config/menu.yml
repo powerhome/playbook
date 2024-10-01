@@ -43,6 +43,9 @@ kits:
     platforms: *1
     description:
     status: stable
+  - name: drawer
+    platforms: *1 
+    status: beta
 - category: buttons
   description: Buttons are used primarily for actions, such as “Save” and “Cancel”.
     Link Buttons are used for less important or less commonly used actions, such as
@@ -569,4 +572,3 @@ kits:
       with avatar, titles, name and territory. This is a versatile kit with features
       than can be added to display more info.
     status: stable
-
