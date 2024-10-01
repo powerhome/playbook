@@ -45,7 +45,7 @@ const TicketsChartCard = () => {
                 hover={{ scale: "lg" }}
                 chartData={data}
                 fullCircle
-                height="25%"
+                height="150px"
                 id="gauge-full-circle"
                 suffix="%"
                 paddingLeft="md"
