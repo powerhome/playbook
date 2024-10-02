@@ -1,201 +1,23 @@
 import colors from '../tokens/exports/_colors.module.scss'
-import typography from '../tokens/exports/_typography.module.scss'
 
 const mapTheme = {
-  lang: {
-    thousandsSep: ',',
-  },
-  colors: [
-    colors.data_1,
-    colors.data_2,
-    colors.data_3,
-    colors.data_4,
-    colors.data_5,
-    colors.data_6,
-    colors.data_7,
-  ],
-  chart: {
-    borderWidth: 0,
-    borderRadius: 0,
-    plotShadow: false,
-    plotBorderWidth: 0,
-  },
-  title: {
-    style: {
-      color: colors.text_lt_default,
-      fontFamily: typography.font_family_base,
-      fontWeight: typography.bold,
-      fontSize: typography.heading_3,
+    marker : colors.primary_action,
+    maptiles: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+    flyToConfig: {
+        zoom: 13,
+        bearing: 0,
+        curve: 1.42, // change the speed at which it zooms
+               easing: function (t: any) {
+                return t;
+                },
+        essential: true
     },
-  },
-  subtitle: {
-    style: {
-      fontFamily: typography.font_family_base,
-      color: colors.text_lt_light,
-      fontWeight: typography.regular,
-      fontSize: typography.text_base,
-    },
-  },
-  xAxis: {
-    gridLineWidth: 0,
-    lineColor: colors.border_light,
-    tickColor: colors.border_light,
-    labels: {
-      style: {
-        fontFamily: typography.font_family_base,
-        color: colors.text_lt_lighter,
-        fontWeight: typography.bold,
-        fontSize: typography.text_smaller,
-      },
-    },
-    title: {
-      style: {
-        color: colors.text_lt_default,
-        fontFamily: typography.font_family_base,
-        fontWeight: typography.regular,
-        fontSize: typography.heading_4,
-      },
-    },
-  },
-  yAxis: {
-    gridLineColor: colors.border_light,
-    minorGridLineColor: colors.border_light,
-    lineWidth: 0,
-    tickWidth: 0,
-    labels: {
-      style: {
-        fontFamily: typography.font_family_base,
-        color: colors.text_lt_lighter,
-        fontWeight: typography.bold,
-        fontSize: typography.text_smaller,
-      },
-    },
-    title: {
-      style: {
-        fontFamily: typography.font_family_base,
-        color: colors.text_lt_lighter,
-        fontWeight: typography.bold,
-        fontSize: typography.text_smaller,
-      },
-    },
-  },
-  legend: {
-    layout: 'horizontal',
-    align: 'center',
-    verticalAlign: 'bottom',
-    itemStyle: {
-      fontFamily: typography.font_family_base,
-      color: colors.text_lt_light,
-      fontWeight: typography.regular,
-      fontSize: typography.text_smaller,
-    },
-    itemHoverStyle: {
-      color: colors.text_lt_default,
-    },
-    itemHiddenStyle: {
-      color: colors.text_lt_lighter,
-    },
-  },
-  tooltip: {
-    backgroundColor: {
-      linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-      stops: [
-        [0, colors.bg_dark],
-        [1, colors.bg_dark],
-      ],
-    },
-    shadow: false,
-    borderWidth: 0,
-    borderRadius: 10,
-    style: {
-      fontFamily: typography.font_family_base,
-      color: colors.text_dk_default,
-      fontWeight: typography.regular,
-      fontSize: typography.text_smaller,
-    },
-  },
-  // specific to gauge
-  // unfilled gauge color
-  pane: {
-    background: {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment 
-      // @ts-ignore
-      borderColor: colors.border_light, 
-    },
-  },
-
-  plotOptions: {
-    // PIE STYLES
-    pie: {
-      colors: [
-        colors.data_1,
-        colors.data_2,
-        colors.data_3,
-        colors.data_4,
-        colors.data_5,
-        colors.data_6,
-        colors.data_7,
-      ],
-      dataLabels: {
-        style: {
-          fontFamily: typography.font_family_base,
-          fontSize: typography.text_smaller,
-          color: colors.text_lt_light,
-          fontWeight: typography.regular,
-          textOutline: '2px $white',
-        },
-      },
-    },
-
-    // LINE CHART STYLES
-    line: {
-      dataLabels: {
-        color: '#CCC',
-      },
-      marker: {
-        lineColor: '#333',
-      },
-    },
-
-    //TREEMAP CHART STYLES
-    treemap: {
-      layoutAlgorithm: "squarified",
-      allowTraversingTree: false,
-      animationLimit: 1000,
-      colors: [
-        colors.data_1,
-        colors.data_2,
-        colors.data_3,
-        colors.data_4,
-        colors.data_5,
-        colors.data_6,
-        colors.data_7,
-        colors.data_8,
-      ],
-      dataLabels: {
-        enabled: true,
-        style: {
-          fontFamily: typography.font_family_base,
-          fontWeight: typography.bold,
-          fontSize: typography.heading_4,
-        },
-      },
-      levels: [
-        {
-          level: 1,
-          dataLabels: {
-            enabled: false,
-          },
-        },
-      ],
-      traverseUpButton: {
-        position: { y: -50 },
-      },
-    },
-  },
-  credits: {
-    enabled: false
-  },
+    zoomConfig: { duration:1000 },
+    mapConfig: {
+            style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+            zoom: 13,
+            attributionControl: false,
+    }
 }
 
 export default mapTheme
