@@ -1,7 +1,7 @@
 import colors from '../tokens/exports/_colors.module.scss'
 import typography from '../tokens/exports/_typography.module.scss'
 
-const mapTheme = {
+const highchartsTheme = {
   lang: {
     thousandsSep: ',',
   },
@@ -17,6 +17,7 @@ const mapTheme = {
   chart: {
     borderWidth: 0,
     borderRadius: 0,
+    plotBackgroundColor: undefined,
     plotShadow: false,
     plotBorderWidth: 0,
   },
@@ -58,6 +59,8 @@ const mapTheme = {
     },
   },
   yAxis: {
+    alternateGridColor: undefined,
+    minorTickInterval: null,
     gridLineColor: colors.border_light,
     minorGridLineColor: colors.border_light,
     lineWidth: 0,
@@ -125,6 +128,9 @@ const mapTheme = {
   },
 
   plotOptions: {
+    series: {
+      threshold: null,
+    },
     // PIE STYLES
     pie: {
       colors: [
@@ -198,4 +204,4 @@ const mapTheme = {
   },
 }
 
-export default mapTheme
+export { highchartsTheme }
