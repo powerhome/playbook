@@ -35,7 +35,6 @@ module Playbook
       content_for(:pb_js, javascript_tag(<<~JS))
         window.addEventListener("DOMContentLoaded", function() { PbFormValidation.start() })
         window.addEventListener("DOMContentLoaded", () => formHelper())
-        window.addEventListener("turbo:frame-load", () => formHelper())
       JS
 
       form_with(**options, &block)
