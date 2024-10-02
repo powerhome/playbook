@@ -204,4 +204,4 @@ const highchartsTheme = {
   },
 }
 
-export default highchartsTheme
+export { highchartsTheme }

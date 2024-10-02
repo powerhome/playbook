@@ -205,4 +205,4 @@ const highchartsDarkTheme = {
   },
 }
 
-export default highchartsDarkTheme
+export { highchartsDarkTheme }
