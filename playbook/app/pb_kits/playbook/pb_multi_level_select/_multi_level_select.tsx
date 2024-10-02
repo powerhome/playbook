@@ -367,7 +367,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   // Rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: string; }[] | any ) => {
     const hasOptionsChild = React.Children.toArray(props.children).some(
-      child => child.type === MultiLevelSelect.Options
+      (child: any) => child.type === MultiLevelSelect.Options
     );
 
     if (hasOptionsChild) {
