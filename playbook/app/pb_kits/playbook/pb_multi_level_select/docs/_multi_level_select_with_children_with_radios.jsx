@@ -38,6 +38,7 @@ const treeData = [
                 label: "Learning & Development",
                 value: "Learning & Development",
                 id: "development1",
+                status: "Inactive",
               },
             ],
           },
@@ -88,15 +89,17 @@ const MultiLevelSelectWithChildrenWithRadios = (props) => {
           variant="single"
           {...props}
       >
-        {(item) => (
-          <div>
-            <Badge 
-                marginLeft="sm"
-                text={item.status} 
-                variant={item.status === "active" ? "success" : "warning"} 
-            />
-          </div>
-        )}
+        <MultiLevelSelect.Options>
+          {(item) => (
+            <div>
+              <Badge 
+                  marginLeft="sm"
+                  text={item.status} 
+                  variant={item.status === "active" ? "success" : "warning"} 
+              />
+            </div>
+          )}
+        </MultiLevelSelect.Options>
       </MultiLevelSelect>
     </div>
   );

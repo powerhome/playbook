@@ -38,6 +38,7 @@ const treeData = [
                 label: "Learning & Development",
                 value: "Learning & Development",
                 id: "development1",
+                status: "Inactive",
               },
             ],
           },
@@ -87,6 +88,7 @@ const MultiLevelSelectWithChildren = (props) => {
           treeData={treeData}
           {...props}
       >
+        <MultiLevelSelect.Options>
         {(item) => (
           <div>
             <Badge 
@@ -96,6 +98,7 @@ const MultiLevelSelectWithChildren = (props) => {
             />
           </div>
         )}
+        </MultiLevelSelect.Options>
       </MultiLevelSelect>
     </div>
   );

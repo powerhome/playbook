@@ -13,29 +13,20 @@ import Radio from "../pb_radio/_radio";
 import CircleIconButton from "../pb_circle_icon_button/_circle_icon_button";
 import Body from "../pb_body/_body";
 
-
 type MultiLevelSelectOptionsProps = {
   aria?: { [key: string]: string },
-  children?: any,
+  children?: React.ReactNode | ((item: any) => React.ReactNode),
   className?: string,
   dark?: boolean,
   data?: { [key: string]: string },
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
-  items: { [key: string]: string }[],
 } & GlobalProps;
 
 const MultiLevelSelectOptions = ({
-  items,
   children,
+  items,
   ...props
 }: MultiLevelSelectOptionsProps) => {
-  const {
-    aria = {},
-    className,
-    data = {},
-    htmlOptions = {},
-  } = props;
-
 const {
   variant,
   inputName,
@@ -45,7 +36,14 @@ const {
   handleRadioButtonClick,
   handledropdownItemClick,
   filterItem,
-} =useContext(MultiLevelSelectContext);
+} = useContext(MultiLevelSelectContext)
+
+const {
+  aria = {},
+  className,
+  data = {},
+  htmlOptions = {},
+} = props;
 
 const ariaProps = buildAriaProps(aria);
 const dataProps = buildDataProps(data);
@@ -55,7 +53,6 @@ const classes = classnames(
   globalProps(props),
   className
 );
-
 
   return (
     <ul
@@ -91,7 +88,7 @@ const classes = classnames(
                               ? "chevron-down"
                               : "chevron-right"
                           }
-                          onClick={(event: any) =>
+                          onClick={(event: React.MouseEvent) =>
                             handleToggleClick(item.id, event)
                           }
                           variant="link"
@@ -127,18 +124,18 @@ const classes = classnames(
                             }}
                             type="checkbox"
                             value={item.label}
-                      />
+                        />
                     </Checkbox>
                   )}
                   {/* Render children next to the checkbox */}
                   {children && (
-                    typeof children === "function" ? children(item) : children                  
+                    typeof children === "function" ? children(item) : children
                   )}
                 </div>
                 {isTreeRowExpanded(item) &&
                   item.children &&
                   item.children.length > 0 &&
-                  (variant === "single" || !filterItem) && ( // Show children if expanded is true
+                  (variant === "single" || !filterItem) && (
                     <div>{renderNestedOptions(item.children)}</div>
                   )}
               </li>

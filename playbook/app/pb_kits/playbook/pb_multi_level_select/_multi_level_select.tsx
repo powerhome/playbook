@@ -365,15 +365,24 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   };
 
   // Rendering formattedData to UI based on typeahead
-  const renderNestedOptions = (items?: { [key: string]: any }[]) => {
-    return (
-      <MultiLevelSelectOptions
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment 
-          // eslint-disable-next-line react/no-children-prop
-          children={children}
-          items={items}
-      />
+  const renderNestedOptions = (items: { [key: string]: string; }[] | any ) => {
+    const hasOptionsChild = React.Children.toArray(props.children).some(
+      child => child.type === MultiLevelSelect.Options
     );
+
+    if (hasOptionsChild) {
+      return React.Children.map(props.children, (child) => {
+        if (child.type === MultiLevelSelect.Options) {
+          return React.cloneElement(child, { items });
+        }
+        return null;
+      });
+    } else {
+      // If nochildren, use the default rendering
+      return (
+        <MultiLevelSelectOptions items={items} />
+      );
+    }
   };
 
 
@@ -386,7 +395,6 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         id={id}
     >
       <MultiLevelSelectContext.Provider value={{
-          items: filterItem ? findByFilter(formattedData, filterItem) : formattedData,
           variant,
           inputName,
           renderNestedOptions,
