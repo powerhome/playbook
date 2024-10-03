@@ -1,1 +1,0 @@
-`showTipsBelow`(react) / `show_tips_below`(rails) takes 'xs', 'sm', 'md', 'lg', 'xl' and only show the tips below the given screen size. Similar to the <a href="/kits/table/react" target="_blank">responsive table breakpoints.</a>  Omit this prop to always show.

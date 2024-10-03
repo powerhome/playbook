@@ -1,1 +1,0 @@
-Full Width is a prop that can be added to any of the Form Group options. This prop allows the Form Group to stretch the full width of the div.

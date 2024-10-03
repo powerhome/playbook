@@ -1,8 +1,0 @@
-$flex_direction_values: (
-  row: row,
-  column: column,
-  row_reverse: row-reverse,
-  column_reverse: column-reverse
-);
-
-@include global_props_responsive_css($flex_direction_values, 'flex_direction', 'flex-direction');

@@ -1,1 +1,0 @@
-The `multiple` prop enables multiple selections; however, for a better user experience, we recommend our [Typeahead](https://playbook.powerapp.cloud/kits/typeahead/react) kit.

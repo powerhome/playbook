@@ -1,8 +1,0 @@
-export { default as BackgroundLight } from './_background_light.jsx'
-export { default as BackgroundWhite } from './_background_white.jsx'
-export { default as BackgroundGradient } from './_background_gradient.jsx'
-export { default as BackgroundImage } from './_background_image.jsx'
-export { default as BackgroundStatus } from './_background_status.jsx'
-export { default as BackgroundStatusSubtle } from './_background_status_subtle.jsx'
-export { default as BackgroundCategory } from './_background_category.jsx'
-export { default as BackgroundSize } from './_background_size.jsx'

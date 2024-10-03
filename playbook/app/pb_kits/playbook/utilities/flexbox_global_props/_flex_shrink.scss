@@ -1,6 +1,0 @@
-$flex_shrink_values: (
-  0: 0,
-  1: 1,
-);
-
-@include global_props_responsive_css($flex_shrink_values, 'flex_shrink', 'flex-shrink');

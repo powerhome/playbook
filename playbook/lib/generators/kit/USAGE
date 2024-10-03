@@ -1,5 +1,0 @@
-Description:
-    Create a new Playbook kit
-
-Example:
-    rails g kit "button"

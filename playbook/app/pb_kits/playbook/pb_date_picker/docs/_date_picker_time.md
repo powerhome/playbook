@@ -1,1 +1,0 @@
-To select time as well, you should pass the `enableTime` boolean prop. You can also enable timezone display by passing `showTimezone`.

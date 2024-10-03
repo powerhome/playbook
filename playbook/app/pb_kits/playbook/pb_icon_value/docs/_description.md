@@ -1,1 +1,0 @@
-Icon Value leverages our icon kit, to display a value of some sort in the interface. Typically, this includes a numerical value. 

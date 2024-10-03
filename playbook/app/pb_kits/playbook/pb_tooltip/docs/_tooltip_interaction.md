@@ -1,1 +1,0 @@
-Set the prop `interaction` as `true` for cases that require users to copy the content inside the tooltip.

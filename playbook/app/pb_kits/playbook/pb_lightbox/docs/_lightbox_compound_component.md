@@ -1,1 +1,0 @@
-`title` and `description` are optional props that can be passed to the kit if needed. Each of these props can take a string OR a custom component. This example highlights what the kit will look like when only strings are passed as `title` and `description`.

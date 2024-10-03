@@ -1,1 +1,0 @@
-Optionally replace the default trigger's select element by passing child components directly to the `Dropdown.Trigger`.

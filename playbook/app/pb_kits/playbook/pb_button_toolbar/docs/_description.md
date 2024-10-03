@@ -1,1 +1,0 @@
-This kit should primarily hold the most commonly used buttons.

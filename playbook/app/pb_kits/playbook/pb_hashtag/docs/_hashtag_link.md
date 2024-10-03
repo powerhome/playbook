@@ -1,1 +1,0 @@
-Use the `target` prop to control whether the link opens on the same or a new tab (same page is the default behavior). You can use any [web/standard](https://www.w3schools.com/tags/att_a_target.asp) values or a custom string to specify your link target.

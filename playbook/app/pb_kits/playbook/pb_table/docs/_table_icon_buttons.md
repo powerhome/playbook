@@ -1,1 +1,0 @@
-Icon buttons are great to use if space is limited. If the icon isn’t VERY self explanatory (for example pencil/pen for edit, trashcan for delete) then it should use a tooltip explaining what the action does. The tooltip shouldn’t be longer than a few words and essentially serves as a replacement for what the button would say if it weren’t an icon

@@ -1,1 +1,0 @@
-Icon used needs to be square. Icon size is 24px by 24px.

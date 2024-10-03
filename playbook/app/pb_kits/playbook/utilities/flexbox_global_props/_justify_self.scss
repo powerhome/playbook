@@ -1,9 +1,0 @@
-$justify_self_values: (
-  auto: auto,
-  start: start,
-  center: center,
-  end: end,
-  stretch: stretch,
-);
-
-@include global_props_responsive_css($justify_self_values, 'justify_self', 'justify-self');

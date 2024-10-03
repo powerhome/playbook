@@ -1,1 +1,0 @@
-Card headers pass category, product, and background colors only. List of all category, product, and background colors can be viewed <a href="https://playbook.powerapp.cloud/visual_guidelines/colors" target="_blank">here</a>.

@@ -1,1 +1,0 @@
-### Min defaults to 0, Max to 100.

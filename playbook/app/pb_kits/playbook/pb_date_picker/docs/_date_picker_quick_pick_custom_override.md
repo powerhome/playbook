@@ -1,1 +1,0 @@
-The customQuickPickDates/custom_quick_pick_dates prop allows for an override boolean. The override allows for the user to completely override the quick pick dates that ship with the component. Default of `override` is set to true. If you would like to simply append your dates to the default quick pick dates, set this prop to false explicitly.

@@ -1,1 +1,0 @@
-User avatar default size is `xs` or `28px`, but you can pass in `xxs` to change avatar size to `20px`.

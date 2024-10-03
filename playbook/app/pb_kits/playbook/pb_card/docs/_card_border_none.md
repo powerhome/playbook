@@ -1,1 +1,0 @@
-Remove card border <b>only</b> for dashboard cards.

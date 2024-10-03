@@ -1,1 +1,0 @@
-Badges can be used for notification, tags, and status. They are used for count and numbers.

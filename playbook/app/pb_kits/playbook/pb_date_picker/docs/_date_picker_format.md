@@ -1,1 +1,0 @@
-A full list of formatting tokens, i.e. `"m/d/Y"` can be found [here](https://flatpickr.js.org/formatting/).

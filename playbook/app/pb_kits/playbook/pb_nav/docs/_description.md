@@ -1,1 +1,0 @@
-The nav is a grouped set of links that take the user to another page, or tab through parts of a page. It comes in horizontal or vertical with several different variants.

@@ -1,1 +1,0 @@
-The `autocomplete` prop can be used to add autocomplete or typeahead functionality to the Dropdown's default Trigger. This prop is set to 'false' by default. 

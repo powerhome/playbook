@@ -1,3 +1,0 @@
-The background kit is used for adding a background to a page or to any container. Instead of adding a custom class to give something a background, you can now wrap the elements in the background kit and use the `background_color` prop to assign its color. The colors that you can choose from for the `background_color` prop are: gradient, dark, light, white, status colors, product colors, and category colors.
-
-The `custom_color` prop allows you to pass a hex value (ex. "#e43718") in place of `background_color`. It is not case sensitive, but needs to start with `#`. This prop exists primarily for use in microsites and very specific situations. Avoid using unless absolutely necessary to maintain continuity.

@@ -1,8 +1,0 @@
-# frozen_string_literal: true
-
-module Playbook
-  module Pb<%= @kit_name_pascal %>
-    class <%= @kit_name_pascal %> < ::Playbook::KitBase
-    end
-  end
-end

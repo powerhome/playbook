@@ -1,3 +1,0 @@
-The Tanstack table consumes the useReactTable hook to create the table. This hook takes an object that can contain any of the functions that the Tanstack table provides. The advancedTable's optional `tableOptions` can be used to pass tanstack options to the kit. 
-
-In the above example, we are using the initialState option provided by tanstack that takes sort as one of it's values. Setting it to true for the first column is reversing the sort order on first render of the table. For a complete list of possible options and how to use them, see [here](https://tanstack.com/table/v8/docs/api/core/table#usereacttable--createsolidtable--usevuetable--createsveltetable)

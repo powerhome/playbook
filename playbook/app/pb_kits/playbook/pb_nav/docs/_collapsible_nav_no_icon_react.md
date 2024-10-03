@@ -1,1 +1,0 @@
-Optionally remove the expand/collapse icon(s) from any collapsible nav item by passing "none" to the `iconRight` prop on that nav item.

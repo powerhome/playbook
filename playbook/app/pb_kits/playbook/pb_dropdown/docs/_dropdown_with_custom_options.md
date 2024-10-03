@@ -1,1 +1,0 @@
-`Dropdown.Option` subcomponent accepts any child components to customize the options' contents and display. By default, options are Body kit text that is set by the `label` value from the `option` object.

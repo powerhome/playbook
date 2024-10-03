@@ -1,1 +1,0 @@
-Pass `textTransform = "none"` prop and the text will remain without modification.

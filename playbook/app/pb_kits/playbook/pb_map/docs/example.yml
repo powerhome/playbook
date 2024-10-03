@@ -1,7 +1,0 @@
-examples:
-  
-  
-  react:
-  - map_default: Default
-  - map_with_plugin: Map With Polygon Draw Plugin
-  - map_with_custom_button: Map With Custom Button

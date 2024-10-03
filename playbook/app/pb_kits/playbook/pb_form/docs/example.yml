@@ -1,5 +1,0 @@
-examples:
-
-  rails:
-  - form_form_with: Default
-  - form_form_with_validate: Default + Validation

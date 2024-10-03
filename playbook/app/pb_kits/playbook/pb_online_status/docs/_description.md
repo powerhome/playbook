@@ -1,1 +1,0 @@
-Online Status is a small indicator that lets the user know the status of a person or item.

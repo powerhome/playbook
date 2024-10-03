@@ -1,9 +1,0 @@
-<%= pb_content_tag do %>
-
-    <%= pb_rails("body", props: { color: "light", dark: object.dark, classname: "pb_time_stacked time-spacing" }) do %>
-      <time>
-        <%= object.format_time_string %>
-        <%= pb_rails("caption", props: { color: "light", tag: "span", text: object.pb_date_time.to_timezone.upcase, dark: object.dark, classname: "pb_time_stacked" }) %>
-      </time>
-    <% end %>
-<% end %>

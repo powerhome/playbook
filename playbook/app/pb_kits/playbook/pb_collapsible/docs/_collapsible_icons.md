@@ -1,2 +1,0 @@
-##### Prop
-The `icon` prop allows you to customize your icon sets by passing it an array of any comma-separated pair of icon values. The first icon value will replace the kit's default icon when collapsed (chevron-down), and the second value will replace the default icon when expanded (chevron-up). `icon` also allows you to pass it a single icon as a string, in which case the icon will not toggle with the collapsible state.

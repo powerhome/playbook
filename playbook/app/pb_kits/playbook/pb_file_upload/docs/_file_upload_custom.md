@@ -1,1 +1,0 @@
-The `id` for the File Upload and the existing input you are choosing to wrap with our Kit with must match each other. This will ensure that the click on the button a.k.a, the underlying label's `for`, triggers the File Upload.

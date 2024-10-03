@@ -1,3 +1,0 @@
-`subRowHeaders` is an optional prop that if present will add header rows at each level of the nested data. The prop takes an array of strings, each string being the text for each header row. The array of strings must be in the order in which they need to be rendered in the UI according to depth.
-
-`enableToggleExpansion` is an additional optional prop that can be used in conjunction with the subRowHeaders prop. `enableToggleExpansion` is a string that can be "all", "header" or "none". If set to "all", the toggle exapansion button will appear in the table header as well as in the subRow headers. If set to "header" button will only appear in header and NOT in subRow headers. This is set to "header" by default.

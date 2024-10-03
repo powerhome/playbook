@@ -1,1 +1,0 @@
-Because the Quick Pick variant has `allowInput` set to `true` by default, use the `onClose` handler function to access the startDate and endDate values. See the `onClose` example for details.

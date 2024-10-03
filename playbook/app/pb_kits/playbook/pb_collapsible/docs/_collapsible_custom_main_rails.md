@@ -1,3 +1,0 @@
-Optionally replace your `collapsible/collapsible_main` with any component to customize your Main section's contents and/or style. This gives you full control over that subcomponent. For example, here we are using global props to make that custom Main 'sticky' on scroll.
-
-__NOTE__: Custom main sections require `data: {"collapsible-main": "true"}` to ensure the collapsible's toggle action works correctly.

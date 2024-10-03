@@ -1,1 +1,0 @@
-The `size` prop supports responsive sizes. To use them, pass an object to the size prop containing your size values relative to responsive break points (show code below). To test this here, resize your browser window to responsively change this Title's size.

@@ -1,1 +1,0 @@
-By default `textTransform = "none"`.  If there is a need to enforce `lowercase`, please pass the `textTransform = "lowercase` prop.

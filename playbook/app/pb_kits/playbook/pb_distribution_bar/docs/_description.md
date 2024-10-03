@@ -1,1 +1,0 @@
-Can be used in the same way a pie chart can be used. By default, Distribution Bar comparatively represents data without numbers. To add numbers to this chart, you can use the Legend kit with prefix text.

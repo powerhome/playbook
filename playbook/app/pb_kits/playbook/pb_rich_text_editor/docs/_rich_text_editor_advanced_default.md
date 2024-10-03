@@ -1,4 +1,0 @@
-The advanced variant leverages Tiptap to unlock additional UI options (e.g., consolidated nav toolbar, styling, etc.) as well as several extensions (see [Tiptap docs](https://tiptap.dev/extensions) for more). To leverage this variant, Tiptap __must be installed__ in your project. Complete docs for using the library can be found [here](https://tiptap.dev/). To get started with this variant, see the Code Example below for required imports as well as the basic setup. 
-
-
-NOTE: Once the Tiptap editor is initialized as shown below, you must pass that instance to the kit via the `advancedEditor` prop. 

@@ -1,3 +1,0 @@
-NOTE: All `componentOverlay` implementations require a `placement` prop, that accepts any of the following values: `top-right`, `top-left`, `bottom-right`, `bottom-left`, `top-center`, `bottom-center`, `left-center`, and `right-center`.
-
-When passing the `badge` component as an overlay, you must also specify its text content,and you may optionally control the color by passing an [approved value](https://playbook.powerapp.cloud/kits/badge#colors) as a `variant`.

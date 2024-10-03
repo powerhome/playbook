@@ -1,7 +1,0 @@
-$flex_wrap_values: (
-  wrap: wrap,
-  nowrap: nowrap,
-  wrap_reverse: wrap-reverse,
-);
-
-@include global_props_responsive_css($flex_wrap_values, 'flex_wrap', 'flex-wrap');

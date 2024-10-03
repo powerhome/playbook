@@ -1,1 +1,0 @@
-Status Subtle colors can be passed into the background kit. `success_subtle`, `warning_subtle`,`error_subtle`, `info_subtle` and `neutral_subtle`

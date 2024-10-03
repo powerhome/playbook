@@ -1,9 +1,0 @@
-examples:
-
-  rails:
-  - icon_value_default: Default
-  - icon_value_align: Align
-
-  react:
-  - icon_value_default: Default
-  - icon_value_align: Align

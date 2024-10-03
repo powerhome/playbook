@@ -1,1 +1,0 @@
-To display the "No Filters Selected" text, the `filters` prop must be `null`. As a suggestion, check the values of each key in your filters object. If they are all falsy, return `null`.

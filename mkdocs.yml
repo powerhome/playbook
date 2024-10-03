@@ -1,8 +1,0 @@
-site_name: Playbook
-site_description: Playbook Documentation
-nav:
-  - "Home": "README.md"
-  - "Upgrade Guide": "upgrade-guide.md"
-  - "Change Log": "CHANGELOG.md"
-plugins:
-  - techdocs-core

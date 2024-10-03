@@ -1,8 +1,0 @@
-examples:
-  
-  rails:
-  - pagination_default: Default
-  
-  react:
-  - pagination_default: Default
-  - pagination_page_change: Page Change

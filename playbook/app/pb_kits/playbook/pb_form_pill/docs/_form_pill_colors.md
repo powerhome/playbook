@@ -1,1 +1,0 @@
-The Status, Data, and Product colors highlighted above can be passed to the `color` prop. Primary is the default color. Form pills with a text tag, an avatar, or an icon with text tag can all receive the `color` prop. 

@@ -1,1 +1,0 @@
-Used when the user wants to display custom content within a button instead of passing in text or props to the kit itself. In this example the button is using the Pill kit and a `<span>` element inside the button.

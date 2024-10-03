@@ -1,1 +1,0 @@
-Passing `is_multi: false` will allow the user to only select one option from the drop down. Note: this will disable `pills` prop.

@@ -1,1 +1,0 @@
-Date Time is a composite kit that leverages the [Date](/kits/date) and [Time](/kits/time) kits. The Date Time kit is affected by time zones and defaults to "America/New_York".

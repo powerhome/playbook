@@ -1,1 +1,0 @@
-The message kit also supports @mentions using a [compound component](https://kentcdodds.com/blog/compound-components-with-react-hooks) structure. See the code example for details on how to pass user mentions through your messages.

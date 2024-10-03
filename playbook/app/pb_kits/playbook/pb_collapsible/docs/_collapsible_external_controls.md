@@ -1,3 +1,0 @@
-The `collapsed` prop (boolean; default = true) handles the collapsed state of a collapsible. Set it to 'false' and the collapsible will render in an expanded state on page load.
-
-You can also control the collapsed state using an external control (like a button). To do this, you must first apply a unique id to the collapsible/collapsible_content child element. You can then attach an eventListner to the external control of your choice, pass it the id as an argument and use `document.dispatchEvent(new CustomEvent(id))` to trigger the action. See the code example below for details.

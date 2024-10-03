@@ -1,1 +1,0 @@
-The external control functionality can also be used to toggle multiple collapsibles with the same control. See the code example below to see this in action.

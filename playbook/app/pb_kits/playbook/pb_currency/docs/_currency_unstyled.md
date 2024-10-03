@@ -1,1 +1,0 @@
-For alternative typography styles, you can pass a boolean prop called `unstyled` to the `Currency` kit and wrap it in any of our typography kits (`Title`, `Body`, `Caption`, etc.). This will allow the `Currency` kit to inherit any of our typography styles.

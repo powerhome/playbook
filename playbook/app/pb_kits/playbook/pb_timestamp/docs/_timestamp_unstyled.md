@@ -1,1 +1,0 @@
-For alternative typography styles, you can pass a boolean prop called `unstyled` to the `Timestamp` kit and wrap it in any of our typography kits (`Title`, `Body`, etc.). This will allow the `Timestamp` kit to inherit any of our typography styles.

@@ -1,7 +1,0 @@
-examples:
-
-  rails:
-  - date_year_stacked_default: Default
-
-  react:
-  - date_year_stacked_default: Default

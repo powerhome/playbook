@@ -1,1 +1,0 @@
-If you want to add custom buttons to the Map, you can use the `MapCustomButton` component nested inside Map.Controls as shown in the code snippet below. Note that when Map.Controls is used in this way, the props for the rest of the buttons must also be passed to Map.Controls instead of the Map itself.
