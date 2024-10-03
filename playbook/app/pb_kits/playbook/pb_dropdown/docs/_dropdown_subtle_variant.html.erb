@@ -7,4 +7,11 @@
 
 %>
 
-<%= pb_rails("dropdown", props: {options: options, variant: "subtle"}) %>
+<%= pb_rails("dropdown", props: {options: options, variant: "subtle", separators: false}) do %>
+    <%= pb_rails("dropdown/dropdown_trigger") %>
+    <%= pb_rails("dropdown/dropdown_container") do %>
+        <% options.each do |option| %>
+            <%= pb_rails("dropdown/dropdown_option", props: {option: option, margin_y: "xxs", margin_x: "xs", padding_y: "xxs", padding_x: "xs", border_radius: "md"}) %>
+        <% end %>
+    <% end %>
+<% end %>

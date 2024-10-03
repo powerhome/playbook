@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dropdown } from 'playbook-ui'
 
-const DropdownDefault = (props) => {
+const DropdownSeparatorsHidden = (props) => {
 
   const options = [
     {
@@ -23,11 +23,11 @@ const DropdownDefault = (props) => {
   <div>
     <Dropdown
         options={options}
-        variant="subtle"
+        separators={false}
         {...props}
     />
   </div>
   )
 }
 
-export default DropdownDefault
+export default DropdownSeparatorsHidden

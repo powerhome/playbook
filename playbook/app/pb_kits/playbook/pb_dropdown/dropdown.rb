@@ -14,21 +14,27 @@ module Playbook
       prop :blank_selection, type: Playbook::Props::String,
                              default: ""
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[primary subtle],
-                     default: "primary"
+                     values: %w[default subtle],
+                     default: "default"
+      prop :separators, type: Playbook::Props::Boolean,
+                        default: true
 
       def data
         Hash(prop(:data)).merge(pb_dropdown: true)
       end
 
       def classname
-        generate_classname("pb_dropdown", variant, separator: " ")
+        generate_classname("pb_dropdown", variant, separators_class, separator: " ")
       end
 
     private
 
       def error_class
         error.present? ? " error" : ""
+      end
+
+      def separators_class
+        separators ? "" : "separators_hidden"
       end
 
       def input_default_value
