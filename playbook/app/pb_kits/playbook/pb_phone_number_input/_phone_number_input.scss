@@ -15,7 +15,7 @@ $flag-min-resolution: 192dpi;
       border-color: $primary !important;
     }
 
-    .iti__selected-flag:focus-visible {
+    .iti__selected-country:focus-visible {
       outline-style: none;
     }
   }
@@ -29,7 +29,7 @@ $flag-min-resolution: 192dpi;
     border-bottom: 1px solid $border_light !important;  
   }
 
-  .iti__selected-flag {
+  .iti__selected-country {
     padding: 0 $space_xxs 0 $space_sm;
     border-radius: $space_xxs; 
 
@@ -51,7 +51,7 @@ $flag-min-resolution: 192dpi;
     }
   }
 
-  .iti--allow-dropdown .iti__country-container:hover .iti__selected-flag {
+  .iti--allow-dropdown .iti__country-container:hover .iti__selected-country {
     background-color: $focus_input_light;
   }
 
@@ -68,7 +68,7 @@ $flag-min-resolution: 192dpi;
     width: 100%;
   }
 
-  .iti--separate-dial-code .iti__selected-flag {
+  .iti--separate-dial-code .iti__selected-country {
     background-color: rgba($white, $opacity_1);
   }
 
@@ -149,13 +149,13 @@ $flag-min-resolution: 192dpi;
           background-color: rgba($white, 0.15);
         }
 
-        .iti__selected-flag {
+        .iti__selected-country {
           background-color: rgba($white, 0);
         }
       }
     }
 
-    .iti__selected-flag {
+    .iti__selected-country {
       background-color: rgba($white, 0);
       color: $white;
     }
