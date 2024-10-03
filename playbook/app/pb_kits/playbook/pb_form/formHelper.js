@@ -2,8 +2,6 @@ const formHelper = () => {
     const loadingForm = document.querySelector(".pb_form_loading")
     if (loadingForm) {
         loadingForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-
             const submitButton = event['submitter'];
             const cancelButton = event['target'].querySelector('button[type="reset"]');
 
