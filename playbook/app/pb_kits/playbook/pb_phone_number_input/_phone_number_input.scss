@@ -51,11 +51,11 @@ $flag-min-resolution: 192dpi;
     }
   }
 
-  .iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+  .iti--allow-dropdown .iti__country-container:hover .iti__selected-flag {
     background-color: $focus_input_light;
   }
 
-  .iti__flag-container:hover + .text_input {
+  .iti__country-container:hover + .text_input {
     background-color: $focus_input_light;
   }
 
@@ -139,7 +139,7 @@ $flag-min-resolution: 192dpi;
   }
 
   &.dark {
-    .iti--allow-dropdown .iti__flag-container {
+    .iti--allow-dropdown .iti__country-container {
       background-color: rgba($white, 0);
 
       &:hover {
