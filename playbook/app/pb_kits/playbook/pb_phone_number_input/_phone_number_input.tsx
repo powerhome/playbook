@@ -50,7 +50,7 @@ const formatToGlobalCountryName = (countryName: string) => {
 }
 
 const formatAllCountries = () => {
-  const countryData = window.intlTelInputGlobals.getCountryData()
+  const countryData = intlTelInput.getCountryData()
 
   for (let i = 0; i < countryData.length; i++) {
     const country = countryData[i]
