@@ -4,11 +4,9 @@ import Card from '../_card'
 const CardLight = (props) => {
   return (
     <div>
-      <Card borderNone
+      <Card 
           height="100vh"
           margin="xl"
-          position="absolute"
-          top={{value: 'xs', inset: 'true'}}
           {...props}
       >{'Card content'}</Card>
     </div>

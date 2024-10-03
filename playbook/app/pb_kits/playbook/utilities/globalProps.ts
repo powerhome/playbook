@@ -171,7 +171,15 @@ type ZIndex = {
 } | ZIndexResponsiveType
 
 type Height = {
-  height?: string | number;
+  height?: string | number
+}
+
+type MaxHeight = {
+  maxHeight?: string | number
+}
+
+type MinHeight = {
+  minHeight?: string | number
 }
 
 // keep this as the last type definition
@@ -179,7 +187,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height;
+  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -503,9 +511,21 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       return verticalAlign ? `vertical_align_${verticalAlign} ` : ''
     }
   },
+
+}
+
+const PROP_INLINE_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => {[key: string]: any}} = {
   heightProps: ({ height }: Height) => {
-    return height ? { height } : {}; // Return height as an object
-  }
+    return height ? { height } : {}; 
+  },
+
+  maxHeightProps: ({ maxHeight }: MaxHeight) => {
+    return maxHeight ? { maxHeight } : {};
+  },
+
+  minHeightProps: ({ minHeight }: MinHeight) => {
+    return minHeight ? { minHeight } : {}; 
+  },
 }
 
 type DefaultProps = {[key: string]: string} | Record<string, unknown>
@@ -519,8 +539,8 @@ export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {})
 
 // New function for inline styles
 export const globalInlineProps = (props: GlobalProps): React.CSSProperties => {
-  const styles = Object.keys(PROP_CATEGORIES).reduce((acc, key) => {
-    const result = PROP_CATEGORIES[key](props);
+  const styles = Object.keys(PROP_INLINE_CATEGORIES).reduce((acc, key) => {
+    const result = PROP_INLINE_CATEGORIES[key](props);
     return { ...acc, ...(typeof result === 'object' ? result : {}) }; // Ensure result is an object before spreading
   }, {});
 
