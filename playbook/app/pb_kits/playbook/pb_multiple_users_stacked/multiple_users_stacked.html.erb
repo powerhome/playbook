@@ -22,23 +22,10 @@
       }) %>
     <% elsif object.bubble %>
       <% object.users.slice(1, 3).each_with_index do |item, idx| %>
-        <% classname = "pb_multiple_users_stacked_item " %>
-        <% if idx == 0 %>
-          <% classname += "second_item" %>
-          <% classname += " double_bubble" if object.double_bubble %>
-          <% classname += " triple_bubble" if object.triple_bubble %>
-          <% classname += " quadruple_bubble" if object.quadruple_bubble %>
-        <% elsif idx == 1 %>
-          <% classname += "third_item" %>
-          <% classname += " quadruple_bubble" if object.quadruple_bubble %>
-        <% else %>
-          <% classname += "fourth_item" %>
-        <% end %>
-
         <%= pb_rails(
           "avatar",
           props: item.merge({
-            classname: classname,
+            classname: object.bubble_classname(idx),
             dark: object.dark
           })
         ) %>

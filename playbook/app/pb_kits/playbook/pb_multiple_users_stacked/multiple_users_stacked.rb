@@ -48,6 +48,25 @@ module Playbook
         generate_classname("pb_multiple_users_stacked_kit", single_class, bubble_class, size_class)
       end
 
+      def bubble_classname(index)
+        base_classname = "pb_multiple_users_stacked_item "
+
+        case index
+        when 0
+          base_classname += "second_item"
+          base_classname += " double_bubble" if double_bubble
+          base_classname += " triple_bubble" if triple_bubble
+          base_classname += " quadruple_bubble" if quadruple_bubble
+        when 1
+          base_classname += "third_item"
+          base_classname += " quadruple_bubble" if quadruple_bubble
+        else
+          base_classname += "fourth_item"
+        end
+
+        base_classname
+      end
+
     private
 
       def single_class
