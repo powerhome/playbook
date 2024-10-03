@@ -16,7 +16,7 @@ type Props = {
 const MultiValue = (props: Props) => {
   const { removeProps } = props
   const { imageUrl, label } = props.data
-  const { dark, multiKit, pillColor } = props.selectProps
+  const { dark, multiKit, pillColor, truncate } = props.selectProps
 
   const formPillProps = {
     marginRight: 'xs',
@@ -51,6 +51,7 @@ const MultiValue = (props: Props) => {
             name={label}
             size={multiKit === 'smallPill' ? 'small' : ''}
             text=''
+            truncate={truncate}
             {...props}
         />
       }
@@ -64,6 +65,7 @@ const MultiValue = (props: Props) => {
             name=''
             size={multiKit === 'smallPill' ? 'small' : ''}
             text={label}
+            truncate={truncate}
             {...props}
         />
       }

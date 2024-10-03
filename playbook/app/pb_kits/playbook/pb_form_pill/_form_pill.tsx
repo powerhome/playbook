@@ -47,9 +47,13 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
 
   const iconClass = icon ? "_icon" : ""
   const closeIconSize = size === "small" ? "xs" : "sm"
+
+  const filteredProps: FormPillProps = {...props}
+  delete filteredProps.truncate
+
   const css = classnames(
     `pb_form_pill_kit_${color}${iconClass}`,
-    globalProps(props),
+    globalProps(filteredProps),
     className,
     size === 'small' ? 'small' : null,
     textTransform,
@@ -77,6 +81,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
               className="pb_form_pill_text"
               size={4}
               text={name}
+              truncate={props.truncate}
           />
         </>
       )}
@@ -92,6 +97,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
               className="pb_form_pill_text"
               size={4}
               text={name}
+              truncate={props.truncate}
           />
           <Icon
               className="pb_form_pill_icon"
@@ -111,6 +117,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
               className="pb_form_pill_tag"
               size={4}
               text={text}
+              truncate={props.truncate}
           />
         </>
       )}
@@ -119,6 +126,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
             className="pb_form_pill_tag"
             size={4}
             text={text}
+            truncate={props.truncate}
         />
       )}
       <div
