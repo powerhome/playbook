@@ -363,13 +363,13 @@ $first-item-position-quadruple-bubble: (
   }
   &[class*=_single] .pb_multiple_users_stacked_item {
     @include avatar-size(28px);
-    max-width: 28px;
   }
   [class^=pb_avatar_kit].second_item, [class^=pb_badge_kit].second_item {
     @include position((bottom: 0, right: 0));
     z-index: 2;
     background: tint($primary, 90%);
     border-radius: $border_rad_mega;
+    max-width: 28px;
     padding: 0;
     span {
       transform: translateY(0);
