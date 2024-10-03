@@ -378,7 +378,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         return null;
       });
     } else {
-      // If nochildren, use the default rendering
+      // If no children, use the default rendering
       return (
         <MultiLevelSelectOptions items={items} />
       );

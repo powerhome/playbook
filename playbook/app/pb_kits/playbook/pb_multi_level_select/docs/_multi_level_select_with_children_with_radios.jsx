@@ -91,13 +91,11 @@ const MultiLevelSelectWithChildrenWithRadios = (props) => {
       >
         <MultiLevelSelect.Options>
           {(item) => (
-            <div>
-              <Badge 
-                  marginLeft="sm"
-                  text={item.status} 
-                  variant={item.status === "active" ? "success" : "warning"} 
-              />
-            </div>
+            <Badge 
+                marginLeft="sm"
+                text={item.status} 
+                variant={item.status === "active" ? "success" : "warning"} 
+            />
           )}
         </MultiLevelSelect.Options>
       </MultiLevelSelect>
