@@ -1,0 +1,19 @@
+<%
+  names = [
+    { label: 'Alexander Nathaniel Montgomery', value: 'Alexander Nathaniel Montgomery' },
+    { label: 'Isabella Anastasia Wellington', value: 'Isabella Anastasia Wellington' },
+    { label: 'Christopher Maximilian Harrington', value: 'Christopher Maximilian Harrington' },
+    { label: 'Elizabeth Seraphina Kensington', value: 'Elizabeth Seraphina Kensington' },
+    { label: 'Theodore Jonathan Abernathy', value: 'Theodore Jonathan Abernathy' },
+  ]
+%>
+
+<%= pb_rails("typeahead", props: {
+    html_options: { style: { maxWidth: "240px" }},
+    id: "typeahead-form-pill",
+    is_multi: true,
+    options: names,
+    label: "Names",
+    pills: true,
+    truncate: 1,
+}) %>
