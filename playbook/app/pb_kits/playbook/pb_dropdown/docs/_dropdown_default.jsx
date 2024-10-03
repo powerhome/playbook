@@ -23,7 +23,6 @@ const DropdownDefault = (props) => {
   <div>
     <Dropdown
         options={options}
-        variant="subtle"
         {...props}
     />
   </div>
