@@ -37,7 +37,7 @@ type DropdownProps = {
     options: GenericObject;
     separators?: boolean;
     triggerRef?: any;
-    variant?: "primary" | "subtle";
+    variant?: "default" | "subtle";
 };
 
 const Dropdown = (props: DropdownProps) => {
