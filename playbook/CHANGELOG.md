@@ -1,7 +1,5 @@
-# 14.5.0
+# 🐝 Improved Usability, Flexibility, Customization and More! 🐝
 ##### October 1, 2024 
-
-🐝 Improved Usability, Flexibility, Customization and More!🐝
 
 ![1450](https://github.com/user-attachments/assets/04a54556-9148-4a9e-8ff2-4902c59aef18)
 
