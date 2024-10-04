@@ -1,0 +1,1 @@
+The MultiLevelSelect subcomponent structure is also available in the 'Single Select' variant. In this variant, the children will be rendered to the right of the Radios and their labels. 
