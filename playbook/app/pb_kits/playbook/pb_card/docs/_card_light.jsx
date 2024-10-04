@@ -5,8 +5,8 @@ const CardLight = (props) => {
   return (
     <div>
       <Card 
-          height="100vh"
           margin="xl"
+          minHeight="100px"
           {...props}
       >{'Card content'}</Card>
     </div>
