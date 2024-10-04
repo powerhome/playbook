@@ -26,7 +26,7 @@ app.build(
             ]
         ],
         storageConfig: [
-          size: '10Gi',
+          size: '15Gi',
         ],
       ])
     }
