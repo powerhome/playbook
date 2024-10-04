@@ -65,10 +65,10 @@ module Playbook
       def typeahead_react_options
         base_options = {
           className: classname,
-          pillColor: pill_color,
           dark: dark,
           defaultValue: default_options,
           error: error,
+          htmlOptions: html_options,
           id: id,
           inline: inline,
           isMulti: is_multi,
@@ -77,8 +77,10 @@ module Playbook
           multiKit: multi_kit,
           name: name,
           options: options,
+          pillColor: pill_color,
           placeholder: placeholder,
           plusIcon: plus_icon,
+          truncate: truncate,
         }
 
         base_options[:getOptionLabel] = get_option_label if get_option_label.present?

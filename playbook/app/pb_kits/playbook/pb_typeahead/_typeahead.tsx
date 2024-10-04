@@ -136,12 +136,15 @@ const Typeahead = ({
     }
   }
 
+  const filteredProps: TypeaheadProps = {...props}
+  delete filteredProps.truncate
+
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     'pb_typeahead_kit react-select',
     `mb_${marginBottom}`,
-    globalProps(props),
+    globalProps(filteredProps),
     className
   )
 
