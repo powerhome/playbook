@@ -6,6 +6,18 @@ $dropdown-min-width: 340px;
 $flag-min-resolution: 192dpi;
 
 .pb_phone_number_input {
+  .iti {
+    width: 100%;
+  }
+
+  .iti__flag {
+    margin-right: 6px;
+  }
+
+  .iti__a11y-text {
+    display: none;
+  }
+
   input::placeholder {
     color: $focus_input_light;
   }
@@ -29,7 +41,24 @@ $flag-min-resolution: 192dpi;
     border-bottom: 1px solid $border_light !important;  
   }
 
+  .iti__selected-country-primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+  }
+
   .iti__selected-country {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    display: flex;
+    // The dropdown should automatically appear above/below the input depending on the available space. For this to work properly, you must only initialise the plugin after the <input> has been added to the DOM.
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    border-width: 0;
+
     padding: 0 $space_xxs 0 $space_sm;
     border-radius: $space_xxs; 
 
@@ -64,11 +93,7 @@ $flag-min-resolution: 192dpi;
     border-radius: 1px;
   }
 
-  .iti--separate-dial-code {
-    width: 100%;
-  }
-
-  .iti--separate-dial-code .iti__selected-country {
+  .iti--show-flags .iti__selected-country {
     background-color: rgba($white, $opacity_1);
   }
 
@@ -136,6 +161,10 @@ $flag-min-resolution: 192dpi;
   .iti__dropdown-content {
     border-radius: $space_xs; 
     border: 1px solid $border_light !important;
+    position: absolute;
+    z-index: 2;
+    // The dropdown should automatically appear above/below the input depending on the available space. For this to work properly, you must only initialise the plugin after the <input> has been added to the DOM.
+    top: 45px;
   }
 
   &.dark {
