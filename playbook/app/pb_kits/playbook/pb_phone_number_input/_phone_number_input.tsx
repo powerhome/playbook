@@ -223,6 +223,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       initialCountry,
       onlyCountries,
       countrySearch: false,
+      fixDropdownWidth: false,
     })
 
     inputRef.current.addEventListener("countrychange", (evt: Event) => {
