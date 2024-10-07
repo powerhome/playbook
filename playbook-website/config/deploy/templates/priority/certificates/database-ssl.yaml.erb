@@ -1,0 +1,39 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: custom-database-pxc-ca-issuer
+  labels:
+    app.kubernetes.io/component: database
+    app.kubernetes.io/name: playbook
+    app.kubernetes.io/instance: playbook-<%= environment %>
+    app.kubernetes.io/part-of: cert-priority-deploy
+    app.kubernetes.io/managed-by: krane
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: custom-database-ssl
+  labels:
+    app.kubernetes.io/component: database
+    app.kubernetes.io/name: playbook
+    app.kubernetes.io/instance: playbook-<%= environment %>
+    app.kubernetes.io/part-of: cert-priority-deploy
+    app.kubernetes.io/managed-by: krane
+spec:
+  commonName: database-pxc
+  dnsNames:
+    - database-pxc
+    - '*.database-pxc'
+    - database-haproxy-replicas.playbook-<%= environment %>.svc.cluster.local
+    - database-haproxy-replicas.playbook-<%= environment %>
+    - database-haproxy-replicas
+    - database-haproxy.playbook-<%= environment %>.svc.cluster.local
+    - database-haproxy.playbook-<%= environment %>
+    - database-haproxy
+  issuerRef:
+    kind: Issuer
+    name: custom-database-pxc-ca-issuer
+  secretName: custom-database-ssl
