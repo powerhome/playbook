@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "changelog/swift",          to: "pages#changelog_swift"
   get "changelog/figma",          to: "pages#changelog_figma"
   get "changelog",                to: redirect("changelog/web")
+  get "ai_assistant",             to: "pages#ai_assistant"
 
   # Kits
 
