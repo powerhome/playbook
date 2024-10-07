@@ -1,0 +1,15 @@
+#!/bin/bash
+
+priorityResources=$(krane render \
+                          --filenames="$(pwd)/config/deploy/templates/priority" \
+                          --bindings="@${workDir}/config/deploy/values.yaml" $environmentValuesFile $environmentSecretsFile "image_tag=${tag}" "environment=${environment}" $extraBindings \
+                          --current-sha=${tag}) || exit $?
+
+echo "$priorityResources" | krane deploy ${namespace} ${cluster} \
+                                  --selector="app.kubernetes.io/name=playbook,app.kubernetes.io/part-of=priority-deploy" \
+                                  --verbose-log-prefix \
+                                  --global-timeout=10m \
+                                  --stdin
+
+### run post priority scripts
+"${workDir}/bin/mysql/user-setup.sh" "$cluster" "$namespace"
