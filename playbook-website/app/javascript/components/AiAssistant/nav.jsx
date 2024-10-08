@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Nav, NavItem } from 'playbook-ui';
 
-const AINav = () => {
+const AINav = ({onChildClick}) => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
@@ -32,6 +32,10 @@ const AINav = () => {
             const currentUrl = new URL(window.location.href);
             currentUrl.searchParams.set('project', project.id);
             window.history.pushState({}, '', currentUrl);
+
+            // console.log(changeProject)
+            // changeProject()
+            onChildClick(project.id)
           }}
           text={project.summary}
         />

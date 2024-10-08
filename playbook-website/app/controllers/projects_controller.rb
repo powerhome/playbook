@@ -10,7 +10,9 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1
-  def show; end
+  def show
+    render json: @project.messages
+  end
 
   # GET /projects/new
   def new

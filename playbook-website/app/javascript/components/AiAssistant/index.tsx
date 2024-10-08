@@ -4,14 +4,37 @@ import { fetchChatGPTResponse } from "./apiService";
 import { Button, Card, Flex, Textarea, Background, Body } from "playbook-ui";
 import KitResponse from "./kitResponse";
 import AINav from "./nav";
+import Messages from "./messages"
 
 const AiAssistant = ({ apiKey }) => {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [currentProject, setCurrentProject] = useState(null);
 
   // Retrieve the CSRF token from the meta tag in the HTML
   const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content");
+
+  const getQueryParams = () => {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      project: params.get('project'),
+    };
+  };
+
+  const { project } = getQueryParams();
+
+  const changeProject = "fsdlfidsjdfslk"
+
+  // const changeProject = () => {
+  //   console.log("i'm being clicked form the nav")
+  // }
+
+  const handleChildClick = (id) => {
+    // alert('Child component clicked!');
+    console.log(id)
+    setCurrentProject(id)
+  };
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -61,7 +84,8 @@ const AiAssistant = ({ apiKey }) => {
   return (
     <>
       <Background display="flex" backgroundColor="grey">
-        <AINav/>
+        <AINav onChildClick={handleChildClick} />
+        <Messages project={project} currentProject={currentProject} />
         <Flex
           grow
           orientation="column"
