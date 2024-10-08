@@ -11,7 +11,7 @@ export const fetchChatGPTResponse = async (prompt) => {
   };
 
   const data = {
-    model: 'gpt-4o-mini', // Or whichever GPT model you're using
+    model: 'gpt-4o-mini',
     messages: [{ role: 'user', content: prompt }],
     max_tokens: 150,
   };
