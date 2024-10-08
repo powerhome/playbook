@@ -2,7 +2,7 @@ import { useState } from "react";
 import { fetchChatGPTResponse } from "./apiService";
 import { Button, Card, Flex, Textarea, Background, Body } from "playbook-ui";
 
-const AiAssistant = () => {
+const AiAssistant = ({ apiKey }) => {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -10,7 +10,7 @@ const AiAssistant = () => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const data = await fetchChatGPTResponse(input);
+      const data = await fetchChatGPTResponse(input, apiKey);
       setResponse(data.choices[0].message.content);
     } catch (error) {
       console.error("Error fetching response:", error);

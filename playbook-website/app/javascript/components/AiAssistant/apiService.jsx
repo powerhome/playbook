@@ -1,14 +1,12 @@
 import axios from 'axios';
 import { avatarCode, badgeCode, cardCode, examplePage, pillCode, tableCode, tableExampleCode, titleCode } from './kitsCode';
 
-const API_KEY = ''; // Replace with your OpenAI API key
-
-export const fetchChatGPTResponse = async (prompt) => {
+export const fetchChatGPTResponse = async (prompt, apiKey) => {
     const url = 'https://api.openai.com/v1/chat/completions';
 
     const headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
     };
 
     const data = {
