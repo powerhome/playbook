@@ -24,6 +24,7 @@ const AiAssistant = ({ apiKey }) => {
       await axios.post(
         "/projects",
         {
+          summary: input,
         },
         {
           headers: {
