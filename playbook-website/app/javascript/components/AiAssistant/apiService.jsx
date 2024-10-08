@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { avatarCode, badgeCode, cardCode, examplePage, pillCode, tableCode, tableExampleCode, titleCode, barGraphCode } from './kitsCode';
+import { examplePage, tableExampleCode, allKits } from './kitsCode';
 
 export const fetchChatGPTResponse = async (prompt, apiKey) => {
     const url = 'https://api.openai.com/v1/chat/completions';
@@ -8,6 +8,14 @@ export const fetchChatGPTResponse = async (prompt, apiKey) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
     };
+
+    let allKitsRoles = []
+    const allKitsCode = await allKits();
+    allKitsCode.forEach((kit) => {
+        allKitsRoles.push({ role: "assistant", content: kit });
+    });
+
+    console.log(allKitsRoles);
 
     const data = {
         model: 'gpt-4o-mini', // Or whichever GPT model you're using
@@ -19,15 +27,9 @@ export const fetchChatGPTResponse = async (prompt, apiKey) => {
             },
             {
                 role: "system",
-                content: "If you need to use the table component, here is an example of how to use it: #{table_example_code}"
+                content: `If you need to use the table component, here is an example of how to use it: ${tableExampleCode()}`
             },
-            { role: "assistant", content: avatarCode() },
-            { role: "assistant", content: badgeCode() },
-            { role: "assistant", content: cardCode() },
-            { role: "assistant", content: pillCode() },
-            { role: "assistant", content: tableCode() },
-            { role: "assistant", content: titleCode() },
-            { role: "assistant", content: barGraphCode() },
+            ...allKitsRoles,
             { role: "assistant", content: `This is how I want you to format the page: ${examplePage()}` },
             { role: "user", content: "Give me a table with 5 columns and 3 rows" },
             { role: "assistant", content: tableExampleCode() },
