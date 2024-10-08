@@ -1,3 +1,4 @@
+import { Avatar, Badge, Card, Pill, Table, Title } from "playbook-ui";
 async function kitCode(url) {
     try {
         const response = await fetch(url);
@@ -11,28 +12,23 @@ async function kitCode(url) {
 }
 
 export async function avatarCode() {
-    const url = "https://raw.githubusercontent.com/powerhome/playbook/master/playbook/app/pb_kits/playbook/pb_avatar/_avatar.tsx";
-    return await kitCode(url);
+    return Avatar.toString();
 }
 
 export async function badgeCode() {
-    const url = "https://raw.githubusercontent.com/powerhome/playbook/master/playbook/app/pb_kits/playbook/pb_badge/_badge.tsx";
-    return await kitCode(url);
+    return Badge.toString();
 }
 
 export async function cardCode() {
-    const url = "https://raw.githubusercontent.com/powerhome/playbook/master/playbook/app/pb_kits/playbook/pb_card/_card.tsx";
-    return await kitCode(url);
+    return Card.toString();
 }
 
 export async function pillCode() {
-    const url = "https://raw.githubusercontent.com/powerhome/playbook/master/playbook/app/pb_kits/playbook/pb_pill/_pill.tsx";
-    return await kitCode(url);
+    return Pill.toString();
 }
 
 export async function tableCode() {
-    const url = "https://raw.githubusercontent.com/powerhome/playbook/master/playbook/app/pb_kits/playbook/pb_table/_table.tsx";
-    return await kitCode(url);
+    return Table.toString();
 }
 
 export function tableExampleCode() {
@@ -40,8 +36,7 @@ export function tableExampleCode() {
 }
 
 export async function titleCode() {
-    const url = "https://raw.githubusercontent.com/powerhome/playbook/master/playbook/app/pb_kits/playbook/pb_title/_title.tsx";
-    return await kitCode(url);
+    return Title.toString();
 }
 
 export async function examplePage() {
