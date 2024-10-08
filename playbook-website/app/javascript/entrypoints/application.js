@@ -26,6 +26,7 @@ import PbKitPlayground from 'components/PbKitPlayground'
 import AvailableProps from 'components/AvailableProps'
 import MainSidebar from 'components/MainSidebar'
 import HomepageHero from 'components/HomepageHero'
+import AiAssistant from 'components/AiAssistant'
 import AnchorJS from 'anchor-js'
 import { Website } from 'components/app'
 import { Turbo } from "@hotwired/turbo-rails"
@@ -72,4 +73,5 @@ WebpackerReact.registerComponents({
   MainSidebar,
   Website,
   HomepageHero,
+  AiAssistant
 })
