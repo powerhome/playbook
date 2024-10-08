@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios"; // Import axios
 import { fetchChatGPTResponse } from "./apiService";
 import { Button, Card, Flex, Textarea, Background, Body } from "playbook-ui";
 import KitResponse from "./kitResponse";
@@ -8,13 +9,31 @@ const AiAssistant = ({ apiKey }) => {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Retrieve the CSRF token from the meta tag in the HTML
+  const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content");
+
   const handleSubmit = async () => {
     setLoading(true);
     try {
+      // Fetch the response from ChatGPT
       const data = await fetchChatGPTResponse(input, apiKey);
-      setResponse(data.choices[0].message.content);
+      const chatResponse = data.choices[0].message.content;
+      setResponse(chatResponse);
+
+      // Post the response to your Rails app's Message model with the CSRF token
+      await axios.post(
+        "/projects",
+        {
+        },
+        {
+          headers: {
+            "X-CSRF-Token": csrfToken,
+            "Content-Type": "application/json",
+          },
+        }
+      );
     } catch (error) {
-      console.error("Error fetching response:", error);
+      console.error("Error fetching or posting response:", error);
     } finally {
       setLoading(false);
     }
