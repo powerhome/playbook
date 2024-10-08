@@ -18,6 +18,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 # livenessProbe and readinessProbe. See: https://github.com/powerhome/playbook/blob/master/playbook/config/deploy/templates/deployment.yaml.erb
 gem "health_check"
 
+gem "mysql2", "0.5.6"
 gem "redcarpet", "~> 3.6"
 gem 'front_matter_parser', "~> 1.0.1"
 gem "rouge", "~> 3.15"
