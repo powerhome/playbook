@@ -3,6 +3,7 @@ import axios from "axios"; // Import axios
 import { fetchChatGPTResponse } from "./apiService";
 import { Button, Card, Flex, Textarea, Background, Body } from "playbook-ui";
 import KitResponse from "./kitResponse";
+import AINav from "./nav";
 
 const AiAssistant = ({ apiKey }) => {
   const [input, setInput] = useState("");
@@ -42,7 +43,8 @@ const AiAssistant = ({ apiKey }) => {
 
   return (
     <>
-      <Background backgroundColor="white">
+      <Background display="flex" backgroundColor="grey">
+        <AINav/>
         <Flex
           grow
           orientation="column"
