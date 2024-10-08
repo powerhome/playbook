@@ -38,6 +38,10 @@ module PlaybookWebsite
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
+
     config.generators.system_tests = nil
+
+    openai_api_key = ENV["OPENAI_API_KEY"]
+    Rails.application.config.openai_api_key = openai_api_key
   end
 end

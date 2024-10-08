@@ -41,6 +41,11 @@ template:
             value: "true"
           - name: RAILS_LOG_TO_STDOUT
             value: "true"
+          - name: OPEN_AI
+            valueFrom:
+              secretKeyRef:
+                name: playbook
+                key: open-ai
         resources:
           limits:
             cpu: 0.3
