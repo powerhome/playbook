@@ -1,30 +1,18 @@
 import React, { useState } from "react"
-import { Avatar, Button, Pill } from 'playbook-ui';
+import { Avatar, Button, Pill, Badge, Card, Title } from 'playbook-ui';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
-const kitResponse = (props) => {
+const kitResponse = ({response}) => {
 const [editorDisabled, setEditorDisabled] = useState(true);
 
 const handleEditorEditable = () => { 
   setEditorDisabled(!editorDisabled);
 }
-
-  const previewCode = `
-  <>
-    <Avatar
-      name="Carlos Lima"
-      size="lg"
-    />
-    <Pill 
-      text="Hey" 
-      variant="success"
-    />
-  </>
-  `;
+  const previewCode = response
 
   return (
     <>
-      <LiveProvider code={previewCode} disabled={editorDisabled} scope={{ Avatar, Pill }}>
+      <LiveProvider code={previewCode} disabled={editorDisabled} scope={{ Avatar, Button, Pill, Badge, Title, Card }}>
       <Button  text={editorDisabled ? `Edit` : "Disable"} onClick={handleEditorEditable}/>
         <LiveEditor />
         <LiveError />

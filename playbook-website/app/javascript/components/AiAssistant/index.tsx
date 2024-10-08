@@ -32,9 +32,7 @@ const AiAssistant = ({ apiKey }) => {
         >
           {response ? (
             <Body>
-              {response}
-              <br />
-              <KitResponse />
+              <KitResponse response={response}/>
             </Body>
           ) : (
             <Card
