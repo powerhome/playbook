@@ -9,7 +9,6 @@ const AINav = () => {
     axios.get('/projects.json')
       .then(response => {
         console.log(response.data);
-        console.log('asdfasdfasd_f');
         setProjects(response.data);
       })
       .catch(error => {
@@ -28,7 +27,12 @@ const AINav = () => {
           key={project.id}
           fontSize="small"
           fontWeight="bolder"
-          link="#"
+          // link={"?project=" + project.id}
+          onClick={() => {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('project', project.id);
+            window.history.pushState({}, '', currentUrl);
+          }}
           text={project.summary}
         />
       ))}

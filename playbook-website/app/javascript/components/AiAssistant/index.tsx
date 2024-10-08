@@ -22,7 +22,7 @@ const AiAssistant = ({ apiKey }) => {
       setResponse(chatResponse);
 
       // Post the response to your Rails app's Message model with the CSRF token
-      await axios.post(
+      const projectResponse = await axios.post(
         "/projects",
         {
           summary: input,
@@ -34,6 +34,23 @@ const AiAssistant = ({ apiKey }) => {
           },
         }
       );
+
+      console.log(projectResponse)
+
+      await axios.post(
+        "/messages",
+        {
+          project_id: projectResponse.data.id,
+          code: chatResponse,
+        },
+        {
+          headers: {
+            "X-CSRF-Token": csrfToken,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      // Post response to messages
     } catch (error) {
       console.error("Error fetching or posting response:", error);
     } finally {
@@ -52,12 +69,7 @@ const AiAssistant = ({ apiKey }) => {
           align="center"
           htmlOptions={{ style: { height: "100vh" } }}
         >
-          {response ? (
-            <Body>
-              <KitResponse response={response}/>
-            </Body>
-          ) : (
-            <Card
+          <Card
               borderNone
               padding="xs"
               htmlOptions={{ style: { width: "700px" } }}
@@ -76,6 +88,12 @@ const AiAssistant = ({ apiKey }) => {
                 text="Submit"
               />
             </Card>
+          {response ? (
+            <Body>
+              <KitResponse response={response}/>
+            </Body>
+          ) : (
+            <div></div>
           )}
         </Flex>
       </Background>
