@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { avatarCode, badgeCode, cardCode, examplePage, pillCode, tableCode, tableExampleCode, titleCode } from './kitsCode';
+import { avatarCode, badgeCode, cardCode, examplePage, pillCode, tableCode, tableExampleCode, titleCode, barGraphCode } from './kitsCode';
 
 export const fetchChatGPTResponse = async (prompt, apiKey) => {
     const url = 'https://api.openai.com/v1/chat/completions';
@@ -27,6 +27,7 @@ export const fetchChatGPTResponse = async (prompt, apiKey) => {
             { role: "assistant", content: await pillCode() },
             { role: "assistant", content: await tableCode() },
             { role: "assistant", content: await titleCode() },
+            { role: "assistant", content: await barGraphCode() },
             { role: "assistant", content: `This is how I want you to format the page: ${await examplePage()}` },
             { role: "user", content: "Give me a table with 5 columns and 3 rows" },
             { role: "assistant", content: await tableExampleCode() },
