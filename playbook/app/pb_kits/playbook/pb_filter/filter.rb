@@ -12,6 +12,7 @@ module Playbook
       prop :background, type: Playbook::Props::Boolean, default: true
       prop :max_height
       prop :min_width, default: "auto"
+      prop :max_width
       prop :placement, type: Playbook::Props::Enum,
                        values: %w[top bottom left right top-start top-end bottom-start bottom-end right-start right-end left-start left-end],
                        default: "bottom-start"
