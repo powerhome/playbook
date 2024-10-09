@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   Flex,
+  FlexItem,
   Textarea,
   Background,
   Body,
@@ -94,12 +95,24 @@ const AiAssistant = ({ apiKey }) => {
 
   return (
     <>
-      <Layout layout='content'>
-        <Layout.Side>
+    <Flex>
+     <div
+          style={{height: "100vh", backgroundColor: "white"}}
+           >
+           <Flex alignItems="center" justifyContent="center" paddingTop="xl">
+    <Button
+        marginRight='lg'
+        onClick={() => alert("button clicked!")}
+        tabIndex={0}
+        text='New Design'
+        variant='secondary'
+        icon="edit"
+    />
+    </Flex>
           <AINav onChildClick={handleChildClick} />
           <Messages project={project} currentProject={currentProject} apiKey={apiKey} />
-        </Layout.Side>
-        <Layout.Body>
+     </div>
+     <FlexItem>
           <Flex
             grow
             orientation='column'
@@ -148,8 +161,8 @@ const AiAssistant = ({ apiKey }) => {
               </>
             )}
           </Flex>
-        </Layout.Body>
-      </Layout>
+      </FlexItem>
+      </Flex>
       <Background display='flex' backgroundColor='grey'></Background>
       <style>
         {`

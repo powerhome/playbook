@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Nav, NavItem } from 'playbook-ui';
+import { Body, Nav, Title, Image, Flex, FlexItem } from 'playbook-ui';
 
 const AINav = ({onChildClick}) => {
   const [projects, setProjects] = useState([]);
@@ -21,24 +21,36 @@ const AINav = ({onChildClick}) => {
       link="#"
       orientation="vertical"
       variant="bold"
+      paddingX="sm"
     >
       {projects.map((project) => (
-        <NavItem
-          key={project.id}
-          fontSize="small"
-          fontWeight="bolder"
-          // link={"?project=" + project.id}
-          onClick={() => {
-            const currentUrl = new URL(window.location.href);
-            currentUrl.searchParams.set('project', project.id);
-            window.history.pushState({}, '', currentUrl);
-
-            // console.log(changeProject)
-            // changeProject()
-            onChildClick(project.id)
-          }}
-          text={project.summary}
+        <Flex>
+       <Image
+            alt=""
+            rounded
+            size="xs"
+            url="https://unsplash.it/500/400/?image=634"
         />
+        <FlexItem>
+          <Title> { project.summary } </Title>
+        </FlexItem>
+        </Flex>
+ //       <NavItem
+ //         key={project.id}
+ //         fontSize="small"
+ //         fontWeight="bolder"
+ //         // link={"?project=" + project.id}
+ //         onClick={() => {
+ //           const currentUrl = new URL(window.location.href);
+ //           currentUrl.searchParams.set('project', project.id);
+ //           window.history.pushState({}, '', currentUrl);
+
+ //           // console.log(changeProject)
+ //           // changeProject()
+ //           onChildClick(project.id)
+ //         }}
+ //         text={project.summary}
+ //       />
       ))}
     </Nav>
   );
