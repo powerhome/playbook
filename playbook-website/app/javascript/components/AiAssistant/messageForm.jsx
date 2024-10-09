@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios"; // Import axios
 import { fetchChatGPTResponse, fetchIteration, describeCode } from "./apiService";
-import { Button, Card, Flex, Textarea, Background, Body } from "playbook-ui";
+import { Background, Body, Button, Card, CircleIconButton, Flex, SectionSeparator, Textarea } from "playbook-ui";
 import KitResponse from "./kitResponse";
 import AINav from "./nav";
 import Messages from "./messages"
@@ -84,19 +84,35 @@ const MessageForm = ({ projectId, apiKey, messages }) => {
 
   return (
     <>
-      <Textarea
-        label='Tell us about the problem you are solving'
-        name='comment'
-        onChange={(e) => setInput(e.target.value)}
-        placeholder='Continue?'
-        value={input}
-      />
-      <Button
-        onClick={handleSubmit}
-        disabled={loading}
-        loading={loading}
-        text='Generate Design'
-      />
+      <SectionSeparator/>
+      <Flex   
+        alignItems="center"  
+        display="flex"
+        justifyContent="center"
+        position="relative"
+      >
+        <Textarea
+          alignItems="center"
+          inline
+          name='comment'
+          onChange={(e) => setInput(e.target.value)}
+          marginTop="md"
+          placeholder='Refine your results'
+          shadow="deep"
+          htmlOptions={{ style: { width: "300px" } }}
+          value={input}
+        />
+        <CircleIconButton 
+          bottom={{ inset: true, value: "md" }}
+          icon="paper-plane" 
+          disabled={loading}
+          loading={loading}
+          onClick={handleSubmit}
+          position="absolute"
+          right={{ inset: true, value: "md" }}
+          variant="secondary"
+        />
+      </Flex>
     </>
   );
 };
