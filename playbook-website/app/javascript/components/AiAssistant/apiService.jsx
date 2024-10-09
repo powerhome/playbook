@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { examplePage, tableExampleCode, allKits } from './kitsCode';
+import { examplePage, tableExampleCode, allKits, exampleFormatCode } from './kitsCode';
 
 export const fetchChatGPTResponse = async (prompt, apiKey) => {
     const url = 'https://api.openai.com/v1/chat/completions';
@@ -19,6 +19,7 @@ export const fetchChatGPTResponse = async (prompt, apiKey) => {
         model: 'gpt-4o-mini', // Or whichever GPT model you're using
         messages: [
             { role: "system", content: "Only give me code as a response" },
+            { role: "system", content: "remove all imports from the top and only give funtional components, no arrow functions" },
             {
                 role: "system",
                 content: "If you need to use any component, use it from the code I gave you, importing them from playbook-ui"
