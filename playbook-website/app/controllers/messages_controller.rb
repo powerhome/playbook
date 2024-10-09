@@ -54,6 +54,6 @@ private
 
   # Only allow a list of trusted parameters through.
   def message_params
-    params.require(:message).permit(:project_id, :code, :user_input, :open_ai_api_response)
+    params.require(:message).permit(:project_id, :code, :user_input, :ai_response)
   end
 end

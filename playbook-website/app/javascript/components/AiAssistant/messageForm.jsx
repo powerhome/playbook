@@ -37,14 +37,14 @@ const MessageForm = ({ projectId, apiKey, messages }) => {
       const descriptionChatResponse = descriptionData.choices[0].message.content
 
       console.log(descriptionChatResponse)
-      
+
       await axios.post(
         "/messages",
         {
           project_id: projectId,
           user_input: input,
           code: chatResponse,
-          open_ai_api_response: descriptionChatResponse,
+          ai_response: descriptionChatResponse,
         },
         {
           headers: {

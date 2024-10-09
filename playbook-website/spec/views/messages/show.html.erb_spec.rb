@@ -8,7 +8,7 @@ RSpec.describe "messages/show", type: :view do
                                   :project => nil,
                                   :code => "MyText",
                                   :user_input => "MyText",
-                                  :open_ai_api_response => "MyText"
+                                  :ai_response => "MyText"
                                 ))
   end
 

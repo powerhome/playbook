@@ -8,7 +8,7 @@ RSpec.describe "messages/edit", type: :view do
                                   :project => nil,
                                   :code => "MyText",
                                   :user_input => "MyText",
-                                  :open_ai_api_response => "MyText"
+                                  :ai_response => "MyText"
                                 ))
   end
 
@@ -22,7 +22,7 @@ RSpec.describe "messages/edit", type: :view do
 
       assert_select "textarea[name=?]", "message[user_input]"
 
-      assert_select "textarea[name=?]", "message[open_ai_api_response]"
+      assert_select "textarea[name=?]", "message[ai_response]"
     end
   end
 end
