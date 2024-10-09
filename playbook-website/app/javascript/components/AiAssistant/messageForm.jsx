@@ -33,7 +33,7 @@ const MessageForm = ({ projectId, apiKey, messages }) => {
       console.log(chatResponse)
       console.log("before posting a message")
 
-      const descriptionData = await describeCode(chatResponse, apiKey)
+      const descriptionData = await describeCode(previousMessage.code, chatResponse, apiKey)
       const descriptionChatResponse = descriptionData.choices[0].message.content
 
       console.log(descriptionChatResponse)

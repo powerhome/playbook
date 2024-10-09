@@ -171,7 +171,7 @@ export const fetchIteration = async (prompt, previousCode, apiKey) => {
     }
 };
 
-export const describeCode = async (code, apiKey) => {
+export const describeCode = async (previousCode, code, apiKey) => {
     const url = 'https://api.openai.com/v1/chat/completions';
 
     const headers = {
@@ -183,8 +183,11 @@ export const describeCode = async (code, apiKey) => {
     const data = {
         model: 'gpt-4o-mini', // Or whichever GPT model you're using
         messages: [
-            { role: 'user', content: "Describe this code in one paragraph." },
-            { role: 'user', content: code }
+            { role: 'user', content: "Describe the updates between this code in one sentence." },
+            { role: 'user', content: "Previous code:" },
+            { role: 'user', content: previousCode },
+            { role: 'user', content: "New code:" },
+            { role: 'user', content: code },
         ],
         max_tokens: 4096,
     };
