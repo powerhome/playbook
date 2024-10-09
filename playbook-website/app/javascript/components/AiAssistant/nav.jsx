@@ -46,7 +46,7 @@ const AINav = ({onChildClick, project, apiKey, currentProject }) => {
 
             // console.log(changeProject)
             // changeProject()
-            onChildClick('new')
+            onChildClick('undefined')
           }}
     />
     </Flex>

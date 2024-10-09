@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios" // Import axios
 import { fetchChatGPTResponse } from "./apiService"
 import {
@@ -25,6 +25,34 @@ const AiAssistant = ({ apiKey }) => {
   const [response, setResponse] = useState(null)
   const [loading, setLoading] = useState(false)
   const [currentProject, setCurrentProject] = useState(null)
+  const [lastMessage, setLastMessage] = useState(null)
+
+
+  useEffect(() => {
+    const currentUrl = new URL(window.location.href);
+    const projectParam = currentUrl.searchParams.get('project');
+
+    console.log(projectParam)
+
+    console.log("lying current project", currentProject)
+
+    setCurrentProject(projectParam)
+
+    // change to query param conditional
+    if (projectParam !== 'undefined') {
+      axios.get(`/projects/${projectParam}.json`)
+        .then(response => {
+          console.log("index messages", response.data)
+          // setMessages(response.data);
+          setLastMessage(response.data[response.data.length - 1])
+
+          console.log(lastMessage)
+        })
+        .catch(error => {
+          console.error("There was an error fetching the projects!", error);
+        });
+    }
+  }, [currentProject]);
 
   // Retrieve the CSRF token from the meta tag in the HTML
   const csrfToken = document
@@ -111,50 +139,47 @@ const AiAssistant = ({ apiKey }) => {
             align='center'
             htmlOptions={{ style: { height: "100vh" } }}
           >
-            {response ? (
-              <Body>
-                <KitResponse response={response} />
-              </Body>
-            ) : (
-              <>
-                <img src={Logo} alt='Playmaker Logo' />
-                <Card
-                  marginTop='xl'
-                  padding='md'
-                  htmlOptions={{ style: { width: "700px" } }}
+            {(lastMessage && currentProject !== "undefined") && <Body>
+              <KitResponse response={lastMessage.code} />
+            </Body>}
+            {currentProject === 'undefined' && <>
+              <img src={Logo} alt='Playmaker Logo' />
+              <Card
+                marginTop='xl'
+                padding='md'
+                htmlOptions={{ style: { width: "700px" } }}
+              >
+                <Title size={3} paddingBottom='lg'>
+                  Let's get started
+                </Title>
+                <Caption paddingBottom='xs'>
+                  What device are you designing for?
+                </Caption>
+                <Nav
+                  paddingBottom='lg'
+                  link='#'
+                  orientation='horizontal'
+                  variant='subtle'
                 >
-                  <Title size={3} paddingBottom='lg'>
-                    Let's get started
-                  </Title>
-                  <Caption paddingBottom='xs'>
-                    What device are you designing for?
-                  </Caption>
-                  <Nav
-                    paddingBottom='lg'
-                    link='#'
-                    orientation='horizontal'
-                    variant='subtle'
-                  >
-                    <NavItem active link='#' text='Desktop' />
-                    <NavItem link='#' text='Tablet' />
-                    <NavItem link='#' text='Mobile' />
-                  </Nav>
-                  <Textarea
-                    label='Tell us about the problem you are solving'
-                    name='comment'
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder='For the [Project Name], I’d like to use AI to design a layout that meets our key project requirements, such as prioritized features, user interactions, and any specific technical constraints like deadlines or platform dependencies. The layout should focus on our target audience, reflect the desired aesthetic, and include critical content elements.'
-                    value={input}
-                  />
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={loading}
-                    loading={loading}
-                    text='Generate Design'
-                  />
-                </Card>
-              </>
-            )}
+                  <NavItem active link='#' text='Desktop' />
+                  <NavItem link='#' text='Tablet' />
+                  <NavItem link='#' text='Mobile' />
+                </Nav>
+                <Textarea
+                  label='Tell us about the problem you are solving'
+                  name='comment'
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder='For the [Project Name], I’d like to use AI to design a layout that meets our key project requirements, such as prioritized features, user interactions, and any specific technical constraints like deadlines or platform dependencies. The layout should focus on our target audience, reflect the desired aesthetic, and include critical content elements.'
+                  value={input}
+                />
+                <Button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  loading={loading}
+                  text='Generate Design'
+                />
+              </Card>
+            </>}
           </Flex>
         </FlexItem>
       </Flex>

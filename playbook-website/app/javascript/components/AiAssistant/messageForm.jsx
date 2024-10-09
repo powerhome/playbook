@@ -56,6 +56,8 @@ const MessageForm = ({ projectId, apiKey, messages }) => {
 
       console.log("after posting a message")
 
+      window.location.reload();
+
       // Fetch the response from ChatGPT
       // const data = await fetchChatGPTResponse(input, apiKey)
       // const chatResponse = data.choices[0].message.content
