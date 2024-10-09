@@ -28,48 +28,6 @@ const kitResponse = ({ response }) => {
   
     return renderStatement.trim();
   };
-    // Define the example code as a string - note the removal of template literals
-  const example = `function FrogLifeExpectancy() {
-  const frogData = [
-    {
-      name: "Common Frog",
-      data: [10]
-    },
-    {
-      name: "Tree Frog",
-      data: [6]
-    },
-    {
-      name: "Bullfrog",
-      data: [8]
-    },
-    {
-      name: "African Clawed Frog",
-      data: [15]
-    },
-    {
-      name: "Poison Dart Frog",
-      data: [4]
-    }
-  ];
-
-  return (
-    <div>
-      <BarGraph
-        align="center"
-        axisTitle="Life Expectancy (years)"
-        chartData={frogData}
-        id="frog-life-expectancy-graph"
-        pointStart={1}
-        subTitle="Source: Various studies on amphibians"
-        title="Life Expectancy of Various Frog Species"
-      />
-    </div>
-  );
-}
-
-render(<FrogLifeExpectancy />);`;
-
 
 const jsxCode = transformComponent(response);
 
