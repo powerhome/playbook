@@ -18,7 +18,7 @@ const AINav = ({onChildClick, project, apiKey, currentProject }) => {
     
     axios.get('/projects.json')
       .then(response => {
-        console.log(response.data);
+        console.log("projects", response.data);
         setProjects(response.data);
       })
       .catch(error => {

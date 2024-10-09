@@ -106,12 +106,7 @@ const AiAssistant = ({ apiKey }) => {
             />
           </Flex>
 
-          <AINav onChildClick={handleChildClick} />
-          <Messages
-            project={project}
-            currentProject={currentProject}
-            apiKey={apiKey}
-          />
+          <AINav onChildClick={handleChildClick} project={project} currentProject={currentProject} apiKey={apiKey} />
         </div>
         <FlexItem>
           <Flex
