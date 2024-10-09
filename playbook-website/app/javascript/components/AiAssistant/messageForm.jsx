@@ -19,14 +19,19 @@ const MessageForm = ({ projectId, apiKey, messages }) => {
     setLoading(true)
 
     console.log("submitting a message!", projectId)
-    
+
     const previousMessage = messages[messages.length - 1]
 
     try {
 
+      console.log(previousMessage)
       const data = await fetchIteration(input, previousMessage.code, apiKey)
       const chatResponse = data.choices[0].message.content
       setResponse(chatResponse)
+
+
+      console.log(chatResponse)
+      console.log("before posting a message")
       
       await axios.post(
         "/messages",
@@ -42,6 +47,8 @@ const MessageForm = ({ projectId, apiKey, messages }) => {
           },
         }
       );
+
+      console.log("after posting a message")
 
       // Fetch the response from ChatGPT
       // const data = await fetchChatGPTResponse(input, apiKey)

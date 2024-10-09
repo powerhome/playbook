@@ -101,6 +101,42 @@ export const fetchIteration = async (prompt, previousCode, apiKey) => {
     allKitsCode.forEach((kit) => {
         allKitsRoles.push({ role: "assistant", content: kit });
     });
+    const designRulesContext = Object.entries(designRules).map(([key, rules]) => (
+        `For ${key}: ${rules.join(' ')}`
+    )).join('\n');
+
+    const territoriesContext = territories.map(territory => 
+        `Territory ID: ${territory.id}, Name: ${territory.name}, Abbreviation: ${territory.abbreviation}`
+    ).join('\n');
+
+    const genericInfoContext = Object.entries(genericInfo).map(([key, info]) => 
+        `${key}: ${info.join(' ')}`
+    ).join('\n');
+
+    const tableGuidelinesContext = tableGuidelines.map(guideline => 
+        `${guideline.section}: ${guideline.description}`
+    ).join('\n');
+
+    const newsLayoutContext = newsLayout.map(layout => 
+        `${layout.section}: ${layout.description}`
+    ).join('\n');
+
+    const fullContext = `
+        Design Rules:
+        ${designRulesContext}
+
+        Territories:
+        ${territoriesContext}
+
+        Generic Information:
+        ${genericInfoContext}
+
+        Table Guidelines:
+        ${tableGuidelinesContext}
+
+        News Layout:
+        ${newsLayoutContext}
+    `;
 
     const data = {
         model: 'gpt-4o-mini', // Or whichever GPT model you're using
