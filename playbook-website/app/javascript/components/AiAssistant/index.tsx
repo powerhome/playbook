@@ -151,6 +151,13 @@ const AiAssistant = ({ apiKey }) => {
         </Layout.Body>
       </Layout>
       <Background display='flex' backgroundColor='grey'></Background>
+      <style>
+        {`
+          [class^=pb_layout_kit][class*=_content] {
+            grid-template-areas: none;
+          }
+        `}
+      </style>
     </>
   )
 }
