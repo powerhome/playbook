@@ -74,7 +74,7 @@ export const fetchChatGPTResponse = async (prompt, apiKey) => {
             { role: 'user', content: "Rename the Component function to App" },
             { role: 'user', content: "Make it a functional component" },
             { role: 'user', content: "Move any const to inside the functional component" },
-            { role: 'user', content: "Do not add any markdown to it" },
+            { role: 'user', content: "Do not add any markdown to it. Example: remove any back ticks like ```javascript" },
             { role: 'user', content: "Last line should be only render(<App />)" },
             { role: 'user', content: "Remove all the import at the top" },
         ],
@@ -161,7 +161,13 @@ export const fetchIteration = async (prompt, previousCode, apiKey) => {
             { role: "assistant", content: tableExampleCode() },
             // Show previous code
             { role: 'user', content: previousCode },
-            { role: 'user', content: prompt }
+            { role: 'user', content: prompt },
+            { role: 'user', content: "Rename the Component function to App" },
+            { role: 'user', content: "Make it a functional component" },
+            { role: 'user', content: "Move any const to inside the functional component" },
+            { role: 'user', content: "Do not add any markdown to it. Example: remove any back ticks like ```javascript" },
+            { role: 'user', content: "Last line should be only render(<App />)" },
+            { role: 'user', content: "Remove all the import at the top" },
         ],
         max_tokens: 4096,
     };
