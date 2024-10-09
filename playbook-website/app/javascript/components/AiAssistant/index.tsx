@@ -1,6 +1,7 @@
-import { useState } from "react"
-import axios from "axios" // Import axios
-import { fetchChatGPTResponse } from "./apiService"
+
+import { useState } from "react";
+import axios from "axios"; // Import axios
+import { fetchChatGPTResponse } from "./apiService";
 import {
   Button,
   Card,
@@ -14,18 +15,36 @@ import {
   NavItem,
   Caption,
 } from "playbook-ui"
-import KitResponse from "./kitResponse"
-import AINav from "./nav"
+import KitResponse from "./kitResponse";
+import AINav from "./nav";
+import Messages from "./messages"
 
 const AiAssistant = ({ apiKey }) => {
-  const [input, setInput] = useState("")
-  const [response, setResponse] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [input, setInput] = useState("");
+  const [response, setResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [currentProject, setCurrentProject] = useState(null);
+
 
   // Retrieve the CSRF token from the meta tag in the HTML
   const csrfToken = document
     .querySelector('meta[name="csrf-token"]')
     ?.getAttribute("content")
+
+  const getQueryParams = () => {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      project: params.get('project'),
+    };
+  };
+
+  const { project } = getQueryParams();
+
+  const handleChildClick = (id) => {
+    // alert('Child component clicked!');
+    console.log(id)
+    setCurrentProject(id)
+  };
 
   const handleSubmit = async () => {
     setLoading(true)
@@ -36,7 +55,7 @@ const AiAssistant = ({ apiKey }) => {
       setResponse(chatResponse)
 
       // Post the response to your Rails app's Message model with the CSRF token
-      await axios.post(
+      const projectResponse = await axios.post(
         "/projects",
         {
           summary: input,
@@ -47,7 +66,24 @@ const AiAssistant = ({ apiKey }) => {
             "Content-Type": "application/json",
           },
         }
-      )
+      );
+
+      console.log(projectResponse)
+
+      await axios.post(
+        "/messages",
+        {
+          project_id: projectResponse.data.id,
+          code: chatResponse,
+        },
+        {
+          headers: {
+            "X-CSRF-Token": csrfToken,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      // Post response to messages
     } catch (error) {
       console.error("Error fetching or posting response:", error)
     } finally {
@@ -57,10 +93,10 @@ const AiAssistant = ({ apiKey }) => {
 
   return (
     <>
-      {" "}
       <Layout layout='content'>
         <Layout.Side>
-          <AINav />
+          <AINav onChildClick={handleChildClick} />
+          <Messages project={project} currentProject={currentProject} />
         </Layout.Side>
         <Layout.Body>
           <Flex

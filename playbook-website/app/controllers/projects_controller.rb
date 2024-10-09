@@ -10,7 +10,9 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1
-  def show; end
+  def show
+    render json: @project.messages
+  end
 
   # GET /projects/new
   def new
@@ -25,7 +27,9 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      redirect_to @project, notice: "Project was successfully created."
+      # redirect_to @project, notice: "Project was successfully created."
+      puts @project
+      render json: @project
     else
       render :new, status: :unprocessable_entity
     end
