@@ -79,6 +79,11 @@ const globalPropsValues = [
     values: '"wrap" | "nowrap" | "wrapReverse"'
   },
   {
+    prop: "htmlOptions",
+    type: "object",
+    values: "{ [key: string]: string | number | boolean | (() => void); }"
+  },
+  {
     prop: "id",
     type: "string",
     values: []
