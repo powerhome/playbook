@@ -7,9 +7,15 @@ const AINav = ({onChildClick, project, apiKey, currentProject }) => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-            const currentUrl = new URL(window.location.href);
-            currentUrl.searchParams.set('project', 'undefined');
-            window.history.pushState({}, '', currentUrl);
+    const currentUrl = new URL(window.location.href);
+    const projectParam = currentUrl.searchParams.get('project');
+
+    // Check if projectParam is a number
+    if (projectParam !== null && !projectParam) {
+      currentUrl.searchParams.set('project', 'undefined');
+      window.history.pushState({}, '', currentUrl);
+    }
+    
     axios.get('/projects.json')
       .then(response => {
         console.log(response.data);
