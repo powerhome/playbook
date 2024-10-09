@@ -2,30 +2,35 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Nav, NavItem } from 'playbook-ui';
 
-const Messages = ({project, currentProject}) => {
-  const [projects, setProjects] = useState([]);
+import MessagesForm from "./messageForm"
+
+const Messages = ({project, currentProject, apiKey}) => {
+  const [messages, setMessages] = useState([]);
+
+  const trueProject = currentProject || project;
 
   useEffect(() => {
-    axios.get(`/projects/${currentProject || project}.json`)
-      .then(response => {
-        console.log(response.data);
-        setProjects(response.data);
-      })
-      .catch(error => {
-        console.error("There was an error fetching the projects!", error);
-      });
-    //   currentProject remove this to not refresh after you make a new project
+    if (trueProject) {
+        axios.get(`/projects/${trueProject}.json`)
+          .then(response => {
+            setMessages(response.data);
+          })
+          .catch(error => {
+            console.error("There was an error fetching the projects!", error);
+          });
+    }
   }, [currentProject]);
 
 
 
   return (
     <div>
-        {projects.map((project) => (
+        {messages.map((message) => (
             <div>
-                {project.code}
+                {message.code}
             </div>
       ))}
+      <MessagesForm projectId={trueProject} apiKey={apiKey} />
     </div>
   );
 };

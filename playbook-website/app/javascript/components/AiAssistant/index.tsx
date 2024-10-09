@@ -96,7 +96,7 @@ const AiAssistant = ({ apiKey }) => {
       <Layout layout='content'>
         <Layout.Side>
           <AINav onChildClick={handleChildClick} />
-          <Messages project={project} currentProject={currentProject} />
+          <Messages project={project} currentProject={currentProject} apiKey={apiKey} />
         </Layout.Side>
         <Layout.Body>
           <Flex
