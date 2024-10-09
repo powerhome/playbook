@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios"; // Import axios
-import { fetchChatGPTResponse } from "./apiService";
+import { fetchChatGPTResponse, fetchIteration } from "./apiService";
 import { Button, Card, Flex, Textarea, Background, Body } from "playbook-ui";
 import KitResponse from "./kitResponse";
 import AINav from "./nav";
 import Messages from "./messages"
 
-const MessageForm = ({ projectId, apiKey }) => {
+const MessageForm = ({ projectId, apiKey, messages }) => {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -19,9 +19,12 @@ const MessageForm = ({ projectId, apiKey }) => {
     setLoading(true)
 
     console.log("submitting a message!", projectId)
+    
+    const previousMessage = messages[messages.length - 1]
+
     try {
 
-      const data = await fetchChatGPTResponse(input, apiKey)
+      const data = await fetchIteration(input, previousMessage.code, apiKey)
       const chatResponse = data.choices[0].message.content
       setResponse(chatResponse)
       

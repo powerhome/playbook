@@ -30,7 +30,7 @@ const Messages = ({project, currentProject, apiKey}) => {
                 {message.code}
             </div>
       ))}
-      <MessagesForm projectId={trueProject} apiKey={apiKey} />
+      <MessagesForm projectId={trueProject} apiKey={apiKey} messages={messages} />
     </div>
   );
 };
