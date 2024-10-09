@@ -50,7 +50,7 @@ spec:
                 secretKeyRef:
                   name: playbook
                   key: sentry-dsn
-            - name: OPEN_AI
+            - name: OPEN_AI_KEY
               valueFrom:
                 secretKeyRef:
                   name: playbook
@@ -77,4 +77,4 @@ spec:
               "memory" => "256Mi",
               "ephemeral-storage" => "100Mi"
             }
-          } %> 
+          } %>
