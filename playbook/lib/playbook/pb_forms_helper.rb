@@ -22,9 +22,10 @@ module Playbook
     # @param data [Hash] hash of data attributes
     # @param validate [Boolean] whether validation should be triggered or not
     # @see [#form_with] for other options
-    def pb_form_with(data: {}, validate: false, **kwargs, &block)
+    def pb_form_with(data: {}, validate: false, loading: false, **kwargs, &block)
       data = data.merge("pb-form-validation" => validate)
       classname = ["pb-form", kwargs[:class]].join(" ")
+      classname += " pb_form_loading" if loading
       options = kwargs.merge(
         class: classname,
         data: data,
@@ -33,6 +34,7 @@ module Playbook
 
       content_for(:pb_js, javascript_tag(<<~JS))
         window.addEventListener("DOMContentLoaded", function() { PbFormValidation.start() })
+        window.addEventListener("DOMContentLoaded", () => formHelper())
       JS
 
       form_with(**options, &block)
