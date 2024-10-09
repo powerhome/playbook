@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { examplePage, tableExampleCode, allKits, exampleFormatCode } from './kitsCode';
+import { examplePage, tableExampleCode, allKits } from './kitsCode';
 
 export const fetchChatGPTResponse = async (prompt, apiKey) => {
     const url = 'https://api.openai.com/v1/chat/completions';
