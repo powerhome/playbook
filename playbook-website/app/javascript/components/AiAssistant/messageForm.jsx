@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios"; // Import axios
-import { fetchChatGPTResponse, fetchIteration } from "./apiService";
+import { fetchChatGPTResponse, fetchIteration, describeCode } from "./apiService";
 import { Button, Card, Flex, Textarea, Background, Body } from "playbook-ui";
 import KitResponse from "./kitResponse";
 import AINav from "./nav";
@@ -32,13 +32,19 @@ const MessageForm = ({ projectId, apiKey, messages }) => {
 
       console.log(chatResponse)
       console.log("before posting a message")
+
+      const descriptionData = await describeCode(chatResponse, apiKey)
+      const descriptionChatResponse = descriptionData.choices[0].message.content
+
+      console.log(descriptionChatResponse)
       
       await axios.post(
         "/messages",
         {
           project_id: projectId,
           user_input: input,
-          code: chatResponse
+          code: chatResponse,
+          open_ai_api_response: descriptionChatResponse,
         },
         {
           headers: {

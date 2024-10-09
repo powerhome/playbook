@@ -54,7 +54,7 @@ const Messages = ({project, currentProject, apiKey}) => {
                    Playmaker 
                 </Caption>
                 <div>
-                   open ai response goes here 
+                   {message.open_ai_api_response}
                 </div>
               </div>
           </Flex>
