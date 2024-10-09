@@ -50,6 +50,7 @@ const AINav = ({onChildClick, project, apiKey, currentProject }) => {
           }}
     />
     </Flex>
+    {(project === 'undefined' ) &&  
     <Nav
       link="#"
       orientation="vertical"
@@ -97,6 +98,7 @@ const AINav = ({onChildClick, project, apiKey, currentProject }) => {
         </Flex>
       ))}
     </Nav>
+    }
     {(project !== 'undefined' ) &&  
       <Messages project={project} currentProject={currentProject} apiKey={apiKey} />
     }
