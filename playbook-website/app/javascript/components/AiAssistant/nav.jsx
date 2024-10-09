@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Caption, Nav, Title, Image, Flex, NavItem } from 'playbook-ui';
+import { Caption, Button, Nav, Title, Image, Flex, NavItem } from 'playbook-ui';
+import Messages from "./messages"
 
-const AINav = ({onChildClick}) => {
+const AINav = ({onChildClick, project, apiKey, currentProject }) => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('project', 'undefined');
+            window.history.pushState({}, '', currentUrl);
     axios.get('/projects.json')
       .then(response => {
         console.log(response.data);
@@ -17,6 +21,29 @@ const AINav = ({onChildClick}) => {
   }, []);
 
   return (
+     <div
+          style={{height: "100vh", width: "20vw", backgroundColor: "white"}}
+           >
+           <Flex alignItems="center" justifyContent="center" paddingTop="xl">
+    <Button
+        marginRight='lg'
+        onClick={() => alert("button clicked!")}
+        tabIndex={0}
+        text='New Design'
+        variant='secondary'
+        icon="edit"
+        marginBottom="md"
+        onClick={() => {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('project', project.id);
+            window.history.pushState({}, '', currentUrl);
+
+            // console.log(changeProject)
+            // changeProject()
+            onChildClick('new')
+          }}
+    />
+    </Flex>
     <Nav
       link="#"
       orientation="vertical"
@@ -64,6 +91,10 @@ const AINav = ({onChildClick}) => {
         </Flex>
       ))}
     </Nav>
+    {(project !== 'undefined' ) &&  
+      <Messages project={project} currentProject={currentProject} apiKey={apiKey} />
+    }
+    </div>
   );
 };
 
