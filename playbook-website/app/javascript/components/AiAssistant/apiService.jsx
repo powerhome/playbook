@@ -15,15 +15,13 @@ export const fetchChatGPTResponse = async (prompt, apiKey) => {
         allKitsRoles.push({ role: "assistant", content: kit });
     });
 
-    console.log(allKitsRoles);
-
     const data = {
         model: 'gpt-4o-mini', // Or whichever GPT model you're using
         messages: [
             { role: "system", content: "Only give me code as a response" },
             {
                 role: "system",
-                content: "If you need to use avatar, badge, card, pill, table, or title, use it from the code I gave you, importing them from playbook-ui"
+                content: "If you need to use any component, use it from the code I gave you, importing them from playbook-ui"
             },
             {
                 role: "system",
