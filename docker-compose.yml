@@ -19,3 +19,48 @@ services:
       - bundle:/usr/local/bundle
     ports:
       - "8089:3000"
+  db:
+    platform: linux/x86_64
+    image: percona:8.0.27-18@sha256:f649b06357456689c24601fe919d585dce5b289c623bb547f84acc458c34c0d0
+    init: true
+    ports:
+      - "3306:3306"  # Map the host port 3306 to the container port 3306
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "mysql", "-u", "root", "-ppassword", "-e", "SHOW DATABASES;"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+      start_period: 20s
+    networks:
+      - main
+  redis:
+    image: redis:7.4.0-alpine@sha256:c35af3bbcef51a62c8bae5a9a563c6f1b60d7ebaea4cb5a3ccbcc157580ae098
+    healthcheck:
+      test: ["CMD", "redis-cli", "PING"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+      start_period: 20s
+    ports:
+      - 6379
+    networks:
+      - main
+  influxdb:
+    image: influxdb:2.7.10@sha256:aac51f94d98041e591aa4a5f36294080dd7987c1033ff115febfab98adcda61d
+    container_name: influxdb
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: passwordpasswordpassword
+      DOCKER_INFLUXDB_INIT_ORG: web
+      DOCKER_INFLUXDB_INIT_BUCKET: app_data
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: influxdbwebtoken
+    ports:
+      - 8086:8086
+    networks:
+      - main
+networks:
+  main:

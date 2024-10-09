@@ -1,0 +1,20 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password: password
+  host: 127.0.0.1 
+  port: 3306
+
+development:
+  <<: *default
+  database: playbook_website_dev
+
+test:
+  <<: *default
+  database: playbook_website_test
+
+production:
+  <<: *default
+  database: playbook_website_prod
