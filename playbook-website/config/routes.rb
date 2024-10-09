@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :messages
+  resources :projects
   root                            to: "pages#home"
   get "home",                     to: "pages#home"
   get "visual_guidelines",        to: redirect("/visual_guidelines/colors")

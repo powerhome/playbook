@@ -12,5 +12,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_08_185740) do
+  create_table "messages", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.text "code"
+    t.text "user_input"
+    t.text "open_ai_api_response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_messages_on_project_id"
+  end
+
+  create_table "projects", charset: "utf8mb3", force: :cascade do |t|
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "messages", "projects"
 end

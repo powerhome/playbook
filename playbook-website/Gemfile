@@ -7,32 +7,32 @@ ruby "3.3.0"
 
 gem "playbook_ui", path: "../playbook"
 
+gem "puma", "~> 6.3"
 gem "rails", "~> 7.0.8"
 gem "turbo-rails", "~> 1.4.0"
-gem "puma", "~> 6.3"
 gem "vite_rails"
 # Make Compatible with Ruby 3.1.0 Upgrade
-gem "psych", "< 4"
 gem "bootsnap", ">= 1.1.0", require: false
+gem "psych", "< 4"
 
 # livenessProbe and readinessProbe. See: https://github.com/powerhome/playbook/blob/master/playbook/config/deploy/templates/deployment.yaml.erb
 gem "health_check"
 
+gem "faker"
+gem "front_matter_parser", "~> 1.0.1"
 gem "mysql2", "0.5.6"
 gem "redcarpet", "~> 3.6"
-gem 'front_matter_parser', "~> 1.0.1"
 gem "rouge", "~> 3.15"
-gem "faker"
-gem "will_paginate"
-gem "sentry-ruby"
 gem "sentry-rails"
+gem "sentry-ruby"
+gem "will_paginate"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
-  gem "rspec-rails", '3.9.1'
   gem "diff-lcs", "1.4.4"
   gem "rails-controller-testing"
+  gem "rspec-rails", "3.9.1"
 end
 
 group :development do
