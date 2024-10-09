@@ -74,6 +74,7 @@ const AiAssistant = ({ apiKey }) => {
         "/messages",
         {
           project_id: projectResponse.data.id,
+          user_input: projectResponse.data.summary,
           code: chatResponse,
         },
         {
