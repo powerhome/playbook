@@ -1,7 +1,6 @@
-
-import { useState } from "react";
-import axios from "axios"; // Import axios
-import { fetchChatGPTResponse } from "./apiService";
+import { useState } from "react"
+import axios from "axios" // Import axios
+import { fetchChatGPTResponse } from "./apiService"
 import {
   Button,
   Card,
@@ -10,22 +9,21 @@ import {
   Textarea,
   Background,
   Body,
-  Layout,
   Title,
   Nav,
   NavItem,
   Caption,
 } from "playbook-ui"
-import KitResponse from "./kitResponse";
-import AINav from "./nav";
+import KitResponse from "./kitResponse"
+import AINav from "./nav"
 import Messages from "./messages"
+import Logo from "../../images/Logo.svg"
 
 const AiAssistant = ({ apiKey }) => {
-  const [input, setInput] = useState("");
-  const [response, setResponse] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [currentProject, setCurrentProject] = useState(null);
-
+  const [input, setInput] = useState("")
+  const [response, setResponse] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [currentProject, setCurrentProject] = useState(null)
 
   // Retrieve the CSRF token from the meta tag in the HTML
   const csrfToken = document
@@ -33,19 +31,19 @@ const AiAssistant = ({ apiKey }) => {
     ?.getAttribute("content")
 
   const getQueryParams = () => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.search)
     return {
-      project: params.get('project'),
-    };
-  };
+      project: params.get("project"),
+    }
+  }
 
-  const { project } = getQueryParams();
+  const { project } = getQueryParams()
 
   const handleChildClick = (id) => {
     // alert('Child component clicked!');
     console.log(id)
     setCurrentProject(id)
-  };
+  }
 
   const handleSubmit = async () => {
     setLoading(true)
@@ -67,7 +65,7 @@ const AiAssistant = ({ apiKey }) => {
             "Content-Type": "application/json",
           },
         }
-      );
+      )
 
       console.log(projectResponse)
 
@@ -84,7 +82,7 @@ const AiAssistant = ({ apiKey }) => {
             "Content-Type": "application/json",
           },
         }
-      );
+      )
       // Post response to messages
     } catch (error) {
       console.error("Error fetching or posting response:", error)
@@ -95,9 +93,27 @@ const AiAssistant = ({ apiKey }) => {
 
   return (
     <>
-    <Flex>
-          <AINav onChildClick={handleChildClick} project={project} apiKey={apiKey} currentProject={currentProject} />
-     <FlexItem>
+      <Flex>
+        <div style={{ height: "100vh", backgroundColor: "white" }}>
+          <Flex alignItems='center' justifyContent='center' paddingTop='xl'>
+            <Button
+              marginRight='lg'
+              onClick={() => alert("button clicked!")}
+              tabIndex={0}
+              text='New Design'
+              variant='secondary'
+              icon='edit'
+            />
+          </Flex>
+
+          <AINav onChildClick={handleChildClick} />
+          <Messages
+            project={project}
+            currentProject={currentProject}
+            apiKey={apiKey}
+          />
+        </div>
+        <FlexItem>
           <Flex
             grow
             orientation='column'
@@ -111,8 +127,12 @@ const AiAssistant = ({ apiKey }) => {
               </Body>
             ) : (
               <>
-                <Body paddingBottom='lg' color="lighter">Generate UI from simple text</Body>
-                <Card padding='md' htmlOptions={{ style: { width: "700px" } }}>
+                <img src={Logo} alt='Playmaker Logo' />
+                <Card
+                  marginTop='xl'
+                  padding='md'
+                  htmlOptions={{ style: { width: "700px" } }}
+                >
                   <Title size={3} paddingBottom='lg'>
                     Let's get started
                   </Title>
@@ -146,7 +166,7 @@ const AiAssistant = ({ apiKey }) => {
               </>
             )}
           </Flex>
-      </FlexItem>
+        </FlexItem>
       </Flex>
       <Background display='flex' backgroundColor='grey'></Background>
       <style>
