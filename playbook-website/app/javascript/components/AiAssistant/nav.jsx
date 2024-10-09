@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Body, Nav, Title, Image, Flex, FlexItem } from 'playbook-ui';
+import { Caption, Button, Nav, Title, Image, Flex, NavItem } from 'playbook-ui';
+import Messages from "./messages"
 
-const AINav = ({onChildClick}) => {
+const AINav = ({onChildClick, project, apiKey, currentProject }) => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+    const currentUrl = new URL(window.location.href);
+    const projectParam = currentUrl.searchParams.get('project');
+
+    // Check if projectParam is a number
+    if (projectParam !== null && !projectParam) {
+      currentUrl.searchParams.set('project', 'undefined');
+      window.history.pushState({}, '', currentUrl);
+    }
+    
     axios.get('/projects.json')
       .then(response => {
         console.log(response.data);
@@ -17,6 +27,29 @@ const AINav = ({onChildClick}) => {
   }, []);
 
   return (
+     <div
+          style={{height: "100vh", width: "20vw", backgroundColor: "white"}}
+           >
+           <Flex alignItems="center" justifyContent="center" paddingTop="xl">
+    <Button
+        marginRight='lg'
+        onClick={() => alert("button clicked!")}
+        tabIndex={0}
+        text='New Design'
+        variant='secondary'
+        icon="edit"
+        marginBottom="md"
+        onClick={() => {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('project', project.id);
+            window.history.pushState({}, '', currentUrl);
+
+            // console.log(changeProject)
+            // changeProject()
+            onChildClick('new')
+          }}
+    />
+    </Flex>
     <Nav
       link="#"
       orientation="vertical"
@@ -24,35 +57,50 @@ const AINav = ({onChildClick}) => {
       paddingX="sm"
     >
       {projects.map((project) => (
-        <Flex>
+        <Flex
+        >
        <Image
             alt=""
             rounded
             size="xs"
             url="https://unsplash.it/500/400/?image=634"
-        />
-        <FlexItem>
-          <Title> { project.summary } </Title>
-        </FlexItem>
-        </Flex>
- //       <NavItem
- //         key={project.id}
- //         fontSize="small"
- //         fontWeight="bolder"
- //         // link={"?project=" + project.id}
- //         onClick={() => {
- //           const currentUrl = new URL(window.location.href);
- //           currentUrl.searchParams.set('project', project.id);
- //           window.history.pushState({}, '', currentUrl);
 
- //           // console.log(changeProject)
- //           // changeProject()
- //           onChildClick(project.id)
- //         }}
- //         text={project.summary}
- //       />
+        key={project.id}
+        onClick={() => {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('project', project.id);
+            window.history.pushState({}, '', currentUrl);
+
+            // console.log(changeProject)
+            // changeProject()
+            onChildClick(project.id)
+          }}
+        />
+        <NavItem 
+
+        key={project.id}
+        onClick={() => {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('project', project.id);
+            window.history.pushState({}, '', currentUrl);
+
+            // console.log(changeProject)
+            // changeProject()
+            onChildClick(project.id)
+          }}
+        >
+          <Title size={4}> { project.summary } </Title>
+          <Caption>
+            { project.media_size }
+          </Caption>
+        </NavItem>
+        </Flex>
       ))}
     </Nav>
+    {(project !== 'undefined' ) &&  
+      <Messages project={project} currentProject={currentProject} apiKey={apiKey} />
+    }
+    </div>
   );
 };
 
