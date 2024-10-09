@@ -95,17 +95,6 @@ const AiAssistant = ({ apiKey }) => {
     <>
       <Flex>
         <div style={{ height: "100vh", backgroundColor: "white" }}>
-          <Flex alignItems='center' justifyContent='center' paddingTop='xl'>
-            <Button
-              marginRight='lg'
-              onClick={() => alert("button clicked!")}
-              tabIndex={0}
-              text='New Design'
-              variant='secondary'
-              icon='edit'
-            />
-          </Flex>
-
           <AINav onChildClick={handleChildClick} project={project} currentProject={currentProject} apiKey={apiKey} />
         </div>
         <FlexItem>
