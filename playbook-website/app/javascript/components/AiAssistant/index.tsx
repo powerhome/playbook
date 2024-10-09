@@ -18,6 +18,7 @@ import KitResponse from "./kitResponse"
 import AINav from "./nav"
 import Messages from "./messages"
 import Logo from "../../images/Logo.svg"
+import TopNavBar from "./topNavBar"
 
 const AiAssistant = ({ apiKey }) => {
   const [input, setInput] = useState("")
@@ -97,7 +98,12 @@ const AiAssistant = ({ apiKey }) => {
         <div style={{ height: "100vh", backgroundColor: "white" }}>
           <AINav onChildClick={handleChildClick} project={project} currentProject={currentProject} apiKey={apiKey} />
         </div>
-        <FlexItem>
+        <FlexItem className="nav-flex-item">
+          {response ? (
+            < TopNavBar />
+          ) : 
+            ("")
+          }
           <Flex
             grow
             orientation='column'
@@ -158,6 +164,9 @@ const AiAssistant = ({ apiKey }) => {
           [class^=pb_layout_kit][class*=_content] {
             grid-template-areas: none;
           }
+              .nav-flex-item {
+              width: 100% !important;
+            }
         `}
       </style>
     </>
