@@ -20,12 +20,17 @@ const MessageForm = ({ projectId, apiKey }) => {
 
     console.log("submitting a message!", projectId)
     try {
+
+      const data = await fetchChatGPTResponse(input, apiKey)
+      const chatResponse = data.choices[0].message.content
+      setResponse(chatResponse)
       
       await axios.post(
         "/messages",
         {
           project_id: projectId,
-          code: input,
+          user_input: input,
+          code: chatResponse
         },
         {
           headers: {
@@ -63,8 +68,6 @@ const MessageForm = ({ projectId, apiKey }) => {
 
   return (
     <>
-      {/* <div>ID: {projectId}</div> */}
-      <div>funny animal name: {projectId}</div>
       <Textarea
         label='Tell us about the problem you are solving'
         name='comment'
