@@ -127,7 +127,7 @@ const AiAssistant = ({ apiKey }) => {
           <AINav onChildClick={handleChildClick} project={project} currentProject={currentProject} apiKey={apiKey} />
         </div>
         <FlexItem className="nav-flex-item">
-          {response ? (
+          {(currentProject !== "undefined") ? (
             < TopNavBar />
           ) : 
             ("")
