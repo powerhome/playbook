@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :messages
+  resources :projects
   root                            to: "pages#home"
   get "home",                     to: "pages#home"
   get "visual_guidelines",        to: redirect("/visual_guidelines/colors")
@@ -9,6 +11,7 @@ Rails.application.routes.draw do
   get "changelog/swift",          to: "pages#changelog_swift"
   get "changelog/figma",          to: "pages#changelog_figma"
   get "changelog",                to: redirect("changelog/web")
+  get "ai_assistant",             to: "pages#ai_assistant"
 
   # Kits
 

@@ -40,6 +40,10 @@ class PagesController < ApplicationController
     end
   end
 
+  def ai_assistant
+    redirect_to "/ai_assistant?project=undefined" if params[:project].nil?
+  end
+
   def disable_dark_mode
     cookies[:dark_mode] = {
       value: "false",

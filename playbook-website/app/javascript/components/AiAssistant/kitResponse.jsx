@@ -1,0 +1,15 @@
+import React from "react"
+import { Dialog, FixedConfirmationToast, PbReactPopover, Tooltip, Drawer, Button, ButtonToolbar, CircleIconButton, Map, Table, AdvancedTable, List, Filter, DistributionBar, Legend, Gauge, BarGraph, CircleChart, GanttChart, LineGraph, TreemapChart, Date, DateRangeInline, DateRangeStacked, DateStacked, DateTime, DateTimeStacked, DateYearStacked, Time, TimeRangeInline, TimeStacked, Timestamp, WeekdayStacked, Contact, Currency, HomeAddressStreet, LabelPill, LabelValue, Person, PersonContact, Source, DashboardValue, StatChange, StatValue, TitleCount, TitleDetail, FileUpload, Toggle, FormPill, FormGroup, Passphrase, PhoneNumberInput, TextInput, RichTextEditor, Textarea, Typeahead, DatePicker, Dropdown, MultiLevelSelect, Select, SelectableCard, SelectableCardIcon, SelectableIcon, Radio, Checkbox, SelectableList, Icon, IconCircle, IconStatValue, IconValue, UserBadge, Image, Lightbox, StarRating, Flex, Layout, Card, SectionSeparator, Background, Collapsible, Overlay, Draggable, Highlight, Message, BreadCrumbs, Nav, Pagination, LoadingInline, ProgressPills, ProgressSimple, ProgressStep, Walkthrough, Timeline, Badge, OnlineStatus, Pill, Hashtag, Body, Caption, Detail, Title, Avatar, AvatarActionButton, MultipleUsers, MultipleUsersStacked, User } from 'playbook-ui';
+import { LiveProvider, LiveError, LivePreview } from 'react-live';
+
+const kitResponse = ({ response }) => {
+console.log(response);
+  return (
+      <LiveProvider code={response} noInline={true} scope={{ Dialog, FixedConfirmationToast, PbReactPopover, Tooltip, Drawer, Button, ButtonToolbar, CircleIconButton, Map, Table, AdvancedTable, List, Filter, DistributionBar, Legend, Gauge, BarGraph, CircleChart, GanttChart, LineGraph, TreemapChart, Date, DateRangeInline, DateRangeStacked, DateStacked, DateTime, DateTimeStacked, DateYearStacked, Time, TimeRangeInline, TimeStacked, Timestamp, WeekdayStacked, Contact, Currency, HomeAddressStreet, LabelPill, LabelValue, Person, PersonContact, Source, DashboardValue, StatChange, StatValue, TitleCount, TitleDetail, FileUpload, Toggle, FormPill, FormGroup, Passphrase, PhoneNumberInput, TextInput, RichTextEditor, Textarea, Typeahead, DatePicker, Dropdown, MultiLevelSelect, Select, SelectableCard, SelectableCardIcon, SelectableIcon, Radio, Checkbox, SelectableList, Icon, IconCircle, IconStatValue, IconValue, UserBadge, Image, Lightbox, StarRating, Flex, Layout, Card, SectionSeparator, Background, Collapsible, Overlay, Draggable, Highlight, Message, BreadCrumbs, Nav, Pagination, LoadingInline, ProgressPills, ProgressSimple, ProgressStep, Walkthrough, Timeline, Badge, OnlineStatus, Pill, Hashtag, Body, Caption, Detail, Title, Avatar, AvatarActionButton, MultipleUsers, MultipleUsersStacked, User }}>
+        <LiveError />
+        <LivePreview />
+      </LiveProvider>
+  );
+};
+
+export default kitResponse;
