@@ -27,10 +27,17 @@ spec:
     args:
       - db:prepare
     env:
+      - name: SECRET_KEY_BASE
+        valueFrom:
+          secretKeyRef:
+            name: playbook
+            key: secret-key-base
       - name: RACK_ENV
         value: <%= appConfig["rackEnv"] %>
       - name: RAILS_ENV
         value: <%= appConfig["railsEnv"] %>
+      - name: RAILS_LOG_TO_STDOUT
+        value: "true"
       - name: DATABASE_HOST
         value: database-haproxy
       - name: DATABASE_USER
