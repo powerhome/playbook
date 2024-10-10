@@ -30,7 +30,7 @@ const Messages = ({project, currentProject, apiKey}) => {
       <div style={{ height: "80%", maxHeight: "80%", overflowY: "scroll",  backgroundColor: "white" }}>
         {messages.map((message) => (
           <div>
-            <Flex alignItems="start">
+            <Flex alignItems="start" paddingY="sm">
               <Background borderRadius="md">
                 <Icon color="text_lt_light" icon="user"/>
               </Background>
@@ -47,20 +47,23 @@ const Messages = ({project, currentProject, apiKey}) => {
          <SectionSeparator
              text="Playmaker has Responded"
          />
-
-            <Flex alignItems="start">
-            <Background borderRadius="md">
-              <img src={PlaymakerLogo} alt='Playmaker Powergon Logo' width="19px" style={{padding_x: "4px"}}/>
-              </Background>
-              <div style={{marginLeft: "5px"}}>
-                <Caption>
-                   Playmaker 
-                </Caption>
-                <div>
-                   {message.ai_response}
-                </div>
-              </div>
-          </Flex>
+          {message.ai_response && (
+            <>
+              <Flex alignItems="start" paddingY="sm">
+                <Background borderRadius="md">
+                  <img src={PlaymakerLogo} alt='Playmaker Powergon Logo' width="19px" style={{padding_x: "4px"}}/>
+                </Background>
+                  <div style={{marginLeft: "5px"}}>
+                    <Caption>
+                      Playmaker 
+                    </Caption>
+                    <div>
+                      {message.ai_response}
+                    </div>
+                  </div>
+              </Flex>
+            </>
+          )}
           </div>
       ))}
       </div>
