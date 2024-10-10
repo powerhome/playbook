@@ -24,7 +24,8 @@ const Messages = ({project, currentProject, apiKey}) => {
 
 
   return (
-    <div>
+    <div style={{ height: "80vh" }}>
+      <div style={{ height: "80%", maxHeight: "80%", overflowY: "scroll",  backgroundColor: "white" }}>
         {messages.map((message) => (
           <div>
             <Flex>
@@ -33,7 +34,7 @@ const Messages = ({project, currentProject, apiKey}) => {
               </div>
               <div>
                 <Caption>
-                   You 
+                   You
                 </Caption>
                 <div>
                     {message.user_input}
@@ -60,7 +61,10 @@ const Messages = ({project, currentProject, apiKey}) => {
           </Flex>
           </div>
       ))}
-      <MessagesForm projectId={trueProject} apiKey={apiKey} messages={messages} />
+      </div>
+      <div style={{ minHeight: "10%", maxHeight: "20%" }}>
+        <MessagesForm projectId={trueProject} apiKey={apiKey} messages={messages} />
+      </div>
     </div>
   );
 };
