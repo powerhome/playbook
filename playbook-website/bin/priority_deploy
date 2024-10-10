@@ -7,7 +7,7 @@ run_post_priotity_scripts(){
     exit_flag=0
 
     for script in "${post_priority_scripts[@]}"; do
-        bash "$SCRIPT_DIR/$script" "$cluster" "$namespace"
+        bash "${workDir}/bin/$script" "$cluster" "$namespace"
         pids+=($!)
     done
 
