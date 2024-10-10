@@ -27,6 +27,8 @@ spec:
     args:
       - db:prepare
     env:
+      - name: DATABASE_HOST
+        value: database-haproxy
       - name: DATABASE_USER
         value: "<%= migrate_user %>"
       - name: DATABASE_PASSWORD

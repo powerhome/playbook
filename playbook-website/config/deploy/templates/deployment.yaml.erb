@@ -58,6 +58,8 @@ spec:
                 secretKeyRef:
                   name: playbook
                   key: open-ai
+            - name: DATABASE_HOST
+              value: database-haproxy
             - name: DATABASE_USER
               value: <%= database_user %>
             - name: DATABASE_PASSWORD
