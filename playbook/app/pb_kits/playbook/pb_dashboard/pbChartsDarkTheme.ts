@@ -1,11 +1,7 @@
 import colors from '../tokens/exports/_colors.module.scss'
 import typography from '../tokens/exports/_typography.module.scss'
 
-import { ThemeProps } from './themeTypes'
-
-import { PlotTreemapOptions } from "highcharts";
-
-const highchartsDarkTheme: ThemeProps = {
+const highchartsDarkTheme = {
   lang: {
     thousandsSep: ',',
   },
@@ -21,7 +17,6 @@ const highchartsDarkTheme: ThemeProps = {
   chart: {
     borderWidth: 0,
     borderRadius: 0,
-    plotBackgroundColor: undefined,
     plotShadow: false,
     plotBorderWidth: 0,
   },
@@ -63,8 +58,6 @@ const highchartsDarkTheme: ThemeProps = {
     },
   },
   yAxis: {
-    alternateGridColor: undefined,
-    minorTickInterval: null,
     gridLineColor: colors.border_dark,
     minorGridLineColor: colors.border_dark,
     lineWidth: 0,
@@ -135,7 +128,6 @@ const highchartsDarkTheme: ThemeProps = {
     series: {
       borderColor: colors.bg_dark_card,
       borderWidth: 2,
-      threshold: null,
     },
     // PIE STYLES
     pie: {
@@ -202,11 +194,11 @@ const highchartsDarkTheme: ThemeProps = {
       traverseUpButton: {
         position: { y: -50 },
       },
-    } as PlotTreemapOptions,
+    },
   },
   credits: {
     enabled: false
   },
 }
 
-export { highchartsDarkTheme }
+export default highchartsDarkTheme

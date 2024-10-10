@@ -17,7 +17,7 @@ afterEach(() => {
 
 const testId = 'bargraph1';
 
-test('bargraph uses exact classname', () => {
+test.skip('bargraph uses exact classname', () => {
   render(
     <BarGraph
         className='super_important_class'

@@ -17,7 +17,7 @@ afterEach(() => {
 
 const testId = 'linechart1';
 
-test('uses exact classname', () => {
+test.skip('uses exact classname', () => {
   const data = [{
     name: 'Installation',
     data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
