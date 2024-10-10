@@ -18,6 +18,7 @@ import KitResponse from "./kitResponse"
 import AINav from "./nav"
 import Messages from "./messages"
 import Logo from "../../images/Logo.svg"
+import Loading from "../../images/loading-animation.svg"
 import TopNavBar from "./topNavBar"
 
 const AiAssistant = ({ apiKey }) => {
@@ -139,10 +140,13 @@ const AiAssistant = ({ apiKey }) => {
             align='center'
             htmlOptions={{ style: { height: "100vh" } }}
           >
+            {loading &&
+              <img src={Loading} alt='Playmaker Logo' />
+            }
             {(lastMessage && currentProject !== "undefined") && <Body>
               <KitResponse response={lastMessage.code} />
             </Body>}
-            {currentProject === 'undefined' && <>
+            {currentProject === 'undefined' && !loading && <>
               <img src={Logo} alt='Playmaker Logo' />
               <Card
                 marginTop='xl'
