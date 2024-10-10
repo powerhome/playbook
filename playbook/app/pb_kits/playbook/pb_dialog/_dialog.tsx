@@ -6,7 +6,7 @@ import classnames from "classnames";
 import Modal from "react-modal";
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import { globalProps, globalInlineProps } from "../utilities/globalProps";
 
 import Body from "../pb_body/_body";
 import Button from "../pb_button/_button";
@@ -90,6 +90,8 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     afterOpen: "pb_dialog_overlay_after_open",
     beforeClose: "pb_dialog_overlay_before_close",
   };
+
+  const inlineStyles = globalInlineProps(props); 
 
   const classes = classnames(
     buildCss("pb_dialog_wrapper"),
@@ -192,6 +194,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
               <Dialog.Body
                   className="dialog_status_text_align"
                   padding="md"
+                  style={inlineStyles} 
               >
                 <Flex align="center"
                     orientation="column"

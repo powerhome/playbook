@@ -4,7 +4,11 @@ import Card from '../_card'
 const CardLight = (props) => {
   return (
     <div>
-      <Card {...props}>{'Card content'}</Card>
+      <Card 
+          margin="xl"
+          minHeight="100px"
+          {...props}
+      >{'Card content'}</Card>
     </div>
   )
 }

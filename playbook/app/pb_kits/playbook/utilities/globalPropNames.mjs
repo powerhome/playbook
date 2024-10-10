@@ -1,4 +1,7 @@
 export default [
+  "minHeight",
+  "maxHeight",
+  "height",
   "left",
   "bottom",
   "right",
