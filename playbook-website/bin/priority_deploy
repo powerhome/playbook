@@ -1,0 +1,84 @@
+#!/bin/bash
+
+run_post_priotity_scripts(){
+
+    post_priority_scripts=("mysql/user-setup.sh")
+    pids=()
+    exit_flag=0
+
+    for script in "${post_priority_scripts[@]}"; do
+        bash "${workDir}/bin/$script" "$cluster" "$namespace"
+        pids+=($!)
+    done
+
+    # Wait for all background processes to finish and check exit codes
+    for pid in "${pids[@]}"; do
+        wait "$pid"
+        exit_code=$?
+        if [ $exit_code -eq 1 ]; then
+            exit_flag=1
+        fi
+    done
+
+    if [ $exit_flag -eq 1 ]; then
+        exit $exit_flag
+    fi
+}
+
+wait_for_cert_secrets(){
+
+    secret_name="custom-database-ssl"
+    timeout_secs=120
+    sleep_secs=1
+    secret_found=false
+
+    for ((i=0; i<timeout_secs; i+=sleep_secs)); do
+        if kubectl --context $cluster --namespace $namespace get secret "$secret_name" &> /dev/null; then
+            echo "cert manager generated secret $secret_name"
+            secret_found=true
+            break
+        else
+            echo "Secret $secret_name not found in namespace $namespace, waiting for $sleep_secs second(s)..."
+            sleep "$sleep_secs"
+        fi
+    done
+
+    if [ "$secret_found" = false ]; then
+        echo "Timeout: Secret $secret_name not found after $timeout_secs seconds."
+        exit 1
+    fi
+
+}
+
+priority_deploy(){
+
+    priorityResources=$(krane render \
+        --filenames="$(pwd)/config/deploy/templates/priority" \
+        --bindings="@${workDir}/config/deploy/values.yaml" $environmentValuesFile $environmentSecretsFile "image_tag=${tag}" "environment=${environment}" $extraBindings \
+        --current-sha=${tag}) || exit $?
+
+    certResources=$(krane render \
+        --filenames="$(pwd)/config/deploy/templates/priority/certificates" \
+        --bindings="@${workDir}/config/deploy/values.yaml" $environmentValuesFile $environmentSecretsFile "image_tag=${tag}" "environment=${environment}" $extraBindings \
+        --current-sha=${tag}) || exit $?
+
+    if [ -n "$certResources" ]; then
+        echo "$certResources" | krane deploy ${namespace} ${cluster} \
+            --selector="app.kubernetes.io/name=playbook,app.kubernetes.io/part-of=cert-priority-deploy" \
+            --verbose-log-prefix \
+            --global-timeout=10m \
+            --stdin
+    fi
+
+    wait_for_cert_secrets
+
+    echo "$priorityResources" | krane deploy ${namespace} ${cluster} \
+        --selector="app.kubernetes.io/name=playbook,app.kubernetes.io/part-of=priority-deploy" \
+        --verbose-log-prefix \
+        --global-timeout=10m \
+        --stdin
+
+    ### run post priority scripts in parallel
+    run_post_priotity_scripts
+
+}

@@ -21,6 +21,11 @@ fi
 
 extraBindings="{\"ingress\":{\"hosts\":[\"${deploy_url}\"]}}"
 
+# Priority resources
+source "${workDir}/bin/priority_deploy"
+priority_deploy
+
+# Application Deployment
 krane render \
     --filenames=${workDir}/config/deploy/templates \
     --bindings="@${workDir}/config/deploy/values.yaml" $environmentValuesFile $environmentSecretsFile "image_tag=${tag}" "environment=${environment}" $extraBindings \

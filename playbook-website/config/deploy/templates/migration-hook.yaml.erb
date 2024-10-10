@@ -1,0 +1,57 @@
+<%
+  migrate_user = database["allprivs_user"]
+%>
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "db-migrate-<%= deployment_id.downcase %>"
+  labels:
+    app: playbook
+    app.kubernetes.io/name: playbook
+    app.kubernetes.io/instance: playbook-<%= environment %>
+    app.kubernetes.io/version: <%= image_tag %>
+    app.kubernetes.io/component: db-migrate
+    app.kubernetes.io/part-of: playbook
+    app.kubernetes.io/managed-by: krane
+  annotations:
+    krane.shopify.io/timeout-override: 30m
+spec:
+  restartPolicy: Never
+  shareProcessNamespace: true
+  containers:
+  - name: db-migrate
+    image: "image-registry.powerapp.cloud/playbook/playbook:<%= image_tag %>"
+    workingDir: /home/app/src/playbook-website
+    command:
+      - bin/rails
+    args:
+      - db:prepare
+    env:
+      - name: SECRET_KEY_BASE
+        valueFrom:
+          secretKeyRef:
+            name: playbook
+            key: secret-key-base
+      - name: RACK_ENV
+        value: <%= appConfig["rackEnv"] %>
+      - name: RAILS_ENV
+        value: <%= appConfig["railsEnv"] %>
+      - name: RAILS_LOG_TO_STDOUT
+        value: "true"
+      - name: DATABASE_HOST
+        value: database-haproxy
+      - name: DATABASE_USER
+        value: "<%= migrate_user %>"
+      - name: DATABASE_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: database-secrets
+            key: "<%= migrate_user %>"
+    resources:
+      limits:
+        memory: 700Mi
+        ephemeral-storage: 100Mi
+      requests:
+        cpu: 0.1
+        memory: 500Mi
+        ephemeral-storage: 100Mi

@@ -1,3 +1,6 @@
+<%
+  database_user = database["application_user"]
+%>
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -55,6 +58,15 @@ spec:
                 secretKeyRef:
                   name: playbook
                   key: open-ai
+            - name: DATABASE_HOST
+              value: database-haproxy
+            - name: DATABASE_USER
+              value: <%= database_user %>
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: <%= database_user %>
           livenessProbe:
             httpGet:
               path: /health_check/site

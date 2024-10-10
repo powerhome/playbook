@@ -6,8 +6,10 @@ machine:
 
 deploy: &deploy
   max_commits: # Automatically deploy all commits, no matter how many.
+  pre:
+    - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/pre_deploy"
   override:
-    - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} deploy_url=${DEPLOY_URL} bin/deploy"
+    - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
 
 rollback:
   <<: *deploy
