@@ -27,6 +27,10 @@ spec:
     args:
       - db:prepare
     env:
+      - name: RACK_ENV
+        value: <%= appConfig["rackEnv"] %>
+      - name: RAILS_ENV
+        value: <%= appConfig["railsEnv"] %>
       - name: DATABASE_HOST
         value: database-haproxy
       - name: DATABASE_USER
