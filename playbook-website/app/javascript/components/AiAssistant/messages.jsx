@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Caption, Flex, SectionSeparator } from 'playbook-ui';
+import { Background, Caption, Flex, Icon, Image, SectionSeparator } from 'playbook-ui';
+import PlaymakerLogo from "../../images/playmaker-powergon.svg";
+
 
 import MessagesForm from "./messageForm"
 
@@ -28,11 +30,11 @@ const Messages = ({project, currentProject, apiKey}) => {
       <div style={{ height: "80%", maxHeight: "80%", overflowY: "scroll",  backgroundColor: "white" }}>
         {messages.map((message) => (
           <div>
-            <Flex>
-              <div>
-          icon
-              </div>
-              <div>
+            <Flex alignItems="start">
+              <Background borderRadius="md">
+                <Icon color="text_lt_light" icon="user"/>
+              </Background>
+              <div style={{marginLeft: "5px"}}>
                 <Caption>
                    You
                 </Caption>
@@ -46,11 +48,11 @@ const Messages = ({project, currentProject, apiKey}) => {
              text="Playmaker has Responded"
          />
 
-            <Flex>
-              <div>
-          icon
-              </div>
-              <div>
+            <Flex alignItems="start">
+            <Background borderRadius="md">
+              <img src={PlaymakerLogo} alt='Playmaker Powergon Logo' width="19px" style={{padding_x: "4px"}}/>
+              </Background>
+              <div style={{marginLeft: "5px"}}>
                 <Caption>
                    Playmaker 
                 </Caption>
