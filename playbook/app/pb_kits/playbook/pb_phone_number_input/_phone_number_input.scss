@@ -53,8 +53,7 @@ $flag-min-resolution: 192dpi;
     z-index: 2;
     top: 0;
     display: flex;
-    // The dropdown should automatically appear above/below the input depending on the available space. For this to work properly, you must only initialise the plugin after the <input> has been added to the DOM.
-    height: 45px;
+    height: 100%;
     justify-content: center;
     align-items: center;
     border-width: 0;
