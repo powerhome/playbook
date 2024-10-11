@@ -93,10 +93,11 @@ $flag-min-resolution: 192dpi;
     border-radius: 1px;
   }
 
-  .iti__globe {
+  .iti__flag.iti__globe {
     background-image: url("https://unpkg.com/intl-tel-input@21.1.4/build/img/globe.png");
     background-position: center;
     height: 20px;
+    background-size: 20px 20px;
   }
 
   .iti--show-flags .iti__selected-country {
