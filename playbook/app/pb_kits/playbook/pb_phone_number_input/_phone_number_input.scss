@@ -169,8 +169,7 @@ $flag-min-resolution: 192dpi;
     border: 1px solid $border_light !important;
     position: absolute;
     z-index: 2;
-    // The dropdown should automatically appear above/below the input depending on the available space. For this to work properly, you must only initialise the plugin after the <input> has been added to the DOM.
-    top: 45px;
+    top: 100%;
   }
 
   &.dark {
