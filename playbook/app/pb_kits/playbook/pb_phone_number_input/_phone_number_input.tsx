@@ -217,7 +217,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   useEffect(() => {
     const telInputInit = intlTelInput(inputRef.current, {
       separateDialCode: true,
-      preferredCountries,
+      countryOrder: preferredCountries,
       allowDropdown: !disabled,
       autoInsertDialCode: false,
       initialCountry,
