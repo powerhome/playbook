@@ -126,7 +126,7 @@ $flag-min-resolution: 192dpi;
     position: relative;
     vertical-align: top;
     width: $space_xxs + 1px;
-    top: $space_xs + 2px;
+    top: $space_xs - 1px;
     transform: rotate($transform-rotate-deg);
     color: $slate;
   }
