@@ -3,319 +3,75 @@
 @import "../tokens/opacity";
 @import "../pb_avatar/avatar";
 
-$avatar-sizes: (
-  "sm":   38px,
-  "md":   60px,
-  "lg":   80px,
-  "xl":   100px,
+$sizes: (
+  "avatar": ("sm": 38px, "md": 60px, "lg": 80px, "xl": 100px),
+  "first-item-double": ("sm": 20px, "md": 32px, "lg": 44px, "xl": 56px),
+  "first-item-triple": ("sm": 16px, "md": 24px, "lg": 32px, "xl": 44px),
+  "first-item-quadruple": ("sm": 16px, "md": 28px, "lg": 36px, "xl": 44px),
+  "second-item-double": ("sm": 12px, "md": 16px, "lg": 20px, "xl": 24px),
+  "second-item-triple": ("sm": 12px, "md": 20px, "lg": 24px, "xl": 32px),
+  "second-item-quadruple": ("sm": 12px, "md": 20px, "lg": 28px, "xl": 32px),
+  "third-item-triple": ("sm": 10px, "md": 16px, "lg": 20px, "xl": 24px),
+  "third-item-quadruple": ("sm": 10px, "md": 16px, "lg": 24px, "xl": 24px),
+  "fourth-item": ("sm": 8px, "md": 12px, "lg": 16px, "xl": 16px)
 );
 
-$first-item-sizes-double-bubble: (
-  "sm":   20px,
-  "md":   32px,
-  "lg":   44px,
-  "xl":   56px,
-);
-
-$first-item-sizes-triple-bubble: (
-  "sm":   16px,
-  "md":   24px,
-  "lg":   32px,
-  "xl":   44px,
-);
-
-$first-item-sizes-quadruple-bubble: (
-  "sm":   16px,
-  "md":   28px,
-  "lg":   36px,
-  "xl":   44px,
-);
-
-$second-item-sizes-double-bubble: (
-  "sm":   12px,
-  "md":   16px,
-  "lg":   20px,
-  "xl":   24px,
-);
-
-$second-item-sizes-triple-bubble: (
-  "sm":   12px,
-  "md":   20px,
-  "lg":   24px,
-  "xl":   32px,
-);
-
-$second-item-sizes-quadruple-bubble: (
-  "sm":   12px,
-  "md":   20px,
-  "lg":   28px,
-  "xl":   32px,
-);
-
-$third-item-sizes-third-bubble: (
-  "sm":   10px,
-  "md":   16px,
-  "lg":   20px,
-  "xl":   24px,
-);
-
-$third-item-sizes-quadruple-bubble: (
-  "sm":   10px,
-  "md":   16px,
-  "lg":   24px,
-  "xl":   24px,
-);
-
-$fourth-item-sizes-fourth-bubble: (
-  "sm":   8px,
-  "md":   12px,
-  "lg":   16px,
-  "xl":   16px,
-);
-
-$second-item-position-double-bubble: (
-  "sm": (
-    "top": null,
-    "bottom": 5px,
-    "right": 4px,
-    "left": null
+$positions: (
+  "second-item-double": (
+    "sm": ("top": null, "bottom": 5px, "right": 4px, "left": null),
+    "md": ("top": null, "bottom": 10px, "right": 8px, "left": null),
+    "lg": ("top": 46px, "bottom": null, "right": 12px, "left": null),
+    "xl": ("top": 58px, "bottom": null, "right": 14px, "left": null)
   ),
-  "md": (
-    "top": null,
-    "bottom": 10px,
-    "right": 8px,
-    "left": null
+  "second-item-triple": (
+    "sm": ("top": 12px, "bottom": null, "right": 2px, "left": null),
+    "md": ("top": 24px, "bottom": null, "right": 5px, "left": null),
+    "lg": ("top": 32px, "bottom": null, "right": 9px, "left": null),
+    "xl": ("top": 41px, "bottom": null, "right": 11px, "left": null)
   ),
-  "lg": (
-    "top": 46px,
-    "bottom": null,
-    "right": 12px,
-    "left": null
+  "second-item-quadruple": (
+    "sm": ("top": null, "bottom": 9px, "right": 4px, "left": null),
+    "md": ("top": 24px, "bottom": null, "right": 5px, "left": null),
+    "lg": ("top": 31px, "bottom": null, "right": 6px, "left": null),
+    "xl": ("top": 43px, "bottom": null, "right": 9px, "left": null)
   ),
-  "xl": (
-    "top": 58px,
-    "bottom": null,
-    "right": 14px,
-    "left": null
+  "third-item-triple": (
+    "sm": ("top": null, "bottom": 3px, "right": null, "left": 11px),
+    "md": ("top": null, "bottom": 6px, "right": null, "left": 16px),
+    "lg": ("top": null, "bottom": 10px, "right": null, "left": 23px),
+    "xl": ("top": null, "bottom": 13px, "right": null, "left": 27px)
   ),
-);
-
-$second-item-position-triple-bubble: (
-  "sm": (
-    "top": 12px,
-    "bottom": null,
-    "right": 2px,
-    "left": null
+  "third-item-quadruple": (
+    "sm": ("top": null, "bottom": 3px, "right": null, "left": 9px),
+    "md": ("top": null, "bottom": 5px, "right": null, "left": 15px),
+    "lg": ("top": null, "bottom": 7px, "right": null, "left": 20px),
+    "xl": ("top": null, "bottom": 11px, "right": null, "left": 27px)
   ),
-  "md": (
-    "top": 24px,
-    "bottom": null,
-    "right": 5px,
-    "left": null
+  "fourth-item": (
+    "sm": ("top": 5px, "bottom": null, "right": 6px, "left": null),
+    "md": ("top": 7px, "bottom": null, "right": 12px, "left": null),
+    "lg": ("top": 9px, "bottom": null, "right": 16px, "left": null),
+    "xl": ("top": 16px, "bottom": null, "right": 24px, "left": null)
   ),
-  "lg": (
-    "top": 32px,
-    "bottom": null,
-    "right": 9px,
-    "left": null
+  "first-item-double": (
+    "sm": ("top": 4px, "bottom": null, "right": null, "left": 3px),
+    "md": ("top": 6px, "bottom": null, "right": null, "left": 8px),
+    "lg": ("top": 8px, "bottom": null, "right": null, "left": 8px),
+    "xl": ("top": 10px, "bottom": null, "right": null, "left": 10px)
   ),
-  "xl": (
-    "top": 41px,
-    "bottom": null,
-    "right": 11px,
-    "left": null
+  "first-item-triple": (
+    "sm": ("top": 4px, "bottom": null, "right": null, "left": 4px),
+    "md": ("top": 7px, "bottom": null, "right": null, "left": 7px),
+    "lg": ("top": 10px, "bottom": null, "right": null, "left": 10px),
+    "xl": ("top": 12px, "bottom": null, "right": null, "left": 12px)
   ),
-);
-
-$second-item-position-quadruple-bubble: (
-  "sm": (
-    "top": null,
-    "bottom": 9px,
-    "right": 4px,
-    "left": null
-  ),
-  "md": (
-    "top": 24px,
-    "bottom": null,
-    "right": 5px,
-    "left": null
-  ),
-  "lg": (
-    "top": 31px,
-    "bottom": null,
-    "right": 6px,
-    "left": null
-  ),
-  "xl": (
-    "top": 43px,
-    "bottom": null,
-    "right": 9px,
-    "left": null
-  ),
-);
-
-$third-item-position-triple-buble: (
-  "sm": (
-    "top": null,
-    "bottom": 3px,
-    "right": null,
-    "left": 11px
-  ),
-  "md": (
-    "top": null,
-    "bottom": 6px,
-    "right": null,
-    "left": 16px
-  ),
-  "lg": (
-    "top": null,
-    "bottom": 10px,
-    "right": null,
-    "left": 23px
-  ),
-  "xl": (
-    "top": null,
-    "bottom": 13px,
-    "right": null,
-    "left": 27px
-  ),
-);
-
-$third-item-position-quadruple-bubble: (
-  "sm": (
-    "top": null,
-    "bottom": 3px,
-    "right": null,
-    "left": 9px
-  ),
-  "md": (
-    "top": null,
-    "bottom": 5px,
-    "right": null,
-    "left": 15px
-  ),
-  "lg": (
-    "top": null,
-    "bottom": 7px,
-    "right": null,
-    "left": 20px
-  ),
-  "xl": (
-    "top": null,
-    "bottom": 11px,
-    "right": null,
-    "left": 27px
+  "first-item-quadruple": (
+    "sm": ("top": 5px, "bottom": null, "right": null, "left": 3px),
+    "md": ("top": 7px, "bottom": null, "right": null, "left": 5px),
+    "lg": ("top": 9px, "bottom": null, "right": null, "left": 7px),
+    "xl": ("top": 16px, "bottom": null, "right": null, "left": 10px)
   )
 );
-
-$fourth-item-position-quadruple-bubble: (
-  "sm": (
-    "top": 5px,
-    "bottom": null,
-    "right": 6px,
-    "left": null
-  ),
-  "md": (
-    "top": 7px,
-    "bottom": null,
-    "right": 12px,
-    "left": null
-  ),
-  "lg": (
-    "top": 9px,
-    "bottom": null,
-    "right": 16px,
-    "left": null
-  ),
-  "xl": (
-    "top": 16px,
-    "bottom": null,
-    "right": 24px,
-    "left": null
-  )
-);
-
-$first-item-position-double-bubble: (
-  "sm": (
-    "top": 4px,
-    "bottom": null,
-    "right": null,
-    "left": 3px
-  ),
-  "md": (
-    "top": 6px,
-    "bottom": null,
-    "right": null,
-    "left": 8px
-  ),
-  "lg": (
-    "top": 8px,
-    "bottom": null,
-    "right": null,
-    "left": 8px
-  ),
-  "xl": (
-    "top": 10px,
-    "bottom": null,
-    "right": null,
-    "left": 10px
-  ),
-);
-
-$first-item-position-triple-bubble: (
-  "sm": (
-    "top": 4px,
-    "bottom": null,
-    "right": null,
-    "left": 4px
-  ),
-  "md": (
-    "top": 7px,
-    "bottom": null,
-    "right": null,
-    "left": 7px
-  ),
-  "lg": (
-    "top": 10px,
-    "bottom": null,
-    "right": null,
-    "left": 10px
-  ),
-  "xl": (
-    "top": 12px,
-    "bottom": null,
-    "right": null,
-    "left": 12px
-  ),
-);
-
-$first-item-position-quadruple-bubble: (
-  "sm": (
-    "top": 5px,
-    "bottom": null,
-    "right": null,
-    "left": 3px
-  ),
-  "md": (
-    "top": 7px,
-    "bottom": null,
-    "right": null,
-    "left": 5px
-  ),
-  "lg": (
-    "top": 9px,
-    "bottom": null,
-    "right": null,
-    "left": 7px
-  ),
-  "xl": (
-    "top": 16px,
-    "bottom": null,
-    "right": null,
-    "left": 10px
-  ),
-);
-
 
 @mixin avatar-size($size) {
   height: $size;
@@ -421,64 +177,64 @@ $first-item-position-quadruple-bubble: (
   
         [class^=pb_avatar_kit] {
           // First Item
-            &.first_item {
-              @include position(map-get($first-item-position-double-bubble, $size_name));
-              @include avatar-size(map-get($first-item-sizes-double-bubble, $size_name ));
-  
-              &.double_bubble {
-                @include position(map-get($first-item-position-double-bubble, $size_name));
-                @include avatar-size(map-get($first-item-sizes-double-bubble, $size_name ));
-              }
-  
-              &.triple_bubble {
-                @include position(map-get($first-item-position-triple-bubble, $size_name));
-                @include avatar-size(map-get($first-item-sizes-triple-bubble, $size_name));
-              }
-  
-              &.quadruple_bubble {
-                @include position(map-get($first-item-position-quadruple-bubble, $size_name));
-                @include avatar-size(map-get($first-item-sizes-quadruple-bubble, $size_name));
-              }
+          &.first_item {
+            @include position(map-get(map-get($positions, 'first-item-double'), $size_name));
+            @include avatar-size(map-get(map-get($sizes, 'first-item-double'), $size_name));
+        
+            &.double_bubble {
+              @include position(map-get(map-get($positions, 'first-item-double'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'first-item-double'), $size_name));
             }
-  
+        
+            &.triple_bubble {
+              @include position(map-get(map-get($positions, 'first-item-triple'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'first-item-triple'), $size_name));
+            }
+        
+            &.quadruple_bubble {
+              @include position(map-get(map-get($positions, 'first-item-quadruple'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'first-item-quadruple'), $size_name));
+            }
+          }
+        
           // Second Item
           &.second_item {
-            @include position(map-get($second-item-position-double-bubble, $size_name));
-  
+            @include position(map-get(map-get($positions, 'second-item-double'), $size_name));
+        
             &.double_bubble {
-              @include position(map-get($second-item-position-double-bubble, $size_name));
-              @include avatar-size(map-get($second-item-sizes-double-bubble, $size_name));
+              @include position(map-get(map-get($positions, 'second-item-double'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'second-item-double'), $size_name));
             }
-  
+        
             &.triple_bubble {
-              @include position(map-get($second-item-position-triple-bubble, $size_name));
-              @include avatar-size(map-get($second-item-sizes-triple-bubble, $size_name));
+              @include position(map-get(map-get($positions, 'second-item-triple'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'second-item-triple'), $size_name));
             }
-  
+        
             &.quadruple_bubble {
-              @include position(map-get($second-item-position-quadruple-bubble, $size_name));
-              @include avatar-size(map-get($second-item-sizes-quadruple-bubble, $size_name));
+              @include position(map-get(map-get($positions, 'second-item-quadruple'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'second-item-quadruple'), $size_name));
             }
           }
-  
+        
           // Third Item
           &.third_item {
-            @include position(map-get($third-item-position-triple-buble, $size_name));
-            @include avatar-size(map-get($third-item-sizes-third-bubble, $size_name));
-  
+            @include position(map-get(map-get($positions, 'third-item-triple'), $size_name));
+            @include avatar-size(map-get(map-get($sizes, 'third-item-triple'), $size_name));
+        
             &.quadruple_bubble {
-              @include position(map-get($third-item-position-quadruple-bubble, $size_name));
-              @include avatar-size(map-get($third-item-sizes-quadruple-bubble, $size_name));
+              @include position(map-get(map-get($positions, 'third-item-quadruple'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'third-item-quadruple'), $size_name));
             }
           }
-  
+        
           // Fourth Item
           &.fourth_item {
-            @include position(map-get($fourth-item-position-quadruple-bubble, $size_name));
-              @include avatar-size(map-get($fourth-item-sizes-fourth-bubble, $size_name));
+            @include position(map-get(map-get($positions, 'fourth-item'), $size_name));
+            @include avatar-size(map-get(map-get($sizes, 'fourth-item'), $size_name));
           }
         }
-  
+        
         &[class*=_single_bubble] {
           [class^=pb_avatar_kit].first_item {
             @include position((top: 0, left: 0));
