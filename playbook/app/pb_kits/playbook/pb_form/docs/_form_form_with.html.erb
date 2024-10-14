@@ -22,7 +22,7 @@
 
 %>
 
-<%= pb_form_with(url: rails_pg_render_path, method: :post, local: false, data: { remote: true, disable_with: "Loading..." }) do |form| %>
+<%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
   <%= form.typeahead :example_user, props: { data: { typeahead_example1: true, user: {} }, placeholder: "Search for a user" } %>
   <%= form.text_field :example_text_field, props: { label: true } %>
   <%= form.phone_number_field :example_phone_number_field, props: { label: "Example phone field" } %>
