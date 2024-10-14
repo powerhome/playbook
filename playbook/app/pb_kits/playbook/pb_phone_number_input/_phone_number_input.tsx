@@ -213,13 +213,20 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   // This also Fixes things for our react_component rendering on the Rails Side
   useEffect(formatAllCountries, [])
 
+  // If an initial country is not specified, the "globe" icon will show
+  // Always set a country
+  const fallbackCountry =
+    preferredCountries.length > 0 ? preferredCountries[0] :
+      onlyCountries.length > 0 ? onlyCountries.sort()[0] :
+        "af";
+
   useEffect(() => {
     const telInputInit = intlTelInput(inputRef.current, {
       separateDialCode: true,
       countryOrder: preferredCountries,
       allowDropdown: !disabled,
       autoInsertDialCode: false,
-      initialCountry,
+      initialCountry: initialCountry || fallbackCountry,
       onlyCountries,
       countrySearch: false,
       fixDropdownWidth: false,
