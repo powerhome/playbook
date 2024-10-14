@@ -136,7 +136,7 @@ $flag-min-resolution: 192dpi;
 
   .iti__arrow.iti__arrow--up::before {
     transform: rotate(-($transform-rotate-deg/3));
-    top: $space_xs + 4px;
+    top: $space_xs + 1px;
     color: $primary_action;
   }
 
