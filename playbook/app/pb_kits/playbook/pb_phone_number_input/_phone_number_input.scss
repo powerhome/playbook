@@ -19,7 +19,15 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__selected-dial-code {
+    font-family: $font_family_base;
     font-size: $font_base;
+    line-height: 1.5;
+    letter-spacing: $lspace_normal;
+    font-weight: $regular;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    -moz-font-feature-settings: "liga" on;
+    color: $charcoal;
   }
 
   input::placeholder {
