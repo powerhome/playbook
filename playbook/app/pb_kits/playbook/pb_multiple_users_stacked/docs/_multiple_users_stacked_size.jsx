@@ -1,6 +1,6 @@
 import React from 'react'
 import Flex from '../../pb_flex/_flex'
-import Title from '../../pb_flex/_title'
+import Title from '../../pb_title/_title'
 import MultipleUsersStacked from '../_multiple_users_stacked'
 
 const MultipleUsersStackedSize = (props) => {
@@ -69,12 +69,14 @@ const MultipleUsersStackedSize = (props) => {
   return (
     <>
       {sizes.map(({ label, size }) => (
-        <Flex key={size}>
+        <Flex key={size}
+            orientation="column"
+        >
           <Title paddingTop='sm' >{label}</Title>
           <Flex>
             {usersList.map((users, index) => (
               <Flex key={index}
-                  style={{ paddingRight: '16px' }}
+                  paddingRight='sm'
               >
                 <MultipleUsersStacked
                     size={size}
