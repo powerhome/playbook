@@ -14,11 +14,3 @@
             <% end %>
         <% end %>
 <% end %>
-
-<script type="text/javascript">
-    var expandAllRows = (element) => {
-        element.closest('.pb_table').querySelectorAll('.pb_advanced_table_body > .pb_table_tr [data-advanced-table]').forEach((button) => {
-            button.dispatchEvent(new Event('click'));
-        });
-    };
-</script>
