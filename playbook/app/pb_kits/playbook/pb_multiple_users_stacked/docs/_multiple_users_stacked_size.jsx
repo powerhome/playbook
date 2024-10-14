@@ -1,4 +1,6 @@
 import React from 'react'
+import Flex from '../../pb_flex/_flex'
+import Title from '../../pb_flex/_title'
 import MultipleUsersStacked from '../_multiple_users_stacked'
 
 const MultipleUsersStackedSize = (props) => {
@@ -65,13 +67,13 @@ const MultipleUsersStackedSize = (props) => {
   ]
 
   return (
-    <div>
+    <>
       {sizes.map(({ label, size }) => (
-        <div key={size}>
-          <h4 style={{ paddingTop: '16px' }}>{label}</h4>
-          <div style={{ display: 'flex' }}>
+        <Flex key={size}>
+          <Title paddingTop='sm' >{label}</Title>
+          <Flex>
             {usersList.map((users, index) => (
-              <div key={index}
+              <Flex key={index}
                   style={{ paddingRight: '16px' }}
               >
                 <MultipleUsersStacked
@@ -80,13 +82,13 @@ const MultipleUsersStackedSize = (props) => {
                     variant="bubble"
                     {...props}
                 />
-              </div>
+              </Flex>
             ))}
-          </div>
+          </Flex>
           <br />
-        </div>
+        </Flex>
       ))}
-    </div>
+    </>
   )
 }
 
