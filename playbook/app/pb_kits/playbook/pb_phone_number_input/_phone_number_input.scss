@@ -18,6 +18,10 @@ $flag-min-resolution: 192dpi;
     display: none;
   }
 
+  .iti__selected-dial-code {
+    font-size: $font_base;
+  }
+
   input::placeholder {
     color: $focus_input_light;
   }
