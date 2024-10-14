@@ -6,3 +6,32 @@
     <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
   <% end %>
 <% end %>
+
+<script>
+    const loadingForm = document.querySelector(".pb_form_loading")
+    if (loadingForm) {
+        loadingForm.addEventListener("submit", function(event) {
+            const submitButton = event['submitter'];
+            const cancelButton = event['target'].querySelector('button[type="reset"]');
+
+            if (submitButton) {
+                let currentClass = submitButton.className;
+                let newClass = currentClass.replace("_disabled_loading", "_enabled");
+
+                let cancelClass = cancelButton ? cancelButton.className : "";
+                let newCancelClass = cancelClass.replace("_disabled", "_enabled");
+
+                setTimeout(function() {
+                    submitButton.disabled = false;
+                    submitButton.className = currentClass;
+
+                    if (cancelButton) {
+                        cancelButton.disabled = false;
+                        cancelButton.className = cancelClass;
+                    }
+                }, 5000);
+            }
+        });
+    }
+</script>
+

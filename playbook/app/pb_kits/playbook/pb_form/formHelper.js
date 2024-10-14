@@ -19,19 +19,7 @@ const formHelper = () => {
                     cancelButton.disabled = true;
                     cancelButton.className = newCancelClass;
                 }
-
-                setTimeout(function() {
-                    submitButton.disabled = false;
-                    submitButton.className = currentClass;
-
-                    if (cancelButton) {
-                        cancelButton.disabled = false;
-                        cancelButton.className = cancelClass;
-                    }
-                }, 5000);
             }
-
-            this.submit();
         });
     }
 };
