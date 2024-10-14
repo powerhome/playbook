@@ -171,15 +171,15 @@ type ZIndex = {
 } | ZIndexResponsiveType
 
 type Height = {
-  height?: string | number 
+  height?: string 
 }
 
 type MaxHeight = {
-  maxHeight?: string | number
+  maxHeight?: string
 }
 
 type MinHeight = {
-  minHeight?: string | number
+  minHeight?: string
 }
 
 // keep this as the last type definition

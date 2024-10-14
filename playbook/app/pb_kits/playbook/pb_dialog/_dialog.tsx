@@ -186,6 +186,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             overlayClassName={overlayClassNames}
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick && !loading}
+            style={{ content: inlineStyles }}
         >
           <>
             {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}
@@ -194,7 +195,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
               <Dialog.Body
                   className="dialog_status_text_align"
                   padding="md"
-                  style={inlineStyles} 
+              
               >
                 <Flex align="center"
                     orientation="column"
