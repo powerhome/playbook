@@ -205,7 +205,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   useEffect(() => {
     if (id) {
       // Attach the clear function to the window, scoped by the id
-      window[`clearMultiLevelSelect_${id}`] = () => {
+      (window as any)[`clearMultiLevelSelect_${id}`] = () => {
         const resetData = modifyRecursive(formattedData, false);
         setFormattedData(resetData);
         setReturnedArray([]);
@@ -214,7 +214,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         onSelect([]);
       };
       return () => {
-        delete window[`clearMultiLevelSelect_${id}`];
+        delete (window as any)[`clearMultiLevelSelect_${id}`];
       };
     }
   }, [formattedData, id, onSelect]);
