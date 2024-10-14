@@ -12,7 +12,6 @@ const DialogDefault = () => {
       <Dialog
           cancelButton="Cancel Button"
           confirmButton="Okay"
-          height="30%"
           onCancel={close}
           onClose={close}
           onConfirm={close}
@@ -26,5 +25,3 @@ const DialogDefault = () => {
 }
 
 export default DialogDefault
-
-
