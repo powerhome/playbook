@@ -138,7 +138,7 @@ module Playbook
       {}
     end
 
-    def data_attributesx
+    def data_attributes
       {
         data: data,
         aria: aria,
