@@ -75,6 +75,8 @@ module Playbook
     prop :children, type: Playbook::Props::Proc
     prop :style, type: Playbook::Props::HashProp, default: {}
     prop :height
+    prop :min_height
+    prop :max_height
 
     def object
       self
@@ -84,11 +86,11 @@ module Playbook
       default_html_options.merge(html_options.deep_merge(data_attributes))
     end
 
-    # Method to generate inline styles based on kit properties
     def global_inline_props
       {
         height: height,
-        # Add other global props here
+        min_height: min_height,
+        max_height: max_height,
       }.compact
     end
 
@@ -136,7 +138,7 @@ module Playbook
       {}
     end
 
-    def data_attributes
+    def data_attributesx
       {
         data: data,
         aria: aria,
