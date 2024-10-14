@@ -46,6 +46,9 @@ $flag-min-resolution: 192dpi;
     justify-content: center;
     align-items: center;
     margin-right: 10px;
+    .iti__flag {
+      margin-right: 0;
+    }
   }
 
   .iti__selected-country {
