@@ -243,5 +243,9 @@ $flag-min-resolution: 192dpi;
         background-color: rgba($white, 0.025) !important;
       }
     }
+
+    .iti__selected-dial-code {
+      color: $white;
+    }
   }
 }
