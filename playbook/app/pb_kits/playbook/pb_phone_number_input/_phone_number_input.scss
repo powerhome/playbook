@@ -30,6 +30,11 @@ $flag-min-resolution: 192dpi;
     color: $charcoal;
   }
 
+  .iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])) .iti__selected-country-primary:hover,
+  .iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])) .iti__selected-country:has(+ .iti__dropdown-content:hover) .iti__selected-country-primary {
+    background-color: transparent;
+  }
+
   input::placeholder {
     color: $focus_input_light;
   }
@@ -57,7 +62,6 @@ $flag-min-resolution: 192dpi;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 10px;
     .iti__flag {
       margin-right: 0;
     }
@@ -73,7 +77,7 @@ $flag-min-resolution: 192dpi;
     align-items: center;
     border-width: 0;
 
-    padding: 0 $space_xxs 0 $space_sm;
+    padding: 0 $space_xxs 0 $space_xs;
     border-radius: $space_xxs; 
 
     &[aria-expanded="true"] {
@@ -139,14 +143,14 @@ $flag-min-resolution: 192dpi;
     position: relative;
     vertical-align: top;
     width: $space_xxs + 1px;
-    top: $space_xs - 1px;
+    top: $space_xs + 2px;
     transform: rotate($transform-rotate-deg);
     color: $slate;
   }
 
   .iti__arrow.iti__arrow--up::before {
     transform: rotate(-($transform-rotate-deg/3));
-    top: $space_xs + 1px;
+    top: $space_xs + 4px;
     color: $primary_action;
   }
 
