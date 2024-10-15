@@ -114,8 +114,9 @@ $flag-min-resolution: 192dpi;
   .iti__flag.iti__globe {
     background-image: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe.png");
     background-position: center;
-    height: 20px;
-    background-size: 20px 20px;
+    height: 16px;
+    width: 16px;
+    background-size: 16px 16px;
   }
 
   .iti--show-flags .iti__selected-country {
