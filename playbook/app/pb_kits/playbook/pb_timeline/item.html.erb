@@ -1,12 +1,21 @@
 <%= pb_content_tag do %>
-  <% if object.use_sub_kits == false %>
-    <%= pb_rails("timeline/date_area", props: { date: object.date }) %>
-    <%= pb_rails("timeline/node_area", props: { icon: object.icon,
-                                                icon_color: object.icon_color }) %>
-    <%= pb_rails("timeline/detail_area") do %>
-      <%= content.presence %>
-    <% end %>
+  <% if date_area %>
+    <%= date_area %>
   <% else %>
-    <%= content.presence %>
+    <%= pb_rails("timeline/date_area", props: { date: date }) %>
+  <% end %>
+
+  <% if node_area %>
+    <%= node_area %>
+  <% else %>
+    <%= pb_rails("timeline/node_area", props: { icon: icon, icon_color: icon_color }) %>
+  <% end %>
+
+  <% if detail_area %>
+    <%= detail_area %>
+  <% else %>
+    <%= pb_rails("timeline/detail_area") do %>
+      <%= content %>
+    <% end %>
   <% end %>
 <% end %>
