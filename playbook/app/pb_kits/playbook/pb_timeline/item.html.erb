@@ -1,5 +1,5 @@
 <%= pb_content_tag do %>
-  <% if object.icon.present? %>
+  <% if object.use_sub_kits == false %>
     <%= pb_rails("timeline/date_area", props: { date: object.date }) %>
     <%= pb_rails("timeline/node_area", props: { icon: object.icon,
                                                 icon_color: object.icon_color }) %>

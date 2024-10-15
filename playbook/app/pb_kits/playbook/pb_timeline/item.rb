@@ -12,6 +12,8 @@ module Playbook
       prop :line_style, type: Playbook::Props::Enum,
                         values: %w[solid dotted],
                         default: "solid"
+      prop :use_sub_kits, type: Playbook::Props::Boolean,
+                          default: false
 
       def classname
         generate_classname("pb_timeline_item_kit", line_style)
