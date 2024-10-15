@@ -1,6 +1,6 @@
 /* @import "intl-tel-input/build/css/intlTelInput.css"; */
 // If you update intl-tel-input, make sure to move this over
-// And replace the path urls with the set images
+// And replace the relative path urls with the images from unpkg
 :root {
   --iti-hover-color: rgba(0, 0, 0, 0.05);
   --iti-border-color: #ccc;
@@ -15,10 +15,10 @@
   --iti-triangle-border: calc(var(--iti-arrow-width) / 2);
   --iti-arrow-padding: 6px;
   --iti-arrow-color: #555;
-  --iti-path-flags-1x: url("../img/flags.webp");
-  --iti-path-flags-2x: url("../img/flags@2x.webp");
-  --iti-path-globe-1x: url("../img/globe.webp");
-  --iti-path-globe-2x: url("../img/globe@2x.webp");
+  --iti-path-flags-1x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags.png");
+  --iti-path-flags-2x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags@2x.png");
+  --iti-path-globe-1x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe.png");
+  --iti-path-globe-2x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe@2x.png");
   --iti-flag-sprite-width: 3904px;
   --iti-flag-sprite-height: 12px;
   --iti-mobile-popup-margin: 30px;
