@@ -25,7 +25,7 @@ const FilterDefault = (props) => {
           marginBottom="xl"
           minWidth="375px"
           onSortChange={SortingChangeCallback}
-          results={1}
+          // results={1}
           sortOptions={{
             popularity: 'Popularity',
             // eslint-disable-next-line
@@ -78,7 +78,7 @@ const FilterDefault = (props) => {
           double
           minWidth="375px"
           onSortChange={SortingChangeCallback}
-          results={1}
+          results={0}
           sortOptions={{
             popularity: 'Popularity',
             // eslint-disable-next-line
