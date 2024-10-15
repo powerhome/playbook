@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -38,7 +38,14 @@ type DropdownProps = {
     triggerRef?: any;
 };
 
-const Dropdown = (props: DropdownProps) => {
+interface DropdownComponent
+    extends React.ForwardRefExoticComponent<DropdownProps & React.RefAttributes<unknown>> {
+    Option: typeof DropdownOption;
+    Trigger: typeof DropdownTrigger;
+    Container: typeof DropdownContainer;
+}
+
+const Dropdown = forwardRef((props: DropdownProps, ref: any) => {
     const {
         aria = {},
         autocomplete = false,
@@ -125,7 +132,7 @@ const Dropdown = (props: DropdownProps) => {
     const filteredOptions = optionsWithBlankSelection?.filter((option: GenericObject) => {
         const label = typeof option.label === 'string' ? option.label.toLowerCase() : option.label;
         return String(label).toLowerCase().includes(filterItem.toLowerCase());
-    });    
+    });
 
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {
@@ -175,6 +182,14 @@ const Dropdown = (props: DropdownProps) => {
         dark
     });
 
+    useImperativeHandle(ref, () => ({
+        clearSelected: () => {
+            setSelected({});
+            setFilterItem("");
+            setIsDropDownClosed(true);
+            onSelect && onSelect(null);
+        },
+    }));
 
     return (
         <div {...ariaProps}
@@ -258,8 +273,9 @@ const Dropdown = (props: DropdownProps) => {
             </DropdownContext.Provider>
         </div>
     )
-};
+}) as DropdownComponent
 
+Dropdown.displayName = "Dropdown";
 Dropdown.Option = DropdownOption;
 Dropdown.Trigger = DropdownTrigger;
 Dropdown.Container = DropdownContainer;
