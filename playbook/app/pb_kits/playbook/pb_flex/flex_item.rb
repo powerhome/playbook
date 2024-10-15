@@ -24,6 +24,8 @@ module Playbook
         styles = []
         styles << "flex-basis: #{fixed_size};" if fixed_size.present?
         styles << "height: #{height};" if height.present?
+        styles << "min-height: #{min_height};" if min_height.present?
+        styles << "max-height: #{max_height};" if max_height.present?
         styles.join(" ")
       end
 
