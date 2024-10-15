@@ -98,10 +98,6 @@ $flag-min-resolution: 192dpi;
     }
   }
 
-  .iti--allow-dropdown .iti__country-container:hover .iti__selected-country {
-    background-color: $focus_input_light;
-  }
-
   .iti__country-container:hover + .text_input {
     background-color: $focus_input_light;
   }
