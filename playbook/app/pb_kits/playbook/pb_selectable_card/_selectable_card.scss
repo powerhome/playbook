@@ -75,7 +75,7 @@ $pb_selectable_card_border: 2px;
         @include pb_card_selected;
         // Selected card has 1px more border
         // Remove 1px so content does not "jump"
-        padding: calc($space_sm - 1px);
+        padding: calc(#{$space_sm} - 1px);
         transition-property: none;
         transition-duration: 0s;
 
