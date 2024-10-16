@@ -10,6 +10,24 @@
 $pb_selectable_card_indicator_size: 22px;
 $pb_selectable_card_border: 2px;
 
+$pb_selectable_space_classes: (
+  xxs: $space_xxs,
+  xs: $space_xs,
+  sm: $space_sm,
+  md: $space_md,
+  lg: $space_lg,
+  xl: $space_xl,
+);
+$pb_selectable_paddings: (
+  p: "padding",
+  pr: "padding-right",
+  pl: "padding-left",
+  pt: "padding-top",
+  pb: "padding-bottom",
+  px: ("padding-left", "padding-right"),
+  py: ("padding-top", "padding-bottom")
+);
+
 [class^=pb_selectable_card_kit] {
   display: block;
   margin-bottom: 0;
@@ -73,8 +91,6 @@ $pb_selectable_card_border: 2px;
 
         position: relative;
         @include pb_card_selected;
-        // Selected card has 1px more border
-        // Remove 1px so content does not "jump"
         padding: calc(#{$space_sm} - 1px);
         transition-property: none;
         transition-duration: 0s;
@@ -88,6 +104,26 @@ $pb_selectable_card_border: 2px;
         }
         .psuedo_separator {
           background-color: $royal;
+        }
+      }
+
+      // Selected card has 1px more border
+      // Remove 1px so content does not "jump"
+      @each $position_name,
+      $position in $pb_selectable_paddings {
+        @each $space_name,
+        $space in $pb_selectable_space_classes {
+          ~ label.#{$position_name}_#{$space_name} {
+            @if type-of($position)=="list" {
+              @each $coordinate in $position {
+                #{$coordinate}: calc(#{$space} - 1px) !important;
+              }
+            }
+
+            @else {
+              #{$position}: calc(#{$space} - 1px) !important;
+            }
+          }
         }
       }
     }
