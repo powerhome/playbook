@@ -74,17 +74,15 @@ const TimelineItem = ({
           />
         ))}
       </div>
-      <div className="pb_timeline_item_step">
         {nodeAreaChild || (
-          <>
+          <div className="pb_timeline_item_step">
             <IconCircle icon={icon}
                 size="xs"
                 variant={iconColor}
             />
             <div className="pb_timeline_item_connector" />
-          </>
+          </div>
         )}
-      </div>
       <div className="pb_timeline_item_right_block">
         {detailAreaChild || otherChildren}
       </div>

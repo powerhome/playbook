@@ -22,7 +22,7 @@ const TimelineNodeArea: React.FC<TimelineNodeAreaProps> = ({
   return (
     <div
         {...htmlProps}
-        className={classnames('pb_timeline_node_area', globalProps(props), className)}
+        className={classnames('pb_timeline_item_step', globalProps(props), className)}
     >
       <IconCircle icon={icon}
           size="xs"
