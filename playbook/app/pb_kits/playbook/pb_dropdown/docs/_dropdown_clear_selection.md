@@ -1,0 +1,1 @@
+To use an external control (like a reset button) to clear Dropdown selection, you can make sure of the `useRef` hook. You must pass a ref to the Dropdown component and use that ref within the onClick for the external control in the way shown in the code snippet below.
