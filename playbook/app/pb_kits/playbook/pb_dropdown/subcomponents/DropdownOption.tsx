@@ -62,7 +62,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
   const focusedClass = isFocused && "focused";
 
   const selectedClass = `${
-    selected.label === option.label
+    selected?.label === option.label
       ? "selected"
       : "list"
   }`;

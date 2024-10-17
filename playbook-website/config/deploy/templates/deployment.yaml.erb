@@ -50,6 +50,11 @@ spec:
                 secretKeyRef:
                   name: playbook
                   key: sentry-dsn
+            - name: OPEN_AI_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: playbook
+                  key: open-ai
           livenessProbe:
             httpGet:
               path: /health_check/site
@@ -72,4 +77,4 @@ spec:
               "memory" => "256Mi",
               "ephemeral-storage" => "100Mi"
             }
-          } %> 
+          } %>

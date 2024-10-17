@@ -1,90 +1,93 @@
-import React from "react";
-import MultiLevelSelect from "../_multi_level_select";
-
-const treeData = [
-  {
+<% treeData = [{
     label: "Power Home Remodeling",
     value: "Power Home Remodeling",
-    id: "powerhome1",
+    id: "100",
     expanded: true,
     children: [
       {
         label: "People",
         value: "People",
-        id: "people1",
+        id: "101",
         expanded: true,
         children: [
           {
             label: "Talent Acquisition",
             value: "Talent Acquisition",
-            id: "talent1",
+            id: "102",
           },
           {
             label: "Business Affairs",
             value: "Business Affairs",
-            id: "business1",
+            id: "103",
             children: [
               {
                 label: "Initiatives",
                 value: "Initiatives",
-                id: "initiative1",
+                id: "104",
               },
               {
                 label: "Learning & Development",
                 value: "Learning & Development",
-                id: "development1",
+                id: "105",
               },
             ],
           },
           {
             label: "People Experience",
             value: "People Experience",
-            id: "experience1",
+            id: "106",
           },
         ],
       },
       {
         label: "Contact Center",
         value: "Contact Center",
-        id: "contact1",
+        id: "107",
         children: [
           {
             label: "Appointment Management",
             value: "Appointment Management",
-            id: "appointment1",
+            id: "108",
           },
           {
             label: "Customer Service",
             value: "Customer Service",
-            id: "customer1",
+            id: "109",
           },
           {
             label: "Energy",
             value: "Energy",
-            id: "energy1",
+            id: "110",
           },
         ],
       },
     ],
-  },
-];
+}] %>
 
-const MultiLevelSelectDefault = (props) => {
-  return (
-    <div>
-      <MultiLevelSelect
-          id='multiselect-default'
-          onSelect={(selectedNodes) =>
-          console.log(
-            "Selected Items",
-            selectedNodes
-          )
-        }
-          treeData={treeData}
-          {...props}
-      />
-    </div>
-  )
-};
+<%= pb_rails("multi_level_select", props: {
+    id: "multi-level-select-reset-example",
+    name: "my_array",
+    tree_data: treeData,
+    return_all_selected: true
+}) %>
 
-export default MultiLevelSelectDefault;
+<%= pb_rails("button", props: { text: "Reset", margin_top: "lg", id:"multilevelselect-reset-button" }) %>
+
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const exampleResetButton = document.querySelector("#multilevelselect-reset-button");
+
+    exampleResetButton.addEventListener("click", () => {
+        clearMultiLevelSelectById('multi-level-select-reset-example');
+      });
+    function clearMultiLevelSelectById(id) {
+      const clearFunction = window[`clearMultiLevelSelect_${id}`];
+      if (clearFunction) {
+        clearFunction();
+      } else {
+        console.warn(`No clear function found for MultiLevelSelect with id: ${id}`);
+      }
+    }
+  })
+</script>
