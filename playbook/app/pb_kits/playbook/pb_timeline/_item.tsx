@@ -12,9 +12,9 @@ import TimelineDetailArea from './_detail_area'
 
 type ItemProps = {
   className?: string,
-  children?: React.ReactNode,
+  children?: React.ReactNode[] | React.ReactNode,
   date?: Date,
-  htmlOptions?: { [key: string]: any },
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
   iconColor?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
   lineStyle?: 'solid' | 'dotted',
@@ -38,6 +38,7 @@ const TimelineItem = ({
   ...props
 }: ItemProps): React.ReactElement => {
   const timelineItemCss = buildCss('pb_timeline_item_kit', lineStyle)
+
   const htmlProps = buildHtmlProps(htmlOptions)
 
   const childrenArray = React.Children.toArray(children)
