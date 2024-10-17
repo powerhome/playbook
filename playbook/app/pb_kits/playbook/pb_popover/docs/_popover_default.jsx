@@ -33,6 +33,7 @@ const PopoverDefault = (props) => {
           placement="top"
           reference={popoverReference}
           show={showPopover}
+          width="10px"
           {...props}
       >
         {'I\'m a popover. I can show content of any size.'}
