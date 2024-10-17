@@ -69,7 +69,6 @@ $flag-min-resolution: 192dpi;
 
   .iti__selected-country {
     position: absolute;
-    z-index: 2;
     top: 0;
     display: flex;
     height: 100%;
@@ -184,7 +183,6 @@ $flag-min-resolution: 192dpi;
     border-radius: $space_xs; 
     border: 1px solid $border_light !important;
     position: absolute;
-    z-index: 2;
     top: 100%;
   }
 
