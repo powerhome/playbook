@@ -1,0 +1,205 @@
+import { useState, useEffect } from "react"
+import axios from "axios" // Import axios
+import { fetchChatGPTResponse } from "./apiService"
+import {
+  Button,
+  Card,
+  Flex,
+  FlexItem,
+  Textarea,
+  Background,
+  Body,
+  Title,
+  Nav,
+  NavItem,
+  Caption,
+} from "playbook-ui"
+import KitResponse from "./kitResponse"
+import AINav from "./nav"
+import Messages from "./messages"
+import Logo from "../../images/Logo.svg"
+import TopNavBar from "./topNavBar"
+import Loading from "../../images/loading-animation.svg"
+
+const AiAssistant = ({ apiKey }) => {
+  const [input, setInput] = useState("")
+  const [response, setResponse] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [currentProject, setCurrentProject] = useState(null)
+  const [lastMessage, setLastMessage] = useState(null)
+
+
+  useEffect(() => {
+    const currentUrl = new URL(window.location.href);
+    const projectParam = currentUrl.searchParams.get('project');
+
+    console.log(projectParam)
+
+    console.log("lying current project", currentProject)
+
+    setCurrentProject(projectParam)
+
+    // change to query param conditional
+    if (projectParam !== 'undefined') {
+      axios.get(`/projects/${projectParam}.json`)
+        .then(response => {
+          console.log("index messages", response.data)
+          // setMessages(response.data);
+          setLastMessage(response.data[response.data.length - 1])
+
+          console.log(lastMessage)
+        })
+        .catch(error => {
+          console.error("There was an error fetching the projects!", error);
+        });
+    }
+  }, [currentProject]);
+
+  // Retrieve the CSRF token from the meta tag in the HTML
+  const csrfToken = document
+    .querySelector('meta[name="csrf-token"]')
+    ?.getAttribute("content")
+
+  const getQueryParams = () => {
+    const params = new URLSearchParams(window.location.search)
+    return {
+      project: params.get("project"),
+    }
+  }
+
+  const { project } = getQueryParams()
+
+  const handleChildClick = (id) => {
+    // alert('Child component clicked!');
+    console.log(id)
+    setCurrentProject(id)
+  }
+
+  const handleSubmit = async () => {
+    setLoading(true)
+    try {
+      // Fetch the response from ChatGPT
+      const data = await fetchChatGPTResponse(input, apiKey)
+      const chatResponse = data.choices[0].message.content
+      setResponse(chatResponse)
+
+      // Post the response to your Rails app's Message model with the CSRF token
+      const projectResponse = await axios.post(
+        "/projects",
+        {
+          summary: input,
+        },
+        {
+          headers: {
+            "X-CSRF-Token": csrfToken,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+
+      console.log(projectResponse)
+
+      await axios.post(
+        "/messages",
+        {
+          project_id: projectResponse.data.id,
+          user_input: projectResponse.data.summary,
+          code: chatResponse,
+        },
+        {
+          headers: {
+            "X-CSRF-Token": csrfToken,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      // Post response to messages
+    } catch (error) {
+      console.error("Error fetching or posting response:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <>
+      <Flex>
+        <div style={{ height: "100vh", backgroundColor: "white" }}>
+          <AINav onChildClick={handleChildClick} project={project} currentProject={currentProject} apiKey={apiKey} />
+        </div>
+        <FlexItem className="nav-flex-item">
+          {(currentProject !== "undefined") ? (
+            < TopNavBar />
+          ) : 
+            ("")
+          }
+          <Flex
+            grow
+            orientation='column'
+            justify='center'
+            align='center'
+            htmlOptions={{ style: { height: "100vh" } }}
+          >
+            {loading &&
+              <img src={Loading} alt='Playmaker Logo' />
+            }
+            {(lastMessage && currentProject !== "undefined") && <Body>
+              <KitResponse response={lastMessage.code} />
+            </Body>}
+            {currentProject === 'undefined' && !loading && <>
+              <img src={Logo} alt='Playmaker Logo' />
+              <Card
+                marginTop='xl'
+                padding='md'
+                htmlOptions={{ style: { width: "700px" } }}
+              >
+                <Title size={3} paddingBottom='lg'>
+                  Let's get started
+                </Title>
+                <Caption paddingBottom='xs'>
+                  What device are you designing for?
+                </Caption>
+                <Nav
+                  paddingBottom='lg'
+                  link='#'
+                  orientation='horizontal'
+                  variant='subtle'
+                >
+                  <NavItem active link='#' text='Desktop' />
+                  <NavItem link='#' text='Tablet' />
+                  <NavItem link='#' text='Mobile' />
+                </Nav>
+                <Textarea
+                  label='Tell us about the problem you are solving'
+                  name='comment'
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder='For the [Project Name], I’d like to use AI to design a layout that meets our key project requirements, such as prioritized features, user interactions, and any specific technical constraints like deadlines or platform dependencies. The layout should focus on our target audience, reflect the desired aesthetic, and include critical content elements.'
+                  value={input}
+                />
+                <Button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  loading={loading}
+                  text='Generate Design'
+                />
+              </Card>
+            </>}
+          </Flex>
+        </FlexItem>
+      </Flex>
+      <Background display='flex' backgroundColor='grey'></Background>
+      <style>
+        {`
+          [class^=pb_layout_kit][class*=_content] {
+            grid-template-areas: none;
+          }
+              .nav-flex-item {
+              width: 100% !important;
+            }
+        `}
+      </style>
+    </>
+  )
+}
+
+export default AiAssistant

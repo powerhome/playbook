@@ -45,6 +45,9 @@ clean:
 changelog:
 	docker compose run web bundle exec github_changelog_generator
 
+db:
+	docker compose up -d db
+
 time-to-live ?= 3h
 review_cluster = ${shell ./playbook-website/bin/deployer ./playbook-website/bin/cluster_for_review_stack pr$(pr)}
 
