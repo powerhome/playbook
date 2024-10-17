@@ -13,24 +13,18 @@ jobs:
       GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
       NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
     steps:
-      - name: Check for required Semver labels
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const requiredLabels = ['Major', 'Minor', 'Patch'];
-            const { data: labels } = await github.rest.issues.listLabelsOnIssue({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-            });
-            const presentLabels = labels.map(label => label.name);
-            const presentRequiredLabel = requiredLabels.filter(label => presentLabels.includes(label));
+      - name: Check for Semver label
+        run: |
+          LABELS=$(jq -r '.pull_request.labels[].name' "$GITHUB_EVENT_PATH")
+          SEMVER_PATTERN="^(major|minor|patch)$"
 
-            if (presentRequiredLabels.length === 0) {
-              core.setFailed('Your pull request is missing a required Semver label: (${requiredLabels.join(', ')})');
-            } else if (presentRequiredLabels.length > 1) {
-              core.setFailed('Your pull request has multiple Semver labels. Please use only one.')
-            } else {
-              console.log('Pull request has a required Semver label.');
-            }
+          SEMVER_LABEL=$(echo "$LABELS" | grep -iE "$SEMVER_PATTERN" || true)
+
+          if [ -z "$SEMVER_LABEL" ]; then
+            echo "No valid Semver label found. Please add one of: major, minor, patch (case-insensitive)"
+            exit 1
+          else
+            echo "Valid Semver label found: $SEMVER_LABEL"
+            NORMALIZED_LABEL=$(echo "$SEMVER_LABEL" | tr '[:upper:]' '[:lower:]')
+            echo "Normalized label: $NORMALIZED_LABEL"
+          fi
