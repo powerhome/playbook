@@ -1,0 +1,36 @@
+name: Check Labels
+run-name: ${{ github.actor }} is checking labels 🚀
+on:
+  pull_request:
+    types: [ labeled ]
+jobs:
+  Checking-Labels:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./playbook
+    env:
+      GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+    steps:
+      - name: Check for required Semver labels
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const requiredLabels = ['Major', 'Minor', 'Patch'];
+            const { data: labels } = await github.rest.issues.listLabelsOnIssue({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const presentLabels = labels.map(label => label.name);
+            const presentRequiredLabel = requiredLabels.filter(label => presentLabels.includes(label));
+
+            if (presentRequiredLabels.length === 0) {
+              core.setFailed('Your pull request is missing a required Semver label: (${requiredLabels.join(', ')})');
+            } else if (presentRequiredLabels.length > 1) {
+              core.setFailed('Your pull request has multiple Semver labels. Please use only one.')
+            } else {
+              console.log('Pull request has a required Semver label.');
+            }

@@ -15,27 +15,6 @@ jobs:
       GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
       NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
     steps:
-      - name: Check for required Semver labels
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const requiredLabels = ['Major', 'Minor', 'Patch'];
-            const { data: labels } = await github.rest.issues.listLabelsOnIssue({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-            });
-            const presentLabels = labels.map(label => label.name);
-            const presentRequiredLabel = requiredLabels.filter(label => presentLabels.includes(label));
-
-            if (presentRequiredLabels.length === 0) {
-              core.setFailed('Your pull request is missing a required Semver label: (${requiredLabels.join(', ')})');
-            else if (presentRequiredLabels.length > 1) {
-              core.setFailed('Your pull request has multiple Semver labels. Please use only one.')
-            } else {
-              console.log('Pull request has a required Semver label.');
-            }
       - uses: actions/checkout@v3
       - name: 'Enable registry auth'
         shell: bash
@@ -51,88 +30,79 @@ jobs:
         with:
           bundler-cache: true
       - name: Python Setup
-        uses: actions/setup-python@v4
-        with:
+        uses: actions/setup-python@v4 
+        with: 
           python-version: '3.9'
       - name: Set Git Config
         run: |
           git config --local user.name "${{ github.actor }}"
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-      - name: Determine version increment type
-        id: version-label
+      - name: Grab Current Version and Set New RC Version
+        id: set-version
         run: |
-          if [[ ${{ contains(github.event.pull_request.labels.*.name, 'Major') }} == 'true' ]]; then
-            echo "INCREMENT=major" >> $GITHUB_OUTPUT
-          elif [[ ${{ contains(github.event.pull_request.labels.*.name, 'Minor') }} == 'true' ]]; then
-            echo "INCREMENT=minor" >> $GITHUB_OUTPUT
-          elif [[ ${{ contains(github.event.pull_request.labels.*.name, 'Patch') }} == 'true' ]]; then
-            echo "INCREMENT=patch" >> $GITHUB_OUTPUT
+          current_npm_version=$(node -pe "require('./package.json').version")
+          
+          if [[ $current_npm_version == *"-rc."* ]]; then
+            new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           else
-            echo "No valid version label found. Please add a Major, Minor, or Patch label to the PR."
+            new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+          fi
+          
+          new_npm_version=${new_npm_version#v}
+          new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
+          
+          echo "new_npm_version=${new_npm_version}" >> $GITHUB_ENV
+          echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
+      - name: Check if version exists and increment if necessary
+        run: |
+          max_attempts=100
+          attempt=0
+          current_version="${{ env.new_npm_version }}"
+          while [ $attempt -lt $max_attempts ]; do
+            if npm view playbook-ui@$current_version version &>/dev/null; then
+              echo "Version $current_version already exists. Incrementing..."
+              current_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+              current_version=${current_version#v}
+            else
+              echo "Version $current_version is available."
+              break
+            fi
+            attempt=$((attempt+1))
+          done
+          if [ $attempt -eq $max_attempts ]; then
+            echo "Error: Maximum attempts reached. Unable to find an available version."
             exit 1
           fi
-      # - name: Grab Current Version and Set New RC Version
-      #   id: set-version
-      #   run: |
-      #     current_npm_version=$(node -pe "require('./package.json').version")
-
-      #     new_npm_version=$(yarn version --pre${{ steps.version-label.outputs.INCREMENT }} --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-
-      #     new_npm_version=${new_npm_version#v}
-      #     new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
-
-      #     echo "new_npm_version=${new_npm_version}" >> $GITHUB_ENV
-      #     echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
-      # - name: Check if version exists and increment if necessary
-      #   run: |
-      #     max_attempts=100
-      #     attempt=0
-      #     current_version="${{ env.new_npm_version }}"
-      #     while [ $attempt -lt $max_attempts ]; do
-      #       if npm view playbook-ui@$current_version version &>/dev/null; then
-      #         echo "Version $current_version already exists. Incrementing..."
-      #         current_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-      #         current_version=${current_version#v}
-      #       else
-      #         echo "Version $current_version is available."
-      #         break
-      #       fi
-      #       attempt=$((attempt+1))
-      #     done
-      #     if [ $attempt -eq $max_attempts ]; then
-      #       echo "Error: Maximum attempts reached. Unable to find an available version."
-      #       exit 1
-      #     fi
-      #     echo "new_npm_version=${current_version}" >> $GITHUB_ENV
-      #     new_ruby_version=$(echo $current_version | sed 's/-rc\./.pre.rc./')
-      #     echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
-      # - name: Update Version.rb
-      #   run: |
-      #     gem install bundler
-      #     bundle
-      #     bin/rails pb_release:action[${{env.new_ruby_version}}]
-      # - name: Distribute and Publish (NPM)
-      #   run: |
-      #     yarn install
-      #     bundle
-      #     yarn release
-      #     npm pack
-      #     npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_version }}.tgz --tag rc
-      # - name: Distribute and Publish (RubyGems)
-      #   run: |
-      #     bin/build_gem
-      #     gem build lib/playbook_ui_docs.gemspec
-      #     rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
-      #     gem push playbook_ui-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
-      #     gem push playbook_ui_docs-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
-      # - name: Create GitHub Release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     gh release create v${{ env.new_npm_version }} \
-      #       --title "Release Candidate v${{ env.new_npm_version }}" \
-      #       --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
-      #       --prerelease
+          echo "new_npm_version=${current_version}" >> $GITHUB_ENV
+          new_ruby_version=$(echo $current_version | sed 's/-rc\./.pre.rc./')
+          echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
+      - name: Update Version.rb
+        run: |
+          gem install bundler
+          bundle
+          bin/rails pb_release:action[${{env.new_ruby_version}}]
+      - name: Distribute and Publish (NPM)
+        run: |
+          yarn install
+          bundle
+          yarn release
+          npm pack
+          npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_version }}.tgz --tag rc
+      - name: Distribute and Publish (RubyGems)
+        run: |
+          bin/build_gem
+          gem build lib/playbook_ui_docs.gemspec
+          rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
+          gem push playbook_ui-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
+          gem push playbook_ui_docs-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v${{ env.new_npm_version }} \
+            --title "Release Candidate v${{ env.new_npm_version }}" \
+            --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
+            --prerelease
       - name: Leave PR comment
         uses: actions/github-script@v6
         env:
@@ -170,7 +140,7 @@ jobs:
                 issue_number: pullRequestNumber,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: `You merged this pr to master branch:
+                body: `You merged this pr to master branch: 
                 - Ruby Gem: [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}})
                 - NPM: [${{env.NPM_VERSION}}](${{env.NPM_LINK}})`
               });
