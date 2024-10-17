@@ -2,6 +2,10 @@ import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 
 import Timeline from './_timeline'
+import TimelineItem from './_item'
+import TimelineDateArea from './_date_area'
+import TimelineNodeArea from './_node_area'
+import TimelineDetailArea from './_detail_area'
 import TitleDetail from '../pb_title_detail/_title_detail'
 
 const testId = 'timeline'
@@ -43,14 +47,87 @@ const TimelineDefault = (props) => (
     </>
 )
 
+const TimelineWithChildren = (props) => (
+  <>
+    <Timeline
+        className={className}
+        data={{ testid: testId }}
+        orientation="horizontal"
+        showDate
+        {...props}
+    >
+      <TimelineItem lineStyle="solid"
+          {...props}
+      >
+        <TimelineDateArea date={new Date()} />
+        <TimelineNodeArea icon="user"
+            iconColor="royal"
+        />
+        <TimelineDetailArea>
+          <TitleDetail
+              detail="37-27 74th Street"
+              title="Jackson Heights"
+              {...props}
+          />
+        </TimelineDetailArea>
+      </TimelineItem>
+
+      <TimelineItem lineStyle="dotted"
+          {...props}
+      >
+        <TimelineNodeArea icon="check"
+            iconColor="teal"
+        />
+        <TimelineDetailArea>
+          <TitleDetail
+              detail="81 Gate St Brooklyn"
+              title="Greenpoint"
+              {...props}
+          />
+        </TimelineDetailArea>
+      </TimelineItem>
+
+      <TimelineItem lineStyle="solid"
+          {...props}
+      >
+        <TimelineDateArea
+            date={new Date(new Date().setDate(new Date().getDate() + 1))}
+        />
+        <TimelineNodeArea icon="map-marker-alt"
+            iconColor="purple"
+        />
+        <TimelineDetailArea>
+          <TitleDetail
+              detail="72 E St Astoria"
+              title="Society Hill"
+              {...props}
+          />
+        </TimelineDetailArea>
+      </TimelineItem>
+    </Timeline>
+  </>
+)
+
 test('should pass data prop', () => {
     render(<TimelineDefault />)
     const kit = screen.getByTestId(testId)
     expect(kit).toBeInTheDocument()
 })
 
+test('should pass data prop using children', () => {
+    render(<TimelineWithChildren />)
+    const kit = screen.getByTestId(testId)
+    expect(kit).toBeInTheDocument()
+})
+
 test('should pass className prop', () => {
     render(<TimelineDefault />)
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass(className)
+})
+
+test('should pass className prop with children', () => {
+    render(<TimelineWithChildren />)
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveClass(className)
 })
@@ -83,6 +160,13 @@ test('should pass vertical orientation', () => {
 test('should pass showDate prop', () => {
     const props = { showDate: true }
     render(<TimelineDefault {...props} />)
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass('pb_timeline_kit__horizontal__with_date')
+})
+
+test('should pass showDate prop with Children', () => {
+    const props = { showDate: true }
+    render(<TimelineWithChildren {...props} />)
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveClass('pb_timeline_kit__horizontal__with_date')
 })
