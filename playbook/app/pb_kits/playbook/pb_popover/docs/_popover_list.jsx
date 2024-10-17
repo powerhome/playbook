@@ -26,10 +26,10 @@ const PopoverWithButton = (props) => {
             className={showPopover ? "fa-flip-vertical" : ""}
             display="inline_flex"
         >
-          <Icon 
-              fixedWidth 
-              icon="angle-down" 
-              margin-left="xxs" 
+          <Icon
+              fixedWidth
+              icon="angle-down"
+              margin-left="xxs"
           />
         </Flex>
       </Flex>

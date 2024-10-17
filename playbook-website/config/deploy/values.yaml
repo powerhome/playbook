@@ -1,3 +1,22 @@
 appConfig:
   rackEnv: "production"
   railsEnv: "production"
+
+database:
+  users:
+    - name: webapp
+      dbs:
+        - playbook_website
+      grant: 'SELECT, INSERT, UPDATE, DELETE'
+    - name: migrator
+      dbs:
+        - playbook_website
+      grant: 'ALL'
+    - name: webapp_readonly
+      dbs:
+        - playbook_website
+      grant: 'SELECT'
+  allprivs_user: migrator
+  application_user: webapp
+  storageClass: staging-performance
+  volumeSize: 1Gi

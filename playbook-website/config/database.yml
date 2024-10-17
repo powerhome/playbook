@@ -1,0 +1,27 @@
+base: &base
+  adapter: mysql2
+  pool: <%= ENV['DATABASE_POOL'] || ENV['RAILS_MAX_THREADS'] || 5 %>
+  timeout: <%= ENV['DATABASE_TIMEOUT'] || 5000 %>
+  username: <%= ENV['DATABASE_USER'] || "root" %>
+  password: <%= ENV['DATABASE_PASSWORD'] || "password" %>
+  host: <%= ENV['DATABASE_HOST'] || "db" %>
+  database: <%= ENV['DATABASE_NAME'] || "playbook_website" %>
+  advisory_locks: <%= ENV['DATABASE_ADVISORY_LOCKS'] || false %>
+
+development:
+  <<: *base
+  database: playbook_website_dev
+
+test:
+  <<: *base
+  database: playbook_website_test
+  username: <%= ENV['DATABASE_USER'] || "root" %>
+
+review:
+  <<: *base
+
+staging:
+  <<: *base
+
+production:
+  <<: *base

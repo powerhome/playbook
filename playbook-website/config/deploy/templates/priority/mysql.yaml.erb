@@ -1,0 +1,120 @@
+<%
+  pxc_cluster_size    = 3
+%>
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: database-secrets
+  labels:
+    app.kubernetes.io/name: playbook
+    app.kubernetes.io/instance: playbook-<%= environment %>
+    app.kubernetes.io/version: <%= image_tag %>
+    app.kubernetes.io/component: database
+    app.kubernetes.io/part-of: priority-deploy
+    app.kubernetes.io/managed-by: krane
+type: Opaque
+data:
+  root: <%= Base64.encode64(database.dig("passwords", "root")) %>
+  proxyadmin: <%= Base64.encode64(database.dig("passwords", "proxyadmin")) %>
+  xtrabackup: <%= Base64.encode64(database.dig("passwords", "xtrabackup")) %>
+  clustercheck: <%= Base64.encode64(database.dig("passwords", "clustercheck")) %>
+  monitor: <%= Base64.encode64(database.dig("passwords", "monitor")) %>
+  pmmserver: <%= Base64.encode64(database.dig("passwords", "pmmserver")) %>
+  operator: <%= Base64.encode64(database.dig("passwords", "operator")) %>
+  replication: <%= Base64.encode64(database.dig("passwords", "replication")) %>
+  webapp: <%= Base64.encode64(database.dig("passwords", "webapp")) %>
+  migrator: <%= Base64.encode64(database.dig("passwords", "migrator")) %>
+  webapp_readonly: <%= Base64.encode64(database.dig("passwords", "webapp_readonly")) %>
+---
+apiVersion: pxc.percona.com/v1
+kind: PerconaXtraDBCluster
+metadata:
+  name: database
+  labels:
+    app.kubernetes.io/name: playbook
+    app.kubernetes.io/instance: playbook-<%= environment %>
+    app.kubernetes.io/component: database
+    app.kubernetes.io/part-of: priority-deploy
+    app.kubernetes.io/managed-by: krane
+  annotations:
+    krane.shopify.io/timeout-override: 400s
+  finalizers: []
+spec:
+  crVersion: 1.15.0
+  secretsName: database-secrets
+  allowUnsafeConfigurations: false
+  pause: false
+  updateStrategy: SmartUpdate
+  pxc:
+    size: <%= pxc_cluster_size %>
+    image: percona/percona-xtradb-cluster:8.0.36@sha256:b5cc4034ccfb0186d6a734cb749ae17f013b027e9e64746b2c876e8beef379b3
+    autoRecovery: true
+    resources:
+      requests:
+        memory: 200M
+        cpu: "0.2"
+        ephemeral-storage: 500Mi
+      limits:
+        memory: 1G
+        ephemeral-storage: 500Mi
+    affinity:
+      antiAffinityTopologyKey: "kubernetes.io/hostname"
+    podDisruptionBudget:
+      maxUnavailable: 1
+    volumeSpec:
+      persistentVolumeClaim:
+        storageClassName: <%= database["storageClass"] %>
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: <%= database["volumeSize"] %>
+    gracePeriod: 600
+    configuration: |
+      [mysqld]
+      pxc_strict_mode=MASTER
+      log_bin_trust_function_creators=ON
+  haproxy:
+    enabled: true
+    size: 3
+    image: percona/haproxy:2.8.5@sha256:941f3bd0977bff9145e904bf8f8298a1a024d7f03152edaea0cf65fd1c137340
+    resources:
+      requests:
+        memory: 100M
+        cpu: 100m
+        ephemeral-storage: 500Mi
+      limits:
+        memory: 200M
+        ephemeral-storage: 500Mi
+    sidecarResources:
+      requests:
+        memory: 50M
+        cpu: 100m
+        ephemeral-storage: 250Mi
+      limits:
+        memory: 100M
+        ephemeral-storage: 250Mi
+    affinity:
+      antiAffinityTopologyKey: "kubernetes.io/hostname"
+    podDisruptionBudget:
+      maxUnavailable: 1
+    gracePeriod: 30
+    annotations:
+      fluentbit.io/exclude: "true"
+  pmm:
+    enabled: false
+<% if database["users"] %>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-users-playbook
+  labels:
+    app.kubernetes.io/component: database
+    app.kubernetes.io/name: playbook
+    app.kubernetes.io/instance: playbook-<%= environment %>
+    app.kubernetes.io/part-of: priority-deploy
+    app.kubernetes.io/managed-by: krane
+data:
+  users: '<%= database["users"].to_json %>'
+<% end %>

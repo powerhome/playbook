@@ -35,6 +35,7 @@ import * as Detail from 'kits/pb_detail/docs'
 import * as Dialog from 'kits/pb_dialog/docs'
 import * as DistributionBarDocs from 'kits/pb_distribution_bar/docs'
 import * as Draggable from 'kits/pb_draggable/docs'
+import * as Drawer from 'kits/pb_drawer/docs'
 import * as Dropdown from 'kits/pb_dropdown/docs'
 import * as FileUpload from 'kits/pb_file_upload/docs'
 import * as Filter from 'kits/pb_filter/docs'
@@ -142,6 +143,7 @@ WebpackerReact.registerComponents({
   ...Dialog,
   ...DistributionBarDocs,
   ...Draggable,
+  ...Drawer,
   ...Dropdown,
   ...FileUpload,
   ...Filter,

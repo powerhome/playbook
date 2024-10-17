@@ -3,6 +3,76 @@
 @import "../tokens/opacity";
 @import "../pb_avatar/avatar";
 
+$sizes: (
+  "avatar": ("sm": 38px, "md": 60px, "lg": 80px, "xl": 100px),
+  "first-item-double": ("sm": 20px, "md": 32px, "lg": 44px, "xl": 56px),
+  "first-item-triple": ("sm": 16px, "md": 24px, "lg": 32px, "xl": 44px),
+  "first-item-quadruple": ("sm": 16px, "md": 28px, "lg": 36px, "xl": 44px),
+  "second-item-double": ("sm": 12px, "md": 16px, "lg": 20px, "xl": 24px),
+  "second-item-triple": ("sm": 12px, "md": 20px, "lg": 24px, "xl": 32px),
+  "second-item-quadruple": ("sm": 12px, "md": 20px, "lg": 28px, "xl": 32px),
+  "third-item-triple": ("sm": 10px, "md": 16px, "lg": 20px, "xl": 24px),
+  "third-item-quadruple": ("sm": 10px, "md": 16px, "lg": 24px, "xl": 24px),
+  "fourth-item": ("sm": 8px, "md": 12px, "lg": 16px, "xl": 16px)
+);
+
+$positions: (
+  "second-item-double": (
+    "sm": ("top": null, "bottom": 5px, "right": 4px, "left": null),
+    "md": ("top": null, "bottom": 10px, "right": 8px, "left": null),
+    "lg": ("top": 46px, "bottom": null, "right": 12px, "left": null),
+    "xl": ("top": 58px, "bottom": null, "right": 14px, "left": null)
+  ),
+  "second-item-triple": (
+    "sm": ("top": 12px, "bottom": null, "right": 2px, "left": null),
+    "md": ("top": 24px, "bottom": null, "right": 5px, "left": null),
+    "lg": ("top": 32px, "bottom": null, "right": 9px, "left": null),
+    "xl": ("top": 41px, "bottom": null, "right": 11px, "left": null)
+  ),
+  "second-item-quadruple": (
+    "sm": ("top": null, "bottom": 9px, "right": 4px, "left": null),
+    "md": ("top": 24px, "bottom": null, "right": 5px, "left": null),
+    "lg": ("top": 31px, "bottom": null, "right": 6px, "left": null),
+    "xl": ("top": 43px, "bottom": null, "right": 9px, "left": null)
+  ),
+  "third-item-triple": (
+    "sm": ("top": null, "bottom": 3px, "right": null, "left": 11px),
+    "md": ("top": null, "bottom": 6px, "right": null, "left": 16px),
+    "lg": ("top": null, "bottom": 10px, "right": null, "left": 23px),
+    "xl": ("top": null, "bottom": 13px, "right": null, "left": 27px)
+  ),
+  "third-item-quadruple": (
+    "sm": ("top": null, "bottom": 3px, "right": null, "left": 9px),
+    "md": ("top": null, "bottom": 5px, "right": null, "left": 15px),
+    "lg": ("top": null, "bottom": 7px, "right": null, "left": 20px),
+    "xl": ("top": null, "bottom": 11px, "right": null, "left": 27px)
+  ),
+  "fourth-item": (
+    "sm": ("top": 5px, "bottom": null, "right": 6px, "left": null),
+    "md": ("top": 7px, "bottom": null, "right": 12px, "left": null),
+    "lg": ("top": 9px, "bottom": null, "right": 16px, "left": null),
+    "xl": ("top": 16px, "bottom": null, "right": 24px, "left": null)
+  ),
+  "first-item-double": (
+    "sm": ("top": 4px, "bottom": null, "right": null, "left": 3px),
+    "md": ("top": 6px, "bottom": null, "right": null, "left": 8px),
+    "lg": ("top": 8px, "bottom": null, "right": null, "left": 8px),
+    "xl": ("top": 10px, "bottom": null, "right": null, "left": 10px)
+  ),
+  "first-item-triple": (
+    "sm": ("top": 4px, "bottom": null, "right": null, "left": 4px),
+    "md": ("top": 7px, "bottom": null, "right": null, "left": 7px),
+    "lg": ("top": 10px, "bottom": null, "right": null, "left": 10px),
+    "xl": ("top": 12px, "bottom": null, "right": null, "left": 12px)
+  ),
+  "first-item-quadruple": (
+    "sm": ("top": 5px, "bottom": null, "right": null, "left": 3px),
+    "md": ("top": 7px, "bottom": null, "right": null, "left": 5px),
+    "lg": ("top": 9px, "bottom": null, "right": null, "left": 7px),
+    "xl": ("top": 16px, "bottom": null, "right": null, "left": 10px)
+  )
+);
+
 @mixin avatar-size($size) {
   height: $size;
   width: $size;
@@ -27,8 +97,8 @@
   $stacked_size: 18px;
   $max_to_display: 1, 2;
   display: inline-flex;
-  width: $container_size;
-  height: $container_size;
+  width: 28px;
+  height: 28px;
   flex-basis: $container_size;
   position: relative;
   flex-shrink: 0;
@@ -48,7 +118,7 @@
     }
   }
   &[class*=_single] .pb_multiple_users_stacked_item {
-    @include avatar-size($container_size);
+    @include avatar-size(28px);
   }
   [class^=pb_avatar_kit].second_item, [class^=pb_badge_kit].second_item {
     @include position((bottom: 0, right: 0));
@@ -71,72 +141,106 @@
     color: transparent;
   }
 
-  &[class*=_bubble] {
-    @include avatar-size($bubble_container_size);
-    background-color: $bg_light;
-    border-radius: 50%;
-
-    &.dark {
-      background-color: $card_dark;
-    }
-    
-    [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
-      &.dark {
-        .avatar_wrapper {
-          border: $border_size solid $border_dark;
+  // Iterate over each size to adjust the bubble container only when class contains "_bubble_"
+  @each $size_name, $size_value in $avatar-sizes {
+      &[class*=_bubble_][class*=_size_#{$size_name}] {
+        // Set bubble container size based on the class
+        $bubble_container_size: $size_value;
+        $container_size: $size_value;
+  
+        // Apply the bubble container size
+        @include avatar-size($bubble_container_size);
+        width: $bubble_container_size;
+        height: $bubble_container_size;
+        flex-basis: $bubble_container_size;
+  
+        background-color: $bg_light;
+        border-radius: 50%;
+  
+        &.dark {
+          background-color: $card_dark;
         }
-      }
-    }
-
-    [class^=pb_avatar_kit] {
-      &.first_item {
-        @include position((top: 4px, left: 3px));
-        @include avatar-size(20px);
-
-        &.triple_bubble {
-          @include position((top: 4px, left: 4px));
-          @include avatar-size(16px);
+  
+        [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
+          @include avatar-size($bubble_container_size * 0.45); // Adjust the size of stacked avatars
+  
+          &.dark {
+            .avatar_wrapper {
+              border: $border_size solid $border_dark;
+            }
+          }
+  
+          .avatar_wrapper {
+            border: $border_size solid $white;
+          }
         }
-
-        &.quadruple_bubble {
-          @include position((top: 5px, left: 3px));
-          @include avatar-size(16px);
+  
+        [class^=pb_avatar_kit] {
+          // First Item
+          &.first_item {
+            @include position(map-get(map-get($positions, 'first-item-double'), $size_name));
+            @include avatar-size(map-get(map-get($sizes, 'first-item-double'), $size_name));
+        
+            &.double_bubble {
+              @include position(map-get(map-get($positions, 'first-item-double'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'first-item-double'), $size_name));
+            }
+        
+            &.triple_bubble {
+              @include position(map-get(map-get($positions, 'first-item-triple'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'first-item-triple'), $size_name));
+            }
+        
+            &.quadruple_bubble {
+              @include position(map-get(map-get($positions, 'first-item-quadruple'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'first-item-quadruple'), $size_name));
+            }
+          }
+        
+          // Second Item
+          &.second_item {
+            @include position(map-get(map-get($positions, 'second-item-double'), $size_name));
+        
+            &.double_bubble {
+              @include position(map-get(map-get($positions, 'second-item-double'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'second-item-double'), $size_name));
+            }
+        
+            &.triple_bubble {
+              @include position(map-get(map-get($positions, 'second-item-triple'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'second-item-triple'), $size_name));
+            }
+        
+            &.quadruple_bubble {
+              @include position(map-get(map-get($positions, 'second-item-quadruple'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'second-item-quadruple'), $size_name));
+            }
+          }
+        
+          // Third Item
+          &.third_item {
+            @include position(map-get(map-get($positions, 'third-item-triple'), $size_name));
+            @include avatar-size(map-get(map-get($sizes, 'third-item-triple'), $size_name));
+        
+            &.quadruple_bubble {
+              @include position(map-get(map-get($positions, 'third-item-quadruple'), $size_name));
+              @include avatar-size(map-get(map-get($sizes, 'third-item-quadruple'), $size_name));
+            }
+          }
+        
+          // Fourth Item
+          &.fourth_item {
+            @include position(map-get(map-get($positions, 'fourth-item'), $size_name));
+            @include avatar-size(map-get(map-get($sizes, 'fourth-item'), $size_name));
+          }
         }
-      }
-
-      &.second_item {
-        @include position((bottom: 5px, right: 4px));
-        @include avatar-size(12px);
-
-        &.triple_bubble {
-          @include position((top: 13px, right: 2px));
+        
+        &[class*=_single_bubble] {
+          [class^=pb_avatar_kit].first_item {
+            @include position((top: 0, left: 0));
+            @include avatar-size($bubble_container_size);
+          }
         }
-
-        &.quadruple_bubble {
-          @include position((bottom: 9px, right: 4px));
-        }
-      }
-
-      &.third_item {
-        @include position((bottom: 3px, left: 11px));
-        @include avatar-size(10px);
-
-        &.quadruple_bubble {
-          @include position((bottom: 3px, left: 9px));
-        }
-      }
-
-      &.fourth_item {
-        @include position((top: 5px, right: 6px));
-        @include avatar-size(8px);
       }
     }
   }
-
-  &[class*=_single_bubble] {
-    [class^=pb_avatar_kit].first_item {
-      @include position((top: 0, left: 0));
-      @include avatar-size($bubble_container_size);
-    }
-  }
-}
