@@ -6,12 +6,14 @@ import DateStacked from '../pb_date_stacked/_date_stacked'
 
 type TimelineDateAreaProps = {
   date?: Date,
+  children?: React.ReactNode,
   className?: string,
   htmlOptions?: { [key: string]: any },
 } & GlobalProps
 
 const TimelineDateArea: React.FC<TimelineDateAreaProps> = ({
   date,
+  children,
   className,
   htmlOptions = {},
   ...props
@@ -22,6 +24,7 @@ const TimelineDateArea: React.FC<TimelineDateAreaProps> = ({
         {...htmlProps}
         className={classnames('pb_timeline_item_left_block', globalProps(props), className)}
     >
+      {children}
       {date && (
         <DateStacked align="center"
             date={date}

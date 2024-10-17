@@ -7,6 +7,7 @@ import IconCircle from '../pb_icon_circle/_icon_circle'
 type TimelineNodeAreaProps = {
   icon?: string,
   iconColor?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
+  children?: React.ReactNode,
   className?: string,
   htmlOptions?: { [key: string]: any },
 } & GlobalProps
@@ -14,6 +15,7 @@ type TimelineNodeAreaProps = {
 const TimelineNodeArea: React.FC<TimelineNodeAreaProps> = ({
   icon = 'user',
   iconColor = 'default',
+  children,
   className,
   htmlOptions = {},
   ...props
@@ -24,10 +26,14 @@ const TimelineNodeArea: React.FC<TimelineNodeAreaProps> = ({
         {...htmlProps}
         className={classnames('pb_timeline_item_step', globalProps(props), className)}
     >
-      <IconCircle icon={icon}
-          size="xs"
-          variant={iconColor}
-      />
+      {children ? (
+        children
+      ) : (
+        <IconCircle icon={icon}
+            size="xs"
+            variant={iconColor}
+        />
+      )}
       <div className="pb_timeline_item_connector" />
     </div>
   )
