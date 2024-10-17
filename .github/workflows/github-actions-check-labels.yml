@@ -2,7 +2,7 @@ name: Check Labels
 run-name: ${{ github.actor }} is checking labels 🚀
 on:
   pull_request:
-    types: [ labeled ]
+    types: [ labeled, unlabeled ]
 jobs:
   Checking-Labels:
     runs-on: ubuntu-latest
@@ -18,13 +18,17 @@ jobs:
           LABELS=$(jq -r '.pull_request.labels[].name' "$GITHUB_EVENT_PATH")
           SEMVER_PATTERN="^(major|minor|patch)$"
 
-          SEMVER_LABEL=$(echo "$LABELS" | grep -iE "$SEMVER_PATTERN" || true)
+          SEMVER_LABELS=$(echo "$LABELS" | grep -iE "$SEMVER_PATTERN" || true)
+          SEMVER_LABEL_COUNT=$(echo "$SEMVER_LABELS" | wc -l)
 
-          if [ -z "$SEMVER_LABEL" ]; then
-            echo "No valid Semver label found. Please add one of: major, minor, patch (case-insensitive)"
+          if [ "$SEMVER_LABEL_COUNT" -eq 0 ]; then
+            echo "Error: No Semver label found. Please add exactly one of: major, minor, patch (case-insensitive)"
+            exit 1
+          elif [ "$SEMVER_LABEL_COUNT" -gt 1 ]; then
+            echo "Error: Multiple Semver labels found. Please ensure only one is present:"
+            echo "$SEMVER_LABELS"
             exit 1
           else
-            echo "Valid Semver label found: $SEMVER_LABEL"
-            NORMALIZED_LABEL=$(echo "$SEMVER_LABEL" | tr '[:upper:]' '[:lower:]')
-            echo "Normalized label: $NORMALIZED_LABEL"
+            NORMALIZED_LABEL=$(echo "$SEMVER_LABELS" | tr '[:upper:]' '[:lower:]')
+            echo "Valid Semver label found: $NORMALIZED_LABEL"
           fi
