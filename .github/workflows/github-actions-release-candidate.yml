@@ -31,7 +31,7 @@ jobs:
 
             if (presentRequiredLabels.length === 0) {
               core.setFailed('Your pull request is missing a required Semver label: (${requiredLabels.join(', ')})');
-            } else if (presentRequiredLabels.length > 1) {
+            else if (presentRequiredLabels.length > 1) {
               core.setFailed('Your pull request has multiple Semver labels. Please use only one.')
             } else {
               console.log('Pull request has a required Semver label.');
