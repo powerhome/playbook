@@ -1,0 +1,19 @@
+#!/bin/bash
+
+task_name="Predeployment"
+source "$(dirname $(realpath $0))/deployment_helpers"
+
+log ">>> Installing dependencies at $tag into $environment ($cluster # $namespace)"
+
+instance=$(environment=$environment instance_name)
+
+operatorResources=$(krane render \
+    --filenames=/app/config/deploy/templates/operators \
+    --current-sha=${tag}) || exit $?
+echo "$operatorResources" | krane deploy ${namespace} ${cluster} \
+    --selector="app.kubernetes.io/component=operator" \
+    --verbose-log-prefix \
+    --global-timeout=300s \
+    --stdin
+
+log "${GREEN}SUCCESS: $task_name - $cluster / $namespace${NOFORMAT}"
