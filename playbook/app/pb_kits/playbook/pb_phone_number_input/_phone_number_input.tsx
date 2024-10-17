@@ -1,8 +1,7 @@
 import React, { forwardRef, useEffect, useRef, useState, useImperativeHandle } from 'react'
 import classnames from 'classnames'
 
-import intlTelInput from 'intl-tel-input'
-import 'intl-tel-input/build/js/utils.js'
+import intlTelInput from 'intl-tel-input/build/js/intlTelInputWithUtils.js'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
@@ -50,7 +49,7 @@ const formatToGlobalCountryName = (countryName: string) => {
 }
 
 const formatAllCountries = () => {
-  const countryData = window.intlTelInputGlobals.getCountryData()
+  const countryData = intlTelInput.getCountryData()
 
   for (let i = 0; i < countryData.length; i++) {
     const country = countryData[i]
@@ -214,14 +213,24 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   // This also Fixes things for our react_component rendering on the Rails Side
   useEffect(formatAllCountries, [])
 
+  // If an initial country is not specified, the "globe" icon will show
+  // Always set a country
+  const fallbackCountry =
+    preferredCountries.length > 0 ? preferredCountries[0] :
+      onlyCountries.length > 0 ? onlyCountries.sort()[0] :
+        "af";
+
   useEffect(() => {
     const telInputInit = intlTelInput(inputRef.current, {
       separateDialCode: true,
-      preferredCountries,
+      countryOrder: preferredCountries,
       allowDropdown: !disabled,
       autoInsertDialCode: false,
-      initialCountry,
-      onlyCountries
+      initialCountry: initialCountry || fallbackCountry,
+      onlyCountries,
+      countrySearch: false,
+      fixDropdownWidth: false,
+      formatAsYouType: false,
     })
 
     inputRef.current.addEventListener("countrychange", (evt: Event) => {
