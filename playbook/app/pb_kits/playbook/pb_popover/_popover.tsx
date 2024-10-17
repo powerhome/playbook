@@ -21,7 +21,7 @@ import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import { uniqueId } from 'lodash';
 
-type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth'>
+type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth' | 'maxHeight' | 'minHeight'>
 
 type PbPopoverProps = {
   aria?: { [key: string]: string };

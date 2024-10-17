@@ -73,6 +73,10 @@ module Playbook
     prop :aria, type: Playbook::Props::HashProp, default: {}
     prop :html_options, type: Playbook::Props::HashProp, default: {}
     prop :children, type: Playbook::Props::Proc
+    prop :style, type: Playbook::Props::HashProp, default: {}
+    prop :height
+    prop :min_height
+    prop :max_height
 
     def object
       self
@@ -80,6 +84,14 @@ module Playbook
 
     def combined_html_options
       default_html_options.merge(html_options.deep_merge(data_attributes))
+    end
+
+    def global_inline_props
+      {
+        height: height,
+        min_height: min_height,
+        max_height: max_height,
+      }.compact
     end
 
     # rubocop:disable Layout/CommentIndentation
@@ -118,6 +130,7 @@ module Playbook
         data: data,
         class: classname,
         aria: aria,
+        style: inline_styles,
       }
     end
 
@@ -130,6 +143,10 @@ module Playbook
         data: data,
         aria: aria,
       }.transform_keys { |key| key.to_s.tr("_", "-").to_sym }
+    end
+
+    def inline_styles
+      global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value};" }.join(" ")
     end
   end
 end
