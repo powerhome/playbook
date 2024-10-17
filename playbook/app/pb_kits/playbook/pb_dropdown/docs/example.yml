@@ -25,6 +25,7 @@ examples:
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
   - dropdown_blank_selection: Blank Selection
+  - dropdown_clear_selection: Clear Selection
   - dropdown_separators_hidden: Separators Hidden
   # - dropdown_with_autocomplete: Autocomplete
   # - dropdown_with_autocomplete_and_custom_display: Autocomplete with Custom Display
