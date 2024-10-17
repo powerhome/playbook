@@ -202,6 +202,23 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (id) {
+      // Attach the clear function to the window, scoped by the id
+      (window as any)[`clearMultiLevelSelect_${id}`] = () => {
+        const resetData = modifyRecursive(formattedData, false);
+        setFormattedData(resetData);
+        setReturnedArray([]);
+        setDefaultReturn([]);
+        setSingleSelectedItem({ id: [], value: "", item: [] });
+        onSelect([]);
+      };
+      return () => {
+        delete (window as any)[`clearMultiLevelSelect_${id}`];
+      };
+    }
+  }, [formattedData, id, onSelect]);
+
   // Iterate over tree, find item and set checked or unchecked
   const modifyValue = (
     id: string,

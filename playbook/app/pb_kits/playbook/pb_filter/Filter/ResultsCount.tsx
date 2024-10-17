@@ -13,6 +13,7 @@ type ResultsCountProps = {
 const ResultsCount = ({ dark, results, title }: ResultsCountProps): React.ReactElement => {
   
   const resultTitle = () => {
+    if (results == null) return null
     return (
       <TitleCount
           align="center"
@@ -24,6 +25,7 @@ const ResultsCount = ({ dark, results, title }: ResultsCountProps): React.ReactE
   }
 
   const justResults = () => {
+    if (results == null) return null
     return (
       <Caption
           className="filter-results"
@@ -35,13 +37,13 @@ const ResultsCount = ({ dark, results, title }: ResultsCountProps): React.ReactE
   }
 
   const displayResultsCount = () => {
-    if (results && title) {
+    if (results != null && results >=0 && title) {
       return (
         <>
           {resultTitle()}
         </>
       )
-    } else if (results) {
+    } else if (results !=null && results >=0 ) {
       return (
         <>
           {justResults()}
