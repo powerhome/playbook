@@ -66,14 +66,17 @@ const TimelineItem = ({
         {...htmlProps}
         className={classnames(timelineItemCss, globalProps(props), className)}
     >
-      <div className="pb_timeline_item_left_block">
-        {dateAreaChild || (date && (
-          <DateStacked align="center"
-              date={date}
-              size="sm"
-          />
-        ))}
-      </div>
+        {dateAreaChild || (
+          <div className="pb_timeline_item_left_block">
+            {date && (
+              <DateStacked
+                  align="center"
+                  date={date}
+                  size="sm"
+              />
+            )}
+          </div>
+        )}
         {nodeAreaChild || (
           <div className="pb_timeline_item_step">
             <IconCircle icon={icon}
@@ -83,9 +86,11 @@ const TimelineItem = ({
             <div className="pb_timeline_item_connector" />
           </div>
         )}
-      <div className="pb_timeline_item_right_block">
-        {detailAreaChild || otherChildren}
-      </div>
+        {detailAreaChild || (
+          <div className="pb_timeline_item_right_block">
+           { otherChildren }
+          </div>
+        )}
     </div>
   )
 }

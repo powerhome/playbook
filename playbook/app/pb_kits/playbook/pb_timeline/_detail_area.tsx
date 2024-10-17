@@ -19,7 +19,7 @@ const TimelineDetailArea: React.FC<TimelineDetailAreaProps> = ({
   return (
     <div
         {...htmlProps}
-        className={classnames('pb_timeline_detail_area', globalProps(props), className)}
+        className={classnames('pb_timeline_item_right_block', globalProps(props), className)}
     >
       {children}
     </div>

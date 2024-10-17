@@ -20,7 +20,7 @@ const TimelineDateArea: React.FC<TimelineDateAreaProps> = ({
   return (
     <div
         {...htmlProps}
-        className={classnames('pb_timeline_date_area', globalProps(props), className)}
+        className={classnames('pb_timeline_item_left_block', globalProps(props), className)}
     >
       {date && (
         <DateStacked align="center"
