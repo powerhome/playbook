@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Card, Nav, SectionSeparator, NavItem } from 'playbook-ui'
 import GlobalProps from './globalProps'
+import GlobalPropsValues from './globalPropsValues'
 import KitProps from './kitProps'
 
 type AvailablePropsType = {
@@ -10,7 +11,14 @@ type AvailablePropsType = {
 
 const AvailableProps = ({ availableProps, darkMode }: AvailablePropsType) => {
   const props = JSON.parse(availableProps)
+  const globalPropsNames = GlobalPropsValues.map(prop => prop.prop)
   const [showKitTab, setShowKitTab] = useState(true)
+
+  for(var propName in props) {
+    if(globalPropsNames.includes(propName)) {
+      delete props[propName]
+    }
+  }
 
   return (
     <>

@@ -16,6 +16,24 @@ services:
         - image-registry.powerapp.cloud/playbook/playbook:main
     volumes:
       - .:/home/app/src
-      - bundle:/usr/local/bundle
+      - bundle:/usr/local/rvm/gems
     ports:
       - "8089:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    platform: linux/x86_64
+    image: percona:8.0.36-28@sha256:1128d56e64711ed65cb0c57041048967ee5875a2167d708d327885fd1f995fa0
+    init: true
+    ports:
+      - 3306
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "mysql", "-u", "root", "-ppassword", "-e", "SHOW DATABASES;"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+      start_period: 20s

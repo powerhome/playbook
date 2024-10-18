@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: percona-xtradb-cluster-operator
+  labels:
+    app.kubernetes.io/component: operator
+    app.kubernetes.io/instance: percona-xtradb-cluster-operator
+    app.kubernetes.io/name: percona-xtradb-cluster-operator
+    app.kubernetes.io/part-of: percona-xtradb-cluster-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: operator
+      app.kubernetes.io/instance: percona-xtradb-cluster-operator
+      app.kubernetes.io/name: percona-xtradb-cluster-operator
+      app.kubernetes.io/part-of: percona-xtradb-cluster-operator
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/instance: percona-xtradb-cluster-operator
+        app.kubernetes.io/name: percona-xtradb-cluster-operator
+        app.kubernetes.io/part-of: percona-xtradb-cluster-operator
+    spec:
+      serviceAccountName: percona-xtradb-cluster-operator
+      containers:
+        - name: percona-xtradb-cluster-operator
+          image: percona/percona-xtradb-cluster-operator:1.15.0@sha256:6f7d8d4e472b8c4d166573cc7bb714bbb0fdf1535142b6138c62fdecbf881df9
+          ports:
+          - containerPort: 8080
+            name: metrics
+            protocol: TCP
+          command:
+          - percona-xtradb-cluster-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "percona-xtradb-cluster-operator"
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /metrics
+              port: metrics
+              scheme: HTTP
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+              ephemeral-storage: 100Mi
+            limits:
+              memory: "256Mi"
+              ephemeral-storage: 100Mi
