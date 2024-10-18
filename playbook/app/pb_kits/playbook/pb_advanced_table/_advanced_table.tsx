@@ -103,7 +103,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
     // Use customRenderer if provided, otherwise default rendering
     if (customRenderer) {
-      // console.log(row.original, getValue())
       return customRenderer(row, getValue())
     }
 

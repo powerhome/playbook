@@ -1,5 +1,5 @@
 import React from "react"
-import { AdvancedTable, Pill, Body } from "playbook-ui"
+import { AdvancedTable, Pill, Body, Flex, Detail, Caption } from "playbook-ui"
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableCustomCell = (props) => {
@@ -13,7 +13,11 @@ const AdvancedTableCustomCell = (props) => {
     {
       accessor: "newEnrollments",
       label: "New Enrollments",
-      customRenderer: (row, value) => <Pill text={value} />, 
+      customRenderer: (row, value) => (
+        <Pill text={value} 
+            variant="success"    
+        />
+      ), 
     },
     {
       accessor: "scheduledMeetings",
@@ -23,6 +27,17 @@ const AdvancedTableCustomCell = (props) => {
     {
       accessor: "attendanceRate",
       label: "Attendance Rate",
+      customRenderer: (row, value) => (
+        <Flex alignItems="end" 
+            orientation="column"
+        >
+          <Detail bold 
+              color="default" 
+              text={value} 
+          />
+          <Caption size="xs">{row.original.graduatedStudents}</Caption>
+        </Flex>
+      ),
     },
     {
       accessor: "completedClasses",
@@ -42,9 +57,14 @@ const AdvancedTableCustomCell = (props) => {
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          enableToggleExpansion="all"
+          responsive="none"
           tableData={MOCK_DATA}
           {...props}
-      />
+      >
+        <AdvancedTable.Header enableSorting />
+        <AdvancedTable.Body />
+      </AdvancedTable>
     </div>
   )
 }
