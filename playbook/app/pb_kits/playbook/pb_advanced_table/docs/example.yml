@@ -3,6 +3,7 @@ examples:
   - advanced_table_beta: Default (Required Props)
   - advanced_table_beta_subrow_headers: SubRow Headers
   - advanced_table_beta_sort: Enable Sorting
+
   react:
   - advanced_table_default: Default (Required Props)
   - advanced_table_loading: Loading State
@@ -15,3 +16,4 @@ examples:
   - advanced_table_table_props: Table Props
   - advanced_table_inline_row_loading: Inline Row Loading
   - advanced_table_responsive: Responsive Tables
+  - advanced_table_custom_cell: Custom Components for Cells
