@@ -1,1 +1,1 @@
-The `subtle` variant adjusts the text and background colors to appear less bold. You can use our global props to control the spacing and border radius of the dropdown options when utilizing our subcomponent structure. Set the `Separators` prop to `false` to remove the separator lines between the options.
+On the `subtle` variant, it is recommended that you set the `Separators` prop to `false` to remove the separator lines between the options for a more cleaner look.

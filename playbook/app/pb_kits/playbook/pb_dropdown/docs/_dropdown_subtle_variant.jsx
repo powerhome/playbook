@@ -21,27 +21,12 @@ const DropdownSubtleVariant = (props) => {
 
   return (
   <>
-    <Dropdown
-        options={options}
-        separators={false}
-        variant="subtle"
-        {...props}
-    >
-      <Dropdown.Trigger/>
-      <Dropdown.Container>
-        {options.map((option) => (
-          <Dropdown.Option 
-              borderRadius="md"
-              key={option.id} 
-              marginX="xs"
-              marginY="xxs"
-              option={option}
-              paddingX="xs"
-              paddingY="xxs"
-          />
-        ))}
-      </Dropdown.Container>
-    </Dropdown>
+     <Dropdown
+         options={options}
+         separators={false}
+         variant="subtle"
+         {...props}
+    />
   </>
   )
 }
