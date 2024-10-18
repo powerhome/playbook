@@ -79,6 +79,7 @@ const Popover = (props: PbPopoverProps) => {
     maxWidth,
     minHeight,
     minWidth,
+    width,
     targetId,
   } = props;
 
@@ -97,7 +98,8 @@ const Popover = (props: PbPopoverProps) => {
       maxHeight ? { maxHeight: maxHeight } : {},
       maxWidth ? { maxWidth: maxWidth } : {},
       minHeight ? { minHeight: minHeight } : {},
-      minWidth ? { minWidth: minWidth } : {}
+      minWidth ? { minWidth: minWidth } : {},
+      width ? { width: width } : {}
     );
   };
   const ariaProps = buildAriaProps(aria);
@@ -167,6 +169,7 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
     maxWidth,
     minHeight,
     minWidth,
+    width,
   } = props;
 
   useEffect(() => {
@@ -216,6 +219,7 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
         placement={placement}
         referenceElement={referenceElement}
         targetId={targetId}
+        width={width}
         zIndex={zIndex}
         {...props}
     >

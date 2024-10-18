@@ -12,6 +12,7 @@ module Playbook
       prop :max_width
       prop :min_width
       prop :min_height
+      prop :width
       prop :z_index, type: Playbook::Props::String
       prop :offset, type: Playbook::Props::Boolean, default: false
       prop :close_on_click, type: Playbook::Props::Enum,
@@ -36,11 +37,12 @@ module Playbook
         out += "max-width: #{max_width}; " if max_width.present?
         out += "min-height: #{min_height}; " if min_height.present?
         out += "min-width: #{min_width};" if min_width.present?
+        out += "width: #{width};" if width.present?
         out
       end
 
       def width_height_class_helper
-        "overflow_handling" if max_height || max_width
+        "overflow_handling" if max_height || max_width || width
       end
 
       def data
