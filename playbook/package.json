@@ -87,7 +87,7 @@
     "react-popper": "^2.3.0",
     "react-select": "5.8.0",
     "react-trix": "0.10.1",
-    "react-zoom-pan-pinch": "^2.6.1",
+    "react-zoom-pan-pinch": "3.6.0",
     "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.77.6",
     "terser": "^5.31.3",
