@@ -1,0 +1,1 @@
+Filter can leverage `popover_props` to set a custom width to the popover, without affecting the Filter size. 
