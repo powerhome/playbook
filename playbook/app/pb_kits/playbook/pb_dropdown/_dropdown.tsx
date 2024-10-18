@@ -35,7 +35,9 @@ type DropdownProps = {
     label?: string;
     onSelect?: (arg: GenericObject) => null;
     options: GenericObject;
+    separators: boolean;
     triggerRef?: any;
+    variant?: "default" | "subtle";
 };
 
 interface DropdownComponent
@@ -62,15 +64,20 @@ const Dropdown = forwardRef((props: DropdownProps, ref: any) => {
         label,
         onSelect,
         options,
-        triggerRef
+        separators = true,
+        triggerRef,
+        variant = "default",
     } = props;
 
     const ariaProps = buildAriaProps(aria);
     const dataProps = buildDataProps(data);
     const htmlProps = buildHtmlProps(htmlOptions);
+    const separatorsClass = separators ? '' : 'separators_hidden'
     const classes = classnames(
         buildCss("pb_dropdown"),
         globalProps(props),
+        variant,
+        separatorsClass,
         className
     );
 
