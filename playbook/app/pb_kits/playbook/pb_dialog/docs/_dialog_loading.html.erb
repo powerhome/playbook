@@ -1,13 +1,36 @@
 <%= pb_rails("button", props: { text: "Open Dialog", data: {"open-dialog": "dialog-loading"} }) %>
 
-<%= pb_rails("dialog", props: { 
-    id:"dialog-loading", 
-    size: "sm", 
-    title: "Loading Exmaple", 
-    text: "Make a loading request?", 
-    cancel_button: "Cancel Button", 
+<%= pb_rails("dialog", props: {
+    id:"dialog-loading",
+    size: "sm",
+    title: "Loading Example",
+    text: "Make a loading request?",
+    cancel_button: "Cancel Button",
     cancel_button_id: "cancel-button-loading",
-    confirm_button: "Okay", 
+    confirm_button: "Okay",
     confirm_button_id: "confirm-button-loading",
     loading: true,
 }) %>
+
+<script>
+    const loadingButton = document.querySelector('[data-disable-with="Loading"]');
+    if (loadingButton) {
+        loadingButton.addEventListener("click", function() {
+        const okayLoadingButton = document.querySelector('[data-disable-with="Loading"]');
+        const cancelButton = document.querySelector('[data-disable-cancel-with="Loading"]');
+        let currentClass = okayLoadingButton.className;
+        let cancelClass = cancelButton ? cancelButton.className : "";
+
+        setTimeout(function() {
+            okayLoadingButton.disabled = false;
+            okayLoadingButton.className = currentClass.replace("_disabled_loading", "_enabled");
+
+            if (cancelButton) {
+            cancelButton.disabled = false;
+            cancelButton.className = cancelClass.replace("_disabled", "_enabled");
+            }
+        }, 5000);
+
+        });
+  }
+</script>
