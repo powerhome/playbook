@@ -9,8 +9,6 @@ jobs:
     steps:
       - name: Check for Semver label
         run: |
-          PR_NUMBER=$(git log -1 --pretty=%B | grep -oP '#\K\d+')
-          echo "Here is the PR Number: $PR_NUMBER"
           LABELS=$(jq -r '.pull_request.labels[].name' "$GITHUB_EVENT_PATH")
           SEMVER_PATTERN="^(major|minor|patch)$"
 
