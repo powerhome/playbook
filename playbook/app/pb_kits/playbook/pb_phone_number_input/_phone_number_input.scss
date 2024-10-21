@@ -256,15 +256,3 @@ $flag-min-resolution: 192dpi;
     }
   }
 }
-
-// Rails Phone Number Input padding placement of placeholders
-// is off in a Dialog because it doesn't account for
-// padding: 0 $space_xxs 0 $space_xs;
-// Set to 0 so the placeholder doesn't overlap with selected country
-.pb_dialog {
-  .pb_phone_number_input_rails {
-    .iti__selected-country {
-      padding: 0;
-    }
-  }
-}

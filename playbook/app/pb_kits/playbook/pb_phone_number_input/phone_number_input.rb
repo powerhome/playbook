@@ -23,13 +23,12 @@ module Playbook
                    default: ""
 
       def classname
-        generate_classname("pb_phone_number_input_rails")
+        generate_classname("pb_phone_number_input")
       end
 
       def phone_number_input_options
         {
           id: id,
-          className: classname,
           dark: dark,
           disabled: disabled,
           error: error,
