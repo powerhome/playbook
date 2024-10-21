@@ -1,10 +1,23 @@
-<%= pb_rails("avatar", props: {
-    name: "Terry Johnson",
-    size: "xxs",
-    image_url: "https://randomuser.me/api/portraits/men/44.jpg",
-    status: "away"
-  }) %>
+<%= pb_rails("flex", props: { group_hover: true }) do %>
 
+  <% 3.times do %>
+    <%= pb_rails("avatar", props: {
+      name: "Terry Johnson",
+      size: "xxs",
+      image_url: "https://randomuser.me/api/portraits/men/44.jpg",
+      status: "away",
+    }) %>
+  <% end %>
+
+  <%= pb_rails("avatar", props: {
+      name: "Terry Johnson",
+      size: "xxs",
+      image_url: "https://randomuser.me/api/portraits/men/44.jpg",
+      status: "away",
+      hover: {scale: "md"},
+    }) %>
+
+<% end %>
 <br>
 
 <%= pb_rails("avatar", props: {
@@ -12,7 +25,8 @@
     size: "xs",
     image_alt: "Terry Johnson Standing",
     image_url: "https://randomuser.me/api/portraits/men/44.jpg",
-    status: "online"
+    status: "online",
+    hover: {scale: "lg"},
   }) %>
 
 <br>
