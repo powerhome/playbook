@@ -572,3 +572,8 @@ kits:
       with avatar, titles, name and territory. This is a versatile kit with features
       than can be added to display more info.
     status: stable
+- category: link
+  components:
+    - name: link
+      platforms: all
+      status: beta

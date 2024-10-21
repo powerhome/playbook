@@ -1,0 +1,13 @@
+examples:
+  
+  rails:
+  - link_default: Default
+  
+  
+  react:
+  - link_default: Default
+  
+  
+  swift:
+  - link_default_swift: Default
+  
