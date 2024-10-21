@@ -9,8 +9,8 @@ examples:
   - sort_only: Sort Only
   - filter_max_width: Max Width for Popover Inside of Filter
   - filter_max_height: Max Height for Popover Inside of Filter
-  - filter_custom_width: Custom Width for Popover Inside of Filter
   - filter_placement: Filter Placement
+  - filter_popover_props: Popover Props
 
   react:
   - filter_default: Default
@@ -21,6 +21,6 @@ examples:
   - sort_only: Sort Only
   - filter_max_width: Max Width for Popover Inside of Filter
   - filter_max_height: Max Height for Popover Inside of Filter
-  - filter_custom_width: Custom Width for Popover Inside of Filter
   - filter_placement: Filter Placement
+  - filter_popover_props: Popover Props
 

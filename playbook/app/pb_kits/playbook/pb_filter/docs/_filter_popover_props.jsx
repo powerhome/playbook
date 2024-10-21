@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Filter, Flex, Select, TextInput } from 'playbook-ui'
 
-const FilterCustomWidth = (props) => {
+const FilterPopoverProps = (props) => {
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
@@ -68,4 +68,4 @@ const FilterCustomWidth = (props) => {
   )
 }
 
-export default FilterCustomWidth
+export default FilterPopoverProps
