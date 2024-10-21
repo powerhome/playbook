@@ -17,7 +17,7 @@ RSpec.describe Playbook::PbPhoneNumberInput do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      classname = "pb_phone_number_input_rails"
+      classname = "pb_phone_number_input"
       expect(subject.new({}).classname).to eq classname
       expect(subject.new(classname: "additional_class").classname).to eq "#{classname} additional_class"
     end
