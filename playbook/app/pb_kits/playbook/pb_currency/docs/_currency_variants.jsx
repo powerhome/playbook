@@ -30,6 +30,15 @@ const CurrencyVariants = (props) => {
           variant="bold"
           {...props}
       />
+      
+      <Currency
+          amount="1234567.89"
+          commaSeparator
+          label="Comma Separator"
+          marginBottom="md"
+          size="sm"
+          {...props}
+      />
     </>
   )
 }

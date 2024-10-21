@@ -43,6 +43,9 @@ module Playbook
       prop :unstyled, type: Playbook::Props::Boolean,
                       default: false
 
+      prop :comma_separator, type: Playbook::Props::Boolean,
+                             default: false
+
       def classname
         generate_classname("pb_currency_kit", align, size, dark_class)
       end
@@ -98,7 +101,8 @@ module Playbook
       def whole_value
         return amount if decimals == "matching"
 
-        amount.split(".").first.to_s
+        value = amount.split(".").first.to_s
+        comma_separator ? number_with_delimiter(value) : value
       end
 
       def abbreviated_value(index = 0..-2)

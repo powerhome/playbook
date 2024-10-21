@@ -26,6 +26,7 @@ type CurrencyProps = {
   variant?: 'default' | 'light' | 'bold',
   unit?: string,
   unstyled?: boolean,
+  commaSeparator?: boolean,
 }
 
 const sizes: {lg: 1, md: 3, sm: 4} = {
@@ -53,6 +54,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     variant = 'default',
     dark = false,
     unstyled = false,
+    commaSeparator = false,
   } = props
 
   const emphasizedClass = emphasized ? '' : '_deemphasized'
@@ -74,7 +76,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     className
   )
 
-  const getFormattedNumber = (input: number | any ) => new Intl.NumberFormat('en-US', {
+  const getFormattedNumber = (input: number | string) => new Intl.NumberFormat('en-US', {
     notation: 'compact',
     maximumFractionDigits: 1,
   }).format(input)
@@ -91,7 +93,15 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
   const getMatchingDecimalAmount = decimals === "matching" ? amount : whole,
     getMatchingDecimalValue = decimals === "matching" ? '' : `.${decimal}`
 
-  const getAmount = abbreviate ? getAbbreviatedValue('amount') : getMatchingDecimalAmount,
+  const formatAmount = (amount: string) => {
+    if (!commaSeparator) return amount;
+    
+    const [whole, decimal = '00'] = amount.split('.');
+    const formattedWhole = new Intl.NumberFormat('en-US').format(parseInt(whole));
+    return `${formattedWhole}.${decimal}`;
+  }
+
+  const getAmount = abbreviate ? getAbbreviatedValue('amount') : formatAmount(getMatchingDecimalAmount),
     getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null,
     getDecimalValue = abbreviate ? '' : getMatchingDecimalValue
 
