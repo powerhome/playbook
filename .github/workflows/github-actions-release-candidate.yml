@@ -37,6 +37,34 @@ jobs:
         run: |
           git config --local user.name "${{ github.actor }}"
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Get Semver Label
+        id: get-label
+        run: |
+          PR_NUMBER=$(git log -1 --pretty=%B | grep -oP '#\K\d+')
+          if [ -z "$PR_NUMBER" ]; then
+            echo "Error: No PR number found in commit message."
+            exit 1
+          fi
+
+          LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name')
+          SEMVER_LABEL=$(echo "$LABELS" | grep -E '^(major|minor|patch)$')
+
+          if [ -z "$SEMVER_LABEL" ]; then
+            echo "Error: No valid Semver label (major, minor, patch) found on PR #$PR_NUMBER."
+            exit 1
+          fi
+
+          LABEL_COUNT=$(echo "$SEMVER_LABEL" | wc -l)
+          if [ "$LABEL_COUNT" -ne 1 ]; then
+            echo "Error: Expected exactly one Semver label, found $LABEL_COUNT on PR #$PR_NUMBER."
+            exit 1
+          fi
+
+          echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
+          echo "Semver label found: $SEMVER_LABEL"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Grab Current Version and Set New RC Version
         id: set-version
         run: |
@@ -45,7 +73,21 @@ jobs:
           if [[ $current_npm_version == *"-rc."* ]]; then
             new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           else
-            new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+            case ${{ env.SEMVER_LABEL }} in
+              major)
+                new_npm_version=$(yarn version --premajor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+                ;;
+              minor)
+                new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+                ;;
+              patch)
+                new_npm_version=$(yarn version --prepatch --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+                ;;
+              *)
+                echo "Error: Invalid Semver label: ${{ env.SEMVER_LABEL }}"
+                exit 1
+                ;;
+            esac
           fi
 
           new_npm_version=${new_npm_version#v}
@@ -53,6 +95,7 @@ jobs:
 
           echo "new_npm_version=${new_npm_version}" >> $GITHUB_ENV
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
+
       - name: Check if version exists and increment if necessary
         run: |
           max_attempts=100
@@ -140,7 +183,7 @@ jobs:
                 issue_number: pullRequestNumber,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: `You merged this pr to master branch: 
+                body: `You merged this pr to master branch:
                 - Ruby Gem: [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}})
                 - NPM: [${{env.NPM_VERSION}}](${{env.NPM_LINK}})`
               });
