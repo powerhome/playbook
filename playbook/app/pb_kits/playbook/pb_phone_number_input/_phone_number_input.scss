@@ -5,6 +5,15 @@ $transform-rotate-deg: 135deg;
 $dropdown-min-width: 340px;
 $flag-min-resolution: 192dpi;
 
+:root {
+  --iti-arrow-padding: #{$space_xs};
+  --iti-spacer-horizontal: #{$space_sm};
+  --iti-path-flags-1x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags.png");
+  --iti-path-flags-2x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags@2x.png");
+  --iti-path-globe-1x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe.png");
+  --iti-path-globe-2x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe@2x.png");
+}
+
 .pb_phone_number_input {
   .iti {
     width: 100%;
@@ -30,6 +39,15 @@ $flag-min-resolution: 192dpi;
     color: $charcoal;
   }
 
+  // iti-spacer-horizontal's default is 8px, or $space_xs 
+  .iti__country-list .iti__flag, .iti__country-name {
+    margin-right: $space_xs;
+  }
+  [dir=rtl] .iti__country-list .iti__flag, [dir=rtl] .iti__country-name {
+    margin-right: 0;
+    margin-left: $space_xs;
+  }
+
   .iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])) .iti__selected-country-primary:hover,
   .iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])) .iti__selected-country:has(+ .iti__dropdown-content:hover) .iti__selected-country-primary {
     background-color: transparent;
@@ -50,7 +68,7 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__country {
-    padding: 5px 10px 5px 16px;
+    padding: 5px $space_xs 5px $space_sm;
     transition: $transition_default;
   }
 
@@ -75,8 +93,6 @@ $flag-min-resolution: 192dpi;
     justify-content: center;
     align-items: center;
     border-width: 0;
-
-    padding: 0 $space_xxs 0 $space_xs;
     border-radius: $space_xxs; 
 
     &[aria-expanded="true"] {
