@@ -103,7 +103,7 @@ module Playbook
         if comma_separator
           number_with_delimiter(value.gsub(",", ""))
         else
-          value # Keep original formatting if comma_separator is false
+          value
         end
       end
 
@@ -153,7 +153,7 @@ module Playbook
           if comma_separator
             number_with_delimiter(amount.gsub(",", ""))
           else
-            amount # Keep original formatting if comma_separator is false
+            amount
           end
         else
           whole_value
