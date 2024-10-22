@@ -49,30 +49,57 @@ jobs:
       - name: Get Semver Label
         id: get-label
         run: |
-          PR_NUMBER=$(git log -1 --pretty=%B | grep -oP '#\K\d+')
+          set -x  # Enable debug mode to print commands as they execute
+          
+          echo "Event name: ${{ github.event_name }}"
+          
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PR_NUMBER="${{ github.event.inputs.pr_number }}"
+            echo "Using provided PR number: $PR_NUMBER"
+          else
+            echo "Getting PR number from last commit message..."
+            git log -1 --pretty=%B
+            PR_NUMBER=$(git log -1 --pretty=%B | grep -oP '#\K\d+' || true)
+            echo "Extracted PR number: $PR_NUMBER"
+          fi
+          
           if [ -z "$PR_NUMBER" ]; then
-            echo "Error: No PR number found in commit message."
+            echo "Error: No PR number found."
             exit 1
           fi
-
-          LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name')
-          SEMVER_LABEL=$(echo "$LABELS" | grep -E '^(major|minor|patch)$')
-
+          
+          echo "Fetching labels for PR #$PR_NUMBER..."
+          gh auth status
+          LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name' || echo "Failed to fetch labels")
+          echo "Found labels: $LABELS"
+          
+          if [ "$?" -ne 0 ]; then
+            echo "Error: Failed to fetch PR labels"
+            exit 1
+          fi
+          
+          echo "Filtering for Semver labels..."
+          SEMVER_LABEL=$(echo "$LABELS" | grep -E '^(major|minor|patch)$' || true)
+          echo "Found Semver labels: $SEMVER_LABEL"
+          
           if [ -z "$SEMVER_LABEL" ]; then
             echo "Error: No valid Semver label (major, minor, patch) found on PR #$PR_NUMBER."
             exit 1
           fi
-
+          
           LABEL_COUNT=$(echo "$SEMVER_LABEL" | wc -l)
+          echo "Number of Semver labels found: $LABEL_COUNT"
+          
           if [ "$LABEL_COUNT" -ne 1 ]; then
             echo "Error: Expected exactly one Semver label, found $LABEL_COUNT on PR #$PR_NUMBER."
             exit 1
           fi
-
+          
           echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
-          echo "Semver label found: $SEMVER_LABEL"
+          echo "Successfully found Semver label: $SEMVER_LABEL"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Adding explicit GH_TOKEN for gh CLI
 
       - name: Grab Current Version and Set New RC Version
         id: set-version
