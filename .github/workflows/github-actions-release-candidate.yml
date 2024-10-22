@@ -136,7 +136,7 @@ jobs:
             exit 1
           fi
           
-          SEMVER_LABEL=$(echo "$LABELS" | grep -E '^(major|minor|patch)$' || true)
+          SEMVER_LABEL=$(echo "$LABELS" | grep -iE '^(major|minor|patch)$' || true)
           echo "Found Semver labels: $SEMVER_LABEL"
           
           if [ -z "$SEMVER_LABEL" ]; then
