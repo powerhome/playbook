@@ -1,3 +1,64 @@
-.pb_link {
+@import "./body_mixins";
+@import "../tokens/titles";
+
+[class^=pb_link_kit]{
+  @include pb_body($text_lt_default);
+  @each $color_name, $color_value in $pb_body_colors {
+    &[class*=_#{"" + $color_name}] {
+      @include pb_body($color_value);
+    }
+    @each $status_name, $status_value in $pb_body_status {
+      &[class*=_default_#{$status_name}] {
+        @include pb_body($status_value);
+      }
+    }
+  }
+  @each $dark_color_name, $dark_color_value in $pb_dark_body_colors{
+    &[class*=_#{$dark_color_name}][class*=dark]{
+      @include pb_body($dark_color_value);
+    }
+  }
+  b, strong {
+    font-weight: $bold;
+  }
+
+  a {
+    color: $primary;
+    &:hover {
+      color: $text_lt_default;
+    }
+  }
+
+  em, i {
+    font-style: italic;
+  }
+
+  small {
+    font-size: $font_smaller;
+    letter-spacing: $lspace_loose;
+  }
+
+  @each $status_name, $status_value in $pb_body_status {
+    &[class*=#{$status_name}] {
+      @include pb_body($status_value);
+    }
+  }
+
+  &[class*=dark] {
+    a {
+      color: $active_dark;
+    }
+    @include pb_body_dark();
+    @each $dark_color_name, $dark_color_value in $pb_dark_body_colors{
+      &[class*=_#{$dark_color_name}][class*=dark]{
+        @include pb_body($dark_color_value);
+      }
+    }
+    @each $status_name, $status_value in $pb_body_status {
+      &[class*=_#{$status_name}] {
+        @include pb_body($status_value);
+      }
+    }
+  }
 
 }
