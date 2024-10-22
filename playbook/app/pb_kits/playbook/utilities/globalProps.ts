@@ -66,6 +66,10 @@ type Hover = Shadow & {
   scale?: "sm" | "md" | "lg"
 }
 
+type HoverGroup  = {
+  hoverGroup?: boolean,
+}
+
 type JustifyContent = {
   justifyContent?: Alignment & Space
 }
@@ -175,7 +179,7 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left;
+  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & HoverGroup & { hover?: string } & Top & Right & Bottom & Left;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -209,6 +213,7 @@ const filterClassName = (value: string): string => {
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
 
+  hoverGroupProps: ({ hoverGroup }: HoverGroup) => hoverGroup ? 'hover_group' : '',
   hoverProps: ({ hover }: { hover?: Hover }) => {
       let css = '';
       if (!hover) return css;

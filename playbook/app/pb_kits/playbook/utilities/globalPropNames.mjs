@@ -4,6 +4,7 @@ export default [
   "right",
   "top",
   "hover",
+  "hover_group",
   "zIndex",
   "verticalAlign",
   "truncate",
