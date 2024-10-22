@@ -90,20 +90,20 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     return isAmount ? num.slice(0, -1) : isUnit ? num.slice(-1) : ''
   }
 
-  const getMatchingDecimalAmount = decimals === "matching" ? amount : whole,
-    getMatchingDecimalValue = decimals === "matching" ? '' : `.${decimal}`
+  const getMatchingDecimalAmount = decimals === "matching" ? amount : whole
+  const getMatchingDecimalValue = decimals === "matching" ? '' : `.${decimal}`
 
   const formatAmount = (amount: string) => {
     if (!commaSeparator) return amount;
     
-    const [whole, decimal = '00'] = amount.split('.');
-    const formattedWhole = new Intl.NumberFormat('en-US').format(parseInt(whole));
-    return `${formattedWhole}.${decimal}`;
+    const [wholePart, decimalPart] = amount.split('.');
+    const formattedWhole = new Intl.NumberFormat('en-US').format(parseInt(wholePart));
+    return decimalPart ? `${formattedWhole}.${decimalPart}` : formattedWhole;
   }
 
-  const getAmount = abbreviate ? getAbbreviatedValue('amount') : formatAmount(getMatchingDecimalAmount),
-    getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null,
-    getDecimalValue = abbreviate ? '' : getMatchingDecimalValue
+  const getAmount = abbreviate ? getAbbreviatedValue('amount') : formatAmount(getMatchingDecimalAmount)
+  const getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null
+  const getDecimalValue = abbreviate ? '' : getMatchingDecimalValue
 
   return (
     <div
