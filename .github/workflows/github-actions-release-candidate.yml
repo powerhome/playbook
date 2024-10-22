@@ -4,9 +4,18 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull Request Number'
+        required: true
+  pull_request:
+    types: [labeled]
 
 jobs:
   Creating-Release-Candidate:
+    # Only run release creation on master push or workflow_dispatch
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -119,74 +128,74 @@ jobs:
           echo "new_npm_version=${current_version}" >> $GITHUB_ENV
           new_ruby_version=$(echo $current_version | sed 's/-rc\./.pre.rc./')
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
-      - name: Update Version.rb
-        run: |
-          gem install bundler
-          bundle
-          bin/rails pb_release:action[${{env.new_ruby_version}}]
-      - name: Distribute and Publish (NPM)
-        run: |
-          yarn install
-          bundle
-          yarn release
-          npm pack
-          npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_version }}.tgz --tag rc
-      - name: Distribute and Publish (RubyGems)
-        run: |
-          bin/build_gem
-          gem build lib/playbook_ui_docs.gemspec
-          rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
-          gem push playbook_ui-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
-          gem push playbook_ui_docs-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
-      - name: Create GitHub Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release create v${{ env.new_npm_version }} \
-            --title "Release Candidate v${{ env.new_npm_version }}" \
-            --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
-            --prerelease
-      - name: Leave PR comment
-        uses: actions/github-script@v6
-        env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUBY_GEM_VERSION: ${{ env.new_ruby_version }}
-          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_version}}
-          NPM_VERSION: ${{ env.new_npm_version }}
-          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_version}}
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const commitSha = context.payload.head_commit.id;
-            const commitMessage = context.payload.head_commit.message;
-            const commitAuthor = context.payload.head_commit.author.name;
-            const commitUrl = context.payload.head_commit.url;
+      # - name: Update Version.rb
+      #   run: |
+      #     gem install bundler
+      #     bundle
+      #     bin/rails pb_release:action[${{env.new_ruby_version}}]
+      # - name: Distribute and Publish (NPM)
+      #   run: |
+      #     yarn install
+      #     bundle
+      #     yarn release
+      #     npm pack
+      #     npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_version }}.tgz --tag rc
+      # - name: Distribute and Publish (RubyGems)
+      #   run: |
+      #     bin/build_gem
+      #     gem build lib/playbook_ui_docs.gemspec
+      #     rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
+      #     gem push playbook_ui-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
+      #     gem push playbook_ui_docs-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
+      # - name: Create GitHub Release
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     gh release create v${{ env.new_npm_version }} \
+      #       --title "Release Candidate v${{ env.new_npm_version }}" \
+      #       --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
+      #       --prerelease
+      # - name: Leave PR comment
+      #   uses: actions/github-script@v6
+      #   env:
+      #     PR_NUMBER: ${{ github.event.pull_request.number }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     RUBY_GEM_VERSION: ${{ env.new_ruby_version }}
+      #     RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_version}}
+      #     NPM_VERSION: ${{ env.new_npm_version }}
+      #     NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_version}}
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     script: |
+      #       const commitSha = context.payload.head_commit.id;
+      #       const commitMessage = context.payload.head_commit.message;
+      #       const commitAuthor = context.payload.head_commit.author.name;
+      #       const commitUrl = context.payload.head_commit.url;
 
-            console.log(`Commit message: ${commitMessage}`);
-            console.log(`Commit author: ${commitAuthor}`);
-            console.log(`Commit URL: ${commitUrl}`);
+      #       console.log(`Commit message: ${commitMessage}`);
+      #       console.log(`Commit author: ${commitAuthor}`);
+      #       console.log(`Commit URL: ${commitUrl}`);
 
-            // Get the PR related to this commit using octokit API
-            const pullRequests = await github.rest.repos.listPullRequestsAssociatedWithCommit({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: commitSha
-            });
+      #       // Get the PR related to this commit using octokit API
+      #       const pullRequests = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         commit_sha: commitSha
+      #       });
 
-            if (pullRequests.data.length > 0) {
-              const pullRequestNumber = pullRequests.data[0].number;
-              console.log(`Found pull request #${pullRequestNumber} for commit ${commitSha}`);
+      #       if (pullRequests.data.length > 0) {
+      #         const pullRequestNumber = pullRequests.data[0].number;
+      #         console.log(`Found pull request #${pullRequestNumber} for commit ${commitSha}`);
 
-              // Add a comment to the pull request
-              await github.rest.issues.createComment({
-                issue_number: pullRequestNumber,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `You merged this pr to master branch:
-                - Ruby Gem: [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}})
-                - NPM: [${{env.NPM_VERSION}}](${{env.NPM_LINK}})`
-              });
-            } else {
-              console.log('No pull request found for this commit');
-            }
+      #         // Add a comment to the pull request
+      #         await github.rest.issues.createComment({
+      #           issue_number: pullRequestNumber,
+      #           owner: context.repo.owner,
+      #           repo: context.repo.repo,
+      #           body: `You merged this pr to master branch:
+      #           - Ruby Gem: [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}})
+      #           - NPM: [${{env.NPM_VERSION}}](${{env.NPM_LINK}})`
+      #         });
+      #       } else {
+      #         console.log('No pull request found for this commit');
+      #       }
