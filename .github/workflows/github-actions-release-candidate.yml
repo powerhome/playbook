@@ -46,117 +46,51 @@ jobs:
         run: |
           git config --local user.name "${{ github.actor }}"
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+
       - name: Get Semver Label
         id: get-label
         run: |
-          set -x  # Enable debug mode
-          
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            PR_NUMBER="${{ github.event.inputs.pr_number }}"
-            echo "Using manually provided PR number: $PR_NUMBER"
+          PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
+          if [ ! -z "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
+            echo "✅ Successfully found PR number: $PR_NUMBER"
           else
-            echo "Analyzing commit for PR number..."
-            
-            # Print full commit message for debugging
-            echo "Full commit message:"
-            git log -1 --pretty=%B
-            
-            # Pattern 1: Merge pull request #X from ...
-            echo "Trying Pattern 1: Standard merge commit format (Merge pull request #X from ...)"
-            PR_NUMBER=$(git log -1 --pretty=%B | grep -oP "Merge pull request #\K\d+" || true)
-            if [ ! -z "$PR_NUMBER" ]; then
-              echo "✅ Pattern 1 successfully found PR number: $PR_NUMBER"
-            else
-              echo "❌ Pattern 1 did not find PR number"
-            fi
-            
-            # Pattern 2: #X from ...
-            if [ -z "$PR_NUMBER" ]; then
-              echo "Trying Pattern 2: Simple PR reference (#X)"
-              PR_NUMBER=$(git log -1 --pretty=%B | grep -oP "#\K\d+" || true)
-              if [ ! -z "$PR_NUMBER" ]; then
-                echo "✅ Pattern 2 successfully found PR number: $PR_NUMBER"
-              else
-                echo "❌ Pattern 2 did not find PR number"
-              fi
-            fi
-            
-            # Pattern 3: GitHub event payload
-            if [ -z "$PR_NUMBER" ]; then
-              echo "Trying Pattern 3: GitHub event payload"
-              PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
-              if [ ! -z "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
-                echo "✅ Pattern 3 successfully found PR number: $PR_NUMBER"
-              else
-                echo "❌ Pattern 3 did not find PR number"
-              fi
-            fi
-            
-            # Pattern 4: Commit message title
-            if [ -z "$PR_NUMBER" ]; then
-              echo "Trying Pattern 4: Commit message title"
-              PR_NUMBER=$(git log -1 --pretty=%s | grep -oP "#\K\d+" || true)
-              if [ ! -z "$PR_NUMBER" ]; then
-                echo "✅ Pattern 4 successfully found PR number: $PR_NUMBER"
-              else
-                echo "❌ Pattern 4 did not find PR number"
-              fi
-            fi
-            
-            # Pattern 5: GitHub API
-            if [ -z "$PR_NUMBER" ]; then
-              echo "Trying Pattern 5: GitHub API for commit"
-              COMMIT_SHA=$(git rev-parse HEAD)
-              echo "Checking commit SHA: $COMMIT_SHA"
-              PR_NUMBER=$(gh api repos/${{ github.repository }}/commits/$COMMIT_SHA/pulls --jq '.[0].number' || true)
-              if [ ! -z "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
-                echo "✅ Pattern 5 successfully found PR number: $PR_NUMBER"
-              else
-                echo "❌ Pattern 5 did not find PR number"
-              fi
-            fi
-            
-            echo "Final PR number extraction result: $PR_NUMBER"
+            echo "❌ Unable to find PR number"
           fi
-          
-          if [ -z "$PR_NUMBER" ]; then
-            echo "⛔ Error: Could not determine PR number from any pattern"
-            echo "GitHub event name: ${{ github.event_name }}"
-            echo "GitHub event path content:"
-            cat "$GITHUB_EVENT_PATH"
-            exit 1
-          fi
-          
+
           echo "Fetching labels for PR #$PR_NUMBER..."
           LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name' || echo "Failed to fetch labels")
           echo "Found labels: $LABELS"
-          
+
           if [ -z "$LABELS" ]; then
             echo "⛔ Error: Failed to fetch PR labels"
             exit 1
           fi
-          
+
           SEMVER_LABEL=$(echo "$LABELS" | grep -iE '^(major|minor|patch)$' || true)
           echo "Found Semver labels: $SEMVER_LABEL"
-          
+
           if [ -z "$SEMVER_LABEL" ]; then
             echo "⛔ Error: No valid Semver label (major, minor, patch) found on PR #$PR_NUMBER."
             exit 1
           fi
-          
+
           LABEL_COUNT=$(echo "$SEMVER_LABEL" | wc -l)
           echo "Number of Semver labels found: $LABEL_COUNT"
-          
+
           if [ "$LABEL_COUNT" -ne 1 ]; then
             echo "⛔ Error: Expected exactly one Semver label, found $LABEL_COUNT on PR #$PR_NUMBER."
             exit 1
           fi
-          
+
           echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
           echo "✅ Successfully found Semver label: $SEMVER_LABEL"
+
+          echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
+          echo "Semver label found: $SEMVER_LABEL"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Grab Current Version and Set New RC Version
         id: set-version
         run: |
