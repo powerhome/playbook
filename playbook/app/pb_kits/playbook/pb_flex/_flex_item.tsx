@@ -35,10 +35,10 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
   const fixedStyle =
     fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
   const orderClass = order !== 'none' ? `order_${order}` : null
-  const inlineStyles = globalInlineProps(props)
+  const dynamicInlineProps = globalInlineProps(props)
   const combinedStyles = {
     ...fixedStyle,
-    ...inlineStyles
+    ...dynamicInlineProps
   }
 
   const htmlProps = buildHtmlProps(htmlOptions)

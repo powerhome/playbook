@@ -108,7 +108,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
 
   // coerce to array
   const cardChildren = React.Children.toArray(children)
-  const inlineStyles = globalInlineProps(props);
+  const dynamicInlineProps = globalInlineProps(props);
 
   const subComponentTags = (tagName: string) => {
     return cardChildren.filter((c: string) => (
@@ -137,7 +137,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
             {...dataProps}
             {...htmlProps}
             className={classnames(cardCss, globalProps(props), className)}
-            style={inlineStyles}
+            style={dynamicInlineProps}
         >
           {subComponentTags('Header')}
           {
@@ -166,7 +166,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
               {...dataProps}
               {...htmlProps}
               className={classnames(cardCss, globalProps(props), className)}
-              style={inlineStyles}
+              style={dynamicInlineProps}
             >
               {subComponentTags('Header')}
               {nonHeaderChildren}

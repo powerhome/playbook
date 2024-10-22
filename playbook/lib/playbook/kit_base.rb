@@ -125,13 +125,15 @@ module Playbook
   private
 
     def default_options
-      {
+      options = {
         id: id,
         data: data,
         class: classname,
         aria: aria,
-        style: inline_styles,
       }
+      inline_styles = dynamic_inline_props
+      options[:style] = inline_styles if inline_styles.present?
+      options
     end
 
     def default_html_options
@@ -145,8 +147,9 @@ module Playbook
       }.transform_keys { |key| key.to_s.tr("_", "-").to_sym }
     end
 
-    def inline_styles
-      global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value};" }.join(" ")
+    def dynamic_inline_props
+      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value};" if value.present? }.compact
+      styles.join(" ").presence
     end
   end
 end

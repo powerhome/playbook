@@ -91,7 +91,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     beforeClose: "pb_dialog_overlay_before_close",
   };
 
-  const inlineStyles = globalInlineProps(props); 
+  const dynamicInlineProps = globalInlineProps(props); 
 
   const classes = classnames(
     buildCss("pb_dialog_wrapper"),
@@ -186,7 +186,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             overlayClassName={overlayClassNames}
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick && !loading}
-            style={{ content: inlineStyles }}
+            style={{ content: dynamicInlineProps }}
         >
           <>
             {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}

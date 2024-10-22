@@ -61,7 +61,7 @@ const Flex = (props: FlexProps): React.ReactElement => {
   const alignSelfClass = alignSelf !== 'none' ? `align_self_${alignSelf}` : ''
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const inlineStyles = globalInlineProps(props)
+  const dynamicInlineProps = globalInlineProps(props)
 
 
   return (
@@ -84,7 +84,7 @@ const Flex = (props: FlexProps): React.ReactElement => {
         globalProps(props),
         className
       )}
-        style={inlineStyles}
+        style={dynamicInlineProps}
         {...dataProps}
         {...htmlProps}
     >
