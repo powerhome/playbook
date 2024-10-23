@@ -76,7 +76,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     className
   )
 
-  const getFormattedNumber = (input: number | string) => new Intl.NumberFormat('en-US', {
+  const getFormattedNumber = (input: number | any) => new Intl.NumberFormat('en-US', {
     notation: 'compact',
     maximumFractionDigits: 1,
   }).format(input)
