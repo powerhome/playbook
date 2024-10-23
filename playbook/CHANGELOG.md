@@ -1,12 +1,11 @@
-# 14.6.0
+# 14.6.1
 ##### October 22, 2024
 
-[14.6.0](https://github.com/powerhome/playbook/tree/14.6.0) full list of changes:
+[14.6.1](https://github.com/powerhome/playbook/tree/14.6.1) full list of changes:
 
 **Kit Enhancements:**
 
 - Custom Width for Popover Kit and PopoverProps for Filter Kit [\#3827](https://github.com/powerhome/playbook/pull/3827) ([ElisaShapiro](https://github.com/ElisaShapiro))
-- Height, minHeight, maxHeight for Card, Flex, FlexItem, & Dialog [\#3749](https://github.com/powerhome/playbook/pull/3749) ([jasperfurniss](https://github.com/jasperfurniss))
 - Dropdown Kit - States & Variant Prop [\#3828](https://github.com/powerhome/playbook/pull/3828) ([nickamantia](https://github.com/nickamantia))
 - Custom Cells for Advanced Table [\#3821](https://github.com/powerhome/playbook/pull/3821) ([nidaqg](https://github.com/nidaqg))
 - Multiple User Bubble Size Prop [\#3719](https://github.com/powerhome/playbook/pull/3719) 
@@ -33,7 +32,7 @@
 - More storage for CI image builds [\#3767](https://github.com/powerhome/playbook/pull/3767) ([benlangfeld](https://github.com/benlangfeld))
 
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/14.5.0...14.6.0)
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.5.0...14.6.1)
 
 
 # 🐝 Improved Usability, Flexibility, Customization and More! 🐝
