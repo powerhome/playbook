@@ -15,10 +15,11 @@ type LinkProps = {
   data?: {[key: string]: string},
   highlightedText?: string[],
   highlighting?: boolean,
+  href?: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void)},
   id?: string,
   status?: 'neutral' | 'negative' | 'positive',
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
+  tag?: 'a' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
   variant?: null | 'link',
 } & GlobalProps
@@ -33,10 +34,11 @@ const Link = (props: LinkProps): React.ReactElement => {
     data = {},
     highlightedText = [],
     highlighting = false,
+    href= '',
     htmlOptions = {},
     id = '',
     status = null,
-    tag = 'div',
+    tag = 'a',
     text = '',
     variant = null,
   } = props
@@ -57,6 +59,7 @@ const Link = (props: LinkProps): React.ReactElement => {
         {...dataProps}
         {...htmlProps}
         className={classes}
+        href={href}
         id={id}
     >
       { highlighting && (
