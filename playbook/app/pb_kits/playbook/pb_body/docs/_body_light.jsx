@@ -6,13 +6,13 @@ const BodyLight = (props) => {
     <Card hoverGroup>
       <Body
           hover={{ scale: "lg"}}
+          hoverGroup
           text="I am a body kit (Default)"
           {...props}
       />
       <Body
           color="light"
           hover={{ scale: "lg"}}
-          hoverDirect
           text="I am a body kit (Light)" 
           {...props}
       />
