@@ -1,15 +1,15 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildHtmlProps } from '../utilities/props'
-import { globalProps, GlobalProps } from "../utilities/globalProps"
+import { buildHtmlProps } from '../../utilities/props'
+import { globalProps, GlobalProps } from "../../utilities/globalProps"
 
-type TimelineDetailAreaProps = {
+type TimelineDetailProps = {
   children?: React.ReactNode,
   className?: string,
   htmlOptions?: { [key: string]: any },
 } & GlobalProps
 
-const TimelineDetailArea: React.FC<TimelineDetailAreaProps> = ({
+const TimelineDetail: React.FC<TimelineDetailProps> = ({
   children,
   className,
   htmlOptions = {},
@@ -26,4 +26,4 @@ const TimelineDetailArea: React.FC<TimelineDetailAreaProps> = ({
   )
 }
 
-export default TimelineDetailArea
+export default TimelineDetail

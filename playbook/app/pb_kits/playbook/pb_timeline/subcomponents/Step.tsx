@@ -1,10 +1,10 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildHtmlProps } from '../utilities/props'
-import { globalProps, GlobalProps } from "../utilities/globalProps"
-import IconCircle from '../pb_icon_circle/_icon_circle'
+import { buildHtmlProps } from '../../utilities/props'
+import { globalProps, GlobalProps } from "../../utilities/globalProps"
+import IconCircle from '../../pb_icon_circle/_icon_circle'
 
-type TimelineNodeAreaProps = {
+type TimelineStepProps = {
   icon?: string,
   iconColor?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
   children?: React.ReactNode,
@@ -12,7 +12,7 @@ type TimelineNodeAreaProps = {
   htmlOptions?: { [key: string]: any },
 } & GlobalProps
 
-const TimelineNodeArea: React.FC<TimelineNodeAreaProps> = ({
+const TimelineStep: React.FC<TimelineStepProps> = ({
   icon = 'user',
   iconColor = 'default',
   children,
@@ -39,4 +39,4 @@ const TimelineNodeArea: React.FC<TimelineNodeAreaProps> = ({
   )
 }
 
-export default TimelineNodeArea
+export default TimelineStep

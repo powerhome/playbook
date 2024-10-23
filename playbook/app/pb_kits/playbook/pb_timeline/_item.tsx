@@ -6,9 +6,9 @@ import { globalProps, GlobalProps } from "../utilities/globalProps"
 import DateStacked from '../pb_date_stacked/_date_stacked'
 import IconCircle from '../pb_icon_circle/_icon_circle'
 
-import TimelineDateArea from './_date_area'
-import TimelineNodeArea from './_node_area'
-import TimelineDetailArea from './_detail_area'
+import TimelineLabel from './subcomponents/Label'
+import TimelineStep from './subcomponents/Step'
+import TimelineDetail from './subcomponents/Detail'
 
 type ItemProps = {
   className?: string,
@@ -43,23 +43,23 @@ const TimelineItem = ({
 
   const childrenArray = React.Children.toArray(children)
 
-  const dateAreaChild = childrenArray.find(
-    (child): child is React.ReactElement => isElementOfType(child, TimelineDateArea)
+  const labelChild = childrenArray.find(
+    (child): child is React.ReactElement => isElementOfType(child, TimelineLabel)
   )
 
-  const nodeAreaChild = childrenArray.find(
-    (child): child is React.ReactElement => isElementOfType(child, TimelineNodeArea)
+  const stepChild = childrenArray.find(
+    (child): child is React.ReactElement => isElementOfType(child, TimelineStep)
   )
 
-  const detailAreaChild = childrenArray.find(
-    (child): child is React.ReactElement => isElementOfType(child, TimelineDetailArea)
+  const detailChild = childrenArray.find(
+    (child): child is React.ReactElement => isElementOfType(child, TimelineDetail)
   )
 
   const otherChildren = childrenArray.filter(
     (child) =>
-      !isElementOfType(child, TimelineDateArea) &&
-      !isElementOfType(child, TimelineNodeArea) &&
-      !isElementOfType(child, TimelineDetailArea)
+      !isElementOfType(child, TimelineLabel) &&
+      !isElementOfType(child, TimelineStep) &&
+      !isElementOfType(child, TimelineDetail)
   )
 
   return (
@@ -67,7 +67,7 @@ const TimelineItem = ({
         {...htmlProps}
         className={classnames(timelineItemCss, globalProps(props), className)}
     >
-        {dateAreaChild || (
+        {labelChild || (
           <div className="pb_timeline_item_left_block">
             {date && (
               <DateStacked
@@ -78,7 +78,7 @@ const TimelineItem = ({
             )}
           </div>
         )}
-        {nodeAreaChild || (
+        {stepChild || (
           <div className="pb_timeline_item_step">
             <IconCircle icon={icon}
                 size="xs"
@@ -87,7 +87,7 @@ const TimelineItem = ({
             <div className="pb_timeline_item_connector" />
           </div>
         )}
-        {detailAreaChild || (
+        {detailChild || (
           <div className="pb_timeline_item_right_block">
            { otherChildren }
           </div>

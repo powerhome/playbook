@@ -3,9 +3,9 @@ import { render, screen } from '../utilities/test-utils'
 
 import Timeline from './_timeline'
 import TimelineItem from './_item'
-import TimelineDateArea from './_date_area'
-import TimelineNodeArea from './_node_area'
-import TimelineDetailArea from './_detail_area'
+import TimelineLabel from './subcomponents/Label'
+import TimelineStep from './subcoponents/Step'
+import TimelineDetail from './subcomponents/Detail'
 import TitleDetail from '../pb_title_detail/_title_detail'
 
 const testId = 'timeline'
@@ -59,50 +59,50 @@ const TimelineWithChildren = (props) => (
       <TimelineItem lineStyle="solid"
           {...props}
       >
-        <TimelineDateArea date={new Date()} />
-        <TimelineNodeArea icon="user"
+        <TimelineLabel date={new Date()} />
+        <TimelineStep icon="user"
             iconColor="royal"
         />
-        <TimelineDetailArea>
+        <TimelineDetail>
           <TitleDetail
               detail="37-27 74th Street"
               title="Jackson Heights"
               {...props}
           />
-        </TimelineDetailArea>
+        </TimelineDetail>
       </TimelineItem>
 
       <TimelineItem lineStyle="dotted"
           {...props}
       >
-        <TimelineNodeArea icon="check"
+        <TimelineStep icon="check"
             iconColor="teal"
         />
-        <TimelineDetailArea>
+        <TimelineDetail>
           <TitleDetail
               detail="81 Gate St Brooklyn"
               title="Greenpoint"
               {...props}
           />
-        </TimelineDetailArea>
+        </TimelineDetail>
       </TimelineItem>
 
       <TimelineItem lineStyle="solid"
           {...props}
       >
-        <TimelineDateArea
+        <TimelineLabel
             date={new Date(new Date().setDate(new Date().getDate() + 1))}
         />
-        <TimelineNodeArea icon="map-marker-alt"
+        <TimelineStep icon="map-marker-alt"
             iconColor="purple"
         />
-        <TimelineDetailArea>
+        <TimelineDetail>
           <TitleDetail
               detail="72 E St Astoria"
               title="Society Hill"
               {...props}
           />
-        </TimelineDetailArea>
+        </TimelineDetail>
       </TimelineItem>
     </Timeline>
   </>
