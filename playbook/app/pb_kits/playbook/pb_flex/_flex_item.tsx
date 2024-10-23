@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss, buildHtmlProps } from '../utilities/props'
-import { globalProps, GlobalProps, globalInlineProps} from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 type FlexItemPropTypes = {
   children: React.ReactNode[] | React.ReactNode,
   fixedSize?: string,
@@ -35,20 +35,14 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
   const fixedStyle =
     fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
   const orderClass = order !== 'none' ? `order_${order}` : null
-  const dynamicInlineProps = globalInlineProps(props)
-  const combinedStyles = {
-    ...fixedStyle,
-    ...dynamicInlineProps
-  }
 
   const htmlProps = buildHtmlProps(htmlOptions)
-
 
   return (
     <div
         {...htmlProps}
         className={classnames(buildCss('pb_flex_item_kit', growClass, shrinkClass, flexClass, displayFlexClass), orderClass, alignSelfClass, globalProps(props), className)}
-        style={combinedStyles}
+        style={fixedStyle}
     >
       {children}
     </div>

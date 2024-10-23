@@ -5,7 +5,7 @@ import { get } from 'lodash'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 import type { ProductColors, CategoryColors, BackgroundColors } from '../types/colors'
 
 import Icon from '../pb_icon/_icon'
@@ -48,7 +48,6 @@ type CardBodyProps = {
   className?: string,
   padding?: string,
 } & GlobalProps
-
 
 // Header component
 const Header = (props: CardHeaderProps) => {
@@ -108,7 +107,6 @@ const Card = (props: CardPropTypes): React.ReactElement => {
 
   // coerce to array
   const cardChildren = React.Children.toArray(children)
-  const dynamicInlineProps = globalInlineProps(props);
 
   const subComponentTags = (tagName: string) => {
     return cardChildren.filter((c: string) => (
@@ -137,7 +135,6 @@ const Card = (props: CardPropTypes): React.ReactElement => {
             {...dataProps}
             {...htmlProps}
             className={classnames(cardCss, globalProps(props), className)}
-            style={dynamicInlineProps}
         >
           {subComponentTags('Header')}
           {
@@ -166,7 +163,6 @@ const Card = (props: CardPropTypes): React.ReactElement => {
               {...dataProps}
               {...htmlProps}
               className={classnames(cardCss, globalProps(props), className)}
-              style={dynamicInlineProps}
             >
               {subComponentTags('Header')}
               {nonHeaderChildren}
