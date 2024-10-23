@@ -5,7 +5,54 @@ $transform-rotate-deg: 135deg;
 $dropdown-min-width: 340px;
 $flag-min-resolution: 192dpi;
 
+:root {
+  --iti-arrow-padding: #{$space_xs};
+  --iti-spacer-horizontal: #{$space_sm};
+  --iti-path-flags-1x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags.png");
+  --iti-path-flags-2x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags@2x.png");
+  --iti-path-globe-1x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe.png");
+  --iti-path-globe-2x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe@2x.png");
+}
+
 .pb_phone_number_input {
+  .iti {
+    width: 100%;
+  }
+
+  .iti__flag {
+    margin-right: 6px;
+  }
+
+  .iti__a11y-text {
+    display: none;
+  }
+
+  .iti__selected-dial-code {
+    font-family: $font_family_base;
+    font-size: $font_base;
+    line-height: 1.5;
+    letter-spacing: $lspace_normal;
+    font-weight: $regular;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    -moz-font-feature-settings: "liga" on;
+    color: $charcoal;
+  }
+
+  // iti-spacer-horizontal's default is 8px, or $space_xs 
+  .iti__country-list .iti__flag, .iti__country-name {
+    margin-right: $space_xs;
+  }
+  [dir=rtl] .iti__country-list .iti__flag, [dir=rtl] .iti__country-name {
+    margin-right: 0;
+    margin-left: $space_xs;
+  }
+
+  .iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])) .iti__selected-country-primary:hover,
+  .iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])) .iti__selected-country:has(+ .iti__dropdown-content:hover) .iti__selected-country-primary {
+    background-color: transparent;
+  }
+
   input::placeholder {
     color: $focus_input_light;
   }
@@ -15,13 +62,13 @@ $flag-min-resolution: 192dpi;
       border-color: $primary !important;
     }
 
-    .iti__selected-flag:focus-visible {
+    .iti__selected-country:focus-visible {
       outline-style: none;
     }
   }
 
   .iti__country {
-    padding: 5px 10px 5px 16px;
+    padding: 5px $space_xs 5px $space_sm;
     transition: $transition_default;
   }
 
@@ -29,8 +76,23 @@ $flag-min-resolution: 192dpi;
     border-bottom: 1px solid $border_light !important;  
   }
 
-  .iti__selected-flag {
-    padding: 0 $space_xxs 0 $space_sm;
+  .iti__selected-country-primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .iti__flag {
+      margin-right: 0;
+    }
+  }
+
+  .iti__selected-country {
+    position: absolute;
+    top: 0;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    border-width: 0;
     border-radius: $space_xxs; 
 
     &[aria-expanded="true"] {
@@ -51,24 +113,24 @@ $flag-min-resolution: 192dpi;
     }
   }
 
-  .iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
-    background-color: $focus_input_light;
-  }
-
-  .iti__flag-container:hover + .text_input {
+  .iti__country-container:hover + .text_input {
     background-color: $focus_input_light;
   }
 
   .iti__flag {
-    background-image: url("https://unpkg.com/playbook-ui@14.2.0-alpha.fixphonenumberinputflag3631/dist/assets/flags.png");
+    background-image: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags.png");
     border-radius: 1px;
   }
 
-  .iti--separate-dial-code {
-    width: 100%;
+  .iti__flag.iti__globe {
+    background-image: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe.png");
+    background-position: center;
+    height: 16px;
+    width: 16px;
+    background-size: 16px 16px;
   }
 
-  .iti--separate-dial-code .iti__selected-flag {
+  .iti--show-flags .iti__selected-country {
     background-color: rgba($white, $opacity_1);
   }
 
@@ -136,10 +198,12 @@ $flag-min-resolution: 192dpi;
   .iti__dropdown-content {
     border-radius: $space_xs; 
     border: 1px solid $border_light !important;
+    position: absolute;
+    top: 100%;
   }
 
   &.dark {
-    .iti--allow-dropdown .iti__flag-container {
+    .iti--allow-dropdown .iti__country-container {
       background-color: rgba($white, 0);
 
       &:hover {
@@ -149,13 +213,13 @@ $flag-min-resolution: 192dpi;
           background-color: rgba($white, 0.15);
         }
 
-        .iti__selected-flag {
+        .iti__selected-country {
           background-color: rgba($white, 0);
         }
       }
     }
 
-    .iti__selected-flag {
+    .iti__selected-country {
       background-color: rgba($white, 0);
       color: $white;
     }
@@ -196,11 +260,15 @@ $flag-min-resolution: 192dpi;
         background-color: rgba($white, 0.025) !important;
       }
     }
-  }
 
+    .iti__selected-dial-code {
+      color: $white;
+    }
+  }
+  
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: $flag-min-resolution) {
     .iti__flag {
-      background-image: url("https://unpkg.com/playbook-ui@14.2.0-alpha.fixphonenumberinputflag3631/dist/assets/flags.png");
+      background-image: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags@2x.png");
     }
   }
 }

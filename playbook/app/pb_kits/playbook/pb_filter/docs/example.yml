@@ -10,6 +10,7 @@ examples:
   - filter_max_width: Max Width for Popover Inside of Filter
   - filter_max_height: Max Height for Popover Inside of Filter
   - filter_placement: Filter Placement
+  - filter_popover_props: Popover Props
 
   react:
   - filter_default: Default
@@ -21,3 +22,5 @@ examples:
   - filter_max_width: Max Width for Popover Inside of Filter
   - filter_max_height: Max Height for Popover Inside of Filter
   - filter_placement: Filter Placement
+  - filter_popover_props: Popover Props
+
