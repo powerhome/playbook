@@ -3,10 +3,10 @@ import { Body, Card } from 'playbook-ui'
 
 const BodyLight = (props) => {
   return (
-    <Card hoverGroup>
+    <Card groupHover>
       <Body
+          groupHover 
           hover={{ scale: "lg"}}
-          hoverGroup
           text="I am a body kit (Default)"
           {...props}
       />
