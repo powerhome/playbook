@@ -34,11 +34,11 @@ const TimelineWithChildren = (props) => (
       <Timeline.Item lineStyle="dotted"
           {...props}
       >
-        <Timeline.Label>
+        <Timeline.Step>
           <Pill text="Any Kit"
               variant="success"
           />
-        </Timeline.Label>
+        </Timeline.Step>
         <Timeline.Detail>
           <TitleDetail detail="81 Gate St Brooklyn"
               title="Greenpoint"
