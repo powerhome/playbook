@@ -1,5 +1,8 @@
-<%= pb_content_tag(:div, 
-  style: object.inline_styles
-) do %> 
+<%= content_tag(:div,
+    id: object.id,
+    data: object.data,
+    class: object.classname,
+    style: object.style_value,
+    **combined_html_options) do %>
   <%= content.presence %>
 <% end %>
