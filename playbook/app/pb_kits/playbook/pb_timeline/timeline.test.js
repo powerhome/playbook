@@ -4,7 +4,7 @@ import { render, screen } from '../utilities/test-utils'
 import Timeline from './_timeline'
 import TimelineItem from './_item'
 import TimelineLabel from './subcomponents/Label'
-import TimelineStep from './subcoponents/Step'
+import TimelineStep from './subcomponents/Step'
 import TimelineDetail from './subcomponents/Detail'
 import TitleDetail from '../pb_title_detail/_title_detail'
 
