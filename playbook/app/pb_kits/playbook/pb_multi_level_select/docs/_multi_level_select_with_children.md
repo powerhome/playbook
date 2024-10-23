@@ -1,0 +1,1 @@
+The MultiLevelSelect also provides a subcomponent structure which can be used to render children to the right of the Checkboxes and their labels. As seen in the code snippet below, these children have access to the current item being iterated over which can be used for conditional rendering.

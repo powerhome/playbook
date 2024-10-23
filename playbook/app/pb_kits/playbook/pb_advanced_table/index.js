@@ -13,9 +13,20 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   get target() {
     return document.querySelector(CONTENT_SELECTOR.replace("id", this.element.id))
   }
+  
+  static expandedRows = new Set()
+  static isCollapsing = false
 
   connect() {
     this.element.addEventListener('click', () => {
+      if (!PbAdvancedTable.isCollapsing) {
+        const isExpanded = this.element.querySelector(UP_ARROW_SELECTOR).style.display === 'inline-block'
+        if (!isExpanded) {
+          PbAdvancedTable.expandedRows.add(this.element.id)
+        } else {
+          PbAdvancedTable.expandedRows.delete(this.element.id)
+        }
+      }
       this.toggleElement(this.target)
     })
   }
@@ -75,4 +86,53 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'inline-block'
     this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'none'
   }
+
+  static handleToggleAllHeaders(element) {
+    const table = element.closest('.pb_table')
+    const firstLevelButtons = table.querySelectorAll('.pb_advanced_table_body > .pb_table_tr [data-advanced-table]')
+    
+    const expandedRows = Array.from(firstLevelButtons).filter(button => 
+      button.querySelector(UP_ARROW_SELECTOR).style.display === 'inline-block'
+    )
+  
+    if (expandedRows.length === firstLevelButtons.length) {
+      expandedRows.forEach(button => {
+        button.click()
+      })
+      this.expandedRows.clear()
+    } else {
+      firstLevelButtons.forEach(button => {
+        if (!this.expandedRows.has(button.id)) {
+          button.click()
+        }
+      })
+    }
+  }
+  static handleToggleAllSubRows(element, rowDepth) {
+    const parentElement = element.closest(".toggle-content")
+    const subrowButtons = parentElement.querySelectorAll('.depth-sub-row-' + rowDepth + ' [data-advanced-table]')
+    
+    const expandedSubRows = Array.from(subrowButtons).filter(button => 
+      button.querySelector(UP_ARROW_SELECTOR).style.display === 'inline-block'
+    )
+  
+    if (expandedSubRows.length === subrowButtons.length) {
+      expandedSubRows.forEach(button => {
+        button.click()
+      })
+    } else {
+      subrowButtons.forEach(button => {
+        if (!this.expandedRows.has(button.id)) {
+          button.click()
+        }
+      })
+    }
+  }
+}
+
+window.expandAllRows = (element) => {
+  PbAdvancedTable.handleToggleAllHeaders(element)
+}
+window.expandAllSubRows = (element, rowDepth) => {
+  PbAdvancedTable.handleToggleAllSubRows(element, rowDepth)
 }
