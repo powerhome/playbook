@@ -1,0 +1,15 @@
+<Card groupHover>
+  <Body
+      groupHover 
+      hover={{ scale: "lg"}}
+      text="If the card is hovered, I'm hovered too!"
+  />
+  <Body
+      paddingY="lg"
+      text="I don't have any over effect on me"
+  />
+  <Body
+      hover={{ scale: "lg"}}
+      text="I need to be hovered over directly"
+  />
+</Card>
