@@ -67,7 +67,7 @@ test('commaSeparator prop returns comma separated amount', () => {
   render(
     <Currency 
         amount="1234567890"
-        comma_separator
+        commaSeparator
         data={{ testid: 'comma-test' }}
     />
   )
@@ -78,7 +78,7 @@ test('commaSeparator prop returns comma separated amount with decimals', () => {
   render(
     <Currency 
         amount="1234567890.12"
-        comma_separator
+        commaSeparator
         data={{ testid: 'comma-test-decimals' }}
     />
   )
@@ -89,7 +89,7 @@ test('commaSeparator prop returns comma separated amount with decimals="matching
   render(
     <Currency 
         amount="1234567890.12"
-        comma_separator
+        commaSeparator
         data={{ testid: 'comma-test-decimals-matching' }}
         decimals="matching"
     />
