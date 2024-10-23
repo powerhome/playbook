@@ -7,7 +7,3 @@ examples:
   react:
   - link_default: Default
   
-  
-  swift:
-  - link_default_swift: Default
-  
