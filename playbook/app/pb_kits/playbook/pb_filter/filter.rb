@@ -15,6 +15,8 @@ module Playbook
       prop :placement, type: Playbook::Props::Enum,
                        values: %w[top bottom left right top-start top-end bottom-start bottom-end right-start right-end left-start left-end],
                        default: "bottom-start"
+      prop :popover_props, type: Playbook::Props::HashProp,
+                           default: {}
 
       def classname
         generate_classname("pb_filter_kit").rstrip

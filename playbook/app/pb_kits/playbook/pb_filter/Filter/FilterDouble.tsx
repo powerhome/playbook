@@ -34,6 +34,7 @@ const FilterDouble = ({
   maxHeight,
   minWidth,
   placement,
+  popoverProps,
   ...bgProps
 }: FilterDoubleProps): React.ReactElement => (
   <FilterBackground
@@ -49,6 +50,7 @@ const FilterDouble = ({
           maxHeight={maxHeight}
           minWidth={minWidth}
           placement={placement}
+          popoverProps={popoverProps}
       >
           {children}
       </FiltersPopover>
