@@ -129,6 +129,34 @@ $pb_selectable_paddings: (
     }
   }
 
+  &[class*=_display_input] {
+    input[type="checkbox"],
+    input[type="radio"] {
+      &:checked {
+        ~label {
+          border-width: $pb_card_border_width;
+          outline: 1px solid $primary;
+        }
+
+      }
+    }
+
+    > label {
+      outline: 1px solid transparent;
+      padding: $space_sm;
+    }
+
+    &.dark {
+      input[type="checkbox"],
+      input[type="radio"] {
+        &:checked ~ label {
+          border-width: $pb_card_border_width;
+          outline: 1px solid $primary;
+        }
+      }
+    }
+  }
+
   &.dark {
     color: $white;
     > label {
