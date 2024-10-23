@@ -2,7 +2,7 @@
 @import "../tokens/titles";
 
 [class^=pb_link_kit]{
-  @include pb_body($text_lt_default);
+  @include pb_body($primary);
   @each $color_name, $color_value in $pb_body_colors {
     &[class*=_#{"" + $color_name}] {
       @include pb_body($color_value);

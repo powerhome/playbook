@@ -4,8 +4,8 @@ module Playbook
   module PbLink
     class Link < ::Playbook::KitBase
       prop :color, type: Playbook::Props::Enum,
-                   values: %w[default light lighter link success error],
-                   default: "link"
+                   values: %w[default body muted destructive],
+                   default: "default"
       prop :href
       prop :status, type: Playbook::Props::Enum,
                     values: %w[neutral positive negative],
@@ -38,7 +38,7 @@ module Playbook
       end
 
       def color_class
-        color == "link" ? "link" : color
+        color == "default" ? nil : color
       end
 
       def status_class
