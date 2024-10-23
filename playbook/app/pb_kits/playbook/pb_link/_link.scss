@@ -61,4 +61,8 @@
     }
   }
 
+  &[class*=_underlined] {
+    text-decoration: underline;
+  }
+
 }

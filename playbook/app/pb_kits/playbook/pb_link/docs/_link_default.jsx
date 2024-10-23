@@ -34,6 +34,14 @@ const LinkDefault = (props) => (
           {...props}
       />
     </div>
+    <div>
+      <Link
+          href="https://www.google.com/"
+          text="link example"
+          underlined
+          {...props}
+      />
+    </div>
   </div>
 )
 

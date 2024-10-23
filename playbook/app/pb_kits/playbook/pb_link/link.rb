@@ -15,13 +15,15 @@ module Playbook
                  values: %w[a h1 h2 h3 h4 h5 h6 p span div],
                  default: "a"
       prop :text
+      prop :underlined, type: Playbook::Props::Boolean,
+                        default: false
       prop :highlighting, type: Playbook::Props::Boolean,
                           default: false
       prop :highlighted_text, type: Playbook::Props::Array,
                               default: []
 
       def classname
-        generate_classname("pb_link_kit", color_class, status_class)
+        generate_classname("pb_link_kit", color_class, status_class, underlined_class)
       end
 
       def content
@@ -43,6 +45,10 @@ module Playbook
 
       def status_class
         status == "neutral" ? nil : status
+      end
+
+      def underlined_class
+        underlined ? "underlined" : nil
       end
     end
   end
