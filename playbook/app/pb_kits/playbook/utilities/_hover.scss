@@ -1,16 +1,11 @@
 @import "../tokens/exports/scale.module";
 
-@mixin hover-color-classes($colors-list) {
-  @each $name, $color in $colors-list {
-    .hover_background_#{"" + $name}:hover,
-    .group_hover:hover .hover_background_#{"" + $name} {
-      background-color: $color !important;
-      transition: background-color $transition-speed ease;
-    }
-    .hover_color_#{"" + $name}:hover,
-    .group_hover:hover .hover_color_#{"" + $name} {
-      color: $color !important;
-      transition: color $transition-speed ease;
+@mixin hover-scale-classes($scales-list) {
+  @each $name, $scale in $scales-list {
+    .hover_#{"" + $name}:hover,
+    .group_hover:hover .hover_#{"" + $name}:not(.direct_hover) {
+      transform: $scale;
+      transition: transform $transition-speed ease;
     }
   }
 }
@@ -18,19 +13,24 @@
 @mixin hover-shadow-classes($shadows-list) {
   @each $name, $shadow in $shadows-list {
     .hover_#{"" + $name}:hover,
-    .group_hover:hover .hover_#{"" + $name} {
+    .group_hover:hover .hover_#{"" + $name}:not(.direct_hover) {
       box-shadow: $shadow;
       transition: box-shadow $transition-speed ease;
     }
   }
 }
 
-@mixin hover-scale-classes($scales-list) {
-  @each $name, $scale in $scales-list {
-    .hover_#{"" + $name}:hover,
-    .group_hover:hover .hover_#{"" + $name} {
-      transform: $scale;
-      transition: transform $transition-speed ease;
+@mixin hover-color-classes($colors-list) {
+  @each $name, $color in $colors-list {
+    .hover_background_#{"" + $name}:hover,
+    .group_hover:hover .hover_background_#{"" + $name}:not(.direct_hover) {
+      background-color: $color !important;
+      transition: background-color $transition-speed ease;
+    }
+    .hover_color_#{"" + $name}:hover,
+    .group_hover:hover .hover_color_#{"" + $name}:not(.direct_hover) {
+      color: $color !important;
+      transition: color $transition-speed ease;
     }
   }
 }

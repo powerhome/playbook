@@ -5,6 +5,7 @@ module Playbook
     def self.included(base)
       base.prop :hover
       base.prop :group_hover, type: Playbook::Props::Boolean, default: false
+      base.prop :direct_hover, type: Playbook::Props::Boolean, default: false
     end
 
     def hover_options
@@ -61,6 +62,7 @@ module Playbook
       end
 
       css += "group_hover " if group_hover
+      css += "direct_hover " if direct_hover
       css.strip unless css.blank?
     end
   end

@@ -1,28 +1,39 @@
-<%= pb_rails("body", props: {
-  text: "I am a body kit"
-}) %>
+<%= pb_rails("card", props: {
+  direction: "column",
+  gap: "xs",
+  group_hover: true
+}) do %>
 
-<%= pb_rails("body", props: {
-  text: "I am a body kit (Light)",
-  color: "light"
-}) %>
+  <%= pb_rails("body", props: {
+    text: "I am a body kit",
+    hover: { scale: "md"}
+  }) %>
+  
+  <%= pb_rails("body", props: {
+    text: "I am a body kit (Light)",
+    color: "light",
+    hover: { scale: "md" }, 
+    direct_hover: true
+  }) %>
+  
+  <%= pb_rails("body", props: {
+    text: "I am a body kit (Lighter)",
+    color: "lighter"
+  }) %>
+  
+  <%= pb_rails("body", props: {
+    text: "I am a body kit (Link)",
+    color: "link"
+  }) %>
+  
+  <%= pb_rails("body", props: {
+    text: "I am a body kit (Error)",
+    color: "error"
+  }) %>
+  
+  <%= pb_rails("body", props: {
+    text: "I am a body kit (Success)",
+    color: "success"
+  }) %>
 
-<%= pb_rails("body", props: {
-  text: "I am a body kit (Lighter)",
-  color: "lighter"
-}) %>
-
-<%= pb_rails("body", props: {
-  text: "I am a body kit (Link)",
-  color: "link"
-}) %>
-
-<%= pb_rails("body", props: {
-  text: "I am a body kit (Error)",
-  color: "error"
-}) %>
-
-<%= pb_rails("body", props: {
-  text: "I am a body kit (Success)",
-  color: "success"
-}) %>
+<% end %>

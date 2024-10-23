@@ -1,16 +1,19 @@
 import React from 'react'
-import { Body } from 'playbook-ui'
+import { Body, Card } from 'playbook-ui'
 
 const BodyLight = (props) => {
   return (
-    <div>
+    <Card hoverGroup>
       <Body
+          hover={{ scale: "lg"}}
           text="I am a body kit (Default)"
           {...props}
       />
       <Body
           color="light"
-          text="I am a body kit (Light)"
+          hover={{ scale: "lg"}}
+          hoverDirect
+          text="I am a body kit (Light)" 
           {...props}
       />
       <Body
@@ -33,7 +36,7 @@ const BodyLight = (props) => {
           text="I am a body kit (Success)"
           {...props}
       />
-    </div>
+    </Card>
   )
 }
 
