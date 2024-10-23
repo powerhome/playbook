@@ -30,7 +30,7 @@ const GroupHover = ({ example }: {example: string}) => (
       />
       <Body
           paddingY="lg"
-          text="I don't have any over effect on me"
+          text="I don't have any hover effect on me"
       />
       <Body
           hover={{ scale: "lg"}}
