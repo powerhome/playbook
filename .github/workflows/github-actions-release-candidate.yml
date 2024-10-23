@@ -40,30 +40,46 @@ jobs:
       - name: Get Semver Label
         id: get-label
         run: |
-          PR_NUMBER=$(git log -1 --pretty=%B | grep -oP '#\K\d+')
-          if [ -z "$PR_NUMBER" ]; then
-            echo "Error: No PR number found in commit message."
+          PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
+          if [ ! -z "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
+            echo "✅ Successfully found PR number: $PR_NUMBER"
+          else
+            echo "❌ Unable to find PR number"
+          fi
+
+          echo "Fetching labels for PR #$PR_NUMBER..."
+          LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name' || echo "Failed to fetch labels")
+          echo "Found labels: $LABELS"
+
+          if [ -z "$LABELS" ]; then
+            echo "⛔ Error: Failed to fetch PR labels"
             exit 1
           fi
 
-          LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name')
-          SEMVER_LABEL=$(echo "$LABELS" | grep -E '^(major|minor|patch)$')
+          SEMVER_LABEL=$(echo "$LABELS" | grep -iE '^(major|minor|patch)$' || true)
+          echo "Found Semver labels: $SEMVER_LABEL"
 
           if [ -z "$SEMVER_LABEL" ]; then
-            echo "Error: No valid Semver label (major, minor, patch) found on PR #$PR_NUMBER."
+            echo "⛔ Error: No valid Semver label (major, minor, patch) found on PR #$PR_NUMBER."
             exit 1
           fi
 
           LABEL_COUNT=$(echo "$SEMVER_LABEL" | wc -l)
+          echo "Number of Semver labels found: $LABEL_COUNT"
+
           if [ "$LABEL_COUNT" -ne 1 ]; then
-            echo "Error: Expected exactly one Semver label, found $LABEL_COUNT on PR #$PR_NUMBER."
+            echo "⛔ Error: Expected exactly one Semver label, found $LABEL_COUNT on PR #$PR_NUMBER."
             exit 1
           fi
+
+          echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
+          echo "✅ Successfully found Semver label: $SEMVER_LABEL"
 
           echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
           echo "Semver label found: $SEMVER_LABEL"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Grab Current Version and Set New RC Version
         id: set-version
@@ -74,13 +90,13 @@ jobs:
             new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           else
             case ${{ env.SEMVER_LABEL }} in
-              major)
+              Major)
                 new_npm_version=$(yarn version --premajor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
                 ;;
-              minor)
+              Minor)
                 new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
                 ;;
-              patch)
+              Patch)
                 new_npm_version=$(yarn version --prepatch --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
                 ;;
               *)
