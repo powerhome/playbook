@@ -5,6 +5,11 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 
 import TimelineItem from './_item'
+import {
+  TimelineStep,
+  TimelineLabel,
+  TimelineDetail,
+} from './subcomponents'
 
 type TimelineProps = {
   aria?: { [key: string]: string },
@@ -47,5 +52,8 @@ const Timeline = ({
 }
 
 Timeline.Item = TimelineItem
+Timeline.Step = TimelineStep
+Timeline.Label = TimelineLabel
+Timeline.Detail = TimelineDetail
 
 export default Timeline
