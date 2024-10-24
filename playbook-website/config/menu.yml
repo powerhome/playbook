@@ -26,6 +26,9 @@ kits:
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: fixed_confirmation_toast
     platforms: *1
     description: Fixed Confirmation Toast is used as an alert. Success is used when
@@ -33,19 +36,31 @@ kits:
       and the user cannot proceed. Neutral is used to display information to a user
       to complete a task.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
   - name: popover
     platforms: *1
     description: A popover is a way to toggle content on top of other content. It
       can be used for small texts, small forms, or even dropdowns. By default, popover
       will toggle open/closed by simply clicking the trigger element.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: true
   - name: tooltip
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: true
   - name: drawer
-    platforms: *1 
+    platforms: *1
     status: beta
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: buttons
   description: Buttons are used primarily for actions, such as “Save” and “Cancel”.
     Link Buttons are used for less important or less commonly used actions, such as
@@ -55,15 +70,24 @@ kits:
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: button_toolbar
     platforms: *1
     description: This kit should primarily hold the most commonly used buttons.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: circle_icon_button
     platforms: *1
     description: When using Icon Circle Button, the icon must be clear a clear indication
       of what the button does because there is no text.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
 - category: data_visualization
   description:
   components:
@@ -71,62 +95,101 @@ kits:
     platforms: *2
     description: This kit provides a wrapping class to place around the MapLibre library.
     status: stable
+    icons_used: true
+    react_rendered: true
+    enhanced_element_used: false
   - name: table
     platforms: *1
     description: Tables display a collection of structured data and typically have
       the ability to sort, filter, and paginate data.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: true
   - name: advanced_table
     platforms: *1
     description: The Advanced Table can be used to display complex, nested data in
       a way that allows for expansion and/or sorting.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
   - name: list
     platforms: *1
     description: Lists display a vertical set of related content.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: filter
     platforms: *1
     description: This kit can be implemented in a variety of ways. To see examples
       of how to implement this kit in production visit the /dev_docs/search page in
       production.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: distribution_bar
     platforms: *1
     description: Can be used in the same way a pie chart can be used. By default,
       Distribution Bar comparatively represents data without numbers.
     status: stable
+    icons_used: false
+    react_rendered: true
+    enhanced_element_used: false
   - name: legend
     platforms: *1
     description: A key used to compare the variables and their value in any given
       graph.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: gauge
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: true
+    enhanced_element_used: false
   - name: bar_graph
     platforms: *1
     description: Bar graphs are used to compare data. Bar graphs are not typically
       used to show percentages.
     status: stable
+    icons_used: false
+    react_rendered: true
+    enhanced_element_used: false
   - name: circle_chart
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: true
+    enhanced_element_used: false
   - name: gantt_chart
     platforms: *2
     status: beta
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: line_graph
     platforms: *1
     description: Line graphs are used to show changes in data over time.
     status: stable
+    icons_used: false
+    react_rendered: true
+    enhanced_element_used: false
   - name: treemap_chart
     platforms: *1
     description: Treemap charts are used to compare the relative size of groups of
       data. They can also use a nested data structure, allowing a user to drill down
       into a group to see its constituent data points.
     status: stable
+    icons_used: false
+    react_rendered: true
+    enhanced_element_used: false
 - category: date_and_time_text_patterns
   description: ''
   components:
@@ -135,55 +198,91 @@ kits:
     description: Use to display the date. Year will not display if it is the current
       year.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: date_range_inline
     platforms: *1
     description: Use to display a date range. Year will not show if it is the current
       year.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: date_range_stacked
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: date_stacked
     platforms: *1
     description: Use to display the date, stacking month and day. Year will not show
       if it is the current year.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: date_time
     platforms: *1
     description: Date Time is a composite kit that leverages the Date and Time kits.
       The Date Time kit is affected by time zones and defaults to "America/New_York".
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: date_time_stacked
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: date_year_stacked
     platforms: *1
     description: This kit is a simple option for displaying dates in a month, day
       and the year format.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: time
     platforms: *1
     description: This kit consist of large display and table display format. It includes
       and icon, and a time zone.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: time_range_inline
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: time_stacked
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: timestamp
     platforms: *3
     description: This low profile kit displays time. Elapsed, current, future, or
       otherwise.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: weekday_stacked
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: form_and_dashboard_text_patterns
   description: ''
   components:
@@ -191,65 +290,104 @@ kits:
     platforms: *1
     description: Use to display customer's or user's contact information.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: currency
     platforms: *1
     description: Use to display monetary amounts, typically on dashboards or other
       layouts to show an overview or summary. User understanding increase when paired
       with labels.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: home_address_street
     platforms: *1
     description: This kit can be used to display the address for a homeowner/project.
       It contains street address, APT format, City, state and zip. A Project hashtag
       can be used as a prop to link back to a project.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: label_pill
     platforms: *1
     description: This kit combines the caption and pill kit with all its variants.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: label_value
     platforms: *1
     description: This kit can be very versatile when used to display text data.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: person
     platforms: *1
     description: This kit is broken down into a first name last name format with normal
       and bold weighted text.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: person_contact
     platforms: *1
     description: This kit can be used to display a person contact information.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: source
     platforms: *1
     description: General use is to describe the discovery of businesses, customers,
       etc. This kit can also be used for other purposes as well.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: dashboard_value
     platforms: *1
     description: Use in dashboards to give the viewer a quick overview of important
       metrics. If want to show currency, use Currency Kit.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: stat_change
     platforms: *1
     description: Displays the increase, decrease, or neutral change in data.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: stat_value
     platforms: *1
     description: This kit was cerated for the main use as a dashboard display for
       numbers. A large label is an optional part if it needs more clarity.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: title_count
     platforms: *1
     description: This kits consists of title kit and body text. It is used to display
       a title and a count (numbers). It has a base size and a large formation for
       dashboard use.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: title_detail
     platforms: *1
     description: This kit can be used in many versatile ways. It consist of a title
       4 and light body text kit.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: form_elements
   description:
   components:
@@ -257,24 +395,39 @@ kits:
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: toggle
     platforms: *1
     description: Physical switch that allows users to turn things on or off. Used
       for applying system states, presenting binary options and activating a state.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: form_pill
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: form
     platforms: *4
     description: The form kit provides consumers with a convenient, consistently styled
       <form> wrapper.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: true
   - name: form_group
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: form_input
   description: ''
   components:
@@ -282,29 +435,47 @@ kits:
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: true
+    enhanced_element_used: false
   - name: phone_number_input
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: true
+    enhanced_element_used: false
   - name: text_input
     platforms: *1
     description: Area where user can enter small amount of text. Commonly used in
       forms.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: rich_text_editor
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: true
+    enhanced_element_used: false
   - name: textarea
     platforms: *1
     description: Area where user can enter larger amounts of text. Commonly used in
       forms.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: true
   - name: typeahead
     platforms: *1
     description: Typeahead is auto suggestion or completion based on what the user
       is starting to type, gets refined as the user types more.
     status: stable
+    icons_used: true
+    react_rendered: true
+    enhanced_element_used: true
 - category: form_selection
   description:
   components:
@@ -314,47 +485,77 @@ kits:
       Common date picker use cases and features have been adapted into simple prop
       based configuration detailed in the docs below.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: dropdown
     platforms: *1
     description: ''
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
   - name: multi_level_select
     platforms: *1
     description: The MultiLevelSelect kit renders a multi leveled select dropdown
       based on data from the user.
     status: stable
+    icons_used: true
+    react_rendered: true
+    enhanced_element_used: false
   - name: select
     platforms: *1
     description: Select displays multiple options for a user to pick from in a dropdown
       menu. User selects one option.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: selectable_card
     platforms: *1
     description: Cards for information/content that can be selected. There is design
       for unselected and selected states. Typically used as a form element.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: selectable_card_icon
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: selectable_icon
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: radio
     platforms: *3
     description: Radio is a control that allows the user to only choose one predefined
       option.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: checkbox
     platforms: *1
     description: Checkbox is used for a list of selections that are meant to have
       one or more options checked.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: selectable_list
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: icons_and_images
   description: ''
   components:
@@ -363,40 +564,64 @@ kits:
     description: An icon is a graphic symbol that represents an object (ie a file)
       or a function. They can be used to give the user feedback.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: icon_circle
     platforms: *1
     description: Similar to Icon, Icon Circle is a graphical symbol within a circle
       used to visually indicate an object or function.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: icon_stat_value
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: icon_value
     platforms: *1
     description: Icon Value leverages our icon kit, to display a value of some sort
       in the interface. Typically, this includes a numerical value.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: user_badge
     platforms: *1
     description: This kit was created to display employee icons related to a Nitro
       user. Currently there is the PVI logo and the Million Dollar Rep Icon.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: image
     platforms: *1
     description: A responsive image component.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: lightbox
     platforms: *2
     description: The Lightbox kit is a popup window overlay that will appear on top
       of your webpage and cover the entirety of the screen.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: star_rating
     platforms: *1
     description: A component to view other people’s opinions and experiences. Use
       when you want to show evaluation or a quick quantitative rating. Most effective
       when paired with reviews.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
 - category: layout_and_structure
   description:
   components:
@@ -405,35 +630,59 @@ kits:
     description: This kit is used to build most of the complex interfaces. The Flex
       Kit is used the same way flex box is used.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: layout
     platforms: *1
     description: Layouts used for positioning content inside of pages, cards, or containers.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: card
     platforms: *3
     description:
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: section_separator
     platforms: *1
     description: Section separator is a divider line that compartmentalizes content,
       typically used on cards or white backgrounds.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: background
     platforms: *1
     description: The background kit is used for adding a background to a page or to
       any container.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: collapsible
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
   - name: overlay
     platforms: *1
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: draggable
     platforms: *2
     description:
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: message_text_patterns
   description:
   components:
@@ -441,11 +690,17 @@ kits:
     platforms: *1
     description: Highlight is used to pick out or emphasize content.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: message
     platforms: *1
     description: This multi kit consist of a an avatar, a status, a caption, a body
       text, and a time stamp. All which can be optional.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: navigation
   description:
   components:
@@ -453,12 +708,18 @@ kits:
     platforms: *1
     description: BreadCrumbs can be used for keeping a user aware of their route location.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: nav
     platforms: *1
     description: The nav is a grouped set of links that take the user to another page,
       or tab through parts of a page. It comes in horizontal or vertical with several
       different variants.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
   - name: pagination
     platforms: *4
     description:
@@ -471,11 +732,17 @@ kits:
     description: The loading kit is used to indicate to users that a page is still
       loading, or an action is still being processed.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: progress_pills
     platforms: *1
     description: Progress pills indicate a specific point in time of a series of sequential
       steps. They are used to track progress of something over time.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: progress_simple
     platforms: *1
     description: Displays the current progress of an operation flow. User understanding
@@ -485,15 +752,24 @@ kits:
     description: 'Progress step kit is used to show the progress of a process. There
       are three types of steps in this kit: completed, active, and inactive.'
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: walkthrough
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: timeline
     platforms: *1
     description: The timeline kit can use two different line styles in the same timeline
       - solid and dotted line styles.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
 - category: tags
   description:
   components:
@@ -502,21 +778,33 @@ kits:
     description: Badges can be used for notification, tags, and status. They are used
       for count and numbers.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: online_status
     platforms: *1
     description: Online Status is a small indicator that lets the user know the status
       of a person or item.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: pill
     platforms: *3
     description: A pill uses both a keyword and a specific color to categorize an
       item.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: hashtag
     platforms: *1
     description: Hashtag is used to display home, project and other forms of IDs.
       They can be used as a link.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: typography
   description: ''
   components:
@@ -526,22 +814,34 @@ kits:
       or "lighter" variants to deemphasize text — default style should be followed
       by "light" followed by "lighter".
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: caption
     platforms: *1
     description: Use to provide supplementary context. Default size is best when providing
       supplementary context to a small section (i.e. label for a text input, label
       for a paragraph). Use large caption when supplementary text covers more content.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: detail
     platforms: *1
     description: Used for tables or designs with large amounts of data or text.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: title
     platforms: *1
     description: Typically used as headers. Follow semantic hierarchy — Title 1s should
       be followed by Title 2s followed by Title 3s and so on, without skipping any
       levels.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: user
   description:
   components:
@@ -552,23 +852,38 @@ kits:
       other kits. The only time Avatar should be used instead of the User kit is when
       you are not going to display the user's name.
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: avatar_action_button
     platforms: *1
     description:
     status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: multiple_users
     platforms: *1
     description: The multiple users kit is used to show that more than one user is
       associated to an action or item.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: multiple_users_stacked
     platforms: *1
     description: Multiple users stacked is used in tight spaces, where we need to
       indicate that multiple users are associated to a specific action or item.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: user
     platforms: *1
     description: This kit was created for having a systematic way of displaying users
       with avatar, titles, name and territory. This is a versatile kit with features
       than can be added to display more info.
     status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
