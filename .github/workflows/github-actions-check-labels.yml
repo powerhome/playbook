@@ -1,0 +1,35 @@
+name: Check Labels
+run-name: ${{ github.actor }} is checking labels 🚀
+on:
+  pull_request:
+    types: [ labeled, unlabeled ]
+jobs:
+  Checking-Labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Semver label
+        run: |
+          LABELS=$(jq -r '.pull_request.labels[].name' "$GITHUB_EVENT_PATH")
+          SEMVER_PATTERN="^(major|minor|patch)$"
+
+          SEMVER_LABELS=$(echo "$LABELS" | grep -iE "$SEMVER_PATTERN" || true)
+
+          # Check if SEMVER_LABELS is empty
+          if [ -z "$SEMVER_LABELS" ]; then
+            echo "Error: No Semver label found. Please add exactly one of: major, minor, patch (case-insensitive)"
+            exit 1
+          fi
+
+          SEMVER_LABEL_COUNT=$(echo "$SEMVER_LABELS" | wc -l)
+
+          if [ "$SEMVER_LABEL_COUNT" -eq 0 ]; then
+            echo "Error: No Semver label found. Please add exactly one of: major, minor, patch (case-insensitive)"
+            exit 1
+          elif [ "$SEMVER_LABEL_COUNT" -gt 1 ]; then
+            echo "Error: Multiple Semver labels found. Please ensure only one is present:"
+            echo "$SEMVER_LABELS"
+            exit 1
+          else
+            NORMALIZED_LABEL=$(echo "$SEMVER_LABELS" | tr '[:upper:]' '[:lower:]')
+            echo "Valid Semver label found: $NORMALIZED_LABEL"
+          fi
