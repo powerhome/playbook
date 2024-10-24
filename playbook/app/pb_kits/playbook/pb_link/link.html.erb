@@ -1,9 +1,23 @@
-<%= pb_content_tag(object.tag, { href: object.href }) do %>
-  <% if object.icon.present? %>
-    <%= pb_rails("icon", props: { icon: object.icon, fixed_width: true, size: "xs", margin_right: "xxs" }) %>
+<% if object.tag == "a" %>
+  <%= pb_content_tag(object.tag, { href: object.href }) do %>
+    <% if object.icon.present? %>
+      <%= pb_rails("icon", props: { icon: object.icon, fixed_width: true, size: "xs", margin_right: "xxs" }) %>
+    <% end %>
+    <%= object.content %>
+    <% if object.icon_right.present? %>
+      <%= pb_rails("icon", props: { icon: object.icon_right, fixed_width: true, size: "xs", margin_right: "xxs" }) %>
+    <% end %>
   <% end %>
-  <%= object.content %>
-  <% if object.icon_right.present? %>
-    <%= pb_rails("icon", props: { icon: object.icon_right, fixed_width: true, size: "xs", margin_right: "xxs" }) %>
+<% else %>
+  <%= pb_content_tag(:a, { href: object.href }) do %>
+    <%= content_tag(object.tag) do %>
+      <% if object.icon.present? %>
+        <%= pb_rails("icon", props: { icon: object.icon, fixed_width: true, size: "xs", margin_right: "xxs" }) %>
+      <% end %>
+      <%= object.content %>
+      <% if object.icon_right.present? %>
+        <%= pb_rails("icon", props: { icon: object.icon_right, fixed_width: true, size: "xs", margin_right: "xxs" }) %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

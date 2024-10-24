@@ -26,11 +26,7 @@ $pb_link_hover_colors: (
 );
 
 @mixin pb_link($color: $primary_action) {
-  line-height: $lh_tight;
   color: $color;
-  font-size: $text_default;
-  font-weight: $regular;
-  font-family: $font-family-base;
 }
 
 [class^=pb_link_kit]{

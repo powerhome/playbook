@@ -54,30 +54,58 @@ const Link = (props: LinkProps): React.ReactElement => {
   )
   const Tag: keyof JSX.IntrinsicElements = `${tag}`
 
-  return (
-    <Tag
-        {...ariaProps}
-        {...dataProps}
-        {...htmlProps}
-        className={classes}
-        href={href}
-        id={id}
-    >
-      {icon && <Icon
-          fixedWidth
-          icon={icon}
-          marginRight="xxs"
-          size="xs"
-      />}
-      { text || children }
-      {iconRight && <Icon
-          fixedWidth
-          icon={iconRight}
-          marginLeft="xxs"
-          size="xs"
-      />}
-    </Tag>
+  const content = (
+    <>
+      {icon && (
+        <Icon
+            fixedWidth
+            icon={icon}
+            marginRight="xxs"
+            size="xs"
+        />
+      )}
+      {text || children}
+      {iconRight && (
+        <Icon
+            fixedWidth
+            icon={iconRight}
+            marginLeft="xxs"
+            size="xs"
+        />
+      )}
+    </>
   )
+
+  if (tag === 'a') {
+    return (
+      <Tag
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
+          className={classes}
+          href={href}
+          id={id}
+      >
+        {content}
+      </Tag>
+    )
+  } else {
+    return (
+      <a
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
+          className={classes}
+          href={href}
+          id={id}
+      >
+        <Tag>
+          {content}
+        </Tag>
+      </a>
+    )
+  }
+
 }
 
 export default Link

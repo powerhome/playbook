@@ -5,6 +5,7 @@ examples:
   - link_underline: Underline
   - link_icon: Icon
   - link_disabled: Disabled
+  - link_tag: Tag
   
   
   react:
@@ -12,3 +13,4 @@ examples:
   - link_underline: Underline
   - link_icon: Icon
   - link_disabled: Disabled
+  - link_tag: Tag
