@@ -5,7 +5,7 @@ const LinkDisabled = (props) => (
   <div>
     <Link
         disabled
-        href="https://www.google.com/"
+        href="#"
         text="link example"
         {...props}
     />

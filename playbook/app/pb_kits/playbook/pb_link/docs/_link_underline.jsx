@@ -4,7 +4,7 @@ import { Link } from 'playbook-ui'
 const LinkUnderline = (props) => (
   <div>
     <Link
-        href="https://www.google.com/"
+        href="#underline"
         text="link example"
         underlined
         {...props}

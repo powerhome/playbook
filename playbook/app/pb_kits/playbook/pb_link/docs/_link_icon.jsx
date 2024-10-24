@@ -5,7 +5,7 @@ const LinkIcon = (props) => (
   <div>
     <div>
       <Link
-          href="https://www.google.com/"
+          href="#icon"
           icon="arrow-up-right-from-square"
           text="link example"
           {...props}
@@ -13,7 +13,7 @@ const LinkIcon = (props) => (
     </div>
     <div>
       <Link
-          href="https://www.google.com/"
+          href="#icon"
           iconRight="chevron-right"
           text="link example"
           {...props}

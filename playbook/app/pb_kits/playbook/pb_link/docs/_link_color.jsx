@@ -13,7 +13,7 @@ const LinkColor = (props) => (
     <div>
       <Link
           color="body"
-          href="https://www.google.com/"
+          href="https://www.youtube.com/"
           text="link example"
           {...props}
       />
@@ -21,7 +21,7 @@ const LinkColor = (props) => (
     <div>
       <Link
           color="muted"
-          href="https://www.google.com/"
+          href="https://www.facebook.com/"
           text="link example"
           {...props}
       />
@@ -29,7 +29,7 @@ const LinkColor = (props) => (
     <div>
       <Link
           color="destructive"
-          href="https://www.google.com/"
+          href="https://www.instagram.com/"
           text="link example"
           {...props}
       />
