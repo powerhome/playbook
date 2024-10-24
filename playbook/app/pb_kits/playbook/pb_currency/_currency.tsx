@@ -26,6 +26,7 @@ type CurrencyProps = {
   variant?: 'default' | 'light' | 'bold',
   unit?: string,
   unstyled?: boolean,
+  commaSeparator?: boolean,
 }
 
 const sizes: {lg: 1, md: 3, sm: 4} = {
@@ -53,6 +54,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     variant = 'default',
     dark = false,
     unstyled = false,
+    commaSeparator = false,
   } = props
 
   const emphasizedClass = emphasized ? '' : '_deemphasized'
@@ -74,7 +76,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     className
   )
 
-  const getFormattedNumber = (input: number | any ) => new Intl.NumberFormat('en-US', {
+  const getFormattedNumber = (input: number | any) => new Intl.NumberFormat('en-US', {
     notation: 'compact',
     maximumFractionDigits: 1,
   }).format(input)
@@ -88,12 +90,20 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     return isAmount ? num.slice(0, -1) : isUnit ? num.slice(-1) : ''
   }
 
-  const getMatchingDecimalAmount = decimals === "matching" ? amount : whole,
-    getMatchingDecimalValue = decimals === "matching" ? '' : `.${decimal}`
+  const getMatchingDecimalAmount = decimals === "matching" ? amount : whole
+  const getMatchingDecimalValue = decimals === "matching" ? '' : `.${decimal}`
 
-  const getAmount = abbreviate ? getAbbreviatedValue('amount') : getMatchingDecimalAmount,
-    getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null,
-    getDecimalValue = abbreviate ? '' : getMatchingDecimalValue
+  const formatAmount = (amount: string) => {
+    if (!commaSeparator) return amount;
+    
+    const [wholePart, decimalPart] = amount.split('.');
+    const formattedWhole = new Intl.NumberFormat('en-US').format(parseInt(wholePart));
+    return decimalPart ? `${formattedWhole}.${decimalPart}` : formattedWhole;
+  }
+
+  const getAmount = abbreviate ? getAbbreviatedValue('amount') : formatAmount(getMatchingDecimalAmount)
+  const getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null
+  const getDecimalValue = abbreviate ? '' : getMatchingDecimalValue
 
   return (
     <div
