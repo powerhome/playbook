@@ -9,7 +9,7 @@
 
 @import "./scss_partials/dropdown_animation";
 
-.pb_dropdown {
+[class*="pb_dropdown"] {
   .dropdown_wrapper {
     [class*="dropdown_trigger_wrapper"] {
       @include pb_body;
@@ -131,7 +131,7 @@
     }
   }
 
-  &.separators_hidden {
+  &[class*="separators_hidden"] {
     .dropdown_wrapper {
       .pb_dropdown_container {
 
@@ -142,7 +142,7 @@
     }
   }
 
-  &.subtle {
+  &[class*="subtle"] {
     .dropdown_wrapper {
       .pb_dropdown_container {
         
@@ -178,7 +178,7 @@
       }
     }
   
-    &.separators_hidden {
+    &[class*="separators_hidden"] {
       .dropdown_wrapper {
         .pb_dropdown_container {
           [class*="pb_dropdown_option"]:first-child {
