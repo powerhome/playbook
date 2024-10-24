@@ -1,7 +1,11 @@
-# 14.6.1
+# Supercharge Your Tables: Custom Components in Advanced Table Cells!
 ##### October 22, 2024
 
-[14.6.1](https://github.com/powerhome/playbook/tree/14.6.1) full list of changes:
+<img width="889" alt="6c7a47b3-9b73-4790-811f-e4a01f32c625" src="https://github.com/user-attachments/assets/16ecd4b0-53be-4e0e-813f-2f606a70dbd3">
+
+We’re excited to announce a new level of flexibility for your tables! The Advanced Table now supports custom components within individual cells. Using the optional customRenderer in columnDefinition, you can access not only the current cell's value but also the entire row's data. This opens up powerful possibilities to render dynamic, tailored content in each cell with ease.
+
+[14.6.2](https://github.com/powerhome/playbook/tree/14.6.2) full list of changes:
 
 **Kit Enhancements:**
 
@@ -21,6 +25,7 @@
 - Truncating the Typeahead FormPill Text [\#3738](https://github.com/powerhome/playbook/pull/3738) ([carloslimasd](https://github.com/carloslimasd))
 - Fixing icon display for markdown helper [\#3754](https://github.com/powerhome/playbook/pull/3754) ([skduncan](https://github.com/skduncan))
 - Set Total Tickets Hero Gauge Height to 150px instead of 25% [\#3752](https://github.com/powerhome/playbook/pull/3752) ([kangaree](https://github.com/kangaree))
+- Dropdown ClassName Fix [\#3845](https://github.com/powerhome/playbook/pull/3845) ([@nickamantia](https://github.com/nickamantia))
 
 **Improvements:**
 - Upgrade intl-tel-input to Latest and Make Fixes [\#3791](https://github.com/powerhome/playbook/pull/3791) ([kangaree](https://github.com/kangaree))
@@ -32,7 +37,7 @@
 - More storage for CI image builds [\#3767](https://github.com/powerhome/playbook/pull/3767) ([benlangfeld](https://github.com/benlangfeld))
 
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/14.5.0...14.6.1)
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.5.0...14.6.2)
 
 
 # 🐝 Improved Usability, Flexibility, Customization and More! 🐝
