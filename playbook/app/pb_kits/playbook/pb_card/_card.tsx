@@ -109,6 +109,9 @@ const Card = (props: CardPropTypes): React.ReactElement => {
   // coerce to array
   const cardChildren = React.Children.toArray(children)
   const dynamicInlineProps = globalInlineProps(props);
+  const { style: htmlStyle, ...restHtmlProps } = htmlProps;
+  const mergedStyles = { ...htmlStyle, ...dynamicInlineProps };
+
 
   const subComponentTags = (tagName: string) => {
     return cardChildren.filter((c: string) => (
@@ -124,7 +127,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
 
   const tagOptions = ['div', 'section', 'footer', 'header', 'article', 'aside', 'main', 'nav']
   const Tag = tagOptions.includes(tag) ? tag : 'div'
-
+  
   return (
     <>
     {
@@ -132,12 +135,13 @@ const Card = (props: CardPropTypes): React.ReactElement => {
         <Draggable.Item dragId={dragId} 
             key={dragId}
         >
+          <h1>{htmlProps}</h1>
         <Tag
             {...ariaProps}
             {...dataProps}
-            {...htmlProps}
             className={classnames(cardCss, globalProps(props), className)}
-            style={dynamicInlineProps}
+            {...restHtmlProps}
+            style={mergedStyles} 
         >
           {subComponentTags('Header')}
           {
@@ -164,9 +168,9 @@ const Card = (props: CardPropTypes): React.ReactElement => {
           <Tag
               {...ariaProps}
               {...dataProps}
-              {...htmlProps}
               className={classnames(cardCss, globalProps(props), className)}
-              style={dynamicInlineProps}
+              {...restHtmlProps}
+              style={mergedStyles} 
             >
               {subComponentTags('Header')}
               {nonHeaderChildren}
