@@ -46,11 +46,19 @@ $pb_link_hover_colors: (
     outline: 1px solid $primary;
     outline-offset: 2px;
   }
+  &:visited {
+    color: $data_3;
+  }
   @each $color_name, $color_value in $pb_link_colors {
     &[class*=_#{"" + $color_name}] {
       @include pb_link($color_value);
+
       &:hover {
         color: map-get($pb_link_hover_colors, $color_name);
+      }
+
+      &:visited {
+        color: $data_3;
       }
     }
   }
@@ -61,6 +69,10 @@ $pb_link_hover_colors: (
       
       &:hover {
         color: map-get($pb_link_hover_colors, $dark_color_name);
+      }
+
+      &:visited {
+        color: $data_3;
       }
     }
   }
