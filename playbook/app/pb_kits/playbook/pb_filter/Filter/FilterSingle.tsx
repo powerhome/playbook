@@ -33,6 +33,7 @@ const FilterSingle = ({
   maxHeight,
   minWidth,
   placement,
+  popoverProps,
   ...bgProps
 }: FilterSingleProps): React.ReactElement => {
   return (
@@ -52,6 +53,7 @@ const FilterSingle = ({
                 maxHeight={maxHeight}
                 minWidth={minWidth}
                 placement={placement}
+                popoverProps={popoverProps}
             >
             {children}
             </FiltersPopover>

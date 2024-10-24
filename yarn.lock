@@ -3932,10 +3932,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-modal@3.13.1":
-  version "3.13.1"
-  resolved "https://npm.powerapp.cloud/@types/react-modal/-/react-modal-3.13.1.tgz#5b9845c205fccc85d9a77966b6e16dc70a60825a"
-  integrity sha512-iY/gPvTDIy6Z+37l+ibmrY+GTV4KQTHcCyR5FIytm182RQS69G5ps4PH2FxtC7bAQ2QRHXMevsBgck7IQruHNg==
+"@types/react-modal@3.16.1":
+  version "3.16.1"
+  resolved "https://npm.powerapp.cloud/@types/react-modal/-/react-modal-3.16.1.tgz#0d65e078b1290acfef8083b8cd92b7692e899720"
+  integrity sha512-HsH2E3luJ2hdVOAovq93x/r+CmWqbhwT8hXW05KMp3zzbSEZsBn4egnMGU/VLwScwlCRPTyZgIEPqLycaz5EOw==
   dependencies:
     "@types/react" "*"
 
@@ -7324,10 +7324,10 @@ intersection-observer@^0.10.0:
   resolved "https://npm.powerapp.cloud/intersection-observer/-/intersection-observer-0.10.0.tgz#4d11d63c1ff67e21e62987be24d55218da1a1a69"
   integrity sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==
 
-intl-tel-input@^18.0.15:
-  version "18.5.3"
-  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-18.5.3.tgz#20b18431cb802d33c118f52e332e218e641ec09b"
-  integrity sha512-ncFqSpkdGf2YC/FvAiwBH44KAeRG8L7aqDODEpOvMAT3ZpBtvc/WtwaQ/6X4+HKDTlGkobdBjr6P3nAMwO8jtA==
+intl-tel-input@^24.6.0:
+  version "24.6.0"
+  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-24.6.0.tgz#f3b070b337f6981493b2c3b9d28e31828ce32a2f"
+  integrity sha512-3ZlxJk7IOhNCRRxGrAcGiP1uzZFaDEQUIHNHk516RORZpOoPh1kqZP8ksE8nm+/5HZk+tRV7F/iex0aWnkkixQ==
 
 is-accessor-descriptor@^0.1.6:
   version "0.1.6"
@@ -10115,7 +10115,7 @@ react-lifecycles-compat@^3.0.0:
   resolved "https://npm.powerapp.cloud/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-modal@^3.12.1:
+react-modal@^3.16.1:
   version "3.16.1"
   resolved "https://npm.powerapp.cloud/react-modal/-/react-modal-3.16.1.tgz#34018528fc206561b1a5467fc3beeaddafb39b2b"
   integrity sha512-VStHgI3BVcGo7OXczvnJN7yT2TWHJPDXZWyI/a0ssFNhGZWsPmB8cF0z33ewDXq4VfYMO1vXgiv/g8Nj9NDyWg==
@@ -10190,10 +10190,10 @@ react-trix@0.10.1:
   dependencies:
     trix "^1.3.1"
 
-react-zoom-pan-pinch@^2.6.1:
-  version "2.6.1"
-  resolved "https://npm.powerapp.cloud/react-zoom-pan-pinch/-/react-zoom-pan-pinch-2.6.1.tgz#5719fdd9515dc1f379a23350cbf99edd540b1281"
-  integrity sha512-4Cgdnn6OwN4DomY/E9NpAf0TyCtslEgwdYn96ZV/f5LKuw/FE3gcIBJiaKFmMGThDGV0yKN5mzO8noi34+UE4Q==
+react-zoom-pan-pinch@3.6.0:
+  version "3.6.0"
+  resolved "https://npm.powerapp.cloud/react-zoom-pan-pinch/-/react-zoom-pan-pinch-3.6.0.tgz#aea299a27d120a96b832fd953b2490ca9bfc4954"
+  integrity sha512-qLAFbDmlRwwJ7F3KXIoT5zxVZD34ZO0a5jI65URmTUjthapoQ0UCAF8oxpSJV0bSVszI5T3WV/U4Jd6ypwOnAQ==
 
 react@^17.0.2:
   version "17.0.2"
