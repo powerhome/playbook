@@ -15,11 +15,11 @@ module Playbook
                  values: %w[a h1 h2 h3 h4 h5 h6 p span div],
                  default: "a"
       prop :text
-      prop :underlined, type: Playbook::Props::Boolean,
-                        default: false
+      prop :underline, type: Playbook::Props::Boolean,
+                       default: false
 
       def classname
-        generate_classname("pb_link_kit", color_class, underlined_class, disabled_class)
+        generate_classname("pb_link_kit", color_class, underline_class, disabled_class)
       end
 
       def content
@@ -36,8 +36,8 @@ module Playbook
         disabled ? "disabled" : nil
       end
 
-      def underlined_class
-        underlined ? "underlined" : nil
+      def underline_class
+        underline ? "underline" : nil
       end
     end
   end

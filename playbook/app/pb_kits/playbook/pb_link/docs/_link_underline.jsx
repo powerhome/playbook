@@ -6,7 +6,7 @@ const LinkUnderline = (props) => (
     <Link
         href="#underline"
         text="link example"
-        underlined
+        underline
         {...props}
     />
   </div>

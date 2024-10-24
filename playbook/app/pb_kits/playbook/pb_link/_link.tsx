@@ -21,7 +21,7 @@ type LinkProps = {
   id?: string,
   tag?: 'a' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
-  underlined?: boolean,
+  underline?: boolean,
   variant?: '' | 'link',
 } & GlobalProps
 
@@ -40,7 +40,7 @@ const Link = (props: LinkProps): React.ReactElement => {
     id = '',
     tag = 'a',
     text = '',
-    underlined = false,
+    underline = false,
     variant = '',
   } = props
 
@@ -48,7 +48,7 @@ const Link = (props: LinkProps): React.ReactElement => {
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
-    buildCss('pb_link_kit', color, variant, underlined ? 'underlined' : '', disabled ? 'disabled' : ''),
+    buildCss('pb_link_kit', color, variant, underline ? 'underline' : '', disabled ? 'disabled' : ''),
     globalProps(props),
     className
   )
