@@ -1,21 +1,40 @@
-@import "./link_mixins";
-@import "../tokens/titles";
+@import "../tokens/colors";
+@import "../tokens/line_height";
+@import "../tokens/typography";
+
+$pb_link_colors: (
+  default:        $primary,
+  body:           $text_lt_default,
+  muted:          $text_lt_light,
+  destructive:    $error,
+);
+
+// Match regular colors. Need to Update.
+$pb_dark_link_colors: (
+  default:        $primary,
+  body:           $text_lt_default,
+  muted:          $text_lt_light,
+  destructive:    $error,
+);
+
+@mixin pb_link($color: $primary) {
+  line-height: $lh_tight;
+  color: $color;
+  font-size: $text_default;
+  font-weight: $regular;
+  font-family: $font-family-base;
+}
 
 [class^=pb_link_kit]{
-  @include pb_body($primary);
-  @each $color_name, $color_value in $pb_body_colors {
+  @include pb_link($primary);
+  @each $color_name, $color_value in $pb_link_colors {
     &[class*=_#{"" + $color_name}] {
-      @include pb_body($color_value);
-    }
-    @each $status_name, $status_value in $pb_body_status {
-      &[class*=_default_#{$status_name}] {
-        @include pb_body($status_value);
-      }
+      @include pb_link($color_value);
     }
   }
-  @each $dark_color_name, $dark_color_value in $pb_dark_body_colors{
+  @each $dark_color_name, $dark_color_value in $pb_dark_link_colors{
     &[class*=_#{$dark_color_name}][class*=dark]{
-      @include pb_body($dark_color_value);
+      @include pb_link($dark_color_value);
     }
   }
   b, strong {
@@ -38,25 +57,14 @@
     letter-spacing: $lspace_loose;
   }
 
-  @each $status_name, $status_value in $pb_body_status {
-    &[class*=#{$status_name}] {
-      @include pb_body($status_value);
-    }
-  }
-
   &[class*=dark] {
     a {
       color: $active_dark;
     }
     @include pb_body_dark();
-    @each $dark_color_name, $dark_color_value in $pb_dark_body_colors{
+    @each $dark_color_name, $dark_color_value in $pb_dark_link_colors{
       &[class*=_#{$dark_color_name}][class*=dark]{
-        @include pb_body($dark_color_value);
-      }
-    }
-    @each $status_name, $status_value in $pb_body_status {
-      &[class*=_#{$status_name}] {
-        @include pb_body($status_value);
+        @include pb_link($dark_color_value);
       }
     }
   }
