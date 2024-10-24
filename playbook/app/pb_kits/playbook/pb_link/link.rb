@@ -6,6 +6,8 @@ module Playbook
       prop :color, type: Playbook::Props::Enum,
                    values: %w[default body muted destructive],
                    default: "default"
+      prop :disabled, type: Playbook::Props::Boolean,
+                      default: false
       prop :href
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[a h1 h2 h3 h4 h5 h6 p span div],
@@ -15,7 +17,7 @@ module Playbook
                         default: false
 
       def classname
-        generate_classname("pb_link_kit", color_class, underlined_class)
+        generate_classname("pb_link_kit", color_class, underlined_class, disabled_class)
       end
 
       def content
@@ -26,6 +28,10 @@ module Playbook
 
       def color_class
         color == "default" ? nil : color
+      end
+
+      def disabled_class
+        disabled ? "disabled" : nil
       end
 
       def underlined_class

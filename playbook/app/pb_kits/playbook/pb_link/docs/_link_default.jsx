@@ -42,6 +42,14 @@ const LinkDefault = (props) => (
           {...props}
       />
     </div>
+    <div>
+      <Link
+          disabled
+          href="https://www.google.com/"
+          text="link example"
+          {...props}
+      />
+    </div>
   </div>
 )
 

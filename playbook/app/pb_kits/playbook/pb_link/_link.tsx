@@ -11,6 +11,7 @@ type LinkProps = {
   color?: 'default' | 'body' | 'muted' | 'destructive',
   dark?: boolean,
   data?: {[key: string]: string},
+  disabled?: boolean,
   href?: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void)},
   id?: string,
@@ -27,6 +28,7 @@ const Link = (props: LinkProps): React.ReactElement => {
     className,
     color = '',
     data = {},
+    disabled = false,
     href= '',
     htmlOptions = {},
     id = '',
@@ -40,7 +42,7 @@ const Link = (props: LinkProps): React.ReactElement => {
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
-    buildCss('pb_link_kit', color, variant, underlined ? 'underlined' : ''),
+    buildCss('pb_link_kit', color, variant, underlined ? 'underlined' : '', disabled ? 'disabled' : ''),
     globalProps(props),
     className
   )

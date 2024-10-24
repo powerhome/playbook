@@ -113,4 +113,10 @@ $pb_link_hover_colors: (
     text-decoration: underline;
   }
 
+  &[class*=_disabled] {
+    pointer-events: none;
+    cursor: default;
+    color: $text_lt_lighter;
+  }
+
 }
