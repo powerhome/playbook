@@ -51,7 +51,7 @@ $pb_link_hover_colors: (
       @include pb_link($dark_color_value);
       
       &:hover {
-        color: map-get($pb_link_hover_colors, $color_name);
+        color: map-get($pb_link_hover_colors, $dark_color_name);
       }
     }
   }
@@ -63,7 +63,7 @@ $pb_link_hover_colors: (
   a {
     color: $primary;
     &:hover {
-      color: $text_lt_default;
+      color: green;
     }
   }
 
