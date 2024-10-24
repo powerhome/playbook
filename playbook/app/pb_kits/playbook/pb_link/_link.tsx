@@ -4,6 +4,8 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
+import Icon from '../pb_icon/_icon'
+
 type LinkProps = {
   aria?: {[key: string]: string},
   className?: string,
@@ -14,6 +16,8 @@ type LinkProps = {
   disabled?: boolean,
   href?: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void)},
+  icon?: string,
+  iconRight?: string,
   id?: string,
   tag?: 'a' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
@@ -31,6 +35,8 @@ const Link = (props: LinkProps): React.ReactElement => {
     disabled = false,
     href= '',
     htmlOptions = {},
+    icon = '',
+    iconRight = '',
     id = '',
     tag = 'a',
     text = '',
@@ -57,7 +63,19 @@ const Link = (props: LinkProps): React.ReactElement => {
         href={href}
         id={id}
     >
+      {icon && <Icon
+          fixedWidth
+          icon={icon}
+          marginRight="xxs"
+          size="xs"
+      />}
       { text || children }
+      {iconRight && <Icon
+          fixedWidth
+          icon={iconRight}
+          marginLeft="xxs"
+          size="xs"
+      />}
     </Tag>
   )
 }

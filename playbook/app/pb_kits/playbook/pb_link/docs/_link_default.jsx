@@ -50,6 +50,22 @@ const LinkDefault = (props) => (
           {...props}
       />
     </div>
+    <div>
+      <Link
+          href="https://www.google.com/"
+          icon="arrow-up-right-from-square"
+          text="link example"
+          {...props}
+      />
+    </div>
+    <div>
+      <Link
+          href="https://www.google.com/"
+          iconRight="chevron-right"
+          text="link example"
+          {...props}
+      />
+    </div>
   </div>
 )
 

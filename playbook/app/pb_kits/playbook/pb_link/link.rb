@@ -9,6 +9,8 @@ module Playbook
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
       prop :href
+      prop :icon
+      prop :icon_right
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[a h1 h2 h3 h4 h5 h6 p span div],
                  default: "a"
