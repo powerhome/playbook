@@ -13,13 +13,18 @@ module Playbook
       prop :default_value
       prop :blank_selection, type: Playbook::Props::String,
                              default: ""
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[default subtle],
+                     default: "default"
+      prop :separators, type: Playbook::Props::Boolean,
+                        default: true
 
       def data
         Hash(prop(:data)).merge(pb_dropdown: true)
       end
 
       def classname
-        generate_classname("pb_dropdown")
+        generate_classname("pb_dropdown", variant, separators_class)
       end
 
     private
@@ -30,6 +35,10 @@ module Playbook
 
       def input_default_value
         default_value.present? ? default_value.transform_keys(&:to_s)["id"] : ""
+      end
+
+      def separators_class
+        separators ? nil : "separators_hidden"
       end
 
       def options_with_blank

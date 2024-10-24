@@ -73,7 +73,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     !autocomplete && "select_only"
   );
 
-  const customDisplayPlaceholder = selected.label ? (
+  const customDisplayPlaceholder = selected?.label ? (
     <b>{selected.label}</b>
   ) : autocomplete ? (
     ""
@@ -83,7 +83,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     "Select..."
   );
 
-  const defaultDisplayPlaceholder = selected.label
+  const defaultDisplayPlaceholder = selected?.label
     ? selected.label
     : autocomplete
     ? ""

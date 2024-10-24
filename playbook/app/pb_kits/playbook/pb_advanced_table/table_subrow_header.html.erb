@@ -24,11 +24,3 @@
             <% end %>
         <% end %>
 <% end %>
-
-<script type="text/javascript">
-    var expandAllSubRows = (element, rowDepth) => {
-        element.closest(".toggle-content").querySelectorAll('.depth-sub-row-' + rowDepth + ' [data-advanced-table]').forEach((button) => {
-            button.dispatchEvent(new Event('click'));
-        });
-    };
-</script>
