@@ -3,7 +3,7 @@
 @import "../tokens/typography";
 
 $pb_link_colors: (
-  default:        $primary,
+  default:        $primary_action,
   body:           $text_lt_default,
   muted:          $text_lt_light,
   destructive:    $error,
@@ -11,13 +11,20 @@ $pb_link_colors: (
 
 // Match regular colors. Need to Update.
 $pb_dark_link_colors: (
-  default:        $primary,
+  default:        $primary_action,
   body:           $text_lt_default,
   muted:          $text_lt_light,
   destructive:    $error,
 );
 
-@mixin pb_link($color: $primary) {
+$pb_link_hover_colors: (
+  default:        $text_lt_default,
+  body:           $primary_action,
+  muted:          $text_lt_default,
+  destructive:    $text_lt_default,
+);
+
+@mixin pb_link($color: $primary_action) {
   line-height: $lh_tight;
   color: $color;
   font-size: $text_default;
@@ -27,16 +34,28 @@ $pb_dark_link_colors: (
 
 [class^=pb_link_kit]{
   @include pb_link($primary);
+  &:hover {
+    color: $text_lt_default;
+  }
   @each $color_name, $color_value in $pb_link_colors {
     &[class*=_#{"" + $color_name}] {
       @include pb_link($color_value);
+      &:hover {
+        color: map-get($pb_link_hover_colors, $color_name);
+      }
     }
   }
+
   @each $dark_color_name, $dark_color_value in $pb_dark_link_colors{
     &[class*=_#{$dark_color_name}][class*=dark]{
       @include pb_link($dark_color_value);
+      
+      &:hover {
+        color: map-get($pb_link_hover_colors, $color_name);
+      }
     }
   }
+
   b, strong {
     font-weight: $bold;
   }
