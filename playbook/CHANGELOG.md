@@ -1,3 +1,45 @@
+# Supercharge Your Tables: Custom Components in Advanced Table Cells!
+##### October 22, 2024
+
+<img width="889" alt="6c7a47b3-9b73-4790-811f-e4a01f32c625" src="https://github.com/user-attachments/assets/16ecd4b0-53be-4e0e-813f-2f606a70dbd3">
+
+We’re excited to announce a new level of flexibility for your tables! The Advanced Table now supports custom components within individual cells. Using the optional customRenderer in columnDefinition, you can access not only the current cell's value but also the entire row's data. This opens up powerful possibilities to render dynamic, tailored content in each cell with ease.
+
+[14.6.2](https://github.com/powerhome/playbook/tree/14.6.2) full list of changes:
+
+**Kit Enhancements:**
+
+- Custom Width for Popover Kit and PopoverProps for Filter Kit [\#3827](https://github.com/powerhome/playbook/pull/3827) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Dropdown Kit - States & Variant Prop [\#3828](https://github.com/powerhome/playbook/pull/3828) ([nickamantia](https://github.com/nickamantia))
+- Custom Cells for Advanced Table [\#3821](https://github.com/powerhome/playbook/pull/3821) ([nidaqg](https://github.com/nidaqg))
+- Multiple User Bubble Size Prop [\#3719](https://github.com/powerhome/playbook/pull/3719) 
+([markdoeswork](https://github.com/markdoeswork))
+- Adding React Dropdown Clearing Feature [\#3793](https://github.com/powerhome/playbook/pull/3793) ([carloslimasd](https://github.com/carloslimasd))
+- Filter Kit - Filter Kit Displaying Zero Results [\#3799](https://github.com/powerhome/playbook/pull/3799) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Add Reset Functionality to Rails side of MultiLevelSelect [\#3792](https://github.com/powerhome/playbook/pull/3792) ([nidaqg](https://github.com/nidaqg))
+- Allow Children for MultiLevelSelect [\#3661](https://github.com/powerhome/playbook/pull/3661) ([nidaqg](https://github.com/nidaqg))
+- Loading State for Rails Form, Resolution of Dialog Loading [\#3753](https://github.com/powerhome/playbook/pull/3753) ([skduncan](https://github.com/skduncan))
+
+**Fixed Bugs:**
+- Advanced Table Kit "toggle all" is Inverted in Rails [\#3790](https://github.com/powerhome/playbook/pull/3790) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Truncating the Typeahead FormPill Text [\#3738](https://github.com/powerhome/playbook/pull/3738) ([carloslimasd](https://github.com/carloslimasd))
+- Fixing icon display for markdown helper [\#3754](https://github.com/powerhome/playbook/pull/3754) ([skduncan](https://github.com/skduncan))
+- Set Total Tickets Hero Gauge Height to 150px instead of 25% [\#3752](https://github.com/powerhome/playbook/pull/3752) ([kangaree](https://github.com/kangaree))
+- Dropdown ClassName Fix [\#3845](https://github.com/powerhome/playbook/pull/3845) ([@nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+- Upgrade intl-tel-input to Latest and Make Fixes [\#3791](https://github.com/powerhome/playbook/pull/3791) ([kangaree](https://github.com/kangaree))
+- Bump react-zoom-pan-pinch from 2.6.1 to 3.6.0 [\#3817](https://github.com/powerhome/playbook/pull/3817) ([kangaree](https://github.com/kangaree))
+- Update react modal version [\#3819](https://github.com/powerhome/playbook/pull/3819) ([markdoeswork](https://github.com/markdoeswork))
+- Add rdbms to playbook-website [\#3778](https://github.com/powerhome/playbook/pull/3778) ([indiebrain](https://github.com/indiebrain))
+- Show htmlOptions as a Global Prop [\#3755](https://github.com/powerhome/playbook/pull/3755) ([skduncan](https://github.com/skduncan))
+- Support Multiple Versions of ruby/psych [\#3751](https://github.com/powerhome/playbook/pull/3751) ([xjunior](https://github.com/xjunior))
+- More storage for CI image builds [\#3767](https://github.com/powerhome/playbook/pull/3767) ([benlangfeld](https://github.com/benlangfeld))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.5.0...14.6.2)
+
+
 # 🐝 Improved Usability, Flexibility, Customization and More! 🐝
 ##### October 1, 2024 
 
