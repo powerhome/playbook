@@ -18,6 +18,7 @@ import Cursor from "../VisualGuidelines/Examples/Cursor";
 import FlexBox from "../VisualGuidelines/Examples/FlexBox";
 import Position from "../VisualGuidelines/Examples/Position";
 import Hover from "../VisualGuidelines/Examples/Hover";
+import GroupHover from "../VisualGuidelines/Examples/GroupHover";
 import TextAlign from "../VisualGuidelines/Examples/TextAlign";
 import Overflow from "./Examples/Overflow";
 import Truncate from "./Examples/Truncate";
@@ -82,6 +83,8 @@ const VisualGuidelines = ({
         return <VerticalAlign example={examples.vertical_align_jsx}/>;
       case "hover":
         return <Hover example={examples.hover_jsx}/>;
+      case "group_hover":
+        return <GroupHover example={examples.group_hover_jsx}/>;
       case "text_align":
         return <TextAlign example={examples.text_align_jsx} />
       case "overflow":

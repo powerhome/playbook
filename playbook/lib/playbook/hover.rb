@@ -4,6 +4,7 @@ module Playbook
   module Hover
     def self.included(base)
       base.prop :hover
+      base.prop :group_hover, type: Playbook::Props::Boolean, default: false
     end
 
     def hover_options
@@ -38,7 +39,8 @@ module Playbook
 
     def hover_props
       selected_props = hover_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+
+      return nil if selected_props.nil? && group_hover.nil?
 
       responsive = selected_props.present? && try(selected_props.first).is_a?(::Hash)
       css = ""
@@ -58,6 +60,7 @@ module Playbook
         end
       end
 
+      css += "group_hover " if group_hover
       css.strip unless css.blank?
     end
   end
