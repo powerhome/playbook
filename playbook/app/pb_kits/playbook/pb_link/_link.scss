@@ -1,6 +1,7 @@
 @import "../tokens/colors";
 @import "../tokens/line_height";
 @import "../tokens/typography";
+@import "../tokens/border_radius";
 
 $pb_link_colors: (
   default:        $primary_action,
@@ -36,6 +37,14 @@ $pb_link_hover_colors: (
   @include pb_link($primary);
   &:hover {
     color: $text_lt_default;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:focus-visible {
+    border-radius: $border_rad_light;
+    outline: 1px solid $primary;
+    outline-offset: 2px;
   }
   @each $color_name, $color_value in $pb_link_colors {
     &[class*=_#{"" + $color_name}] {
