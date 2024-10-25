@@ -28,7 +28,7 @@
     "@tiptap/extension-link": "^2.0.2",
     "@tiptap/extension-paragraph": "^2.1.12",
     "@tiptap/extension-text": "^2.1.12",
-    "@tiptap/pm": "^2.0.2",
+    "@tiptap/pm": "^2.9.1",
     "@tiptap/react": "^2.0.2",
     "@tiptap/starter-kit": "^2.0.2",
     "@vitejs/plugin-react": "^4.3.1",
