@@ -52,9 +52,9 @@ const Link = (props: LinkProps): React.ReactElement => {
     globalProps(props),
     className
   )
-  const Tag: keyof JSX.IntrinsicElements = `${tag}`
+  const Tag = tag as keyof JSX.IntrinsicElements
 
-  const content = (
+  const renderContent = () => (
     <>
       {icon && (
         <Icon
@@ -76,32 +76,30 @@ const Link = (props: LinkProps): React.ReactElement => {
     </>
   )
 
+  const commonProps = {
+    ...ariaProps,
+    ...dataProps,
+    ...htmlProps,
+    className: classes,
+    id,
+  }
+
   if (tag === 'a') {
     return (
-      <Tag
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={classes}
+      <a
+          {...commonProps}
           href={href}
-          id={id}
       >
-        {content}
-      </Tag>
+        {renderContent()}
+      </a>
     )
   } else {
     return (
       <a
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={classes}
+          {...commonProps}
           href={href}
-          id={id}
       >
-        <Tag>
-          {content}
-        </Tag>
+        <Tag>{renderContent()}</Tag>
       </a>
     )
   }
