@@ -74,10 +74,8 @@ const Dropdown = forwardRef((props: DropdownProps, ref: any) => {
     const htmlProps = buildHtmlProps(htmlOptions);
     const separatorsClass = separators ? '' : 'separators_hidden'
     const classes = classnames(
-        buildCss("pb_dropdown"),
+        buildCss("pb_dropdown", variant, separatorsClass),
         globalProps(props),
-        variant,
-        separatorsClass,
         className
     );
 
