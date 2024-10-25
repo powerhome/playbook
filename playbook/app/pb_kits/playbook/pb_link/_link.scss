@@ -10,19 +10,25 @@ $pb_link_colors: (
   destructive:    $error,
 );
 
-// Match regular colors. Need to Update.
-$pb_dark_link_colors: (
-  default:        $primary_action,
-  body:           $text_lt_default,
-  muted:          $text_lt_light,
-  destructive:    $error,
-);
-
 $pb_link_hover_colors: (
   default:        $text_lt_default,
   body:           $primary_action,
   muted:          $text_lt_default,
   destructive:    $text_lt_default,
+);
+
+$pb_dark_link_colors: (
+  default:        $active_dark,
+  body:           $text_dk_default,
+  muted:          $text_dk_light,
+  destructive:    $error_dark,
+);
+
+$pb_dark_link_hover_colors: (
+  default:        $text_dk_default,
+  body:           $active_dark,
+  muted:          $text_dk_default,
+  destructive:    $text_dk_default,
 );
 
 @mixin pb_link($color: $primary_action) {
@@ -45,6 +51,12 @@ $pb_link_hover_colors: (
   &:visited {
     color: $data_3;
   }
+  &.dark  {
+    @include pb_link($active_dark);
+    &:hover {
+      color: $text_dk_default;
+    }
+  }
   @each $color_name, $color_value in $pb_link_colors {
     &[class*=_#{"" + $color_name}] {
       @include pb_link($color_value);
@@ -64,43 +76,11 @@ $pb_link_hover_colors: (
       @include pb_link($dark_color_value);
       
       &:hover {
-        color: map-get($pb_link_hover_colors, $dark_color_name);
+        color: map-get($pb_dark_link_hover_colors, $dark_color_name);
       }
 
       &:visited {
         color: $data_3;
-      }
-    }
-  }
-
-  b, strong {
-    font-weight: $bold;
-  }
-
-  a {
-    color: $primary;
-    &:hover {
-      color: green;
-    }
-  }
-
-  em, i {
-    font-style: italic;
-  }
-
-  small {
-    font-size: $font_smaller;
-    letter-spacing: $lspace_loose;
-  }
-
-  &[class*=dark] {
-    a {
-      color: $active_dark;
-    }
-    @include pb_body_dark();
-    @each $dark_color_name, $dark_color_value in $pb_dark_link_colors{
-      &[class*=_#{$dark_color_name}][class*=dark]{
-        @include pb_link($dark_color_value);
       }
     }
   }
