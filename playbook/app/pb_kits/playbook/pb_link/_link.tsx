@@ -22,7 +22,6 @@ type LinkProps = {
   tag?: 'a' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
   underline?: boolean,
-  variant?: '' | 'link',
 } & GlobalProps
 
 const Link = (props: LinkProps): React.ReactElement => {
@@ -41,14 +40,13 @@ const Link = (props: LinkProps): React.ReactElement => {
     tag = 'a',
     text = '',
     underline = false,
-    variant = '',
   } = props
 
   const ariaProps: {[key: string]: string} = buildAriaProps(aria)
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
-    buildCss('pb_link_kit', color, variant, underline ? 'underline' : '', disabled ? 'disabled' : ''),
+    buildCss('pb_link_kit', color, underline ? 'underline' : '', disabled ? 'disabled' : ''),
     globalProps(props),
     className
   )
