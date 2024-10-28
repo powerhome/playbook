@@ -542,6 +542,9 @@ kits:
       be followed by Title 2s followed by Title 3s and so on, without skipping any
       levels.
     status: stable
+  - name: link
+    platforms: *1
+    status: beta
 - category: user
   description:
   components:
@@ -572,8 +575,3 @@ kits:
       with avatar, titles, name and territory. This is a versatile kit with features
       than can be added to display more info.
     status: stable
-- category: link
-  components:
-    - name: link
-      platforms: all
-      status: beta
