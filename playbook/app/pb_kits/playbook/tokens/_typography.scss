@@ -51,3 +51,36 @@ $boldest:       700 !default;
 $bolder:        700 !default;
 $light:         300 !default;
 $lighter:       300 !default;
+
+/* Link Colors */
+$pb_link_colors: (
+  default:        $primary_action,
+  body:           $text_lt_default,
+  muted:          $text_lt_light,
+  destructive:    $error,
+);
+
+$pb_link_hover_colors: (
+  default:        $text_lt_default,
+  body:           $primary_action,
+  muted:          $text_lt_default,
+  destructive:    $text_lt_default,
+);
+
+$pb_dark_link_colors: (
+  default:        $active_dark,
+  body:           $text_dk_default,
+  muted:          $text_dk_light,
+  destructive:    $error_dark,
+);
+
+$pb_dark_link_hover_colors: (
+  default:        $text_dk_default,
+  body:           $active_dark,
+  muted:          $text_dk_default,
+  destructive:    $text_dk_default,
+);
+
+@mixin pb_link($color: $primary_action) {
+  color: $color;
+}
