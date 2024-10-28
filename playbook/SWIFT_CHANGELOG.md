@@ -1,3 +1,35 @@
+# 🚀 Playbook Swift 6.4.0: Enhanced Buttons, Truncations, and Dynamic Typeahead! 🚀
+##### Oct 18, 2024
+![image](https://github.com/user-attachments/assets/875ae784-bb68-47e1-ae67-3d25e90f427e)
+
+The latest release, Playbook Swift 6.4.0, brings new enhancements focused on flexibility, user experience, and seamless integrations. Key highlights include the new **Destructive Button**, adjustments to **Typeahead** for height and list display, and improved truncation in the User Kit for a cleaner, more responsive UI.
+
+### Playbook Changes
+
+#### Kit Enhancements
+- **Destructive Button**: A new button style designed for critical actions. (#457)
+- **Height Adjusted Dropdown**: Improved dropdown to better fit varied content heights. (#450)
+- **User Kit Truncation**: Tighter, more dynamic user name displays. (#458)
+- **Add Props to PBMessage**: Additional properties to further customize PBMessage. (#456)
+- **Typeahead Enhancements**:
+  - **Show No Option**: Now includes messaging when no options are available. (#455)
+  - **Section List**: Categorized options for a more organized typeahead. (#459)
+  - **Initial Value Support**: Set a starting value in PBSwift Typeahead.
+  - **Truncated User Name Support**: Cleaner user name display in User Kit.
+
+#### Bug Fixes
+- **Message Component Cursor Fix**: Improved cursor behavior for smooth typing experiences. (#454)
+
+#### Documentation Updates
+- **Typeahead Enhancements**: Documented updates for scrollable lists, dropdown height adjustments, conversation name display, and improved conversation management options.
+
+#### Connect-Specific
+- **Conditional Popover Handler**: Fixed the “Close” button issue with a new conditional handler. (#565)
+
+🔗 **Full Changelog**: https://github.com/powerhome/playbook-swift/compare/6.3.1...6.4.0
+
+
+
 # ✨ Dynamic Status Indicators & Interactive Messaging! ✨
 ##### Sept 20, 2024
 ![image](https://github.com/user-attachments/assets/84b6e16c-9fa4-45ba-b00f-6ffa223dbbb4)
