@@ -77,7 +77,7 @@ export default defineConfig({
         },
         {
           src: resolve(__dirname, '../docs/README.md'),
-          dest: resolve(__dirname, 'dist'),
+          dest: resolve(__dirname, './'),
           rename: 'README.md'
         },
       ]

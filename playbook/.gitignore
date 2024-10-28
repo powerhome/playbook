@@ -27,6 +27,7 @@ spec_results/
 spec/examples.txt
 dist
 .npmrc
+README.md
 
 # Vite Ruby
 .vite-build
