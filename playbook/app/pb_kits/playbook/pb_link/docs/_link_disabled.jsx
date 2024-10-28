@@ -5,7 +5,7 @@ const LinkDisabled = (props) => (
   <div>
     <Link
         disabled
-        href="#"
+        href="#disabled"
         text="link example"
         {...props}
     />

@@ -4,14 +4,14 @@ import { Link } from 'playbook-ui'
 const LinkTag = (props) => (
   <div>
     <Link
-        href="https://www.google.com/"
+        href="#tag"
         icon="arrow-up-right-from-square"
         tag="h1"
         text="h1 link example"
         {...props}
     />
     <Link
-        href="https://www.google.com/"
+        href="#tag2"
         tag="h3"
         text="h3 link example"
         underline
@@ -19,13 +19,13 @@ const LinkTag = (props) => (
     />
     <Link
         color="destructive"
-        href="https://www.google.com/"
+        href="#tag3"
         tag="h6"
         text="h6 link example"
         {...props}
     />
     <Link
-        href="https://www.google.com/"
+        href="#tag4"
         iconRight="chevron-right"
         tag="p"
         text="p link example"
@@ -33,7 +33,7 @@ const LinkTag = (props) => (
     />
     <div>
       This is a <Link
-          href="https://www.google.com/"
+          href="#tag5"
           tag="span"
           text="span link example"
           {...props}

@@ -13,7 +13,7 @@ const LinkIcon = (props) => (
     </div>
     <div>
       <Link
-          href="#icon"
+          href="#icon2"
           iconRight="chevron-right"
           text="link example"
           {...props}

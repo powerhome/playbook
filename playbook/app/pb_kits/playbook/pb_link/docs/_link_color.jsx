@@ -5,7 +5,7 @@ const LinkColor = (props) => (
   <div>
     <div>
       <Link
-          href="https://www.google.com/"
+          href="https://www.google.com/search?q=playbook+design+system"
           text="link example"
           {...props}
       />
@@ -13,7 +13,7 @@ const LinkColor = (props) => (
     <div>
       <Link
           color="body"
-          href="https://www.youtube.com/"
+          href="https://www.youtube.com/@PowerHRG"
           text="link example"
           {...props}
       />
@@ -21,7 +21,7 @@ const LinkColor = (props) => (
     <div>
       <Link
           color="muted"
-          href="https://www.facebook.com/"
+          href="https://github.com/powerhome/.github/blob/main/profile/README.md"
           text="link example"
           {...props}
       />
@@ -29,7 +29,7 @@ const LinkColor = (props) => (
     <div>
       <Link
           color="destructive"
-          href="https://www.instagram.com/"
+          href="https://rubygems.org/gems/playbook_ui/"
           text="link example"
           {...props}
       />
