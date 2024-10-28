@@ -1,3 +1,20 @@
+# ✨ Dynamic Status Indicators & Interactive Messaging! ✨
+##### Sept 20, 2024
+![image](https://github.com/user-attachments/assets/84b6e16c-9fa4-45ba-b00f-6ffa223dbbb4)
+
+We’re excited to introduce Playbook Swift 6.3.0, featuring two key updates: a customizable PBAvatar status indicator size and new interactivity for the message kit, delivering more responsive, intuitive user experiences. Here’s what’s new:
+
+**Kit Enhancements**
+- **PBAvatar Status Indicator Size**: Adjust and style status indicators with more control for a sharper, polished look. #525
+- **Handle Click on Message Kit**: Respond to user interactions seamlessly, elevating message engagement. #526
+- **Dark Mode Reaction Button Improvements**: Enhanced visibility with border and button refinements for Dark Mode. #508, #528
+
+### Bug Fix
+- **Online Status Color**: Ensuring accurate color representation for improved visual clarity. #566
+  
+
+🔗 **Full Changelog**: https://github.com/powerhome/playbook-swift/compare/6.2.0...6.3.0
+
 # ✨ Enhance, Customize, and Expand! ✨
 ##### Aug 28, 2024
 
