@@ -75,11 +75,6 @@ export default defineConfig({
           dest: 'dist/tokens',
           rename: (name, extension) => `${name.replace('_', '')}.${extension}`
         },
-        {
-          src: resolve(__dirname, '../docs/README.md'),
-          dest: resolve(__dirname, './'),
-          rename: 'README.md'
-        },
       ]
     }),
     typescript({
