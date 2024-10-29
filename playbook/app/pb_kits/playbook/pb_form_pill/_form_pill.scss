@@ -142,7 +142,9 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
     height: 12px !important;
     width: 12px !important;
     padding-right: $space_xs;
-    + .pb_form_pill_text, + .pb_form_pill_tag {
+    + .pb_form_pill_text, + .pb_form_pill_tag, 
+    + .pb_tooltip_kit .pb_form_pill_text, + .pb_tooltip_kit .pb_form_pill_tag,
+    + div .pb_form_pill_text, + div .pb_form_pill_tag {
       padding-left: 0;
     }
   }
@@ -169,7 +171,9 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
     }
     .pb_form_pill_icon {
       padding-right: $space_xxs;
-      + .pb_form_pill_text, + .pb_form_pill_tag {
+      + .pb_form_pill_text, + .pb_form_pill_tag, 
+      + .pb_tooltip_kit .pb_form_pill_text, + .pb_tooltip_kit .pb_form_pill_tag,
+      + div .pb_form_pill_text, + div .pb_form_pill_tag {
         padding-left: 0;
       }
     }
