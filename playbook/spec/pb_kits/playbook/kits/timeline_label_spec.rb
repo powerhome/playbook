@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_timeline/date_area"
+require_relative "../../../../app/pb_kits/playbook/pb_timeline/label"
 
-RSpec.describe Playbook::PbTimeline::DateArea do
-  subject { Playbook::PbTimeline::DateArea }
+RSpec.describe Playbook::PbTimeline::Label do
+  subject { Playbook::PbTimeline::Label }
 
   it { is_expected.to define_prop(:date) }
 

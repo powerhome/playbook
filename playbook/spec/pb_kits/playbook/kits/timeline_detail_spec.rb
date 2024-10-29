@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_timeline/detail_area"
+require_relative "../../../../app/pb_kits/playbook/pb_timeline/detail"
 
-RSpec.describe Playbook::PbTimeline::DetailArea do
-  subject { Playbook::PbTimeline::DetailArea }
+RSpec.describe Playbook::PbTimeline::Detail do
+  subject { Playbook::PbTimeline::Detail }
 
   describe "#classname" do
     it "returns the correct class name" do

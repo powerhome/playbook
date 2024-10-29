@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_timeline/node_area"
+require_relative "../../../../app/pb_kits/playbook/pb_timeline/step"
 
-RSpec.describe Playbook::PbTimeline::NodeArea do
-  subject { Playbook::PbTimeline::NodeArea }
+RSpec.describe Playbook::PbTimeline::Step do
+  subject { Playbook::PbTimeline::Step }
 
   it { is_expected.to define_prop(:icon) }
 
