@@ -129,7 +129,7 @@ $pb_selectable_paddings: (
     }
   }
 
-  &[class*=_display_input] {
+  &.display_input {
     input[type="checkbox"],
     input[type="radio"] {
       &:checked {
