@@ -20,7 +20,7 @@ The latest release, Playbook Swift 6.4.0, brings new enhancements focused on fle
 #### Bug Fixes
 - **Message Component Cursor Fix**: Improved cursor behavior for smooth typing experiences. (#454)
 
-#### Documentation Updates
+### Documentation Updates
 - **Typeahead Enhancements**: Documented updates for scrollable lists, dropdown height adjustments, conversation name display, and improved conversation management options.
 
 ### Connect-Specific
