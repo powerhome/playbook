@@ -24,7 +24,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_dropdown", variant, separators_class, separator: " ")
+        generate_classname("pb_dropdown", variant, separators_class)
       end
 
     private
@@ -38,7 +38,7 @@ module Playbook
       end
 
       def separators_class
-        separators ? "" : "separators_hidden"
+        separators ? nil : "separators_hidden"
       end
 
       def options_with_blank

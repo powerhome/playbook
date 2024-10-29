@@ -50,7 +50,7 @@ test('generated default kit and classname', () => {
 
   const kit = screen.getByTestId(testId)
   expect(kit).toBeInTheDocument()
-  expect(kit).toHaveClass('pb_dropdown')
+  expect(kit).toHaveClass('pb_dropdown_default')
 })
 
 test('generated default Trigger and Container when none passed in', () => {
