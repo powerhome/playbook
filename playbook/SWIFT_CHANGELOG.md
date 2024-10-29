@@ -23,7 +23,7 @@ The latest release, Playbook Swift 6.4.0, brings new enhancements focused on fle
 #### Documentation Updates
 - **Typeahead Enhancements**: Documented updates for scrollable lists, dropdown height adjustments, conversation name display, and improved conversation management options.
 
-**Connect-Specific**
+### Connect-Specific
 - **Conditional Popover Handler**: Fixed the “Close” button issue with a new conditional handler. (#565)
 
 🔗 **Full Changelog**: https://github.com/powerhome/playbook-swift/compare/6.3.1...6.4.0
