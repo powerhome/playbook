@@ -47,7 +47,7 @@ interface DropdownComponent
     Container: typeof DropdownContainer;
 }
 
-const Dropdown = forwardRef((props: DropdownProps, ref: any) => {
+let Dropdown = (props: DropdownProps, ref: any) => {
     const {
         aria = {},
         autocomplete = false,
@@ -278,8 +278,9 @@ const Dropdown = forwardRef((props: DropdownProps, ref: any) => {
             </DropdownContext.Provider>
         </div>
     )
-}) as DropdownComponent
+}
 
+Dropdown = forwardRef(Dropdown) as DropdownComponent;
 Dropdown.displayName = "Dropdown";
 Dropdown.Option = DropdownOption;
 Dropdown.Trigger = DropdownTrigger;
