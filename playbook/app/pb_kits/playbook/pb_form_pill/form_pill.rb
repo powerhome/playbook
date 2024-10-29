@@ -16,6 +16,8 @@ module Playbook
                    default: "primary"
       prop :tabindex
       prop :icon
+      prop :truncate, type: Playbook::Props::Number,
+                      default: nil
 
       def classname
         generate_classname("pb_form_pill_kit", color, icon_class, name, text, text_transform)

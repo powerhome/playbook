@@ -1,17 +1,49 @@
 <%= content_tag(:div, id: object.id, data: object.data, class: object.classname + object.size_class, tabindex: object.tabindex, **combined_html_options) do %>
   <% if object.name.present? %>
     <%= pb_rails("avatar", props: { name: object.name, image_url: object.avatar_url, size: "xxs" }) %>
-    <%= pb_rails("title", props: { text: object.name, size: 4, classname: "pb_form_pill_text" }) %>
+    <% element_id = "pill_#{object.name.parameterize}" %>
+    <div>
+      <%= pb_rails("title", props: { 
+        classname: "pb_form_pill_text #{object.truncate ? "truncate_#{object.truncate}" : ""}",
+        id: element_id,
+        size: 4, 
+        text: object.name,
+      }) %>
+      <% if object.truncate %>
+        <%= pb_rails("tooltip", props: {
+          position: "top",
+          tooltip_id: "tooltip-#{element_id}",
+          trigger_element_selector: "##{element_id}"
+        }) do %>
+          <%= object.name %>
+        <% end %>
+      <% end %>
+    </div>
     <% if object.icon.present? %>
       <%= pb_rails("icon", props: { classname: "pb_form_pill_icon", color: object.color, icon: object.icon }) %>
     <% end %>
   <% elsif object.text.present? %>
-      <% if object.icon.present? %>
-        <%= pb_rails("icon", props: { classname: "pb_form_pill_icon", color: object.color, icon: object.icon }) %>
+    <% if object.icon.present? %>
+      <%= pb_rails("icon", props: { classname: "pb_form_pill_icon", color: object.color, icon: object.icon }) %>
+    <% end %>
+    <% element_id = "pill_#{object.text.parameterize}" %>
+    <div>
+      <%= pb_rails("title", props: { 
+        classname: "pb_form_pill_tag #{object.truncate ? "truncate_#{object.truncate}" : ""}",
+        id: element_id,
+        size: 4, 
+        text: object.text
+      }) %>
+      <% if object.truncate %>
+        <%= pb_rails("tooltip", props: {
+          position: "top",
+          tooltip_id: "tooltip-#{element_id}",
+          trigger_element_selector: "##{element_id}"
+        }) do %>
+          <%= object.text %>
+        <% end %>
       <% end %>
-      <% if object.text.present? %>
-        <%= pb_rails("title", props: { text: object.text, size: 4, classname: "pb_form_pill_tag" }) %>
-      <% end %>
+    </div>
   <% end %>
   <%= pb_rails("body", props: { classname: "pb_form_pill_close" }) do %>
     <%= pb_rails("icon", props: { icon: 'times', fixed_width: true, size: object.close_icon_size }) %>
