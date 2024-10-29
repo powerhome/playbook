@@ -1,20 +1,20 @@
 <%= pb_content_tag do %>
-  <% if date_area %>
-    <%= date_area %>
+  <% if label %>
+    <%= label %>
   <% else %>
-    <%= pb_rails("timeline/date_area", props: { date: date }) %>
+    <%= pb_rails("timeline/label", props: { date: date }) %>
   <% end %>
 
-  <% if node_area %>
-    <%= node_area %>
+  <% if step %>
+    <%= step %>
   <% else %>
-    <%= pb_rails("timeline/node_area", props: { icon: icon, icon_color: icon_color }) %>
+    <%= pb_rails("timeline/step", props: { icon: icon, icon_color: icon_color }) %>
   <% end %>
 
-  <% if detail_area %>
-    <%= detail_area %>
+  <% if detail%>
+    <%= detail%>
   <% else %>
-    <%= pb_rails("timeline/detail_area") do %>
+    <%= pb_rails("timeline/detail") do %>
       <%= content %>
     <% end %>
   <% end %>

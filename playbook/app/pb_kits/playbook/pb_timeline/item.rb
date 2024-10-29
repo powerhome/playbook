@@ -13,9 +13,9 @@ module Playbook
                         values: %w[solid dotted],
                         default: "solid"
 
-      renders_one :date_area
-      renders_one :node_area
-      renders_one :detail_area
+      renders_one :label
+      renders_one :step
+      renders_one :detail
 
       def classname
         generate_classname("pb_timeline_item_kit", line_style)

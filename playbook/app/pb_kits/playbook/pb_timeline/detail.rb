@@ -2,7 +2,7 @@
 
 module Playbook
   module PbTimeline
-    class DetailArea < Playbook::KitBase
+    class Detail < Playbook::KitBase
       def classname
         generate_classname("pb_timeline_item_right_block")
       end

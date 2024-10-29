@@ -2,7 +2,7 @@
 
 module Playbook
   module PbTimeline
-    class DateArea < Playbook::KitBase
+    class Label < Playbook::KitBase
       prop :date
 
       def classname

@@ -2,7 +2,7 @@
 
 module Playbook
   module PbTimeline
-    class NodeArea < Playbook::KitBase
+    class Step < Playbook::KitBase
       prop :icon, type: Playbook::Props::String
       prop :icon_color, type: Playbook::Props::Enum,
                         values: %w[default royal blue purple teal red yellow green],
