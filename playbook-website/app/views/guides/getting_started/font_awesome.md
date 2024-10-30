@@ -21,47 +21,11 @@ Integrating Font Awesome with Playbook ensures that you have access to these ben
 
 **Make sure you are on Rails 7 or higher.**
 
-**1.** Create your new app
+**1.** Follow the [Ruby on Rails Setup getting started page](/guides/getting_started/ruby_on_rails_setup) to setup Playbook with your Rails project.
 
-```sh
-rails new CoolNewApp
-```
+**2.** Setup Pro or Free Font Awesome to use our Icon Component.
 
-**2.** Add the sassc-rails gem as [outlined by Rails docs](/guides/getting_started/ruby_on_rails_setup) & add our playbook_ui ruby gem inside your Gemfile. 
-
-```rb
-# app/Gemfile
- gem "sassc-rails"
- gem "playbook_ui"
-```
-
-**3.** Add the View Helper to enable Rails Kits
-
-```rb
-# app/controllers/application_controller.rb
- helper Playbook::PbKitHelper
-```
-
-**4.** Import the Playbook Kit Styles
-
-```rb
-# app/assets/stylesheets/application.scss
- @import "playbook";
-```
-
-or be selective:
-
-```rb
-# app/assets/stylesheets/application.scss
- @import "tokens/index";
- @import "pb_body/body";
-```
-
-**5.** Setup Pro or Free Font Awesome to use our Icon Component.
-
-*Free Users: currently only [Free Regular](https://fontawesome.com/search?o=r&m=free&s=regular) icons are supported in our icon component structure.*
-
-Pro:
+**Pro:**
 
 ```rb
 # app/assets/stylesheets/application.scss
@@ -78,7 +42,9 @@ Pro:
  end
 ```
 
-Free:
+**Free:**
+
+*Currently only [Free Regular](https://fontawesome.com/search?o=r&m=free&s=regular) icons are supported in our icon component structure.*
 
 ```rb
 # app/assets/stylesheets/application.scss
@@ -92,13 +58,13 @@ Free:
  end
 ```
 
-**6.** Bundle all the things!
+**3.** Bundle all the things!
 
 ```sh
 bundle install
 ```
 
-**7.** **Go build awesome stuff!**
+**4.** **Go build awesome stuff!**
 
 Refer to our [Icon kit](/kits/icon) to get started with Font Awesome icons in Playbook. 
 
