@@ -71,8 +71,8 @@ navigation[:whats_new] = {
 
 # Move HTML figma to the end
 
-move_pages = navigation[:getting_started][:pages].select { |page| ["HTML&_CSS", "figma_setup", "how_to_theme"].include?(page[:page_id]) }
-navigation[:getting_started][:pages].reject! { |page| ["HTML&_CSS", "figma_setup", "how_to_theme"].include?(page[:page_id]) }
+move_pages = navigation[:getting_started][:pages].select { |page| ["HTML&_CSS", "figma_setup", "how_to_theme", "font_awesome"].include?(page[:page_id]) }
+navigation[:getting_started][:pages].reject! { |page| ["HTML&_CSS", "figma_setup", "how_to_theme", "font_awesome"].include?(page[:page_id]) }
 navigation[:getting_started][:pages].concat(move_pages)
 
 DOCS = navigation
