@@ -46,7 +46,7 @@
     "@actions/github": "4.0.0",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
-    "@babel/preset-typescript": "^7.15.0",
+    "@babel/preset-typescript": "^7.26.0",
     "@codesandbox/sandpack-react": "^2.12.1",
     "@floating-ui/react": "^0.22.2",
     "@rollup/plugin-typescript": "^11.1.6",
