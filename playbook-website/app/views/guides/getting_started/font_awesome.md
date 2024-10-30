@@ -1,17 +1,17 @@
 ---
 title: Font Awesome Setup
-description: Icons in a design system are small graphical elements that represent actions, objects, and symbols.
+description: Playbook seamlessly integrates with Font Awesome, a leading icon library known for its extensive collection of high-quality, scalable icons. This integration not only enhances the visual appeal of websites and applications but also improves overall usability.
 icon: font-awesome
 ---
 
-Playbook integrates with [Font Awesome 6 Pro](https://fontawesome.com/), a premium icon library, because of its extensive collection of high-quality icons. This integration enhances the visual appeal and usability of websites and applications. 
+Playbook seamlessly integrates with [Font Awesome](https://fontawesome.com/), a leading icon library known for its extensive collection of high-quality, scalable icons. This integration not only enhances the visual appeal of websites and applications but also improves overall usability. 
 
 Some Font Awesome benefits:
 
-**1. Wide Range of Icons:** Font Awesome offers a vast selection of icons that cater to various needs, ensuring you can find the perfect icon for any project.
-**2. Ease of Use:** The icons are straightforward to implement, allowing you to quickly and easily add visual elements to your web projects.
-**3. Visual Appeal:** Incorporating these icons can improve the aesthetic of your site or application, making it more attractive to users.
-**4. User-Friendliness:** Icons can help users navigate and understand your website or application more efficiently, enhancing their overall experience. 
+**1. Wide Range of Icons:** Font Awesome offers a vast selection of icons to suit a variety of needs. You can easily find the perfect icon for your project through their [icon search](https://fontawesome.com/search).
+**2. Ease of Use:** The icons are straightforward to implement. With just a few lines of code, you can quickly and easily add visual elements to your web projects. Note, a Pro subscription is required for access to a wider range of icons beyond the [Free set](https://fontawesome.com/search?o=r&m=free&s=regular).
+**3. Visual Appeal:** Incorporating these icons can improve the aesthetic of your site or application, making it more attractive to users. With Playbook, you have the flexibility to customize color, size, and animations.
+**4. User-Friendliness:** Icons can help users navigate and understand your website or application more efficiently, enhancing their overall experience. Font Awesome icons are web fonts compatible with most browsers and are optimized for performance and accessibility.
 
 Integrating Font Awesome with Playbook ensures that you have access to these benefits, making your projects more polished and professional.
 
@@ -19,7 +19,7 @@ Integrating Font Awesome with Playbook ensures that you have access to these ben
 
 ## Rails Setup (default with asset pipeline)
 
-**Make sure you have Rails 7 or higher. This example used 7.0.8**
+**Make sure you are on Rails 7 or higher.**
 
 **1.** Create your new app
 
@@ -32,7 +32,7 @@ rails new CoolNewApp
 ```rb
 # app/Gemfile
  gem "sassc-rails"
- gem "playbook_ui", "~>11.4.0"
+ gem "playbook_ui"
 ```
 
 **3.** Add the View Helper to Enable Rails Kits
