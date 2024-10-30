@@ -1,0 +1,66 @@
+@import "../tokens/colors";
+@import "../tokens/line_height";
+@import "../tokens/typography";
+@import "../tokens/border_radius";
+
+[class^=pb_link_kit]{
+  @include pb_link($primary);
+  &:hover {
+    color: $text_lt_default;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:focus-visible {
+    border-radius: $border_rad_light;
+    outline: 1px solid $primary;
+    outline-offset: 2px;
+  }
+  &:visited {
+    color: $data_3;
+  }
+  &.dark  {
+    @include pb_link($active_dark);
+    &:hover {
+      color: $text_dk_default;
+    }
+  }
+  @each $color_name, $color_value in $pb_link_colors {
+    &[class*=_#{"" + $color_name}] {
+      @include pb_link($color_value);
+
+      &:hover {
+        color: map-get($pb_link_hover_colors, $color_name);
+      }
+
+      &:visited {
+        color: $data_3;
+      }
+    }
+  }
+
+  @each $dark_color_name, $dark_color_value in $pb_dark_link_colors{
+    &[class*=_#{$dark_color_name}][class*=dark]{
+      @include pb_link($dark_color_value);
+      
+      &:hover {
+        color: map-get($pb_dark_link_hover_colors, $dark_color_name);
+      }
+
+      &:visited {
+        color: $data_3;
+      }
+    }
+  }
+
+  &[class*=_underline] {
+    text-decoration: underline;
+  }
+
+  &[class*=_disabled] {
+    pointer-events: none;
+    cursor: default;
+    color: $text_lt_lighter;
+  }
+
+}
