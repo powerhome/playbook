@@ -17,7 +17,7 @@ Integrating Font Awesome with Playbook ensures that you have access to these ben
 
 ![Font Awesome Icons](https://cdn.hashnode.com/res/hashnode/image/upload/v1702882676689/8da380bd-d295-4d7f-8d29-7154ab845781.png)
 
-## Rails Setup (default with asset pipeline)
+## Ruby on Rails Setup (default with asset pipeline)
 
 **Make sure you are on Rails 7 or higher.**
 
@@ -35,14 +35,14 @@ rails new CoolNewApp
  gem "playbook_ui"
 ```
 
-**3.** Add the View Helper to Enable Rails Kits
+**3.** Add the View Helper to enable Rails Kits
 
 ```rb
 # app/controllers/application_controller.rb
  helper Playbook::PbKitHelper
 ```
 
-**4.** Import the Kit Styles
+**4.** Import the Playbook Kit Styles
 
 ```rb
 # app/assets/stylesheets/application.scss
@@ -57,7 +57,9 @@ or be selective:
  @import "pb_body/body";
 ```
 
-**5.** Setup Pro or Free Font Awesome to use our Icon Component. (Free Users: currently only Free Regular is supported in our icon component structure)
+**5.** Setup Pro or Free Font Awesome to use our Icon Component.
+
+*Free Users: currently only [Free Regular](https://fontawesome.com/search?o=r&m=free&s=regular) icons are supported in our icon component structure*
 
 Pro:
 
@@ -90,10 +92,10 @@ Free:
  end
 ```
 
-Bundle all the things!
+**6.** Bundle all the things!
 
 ```sh
 bundle install
 ```
 
-**6.** **Go build awesome stuff!**
+**7.** **Go build awesome stuff!**
