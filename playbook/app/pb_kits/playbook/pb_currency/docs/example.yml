@@ -8,8 +8,7 @@ examples:
   - currency_abbreviated: Abbreviate Larger Amounts
   - currency_matching_decimals: Matching Decimals
   - currency_unstyled: Unstyled
-  - currency_comma_separator: Comma Separator
-  
+
   react:
   - currency_variants: Variants
   - currency_size: Size
@@ -18,7 +17,6 @@ examples:
   - currency_abbreviated: Abbreviate Larger Amounts
   - currency_matching_decimals: Matching Decimals
   - currency_unstyled: Unstyled
-  - currency_comma_separator: Comma Separator
 
   swift:
   - currency_size_swift: Size

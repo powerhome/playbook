@@ -15,7 +15,6 @@ RSpec.describe Playbook::PbCurrency::Currency do
   it { is_expected.to define_enum_prop(:variant).with_default("default").with_values("default", "light", "bold") }
   it { is_expected.to define_prop(:abbreviate).with_default(false).of_type(Playbook::Props::Boolean) }
   it { is_expected.to define_enum_prop(:decimals).with_default("default").with_values("default", "matching") }
-  it { is_expected.to define_prop(:comma_separator).with_default(false).of_type(Playbook::Props::Boolean) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -74,14 +73,6 @@ RSpec.describe Playbook::PbCurrency::Currency do
 
       expect(num.title_props[:text]).to eq "320"
       expect(num.body_props[:text]).to eq ".20"
-    end
-  end
-
-  describe "when prop commaSeparator is set to true" do
-    it "returns comma separated amount" do
-      num = subject.new(comma_separator: true, amount: "1234567890")
-
-      expect(num.title_props[:text]).to eq "1,234,567,890"
     end
   end
 end
