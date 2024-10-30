@@ -3760,6 +3760,13 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.5.tgz#a6ce3e556e00fd9895dd872dd172ad0d4bd687f4"
   integrity sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==
 
+"@types/flatpickr@3.1.2":
+  version "3.1.2"
+  resolved "https://npm.powerapp.cloud/@types/flatpickr/-/flatpickr-3.1.2.tgz#767e04fea776ddb399007028bed1a885e26d6d52"
+  integrity sha512-vCEuLqfSlpPhLDOvxyYMIlX20Dwn3XSEeYf9rXfcldDQdLVrtxDdIzE82xhlEFVeHpERujCCQIqETNEUrGsVtA==
+  dependencies:
+    flatpickr "*"
+
 "@types/fs-extra@^8.0.1":
   version "8.1.5"
   resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-8.1.5.tgz#33aae2962d3b3ec9219b5aca2555ee00274f5927"
@@ -6634,6 +6641,11 @@ flat-cache@^2.0.1:
     flatted "^2.0.0"
     rimraf "2.6.3"
     write "1.0.3"
+
+flatpickr@*, flatpickr@^4.6.13:
+  version "4.6.13"
+  resolved "https://npm.powerapp.cloud/flatpickr/-/flatpickr-4.6.13.tgz#8a029548187fd6e0d670908471e43abe9ad18d94"
+  integrity sha512-97PMG/aywoYpB4IvbvUJi0RQi8vearvU0oov1WW3k0WZPBMrTQVqekSX5CjSG/M4Q3i6A/0FKXC7RyAoAUUSPw==
 
 flatted@^2.0.0:
   version "2.0.2"
