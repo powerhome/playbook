@@ -4,6 +4,8 @@
 
 The latest release, Playbook Swift 6.4.0, brings new enhancements focused on flexibility, user experience, and seamless integrations. Key highlights include the new **Destructive Button**, adjustments to **Typeahead** for height and list display, and improved truncation in the User Kit for a cleaner, more responsive UI.
 
+[6.4.0](https://github.com/powerhome/playbook-swift/tree/6.4.0) full list of changes:
+
 ### Playbook Changes
 
 #### Kit Enhancements
@@ -35,6 +37,8 @@ The latest release, Playbook Swift 6.4.0, brings new enhancements focused on fle
 ![image](https://github.com/user-attachments/assets/84b6e16c-9fa4-45ba-b00f-6ffa223dbbb4)
 
 We’re excited to introduce Playbook Swift 6.3.0, featuring two key updates: a customizable PBAvatar status indicator size and new interactivity for the message kit, delivering more responsive, intuitive user experiences. Here’s what’s new:
+
+[6.3.0](https://github.com/powerhome/playbook-swift/tree/6.3.0) full list of changes:
 
 **Kit Enhancements**
 - **PBAvatar Status Indicator Size**: Adjust and style status indicators with more control for a sharper, polished look. #525
