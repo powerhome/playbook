@@ -6,6 +6,10 @@ module Playbook
       prop :initial_items, type: Playbook::Props::Array,
                            default: []
 
+      def data
+        Hash(prop(:data)).merge(pb_draggable: true)
+      end
+
       def classname
         generate_classname("pb_draggable")
       end
