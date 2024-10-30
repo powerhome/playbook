@@ -1,0 +1,61 @@
+<%= pb_content_tag do %>
+  <div class="draggable-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+    <% object.initial_items.each do |item| %>
+      <div
+        class="draggable-item"
+        id="item_<%= item[:id] %>"
+        draggable="true"
+        ondragstart="handleDragStart(event)"
+        ondragend="handleDragEnd(event)"
+      >
+        <%= item[:name] %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<script>
+  let draggedItemId = null;
+
+  function handleDragStart(event) {
+    draggedItemId = event.target.id;
+    event.target.classList.add("is-dragging");
+  }
+
+  function handleDragOver(event) {
+    event.preventDefault();
+    event.target.classList.add("active-container");
+  }
+
+  function handleDrop(event) {
+    event.preventDefault();
+    const target = event.target;
+    const draggedElement = document.getElementById(draggedItemId);
+
+    if (target && draggedElement && target !== draggedElement) {
+      // Append the dragged element to the drop target
+      target.appendChild(draggedElement);
+      draggedElement.classList.remove("is-dragging");
+    }
+
+    target.classList.remove("active-container");
+    draggedItemId = null; // Reset draggedItemId after drop
+  }
+
+  function handleDragEnd(event) {
+    event.target.classList.remove("is-dragging");
+    draggedItemId = null; // Reset draggedItemId after drag ends
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".draggable-item").forEach(item => {
+      item.addEventListener("dragstart", handleDragStart);
+      item.addEventListener("dragend", handleDragEnd);
+    });
+
+    document.querySelectorAll(".draggable-container").forEach(container => {
+      container.addEventListener("dragover", handleDragOver);
+      container.addEventListener("drop", handleDrop);
+    });
+  });
+</script>
