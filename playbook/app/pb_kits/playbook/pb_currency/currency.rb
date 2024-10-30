@@ -43,9 +43,6 @@ module Playbook
       prop :unstyled, type: Playbook::Props::Boolean,
                       default: false
 
-      prop :comma_separator, type: Playbook::Props::Boolean,
-                             default: false
-
       def classname
         generate_classname("pb_currency_kit", align, size, dark_class)
       end
@@ -68,7 +65,7 @@ module Playbook
       def title_props
         {
           size: size_value,
-          text: abbreviate ? abbreviated_value : formatted_amount,
+          text: abbreviate ? abbreviated_value : whole_value,
           classname: "pb_currency_value",
           dark: dark,
         }
@@ -99,36 +96,26 @@ module Playbook
     private
 
       def whole_value
-        value = amount.split(".").first
-        if comma_separator
-          number_with_delimiter(value.gsub(",", ""))
-        else
-          value
-        end
+        return amount if decimals == "matching"
+
+        amount.split(".").first.to_s
       end
 
-      def decimal_value
-        amount.split(".")[1] || "00"
+      def abbreviated_value(index = 0..-2)
+        value = amount.split(".").first.split(",").join("")
+        abbreviated_num = number_to_human(value, units: { thousand: "K", million: "M", billion: "B", trillion: "T" }).gsub(/\s+/, "").to_s
+        abbreviated_num[index]
       end
 
       def units_element
         return "" if decimals == "matching" && !abbreviate && !unit
 
-        if unit.nil? && !abbreviate
-          if decimals == "matching"
-            ""
-          else
-            ".#{decimal_value}"
-          end
+        _, decimal_part = amount.split(".")
+        if unit.nil? && abbreviate == false
+          decimal_part.nil? ? ".00" : ".#{decimal_part}"
         else
           abbreviate ? "#{abbreviated_value(-1)}#{unit}" : unit
         end
-      end
-
-      def abbreviated_value(index = 0..-2)
-        value = amount.split(".").first.gsub(",", "").to_i
-        abbreviated_num = number_to_human(value, units: { thousand: "K", million: "M", billion: "B", trillion: "T" }).gsub(/\s+/, "")
-        abbreviated_num[index]
       end
 
       def size_value
@@ -144,20 +131,6 @@ module Playbook
 
       def dark_class
         dark ? "dark" : nil
-      end
-
-      def formatted_amount
-        return abbreviated_value if abbreviate
-
-        if decimals == "matching"
-          if comma_separator
-            number_with_delimiter(amount.gsub(",", ""))
-          else
-            amount
-          end
-        else
-          whole_value
-        end
       end
     end
   end

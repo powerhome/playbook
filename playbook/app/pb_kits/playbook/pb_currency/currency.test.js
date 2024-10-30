@@ -61,38 +61,3 @@ test('decimals default prop returns decimals as body text', () => {
   expect(currencyKit.querySelector('.pb_currency_value')).toHaveTextContent('320')
   expect(currencyKit.querySelector('.unit')).toHaveTextContent('.20')
 })
-
-
-test('commaSeparator prop returns comma separated amount', () => {
-  render(
-    <Currency 
-        amount="1234567890"
-        commaSeparator
-        data={{ testid: 'comma-test' }}
-    />
-  )
-  expect(screen.getByTestId('comma-test')).toHaveTextContent('1,234,567,890')
-})
-
-test('commaSeparator prop returns comma separated amount with decimals', () => {
-  render(
-    <Currency 
-        amount="1234567890.12"
-        commaSeparator
-        data={{ testid: 'comma-test-decimals' }}
-    />
-  )
-  expect(screen.getByTestId('comma-test-decimals')).toHaveTextContent('1,234,567,890.12')
-})
-
-test('commaSeparator prop returns comma separated amount with decimals="matching"', () => {
-  render(
-    <Currency 
-        amount="1234567890.12"
-        commaSeparator
-        data={{ testid: 'comma-test-decimals-matching' }}
-        decimals="matching"
-    />
-  )
-  expect(screen.getByTestId('comma-test-decimals-matching')).toHaveTextContent('1,234,567,890.12')
-})
