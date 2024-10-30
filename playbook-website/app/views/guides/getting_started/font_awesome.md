@@ -59,7 +59,7 @@ or be selective:
 
 **5.** Setup Pro or Free Font Awesome to use our Icon Component.
 
-*Free Users: currently only [Free Regular](https://fontawesome.com/search?o=r&m=free&s=regular) icons are supported in our icon component structure*
+*Free Users: currently only [Free Regular](https://fontawesome.com/search?o=r&m=free&s=regular) icons are supported in our icon component structure.*
 
 Pro:
 
@@ -99,3 +99,9 @@ bundle install
 ```
 
 **7.** **Go build awesome stuff!**
+
+Refer to our [Icon kit](/kits/icon) to get started with Font Awesome icons in Playbook. 
+
+```rb
+<%= pb_rails("icon", props: { icon: "font-awesome", fixed_width: true }) %>
+```
