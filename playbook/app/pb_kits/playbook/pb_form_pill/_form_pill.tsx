@@ -22,7 +22,6 @@ type FormPillProps = {
   data?: {[key: string]: string},
   tabIndex?: number,
   icon?: string,
-  truncate?: number,
   closeProps?: {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
@@ -45,7 +44,6 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     data = {},
     tabIndex,
     icon = "",
-    truncate,
   } = props
 
   const iconClass = icon ? "_icon" : ""
@@ -71,10 +69,10 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
           className={className}
           size={4}
           text={content}
-          truncate={truncate}
+          truncate={props.truncate}
       />
     )
-    if (truncate) {
+    if (props.truncate) {
       return (
         <Tooltip
             interaction
