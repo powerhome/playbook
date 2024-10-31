@@ -15,7 +15,7 @@ Some Font Awesome benefits:
 
 Integrating Font Awesome with Playbook ensures that you have access to these benefits, making your projects more polished and professional.
 
-![font-awesome-icons](https://github.com/user-attachments/assets/293458ea-3295-4479-b149-24b14c095e40)
+![fontawesome](https://github.com/user-attachments/assets/638b63ad-56d3-4819-8e05-fcbb175bedc7)
 
 ## Ruby on Rails Setup (default with asset pipeline)
 
