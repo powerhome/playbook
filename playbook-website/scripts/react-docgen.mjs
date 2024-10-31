@@ -53,9 +53,9 @@ if (!kitPath) {
 }
 
 // cache handling
-if (!fs.existsSync(CACHE_DIR)) {
-  fs.mkdirSync(CACHE_DIR, { recursive: true });
-}
+// if (!fs.existsSync(CACHE_DIR)) {
+//   fs.mkdirSync(CACHE_DIR, { recursive: true });
+// }
 
 function processKit({ kitPath }) {
   const kitFileName = kitPath.split('/').reverse()[0].split('.')[0],
