@@ -8,4 +8,22 @@
   .pb_draggable_item:hover {
     cursor: grab;
   }
+  &.active_container {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.pb_draggable_placeholder {
+  background-color: #e0e0e0;
+  border: 2px dashed #999;
+  margin: 4px 0;
+  border-radius: 4px;
+}
+
+.pb_draggable_item {
+  &.is_dragging {
+    opacity: 0.5;
+    position: relative;
+    z-index: 1000;
+  }
 }
