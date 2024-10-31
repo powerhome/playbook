@@ -62,10 +62,10 @@ function processKit({ kitPath }) {
         cachedKit = resolve(CACHE_DIR, `${kitFileName}.json`);
 
   // use cache if it exists
-  if (fs.existsSync(cachedKit)) {
-    const cachedKitContent = fs.readFileSync(cachedKit, 'utf8');
-    return cachedKitContent;
-  }
+  // if (fs.existsSync(cachedKit)) {
+  //   const cachedKitContent = fs.readFileSync(cachedKit, 'utf8');
+  //   return cachedKitContent;
+  // }
 
   const parser = withCustomConfig(TSCONFIG_PATH, PARSER_OPTIONS);
   const parsed = parser.parse(kitPath, PARSER_OPTIONS);
