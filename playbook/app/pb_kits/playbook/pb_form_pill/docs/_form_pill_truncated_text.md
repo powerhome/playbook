@@ -1,1 +1,0 @@
-For pills with longer text, the `truncate` global prop can be used to truncate the label within each Form Pill. Hover over the truncated Form Pill and a Tooltip containing the text or tag section of the Form Pill will appear. See [here](https://playbook.powerapp.cloud/visual_guidelines/truncate) for more information on the truncate global prop.

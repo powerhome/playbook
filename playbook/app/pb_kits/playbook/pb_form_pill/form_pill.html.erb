@@ -1,19 +1,18 @@
 <%= content_tag(:div, id: object.id, data: object.data, class: object.classname + object.size_class, tabindex: object.tabindex, **combined_html_options) do %>
   <% if object.name.present? %>
     <%= pb_rails("avatar", props: { name: object.name, image_url: object.avatar_url, size: "xxs" }) %>
-    <% element_id = "pill_#{object.name.parameterize}" %>
     <div>
       <%= pb_rails("title", props: { 
         classname: "pb_form_pill_text #{object.truncate ? "truncate_#{object.truncate}" : ""}",
-        id: element_id,
+        id: object.id,
         size: 4, 
         text: object.name,
       }) %>
-      <% if object.truncate %>
+      <% if object.truncate && object.id.present? %>
         <%= pb_rails("tooltip", props: {
           position: "top",
-          tooltip_id: "tooltip-#{element_id}",
-          trigger_element_selector: "##{element_id}"
+          tooltip_id: "tooltip-#{object.id}",
+          trigger_element_selector: "##{object.id}"
         }) do %>
           <%= object.name %>
         <% end %>
@@ -26,19 +25,18 @@
     <% if object.icon.present? %>
       <%= pb_rails("icon", props: { classname: "pb_form_pill_icon", color: object.color, icon: object.icon }) %>
     <% end %>
-    <% element_id = "pill_#{object.text.parameterize}" %>
     <div>
       <%= pb_rails("title", props: { 
         classname: "pb_form_pill_tag #{object.truncate ? "truncate_#{object.truncate}" : ""}",
-        id: element_id,
+        id: object.id,
         size: 4, 
         text: object.text
       }) %>
-      <% if object.truncate %>
+      <% if object.truncate && object.id.present? %>
         <%= pb_rails("tooltip", props: {
           position: "top",
-          tooltip_id: "tooltip-#{element_id}",
-          trigger_element_selector: "##{element_id}"
+          tooltip_id: "tooltip-#{object.id}",
+          trigger_element_selector: "##{object.id}"
         }) do %>
           <%= object.text %>
         <% end %>
