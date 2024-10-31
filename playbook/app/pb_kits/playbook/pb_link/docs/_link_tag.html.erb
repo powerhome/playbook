@@ -1,0 +1,35 @@
+<%= pb_rails("link", props: {
+  text: "h1 link example",
+  href: "#tag",
+  icon: "arrow-up-right-from-square",
+  tag: "h1",
+}) %>
+
+<%= pb_rails("link", props: {
+  text: "h3 link example",
+  href: "#tag2",
+  tag: "h3",
+  underline: true,
+}) %>
+
+<%= pb_rails("link", props: {
+  color: "destructive",
+  text: "h6 link example",
+  href: "#tag3",
+  tag: "h6",
+}) %>
+
+<%= pb_rails("link", props: {
+  text: "p link example",
+  href: "#tag4",
+  icon_right: "chevron-right",
+  tag: "p",
+}) %>
+
+<div>
+  This is a <%= pb_rails("link", props: {
+    text: "span link example",
+    href: "#tag5",
+    tag: "span",
+  }) %>
+</div>
