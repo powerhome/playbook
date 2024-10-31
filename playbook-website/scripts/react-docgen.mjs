@@ -53,19 +53,19 @@ if (!kitPath) {
 }
 
 // cache handling
-// if (!fs.existsSync(CACHE_DIR)) {
-//   fs.mkdirSync(CACHE_DIR, { recursive: true });
-// }
+if (!fs.existsSync(CACHE_DIR)) {
+  fs.mkdirSync(CACHE_DIR, { recursive: true });
+}
 
 function processKit({ kitPath }) {
   const kitFileName = kitPath.split('/').reverse()[0].split('.')[0],
         cachedKit = resolve(CACHE_DIR, `${kitFileName}.json`);
 
   // use cache if it exists
-  // if (fs.existsSync(cachedKit)) {
-  //   const cachedKitContent = fs.readFileSync(cachedKit, 'utf8');
-  //   return cachedKitContent;
-  // }
+  if (fs.existsSync(cachedKit)) {
+    const cachedKitContent = fs.readFileSync(cachedKit, 'utf8');
+    return cachedKitContent;
+  }
 
   const parser = withCustomConfig(TSCONFIG_PATH, PARSER_OPTIONS);
   const parsed = parser.parse(kitPath, PARSER_OPTIONS);

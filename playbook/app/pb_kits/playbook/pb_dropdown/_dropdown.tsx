@@ -47,7 +47,7 @@ interface DropdownComponent
     Container: typeof DropdownContainer;
 }
 
-const Dropdown: React.ForwardRefRenderFunction<unknown, DropdownProps> = (props, ref) => {
+let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const {
         aria = {},
         autocomplete = false,
@@ -260,8 +260,7 @@ const Dropdown: React.ForwardRefRenderFunction<unknown, DropdownProps> = (props,
                             <DropdownContainer>
                                 {optionsWithBlankSelection &&
                                     optionsWithBlankSelection?.map((option: GenericObject) => (
-                                        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                                        <ForwardedDropdown.Option key={option.id}
+                                        <Dropdown.Option key={option.id}
                                             option={option}
                                         />
                                     ))}
@@ -281,10 +280,10 @@ const Dropdown: React.ForwardRefRenderFunction<unknown, DropdownProps> = (props,
     )
 }
 
-const ForwardedDropdown = forwardRef(Dropdown) as DropdownComponent;
-ForwardedDropdown.displayName = "Dropdown";
-ForwardedDropdown.Option = DropdownOption;
-ForwardedDropdown.Trigger = DropdownTrigger;
-ForwardedDropdown.Container = DropdownContainer;
+Dropdown = forwardRef(Dropdown) as unknown as DropdownComponent;
+(Dropdown as DropdownComponent).displayName = "Dropdown";
+(Dropdown as DropdownComponent).Option = DropdownOption;
+(Dropdown as DropdownComponent).Trigger = DropdownTrigger;
+(Dropdown as DropdownComponent).Container = DropdownContainer;
 
-export default ForwardedDropdown;
+export default Dropdown;
