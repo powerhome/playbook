@@ -1,14 +1,16 @@
 <%= pb_content_tag do %>
-  <div class="draggable-container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+  <div class="pb_draggable_container" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
     <% object.initial_items.each do |item| %>
       <div
-        class="draggable-item"
+        class="pb_draggable_item"
         id="item_<%= item[:id] %>"
         draggable="true"
         ondragstart="handleDragStart(event)"
         ondragend="handleDragEnd(event)"
       >
+      <%= pb_rails("card") do %>
         <%= item[:name] %>
+      <% end %>
       </div>
     <% end %>
   </div>

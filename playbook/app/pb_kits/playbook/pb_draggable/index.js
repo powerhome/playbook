@@ -13,12 +13,12 @@ export default class PbDragabble extends PbEnhancedElement {
 
   bindEventListeners() {
     // Event listeners for all draggable items and containers
-    this.element.querySelectorAll(".draggable-item").forEach(item => {
+    this.element.querySelectorAll(".pb_draggable_item").forEach(item => {
       item.addEventListener("dragstart", this.handleDragStart.bind(this));
       item.addEventListener("dragend", this.handleDragEnd.bind(this));
     });
 
-    this.element.querySelectorAll(".draggable-container").forEach(container => {
+    this.element.querySelectorAll(".pb_draggable_container").forEach(container => {
       container.addEventListener("dragover", this.handleDragOver.bind(this));
       container.addEventListener("drop", this.handleDrop.bind(this));
     });
