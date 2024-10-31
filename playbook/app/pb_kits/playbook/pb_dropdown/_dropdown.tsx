@@ -260,7 +260,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                             <DropdownContainer>
                                 {optionsWithBlankSelection &&
                                     optionsWithBlankSelection?.map((option: GenericObject) => (
-                                        <Dropdown.Option key={option.id}
+                                        <DropdownOption key={option.id}
                                             option={option}
                                         />
                                     ))}
