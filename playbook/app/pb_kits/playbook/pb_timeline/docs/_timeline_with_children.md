@@ -1,4 +1,2 @@
-You can use whatever kit you want for the label, step, or detail sections of a timeline's event item.
-
-Checkout the code in this example to see the children kits in action.
+Any kit can be used inside of our compound components of label, step, or detail. Expand the code snippet below to see how to use these children elements.
 
