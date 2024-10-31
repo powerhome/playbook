@@ -3,15 +3,15 @@
 import React from 'react'
 
 import {
-  Body,
-  Card
+  Card,
+  Title,
 } from 'playbook-ui'
 
 import Example from '../Templates/Example'
 
 const GroupHoverDescription = () => (
   <>
-    You can hover over a kit and its children's hover affects will be applied
+    You can hover over a kit and its children's hover affects will be applied. Check out <a href="https://playbook.powerapp.cloud/visual_guidelines/hover">{"our hover affects here."}</a>
   </>
 )
 
@@ -22,17 +22,23 @@ const GroupHover = ({ example }: {example: string}) => (
       example={example}
       title="Group Hover"
   >
-    <Card groupHover>
-      <Body
+    <Card 
+      cursor="pointer"
+      groupHover
+    >
+      <Title
+          alignSelf="center"
           groupHover 
           hover={{ scale: "lg"}}
           text="If the card is hovered, I'm hovered too!"
       />
-      <Body
+      <Title
+          alignSelf="center"
           paddingY="lg"
           text="I don't have any hover effect on me"
       />
-      <Body
+      <Title
+          alignSelf="center"
           hover={{ scale: "lg"}}
           text="I need to be hovered over directly"
       />
