@@ -1,3 +1,56 @@
+# 🚀 Playbook Swift 6.4.0: Enhanced Buttons, Truncations, and Dynamic Typeahead! 🚀
+##### Oct 18, 2024
+![image](https://github.com/user-attachments/assets/875ae784-bb68-47e1-ae67-3d25e90f427e)
+
+The latest release, Playbook Swift 6.4.0, brings new enhancements focused on flexibility, user experience, and seamless integrations. Key highlights include the new **Destructive Button**, adjustments to **Typeahead** for height and list display, and improved truncation in the User Kit for a cleaner, more responsive UI.
+
+[6.4.0](https://github.com/powerhome/playbook-swift/tree/6.4.0) full list of changes:
+
+### Playbook Changes
+
+#### Kit Enhancements
+- **Destructive Button**: A new button style designed for critical actions. (#457)
+- **Height Adjusted Dropdown**: Improved dropdown to better fit varied content heights. (#450)
+- **User Kit Truncation**: Tighter, more dynamic user name displays. (#458)
+- **Add Props to PBMessage**: Additional properties to further customize PBMessage. (#456)
+- **Typeahead Enhancements**:
+  - **Show No Option**: Now includes messaging when no options are available. (#455)
+  - **Section List**: Categorized options for a more organized typeahead. (#459)
+  - **Initial Value Support**: Set a starting value in PBSwift Typeahead.
+  - **Truncated User Name Support**: Cleaner user name display in User Kit.
+
+#### Bug Fixes
+- **Message Component Cursor Fix**: Improved cursor behavior for smooth typing experiences. (#454)
+
+### Documentation Updates
+- **Typeahead Enhancements**: Documented updates for scrollable lists, dropdown height adjustments, conversation name display, and improved conversation management options.
+
+### Connect-Specific
+- **Conditional Popover Handler**: Fixed the “Close” button issue with a new conditional handler. (#565)
+
+🔗 **Full Changelog**: https://github.com/powerhome/playbook-swift/compare/6.3.1...6.4.0
+
+
+
+# ✨ Dynamic Status Indicators & Interactive Messaging! ✨
+##### Sept 20, 2024
+![image](https://github.com/user-attachments/assets/84b6e16c-9fa4-45ba-b00f-6ffa223dbbb4)
+
+We’re excited to introduce Playbook Swift 6.3.0, featuring two key updates: a customizable PBAvatar status indicator size and new interactivity for the message kit, delivering more responsive, intuitive user experiences. Here’s what’s new:
+
+[6.3.0](https://github.com/powerhome/playbook-swift/tree/6.3.0) full list of changes:
+
+**Kit Enhancements**
+- **PBAvatar Status Indicator Size**: Adjust and style status indicators with more control for a sharper, polished look. #525
+- **Handle Click on Message Kit**: Respond to user interactions seamlessly, elevating message engagement. #526
+- **Dark Mode Reaction Button Improvements**: Enhanced visibility with border and button refinements for Dark Mode. #508, #528
+
+### Bug Fix
+- **Online Status Color**: Ensuring accurate color representation for improved visual clarity. #566
+  
+
+🔗 **Full Changelog**: https://github.com/powerhome/playbook-swift/compare/6.2.0...6.3.0
+
 # ✨ Enhance, Customize, and Expand! ✨
 ##### Aug 28, 2024
 
