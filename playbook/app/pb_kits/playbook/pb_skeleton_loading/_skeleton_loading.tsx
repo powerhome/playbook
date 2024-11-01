@@ -3,6 +3,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+// import { Sizes } from '../types'
 
 
 type SkeletonLoadingProps = {
@@ -10,14 +11,26 @@ type SkeletonLoadingProps = {
   className?: string,
   data?: { [key: string]: string },
   id?: string,
+  // height?: string,
+  // width?: string,
+  // borderRadius: string,
+  // gap?: Sizes | "none",
+  // stack?: number,
+  // color?: "default" | "light",
 }
 
 const SkeletonLoading = (props: SkeletonLoadingProps) => {
   const {
     aria = {},
-  className,
-  data = {},
-  id,
+    className,
+    data = {},
+    id,
+    // height = "16px",
+    // width = "100%",
+    // borderRadius = "sm",
+    // gap = "xxs",
+    // stack = "1",
+    // color = "default",
   } = props
 
   const ariaProps = buildAriaProps(aria)

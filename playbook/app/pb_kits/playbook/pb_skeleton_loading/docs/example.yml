@@ -1,7 +1,7 @@
 examples:
   
   rails:
-  - skeleton_loading_default: Default
+  # - skeleton_loading_default: Default
   
   
   react:
