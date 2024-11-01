@@ -1,0 +1,21 @@
+// import { ensureAccessible, renderKit } from '../utilities/test-utils'
+
+// import { SkeletonLoading } from 'playbook-ui'
+
+/* See these resources for more testing info:
+  - https://github.com/testing-library/jest-dom#usage for useage and examples
+  - https://jestjs.io/docs/en/using-matchers
+*/
+
+// test('generated scaffold test - update me', () => {
+//   const props = {
+//     data: { testid: 'default' }
+//   }
+
+//   const kit = renderKit(SkeletonLoading , props)
+//   expect(kit).toBeInTheDocument()
+// })
+
+// it("should be accessible", async () => {
+//   ensureAccessible(SkeletonLoading, props)
+// })

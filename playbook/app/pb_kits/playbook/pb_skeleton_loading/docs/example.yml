@@ -1,0 +1,10 @@
+examples:
+  
+  rails:
+  - skeleton_loading_default: Default
+  
+  
+  react:
+  - skeleton_loading_default: Default
+  
+  
