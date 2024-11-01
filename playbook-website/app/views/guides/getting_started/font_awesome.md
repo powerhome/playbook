@@ -17,57 +17,45 @@ Integrating Font Awesome with Playbook ensures that you have access to these ben
 
 ![fontawesome](https://github.com/user-attachments/assets/638b63ad-56d3-4819-8e05-fcbb175bedc7)
 
-## Ruby on Rails Setup (default with asset pipeline)
+### Ruby on Rails Setup
 
-**Make sure you are on Rails 7 or higher.**
-
-**1.** Follow the [Ruby on Rails Setup getting started page](/guides/getting_started/ruby_on_rails_setup) to setup Playbook with your Rails project.
-
-**2.** Setup Pro or Free Font Awesome to use our Icon Component.
-
-**Pro:**
-
-```rb
-# app/assets/stylesheets/application.scss
+<details class="mt_sm">
+  <summary class="mb_sm"><strong>Default with an Asset Pipeline</strong></summary>
+  <strong>Make sure you are on Rails 7 or higher.</strong>
+  <p>
+    <strong>1.</strong> Follow the <a href="/guides/getting_started/ruby_on_rails_setup">Ruby on Rails Setup getting started page</a> to setup Playbook with your Rails project.
+  </p>
+  <p>
+    <strong>2.</strong> Setup Pro or Free Font Awesome to use our Icon Component.
+  </p>
+  <p><strong>Pro:</strong></p>
+  <pre><code class="rb"># app/assets/stylesheets/application.scss
  @import "font-awesome-pro";
  @import "font-awesome-pro/solid";
  @import "font-awesome-pro/regular";
- @import "playbook";
-```
-
-```rb
-# app/Gemfile
+ @import "playbook";</code></pre>
+  <pre><code class="rb"># app/Gemfile
  source "https://token:TOKEN@dl.fontawesome.com/basic/fontawesome-pro/ruby/" do
    gem "font-awesome-pro-sass", "6.2.0"
- end
-```
+ end</code></pre>
+ <strong>Free:</strong>
+  <p><em>Currently only <a href="https://fontawesome.com/search?o=r&m=free&s=regular">Free Regular</a> icons are supported in our icon component structure.</em></p>
 
-**Free:**
+  <pre><code class="rb"># app/assets/stylesheets/application.scss
+ @import "font-awesome";</code></pre>
 
-*Currently only [Free Regular](https://fontawesome.com/search?o=r&m=free&s=regular) icons are supported in our icon component structure.*
-
-```rb
-# app/assets/stylesheets/application.scss
- @import "font-awesome";
-```
-
-```rb
-# app/Gemfile
+  <pre><code class="rb"># app/Gemfile
  source "https://token:TOKEN@dl.fontawesome.com/basic/fontawesome-pro/ruby/" do
    gem "font-awesome-pro-sass", "6.2.0"
- end
-```
+ end</code></pre>
 
-**3.** Bundle all the things!
+  <strong>3.</strong> Bundle all the things!
 
-```sh
-bundle install
-```
+  <pre><code class="sh">bundle install</code></pre>
 
-**4.** **Go build awesome stuff!**
+  <strong>4.</strong> <strong>Go build awesome stuff!</strong>
 
-Refer to our [Icon kit](/kits/icon) to get started with Font Awesome icons in Playbook. 
+  <p>Refer to our <a href="/kits/icon">Icon kit</a> to get started with Font Awesome icons in Playbook.</p>
 
-```rb
-<%= pb_rails("icon", props: { icon: "font-awesome", fixed_width: true }) %>
-```
+  <pre><code class="rb">&lt;%= pb_rails("icon", props: { icon: "font-awesome", fixed_width: true }) %&gt;</code></pre>
+</details>
