@@ -25,7 +25,7 @@
           <% end %>
           <div class="separator"></div>
           <div class="psuedo_separator"></div>
-          <%= pb_rails("card", props: { padding: "sm", status: object.status, border_none: true }) do %>
+          <%= pb_rails("card", props: { padding: "sm", status: object.status, border_none: true, dark: object.dark }) do %>
             <% if content.nil? %>
               <%= pb_rails("body", props: { text: object.text }) %>
             <% else %>
