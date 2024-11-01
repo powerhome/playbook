@@ -48,7 +48,7 @@ module Playbook
         if responsive
           value.each do |key, val|
             if %i[background color].include?(key)
-              css += "#{prefix}_#{key}_#{val} " if hover_attributes.include?(key.to_s)
+              css += "#{prefix}_#{key}-#{val} " if hover_attributes.include?(key.to_s)
             elsif hover_attributes.include?(key.to_s) && send("hover_#{key}_values").include?(val.to_s)
               css += "#{prefix}_#{key}_#{val} "
             end

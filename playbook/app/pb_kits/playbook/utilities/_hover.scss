@@ -2,11 +2,11 @@
 
 @mixin hover-color-classes($colors-list) {
     @each $name, $color in $colors-list {
-      .hover_background_#{"" + $name}:hover {
+      .hover_background-#{"" + $name}:hover {
         background-color: $color !important;
         transition: background-color $transition-speed ease;
       }
-      .hover_color_#{"" + $name}:hover {
+      .hover_color-#{"" + $name}:hover {
         color: $color !important;
         transition: color $transition-speed ease;
       }
