@@ -70,10 +70,8 @@ export default class PbDraggable extends PbEnhancedElement {
     const targetIndex = items.indexOf(targetItem);
 
     if (draggedIndex !== -1 && targetIndex !== -1) {
-      // Remove existing placeholder
       this.placeholder.remove();
       
-      // Insert placeholder based on mouse position
       const rect = targetItem.getBoundingClientRect();
       const midpoint = rect.top + rect.height / 2;
       
@@ -97,7 +95,6 @@ export default class PbDraggable extends PbEnhancedElement {
     if (container) {
       container.classList.add("active_container");
       
-      // Handle empty container
       if (!container.querySelector('.pb_draggable_item:not(.is_dragging)')) {
         container.appendChild(this.placeholder);
       }
@@ -112,7 +109,6 @@ export default class PbDraggable extends PbEnhancedElement {
     container.classList.remove("active_container");
     this.draggedItem.style.opacity = '1';
     
-    // Replace placeholder with dragged item
     if (this.placeholder.parentNode) {
       this.placeholder.parentNode.insertBefore(this.draggedItem, this.placeholder);
       this.placeholder.remove();
@@ -120,7 +116,6 @@ export default class PbDraggable extends PbEnhancedElement {
       container.appendChild(this.draggedItem);
     }
 
-    // Trigger custom event
     const customEvent = new CustomEvent('pb-draggable-reorder', {
       detail: {
         itemId: this.draggedItemId,
