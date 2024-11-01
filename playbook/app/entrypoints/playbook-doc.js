@@ -59,6 +59,7 @@ import * as Layout from 'kits/pb_layout/docs'
 import * as LegendDocs from 'kits/pb_legend/docs'
 import * as Lightbox from 'kits/pb_lightbox/docs'
 import * as LineGraphDocs from 'kits/pb_line_graph/docs'
+import * as Link from 'kits/pb_link/docs'
 import * as List from 'kits/pb_list/docs'
 import * as LoadingInline from 'kits/pb_loading_inline/docs'
 import * as Map from 'kits/pb_map/docs'
@@ -167,6 +168,7 @@ WebpackerReact.registerComponents({
   ...LegendDocs,
   ...Lightbox,
   ...LineGraphDocs,
+  ...Link,
   ...List,
   ...LoadingInline,
   ...Map,
