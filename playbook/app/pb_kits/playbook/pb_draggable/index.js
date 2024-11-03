@@ -74,19 +74,30 @@ export default class PbDraggable extends PbEnhancedElement {
     event.preventDefault();
     const container = event.target.closest(DRAGGABLE_CONTAINER);
     if (!container || !this.draggedItem) return;
-
+  
     container.classList.remove("active_container");
     this.draggedItem.style.opacity = '1';
-
+  
+    // Updated order of items as an array of item IDs
+    const reorderedItems = Array.from(container.children)
+      .filter(item => item.classList.contains("pb_draggable_item"))
+      .map(item => item.id.replace("item_", "")); 
+  
+    // Store reordered items in a data attribute on the container
+    container.setAttribute("data-reordered-items", JSON.stringify(reorderedItems));
+  
     const customEvent = new CustomEvent('pb-draggable-reorder', {
       detail: {
-        itemId: this.draggedItemId,
+        reorderedItems,
         containerId: container.id,
-        newIndex: Array.from(container.children).indexOf(this.draggedItem)
       }
     });
     this.element.dispatchEvent(customEvent);
+  
+    this.draggedItem = null;
+    this.draggedItemId = null;
   }
+  
 
   handleDragEnd(event) {
     event.target.classList.remove("is_dragging");
