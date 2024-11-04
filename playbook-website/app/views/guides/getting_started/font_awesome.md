@@ -59,3 +59,64 @@ Integrating Font Awesome with Playbook ensures that you have access to these ben
 
   <pre><code class="rb">&lt;%= pb_rails("icon", props: { icon: "font-awesome", fixed_width: true }) %&gt;</code></pre>
 </details>
+
+<details class="mt_sm">
+  <summary class="mb_sm"><strong>With a JavaScript Bundler</strong></summary>
+  <strong>Make sure you are on Rails 7 or higher.</strong>
+  <p>
+    <strong>1.</strong> Follow the <a href="/guides/getting_started/ruby_on_rails_setup">Ruby on Rails Setup getting started page</a> to setup Playbook with your Rails project. 
+  </p>
+  <p>
+    Use your desired bundler:
+    <pre><code class="sh">rails new CoolNewApp -j webpack</code></pre>
+  </p>
+  <p>
+    <strong>2.</strong> Follow the <a href="/guides/getting_started/rails_&_react_setup">Ruby & React page</a> if you want to use React with your project. 
+  </p>
+  <p>
+    <strong>3.</strong> Setup Pro or Free Font Awesome to use our Icon Component.
+  </p>
+  <p><strong>Pro:</strong></p>
+  <pre><code class="rb"># app/assets/stylesheets/application.scss
+ @import "font-awesome-pro";
+ @import "font-awesome-pro/solid";
+ @import "font-awesome-pro/regular";
+ @import "playbook";</code></pre>
+  <pre><code class="rb"># app/Gemfile
+ source "https://token:TOKEN@dl.fontawesome.com/basic/fontawesome-pro/ruby/" do
+   gem "font-awesome-pro-sass", "6.2.0"
+ end</code></pre>
+ <strong>Free:</strong>
+  <p><em>Currently only <a href="https://fontawesome.com/search?o=r&m=free&s=regular">Free Regular</a> icons are supported in our icon component structure.</em></p>
+
+  <pre><code class="rb"># app/assets/stylesheets/application.scss
+ @import "font-awesome";</code></pre>
+
+  <pre><code class="rb"># app/Gemfile
+ source "https://token:TOKEN@dl.fontawesome.com/basic/fontawesome-pro/ruby/" do
+   gem "font-awesome-pro-sass", "6.2.0"
+ end</code></pre>
+
+  <strong>4.</strong> Bundle all the things!
+
+  <pre><code class="sh">bundle install</code></pre>
+
+  <pre><code class="sh">yarn</code></pre>
+
+  <pre><code class="sh">npm install</code></pre>
+
+  <strong>5.</strong> Build JavaScript for development
+  <p>When using a bundling option, use <code>bin/dev</code> to start the Rails server and build JavaScript for development. Don't forget to add a build script in your package.json file:</p>
+
+  <pre><code class="js">"scripts": {
+   "build": "webpack"
+ },</code></pre>
+
+  <strong>6.</strong> <strong>Go build awesome stuff!</strong>
+
+  <p>Refer to our <a href="/kits/icon">Icon kit</a> to get started with Font Awesome icons in Playbook.</p>
+
+  <pre><code class="rb">&lt;%= pb_rails("icon", props: { icon: "font-awesome", fixed_width: true }) %&gt;</code></pre>
+
+  <pre><code class="react">&lt;Icon fixedWidth icon="font-awesome" /&gt;</code></pre>
+</details>
