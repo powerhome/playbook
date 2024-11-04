@@ -1,3 +1,40 @@
 .pb_skeleton_loading {
-
+    .color_default {
+        background-color: $silver;
+        // background-color: $green;
+    }
+    .color_light {
+        background-color: $white;
+        // background-color: $orange;
+    }
+    .dark {
+        background-color: $border_dark
+    }
+    .gap_xxs {
+        margin-top: 4px;
+      }
+      
+      .gap_xs {
+        margin-top: 8px;
+      }
+      
+      .gap_sm {
+        margin-top: 16px;
+      }
+      
+      .gap_md {
+        margin-top: 24px;
+      }
+      
+      .gap_lg {
+        margin-top: 32px;
+      }
+      
+      .gap_xl {
+        margin-top: 40px;
+      }
+      
+      .gap_xxl {
+        margin-top: 48px;
+      }
 }
