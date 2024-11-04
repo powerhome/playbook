@@ -20,7 +20,7 @@ Integrating Font Awesome with Playbook ensures that you have access to these ben
 ### Ruby on Rails Setup
 
 <details class="mt_sm">
-  <summary class="mb_sm"><strong>Default with an Asset Pipeline</strong></summary>
+  <summary class="mb_sm"><strong><img src="https://github.com/user-attachments/assets/781b1ec8-954c-4919-a79c-7009521849a6" alt="rails logo" class="pb_custom_icon svg-inline--fa svg_fw mr_xxs" style="margin: 0;" />Default with an Asset Pipeline</strong></summary>
   <strong>Make sure you are on Rails 7 or higher.</strong>
   <p>
     <strong>1.</strong> Follow the <a href="/guides/getting_started/ruby_on_rails_setup">Ruby on Rails Setup getting started page</a> to setup Playbook with your Rails project.
@@ -61,7 +61,7 @@ Integrating Font Awesome with Playbook ensures that you have access to these ben
 </details>
 
 <details class="mt_sm">
-  <summary class="mb_sm"><strong>With a JavaScript Bundler</strong></summary>
+  <summary class="mb_sm"><strong><img src="https://github.com/user-attachments/assets/781b1ec8-954c-4919-a79c-7009521849a6" alt="rails logo" class="pb_custom_icon svg-inline--fa svg_fw mr_xxs" style="margin: 0;" />With a JavaScript Bundler</strong></summary>
   <strong>Make sure you are on Rails 7 or higher.</strong>
   <p>
     <strong>1.</strong> Follow the <a href="/guides/getting_started/ruby_on_rails_setup">Ruby on Rails Setup getting started page</a> to setup Playbook with your Rails project. 
