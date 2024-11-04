@@ -86,7 +86,9 @@ Integrating Font Awesome with Playbook ensures that you have access to these ben
  source "https://token:TOKEN@dl.fontawesome.com/basic/fontawesome-pro/ruby/" do
    gem "font-awesome-pro-sass", "6.2.0"
  end</code></pre>
- <strong>Free:</strong>
+  <p>If you prefer, you can install with JavaScript:</p>
+  <pre><code class="sh">FONTAWESOME_PACKAGE_TOKEN=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX yarn add @fortawesome/fontawesome-pro</code></pre>
+  <strong>Free:</strong>
   <p><em>Currently only <a href="https://fontawesome.com/search?o=r&m=free&s=regular">Free Regular</a> icons are supported in our icon component structure.</em></p>
 
   <pre><code class="rb"># app/assets/stylesheets/application.scss
@@ -96,6 +98,9 @@ Integrating Font Awesome with Playbook ensures that you have access to these ben
  source "https://token:TOKEN@dl.fontawesome.com/basic/fontawesome-pro/ruby/" do
    gem "font-awesome-pro-sass", "6.2.0"
  end</code></pre>
+
+  <p>If you prefer, you can install with JavaScript:</p>
+  <pre><code class="sh">yarn add @fortawesome/fontawesome-free</code></pre>
 
   <strong>4.</strong> Bundle all the things!
 
