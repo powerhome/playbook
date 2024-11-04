@@ -30,8 +30,8 @@ jobs:
         with:
           bundler-cache: true
       - name: Python Setup
-        uses: actions/setup-python@v4
-        with:
+        uses: actions/setup-python@v4 
+        with: 
           python-version: '3.9'
       - name: Set Git Config
         run: |
@@ -41,16 +41,16 @@ jobs:
         id: set-version
         run: |
           current_npm_version=$(node -pe "require('./package.json').version")
-
+          
           if [[ $current_npm_version == *"-rc."* ]]; then
             new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           else
             new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           fi
-
+          
           new_npm_version=${new_npm_version#v}
           new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
-
+          
           echo "new_npm_version=${new_npm_version}" >> $GITHUB_ENV
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
       - name: Check if version exists and increment if necessary
