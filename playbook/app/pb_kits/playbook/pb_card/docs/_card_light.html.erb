@@ -1,4 +1,40 @@
 <%= pb_rails("card", props: {
-})  do %>
+  html_options: {
+    class: "pb-card-light"
+  },
+  height: "600px"
+}) do %>
   Card content
 <% end %>
+
+<%# Example showing html_options style also works %>
+<%= pb_rails("card", props: {
+  html_options: {
+    class: "pb-card-light",
+    style: { height: "422px", background_color: "orange" }
+  }
+}) do %>
+  Card content with html_options style
+<% end %>
+
+
+<%# Example showing just html_options %>
+<%= pb_rails("card", props: {
+  html_options: {
+    width: "60px",
+  }
+}) do %>
+  Card content with just html_options style
+<% end %>
+
+<%= pb_rails("card", props: {
+  height: "100%",
+  html_options: {
+    style: { width: "100%", background_color: "blue" },
+    tabindex: 7
+  },
+  min_height: "189px"
+}) do %>
+  HELLO WORLD!!!
+<% end %>
+

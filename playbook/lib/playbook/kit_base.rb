@@ -82,8 +82,35 @@ module Playbook
       self
     end
 
+    def pb_content_tag(name = :div, content_or_options_with_block = {}, options = {}, escape: true, &block)
+      combined_options = options
+                         .merge(combined_html_options)
+                         .merge(default_options.merge(content_or_options_with_block))
+      content_tag(name, combined_options, options, escape, &block)
+    end
+
     def combined_html_options
-      default_html_options.merge(html_options.deep_merge(data_attributes))
+      merged = default_html_options.dup
+
+      html_options.each do |key, value|
+        if key == :style && value.is_a?(Hash)
+          # Convert style hash to CSS string
+          merged[:style] = value.map { |k, v| "#{k.to_s.gsub('_', '-')}: #{v}" }.join("; ")
+        else
+          merged[key] = value
+        end
+      end
+
+      inline_styles = dynamic_inline_props
+      if inline_styles.present?
+        merged[:style] = if merged[:style].present?
+                           "#{merged[:style]}; #{inline_styles}"
+                         else
+                           inline_styles
+                         end
+      end
+
+      merged.deep_merge(data_attributes)
     end
 
     def global_inline_props
@@ -94,34 +121,6 @@ module Playbook
       }.compact
     end
 
-    # rubocop:disable Layout/CommentIndentation
-    # pb_content_tag information (potentially to be abstracted into its own dev doc in the future)
-    # The pb_content_tag generates HTML content tags for rails kits with flexible options.
-    # Modify a generated kit.html.erb file accordingly (the default_options listed below no longer need to be explictly outlined in that file, only modifications).
-    # name - the first argument is for HTML tag. The default is :div.
-    # content_or_options_with_block - additional content or options for the tag (i.e., the customizations a dev adds to kit.html.erb).
-    # options - Within combined_options, the empty options hash allows for customizations to
-        # merge with the default_options and combined_html_options.
-    # escape - set to true, this allows for HTML-escape.
-    # block - an optional block for content inside the tag.
-    # The return is a HTML tag that includes any provided customizations. If nothing is specified in kit.html.erb, the default shape is:
-        # :div,
-        # aria: object.aria,
-        # class: object.classname,
-        # data: object.data,
-        # id: object.id,
-        # **combined_html_options
-    # rubocop:enable Layout/CommentIndentation
-
-    # rubocop:disable Style/OptionalBooleanParameter
-    def pb_content_tag(name = :div, content_or_options_with_block = {}, options = {}, escape = true, &block)
-      combined_options = options
-                         .merge(combined_html_options)
-                         .merge(default_options.merge(content_or_options_with_block))
-      content_tag(name, combined_options, options, escape, &block)
-    end
-    # rubocop:enable Style/OptionalBooleanParameter
-
   private
 
     def default_options
@@ -131,8 +130,10 @@ module Playbook
         class: classname,
         aria: aria,
       }
+
       inline_styles = dynamic_inline_props
-      options[:style] = inline_styles if inline_styles.present?
+      options[:style] = inline_styles if inline_styles.present? && !html_options.key?(:style)
+
       options
     end
 
@@ -148,8 +149,8 @@ module Playbook
     end
 
     def dynamic_inline_props
-      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value};" if value.present? }.compact
-      styles.join(" ").presence
+      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value}" if value.present? }.compact
+      styles.join("; ").presence
     end
   end
 end
