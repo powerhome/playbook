@@ -18,6 +18,7 @@ type SkeletonLoadingProps = {
   stack?: number,
   color?: "default" | "light",
   dark?: boolean,
+  square?: "string",
 } & GlobalProps
 
 const SkeletonLoading = (props: SkeletonLoadingProps): React.ReactElement => {
@@ -30,63 +31,36 @@ const SkeletonLoading = (props: SkeletonLoadingProps): React.ReactElement => {
     width = "100%",
     borderRadius = "sm",
     gap = "xxs",
-    stack = "1",
+    stack = 1,
     color = "default",
     dark = false,
+    square,
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  // const classes = classnames(buildCss('pb_skeleton_loading'), globalProps(props), className)
-  // let css = classnames(globalProps(props, { borderRadius }), className)
-  // const skeletonContainerCss = classnames('pb_skeleton_loading', globalProps(props), className)
   const skeletonContainerCss =classnames(buildCss('pb_skeleton_loading'), globalProps(props), className)
   const gapClass = gap !== 'none' ? `gap_${gap}` : ''
   const innerSkeletonCss = classnames(`border_radius_${borderRadius}`,`color_${color}`, dark && 'dark', )
-  const innerSizeStyle = { height, width }
-
+  // const innerSizeStyle = { height, width }
+  const innerSizeStyle = square ? { height: square, width: square } : { height, width }
+  
   return (
     <div
         {...ariaProps}
         {...dataProps}
-        // className={classes}
-        // className={css}
         className={skeletonContainerCss}
         id={id}
-        // style={sizeStyle}
-        style={{ display: "flex", flexDirection: "column" }}
+        style={{ display: "flex", flexDirection: "column", height: "100%" }}
     >
       {className}
-      {/* {"hello skeleton_loading tsx file"} */}
-      {/* <div style={{height: "16px", width: "100%", backgroundColor: "red"}}> </div> */}
-      {/* <div style={{height, width, }}> </div> */}
       {Array.from({ length: Number(stack) }).map((_, index) => (
         <div
-            // className={gap !== 'none' ? gapClass : ''}
-            // className={index > 0 && stack > 1 && gap !== 'none' ? `gap_${gap}` : ''}
-            // className={classnames(`color_${color}`, `border_radius_${borderRadius}`, dark && 'dark', index > 0 && gapClass)}
             className={classnames(innerSkeletonCss, index > 0 && gapClass)}
-            // className={classnames((gapClass && index > 0), innerSkeletonCss)}
-            // className={classnames({ [gapClass]: index > 0, innerSkeletonCss })}
             key={index}
-            // style={sizeStyle}
             style={innerSizeStyle}
         />
       ))}
-      {/* {Array.from({ length: Number(stack) }).map((_, index) => {
-        const classNames = classnames(
-          innerSkeletonCss,
-          { [gapClass]: index > 0 }
-        )
-
-        return (
-          <div
-            key={index}
-            style={innerSizeStyle}
-            className={classNames}
-          />
-        )
-      })} */}
     </div>
   )
 }
