@@ -25,7 +25,7 @@ module Playbook
 
       def classname
         [
-          generate_classname_without_spacing("pb_selectable_card_kit", checked_class, enable_disabled_class),
+          generate_classname_without_spacing("pb_selectable_card_kit", checked_class, enable_disabled_class) + display_input_class,
           error_class,
           dark_props,
         ].compact.join(" ")
@@ -78,6 +78,10 @@ module Playbook
 
       def error_class
         error ? "error" : nil
+      end
+
+      def display_input_class
+        variant == "display_input" ? " display_input" : ""
       end
     end
   end
