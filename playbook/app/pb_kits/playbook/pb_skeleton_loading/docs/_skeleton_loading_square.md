@@ -1,0 +1,1 @@
+The `square` prop accepts pixel and percentage values, and functions to set the `height` and `width` props to the same value. If using percentages and your parent container is not a square, then the resulting Skeleton Loading component will not be a square (rather, the each resulting value will correspond to the size of the container based on the same percentage).

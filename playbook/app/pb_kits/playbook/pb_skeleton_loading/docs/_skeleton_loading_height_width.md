@@ -1,0 +1,1 @@
+The `height` and `width` props accept pixel and percentage values. If using a percentage for `height`, the parent container must have a set height.

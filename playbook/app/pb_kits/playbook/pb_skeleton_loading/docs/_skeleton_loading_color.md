@@ -1,0 +1,1 @@
+The SkeletonLoading component has a default and a light `color` variant. They are the same color in dark mode.
