@@ -109,8 +109,8 @@ const Card = (props: CardPropTypes): React.ReactElement => {
   // coerce to array
   const cardChildren = React.Children.toArray(children)
   const dynamicInlineProps = globalInlineProps(props);
-  const { style: htmlStyle, ...restHtmlProps } = htmlProps;
-  const mergedStyles = { ...htmlStyle, ...dynamicInlineProps };
+  const { style: htmlStyle = {}, ...restHtmlProps } = htmlProps as { style?: React.CSSProperties };
+  const mergedStyles: React.CSSProperties = { ...htmlStyle, ...dynamicInlineProps };
 
 
   const subComponentTags = (tagName: string) => {
@@ -135,7 +135,6 @@ const Card = (props: CardPropTypes): React.ReactElement => {
         <Draggable.Item dragId={dragId} 
             key={dragId}
         >
-          <h1>{htmlProps}</h1>
         <Tag
             {...ariaProps}
             {...dataProps}
