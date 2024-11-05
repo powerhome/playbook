@@ -6,7 +6,7 @@ description: Some of our kits require additional libraries to run properly.
 
 ## Playbook UI Dependencies | React
 
-Playbook UI's React libray needs the following packages installed in your project to work properly:
+Playbook UI's React library needs the following packages installed in your project to work properly:
 
 ```json
 "react"
