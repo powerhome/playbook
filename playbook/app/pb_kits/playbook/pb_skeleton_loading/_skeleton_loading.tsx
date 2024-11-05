@@ -18,7 +18,6 @@ type SkeletonLoadingProps = {
   stack?: number,
   color?: "default" | "light",
   dark?: boolean,
-  square?: "string",
 } & GlobalProps
 
 const SkeletonLoading = (props: SkeletonLoadingProps): React.ReactElement => {
@@ -34,7 +33,6 @@ const SkeletonLoading = (props: SkeletonLoadingProps): React.ReactElement => {
     stack = 1,
     color = "default",
     dark = false,
-    square,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -42,8 +40,7 @@ const SkeletonLoading = (props: SkeletonLoadingProps): React.ReactElement => {
   const skeletonContainerCss =classnames(buildCss('pb_skeleton_loading'), globalProps(props), className)
   const gapClass = gap !== 'none' ? `gap_${gap}` : ''
   const innerSkeletonCss = classnames(`border_radius_${borderRadius}`,`color_${color}`, dark && 'dark', )
-  // const innerSizeStyle = { height, width }
-  const innerSizeStyle = square ? { height: square, width: square } : { height, width }
+  const innerSizeStyle = { height, width }
   
   return (
     <div

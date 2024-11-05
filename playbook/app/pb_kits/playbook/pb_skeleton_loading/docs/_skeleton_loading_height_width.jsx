@@ -12,9 +12,9 @@ const SkeletonLoadingHeightWidth = (props) => (
     <br />
     <SkeletonLoading
         gap="md"
-        height="10px"
+        height="20px"
         stack="3"
-        width="20px"
+        width="50px"
         {...props}
     />
     <br />
@@ -26,7 +26,7 @@ const SkeletonLoadingHeightWidth = (props) => (
           borderRadius="md"
           gap="xl"
           height="50%"
-          width="30px"
+          width="300px"
           {...props}
       />
     </Card>

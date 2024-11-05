@@ -6,12 +6,10 @@
     height: 100%;
     .color_default {
         background-color: $silver;
-        // background-color: $green;
         @include skeleton-shimmer($silver)
     }
     .color_light {
         background-color: $white;
-        // background-color: $orange;
         @include skeleton-shimmer($white)
 
     }
