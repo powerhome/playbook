@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import Title from '../pb_title/_title'
 import Icon from '../pb_icon/_icon'
 import Avatar from '../pb_avatar/_avatar'
+import Tooltip from '../pb_tooltip/_tooltip'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildDataProps, buildHtmlProps } from '../utilities/props'
 
@@ -62,6 +63,30 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
 
+  const renderTitle = (content: string, className: string) => {
+    const titleComponent = (
+      <Title
+          className={className}
+          size={4}
+          text={content}
+          truncate={props.truncate}
+      />
+    )
+    if (props.truncate) {
+      return (
+        <Tooltip
+            interaction
+            placement="top"
+            position="fixed"
+            text={content}
+        >
+          {titleComponent}
+        </Tooltip>
+      )
+    }
+    return titleComponent
+  }
+
   return (
     <div className={css}
         id={id}
@@ -77,12 +102,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
               size="xxs"
               status={null}
           />
-          <Title
-              className="pb_form_pill_text"
-              size={4}
-              text={name}
-              truncate={props.truncate}
-          />
+          {renderTitle(name, "pb_form_pill_text")}
         </>
       )}
       {((name && icon && !text) || (name && icon && text)) && (
@@ -93,12 +113,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
               size="xxs"
               status={null}
           />
-          <Title
-              className="pb_form_pill_text"
-              size={4}
-              text={name}
-              truncate={props.truncate}
-          />
+          {renderTitle(name, "pb_form_pill_text")}
           <Icon
               className="pb_form_pill_icon"
               color={color}
@@ -113,22 +128,10 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
               color={color}
               icon={icon}
           />
-          <Title
-              className="pb_form_pill_tag"
-              size={4}
-              text={text}
-              truncate={props.truncate}
-          />
+          {renderTitle(text, "pb_form_pill_tag")}
         </>
       )}
-      {(!name && !icon && text) && (
-        <Title
-            className="pb_form_pill_tag"
-            size={4}
-            text={text}
-            truncate={props.truncate}
-        />
-      )}
+      {(!name && !icon && text) && renderTitle(text, "pb_form_pill_tag")}
       <div
           className="pb_form_pill_close"
           onClick={onClick}
@@ -143,4 +146,5 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     </div>
   )
 }
+
 export default FormPill
