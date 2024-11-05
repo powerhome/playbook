@@ -1,57 +1,23 @@
-// animation
-@keyframes wave {
-    0% {
-      background-position: -468px 0;
-    }
-    100% {
-      background-position: 468px 0;
-    }
-}
+@import 'skeleton_loading_mixins';
 
 .pb_skeleton_loading {
+    display: "flex";
+    flex-direction: "column";
+    height: 100%;
     .color_default {
         background-color: $silver;
         // background-color: $green;
-        background-image: linear-gradient(
-            to left,
-            $silver 0%,
-            lighten($silver, 1%) 50%,
-            lighten($silver, 1%) 60%,
-            $silver 80%,
-            $silver 100%
-          );
-          background-size: 800px 104px;
-          background-repeat: no-repeat;
-          animation: wave 1.5s linear infinite;
+        @include skeleton-shimmer($silver)
     }
     .color_light {
         background-color: $white;
         // background-color: $orange;
-        background-image: linear-gradient(
-            to left,
-            $white 0%,
-            lighten($white, 1%) 50%,
-            lighten($white, 1%) 60%,
-            $white 80%,
-            $white 100%
-          );
-          background-size: 800px 104px;
-          background-repeat: no-repeat;
-          animation: wave 1.5s linear infinite;
+        @include skeleton-shimmer($white)
+
     }
     .dark {
         background-color: $border_dark;
-        background-image: linear-gradient(
-            to left,
-            $border_dark 0%,
-            lighten($border_dark, 10%) 50%,
-            lighten($border_dark, 10%) 60%,
-            $border_dark 80%,
-            $border_dark 100%
-          );
-          background-size: 800px 104px;
-          background-repeat: no-repeat;
-          animation: wave 1.5s linear infinite;
+        @include skeleton-shimmer($border_dark)
     }
     .gap_xxs {
         margin-top: 4px;

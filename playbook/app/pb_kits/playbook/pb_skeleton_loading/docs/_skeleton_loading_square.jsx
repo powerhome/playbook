@@ -1,9 +1,10 @@
 import React from 'react'
-import { Card, SkeletonLoading } from "playbook-ui"
+import { Caption, Card, SkeletonLoading } from "playbook-ui"
 
 
 const SkeletonLoadingSquare = (props) => (
   <div>
+    <Caption text="square from square prop" />
     <SkeletonLoading 
         square="150px" 
         {...props}
@@ -25,6 +26,12 @@ const SkeletonLoadingSquare = (props) => (
           {...props}
       />
     </Card>
+    <Caption text="square from height = width" />
+    <SkeletonLoading 
+        height="150px"
+        width="150px"
+        {...props}
+    />
   </div>
 )
 

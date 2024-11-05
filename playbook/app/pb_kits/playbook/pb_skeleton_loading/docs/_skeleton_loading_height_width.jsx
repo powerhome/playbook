@@ -37,7 +37,7 @@ const SkeletonLoadingHeightWidth = (props) => (
           borderRadius="md"
           gap="xl"
           height="30%"
-          stack="3"
+          stack="2"
           width="70%"
           {...props}
       />

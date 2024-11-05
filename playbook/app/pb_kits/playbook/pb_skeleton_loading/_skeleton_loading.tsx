@@ -51,12 +51,11 @@ const SkeletonLoading = (props: SkeletonLoadingProps): React.ReactElement => {
         {...dataProps}
         className={skeletonContainerCss}
         id={id}
-        style={{ display: "flex", flexDirection: "column", height: "100%" }}
     >
       {className}
       {Array.from({ length: Number(stack) }).map((_, index) => (
         <div
-            className={classnames(innerSkeletonCss, index > 0 && gapClass)}
+            className={classnames(buildCss('pb_skeleton_loading'), innerSkeletonCss, index > 0 && gapClass)}
             key={index}
             style={innerSizeStyle}
         />
