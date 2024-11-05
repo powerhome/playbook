@@ -1,40 +1,83 @@
+// animation
+@keyframes wave {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+}
+
 .pb_skeleton_loading {
     .color_default {
         background-color: $silver;
         // background-color: $green;
+        background-image: linear-gradient(
+            to left,
+            $silver 0%,
+            lighten($silver, 1%) 50%,
+            lighten($silver, 1%) 60%,
+            $silver 80%,
+            $silver 100%
+          );
+          background-size: 800px 104px;
+          background-repeat: no-repeat;
+          animation: wave 1.5s linear infinite;
     }
     .color_light {
         background-color: $white;
         // background-color: $orange;
+        background-image: linear-gradient(
+            to left,
+            $white 0%,
+            lighten($white, 1%) 50%,
+            lighten($white, 1%) 60%,
+            $white 80%,
+            $white 100%
+          );
+          background-size: 800px 104px;
+          background-repeat: no-repeat;
+          animation: wave 1.5s linear infinite;
     }
     .dark {
-        background-color: $border_dark
+        background-color: $border_dark;
+        background-image: linear-gradient(
+            to left,
+            $border_dark 0%,
+            lighten($border_dark, 10%) 50%,
+            lighten($border_dark, 10%) 60%,
+            $border_dark 80%,
+            $border_dark 100%
+          );
+          background-size: 800px 104px;
+          background-repeat: no-repeat;
+          animation: wave 1.5s linear infinite;
     }
     .gap_xxs {
         margin-top: 4px;
-      }
-      
-      .gap_xs {
+    }
+    
+    .gap_xs {
         margin-top: 8px;
-      }
-      
-      .gap_sm {
+    }
+    
+    .gap_sm {
         margin-top: 16px;
-      }
-      
-      .gap_md {
+    }
+    
+    .gap_md {
         margin-top: 24px;
-      }
-      
-      .gap_lg {
+    }
+    
+    .gap_lg {
         margin-top: 32px;
-      }
-      
-      .gap_xl {
+    }
+    
+    .gap_xl {
         margin-top: 40px;
-      }
-      
-      .gap_xxl {
+    }
+    
+    .gap_xxl {
         margin-top: 48px;
-      }
+    }
 }
