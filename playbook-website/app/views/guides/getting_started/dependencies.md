@@ -4,6 +4,21 @@ icon: code
 description: Some of our kits require additional libraries to run properly.
 ---
 
+## Playbook UI Dependencies | React
+
+Playbook UI's React libray needs the following packages installed in your project to work properly:
+
+```json
+"react"
+ "react-dom"
+ "react-is"
+ "react-trix"
+```
+
+## Playbook UI Dependencies | Rails
+
+Playbook UI's Rails library depends on the react library for all of its javascript powered features. Follow the instructions in the [Ruby & React Setup](/guides/getting_started/rails_&_react_setup) guide to add react to your Rails app.
+
 ## Unbundled Dependencies
 
 These kits require you to install additional libraries to get full functionality.
