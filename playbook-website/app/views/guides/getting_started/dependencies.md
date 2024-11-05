@@ -17,7 +17,7 @@ Playbook UI's React libray needs the following packages installed in your projec
 
 ## Playbook UI Dependencies | Rails
 
-Playbook UI's Rails library depends on the react library for all of its javascript powered features. Follow the instructions in the [Ruby & React Setup](/guides/getting_started/rails_&_react_setup) guide to add react to your Rails app.
+Playbook UI's Rails gem requires React for its components javascript to fully function. Follow the instructions in the [Ruby & React Setup](/guides/getting_started/rails_&_react_setup) guide to add react to your Rails app.
 
 ## Unbundled Dependencies
 

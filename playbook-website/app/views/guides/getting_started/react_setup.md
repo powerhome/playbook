@@ -31,3 +31,6 @@ import { Avatar, Button } from 'playbook-ui';
 ```
 #### CodeSandbox React Setup Example
 [Link to CodeSandbox Example](https://codesandbox.io/s/playbook-empty-6ixcw)
+
+### Dependencies 
+[More details about Playbook dependencies](/guides/getting_started/dependencies)
