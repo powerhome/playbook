@@ -31,6 +31,21 @@ const TimelineWithChildrenVertical = (props) => (
         </Timeline.Detail>
       </Timeline.Item>
 
+      <Timeline.Item lineStyle="solid"
+          {...props}
+      >
+        <Timeline.Label date={new Date(new Date().setDate(new Date().getDate() + 1))} />
+        <Timeline.Step icon="map-marker-alt"
+            iconColor="purple"
+        />
+        <Timeline.Detail>
+          <TitleDetail detail="72 E St Astoria"
+              title="Society Hill"
+              {...props}
+          />
+        </Timeline.Detail>
+      </Timeline.Item>
+
       <Timeline.Item lineStyle="dotted"
           {...props}
       >
@@ -42,21 +57,6 @@ const TimelineWithChildrenVertical = (props) => (
         <Timeline.Detail>
           <TitleDetail detail="81 Gate St Brooklyn"
               title="Greenpoint"
-              {...props}
-          />
-        </Timeline.Detail>
-      </Timeline.Item>
-
-      <Timeline.Item lineStyle="solid"
-          {...props}
-      >
-        <Timeline.Label date={new Date(new Date().setDate(new Date().getDate() + 1))} />
-        <Timeline.Step icon="map-marker-alt"
-            iconColor="purple"
-        />
-        <Timeline.Detail>
-          <TitleDetail detail="72 E St Astoria"
-              title="Society Hill"
               {...props}
           />
         </Timeline.Detail>

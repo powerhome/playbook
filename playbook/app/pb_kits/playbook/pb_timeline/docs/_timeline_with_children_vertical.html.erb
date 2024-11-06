@@ -18,6 +18,14 @@
         }) %>
       <% end %>
     <% end %>
+
+    <%= pb_rails("timeline/item", props: {icon: "map-marker-alt", icon_color: "purple", date: Date.today+1 }) do |item| %>
+      <%= pb_rails("title_detail", props: {
+          title: "Society Hill",
+          detail: "72 E St Astoria"
+      }) %>
+    <% end %>
+
     <%= pb_rails("timeline/item", props: { line_style: "dotted"}) do |item| %>
 
       <% item.step do %>
@@ -32,12 +40,5 @@
           detail: "81 Gate St Brooklyn"
         }) %>
       <% end %>
-    <% end %>
-
-    <%= pb_rails("timeline/item", props: {icon: "map-marker-alt", icon_color: "purple", date: Date.today+1 }) do |item| %>
-      <%= pb_rails("title_detail", props: {
-          title: "Society Hill",
-          detail: "72 E St Astoria"
-      }) %>
     <% end %>
 <% end %>
