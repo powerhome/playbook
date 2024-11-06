@@ -16,7 +16,7 @@ interface CustomCellProps {
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   row: Row<GenericObject>
   value?: string
-  customRenderer?: any,
+  customRenderer?: (row: Row<GenericObject>, value: string | undefined) => React.ReactNode
 } 
 
 export const CustomCell = ({
