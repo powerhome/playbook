@@ -16,6 +16,7 @@ interface CustomCellProps {
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   row: Row<GenericObject>
   value?: string
+  customRenderer?: any,
 } 
 
 export const CustomCell = ({
@@ -23,6 +24,7 @@ export const CustomCell = ({
   onRowToggleClick,
   row,
   value,
+  customRenderer,
 }: CustomCellProps & GlobalProps) => {
   const { setExpanded, expanded, expandedControl, inlineRowLoading } = useContext(AdvancedTableContext);
 
@@ -61,7 +63,12 @@ export const CustomCell = ({
           </button>
         ) : null}
         <FlexItem paddingLeft={renderButton? "none" : "xs"}>
-          {row.depth === 0 ? getValue() : value}
+          {row.depth === 0 ? (
+            customRenderer ? customRenderer(row, getValue()) : getValue()
+           ) :(
+            customRenderer ? customRenderer(row, value) : value
+           )
+           }
         </FlexItem>
       </Flex>
     </div>

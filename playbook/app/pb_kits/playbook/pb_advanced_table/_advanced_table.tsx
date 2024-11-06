@@ -17,7 +17,6 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../uti
 import { globalProps, GlobalProps } from "../utilities/globalProps"
 
 import Table from "../pb_table/_table"
-import Flex from "../pb_flex/_flex"
 
 import AdvancedTableContext from "./Context/AdvancedTableContext"
 
@@ -106,22 +105,12 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       switch (row.depth) {
         case 0: {
           return (
-              customRenderer ? (
-                <Flex>
                 <CustomCell
+                    customRenderer={customRenderer}
                     getValue={getValue}
                     onRowToggleClick={onRowToggleClick}
                     row={row}
                 />
-                  {customRenderer(row, getValue())}
-                </Flex>
-              ) : (
-                <CustomCell
-                    getValue={getValue}
-                    onRowToggleClick={onRowToggleClick}
-                    row={row}
-                />
-              )
           )
         }
         default: {
@@ -129,22 +118,12 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           const depthAccessor = cellAccessors[row.depth - 1] // Adjust index for depth
           const accessorValue = rowData[depthAccessor]
           return accessorValue ? (
-            customRenderer ? (
-              <Flex>
-                <CustomCell
-                    onRowToggleClick={onRowToggleClick}
-                    row={row} 
-                    value={accessorValue} 
-                />
-                  {customRenderer(row, getValue())}
-                </Flex>
-            ) : (
             <CustomCell
+                customRenderer={customRenderer}
                 onRowToggleClick={onRowToggleClick}
                 row={row} 
                 value={accessorValue} 
             />
-            )
           ) : (
             "N/A"
           )
