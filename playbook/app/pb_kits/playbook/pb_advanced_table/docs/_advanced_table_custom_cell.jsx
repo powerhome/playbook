@@ -13,8 +13,8 @@ const AdvancedTableCustomCell = (props) => {
           <Title size={4}
               text={value} 
           />
-          <Badge 
-              marginLeft="sm"
+          <Badge dark
+              marginLeft="xxs"
               text={row.original.newEnrollments > 20 ? "High" : "Low"}
               variant="neutral"
           />
