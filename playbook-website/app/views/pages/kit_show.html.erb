@@ -4,14 +4,10 @@
       <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
     </div>
   <% end %>
-    <%= pb_rails("flex", props: { justify: "between", align_items: "center" }) do %>
+    <%= pb_rails("flex", props: { justify: "between", align_items: "start" }) do %>
     <%= pb_rails("flex/flex_item", props: { flex: "9"}) do %>
       <%= pb_rails("flex", props: { orientation: "column"}) do %>
         <%= pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: 1, margin_top: "xl" }) %>
-        <%= @kit %>
-        <%= @icons_used.to_s %>
-        <%= @react_rendered.to_s %>
-        <%= @enhanced_element_used.to_s %>
         <% if @kit_status === "beta" %>
           <%= pb_rails("card", props: {highlight: {position: "side", color:"primary", shadow:"deep"}, margin_y: "md", padding: "sm"}) do %>
             <%= pb_rails("flex", props:{ align: "center" }) do %>
