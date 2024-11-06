@@ -1,0 +1,43 @@
+<%= pb_rails("timeline", props: {orientation: "vertical", show_date: true}) do %>
+    <%= pb_rails("timeline/item") do |item| %>
+
+      <% item.label do %>
+        <%= pb_rails("timeline/label") do %>
+          <%= pb_rails("title", props: { text: "Any Kit", size: 4 }) %>
+        <% end %>
+      <% end %>
+    
+      <% item.step do %>
+        <%= pb_rails("timeline/step", props: { icon: 'user', icon_color: 'royal' }) %>
+      <% end %>
+    
+      <% item.detail do %>
+        <%= pb_rails("title_detail", props: {
+          title: "Jackson Heights",
+          detail: "37-27 74th Street"
+        }) %>
+      <% end %>
+    <% end %>
+    <%= pb_rails("timeline/item", props: { line_style: "dotted"}) do |item| %>
+
+      <% item.step do %>
+        <%= pb_rails("timeline/step") do %>
+          <%= pb_rails("pill", props: { text: "Any Kit" , variant: "success" }) %>
+        <% end %>
+      <% end %>
+    
+      <% item.detail do %>
+        <%= pb_rails("title_detail", props: {
+          title: "Greenpoint",
+          detail: "81 Gate St Brooklyn"
+        }) %>
+      <% end %>
+    <% end %>
+
+    <%= pb_rails("timeline/item", props: {icon: "map-marker-alt", icon_color: "purple", date: Date.today+1 }) do |item| %>
+      <%= pb_rails("title_detail", props: {
+          title: "Society Hill",
+          detail: "72 E St Astoria"
+      }) %>
+    <% end %>
+<% end %>

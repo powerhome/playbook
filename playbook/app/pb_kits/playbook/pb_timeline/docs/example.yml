@@ -5,6 +5,7 @@ examples:
   - timeline_vertical: Vertical
   - timeline_with_date: With Date
   - timeline_with_children: With Children
+  - timeline_with_children_vertical: Vertical With Children
   
   
   react:
@@ -12,3 +13,4 @@ examples:
   - timeline_vertical: Vertical
   - timeline_with_date: With Date
   - timeline_with_children: With Children
+  - timeline_with_children_vertical: Vertical With Children
