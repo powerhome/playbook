@@ -40,7 +40,7 @@ const SkeletonLoading = (props: SkeletonLoadingProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const skeletonContainerCss =classnames(buildCss('pb_skeleton_loading'), globalProps(props), className)
+  const skeletonContainerCss = classnames(buildCss('pb_skeleton_loading'), globalProps(props), className)
   const gapClass = gap !== 'none' ? `gap_${gap}` : ''
   const innerSkeletonCss = classnames(`border_radius_${borderRadius}`,`color_${color}`, dark && 'dark', )
   const innerSizeStyle = { height, width }
@@ -55,7 +55,7 @@ const SkeletonLoading = (props: SkeletonLoadingProps): React.ReactElement => {
     >
       {Array.from({ length: Number(stack) }).map((_, index) => (
         <div
-            className={classnames(buildCss('pb_skeleton_loading'), innerSkeletonCss, index > 0 && gapClass)}
+            className={classnames(buildCss('pb_skeleton_loading_item'), innerSkeletonCss, index > 0 && gapClass)}
             key={index}
             style={innerSizeStyle}
         />
