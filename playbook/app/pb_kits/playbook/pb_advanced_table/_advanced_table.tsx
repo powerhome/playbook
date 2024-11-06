@@ -91,7 +91,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const columnHelper = createColumnHelper()
 
   //Create cells for columns, with customization for first column
-  const createCellFunction = (cellAccessors: string[], customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element, index:number) => {
+  const createCellFunction = (cellAccessors: string[], customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element, index?: number) => {
     const columnCells = ({
       row,
       getValue,
