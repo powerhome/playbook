@@ -8,6 +8,19 @@ $icon_margin: $space_xs/2;
 $icon_height: 28px;
 $height_from_top: $icon_height/2 - $connector_width/2;
 
+$gapSpaces:(
+  xxs:  $space_xxs,
+  xs:   $space_xs,
+  sm:   $space_sm,
+  md:   $space_md,
+  lg:   $space_lg,
+  xl:   $space_xl
+);
+
+$gapTypes: (
+  gap: gap
+);
+
 @mixin pb_timeline_line_solid($width, $height, $margin) {
     width: $width;
     height: $height;
@@ -267,4 +280,14 @@ $height_from_top: $icon_height/2 - $connector_width/2;
             }
         }
     }
+
+    //Gap
+    @each $gapType, $gapValue in $gapTypes{
+        @each $sizeName, $sizeValue in $gapSpaces {
+            &[class*=_#{$gapType}_#{$sizeName}]{
+                #{$gapValue}: $sizeValue;
+            }
+        }
+    }
+
 }
