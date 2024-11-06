@@ -90,7 +90,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
   const columnHelper = createColumnHelper()
 
-  //Create cells for first columns
+  //Create cells for columns, with customization for first column
   const createCellFunction = (cellAccessors: string[], customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element, index:number) => {
     const columnCells = ({
       row,
@@ -133,14 +133,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     return customRenderer
     ? customRenderer(row, getValue())
     : getValue()
-
     }
-
     return columnCells
   }
-
-
-  
+ 
 //   //Create column array in format needed by Tanstack
   const columns =
     columnDefinitions &&
