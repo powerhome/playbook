@@ -67,6 +67,7 @@ const SelectableCard = (props: SelectableCardProps) => {
       'disabled': disabled,
       'enabled': !disabled,
     }),
+  variant === 'displayInput' ? 'display_input' : '',
   { error },
   dark ? 'dark' : '',
   className
