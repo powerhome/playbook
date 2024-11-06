@@ -1,5 +1,5 @@
 import React from "react"
-import { AdvancedTable, Pill, Body, Flex, Detail, Caption } from "playbook-ui"
+import { AdvancedTable, Pill, Body, Flex, Detail, Caption, Badge } from "playbook-ui"
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableCustomCell = (props) => {
@@ -8,6 +8,11 @@ const AdvancedTableCustomCell = (props) => {
       accessor: "year",
       label: "Year",
       cellAccessors: ["quarter", "month", "day"],
+      customRenderer: (row, value) => (
+        <Badge text={value} 
+            variant="neutral"    
+        />
+      ), 
 
     },
     {
