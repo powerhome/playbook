@@ -41,6 +41,9 @@ $height_from_top: $icon_height/2 - $connector_width/2;
     &[class*=_horizontal] {
         @include flex_wrapper(row);
         width: 100%;
+        .hidden_icon_circle_placeholder {
+            display: none;
+        }
         >div {
             &:last-child {
                 flex-basis: auto !important;
@@ -163,6 +166,17 @@ $height_from_top: $icon_height/2 - $connector_width/2;
         @include flex_wrapper(column);
         align-items: flex-start;
         align-self: auto;
+        [class=pb_timeline_item_step] {
+            position: relative;
+        }
+        .step_children_container {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        .hidden_icon_circle_placeholder {
+            visibility: hidden;
+        }
         >div:last-child {
             [class=pb_timeline_item_step] {
                 [class=pb_timeline_item_connector] {

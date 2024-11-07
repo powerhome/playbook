@@ -6,7 +6,15 @@
       size: "xs"
     }) %>
   <% else %>
-    <%= content.presence %>
+    <div class="step_children_container">
+      <%= content.presence %>
+    </div>
+    <%= pb_rails("icon_circle", props: {
+      classname: "hidden_icon_circle_placeholder",
+      icon: "user",
+      variant: "default",
+      size: "xs"
+    }) %>
   <% end %>
   <div class="pb_timeline_item_connector"></div>
 <% end %>

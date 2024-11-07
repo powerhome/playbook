@@ -27,7 +27,17 @@ const TimelineStep: React.FC<TimelineStepProps> = ({
         className={classnames('pb_timeline_item_step', globalProps(props), className)}
     >
       {children ? (
-        children
+        <>
+          <div className="step_children_container">
+            {children}
+          </div>
+          <IconCircle
+              className="hidden_icon_circle_placeholder"
+              icon="user"
+              size="xs"
+              variant="default"
+          />
+        </>
       ) : (
         <IconCircle icon={icon}
             size="xs"
