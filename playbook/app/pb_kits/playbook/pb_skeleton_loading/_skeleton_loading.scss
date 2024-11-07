@@ -5,17 +5,14 @@
     flex-direction: "column";
     height: 100%;
     .color_default {
-        background-color: $silver;
-        @include skeleton-shimmer($silver)
+        @include skeleton-shimmer($silver);
     }
     .color_light {
-        background-color: $white;
-        @include skeleton-shimmer($white)
+        @include skeleton-shimmer($white);
 
     }
     .dark {
-        background-color: $border_dark;
-        @include skeleton-shimmer($border_dark)
+        @include skeleton-shimmer($border_dark);
     }
     .gap_xxs {
         margin-top: 4px;
