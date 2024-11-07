@@ -25,8 +25,11 @@
         margin-left: 4px !important;
     }
     &.dark {
-        [class^=pb_title_kit], [class^=pb_body_kit], [class^=pb_caption_kit] {
+        [class^=pb_title_kit] {
             color: $text_dk_default !important;
+        }
+        [class^=pb_body_kit], [class^=pb_caption_kit] {
+            color: $text_dk_light !important;
         }
     }
 }
