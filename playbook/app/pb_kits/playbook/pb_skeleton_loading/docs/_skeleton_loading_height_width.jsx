@@ -9,15 +9,14 @@ const SkeletonLoadingHeightWidth = (props) => (
         width="50%"
         {...props}
     />
-    <br />
     <SkeletonLoading
         gap="md"
         height="20px"
+        marginY="md"
         stack="3"
         width="50px"
         {...props}
     />
-    <br />
     <Card htmlOptions={{ style: { height: '200px', width: '100%' }}} 
         marginBottom="md"
         padding="none" 
@@ -42,6 +41,18 @@ const SkeletonLoadingHeightWidth = (props) => (
           {...props}
       />
     </Card>
+    <SkeletonLoading 
+        height="150px"
+        marginY="md"
+        width="150px"
+        {...props}
+    />
+    <SkeletonLoading 
+        borderRadius="rounded"
+        height="150px"
+        width="150px"
+        {...props}
+    />
   </div>
 )
 

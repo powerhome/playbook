@@ -16,7 +16,7 @@ const SkeletonLoadingColor = (props) => (
         {...props}
     >
       <SkeletonLoading 
-          color="light" 
+          color="white" 
           {...props} 
       />
     </Card>

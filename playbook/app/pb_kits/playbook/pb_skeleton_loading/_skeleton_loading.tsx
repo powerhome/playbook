@@ -17,7 +17,7 @@ type SkeletonLoadingProps = {
   borderRadius?: string,
   gap?: Sizes | "none",
   stack?: number,
-  color?: "default" | "light",
+  color?: "default" | "white",
   dark?: boolean,
 } & GlobalProps
 
