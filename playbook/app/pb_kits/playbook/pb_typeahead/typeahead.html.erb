@@ -22,6 +22,7 @@
         value: object.value,
         placeholder: object.placeholder,
         margin_bottom: "none",
+        required: object.required,
       }) %>
       <%= pb_rails("list", props: { ordered: false, borderless: false, xpadding: true, role: "status", aria: { live: "polite" }, data: { pb_typeahead_kit_results: true } }) do %>
       <% end %>

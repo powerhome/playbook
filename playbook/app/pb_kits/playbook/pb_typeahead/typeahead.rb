@@ -40,6 +40,8 @@ module Playbook
       prop :pill_color, type: Playbook::Props::Enum,
                         values: %w[primary neutral success warning error info data_1 data_2 data_3 data_4 data_5 data_6 data_7 data_8 windows siding roofing doors gutters solar insulation accessories],
                         default: "primary"
+      prop :required, type: Playbook::Props::Boolean,
+                      default: false
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
