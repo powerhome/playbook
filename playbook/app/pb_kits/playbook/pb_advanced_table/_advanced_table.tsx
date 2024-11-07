@@ -136,8 +136,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
     return columnCells
   }
- 
-//   //Create column array in format needed by Tanstack
+//Create column array in format needed by Tanstack
   const columns =
     columnDefinitions &&
       columnDefinitions.map((column, index) => {
