@@ -1,0 +1,14 @@
+<%= pb_content_tag do %>
+  <% if object.icon.present? %>
+    <%= pb_rails("icon_circle", props: {
+      icon: object.icon,
+      variant: object.icon_color,
+      size: "xs"
+    }) %>
+  <% else %>
+    <%= content.presence %>
+  <% end %>
+  <div class="pb_timeline_item_connector"></div>
+<% end %>
+
+
