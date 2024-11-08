@@ -1,3 +1,41 @@
+# 14.7.0
+##### November 8, 2024
+
+[14.7.0](https://github.com/powerhome/playbook/tree/14.7.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Custom Cells for Advanced Table First Column ([\#3889](https://github.com/powerhome/playbook/pull/3889)) ([@nidaqg](https://github.com/nidaqg))
+- Group hover Global Prop ([\#3833](https://github.com/powerhome/playbook/pull/3833)) ([@markdoeswork](https://github.com/markdoeswork))
+- Timeline Sub Components ([\#3801](https://github.com/powerhome/playbook/pull/3801)) ([@markdoeswork](https://github.com/markdoeswork))
+- Tooltip for Truncated Form Pills ([\#3856](https://github.com/powerhome/playbook/pull/3856)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Currency Kit Comma Separator ([\#3867](https://github.com/powerhome/playbook/pull/3867)) ([@jasperfurniss](https://github.com/jasperfurniss))
+
+**Fixed Bugs:**
+ - Fix Height Prop for HtmlOptions Support ([\#3873](https://github.com/powerhome/playbook/pull/3873)) ([@jasperfurniss](https://github.com/jasperfurniss))
+ - Fix Overflow Container Bug by Using Padding Instead of Outline ([\#3807](https://github.com/powerhome/playbook/pull/3807)) ([@kangaree](https://github.com/kangaree))
+
+
+**Improvements:**
+- Bump @tiptap/extension-document from 2.1.12 to 2.6.6 ([\#3879](https://github.com/powerhome/playbook/pull/3879)) ([@skduncan](https://github.com/skduncan))
+- Fixing parsing kits props ([\#3857](https://github.com/powerhome/playbook/pull/3857)) ([@carloslimasd](https://github.com/carloslimasd))
+- Bump lazysizes from 5.2.2 to 5.3.2 ([\#3855](https://github.com/powerhome/playbook/pull/3855)) ([@skduncan](https://github.com/skduncan))
+- Font Awesome Setup Docs: JS Bundle and Asset Pipeline - Phase 2 ([\#3878](https://github.com/powerhome/playbook/pull/3878)) ([@kangaree](https://github.com/kangaree))
+- Add Details to Dependencies Docs ([\#3885](https://github.com/powerhome/playbook/pull/3885)) ([@markdoeswork](https://github.com/markdoeswork))
+- Font Awesome Setup Documentation - Phase 1 ([\#3865](https://github.com/powerhome/playbook/pull/3865)) ([@kangaree](https://github.com/kangaree))
+- Add Dependencies to Getting Started Page ([\#3864](https://github.com/powerhome/playbook/pull/3864)) ([@markdoeswork](https://github.com/markdoeswork))
+- Swift Changelog Update ([\#3854](https://github.com/powerhome/playbook/pull/3854)) ([@RachelRadford21](https://github.com/RachelRadford21))
+- Add README.md to Root in Dist for NPM ([\#3853](https://github.com/powerhome/playbook/pull/3853)) ([@kangaree](https://github.com/kangaree))
+Update Sentry DSNs ([\#3843](https://github.com/powerhome/playbook/pull/3843)) ([@benlangfeld](https://github.com/benlangfeld))
+
+**New Kits:**
+ - Beta Skeleton Loading Kit - React ([\#3876](https://github.com/powerhome/playbook/pull/3876)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+ - Beta Link Kit ([\#3852](https://github.com/powerhome/playbook/pull/3852)) ([@kangaree](https://github.com/kangaree))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.6.2...14.7.0)
+
+
 # Supercharge Your Tables: Custom Components in Advanced Table Cells!
 ##### October 22, 2024
 
