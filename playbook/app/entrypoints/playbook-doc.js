@@ -88,6 +88,7 @@ import * as SelectableCard from 'kits/pb_selectable_card/docs'
 import * as SelectableCardIcon from 'kits/pb_selectable_card_icon/docs'
 import * as SelectableIcon from 'kits/pb_selectable_icon/docs'
 import * as SelectableList from 'kits/pb_selectable_list/docs'
+import * as SkeletonLoading from 'kits/pb_skeleton_loading/docs'
 import * as Source from 'kits/pb_source/docs'
 import * as StarRating from 'kits/pb_star_rating/docs'
 import * as StatChange from 'kits/pb_stat_change/docs'
@@ -197,6 +198,7 @@ WebpackerReact.registerComponents({
   ...SelectableCardIcon,
   ...SelectableIcon,
   ...SelectableList,
+  ...SkeletonLoading,
   ...Source,
   ...StarRating,
   ...StatChange,
