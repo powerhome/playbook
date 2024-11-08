@@ -28,6 +28,7 @@
         margin_bottom: "none",
         required: object.required,
         id: object.name,
+        validation: object.validation,
       }) %>
       <%= pb_rails("list", props: { ordered: false, borderless: false, xpadding: true, role: "status", aria: { live: "polite" }, data: { pb_typeahead_kit_results: true } }) do %>
       <% end %>

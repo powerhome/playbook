@@ -42,6 +42,8 @@ module Playbook
                         default: "primary"
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :validation, type: Playbook::Props::HashProp,
+                        default: {}
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
