@@ -47,7 +47,7 @@ interface DropdownComponent
     Container: typeof DropdownContainer;
 }
 
-const Dropdown = forwardRef((props: DropdownProps, ref: any) => {
+let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const {
         aria = {},
         autocomplete = false,
@@ -260,7 +260,7 @@ const Dropdown = forwardRef((props: DropdownProps, ref: any) => {
                             <DropdownContainer>
                                 {optionsWithBlankSelection &&
                                     optionsWithBlankSelection?.map((option: GenericObject) => (
-                                        <Dropdown.Option key={option.id}
+                                        <DropdownOption key={option.id}
                                             option={option}
                                         />
                                     ))}
@@ -278,11 +278,12 @@ const Dropdown = forwardRef((props: DropdownProps, ref: any) => {
             </DropdownContext.Provider>
         </div>
     )
-}) as DropdownComponent
+}
 
-Dropdown.displayName = "Dropdown";
-Dropdown.Option = DropdownOption;
-Dropdown.Trigger = DropdownTrigger;
-Dropdown.Container = DropdownContainer;
+Dropdown = forwardRef(Dropdown) as unknown as DropdownComponent;
+(Dropdown as DropdownComponent).displayName = "Dropdown";
+(Dropdown as DropdownComponent).Option = DropdownOption;
+(Dropdown as DropdownComponent).Trigger = DropdownTrigger;
+(Dropdown as DropdownComponent).Container = DropdownContainer;
 
 export default Dropdown;

@@ -64,6 +64,10 @@ export const VisualGuidelinesItems = [
         link: "/visual_guidelines/hover"
     },
     {
+        name: "Group Hover",
+        link: "/visual_guidelines/group_hover"
+    },
+    {
         name: "Text Align",
         link: "/visual_guidelines/text_align"
     },

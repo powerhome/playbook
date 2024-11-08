@@ -66,6 +66,10 @@ type Hover = Shadow & {
   scale?: "sm" | "md" | "lg"
 }
 
+type GroupHover  = {
+  groupHover?: boolean,
+}
+
 type JustifyContent = {
   justifyContent?: Alignment & Space
 }
@@ -221,6 +225,7 @@ const filterClassName = (value: string): string => {
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
 
+  groupHoverProps: ({ groupHover }: GroupHover ) => groupHover ? 'group_hover ' : '',
   hoverProps: ({ hover }: { hover?: Hover }) => {
       let css = '';
       if (!hover) return css;
