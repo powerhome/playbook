@@ -5,10 +5,12 @@
 ] %>
 
 <%= pb_rails("draggable", props: {initial_items: initial_items}) do %>
-  <% initial_items.each do |item| %>
-    <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id]}) do %>
-      <%= pb_rails("card") do %>
-        <%= item[:name] %>
+  <%= pb_rails("draggable/draggable_container") do %>
+    <% initial_items.each do |item| %>
+      <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id]}) do %>
+        <%= pb_rails("card") do %>
+          <%= item[:name] %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
