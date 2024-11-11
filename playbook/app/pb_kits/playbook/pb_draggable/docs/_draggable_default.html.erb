@@ -4,4 +4,12 @@
   { id: "23", name: "Image 3" },
 ] %>
 
-<%= pb_rails("draggable", props: {initial_items: initial_items}) %>
+<%= pb_rails("draggable", props: {initial_items: initial_items}) do %>
+  <% initial_items.each do |item| %>
+    <%= pb_rails("draggable/draggable_item", props:{item: item}) do %>
+      <%= pb_rails("card") do %>
+        <%= item[:name] %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
