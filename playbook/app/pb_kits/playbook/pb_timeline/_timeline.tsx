@@ -3,7 +3,6 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
-import { Sizes } from '../types'
 
 import TimelineItem from './_item'
 import {
@@ -11,6 +10,8 @@ import {
   TimelineLabel,
   TimelineDetail,
 } from './subcomponents'
+
+import { TimelineContext } from './TimelineContext';
 
 type TimelineProps = {
   aria?: { [key: string]: string },
@@ -21,7 +22,7 @@ type TimelineProps = {
   id?: string,
   orientation?: string,
   showDate?: boolean,
-  gap?: Sizes | "none",
+  gap?: 'sm' | 'md' | 'lg',
 } & GlobalProps
 
 const Timeline = ({
@@ -33,24 +34,26 @@ const Timeline = ({
   id,
   orientation = 'horizontal',
   showDate = false,
-  gap = 'none',
+  gap,
   ...props
 }: TimelineProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const dateStyle = showDate === true ? '_with_date' : ''
-  const timelineCss = buildCss('pb_timeline_kit', `_gap_${gap}`, `_${orientation}`, dateStyle)
+  const timelineCss = buildCss('pb_timeline_kit', `_${orientation}`, dateStyle)
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        {...htmlProps}
-        className={classnames(timelineCss, globalProps(props), className)}
-        id={id}
-    >
-      {children}
-    </div>
+    <TimelineContext.Provider value={{ gap }}>
+      <div
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
+          className={classnames(timelineCss, globalProps(props), className)}
+          id={id}
+      >
+        {children}
+      </div>
+    </TimelineContext.Provider>
   )
 }
 
