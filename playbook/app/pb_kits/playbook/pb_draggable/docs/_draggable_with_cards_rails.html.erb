@@ -1,0 +1,39 @@
+<% initial_items = [
+  { id: "21", name: "Joe Black" },
+  { id: "22", name: "Nancy White" },
+  { id: "23", name: "Bill Green" },
+] %>
+
+<%= pb_rails("draggable", props: {initial_items: initial_items}) do %>
+  <%= pb_rails("draggable/draggable_container") do %>
+    <% initial_items.each do |item| %>
+      <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id]}) do %>
+        <%= pb_rails("card", props: {highlight: {position: "side", color:"primary"}, margin_bottom: "xs", padding: "xs"}) do %>
+          <%= pb_rails("flex", props:{align_items: "stretch", flex_direction:"column"}) do %>
+            <%= pb_rails("flex", props:{gap: "xs"}) do %>
+              <%= pb_rails("title", props: { text: item[:name], tag: "h4", size: 4 }) %>
+              <%= pb_rails("badge", props: {text:"35-12345" ,variant: "primary"}) %>
+            <% end %>
+            <%= pb_rails("caption", props: { size: "xs", text: "8:00A • Township Name • 90210" }) %>
+            <%= pb_rails("flex", props:{gap: "xxs", spacing:"between"}) do %>
+              <%= pb_rails("flex", props:{gap: "xxs"}) do %>
+                <%= pb_rails("caption", props: { size: "xs" , color: "error" }) do %>
+                  <%= pb_rails("icon", props: { icon: "house-circle-exclamation", fixed_width: true }) %>
+                <% end %>
+                <%= pb_rails("caption", props: { size: "xs" , color: "success" }) do %>
+                  <%= pb_rails("icon", props: { icon: "file-circle-check", fixed_width: true }) %>
+                <% end %>
+              <% end %>
+              <%= pb_rails("flex") do %>
+                <%= pb_rails("badge", props: {text:"Schedule QA" ,variant: "warning", rounded: true}) %>
+                <%= pb_rails("badge", props: {text:"Flex" ,variant: "primary", rounded: true}) %>
+                <%= pb_rails("badge", props: {text:"R99" ,variant: "primary", rounded: true}) %>
+            <% end %>
+
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
