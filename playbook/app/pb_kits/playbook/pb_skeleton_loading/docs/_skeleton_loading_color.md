@@ -1,0 +1,1 @@
+The SkeletonLoading component has a default and a white `color` variant.

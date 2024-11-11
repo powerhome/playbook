@@ -93,6 +93,7 @@ export { default as SelectableCardIcon } from '../pb_kits/playbook/pb_selectable
 export { default as SelectableIcon } from '../pb_kits/playbook/pb_selectable_icon/_selectable_icon'
 export { default as SelectableList } from '../pb_kits/playbook/pb_selectable_list/_selectable_list'
 export { default as SelectableListItem } from '../pb_kits/playbook/pb_selectable_list/_item'
+export { default as SkeletonLoading} from '../pb_kits/playbook/pb_skeleton_loading/_skeleton_loading'
 export { default as Source } from '../pb_kits/playbook/pb_source/_source'
 export { default as StarRating } from '../pb_kits/playbook/pb_star_rating/_star_rating'
 export { default as StatChange } from '../pb_kits/playbook/pb_stat_change/_stat_change'

@@ -5,7 +5,7 @@ import { get } from 'lodash'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 import type { ProductColors, CategoryColors, BackgroundColors } from '../types/colors'
 
 import Icon from '../pb_icon/_icon'
@@ -48,6 +48,7 @@ type CardBodyProps = {
   className?: string,
   padding?: string,
 } & GlobalProps
+
 
 // Header component
 const Header = (props: CardHeaderProps) => {
@@ -107,6 +108,10 @@ const Card = (props: CardPropTypes): React.ReactElement => {
 
   // coerce to array
   const cardChildren = React.Children.toArray(children)
+  const dynamicInlineProps = globalInlineProps(props);
+  const { style: htmlStyle = {}, ...restHtmlProps } = htmlProps as { style?: React.CSSProperties };
+  const mergedStyles: React.CSSProperties = { ...htmlStyle, ...dynamicInlineProps };
+
 
   const subComponentTags = (tagName: string) => {
     return cardChildren.filter((c: string) => (
@@ -122,7 +127,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
 
   const tagOptions = ['div', 'section', 'footer', 'header', 'article', 'aside', 'main', 'nav']
   const Tag = tagOptions.includes(tag) ? tag : 'div'
-
+  
   return (
     <>
     {
@@ -133,8 +138,9 @@ const Card = (props: CardPropTypes): React.ReactElement => {
         <Tag
             {...ariaProps}
             {...dataProps}
-            {...htmlProps}
             className={classnames(cardCss, globalProps(props), className)}
+            {...restHtmlProps}
+            style={mergedStyles} 
         >
           {subComponentTags('Header')}
           {
@@ -161,8 +167,9 @@ const Card = (props: CardPropTypes): React.ReactElement => {
           <Tag
               {...ariaProps}
               {...dataProps}
-              {...htmlProps}
               className={classnames(cardCss, globalProps(props), className)}
+              {...restHtmlProps}
+              style={mergedStyles} 
             >
               {subComponentTags('Header')}
               {nonHeaderChildren}
