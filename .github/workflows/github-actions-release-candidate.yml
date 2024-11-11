@@ -86,23 +86,21 @@ jobs:
         run: |
           current_npm_version=$(node -pe "require('./package.json').version")
 
-          if [[ $current_npm_version == *"-rc."* ]]; then
-            case ${{ env.SEMVER_LABEL }} in
-              Major)
-                new_npm_version=$(yarn version --premajor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-                ;;
-              Minor)
-                new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-                ;;
-              Patch)
-                new_npm_version=$(yarn version --prepatch --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-                ;;
-              *)
-                echo "Error: Invalid Semver label: ${{ env.SEMVER_LABEL }}"
-                exit 1
-                ;;
-            esac
-          fi
+          case ${{ env.SEMVER_LABEL }} in
+            Major)
+              new_npm_version=$(yarn version --premajor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+              ;;
+            Minor)
+              new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+              ;;
+            Patch)
+              new_npm_version=$(yarn version --prepatch --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+              ;;
+            *)
+              echo "Error: Invalid Semver label: ${{ env.SEMVER_LABEL }}"
+              exit 1
+              ;;
+          esac
 
           new_npm_version=${new_npm_version#v}
           new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
