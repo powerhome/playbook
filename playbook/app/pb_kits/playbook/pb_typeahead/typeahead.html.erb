@@ -14,11 +14,6 @@
           fixed_width: true,
         }) %>
       </div>
-      <% if object.label.present? %>
-        <label class="pb_typeahead_kit_label" for="<%= object.name %>">
-          <%= pb_rails("caption", props: { text: object.label, margin_bottom:"xs"}) %>
-        </label>
-      <% end %>
       <%= pb_rails("text_input", props: {
         type: "search",
         input_options: object.input_options,
@@ -27,8 +22,9 @@
         placeholder: object.placeholder,
         margin_bottom: "none",
         required: object.required,
-        id: object.name,
         validation: object.validation,
+        label: object.label,
+        id: object.input_options[:id],
       }) %>
       <%= pb_rails("list", props: { ordered: false, borderless: false, xpadding: true, role: "status", aria: { live: "polite" }, data: { pb_typeahead_kit_results: true } }) do %>
       <% end %>

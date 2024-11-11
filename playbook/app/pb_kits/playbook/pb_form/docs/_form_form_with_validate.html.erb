@@ -21,8 +21,25 @@
   ]
 %>
 
+<%
+  names = [
+    { label: 'Alexander Nathaniel Montgomery', value: 'Alexander Nathaniel Montgomery' },
+    { label: 'Isabella Anastasia Wellington', value: 'Isabella Anastasia Wellington' },
+    { label: 'Christopher Maximilian Harrington', value: 'Christopher Maximilian Harrington' },
+    { label: 'Elizabeth Seraphina Kensington', value: 'Elizabeth Seraphina Kensington' },
+    { label: 'Theodore Jonathan Abernathy', value: 'Theodore Jonathan Abernathy' },
+  ]
+%>
+
 <%= pb_form_with(scope: :example, method: :get, url: "", validate: true) do |form| %>
-  <%= form.typeahead :example_typeahead_validation, props: { data: { typeahead_example2: true, user: {} }, label: true, placeholder: "Search for a user", required: true,  validation: { message: "Please select a user." } } %>
+  <%= form.typeahead :example_typeahead_validation, props: { data: { typeahead_example2: true, user: {} }, label: true, placeholder: "Search for a user", required: true, validation: { message: "Please select a user." } } %>
+  <%= form.typeahead :example_typeahead_names, props: { 
+    data: { typeahead_names: true }, 
+    options: names,
+    label: true, 
+    placeholder: "Search for a name", 
+    required: true,
+  } %>
   <%= form.text_field :example_text_field_validation, props: { label: true, required: true } %>
   <%= form.phone_number_field :example_phone_number_field_validation, props: { label: "Example phone field" } %>
   <%= form.email_field :example_email_field_validation, props: { label: true, required: true } %>
@@ -44,6 +61,55 @@
   <% end %>
 <% end %>
 
+
+<!-- form.typeahead names results template -->
+<template data-typeahead-names-result-option>
+  <%= pb_rails("user", props: {
+    name: tag(:slot, name: "name"),
+    orientation: "horizontal",
+    align: "left",
+    avatar_url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=",
+    avatar: true
+    }) %>
+</template>
+
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("pb-typeahead-kit-search", function(event) {
+    if (!event.target.dataset || !event.target.dataset.typeaheadNames) return
+
+    const searchTerm = event.detail.searchingFor.toLowerCase()
+    const resultOptionTemplate = document.querySelector("[data-typeahead-names-result-option]")
+    
+    const filteredNames = <%= raw names.to_json %>.filter(name => 
+      name.label.toLowerCase().includes(searchTerm)
+    )
+
+    event.detail.setResults(filteredNames.map((nameObj) => {
+      const wrapper = resultOptionTemplate.content.cloneNode(true)
+      wrapper.children[0].dataset.nameData = JSON.stringify(nameObj)
+      wrapper.querySelector('slot[name="name"]').replaceWith(nameObj.label)
+      return wrapper
+    }))
+  })
+
+  document.addEventListener("pb-typeahead-kit-result-option-selected", function(event) {
+    if (!event.target.dataset.typeaheadNames) return
+
+    const selectedNameJSON = event.detail.selected.firstElementChild.dataset.nameData
+    const selectedNameData = JSON.parse(selectedNameJSON)
+
+    // set the input field's value
+    event.target.querySelector('input[name=example_typeahead_names]').value = selectedNameData.value
+
+    // log the selected option's dataset
+    console.log('The selected name data:')
+    console.dir(selectedNameData)
+
+    // store the full data on the element for later use if needed
+    event.target.dataset.nameData = selectedNameJSON
+  })
+<% end %>
+
 <!-- form.typeahead user results example template -->
 <template data-typeahead-example-result-option>
   <%= pb_rails("user", props: {
@@ -58,7 +124,7 @@
 <!-- form.typeahead JS example implementation -->
 <%= javascript_tag defer: "defer" do %>
   document.addEventListener("pb-typeahead-kit-search", function(event) {
-    if (!event.target.dataset || !event.target.dataset.typeaheadExample2) return;
+    if (!event.target.dataset || !event.target.dataset.typeaheadExample2) return
 
     fetch(`https://api.github.com/search/users?q=${encodeURIComponent(event.detail.searchingFor)}`)
       .then(response => response.json())
@@ -77,7 +143,7 @@
 
 
   document.addEventListener("pb-typeahead-kit-result-option-selected", function(event) {
-    if (!event.target.dataset.typeaheadExample2) return;
+    if (!event.target.dataset.typeaheadExample2) return
 
     const selectedUserJSON = event.detail.selected.firstElementChild.dataset.user
     const selectedUserData = JSON.parse(selectedUserJSON)
