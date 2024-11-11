@@ -1,5 +1,7 @@
 // Forms
 import 'kits/pb_form/pb_form_validation'
+import formHelper from 'kits/pb_form/formHelper'
+window.formHelper = formHelper
 
 // Date Picker
 import datePickerHelper from 'kits/pb_date_picker/date_picker_helper'
