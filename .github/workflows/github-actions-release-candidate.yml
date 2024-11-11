@@ -87,8 +87,6 @@ jobs:
           current_npm_version=$(node -pe "require('./package.json').version")
 
           if [[ $current_npm_version == *"-rc."* ]]; then
-            new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-          else
             case ${{ env.SEMVER_LABEL }} in
               Major)
                 new_npm_version=$(yarn version --premajor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
