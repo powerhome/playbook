@@ -30,8 +30,8 @@
         </div>
       <% end %>
     <% end %>
-    <%= pb_rails("flex/flex_item", props: { flex: "2" }) do %>
-      <%= pb_rails("flex", props: { orientation: "column", align: "stretch" }) do %>
+    <%= pb_rails("flex/flex_item", props: { flex: "3" }) do %>
+      <%= pb_rails("flex", props: { orientation: "column", align: "stretch", margin_top: "xl" }) do %>
         <% if @icons_used || @react_rendered || @enhanced_element_used %>
           <%= pb_rails("caption", props: { size: 'sm', margin: "xxs" }) do %>
             Summary
