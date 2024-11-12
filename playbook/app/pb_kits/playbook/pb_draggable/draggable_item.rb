@@ -3,8 +3,6 @@
 module Playbook
   module PbDraggable
     class DraggableItem < ::Playbook::KitBase
-      prop :item, type: Playbook::Props::HashProp,
-                  default: {}
       prop :drag_id, type: Playbook::Props::String,
                      default: ""
 
