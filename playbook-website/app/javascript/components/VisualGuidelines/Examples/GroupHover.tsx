@@ -11,7 +11,7 @@ import Example from '../Templates/Example'
 
 const GroupHoverDescription = () => (
   <>
-    You can hover over a kit and its children's hover affects will be applied. Check out <a href="https://playbook.powerapp.cloud/visual_guidelines/hover">{"our hover affects here."}</a>
+    You can hover over a kit and its children's hover effects will be applied. Check out <a href="https://playbook.powerapp.cloud/visual_guidelines/hover">{"our hover effects here."}</a>
   </>
 )
 
