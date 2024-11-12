@@ -9,7 +9,7 @@ export default class PbTypeahead extends PbEnhancedElement {
   _resultOptionTemplate: HTMLElement
   _resultsOptionCache: Map<string, Array<DocumentFragment>>
   _searchContext: string
-  _validSelection: false
+  _validSelection: boolean
 
   static get selector() {
     return '[data-pb-typeahead-kit]'
@@ -101,7 +101,7 @@ export default class PbTypeahead extends PbEnhancedElement {
   removeValidationError() {
     const inputWrapper = this.searchInput.closest('.text_input_wrapper')
     if (inputWrapper) {
-      const errorMessage = inputWrapper.querySelector('.pb_body_kit_negative')
+      const errorMessage = inputWrapper.querySelector('.pb_body_kit_negative') as HTMLElement
       if (errorMessage) {
         errorMessage.style.display = 'none'
       }
@@ -112,7 +112,7 @@ export default class PbTypeahead extends PbEnhancedElement {
   showValidationError() {
     const inputWrapper = this.searchInput.closest('.text_input_wrapper')
     if (inputWrapper) {
-      const errorMessage = inputWrapper.querySelector('.pb_body_kit_negative')
+      const errorMessage = inputWrapper.querySelector('.pb_body_kit_negative') as HTMLElement
       if (errorMessage) {
         errorMessage.style.display = 'block'
       }
