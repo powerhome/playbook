@@ -1,4 +1,4 @@
-The `draggable` kit gives you a full subcomponent structure that allows it to be used with almost any kits.
+The `draggable` kit gives you a full subcomponent structure that allows it to be used with almost any kit.
 
 `initial_items` is a REQUIRED prop, which is the array of objects that contains data for the the draggable items.
  
