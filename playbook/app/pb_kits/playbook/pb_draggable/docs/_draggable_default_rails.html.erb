@@ -18,7 +18,7 @@
     <%= pb_rails("flex") do %>
       <% initial_items.each do |item| %>
         <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id]}) do %>
-        <%= pb_rails("image", props: { alt: item[:id], size: "md", url: item[:url], margin: "xs" }) %>
+          <%= pb_rails("image", props: { alt: item[:id], size: "md", url: item[:url], margin: "xs" }) %>
         <% end %>
       <% end %>
     <% end %>

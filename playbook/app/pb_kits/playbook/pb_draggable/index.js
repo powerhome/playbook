@@ -15,6 +15,12 @@ export default class PbDraggable extends PbEnhancedElement {
   }
 
   bindEventListeners() {
+    // Needed to prevent images within draggable items from being independently draggable
+    // Needed if using Image kit in draggable items
+    this.element.querySelectorAll(".pb_draggable_item img").forEach(img => {
+      img.setAttribute("draggable", "false");
+    });
+
     this.element.querySelectorAll(".pb_draggable_item").forEach(item => {
       item.addEventListener("dragstart", this.handleDragStart.bind(this));
       item.addEventListener("dragend", this.handleDragEnd.bind(this));
@@ -29,6 +35,13 @@ export default class PbDraggable extends PbEnhancedElement {
   }
 
   handleDragStart(event) {
+    // Needed to prevent images within draggable items from being independently draggable
+    // Needed if using Image kit in draggable items
+    if (event.target.tagName.toLowerCase() === 'img') {
+      event.preventDefault();
+      return;
+    }
+    
     this.draggedItem = event.target;
     this.draggedItemId = event.target.id;
     event.target.classList.add("is_dragging");
