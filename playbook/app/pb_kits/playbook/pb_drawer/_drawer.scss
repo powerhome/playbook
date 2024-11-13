@@ -72,11 +72,11 @@ $z-index: $z_7;
 }
 
 body.PBDrawer__Body--open {
-  transition: margin-left $animation-duration ease-in-out, margin-right $animation-duration ease-in-out;
+  transition: margin-left $animation-duration ease-in, margin-right $animation-duration ease-in;
 }
 
 body.PBDrawer__Body--close {
-  transition: margin-left $animation-duration ease-in-out, margin-right $animation-duration ease-in-out;
+  transition: margin-left $animation-duration ease-out, margin-right $animation-duration ease-out;
 }
 
 .pb_drawer_lg_left.pb_drawer {
@@ -93,6 +93,8 @@ body.PBDrawer__Body--close {
 
 // Drawer Styles
 .pb_drawer {
+   will-change: transform;
+   backface-visibility: hidden;
 
   .drawer {
     position: sticky;
@@ -112,8 +114,6 @@ body.PBDrawer__Body--close {
   overflow: auto;
   animation-duration: $animation-duration;
   outline: none;
-  animation-timing-function: ease-in-out;
-  transition: transform $animation-duration ease-in-out;
 
   // General _before_close styles
   &[class*="_before_close"] {
