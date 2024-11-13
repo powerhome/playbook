@@ -90,8 +90,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
   const columnHelper = createColumnHelper()
 
-  //Create cells for first columns
-  const createCellFunction = (cellAccessors: string[], customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element) => {
+  //Create cells for columns, with customization for first column
+  const createCellFunction = (cellAccessors: string[], customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element, index?: number) => {
     const columnCells = ({
       row,
       getValue,
@@ -101,19 +101,16 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }) => {
       const rowData = row.original
 
-    // Use customRenderer if provided, otherwise default rendering
-    if (customRenderer) {
-      return customRenderer(row, getValue())
-    }
-
+    if (index === 0) {
       switch (row.depth) {
         case 0: {
           return (
-            <CustomCell
-                getValue={getValue}
-                onRowToggleClick={onRowToggleClick}
-                row={row}
-            />
+                <CustomCell
+                    customRenderer={customRenderer}
+                    getValue={getValue}
+                    onRowToggleClick={onRowToggleClick}
+                    row={row}
+                />
           )
         }
         default: {
@@ -122,6 +119,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           const accessorValue = rowData[depthAccessor]
           return accessorValue ? (
             <CustomCell
+                customRenderer={customRenderer}
                 onRowToggleClick={onRowToggleClick}
                 row={row} 
                 value={accessorValue} 
@@ -132,11 +130,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         }
       }
     }
-
+    return customRenderer
+    ? customRenderer(row, getValue())
+    : getValue()
+    }
     return columnCells
   }
-
-  //Create column array in format needed by Tanstack
+//Create column array in format needed by Tanstack
   const columns =
     columnDefinitions &&
       columnDefinitions.map((column, index) => {
@@ -147,19 +147,12 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         }),
       }
 
-  // Use the custom renderer if provided, EXCEPT for the first column
-  if (index !== 0) {
-    if (column.cellAccessors || column.customRenderer) {
-      columnStructure.cell = createCellFunction(
-        column.cellAccessors,
-        column.customRenderer
-      )
-    }
-  } else {
-    // For the first column, apply createCellFunction without customRenderer
-    if (column.cellAccessors) {
-      columnStructure.cell = createCellFunction(column.cellAccessors)
-    }
+  if (column.cellAccessors || column.customRenderer) {
+    columnStructure.cell = createCellFunction(
+      column.cellAccessors,
+      column.customRenderer,
+      index
+    )
   }
 
   return columnStructure

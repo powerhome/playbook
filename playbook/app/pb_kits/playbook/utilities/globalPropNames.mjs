@@ -1,9 +1,13 @@
 export default [
+  "minHeight",
+  "maxHeight",
+  "height",
   "left",
   "bottom",
   "right",
   "top",
   "hover",
+  "groupHover",
   "zIndex",
   "verticalAlign",
   "truncate",
