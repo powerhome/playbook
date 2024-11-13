@@ -1,7 +1,5 @@
 /* eslint-disable flowtype/no-types-missing-file-annotation */
 
-import React from 'react'
-
 import {
   Card,
   Title,
