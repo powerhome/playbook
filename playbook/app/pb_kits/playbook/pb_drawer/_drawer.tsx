@@ -173,10 +173,10 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
         body.style.cssText = `margin-right: ${sizeMap[size]} !important; margin-left: '' !important;`;
       }
 
-      body.classList.add("ReactModal__Body--open");
+      body.classList.add("PBDrawer__Body--open");
     } else if (body) {
       body.style.cssText = ""; // Clear the styles when modal is closed or behavior is not 'push'
-      body.classList.remove("ReactModal__Body--open");
+      body.classList.remove("PBDrawer__Body--open");
     }
   }, [modalIsOpened, behavior, placement, size]);
 
@@ -196,29 +196,27 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
           {...htmlProps}
           className={classes}
       >
-        {isModalVisible && (
-          <div
-              className={classnames(overlayClassNames.base, {
+          {isModalVisible && (
+            <div
+                className={classnames(overlayClassNames.base, {
               [overlayClassNames.afterOpen]: animationState === "afterOpen",
               [overlayClassNames.beforeClose]: animationState === "beforeClose",
             })}
-              id={id}
-              onClick={overlay ? onClose : undefined}
-          >
+                id={id}
+                onClick={overlay ? onClose : undefined}
+            >
             <div
                 className={classnames(drawerClassNames.base, {
-                [drawerClassNames.afterOpen]:
-                  animationState === "afterOpen",
-                [drawerClassNames.beforeClose]:
-                  animationState === "beforeClose",
-              })}
+              [drawerClassNames.afterOpen]: animationState === "afterOpen",
+              [drawerClassNames.beforeClose]: animationState === "beforeClose",
+            })}
                 onClick={(e) => e.stopPropagation()}
             >
-              {children}
+            {children}
             </div>
+            </div>
+          )}
           </div>
-        )}
-      </div>
     </DialogContext.Provider>
   );
 };
