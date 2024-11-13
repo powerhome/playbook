@@ -18,6 +18,7 @@ import Example from '../Templates/Example'
 
 const shadowArr = ['deep', 'deeper', 'deepest']
 const scaleObj = { 'sm': '@1.05', 'md': '@1.10', 'lg': '@1.15' }
+const visibilityArr = ['true', 'false']
 
 const Hover = ({ example }: { example: string }) => (
   <React.Fragment>
@@ -160,6 +161,27 @@ const Hover = ({ example }: { example: string }) => (
                     <Pill
                       key={key}
                       text={key}
+                      textTransform="none"
+                      variant="warning"
+                    />
+                  )
+                })}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Pill
+                  text="visibility"
+                  textTransform="none"
+                  variant="warning"
+                />
+              </td>
+              <td>
+                {visibilityArr.map((value) => {
+                  return (
+                    <Pill
+                      key={value}
+                      text={value}
                       textTransform="none"
                       variant="warning"
                     />
