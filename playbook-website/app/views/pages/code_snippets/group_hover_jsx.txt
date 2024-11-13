@@ -1,0 +1,21 @@
+<Card 
+  cursor="pointer"
+  groupHover
+>
+  <Title
+      alignSelf="center"
+      groupHover 
+      hover={{ scale: "lg"}}
+      text="If the card is hovered, I'm hovered too!"
+  />
+  <Title
+      alignSelf="center"
+      paddingY="lg"
+      text="I don't have any hover effect on me"
+  />
+  <Title
+      alignSelf="center"
+      hover={{ scale: "lg"}}
+      text="I need to be hovered over directly"
+  />
+</Card>

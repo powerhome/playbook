@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 import { GenericObject, Sizes } from '../types'
 
 type FlexProps = {
@@ -61,6 +61,7 @@ const Flex = (props: FlexProps): React.ReactElement => {
   const alignSelfClass = alignSelf !== 'none' ? `align_self_${alignSelf}` : ''
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
+  const dynamicInlineProps = globalInlineProps(props)
 
 
   return (
@@ -83,6 +84,7 @@ const Flex = (props: FlexProps): React.ReactElement => {
         globalProps(props),
         className
       )}
+        style={dynamicInlineProps}
         {...dataProps}
         {...htmlProps}
     >

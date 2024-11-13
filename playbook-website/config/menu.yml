@@ -44,7 +44,7 @@ kits:
     description:
     status: stable
   - name: drawer
-    platforms: *1 
+    platforms: *1
     status: beta
 - category: buttons
   description: Buttons are used primarily for actions, such as “Save” and “Cancel”.
@@ -431,7 +431,7 @@ kits:
     platforms: *1
     status: stable
   - name: draggable
-    platforms: *2
+    platforms: *1
     description:
     status: stable
 - category: message_text_patterns
@@ -494,6 +494,9 @@ kits:
     description: The timeline kit can use two different line styles in the same timeline
       - solid and dotted line styles.
     status: stable
+  - name: skeleton_loading
+    platforms: *1
+    status: beta
 - category: tags
   description:
   components:
