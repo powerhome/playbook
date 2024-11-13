@@ -39,7 +39,7 @@ const Timeline = ({
   const htmlProps = buildHtmlProps(htmlOptions);
   const dateStyle = showDate === true ? '_with_date' : '';
   const gapStyle = gap == 'none' ? '' : `gap_${gap}`
-  const timelineCss = buildCss('pb_timeline_kit', gapStyle, `${orientation}`, dateStyle);
+  const timelineCss = buildCss('pb_timeline_kit', `${orientation}`, dateStyle, gapStyle);
 
   return (
     <div
