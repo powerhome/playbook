@@ -2,5 +2,5 @@ Use the optional `gap` prop to render the timeline kit with adjusted spacing bet
 
 ##### Prop
 
-*  `gap` | **Type**: String | **Values**: sm | md | lg | none
+*  `gap` | **Type**: String | **Values**: xs | sm | md | lg | none
 

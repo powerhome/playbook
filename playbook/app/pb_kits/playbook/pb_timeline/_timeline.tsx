@@ -19,7 +19,7 @@ type TimelineProps = {
   id?: string,
   orientation?: string,
   showDate?: boolean,
-  gap?: 'sm' | 'md' | 'lg',
+  gap?: 'xs' | 'sm' | 'md' | 'lg' | 'none',
 } & GlobalProps;
 
 const Timeline = ({
@@ -38,7 +38,8 @@ const Timeline = ({
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
   const dateStyle = showDate === true ? '_with_date' : '';
-  const timelineCss = buildCss('pb_timeline_kit', `gap_${gap}`, `${orientation}`, dateStyle);
+  const gapStyle = gap == 'none' ? '' : `gap_${gap}`
+  const timelineCss = buildCss('pb_timeline_kit', gapStyle, `${orientation}`, dateStyle);
 
   return (
     <div

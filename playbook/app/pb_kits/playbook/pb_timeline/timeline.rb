@@ -9,7 +9,7 @@ module Playbook
       prop :show_date, type: Playbook::Props::Boolean,
                        default: false
       prop :gap, type: Playbook::Props::Enum,
-                 values: %w[sm md lg none],
+                 values: %w[xs sm md lg none],
                  default: "none"
 
       def classname
