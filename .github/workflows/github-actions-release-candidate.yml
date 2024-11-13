@@ -30,29 +30,84 @@ jobs:
         with:
           bundler-cache: true
       - name: Python Setup
-        uses: actions/setup-python@v4 
-        with: 
+        uses: actions/setup-python@v4
+        with:
           python-version: '3.9'
       - name: Set Git Config
         run: |
           git config --local user.name "${{ github.actor }}"
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Get Semver Label
+        id: get-label
+        run: |
+          PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
+          if [ ! -z "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
+            echo "✅ Successfully found PR number: $PR_NUMBER"
+          else
+            echo "❌ Unable to find PR number"
+          fi
+
+          echo "Fetching labels for PR #$PR_NUMBER..."
+          LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name' || echo "Failed to fetch labels")
+          echo "Found labels: $LABELS"
+
+          if [ -z "$LABELS" ]; then
+            echo "⛔ Error: Failed to fetch PR labels"
+            exit 1
+          fi
+
+          SEMVER_LABEL=$(echo "$LABELS" | grep -iE '^(major|minor|patch)$' || true)
+          echo "Found Semver labels: $SEMVER_LABEL"
+
+          if [ -z "$SEMVER_LABEL" ]; then
+            echo "⛔ Error: No valid Semver label (major, minor, patch) found on PR #$PR_NUMBER."
+            exit 1
+          fi
+
+          LABEL_COUNT=$(echo "$SEMVER_LABEL" | wc -l)
+          echo "Number of Semver labels found: $LABEL_COUNT"
+
+          if [ "$LABEL_COUNT" -ne 1 ]; then
+            echo "⛔ Error: Expected exactly one Semver label, found $LABEL_COUNT on PR #$PR_NUMBER."
+            exit 1
+          fi
+
+          echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
+          echo "✅ Successfully found Semver label: $SEMVER_LABEL"
+
+          echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
+          echo "Semver label found: $SEMVER_LABEL"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Grab Current Version and Set New RC Version
         id: set-version
         run: |
           current_npm_version=$(node -pe "require('./package.json').version")
-          
-          if [[ $current_npm_version == *"-rc."* ]]; then
-            new_npm_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-          else
-            new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-          fi
-          
+
+          case ${{ env.SEMVER_LABEL }} in
+            Major)
+              new_npm_version=$(yarn version --premajor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+              ;;
+            Minor)
+              new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+              ;;
+            Patch)
+              new_npm_version=$(yarn version --prepatch --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
+              ;;
+            *)
+              echo "Error: Invalid Semver label: ${{ env.SEMVER_LABEL }}"
+              exit 1
+              ;;
+          esac
+
           new_npm_version=${new_npm_version#v}
           new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
-          
+
           echo "new_npm_version=${new_npm_version}" >> $GITHUB_ENV
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
+
       - name: Check if version exists and increment if necessary
         run: |
           max_attempts=100
@@ -140,7 +195,7 @@ jobs:
                 issue_number: pullRequestNumber,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: `You merged this pr to master branch: 
+                body: `You merged this pr to master branch:
                 - Ruby Gem: [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}})
                 - NPM: [${{env.NPM_VERSION}}](${{env.NPM_LINK}})`
               });

@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import { render, screen, waitFor } from "../utilities/test-utils"
 
-import { AdvancedTable } from "playbook-ui"
+import { AdvancedTable, Pill } from "playbook-ui"
 
 const MOCK_DATA = [
   {
@@ -87,6 +87,28 @@ const columnDefinitions = [
     label: "Scheduled Meetings",
   },
 ]
+
+const columnDefinitionsCustomRenderer = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    accessor: "newEnrollments",
+    label: "New Enrollments",
+    customRenderer: (row, value) => (
+      <Pill text={value} 
+          variant="success"    
+      />
+    ),
+  },
+  {
+    accessor: "scheduledMeetings",
+    label: "Scheduled Meetings",
+  },
+]
+
 
 const subRowHeaders = ["Quarter"]
 
@@ -462,4 +484,18 @@ test("responsive none prop functions as expected", () => {
 
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveClass("pb_advanced_table table-responsive-none")
+})
+
+test("customRenderer prop functions as expected", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitionsCustomRenderer}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const pill = kit.querySelector(".pb_pill_kit_success_lowercase")
+  expect(pill).toBeInTheDocument()
 })
