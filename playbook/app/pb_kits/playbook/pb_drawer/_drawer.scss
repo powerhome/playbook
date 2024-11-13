@@ -75,6 +75,10 @@ body.PBDrawer__Body--open {
   transition: margin-left $animation-duration ease-in-out, margin-right $animation-duration ease-in-out;
 }
 
+body.PBDrawer__Body--close {
+  transition: margin-left $animation-duration ease-in-out, margin-right $animation-duration ease-in-out;
+}
+
 .pb_drawer_lg_left.pb_drawer {
   transform: translateX(-100%);
 }

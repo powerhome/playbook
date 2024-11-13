@@ -175,6 +175,9 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
 
       body.classList.add("PBDrawer__Body--open");
     } else if (body) {
+      if (body.classList.contains("PBDrawer__Body--open")) {
+        body.classList.add("PBDrawer__Body--close");
+      }
       body.style.cssText = ""; // Clear the styles when modal is closed or behavior is not 'push'
       body.classList.remove("PBDrawer__Body--open");
     }
