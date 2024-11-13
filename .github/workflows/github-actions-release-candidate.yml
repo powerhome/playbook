@@ -40,7 +40,11 @@ jobs:
       - name: Get Semver Label
         id: get-label
         run: |
-          PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
+          PR_NUMBER=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" \
+            | jq '.[0].number')
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+          
           if [ ! -z "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
             echo "✅ Successfully found PR number: $PR_NUMBER"
           else
