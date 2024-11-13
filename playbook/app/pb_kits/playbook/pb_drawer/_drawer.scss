@@ -14,7 +14,7 @@ $medium: 250px;
 $large: 300px;
 $xlarge: 365px;
 $animation-duration: 0.4s;
-$z-index: 100;
+$z-index: $z_7;
 
 // Drawer animations
 @keyframes modalFadeInLeft {
@@ -88,7 +88,7 @@ body.PBDrawer__Body--close {
 }
 
 .pb_drawer.pb_drawer_after_open {
-  transform: translateX(0); /* Slide in */
+  transform: translate3d(0, 0, 0);
 }
 
 // Drawer Styles
@@ -96,9 +96,11 @@ body.PBDrawer__Body--close {
 
   .drawer {
     position: sticky;
+    will-change: transform;
+    backface-visibility: hidden;
     top: 0;
     background-color: $white;
-    z-index: $z_8;
+    z-index: $z_9;
   }
 
   // @include pb_card;
