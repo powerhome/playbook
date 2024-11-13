@@ -10,8 +10,6 @@ import TimelineLabel from './subcomponents/Label'
 import TimelineStep from './subcomponents/Step'
 import TimelineDetail from './subcomponents/Detail'
 
-import { TimelineContext } from './TimelineContext';
-
 type ItemProps = {
   className?: string,
   children?: React.ReactNode[] | React.ReactNode,
@@ -39,8 +37,6 @@ const TimelineItem = ({
   lineStyle = 'solid',
   ...props
 }: ItemProps): React.ReactElement => {
-  const { gap } = React.useContext(TimelineContext);
-
   const timelineItemCss = buildCss('pb_timeline_item_kit', lineStyle)
 
   const htmlProps = buildHtmlProps(htmlOptions)
