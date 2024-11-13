@@ -8,18 +8,10 @@ $icon_margin: $space_xs/2;
 $icon_height: 28px;
 $height_from_top: $icon_height/2 - $connector_width/2;
 
-$gapSpaces:(
-  xxs:  $space_xxs,
-  xs:   $space_xs,
-  sm:   $space_sm,
-  md:   $space_md,
-  lg:   $space_lg,
-  xl:   $space_xl
-);
-
-$gapTypes: (
-  gap: gap
-);
+// Add gap variables
+$gap_sm: $space_sm;
+$gap_md: $space_md;
+$gap_lg: $space_lg;
 
 @mixin pb_timeline_line_solid($width, $height, $margin) {
     width: $width;
@@ -169,7 +161,7 @@ $gapTypes: (
                         }
                     }
                 }
-            } 
+            }
         }
     }
     &[class*=_vertical] {
@@ -279,15 +271,32 @@ $gapTypes: (
                 }
             }
         }
-    }
-
-    //Gap
-    @each $gapType, $gapValue in $gapTypes{
-        @each $sizeName, $sizeValue in $gapSpaces {
-            &[class*=_#{$gapType}_#{$sizeName}]{
-                #{$gapValue}: $sizeValue;
+        &[class*=_gap_sm] {
+            [class*=pb_timeline_item_kit] {
+                [class=pb_timeline_item_step] {
+                    [class=pb_timeline_item_connector] {
+                        height: $height_from_top + $gap_sm !important;
+                    }
+                }
+            }
+        }
+        &[class*=_gap_md] {
+            [class*=pb_timeline_item_kit] {
+                [class=pb_timeline_item_step] {
+                    [class=pb_timeline_item_connector] {
+                        height: $height_from_top + $gap_md !important;
+                    }
+                }
+            }
+        }
+        &[class*=_gap_lg] {
+            [class*=pb_timeline_item_kit] {
+                [class=pb_timeline_item_step] {
+                    [class=pb_timeline_item_connector] {
+                        height: $height_from_top + $gap_lg !important;
+                    }
+                }
             }
         }
     }
-
 }

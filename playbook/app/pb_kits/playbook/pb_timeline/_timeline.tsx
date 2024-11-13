@@ -1,17 +1,14 @@
-import React from 'react'
-import classnames from 'classnames'
-
-import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { GlobalProps, globalProps } from '../utilities/globalProps'
-
-import TimelineItem from './_item'
+// Timeline.tsx
+import React from 'react';
+import classnames from 'classnames';
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props';
+import { GlobalProps, globalProps } from '../utilities/globalProps';
+import TimelineItem from './_item';
 import {
   TimelineStep,
   TimelineLabel,
   TimelineDetail,
-} from './subcomponents'
-
-import { TimelineContext } from './TimelineContext';
+} from './subcomponents';
 
 type TimelineProps = {
   aria?: { [key: string]: string },
@@ -23,7 +20,7 @@ type TimelineProps = {
   orientation?: string,
   showDate?: boolean,
   gap?: 'sm' | 'md' | 'lg',
-} & GlobalProps
+} & GlobalProps;
 
 const Timeline = ({
   aria = {},
@@ -37,29 +34,28 @@ const Timeline = ({
   gap,
   ...props
 }: TimelineProps): React.ReactElement => {
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
-  const htmlProps = buildHtmlProps(htmlOptions)
-  const dateStyle = showDate === true ? '_with_date' : ''
-  const timelineCss = buildCss('pb_timeline_kit', `_${orientation}`, dateStyle)
+  const ariaProps = buildAriaProps(aria);
+  const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
+  const dateStyle = showDate === true ? '_with_date' : '';
+  const timelineCss = buildCss('pb_timeline_kit', `gap_${gap}`, `${orientation}`, dateStyle);
+
   return (
-    <TimelineContext.Provider value={{ gap }}>
-      <div
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={classnames(timelineCss, globalProps(props), className)}
-          id={id}
-      >
-        {children}
-      </div>
-    </TimelineContext.Provider>
-  )
-}
+    <div
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classnames(timelineCss, globalProps(props), className)}
+        id={id}
+    >
+      {children}
+    </div>
+  );
+};
 
-Timeline.Item = TimelineItem
-Timeline.Step = TimelineStep
-Timeline.Label = TimelineLabel
-Timeline.Detail = TimelineDetail
+Timeline.Item = TimelineItem;
+Timeline.Step = TimelineStep;
+Timeline.Label = TimelineLabel;
+Timeline.Detail = TimelineDetail;
 
-export default Timeline
+export default Timeline;

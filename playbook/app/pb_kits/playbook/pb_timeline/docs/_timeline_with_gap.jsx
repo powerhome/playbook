@@ -1,59 +1,138 @@
 import React from 'react'
 
 import Timeline from '../_timeline'
+import Flex from "../../pb_flex/_flex"
+import FlexItem from "../../pb_flex/_flex_item"
 import Body from '../../pb_body/_body'
 
 const TimelineWithGap = (props) => (
   <div>
-    <Timeline
-        gap="lg"
-        orientation="vertical"
-    >
-      <Timeline.Item
-          icon="user"
-          iconColor="royal"
-          {...props}
-      >
-        <Body
-            color="light"
-            text="Conversation started"
-            {...props}
-        />
-      </Timeline.Item>
-      <Timeline.Item
-          icon="check"
-          iconColor="teal"
-          {...props}
-      >
-        <Body
-            color="light"
-            text="Trip #12422"
-            {...props}
-        />
-      </Timeline.Item>
-      <Timeline.Item
-          icon="credit-card"
-          iconColor="red"
-          {...props}
-      >
-        <Body
-            color="light"
-            text="Refund issue #12422"
-            {...props}
-        />
-      </Timeline.Item>
-      <Timeline.Item
-          icon="smile"
-          iconColor="green"
-          {...props}
-      >
-        <Body
-            color="light"
-            text="Conversation resolved"
-            {...props}
-        />
-      </Timeline.Item>
-    </Timeline>
+    <Flex justify="evenly">
+      <FlexItem>
+        <Timeline
+            gap="sm"
+            orientation="vertical"
+        >
+          <Timeline.Item
+              icon="user"
+              iconColor="royal"
+              {...props}
+          >
+            <Body
+                color="light"
+                text="Conversation started"
+                {...props}
+            />
+          </Timeline.Item>
+          <Timeline.Item
+              icon="check"
+              iconColor="teal"
+              lineStyle="dotted"
+              {...props}
+          >
+            <Body
+                color="light"
+                text="Trip #12422"
+                {...props}
+            />
+          </Timeline.Item>
+          <Timeline.Item
+              icon="credit-card"
+              iconColor="red"
+              {...props}
+          >
+            <Body
+                color="light"
+                text="Refund issue #12422"
+                {...props}
+            />
+          </Timeline.Item>
+        </Timeline>
+      </FlexItem>
+      <FlexItem>
+        <Timeline
+            gap="md"
+            orientation="vertical"
+        >
+          <Timeline.Item
+              icon="user"
+              iconColor="royal"
+              {...props}
+          >
+            <Body
+                color="light"
+                text="Conversation started"
+                {...props}
+            />
+          </Timeline.Item>
+          <Timeline.Item
+              icon="check"
+              iconColor="teal"
+              lineStyle="dotted"
+              {...props}
+          >
+            <Body
+                color="light"
+                text="Trip #12422"
+                {...props}
+            />
+          </Timeline.Item>
+          <Timeline.Item
+              icon="credit-card"
+              iconColor="red"
+              lineStyle="dotted"
+              {...props}
+          >
+            <Body
+                color="light"
+                text="Refund issue #12422"
+                {...props}
+            />
+          </Timeline.Item>
+        </Timeline>
+      </FlexItem>
+      <FlexItem>
+        <Timeline
+            gap="lg"
+            orientation="vertical"
+        >
+          <Timeline.Item
+              icon="user"
+              iconColor="royal"
+              {...props}
+          >
+            <Body
+                color="light"
+                text="Conversation started"
+                {...props}
+            />
+          </Timeline.Item>
+          <Timeline.Item
+              icon="check"
+              iconColor="teal"
+              lineStyle="dotted"
+              {...props}
+          >
+            <Body
+                color="light"
+                text="Trip #12422"
+                {...props}
+            />
+          </Timeline.Item>
+          <Timeline.Item
+              icon="credit-card"
+              iconColor="red"
+              {...props}
+          >
+            <Body
+                color="light"
+                text="Refund issue #12422"
+                {...props}
+            />
+          </Timeline.Item>
+        </Timeline>
+      </FlexItem>
+    </Flex>
   </div>
 )
 

@@ -9,7 +9,7 @@ module Playbook
       prop :show_date, type: Playbook::Props::Boolean,
                        default: false
       prop :gap, type: Playbook::Props::Enum,
-                 values: %w[xxs xs sm md lg xl none],
+                 values: %w[sm md lg none],
                  default: "none"
 
       def classname
@@ -26,11 +26,7 @@ module Playbook
       end
 
       def gap_class
-        if gap == "none"
-          nil
-        else
-          "gap_#{gap}"
-        end
+        gap == "none" ? "" : "gap_#{gap}"
       end
     end
   end
