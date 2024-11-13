@@ -26,7 +26,7 @@ module Playbook
       end
 
       def gap_class
-        gap == "none" ? "" : "gap_#{gap}"
+        gap == "none" ? nil : "gap_#{gap}"
       end
     end
   end

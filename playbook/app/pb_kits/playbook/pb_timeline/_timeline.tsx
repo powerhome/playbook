@@ -1,14 +1,15 @@
-// Timeline.tsx
-import React from 'react';
-import classnames from 'classnames';
-import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props';
-import { GlobalProps, globalProps } from '../utilities/globalProps';
-import TimelineItem from './_item';
+import React from 'react'
+import classnames from 'classnames'
+
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
+
+import TimelineItem from './_item'
 import {
   TimelineStep,
   TimelineLabel,
   TimelineDetail,
-} from './subcomponents';
+} from './subcomponents'
 
 type TimelineProps = {
   aria?: { [key: string]: string },
@@ -20,7 +21,7 @@ type TimelineProps = {
   orientation?: string,
   showDate?: boolean,
   gap?: 'xs' | 'sm' | 'md' | 'lg' | 'none',
-} & GlobalProps;
+} & GlobalProps
 
 const Timeline = ({
   aria = {},
@@ -31,15 +32,15 @@ const Timeline = ({
   id,
   orientation = 'horizontal',
   showDate = false,
-  gap,
+  gap = 'none',
   ...props
 }: TimelineProps): React.ReactElement => {
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
-  const htmlProps = buildHtmlProps(htmlOptions);
-  const dateStyle = showDate === true ? '_with_date' : '';
-  const gapStyle = gap == 'none' ? '' : `gap_${gap}`
-  const timelineCss = buildCss('pb_timeline_kit', `${orientation}`, dateStyle, gapStyle);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+  const dateStyle = showDate === true ? '_with_date' : ''
+  const gapStyle = gap === 'none' ? '' : `gap_${gap}`
+  const timelineCss = buildCss('pb_timeline_kit', `${orientation}`, dateStyle, gapStyle)
 
   return (
     <div
@@ -51,12 +52,12 @@ const Timeline = ({
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
-Timeline.Item = TimelineItem;
-Timeline.Step = TimelineStep;
-Timeline.Label = TimelineLabel;
-Timeline.Detail = TimelineDetail;
+Timeline.Item = TimelineItem
+Timeline.Step = TimelineStep
+Timeline.Label = TimelineLabel
+Timeline.Detail = TimelineDetail
 
-export default Timeline;
+export default Timeline

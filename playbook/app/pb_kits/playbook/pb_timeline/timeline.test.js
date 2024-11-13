@@ -147,26 +147,26 @@ test('should pass id prop', () => {
 test('should have horizontal orientation by default', () => {
     render(<TimelineDefault />)
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass('pb_timeline_kit__horizontal')
+    expect(kit).toHaveClass('pb_timeline_kit_horizontal')
 })
 
 test('should pass vertical orientation', () => {
     const props = { orientation: 'vertical' }
     render(<TimelineDefault {...props} />)
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass('pb_timeline_kit__vertical')
+    expect(kit).toHaveClass('pb_timeline_kit_vertical')
 })
 
 test('should pass showDate prop', () => {
     const props = { showDate: true }
     render(<TimelineDefault {...props} />)
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass('pb_timeline_kit__horizontal__with_date')
+    expect(kit).toHaveClass('pb_timeline_kit_horizontal__with_date')
 })
 
 test('should pass showDate prop with Children', () => {
     const props = { showDate: true }
     render(<TimelineWithChildren {...props} />)
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass('pb_timeline_kit__horizontal__with_date')
+    expect(kit).toHaveClass('pb_timeline_kit_horizontal__with_date')
 })
