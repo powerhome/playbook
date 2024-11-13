@@ -1,5 +1,9 @@
-# 14.7.0
+# Go Further With Our Custom Timelines!
 ##### November 8, 2024
+
+![timelinewithanykit](https://github.com/user-attachments/assets/f0e500bb-e7ea-4eb7-990f-68e6eebdacf1)
+
+The Timeline kit now lets you swap in custom components, allowing clear, adaptable tracking for projects, processes, and user journeys. This enables your Timelines to be more informative and lets you adjust it to fit your needs!
 
 [14.7.0](https://github.com/powerhome/playbook/tree/14.7.0) full list of changes:
 
