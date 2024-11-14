@@ -1,0 +1,19 @@
+<% initial_items = [
+  { id: "31", name: "Philadelphia" },
+  { id: "32", name: "New Jersey" },
+  { id: "33", name: "Maryland" },
+  { id: "34", name: "Connecticut" },
+
+] %>
+
+<%= pb_rails("draggable", props: {initial_items: initial_items}) do %>
+  <%= pb_rails("draggable/draggable_container") do %>
+    <%= pb_rails("list", props: {ordered: false}) do %>
+        <% initial_items.each do |item| %>
+            <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id]}) do %>
+                <%= pb_rails("list/item") do %><%= item[:name] %><% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+  <% end %>
+<% end %>

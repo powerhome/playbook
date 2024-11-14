@@ -1,0 +1,37 @@
+@import 'skeleton_loading_mixins';
+
+.pb_skeleton_loading {
+    display: "flex";
+    flex-direction: "column";
+    height: 100%;
+    .color_default {
+        @include skeleton-shimmer($silver);
+    }
+    .color_white {
+        @include skeleton-shimmer-light($white);
+    }
+    .dark {
+        @include skeleton-shimmer($border_dark);
+    }
+    .gap_xxs {
+        margin-top: 4px;
+    }
+    .gap_xs {
+        margin-top: 8px;
+    }
+    .gap_sm {
+        margin-top: 16px;
+    }
+    .gap_md {
+        margin-top: 24px;
+    }
+    .gap_lg {
+        margin-top: 32px;
+    }
+    .gap_xl {
+        margin-top: 40px;
+    }
+    .gap_xxl {
+        margin-top: 48px;
+    }
+}

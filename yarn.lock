@@ -3520,10 +3520,10 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-document/-/extension-document-2.0.2.tgz#b07a4062cc0772e4129621b9b9a2e043a05395a1"
   integrity sha512-rY87m1sezlD37v5hGndiA/B/3upR3hQurSEsWhWyQE/11lOshPQKCCHfDV6KLwKdjd8lfwfbXueH/SBFHtrYAQ==
 
-"@tiptap/extension-document@^2.1.12":
-  version "2.1.12"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-document/-/extension-document-2.1.12.tgz#e19e4716dfad60cbeb6abaf2f362fed759963529"
-  integrity sha512-0QNfAkCcFlB9O8cUNSwTSIQMV9TmoEhfEaLz/GvbjwEq4skXK3bU+OQX7Ih07waCDVXIGAZ7YAZogbvrn/WbOw==
+"@tiptap/extension-document@^2.6.6":
+  version "2.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-document/-/extension-document-2.9.1.tgz#ea65a86a4d2524ec65fc4775122f652840a89386"
+  integrity sha512-1a+HCoDPnBttjqExfYLwfABq8MYdiowhy/wp8eCxVb6KGFEENO53KapstISvPzqH7eOi+qRjBB1KtVYb/ZXicg==
 
 "@tiptap/extension-dropcursor@^2.0.2":
   version "2.0.2"
@@ -7324,10 +7324,10 @@ intersection-observer@^0.10.0:
   resolved "https://npm.powerapp.cloud/intersection-observer/-/intersection-observer-0.10.0.tgz#4d11d63c1ff67e21e62987be24d55218da1a1a69"
   integrity sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==
 
-intl-tel-input@^24.6.0:
-  version "24.6.0"
-  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-24.6.0.tgz#f3b070b337f6981493b2c3b9d28e31828ce32a2f"
-  integrity sha512-3ZlxJk7IOhNCRRxGrAcGiP1uzZFaDEQUIHNHk516RORZpOoPh1kqZP8ksE8nm+/5HZk+tRV7F/iex0aWnkkixQ==
+intl-tel-input@^24.7.0:
+  version "24.7.0"
+  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-24.7.0.tgz#8975df176659f8a3a16b97759add1ca24486e480"
+  integrity sha512-OjkhKen4SJUI2kN9OHpb8ReNN619sB9gECPq51dn3zKEWvif3mnSjmrtWhm8ABIb7Ijs+AAYSS5sI33Sb4YqvQ==
 
 is-accessor-descriptor@^0.1.6:
   version "0.1.6"
