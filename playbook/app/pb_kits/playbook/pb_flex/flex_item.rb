@@ -20,8 +20,13 @@ module Playbook
         generate_classname("pb_flex_item_kit", fixed_size_class, grow_class, shrink_class, display_flex_class) + align_self_class
       end
 
-      def style_value
-        "flex-basis: #{fixed_size};" if fixed_size.present?
+      def inline_styles
+        styles = []
+        styles << "flex-basis: #{fixed_size};" if fixed_size.present?
+        styles << "height: #{height};" if height.present?
+        styles << "min-height: #{min_height};" if min_height.present?
+        styles << "max-height: #{max_height};" if max_height.present?
+        styles.join(" ")
       end
 
     private

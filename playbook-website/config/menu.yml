@@ -677,7 +677,7 @@ kits:
     react_rendered: false
     enhanced_element_used: false
   - name: draggable
-    platforms: *2
+    platforms: *1
     description:
     status: stable
     icons_used: false
@@ -770,6 +770,9 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
+  - name: skeleton_loading
+    platforms: *1
+    status: beta
 - category: tags
   description:
   components:

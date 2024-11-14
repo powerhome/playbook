@@ -73,13 +73,13 @@ module Playbook
     prop :aria, type: Playbook::Props::HashProp, default: {}
     prop :html_options, type: Playbook::Props::HashProp, default: {}
     prop :children, type: Playbook::Props::Proc
+    prop :style, type: Playbook::Props::HashProp, default: {}
+    prop :height
+    prop :min_height
+    prop :max_height
 
     def object
       self
-    end
-
-    def combined_html_options
-      default_html_options.merge(html_options.deep_merge(data_attributes))
     end
 
     # rubocop:disable Layout/CommentIndentation
@@ -110,15 +110,48 @@ module Playbook
     end
     # rubocop:enable Style/OptionalBooleanParameter
 
+    def combined_html_options
+      merged = default_html_options.dup
+
+      html_options.each do |key, value|
+        if key == :style && value.is_a?(Hash)
+          # Convert style hash to CSS string
+          merged[:style] = value.map { |k, v| "#{k.to_s.gsub('_', '-')}: #{v}" }.join("; ")
+        else
+          merged[key] = value
+        end
+      end
+
+      inline_styles = dynamic_inline_props
+      merged[:style] = if inline_styles.present?
+                         merged[:style].present? ? "#{merged[:style]}; #{inline_styles}" : inline_styles
+                       end
+
+      merged.deep_merge(data_attributes)
+    end
+
+    def global_inline_props
+      {
+        height: height,
+        min_height: min_height,
+        max_height: max_height,
+      }.compact
+    end
+
   private
 
     def default_options
-      {
+      options = {
         id: id,
         data: data,
         class: classname,
         aria: aria,
       }
+
+      inline_styles = dynamic_inline_props
+      options[:style] = inline_styles if inline_styles.present? && !html_options.key?(:style)
+
+      options
     end
 
     def default_html_options
@@ -130,6 +163,11 @@ module Playbook
         data: data,
         aria: aria,
       }.transform_keys { |key| key.to_s.tr("_", "-").to_sym }
+    end
+
+    def dynamic_inline_props
+      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value}" if value.present? }.compact
+      styles.join("; ").presence
     end
   end
 end

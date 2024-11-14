@@ -1,0 +1,40 @@
+// Animation
+@keyframes wave {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+}
+
+// Shimmer animation and gradient mixin based on color
+@mixin skeleton-shimmer($color) {
+    background: $color;
+    background-color: $color;
+    background-image: linear-gradient(
+      to left,
+      $color 0%,
+      lighten($color, 1%) 50%,
+      lighten($color, 1%) 60%,
+      $color 80%,
+      $color 100%
+    );
+    background-repeat: no-repeat;
+    animation: wave 1.5s linear infinite forwards;
+}
+
+@mixin skeleton-shimmer-light($color) {
+    background: $color;
+    background-color: $color;
+    background-image: linear-gradient(
+      to left,
+      $color 0%,
+      darken($color, 1%) 50%,
+      darken($color, 1%) 60%,
+      $color 80%,
+      $color 100%
+    );
+    background-repeat: no-repeat;
+    animation: wave 1.5s linear infinite forwards;
+}

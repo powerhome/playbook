@@ -174,12 +174,24 @@ type ZIndex = {
   zIndex?: ZIndexType,
 } | ZIndexResponsiveType
 
+type Height = {
+  height?: string 
+}
+
+type MaxHeight = {
+  maxHeight?: string
+}
+
+type MinHeight = {
+  minHeight?: string
+}
+
 // keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & GroupHover & { hover?: string } & Top & Right & Bottom & Left;
+  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -503,7 +515,22 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     } else {
       return verticalAlign ? `vertical_align_${verticalAlign} ` : ''
     }
-  }
+  },
+
+}
+
+const PROP_INLINE_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => {[key: string]: any}} = {
+  heightProps: ({ height }: Height) => {
+    return height ? { height } : {}; 
+  },
+
+  maxHeightProps: ({ maxHeight }: MaxHeight) => {
+    return maxHeight ? { maxHeight } : {};
+  },
+
+  minHeightProps: ({ minHeight }: MinHeight) => {
+    return minHeight ? { minHeight } : {}; 
+  },
 }
 
 type DefaultProps = {[key: string]: string} | Record<string, unknown>
@@ -513,6 +540,16 @@ export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {})
   return Object.keys(PROP_CATEGORIES).map((key) => {
     return PROP_CATEGORIES[key](allProps)
   }).filter((value) => value?.length > 0).join(" ")
+}
+
+// New function for inline styles
+export const globalInlineProps = (props: GlobalProps): React.CSSProperties => {
+  const styles = Object.keys(PROP_INLINE_CATEGORIES).reduce((acc, key) => {
+    const result = PROP_INLINE_CATEGORIES[key](props);
+    return { ...acc, ...(typeof result === 'object' ? result : {}) }; // Ensure result is an object before spreading
+  }, {});
+
+  return styles; // Return the styles object directly
 }
 
 
