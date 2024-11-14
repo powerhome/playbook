@@ -26,7 +26,7 @@ type customQuickPickDatesType = {
 
 let activeLabel = ""
 
-const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: customQuickPickDatesType | undefined) => {
+const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: customQuickPickDatesType | undefined, defaultDate: string) => {
   return function (fp: FpTypes & any): any {
     const today = new Date()
     const yesterday = DateTime.getYesterdayDate(new Date())
@@ -185,6 +185,8 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
     return {
       // onReady is a hook from flatpickr that runs when calendar is in a ready state
       onReady(selectedDates: Array<Date>) {
+        let defaultDateRange, defaultDateLabel
+
         // loop through the ranges and create an anchor tag for each range and add an event listener to set the date when user clicks on a date range
         for (const [label, range] of Object.entries(pluginData.ranges)) {
           addRangeButton(label).addEventListener('click', function () {
@@ -201,6 +203,13 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
               fp.close();
             }
           });
+
+          if (defaultDate) {
+            if (label.toLowerCase() === defaultDate.toLowerCase()) {
+              defaultDateRange = range
+              defaultDateLabel = label
+            }
+          }
         }
         // conditional to check if there is a dropdown to add it to the calendar container and get it the classes it needs
         if (pluginData.rangesNav.children.length > 0) {
@@ -215,6 +224,12 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
            */
           // function to give the active button the active class
           selectActiveRangeButton(selectedDates);
+        }
+
+        if (defaultDateRange && defaultDateLabel) {
+          fp.setDate(defaultDateRange, false);
+          activeLabel = defaultDateLabel
+          selectActiveRangeButton(defaultDateRange);
         }
       },
       onValueUpdate(selectedDates: Array<Date>) {
