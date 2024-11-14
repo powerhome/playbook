@@ -91,13 +91,13 @@ jobs:
           current_npm_version=$(node -pe "require('./package.json').version")
 
           case ${{ env.SEMVER_LABEL }} in
-            Major)
+            major)
               new_npm_version=$(yarn version --premajor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
               ;;
-            Minor)
+            minor)
               new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
               ;;
-            Patch)
+            patch)
               new_npm_version=$(yarn version --prepatch --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
               ;;
             *)
