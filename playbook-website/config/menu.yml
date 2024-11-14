@@ -773,6 +773,9 @@ kits:
   - name: skeleton_loading
     platforms: *1
     status: beta
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: tags
   description:
   components:
