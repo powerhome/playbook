@@ -185,7 +185,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
     return {
       // onReady is a hook from flatpickr that runs when calendar is in a ready state
       onReady(selectedDates: Array<Date>) {
-        let defaultDateRange, defaultDateLabel
+        let defaultDateRange
 
         // loop through the ranges and create an anchor tag for each range and add an event listener to set the date when user clicks on a date range
         for (const [label, range] of Object.entries(pluginData.ranges)) {
@@ -204,10 +204,11 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
             }
           });
 
+          // check if there is a default date and set the default date range and label for quick pick
           if (defaultDate) {
             if (label.toLowerCase() === defaultDate.toLowerCase()) {
+              activeLabel = label
               defaultDateRange = range
-              defaultDateLabel = label
             }
           }
         }
@@ -226,9 +227,9 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
           selectActiveRangeButton(selectedDates);
         }
 
-        if (defaultDateRange && defaultDateLabel) {
+        // set the default date range if there is one and select the active button
+        if (defaultDateRange) {
           fp.setDate(defaultDateRange, false);
-          activeLabel = defaultDateLabel
           selectActiveRangeButton(defaultDateRange);
         }
       },
