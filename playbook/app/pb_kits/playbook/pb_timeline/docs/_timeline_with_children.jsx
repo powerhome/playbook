@@ -90,7 +90,7 @@ const TimelineWithChildren = (props) => (
         </Timeline.Detail>
       </Timeline.Item>
 
-      <Timeline.Item lineStyle="solid"
+      <Timeline.Item lineStyle="dotted"
           {...props}
       >
         <Timeline.Label date={new Date(new Date().setDate(new Date().getDate() + 1))} />
@@ -105,11 +105,11 @@ const TimelineWithChildren = (props) => (
         </Timeline.Detail>
       </Timeline.Item>
 
-      <Timeline.Item lineStyle="dotted"
+      <Timeline.Item lineStyle="solid"
           {...props}
       >
         <Timeline.Step>
-          <Pill text="Any Kit"
+          <Pill text="3"
               variant="success"
           />
         </Timeline.Step>

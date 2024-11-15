@@ -65,18 +65,18 @@
     <% end %>
   <% end %>
 
-  <%= pb_rails("timeline/item", props: {icon: "map-marker-alt", icon_color: "purple", date: Date.today+1 }) do |item| %>
+  <%= pb_rails("timeline/item", props: {icon: "map-marker-alt", icon_color: "purple", date: Date.today+1, line_style: "dotted" }) do |item| %>
     <%= pb_rails("title_detail", props: {
         title: "Society Hill",
         detail: "72 E St Astoria"
     }) %>
   <% end %>
 
-  <%= pb_rails("timeline/item", props: { line_style: "dotted"}) do |item| %>
+  <%= pb_rails("timeline/item") do |item| %>
 
     <% item.step do %>
       <%= pb_rails("timeline/step") do %>
-        <%= pb_rails("pill", props: { text: "Any Kit" , variant: "success" }) %>
+        <%= pb_rails("pill", props: { text: "3" , variant: "success" }) %>
       <% end %>
     <% end %>
   
