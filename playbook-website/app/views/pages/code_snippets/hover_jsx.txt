@@ -7,13 +7,18 @@
 <Button
   hover={{ scale: "lg" }}
   onClick={() => alert("button clicked!")}
-  text='Shadow Deep'
+  text='Large Scale'
 />
 
 <Message
     hover={{ background: "success_subtle" }}
     label='Anna Black'
     message='How can we assist you today?'
+/>
+
+<Title
+    hover={{ visibility: true }}
+    text="Surprise!"
 />
 
 <Body

@@ -50,3 +50,18 @@
   @include hover-color-classes($border_colors);
   @include hover-color-classes($text_colors);
   @include hover-color-classes($category_colors);
+
+.hover_visibility {
+  opacity: 0;
+  transition: opacity $transition-speed ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.group_hover:hover {
+  .group_hover.hover_visibility {
+    opacity: 1;
+  }
+}

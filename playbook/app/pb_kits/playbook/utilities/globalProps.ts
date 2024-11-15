@@ -63,7 +63,8 @@ type FlexWrap = {
 type Hover = Shadow & {
   background?: string,
   color?: string,
-  scale?: "sm" | "md" | "lg"
+  scale?: "sm" | "md" | "lg",
+  visibility?: boolean,
 }
 
 type GroupHover  = {
@@ -233,6 +234,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       css += hover.background ? `hover_background-${hover.background } ` : '';
       css += hover.scale ? `hover_scale_${hover.scale} ` : '';
       css += hover.color ? `hover_color-${hover.color } ` : '';
+      css += hover.visibility ? `hover_visibility` : '';
       return css;
   },
 
