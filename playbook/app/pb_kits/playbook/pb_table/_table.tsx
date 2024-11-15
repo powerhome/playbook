@@ -4,11 +4,11 @@ import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/pro
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import PbTable from '.'
 import {
-  TableHead,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableCell,
+    TableHead,
+    TableHeader,
+    TableBody,
+    TableRow,
+    TableCell,
 } from "./subcomponents";
 
 type TableProps = {
@@ -28,6 +28,7 @@ type TableProps = {
     singleLine?: boolean,
     size?: "sm" | "md" | "lg",
     sticky?: boolean,
+    stickyLeftcolumn?: string[],
     striped?: boolean,
     tag?: "table" | "div",
     verticalBorder?: boolean,
@@ -51,6 +52,7 @@ const Table = (props: TableProps): React.ReactElement => {
         singleLine = false,
         size = 'sm',
         sticky = false,
+        stickyLeftcolumn = [],
         striped = false,
         tag = 'table',
         verticalBorder = false,
@@ -76,6 +78,7 @@ const Table = (props: TableProps): React.ReactElement => {
             'single-line': singleLine,
             'no-hover': disableHover,
             'sticky-header': sticky,
+            'sticky-left-column': stickyLeftcolumn,
             'striped': striped,
             [outerPaddingCss]: outerPadding !== '',
         },
@@ -86,32 +89,91 @@ const Table = (props: TableProps): React.ReactElement => {
     )
 
     useEffect(() => {
+        const handleStickyColumns = () => {
+            let accumulatedWidth = 0;
+
+            stickyLeftcolumn.forEach((colId) => {
+                const header = document.querySelector(`th[id="${colId}"]`);
+                const cells = document.querySelectorAll(`td[id="${colId}"]`);
+
+                if (header) {
+                    header.classList.add('sticky');
+                    header.style.left = `${accumulatedWidth}px`;
+
+                    accumulatedWidth += header.offsetWidth;
+                }
+
+                cells.forEach((cell) => {
+                    cell.classList.add('sticky');
+                    cell.style.left = `${accumulatedWidth - header.offsetWidth}px`;
+                });
+            });
+        };
+
+        setTimeout(() => {
+            handleStickyColumns();
+        }, 50);
+
+        window.addEventListener('resize', handleStickyColumns);
+
+        return () => {
+            window.removeEventListener('resize', handleStickyColumns);
+        };
+    }, [stickyLeftcolumn]);
+
+    useEffect(() => {
         const instance = new PbTable()
         instance.connect()
     }, [])
 
     return (
         <>
-            {isTableTag ? (
-                <table
-                    {...ariaProps}
-                    {...dataProps}
-                    {...htmlProps}
-                    className={classNames}
-                    id={id}
-                >
-                    {children}
-                </table>
-            ) : (
-                <div
-                    {...ariaProps}
-                    {...dataProps}
-                    {...htmlProps}
-                    className={classNames}
-                    id={id}
-                >
-                    {children}
+            {responsive === 'scroll' ? (
+                <div className='table-responsive-scroll'>
+                    {isTableTag ? (
+                        <table
+                            {...ariaProps}
+                            {...dataProps}
+                            {...htmlProps}
+                            className={classNames}
+                            id={id}
+                        >
+                            {children}
+                        </table>
+                    ) : (
+                        <div
+                            {...ariaProps}
+                            {...dataProps}
+                            {...htmlProps}
+                            className={classNames}
+                            id={id}
+                        >
+                            {children}
+                        </div>
+                    )}
                 </div>
+            ) : (
+                isTableTag ? (
+                    <table
+                        {...ariaProps}
+                        {...dataProps}
+                        {...htmlProps}
+                        className={classNames}
+                        id={id}
+                    >
+                        {children}
+                    </table>
+                ) : (
+                    <div
+                        {...ariaProps}
+                        {...dataProps}
+                        {...htmlProps}
+                        className={classNames}
+                        id={id}
+                    >
+                        {children}
+                    </div>
+                )
             )}
         </>
     )
