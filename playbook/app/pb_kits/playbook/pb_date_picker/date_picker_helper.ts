@@ -143,7 +143,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
     } else if (selectionType === "quickpick") {
       //------- QUICKPICK VARIANT PLUGIN -------------//
-      pluginList.push(quickPickPlugin(thisRangesEndToday, customQuickPickDates))
+      pluginList.push(quickPickPlugin(thisRangesEndToday, customQuickPickDates, defaultDate as string))
     }
 
     // time selection
