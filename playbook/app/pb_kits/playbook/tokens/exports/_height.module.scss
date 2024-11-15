@@ -1,0 +1,13 @@
+@import "../height";
+
+:export {
+  @mixin export_height($height_list) {
+    @each $name, $value in $height_list {
+      .#{$name} {
+        height: $value;
+      }
+    }
+  }
+
+  @include export_height($heights);
+}
