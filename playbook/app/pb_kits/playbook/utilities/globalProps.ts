@@ -231,9 +231,9 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       let css = '';
       if (!hover) return css;
       css += hover.shadow ? `hover_shadow_${hover.shadow} ` : '';
-      css += hover.background ? `hover_background_${hover.background } ` : '';
+      css += hover.background ? `hover_background-${hover.background } ` : '';
       css += hover.scale ? `hover_scale_${hover.scale} ` : '';
-      css += hover.color ? `hover_color_${hover.color } ` : '';
+      css += hover.color ? `hover_color-${hover.color } ` : '';
       css += hover.visibility ? `hover_visibility` : '';
       return css;
   },

@@ -20,3 +20,8 @@
     hover={{ visibility: true }}
     text="Surprise!"
 />
+
+<Body
+    hover={{ color: "success" }}
+    text='Hover to change color'
+/>

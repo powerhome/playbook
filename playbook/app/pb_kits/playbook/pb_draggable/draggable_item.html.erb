@@ -1,0 +1,7 @@
+<%= pb_content_tag(:div, {
+id: "item_#{object.drag_id}",
+draggable: true
+}) do %>
+    <%= content.presence %>
+<% end %>
+  

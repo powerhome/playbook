@@ -20,6 +20,7 @@ type TimelineProps = {
   id?: string,
   orientation?: string,
   showDate?: boolean,
+  gap?: 'xs' | 'sm' | 'md' | 'lg' | 'none',
 } & GlobalProps
 
 const Timeline = ({
@@ -31,13 +32,16 @@ const Timeline = ({
   id,
   orientation = 'horizontal',
   showDate = false,
+  gap = 'none',
   ...props
 }: TimelineProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const dateStyle = showDate === true ? '_with_date' : ''
-  const timelineCss = buildCss('pb_timeline_kit', `_${orientation}`, dateStyle)
+  const gapStyle = gap === 'none' ? '' : `gap_${gap}`
+  const timelineCss = buildCss('pb_timeline_kit', `${orientation}`, dateStyle, gapStyle)
+
   return (
     <div
         {...ariaProps}
