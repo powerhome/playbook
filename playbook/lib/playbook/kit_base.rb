@@ -30,6 +30,9 @@ require "playbook/top"
 require "playbook/right"
 require "playbook/bottom"
 require "playbook/vertical_align"
+require "playbook/height"
+require "playbook/min_height"
+require "playbook/max_height"
 
 module Playbook
   include ActionView::Helpers
@@ -67,6 +70,9 @@ module Playbook
     include Playbook::Right
     include Playbook::Bottom
     include Playbook::VerticalAlign
+    include Playbook::Height
+    include Playbook::MinHeight
+    include Playbook::MaxHeight
 
     prop :id
     prop :data, type: Playbook::Props::HashProp, default: {}
