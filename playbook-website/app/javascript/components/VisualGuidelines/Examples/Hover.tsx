@@ -112,6 +112,22 @@ const Hover = ({ example }: { example: string }) => (
             <tr>
               <td>
                 <Pill
+                  text="color"
+                  textTransform="none"
+                  variant="warning"
+                />
+              </td>
+              <td>
+                <Pill
+                  text="${color}"
+                  textTransform="none"
+                  variant="warning"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Pill
                   text="background"
                   textTransform="none"
                   variant="warning"
@@ -199,6 +215,12 @@ const Hover = ({ example }: { example: string }) => (
               gap="sm"
               wrap
             >
+              <Card padding="xs" >
+                <Body
+                  text="Text Color"
+                  hover={{ color: 'data_1' }}
+                />
+              </Card>
               <Card
                 hover={{ background: 'success_subtle' }}
                 padding="xs"

@@ -21,34 +21,32 @@
 }
 
 @mixin hover-color-classes($colors-list) {
-  @each $name, $color in $colors-list {
-    .hover_background_#{"" + $name}:hover,
-    .group_hover:hover .group_hover.hover_background_#{"" + $name} {
-      background-color: $color !important;
-      transition: background-color $transition-speed ease;
-    }
-    .hover_color_#{"" + $name}:hover,
-    .group_hover:hover .group_hover.hover_color_#{"" + $name} {
-      color: $color !important;
-      transition: color $transition-speed ease;
+    @each $name, $color in $colors-list {
+      .hover_background-#{"" + $name}:hover {
+        background-color: $color !important;
+        transition: background-color $transition-speed ease;
+      }
+      .hover_color-#{"" + $name}:hover {
+        color: $color !important;
+        transition: color $transition-speed ease;
+      }
     }
   }
-}
-
-@include hover-scale-classes($scales);
-@include hover-shadow-classes($box_shadows);
-@include hover-color-classes($product_colors);
-@include hover-color-classes($status_colors);
-@include hover-color-classes($data_colors);
-@include hover-color-classes($shadow_colors);
-@include hover-color-classes($colors);
-@include hover-color-classes($interface_colors);
-@include hover-color-classes($main_colors);
-@include hover-color-classes($background_colors);
-@include hover-color-classes($card_colors);
-@include hover-color-classes($active_colors);
-@include hover-color-classes($action_colors);
-@include hover-color-classes($hover_colors);
-@include hover-color-classes($border_colors);
-@include hover-color-classes($text_colors);
-@include hover-color-classes($category_colors);
+  
+  @include hover-scale-classes($scales);
+  @include hover-shadow-classes($box_shadows);
+  @include hover-color-classes($product_colors);
+  @include hover-color-classes($status_colors);
+  @include hover-color-classes($data_colors);
+  @include hover-color-classes($shadow_colors);
+  @include hover-color-classes($colors);
+  @include hover-color-classes($interface_colors);
+  @include hover-color-classes($main_colors);
+  @include hover-color-classes($background_colors);
+  @include hover-color-classes($card_colors);
+  @include hover-color-classes($active_colors);
+  @include hover-color-classes($action_colors);
+  @include hover-color-classes($hover_colors);
+  @include hover-color-classes($border_colors);
+  @include hover-color-classes($text_colors);
+  @include hover-color-classes($category_colors);

@@ -15,3 +15,8 @@
     label='Anna Black'
     message='How can we assist you today?'
 />
+
+<Body
+    hover={{ color: "success" }}
+    text='Hover to change color'
+/>
