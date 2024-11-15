@@ -1,1 +1,8 @@
-height
+<Background height="xs">
+  <Title>
+    XS 
+  </Title>
+  <Detail>
+    320px height 
+  </Detail>
+</Background>

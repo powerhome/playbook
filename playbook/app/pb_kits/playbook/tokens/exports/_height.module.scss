@@ -11,3 +11,27 @@
 
   @include export_height($heights);
 }
+
+:export {
+  @mixin export_max_height($height_list) {
+    @each $name, $value in $height_list {
+      .max_#{$name} {
+        max-height: $value;
+      }
+    }
+  }
+
+  @include export_max_height($heights);
+}
+
+:export {
+  @mixin export_min_height($height_list) {
+    @each $name, $value in $height_list {
+      .min_#{$name} {
+        min-height: $value;
+      }
+    }
+  }
+
+  @include export_min_height($heights);
+}

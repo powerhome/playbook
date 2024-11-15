@@ -11,58 +11,78 @@ import {
 
 import Example from '../Templates/Example'
 
-const SIZES: { [size: string]: string } = {
-  'xs': '360px max',
-  'sm': '540px max',
-  'md': '720px max',
-  'lg': '960px max',
-  'xl': '1140px max',
-  'xxl': '1320px max',
+const HEIGHTS: { [size: string]: string } = {
+  'auto': 'Auto height',
+  'xs': '320px max',
+  'sm': '480px max',
+  'md': '768px max',
+  'lg': '1024x max',
+  'xl': '1280px max',
+  'xxl': '1440px max',
+  'xxxl': '1920px max',
 }
 
-const MaxWidthDescription = () => (
+const VALUES: { [value: string]: string } = {
+  'auto': 'auto',
+  'xs': 'xs',
+  'sm': 'sm',
+  'md': 'md',
+  'lg': 'lg',
+  'xl': 'xl',
+  'xxl': 'xxl',
+  'xxxl': 'xxxl',
+}
+
+const MaxHeightDescription = () => (
   <>
-    When building your interface it is common to add max width to specific kits so the interface looks good at all sizes. For articles we recommend pairing a "medium" width with "loose" line height. See our <a href="https://playbook.powerapp.cloud/kits/body/react" target="_blank">Body Kit</a> for an example. We've made it easy to add max with ANY kit through our global props. See below:
+    We've made it easy to add max height to ANY kit through our global props. See below:
   </>
 )
 
-const MaxWidth = ({ example }: {example: string}) => (
+const MaxHeight = ({ example }: {example: string}) => (
   <Example
-      backgroundClass='maxwidth-class'
-      description={<MaxWidthDescription />}
+      backgroundClass='maxheight-class'
+      description={<MaxHeightDescription />}
       example={example}
       globalProps={{
-        maxWidth: Object.keys(SIZES),
+        maxHeight: Object.keys(VALUES),
       }}
-      title="Max Width"
+      title="Max Height"
   >
-    {Object.keys(SIZES).map((size: string) => (
-      <Background
-          backgroundColor="gradient"
-          key={size}
-          marginBottom="xs"
-          maxWidth={size}
-          padding="xs"
-      >
-        <Flex>
-          <Title
-            dark
-            size={4}
-            flex={1}
-            htmlOptions={{style: {minWidth:"30px"}}}
+    <Background
+        className="maxheight-resize"
+        height="sm"
+    >
+      <Flex wrap>
+        {Object.keys(HEIGHTS).map((size: string) => (
+          <Background
+              backgroundColor="gradient"
+              key={size}
+              marginBottom="xs"
+              marginRight="xs"
+              height="sm"
+              maxHeight={size}
+              padding="xs"
           >
-            {size.toUpperCase()}
-          </Title>
-          <Detail 
-            flex={0}
-            color="lighter"
-          >
-            {SIZES[size]}
-          </Detail>
-        </Flex>
-      </Background>
-    ))}
+            <>
+              <Title
+                dark
+                size={4}
+              >
+                {size.toUpperCase()}
+              </Title>
+              <Detail
+                color="lighter"
+              >
+                {HEIGHTS[size]}
+              </Detail>
+            </>
+          </Background>
+        ))}
+      </Flex>
+    </Background>
+    <Detail text="The XS column would go to the bottom of the card but it doesn't because it has a max height" />
   </Example>
 )
 
-export default MaxWidth
+export default MaxHeight

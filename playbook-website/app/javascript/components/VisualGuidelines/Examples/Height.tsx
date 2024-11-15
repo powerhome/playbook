@@ -11,58 +11,78 @@ import {
 
 import Example from '../Templates/Example'
 
-const SIZES: { [size: string]: string } = {
-  'xs': '360px max',
-  'sm': '540px max',
-  'md': '720px max',
-  'lg': '960px max',
-  'xl': '1140px max',
-  'xxl': '1320px max',
+const HEIGHTS: { [size: string]: string } = {
+  'auto': 'Auto height',
+  'xs': '320px',
+  'sm': '480px',
+  'md': '768px',
+  'lg': '1024x',
+  'xl': '1280px',
+  'xxl': '1440px',
+  'xxxl': '1920px',
 }
 
-const MaxWidthDescription = () => (
+const VALUES: { [value: string]: string } = {
+  'auto': 'auto',
+  'xs': 'xs',
+  'sm': 'sm',
+  'md': 'md',
+  'lg': 'lg',
+  'xl': 'xl',
+  'xxl': 'xxl',
+  'xxxl': 'xxxl',
+}
+
+const HeightDescription = () => (
   <>
-    When building your interface it is common to add max width to specific kits so the interface looks good at all sizes. For articles we recommend pairing a "medium" width with "loose" line height. See our <a href="https://playbook.powerapp.cloud/kits/body/react" target="_blank">Body Kit</a> for an example. We've made it easy to add max with ANY kit through our global props. See below:
+    We've made it easy to set height for ANY kit through our global props. See below:
   </>
 )
 
-const MaxWidth = ({ example }: {example: string}) => (
+const Height = ({ example }: {example: string}) => (
   <Example
-      backgroundClass='maxwidth-class'
-      description={<MaxWidthDescription />}
+      backgroundClass='height-class'
+      description={<HeightDescription />}
       example={example}
       globalProps={{
-        maxWidth: Object.keys(SIZES),
+        height: Object.keys(VALUES),
       }}
-      title="Max Width"
+      title="Height"
   >
-    {Object.keys(SIZES).map((size: string) => (
-      <Background
-          backgroundColor="gradient"
-          key={size}
-          marginBottom="xs"
-          maxWidth={size}
-          padding="xs"
-      >
-        <Flex>
-          <Title
-            dark
-            size={4}
-            flex={1}
-            htmlOptions={{style: {minWidth:"30px"}}}
+    <Background
+        className="height-resize"
+        height="sm"
+        overflowY="auto"
+    >
+      <Flex wrap>
+        {Object.keys(HEIGHTS).map((size: string) => (
+          <Background
+              backgroundColor="gradient"
+              key={size}
+              marginBottom="xs"
+              marginRight="xs"
+              height={size}
+              padding="xs"
           >
-            {size.toUpperCase()}
-          </Title>
-          <Detail 
-            flex={0}
-            color="lighter"
-          >
-            {SIZES[size]}
-          </Detail>
-        </Flex>
-      </Background>
-    ))}
+            <>
+              <Title
+                dark
+                size={4}
+              >
+                {size.toUpperCase()}
+              </Title>
+              <Detail
+                color="lighter"
+              >
+                {HEIGHTS[size]}
+              </Detail>
+            </>
+          </Background>
+        ))}
+      </Flex>
+    </Background>
+    <Detail text="To see different heights, you can scroll down" />
   </Example>
 )
 
-export default MaxWidth
+export default Height

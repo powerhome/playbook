@@ -1,1 +1,8 @@
-max height
+<Background height="md" maxHeight="sm" >
+  <Title>
+    MD 
+  </Title>
+  <Detail>
+    is stopped at sm height 
+  </Detail>
+</Background>
