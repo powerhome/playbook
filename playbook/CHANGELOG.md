@@ -1,3 +1,34 @@
+# 14.8.0
+##### November 18, 2024
+
+
+[14.8.0](https://github.com/powerhome/playbook/tree/14.8.0) full list of changes:
+
+**Kit Enhancements:**
+- Remove react-modal from Drawer Kit ([\#3891](https://github.com/powerhome/playbook/pull/3891)) ([@markdoeswork](https://github.com/markdoeswork))
+- Add Color Hover Docs and Fix Background Hover ([\#3874](https://github.com/powerhome/playbook/pull/3874)) ([@markdoeswork](https://github.com/markdoeswork))
+- Adding defaultDate Prop to Date Picker Quick Pick Variant ([\#3907](https://github.com/powerhome/playbook/pull/3907)) ([@carloslimasd](https://github.com/carloslimasd))
+- Timeline Small Variant: Add "Gap" Prop to Timeline Kit ([\#3903](https://github.com/powerhome/playbook/pull/3903)) ([@skduncan](https://github.com/skduncan))
+
+
+**Fixed Bugs:**
+- Fix Dark Mode Date Colors- Dots, Icons, and Captions ([\#3894](https://github.com/powerhome/playbook/pull/3894)) ([@kangaree](https://github.com/kangaree))
+
+
+**Improvements:**
+- Global Hover Visibility Prop ([\#3905](https://github.com/powerhome/playbook/pull/3905)) ([@kangaree](https://github.com/kangaree))
+- Bump intl-tel-input from 24.6.0 to 24.7.0 ([\#3895](https://github.com/powerhome/playbook/pull/3895)) ([@dependabot](https://github.com/dependabot))
+- Fixing Github Action Errors ([\#3904](https://github.com/powerhome/playbook/pull/3904)) ([@jasperfurniss](https://github.com/jasperfurniss))
+- Semver Targets Trigger Correct RCs - Update Version ([\#3831](https://github.com/powerhome/playbook/pull/3831)) ([@skduncan](https://github.com/skduncan))
+- Semver Targets Trigger Correct RCs - Check Label ([\#3822](https://github.com/powerhome/playbook/pull/3822)) ([@skduncan](https://github.com/skduncan))
+
+**New Kits:**
+- Draggable Kit in Rails ([\#3863](https://github.com/powerhome/playbook/pull/3863)) ([@nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.7.0...14.8.0)
+
+
 # Go Further With Our Custom Timelines!
 ##### November 8, 2024
 
