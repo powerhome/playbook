@@ -98,14 +98,14 @@ const Table = (props: TableProps): React.ReactElement => {
 
                 if (header) {
                     header.classList.add('sticky');
-                    header.style.left = `${accumulatedWidth}px`;
+                    (header as HTMLElement).style.left = `${accumulatedWidth}px`;
 
-                    accumulatedWidth += header.offsetWidth;
+                    accumulatedWidth += (header as HTMLElement).offsetWidth;
                 }
 
                 cells.forEach((cell) => {
                     cell.classList.add('sticky');
-                    cell.style.left = `${accumulatedWidth - header.offsetWidth}px`;
+                    (cell as HTMLElement).style.left = `${accumulatedWidth - (header as HTMLElement).offsetWidth}px`;
                 });
             });
         };
