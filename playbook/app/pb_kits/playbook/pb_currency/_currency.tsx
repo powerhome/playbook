@@ -103,7 +103,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
 
   const swapNegative = size === "sm" && symbol !== ""
   const handleNegative = amount.startsWith("-") && swapNegative ? "-" : ""
-  const getAbsoluteAmount = (amountString) => amountString.replace(/^-/,'')
+  const getAbsoluteAmount = (amountString: string) => amountString.replace(/^-/,'')
   const getAbbrOrFormatAmount = abbreviate ? getAbbreviatedValue('amount') : formatAmount(getMatchingDecimalAmount)
   const getAmount = swapNegative ? getAbsoluteAmount(getAbbrOrFormatAmount) : getAbbrOrFormatAmount
   const getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null
