@@ -68,14 +68,18 @@ module Playbook
       def title_props
         {
           size: size_value,
-          text: absolute_amount(abbreviate ? abbreviated_value : formatted_amount),
+          text: swap_negative ? absolute_amount(abbr_or_format_amount) : abbr_or_format_amount,
           classname: "pb_currency_value",
           dark: dark,
         }
       end
 
+      def abbr_or_format_amount
+        abbreviate ? abbreviated_value : formatted_amount
+      end
+
       def negative_sign
-        amount.starts_with?("-") ? "-" : ""
+        amount.starts_with?("-") && swap_negative ? "-" : ""
       end
 
       def body_props
@@ -166,6 +170,10 @@ module Playbook
 
       def absolute_amount(amount_string)
         amount_string.sub(/^-/, "")
+      end
+
+      def swap_negative
+        size === "sm"
       end
     end
   end
