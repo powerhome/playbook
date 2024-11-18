@@ -1,5 +1,5 @@
 <%= pb_form_with(scope: :example, url: "", method: :get, loading: true) do |form| %>
-  <%= form.text_field :example_text_field_loading, props: { label: true } %>
+  <%= form.text_field :example_text_field, props: { label: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

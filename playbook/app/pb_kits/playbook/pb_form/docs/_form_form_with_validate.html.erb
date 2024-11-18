@@ -22,74 +22,23 @@
 %>
 
 <%= pb_form_with(scope: :example, method: :get, url: "", validate: true) do |form| %>
-  <%= form.typeahead :example_typeahead_validation, props: { data: { typeahead_example2: true, user: {} }, label: true, placeholder: "Search for a user", required: true, validation: { message: "Please select a user." } } %>
-  <%= form.text_field :example_text_field_validation, props: { label: true, required: true } %>
-  <%= form.phone_number_field :example_phone_number_field_validation, props: { label: "Example phone field" } %>
-  <%= form.email_field :example_email_field_validation, props: { label: true, required: true } %>
-  <%= form.number_field :example_number_field_validation, props: { label: true, required: true } %>
-  <%= form.search_field :example_project_number_validation, props: { label: true, required: true, validation: { pattern: "[0-9]{2}-[0-9]{5}", message: "Please enter a valid project number (example: 33-12345)." } } %>
-  <%= form.password_field :example_password_field_validation, props: { label: true, required: true } %>
-  <%= form.url_field :example_url_field_validation, props: { label: true, required: true } %>
-  <%= form.text_area :example_text_area_validation, props: { label: true, required: true } %>
-  <%= form.dropdown_field :example_dropdown_validation, props: { label: true, options: example_dropdown_options, required: true } %>
-  <%= form.select :example_select_validation, [ ["Yes", 1], ["No", 2] ], props: { label: true, blank_selection: "Select One...", required: true } %>
-  <%= form.collection_select :example_collection_select_validation, example_collection, :value, :name, props: { label: true, blank_selection: "Select One...", required: true } %>
+  <%= form.text_field :example_text_field, props: { label: true, required: true } %>
+  <%= form.phone_number_field :example_phone_number_field, props: { label: "Example phone field" } %>
+  <%= form.email_field :example_email_field, props: { label: true, required: true } %>
+  <%= form.number_field :example_number_field, props: { label: true, required: true } %>
+  <%= form.search_field :example_project_number, props: { label: true, required: true, validation: { pattern: "[0-9]{2}-[0-9]{5}", message: "Please enter a valid project number (example: 33-12345)." } } %>
+  <%= form.password_field :example_password_field, props: { label: true, required: true } %>
+  <%= form.url_field :example_url_field, props: { label: true, required: true } %>
+  <%= form.text_area :example_text_area, props: { label: true, required: true } %>
+  <%= form.dropdown_field :example_dropdown, props: { label: true, options: example_dropdown_options, required: true } %>
+  <%= form.select :example_select, [ ["Yes", 1], ["No", 2] ], props: { label: true, blank_selection: "Select One...", required: true } %>
+  <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true, blank_selection: "Select One...", required: true } %>
   <%= form.check_box :example_checkbox, props: { text: "Example Checkbox", label: true, required: true } %>
   <%= form.date_picker :example_date_picker_2, props: { label: true, required: true } %>
-  <%= form.star_rating_field :example_star_rating_validation, props: { variant: "interactive", label: true, required: true } %>
+  <%= form.star_rating_field :example_star_rating, props: { variant: "interactive", label: true, required: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>
     <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
   <% end %>
-<% end %>
-
-<!-- form.typeahead user results example template -->
-<template data-typeahead-example-result-option>
-  <%= pb_rails("user", props: {
-    name: tag(:slot, name: "name"),
-    orientation: "horizontal",
-    align: "left",
-    avatar_url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=",
-    avatar: true
-    }) %>
-</template>
-
-<!-- form.typeahead JS example implementation -->
-<%= javascript_tag defer: "defer" do %>
-  document.addEventListener("pb-typeahead-kit-search", function(event) {
-    if (!event.target.dataset || !event.target.dataset.typeaheadExample2) return
-
-    fetch(`https://api.github.com/search/users?q=${encodeURIComponent(event.detail.searchingFor)}`)
-      .then(response => response.json())
-      .then((result) => {
-        const resultOptionTemplate = document.querySelector("[data-typeahead-example-result-option]")
-
-        event.detail.setResults((result.items || []).map((user) => {
-          const wrapper = resultOptionTemplate.content.cloneNode(true)
-          wrapper.children[0].dataset.user = JSON.stringify(user)
-          wrapper.querySelector('slot[name="name"]').replaceWith(user.login)
-          wrapper.querySelector('img').dataset.src = user.avatar_url
-          return wrapper
-        }))
-      })
-  })
-
-
-  document.addEventListener("pb-typeahead-kit-result-option-selected", function(event) {
-    if (!event.target.dataset.typeaheadExample2) return
-
-    const selectedUserJSON = event.detail.selected.firstElementChild.dataset.user
-    const selectedUserData = JSON.parse(selectedUserJSON)
-
-    // set the input field's value
-    event.target.querySelector('input[name=example_typeahead_validation]').value = selectedUserData.login
-
-    // log the selected option's dataset
-    console.log('The selected user data:')
-    console.dir(selectedUserData)
-
-    // do even more with the data later - TBD
-    event.target.dataset.user = selectedUserJSON
-  })
 <% end %>
