@@ -3,12 +3,12 @@
 
   <div class=<%= "pb_currency_wrapper#{object.variant_class || object.emphasized_class}" %>>
     <% if object.unstyled %>
-      <div><%= object.symbol %></div>
+      <div><%= object.negative_sign %><%= object.symbol %></div>
       <div><%= object.title_props[:text] %></div>
       <div><%= object.body_props[:text] %></div>
     <% else %>
       <%= pb_rails("body", props: object.currency_wrapper_props) do %>
-        <%= object.symbol %>
+        <%= object.negative_sign %><%= object.symbol %>
       <% end %>
       <%= pb_rails("title", props: object.title_props) %>
       <%= pb_rails("body", props: object.body_props) %>
