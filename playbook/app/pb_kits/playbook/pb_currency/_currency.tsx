@@ -101,7 +101,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     return decimalPart ? `${formattedWhole}.${decimalPart}` : formattedWhole;
   }
 
-  const swapNegative = size === 'sm'
+  const swapNegative = size === "sm" && symbol !== ""
   const handleNegative = amount.startsWith("-") && swapNegative ? "-" : ""
   const getAbsoluteAmount = (amountString) => amountString.replace(/^-/,'')
   const getAbbrOrFormatAmount = abbreviate ? getAbbreviatedValue('amount') : formatAmount(getMatchingDecimalAmount)

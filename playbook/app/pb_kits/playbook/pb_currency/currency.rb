@@ -173,7 +173,7 @@ module Playbook
       end
 
       def swap_negative
-        size === "sm"
+        size == "sm" && symbol != ""
       end
     end
   end
