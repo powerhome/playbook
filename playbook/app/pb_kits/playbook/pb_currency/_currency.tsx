@@ -101,9 +101,11 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     return decimalPart ? `${formattedWhole}.${decimalPart}` : formattedWhole;
   }
 
-  const negativeSymbol = amount.startsWith("-") ? "-" : ""
+  const swapNegative = size === 'sm'
+  const handleNegative = amount.startsWith("-") && swapNegative ? "-" : ""
   const getAbsoluteAmount = (amountString) => amountString.replace(/^-/,'')
-  const getAmount = getAbsoluteAmount(abbreviate ? getAbbreviatedValue('amount') : formatAmount(getMatchingDecimalAmount))
+  const getAbbrOrFormatAmount = abbreviate ? getAbbreviatedValue('amount') : formatAmount(getMatchingDecimalAmount)
+  const getAmount = swapNegative ? getAbsoluteAmount(getAbbrOrFormatAmount) : getAbbrOrFormatAmount
   const getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null
   const getDecimalValue = abbreviate ? '' : getMatchingDecimalValue
 
@@ -120,7 +122,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
       <div className={`pb_currency_wrapper${variantClass || emphasizedClass}`}>
         {unstyled ? (
           <>
-            <div>{negativeSymbol}{symbol}</div>
+            <div>{handleNegative}{symbol}</div>
             <div>{getAmount}</div>
             <div>
               {getAbbreviation}
@@ -134,7 +136,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
                 color="light"
                 dark={dark}
             >
-              {negativeSymbol}{symbol}
+              {handleNegative}{symbol}
             </Body>
 
             <Title
