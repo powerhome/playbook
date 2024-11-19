@@ -360,19 +360,28 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     return css.trimEnd()
   },
   minHeightProps: ({ minHeight }: MinHeight) => {
-    let css = ''
-    css += minHeight ? `min_height_${filterClassName(minHeight)} ` : ''
-    return css.trimEnd()
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    if (heightValues.includes(minHeight)) {
+      let css = ''
+      css += minHeight ? `min_height_${filterClassName(minHeight)} ` : ''
+      return css.trimEnd()
+    }
   },
   maxHeightProps: ({ maxHeight }: MaxHeight) => {
-    let css = ''
-    css += maxHeight ? `max_height_${filterClassName(maxHeight)} ` : ''
-    return css.trimEnd()
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    if (heightValues.includes(maxHeight)) {
+      let css = ''
+      css += maxHeight ? `max_height_${filterClassName(maxHeight)} ` : ''
+      return css.trimEnd()
+    }
   },
   heightProps: ({ height }: Height) => {
-    let css = ''
-    css += height ? `height_${filterClassName(height)} ` : ''
-    return css.trimEnd()
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    if (heightValues.includes(height)) {
+      let css = ''
+      css += height ? `height_${filterClassName(height)} ` : ''
+      return css.trimEnd()
+    }
   },
   zIndexProps: (zIndex: ZIndex) => {
     let css = ''

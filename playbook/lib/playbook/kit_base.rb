@@ -172,8 +172,17 @@ module Playbook
     end
 
     def dynamic_inline_props
-      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value}" if value.present? }.compact
+      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value}" if inline_validator(key, value) }.compact
       styles.join("; ").presence
+    end
+
+    def inline_validator(key, value)
+      return false if value.nil?
+      return false if height_values.include?(value) && key == :height
+      return false if height_values.include?(value) && key == :min_height
+      return false if height_values.include?(value) && key == :max_height
+
+      true
     end
   end
 end
