@@ -27,3 +27,7 @@
 @include export_height($heights);
 @include export_max_height($heights);
 @include export_min_height($heights);
+
+.height-resize {
+  resize: vertical;
+}

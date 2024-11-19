@@ -12,11 +12,11 @@ import {
 import Example from '../Templates/Example'
 
 const HEIGHTS: { [size: string]: string } = {
-  'auto': 'Auto height',
+  'auto': 'auto',
   'xs': '320px min',
   'sm': '480px min',
   'md': '768px min',
-  'lg': '1024x min',
+  'lg': '1024px min',
   'xl': '1280px min',
   'xxl': '1440px min',
   'xxxl': '1920px min',
@@ -50,17 +50,16 @@ const MinHeight = ({ example }: {example: string}) => (
       title="Min Height"
   >
     <Background
-        className="minheight-resize"
+        className="height-resize"
         height="sm"
         overflowY="auto"
     >
-      <Flex wrap>
+      <Flex justify="between" wrap>
         {Object.keys(HEIGHTS).map((size: string) => (
           <Background
               backgroundColor="gradient"
               key={size}
               marginBottom="xs"
-              marginRight="xs"
               minHeight={size}
               padding="xs"
           >
@@ -68,11 +67,13 @@ const MinHeight = ({ example }: {example: string}) => (
               <Title
                 dark
                 size={4}
+                textAlign="center"
               >
                 {size.toUpperCase()}
               </Title>
               <Detail
                 color="lighter"
+                textAlign="center"
               >
                 {HEIGHTS[size]}
               </Detail>
@@ -81,7 +82,7 @@ const MinHeight = ({ example }: {example: string}) => (
         ))}
       </Flex>
     </Background>
-    <Detail text="To see minimum heights, you can scroll down" />
+    <Detail text="To see minimum heights, you can scroll down or resize the container" />
   </Example>
 )
 

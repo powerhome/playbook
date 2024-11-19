@@ -12,11 +12,11 @@ import {
 import Example from '../Templates/Example'
 
 const HEIGHTS: { [size: string]: string } = {
-  'auto': 'Auto height',
+  'auto': 'auto',
   'xs': '320px max',
   'sm': '480px max',
   'md': '768px max',
-  'lg': '1024x max',
+  'lg': '1024px max',
   'xl': '1280px max',
   'xxl': '1440px max',
   'xxxl': '1920px max',
@@ -50,17 +50,17 @@ const MaxHeight = ({ example }: {example: string}) => (
       title="Max Height"
   >
     <Background
-        className="maxheight-resize"
+        className="height-resize"
         height="sm"
+        overflowY="auto"
     >
-      <Flex wrap>
+      <Flex justify="between">
         {Object.keys(HEIGHTS).map((size: string) => (
           <Background
               backgroundColor="gradient"
               key={size}
               marginBottom="xs"
-              marginRight="xs"
-              height="sm"
+              height="xxxl"
               maxHeight={size}
               padding="xs"
           >
@@ -68,11 +68,13 @@ const MaxHeight = ({ example }: {example: string}) => (
               <Title
                 dark
                 size={4}
+                textAlign="center"
               >
                 {size.toUpperCase()}
               </Title>
               <Detail
                 color="lighter"
+                textAlign="center"
               >
                 {HEIGHTS[size]}
               </Detail>
@@ -81,7 +83,7 @@ const MaxHeight = ({ example }: {example: string}) => (
         ))}
       </Flex>
     </Background>
-    <Detail text="The XS column would go to the bottom of the card but it doesn't because it has a max height" />
+    <Detail text="To see maximum heights, you can scroll down or resize the container" />
   </Example>
 )
 

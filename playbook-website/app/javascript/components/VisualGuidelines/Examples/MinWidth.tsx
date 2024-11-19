@@ -49,7 +49,7 @@ const MinWidth = ({ example }: {example: string}) => (
       title="Min Width"
   >
   <Background
-      className="minwidth-resize"
+      className="width-resize"
       minWidth="xxs"
       overflow="auto"
   >

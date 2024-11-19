@@ -12,11 +12,11 @@ import {
 import Example from '../Templates/Example'
 
 const HEIGHTS: { [size: string]: string } = {
-  'auto': 'Auto height',
+  'auto': 'auto',
   'xs': '320px',
   'sm': '480px',
   'md': '768px',
-  'lg': '1024x',
+  'lg': '1024px',
   'xl': '1280px',
   'xxl': '1440px',
   'xxxl': '1920px',
@@ -54,13 +54,12 @@ const Height = ({ example }: {example: string}) => (
         height="sm"
         overflowY="auto"
     >
-      <Flex wrap>
+      <Flex justify="between" wrap>
         {Object.keys(HEIGHTS).map((size: string) => (
           <Background
               backgroundColor="gradient"
               key={size}
               marginBottom="xs"
-              marginRight="xs"
               height={size}
               padding="xs"
           >
@@ -68,11 +67,13 @@ const Height = ({ example }: {example: string}) => (
               <Title
                 dark
                 size={4}
+                textAlign="center"
               >
                 {size.toUpperCase()}
               </Title>
               <Detail
                 color="lighter"
+                textAlign="center"
               >
                 {HEIGHTS[size]}
               </Detail>
@@ -81,7 +82,7 @@ const Height = ({ example }: {example: string}) => (
         ))}
       </Flex>
     </Background>
-    <Detail text="To see different heights, you can scroll down" />
+    <Detail text="To see different heights, you can scroll down or resize the container" />
   </Example>
 )
 

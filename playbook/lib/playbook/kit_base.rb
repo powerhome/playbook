@@ -179,8 +179,8 @@ module Playbook
     def inline_validator(key, value)
       return false if value.nil?
       return false if height_values.include?(value) && key == :height
-      return false if height_values.include?(value) && key == :min_height
-      return false if height_values.include?(value) && key == :max_height
+      return false if min_height_values.include?(value) && key == :min_height
+      return false if max_height_values.include?(value) && key == :max_height
 
       true
     end
