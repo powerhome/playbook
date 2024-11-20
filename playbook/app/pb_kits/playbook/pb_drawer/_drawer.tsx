@@ -29,7 +29,6 @@ type DrawerProps = {
   placement?: "left" | "right";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   text?: string;
-  trigger?: string;
 };
 
 const Drawer = (props: DrawerProps): React.ReactElement => {
@@ -50,7 +49,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     onClose,
     overlay = true,
     placement = "left",
-    trigger,
   } = props;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -103,7 +101,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
 
   const classes = classnames(buildCss("pb_drawer_wrapper"), className);
 
-  const [triggerOpened, setTriggerOpened] = useState(false);
   const [menuButtonOpened, setMenuButtonOpened] = useState(false);
 
   const breakpointWidths: Record<DrawerProps["breakpoint"], number> = {
@@ -143,11 +140,12 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
   }, [breakpoint]);
 
   // Simplified modalIsOpened logic
-  const modalIsOpened = isBreakpointOpen || triggerOpened || menuButtonOpened || opened;
+  const modalIsOpened = isBreakpointOpen || menuButtonOpened || opened;
 
   const [animationState, setAnimationState] = useState("");
 
   useEffect(() => {
+    // a good spot to log open/closed 
     if (modalIsOpened) {
       setAnimationState("afterOpen");
     } else if (!modalIsOpened && animationState === "afterOpen") {
@@ -169,7 +167,10 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       xs: "64px",
     };
     const body = document.querySelector("body");
-
+    console.log("top of useeffect")
+    console.log("modalisopened", modalIsOpened);
+    console.log("Breakpoint log", isBreakpointOpen);
+    console.log("menuButtonOpened", menuButtonOpened);
     if (modalIsOpened && behavior === "push" && body) {
       if (placement === "left") {
         body.style.cssText = `margin-left: ${sizeMap[size]} !important; margin-right: '' !important;`;
@@ -189,9 +190,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
 
   const api = {
     onClose: () => {
-      if (trigger) {
-        setTriggerOpened(false);
-      } else if (menuButtonID) {
+      if (menuButtonID) {
         setMenuButtonOpened(false);
       }
       if (onClose) {
@@ -205,7 +204,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       const menuButton = document.getElementById(menuButtonID);
       if (menuButton) {
         const handleMenuButtonClick = () => {
-          console.log("menuButtonID", menuButtonID);
+          console.log("menuButtonpressed");
           setMenuButtonOpened((prev) => !prev);
         };
         menuButton.addEventListener("click", handleMenuButtonClick);
