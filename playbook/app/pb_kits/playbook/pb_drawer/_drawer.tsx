@@ -22,6 +22,7 @@ type DrawerProps = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   fullHeight?: boolean;
+  menuButtonID?: string;
   onClose?: () => void;
   opened: boolean;
   overlay: boolean;
@@ -43,7 +44,8 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     id,
     size = "md",
     children,
-    fullHeight = false,
+    fullHeight = true,
+    menuButtonID,
     opened,
     onClose,
     overlay = true,
@@ -102,6 +104,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
   const classes = classnames(buildCss("pb_drawer_wrapper"), className);
 
   const [triggerOpened, setTriggerOpened] = useState(false);
+  const [menuButtonOpened, setMenuButtonOpened] = useState(false);
 
   const breakpointWidths: Record<DrawerProps["breakpoint"], number> = {
     none: 0,
@@ -139,7 +142,8 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     };
   }, [breakpoint]);
 
-  const modalIsOpened = trigger ? triggerOpened : opened || isBreakpointOpen;
+  // Simplified modalIsOpened logic
+  const modalIsOpened = isBreakpointOpen || triggerOpened || menuButtonOpened || opened;
 
   const [animationState, setAnimationState] = useState("");
 
@@ -184,12 +188,33 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
   }, [modalIsOpened, behavior, placement, size]);
 
   const api = {
-    onClose: trigger
-      ? function () {
-          setTriggerOpened(false);
-        }
-      : onClose,
+    onClose: () => {
+      if (trigger) {
+        setTriggerOpened(false);
+      } else if (menuButtonID) {
+        setMenuButtonOpened(false);
+      }
+      if (onClose) {
+        onClose();
+      }
+    },
   };
+
+  useEffect(() => {
+    if (menuButtonID) {
+      const menuButton = document.getElementById(menuButtonID);
+      if (menuButton) {
+        const handleMenuButtonClick = () => {
+          console.log("menuButtonID", menuButtonID);
+          setMenuButtonOpened((prev) => !prev);
+        };
+        menuButton.addEventListener("click", handleMenuButtonClick);
+        return () => {
+          menuButton.removeEventListener("click", handleMenuButtonClick);
+        };
+      }
+    }
+  }, [menuButtonID]);
 
   return (
     <DialogContext.Provider value={api}>
@@ -199,27 +224,29 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
           {...htmlProps}
           className={classes}
       >
-          {isModalVisible && (
-            <div
-                className={classnames(overlayClassNames.base, {
+        {isModalVisible && (
+          <div
+              className={classnames(overlayClassNames.base, {
               [overlayClassNames.afterOpen]: animationState === "afterOpen",
               [overlayClassNames.beforeClose]: animationState === "beforeClose",
             })}
-                id={id}
-                onClick={overlay ? onClose : undefined}
-            >
+              id={id}
+              onClick={overlay ? api.onClose : undefined}
+          >
             <div
                 className={classnames(drawerClassNames.base, {
-              [drawerClassNames.afterOpen]: animationState === "afterOpen",
-              [drawerClassNames.beforeClose]: animationState === "beforeClose",
-            })}
+                [drawerClassNames.afterOpen]:
+                  animationState === "afterOpen",
+                [drawerClassNames.beforeClose]:
+                  animationState === "beforeClose",
+              })}
                 onClick={(e) => e.stopPropagation()}
             >
-            {children}
+              {children}
             </div>
-            </div>
-          )}
           </div>
+        )}
+      </div>
     </DialogContext.Provider>
   );
 };

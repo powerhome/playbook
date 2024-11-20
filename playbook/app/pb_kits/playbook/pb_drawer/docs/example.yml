@@ -5,8 +5,4 @@ examples:
   
   
   react:
-  - drawer_default: Default
-  - drawer_sizes: Sizes
-  - drawer_overlay: Overlay
-  - drawer_borders: Borders 
-  - drawer_breakpoints: Open on Breakpoints 
+  - drawer_menu: Menu Behavior 
