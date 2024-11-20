@@ -112,7 +112,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     xl: 1400,
   };
 
-  const [isBreakpointOpen, setIsBreakpointOpen] = useState(false);
+  const [isOpenBreakpointOpen, setIsOpenBreakpointOpen] = useState(false);
   const [isUserClosed, setIsUserClosed] = useState(false);
 
   useEffect(() => {
@@ -123,9 +123,9 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       const breakpointWidth = breakpointWidths[openBreakpoint];
 
       if (width <= breakpointWidth) {
-        setIsBreakpointOpen(true);
+        setIsOpenBreakpointOpen(true);
       } else {
-        setIsBreakpointOpen(false);
+        setIsOpenBreakpointOpen(false);
         setIsUserClosed(false); // Reset when the breakpoint condition changes
       }
     };
@@ -142,13 +142,13 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
 
   // Reset isUserClosed when isBreakpointOpen changes
   useEffect(() => {
-    if (isBreakpointOpen) {
+    if (isOpenBreakpointOpen) {
       setIsUserClosed(false);
     }
-  }, [isBreakpointOpen]);
+  }, [isOpenBreakpointOpen]);
 
   const modalIsOpened =
-    (isBreakpointOpen && !isUserClosed) || menuButtonOpened || opened;
+    (isOpenBreakpointOpen && !isUserClosed) || menuButtonOpened || opened;
 
   const [animationState, setAnimationState] = useState("");
 
