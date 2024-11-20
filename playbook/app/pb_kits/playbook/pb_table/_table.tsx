@@ -91,28 +91,45 @@ const Table = (props: TableProps): React.ReactElement => {
     useEffect(() => {
         const handleStickyColumns = () => {
             let accumulatedWidth = 0;
-
-            stickyLeftcolumn.forEach((colId) => {
+    
+            stickyLeftcolumn.forEach((colId, index) => {
+                const isLastColumn = index === stickyLeftcolumn.length - 1;
                 const header = document.querySelector(`th[id="${colId}"]`);
                 const cells = document.querySelectorAll(`td[id="${colId}"]`);
-
+    
                 if (header) {
                     header.classList.add('sticky');
                     (header as HTMLElement).style.left = `${accumulatedWidth}px`;
-
+    
+                    if (!isLastColumn) {
+                        header.classList.add('with-border');
+                        header.classList.remove('sticky-shadow');
+                    } else {
+                        header.classList.remove('with-border');
+                        header.classList.add('sticky-shadow');
+                    }
+    
                     accumulatedWidth += (header as HTMLElement).offsetWidth;
                 }
-
+    
                 cells.forEach((cell) => {
                     cell.classList.add('sticky');
                     (cell as HTMLElement).style.left = `${accumulatedWidth - (header as HTMLElement).offsetWidth}px`;
+                    
+                    if (!isLastColumn) {
+                        cell.classList.add('with-border');
+                        cell.classList.remove('sticky-shadow');
+                    } else {
+                        cell.classList.remove('with-border');
+                        cell.classList.add('sticky-shadow');
+                    }
                 });
             });
         };
 
         setTimeout(() => {
             handleStickyColumns();
-        }, 50);
+        }, 10);
 
         window.addEventListener('resize', handleStickyColumns);
 
