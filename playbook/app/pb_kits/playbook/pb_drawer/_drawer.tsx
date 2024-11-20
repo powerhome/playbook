@@ -112,8 +112,8 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     xl: 1400,
   };
 
-  // State to manage opening the drawer based on breakpoint
   const [isBreakpointOpen, setIsBreakpointOpen] = useState(false);
+  const [isUserClosed, setIsUserClosed] = useState(false);
 
   useEffect(() => {
     if (breakpoint === "none") return;
@@ -126,6 +126,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
         setIsBreakpointOpen(true);
       } else {
         setIsBreakpointOpen(false);
+        setIsUserClosed(false); // Reset when the breakpoint condition changes
       }
     };
 
@@ -139,20 +140,26 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     };
   }, [breakpoint]);
 
-  // Simplified modalIsOpened logic
-  const modalIsOpened = isBreakpointOpen || menuButtonOpened || opened;
+  // Reset isUserClosed when isBreakpointOpen changes
+  useEffect(() => {
+    if (isBreakpointOpen) {
+      setIsUserClosed(false);
+    }
+  }, [isBreakpointOpen]);
+
+  const modalIsOpened =
+    (isBreakpointOpen && !isUserClosed) || menuButtonOpened || opened;
 
   const [animationState, setAnimationState] = useState("");
 
   useEffect(() => {
-    // a good spot to log open/closed 
     if (modalIsOpened) {
       setAnimationState("afterOpen");
     } else if (!modalIsOpened && animationState === "afterOpen") {
       setAnimationState("beforeClose");
       setTimeout(() => {
         setAnimationState("");
-      }, 200); // closeTimeoutMS
+      }, 200); 
     }
   }, [modalIsOpened]);
 
@@ -167,10 +174,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       xs: "64px",
     };
     const body = document.querySelector("body");
-    console.log("top of useeffect")
-    console.log("modalisopened", modalIsOpened);
-    console.log("Breakpoint log", isBreakpointOpen);
-    console.log("menuButtonOpened", menuButtonOpened);
     if (modalIsOpened && behavior === "push" && body) {
       if (placement === "left") {
         body.style.cssText = `margin-left: ${sizeMap[size]} !important; margin-right: '' !important;`;
@@ -193,6 +196,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       if (menuButtonID) {
         setMenuButtonOpened(false);
       }
+      setIsUserClosed(true);
       if (onClose) {
         onClose();
       }
@@ -204,8 +208,15 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       const menuButton = document.getElementById(menuButtonID);
       if (menuButton) {
         const handleMenuButtonClick = () => {
-          console.log("menuButtonpressed");
-          setMenuButtonOpened((prev) => !prev);
+          if (modalIsOpened) {
+            // Drawer is open, close it
+            setMenuButtonOpened(false);
+            setIsUserClosed(true);
+          } else {
+            // Drawer is closed, open it
+            setMenuButtonOpened(true);
+            setIsUserClosed(false);
+          }
         };
         menuButton.addEventListener("click", handleMenuButtonClick);
         return () => {
@@ -213,12 +224,11 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
         };
       }
     }
-  }, [menuButtonID]);
+  }, [menuButtonID, modalIsOpened]); // Added modalIsOpened to dependencies
 
   return (
     <DialogContext.Provider value={api}>
-      <div
-          {...ariaProps}
+      <div {...ariaProps}
           {...dataProps}
           {...htmlProps}
           className={classes}
@@ -227,15 +237,15 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
           <div
               className={classnames(overlayClassNames.base, {
               [overlayClassNames.afterOpen]: animationState === "afterOpen",
-              [overlayClassNames.beforeClose]: animationState === "beforeClose",
+              [overlayClassNames.beforeClose]:
+                animationState === "beforeClose",
             })}
               id={id}
               onClick={overlay ? api.onClose : undefined}
           >
             <div
                 className={classnames(drawerClassNames.base, {
-                [drawerClassNames.afterOpen]:
-                  animationState === "afterOpen",
+                [drawerClassNames.afterOpen]: animationState === "afterOpen",
                 [drawerClassNames.beforeClose]:
                   animationState === "beforeClose",
               })}
