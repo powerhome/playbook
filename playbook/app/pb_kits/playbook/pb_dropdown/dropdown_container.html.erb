@@ -1,10 +1,8 @@
-<%= content_tag(:div,
+<%= pb_content_tag(:div,
     aria: object.aria,
     class: object.classname,
     data: object.data,
-    id: object.id,
-    style: object.container_style,
-    **combined_html_options) do %>
+    id: object.id) do %>
     <%= pb_rails("list", props: {ordered: false, borderless: false}) do %>
             <% if content.present? %> 
                 <%= content.presence %>
