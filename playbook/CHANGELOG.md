@@ -1,6 +1,9 @@
-# 14.8.0
+# 🐉 The Draggable Kit, Now in Rails ! ⬆️⬇️
 ##### November 18, 2024
 
+![Zight Recording 2024-07-11 at 12 24 54 PM](https://github.com/user-attachments/assets/66d61dd3-81e1-43a5-9f01-003bbaffe772)
+
+Now introducing the Draggable kit in Rails! A flexible solution for all your drag-and-drop needs! Use the simple subcomponent structure for super easy implementation out of the box!
 
 [14.8.0](https://github.com/powerhome/playbook/tree/14.8.0) full list of changes:
 
