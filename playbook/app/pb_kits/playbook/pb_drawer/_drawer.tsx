@@ -15,7 +15,7 @@ type DrawerProps = {
   aria?: { [key: string]: string };
   behavior?: "floating" | "push";
   border?: "full" | "none" | "right" | "left";
-  breakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
+  openBreakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
   data?: { [key: string]: string };
@@ -36,7 +36,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     aria = {},
     behavior = "floating",
     border = "none",
-    breakpoint = "none",
+    openBreakpoint = "none",
     className,
     data = {},
     htmlOptions = {},
@@ -103,7 +103,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
 
   const [menuButtonOpened, setMenuButtonOpened] = useState(false);
 
-  const breakpointWidths: Record<DrawerProps["breakpoint"], number> = {
+  const breakpointWidths: Record<DrawerProps["openBreakpoint"], number> = {
     none: 0,
     xs: 575,
     sm: 768,
@@ -116,11 +116,11 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
   const [isUserClosed, setIsUserClosed] = useState(false);
 
   useEffect(() => {
-    if (breakpoint === "none") return;
+    if (openBreakpoint === "none") return;
 
     const handleResize = () => {
       const width = window.innerWidth;
-      const breakpointWidth = breakpointWidths[breakpoint];
+      const breakpointWidth = breakpointWidths[openBreakpoint];
 
       if (width <= breakpointWidth) {
         setIsBreakpointOpen(true);
@@ -138,7 +138,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [breakpoint]);
+  }, [openBreakpoint]);
 
   // Reset isUserClosed when isBreakpointOpen changes
   useEffect(() => {

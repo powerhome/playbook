@@ -8,8 +8,8 @@ const DrawerMenu = () => {
       <Button id="menuButton">Toggle Drawer</Button>
       <Drawer
           behavior="push"
-          breakpoint="sm"
           menuButtonID="menuButton"
+          openBreakpoint="sm"
           overlay={false}
           placement="right"
       >
