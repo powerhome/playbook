@@ -1,3 +1,23 @@
+# 🚀 Playbook Swift 6.5.0: Enhanced Dynamic Typeahead! 🚀
+##### Nov 12, 2024
+
+Dive into our latest release, Playbook Swift 6.5.0, where we've introduced some exciting enhancements to improve your development experience. Here’s a quick look at what’s new:
+
+[6.5.0 Full List of Changes](https://github.com/powerhome/playbook-swift/compare/6.4.1...6.5.0)
+
+### Playbook Changes 
+
+#### Kit Enhancements 
+- **Make Reaction Button Public**: We've made the Reaction Button accessible for all users, expanding its potential applications across different projects. [#625](https://github.com/powerhome/playbook-swift/pull/470) [(Rachel Radford)](https://github.com/RachelRadford21)
+
+#### Bug Fixes 
+- **Fix Single Selection Highlight**: We've addressed an issue where highlights were not behaving as expected in single selection modes. [#598](https://github.com/powerhome/playbook-swift/pull/466) [(Isis Silva)](https://github.com/isismsilva)
+- **Fix Focus on Backspace**: This fix ensures that focus behavior is consistent across various use cases when backspacing through inputs. [#590](https://github.com/powerhome/playbook-swift/pull/467) [(Isis Silva)](https://github.com/isismsilva)
+
+🔗 [Full Changelog](https://github.com/powerhome/playbook-swift/compare/6.4.1...6.5.0)
+
+
+
 # 🚀 Playbook Swift 6.4.0: Enhanced Buttons, Truncations, and Dynamic Typeahead! 🚀
 ##### Oct 18, 2024
 ![image](https://github.com/user-attachments/assets/875ae784-bb68-47e1-ae67-3d25e90f427e)
