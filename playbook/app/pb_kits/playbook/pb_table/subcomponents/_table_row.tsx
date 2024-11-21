@@ -101,14 +101,22 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
             >
               {children}
             </div>
-            <Collapsible collapsed={isCollapsed} 
-                padding="none"
-            >
-              <tr/>
-              <Collapsible.Content>
-                <div>hello</div>
-              </Collapsible.Content>
-            </Collapsible>
+            <tr>
+              <Collapsible
+                  collapsed={isCollapsed}
+                  htmlOptions={{ colSpan: colSpan }}
+                  padding="none"
+                  tag="td"
+              >
+                <tr/>
+                <Collapsible.Content 
+                    margin="none"
+                    padding="none" 
+                >
+                 {collapsibleContent}
+                </Collapsible.Content>
+              </Collapsible>
+            </tr>
           </>
         )
       ) : isTableTag ? (

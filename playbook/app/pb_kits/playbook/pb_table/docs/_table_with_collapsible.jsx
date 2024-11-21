@@ -1,9 +1,19 @@
 import React from 'react'
 
 import Table from '../_table'
-import Body from '../../pb_body/_body'
+import Background from '../../pb_background/_background'
 
 const TableWithCollapsible = (props) => {
+
+  const Content = () => {
+    return (
+      <Background color="light" 
+          padding="md"
+      >
+        <div>Nested content inside a background.</div>
+      </Background>
+    );
+  };
 
     return (
     <Table
@@ -21,7 +31,7 @@ const TableWithCollapsible = (props) => {
       </Table.Head>
       <Table.Body>
         <Table.Row collapsible 
-            collapsibleContent={<Body text="hello"/>}
+            collapsibleContent={<Content/>}
         >
           <Table.Cell>{'Value 1'}</Table.Cell>
           <Table.Cell>{'Value 2'}</Table.Cell>
