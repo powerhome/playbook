@@ -15,6 +15,7 @@ type TableRowPropTypes = {
   aria?: { [key: string]: string };
   children: React.ReactNode[] | React.ReactNode;
   collapsible?: boolean;
+  collapsibleContent?: React.ReactNode[] | React.ReactNode;
   className: string;
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
@@ -28,6 +29,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
     aria = {},
     children,
     collapsible,
+    collapsibleContent,
     className,
     data = {},
     htmlOptions = {},
@@ -49,7 +51,8 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
   );
   const isTableTag = tag === "table";
 
-  const [isCollapsed, setIsCollapsed] = useCollapsible(false);
+  const [isCollapsed, setIsCollapsed] = useCollapsible(true);
+  
   const colSpan = React.Children.count(children);
 
   return (
@@ -80,11 +83,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
                     margin="none"
                     padding="none" 
                 >
-                  <Background color="light" 
-                      padding="none"
-                  >
-                      <div>Nested content inside a background.</div>
-                  </Background>
+                 {collapsibleContent}
                 </Collapsible.Content>
               </Collapsible>
             </tr>

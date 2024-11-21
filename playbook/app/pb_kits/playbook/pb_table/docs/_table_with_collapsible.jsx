@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Table from '../_table'
+import Body from '../../pb_body/_body'
 
 const TableWithCollapsible = (props) => {
 
@@ -19,7 +20,9 @@ const TableWithCollapsible = (props) => {
         </Table.Row>
       </Table.Head>
       <Table.Body>
-        <Table.Row collapsible>
+        <Table.Row collapsible 
+            collapsibleContent={<Body text="hello"/>}
+        >
           <Table.Cell>{'Value 1'}</Table.Cell>
           <Table.Cell>{'Value 2'}</Table.Cell>
           <Table.Cell>{'Value 3'}</Table.Cell>

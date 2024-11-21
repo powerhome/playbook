@@ -2,7 +2,7 @@ import React, { useEffect, ReactElement } from 'react'
 import classnames from 'classnames'
 import  useCollapsible from './useCollapsible'
 
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import CollapsibleContent from './child_kits/CollapsibleContent'
@@ -32,7 +32,7 @@ type CollapsibleProps = {
   onClick?: ()=> void,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
-  tag?: string
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col',
 }
 
 const Collapsible = ({
@@ -50,7 +50,7 @@ const Collapsible = ({
   id,
   tag = 'div',
   ...props
-}: CollapsibleProps): React.ReactElement => {
+}: CollapsibleProps & GlobalProps): React.ReactElement => {
   const [isCollapsed, toggle, setIsCollapsed] = useCollapsible(collapsed)
 
   useEffect(()=> {
@@ -78,28 +78,28 @@ const Collapsible = ({
     className
   )
 
-  const Wrapper = React.createElement(
-    tag,
-    {
-      ...ariaProps,
-      ...dataProps,
-      ...htmlProps,
-      className: classes,
-      id,
-    },
-    <>
-      {Main ? (
-        <CollapsibleMain {...mainProps}>{mainChildren}</CollapsibleMain>
-      ) : (
-        FirstChild
-      )}
-      <CollapsibleContent {...contentProps}>{contentChildren}</CollapsibleContent>
-    </>
+  const Tag: React.ReactElement | any = `${tag}`;
 
-  );
   return (
     <CollapsibleContext.Provider value={{ collapsed: isCollapsed, toggle, icon, iconSize, iconColor, onIconClick, onClick }}>
-      {Wrapper}
+      <Tag
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
+          className={classes}
+          id={id}
+      >
+        {Main ? (
+          <CollapsibleMain {...mainProps}>
+            {mainChildren}
+          </CollapsibleMain>
+        ) : (
+          FirstChild
+        )}
+          <CollapsibleContent {...contentProps}>
+            {contentChildren}
+          </CollapsibleContent>
+      </Tag>
     </CollapsibleContext.Provider>
   )
 }
