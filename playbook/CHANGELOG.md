@@ -1,9 +1,9 @@
-# 🐉 The Draggable Kit, Now in Rails ! ⬆️⬇️
+#  🐉 Draggable Kit Now Available For Rails! ✨
 ##### November 18, 2024
 
-![Zight Recording 2024-07-11 at 12 24 54 PM](https://github.com/user-attachments/assets/66d61dd3-81e1-43a5-9f01-003bbaffe772)
+![playbookrelease14-8-0](https://github.com/user-attachments/assets/5248b47b-d84f-486c-b77d-453731ff6584)
 
-Now introducing the Draggable kit in Rails! A flexible solution for all your drag-and-drop needs! Use the simple subcomponent structure for super easy implementation out of the box!
+Now introducing the Draggable Kit for Rails! It’s easy to implement with a simple, flexible subcomponent structure right out of the box and works with almost any kit. Like its React counterpart, it’s fully customizable to fit your Rails project’s unique needs.
 
 [14.8.0](https://github.com/powerhome/playbook/tree/14.8.0) full list of changes:
 
