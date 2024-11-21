@@ -43,6 +43,9 @@ module Playbook
         right_props,
         bottom_props,
         vertical_align_props,
+        height_props,
+        min_height_props,
+        max_height_props,
       ].compact.join(" ")
     end
 
