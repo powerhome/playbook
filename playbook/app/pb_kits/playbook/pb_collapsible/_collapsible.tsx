@@ -32,6 +32,7 @@ type CollapsibleProps = {
   onClick?: ()=> void,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
+  tag?: string
 }
 
 const Collapsible = ({
@@ -47,6 +48,7 @@ const Collapsible = ({
   onIconClick,
   onClick,
   id,
+  tag = 'div',
   ...props
 }: CollapsibleProps): React.ReactElement => {
   const [isCollapsed, toggle, setIsCollapsed] = useCollapsible(collapsed)
@@ -75,26 +77,29 @@ const Collapsible = ({
     globalProps(props),
     className
   )
+
+  const Wrapper = React.createElement(
+    tag,
+    {
+      ...ariaProps,
+      ...dataProps,
+      ...htmlProps,
+      className: classes,
+      id,
+    },
+    <>
+      {Main ? (
+        <CollapsibleMain {...mainProps}>{mainChildren}</CollapsibleMain>
+      ) : (
+        FirstChild
+      )}
+      <CollapsibleContent {...contentProps}>{contentChildren}</CollapsibleContent>
+    </>
+
+  );
   return (
     <CollapsibleContext.Provider value={{ collapsed: isCollapsed, toggle, icon, iconSize, iconColor, onIconClick, onClick }}>
-      <div
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={classes}
-          id={id}
-      >
-        {Main ? (
-          <CollapsibleMain {...mainProps}>
-            {mainChildren}
-          </CollapsibleMain>
-        ) : (
-          FirstChild
-        )}
-          <CollapsibleContent {...contentProps}>
-            {contentChildren}
-          </CollapsibleContent>
-      </div>
+      {Wrapper}
     </CollapsibleContext.Provider>
   )
 }

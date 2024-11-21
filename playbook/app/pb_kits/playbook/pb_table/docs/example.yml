@@ -29,6 +29,7 @@ examples:
     - table_outer_padding: Outer Padding
 
   react:
+    - table_with_collapsible: Table with Collapsible
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
