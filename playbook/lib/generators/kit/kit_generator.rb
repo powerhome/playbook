@@ -12,6 +12,9 @@ class KitGenerator < Rails::Generators::NamedBase
   class_option :react, type: :boolean, default: false, desc: "Creates the boilerplate files for React"
   class_option :swift, type: :boolean, default: false, desc: "Creates the boilerplate files for Swift"
   class_option :beta, type: :boolean, default: true, desc: "Adds status flag to determine if kit is in beta"
+  class_option :icons_used, type: :boolean, default: false, desc: "Adds flag to determine if kit uses the icon kit"
+  class_option :react_rendered, type: :boolean, default: false, desc: "Adds flag to determine if kit is rendered in react"
+  class_option :enhanced_element_used, type: :boolean, default: false, desc: "Adds flag to determine if kit uses the enhanced element kit"
 
   REACT_EXAMPLES_PATH = "app/entrypoints/playbook-doc.js"
   REACT_INDEX_PATH = "app/javascript/kits.js"
@@ -30,6 +33,10 @@ class KitGenerator < Rails::Generators::NamedBase
     @kit_name_pascal = kit_name.titleize.gsub(/\s+/, "")
     @kit_category = options[:category]
     @kit_category_capitalize = options[:category].capitalize
+
+    @icons_used = options[:icons_used]
+    @react_rendered = options[:react_rendered]
+    @enhanced_element_used = options[:enhanced_element_used]
 
     kit_props = options[:props].concat(%w[id:string classname:string data:object aria:object])
     @kit_props = kit_props.map { |hash| [hash.partition(":").first, hash.partition(":").last] }.to_h
@@ -149,7 +156,14 @@ class KitGenerator < Rails::Generators::NamedBase
         yaml_data["kits"].each do |kit|
           next unless kit["category"] == @kit_category
 
-          new_kit = { "name" => @kit_name_underscore, "platforms" => platforms, "status" => @kit_status }
+          new_kit = {
+            "name" => @kit_name_underscore,
+            "platforms" => platforms,
+            "status" => @kit_status,
+            "icons_used" => @icons_used,
+            "react_rendered" => @react_rendered,
+            "enhanced_element_used" => @enhanced_element_used,
+          }
           kit["components"] << new_kit
           break
         end
@@ -169,6 +183,9 @@ class KitGenerator < Rails::Generators::NamedBase
           f.puts "    - name: #{@kit_name_underscore}"
           f.puts "      platforms: #{platforms}"
           f.puts "      status: #{@kit_status}"
+          f.puts "      icons_used: #{@icons_used}"
+          f.puts "      react_rendered: #{@react_rendered}"
+          f.puts "      enhanced_element_used: #{@enhanced_element_used}"
         end
 
         say_status  "complete",

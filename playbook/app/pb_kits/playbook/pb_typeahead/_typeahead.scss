@@ -2,6 +2,7 @@
 @import "../tokens/border_radius";
 @import "../tokens/spacing";
 @import "../tokens/shadows";
+@import "../tokens/positioning";
 
 [class^=pb_typeahead_kit] {
   .typeahead-kit-select__option {
@@ -99,6 +100,7 @@
     .typeahead-kit-select__menu {
       background-color: $bg_dark;
       color: $white;
+      z-index: $z_1;
     }
     .typeahead-kit-select__option:hover {
       background-color: $active_dark;
@@ -182,6 +184,7 @@
   }
  
   .typeahead-kit-select__menu {
+    z-index: $z_1;
     .typeahead-kit-select__menu-list {
       padding: 0;
     }
