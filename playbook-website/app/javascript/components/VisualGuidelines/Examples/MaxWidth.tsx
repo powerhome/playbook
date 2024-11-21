@@ -36,32 +36,39 @@ const MaxWidth = ({ example }: {example: string}) => (
       }}
       title="Max Width"
   >
-    {Object.keys(SIZES).map((size: string) => (
-      <Background
-          backgroundColor="gradient"
-          key={size}
-          marginBottom="xs"
-          maxWidth={size}
-          padding="xs"
-      >
-        <Flex>
-          <Title
-            dark
-            size={4}
-            flex={1}
-            htmlOptions={{style: {minWidth:"30px"}}}
-          >
-            {size.toUpperCase()}
-          </Title>
-          <Detail 
-            flex={0}
-            color="lighter"
-          >
-            {SIZES[size]}
-          </Detail>
-        </Flex>
-      </Background>
-    ))}
+    <Background
+        className="width-resize"
+        minWidth="xxs"
+        overflow="auto"
+    >
+      {Object.keys(SIZES).map((size: string) => (
+        <Background
+            backgroundColor="gradient"
+            key={size}
+            marginBottom="xs"
+            maxWidth={size}
+            padding="xs"
+        >
+          <Flex>
+            <Title
+              dark
+              size={4}
+              flex={1}
+              htmlOptions={{style: {minWidth:"30px"}}}
+            >
+              {size.toUpperCase()}
+            </Title>
+            <Detail 
+              flex={0}
+              color="lighter"
+            >
+              {SIZES[size]}
+            </Detail>
+          </Flex>
+        </Background>
+      ))}
+    </Background>
+    <Detail text="To see the maximum widths, you can resie the above container and scroll"/>
   </Example>
 )
 
