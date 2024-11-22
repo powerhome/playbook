@@ -4,6 +4,7 @@
 import React from "react";
 
 import Colors from "../VisualGuidelines/Colors";
+import Width from "../VisualGuidelines/Examples/Width";
 import MinWidth from "../VisualGuidelines/Examples/MinWidth";
 import MaxWidth from "../VisualGuidelines/Examples/MaxWidth";
 import Height from "../VisualGuidelines/Examples/Height";
@@ -41,8 +42,10 @@ const VisualGuidelines = ({
     switch (result) {
       case "colors":
         return <Colors />;
+      case "width":
+        return <Width example={examples.width_jsx}/>;
       case "max_width":
-        return <MaxWidth example={examples.width_jsx}/>;
+        return <MaxWidth example={examples.max_width_jsx}/>;
       case "min_width":
         return <MinWidth example={examples.min_width_jsx}/>;
       case "height":
@@ -83,7 +86,7 @@ const VisualGuidelines = ({
       case "flex_box":
         return <FlexBox example={examples.justify_self_jsx}/>;
       case "position":
-        return <Position 
+        return <Position
                    example={examples.position_jsx}
                    tokensExample={examples.position_token}
                    secondExample={examples.global_positioning}
@@ -97,11 +100,10 @@ const VisualGuidelines = ({
       case "text_align":
         return <TextAlign example={examples.text_align_jsx} />
       case "overflow":
-        return <Overflow example={examples.overflow_jsx} 
+        return <Overflow example={examples.overflow_jsx}
                          tokensExample={examples.overflow_token} />
       case "truncate":
         return <Truncate example={examples.truncate_jsx} />
-                         
 
       default:
         return <Colors/>;

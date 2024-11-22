@@ -95,12 +95,16 @@ type Margin = {
   default?: string
 }
 
+type Width = {
+  width?: string
+}
+
 type MaxWidth = {
-  maxWidth?: Sizes,
+  maxWidth?: string,
 }
 
 type MinWidth = {
-  minWidth?: Sizes,
+  minWidth?: string,
 }
 
 type NumberSpacing = {
@@ -176,7 +180,7 @@ type ZIndex = {
 } | ZIndexResponsiveType
 
 type Height = {
-  height?: string 
+  height?: string
 }
 
 type MaxHeight = {
@@ -191,7 +195,7 @@ type MinHeight = {
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
-  LineHeight & Margin & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
+  LineHeight & Margin & Width & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
@@ -351,15 +355,29 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += numberSpacing ? `ns_${numberSpacing} ` : ''
     return css
   },
+  widthProps: ({ width }: Width) => {
+    const widthValues = ["0%", "xs", "sm", "md", "lg", "xl", "xxl", "100%"]
+    if (widthValues.includes(width)) {
+      let css = ''
+      css += width ? `width_${filterClassName(width)} ` : ''
+      return css.trimEnd()
+    }
+  },
   minWidthProps: ({ minWidth }: MinWidth) => {
-    let css = ''
-    css += minWidth ? `min_width_${filterClassName(minWidth)} ` : ''
-    return css.trimEnd()
+    const widthValues = ["0%", "xs", "sm", "md", "lg", "xl", "xxl", "100%"]
+    if (widthValues.includes(minWidth)) {
+      let css = ''
+      css += minWidth ? `min_width_${filterClassName(minWidth)} ` : ''
+      return css.trimEnd()
+    }
   },
   maxWidthProps: ({ maxWidth }: MaxWidth) => {
-    let css = ''
-    css += maxWidth ? `max_width_${filterClassName(maxWidth)} ` : ''
-    return css.trimEnd()
+    const widthValues = ["xs", "sm", "md", "lg", "xl", "xxl", "100%", "none"]
+    if (widthValues.includes(maxWidth)) {
+      let css = ''
+      css += maxWidth ? `max_width_${filterClassName(maxWidth)} ` : ''
+      return css.trimEnd()
+    }
   },
   minHeightProps: ({ minHeight }: MinHeight) => {
     const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]

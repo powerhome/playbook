@@ -4,6 +4,10 @@ export const VisualGuidelinesItems = [
         link: "/visual_guidelines/colors"
     },
     {
+        name: "Width",
+        link: "/visual_guidelines/width"
+    },
+    {
         name: "Min Width",
         link: "/visual_guidelines/min_width"
     },
