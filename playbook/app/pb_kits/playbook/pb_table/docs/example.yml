@@ -30,6 +30,7 @@ examples:
 
   react:
     - table_with_collapsible: Table with Collapsible
+    - table_with_collapsible_with_icon: Table with Collapsible and Icon
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large

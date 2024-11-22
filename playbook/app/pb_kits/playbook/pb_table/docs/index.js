@@ -26,3 +26,4 @@ export { default as TableWithSubcomponents } from './_table_with_subcomponents.j
 export { default as TableWithSubcomponentsAsDivs } from './_table_with_subcomponents_as_divs.jsx'
 export { default as TableOuterPadding } from './_table_outer_padding.jsx'
 export { default as TableWithCollapsible } from './_table_with_collapsible.jsx'
+export { default as TableWithCollapsibleWithIcon } from './_table_with_collapsible_with_icon.jsx'
