@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Drawer, Icon } from "playbook-ui";
+import { Button, Drawer, Icon, Title } from "playbook-ui";
 
 const DrawerMenu = () => {
 
@@ -18,10 +18,11 @@ const DrawerMenu = () => {
           menuButtonID="menuButton"
           overlay={false}
           placement="left"
+          size="lg"
           withinElement
       >
-        <p>Your drawer content here</p>
-        <Button text="Close" />
+        <Title paddingBottom="md">A really neat menu</Title>
+        <Button text="This Button does nothing" />
       </Drawer>
     </>
   );

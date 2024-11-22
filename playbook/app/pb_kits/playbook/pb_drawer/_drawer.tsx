@@ -176,6 +176,20 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     
   }, [closeBreakpoint]);
 
+  //hide menu button if breakpoint opens the drawer  
+  useEffect(() => {
+    if (menuButtonID) {
+      const menuButton = document.getElementById(menuButtonID);
+      if (menuButton) {
+        if (isOpenBreakpointOpen) {
+          menuButton.style.display = 'none';
+        } else {
+          menuButton.style.display = '';
+        }
+      }
+    }
+  }, [menuButtonID, isOpenBreakpointOpen]);
+
   // Reset isUserClosed when isBreakpointOpen changes
   useEffect(() => {
     if (isOpenBreakpointOpen) {
