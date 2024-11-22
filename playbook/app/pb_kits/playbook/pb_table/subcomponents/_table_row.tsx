@@ -16,6 +16,7 @@ type TableRowPropTypes = {
   children: React.ReactNode[] | React.ReactNode;
   collapsible?: boolean;
   collapsibleContent?: React.ReactNode[] | React.ReactNode;
+  collapsibleSideHighlight?: boolean;
   className: string;
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
@@ -30,6 +31,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
     children,
     collapsible,
     collapsibleContent,
+    collapsibleSideHighlight = true,
     className,
     data = {},
     htmlOptions = {},
@@ -80,8 +82,9 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
               >
                 <tr/>
                 <Collapsible.Content 
+                    className={collapsibleSideHighlight ? `table_collapsible_side_highlight` : ''}
                     margin="none"
-                    padding="none" 
+                    padding="none"
                 >
                  {collapsibleContent}
                 </Collapsible.Content>

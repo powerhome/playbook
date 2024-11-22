@@ -32,6 +32,7 @@ const TableWithCollapsible = (props) => {
       <Table.Body>
         <Table.Row collapsible 
             collapsibleContent={<Content/>}
+            collapsibleSideHighlight={false}
         >
           <Table.Cell>{'Value 1'}</Table.Cell>
           <Table.Cell>{'Value 2'}</Table.Cell>

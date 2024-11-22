@@ -11,7 +11,9 @@ const TableWithCollapsibleWithIcon = (props) => {
 
   const Content = () => {
     return (
-      <Card color="light" 
+      <Card 
+          borderNone
+          color="light" 
           padding="sm"
       >
          <Body paddingBottom="sm" 
