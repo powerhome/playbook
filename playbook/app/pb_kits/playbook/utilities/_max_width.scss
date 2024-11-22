@@ -1,31 +1,47 @@
-.max_width_xs {
-  max-width: 360px;
+@import "../tokens/container";
+
+.max_width_0 {
+  max-width: map-get($containers, 'none');
 }
-.max_width_0_percent {
-  max-width: 0;
-}
+
 .max_width_none {
   max-width: none;
 }
 
+.max_width_0_percent {
+  max-width: $container_0;
+}
+
+.max_width_xxs {
+  max-width: $container_xxs;
+}
+
+.max_width_xs {
+  max-width: $container_xs;
+}
+
 .max_width_sm {
-  max-width: 540px;
+  max-width: $container_sm;
 }
 
 .max_width_md {
-  max-width: 720px;
+  max-width: $container_md;
 }
 
 .max_width_lg {
-  max-width: 960px;
+  max-width: $container_lg;
 }
 
 .max_width_xl {
-  max-width: 1140px;
+  max-width: $container_xl;
 }
 
 .max_width_xxl {
-  max-width: 1320px;
+  max-width: $container_xxl;
+}
+
+.max_width_100_percent {
+  max-width: $container_100;
 }
 
 .width-resize {

@@ -1,5 +1,13 @@
 @import "../tokens/container";
 
+.width_none {
+  width: none;
+}
+
+.width_0 {
+  width: map-get($containers, 'none');
+}
+
 .width_0_percent {
   width: map-get($containers, 'none');
 }
