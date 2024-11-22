@@ -16,6 +16,7 @@ type DrawerProps = {
   behavior?: "floating" | "push";
   border?: "full" | "none" | "right" | "left";
   openBreakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
+  closeBreakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
   children: React.ReactNode | React.ReactNode[] | string;
   className?: string;
   data?: { [key: string]: string };
@@ -37,6 +38,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     behavior = "floating",
     border = "none",
     openBreakpoint = "none",
+    closeBreakpoint = "none",
     className,
     data = {},
     htmlOptions = {},
@@ -112,6 +114,15 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     xl: 1400,
   };
 
+  const breakpointValues = { 
+    none: 0,
+    xs: 575,
+    sm: 768,
+    md: 992,
+    lg: 1200,
+    xl: 1400,
+  }
+
   const [isOpenBreakpointOpen, setIsOpenBreakpointOpen] = useState(false);
   const [isUserClosed, setIsUserClosed] = useState(false);
 
@@ -120,9 +131,9 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
 
     const handleResize = () => {
       const width = window.innerWidth;
-      const breakpointWidth = breakpointWidths[openBreakpoint];
+      const openBreakpointWidth = breakpointWidths[openBreakpoint];
 
-      if (width <= breakpointWidth) {
+      if (width <= openBreakpointWidth) {
         setIsOpenBreakpointOpen(true);
       } else {
         setIsOpenBreakpointOpen(false);
@@ -139,6 +150,28 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       window.removeEventListener("resize", handleResize);
     };
   }, [openBreakpoint]);
+
+  useEffect(() => {
+    if (closeBreakpoint === "none") return;
+
+   const handleResize = () => { 
+    const width = window.innerWidth;
+    if (width >= breakpointValues[closeBreakpoint]) {
+      setIsOpenBreakpointOpen(true);
+    } else {
+      setIsOpenBreakpointOpen(false);
+    }
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+    
+  }, [closeBreakpoint]);
 
   // Reset isUserClosed when isBreakpointOpen changes
   useEffect(() => {
