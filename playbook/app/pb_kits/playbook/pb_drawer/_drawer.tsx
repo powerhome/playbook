@@ -30,6 +30,7 @@ type DrawerProps = {
   placement?: "left" | "right";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   text?: string;
+  withinElement?: boolean;
 };
 
 const Drawer = (props: DrawerProps): React.ReactElement => {
@@ -51,6 +52,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     onClose,
     overlay = true,
     placement = "left",
+    withinElement = false,
   } = props;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -82,6 +84,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
         drawer_border_full: border === "full",
         drawer_border_right: border === "right",
         drawer_border_left: border === "left",
+        pb_drawer_within_element: withinElement,
       }
     )} ${globalPropsString}`,
     afterOpen: "pb_drawer_after_open",
@@ -199,6 +202,8 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
   const isModalVisible = modalIsOpened || animationState === "beforeClose";
 
   useEffect(() => {
+    if (withinElement) return;
+
     const sizeMap: Record<DrawerProps["size"], string> = {
       xl: "365px",
       lg: "300px",
@@ -222,7 +227,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       body.style.cssText = ""; // Clear the styles when modal is closed or behavior is not 'push'
       body.classList.remove("PBDrawer__Body--open");
     }
-  }, [modalIsOpened, behavior, placement, size]);
+  }, [modalIsOpened, behavior, placement, size, withinElement]);
 
   const api = {
     onClose: () => {
@@ -257,38 +262,61 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
         };
       }
     }
-  }, [menuButtonID, modalIsOpened]); // Added modalIsOpened to dependencies
+  }, [menuButtonID, modalIsOpened]);
 
   return (
     <DialogContext.Provider value={api}>
-      <div {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={classes}
-      >
-        {isModalVisible && (
+      {withinElement ? (
+        isModalVisible && (
           <div
-              className={classnames(overlayClassNames.base, {
-              [overlayClassNames.afterOpen]: animationState === "afterOpen",
-              [overlayClassNames.beforeClose]:
+              {...ariaProps}
+              {...dataProps}
+              {...htmlProps}
+              className={classnames(drawerClassNames.base, {
+              [drawerClassNames.afterOpen]:
+                animationState === "afterOpen",
+              [drawerClassNames.beforeClose]:
                 animationState === "beforeClose",
             })}
               id={id}
-              onClick={overlay ? api.onClose : undefined}
+              onClick={(e) => e.stopPropagation()}
           >
+            {children}
+          </div>
+        )
+      ) : (
+        <div
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
+        >
+          {isModalVisible && (
             <div
-                className={classnames(drawerClassNames.base, {
-                [drawerClassNames.afterOpen]: animationState === "afterOpen",
-                [drawerClassNames.beforeClose]:
+                className={classnames(overlayClassNames.base, {
+                [overlayClassNames.afterOpen]:
+                  animationState === "afterOpen",
+                [overlayClassNames.beforeClose]:
                   animationState === "beforeClose",
               })}
-                onClick={(e) => e.stopPropagation()}
+                id={id}
+                onClick={overlay ? api.onClose : undefined}
             >
-              {children}
+              <div
+                  className={classnames(drawerClassNames.base, {
+                  [drawerClassNames.afterOpen]:
+                    animationState === "afterOpen",
+                  [drawerClassNames.beforeClose]:
+                    animationState === "beforeClose",
+                })}
+                  onClick={(e) => e.stopPropagation()}
+              >
+                {children}
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </DialogContext.Provider>
   );
 };

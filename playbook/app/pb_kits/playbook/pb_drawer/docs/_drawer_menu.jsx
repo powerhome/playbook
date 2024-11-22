@@ -17,7 +17,8 @@ const DrawerMenu = () => {
           closeBreakpoint="md"
           menuButtonID="menuButton"
           overlay={false}
-          placement="right"
+          placement="left"
+          withinElement
       >
         <p>Your drawer content here</p>
         <Button text="Close" />
