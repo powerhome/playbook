@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
-import { globalProps, globalInlineProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 
 type LayoutPropTypes = {
   aria?: {[key: string]: string},
@@ -19,7 +19,7 @@ type LayoutPropTypes = {
   variant?: "light" | "dark" | "gradient",
   transparent?: boolean,
   layout?: "sidebar" | "collection" | "kanban" | "content" | "masonry",
-}
+} & GlobalProps
 
 type LayoutSideProps = {
   children: React.ReactNode[] | React.ReactNode,
