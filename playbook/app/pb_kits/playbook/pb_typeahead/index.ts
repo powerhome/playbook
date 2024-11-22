@@ -4,11 +4,12 @@ import { debounce } from 'lodash'
 export default class PbTypeahead extends PbEnhancedElement {
   _searchInput: HTMLInputElement
   _resultsElement: HTMLElement
-  _debouncedSearch: Function
+  _debouncedSearch: () => void
   _resultsLoadingIndicator: HTMLElement
   _resultOptionTemplate: HTMLElement
   _resultsOptionCache: Map<string, Array<DocumentFragment>>
   _searchContext: string
+  _validSelection: boolean
 
   static get selector() {
     return '[data-pb-typeahead-kit]'
@@ -86,11 +87,36 @@ export default class PbTypeahead extends PbEnhancedElement {
     const resultOption = (event.target as Element).closest('[data-result-option-item]')
     if (!resultOption) return
 
+    this._validSelection = true
+    this.removeValidationError()
+
     this.resultsCacheClear()
     this.searchInputClear()
     this.clearResults()
 
     this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-result-option-selected', { bubbles: true, detail: { selected: resultOption, typeahead: this } }))
+  }
+
+  removeValidationError() {
+    const inputWrapper = this.searchInput.closest('.text_input_wrapper')
+    if (inputWrapper) {
+      const errorMessage = inputWrapper.querySelector('.pb_body_kit_negative') as HTMLElement
+      if (errorMessage) {
+        errorMessage.style.display = 'none'
+      }
+      this.searchInput.classList.remove('error')
+    }
+  }
+
+  showValidationError() {
+    const inputWrapper = this.searchInput.closest('.text_input_wrapper')
+    if (inputWrapper) {
+      const errorMessage = inputWrapper.querySelector('.pb_body_kit_negative') as HTMLElement
+      if (errorMessage) {
+        errorMessage.style.display = 'block'
+      }
+      this.searchInput.classList.add('error')
+    }
   }
 
   clearResults() {
@@ -201,7 +227,7 @@ export default class PbTypeahead extends PbEnhancedElement {
   }
 
   toggleResultsLoadingIndicator(visible: boolean) {
-    var visibilityProperty = '0'
+    let visibilityProperty = '0'
     if (visible) visibilityProperty = '1'
     this.resultsLoadingIndicator.style.opacity = visibilityProperty
   }

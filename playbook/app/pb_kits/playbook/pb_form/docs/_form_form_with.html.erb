@@ -23,7 +23,7 @@
 %>
 
 <%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
-  <%= form.typeahead :example_user, props: { data: { typeahead_example1: true, user: {} }, placeholder: "Search for a user" } %>
+  <%= form.typeahead :example_typeahead, props: { data: { typeahead_example1: true, user: {} }, label: true, placeholder: "Search for a user" } %>
   <%= form.text_field :example_text_field, props: { label: true } %>
   <%= form.phone_number_field :example_phone_number_field, props: { label: "Example phone field" } %>
   <%= form.email_field :example_email_field, props: { label: true } %>
@@ -92,7 +92,7 @@
     const selectedUserData = JSON.parse(selectedUserJSON)
 
     // set the input field's value
-    event.target.querySelector('input[name=example_user]').value = selectedUserData.login
+    event.target.querySelector('input[name=example_typeahead]').value = selectedUserData.login
 
     // log the selected option's dataset
     console.log('The selected user data:')
