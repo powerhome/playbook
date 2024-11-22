@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, globalInlineProps } from '../utilities/globalProps'
 
 import Caption from '../pb_caption/_caption'
 
@@ -38,6 +38,7 @@ const SectionSeparator = (props: SectionSeparatorProps): React.ReactElement => {
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, lineStyle === "dashed" ? lineStyle : ""), globalProps(props), className)
+  const dynamicInlineProps = globalInlineProps(props)
 
   return (
 
@@ -47,6 +48,7 @@ const SectionSeparator = (props: SectionSeparatorProps): React.ReactElement => {
         {...htmlProps}
         className={classes}
         id={id}
+        style={dynamicInlineProps}
     >
       {
         children && children ||

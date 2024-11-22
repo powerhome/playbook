@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 type ImageType = {
@@ -41,6 +41,7 @@ const Image = (props: ImageType): React.ReactElement => {
     globalProps(props),
     className
   )
+  const dynamicInlineProps = globalInlineProps(props)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
 
@@ -56,6 +57,7 @@ const Image = (props: ImageType): React.ReactElement => {
         id={id}
         onError={onError}
         src={url}
+        style={dynamicInlineProps}
     />
   )
 }
