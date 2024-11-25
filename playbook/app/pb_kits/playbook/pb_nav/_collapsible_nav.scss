@@ -245,6 +245,13 @@
           color: $white !important;
         }
       }
+
+      .pb_collapsible_main_kit {
+        svg {
+          color: $text_dk_default !important;
+        }
+      }
+
       .icon_wrapper:hover {
         background-color: mix($white, $card_dark, 40%);
       }
