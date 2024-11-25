@@ -77,6 +77,12 @@ $pb_button_sizes: (
   &[class*=_loading]  {
     @include pb_button_loading(true);
   }
+
+  // Danger ===================
+  &[class*=_danger] {
+    @include pb_button_danger;
+  }
+
   // Dark Variants =============
   &.dark  {
     &[class*=_primary]  {
@@ -90,6 +96,9 @@ $pb_button_sizes: (
     }
     &[class*=_disabled]  {
       @include pb_button_disabled_dark;
+    }
+    &[class*=_danger] {
+      @include pb_button_danger_dark;
     }
   }
 }
