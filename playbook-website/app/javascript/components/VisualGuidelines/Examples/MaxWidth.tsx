@@ -69,7 +69,7 @@ const MaxWidth = ({ example }: {example: string}) => (
             >
               {size.toUpperCase()}
             </Title>
-            <Detail 
+            <Detail
               flex={0}
               color="lighter"
             >

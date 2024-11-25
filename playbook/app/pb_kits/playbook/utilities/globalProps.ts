@@ -356,28 +356,19 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     return css
   },
   widthProps: ({ width }: Width) => {
-    const widthValues = ["0%", "xs", "sm", "md", "lg", "xl", "xxl", "100%"]
-    if (widthValues.includes(width)) {
-      let css = ''
-      css += width ? `width_${filterClassName(width)} ` : ''
-      return css.trimEnd()
-    }
+    let css = ''
+    css += width ? `width_${filterClassName(width)} ` : ''
+    return css.trimEnd()
   },
   minWidthProps: ({ minWidth }: MinWidth) => {
-    const widthValues = ["0%", "xs", "sm", "md", "lg", "xl", "xxl", "100%"]
-    if (widthValues.includes(minWidth)) {
-      let css = ''
-      css += minWidth ? `min_width_${filterClassName(minWidth)} ` : ''
-      return css.trimEnd()
-    }
+    let css = ''
+    css += minWidth ? `min_width_${filterClassName(minWidth)} ` : ''
+    return css.trimEnd()
   },
   maxWidthProps: ({ maxWidth }: MaxWidth) => {
-    const widthValues = ["xs", "sm", "md", "lg", "xl", "xxl", "100%", "none"]
-    if (widthValues.includes(maxWidth)) {
-      let css = ''
-      css += maxWidth ? `max_width_${filterClassName(maxWidth)} ` : ''
-      return css.trimEnd()
-    }
+    let css = ''
+    css += maxWidth ? `max_width_${filterClassName(maxWidth)} ` : ''
+    return css.trimEnd()
   },
   minHeightProps: ({ minHeight }: MinHeight) => {
     const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
