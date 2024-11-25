@@ -240,8 +240,7 @@
 
       .pb_collapsible_main_kit:hover {
         background-color: mix($white, $card_dark, 20%);
-        .pb_nav_list_item_text_collapsible,
-        svg {
+        .pb_nav_list_item_text_collapsible {
           color: $white !important;
         }
       }
