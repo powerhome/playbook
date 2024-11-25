@@ -6,7 +6,7 @@
       &[class*=_active] {
         background-color: $primary;
         color: $white;
-        box-shadow: $shadow_deep;
+        box-shadow: 0 2px 10px 0 $shadow_dark;
         @media (hover:hover) {
           &:hover {
             background-color: darken($primary, 4%);
