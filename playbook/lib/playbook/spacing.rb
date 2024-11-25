@@ -12,6 +12,7 @@ module Playbook
       base.prop :margin_y
       base.prop :max_width
       base.prop :min_width
+      base.prop :width
       base.prop :padding
       base.prop :padding_bottom
       base.prop :padding_left
@@ -19,7 +20,6 @@ module Playbook
       base.prop :padding_top
       base.prop :padding_x
       base.prop :padding_y
-      base.prop :width
     end
 
     def max_width_options
@@ -36,7 +36,7 @@ module Playbook
 
     def width_options
       {
-        min_width: "w",
+        width: "w",
       }
     end
 
