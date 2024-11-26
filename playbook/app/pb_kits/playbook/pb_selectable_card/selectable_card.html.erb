@@ -35,7 +35,7 @@
         <% end %>
       <% else %>
         <% if content.nil? %>
-          <%= pb_rails("body", props: { text: object.text }) %>
+          <%= pb_rails("body", props: { text: object.text, dark: object.dark }) %>
         <% else %>
           <%= content %>
         <% end %>
