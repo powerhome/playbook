@@ -206,8 +206,6 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
               <Icon icon={icon ? icon : "face-smile-plus"} />
             )
           }
-
-        
         </button>
       );
     } else {

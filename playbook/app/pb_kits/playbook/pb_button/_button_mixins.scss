@@ -234,18 +234,3 @@ $pb_button_border_width: 0px;
   @include pb_button_variant(rgba($slate, $opacity_5), $disabled_color);
   pointer-events: none;
 }
-
-// Dark Danger ======================
-@mixin pb_button_danger_dark {
-  @include pb_button_variant($error_dark, $text_dk_default, transparent);
-
-  @media (hover:hover) {
-    &:hover {
-      @include pb_button_hover($bg: darken($error_dark, $pb_button_hover_darken));
-    }
-    &:active {
-      transition: none;
-      @include pb_button_variant($error_dark);
-    }
-  }
-}

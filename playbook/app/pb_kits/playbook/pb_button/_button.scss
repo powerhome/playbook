@@ -97,8 +97,5 @@ $pb_button_sizes: (
     &[class*=_disabled]  {
       @include pb_button_disabled_dark;
     }
-    &[class*=_danger] {
-      @include pb_button_danger_dark;
-    }
   }
 }
