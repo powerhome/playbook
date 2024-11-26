@@ -1,20 +1,28 @@
-<% column_definitions = [
+<% 
+  column_definitions = [
     {
       accessor: "year",
       label: "Year",
       cellAccessors: ["quarter", "month", "day"],
+      customRenderer: ->(row, value) { pb_rails("pill", props: { text: value, variant: "success" }) }
+
     },
     {
       accessor: "newEnrollments",
       label: "New Enrollments",
-    },
-    {
-      accessor: "scheduledMeetings",
-      label: "Scheduled Meetings",
+      customRenderer: ->(row, value) { pb_rails("pill", props: { text: value, variant: "success" }) }
     },
     {
       accessor: "attendanceRate",
       label: "Attendance Rate",
+      customRenderer: ->(row, value) {
+        content_tag(
+          :a,
+          "#{value}",
+          href: "https://www.google.com",
+          target: "_blank"
+        )
+      }
     },
     {
       accessor: "completedClasses",
@@ -28,6 +36,7 @@
       accessor: "graduatedStudents",
       label: "Graduated Students",
     }
-] %>
+  ]
+%>
 
-<%= pb_rails("advanced_table", props: {table_data: @table_data, column_definitions: column_definitions}) %>
+<%= pb_rails("advanced_table", props: { table_data: @table_data, column_definitions: column_definitions }) %>

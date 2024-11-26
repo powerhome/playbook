@@ -24,7 +24,26 @@ module Playbook
         end.compact
       end
 
+      def render_cell(column, index)
+        if column[:customRenderer].present?
+          renderer = column[:customRenderer]
+          raw(renderer.call(row, row[column[:accessor].to_sym]))
+        else
+          index.zero? ? render_first_column(column) : row[column[:accessor].to_sym]
+        end
+      end
+
     private
+
+      def render_first_column(column)
+        if depth.zero?
+          row[column[:accessor].to_sym]
+        else
+          depth_accessors.each_with_index do |item, accessor_index|
+            return row[item.to_sym] if depth - 1 == accessor_index
+          end
+        end
+      end
 
       def subrow_depth_classname
         depth.positive? ? "depth-sub-row-#{depth}" : ""
