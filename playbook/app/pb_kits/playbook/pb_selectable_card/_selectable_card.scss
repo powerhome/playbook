@@ -149,7 +149,7 @@ $pb_selectable_paddings: (
     &.dark {
       input[type="checkbox"],
       input[type="radio"] {
-        &:checked ~ label ~ enabled {
+        &:checked ~ label {
           border-width: $pb_card_border_width;
           outline: 1px solid $primary_action_dark;
         }
