@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "14.6.2",
+  "version": "14.8.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
@@ -39,7 +39,7 @@
     "flatpickr": "^4.6.13",
     "highcharts": "^11.4.8",
     "highcharts-react-official": "^3.2.1",
-    "intl-tel-input": "^24.6.0"
+    "intl-tel-input": "^24.7.0"
   },
   "devDependencies": {
     "@actions/core": "1.10.0",

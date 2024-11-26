@@ -12,6 +12,18 @@ export const VisualGuidelinesItems = [
         link: "/visual_guidelines/max_width"
     },
     {
+        name: "Height",
+        link: "/visual_guidelines/height"
+    },
+    {
+        name: "Min Height",
+        link: "/visual_guidelines/min_height"
+    },
+    {
+        name : "Max Height",
+        link: "/visual_guidelines/max_height"
+    },
+    {
         name: "Position",
         link: "/visual_guidelines/position"
     },
@@ -62,6 +74,10 @@ export const VisualGuidelinesItems = [
     {
         name: "Hover",
         link: "/visual_guidelines/hover"
+    },
+    {
+        name: "Group Hover",
+        link: "/visual_guidelines/group_hover"
     },
     {
         name: "Text Align",

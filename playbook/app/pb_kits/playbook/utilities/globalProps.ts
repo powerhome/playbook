@@ -63,7 +63,12 @@ type FlexWrap = {
 type Hover = Shadow & {
   background?: string,
   color?: string,
-  scale?: "sm" | "md" | "lg"
+  scale?: "sm" | "md" | "lg",
+  visibility?: boolean,
+}
+
+type GroupHover  = {
+  groupHover?: boolean,
 }
 
 type JustifyContent = {
@@ -170,12 +175,24 @@ type ZIndex = {
   zIndex?: ZIndexType,
 } | ZIndexResponsiveType
 
+type Height = {
+  height?: string 
+}
+
+type MaxHeight = {
+  maxHeight?: string
+}
+
+type MinHeight = {
+  minHeight?: string
+}
+
 // keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left;
+  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -209,13 +226,15 @@ const filterClassName = (value: string): string => {
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
 
+  groupHoverProps: ({ groupHover }: GroupHover ) => groupHover ? 'group_hover ' : '',
   hoverProps: ({ hover }: { hover?: Hover }) => {
       let css = '';
       if (!hover) return css;
       css += hover.shadow ? `hover_shadow_${hover.shadow} ` : '';
-      css += hover.background ? `hover_background_${hover.background } ` : '';
+      css += hover.background ? `hover_background-${hover.background } ` : '';
       css += hover.scale ? `hover_scale_${hover.scale} ` : '';
-      css += hover.color ? `hover_color_${hover.color } ` : '';
+      css += hover.color ? `hover_color-${hover.color } ` : '';
+      css += hover.visibility ? `hover_visibility` : '';
       return css;
   },
 
@@ -341,6 +360,30 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     let css = ''
     css += maxWidth ? `max_width_${filterClassName(maxWidth)} ` : ''
     return css.trimEnd()
+  },
+  minHeightProps: ({ minHeight }: MinHeight) => {
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    if (heightValues.includes(minHeight)) {
+      let css = ''
+      css += minHeight ? `min_height_${filterClassName(minHeight)} ` : ''
+      return css.trimEnd()
+    }
+  },
+  maxHeightProps: ({ maxHeight }: MaxHeight) => {
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    if (heightValues.includes(maxHeight)) {
+      let css = ''
+      css += maxHeight ? `max_height_${filterClassName(maxHeight)} ` : ''
+      return css.trimEnd()
+    }
+  },
+  heightProps: ({ height }: Height) => {
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    if (heightValues.includes(height)) {
+      let css = ''
+      css += height ? `height_${filterClassName(height)} ` : ''
+      return css.trimEnd()
+    }
   },
   zIndexProps: (zIndex: ZIndex) => {
     let css = ''
@@ -498,7 +541,22 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     } else {
       return verticalAlign ? `vertical_align_${verticalAlign} ` : ''
     }
-  }
+  },
+
+}
+
+const PROP_INLINE_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => {[key: string]: any}} = {
+  heightProps: ({ height }: Height) => {
+    return height ? { height } : {}; 
+  },
+
+  maxHeightProps: ({ maxHeight }: MaxHeight) => {
+    return maxHeight ? { maxHeight } : {};
+  },
+
+  minHeightProps: ({ minHeight }: MinHeight) => {
+    return minHeight ? { minHeight } : {}; 
+  },
 }
 
 type DefaultProps = {[key: string]: string} | Record<string, unknown>
@@ -508,6 +566,16 @@ export const globalProps = (props: GlobalProps, defaultProps: DefaultProps = {})
   return Object.keys(PROP_CATEGORIES).map((key) => {
     return PROP_CATEGORIES[key](allProps)
   }).filter((value) => value?.length > 0).join(" ")
+}
+
+// New function for inline styles
+export const globalInlineProps = (props: GlobalProps): React.CSSProperties => {
+  const styles = Object.keys(PROP_INLINE_CATEGORIES).reduce((acc, key) => {
+    const result = PROP_INLINE_CATEGORIES[key](props);
+    return { ...acc, ...(typeof result === 'object' ? result : {}) }; // Ensure result is an object before spreading
+  }, {});
+
+  return styles; // Return the styles object directly
 }
 
 

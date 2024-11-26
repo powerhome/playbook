@@ -8,6 +8,12 @@ $icon_margin: $space_xs/2;
 $icon_height: 28px;
 $height_from_top: $icon_height/2 - $connector_width/2;
 
+// Add gap variables
+$gap_xs: $height_from_top + $space_xs;
+$gap_sm: $height_from_top + $space_sm;
+$gap_md: $height_from_top + $space_md;
+$gap_lg: $height_from_top + $space_lg;
+
 @mixin pb_timeline_line_solid($width, $height, $margin) {
     width: $width;
     height: $height;
@@ -156,7 +162,7 @@ $height_from_top: $icon_height/2 - $connector_width/2;
                         }
                     }
                 }
-            } 
+            }
         }
     }
     &[class*=_vertical] {
@@ -262,6 +268,42 @@ $height_from_top: $icon_height/2 - $connector_width/2;
                     [class=pb_timeline_item_right_block] {
                         @include flex_wrapper(column);
                         margin-bottom: $space_lg;
+                    }
+                }
+            }
+        }
+        &[class*=_gap_xs] {
+            [class*=pb_timeline_item_kit] {
+                [class=pb_timeline_item_step] {
+                    [class=pb_timeline_item_connector] {
+                        height: $gap_xs !important;
+                    }
+                }
+            }
+        }
+        &[class*=_gap_sm] {
+            [class*=pb_timeline_item_kit] {
+                [class=pb_timeline_item_step] {
+                    [class=pb_timeline_item_connector] {
+                        height: $gap_sm !important;
+                    }
+                }
+            }
+        }
+        &[class*=_gap_md] {
+            [class*=pb_timeline_item_kit] {
+                [class=pb_timeline_item_step] {
+                    [class=pb_timeline_item_connector] {
+                        height: $gap_md !important;
+                    }
+                }
+            }
+        }
+        &[class*=_gap_lg] {
+            [class*=pb_timeline_item_kit] {
+                [class=pb_timeline_item_step] {
+                    [class=pb_timeline_item_connector] {
+                        height: $gap_lg !important;
                     }
                 }
             }

@@ -30,6 +30,9 @@ require "playbook/top"
 require "playbook/right"
 require "playbook/bottom"
 require "playbook/vertical_align"
+require "playbook/height"
+require "playbook/min_height"
+require "playbook/max_height"
 
 module Playbook
   include ActionView::Helpers
@@ -67,19 +70,22 @@ module Playbook
     include Playbook::Right
     include Playbook::Bottom
     include Playbook::VerticalAlign
+    include Playbook::Height
+    include Playbook::MinHeight
+    include Playbook::MaxHeight
 
     prop :id
     prop :data, type: Playbook::Props::HashProp, default: {}
     prop :aria, type: Playbook::Props::HashProp, default: {}
     prop :html_options, type: Playbook::Props::HashProp, default: {}
     prop :children, type: Playbook::Props::Proc
+    prop :style, type: Playbook::Props::HashProp, default: {}
+    prop :height
+    prop :min_height
+    prop :max_height
 
     def object
       self
-    end
-
-    def combined_html_options
-      default_html_options.merge(html_options.deep_merge(data_attributes))
     end
 
     # rubocop:disable Layout/CommentIndentation
@@ -110,15 +116,48 @@ module Playbook
     end
     # rubocop:enable Style/OptionalBooleanParameter
 
+    def combined_html_options
+      merged = default_html_options.dup
+
+      html_options.each do |key, value|
+        if key == :style && value.is_a?(Hash)
+          # Convert style hash to CSS string
+          merged[:style] = value.map { |k, v| "#{k.to_s.gsub('_', '-')}: #{v}" }.join("; ")
+        else
+          merged[key] = value
+        end
+      end
+
+      inline_styles = dynamic_inline_props
+      merged[:style] = if inline_styles.present?
+                         merged[:style].present? ? "#{merged[:style]}; #{inline_styles}" : inline_styles
+                       end
+
+      merged.deep_merge(data_attributes)
+    end
+
+    def global_inline_props
+      {
+        height: height,
+        min_height: min_height,
+        max_height: max_height,
+      }.compact
+    end
+
   private
 
     def default_options
-      {
+      options = {
         id: id,
         data: data,
         class: classname,
         aria: aria,
       }
+
+      inline_styles = dynamic_inline_props
+      options[:style] = inline_styles if inline_styles.present? && !html_options.key?(:style)
+
+      options
     end
 
     def default_html_options
@@ -130,6 +169,20 @@ module Playbook
         data: data,
         aria: aria,
       }.transform_keys { |key| key.to_s.tr("_", "-").to_sym }
+    end
+
+    def dynamic_inline_props
+      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value}" if inline_validator(key, value) }.compact
+      styles.join("; ").presence
+    end
+
+    def inline_validator(key, value)
+      return false if value.nil?
+      return false if height_values.include?(value) && key == :height
+      return false if min_height_values.include?(value) && key == :min_height
+      return false if max_height_values.include?(value) && key == :max_height
+
+      true
     end
   end
 end

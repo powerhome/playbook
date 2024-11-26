@@ -6,6 +6,9 @@ import React from "react";
 import Colors from "../VisualGuidelines/Colors";
 import MinWidth from "../VisualGuidelines/Examples/MinWidth";
 import MaxWidth from "../VisualGuidelines/Examples/MaxWidth";
+import Height from "../VisualGuidelines/Examples/Height";
+import MinHeight from "../VisualGuidelines/Examples/MinHeight";
+import MaxHeight from "../VisualGuidelines/Examples/MaxHeight";
 import ZIndex from "../VisualGuidelines/Examples/ZIndex";
 import LineHeight from "../VisualGuidelines/Examples/LineHeight";
 import NumberSpacing from "../VisualGuidelines/Examples/NumberSpacing";
@@ -18,6 +21,7 @@ import Cursor from "../VisualGuidelines/Examples/Cursor";
 import FlexBox from "../VisualGuidelines/Examples/FlexBox";
 import Position from "../VisualGuidelines/Examples/Position";
 import Hover from "../VisualGuidelines/Examples/Hover";
+import GroupHover from "../VisualGuidelines/Examples/GroupHover";
 import TextAlign from "../VisualGuidelines/Examples/TextAlign";
 import Overflow from "./Examples/Overflow";
 import Truncate from "./Examples/Truncate";
@@ -41,6 +45,12 @@ const VisualGuidelines = ({
         return <MaxWidth example={examples.width_jsx}/>;
       case "min_width":
         return <MinWidth example={examples.min_width_jsx}/>;
+      case "height":
+        return <Height example={examples.height_jsx}/>;
+      case "min_height":
+        return <MinHeight example={examples.min_height_jsx}/>;
+      case "max_height":
+        return <MaxHeight example={examples.max_height_jsx}/>;
       case "z_index":
         return <ZIndex example={examples.z_index_jsx}
                   tokensExample={examples.z_index_token}
@@ -82,6 +92,8 @@ const VisualGuidelines = ({
         return <VerticalAlign example={examples.vertical_align_jsx}/>;
       case "hover":
         return <Hover example={examples.hover_jsx}/>;
+      case "group_hover":
+        return <GroupHover example={examples.group_hover_jsx}/>;
       case "text_align":
         return <TextAlign example={examples.text_align_jsx} />
       case "overflow":

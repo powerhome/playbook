@@ -18,10 +18,6 @@ module Playbook
       prop :form_spacing, type: Playbook::Props::Boolean,
                           default: false
 
-      def checked_html
-        checked ? "checked='true'" : nil
-      end
-
       def classname
         generate_classname("pb_checkbox_kit", checked_class) + indeterminate_class + error_class
       end

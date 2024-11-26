@@ -1,0 +1,42 @@
+<%= pb_rails("date_picker", props: {
+  allow_input: true,
+  default_date: "This month",
+  end_date_id: "quick-pick-end-date",
+  end_date_name: "quick-pick-end-date",
+  mode: "range",
+  picker_id: "quick-pick-default-date",
+  placeholder: "mm/dd/yyyy to mm/dd/yyyy",
+  selection_type: "quickpick",
+  start_date_id: "quick-pick-start-date",
+  start_date_name: "quick-pick-start-date"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  allow_input: true,
+  custom_quick_pick_dates: {
+    dates: [
+      {
+        label: "Last 15 months",
+        value: {
+          timePeriod: "months",
+          amount: 15,
+        },
+      },
+      {
+        label: "First Week of June 2022",
+        value: ["06/01/2022", "06/07/2022"],
+      },
+    ],
+  },
+  default_date: "First Week of June 2022",
+  end_date_id: "quick-pick-end-date",
+  end_date_name: "quick-pick-end-date",
+  label: "Custom Date Picker",
+  mode: "range",
+  picker_id: "custom-quick-pick-default-date",
+  placeholder: "mm/dd/yyyy to mm/dd/yyyy",
+  selection_type: "quickpick",
+  start_date_id: "quick-pick-start-date",
+  start_date_name: "quick-pick-start-date"
+}) %>
+
