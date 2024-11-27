@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint app/ --ext .js,.jsx",
-    "release": "bin/vite build"
+    "release": "bin/vite build",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@fortawesome/fontawesome-pro": "6.2.1",
@@ -35,6 +36,7 @@
     "axe-core": "4.10.0",
     "babel-plugin-react-docgen": "^4.2.1",
     "copy-to-clipboard": "^3.3.3",
+    "cypress": "^13.16.0",
     "eslint": "6.8.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.1.0",
