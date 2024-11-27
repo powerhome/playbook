@@ -189,6 +189,17 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         }
     }
 
+    const paginagionInitializer = pagination ? {
+        getPaginationRowModel: getPaginationRowModel(),
+        paginateExpandedRows: false,
+        initialState: {
+            pagination: {
+                pageIndex,
+                pageSize,
+            },
+        },
+    } : {}
+
     //initialize table
     const table = useReactTable({
         data: loading ? Array(loadingStateRowCount).fill({}) : tableData,
@@ -197,18 +208,11 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         getSubRows: (row: GenericObject) => row.children,
         getCoreRowModel: getCoreRowModel(),
         getExpandedRowModel: getExpandedRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         enableSortingRemoval: false,
-        paginateExpandedRows: false,
         sortDescFirst: true,
-        initialState: {
-            pagination: {
-                pageIndex,
-                pageSize,
-            },
-        },
         ...expandAndSortState(),
+        ...paginagionInitializer,
         ...tableOptions,
     })
 
@@ -275,7 +279,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                 }}
             >
                 <>
-                    {pagination &&
+                    {/* {pagination &&
                         <Pagination
                             current={table.getState().pagination.pageIndex + 1}
                             key={`pagination-top-${table.getState().pagination.pageIndex + 1}`}
@@ -284,7 +288,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                             range={5}
                             total={table.getPageCount()}
                         />
-                    }
+                    } */}
 
                     <Table
                         className={`${loading ? "content-loading" : ""}`}
@@ -304,7 +308,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                         )}
                     </Table>
 
-                    {pagination &&
+                    {/* {pagination &&
                         <Pagination
                             current={table.getState().pagination.pageIndex + 1}
                             key={`pagination-bottom-${table.getState().pagination.pageIndex + 1}`}
@@ -313,7 +317,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                             range={5}
                             total={table.getPageCount()}
                         />
-                    }
+                    } */}
                 </>
             </AdvancedTableContext.Provider>
         </div>
