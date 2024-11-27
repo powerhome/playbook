@@ -12,7 +12,6 @@ import {
     Row,
     useReactTable,
     Getter,
-    PaginationState,
 } from "@tanstack/react-table"
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
