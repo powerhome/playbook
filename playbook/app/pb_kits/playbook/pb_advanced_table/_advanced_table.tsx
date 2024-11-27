@@ -279,7 +279,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                 }}
             >
                 <>
-                    {/* {pagination &&
+                    {pagination &&
                         <Pagination
                             current={table.getState().pagination.pageIndex + 1}
                             key={`pagination-top-${table.getState().pagination.pageIndex + 1}`}
@@ -288,7 +288,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                             range={5}
                             total={table.getPageCount()}
                         />
-                    } */}
+                    }
 
                     <Table
                         className={`${loading ? "content-loading" : ""}`}
@@ -308,7 +308,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                         )}
                     </Table>
 
-                    {/* {pagination &&
+                    {pagination &&
                         <Pagination
                             current={table.getState().pagination.pageIndex + 1}
                             key={`pagination-bottom-${table.getState().pagination.pageIndex + 1}`}
@@ -317,7 +317,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                             range={5}
                             total={table.getPageCount()}
                         />
-                    } */}
+                    }
                 </>
             </AdvancedTableContext.Provider>
         </div>
