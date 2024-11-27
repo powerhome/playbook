@@ -41,7 +41,7 @@ const WidthDescription = () => (
 
 const Width = ({ example }: {example: string}) => (
   <Example
-      backgroundClass='maxwidth-class'
+      backgroundClass='minwidth-class'
       description={<WidthDescription />}
       example={example}
       globalProps={{
@@ -50,6 +50,7 @@ const Width = ({ example }: {example: string}) => (
       title="Width"
   >
   <Background
+      className="width-resize"
       minWidth="xxs"
       overflow="auto"
   >
@@ -58,6 +59,7 @@ const Width = ({ example }: {example: string}) => (
           backgroundColor="gradient"
           key={size}
           marginBottom="xs"
+          minWidth={size}
           width={size}
           padding="xs"
       >
