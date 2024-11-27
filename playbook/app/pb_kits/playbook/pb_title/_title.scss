@@ -49,10 +49,26 @@
   }
 
   &.dark {
-    @include pb_title_dark; 
+    @include pb_title_dark;
   }
 
-  &.dark[class*=_link] { 
-    @include pb_title_dark_link; 
+  &.dark[class*=_light] {
+    @include pb_title_dark_light;
+  }
+
+  &.dark[class*=_lighter] {
+    @include pb_title_dark_lighter;
+  }
+
+  &.dark[class*=_link] {
+    @include pb_title_dark_link;
+  }
+
+  &.dark[class*=_error] {
+    @include pb_title_dark_error;
+  }
+
+  &.dark[class*=_success] {
+    @include pb_title_dark_success;
   }
 }
