@@ -10,3 +10,4 @@ export { default as AdvancedTableTableProps } from './_advanced_table_table_prop
 export { default as AdvancedTableInlineRowLoading } from './_advanced_table_inline_row_loading.jsx'
 export { default as AdvancedTableResponsive } from './_advanced_table_responsive.jsx'
 export { default as AdvancedTableCustomCell } from './_advanced_table_custom_cell.jsx'
+export { default as AdvancedTablePagination } from './_advanced_table_pagination.jsx'
