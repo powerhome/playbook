@@ -1,3 +1,36 @@
+# 14.9.0
+#### November 29, 2024
+
+[14.9.0](https://github.com/powerhome/playbook/tree/14.9.0) full list of changes:
+
+**Kit Enhancements:**
+- Roll Out Height Global Props ([#3944](https://github.com/powerhome/playbook/pull/3944)) ([@kangaree](https://github.com/kangaree))
+- Add Red "Danger" Button Variant For Delete Actions ([#3949](https://github.com/powerhome/playbook/pull/3949)) ([@skduncan](https://github.com/skduncan))
+- Implementing Rails Advanced Table Custom Cell With Kits ([#3952](https://github.com/powerhome/playbook/pull/3952)) ([@carloslimasd](https://github.com/carloslimasd))
+- Create A "StickyLeftColumn" Prop For The Table Kit ([#3913](https://github.com/powerhome/playbook/pull/3913)) ([@nickamantia](https://github.com/nickamantia))
+- Rails Typeahead Form Integration ([#3917](https://github.com/powerhome/playbook/pull/3917)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Height Global Props ([#3910](https://github.com/powerhome/playbook/pull/3910)) ([@markdoeswork](https://github.com/markdoeswork))
+- Drawer Menu Behavior ([\#3932](https://github.com/powerhome/playbook/pull/3932)) ([@markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+- Move Negative Sign To Left Of Currency Sign ([#3921](https://github.com/powerhome/playbook/pull/3921)) ([@kangaree](https://github.com/kangaree))
+- Fixes For Custom Trigger Not Working ([#3958](https://github.com/powerhome/playbook/pull/3958)) ([@nidaqg](https://github.com/nidaqg))
+- Fix For PhoneNumberInput CSS Conflict ([#3922](https://github.com/powerhome/playbook/pull/3922)) ([@jasperfurniss](https://github.com/jasperfurniss))
+- Dropdown Rails To Have Position Absolute On Container ([#3933](https://github.com/powerhome/playbook/pull/3933)) ([@nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+- Width Global Prop ([#3943](https://github.com/powerhome/playbook/pull/3943)) ([@skduncan](https://github.com/skduncan))
+- Bump @Floating-Ui/React From 0.22.2 To 0.26.23 ([#3926](https://github.com/powerhome/playbook/pull/3926)) ([@skduncan](https://github.com/skduncan))
+- Dependency Update/Upgrade-@Tanstack/React-Table (8.9.2 -> 8.20.5) ([#3951](https://github.com/powerhome/playbook/pull/3951)) ([@skduncan](https://github.com/skduncan))
+- Timeline Kit: Add A Vertical "With Children" Doc Example ([#3890](https://github.com/powerhome/playbook/pull/3890)) ([@kangaree](https://github.com/kangaree))
+- Adding Rails Indeterminate Checkbox Variant Doc ([#3918](https://github.com/powerhome/playbook/pull/3918)) ([@carloslimasd](https://github.com/carloslimasd))
+- Dependency Display: Add Flex Section For Summary Display [2 Of 2] ([#3875](https://github.com/powerhome/playbook/pull/3875)) ([@skduncan](https://github.com/skduncan))
+- Update Playbook-Swift Changelog ([#3901](https://github.com/powerhome/playbook/pull/3901)) ([@isismsilva](https://github.com/isismsilva))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.8.0...14.9.0)
+
+
 #  🐉 Draggable Kit Now Available For Rails! ✨
 ##### November 18, 2024
 
