@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps, globalInlineProps } from '../utilities/globalProps'
 import PbTable from '.'
 import {
     TableHead,
@@ -66,6 +66,7 @@ const Table = (props: TableProps): React.ReactElement => {
     const spaceCssName = outerPadding !== 'none' ? 'space_' : ''
     const outerPaddingCss = outerPadding ? `outer_padding_${spaceCssName}${outerPadding}` : ''
     const isTableTag = tag === 'table'
+    const dynamicInlineProps = globalInlineProps(props)
 
     const classNames = classnames(
         'pb_table',
@@ -154,6 +155,7 @@ const Table = (props: TableProps): React.ReactElement => {
                             {...htmlProps}
                             className={classNames}
                             id={id}
+                            style={dynamicInlineProps}
                         >
                             {children}
                         </table>
@@ -164,6 +166,7 @@ const Table = (props: TableProps): React.ReactElement => {
                             {...htmlProps}
                             className={classNames}
                             id={id}
+                            style={dynamicInlineProps}
                         >
                             {children}
                         </div>
@@ -177,6 +180,7 @@ const Table = (props: TableProps): React.ReactElement => {
                         {...htmlProps}
                         className={classNames}
                         id={id}
+                        style={dynamicInlineProps}
                     >
                         {children}
                     </table>
@@ -187,6 +191,7 @@ const Table = (props: TableProps): React.ReactElement => {
                         {...htmlProps}
                         className={classNames}
                         id={id}
+                        style={dynamicInlineProps}
                     >
                         {children}
                     </div>

@@ -7,7 +7,7 @@ import {
   buildDataProps,
   buildHtmlProps,
 } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import { globalProps, globalInlineProps } from "../utilities/globalProps";
 
 import { DialogContext } from "../pb_dialog/_dialog_context";
 
@@ -100,6 +100,8 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
   };
 
   const classes = classnames(buildCss("pb_drawer_wrapper"), className);
+
+  const dynamicInlineProps = globalInlineProps(props)
 
   const [triggerOpened, setTriggerOpened] = useState(false);
 
@@ -198,6 +200,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
           {...dataProps}
           {...htmlProps}
           className={classes}
+          style={dynamicInlineProps}
       >
           {isModalVisible && (
             <div
