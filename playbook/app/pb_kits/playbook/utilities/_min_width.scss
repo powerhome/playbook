@@ -4,7 +4,11 @@
   min-width: map-get($containers, 'none');
 }
 
-.min_with_0_percent {
+.min_width_none {
+  min-width: none;
+}
+
+.min_width_0_percent {
   min-width: $container_0;
 }
 

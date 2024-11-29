@@ -18,6 +18,17 @@ const SIZES: { [size: string]: string } = {
   'lg': '960px max',
   'xl': '1140px max',
   'xxl': '1320px max',
+  '100%': '100% max'
+}
+
+const VALUES: { [value: string]: string } = {
+  'xs': 'xs',
+  'sm': 'sm',
+  'md': 'md',
+  'lg': 'lg',
+  'xl': 'xl',
+  'xxl': 'xxl',
+  '100%': '100%',
 }
 
 const MaxWidthDescription = () => (
@@ -32,7 +43,7 @@ const MaxWidth = ({ example }: {example: string}) => (
       description={<MaxWidthDescription />}
       example={example}
       globalProps={{
-        maxWidth: Object.keys(SIZES),
+        maxWidth: Object.keys(VALUES),
       }}
       title="Max Width"
   >
@@ -58,7 +69,7 @@ const MaxWidth = ({ example }: {example: string}) => (
             >
               {size.toUpperCase()}
             </Title>
-            <Detail 
+            <Detail
               flex={0}
               color="lighter"
             >
@@ -68,7 +79,7 @@ const MaxWidth = ({ example }: {example: string}) => (
         </Background>
       ))}
     </Background>
-    <Detail text="To see the maximum widths, you can resie the above container and scroll"/>
+    <Detail text="To see the maximum widths, you can resize the above container and scroll"/>
   </Example>
 )
 

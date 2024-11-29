@@ -1,7 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
+
+type ModifiedGlobalProps = Omit<GlobalProps, 'width'>
 
 type ProgressSimpleProps = {
   align?: "left" | "center" | "right",
@@ -16,7 +18,7 @@ type ProgressSimpleProps = {
   value: number,
   variant?: "default" | "positive" | "negative" | "warning",
   width: string,
-}
+} & ModifiedGlobalProps
 
 const ProgressSimple = (props: ProgressSimpleProps): React.ReactElement => {
   const {
@@ -56,7 +58,7 @@ const ProgressSimple = (props: ProgressSimpleProps): React.ReactElement => {
   )
 
   return (
-    <div 
+    <div
         {...dataProps}
         {...htmlProps}
         className={wrapperClass}

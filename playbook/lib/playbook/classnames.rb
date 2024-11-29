@@ -13,6 +13,7 @@ module Playbook
         prop(:classname),
         spacing_props,
         dark_props,
+        width_props,
         min_width_props,
         max_width_props,
         z_index_props,

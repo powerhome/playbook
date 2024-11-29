@@ -1,1 +1,1 @@
-<Card maxWidth="xl">{'Card content'}</Card>
+<Card width="xl">{'Card content'}</Card>
