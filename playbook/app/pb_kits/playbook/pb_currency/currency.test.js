@@ -65,7 +65,7 @@ test('decimals default prop returns decimals as body text', () => {
 
 test('commaSeparator prop returns comma separated amount', () => {
   render(
-    <Currency 
+    <Currency
         amount="1234567890"
         commaSeparator
         data={{ testid: 'comma-test' }}
@@ -76,7 +76,7 @@ test('commaSeparator prop returns comma separated amount', () => {
 
 test('commaSeparator prop returns comma separated amount with decimals', () => {
   render(
-    <Currency 
+    <Currency
         amount="1234567890.12"
         commaSeparator
         data={{ testid: 'comma-test-decimals' }}
@@ -87,7 +87,7 @@ test('commaSeparator prop returns comma separated amount with decimals', () => {
 
 test('commaSeparator prop returns comma separated amount with decimals="matching"', () => {
   render(
-    <Currency 
+    <Currency
         amount="1234567890.12"
         commaSeparator
         data={{ testid: 'comma-test-decimals-matching' }}
@@ -95,4 +95,41 @@ test('commaSeparator prop returns comma separated amount with decimals="matching
     />
   )
   expect(screen.getByTestId('comma-test-decimals-matching')).toHaveTextContent('1,234,567,890.12')
+})
+
+test('handles negative amounts correctly', () => {
+  render(
+    <>
+      <Currency
+          amount="-320"
+          data={{ testid: 'test-negative-default' }}
+      />
+      <Currency
+          abbreviate
+          amount="-3200000"
+          data={{ testid: 'test-negative-millions' }}
+      />
+      <Currency
+          amount="-123456.78"
+          commaSeparator
+          data={{ testid: 'test-negative-comma-decimals' }}
+      />
+      <Currency
+          amount="-400.50"
+          data={{ testid: 'test-negative-no-symbol' }}
+          symbol=""
+      />
+      <Currency
+          amount="-500.55"
+          data={{ testid: 'test-negative-medium-size' }}
+          size="md"
+      />
+    </>
+  )
+
+  expect(screen.getByTestId('test-negative-default')).toHaveTextContent('-$320')
+  expect(screen.getByTestId('test-negative-millions')).toHaveTextContent('-$3.2M')
+  expect(screen.getByTestId('test-negative-comma-decimals')).toHaveTextContent('-$123,456.78')
+  expect(screen.getByTestId('test-negative-no-symbol')).toHaveTextContent('-400.50')
+  expect(screen.getByTestId('test-negative-medium-size')).toHaveTextContent('$-500.55')
 })
