@@ -1,0 +1,45 @@
+@import "../tokens/container";
+
+.width_none {
+  width: none;
+}
+
+.width_0 {
+  width: map-get($containers, 'none');
+}
+
+.width_0_percent {
+  width: map-get($containers, 'none');
+}
+
+.width_xxs {
+  width: $container_xxs;
+}
+
+.width_xs {
+  width: $container_xs;
+}
+
+.width_sm {
+  width: $container_sm;
+}
+
+.width_md {
+  width: $container_md;
+}
+
+.width_lg {
+  width: $container_lg;
+}
+
+.width_xl {
+  width: $container_xl;
+}
+
+.width_xxl {
+  width: $container_xxl;
+}
+
+.width_100_percent {
+  width: $container_100;
+}

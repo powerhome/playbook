@@ -95,12 +95,16 @@ type Margin = {
   default?: string
 }
 
+type Width = {
+  width?: string
+}
+
 type MaxWidth = {
-  maxWidth?: Sizes,
+  maxWidth?: string,
 }
 
 type MinWidth = {
-  minWidth?: Sizes,
+  minWidth?: string,
 }
 
 type NumberSpacing = {
@@ -176,7 +180,7 @@ type ZIndex = {
 } | ZIndexResponsiveType
 
 type Height = {
-  height?: string 
+  height?: string
 }
 
 type MaxHeight = {
@@ -191,7 +195,7 @@ type MinHeight = {
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
-  LineHeight & Margin & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
+  LineHeight & Margin & Width & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
@@ -351,6 +355,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += numberSpacing ? `ns_${numberSpacing} ` : ''
     return css
   },
+  widthProps: ({ width }: Width) => {
+    let css = ''
+    css += width ? `width_${filterClassName(width)} ` : ''
+    return css.trimEnd()
+  },
   minWidthProps: ({ minWidth }: MinWidth) => {
     let css = ''
     css += minWidth ? `min_width_${filterClassName(minWidth)} ` : ''
@@ -360,6 +369,30 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     let css = ''
     css += maxWidth ? `max_width_${filterClassName(maxWidth)} ` : ''
     return css.trimEnd()
+  },
+  minHeightProps: ({ minHeight }: MinHeight) => {
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    if (heightValues.includes(minHeight)) {
+      let css = ''
+      css += minHeight ? `min_height_${filterClassName(minHeight)} ` : ''
+      return css.trimEnd()
+    }
+  },
+  maxHeightProps: ({ maxHeight }: MaxHeight) => {
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    if (heightValues.includes(maxHeight)) {
+      let css = ''
+      css += maxHeight ? `max_height_${filterClassName(maxHeight)} ` : ''
+      return css.trimEnd()
+    }
+  },
+  heightProps: ({ height }: Height) => {
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    if (heightValues.includes(height)) {
+      let css = ''
+      css += height ? `height_${filterClassName(height)} ` : ''
+      return css.trimEnd()
+    }
   },
   zIndexProps: (zIndex: ZIndex) => {
     let css = ''

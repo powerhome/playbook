@@ -18,9 +18,19 @@ export const separateChildComponents = (children: React.ReactChild[] | React.Rea
   const otherChildren: React.ReactChild[] = [];
 
   React.Children.forEach(children, (child) => {
-    if (child && (child as ReactElement).type === DropdownTrigger) {
+    const element = child as ReactElement;
+    const childType = element?.type;
+    const childDisplayName = (childType as any)?.displayName || (childType as any)?.name;
+
+    if (
+      childType === DropdownTrigger ||
+      childDisplayName === "DropdownTrigger"
+    ) {
       trigger = child;
-    } else if (child && (child as ReactElement).type === DropdownContainer) {
+    } else if (
+      childType === DropdownContainer ||
+      childDisplayName === "DropdownContainer"
+    ) {
       container = child;
     } else {
       otherChildren.push(child);
@@ -29,6 +39,7 @@ export const separateChildComponents = (children: React.ReactChild[] | React.Rea
 
   return { trigger, container, otherChildren };
 };
+
 
 export const prepareSubcomponents = ({
   children,

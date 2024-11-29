@@ -2,7 +2,7 @@ import React, { useEffect, ReactElement } from 'react'
 import classnames from 'classnames'
 import  useCollapsible from './useCollapsible'
 
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, globalInlineProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import CollapsibleContent from './child_kits/CollapsibleContent'
@@ -75,6 +75,7 @@ const Collapsible = ({
     globalProps(props),
     className
   )
+  const dynamicInlineProps = globalInlineProps(props)
   return (
     <CollapsibleContext.Provider value={{ collapsed: isCollapsed, toggle, icon, iconSize, iconColor, onIconClick, onClick }}>
       <div
@@ -83,6 +84,7 @@ const Collapsible = ({
           {...htmlProps}
           className={classes}
           id={id}
+          style={dynamicInlineProps}
       >
         {Main ? (
           <CollapsibleMain {...mainProps}>

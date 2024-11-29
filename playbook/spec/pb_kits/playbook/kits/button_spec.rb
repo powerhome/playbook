@@ -8,7 +8,7 @@ RSpec.describe Playbook::PbButton::Button do
   it {
     is_expected.to define_enum_prop(:variant)
       .with_default("primary")
-      .with_values("primary", "secondary", "link", "reaction")
+      .with_values("primary", "secondary", "link", "danger", "reaction")
   }
   it {
     is_expected.to define_enum_prop(:size)

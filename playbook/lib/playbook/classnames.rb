@@ -13,6 +13,7 @@ module Playbook
         prop(:classname),
         spacing_props,
         dark_props,
+        width_props,
         min_width_props,
         max_width_props,
         z_index_props,
@@ -43,6 +44,9 @@ module Playbook
         right_props,
         bottom_props,
         vertical_align_props,
+        height_props,
+        min_height_props,
+        max_height_props,
       ].compact.join(" ")
     end
 

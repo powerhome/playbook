@@ -7,7 +7,7 @@ import {
   buildDataProps,
   buildHtmlProps,
 } from "../utilities/props";
-import { globalProps } from "../utilities/globalProps";
+import { globalProps, globalInlineProps } from "../utilities/globalProps";
 
 import { DialogContext } from "../pb_dialog/_dialog_context";
 
@@ -105,8 +105,9 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
   };
 
   const classes = classnames(buildCss("pb_drawer_wrapper"), className);
-
+  const dynamicInlineProps = globalInlineProps(props)
   const [menuButtonOpened, setMenuButtonOpened] = useState(false);
+  const [triggerOpened, setTriggerOpened] = useState(false);
 
   const breakpointWidths: Record<DrawerProps["openBreakpoint"], number> = {
     none: 0,
@@ -286,6 +287,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
               {...ariaProps}
               {...dataProps}
               {...htmlProps}
+              style={dynamicInlineProps}
               className={classnames(drawerClassNames.base, {
               [drawerClassNames.afterOpen]:
                 animationState === "afterOpen",
@@ -304,6 +306,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
             {...dataProps}
             {...htmlProps}
             className={classes}
+            style={dynamicInlineProps}
         >
           {isModalVisible && (
             <div

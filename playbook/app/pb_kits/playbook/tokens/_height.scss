@@ -1,0 +1,19 @@
+
+$height_auto: auto !default;
+$height_xs: 320px !default;
+$height_sm: 480px !default;
+$height_md: 768px !default;
+$height_lg: 1024px !default;
+$height_xl: 1280px !default;
+$height_2xl: 1440px !default;
+$height_3xl: 1920px !default;
+$heights: (
+  height_auto: $height_auto,
+  height_xs: $height_xs,
+  height_sm: $height_sm,
+  height_md: $height_md,
+  height_lg: $height_lg,
+  height_xl: $height_xl,
+  height_xxl: $height_2xl,
+  height_xxxl: $height_3xl
+);

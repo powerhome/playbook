@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 
 type LayoutPropTypes = {
   aria?: {[key: string]: string},
@@ -19,7 +19,7 @@ type LayoutPropTypes = {
   variant?: "light" | "dark" | "gradient",
   transparent?: boolean,
   layout?: "sidebar" | "collection" | "kanban" | "content" | "masonry",
-}
+} & GlobalProps
 
 type LayoutSideProps = {
   children: React.ReactNode[] | React.ReactNode,
@@ -159,6 +159,8 @@ const Layout = (props: LayoutPropTypes) => {
   const filteredProps = {...props}
   delete filteredProps?.position
 
+  const dynamicInlineProps = globalInlineProps(props)
+
   return (
     <div
         {...ariaProps}
@@ -171,7 +173,8 @@ const Layout = (props: LayoutPropTypes) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         globalProps(filteredProps)
-      )}
+        )}
+        style={dynamicInlineProps}
     >
       {subComponentTags('Side')}
       {nonSideChildren}

@@ -1,0 +1,1 @@
+<Card width="lg" maxWidth="md">{'Card content'}</Card>

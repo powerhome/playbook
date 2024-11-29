@@ -26,14 +26,14 @@ RSpec.describe Playbook::PbProgressSimple::ProgressSimple do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_progress_simple_kit_left"
-      expect(subject.new(align: "center").classname).to eq "pb_progress_simple_kit_center"
-      expect(subject.new(muted: true).classname).to eq "pb_progress_simple_kit_muted_left"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_progress_simple_kit_left additional_class"
-      expect(subject.new(variant: "default").classname).to eq "pb_progress_simple_kit_left"
-      expect(subject.new(variant: "positive").classname).to eq "pb_progress_simple_kit_positive_left"
-      expect(subject.new(variant: "negative").classname).to eq "pb_progress_simple_kit_negative_left"
-      expect(subject.new(variant: "warning").classname).to eq "pb_progress_simple_kit_warning_left"
+      expect(subject.new({}).classname).to eq "pb_progress_simple_kit_left width_100_percent"
+      expect(subject.new(align: "center").classname).to eq "pb_progress_simple_kit_center width_100_percent"
+      expect(subject.new(muted: true).classname).to eq "pb_progress_simple_kit_muted_left width_100_percent"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_progress_simple_kit_left additional_class width_100_percent"
+      expect(subject.new(variant: "default").classname).to eq "pb_progress_simple_kit_left width_100_percent"
+      expect(subject.new(variant: "positive").classname).to eq "pb_progress_simple_kit_positive_left width_100_percent"
+      expect(subject.new(variant: "negative").classname).to eq "pb_progress_simple_kit_negative_left width_100_percent"
+      expect(subject.new(variant: "warning").classname).to eq "pb_progress_simple_kit_warning_left width_100_percent"
     end
   end
 
