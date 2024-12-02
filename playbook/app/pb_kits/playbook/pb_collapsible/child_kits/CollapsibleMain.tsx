@@ -3,7 +3,7 @@
 import classnames from 'classnames'
 import React, { useContext } from 'react'
 import { buildCss } from '../../utilities/props'
-import { globalProps } from '../../utilities/globalProps'
+import { globalProps, GlobalProps } from '../../utilities/globalProps'
 
 import Flex from '../../pb_flex/_flex'
 import FlexItem from '../../pb_flex/_flex_item'
@@ -25,7 +25,7 @@ const CollapsibleMain = ({
   className,
   cursor = 'pointer',
   ...props
-}: CollapsibleMainProps): React.ReactElement=> {
+}: CollapsibleMainProps & GlobalProps): React.ReactElement=> {
   const {collapsed, toggle, icon, iconSize, iconColor, onIconClick, onClick}: any = useContext(CollapsibleContext)
   const mainCSS = buildCss('pb_collapsible_main_kit')
   const mainSpacing = globalProps(props, { cursor })
