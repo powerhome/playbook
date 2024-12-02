@@ -189,7 +189,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     initialState: {
         pagination: {
             pageIndex: paginationProps?.pageIndex ?? 0,
-            pageSize: paginationProps?.pageSize ??  10,
+            pageSize: paginationProps?.pageSize ??  20,
         },
     },
 } : {}

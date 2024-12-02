@@ -37,7 +37,7 @@ const AdvancedTablePaginationWithProps = (props) => {
 
   const paginationProps = {
     pageIndex: 1,
-    pageSize: 20,
+    pageSize: 10,
     range: 2
   }
   
