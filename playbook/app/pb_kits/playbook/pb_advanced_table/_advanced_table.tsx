@@ -181,13 +181,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }
 
-  const paginagionInitializer = paginationProps ? {
+  const paginationInitializer = paginationProps?.paginate ? {
     getPaginationRowModel: getPaginationRowModel(),
     paginateExpandedRows: false,
     initialState: {
         pagination: {
-            pageIndex: paginationProps.pageIndex,
-            pageSize: paginationProps.pageSize,
+            pageIndex: paginationProps.pageIndex ?? 0,
+            pageSize: paginationProps.pageSize ??  10,
         },
     },
 } : {}
@@ -204,7 +204,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     enableSortingRemoval: false,
     sortDescFirst: true,
     ...expandAndSortState(),
-    ...paginagionInitializer,
+    ... paginationInitializer,
     ...tableOptions,
   })
 
@@ -271,7 +271,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           }}
       >
         <>
-          {paginationProps &&
+          {paginationProps?.paginate &&
               <Pagination
                   current={table.getState().pagination.pageIndex + 1}
                   key={`pagination-top-${table.getState().pagination.pageIndex + 1}`}
@@ -298,7 +298,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
               </>
             )}
           </Table>
-          {paginationProps &&
+          {paginationProps?.paginate &&
             <Pagination
                 current={table.getState().pagination.pageIndex + 1}
                 key={`pagination-bottom-${table.getState().pagination.pageIndex + 1}`}
