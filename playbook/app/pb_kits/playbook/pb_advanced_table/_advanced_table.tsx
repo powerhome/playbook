@@ -44,6 +44,7 @@ type AdvancedTableProps = {
   loading?: boolean | string
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
+  pagination?: boolean,
   paginationProps?: GenericObject
   responsive?: "scroll" | "none",
   sortControl?: GenericObject
@@ -70,6 +71,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     loading,
     onRowToggleClick,
     onToggleExpansionClick,
+    pagination = false,
     paginationProps,
     responsive = "scroll",
     sortControl,
@@ -181,13 +183,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }
 
-  const paginationInitializer = paginationProps?.paginate ? {
+  const paginationInitializer = pagination ? {
     getPaginationRowModel: getPaginationRowModel(),
     paginateExpandedRows: false,
     initialState: {
         pagination: {
-            pageIndex: paginationProps.pageIndex ?? 0,
-            pageSize: paginationProps.pageSize ??  10,
+            pageIndex: paginationProps?.pageIndex ?? 0,
+            pageSize: paginationProps?.pageSize ??  10,
         },
     },
 } : {}
@@ -271,13 +273,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           }}
       >
         <>
-          {paginationProps?.paginate &&
+          {pagination &&
               <Pagination
                   current={table.getState().pagination.pageIndex + 1}
                   key={`pagination-top-${table.getState().pagination.pageIndex + 1}`}
                   marginBottom="xs"
                   onChange={onPageChange}
-                  range={5}
+                  range={paginationProps?.range ? paginationProps?.range : 5}
                   total={table.getPageCount()}
                   />
           }
@@ -298,13 +300,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
               </>
             )}
           </Table>
-          {paginationProps?.paginate &&
+          {pagination &&
             <Pagination
                 current={table.getState().pagination.pageIndex + 1}
                 key={`pagination-bottom-${table.getState().pagination.pageIndex + 1}`}
                 marginTop="xs"
                 onChange={onPageChange}
-                range={5}
+                range={paginationProps?.range ? paginationProps?.range : 5}
                 total={table.getPageCount()}
             />
           }

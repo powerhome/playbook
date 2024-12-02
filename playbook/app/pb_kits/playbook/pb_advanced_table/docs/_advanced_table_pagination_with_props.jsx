@@ -2,7 +2,7 @@ import React from "react"
 import { AdvancedTable } from "playbook-ui"
 import PAGINATION_MOCK_DATA from "./advanced_table_pagination_mock_data.json"
 
-const AdvancedTablePagination = (props) => {
+const AdvancedTablePaginationWithProps = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -35,11 +35,18 @@ const AdvancedTablePagination = (props) => {
     },
   ]
 
+  const paginationProps = {
+    pageIndex: 1,
+    pageSize: 20,
+    range: 2
+  }
+  
   return (
     <>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           pagination
+          paginationProps={paginationProps}
           tableData={PAGINATION_MOCK_DATA}
           {...props}
       />
@@ -47,4 +54,4 @@ const AdvancedTablePagination = (props) => {
   )
 }
 
-export default AdvancedTablePagination
+export default AdvancedTablePaginationWithProps
