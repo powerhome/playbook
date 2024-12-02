@@ -84,4 +84,30 @@ RSpec.describe Playbook::PbCurrency::Currency do
       expect(num.title_props[:text]).to eq "1,234,567,890"
     end
   end
+
+  describe "when given a negative value" do
+    it "show negative sign to the left of currency sign with small variant" do
+      num = subject.new(amount: "-123.45", size: "sm")
+
+      expect(num.negative_sign).to eq "-"
+      expect(num.title_props[:text]).to eq "123"
+    end
+
+    it "show negative sign to the right of currency sign with medium, large, and no sign variants" do
+      md_num = subject.new(amount: "-123.45", size: "md")
+
+      expect(md_num.negative_sign).to eq ""
+      expect(md_num.title_props[:text]).to eq "-123"
+
+      lg_num = subject.new(amount: "-123.45", size: "lg")
+
+      expect(lg_num.negative_sign).to eq ""
+      expect(lg_num.title_props[:text]).to eq "-123"
+
+      no_symbol_num = subject.new(amount: "-123.45", size: "sm", symbol: "")
+
+      expect(no_symbol_num.negative_sign).to eq ""
+      expect(no_symbol_num.title_props[:text]).to eq "-123"
+    end
+  end
 end
