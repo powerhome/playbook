@@ -45,11 +45,12 @@
     class: "checkbox-class"
   %>
   <%= form.date_picker :example_date_picker_1, props: { label: true } %>
+  <%= form.date_picker :example_date_picker_2,  props: { label: true,  reset_to_default: true, default_date: "06/09/1994" } %>
   <%= form.star_rating_field :example_star_rating, props: { variant: "interactive", label: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>
-    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary", onclick: "resetDates()"  } %>
   <% end %>
 <% end %>
 

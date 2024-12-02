@@ -24,9 +24,11 @@ type DatePickerConfig = {
   required: boolean,
   hideIcon?: boolean;
   inLine?: boolean,
+  inputValue: string,
   onChange: (dateStr: string, selectedDates: Date[]) => void,
   selectionType?: "month" | "week" | "quickpick" | "",
   onClose: (dateStr: Date[] | string, selectedDates: Date[] | string) => void,
+  resetToDefault?: boolean,
   showTimezone?: boolean,
   staticPosition: boolean,
   thisRangesEndToday?: boolean,
@@ -50,6 +52,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     disableWeekdays,
     enableTime,
     format,
+    inputValue,
     maxDate,
     minDate,
     mode,
@@ -59,6 +62,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     plugins,
     position = "auto",
     positionElement,
+    resetToDefault,
     required,
     selectionType,
     showTimezone,
@@ -241,6 +245,12 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   dropdown.addEventListener('input', (e: Event & { target: { value: string}}) => {
     picker.changeYear(Number(e.target.value))
   })
+
+  // add data atrribute for reset to default
+  const element = document.querySelector(`#${pickerId}`);
+  if (resetToDefault && defaultDate && element) {
+    element.setAttribute("data-pb-date-picker", defaultDate?.toString());
+  }
 
   // Reverse month and year dropdown reset on form.reset()
   if (picker.input.form) {

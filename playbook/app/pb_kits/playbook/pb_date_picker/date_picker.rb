@@ -40,6 +40,8 @@ module Playbook
                         default: {}
       prop :input_data, type: Playbook::Props::HashProp,
                         default: {}
+      prop :input_options, type: Playbook::Props::HashProp,
+                           default: {}
       prop :max_date, type: Playbook::Props::String
       prop :min_date, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String
@@ -55,6 +57,8 @@ module Playbook
       prop :position, type: Playbook::Props::String,
                       default: "auto"
       prop :position_element, type: Playbook::Props::String
+      prop :reset_to_default, type: Playbook::Props::Boolean,
+                              default: false
       prop :scroll_container, type: Playbook::Props::String
       prop :selection_type, type: Playbook::Props::Enum,
                             values: %w[week month quickpick none],
@@ -98,6 +102,7 @@ module Playbook
           plugins: plugins,
           position: position,
           positionElement: position_element,
+          resetToDefault: reset_to_default,
           required: required,
           selectionType: selection_type,
           showTimezone: show_timezone,
