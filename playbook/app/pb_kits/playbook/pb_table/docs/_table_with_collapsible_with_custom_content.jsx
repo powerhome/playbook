@@ -7,14 +7,15 @@ import Image from '../../pb_image/_image'
 import Flex from '../../pb_flex/_flex'
 import Card from '../../pb_card/_card'
 
-const TableWithCollapsibleWithIcon = (props) => {
+const TableWithCollapsibleWithCustomContent = (props) => {
 
   const Content = () => {
     return (
       <Card 
           borderNone
           color="light" 
-          padding="sm"
+          paddingX="xl"
+          paddingY="md"
       >
          <Body paddingBottom="sm" 
              text="Expanded Custom Layout"
@@ -92,4 +93,4 @@ const TableWithCollapsibleWithIcon = (props) => {
   )
 }
 
-export default TableWithCollapsibleWithIcon
+export default TableWithCollapsibleWithCustomContent
