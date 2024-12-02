@@ -35,13 +35,15 @@ const AdvancedTablePagination = (props) => {
     },
   ]
 
+  const paginationProps = {
+    pageIndex: 1,
+    pageSize: 20
+  }
   return (
     <>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
-          pageIndex={1}
-          pageSize={20}
-          pagination
+          paginationProps={paginationProps}
           tableData={PAGINATION_MOCK_DATA}
           {...props}
       />

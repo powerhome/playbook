@@ -44,9 +44,7 @@ type AdvancedTableProps = {
   loading?: boolean | string
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
-  pagination?: boolean
-  pageIndex?: number
-  pageSize?: number
+  paginationProps?: GenericObject
   responsive?: "scroll" | "none",
   sortControl?: GenericObject
   tableData: GenericObject[]
@@ -72,9 +70,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     loading,
     onRowToggleClick,
     onToggleExpansionClick,
-    pagination = false,
-    pageIndex = 0,
-    pageSize = 10,
+    paginationProps,
     responsive = "scroll",
     sortControl,
     tableData,
@@ -185,13 +181,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }
 
-  const paginagionInitializer = pagination ? {
+  const paginagionInitializer = paginationProps ? {
     getPaginationRowModel: getPaginationRowModel(),
     paginateExpandedRows: false,
     initialState: {
         pagination: {
-            pageIndex,
-            pageSize,
+            pageIndex: paginationProps.pageIndex,
+            pageSize: paginationProps.pageSize,
         },
     },
 } : {}
@@ -275,7 +271,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           }}
       >
         <>
-          {pagination &&
+          {paginationProps &&
               <Pagination
                   current={table.getState().pagination.pageIndex + 1}
                   key={`pagination-top-${table.getState().pagination.pageIndex + 1}`}
@@ -302,7 +298,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
               </>
             )}
           </Table>
-          {pagination &&
+          {paginationProps &&
             <Pagination
                 current={table.getState().pagination.pageIndex + 1}
                 key={`pagination-bottom-${table.getState().pagination.pageIndex + 1}`}
