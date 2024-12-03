@@ -174,8 +174,6 @@ $pb_selectable_paddings: (
       &:checked ~ label {
         @include pb_card_selected_dark;
         background: $bg_dark_card;
-        border-width: $pb_card_border_width;
-        outline: 1px solid $primary_action_dark;
       }
     }
 
