@@ -7,6 +7,7 @@ import {
   createColumnHelper,
   getCoreRowModel,
   getExpandedRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   Row,
   useReactTable,
@@ -25,6 +26,7 @@ import { updateExpandAndCollapseState } from "./Utilities/ExpansionControlHelper
 import { CustomCell } from "./Components/CustomCell"
 import { TableHeader } from "./SubKits/TableHeader"
 import { TableBody } from "./SubKits/TableBody"
+import Pagination from "../pb_pagination/_pagination"
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
@@ -42,6 +44,8 @@ type AdvancedTableProps = {
   loading?: boolean | string
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
+  pagination?: boolean,
+  paginationProps?: GenericObject
   responsive?: "scroll" | "none",
   sortControl?: GenericObject
   tableData: GenericObject[]
@@ -67,6 +71,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     loading,
     onRowToggleClick,
     onToggleExpansionClick,
+    pagination = false,
+    paginationProps,
     responsive = "scroll",
     sortControl,
     tableData,
@@ -177,6 +183,17 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }
 
+  const paginationInitializer = pagination ? {
+    getPaginationRowModel: getPaginationRowModel(),
+    paginateExpandedRows: false,
+    initialState: {
+        pagination: {
+            pageIndex: paginationProps?.pageIndex ?? 0,
+            pageSize: paginationProps?.pageSize ??  20,
+        },
+    },
+} : {}
+
 //initialize table
   const table = useReactTable({
     data: loading ? Array(loadingStateRowCount).fill({}) : tableData,
@@ -189,6 +206,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     enableSortingRemoval: false,
     sortDescFirst: true,
     ...expandAndSortState(),
+    ... paginationInitializer,
     ...tableOptions,
   })
 
@@ -227,6 +245,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     className
   )
 
+  const onPageChange = (page: number) => {
+    table.setPageIndex(page - 1)
+  }
+
   return (
     <div {...ariaProps} 
         {...dataProps} 
@@ -250,23 +272,45 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             toggleExpansionIcon,
           }}
       >
-        <Table
-            className={`${loading ? "content-loading" : ""}`}
-            dark={dark}
-            dataTable
-            numberSpacing="tabular"
-            responsive="none"
-            {...tableProps}
-        >
-          {children ? (
-            children
-          ) : (
-            <>
-              <TableHeader />
-              <TableBody />
-            </>
-          )}
-        </Table>
+        <>
+          {pagination &&
+              <Pagination
+                  current={table.getState().pagination.pageIndex + 1}
+                  key={`pagination-top-${table.getState().pagination.pageIndex + 1}`}
+                  marginBottom="xs"
+                  onChange={onPageChange}
+                  range={paginationProps?.range ? paginationProps?.range : 5}
+                  total={table.getPageCount()}
+                  />
+          }
+          <Table
+              className={`${loading ? "content-loading" : ""}`}
+              dark={dark}
+              dataTable
+              numberSpacing="tabular"
+              responsive="none"
+              {...tableProps}
+          >
+            {children ? (
+              children
+            ) : (
+              <>
+                <TableHeader />
+                <TableBody />
+              </>
+            )}
+          </Table>
+          {pagination &&
+            <Pagination
+                current={table.getState().pagination.pageIndex + 1}
+                key={`pagination-bottom-${table.getState().pagination.pageIndex + 1}`}
+                marginTop="xs"
+                onChange={onPageChange}
+                range={paginationProps?.range ? paginationProps?.range : 5}
+                total={table.getPageCount()}
+            />
+          }
+        </>
       </AdvancedTableContext.Provider>
     </div>
   )

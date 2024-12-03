@@ -18,3 +18,5 @@ examples:
   - advanced_table_inline_row_loading: Inline Row Loading
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell: Custom Components for Cells
+  - advanced_table_pagination: Pagination
+  - advanced_table_pagination_with_props: Pagination Props
