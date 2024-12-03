@@ -76,7 +76,7 @@ module Playbook
       end
 
       def sticky_left_column_class
-        sticky_left_column ? "sticky-left-column" : nil
+        sticky_left_column.empty? ? nil : "sticky-left-column"
       end
 
       def striped_class
