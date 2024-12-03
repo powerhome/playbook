@@ -1,27 +1,55 @@
 import React from 'react'
-
-import Table from '../_table'
-import Icon from '../../pb_icon/_icon'
-import Card from '../../pb_card/_card'
+import {Pill, Background, Table, Icon, Card} from "playbook-ui"
 
 const TableWithCollapsibleWithNestedTable = (props) => {
 
   const Content = () => {
     return (
-      <Card 
-          borderNone
+      <Card borderNone 
           color="light" 
           padding="none"
-          >
-        <Table>
+      >
+        <Table size="sm">
           <Table.Head>
-            <Table.Row>
-            <Table.Header>{'Column 1'}</Table.Header>
-          <Table.Header>{'Column 2'}</Table.Header>
-          <Table.Header>{'Column 3'}</Table.Header>
-          </Table.Row>
+            <Background tag="tr">
+              <Table.Header>{"Alt Header"}</Table.Header>
+              <Table.Header>{"Alt Header"}</Table.Header>
+              <Table.Header>{"Alt Header"}</Table.Header>
+              <Table.Header>{"Alt Header"}</Table.Header>
+            </Background>
           </Table.Head>
-          
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>{"Expanded"}</Table.Cell>
+              <Table.Cell>{"Expanded"}</Table.Cell>
+              <Table.Cell>{"Expanded"}</Table.Cell>
+              <Table.Cell>
+                  <Pill text="Pill" 
+                      variant="primary"
+                  />
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>{"Expanded"}</Table.Cell>
+              <Table.Cell>{"Expanded"}</Table.Cell>
+              <Table.Cell>{"Expanded"}</Table.Cell>
+              <Table.Cell>
+                  <Pill text="Pill" 
+                      variant="primary"
+                  />
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>{"Expanded"}</Table.Cell>
+              <Table.Cell>{"Expanded"}</Table.Cell>
+              <Table.Cell>{"Expanded"}</Table.Cell>
+              <Table.Cell>
+                  <Pill text="Pill" 
+                      variant="primary"
+                  />
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
         </Table>
       </Card>
     );
@@ -46,6 +74,7 @@ const TableWithCollapsibleWithNestedTable = (props) => {
       <Table.Body>
         <Table.Row collapsible 
             collapsibleContent={<Content/>}
+            collapsibleSideHighlight={false}
         >
           <Table.Cell>{'Value 1'}</Table.Cell>
           <Table.Cell>{'Value 2'}</Table.Cell>
