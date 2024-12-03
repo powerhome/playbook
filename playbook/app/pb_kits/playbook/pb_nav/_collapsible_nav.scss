@@ -223,6 +223,7 @@
         }
       }
       [class*="pb_collapsible_nav_item"][class*="pb_nav_list_item_link_collapsible"][class*="pb_nav_list_kit_item"] {
+        box-shadow: unset !important;
         .pb_nav_list_item_text_collapsible {
           color: $white !important;
         }
@@ -260,6 +261,13 @@
           &::after {
             background-color: $border_dark;
           }
+        }
+      }
+
+      &[class*="_active"] {
+        > .pb_collapsible_main_kit {
+          background-color: $primary;
+          box-shadow: 0 2px 10px 0 $shadow_dark;
         }
       }
     }
