@@ -20,6 +20,7 @@ type TableRowPropTypes = {
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
+  toggleCellId?: string;
   sideHighlightColor: string;
   tag?: "table" | "div";
 };
@@ -35,6 +36,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
     data = {},
     htmlOptions = {},
     id,
+    toggleCellId,
     sideHighlightColor = "none",
     tag = "table",
   } = props;
@@ -56,6 +58,20 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
 
   const colSpan = React.Children.count(children);
 
+  const handleRowClick = (event) => {
+    if (toggleCellId) {
+      const clickedCell = event.target instanceof HTMLElement
+      ? event.target.closest(`td#${toggleCellId}`)
+      : null;
+
+    if (clickedCell) {
+      setIsCollapsed(!isCollapsed);
+    }
+    } else {
+      setIsCollapsed(!isCollapsed);
+    }
+  };
+    
   return (
     <>
       {collapsible ? (
@@ -67,8 +83,8 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
                 {...htmlProps}
                 className={classes}
                 id={id}
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                style={{ cursor: "pointer" }}
+                onClick={(e)=>handleRowClick(e)}
+                style={{ cursor: toggleCellId ? "default" : "pointer" }}
             >
               {children}
             </tr>
@@ -98,7 +114,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
                 {...htmlProps}
                 className={classes}
                 id={id}
-                onClick={() => setIsCollapsed(!isCollapsed)}
+                onClick={handleRowClick}
                 style={{ cursor: "pointer" }}
             >
               {children}
@@ -112,8 +128,9 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
               >
                 <tr/>
                 <Collapsible.Content 
+                    className={collapsibleSideHighlight ? `table_collapsible_side_highlight` : ''}
                     margin="none"
-                    padding="none" 
+                    padding="none"
                 >
                  {collapsibleContent}
                 </Collapsible.Content>
