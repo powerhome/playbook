@@ -9,6 +9,7 @@ examples:
   - currency_matching_decimals: Matching Decimals
   - currency_unstyled: Unstyled
   - currency_comma_separator: Comma Separator
+  - currency_negative: Negative
   
   react:
   - currency_variants: Variants
@@ -19,6 +20,7 @@ examples:
   - currency_matching_decimals: Matching Decimals
   - currency_unstyled: Unstyled
   - currency_comma_separator: Comma Separator
+  - currency_negative: Negative
 
   swift:
   - currency_size_swift: Size

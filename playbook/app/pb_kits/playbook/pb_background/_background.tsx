@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 
 type BackgroundColors = 'gradient' |
   'dark' |'light' | 'white' | 'success' | 'warning' | 'error' | 'info' | 'neutral' | 'primary' | 'shadow' |
@@ -145,6 +145,12 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     } : {})
   };
 
+  const dynamicInlineProps = globalInlineProps(props);
+  const combinedStyles = {
+    ...backgroundStyle,
+    ...dynamicInlineProps
+  };
+
   const Tag: React.ReactElement | any = `${tag}`;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -158,7 +164,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
         alt={alt}
         className={classes}
         id={id}
-        style={backgroundStyle}
+        style={combinedStyles}
     >
       {children}
     </Tag>

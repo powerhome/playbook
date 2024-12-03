@@ -11,7 +11,9 @@
                                 </button>
                             <% end %>
                             <%= pb_rails("flex/flex_item", props:{padding_left: index.zero? && object.row[:children].present? ? "none" : "xs"}) do %>
-                                <% if index.zero? %>
+                                <% if column[:custom_renderer].present? %>
+                                    <%= raw(column[:custom_renderer].call(object.row, custom_renderer_value(column, index))) %>
+                                <% elsif index.zero? %>
                                     <% if object.depth.zero? %>
                                         <%= object.row[column[:accessor].to_sym] %>
                                     <% else %>

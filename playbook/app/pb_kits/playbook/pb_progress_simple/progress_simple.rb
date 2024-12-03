@@ -21,6 +21,11 @@ module Playbook
                      values: %w[default positive negative warning],
                      default: "default"
 
+      # Explicitly defining the width prop here so the local prop takes precedence over global width prop
+      def width
+        prop(:width)
+      end
+
       def number_value
         validate_required_progress_props
 

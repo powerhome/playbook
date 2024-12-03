@@ -30,6 +30,9 @@ require "playbook/top"
 require "playbook/right"
 require "playbook/bottom"
 require "playbook/vertical_align"
+require "playbook/height"
+require "playbook/min_height"
+require "playbook/max_height"
 
 module Playbook
   include ActionView::Helpers
@@ -67,6 +70,9 @@ module Playbook
     include Playbook::Right
     include Playbook::Bottom
     include Playbook::VerticalAlign
+    include Playbook::Height
+    include Playbook::MinHeight
+    include Playbook::MaxHeight
 
     prop :id
     prop :data, type: Playbook::Props::HashProp, default: {}
@@ -166,8 +172,17 @@ module Playbook
     end
 
     def dynamic_inline_props
-      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value}" if value.present? }.compact
+      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value}" if inline_validator(key, value) }.compact
       styles.join("; ").presence
+    end
+
+    def inline_validator(key, value)
+      return false if value.nil?
+      return false if height_values.include?(value) && key == :height
+      return false if min_height_values.include?(value) && key == :min_height
+      return false if max_height_values.include?(value) && key == :max_height
+
+      true
     end
   end
 end

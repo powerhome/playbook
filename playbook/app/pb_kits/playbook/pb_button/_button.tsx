@@ -37,7 +37,7 @@ type ButtonPropTypes = {
   type?: 'inline' | null,
   htmlType?: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
-  variant?: 'primary' | 'secondary' | 'link'| 'reaction',
+  variant?: 'primary' | 'secondary' | 'link'| 'danger' | 'reaction',
   wrapperClass?: string,
 } & GlobalProps
 
@@ -206,8 +206,6 @@ const Button = (props: ButtonPropTypes): React.ReactElement => {
               <Icon icon={icon ? icon : "face-smile-plus"} />
             )
           }
-
-        
         </button>
       );
     } else {

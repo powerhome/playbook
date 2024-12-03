@@ -12,6 +12,7 @@ module Playbook
       base.prop :margin_y
       base.prop :max_width
       base.prop :min_width
+      base.prop :width
       base.prop :padding
       base.prop :padding_bottom
       base.prop :padding_left
@@ -33,11 +34,21 @@ module Playbook
       }
     end
 
+    def width_options
+      {
+        width: "w",
+      }
+    end
+
     def max_width_values
       %w[0% xs sm md lg xl xxl 0 none 100%]
     end
 
     def min_width_values
+      %w[0% xs sm md lg xl xxl 0 none 100%]
+    end
+
+    def width_values
       %w[0% xs sm md lg xl xxl 0 none 100%]
     end
 
@@ -123,6 +134,16 @@ module Playbook
       selected_mw_props.map do |k|
         width_value = send(k)
         "max_width_#{filter_classname(width_value)}" if max_width_values.include? width_value
+      end.compact.join(" ")
+    end
+
+    def width_props
+      selected_w_props = width_options.keys.select { |sk| try(sk) }
+      return nil unless selected_w_props.present?
+
+      selected_w_props.map do |k|
+        width_value = send(k)
+        "width_#{filter_classname(width_value)}" if width_values.include? width_value
       end.compact.join(" ")
     end
   end

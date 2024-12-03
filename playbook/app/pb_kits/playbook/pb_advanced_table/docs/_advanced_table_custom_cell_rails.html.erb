@@ -1,0 +1,53 @@
+<%
+  column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+      custom_renderer: ->(row, value) {
+        capture do
+          pb_rails("flex") do
+            pb_rails("title", props: { text: value, size: 4 }) +
+            pb_rails("badge", props: { dark: true, margin_left: "xxs", text: row[:newEnrollments].to_i > 20 ? "High" : "Low", variant: "neutral" })
+          end
+        end
+      }
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      custom_renderer: ->(row, value) { pb_rails("pill", props: { text: value, variant: "success" }) }
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+      custom_renderer: ->(row, value) { content_tag(:a, value, href: "#") }
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+      custom_renderer: ->(row, value) {
+        capture do
+          pb_rails("flex", props: { align_items: "end", orientation: "column" }) do
+            pb_rails("detail", props: { bold: true, color: "default", text: value }) +
+            pb_rails("caption", props: { size: "xs", text: row[:graduatedStudents] })
+          end
+        end
+      }
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    }
+  ]
+%>
+
+<%= pb_rails("advanced_table", props: { id: "custom_cell", table_data: @table_data, column_definitions: column_definitions }) %>

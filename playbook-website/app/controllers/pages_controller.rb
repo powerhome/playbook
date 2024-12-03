@@ -324,7 +324,13 @@ private
     group_components = []
     aggregate_kits.each do |kit|
       group_components.push(kit["components"].map do |component|
-        { name: component["name"], status: component["status"] }
+        {
+          name: component["name"],
+          status: component["status"],
+          icons_used: component["icons_used"],
+          react_rendered: component["react_rendered"],
+          enhanced_element_used: component["enhanced_element_used"],
+        }
       end)
     end
     group_components.flatten
@@ -360,6 +366,9 @@ private
     if matching_kit
       @kit = matching_kit[:name]
       @kit_status = matching_kit[:status]
+      @icons_used = matching_kit[:icons_used]
+      @react_rendered = matching_kit[:react_rendered]
+      @enhanced_element_used = matching_kit[:enhanced_element_used]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
     end

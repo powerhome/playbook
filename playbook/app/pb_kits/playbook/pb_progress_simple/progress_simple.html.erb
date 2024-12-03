@@ -1,9 +1,10 @@
-<%= content_tag(:div, class: object.wrapper_classname) do %>
+<%= content_tag(:div,
+class: object.wrapper_classname,
+style: object.style) do %>
   <%= content_tag(:div,
   id: object.id,
   data: object.data_values,
   class: object.classname,
-  style: object.style,
   **combined_html_options) do %>
     <%= content_tag(:div, "",
       class: "progress_simple_value",

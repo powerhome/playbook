@@ -34,6 +34,14 @@ const ButtonDefault = (props) => (
         text='Button Disabled'
         {...props}
     />
+    <Button
+        marginRight='lg'
+        onClick={() => alert("button clicked!")}
+        tabIndex={0}
+        text='Button Danger'
+        variant='danger'
+        {...props}
+    />
   </div>
 )
 

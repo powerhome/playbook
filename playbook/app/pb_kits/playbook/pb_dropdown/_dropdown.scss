@@ -53,6 +53,7 @@
     }
 
     .pb_dropdown_container {
+      position: absolute;
       background-color: $white;
       overflow: hidden;
       box-shadow: $shadow_deep;
