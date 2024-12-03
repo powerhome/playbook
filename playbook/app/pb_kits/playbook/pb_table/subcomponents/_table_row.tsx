@@ -58,15 +58,15 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
 
   const colSpan = React.Children.count(children);
 
-  const handleRowClick = (event) => {
+  const handleRowClick = (event: React.MouseEvent) => {
     if (toggleCellId) {
       const clickedCell = event.target instanceof HTMLElement
-      ? event.target.closest(`td#${toggleCellId}`)
-      : null;
-
-    if (clickedCell) {
-      setIsCollapsed(!isCollapsed);
-    }
+        ? event.target.closest(`#${toggleCellId}`)
+        : null;
+  
+      if (clickedCell) {
+        setIsCollapsed(!isCollapsed);
+      }
     } else {
       setIsCollapsed(!isCollapsed);
     }
