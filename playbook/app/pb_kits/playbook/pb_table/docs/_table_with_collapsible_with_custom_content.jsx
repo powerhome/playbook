@@ -7,6 +7,7 @@ const TableWithCollapsibleWithCustomContent = (props) => {
     return (
       <Card 
           borderNone
+          borderRadius="none"
           color="light" 
           paddingX="xl"
           paddingY="md"

@@ -1,15 +1,18 @@
 import React from 'react'
-import { Table, Background, Icon } from 'playbook-ui'
+import { Table, Card, Icon, Body } from 'playbook-ui'
 
 const TableWithCollapsibleWithCustomClick = (props) => {
 
   const Content = () => {
     return (
-      <Background color="light" 
+      <Card 
+          background="light"
+          borderNone
+          borderRadius="none"
           padding="md"
       >
-        <div>Nested content inside a Table Row</div>
-      </Background>
+        <Body>Nested content inside a Table Row</Body>
+      </Card>
     );
   };
 
