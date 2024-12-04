@@ -60,12 +60,14 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
 
   const handleRowClick = (event: React.MouseEvent) => {
     if (toggleCellId) {
-      const clickedCell = event.target instanceof HTMLElement
-        ? event.target.closest(`#${toggleCellId}`)
-        : null;
-  
-      if (clickedCell) {
-        setIsCollapsed(!isCollapsed);
+      const target = event.target as HTMLElement;
+      const clickedCell = target.closest(`#${toggleCellId}`);
+      const isIconClick =
+      target instanceof SVGElement &&
+      (target.matches("svg.pb_custom_icon") || target.closest("svg.pb_custom_icon"));
+
+        if (clickedCell || isIconClick) { 
+      setIsCollapsed(!isCollapsed);
       }
     } else {
       setIsCollapsed(!isCollapsed);

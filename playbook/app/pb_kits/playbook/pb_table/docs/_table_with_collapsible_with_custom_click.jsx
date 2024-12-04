@@ -33,7 +33,6 @@ return (
         <Table.Body>
           <Table.Row collapsible 
               collapsibleContent={<Content/>}
-              id="row-1"
               toggleCellId="cell-1"
           >
             <Table.Cell>{'Value 1'}</Table.Cell>
@@ -52,21 +51,45 @@ return (
             </Table.Cell>
 
           </Table.Row>
-          <Table.Row>
+          <Table.Row collapsible 
+              collapsibleContent={<Content/>}
+              toggleCellId="cell-2"
+          >
             <Table.Cell>{'Value 1'}</Table.Cell>
             <Table.Cell>{'Value 2'}</Table.Cell>
             <Table.Cell>{'Value 3'}</Table.Cell>
             <Table.Cell>{'Value 4'}</Table.Cell>
             <Table.Cell>{'Value 5'}</Table.Cell>
-            <Table.Cell>{''}</Table.Cell>
+            <Table.Cell cursor="pointer" 
+                id="cell-2"
+            >
+              <Icon
+                  color="primary"
+                  fixedWidth
+                  icon="chevron-down"
+              />
+            </Table.Cell>
+
           </Table.Row>
-          <Table.Row>
+          <Table.Row collapsible 
+              collapsibleContent={<Content/>}
+              toggleCellId="cell-3"
+          >
             <Table.Cell>{'Value 1'}</Table.Cell>
             <Table.Cell>{'Value 2'}</Table.Cell>
             <Table.Cell>{'Value 3'}</Table.Cell>
             <Table.Cell>{'Value 4'}</Table.Cell>
             <Table.Cell>{'Value 5'}</Table.Cell>
-            <Table.Cell>{''}</Table.Cell>
+            <Table.Cell cursor="pointer" 
+                id="cell-3"
+            >
+              <Icon
+                  color="primary"
+                  fixedWidth
+                  icon="chevron-down"
+              />
+            </Table.Cell>
+
           </Table.Row>
         </Table.Body>
       </Table>

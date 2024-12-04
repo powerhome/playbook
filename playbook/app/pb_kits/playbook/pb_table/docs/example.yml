@@ -29,32 +29,32 @@ examples:
     - table_outer_padding: Outer Padding
 
   react:
-    # - table_sm: Small
-    # - table_md: Medium
-    # - table_lg: Large
-    # - table_sticky: Sticky Header
-    # - table_alignment_row: Row Alignment
-    # - table_alignment_column: Cell Alignment
-    # - table_alignment_shift_row: Row Shift
-    # - table_alignment_shift_data: Cell Shift
-    # - table_side_highlight: Side Highlight
-    # - table_container: Table Container Off
-    # - table_disable_hover: Disable Hover
-    # - table_multiline: Multi-line
-    # - table_single_line: Force Single Line
-    # - table_data_table: Data Table
-    # - table_responsive_table: Responsive Tables
-    # - table_one_action: Table with 1 Action
-    # - table_two_actions: Table with 2 Actions
-    # - table_two_plus_actions: Table with 2+ Actions
-    # - table_action_middle: Table with Actions in the Middle
-    # - table_icon_buttons: Table with Icon Buttons
-    # - table_with_background_kit: Table With Background Kit
-    # - table_vertical_border: Vertical Borders
-    # - table_striped: Striped Table
-    # - table_with_subcomponents: Table with Sub Components (Table Elements)
-    # - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
-    # - table_outer_padding: Outer Padding
+    - table_sm: Small
+    - table_md: Medium
+    - table_lg: Large
+    - table_sticky: Sticky Header
+    - table_alignment_row: Row Alignment
+    - table_alignment_column: Cell Alignment
+    - table_alignment_shift_row: Row Shift
+    - table_alignment_shift_data: Cell Shift
+    - table_side_highlight: Side Highlight
+    - table_container: Table Container Off
+    - table_disable_hover: Disable Hover
+    - table_multiline: Multi-line
+    - table_single_line: Force Single Line
+    - table_data_table: Data Table
+    - table_responsive_table: Responsive Tables
+    - table_one_action: Table with 1 Action
+    - table_two_actions: Table with 2 Actions
+    - table_two_plus_actions: Table with 2+ Actions
+    - table_action_middle: Table with Actions in the Middle
+    - table_icon_buttons: Table with Icon Buttons
+    - table_with_background_kit: Table With Background Kit
+    - table_vertical_border: Vertical Borders
+    - table_striped: Striped Table
+    - table_with_subcomponents: Table with Sub Components (Table Elements)
+    - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
+    - table_outer_padding: Outer Padding
     - table_with_collapsible: Table with Collapsible
     - table_with_collapsible_with_custom_click: Table with Collapsible with Custom Click
     - table_with_collapsible_with_custom_content: Table with Collapsible with Custom Content

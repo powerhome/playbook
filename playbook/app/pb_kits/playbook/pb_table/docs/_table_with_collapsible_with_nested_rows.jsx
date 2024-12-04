@@ -10,6 +10,8 @@ const TableWithCollapsibleWithNestedRows = (props) => {
         <Table.Cell>Expanded</Table.Cell>
         <Table.Cell>Expanded</Table.Cell>
         <Table.Cell>Expanded</Table.Cell>
+        <Table.Cell>Expanded</Table.Cell>
+        <Table.Cell>Expanded</Table.Cell>
       </Background>
       </Table>
     );
