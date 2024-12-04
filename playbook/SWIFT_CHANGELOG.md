@@ -1,3 +1,14 @@
+# 🚀 Playbook Swift 6.5.1: Adjustments and Fixes! 🚀
+##### Dec 04, 2024
+
+This release includes adjustments and necessary fixes for release 6.5.0
+
+Adjustments and Fixes 6.5.0: This update includes essential changes and tweaks following our last major release to ensure everything runs. [#1665](https://github.com/powerhome/playbook-swift/pull/472) [(Everton Cunha)](https://github.com/evertoncunha)
+
+🔗 [Full Changelog](https://github.com/powerhome/playbook-swift/compare/6.5.0...6.5.1)
+
+
+
 # 🚀 Playbook Swift 6.5.0: Enhanced Dynamic Typeahead! 🚀
 ##### Nov 12, 2024
 
