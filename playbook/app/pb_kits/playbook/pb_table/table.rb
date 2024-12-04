@@ -76,7 +76,16 @@ module Playbook
       end
 
       def sticky_left_column_class
-        sticky_left_column.empty? ? nil : "sticky-left-column"
+        if sticky_left_column.empty?
+          nil
+        else
+          sticky_col_classname = "sticky-left-column sticky-columns"
+          sticky_left_column.each do |id|
+            sticky_col_classname += "-#{id}"
+          end
+
+          sticky_col_classname
+        end
       end
 
       def striped_class

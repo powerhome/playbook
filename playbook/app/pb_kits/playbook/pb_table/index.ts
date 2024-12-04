@@ -10,7 +10,6 @@ export default class PbTable extends PbEnhancedElement {
 
     connect(): void {
       const tables = document.querySelectorAll('.table-responsive-collapse');
-
       // Each Table
       [].forEach.call(tables, (table: HTMLTableElement) => {
         // Header Titles
@@ -21,7 +20,6 @@ export default class PbTable extends PbEnhancedElement {
               headers.push(header.textContent.replace(/\r?\n|\r/, ''));
             }
         });
-
         // for each row in tbody
         [].forEach.call(table.querySelectorAll('tbody tr'), (row: HTMLTableRowElement) => {
           // for each cell
@@ -37,19 +35,26 @@ export default class PbTable extends PbEnhancedElement {
     }
 
     private initStickyColumns(): void {
-      // Check if the table has sticky left columns class
+      // Find tables with sticky-left-column class
       const tables = document.querySelectorAll('.sticky-left-column');
 
       tables.forEach((table) => {
-        // Extract sticky left column IDs from headers
-        this.stickyLeftColumns = Array.from(table.querySelectorAll('th'))
-            .filter(header => header.id)
-            .map(header => header.id);
+        // Extract sticky left column IDs by looking at the component's class
+        const classList = Array.from(table.classList);
 
-        if (this.stickyLeftColumns.length > 0) {
-          this.handleStickyColumnsRef = this.handleStickyColumns.bind(this);
-          this.handleStickyColumns();
-          window.addEventListener('resize', this.handleStickyColumnsRef);
+        // Look for classes in the format sticky-left-column-{ids}
+        const stickyColumnClass = classList.find(cls => cls.startsWith('sticky-columns-'));
+        if (stickyColumnClass) {
+          // Extract the IDs from the class name
+          this.stickyLeftColumns = stickyColumnClass
+              .replace('sticky-columns-', '')
+              .split('-');
+
+          if (this.stickyLeftColumns.length > 0) {
+            this.handleStickyColumnsRef = this.handleStickyColumns.bind(this);
+            this.handleStickyColumns();
+            window.addEventListener('resize', this.handleStickyColumnsRef);
+          }
         }
       });
     }
