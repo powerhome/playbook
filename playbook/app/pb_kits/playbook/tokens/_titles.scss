@@ -37,30 +37,6 @@
   font-weight: $bolder;
 }
 
-@mixin pb_title_dark {
-    color: $text_dk_default;
-}
-
-@mixin pb_title_dark_link {
-    color: $active_dark;
-}
-
-@mixin pb_title_dark_light {
-  color: $text_dk_light;
-}
-
-@mixin pb_title_dark_lighter {
-  color: $text_dk_light;
-}
-
-@mixin pb_title_dark_error {
-  color: $error_dark;
-}
-
-@mixin pb_title_dark_success {
-  color: $success;
-}
-
 @mixin pb_title_thin {
   font-weight: $lighter;
   letter-spacing: $lspace_tight;
