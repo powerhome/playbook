@@ -13,10 +13,10 @@ type BreadCrumbItemProps = {
   aria?: { [key: string]: string }
   children?: React.ReactNode
   className?: string
+  component?: "a" | "span"
   data?: { [key: string]: string }
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
   id?: string
-  component?: "a" | "span"
   [x: string]: any
 }
 
@@ -25,12 +25,13 @@ const BreadCrumbItem = (props: BreadCrumbItemProps): React.ReactElement => {
     aria = {},
     children,
     className,
+    component = "a",
     data = {},
     htmlOptions = {},
     id,
-    component = "a",
     ...rest
   } = props
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
