@@ -1,5 +1,7 @@
-# 14.9.0
+# Fresh Features, Exciting Enhancements, and Key Fixes!
 #### November 29, 2024
+
+We're back with new updates, packed with important improvements, bug fixes, and new features! Highlights include global prop updates, a new red "danger" button variant for delete actions, as well as new table and form enhancements. Dive into the details below for all the updates!
 
 [14.9.0](https://github.com/powerhome/playbook/tree/14.9.0) full list of changes:
 
