@@ -6,12 +6,14 @@ const TableWithCollapsibleWithNestedTable = (props) => {
   const Content = () => {
     return (
         <Table 
+            borderRadius="none"
             container={false} 
-            size="sm" 
+            size="sm"
             {...props}
         >
           <Table.Head>
-            <Background tag="tr" 
+            <Background
+                tag="tr" 
                 {...props}
             >
               <Table.Header>{"Alt Header"}</Table.Header>

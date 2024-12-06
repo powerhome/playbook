@@ -5,7 +5,10 @@ const TableWithCollapsibleWithNestedRows = (props) => {
 
   const Content = () => {
     return (
-      <Table size="sm" 
+      <Table 
+          borderRadius="none"
+          container={false}
+          size="sm" 
           {...props}
       >
       <Background tag="tr" 
