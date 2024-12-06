@@ -22,7 +22,7 @@ type TextInputProps = {
   inline?: boolean,
   name: string,
   label: string,
-  mask?: 'zipCode' | 'postalCode' | 'ssn',
+  mask?: 'currency' | 'zipCode' | 'postalCode' | 'ssn',
   onChange: (e: React.FormEvent<HTMLInputElement>) => void,
   placeholder: string,
   required?: boolean,
