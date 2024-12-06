@@ -2,4 +2,7 @@
 
 .table_collapsible_side_highlight{
 border-left: 4px solid $primary;
+&.dark  {
+  border-left: 4px solid $active_dark;
+}
 }

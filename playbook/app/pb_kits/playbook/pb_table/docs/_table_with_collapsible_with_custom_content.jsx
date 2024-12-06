@@ -11,9 +11,11 @@ const TableWithCollapsibleWithCustomContent = (props) => {
           color="light" 
           paddingX="xl"
           paddingY="md"
+          {...props}
       >
          <Body paddingBottom="sm" 
              text="Expanded Custom Layout"
+             {...props}
          />
          <Flex justify="between">
            <Image
@@ -52,13 +54,14 @@ const TableWithCollapsibleWithCustomContent = (props) => {
       <Table.Body>
         <Table.Row collapsible 
             collapsibleContent={<Content/>}
+            {...props}
         >
           <Table.Cell>{'Value 1'}</Table.Cell>
           <Table.Cell>{'Value 2'}</Table.Cell>
           <Table.Cell>{'Value 3'}</Table.Cell>
           <Table.Cell>{'Value 4'}</Table.Cell>
           <Table.Cell>{'Value 5'}</Table.Cell>
-          <Table.Cell>{ 
+          <Table.Cell textAlign="right">{ 
             <Icon
                 color="primary"
                 fixedWidth

@@ -5,8 +5,12 @@ const TableWithCollapsibleWithNestedRows = (props) => {
 
   const Content = () => {
     return (
-      <Table size="sm">
-      <Background tag="tr">
+      <Table size="sm" 
+          {...props}
+      >
+      <Background tag="tr" 
+          {...props}
+      >
         <Table.Cell>Expanded</Table.Cell>
         <Table.Cell>Expanded</Table.Cell>
         <Table.Cell>Expanded</Table.Cell>
@@ -43,7 +47,7 @@ const TableWithCollapsibleWithNestedRows = (props) => {
           <Table.Cell>{'Value 3'}</Table.Cell>
           <Table.Cell>{'Value 4'}</Table.Cell>
           <Table.Cell>{'Value 5'}</Table.Cell>
-          <Table.Cell>{ 
+          <Table.Cell textAlign="right">{ 
             <Icon
                 color="primary"
                 fixedWidth

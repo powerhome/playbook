@@ -6,12 +6,12 @@ const TableWithCollapsibleWithCustomClick = (props) => {
   const Content = () => {
     return (
       <Card 
-          background="light"
           borderNone
           borderRadius="none"
           padding="md"
+          {...props}
       >
-        <Body>Nested content inside a Table Row</Body>
+        <Body {...props}>Nested content inside a Table Row</Body>
       </Card>
     );
   };
@@ -37,6 +37,7 @@ return (
           <Table.Row collapsible 
               collapsibleContent={<Content/>}
               toggleCellId="cell-1"
+              {...props}
           >
             <Table.Cell>{'Value 1'}</Table.Cell>
             <Table.Cell>{'Value 2'}</Table.Cell>
@@ -45,6 +46,7 @@ return (
             <Table.Cell>{'Value 5'}</Table.Cell>
             <Table.Cell cursor="pointer" 
                 id="cell-1"
+                textAlign="right"
             >
               <Icon
                   color="primary"
@@ -57,6 +59,7 @@ return (
           <Table.Row collapsible 
               collapsibleContent={<Content/>}
               toggleCellId="cell-2"
+              {...props}
           >
             <Table.Cell>{'Value 1'}</Table.Cell>
             <Table.Cell>{'Value 2'}</Table.Cell>
@@ -65,6 +68,7 @@ return (
             <Table.Cell>{'Value 5'}</Table.Cell>
             <Table.Cell cursor="pointer" 
                 id="cell-2"
+                textAlign="right"
             >
               <Icon
                   color="primary"
@@ -77,6 +81,7 @@ return (
           <Table.Row collapsible 
               collapsibleContent={<Content/>}
               toggleCellId="cell-3"
+              {...props}
           >
             <Table.Cell>{'Value 1'}</Table.Cell>
             <Table.Cell>{'Value 2'}</Table.Cell>
@@ -85,6 +90,7 @@ return (
             <Table.Cell>{'Value 5'}</Table.Cell>
             <Table.Cell cursor="pointer" 
                 id="cell-3"
+                textAlign="right"
             >
               <Icon
                   color="primary"

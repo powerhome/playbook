@@ -18,6 +18,7 @@ type TableRowPropTypes = {
   collapsibleContent?: React.ReactNode[] | React.ReactNode;
   collapsibleSideHighlight?: boolean;
   data?: { [key: string]: string };
+  dark?: boolean;
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   toggleCellId?: string;
@@ -34,6 +35,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
     collapsibleSideHighlight = true,
     className,
     data = {},
+    dark = false,
     htmlOptions = {},
     id,
     toggleCellId,
@@ -93,6 +95,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
             <tr>
               <Collapsible
                   collapsed={isCollapsed}
+                  dark={dark}
                   htmlOptions={{ colSpan: colSpan }}
                   padding="none"
                   tag="td"
@@ -100,6 +103,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
                 <tr/>
                 <Collapsible.Content 
                     className={collapsibleSideHighlight ? `table_collapsible_side_highlight` : ''}
+                    dark={dark}
                     margin="none"
                     padding="none"
                 >
@@ -124,6 +128,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
             <tr>
               <Collapsible
                   collapsed={isCollapsed}
+                  dark={dark}
                   htmlOptions={{ colSpan: colSpan }}
                   padding="none"
                   tag="td"
@@ -131,6 +136,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
                 <tr/>
                 <Collapsible.Content 
                     className={collapsibleSideHighlight ? `table_collapsible_side_highlight` : ''}
+                    dark={dark}
                     margin="none"
                     padding="none"
                 >

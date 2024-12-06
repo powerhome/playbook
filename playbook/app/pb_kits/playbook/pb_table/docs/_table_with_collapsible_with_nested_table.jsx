@@ -1,17 +1,19 @@
 import React from 'react'
-import {Pill, Background, Table, Icon, Card} from "playbook-ui"
+import {Pill, Background, Table, Icon} from "playbook-ui"
 
 const TableWithCollapsibleWithNestedTable = (props) => {
 
   const Content = () => {
     return (
-      <Card borderNone 
-          color="light" 
-          padding="none"
-      >
-        <Table size="sm">
+        <Table 
+            container={false} 
+            size="sm" 
+            {...props}
+        >
           <Table.Head>
-            <Background tag="tr">
+            <Background tag="tr" 
+                {...props}
+            >
               <Table.Header>{"Alt Header"}</Table.Header>
               <Table.Header>{"Alt Header"}</Table.Header>
               <Table.Header>{"Alt Header"}</Table.Header>
@@ -26,6 +28,7 @@ const TableWithCollapsibleWithNestedTable = (props) => {
               <Table.Cell>
                   <Pill text="Pill" 
                       variant="primary"
+                      {...props}
                   />
               </Table.Cell>
             </Table.Row>
@@ -36,6 +39,7 @@ const TableWithCollapsibleWithNestedTable = (props) => {
               <Table.Cell>
                   <Pill text="Pill" 
                       variant="primary"
+                      {...props}
                   />
               </Table.Cell>
             </Table.Row>
@@ -46,12 +50,12 @@ const TableWithCollapsibleWithNestedTable = (props) => {
               <Table.Cell>
                   <Pill text="Pill" 
                       variant="primary"
+                      {...props}
                   />
               </Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>
-      </Card>
     );
   };
 
@@ -81,7 +85,7 @@ const TableWithCollapsibleWithNestedTable = (props) => {
           <Table.Cell>{'Value 3'}</Table.Cell>
           <Table.Cell>{'Value 4'}</Table.Cell>
           <Table.Cell>{'Value 5'}</Table.Cell>
-          <Table.Cell>{ 
+          <Table.Cell textAlign="right">{ 
             <Icon
                 color="primary"
                 fixedWidth

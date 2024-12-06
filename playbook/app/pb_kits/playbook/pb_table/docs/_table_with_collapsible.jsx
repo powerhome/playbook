@@ -6,12 +6,12 @@ const TableWithCollapsible = (props) => {
   const Content = () => {
     return (
       <Card 
-          background="light"
           borderNone
           borderRadius="none"
           padding="md"
+          {...props}
       >
-        <Body>Nested content inside a Table Row</Body>
+        <Body {...props}>Nested content inside a Table Row</Body>
       </Card>
     );
   };
@@ -35,13 +35,14 @@ return (
         <Table.Body>
           <Table.Row collapsible 
               collapsibleContent={<Content/>}
+              {...props}
           >
             <Table.Cell>{'Value 1'}</Table.Cell>
             <Table.Cell>{'Value 2'}</Table.Cell>
             <Table.Cell>{'Value 3'}</Table.Cell>
             <Table.Cell>{'Value 4'}</Table.Cell>
             <Table.Cell>{'Value 5'}</Table.Cell>
-            <Table.Cell>{ 
+            <Table.Cell textAlign="right">{ 
               <Icon
                   color="primary"
                   fixedWidth
