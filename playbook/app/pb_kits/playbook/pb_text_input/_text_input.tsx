@@ -109,8 +109,6 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
           maximumFractionDigits: 2,
         }).format(numericValue);
       },
-      // eslint-disable-next-line no-useless-escape
-      pattern: '^\$?(\d{1,3}(?:,\d{3})*)(\.\d{2})?$',
       placeholder: '$0.00',
     },
     zipCode: {
