@@ -100,7 +100,9 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
           return "";
         }
         const numericValue = parseFloat((parseInt(v) / 100).toFixed(2));
-
+        if (numericValue === 0) {
+          return "";
+        }
         return new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
