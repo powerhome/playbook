@@ -1,5 +1,5 @@
 import React from 'react'
-import BarGraph from 'playbook-ui'
+import BarGraph from '../_bar_graph'
 
 const chartData = [
   {
