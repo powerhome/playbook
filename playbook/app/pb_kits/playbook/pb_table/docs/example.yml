@@ -4,7 +4,6 @@ examples:
     - table_md: Medium
     - table_lg: Large
     - table_sticky: Sticky Header
-    - table_sticky_left_columns: Sticky Left Column
     - table_header: Table Header
     - table_alignment_row_rails: Row Alignment
     - table_alignment_column_rails: Cell Alignment
