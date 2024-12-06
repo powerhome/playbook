@@ -1,8 +1,10 @@
 import React, { forwardRef } from 'react'
 import classnames from 'classnames'
+import { FieldValues } from 'react-hook-form'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
+import { HookFormProps, withHookForm } from '../utilities/hookFormProps'
 import type { InputCallback } from '../types'
 import { getAllIcons } from "../utilities/icons/allicons"
 
@@ -16,7 +18,7 @@ type SelectOption = {
   disabled?: boolean,
 }
 
-type SelectProps = {
+type SelectProps<T extends FieldValues = FieldValues> = {
   aria?: { [key: string]: string },
   blankSelection?: string,
   children?: Node,
@@ -30,16 +32,17 @@ type SelectProps = {
   includeBlank?: string,
   inline?: boolean,
   label?: string,
-  margin: string,
+  margin?: string,
   marginBottom: string,
+  marginTop: string,
   multiple?: boolean,
   name?: string,
-  onChange: InputCallback<HTMLSelectElement>,
+  onChange?: InputCallback<HTMLSelectElement>,
   options: SelectOption[],
   required?: boolean,
   showArrow?: boolean,
   value?: string,
-} & GlobalProps
+} & GlobalProps & Partial<HookFormProps<T>>
 
 const createOptions = (options: SelectOption[]) => options.map((option, index) => (
   <option
@@ -51,7 +54,7 @@ const createOptions = (options: SelectOption[]) => options.map((option, index) =
   </option>
 ))
 
-const Select = ({
+const Select = <T extends FieldValues = FieldValues>({
   aria = {},
   blankSelection,
   children,
@@ -65,17 +68,20 @@ const Select = ({
   inline = false,
   multiple = false,
   name,
-  onChange = () => undefined,
+  onChange,
   options = [],
+  register,
   required = false,
+  rules,
   showArrow = false,
   value,
   ...props
-}: SelectProps, ref: React.LegacyRef<HTMLSelectElement>) => {
+}: SelectProps<T>, ref: React.LegacyRef<HTMLSelectElement>) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const optionsList = createOptions(options)
+  const hookFormProps = name ? withHookForm({ register, name, rules }) : {}
 
   const inlineClass = inline ? 'inline' : null
   const compactClass = compact ? 'compact' : null
@@ -91,21 +97,22 @@ const Select = ({
     compactClass
   );
 
-  const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
+  const icons = getAllIcons()
+  const angleDown = icons?.angleDown?.icon as { [key: string]: SVGElement }
 
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
   const selectBody =(() =>{
     if (children) return children
     return (
       <select
-          {...htmlOptions}
           {...domSafeProps(props)}
+          {...hookFormProps}
           disabled={disabled}
           id={name}
           multiple={multiple}
           name={name}
-          onChange={onChange}
-          ref={ref}
+          onChange={onChange || hookFormProps.onChange}
+          ref={ref || hookFormProps.ref}
           required={required}
           value={value}
       >
@@ -135,14 +142,12 @@ const Select = ({
           htmlFor={name}
       >
         {selectBody}
-        { multiple !== true ?
+        { multiple !== true && angleDown &&
           <Icon
               className="pb_select_kit_caret svg-inline--fa"
               customIcon={angleDown}
               fixedWidth
           />
-          :
-          null
         }
         {error &&
           <Body
