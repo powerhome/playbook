@@ -1,18 +1,9 @@
 <% data = [{
-    name: 'Installation',
-    data: [1475,200,3000,654,656]
+  name: 'Role',
+  data: [0, 200, 300, 654, 656],
 }, {
-    name: 'Manufacturing',
-    data: [4434,524,2320,440,500]
-}, {
-    name: 'Sales & Distribution',
-    data: [3387,743,1344,434,440,]
-}, {
-    name: 'Project Development',
-    data: [3227,878,999,780,1000]
-}, {
-    name: 'Other',
-    data: [1111,677,3245,500,200]
+  name: 'Company',
+  data: [150, 524, 320, 440, 500],
 }] %>
 
 <% bar_graph_options = {
@@ -25,11 +16,11 @@
         },
         xAxis: {
             categories: [
-                '<i class="far fa-apple-whole"></i> Jan',
-                '<i class="far fa-strawberry"></i> Feb',
-                '<i class="far fa-lemon"></i> Mar',
-                '<i class="far fa-pear"></i> Apr',
-                '<i class="far fa-peach"></i> May'
+                '<i style="color: red; font-size: 18px;" class="far fa-face-angry"></i>',
+                '<i style="color: orange; font-size: 18px;" class="far fa-face-frown"></i>',
+                '<i style="color: grey; font-size: 18px;" class="far fa-face-meh"></i>',
+                '<i style="color: #63E6BE; font-size: 18px;" class="far fa-face-smile"></i>',
+                '<i style="color: green; font-size: 18px;" class="far fa-laugh-beam sucess"></i>'
             ],
             labels: {
                 useHTML: true,
@@ -39,9 +30,10 @@
 } %>
 
 <%= pb_rails("bar_graph", props: {
-    axis_title: 'Number of Employees',
+    axis_title: '',
     chart_data: data,
     id: "bar-default",
+    legend: true,
     y_axis_min: 0,
     subtitle: 'Subtitle to replace',
     title: 'Bar Graph with Custom Overrides',
