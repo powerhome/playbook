@@ -48,15 +48,20 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
   const htmlProps = buildHtmlProps(htmlOptions);
   const sideHighlightClass =
     sideHighlightColor != "" ? `side_highlight_${sideHighlightColor}` : null;
+  
+  const [isCollapsed, setIsCollapsed] = useCollapsible(true);
+
+  const collapsibleRow = collapsible && isCollapsed === true ? "collapsible_table_row" : null;
   const classes = classnames(
     buildCss("pb_table_row_kit", sideHighlightClass),
     "pb_table_tr",
+    collapsibleRow,
     globalProps(props),
     className
   );
   const isTableTag = tag === "table";
 
-  const [isCollapsed, setIsCollapsed] = useCollapsible(true);
+  // const [isCollapsed, setIsCollapsed] = useCollapsible(true);
 
   const colSpan = React.Children.count(children);
 
