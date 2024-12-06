@@ -145,8 +145,16 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (isMaskedInput) {
       const inputValue = e.target.value
+
+      const cursorPosition = e.target.selectionStart;
+      const isAtEnd = cursorPosition === inputValue.length;
+      
       const formattedValue = INPUTMASKS[mask].format(inputValue)
       e.target.value = formattedValue
+
+      if (!isAtEnd) {
+        e.target.selectionStart = e.target.selectionEnd = cursorPosition
+      }
     }
     
     onChange(e)
