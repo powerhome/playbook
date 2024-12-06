@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, ChangeEvent } from 'react'
 import classnames from 'classnames'
 
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
@@ -22,6 +22,7 @@ type TextInputProps = {
   inline?: boolean,
   name: string,
   label: string,
+  mask?: 'zipCode' | 'postalCode' | 'ssn',
   onChange: (e: React.FormEvent<HTMLInputElement>) => void,
   placeholder: string,
   required?: boolean,
@@ -47,6 +48,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     htmlOptions = {},
     id,
     inline = false,
+    mask = null,
     name,
     label,
     onChange = () => { void 0 },
@@ -90,6 +92,48 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     />
   )
 
+  const INPUTMASKS = {
+    zipCode: {
+      format: (value: string) => {
+        const v = value.replace(/\D/g, '').slice(0, 5)
+        return v
+      },
+      pattern: '\\d{5}',
+      placeholder: '12345',
+    },
+    postalCode: {
+      format: (value: string) => {
+        const v = value.replace(/\D/g, '').slice(0, 9)
+        return v.replace(/(\d{5})(?=\d)/, '$1-')
+      },
+      pattern: '\\d{5}-\\d{4}',
+      placeholder: '12345-6789',
+    },
+    ssn: {
+      format: (value: string) => {
+        const v = value.replace(/\D/g, '').slice(0, 9)
+        
+        return v
+          .replace(/(\d{5})(?=\d)/, '$1-')
+          .replace(/(\d{3})(?=\d)/, '$1-')
+      },
+      pattern: '\\d{3}-\\d{2}-\\d{4}',
+      placeholder: '123-45-6789',
+    },
+  }
+
+  const isMaskedInput = mask && mask in INPUTMASKS
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (isMaskedInput) {
+      const inputValue = e.target.value
+      const formattedValue = INPUTMASKS[mask].format(inputValue)
+      e.target.value = formattedValue
+    }
+    
+    onChange(e)
+  }
+
   const childInput = children ? children.type === "input" : undefined
 
   const textInput = (
@@ -101,8 +145,9 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         id={id}
         key={id}
         name={name}
-        onChange={onChange}
-        placeholder={placeholder}
+        onChange={handleChange}
+        pattern={isMaskedInput ? INPUTMASKS[mask]?.pattern : undefined}
+        placeholder={placeholder || (isMaskedInput ? INPUTMASKS[mask]?.placeholder : undefined)}
         ref={ref}
         required={required}
         type={type}
