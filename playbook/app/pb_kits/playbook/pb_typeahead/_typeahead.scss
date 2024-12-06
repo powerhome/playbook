@@ -90,50 +90,7 @@
       }
     }
   }
-  &[class*=dark] {
-    .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
-      color: $text_dk_light;
-    }
-    [class^=pb_text_input_kit].dark .text_input_wrapper .text_input {
-      display: inherit !important;
-    }
-    .typeahead-kit-select__menu {
-      background-color: $bg_dark;
-      color: $white;
-      z-index: $z_1;
-    }
-    .typeahead-kit-select__option:hover {
-      background-color: $active_dark;
-    }
-    .typeahead-kit-select__indicator:hover {
-      color: $white;
-    }
-    .typeahead-kit-select__input {
-      color: white;
-      input:focus {
-        box-shadow: none;
-      }
-    }
-    .typeahead-kit-select__single-value {
-      color: white;
-    }
-    .typeahead-kit-select__option--is-focused {
-      background-color: $active_dark;
-    }
-    [class^=pb_list_kit] {
-      background-color: $bg_dark;
-    }
-    .pb_item_kit {
-      button {
-        color: white !important;
-      }
-      @media (hover:hover) {
-        &:hover {
-          background-color: rgba($white,.1);
-        }
-      }
-    }
-  }
+
   &.react-select, &.react-select .dark {
     .text_input {
       display: inherit;
@@ -182,7 +139,7 @@
       }
     }
   }
- 
+
   .typeahead-kit-select__menu {
     z-index: $z_1;
     .typeahead-kit-select__menu-list {
@@ -215,5 +172,114 @@
       }
     }
   }
-}
 
+  &[class*=dark] {
+    .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
+      color: $text_dk_light;
+    }
+    [class^=pb_text_input_kit].dark .text_input_wrapper .text_input {
+      display: inherit !important;
+    }
+    .typeahead-kit-select__menu {
+      background-color: $bg_dark;
+      color: $white;
+      z-index: $z_1;
+      .typeahead-kit-select__menu-list {
+        padding: 0;
+      }
+      .typeahead-kit-select__single-value {
+        color: white;
+      }
+
+      .typeahead-kit-select__option {
+        &.typeahead-kit-select__option--is-focused {
+          background-color: $hover_dark;
+        }
+        &.typeahead-kit-select__option--is-selected {
+          background-color: $active_dark;
+        }
+      }
+    }
+    .text_input_wrapper{
+      color: text_dk_default;
+    }
+    .typeahead-kit-select__option:hover {
+      background-color: $active_dark;
+    }
+    .typeahead-kit-select__indicator {
+      color: $text_dk_default;
+    }
+    .typeahead-kit-select__indicator:hover {
+      color: $text_dk_lighter;
+    }
+    .typeahead-kit-select__input {
+      color: white;
+      input:focus {
+        box-shadow: none;
+      }
+    }
+    .typeahead-kit-select__option--is-focused {
+      background-color: $active_dark;
+    }
+    [class^=pb_list_kit] {
+      background-color: $bg_dark;
+    }
+    .pb_item_kit {
+      button {
+        color: white !important;
+      }
+      @media (hover:hover) {
+        &:hover {
+          background-color: $hover_dark;
+        }
+      }
+    }
+
+    .text_input {
+      .typeahead-kit-select__input-container{
+        color: $text_dk_default
+      }
+      .typeahead-kit-select {
+        &__single-value{
+          color: $text_dk_default;
+        }
+      }
+      &.typeahead-kit-select {
+        &__single-value{
+          color: $text_dk_default;
+        }
+        &__control {
+          &--is-focused {
+            @include pb_textarea_focus;
+            @include transition_default;
+            border-color: $active_dark;
+            background-color: rgba($focus_input_dark,$opacity_5);
+            box-shadow: none;
+            .typeahead-plus-icon {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    &.inline {
+      &:not(:hover) {
+        .text_input {
+          background-color: transparent;
+          border-color: transparent;
+        }
+        .typeahead-kit-select__indicator {
+          color: transparent;
+        }
+      }
+
+      &:hover {
+        .text_input {
+          background-color: $hover_dark;
+        }
+      }
+    }
+
+  }
+}
