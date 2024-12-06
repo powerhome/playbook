@@ -93,6 +93,24 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   )
 
   const INPUTMASKS = {
+    currency: {
+      format: (value: string) => {
+        const v = value.replace(/[^0-9]/g, "")
+        if (v === "") {
+          return "";
+        }
+        const numericValue = parseFloat((parseInt(v) / 100).toFixed(2));
+
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 2,
+        }).format(numericValue);
+      },
+      // eslint-disable-next-line no-useless-escape
+      pattern: '^\$?(\d{1,3}(?:,\d{3})*)(\.\d{2})?$',
+      placeholder: '$0.00',
+    },
     zipCode: {
       format: (value: string) => {
         const v = value.replace(/\D/g, '').slice(0, 5)
