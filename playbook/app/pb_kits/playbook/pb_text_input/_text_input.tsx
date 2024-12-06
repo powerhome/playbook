@@ -148,13 +148,18 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     if (isMaskedInput) {
       const inputValue = e.target.value
 
-      const cursorPosition = e.target.selectionStart;
+      let cursorPosition = e.target.selectionStart;
       const isAtEnd = cursorPosition === inputValue.length;
       
       const formattedValue = INPUTMASKS[mask].format(inputValue)
       e.target.value = formattedValue
-
+      
+      // Keep cursor position
       if (!isAtEnd) {
+        // Account for added characters (e.g., commas added in currency)
+        if (formattedValue.length - inputValue.length === 1) {
+          cursorPosition = cursorPosition + 1
+        }
         e.target.selectionStart = e.target.selectionEnd = cursorPosition
       }
     }
