@@ -154,9 +154,11 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
       
       // Keep cursor position
       if (!isAtEnd) {
-        // Account for added characters (e.g., commas added in currency)
+        // Account for extra characters (e.g., commas added/removed in currency)
         if (formattedValue.length - inputValue.length === 1) {
           cursorPosition = cursorPosition + 1
+        } else if (mask === "currency" && formattedValue.length - inputValue.length === -1) {
+          cursorPosition = cursorPosition - 1
         }
         e.target.selectionStart = e.target.selectionEnd = cursorPosition
       }
