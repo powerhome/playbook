@@ -33,14 +33,6 @@
   @include pb_title($heading_4, $bolder, $letterSpacing: $lspace_normal);
 }
 
-@mixin pb_title_dark {
-    color: $text_dk_default;
-} 
-
-@mixin pb_title_dark_link {
-    color: $active_dark;
-}
-
 @mixin pb_title_bold {
   font-weight: $bolder;
 }
