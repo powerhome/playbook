@@ -37,7 +37,7 @@ const BreadCrumbItem = (props: BreadCrumbItemProps): React.ReactElement => {
     globalProps(props),
     className
   )
-  
+
   return (
     <div
         {...ariaProps}
