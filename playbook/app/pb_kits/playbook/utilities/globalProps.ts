@@ -64,6 +64,7 @@ type Hover = Shadow & {
   background?: string,
   color?: string,
   scale?: "sm" | "md" | "lg",
+  underline?: boolean,
   visibility?: boolean,
 }
 
@@ -236,6 +237,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       if (!hover) return css;
       css += hover.shadow ? `hover_shadow_${hover.shadow} ` : '';
       css += hover.background ? `hover_background-${hover.background } ` : '';
+      css += hover.underline ? `hover_underline ` : '';
       css += hover.scale ? `hover_scale_${hover.scale} ` : '';
       css += hover.color ? `hover_color-${hover.color } ` : '';
       css += hover.visibility ? `hover_visibility` : '';
