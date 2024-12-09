@@ -5,11 +5,17 @@
     id: object.id,
     **combined_html_options) do %>
       <%= pb_rails("form_group", props: {cursor: "pointer", full_width: object.full_width}) do %>
-        <label for="upload-<%= object.id %>" class="pb_button_kit_secondary_inline_enabled"><%= "#{object.label}" %></label>
+        <label
+          for="upload-<%= object.id %>"
+          class="pb_button_kit_secondary_inline_enabled <%= 'dark' if object.dark %>"
+        >
+          <%= "#{object.label}" %>
+        </label>
         <%= pb_rails("text_input", props: {
           type: "file",
+          dark: object.dark,
           input_options: {
-            id: "upload-#{object.id}", 
+            id: "upload-#{object.id}",
             classname: "cursor_pointer",
           }.merge(object.input_options)
         }) %>
