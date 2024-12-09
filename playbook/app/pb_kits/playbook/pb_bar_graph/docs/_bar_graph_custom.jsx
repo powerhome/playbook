@@ -13,49 +13,48 @@ const chartData = [
 ]
 
 const barGraphOptions = {
-  subtitle: {
-    text: 'Overwritten subtitle',
-    style: {
-      color: 'red',
-    },
+  yAxis: {
+    tickInterval: 5,
   },
   xAxis: {
-    legend: {
-      itemMarginTop: 62,
-    },
-    xAxisCategories: ['Angry', 'Frown', 'Meh', 'Smile', 'Laugh'],
+    categories: ['1', '2', '3', '4', '5'],
     labels: {
       useHTML: true,
       formatter: function () {
         switch (this.value) {
-          case 'Angry':
+          case '1':
             return '<i style="color: red;" class="far fa-face-angry"></i>'
-          case 'Frown':
+          case '2':
             return '<i style="color: orange;" class="far fa-face-frown"></i>'
-          case 'Meh':
+          case '3':
             return '<i style="color: grey;" class="far fa-face-meh"></i>'
-          case 'Smile':
+          case '4':
             return '<i style="color: #63E6BE;" class="far fa-face-smile"></i>'
-          case 'Laugh':
-            return '<i style="color: green;" class="far fa-laugh-beam sucess"></i>'
+          case '5':
+            return '<i style="color: green;" class="far fa-face-laugh-beam"></i>'
           default:
             return ''
         }
       },
+      style: {
+        fontSize: '1.4em',
+      },
+      y: 42,
     },
+  },
+  legend: {
+    itemMarginTop: 62,
   },
 }
 
-const BarGraphCustom = (props) => (
+const BarGraphCustom = () => (
   <div>
     <BarGraph
         chartData={chartData}
         customOptions={barGraphOptions}
-        id="bar-custom"
+        id="happiness-dashboard"
         legend
-        title="Bar Graph with Custom Overrides"
-        xAxisCategories={['Angry', 'Frown', 'Meh', 'Smile', 'Laugh']}
-        {...props}
+        title=""
     />
   </div>
 )
