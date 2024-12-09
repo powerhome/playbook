@@ -4,8 +4,10 @@
                 <%= pb_rails("table/table_header", props: { tag: "div", id: item[:accessor], classname: object.th_classname, sort_menu: item[:sort_menu] }) do %>
                     <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end", text_align: "end" }) do %>
                         <% if index.zero? && (object.enable_toggle_expansion == "header" || object.enable_toggle_expansion == "all") %>
-                            <button class="gray-icon toggle-all-icon" onclick="expandAllRows(this)">
-                                <%= pb_rails("icon", props: { icon: "arrows-from-line", cursor: "pointer", fixed_width: true, padding_right: "xs" }) %>
+                            <button
+                              class="gray-icon toggle-all-icon"
+                              onclick="expandAllRows(this); event.preventDefault();">
+                              <%= pb_rails("icon", props: { icon: "arrows-from-line", cursor: "pointer", fixed_width: true, padding_right: "xs" }) %>
                             </button>
                         <% end %>
                         <%= item[:label] %>
