@@ -95,7 +95,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   const INPUTMASKS = {
     currency: {
       format: (value: string) => {
-        const v = value.replace(/[^0-9]/g, "")
+        const v = value.replace(/[^0-9]/g, "").slice(0, 15)
         if (v === "") {
           return "";
         }
