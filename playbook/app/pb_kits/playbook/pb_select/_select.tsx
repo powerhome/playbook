@@ -33,8 +33,8 @@ type SelectProps<T extends FieldValues = FieldValues> = {
   inline?: boolean,
   label?: string,
   margin?: string,
-  marginBottom: string,
-  marginTop: string,
+  marginBottom?: string,
+  marginTop?: string,
   multiple?: boolean,
   name?: string,
   onChange?: InputCallback<HTMLSelectElement>,
@@ -53,6 +53,10 @@ const createOptions = (options: SelectOption[]) => options.map((option, index) =
     {option.text || option.value}
   </option>
 ))
+
+type SelectComponent = <T extends FieldValues = FieldValues>(
+  props: SelectProps<T> & { ref?: React.Ref<HTMLSelectElement> }
+) => React.ReactElement
 
 const Select = <T extends FieldValues = FieldValues>({
   aria = {},
@@ -76,7 +80,7 @@ const Select = <T extends FieldValues = FieldValues>({
   showArrow = false,
   value,
   ...props
-}: SelectProps<T>, ref: React.LegacyRef<HTMLSelectElement>) => {
+}: SelectProps<T>, ref: React.Ref<HTMLSelectElement>) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -160,4 +164,4 @@ const Select = <T extends FieldValues = FieldValues>({
   )
 }
 
-export default forwardRef(Select)
+export default forwardRef(Select) as SelectComponent

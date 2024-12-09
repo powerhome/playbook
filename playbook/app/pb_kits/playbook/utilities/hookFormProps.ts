@@ -1,9 +1,9 @@
-import { UseFormRegister, FieldValues, RegisterOptions } from 'react-hook-form'
+import { UseFormRegister, FieldValues, RegisterOptions, Path } from 'react-hook-form'
 
 export type HookFormProps<T extends FieldValues = FieldValues> = {
   register?: UseFormRegister<T>
   rules?: RegisterOptions
-  name: string
+  name: Path<T>
 }
 
 export const withHookForm = <T extends FieldValues = FieldValues>(
@@ -12,5 +12,11 @@ export const withHookForm = <T extends FieldValues = FieldValues>(
   const { register, name, rules } = props
   if (!register) return {}
   
-  return register(name, rules) 
+  const registration = register(name, rules)
+  return {
+    onChange: registration.onChange,
+    onBlur: registration.onBlur,
+    ref: registration.ref,
+    name: registration.name,
+  }
 } 
