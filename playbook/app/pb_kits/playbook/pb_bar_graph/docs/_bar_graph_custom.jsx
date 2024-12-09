@@ -20,6 +20,9 @@ const barGraphOptions = {
     },
   },
   xAxis: {
+    legend: {
+      itemMarginTop: 62,
+    },
     labels: {
       useHTML: true,
       formatter: function () {
@@ -49,10 +52,8 @@ const BarGraphCustom = (props) => (
         customOptions={barGraphOptions}
         id="bar-custom"
         legend
-        subTitle="Subtitle to replace"
         title="Bar Graph with Custom Overrides"
         xAxisCategories={['Angry', 'Frown', 'Meh', 'Smile', 'Laugh']}
-        yAxisMin={0}
         {...props}
     />
   </div>

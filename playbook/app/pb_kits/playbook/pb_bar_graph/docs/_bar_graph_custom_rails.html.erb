@@ -24,18 +24,18 @@
             ],
             labels: {
                 useHTML: true,
+            },
+            legend: {
+              itemMarginTop: 62,
             }
         }
     }
 } %>
 
 <%= pb_rails("bar_graph", props: {
-    axis_title: '',
     chart_data: data,
     id: "bar-default",
     legend: true,
-    y_axis_min: 0,
-    subtitle: 'Subtitle to replace',
     title: 'Bar Graph with Custom Overrides',
     custom_options: bar_graph_options
 }) %>
