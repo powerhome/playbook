@@ -7,29 +7,30 @@
 }] %>
 
 <% bar_graph_options = {
-    customOptions: {
-        subtitle: {
-            text: "Overwritten subtitle",
-            style: {
-                color: "red"
-            }
+  customOptions: {
+    yAxis: {
+      tickInterval: 5,
+    },
+    xAxis: {
+      categories: [
+        '<i style="color: red; font-size: 18px;" class="far fa-face-angry"></i>',
+        '<i style="color: orange; font-size: 18px;" class="far fa-face-frown"></i>',
+        '<i style="color: grey; font-size: 18px;" class="far fa-face-meh"></i>',
+        '<i style="color: #63E6BE; font-size: 18px;" class="far fa-face-smile"></i>',
+        '<i style="color: green; font-size: 18px;" class="far fa-laugh-beam sucess"></i>'
+      ],
+      labels: {
+        useHTML: true,
+        sytle: {
+          fontSize: '1.4em',
         },
-        xAxis: {
-            categories: [
-                '<i style="color: red; font-size: 18px;" class="far fa-face-angry"></i>',
-                '<i style="color: orange; font-size: 18px;" class="far fa-face-frown"></i>',
-                '<i style="color: grey; font-size: 18px;" class="far fa-face-meh"></i>',
-                '<i style="color: #63E6BE; font-size: 18px;" class="far fa-face-smile"></i>',
-                '<i style="color: green; font-size: 18px;" class="far fa-laugh-beam sucess"></i>'
-            ],
-            labels: {
-                useHTML: true,
-            },
-            legend: {
-              itemMarginTop: 62,
-            }
-        }
-    }
+        y: 42,
+      },
+    },
+    legend: {
+      itemMarginTop: 62,
+    },
+  } 
 } %>
 
 <%= pb_rails("bar_graph", props: {

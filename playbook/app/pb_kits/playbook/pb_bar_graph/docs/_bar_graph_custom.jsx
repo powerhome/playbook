@@ -54,7 +54,7 @@ const BarGraphCustom = () => (
         customOptions={barGraphOptions}
         id="happiness-dashboard"
         legend
-        title=""
+        title="Bar Graph with Custom Overrides"
     />
   </div>
 )
