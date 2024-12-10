@@ -6,8 +6,9 @@ examples:
   
   react:
   - skeleton_loading_default: Default
-  - skeleton_loading_color: Color
-  - skeleton_loading_layout: Layout
-  - skeleton_loading_border_radius: Border Radius
-  - skeleton_loading_height_width: Height & Width
+  # - skeleton_loading_color: Color
+  # - skeleton_loading_layout: Layout
+  # - skeleton_loading_border_radius: Border Radius
+  # - skeleton_loading_height_width: Height & Width
   - skeleton_loading_user: User Component Example
+  - skeleton_loading_filter: Filter Component Example
