@@ -2,7 +2,7 @@ import React from 'react';
 import { Flex, SkeletonLoading, User } from "playbook-ui";
 
 const SkeletonLoadingUser = (props) => {
-  const isLoading = false
+  const isLoading = true
 
   return (
     <div>
