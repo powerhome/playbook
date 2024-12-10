@@ -81,6 +81,7 @@ const SelectForm = (props) => {
           />
 
           <Button
+              htmlType="submit"
               marginTop="lg"
               text="Submit"
               type="submit"

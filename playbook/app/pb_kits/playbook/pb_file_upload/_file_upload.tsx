@@ -1,10 +1,12 @@
 import React, { useEffect, useCallback, useRef } from 'react'
 import { useDropzone, DropzoneInputProps, DropzoneRootProps } from 'react-dropzone'
 import classnames from 'classnames'
+import { FieldValues } from 'react-hook-form'
 
 import { buildCss, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 import type { Callback } from '../types'
+import { withReactHookForm, WithReactHookFormProps } from '../utilities/withReactHookForm'
 
 import Body from '../pb_body/_body'
 import Card from '../pb_card/_card'
@@ -19,25 +21,24 @@ type FileUploadProps = {
   maxSize?: number,
   onFilesAccepted: Callback<File, File>,
   onFilesRejected: (error: string, files: File[]) => void,
-}
+} & GlobalProps
 
 const getFormattedFileSize = (fileSize: number): string => {
   return `${fileSize / 1e+6} MB`
 }
 
-const FileUpload = (props: FileUploadProps): React.ReactElement => {
-  const {
-    accept = null,
-    acceptedFilesDescription = '',
-    className,
-    customMessage,
-    data = {},
-    htmlOptions = {},
-    maxSize,
-    onFilesAccepted = noop,
-    onFilesRejected = noop,
-  } = props
-
+const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(({
+  accept = [],
+  acceptedFilesDescription = '',
+  className,
+  customMessage,
+  data = {},
+  htmlOptions = {},
+  maxSize,
+  onFilesAccepted = noop,
+  onFilesRejected = noop,
+  ...props
+}, ref) => {
   const onDrop = useCallback((files) => {
     onFilesAccepted(files)
   }, [onFilesAccepted])
@@ -50,18 +51,18 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
   }
 
   const { getRootProps, getInputProps, isDragActive, rejectedFiles }: DropZoneProps = useDropzone({
-    accept,
+    accept: accept.length > 0 ? accept : undefined,
     maxSize,
     onDrop,
   })
 
-  const prevRejected = useRef<File[] | null>(null);
+  const prevRejected = useRef<File[] | null>(null)
 
-  const maxFileSizeText = `Max file size is ${getFormattedFileSize(maxSize)}.`
+  const maxFileSizeText = maxSize ? `Max file size is ${getFormattedFileSize(maxSize)}.` : ''
 
   useEffect(() => {
     if (rejectedFiles === prevRejected.current) return
-    const isFileTooLarge = maxSize && rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
+    const isFileTooLarge = maxSize && rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize
     if (isFileTooLarge) {
       onFilesRejected(`File size is too large! ${maxFileSizeText}`, rejectedFiles)
     }
@@ -78,13 +79,13 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     })
   }
 
-   const dataProps = buildDataProps(data)
-   const htmlProps = buildHtmlProps(htmlOptions)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
 
   const getDescription = () => {
     return customMessage
       ? customMessage
-      : `Choose a file or drag it here.${accept === null ? '' : ` The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`}${maxSize ? ` ${maxFileSizeText}` : ''}`;
+      : `Choose a file or drag it here.${accept.length === 0 ? '' : ` The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`}${maxFileSizeText}`;
   }
 
   return (
@@ -95,7 +96,10 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
         {...getRootProps()}
     >
       <Card>
-        <input {...getInputProps()} />
+        <input
+            {...getInputProps()}
+            ref={ref}
+        />
         <Body color="light">
           {isDragActive ?
             <p>{'Drop the files here ...'}</p>
@@ -106,6 +110,11 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
       </Card>
     </div>
   )
-}
+})
 
-export default FileUpload
+FileUpload.displayName = 'FileUpload'
+
+export type FileUploadWithHookFormProps<T extends FieldValues = FieldValues> = FileUploadProps & WithReactHookFormProps<T>
+
+const FileUploadWithHookForm = withReactHookForm(FileUpload)
+export default FileUploadWithHookForm

@@ -1,12 +1,12 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 import { FieldValues } from 'react-hook-form'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
-import { HookFormProps, withHookForm } from '../utilities/hookFormProps'
 import type { InputCallback } from '../types'
 import { getAllIcons } from "../utilities/icons/allicons"
+import { withReactHookForm, WithReactHookFormProps } from '../utilities/withReactHookForm'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -18,7 +18,7 @@ type SelectOption = {
   disabled?: boolean,
 }
 
-type SelectProps<T extends FieldValues = FieldValues> = {
+type SelectProps = {
   aria?: { [key: string]: string },
   blankSelection?: string,
   children?: Node,
@@ -42,7 +42,7 @@ type SelectProps<T extends FieldValues = FieldValues> = {
   required?: boolean,
   showArrow?: boolean,
   value?: string,
-} & GlobalProps & Partial<HookFormProps<T>>
+} & GlobalProps
 
 const createOptions = (options: SelectOption[]) => options.map((option, index) => (
   <option
@@ -54,11 +54,7 @@ const createOptions = (options: SelectOption[]) => options.map((option, index) =
   </option>
 ))
 
-type SelectComponent = <T extends FieldValues = FieldValues>(
-  props: SelectProps<T> & { ref?: React.Ref<HTMLSelectElement> }
-) => React.ReactElement
-
-const Select = <T extends FieldValues = FieldValues>({
+const Select = React.forwardRef<HTMLSelectElement, SelectProps>(({
   aria = {},
   blankSelection,
   children,
@@ -74,18 +70,15 @@ const Select = <T extends FieldValues = FieldValues>({
   name,
   onChange,
   options = [],
-  register,
   required = false,
-  rules,
   showArrow = false,
   value,
   ...props
-}: SelectProps<T>, ref: React.Ref<HTMLSelectElement>) => {
+}, ref) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const optionsList = createOptions(options)
-  const hookFormProps = name ? withHookForm({ register, name, rules }) : {}
 
   const inlineClass = inline ? 'inline' : null
   const compactClass = compact ? 'compact' : null
@@ -102,7 +95,7 @@ const Select = <T extends FieldValues = FieldValues>({
   );
 
   const icons = getAllIcons()
-  const angleDown = icons?.angleDown?.icon as { [key: string]: SVGElement }
+  const angleDown = icons?.angleDown?.icon
 
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
   const selectBody =(() =>{
@@ -110,13 +103,12 @@ const Select = <T extends FieldValues = FieldValues>({
     return (
       <select
           {...domSafeProps(props)}
-          {...hookFormProps}
           disabled={disabled}
           id={name}
           multiple={multiple}
           name={name}
-          onChange={onChange || hookFormProps.onChange}
-          ref={ref || hookFormProps.ref}
+          onChange={onChange}
+          ref={ref}
           required={required}
           value={value}
       >
@@ -162,6 +154,11 @@ const Select = <T extends FieldValues = FieldValues>({
       </label>
     </div>
   )
-}
+})
 
-export default forwardRef(Select) as SelectComponent
+Select.displayName = 'Select'
+
+export type SelectWithHookFormProps<T extends FieldValues = FieldValues> = SelectProps & WithReactHookFormProps<T>
+
+const SelectWithHookForm = withReactHookForm(Select)
+export default SelectWithHookForm
