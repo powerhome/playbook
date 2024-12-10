@@ -10,4 +10,4 @@ examples:
   - skeleton_loading_layout: Layout
   - skeleton_loading_border_radius: Border Radius
   - skeleton_loading_height_width: Height & Width
-  
+  - skeleton_loading_user: User Component Example
