@@ -1,49 +1,64 @@
-export const INPUTMASKS = {
+type InputMask = {
+    format: (value: string) => string
+    pattern: string
+    placeholder: string
+}
+
+type InputMaskDictionary = {
+    [key in 'currency' | 'zipCode' | 'postalCode' | 'ssn']: InputMask
+}
+
+const formatCurrency = (value: string): string => {
+    const numericValue = value.replace(/[^0-9]/g, '').slice(0, 15)
+
+    if (!numericValue) return ''
+
+    const dollars = parseFloat((parseInt(numericValue) / 100).toFixed(2))
+    if (dollars === 0) return ''
+
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 2,
+    }).format(dollars)
+}
+
+const formatBasicPostal = (value: string): string => {
+    return value.replace(/\D/g, '').slice(0, 5)
+}
+
+const formatExtendedPostal = (value: string): string => {
+    const cleaned = value.replace(/\D/g, '').slice(0, 9)
+    return cleaned.replace(/(\d{5})(?=\d)/, '$1-')
+}
+
+const formatSSN = (value: string): string => {
+    const cleaned = value.replace(/\D/g, '').slice(0, 9)
+    return cleaned
+        .replace(/(\d{5})(?=\d)/, '$1-')
+        .replace(/(\d{3})(?=\d)/, '$1-')
+}
+
+export const INPUTMASKS: InputMaskDictionary = {
     currency: {
-        format: (value: string) => {
-            const v = value.replace(/[^0-9]/g, "").slice(0, 15)
-            if (v === "") {
-                return "";
-            }
-            const numericValue = parseFloat((parseInt(v) / 100).toFixed(2));
-            if (numericValue === 0) {
-                return "";
-            }
-            return new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-                maximumFractionDigits: 2,
-            }).format(numericValue);
-        },
+        format: formatCurrency,
         // eslint-disable-next-line no-useless-escape
         pattern: '^\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?$',
         placeholder: '$0.00',
     },
     zipCode: {
-        format: (value: string) => {
-            const v = value.replace(/\D/g, '').slice(0, 5)
-            return v
-        },
+        format: formatBasicPostal,
         pattern: '\\d{5}',
         placeholder: '12345',
     },
     postalCode: {
-        format: (value: string) => {
-            const v = value.replace(/\D/g, '').slice(0, 9)
-            return v.replace(/(\d{5})(?=\d)/, '$1-')
-        },
+        format: formatExtendedPostal,
         pattern: '\\d{5}-\\d{4}',
         placeholder: '12345-6789',
     },
     ssn: {
-        format: (value: string) => {
-            const v = value.replace(/\D/g, '').slice(0, 9)
-
-            return v
-                .replace(/(\d{5})(?=\d)/, '$1-')
-                .replace(/(\d{3})(?=\d)/, '$1-')
-        },
+        format: formatSSN,
         pattern: '\\d{3}-\\d{2}-\\d{4}',
         placeholder: '123-45-6789',
     },
-}
+} 
