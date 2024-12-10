@@ -8,6 +8,7 @@ examples:
   - text_input_inline: Inline
   - text_input_no_label: No Label
   - text_input_options: Input Options
+  - text_input_mask: Mask
   react:
   - text_input_default: Default
   - text_input_error: With Error
