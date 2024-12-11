@@ -1,19 +1,29 @@
-import React from 'react'
-import { FieldValues, Path, UseFormRegister, RegisterOptions } from 'react-hook-form'
+import React from "react"
+import {
+  FieldValues,
+  Path,
+  UseFormRegister,
+  RegisterOptions,
+} from "react-hook-form"
 
 export type WithReactHookFormProps<T extends FieldValues> = {
   name: Path<T>
   register?: UseFormRegister<T>
-  rules?: Omit<RegisterOptions<T>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>
+  rules?: Omit<
+    RegisterOptions<T>,
+    "valueAsNumber" | "valueAsDate" | "setValueAs"
+  >
   disabled?: boolean
 }
 
 export function withReactHookForm<
-  P extends { onChange?: (...args: any[]) => void, onBlur?: (...args: any[]) => void, ref?: any },
+  P extends {
+    onChange?: (...args: any[]) => void
+    onBlur?: (...args: any[]) => void
+    ref?: any
+  },
   T extends FieldValues = FieldValues
->(
-  WrappedComponent: React.ComponentType<P>
-) {
+>(WrappedComponent: React.ComponentType<P>) {
   const WithReactHookFormComponent = React.forwardRef<
     HTMLElement,
     P & WithReactHookFormProps<T>
@@ -38,15 +48,15 @@ export function withReactHookForm<
       onBlur: (...args: any[]) => {
         fieldRegistration.onBlur?.(...args)
         ;(rest as P).onBlur?.(...args)
-      }
+      },
     }
 
     return <WrappedComponent {...(fieldProps as P)} />
   })
 
   WithReactHookFormComponent.displayName = `WithReactHookForm(${
-    WrappedComponent.displayName || WrappedComponent.name || 'Component'
+    WrappedComponent.displayName || WrappedComponent.name || "Component"
   })`
 
   return WithReactHookFormComponent
-} 
+}

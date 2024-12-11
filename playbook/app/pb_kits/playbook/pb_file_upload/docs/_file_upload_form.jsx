@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { FileUpload, Card, Body, Button } from '../..'
+import { FileUpload, Card, Body, Button } from 'playbook-ui'
 
 const FileUploadFormExample = () => {
   const {
@@ -109,34 +109,5 @@ const FileUploadFormExample = () => {
   )
 }
 
-FileUploadFormExample.title = 'React Hook Form Integration'
-FileUploadFormExample.description = `
-This example demonstrates how to use the FileUpload component with React Hook Form.
-The integration provides:
-- Direct form state management
-- Built-in validation
-- File type restrictions
-- File size limits
-- Error handling
-- No need for Controller wrapper
-
-Example usage:
-\`\`\`jsx
-const { register, setValue } = useForm()
-
-const handleFilesAccepted = (files) => {
-  setValue('profilePicture', files[0])
-}
-
-<FileUpload
-  name="profilePicture"
-  accept={['image/jpeg', 'image/png']}
-  maxSize={5000000}
-  register={register}
-  rules={{ required: 'Please upload a file' }}
-  onFilesAccepted={handleFilesAccepted}
-/>
-\`\`\`
-`
 
 export default FileUploadFormExample 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Radio, Card, Body, Button } from '../..'
+import { Radio, Card, Body, Button } from 'playbook-ui'
 
-const RadioFormExample = () => {
+const RadioForm = () => {
   const {
     register,
     handleSubmit,
@@ -20,14 +20,12 @@ const RadioFormExample = () => {
     console.log('Form submitted:', data)
   }
 
-  // Watch form values for real-time display
   const formValues = watch()
 
   return (
     <div>
       <Card padding="md">
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* Basic Radio with validation */}
           <div>
             <Body
                 marginBottom="xs"
@@ -63,7 +61,6 @@ const RadioFormExample = () => {
             />
           </div>
 
-          {/* Radio group with custom validation */}
           <div className="mt-4">
             <Body
                 marginBottom="xs"
@@ -126,6 +123,7 @@ const RadioFormExample = () => {
           </div>
 
           <Button
+              htmlType="submit"
               marginTop="lg"
               text="Submit"
               type="submit"
@@ -139,7 +137,7 @@ const RadioFormExample = () => {
               text="Current Form Values:"
               variant="bold"
           />
-          <pre style={{ marginTop: '8px' }}>
+          <pre style={{ marginTop: '8px', color: "white" }}>
             {JSON.stringify(formValues, null, 2)}
           </pre>
         </Card>
@@ -148,31 +146,4 @@ const RadioFormExample = () => {
   )
 }
 
-RadioFormExample.title = 'React Hook Form Integration'
-RadioFormExample.description = `
-This example demonstrates how to use the Radio component with React Hook Form.
-The integration provides:
-- Direct form state management
-- Built-in validation
-- Error handling
-- No need for Controller wrapper
-- Support for radio groups
-
-Example usage:
-\`\`\`jsx
-const { register } = useForm()
-
-<Radio
-  name="contact"
-  label="Email"
-  value="email"
-  register={register}
-  rules={{
-    required: 'Please select a contact method'
-  }}
-  error={errors.contact?.message}
-/>
-\`\`\`
-`
-
-export default RadioFormExample 
+export default RadioForm
