@@ -1,7 +1,7 @@
 [class^=pb_form_group_kit] {
   display: inline-flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: flex-start;
 
   &[class*=_full] {
@@ -10,6 +10,18 @@
     & > div {
       width: 100%;
     }
+  }
+
+  &:has(.pb_text_input_kit):has(.pb_text_input_kit_label){
+    align-items: flex-end;
+  }
+
+  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label){
+    align-items: center;
+  }
+
+  &:has(.pb_phone_number_input):has(.pb_text_input_kit.error):has(.pb_text_input_kit_label){
+    align-items: center;
   }
 
   & [class^=pb_text_input_kit] .text_input_wrapper,
@@ -27,7 +39,7 @@
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
-    
+
       &:focus {
         outline: $primary solid 1px;
         outline-offset: -1px;
@@ -150,7 +162,7 @@
   & > [class^=pb_selectable_card_kit] input[type="checkbox"]:not(:checked) ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:not(:checked) ~ label {
     &:hover {
       border-right-color: $slate;
-    } 
+    }
   }
 
   & > [class^=pb_selectable_card_kit]:not(:first-child) label {
