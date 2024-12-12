@@ -131,12 +131,15 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
       }
       {emphasis == 'none' &&
         <div>
-          <Body>
+          <Body dark={dark}>
             {joinPresent([titleize(address), houseStyle], ' · ')}
           </Body>
-          <Body>{titleize(addressCont)}</Body>
+          <Body dark={dark}>{titleize(addressCont)}</Body>
           <div>
-            <Body color="light">
+            <Body
+                color="light"
+                dark={dark}
+              >
             {`${titleize(city)}, ${state} ${zipcode}`}
           </Body>
           </div>
