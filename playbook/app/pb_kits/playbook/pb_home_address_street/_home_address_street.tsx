@@ -18,7 +18,7 @@ type HomeAddressStreetProps = {
   className?: string,
   data?: { [key: string]: string },
   dark?: boolean,
-  emphasis: "street" | "city",
+  emphasis: "street" | "city" | "none",
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   homeId: string,
   houseStyle: string,
@@ -126,6 +126,19 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
             >
               {` ${zipcode}`}
             </Body>
+          </div>
+        </div>
+      }
+      {emphasis == 'none' &&
+        <div>
+          <Body>
+            {joinPresent([titleize(address), houseStyle], ' · ')}
+          </Body>
+          <Body>{titleize(addressCont)}</Body>
+          <div>
+            <Body color="light">
+            {`${titleize(city)}, ${state} ${zipcode}`}
+          </Body>
           </div>
         </div>
       }
