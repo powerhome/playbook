@@ -221,7 +221,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // Assign dynamically sourced flatpickr instance to variable
   const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
   picker.innerContainer.parentElement.id = `cal-${pickerId}`
-  console.log("5 " + JSON.stringify(picker.input));
 
   // replace year selector with dropdown
   picker.yearElements[0].parentElement.innerHTML = `<select class="numInput cur-year" type="number" tabIndex="-1" aria-label="Year" id="year-${pickerId}"></select>`
@@ -246,6 +245,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
   // Reverse month and year dropdown reset on form.reset()
   if (picker.input.form) {
+    console.log("5 " + picker.input.form);
     picker.input.form.addEventListener('reset', () => {
       // Code block triggers after form.reset() is called and executed
       setTimeout(() => {
