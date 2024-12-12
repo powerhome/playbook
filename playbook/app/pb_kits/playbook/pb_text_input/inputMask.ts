@@ -1,5 +1,5 @@
 type InputMask = {
-    format: (value: string) => string
+    format: (value: string | number) => string
     pattern: string
     placeholder: string
 }
@@ -8,8 +8,10 @@ type InputMaskDictionary = {
     [key in 'currency' | 'zipCode' | 'postalCode' | 'ssn']: InputMask
 }
 
-const formatCurrency = (value: string): string => {
-    const numericValue = value.replace(/[^0-9]/g, '').slice(0, 15)
+const formatCurrency = (value: string | number): string => {
+    const valueString = typeof value === 'number' ? value.toString() : value;
+
+    const numericValue = valueString.replace(/[^0-9]/g, '').slice(0, 15)
 
     if (!numericValue) return ''
 
@@ -23,17 +25,23 @@ const formatCurrency = (value: string): string => {
     }).format(dollars)
 }
 
-const formatBasicPostal = (value: string): string => {
-    return value.replace(/\D/g, '').slice(0, 5)
+const formatBasicPostal = (value: string | number): string => {
+    const valueString = typeof value === 'number' ? value.toString() : value;
+
+    return valueString.replace(/\D/g, '').slice(0, 5)
 }
 
-const formatExtendedPostal = (value: string): string => {
-    const cleaned = value.replace(/\D/g, '').slice(0, 9)
+const formatExtendedPostal = (value: string | number): string => {
+    const valueString = typeof value === 'number' ? value.toString() : value;
+
+    const cleaned = valueString.replace(/\D/g, '').slice(0, 9)
     return cleaned.replace(/(\d{5})(?=\d)/, '$1-')
 }
 
-const formatSSN = (value: string): string => {
-    const cleaned = value.replace(/\D/g, '').slice(0, 9)
+const formatSSN = (value: string | number): string => {
+    const valueString = typeof value === 'number' ? value.toString() : value;
+
+    const cleaned = valueString.replace(/\D/g, '').slice(0, 9)
     return cleaned
         .replace(/(\d{5})(?=\d)/, '$1-')
         .replace(/(\d{3})(?=\d)/, '$1-')
