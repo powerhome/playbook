@@ -68,7 +68,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     timeFormat = 'at h:i K',
     yearRange,
   } = config
-  console.log("1 " + config);
+  console.log("1 " + JSON.stringify(config));
   // ===========================================================
   // |                   Hook Definitions                      |
   // ===========================================================
@@ -148,8 +148,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
     // time selection
     if (enableTime) pluginList.push(timeSelectPlugin({ caption: timeCaption, showTimezone: showTimezone}))
-    console.log("2 " + thisRangesEndToday);
-    console.log("3 " + customQuickPickDates);
+    console.log("3 " + JSON.stringify(customQuickPickDates));
     console.log("4 " + pluginList);
     return pluginList
   }
@@ -222,7 +221,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // Assign dynamically sourced flatpickr instance to variable
   const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
   picker.innerContainer.parentElement.id = `cal-${pickerId}`
-  console.log("5 " + picker);
+  console.log("5 " + JSON.stringify(picker));
 
   // replace year selector with dropdown
   picker.yearElements[0].parentElement.innerHTML = `<select class="numInput cur-year" type="number" tabIndex="-1" aria-label="Year" id="year-${pickerId}"></select>`
