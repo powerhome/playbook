@@ -1,5 +1,7 @@
 import React from 'react'
+import ReactDOMServer from 'react-dom/server'
 import BarGraph from '../_bar_graph'
+import Icon from '../../pb_icon/_icon'
 
 const chartData = [
   {
@@ -12,6 +14,14 @@ const chartData = [
   },
 ]
 
+const renderIcon = (iconName, color) => {
+  return ReactDOMServer.renderToStaticMarkup(
+  <Icon
+      color={color}
+      icon={iconName}
+  />)
+};
+
 const barGraphOptions = {
   yAxis: {
     tickInterval: 5,
@@ -23,15 +33,15 @@ const barGraphOptions = {
       formatter: function () {
         switch (this.value) {
           case '1':
-            return '<i style="color: red;" class="far fa-face-angry"></i>'
+            return `${renderIcon('frown', 'error')}`;
           case '2':
-            return '<i style="color: orange;" class="far fa-face-frown"></i>'
+            return `${renderIcon('frown', 'warning')}`;
           case '3':
-            return '<i style="color: grey;" class="far fa-face-meh"></i>'
+            return `${renderIcon('frown-open', 'neutral')}`;
           case '4':
-            return '<i style="color: #63E6BE;" class="far fa-face-smile"></i>'
+            return `${renderIcon('smile', 'category_7')}`;
           case '5':
-            return '<i style="color: green;" class="far fa-face-laugh-beam"></i>'
+            return `${renderIcon('smile-beam', 'success')}`;
           default:
             return ''
         }
