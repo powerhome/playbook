@@ -251,7 +251,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         picker.monthsDropdownContainer.value = picker.currentMonth
 
         /* Reset date picker to default value on form.reset() */
-        if (defaultDate){
+        if (defaultDate && !picker.input.value){
           picker.setDate(defaultDate)
           yearChangeHook(picker)
         }
