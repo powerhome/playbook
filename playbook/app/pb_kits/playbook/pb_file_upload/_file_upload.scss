@@ -11,3 +11,8 @@
   }
 }
 
+.dark [class*='pb_file_upload_kit'] {
+  [class*='pb_card_kit'] {
+    border: 1px $text_dk_lighter dashed;
+  }
+}

@@ -9,10 +9,23 @@ $pb_title_colors: (
   link: $primary
 );
 
+$pb_dark_title_colors: (
+  default: $text_dk_default,
+  light: $text_dk_light,
+  lighter: $text_dk_lighter,
+  success: $success,
+  error: $error_dark,
+  link: $active_dark
+);
+
 @mixin title_colors {
   @each $name, $color in $pb_title_colors {
     &[class*=_#{$name}] {
       color: $color
     }
   }
+}
+
+@mixin title_dark {
+  color: $text_dk_default;
 }

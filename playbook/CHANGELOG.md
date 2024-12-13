@@ -1,7 +1,9 @@
-# Fresh Features, Exciting Enhancements, and Key Fixes!
+# 🪄 New Width Global Prop — Apply Widths With Ease!
 #### November 29, 2024
 
-We're back with new updates, packed with important improvements, bug fixes, and new features! Highlights include global prop updates, a new red "danger" button variant for delete actions, as well as new table and form enhancements. Dive into the details below for all the updates!
+![turtle_width](https://github.com/user-attachments/assets/fe524590-d08c-4784-b48a-00cbc1f9ae73)
+
+ Introducing a new way to set widths on components without using custom CSS! Available on every component, the width prop accepts Playbook spacing values as well as 0% and 100%.
 
 [14.9.0](https://github.com/powerhome/playbook/tree/14.9.0) full list of changes:
 

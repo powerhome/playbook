@@ -29,12 +29,16 @@ module Playbook
       []
     end
 
+    def hover_underline_values
+      [true, false]
+    end
+
     def hover_values
       hover_options.keys.select { |sk| try(sk) }
     end
 
     def hover_attributes
-      %w[background shadow scale color]
+      %w[background shadow scale color underline]
     end
 
     def hover_props
@@ -51,6 +55,8 @@ module Playbook
           value.each do |key, val|
             if %i[background color].include?(key)
               css += "#{prefix}_#{key}-#{val} " if hover_attributes.include?(key.to_s)
+            elsif %i[underline].include?(key) && val == true
+              css += "hover_underline "
             elsif hover_attributes.include?(key.to_s) && send("hover_#{key}_values").include?(val.to_s)
               css += "#{prefix}_#{key}_#{val} "
             end

@@ -26,3 +26,8 @@ export { default as TableWithSubcomponents } from './_table_with_subcomponents.j
 export { default as TableWithSubcomponentsAsDivs } from './_table_with_subcomponents_as_divs.jsx'
 export { default as TableOuterPadding } from './_table_outer_padding.jsx'
 export { default as TableStickyLeftColumns } from './_table_sticky_left_columns.jsx'
+export { default as TableWithCollapsible } from './_table_with_collapsible.jsx'
+export { default as TableWithCollapsibleWithCustomContent } from './_table_with_collapsible_with_custom_content.jsx'
+export { default as TableWithCollapsibleWithNestedTable } from './_table_with_collapsible_with_nested_table.jsx'
+export { default as TableWithCollapsibleWithNestedRows } from './_table_with_collapsible_with_nested_rows.jsx'
+export { default as TableWithCollapsibleWithCustomClick } from './_table_with_collapsible_with_custom_click.jsx'
