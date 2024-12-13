@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import classnames from 'classnames'
-import { FieldValues } from 'react-hook-form'
 
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { withReactHookForm, WithReactHookFormProps } from '../utilities/withReactHookForm'
 
 import Flex from '../pb_flex/_flex'
 import Card from '../pb_card/_card'
@@ -37,27 +35,28 @@ type TextInputProps = {
   },
 } & GlobalProps
 
-const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(({
-  addOn = { icon: null, alignment: 'right', border: true },
-  aria = {},
-  className,
-  dark = false,
-  data = {},
-  disabled,
-  error,
-  htmlOptions = {},
-  id,
-  inline = false,
-  name,
-  label,
-  onChange = () => { void 0 },
-  placeholder,
-  required,
-  type = 'text',
-  value = '',
-  children = null,
-  ...props
-}, ref) => {
+const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>) => {
+  const {
+    addOn = { icon: null, alignment: 'right', border: true },
+    aria = {},
+    className,
+    dark = false,
+    data = {},
+    disabled,
+    error,
+    htmlOptions = {},
+    id,
+    inline = false,
+    name,
+    label,
+    onChange = () => { void 0 },
+    placeholder,
+    required,
+    type = 'text',
+    value = '',
+    children = null,
+  } = props
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -171,11 +170,6 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(({
       </div>
     </div>
   )
-})
+}
 
-TextInput.displayName = 'TextInput'
-
-export type TextInputWithHookFormProps<T extends FieldValues = FieldValues> = TextInputProps & WithReactHookFormProps<T>
-
-const TextInputWithHookForm = withReactHookForm(TextInput)
-export default TextInputWithHookForm
+export default forwardRef(TextInput)
