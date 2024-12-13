@@ -76,6 +76,10 @@ export const OtherNavItems = ({
   }
 
   const activeForItems = (link, i) => {
+    if (currentURL.startsWith("/guides/getting_started/icons") && link.name === "Icon Integration") {
+      return true;
+    }
+
     const key = name === "UI Samples" ? `${link}-${i}` : `${link.link}-${i}`
     return isActive[key]
       ? true
