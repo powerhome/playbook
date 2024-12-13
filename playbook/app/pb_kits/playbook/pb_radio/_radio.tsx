@@ -55,7 +55,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
-    buildCss('pb_radio_kit', alignment || 'default'),
+    buildCss('pb_radio_kit', alignment),
     dark ? 'dark' : null,
     error ? 'error' : null,
     globalProps(props),
@@ -73,7 +73,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
     onChange(event)
   }
 
-  const displayRadio = (props: Partial<RadioProps>) => {
+  const displayRadio = (props: RadioProps & any) => {
     if (children && customChildren == false) {
       return (children)
     }
@@ -120,7 +120,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
           }}
           id="radio-container"
       >
-        <label className={buildCss('pb_radio_kit', alignment || 'default')}>
+        <label className={buildCss('pb_radio_kit', alignment)}>
           <input
               disabled={disabled}
               id={id}
@@ -129,6 +129,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
               ref={ref}
               type="radio"
               value={value}
+              {...props}
           />
           <span className="pb_radio_button" />
         </label>
@@ -142,7 +143,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
             className={classes}
             htmlFor={id}
         >
-          <>{displayRadio({})}</>
+          <>{displayRadio(props)}</>
           <span className="pb_radio_button" />
           <Body
               dark={dark}
