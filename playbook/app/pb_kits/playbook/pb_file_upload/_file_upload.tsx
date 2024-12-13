@@ -1,12 +1,10 @@
 import React, { useEffect, useCallback, useRef } from 'react'
 import { useDropzone, DropzoneInputProps, DropzoneRootProps } from 'react-dropzone'
 import classnames from 'classnames'
-import { FieldValues } from 'react-hook-form'
 
 import { buildCss, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
-import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { globalProps } from '../utilities/globalProps'
 import type { Callback } from '../types'
-import { withReactHookForm, WithReactHookFormProps } from '../utilities/withReactHookForm'
 
 import Body from '../pb_body/_body'
 import Card from '../pb_card/_card'
@@ -15,30 +13,33 @@ type FileUploadProps = {
   accept?: string[],
   className?: string,
   customMessage?: string,
+  dark?: boolean,
   data?: {[key: string]: string | number},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   acceptedFilesDescription?: string,
   maxSize?: number,
   onFilesAccepted: Callback<File, File>,
   onFilesRejected: (error: string, files: File[]) => void,
-} & GlobalProps
+}
 
 const getFormattedFileSize = (fileSize: number): string => {
   return `${fileSize / 1e+6} MB`
 }
 
-const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(({
-  accept = [],
-  acceptedFilesDescription = '',
-  className,
-  customMessage,
-  data = {},
-  htmlOptions = {},
-  maxSize,
-  onFilesAccepted = noop,
-  onFilesRejected = noop,
-  ...props
-}, ref) => {
+const FileUpload = (props: FileUploadProps): React.ReactElement => {
+  const {
+    accept = null,
+    acceptedFilesDescription = '',
+    className,
+    customMessage,
+    dark = false,
+    data = {},
+    htmlOptions = {},
+    maxSize,
+    onFilesAccepted = noop,
+    onFilesRejected = noop,
+  } = props
+
   const onDrop = useCallback((files) => {
     onFilesAccepted(files)
   }, [onFilesAccepted])
@@ -51,18 +52,18 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(({
   }
 
   const { getRootProps, getInputProps, isDragActive, rejectedFiles }: DropZoneProps = useDropzone({
-    accept: accept.length > 0 ? accept : undefined,
+    accept,
     maxSize,
     onDrop,
   })
 
-  const prevRejected = useRef<File[] | null>(null)
+  const prevRejected = useRef<File[] | null>(null);
 
-  const maxFileSizeText = maxSize ? `Max file size is ${getFormattedFileSize(maxSize)}.` : ''
+  const maxFileSizeText = `Max file size is ${getFormattedFileSize(maxSize)}.`
 
   useEffect(() => {
     if (rejectedFiles === prevRejected.current) return
-    const isFileTooLarge = maxSize && rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize
+    const isFileTooLarge = maxSize && rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
     if (isFileTooLarge) {
       onFilesRejected(`File size is too large! ${maxFileSizeText}`, rejectedFiles)
     }
@@ -79,13 +80,13 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(({
     })
   }
 
-  const dataProps = buildDataProps(data)
-  const htmlProps = buildHtmlProps(htmlOptions)
+   const dataProps = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions)
 
   const getDescription = () => {
     return customMessage
       ? customMessage
-      : `Choose a file or drag it here.${accept.length === 0 ? '' : ` The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`}${maxFileSizeText}`;
+      : `Choose a file or drag it here.${accept === null ? '' : ` The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`}${maxSize ? ` ${maxFileSizeText}` : ''}`;
   }
 
   return (
@@ -95,12 +96,12 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(({
         {...htmlProps}
         {...getRootProps()}
     >
-      <Card>
-        <input
-            {...getInputProps()}
-            ref={ref}
-        />
-        <Body color="light">
+      <Card dark={dark}>
+        <input {...getInputProps()} />
+        <Body
+            color="light"
+            dark={dark}
+        >
           {isDragActive ?
             <p>{'Drop the files here ...'}</p>
             :
@@ -110,11 +111,6 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(({
       </Card>
     </div>
   )
-})
+}
 
-FileUpload.displayName = 'FileUpload'
-
-export type FileUploadWithHookFormProps<T extends FieldValues = FieldValues> = FileUploadProps & WithReactHookFormProps<T>
-
-const FileUploadWithHookForm = withReactHookForm(FileUpload)
-export default FileUploadWithHookForm
+export default FileUpload
