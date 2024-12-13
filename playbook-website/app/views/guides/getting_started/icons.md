@@ -14,4 +14,4 @@ Icons are small graphical elements that represent actions, objects, or concepts 
 
 Playbook allows integration with [Font Awesome icons](/guides/getting_started/icons/font_awesome/) as well as [custom icons](/kits/icon/rails#icon-custom). 
 
-![icons](https://huddle.powerapp.cloud/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcDhIIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--1c5cfe0fbca13a60e4a3ef923e6a76fe4f98c847/Icons%20Image.png)
+![icons](https://github.com/user-attachments/assets/bb10a281-f11a-4b3c-b797-d046f8044e86)
