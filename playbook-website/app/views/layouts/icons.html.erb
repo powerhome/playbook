@@ -27,7 +27,7 @@
                 <%= pb_rails("background", props: { display: "flex", justify_content: "center", classname: "markdown w100", background_color: "white", padding_x: "sm", padding_y: "md" }) do %>
                   <%= pb_rails("background", props: { width: 'lg' , background_color: "white" }) do %>
                     <div class="markdown_title"><%= @page_title %></div>
-                    <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
+                    <%= pb_rails("nav", props: { orientation: "horizontal", variant: "bold" }) do %>
                       <%= pb_rails("nav/item", props: { text: "About", link: "/guides/getting_started/icons/", active: action_name == "icons"}) %>
                       <%= pb_rails("nav/item", props: { text: "Font Awesome", link: "/guides/getting_started/icons/font_awesome", active: action_name == "icons_font_awesome" }) %>
                       <%= pb_rails("nav/item", props: { text: "Playbook Icons", link: "/guides/getting_started/icons/playbook", active: action_name == "icons_playbook" }) %>
