@@ -25,17 +25,25 @@ RSpec.describe Playbook::PbBody::Body do
         expect(instance.classname).to include("hover_color-#{value}")
       end
 
+      instance = subject.new({ hover: { underline: true } })
+      expect(instance.classname).to include("hover_underline")
+
+      instance = subject.new({ hover: { underline: false } })
+      expect(instance.classname).not_to include("hover_underline")
+
       hover_props = {
         shadow: "deep",
         scale: "sm",
         background: "red",
         color: "blue",
+        underline: true,
       }
       instance = subject.new({ hover: hover_props })
       expect(instance.classname).to include("hover_shadow_deep")
       expect(instance.classname).to include("hover_scale_sm")
       expect(instance.classname).to include("hover_background-red")
       expect(instance.classname).to include("hover_color-blue")
+      expect(instance.classname).to include("hover_underline")
     end
   end
 end

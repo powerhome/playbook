@@ -115,7 +115,7 @@ $selector: ".pb_nav_list";
       }
       [class*="_item_text"],
       [class*="_item_icon"] {
-        color: $text_dk_lighter !important;
+        color: $text_dk_light !important;
       }
       &[class*="_link"] {
         &:hover {

@@ -151,7 +151,7 @@ $pb_selectable_paddings: (
       input[type="radio"] {
         &:checked ~ label {
           border-width: $pb_card_border_width;
-          outline: 1px solid $primary;
+          outline: 1px solid $primary_action_dark;
         }
       }
     }
@@ -161,11 +161,11 @@ $pb_selectable_paddings: (
     color: $white;
     > label {
       @include pb_card_dark;
-      background: transparent;
+      background: $bg_dark_card;
 
       .pb_selectable_card_circle {
         border-color: $bg_dark;
-        background: $primary-action;
+        background: $primary_action_dark;
       }
     }
 
@@ -173,7 +173,7 @@ $pb_selectable_paddings: (
     input[type="radio"] {
       &:checked ~ label {
         @include pb_card_selected_dark;
-        background: transparent;
+        background: $bg_dark_card;
       }
     }
 

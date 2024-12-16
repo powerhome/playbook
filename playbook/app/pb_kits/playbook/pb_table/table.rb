@@ -23,6 +23,8 @@ module Playbook
       prop :text
       prop :sticky, type: Playbook::Props::Boolean,
                     default: false
+      prop :sticky_left_column, type: Playbook::Props::Array,
+                                default: []
       prop :vertical_border, type: Playbook::Props::Boolean,
                              default: false
       prop :striped, type: Playbook::Props::Boolean,
@@ -37,8 +39,8 @@ module Playbook
       def classname
         generate_classname(
           "pb_table", "table-#{size}", single_line_class, dark_class,
-          disable_hover_class, container_class, data_table_class, sticky_class, collapse_class,
-          vertical_border_class, striped_class, outer_padding_class,
+          disable_hover_class, container_class, data_table_class, sticky_class, sticky_left_column_class,
+          collapse_class, vertical_border_class, striped_class, outer_padding_class,
           "table-responsive-#{responsive}", separator: " "
         )
       end
@@ -71,6 +73,19 @@ module Playbook
 
       def sticky_class
         sticky ? "sticky-header" : nil
+      end
+
+      def sticky_left_column_class
+        if sticky_left_column.empty?
+          nil
+        else
+          sticky_col_classname = "sticky-left-column sticky-columns"
+          sticky_left_column.each do |id|
+            sticky_col_classname += "-#{id}"
+          end
+
+          sticky_col_classname
+        end
       end
 
       def striped_class

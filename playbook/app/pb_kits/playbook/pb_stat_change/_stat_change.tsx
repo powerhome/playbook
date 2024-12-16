@@ -1,40 +1,46 @@
-import React from 'react'
-import classnames from 'classnames'
+import React from "react"
+import classnames from "classnames"
 
-import { buildCss, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { buildCss, buildHtmlProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
 
-import Body from '../pb_body/_body'
-import Icon from '../pb_icon/_icon'
+import Body from "../pb_body/_body"
+import Icon from "../pb_icon/_icon"
 
-const statusMap: {neutral: 'neutral', decrease: 'negative' ,increase: 'positive'} = {
-  increase: 'positive',
-  decrease: 'negative',
-  neutral: 'neutral',
+const statusMap: {
+  neutral: "neutral"
+  decrease: "negative"
+  increase: "positive"
+} = {
+  increase: "positive",
+  decrease: "negative",
+  neutral: "neutral",
 }
 
 const iconMap = {
-  increase: 'arrow-up',
-  decrease: 'arrow-down',
+  increase: "arrow-up",
+  decrease: "arrow-down",
 }
 
 type StatChangeProps = {
-  change?: 'increase' | 'decrease' | 'neutral',
-  className?: string,
-  icon?: string,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
-  id?: string,
-  value?: string | number,
+  change?: "increase" | "decrease" | "neutral"
+  className?: string
+  dark?: boolean
+  icon?: string
+  id?: string
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
+  value?: string | number
 }
 
 const StatChange = (props: StatChangeProps): React.ReactElement => {
-  const { 
-    change = 'neutral', 
-    className, 
+  const {
+    change = "neutral",
+    className,
+    dark = false,
     htmlOptions = {},
-    icon, 
-    id, 
-    value 
+    icon,
+    id,
+    value,
   } = props
 
   const status = statusMap[change as keyof typeof statusMap]
@@ -47,30 +53,32 @@ const StatChange = (props: StatChangeProps): React.ReactElement => {
 
   return (
     <>
-      {value &&
+      {value && (
         <div
             className={classnames(
-              buildCss('pb_stat_change_kit', status),
-              globalProps(props),
-              className
-              )}
+            buildCss("pb_stat_change_kit", status),
+            globalProps(props),
+            className
+          )}
             id={id}
             {...htmlProps}
         >
-          <Body status={status}>
-            {returnedIcon &&
+          <Body dark={dark}
+              status={status}
+          >
+            {" "}
+            {returnedIcon && (
               <>
-                <Icon
+                <Icon dark={dark}
                     fixed_width
                     icon={returnedIcon}
-                />
-                {' '}
+                />{" "}
               </>
-            }
+            )}
             {`${value}%`}
           </Body>
         </div>
-      }
+      )}
     </>
   )
 }

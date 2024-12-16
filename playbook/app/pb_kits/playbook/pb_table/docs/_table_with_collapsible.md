@@ -1,0 +1,1 @@
+The `collapsible` prop can be used on any Table Row to add a collapsible area. Use the additional `collapsibleContent` prop to add any content to the collapsible Row.

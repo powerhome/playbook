@@ -20,6 +20,13 @@
   }
 }
 
+@mixin hover-underline {
+  .hover_underline:hover {
+    text-decoration: underline;
+    transition: text-decoration $transition-speed ease;
+  }
+}
+
 @mixin hover-color-classes($colors-list) {
     @each $name, $color in $colors-list {
       .hover_background-#{"" + $name}:hover {
@@ -32,7 +39,9 @@
       }
     }
   }
-  
+
+
+  @include hover-underline;
   @include hover-scale-classes($scales);
   @include hover-shadow-classes($box_shadows);
   @include hover-color-classes($product_colors);
