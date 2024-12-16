@@ -106,7 +106,10 @@ const VisualGuidelines = ({
         return <Truncate example={examples.truncate_jsx} />
 
       default:
-        return <Colors/>;
+        if (window.location.pathname !== "/visual_guidelines/colors") {
+          window.history.pushState(null, "", "/visual_guidelines/colors");
+        }
+        return <Colors />;
     }
   }
   return <div className="visual_guidelines_individual">{getComponent(result)}</div>;
