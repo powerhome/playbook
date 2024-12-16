@@ -1,7 +1,7 @@
 ---
 title: Icon Integration
 description: Icons are small graphical elements that represent actions, objects, or concepts in a user interface. They are a crucial part of a UI's visual language and help users understand and interact with the interface efficiently. Here's a detailed overview of what icons entail with Playbook.
-icon: font-awesome
+icon: eye
 ---
 
 Icons are small graphical elements that represent actions, objects, or concepts in a user interface. They are a crucial part of a UI's visual language and help users understand and interact with the interface efficiently. Here's a detailed overview of what icons entail with Playbook:
