@@ -25,7 +25,7 @@
           <%= pb_rails("flex", props:{orientation: "column", align:"center"}) do %>
               <%= pb_rails("flex/flex_item", props: { classname: "minw0 w100" }) do %>
                 <%= pb_rails("background", props: { display: "flex", justify_content: "center", classname: "markdown w100", background_color: "white", padding_x: "sm", padding_y: "md" }) do %>
-                  <%= pb_rails("background", props: { max_width: 'lg' , background_color: "white" }) do %>
+                  <%= pb_rails("background", props: { width: 'lg' , background_color: "white" }) do %>
                     <div class="markdown_title"><%= @page_title %></div>
                     <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
                       <%= pb_rails("nav/item", props: { text: "About", link: "/guides/getting_started/icons/", active: action_name == "icons"}) %>
