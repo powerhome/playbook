@@ -16,7 +16,6 @@ examples:
   - radio_alignment: Alignment
   - radio_disabled: Disabled
   - radio_custom_children: Custom Children
-  - radio_form: Form
 
   swift:
   - radio_default_swift: Default
