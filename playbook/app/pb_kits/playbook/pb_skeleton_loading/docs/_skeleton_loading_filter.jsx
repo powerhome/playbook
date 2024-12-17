@@ -49,13 +49,8 @@ const SkeletonLoadingFilter = () => {
                       orientation="row"
                   >
                       <SkeletonLoading 
-                          height="16px" 
-                          marginRight="md"
-                          width="62px"
-                      />
-                      <SkeletonLoading 
                           height="18px" 
-                          width="90px"
+                          width="120px"
                       />
                   </Flex>
               </Flex>
@@ -107,7 +102,7 @@ const SkeletonLoadingFilter = () => {
           <SkeletonLoading 
               height="127px" 
               marginBottom="lg"
-              width="824px"
+              width="100%"
           />
         ) : (
           <Filter
