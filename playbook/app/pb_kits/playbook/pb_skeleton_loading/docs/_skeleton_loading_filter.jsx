@@ -70,9 +70,9 @@ const SkeletonLoadingFilter = (props) => {
               sortOptions={{
                 popularity: 'Popularity',
                 // eslint-disable-next-line
-                manager_title: "Manager\'s Title",
+                manager_title: 'Manager\'s Title',
                 // eslint-disable-next-line
-                manager_name: "Manager\'s Name",
+                manager_name: 'Manager\'s Name',
               }}
               sortValue={[{ name: 'popularity', dir: 'desc' }]}
           >
@@ -124,8 +124,10 @@ const SkeletonLoadingFilter = (props) => {
               results={1}
               sortOptions={{
                 popularity: 'Popularity',
-                manager_title: "Manager's Title",
-                manager_name: "Manager's Name",
+                // eslint-disable-next-line
+                manager_title: 'Manager\'s Title',
+                // eslint-disable-next-line
+                manager_name: 'Manager\'s Name',
               }}
               sortValue={[{ name: 'popularity', dir: 'desc' }]}
           >
