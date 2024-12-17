@@ -5,7 +5,7 @@ const SortingChangeCallback = (sortOptions) => {
   alert(JSON.stringify(sortOptions[0]))
 }
 
-const SkeletonLoadingFilter = () => {
+const SkeletonLoadingFilter = (props) => {
   const isLoading = true
 
   const options = [
@@ -20,7 +20,10 @@ const SkeletonLoadingFilter = () => {
     <div>
       <div>
         {isLoading ? (
-          <Card marginBottom="lg">
+          <Card 
+              marginBottom="lg" 
+              {...props}
+          >
               <Flex 
                   alignItems="center" 
                   justify="between"
@@ -36,11 +39,13 @@ const SkeletonLoadingFilter = () => {
                           height="40px"
                           marginRight="sm"
                           width="40px"
+                          {...props}
                       />
                       <SkeletonLoading 
                           height="16px" 
                           marginRight="md"
                           width="80px"
+                          {...props}
                       />
                   </Flex>
                   <Flex 
@@ -51,6 +56,7 @@ const SkeletonLoadingFilter = () => {
                       <SkeletonLoading 
                           height="18px" 
                           width="120px"
+                          {...props}
                       />
                   </Flex>
               </Flex>
@@ -103,6 +109,7 @@ const SkeletonLoadingFilter = () => {
               height="127px" 
               marginBottom="lg"
               width="100%"
+              {...props}
           />
         ) : (
           <Filter
