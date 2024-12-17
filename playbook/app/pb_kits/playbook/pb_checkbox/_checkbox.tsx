@@ -69,6 +69,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(({
     else
     return (
     <input
+        {...props}
         defaultChecked={checked}
         disabled={disabled}
         name={name}
@@ -77,7 +78,6 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(({
         tabIndex={tabIndex}
         type="checkbox"
         value={value}
-        {...props}
     />)
   }
 

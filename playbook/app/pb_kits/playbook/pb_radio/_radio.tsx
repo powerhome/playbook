@@ -1,14 +1,11 @@
 /*eslint-disable react/no-multi-comp */
 
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import Body from '../pb_body/_body'
 import Flex from '../pb_flex/_flex'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
-import { withReactHookForm, WithReactHookFormProps } from '../utilities/withReactHookForm'
-import { FieldValues } from 'react-hook-form'
-
 
 type RadioProps = {
   aria?: { [key: string]: string },
@@ -27,13 +24,12 @@ type RadioProps = {
   name?: string,
   value?: string,
   text?: string,
-  onChange?: (event: React.FormEvent<HTMLInputElement> | null) => void,
+  onChange: (event: React.FormEvent<HTMLInputElement> | null) => void,
 } & GlobalProps
 
-const Radio = forwardRef<HTMLInputElement, RadioProps>(({
+const Radio = ({
   aria = {},
   alignment,
-  checked,
   children,
   className,
   customChildren = false,
@@ -49,7 +45,8 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   value = 'radio_text',
   onChange = () => { void 0 },
   ...props
-}, ref) => {
+}: RadioProps, ref: any) => {
+  const radioRef = useRef(null);
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -69,38 +66,32 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
     className
   );
 
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    onChange(event)
-  }
-
   const displayRadio = (props: RadioProps & any) => {
-    if (children && customChildren == false) {
+    if (children && customChildren == false)
       return (children)
-    }
-    
+    else
     return (
-      <input
-          disabled={disabled}
-          id={id}
-          name={name}
-          onChange={handleChange}
-          ref={ref}
-          type="radio"
-          value={value}
-          {...props}
-      />
-    )
-  }
+    <input
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={onChange}
+        ref={ref}
+        text={text}
+        type="radio"
+        value={value}
+        {...props}
+    />
+  )}
 
-  const handleContainerClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleContainerClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent> | undefined) => {
     if (event) {
       const target = event.target as HTMLElement;
       if (
         target.id === 'pb-radio-children-wrapper' ||
         target.closest('#pb-radio-children-wrapper')
       ) {
-        const inputElement = ref as React.RefObject<HTMLInputElement>;
-        inputElement.current?.click();
+        radioRef.current?.click();
       }
     }
   };
@@ -116,21 +107,23 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
           cursor='pointer'
           htmlFor={id}
           htmlOptions={{
-            onClick: handleContainerClick as unknown as () => void
+            onClick: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+              handleContainerClick(event);
+            }) as unknown as () => void
           }}
           id="radio-container"
       >
         <label className={buildCss('pb_radio_kit', alignment)}>
-          <input
-              disabled={disabled}
-              id={id}
-              name={name}
-              onChange={onChange}
-              ref={ref}
-              type="radio"
-              value={value}
-              {...props}
-          />
+        <input
+            disabled={disabled}
+            id={id}
+            name={name}
+            onChange={onChange}
+            ref={radioRef}
+            type="radio"
+            value={value}
+            {...props}
+        />
           <span className="pb_radio_button" />
         </label>
         <div id="pb-radio-children-wrapper"> {children} </div>
@@ -143,21 +136,17 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
             className={classes}
             htmlFor={id}
         >
-          <>{displayRadio(props)}</>
-          <span className="pb_radio_button" />
-          <Body
-              dark={dark}
-              status={error ? 'negative' : undefined}
-              text={label}
-              variant={undefined}
-          />
-        </label>
+        <>{displayRadio(props)}</>
+        <span className="pb_radio_button" />
+        <Body
+            dark={dark}
+            status={error ? 'negative' : null}
+            text={label}
+            variant={null}
+        />
+      </label>
     )
   );
-});
+};
 
-Radio.displayName = 'Radio'
-export type RadioWithHookFormProps<T extends FieldValues = FieldValues> = RadioProps & WithReactHookFormProps<T>
-
-const RadioWithHookForm = withReactHookForm(Radio)
-export default RadioWithHookForm
+export default forwardRef(Radio);
