@@ -16,6 +16,7 @@ examples:
   - text_input_add_on: Add On
   - text_input_inline: Inline
   - text_input_no_label: No Label
+  - text_input_mask: Mask
 
   swift:
     - text_input_default_swift: Default
