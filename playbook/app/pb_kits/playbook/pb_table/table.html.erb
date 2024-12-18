@@ -1,10 +1,10 @@
 <% if object.responsive_classname %>
-  <% div_classname = object.responsive_classname %>
+  <% responsive_class = object.responsive_classname %>
 <% else %>
-  <% div_classname = nil %>
+  <% responsive_class = nil %>
 <% end %>
 
-<%= content_tag(:div, class: div_classname) do %>
+<%= content_tag(:div, class: responsive_class) do %>
   <% if object.tag == "table" %>
     <%= content_tag(:table,
       aria: object.aria,
