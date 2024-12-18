@@ -1,4 +1,7 @@
-    .table-responsive-scroll {
-        display: block;
-        overflow-x: auto;
-    }
+.table-responsive-scroll {
+    display: block;
+    overflow-x: auto;
+    border-right: 1px solid $border_light !important;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
