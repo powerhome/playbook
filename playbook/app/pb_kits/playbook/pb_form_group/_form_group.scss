@@ -14,52 +14,29 @@
     }
   }
 
-
-  // This is handeling the misalignment of the buttons when the text input has an error and/or label
-  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has([class^=pb_button_kit]) {
-    align-items: center;
-  }
-
-  &:has(.pb_text_input_kit.error):has([class^=pb_button_kit]) {
+  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit),
+  &:has(.pb_text_input_kit):has(.pb_date_picker_kit.error),
+  &:has(.pb_text_input_kit):has(.pb_select_kit_wrapper.error),
+  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error) {
     align-items: flex-start;
   }
 
-  //This is handeling when two text inputs next to each other with and without an error
-  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit) {
-    align-items: flex-start;
-  }
-
-  //This is handeling when a text input and a date kit next to each other with and without an error
-  &:has(.pb_text_input_kit):has(.pb_date_picker_kit.error) {
-    align-items: flex-start;
-  }
-
-  //This is handeling when a text input and select kit are next to each other with and without an error
-  &:has(.pb_text_input_kit):has(.pb_select_kit_wrapper.error) {
-    align-items: flex-start;
-  }
-
-  &:has(.pb_text_input_kit:not(.error)):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error) {
+  &:has(.pb_text_input_kit:not(.error)):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error),
+  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper) {
     position: relative;
     align-items: flex-start;
+    .pb_select_kit_wrapper,
     .pb_select_kit_wrapper.error {
       padding-top: $space_md;
       margin-top: 2px;
-      .pb_select_kit_caret{
+      .pb_select_kit_caret {
         padding-top: $space_xl;
       }
     }
   }
 
-  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error) {
-    align-items: flex-end;
-  }
-
-  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper) {
-    align-items: center;
-  }
-
-  &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper.error):has(.pb_phone_number_input) {
+  &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper.error):has(.pb_phone_number_input),
+  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has([class^=pb_button_kit]) {
     align-items: center;
   }
 
