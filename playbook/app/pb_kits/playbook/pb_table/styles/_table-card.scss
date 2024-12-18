@@ -3,6 +3,7 @@
   &.table-md,
   &.table-lg {
     &.table-card {
+      display: table;
       border-collapse: separate;
       border-spacing: 0;
       background: $white;
