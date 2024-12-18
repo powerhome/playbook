@@ -107,7 +107,7 @@ const VisualGuidelines = ({
 
       default:
         if (window.location.pathname !== "/visual_guidelines/colors") {
-          window.history.pushState(null, "", "/visual_guidelines/colors");
+          window.history.replaceState(null, "", "/visual_guidelines/colors");
         }
         return <Colors />;
     }
