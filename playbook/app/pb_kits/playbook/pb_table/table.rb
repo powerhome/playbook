@@ -40,7 +40,8 @@ module Playbook
         generate_classname(
           "pb_table", "table-#{size}", single_line_class, dark_class,
           disable_hover_class, container_class, data_table_class, sticky_class, sticky_left_column_class,
-          collapse_class, vertical_border_class, striped_class, outer_padding_class, separator: " "
+          collapse_class, vertical_border_class, striped_class, outer_padding_class,
+          "table-responsive-#{responsive}", separator: " "
         )
       end
 
