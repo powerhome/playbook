@@ -96,6 +96,7 @@ body.PBDrawer__Body--close {
 .pb_drawer {
    will-change: transform;
    backface-visibility: hidden;
+   padding: $space_sm;
 
   .drawer {
     position: sticky;

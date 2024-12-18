@@ -1,45 +1,44 @@
-import React, { useState, useEffect } from "react";
-import classnames from "classnames";
+import React, { useState, useEffect } from "react"
+import classnames from "classnames"
 
 import {
   buildAriaProps,
   buildCss,
   buildDataProps,
   buildHtmlProps,
-} from "../utilities/props";
-import { globalProps, globalInlineProps } from "../utilities/globalProps";
-
-import { DialogContext } from "../pb_dialog/_dialog_context";
+} from "../utilities/props"
+import { globalProps, globalInlineProps } from "../utilities/globalProps"
+import { DialogContext } from "../pb_dialog/_dialog_context"
+import { useBreakpoint } from "./hooks/useBreakpoint"
+import { useDrawerAnimation } from "./hooks/useDrawerAnimation"
 
 type DrawerProps = {
-  aria?: { [key: string]: string };
-  behavior?: "floating" | "push";
-  border?: "full" | "none" | "right" | "left";
-  openBreakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
-  closeBreakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
-  children: React.ReactNode | React.ReactNode[] | string;
-  className?: string;
-  data?: { [key: string]: string };
-  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
-  id?: string;
-  fullHeight?: boolean;
-  menuButtonID?: string;
-  onClose?: () => void;
-  opened: boolean;
-  overlay: boolean;
-  placement?: "left" | "right";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  text?: string;
-  withinElement?: boolean;
-};
+  aria?: { [key: string]: string }
+  behavior?: "floating" | "push"
+  border?: "full" | "none" | "right" | "left"
+  breakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl"
+  children: React.ReactNode | React.ReactNode[] | string
+  className?: string
+  data?: { [key: string]: string }
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
+  id?: string
+  fullHeight?: boolean
+  menuButtonID?: string
+  onClose?: () => void
+  opened: boolean
+  overlay: boolean
+  placement?: "left" | "right"
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
+  text?: string
+  withinElement?: boolean
+}
 
 const Drawer = (props: DrawerProps): React.ReactElement => {
   const {
     aria = {},
     behavior = "floating",
     border = "none",
-    openBreakpoint = "none",
-    closeBreakpoint = "none",
+    breakpoint = "none",
     className,
     data = {},
     htmlOptions = {},
@@ -53,289 +52,123 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     overlay = true,
     placement = "left",
     withinElement = false,
-  } = props;
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
-  const htmlProps = buildHtmlProps(htmlOptions);
+  } = props
 
-  let globalPropsString: string = globalProps(props);
+  const [menuButtonOpened, setMenuButtonOpened] = useState(false)
 
-  // Check if the string contains any of the prefixes
-  const containsPrefix = [
-    "p_",
-    "pb_",
-    "pt_",
-    "pl_",
-    "pr_",
-    "px_",
-    "py_",
-  ].some((prefix) => globalPropsString.includes(prefix));
-
-  // If none of the prefixes are found, append 'p_sm' to the string
-  if (!containsPrefix) {
-    globalPropsString += " p_sm";
-  }
-
-  const drawerClassNames = {
-    base: `${classnames(
-      "pb_drawer",
-      buildCss("pb_drawer", size, placement),
-      {
-        drawer_border_full: border === "full",
-        drawer_border_right: border === "right",
-        drawer_border_left: border === "left",
-        pb_drawer_within_element: withinElement,
-      }
-    )} ${globalPropsString}`,
-    afterOpen: "pb_drawer_after_open",
-    beforeClose: "pb_drawer_before_close",
-  };
-
-  const fullHeightClassNames = () => {
-    if (!fullHeight) return null;
-    return `full_height_${placement}`;
-  };
-
-  const overlayClassNames = {
-    base: `pb_drawer${overlay ? "_overlay" : "_no_overlay"} ${
-      fullHeight !== null && fullHeightClassNames()
-    } ${!overlay ? "no-background" : ""}`,
-    afterOpen: "pb_drawer_overlay_after_open",
-    beforeClose: "pb_drawer_overlay_before_close",
-  };
-
-  const classes = classnames(buildCss("pb_drawer_wrapper"), className);
-  const dynamicInlineProps = globalInlineProps(props)
-  const [menuButtonOpened, setMenuButtonOpened] = useState(false);
-  const [triggerOpened, setTriggerOpened] = useState(false);
-
-  const breakpointWidths: Record<DrawerProps["openBreakpoint"], number> = {
-    none: 0,
-    xs: 575,
-    sm: 768,
-    md: 992,
-    lg: 1200,
-    xl: 1400,
-  };
-
-  const breakpointValues = { 
-    none: 0,
-    xs: 575,
-    sm: 768,
-    md: 992,
-    lg: 1200,
-    xl: 1400,
-  }
-
-  const [isOpenBreakpointOpen, setIsOpenBreakpointOpen] = useState(false);
-  const [isUserClosed, setIsUserClosed] = useState(false);
-
-  useEffect(() => {
-    if (openBreakpoint === "none") return;
-
-    const handleResize = () => {
-      const width = window.innerWidth;
-      const openBreakpointWidth = breakpointWidths[openBreakpoint];
-
-      if (width <= openBreakpointWidth) {
-        setIsOpenBreakpointOpen(true);
-      } else {
-        setIsOpenBreakpointOpen(false);
-        setIsUserClosed(false); // Reset when the breakpoint condition changes
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // Call handler once on mount to set initial state
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [openBreakpoint]);
-
-  useEffect(() => {
-    if (closeBreakpoint === "none") return;
-
-   const handleResize = () => { 
-    const width = window.innerWidth;
-    if (width >= breakpointValues[closeBreakpoint]) {
-      setIsOpenBreakpointOpen(true);
-    } else {
-      setIsOpenBreakpointOpen(false);
+  const { isOpenBreakpointOpen, isUserClosed, setIsUserClosed } = useBreakpoint(
+    {
+      openBreakpoint: breakpoint,
+      closeBreakpoint: breakpoint,
+      menuButtonID,
     }
-    }
+  )
 
-    window.addEventListener("resize", handleResize);
+  const modalIsOpened =
+    (isOpenBreakpointOpen && !isUserClosed) || menuButtonOpened || opened
 
-    handleResize();
+  const { animationState, isVisible } = useDrawerAnimation(modalIsOpened)
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-    
-  }, [closeBreakpoint]);
-
-  //hide menu button if breakpoint opens the drawer  
+  // Handle menu button click
   useEffect(() => {
     if (menuButtonID) {
-      const menuButton = document.getElementById(menuButtonID);
+      const menuButton = document.getElementById(menuButtonID)
       if (menuButton) {
-        if (isOpenBreakpointOpen) {
-          menuButton.style.display = 'none';
-        } else {
-          menuButton.style.display = '';
+        const handleMenuButtonClick = () => {
+          if (modalIsOpened) {
+            setMenuButtonOpened(false)
+            setIsUserClosed(true)
+          } else {
+            setMenuButtonOpened(true)
+            setIsUserClosed(false)
+          }
+        }
+        menuButton.addEventListener("click", handleMenuButtonClick)
+        return () => {
+          menuButton.removeEventListener("click", handleMenuButtonClick)
         }
       }
     }
-  }, [menuButtonID, isOpenBreakpointOpen]);
+  }, [menuButtonID, modalIsOpened])
 
-  // Reset isUserClosed when isBreakpointOpen changes
-  useEffect(() => {
-    if (isOpenBreakpointOpen) {
-      setIsUserClosed(false);
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+  const dynamicInlineProps = globalInlineProps(props)
+
+  const drawerClasses = classnames(
+    "pb_drawer",
+    buildCss("pb_drawer", size, placement),
+    {
+      drawer_border_full: border === "full",
+      drawer_border_right: border === "right",
+      drawer_border_left: border === "left",
+      pb_drawer_within_element: withinElement,
+      pb_drawer_after_open: animationState === "afterOpen",
+      pb_drawer_before_close: animationState === "beforeClose",
     }
-  }, [isOpenBreakpointOpen]);
+  )
 
-  const modalIsOpened =
-    (isOpenBreakpointOpen && !isUserClosed) || menuButtonOpened || opened;
-
-  const [animationState, setAnimationState] = useState("");
-
-  useEffect(() => {
-    if (modalIsOpened) {
-      setAnimationState("afterOpen");
-    } else if (!modalIsOpened && animationState === "afterOpen") {
-      setAnimationState("beforeClose");
-      setTimeout(() => {
-        setAnimationState("");
-      }, 200); 
+  const overlayClasses = classnames(
+    `pb_drawer${overlay ? "_overlay" : "_no_overlay"}`,
+    fullHeight && `full_height_${placement}`,
+    !overlay && "no-background",
+    {
+      pb_drawer_overlay_after_open: animationState === "afterOpen",
+      pb_drawer_overlay_before_close: animationState === "beforeClose",
     }
-  }, [modalIsOpened]);
-
-  const isModalVisible = modalIsOpened || animationState === "beforeClose";
-
-  useEffect(() => {
-    if (withinElement) return;
-
-    const sizeMap: Record<DrawerProps["size"], string> = {
-      xl: "365px",
-      lg: "300px",
-      md: "250px",
-      sm: "200px",
-      xs: "64px",
-    };
-    const body = document.querySelector("body");
-    if (modalIsOpened && behavior === "push" && body) {
-      if (placement === "left") {
-        body.style.cssText = `margin-left: ${sizeMap[size]} !important; margin-right: '' !important;`;
-      } else if (placement === "right") {
-        body.style.cssText = `margin-right: ${sizeMap[size]} !important; margin-left: '' !important;`;
-      }
-
-      body.classList.add("PBDrawer__Body--open");
-    } else if (body) {
-      if (body.classList.contains("PBDrawer__Body--open")) {
-        body.classList.add("PBDrawer__Body--close");
-      }
-      body.style.cssText = ""; // Clear the styles when modal is closed or behavior is not 'push'
-      body.classList.remove("PBDrawer__Body--open");
-    }
-  }, [modalIsOpened, behavior, placement, size, withinElement]);
+  )
 
   const api = {
     onClose: () => {
       if (menuButtonID) {
-        setMenuButtonOpened(false);
+        setMenuButtonOpened(false)
       }
-      setIsUserClosed(true);
+      setIsUserClosed(true)
       if (onClose) {
-        onClose();
+        onClose()
       }
     },
-  };
+  }
 
-  useEffect(() => {
-    if (menuButtonID) {
-      const menuButton = document.getElementById(menuButtonID);
-      if (menuButton) {
-        const handleMenuButtonClick = () => {
-          if (modalIsOpened) {
-            // Drawer is open, close it
-            setMenuButtonOpened(false);
-            setIsUserClosed(true);
-          } else {
-            // Drawer is closed, open it
-            setMenuButtonOpened(true);
-            setIsUserClosed(false);
-          }
-        };
-        menuButton.addEventListener("click", handleMenuButtonClick);
-        return () => {
-          menuButton.removeEventListener("click", handleMenuButtonClick);
-        };
-      }
-    }
-  }, [menuButtonID, modalIsOpened]);
+  const drawerContent = (
+    <div
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={drawerClasses}
+        onClick={(e) => e.stopPropagation()}
+        style={dynamicInlineProps}
+    >
+      {children}
+    </div>
+  )
+
+  if (!isVisible) return null
 
   return (
     <DialogContext.Provider value={api}>
       {withinElement ? (
-        isModalVisible && (
-          <div
-              {...ariaProps}
-              {...dataProps}
-              {...htmlProps}
-              style={dynamicInlineProps}
-              className={classnames(drawerClassNames.base, {
-              [drawerClassNames.afterOpen]:
-                animationState === "afterOpen",
-              [drawerClassNames.beforeClose]:
-                animationState === "beforeClose",
-            })}
-              id={id}
-              onClick={(e) => e.stopPropagation()}
-          >
-            {children}
-          </div>
-        )
+        drawerContent
       ) : (
         <div
             {...ariaProps}
             {...dataProps}
             {...htmlProps}
-            className={classes}
+            className={classnames(buildCss("pb_drawer_wrapper"), className)}
             style={dynamicInlineProps}
         >
-          {isModalVisible && (
-            <div
-                className={classnames(overlayClassNames.base, {
-                [overlayClassNames.afterOpen]:
-                  animationState === "afterOpen",
-                [overlayClassNames.beforeClose]:
-                  animationState === "beforeClose",
-              })}
-                id={id}
-                onClick={overlay ? api.onClose : undefined}
-            >
-              <div
-                  className={classnames(drawerClassNames.base, {
-                  [drawerClassNames.afterOpen]:
-                    animationState === "afterOpen",
-                  [drawerClassNames.beforeClose]:
-                    animationState === "beforeClose",
-                })}
-                  onClick={(e) => e.stopPropagation()}
-              >
-                {children}
-              </div>
-            </div>
-          )}
+          <div
+              className={overlayClasses}
+              id={id}
+              onClick={overlay ? api.onClose : undefined}
+          >
+            {drawerContent}
+          </div>
         </div>
       )}
     </DialogContext.Provider>
-  );
-};
+  )
+}
 
-export default Drawer;
+export default Drawer
