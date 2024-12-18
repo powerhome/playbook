@@ -7,7 +7,7 @@
     stroke: none;
 
     &[class*=dark] {
-      fill: $text_dk_light;
+      fill: $text_dk_default;
     }
   }
 
@@ -39,7 +39,7 @@
   }
 
   &[class*=dark] {
-    color: $text_dk_light;
+    color: $text_dk_default;
 
     .pb_title_kit_size_1,
     .pb_caption_kit_xs {
