@@ -1,4 +1,5 @@
 @import "../tokens/spacing";
+@import "./error_state_mixin";
 
 [class^=pb_form_group_kit] {
   display: inline-flex;
@@ -14,43 +15,48 @@
     }
   }
 
-  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit),
-  &:has(.pb_text_input_kit):has(.pb_date_picker_kit.error),
-  &:has(.pb_text_input_kit):has(.pb_select_kit_wrapper.error),
-  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error) {
-    align-items: flex-start;
-  }
+@include error-state-flex-start-selectors;
+@include error-state-center-selectors;
+@include error-state-flex-end-selectors;
+@include error-state-left-side-select-kit;
+@include error-state-right-side-select-kit;
 
-  &:has(.pb_text_input_kit:not(.error)):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error),
-  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper) {
-    position: relative;
-    align-items: flex-start;
-    .pb_select_kit_wrapper,
-    .pb_select_kit_wrapper.error {
-      padding-top: $space_md;
-      margin-top: 2px;
-      .pb_select_kit_caret {
-        padding-top: $space_xl;
-      }
-    }
-  }
+  // &:has(.pb_text_input_kit.error):has(.pb_text_input_kit),
+  // &:has(.pb_text_input_kit):has(.pb_date_picker_kit.error),
+  // &:has(.pb_text_input_kit):has(.pb_select_kit_wrapper.error),
+  // &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error) {
+  //   align-items: flex-start;
+  // }
 
-  &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper.error):has(.pb_phone_number_input),
-  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has([class^=pb_button_kit]) {
-    align-items: center;
-  }
+  // &:has(.pb_text_input_kit:not(.error)):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error),
+  // &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper) {
+  //   align-items: flex-start;
+  //   .pb_select_kit_wrapper,
+  //   .pb_select_kit_wrapper.error {
+  //     padding-top: $space_md;
+  //     margin-top: 2px;
+  //     .pb_select_kit_caret {
+  //       padding-top: $space_xl;
+  //     }
+  //   }
+  // }
 
-  &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper.error):has(.pb_phone_number_input):has(.pb_text_input_kit.error) {
-    align-items: flex-end;
-  }
+  // &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper.error):has(.pb_phone_number_input),
+  // &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has([class^=pb_button_kit]) {
+  //   align-items: center;
+  // }
 
-  &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper):has(.pb_phone_number_input):has(.pb_text_input_kit.error) {
-    align-items: flex-start;
-    .pb_text_input_kit.error {
-      padding-top: $space_md;
-      margin-top: 2px;
-    }
-  }
+  // &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper.error):has(.pb_phone_number_input):has(.pb_text_input_kit.error) {
+  //   align-items: flex-end;
+  // }
+
+  // &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper):has(.pb_phone_number_input):has(.pb_text_input_kit.error) {
+  //   align-items: flex-start;
+  //   .pb_text_input_kit.error {
+  //     padding-top: $space_md;
+  //     margin-top: 2px;
+  //   }
+  // }
 
   & [class^=pb_text_input_kit] .text_input_wrapper,
   & [class^=pb_date_picker_kit] .input_wrapper,
