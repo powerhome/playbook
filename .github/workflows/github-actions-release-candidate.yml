@@ -61,7 +61,7 @@ jobs:
           fi
 
           if echo "$LABELS" | grep -iq "Inactive RC"; then
-            echo "⛔ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
             exit 0  # Exit the job early, skipping the rest of the workflow
           fi
 
