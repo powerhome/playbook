@@ -10,7 +10,7 @@ import Body from '../pb_body/_body'
 import Card from '../pb_card/_card'
 
 type FileUploadProps = {
-  accept?: string[],
+  accept?: Record<string, string[]>,
   className?: string,
   customMessage?: string,
   dark?: boolean,
@@ -28,7 +28,7 @@ const getFormattedFileSize = (fileSize: number): string => {
 
 const FileUpload = (props: FileUploadProps): React.ReactElement => {
   const {
-    accept = null,
+    accept = {},
     acceptedFilesDescription = '',
     className,
     customMessage,
@@ -71,7 +71,11 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
   }, [maxFileSizeText, maxSize, onFilesRejected, rejectedFiles])
 
   const acceptedFileTypes = () => {
-    return accept.map((fileType) => {
+    if (!accept) {
+      return []
+    }
+
+    return Object.keys(accept).map((fileType) => {
       if (fileType.startsWith('image/')) {
         return fileType.replace('image/', ' ')
       } else {

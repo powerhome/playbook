@@ -25,7 +25,10 @@ const FileUploadCustomDescription = (props) => {
           {...props}
       />
       <FileUpload
-          accept={['application/pdf','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']}
+          accept={{
+            "application/pdf": [".pdf"],
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"],
+          }}
           acceptedFilesDescription="Adobe (.pdf) and Microsoft (.xslx)"
           onFilesAccepted={handleOnFilesAccepted}
           {...props}
