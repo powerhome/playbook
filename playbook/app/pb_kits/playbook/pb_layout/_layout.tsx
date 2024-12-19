@@ -24,34 +24,37 @@ type LayoutPropTypes = {
 type LayoutSideProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
-}
+} & GlobalProps
 
 type LayoutBodyProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
-}
+} & GlobalProps
 
 type LayoutItemProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
   size?: "sm" | "md" | "lg"
-}
+} & GlobalProps
 
 type LayoutHeaderProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
-}
+} & GlobalProps
 
 type LayoutFooterProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
-}
+} & GlobalProps
 
-// Side component
 const Side = (props: LayoutSideProps) => {
   const { children, className } = props
+  const dynamicInlineProps = globalInlineProps(props)
   return (
-    <div className={classnames('layout_sidebar', globalProps(props), className)}>
+    <div
+        className={classnames('layout_sidebar', globalProps(props), className)}
+        style={dynamicInlineProps}
+    >
       {children}
     </div>
   )
@@ -60,8 +63,12 @@ const Side = (props: LayoutSideProps) => {
 // Body component
 const Body = (props: LayoutBodyProps) => {
   const { children, className } = props
+  const dynamicInlineProps = globalInlineProps(props)
   return (
-    <div className={classnames('layout_body', globalProps(props), className)}>
+    <div
+        className={classnames('layout_body', globalProps(props), className)}
+        style={dynamicInlineProps}
+    >
       {children}
     </div>
   )
@@ -71,8 +78,12 @@ const Body = (props: LayoutBodyProps) => {
 const Item = (props: LayoutItemProps) => {
   const { children, className, size = 'sm' } = props
   const sizeClass = `size_${size}`
+  const dynamicInlineProps = globalInlineProps(props)
   return (
-    <div className={classnames('layout_item', sizeClass, globalProps(props), className)}>
+    <div
+        className={classnames('layout_item', sizeClass, globalProps(props), className)}
+        style={dynamicInlineProps}
+    >
       {children}
     </div>
   )
@@ -81,8 +92,12 @@ const Item = (props: LayoutItemProps) => {
 // Header component
 const Header = (props: LayoutHeaderProps) => {
   const { children, className } = props
+  const dynamicInlineProps = globalInlineProps(props)
   return (
-    <div className={classnames('layout_header', globalProps(props), className)}>
+    <div
+        className={classnames('layout_header', globalProps(props), className)}
+        style={dynamicInlineProps}
+    >
       {children}
     </div>
   )
@@ -91,8 +106,12 @@ const Header = (props: LayoutHeaderProps) => {
 // Footer component
 const Footer = (props: LayoutFooterProps) => {
   const { children, className } = props
+  const dynamicInlineProps = globalInlineProps(props)
   return (
-    <div className={classnames('layout_footer', globalProps(props), className)}>
+    <div
+        className={classnames('layout_footer', globalProps(props), className)}
+        style={dynamicInlineProps}
+    >
       {children}
     </div>
   )
