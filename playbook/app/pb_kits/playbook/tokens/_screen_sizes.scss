@@ -8,6 +8,7 @@ $screen-lg-min: 992px !default;
 $screen-lg-max: $screen-lg-min - 1 !default;
 $screen-xl-min: 1200px !default;
 $screen-xl-max: $screen-xl-min - 1 !default;
+$screen-2xl-min: 1440px !default;
 
 $breakpoints: (
   xs: $screen-xs-min,

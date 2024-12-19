@@ -5,9 +5,10 @@
     overflow-x: scroll;
 
     // Responsive Styles
-    @media only screen and (max-width: $screen-xl-min) {
+    @media (max-width: 1600px) {
         &[class*="table-responsive-scroll"] {
-            border-right: 1px solid $border_light !important;
+            box-shadow: 1px 0 0 0px $border_light,
+                        -1px 0 0 0px $border_light;
         }
     }
 }
