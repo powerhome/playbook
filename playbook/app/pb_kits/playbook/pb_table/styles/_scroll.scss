@@ -1,5 +1,13 @@
+@import "../../tokens/screen_sizes";
+
 .table-responsive-scroll {
     display: block;
     overflow-x: scroll;
-    outline: 1px solid $border_light !important;
+
+    // Responsive Styles
+    @media only screen and (max-width: $screen-xl-min) {
+        &[class*="table-responsive-scroll"] {
+            border-right: 1px solid $border_light !important;
+        }
+    }
 }
