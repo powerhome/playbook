@@ -46,7 +46,7 @@ $section_colors_dark: (
       }
 
       &[class*=_vertical] {
-        &::before, &::after {
+        &::after {
           background: $color_value;
         }
       }
@@ -70,6 +70,9 @@ $section_colors_dark: (
   &[class*=_vertical] {
     margin-left: $space_xs;
     margin-right: $space_xs;
+    &::before {
+      display: none;
+    }
     &::after {
       @include section_separator_vertical(false);
     }
@@ -84,6 +87,33 @@ $section_colors_dark: (
   // Dark =========================
 
   &.dark {
+    @each $color_name, $color_value in $section_selector_colors {
+      &[class*="color_#{$color_name}"] {
+        &::before, &::after {
+          background: $color_value;
+        }
+
+        &[class*=_vertical] {
+          &::after {
+            @include section_separator_vertical(false);
+            background: $color_value;
+          }
+        }
+
+        &[class*=_dashed] {
+          &::before, &::after {
+            border: 1px dashed $color_value;
+            background: none;
+          }
+          &[class*=_vertical] {
+            &::after {
+              border: 1px dashed $color_value;
+              background: none;
+            }
+          }
+        }
+      }
+    }
     &::before {
       @include section_separator_horizontal(true);
     }
