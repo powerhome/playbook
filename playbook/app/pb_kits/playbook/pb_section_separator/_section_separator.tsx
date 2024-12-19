@@ -39,7 +39,7 @@ const SectionSeparator = (props: SectionSeparatorProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, lineStyle === "dashed" ? lineStyle : ""), globalProps(props), color ? `color_${color}` : '', className)
+  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, lineStyle === "dashed" ? lineStyle : ""), globalProps(props), color !== "default" ? `color_${color}` : '', className)
   const dynamicInlineProps = globalInlineProps(props)
 
   return (
