@@ -7,8 +7,8 @@
     // Responsive Styles
     @media (max-width: 1600px) {
         &[class*="table-responsive-scroll"] {
-            box-shadow: 1px 0 0 0px $border_light,
-                        -1px 0 0 0px $border_light;
-        }
+            border-radius: 4px;
+            box-shadow: 1px 0 0 0px $border_light
+          }
     }
 }
