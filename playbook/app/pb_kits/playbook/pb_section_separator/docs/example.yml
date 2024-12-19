@@ -16,7 +16,6 @@ examples:
   - section_separator_children: Children
   - section_separator_color: Color
 
-
   swift:
   - section_separator_line_swift: Line Separator
   - section_separator_dashed_swift: Dashed Separator
