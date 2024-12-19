@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useRef } from 'react'
-import { useDropzone, DropzoneInputProps, DropzoneRootProps } from 'react-dropzone'
+import { useDropzone, DropzoneInputProps, DropzoneRootProps, FileRejection } from 'react-dropzone'
 import classnames from 'classnames'
 
 import { buildCss, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
@@ -8,6 +8,8 @@ import type { Callback } from '../types'
 
 import Body from '../pb_body/_body'
 import Card from '../pb_card/_card'
+
+import { isEmpty } from '../utilities/object'
 
 type FileUploadProps = {
   accept?: Record<string, string[]>,
@@ -19,7 +21,7 @@ type FileUploadProps = {
   acceptedFilesDescription?: string,
   maxSize?: number,
   onFilesAccepted: Callback<File, File>,
-  onFilesRejected: (error: string, files: File[]) => void,
+  onFilesRejected: (error: string, files: readonly FileRejection[]) => void,
 }
 
 const getFormattedFileSize = (fileSize: number): string => {
@@ -48,27 +50,30 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     getRootProps: () => DropzoneRootProps & any;
     getInputProps: () => DropzoneInputProps & any;
     isDragActive: boolean;
-    rejectedFiles: File[];
+    fileRejections: readonly FileRejection[];
   }
 
-  const { getRootProps, getInputProps, isDragActive, rejectedFiles }: DropZoneProps = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, fileRejections }: DropZoneProps = useDropzone({
     accept,
     maxSize,
     onDrop,
   })
 
-  const prevRejected = useRef<File[] | null>(null);
+  const prevRejected = useRef<readonly FileRejection[] | null>(null);
 
-  const maxFileSizeText = `Max file size is ${getFormattedFileSize(maxSize)}.`
+  let maxFileSizeText = ''
+  if (maxSize !== undefined) {
+    maxFileSizeText = `Max file size is ${getFormattedFileSize(maxSize)}.`
+  }
 
   useEffect(() => {
-    if (rejectedFiles === prevRejected.current) return
-    const isFileTooLarge = maxSize && rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
+    if (fileRejections === prevRejected.current) return
+    const isFileTooLarge = maxSize && fileRejections.length > 0 && fileRejections[0].file.size > maxSize;
     if (isFileTooLarge) {
-      onFilesRejected(`File size is too large! ${maxFileSizeText}`, rejectedFiles)
+      onFilesRejected(`File size is too large! ${maxFileSizeText}`, fileRejections)
     }
-    prevRejected.current = rejectedFiles
-  }, [maxFileSizeText, maxSize, onFilesRejected, rejectedFiles])
+    prevRejected.current = fileRejections
+  }, [maxFileSizeText, maxSize, onFilesRejected, fileRejections])
 
   const acceptedFileTypes = () => {
     if (!accept) {
@@ -90,7 +95,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
   const getDescription = () => {
     return customMessage
       ? customMessage
-      : `Choose a file or drag it here.${accept === null ? '' : ` The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`}${maxSize ? ` ${maxFileSizeText}` : ''}`;
+      : `Choose a file or drag it here.${isEmpty(accept) ? '' : ` The accepted file types are: ${acceptedFilesDescription || acceptedFileTypes()}.`}${maxSize ? ` ${maxFileSizeText}` : ''}`;
   }
 
   return (
