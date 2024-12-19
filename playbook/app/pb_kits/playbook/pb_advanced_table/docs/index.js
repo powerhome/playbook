@@ -12,3 +12,4 @@ export { default as AdvancedTableResponsive } from './_advanced_table_responsive
 export { default as AdvancedTableCustomCell } from './_advanced_table_custom_cell.jsx'
 export { default as AdvancedTablePagination } from './_advanced_table_pagination.jsx'
 export { default as AdvancedTablePaginationWithProps } from './_advanced_table_pagination_with_props.jsx'
+export { default as AdvancedTableColumnHeaders } from './_advanced_table_column_headers.jsx'

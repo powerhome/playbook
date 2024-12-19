@@ -31,6 +31,21 @@
     min-width: 180px;
   }
 
+  .pb_advanced_table_header {
+    > tr:not(:first-child) {
+      th {
+        border-radius: 0px !important;
+        border-width: 0 1px 1px 0 !important;
+      }
+      th:first-child {
+        border-left-width: 1px !important;
+        @media only screen and (max-width: $screen-xl-min) {
+          border-left-width: 0 !important;
+        }
+      }
+    }
+  }
+
   .table-header-cells-active:first-child {
     color: $primary !important;
   }

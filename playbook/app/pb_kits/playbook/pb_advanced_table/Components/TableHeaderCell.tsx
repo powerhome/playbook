@@ -49,10 +49,15 @@ export const TableHeaderCell = ({
     }
   }
 
+  const isLeafColumn =
+  header.column.getLeafColumns().length === 1 &&
+  header.column.getLeafColumns()[0].id === header.column.id
+
 const cellClassName = classnames("table-header-cells", 
   `${isChrome() ? "chrome-styles" : ""}`, 
   `${enableSorting ? "table-header-cells-active" : ""}`,
   { 'pinned-left': responsive === "scroll" && isPinnedLeft },
+  isLeafColumn ? "leaf-column" : "",
 )
 
 const cellId = `${loading ? 
@@ -72,10 +77,13 @@ const isToggleExpansionEnabled =
   (enableToggleExpansion === "all" || "header") &&
   enableToggleExpansion !== "none"
 
+const justifyHeader = isLeafColumn ? "end" : "center"
+
   return (
     <th
         align="right"
         className={cellClassName}
+        colSpan={header.colSpan}
         id={cellId}
         key={`${header.id}-header`}
     >
@@ -89,7 +97,7 @@ const isToggleExpansionEnabled =
       ) : (
         <Flex
             alignItems="center"
-            justify={header.index === 0 && enableSorting ? "between" : header.index === 0 && !enableSorting ? "start" : "end"}
+            justify={header.index === 0 && enableSorting ? "between" : header.index === 0 && !enableSorting ? "start" : justifyHeader}
         >
           {isToggleExpansionEnabled && (
               <ToggleIconButton onClick={handleExpandOrCollapse} />
