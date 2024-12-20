@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "changelog/figma",          to: "pages#changelog_figma"
   get "changelog",                to: redirect("changelog/web")
 
+  get "changelog/*path", to: redirect("changelog/web")
+
   # Kits
 
   ## Beta View
