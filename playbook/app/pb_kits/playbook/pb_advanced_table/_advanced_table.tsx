@@ -240,7 +240,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss("pb_advanced_table"),
-    `table-responsive-${responsive}`,
+    `advanced-table-responsive-${responsive}`,
     globalProps(props),
     className
   )
