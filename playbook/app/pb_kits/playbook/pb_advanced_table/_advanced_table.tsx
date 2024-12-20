@@ -152,12 +152,14 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           return {
             header: column.label || "",
             columns: buildColumns(column.columns),
+            headerClassName: 'grouped-header',
           };
         } else {
           // Define the base column structure
           const columnStructure = {
             ...columnHelper.accessor(column.accessor, {
               header: column.label || "",
+              cellClassName: 'leaf-column-cell',
             }),
           };
 

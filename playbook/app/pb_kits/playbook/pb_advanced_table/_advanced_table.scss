@@ -33,9 +33,13 @@
 
   .pb_advanced_table_header {
     > tr:not(:first-child) {
+      .last-header-cell {
+        border-right: 1px solid $border_light !important;
+      }
+    
       th {
         border-radius: 0px !important;
-        border-width: 0 1px 1px 0 !important;
+        border-width: 0 0 1px 0 !important;
       }
       th:first-child {
         border-left-width: 1px !important;
@@ -43,8 +47,26 @@
           border-left-width: 0 !important;
         }
       }
+      th:last-child {
+        border-right-width: 1px !important;
+        @media only screen and (max-width: $screen-xl-min) {
+          border-right-width: 0 !important;
+        }
+      }
+    }
+    th[colspan]:not([colspan="1"]) {
+      border-right: 1px solid $border_light;
+    }
+
+  
+  }
+
+  .pb_advanced_table_body {
+    .last-cell {
+      border-right: 1px solid $border_light !important;
     }
   }
+
 
   .table-header-cells-active:first-child {
     color: $primary !important;

@@ -40,25 +40,25 @@ export const TableHeaderCell = ({
 
   const toggleSortButton = (event: React.SyntheticEvent) => {
     if (sortControl) {
-      const sortIsDesc = header.column.getIsSorted() === "desc"
+      const sortIsDesc = header?.column.getIsSorted() === "desc"
       sortIsDesc
         ? sortControl.onChange({ desc: true })
         : sortControl.onChange({ desc: false })
     } else {
-      header.column.getToggleSortingHandler()(event)
+      header?.column.getToggleSortingHandler()(event)
     }
   }
 
   const isLeafColumn =
-  header.column.getLeafColumns().length === 1 &&
-  header.column.getLeafColumns()[0].id === header.column.id
+  header?.column.getLeafColumns().length === 1 &&
+  header?.column.getLeafColumns()[0].id === header.column.id
 
 const cellClassName = classnames("table-header-cells", 
   `${isChrome() ? "chrome-styles" : ""}`, 
   `${enableSorting ? "table-header-cells-active" : ""}`,
   { 'pinned-left': responsive === "scroll" && isPinnedLeft },
-  isLeafColumn ? "leaf-column" : "",
-)
+  `${header.column.parent?.columns.at(-1)?.id === header.id ? "last-header-cell" : ""}`,
+) 
 
 const cellId = `${loading ? 
     `loading-${header.id}`

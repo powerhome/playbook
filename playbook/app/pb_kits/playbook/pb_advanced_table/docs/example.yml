@@ -21,4 +21,4 @@ examples:
   - advanced_table_custom_cell: Custom Components for Cells
   - advanced_table_pagination: Pagination
   - advanced_table_pagination_with_props: Pagination Props
-  - advanced_table_column_headers: Column Headers
+  - advanced_table_column_headers: Multiple Column Headers

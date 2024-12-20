@@ -51,7 +51,6 @@ const AdvancedTableColumnHeaders = (props) => {
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           tableData={MOCK_DATA}
-          tableProps={{verticalBorder: true}}
           {...props}
       />
     </div>
