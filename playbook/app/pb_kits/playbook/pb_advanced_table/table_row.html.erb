@@ -2,6 +2,14 @@
         <% object.column_definitions.each_with_index do |column, index| %>
             <%= pb_rails("table/table_cell", props: { tag:"div", classname:object.td_classname}) do %>
                 <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end" }) do %>
+                    <% if collapsible_trail && index.zero? %>
+                        <% (1..depth).each do |i| %>
+                            <% additional_offset = i > 1 ? (i - 1) * 0.25 : 0 %>
+                            <% left_offset = i * 1.0 + additional_offset %>
+                            <div class="collapsible-trail" style="left: <%= left_offset %>em"></div>
+                        <% end %>
+                    <% end %>
+
                     <div style="padding-left: <%= depth * 1.25 %>em">
                         <%= pb_rails("flex", props:{align: "center", column_gap: "xs"}) do %>
                             <% if index.zero? && object.row[:children].present? %>
