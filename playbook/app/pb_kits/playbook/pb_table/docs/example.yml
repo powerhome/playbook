@@ -35,6 +35,7 @@ examples:
     - table_lg: Large
     - table_sticky: Sticky Header
     - table_sticky_left_columns: Sticky Left Column
+    - table_alignment_row: Row Alignment
     - table_alignment_column: Cell Alignment
     - table_alignment_shift_row: Row Shift
     - table_alignment_shift_data: Cell Shift
