@@ -110,6 +110,14 @@
     height: auto;
   }
 
+  .collapsible-trail {
+    background-color: $border_light;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+  }
+
   // Responsive Styles
   @media only screen and (max-width: $screen-xl-min) {  
     &[class*="table-responsive-scroll"] {

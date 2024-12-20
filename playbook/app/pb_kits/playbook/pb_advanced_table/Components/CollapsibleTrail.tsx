@@ -3,18 +3,13 @@ import React from "react"
 //CollapsibleTrail component
 const CollapsibleTrail = ({ leftOffset }: { leftOffset: number }) => {
   const style: { [key: string]: string | number } = {
-    position: "absolute",
     left: `${leftOffset}em`,
-    top: 0,
-    bottom: 0,
-    width: "2px",
-    backgroundColor: "#E4E8F0",
   }
 
   return (
     <div 
         className="collapsible-trail" 
-        style={style} 
+        style={style}
     />
   )
 }

@@ -9,6 +9,8 @@ module Playbook
                                 default: []
       prop :row
       prop :depth
+      prop :collapsible_trail, type: Playbook::Props::Boolean,
+                               default: true
 
       def classname
         generate_classname("pb_table_tr", "bg-white", subrow_depth_classname, separator: " ")
