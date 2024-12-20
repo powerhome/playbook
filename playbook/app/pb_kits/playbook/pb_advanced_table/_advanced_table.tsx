@@ -143,7 +143,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     return columnCells
   }
 
-  const buildColumns = (columnDefinitions) => {
+  const buildColumns = (columnDefinitions: GenericObject[]): any => {
     return (
       columnDefinitions &&
       columnDefinitions.map((column, index) => {
