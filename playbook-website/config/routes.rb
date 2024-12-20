@@ -40,6 +40,12 @@ Rails.application.routes.draw do
   get "kit_playground_rails",       to: "pages#kit_playground_rails", as: "kit_playground_rails"
   post "rails_pg_render",           to: "pages#rails_pg_render",      as: "rails_pg_render"
 
+  # Icon Docs
+  get "guides/getting_started/icons/font_awesome", to: "pages#icons_font_awesome"
+  get "guides/getting_started/icons/playbook",     to: "pages#icons_playbook"
+  get "guides/getting_started/icons/custom",       to: "pages#icons_custom"
+  get "guides/getting_started/icons",              to: "pages#icons"
+
   # Docs
   get "guides/:parent",         to: "guides#md_doc", as: "guides_parent"
   get "guides/:parent/:page",   to: "guides#md_doc", as: "guides_parent_page"
