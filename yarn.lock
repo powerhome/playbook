@@ -7117,10 +7117,10 @@ highcharts-react-official@^3.2.1:
   resolved "https://npm.powerapp.cloud/highcharts-react-official/-/highcharts-react-official-3.2.1.tgz#4b62a7af2969bdebde6b338d36f6b9bf1f1029bc"
   integrity sha512-hyQTX7ezCxl7JqumaWiGsroGWalzh24GedQIgO3vJbkGOZ6ySRAltIYjfxhrq4HszJOySZegotEF7v+haQ75UA==
 
-highcharts@^11.4.8:
-  version "11.4.8"
-  resolved "https://npm.powerapp.cloud/highcharts/-/highcharts-11.4.8.tgz#252e71b81c24ec9f99e756b76dbebd7546e18dda"
-  integrity sha512-5Tke9LuzZszC4osaFisxLIcw7xgNGz4Sy3Jc9pRMV+ydm6sYqsPYdU8ELOgpzGNrbrRNDRBtveoR5xS3SzneEA==
+highcharts@^12.1.1:
+  version "12.1.1"
+  resolved "https://npm.powerapp.cloud/highcharts/-/highcharts-12.1.1.tgz#cbe431bff1bfefaf7cd0504957329259dcb80870"
+  integrity sha512-tG2hZZBQ4pNOoIh4pmKnS0bSUpU7lGQnlzmr3FSdcc1/6dmeiCLZEFzjr1W52ist2H6Bh+bHhYKv99iX/wkpng==
 
 highlight-words-core@^1.2.0:
   version "1.2.2"
