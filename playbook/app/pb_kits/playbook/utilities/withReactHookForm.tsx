@@ -7,13 +7,12 @@ import {
 } from "react-hook-form"
 
 export type WithReactHookFormProps<T extends FieldValues> = {
-  name: Path<T>
+  name?: any
   register?: UseFormRegister<T>
   rules?: Omit<
     RegisterOptions<T>,
     "valueAsNumber" | "valueAsDate" | "setValueAs"
   >
-  disabled?: boolean
 }
 
 function getDisplayName(WrappedComponent: React.ComponentType<any>): string {
@@ -25,25 +24,28 @@ export function withReactHookForm<
     onChange?: (...args: any[]) => void
     onBlur?: (...args: any[]) => void
     ref?: any
+    name?: string
   },
   T extends FieldValues = FieldValues
 >(WrappedComponent: React.ComponentType<P>) {
   const WithReactHookFormComponent = React.forwardRef<HTMLElement, P & WithReactHookFormProps<T>>(
     (props, ref) => {
-      const { register, name, rules, disabled, ...rest } = props
+      const { register, rules, ...rest } = props
 
       if (!register) {
-        return (<WrappedComponent {...(rest as P)}
-            ref={ref}
-                />)
+        return (
+          <WrappedComponent 
+              {...(rest as P)} 
+              ref={ref} 
+          />
+        )
       }
 
-      const fieldRegistration = register(name, rules)
+      const fieldRegistration = register(props.name, rules)
 
       const fieldProps = {
         ...rest,
         ...fieldRegistration,
-        disabled: disabled || (rest as any).disabled,
         ref: ref || fieldRegistration.ref,
         onChange: (...args: any[]) => {
           fieldRegistration.onChange?.(...args)

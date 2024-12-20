@@ -129,3 +129,5 @@ export type CheckboxWithHookFormProps<T extends FieldValues = FieldValues> = Che
 
 const CheckboxWithHookForm = withReactHookForm(Checkbox)
 export default CheckboxWithHookForm
+
+// export default Checkbox
