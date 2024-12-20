@@ -468,7 +468,7 @@ test("responsive prop functions as expected", () => {
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit).toHaveClass("pb_advanced_table table-responsive-scroll")
+  expect(kit).toHaveClass("pb_advanced_table advanced-table-responsive-scroll")
 })
 
 test("responsive none prop functions as expected", () => {
@@ -483,7 +483,7 @@ test("responsive none prop functions as expected", () => {
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit).toHaveClass("pb_advanced_table table-responsive-none")
+  expect(kit).toHaveClass("pb_advanced_table advanced-table-responsive-none")
 })
 
 test("customRenderer prop functions as expected", () => {
