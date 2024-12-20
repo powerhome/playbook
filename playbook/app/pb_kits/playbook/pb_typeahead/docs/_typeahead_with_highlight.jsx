@@ -55,11 +55,18 @@ const TypeaheadWithHighlight = (props) => {
               marginRight="sm"
               name={name}
               size="sm"
+              {...props}
           />
         </FlexItem>
         <FlexItem>
-          <Title size={4}><span dangerouslySetInnerHTML={{ __html: highlighted(name) }} /></Title>
-          <Body color="light">
+          <Title
+              size={4}
+              {...props}
+          >
+            <span dangerouslySetInnerHTML={{ __html: highlighted(name) }} /></Title>
+          <Body color="light"
+              {...props}
+          >
             <span dangerouslySetInnerHTML={{ __html: highlighted(title) }} />{" • "}
             {territory}
           </Body>

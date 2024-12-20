@@ -25,8 +25,9 @@
         validation: object.validation,
         label: object.label,
         id: object.input_options[:id],
+        dark: object.dark,
       }) %>
-      <%= pb_rails("list", props: { ordered: false, borderless: false, xpadding: true, role: "status", aria: { live: "polite" }, data: { pb_typeahead_kit_results: true } }) do %>
+      <%= pb_rails("list", props: { ordered: false, borderless: true, xpadding: true, role: "status", aria: { live: "polite" }, data: { pb_typeahead_kit_results: true } }) do %>
       <% end %>
     </div>
 
