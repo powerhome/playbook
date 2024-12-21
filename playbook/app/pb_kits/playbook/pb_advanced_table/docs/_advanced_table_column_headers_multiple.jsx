@@ -51,8 +51,8 @@ const AdvancedTableColumnHeadersMultiple = (props) => {
               label: "Attendance Rate",
             },
             {
-              accessor: "graduatedStudents",
-              label: "Graduated Students",
+              accessor: "scheduledMeetings",
+              label: "Scheduled Meetings",
             },
           ],
         },

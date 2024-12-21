@@ -53,13 +53,18 @@ export const TableHeaderCell = ({
   header?.column.getLeafColumns().length === 1 &&
   header?.column.getLeafColumns()[0].id === header.column.id
  
-const cellClassName = classnames("table-header-cells", 
-  `${isChrome() ? "chrome-styles" : ""}`, 
+const cellClassName = classnames(
+  "table-header-cells",
+  `${isChrome() ? "chrome-styles" : ""}`,
   `${enableSorting ? "table-header-cells-active" : ""}`,
-  { 'pinned-left': responsive === "scroll" && isPinnedLeft },
-  `${header?.column.parent?.columns.at(-1) === header?.column ? "last-header-cell" : ""
-  }`,
-) 
+  { "pinned-left": responsive === "scroll" && isPinnedLeft },
+  `${
+    header?.column.parent?.columns.at(-1) === header?.column ||
+    (header?.colSpan > 1 && header?.column.parent !== undefined)
+      ? "last-header-cell"
+      : ""
+  }`
+); 
 
 const cellId = `${loading ? 
     `loading-${header?.id}`
