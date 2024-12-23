@@ -52,18 +52,17 @@ export const TableHeaderCell = ({
   const isLeafColumn =
   header?.column.getLeafColumns().length === 1 &&
   header?.column.getLeafColumns()[0].id === header.column.id
+
+  const isLastHeaderCell =
+    header?.column.parent?.columns.at(-1) === header?.column ||
+    (header?.colSpan > 1 && header?.column.parent !== undefined);
  
 const cellClassName = classnames(
   "table-header-cells",
   `${isChrome() ? "chrome-styles" : ""}`,
   `${enableSorting ? "table-header-cells-active" : ""}`,
   { "pinned-left": responsive === "scroll" && isPinnedLeft },
-  `${
-    header?.column.parent?.columns.at(-1) === header?.column ||
-    (header?.colSpan > 1 && header?.column.parent !== undefined)
-      ? "last-header-cell"
-      : ""
-  }`
+   isLastHeaderCell ? "last-header-cell" : ""
 ); 
 
 const cellId = `${loading ? 

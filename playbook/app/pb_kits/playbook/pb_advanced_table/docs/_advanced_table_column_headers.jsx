@@ -47,13 +47,13 @@ const AdvancedTableColumnHeaders = (props) => {
   
 
   return (
-    <div>
+    <>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           tableData={MOCK_DATA}
           {...props}
       />
-    </div>
+    </>
   )
 }
 
