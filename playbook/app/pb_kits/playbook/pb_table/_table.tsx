@@ -186,12 +186,6 @@ const Table = (props: TableProps): React.ReactElement => {
         setTimeout(() => {
             handleStickyRightColumns();
         }, 10);
-
-        window.addEventListener('resize', handleStickyRightColumns);
-
-        return () => {
-            window.removeEventListener('resize', handleStickyRightColumns);
-        };
     }, [stickyRightcolumn]);
 
     useEffect(() => {
