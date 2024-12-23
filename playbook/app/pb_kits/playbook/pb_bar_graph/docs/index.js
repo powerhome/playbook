@@ -1,4 +1,5 @@
-export { default as BarGraphDefault } from './_bar_graph_default.jsx'
+export { default as BarGraphDuck } from './_bar_graph_default.jsx'
+export { default as BarGraphDog } from './_bar_graph_dog.jsx'
 export { default as BarGraphLegend } from './_bar_graph_legend.jsx'
 export { default as BarGraphLegendPosition } from './_bar_graph_legend_position.jsx'
 export { default as BarGraphLegendNonClickable } from './_bar_graph_legend_non_clickable.jsx'
