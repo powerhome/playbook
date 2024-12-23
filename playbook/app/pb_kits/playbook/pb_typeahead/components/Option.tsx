@@ -14,11 +14,11 @@ const Option = (props: any) => {
       <>
         {!valueComponent && imageUrl &&
           <User
-            align="left"
-            avatarUrl={imageUrl}
-            dark={props.selectProps.dark}
-            name={props.label}
-            orientation="horizontal"
+              align="left"
+              avatarUrl={imageUrl}
+              dark={props.selectProps.dark}
+              name={props.label}
+              orientation="horizontal"
           />
         }
 

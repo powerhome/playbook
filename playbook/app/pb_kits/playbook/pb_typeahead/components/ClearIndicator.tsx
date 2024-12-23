@@ -9,8 +9,8 @@ const ClearContainer = (props: any) => {
 
   return (
     <components.ClearIndicator
-      className="clear_indicator"
-      {...props}
+        className="clear_indicator"
+        {...props}
     />
   )
 }

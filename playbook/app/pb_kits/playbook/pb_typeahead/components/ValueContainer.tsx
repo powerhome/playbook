@@ -3,8 +3,8 @@ import { components } from 'react-select'
 
 const ValueContainer = (props: any) => (
   <components.ValueContainer
-    className="text_input_value_container"
-    {...props}
+      className="text_input_value_container"
+      {...props}
   />
 )
 
