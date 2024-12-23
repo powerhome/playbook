@@ -14,16 +14,6 @@ $pb_icon_circle_sizes: (
   "xl":   100px,
 );
 
-@mixin svg_size($name, $match, $adjust) {
-  @if $name == $match {
-    $svg_xy: $adjust;
-    & > svg {
-      width: #{$svg_xy};
-      height: #{$svg_xy};
-    }
-  }
-}
-
 [class^=pb_icon_circle_kit] {
   display: flex;
   justify-content: center;
