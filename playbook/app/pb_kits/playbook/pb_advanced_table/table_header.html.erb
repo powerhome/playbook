@@ -1,18 +1,24 @@
 <%= pb_content_tag do %>
-        <%= pb_rails("table/table_row", props: { tag: "div" }) do %>
-            <% object.column_definitions.each_with_index do |item, index| %>
-                <%= pb_rails("table/table_header", props: { tag: "div", id: item[:accessor], classname: object.th_classname, sort_menu: item[:sort_menu] }) do %>
-                    <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end", text_align: "end" }) do %>
-                        <% if index.zero? && (object.enable_toggle_expansion == "header" || object.enable_toggle_expansion == "all") %>
-                            <button
-                              class="gray-icon toggle-all-icon"
-                              onclick="expandAllRows(this); event.preventDefault();">
-                              <%= pb_rails("icon", props: { icon: "arrows-from-line", cursor: "pointer", fixed_width: true, padding_right: "xs" }) %>
-                            </button>
-                        <% end %>
-                        <%= item[:label] %>
+  <% object.header_rows.each_with_index do |header_row, row_index| %>
+    <%= pb_rails("table/table_row", props: { tag: "div" }) do %>
+      <% header_row.each_with_index do |cell, cell_index| %>
+
+        <% header_id = cell[:accessor].present? ? cell[:accessor] : "header_#{row_index}_#{cell_index}" %>
+
+        <%= pb_rails("table/table_header", props: { tag: "div", id: header_id, classname: object.th_classname, sort_menu: cell[:accessor] ? cell[:sort_menu] : nil }) do %>
+                <%= pb_rails("flex", props:{ align: "center", justify: row_index.zero? ? "start" : "end", text_align: "end" }) do %>
+                    <% if cell_index.zero? && (object.enable_toggle_expansion == "header" || object.enable_toggle_expansion == "all") %>
+                        <button
+                            class="gray-icon toggle-all-icon"
+                            onclick="expandAllRows(this); event.preventDefault();">
+                            <%= pb_rails("icon", props: { icon: "arrows-from-line", cursor: "pointer", fixed_width: true, padding_right: "xs" }) %>
+                        </button>
                     <% end %>
+                    <%= cell[:label] %>
                 <% end %>
-            <% end %>
         <% end %>
+
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>

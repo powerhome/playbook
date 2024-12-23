@@ -29,6 +29,8 @@ module Playbook
     private
 
       def custom_renderer_value(column, index)
+        return nil unless column[:accessor].present?
+
         if index.zero?
           if depth.zero?
             row[column[:accessor].to_sym]
@@ -37,6 +39,7 @@ module Playbook
               key = item.to_sym
               return row[key] if depth - 1 == accessor_index
             end
+            nil
           end
         else
           row[column[:accessor].to_sym]
