@@ -29,6 +29,7 @@ type TableProps = {
     size?: "sm" | "md" | "lg",
     sticky?: boolean,
     stickyLeftcolumn?: string[],
+    stickyRightcolumn?: string[],
     striped?: boolean,
     tag?: "table" | "div",
     verticalBorder?: boolean,
@@ -53,6 +54,7 @@ const Table = (props: TableProps): React.ReactElement => {
         size = 'sm',
         sticky = false,
         stickyLeftcolumn = [],
+        stickyRightcolumn= [],
         striped = false,
         tag = 'table',
         verticalBorder = false,
@@ -80,6 +82,7 @@ const Table = (props: TableProps): React.ReactElement => {
             'no-hover': disableHover,
             'sticky-header': sticky,
             'sticky-left-column': stickyLeftcolumn,
+            'sticky-right-column': stickyRightcolumn,
             'striped': striped,
             [outerPaddingCss]: outerPadding !== '',
         },
@@ -90,7 +93,8 @@ const Table = (props: TableProps): React.ReactElement => {
     )
 
     useEffect(() => {
-        const handleStickyColumns = () => {
+        const handleStickyLeftColumns = () => {
+            if (!stickyLeftcolumn.length) return;
             let accumulatedWidth = 0;
 
             stickyLeftcolumn.forEach((colId, index) => {
@@ -103,11 +107,11 @@ const Table = (props: TableProps): React.ReactElement => {
                     (header as HTMLElement).style.left = `${accumulatedWidth}px`;
 
                     if (!isLastColumn) {
-                        header.classList.add('with-border');
-                        header.classList.remove('sticky-shadow');
+                        header.classList.add('with-border-right');
+                        header.classList.remove('sticky-left-shadow');
                     } else {
-                        header.classList.remove('with-border');
-                        header.classList.add('sticky-shadow');
+                        header.classList.remove('with-border-right');
+                        header.classList.add('sticky-left-shadow');
                     }
 
                     accumulatedWidth += (header as HTMLElement).offsetWidth;
@@ -118,26 +122,77 @@ const Table = (props: TableProps): React.ReactElement => {
                     (cell as HTMLElement).style.left = `${accumulatedWidth - (header as HTMLElement).offsetWidth}px`;
 
                     if (!isLastColumn) {
-                        cell.classList.add('with-border');
-                        cell.classList.remove('sticky-shadow');
+                        cell.classList.add('with-border-right');
+                        cell.classList.remove('sticky-left-shadow');
                     } else {
-                        cell.classList.remove('with-border');
-                        cell.classList.add('sticky-shadow');
+                        cell.classList.remove('with-border-right');
+                        cell.classList.add('sticky-left-shadow');
                     }
                 });
             });
         };
 
         setTimeout(() => {
-            handleStickyColumns();
+            handleStickyLeftColumns();
         }, 10);
 
-        window.addEventListener('resize', handleStickyColumns);
+        window.addEventListener('resize', handleStickyLeftColumns);
 
         return () => {
-            window.removeEventListener('resize', handleStickyColumns);
+            window.removeEventListener('resize', handleStickyLeftColumns);
         };
     }, [stickyLeftcolumn]);
+
+    useEffect(() => {
+        const handleStickyRightColumns = () => {
+            if (!stickyRightcolumn.length) return;
+            let accumulatedWidth = 0;
+
+            stickyRightcolumn.reverse().forEach((colId, index) => {
+                const isLastColumn = index === stickyRightcolumn.length - 1;
+                const header = document.querySelector(`th[id="${colId}"]`);
+                const cells = document.querySelectorAll(`td[id="${colId}"]`);
+
+                if (header) {
+                    header.classList.add('sticky');
+                    (header as HTMLElement).style.right = `${accumulatedWidth}px`;
+
+                    if (!isLastColumn) {
+                        header.classList.add('with-border-left');
+                        header.classList.remove('sticky-right-shadow');
+                    } else {
+                        header.classList.remove('with-border-left');
+                        header.classList.add('sticky-right-shadow');
+                    }
+
+                    accumulatedWidth += (header as HTMLElement).offsetWidth;
+                }
+
+                cells.forEach((cell) => {
+                    cell.classList.add('sticky');
+                    (cell as HTMLElement).style.right = `${accumulatedWidth - (header as HTMLElement).offsetWidth}px`;
+
+                    if (!isLastColumn) {
+                        cell.classList.add('with-border-left');
+                        cell.classList.remove('sticky-right-shadow');
+                    } else {
+                        cell.classList.remove('with-border-left');
+                        cell.classList.add('sticky-right-shadow');
+                    }
+                });
+            });
+        };
+
+        setTimeout(() => {
+            handleStickyRightColumns();
+        }, 10);
+
+        window.addEventListener('resize', handleStickyRightColumns);
+
+        return () => {
+            window.removeEventListener('resize', handleStickyRightColumns);
+        };
+    }, [stickyRightcolumn]);
 
     useEffect(() => {
         const instance = new PbTable()
