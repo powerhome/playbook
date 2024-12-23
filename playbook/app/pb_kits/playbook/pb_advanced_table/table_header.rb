@@ -18,13 +18,12 @@ module Playbook
       end
 
       def header_rows
+        wrapped_columns = wrap_leaf_columns(column_definitions)
+
         rows = []
-        max_depth = compute_max_depth(column_definitions)
-
+        max_depth = compute_max_depth(wrapped_columns)
         max_depth.times { rows << [] }
-
-        process_columns(column_definitions, rows, 0, max_depth)
-
+        process_columns(wrapped_columns, rows, 0, max_depth)
         rows
       end
 
@@ -61,6 +60,30 @@ module Playbook
       def compute_leaf_columns(columns)
         columns.reduce(0) do |sum, col|
           col[:columns] ? sum + compute_leaf_columns(col[:columns]) : sum + 1
+        end
+      end
+
+      def wrap_leaf_columns(column_definitions)
+        has_grouped_headers = column_definitions.any? { |col| col.key?(:columns) }
+
+        if has_grouped_headers
+          column_definitions.map do |col|
+            if col.key?(:columns)
+              {
+                label: col[:label],
+                columns: wrap_leaf_columns(col[:columns]),
+              }
+            elsif col.key?(:accessor)
+              {
+                label: "",
+                columns: [col],
+              }
+            else
+              col
+            end
+          end
+        else
+          column_definitions
         end
       end
     end
