@@ -39,17 +39,14 @@ module Playbook
         columns.each do |col|
           if col[:columns]
             colspan = compute_leaf_columns(col[:columns])
-            rowspan = 1
-            rows[current_depth] << { label: col[:label], colspan: colspan, rowspan: rowspan }
+            rows[current_depth] << { label: col[:label], colspan: colspan }
 
             process_columns(col[:columns], rows, current_depth + 1, max_depth)
           else
             colspan = 1
-            rowspan = max_depth - current_depth
             rows[current_depth] << {
               label: col[:label],
               colspan: colspan,
-              rowspan: rowspan,
               accessor: col[:accessor],
               sort_menu: col[:sort_menu],
             }
