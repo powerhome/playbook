@@ -56,7 +56,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_advanced_table_body", "pb_table_tbody", separator: " ")
+        generate_classname("pb_advanced_table_body", separator: " ")
       end
     end
   end

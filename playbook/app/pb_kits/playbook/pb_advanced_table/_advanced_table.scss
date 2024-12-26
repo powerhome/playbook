@@ -65,6 +65,9 @@
     .last-cell {
       border-right: 1px solid $border_light !important;
     }
+    tr td:first-child {
+      padding-left: 8px !important;
+    }
   }
 
 
