@@ -12,10 +12,10 @@ const TextInputMask = (props) => {
   const ref = React.createRef()
 
   const [formFields, setFormFields] = useState({
-    currency: '',
+    currency: '1666190',
     zipCode: '',
-    postalCode: '',
-    ssn: '',
+    postalCode: '1234567890',
+    ssn: '1234567890',
   })
 
   const handleOnChangeFormField =  ({ target }) => {
