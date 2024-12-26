@@ -1,16 +1,17 @@
 import React from 'react'
 import Table from '../_table'
 
-const TableStickyRightColumns = () => {
+const TableStickyColumns = () => {
     return (
         <Table
             responsive="scroll"
             size="md"
-            stickyRightColumn={["13", "14", "15"]}
+            stickyLeftColumn={["a"]}
+            stickyRightColumn={["b"]}
         >
             <thead>
                 <tr>
-                    <th>{'Column 1'}</th>
+                    <th id="a">{'Column 1'}</th>
                     <th>{'Column 2'}</th>
                     <th>{'Column 3'}</th>
                     <th>{'Column 4'}</th>
@@ -22,14 +23,14 @@ const TableStickyRightColumns = () => {
                     <th>{'Column 10'}</th>
                     <th>{'Column 11'}</th>
                     <th>{'Column 12'}</th>
-                    <th id="13">{'Column 13'}</th>
-                    <th id="14">{'Column 14'}</th>
-                    <th id="15">{'Column 15'}</th>
+                    <th>{'Column 13'}</th>
+                    <th>{'Column 14'}</th>
+                    <th id="b">{'Column 15'}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{'Value 1'}</td>
+                    <td id="a">{'Value 1'}</td>
                     <td>{'Value 2'}</td>
                     <td>{'Value 3'}</td>
                     <td>{'Value 4'}</td>
@@ -41,12 +42,12 @@ const TableStickyRightColumns = () => {
                     <td>{'Value 10'}</td>
                     <td>{'Value 11'}</td>
                     <td>{'Value 12'}</td>
-                    <td id="13">{'Value 13'}</td>
-                    <td id="14">{'Value 14'}</td>
-                    <td id="15">{'Value 15'}</td>
+                    <td>{'Value 13'}</td>
+                    <td>{'Value 14'}</td>
+                    <td id="b">{'Value 15'}</td>
                 </tr>
                 <tr>
-                    <td>{'Value 1'}</td>
+                    <td id="a">{'Value 1'}</td>
                     <td>{'Value 2'}</td>
                     <td>{'Value 3'}</td>
                     <td>{'Value 4'}</td>
@@ -58,12 +59,12 @@ const TableStickyRightColumns = () => {
                     <td>{'Value 10'}</td>
                     <td>{'Value 11'}</td>
                     <td>{'Value 12'}</td>
-                    <td id="13">{'Value 13'}</td>
-                    <td id="14">{'Value 14'}</td>
-                    <td id="15">{'Value 15'}</td>
+                    <td>{'Value 13'}</td>
+                    <td>{'Value 14'}</td>
+                    <td id="b">{'Value 15'}</td>
                 </tr>
                 <tr>
-                    <td>{'Value 1'}</td>
+                    <td id="a">{'Value 1'}</td>
                     <td>{'Value 2'}</td>
                     <td>{'Value 3'}</td>
                     <td>{'Value 4'}</td>
@@ -75,13 +76,13 @@ const TableStickyRightColumns = () => {
                     <td>{'Value 10'}</td>
                     <td>{'Value 11'}</td>
                     <td>{'Value 12'}</td>
-                    <td id="13">{'Value 13'}</td>
-                    <td id="14">{'Value 14'}</td>
-                    <td id="15">{'Value 15'}</td>
+                    <td>{'Value 13'}</td>
+                    <td>{'Value 14'}</td>
+                    <td id="b">{'Value 15'}</td>
                 </tr>
             </tbody>
         </Table>
     )
 }
 
-export default TableStickyRightColumns
+export default TableStickyColumns

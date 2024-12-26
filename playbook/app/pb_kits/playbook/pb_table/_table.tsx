@@ -28,8 +28,8 @@ type TableProps = {
     singleLine?: boolean,
     size?: "sm" | "md" | "lg",
     sticky?: boolean,
-    stickyLeftcolumn?: string[],
-    stickyRightcolumn?: string[],
+    stickyLeftColumn?: string[],
+    stickyRightColumn?: string[],
     striped?: boolean,
     tag?: "table" | "div",
     verticalBorder?: boolean,
@@ -53,8 +53,8 @@ const Table = (props: TableProps): React.ReactElement => {
         singleLine = false,
         size = 'sm',
         sticky = false,
-        stickyLeftcolumn = [],
-        stickyRightcolumn= [],
+        stickyLeftColumn = [],
+        stickyRightColumn= [],
         striped = false,
         tag = 'table',
         verticalBorder = false,
@@ -81,8 +81,8 @@ const Table = (props: TableProps): React.ReactElement => {
             'single-line': singleLine,
             'no-hover': disableHover,
             'sticky-header': sticky,
-            'sticky-left-column': stickyLeftcolumn,
-            'sticky-right-column': stickyRightcolumn,
+            'sticky-left-column': stickyLeftColumn,
+            'sticky-right-column': stickyRightColumn,
             'striped': striped,
             [outerPaddingCss]: outerPadding !== '',
         },
@@ -94,11 +94,11 @@ const Table = (props: TableProps): React.ReactElement => {
 
     useEffect(() => {
         const handleStickyLeftColumns = () => {
-            if (!stickyLeftcolumn.length) return;
+            if (!stickyLeftColumn.length) return;
             let accumulatedWidth = 0;
 
-            stickyLeftcolumn.forEach((colId, index) => {
-                const isLastColumn = index === stickyLeftcolumn.length - 1;
+            stickyLeftColumn.forEach((colId, index) => {
+                const isLastColumn = index === stickyLeftColumn.length - 1;
                 const header = document.querySelector(`th[id="${colId}"]`);
                 const cells = document.querySelectorAll(`td[id="${colId}"]`);
 
@@ -141,15 +141,15 @@ const Table = (props: TableProps): React.ReactElement => {
         return () => {
             window.removeEventListener('resize', handleStickyLeftColumns);
         };
-    }, [stickyLeftcolumn]);
+    }, [stickyLeftColumn]);
 
     useEffect(() => {
         const handleStickyRightColumns = () => {
-            if (!stickyRightcolumn.length) return;
+            if (!stickyRightColumn.length) return;
             let accumulatedWidth = 0;
 
-            stickyRightcolumn.reverse().forEach((colId, index) => {
-                const isLastColumn = index === stickyRightcolumn.length - 1;
+            stickyRightColumn.reverse().forEach((colId, index) => {
+                const isLastColumn = index === stickyRightColumn.length - 1;
                 const header = document.querySelector(`th[id="${colId}"]`);
                 const cells = document.querySelectorAll(`td[id="${colId}"]`);
 
@@ -186,7 +186,7 @@ const Table = (props: TableProps): React.ReactElement => {
         setTimeout(() => {
             handleStickyRightColumns();
         }, 10);
-    }, [stickyRightcolumn]);
+    }, [stickyRightColumn]);
 
     useEffect(() => {
         const instance = new PbTable()
