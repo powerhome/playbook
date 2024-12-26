@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { components } from 'react-select'
 
-const ClearContainer = (props: any) => {
+import { ClearIndicatorProps } from 'react-select'
+
+const ClearContainer = (props: ClearIndicatorProps<unknown>): JSX.Element => {
   const { selectProps, clearValue } = props
   useEffect(() => {
     document.addEventListener(`pb-typeahead-kit-${selectProps.id}:clear`, clearValue)
-  }, [true])
+  })
 
   return (
     <components.ClearIndicator
