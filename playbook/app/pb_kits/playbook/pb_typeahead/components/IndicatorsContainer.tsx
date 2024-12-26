@@ -1,7 +1,9 @@
 import React from 'react'
 import { components } from 'react-select'
 
-const IndicatorsContainer = (props: any) => (
+import { IndicatorsContainerProps } from 'react-select'
+
+const IndicatorsContainer = (props: IndicatorsContainerProps<unknown>): JSX.Element => (
   <components.IndicatorsContainer
       className="text_input_indicators"
       {...props}
