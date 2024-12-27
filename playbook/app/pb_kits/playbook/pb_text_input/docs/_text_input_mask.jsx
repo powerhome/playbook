@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 import Caption from '../../pb_caption/_caption'
 import TextInput from '../../pb_text_input/_text_input'
 import Title from '../../pb_title/_title'
-import Flex from '../../pb_flex/_flex'
-import Button from '../../pb_button/_button'
 
 const TextInputMask = (props) => {
   const [ssn, setSSN] = useState('')
@@ -19,7 +17,6 @@ const TextInputMask = (props) => {
     postalCode: '',
     ssn: '',
   })
-  const [currencySetField, setCurrencySetField] = useState('')
 
   const handleOnChangeFormField =  ({ target }) => {
     const { name, value } = target
@@ -36,22 +33,6 @@ const TextInputMask = (props) => {
           value={formFields.currency}
           {...props}
       />
-
-      <Flex>
-        <TextInput
-            name="defaultValue"
-            onChange={(e) => setCurrencySetField(e.target.value)}
-            value={currencySetField}
-            {...props}
-        />
-        <Button onClick={() => setFormFields({ ...formFields, currency: currencySetField })}>
-          Set Currency Field
-        </Button>
-      </Flex>
-      
-      <br />
-      <br />
-
       <TextInput
           label="Zip Code"
           mask="zipCode"
