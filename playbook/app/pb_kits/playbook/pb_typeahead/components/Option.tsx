@@ -3,7 +3,20 @@ import { components } from 'react-select'
 
 import User from '../../pb_user/_user'
 
-const Option = (props: any) => {
+import { OptionProps, GroupBase } from 'react-select'
+import SelectProps from 'react-select'
+
+interface OptionData {
+  imageUrl?: string;
+  label: string;
+  dark?: boolean;
+}
+
+interface CustomSelectProps extends SelectProps {
+  valueComponent?: (data: OptionData) => JSX.Element;
+}
+
+const Option = (props: OptionProps<OptionData, boolean, GroupBase<OptionData>> & { selectProps: CustomSelectProps }): JSX.Element => {
   const {
     imageUrl,
   } = props.data
@@ -16,7 +29,7 @@ const Option = (props: any) => {
           <User
               align="left"
               avatarUrl={imageUrl}
-              dark={props.selectProps.dark}
+              dark={props.data.dark}
               name={props.label}
               orientation="horizontal"
           />
