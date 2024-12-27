@@ -1,18 +1,10 @@
 import React from 'react'
-import { components, PlaceholderProps as ReactSelectPlaceholderProps } from 'react-select'
+import { components } from 'react-select'
 
 import Flex from '../../pb_flex/_flex'
 import Icon from '../../pb_icon/_icon'
 
-interface CustomSelectProps {
-  plusIcon?: boolean;
-}
-
-type PlaceholderProps = ReactSelectPlaceholderProps & {
-  selectProps: ReactSelectPlaceholderProps['selectProps'] & CustomSelectProps;
-};
-
-const Placeholder = (props: PlaceholderProps): JSX.Element => (
+const Placeholder = (props: any): JSX.Element => (
   <>
     <Flex
         align="center"
@@ -21,12 +13,12 @@ const Placeholder = (props: PlaceholderProps): JSX.Element => (
       <components.IndicatorsContainer
           {...props}
       />
-      {props.selectProps.plusIcon && (
+      {props.selectProps.plusIcon &&
         <Icon
             className="typeahead-plus-icon"
             icon="plus"
         />
-      )}
+      }
     </Flex>
   </>
 )

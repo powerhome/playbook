@@ -1,15 +1,12 @@
-import React from 'react';
-import { components, ControlProps, GroupBase } from 'react-select';
-import Flex from '../../pb_flex/_flex';
-import TextInput from '../../pb_text_input/_text_input';
+import React from 'react'
+import { components } from 'react-select'
 
-type Props = ControlProps<unknown, boolean, GroupBase<unknown>> & {
-  selectProps: {
-    dark: boolean;
-    error: boolean;
-    label: string;
-  };
-};
+import Flex from '../../pb_flex/_flex'
+import TextInput from '../../pb_text_input/_text_input'
+
+type Props = {
+  selectProps: any,
+}
 
 const TypeaheadControl = (props: Props): JSX.Element => (
   <div className="pb_typeahead_wrapper">
@@ -20,15 +17,13 @@ const TypeaheadControl = (props: Props): JSX.Element => (
         marginBottom="none"
     >
       <Flex>
-        <components.Control<unknown, boolean, GroupBase<unknown>>
+        <components.Control
             className="text_input"
             {...props}
-        >
-          {props.children}
-        </components.Control>
+        />
       </Flex>
     </TextInput>
   </div>
-);
+)
 
-export default TypeaheadControl;
+export default TypeaheadControl
