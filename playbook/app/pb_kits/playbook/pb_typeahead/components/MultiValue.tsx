@@ -7,13 +7,17 @@ import { SelectValueType } from '../_typeahead'
 
 type Props = {
   data: SelectValueType,
-  multiValueTemplate: any,
+  multiValueTemplate: React.ReactNode,
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
-  removeProps: any,
+  removeProps: {
+    onClick: () => void,
+    onMouseDown: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
+    onTouchEnd: (event: React.TouchEvent<HTMLDivElement>) => void,
+  },
   selectProps: any,
 }
 
-const MultiValue = (props: Props) => {
+const MultiValue = (props: Props): JSX.Element => {
   const { removeProps } = props
   const { imageUrl, label } = props.data
   const { dark, multiKit, pillColor, truncate } = props.selectProps
