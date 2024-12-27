@@ -1,9 +1,9 @@
-# Data that Sticks With You!
+# 📊 Data that Sticks With You! 📌
 ##### December 26, 2024
 
 ![14 10 0](https://github.com/user-attachments/assets/6bc3d0d8-499d-4730-a435-512db589ab8e)
 
-The Table Kit now supports sticky columns to ensure your essential table details are always in sight. Pair that with an easy-to-implement pagination navigation bar, and you'll  never get lost in the numbers again! The AdvancedTable also now supports Pagination!
+The Table Kit now supports sticky columns to ensure your essential table details are always in sight. Pair that with an easy-to-implement pagination navigation bar, and you'll never get lost in the numbers again! Need to display more complex data? Our AdvancedTable kit now also supports seamless Pagination for an even smoother experience. 🚀
 
 [14.10.0](https://github.com/powerhome/playbook/tree/14.10.0) full list of changes:
 
