@@ -27,7 +27,9 @@ module Playbook
         end.compact
       end
 
-      def render_row_and_children(row, column_definitions, current_depth, first_parent_child)
+      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil)
+        top_parent_id ||= row.object_id
+        new_ancestor_ids = ancestor_ids + [row.object_id]
         leaf_columns = flatten_columns(column_definitions)
 
         output = ActiveSupport::SafeBuffer.new
@@ -45,11 +47,18 @@ module Playbook
                            })
 
         if row[:children].present?
-          output << content_tag(:div, class: "toggle-content", data: { advanced_table_content: row.object_id.to_s + id }) do
-            row[:children].map do |child_row|
-              render_row_and_children(child_row, column_definitions, current_depth + 1, row.children.first == child_row)
-            end.join.html_safe
-          end
+          output << row[:children].map do |child_row|
+            is_first_child = row[:children].first == child_row
+
+            child_output = render_row_and_children(child_row, column_definitions, current_depth + 1, is_first_child, new_ancestor_ids, top_parent_id)
+
+            immediate_parent_id = row.object_id
+            top_parent = top_parent_id
+            # Combine ancestor_ids to build the content id
+            data_content = new_ancestor_ids.join("-") + "-#{child_row.object_id}"
+
+            child_output.to_str.sub("<tr", %(<tr class="toggle-content" data-top-parent="#{top_parent}" data-row-depth="#{current_depth}" data-row-parent="#{immediate_parent_id}" data-advanced-table-content="#{data_content}"))
+          end.join.html_safe
         end
 
         output

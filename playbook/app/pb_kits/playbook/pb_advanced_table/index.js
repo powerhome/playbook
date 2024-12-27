@@ -1,7 +1,6 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 
 const ADVANCED_TABLE_SELECTOR = '[data-advanced-table]'
-const CONTENT_SELECTOR = '[data-advanced-table-content="id"]'
 const DOWN_ARROW_SELECTOR = '#advanced-table_open_icon'
 const UP_ARROW_SELECTOR = '#advanced-table_close_icon'
 
@@ -11,13 +10,17 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   get target() {
-    return document.querySelector(CONTENT_SELECTOR.replace("id", this.element.id))
+    const table = this.element.closest('table')
+    return table.querySelectorAll(`[data-row-parent="${this.element.id}"]`)
   }
   
   static expandedRows = new Set()
   static isCollapsing = false
 
   connect() {
+      // Hide all child rows on initial load
+      this.hideAllChildRows()
+
     this.element.addEventListener('click', () => {
       if (!PbAdvancedTable.isCollapsing) {
         const isExpanded = this.element.querySelector(UP_ARROW_SELECTOR).style.display === 'inline-block'
@@ -31,50 +34,52 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     })
   }
 
-  showElement(elem) {
-    const getHeight = () => {
-      elem.style.display = 'block'
-      const height = elem.scrollHeight + 'px'
-      elem.style.display = ''
-      return height
-    }
-
-    const height = getHeight()
-    elem.classList.add('is-visible')
-    elem.style.height = height
-    elem.style.overflow = "hidden"
-
-    window.setTimeout(() => {
-      elem.style.height = ''
-      elem.style.overflow = "visible"
-    }, 250)
+  hideAllChildRows() {
+    const table = this.element.closest('table')
+    const childRows = table.querySelectorAll('.toggle-content')
+    childRows.forEach(row => {
+      row.style.display = 'none'
+      row.classList.remove('is-visible')
+    })
   }
 
-  hideElement(elem) {
-    elem.style.height = elem.scrollHeight + 'px'
+  showElement(elements) {
+    elements.forEach(elem => {
+      elem.style.display = 'table-row'
+      elem.classList.add('is-visible')
+    })
+  }
 
-    window.setTimeout(() => {
-      elem.style.height = '0'
-      elem.style.paddingTop = '0'
-      elem.style.paddingBottom = '0'
-      elem.style.overflow = "hidden"
-    }, 1)
-
-    window.setTimeout(() => {
+  hideElement(elements) {
+    elements.forEach(elem => {
+      elem.style.display = 'none'
       elem.classList.remove('is-visible')
-      elem.style.overflow = ""
-    }, 200)
+
+      const childrenArray = elem.dataset.advancedTableContent.split('-')
+      const currentDepth = parseInt(elem.dataset.rowDepth)
+      if (childrenArray.length > currentDepth) {
+        // Find the child rows corresponding to this parent row
+        const childRows = this.element.closest('table').querySelectorAll(`[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`);
+    
+        childRows.forEach(childRow => {
+          childRow.style.display = 'none';
+          childRow.classList.remove('is-visible');
+        });
+      }
+    })
   }
 
-  toggleElement(elem) {
-    if (elem.classList.contains('is-visible')) {
-      this.hideElement(elem)
+  toggleElement(elements) {
+    if (!elements.length) return
+    
+    const isVisible = elements[0].classList.contains('is-visible')
+    if (isVisible) {
+      this.hideElement(elements)
       this.displayDownArrow()
-      return
+    } else {
+      this.showElement(elements)
+      this.displayUpArrow()
     }
-
-    this.showElement(elem)
-    this.displayUpArrow()
   }
 
   displayDownArrow() {
@@ -108,6 +113,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       })
     }
   }
+
   static handleToggleAllSubRows(element, rowDepth) {
     const parentElement = element.closest(".toggle-content")
     const subrowButtons = parentElement.querySelectorAll('.depth-sub-row-' + rowDepth + ' [data-advanced-table]')
