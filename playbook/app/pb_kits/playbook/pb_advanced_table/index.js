@@ -31,8 +31,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         } else {
           PbAdvancedTable.expandedRows.delete(this.element.id);
         }
+        this.toggleElement(this.target);
       }
-      this.toggleElement(this.target);
     });
   }
 
@@ -55,9 +55,10 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
         );
       childRowsAll.forEach((childRow) => {
-        PbAdvancedTable.expandedRows.has(childRow.dataset.rowParent)
-          ? (childRow.style.display = "table-row")
-          : (childRow.style.display = "none");
+        if (PbAdvancedTable.expandedRows.has(childRow.dataset.rowParent)) {
+          childRow.style.display = "table-row";
+          childRow.classList.add("is-visible");
+        }
       });
     });
   }
@@ -106,13 +107,15 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   displayDownArrow() {
     this.element.querySelector(DOWN_ARROW_SELECTOR).style.display =
       "inline-block";
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = "none";
+    this.element.querySelector(UP_ARROW_SELECTOR).style.display =
+      "none";
   }
 
   displayUpArrow() {
     this.element.querySelector(UP_ARROW_SELECTOR).style.display =
       "inline-block";
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = "none";
+    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display =
+      "none";
   }
 
   static handleToggleAllHeaders(element) {
@@ -121,13 +124,13 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       ".pb_advanced_table_body > .pb_table_tr [data-advanced-table]"
     );
 
-    const expandedRows = Array.from(firstLevelButtons).filter(
+    const allExpanded = Array.from(firstLevelButtons).every(
       (button) =>
         button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block"
     );
 
-    if (expandedRows.length === firstLevelButtons.length) {
-      expandedRows.forEach((button) => {
+    if (allExpanded) {
+      firstLevelButtons.forEach((button) => {
         button.click();
       });
       this.expandedRows.clear();
