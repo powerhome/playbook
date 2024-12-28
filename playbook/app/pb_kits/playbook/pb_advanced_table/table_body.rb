@@ -57,7 +57,7 @@ module Playbook
             # Combine ancestor_ids to build the content id
             data_content = new_ancestor_ids.join("-") + "-#{child_row.object_id}"
 
-            child_output.to_str.sub("<tr", %(<tr class="toggle-content" data-top-parent="#{top_parent}" data-row-depth="#{current_depth}" data-row-parent="#{immediate_parent_id}" data-advanced-table-content="#{data_content}"))
+            child_output.to_str.sub("<tr", %(<tr class="toggle-content" data-top-parent="#{id}_#{top_parent}" data-row-depth="#{current_depth}" data-row-parent="#{id}_#{immediate_parent_id}" data-advanced-table-content="#{data_content}"))
           end.join.html_safe
         end
 
