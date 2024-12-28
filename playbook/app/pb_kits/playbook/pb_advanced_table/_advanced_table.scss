@@ -68,6 +68,9 @@
     tr td:first-child {
       padding-left: 8px !important;
     }
+    tr .pb_table_td:last-child {
+      padding-right: 8px !important;
+    }
   }
 
 

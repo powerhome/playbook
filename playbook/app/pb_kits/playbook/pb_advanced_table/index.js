@@ -6,132 +6,137 @@ const UP_ARROW_SELECTOR = '#advanced-table_close_icon'
 
 export default class PbAdvancedTable extends PbEnhancedElement {
   static get selector() {
-    return ADVANCED_TABLE_SELECTOR
+    return ADVANCED_TABLE_SELECTOR;
   }
 
   get target() {
-    const table = this.element.closest('table')
-    return table.querySelectorAll(`[data-row-parent="${this.element.id}"]`)
+    const table = this.element.closest("table");
+    return table.querySelectorAll(`[data-row-parent="${this.element.id}"]`);
   }
-  
-  static expandedRows = new Set()
-  static isCollapsing = false
+
+  static expandedRows = new Set();
+  static isCollapsing = false;
 
   connect() {
-      // Hide all child rows on initial load
-      this.hideAllChildRows()
+    // Hide all child rows on initial load
+    this.hideAllChildRows();
 
-    this.element.addEventListener('click', () => {
+    this.element.addEventListener("click", () => {
       if (!PbAdvancedTable.isCollapsing) {
-        const isExpanded = this.element.querySelector(UP_ARROW_SELECTOR).style.display === 'inline-block'
+        const isExpanded =
+          this.element.querySelector(UP_ARROW_SELECTOR).style.display ===
+          "inline-block";
         if (!isExpanded) {
-          PbAdvancedTable.expandedRows.add(this.element.id)
+          PbAdvancedTable.expandedRows.add(this.element.id);
         } else {
-          PbAdvancedTable.expandedRows.delete(this.element.id)
+          PbAdvancedTable.expandedRows.delete(this.element.id);
         }
       }
-      this.toggleElement(this.target)
-    })
+      this.toggleElement(this.target);
+    });
   }
 
   hideAllChildRows() {
-    const table = this.element.closest('table')
-    const childRows = table.querySelectorAll('.toggle-content')
-    childRows.forEach(row => {
-      row.style.display = 'none'
-      row.classList.remove('is-visible')
-    })
+    const table = this.element.closest("table");
+    const childRows = table.querySelectorAll(".toggle-content");
+    childRows.forEach((row) => {
+      row.style.display = "none";
+      row.classList.remove("is-visible");
+    });
   }
 
   showElement(elements) {
-    elements.forEach(elem => {
-      elem.style.display = 'table-row'
-      elem.classList.add('is-visible')
-    })
+    elements.forEach((elem) => {
+      elem.style.display = "table-row";
+      elem.classList.add("is-visible");
+      const childRowsAll = this.element
+        .closest("table")
+        .querySelectorAll(
+          `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
+        );
+      childRowsAll.forEach((childRow) => {
+        PbAdvancedTable.expandedRows.has(childRow.dataset.rowParent)
+          ? (childRow.style.display = "table-row")
+          : (childRow.style.display = "none");
+      });
+    });
   }
 
   hideElement(elements) {
-    elements.forEach(elem => {
-      elem.style.display = 'none'
-      elem.classList.remove('is-visible')
+    elements.forEach((elem) => {
+      elem.style.display = "none";
+      elem.classList.remove("is-visible");
 
-      const childrenArray = elem.dataset.advancedTableContent.split('-')
-      const currentDepth = parseInt(elem.dataset.rowDepth)
+      // Remove the row ID from expandedRows when this row is hidden
+      if (PbAdvancedTable.expandedRows.has(elem.id)) {
+        PbAdvancedTable.expandedRows.delete(elem.id);
+      }
+
+      const childrenArray = elem.dataset.advancedTableContent.split("-");
+      const currentDepth = parseInt(elem.dataset.rowDepth);
       if (childrenArray.length > currentDepth) {
         // Find the child rows corresponding to this parent row
-        const childRows = this.element.closest('table').querySelectorAll(`[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`);
-    
-        childRows.forEach(childRow => {
-          childRow.style.display = 'none';
-          childRow.classList.remove('is-visible');
+        const childRows = this.element
+          .closest("table")
+          .querySelectorAll(
+            `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
+          );
+
+        childRows.forEach((childRow) => {
+          childRow.style.display = "none";
+          childRow.classList.remove("is-visible");
         });
       }
-    })
+    });
   }
 
   toggleElement(elements) {
-    if (!elements.length) return
-    
-    const isVisible = elements[0].classList.contains('is-visible')
+    if (!elements.length) return;
+
+    const isVisible = elements[0].classList.contains("is-visible");
     if (isVisible) {
-      this.hideElement(elements)
-      this.displayDownArrow()
+      this.hideElement(elements);
+      this.displayDownArrow();
     } else {
-      this.showElement(elements)
-      this.displayUpArrow()
+      this.showElement(elements);
+      this.displayUpArrow();
     }
   }
 
   displayDownArrow() {
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'inline-block'
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'none'
+    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display =
+      "inline-block";
+    this.element.querySelector(UP_ARROW_SELECTOR).style.display = "none";
   }
 
   displayUpArrow() {
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'inline-block'
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'none'
+    this.element.querySelector(UP_ARROW_SELECTOR).style.display =
+      "inline-block";
+    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = "none";
   }
 
   static handleToggleAllHeaders(element) {
-    const table = element.closest('.pb_table')
-    const firstLevelButtons = table.querySelectorAll('.pb_advanced_table_body > .pb_table_tr [data-advanced-table]')
-    
-    const expandedRows = Array.from(firstLevelButtons).filter(button => 
-      button.querySelector(UP_ARROW_SELECTOR).style.display === 'inline-block'
-    )
-  
-    if (expandedRows.length === firstLevelButtons.length) {
-      expandedRows.forEach(button => {
-        button.click()
-      })
-      this.expandedRows.clear()
-    } else {
-      firstLevelButtons.forEach(button => {
-        if (!this.expandedRows.has(button.id)) {
-          button.click()
-        }
-      })
-    }
-  }
+    const table = element.closest(".pb_table");
+    const firstLevelButtons = table.querySelectorAll(
+      ".pb_advanced_table_body > .pb_table_tr [data-advanced-table]"
+    );
 
-  static handleToggleAllSubRows(element, rowDepth) {
-    const parentElement = element.closest(".toggle-content")
-    const subrowButtons = parentElement.querySelectorAll('.depth-sub-row-' + rowDepth + ' [data-advanced-table]')
-    
-    const expandedSubRows = Array.from(subrowButtons).filter(button => 
-      button.querySelector(UP_ARROW_SELECTOR).style.display === 'inline-block'
-    )
-  
-    if (expandedSubRows.length === subrowButtons.length) {
-      expandedSubRows.forEach(button => {
-        button.click()
-      })
+    const expandedRows = Array.from(firstLevelButtons).filter(
+      (button) =>
+        button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block"
+    );
+
+    if (expandedRows.length === firstLevelButtons.length) {
+      expandedRows.forEach((button) => {
+        button.click();
+      });
+      this.expandedRows.clear();
     } else {
-      subrowButtons.forEach(button => {
+      firstLevelButtons.forEach((button) => {
         if (!this.expandedRows.has(button.id)) {
-          button.click()
+          button.click();
         }
-      })
+      });
     }
   }
 }
