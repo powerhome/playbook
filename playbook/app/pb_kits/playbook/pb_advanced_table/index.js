@@ -1,8 +1,8 @@
-import PbEnhancedElement from '../pb_enhanced_element'
+import PbEnhancedElement from "../pb_enhanced_element";
 
-const ADVANCED_TABLE_SELECTOR = '[data-advanced-table]'
-const DOWN_ARROW_SELECTOR = '#advanced-table_open_icon'
-const UP_ARROW_SELECTOR = '#advanced-table_close_icon'
+const ADVANCED_TABLE_SELECTOR = "[data-advanced-table]";
+const DOWN_ARROW_SELECTOR = "#advanced-table_open_icon";
+const UP_ARROW_SELECTOR = "#advanced-table_close_icon";
 
 export default class PbAdvancedTable extends PbEnhancedElement {
   static get selector() {
@@ -33,6 +33,22 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         }
         this.toggleElement(this.target);
       }
+    });
+
+    const nestedButtons = this.element
+      .closest("table")
+      .querySelectorAll("[data-advanced-table]");
+    nestedButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const isExpanded =
+          button.querySelector(UP_ARROW_SELECTOR).style.display ===
+          "inline-block";
+        if (isExpanded) {
+          PbAdvancedTable.expandedRows.add(button.id);
+        } else {
+          PbAdvancedTable.expandedRows.delete(button.id);
+        }
+      });
     });
   }
 
@@ -107,15 +123,13 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   displayDownArrow() {
     this.element.querySelector(DOWN_ARROW_SELECTOR).style.display =
       "inline-block";
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display =
-      "none";
+    this.element.querySelector(UP_ARROW_SELECTOR).style.display = "none";
   }
 
   displayUpArrow() {
     this.element.querySelector(UP_ARROW_SELECTOR).style.display =
       "inline-block";
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display =
-      "none";
+    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = "none";
   }
 
   static handleToggleAllHeaders(element) {
@@ -132,21 +146,33 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     if (allExpanded) {
       firstLevelButtons.forEach((button) => {
         button.click();
+        PbAdvancedTable.expandedRows.delete(button.id);
       });
-      this.expandedRows.clear();
     } else {
       firstLevelButtons.forEach((button) => {
-        if (!this.expandedRows.has(button.id)) {
+        if (!PbAdvancedTable.expandedRows.has(button.id)) {
           button.click();
+          PbAdvancedTable.expandedRows.add(button.id);
+        }
+      });
+
+      PbAdvancedTable.expandedRows.forEach((rowId) => {
+        const nestedButton = table.querySelector(
+          `[data-advanced-table][id="${rowId}"]`
+        );
+        if (nestedButton && !firstLevelButtons.contains(nestedButton)) {
+          nestedButton.click();
         }
       });
     }
   }
+
+  // static handleToggleAllSubRows(element, rowDepth) {}
 }
 
 window.expandAllRows = (element) => {
-  PbAdvancedTable.handleToggleAllHeaders(element)
-}
-window.expandAllSubRows = (element, rowDepth) => {
-  PbAdvancedTable.handleToggleAllSubRows(element, rowDepth)
-}
+  PbAdvancedTable.handleToggleAllHeaders(element);
+};
+// window.expandAllSubRows = (element, rowDepth) => {
+//   PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
+// };
