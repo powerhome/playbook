@@ -41,7 +41,6 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
     fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
   const orderClass = order !== 'none' ? `order_${order}` : null
 
-  // Combine dynamic inline styles
   const dynamicInlineProps = globalInlineProps(props)
   const combinedStyles = {
     ...fixedStyle,
