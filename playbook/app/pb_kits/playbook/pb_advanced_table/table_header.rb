@@ -36,10 +36,16 @@ module Playbook
       end
 
       def process_columns(columns, rows, current_depth, max_depth)
-        columns.each do |col|
+        total_columns = columns.size
+        columns.each_with_index do |col, index|
+          is_last = index == total_columns - 1
           if col[:columns]
             colspan = compute_leaf_columns(col[:columns])
-            rows[current_depth] << { label: col[:label], colspan: colspan }
+            rows[current_depth] << {
+              label: col[:label],
+              colspan: colspan,
+              is_last_in_group: is_last && current_depth.positive?,
+            }
 
             process_columns(col[:columns], rows, current_depth + 1, max_depth)
           else
@@ -49,6 +55,7 @@ module Playbook
               colspan: colspan,
               accessor: col[:accessor],
               sort_menu: col[:sort_menu],
+              is_last_in_group: is_last && current_depth.positive?,
             }
           end
         end

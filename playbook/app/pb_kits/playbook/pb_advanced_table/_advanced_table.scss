@@ -55,7 +55,7 @@
       }
     }
     th[colspan]:not([colspan="1"]) {
-      border-right: 1px solid $border_light;
+      border-right: 1px solid $border_light !important;
     }
 
   
