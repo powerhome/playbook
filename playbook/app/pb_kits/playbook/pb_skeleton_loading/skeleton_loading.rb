@@ -25,6 +25,10 @@ module Playbook
         generate_classname("pb_skeleton_loading")
       end
 
+      def global_inline_props
+        {}
+      end
+
       def item_classname(index = nil)
         classes = [
           "pb_skeleton_loading_item",
@@ -40,7 +44,6 @@ module Playbook
         styles = []
         styles << "height: #{height}"
         styles << "width: #{width}"
-        styles << "border: 1px solid red"
         styles.join("; ")
       end
 
