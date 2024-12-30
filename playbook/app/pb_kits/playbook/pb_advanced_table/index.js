@@ -71,15 +71,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
         );
 
-      function getSimpleId(prefixedId) {
-        return prefixedId.substring(prefixedId.lastIndexOf("_") + 1);
-      }
-
-      // New Set with simple IDs for comparing
-      const simpleExpandedRows = new Set(
-        [...PbAdvancedTable.expandedRows].map(getSimpleId)
-      );
-
       childRowsAll.forEach((childRow) => {
         const dataContent = childRow.dataset.advancedTableContent;
 
@@ -89,8 +80,12 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
         // Split the dataContent to get all ancestor IDs, check against simpleExpandedRows
         const ancestorIds = dataContent.split("-").slice(0, -1);
-        const allAncestorsExpanded = ancestorIds.every((id) =>
-          simpleExpandedRows.has(id)
+
+        const prefixedAncestorIds = ancestorIds.map(
+          (id) => `${childRow.id}_${id}`
+        );
+        const allAncestorsExpanded = prefixedAncestorIds.every((id) =>
+          PbAdvancedTable.expandedRows.has(id)
         );
 
         if (allAncestorsExpanded) {
