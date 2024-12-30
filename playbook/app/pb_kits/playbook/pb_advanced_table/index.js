@@ -70,10 +70,35 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         .querySelectorAll(
           `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
         );
+
+      function getSimpleId(prefixedId) {
+        return prefixedId.substring(prefixedId.lastIndexOf("_") + 1);
+      }
+
+      // New Set with simple IDs for comparing
+      const simpleExpandedRows = new Set(
+        [...PbAdvancedTable.expandedRows].map(getSimpleId)
+      );
+
       childRowsAll.forEach((childRow) => {
-        if (PbAdvancedTable.expandedRows.has(childRow.dataset.rowParent)) {
+        const dataContent = childRow.dataset.advancedTableContent;
+
+        if (!dataContent) {
+          return;
+        }
+
+        // Split the dataContent to get all ancestor IDs, check against simpleExpandedRows
+        const ancestorIds = dataContent.split("-").slice(0, -1);
+        const allAncestorsExpanded = ancestorIds.every((id) =>
+          simpleExpandedRows.has(id)
+        );
+
+        if (allAncestorsExpanded) {
           childRow.style.display = "table-row";
           childRow.classList.add("is-visible");
+        } else {
+          childRow.style.display = "none";
+          childRow.classList.remove("is-visible");
         }
       });
     });
