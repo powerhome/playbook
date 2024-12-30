@@ -20,6 +20,7 @@ type CircleIconButtonProps = {
   onClick?: React.MouseEventHandler<HTMLElement>,
   newWindow?: boolean,
   type?: 'button' | 'submit' | 'reset' | undefined,
+  target?: string
   variant?: 'primary' | 'secondary' | 'link',
 }
 
@@ -36,6 +37,7 @@ const CircleIconButton = (props: CircleIconButtonProps): React.ReactElement => {
     loading = false,
     onClick = noop,
     type,
+    target,
     link,
     newWindow,
     variant,
@@ -66,6 +68,7 @@ const CircleIconButton = (props: CircleIconButtonProps): React.ReactElement => {
           loading={loading}
           newWindow={newWindow}
           onClick={onClick}
+          target={target}
           text={null}
           variant={variant}
       >

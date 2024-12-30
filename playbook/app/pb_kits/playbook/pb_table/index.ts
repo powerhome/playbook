@@ -51,9 +51,11 @@ export default class PbTable extends PbEnhancedElement {
               .split('-');
 
           if (this.stickyLeftColumns.length > 0) {
-            this.handleStickyColumnsRef = this.handleStickyColumns.bind(this);
-            this.handleStickyColumns();
-            window.addEventListener('resize', this.handleStickyColumnsRef);
+            setTimeout(() => {
+              this.handleStickyColumnsRef = this.handleStickyColumns.bind(this);
+              this.handleStickyColumns();
+              window.addEventListener('resize', this.handleStickyColumnsRef);
+            }, 10);
           }
         }
       });
