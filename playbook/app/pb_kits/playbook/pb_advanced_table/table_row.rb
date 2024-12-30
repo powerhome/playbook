@@ -16,8 +16,10 @@ module Playbook
         generate_classname("pb_table_tr", "bg-white", subrow_depth_classname, separator: " ")
       end
 
-      def td_classname
-        generate_classname("id-cell", "chrome-styles", separator: " ")
+      def td_classname(column)
+        classes = %w[id-cell chrome-styles]
+        classes << "last-cell" if column[:is_last_in_group]
+        classes.join(" ")
       end
 
       def depth_accessors

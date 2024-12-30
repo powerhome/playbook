@@ -22,7 +22,11 @@ module Playbook
           if col[:columns]
             flatten_columns(col[:columns])
           elsif col[:accessor].present?
-            col
+            if has_grouped_headers?
+              col.merge(is_last_in_group: last_in_group?(columns, col))
+            else
+              col
+            end
           end
         end.compact
       end
@@ -66,6 +70,16 @@ module Playbook
 
       def classname
         generate_classname("pb_advanced_table_body", separator: " ")
+      end
+
+    private
+
+      def has_grouped_headers?
+        column_definitions.any? { |col| col.key?(:columns) }
+      end
+
+      def last_in_group?(columns, current_col)
+        columns.last[:accessor] == current_col[:accessor]
       end
     end
   end
