@@ -10,3 +10,11 @@
   link: "https://google.com",
   new_window: true
 }) %>
+<br/>
+<%= pb_rails("circle_icon_button", props: {
+  icon: "info",
+  variant: "secondary",
+  aria: { label: "Link to Playbook in new window" },
+  link: "https://playbook.powerapp.cloud/",
+  target: "child"
+}) %>

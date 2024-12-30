@@ -21,6 +21,15 @@ const CircleIconButtonLink = (props) => (
         {...props}
     />
 
+    <br/>
+
+    <CircleIconButton
+        aria={{ label: "Link to Playbook in new window" }}
+        icon="info"
+        link="https://playbook.powerapp.cloud/"
+        target="child"
+        variant="secondary"
+    />
   </div>
 )
 
