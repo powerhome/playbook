@@ -4,6 +4,10 @@
     display: block;
     overflow-x: scroll;
 
+    &.table-responsive-scroll > .table-responsive-scroll {
+        overflow: visible;
+    }
+
     // Responsive Styles
     @media (max-width: 1600px) {
         &[class*="table-responsive-scroll"] {

@@ -146,28 +146,56 @@ const Table = (props: TableProps): React.ReactElement => {
 
     return (
         <>
-            {isTableTag ? (
-                <table
-                    {...ariaProps}
-                    {...dataProps}
-                    {...htmlProps}
-                    className={classNames}
-                    id={id}
-                    style={dynamicInlineProps}
-                >
-                    {children}
-                </table>
-            ) : (
-                <div
-                    {...ariaProps}
-                    {...dataProps}
-                    {...htmlProps}
-                    className={classNames}
-                    id={id}
-                    style={dynamicInlineProps}
-                >
-                    {children}
+            {responsive === 'scroll' ? (
+                <div className='table-responsive-scroll'>
+                    {isTableTag ? (
+                        <table
+                            {...ariaProps}
+                            {...dataProps}
+                            {...htmlProps}
+                            className={classNames}
+                            id={id}
+                            style={dynamicInlineProps}
+                        >
+                            {children}
+                        </table>
+                    ) : (
+                        <div
+                            {...ariaProps}
+                            {...dataProps}
+                            {...htmlProps}
+                            className={classNames}
+                            id={id}
+                            style={dynamicInlineProps}
+                        >
+                            {children}
+                        </div>
+                    )}
                 </div>
+            ) : (
+                isTableTag ? (
+                    <table
+                        {...ariaProps}
+                        {...dataProps}
+                        {...htmlProps}
+                        className={classNames}
+                        id={id}
+                        style={dynamicInlineProps}
+                    >
+                        {children}
+                    </table>
+                ) : (
+                    <div
+                        {...ariaProps}
+                        {...dataProps}
+                        {...htmlProps}
+                        className={classNames}
+                        id={id}
+                        style={dynamicInlineProps}
+                    >
+                        {children}
+                    </div>
+                )
             )}
         </>
     )
