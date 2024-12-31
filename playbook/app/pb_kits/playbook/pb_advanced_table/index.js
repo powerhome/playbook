@@ -18,9 +18,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   static isCollapsing = false;
 
   connect() {
-    // Hide all child rows on initial load
-    this.hideAllChildRows();
-
     this.element.addEventListener("click", () => {
       if (!PbAdvancedTable.isCollapsing) {
         const isExpanded =
@@ -49,15 +46,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           PbAdvancedTable.expandedRows.delete(button.id);
         }
       });
-    });
-  }
-
-  hideAllChildRows() {
-    const table = this.element.closest("table");
-    const childRows = table.querySelectorAll(".toggle-content");
-    childRows.forEach((row) => {
-      row.style.display = "none";
-      row.classList.remove("is-visible");
     });
   }
 

@@ -128,7 +128,7 @@
   }
 
   .toggle-content {
-    display: none;
+    display: none !important;
     height: 0;
     padding-bottom: 0 !important;
     padding-top: 0 !important;
@@ -137,7 +137,7 @@
   }
 
   .toggle-content.is-visible {
-    display: contents;
+    display: table-row !important;
     height: auto;
   }
 
