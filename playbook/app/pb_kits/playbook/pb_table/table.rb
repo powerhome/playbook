@@ -45,10 +45,6 @@ module Playbook
         )
       end
 
-      def responsive_classname
-        responsive ? "table-responsive-#{responsive}" : nil
-      end
-
     private
 
       def dark_class

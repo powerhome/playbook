@@ -146,56 +146,28 @@ const Table = (props: TableProps): React.ReactElement => {
 
     return (
         <>
-            {responsive === 'scroll' ? (
-                <div className='table-responsive-scroll'>
-                    {isTableTag ? (
-                        <table
-                            {...ariaProps}
-                            {...dataProps}
-                            {...htmlProps}
-                            className={classNames}
-                            id={id}
-                            style={dynamicInlineProps}
-                        >
-                            {children}
-                        </table>
-                    ) : (
-                        <div
-                            {...ariaProps}
-                            {...dataProps}
-                            {...htmlProps}
-                            className={classNames}
-                            id={id}
-                            style={dynamicInlineProps}
-                        >
-                            {children}
-                        </div>
-                    )}
-                </div>
+            {isTableTag ? (
+                <table
+                    {...ariaProps}
+                    {...dataProps}
+                    {...htmlProps}
+                    className={classNames}
+                    id={id}
+                    style={dynamicInlineProps}
+                >
+                    {children}
+                </table>
             ) : (
-                isTableTag ? (
-                    <table
-                        {...ariaProps}
-                        {...dataProps}
-                        {...htmlProps}
-                        className={classNames}
-                        id={id}
-                        style={dynamicInlineProps}
-                    >
-                        {children}
-                    </table>
-                ) : (
-                    <div
-                        {...ariaProps}
-                        {...dataProps}
-                        {...htmlProps}
-                        className={classNames}
-                        id={id}
-                        style={dynamicInlineProps}
-                    >
-                        {children}
-                    </div>
-                )
+                <div
+                    {...ariaProps}
+                    {...dataProps}
+                    {...htmlProps}
+                    className={classNames}
+                    id={id}
+                    style={dynamicInlineProps}
+                >
+                    {children}
+                </div>
             )}
         </>
     )
