@@ -68,27 +68,30 @@ module Playbook
       end
 
       def wrap_leaf_columns(column_definitions)
-        has_grouped_headers = column_definitions.any? { |col| col.key?(:columns) }
+        max_depth = compute_max_depth(column_definitions)
 
-        if has_grouped_headers
-          column_definitions.map do |col|
-            if col.key?(:columns)
-              {
-                label: col[:label],
-                columns: wrap_leaf_columns(col[:columns]),
-              }
-            elsif col.key?(:accessor)
-              {
-                label: "",
-                columns: [col],
-              }
-            else
-              col
-            end
+        column_definitions.map do |col|
+          if col.key?(:columns)
+            {
+              label: col[:label],
+              columns: wrap_leaf_columns(col[:columns]),
+            }
+          else
+            # For leaf columns, wrap with empty labels up to max depth to get proper structure
+            wrap_leaf_column(col, max_depth)
           end
-        else
-          column_definitions
         end
+      end
+
+      def wrap_leaf_column(col, max_depth)
+        wrapped = {
+          accessor: col[:accessor],
+          label: col[:label] || "",
+        }
+        (max_depth - 1).times do
+          wrapped = { label: "", columns: [wrapped] }
+        end
+        wrapped
       end
     end
   end
