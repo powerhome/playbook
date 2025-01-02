@@ -7,7 +7,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
 
   subject { Playbook::PbTimestamp::Timestamp }
   let(:timestamp) { DateTime.new(2020, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze }
-  let(:future_timestamp) { DateTime.new(2025, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze }
+  let(:future_timestamp) { DateTime.new(2024, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze }
 
   it {
     is_expected.to define_enum_prop(:align)
@@ -101,7 +101,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
       context "if show_user is true" do
         let(:show_user) { true }
         it "returns last updated with year including user's name" do
-          timestamp = DateTime.new(2025, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze
+          timestamp = DateTime.new(2024, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze
           date = "Oct 10"
           time = " 4:30p"
 
@@ -112,7 +112,7 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
       context "if show_user is false" do
         let(:show_user) { false }
         it "returns last updated with year without user's name" do
-          timestamp = DateTime.new(2025, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze
+          timestamp = DateTime.new(2024, 10, 10, 20, 30, 0o0).in_time_zone("America/New_York").freeze
           date = "Oct 10"
           time = " 4:30p"
 
