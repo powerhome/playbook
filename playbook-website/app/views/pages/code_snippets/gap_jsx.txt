@@ -1,4 +1,4 @@
-<Flex gap="space_xxs" alignItems="center">
+<Flex gap="xxs" alignItems="center">
   <Button variant="primary" />
   <Button variant="secondary" />
   <Button variant="link" />
