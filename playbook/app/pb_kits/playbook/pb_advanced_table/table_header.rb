@@ -87,6 +87,7 @@ module Playbook
         wrapped = {
           accessor: col[:accessor],
           label: col[:label] || "",
+          sort_menu: col[:sort_menu] || nil,
         }
         (max_depth - 1).times do
           wrapped = { label: "", columns: [wrapped] }
