@@ -1,3 +1,121 @@
+# 📊 Data that Sticks With You! 📌
+##### December 26, 2024
+
+![14 10 0](https://github.com/user-attachments/assets/6bc3d0d8-499d-4730-a435-512db589ab8e)
+
+The Table Kit now supports sticky columns to ensure your essential table details are always in sight. Pair that with an easy-to-implement Pagination navigation bar, and you'll never get lost in the numbers again! Need to display more complex data? Our AdvancedTable kit now also supports seamless Pagination for an even smoother experience. 🚀
+
+[14.10.0](https://github.com/powerhome/playbook/tree/14.10.0) full list of changes:
+
+**Kit Enhancements:**
+- Add Status Color to Card Header ([\#4044](https://github.com/powerhome/playbook/pull/4044)) ([@Tomm1128](https://github.com/Tomm1128))
+- Table Kit: "Sticky Left Column" Variant Styling - React and Rails ([\#4027](https://github.com/powerhome/playbook/pull/4027)) ([@skduncan](https://github.com/skduncan))
+- Home Address Street: "none" Emphasis Prop ([\#4006](https://github.com/powerhome/playbook/pull/4006)) ([@Tomm1128](https://github.com/Tomm1128))
+- Adding Collapsible Trail to Rails Advanced Table ([\#4030](https://github.com/powerhome/playbook/pull/4030)) ([@carloslimasd](https://github.com/carloslimasd))
+- Global Height Fixes ([\#3972](https://github.com/powerhome/playbook/pull/3972)) ([@markdoeswork](https://github.com/markdoeswork))
+- Text Input Masking for React: Currency, Zip Code, Postal Code, SSN ([\#3986](https://github.com/powerhome/playbook/pull/3986)) ([@kangaree](https://github.com/kangaree))
+- Collapsible Rows for Basic Table ([\#3967](https://github.com/powerhome/playbook/pull/3967)) ([@nidaqg](https://github.com/nidaqg))
+- Create a "stickyLeftColumn" Prop for the Table Kit - RAILS only ([\#3970](https://github.com/powerhome/playbook/pull/3970)) ([@skduncan](https://github.com/skduncan))
+- Add Underline Hover Prop ([\#3975](https://github.com/powerhome/playbook/pull/3975)) ([@markdoeswork](https://github.com/markdoeswork))
+- Adding AdvancedTable Pagination (React) ([\#3962](https://github.com/powerhome/playbook/pull/3962)) ([@carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+- Form Group Error State Alignment ([\#4004](https://github.com/powerhome/playbook/pull/4004)) ([@Tomm1128](https://github.com/Tomm1128))
+- Change Playground Key ([\#3984](https://github.com/powerhome/playbook/pull/3984)) ([@Lsimmons98](https://github.com/Lsimmons98))
+- Fix Sort Function on Rails Advanced Table ([\#3974](https://github.com/powerhome/playbook/pull/3974)) ([@Tomm1128](https://github.com/Tomm1128))
+- Avatar Badge Overlay Border Bug Fix ([\#3976](https://github.com/powerhome/playbook/pull/3976)) ([@ASPhillips8](https://github.com/ASPhillips8))
+
+**Improvements:**
+- Dark Mode Audit - Gauge ([\#4015](https://github.com/powerhome/playbook/pull/4015)) ([@Lsimmons98](https://github.com/Lsimmons98))
+- Skip RC Process with 'Inactive RC' Label ([\#4021](https://github.com/powerhome/playbook/pull/4021)) ([@kangaree](https://github.com/kangaree))
+- Playbook Website Redirects - Go to Parent Not Home ([\#4013](https://github.com/powerhome/playbook/pull/4013)) ([@Tomm1128](https://github.com/Tomm1128))
+- Icon Integration Docs: Nav Bar and About Page ([\#4007](https://github.com/powerhome/playbook/pull/4007)) ([@kangaree](https://github.com/kangaree))
+- Dark Mode Audit - Typeahead ([\#3983](https://github.com/powerhome/playbook/pull/3983)) ([@Lsimmons98](https://github.com/Lsimmons98))
+- SkeletonLoading User Component and Filter Component Doc Examples ([\#4014](https://github.com/powerhome/playbook/pull/4014)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Change BarGraph Override Example ([\#3982](https://github.com/powerhome/playbook/pull/3982)) ([@markdoeswork](https://github.com/markdoeswork))
+- Make Link Kit Live and Update ‘visited’ Color ([\#3997](https://github.com/powerhome/playbook/pull/3997)) ([@markdoeswork](https://github.com/markdoeswork))
+- Bread Crumbs Dark Mode Fix ([\#3973](https://github.com/powerhome/playbook/pull/3973)) ([@ASPhillips8](https://github.com/ASPhillips8))
+- Dark Mode Audit Stat Change ([\#3968](https://github.com/powerhome/playbook/pull/3968)) ([@ASPhillips8](https://github.com/ASPhillips8))
+- Dark Mode Audit - Caption and Title ([\#3961](https://github.com/powerhome/playbook/pull/3961)) ([@Lsimmons98](https://github.com/Lsimmons98))
+- Dark Mode Audit - File Upload Kit ([\#3954](https://github.com/powerhome/playbook/pull/3954)) ([@Lsimmons98](https://github.com/Lsimmons98))
+- Dark Mode Audit - Nav ([\#3950](https://github.com/powerhome/playbook/pull/3950)) ([@Tomm1128](https://github.com/Tomm1128))
+- Dark Mode Audit - Selectable Card ([\#3953](https://github.com/powerhome/playbook/pull/3953)) ([@Lsimmons98](https://github.com/Lsimmons98))
+- Update SWIFT_CHANGELOG.md to Reflect 6.5.1 Release ([\#3971](https://github.com/powerhome/playbook/pull/3971)) ([@RachelRadford21](https://github.com/RachelRadford21))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.9.0...14.10.0)
+
+
+# 🪄 New Width Global Prop — Apply Widths With Ease!
+##### November 29, 2024
+
+![turtle_width](https://github.com/user-attachments/assets/fe524590-d08c-4784-b48a-00cbc1f9ae73)
+
+ Introducing a new way to set widths on components without using custom CSS! Available on every component, the width prop accepts Playbook spacing values as well as 0% and 100%.
+
+[14.9.0](https://github.com/powerhome/playbook/tree/14.9.0) full list of changes:
+
+**Kit Enhancements:**
+- Roll Out Height Global Props ([#3944](https://github.com/powerhome/playbook/pull/3944)) ([@kangaree](https://github.com/kangaree))
+- Add Red "Danger" Button Variant For Delete Actions ([#3949](https://github.com/powerhome/playbook/pull/3949)) ([@skduncan](https://github.com/skduncan))
+- Implementing Rails Advanced Table Custom Cell With Kits ([#3952](https://github.com/powerhome/playbook/pull/3952)) ([@carloslimasd](https://github.com/carloslimasd))
+- Create A "StickyLeftColumn" Prop For The Table Kit ([#3913](https://github.com/powerhome/playbook/pull/3913)) ([@nickamantia](https://github.com/nickamantia))
+- Rails Typeahead Form Integration ([#3917](https://github.com/powerhome/playbook/pull/3917)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Height Global Props ([#3910](https://github.com/powerhome/playbook/pull/3910)) ([@markdoeswork](https://github.com/markdoeswork))
+- Drawer Menu Behavior ([\#3932](https://github.com/powerhome/playbook/pull/3932)) ([@markdoeswork](https://github.com/markdoeswork))
+
+**Fixed Bugs:**
+- Move Negative Sign To Left Of Currency Sign ([#3921](https://github.com/powerhome/playbook/pull/3921)) ([@kangaree](https://github.com/kangaree))
+- Fixes For Custom Trigger Not Working ([#3958](https://github.com/powerhome/playbook/pull/3958)) ([@nidaqg](https://github.com/nidaqg))
+- Fix For PhoneNumberInput CSS Conflict ([#3922](https://github.com/powerhome/playbook/pull/3922)) ([@jasperfurniss](https://github.com/jasperfurniss))
+- Dropdown Rails To Have Position Absolute On Container ([#3933](https://github.com/powerhome/playbook/pull/3933)) ([@nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+- Width Global Prop ([#3943](https://github.com/powerhome/playbook/pull/3943)) ([@skduncan](https://github.com/skduncan))
+- Bump @Floating-Ui/React From 0.22.2 To 0.26.23 ([#3926](https://github.com/powerhome/playbook/pull/3926)) ([@skduncan](https://github.com/skduncan))
+- Dependency Update/Upgrade-@Tanstack/React-Table (8.9.2 -> 8.20.5) ([#3951](https://github.com/powerhome/playbook/pull/3951)) ([@skduncan](https://github.com/skduncan))
+- Timeline Kit: Add A Vertical "With Children" Doc Example ([#3890](https://github.com/powerhome/playbook/pull/3890)) ([@kangaree](https://github.com/kangaree))
+- Adding Rails Indeterminate Checkbox Variant Doc ([#3918](https://github.com/powerhome/playbook/pull/3918)) ([@carloslimasd](https://github.com/carloslimasd))
+- Dependency Display: Add Flex Section For Summary Display [2 Of 2] ([#3875](https://github.com/powerhome/playbook/pull/3875)) ([@skduncan](https://github.com/skduncan))
+- Update Playbook-Swift Changelog ([#3901](https://github.com/powerhome/playbook/pull/3901)) ([@isismsilva](https://github.com/isismsilva))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.8.0...14.9.0)
+
+
+#  🐉 Draggable Kit Now Available For Rails! ✨
+##### November 18, 2024
+
+![playbookrelease14-8-0](https://github.com/user-attachments/assets/5248b47b-d84f-486c-b77d-453731ff6584)
+
+Now introducing the Draggable Kit for Rails! It’s easy to implement with a simple, flexible subcomponent structure right out of the box and works with almost any kit. Like its React counterpart, it’s fully customizable to fit your Rails project’s unique needs.
+
+[14.8.0](https://github.com/powerhome/playbook/tree/14.8.0) full list of changes:
+
+**Kit Enhancements:**
+- Remove react-modal from Drawer Kit ([\#3891](https://github.com/powerhome/playbook/pull/3891)) ([@markdoeswork](https://github.com/markdoeswork))
+- Add Color Hover Docs and Fix Background Hover ([\#3874](https://github.com/powerhome/playbook/pull/3874)) ([@markdoeswork](https://github.com/markdoeswork))
+- Adding defaultDate Prop to Date Picker Quick Pick Variant ([\#3907](https://github.com/powerhome/playbook/pull/3907)) ([@carloslimasd](https://github.com/carloslimasd))
+- Timeline Small Variant: Add "Gap" Prop to Timeline Kit ([\#3903](https://github.com/powerhome/playbook/pull/3903)) ([@skduncan](https://github.com/skduncan))
+
+
+**Fixed Bugs:**
+- Fix Dark Mode Date Colors- Dots, Icons, and Captions ([\#3894](https://github.com/powerhome/playbook/pull/3894)) ([@kangaree](https://github.com/kangaree))
+
+
+**Improvements:**
+- Global Hover Visibility Prop ([\#3905](https://github.com/powerhome/playbook/pull/3905)) ([@kangaree](https://github.com/kangaree))
+- Bump intl-tel-input from 24.6.0 to 24.7.0 ([\#3895](https://github.com/powerhome/playbook/pull/3895)) ([@dependabot](https://github.com/dependabot))
+- Fixing Github Action Errors ([\#3904](https://github.com/powerhome/playbook/pull/3904)) ([@jasperfurniss](https://github.com/jasperfurniss))
+- Semver Targets Trigger Correct RCs - Update Version ([\#3831](https://github.com/powerhome/playbook/pull/3831)) ([@skduncan](https://github.com/skduncan))
+- Semver Targets Trigger Correct RCs - Check Label ([\#3822](https://github.com/powerhome/playbook/pull/3822)) ([@skduncan](https://github.com/skduncan))
+
+**New Kits:**
+- Draggable Kit in Rails ([\#3863](https://github.com/powerhome/playbook/pull/3863)) ([@nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.7.0...14.8.0)
+
+
 # Go Further With Our Custom Timelines!
 ##### November 8, 2024
 

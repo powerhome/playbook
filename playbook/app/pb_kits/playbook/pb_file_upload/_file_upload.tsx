@@ -13,6 +13,7 @@ type FileUploadProps = {
   accept?: string[],
   className?: string,
   customMessage?: string,
+  dark?: boolean,
   data?: {[key: string]: string | number},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   acceptedFilesDescription?: string,
@@ -31,6 +32,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     acceptedFilesDescription = '',
     className,
     customMessage,
+    dark = false,
     data = {},
     htmlOptions = {},
     maxSize,
@@ -94,9 +96,12 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
         {...htmlProps}
         {...getRootProps()}
     >
-      <Card>
+      <Card dark={dark}>
         <input {...getInputProps()} />
-        <Body color="light">
+        <Body
+            color="light"
+            dark={dark}
+        >
           {isDragActive ?
             <p>{'Drop the files here ...'}</p>
             :

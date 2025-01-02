@@ -1,0 +1,1 @@
+`pagination` is an optional prop that can be used to add pagination to the AdvancedTable. If present, it will add pagination with default values for pageSize, etc. To customize pagination, you can also use `paginationProps` shown in the next example.

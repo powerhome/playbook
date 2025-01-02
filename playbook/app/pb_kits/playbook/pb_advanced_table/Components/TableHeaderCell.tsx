@@ -40,46 +40,59 @@ export const TableHeaderCell = ({
 
   const toggleSortButton = (event: React.SyntheticEvent) => {
     if (sortControl) {
-      const sortIsDesc = header.column.getIsSorted() === "desc"
+      const sortIsDesc = header?.column.getIsSorted() === "desc"
       sortIsDesc
         ? sortControl.onChange({ desc: true })
         : sortControl.onChange({ desc: false })
     } else {
-      header.column.getToggleSortingHandler()(event)
+      header?.column.getToggleSortingHandler()(event)
     }
   }
 
-const cellClassName = classnames("table-header-cells", 
-  `${isChrome() ? "chrome-styles" : ""}`, 
+  const isLeafColumn =
+  header?.column.getLeafColumns().length === 1 &&
+  header?.column.getLeafColumns()[0].id === header.column.id
+
+  const isLastHeaderCell =
+    header?.column.parent?.columns.at(-1) === header?.column ||
+    (header?.colSpan > 1 && header?.column.parent !== undefined);
+ 
+const cellClassName = classnames(
+  "table-header-cells",
+  `${isChrome() ? "chrome-styles" : ""}`,
   `${enableSorting ? "table-header-cells-active" : ""}`,
-  { 'pinned-left': responsive === "scroll" && isPinnedLeft },
-)
+  { "pinned-left": responsive === "scroll" && isPinnedLeft },
+   isLastHeaderCell ? "last-header-cell" : ""
+); 
 
 const cellId = `${loading ? 
-    `loading-${header.id}`
-    : `${header.id}`
+    `loading-${header?.id}`
+    : `${header?.id}`
 }`
 
 const isToggleExpansionEnabledLoading =
-  header.index === 0 &&
+  header?.index === 0 &&
   loading &&
   (enableToggleExpansion === "all" || "header") &&
   enableToggleExpansion !== "none"
   
 const isToggleExpansionEnabled =
-  header.index === 0 &&
+  header?.index === 0 &&
   !loading &&
   (enableToggleExpansion === "all" || "header") &&
   enableToggleExpansion !== "none"
+
+const justifyHeader = isLeafColumn ? "end" : "center"
 
   return (
     <th
         align="right"
         className={cellClassName}
+        colSpan={header?.colSpan}
         id={cellId}
-        key={`${header.id}-header`}
+        key={`${header?.id}-header`}
     >
-      {header.isPlaceholder ? null : headerChildren && header.index === 0 ? (
+      {header?.isPlaceholder ? null : headerChildren && header?.index === 0 ? (
         <Flex alignItems="center">
           {headerChildren}
           <div>
@@ -89,7 +102,7 @@ const isToggleExpansionEnabled =
       ) : (
         <Flex
             alignItems="center"
-            justify={header.index === 0 && enableSorting ? "between" : header.index === 0 && !enableSorting ? "start" : "end"}
+            justify={header?.index === 0 && enableSorting ? "between" : header?.index === 0 && !enableSorting ? "start" : justifyHeader}
         >
           {isToggleExpansionEnabled && (
               <ToggleIconButton onClick={handleExpandOrCollapse} />
@@ -100,11 +113,11 @@ const isToggleExpansionEnabled =
             )}
 
           <Flex
-              className={`${header.index === 0 &&
+              className={`${header?.index === 0 &&
                 enableSorting &&
                 "header-sort-button pb_th_link"}`}
-              cursor={header.index === 0 && enableSorting ? "pointer" : "default"}
-              {...(header.index === 0 &&
+              cursor={header?.index === 0 && enableSorting ? "pointer" : "default"}
+              {...(header?.index === 0 &&
                 enableSorting && {
                   htmlOptions: {
                     onClick: (event: React.MouseEvent) => toggleSortButton(event),
@@ -116,14 +129,14 @@ const isToggleExpansionEnabled =
                     tabIndex: 0,
                   },
                 })}
-              justify={header.index === 0 && enableSorting ? "between" : "none"}
+              justify={header?.index === 0 && enableSorting ? "between" : "none"}
               paddingLeft={enableSorting ? "xxs" : "xs"}
           >
             <div>
-              {flexRender(header.column.columnDef.header, header.getContext())}
+              {flexRender(header?.column.columnDef.header, header?.getContext())}
             </div>
 
-            {header.index === 0 &&
+            {header?.index === 0 &&
               header.column.getCanSort() &&
               enableSorting &&
               (loading ? (

@@ -4,6 +4,7 @@ examples:
     - table_md: Medium
     - table_lg: Large
     - table_sticky: Sticky Header
+    - table_sticky_left_columns: Sticky Left Column
     - table_header: Table Header
     - table_alignment_row_rails: Row Alignment
     - table_alignment_column_rails: Cell Alignment
@@ -33,6 +34,7 @@ examples:
     - table_md: Medium
     - table_lg: Large
     - table_sticky: Sticky Header
+    - table_sticky_left_columns: Sticky Left Column
     - table_alignment_row: Row Alignment
     - table_alignment_column: Cell Alignment
     - table_alignment_shift_row: Row Shift
@@ -55,3 +57,8 @@ examples:
     - table_with_subcomponents: Table with Sub Components (Table Elements)
     - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
     - table_outer_padding: Outer Padding
+    - table_with_collapsible: Table with Collapsible
+    - table_with_collapsible_with_custom_click: Table with Collapsible with Custom Click
+    - table_with_collapsible_with_custom_content: Table with Collapsible with Custom Content
+    - table_with_collapsible_with_nested_rows: Table with Collapsible with Nested Rows
+    - table_with_collapsible_with_nested_table: Table with Collapsible with Nested Table

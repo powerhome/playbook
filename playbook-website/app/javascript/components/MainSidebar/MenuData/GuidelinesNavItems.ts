@@ -4,12 +4,28 @@ export const VisualGuidelinesItems = [
         link: "/visual_guidelines/colors"
     },
     {
+        name: "Width",
+        link: "/visual_guidelines/width"
+    },
+    {
         name: "Min Width",
         link: "/visual_guidelines/min_width"
     },
     {
         name: "Max Width",
         link: "/visual_guidelines/max_width"
+    },
+    {
+        name: "Height",
+        link: "/visual_guidelines/height"
+    },
+    {
+        name: "Min Height",
+        link: "/visual_guidelines/min_height"
+    },
+    {
+        name : "Max Height",
+        link: "/visual_guidelines/max_height"
     },
     {
         name: "Position",

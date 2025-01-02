@@ -7,6 +7,7 @@ import {
   createColumnHelper,
   getCoreRowModel,
   getExpandedRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   Row,
   useReactTable,
@@ -25,6 +26,7 @@ import { updateExpandAndCollapseState } from "./Utilities/ExpansionControlHelper
 import { CustomCell } from "./Components/CustomCell"
 import { TableHeader } from "./SubKits/TableHeader"
 import { TableBody } from "./SubKits/TableBody"
+import Pagination from "../pb_pagination/_pagination"
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
@@ -42,6 +44,8 @@ type AdvancedTableProps = {
   loading?: boolean | string
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
+  pagination?: boolean,
+  paginationProps?: GenericObject
   responsive?: "scroll" | "none",
   sortControl?: GenericObject
   tableData: GenericObject[]
@@ -67,6 +71,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     loading,
     onRowToggleClick,
     onToggleExpansionClick,
+    pagination = false,
+    paginationProps,
     responsive = "scroll",
     sortControl,
     tableData,
@@ -136,27 +142,41 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
     return columnCells
   }
-//Create column array in format needed by Tanstack
-  const columns =
-    columnDefinitions &&
+
+  const buildColumns = (columnDefinitions: GenericObject[]): any => {
+    return (
+      columnDefinitions &&
       columnDefinitions.map((column, index) => {
-      // Define the base column structure
-      const columnStructure = {
-        ...columnHelper.accessor(column.accessor, {
-          header: column.label,
-        }),
-      }
+        //Checking to see if grouped column or not
+        if (column.columns && column.columns.length > 0) {
+          return {
+            header: column.label || "",
+            columns: buildColumns(column.columns),
+          };
+        } else {
+          // Define the base column structure
+          const columnStructure = {
+            ...columnHelper.accessor(column.accessor, {
+              header: column.label || "",
+            }),
+          };
 
-  if (column.cellAccessors || column.customRenderer) {
-    columnStructure.cell = createCellFunction(
-      column.cellAccessors,
-      column.customRenderer,
-      index
-    )
-  }
+          if (column.cellAccessors || column.customRenderer) {
+            columnStructure.cell = createCellFunction(
+              column.cellAccessors,
+              column.customRenderer,
+              index
+            );
+          }
 
-  return columnStructure
-})
+          return columnStructure;
+        }
+      })
+    );
+  };
+
+  //Create column array in format needed by Tanstack
+  const columns = buildColumns(columnDefinitions);
 
   //Syntax for sorting Array if we want to manage state ourselves
   const sorting = [
@@ -177,6 +197,17 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }
 
+  const paginationInitializer = pagination ? {
+    getPaginationRowModel: getPaginationRowModel(),
+    paginateExpandedRows: false,
+    initialState: {
+        pagination: {
+            pageIndex: paginationProps?.pageIndex ?? 0,
+            pageSize: paginationProps?.pageSize ??  20,
+        },
+    },
+} : {}
+
 //initialize table
   const table = useReactTable({
     data: loading ? Array(loadingStateRowCount).fill({}) : tableData,
@@ -189,6 +220,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     enableSortingRemoval: false,
     sortDescFirst: true,
     ...expandAndSortState(),
+    ... paginationInitializer,
     ...tableOptions,
   })
 
@@ -222,10 +254,14 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss("pb_advanced_table"),
-    `table-responsive-${responsive}`,
+    `advanced-table-responsive-${responsive}`,
     globalProps(props),
     className
   )
+
+  const onPageChange = (page: number) => {
+    table.setPageIndex(page - 1)
+  }
 
   return (
     <div {...ariaProps} 
@@ -250,23 +286,45 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             toggleExpansionIcon,
           }}
       >
-        <Table
-            className={`${loading ? "content-loading" : ""}`}
-            dark={dark}
-            dataTable
-            numberSpacing="tabular"
-            responsive="none"
-            {...tableProps}
-        >
-          {children ? (
-            children
-          ) : (
-            <>
-              <TableHeader />
-              <TableBody />
-            </>
-          )}
-        </Table>
+        <>
+          {pagination &&
+              <Pagination
+                  current={table.getState().pagination.pageIndex + 1}
+                  key={`pagination-top-${table.getState().pagination.pageIndex + 1}`}
+                  marginBottom="xs"
+                  onChange={onPageChange}
+                  range={paginationProps?.range ? paginationProps?.range : 5}
+                  total={table.getPageCount()}
+                  />
+          }
+          <Table
+              className={`${loading ? "content-loading" : ""}`}
+              dark={dark}
+              dataTable
+              numberSpacing="tabular"
+              responsive="none"
+              {...tableProps}
+          >
+            {children ? (
+              children
+            ) : (
+              <>
+                <TableHeader />
+                <TableBody />
+              </>
+            )}
+          </Table>
+          {pagination &&
+            <Pagination
+                current={table.getState().pagination.pageIndex + 1}
+                key={`pagination-bottom-${table.getState().pagination.pageIndex + 1}`}
+                marginTop="xs"
+                onChange={onPageChange}
+                range={paginationProps?.range ? paginationProps?.range : 5}
+                total={table.getPageCount()}
+            />
+          }
+        </>
       </AdvancedTableContext.Provider>
     </div>
   )

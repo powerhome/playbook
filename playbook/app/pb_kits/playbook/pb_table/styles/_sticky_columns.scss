@@ -1,0 +1,17 @@
+@import "../../tokens/colors";
+
+[class^="pb_table"] {
+    .sticky {
+        position: sticky !important;
+        z-index: 1;
+        background-color: white;
+    }
+
+    .with-border {
+        border-right: 1px solid $border_light !important;
+    }
+
+    .sticky-shadow {
+        box-shadow: 4px 0 10px rgba(60, 106, 172, 0.16) !important;
+    }
+}

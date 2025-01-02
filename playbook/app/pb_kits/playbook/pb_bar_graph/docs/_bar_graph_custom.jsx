@@ -1,66 +1,70 @@
 import React from 'react'
-
+import ReactDOMServer from 'react-dom/server'
 import BarGraph from '../_bar_graph'
+import Icon from '../../pb_icon/_icon'
 
-const chartData = [{
-  name: 'Installation',
-  data: [1475, 200, 3000, 654, 656],
-}, {
-  name: 'Manufacturing',
-  data: [4434, 524, 2320, 440, 500],
-}, {
-  name: 'Sales & Distribution',
-  data: [3387, 743, 1344, 434, 440],
-}, {
-  name: 'Project Development',
-  data: [3227, 878, 999, 780, 1000],
-}, {
-  name: 'Other',
-  data: [1111, 677, 3245, 500, 200],
-}]
+const chartData = [
+  {
+    name: 'Role',
+    data: [0, 200, 300, 654, 656],
+  },
+  {
+    name: 'Company',
+    data: [150, 524, 320, 440, 500],
+  },
+]
+
+const renderIcon = (iconName, color) => {
+  return ReactDOMServer.renderToStaticMarkup(
+  <Icon
+      color={color}
+      icon={iconName}
+  />)
+};
 
 const barGraphOptions = {
-  subtitle: {
-    text: "Overwritten subtitle",
-    style: {
-      color: "red"
-    }
+  yAxis: {
+    tickInterval: 5,
   },
   xAxis: {
-      labels: {
-          useHTML: true,
-          formatter: function() {
-              switch (this.value) {
-                  case 'Jan':
-                      return `<i class="far fa-apple-whole"></i> ${this.value}`
-                  case 'Feb':
-                      return `<i class="far fa-strawberry"></i> ${this.value}`
-                  case 'Mar':
-                      return `<i class="far fa-lemon"></i> ${this.value}`
-                  case 'Apr':
-                      return `<i class="far fa-pear"></i> ${this.value}`
-                  case 'May':
-                      return `<i class="far fa-peach"></i> ${this.value}`
-                  default:
-                      return ''
-              }
-          }
-      }
-  }
+    categories: ['1', '2', '3', '4', '5'],
+    labels: {
+      useHTML: true,
+      formatter: function () {
+        switch (this.value) {
+          case '1':
+            return `${renderIcon('frown', 'error')}`;
+          case '2':
+            return `${renderIcon('frown', 'warning')}`;
+          case '3':
+            return `${renderIcon('frown-open', 'neutral')}`;
+          case '4':
+            return `${renderIcon('smile', 'category_7')}`;
+          case '5':
+            return `${renderIcon('smile-beam', 'success')}`;
+          default:
+            return ''
+        }
+      },
+      style: {
+        fontSize: '1.4em',
+      },
+      y: 42,
+    },
+  },
+  legend: {
+    itemMarginTop: 62,
+  },
 }
 
-const BarGraphCustom = (props) => (
+const BarGraphCustom = () => (
   <div>
     <BarGraph
-        axisTitle="Number of Employees"
         chartData={chartData}
         customOptions={barGraphOptions}
-        id="bar-custom"
-        subTitle="Subtitle to replace"
+        id="happiness-dashboard"
+        legend
         title="Bar Graph with Custom Overrides"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
     />
   </div>
 )

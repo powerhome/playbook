@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, globalInlineProps } from '../utilities/globalProps'
 import OverlayPercentage from './subcomponents/_overlay_percentage'
 import OverlayToken from './subcomponents/_overlay_token'
 
@@ -39,6 +39,7 @@ const Overlay = (props: OverlayProps) => {
     const dataProps = buildDataProps(data)
     const classes = classnames(buildCss('pb_overlay'), globalProps(props), className)
     const htmlProps = buildHtmlProps(htmlOptions)
+    const dynamicInlineProps = globalInlineProps(props)
 
     const getPosition = () => {
         return Object.keys(layout)[0]
@@ -57,6 +58,7 @@ const Overlay = (props: OverlayProps) => {
             {...htmlProps}
             className={classes}
             id={id}
+            style={dynamicInlineProps}
         >
             {isSizePercentage ?
                 OverlayPercentage({

@@ -24,7 +24,7 @@ $additional_colors: (
   "neutral_subtle": $neutral_subtle,
 );
 $background_colors: map-merge($product_colors, $additional_colors);
-$pb_card_header_colors: map-merge(map-merge($product_colors, $additional_colors), $category_colors);
+$pb_card_header_colors: map-merge(map-merge(map-merge($product_colors, $additional_colors), $category_colors), $status_colors);
 
 @mixin pb_card_selected($border_color: $primary) {
   border-color: $border_color;
@@ -32,7 +32,7 @@ $pb_card_header_colors: map-merge(map-merge($product_colors, $additional_colors)
 }
 
 @mixin pb_card_selected_dark {
-  @include pb_card_selected($primary_action);
+  @include pb_card_selected($primary_action_dark);
 }
 
 @mixin pb_card($background: $card_light, $border_color: $border_light) {

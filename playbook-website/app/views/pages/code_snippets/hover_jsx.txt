@@ -25,3 +25,8 @@
     hover={{ color: "success" }}
     text='Hover to change color'
 />
+
+<Body
+    hover={{ underline: true }}
+    text='Hover to underline'
+/>

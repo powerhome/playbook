@@ -12,6 +12,8 @@ module Playbook
                                      default: "header"
       prop :subrow_header, type: Playbook::Props::String,
                            default: ""
+      prop :collapsible_trail, type: Playbook::Props::Boolean,
+                               default: true
 
       def classname
         generate_classname("pb_table_tr", "bg-white", subrow_depth_classname, separator: " ")

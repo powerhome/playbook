@@ -57,6 +57,19 @@ test('Hover Props: returns proper class name', () => {
   expectedClassName = `hover_scale_xl`;
   expect(kit).toHaveClass(expectedClassName);
 
+  const testIdUnderline = `${testSubject}-hover-underline`;
+  render(
+    <Body
+        data={{ testid: testIdUnderline }}
+        hover={{ underline: true }}
+        text="Hi"
+    />
+  );
+
+  kit = screen.getByTestId(testIdUnderline);
+  expectedClassName = `hover_underline`;
+  expect(kit).toHaveClass(expectedClassName);
+
   const testIdMultiple = `${testSubject}-hover-multiple`;
   render(
     <Body
@@ -66,6 +79,7 @@ test('Hover Props: returns proper class name', () => {
         background: 'error',
         shadow: 'deeper',
         scale: 'xl',
+        underline: true,
       }}
         text="Hi"
     />
@@ -76,4 +90,5 @@ test('Hover Props: returns proper class name', () => {
   expect(kit).toHaveClass('hover_background-error');
   expect(kit).toHaveClass('hover_shadow_deeper');
   expect(kit).toHaveClass('hover_scale_xl');
+  expect(kit).toHaveClass('hover_underline');
 });

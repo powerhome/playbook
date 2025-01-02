@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classnames from 'classnames'
-import { globalProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import Icon from '../pb_icon/_icon';
 
@@ -14,7 +14,7 @@ type PaginationProps = {
   onChange?: (pageNumber: number) => void;
   range?: number;
   total?: number;
-};
+} & GlobalProps;
 
 const Pagination = ( props: PaginationProps) => {
   const {

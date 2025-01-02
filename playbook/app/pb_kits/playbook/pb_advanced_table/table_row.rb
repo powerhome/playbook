@@ -9,6 +9,8 @@ module Playbook
                                 default: []
       prop :row
       prop :depth
+      prop :collapsible_trail, type: Playbook::Props::Boolean,
+                               default: true
 
       def classname
         generate_classname("pb_table_tr", "bg-white", subrow_depth_classname, separator: " ")
@@ -25,6 +27,21 @@ module Playbook
       end
 
     private
+
+      def custom_renderer_value(column, index)
+        if index.zero?
+          if depth.zero?
+            row[column[:accessor].to_sym]
+          else
+            depth_accessors.each_with_index do |item, accessor_index|
+              key = item.to_sym
+              return row[key] if depth - 1 == accessor_index
+            end
+          end
+        else
+          row[column[:accessor].to_sym]
+        end
+      end
 
       def subrow_depth_classname
         depth.positive? ? "depth-sub-row-#{depth}" : ""

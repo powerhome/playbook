@@ -1,0 +1,57 @@
+@mixin error-state-flex-start-selectors {
+  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit),
+  &:has(.pb_text_input_kit):has(.pb_date_picker_kit.error),
+  &:has(.pb_text_input_kit):has(.pb_select_kit_wrapper.error),
+  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error) {
+    align-items: flex-start;
+  }
+}
+
+@mixin error-state-center-selectors {
+  &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper.error):has(.pb_phone_number_input),
+  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has([class^=pb_button_kit]) {
+    align-items: center;
+  }
+}
+
+@mixin error-state-flex-end-selectors {
+  &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper.error):has(.pb_phone_number_input):has(.pb_text_input_kit.error) {
+    align-items: flex-end;
+  }
+}
+
+@mixin error-state-right-side-select-kit {
+  &:has(.pb_text_input_kit:not(.error)):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error),
+  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper) {
+    align-items: flex-start;
+
+    .pb_select_kit_wrapper {
+      padding-top: $space_md;
+      margin-top: 2px;
+
+      .pb_select_kit_caret {
+        padding-top: $space_md;
+      }
+    }
+
+    .pb_select_kit_wrapper.error {
+      padding-top: $space_md;
+      margin-top: 2px;
+
+      .pb_select_kit_caret {
+        padding-top: $space_xl;
+      }
+    }
+  }
+}
+
+@mixin error-state-left-side-select-kit {
+  &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper):has(.pb_phone_number_input):has(.pb_text_input_kit.error) {
+    align-items: flex-start;
+
+    .pb_text_input_kit.error {
+      padding-top: $space_md;
+      margin-top: 2px;
+    }
+  }
+}

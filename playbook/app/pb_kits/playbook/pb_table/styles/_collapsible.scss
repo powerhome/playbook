@@ -1,0 +1,35 @@
+@import "../../tokens/colors";
+
+.table_collapsible_side_highlight {
+  border-left: 4px solid $primary;
+  &.dark {
+    border-left: 4px solid $active_dark;
+  }
+}
+
+[class^="pb_table"] {
+  &.table-sm,
+  &.table-md,
+  &.table-lg {
+    &.table-card {
+      tbody,
+      .pb_table_tbody {
+        tr,
+        .pb_table_tr {
+          &.collapsible_table_row {
+            td,
+            .pb_table_td {
+              border-bottom-color: transparent;
+            }
+            &:hover {
+              td,
+              .pb_table_td {
+                border-bottom-color: darken($border_light, 10%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

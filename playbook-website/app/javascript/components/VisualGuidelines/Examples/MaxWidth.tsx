@@ -18,6 +18,17 @@ const SIZES: { [size: string]: string } = {
   'lg': '960px max',
   'xl': '1140px max',
   'xxl': '1320px max',
+  '100%': '100% max'
+}
+
+const VALUES: { [value: string]: string } = {
+  'xs': 'xs',
+  'sm': 'sm',
+  'md': 'md',
+  'lg': 'lg',
+  'xl': 'xl',
+  'xxl': 'xxl',
+  '100%': '100%',
 }
 
 const MaxWidthDescription = () => (
@@ -32,36 +43,43 @@ const MaxWidth = ({ example }: {example: string}) => (
       description={<MaxWidthDescription />}
       example={example}
       globalProps={{
-        maxWidth: Object.keys(SIZES),
+        maxWidth: Object.keys(VALUES),
       }}
       title="Max Width"
   >
-    {Object.keys(SIZES).map((size: string) => (
-      <Background
-          backgroundColor="gradient"
-          key={size}
-          marginBottom="xs"
-          maxWidth={size}
-          padding="xs"
-      >
-        <Flex>
-          <Title
-            dark
-            size={4}
-            flex={1}
-            htmlOptions={{style: {minWidth:"30px"}}}
-          >
-            {size.toUpperCase()}
-          </Title>
-          <Detail 
-            flex={0}
-            color="lighter"
-          >
-            {SIZES[size]}
-          </Detail>
-        </Flex>
-      </Background>
-    ))}
+    <Background
+        className="width-resize"
+        minWidth="xxs"
+        overflow="auto"
+    >
+      {Object.keys(SIZES).map((size: string) => (
+        <Background
+            backgroundColor="gradient"
+            key={size}
+            marginBottom="xs"
+            maxWidth={size}
+            padding="xs"
+        >
+          <Flex>
+            <Title
+              dark
+              size={4}
+              flex={1}
+              htmlOptions={{style: {minWidth:"30px"}}}
+            >
+              {size.toUpperCase()}
+            </Title>
+            <Detail
+              flex={0}
+              color="lighter"
+            >
+              {SIZES[size]}
+            </Detail>
+          </Flex>
+        </Background>
+      ))}
+    </Background>
+    <Detail text="To see the maximum widths, you can resize the above container and scroll"/>
   </Example>
 )
 
