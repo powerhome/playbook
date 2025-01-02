@@ -378,7 +378,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   gapProps: ({ gap }: Gap) => {
     let css = ''
-    css += gap ? `gap_${filterClassName(gap)} ` : ''
+    css += gap ? `gap_${gap} ` : ''
     return css.trimEnd()
   },
   minHeightProps: ({ minHeight }: MinHeight) => {
