@@ -109,9 +109,9 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
         it "returns last updated with year including user's name" do
           timestamp = dynamic_future_timestamp
           date = timestamp.strftime("%b %-d, %Y")
-          time = timestamp.strftime(" %l:%M%P").strip
+          time = timestamp.strftime(" %l:%M%P").strip.gsub(/m$/, "")
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).send(:format_updated_string)).to eq("Last updated by #{name} on #{date} at#{time}")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user, text: name).send(:format_updated_string)).to eq("Last updated by #{name} on #{date} at #{time}")
         end
       end
 
@@ -120,9 +120,9 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
         it "returns last updated with year without user's name" do
           timestamp = dynamic_future_timestamp
           date = timestamp.strftime("%b %-d, %Y")
-          time = timestamp.strftime(" %l:%M%P").strip
+          time = timestamp.strftime(" %l:%M%P").strip.gsub(/m$/, "")
 
-          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).send(:format_updated_string)).to eq("Last updated on #{date} at#{time}")
+          expect(subject.new(timestamp: timestamp, variant: variant, show_user: show_user).send(:format_updated_string)).to eq("Last updated on #{date} at #{time}")
         end
       end
     end
