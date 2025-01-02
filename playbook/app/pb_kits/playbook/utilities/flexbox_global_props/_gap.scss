@@ -1,31 +1,35 @@
 @import "../tokens/spacing";
 
 .gap_none {
-  gap: map-get($spacing, 'none');
+  gap: none;
 }
 
-.gap_space_xxs {
-  gap: map-get($spacing, 'space_xxs');
+.gap_0 {
+  gap: $space_none;
 }
 
-.gap_space_xs {
-  gap: map-get($spacing, 'space_xs');
+.gap_xxs {
+  gap: $space_xxs;
 }
 
-.gap_space_sm {
-  gap: map-get($spacing, 'space_sm');
+.gap_xs {
+  gap: $space_xs;
 }
 
-.gap_space_md {
-  gap: map-get($spacing, 'space_md');
+.gap_sm {
+  gap: $space_sm;
 }
 
-.gap_space_lg {
-  gap: map-get($spacing, 'space_lg');
+.gap_md {
+  gap: $space_md;
 }
 
-.gap_space_xl {
-  gap: map-get($spacing, 'space_xl');
+.gap_lg {
+  gap: $space_lg;
+}
+
+.gap_xl {
+  gap: $space_xl;
 }
 
 .gap-container {

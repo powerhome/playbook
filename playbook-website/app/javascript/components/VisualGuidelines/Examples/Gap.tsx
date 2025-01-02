@@ -13,22 +13,22 @@ import Example from '../Templates/Example'
 
 const SIZES: { [size: string]: string } = {
   "none": "0px",
-  "space_xxs": "4px",
-  "space_xs": "8px",
-  "space_sm": "16px",
-  "space_md": "24px",
-  "space_lg": "32px",
-  "space_xl": "40px",
+  "xxs": "4px",
+  "xs": "8px",
+  "sm": "16px",
+  "md": "24px",
+  "lg": "32px",
+  "xl": "40px",
 }
 
 const VALUES: { [value: string]: string } = {
   "none": "none",
-  "space_xxs": "space_xxs",
-  "space_xs": "space_xs",
-  "space_sm": "space_sm",
-  "space_md": "space_md",
-  "space_lg": "space_lg",
-  "space_xl": "space_xl",
+  "xxs": "xxs",
+  "xs": "xs",
+  "sm": "sm",
+  "md": "md",
+  "lg": "lg",
+  "xl": "xl",
 }
 
 const GapDescription = () => (

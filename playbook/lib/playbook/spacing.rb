@@ -3,6 +3,7 @@
 module Playbook
   module Spacing
     def self.included(base)
+      base.prop :gap
       base.prop :margin
       base.prop :margin_bottom
       base.prop :margin_left
@@ -50,6 +51,16 @@ module Playbook
 
     def width_values
       %w[0% xs sm md lg xl xxl 0 none 100%]
+    end
+
+    def gap_values
+      %w[none xxs xs sm md lg xl]
+    end
+
+    def gap_options
+      {
+        gap: "gap",
+      }
     end
 
     def spacing_options
@@ -144,6 +155,16 @@ module Playbook
       selected_w_props.map do |k|
         width_value = send(k)
         "width_#{filter_classname(width_value)}" if width_values.include? width_value
+      end.compact.join(" ")
+    end
+
+    def gap_props
+      selected_gap_props = gap_options.keys.select { |sk| try(sk) }
+      return nil unless selected_gap_props.present?
+
+      selected_gap_props.map do |k|
+        gap_value = send(k)
+        "gap_#{filter_classname(gap_value)}" if gap_values.include? gap_value
       end.compact.join(" ")
     end
   end

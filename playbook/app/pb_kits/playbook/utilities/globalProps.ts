@@ -61,7 +61,7 @@ type FlexWrap = {
 }
 
 type Gap = {
-  gap?: AllSizes,
+  gap?: "none" | "xs" | "sm" | "md" | "lg" | "xl"
 }
 
 type Hover = Shadow & {
@@ -390,6 +390,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       css += maxHeight ? `max_height_${filterClassName(maxHeight)} ` : ''
       return css.trimEnd()
     }
+  },
+  gapProps: ({ gap }: Gap) => {
+    let css = ''
+    css += gap ? `gap_${filterClassName(gap)} ` : ''
+    return css.trimEnd()
   },
   heightProps: ({ height }: Height) => {
     const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
