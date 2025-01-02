@@ -13,7 +13,7 @@ type FlexItemPropTypes = {
   order?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'first' | 'none',
   alignSelf?: "start" | "end" | "center" | "stretch" | null,
   displayFlex?: boolean,
-  gap?: "space_xxs" | "space_xs" | "space_sm" | "space_md" | "space_lg" | "space_xl" | "none"
+  gap?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"
 } & GlobalProps
 
 const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
@@ -36,7 +36,7 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
   const flexClass = flex !== 'none' ? `flex_${flex}` : ''
   const shrinkClass = shrink === true ? 'shrink' : ''
   const alignSelfClass = alignSelf ? `align_self_${alignSelf}` : ''
-  const gapClass = gap !== 'none' ? `gap_size_${gap}` : ''
+  const gapClass = gap !== 'none' ? `gap_${gap}` : ''
   const fixedStyle =
     fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
   const orderClass = order !== 'none' ? `order_${order}` : null

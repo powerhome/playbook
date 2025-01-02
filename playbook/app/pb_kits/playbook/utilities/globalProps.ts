@@ -60,10 +60,6 @@ type FlexWrap = {
   flexWrap?: "wrap" | "nowrap" | "wrapReverse"
 }
 
-type Gap = {
-  gap?: "none" | "xs" | "sm" | "md" | "lg" | "xl"
-}
-
 type Hover = Shadow & {
   background?: string,
   color?: string,
@@ -110,6 +106,10 @@ type MaxWidth = {
 
 type MinWidth = {
   minWidth?: string,
+}
+
+type Gap = {
+  gap?: string
 }
 
 type NumberSpacing = {
@@ -196,11 +196,12 @@ type MinHeight = {
   minHeight?: string
 }
 
+// keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
-  LineHeight & Margin & Width & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & Gap & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
+  LineHeight & Margin & Width & MinWidth & MaxWidth & Gap & NumberSpacing & Order & Overflow & Padding &
+  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -375,6 +376,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += maxWidth ? `max_width_${filterClassName(maxWidth)} ` : ''
     return css.trimEnd()
   },
+  gapProps: ({ gap }: Gap) => {
+    let css = ''
+    css += gap ? `gap_${filterClassName(gap)} ` : ''
+    return css.trimEnd()
+  },
   minHeightProps: ({ minHeight }: MinHeight) => {
     const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
     if (heightValues.includes(minHeight)) {
@@ -390,11 +396,6 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       css += maxHeight ? `max_height_${filterClassName(maxHeight)} ` : ''
       return css.trimEnd()
     }
-  },
-  gapProps: ({ gap }: Gap) => {
-    let css = ''
-    css += gap ? `gap_${filterClassName(gap)} ` : ''
-    return css.trimEnd()
   },
   heightProps: ({ height }: Height) => {
     const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]

@@ -81,7 +81,7 @@ const globalPropsValues = [
   {
     prop: "gap",
     type: "union",
-    values: '"space_xxs" | "space_xs" | "space_sm" | "space_md" | "space_lg" | "space_xl" | "none"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
   },
   {
     prop: "htmlOptions",
