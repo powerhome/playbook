@@ -123,6 +123,13 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
 
   const childInput = children ? children.type === "input" : undefined
 
+  let formattedValue;
+  if (isMaskedInput && value) {
+    formattedValue = INPUTMASKS[mask].formatDefaultValue(value.toString())
+  } else {
+    formattedValue = value
+  }
+
   const textInput = (
     childInput ? React.cloneElement(children, { className: "text_input" }) :
     (<input
@@ -138,7 +145,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         ref={ref}
         required={required}
         type={type}
-        value={value}
+        value={formattedValue}
      />)
   )
 
