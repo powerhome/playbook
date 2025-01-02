@@ -27,6 +27,7 @@ export default [
   "overflow",
   "order",
   "numberSpacing",
+  "gap",
   "maxWidth",
   "minWidth",
   "width",
@@ -51,6 +52,5 @@ export default [
   "borderRadius",
   "alignSelf",
   "alignItems",
-  "alignContent",
-  "gap"
+  "alignContent"
 ];

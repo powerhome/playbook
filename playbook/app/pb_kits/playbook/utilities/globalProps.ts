@@ -109,7 +109,7 @@ type MinWidth = {
 }
 
 type Gap = {
-  gap?: string
+  gap?: string,
 }
 
 type NumberSpacing = {

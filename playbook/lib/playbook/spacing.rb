@@ -164,7 +164,7 @@ module Playbook
 
       selected_gap_props.map do |k|
         gap_value = send(k)
-        "gap_#{filter_classname(gap_value)}" if gap_values.include? gap_value
+        "gap_#{gap_value}" if gap_values.include? gap_value
       end.compact.join(" ")
     end
   end

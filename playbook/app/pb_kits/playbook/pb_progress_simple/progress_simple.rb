@@ -17,7 +17,6 @@ module Playbook
       # Should we be allowing the user to pass this value at all?
       # could this possibly be [sm, md, lg]?
       prop :width, default: "100%"
-      prop :gap, type: Playbook::Props::Enum, values: %w[none xxs xs sm md lg xl], default: "none"
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default positive negative warning],
                      default: "default"
