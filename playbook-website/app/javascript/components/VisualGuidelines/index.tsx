@@ -15,7 +15,6 @@ import LineHeight from "../VisualGuidelines/Examples/LineHeight";
 import NumberSpacing from "../VisualGuidelines/Examples/NumberSpacing";
 import Shadows from "../VisualGuidelines/Examples/Shadows";
 import Spacing from "../VisualGuidelines/Examples/Spacing";
-import Gap from "../VisualGuidelines/Examples/Gap";
 import BorderRadius from "../VisualGuidelines/Examples/BorderRadius";
 import Typography from "../VisualGuidelines/Examples/Typography";
 import Display from "../VisualGuidelines/Examples/Display";
