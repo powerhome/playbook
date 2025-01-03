@@ -3,6 +3,11 @@
 @import "../tokens/opacity";
 @import "./section_separator_mixin";
 
+$merge_kits1: map-merge($status_colors, $category_colors);
+$merge_kits2: map-merge($merge_kits1, $product_colors);
+$merge_kits3: map-merge($merge_kits2, $text_colors);
+$section_selector_colors: map-merge($merge_kits3, $data_colors);
+
 $section_colors_light: (
   background:   $bg_light,
   card:         $card_light,
@@ -37,12 +42,40 @@ $section_colors_dark: (
     flex: 1;
     @include section_separator_horizontal;
   }
+  @each $color_name, $color_value in $section_selector_colors {
+    &[class*="color_#{$color_name}"] {
+      &::before, &::after {
+        background: $color_value;
+      }
+
+      &[class*=_vertical] {
+        &::after {
+          background: $color_value;
+        }
+      }
+      &[class*=_dashed] {
+        &::before, &::after {
+          border: 1px dashed $color_value;
+        }
+        &[class*=_vertical] {
+          &::after {
+            border: 1px dashed $color_value;
+            background: none;
+          }
+        }
+      }
+    }
+  }
+
   &[class*=_horizontal] {
     justify-content: center;
   }
   &[class*=_vertical] {
     margin-left: $space_xs;
     margin-right: $space_xs;
+    &::before {
+      display: none;
+    }
     &::after {
       @include section_separator_vertical(false);
     }
@@ -57,6 +90,33 @@ $section_colors_dark: (
   // Dark =========================
 
   &.dark {
+    @each $color_name, $color_value in $section_selector_colors {
+      &[class*="color_#{$color_name}"] {
+        &::before, &::after {
+          background: $color_value;
+        }
+
+        &[class*=_vertical] {
+          &::after {
+            @include section_separator_vertical(false);
+            background: $color_value;
+          }
+        }
+
+        &[class*=_dashed] {
+          &::before, &::after {
+            border: 1px dashed $color_value;
+            background: none;
+          }
+          &[class*=_vertical] {
+            &::after {
+              border: 1px dashed $color_value;
+              background: none;
+            }
+          }
+        }
+      }
+    }
     &::before {
       @include section_separator_horizontal(true);
     }

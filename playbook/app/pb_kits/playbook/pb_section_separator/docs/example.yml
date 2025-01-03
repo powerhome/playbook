@@ -6,6 +6,7 @@ examples:
   - section_separator_text: Text Separator
   - section_separator_vertical: Vertical
   - section_separator_children: Children
+  - section_separator_color: Color
 
   react:
   - section_separator_line: Line Separator
@@ -13,6 +14,7 @@ examples:
   - section_separator_text: Text Separator
   - section_separator_vertical: Vertical
   - section_separator_children: Children
+  - section_separator_color: Color
 
   swift:
   - section_separator_line_swift: Line Separator
