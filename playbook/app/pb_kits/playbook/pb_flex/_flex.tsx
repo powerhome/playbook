@@ -4,8 +4,6 @@ import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 import { GenericObject, Sizes } from '../types'
 
-type ModifiedGlobalProps = Omit<GlobalProps, 'gap'>
-
 type FlexProps = {
   children: React.ReactChild[] | React.ReactNode,
   className?: string,
@@ -25,7 +23,7 @@ type FlexProps = {
   columnGap?: Sizes| "none",
   wrap?: boolean,
   alignSelf?: "start" | "end" | "center" | "stretch" | "none"
-} & ModifiedGlobalProps
+} & GlobalProps
 
 const Flex = (props: FlexProps): React.ReactElement => {
   const {
