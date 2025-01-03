@@ -4,6 +4,26 @@
     display: block;
     overflow-x: scroll;
 
+    // hides duplicate scroll bar for those that see two (byproduct of repeated table-responsive-scroll class
+    // hides outer scroll bar in chrome and safari
+    &:not(.table-responsive-scroll .table-responsive-scroll) {
+        &::-webkit-scrollbar {
+            height: 0px;
+        }
+    }
+    // hides outer scroll bar in firefox
+    @supports (scrollbar-width: none) {
+        scrollbar-width: none;
+        .pb_table {
+            overflow-x: auto;
+            scrollbar-width: auto;
+        }
+    }
+    // ensures visible inner scroll bar can scroll
+    .pb_table {
+        overflow-x: auto;
+    }
+
     // Responsive Styles
     @media (max-width: 1600px) {
         &[class*="table-responsive-scroll"] {
