@@ -17,6 +17,7 @@ module Playbook
       prop :link
       prop :new_window, type: Playbook::Props::Boolean,
                         default: false
+      prop :target
       def classname
         generate_classname("pb_circle_icon_button_kit")
       end

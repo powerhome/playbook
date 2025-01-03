@@ -1,11 +1,30 @@
 type InputMask = {
     format: (value: string) => string
+    formatDefaultValue: (value: string) => string
     pattern: string
     placeholder: string
 }
 
 type InputMaskDictionary = {
     [key in 'currency' | 'zipCode' | 'postalCode' | 'ssn']: InputMask
+}
+
+const formatCurrencyDefaultValue = (value: string): string => {
+    // Remove non-numeric characters except for the decimal point
+    const numericValue = value.replace(/[^0-9.]/g, '')
+
+    if (!numericValue) return ''
+
+    // Parse the numeric value as a float to handle decimals
+    const dollars = parseFloat(numericValue)
+    if (isNaN(dollars) || dollars === 0) return ''
+
+    // Format as currency
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 2,
+    }).format(dollars)
 }
 
 const formatCurrency = (value: string): string => {
@@ -42,22 +61,26 @@ const formatSSN = (value: string): string => {
 export const INPUTMASKS: InputMaskDictionary = {
     currency: {
         format: formatCurrency,
+        formatDefaultValue: formatCurrencyDefaultValue,
         // eslint-disable-next-line no-useless-escape
         pattern: '^\\$\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?$',
         placeholder: '$0.00',
     },
     zipCode: {
         format: formatBasicPostal,
+        formatDefaultValue: formatBasicPostal,
         pattern: '\\d{5}',
         placeholder: '12345',
     },
     postalCode: {
         format: formatExtendedPostal,
+        formatDefaultValue: formatExtendedPostal,
         pattern: '\\d{5}-\\d{4}',
         placeholder: '12345-6789',
     },
     ssn: {
         format: formatSSN,
+        formatDefaultValue: formatSSN,
         pattern: '\\d{3}-\\d{2}-\\d{4}',
         placeholder: '123-45-6789',
     },

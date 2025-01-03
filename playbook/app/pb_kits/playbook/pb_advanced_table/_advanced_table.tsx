@@ -142,27 +142,41 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
     return columnCells
   }
-//Create column array in format needed by Tanstack
-  const columns =
-    columnDefinitions &&
+
+  const buildColumns = (columnDefinitions: GenericObject[]): any => {
+    return (
+      columnDefinitions &&
       columnDefinitions.map((column, index) => {
-      // Define the base column structure
-      const columnStructure = {
-        ...columnHelper.accessor(column.accessor, {
-          header: column.label,
-        }),
-      }
+        //Checking to see if grouped column or not
+        if (column.columns && column.columns.length > 0) {
+          return {
+            header: column.label || "",
+            columns: buildColumns(column.columns),
+          };
+        } else {
+          // Define the base column structure
+          const columnStructure = {
+            ...columnHelper.accessor(column.accessor, {
+              header: column.label || "",
+            }),
+          };
 
-  if (column.cellAccessors || column.customRenderer) {
-    columnStructure.cell = createCellFunction(
-      column.cellAccessors,
-      column.customRenderer,
-      index
-    )
-  }
+          if (column.cellAccessors || column.customRenderer) {
+            columnStructure.cell = createCellFunction(
+              column.cellAccessors,
+              column.customRenderer,
+              index
+            );
+          }
 
-  return columnStructure
-})
+          return columnStructure;
+        }
+      })
+    );
+  };
+
+  //Create column array in format needed by Tanstack
+  const columns = buildColumns(columnDefinitions);
 
   //Syntax for sorting Array if we want to manage state ourselves
   const sorting = [
