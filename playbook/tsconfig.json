@@ -33,7 +33,6 @@
     "app/entrypoints/playbook.js",
     "app/entrypoints/playbook-doc.js",
     "app/entrypoints/playbook-rails-react-bindings.js",
-    "app/entrypoints/playbook-rails.js",
-    "app/pb_kits/playbook/pb_bar_graph/BarGraphStyles.css"
+    "app/entrypoints/playbook-rails.js"
   ]
 }

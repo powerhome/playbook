@@ -76,7 +76,7 @@ export default defineConfig({
           rename: (name, extension) => `${name.replace('_', '')}.${extension}`,
         },
         {
-          src: resolve(__dirname, 'app/pb_kits/playbook/pb_bar_graph/BarGraphStyles.css'),
+          src: resolve(__dirname, 'app/pb_kits/playbook/pb_bar_graph/BarGraphStyles.scss'),
           dest: 'dist/pb_bar_graph/',
         },
       ],
