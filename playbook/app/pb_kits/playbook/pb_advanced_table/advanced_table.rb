@@ -10,6 +10,8 @@ module Playbook
       prop :enable_toggle_expansion, type: Playbook::Props::Enum,
                                      values: %w[all header none],
                                      default: "header"
+      prop :loading, type: Playbook::Props::Boolean,
+                     default: false
 
       def classname
         generate_classname("pb_advanced_table")
