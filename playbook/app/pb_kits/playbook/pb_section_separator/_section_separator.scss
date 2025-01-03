@@ -19,8 +19,11 @@ $section_colors_dark: (
   align-items: center;
   position: relative;
   span {
-    padding: 0 $space_xs;
+    padding: 0;
     display: flex;
+    [class*="pb_caption_kit"] {
+      padding: 0 $space_xs;
+    }
   }
   &::before {
     content: "";
