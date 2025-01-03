@@ -53,8 +53,6 @@ const VisualGuidelines = ({
         return <MinHeight example={examples.min_height_jsx} />;
       case "max_height":
         return <MaxHeight example={examples.max_height_jsx} />;
-      case "gap":
-        return <Gap example={examples.gap_jsx} tokensExample={examples.gap_tokens_jsx} />;
       case "z_index":
         return <ZIndex example={examples.z_index_jsx} tokensExample={examples.z_index_token} />;
       case "line_height":
