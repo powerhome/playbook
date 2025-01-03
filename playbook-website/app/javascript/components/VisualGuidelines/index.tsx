@@ -37,87 +37,74 @@ const VisualGuidelines = ({
   const regex = /(?:(?:[^/]*\/){2})(.*)/;
   const result = urlPath.match(regex)[1];
 
+
   function getComponent(result) {
     switch (result) {
       case "colors":
         return <Colors />;
       case "width":
-        return <Width example={examples.width_jsx} />;
+        return <Width example={examples.width_jsx}/>;
       case "max_width":
-        return <MaxWidth example={examples.max_width_jsx} />;
+        return <MaxWidth example={examples.max_width_jsx}/>;
       case "min_width":
-        return <MinWidth example={examples.min_width_jsx} />;
+        return <MinWidth example={examples.min_width_jsx}/>;
       case "height":
-        return <Height example={examples.height_jsx} />;
+        return <Height example={examples.height_jsx}/>;
       case "min_height":
-        return <MinHeight example={examples.min_height_jsx} />;
+        return <MinHeight example={examples.min_height_jsx}/>;
       case "max_height":
-        return <MaxHeight example={examples.max_height_jsx} />;
+        return <MaxHeight example={examples.max_height_jsx}/>;
       case "z_index":
-        return <ZIndex example={examples.z_index_jsx} tokensExample={examples.z_index_token} />;
+        return <ZIndex example={examples.z_index_jsx}
+                  tokensExample={examples.z_index_token}
+                />;
       case "line_height":
-        return (
-          <LineHeight
-            example={examples.line_height_code_jsx}
-            tokensExample={examples.line_height_jsx}
-          />
-        );
+        return <LineHeight example={examples.line_height_code_jsx}
+                    tokensExample={examples.line_height_jsx}
+                />;
       case "number_spacing":
         return <NumberSpacing example={examples.number_spacing_jsx} />;
       case "shadows":
-        return (
-          <Shadows
-            example={examples.shadow_in_use_jsx}
-            tokensExample={examples.shadow_erb}
-          />
-        );
+        return <Shadows example={examples.shadow_in_use_jsx}
+                   tokensExample={examples.shadow_erb}
+               />;
       case "spacing":
-        return (
-          <Spacing
-            example={examples.spacing_global_props_jsx}
-            tokensExample={examples.spacing_tokens_jsx}
-          />
-        );
+        return <Spacing
+                  example={examples.spacing_global_props_jsx}
+                  tokensExample={examples.spacing_tokens_jsx}
+               />;
       case "typography":
-        return <Typography example={examples.typography_tokens} />;
+        return <Typography example={examples.typography_tokens}/>;
       case "border_radius":
-        return (
-          <BorderRadius
-            example={examples.border_radius_jsx}
-            tokensExample={examples.border_radius_tokens}
-          />
-        );
+        return <BorderRadius example={examples.border_radius_jsx}
+                  tokensExample={examples.border_radius_tokens}
+                />;
       case "display":
-        return <Display example={examples.display_in_use_jsx} />;
+        return <Display example={examples.display_in_use_jsx}/>;
       case "cursor":
-        return <Cursor example={examples.cursor_jsx} />;
+        return <Cursor example={examples.cursor_jsx}/>;
       case "flex_box":
-        return <FlexBox example={examples.justify_self_jsx} />;
+        return <FlexBox example={examples.justify_self_jsx}/>;
       case "position":
-        return (
-          <Position
-            example={examples.position_jsx}
-            tokensExample={examples.position_token}
-            secondExample={examples.global_positioning}
-          />
-        );
+        return <Position
+                   example={examples.position_jsx}
+                   tokensExample={examples.position_token}
+                   secondExample={examples.global_positioning}
+               />;
       case "vertical_align":
-        return <VerticalAlign example={examples.vertical_align_jsx} />;
+        return <VerticalAlign example={examples.vertical_align_jsx}/>;
       case "hover":
-        return <Hover example={examples.hover_jsx} />;
+        return <Hover example={examples.hover_jsx}/>;
       case "group_hover":
-        return <GroupHover example={examples.group_hover_jsx} />;
+        return <GroupHover example={examples.group_hover_jsx}/>;
       case "text_align":
-        return <TextAlign example={examples.text_align_jsx} />;
+        return <TextAlign example={examples.text_align_jsx} />
       case "overflow":
-        return (
-          <Overflow
-            example={examples.overflow_jsx}
-            tokensExample={examples.overflow_token}
-          />
-        );
+        return <Overflow example={examples.overflow_jsx}
+                         tokensExample={examples.overflow_token} />
       case "truncate":
-        return <Truncate example={examples.truncate_jsx} />;
+        return <Truncate example={examples.truncate_jsx} />
+
       default:
         if (window.location.pathname !== "/visual_guidelines/colors") {
           window.history.replaceState(null, "", "/visual_guidelines/colors");
@@ -125,7 +112,6 @@ const VisualGuidelines = ({
         return <Colors />;
     }
   }
-
   return <div className="visual_guidelines_individual">{getComponent(result)}</div>;
 };
 
