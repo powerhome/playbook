@@ -1,0 +1,63 @@
+<%= pb_rails("button", props: { id: "toggle-user-button", margin_bottom: "md", text: "Show User", variant: "secondary" }) %>
+
+<div id="skeleton-loading-user-content">
+    <%= pb_rails("flex", props: { align_items: "center" }) do %>
+        <%= pb_rails("skeleton_loading", props: { border_radius: "rounded", height: "38px", padding_right: "sm", width: "38px"}) %>
+        <%= pb_rails("skeleton_loading", props: { gap: "xxs", height: "18px", stack: 2, width: "161px"}) %>
+    <% end %>
+    <%= pb_rails("flex", props: { align_items: "start", padding_top: "md" }) do %>
+        <%= pb_rails("flex", props: { align_items: "center", flex_direction: "column" }) do %>
+            <%= pb_rails("skeleton_loading", props: { border_radius: "rounded", height: "100px", padding_bottom: "xs", width: "100px"}) %>
+            <%= pb_rails("skeleton_loading", props: { height: "32px", padding_bottom: "xxs", width: "144px"}) %>
+            <%= pb_rails("skeleton_loading", props: { height: "21px", width: "164px"}) %>
+        <% end %>
+    <% end %>
+</div>
+
+<div id="user-content" style="display: none;">
+    <div>
+        <%= pb_rails("user", props: {
+            name: "Anna Black",
+            title: "Remodeling Consultant",
+            orientation: "horizontal",
+            align: "left",
+            avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+        }) %>
+    </div>
+    <div>
+        <%= pb_rails("flex", props: { align_items: "start", padding_top: "md" }) do %>
+            <%= pb_rails("user", props: {
+                name: "Anna Black",
+                title: "Remodeling Consultant",
+                orientation: "vertical",
+                align: "center",
+                size: "lg",
+                avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+            }) %>
+        <% end %>
+    </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const toggleButton = document.getElementById('toggle-user-button')
+    const skeletonUserContentDiv = document.getElementById('skeleton-loading-user-content')
+    const userContentDiv = document.getElementById('user-content')
+
+    let isLoading = true
+
+    toggleButton.addEventListener('click', function() {
+      isLoading = !isLoading
+
+      if (isLoading) {
+        skeletonUserContentDiv.style.display = 'block'
+        userContentDiv.style.display = 'none'
+        toggleButton.textContent = 'Show User'
+      } else {
+        skeletonUserContentDiv.style.display = 'none'
+        userContentDiv.style.display = 'block'
+        toggleButton.textContent = 'Show Skeleton Loading'
+      }
+    })
+  })
+</script>
