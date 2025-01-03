@@ -12,7 +12,7 @@
     "test-watch": "jest --watch",
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
-    "release": "rm -rf dist; npx vite build",
+    "release": "rm -rf dist && npx vite build && mkdir -p dist/pb_bar_graph && cp playbook/app/pb_kits/playbook/pb_bar_graph/BarGraphStyles.css dist/pb_bar_graph/",
     "watch": "npx vite build --watch"
   },
   "repository": {
