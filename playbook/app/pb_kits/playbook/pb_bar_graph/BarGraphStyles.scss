@@ -50,3 +50,11 @@
 .highcharts-grid-line {
     stroke: $border_light;
 }
+
+.highcharts-point {
+  border-radius: 3px;
+}
+
+.highcharts-axis-line {
+  stroke: $border_light;
+}
