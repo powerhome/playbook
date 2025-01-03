@@ -15,10 +15,6 @@ export const VisualGuidelinesItems = [
         name: "Max Width",
         link: "/visual_guidelines/max_width"
     },
-        {
-        name: "Gap",
-        link: "/visual_guidelines/gap"
-    },
     {
         name: "Height",
         link: "/visual_guidelines/height"
