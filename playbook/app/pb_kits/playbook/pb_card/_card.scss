@@ -21,6 +21,14 @@
     border-width: 0px;
   }
 
+  @function ends-with($string, $suffix) {
+    $suffix-length: str-length($suffix);
+    @if $suffix-length == 0 {
+      @return true;
+    }
+    @return str-slice($string, -$suffix-length) == $suffix;
+  }
+
   [class^=pb_card_header_kit] {
     flex-grow: 0;
     flex-shrink: 0;
@@ -30,9 +38,19 @@
     border: 0;
     border-radius: $pb_card_header_border_radius $pb_card_header_border_radius 0px 0px;
     @each $color_name, $color_value in $pb_card_header_colors {
-      &[class*=_#{"" + $color_name}] {
-        @include pb_card_header_color($color_value);
-        color: lightenText($color_value);
+      @if not ends-with($color_name, '_subtle') {
+        &[class*="_#{$color_name}"] {
+          @include pb_card_header_color($color_value);
+          color: lightenText($color_value);
+        }
+      }
+    }
+    @each $color_name, $color_value in $pb_card_header_colors {
+      @if ends-with($color_name, '_subtle') {
+        &[class*="_#{$color_name}"] {
+          @include pb_card_header_color($color_value);
+          color: lightenText($color_value);
+        }
       }
     }
     @each $color_name, $color_value in $pb_card_header_colors {

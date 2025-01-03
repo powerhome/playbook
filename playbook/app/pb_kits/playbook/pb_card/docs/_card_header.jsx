@@ -231,6 +231,46 @@ const CardHeader = (props) => {
                     />
                 </Card.Body>
             </Card>
+
+            <Card
+                {...props}
+                marginBottom='sm'
+                padding="none"
+            >
+                <Card.Header
+                    headerColor="success_subtle"
+                >
+                    <Body
+                        text="Success Subtle"
+                    />
+                </Card.Header>
+                <Card.Body>
+                    <Body
+                        {...props}
+                        text="Body"
+                    />
+                </Card.Body>
+            </Card>
+
+            <Card
+                {...props}
+                marginBottom='sm'
+                padding="none"
+            >
+                <Card.Header
+                    headerColor="error_subtle"
+                >
+                    <Body
+                        text="Error Subtle"
+                    />
+                </Card.Header>
+                <Card.Body>
+                    <Body
+                        {...props}
+                        text="Body"
+                    />
+                </Card.Body>
+            </Card>
         </>
     )
 }
