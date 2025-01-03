@@ -17,27 +17,69 @@ module Playbook
       prop :collapsible_trail, type: Playbook::Props::Boolean,
                                default: true
 
-      def render_row_and_children(row, column_definitions, current_depth, first_parent_child)
+      def flatten_columns(columns)
+        columns.flat_map do |col|
+          if col[:columns]
+            flatten_columns(col[:columns])
+          elsif col[:accessor].present?
+            if has_grouped_headers?
+              col.merge(is_last_in_group: last_in_group?(columns, col))
+            else
+              col
+            end
+          end
+        end.compact
+      end
+
+      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil)
+        top_parent_id ||= row.object_id
+        new_ancestor_ids = ancestor_ids + [row.object_id]
+        leaf_columns = flatten_columns(column_definitions)
+
         output = ActiveSupport::SafeBuffer.new
         is_first_child_of_subrow = current_depth.positive? && first_parent_child && subrow_headers[current_depth - 1].present?
 
         output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: column_definitions, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
 
-        output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: column_definitions, depth: current_depth, collapsible_trail: collapsible_trail })
+        # Pass only leaf_columns to table_row to account for multiple nested columns
+        output << pb_rails("advanced_table/table_row", props: {
+                             id: id,
+                             row: row,
+                             column_definitions: leaf_columns,
+                             depth: current_depth,
+                             collapsible_trail: collapsible_trail,
+                           })
 
         if row[:children].present?
-          output << content_tag(:div, class: "toggle-content", data: { advanced_table_content: row.object_id.to_s + id }) do
-            row[:children].map do |child_row|
-              render_row_and_children(child_row, column_definitions, current_depth + 1, row.children.first == child_row)
-            end.join.html_safe
-          end
+          output << row[:children].map do |child_row|
+            is_first_child = row[:children].first == child_row
+
+            child_output = render_row_and_children(child_row, column_definitions, current_depth + 1, is_first_child, new_ancestor_ids, top_parent_id)
+
+            immediate_parent_id = row.object_id
+            top_parent = top_parent_id
+            # Combine ancestor_ids to build the content id
+            data_content = new_ancestor_ids.join("-") + "-#{child_row.object_id}"
+
+            child_output.to_str.sub("<tr", %(<tr class="toggle-content" data-top-parent="#{id}_#{top_parent}" data-row-depth="#{current_depth}" data-row-parent="#{id}_#{immediate_parent_id}" data-advanced-table-content="#{data_content}"))
+          end.join.html_safe
         end
 
         output
       end
 
       def classname
-        generate_classname("pb_advanced_table_body", "pb_table_tbody", separator: " ")
+        generate_classname("pb_advanced_table_body", separator: " ")
+      end
+
+    private
+
+      def has_grouped_headers?
+        column_definitions.any? { |col| col.key?(:columns) }
+      end
+
+      def last_in_group?(columns, current_col)
+        columns.last[:accessor] == current_col[:accessor]
       end
     end
   end

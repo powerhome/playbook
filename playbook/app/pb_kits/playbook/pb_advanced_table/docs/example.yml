@@ -1,10 +1,13 @@
 examples:
   rails:
   - advanced_table_beta: Default (Required Props)
-  - advanced_table_beta_subrow_headers: SubRow Headers
+  # - advanced_table_beta_subrow_headers: SubRow Headers
   - advanced_table_collapsible_trail_rails: Collapsible Trail
   - advanced_table_beta_sort: Enable Sorting
   - advanced_table_custom_cell_rails: Custom Components for Cells
+  - advanced_table_column_headers: Multi-Header Columns
+  - advanced_table_column_headers_multiple: Multi-Header Columns (Multiple Levels)
+
 
   react:
   - advanced_table_default: Default (Required Props)
