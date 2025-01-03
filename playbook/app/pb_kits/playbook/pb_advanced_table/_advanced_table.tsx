@@ -264,6 +264,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   }
 
   return (
+    <div className="table-scroll-container">
     <div {...ariaProps} 
         {...dataProps} 
         {...htmlProps}
@@ -326,6 +327,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           }
         </>
       </AdvancedTableContext.Provider>
+    </div>
     </div>
   )
 }
