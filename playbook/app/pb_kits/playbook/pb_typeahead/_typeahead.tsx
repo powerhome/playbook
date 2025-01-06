@@ -42,8 +42,8 @@ type TypeaheadProps = {
   id?: string,
   label?: string,
   loadOptions?: string | Noop,
-  getOptionLabel?: string | (() => any),
-  getOptionValue?: string | (() => any),
+  getOptionLabel?: string | (() => string),
+  getOptionValue?: string | (() => string),
   name?: string,
   marginBottom?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
@@ -109,6 +109,7 @@ const Typeahead = ({
     multiKit: '',
     onCreateOption: null as null,
     plusIcon: false,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onMultiValueClick: (_option: SelectValueType): any => undefined,
     pillColor: pillColor,
     ...props,
