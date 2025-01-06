@@ -18,10 +18,10 @@ RSpec.describe Playbook::PbTimeline::Timeline do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_timeline_kit_horizontal"
-      expect(subject.new(orientation: "horizontal").classname).to eq "pb_timeline_kit_horizontal gap_none"
-      expect(subject.new(orientation: "vertical").classname).to eq "pb_timeline_kit_vertical gap_none"
-      expect(subject.new(orientation: "horizontal", show_date: true).classname).to eq "pb_timeline_kit_horizontal_with_date gap_none"
-      expect(subject.new(orientation: "vertical", show_date: true).classname).to eq "pb_timeline_kit_vertical_with_date gap_none"
+      expect(subject.new(orientation: "horizontal").classname).to eq "pb_timeline_kit_horizontal"
+      expect(subject.new(orientation: "vertical").classname).to eq "pb_timeline_kit_vertical"
+      expect(subject.new(orientation: "horizontal", show_date: true).classname).to eq "pb_timeline_kit_horizontal_with_date"
+      expect(subject.new(orientation: "vertical", show_date: true).classname).to eq "pb_timeline_kit_vertical_with_date"
     end
   end
 end
