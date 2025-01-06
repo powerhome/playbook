@@ -143,7 +143,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   static handleToggleAllHeaders(element) {
     const table = element.closest(".pb_table");
     const firstLevelButtons = table.querySelectorAll(
-      ".pb_advanced_table_body > .pb_table_tr [data-advanced-table]"
+      ".pb_advanced_table_body > .pb_table_tr[data-row-depth='0'] [data-advanced-table]"
     );
 
     const allExpanded = Array.from(firstLevelButtons).every(
@@ -174,13 +174,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       });
     }
   }
-
-  // static handleToggleAllSubRows(element, rowDepth) {}
 }
 
 window.expandAllRows = (element) => {
   PbAdvancedTable.handleToggleAllHeaders(element);
 };
-// window.expandAllSubRows = (element, rowDepth) => {
-//   PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
-// };
