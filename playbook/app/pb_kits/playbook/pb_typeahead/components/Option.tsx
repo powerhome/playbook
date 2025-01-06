@@ -3,7 +3,22 @@ import { components } from 'react-select'
 
 import User from '../../pb_user/_user'
 
-const Option = (props: any): JSX.Element => {
+type OptionProps = {
+  children: React.ReactNode,
+  label?: string,
+  data: {
+    imageUrl?: string,
+  },
+  selectProps: {
+    dark?: boolean,
+    valueComponent?: (data: {
+      imageUrl?: string,
+    }) => React.ReactNode,
+  },
+}
+
+
+const Option = (props: OptionProps): React.ReactElement => {
   const {
     imageUrl,
   } = props.data

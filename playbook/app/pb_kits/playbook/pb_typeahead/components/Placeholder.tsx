@@ -4,7 +4,14 @@ import { components } from 'react-select'
 import Flex from '../../pb_flex/_flex'
 import Icon from '../../pb_icon/_icon'
 
-const Placeholder = (props: any): JSX.Element => (
+type PlaceholderProps = {
+  children: React.ReactNode,
+  selectProps: {
+    plusIcon?: boolean,
+  },
+}
+
+const Placeholder = (props: PlaceholderProps): React.ReactElement => (
   <>
     <Flex
         align="center"

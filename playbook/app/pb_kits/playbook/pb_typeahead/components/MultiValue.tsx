@@ -7,26 +7,25 @@ import { SelectValueType } from '../_typeahead'
 
 type Props = {
   data: SelectValueType,
-  multiValueTemplate: React.ReactNode,
-  pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
-  removeProps: {
-    onClick: () => void,
-    onMouseDown: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
-    onTouchEnd: (event: React.TouchEvent<HTMLDivElement>) => void,
+  removeProps?: {
+    onClick?: React.MouseEventHandler<HTMLSpanElement>,
+    onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
+    onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
   },
-  selectProps: any,
+  selectProps: {
+    multiKit?: string,
+  },
 }
 
-const MultiValue = (props: Props): JSX.Element => {
+const MultiValue = (props: Props): React.ReactElement => {
   const { removeProps } = props
   const { imageUrl, label } = props.data
-  const { dark, multiKit, pillColor, truncate } = props.selectProps
+  const { multiKit } = props.selectProps
 
   const formPillProps = {
     marginRight: 'xs',
     name: label,
     avatarUrl: '',
-    dark,
   }
 
   if (typeof imageUrl === 'string') formPillProps.avatarUrl = imageUrl
@@ -49,28 +48,20 @@ const MultiValue = (props: Props): JSX.Element => {
         <FormPill
             avatarUrl={imageUrl}
             closeProps={removeProps}
-            color={pillColor}
-            dark={dark}
             marginRight="xs"
             name={label}
             size={multiKit === 'smallPill' ? 'small' : ''}
             text=''
-            truncate={truncate}
-            {...props}
         />
       }
 
       {multiKit !== 'badge' && !imageUrl &&
         <FormPill
             closeProps={removeProps}
-            color={pillColor}
-            dark={dark}
             marginRight="xs"
             name=''
             size={multiKit === 'smallPill' ? 'small' : ''}
             text={label}
-            truncate={truncate}
-            {...props}
         />
       }
     </components.MultiValueContainer>

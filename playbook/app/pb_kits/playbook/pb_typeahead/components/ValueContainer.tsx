@@ -1,7 +1,11 @@
 import React from 'react'
 import { components } from 'react-select'
 
-const ValueContainer = (props: any): JSX.Element => (
+type ValueContainerProps = {
+  children: React.ReactNode,
+}
+
+const ValueContainer = (props: ValueContainerProps): React.ReactElement => (
   <components.ValueContainer
       className="text_input_value_container"
       {...props}
