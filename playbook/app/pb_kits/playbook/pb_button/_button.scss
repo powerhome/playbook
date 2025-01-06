@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "./button_mixins";
 @import "../tokens/colors";
 @import "../tokens/border_radius";
@@ -17,7 +19,7 @@ $pb_button_sizes: (
   @each $name, $size in $pb_button_sizes {
     &[class*=size_#{$name}] {
       font-size: $size;
-      padding: $size / 2 $size * 2.42;
+      padding: math.div($size, 2) $size * 2.42;
       @if $name == "sm" {
         min-height: 0;
       }
