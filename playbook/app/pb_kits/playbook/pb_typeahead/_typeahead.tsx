@@ -4,7 +4,7 @@ import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
 import AsyncCreateableSelect from 'react-select/async-creatable'
 import { get, isString, uniqueId } from 'lodash'
-import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { globalProps } from '../utilities/globalProps'
 import classnames from 'classnames'
 
 import {
@@ -42,18 +42,15 @@ type TypeaheadProps = {
   id?: string,
   label?: string,
   loadOptions?: string | Noop,
-  getOptionLabel?: string | (() => any),
-  getOptionValue?: string | (() => any),
+  getOptionLabel?: string | (() => string),
+  getOptionValue?: string | (() => string),
   name?: string,
-  marginBottom?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
-  pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
-} & GlobalProps
+}
 
 export type SelectValueType = {
   label: string,
   value: string,
   imageUrl?: string,
-  pillColor?: string,
 }
 
 type TagOnChangeValues = {
@@ -79,10 +76,8 @@ const Typeahead = ({
   htmlOptions = {},
   id,
   loadOptions = noop,
-  marginBottom = "sm",
-  pillColor,
   ...props
-}: TypeaheadProps) => {
+}: TypeaheadProps): React.ReactElement => {
   const selectProps = {
     cacheOptions: true,
     components: {
@@ -109,8 +104,8 @@ const Typeahead = ({
     multiKit: '',
     onCreateOption: null as null,
     plusIcon: false,
-    onMultiValueClick: (_option: SelectValueType): any => undefined,
-    pillColor: pillColor,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onMultiValueClick: (_option: SelectValueType): void => undefined,
     ...props,
   }
 
@@ -136,15 +131,11 @@ const Typeahead = ({
     }
   }
 
-  const filteredProps: TypeaheadProps = {...props}
-  delete filteredProps.truncate
-
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     'pb_typeahead_kit react-select',
-    `mb_${marginBottom}`,
-    globalProps(filteredProps),
+    globalProps(props),
     className
   )
 
