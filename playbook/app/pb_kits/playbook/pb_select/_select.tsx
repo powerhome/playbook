@@ -34,7 +34,6 @@ type SelectProps = {
   label?: string,
   margin?: string,
   marginBottom?: string,
-  marginTop?: string,
   multiple?: boolean,
   name?: string,
   onChange?: InputCallback<HTMLSelectElement>,
@@ -68,13 +67,13 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(({
   inline = false,
   multiple = false,
   name,
-  onChange,
+  onChange = () => undefined,
   options = [],
   required = false,
   showArrow = false,
   value,
   ...props
-}, ref) => {
+}: SelectProps, ref: React.LegacyRef<HTMLSelectElement>) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -94,14 +93,14 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(({
     compactClass
   );
 
-  const icons = getAllIcons()
-  const angleDown = icons?.angleDown?.icon
+  const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
 
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
   const selectBody =(() =>{
     if (children) return children
     return (
       <select
+          {...htmlOptions}
           {...domSafeProps(props)}
           disabled={disabled}
           id={name}
@@ -138,12 +137,14 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(({
           htmlFor={name}
       >
         {selectBody}
-        { multiple !== true && angleDown &&
+        { multiple !== true ?
           <Icon
               className="pb_select_kit_caret svg-inline--fa"
               customIcon={angleDown}
               fixedWidth
           />
+          :
+          null
         }
         {error &&
           <Body
