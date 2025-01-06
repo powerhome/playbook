@@ -1,9 +1,8 @@
 /* eslint-disable react/no-danger */
 /* eslint-disable react/no-multi-comp */
-/* @flow */
 
 import React, { useState } from 'react'
-import { components, OptionProps } from 'react-select'
+import { components } from 'react-select'
 
 import {
   Avatar,
@@ -12,13 +11,7 @@ import {
   FlexItem,
   Title,
   Typeahead,
-} from '../..'
-
-type TypeAheadWithHighlightProps = {
-  data: {
-    name: String,
-  },
-};
+} from 'playbook-ui'
 
 const USERS = [
   {
@@ -43,12 +36,12 @@ const USERS = [
   },
 ];
 
-const TypeaheadWithHighlight = (props: TypeAheadWithHighlightProps) => {
+const TypeaheadWithHighlight = (props) => {
   const [selectedUser, setSelectedUser] = useState()
 
   const formatOptionLabel = ({name, territory, title}, {inputValue}) => {
 
-    const highlighted = (text: string) => {
+    const highlighted = (text) => {
       if (!inputValue.length) return text
       return text.replace(
         new RegExp(inputValue, 'gi'),
@@ -62,11 +55,18 @@ const TypeaheadWithHighlight = (props: TypeAheadWithHighlightProps) => {
               marginRight="sm"
               name={name}
               size="sm"
+              {...props}
           />
         </FlexItem>
         <FlexItem>
-          <Title size={4}><span dangerouslySetInnerHTML={{ __html: highlighted(name) }} /></Title>
-          <Body color="light">
+          <Title
+              size={4}
+              {...props}
+          >
+            <span dangerouslySetInnerHTML={{ __html: highlighted(name) }} /></Title>
+          <Body color="light"
+              {...props}
+          >
             <span dangerouslySetInnerHTML={{ __html: highlighted(title) }} />{" • "}
             {territory}
           </Body>
@@ -76,7 +76,7 @@ const TypeaheadWithHighlight = (props: TypeAheadWithHighlightProps) => {
   }
 
   const customComponents = {
-    Option: (highlightProps: OptionProps) => (
+    Option: (highlightProps) => (
       <components.Option {...highlightProps}/>
     ),
     SingleValue: ({ ...props }) => (
