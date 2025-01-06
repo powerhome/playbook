@@ -16,8 +16,10 @@ module Playbook
         generate_classname("pb_table_tr", "bg-white", subrow_depth_classname, separator: " ")
       end
 
-      def td_classname
-        generate_classname("id-cell", "chrome-styles", separator: " ")
+      def td_classname(column)
+        classes = %w[id-cell chrome-styles]
+        classes << "last-cell" if column[:is_last_in_group]
+        classes.join(" ")
       end
 
       def depth_accessors
@@ -29,6 +31,8 @@ module Playbook
     private
 
       def custom_renderer_value(column, index)
+        return nil unless column[:accessor].present?
+
         if index.zero?
           if depth.zero?
             row[column[:accessor].to_sym]
@@ -37,6 +41,7 @@ module Playbook
               key = item.to_sym
               return row[key] if depth - 1 == accessor_index
             end
+            nil
           end
         else
           row[column[:accessor].to_sym]
