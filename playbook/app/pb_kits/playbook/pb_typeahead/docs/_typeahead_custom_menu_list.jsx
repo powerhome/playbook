@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 import {
   Button,
-} from '../..'
+} from 'playbook-ui'
 
 import Typeahead from '../_typeahead'
 
