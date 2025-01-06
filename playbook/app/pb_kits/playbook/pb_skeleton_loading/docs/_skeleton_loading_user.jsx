@@ -1,11 +1,19 @@
-import React from 'react';
-import { Flex, SkeletonLoading, User } from "playbook-ui";
+import React, { useState } from 'react';
+import { Button, Flex, SkeletonLoading, User } from "playbook-ui";
 
 const SkeletonLoadingUser = (props) => {
-  const isLoading = true
+  const [isLoading, setIsLoading] = useState(true)
+  const toggleLoading = () => setIsLoading((prev) => !prev)
 
   return (
     <div>
+      <Button 
+          marginBottom="md" 
+          onClick={toggleLoading} 
+          variant="secondary"
+      >
+          {isLoading ? "Show User" : "Show Skeleton Loading"}
+      </Button>
       <div>
         {isLoading ? (
           <Flex alignItems="center">

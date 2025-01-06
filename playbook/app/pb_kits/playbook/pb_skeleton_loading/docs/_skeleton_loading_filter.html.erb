@@ -1,0 +1,119 @@
+<%= pb_rails("button", props: { id: "toggle-filter-button", margin_bottom: "md", text: "Show Filter", variant: "secondary" }) %>
+
+<div id="skeleton-loading-filter-content">
+  <%= pb_rails("card", props: { margin_bottom: "lg" }) do %>
+    <%= pb_rails("flex", props: { align_items: "center", justify: "between", orientation: "row" }) do %>
+      <%= pb_rails("flex", props: { align_items: "center", justify: "start", orientation: "row" }) do %>
+        <%= pb_rails("skeleton_loading", props: { border_radius: "rounded", height: "40px", margin_right: "sm", width: "40px" }) %>
+        <%= pb_rails("skeleton_loading", props: { height: "16px", margin_right: "md", width: "80px" }) %>
+      <% end %>
+      <%= pb_rails("flex", props: { align_items: "center", justify: "end", orientation: "row" }) do %>
+        <%= pb_rails("skeleton_loading", props: { height: "18px", width: "120px" }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("skeleton_loading", props: { height: "127px", width: "100%" }) %>
+</div>
+
+<div id="filter-content" style="display: none;">
+  <%= pb_rails("filter", props: {
+    margin_bottom: "xl",
+    min_width: "360px",
+    id: "2",
+    filters: [
+      { name: "name", value: "John Wick" }
+    ],
+    sort_menu: [
+      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+      { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: false },
+      { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+    ],
+    results: 546,
+    template: "single"
+  }) do %>
+    <% example_collection = [
+      OpenStruct.new(name: "USA", value: 1),
+      OpenStruct.new(name: "Canada", value: 2),
+      OpenStruct.new(name: "Brazil", value: 3),
+      OpenStruct.new(name: "Philippines", value: 4),
+      OpenStruct.new(name: "A galaxy far far away...", value: 5)
+    ] %>
+
+    <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+      <%= form.text_field :example_text_field, props: { label: true } %>
+      <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
+
+      <%= form.actions do |action| %>
+        <%= action.submit props: {
+          text: "Apply",
+          data: {
+            disable_with: "pb_rails('icon', props: { icon: 'spinner', spin: true, fixed_width: true })Searching...".html_safe
+        },}%>
+        <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("filter", props: {
+    min_width: "360px",
+    id: "1",
+    filters: [
+      { name: "name", value: "John Wick" },
+      { name: "city", value: "San Francisco"}
+    ],
+    sort_menu: [
+      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+      { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: false },
+      { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+    ],
+    template: "default",
+    results: 1,
+  }) do %>
+    <% example_collection = [
+      OpenStruct.new(name: "USA", value: 1),
+      OpenStruct.new(name: "Canada", value: 2),
+      OpenStruct.new(name: "Brazil", value: 3),
+      OpenStruct.new(name: "Philippines", value: 4),
+      OpenStruct.new(name: "A galaxy far far away...", value: 5)
+    ] %>
+    <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+      <%= form.text_field :example_text_field, props: { label: true } %>
+      <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
+
+      <%= form.actions do |action| %>
+        <%= action.submit props: {
+          text: "Apply",
+          data: {
+            disable_with: "pb_rails('icon', props: { icon: 'spinner', spin: true, fixed_width: true })Searching...".html_safe
+        },}%>
+        <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const toggleButton = document.getElementById('toggle-filter-button')
+    const skeletonFilterContentDiv = document.getElementById('skeleton-loading-filter-content')
+    const filterContentDiv = document.getElementById('filter-content')
+    const secondFilterContentDiv = document.getElementById('second-filter-content')
+
+    let isLoading = true
+
+    toggleButton.addEventListener('click', function() {
+      isLoading = !isLoading
+
+      if (isLoading) {
+        skeletonFilterContentDiv.style.display = 'block'
+        filterContentDiv.style.display = 'none'
+        toggleButton.textContent = 'Show Filter'
+      } else {
+        skeletonFilterContentDiv.style.display = 'none'
+        filterContentDiv.style.display = 'block'
+        toggleButton.textContent = 'Show Skeleton Loading'
+      }
+    })
+  })
+</script>

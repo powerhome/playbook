@@ -17,9 +17,11 @@ const SkeletonLoadingHeightWidth = (props) => (
         width="50px"
         {...props}
     />
-    <Card htmlOptions={{ style: { height: '200px', width: '100%' }}} 
+    <Card 
+        height='200px' 
         marginBottom="md"
         padding="none" 
+        width='100%'
         {...props}
     >
       <SkeletonLoading
@@ -30,8 +32,10 @@ const SkeletonLoadingHeightWidth = (props) => (
           {...props}
       />
     </Card>
-    <Card htmlOptions={{ style: { height: '200px', width: '100%' }}} 
+    <Card 
+        height='200px'
         padding="none"
+        width='100%'
         {...props}
     >
       <SkeletonLoading

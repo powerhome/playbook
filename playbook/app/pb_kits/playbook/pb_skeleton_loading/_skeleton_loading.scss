@@ -1,8 +1,8 @@
 @import 'skeleton_loading_mixins';
 
 .pb_skeleton_loading {
-    display: "flex";
-    flex-direction: "column";
+    display: flex;
+    flex-direction: column;
     height: 100%;
     .color_default {
         @include skeleton-shimmer($silver);
