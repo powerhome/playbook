@@ -9,13 +9,12 @@ examples:
     - checkbox_disabled: Disabled Checkbox
 
   react:
-    - checkbox_default: Default
-    - checkbox_checked: Load as checked
-    - checkbox_custom: Custom Checkbox
-    - checkbox_error: Default w/ Error
-    - checkbox_indeterminate: Indeterminate Checkbox
-    - checkbox_disabled: Disabled Checkbox
-    - checkbox_form: Checkbox Form
+  - checkbox_default: Default
+  - checkbox_checked: Load as checked
+  - checkbox_custom: Custom Checkbox
+  - checkbox_error: Default w/ Error
+  - checkbox_indeterminate: Indeterminate Checkbox
+  - checkbox_disabled: Disabled Checkbox
 
   swift:
     - checkbox_default_swift: Default

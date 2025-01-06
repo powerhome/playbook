@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from 'react'
-import { FieldValues } from 'react-hook-form'
 import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import classnames from 'classnames'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
-import { withReactHookForm, WithReactHookFormProps } from '../utilities/withReactHookForm'
 
 type CheckboxProps = {
   aria?: {[key: string]: string},
@@ -15,7 +13,7 @@ type CheckboxProps = {
   dark?: boolean,
   data?: {[key: string]: string},
   disabled?: boolean,
-  error?: boolean | string,
+  error?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   indeterminate?: boolean,
@@ -26,26 +24,27 @@ type CheckboxProps = {
   value?: string,
 } & GlobalProps
 
-const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(({
-  aria = {},
-  checked = false,
-  children,
-  className,
-  dark = false,
-  data = {},
-  disabled = false,
-  error = false,
-  htmlOptions = {},
-  id,
-  indeterminate = false,
-  name = '',
-  onChange = () => { void 0 },
-  tabIndex,
-  text = '',
-  value = '',
-  ...props
-}, ref) => {
-  const checkRef = useRef<HTMLInputElement>(null)
+const Checkbox = (props: CheckboxProps): React.ReactElement => {
+  const {
+    aria = {},
+    checked = false,
+    children,
+    className,
+    dark = false,
+    data = {},
+    disabled = false,
+    error = false,
+    htmlOptions = {},
+    id,
+    indeterminate = false,
+    name = '',
+    onChange = () => { void 0 },
+    tabIndex,
+    text = '',
+    value = '',
+  } = props
+
+  const checkRef = useRef(null)
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -69,12 +68,11 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(({
     else
     return (
     <input
-        {...props}
         defaultChecked={checked}
         disabled={disabled}
         name={name}
         onChange={onChange}
-        ref={ref || checkRef}
+        ref={checkRef}
         tabIndex={tabIndex}
         type="checkbox"
         value={value}
@@ -114,20 +112,13 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(({
       <Body
           className="pb_checkbox_label"
           dark={dark}
-          status={typeof error === 'string' ? 'negative' : null}
+          status={error ? 'negative' : null}
           variant={null}
       >
         {text}
       </Body>
     </label>
   )
-})
+}
 
-Checkbox.displayName = 'Checkbox'
-
-export type CheckboxWithHookFormProps<T extends FieldValues = FieldValues> = CheckboxProps & WithReactHookFormProps<T>
-
-const CheckboxWithHookForm = withReactHookForm(Checkbox)
-export default CheckboxWithHookForm
-
-// export default Checkbox
+export default Checkbox

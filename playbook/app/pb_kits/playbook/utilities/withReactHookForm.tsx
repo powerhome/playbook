@@ -7,7 +7,7 @@ import {
 } from "react-hook-form"
 
 export type WithReactHookFormProps<T extends FieldValues> = {
-  name?: any
+  name?: Path<T>
   register?: UseFormRegister<T>
   rules?: Omit<
     RegisterOptions<T>,
@@ -21,43 +21,39 @@ function getDisplayName(WrappedComponent: React.ComponentType<any>): string {
 
 export function withReactHookForm<
   P extends {
-    onChange?: (...args: any[]) => void
-    onBlur?: (...args: any[]) => void
-    ref?: any
+    onChange?: (event: React.ChangeEvent<any>) => void
+    onBlur?: (event: React.FocusEvent<any>) => void
+    ref?: React.Ref<any>
     name?: string
   },
   T extends FieldValues = FieldValues
->(WrappedComponent: React.ComponentType<P>) {
+>(WrappedComponent: React.ComponentType<P> & { displayName?: string }) {
   const WithReactHookFormComponent = React.forwardRef<HTMLElement, P & WithReactHookFormProps<T>>(
     (props, ref) => {
       const { register, rules, ...rest } = props
 
       if (!register) {
-        return (
-          <WrappedComponent 
-              {...(rest as P)} 
-              ref={ref} 
-          />
-        )
+        return React.createElement(WrappedComponent, { ...rest as P, ref })
       }
-
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore: Type instantiation is excessively deep and possibly infinite
       const fieldRegistration = register(props.name, rules)
 
       const fieldProps = {
         ...rest,
         ...fieldRegistration,
         ref: ref || fieldRegistration.ref,
-        onChange: (...args: any[]) => {
-          fieldRegistration.onChange?.(...args)
-          ;(rest as P).onChange?.(...args)
+        onChange: (event: React.ChangeEvent<any>) => {
+          fieldRegistration.onChange?.(event)
+          ;(rest as P).onChange?.(event)
         },
-        onBlur: (...args: any[]) => {
-          fieldRegistration.onBlur?.(...args)
-          ;(rest as P).onBlur?.(...args)
+        onBlur: (event: React.FocusEvent<any>) => {
+          fieldRegistration.onBlur?.(event)
+          ;(rest as P).onBlur?.(event)
         },
       }
 
-      return <WrappedComponent {...(fieldProps as P)} />
+      return React.createElement(WrappedComponent, fieldProps as P)
     }
   )
 
