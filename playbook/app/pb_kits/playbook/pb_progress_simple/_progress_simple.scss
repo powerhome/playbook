@@ -44,7 +44,7 @@ $pb_progress_simple_height: 4px;
   [class^=progress_simple_value] {
     width: 0%;
     height: 100%;
-    border-radius: $pb_progress_simple_height/2;
+    border-radius: math.div($pb_progress_simple_height, 2);
     background: $primary;
   }
 
