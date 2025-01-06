@@ -83,13 +83,13 @@ const TypeaheadWithPillsAsyncCustomOptions = (props) => {
           onChange={handleOnChange}
           onMultiValueClick={handleOnMultiValueClick}
           placeholder="type the name of a Github user"
-          valueComponent={(props) => (
+          valueComponent={({ imageUrl, label, territory, type }) => (
             <User
                 avatar
-                avatarUrl={props.imageUrl}
-                name={props.label}
-                territory={props.territory}
-                title={props.type}
+                avatarUrl={imageUrl}
+                name={label}
+                territory={territory}
+                title={type}
             />
           )}
           {...props}

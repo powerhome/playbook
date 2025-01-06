@@ -1,8 +1,10 @@
+/* eslint-disable react/no-multi-comp */
+
 import React, { useState } from 'react'
 
 import {
   Button,
-} from 'playbook-ui'
+} from '../..'
 
 import Typeahead from '../_typeahead'
 
