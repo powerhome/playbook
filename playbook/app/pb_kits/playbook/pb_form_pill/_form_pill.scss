@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../tokens/opacity";
@@ -14,9 +16,9 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0 $space-md/2;
+  padding: 0 math.div($space-md, 2);
   height: $pb_form_pill_height;
-  border-radius: $pb_form_pill_height/2;
+  border-radius: math.div($pb_form_pill_height, 2);
   margin-bottom: 2px;
   margin-top: 2px;
   cursor: pointer;
@@ -142,7 +144,7 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
     height: 12px !important;
     width: 12px !important;
     padding-right: $space_xs;
-    + .pb_form_pill_text, + .pb_form_pill_tag, 
+    + .pb_form_pill_text, + .pb_form_pill_tag,
     + .pb_tooltip_kit .pb_form_pill_text, + .pb_tooltip_kit .pb_form_pill_tag,
     + div .pb_form_pill_text, + div .pb_form_pill_tag {
       padding-left: 0;
@@ -171,7 +173,7 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
     }
     .pb_form_pill_icon {
       padding-right: $space_xxs;
-      + .pb_form_pill_text, + .pb_form_pill_tag, 
+      + .pb_form_pill_text, + .pb_form_pill_tag,
       + .pb_tooltip_kit .pb_form_pill_text, + .pb_tooltip_kit .pb_form_pill_tag,
       + div .pb_form_pill_text, + div .pb_form_pill_tag {
         padding-left: 0;
