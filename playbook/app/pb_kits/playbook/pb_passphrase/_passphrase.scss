@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../tokens/colors";
 @import "../tokens/spacing";
 @import "../tokens/screen_sizes";
@@ -21,14 +23,14 @@
   }
 
   .passphrase-label {
-    margin-right: $space_xs / 2;
+    margin-right: math.div($space_xs, 2);
   }
 
   .passphrase-text-input-wrapper {
     position: relative;
 
     .pb_text_input_kit_label {
-      margin-bottom: $space_xs / 2;
+      margin-bottom: math.div($space_xs, 2);
     }
 
     .passphrase-text-input input {
@@ -57,7 +59,7 @@
   }
 
   .pb_progress_simple_wrapper, .pb_progress_simple_wrapper_dark {
-    margin-bottom: $space_xs/2;
+    margin-bottom: math.div($space_xs, 2);
 
     &.progress-empty-input {
       visibility: hidden;
