@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../../pb_textarea/textarea_mixin";
 
 [class^=pb_date_picker_kit] {
@@ -41,7 +43,7 @@
   &.error {
     .date_picker_input_wrapper {
       [class*=pb_body_kit] {
-        margin-top: $space_xs / 2;
+        margin-top: math.div($space_xs, 2);
       }
 
       input,
