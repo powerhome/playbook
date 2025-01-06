@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../tokens/colors";
 
 $color_checkbox_success: $data_1;
@@ -8,7 +10,7 @@ $transition: .2s ease-in-out;
 [class^=pb_toggle_kit] {
   position: relative;
   $width: 44px;
-  $height: $width / 2;
+  $height: math.div($width, 2);
   $border_success: 3px solid $color_checkbox_success;
   $border_default: 3px solid $color_checkbox_default;
 
@@ -27,7 +29,7 @@ $transition: .2s ease-in-out;
       &:after {
         transition: $transition;
         content: "";
-        width: $width / 2 - 4px;
+        width: math.div($width, 2) - 4px;
         height: $height - 4px;
         background-color: $color_checkbox_default;
         border-radius: 50%;
@@ -68,7 +70,7 @@ $transition: .2s ease-in-out;
         background-color: $color_checkbox_success;
 
         &:after {
-          left: $width / 2 + 2px;
+          left: math.div($width, 2) + 2px;
           background-color: $white;
         }
       }
