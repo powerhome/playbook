@@ -1,10 +1,15 @@
 import React from 'react'
 import { components } from 'react-select'
 
-const IndicatorsContainer = (props: any) => (
+type IndicatorsContainerProps = {
+  children: React.ReactNode,
+}
+
+
+const IndicatorsContainer = (props: IndicatorsContainerProps): React.ReactElement => (
   <components.IndicatorsContainer
-    className="text_input_indicators"
-    {...props}
+      className="text_input_indicators"
+      {...props}
   />
 )
 
