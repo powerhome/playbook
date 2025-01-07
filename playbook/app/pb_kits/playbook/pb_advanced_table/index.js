@@ -188,8 +188,44 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       });
     }
   }
+
+  static handleToggleAllSubRows(element, rowDepth) {
+    const table = element.closest(".pb_table");
+    const parentRow = element.closest("tr");
+    if (!parentRow) {
+      return;
+    }
+    const rowParentId = parentRow.dataset.rowParent;
+    // Select all buttons that for subrows at that depth and with same rowParent
+    const subRowButtons = table.querySelectorAll(
+      `.pb_advanced_table_body > .pb_table_tr[data-row-depth='${rowDepth}'].pb_table_tr[data-row-parent='${rowParentId}'] [data-advanced-table]`
+    );
+
+    const allExpanded = Array.from(subRowButtons).every(
+      (button) =>
+        button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block"
+    );
+
+    if (allExpanded) {
+      subRowButtons.forEach((button) => {
+        button.click();
+        PbAdvancedTable.expandedRows.delete(button.id);
+      });
+    } else {
+      subRowButtons.forEach((button) => {
+        if (!PbAdvancedTable.expandedRows.has(button.id)) {
+          button.click();
+          PbAdvancedTable.expandedRows.add(button.id);
+        }
+      });
+    }
+  }
 }
 
 window.expandAllRows = (element) => {
   PbAdvancedTable.handleToggleAllHeaders(element);
+};
+
+window.expandAllSubRows = (element, rowDepth) => {
+  PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
 };
