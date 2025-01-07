@@ -86,6 +86,11 @@ $gap_lg: $height_from_top + $space_lg;
                     }
                 }
             }
+            [class=pb_timeline_item_step] { 
+                > :first-child:not([class^=pb_icon_circle_kit]) { 
+                    margin-top: $space_xs;
+                }
+            }
         }
         &[class*=_with_date] {
             @include flex_wrapper(row);
