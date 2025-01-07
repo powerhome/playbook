@@ -78,10 +78,13 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         const checkIfParentIsExpanded = () => {
           if (dataContent.endsWith("sr")) {
             const parentRowId = childRow.dataset.rowParent;
+            const isParentVisible =
+              childRow.previousElementSibling.classList.contains("is-visible");
             if (parentRowId) {
-              const isParentExpanded =
-                PbAdvancedTable.expandedRows.has(parentRowId);
-              return isParentExpanded;
+              const isInSet = PbAdvancedTable.expandedRows.has(parentRowId);
+              if (isInSet && isParentVisible) {
+                return true;
+              }
             }
           }
           return false;
