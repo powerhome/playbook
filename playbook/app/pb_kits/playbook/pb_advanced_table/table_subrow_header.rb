@@ -22,7 +22,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_table_tr", "bg-white", "pb_subrow_header", subrow_depth_classname, separator: " ")
+        generate_classname("pb_table_tr", "bg-silver", "pb_subrow_header", subrow_depth_classname, separator: " ")
       end
 
     private
