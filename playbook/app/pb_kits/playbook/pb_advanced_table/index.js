@@ -50,7 +50,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   showElement(elements) {
-    console.log(elements);
     elements.forEach((elem) => {
       elem.style.display = "table-row";
       elem.classList.add("is-visible");
@@ -66,7 +65,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         if (!dataContent) {
           return;
         }
-
         // Split the dataContent to get all ancestor IDs, check against ExpandedRows
         const ancestorIds = dataContent.split("-").slice(0, -1);
 
@@ -77,7 +75,19 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           PbAdvancedTable.expandedRows.has(id)
         );
 
-        if (allAncestorsExpanded) {
+        const checkIfParentIsExpanded = () => {
+          if (dataContent.endsWith("sr")) {
+            const parentRowId = childRow.dataset.rowParent;
+            if (parentRowId) {
+              const isParentExpanded =
+                PbAdvancedTable.expandedRows.has(parentRowId);
+              return isParentExpanded;
+            }
+          }
+          return false;
+        };
+
+        if (allAncestorsExpanded || checkIfParentIsExpanded()) {
           childRow.style.display = "table-row";
           childRow.classList.add("is-visible");
         } else {

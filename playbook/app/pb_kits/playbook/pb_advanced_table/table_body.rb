@@ -39,8 +39,9 @@ module Playbook
         output = ActiveSupport::SafeBuffer.new
         is_first_child_of_subrow = current_depth.positive? && first_parent_child && subrow_headers[current_depth - 1].present?
 
+        subrow_ancestor_ids = ancestor_ids + ["#{row.object_id}sr"]
         subrow_data_attributes = {
-          advanced_table_content: new_ancestor_ids.join("-"),
+          advanced_table_content: subrow_ancestor_ids.join("-"),
           row_depth: current_depth,
           row_parent: "#{id}_#{ancestor_ids.last}",
         }
