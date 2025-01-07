@@ -50,6 +50,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   showElement(elements) {
+    console.log(elements);
     elements.forEach((elem) => {
       elem.style.display = "table-row";
       elem.classList.add("is-visible");
@@ -66,7 +67,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           return;
         }
 
-        // Split the dataContent to get all ancestor IDs, check against simpleExpandedRows
+        // Split the dataContent to get all ancestor IDs, check against ExpandedRows
         const ancestorIds = dataContent.split("-").slice(0, -1);
 
         const prefixedAncestorIds = ancestorIds.map(

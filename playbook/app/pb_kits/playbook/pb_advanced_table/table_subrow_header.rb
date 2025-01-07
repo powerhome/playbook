@@ -14,13 +14,15 @@ module Playbook
                            default: ""
       prop :collapsible_trail, type: Playbook::Props::Boolean,
                                default: true
+      prop :subrow_data_attributes, type: Playbook::Props::HashProp,
+                                    default: {}
 
-      def classname
-        generate_classname("pb_table_tr", "bg-white", subrow_depth_classname, separator: " ")
+      def data
+        Hash(prop(:data)).merge(subrow_data_attributes)
       end
 
-      def td_classname
-        generate_classname("id-cell", "chrome-styles", separator: " ")
+      def classname
+        generate_classname("pb_table_tr", "bg-white", "pb_subrow_header", subrow_depth_classname, separator: " ")
       end
 
     private
