@@ -66,9 +66,6 @@ $gap_lg: $height_from_top + $space_lg;
         [class*=pb_timeline_item_kit] {
             &[class*=_solid] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_left_block] {
-                    height: 0px;
-                }
                 [class=pb_timeline_item_step] {
                     @include flex_wrapper(row);
                     margin-top: $space_xs;
@@ -80,9 +77,6 @@ $gap_lg: $height_from_top + $space_lg;
             }
             &[class*=_dotted] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_left_block] {
-                    height: 0;
-                }
                 [class=pb_timeline_item_step] {
                     @include flex_wrapper(row);
                     margin-top: $space_xs;
