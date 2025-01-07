@@ -46,7 +46,7 @@ module Playbook
           row_parent: "#{id}_#{ancestor_ids.last}",
         }
         # Subrow header if applicable
-        output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: column_definitions, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", subrow_data_attributes: subrow_data_attributes }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
+        output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: leaf_columns, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", subrow_data_attributes: subrow_data_attributes }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
 
         current_data_attributes = current_depth.zero? ? { row_depth: 0 } : table_data_attributes
 
