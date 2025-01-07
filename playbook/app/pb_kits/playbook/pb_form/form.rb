@@ -26,6 +26,9 @@ module Playbook
           loading: loading,
           validate: validate,
         }.merge(prop(:options) || prop(:form_system_options) || {})
+
+        props = options[:props] || {}
+        options.merge(props)
       end
     end
   end
