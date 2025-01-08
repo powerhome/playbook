@@ -65,8 +65,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         if (!dataContent) {
           return;
         }
-
-        // Split the dataContent to get all ancestor IDs, check against simpleExpandedRows
+        // Split the dataContent to get all ancestor IDs, check against ExpandedRows
         const ancestorIds = dataContent.split("-").slice(0, -1);
 
         const prefixedAncestorIds = ancestorIds.map(
@@ -76,7 +75,22 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           PbAdvancedTable.expandedRows.has(id)
         );
 
-        if (allAncestorsExpanded) {
+        const checkIfParentIsExpanded = () => {
+          if (dataContent.endsWith("sr")) {
+            const parentRowId = childRow.dataset.rowParent;
+            const isParentVisible =
+              childRow.previousElementSibling.classList.contains("is-visible");
+            if (parentRowId) {
+              const isInSet = PbAdvancedTable.expandedRows.has(parentRowId);
+              if (isInSet && isParentVisible) {
+                return true;
+              }
+            }
+          }
+          return false;
+        };
+
+        if (allAncestorsExpanded || checkIfParentIsExpanded()) {
           childRow.style.display = "table-row";
           childRow.classList.add("is-visible");
         } else {
@@ -143,7 +157,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   static handleToggleAllHeaders(element) {
     const table = element.closest(".pb_table");
     const firstLevelButtons = table.querySelectorAll(
-      ".pb_advanced_table_body > .pb_table_tr [data-advanced-table]"
+      ".pb_advanced_table_body > .pb_table_tr[data-row-depth='0'] [data-advanced-table]"
     );
 
     const allExpanded = Array.from(firstLevelButtons).every(
@@ -175,12 +189,43 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     }
   }
 
-  // static handleToggleAllSubRows(element, rowDepth) {}
+  static handleToggleAllSubRows(element, rowDepth) {
+    const table = element.closest(".pb_table");
+    const parentRow = element.closest("tr");
+    if (!parentRow) {
+      return;
+    }
+    const rowParentId = parentRow.dataset.rowParent;
+    // Select all buttons that for subrows at that depth and with same rowParent
+    const subRowButtons = table.querySelectorAll(
+      `.pb_advanced_table_body > .pb_table_tr[data-row-depth='${rowDepth}'].pb_table_tr[data-row-parent='${rowParentId}'] [data-advanced-table]`
+    );
+
+    const allExpanded = Array.from(subRowButtons).every(
+      (button) =>
+        button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block"
+    );
+
+    if (allExpanded) {
+      subRowButtons.forEach((button) => {
+        button.click();
+        PbAdvancedTable.expandedRows.delete(button.id);
+      });
+    } else {
+      subRowButtons.forEach((button) => {
+        if (!PbAdvancedTable.expandedRows.has(button.id)) {
+          button.click();
+          PbAdvancedTable.expandedRows.add(button.id);
+        }
+      });
+    }
+  }
 }
 
 window.expandAllRows = (element) => {
   PbAdvancedTable.handleToggleAllHeaders(element);
 };
-// window.expandAllSubRows = (element, rowDepth) => {
-//   PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
-// };
+
+window.expandAllSubRows = (element, rowDepth) => {
+  PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
+};

@@ -11,6 +11,12 @@ module Playbook
       prop :depth
       prop :collapsible_trail, type: Playbook::Props::Boolean,
                                default: true
+      prop :table_data_attributes, type: Playbook::Props::HashProp,
+                                   default: {}
+
+      def data
+        Hash(prop(:data)).merge(table_data_attributes)
+      end
 
       def classname
         generate_classname("pb_table_tr", "bg-white", subrow_depth_classname, separator: " ")

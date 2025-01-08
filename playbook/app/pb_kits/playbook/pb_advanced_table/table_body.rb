@@ -31,7 +31,7 @@ module Playbook
         end.compact
       end
 
-      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil)
+      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil, additional_classes: "", table_data_attributes: {})
         top_parent_id ||= row.object_id
         new_ancestor_ids = ancestor_ids + [row.object_id]
         leaf_columns = flatten_columns(column_definitions)
@@ -39,30 +39,35 @@ module Playbook
         output = ActiveSupport::SafeBuffer.new
         is_first_child_of_subrow = current_depth.positive? && first_parent_child && subrow_headers[current_depth - 1].present?
 
-        output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: column_definitions, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
+        subrow_ancestor_ids = ancestor_ids + ["#{row.object_id}sr"]
+        subrow_data_attributes = {
+          advanced_table_content: subrow_ancestor_ids.join("-"),
+          row_depth: current_depth,
+          row_parent: "#{id}_#{ancestor_ids.last}",
+        }
+        # Subrow header if applicable
+        output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: leaf_columns, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", subrow_data_attributes: subrow_data_attributes }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
 
-        # Pass only leaf_columns to table_row to account for multiple nested columns
-        output << pb_rails("advanced_table/table_row", props: {
-                             id: id,
-                             row: row,
-                             column_definitions: leaf_columns,
-                             depth: current_depth,
-                             collapsible_trail: collapsible_trail,
-                           })
+        current_data_attributes = current_depth.zero? ? { row_depth: 0 } : table_data_attributes
+
+        # Additional class and data attributes needed for toggle logic
+        output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes })
 
         if row[:children].present?
-          output << row[:children].map do |child_row|
+          row[:children].each do |child_row|
             is_first_child = row[:children].first == child_row
-
-            child_output = render_row_and_children(child_row, column_definitions, current_depth + 1, is_first_child, new_ancestor_ids, top_parent_id)
-
             immediate_parent_id = row.object_id
-            top_parent = top_parent_id
-            # Combine ancestor_ids to build the content id
             data_content = new_ancestor_ids.join("-") + "-#{child_row.object_id}"
 
-            child_output.to_str.sub("<tr", %(<tr class="toggle-content" data-top-parent="#{id}_#{top_parent}" data-row-depth="#{current_depth}" data-row-parent="#{id}_#{immediate_parent_id}" data-advanced-table-content="#{data_content}"))
-          end.join.html_safe
+            child_data_attributes = {
+              top_parent: "#{id}_#{top_parent_id}",
+              row_depth: current_depth + 1,
+              row_parent: "#{id}_#{immediate_parent_id}",
+              advanced_table_content: data_content,
+            }
+
+            output << render_row_and_children(child_row, column_definitions, current_depth + 1, is_first_child, new_ancestor_ids, top_parent_id, additional_classes: "toggle-content", table_data_attributes: child_data_attributes)
+          end
         end
 
         output
