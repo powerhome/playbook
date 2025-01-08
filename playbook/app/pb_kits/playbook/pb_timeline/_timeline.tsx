@@ -20,7 +20,7 @@ type TimelineProps = {
   id?: string,
   orientation?: string,
   showDate?: boolean,
-  item_gap?: 'xs' | 'sm' | 'md' | 'lg' | 'none',
+  itemGap?: 'xs' | 'sm' | 'md' | 'lg' | 'none',
 } & GlobalProps
 
 const Timeline = ({
@@ -32,14 +32,14 @@ const Timeline = ({
   id,
   orientation = 'horizontal',
   showDate = false,
-  item_gap = 'none',
+  itemGap = 'none',
   ...props
 }: TimelineProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const dateStyle = showDate === true ? '_with_date' : ''
-  const itemGapStyle = item_gap === 'none' ? '' : `gap_${item_gap}`
+  const itemGapStyle = itemGap === 'none' ? '' : `gap_${itemGap}`
   const timelineCss = buildCss('pb_timeline_kit', `${orientation}`, dateStyle, itemGapStyle)
 
   return (

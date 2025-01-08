@@ -10,7 +10,7 @@ const TimelineWithGap = (props) => (
     <Flex justify="evenly">
     <FlexItem>
         <Timeline
-            item_gap="xs"
+            itemGap="xs"
             orientation="vertical"
         >
           <Timeline.Item
@@ -51,7 +51,7 @@ const TimelineWithGap = (props) => (
       </FlexItem>
       <FlexItem>
         <Timeline
-            item_gap="sm"
+            itemGap="sm"
             orientation="vertical"
         >
           <Timeline.Item
@@ -92,7 +92,7 @@ const TimelineWithGap = (props) => (
       </FlexItem>
       <FlexItem>
         <Timeline
-            item_gap="md"
+            itemGap="md"
             orientation="vertical"
         >
           <Timeline.Item
@@ -134,7 +134,7 @@ const TimelineWithGap = (props) => (
       </FlexItem>
       <FlexItem>
         <Timeline
-            item_gap="lg"
+            itemGap="lg"
             orientation="vertical"
         >
           <Timeline.Item
