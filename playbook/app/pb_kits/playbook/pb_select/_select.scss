@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../pb_body/body_mixins";
 @import "../pb_textarea/textarea_mixin";
 @import "../tokens/titles";
@@ -81,7 +83,7 @@
     display: block;
     &.error {
       [class*=pb_body_kit] {
-        margin-top: $space_xs / 2;
+        margin-top: math.div($space_xs, 2);
       }
       > select:first-child {
         border-color: $error;
@@ -133,7 +135,7 @@
       box-shadow: none;
       border-color: transparent;
       padding: 4px 8px;
-      padding-right: $space_lg; 
+      padding-right: $space_lg;
       border-radius: 4px;
       option {
         background-color: $white;
@@ -240,7 +242,7 @@
       border-color: transparent;
       background: transparent;
       padding: 4px 8px;
-      padding-right: $space_lg; 
+      padding-right: $space_lg;
       border-radius: 4px;
       option {
         background-color: $white;

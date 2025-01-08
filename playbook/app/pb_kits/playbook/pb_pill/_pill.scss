@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../tokens/opacity";
@@ -9,9 +11,9 @@ $pb_pill_height: 22px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0 $space-sm/1.8;
+  padding: 0 math.div($space-sm, 1.8);
   height: $pb_pill_height;
-  border-radius: $pb_pill_height/2;
+  border-radius: math.div($pb_pill_height, 2);
   white-space: nowrap;
 
   &[class*=lowercase] {

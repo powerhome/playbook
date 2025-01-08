@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @media (min-width: 500px) {
   .flatpickr-calendar {
     padding: $space_xs;
@@ -6,8 +8,8 @@
     width: 315.88px
   }
   .flatpickr-months {
-    margin-left: $space_xs / 4;
-    margin-top: $space_xs / 3;
+    margin-left: math.div($space_xs, 4);
+    margin-top: math.div($space_xs, 3);
   }
 }
 @media (max-width: 499px) {
@@ -19,7 +21,7 @@
   }
 }
 // Firefox Header Adjustments
-@supports (-moz-appearance:none) { 
+@supports (-moz-appearance:none) {
   select.flatpickr-monthDropdown-months {
       width: 97px !important;
       margin-left: $space_xs + 3;
