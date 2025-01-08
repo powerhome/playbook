@@ -27,8 +27,8 @@ type DrawerProps = {
   onClose?: () => void
   opened: boolean
   overlay: boolean
-  placement?: "left" | "right"
-  size?: "xs" | "sm" | "md" | "lg" | "xl"
+  placement?: "left" | "right" | "top" | "bottom"
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "full"
   text?: string
   withinElement?: boolean
 }
@@ -43,7 +43,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     data = {},
     htmlOptions = {},
     id,
-    size = "md",
+    size,
     children,
     fullHeight = true,
     menuButtonID,
@@ -106,7 +106,10 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       pb_drawer_within_element: withinElement,
       pb_drawer_after_open: animationState === "afterOpen",
       pb_drawer_before_close: animationState === "beforeClose",
-    }
+    },
+    withinElement ? "shadow_none" : "shadow_deepest",
+    globalProps(props),
+    className
   )
 
   const overlayClasses = classnames(
@@ -136,6 +139,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        
         className={drawerClasses}
         onClick={(e) => e.stopPropagation()}
         style={dynamicInlineProps}

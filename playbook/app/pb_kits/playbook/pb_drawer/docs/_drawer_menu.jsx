@@ -1,31 +1,52 @@
-import React from "react";
-import { Button, Drawer, Icon, Title } from "playbook-ui";
+import React from "react"
+import { Button, Drawer, Icon, Nav, NavItem } from "playbook-ui"
 
 const DrawerMenu = () => {
-
   return (
     <>
-      <Button id="menuButton"
-          padding="sm"
+      <Button 
+          id='menuButton' 
+          padding='sm'
       >
-        <Icon icon="bars"
-            size="3x"
+        <Icon 
+            icon='bars' 
+            size='3x' 
         />
       </Button>
       <Drawer
-          behavior="push"
-          closeBreakpoint="md"
-          menuButtonID="menuButton"
+          behavior='push'
+          breakpoint='md'
+          menuButtonID='menuButton'
           overlay={false}
-          placement="left"
-          size="lg"
+          placement='bottom'
+          size="full"
           withinElement
       >
-        <Title paddingBottom="md">A really neat menu</Title>
-        <Button text="This Button does nothing" />
+        <Nav 
+            link='#' 
+            orientation='horizontal'
+        >
+          <NavItem 
+              link='#' 
+              text='About' 
+          />
+          <NavItem 
+              active 
+              link='#' 
+              text='Case Studies' 
+          />
+          <NavItem 
+              link='#' 
+              text='Service' 
+          />
+          <NavItem 
+              link='#' 
+              text='Contacts' 
+          />
+        </Nav>
       </Drawer>
     </>
-  );
-};
+  )
+}
 
-export default DrawerMenu;
+export default DrawerMenu

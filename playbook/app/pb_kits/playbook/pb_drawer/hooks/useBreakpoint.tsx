@@ -33,7 +33,7 @@ export const useBreakpoint = ({
       
       if (openBreakpoint !== 'none') {
         const openBreakpointWidth = breakpointValues[openBreakpoint]
-        if (width <= openBreakpointWidth) {
+        if (width >= openBreakpointWidth) {
           setIsOpenBreakpointOpen(true)
         } else {
           setIsOpenBreakpointOpen(false)
@@ -42,10 +42,11 @@ export const useBreakpoint = ({
       }
 
       if (closeBreakpoint !== 'none') {
-        if (width >= breakpointValues[closeBreakpoint]) {
-          setIsOpenBreakpointOpen(true)
-        } else {
+        const closeBreakpointWidth = breakpointValues[closeBreakpoint]
+        if (width < closeBreakpointWidth) {
           setIsOpenBreakpointOpen(false)
+        } else {
+          setIsOpenBreakpointOpen(true)
         }
       }
 
@@ -62,7 +63,7 @@ export const useBreakpoint = ({
     handleResize()
 
     return () => window.removeEventListener('resize', handleResize)
-  }, [openBreakpoint, closeBreakpoint, menuButtonID])
+  }, [openBreakpoint, closeBreakpoint, menuButtonID, isOpenBreakpointOpen])
 
   return {
     isOpenBreakpointOpen,
