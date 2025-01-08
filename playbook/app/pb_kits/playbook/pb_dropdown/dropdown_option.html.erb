@@ -1,15 +1,10 @@
-<%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.option[:id],
-    **combined_html_options) do %>
+<%= pb_content_tag do %>
     <%= pb_rails("list/item", props: {
-        display: "flex", 
-        justify_content: "center", 
-        padding:"none", 
+        display: "flex",
+        justify_content: "center",
+        padding:"none",
         cursor: "pointer"
-        }) do %> 
+        }) do %>
             <div class="dropdown_option_wrapper">
                 <% if content.present? %>
                     <%= content.presence %>
