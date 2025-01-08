@@ -69,6 +69,7 @@ const Table = (props: TableProps): React.ReactElement => {
     const outerPaddingCss = outerPadding ? `outer_padding_${spaceCssName}${outerPadding}` : ''
     const isTableTag = tag === 'table'
     const dynamicInlineProps = globalInlineProps(props)
+    const stickyRightColumnReversed = stickyRightColumn.reverse()
 
     const classNames = classnames(
         'pb_table',
@@ -148,7 +149,7 @@ const Table = (props: TableProps): React.ReactElement => {
             if (!stickyRightColumn.length) return;
             let accumulatedWidth = 0;
 
-            stickyRightColumn.reverse().forEach((colId, index) => {
+            stickyRightColumnReversed.forEach((colId, index) => {
                 const isLastColumn = index === stickyRightColumn.length - 1;
                 const header = document.querySelector(`th[id="${colId}"]`);
                 const cells = document.querySelectorAll(`td[id="${colId}"]`);
@@ -186,6 +187,12 @@ const Table = (props: TableProps): React.ReactElement => {
         setTimeout(() => {
             handleStickyRightColumns();
         }, 10);
+
+        window.addEventListener('resize', handleStickyRightColumns);
+
+        return () => {
+            window.removeEventListener('resize', handleStickyRightColumns);
+        };
     }, [stickyRightColumn]);
 
     useEffect(() => {
