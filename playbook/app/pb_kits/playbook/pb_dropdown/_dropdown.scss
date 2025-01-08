@@ -1,5 +1,3 @@
-@use "sass:math";
-
 @import "../tokens/colors";
 @import "../tokens/spacing";
 @import "../tokens/typography";
@@ -124,7 +122,7 @@
 
     &.error {
       [class*=pb_body_kit] {
-        margin-top: math.div($space_xs, 2);
+        margin-top: $space_xs / 2;
       }
 
       [class*="dropdown_trigger_wrapper"] {
@@ -148,7 +146,7 @@
   &[class*="subtle"] {
     .dropdown_wrapper {
       .pb_dropdown_container {
-
+        
         [class*="pb_dropdown_option"]:first-child {
           margin-top: $space_xs;
         }
@@ -163,7 +161,7 @@
           border-radius: $border_radius_md;
           border-bottom: none;
           position: relative;
-
+        
           &::after {
             content: "";
             position: absolute;
@@ -174,20 +172,20 @@
             background: $border_light;
           }
         }
-
+        
         [class*="pb_dropdown_option"]:last-child::after {
-          display: none;
+          display: none; 
         }
       }
     }
-
+  
     &[class*="separators_hidden"] {
       .dropdown_wrapper {
         .pb_dropdown_container {
           [class*="pb_dropdown_option"]:first-child {
             margin-top: $space_xs;
           }
-
+  
           [class*="pb_dropdown_option"]:last-child {
             margin-bottom: $space_xs;
           }
@@ -195,7 +193,7 @@
           [class*="pb_dropdown_option"] {
             padding: $space_xxs $space_xs;
             margin: $space_xxs $space_xs;
-
+     
             &::after {
               height: 0px;
             }

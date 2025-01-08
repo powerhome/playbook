@@ -1,5 +1,3 @@
-@use "sass:math";
-
 @import "./intlTelInput";
 @import "../tokens/colors";
 
@@ -41,7 +39,7 @@ $flag-min-resolution: 192dpi;
     color: $charcoal;
   }
 
-  // iti-spacer-horizontal's default is 8px, or $space_xs
+  // iti-spacer-horizontal's default is 8px, or $space_xs 
   .iti__country-list .iti__flag, .iti__country-name {
     margin-right: $space_xs;
   }
@@ -75,7 +73,7 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__divider {
-    border-bottom: 1px solid $border_light !important;
+    border-bottom: 1px solid $border_light !important;  
   }
 
   .iti__selected-country-primary {
@@ -95,7 +93,7 @@ $flag-min-resolution: 192dpi;
     justify-content: center;
     align-items: center;
     border-width: 0;
-    border-radius: $space_xxs;
+    border-radius: $space_xxs; 
 
     &[aria-expanded="true"] {
       color: $primary_action;
@@ -165,7 +163,7 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__arrow.iti__arrow--up::before {
-    transform: rotate(-(math.div($transform-rotate-deg, 3)));
+    transform: rotate(-($transform-rotate-deg/3));
     top: $space_xs + 4px;
     color: $primary_action;
   }
@@ -198,7 +196,7 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__dropdown-content {
-    border-radius: $space_xs;
+    border-radius: $space_xs; 
     border: 1px solid $border_light !important;
     position: absolute;
     top: 100%;
@@ -227,12 +225,12 @@ $flag-min-resolution: 192dpi;
     }
 
     .iti__dropdown-content {
-      border-radius: $space_xs;
+      border-radius: $space_xs; 
       border: 1px solid $border_dark !important;
     }
 
     .iti__divider {
-      border-bottom: 1px solid $border_dark !important;
+      border-bottom: 1px solid $border_dark !important;  
     }
 
     .iti__country-list {
@@ -267,7 +265,7 @@ $flag-min-resolution: 192dpi;
       color: $white;
     }
   }
-
+  
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: $flag-min-resolution) {
     .iti__flag {
       background-image: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags@2x.png");

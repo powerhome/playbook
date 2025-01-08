@@ -1,5 +1,3 @@
-@use "sass:math";
-
 @import "../tokens/spacing";
 
 @mixin pb_message {
@@ -19,7 +17,7 @@
     }
 
     .message_text {
-      margin: 0 0 math.div($space-xs, 2);
+      margin: 0 0 $space-xs/2;
     }
 
     .message_title {

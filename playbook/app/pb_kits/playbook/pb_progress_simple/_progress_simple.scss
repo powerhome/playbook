@@ -1,5 +1,3 @@
-@use "sass:math";
-
 @import "../tokens/colors";
 @import "../tokens/opacity";
 @import "../tokens/colors";
@@ -23,7 +21,7 @@ $pb_progress_simple_height: 4px;
 [class^=pb_progress_simple_kit] {
   width: 100%;
   height: $pb_progress_simple_height;
-  border-radius: math.div($pb_progress_simple_height, 2);
+  border-radius: $pb_progress_simple_height/2;
   background: rgba($primary, $opacity-1);
     &[class*=_positive] {
       .progress_simple_value {
@@ -44,7 +42,7 @@ $pb_progress_simple_height: 4px;
   [class^=progress_simple_value] {
     width: 0%;
     height: 100%;
-    border-radius: math.div($pb_progress_simple_height, 2);
+    border-radius: $pb_progress_simple_height/2;
     background: $primary;
   }
 

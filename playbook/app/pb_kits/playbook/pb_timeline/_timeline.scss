@@ -1,14 +1,12 @@
-@use "sass:math";
-
 @import "../tokens/colors";
 @import "../tokens/spacing";
 @import "../tokens/opacity";
 @import "../tokens/typography";
 
 $connector_width: 2px;
-$icon_margin: math.div($space_xs, 2);
+$icon_margin: $space_xs/2;
 $icon_height: 28px;
-$height_from_top: (math.div($icon_height, 2)) - (math.div($connector_width, 2));
+$height_from_top: $icon_height/2 - $connector_width/2;
 
 // Add gap variables
 $gap_xs: $height_from_top + $space_xs;

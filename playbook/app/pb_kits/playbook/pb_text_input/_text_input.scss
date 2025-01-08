@@ -1,5 +1,3 @@
-@use "sass:math";
-
 @import "../pb_textarea/textarea_mixin";
 @import "../tokens/titles";
 @import "../tokens/colors";
@@ -102,7 +100,7 @@
   &.error {
     .text_input_wrapper {
       [class*="pb_body_kit"] {
-        margin-top: math.div($space_xs, 2);
+        margin-top: $space_xs / 2;
       }
       input,
       .text_input {
