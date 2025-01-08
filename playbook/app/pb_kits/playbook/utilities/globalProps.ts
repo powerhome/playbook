@@ -108,6 +108,10 @@ type MinWidth = {
   minWidth?: string,
 }
 
+type Gap = {
+  gap?: string,
+}
+
 type NumberSpacing = {
   numberSpacing?: "tabular",
 }
@@ -196,7 +200,7 @@ type MinHeight = {
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
-  LineHeight & Margin & Width & MinWidth & MaxWidth & NumberSpacing & Order & Overflow & Padding &
+  LineHeight & Margin & Width & MinWidth & MaxWidth & Gap & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
@@ -372,6 +376,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     css += maxWidth ? `max_width_${filterClassName(maxWidth)} ` : ''
     return css.trimEnd()
   },
+  gapProps: ({ gap }: Gap) => {
+    let css = ''
+    css += gap ? `gap_${gap} ` : ''
+    return css.trimEnd()
+  },
   minHeightProps: ({ minHeight }: MinHeight) => {
     const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
     if (heightValues.includes(minHeight)) {
@@ -530,15 +539,15 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
 
 
-  topProps: ({top}) => getPositioningPropsClasses('top', top), 
+  topProps: ({top}) => getPositioningPropsClasses('top', top),
 
-  rightProps: ({right}) => getPositioningPropsClasses('right', right), 
+  rightProps: ({right}) => getPositioningPropsClasses('right', right),
 
-  bottomProps:({bottom}) =>  getPositioningPropsClasses('bottom', bottom), 
-  
+  bottomProps:({bottom}) =>  getPositioningPropsClasses('bottom', bottom),
+
   leftProps: ({left}) => getPositioningPropsClasses('left', left),
-    
-  
+
+
   textAlignProps: ({ textAlign }: TextAlign) => {
     if (typeof textAlign === 'object') {
       return getResponsivePropClasses(textAlign, 'text_align')
@@ -558,7 +567,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
 
 const PROP_INLINE_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => {[key: string]: any}} = {
   heightProps: ({ height }: Height) => {
-    return height ? { height } : {}; 
+    return height ? { height } : {};
   },
 
   maxHeightProps: ({ maxHeight }: MaxHeight) => {
@@ -566,7 +575,7 @@ const PROP_INLINE_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => {[
   },
 
   minHeightProps: ({ minHeight }: MinHeight) => {
-    return minHeight ? { minHeight } : {}; 
+    return minHeight ? { minHeight } : {};
   },
 }
 
