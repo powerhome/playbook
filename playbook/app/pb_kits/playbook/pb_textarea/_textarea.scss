@@ -1,5 +1,3 @@
-@use "sass:math";
-
 @import "../pb_body/body_mixins";
 @import "./textarea_mixin";
 @import "../tokens/spacing";
@@ -62,7 +60,7 @@
 
   &.error {
     [class*=pb_body_kit] {
-      margin-top: math.div($space_xs, 2);
+      margin-top: $space_xs / 2;
     }
     textarea {
       border-color: $error;

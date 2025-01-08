@@ -1,5 +1,3 @@
-@use "sass:math";
-
 [class^=pb_date_time_stacked] {
 
   [class^=padding_month] {
@@ -21,7 +19,7 @@
 
 }
 .date-time-padding {
-  padding-right: math.div($space_xs, 2);
-  padding-left: math.div($space_xs, 2);
+  padding-right: $space_xs / 2;
+  padding-left: $space_xs / 2;
 }
 
