@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import classnames from "classnames"
 
 import {
@@ -11,6 +11,10 @@ import { globalProps, globalInlineProps } from "../utilities/globalProps"
 import { DialogContext } from "../pb_dialog/_dialog_context"
 import { useBreakpoint } from "./hooks/useBreakpoint"
 import { useDrawerAnimation } from "./hooks/useDrawerAnimation"
+
+type DrawerContextType = {
+  onClose: () => void;
+} | null;
 
 type DrawerProps = {
   aria?: { [key: string]: string }
@@ -33,7 +37,7 @@ type DrawerProps = {
   withinElement?: boolean
 }
 
-const Drawer = (props: DrawerProps): React.ReactElement => {
+const Drawer = (props: DrawerProps): React.ReactElement | null => {
   const {
     aria = {},
     behavior = "floating",
@@ -43,7 +47,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     data = {},
     htmlOptions = {},
     id,
-    size,
+    size = "md",
     children,
     fullHeight = true,
     menuButtonID,
@@ -54,6 +58,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     withinElement = false,
   } = props
 
+  const drawerRef = useRef<HTMLDivElement>(null)
   const [menuButtonOpened, setMenuButtonOpened] = useState(false)
 
   const { isOpenBreakpointOpen, isUserClosed, setIsUserClosed } = useBreakpoint(
@@ -68,6 +73,32 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
     (isOpenBreakpointOpen && !isUserClosed) || menuButtonOpened || opened
 
   const { animationState, isVisible } = useDrawerAnimation(modalIsOpened)
+
+  // Handle height animation for top/bottom placements
+  useEffect(() => {
+    if (drawerRef.current && (placement === "top" || placement === "bottom")) {
+      const elem = drawerRef.current
+      
+      if (animationState === "afterOpen") {
+        elem.style.display = 'block'
+        const height = elem.scrollHeight + 'px'
+        elem.style.height = height
+        elem.style.overflow = "hidden"
+        
+        window.setTimeout(() => {
+          elem.style.height = ''
+          elem.style.overflow = "visible"
+        }, 300)
+      } else if (animationState === "beforeClose") {
+        elem.style.height = elem.scrollHeight + 'px'
+        
+        window.setTimeout(() => {
+          elem.style.height = '0'
+          elem.style.overflow = "hidden"
+        }, 1)
+      }
+    }
+  }, [animationState, placement])
 
   // Handle menu button click
   useEffect(() => {
@@ -98,7 +129,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
 
   const drawerClasses = classnames(
     "pb_drawer",
-    buildCss("pb_drawer", size, placement),
+    buildCss("pb_drawer", size as string, placement as string),
     {
       drawer_border_full: border === "full",
       drawer_border_right: border === "right",
@@ -139,10 +170,15 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
-        
         className={drawerClasses}
         onClick={(e) => e.stopPropagation()}
-        style={dynamicInlineProps}
+        ref={drawerRef}
+        style={{
+          ...dynamicInlineProps,
+          ...(placement === "top" || placement === "bottom" 
+            ? { height: 0, transition: "height 300ms ease" } 
+            : {})
+        }}
     >
       {children}
     </div>
@@ -151,7 +187,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
   if (!isVisible) return null
 
   return (
-    <DialogContext.Provider value={api}>
+    <DialogContext.Provider value={api as DrawerContextType}>
       {withinElement ? (
         drawerContent
       ) : (

@@ -18,7 +18,7 @@ const DrawerMenu = () => {
           breakpoint='md'
           menuButtonID='menuButton'
           overlay={false}
-          placement='bottom'
+          placement="bottom"
           size="full"
           withinElement
       >

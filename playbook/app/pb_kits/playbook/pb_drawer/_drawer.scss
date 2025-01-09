@@ -71,41 +71,41 @@ $z-index: $z_7;
   }
 }
 
-@keyframes modalFadeDownIn {
-  from {
-    height: 0;
-  }
-  to {
-    height: 100%;
-  }
-}
+// @keyframes modalFadeDownIn {
+//   from {
+//     height: 0;
+//   }
+//   to {
+//     height: 100%;
+//   }
+// }
 
-@keyframes modalFadeDownOut {
-  from {
-    height: 100%;
-  }
-  to {
-    height: 0;
-  }
-}
+// @keyframes modalFadeDownOut {
+//   from {
+//     height: 100%;
+//   }
+//   to {
+//     height: 0;
+//   }
+// }
 
-@keyframes modalFadeUpIn {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
+// @keyframes modalFadeUpIn {
+//   from {
+//     transform: translateY(100%);
+//   }
+//   to {
+//     transform: translateY(0);
+//   }
+// }
 
-@keyframes modalFadeUpOut {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(100%);
-  }
-}
+// @keyframes modalFadeUpOut {
+//   from {
+//     transform: translateY(0);
+//   }
+//   to {
+//     transform: translateY(100%);
+//   }
+// }
 
 body.PBDrawer__Body--open {
   transition: margin-left $animation-duration ease-in, margin-right $animation-duration ease-in;
@@ -121,14 +121,6 @@ body.PBDrawer__Body--close {
 
 .pb_drawer_lg_right.pb_drawer {
   transform: translateX(100%);
-}
-
-.pb_drawer_full_bottom.pb_drawer {
-
-}
-
-.pb_drawer_full_top.pb_drawer {
-
 }
 
 .pb_drawer.pb_drawer_after_open {
@@ -184,23 +176,23 @@ body.PBDrawer__Body--close {
     animation-duration: $animation-duration;
   }
 
-  &[class*="_bottom"] {
-    animation-name: modalFadeDownIn;
-  }
+  // &[class*="_bottom"] {
+  //   animation-name: modalFadeDownIn;
+  // }
 
-  &[class*="_top"] {
-    animation-name: modalFadeUpIn;
-  }
+  // &[class*="_top"] {
+  //   animation-name: modalFadeUpIn;
+  // }
 
-  &[class*="_bottom"][class*="_before_close"] {
-    animation-name: modalFadeDownOut;
-    animation-duration: $animation-duration;
-  }
+  // &[class*="_bottom"][class*="_before_close"] {
+  //   animation-name: modalFadeDownOut;
+  //   animation-duration: $animation-duration;
+  // }
 
-  &[class*="_top"][class*="_before_close"] {
-    animation-name: modalFadeUpOut;
-    animation-duration: $animation-duration;
-  }
+  // &[class*="_top"][class*="_before_close"] {
+  //   animation-name: modalFadeUpOut;
+  //   animation-duration: $animation-duration;
+  // }
 
   &[class*="_xs_"] {
     width: $xsmall;
