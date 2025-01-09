@@ -50,7 +50,7 @@ $gap_lg: $height_from_top + $space_lg;
         >div {
             &:last-child {
                 flex-basis: auto !important;
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         opacity: 0;
                     }
@@ -66,7 +66,7 @@ $gap_lg: $height_from_top + $space_lg;
         [class*=pb_timeline_item_kit] {
             &[class*=_solid] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     @include flex_wrapper(row);
                     align-items: center;
                     margin-top: $space_xs;
@@ -78,7 +78,7 @@ $gap_lg: $height_from_top + $space_lg;
             }
             &[class*=_dotted] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     @include flex_wrapper(row);
                     align-items: center;
                     margin-top: $space_xs;
@@ -95,7 +95,7 @@ $gap_lg: $height_from_top + $space_lg;
             >div {
                 &:last-child {
                     flex-basis: auto !important;
-                    [class=pb_timeline_item_step] {
+                    [class^=pb_timeline_item_step] {
                         [class=pb_timeline_item_connector] {
                             opacity: 0;
                         }
@@ -125,7 +125,7 @@ $gap_lg: $height_from_top + $space_lg;
                             }
                         }
                     }
-                    [class=pb_timeline_item_step] {
+                    [class^=pb_timeline_item_step] {
                         @include flex_wrapper(row);
                         margin-top: $space_xs;
                         margin-bottom: $space_xs;
@@ -149,7 +149,7 @@ $gap_lg: $height_from_top + $space_lg;
                             }
                         }
                     }
-                    [class=pb_timeline_item_step] {
+                    [class^=pb_timeline_item_step] {
                         @include flex_wrapper(row);
                         margin-top: $space_xs;
                         margin-bottom: $space_xs;
@@ -166,7 +166,7 @@ $gap_lg: $height_from_top + $space_lg;
         align-items: flex-start;
         align-self: auto;
         >div:last-child {
-            [class=pb_timeline_item_step] {
+            [class^=pb_timeline_item_step] {
                 [class=pb_timeline_item_connector] {
                     opacity: 0;
                 }
@@ -176,7 +176,7 @@ $gap_lg: $height_from_top + $space_lg;
             @include flex_wrapper(row);
             &[class*=_solid] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     @include flex_wrapper(column);
                     align-items: center;
                     align-content: flex-start;
@@ -197,7 +197,7 @@ $gap_lg: $height_from_top + $space_lg;
             }
             &[class*=_dotted] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     @include flex_wrapper(column);
                     align-items: center;
                     margin-right: $space_sm;
@@ -221,7 +221,7 @@ $gap_lg: $height_from_top + $space_lg;
             align-items: flex-start;
             align-self: auto;
             >div:last-child {
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         opacity: 0;
                     }
@@ -231,7 +231,7 @@ $gap_lg: $height_from_top + $space_lg;
                 @include flex_wrapper(row);
                 &[class*=_solid] {
                     flex-basis: 100%;
-                    [class=pb_timeline_item_step] {
+                    [class^=pb_timeline_item_step] {
                         @include flex_wrapper(column);
                         align-items: center;
                         align-content: flex-start;
@@ -252,7 +252,7 @@ $gap_lg: $height_from_top + $space_lg;
                 }
                 &[class*=_dotted] {
                     flex-basis: 100%;
-                    [class=pb_timeline_item_step] {
+                    [class^=pb_timeline_item_step] {
                         @include flex_wrapper(column);
                         align-items: center;
                         margin-right: $space_sm;
@@ -274,7 +274,7 @@ $gap_lg: $height_from_top + $space_lg;
         }
         &[class*=_gap_xs] {
             [class*=pb_timeline_item_kit] {
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         height: $gap_xs !important;
                     }
@@ -283,7 +283,7 @@ $gap_lg: $height_from_top + $space_lg;
         }
         &[class*=_gap_sm] {
             [class*=pb_timeline_item_kit] {
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         height: $gap_sm !important;
                     }
@@ -292,7 +292,7 @@ $gap_lg: $height_from_top + $space_lg;
         }
         &[class*=_gap_md] {
             [class*=pb_timeline_item_kit] {
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         height: $gap_md !important;
                     }
@@ -301,7 +301,7 @@ $gap_lg: $height_from_top + $space_lg;
         }
         &[class*=_gap_lg] {
             [class*=pb_timeline_item_kit] {
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         height: $gap_lg !important;
                     }
