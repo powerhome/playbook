@@ -1,5 +1,5 @@
 <%= pb_content_tag do %>
-        <%= pb_rails("table", props: { size: "sm", data_table: true, number_spacing:"tabular", responsive:"none", dark: dark }) do %>
+        <%= pb_rails("table", props: { size: "sm", data_table: true, number_spacing:"tabular", responsive:"none", dark: dark }.merge(object.table_props)) do %>
           <% if content.present? %>
             <% content.presence %>
           <% else %>

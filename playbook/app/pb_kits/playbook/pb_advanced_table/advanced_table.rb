@@ -13,6 +13,8 @@ module Playbook
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[none scroll],
                         default: "none"
+      prop :table_props, type: Playbook::Props::HashProp,
+                         default: {}
 
       def classname
         generate_classname("pb_advanced_table", responsive_classname, separator: " ")
