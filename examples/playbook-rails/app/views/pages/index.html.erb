@@ -1,8 +1,108 @@
-<%= pb_rails("circle_icon_button", props: {
-  variant: "primary",
-  icon: "plus"
-}) %>
-<%= pb_rails("title", props: {
-})  do %>
-    Welcome to Playbook
-<% end %>
+<div class="feedback-form">
+  <h2 class="feedback-form__title">Share Your Feedback</h2>
+  
+  <form action="/feedback" method="post" class="js-feedback-form">
+    <div class="feedback-form__field">
+      <label class="feedback-form__label" for="feedback_name">Name</label>
+      <input type="text" id="feedback_name" name="feedback[name]" class="feedback-form__input" required>
+      <div class="feedback-form__error" data-error="name">Please enter your name</div>
+    </div>
+
+    <div class="feedback-form__field">
+      <label class="feedback-form__label" for="feedback_comments">Comments</label>
+      <textarea id="feedback_comments" name="feedback[comments]" class="feedback-form__textarea" required></textarea>
+      <div class="feedback-form__error" data-error="comments">Please enter your feedback</div>
+    </div>
+
+    <button type="submit" class="feedback-form__submit">
+      Submit Feedback
+    </button>
+  </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('.js-feedback-form');
+  const submitButton = form.querySelector('.feedback-form__submit');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Reset errors
+    form.querySelectorAll('.feedback-form__error').forEach(error => {
+      error.classList.remove('feedback-form__error--visible');
+    });
+    form.querySelectorAll('.feedback-form__input, .feedback-form__textarea').forEach(input => {
+      input.classList.remove('feedback-form__input--error');
+    });
+
+    // Add loading state
+    submitButton.disabled = true;
+    submitButton.classList.add('feedback-form__submit--loading');
+
+    // Get the form data and structure it properly
+    const formData = new FormData(form);
+    const feedbackData = {
+      feedback: {
+        name: formData.get('feedback[name]'),
+        comments: formData.get('feedback[comments]')
+      }
+    };
+    
+    console.log('Sending data:', feedbackData);
+    
+    // Submit form
+    fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify(feedbackData)
+    })
+    .then(response => {
+      console.log('Response status:', response.status);
+      if (!response.ok) {
+        return response.json().then(data => {
+          console.log('Error data:', data);
+          return Promise.reject(data);
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success data:', data);
+      if (data.message) {
+        alert(data.message);
+        form.reset();
+      }
+    })
+    .catch(error => {
+      console.log('Caught error:', error);
+      if (error.errors) {
+        Object.entries(error.errors).forEach(([field, message]) => {
+          if (message) {
+            const input = form.querySelector(`[name="feedback[${field}]"]`);
+            if (input) {
+              input.classList.add('feedback-form__input--error');
+              const errorElement = form.querySelector(`[data-error="${field}"]`);
+              if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.classList.add('feedback-form__error--visible');
+              }
+            }
+          }
+        });
+      } else {
+        alert('An error occurred. Please try again.');
+      }
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+      submitButton.classList.remove('feedback-form__submit--loading');
+    });
+  });
+});
+</script>
+

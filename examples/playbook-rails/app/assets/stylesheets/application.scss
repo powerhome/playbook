@@ -5,4 +5,14 @@
 @import "playbook";
 
 // Import fonts
-@import "fonts"
+@import "fonts";
+
+
+.test {
+  color: $primary;
+  font-size: $text_large;
+  font-weight: $bold;
+  font-family: $font_family_base;
+}
+
+

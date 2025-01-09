@@ -533,3 +533,499 @@ Processing by PagesController#index as HTML
 Completed 200 OK in 5065ms (Views: 5052.3ms | ActiveRecord: 0.0ms | Allocations: 658595)
 
 
+Started GET "/" for 127.0.0.1 at 2025-01-09 11:34:00 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 15.4ms | Allocations: 11062)
+  Rendered layout layouts/application.html.erb (Duration: 5122.7ms | Allocations: 563511)
+Completed 200 OK in 5147ms (Views: 5127.2ms | ActiveRecord: 0.0ms | Allocations: 570166)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 11:36:49 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 5.6ms | Allocations: 2603)
+  Rendered layout layouts/application.html.erb (Duration: 4419.5ms | Allocations: 333615)
+Completed 200 OK in 4421ms (Views: 4420.7ms | ActiveRecord: 0.0ms | Allocations: 334405)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 11:37:33 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 4.8ms | Allocations: 2410)
+  Rendered layout layouts/application.html.erb (Duration: 501.3ms | Allocations: 33440)
+Completed 500 Internal Server Error in 502ms (ActiveRecord: 0.0ms | Allocations: 33679)
+
+
+  
+ActionView::Template::Error (Error: Undefined variable: "$primary".
+        on line 12:10 of app/assets/stylesheets/application.scss
+>>   color: $primary;
+
+   ---------^
+):
+     6:     <%= csrf_meta_tags %>
+     7:     <%= csp_meta_tag %>
+     8: 
+     9:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    10:   </head>
+    11: 
+    12:   <body>
+  
+app/assets/stylesheets/application.scss:12
+app/views/layouts/application.html.erb:9
+Started GET "/" for 127.0.0.1 at 2025-01-09 11:37:51 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 3.0ms | Allocations: 2411)
+  Rendered layout layouts/application.html.erb (Duration: 466.0ms | Allocations: 22067)
+Completed 500 Internal Server Error in 466ms (ActiveRecord: 0.0ms | Allocations: 22276)
+
+
+  
+ActionView::Template::Error (Error: Undefined variable: "$primary".
+        on line 12:10 of app/assets/stylesheets/application.scss
+>>   color: $primary;
+
+   ---------^
+):
+     6:     <%= csrf_meta_tags %>
+     7:     <%= csp_meta_tag %>
+     8: 
+     9:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    10:   </head>
+    11: 
+    12:   <body>
+  
+app/assets/stylesheets/application.scss:12
+app/views/layouts/application.html.erb:9
+Started GET "/" for 127.0.0.1 at 2025-01-09 11:37:53 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 4.0ms | Allocations: 2410)
+  Rendered layout layouts/application.html.erb (Duration: 481.0ms | Allocations: 22019)
+Completed 500 Internal Server Error in 481ms (ActiveRecord: 0.0ms | Allocations: 22230)
+
+
+  
+ActionView::Template::Error (Error: Undefined variable: "$primary".
+        on line 12:10 of app/assets/stylesheets/application.scss
+>>   color: $primary;
+
+   ---------^
+):
+     6:     <%= csrf_meta_tags %>
+     7:     <%= csp_meta_tag %>
+     8: 
+     9:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    10:   </head>
+    11: 
+    12:   <body>
+  
+app/assets/stylesheets/application.scss:12
+app/views/layouts/application.html.erb:9
+Started GET "/" for 127.0.0.1 at 2025-01-09 11:38:10 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 2410)
+  Rendered layout layouts/application.html.erb (Duration: 4339.2ms | Allocations: 333082)
+Completed 200 OK in 4340ms (Views: 4339.5ms | ActiveRecord: 0.0ms | Allocations: 333312)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 11:38:51 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 5.9ms | Allocations: 2410)
+  Rendered layout layouts/application.html.erb (Duration: 4388.5ms | Allocations: 333078)
+Completed 200 OK in 4389ms (Views: 4388.7ms | ActiveRecord: 0.0ms | Allocations: 333306)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:01:53 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 7.9ms | Allocations: 6963)
+  Rendered layout layouts/application.html.erb (Duration: 4340.1ms | Allocations: 337707)
+Completed 200 OK in 4341ms (Views: 4340.9ms | ActiveRecord: 0.0ms | Allocations: 338577)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:02:06 -0500
+Processing by FeedbackController#create as */*
+  Parameters: {"feedback[name]"=>"hello", "feedback[comments]"=>"hello world", "feedback"=>{"feedback[name]"=>"hello", "feedback[comments]"=>"hello world"}}
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 433)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:02:42 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 5.0ms | Allocations: 2661)
+  Rendered layout layouts/application.html.erb (Duration: 38.4ms | Allocations: 44486)
+Completed 200 OK in 39ms (Views: 39.0ms | ActiveRecord: 0.0ms | Allocations: 44715)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:02:43 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 5.3ms | Allocations: 2657)
+  Rendered layout layouts/application.html.erb (Duration: 37.6ms | Allocations: 44015)
+Completed 200 OK in 39ms (Views: 38.3ms | ActiveRecord: 0.0ms | Allocations: 44244)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:03:16 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 4.7ms | Allocations: 3070)
+  Rendered layout layouts/application.html.erb (Duration: 28.7ms | Allocations: 45424)
+Completed 200 OK in 30ms (Views: 29.9ms | ActiveRecord: 0.0ms | Allocations: 46213)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:03:17 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 3.1ms | Allocations: 2666)
+  Rendered layout layouts/application.html.erb (Duration: 24.4ms | Allocations: 43989)
+Completed 200 OK in 25ms (Views: 24.7ms | ActiveRecord: 0.0ms | Allocations: 44219)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:03:30 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 8.3ms | Allocations: 8738)
+  Rendered layout layouts/application.html.erb (Duration: 432.5ms | Allocations: 189863)
+Completed 200 OK in 439ms (Views: 434.6ms | ActiveRecord: 0.0ms | Allocations: 193643)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:03:31 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 3.1ms | Allocations: 2663)
+  Rendered layout layouts/application.html.erb (Duration: 23.1ms | Allocations: 43854)
+Completed 200 OK in 23ms (Views: 23.3ms | ActiveRecord: 0.0ms | Allocations: 44086)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:07:57 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 9.4ms | Allocations: 8753)
+  Rendered layout layouts/application.html.erb (Duration: 173.7ms | Allocations: 135776)
+Completed 200 OK in 179ms (Views: 175.1ms | ActiveRecord: 0.0ms | Allocations: 139557)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:08:07 -0500
+Processing by FeedbackController#create as */*
+  Parameters: {"feedback[name]"=>"Awesome", "feedback[comments]"=>"cool", "feedback"=>{"feedback[name]"=>"Awesome", "feedback[comments]"=>"cool"}}
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 457)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:08:30 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 582)
+  Rendered layout layouts/application.html.erb (Duration: 32.1ms | Allocations: 42805)
+Completed 200 OK in 35ms (Views: 33.9ms | ActiveRecord: 0.0ms | Allocations: 43596)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:09:05 -0500
+Processing by FeedbackController#create as */*
+  Parameters: {"feedback[name]"=>"Testing this out. ", "feedback[comments]"=>"Awesome. ", "feedback"=>{"feedback[name]"=>"Testing this out. ", "feedback[comments]"=>"Awesome. "}}
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 324)
+
+
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateFeedbacks (20240119000000)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "feedbacks" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "comments" text NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20240119000000"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2025-01-09 17:13:14.418663"], ["updated_at", "2025-01-09 17:13:14.418663"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:13:41 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1056)
+  Rendered layout layouts/application.html.erb (Duration: 169.6ms | Allocations: 128110)
+Completed 200 OK in 175ms (Views: 171.0ms | ActiveRecord: 0.0ms | Allocations: 131891)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:13:57 -0500
+Processing by FeedbackController#create as */*
+  Parameters: {"feedback[name]"=>"asdfasdf", "feedback[comments]"=>"adfasdf", "feedback"=>{}}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.4ms | Allocations: 707)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: feedback):
+  
+app/controllers/feedback_controller.rb:17:in `feedback_params'
+app/controllers/feedback_controller.rb:3:in `create'
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:13:59 -0500
+Processing by FeedbackController#create as */*
+  Parameters: {"feedback[name]"=>"asdfasdf", "feedback[comments]"=>"adfasdf", "feedback"=>{}}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 633)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: feedback):
+  
+app/controllers/feedback_controller.rb:17:in `feedback_params'
+app/controllers/feedback_controller.rb:3:in `create'
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:14:05 -0500
+Processing by FeedbackController#create as */*
+  Parameters: {"feedback[name]"=>"asdfasdf", "feedback[comments]"=>"adfasdf", "feedback"=>{}}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 633)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: feedback):
+  
+app/controllers/feedback_controller.rb:17:in `feedback_params'
+app/controllers/feedback_controller.rb:3:in `create'
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:14:09 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 248)
+  Rendered layout layouts/application.html.erb (Duration: 39.6ms | Allocations: 42261)
+Completed 200 OK in 40ms (Views: 39.9ms | ActiveRecord: 0.0ms | Allocations: 42494)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:17:33 -0500
+Processing by FeedbackController#create as */*
+  Parameters: {"feedback[name]"=>"Jasper", "feedback[comments]"=>"asdfjasdfjasdf", "feedback"=>{}}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 636)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: feedback):
+  
+app/controllers/feedback_controller.rb:17:in `feedback_params'
+app/controllers/feedback_controller.rb:3:in `create'
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:18:02 -0500
+Processing by FeedbackController#create as */*
+  Parameters: {"feedback[name]"=>"Jasper", "feedback[comments]"=>"asdfjasdfjasdf", "feedback"=>{}}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 635)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: feedback):
+  
+app/controllers/feedback_controller.rb:17:in `feedback_params'
+app/controllers/feedback_controller.rb:3:in `create'
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:19:25 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 269)
+  Rendered layout layouts/application.html.erb (Duration: 28.7ms | Allocations: 42700)
+Completed 200 OK in 30ms (Views: 29.7ms | ActiveRecord: 0.0ms | Allocations: 43570)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:19:40 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by FeedbackController#create as JSON
+  Parameters: {"feedback"=>{"name"=>"Testing", "comments"=>"Tesitng"}}
+Received feedback params: #<ActionController::Parameters {"feedback"=>{"name"=>"Testing", "comments"=>"Tesitng"}, "controller"=>"feedback", "action"=>"create"} permitted: false>
+Feedback validation failed: ["Comments is too short (minimum is 10 characters)"]
+Completed 422 Unprocessable Entity in 12ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 9308)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:22:23 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 495)
+  Rendered layout layouts/application.html.erb (Duration: 283.1ms | Allocations: 128003)
+Completed 200 OK in 290ms (Views: 285.3ms | ActiveRecord: 0.0ms | Allocations: 131784)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:22:31 -0500
+Processing by FeedbackController#create as JSON
+  Parameters: {"feedback[name]"=>"Jasper", "feedback[comments]"=>"i love it here.", "feedback"=>{}}
+Received feedback params: #<ActionController::Parameters {"feedback[name]"=>"Jasper", "feedback[comments]"=>"i love it here.", "controller"=>"feedback", "action"=>"create", "feedback"=>{}} permitted: false>
+Raw request body: {"feedback[name]":"Jasper","feedback[comments]":"i love it here."}
+Error in feedback#create: ActionController::ParameterMissing - param is missing or the value is empty: feedback
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_controller/metal/strong_parameters.rb:477:in `require'
+/Users/jasper.furniss/playbook/examples/playbook-rails/app/controllers/feedback_controller.rb:30:in `feedback_params'
+/Users/jasper.furniss/playbook/examples/playbook-rails/app/controllers/feedback_controller.rb:8:in `create'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/abstract_controller/base.rb:215:in `process_action'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_controller/metal/rendering.rb:165:in `process_action'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actiontext-7.0.8.1/lib/action_text/rendering.rb:20:in `with_renderer'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actiontext-7.0.8.1/lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/callbacks.rb:127:in `instance_exec'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/callbacks.rb:138:in `run_callbacks'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/abstract_controller/callbacks.rb:233:in `process_action'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_controller/metal/rescue.rb:23:in `process_action'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/notifications.rb:206:in `block in instrument'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/notifications.rb:206:in `instrument'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activerecord-7.0.8.1/lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/abstract_controller/base.rb:151:in `process'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionview-7.0.8.1/lib/action_view/rendering.rb:39:in `process'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_controller/metal.rb:188:in `dispatch'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_controller/metal.rb:251:in `dispatch'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/routing/route_set.rb:32:in `serve'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/journey/router.rb:50:in `block in serve'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/journey/router.rb:32:in `each'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/journey/router.rb:32:in `serve'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/routing/route_set.rb:852:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/static.rb:23:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/rack-2.2.9/lib/rack/tempfile_reaper.rb:15:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/rack-2.2.9/lib/rack/etag.rb:27:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/rack-2.2.9/lib/rack/conditional_get.rb:40:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/rack-2.2.9/lib/rack/head.rb:12:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/rack-2.2.9/lib/rack/session/abstract/id.rb:266:in `context'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/rack-2.2.9/lib/rack/session/abstract/id.rb:260:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/cookies.rb:704:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activerecord-7.0.8.1/lib/active_record/migration.rb:638:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/callbacks.rb:99:in `run_callbacks'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/executor.rb:14:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/web-console-4.2.1/lib/web_console/middleware.rb:132:in `call_app'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/web-console-4.2.1/lib/web_console/middleware.rb:28:in `block in call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/web-console-4.2.1/lib/web_console/middleware.rb:17:in `catch'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/web-console-4.2.1/lib/web_console/middleware.rb:17:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/railties-7.0.8.1/lib/rails/rack/logger.rb:40:in `call_app'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/railties-7.0.8.1/lib/rails/rack/logger.rb:25:in `block in call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/tagged_logging.rb:99:in `block in tagged'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/tagged_logging.rb:37:in `tagged'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/tagged_logging.rb:99:in `tagged'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/railties-7.0.8.1/lib/rails/rack/logger.rb:25:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/sprockets-rails-3.4.2/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/request_id.rb:26:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/rack-2.2.9/lib/rack/method_override.rb:24:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/rack-2.2.9/lib/rack/runtime.rb:22:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/activesupport-7.0.8.1/lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/executor.rb:14:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/static.rb:23:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/rack-2.2.9/lib/rack/sendfile.rb:110:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/actionpack-7.0.8.1/lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/railties-7.0.8.1/lib/rails/engine.rb:530:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/puma-5.6.8/lib/puma/configuration.rb:252:in `call'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/puma-5.6.8/lib/puma/request.rb:77:in `block in handle_request'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/puma-5.6.8/lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/puma-5.6.8/lib/puma/request.rb:76:in `handle_request'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/puma-5.6.8/lib/puma/server.rb:443:in `process_client'
+/Users/jasper.furniss/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/puma-5.6.8/lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Completed 500 Internal Server Error in 4ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 625)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:24:46 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 510)
+  Rendered layout layouts/application.html.erb (Duration: 273.8ms | Allocations: 127993)
+Completed 200 OK in 281ms (Views: 276.0ms | ActiveRecord: 0.0ms | Allocations: 131774)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:24:59 -0500
+Processing by FeedbackController#create as JSON
+  Parameters: {"feedback"=>{"name"=>"Jasper", "comments"=>"Testing."}}
+Received feedback params: #<ActionController::Parameters {"feedback"=>{"name"=>"Jasper", "comments"=>"Testing."}, "controller"=>"feedback", "action"=>"create"} permitted: false>
+Raw request body: {"feedback":{"name":"Jasper","comments":"Testing."}}
+Created feedback object with attributes: {"id"=>nil, "name"=>"Jasper", "comments"=>"Testing.", "created_at"=>nil, "updated_at"=>nil}
+Feedback validation failed: ["Comments is too short (minimum is 10 characters)"]
+Feedback attributes that failed: {"id"=>nil, "name"=>"Jasper", "comments"=>"Testing.", "created_at"=>nil, "updated_at"=>nil}
+Completed 422 Unprocessable Entity in 14ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 6352)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:25:08 -0500
+Processing by FeedbackController#create as JSON
+  Parameters: {"feedback"=>{"name"=>"Jasper", "comments"=>"Testing this awesome thing out. "}}
+Received feedback params: #<ActionController::Parameters {"feedback"=>{"name"=>"Jasper", "comments"=>"Testing this awesome thing out. "}, "controller"=>"feedback", "action"=>"create"} permitted: false>
+Raw request body: {"feedback":{"name":"Jasper","comments":"Testing this awesome thing out. "}}
+Created feedback object with attributes: {"id"=>nil, "name"=>"Jasper", "comments"=>"Testing this awesome thing out. ", "created_at"=>nil, "updated_at"=>nil}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/feedback_controller.rb:11:in `create'
+  [1m[36mFeedback Create (0.8ms)[0m  [1m[32mINSERT INTO "feedbacks" ("name", "comments", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Jasper"], ["comments", "Testing this awesome thing out."], ["created_at", "2025-01-09 17:25:08.831132"], ["updated_at", "2025-01-09 17:25:08.831132"]]
+  ↳ app/controllers/feedback_controller.rb:11:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/feedback_controller.rb:11:in `create'
+Feedback saved successfully
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 1.5ms | Allocations: 3066)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 12:33:39 -0500
+Processing by FeedbackController#create as JSON
+  Parameters: {"feedback"=>{"name"=>"j", "comments"=>"asdf"}}
+Completed 422 Unprocessable Entity in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 2911)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:40:01 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 10)
+  Rendered layout layouts/application.html.erb (Duration: 36.6ms | Allocations: 42267)
+Completed 200 OK in 38ms (Views: 37.6ms | ActiveRecord: 0.0ms | Allocations: 42741)
+
+
+Started GET "/" for 127.0.0.1 at 2025-01-09 12:59:46 -0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered layout layouts/application.html.erb (Duration: 27.1ms | Allocations: 42133)
+Completed 200 OK in 28ms (Views: 27.5ms | ActiveRecord: 0.0ms | Allocations: 42362)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 13:05:55 -0500
+Processing by FeedbackController#create as JSON
+  Parameters: {"feedback"=>{"name"=>"asdf", "comments"=>"asdfasdf"}}
+Completed 422 Unprocessable Entity in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1043)
+
+
+Started POST "/feedback" for 127.0.0.1 at 2025-01-09 13:06:00 -0500
+Processing by FeedbackController#create as JSON
+  Parameters: {"feedback"=>{"name"=>"asdf", "comments"=>"asdfasdfasdfasdf"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/feedback_controller.rb:7:in `create'
+  [1m[36mFeedback Create (1.8ms)[0m  [1m[32mINSERT INTO "feedbacks" ("name", "comments", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "asdf"], ["comments", "asdfasdfasdfasdf"], ["created_at", "2025-01-09 18:06:00.424873"], ["updated_at", "2025-01-09 18:06:00.424873"]]
+  ↳ app/controllers/feedback_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/feedback_controller.rb:7:in `create'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 2049)
+
+
