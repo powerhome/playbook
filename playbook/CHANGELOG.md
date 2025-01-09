@@ -1,5 +1,9 @@
-# 14.11.0
+# 💀 Skeleton Loading Kit — Smooth, Seamless Loading! ✨
 ##### January 8, 2025
+
+![14-11-0](https://github.com/user-attachments/assets/b5c72eb5-2719-4319-bfc5-c41e553f7c2f)
+
+Say goodbye to jarring page loads and hello to a smoother user experience! The new Skeleton Loading Kit provides a lightweight and customizable placeholder while your content loads. Perfect for lists, cards, or any UI component, it’s designed to keep users engaged and your app feeling snappy. Ready to level up your loading state game? Dive in today! 🚀
 
 [14.11.0](https://github.com/powerhome/playbook/tree/14.11.0) full list of changes:
 
@@ -16,7 +20,6 @@
 
 **Fixed Bugs:**
 - Fixing Gaps between StickyRightColumns ([\#4101](https://github.com/powerhome/playbook/pull/4101)) ([@carloslimasd](https://github.com/carloslimasd))
-- Update Kits To Remove Deprecation Warning With Division ([\#4089](https://github.com/powerhome/playbook/pull/4089)) ([@ASPhillips8](https://github.com/ASPhillips8))
 - Subtle Colors to work with Card Header ([\#4080](https://github.com/powerhome/playbook/pull/4080)) ([@nidaqg](https://github.com/nidaqg))
 - Double Scroll Bars on "sticky" Doc Examples ([\#4071](https://github.com/powerhome/playbook/pull/4071)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
 - Icon Circle Size Bug Fix ([\#4045](https://github.com/powerhome/playbook/pull/4045)) ([@ASPhillips8](https://github.com/ASPhillips8))
