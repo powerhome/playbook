@@ -1,11 +1,11 @@
-# 💀 Skeleton Loading Kit — Smooth, Seamless Loading! ✨
+# 💀Skeleton Loading Kit - Smooth, Seamless Loading!✨
 ##### January 8, 2025
 
 ![14-11-0](https://github.com/user-attachments/assets/b5c72eb5-2719-4319-bfc5-c41e553f7c2f)
 
 Say goodbye to jarring page loads and hello to a smoother user experience! The new Skeleton Loading Kit provides a lightweight and customizable placeholder while your content loads. Perfect for lists, cards, or any UI component, it’s designed to keep users engaged and your app feeling snappy. Ready to level up your loading state game? Dive in today! 🚀
 
-[14.11.0](https://github.com/powerhome/playbook/tree/14.11.0) full list of changes:
+[14.11.1](https://github.com/powerhome/playbook/tree/14.11.1) full list of changes:
 
 **Kit Enhancements:**
 - Create Global Gap Prop ([\#4067](https://github.com/powerhome/playbook/pull/4067)) ([@Lsimmons98](https://github.com/Lsimmons98))
@@ -35,7 +35,7 @@ Say goodbye to jarring page loads and hello to a smoother user experience! The n
 **New Kits:**
 - Skeleton Loading Component Build - Rails ([\#4068](https://github.com/powerhome/playbook/pull/4068)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/14.10.0...14.11.0)
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.10.0...14.11.1)
 
 
 # 📊 Data that Sticks With You! 📌
