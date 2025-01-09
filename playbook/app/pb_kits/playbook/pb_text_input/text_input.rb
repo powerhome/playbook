@@ -25,6 +25,8 @@ module Playbook
       prop :add_on, type: Playbook::Props::NestedProps,
                     nested_kit: Playbook::PbTextInput::AddOn
 
+      prop :mask
+
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
         generate_classname("pb_text_input_kit") + default_margin_bottom + error_class + inline_class
@@ -55,12 +57,13 @@ module Playbook
           data: validation_data,
           disabled: disabled,
           id: input_options.dig(:id) || id,
-          name: name,
+          name: mask.present? ? "" : name,
           pattern: validation_pattern,
           placeholder: placeholder,
           required: required,
           type: type,
           value: value,
+          mask: mask,
         }.merge(input_options)
       end
 
@@ -68,13 +71,9 @@ module Playbook
         validation[:message] || ""
       end
 
-      def validation_pattern
-        validation[:pattern] || nil
-      end
-
       def validation_data
         fields = input_options.dig(:data) || {}
-        fields[:message] = validation_message unless validation_message.blank?
+        fields[:message] = wvalidation_message unless validation_message.blank?
         fields
       end
 

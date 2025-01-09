@@ -1,31 +1,28 @@
 <%= pb_rails("text_input", props: {
-  label: "First Name",
-  placeholder: "Enter first name",
-  value: "Timothy Wenhold",
-  data: { say: "hi", yell: "go" },
-  aria: { something: "hello"},
-  id: "unique_id"
+  label: "SSN",
+  placeholder: "123-45-6789",
+  mask: "ssn",
+  id: "ssn",
+  name: "ssn"
 }) %>
-
 <%= pb_rails("text_input", props: {
-  label: "Last Name",
-  placeholder: "Enter last name"
+  label: "Currency",
+  placeholder: "$0.00",
+  mask: "currency",
+  id: "currency",
+  name: "currency"
 }) %>
-
 <%= pb_rails("text_input", props: {
-    label: "Phone Number",
-    type: "phone",
-    placeholder: "Enter phone number"
+  label: "Postal Code",
+  placeholder: 12345-1234,
+  mask: "postal_code",
+  id: "postal_code",
+  name: "postal_code"
 }) %>
-
 <%= pb_rails("text_input", props: {
-    label: "Email Address",
-    type: "email",
-    placeholder: "Enter email address"
-}) %>
-
-<%= pb_rails("text_input", props: {
-    label: "Zip Code",
-    type: "number",
-    placeholder: "Enter zip code"
+  label: "Zip Code",
+  placeholder: 12345,
+  mask: "zip_code",
+  id: "zip_code",
+  name: "zip_code"
 }) %>
