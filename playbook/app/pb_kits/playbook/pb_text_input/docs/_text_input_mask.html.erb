@@ -1,0 +1,35 @@
+
+
+
+<%= pb_rails("title", props: { text: "Input Masks", size: 4, margin_bottom: "md" }) %>
+
+<div class="pb--doc-demo-elements">
+  <%= pb_rails("text_input", props: {
+    label: "Currency",
+    mask: "currency",
+    margin_bottom: "md",
+    id: "currency"
+  }) %>
+
+  <%= pb_rails("text_input", props: {
+    label: "ZIP Code",
+    mask: "zip_code",
+    margin_bottom: "md",
+    id: "zip_code"
+  }) %>
+
+  <%= pb_rails("text_input", props: {
+    label: "Postal Code",
+    mask: "postal_code",
+    placeholder: "12345-6789",
+    margin_bottom: "md",
+    id: "postal_code"
+  }) %>
+
+  <%= pb_rails("text_input", props: {
+    label: "Social Security Number",
+    mask: "ssn",
+    margin_bottom: "md",
+    id: "ssn"
+  }) %>
+</div>
