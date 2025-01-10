@@ -53,6 +53,9 @@ PbRadio.start()
 import PbDraggable from 'kits/pb_draggable'
 PbDraggable.start()
 
+import PbTextInput from 'kits/pb_text_input'
+PbTextInput.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====

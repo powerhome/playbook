@@ -4,6 +4,22 @@
 module Playbook
   module PbTextInput
     class TextInput < Playbook::KitBase
+      VALID_MASKS = %w[currency zipCode postalCode ssn].freeze
+
+      MASK_PATTERNS = {
+        "currency" => '^\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?$',
+        "zip_code" => '\d{5}',
+        "postal_code" => '\d{5}-\d{4}',
+        "ssn" => '\d{3}-\d{2}-\d{4}',
+      }.freeze
+
+      MASK_PLACEHOLDERS = {
+        "currency" => "$0.00",
+        "zip_code" => "12345",
+        "postal_code" => "12345-6789",
+        "ssn" => "123-45-6789",
+      }.freeze
+
       prop :autocomplete, type: Playbook::Props::Boolean,
                           default: true
       prop :disabled, type: Playbook::Props::Boolean,
@@ -25,7 +41,8 @@ module Playbook
       prop :add_on, type: Playbook::Props::NestedProps,
                     nested_kit: Playbook::PbTextInput::AddOn
 
-      prop :mask
+      prop :mask, type: Playbook::Props::String,
+                  default: nil
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
@@ -58,8 +75,8 @@ module Playbook
           disabled: disabled,
           id: input_options.dig(:id) || id,
           name: mask.present? ? "" : name,
-          pattern: validation_pattern,
-          placeholder: placeholder,
+          pattern: validation_pattern || mask_pattern,
+          placeholder: placeholder || mask_placeholder,
           required: required,
           type: type,
           value: value,
@@ -71,9 +88,13 @@ module Playbook
         validation[:message] || ""
       end
 
+      def validation_pattern
+        validation[:pattern] || nil
+      end
+
       def validation_data
         fields = input_options.dig(:data) || {}
-        fields[:message] = wvalidation_message unless validation_message.blank?
+        fields[:message] = validation_message unless validation_message.blank?
         fields
       end
 
@@ -83,6 +104,25 @@ module Playbook
 
       def inline_class
         inline ? " inline" : ""
+      end
+
+      def mask_data
+        return {} unless mask
+        raise ArgumentError, "mask must be one of: #{VALID_MASKS.join(', ')}" unless VALID_MASKS.include?(mask)
+
+        { mask: mask }
+      end
+
+      def mask_pattern
+        return nil unless mask
+
+        MASK_PATTERNS[mask]
+      end
+
+      def mask_placeholder
+        return nil unless mask
+
+        MASK_PLACEHOLDERS[mask]
       end
     end
   end
