@@ -1,3 +1,43 @@
+# 💀Skeleton Loading Kit - Smooth, Seamless Loading!✨
+##### January 8, 2025
+
+![14-11-0](https://github.com/user-attachments/assets/b5c72eb5-2719-4319-bfc5-c41e553f7c2f)
+
+Say goodbye to jarring page loads and hello to a smoother user experience! The new Skeleton Loading Kit provides a lightweight and customizable placeholder while your content loads. Perfect for lists, cards, or any UI component, it’s designed to keep users engaged and your app feeling snappy. Ready to level up your loading state game? Dive in today! 🚀
+
+[14.11.1](https://github.com/powerhome/playbook/tree/14.11.1) full list of changes:
+
+**Kit Enhancements:**
+- Create Global Gap Prop ([\#4067](https://github.com/powerhome/playbook/pull/4067)) ([@Lsimmons98](https://github.com/Lsimmons98))
+- AdvancedTable Rails: Subrow Headers ([\#4088](https://github.com/powerhome/playbook/pull/4088)) ([@nidaqg](https://github.com/nidaqg))
+- Add Credit Card and CVV Masks ([\#4090](https://github.com/powerhome/playbook/pull/4090)) ([@markdoeswork](https://github.com/markdoeswork))
+- Advanced Table Rails Refactor and Multi Column Headers ([\#4052](https://github.com/powerhome/playbook/pull/4052)) ([@nidaqg](https://github.com/nidaqg))
+- Create a "stickyRightcolumn" Prop for the Table kit - REACT ONLY ([\#4051](https://github.com/powerhome/playbook/pull/4051)) ([@skduncan](https://github.com/skduncan))
+- Section Separator: Add Color Option ([\#4036](https://github.com/powerhome/playbook/pull/4036)) ([@ASPhillips8](https://github.com/ASPhillips8))
+- Formatting Input Text Mask Default Value ([\#4062](https://github.com/powerhome/playbook/pull/4062)) ([@carloslimasd](https://github.com/carloslimasd))
+- Multi Column Headers for Advanced Table ([\#4038](https://github.com/powerhome/playbook/pull/4038)) ([@nidaqg](https://github.com/nidaqg))
+- Circle Icon Button Kit: Add Target Prop ([\#4054](https://github.com/powerhome/playbook/pull/4054)) ([@Lsimmons98](https://github.com/Lsimmons98))
+
+**Fixed Bugs:**
+- Fixing Gaps between StickyRightColumns ([\#4101](https://github.com/powerhome/playbook/pull/4101)) ([@carloslimasd](https://github.com/carloslimasd))
+- Subtle Colors to work with Card Header ([\#4080](https://github.com/powerhome/playbook/pull/4080)) ([@nidaqg](https://github.com/nidaqg))
+- Double Scroll Bars on "sticky" Doc Examples ([\#4071](https://github.com/powerhome/playbook/pull/4071)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Icon Circle Size Bug Fix ([\#4045](https://github.com/powerhome/playbook/pull/4045)) ([@ASPhillips8](https://github.com/ASPhillips8))
+- Remove Default Padding in Section Separator When Children are Passed ([\#4029](https://github.com/powerhome/playbook/pull/4029)) ([@Lsimmons98](https://github.com/Lsimmons98))
+- Fixes for Timestamp Spec Failing on Year Change ([\#4072](https://github.com/powerhome/playbook/pull/4072)) ([@nidaqg](https://github.com/nidaqg))
+
+
+**Improvements:**
+- Remove react-animate-height from Playbook ([\#4086](https://github.com/powerhome/playbook/pull/4086)) ([@kangaree](https://github.com/kangaree))
+- Upgrade react-dropzone to 14.3.5 and File Upload Kit ([\#4037](https://github.com/powerhome/playbook/pull/4037)) ([@kangaree](https://github.com/kangaree))
+
+
+**New Kits:**
+- Skeleton Loading Component Build - Rails ([\#4068](https://github.com/powerhome/playbook/pull/4068)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.10.0...14.11.1)
+
+
 # 📊 Data that Sticks With You! 📌
 ##### December 26, 2024
 
