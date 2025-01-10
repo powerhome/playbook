@@ -1,4 +1,5 @@
-<%= pb_content_tag do %>
+<%= pb_content_tag(:div,
+    class: object.classname + object.error_class) do %>
   <div class="input_wrapper">
     <% if content.present? %>
       <%= content %>
