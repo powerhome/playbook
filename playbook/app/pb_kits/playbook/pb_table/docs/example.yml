@@ -28,6 +28,7 @@ examples:
     - table_with_subcomponents_rails: Table with Sub Components (Table Elements)
     - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
     - table_outer_padding: Outer Padding
+    - table_with_collapsible: Table with Collapsible
 
   react:
     - table_sm: Small

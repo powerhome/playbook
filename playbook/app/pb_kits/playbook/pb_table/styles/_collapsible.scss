@@ -32,4 +32,12 @@
       }
     }
   }
+
+  .no-border {
+    border-bottom: none !important;
+  }
+  
+  .border-active {
+    border-bottom: 1px;
+  }
 }

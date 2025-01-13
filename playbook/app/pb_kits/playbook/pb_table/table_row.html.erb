@@ -1,4 +1,23 @@
-<% if object.tag == "table" %>
+<% if object.collapsible && object.tag == "table" %>
+    <%= content_tag(:tr,
+    aria: object.aria,
+    class: object.classname,
+    data: object.data,
+    id: object.id,
+    onClick: "toggleCollapsibleById('collapsed-toggle')",
+    **combined_html_options) do %>
+    <%= content.presence %>
+  <% end %>
+
+  <tr class="pb_table_collapsible_row">
+    <%= pb_rails("collapsible", props: { classname: "collapsible_border_toggle" + " no-border", name: "default-example", tag: "td", padding: "none" }) do %>
+       <%= pb_rails("flex", props: { data: { "collapsible-main": "true"} }) %>
+       <%= pb_rails("collapsible/collapsible_content", props: { classname: object.collapsible_side_highlight ? "table_collapsible_side_highlight" : "", padding: "none", margin: "none", id: "collapsed-toggle" }) do %>
+          <%= object.collapsible_content %>
+      <% end %>
+    <% end %>  
+  </tr>
+<% elsif object.tag == "table" %>
     <%= content_tag(:tr,
       aria: object.aria,
       class: object.classname,
@@ -17,3 +36,18 @@
       <%= content.presence %>
     <% end %>
 <% end %>
+
+<script>
+  const toggleCollapsibleById = (id) => {
+    console.log("hi");
+    document.dispatchEvent(new CustomEvent(id));
+
+    const toggleElements = document.querySelectorAll('.collapsible_border_toggle');
+    toggleElements.forEach(element => {
+      element.classList.toggle('no-border');
+      element.classList.toggle('border-active');
+    });
+  };
+
+  
+</script>
