@@ -39,7 +39,6 @@
 
 <script>
   const toggleCollapsibleById = (id) => {
-    console.log("hi");
     document.dispatchEvent(new CustomEvent(id));
 
     const toggleElements = document.querySelectorAll('.collapsible_border_toggle');
