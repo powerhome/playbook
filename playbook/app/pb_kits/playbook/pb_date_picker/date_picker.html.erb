@@ -68,7 +68,7 @@
   </div>
 
   <%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => {
+    const loadDatePicker = () => {
       datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
 
       if (<%= object.selection_type == "quickpick" %>) {
@@ -80,6 +80,17 @@
           endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
         })
       }
-    })
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadDatePicker();
+    });
+    
+    if (<%= !object.custom_event_listener.empty? %>) {
+      window.addEventListener("<%= object.custom_event_listener %>", () => {
+        console.log("Custom Event listener fired");
+        loadDatePicker();
+      })
+    }
   <% end %>
 <% end %>

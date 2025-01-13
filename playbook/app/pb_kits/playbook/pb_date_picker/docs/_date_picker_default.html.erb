@@ -1,1 +1,12 @@
-<%= pb_rails("date_picker", props: { picker_id: "date-picker-default"}) %>
+<%= pb_rails("date_picker", props: { picker_id: "date-picker-default", custom_event_listener: "datePickerLoader" }) %>
+<%= pb_rails("button", props: { id: "date-picker-loader", text: "Load Custom Event" }) %>
+
+<script>
+    document.getElementById("date-picker-loader").addEventListener("click", () => {
+        window.document.dispatchEvent(
+            new CustomEvent("datePickerLoader", {
+                bubbles: true,
+            })
+        );
+    });
+</script>

@@ -73,6 +73,8 @@ module Playbook
                       default: false
       prop :year_range, type: Playbook::Props::Array,
                         default: [1900, 2100]
+      prop :custom_event_listener, type: Playbook::Props::String,
+                                   default: ""
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
