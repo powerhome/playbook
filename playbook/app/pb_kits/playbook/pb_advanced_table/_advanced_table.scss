@@ -15,6 +15,12 @@
     word-wrap: normal;
   }
 
+  .sticky-header {
+    thead {
+      z-index: 3 !important;
+    }
+  }
+
   .bg-silver {
     background-color: lighten($silver, $opacity_7);
   }

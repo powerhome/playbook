@@ -14,3 +14,4 @@ export { default as AdvancedTablePagination } from './_advanced_table_pagination
 export { default as AdvancedTablePaginationWithProps } from './_advanced_table_pagination_with_props.jsx'
 export { default as AdvancedTableColumnHeaders } from './_advanced_table_column_headers.jsx'
 export { default as AdvancedTableColumnHeadersMultiple } from './_advanced_table_column_headers_multiple.jsx'
+export { default as AdvancedTableStickyHeaderResponsive } from './_advanced_table_sticky_header_responsive.jsx'
