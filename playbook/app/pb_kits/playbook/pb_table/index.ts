@@ -101,7 +101,6 @@ export default class PbTable extends PbEnhancedElement {
     }
 
     handleCollapsibleRow() {
-      // Use a flag on the `window` object to track execution
       if (window.isCollapsibleRowHandled) return;
 
       const collapsibleRows = document.querySelectorAll('.pb_table_collapsible_row');
@@ -116,7 +115,6 @@ export default class PbTable extends PbEnhancedElement {
             const tdCount = previousRow.querySelectorAll('td').length;
             console.log(`Number of <td> elements in the previous <tr>: ${tdCount}`);
 
-            // Set colSpan dynamically for the collapsible row
             const collapsibleTd = row.querySelector('td');
             if (collapsibleTd) {
               collapsibleTd.colSpan = tdCount;
@@ -126,7 +124,6 @@ export default class PbTable extends PbEnhancedElement {
           }
         });
 
-        // Mark the logic as executed globally
         window.isCollapsibleRowHandled = true;
       }
     }
