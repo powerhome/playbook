@@ -201,6 +201,12 @@
       background-color: $hover_dark;
     }
   }
+  label {
+    color: $text_dk_light;
+    * {
+      color: inherit;
+    }
+  }
   option {
     color: $text_dk_default;
   }
