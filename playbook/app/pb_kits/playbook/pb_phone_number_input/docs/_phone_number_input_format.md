@@ -1,1 +1,1 @@
-NOTE: the `number` in the React `onChange` event will not include formatting (no spaces, dashes, and parentheses). 
+NOTE: the `number` in the React `onChange` event will not include formatting (no spaces, dashes, and parentheses). For Rails, the `value` will include formatting and its value must be sanitized manually. 

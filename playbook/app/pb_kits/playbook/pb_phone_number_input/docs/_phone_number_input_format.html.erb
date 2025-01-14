@@ -1,4 +1,15 @@
 <%= pb_rails("phone_number_input", props: {
-    id: "format",
+    id: "phone_number_input",
     format_as_you_type: true
 }) %>
+
+<%= pb_rails("button", props: {id: "clickable", text: "Save Phone Number"}) %>
+
+<%= javascript_tag do %>
+    document.querySelector('#clickable').addEventListener('click', () => {
+        const formattedPhoneNumber = document.querySelector('#phone_number_input').value
+        const unformattedPhoneNumber = formattedPhoneNumber.replace(/\D/g, "")
+
+        alert(`Formatted: ${formattedPhoneNumber}. Unformatted: ${unformattedPhoneNumber}`)
+    })
+<% end %>
