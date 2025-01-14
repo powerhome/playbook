@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Filter, Flex, Select, SkeletonLoading, TextInput } from "playbook-ui";
 
 const SortingChangeCallback = (sortOptions) => {
@@ -6,7 +6,8 @@ const SortingChangeCallback = (sortOptions) => {
 }
 
 const SkeletonLoadingFilter = (props) => {
-  const isLoading = true
+  const [isLoading, setIsLoading] = useState(true)
+  const toggleLoading = () => setIsLoading((prev) => !prev)
 
   const options = [
     { value: 'USA' },
@@ -18,6 +19,13 @@ const SkeletonLoadingFilter = (props) => {
 
   return (
     <div>
+      <Button 
+          marginBottom="md" 
+          onClick={toggleLoading} 
+          variant="secondary"
+      >
+          {isLoading ? "Show Filter" : "Show Skeleton Loading"}
+      </Button>
       <div>
         {isLoading ? (
           <Card 

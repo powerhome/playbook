@@ -1,6 +1,6 @@
 <%= pb_rails("flex", props: { justify: "evenly" }) do %>
     <%= pb_rails("flex/flex_item") do %>
-        <%= pb_rails("timeline", props: {orientation: "vertical", gap: "xs"}) do %>
+        <%= pb_rails("timeline", props: {orientation: "vertical", item_gap: "xs"}) do %>
             <%= pb_rails("timeline/item", props: {icon: "user", icon_color: "royal"}) do %>
                 <%= pb_rails("body", props: {
                     text: "Conversation started",
@@ -23,7 +23,7 @@
     <% end %>
 
     <%= pb_rails("flex/flex_item") do %>
-        <%= pb_rails("timeline", props: {orientation: "vertical", gap: "sm"}) do %>
+        <%= pb_rails("timeline", props: {orientation: "vertical", item_gap: "sm"}) do %>
             <%= pb_rails("timeline/item", props: {icon: "user", icon_color: "royal"}) do %>
                 <%= pb_rails("body", props: {
                     text: "Conversation started",
@@ -46,7 +46,7 @@
     <% end %>
 
     <%= pb_rails("flex/flex_item") do %>
-        <%= pb_rails("timeline", props: {orientation: "vertical", gap: "md"}) do %>
+        <%= pb_rails("timeline", props: {orientation: "vertical", item_gap: "md"}) do %>
             <%= pb_rails("timeline/item", props: {icon: "user", icon_color: "royal"}) do %>
                 <%= pb_rails("body", props: {
                     text: "Conversation started",
@@ -69,7 +69,7 @@
     <% end %>
 
     <%= pb_rails("flex/flex_item") do %>
-        <%= pb_rails("timeline", props: {orientation: "vertical", gap: "lg"}) do %>
+        <%= pb_rails("timeline", props: {orientation: "vertical", item_gap: "lg"}) do %>
             <%= pb_rails("timeline/item", props: {icon: "user", icon_color: "royal"}) do %>
                 <%= pb_rails("body", props: {
                     text: "Conversation started",
@@ -91,4 +91,3 @@
         <% end %>
     <% end %>
 <% end %>
-

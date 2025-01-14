@@ -6,7 +6,7 @@ type InputMask = {
 }
 
 type InputMaskDictionary = {
-    [key in 'currency' | 'zipCode' | 'postalCode' | 'ssn']: InputMask
+    [key in 'currency' | 'zipCode' | 'postalCode' | 'ssn' | 'creditCard' | 'cvv']: InputMask
 }
 
 const formatCurrencyDefaultValue = (value: string): string => {
@@ -58,6 +58,15 @@ const formatSSN = (value: string): string => {
         .replace(/(\d{3})(?=\d)/, '$1-')
 }
 
+const formatCreditCard = (value: string): string => {
+    const cleaned = value.replace(/\D/g, '').slice(0, 16)
+    return cleaned.replace(/(\d{4})(?=\d)/g, '$1 ')
+}
+
+const formatCVV = (value: string): string => {
+    return value.replace(/\D/g, '').slice(0, 4)
+}
+
 export const INPUTMASKS: InputMaskDictionary = {
     currency: {
         format: formatCurrency,
@@ -83,5 +92,17 @@ export const INPUTMASKS: InputMaskDictionary = {
         formatDefaultValue: formatSSN,
         pattern: '\\d{3}-\\d{2}-\\d{4}',
         placeholder: '123-45-6789',
+    },
+    creditCard: {
+        format: formatCreditCard,
+        formatDefaultValue: formatCreditCard,
+        pattern: '\\d{4} \\d{4} \\d{4} \\d{4}',
+        placeholder: '1234 5678 9012 3456',
+    },
+    cvv: {
+        format: formatCVV,
+        formatDefaultValue: formatCVV,
+        pattern: '\\d{3,4}',
+        placeholder: '123',
     },
 } 

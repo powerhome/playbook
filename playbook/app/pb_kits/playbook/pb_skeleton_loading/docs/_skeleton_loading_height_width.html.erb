@@ -1,0 +1,15 @@
+<%= pb_rails("skeleton_loading", props: { height: "100px", width: "50%" }) %>
+
+<%= pb_rails("skeleton_loading", props: { gap: "md", height: "20px", margin_y: "md", stack: 3, width: "50px" }) %>
+
+<%= pb_rails("card", props: { height: "200px", margin_bottom: "md", padding: "none", width: "100%" }) do %>
+    <%= pb_rails("skeleton_loading", props: { border_radius: "md", gap: "xl", height: "50%", width: "300px" }) %>
+<% end %>
+
+<%= pb_rails("card", props: { height: "200px", margin_bottom: "md", padding: "none", width: "100%" }) do %>
+    <%= pb_rails("skeleton_loading", props: { border_radius: "md", gap: "xl", height: "30%", stack: 2, width: "70%" }) %>
+<% end %>
+
+<%= pb_rails("skeleton_loading", props: { height: "150px", margin_y: "md", width: "150px" }) %>
+
+<%= pb_rails("skeleton_loading", props: { border_radius: "rounded", height: "150px", width: "150px" }) %>

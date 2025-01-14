@@ -1,0 +1,29 @@
+@import "spacing";
+
+.gap_none {
+  gap: 0;
+}
+
+.gap_xxs {
+  gap: $space_xxs;
+}
+
+.gap_xs {
+  gap: $space_xs;
+}
+
+.gap_sm {
+  gap: $space_sm;
+}
+
+.gap_md {
+  gap: $space_md;
+}
+
+.gap_lg {
+  gap: $space_lg;
+}
+
+.gap_xl {
+  gap: $space_xl;
+}
