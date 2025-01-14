@@ -103,7 +103,6 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   const inputRef = useRef<HTMLInputElement>()
   const itiRef = useRef<any>(null);
   const [inputValue, setInputValue] = useState(value)
-  const [itiInit, setItiInit] = useState<any>()
   const [error, setError] = useState(props.error)
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
@@ -138,7 +137,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   }
 
   const showFormattedError = (reason = '') => {
-    const countryName = itiInit.getSelectedCountryData().name
+    const countryName = itiRef.current.getSelectedCountryData().name
     const reasonText = reason.length > 0 ? ` (${reason})` : ''
     setError(`Invalid ${countryName} phone number${reasonText}`)
     return true
@@ -196,12 +195,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   }
 
   const validateErrors = () => {
-    if (itiInit) isValid(itiInit.isValidNumber())
-    if (validateOnlyNumbers(itiInit)) return
-    if (validateTooLongNumber(itiInit)) return
-    if (validateTooShortNumber(itiInit)) return
-    if (validateUnhandledError(itiInit)) return
-    if (validateMissingAreaCode(itiInit)) return
+    if (itiRef.current) isValid(itiRef.current.isValidNumber())
+    if (validateOnlyNumbers(itiRef.current)) return
+    if (validateTooLongNumber(itiRef.current)) return
+    if (validateTooShortNumber(itiRef.current)) return
+    if (validateUnhandledError(itiRef.current)) return
+    if (validateMissingAreaCode(itiRef.current)) return
   }
 
   const getCurrentSelectedData = (itiInit: any, inputValue: string) => {
@@ -215,15 +214,11 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
       phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
     } else {
-      phoneNumberData = getCurrentSelectedData(itiInit, evt.target.value)
+      phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
     }
     setSelectedData(phoneNumberData)
     onChange(phoneNumberData)
-    if (formatAsYouType) {
-      isValid(itiRef.current.isValidNumber())
-    } else {
-      isValid(itiInit.isValidNumber())
-    }
+    isValid(itiRef.current.isValidNumber())
   }
 
   // Separating Concerns as React Docs Recommend
@@ -267,8 +262,6 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
         handleOnChange(evt as unknown as React.ChangeEvent<HTMLInputElement>);
       });
     }
-
-    setItiInit(telInputInit)
   }, [])
 
   let textInputProps: {[key: string]: any} = {
