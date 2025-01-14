@@ -35,6 +35,7 @@ type PhoneNumberInputProps = {
   preferredCountries?: string[],
   required?: boolean,
   value?: string,
+  formatAsYouType?: boolean,
 }
 
 enum ValidationError {
@@ -87,6 +88,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
     required = false,
     preferredCountries = [],
     value = "",
+    formatAsYouType = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -99,6 +101,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   )
 
   const inputRef = useRef<HTMLInputElement>()
+  const itiRef = useRef<any>(null);
   const [inputValue, setInputValue] = useState(value)
   const [itiInit, setItiInit] = useState<any>()
   const [error, setError] = useState(props.error)
@@ -129,6 +132,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       }
     }
   })
+
+  const unformatNumber = (formattedNumber: any) => {
+    return formattedNumber.replace(/[()\-\s]/g, "")
+  }
 
   const showFormattedError = (reason = '') => {
     const countryName = itiInit.getSelectedCountryData().name
@@ -203,10 +210,20 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(evt.target.value)
-    const phoneNumberData = getCurrentSelectedData(itiInit, evt.target.value)
+    let phoneNumberData
+    if (formatAsYouType) {
+      const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
+      phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
+    } else {
+      phoneNumberData = getCurrentSelectedData(itiInit, evt.target.value)
+    }
     setSelectedData(phoneNumberData)
     onChange(phoneNumberData)
-    isValid(itiInit.isValidNumber())
+    if (formatAsYouType) {
+      isValid(itiRef.current.isValidNumber())
+    } else {
+      isValid(itiInit.isValidNumber())
+    }
   }
 
   // Separating Concerns as React Docs Recommend
@@ -230,8 +247,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       onlyCountries,
       countrySearch: false,
       fixDropdownWidth: false,
-      formatAsYouType: false,
+      formatAsYouType: formatAsYouType,
     })
+
+    itiRef.current = telInputInit;
 
     inputRef.current.addEventListener("countrychange", (evt: Event) => {
       const phoneNumberData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
@@ -242,6 +261,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
 
     inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
     inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
+
+    if (formatAsYouType) {
+      inputRef.current?.addEventListener("input", (evt) => {
+        handleOnChange(evt as unknown as React.ChangeEvent<HTMLInputElement>);
+      });
+    }
 
     setItiInit(telInputInit)
   }, [])
