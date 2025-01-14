@@ -201,10 +201,9 @@
       background-color: $hover_dark;
     }
   }
-  label {
-    color: $text_dk_light;
-    * {
-      color: inherit;
+  .pb_select_kit_label {
+    > div:first-child{
+      color: $text_dk_light;
     }
   }
   option {
