@@ -31,7 +31,6 @@ export default class PbTable extends PbEnhancedElement {
       });
 
       // New sticky columns logic
-      this.initStickyColumns();
       this.initStickyLeftColumns();
       this.handleCollapsibleRow()
     }
