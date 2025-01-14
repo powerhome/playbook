@@ -11,6 +11,7 @@ examples:
   rails:
   - draggable_default_rails: Default
   - draggable_with_list_rails: Draggable with List Kit
+  - draggable_with_selectable_list_rails: Draggable with SelectableList Kit
   - draggable_with_cards_rails: Draggable with Cards
 
 
