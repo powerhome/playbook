@@ -194,13 +194,13 @@
     }
 
     .maplibregl-popup-content {
-      background-color: $bg_dark;
+      background-color: $white;
       color: $text_dk_default;
     }
 
     .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
     .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
-      border-top-color: $bg_dark;
+      border-top-color: $white;
     }
     .map-zoom-in-button,
     .map-zoom-out-button,
