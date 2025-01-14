@@ -1,7 +1,7 @@
 <% if object.collapsible && object.tag == "table" %>
     <%= content_tag(:tr,
     aria: object.aria,
-    class: object.classname,
+    class: object.classname + " collapsible-tr",
     data: object.data,
     id: object.id,
     onClick: "toggleCollapsibleRowById('collapsed-toggle')",

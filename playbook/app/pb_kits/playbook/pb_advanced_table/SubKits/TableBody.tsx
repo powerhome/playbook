@@ -86,7 +86,6 @@ export const TableBody = ({
             >
               {row.getVisibleCells().map((cell, i) => {
                 const isPinnedLeft = columnPinning.left.includes(cell.column.id)
-                const isLastCell = cell.column.parent?.columns.at(-1)?.id === cell.column.id
 
                 return (
                   <td
@@ -94,8 +93,7 @@ export const TableBody = ({
                       className={classnames(
                         `${cell.id}-cell position_relative`,
                         isChrome() ? "chrome-styles" : "",
-                        isPinnedLeft && 'pinned-left',
-                        isLastCell && 'last-cell',
+                        isPinnedLeft && 'pinned-left'
                       )}
                       key={`${cell.id}-data`}
                   >
