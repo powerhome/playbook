@@ -133,7 +133,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   })
 
   const unformatNumber = (formattedNumber: any) => {
-    return formattedNumber.replace(/[()\-\s]/g, "")
+    return formattedNumber.replace(/\D/g, "")
   }
 
   const showFormattedError = (reason = '') => {
