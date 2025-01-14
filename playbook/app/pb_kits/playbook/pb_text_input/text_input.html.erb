@@ -15,7 +15,7 @@
       <% end %>
     <% elsif mask.present? %>
       <%= input_tag %>
-      <%= tag(:input, placeholder: object.id, id: "#{object.id}-sanitized", name: object.name) %>
+      <%= tag(:input, data: "sanitized-pb-input", id: sanitized_id, name: object.name, style: "display: none;") %>
     <% else %>
       <%= input_tag %>
     <% end %>
@@ -23,71 +23,3 @@
   <% end %>
 <% end %>
 
-<script>
-
-
-function formatSSN(value){
-    var cleaned = value.replace(/\D/g, '').slice(0, 9);
-    return cleaned
-        .replace(/(\d{5})(?=\d)/, '$1-')
-        .replace(/(\d{3})(?=\d)/, '$1-');
-}
-
-function formatCurrency(value){
-    const numericValue = value.replace(/[^0-9]/g, '').slice(0, 15)
-
-    if (!numericValue) return ''
-
-    const dollars = parseFloat((parseInt(numericValue) / 100).toFixed(2))
-    if (dollars === 0) return ''
-
-    return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        maximumFractionDigits: 2,
-    }).format(dollars)
-}
-
-function formatZipCode(value){
-    return value.replace(/\D/g, '').slice(0, 5)
-}
-
-function formatPostalCode(value){
-    var cleaned = value.replace(/\D/g, '').slice(0, 9);
-    return cleaned
-        .replace(/(\d{5})(?=\d)/, '$1-')
-}
-
-function sanitizeSSN(input){
-    return input.replace(/\D/g, '');
-}
-
-function sanitizeCurrency(input){
-    return input.replace(/[$,]/g, '');
-}
-
-  document.addEventListener("DOMContentLoaded", function() {
-    var input = document.getElementById("<%= object.id %>");
-    var sanitized = document.getElementById("<%= object.id %>-sanitized");
-
-    if (input && sanitized) {
-      input.addEventListener("input", function() {
-        if (input.getAttribute("mask") === "ssn") {
-          input.value = formatSSN(input.value);
-          sanitized.value = sanitizeSSN(input.value);
-        } else if (input.getAttribute("mask") === "zip_code") {
-          input.value = formatZipCode(input.value);
-          sanitized.value = formatZipCode(input.value)
-        } else if (input.getAttribute("mask") === "currency") {
-          input.value = formatCurrency(input.value);
-          sanitized.value=sanitizeCurrency(input.value)
-        } else if (input.getAttribute("mask") === "postal_code") {
-          input.value = formatPostalCode(input.value);
-          sanitized.value = sanitizeSSN(input.value)
-        }
-      });
-    }
-});
-
-
-  </script>

@@ -1,3 +1,7 @@
+// Text Input
+import PbTextInput from 'kits/pb_text_input'
+PbTextInput.start()
+
 // Forms
 import 'kits/pb_form/pb_form_validation'
 import formHelper from 'kits/pb_form/formHelper'
@@ -52,9 +56,6 @@ PbRadio.start()
 
 import PbDraggable from 'kits/pb_draggable'
 PbDraggable.start()
-
-import PbTextInput from 'kits/pb_text_input'
-PbTextInput.start()
 
 import 'flatpickr'
 

@@ -65,6 +65,10 @@ module Playbook
         { dark: dark }.merge(add_on || {})
       end
 
+      def sanitized_id
+        "#{object.id}-sanitized" if id.present?
+      end
+
     private
 
       def all_input_options
@@ -95,7 +99,7 @@ module Playbook
       def validation_data
         fields = input_options.dig(:data) || {}
         fields[:message] = validation_message unless validation_message.blank?
-        fields
+        mask ? fields.merge(pb_input_mask: true) : fields
       end
 
       def error_class
