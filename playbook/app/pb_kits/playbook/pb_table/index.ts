@@ -1,5 +1,11 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 
+declare global {
+  interface Window {
+    isCollapsibleRowHandled?: boolean;
+  }
+}
+
 export default class PbTable extends PbEnhancedElement {
     private stickyLeftColumns: string[] = [];
     private handleStickyLeftColumnsRef: () => void;
