@@ -1,0 +1,1 @@
+NOTE: the `number` in the React `onChange` event will not include formatting (no spaces, dashes, and parentheses). 
