@@ -5,7 +5,11 @@ import Flex from '../../pb_flex/_flex'
 import TextInput from '../../pb_text_input/_text_input'
 
 type Props = {
-  selectProps: any,
+    selectProps: {
+    dark?: boolean,
+    label: string,
+    error?: string,
+  },
 }
 
 const TypeaheadControl = (props: Props) => (

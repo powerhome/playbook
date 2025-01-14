@@ -6,7 +6,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
-import type { ProductColors, CategoryColors, BackgroundColors } from '../types/colors'
+import type { ProductColors, CategoryColors, BackgroundColors, StatusColors } from '../types/colors'
 
 import Icon from '../pb_icon/_icon'
 import Flex from '../pb_flex/_flex'
@@ -36,7 +36,7 @@ type CardPropTypes = {
 } & GlobalProps
 
 type CardHeaderProps = {
-  headerColor?: BackgroundColors | ProductColors | CategoryColors | "none",
+  headerColor?: BackgroundColors | ProductColors | CategoryColors | StatusColors | "none",
   headerColorStriped?: boolean,
   children: React.ReactChild[] | React.ReactChild,
   className?: string,
@@ -127,12 +127,12 @@ const Card = (props: CardPropTypes): React.ReactElement => {
 
   const tagOptions = ['div', 'section', 'footer', 'header', 'article', 'aside', 'main', 'nav']
   const Tag = tagOptions.includes(tag) ? tag : 'div'
-  
+
   return (
     <>
     {
       draggableItem ? (
-        <Draggable.Item dragId={dragId} 
+        <Draggable.Item dragId={dragId}
             key={dragId}
         >
         <Tag
@@ -140,14 +140,14 @@ const Card = (props: CardPropTypes): React.ReactElement => {
             {...dataProps}
             className={classnames(cardCss, globalProps(props), className)}
             {...restHtmlProps}
-            style={mergedStyles} 
+            style={mergedStyles}
         >
           {subComponentTags('Header')}
           {
             dragHandle ? (
               <Flex>
                 <span className="card_draggable_handle">
-                  <Icon 
+                  <Icon
                       icon="grip-dots-vertical"
                       paddingRight="xs"
                       verticalAlign="middle"
@@ -169,7 +169,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
               {...dataProps}
               className={classnames(cardCss, globalProps(props), className)}
               {...restHtmlProps}
-              style={mergedStyles} 
+              style={mergedStyles}
             >
               {subComponentTags('Header')}
               {nonHeaderChildren}

@@ -1,0 +1,1 @@
+Use a nested `columns` array in your columnDefinitions to create multiple header rows. Any column with `columns` is treated as a grouped header, and its child columns are displayed beneath it.

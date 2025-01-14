@@ -1,11 +1,20 @@
-<%= pb_content_tag do %>
+<%= pb_content_tag(:tr) do %>
         <% object.column_definitions.each_with_index do |column, index| %>
-            <%= pb_rails("table/table_cell", props: { tag:"div", classname:object.td_classname}) do %>
+            <% next unless column[:accessor].present? %>
+            <%= pb_rails("table/table_cell", props: { classname:object.td_classname(column)}) do %>
                 <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end" }) do %>
+                    <% if collapsible_trail && index.zero? %>
+                        <% (1..depth).each do |i| %>
+                            <% additional_offset = i > 1 ? (i - 1) * 0.25 : 0 %>
+                            <% left_offset = i * 1.0 + additional_offset %>
+                            <div class="collapsible-trail" style="left: <%= left_offset %>em"></div>
+                        <% end %>
+                    <% end %>
+
                     <div style="padding-left: <%= depth * 1.25 %>em">
                         <%= pb_rails("flex", props:{align: "center", column_gap: "xs"}) do %>
                             <% if index.zero? && object.row[:children].present? %>
-                                <button id="<%= object.row.object_id.to_s + object.id %>" class="gray-icon expand-toggle-icon" data-advanced-table="true" >
+                                <button id="<%= "#{object.id}_#{object.row.object_id}" %>" class="gray-icon expand-toggle-icon" data-advanced-table="true" >
                                     <%= pb_rails("icon", props: { id: "advanced-table_open_icon", icon: "circle-play", cursor: "pointer" }) %> 
                                     <%= pb_rails("icon", props: { id: "advanced-table_close_icon", display: "none", icon: "circle-play", cursor: "pointer", rotation: 90 }) %>
                                 </button>

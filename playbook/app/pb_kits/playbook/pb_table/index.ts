@@ -2,7 +2,7 @@ import PbEnhancedElement from '../pb_enhanced_element'
 
 export default class PbTable extends PbEnhancedElement {
     private stickyLeftColumns: string[] = [];
-    private handleStickyColumnsRef: () => void;
+    private handleStickyLeftColumnsRef: () => void;
 
     static get selector(): string {
       return '.table-responsive-collapse'
@@ -31,10 +31,10 @@ export default class PbTable extends PbEnhancedElement {
       });
 
       // New sticky columns logic
-      this.initStickyColumns();
+      this.initStickyLeftColumns();
     }
 
-    private initStickyColumns(): void {
+    private initStickyLeftColumns(): void {
       // Find tables with sticky-left-column class
       const tables = document.querySelectorAll('.sticky-left-column');
 
@@ -51,15 +51,17 @@ export default class PbTable extends PbEnhancedElement {
               .split('-');
 
           if (this.stickyLeftColumns.length > 0) {
-            this.handleStickyColumnsRef = this.handleStickyColumns.bind(this);
-            this.handleStickyColumns();
-            window.addEventListener('resize', this.handleStickyColumnsRef);
+            setTimeout(() => {
+              this.handleStickyLeftColumnsRef = this.handleStickyLeftColumns.bind(this);
+              this.handleStickyLeftColumns();
+              window.addEventListener('resize', this.handleStickyLeftColumnsRef);
+            }, 10);
           }
         }
       });
     }
 
-    private handleStickyColumns(): void {
+    private handleStickyLeftColumns(): void {
       let accumulatedWidth = 0;
 
       this.stickyLeftColumns.forEach((colId, index) => {
@@ -72,11 +74,11 @@ export default class PbTable extends PbEnhancedElement {
           (header as HTMLElement).style.left = `${accumulatedWidth}px`;
 
           if (!isLastColumn) {
-            header.classList.add('with-border');
-            header.classList.remove('sticky-shadow');
+            header.classList.add('with-border-right');
+            header.classList.remove('sticky-left-shadow');
           } else {
-            header.classList.remove('with-border');
-            header.classList.add('sticky-shadow');
+            header.classList.remove('with-border-right');
+            header.classList.add('sticky-left-shadow');
           }
 
           accumulatedWidth += (header as HTMLElement).offsetWidth;
@@ -87,11 +89,11 @@ export default class PbTable extends PbEnhancedElement {
           (cell as HTMLElement).style.left = `${accumulatedWidth - (header as HTMLElement).offsetWidth}px`;
 
           if (!isLastColumn) {
-            cell.classList.add('with-border');
-            cell.classList.remove('sticky-shadow');
+            cell.classList.add('with-border-right');
+            cell.classList.remove('sticky-left-shadow');
           } else {
-            cell.classList.remove('with-border');
-            cell.classList.add('sticky-shadow');
+            cell.classList.remove('with-border-right');
+            cell.classList.add('sticky-left-shadow');
           }
         });
       });
@@ -99,8 +101,8 @@ export default class PbTable extends PbEnhancedElement {
 
     // Cleanup method to remove event listener
     disconnect(): void {
-      if (this.handleStickyColumnsRef) {
-        window.removeEventListener('resize', this.handleStickyColumnsRef);
+      if (this.handleStickyLeftColumnsRef) {
+        window.removeEventListener('resize', this.handleStickyLeftColumnsRef);
       }
     }
 }

@@ -164,9 +164,9 @@ const Gauge = ({
             color: defaultColors.text_lt_default,
             enabled: true,
             format:
-              `<span class="prefix">${prefix}</span>` +
-              '<span class="fix">{y:,f}</span>' +
-              `<span class="suffix">${suffix}</span>`,
+              `<span class="prefix${dark ? " dark" : ""}">${prefix}</span>` +
+              `<span class="fix${dark ? " dark" : ""}">{y:,f}</span>` +
+              `<span class="suffix${dark ? " dark" : ""}">${suffix}</span>`,
             style: {
               fontFamily: typography.font_family_base,
               fontWeight: typography.regular,

@@ -7,7 +7,7 @@ module Playbook
       prop :address_cont
       prop :city
       prop :emphasis, type: Playbook::Props::Enum,
-                      values: %w[street city],
+                      values: %w[street city none],
                       default: "street"
       prop :home_id, type: Playbook::Props::Number
       prop :home_url
@@ -64,6 +64,20 @@ module Playbook
       end
 
       def street_emphasis_props
+        {
+          address_house_style: address_house_style,
+          address_house_style2: address_house_style2,
+          city_state_zip: city_state_zip,
+          dark: dark,
+          home_id: home_id,
+          home_url: home_url,
+          target: target_option,
+          new_window: new_window,
+          territory: territory,
+        }
+      end
+
+      def none_emphasis_props
         {
           address_house_style: address_house_style,
           address_house_style2: address_house_style2,

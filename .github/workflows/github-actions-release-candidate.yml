@@ -60,6 +60,12 @@ jobs:
             exit 1
           fi
 
+          if echo "$LABELS" | grep -iq "Inactive RC"; then
+            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            echo "SKIP_REMAINING_STEPS=true" >> $GITHUB_ENV  # Set flag to skip steps
+            exit 0  # Exit the job early, skipping the rest of the workflow
+          fi
+
           SEMVER_LABEL=$(echo "$LABELS" | grep -iE '^(major|minor|patch)$' || true)
           echo "Found Semver labels: $SEMVER_LABEL"
 
@@ -88,6 +94,10 @@ jobs:
       - name: Grab Current Version and Set New RC Version
         id: set-version
         run: |
+          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
+            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            exit 0
+          fi
           current_npm_version=$(node -pe "require('./package.json').version")
 
           case ${{ env.SEMVER_LABEL }} in
@@ -114,6 +124,10 @@ jobs:
 
       - name: Check if version exists and increment if necessary
         run: |
+          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
+            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            exit 0
+          fi
           max_attempts=100
           attempt=0
           current_version="${{ env.new_npm_version }}"
@@ -137,11 +151,19 @@ jobs:
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
       - name: Update Version.rb
         run: |
+          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
+            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            exit 0
+          fi
           gem install bundler
           bundle
           bin/rails pb_release:action[${{env.new_ruby_version}}]
       - name: Distribute and Publish (NPM)
         run: |
+          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
+            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            exit 0
+          fi
           yarn install
           bundle
           yarn release
@@ -149,6 +171,10 @@ jobs:
           npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_version }}.tgz --tag rc
       - name: Distribute and Publish (RubyGems)
         run: |
+          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
+            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            exit 0
+          fi
           bin/build_gem
           gem build lib/playbook_ui_docs.gemspec
           rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
@@ -158,6 +184,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
+            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            exit 0
+          fi
           gh release create v${{ env.new_npm_version }} \
             --title "Release Candidate v${{ env.new_npm_version }}" \
             --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
@@ -174,6 +204,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            if (process.env.SKIP_REMAINING_STEPS === 'true') {
+              console.log("⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process.");
+              return;
+            }
+
             const commitSha = context.payload.head_commit.id;
             const commitMessage = context.payload.head_commit.message;
             const commitAuthor = context.payload.head_commit.author.name;
