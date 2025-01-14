@@ -214,8 +214,11 @@
   }
   .pb_select_kit_wrapper {
     &.error {
-      > select:first-child {
+      > select {
         border-color: $error_dark;
+      }
+      > div {
+        color: $error_dark;
       }
     }
   }
