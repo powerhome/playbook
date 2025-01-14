@@ -1,7 +1,6 @@
 @import "../../tokens/screen_sizes";
 
 .table-responsive-scroll {
-    display: block;
     overflow-x: scroll;
 
     // hides duplicate scroll bar for those that see two (byproduct of repeated table-responsive-scroll class
