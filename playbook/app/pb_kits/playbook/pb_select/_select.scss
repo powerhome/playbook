@@ -214,10 +214,8 @@
   }
   .pb_select_kit_wrapper {
     &.error {
-      .pb_select_kit_wrapper {
-        > select:first-child {
-          border-color: $error_dark;
-        }
+      > select:first-child {
+        border-color: $error_dark;
       }
     }
   }
