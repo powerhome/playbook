@@ -4,7 +4,7 @@
     class: object.classname,
     data: object.data,
     id: object.id,
-    onClick: "toggleCollapsibleById('collapsed-toggle')",
+    onClick: "toggleCollapsibleRowById('collapsed-toggle')",
     **combined_html_options) do %>
     <%= content.presence %>
   <% end %>
@@ -38,13 +38,15 @@
 <% end %>
 
 <script>
-  const toggleCollapsibleById = (id) => {
-    document.dispatchEvent(new CustomEvent(id));
+  if (!window.toggleCollapsibleRowById) {
+    window.toggleCollapsibleRowById = (id) => {
+      document.dispatchEvent(new CustomEvent(id));
 
-    const toggleElements = document.querySelectorAll('.collapsible_border_toggle');
-    toggleElements.forEach(element => {
-      element.classList.toggle('no-border');
-      element.classList.toggle('border-active');
-    });
-  };
+      const toggleElements = document.querySelectorAll('.collapsible_border_toggle');
+      toggleElements.forEach(element => {
+        element.classList.toggle('no-border');
+        element.classList.toggle('border-active');
+      });
+    };
+  }
 </script>

@@ -113,14 +113,13 @@ export default class PbTable extends PbEnhancedElement {
             previousRow.tagName === 'TR'
           ) {
             const tdCount = previousRow.querySelectorAll('td').length;
-            console.log(`Number of <td> elements in the previous <tr>: ${tdCount}`);
 
             const collapsibleTd = row.querySelector('td');
             if (collapsibleTd) {
               collapsibleTd.colSpan = tdCount;
             }
           } else {
-            console.log('Previous row does not match collapsible conditions.');
+            return
           }
         });
 
