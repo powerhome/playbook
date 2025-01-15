@@ -40,7 +40,7 @@ const RadioChildren = (props) => {
           value="Typeahead"
           {...props}
       >
-        <Typeahead 
+        <Typeahead
             marginBottom="none"
             minWidth="xs"
             options={options}
@@ -54,7 +54,10 @@ const RadioChildren = (props) => {
           value="Typography"
           {...props}
       >
-        <Title text="Custom Typography" />
+        <Title
+            dark
+            text="Custom Typography"
+        />
       </Radio>
     </div>
   )
