@@ -25,7 +25,7 @@ const MapWithPlugin = (props) => {
         new maplibregl.Marker({
           color: mapTheme.marker,
         }).setLngLat(defaultPosition)
-        .setPopup(new maplibregl.Popup({className: 'map_popup', closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
+        .setPopup(new maplibregl.Popup({className: 'map_popup', closeButton: false}).setHTML(`<h4>Hello World!</h4>`)) // add popup
         .addTo(map);
 
         //add maplibre default zoom controls
@@ -48,7 +48,7 @@ const MapWithPlugin = (props) => {
         map.addControl(new maplibregl.AttributionControl({
             compact: true
         }));
-          
+
         //set map instance
         setMapInstance(map)
     }
@@ -62,8 +62,8 @@ const MapWithPlugin = (props) => {
     }, [])
 
 
-    
-return ( 
+
+return (
   <Map flyTo
       flyToClick={()=> {handleFlyTo(mapInstance)}}
       zoomBtns
@@ -77,7 +77,7 @@ return (
               position: 'absolute',
               left: 0,
               right: 0,
-              top: 0, 
+              top: 0,
               bottom: 0,
            }}
        />
