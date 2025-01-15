@@ -3,6 +3,7 @@
 @import "../tokens/shadows";
 @import "../tokens/border_radius";
 @import "./_pb_map_button_mixin.scss";
+@import "../tokens/titles.scss";
 
 [class*="pb_map"] {
   .pb_map-custom-button {
@@ -194,13 +195,14 @@
     }
 
     .maplibregl-popup-content {
-      background-color: $white;
+      @include pb_title_4;
+      background-color: $bg_dark;
       color: $text_dk_default;
     }
 
     .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
     .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
-      border-top-color: $white;
+      border-top-color: $bg_dark;
     }
     .map-zoom-in-button,
     .map-zoom-out-button,
