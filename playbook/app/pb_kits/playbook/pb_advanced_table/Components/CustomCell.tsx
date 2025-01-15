@@ -8,6 +8,7 @@ import { GlobalProps } from "../../utilities/globalProps"
 import Flex from "../../pb_flex/_flex"
 import FlexItem from "../../pb_flex/_flex_item"
 import Icon from "../../pb_icon/_icon"
+import Checkbox from "../../pb_checkbox/_checkbox"
 
 import AdvancedTableContext from "../Context/AdvancedTableContext"
 
@@ -17,6 +18,8 @@ interface CustomCellProps {
   row: Row<GenericObject>
   value?: string
   customRenderer?: (row: Row<GenericObject>, value: string | undefined) => React.ReactNode
+  selectedRows?: any
+  table?: any
 } 
 
 export const CustomCell = ({
@@ -25,6 +28,8 @@ export const CustomCell = ({
   row,
   value,
   customRenderer,
+  selectedRows,
+  table
 }: CustomCellProps & GlobalProps) => {
   const { setExpanded, expanded, expandedControl, inlineRowLoading } = useContext(AdvancedTableContext);
 
@@ -45,6 +50,19 @@ export const CustomCell = ({
           columnGap="xs"
           orientation="row"
       >
+        {
+          selectedRows && (
+          <Checkbox>
+            <input
+                checked={row.getIsSelected()}
+                disabled={!row.getCanSelect()}
+                // indeterminate={row.getIsSomeSelected()}
+                onChange={row.getToggleSelectedHandler()}
+                type="checkbox"
+          />
+            </Checkbox>
+          )
+        }
         {renderButton ? (
           <button
               className="gray-icon expand-toggle-icon"

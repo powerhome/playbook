@@ -12,6 +12,7 @@ import {
   Row,
   useReactTable,
   Getter,
+  RowSelectionState
 } from "@tanstack/react-table"
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
@@ -47,6 +48,7 @@ type AdvancedTableProps = {
   pagination?: boolean,
   paginationProps?: GenericObject
   responsive?: "scroll" | "none",
+  selectedRows?: any,
   sortControl?: GenericObject
   tableData: GenericObject[]
   tableOptions?: GenericObject
@@ -74,6 +76,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     pagination = false,
     paginationProps,
     responsive = "scroll",
+    selectedRows,
     sortControl,
     tableData,
     tableOptions,
@@ -96,6 +99,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
   const columnHelper = createColumnHelper()
 
+  //Row Selection
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
+
   //Create cells for columns, with customization for first column
   const createCellFunction = (cellAccessors: string[], customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element, index?: number) => {
     const columnCells = ({
@@ -116,6 +122,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                     getValue={getValue}
                     onRowToggleClick={onRowToggleClick}
                     row={row}
+                    selectedRows={selectedRows}
                 />
           )
         }
@@ -128,6 +135,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                 customRenderer={customRenderer}
                 onRowToggleClick={onRowToggleClick}
                 row={row} 
+                selectedRows={selectedRows}
                 value={accessorValue} 
             />
           ) : (
@@ -189,9 +197,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     },
   ]
 
-  const expandAndSortState = () => {
-    if (sortControl) {
+  const customState = () => {
+    if (sortControl && selectedRows) {
+      return { state: { expanded, sorting, rowSelection } }
+    } else if (sortControl) {
       return { state: { expanded, sorting } }
+    } else if (selectedRows) {
+      return { state: { expanded, rowSelection } }
     } else {
       return { state: { expanded } }
     }
@@ -219,7 +231,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     getSortedRowModel: getSortedRowModel(),
     enableSortingRemoval: false,
     sortDescFirst: true,
-    ...expandAndSortState(),
+    onRowSelectionChange: setRowSelection,
+    ...customState(),
     ... paginationInitializer,
     ...tableOptions,
   })
