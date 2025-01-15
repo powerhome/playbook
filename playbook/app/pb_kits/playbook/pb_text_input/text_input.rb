@@ -13,13 +13,6 @@ module Playbook
         "ssn" => '\d{3}-\d{2}-\d{4}',
       }.freeze
 
-      MASK_PLACEHOLDERS = {
-        "currency" => "$0.00",
-        "zip_code" => "12345",
-        "postal_code" => "12345-6789",
-        "ssn" => "123-45-6789",
-      }.freeze
-
       prop :autocomplete, type: Playbook::Props::Boolean,
                           default: true
       prop :disabled, type: Playbook::Props::Boolean,
@@ -80,7 +73,7 @@ module Playbook
           id: input_options.dig(:id) || id,
           name: mask.present? ? "" : name,
           pattern: validation_pattern || mask_pattern,
-          placeholder: placeholder || mask_placeholder,
+          placeholder: placeholder,
           required: required,
           type: type,
           value: value,
@@ -121,12 +114,6 @@ module Playbook
         return nil unless mask
 
         MASK_PATTERNS[mask]
-      end
-
-      def mask_placeholder
-        return nil unless mask
-
-        MASK_PLACEHOLDERS[mask]
       end
     end
   end

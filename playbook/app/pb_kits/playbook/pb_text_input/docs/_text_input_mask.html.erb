@@ -8,13 +8,15 @@
     label: "Currency",
     mask: "currency",
     margin_bottom: "md",
-    name: "currency_name"
+    name: "currency_name",
+    placeholder:"$0.00"
   }) %>
 
   <%= pb_rails("text_input", props: {
     label: "ZIP Code",
     mask: "zip_code",
     margin_bottom: "md",
+    placeholder: "12345"
   }) %>
 
   <%= pb_rails("text_input", props: {
@@ -28,6 +30,7 @@
     label: "Social Security Number",
     mask: "ssn",
     margin_bottom: "md",
+    placeholder: "123-45-6789"
   }) %>
 
   <%= pb_rails("title" , props: {
@@ -40,7 +43,8 @@
     mask: "currency",
     margin_bottom: "md",
     name: "currency_name",
-    id: "example-currency"
+    id: "example-currency",
+    placeholder: "$0.00",
   }) %>
 
 <style>
