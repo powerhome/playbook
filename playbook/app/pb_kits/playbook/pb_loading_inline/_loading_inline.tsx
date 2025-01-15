@@ -45,7 +45,10 @@ const LoadingInline = (props: LoadingInlineProps) => {
         className={classes}
         id={id}
     >
-      <Body color="light">
+      <Body
+          color="light"
+          dark
+      >
         <Icon
             aria={{ label: 'loading icon' }}
             fixedWidth
