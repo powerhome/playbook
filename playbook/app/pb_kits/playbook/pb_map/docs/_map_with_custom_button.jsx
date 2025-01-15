@@ -25,7 +25,7 @@ const MapWithCustomButton = (props) => {
         new maplibregl.Marker({
           color: mapTheme.marker,
         }).setLngLat(defaultPosition)
-        .setPopup(new maplibregl.Popup({closeButton: false}).setHTML(`<h4>Hello World!</h4>`)) // add popup
+        .setPopup(new maplibregl.Popup({closeButton: false}).setHTML('Hello World!')) // add popup
         .addTo(map);
 
         // disable map zoom when using scroll

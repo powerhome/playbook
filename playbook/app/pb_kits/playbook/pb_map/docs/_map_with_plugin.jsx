@@ -25,7 +25,7 @@ const MapWithPlugin = (props) => {
         new maplibregl.Marker({
           color: mapTheme.marker,
         }).setLngLat(defaultPosition)
-        .setPopup(new maplibregl.Popup({className: 'map_popup', closeButton: false}).setHTML(`<h4>Hello World!</h4>`)) // add popup
+        .setPopup(new maplibregl.Popup({className: 'map_popup', closeButton: false}).setHTML('Hello World!')) // add popup
         .addTo(map);
 
         //add maplibre default zoom controls
