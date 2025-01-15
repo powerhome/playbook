@@ -201,11 +201,6 @@
       background-color: $hover_dark;
     }
   }
-  .pb_select_kit_label {
-    > div:first-child{
-      color: $text_dk_light;
-    }
-  }
   option {
     color: $text_dk_default;
   }
@@ -234,7 +229,7 @@
     &:hover {
       select {
         color: $white !important;
-        background: rgba(196, 221, 245, 0.1);
+        background: $focus_input_dark;
       }
       svg {
         color: $primary !important;

@@ -5,7 +5,7 @@
   **combined_html_options) do %>
   <% if object.label %>
     <label class="pb_select_kit_label" for="<%= object.name %>">
-      <%= pb_rails("caption", props: { text: object.label }) %>
+      <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) %>
     </label>
   <% end %>
   <label class="<%= object.select_wrapper_class %>" for="<%= object.name %>">
