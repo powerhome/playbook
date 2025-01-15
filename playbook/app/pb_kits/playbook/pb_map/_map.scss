@@ -160,6 +160,7 @@
   }
 
   .maplibregl-popup-content {
+    @include pb_title_4;
     padding: $space_sm;
     background-color: $card_light;
     box-shadow: $shadow_deeper;
