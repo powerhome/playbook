@@ -68,7 +68,7 @@ const TableWithBackgroundKit = (props) => {
                 tag='col'
             />
             <Background
-                backgroundColor="card_light"
+                backgroundColor="success_subtle"
                 tag='col'
             />
             <Background
@@ -77,7 +77,7 @@ const TableWithBackgroundKit = (props) => {
             />
           </colgroup>
           <Background
-              backgroundColor="card_light"
+              backgroundColor="warning_subtle"
               tag='thead'
           >
             <tr>
