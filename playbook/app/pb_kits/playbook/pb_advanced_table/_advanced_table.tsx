@@ -234,8 +234,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     enableSortingRemoval: false,
     sortDescFirst: true,
     onRowSelectionChange: setRowSelection,
+    getRowId: selectableRows ? row => row.id : undefined,
     ...customState(),
-    ... paginationInitializer,
+    ...paginationInitializer,
     ...tableOptions,
   })
 
@@ -305,6 +306,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             sortControl,
             table,
             toggleExpansionIcon,
+            selectableRows
           }}
       >
         <>

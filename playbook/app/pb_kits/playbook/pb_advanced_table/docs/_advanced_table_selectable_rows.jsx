@@ -1,6 +1,6 @@
 import React from "react"
 import { AdvancedTable } from "playbook-ui"
-import MOCK_DATA from "./advanced_table_mock_data.json"
+import MOCK_DATA from "./advanced_table_mock_data_with_id.json"
 
 const AdvancedTableSelectableRows = (props) => {
   const columnDefinitions = [

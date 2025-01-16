@@ -1,12 +1,13 @@
 import React, { useContext } from "react"
 import classnames from "classnames"
-import { flexRender, Header } from "@tanstack/react-table"
+import { flexRender, Header, Table } from "@tanstack/react-table"
 
 import { GenericObject } from "../../types"
 
 import { GlobalProps } from "../../utilities/globalProps"
 
 import Flex from "../../pb_flex/_flex"
+import Checkbox from "../../pb_checkbox/_checkbox"
 
 import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
@@ -24,6 +25,7 @@ type TableHeaderCellProps = {
   isPinnedLeft?: boolean
   loading?: boolean
   sortIcon?: string | string[]
+  table?: Table<GenericObject>
 } & GlobalProps
 
 export const TableHeaderCell = ({
@@ -35,8 +37,9 @@ export const TableHeaderCell = ({
   isPinnedLeft = false,
   loading,
   sortIcon,
+  table
 }: TableHeaderCellProps) => {
-  const { sortControl, responsive } = useContext(AdvancedTableContext)
+  const { sortControl, responsive, selectableRows } = useContext(AdvancedTableContext)
 
   const toggleSortButton = (event: React.SyntheticEvent) => {
     if (sortControl) {
@@ -104,6 +107,16 @@ const justifyHeader = isLeafColumn ? "end" : "center"
             alignItems="center"
             justify={header?.index === 0 && enableSorting ? "between" : header?.index === 0 && !enableSorting ? "start" : justifyHeader}
         >
+          {
+            selectableRows && header?.index === 0 && (
+              <Checkbox
+                  checked={table.getIsAllRowsSelected()}
+                  indeterminate={table.getIsSomeRowsSelected()}
+                  name={table.id}
+                  onChange={table.getToggleAllRowsSelectedHandler()}
+              />
+            )
+          }
           {isToggleExpansionEnabled && (
               <ToggleIconButton onClick={handleExpandOrCollapse} />
             )}

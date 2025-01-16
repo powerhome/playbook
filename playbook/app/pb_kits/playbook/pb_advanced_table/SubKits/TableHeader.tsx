@@ -65,6 +65,7 @@ export const TableHeader = ({
                     key={`${header.id}-header`}
                     loading={loading}
                     sortIcon={sortIcon}
+                    table={table}
                 />
               )
             })}
