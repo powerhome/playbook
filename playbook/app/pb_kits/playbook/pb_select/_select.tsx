@@ -127,7 +127,10 @@ const Select = ({
             className="pb_select_kit_label"
             htmlFor={name}
         >
-          <Caption text={label} />
+          <Caption 
+              dark
+              text={label} 
+          />
         </label>
       }
       <label
