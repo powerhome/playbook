@@ -21,6 +21,7 @@ import * as CircleChart from 'kits/pb_circle_chart/docs'
 import * as CircleIconButton from 'kits/pb_circle_icon_button/docs'
 import * as Collapsible from 'kits/pb_collapsible/docs'
 import * as Contact from 'kits/pb_contact/docs'
+import * as CopyButton from 'pb_copy_button/docs'
 import * as Currency from 'kits/pb_currency/docs'
 import * as DashboardValue from 'kits/pb_dashboard_value/docs'
 import * as Date from 'kits/pb_date/docs'
@@ -131,6 +132,7 @@ WebpackerReact.registerComponents({
   ...CircleIconButton,
   ...Collapsible,
   ...Contact,
+  ...CopyButton,
   ...Currency,
   ...DashboardValue,
   ...Date,
