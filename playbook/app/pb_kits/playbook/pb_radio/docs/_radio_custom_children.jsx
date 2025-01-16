@@ -55,8 +55,8 @@ const RadioChildren = (props) => {
           {...props}
       >
         <Title
-            dark
             text="Custom Typography"
+            {...props}
         />
       </Radio>
     </div>
