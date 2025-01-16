@@ -1,5 +1,5 @@
 <% if object.enable_drag %>
-  <%= pb_rails("draggable", props: {initial_items: items}) do %>
+  <%= pb_rails("draggable", props: {initial_items: object.items}) do %>
     <%= pb_rails("draggable/draggable_container") do %>
       <%= content_tag(:div, class: object.list_classname) do %>
         <%= content_tag(:"#{object.ordered_class}",
