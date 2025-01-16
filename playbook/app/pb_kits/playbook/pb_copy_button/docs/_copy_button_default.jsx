@@ -1,5 +1,5 @@
 import React from 'react'
-import { CopyButton } from '../../'
+import { CopyButton } from 'playbook-ui'
 
 const CopyButtonDefault = (props) => (
   <div>

@@ -20,7 +20,7 @@ export { default as CircleChart } from '../pb_kits/playbook/pb_circle_chart/_cir
 export { default as CircleIconButton } from '../pb_kits/playbook/pb_circle_icon_button/_circle_icon_button'
 export { default as Collapsible } from '../pb_kits/playbook/pb_collapsible/_collapsible'
 export { default as Contact } from '../pb_kits/playbook/pb_contact/_contact'
-export { default as CopyButton} from './pb_copy_button/_copy_button'
+export { default as CopyButton} from '../pb_kits/playbook/pb_copy_button/_copy_button'
 export { default as Currency } from '../pb_kits/playbook/pb_currency/_currency'
 export { default as DashboardValue } from '../pb_kits/playbook/pb_dashboard_value/_dashboard_value'
 export { default as Date } from '../pb_kits/playbook/pb_date/_date'
