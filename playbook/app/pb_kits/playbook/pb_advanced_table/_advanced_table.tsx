@@ -54,6 +54,7 @@ type AdvancedTableProps = {
   tableOptions?: GenericObject
   tableProps?: GenericObject
   toggleExpansionIcon?: string | string[]
+  onRowSelectionChange?: (arg: RowSelectionState) => void
 } & GlobalProps
 
 const AdvancedTable = (props: AdvancedTableProps) => {
@@ -82,6 +83,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     tableOptions,
     tableProps,
     toggleExpansionIcon = "arrows-from-line",
+    onRowSelectionChange,
   } = props
 
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(
@@ -238,6 +240,12 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   })
 
   const tableRows = table.getRowModel()
+
+  useEffect(() => {
+    if (onRowSelectionChange) {
+      onRowSelectionChange(table.getState().rowSelection)
+    }
+  } , [table.getState().rowSelection, onRowSelectionChange])
 
   // Set table row count for loading state
   const updateLoadingStateRowCount = useCallback(() => {

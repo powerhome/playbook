@@ -19,7 +19,6 @@ interface CustomCellProps {
   value?: string
   customRenderer?: (row: Row<GenericObject>, value: string | undefined) => React.ReactNode
   selectableRows?: boolean
-  table?: any
 } 
 
 export const CustomCell = ({
@@ -29,7 +28,6 @@ export const CustomCell = ({
   value,
   customRenderer,
   selectableRows,
-  table
 }: CustomCellProps & GlobalProps) => {
   const { setExpanded, expanded, expandedControl, inlineRowLoading } = useContext(AdvancedTableContext);
 
