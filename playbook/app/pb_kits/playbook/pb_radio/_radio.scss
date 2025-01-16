@@ -81,7 +81,7 @@
       }
       &:checked {
         & ~ .pb_radio_button {
-          border: 6px solid $primary;
+          border: 6px solid $active_dark;
         }
       }
 
