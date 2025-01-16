@@ -18,7 +18,7 @@ interface CustomCellProps {
   row: Row<GenericObject>
   value?: string
   customRenderer?: (row: Row<GenericObject>, value: string | undefined) => React.ReactNode
-  selectedRows?: any
+  selectableRows?: boolean
   table?: any
 } 
 
@@ -28,7 +28,7 @@ export const CustomCell = ({
   row,
   value,
   customRenderer,
-  selectedRows,
+  selectableRows,
   table
 }: CustomCellProps & GlobalProps) => {
   const { setExpanded, expanded, expandedControl, inlineRowLoading } = useContext(AdvancedTableContext);
@@ -51,16 +51,14 @@ export const CustomCell = ({
           orientation="row"
       >
         {
-          selectedRows && (
-          <Checkbox>
-            <input
-                checked={row.getIsSelected()}
-                disabled={!row.getCanSelect()}
-                // indeterminate={row.getIsSomeSelected()}
-                onChange={row.getToggleSelectedHandler()}
-                type="checkbox"
+          selectableRows && (
+          <Checkbox
+              checked={row.getIsSelected()}
+              disabled={!row.getCanSelect()}
+              indeterminate={row.getIsSomeSelected()}
+              name={row.id}
+              onChange={row.getToggleSelectedHandler()}
           />
-            </Checkbox>
           )
         }
         {renderButton ? (

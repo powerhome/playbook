@@ -48,7 +48,7 @@ type AdvancedTableProps = {
   pagination?: boolean,
   paginationProps?: GenericObject
   responsive?: "scroll" | "none",
-  selectedRows?: any,
+  selectableRows?: boolean,
   sortControl?: GenericObject
   tableData: GenericObject[]
   tableOptions?: GenericObject
@@ -76,7 +76,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     pagination = false,
     paginationProps,
     responsive = "scroll",
-    selectedRows,
+    selectableRows,
     sortControl,
     tableData,
     tableOptions,
@@ -122,7 +122,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                     getValue={getValue}
                     onRowToggleClick={onRowToggleClick}
                     row={row}
-                    selectedRows={selectedRows}
+                    selectableRows={selectableRows}
                 />
           )
         }
@@ -135,7 +135,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                 customRenderer={customRenderer}
                 onRowToggleClick={onRowToggleClick}
                 row={row} 
-                selectedRows={selectedRows}
+                selectableRows={selectableRows}
                 value={accessorValue} 
             />
           ) : (
@@ -198,11 +198,11 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   ]
 
   const customState = () => {
-    if (sortControl && selectedRows) {
+    if (sortControl && selectableRows) {
       return { state: { expanded, sorting, rowSelection } }
     } else if (sortControl) {
       return { state: { expanded, sorting } }
-    } else if (selectedRows) {
+    } else if (selectableRows) {
       return { state: { expanded, rowSelection } }
     } else {
       return { state: { expanded } }

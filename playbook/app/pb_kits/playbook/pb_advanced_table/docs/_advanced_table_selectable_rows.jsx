@@ -44,7 +44,7 @@ const AdvancedTableSelectableRows = (props) => {
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           enableToggleExpansion="all"
-          selectedRows
+          selectableRows
           tableData={MOCK_DATA}
           {...props}
       >
