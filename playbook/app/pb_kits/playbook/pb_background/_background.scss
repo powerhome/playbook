@@ -29,6 +29,17 @@ $background_colors: map-merge($additional_colors, $merge_kits7);
     }
   };
 
+  &.highlight {
+    background: $info_subtle;
+  }
+
+  &.no-highlight {
+    &.dark {
+      background: $card_dark;
+    }
+    background: $card_light;
+  }
+
   &.fade {
     opacity: 0;
     &.lazyloaded {
