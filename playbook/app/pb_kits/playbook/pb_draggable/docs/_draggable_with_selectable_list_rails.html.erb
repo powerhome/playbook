@@ -1,0 +1,38 @@
+<%= pb_rails("selectable_list",
+        props: {
+          enable_drag: true,
+          variant: "radio",
+          items: [
+            { drag_id: "41",
+              text: "Task 1",
+              input_options: {
+                value: "1",
+                name: "radio-name",
+              }
+            },
+            { drag_id: "42",
+              text: "Task 2",
+              checked: true,
+              input_options: {
+                value: "2",
+                name: "radio-name",
+              }
+            },
+            { drag_id: "43",
+              text: "Task 3",
+              input_options: {
+                value: "3",
+                name: "radio-name",
+              }
+            },
+            { drag_id: "44",
+              text: "Task 4",
+              input_options: {
+                value: "4",
+                name: "radio-name",
+              }
+            }
+          ]
+        }
+    )
+%>

@@ -40,6 +40,7 @@ Gem::Specification.new do |s|
   s.add_dependency "view_component", "2.83.0"
   s.add_dependency "webpacker-react", "~> 0.3.2"
 
+  s.add_development_dependency "brakeman", "7.0.0"
   s.add_development_dependency "byebug", ">= 11.0.0"
   s.add_development_dependency "github_changelog_generator", "1.15.2"
   s.add_development_dependency "rails", ">= 5.2.4.5"
