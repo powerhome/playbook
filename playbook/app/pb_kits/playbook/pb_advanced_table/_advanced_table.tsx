@@ -242,6 +242,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
   const tableRows = table.getRowModel()
 
+  const hasAnySubRows = tableRows.rows.some(row => row.subRows && row.subRows.length > 0);
+
   useEffect(() => {
     if (onRowSelectionChange) {
       onRowSelectionChange(table.getState().rowSelection)
@@ -306,7 +308,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             sortControl,
             table,
             toggleExpansionIcon,
-            selectableRows
+            selectableRows,
+            hasAnySubRows
           }}
       >
         <>

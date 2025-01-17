@@ -29,7 +29,7 @@ export const CustomCell = ({
   customRenderer,
   selectableRows,
 }: CustomCellProps & GlobalProps) => {
-  const { setExpanded, expanded, expandedControl, inlineRowLoading } = useContext(AdvancedTableContext);
+  const { setExpanded, expanded, expandedControl, inlineRowLoading, hasAnySubRows } = useContext(AdvancedTableContext);
 
   const handleOnExpand = (row: Row<GenericObject>) => {
     onRowToggleClick && onRowToggleClick(row);
@@ -44,12 +44,14 @@ export const CustomCell = ({
 
   return (
     <div style={{ paddingLeft: `${row.depth * 1.25}em` }}>
-      <Flex alignItems="center" 
+      <Flex 
+          alignItems="center" 
           columnGap="xs"
+          justifyContent={!hasAnySubRows ? "end" : ""}
           orientation="row"
       >
         {
-          selectableRows && (
+          selectableRows && hasAnySubRows && (
           <Checkbox
               checked={row.getIsSelected()}
               disabled={!row.getCanSelect()}

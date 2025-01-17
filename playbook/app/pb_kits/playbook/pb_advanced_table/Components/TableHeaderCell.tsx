@@ -39,7 +39,8 @@ export const TableHeaderCell = ({
   sortIcon,
   table
 }: TableHeaderCellProps) => {
-  const { sortControl, responsive, selectableRows } = useContext(AdvancedTableContext)
+  const { sortControl, responsive, selectableRows, hasAnySubRows } =
+    useContext(AdvancedTableContext);
 
   const toggleSortButton = (event: React.SyntheticEvent) => {
     if (sortControl) {
@@ -85,8 +86,14 @@ const isToggleExpansionEnabled =
   (enableToggleExpansion === "all" || "header") &&
   enableToggleExpansion !== "none"
 
-const justifyHeader = isLeafColumn ? "end" : "center"
+  let justifyHeader;
 
+  if (header?.index === 0 && hasAnySubRows) {
+    justifyHeader = enableSorting ? "between" : "start";
+  } else {
+    justifyHeader = isLeafColumn ? "end" : "center";
+  }
+  
   return (
     <th
         align="right"
@@ -105,19 +112,18 @@ const justifyHeader = isLeafColumn ? "end" : "center"
       ) : (
         <Flex
             alignItems="center"
-            justify={header?.index === 0 && enableSorting ? "between" : header?.index === 0 && !enableSorting ? "start" : justifyHeader}
+            justify={justifyHeader}
         >
           {
-            selectableRows && header?.index === 0 && (
+            selectableRows && header?.index === 0 && hasAnySubRows && (
               <Checkbox
-                  checked={table.getIsAllRowsSelected()}
-                  indeterminate={table.getIsSomeRowsSelected()}
-                  name={table.id}
-                  onChange={table.getToggleAllRowsSelectedHandler()}
+                  checked={table?.getIsAllRowsSelected()}
+                  indeterminate={table?.getIsSomeRowsSelected()}
+                  onChange={table?.getToggleAllRowsSelectedHandler()}
               />
             )
           }
-          {isToggleExpansionEnabled && (
+          {isToggleExpansionEnabled && hasAnySubRows && (
               <ToggleIconButton onClick={handleExpandOrCollapse} />
             )}
 

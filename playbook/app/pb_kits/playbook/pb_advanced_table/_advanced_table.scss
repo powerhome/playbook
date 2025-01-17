@@ -116,6 +116,7 @@
 
   // Vertical separator
   .table-header-cells:first-child,
+  .table-header-cells-custom:first-child,
   td:first-child,
   .pb_table_td:first-child {
     box-shadow: 1px 0px 0px 0px $border_light !important;
