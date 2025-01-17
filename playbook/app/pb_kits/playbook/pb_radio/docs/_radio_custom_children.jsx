@@ -29,6 +29,7 @@ const RadioChildren = (props) => {
             marginBottom="none"
             minWidth="xs"
             options={options}
+            {...props}
         />
       </Radio>
       <Radio
@@ -44,6 +45,7 @@ const RadioChildren = (props) => {
             marginBottom="none"
             minWidth="xs"
             options={options}
+            {...props}
         />
       </Radio>
       <Radio
