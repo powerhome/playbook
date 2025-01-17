@@ -68,7 +68,7 @@ export const TableBody = ({
           const numberOfColumns = table.getAllFlatColumns().length
           const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && (row.depth < columnDefinitions[0].cellAccessors?.length)
           const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren))
-
+          const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white"
           return (
             <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
               {isFirstChildofSubrow && subRowHeaders && (
@@ -82,7 +82,7 @@ export const TableBody = ({
                 />
               )}
             <tr
-                className={`${rowBackground ? "bg-silver" : "bg-white"} ${
+                className={`${rowColor} ${
                   row.depth > 0 ? `depth-sub-row-${row.depth}` : ""
               }`}
                 id={`${row.index}-${row.id}-${row.depth}-row`}
