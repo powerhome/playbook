@@ -29,6 +29,13 @@ $background_colors: map-merge($additional_colors, $merge_kits7);
     }
   };
 
+  &.pb_table_doc_background_header{
+    &.dark {
+      background: $card_dark !important;
+    }
+    background: $card_light !important;
+  }
+
   &.highlight {
     background: $info_subtle;
   }

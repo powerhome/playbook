@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Table from '../_table'
 import Background from "../../pb_background/_background"
@@ -68,7 +69,7 @@ const TableWithBackgroundKit = (props) => {
                 tag='col'
             />
             <Background
-                backgroundColor="success_subtle"
+                backgroundColor={props.dark ? "card_dark" : "card_light"}
                 tag='col'
             />
             <Background
@@ -77,7 +78,7 @@ const TableWithBackgroundKit = (props) => {
             />
           </colgroup>
           <Background
-              backgroundColor="warning_subtle"
+              backgroundColor={props.dark ? "card_dark" : "card_light"}
               tag='thead'
           >
             <tr>
@@ -122,6 +123,10 @@ const TableWithBackgroundKit = (props) => {
         </div>
     </div>
   )
+}
+
+TableWithBackgroundKit.propTypes = {
+  dark: PropTypes.bool,
 }
 
 export default TableWithBackgroundKit

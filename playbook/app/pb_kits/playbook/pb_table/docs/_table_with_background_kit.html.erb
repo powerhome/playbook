@@ -39,19 +39,16 @@
     </tr>
   </tbody>
 <% end %>
-
 <%= pb_rails("table", props: { size: "sm", margin_bottom: "lg" }) do %>
   <colgroup>
     <%= pb_rails("background", props: { background_color: "error_subtle", tag: "col" }) %>
-    <%= pb_rails("background", props: { background_color: "card_dark", tag: "col" }) %>
+    <%= pb_rails("background", props: { background_color: "success_subtle", tag: "col" }) %>
     <%= pb_rails("background", props: { background_color: "warning_subtle", tag: "col" }) %>
   </colgroup>
-  <%= pb_rails("background", props: { background_color: "card_dark", tag: "thead" }) do %>
-    <tr>
-      <th>Column 1</th>
-      <th>Column 2</th>
-      <th>Column 3</th>
-    </tr>
+  <%= pb_rails("background", props: { classname: "pb_table_doc_background_header", tag: "thead" }) do %>
+    <th>Column 1</th>
+    <th>Column 2</th>
+    <th>Column 3</th>
   <% end %>
   <tbody>
     <tr>
