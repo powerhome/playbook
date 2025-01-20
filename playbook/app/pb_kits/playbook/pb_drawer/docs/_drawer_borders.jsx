@@ -68,7 +68,7 @@ const DrawerBorders = () => {
           onClose={toggleBLeftDrawer}
           opened={openedBLeftDrawer}
           overlay={false}
-          placement="right"
+          placement="left"
           size="lg"
       >
         This is a Drawer with border left
@@ -80,7 +80,7 @@ const DrawerBorders = () => {
           onClose={toggleBFullDrawer}
           opened={openedBFullDrawer}
           overlay={false}
-          placement="right"
+          placement="left"
           size="lg"
       >
         This is a Drawer with border full
@@ -91,24 +91,10 @@ const DrawerBorders = () => {
           onClose={toggleBDefaultDrawer}
           opened={openedBDefaultDrawer}
           overlay={false}
-          placement="right"
+          placement="left"
           size="lg"
       >   
         This is a Default Drawer
-      </Drawer>
-      <Drawer
-          behavior="float"
-          borderRadius="rounded"
-          fullHeight
-          onClose={toggleBRoundedDrawer}
-          opened={openedBRoundedDrawer}
-          overlay={false}
-          placement="right"
-          size="lg"
-      >
-      <div style={{ paddingTop: '100px', paddingLeft: '12px' }}>
-        This is a Rounded Drawer
-      </div>
       </Drawer>
     </>
   );

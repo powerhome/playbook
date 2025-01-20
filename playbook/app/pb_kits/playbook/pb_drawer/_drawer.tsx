@@ -11,7 +11,7 @@ import { globalProps, globalInlineProps } from "../utilities/globalProps"
 import { DrawerContext } from "./context"
 import { useBreakpoint } from "./hooks/useBreakpoint"
 import { useDrawerAnimation } from "./hooks/useDrawerAnimation"
-import { showElement, hideElement } from "../pb_collapsible/_helper_functions"
+// import { showElement, hideElement } from "../pb_collapsible/_helper_functions"
 
 type DrawerContextType = {
   onClose: () => void
@@ -75,7 +75,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
   const modalIsOpened =
     (isOpenBreakpointOpen && !isUserClosed) || menuButtonOpened || opened
 
-  const { animationState, isVisible } = useDrawerAnimation(modalIsOpened)  
+  // const { animationState, isVisible } = useDrawerAnimation(modalIsOpened)  
 
   // Replace useDrawerAnimation with our new animation logic
   useEffect(() => {
@@ -145,9 +145,9 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
     "pb_drawer",
     buildCss("pb_drawer", size as string, placement as string),
     {
-      drawer_border_full: border === "full",
-      drawer_border_right: border === "right",
-      drawer_border_left: border === "left",
+      "drawer_border-full": border === "full",
+      "drawer_border-right": border === "right",
+      "drawer_border-left": border === "left",
       pb_drawer_within_element: withinElement,
       pb_drawer_collapsing: shouldRender && !isAnimating,
       pb_drawer_after_open: isAnimating,

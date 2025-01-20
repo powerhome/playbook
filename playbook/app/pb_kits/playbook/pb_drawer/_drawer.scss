@@ -36,23 +36,23 @@ $z-index: $z_7;
   }
 }
 
-// @keyframes modalFadeInRight {
-//   from {
-//     transform: translateX(100%);
-//   }
-//   to {
-//     transform: translateX(0);
-//   }
-// }
+@keyframes modalFadeInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 
-// @keyframes modalFadeOutRight {
-//   from {
-//     transform: translateX(0);
-//   }
-//   to {
-//     transform: translateX(100%);
-//   }
-// }
+@keyframes modalFadeOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
 
 @keyframes modalFadeIn {
   from {
@@ -228,14 +228,15 @@ $z-index: $z_7;
     transform: translateX(-100%);
   }
 
-  // &[class*="_right"] {
-  //   animation-name: modalFadeInRight;
-  // }
+  &[class*="_right"] {
+    animation-name: modalFadeInRight;
+  }
 
-  // &[class*="_right"][class*="_before_close"] {
-  //   animation-name: modalFadeOutRight;
-  //   animation-duration: $animation-duration;
-  // }
+  &[class*="_right"][class*="_before_close"] {
+    animation-name: modalFadeOutRight;
+    animation-duration: $animation-duration;
+    transform: translateX(100%);
+  }
 
   &[class*="_bottom"] {
     animation: none;
@@ -291,16 +292,16 @@ $z-index: $z_7;
     overflow: hidden;
   }
 
-  &.drawer_border_full {
+  &.drawer_border-full {
     box-shadow: none;
     border: 2px solid #f3f7fb;
   }
 
-  &.drawer_border_right {
+  &.drawer_border-right {
     border-right: 2px solid #f3f7fb;
   }
 
-  &.drawer_border_left {
+  &.drawer_border-left {
     border-left: 2px solid #f3f7fb;
   }
 
@@ -410,8 +411,9 @@ $z-index: $z_7;
     align-items: center;
     justify-content: center;
     z-index: $z-index;
-    opacity: 0;
+    opacity: 1;
     animation: overlayFade $animation-duration ease-in-out;
+    pointer-events: none;
 
     &_after_open {
       opacity: 1;
