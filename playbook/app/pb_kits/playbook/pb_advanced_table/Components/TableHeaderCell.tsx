@@ -42,6 +42,8 @@ export const TableHeaderCell = ({
   const { sortControl, responsive, selectableRows, hasAnySubRows, showActionsBar } =
     useContext(AdvancedTableContext);
 
+  type justifyTypes = "none" | "center" | "start" | "end" | "between" | "around" | "evenly"
+  
   const toggleSortButton = (event: React.SyntheticEvent) => {
     if (sortControl) {
       const sortIsDesc = header?.column.getIsSorted() === "desc"
@@ -87,7 +89,7 @@ const isToggleExpansionEnabled =
   (enableToggleExpansion === "all" || "header") &&
   enableToggleExpansion !== "none"
 
-  let justifyHeader;
+  let justifyHeader:justifyTypes;
 
   if (header?.index === 0 && hasAnySubRows) {
     justifyHeader = enableSorting ? "between" : "start";
