@@ -1,4 +1,4 @@
-# 6.6.2 [Insert Title]
+# 6.6.2: Adjustments and Fixes! 🚀
 
 ### Bug Fixes
 - **[PBIOS-662]** Modify PBReactionButton to Use Binding by [@RachelRadford21](https://github.com/RachelRadford21) in [#485](https://github.com/Power/Playbook/pull/485)
@@ -8,11 +8,9 @@
 
 [Full Changelog](https://github.com/Power/Playbook/compare/6.6.1...6.6.2)
 
-
-
 ---
 
-# 6.6.1 [Insert Title]
+# 6.6.1: Typeahead Adjustments! 🚀
 
 - **[PBIOS-656]** Typeahead presentation fix by [@isismsilva](https://github.com/isismsilva) in [#482](https://github.com/Power/Playbook/pull/482)
 
@@ -20,7 +18,7 @@
 
 ---
 
-# 6.6.0 [Insert Title]
+# 6.6.0: Fixing constraints! 🚀
 
 #### Bug Fixes
 - **[PBIOS-591]** Fix popover closing on scroll by [@isismsilva](https://github.com/isismsilva) in [#469](https://github.com/Power/Playbook/pull/469)
@@ -39,7 +37,7 @@
 
 ---
 
-# 6.6.0 [Insert Title]
+# 6.6.0: Enhanced Reaction Button! 🚀
 
 **Release Date**: 12/18/2024
 
