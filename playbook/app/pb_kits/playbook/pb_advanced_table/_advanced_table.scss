@@ -51,6 +51,11 @@
     th[colspan]:not([colspan="1"]) {
       border-right: 1px solid $border_light !important;
     }
+    .table-header-cells-custom {
+      [class^=pb_checkbox_kit] .pb_checkbox_label {
+        padding-left: 0px;
+      }
+    }
   }
 
   .pb_advanced_table_body {
@@ -62,6 +67,14 @@
     }
     tr .pb_table_td:last-child {
       padding-right: 8px !important;
+    }
+
+    .checkbox-cell {
+      display: flex;
+      justify-content: center;
+      [class^=pb_checkbox_kit] .pb_checkbox_label {
+        padding-left: 0px;
+      }
     }
   }
 
