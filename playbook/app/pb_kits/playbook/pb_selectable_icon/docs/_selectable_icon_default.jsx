@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SelectableIcon from '../_selectable_icon'
 
-const SelectableIconDefault = () => {
+const SelectableIconDefault = ({ dark } ) => {
   const [ checkSelected, toggleSelected ] = useState(true)
   const [ checkUnselected, toggleUnselected ] = useState(false)
   const [ checkDisabled, toggleDisabled ] = useState(false)
@@ -11,6 +11,7 @@ const SelectableIconDefault = () => {
     <div className="pb--doc-demo-row">
       <SelectableIcon
           checked={checkSelected}
+          dark={dark}
           icon="dollar-sign"
           inputId={10}
           onChange={() => toggleSelected(!checkSelected)}
@@ -19,6 +20,7 @@ const SelectableIconDefault = () => {
 
       <SelectableIcon
           checked={checkUnselected}
+          dark={dark}
           icon="euro-sign"
           inputId={11}
           onChange={() => toggleUnselected(!checkUnselected)}
@@ -27,6 +29,7 @@ const SelectableIconDefault = () => {
 
       <SelectableIcon
           checked={checkDisabled}
+          dark={dark}
           disabled
           icon="yen-sign"
           inputId={12}
