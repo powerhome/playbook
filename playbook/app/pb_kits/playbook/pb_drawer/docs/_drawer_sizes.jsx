@@ -49,7 +49,6 @@ const DrawerSizes = () => {
       {/* Drawers for each size */}
       <Drawer
           behavior="push"
-          fullHeight
           onClose={toggleXsDrawer}
           opened={openedXsDrawer}
           overlay
@@ -61,7 +60,6 @@ const DrawerSizes = () => {
 
       <Drawer
           behavior="push"
-          fullHeight
           onClose={toggleSmDrawer}
           opened={openedSmDrawer}
           overlay
@@ -73,7 +71,6 @@ const DrawerSizes = () => {
 
       <Drawer
           behavior="push"
-          fullHeight
           onClose={toggleMdDrawer}
           opened={openedMdDrawer}
           overlay
@@ -85,7 +82,6 @@ const DrawerSizes = () => {
 
       <Drawer
           behavior="push"
-          fullHeight
           onClose={toggleLgDrawer}
           opened={openedLgDrawer}
           overlay
@@ -97,7 +93,6 @@ const DrawerSizes = () => {
 
       <Drawer
           behavior="push"
-          fullHeight
           onClose={toggleXlDrawer}
           opened={openedXlDrawer}
           overlay

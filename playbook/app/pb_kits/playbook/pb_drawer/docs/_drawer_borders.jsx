@@ -45,7 +45,6 @@ const DrawerBorders = () => {
       <Drawer
           behavior="float"
           border="right"
-          fullHeight
           onClose={toggleBRightDrawer}
           opened={openedBRightDrawer}
           overlay={false}
@@ -57,7 +56,6 @@ const DrawerBorders = () => {
       <Drawer
           behavior="float"
           border="left"
-          fullHeight
           onClose={toggleBLeftDrawer}
           opened={openedBLeftDrawer}
           overlay={false}
@@ -69,7 +67,6 @@ const DrawerBorders = () => {
       <Drawer
           behavior="float"
           border="full"
-          fullHeight
           onClose={toggleBFullDrawer}
           opened={openedBFullDrawer}
           overlay={false}
@@ -80,7 +77,6 @@ const DrawerBorders = () => {
       </Drawer>
       <Drawer
           behavior="float"
-          fullHeight
           onClose={toggleBDefaultDrawer}
           opened={openedBDefaultDrawer}
           overlay={false}

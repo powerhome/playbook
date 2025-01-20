@@ -23,8 +23,7 @@ const DrawerBehavior = () => {
       </Flex>
       <Flex>
         <Drawer
-            behavior={"push"}
-            fullHeight
+            behavior={"push"}      
             onClose={toggleDrawerOpen}
             opened={drawerOpen}
             overlay

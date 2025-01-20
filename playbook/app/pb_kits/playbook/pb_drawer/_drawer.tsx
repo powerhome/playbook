@@ -27,7 +27,6 @@ type DrawerProps = {
   data?: { [key: string]: string }
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
   id?: string
-  fullHeight?: boolean
   triggerId?: string
   onClose?: () => void
   opened: boolean
@@ -50,7 +49,6 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
     id,
     size = "md",
     children,
-    fullHeight = true,
     triggerId,
     opened,
     onClose,
@@ -189,7 +187,6 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
 
   const overlayClasses = classnames(
     `pb_drawer${overlay ? "_overlay" : "_no_overlay"}`,
-    fullHeight && `full_height_${placement}`,
     !overlay && "no-background",
     {
       pb_drawer_overlay_after_open: isAnimating,

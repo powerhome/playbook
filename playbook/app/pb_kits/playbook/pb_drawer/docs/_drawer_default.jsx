@@ -32,7 +32,6 @@ const DrawerDefault = () => {
       <Flex>
         {/* Left Drawer */}
         <Drawer
-            fullHeight
             onClose={toggleDrawerLeftOpen}
             opened={drawerLeftOpen}
             overlay
@@ -44,7 +43,6 @@ const DrawerDefault = () => {
 
         {/* Right Drawer */}
         <Drawer
-            fullHeight
             onClose={toggleDrawerRightOpen}
             opened={drawerRightOpen}
             overlay
