@@ -34,7 +34,7 @@ const CopyButton = (props: CopyButtonProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_copy_button'), globalProps(props), className)
+  const classes = classnames(buildCss('pb_copy_button_kit'), globalProps(props), className)
 
   const copy = () => {
     navigator.clipboard.writeText(value)

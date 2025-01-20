@@ -1,19 +1,15 @@
 import { ensureAccessible, renderKit } from '../utilities/test-utils'
 
-import { CopyButton } from '../'
-
-/* See these resources for more testing info:
-  - https://github.com/testing-library/jest-dom#usage for useage and examples
-  - https://jestjs.io/docs/en/using-matchers
-*/
+import { CopyButton } from 'playbook-ui'
 
 const props = {
   data: { testid: 'default' }
 }
 
-test('generated scaffold test - update me', () => {
+test('returns namespaced class name', () => {
   const kit = renderKit(CopyButton , props)
   expect(kit).toBeInTheDocument()
+  expect(kit).toHaveClass('pb_copy_button_kit')
 })
 
 it("should be accessible", async () => {
