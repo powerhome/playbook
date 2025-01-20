@@ -128,13 +128,13 @@ $z-index: $z_7;
   }
 }
 
-// body.PBDrawer__Body--open {
-//   transition: margin-left $animation-duration ease-in, margin-right $animation-duration ease-in;
-// }
+body.PBDrawer__Body--open {
+  transition: margin-left $animation-duration ease-in, margin-right $animation-duration ease-in;
+}
 
-// body.PBDrawer__Body--close {
-//   transition: margin-left $animation-duration ease-out, margin-right $animation-duration ease-out;
-// }
+body.PBDrawer__Body--close {
+  transition: margin-left $animation-duration ease-out, margin-right $animation-duration ease-out;
+}
 
 .pb_drawer_lg_left.pb_drawer {
   transform: translateX(-100%);

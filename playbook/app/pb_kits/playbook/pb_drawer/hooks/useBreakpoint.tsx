@@ -14,13 +14,13 @@ type BreakpointSize = keyof typeof breakpointValues
 interface UseBreakpointProps {
   openBreakpoint?: BreakpointSize
   closeBreakpoint?: BreakpointSize
-  menuButtonID?: string
+  triggerId?: string
 }
 
 export const useBreakpoint = ({ 
   openBreakpoint = 'none',
   closeBreakpoint = 'none',
-  menuButtonID 
+  triggerId 
 }: UseBreakpointProps) => {
   const [isOpenBreakpointOpen, setIsOpenBreakpointOpen] = useState(false)
   const [isUserClosed, setIsUserClosed] = useState(false)
@@ -51,8 +51,8 @@ export const useBreakpoint = ({
       }
 
       // Handle menu button visibility
-      if (menuButtonID) {
-        const menuButton = document.getElementById(menuButtonID)
+      if (triggerId) {
+        const menuButton = document.getElementById(triggerId)
         if (menuButton) {
           menuButton.style.display = isOpenBreakpointOpen ? 'none' : ''
         }
@@ -63,7 +63,7 @@ export const useBreakpoint = ({
     handleResize()
 
     return () => window.removeEventListener('resize', handleResize)
-  }, [openBreakpoint, closeBreakpoint, menuButtonID, isOpenBreakpointOpen])
+  }, [openBreakpoint, closeBreakpoint, triggerId, isOpenBreakpointOpen])
 
   return {
     isOpenBreakpointOpen,

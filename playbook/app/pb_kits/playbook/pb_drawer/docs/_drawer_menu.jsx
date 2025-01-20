@@ -22,11 +22,9 @@ const DrawerMenu = () => {
         />
       </Button>
       <Drawer
-          // behavior='push'
-          breakpoint='md'
-          menuButtonID='menuButton'
           placement='bottom'
           size='full'
+          triggerId='menuButton'
           withinElement
       >
         <Nav 

@@ -11,7 +11,7 @@ import { globalProps, globalInlineProps } from "../utilities/globalProps"
 import { DrawerContext } from "./context"
 import { useBreakpoint } from "./hooks/useBreakpoint"
 import { useDrawerAnimation } from "./hooks/useDrawerAnimation"
-// import { showElement, hideElement } from "../pb_collapsible/_helper_functions"
+
 
 type DrawerContextType = {
   onClose: () => void
@@ -28,7 +28,7 @@ type DrawerProps = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
   id?: string
   fullHeight?: boolean
-  menuButtonID?: string
+  triggerId?: string
   onClose?: () => void
   opened: boolean
   overlay: boolean
@@ -51,7 +51,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
     size = "md",
     children,
     fullHeight = true,
-    menuButtonID,
+    triggerId,
     opened,
     onClose,
     overlay = true,
@@ -68,7 +68,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
     {
       openBreakpoint: breakpoint,
       closeBreakpoint: breakpoint,
-      menuButtonID,
+      triggerId,
     }
   )
 
@@ -76,6 +76,35 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
     (isOpenBreakpointOpen && !isUserClosed) || menuButtonOpened || opened
 
   // const { animationState, isVisible } = useDrawerAnimation(modalIsOpened)  
+
+
+  useEffect(() => {
+    if (withinElement) return;
+
+    const sizeMap: Record<DrawerProps["size"], string> = {
+      xl: "365px",
+      lg: "300px",
+      md: "250px",
+      sm: "200px",
+      xs: "64px",
+    };
+    const body = document.querySelector("body");
+    if (modalIsOpened && behavior === "push" && body) {
+      if (placement === "left") {
+        body.style.cssText = `margin-left: ${sizeMap[size]} !important; margin-right: '' !important;`;
+      } else if (placement === "right") {
+        body.style.cssText = `margin-right: ${sizeMap[size]} !important; margin-left: '' !important;`;
+      }
+
+      body.classList.add("PBDrawer__Body--open");
+    } else if (body) {
+      if (body.classList.contains("PBDrawer__Body--open")) {
+        body.classList.add("PBDrawer__Body--close");
+      }
+      body.style.cssText = ""; // Clear the styles when modal is closed or behavior is not 'push'
+      body.classList.remove("PBDrawer__Body--open");
+    }
+  }, [modalIsOpened, behavior, placement, size, withinElement]);
 
   // Replace useDrawerAnimation with our new animation logic
   useEffect(() => {
@@ -115,9 +144,9 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
 
   // Handle menu button click
   useEffect(() => {
-    console.log("menuButtonID")
-    if (menuButtonID) {
-      const menuButton = document.getElementById(menuButtonID)
+    console.log("triggerId")
+    if (triggerId) {
+      const menuButton = document.getElementById(triggerId)
       if (menuButton) {
         const handleMenuButtonClick = () => {
           if (modalIsOpened) {
@@ -134,7 +163,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
         }
       }
     }
-  }, [menuButtonID, modalIsOpened])
+  }, [triggerId, modalIsOpened])
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -171,7 +200,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
   const api = {
     onClose: () => {
       console.log("onClose")
-      if (menuButtonID) {
+      if (triggerId) {
         setMenuButtonOpened(false)
       }
       setIsUserClosed(true)
