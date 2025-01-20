@@ -2,7 +2,7 @@ import React from "react"
 import { AdvancedTable } from "playbook-ui"
 import MOCK_DATA from "./advanced_table_mock_data_no_subrows.json"
 
-const AdvancedTableSelectableRowsNoSubrows = (props) => {
+const AdvancedTableSelectableRowsHeader = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -42,6 +42,7 @@ const AdvancedTableSelectableRowsNoSubrows = (props) => {
           columnDefinitions={columnDefinitions}
           onRowSelectionChange={(selectedRows) => console.log(selectedRows)}
           selectableRows
+          showActionsBar={false}
           tableData={MOCK_DATA}
           {...props}
       />
@@ -49,4 +50,4 @@ const AdvancedTableSelectableRowsNoSubrows = (props) => {
   )
 }
 
-export default AdvancedTableSelectableRowsNoSubrows
+export default AdvancedTableSelectableRowsHeader
