@@ -94,7 +94,6 @@ const Select = ({
   const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
 
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
-
   const selectBody =(() =>{
     if (children) return children
     return (
