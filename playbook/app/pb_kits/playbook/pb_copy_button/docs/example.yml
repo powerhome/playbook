@@ -3,5 +3,6 @@ examples:
   
   react:
   - copy_button_default: Default
+  - copy_button_from: Copy From
   
   

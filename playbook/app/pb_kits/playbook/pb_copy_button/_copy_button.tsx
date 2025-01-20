@@ -12,6 +12,7 @@ type CopyButtonProps = {
   className?: string,
   data?: { [key: string]: string },
   id?: string,
+  from?: string,
   text?: string,
   tooltipPlacement?:  "top" | "right" | "bottom" | "left",
   tooltipText?: string,
@@ -23,6 +24,7 @@ const CopyButton = (props: CopyButtonProps) => {
     aria = {},
     className,
     data = {},
+    from = '',
     id,
     text= 'Copy',
     tooltipPlacement= 'bottom',
@@ -37,7 +39,25 @@ const CopyButton = (props: CopyButtonProps) => {
   const classes = classnames(buildCss('pb_copy_button_kit'), globalProps(props), className)
 
   const copy = () => {
-    navigator.clipboard.writeText(value)
+    if (!from && !value) {
+      return
+    }
+
+    if (value) {
+      navigator.clipboard.writeText(value)
+    } else if (from) {
+      const copyElement = document.getElementById(from);
+      let copyText = copyElement?.innerText
+
+      if (copyElement instanceof HTMLTextAreaElement || copyElement instanceof HTMLInputElement) {
+        copyText = copyElement.value;
+      }
+
+      if (copyText) {
+        navigator.clipboard.writeText(copyText)
+      }
+    }
+
     setCopied(true)
 
     setTimeout(() => {
