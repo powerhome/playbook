@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import SelectableIcon from '../_selectable_icon'
 
-const SelectableIconSingleSelect = () => {
+const SelectableIconSingleSelect = ({ dark }) => {
   const [ selectedFormat, toggleFormat ] = useState(null)
 
   return (
@@ -10,6 +10,7 @@ const SelectableIconSingleSelect = () => {
     <div className="pb--doc-demo-row">
       <SelectableIcon
           checked={selectedFormat === 'Cassette'}
+          dark={dark}
           icon="cassette-tape"
           inputId={13}
           multi={false}
@@ -21,6 +22,7 @@ const SelectableIconSingleSelect = () => {
 
       <SelectableIcon
           checked={selectedFormat === 'CD'}
+          dark={dark}
           icon="compact-disc"
           inputId={14}
           multi={false}
@@ -32,6 +34,7 @@ const SelectableIconSingleSelect = () => {
 
       <SelectableIcon
           checked={selectedFormat === 'Vinyl'}
+          dark={dark}
           icon="album-collection"
           inputId={15}
           multi={false}
