@@ -39,7 +39,7 @@ export const TableHeaderCell = ({
   sortIcon,
   table
 }: TableHeaderCellProps) => {
-  const { sortControl, responsive, selectableRows, hasAnySubRows } =
+  const { sortControl, responsive, selectableRows, hasAnySubRows, showActionsBar } =
     useContext(AdvancedTableContext);
 
   const toggleSortButton = (event: React.SyntheticEvent) => {
@@ -63,6 +63,7 @@ export const TableHeaderCell = ({
  
 const cellClassName = classnames(
   "table-header-cells",
+  `${showActionsBar && "header-cells-with-actions"}`,
   `${isChrome() ? "chrome-styles" : ""}`,
   `${enableSorting ? "table-header-cells-active" : ""}`,
   { "pinned-left": responsive === "scroll" && isPinnedLeft },

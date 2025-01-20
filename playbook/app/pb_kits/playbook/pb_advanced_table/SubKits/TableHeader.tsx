@@ -37,6 +37,7 @@ export const TableHeader = ({
     loading,
     table,
     hasAnySubRows,
+    showActionsBar,
     selectableRows,
     responsive
   } = useContext(AdvancedTableContext)
@@ -51,6 +52,7 @@ export const TableHeader = ({
 
   const customCellClassnames = classnames(
     "table-header-cells-custom",
+    `${showActionsBar && "header-cells-with-actions"}`,
     `${isChrome() ? "chrome-styles" : ""}`,
     `${responsive === "scroll" && "pinned-left"}`,
   );

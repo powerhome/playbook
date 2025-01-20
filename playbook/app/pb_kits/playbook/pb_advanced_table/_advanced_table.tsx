@@ -19,6 +19,8 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../uti
 import { globalProps, GlobalProps } from "../utilities/globalProps"
 
 import Table from "../pb_table/_table"
+import Card from "../pb_card/_card"
+import Body from "../pb_body/_body"
 
 import AdvancedTableContext from "./Context/AdvancedTableContext"
 
@@ -49,6 +51,7 @@ type AdvancedTableProps = {
   paginationProps?: GenericObject
   responsive?: "scroll" | "none",
   selectableRows?: boolean,
+  showActionsBar?: boolean,
   sortControl?: GenericObject
   tableData: GenericObject[]
   tableOptions?: GenericObject
@@ -77,6 +80,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     pagination = false,
     paginationProps,
     responsive = "scroll",
+    showActionsBar = true,
     selectableRows,
     sortControl,
     tableData,
@@ -243,6 +247,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const tableRows = table.getRowModel()
 
   const hasAnySubRows = tableRows.rows.some(row => row.subRows && row.subRows.length > 0);
+  const selectedRowsLength = Object.keys(table.getState().rowSelection).length
 
   useEffect(() => {
     if (onRowSelectionChange) {
@@ -308,6 +313,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             sortControl,
             table,
             toggleExpansionIcon,
+            showActionsBar,
             selectableRows,
             hasAnySubRows
           }}
@@ -322,6 +328,19 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                   range={paginationProps?.range ? paginationProps?.range : 5}
                   total={table.getPageCount()}
                   />
+          }
+          {
+            selectableRows && showActionsBar && (
+              <Card className="row-selection-actions-card"
+                  padding="xs"
+              >
+                <Body color="lighter"
+                    paddingLeft="xs"
+                >
+                  {selectedRowsLength} Selected
+                </Body>
+              </Card>
+            )
           }
           <Table
               className={`${loading ? "content-loading" : ""}`}

@@ -31,6 +31,12 @@
     width: 100%;
   }
 
+  .row-selection-actions-card {
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-color: transparent;
+  }
+
   .table-header-cells:first-child {
     min-width: 180px;
   }
@@ -55,6 +61,10 @@
       [class^=pb_checkbox_kit] .pb_checkbox_label {
         padding-left: 0px;
       }
+    }
+    .header-cells-with-actions {
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
     }
   }
 
