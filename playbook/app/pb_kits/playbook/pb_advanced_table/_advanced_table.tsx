@@ -21,6 +21,8 @@ import { globalProps, GlobalProps } from "../utilities/globalProps"
 import Table from "../pb_table/_table"
 import Card from "../pb_card/_card"
 import Body from "../pb_body/_body"
+import Flex from "../pb_flex/_flex"
+import FlexItem from "../pb_flex/_flex_item"
 
 import AdvancedTableContext from "./Context/AdvancedTableContext"
 
@@ -33,6 +35,7 @@ import Pagination from "../pb_pagination/_pagination"
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
+  actions?: React.ReactNode[] | React.ReactNode
   children?: React.ReactNode | React.ReactNode[]
   className?: string
   columnDefinitions: GenericObject[]
@@ -63,6 +66,7 @@ type AdvancedTableProps = {
 const AdvancedTable = (props: AdvancedTableProps) => {
   const {
     aria = {},
+    actions,
     children,
     className,
     columnDefinitions,
@@ -334,11 +338,18 @@ const AdvancedTable = (props: AdvancedTableProps) => {
               <Card className="row-selection-actions-card"
                   padding="xs"
               >
-                <Body color="lighter"
-                    paddingLeft="xs"
+                <Flex alignItems="center"
+                    justify="between"
                 >
-                  {selectedRowsLength} Selected
-                </Body>
+                    <Body color="lighter"
+                        paddingLeft="xs"
+                    >
+                      {selectedRowsLength} Selected
+                    </Body>
+                    <FlexItem>
+                    {actions}
+                    </FlexItem>
+                </Flex>
               </Card>
             )
           }

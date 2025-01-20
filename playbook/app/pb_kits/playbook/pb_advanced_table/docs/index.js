@@ -18,3 +18,4 @@ export { default as AdvancedTableSelectableRows } from './_advanced_table_select
 export { default as AdvancedTableSelectableRowsNoSubrows } from './_advanced_table_selectable_rows_no_subrows.jsx'
 export { default as AdvancedTableNoSubrows } from './_advanced_table_no_subrows.jsx'
 export { default as AdvancedTableSelectableRowsHeader } from './_advanced_table_selectable_rows_header.jsx'
+export { default as AdvancedTableSelectableRowsActions } from './_advanced_table_selectable_rows_actions.jsx'
