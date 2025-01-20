@@ -1,3 +1,67 @@
+# 6.6.2 [Insert Title]
+
+### Bug Fixes
+- **[PBIOS-662]** Modify PBReactionButton to Use Binding by [@RachelRadford21](https://github.com/RachelRadford21) in [#485](https://github.com/Power/Playbook/pull/485)
+- **[PBIOS-659]** Update PBSelect Kit Dynamic Select by [@RachelRadford21](https://github.com/RachelRadford21) in [#484](https://github.com/Power/Playbook/pull/484)
+- **[PBIOS-655]** pbIcon Clipping Fix by [@RachelRadford21](https://github.com/RachelRadford21) in [#480](https://github.com/Power/Playbook/pull/480)
+- **[PBIOS-668]** Section list fix for connect by [@isismsilva](https://github.com/isismsilva) in [#486](https://github.com/Power/Playbook/pull/486)
+
+[Full Changelog](https://github.com/Power/Playbook/compare/6.6.1...6.6.2)
+
+
+
+---
+
+# 6.6.1 [Insert Title]
+
+- **[PBIOS-656]** Typeahead presentation fix by [@isismsilva](https://github.com/isismsilva) in [#482](https://github.com/Power/Playbook/pull/482)
+
+[Full Changelog](https://github.com/Power/Playbook/compare/6.6.0...6.6.1)
+
+---
+
+# 6.6.0 [Insert Title]
+
+#### Bug Fixes
+- **[PBIOS-591]** Fix popover closing on scroll by [@isismsilva](https://github.com/isismsilva) in [#469](https://github.com/Power/Playbook/pull/469)
+- **[PBIOS-639, RANGR-830]** Fix Popover leak by [@AlexandreHauber](https://github.com/AlexandreHauber) in [#478](https://github.com/Power/Playbook/pull/478)
+- **[PBIOS-589]** Fix Typeahead dropdown scroll on key pressed by [@isismsilva](https://github.com/isismsilva) in [#476](https://github.com/Power/Playbook/pull/476)
+
+#### Kit Enhancements
+- **[PBIOS-635]** Update Padding Prop to PBNavItem by [@RachelRadford21](https://github.com/RachelRadford21) in [#475](https://github.com/Power/Playbook/pull/475)
+- **[PBIOS-634]** Add Action to Reaction Button by [@RachelRadford21](https://github.com/RachelRadford21) in [#474](https://github.com/Power/Playbook/pull/474)
+
+#### Platform Updates
+- **[PBIOS-636]** Upgrade iOS and macOS version by [@isismsilva](https://github.com/isismsilva) in [#477](https://github.com/Power/Playbook/pull/477)
+
+[Full Changelog](https://github.com/Power/Playbook/compare/6.5.1...6.6.0)
+
+
+---
+
+# 6.6.0 [Insert Title]
+
+**Release Date**: 12/18/2024
+
+This release introduces fixes and improvements that refine user experience, optimize component behavior, and expand functionality across platforms.
+
+#### Full List of Changes
+
+**Bug Fixes**
+- Fix Popover Closing on Scroll: Resolved issues with popovers unexpectedly closing when scrolling. [#469](https://github.com/Power/Playbook/pull/469) (Isis Silva)
+- Fix Popover Leak: Addressed a memory leak associated with popover components. [#478](https://github.com/Power/Playbook/pull/478) (Alexandre Hauber)
+- Fix Typeahead Dropdown Scroll on Key Pressed: Improved dropdown behavior for a smoother scrolling experience when using the keyboard. [#476](https://github.com/Power/Playbook/pull/476)
+
+**Kit Enhancements**
+- Update Padding Prop to PBNavItem: Introduced a new padding property for PBNavItem to allow greater customization. [#475](https://github.com/Power/Playbook/pull/475) (Rachel Radford)
+- Add Action to Reaction Button: Enabled new actions to enhance interactivity with the Reaction Button kit. [#474](https://github.com/Power/Playbook/pull/474) (Rachel Radford)
+
+**Platform Updates**
+- Upgrade iOS and macOS Versions: Updated supported versions for iOS and macOS to ensure compatibility with the latest platforms. [#477](https://github.com/Power/Playbook/pull/477)
+
+
+
+
 # 🚀 Playbook Swift 6.5.1: Adjustments and Fixes! 🚀
 ##### Dec 04, 2024
 
