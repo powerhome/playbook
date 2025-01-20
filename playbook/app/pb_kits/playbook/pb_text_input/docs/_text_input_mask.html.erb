@@ -1,9 +1,3 @@
-
-
-
-<%= pb_rails("title", props: { text: "Input Masks", size: 4, margin_bottom: "md" }) %>
-
-<div class="pb--doc-demo-elements">
   <%= pb_rails("text_input", props: {
     label: "Currency",
     mask: "currency",
@@ -27,7 +21,7 @@
   }) %>
 
   <%= pb_rails("text_input", props: {
-    label: "Social Security Number",
+    label: "SSN",
     mask: "ssn",
     margin_bottom: "md",
     placeholder: "123-45-6789"
@@ -50,5 +44,3 @@
 <style>
 #example-currency-sanitized {display: flex !important;}
 </style>
-
-</div>
