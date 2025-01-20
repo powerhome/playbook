@@ -13,8 +13,9 @@ $small: 200px;
 $medium: 250px;
 $large: 300px;
 $xlarge: 365px;
-$animation-duration: 0.4s;
+$animation-duration: .25s;
 $z-index: $z_7;
+// $transition-collapse: height .25s ease-in-out !default;
 
 // Drawer animations
 @keyframes modalFadeInLeft {
@@ -53,23 +54,23 @@ $z-index: $z_7;
 //   }
 // }
 
-// @keyframes modalFadeIn {
-//   from {
-//     transform: translateY(-100%);
-//   }
-//   to {
-//     transform: translateY(0);
-//   }
-// }
+@keyframes modalFadeIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
 
-// @keyframes modalFadeOut {
-//   from {
-//     transform: translateY(0);
-//   }
-//   to {
-//     transform: translateY(-100%);
-//   }
-// }
+@keyframes modalFadeOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
 
 @keyframes overlayFade {
   from {
@@ -91,13 +92,49 @@ $z-index: $z_7;
   }
 }
 
-body.PBDrawer__Body--open {
-  transition: margin-left $animation-duration ease-in, margin-right $animation-duration ease-in;
+@keyframes modalFadeDownIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
-body.PBDrawer__Body--close {
-  transition: margin-left $animation-duration ease-out, margin-right $animation-duration ease-out;
+@keyframes modalFadeDownOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
 }
+
+@keyframes modalFadeUpIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalFadeUpOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+// body.PBDrawer__Body--open {
+//   transition: margin-left $animation-duration ease-in, margin-right $animation-duration ease-in;
+// }
+
+// body.PBDrawer__Body--close {
+//   transition: margin-left $animation-duration ease-out, margin-right $animation-duration ease-out;
+// }
 
 .pb_drawer_lg_left.pb_drawer {
   transform: translateX(-100%);
@@ -114,29 +151,66 @@ body.PBDrawer__Body--close {
 
 // Drawer Styles
 .pb_drawer {
-  //  will-change: transform;
-  //  backface-visibility: hidden;
-   padding: $space_sm;
+  // padding: $space_sm;
+  background-color: $white;
+  z-index: $z-index;
+
+  &.pb_drawer_within_element {
+    position: relative;
+    width: 100%;
+    display: block;
+    background-color: $white;
+    // z-index: 1;
+    overflow: hidden;
+    transition: height $animation-duration ease-in-out;
+    height: var(--drawer-height);
+    z-index: 1;
+    
+    &.pb_drawer_collapsing {
+      height: 0;
+    }
+    
+    &.pb_drawer_after_open {
+
+      // overflow: visible;
+    }
+    
+    // &.pb_drawer_before_close {
+    //   height: 0;
+    // }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: inherit;
+      z-index: -1;
+    }
+  }
+
+  .toggle-content.is-visible {
+    display: block;
+    height: auto;
+  }
 
   .drawer {
     position: sticky;
     will-change: transform;
-    // backface-visibility: hidden;
     top: 0;
     background-color: $white;
     z-index: $z_9;
   }
 
   // @include pb_card;
-  background-color: $white;
   border: 0;
   max-height: calc(100vh - #{$gutter * 2});
   max-width: calc(100vw - #{$gutter * 2});
   overflow: auto;
   animation-duration: $animation-duration;
   outline: none;
-  transition: transform $animation-duration ease;
-  transform: translateX(-100%); // Initial state for left drawer
 
   // General _before_close styles
   // &[class*="_before_close"] {
@@ -144,14 +218,15 @@ body.PBDrawer__Body--close {
   //   animation-duration: $animation-duration;
   // }
 
-  // &[class*="_left"] {
-  //   animation-name: modalFadeInLeft;
-  // }
+  &[class*="_left"] {
+    animation-name: modalFadeInLeft;
+  }
 
-  // &[class*="_left"][class*="_before_close"] {
-  //   animation-name: modalFadeOutLeft;
-  //   animation-duration: $animation-duration;
-  // }
+  &[class*="_left"][class*="_before_close"] {
+    animation-name: modalFadeOutLeft;
+    animation-duration: $animation-duration;
+    transform: translateX(-100%);
+  }
 
   // &[class*="_right"] {
   //   animation-name: modalFadeInRight;
@@ -161,6 +236,25 @@ body.PBDrawer__Body--close {
   //   animation-name: modalFadeOutRight;
   //   animation-duration: $animation-duration;
   // }
+
+  &[class*="_bottom"] {
+    animation: none;
+    transform: none;
+  }
+
+  &[class*="_bottom"][class*="_before_close"] {
+    animation: none;
+    transform: none;
+  }
+
+  &[class*="_top"] {
+    animation-name: modalFadeUpIn;
+  }
+
+  &[class*="_top"][class*="_before_close"] {
+    animation-name: modalFadeUpOut;
+    animation-duration: $animation-duration;
+  }
 
 
   &[class*="_xs_"] {
@@ -230,8 +324,8 @@ body.PBDrawer__Body--close {
     background-color: rgba($bg_dark, $opacity_4);
     z-index: $z-index;
     opacity: 0;
-    animation: overlayFade $animation-duration ease forwards;
-    transition: opacity $animation-duration ease;
+    animation: overlayFade $animation-duration ease-in-out;
+    transition: opacity $animation-duration ease-in-out;
 
 
     &_after_open {
@@ -239,9 +333,11 @@ body.PBDrawer__Body--close {
     }
     
     &_before_close {
-      animation: overlayFadeOut $animation-duration ease forwards;
+      animation: overlayFadeOut $animation-duration ease-in-out;
       opacity: 0;
     }
+
+
     &[class*="full_height"] {
       &[class*="_left"]{
         justify-content: flex-start;
@@ -315,14 +411,14 @@ body.PBDrawer__Body--close {
     justify-content: center;
     z-index: $z-index;
     opacity: 0;
-    animation: overlayFade $animation-duration ease forwards;
+    animation: overlayFade $animation-duration ease-in-out;
 
     &_after_open {
       opacity: 1;
     }
     
     &_before_close {
-      animation: overlayFadeOut $animation-duration ease forwards;
+      animation: overlayFadeOut $animation-duration ease-in-out;
     }
     &[class*="full_height"] {
       &[class*="_left"]{

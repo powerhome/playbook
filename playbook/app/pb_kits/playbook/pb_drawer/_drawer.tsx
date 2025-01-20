@@ -8,13 +8,14 @@ import {
   buildHtmlProps,
 } from "../utilities/props"
 import { globalProps, globalInlineProps } from "../utilities/globalProps"
-import { DialogContext } from "../pb_dialog/_dialog_context"
+import { DrawerContext } from "./context"
 import { useBreakpoint } from "./hooks/useBreakpoint"
 import { useDrawerAnimation } from "./hooks/useDrawerAnimation"
+import { showElement, hideElement } from "../pb_collapsible/_helper_functions"
 
 type DrawerContextType = {
-  onClose: () => void;
-} | null;
+  onClose: () => void
+} | null
 
 type DrawerProps = {
   aria?: { [key: string]: string }
@@ -63,37 +64,77 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
   const [shouldRender, setShouldRender] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
 
-  const { isOpenBreakpointOpen, isUserClosed, setIsUserClosed } = useBreakpoint({
-    openBreakpoint: breakpoint,
-    closeBreakpoint: breakpoint,
-    menuButtonID,
-  })
+  const { isOpenBreakpointOpen, isUserClosed, setIsUserClosed } = useBreakpoint(
+    {
+      openBreakpoint: breakpoint,
+      closeBreakpoint: breakpoint,
+      menuButtonID,
+    }
+  )
 
   const modalIsOpened =
     (isOpenBreakpointOpen && !isUserClosed) || menuButtonOpened || opened
 
+  const { animationState, isVisible } = useDrawerAnimation(modalIsOpened)  
+
   // Replace useDrawerAnimation with our new animation logic
   useEffect(() => {
+    console.log("animationState")
     if (modalIsOpened) {
       // Step 1: Mount component
       setShouldRender(true)
-      
-      // Step 2: Start animation after a tiny delay
+
+      // Step 2: Measure height and start animation
       const timer = setTimeout(() => {
+        if (drawerRef.current) {
+          const height = drawerRef.current.scrollHeight;
+          drawerRef.current.style.setProperty('--drawer-height', `${height}px`);
+        }
         setIsAnimating(true)
       }, 10)
       return () => clearTimeout(timer)
     } else {
       // Step 3: Start closing animation
       setIsAnimating(false)
-      
+
       // Step 4: Unmount after animation completes
       const timer = setTimeout(() => {
         setShouldRender(false)
-      }, 400) // Match this to your CSS animation duration
+      }, 250) // Match animation duration
       return () => clearTimeout(timer)
     }
   }, [modalIsOpened])
+
+  // Remove the showElement/hideElement effect since we're handling visibility with CSS
+  useEffect(() => {
+    if (drawerRef.current && modalIsOpened) {
+      const height = drawerRef.current.scrollHeight;
+      drawerRef.current.style.setProperty('--drawer-height', `${height}px`);
+    }
+  }, [modalIsOpened])
+
+  // Handle menu button click
+  useEffect(() => {
+    console.log("menuButtonID")
+    if (menuButtonID) {
+      const menuButton = document.getElementById(menuButtonID)
+      if (menuButton) {
+        const handleMenuButtonClick = () => {
+          if (modalIsOpened) {
+            setMenuButtonOpened(false)
+            setIsUserClosed(true)
+          } else {
+            setMenuButtonOpened(true)
+            setIsUserClosed(false)
+          }
+        }
+        menuButton.addEventListener("click", handleMenuButtonClick)
+        return () => {
+          menuButton.removeEventListener("click", handleMenuButtonClick)
+        }
+      }
+    }
+  }, [menuButtonID, modalIsOpened])
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -108,6 +149,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
       drawer_border_right: border === "right",
       drawer_border_left: border === "left",
       pb_drawer_within_element: withinElement,
+      pb_drawer_collapsing: shouldRender && !isAnimating,
       pb_drawer_after_open: isAnimating,
       pb_drawer_before_close: !isAnimating && shouldRender,
     },
@@ -128,6 +170,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
 
   const api = {
     onClose: () => {
+      console.log("onClose")
       if (menuButtonID) {
         setMenuButtonOpened(false)
       }
@@ -147,11 +190,8 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
         onClick={(e) => e.stopPropagation()}
         ref={drawerRef}
         style={{
-          ...dynamicInlineProps,
-          ...(placement === "top" || placement === "bottom" 
-            ? { height: 0, transition: "height 10000ms ease" } 
-            : {})
-        }}
+        ...dynamicInlineProps,
+      }}
     >
       {children}
     </div>
@@ -161,7 +201,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
   if (!shouldRender) return null
 
   return (
-    <DialogContext.Provider value={api as DrawerContextType}>
+    <DrawerContext.Provider value={api as DrawerContextType}>
       {withinElement ? (
         drawerContent
       ) : (
@@ -181,7 +221,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
           </div>
         </div>
       )}
-    </DialogContext.Provider>
+    </DrawerContext.Provider>
   )
 }
 

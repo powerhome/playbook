@@ -15,7 +15,7 @@ const DrawerDefault = () => {
     <>
       <Flex wrap>
         <Button
-            id="sm"
+            id="sm-test"
             marginRight="md"
             onClick={toggleDrawerOpened}
         >
