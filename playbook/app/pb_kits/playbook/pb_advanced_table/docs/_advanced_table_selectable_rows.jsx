@@ -47,6 +47,7 @@ const AdvancedTableSelectableRows = (props) => {
           onRowSelectionChange={(selectedRows) => console.log(selectedRows)}
           selectableRows
           tableData={MOCK_DATA}
+          
           {...props}
       >
         <AdvancedTable.Header />
