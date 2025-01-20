@@ -1,4 +1,4 @@
-# 6.6.2: Adjustments and Fixes! 🚀
+# 🚀 Playbook Swift 6.6.2: Adjustments and Fixes! 🚀
 
 ### Bug Fixes
 - **[PBIOS-662]** Modify PBReactionButton to Use Binding by [@RachelRadford21](https://github.com/RachelRadford21) in [#485](https://github.com/Power/Playbook/pull/485)
@@ -10,7 +10,7 @@
 
 ---
 
-# 6.6.1: Typeahead Adjustments! 🚀
+# 🚀 Playbook Swift 6.6.1: Typeahead Adjustments! 🚀
 
 - **[PBIOS-656]** Typeahead presentation fix by [@isismsilva](https://github.com/isismsilva) in [#482](https://github.com/Power/Playbook/pull/482)
 
@@ -18,26 +18,7 @@
 
 ---
 
-# 6.6.0: Fixing constraints! 🚀
-
-#### Bug Fixes
-- **[PBIOS-591]** Fix popover closing on scroll by [@isismsilva](https://github.com/isismsilva) in [#469](https://github.com/Power/Playbook/pull/469)
-- **[PBIOS-639, RANGR-830]** Fix Popover leak by [@AlexandreHauber](https://github.com/AlexandreHauber) in [#478](https://github.com/Power/Playbook/pull/478)
-- **[PBIOS-589]** Fix Typeahead dropdown scroll on key pressed by [@isismsilva](https://github.com/isismsilva) in [#476](https://github.com/Power/Playbook/pull/476)
-
-#### Kit Enhancements
-- **[PBIOS-635]** Update Padding Prop to PBNavItem by [@RachelRadford21](https://github.com/RachelRadford21) in [#475](https://github.com/Power/Playbook/pull/475)
-- **[PBIOS-634]** Add Action to Reaction Button by [@RachelRadford21](https://github.com/RachelRadford21) in [#474](https://github.com/Power/Playbook/pull/474)
-
-#### Platform Updates
-- **[PBIOS-636]** Upgrade iOS and macOS version by [@isismsilva](https://github.com/isismsilva) in [#477](https://github.com/Power/Playbook/pull/477)
-
-[Full Changelog](https://github.com/Power/Playbook/compare/6.5.1...6.6.0)
-
-
----
-
-# 6.6.0: Enhanced Reaction Button! 🚀
+# 🚀 Playbook Swift 6.6.0: Enhanced Reaction Button! 🚀
 
 **Release Date**: 12/18/2024
 
