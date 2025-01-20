@@ -1,4 +1,5 @@
 # 🚀 Playbook Swift 6.6.2: Adjustments and Fixes! 🚀
+##### Jan 17, 2025
 
 ### Bug Fixes
 - **[PBIOS-662]** Modify PBReactionButton to Use Binding by [@RachelRadford21](https://github.com/RachelRadford21) in [#485](https://github.com/Power/Playbook/pull/485)
@@ -10,8 +11,14 @@
 
 ---
 
-# 🚀 Playbook Swift 6.6.1: Typeahead Adjustments! 🚀
+# 🚀 Playbook Swift 6.6.1: Typeahead improvements! 🚀
+##### Jan 07, 2025
 
+This release introduces fixes and improvements that refine user experience, optimize component behavior, and expand functionality across platforms.
+
+#### Full List of Changes
+
+**Bug Fixes**
 - **[PBIOS-656]** Typeahead presentation fix by [@isismsilva](https://github.com/isismsilva) in [#482](https://github.com/Power/Playbook/pull/482)
 
 [Full Changelog](https://github.com/Power/Playbook/compare/6.6.0...6.6.1)
@@ -19,8 +26,7 @@
 ---
 
 # 🚀 Playbook Swift 6.6.0: Enhanced Reaction Button! 🚀
-
-**Release Date**: 12/18/2024
+##### Dec 18, 2024
 
 This release introduces fixes and improvements that refine user experience, optimize component behavior, and expand functionality across platforms.
 
