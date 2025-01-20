@@ -7,6 +7,7 @@ declare global {
 }
 
 const TABLE_WRAPPER_SELECTOR = "[data-pb-table-wrapper]";
+const TABLE_COLLAPSIBLE_WRAPPER_SELECTOR = "[data-pb-table-collapsible-wrapper]";
 
 export default class PbTable extends PbEnhancedElement {
   stickyLeftColumns: string[] = [];
@@ -37,6 +38,7 @@ export default class PbTable extends PbEnhancedElement {
 
     this.initStickyLeftColumns();
     this.initStickyRightColumns();
+    this.handleCollapsibleClick();
     this.handleCollapsibleRow();
   }
 
@@ -161,10 +163,31 @@ export default class PbTable extends PbEnhancedElement {
     });
   }
 
-  handleCollapsibleRow() {
-    if (window.isCollapsibleRowHandled) return;
+  handleCollapsibleClick() {
+    const collapsibleElements = this.element.querySelectorAll(TABLE_COLLAPSIBLE_WRAPPER_SELECTOR);
+    const documentRef = document;
+    collapsibleElements.forEach((collapsibleElement) => {
 
-    const collapsibleRows = document.querySelectorAll('.pb_table_collapsible_row');
+      collapsibleElement.addEventListener('click', (event) => {
+        console.log(event.currentTarget.id);
+        window.document.dispatchEvent(new CustomEvent(event.currentTarget.id, {
+          bubbles: true,
+        }
+        ));
+
+        const toggleId = event.currentTarget.id.slice(-1);
+        const toggleElements = this.element.querySelectorAll(`.collapsible_border_toggle${toggleId}`);
+        toggleElements.forEach(element => {
+
+          element.classList.toggle('no-border');
+          element.classList.toggle('border-active');
+        });
+      })
+    })
+  }
+
+  handleCollapsibleRow() {
+    const collapsibleRows = this.element.querySelectorAll('.pb_table_collapsible_row');
     if (collapsibleRows.length > 0) {
       collapsibleRows.forEach((row) => {
         const previousRow = row.previousElementSibling;
@@ -184,7 +207,6 @@ export default class PbTable extends PbEnhancedElement {
         }
       });
 
-      window.isCollapsibleRowHandled = true;
     }
   }
 

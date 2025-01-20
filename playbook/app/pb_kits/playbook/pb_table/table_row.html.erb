@@ -4,7 +4,7 @@
     class: object.classname + " collapsible-tr",
     data: object.data.merge(id: object.id),  
     id: object.id,
-    onClick: "toggleCollapsibleRowById('collapsed-toggle#{object.id}')",
+    'data-pb-table-collapsible-wrapper' => true,
     **combined_html_options) do %>
     <%= content.presence %>
   <% end %>
@@ -37,17 +37,3 @@
     <% end %>
 <% end %>
 
-<script>
-  if (!window.toggleCollapsibleRowById) {
-    window.toggleCollapsibleRowById = (id) => {
-      document.dispatchEvent(new CustomEvent(id));
-      
-      const toggleId = id.slice(-1);
-      const toggleElements = document.querySelectorAll(`.collapsible_border_toggle${toggleId}`);
-      toggleElements.forEach(element => {
-        element.classList.toggle('no-border');
-        element.classList.toggle('border-active');
-      });
-    };
-  }
-</script>
