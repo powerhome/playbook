@@ -50,6 +50,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
 
   const itemClasses = classnames(
     'pb_multiple_users_item',
+    globalProps(props),
     buildCss('multiple_users_badge', avatarSizeClass)
   )
 
