@@ -20,7 +20,6 @@ $border_hover_color_dark: lighten($border_dark, 5%);
           }
           @media (hover:hover) {
             td, .pb_table_td {
-              position: relative;
               &:after {
                 transition: background-color $transition-speed ease, height $transition-speed ease;
                 content: "";
