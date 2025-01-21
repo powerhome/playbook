@@ -50,7 +50,7 @@ $gap_lg: $height_from_top + $space_lg;
         >div {
             &:last-child {
                 flex-basis: auto !important;
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         opacity: 0;
                     }
@@ -66,29 +66,25 @@ $gap_lg: $height_from_top + $space_lg;
         [class*=pb_timeline_item_kit] {
             &[class*=_solid] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_left_block] {
-                    height: 0px;
-                }
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     @include flex_wrapper(row);
+                    align-items: center;
                     margin-top: $space_xs;
                     margin-bottom: $space_xs;
                     [class=pb_timeline_item_connector] {
-                        @include pb_timeline_line_solid($connector_width, $connector_width, $height_from_top $icon_margin 0 $icon_margin );
+                        @include pb_timeline_line_solid($connector_width, $connector_width, 0 $icon_margin 0 $icon_margin );
                     }
                 }
             }
             &[class*=_dotted] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_left_block] {
-                    height: 0;
-                }
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     @include flex_wrapper(row);
+                    align-items: center;
                     margin-top: $space_xs;
                     margin-bottom: $space_xs;
                     [class=pb_timeline_item_connector] {
-                        @include pb_timeline_line_dotted_horizontal($connector_width, $connector_width, $height_from_top $icon_margin 0 $icon_margin );
+                        @include pb_timeline_line_dotted_horizontal($connector_width, $connector_width, 0 $icon_margin 0 $icon_margin );
                     }
                 }
             }
@@ -99,7 +95,7 @@ $gap_lg: $height_from_top + $space_lg;
             >div {
                 &:last-child {
                     flex-basis: auto !important;
-                    [class=pb_timeline_item_step] {
+                    [class^=pb_timeline_item_step] {
                         [class=pb_timeline_item_connector] {
                             opacity: 0;
                         }
@@ -129,12 +125,12 @@ $gap_lg: $height_from_top + $space_lg;
                             }
                         }
                     }
-                    [class=pb_timeline_item_step] {
+                    [class^=pb_timeline_item_step] {
                         @include flex_wrapper(row);
                         margin-top: $space_xs;
                         margin-bottom: $space_xs;
                         [class=pb_timeline_item_connector] {
-                            @include pb_timeline_line_solid($connector_width, $connector_width, $height_from_top $icon_margin 0 $icon_margin );
+                            @include pb_timeline_line_solid($connector_width, $connector_width, 0 $icon_margin 0 $icon_margin );
                         }
                     }
                 }
@@ -153,12 +149,12 @@ $gap_lg: $height_from_top + $space_lg;
                             }
                         }
                     }
-                    [class=pb_timeline_item_step] {
+                    [class^=pb_timeline_item_step] {
                         @include flex_wrapper(row);
                         margin-top: $space_xs;
                         margin-bottom: $space_xs;
                         [class=pb_timeline_item_connector] {
-                            @include pb_timeline_line_dotted_horizontal($connector_width, $connector_width, $height_from_top $icon_margin 0 $icon_margin );
+                            @include pb_timeline_line_dotted_horizontal($connector_width, $connector_width, 0 $icon_margin 0 $icon_margin );
                         }
                     }
                 }
@@ -170,7 +166,7 @@ $gap_lg: $height_from_top + $space_lg;
         align-items: flex-start;
         align-self: auto;
         >div:last-child {
-            [class=pb_timeline_item_step] {
+            [class^=pb_timeline_item_step] {
                 [class=pb_timeline_item_connector] {
                     opacity: 0;
                 }
@@ -180,13 +176,14 @@ $gap_lg: $height_from_top + $space_lg;
             @include flex_wrapper(row);
             &[class*=_solid] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     @include flex_wrapper(column);
+                    align-items: center;
                     align-content: flex-start;
                     margin-right: $space_sm;
                     margin-left: $space_sm;
                     [class=pb_timeline_item_connector] {
-                        @include pb_timeline_line_solid($connector_width, $connector_width, $icon_margin 0 $icon_margin $height_from_top);
+                        @include pb_timeline_line_solid($connector_width, $connector_width, $icon_margin 0 $icon_margin 0);
                     }
                 }
                 [class=pb_timeline_item_left_block] {
@@ -200,12 +197,13 @@ $gap_lg: $height_from_top + $space_lg;
             }
             &[class*=_dotted] {
                 flex-basis: 100%;
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     @include flex_wrapper(column);
+                    align-items: center;
                     margin-right: $space_sm;
                     margin-left: $space_sm;
                     [class=pb_timeline_item_connector] {
-                        @include pb_timeline_line_dotted_vertical($connector_width, $connector_width, $icon_margin 0 $icon_margin $height_from_top);
+                        @include pb_timeline_line_dotted_vertical($connector_width, $connector_width, $icon_margin 0 $icon_margin 0);
                     }
                 }
                 [class=pb_timeline_item_left_block] {
@@ -223,7 +221,7 @@ $gap_lg: $height_from_top + $space_lg;
             align-items: flex-start;
             align-self: auto;
             >div:last-child {
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         opacity: 0;
                     }
@@ -233,13 +231,14 @@ $gap_lg: $height_from_top + $space_lg;
                 @include flex_wrapper(row);
                 &[class*=_solid] {
                     flex-basis: 100%;
-                    [class=pb_timeline_item_step] {
+                    [class^=pb_timeline_item_step] {
                         @include flex_wrapper(column);
+                        align-items: center;
                         align-content: flex-start;
                         margin-right: $space_sm;
                         margin-left: $space_sm;
                         [class=pb_timeline_item_connector] {
-                            @include pb_timeline_line_solid($connector_width, $connector_width, $icon_margin 0 $icon_margin $height_from_top);
+                            @include pb_timeline_line_solid($connector_width, $connector_width, $icon_margin 0 $icon_margin 0);
                         }
                     }
                     [class=pb_timeline_item_left_block] {
@@ -253,12 +252,13 @@ $gap_lg: $height_from_top + $space_lg;
                 }
                 &[class*=_dotted] {
                     flex-basis: 100%;
-                    [class=pb_timeline_item_step] {
+                    [class^=pb_timeline_item_step] {
                         @include flex_wrapper(column);
+                        align-items: center;
                         margin-right: $space_sm;
                         margin-left: $space_sm;
                         [class=pb_timeline_item_connector] {
-                            @include pb_timeline_line_dotted_vertical($connector_width, $connector_width, $icon_margin 0 $icon_margin $height_from_top);
+                            @include pb_timeline_line_dotted_vertical($connector_width, $connector_width, $icon_margin 0 $icon_margin 0);
                         }
                     }
                     [class=pb_timeline_item_left_block] {
@@ -274,7 +274,7 @@ $gap_lg: $height_from_top + $space_lg;
         }
         &[class*=_gap_xs] {
             [class*=pb_timeline_item_kit] {
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         height: $gap_xs !important;
                     }
@@ -283,7 +283,7 @@ $gap_lg: $height_from_top + $space_lg;
         }
         &[class*=_gap_sm] {
             [class*=pb_timeline_item_kit] {
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         height: $gap_sm !important;
                     }
@@ -292,7 +292,7 @@ $gap_lg: $height_from_top + $space_lg;
         }
         &[class*=_gap_md] {
             [class*=pb_timeline_item_kit] {
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         height: $gap_md !important;
                     }
@@ -301,7 +301,7 @@ $gap_lg: $height_from_top + $space_lg;
         }
         &[class*=_gap_lg] {
             [class*=pb_timeline_item_kit] {
-                [class=pb_timeline_item_step] {
+                [class^=pb_timeline_item_step] {
                     [class=pb_timeline_item_connector] {
                         height: $gap_lg !important;
                     }
