@@ -161,9 +161,9 @@ export default class PbTable extends PbEnhancedElement {
     const collapsibleElements = this.element.querySelectorAll(TABLE_COLLAPSIBLE_WRAPPER_SELECTOR);
     collapsibleElements.forEach((collapsibleElement) => {
       collapsibleElement.addEventListener('click', (event) => {
-        document.dispatchEvent(new CustomEvent(`collapsed-toggle${event.currentTarget.id}`))
+        document.dispatchEvent(new CustomEvent(`collapsed-toggle${(event.currentTarget as HTMLElement).id}`))
 
-        const toggleElements = this.element.querySelectorAll(`.collapsible_border_toggle${event.currentTarget.id}`);
+        const toggleElements = this.element.querySelectorAll(`.collapsible_border_toggle${(event.currentTarget as HTMLElement).id}`);
         toggleElements.forEach(element => {
           element.classList.toggle('no-border');
           element.classList.toggle('border-active');
