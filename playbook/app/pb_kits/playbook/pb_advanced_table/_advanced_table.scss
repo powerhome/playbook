@@ -58,6 +58,7 @@
       border-right: 1px solid $border_light !important;
     }
     .table-header-cells-custom {
+      text-align:center;
       [class^=pb_checkbox_kit] .pb_checkbox_label {
         padding-left: 0px;
       }

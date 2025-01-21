@@ -20,7 +20,7 @@ import { globalProps, GlobalProps } from "../utilities/globalProps"
 
 import Table from "../pb_table/_table"
 import Card from "../pb_card/_card"
-import Body from "../pb_body/_body"
+import Caption from "../pb_caption/_caption"
 import Flex from "../pb_flex/_flex"
 import FlexItem from "../pb_flex/_flex_item"
 
@@ -341,11 +341,12 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                 <Flex alignItems="center"
                     justify="between"
                 >
-                    <Body color="lighter"
+                    <Caption color="light"
                         paddingLeft="xs"
+                        size="xs"
                     >
                       {selectedRowsLength} Selected
-                    </Body>
+                    </Caption>
                     <FlexItem>
                     {actions}
                     </FlexItem>
