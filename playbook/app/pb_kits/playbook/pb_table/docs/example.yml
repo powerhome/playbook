@@ -32,6 +32,7 @@ examples:
     - table_outer_padding: Outer Padding
 
   react:
+    - table_test_tool_tip: Test Tool Tip
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
