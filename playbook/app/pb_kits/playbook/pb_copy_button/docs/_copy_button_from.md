@@ -1,1 +1,1 @@
-Pass an element's ID to `from` and that element's text will be copied. If the element is an input, the `value` will be copied, otherwise the `innerText` is copied. Also, if a `value` prop is passed, that will be copied instead of the `from` element's text.
+Provide an element's ID as the `from` parameter, and its text will be copied. If the element is an input, its `value` will be copied; otherwise, the `innerText` will be used. Additionally, if a `value` prop is provided, it will override the content from the `from` element and be copied instead.
