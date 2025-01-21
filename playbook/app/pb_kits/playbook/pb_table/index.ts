@@ -1,11 +1,5 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 
-declare global {
-  interface Window {
-    isCollapsibleRowHandled?: boolean;
-  }
-}
-
 const TABLE_WRAPPER_SELECTOR = "[data-pb-table-wrapper]";
 const TABLE_COLLAPSIBLE_WRAPPER_SELECTOR = "[data-pb-table-collapsible-wrapper]";
 
@@ -165,20 +159,12 @@ export default class PbTable extends PbEnhancedElement {
 
   handleCollapsibleClick() {
     const collapsibleElements = this.element.querySelectorAll(TABLE_COLLAPSIBLE_WRAPPER_SELECTOR);
-    const documentRef = document;
     collapsibleElements.forEach((collapsibleElement) => {
-
       collapsibleElement.addEventListener('click', (event) => {
-        console.log(event.currentTarget.id);
-        window.document.dispatchEvent(new CustomEvent(event.currentTarget.id, {
-          bubbles: true,
-        }
-        ));
+        document.dispatchEvent(new CustomEvent(`collapsed-toggle${event.currentTarget.id}`))
 
-        const toggleId = event.currentTarget.id.slice(-1);
-        const toggleElements = this.element.querySelectorAll(`.collapsible_border_toggle${toggleId}`);
+        const toggleElements = this.element.querySelectorAll(`.collapsible_border_toggle${event.currentTarget.id}`);
         toggleElements.forEach(element => {
-
           element.classList.toggle('no-border');
           element.classList.toggle('border-active');
         });
@@ -197,7 +183,6 @@ export default class PbTable extends PbEnhancedElement {
           previousRow.tagName === 'TR'
         ) {
           const tdCount = previousRow.querySelectorAll('td').length;
-
           const collapsibleTd = row.querySelector('td');
           if (collapsibleTd) {
             collapsibleTd.colSpan = tdCount;
@@ -206,7 +191,6 @@ export default class PbTable extends PbEnhancedElement {
           return
         }
       });
-
     }
   }
 
