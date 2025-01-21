@@ -1,3 +1,16 @@
 <%= pb_content_tag do %>
-  <span>ICON_BUTTON CONTENT</span>
+  <%= pb_rails("button", props: { type: object.type,
+                                  link: object.link,
+                                  new_window:object.new_window,
+                                  target: object.target,
+                                  dark: object.dark,
+                                  border_radius: "lg" }) do %>
+  <%= pb_rails("icon", props: { icon: object.icon,
+                                fixed_width: true,
+                                dark: object.dark,
+                                size: "2x",
+                                color: "text_lt_default",
+                                classname: "icon_button_icon",
+                                padding_x: "xxs", padding_y: "xs" }) %>
+  <% end %>
 <% end %>

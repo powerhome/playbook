@@ -1,3 +1,78 @@
-.pb_icon_button {
+$icon_colors: (
+  default: $text_lt_default,
+  link:   $active_dark
+);
 
+@mixin icon_button_variant($variant) {
+  .icon_button_icon {
+    color: map-get($icon_colors, $variant);
+  }
+}
+
+.pb_icon_button_kit_default,
+.pb_icon_button_kit_link {
+  width: fit-content;
+  height: fit-content;
+
+  &:hover {
+    [class*="pb_button_kit"] {
+      background-color: $bg_light;
+    }
+    .icon_button_icon {
+      color: $active_dark;
+    }
+  }
+
+  &:active {
+    [class*="pb_button_kit"] {
+      background-color: $bg_light;
+    }
+    .icon_button_icon {
+      color: $active_dark;
+    }
+  }
+
+  &:hover:active {
+    [class*="pb_button_kit"] {
+      background-color: $bg_light;
+    }
+    .icon_button_icon {
+      color: $text_lt_default;
+    }
+  }
+
+  &:focus {
+    outline: 2px solid $active_dark;
+    border-radius: 8px;
+  }
+
+  [class*="pb_button_kit"] {
+    min-height: 0;
+    background: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: fit-content;
+    height: fit-content;
+    line-height: normal;
+    flex-basis: auto;
+    min-width: 0;
+    padding: 0;
+
+    .icon_button_icon {
+      display: block;
+      vertical-align: middle;
+    }
+  }
+}
+
+.pb_icon_button_kit_default {
+  @include icon_button_variant(default);
+}
+
+.pb_icon_button_kit_link {
+  @include icon_button_variant(link);
 }
