@@ -1,5 +1,6 @@
 examples:
   rails:
+    - table_test_tool_tip: Test Tool Tip
     - table_sm: Small
     - table_md: Medium
     - table_lg: Large
