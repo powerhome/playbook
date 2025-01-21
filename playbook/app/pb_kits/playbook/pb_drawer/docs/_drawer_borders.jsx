@@ -6,13 +6,11 @@ const DrawerBorders = () => {
   const [openedBRightDrawer, setOpenedBRightDrawer] = useState(false);
   const [openedBLeftDrawer, setOpenedBLeftDrawer] = useState(false);
   const [openedBFullDrawer, setOpenedBFullDrawer] = useState(false);
-  const [openedBDefaultDrawer, setOpenedBDefaultDrawer] = useState(false);
 
   // Toggle functions for each drawer
   const toggleBRightDrawer = () => setOpenedBRightDrawer(!openedBRightDrawer);
   const toggleBLeftDrawer = () => setOpenedBLeftDrawer(!openedBLeftDrawer);
   const toggleBFullDrawer = () => setOpenedBFullDrawer(!openedBFullDrawer);
-  const toggleBDefaultDrawer = () => setOpenedBDefaultDrawer(!openedBDefaultDrawer);
 
   return (
     <>
@@ -33,11 +31,6 @@ const DrawerBorders = () => {
             onClick={toggleBFullDrawer}
         >
           Drawer with border full
-        </Button>
-        <Button marginRight="md"    
-            onClick={toggleBDefaultDrawer}
-        >
-          Default Drawer
         </Button>
       </Flex>
 
@@ -74,16 +67,6 @@ const DrawerBorders = () => {
           size="lg"
       >
         This is a Drawer with border full
-      </Drawer>
-      <Drawer
-          behavior="float"
-          onClose={toggleBDefaultDrawer}
-          opened={openedBDefaultDrawer}
-          overlay={false}
-          placement="left"
-          size="lg"
-      >   
-        This is a Default Drawer
       </Drawer>
     </>
   );

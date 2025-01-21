@@ -73,8 +73,6 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
   const modalIsOpened =
     (isOpenBreakpointOpen && !isUserClosed) || menuButtonOpened || opened
 
-  // const { animationState, isVisible } = useDrawerAnimation(modalIsOpened)  
-
 
   useEffect(() => {
     if (withinElement) return;
@@ -106,7 +104,6 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
 
   // Replace useDrawerAnimation with our new animation logic
   useEffect(() => {
-    console.log("animationState")
     if (modalIsOpened) {
       // Step 1: Mount component
       setShouldRender(true)
@@ -142,7 +139,6 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
 
   // Handle menu button click
   useEffect(() => {
-    console.log("triggerId")
     if (triggerId) {
       const menuButton = document.getElementById(triggerId)
       if (menuButton) {
@@ -187,6 +183,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
 
   const overlayClasses = classnames(
     `pb_drawer${overlay ? "_overlay" : "_no_overlay"}`,
+    `drawer_content_${placement}`,
     !overlay && "no-background",
     {
       pb_drawer_overlay_after_open: isAnimating,
@@ -196,7 +193,6 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
 
   const api = {
     onClose: () => {
-      console.log("onClose")
       if (triggerId) {
         setMenuButtonOpened(false)
       }
@@ -209,15 +205,9 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
 
   const drawerContent = (
     <div
-        {...ariaProps}
-        {...dataProps}
-        {...htmlProps}
         className={drawerClasses}
         onClick={(e) => e.stopPropagation()}
         ref={drawerRef}
-        style={{
-        ...dynamicInlineProps,
-      }}
     >
       {children}
     </div>

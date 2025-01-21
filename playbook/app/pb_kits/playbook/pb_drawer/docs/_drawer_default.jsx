@@ -34,8 +34,6 @@ const DrawerDefault = () => {
         <Drawer
             onClose={toggleDrawerLeftOpen}
             opened={drawerLeftOpen}
-            overlay
-            placement={"left"}
             size={"lg"}
         >
           Test me (Left Drawer)
@@ -45,7 +43,6 @@ const DrawerDefault = () => {
         <Drawer
             onClose={toggleDrawerRightOpen}
             opened={drawerRightOpen}
-            overlay
             placement={"right"}
             size={"lg"}
         >

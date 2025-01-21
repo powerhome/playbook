@@ -208,6 +208,7 @@ body.PBDrawer__Body--close {
 
   &[class*="_right"] {
     animation-name: modalFadeInRight;
+    justify-content: flex-end;
   }
 
   &[class*="_right"][class*="_before_close"] {
@@ -297,12 +298,23 @@ body.PBDrawer__Body--close {
     left: 0;
     right: 0;
     bottom: 0;
+    display: flex;
     background-color: rgba($bg_dark, $opacity_4);
     z-index: $z-index;
     opacity: 0;
     animation: overlayFade $animation-duration ease-in-out;
     transition: opacity $animation-duration ease-in-out;
+    &[class*="_left"]{
+      justify-content: flex-start;
+    }
 
+    &[class*="_center"]{
+      justify-content: center;
+    }
+
+    &[class*="_right"]{
+      justify-content: flex-end;
+    }
 
     &_after_open {
       opacity: 1;
@@ -320,9 +332,6 @@ body.PBDrawer__Body--close {
     left: 0;
     right: 0;
     bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     z-index: $z-index;
     opacity: 1;
     animation: overlayFade $animation-duration ease-in-out;
@@ -335,31 +344,6 @@ body.PBDrawer__Body--close {
     &_before_close {
       animation: overlayFadeOut $animation-duration ease-in-out;
     }
-    &[class*="full_height"] {
-      &[class*="_left"]{
-        justify-content: flex-start;
-      }
-
-      &[class*="_center"]{
-        justify-content: center;
-      }
-
-      &[class*="_right"]{
-        justify-content: flex-end;
-      }
-    }
-  }
-
-  [class*="drawer_body"] {
-    padding: $space_sm;
-  }
-
-  [class*="drawer_header"] {
-    padding: $space_sm;
-  }
-
-  [class*="drawer_footer"] {
-    padding: $space_sm;
   }
 
   &.pb_drawer_after_open {

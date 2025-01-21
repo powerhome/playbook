@@ -26,8 +26,6 @@ const DrawerBehavior = () => {
             behavior={"push"}      
             onClose={toggleDrawerOpen}
             opened={drawerOpen}
-            overlay
-            placement={"left"}
             size={"lg"}
         >
           Test me (Push Behavior)

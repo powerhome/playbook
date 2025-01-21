@@ -19,7 +19,8 @@ const DrawerSizes = () => {
   return (
     <>
       <Flex wrap>
-        <Button marginRight="md"
+        <Button 
+            marginRight="md"
             onClick={toggleXsDrawer}
         >
           XS Drawer
@@ -48,10 +49,8 @@ const DrawerSizes = () => {
 
       {/* Drawers for each size */}
       <Drawer
-          behavior="push"
           onClose={toggleXsDrawer}
           opened={openedXsDrawer}
-          overlay
           placement="right"
           size="xs"
       >
@@ -59,43 +58,32 @@ const DrawerSizes = () => {
       </Drawer>
 
       <Drawer
-          behavior="push"
           onClose={toggleSmDrawer}
           opened={openedSmDrawer}
-          overlay
-          placement="right"
           size="sm"
       >
         This is an SM Drawer
       </Drawer>
 
       <Drawer
-          behavior="push"
           onClose={toggleMdDrawer}
           opened={openedMdDrawer}
-          overlay
           placement="right"
-          size="md"
       >
         This is an MD Drawer
       </Drawer>
 
       <Drawer
-          behavior="push"
           onClose={toggleLgDrawer}
           opened={openedLgDrawer}
-          overlay
-          placement="right"
           size="lg"
       >
         This is an LG Drawer
       </Drawer>
 
       <Drawer
-          behavior="push"
           onClose={toggleXlDrawer}
           opened={openedXlDrawer}
-          overlay
           placement="right"
           size="xl"
       >
