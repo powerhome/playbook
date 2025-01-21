@@ -1,9 +1,3 @@
----
-title: Font Awesome Setup
-description: Playbook seamlessly integrates with Font Awesome, a leading icon library known for its extensive collection of high-quality, scalable icons. This integration not only enhances the visual appeal of websites and applications but also improves overall usability.
-icon: font-awesome
----
-
 Playbook seamlessly integrates with [Font Awesome](https://fontawesome.com/), a leading icon library known for its extensive collection of high-quality, scalable icons. This integration not only enhances the visual appeal of websites and applications but also improves overall usability. 
 
 Some Font Awesome benefits:

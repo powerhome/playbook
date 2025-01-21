@@ -287,7 +287,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
               {...ariaProps}
               {...dataProps}
               {...htmlProps}
-              style={dynamicInlineProps}
               className={classnames(drawerClassNames.base, {
               [drawerClassNames.afterOpen]:
                 animationState === "afterOpen",
@@ -296,6 +295,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
             })}
               id={id}
               onClick={(e) => e.stopPropagation()}
+              style={dynamicInlineProps}
           >
             {children}
           </div>
@@ -306,7 +306,6 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
             {...dataProps}
             {...htmlProps}
             className={classes}
-            style={dynamicInlineProps}
         >
           {isModalVisible && (
             <div
@@ -327,6 +326,7 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
                     animationState === "beforeClose",
                 })}
                   onClick={(e) => e.stopPropagation()}
+                  style={dynamicInlineProps}
               >
                 {children}
               </div>

@@ -3,16 +3,29 @@
 [class^="pb_table"] {
     .sticky {
         position: sticky !important;
-        left: 0;
         z-index: 1;
         background-color: white;
     }
 
-    .with-border {
-        border-right: 1px solid $border_light !important;
+    // For use with sticky left columns
+    .sticky-left-shadow {
+        box-shadow: 4px 0 10px rgba(60, 106, 172, 0.16) !important;
+        left: 0;
     }
 
-    .sticky-shadow {
-        box-shadow: 4px 0 10px rgba(60, 106, 172, 0.16) !important;
+    .with-border-right {
+        border-right: 1px solid $border_light !important;
+        left: 0;
+    }
+
+    // For use with sticky right columns
+    .sticky-right-shadow {
+        box-shadow: -4px 0 10px rgba(60, 106, 172, 0.16) !important;
+        right: 0;
+    }
+
+    .with-border-left {
+        border-left: 1px solid $border_light !important;
+        right: 0;
     }
 }

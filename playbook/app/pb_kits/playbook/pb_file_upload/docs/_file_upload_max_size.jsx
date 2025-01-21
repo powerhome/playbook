@@ -18,7 +18,7 @@ const AcceptedFilesList = ({ files }) => (
 const RejectedFilesList = ({ files }) => (
   <List>
     {files.map((file) => (
-      <ListItem key={file.name}><Body color="error">{`${file.name} (file too large)`}</Body></ListItem>
+      <ListItem key={file.file.name}><Body color="error">{`${file.file.name} (file too large)`}</Body></ListItem>
     ))}
   </List>
 )

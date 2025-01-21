@@ -32,6 +32,21 @@ const HomeAddressStreetEmphasis = (props) => {
           zipcode="19382"
           {...props}
       />
+      <br />
+      <br />
+      <HomeAddressStreet
+          address="70 Prospect Ave"
+          addressCont="Apt M18"
+          city="West Chester"
+          emphasis="none"
+          homeId="8250263"
+          homeUrl="https://powerhrg.com/"
+          houseStyle="Colonial"
+          state="PA"
+          territory="PHL"
+          zipcode="19382"
+          {...props}
+      />
     </div>
   )
 }

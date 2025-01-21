@@ -1,3 +1,6 @@
+@import "../tokens/spacing";
+@import "./error_state_mixin";
+
 [class^=pb_form_group_kit] {
   display: inline-flex;
   flex-direction: row;
@@ -11,6 +14,12 @@
       width: 100%;
     }
   }
+
+@include error-state-flex-start-selectors;
+@include error-state-center-selectors;
+@include error-state-flex-end-selectors;
+@include error-state-left-side-select-kit;
+@include error-state-right-side-select-kit;
 
   & [class^=pb_text_input_kit] .text_input_wrapper,
   & [class^=pb_date_picker_kit] .input_wrapper,
@@ -27,7 +36,7 @@
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
-    
+
       &:focus {
         outline: $primary solid 1px;
         outline-offset: -1px;
@@ -150,7 +159,7 @@
   & > [class^=pb_selectable_card_kit] input[type="checkbox"]:not(:checked) ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:not(:checked) ~ label {
     &:hover {
       border-right-color: $slate;
-    } 
+    }
   }
 
   & > [class^=pb_selectable_card_kit]:not(:first-child) label {

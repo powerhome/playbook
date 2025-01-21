@@ -1,0 +1,20 @@
+# Managed by https://github.com/powerhome/software. Do not make changes here, they will be reverted.
+
+name: Automated Code Reviews
+on: [pull_request]
+
+jobs:
+  brakeman:
+    name: Brakeman
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+      - name: "Brakeman playbook"
+        uses: reviewdog/action-brakeman@2a6e4356f87d023571b20b09850e6e5d3ed6856b # v2
+        with:
+          brakeman_version: gemfile
+          tool_name: "playbook"
+          workdir: "./playbook"

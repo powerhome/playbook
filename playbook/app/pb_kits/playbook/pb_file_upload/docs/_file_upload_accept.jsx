@@ -28,7 +28,9 @@ const FileUploadAccept = (props) => {
           {...props}
       />
       <FileUpload
-          accept={['image/svg+xml']}
+          accept={{
+            "image/svg+xml": [".svg", ".xml"],
+          }}
           onFilesAccepted={handleOnFilesAccepted}
           {...props}
       />

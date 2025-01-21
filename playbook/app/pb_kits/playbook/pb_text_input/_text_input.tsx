@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, ChangeEvent } from 'react'
 import classnames from 'classnames'
 
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
@@ -9,6 +9,8 @@ import Card from '../pb_card/_card'
 import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
+
+import { INPUTMASKS } from './inputMask'
 
 type TextInputProps = {
   aria?: { [key: string]: string },
@@ -22,6 +24,7 @@ type TextInputProps = {
   inline?: boolean,
   name: string,
   label: string,
+  mask?: 'currency' | 'zipCode' | 'postalCode' | 'ssn',
   onChange: (e: React.FormEvent<HTMLInputElement>) => void,
   placeholder: string,
   required?: boolean,
@@ -47,6 +50,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     htmlOptions = {},
     id,
     inline = false,
+    mask = null,
     name,
     label,
     onChange = () => { void 0 },
@@ -90,7 +94,41 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     />
   )
 
+  const isMaskedInput = mask && mask in INPUTMASKS
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (isMaskedInput) {
+      const inputValue = e.target.value
+
+      let cursorPosition = e.target.selectionStart;
+      const isAtEnd = cursorPosition === inputValue.length;
+      
+      const formattedValue = INPUTMASKS[mask].format(inputValue)
+      e.target.value = formattedValue
+      
+      // Keep cursor position
+      if (!isAtEnd) {
+        // Account for extra characters (e.g., commas added/removed in currency)
+        if (formattedValue.length - inputValue.length === 1) {
+          cursorPosition = cursorPosition + 1
+        } else if (mask === "currency" && formattedValue.length - inputValue.length === -1) {
+          cursorPosition = cursorPosition - 1
+        }
+        e.target.selectionStart = e.target.selectionEnd = cursorPosition
+      }
+    }
+    
+    onChange(e)
+  }
+
   const childInput = children ? children.type === "input" : undefined
+
+  let formattedValue;
+  if (isMaskedInput && value) {
+    formattedValue = INPUTMASKS[mask].formatDefaultValue(value.toString())
+  } else {
+    formattedValue = value
+  }
 
   const textInput = (
     childInput ? React.cloneElement(children, { className: "text_input" }) :
@@ -101,12 +139,13 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         id={id}
         key={id}
         name={name}
-        onChange={onChange}
-        placeholder={placeholder}
+        onChange={isMaskedInput ? handleChange : onChange}
+        pattern={isMaskedInput ? INPUTMASKS[mask]?.pattern : undefined}
+        placeholder={placeholder || (isMaskedInput ? INPUTMASKS[mask]?.placeholder : undefined)}
         ref={ref}
         required={required}
         type={type}
-        value={value}
+        value={formattedValue}
      />)
   )
 

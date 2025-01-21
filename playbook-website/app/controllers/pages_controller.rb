@@ -88,6 +88,38 @@ class PagesController < ApplicationController
 
   def changelog; end
 
+  def icons
+    @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons.md").read
+    @page_title = "Icon Integration"
+    @show_sidebar = true
+    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook-website/app/views/guides/getting_started/icons.md"
+    render layout: "icons"
+  end
+
+  def icons_font_awesome
+    @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons/font_awesome.md").read
+    @page_title = "Icon Integration"
+    @show_sidebar = true
+    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook-website/app/views/guides/getting_started/icons/font_awesome.md"
+    render layout: "icons"
+  end
+
+  def icons_playbook
+    @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons/playbook.md").read
+    @page_title = "Icon Integration"
+    @show_sidebar = true
+    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook-website/app/views/guides/getting_started/icons/playbook.md"
+    render layout: "icons"
+  end
+
+  def icons_custom
+    @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons/custom.md").read
+    @page_title = "Icon Integration"
+    @show_sidebar = true
+    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook-website/app/views/guides/getting_started/icons/custom.md"
+    render layout: "icons"
+  end
+
   def kits
     params[:type] ||= "react"
     @type = params[:type]
