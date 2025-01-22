@@ -6,14 +6,8 @@
 
 ] %>
 
-<%= pb_rails("draggable", props: {initial_items: initial_items}) do %>
-  <%= pb_rails("draggable/draggable_container") do %>
-    <%= pb_rails("list", props: {ordered: false}) do %>
-        <% initial_items.each do |item| %>
-            <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id]}) do %>
-                <%= pb_rails("list/item") do %><%= item[:name] %><% end %>
-            <% end %>
-        <% end %>
-    <% end %>
+<%= pb_rails("list", props: { enable_drag: true, items: initial_items }) do %>
+  <% initial_items.each do |item| %>
+    <%= pb_rails("list/item", props:{drag_id: item[:id]}) do %><%= item[:name] %><% end %>
   <% end %>
 <% end %>

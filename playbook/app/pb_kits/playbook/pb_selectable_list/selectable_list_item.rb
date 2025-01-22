@@ -6,6 +6,9 @@ module Playbook
       prop :tabindex
       prop :checked, type: Playbook::Props::Boolean,
                      default: false
+      prop :drag_handle, type: Playbook::Props::Boolean,
+                         default: true
+      prop :drag_id, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String
       prop :text, type: Playbook::Props::String
       prop :value, type: Playbook::Props::String

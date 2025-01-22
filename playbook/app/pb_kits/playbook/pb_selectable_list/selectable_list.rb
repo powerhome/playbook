@@ -14,6 +14,9 @@ module Playbook
       prop :items, type: Playbook::Props::Array,
                    default: []
 
+      prop :enable_drag, type: Playbook::Props::Boolean,
+                         default: false
+
       def classname
         generate_classname("pb_selectable_list_kit")
       end
