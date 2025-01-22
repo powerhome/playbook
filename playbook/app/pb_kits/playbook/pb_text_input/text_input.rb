@@ -36,7 +36,8 @@ module Playbook
       prop :add_on, type: Playbook::Props::NestedProps,
                     nested_kit: Playbook::PbTextInput::AddOn
 
-      prop :mask, type: Playbook::Props::String,
+      prop :mask, type: Playbook::Props::Enum,
+                  values: ["currency", "zip_code", "postal_code", "ssn", "credit_card", "cvv", nil],
                   default: nil
 
       def classname
