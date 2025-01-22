@@ -11,6 +11,7 @@ examples:
     - typeahead_error_state: Error State
     - typeahead_margin_bottom: Margin Bottom
     - typeahead_with_pills_color: With Pills (Custom Color)
+    - typeahead_truncated_text: Truncated Text
 
   react:
     - typeahead_default: Default
@@ -27,3 +28,4 @@ examples:
     - typeahead_custom_menu_list: Custom MenuList
     - typeahead_margin_bottom: Margin Bottom
     - typeahead_with_pills_color: With Pills (Custom Color)
+    - typeahead_truncated_text: Truncated Text
