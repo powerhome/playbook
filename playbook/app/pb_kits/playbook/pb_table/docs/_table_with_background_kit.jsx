@@ -68,25 +68,19 @@ const TableWithBackgroundKit = (props) => {
                 backgroundColor="error_subtle"
                 tag='col'
             />
-            <Background
-                backgroundColor={props.dark ? "card_dark" : "card_light"}
-                tag='col'
-            />
+            <col/>
             <Background
                 backgroundColor="warning_subtle"
                 tag='col'
             />
           </colgroup>
-          <Background
-              backgroundColor={props.dark ? "card_dark" : "card_light"}
-              tag='thead'
-          >
+          <thead>
             <tr>
-                <th>{'Column 1'}</th>
-                <th>{'Column 2'}</th>
-                <th>{'Column 3'}</th>
+              <th>{'Column 1'}</th>
+              <th>{'Column 2'}</th>
+              <th>{'Column 3'}</th>
             </tr>
-          </Background>
+          </thead>
           <tbody>
             <tr>
               <td>{'Value 1'}</td>
