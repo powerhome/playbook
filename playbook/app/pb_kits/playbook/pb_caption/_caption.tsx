@@ -8,6 +8,7 @@ type CaptionProps = {
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
+  dark?: boolean,
   data?: {[key: string]: string},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -24,6 +25,7 @@ const Caption = (props: CaptionProps): React.ReactElement => {
     children,
     className,
     color,
+    dark = false,
     data = {},
     htmlOptions = {},
     id,
@@ -52,9 +54,11 @@ const Caption = (props: CaptionProps): React.ReactElement => {
   const htmlProps = buildHtmlProps(htmlOptions)
 
   const css = classnames(
-    buildCss('pb_caption_kit', size, variant, color),
-    globalProps(props),
-    className,
+      buildCss('pb_caption_kit', size, variant,
+         color, dark ? 'dark' : ''
+        ),
+      globalProps(props),
+      className,
   )
 
   return (
@@ -64,6 +68,7 @@ const Caption = (props: CaptionProps): React.ReactElement => {
         {...htmlProps}
         className={css}
         id={id}
+        {...props}
     >
       {text || children}
     </Tag>

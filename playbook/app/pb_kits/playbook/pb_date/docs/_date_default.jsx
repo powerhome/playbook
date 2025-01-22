@@ -18,7 +18,9 @@ const DateDefault = (props) => {
             value={"2012-08-03"}
             {...props}
         />
-        <Caption>{"(Hyphenated Date)"}</Caption>
+        <Caption
+            {...props}
+        >{"(Hyphenated Date)"}</Caption>
       </div>
 
       <br />
@@ -56,6 +58,8 @@ const DateDefault = (props) => {
         <Title
             size={4}
             text={"(Hyphenated Date)"}
+            {...props}
+
         />
       </div>
 

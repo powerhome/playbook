@@ -14,6 +14,7 @@ type PbDateProps = {
   alignment?: "left" | "center" | "right";
   aria?: { [key: string]: string };
   className?: string;
+  dark?: boolean;
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
@@ -29,6 +30,7 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
     aria = {},
     alignment = "left",
     className,
+    dark = false,
     data = {},
     htmlOptions = {},
     id,
@@ -56,7 +58,7 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
   );
 
   return (
-    <div 
+    <div
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
@@ -67,7 +69,8 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
         ? <>
             {showIcon && (
               <div>
-                <Icon fixedWidth
+                <Icon dark={dark}
+                    fixedWidth
                     icon="calendar-alt"
                 />
               </div>
@@ -93,12 +96,14 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
           </>
         : size == "md" || size == "lg"
           ? (
-            <Title size={4}
+            <Title dark={dark}
+                size={4}
                 tag="h4"
             >
               {showIcon && (
                 <Body className="pb_icon_kit_container"
                     color="light"
+                    dark={dark}
                     tag="span"
                 >
                   <Icon fixedWidth
@@ -111,6 +116,7 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
                 <>
                   {weekday}
                   <Body color="light"
+                      dark={dark}
                       tag="span"
                       text=" • "
                   />
@@ -127,9 +133,11 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
               <>
                 {showIcon && (
                   <Caption className="pb_icon_kit_container"
+                      dark={dark}
                       tag="span"
                   >
-                    <Icon fixedWidth
+                    <Icon dark={dark}
+                        fixedWidth
                         icon="calendar-alt"
                         size="sm"
                     />
@@ -138,15 +146,20 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
 
                 {showDayOfWeek && (
                   <>
-                    <Caption tag="div">{weekday}</Caption>
+                    <Caption dark={dark}
+                        tag="div"
+                    >{weekday}</Caption>
                     <Caption color="light"
+                        dark={dark}
                         tag="div"
                         text=" • "
                     />
                   </>
                 )}
 
-                <Caption tag="span">
+                <Caption dark={dark}
+                    tag="span"
+                >
                   {month} {day}
                   {currentYear != year && <>{`, ${year}`}</>}
                 </Caption>
