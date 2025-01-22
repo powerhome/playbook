@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Caption, FormPill, Typeahead } from 'playbook-ui'
+import { Typeahead } from 'playbook-ui'
 
 const names = [
   { label: 'Alexander Nathaniel Montgomery', value: 'Alexander Nathaniel Montgomery' },
@@ -20,35 +20,6 @@ const TypeaheadTruncatedText = (props) => {
           truncate={1}
           {...props}
       />
-      <Caption text="Form Pill Truncation"/>
-      <Card 
-          maxWidth="xs" 
-          {...props}
-      >
-        <FormPill
-            avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-            name="Princess Amelia Mignonette Grimaldi Thermopolis Renaldo"
-            onClick={() => alert('Click!')}
-            tabIndex={0}
-            truncate={1}
-            {...props}
-        />
-        <FormPill
-            icon="badge-check"
-            onClick={() => {alert('Click!')}}
-            tabIndex={0}
-            text="icon and a very long tag to show truncation"
-            truncate={1}
-            {...props}
-        />
-        <FormPill
-            onClick={() => {alert('Click!')}}
-            tabIndex={0}
-            text="form pill with a very long tag to show truncation"
-            truncate={1}
-            {...props}
-        />
-      </Card>
     </>
   )
 }
