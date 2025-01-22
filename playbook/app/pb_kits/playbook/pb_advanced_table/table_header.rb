@@ -8,13 +8,25 @@ module Playbook
       prop :enable_toggle_expansion, type: Playbook::Props::Enum,
                                      values: %w[all header none],
                                      default: "header"
+      prop :responsive, type: Playbook::Props::Enum,
+                        values: %w[none scroll],
+                        default: "none"
+      prop :is_pinned_left, type: Playbook::Props::Boolean,
+                            default: false
 
       def classname
-        generate_classname("pb_advanced_table_header", "pb_table_thead", separator: " ")
+        additional_classes = []
+        additional_classes << "advanced-table-responsive-#{responsive}" if responsive == "scroll"
+        additional_classes << "pinned-left" if is_pinned_left && responsive == "scroll"
+
+        generate_classname("pb_advanced_table_header", "pb_table_thead", *additional_classes, separator: " ")
       end
 
-      def th_classname
-        generate_classname("table-header-cells", separator: " ")
+      def th_classname(is_first_column: false)
+        additional_classes = []
+        additional_classes << "pinned-left" if is_first_column && responsive == "scroll" && is_pinned_left
+
+        generate_classname("table-header-cells", *additional_classes, separator: " ")
       end
 
       def header_rows

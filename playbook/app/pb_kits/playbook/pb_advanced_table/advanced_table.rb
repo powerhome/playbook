@@ -12,7 +12,7 @@ module Playbook
                                      default: "header"
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[none scroll],
-                        default: "none"
+                        default: "scroll"
       prop :table_props, type: Playbook::Props::HashProp,
                          default: {}
 
