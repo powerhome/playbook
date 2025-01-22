@@ -166,8 +166,8 @@ body.PBDrawer__Body--close {
     transition: height $animation-duration ease-in-out;
     height: var(--drawer-height);
     z-index: 1;
-    
-    &.pb_drawer_collapsing {
+
+    &.pb_drawer_before_close {
       height: 0;
     }
 
@@ -267,10 +267,6 @@ body.PBDrawer__Body--close {
     max-width: 100%; 
   }
 
-  &_body_open {
-    overflow: hidden;
-  }
-
   &.drawer_border-full {
     box-shadow: none;
     border: 2px solid #f3f7fb;
@@ -315,14 +311,11 @@ body.PBDrawer__Body--close {
     &[class*="_right"]{
       justify-content: flex-end;
     }
-
-    &_after_open {
-      opacity: 1;
-    }
     
     &_before_close {
       animation: overlayFadeOut $animation-duration ease-in-out forwards;
       opacity: 0;
+      // height: 0;
     }
   }
 
@@ -334,21 +327,13 @@ body.PBDrawer__Body--close {
     bottom: 0;
     z-index: $z-index;
     opacity: 1;
-    animation: overlayFade $animation-duration ease-in-out forwards;
     pointer-events: none;
 
-    &_after_open {
-      opacity: 1;
-    }
-    
     &_before_close {
-      animation: overlayFadeOut $animation-duration ease-in-out forwards;
+      height: 0;
     }
   }
 
-  &.pb_drawer_after_open {
-    transform: translateX(0);
-  }
 
   &.pb_drawer_before_close {
     transform: translateX(-100%);

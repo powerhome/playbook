@@ -12,43 +12,30 @@ export const breakpointValues = {
 type BreakpointSize = keyof typeof breakpointValues
 
 interface UseBreakpointProps {
-  openBreakpoint?: BreakpointSize
-  closeBreakpoint?: BreakpointSize
+  breakpoint?: BreakpointSize
   triggerId?: string
 }
 
 export const useBreakpoint = ({ 
-  openBreakpoint = 'none',
-  closeBreakpoint = 'none',
+  breakpoint = 'none',
   triggerId 
 }: UseBreakpointProps) => {
   const [isOpenBreakpointOpen, setIsOpenBreakpointOpen] = useState(false)
   const [isUserClosed, setIsUserClosed] = useState(false)
 
   useEffect(() => {
-    if (openBreakpoint === 'none' && closeBreakpoint === 'none') return
+    if (breakpoint === 'none') return
 
     const handleResize = () => {
       const width = window.innerWidth
       
-      if (openBreakpoint !== 'none') {
-        const openBreakpointWidth = breakpointValues[openBreakpoint]
+        const openBreakpointWidth = breakpointValues[breakpoint]
         if (width >= openBreakpointWidth) {
           setIsOpenBreakpointOpen(true)
         } else {
           setIsOpenBreakpointOpen(false)
           setIsUserClosed(false)
         }
-      }
-
-      if (closeBreakpoint !== 'none') {
-        const closeBreakpointWidth = breakpointValues[closeBreakpoint]
-        if (width < closeBreakpointWidth) {
-          setIsOpenBreakpointOpen(false)
-        } else {
-          setIsOpenBreakpointOpen(true)
-        }
-      }
 
       // Handle menu button visibility
       if (triggerId) {
@@ -63,7 +50,7 @@ export const useBreakpoint = ({
     handleResize()
 
     return () => window.removeEventListener('resize', handleResize)
-  }, [openBreakpoint, closeBreakpoint, triggerId, isOpenBreakpointOpen])
+  }, [breakpoint, triggerId, isOpenBreakpointOpen])
 
   return {
     isOpenBreakpointOpen,
