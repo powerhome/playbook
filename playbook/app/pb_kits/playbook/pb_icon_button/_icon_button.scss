@@ -1,6 +1,6 @@
 $icon_colors: (
   default: $text_lt_default,
-  link:   $active_dark
+  link:   $primary_action
 );
 
 @mixin icon_button_variant($variant) {
@@ -19,7 +19,7 @@ $icon_colors: (
       background-color: $bg_light;
     }
     .icon_button_icon {
-      color: $active_dark;
+      color: $primary_action;
     }
   }
 
@@ -28,7 +28,7 @@ $icon_colors: (
       background-color: $bg_light;
     }
     .icon_button_icon {
-      color: $active_dark;
+      color: $primary_action;
     }
   }
 
@@ -42,7 +42,7 @@ $icon_colors: (
   }
 
   &:focus {
-    outline: 2px solid $active_dark;
+    outline: 2px solid $primary_action;
     border-radius: 8px;
   }
 
