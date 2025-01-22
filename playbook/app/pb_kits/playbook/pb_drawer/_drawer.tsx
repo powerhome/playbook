@@ -10,12 +10,6 @@ import {
 import { globalProps, globalInlineProps } from "../utilities/globalProps"
 import { DrawerContext } from "./context"
 import { useBreakpoint } from "./hooks/useBreakpoint"
-import { useDrawerAnimation } from "./hooks/useDrawerAnimation"
-
-
-type DrawerContextType = {
-  onClose: () => void
-} | null
 
 type DrawerProps = {
   aria?: { [key: string]: string }
@@ -77,12 +71,13 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
   useEffect(() => {
     if (withinElement) return;
 
-    const sizeMap: Record<DrawerProps["size"], string> = {
+    const sizeMap: { [key: string]: string } = {
       xl: "365px",
       lg: "300px",
       md: "250px",
       sm: "200px",
       xs: "64px",
+      full: "100%",
     };
     const body = document.querySelector("body");
     if (modalIsOpened && behavior === "push" && body) {
@@ -217,7 +212,7 @@ const Drawer = (props: DrawerProps): React.ReactElement | null => {
   if (!shouldRender) return null
 
   return (
-    <DrawerContext.Provider value={api as DrawerContextType}>
+    <DrawerContext.Provider value={api}>
       {withinElement ? (
         drawerContent
       ) : (

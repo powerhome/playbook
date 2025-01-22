@@ -14,7 +14,7 @@ const DrawerBorders = () => {
 
   return (
     <>
-      <Flex padding="md"
+      <Flex 
           wrap
       >
         <Button marginRight="md"

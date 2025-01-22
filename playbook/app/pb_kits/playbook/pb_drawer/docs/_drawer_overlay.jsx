@@ -28,7 +28,6 @@ const DrawerSizes = () => {
 
       {/* Drawers for each size */}
       <Drawer
-          behavior='push'
           onClose={toggleNoOverlayDrawer}
           opened={openedNoOverlayDrawer}
           overlay={false}
@@ -37,7 +36,6 @@ const DrawerSizes = () => {
         This is a Drawer with no overlay
       </Drawer>
       <Drawer
-          behavior='push'
           onClose={toggleOverlayDrawer}
           opened={openedOverlayDrawer}
           placement='right'

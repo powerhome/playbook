@@ -302,8 +302,8 @@ body.PBDrawer__Body--close {
     background-color: rgba($bg_dark, $opacity_4);
     z-index: $z-index;
     opacity: 0;
-    animation: overlayFade $animation-duration ease-in-out;
-    transition: opacity $animation-duration ease-in-out;
+    animation: overlayFade $animation-duration ease-in-out forwards;
+    
     &[class*="_left"]{
       justify-content: flex-start;
     }
@@ -321,7 +321,7 @@ body.PBDrawer__Body--close {
     }
     
     &_before_close {
-      animation: overlayFadeOut $animation-duration ease-in-out;
+      animation: overlayFadeOut $animation-duration ease-in-out forwards;
       opacity: 0;
     }
   }
@@ -334,7 +334,7 @@ body.PBDrawer__Body--close {
     bottom: 0;
     z-index: $z-index;
     opacity: 1;
-    animation: overlayFade $animation-duration ease-in-out;
+    animation: overlayFade $animation-duration ease-in-out forwards;
     pointer-events: none;
 
     &_after_open {
@@ -342,7 +342,7 @@ body.PBDrawer__Body--close {
     }
     
     &_before_close {
-      animation: overlayFadeOut $animation-duration ease-in-out;
+      animation: overlayFadeOut $animation-duration ease-in-out forwards;
     }
   }
 

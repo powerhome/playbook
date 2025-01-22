@@ -22,6 +22,7 @@ const DrawerMenu = () => {
         />
       </Button>
       <Drawer
+          breakpoint="md"
           placement='bottom'
           size='full'
           triggerId='menuButton'
