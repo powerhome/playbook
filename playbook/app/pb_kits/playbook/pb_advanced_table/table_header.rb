@@ -10,7 +10,7 @@ module Playbook
                                      default: "header"
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[none scroll],
-                        default: "none"
+                        default: "scroll"
       prop :is_pinned_left, type: Playbook::Props::Boolean,
                             default: false
 
