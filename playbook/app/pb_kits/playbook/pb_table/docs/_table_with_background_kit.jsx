@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import Table from '../_table'
 import Background from "../../pb_background/_background"
@@ -117,10 +116,6 @@ const TableWithBackgroundKit = (props) => {
         </div>
     </div>
   )
-}
-
-TableWithBackgroundKit.propTypes = {
-  dark: PropTypes.bool,
 }
 
 export default TableWithBackgroundKit
