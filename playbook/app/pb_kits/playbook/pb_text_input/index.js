@@ -24,6 +24,12 @@ export default class PbTextInput {
           case "zip_code":
             formattedValue = formatZipCode(rawValue);
             break;
+          case "credit_card":
+            formattedValue = formatCreditCard(rawValue);
+            break;
+          case "cvv":
+            formattedValue = formatCVV(rawValue);
+            break;
         }
 
         // Update the sanitized input field in the same wrapper
@@ -38,6 +44,9 @@ export default class PbTextInput {
               break;
             case "currency":
               sanitizedInput.value = sanitizeCurrency(formattedValue);
+              break;
+            case "credit_card":
+              sanitizedInput.value = sanitizeCreditCard(formattedValue);
               break;
             default:
               sanitizedInput.value = formattedValue; 
@@ -83,12 +92,25 @@ function formatPostalCode(value) {
   return cleaned.replace(/(\d{5})(?=\d)/, "$1-");
 }
 
+const formatCreditCard = (value) => {
+  const cleaned = value.replace(/\D/g, '').slice(0, 16)
+  return cleaned.replace(/(\d{4})(?=\d)/g, '$1 ')
+}
+
+const formatCVV = (value) => {
+  return value.replace(/\D/g, '').slice(0, 4)
+}
+
 function sanitizeSSN(input) {
   return input.replace(/\D/g, ""); 
 }
 
 function sanitizeCurrency(input) {
   return input.replace(/[$,]/g, ""); 
+}
+
+function sanitizeCreditCard(input) {
+  return input.replace(/\D/g, ""); 
 }
 
 // function to set cursor position
