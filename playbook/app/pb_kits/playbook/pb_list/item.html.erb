@@ -1,10 +1,32 @@
-<%= content_tag(:li,
-                aria: object.aria,
-                class: object.classname,
-                data: object.data,
-                id: object.id,
-                tabindex: object.tabindex,
-                **combined_html_options
-  ) do %>
+<% if object.draggable? %>
+  <%= pb_rails("draggable/draggable_item", props:{drag_id: object.drag_id}) do %>
+    <%= content_tag(:li,
+                    aria: object.aria,
+                    class: object.classname,
+                    data: object.data,
+                    id: object.id,
+                    tabindex: object.tabindex,
+                    **combined_html_options
+      ) do %>
+      <% if object.drag_handle %>
+        <span style="vertical-align: middle;">
+          <%= pb_rails("body") do %>
+            <svg width="auto" height="auto" viewBox="0 0 31 25" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor" class="pb_custom_icon svg-inline--fa vertical_align_middle  svg_fw"><path d="M12.904 6.355a1.48 1.48 0 01-1.5-1.5c0-.796.656-1.5 1.5-1.5.797 0 1.5.704 1.5 1.5 0 .844-.703 1.5-1.5 1.5zm0 7.5a1.48 1.48 0 01-1.5-1.5c0-.796.656-1.5 1.5-1.5.797 0 1.5.704 1.5 1.5 0 .844-.703 1.5-1.5 1.5zm1.5 6c0 .844-.703 1.5-1.5 1.5a1.48 1.48 0 01-1.5-1.5c0-.796.656-1.5 1.5-1.5.797 0 1.5.704 1.5 1.5zm4.5-13.5a1.48 1.48 0 01-1.5-1.5c0-.796.657-1.5 1.5-1.5.797 0 1.5.704 1.5 1.5 0 .844-.703 1.5-1.5 1.5zm1.5 6c0 .844-.703 1.5-1.5 1.5a1.48 1.48 0 01-1.5-1.5c0-.796.657-1.5 1.5-1.5.797 0 1.5.704 1.5 1.5zm-1.5 9a1.48 1.48 0 01-1.5-1.5c0-.796.657-1.5 1.5-1.5.797 0 1.5.704 1.5 1.5 0 .844-.703 1.5-1.5 1.5z" fill="#242B42"></path></svg>
+          <% end %>
+        </span>
+      <% end %>
+      <%= content.presence %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= content_tag(:li,
+                  aria: object.aria,
+                  class: object.classname,
+                  data: object.data,
+                  id: object.id,
+                  tabindex: object.tabindex,
+                  **combined_html_options
+    ) do %>
     <%= content.presence %>
+  <% end %>
 <% end %>

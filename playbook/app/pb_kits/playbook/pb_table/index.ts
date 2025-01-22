@@ -1,73 +1,67 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 
+const TABLE_WRAPPER_SELECTOR = "[data-pb-table-wrapper]";
+
 export default class PbTable extends PbEnhancedElement {
-    private stickyLeftColumns: string[] = [];
-    private handleStickyLeftColumnsRef: () => void;
+    stickyLeftColumns: string[] = [];
+    stickyRightColumns: string[] = [];
+    stickyRightColumnsReversed: string[] = [];
 
     static get selector(): string {
-      return '.table-responsive-collapse'
+      return TABLE_WRAPPER_SELECTOR;
     }
 
-    connect(): void {
-      const tables = document.querySelectorAll('.table-responsive-collapse');
-      // Each Table
-      [].forEach.call(tables, (table: HTMLTableElement) => {
-        // Header Titles
+    connect() {
+      if (this.element.classList.contains('table-responsive-collapse')) {
         const headers: string[] = [];
-        [].forEach.call(table.querySelectorAll('th'), (header: HTMLTableCellElement) => {
+
+        [].forEach.call(this.element.querySelectorAll('th'), (header: HTMLTableCellElement) => {
             const colSpan = header.colSpan
             for (let i = 0; i < colSpan; i++) {
               headers.push(header.textContent.replace(/\r?\n|\r/, ''));
             }
         });
-        // for each row in tbody
-        [].forEach.call(table.querySelectorAll('tbody tr'), (row: HTMLTableRowElement) => {
-          // for each cell
+  
+        [].forEach.call(this.element.querySelectorAll('tbody tr'), (row: HTMLTableRowElement) => {
           [].forEach.call(row.cells, (cell: HTMLTableCellElement, headerIndex: number) => {
-            // apply the attribute
             cell.setAttribute('data-title', headers[headerIndex])
           })
         })
-      });
+      }
 
-      // New sticky columns logic
       this.initStickyLeftColumns();
+      this.initStickyRightColumns();
     }
 
-    private initStickyLeftColumns(): void {
-      // Find tables with sticky-left-column class
-      const tables = document.querySelectorAll('.sticky-left-column');
+    initStickyLeftColumns() {
+      const table = this.element.querySelector('.sticky-left-column');
 
-      tables.forEach((table) => {
-        // Extract sticky left column IDs by looking at the component's class
+      if (table) {
         const classList = Array.from(table.classList);
+        const stickyColumnClass = classList.find(cls => cls.startsWith('sticky-left-columns-ids-'));
 
-        // Look for classes in the format sticky-left-column-{ids}
-        const stickyColumnClass = classList.find(cls => cls.startsWith('sticky-columns-'));
         if (stickyColumnClass) {
-          // Extract the IDs from the class name
           this.stickyLeftColumns = stickyColumnClass
-              .replace('sticky-columns-', '')
-              .split('-');
+            .replace('sticky-left-columns-ids-', '')
+            .split('-');
 
           if (this.stickyLeftColumns.length > 0) {
             setTimeout(() => {
-              this.handleStickyLeftColumnsRef = this.handleStickyLeftColumns.bind(this);
               this.handleStickyLeftColumns();
-              window.addEventListener('resize', this.handleStickyLeftColumnsRef);
+              window.addEventListener('resize', () => this.handleStickyLeftColumns());
             }, 10);
           }
         }
-      });
+      }
     }
 
-    private handleStickyLeftColumns(): void {
+    handleStickyLeftColumns() {
       let accumulatedWidth = 0;
 
       this.stickyLeftColumns.forEach((colId, index) => {
         const isLastColumn = index === this.stickyLeftColumns.length - 1;
-        const header = document.querySelector(`th[id="${colId}"]`);
-        const cells = document.querySelectorAll(`td[id="${colId}"]`);
+        const header = this.element.querySelector(`th[id="${colId}"]`);
+        const cells = this.element.querySelectorAll(`td[id="${colId}"]`);
 
         if (header) {
           header.classList.add('sticky');
@@ -99,10 +93,75 @@ export default class PbTable extends PbEnhancedElement {
       });
     }
 
+    initStickyRightColumns() {
+      const table = this.element.querySelector('.sticky-right-column');
+
+      if (table) {
+        const classList = Array.from(table.classList);
+        const stickyColumnClass = classList.find(cls => cls.startsWith('sticky-right-columns-ids-'));
+
+        if (stickyColumnClass) {
+          this.stickyRightColumns = stickyColumnClass
+            .replace('sticky-right-columns-ids-', '')
+            .split('-');
+          this.stickyRightColumnsReversed = this.stickyRightColumns.reverse();
+
+          if (this.stickyRightColumns.length > 0) {
+            setTimeout(() => {
+              this.handleStickyRightColumns();
+              window.addEventListener('resize', () => this.handleStickyRightColumns());
+            }, 10);
+          }
+        }
+      }
+    }
+
+    handleStickyRightColumns() {
+      let accumulatedWidth = 0;
+
+      this.stickyRightColumnsReversed.forEach((colId, index) => {
+        const isLastColumn = index === this.stickyRightColumns.length - 1;
+        const header = this.element.querySelector(`th[id="${colId}"]`);
+        const cells = this.element.querySelectorAll(`td[id="${colId}"]`);
+
+        if (header) {
+          header.classList.add('sticky');
+          (header as HTMLElement).style.right = `${accumulatedWidth}px`;
+
+          if (!isLastColumn) {
+            header.classList.add('with-border-left');
+            header.classList.remove('sticky-right-shadow');
+          } else {
+            header.classList.remove('with-border-right');
+            header.classList.add('sticky-right-shadow');
+          }
+
+          accumulatedWidth += (header as HTMLElement).offsetWidth;
+        }
+
+        cells.forEach((cell) => {
+          cell.classList.add('sticky');
+          (cell as HTMLElement).style.right = `${accumulatedWidth - (header as HTMLElement).offsetWidth}px`;
+
+          if (!isLastColumn) {
+            cell.classList.add('with-border-left');
+            cell.classList.remove('sticky-right-shadow');
+          } else {
+            cell.classList.remove('with-border-left');
+            cell.classList.add('sticky-right-shadow');
+          }
+        });
+      });
+    }
+
     // Cleanup method to remove event listener
-    disconnect(): void {
-      if (this.handleStickyLeftColumnsRef) {
-        window.removeEventListener('resize', this.handleStickyLeftColumnsRef);
+    disconnect() {
+      if (this.stickyLeftColumns.length > 0) {
+        window.removeEventListener('resize', () => this.handleStickyLeftColumns());
+      }
+
+      if (this.stickyRightColumns.length > 0) {
+        window.removeEventListener('resize', () => this.handleStickyRightColumns());
       }
     }
 }
