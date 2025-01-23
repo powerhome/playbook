@@ -11,8 +11,8 @@ import Icon from "../pb_icon/_icon";
 import Title from "../pb_title/_title";
 
 type PbDateProps = {
-  alignment?: "left" | "center" | "right";
   aria?: { [key: string]: string };
+  alignment?: "left" | "center" | "right";
   className?: string;
   dark?: boolean;
   data?: { [key: string]: string };

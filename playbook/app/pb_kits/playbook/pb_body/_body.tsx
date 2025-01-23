@@ -30,6 +30,7 @@ const Body = (props: BodyProps): React.ReactElement => {
     children,
     className,
     color = '',
+    dark = false,
     data = {},
     highlightedText = [],
     highlighting = false,
@@ -45,7 +46,7 @@ const Body = (props: BodyProps): React.ReactElement => {
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
-    buildCss('pb_body_kit', color, variant, status),
+    buildCss('pb_body_kit', color, dark ? 'dark' : '', variant, status),
     globalProps(props),
     className
   )
@@ -57,10 +58,13 @@ const Body = (props: BodyProps): React.ReactElement => {
         {...dataProps}
         {...htmlProps}
         className={classes}
+        dark={dark}
         id={id}
+        {...props}
     >
       { highlighting && (
         <Highlight
+            dark={dark}
             highlightedText={highlightedText}
             text={text}
         >
