@@ -67,7 +67,10 @@ const TableWithBackgroundKit = (props) => {
                 backgroundColor="error_subtle"
                 tag='col'
             />
-            <col/>
+            <Background
+                backgroundColor="info_subtle"
+                tag='col'
+            />
             <Background
                 backgroundColor="warning_subtle"
                 tag='col'
