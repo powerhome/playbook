@@ -42,7 +42,7 @@
 <%= pb_rails("table", props: { size: "sm", margin_bottom: "lg" }) do %>
   <colgroup>
     <%= pb_rails("background", props: { background_color: "error_subtle", tag: "col" }) %>
-    <col/>
+    <%= pb_rails("background", props: { background_color: "info_subtle", tag: "col" }) %>
     <%= pb_rails("background", props: { background_color: "warning_subtle", tag: "col" }) %>
   </colgroup>
   <thead>
