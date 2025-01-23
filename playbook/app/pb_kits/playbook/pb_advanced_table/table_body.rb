@@ -19,8 +19,6 @@ module Playbook
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[none scroll],
                         default: "scroll"
-      prop :is_pinned_left, type: Playbook::Props::Boolean,
-                            default: false
 
       def flatten_columns(columns)
         columns.flat_map do |col|
@@ -51,12 +49,12 @@ module Playbook
           row_parent: "#{id}_#{ancestor_ids.last}",
         }
         # Subrow header if applicable
-        output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: leaf_columns, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", responsive: responsive, is_pinned_left: is_pinned_left, subrow_data_attributes: subrow_data_attributes }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
+        output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: leaf_columns, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", responsive: responsive, subrow_data_attributes: subrow_data_attributes }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
 
         current_data_attributes = current_depth.zero? ? { row_depth: 0 } : table_data_attributes
 
         # Additional class and data attributes needed for toggle logic
-        output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, is_pinned_left: is_pinned_left })
+        output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive })
 
         if row[:children].present?
           row[:children].each do |child_row|
@@ -80,14 +78,13 @@ module Playbook
 
       def classname
         additional_classes = []
-        additional_classes << "advanced-table-responsive-#{responsive}" if responsive == "scroll"
-        additional_classes << "pinned-left" if is_pinned_left && responsive == "scroll"
+        additional_classes << "advanced-table-responsive-#{responsive} pinned-left" if responsive == "scroll"
 
         generate_classname("pb_advanced_table_body", *additional_classes, separator: " ")
       end
 
       def pinned_cell_class(index)
-        return "pinned-left" if index.zero? && is_pinned_left && responsive == "scroll"
+        return "pinned-left" if index.zero? && responsive == "scroll"
 
         ""
       end

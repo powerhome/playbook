@@ -19,8 +19,6 @@ module Playbook
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[none scroll],
                         default: "scroll"
-      prop :is_pinned_left, type: Playbook::Props::Boolean,
-                            default: false
 
       def data
         Hash(prop(:data)).merge(subrow_data_attributes)
@@ -32,7 +30,7 @@ module Playbook
 
       def td_classname(index)
         classes = %w[id-cell chrome-styles]
-        classes << "pinned-left" if index.zero? && is_pinned_left && responsive == "scroll"
+        classes << "pinned-left" if index.zero? && responsive == "scroll"
         classes.join(" ")
       end
 

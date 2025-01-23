@@ -5,13 +5,11 @@
     <% else %>
       <%= pb_rails("advanced_table/table_header", props: { column_definitions: object.column_definitions,
                                                             enable_toggle_expansion: object.enable_toggle_expansion,
-                                                            responsive: object.responsive,
-                                                            is_pinned_left: object.responsive == "scroll" }) %>
+                                                            responsive: object.responsive }) %>
       <%= pb_rails("advanced_table/table_body", props: { id: object.id,
                                                          table_data: object.table_data,
                                                          column_definitions: object.column_definitions,
-                                                         responsive: object.responsive,
-                                                         is_pinned_left: object.responsive == "scroll" }) %>
+                                                         responsive: object.responsive }) %>
     <% end %>
   <% end %>
 <% end %>
