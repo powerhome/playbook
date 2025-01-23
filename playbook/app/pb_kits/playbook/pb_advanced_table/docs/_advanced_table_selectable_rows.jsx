@@ -1,8 +1,8 @@
 import React from "react"
 import { AdvancedTable } from "playbook-ui"
-import PAGINATION_MOCK_DATA from "./advanced_table_pagination_mock_data.json"
+import MOCK_DATA from "./advanced_table_mock_data_with_id.json"
 
-const AdvancedTablePaginationWithProps = (props) => {
+const AdvancedTableSelectableRows = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -35,24 +35,26 @@ const AdvancedTablePaginationWithProps = (props) => {
     },
   ]
 
-  const paginationProps = {
-    pageIndex: 1,
-    pageSize: 10,
-    range: 2
-  }
-  
+  //Render the subRow header rows
+  const subRowHeaders = ["Quarter", "Month", "Day"]
+
+
   return (
-    <>
+    <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
-          pagination
-          paginationProps={paginationProps}
-          responsive="none"
-          tableData={PAGINATION_MOCK_DATA}
+          enableToggleExpansion="all"
+          onRowSelectionChange={(selectedRows) => console.log(selectedRows)}
+          selectableRows
+          tableData={MOCK_DATA}
+          
           {...props}
-      />
-    </>
+      >
+        <AdvancedTable.Header />
+        <AdvancedTable.Body subRowHeaders={subRowHeaders}/>
+      </AdvancedTable>
+    </div>
   )
 }
 
-export default AdvancedTablePaginationWithProps
+export default AdvancedTableSelectableRows
