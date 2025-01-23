@@ -61,7 +61,7 @@
       <tr>
         <% row.each do |key, value| %>
           <%= pb_rails("background", props: {
-              classname: (params["sort"] && params["sort"].start_with?(key) ? "highlight" : "no-highlight"),
+              background_color: (params["sort"] && params["sort"].start_with?(key) ? "info_subtle" : "card_light"),
               text_align: (value.is_a?(Integer) ? "right" : ""),
               tag: "td"
           }) do %>
