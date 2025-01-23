@@ -13,6 +13,8 @@ module Playbook
                                default: true
       prop :table_data_attributes, type: Playbook::Props::HashProp,
                                    default: {}
+      prop :loading, type: Playbook::Props::Boolean,
+                     default: false
 
       def data
         Hash(prop(:data)).merge(table_data_attributes)
