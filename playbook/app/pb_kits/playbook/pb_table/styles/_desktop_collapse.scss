@@ -74,12 +74,24 @@
       &.table-card {
         background: none !important;
 
+        &.dark {
+          tbody, .pb_table_tbody {
+            tr, .pb_table_tr {
+              td, .pb_table_td {
+                background: $bg_dark_card !important;
+              }
+            }
+          }
+        }
+
         tbody, .pb_table_tbody {
           tr, .pb_table_tr {
             td, .pb_table_td {
+              background: $white !important;
               border-left-width: 1px !important;
               border-right-width: 1px !important;
               border-top-width: 1px !important;
+
               &:after {
                 height: 0;
                 background-color: transparent;
