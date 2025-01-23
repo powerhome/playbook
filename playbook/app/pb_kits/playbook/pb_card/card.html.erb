@@ -1,11 +1,13 @@
 <% if object.draggable_item %>
     <%= pb_rails("draggable/draggable_item", props:{drag_id: object.drag_id}) do %>
         <%= pb_content_tag(object.tag) do %>
-            <% if object.draggable_item && object.drag_handle %>
+            <% if object.draggable_item %>
                 <%= pb_rails("flex", props: { align: "center" }) do %>
-                    <span classname="card_draggable_handle">
-                        <%= pb_rails("icon", props: { icon: "grip-dots-vertical", padding_right: "xs" }) %>
-                    </span>
+                    <% if object.drag_handle %>
+                        <span classname="card_draggable_handle">
+                            <%= pb_rails("icon", props: { icon: "grip-dots-vertical", padding_right: "xs" }) %>
+                        </span>
+                    <% end %>
                     <div style="width: 100%">
                         <%= content.presence %>
                     </div>
