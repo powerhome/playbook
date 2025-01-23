@@ -1,5 +1,22 @@
-<%= pb_content_tag(object.tag) do %>
-    <%= content.presence %>
+<% if object.draggable_item %>
+    <%= pb_rails("draggable/draggable_item", props:{drag_id: object.drag_id}) do %>
+        <%= pb_content_tag(object.tag) do %>
+            <% if object.draggable_item && object.drag_handle %>
+                <%= pb_rails("flex", props: { align: "center", width: "100%" }) do %>
+                    <span classname="card_draggable_handle">
+                        <%= pb_rails("icon", props: { icon: "grip-dots-vertical", vertical_align: "middle", padding_right: "xs" }) %>
+                    </span>
+                    <div style="width: '100%'">
+                        <%= content.presence %>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% else %>
+    <%= pb_content_tag(object.tag) do %>
+        <%= content.presence %>
+    <% end %>
 <% end %>
 
 
