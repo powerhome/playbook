@@ -1,0 +1,3 @@
+The optional `loading` prop takes a boolean value that can be managed using state. If loading is true, the table will display the loading skeleton and once loading is false, the table will render with the data provided. 
+
+By default, the inital row count of the loading skeleton is set to 10. If you want more control over this initial row count, the optional `initialLoadingRowsCount` prop can be used to pass in a number. __NOTE__: This is only for the first render of the table, subsequent loading skeleton row count logic is handled within the kit itself.
