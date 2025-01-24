@@ -30,6 +30,6 @@
     "*.rb": "bundle exec --gemfile=playbook-website/Gemfile rubocop --parallel"
   },
   "dependencies": {
-    "eslint-plugin-react": "^7.33.2"
+    "eslint-plugin-react": "^7.37.4"
   }
 }
