@@ -3,7 +3,6 @@
 module Playbook
   module PbCopyButton
     class CopyButton < ::Playbook::KitBase
-      prop :from
       prop :text
       prop :tooltip_position,
            type: Playbook::Props::Enum,
@@ -14,6 +13,12 @@ module Playbook
 
       def classname
         generate_classname("pb_copy_button")
+      end
+
+      def data
+        Hash(values[:data]).merge(
+          "copy-value": value
+        )
       end
     end
   end
