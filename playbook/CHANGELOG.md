@@ -1,3 +1,49 @@
+# 14.12.0
+#### January 24, 2025
+
+[14.12.0](https://github.com/powerhome/playbook/tree/14.12.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Drawer Kit Refactor ([\#4028](https://github.com/powerhome/playbook/pull/4028)) ([@jasperfurniss](https://github.com/jasperfurniss))
+- Dark Audit Multiple Users ([\#4139](https://github.com/powerhome/playbook/pull/4139)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Rails Input Masking ([\#4127](https://github.com/powerhome/playbook/pull/4127)) ([@markdoeswork](https://github.com/markdoeswork))
+- Dark Mode Select ([\#4128](https://github.com/powerhome/playbook/pull/4128)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Dark Mode - Map Audit ([\#4154](https://github.com/powerhome/playbook/pull/4154)) ([@gabbymassaro](https://github.com/gabbymassaro))
+- SelectableRows for AdvancedTable- React ([\#4131](https://github.com/powerhome/playbook/pull/4131)) ([@nidaqg](https://github.com/nidaqg))
+- Selectable Icon - Dark Mode Audit ([\#4140](https://github.com/powerhome/playbook/pull/4140)) ([@gabbymassaro](https://github.com/gabbymassaro))
+- Make Date Picker Work within Turbo Frames ([\#4142](https://github.com/powerhome/playbook/pull/4142)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Add Expandable/Collapsible Rows to Basic Table Component - RAILS only ([\#4122](https://github.com/powerhome/playbook/pull/4122)) ([@nickamantia](https://github.com/nickamantia))
+- DARK MODE AUDIT - Radio (~[\#4133](https://github.com/powerhome/playbook/pull/4133)) ([@cmhorsey](https://github.com/cmhorsey))
+- Enable Dark Mode in Loading Inline Text and Labels ([\#4130](https://github.com/powerhome/playbook/pull/4130)) ([@cmhorsey](https://github.com/cmhorsey))
+- Convert Kits to Use Pb_content_tag ([\#4106](https://github.com/powerhome/playbook/pull/4106)) ([@ASPhillips8](https://github.com/ASPhillips8))
+- Phone Number Input formatAsYouType Prop ([\#4125](https://github.com/powerhome/playbook/pull/4125)) ([@kangaree](https://github.com/kangaree))
+- Adding Sticky Right Column and Refactoring PBTable Enhanced Element ([\#4135](https://github.com/powerhome/playbook/pull/4135)) ([@carloslimasd](https://github.com/carloslimasd))
+- Draggable Kit: Simplified API for List kit for Rails ([\#4132](https://github.com/powerhome/playbook/pull/4132)) ([@skduncan](https://github.com/skduncan))
+- Draggable Kit: Simplified API for SelectableList for Rails ([\#4124](https://github.com/powerhome/playbook/pull/4124)) ([@skduncan](https://github.com/skduncan))
+- Advanced Table - Add Table Props to Rails kit ([\#4107](https://github.com/powerhome/playbook/pull/4107)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Fixed Bugs:**
+- Fix Website Markdown Code Indentation ([\#4137](https://github.com/powerhome/playbook/pull/4137)) ([@cmhorsey](https://github.com/cmhorsey))
+- Fix Doc Typos ([\#4136](https://github.com/powerhome/playbook/pull/4136)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Fix Timeline Label and Step Spacing ([\#4097](https://github.com/powerhome/playbook/pull/4097)) ([@kangaree](https://github.com/kangaree))
+- Scss fixes for Responsive Scroll for Table ([\#4123](https://github.com/powerhome/playbook/pull/4123)) ([@nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+- Typeahead Truncated Text Docs ([\#4152](https://github.com/powerhome/playbook/pull/4152)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Update SWIFT_CHANGELOG.md ([\#4138](https://github.com/powerhome/playbook/pull/4138)) ([@jasoncypret](https://github.com/jasoncypret))
+- Date Picker Default Date Prop Description Update ([\#4129](https://github.com/powerhome/playbook/pull/4129)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Add Brakeman as a Development Dependency in Playbook ([\#4121](https://github.com/powerhome/playbook/pull/4121)) ([@that-jill](https://github.com/that-jill))
+- Fix Linting Errors - Typeahead Kit ([\#4091](https://github.com/powerhome/playbook/pull/4091)) ([@Tomm1128](https://github.com/Tomm1128))
+- 'Inactive RC' Label: Skip Later Steps ([\#4087](https://github.com/powerhome/playbook/pull/4087)) ([@kangaree](https://github.com/kangaree))
+
+**New Kit:**
+- Icon Button Rails - BETA ([\#4141](https://github.com/powerhome/playbook/pull/4141)) ([@markdoeswork](https://github.com/markdoeswork))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.11.1...14.12.0)
+
+
 # 💀Skeleton Loading Kit - Smooth, Seamless Loading!✨
 ##### January 8, 2025
 
