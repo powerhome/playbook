@@ -1,1 +1,1 @@
-The `state` prop will always capitalize the state even if the data entered was lower case. See the code example how `state="pa"` becomes PA when rendered.
+The `state` prop will always capitalize the state even if the data entered was lower case. See the code example how `state="pa"` becomes PA when rendered. When you pass `preserveCase` for React or `preserve_case` for Rails, the street address will be rendered as entered with no title capitalization. 
