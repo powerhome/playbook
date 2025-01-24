@@ -5,7 +5,7 @@ import HomeAddressStreet from '../_home_address_street'
 const HomeAddressStreetFormatting = (props) => {
   return (
     <HomeAddressStreet
-        address="70 prospect ave"
+        address="70 pRoSpEcT ave"
         addressCont="Apt M18"
         city="West Chester"
         homeId="8250263"
