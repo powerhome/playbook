@@ -5,6 +5,7 @@
             <%= pb_rails("table/table_cell") do %>Expanded<% end %>
             <%= pb_rails("table/table_cell") do %>Expanded<% end %>
             <%= pb_rails("table/table_cell") do %>Expanded<% end %>
+            <%= pb_rails("table/table_cell") do %>Expanded<% end %>
         <% end %>
     <% end %>
 <% end %>
@@ -21,7 +22,7 @@
        <% end %>
   <% end %>
   <%= pb_rails("table/table_body") do %>
-      <%= pb_rails("table/table_row", props: { collapsible: true, collapsible_content: content, collapsible_side_highlight: true, id: "3" }) do %>
+      <%= pb_rails("table/table_row", props: { collapsible: true, collapsible_content: content, collapsible_side_highlight: false, id: "3" }) do %>
           <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
           <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
           <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
