@@ -1,5 +1,4 @@
 import PbEnhancedElement from '../pb_enhanced_element'
-
 import {
   createPopperLite as createPopper,
   flip,
@@ -17,14 +16,51 @@ export default class PbTooltip extends PbEnhancedElement {
 
   connect() {
     this.triggerElements.forEach((trigger) => {
-      trigger.addEventListener('click', () => {
-        this.showTooltip(trigger)
-      })
+      const method = this.triggerMethod
+
+      if (method === 'click') {
+        trigger.addEventListener('click', () => {
+          this.showTooltip(trigger)
+        })
+      } else {
+        trigger.addEventListener('mouseenter', () => {
+          this.mouseenterTimeout = setTimeout(() => {
+            this.showTooltip(trigger)
+            this.checkCloseTooltip(trigger)
+          }, TOOLTIP_TIMEOUT)
+
+          trigger.addEventListener('mouseleave', () => {
+            clearTimeout(this.mouseenterTimeout)
+            setTimeout(() => {
+              this.hideTooltip()
+            }, 0)
+          }, { once: true })
+        })
+
+        this.tooltip.addEventListener('mouseenter', () => {
+          clearTimeout(this.mouseenterTimeout)
+        })
+        this.tooltip.addEventListener('mouseleave', () => {
+          this.hideTooltip()
+        })
+      }
     })
   }
 
+  checkCloseTooltip(trigger) {
+    document.querySelector('body').addEventListener('click', ({ target }) => {
+      const isTooltip = target.closest(`#${this.tooltipId}`) === this.tooltip
+      const isTrigger = target.closest(this.triggerElementSelector) === trigger
+      if (isTrigger || isTooltip) {
+        this.checkCloseTooltip(trigger)
+      } else {
+        this.hideTooltip()
+      }
+    }, { once: true })
+  }
+
   showTooltip(trigger) {
-    if (this.shouldShowTooltip === "false") return
+    if (this.shouldShowTooltip === 'false') return
 
     this.popper = createPopper(trigger, this.tooltip, {
       placement: this.position,
@@ -49,10 +85,12 @@ export default class PbTooltip extends PbEnhancedElement {
     })
     this.tooltip.classList.add('show')
 
-    clearTimeout(this.autoHideTimeout)
-    this.autoHideTimeout = setTimeout(() => {
-      this.hideTooltip()
-    }, 1000)
+    if (this.triggerMethod === 'click') {
+      clearTimeout(this.autoHideTimeout)
+      this.autoHideTimeout = setTimeout(() => {
+        this.hideTooltip()
+      }, 1000)
+    }
   }
 
   hideTooltip() {
@@ -83,11 +121,12 @@ export default class PbTooltip extends PbEnhancedElement {
     }
 
     if (!triggerEl.length) triggerEl = [triggerEl]
-    return this._triggerElements = (this._triggerElements || triggerEl)
+    return (this._triggerElements = this._triggerElements || triggerEl)
   }
 
   get tooltip() {
-    return this._tooltip = (this._tooltip || this.element.querySelector(`#${this.tooltipId}`))
+    return (this._tooltip =
+      this._tooltip || this.element.querySelector(`#${this.tooltipId}`))
   }
 
   get position() {
@@ -108,5 +147,9 @@ export default class PbTooltip extends PbEnhancedElement {
 
   get shouldShowTooltip() {
     return this.element.dataset.pbTooltipShowTooltip
+  }
+
+  get triggerMethod() {
+    return this.element.dataset.pbTooltipTriggerMethod || 'hover'
   }
 }
