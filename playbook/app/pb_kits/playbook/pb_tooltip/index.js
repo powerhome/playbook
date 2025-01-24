@@ -17,40 +17,10 @@ export default class PbTooltip extends PbEnhancedElement {
 
   connect() {
     this.triggerElements.forEach((trigger) => {
-      trigger.addEventListener('mouseenter', () => {
-        this.mouseenterTimeout = setTimeout(() => {
-          this.showTooltip(trigger)
-          this.checkCloseTooltip(trigger)
-        }, TOOLTIP_TIMEOUT)
-
-        trigger.addEventListener('mouseleave', () => {
-          clearTimeout(this.mouseenterTimeout)
-
-          setTimeout(() => {
-            this.hideTooltip()
-          }, 0)
-        }, { once: true })
+      trigger.addEventListener('click', () => {
+        this.showTooltip(trigger)
       })
     })
-
-    this.tooltip.addEventListener('mouseenter', () => {
-      clearTimeout(this.mouseenterTimeout)
-    })
-    this.tooltip.addEventListener('mouseleave', () => {
-      this.hideTooltip()
-    })
-  }
-
-  checkCloseTooltip(trigger) {
-    document.querySelector('body').addEventListener('click', ({ target }) => {
-      const isTooltip = target.closest(`#${this.tooltipId}`) === this.tooltip
-      const isTrigger = target.closest(this.triggerElementSelector) === trigger
-      if (isTrigger || isTooltip) {
-        this.checkCloseTooltip(trigger)
-      } else {
-        this.hideTooltip()
-      }
-    }, { once: true })
   }
 
   showTooltip(trigger) {
@@ -78,6 +48,11 @@ export default class PbTooltip extends PbEnhancedElement {
       ],
     })
     this.tooltip.classList.add('show')
+
+    clearTimeout(this.autoHideTimeout)
+    this.autoHideTimeout = setTimeout(() => {
+      this.hideTooltip()
+    }, 1000)
   }
 
   hideTooltip() {
@@ -94,15 +69,15 @@ export default class PbTooltip extends PbEnhancedElement {
     let triggerEl
 
     if (this.triggerElementId) {
-      triggerEl = document.querySelector(`#${this.triggerElementId}`) //deprecated
+      triggerEl = document.querySelector(`#${this.triggerElementId}`)
     } else {
       const selectorIsId = this.triggerElementSelector.indexOf('#') > -1
-      triggerEl = selectorIsId ? document.querySelector(`${this.triggerElementSelector}`) :
-        document.querySelectorAll(`${this.triggerElementSelector}`)
+      triggerEl = selectorIsId
+        ? document.querySelector(`${this.triggerElementSelector}`)
+        : document.querySelectorAll(`${this.triggerElementSelector}`)
     }
 
     if (!triggerEl) {
-      /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
       console.error('Tooltip Kit: an invalid or unavailable DOM reference was provided!')
       return []
     }
