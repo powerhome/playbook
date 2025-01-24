@@ -2,8 +2,8 @@
 ##### Jan 24, 2025
 
 ### Bug Fixes
-Popover Activity Flag: Added a flag to track popover activity in [#488]
-Reaction Button Font Color Alignment: Fixed an issue with font color alignment in the reaction button in [#490]
+- Popover Activity Flag: Added a flag to track popover activity in [#488]
+- Reaction Button Font Color Alignment: Fixed an issue with font color alignment in the reaction button in [#490]
 
 [Full Changelog](https://github.com/Power/Playbook/compare/6.6.2...6.6.3)
 
