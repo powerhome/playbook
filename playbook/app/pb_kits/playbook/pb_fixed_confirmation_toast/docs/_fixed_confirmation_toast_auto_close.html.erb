@@ -1,0 +1,74 @@
+<%= pb_rails("button", props: { text: "Show Auto Close Toast", variant: "secondary", data: { toast: "#toast-auto-close" } }) %>
+<%= pb_rails("button", props: { text: "Show Closeable Auto Close Toast", variant: "secondary", data: { toast: "#toast-auto-close-closeable" } }) %>
+
+<%= pb_rails("fixed_confirmation_toast", props: {
+  auto_close: 3000,
+  id: "toast-auto-close",
+  text: "I will disappear in 3 seconds.",
+  status: "tip",
+  vertical: "top",
+  horizontal: "center"
+}) %>
+
+<%= pb_rails("fixed_confirmation_toast", props: {
+  auto_close: 10000,
+  closeable: true,
+  id: "toast-auto-close-closeable",
+  text: "I will disappear in 10 seconds.",
+  status: "tip",
+  vertical: "top",
+  horizontal: "center"
+}) %>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+    const toasts = {
+      '#toast-auto-close': document.querySelector("#toast-auto-close"),
+      '#toast-auto-close-closeable': document.querySelector("#toast-auto-close-closeable")
+    }
+    
+    const buttons = {
+      '#toast-auto-close': document.querySelector("button[data-toast='#toast-auto-close']"),
+      '#toast-auto-close-closeable': document.querySelector("button[data-toast='#toast-auto-close-closeable']")
+    }
+
+    const hideAllToastsUponPageLoad = () => {
+      Object.values(toasts).forEach(toast => {
+        if (toast) toast.style.display = "none"
+      })
+    }
+
+    const showAndAutoCloseToast = (toastId) => {
+      hideAllToastsUponPageLoad()
+      const toast = toasts[toastId]
+
+      if (toast) {
+        toast.style.display = "flex"  // Show the selected toast
+
+        const autoCloseClass = Array.from(toast.classList).find(cls => cls.startsWith('auto_close_'))
+        if (autoCloseClass) {
+          const duration = parseInt(autoCloseClass.split('_')[2]) || 0;  // Use 0 as fallback if parsing fails
+
+          if (toast.autoCloseTimeout) {
+            clearTimeout(toast.autoCloseTimeout)
+          }
+
+          toast.autoCloseTimeout = setTimeout(() => {
+            toast.style.display = "none"
+          }, duration)
+        }
+      }
+    }
+
+    Object.keys(buttons).forEach((key) => {
+      const button = buttons[key]
+      if (button) {
+        button.onclick = () => {
+          showAndAutoCloseToast(key)
+        }
+      }
+    })
+
+    hideAllToastsUponPageLoad()
+  })
+</script>

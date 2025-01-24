@@ -2,34 +2,45 @@ import PbEnhancedElement from '../pb_enhanced_element'
 
 export default class PbFixedConfirmationToast extends PbEnhancedElement {
   static get selector() {
-    return '.remove_toast'
+    return '.auto_close, .remove_toast'
   }
 
   connect() {
     this.self = this.element
     this.autoCloseToast(this.self)
 
-    this.self.addEventListener('click', () => {
-      this.removeToast(this.self)
-    })
+    if (this.self.classList.contains('remove_toast')) {
+      this.self.addEventListener('click', () => {
+        this.removeToast(this.self)
+      })
+    }
   }
 
   removeToast(elem) {
+    if (elem.autoCloseTimeout) {
+      clearTimeout(elem.autoCloseTimeout)
+      elem.autoCloseTimeout = null
+    }
+
     elem.parentNode.removeChild(elem)
   }
 
   autoCloseToast(element) {
-    const classListValues = element.classList.value
-    const hasAutoCloseClass = classListValues.includes('auto_close')
+    const hasAutoCloseClass = element.classList.contains('auto_close')
 
     if (hasAutoCloseClass) {
-      const classList = classListValues.split(' ')
-      const autoCloseValue = classList[classList.length - 1].split('_')[2]
-      const autoCloseIntValue = parseInt(autoCloseValue)
+      const autoCloseClass = Array.from(element.classList).find(cls => cls.startsWith('auto_close_'))
+      if (autoCloseClass) {
+        const duration = parseInt(autoCloseClass.split('_')[2])
 
-      setTimeout(() => {
-        this.removeToast(element)
-      }, autoCloseIntValue)
+        if (element.autoCloseTimeout) {
+          clearTimeout(element.autoCloseTimeout)
+        }
+
+        element.autoCloseTimeout = setTimeout(() => {
+          this.removeToast(element)
+        }, duration)
+      }
     }
   }
 }
