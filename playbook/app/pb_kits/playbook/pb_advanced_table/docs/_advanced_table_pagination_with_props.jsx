@@ -47,6 +47,7 @@ const AdvancedTablePaginationWithProps = (props) => {
           columnDefinitions={columnDefinitions}
           pagination
           paginationProps={paginationProps}
+          responsive="none"
           tableData={PAGINATION_MOCK_DATA}
           {...props}
       />

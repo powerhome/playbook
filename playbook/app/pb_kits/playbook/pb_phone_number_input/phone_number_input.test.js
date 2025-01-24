@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "../utilities/test-utils";
+import { render, screen, act } from "../utilities/test-utils";
 import PhoneNumberInput from "./_phone_number_input";
 
 const testId = "phoneNumberInput";
@@ -119,4 +119,23 @@ test("should trigger callback", () => {
   );
 
   expect(handleOnValidate).toBeCalledWith(true)
+});
+
+test("should format phone number as '555-555-5555' with formatAsYouType and 'us' country", () => {
+    const props = {
+        initialCountry: 'us',
+        formatAsYouType: true,
+        id: testId,
+    };
+
+    render(<PhoneNumberInput {...props} />);
+    
+    const input = screen.getByRole("textbox");
+    
+    act(() => {
+        input.value = "5555555555";
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    expect(input.value).toBe("555-555-5555");
 });

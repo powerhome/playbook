@@ -6,7 +6,7 @@ const TableStickyLeftColumns = () => {
         <Table
             responsive="scroll"
             size="md"
-            stickyLeftcolumn={["1", "2", "3"]}
+            stickyLeftColumn={["1", "2", "3"]}
         >
             <thead>
                 <tr>

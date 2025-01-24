@@ -2,4 +2,4 @@ The `defaultDate`/`default_date` prop has a null or empty string value by defaul
 
 If you use a Date object without UTC time standardization the Date Picker kit may misinterpret that date as yesterdays date (consequence of timezone differentials and the Javascript Date Object constructor).  See [this GitHub issue for more information](https://github.com/powerhome/playbook/issues/1167) and the anti-pattern examples below.
 
-
+You can leverage the `defaultDate`/`default_date` prop with custom logic in your filter or controller files where the determination of the default value changes based on user interaction. The page can load with an initial default date picker value or placeholder text, then after filter submission save the submitted values as the "new default" (via state or params).

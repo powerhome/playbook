@@ -1,0 +1,42 @@
+[
+  {
+    "year": "2021",
+    "id": "1",
+    "newEnrollments": "20",
+    "scheduledMeetings": "10",
+    "attendanceRate": "51%",
+    "completedClasses": "3",
+    "classCompletionRate": "33%",
+    "graduatedStudents": "19"
+  },
+  {
+    "year": "2022",
+    "id": "8",
+    "newEnrollments": "25",
+    "scheduledMeetings": "17",
+    "attendanceRate": "75%",
+    "completedClasses": "5",
+    "classCompletionRate": "45%",
+    "graduatedStudents": "32"
+  },
+  {
+    "year": "2023",
+    "id": "15",
+    "newEnrollments": "10",
+    "scheduledMeetings": "15",
+    "attendanceRate": "65%",
+    "completedClasses": "4",
+    "classCompletionRate": "49%",
+    "graduatedStudents": "29"
+  },
+  {
+    "year": "2024",
+    "id": "14",
+    "newEnrollments": "15",
+    "scheduledMeetings": "34",
+    "attendanceRate": "32%",
+    "completedClasses": "6",
+    "classCompletionRate": "67%",
+    "graduatedStudents": "65"
+  }
+]

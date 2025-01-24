@@ -10,6 +10,7 @@ type SectionSeparatorProps = {
   aria?: { [key: string]: string; },
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
+  color?: "default" | "primary",
   dark?: boolean,
   data?: { [key: string]: string; },
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -25,6 +26,7 @@ const SectionSeparator = (props: SectionSeparatorProps): React.ReactElement => {
     aria = {},
     children,
     className,
+    color ="default",
     data = {},
     htmlOptions = {},
     id,
@@ -37,7 +39,7 @@ const SectionSeparator = (props: SectionSeparatorProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, lineStyle === "dashed" ? lineStyle : ""), globalProps(props), className)
+  const classes = classnames(buildCss('pb_section_separator_kit', variant, orientation, lineStyle === "dashed" ? lineStyle : "", color !== "default" ? `color_${color}` : ''), globalProps(props), className)
   const dynamicInlineProps = globalInlineProps(props)
 
   return (

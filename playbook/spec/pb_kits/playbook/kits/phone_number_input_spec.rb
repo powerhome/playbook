@@ -14,6 +14,7 @@ RSpec.describe Playbook::PbPhoneNumberInput do
   it { is_expected.to define_array_prop(:preferred_countries).with_default([]) }
   it { is_expected.to define_prop(:error).with_default("") }
   it { is_expected.to define_prop(:value).with_default("") }
+  it { is_expected.to define_boolean_prop(:format_as_you_type).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

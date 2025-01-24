@@ -16,6 +16,8 @@ const TextInputMask = (props) => {
     zipCode: '',
     postalCode: '',
     ssn: '',
+    creditCard: '',
+    cvv: ''
   })
 
   const handleOnChangeFormField =  ({ target }) => {
@@ -55,6 +57,22 @@ const TextInputMask = (props) => {
           name="ssn"
           onChange={handleOnChangeFormField}
           value={formFields.ssn}
+          {...props}
+      />
+      <TextInput
+          label="Credit Card"
+          mask="creditCard"
+          name="creditCard"
+          onChange={handleOnChangeFormField}
+          value={formFields.creditCard}
+          {...props}
+      />
+      <TextInput
+          label="CVV"
+          mask="cvv"
+          name="cvv"
+          onChange={handleOnChangeFormField}
+          value={formFields.cvv}
           {...props}
       />
 

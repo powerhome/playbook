@@ -6,7 +6,6 @@ import {
   SandpackCodeEditor,
 } from "@codesandbox/sandpack-react"
 
-import AnimateHeight from "react-animate-height"
 import { Button, Caption } from "playbook-ui"
 import entryPoint from "./entryPoint"
 
@@ -121,11 +120,9 @@ const KitDocs = ({ source, exampleTitle }: KitDocsType) => {
               </div>
             )}
 
-            <AnimateHeight duration={500} height={editorHeight}>
-              <SandpackCodeEditor
-                style={{ height: "100%", maxHeight: "300px" }}
-              />
-            </AnimateHeight>
+            <SandpackCodeEditor
+              style={{ height: editorHeight, maxHeight: "300px" }}
+            />
           </div>
         </SandpackLayout>
       </SandpackProvider>

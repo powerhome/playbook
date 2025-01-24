@@ -1,0 +1,1 @@
+Custom actions content can be rendered within the Actions Bar as shown in this doc example. The component passed to `actions` will be rendered on the right of the actionsBar. The `onRowSelectionChange` can then be used to attach the needed click events to those actions.

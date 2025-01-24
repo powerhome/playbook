@@ -1,0 +1,46 @@
+  <%= pb_rails("text_input", props: {
+    label: "Currency",
+    mask: "currency",
+    margin_bottom: "md",
+    name: "currency_name",
+    placeholder:"$0.00"
+  }) %>
+
+  <%= pb_rails("text_input", props: {
+    label: "ZIP Code",
+    mask: "zip_code",
+    margin_bottom: "md",
+    placeholder: "12345"
+  }) %>
+
+  <%= pb_rails("text_input", props: {
+    label: "Postal Code",
+    mask: "postal_code",
+    placeholder: "12345-6789",
+    margin_bottom: "md",
+  }) %>
+
+  <%= pb_rails("text_input", props: {
+    label: "SSN",
+    mask: "ssn",
+    margin_bottom: "md",
+    placeholder: "123-45-6789"
+  }) %>
+
+  <%= pb_rails("title" , props: {
+    text: "Hidden Input Under The Hood",
+    padding_bottom: "sm"
+  })%>
+
+  <%= pb_rails("text_input", props: {
+    label: "Currency",
+    mask: "currency",
+    margin_bottom: "md",
+    name: "currency_name",
+    id: "example-currency",
+    placeholder: "$0.00",
+  }) %>
+
+<style>
+#example-currency-sanitized {display: flex !important;}
+</style>

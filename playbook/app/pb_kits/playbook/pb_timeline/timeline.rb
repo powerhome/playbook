@@ -8,15 +8,15 @@ module Playbook
                          default: "horizontal"
       prop :show_date, type: Playbook::Props::Boolean,
                        default: false
-      prop :gap, type: Playbook::Props::Enum,
-                 values: %w[xs sm md lg none],
-                 default: "none"
+      prop :item_gap, type: Playbook::Props::Enum,
+                      values: %w[xs sm md lg none],
+                      default: "none"
 
       def classname
         generate_classname("pb_timeline_kit",
                            orientation,
                            date_class,
-                           gap_class)
+                           item_gap_class)
       end
 
     private
@@ -25,8 +25,8 @@ module Playbook
         show_date ? "with_date" : nil
       end
 
-      def gap_class
-        gap == "none" ? nil : "gap_#{gap}"
+      def item_gap_class
+        item_gap == "none" ? nil : "gap_#{item_gap}"
       end
     end
   end

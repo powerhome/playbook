@@ -12,12 +12,17 @@ import {
   Row,
   useReactTable,
   Getter,
+  RowSelectionState
 } from "@tanstack/react-table"
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
 import { globalProps, GlobalProps } from "../utilities/globalProps"
 
 import Table from "../pb_table/_table"
+import Card from "../pb_card/_card"
+import Caption from "../pb_caption/_caption"
+import Flex from "../pb_flex/_flex"
+import FlexItem from "../pb_flex/_flex_item"
 
 import AdvancedTableContext from "./Context/AdvancedTableContext"
 
@@ -30,6 +35,7 @@ import Pagination from "../pb_pagination/_pagination"
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
+  actions?: React.ReactNode[] | React.ReactNode
   children?: React.ReactNode | React.ReactNode[]
   className?: string
   columnDefinitions: GenericObject[]
@@ -47,16 +53,20 @@ type AdvancedTableProps = {
   pagination?: boolean,
   paginationProps?: GenericObject
   responsive?: "scroll" | "none",
+  selectableRows?: boolean,
+  showActionsBar?: boolean,
   sortControl?: GenericObject
   tableData: GenericObject[]
   tableOptions?: GenericObject
   tableProps?: GenericObject
   toggleExpansionIcon?: string | string[]
+  onRowSelectionChange?: (arg: RowSelectionState) => void
 } & GlobalProps
 
 const AdvancedTable = (props: AdvancedTableProps) => {
   const {
     aria = {},
+    actions,
     children,
     className,
     columnDefinitions,
@@ -74,11 +84,14 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     pagination = false,
     paginationProps,
     responsive = "scroll",
+    showActionsBar = true,
+    selectableRows,
     sortControl,
     tableData,
     tableOptions,
     tableProps,
     toggleExpansionIcon = "arrows-from-line",
+    onRowSelectionChange,
   } = props
 
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(
@@ -95,6 +108,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     : setLocalExpanded
 
   const columnHelper = createColumnHelper()
+
+  //Row Selection
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   //Create cells for columns, with customization for first column
   const createCellFunction = (cellAccessors: string[], customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element, index?: number) => {
@@ -116,6 +132,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                     getValue={getValue}
                     onRowToggleClick={onRowToggleClick}
                     row={row}
+                    selectableRows={selectableRows}
                 />
           )
         }
@@ -128,6 +145,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                 customRenderer={customRenderer}
                 onRowToggleClick={onRowToggleClick}
                 row={row} 
+                selectableRows={selectableRows}
                 value={accessorValue} 
             />
           ) : (
@@ -189,9 +207,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     },
   ]
 
-  const expandAndSortState = () => {
-    if (sortControl) {
+  const customState = () => {
+    if (sortControl && selectableRows) {
+      return { state: { expanded, sorting, rowSelection } }
+    } else if (sortControl) {
       return { state: { expanded, sorting } }
+    } else if (selectableRows) {
+      return { state: { expanded, rowSelection } }
     } else {
       return { state: { expanded } }
     }
@@ -219,12 +241,23 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     getSortedRowModel: getSortedRowModel(),
     enableSortingRemoval: false,
     sortDescFirst: true,
-    ...expandAndSortState(),
-    ... paginationInitializer,
+    onRowSelectionChange: setRowSelection,
+    getRowId: selectableRows ? row => row.id : undefined,
+    ...customState(),
+    ...paginationInitializer,
     ...tableOptions,
   })
 
   const tableRows = table.getRowModel()
+
+  const hasAnySubRows = tableRows.rows.some(row => row.subRows && row.subRows.length > 0);
+  const selectedRowsLength = Object.keys(table.getState().rowSelection).length
+
+  useEffect(() => {
+    if (onRowSelectionChange) {
+      onRowSelectionChange(table.getState().rowSelection)
+    }
+  } , [table.getState().rowSelection, onRowSelectionChange])
 
   // Set table row count for loading state
   const updateLoadingStateRowCount = useCallback(() => {
@@ -284,6 +317,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             sortControl,
             table,
             toggleExpansionIcon,
+            showActionsBar,
+            selectableRows,
+            hasAnySubRows
           }}
       >
         <>
@@ -296,6 +332,27 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                   range={paginationProps?.range ? paginationProps?.range : 5}
                   total={table.getPageCount()}
                   />
+          }
+          {
+            selectableRows && showActionsBar && (
+              <Card className="row-selection-actions-card"
+                  padding="xs"
+              >
+                <Flex alignItems="center"
+                    justify="between"
+                >
+                    <Caption color="light"
+                        paddingLeft="xs"
+                        size="xs"
+                    >
+                      {selectedRowsLength} Selected
+                    </Caption>
+                    <FlexItem>
+                    {actions}
+                    </FlexItem>
+                </Flex>
+              </Card>
+            )
           }
           <Table
               className={`${loading ? "content-loading" : ""}`}
