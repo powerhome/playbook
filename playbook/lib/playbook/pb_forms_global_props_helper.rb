@@ -4,43 +4,6 @@ module Playbook
   module PbFormsGlobalPropsHelper
   private
 
-    def generate_base_class_with_flex_props(base_class, flex_props)
-      return "#{base_class} " if flex_props.empty?
-
-      flex_props.each do |prop, value|
-        next if value.nil?
-
-        class_suffix =  case prop
-                        when :justify
-                          "_justify_#{value}" if %w[none start end center around between evenly].include?(value.to_s)
-                        when :inline
-                          "_inline" if value == true
-                        when :orientation
-                          "_orientation_#{value}" if %w[row column].include?(value.to_s)
-                        when :spacing
-                          "_spacing_#{value}" if %w[none around evenly between].include?(value.to_s)
-                        when :gap
-                          "_gap_#{value}" if %w[xxs xs sm md lg xl none].include?(value.to_s.downcase)
-                        when :row_gap
-                          "_row_gap_#{value}" if %w[xxs xs sm md lg xl none].include?(value.to_s.downcase)
-                        when :column_gap
-                          "_column_gap_#{value}" if %w[xxs xs sm md lg xl none].include?(value.to_s.downcase)
-                        when :reverse
-                          "_reverse" if value == true
-                        when :align, :align_items
-                          "_align_items_#{value}" if %w[start center end stretch baseline none].include?(value.to_s)
-                        when :align_self
-                          "_align_self_#{value}" if %w[start center end stretch none].include?(value.to_s)
-                        when :wrap
-                          "_wrap" if value == true
-                        end
-
-        base_class = "#{base_class}#{class_suffix}" if class_suffix
-      end
-
-      "#{base_class} "
-    end
-
     def generate_prop_classes(props)
       classes = []
 
@@ -157,25 +120,17 @@ module Playbook
         text_align overflow overflow_x overflow_y truncate group_hover
       ]
 
-      flex_props = %i[
-        justify inline orientation spacing gap row_gap column_gap
-        reverse align align_items align_self wrap
-      ]
-
       props = {}
-      flex_props_values = {}
       form_opts = options.dup
 
       global_props.each { |prop| props[prop] = form_opts.delete(prop) if form_opts.key?(prop) }
-      flex_props.each { |prop| flex_props_values[prop] = form_opts.delete(prop) if form_opts.key?(prop) }
 
       if form_opts[:props].is_a?(Hash)
         nested_props = form_opts.delete(:props)
         props.merge!(nested_props.slice(*global_props))
-        flex_props_values.merge!(nested_props.slice(*flex_props))
       end
 
-      [props, flex_props_values, form_opts]
+      [props, form_opts]
     end
   end
 end

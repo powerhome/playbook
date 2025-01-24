@@ -26,11 +26,9 @@ module Playbook
     # @param validate [Boolean] whether validation should be triggered or not
     # @see [#form_with] for other options
     def pb_form_with(data: {}, validate: false, loading: false, **kwargs, &block)
-      global_props, flex_props, form_options = extract_all_props(kwargs)
+      global_props, form_options = extract_all_props(kwargs)
 
-      base_class = generate_base_class_with_flex_props("pb-form", flex_props)
-
-      classnames = [base_class]
+      classnames = ["pb-form"]
       classnames << form_options[:class] if form_options[:class].present?
       classnames << "pb_form_loading" if loading
       classnames.concat(generate_prop_classes(global_props))
