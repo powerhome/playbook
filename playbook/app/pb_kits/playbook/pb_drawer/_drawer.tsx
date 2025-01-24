@@ -1,230 +1,81 @@
-import React, { useState, useEffect } from "react";
-import classnames from "classnames";
+import React, { useState, useEffect, useRef } from "react"
+import classnames from "classnames"
 
 import {
   buildAriaProps,
   buildCss,
   buildDataProps,
   buildHtmlProps,
-} from "../utilities/props";
-import { globalProps, globalInlineProps } from "../utilities/globalProps";
-
-import { DialogContext } from "../pb_dialog/_dialog_context";
+} from "../utilities/props"
+import { globalProps, globalInlineProps } from "../utilities/globalProps"
+import { DrawerContext } from "./context"
+import { useBreakpoint } from "./hooks/useBreakpoint"
 
 type DrawerProps = {
-  aria?: { [key: string]: string };
-  behavior?: "floating" | "push";
-  border?: "full" | "none" | "right" | "left";
-  openBreakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
-  closeBreakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
-  children: React.ReactNode | React.ReactNode[] | string;
-  className?: string;
-  data?: { [key: string]: string };
-  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
-  id?: string;
-  fullHeight?: boolean;
-  menuButtonID?: string;
-  onClose?: () => void;
-  opened: boolean;
-  overlay: boolean;
-  placement?: "left" | "right";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  text?: string;
-  withinElement?: boolean;
-};
+  aria?: { [key: string]: string }
+  behavior?: "floating" | "push"
+  border?: "full" | "none" | "right" | "left"
+  breakpoint?: "none" | "xs" | "sm" | "md" | "lg" | "xl"
+  children: React.ReactNode | React.ReactNode[] | string
+  className?: string
+  data?: { [key: string]: string }
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
+  id?: string
+  triggerId?: string
+  onClose?: () => void
+  opened: boolean
+  overlay: boolean
+  placement?: "left" | "right" | "top" | "bottom"
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "full"
+  text?: string
+  withinElement?: boolean
+}
 
-const Drawer = (props: DrawerProps): React.ReactElement => {
+const Drawer = (props: DrawerProps): React.ReactElement | null => {
   const {
     aria = {},
     behavior = "floating",
     border = "none",
-    openBreakpoint = "none",
-    closeBreakpoint = "none",
+    breakpoint = "none",
     className,
     data = {},
     htmlOptions = {},
     id,
     size = "md",
     children,
-    fullHeight = true,
-    menuButtonID,
+    triggerId,
     opened,
     onClose,
     overlay = true,
     placement = "left",
     withinElement = false,
-  } = props;
-  const ariaProps = buildAriaProps(aria);
-  const dataProps = buildDataProps(data);
-  const htmlProps = buildHtmlProps(htmlOptions);
+  } = props
 
-  let globalPropsString: string = globalProps(props);
+  const drawerRef = useRef<HTMLDivElement>(null)
+  const [menuButtonOpened, setMenuButtonOpened] = useState(false)
+  const [shouldRender, setShouldRender] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
 
-  // Check if the string contains any of the prefixes
-  const containsPrefix = [
-    "p_",
-    "pb_",
-    "pt_",
-    "pl_",
-    "pr_",
-    "px_",
-    "py_",
-  ].some((prefix) => globalPropsString.includes(prefix));
-
-  // If none of the prefixes are found, append 'p_sm' to the string
-  if (!containsPrefix) {
-    globalPropsString += " p_sm";
-  }
-
-  const drawerClassNames = {
-    base: `${classnames(
-      "pb_drawer",
-      buildCss("pb_drawer", size, placement),
-      {
-        drawer_border_full: border === "full",
-        drawer_border_right: border === "right",
-        drawer_border_left: border === "left",
-        pb_drawer_within_element: withinElement,
-      }
-    )} ${globalPropsString}`,
-    afterOpen: "pb_drawer_after_open",
-    beforeClose: "pb_drawer_before_close",
-  };
-
-  const fullHeightClassNames = () => {
-    if (!fullHeight) return null;
-    return `full_height_${placement}`;
-  };
-
-  const overlayClassNames = {
-    base: `pb_drawer${overlay ? "_overlay" : "_no_overlay"} ${
-      fullHeight !== null && fullHeightClassNames()
-    } ${!overlay ? "no-background" : ""}`,
-    afterOpen: "pb_drawer_overlay_after_open",
-    beforeClose: "pb_drawer_overlay_before_close",
-  };
-
-  const classes = classnames(buildCss("pb_drawer_wrapper"), className);
-  const dynamicInlineProps = globalInlineProps(props)
-  const [menuButtonOpened, setMenuButtonOpened] = useState(false);
-  const [triggerOpened, setTriggerOpened] = useState(false);
-
-  const breakpointWidths: Record<DrawerProps["openBreakpoint"], number> = {
-    none: 0,
-    xs: 575,
-    sm: 768,
-    md: 992,
-    lg: 1200,
-    xl: 1400,
-  };
-
-  const breakpointValues = { 
-    none: 0,
-    xs: 575,
-    sm: 768,
-    md: 992,
-    lg: 1200,
-    xl: 1400,
-  }
-
-  const [isOpenBreakpointOpen, setIsOpenBreakpointOpen] = useState(false);
-  const [isUserClosed, setIsUserClosed] = useState(false);
-
-  useEffect(() => {
-    if (openBreakpoint === "none") return;
-
-    const handleResize = () => {
-      const width = window.innerWidth;
-      const openBreakpointWidth = breakpointWidths[openBreakpoint];
-
-      if (width <= openBreakpointWidth) {
-        setIsOpenBreakpointOpen(true);
-      } else {
-        setIsOpenBreakpointOpen(false);
-        setIsUserClosed(false); // Reset when the breakpoint condition changes
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // Call handler once on mount to set initial state
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [openBreakpoint]);
-
-  useEffect(() => {
-    if (closeBreakpoint === "none") return;
-
-   const handleResize = () => { 
-    const width = window.innerWidth;
-    if (width >= breakpointValues[closeBreakpoint]) {
-      setIsOpenBreakpointOpen(true);
-    } else {
-      setIsOpenBreakpointOpen(false);
+  const { isOpenBreakpointOpen, isUserClosed, setIsUserClosed } = useBreakpoint(
+    {
+      breakpoint: breakpoint,
+      triggerId,
     }
-    }
-
-    window.addEventListener("resize", handleResize);
-
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-    
-  }, [closeBreakpoint]);
-
-  //hide menu button if breakpoint opens the drawer  
-  useEffect(() => {
-    if (menuButtonID) {
-      const menuButton = document.getElementById(menuButtonID);
-      if (menuButton) {
-        if (isOpenBreakpointOpen) {
-          menuButton.style.display = 'none';
-        } else {
-          menuButton.style.display = '';
-        }
-      }
-    }
-  }, [menuButtonID, isOpenBreakpointOpen]);
-
-  // Reset isUserClosed when isBreakpointOpen changes
-  useEffect(() => {
-    if (isOpenBreakpointOpen) {
-      setIsUserClosed(false);
-    }
-  }, [isOpenBreakpointOpen]);
+  )
 
   const modalIsOpened =
-    (isOpenBreakpointOpen && !isUserClosed) || menuButtonOpened || opened;
-
-  const [animationState, setAnimationState] = useState("");
-
-  useEffect(() => {
-    if (modalIsOpened) {
-      setAnimationState("afterOpen");
-    } else if (!modalIsOpened && animationState === "afterOpen") {
-      setAnimationState("beforeClose");
-      setTimeout(() => {
-        setAnimationState("");
-      }, 200); 
-    }
-  }, [modalIsOpened]);
-
-  const isModalVisible = modalIsOpened || animationState === "beforeClose";
+    (isOpenBreakpointOpen && !isUserClosed) || menuButtonOpened || opened
 
   useEffect(() => {
     if (withinElement) return;
 
-    const sizeMap: Record<DrawerProps["size"], string> = {
+    const sizeMap: { [key: string]: string } = {
       xl: "365px",
       lg: "300px",
       md: "250px",
       sm: "200px",
       xs: "64px",
+      full: "100%",
     };
     const body = document.querySelector("body");
     if (modalIsOpened && behavior === "push" && body) {
@@ -239,103 +90,142 @@ const Drawer = (props: DrawerProps): React.ReactElement => {
       if (body.classList.contains("PBDrawer__Body--open")) {
         body.classList.add("PBDrawer__Body--close");
       }
-      body.style.cssText = ""; // Clear the styles when modal is closed or behavior is not 'push'
+      body.style.cssText = "";
       body.classList.remove("PBDrawer__Body--open");
     }
-  }, [modalIsOpened, behavior, placement, size, withinElement]);
+  }, [modalIsOpened]);
+
+  // Helper functions
+  const updateDrawerHeight = () => {
+    if (drawerRef.current) {
+      const height = drawerRef.current.scrollHeight;
+      drawerRef.current.style.setProperty('--drawer-height', `${height}px`);
+    }
+  }
+  
+  useEffect(() => {
+    if (modalIsOpened) {
+      setShouldRender(true)
+      if (withinElement) {
+        const timer = setTimeout(() => {
+          updateDrawerHeight()
+          setIsAnimating(true)
+        }, 10)
+        return () => clearTimeout(timer)
+      } else {
+        setIsAnimating(true)
+      }
+    } else {
+      setIsAnimating(false)
+      const timer = setTimeout(() => {
+        setShouldRender(false)
+      }, 250)
+      return () => clearTimeout(timer)
+    }
+  }, [modalIsOpened])
+
+
+
+  const handleMenuButtonClick = () => {
+    if (modalIsOpened) {
+      setMenuButtonOpened(false)
+      setIsUserClosed(true)
+    } else {
+      setMenuButtonOpened(true)
+      setIsUserClosed(false)
+    }
+  }
+
+  // Setup menu button click handler
+  useEffect(() => {
+    if (!triggerId) return;
+    
+    const menuButton = document.getElementById(triggerId)
+    if (menuButton) {
+      menuButton.addEventListener("click", handleMenuButtonClick)
+      return () => menuButton.removeEventListener("click", handleMenuButtonClick)
+    }
+  }, [modalIsOpened])
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+  const dynamicInlineProps = globalInlineProps(props)
+
+  const drawerClasses = classnames(
+    "pb_drawer",
+    buildCss("pb_drawer", size as string, placement as string),
+    {
+      "drawer_border-full": border === "full",
+      "drawer_border-right": border === "right",
+      "drawer_border-left": border === "left",
+      pb_drawer_within_element: withinElement,
+      pb_drawer_after_open: isAnimating,
+      pb_drawer_before_close: !isAnimating && shouldRender,
+    },
+    withinElement ? "shadow_none" : "shadow_deepest",
+    globalProps(props),
+    className
+  )
+
+  const overlayClasses = classnames(
+    `pb_drawer${overlay ? "_overlay" : "_no_overlay"}`,
+    `drawer_content_${placement}`,
+    !overlay && "no-background",
+    {
+      pb_drawer_overlay_after_open: isAnimating,
+      pb_drawer_overlay_before_close: !isAnimating && shouldRender,
+    }
+  )
 
   const api = {
     onClose: () => {
-      if (menuButtonID) {
-        setMenuButtonOpened(false);
+      if (triggerId) {
+        setMenuButtonOpened(false)
       }
-      setIsUserClosed(true);
+      setIsUserClosed(true)
       if (onClose) {
-        onClose();
+        onClose()
       }
     },
-  };
+  }
 
-  useEffect(() => {
-    if (menuButtonID) {
-      const menuButton = document.getElementById(menuButtonID);
-      if (menuButton) {
-        const handleMenuButtonClick = () => {
-          if (modalIsOpened) {
-            // Drawer is open, close it
-            setMenuButtonOpened(false);
-            setIsUserClosed(true);
-          } else {
-            // Drawer is closed, open it
-            setMenuButtonOpened(true);
-            setIsUserClosed(false);
-          }
-        };
-        menuButton.addEventListener("click", handleMenuButtonClick);
-        return () => {
-          menuButton.removeEventListener("click", handleMenuButtonClick);
-        };
-      }
-    }
-  }, [menuButtonID, modalIsOpened]);
+  const drawerContent = (
+    <div
+        className={drawerClasses}
+        onClick={(e) => e.stopPropagation()}
+        ref={drawerRef}
+    >
+      {children}
+    </div>
+  )
+
+  // Step 5: Only render when shouldRender is true
+  if (!shouldRender) return null
 
   return (
-    <DialogContext.Provider value={api}>
+    <DrawerContext.Provider value={api}>
       {withinElement ? (
-        isModalVisible && (
-          <div
-              {...ariaProps}
-              {...dataProps}
-              {...htmlProps}
-              className={classnames(drawerClassNames.base, {
-              [drawerClassNames.afterOpen]:
-                animationState === "afterOpen",
-              [drawerClassNames.beforeClose]:
-                animationState === "beforeClose",
-            })}
-              id={id}
-              onClick={(e) => e.stopPropagation()}
-              style={dynamicInlineProps}
-          >
-            {children}
-          </div>
-        )
+        drawerContent
       ) : (
         <div
             {...ariaProps}
             {...dataProps}
             {...htmlProps}
-            className={classes}
+            className={classnames(buildCss("pb_drawer_wrapper"), className)}
+            style={dynamicInlineProps}
         >
-          {isModalVisible && (
-            <div
-                className={classnames(overlayClassNames.base, {
-                [overlayClassNames.afterOpen]:
-                  animationState === "afterOpen",
-                [overlayClassNames.beforeClose]:
-                  animationState === "beforeClose",
-              })}
-                id={id}
-                onClick={overlay ? api.onClose : undefined}
-            >
-              <div
-                  className={classnames(drawerClassNames.base, {
-                  [drawerClassNames.afterOpen]:
-                    animationState === "afterOpen",
-                  [drawerClassNames.beforeClose]:
-                    animationState === "beforeClose",
-                })}
-                  onClick={(e) => e.stopPropagation()}
-                  style={dynamicInlineProps}
-              >
-                {children}
-              </div>
-            </div>
-          )}
+          <div
+              className={overlayClasses}
+              id={id}
+              onClick={overlay ? api.onClose : undefined}
+          >
+            {drawerContent}
+          </div>
         </div>
       )}
-    </DialogContext.Provider>
-  );
-};
+    </DrawerContext.Provider>
+  )
+}
 
-export default Drawer;
+export default Drawer

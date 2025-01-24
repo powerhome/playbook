@@ -26,7 +26,6 @@ const DrawerBreakpoints = () => {
         <Drawer
             behavior={"push"}
             breakpoint="sm"
-            fullHeight
             onClose={toggleSmallDrawer}
             opened={smallDrawerOpened}
             overlay={false}
