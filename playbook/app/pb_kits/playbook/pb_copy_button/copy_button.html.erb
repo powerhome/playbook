@@ -1,12 +1,11 @@
-<!-- Go to pb_content_tag definition in kit_base.rb for usage information. Commented out options are default (showing the default shape), and each can be deleted if not customizing that param. -->
-<!-- If using nonstandard params please un-comment out and replace with your custom params. -->
-<%= pb_content_tag(
-    # :div,
-    # aria: object.aria,
-    # class: object.classname,
-    # data: object.data,
-    # id: object.id,
-    # **combined_html_options
-) do %>
-  <span>COPY_BUTTON CONTENT</span>
+<%= pb_content_tag do %>
+  <%= pb_rails("button", props: { text: object.text }) %>
+  <%= pb_rails("tooltip", props: {
+      trigger_element_selector: ".pb_copy_button",
+      tooltip_id: "example-tooltip",
+      position: object.tooltip_position,
+      trigger_method: "click"
+    }) do %>
+        Whoa. I'm a re-useable tooltip.
+  <% end %>
 <% end %>
