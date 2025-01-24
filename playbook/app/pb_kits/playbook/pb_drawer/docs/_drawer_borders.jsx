@@ -6,19 +6,15 @@ const DrawerBorders = () => {
   const [openedBRightDrawer, setOpenedBRightDrawer] = useState(false);
   const [openedBLeftDrawer, setOpenedBLeftDrawer] = useState(false);
   const [openedBFullDrawer, setOpenedBFullDrawer] = useState(false);
-  const [openedBDefaultDrawer, setOpenedBDefaultDrawer] = useState(false);
-  const [openedBRoundedDrawer, setOpenedBRoundedDrawer] = useState(false);
 
   // Toggle functions for each drawer
   const toggleBRightDrawer = () => setOpenedBRightDrawer(!openedBRightDrawer);
   const toggleBLeftDrawer = () => setOpenedBLeftDrawer(!openedBLeftDrawer);
   const toggleBFullDrawer = () => setOpenedBFullDrawer(!openedBFullDrawer);
-  const toggleBDefaultDrawer = () => setOpenedBDefaultDrawer(!openedBDefaultDrawer);
-  const toggleBRoundedDrawer = () => setOpenedBRoundedDrawer(!openedBRoundedDrawer);
 
   return (
     <>
-      <Flex padding="md"
+      <Flex 
           wrap
       >
         <Button marginRight="md"
@@ -36,23 +32,12 @@ const DrawerBorders = () => {
         >
           Drawer with border full
         </Button>
-        <Button marginRight="md"    
-            onClick={toggleBDefaultDrawer}
-        >
-          Default Drawer
-        </Button>
-        <Button marginRight="md"
-            onClick={toggleBRoundedDrawer}
-        > 
-          Rounded Drawer
-        </Button>
       </Flex>
 
       {/* Drawers for each size */}
       <Drawer
           behavior="float"
           border="right"
-          fullHeight
           onClose={toggleBRightDrawer}
           opened={openedBRightDrawer}
           overlay={false}
@@ -64,11 +49,10 @@ const DrawerBorders = () => {
       <Drawer
           behavior="float"
           border="left"
-          fullHeight
           onClose={toggleBLeftDrawer}
           opened={openedBLeftDrawer}
           overlay={false}
-          placement="right"
+          placement="left"
           size="lg"
       >
         This is a Drawer with border left
@@ -76,39 +60,13 @@ const DrawerBorders = () => {
       <Drawer
           behavior="float"
           border="full"
-          fullHeight
           onClose={toggleBFullDrawer}
           opened={openedBFullDrawer}
           overlay={false}
-          placement="right"
+          placement="left"
           size="lg"
       >
         This is a Drawer with border full
-      </Drawer>
-      <Drawer
-          behavior="float"
-          fullHeight
-          onClose={toggleBDefaultDrawer}
-          opened={openedBDefaultDrawer}
-          overlay={false}
-          placement="right"
-          size="lg"
-      >   
-        This is a Default Drawer
-      </Drawer>
-      <Drawer
-          behavior="float"
-          borderRadius="rounded"
-          fullHeight
-          onClose={toggleBRoundedDrawer}
-          opened={openedBRoundedDrawer}
-          overlay={false}
-          placement="right"
-          size="lg"
-      >
-      <div style={{ paddingTop: '100px', paddingLeft: '12px' }}>
-        This is a Rounded Drawer
-      </div>
       </Drawer>
     </>
   );
