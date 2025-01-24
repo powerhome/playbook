@@ -3,7 +3,6 @@
 module Playbook
   module PbDate
     class Date < Playbook::KitBase
-      # prop :dark, type: Playbook::Props::Boolean, default: false
       prop :date, required: true
       prop :alignment, type: Playbook::Props::Enum,
                        values: %w[left center right],

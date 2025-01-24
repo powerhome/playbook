@@ -106,7 +106,8 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
                     dark={dark}
                     tag="span"
                 >
-                  <Icon fixedWidth
+                  <Icon dark={dark}
+                      fixedWidth
                       icon="calendar-alt"
                   />
                 </Body>
@@ -115,7 +116,8 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
               {showDayOfWeek && (
                 <>
                   {weekday}
-                  <Body color="light"
+                  <Body
+                      color="light"
                       dark={dark}
                       tag="span"
                       text=" • "
@@ -149,7 +151,8 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
                     <Caption dark={dark}
                         tag="div"
                     >{weekday}</Caption>
-                    <Caption color="light"
+                    <Caption
+                        color="light"
                         dark={dark}
                         tag="div"
                         text=" • "

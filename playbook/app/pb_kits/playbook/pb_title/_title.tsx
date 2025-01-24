@@ -12,7 +12,6 @@ type TitleProps = {
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
-  dark?: boolean,
   data?: {[key: string]: string},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -29,7 +28,6 @@ const Title = (props: TitleProps): React.ReactElement => {
     children,
     className,
     color,
-    dark = false,
     data = {},
     htmlOptions = {},
     id,
@@ -72,7 +70,6 @@ const Title = (props: TitleProps): React.ReactElement => {
         {...dataProps}
         {...htmlProps}
         className={classes}
-        dark={dark}
         id={id}
     >
       {text || children}

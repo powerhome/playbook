@@ -11,7 +11,6 @@ type BodyProps = {
   className?: string,
   children?: React.ReactChild[] | React.ReactChild,
   color?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
-  dark?: boolean,
   data?: {[key: string]: string},
   highlightedText?: string[],
   highlighting?: boolean,
@@ -58,9 +57,7 @@ const Body = (props: BodyProps): React.ReactElement => {
         {...dataProps}
         {...htmlProps}
         className={classes}
-        dark={dark}
         id={id}
-        {...props}
     >
       { highlighting && (
         <Highlight

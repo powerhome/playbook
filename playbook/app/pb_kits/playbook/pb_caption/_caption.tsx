@@ -8,7 +8,6 @@ type CaptionProps = {
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   color?: "default" | "light" | "lighter" | "success" | "error" | "link",
-  dark?: boolean,
   data?: {[key: string]: string},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -68,7 +67,6 @@ const Caption = (props: CaptionProps): React.ReactElement => {
         {...htmlProps}
         className={css}
         id={id}
-        {...props}
     >
       {text || children}
     </Tag>
