@@ -8,7 +8,8 @@ module Playbook
            type: Playbook::Props::Enum,
            values: %w[top right bottom left],
            default: "top"
-      prop :tooltip_text
+      prop :tooltip_text, type: Playbook::Props::String,
+                          default: "Copied!"
       prop :value
 
       def classname

@@ -1,11 +1,13 @@
 <%= pb_content_tag do %>
   <%= pb_rails("button", props: { text: object.text }) %>
+  <% if object.id %> 
   <%= pb_rails("tooltip", props: {
-      trigger_element_selector: ".pb_copy_button",
-      tooltip_id: "example-tooltip",
+      trigger_element_selector: "##{object.id}",
       position: object.tooltip_position,
+      tooltip_id: "#{object.id}_tooltip",
       trigger_method: "click"
     }) do %>
-        Whoa. I'm a re-useable tooltip.
+        <%= object.tooltip_text %> 
+    <% end %>
   <% end %>
 <% end %>
