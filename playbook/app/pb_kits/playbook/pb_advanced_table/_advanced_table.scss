@@ -94,6 +94,10 @@
     color: $primary !important;
   }
 
+  .expanded-row {
+    background-color: lighten($silver, $opacity_7);
+  }
+
   // Icons
   .button-icon {
     display: flex;
@@ -179,7 +183,7 @@
   }
 
   // Responsive Styles
-  @media only screen and (max-width: $screen-xl-min) {  
+  @media only screen and (max-width: $screen-xl-min) {
     &[class*="advanced-table-responsive-scroll"] {
       border-radius: 4px;
       box-shadow: 1px 0 0 0px $border_light,
@@ -215,7 +219,7 @@
       .bg-white td:first-child {
           background-color: $white;
       }
-      
+
     }
   }
   @media only screen and (min-width: $screen-xl-min) {

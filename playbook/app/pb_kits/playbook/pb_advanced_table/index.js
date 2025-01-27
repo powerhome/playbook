@@ -29,6 +29,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           PbAdvancedTable.expandedRows.delete(this.element.id);
         }
         this.toggleElement(this.target);
+        toggleRowHighlight(this.element);
       }
     });
 
@@ -45,6 +46,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         } else {
           PbAdvancedTable.expandedRows.delete(button.id);
         }
+        toggleRowHighlight(button);
       });
     });
   }
@@ -222,9 +224,18 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 }
 
-window.expandAllRows = (element) => {
-  PbAdvancedTable.handleToggleAllHeaders(element);
-};
+const toggleRowHighlight = (button) => {
+  const row = button.closest("tr");
+  const isExpanded = button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block";
+
+  if (isExpanded) {
+    row.classList.add("expanded-row");
+  } else {
+    row.classList.remove("expanded-row");
+  }
+}
+
+window.toggleRowHighlight = toggleRowHighlight;
 
 window.expandAllSubRows = (element, rowDepth) => {
   PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
