@@ -1,3 +1,3 @@
 Auto close is used when you want the confirmation toast to close automatically after a certain time. `auto_close` property will be a delay number in ms.
 
-Script tag in code snippet is for demonstration purposes only.
+Script tag in code snippet is for demonstration purposes only. It provides the functionality needed to show and hide the toaster in response to user interaction, and hides them from appearing upon initial page load. In a typical production environment this functionality would be handled by a controller or a separate javascript file.

@@ -1,15 +1,24 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 
+const TOAST_WRAPPER_SELECTOR = '[data-pb-toast-wrapper]'
+const TOAST_AUTO_CLOSE_CLASS = 'auto_close'
+const TOAST_REMOVE_CLASS = 'remove_toast'
+
 export default class PbFixedConfirmationToast extends PbEnhancedElement {
   static get selector() {
-    return '.auto_close, .remove_toast'
+    return `${TOAST_WRAPPER_SELECTOR}, .${TOAST_AUTO_CLOSE_CLASS}, .${TOAST_REMOVE_CLASS}`
   }
 
   connect() {
     this.self = this.element
-    this.autoCloseToast(this.self)
 
-    if (this.self.classList.contains('remove_toast')) {
+    if (this.self.classList.contains(TOAST_AUTO_CLOSE_CLASS) || 
+        this.self.hasAttribute('data-pb-auto-close')) {
+      this.autoCloseToast(this.self)
+    }
+
+    if (this.self.classList.contains(TOAST_REMOVE_CLASS) || 
+        this.self.hasAttribute('data-pb-remove-toast')) {
       this.self.addEventListener('click', () => {
         this.removeToast(this.self)
       })
@@ -26,21 +35,35 @@ export default class PbFixedConfirmationToast extends PbEnhancedElement {
   }
 
   autoCloseToast(element) {
-    const hasAutoCloseClass = element.classList.contains('auto_close')
+    let duration
 
-    if (hasAutoCloseClass) {
-      const autoCloseClass = Array.from(element.classList).find(cls => cls.startsWith('auto_close_'))
+    if (element.classList.contains(TOAST_AUTO_CLOSE_CLASS)) {
+      const autoCloseClass = Array.from(element.classList)
+        .find(cls => cls.startsWith('auto_close_'))
+      
       if (autoCloseClass) {
-        const duration = parseInt(autoCloseClass.split('_')[2])
-
-        if (element.autoCloseTimeout) {
-          clearTimeout(element.autoCloseTimeout)
-        }
-
-        element.autoCloseTimeout = setTimeout(() => {
-          this.removeToast(element)
-        }, duration)
+        duration = parseInt(autoCloseClass.split('_')[2])
       }
+    }
+
+    if (!duration) {
+      duration = parseInt(element.getAttribute('data-pb-auto-close'))
+    }
+
+    if (duration) {
+      if (element.autoCloseTimeout) {
+        clearTimeout(element.autoCloseTimeout)
+      }
+
+      element.autoCloseTimeout = setTimeout(() => {
+        this.removeToast(element)
+      }, duration)
+    }
+  }
+
+  disconnect() {
+    if (this.element.autoCloseTimeout) {
+      clearTimeout(this.element.autoCloseTimeout)
     }
   }
 }
