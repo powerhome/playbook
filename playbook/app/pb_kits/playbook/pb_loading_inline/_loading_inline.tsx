@@ -12,6 +12,7 @@ type LoadingInlineProps = {
   aria?: { [key: string]: string },
   className?: string,
   data?: { [key: string]: string },
+  dark?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   text?: string,
@@ -23,6 +24,7 @@ const LoadingInline = (props: LoadingInlineProps) => {
     aria = {},
     className,
     data = {},
+    dark = false,
     htmlOptions = {},
     id,
     text = ' Loading',
@@ -45,7 +47,10 @@ const LoadingInline = (props: LoadingInlineProps) => {
         className={classes}
         id={id}
     >
-      <Body color="light">
+      <Body
+          color="light"
+          dark={dark}
+      >
         <Icon
             aria={{ label: 'loading icon' }}
             fixedWidth

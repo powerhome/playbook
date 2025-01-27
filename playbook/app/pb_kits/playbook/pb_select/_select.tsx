@@ -127,7 +127,10 @@ const Select = ({
             className="pb_select_kit_label"
             htmlFor={name}
         >
-          <Caption text={label} />
+          <Caption 
+              dark={props.dark}
+              text={label} 
+          />
         </label>
       }
       <label
@@ -146,6 +149,7 @@ const Select = ({
         }
         {error &&
           <Body
+              dark={props.dark}
               status="negative"
               text={error}
           />

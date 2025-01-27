@@ -13,9 +13,13 @@
       <%= pb_rails("text_input/add_on", props: object.add_on_props) do %>
         <%= input_tag %>
       <% end %>
+    <% elsif mask.present? %>
+      <%= input_tag %>
+      <%= tag(:input, data: "sanitized-pb-input", id: sanitized_id, name: object.name, style: "display: none;") %>
     <% else %>
       <%= input_tag %>
     <% end %>
     <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) if object.error %>
   <% end %>
 <% end %>
+

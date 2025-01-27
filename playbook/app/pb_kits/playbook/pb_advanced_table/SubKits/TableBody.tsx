@@ -9,6 +9,7 @@ import { globalProps } from "../../utilities/globalProps"
 import { isChrome } from "../Utilities/BrowserCheck"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
+import Checkbox from "../../pb_checkbox/_checkbox"
 
 import { SubRowHeaderRow } from "../Components/SubRowHeaderRow"
 import { LoadingCell } from "../Components/LoadingCell"
@@ -42,6 +43,8 @@ export const TableBody = ({
     loading,
     responsive,
     table,
+    selectableRows,
+    hasAnySubRows
   } = useContext(AdvancedTableContext)
 
   const classes = classnames(
@@ -65,7 +68,7 @@ export const TableBody = ({
           const numberOfColumns = table.getAllFlatColumns().length
           const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && (row.depth < columnDefinitions[0].cellAccessors?.length)
           const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren))
-
+          const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white"
           return (
             <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
               {isFirstChildofSubrow && subRowHeaders && (
@@ -79,11 +82,23 @@ export const TableBody = ({
                 />
               )}
             <tr
-                className={`${rowBackground ? "bg-silver" : "bg-white"} ${
+                className={`${rowColor} ${
                   row.depth > 0 ? `depth-sub-row-${row.depth}` : ""
               }`}
                 id={`${row.index}-${row.id}-${row.depth}-row`}
             >
+              {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
+              {selectableRows && !hasAnySubRows && (
+                  <td className="checkbox-cell">
+                    <Checkbox
+                        checked={row.getIsSelected()}
+                        disabled={!row.getCanSelect()}
+                        indeterminate={row.getIsSomeSelected()}
+                        name={row.id}
+                        onChange={row.getToggleSelectedHandler()}
+                    />
+                  </td>
+                )}
               {row.getVisibleCells().map((cell, i) => {
                 const isPinnedLeft = columnPinning.left.includes(cell.column.id)
                 const isLastCell = cell.column.parent?.columns.at(-1)?.id === cell.column.id

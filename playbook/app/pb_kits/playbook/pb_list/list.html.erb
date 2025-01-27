@@ -1,13 +1,33 @@
-<%= content_tag(:div, class: object.list_classname) do %>
-  <%= content_tag(:"#{object.ordered_class}",
-                  aria: object.aria,
-                  class: object.classname,
-                  data: object.data,
-                  id: object.id,
-                  role: object.role,
-                  tabindex: object.tabindex,
-                  **combined_html_options
-    ) do %>
-      <%= content.presence %>
+<% if object.enable_drag %>
+  <%= pb_rails("draggable", props: {initial_items: object.items}) do %>
+    <%= pb_rails("draggable/draggable_container") do %>
+      <%= content_tag(:div, class: object.list_classname) do %>
+        <%= content_tag(:"#{object.ordered_class}",
+                        aria: object.aria,
+                        class: object.classname,
+                        data: object.data,
+                        id: object.id,
+                        role: object.role,
+                        tabindex: object.tabindex,
+                        **combined_html_options
+          ) do %>
+            <%= content.presence %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= content_tag(:div, class: object.list_classname) do %>
+    <%= content_tag(:"#{object.ordered_class}",
+                    aria: object.aria,
+                    class: object.classname,
+                    data: object.data,
+                    id: object.id,
+                    role: object.role,
+                    tabindex: object.tabindex,
+                    **combined_html_options
+      ) do %>
+        <%= content.presence %>
+    <% end %>
   <% end %>
 <% end %>

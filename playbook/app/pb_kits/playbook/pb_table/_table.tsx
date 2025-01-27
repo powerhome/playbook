@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps, globalInlineProps } from '../utilities/globalProps'
-import PbTable from '.'
 import {
     TableHead,
     TableHeader,
@@ -10,6 +9,7 @@ import {
     TableRow,
     TableCell,
 } from "./subcomponents";
+import { addDataTitle } from './utilities/addDataTitle'
 
 type TableProps = {
     aria?: { [key: string]: string },
@@ -196,8 +196,7 @@ const Table = (props: TableProps): React.ReactElement => {
     }, [stickyRightColumn]);
 
     useEffect(() => {
-        const instance = new PbTable()
-        instance.connect()
+        addDataTitle()
     }, [])
 
     return (
