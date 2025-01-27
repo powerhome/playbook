@@ -39,7 +39,7 @@ test('renders with the right border class when border prop is right', async () =
   const container = document.getElementById('drawer-id');
   const drawer = container.querySelector('#drawer-id .pb_drawer');
 
-  expect(drawer).toHaveClass('drawer_border_right');
+  expect(drawer).toHaveClass('drawer_border-right');
 });
 
 test('renders with the full border class when border prop is full', async () => {
@@ -51,7 +51,7 @@ test('renders with the full border class when border prop is full', async () => 
 
   const container = document.getElementById('drawer-id');
   const drawer = container.querySelector('#drawer-id .pb_drawer');
-  expect(drawer).toHaveClass('drawer_border_full');
+  expect(drawer).toHaveClass('drawer_border-full');
 });
 
 test('does not have a border class when border prop is none', async () => {
@@ -63,9 +63,9 @@ test('does not have a border class when border prop is none', async () => {
 
   const container = document.getElementById('drawer-id');
   const drawer = container.querySelector('#drawer-id .pb_drawer');
-  expect(drawer).not.toHaveClass('drawer_border_right');
-  expect(drawer).not.toHaveClass('drawer_border_left');
-  expect(drawer).not.toHaveClass('drawer_border_full');
+  expect(drawer).not.toHaveClass('drawer_border-right');
+  expect(drawer).not.toHaveClass('drawer_border-left');
+  expect(drawer).not.toHaveClass('drawer_border-full');
 });
 
 test('renders the correct size class for a large drawer', async () => {

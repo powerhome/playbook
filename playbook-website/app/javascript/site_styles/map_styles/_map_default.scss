@@ -7,4 +7,13 @@
 .pb_map {
   height: 600px;
   position: relative;
+  [class^="pb_title_kit"][class*="_4"] {
+    color: $text_lt_default
+  }
+
+  .dark & {
+    [class^="pb_title_kit"][class*="_4"] {
+      color: $text_dk_default;
+    }
+  }
 }

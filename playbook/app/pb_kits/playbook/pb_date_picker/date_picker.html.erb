@@ -64,18 +64,30 @@
   </div>
 
   <%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => {
-      datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
+    (function() {
+      const loadDatePicker = () => {
+        datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
 
-      if (<%= object.selection_type == "quickpick" %>) {
-        document.getElementById("<%= object.picker_id %>").addEventListener("change", ({ target }) => {
-          const startDate = document.getElementById("<%= object.start_date_id %>")
-          const endDate = document.getElementById("<%= object.end_date_id %>")
-          const splittedValue = target.value.split(" to ")
-          startDate.value = splittedValue[0]
-          endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
+        if (<%= object.selection_type == "quickpick" %>) {
+          document.getElementById("<%= object.picker_id %>").addEventListener("change", ({ target }) => {
+            const startDate = document.getElementById("<%= object.start_date_id %>")
+            const endDate = document.getElementById("<%= object.end_date_id %>")
+            const splittedValue = target.value.split(" to ")
+            startDate.value = splittedValue[0]
+            endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
+          })
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        loadDatePicker()
+      })
+
+      if (<%= !object.custom_event_type.empty? %>) {
+        window.addEventListener("<%= object.custom_event_type %>", () => {
+          loadDatePicker()
         })
       }
-    })
+    })()
   <% end %>
 <% end %>

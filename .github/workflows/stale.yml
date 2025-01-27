@@ -29,7 +29,7 @@ jobs:
 
             Thank you for your contributions and your collaboration in reducing WIP
             and cycle time.
-          days-before-stale: 4
-          days-before-close: 1
+          days-before-stale: 14
+          days-before-close: 3
           days-before-issue-stale: -1
           exempt-pr-labels: dependencies
