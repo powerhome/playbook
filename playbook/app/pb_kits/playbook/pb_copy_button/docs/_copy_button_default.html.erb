@@ -1,3 +1,10 @@
 <%= pb_rails("copy_button", props: { text: "Click Me", value: "Your Value", id: 'first-copy' } ) %>
 </br>
 <%= pb_rails("copy_button", props: { text: "Click Me Also", value: "Also a value", id: 'second-copy', tooltip_position: "right", tooltip_text: "Also Copied"} ) %>
+</br>
+<%= pb_rails("copy_button", props: { text: "Copy Text Field Value", from: "copy-text-field", id: "copy-text-field-button" }) %>
+</br>
+<%= pb_rails("text_input", props: {
+  value: "Copy the value of this text field",
+  id: "copy-text-field"
+}) %>

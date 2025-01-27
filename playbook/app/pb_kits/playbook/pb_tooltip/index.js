@@ -19,8 +19,6 @@ export default class PbTooltip extends PbEnhancedElement {
       const method = this.triggerMethod
 
       if (method === 'click') {
-        console.log(trigger)
-        console.log('uwut')
         trigger.addEventListener('click', () => {
           this.showTooltip(trigger)
         })

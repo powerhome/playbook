@@ -11,6 +11,7 @@ module Playbook
       prop :tooltip_text, type: Playbook::Props::String,
                           default: "Copied!"
       prop :value
+      prop :from
 
       def classname
         generate_classname("pb_copy_button")
@@ -18,7 +19,8 @@ module Playbook
 
       def data
         Hash(values[:data]).merge(
-          "copy-value": value
+          "copy-value": value,
+          "from": from
         )
       end
     end
