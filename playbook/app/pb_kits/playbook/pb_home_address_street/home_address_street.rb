@@ -50,7 +50,11 @@ module Playbook
       end
 
       def format_street_address
-        preserve_case ? address : address.titleize
+        preserve_case ? address : custom_titleize(address)
+      end
+
+      def custom_titleize(str)
+        str.split(" ").map(&:capitalize).join(" ")
       end
 
       def city_emphasis_props
