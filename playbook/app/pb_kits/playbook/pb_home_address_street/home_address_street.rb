@@ -18,6 +18,7 @@ module Playbook
       prop :state
       prop :zipcode
       prop :territory
+      prop :preserve_case, default: false
       prop :dark, type: Playbook::Props::Boolean, default: false
 
       def classname
@@ -37,7 +38,7 @@ module Playbook
       end
 
       def address_house_style
-        [address&.titleize, house_style].join(separator)
+        [format_street_address, house_style].join(separator)
       end
 
       def address_house_style2
@@ -46,6 +47,10 @@ module Playbook
 
       def separator
         house_style ? " \u00b7 " : ""
+      end
+
+      def format_street_address
+        preserve_case ? address : address.titleize
       end
 
       def city_emphasis_props
