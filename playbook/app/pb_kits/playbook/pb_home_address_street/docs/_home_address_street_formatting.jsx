@@ -10,7 +10,6 @@ const HomeAddressStreetFormatting = (props) => {
         city="West Chester"
         homeId="8250263"
         homeUrl="https://powerhrg.com/"
-        houseStyle="Colonial"
         preserveCase
         state="pa"
         territory="PHL"
