@@ -55,7 +55,7 @@ $slides-margin: $space-md;
   justify-content: space-between;
   flex-direction: column;
   background-color: black;
-  z-index: 1;
+  z-index: 9999901;
   overflow: hidden;
 }
 
@@ -63,7 +63,7 @@ $slides-margin: $space-md;
   display: flex;
   height: calc(100% - 120px);
   width: 100%;
-  z-index: 1;
+  z-index: 9999901;
 
   [class^="react-transform-wrapper"] {
     flex-shrink: 0;
@@ -87,7 +87,7 @@ $slides-margin: $space-md;
   .carousel-arrow-left {
     display: block;
     position: absolute;
-    z-index: 4;
+    z-index: 9999904;
     top: 50%;
     @media only screen and (max-width: $screen-xs-max) {
       display: none;
@@ -97,7 +97,7 @@ $slides-margin: $space-md;
   .carousel-arrow-right {
     display: block;
     position: absolute;
-    z-index: 4;
+    z-index: 9999904;
     top: 50%;
     right: 0;
     @media only screen and (max-width: $screen-xs-max) {
@@ -140,7 +140,7 @@ $slides-margin: $space-md;
   width: 100vw;
   padding: 3px;
   overflow: scroll;
-  z-index: 20;
+  z-index: 9999920;
   &.centered {
     justify-content: center;
   }
