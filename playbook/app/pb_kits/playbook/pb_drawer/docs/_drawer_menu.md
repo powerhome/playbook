@@ -1,6 +1,24 @@
-Our drawer kit can fulfill your responsive menu needs! Using the `closeBreakpoint` prop you can have the menu close on smaller screens like phones/tablets.
+The Drawer component can be used to create responsive navigation menus and sidebars. It provides flexible options for controlling when and how the drawer appears based on screen size.
 
-Set a menu button with  the `menuButtonID` props. When the Drawer is open, the menu button will be hidden. But when your Brakpoint closes the drawer, you can toggle the Drawer open/close with your menu butotn.
+### Within Element
+The `withinElement` prop allows you to render the drawer within its parent container:
+- The drawer will be positioned relative to its parent element
+- Useful for creating nested navigation structures
+- This must be used in conjunction with the `triggerId` prop
 
-Also use the `withinElement` props to have the Drawer open within a specific element, instead of the default behavior of it taking up the entire screen size.
+This provides a clean way to create responsive navigation patterns that adapt to different screen sizes while maintaining a consistent user experience.
+
+### Trigger Id
+The `triggerId` prop allows you to connect an element to control the drawer:
+- The specified element will toggle the drawer open/closed
+- The element is automatically hidden when the drawer is opened via breakpoint
+- The element reappears when the drawer is closed via breakpoint
+
+### Breakpoint
+Use the `breakpoint` prop to control when the drawer automatically opens or closes based on screen size. For example, setting `breakpoint="md"` will:
+- Close the drawer on screens smaller than the medium breakpoint (992px)
+- Automatically open the drawer on screens larger than or equal to the medium breakpoint
+
+
+
 
