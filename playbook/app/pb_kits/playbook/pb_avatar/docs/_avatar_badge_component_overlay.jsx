@@ -2,36 +2,39 @@ import React from "react";
 import { Avatar } from 'playbook-ui'
 
 const AvatarBadgeComponentOverlay = (props) => {
+   console.log(props)
     return (
         <div>
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    dark: props.dark,
                     placement: "bottom-right",
-                    text: "12"
+                    text: "12",
                 }}
                 imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
                 marginBottom="sm"
                 size="sm"
+                {...props}
             />
 
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    dark: props.dark,
+                    // dark: props.dark,
                     placement: "top-left",
                     text: "12"
                 }}
                 imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
                 marginBottom="sm"
                 size="md"
+                {...props}
+
             />
 
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    dark: props.dark,
+                    // dark: props.dark,
                     placement: "top-center",
                     text: "On Roadtip",
                     variant: "info"
@@ -39,12 +42,14 @@ const AvatarBadgeComponentOverlay = (props) => {
                 imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
                 marginBottom="sm"
                 size="lg"
+                {...props}
+
             />
 
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    dark: props.dark,
+                    // dark: props.dark,
                     placement: "bottom-center",
                     text: "Out of Office",
                     variant: "error"
@@ -52,6 +57,7 @@ const AvatarBadgeComponentOverlay = (props) => {
                 imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
                 marginBottom="sm"
                 size="xl"
+                {...props}
             />
         </div>
     )

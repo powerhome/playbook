@@ -17,7 +17,6 @@ export type AvatarProps = {
   className?: string,
   componentOverlay?: {
     component: "badge" | "iconCircle",
-    dark?: boolean,
     placement: string,
     size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
     text?: string,
@@ -25,7 +24,6 @@ export type AvatarProps = {
     icon?: string
   },
   data?: {[key: string]: string},
-  dark?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   imageAlt?: string,
@@ -116,13 +114,14 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
              <Card
                  borderNone
                  borderRadius="rounded"
+                 dark={dark}
                  padding="none"
                  position="absolute"
                  {...getPlacementProps(componentOverlay.placement, size)}
              >
 
             <Badge
-                dark={componentOverlay.dark}
+                dark={dark}
                 rounded
                 text={componentOverlay.text}
                 variant={componentOverlay.variant as "error" | "info" | "neutral" | "primary" | "success" | "warning" | "notification"}

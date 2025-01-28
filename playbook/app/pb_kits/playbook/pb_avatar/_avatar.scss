@@ -63,10 +63,6 @@ $avatar-sizes: (
           line-height: $size;
           text-transform: uppercase;
           position: relative;
-
-          .dark [data-react-class="AvatarMonogram"] & {
-            background: $text_dk_light;
-          }
         }
 
         img {
@@ -80,6 +76,12 @@ $avatar-sizes: (
           display: block;
         }
       }
+    }
+  }
+
+  &.dark {
+    [class^=pb_card_kit] {
+      position: absolute;
     }
   }
 }
