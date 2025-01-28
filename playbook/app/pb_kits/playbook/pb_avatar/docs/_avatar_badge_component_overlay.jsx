@@ -19,7 +19,6 @@ const AvatarBadgeComponentOverlay = (props) => {
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    // dark: props.dark,
                     placement: "top-left",
                     text: "12"
                 }}
@@ -33,7 +32,6 @@ const AvatarBadgeComponentOverlay = (props) => {
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    // dark: props.dark,
                     placement: "top-center",
                     text: "On Roadtip",
                     variant: "info"
@@ -48,7 +46,6 @@ const AvatarBadgeComponentOverlay = (props) => {
             <Avatar
                 componentOverlay={{
                     component: "badge",
-                    // dark: props.dark,
                     placement: "bottom-center",
                     text: "Out of Office",
                     variant: "error"
