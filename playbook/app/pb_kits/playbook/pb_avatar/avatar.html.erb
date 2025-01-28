@@ -5,7 +5,7 @@
       <%= content_tag(:div, data: { initials: object.initials }, class: "avatar_wrapper") do %>
         <%= pb_rails("image", props: { alt: object.alt_text, url: object.image_url, on_error: object.handle_img_error }) if object.image_url.present? %>
       <% end %>
-      <%= pb_rails("card", props: { dark: object.dark, border_none: true, border_radius: "rounded", html_options: { style: "padding: 2px" }, position: "absolute" }.merge(specific_placement_style)) do %>
+      <%= pb_rails("card", props: { dark: object.dark, border_none: true, border_radius: "rounded", position: "absolute" }.merge(specific_placement_style)) do %>
         
         <%= pb_rails("icon_circle", props: { dark: object.dark, size: "xxs", icon: object.component_overlay[:icon], variant: object.component_overlay[:variant] }) %>
       <% end %>  
