@@ -15,21 +15,43 @@
  */
 
 
-// Playbook App Configuration for Font Family
-$font_family_base: 'Montserrat';
-
-// Enabled Weights in Montserat
-$lighter:       200;
-$light:         200;
-$regular:       500;
-$bold:          700;
-$bolder:        700;
-$boldest:       700;
-$extrabold:     700;
-
-
 @import "reset";
 @import "playbook";
+
+@font-face {
+    src: font-url('PowerCentra-Light.woff') format('woff');
+    font-family: 'Power Centra';
+    font-style: normal;
+    font-weight: 300;
+  }
+  
+  @font-face {
+    src: font-url('PowerCentra-Book.woff') format('woff');
+    font-family: 'Power Centra';
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+  @font-face {
+    src: font-url('PowerCentra-BookItalic.woff') format('woff');
+    font-family: 'Power Centra';
+    font-style: italic;
+    font-weight: 400;
+  }
+  
+  @font-face {
+    src: font-url('PowerCentra-Bold.woff') format('woff');
+    font-family: 'Power Centra';
+    font-style: normal;
+    font-weight: 700;
+  }
+  
+  @font-face {
+    src: font-url('PowerCentra-BoldItalic.woff') format('woff');
+    font-family: 'Power Centra';
+    font-style: italic;
+    font-weight: 700;
+  }
 
 // To use Playbook tokens, import the tokens file in this syntax: 
 // To view all available tokens, visit https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/tokens
