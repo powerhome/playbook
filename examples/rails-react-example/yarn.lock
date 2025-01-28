@@ -5200,10 +5200,10 @@ pkg-dir@^4.1.0:
   dependencies:
     find-up "^4.0.0"
 
-playbook-ui@^14.12.0:
-  version "14.12.0"
-  resolved "https://npm.powerapp.cloud/playbook-ui/-/playbook-ui-14.12.0.tgz#387a6248cb35d5c16161e044f1509087d84927c9"
-  integrity sha512-L9SZhBPnPku/oBnKFtEGgv0b6+iGf7jJnoVc9WKyTbYbctOdsiuPXdzrYCkf4AmsSG6U5hhyQ377A2HbWtZmuA==
+playbook-ui@14.12.0-alpha.testingwithfas5689:
+  version "14.12.0-alpha.testingwithfas5689"
+  resolved "https://npm.powerapp.cloud/playbook-ui/-/playbook-ui-14.12.0-alpha.testingwithfas5689.tgz#8032778536c5b647c99362a7570d4be22989799c"
+  integrity sha512-Oj5g2q5Jc9smS35a9ZbHG82jR8YggZtKYbk8kZT2BE+aGtcdTE9Prfa4ZgFx1TM7bS7BAtDGhAPEHWeiQ/mdHQ==
   dependencies:
     "@fortawesome/fontawesome-free" "^6.2.1"
     "@popperjs/core" "^2.11.8"
