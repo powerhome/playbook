@@ -89,13 +89,8 @@
     }
   }
 
-
   .table-header-cells-active:first-child {
     color: $primary !important;
-  }
-
-  .bg-silver {
-    background-color: lighten($silver, $opacity_7);
   }
 
   // Icons

@@ -29,7 +29,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           PbAdvancedTable.expandedRows.delete(this.element.id);
         }
         this.toggleElement(this.target);
-        toggleRowHighlight(this.element);
       }
     });
 
@@ -46,7 +45,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         } else {
           PbAdvancedTable.expandedRows.delete(button.id);
         }
-        toggleRowHighlight(button);
       });
     });
   }
@@ -135,14 +133,17 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     if (!elements.length) return;
 
     const isVisible = elements[0].classList.contains("is-visible");
-    if (isVisible) {
-      this.hideElement(elements);
-      this.displayDownArrow();
-    } else {
-      this.showElement(elements);
-      this.displayUpArrow();
+
+    isVisible ? this.hideElement(elements) : this.showElement(elements);
+    isVisible ? this.displayDownArrow() : this.displayUpArrow();
+
+    const row = this.element.closest("tr");
+    if (row) {
+      row.classList.toggle("bg-silver", !isVisible);
+      row.classList.toggle("bg-white", isVisible);
     }
   }
+
 
   displayDownArrow() {
     this.element.querySelector(DOWN_ARROW_SELECTOR).style.display =
@@ -224,19 +225,10 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 }
 
-const toggleRowHighlight = (button) => {
-  const row = button.closest("tr");
-  const isExpanded = button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block";
-
-  if (isExpanded) {
-    row.classList.add("bg-silver");
-  } else {
-    row.classList.remove("bg-silver");
-  }
-}
+window.expandAllRows = (element) => {
+  PbAdvancedTable.handleToggleAllHeaders(element);
+};
 
 window.expandAllSubRows = (element, rowDepth) => {
   PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
 };
-
-window.toggleRowHighlight = toggleRowHighlight;
