@@ -71,13 +71,13 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
 
   const canShowImage = imageUrl && !error
 
-  const onlineStatusSize = 
+  const onlineStatusSize =
     ['xxs', 'xs'].includes(size) ? 'sm' :
       ['sm', 'md'].includes(size) ? 'md' :
         ['lg', 'xl'].includes(size) ? 'lg' :
           'sm';
 
-  const onlineStatusPositionProps = (["xxs", "xs", "sm"].includes(size)) ? 
+  const onlineStatusPositionProps = (["xxs", "xs", "sm"].includes(size)) ?
     {
       top: { inset: true, value: "0" },
       right: { inset: false, value: "xxs" }
@@ -96,10 +96,10 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
         id={id}
     >
       {componentOverlay ? (
-        <Flex display="display_inline_block" 
+        <Flex display="display_inline_block"
             position="relative"
         >
-          <div className="avatar_wrapper" 
+          <div className="avatar_wrapper"
               data-initials={initials}
           >
             {canShowImage && (
@@ -119,7 +119,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
                  position="absolute"
                  {...getPlacementProps(componentOverlay.placement, size)}
              >
-    
+
             <Badge
                 rounded
                 text={componentOverlay.text}
@@ -145,7 +145,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
         </Flex>
       ) : (
         <>
-          <div className="avatar_wrapper" 
+          <div className="avatar_wrapper"
               data-initials={initials}
           >
             {canShowImage && (
