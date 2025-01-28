@@ -30,3 +30,8 @@ $extrabold:     700;
 
 @import "reset";
 @import "playbook";
+
+// To use Playbook tokens, import the tokens file in this syntax: 
+// To view all available tokens, visit https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/tokens
+// To see the tokens visually, see our docs here: https://playbook.powerapp.cloud/visual_guidelines
+@import "tokens/spacing";
