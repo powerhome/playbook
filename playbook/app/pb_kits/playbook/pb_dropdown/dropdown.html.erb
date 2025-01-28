@@ -1,19 +1,14 @@
-<%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    **combined_html_options) do %>
+<%= pb_content_tag do %>
     <% if object.label.present? %>
         <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
     <% end %>
     <div class="dropdown_wrapper<%= error_class %>" style="position: relative">
-        <input 
-            data-default-value="<%= input_default_value %>" 
-            id="dropdown-selected-option" 
-            name="<%= object.name %>" 
-            style="display: none" 
-            <%= object.required ? "required" : ""%> 
+        <input
+            data-default-value="<%= input_default_value %>"
+            id="dropdown-selected-option"
+            name="<%= object.name %>"
+            style="display: none"
+            <%= object.required ? "required" : ""%>
         />
         <% if content.present? %>
             <%= content.presence %>

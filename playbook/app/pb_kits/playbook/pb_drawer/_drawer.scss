@@ -13,10 +13,9 @@ $small: 200px;
 $medium: 250px;
 $large: 300px;
 $xlarge: 365px;
-$animation-duration: 0.4s;
+$animation-duration: .25s;
 $z-index: $z_7;
 
-// Drawer animations
 @keyframes modalFadeInLeft {
   from {
     transform: translateX(-100%);
@@ -71,6 +70,62 @@ $z-index: $z_7;
   }
 }
 
+@keyframes overlayFade {
+  from {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes overlayFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modalFadeDownIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalFadeDownOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes modalFadeUpIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalFadeUpOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
 body.PBDrawer__Body--open {
   transition: margin-left $animation-duration ease-in, margin-right $animation-duration ease-in;
 }
@@ -94,32 +149,51 @@ body.PBDrawer__Body--close {
 
 // Drawer Styles
 .pb_drawer {
-   will-change: transform;
-   backface-visibility: hidden;
-
-  .drawer {
-    position: sticky;
-    will-change: transform;
-    backface-visibility: hidden;
-    top: 0;
-    background-color: $white;
-    z-index: $z_9;
-  }
-
-  // @include pb_card;
   background-color: $white;
+  z-index: $z-index;
   border: 0;
-  box-shadow: $shadow_deepest; // border class here
-  max-height: calc(100vh - #{$gutter * 2});
-  max-width: calc(100vw - #{$gutter * 2});
+  height: 100%;
   overflow: auto;
   animation-duration: $animation-duration;
   outline: none;
 
-  // General _before_close styles
-  &[class*="_before_close"] {
-    animation-name: modalFadeOut;
-    animation-duration: $animation-duration;
+  &.pb_drawer_within_element {
+    position: relative;
+    width: 100%;
+    display: block;
+    background-color: $white;
+    overflow: hidden;
+    transition: height $animation-duration ease-in-out;
+    height: var(--drawer-height);
+    z-index: 1;
+
+    &.pb_drawer_before_close {
+      height: 0;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: inherit;
+      z-index: -1;
+    }
+  }
+
+  .toggle-content.is-visible {
+    display: block;
+    height: auto;
+  }
+
+  .drawer {
+    position: sticky;
+    will-change: transform;
+    top: 0;
+    background-color: $white;
+    z-index: $z_9;
   }
 
   &[class*="_left"] {
@@ -129,16 +203,39 @@ body.PBDrawer__Body--close {
   &[class*="_left"][class*="_before_close"] {
     animation-name: modalFadeOutLeft;
     animation-duration: $animation-duration;
+    transform: translateX(-100%);
   }
 
   &[class*="_right"] {
     animation-name: modalFadeInRight;
+    justify-content: flex-end;
   }
 
   &[class*="_right"][class*="_before_close"] {
     animation-name: modalFadeOutRight;
     animation-duration: $animation-duration;
+    transform: translateX(100%);
   }
+
+  &[class*="_bottom"] {
+    animation: none;
+    transform: none;
+  }
+
+  &[class*="_bottom"][class*="_before_close"] {
+    animation: none;
+    transform: none;
+  }
+
+  &[class*="_top"] {
+    animation-name: modalFadeUpIn;
+  }
+
+  &[class*="_top"][class*="_before_close"] {
+    animation-name: modalFadeUpOut;
+    animation-duration: $animation-duration;
+  }
+
 
   &[class*="_xs_"] {
     width: $xsmall;
@@ -165,23 +262,21 @@ body.PBDrawer__Body--close {
     max-width: $xlarge; 
   }
 
-  &_body_open {
-    overflow: hidden;
+  &[class*="_full_"] {
+    width: 100%;
+    max-width: 100%; 
   }
 
-  &_after_open {
-  }
-
-  &.drawer_border_full {
+  &.drawer_border-full {
     box-shadow: none;
     border: 2px solid #f3f7fb;
   }
 
-  &.drawer_border_right {
+  &.drawer_border-right {
     border-right: 2px solid #f3f7fb;
   }
 
-  &.drawer_border_left {
+  &.drawer_border-left {
     border-left: 2px solid #f3f7fb;
   }
 
@@ -200,78 +295,27 @@ body.PBDrawer__Body--close {
     right: 0;
     bottom: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: rgba($bg_dark, $opacity_4);
     z-index: $z-index;
-    animation-name: overlayFade;
-    animation-duration: $animation-duration;
-
-    &_after_open {
+    opacity: 0;
+    animation: overlayFade $animation-duration ease-in-out forwards;
+    
+    &[class*="_left"]{
+      justify-content: flex-start;
     }
+
+    &[class*="_center"]{
+      justify-content: center;
+    }
+
+    &[class*="_right"]{
+      justify-content: flex-end;
+    }
+    
     &_before_close {
-      animation-name: overlayFadeOut;
-      animation-duration: $animation-duration;
-    }
-    &[class*="full_height"] {
-      &[class*="_left"]{
-        justify-content: flex-start;
-      }
-
-      &[class*="_center"]{
-        justify-content: center;
-      }
-
-      &[class*="_right"]{
-        justify-content: flex-end;
-      }
-
-      .pb_drawer {
-        height: 100%;
-        max-height: 100%;
-        max-width: none;
-        // This empty div only has height when drawer is full height
-        // Fix for drawer body content disappearing behind sticky footer
-        .drawer-pseudo-footer {
-          height: $space_xl * 2;
-        }
-        .drawer_footer {
-          position: fixed;
-          bottom: 0;
-          background-color: $white;
-          max-width: 100%;
-        }
-        &[class*="_xs_"] {
-          width: $xsmall;
-          .dialog_footer {
-            width: $xsmall;
-          }
-        }
-        &[class*="_sm_"] {
-          width: $small;
-          .dialog_footer {
-            width: $small;
-          }
-        }
-        &[class*="_md_"] {
-          width: $medium;
-          .dialog_footer {
-            width: $medium;
-          }
-        }
-        &[class*="_lg_"] {
-          width: $large;
-          .dialog_footer {
-            width: $large;
-          }
-        }
-        &[class*="_xl_"] {
-          width: $xlarge;
-          .dialog_footer {
-            width: $xlarge;
-          }
-        }
-      }
+      animation: overlayFadeOut $animation-duration ease-in-out forwards;
+      opacity: 0;
+      // height: 0;
     }
   }
 
@@ -281,99 +325,17 @@ body.PBDrawer__Body--close {
     left: 0;
     right: 0;
     bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     z-index: $z-index;
-    animation-name: overlayFade;
-    animation-duration: $animation-duration;
-    overflow: none; /* Ensure body remains scrollable */
-    pointer-events: none; /* Allow interaction inside the drawer itself */
+    opacity: 1;
+    pointer-events: none;
 
-    body.PBDrawer--open {
-      overflow: none; /* Ensure body remains scrollable */
-      pointer-events: none; /* Allow interaction inside the drawer itself */
-    }
-
-    &_after_open {
-      overflow: none; /* Ensure body remains scrollable */
-      pointer-events: none; /* Allow interaction inside the drawer itself */
-    }
     &_before_close {
-      animation-name: overlayFadeOut;
-      animation-duration: $animation-duration;
-    }
-    &[class*="full_height"] {
-      &[class*="_left"]{
-        justify-content: flex-start;
-      }
-
-      &[class*="_center"]{
-        justify-content: center;
-      }
-
-      &[class*="_right"]{
-        justify-content: flex-end;
-      }
-
-      .pb_drawer {
-        height: 100%;
-        max-height: 100%;
-        max-width: none;
-        // This empty div only has height when drawer is full height
-        // Fix for drawer body content disappearing behind sticky footer
-        .drawer-pseudo-footer {
-          height: $space_xl * 2;
-        }
-        .drawer_footer {
-          position: fixed;
-          bottom: 0;
-          background-color: $white;
-          max-width: 100%;
-        }
-        &[class*="_xs_"] {
-          width: $xsmall;
-          .dialog_footer {
-            width: $xsmall;
-          }
-        }
-        &[class*="_sm_"] {
-          width: $small;
-          .dialog_footer {
-            width: $small;
-          }
-        }
-        &[class*="_md_"] {
-          width: $medium;
-          .dialog_footer {
-            width: $medium;
-          }
-        }
-        &[class*="_lg_"] {
-          width: $large;
-          .dialog_footer {
-            width: $large;
-          }
-        }
-        &[class*="_xl_"] {
-          width: $xlarge;
-          .dialog_footer {
-            width: $xlarge;
-          }
-        }
-      }
+      height: 0;
     }
   }
 
-  [class*="drawer_body"] {
-    padding: $space_sm;
-  }
 
-  [class*="drawer_header"] {
-    padding: $space_sm;
-  }
-
-  [class*="drawer_footer"] {
-    padding: $space_sm;
+  &.pb_drawer_before_close {
+    transform: translateX(-100%);
   }
 }

@@ -7,6 +7,10 @@ module Playbook
                         default: false
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
+      prop :enable_drag, type: Playbook::Props::Boolean,
+                         default: false
+      prop :items, type: Playbook::Props::Array,
+                   default: []
       prop :layout, type: Playbook::Props::Enum,
                     values: ["left", "right", ""],
                     default: ""

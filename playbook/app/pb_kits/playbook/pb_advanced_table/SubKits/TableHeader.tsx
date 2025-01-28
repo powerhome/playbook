@@ -7,8 +7,10 @@ import { GenericObject } from "../../types"
 import { buildCss } from "../../utilities/props"
 import { globalProps } from "../../utilities/globalProps"
 
-import { TableHeaderCell } from "../Components/TableHeaderCell"
+import Checkbox from "../../pb_checkbox/_checkbox"
 
+import { TableHeaderCell } from "../Components/TableHeaderCell"
+import { isChrome } from "../Utilities/BrowserCheck"
 import AdvancedTableContext from "../Context/AdvancedTableContext"
 
 type TableHeaderProps = {
@@ -34,6 +36,10 @@ export const TableHeader = ({
     handleExpandOrCollapse,
     loading,
     table,
+    hasAnySubRows,
+    showActionsBar,
+    selectableRows,
+    responsive
   } = useContext(AdvancedTableContext)
 
   const classes = classnames(
@@ -44,6 +50,12 @@ export const TableHeader = ({
 
   const columnPinning = table.getState().columnPinning;
 
+  const customCellClassnames = classnames(
+    "table-header-cells-custom",
+    `${showActionsBar && "header-cells-with-actions"}`,
+    `${isChrome() ? "chrome-styles" : ""}`,
+    `${responsive === "scroll" && "pinned-left"}`,
+  );
   return (
     <>
       <thead className={classes}
@@ -52,6 +64,15 @@ export const TableHeader = ({
         {/* Get the header groups (only one in this example) */}
         {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
           <tr key={`${headerGroup.id}-headerGroup`}>
+            {!hasAnySubRows && selectableRows && (
+              <th className={customCellClassnames}>
+                <Checkbox
+                    checked={table?.getIsAllRowsSelected()}
+                    indeterminate={table?.getIsSomeRowsSelected()}
+                    onChange={table?.getToggleAllRowsSelectedHandler()}
+                />
+              </th>
+            )}
             {headerGroup.headers.map(header => {
               const isPinnedLeft = columnPinning.left.includes(header.id)
               return (
@@ -65,6 +86,7 @@ export const TableHeader = ({
                     key={`${header.id}-header`}
                     loading={loading}
                     sortIcon={sortIcon}
+                    table={table}
                 />
               )
             })}

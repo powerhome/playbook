@@ -23,8 +23,18 @@
     background-color: $white;
   }
 
+  .bg-row-selection {
+    background-color: $info_subtle;
+  }
+
   .full-width {
     width: 100%;
+  }
+
+  .row-selection-actions-card {
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-color: transparent;
   }
 
   .table-header-cells:first-child {
@@ -47,6 +57,16 @@
     th[colspan]:not([colspan="1"]) {
       border-right: 1px solid $border_light !important;
     }
+    .table-header-cells-custom {
+      text-align:center;
+      [class^=pb_checkbox_kit] .pb_checkbox_label {
+        padding-left: 0px;
+      }
+    }
+    .header-cells-with-actions {
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+    }
   }
 
   .pb_advanced_table_body {
@@ -58,6 +78,14 @@
     }
     tr .pb_table_td:last-child {
       padding-right: 8px !important;
+    }
+
+    .checkbox-cell {
+      display: flex;
+      justify-content: center;
+      [class^=pb_checkbox_kit] .pb_checkbox_label {
+        padding-left: 0px;
+      }
     }
   }
 
@@ -116,6 +144,7 @@
 
   // Vertical separator
   .table-header-cells:first-child,
+  .table-header-cells-custom:first-child,
   td:first-child,
   .pb_table_td:first-child {
     box-shadow: 1px 0px 0px 0px $border_light !important;

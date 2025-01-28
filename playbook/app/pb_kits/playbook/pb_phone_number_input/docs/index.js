@@ -5,3 +5,4 @@ export { default as PhoneNumberInputOnlyCountries } from './_phone_number_input_
 export { default as PhoneNumberInputValidation } from './_phone_number_input_validation'
 export { default as PhoneNumberInputClearField } from './_phone_number_input_clear_field'
 export { default as PhoneNumberInputAccessInputElement } from './_phone_number_input_access_input_element'
+export { default as PhoneNumberInputFormat } from './_phone_number_input_format'

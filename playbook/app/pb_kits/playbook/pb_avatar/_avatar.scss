@@ -78,4 +78,9 @@ $avatar-sizes: (
       }
     }
   }
+  &.dark {
+    [class^=pb_card_kit] {
+      position: absolute;
+    }
+  }
 }

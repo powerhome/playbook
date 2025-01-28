@@ -4,9 +4,23 @@
     data: object.data,
     id: object.id,
     **combined_html_options) do %>
-  <%= pb_rails("list") do %>
-    <% object.items.each do |item| %>
-      <%= pb_rails("selectable_list/selectable_list_item", props: item.merge(variant: object.variant, id: object.get_id(item)) )%>
+  <% if enable_drag %>
+    <%= pb_rails("draggable", props: {initial_items: object.items}) do %>
+      <%= pb_rails("draggable/draggable_container") do %>
+        <%= pb_rails("list", props: {ordered: false}) do %>
+          <% object.items.each do |item| %>
+            <%= pb_rails("draggable/draggable_item", props: {drag_id: item[:drag_id]}) do %>
+              <%= pb_rails("selectable_list/selectable_list_item", props: item.merge(variant: object.variant, id: object.get_id(item), drag_id: item[:drag_id]) )%>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= pb_rails("list") do %>
+      <% object.items.each do |item| %>
+        <%= pb_rails("selectable_list/selectable_list_item", props: item.merge(variant: object.variant, id: object.get_id(item)) )%>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

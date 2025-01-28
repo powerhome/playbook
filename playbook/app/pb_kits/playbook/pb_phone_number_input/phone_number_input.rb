@@ -21,6 +21,8 @@ module Playbook
                    default: ""
       prop :value, type: Playbook::Props::String,
                    default: ""
+      prop :format_as_you_type, type: Playbook::Props::Boolean,
+                                default: false
 
       def classname
         generate_classname("pb_phone_number_input")
@@ -32,6 +34,7 @@ module Playbook
           dark: dark,
           disabled: disabled,
           error: error,
+          formatAsYouType: format_as_you_type,
           initialCountry: initial_country,
           label: label,
           name: name,
