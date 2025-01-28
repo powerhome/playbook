@@ -95,11 +95,11 @@ test('should not have a left border', () => {
 test('should have a right icon', () => {
     render(<NavDefault iconRight="angle-down" />)
     const kit = screen.getByTestId(itemTestId)
-    expect(kit).toContainHTML('<i class="pb_icon_kit far pb_nav_list_item_icon_right fa-fw fa-angle-down" />')
+    expect(kit).toContainHTML('<i class="pb_icon_kit fas pb_nav_list_item_icon_right fa-fw fa-angle-down" />')
 })
 
 test('should have a left icon', () => {
     render(<NavDefault iconLeft="users-class" />)
     const kit = screen.getByTestId(itemTestId)
-    expect(kit).toContainHTML('<i class="pb_icon_kit far pb_nav_list_item_icon_left fa-fw fa-users-class" />')
+    expect(kit).toContainHTML('<i class="pb_icon_kit fas pb_nav_list_item_icon_left fa-fw fa-users-class" />')
 })
