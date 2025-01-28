@@ -137,7 +137,7 @@ const Icon = (props: IconProps) => {
     pulse = false,
     rotation,
     size,
-    fontStyle = 'far',
+    fontStyle = 'fas',
     spin = false,
     tabIndex,
   } = props
