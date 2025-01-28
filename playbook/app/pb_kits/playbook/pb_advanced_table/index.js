@@ -235,8 +235,8 @@ const toggleRowHighlight = (button) => {
   }
 }
 
-window.toggleRowHighlight = toggleRowHighlight;
-
 window.expandAllSubRows = (element, rowDepth) => {
   PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
 };
+
+window.toggleRowHighlight = toggleRowHighlight;
