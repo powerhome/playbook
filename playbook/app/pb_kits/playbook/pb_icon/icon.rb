@@ -207,7 +207,7 @@ module Playbook
       end
 
       def font_style_class
-        font_style ? font_style.to_s : "far"
+        font_style ? font_style.to_s : "fas"
       end
 
       def spin_class
