@@ -89,9 +89,14 @@
     }
   }
 
-
   .table-header-cells-active:first-child {
     color: $primary !important;
+  }
+
+  .sticky-header {
+    thead {
+      z-index: 3 !important;
+    }
   }
 
   // Icons

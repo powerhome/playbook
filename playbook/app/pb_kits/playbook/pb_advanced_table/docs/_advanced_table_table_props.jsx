@@ -40,12 +40,24 @@ const AdvancedTableTableProps = (props) => {
     sticky: true
   }
 
+  const tablePropsStickyHeader = {
+    sticky: true
+  }
+
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           tableData={MOCK_DATA}
           tableProps={tableProps}
+          {...props}
+      />
+      <AdvancedTable
+          columnDefinitions={columnDefinitions}
+          marginTop="lg"
+          maxHeight="xs"
+          tableData={MOCK_DATA}
+          tableProps={tablePropsStickyHeader}
           {...props}
       />
     </div>
