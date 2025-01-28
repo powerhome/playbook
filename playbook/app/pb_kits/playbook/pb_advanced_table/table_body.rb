@@ -16,6 +16,8 @@ module Playbook
                             default: []
       prop :collapsible_trail, type: Playbook::Props::Boolean,
                                default: true
+      prop :loading, type: Playbook::Props::Boolean,
+                     default: false
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[none scroll],
                         default: "scroll"
@@ -54,7 +56,7 @@ module Playbook
         current_data_attributes = current_depth.zero? ? { row_depth: 0 } : table_data_attributes
 
         # Additional class and data attributes needed for toggle logic
-        output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive })
+        output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading })
 
         if row[:children].present?
           row[:children].each do |child_row|
