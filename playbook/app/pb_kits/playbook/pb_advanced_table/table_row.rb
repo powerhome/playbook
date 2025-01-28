@@ -13,6 +13,11 @@ module Playbook
                                default: true
       prop :table_data_attributes, type: Playbook::Props::HashProp,
                                    default: {}
+      prop :responsive, type: Playbook::Props::Enum,
+                        values: %w[none scroll],
+                        default: "scroll"
+      prop :is_pinned_left, type: Playbook::Props::Boolean,
+                            default: false
 
       def data
         Hash(prop(:data)).merge(table_data_attributes)
@@ -22,9 +27,10 @@ module Playbook
         generate_classname("pb_table_tr", "bg-white", subrow_depth_classname, separator: " ")
       end
 
-      def td_classname(column)
+      def td_classname(column, index)
         classes = %w[id-cell chrome-styles]
         classes << "last-cell" if column[:is_last_in_group]
+        classes << "pinned-left" if index.zero? && is_pinned_left && responsive == "scroll"
         classes.join(" ")
       end
 

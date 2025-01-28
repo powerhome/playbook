@@ -16,6 +16,9 @@ module Playbook
                                default: true
       prop :subrow_data_attributes, type: Playbook::Props::HashProp,
                                     default: {}
+      prop :responsive, type: Playbook::Props::Enum,
+                        values: %w[none scroll],
+                        default: "scroll"
 
       def data
         Hash(prop(:data)).merge(subrow_data_attributes)
@@ -23,6 +26,12 @@ module Playbook
 
       def classname
         generate_classname("pb_table_tr", "bg-silver", "pb_subrow_header", subrow_depth_classname, separator: " ")
+      end
+
+      def td_classname(index)
+        classes = %w[id-cell chrome-styles]
+        classes << "pinned-left" if index.zero? && responsive == "scroll"
+        classes.join(" ")
       end
 
     private
