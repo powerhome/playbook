@@ -132,11 +132,13 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
             <Card
                 borderNone
                 borderRadius="rounded"
+                dark={dark}
                 htmlOptions={{style: {padding:"2px"}}}
                 position="absolute"
                 {...getPlacementProps(componentOverlay.placement, size)}
             >
               <IconCircle
+                  dark={dark}
                   icon={componentOverlay.icon}
                   size="xxs"
                   variant={componentOverlay.variant as "default" | "royal" | "blue" | "purple" | "teal" | "red" | "yellow" | "orange" | "green"}
