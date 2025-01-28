@@ -229,9 +229,9 @@ const toggleRowHighlight = (button) => {
   const isExpanded = button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block";
 
   if (isExpanded) {
-    row.classList.add("expanded-row");
+    row.classList.add("bg-silver");
   } else {
-    row.classList.remove("expanded-row");
+    row.classList.remove("bg-silver");
   }
 }
 
