@@ -2,7 +2,6 @@ import React from "react";
 import { Avatar } from 'playbook-ui'
 
 const AvatarBadgeComponentOverlay = (props) => {
-   console.log(props)
     return (
         <div>
             <Avatar
