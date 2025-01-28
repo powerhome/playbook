@@ -1,12 +1,13 @@
 import React from "react";
 import { Avatar } from 'playbook-ui'
 
-const AvatarBadgeComponentOverlay = () => {
+const AvatarBadgeComponentOverlay = (props) => {
     return (
         <div>
             <Avatar
                 componentOverlay={{
                     component: "badge",
+                    dark: props.dark,
                     placement: "bottom-right",
                     text: "12"
                 }}
@@ -18,6 +19,7 @@ const AvatarBadgeComponentOverlay = () => {
             <Avatar
                 componentOverlay={{
                     component: "badge",
+                    dark: props.dark,
                     placement: "top-left",
                     text: "12"
                 }}
@@ -29,6 +31,7 @@ const AvatarBadgeComponentOverlay = () => {
             <Avatar
                 componentOverlay={{
                     component: "badge",
+                    dark: props.dark,
                     placement: "top-center",
                     text: "On Roadtip",
                     variant: "info"
@@ -41,6 +44,7 @@ const AvatarBadgeComponentOverlay = () => {
             <Avatar
                 componentOverlay={{
                     component: "badge",
+                    dark: props.dark,
                     placement: "bottom-center",
                     text: "Out of Office",
                     variant: "error"
@@ -48,7 +52,7 @@ const AvatarBadgeComponentOverlay = () => {
                 imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
                 marginBottom="sm"
                 size="xl"
-            /> 
+            />
         </div>
     )
 }

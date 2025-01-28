@@ -17,6 +17,7 @@ export type AvatarProps = {
   className?: string,
   componentOverlay?: {
     component: "badge" | "iconCircle",
+    dark?: boolean,
     placement: string,
     size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
     text?: string,
@@ -121,6 +122,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
              >
 
             <Badge
+                dark={componentOverlay.dark}
                 rounded
                 text={componentOverlay.text}
                 variant={componentOverlay.variant as "error" | "info" | "neutral" | "primary" | "success" | "warning" | "notification"}
