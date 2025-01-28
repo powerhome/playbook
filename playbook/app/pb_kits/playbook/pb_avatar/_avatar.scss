@@ -52,6 +52,10 @@ $avatar-sizes: (
         flex-grow: 0;
         flex-basis: $size;
 
+        .dark & {
+          background: $text_dk_light;
+        }
+
         &::before {
           content: attr(data-initials);
           width: 100%;
