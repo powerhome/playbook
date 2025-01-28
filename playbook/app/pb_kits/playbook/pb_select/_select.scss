@@ -209,10 +209,8 @@
   }
   .pb_select_kit_wrapper {
     &.error {
-      .pb_select_kit_wrapper {
-        > select:first-child {
-          border-color: $error_dark;
-        }
+      > select {
+        border-color: $error_dark;
       }
     }
   }
@@ -228,7 +226,7 @@
     &:hover {
       select {
         color: $white !important;
-        background: rgba(0,130,255,0.1);
+        background: $focus_input_dark;
       }
       svg {
         color: $primary !important;

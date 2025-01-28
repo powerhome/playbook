@@ -16,6 +16,7 @@ type SelectableIconProps = {
   checked?: boolean,
   className?: string,
   customIcon?: {[key: string] :SVGElement},
+  dark?: boolean,
   disabled?: boolean,
   data?: GenericObject,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -33,6 +34,7 @@ const SelectableIcon = ({
   className,
   checked = false,
   customIcon,
+  dark = false,
   data = {},
   disabled = false,
   htmlOptions = {},
@@ -52,10 +54,12 @@ const SelectableIcon = ({
   const classes = classnames(
     buildCss('pb_selectable_icon_kit', {
       checked: checked,
+      dark: dark,
       disabled: disabled,
       enabled: !disabled,
     }),
     globalProps(props),
+    dark ? 'dark' : '',
     className
   )
 
@@ -73,17 +77,19 @@ const SelectableIcon = ({
         <>
           <Icon
               customIcon={customIcon}
+              dark={dark}
               icon={icon}
               size="2x"
           />
           <Title
+              dark={dark}
               size={4}
               tag="h4"
               text={text}
           />
         </>
       )}
-          
+
       {inputs === 'enabled' && (
         <>
           <input
@@ -98,10 +104,12 @@ const SelectableIcon = ({
           <label htmlFor={inputIdPresent}>
             <Icon
                 customIcon={customIcon}
+                dark={dark}
                 icon={icon}
                 size="2x"
             />
             <Title
+                dark={dark}
                 size={4}
                 tag="h4"
                 text={text}

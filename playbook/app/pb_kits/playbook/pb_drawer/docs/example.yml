@@ -6,7 +6,8 @@ examples:
   
   react:
   - drawer_default: Default
-  - drawer_menu: Menu Behavior 
+  - drawer_behavior: Push Behavior
+  - drawer_menu: Within Element
   - drawer_sizes: Sizes
   - drawer_overlay: Overlay
   - drawer_borders: Borders 
