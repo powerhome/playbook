@@ -26,3 +26,17 @@ test('subtitle prop accepts a node', () => {
 
   expect(screen.getByTestId('test-subtitle-block')).toHaveTextContent('test caption')
 })
+
+test('bold prop applies correct styling when false', () => {
+  render(
+    <User
+        bold={false}
+        data={{ testid: 'test-bold-false' }}
+        name="Anna Black"
+    />
+  )
+  const titleElement = screen.getByText("Anna Black")
+  expect(titleElement).toBeInTheDocument()
+
+  expect(titleElement).toHaveClass('pb_title_kit_size_4_thin')
+})
