@@ -30,20 +30,6 @@ module Playbook
         text
       end
 
-    private
-
-      def color_class
-        color == "default" ? nil : color
-      end
-
-      def disabled_class
-        disabled ? "disabled" : nil
-      end
-
-      def underline_class
-        underline ? "underline" : nil
-      end
-
       def target_attribute
         if target && href
           target
@@ -58,6 +44,20 @@ module Playbook
           option[:target] = target_attribute if target_attribute.present?
           option[:tabindex] = 0
         end
+      end
+
+    private
+
+      def color_class
+        color == "default" ? nil : color
+      end
+
+      def disabled_class
+        disabled ? "disabled" : nil
+      end
+
+      def underline_class
+        underline ? "underline" : nil
       end
     end
   end
