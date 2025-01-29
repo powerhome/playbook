@@ -1,14 +1,15 @@
 examples:
-  
+
   rails:
   - link_color: Color
   - link_underline: Underline
   - link_icon: Icon
   - link_disabled: Disabled
   - link_tag: Tag
-  
-  
+
+
   react:
+  - link_target: Target
   - link_color: Color
   - link_underline: Underline
   - link_icon: Icon
