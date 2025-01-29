@@ -13,6 +13,7 @@ type UserProps = {
   aria?: {[key: string]: string},
   avatar?: boolean,
   avatarUrl?: string,
+  bold?: boolean,
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
@@ -32,6 +33,7 @@ const User = (props: UserProps): React.ReactElement => {
     aria = {},
     avatar = false,
     avatarUrl,
+    bold = true,
     className,
     dark = false,
     data = {},
@@ -48,9 +50,11 @@ const User = (props: UserProps): React.ReactElement => {
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const ariaProps: {[key: string]: string} = buildAriaProps(aria)
   const htmlProps = buildHtmlProps(htmlOptions)
+  const getBold = bold ? '' : 'thin'
+
 
   const classes = classnames(
-    buildCss('pb_user_kit', align, orientation, size),
+    buildCss('pb_user_kit', align, orientation, size, getBold),
     globalProps(props),
     className
   )
@@ -75,6 +79,7 @@ const User = (props: UserProps): React.ReactElement => {
       }
       <div className="content_wrapper">
         <Title
+            {...props}
             dark={dark}
             size={size == 'lg' ? 3 : 4}
             text={name}
