@@ -59,7 +59,7 @@ const Link = (props: LinkProps): React.ReactElement => {
   const Tag = tag as keyof JSX.IntrinsicElements
 
   const getTargetAttribute = () => {
-    if (target && icon) {
+    if (target && href) {
       return target
     } else if (newWindow) {
       return '_blank'
@@ -76,8 +76,6 @@ const Link = (props: LinkProps): React.ReactElement => {
             icon={icon}
             marginRight="xxs"
             size="xs"
-            tabIndex={tabIndex}
-            target={getTargetAttribute()}
         />
       )}
       {text || children}
@@ -87,8 +85,6 @@ const Link = (props: LinkProps): React.ReactElement => {
             icon={iconRight}
             marginLeft="xxs"
             size="xs"
-            tabIndex={tabIndex}
-            target={getTargetAttribute()}
         />
       )}
     </>
@@ -107,6 +103,7 @@ const Link = (props: LinkProps): React.ReactElement => {
       <a
           {...commonProps}
           href={href}
+          rel={target !== 'child' ? 'noreferrer' : ''}
           tabIndex={tabIndex}
           target={getTargetAttribute()}
       >
@@ -118,6 +115,7 @@ const Link = (props: LinkProps): React.ReactElement => {
       <a
           {...commonProps}
           href={href}
+          rel={target !== 'child' ? 'noreferrer' : ''}
           tabIndex={tabIndex}
           target={getTargetAttribute()}
       >

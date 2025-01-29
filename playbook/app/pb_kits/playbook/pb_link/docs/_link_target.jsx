@@ -15,7 +15,10 @@ const LinkTarget = (props) => (
     </div>
     <div>
       <Link
-          href="https://google.com"
+          aria={{ label: 'Link to Playbook in new window' }}
+          href="https://playbook.powerapp.cloud/"
+          tabIndex={0}
+          target='child'
           text="Open in a Child Tab"
           {...props}
       />
