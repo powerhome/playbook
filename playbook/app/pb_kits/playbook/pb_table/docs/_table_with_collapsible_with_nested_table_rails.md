@@ -1,0 +1,1 @@
+The `collapsible_content` can also be used to display nested Tables within each Row.

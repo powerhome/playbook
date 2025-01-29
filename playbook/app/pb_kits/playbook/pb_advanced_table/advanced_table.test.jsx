@@ -245,7 +245,7 @@ test("toggleExpansionAll button exists and toggles subrows open and closed", asy
 })
 
 
-test("loading state + initialLoadingRowCount prop", () => {
+test("loading state + initialLoadingRowsCount prop", () => {
   render(
     <AdvancedTable
         columnDefinitions={columnDefinitions}
