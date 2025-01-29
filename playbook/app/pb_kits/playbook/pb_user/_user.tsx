@@ -79,7 +79,7 @@ const User = (props: UserProps): React.ReactElement => {
       }
       <div className="content_wrapper">
         <Title
-            {...props}
+            bold={bold}
             dark={dark}
             size={size == 'lg' ? 3 : 4}
             text={name}
