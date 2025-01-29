@@ -9,6 +9,7 @@ module Playbook
       prop :avatar, type: Playbook::Props::Boolean,
                     default: false
       prop :avatar_url
+      prop :bold, type: Playbook::Props::Boolean, default: true
       prop :name
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
@@ -21,7 +22,11 @@ module Playbook
       prop :territory
 
       def classname
-        generate_classname("pb_user_kit", align, orientation, size)
+        generate_classname("pb_user_kit", align, orientation, size, is_bold)
+      end
+
+      def is_bold
+        bold ? nil : "thin"
       end
 
       def avatar_size
