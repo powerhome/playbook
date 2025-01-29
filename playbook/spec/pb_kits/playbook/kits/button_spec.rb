@@ -32,6 +32,9 @@ RSpec.describe Playbook::PbButton::Button do
     it "returns 'a' when link is provided" do
       expect(subject.new(link: true).tag).to eq "a"
     end
+    it "returns 'button' when link and disabled" do
+      expect(subject.new(link: true, disabled: true).tag).to eq "button"
+    end
   end
 
   describe "#link_options" do
