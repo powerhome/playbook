@@ -134,7 +134,7 @@ useEffect(() => {
     yearRange,
     required: false,
   }, scrollContainer)
-})
+}, [])
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {
     filteredProps.marginBottom = "sm"
