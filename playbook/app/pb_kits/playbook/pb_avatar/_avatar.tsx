@@ -23,6 +23,7 @@ export type AvatarProps = {
     variant?: string,
     icon?: string
   },
+  dark?: boolean,
   data?: {[key: string]: string},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
