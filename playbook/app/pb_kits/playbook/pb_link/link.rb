@@ -11,9 +11,13 @@ module Playbook
       prop :href
       prop :icon
       prop :icon_right
+      prop :new_window, type: Playbook::Props::Boolean,
+                        default: false
+      prop :tabindex
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[a h1 h2 h3 h4 h5 h6 p span div],
                  default: "a"
+      prop :target
       prop :text
       prop :underline, type: Playbook::Props::Boolean,
                        default: false
@@ -38,6 +42,22 @@ module Playbook
 
       def underline_class
         underline ? "underline" : nil
+      end
+
+      def target_attribute
+        if target && href
+          target
+        elsif new_window
+          "_blank"
+        end
+      end
+
+      def href_options
+        options.tap do |option|
+          option[:href] = href
+          option[:target] = target_attribute if target_attribute.present?
+          option[:tabindex] = 0
+        end
       end
     end
   end

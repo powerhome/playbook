@@ -1,6 +1,7 @@
 examples:
 
   rails:
+  - link_target: Target
   - link_color: Color
   - link_underline: Underline
   - link_icon: Icon
