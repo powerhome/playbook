@@ -220,7 +220,13 @@
       .bg-white td:first-child {
           background-color: $white;
       }
-      
+      .sticky-header {
+        thead {
+          th:first-child {
+            box-shadow: 1px 0 10px -2px $border_light !important;
+          }
+        }
+      }
     }
   }
   @media only screen and (min-width: $screen-xl-min) {
@@ -307,6 +313,14 @@
         }
         .bg-white td:first-child {
           background-color: $bg_dark_card;
+        }
+        .sticky-header {
+          thead {
+            th:first-child {
+              background: $bg_dark;
+              box-shadow: 1px 0 10px -2px $border_dark !important;
+            }
+          }
         }
       }
     }
