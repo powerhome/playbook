@@ -32,6 +32,7 @@ type TooltipProps = {
   position?: "absolute" | "fixed";
   text: string,
   showTooltip?: boolean,
+  forceOpenTooltip?: boolean,
 } & GlobalProps
 
 const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): React.ReactElement => {
@@ -49,6 +50,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     text,
     showTooltip = true,
     zIndex,
+    forceOpenTooltip = false,
     ...rest
   } = props
 
@@ -135,7 +137,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
       >
         {children}
       </div>
-      {open && (
+      {(open || forceOpenTooltip) && (
         <div
             {...getFloatingProps({
               className: `tooltip_tooltip ${placement} visible`,
