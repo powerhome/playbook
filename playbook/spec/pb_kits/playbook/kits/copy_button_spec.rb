@@ -23,10 +23,10 @@ RSpec.describe Playbook::PbCopyButton::CopyButton do
 
   describe "#classname" do
     it "returns the correct base class" do
-      expect(subject.new.classname).to eq "pb_copy_button"
+      expect(subject.new.classname).to eq "pb_copy_button_kit"
       expect(
         subject.new(classname: "additional_class").classname
-      ).to eq "pb_copy_button additional_class"
+      ).to eq "pb_copy_button_kit additional_class"
     end
   end
 
