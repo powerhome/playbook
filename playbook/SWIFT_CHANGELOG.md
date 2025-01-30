@@ -1,11 +1,22 @@
+# 🚀 Playbook Swift 6.6.3: Adjustments and Fixes! 🚀
+##### Jan 24, 2025
+
+### Bug Fixes
+- Popover Activity Flag: Added a flag to track popover activity in [#488]
+- Reaction Button Font Color Alignment: Fixed an issue with font color alignment in the reaction button in [#490]
+
+[Full Changelog](https://github.com/Power/Playbook/compare/6.6.2...6.6.3)
+
+---
+
 # 🚀 Playbook Swift 6.6.2: Adjustments and Fixes! 🚀
 ##### Jan 17, 2025
 
 ### Bug Fixes
-- **[PBIOS-662]** Modify PBReactionButton to Use Binding by [@RachelRadford21](https://github.com/RachelRadford21) in [#485](https://github.com/Power/Playbook/pull/485)
-- **[PBIOS-659]** Update PBSelect Kit Dynamic Select by [@RachelRadford21](https://github.com/RachelRadford21) in [#484](https://github.com/Power/Playbook/pull/484)
-- **[PBIOS-655]** pbIcon Clipping Fix by [@RachelRadford21](https://github.com/RachelRadford21) in [#480](https://github.com/Power/Playbook/pull/480)
-- **[PBIOS-668]** Section list fix for connect by [@isismsilva](https://github.com/isismsilva) in [#486](https://github.com/Power/Playbook/pull/486)
+- Modify PBReactionButton to Use Binding by [@RachelRadford21](https://github.com/RachelRadford21) in [#485](https://github.com/Power/Playbook/pull/485)
+- Update PBSelect Kit Dynamic Select by [@RachelRadford21](https://github.com/RachelRadford21) in [#484](https://github.com/Power/Playbook/pull/484)
+- PBIcon Clipping Fix by [@RachelRadford21](https://github.com/RachelRadford21) in [#480](https://github.com/Power/Playbook/pull/480)
+- Section list fix for connect by [@isismsilva](https://github.com/isismsilva) in [#486](https://github.com/Power/Playbook/pull/486)
 
 [Full Changelog](https://github.com/Power/Playbook/compare/6.6.1...6.6.2)
 
@@ -19,7 +30,7 @@ This release introduces fixes and improvements that refine user experience, opti
 #### Full List of Changes
 
 **Bug Fixes**
-- **[PBIOS-656]** Typeahead presentation fix by [@isismsilva](https://github.com/isismsilva) in [#482](https://github.com/Power/Playbook/pull/482)
+- Typeahead presentation fix by [@isismsilva](https://github.com/isismsilva) in [#482](https://github.com/Power/Playbook/pull/482)
 
 [Full Changelog](https://github.com/Power/Playbook/compare/6.6.0...6.6.1)
 

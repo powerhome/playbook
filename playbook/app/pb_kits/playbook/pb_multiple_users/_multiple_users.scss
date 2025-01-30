@@ -24,6 +24,10 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
     color: $primary;
     font-weight: $bold;
     font-size: $font_smallest - 1;
+
+    &.dark {
+      border: $pb_multiple_users_border_size solid $bg_dark;
+    }
   }
 
   .multiple_users_badge_xxs {

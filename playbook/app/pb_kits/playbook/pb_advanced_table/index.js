@@ -133,14 +133,17 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     if (!elements.length) return;
 
     const isVisible = elements[0].classList.contains("is-visible");
-    if (isVisible) {
-      this.hideElement(elements);
-      this.displayDownArrow();
-    } else {
-      this.showElement(elements);
-      this.displayUpArrow();
+
+    isVisible ? this.hideElement(elements) : this.showElement(elements);
+    isVisible ? this.displayDownArrow() : this.displayUpArrow();
+
+    const row = this.element.closest("tr");
+    if (row) {
+      row.classList.toggle("bg-silver", !isVisible);
+      row.classList.toggle("bg-white", isVisible);
     }
   }
+
 
   displayDownArrow() {
     this.element.querySelector(DOWN_ARROW_SELECTOR).style.display =

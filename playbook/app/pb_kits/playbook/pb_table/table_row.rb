@@ -12,7 +12,7 @@ module Playbook
                          default: false
       prop :collapsible_content
       prop :collapsible_side_highlight, type: Playbook::Props::Boolean,
-                                        default: false
+                                        default: true
 
       def classname
         generate_classname("pb_table_row_kit", side_highlight_class) + tag_class
