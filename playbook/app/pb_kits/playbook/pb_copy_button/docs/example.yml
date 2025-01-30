@@ -1,7 +1,7 @@
 examples:
-  
   rails:
   - copy_button_default: Default
   
-  
-  
+  react:
+  - copy_button_default: Default
+  - copy_button_from: Copy From

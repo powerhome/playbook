@@ -88,8 +88,14 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-  - name: copy_button
+  - name: icon_button
     platforms: rails_only
+    status: beta
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
+  - name: copy_button
+    platforms: *1
     status: beta
     icons_used: false
     react_rendered: false

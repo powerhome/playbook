@@ -14,7 +14,7 @@ module Playbook
       prop :from
 
       def classname
-        generate_classname("pb_copy_button")
+        generate_classname("pb_copy_button_kit")
       end
 
       def data

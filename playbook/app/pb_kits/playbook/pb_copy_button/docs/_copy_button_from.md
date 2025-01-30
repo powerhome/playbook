@@ -1,0 +1,1 @@
+Provide an element's ID as the `from` parameter, and its text will be copied. If the element is an input, its `value` will be copied; otherwise, the `innerText` will be used. Additionally, if a `value` prop is provided, it will override the content from the `from` element and be copied instead.
