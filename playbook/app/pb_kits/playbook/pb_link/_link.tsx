@@ -103,7 +103,7 @@ const Link = (props: LinkProps): React.ReactElement => {
       <a
           {...commonProps}
           href={href}
-          rel={target !== 'child' ? 'noreferrer' : ''}
+          rel={target !== 'child' ? 'noreferrer' : undefined}
           tabIndex={tabIndex}
           target={getTargetAttribute()}
       >
@@ -115,7 +115,7 @@ const Link = (props: LinkProps): React.ReactElement => {
       <a
           {...commonProps}
           href={href}
-          rel={target !== 'child' ? 'noreferrer' : ''}
+          rel={target !== 'child' ? 'noreferrer' : undefined}
           tabIndex={tabIndex}
           target={getTargetAttribute()}
       >
