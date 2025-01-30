@@ -1,8 +1,9 @@
 import React from 'react'
 
-const BarGraphPbStyles = (props) => (
+//import BarGraph from '../_bar_graph'
+
+const BarGraphPbStyles = () => (
   <div>
-    {...props}
     pb styles
   </div>
 )
