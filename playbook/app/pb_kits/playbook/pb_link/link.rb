@@ -38,14 +38,6 @@ module Playbook
         end
       end
 
-      def href_options
-        options.tap do |option|
-          option[:href] = href
-          option[:target] = target_attribute if target_attribute.present?
-          option[:tabindex] = 0
-        end
-      end
-
     private
 
       def color_class

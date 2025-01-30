@@ -1,15 +1,16 @@
 <div>
   <%= pb_rails("link", props: {
-    text: "Open in new Window",
+    href: "http://google.com",
     new_window: true,
-    href: "http://google.com"
+    target: "_blank",
+    text: "Open in new Window"
   }) %>
 </div>
 
 <div>
   <%= pb_rails("link", props: {
-    text: "Open in a Child Tab",
     href: "https://playbook.powerapp.cloud/",
-    target: "child"
+    target: "child",
+    text: "Open in a Child Tab",
   }) %>
 </div>
