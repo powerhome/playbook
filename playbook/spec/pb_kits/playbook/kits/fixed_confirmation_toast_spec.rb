@@ -22,6 +22,7 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       .with_default(nil)
       .with_values(nil, "top", "bottom")
   }
+  it { is_expected.to define_prop(:auto_close).of_type(Playbook::Props::Number) }
 
   describe "#show_text?" do
     it "returns true if text is present", :aggregate_failures do
@@ -56,6 +57,14 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
     end
   end
 
+  describe "#auto_close" do
+    it "returns auto close class with duration when auto_close is present" do
+      expect(subject.new({}).auto_close_class).to eq ""
+      expect(subject.new(auto_close: 3000).auto_close_class).to eq " auto_close_3000"
+      expect(subject.new(auto_close: 10000).auto_close_class).to eq " auto_close_10000"
+    end
+  end
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       text = "Test text"
@@ -70,6 +79,7 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       expect(subject.new(text: text, status: "neutral", vertical: "top").classname).to eq "pb_fixed_confirmation_toast_kit_neutral"
       expect(subject.new(text: text, status: "neutral", vertical: "top", horizontal: "center").classname).to eq "pb_fixed_confirmation_toast_kit_neutral positioned_toast top center"
       expect(subject.new(text: text, status: "tip", icon: "arrow-down").classname).to eq "pb_fixed_confirmation_toast_kit_tip custom_icon"
+      expect(subject.new(text: text, status: "tip", auto_close: 3000).classname).to eq "pb_fixed_confirmation_toast_kit_tip auto_close_3000"
     end
   end
 end
