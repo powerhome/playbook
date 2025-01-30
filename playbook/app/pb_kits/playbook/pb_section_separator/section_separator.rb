@@ -3,6 +3,9 @@
 module Playbook
   module PbSectionSeparator
     class SectionSeparator < Playbook::KitBase
+      prop :color, type: Playbook::Props::Enum,
+                   values: %w[default primary],
+                   default: "default"
       prop :text
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[card background],
@@ -17,7 +20,7 @@ module Playbook
                         default: "solid"
 
       def classname
-        generate_classname("pb_section_separator_kit", variant, orientation, line_style == "dashed" ? "dashed" : nil)
+        generate_classname("pb_section_separator_kit", variant, orientation, line_style == "dashed" ? "dashed" : nil, color != "default" ? "color_#{color}" : nil)
       end
 
     private

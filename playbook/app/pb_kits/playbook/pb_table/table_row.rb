@@ -8,6 +8,11 @@ module Playbook
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[table div],
                  default: "table"
+      prop :collapsible, type: Playbook::Props::Boolean,
+                         default: false
+      prop :collapsible_content
+      prop :collapsible_side_highlight, type: Playbook::Props::Boolean,
+                                        default: true
 
       def classname
         generate_classname("pb_table_row_kit", side_highlight_class) + tag_class

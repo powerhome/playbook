@@ -1,0 +1,3 @@
+For a simplified version of the Draggable API for the SelectableList kit, you can do the following:
+
+The SelectableList kit is optimized to work with the draggable kit. To enable drag, use the `enable_drag` prop on SelectableList kit AND `drag_id` prop within the SelectableList kit prop. An additional optional boolean prop (set to true by default) of `drag_handle` is also available on SelectableList kit to show the drag handle icon.

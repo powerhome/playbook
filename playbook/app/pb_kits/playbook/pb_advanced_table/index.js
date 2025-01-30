@@ -1,138 +1,234 @@
-import PbEnhancedElement from '../pb_enhanced_element'
+import PbEnhancedElement from "../pb_enhanced_element";
 
-const ADVANCED_TABLE_SELECTOR = '[data-advanced-table]'
-const CONTENT_SELECTOR = '[data-advanced-table-content="id"]'
-const DOWN_ARROW_SELECTOR = '#advanced-table_open_icon'
-const UP_ARROW_SELECTOR = '#advanced-table_close_icon'
+const ADVANCED_TABLE_SELECTOR = "[data-advanced-table]";
+const DOWN_ARROW_SELECTOR = "#advanced-table_open_icon";
+const UP_ARROW_SELECTOR = "#advanced-table_close_icon";
 
 export default class PbAdvancedTable extends PbEnhancedElement {
   static get selector() {
-    return ADVANCED_TABLE_SELECTOR
+    return ADVANCED_TABLE_SELECTOR;
   }
 
   get target() {
-    return document.querySelector(CONTENT_SELECTOR.replace("id", this.element.id))
+    const table = this.element.closest("table");
+    return table.querySelectorAll(`[data-row-parent="${this.element.id}"]`);
   }
-  
-  static expandedRows = new Set()
-  static isCollapsing = false
+
+  static expandedRows = new Set();
+  static isCollapsing = false;
 
   connect() {
-    this.element.addEventListener('click', () => {
+    this.element.addEventListener("click", () => {
       if (!PbAdvancedTable.isCollapsing) {
-        const isExpanded = this.element.querySelector(UP_ARROW_SELECTOR).style.display === 'inline-block'
+        const isExpanded =
+          this.element.querySelector(UP_ARROW_SELECTOR).style.display ===
+          "inline-block";
         if (!isExpanded) {
-          PbAdvancedTable.expandedRows.add(this.element.id)
+          PbAdvancedTable.expandedRows.add(this.element.id);
         } else {
-          PbAdvancedTable.expandedRows.delete(this.element.id)
+          PbAdvancedTable.expandedRows.delete(this.element.id);
         }
+        this.toggleElement(this.target);
       }
-      this.toggleElement(this.target)
-    })
+    });
+
+    const nestedButtons = this.element
+      .closest("table")
+      .querySelectorAll("[data-advanced-table]");
+    nestedButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const isExpanded =
+          button.querySelector(UP_ARROW_SELECTOR).style.display ===
+          "inline-block";
+        if (isExpanded) {
+          PbAdvancedTable.expandedRows.add(button.id);
+        } else {
+          PbAdvancedTable.expandedRows.delete(button.id);
+        }
+      });
+    });
   }
 
-  showElement(elem) {
-    const getHeight = () => {
-      elem.style.display = 'block'
-      const height = elem.scrollHeight + 'px'
-      elem.style.display = ''
-      return height
+  showElement(elements) {
+    elements.forEach((elem) => {
+      elem.style.display = "table-row";
+      elem.classList.add("is-visible");
+      const childRowsAll = this.element
+        .closest("table")
+        .querySelectorAll(
+          `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
+        );
+
+      childRowsAll.forEach((childRow) => {
+        const dataContent = childRow.dataset.advancedTableContent;
+
+        if (!dataContent) {
+          return;
+        }
+        // Split the dataContent to get all ancestor IDs, check against ExpandedRows
+        const ancestorIds = dataContent.split("-").slice(0, -1);
+
+        const prefixedAncestorIds = ancestorIds.map(
+          (id) => `${childRow.id}_${id}`
+        );
+        const allAncestorsExpanded = prefixedAncestorIds.every((id) =>
+          PbAdvancedTable.expandedRows.has(id)
+        );
+
+        const checkIfParentIsExpanded = () => {
+          if (dataContent.endsWith("sr")) {
+            const parentRowId = childRow.dataset.rowParent;
+            const isParentVisible =
+              childRow.previousElementSibling.classList.contains("is-visible");
+            if (parentRowId) {
+              const isInSet = PbAdvancedTable.expandedRows.has(parentRowId);
+              if (isInSet && isParentVisible) {
+                return true;
+              }
+            }
+          }
+          return false;
+        };
+
+        if (allAncestorsExpanded || checkIfParentIsExpanded()) {
+          childRow.style.display = "table-row";
+          childRow.classList.add("is-visible");
+        } else {
+          childRow.style.display = "none";
+          childRow.classList.remove("is-visible");
+        }
+      });
+    });
+  }
+
+  hideElement(elements) {
+    elements.forEach((elem) => {
+      elem.style.display = "none";
+      elem.classList.remove("is-visible");
+
+      // Remove the row ID from expandedRows when this row is hidden
+      if (PbAdvancedTable.expandedRows.has(elem.id)) {
+        PbAdvancedTable.expandedRows.delete(elem.id);
+      }
+
+      const childrenArray = elem.dataset.advancedTableContent.split("-");
+      const currentDepth = parseInt(elem.dataset.rowDepth);
+      if (childrenArray.length > currentDepth) {
+        // Find the child rows corresponding to this parent row
+        const childRows = this.element
+          .closest("table")
+          .querySelectorAll(
+            `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
+          );
+
+        childRows.forEach((childRow) => {
+          childRow.style.display = "none";
+          childRow.classList.remove("is-visible");
+        });
+      }
+    });
+  }
+
+  toggleElement(elements) {
+    if (!elements.length) return;
+
+    const isVisible = elements[0].classList.contains("is-visible");
+
+    isVisible ? this.hideElement(elements) : this.showElement(elements);
+    isVisible ? this.displayDownArrow() : this.displayUpArrow();
+
+    const row = this.element.closest("tr");
+    if (row) {
+      row.classList.toggle("bg-silver", !isVisible);
+      row.classList.toggle("bg-white", isVisible);
     }
-
-    const height = getHeight()
-    elem.classList.add('is-visible')
-    elem.style.height = height
-    elem.style.overflow = "hidden"
-
-    window.setTimeout(() => {
-      elem.style.height = ''
-      elem.style.overflow = "visible"
-    }, 250)
   }
 
-  hideElement(elem) {
-    elem.style.height = elem.scrollHeight + 'px'
-
-    window.setTimeout(() => {
-      elem.style.height = '0'
-      elem.style.paddingTop = '0'
-      elem.style.paddingBottom = '0'
-      elem.style.overflow = "hidden"
-    }, 1)
-
-    window.setTimeout(() => {
-      elem.classList.remove('is-visible')
-      elem.style.overflow = ""
-    }, 200)
-  }
-
-  toggleElement(elem) {
-    if (elem.classList.contains('is-visible')) {
-      this.hideElement(elem)
-      this.displayDownArrow()
-      return
-    }
-
-    this.showElement(elem)
-    this.displayUpArrow()
-  }
 
   displayDownArrow() {
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'inline-block'
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'none'
+    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display =
+      "inline-block";
+    this.element.querySelector(UP_ARROW_SELECTOR).style.display = "none";
   }
 
   displayUpArrow() {
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = 'inline-block'
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = 'none'
+    this.element.querySelector(UP_ARROW_SELECTOR).style.display =
+      "inline-block";
+    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = "none";
   }
 
   static handleToggleAllHeaders(element) {
-    const table = element.closest('.pb_table')
-    const firstLevelButtons = table.querySelectorAll('.pb_advanced_table_body > .pb_table_tr [data-advanced-table]')
-    
-    const expandedRows = Array.from(firstLevelButtons).filter(button => 
-      button.querySelector(UP_ARROW_SELECTOR).style.display === 'inline-block'
-    )
-  
-    if (expandedRows.length === firstLevelButtons.length) {
-      expandedRows.forEach(button => {
-        button.click()
-      })
-      this.expandedRows.clear()
+    const table = element.closest(".pb_table");
+    const firstLevelButtons = table.querySelectorAll(
+      ".pb_advanced_table_body > .pb_table_tr[data-row-depth='0'] [data-advanced-table]"
+    );
+
+    const allExpanded = Array.from(firstLevelButtons).every(
+      (button) =>
+        button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block"
+    );
+
+    if (allExpanded) {
+      firstLevelButtons.forEach((button) => {
+        button.click();
+        PbAdvancedTable.expandedRows.delete(button.id);
+      });
     } else {
-      firstLevelButtons.forEach(button => {
-        if (!this.expandedRows.has(button.id)) {
-          button.click()
+      firstLevelButtons.forEach((button) => {
+        if (!PbAdvancedTable.expandedRows.has(button.id)) {
+          button.click();
+          PbAdvancedTable.expandedRows.add(button.id);
         }
-      })
+      });
+
+      PbAdvancedTable.expandedRows.forEach((rowId) => {
+        const nestedButton = table.querySelector(
+          `[data-advanced-table][id="${rowId}"]`
+        );
+        if (nestedButton && !firstLevelButtons.contains(nestedButton)) {
+          nestedButton.click();
+        }
+      });
     }
   }
+
   static handleToggleAllSubRows(element, rowDepth) {
-    const parentElement = element.closest(".toggle-content")
-    const subrowButtons = parentElement.querySelectorAll('.depth-sub-row-' + rowDepth + ' [data-advanced-table]')
-    
-    const expandedSubRows = Array.from(subrowButtons).filter(button => 
-      button.querySelector(UP_ARROW_SELECTOR).style.display === 'inline-block'
-    )
-  
-    if (expandedSubRows.length === subrowButtons.length) {
-      expandedSubRows.forEach(button => {
-        button.click()
-      })
+    const table = element.closest(".pb_table");
+    const parentRow = element.closest("tr");
+    if (!parentRow) {
+      return;
+    }
+    const rowParentId = parentRow.dataset.rowParent;
+    // Select all buttons that for subrows at that depth and with same rowParent
+    const subRowButtons = table.querySelectorAll(
+      `.pb_advanced_table_body > .pb_table_tr[data-row-depth='${rowDepth}'].pb_table_tr[data-row-parent='${rowParentId}'] [data-advanced-table]`
+    );
+
+    const allExpanded = Array.from(subRowButtons).every(
+      (button) =>
+        button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block"
+    );
+
+    if (allExpanded) {
+      subRowButtons.forEach((button) => {
+        button.click();
+        PbAdvancedTable.expandedRows.delete(button.id);
+      });
     } else {
-      subrowButtons.forEach(button => {
-        if (!this.expandedRows.has(button.id)) {
-          button.click()
+      subRowButtons.forEach((button) => {
+        if (!PbAdvancedTable.expandedRows.has(button.id)) {
+          button.click();
+          PbAdvancedTable.expandedRows.add(button.id);
         }
-      })
+      });
     }
   }
 }
 
 window.expandAllRows = (element) => {
-  PbAdvancedTable.handleToggleAllHeaders(element)
-}
+  PbAdvancedTable.handleToggleAllHeaders(element);
+};
+
 window.expandAllSubRows = (element, rowDepth) => {
-  PbAdvancedTable.handleToggleAllSubRows(element, rowDepth)
-}
+  PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
+};

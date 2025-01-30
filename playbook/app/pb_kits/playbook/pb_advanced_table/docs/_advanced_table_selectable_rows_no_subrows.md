@@ -1,0 +1,1 @@
+`selectableRows` can also be used with tables without nested row data.

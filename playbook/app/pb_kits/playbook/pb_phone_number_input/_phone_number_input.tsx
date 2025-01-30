@@ -35,6 +35,7 @@ type PhoneNumberInputProps = {
   preferredCountries?: string[],
   required?: boolean,
   value?: string,
+  formatAsYouType?: boolean,
 }
 
 enum ValidationError {
@@ -87,6 +88,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
     required = false,
     preferredCountries = [],
     value = "",
+    formatAsYouType = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -99,8 +101,8 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   )
 
   const inputRef = useRef<HTMLInputElement>()
+  const itiRef = useRef<any>(null);
   const [inputValue, setInputValue] = useState(value)
-  const [itiInit, setItiInit] = useState<any>()
   const [error, setError] = useState(props.error)
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
@@ -130,8 +132,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
     }
   })
 
+  const unformatNumber = (formattedNumber: any) => {
+    return formattedNumber.replace(/\D/g, "")
+  }
+
   const showFormattedError = (reason = '') => {
-    const countryName = itiInit.getSelectedCountryData().name
+    const countryName = itiRef.current.getSelectedCountryData().name
     const reasonText = reason.length > 0 ? ` (${reason})` : ''
     setError(`Invalid ${countryName} phone number${reasonText}`)
     return true
@@ -189,12 +195,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   }
 
   const validateErrors = () => {
-    if (itiInit) isValid(itiInit.isValidNumber())
-    if (validateOnlyNumbers(itiInit)) return
-    if (validateTooLongNumber(itiInit)) return
-    if (validateTooShortNumber(itiInit)) return
-    if (validateUnhandledError(itiInit)) return
-    if (validateMissingAreaCode(itiInit)) return
+    if (itiRef.current) isValid(itiRef.current.isValidNumber())
+    if (validateOnlyNumbers(itiRef.current)) return
+    if (validateTooLongNumber(itiRef.current)) return
+    if (validateTooShortNumber(itiRef.current)) return
+    if (validateUnhandledError(itiRef.current)) return
+    if (validateMissingAreaCode(itiRef.current)) return
   }
 
   const getCurrentSelectedData = (itiInit: any, inputValue: string) => {
@@ -203,10 +209,16 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(evt.target.value)
-    const phoneNumberData = getCurrentSelectedData(itiInit, evt.target.value)
+    let phoneNumberData
+    if (formatAsYouType) {
+      const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
+      phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
+    } else {
+      phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
+    }
     setSelectedData(phoneNumberData)
     onChange(phoneNumberData)
-    isValid(itiInit.isValidNumber())
+    isValid(itiRef.current.isValidNumber())
   }
 
   // Separating Concerns as React Docs Recommend
@@ -230,8 +242,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       onlyCountries,
       countrySearch: false,
       fixDropdownWidth: false,
-      formatAsYouType: false,
+      formatAsYouType: formatAsYouType,
     })
+
+    itiRef.current = telInputInit;
 
     inputRef.current.addEventListener("countrychange", (evt: Event) => {
       const phoneNumberData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
@@ -243,7 +257,11 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
     inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
     inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
 
-    setItiInit(telInputInit)
+    if (formatAsYouType) {
+      inputRef.current?.addEventListener("input", (evt) => {
+        handleOnChange(evt as unknown as React.ChangeEvent<HTMLInputElement>);
+      });
+    }
   }, [])
 
   let textInputProps: {[key: string]: any} = {

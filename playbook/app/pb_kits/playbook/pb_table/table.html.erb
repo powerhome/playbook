@@ -4,7 +4,7 @@
   <% responsive_class = nil %>
 <% end %>
 
-<%= content_tag(:div, class: responsive_class) do %>
+<%= content_tag(:div, class: responsive_class, 'data-pb-table-wrapper' => true) do %>
   <% if object.tag == "table" %>
     <%= content_tag(:table,
       aria: object.aria,

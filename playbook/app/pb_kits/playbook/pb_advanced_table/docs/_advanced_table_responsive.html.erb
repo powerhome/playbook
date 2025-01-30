@@ -1,0 +1,38 @@
+
+<% column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    },
+] %>
+
+<%= pb_rails("title", props: { size: 4 })  do %> Not Responsive <% end %>
+<%= pb_rails("advanced_table", props: { id: "table_props_table_non_responsive", table_data: @table_data, column_definitions: column_definitions, responsive: "none" }) %>
+
+<%= pb_rails("title", props: { padding_top: "sm", size: 4 })  do %> Responsive as Default <% end %>
+<%= pb_rails("advanced_table", props: { id: "table_props_table_responsive", table_data: @table_data, column_definitions: column_definitions }) %>

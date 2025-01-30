@@ -9,8 +9,8 @@ const useDrawer = (visible = false) => {
 };
 
 const DrawerDefault = () => {
-  const [headerSeparatorDrawerOpened, toggleHeaderSeparatorDrawer] = useDrawer();
-  const [bothSeparatorsDrawerOpened, toggleBothSeparatorsDrawer] = useDrawer();
+  const [drawerLeftOpen, toggleDrawerLeftOpen] = useDrawer();
+  const [drawerRightOpen, toggleDrawerRightOpen ] = useDrawer();
 
   return (
     <>
@@ -18,13 +18,13 @@ const DrawerDefault = () => {
         <Button
             id="sm"
             marginRight="md"
-            onClick={toggleHeaderSeparatorDrawer}
+            onClick={toggleDrawerLeftOpen}
         >
           {"Left Drawer"}
         </Button>
         <Button
             marginRight="xl"
-            onClick={toggleBothSeparatorsDrawer}
+            onClick={toggleDrawerRightOpen}
         >
           {"Right Drawer"}
         </Button>
@@ -32,12 +32,8 @@ const DrawerDefault = () => {
       <Flex>
         {/* Left Drawer */}
         <Drawer
-            behavior={"push"}
-            fullHeight
-            onClose={toggleHeaderSeparatorDrawer}
-            opened={headerSeparatorDrawerOpened}
-            overlay
-            placement={"left"}
+            onClose={toggleDrawerLeftOpen}
+            opened={drawerLeftOpen}
             size={"lg"}
         >
           Test me (Left Drawer)
@@ -45,11 +41,8 @@ const DrawerDefault = () => {
 
         {/* Right Drawer */}
         <Drawer
-            behavior={"push"}
-            fullHeight
-            onClose={toggleBothSeparatorsDrawer}
-            opened={bothSeparatorsDrawerOpened}
-            overlay
+            onClose={toggleDrawerRightOpen}
+            opened={drawerRightOpen}
             placement={"right"}
             size={"lg"}
         >

@@ -1,0 +1,35 @@
+# Managed by https://github.com/powerhome/software. Do not make changes here, they will be reverted.
+
+name: 'Close stale issues and PRs'
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 23 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@5bef64f19d7facfb25b37b414482c7164d639639 # v9
+        with:
+          operations-per-run: 200
+          delete-branch: true
+          stale-pr-message: >
+            This issue has been automatically marked as stale because it has not had
+            recent activity. It will be closed in 24 hours if no further activity occurs.
+
+            If this change is desirable, please accelerate completing it. If it is not,
+            please close the PR. If you're blocked on something, please ensure there's
+            a reference to this PR in a story on your team's board so the team will
+            follow up, and consider closing the PR for now.
+
+            Please do not artificially extend the deadline with a dummy comment. If
+            necessary, provide a status update, such as "this change is being actively
+            tested".
+
+            Thank you for your contributions and your collaboration in reducing WIP
+            and cycle time.
+          days-before-stale: 14
+          days-before-close: 3
+          days-before-issue-stale: -1
+          exempt-pr-labels: dependencies

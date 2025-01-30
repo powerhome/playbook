@@ -88,6 +88,18 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
+  - name: icon_button
+    platforms: rails_only
+    status: beta
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
+  - name: copy_button
+    platforms: *2
+    status: beta
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: data_visualization
   description:
   components:
@@ -772,7 +784,7 @@ kits:
     enhanced_element_used: false
   - name: skeleton_loading
     platforms: *1
-    status: beta
+    status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: false

@@ -226,3 +226,83 @@ test('returns masked ssn value', () => {
 
   expect(input.value).toBe('123-45-6789')
 })
+
+const TextInputCreditCardMask = (props) => {
+  const [creditCard, setValue] = useState('')
+  const handleOnChange = ({ target }) => {
+    setValue(target.value)
+  }
+
+  return (
+    <TextInput
+        mask="creditCard"
+        onChange={handleOnChange}
+        value={creditCard}
+        {...props}
+    />
+  )
+}
+
+test('returns masked credit card value', () => {
+  render(
+    <TextInputCreditCardMask
+        data={{ testid: testId }}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+
+  const input = within(kit).getByRole('textbox')
+
+  fireEvent.change(input, { target: { value: '1234567890123456' } })
+
+  expect(input.value).toBe('1234 5678 9012 3456')
+
+  fireEvent.change(input, { target: { value: '1234' } })
+
+  expect(input.value).toBe('1234')
+
+  fireEvent.change(input, { target: { value: '' } })
+
+  expect(input.value).toBe('')
+})
+
+const TextInputCVVMask = (props) => {
+  const [cvv, setValue] = useState('')
+  const handleOnChange = ({ target }) => {
+    setValue(target.value)
+  }
+
+  return (
+    <TextInput
+        mask="cvv"
+        onChange={handleOnChange}
+        value={cvv}
+        {...props}
+    />
+  )
+}
+
+test('returns masked CVV value', () => {
+  render(
+    <TextInputCVVMask
+        data={{ testid: testId }}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+
+  const input = within(kit).getByRole('textbox')
+
+  fireEvent.change(input, { target: { value: '1234' } })
+
+  expect(input.value).toBe('1234')
+
+  fireEvent.change(input, { target: { value: '123' } })
+
+  expect(input.value).toBe('123')
+
+  fireEvent.change(input, { target: { value: '' } })
+
+  expect(input.value).toBe('')
+})

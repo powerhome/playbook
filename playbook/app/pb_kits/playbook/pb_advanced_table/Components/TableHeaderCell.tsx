@@ -1,12 +1,13 @@
 import React, { useContext } from "react"
 import classnames from "classnames"
-import { flexRender, Header } from "@tanstack/react-table"
+import { flexRender, Header, Table } from "@tanstack/react-table"
 
 import { GenericObject } from "../../types"
 
 import { GlobalProps } from "../../utilities/globalProps"
 
 import Flex from "../../pb_flex/_flex"
+import Checkbox from "../../pb_checkbox/_checkbox"
 
 import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
@@ -24,6 +25,7 @@ type TableHeaderCellProps = {
   isPinnedLeft?: boolean
   loading?: boolean
   sortIcon?: string | string[]
+  table?: Table<GenericObject>
 } & GlobalProps
 
 export const TableHeaderCell = ({
@@ -35,9 +37,13 @@ export const TableHeaderCell = ({
   isPinnedLeft = false,
   loading,
   sortIcon,
+  table
 }: TableHeaderCellProps) => {
-  const { sortControl, responsive } = useContext(AdvancedTableContext)
+  const { sortControl, responsive, selectableRows, hasAnySubRows, showActionsBar, inlineRowLoading } =
+    useContext(AdvancedTableContext);
 
+  type justifyTypes = "none" | "center" | "start" | "end" | "between" | "around" | "evenly"
+  
   const toggleSortButton = (event: React.SyntheticEvent) => {
     if (sortControl) {
       const sortIsDesc = header?.column.getIsSorted() === "desc"
@@ -59,6 +65,7 @@ export const TableHeaderCell = ({
  
 const cellClassName = classnames(
   "table-header-cells",
+  `${showActionsBar && "header-cells-with-actions"}`,
   `${isChrome() ? "chrome-styles" : ""}`,
   `${enableSorting ? "table-header-cells-active" : ""}`,
   { "pinned-left": responsive === "scroll" && isPinnedLeft },
@@ -82,8 +89,14 @@ const isToggleExpansionEnabled =
   (enableToggleExpansion === "all" || "header") &&
   enableToggleExpansion !== "none"
 
-const justifyHeader = isLeafColumn ? "end" : "center"
+  let justifyHeader:justifyTypes;
 
+  if (header?.index === 0 && hasAnySubRows || (header?.index === 0 && inlineRowLoading)) {
+    justifyHeader = enableSorting ? "between" : "start";
+  } else {
+    justifyHeader = isLeafColumn ? "end" : "center";
+  }
+  
   return (
     <th
         align="right"
@@ -102,9 +115,18 @@ const justifyHeader = isLeafColumn ? "end" : "center"
       ) : (
         <Flex
             alignItems="center"
-            justify={header?.index === 0 && enableSorting ? "between" : header?.index === 0 && !enableSorting ? "start" : justifyHeader}
+            justify={justifyHeader}
         >
-          {isToggleExpansionEnabled && (
+          {
+            selectableRows && header?.index === 0 && hasAnySubRows && (
+              <Checkbox
+                  checked={table?.getIsAllRowsSelected()}
+                  indeterminate={table?.getIsSomeRowsSelected()}
+                  onChange={table?.getToggleAllRowsSelectedHandler()}
+              />
+            )
+          }
+          {isToggleExpansionEnabled && hasAnySubRows && (
               <ToggleIconButton onClick={handleExpandOrCollapse} />
             )}
 
