@@ -50,11 +50,9 @@ const User = (props: UserProps): React.ReactElement => {
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const ariaProps: {[key: string]: string} = buildAriaProps(aria)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const getBold = bold ? '' : 'thin'
-
 
   const classes = classnames(
-    buildCss('pb_user_kit', align, orientation, size, getBold),
+    buildCss('pb_user_kit', align, orientation, size),
     globalProps(props),
     className
   )
