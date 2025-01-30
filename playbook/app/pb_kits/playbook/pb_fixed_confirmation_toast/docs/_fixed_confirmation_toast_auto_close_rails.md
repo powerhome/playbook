@@ -1,3 +1,3 @@
-Auto close is used when you want the confirmation toast to close automatically after a certain time. `auto_close` property will be a delay number in ms. The `auto_close` property currently only works in rails when it is a closeable one (`closeable: true`).
+Auto close is used when you want the confirmation toast to close automatically after a certain time. `auto_close` property will be a delay number in ms.
 
-The script tag in this code snippet is for demonstration purposes only. It clones the toast in order to have it appear with a button click prompt and not upon initial page load. In a typical production environment the event triggering a fixed confirmation toast to appear would be handled by a controller or a separate javascript file.
+The script tag in this code snippet is for demonstration purposes only. It clones the toasts in order to have it appear with a button click prompt and not upon initial page load. In a typical production environment the event triggering a fixed confirmation toast to appear would be handled by a controller or a separate javascript file.
