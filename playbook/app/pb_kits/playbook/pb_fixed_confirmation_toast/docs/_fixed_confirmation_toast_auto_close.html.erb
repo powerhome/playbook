@@ -1,4 +1,15 @@
+<%= pb_rails("button", props: { text: "Show Auto Close Toast", variant: "secondary", data: { toast: "#toast-auto-close" } }) %>
 <%= pb_rails("button", props: { text: "Show Closeable Auto Close Toast", variant: "secondary", data: { toast: "#toast-auto-close-closeable" } }) %>
+
+<%= pb_rails("fixed_confirmation_toast", props: {
+  auto_close: 3000,
+  classname: "toast-to-hide",
+  id: "toast-auto-close",
+  text: "I will disappear in 3 seconds.",
+  status: "tip",
+  vertical: "top",
+  horizontal: "center"
+}) %>
 
 <%= pb_rails("fixed_confirmation_toast", props: {
   auto_close: 10000,
@@ -11,23 +22,37 @@
 }) %>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const toast10SecCloseable = document.querySelector("#toast-auto-close-closeable")
-    const button10SecCloseable = document.querySelector("button[data-toast='#toast-auto-close-closeable']")
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize toast elements and buttons
+  const toasts = {
+    '#toast-auto-close': document.querySelector("#toast-auto-close"),
+    '#toast-auto-close-closeable': document.querySelector("#toast-auto-close-closeable")
+  }
+  
+  const buttons = {
+    '#toast-auto-close': document.querySelector("button[data-toast='#toast-auto-close']"),
+    '#toast-auto-close-closeable': document.querySelector("button[data-toast='#toast-auto-close-closeable']")
+  }
 
-    const originalToast = toast10SecCloseable.cloneNode(true)
-    
-    if (toast10SecCloseable) {
-      toast10SecCloseable.remove()
+  // Store original toasts and remove them from DOM
+  const originalToasts = {}
+  Object.entries(toasts).forEach(([id, toast]) => {
+    if (toast) {
+      originalToasts[id] = toast.cloneNode(true)
+      toast.remove()
     }
+  })
 
-    if (button10SecCloseable) {
-      button10SecCloseable.onclick = () => {
-        const newToast = originalToast.cloneNode(true)
+  // Set up button click handlers
+  Object.keys(buttons).forEach((toastId) => {
+    const button = buttons[toastId]
+    if (button) {
+      button.onclick = () => {
+        const newToast = originalToasts[toastId].cloneNode(true)
         newToast.style.display = "flex"
-        
         document.body.appendChild(newToast)
       }
     }
   })
+})
 </script>

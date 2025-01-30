@@ -2,16 +2,18 @@ import PbEnhancedElement from '../pb_enhanced_element'
 
 export default class PbFixedConfirmationToast extends PbEnhancedElement {
   static get selector() {
-    return '.remove_toast'
+    return '[class*="pb_fixed_confirmation_toast_kit"]'
   }
 
   connect() {
     this.self = this.element
     this.autoCloseToast(this.self)
 
-    this.self.addEventListener('click', () => {
-      this.removeToast(this.self)
-    })
+    if (this.self.classList.contains('remove_toast')) {
+      this.self.addEventListener('click', () => {
+        this.removeToast(this.self)
+      })
+    }
   }
 
   removeToast(elem) {
