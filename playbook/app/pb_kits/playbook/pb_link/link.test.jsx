@@ -90,3 +90,33 @@ test('adds icon right', () => {
   const icon = kit.querySelector('.pb_icon_kit')
   expect(icon).toBeInTheDocument();
 })
+
+test('should render target prop', () => {
+  render(
+      <Link
+          data={{ testid: 'target-test' }}
+          href="https://playbook.powerapp.cloud/"
+          target="blank"
+      />
+  )
+
+  const kit = screen.getByTestId('target-test')
+
+  expect(kit).toHaveAttribute('target', 'blank')
+})
+
+
+test('should render child target prop', () => {
+  render(
+      <Link
+          data={{ testid: 'target-test' }}
+          href="https://playbook.powerapp.cloud/"
+          tabIndex={0}
+          target="child"
+      />
+  )
+
+  const kit = screen.getByTestId('target-test')
+
+  expect(kit).toHaveAttribute('target', 'child')
+})
