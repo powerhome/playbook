@@ -22,11 +22,7 @@ module Playbook
       prop :territory
 
       def classname
-        generate_classname("pb_user_kit", align, orientation, size, is_bold)
-      end
-
-      def is_bold
-        bold ? nil : "thin"
+        generate_classname("pb_user_kit", align, orientation, size)
       end
 
       def avatar_size
