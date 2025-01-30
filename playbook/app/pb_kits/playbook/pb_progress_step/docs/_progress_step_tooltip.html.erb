@@ -19,7 +19,7 @@
 <br /><br />
 
 <%= pb_rails("progress_step", props: {orientation: "vertical"}) do %>
-  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-6", tooltip: "Tooltip step 1", step_direction: "vertical" }) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-6", tooltip: "Tooltip step 1", step_direction: "vertical",  tooltip_position: "left" }) do %>
   <% end %>
   <%= pb_rails("progress_step/progress_step_item", props: {status: "active", classname: "tooltip-trigger-7", tooltip: "Tooltip step 2", tooltip_position: "left"}) do %>
   <% end %>
