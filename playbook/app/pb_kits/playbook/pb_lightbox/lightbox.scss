@@ -2,7 +2,7 @@
 @import "../tokens/screen_sizes";
 
 $slides-margin: $space-md;
-$lightbox-z-index-floor: 9999900;
+$lightbox-z-index-floor: $z_10 !default;
 
  .carousel {
 
