@@ -9,9 +9,30 @@ export default class PbDraggable extends PbEnhancedElement {
   }
 
   connect() {
+    this.state = {
+      items: [],
+      dragData: { id: "", initialGroup: "" },
+      isDragging: "",
+      activeContainer: ""
+    };
+
     this.draggedItem = null;
     this.draggedItemId = null;
+
     document.addEventListener("DOMContentLoaded", () => this.bindEventListeners());
+  }
+
+  setState(newState) {
+    this.state = { ...this.state, ...newState };
+    if (newState.items) {
+      const customEvent = new CustomEvent('pb-draggable-reorder', {
+        detail: {
+          reorderedItems: this.state.items,
+          containerId: this.element.querySelector(DRAGGABLE_CONTAINER).id
+        }
+      });
+      this.element.dispatchEvent(customEvent);
+    }
   }
 
   bindEventListeners() {
@@ -27,11 +48,11 @@ export default class PbDraggable extends PbEnhancedElement {
       item.addEventListener("dragenter", this.handleDragEnter.bind(this));
     });
 
-    const container = this.element.querySelector(DRAGGABLE_CONTAINER);
-    if (container) {
+    const containers = this.element.querySelectorAll(DRAGGABLE_CONTAINER);
+    containers.forEach(container => {
       container.addEventListener("dragover", this.handleDragOver.bind(this));
       container.addEventListener("drop", this.handleDrop.bind(this));
-    }
+    });
   }
 
   handleDragStart(event) {
@@ -41,11 +62,17 @@ export default class PbDraggable extends PbEnhancedElement {
       event.preventDefault();
       return;
     }
-    
+
+    const container = event.target.closest(DRAGGABLE_CONTAINER);
     this.draggedItem = event.target;
     this.draggedItemId = event.target.id;
-    event.target.classList.add("is_dragging");
 
+    this.setState({
+      dragData: { id: this.draggedItemId, initialGroup: container.id },
+      isDragging: this.draggedItemId
+    });
+
+    event.target.classList.add("is_dragging");
     if (event.dataTransfer) {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.setData('text/plain', this.draggedItemId);
@@ -64,6 +91,14 @@ export default class PbDraggable extends PbEnhancedElement {
 
     const container = targetItem.parentNode;
     const items = Array.from(container.children);
+
+    const newItems = [...items].map(item => ({
+      id: item.id,
+      container: container.id
+    }));
+
+    this.setState({ items: newItems });
+
     const draggedIndex = items.indexOf(this.draggedItem);
     const targetIndex = items.indexOf(targetItem);
 
@@ -76,45 +111,70 @@ export default class PbDraggable extends PbEnhancedElement {
 
   handleDragOver(event) {
     event.preventDefault();
-    const container = event.target.closest(DRAGGABLE_CONTAINER);
+    event.stopPropagation();
+
+    let container;
+    if (event.target.matches(DRAGGABLE_CONTAINER)) {
+      container = event.target;
+    } else {
+      container = event.target.closest(DRAGGABLE_CONTAINER);
+    }
 
     if (container) {
+      this.setState({ activeContainer: container.id });
       container.classList.add("active_container");
     }
   }
 
   handleDrop(event) {
     event.preventDefault();
-    const container = event.target.closest(DRAGGABLE_CONTAINER);
+    event.stopPropagation();
+
+    let container;
+
+    if (event.target.matches(DRAGGABLE_CONTAINER)) {
+      container = event.target;
+    } else {
+      container = event.target.closest(DRAGGABLE_CONTAINER);
+    }
+
     if (!container || !this.draggedItem) return;
-  
+
     container.classList.remove("active_container");
     this.draggedItem.style.opacity = '1';
-  
+
+    // Handle empty containers
+    if (!container.querySelector('.pb_draggable_item')) {
+      container.appendChild(this.draggedItem);
+    }
+
     // Updated order of items as an array of item IDs
-    const reorderedItems = Array.from(container.children)
-      .filter(item => item.classList.contains("pb_draggable_item"))
-      .map(item => item.id.replace("item_", "")); 
+    const reorderedItems = Array.from(
+      this.element.querySelectorAll('.pb_draggable_item')
+    ).map(item => ({
+      id: item.id,
+      container: item.closest(DRAGGABLE_CONTAINER).id
+    }));
   
-    // Store reordered items in a data attribute on the container
-    container.setAttribute("data-reordered-items", JSON.stringify(reorderedItems));
-  
-    const customEvent = new CustomEvent('pb-draggable-reorder', {
-      detail: {
-        reorderedItems,
-        containerId: container.id,
-      }
+    this.setState({
+      items: reorderedItems,  // Changed from reorderedItems to items to match setState
+      isDragging: "",
+      activeContainer: ""
     });
-    this.element.dispatchEvent(customEvent);
-  
+
     this.draggedItem = null;
     this.draggedItemId = null;
   }
-  
 
   handleDragEnd(event) {
     event.target.classList.remove("is_dragging");
     event.target.style.opacity = '1';
+
+    this.setState({
+      isDragging: "",
+      activeContainer: ""
+    });
+
     this.draggedItem = null;
     this.draggedItemId = null;
 
