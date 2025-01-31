@@ -19,7 +19,7 @@
 <br /><br />
 
 <%= pb_rails("progress_step", props: {orientation: "vertical"}) do %>
-  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-6", tooltip: "Tooltip step 1", step_direction: "vertical",  tooltip_position: "left" }) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-6", tooltip: "Tooltip step 1", step_direction: "vertical", tooltip_position: "left" }) do %>
   <% end %>
   <%= pb_rails("progress_step/progress_step_item", props: {status: "active", classname: "tooltip-trigger-7", tooltip: "Tooltip step 2", tooltip_position: "left"}) do %>
   <% end %>
@@ -31,7 +31,7 @@
 
 <br /><br>
 <%= pb_rails("progress_step",props:{ variant:"tracker", icon:true}) do %>
-  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-10", tooltip: "The order has been received", step_direction: "horizontal" , tooltip_position: "right"  }) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-10", tooltip: "The order has been received", step_direction: "horizontal" , tooltip_position: "right" }) do %>
       <%= pb_rails("caption", props:{text: "Ordered"})%>
   <% end %>
   <%= pb_rails("progress_step/progress_step_item", props: {status: "active", classname: "tooltip-trigger-11", tooltip:"Item(s) have been shipped", tooltip_position: "right" }) do %>
