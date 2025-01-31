@@ -74,6 +74,31 @@
       &.table-card {
         background: none !important;
 
+        &.dark {
+          tbody, .pb_table_tbody {
+            tr, .pb_table_tr {
+              td, .pb_table_td {
+                background: $bg_dark_card !important;
+                border-color: $border_dark !important;
+                &:before {
+                  color: $text_dk_light !important;
+                }
+                &:after {
+                  height: 0;
+                  background-color: transparent;
+                }
+  
+                &:first-child {
+                  border-radius: $border_rad_light $border_rad_light 0 0 !important;
+                }
+                &:last-child {
+                  border-radius: 0 0 $border_rad_light $border_rad_light !important;
+                }
+              }
+            }
+          }
+        }
+
         tbody, .pb_table_tbody {
           tr, .pb_table_tr {
             td, .pb_table_td {
