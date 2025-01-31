@@ -13,6 +13,7 @@ type UserProps = {
   aria?: {[key: string]: string},
   avatar?: boolean,
   avatarUrl?: string,
+  bold?: boolean,
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
@@ -32,6 +33,7 @@ const User = (props: UserProps): React.ReactElement => {
     aria = {},
     avatar = false,
     avatarUrl,
+    bold = true,
     className,
     dark = false,
     data = {},
@@ -75,6 +77,7 @@ const User = (props: UserProps): React.ReactElement => {
       }
       <div className="content_wrapper">
         <Title
+            bold={bold}
             dark={dark}
             size={size == 'lg' ? 3 : 4}
             text={name}

@@ -9,6 +9,7 @@ module Playbook
       prop :avatar, type: Playbook::Props::Boolean,
                     default: false
       prop :avatar_url
+      prop :bold, type: Playbook::Props::Boolean, default: true
       prop :name
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
