@@ -5,6 +5,7 @@ import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Button from '../pb_button/_button'
+import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
 import Tooltip from '../pb_tooltip/_tooltip'
 
 type CopyButtonProps = {
@@ -17,6 +18,7 @@ type CopyButtonProps = {
   tooltipPlacement?:  "top" | "right" | "bottom" | "left",
   tooltipText?: string,
   value?: string,
+  variant?: 'icon' | null,
 }
 
 const CopyButton = (props: CopyButtonProps) => {
@@ -30,6 +32,7 @@ const CopyButton = (props: CopyButtonProps) => {
     tooltipPlacement= 'bottom',
     tooltipText = 'Copied!',
     value = '',
+    variant = null,
   } = props
 
   const [copied, setCopied] = useState(false)
@@ -65,6 +68,30 @@ const CopyButton = (props: CopyButtonProps) => {
     }, 1000);
   }
 
+  if (variant === 'icon') {
+    return (
+      <div
+          {...ariaProps}
+          {...dataProps}
+          className={classes}
+          id={id}
+      >
+        <Tooltip
+            forceOpenTooltip={copied}
+            placement={tooltipPlacement}
+            showTooltip={false}
+            text={tooltipText}
+        >
+          <CircleIconButton
+              icon='copy'
+              onClick={copy}
+              variant="link"
+          />
+        </Tooltip>
+      </div>
+    )
+  }
+
   return (
     <div
         {...ariaProps}
@@ -72,7 +99,7 @@ const CopyButton = (props: CopyButtonProps) => {
         className={classes}
         id={id}
     >
-      <Tooltip 
+      <Tooltip
           forceOpenTooltip={copied}
           placement={tooltipPlacement}
           showTooltip={false}
@@ -88,5 +115,4 @@ const CopyButton = (props: CopyButtonProps) => {
     </div>
   )
 }
-
 export default CopyButton
