@@ -19,7 +19,6 @@ type LinkProps = {
   icon?: string,
   iconRight?: string,
   id?: string,
-  newWindow?: boolean,
   tabIndex?: number,
   tag?: 'a' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   target?: string,
@@ -40,7 +39,6 @@ const Link = (props: LinkProps): React.ReactElement => {
     icon = '',
     iconRight = '',
     id = '',
-    newWindow = false,
     tabIndex,
     tag = 'a',
     target = '',
@@ -61,8 +59,6 @@ const Link = (props: LinkProps): React.ReactElement => {
   const getTargetAttribute = () => {
     if (target && href) {
       return target
-    } else if (newWindow) {
-      return '_blank'
     }
 
     return undefined

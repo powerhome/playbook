@@ -11,8 +11,6 @@ module Playbook
       prop :href
       prop :icon
       prop :icon_right
-      prop :new_window, type: Playbook::Props::Boolean,
-                        default: false
       prop :tabindex
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[a h1 h2 h3 h4 h5 h6 p span div],
@@ -31,11 +29,7 @@ module Playbook
       end
 
       def target_attribute
-        if target && href
-          target
-        elsif new_window
-          "_blank"
-        end
+        target if target && href
       end
 
     private
