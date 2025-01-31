@@ -1,3 +1,3 @@
-export { default as CopyButtonIcon } from './_copy_button_icon.jsx'
 export { default as CopyButtonDefault } from './_copy_button_default.jsx'
 export { default as CopyButtonFrom } from './_copy_button_from.jsx'
+export { default as CopyButtonIcon } from './_copy_button_icon.jsx'
