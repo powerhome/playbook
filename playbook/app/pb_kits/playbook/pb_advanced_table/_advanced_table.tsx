@@ -352,7 +352,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           <Card
               borderNone={!isActionBarVisible}
               className={`${isActionBarVisible && "show-action-card row-selection-actions-card"}`}
-              htmlOptions={{ ref: cardRef }}
+              htmlOptions={{ ref: cardRef as any }}
               padding={`${isActionBarVisible ? "xs" : "none"}`}
           >
             <Flex alignItems="center" 
