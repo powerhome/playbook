@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Typeahead } from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
+import { VisualGuidelinesItems } from './MainSidebar/MenuData/GuidelinesNavItems'
 
 type Kit = {
   label: string,
@@ -8,12 +9,16 @@ type Kit = {
 }
 
 type KitSearchProps = {
-  classname: String,
+  classname: string,
   kits: Kit[],
-  id: String,
+  id: string,
 }
+
 const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
-  const [filteredKits, setFilteredKits] = useState(kits)
+  const kitsAndGuidelines = [...kits, ...VisualGuidelinesItems]
+  const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
+
+  console.log(filteredKits)
 
   useEffect(() => {
     if (id === 'desktop-kit-search') {
@@ -34,10 +39,10 @@ const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
 
   const handleFilteredKits = (query: string) => {
     if (query) {
-      const results = matchSorter(kits, query, { keys: ['label'] })
+      const results = matchSorter(kitsAndGuidelines, query, { keys: ['label', 'name'] })
       setFilteredKits(results)
     } else {
-      setFilteredKits(kits)
+      setFilteredKits(kitsAndGuidelines)
     }
   }
 
