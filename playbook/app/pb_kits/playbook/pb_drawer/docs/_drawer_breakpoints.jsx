@@ -1,42 +1,77 @@
-import React, { useState } from "react";
-import { Button, Drawer, Flex } from "playbook-ui";
+import React, { useState, useEffect } from "react"
+import { Button, Drawer, Icon, Nav, NavItem } from "playbook-ui"
 
-const useDrawer = (visible = false) => {
-  const [opened, setOpened] = useState(visible);
-  const toggle = () => setOpened(!opened);
+const DrawerMenu = () => {
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
+  const navItems = ["Overview", "Albums", "Similar Artists"]
 
-  return [opened, toggle];
-};
-
-const DrawerBreakpoints = () => {
-  const [smallDrawerOpened, toggleSmallDrawer] = useDrawer();
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 992px)")
+    const updateScreen = (e) => setIsSmallScreen(e.matches)
+    updateScreen(mediaQuery)
+    mediaQuery.addEventListener('change', updateScreen)
+    return () => mediaQuery.removeEventListener('change', updateScreen)
+  }, [])
 
   return (
-    <>
-      <Flex wrap>
-        <Button
-            id="sm"
-            marginRight="md"
-            onClick={toggleSmallDrawer}
+    <div>
+      <Button id='sidebar'
+          padding='xs'
+      >
+        <Icon icon='bars'
+            size='2x'
+        />
+      </Button>
+      <Drawer
+          behavior={"push"}
+          breakpoint='md'
+          overlay={isSmallScreen ? true : false}
+          placement='left'
+          size='md'
+          triggerId='sidebar'
+      >
+        <Nav
+            link='#'
+            orientation='vertical'
+            padding={isSmallScreen ? "none" : "sm"}
+            variant='bold'
         >
-          {"Will open at small breakpoint"}
-        </Button>
-      </Flex>
-      <Flex>
-        <Drawer
-            behavior={"push"}
-            breakpoint="sm"
-            onClose={toggleSmallDrawer}
-            opened={smallDrawerOpened}
-            overlay={false}
-            placement={"right"}
-            size={"lg"}
-        >
-          Open because small breakpoint 
-        </Drawer>
-      </Flex>
-    </>
-  );
-};
+          {navItems.map((text, index) => {
+            return (
+              <NavItem
+                  collapsible
+                  collapsibleTrail
+                  fontWeight='bolder'
+                  iconLeft='city'
+                  iconRight={["plus", "minus"]}
+                  key={index}
+                  link='#'
+                  text={text}
+              >
+                <NavItem fontSize='small'
+                    link='#'
+                    marginY='none'
+                    text='City'
+                />
+                <NavItem
+                    fontSize='small'
+                    link='#'
+                    marginY='none'
+                    text='People'
+                />
+                <NavItem
+                    fontSize='small'
+                    link='#'
+                    marginY='none'
+                    text='Business'
+                />
+              </NavItem>
+            )
+          })}
+        </Nav>
+      </Drawer>
+    </div>
+  )
+}
 
-export default DrawerBreakpoints;
+export default DrawerMenu
