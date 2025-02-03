@@ -36,7 +36,7 @@ export const OtherNavItems = ({
     }
   }
   let menuItems: { [key: string]: string }[] | string[] = []
-  
+
   const guidesNavItems = getting_started["pages"].map(guide => ({
     name: guide.title,
     link: `/${guide.url}`
@@ -52,9 +52,14 @@ export const OtherNavItems = ({
     link: `/${guide.url}`
   }))
 
+  const tokensAndGuidelinesMenu = VisualGuidelinesItems.map(guide => ({
+    name: guide.label,
+    link: `${guide.value}`
+  }))
+
   //conditionally render navitems depending on name
   if (name === "Tokens & Guidelines") {
-    menuItems = VisualGuidelinesItems
+    menuItems = tokensAndGuidelinesMenu
   } else if (name === "UI Samples" && samples) {
     menuItems = samplesMenu
   } else if (name === "Getting Started") {
