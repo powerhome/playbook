@@ -14,11 +14,22 @@ type KitSearchProps = {
   id: string,
 }
 
-const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
-  const kitsAndGuidelines = [...kits, ...VisualGuidelinesItems]
-  const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
+interface VisualGuidelineItem {
+  label: string,
+  value: string,
+}
 
-  console.log(filteredKits)
+const combineKitsandVisualGuidelines = (
+  kits: Kit[],
+  VisualGuidelineItems: VisualGuidelineItem[]):
+  (Kit | VisualGuidelineItem)[] => {
+  return [...kits, ...VisualGuidelineItems].sort((a, b) => a.label.localeCompare(b.label))
+}
+
+const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
+  const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, VisualGuidelinesItems)
+
+  const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
 
   useEffect(() => {
     if (id === 'desktop-kit-search') {
