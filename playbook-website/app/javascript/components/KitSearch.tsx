@@ -39,7 +39,7 @@ const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
 
   const handleFilteredKits = (query: string) => {
     if (query) {
-      const results = matchSorter(kitsAndGuidelines, query, { keys: ['label', 'name'] })
+      const results = matchSorter(kitsAndGuidelines, query, { keys: ['label'] })
       setFilteredKits(results)
     } else {
       setFilteredKits(kitsAndGuidelines)

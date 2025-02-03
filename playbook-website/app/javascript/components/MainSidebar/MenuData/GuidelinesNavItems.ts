@@ -1,98 +1,98 @@
 export const VisualGuidelinesItems = [
     {
-        name: "Colors",
+        label: "Colors",
         link: "/visual_guidelines/colors"
     },
     {
-        name: "Width",
+        label: "Width",
         link: "/visual_guidelines/width"
     },
     {
-        name: "Min Width",
+        label: "Min Width",
         link: "/visual_guidelines/min_width"
     },
     {
-        name: "Max Width",
+        label: "Max Width",
         link: "/visual_guidelines/max_width"
     },
     {
-        name: "Height",
+        label: "Height",
         link: "/visual_guidelines/height"
     },
     {
-        name: "Min Height",
+        label: "Min Height",
         link: "/visual_guidelines/min_height"
     },
     {
-        name : "Max Height",
+        label : "Max Height",
         link: "/visual_guidelines/max_height"
     },
     {
-        name: "Position",
+        label: "Position",
         link: "/visual_guidelines/position"
     },
     {
-        name: "Vertical Align",
+        label: "Vertical Align",
         link: "/visual_guidelines/vertical_align"
     },
     {
-        name: "Z-Index",
+        label: "Z-Index",
         link: "/visual_guidelines/z_index"
     },
     {
-        name: "Line Height",
+        label: "Line Height",
         link: "/visual_guidelines/line_height"
     },
     {
-        name: "Number Spacing",
+        label: "Number Spacing",
         link: "/visual_guidelines/number_spacing"
     },
     {
-        name: "Shadows",
+        label: "Shadows",
         link: "/visual_guidelines/shadows"
     },
     {
-        name: "Spacing",
+        label: "Spacing",
         link: "/visual_guidelines/spacing"
     },
     {
-        name: "Border Radius",
+        label: "Border Radius",
         link: "/visual_guidelines/border_radius"
     },
     {
-        name: "Typography",
+        label: "Typography",
         link: "/visual_guidelines/typography"
     },
     {
-        name: "Display",
+        label: "Display",
         link: "/visual_guidelines/display"
     },
     {
-        name: "Cursor",
+        label: "Cursor",
         link: "/visual_guidelines/cursor"
     },
     {
-        name: "Flex Box",
+        label: "Flex Box",
         link: "/visual_guidelines/flex_box"
     },
     {
-        name: "Hover",
+        label: "Hover",
         link: "/visual_guidelines/hover"
     },
     {
-        name: "Group Hover",
+        label: "Group Hover",
         link: "/visual_guidelines/group_hover"
     },
     {
-        name: "Text Align",
+        label: "Text Align",
         link: "/visual_guidelines/text_align"
     },
     {
-        name: "Overflow",
+        label: "Overflow",
         link: "/visual_guidelines/overflow"
     },
     {
-        name: "Truncate",
+        label: "Truncate",
         link: "/visual_guidelines/truncate"
     },
   ];
