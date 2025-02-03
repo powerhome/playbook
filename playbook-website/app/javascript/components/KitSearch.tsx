@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Typeahead } from 'playbook-ui'
+import { Typeahead, Badge } from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
 import { VisualGuidelinesItems } from './MainSidebar/MenuData/GuidelinesNavItems'
 
@@ -57,15 +57,22 @@ const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
     }
   }
 
+
+
+  const formattedKits = filteredKits.map(option => ({
+    ...option,
+    label: option.value.includes("guidelines") ? `${option.label} (Global Prop)` : option.label
+  }));
+
   return (
     <div>
       <Typeahead
           className={classname}
-          dark={document.cookie.split('; ').includes('dark_mode=true')}
+          dark={document.cookie.split("; ").includes("dark_mode=true")}
           id={id}
           onChange={handleChange}
           onInputChange={handleFilteredKits}
-          options={filteredKits}
+          options={formattedKits}
           placeholder="Search..."
       />
     </div>
