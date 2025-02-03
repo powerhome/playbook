@@ -2,7 +2,7 @@ import PbEnhancedElement from "../pb_enhanced_element"
 
 export default class PbCopyButton extends PbEnhancedElement {
   static get selector() {
-    return '.pb_copy_button'
+    return '.pb_copy_button_kit'
   }
 
   connect() {
