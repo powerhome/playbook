@@ -31,7 +31,6 @@ export default class PbCopyButton extends PbEnhancedElement {
           contentToCopy = fromElement.innerText
         }
         navigator.clipboard.writeText(contentToCopy)
-          .then(() => console.log(`Copied from element: ${contentToCopy}`))
           .catch(err => console.error('Failed to copy text', err))
         return
       }
@@ -40,7 +39,6 @@ export default class PbCopyButton extends PbEnhancedElement {
     const textToCopy = this.element.getAttribute('data-copy-value')
     if (textToCopy) {
       navigator.clipboard.writeText(textToCopy)
-        .then(() => console.log(`Copied to clipboard: ${textToCopy}`))
         .catch(err => console.error('Failed to copy text', err))
     } else {
       console.warn('No data-copy-value attribute found or data-from element')

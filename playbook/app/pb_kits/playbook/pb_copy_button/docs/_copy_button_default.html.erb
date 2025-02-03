@@ -1,10 +1,2 @@
-<%= pb_rails("copy_button", props: { text: "Click Me", value: "Your Value", id: 'first-copy' } ) %>
-</br>
-<%= pb_rails("copy_button", props: { text: "Click Me Also", value: "Also a value", id: 'second-copy', tooltip_position: "right", tooltip_text: "Also Copied"} ) %>
-</br>
-<%= pb_rails("copy_button", props: { text: "Copy Text Field Value", from: "copy-text-field", id: "copy-text-field-button" }) %>
-</br>
-<%= pb_rails("text_input", props: {
-  value: "Copy the value of this text field",
-  id: "copy-text-field"
-}) %>
+<%= pb_rails("copy_button", props: { id: "default-copy-button", text: "Copy Text", value: "Playbook makes it easy to support bleeding edge, or legacy systems. Use Playbook’s 200+ components and end-to-end design language to create simple, intuitive and beautiful experiences with ease." } ) %>
+<%= pb_rails("textarea", props: { margin_top: "xs", placeholder: "Copy and paste here" }) %>
