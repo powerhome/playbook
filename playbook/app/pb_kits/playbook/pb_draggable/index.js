@@ -155,7 +155,19 @@ export default class PbDraggable extends PbEnhancedElement {
       id: item.id,
       container: item.closest(DRAGGABLE_CONTAINER).id
     }));
-  
+
+    // Store reordered items in a data attribute on the container
+    container.setAttribute("data-reordered-items", JSON.stringify(reorderedItems));
+
+    const customEvent = new CustomEvent('pb-draggable-reorder', {
+      detail: {
+        reorderedItems,
+        containerId: container.id,
+      }
+    });
+
+    this.element.dispatchEvent(customEvent);
+
     this.setState({
       items: reorderedItems,  // Changed from reorderedItems to items to match setState
       isDragging: "",
