@@ -131,50 +131,54 @@
         case 'In Progress':
           return { text: 'progress', variant: 'primary' };
         case 'Done':
-          return { text: 'done', variant: 'success_sm' };
+          return { text: 'done', variant: 'success' };
         default:
-          console.log('Unknown container:', container);
           return { text: 'queue', variant: 'warning' };
       }
     };
 
     let draggedElement = null;
+    let startContainer = null;
 
     document.querySelectorAll('.pb_draggable_item').forEach(function(item) {
       item.addEventListener('dragstart', function(event) {
         draggedElement = event.target;
+        startContainer = draggedElement.closest('.pb_draggable_container');
       });
     });
 
     document.querySelectorAll('.pb_draggable_container').forEach(function(container) {
       container.addEventListener('drop', function(event) {
         event.preventDefault();
+
         if (draggedElement) {
           setTimeout(function() {
-            // Get container data from the container element
-            const containerData = container.getAttribute('data-container');
+            const currentContainer = container;
 
-            const badge = draggedElement.querySelector('[data-pb-status-badge]');
+            if (currentContainer && startContainer && currentContainer !== startContainer) {
+              const containerData = currentContainer.getAttribute('data-container');
+              const badge = draggedElement.querySelector('[data-pb-status-badge]');
 
-            if (badge && containerData) {
-              const newProperties = updateBadge(containerData);
+              if (badge && containerData) {
+                const newProperties = updateBadge(containerData);
+                const span = badge.querySelector('span');
 
-              // Update the span text
-              const span = badge.querySelector('span');
-              if (span) {
-                span.textContent = newProperties.text;
-              }
-
-              // Remove old classes
-              badge.classList.forEach(function(className) {
-                if (className.includes('pb_badge_kit_') || className === 'ml_sm') {
-                  badge.classList.remove(className);
+                if (span) {
+                  span.textContent = newProperties.text;
                 }
-              });
 
-              // Set new classes in correct order
-              badge.className = `pb_badge_kit_${newProperties.variant}_rounded ml_sm`;
+                badge.classList.forEach(function(className) {
+                  if (className.includes('pb_badge_kit_') || className === 'ml_sm') {
+                    badge.classList.remove(className);
+                  }
+                });
+
+                badge.className = `pb_badge_kit_${newProperties.variant}_rounded ml_sm`;
+              }
             }
+
+            draggedElement = null;
+            startContainer = null;
           }, 50);
         }
       });
