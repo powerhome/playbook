@@ -5,14 +5,12 @@ examples:
   - home_address_street_emphasis: Emphasis
   - home_address_street_modified: Modified
   - home_address_street_link: Link
-  - home_address_street_formatting: Formatting
 
   react:
   - home_address_street_default: Default
   - home_address_street_emphasis: Emphasis
   - home_address_street_modified: Modified
   - home_address_street_link: Link
-  - home_address_street_formatting: Formatting
 
   swift:
   - home_address_street_default_swift: Default

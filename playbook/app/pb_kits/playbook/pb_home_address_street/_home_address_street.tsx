@@ -18,7 +18,6 @@ type HomeAddressStreetProps = {
   className?: string,
   data?: { [key: string]: string },
   dark?: boolean,
-  preserveCase?: boolean,
   emphasis: "street" | "city" | "none",
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   homeId: string,
@@ -44,7 +43,6 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
     htmlOptions = {},
     homeId,
     homeUrl,
-    preserveCase = false,
     target,
     newWindow,
     houseStyle,
@@ -79,8 +77,6 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
     return null
   }
 
-  const formatStreetAdr = (address: string): string => preserveCase ? address : titleize(address)
-
   return (
     <div
         className={classes(className, dark)}
@@ -95,7 +91,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
               dark={dark}
               size={4}
           >
-            {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
+            {joinPresent([titleize(address), houseStyle], ' · ')}
           </Title>
           <Title
               className="pb_home_address_street_address"
@@ -105,14 +101,14 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
             {titleize(addressCont)}
           </Title>
           <Body color="light">
-            {`${titleize(city)}, ${state.toUpperCase()} ${zipcode}`}
+            {`${titleize(city)}, ${state} ${zipcode}`}
           </Body>
         </div>
       }
       {emphasis == 'city' &&
         <div>
           <Body color="light">
-            {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
+            {joinPresent([titleize(address), houseStyle], ' · ')}
           </Body>
           <Body color="light">{titleize(addressCont)}</Body>
           <div>
@@ -122,7 +118,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
                 size={4}
                 tag="span"
             >
-              {`${titleize(city)}, ${state.toUpperCase()}`}
+              {`${titleize(city)}, ${state}`}
             </Title>
             <Body
                 color="light"
@@ -136,15 +132,15 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
       {emphasis == 'none' &&
         <div>
           <Body dark={dark}>
-            {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
+            {joinPresent([titleize(address), houseStyle], ' · ')}
           </Body>
-          <Body dark={dark}>{formatStreetAdr(addressCont)}</Body>
+          <Body dark={dark}>{titleize(addressCont)}</Body>
           <div>
             <Body
                 color="light"
                 dark={dark}
               >
-            {`${titleize(city)}, ${state.toUpperCase()} ${zipcode}`}
+            {`${titleize(city)}, ${state} ${zipcode}`}
           </Body>
           </div>
         </div>
