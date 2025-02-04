@@ -9,6 +9,9 @@ module Playbook
       prop :tooltip_id
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
+      prop :trigger_method, type: Playbook::Props::Enum,
+                            values: %w[hover click],
+                            default: "hover"
 
       def classname
         generate_classname("pb_tooltip_kit", dark_class)
@@ -21,7 +24,8 @@ module Playbook
           pb_tooltip_trigger_element_selector: trigger_element_selector,
           pb_tooltip_trigger_element_id: trigger_element_id,
           pb_tooltip_tooltip_id: tooltip_id,
-          pb_tooltip_show_tooltip: true
+          pb_tooltip_show_tooltip: true,
+          pb_tooltip_trigger_method: trigger_method
         )
       end
 
