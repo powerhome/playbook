@@ -86,8 +86,21 @@ export default class PbDraggable extends PbEnhancedElement {
   handleDragEnter(event) {
     if (!this.draggedItem || event.target === this.draggedItem) return;
 
+    const targetContainer = event.target.closest(DRAGGABLE_CONTAINER);
     const targetItem = event.target.closest('.pb_draggable_item');
-    if (!targetItem) return;
+
+    if (!targetContainer) return;
+
+    // If we're entering a container directly or there's no target item
+    if (!targetItem) {
+      const lastItem = targetContainer.querySelector('.pb_draggable_item:last-child');
+      if (lastItem) {
+        targetContainer.insertBefore(this.draggedItem, lastItem.nextSibling);
+      } else {
+        targetContainer.appendChild(this.draggedItem);
+      }
+      return;
+    }
 
     const container = targetItem.parentNode;
     const items = Array.from(container.children);
@@ -99,10 +112,10 @@ export default class PbDraggable extends PbEnhancedElement {
 
     this.setState({ items: newItems });
 
-    const draggedIndex = items.indexOf(this.draggedItem);
-    const targetIndex = items.indexOf(targetItem);
+    const rect = targetItem.getBoundingClientRect();
+    const middleY = rect.top + rect.height / 2;
 
-    if (draggedIndex > targetIndex) {
+    if (event.clientY < middleY) {
       container.insertBefore(this.draggedItem, targetItem);
     } else {
       container.insertBefore(this.draggedItem, targetItem.nextSibling);
@@ -123,6 +136,14 @@ export default class PbDraggable extends PbEnhancedElement {
     if (container) {
       this.setState({ activeContainer: container.id });
       container.classList.add("active_container");
+
+      // If dragging over empty container or below last item
+      const lastItem = container.querySelector('.pb_draggable_item:last-child');
+      if (!lastItem || (lastItem && event.clientY > lastItem.getBoundingClientRect().bottom)) {
+        if (this.draggedItem && this.draggedItem.parentNode !== container) {
+          container.appendChild(this.draggedItem);
+        }
+      }
     }
   }
 
