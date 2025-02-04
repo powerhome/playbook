@@ -13,6 +13,8 @@ module Playbook
                                default: true
       prop :table_data_attributes, type: Playbook::Props::HashProp,
                                    default: {}
+      prop :loading, type: Playbook::Props::Boolean,
+                     default: false
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[none scroll],
                         default: "scroll"

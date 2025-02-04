@@ -1,8 +1,4 @@
-<%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.classname,
-    **combined_html_options) do %>
+<%= pb_content_tag(:div) do %>
     <%= object.wrapper do %>
       <%= pb_rails("flex", props: { orientation: "row", padding_right: "lg", vertical: "center" }) do %>
         <% if (object.template != "sort_only") %>

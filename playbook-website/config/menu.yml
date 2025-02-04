@@ -94,6 +94,12 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
+  - name: copy_button
+    platforms: *2
+    status: beta
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: data_visualization
   description:
   components:

@@ -141,12 +141,12 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.3-x86_64-linux)
       racc (~> 1.4)
-    playbook_ui (13.27.0)
+    playbook_ui (14.12.0.pre.alpha.testingwithfas5689)
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
       react-rails (= 2.6.1)
-      view_component (= 2.55.0)
+      view_component (= 2.83.0)
       webpacker-react (~> 0.3.2)
     psych (5.1.2)
       stringio
@@ -239,8 +239,9 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    view_component (2.55.0)
-      activesupport (>= 5.0.0, < 8.0)
+    view_component (2.83.0)
+      activesupport (>= 5.2.0, < 8.0)
+      concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
@@ -268,6 +269,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-23
+  arm64-darwin-24
   x86_64-darwin-21
   x86_64-linux
 
@@ -277,7 +279,7 @@ DEPENDENCIES
   debug
   importmap-rails
   jbuilder
-  playbook_ui (~> 13.27.0)
+  playbook_ui (= 14.12.0.pre.alpha.testingwithfas5689)
   puma (~> 5.6)
   rails (~> 7.0.8)
   react-rails

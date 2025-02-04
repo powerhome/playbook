@@ -1,0 +1,1 @@
+The optional `loading` prop takes a boolean value that can be managed using state. If loading is true, the table will display the loading skeleton and once loading is false, the table will render with the data provided. 
