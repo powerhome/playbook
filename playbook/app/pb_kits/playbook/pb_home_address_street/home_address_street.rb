@@ -54,6 +54,8 @@ module Playbook
       end
 
       def custom_titleize(str)
+        return "" if str.nil?
+
         str.split(" ").map(&:capitalize).join(" ")
       end
 
