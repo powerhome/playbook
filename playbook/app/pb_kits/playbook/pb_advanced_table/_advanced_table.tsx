@@ -16,7 +16,7 @@ import {
 } from "@tanstack/react-table"
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
-import { globalProps, GlobalProps, globalInlineProps } from "../utilities/globalProps"
+import { globalProps, GlobalProps } from "../utilities/globalProps"
 
 import Table from "../pb_table/_table"
 import Card from "../pb_card/_card"
@@ -48,6 +48,7 @@ type AdvancedTableProps = {
   initialLoadingRowsCount?: number
   inlineRowLoading?: boolean
   loading?: boolean | string
+  maxHeight?: "auto" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl"
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
   pagination?: boolean,
@@ -79,6 +80,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     initialLoadingRowsCount = 10,
     inlineRowLoading = false,
     loading,
+    maxHeight,
     onRowToggleClick,
     onToggleExpansionClick,
     pagination = false,
@@ -282,14 +284,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     setExpanded(updatedRows)
   }
 
-  const dynamicInlineProps = globalInlineProps(props)
-
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
     buildCss("pb_advanced_table"),
     `advanced-table-responsive-${responsive}`,
+    maxHeight ? `advanced-table-max-height-${maxHeight}` : '', // max height as kit prop not global prop to control overflow-y
     globalProps(props),
     className
   )
@@ -304,7 +305,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         {...htmlProps}
         className={classes} 
         id={id}
-        style={dynamicInlineProps}
     >
       <AdvancedTableContext.Provider
           value={{
