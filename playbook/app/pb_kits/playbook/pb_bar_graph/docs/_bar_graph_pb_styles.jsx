@@ -2,7 +2,9 @@ import React from 'react'
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-//import '../BarGraphStyles.scss'
+import "../BarGraphStyles.scss";
+// Your path might look more like this
+//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
 
 const columnChartData = [
   {
@@ -30,7 +32,6 @@ const columnChartData = [
 const columnOptions = {
   chart: {
     type: "column",
-    styledMode: true,
   },
   series: columnChartData,
   title: {
