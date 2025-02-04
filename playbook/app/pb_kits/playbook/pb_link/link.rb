@@ -11,9 +11,11 @@ module Playbook
       prop :href
       prop :icon
       prop :icon_right
+      prop :tabindex
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[a h1 h2 h3 h4 h5 h6 p span div],
                  default: "a"
+      prop :target
       prop :text
       prop :underline, type: Playbook::Props::Boolean,
                        default: false
@@ -24,6 +26,10 @@ module Playbook
 
       def content
         text
+      end
+
+      def target_attribute
+        target if target && href
       end
 
     private
