@@ -1,1 +1,0 @@
-The `state` prop will always capitalize the state name, even if the data entered is in lowercase. For example, when `state="pa"` is passed, it will be rendered as "PA". When you pass `preserve_case: true`, the street address will be rendered exactly as entered, without automatic title capitalization.
