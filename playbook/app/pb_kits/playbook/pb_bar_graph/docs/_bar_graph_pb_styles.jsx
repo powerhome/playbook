@@ -55,7 +55,6 @@ const columnOptions = {
 
 const BarGraphPbStyles = () => (
   <div>
-    pb stylesx
     <HighchartsReact highcharts={Highcharts}
         options={columnOptions}
     />
