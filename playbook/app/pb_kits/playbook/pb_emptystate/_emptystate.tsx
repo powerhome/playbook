@@ -3,38 +3,42 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import Title from '../pb_title/_title'
+import Image from '../pb_image/_image'
+import Body from '../pb_body/_body'
 import Button from '../pb_button/_button'
+import Flex from '../pb_flex/_flex'
 
 type EmptystateProps = {
   aria?: { [key: string]: string },
-  // alignment?: "center" | "left" | "right",
+  alignment?: "center" | "left" | "right",
   className?: string,
   data?: { [key: string]: string },
-  // description?: string,
+  description?: string,
+  header?: string,
   id?: string,
-  // imageAlt?: string,
-  // imageUrl?: string,
-  // linkButton?: string,
-  // orientation?: "horizontal" | "vertical",
-  // primaryButton?: string,
-  // size?: "sm" | "md" | "lg",
+  image?: string,
+  linkButton?: string,
+  orientation?: "horizontal" | "vertical",
+  primaryButton?: string,
+  size?: "sm" | "md" | "lg",
   text?: string,
 }
 
 const Emptystate = (props: EmptystateProps) => {
   const {
     aria = {},
-    // alignment = 'center',
+    alignment = 'center',
     className,
     data = {},
-    // description,
+    description,
+    header = '',
     id,
-    // imageAlt = '',
-    // imageUrl,
-    // linkButton,
-    // orientation = 'horizontal',
-    // primaryButton,
-    // size = "md",
+    image,
+    linkButton = '',
+    orientation = 'horizontal',
+    primaryButton = '',
+    size = "md",
     text = '',
   } = props
 
@@ -49,9 +53,60 @@ const Emptystate = (props: EmptystateProps) => {
         className={classes}
         id={id}
     >
-    <Button>
-      hello
-    </Button>
+      {size === 'lg' ? (
+        <div>
+          <Image
+              height="auto"
+              url={image}
+              width="100%"
+          />
+          <Title size="1"
+              text={header}
+          />
+          <Body text={description} />
+          <Button
+              size="md"
+              text={primaryButton}
+              variant="primary"
+              width="100%"
+          />
+          <Button
+              size="md"
+              text={linkButton}
+              variant="link"
+              width="100%"
+          />
+        </div>
+      ) : (
+        <div>
+        <Image
+            height="auto"
+            url={image}
+            width="140px"
+        />
+         <Title size="3"
+             text={header}
+         />
+         <Body text={description} />
+        <Flex gap="sm"
+            orientation="column"
+        >
+          <Button
+              size="md"
+              text={primaryButton}
+              variant="primary"
+              width="140px"
+          />
+          <Button
+              size="md"
+              text={linkButton}
+              variant="link"
+              width="140px"
+          />
+        </Flex>
+
+      </div>
+      )}
     </div>
   )
 }
