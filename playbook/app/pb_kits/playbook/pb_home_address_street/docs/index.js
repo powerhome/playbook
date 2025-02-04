@@ -2,4 +2,3 @@ export { default as HomeAddressStreetDefault } from './_home_address_street_defa
 export { default as HomeAddressStreetEmphasis } from './_home_address_street_emphasis.jsx'
 export { default as HomeAddressStreetModified } from './_home_address_street_modified.jsx'
 export { default as HomeAddressStreetLink } from './_home_address_street_link.jsx'
-export { default as HomeAddressStreetFormatting } from './_home_address_street_formatting.jsx'
