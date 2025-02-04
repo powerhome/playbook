@@ -54,7 +54,7 @@ export const OtherNavItems = ({
 
   const tokensAndGuidelinesMenu = VisualGuidelinesItems.map(guide => ({
     name: guide.label,
-    link: `${guide.value}`
+    link: guide.value
   }))
 
   //conditionally render navitems depending on name
