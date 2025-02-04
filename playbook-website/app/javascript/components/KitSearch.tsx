@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Typeahead, Badge } from 'playbook-ui'
+import { useEffect, useState } from 'react'
+import { Typeahead, Badge, Flex } from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
 import { VisualGuidelinesItems } from './MainSidebar/MenuData/GuidelinesNavItems'
 
@@ -57,23 +57,32 @@ const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
     }
   }
 
-
-
-  const formattedKits = filteredKits.map(option => ({
-    ...option,
-    label: option.value.includes("guidelines") ? `${option.label} (Global Prop)` : option.label
-  }));
+  const Item = ({ labelLeft }: { labelLeft: string }) => (
+    <Flex alignItems="center">
+      {labelLeft}
+      <Badge
+        justifyContent="end"
+        text="Global Prop"
+        margin="xs"
+        variant="primary"
+        className="global-prop"
+      />
+    </Flex>
+  )
 
   return (
     <div>
       <Typeahead
-          className={classname}
-          dark={document.cookie.split("; ").includes("dark_mode=true")}
-          id={id}
-          onChange={handleChange}
-          onInputChange={handleFilteredKits}
-          options={formattedKits}
-          placeholder="Search..."
+        className={classname}
+        dark={document.cookie.split("; ").includes("dark_mode=true")}
+        id={id}
+        onChange={handleChange}
+        onInputChange={handleFilteredKits}
+        options={filteredKits}
+        placeholder="Search..."
+        valueComponent={({ label, value }: { label: string, value: string }) => (
+          value.includes("guidelines") ? <Item labelLeft={label} /> : <>{label}</>
+        )}
       />
     </div>
   )
