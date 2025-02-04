@@ -1,16 +1,3 @@
-<% content_for :helper_methods do %>
-  <% def badge_properties(container)
-    case container
-    when "To Do"
-      { text: "queue", variant: "warning" }
-    when "In Progress"
-      { text: "progress", variant: "primary" }
-    else
-      { text: "done", variant: "success" }
-    end
-  end %>
-<% end %>
-
 <% containers = [
   "To Do",
   "In Progress",
@@ -71,123 +58,43 @@
 <%= pb_rails("draggable", props: { initial_items: items_data }) do %>
   <%= pb_rails("flex", props: { justify_content: "center" }) do %>
     <% containers.each do |container| %>
-        <%= pb_rails("draggable/draggable_container", props: {
-            container: container,
-            width: "xs",
-            height: "xs",
-            padding: "sm",
-            data: { container: container }
-        }) do %>
-            <%= pb_rails("caption", props: { text_align: "center" }) do %><%= container %><% end %>
-            <%= pb_rails("flex", props: {align_items: "stretch", orientation: "column"}) do %>
-                <% items_data.select { |item| item[:container] == container }.each do |item| %>
-                    <%= pb_rails("draggable/draggable_item", props: {
-                        container: container,
-                        drag_id: item[:id]
-                    }) do %>
-                        <%= pb_rails("card", props: { margin_bottom: "sm", padding: "sm"}) do %>
-                            <%= pb_rails("flex", props: { justify: "between" }) do %>
-                                <%= pb_rails("flex/flex_item") do %>
-                                    <%= pb_rails("flex") do %>
-                                        <%= pb_rails("avatar", props: {
-                                            image_url: item[:assignee_img],
-                                            name: item[:assignee_name],
-                                            size: "xxs"
-                                        }) %>
-                                        <%= pb_rails("title", props: {
-                                            padding_left: "xs",
-                                            size: 4,
-                                            text: item[:title]
-                                        }) %>
-                                    <% end %>
-                                <% end %>
-                                <%= pb_rails("badge", props: {
-                                    margin_left: "sm",
-                                    rounded: true,
-                                    text: badge_properties(container)[:text],
-                                    variant: badge_properties(container)[:variant],
-                                      data: {
-                                        pb_status_badge: true,
-                                        pb_tag_type: "badge"
-                                      }
-                                }) %>
-                            <% end %>
-                            <%= pb_rails("body", props: { padding_top: "xs", text: item[:description] }) %>
-                        <% end %>
+      <%= pb_rails("draggable/draggable_container", props: {
+          container: container,
+          width: "xs",
+          height: "xs",
+          padding: "sm",
+          data: { container: container }
+      }) do %>
+        <%= pb_rails("caption", props: { text_align: "center" }) do %><%= container %><% end %>
+        <%= pb_rails("flex", props: {align_items: "stretch", orientation: "column"}) do %>
+          <% items_data.select { |item| item[:container] == container }.each do |item| %>
+            <%= pb_rails("draggable/draggable_item", props: {
+                container: container,
+                drag_id: item[:id]
+            }) do %>
+              <%= pb_rails("card", props: { margin_bottom: "sm", padding: "sm"}) do %>
+                <%= pb_rails("flex", props: { justify: "between" }) do %>
+                  <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("flex") do %>
+                      <%= pb_rails("avatar", props: {
+                          image_url: item[:assignee_img],
+                          name: item[:assignee_name],
+                          size: "xxs"
+                      }) %>
+                      <%= pb_rails("title", props: {
+                          padding_left: "xs",
+                          size: 4,
+                          text: item[:title]
+                      }) %>
                     <% end %>
+                  <% end %>
                 <% end %>
+                <%= pb_rails("body", props: { padding_top: "xs", text: item[:description] }) %>
+              <% end %>
             <% end %>
+          <% end %>
         <% end %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
-
-<script>
-  const initBadgeUpdates = function() {
-    const updateBadge = function(container) {
-      switch (container) {
-        case 'To Do':
-          return { text: 'queue', variant: 'warning' };
-        case 'In Progress':
-          return { text: 'progress', variant: 'primary' };
-        case 'Done':
-          return { text: 'done', variant: 'success' };
-        default:
-          return { text: 'queue', variant: 'warning' };
-      }
-    };
-
-    let draggedElement = null;
-    let startContainer = null;
-
-    document.querySelectorAll('.pb_draggable_item').forEach(function(item) {
-      item.addEventListener('dragstart', function(event) {
-        draggedElement = event.target;
-        startContainer = draggedElement.closest('.pb_draggable_container');
-      });
-    });
-
-    document.querySelectorAll('.pb_draggable_container').forEach(function(container) {
-      container.addEventListener('drop', function(event) {
-        event.preventDefault();
-
-        if (draggedElement) {
-          setTimeout(function() {
-            const currentContainer = container;
-
-            if (currentContainer && startContainer && currentContainer !== startContainer) {
-              const containerData = currentContainer.getAttribute('data-container');
-              const badge = draggedElement.querySelector('[data-pb-status-badge]');
-
-              if (badge && containerData) {
-                const newProperties = updateBadge(containerData);
-                const span = badge.querySelector('span');
-
-                if (span) {
-                  span.textContent = newProperties.text;
-                }
-
-                badge.classList.forEach(function(className) {
-                  if (className.includes('pb_badge_kit_') || className === 'ml_sm') {
-                    badge.classList.remove(className);
-                  }
-                });
-
-                badge.className = `pb_badge_kit_${newProperties.variant}_rounded ml_sm`;
-              }
-            }
-
-            draggedElement = null;
-            startContainer = null;
-          }, 50);
-        }
-      });
-    });
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initBadgeUpdates);
-  } else {
-    initBadgeUpdates();
-  }
-</script>
