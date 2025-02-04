@@ -1,4 +1,5 @@
-import PbEnhancedElement from "../pb_enhanced_element";
+import PbEnhancedElement from "../pb_enhanced_element"
+import { INPUTMASKS } from "./inputMask"
 
 export default class PbTextInput extends PbEnhancedElement {
   static get selector() {
@@ -8,6 +9,7 @@ export default class PbTextInput extends PbEnhancedElement {
   connect() {
     this.handleInput = this.handleInput.bind(this);
     this.element.addEventListener("input", this.handleInput);
+    this.handleInput(); 
   }
 
   disconnect() {
@@ -20,19 +22,15 @@ export default class PbTextInput extends PbEnhancedElement {
     const rawValue = this.element.value;
     let formattedValue = rawValue;
 
-    switch (maskType) {
-      case "currency":
-        formattedValue = formatCurrency(rawValue);
-        break;
-      case "ssn":
-        formattedValue = formatSSN(rawValue);
-        break;
-      case "postal_code":
-        formattedValue = formatPostalCode(rawValue);
-        break;
-      case "zip_code":
-        formattedValue = formatZipCode(rawValue);
-        break;
+    const maskKey = {
+      currency: 'currency',
+      ssn: 'ssn',
+      postal_code: 'postalCode',
+      zip_code: 'zipCode',
+    }[maskType];
+
+    if (maskKey && INPUTMASKS[maskKey]) {
+      formattedValue = INPUTMASKS[maskKey].format(rawValue);
     }
 
     const sanitizedInput = this.element
@@ -55,34 +53,6 @@ export default class PbTextInput extends PbEnhancedElement {
     this.element.value = formattedValue;
     setCursorPosition(this.element, cursorPosition, rawValue, formattedValue);
   }
-}
-
-function formatCurrency(value) {
-  const numericValue = value.replace(/[^0-9]/g, "").slice(0, 15);
-  if (!numericValue) return "";
-  const dollars = parseFloat((parseInt(numericValue) / 100).toFixed(2));
-  if (dollars === 0) return "";
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 2,
-  }).format(dollars);
-}
-
-function formatSSN(value) {
-  const cleaned = value.replace(/\D/g, "").slice(0, 9);
-  return cleaned
-    .replace(/(\d{5})(?=\d)/, "$1-")
-    .replace(/(\d{3})(?=\d)/, "$1-");
-}
-
-function formatZipCode(value) {
-  return value.replace(/\D/g, "").slice(0, 5);
-}
-
-function formatPostalCode(value) {
-  const cleaned = value.replace(/\D/g, "").slice(0, 9);
-  return cleaned.replace(/(\d{5})(?=\d)/, "$1-");
 }
 
 function sanitizeSSN(input) {
