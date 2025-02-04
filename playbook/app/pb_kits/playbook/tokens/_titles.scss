@@ -41,3 +41,7 @@
   font-weight: $lighter;
   letter-spacing: $lspace_tight;
 }
+
+@mixin pb_title_display {
+  font-size: 46px;
+}
