@@ -1,5 +1,5 @@
 import React from 'react'
-import { Emptystate } from '../../'
+import { Emptystate } from 'playbook-ui'
 
 const EmptystateDefault = (props) => (
   <div>
