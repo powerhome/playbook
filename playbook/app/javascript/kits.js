@@ -37,6 +37,7 @@ export { default as DistributionBar } from '../pb_kits/playbook/pb_distribution_
 export { default as Draggable} from '../pb_kits/playbook/pb_draggable/_draggable'
 export { default as Drawer} from '../pb_kits/playbook/pb_drawer/_drawer'
 export { default as Dropdown} from '../pb_kits/playbook/pb_dropdown/_dropdown'
+export { default as Emptystate} from './pb_emptystate/_emptystate'
 export { default as FileUpload } from '../pb_kits/playbook/pb_file_upload/_file_upload'
 export { default as Filter } from '../pb_kits/playbook/pb_filter/_filter'
 export { default as FixedConfirmationToast } from '../pb_kits/playbook/pb_fixed_confirmation_toast/_fixed_confirmation_toast'
