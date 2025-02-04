@@ -215,7 +215,7 @@
   }
 
   // Responsive Styles
-  @media only screen and (max-width: $screen-xl-min) {  
+  @media only screen and (max-width: $screen-xl-min) {
     &[class*="advanced-table-responsive-scroll"] {
       border-radius: 4px;
       box-shadow: 1px 0 0 0px $border_light,

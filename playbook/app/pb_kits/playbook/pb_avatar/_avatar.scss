@@ -27,6 +27,9 @@ $avatar-sizes: (
       flex-basis: $size;
 
       & > [class^=pb_flex_kit] {
+        [class^=pb_card_kit] {
+          padding: 2px;
+        }
         [class^=pb_card_kit].overlay_bottom_center,
         [class^=pb_card_kit].overlay_top_center {
           left: 50%;
@@ -52,6 +55,10 @@ $avatar-sizes: (
         flex-grow: 0;
         flex-basis: $size;
 
+        .dark & {
+          background: $text_dk_light;
+        }
+
         &::before {
           content: attr(data-initials);
           width: 100%;
@@ -76,6 +83,13 @@ $avatar-sizes: (
           display: block;
         }
       }
+    }
+  }
+
+  &.dark {
+    [class^=pb_card_kit] {
+      position: absolute;
+      padding: 2px;
     }
   }
 }

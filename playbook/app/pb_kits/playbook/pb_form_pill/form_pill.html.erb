@@ -1,4 +1,4 @@
-<%= content_tag(:div, id: object.id, data: object.data, class: object.classname + object.size_class, tabindex: object.tabindex, **combined_html_options) do %>
+<%= pb_content_tag(:div, class: object.classname + object.size_class, tabindex: object.tabindex) do %>
   <% if object.name.present? %>
     <%= pb_rails("avatar", props: { name: object.name, image_url: object.avatar_url, size: "xxs" }) %>
     <% if object.truncate %>

@@ -1,12 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typeahead } from 'playbook-ui'
+import { matchSorter } from 'match-sorter'
+
+type Kit = {
+  label: string,
+  value: string,
+}
 
 type KitSearchProps = {
   classname: String,
-  kits: [],
+  kits: Kit[],
   id: String,
 }
 const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
+  const [filteredKits, setFilteredKits] = useState(kits)
+
   useEffect(() => {
     if (id === 'desktop-kit-search') {
       window.addEventListener('keydown', (e) => {
@@ -24,6 +32,15 @@ const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
     }
   }
 
+  const handleFilteredKits = (query: string) => {
+    if (query) {
+      const results = matchSorter(kits, query, { keys: ['label'] })
+      setFilteredKits(results)
+    } else {
+      setFilteredKits(kits)
+    }
+  }
+
   return (
     <div>
       <Typeahead
@@ -31,7 +48,8 @@ const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
           dark={document.cookie.split('; ').includes('dark_mode=true')}
           id={id}
           onChange={handleChange}
-          options={kits}
+          onInputChange={handleFilteredKits}
+          options={filteredKits}
           placeholder="Search..."
       />
     </div>

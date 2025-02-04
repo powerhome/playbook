@@ -65,7 +65,7 @@ module Playbook
       end
 
       def tag
-        link ? "a" : "button"
+        link && !disabled ? "a" : "button"
       end
 
       def valid_emoji(icon)
