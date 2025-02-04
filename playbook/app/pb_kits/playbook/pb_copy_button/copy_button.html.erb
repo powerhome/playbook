@@ -1,0 +1,15 @@
+<%= pb_content_tag do %>
+    <%= pb_rails("button", props: { icon: "copy" }) do %>
+      <%= object.text %>
+    <% end %>
+  <% if object.id %> 
+  <%= pb_rails("tooltip", props: {
+      trigger_element_selector: "##{object.id}",
+      position: object.tooltip_position,
+      tooltip_id: "#{object.id}_tooltip",
+      trigger_method: "click"
+    }) do %>
+        <%= object.tooltip_text %> 
+    <% end %>
+  <% end %>
+<% end %>

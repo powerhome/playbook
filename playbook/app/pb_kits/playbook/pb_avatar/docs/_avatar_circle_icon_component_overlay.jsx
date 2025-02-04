@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar } from 'playbook-ui'
 
-const AvatarCircleIconComponentOverlay = () => {
+const AvatarCircleIconComponentOverlay = (props) => {
     return (
         <div>
         <Avatar
@@ -14,6 +14,7 @@ const AvatarCircleIconComponentOverlay = () => {
             imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
             marginBottom="sm"
             size="sm"
+            {...props}
         />
 
         <Avatar
@@ -26,6 +27,7 @@ const AvatarCircleIconComponentOverlay = () => {
             imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
             marginBottom="sm"
             size="md"
+            {...props}
         />
 
         <Avatar
@@ -38,6 +40,7 @@ const AvatarCircleIconComponentOverlay = () => {
             imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
             marginBottom="sm"
             size="lg"
+            {...props}
         />
 
         <Avatar
@@ -50,7 +53,8 @@ const AvatarCircleIconComponentOverlay = () => {
             imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
             marginBottom="sm"
             size="xl"
-        /> 
+            {...props}
+        />
     </div>
     )
 }
