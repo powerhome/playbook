@@ -58,7 +58,7 @@ const Emptystate = (props: EmptystateProps) => {
           >
             <Image height="auto"
                 url={image}
-                width="100%"
+                width="80%"
             />
             <Title size="1"
                 text={header}
@@ -84,7 +84,7 @@ const Emptystate = (props: EmptystateProps) => {
               id={id}
           >
             <Flex vertical="center">
-              <Image height="100%"
+              <Image height="80%"
                   url={image}
                   width="auto"
               />
