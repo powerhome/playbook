@@ -8,6 +8,7 @@ import Image from '../pb_image/_image'
 import Body from '../pb_body/_body'
 import Button from '../pb_button/_button'
 import Flex from '../pb_flex/_flex'
+import FlexItem from '../pb_flex/_flex_item'
 
 type EmptystateProps = {
   aria?: { [key: string]: string },
@@ -46,69 +47,77 @@ const Emptystate = (props: EmptystateProps) => {
   const dataProps = buildDataProps(data)
   const classes = classnames(buildCss('pb_emptystate'), globalProps(props), className)
 
-  return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      {size === 'lg' ? (
-        <div>
-          <Image
-              height="auto"
-              url={image}
-              width="100%"
-          />
-          <Title size="1"
-              text={header}
-          />
-          <Body text={description} />
-          <Button
-              size="md"
-              text={primaryButton}
-              variant="primary"
-              width="100%"
-          />
-          <Button
-              size="md"
-              text={linkButton}
-              variant="link"
-              width="100%"
-          />
-        </div>
-      ) : (
-        <div>
-        <Image
-            height="auto"
-            url={image}
-            width="140px"
-        />
-         <Title size="3"
-             text={header}
-         />
-         <Body text={description} />
-        <Flex gap="sm"
-            orientation="column"
-        >
-          <Button
-              size="md"
-              text={primaryButton}
-              variant="primary"
-              width="140px"
-          />
-          <Button
-              size="md"
-              text={linkButton}
-              variant="link"
-              width="140px"
-          />
-        </Flex>
+  const renderContent = () => {
+    const layouts = {
+      lg: {
+        vertical: (
+          <div {...ariaProps}
+              {...dataProps}
+              className={classes}
+              id={id}
+          >
+            <Image height="auto"
+                url={image}
+                width="100%"
+            />
+            <Title size="1"
+                text={header}
+            />
+            <Body text={description} />
+            <Button size="md"
+                text={primaryButton}
+                variant="primary"
+                width="100%"
+            />
+            <Button size="md"
+                text={linkButton}
+                variant="link"
+                width="100%"
+            />
+          </div>
+        ),
+        horizontal: (
+          <div
+              {...ariaProps}
+              {...dataProps}
+              className={classes}
+              id={id}
+          >
+            <Flex vertical="center">
+              <Image height="100%"
+                  url={image}
+                  width="auto"
+              />
+              <FlexItem paddingLeft="lg">
+                <Title paddingBottom="sm"
+                    size="1"
+                    text={header}
+                />
+                <Body paddingBottom="lg"
+                    text={description}
+                />
+                <Button marginBottom="md"
+                    size="md"
+                    text={primaryButton}
+                    variant="primary"
+                    width="100%"
+                />
+                <Button size="md"
+                    text={linkButton}
+                    variant="link"
+                    width="100%"
+                />
+              </FlexItem >
+            </Flex >
+          </div>
+        ),
+      },
+    }
 
-      </div>
-      )}
-    </div>
-  )
+    return layouts[size]?.[orientation] || null
+  }
+
+  return <div>{renderContent()}</div>
 }
 
 export default Emptystate
