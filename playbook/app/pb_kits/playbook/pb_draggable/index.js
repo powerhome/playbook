@@ -18,6 +18,7 @@ export default class PbDraggable extends PbEnhancedElement {
 
     this.draggedItem = null;
     this.draggedItemId = null;
+    this.hasMultipleContainers = false;
 
     document.addEventListener("DOMContentLoaded", () => this.bindEventListeners());
   }
@@ -36,6 +37,10 @@ export default class PbDraggable extends PbEnhancedElement {
   }
 
   bindEventListeners() {
+    // Check for multiple containers
+    const containers = this.element.querySelectorAll(DRAGGABLE_CONTAINER);
+    this.hasMultipleContainers = containers.length > 1;
+
     // Needed to prevent images within draggable items from being independently draggable
     // Needed if using Image kit in draggable items
     this.element.querySelectorAll(".pb_draggable_item img").forEach(img => {
@@ -48,7 +53,6 @@ export default class PbDraggable extends PbEnhancedElement {
       item.addEventListener("dragenter", this.handleDragEnter.bind(this));
     });
 
-    const containers = this.element.querySelectorAll(DRAGGABLE_CONTAINER);
     containers.forEach(container => {
       container.addEventListener("dragover", this.handleDragOver.bind(this));
       container.addEventListener("drop", this.handleDrop.bind(this));
@@ -86,6 +90,31 @@ export default class PbDraggable extends PbEnhancedElement {
   handleDragEnter(event) {
     if (!this.draggedItem || event.target === this.draggedItem) return;
 
+    if (this.hasMultipleContainers) {
+      this.handleMultiContainerDragEnter(event);
+    } else {
+      this.handleSingleContainerDragEnter(event);
+    }
+  }
+
+  handleSingleContainerDragEnter(event) {
+    const targetItem = event.target.closest('.pb_draggable_item');
+    if (!targetItem) return;
+
+    const container = targetItem.parentNode;
+    const items = Array.from(container.children);
+
+    const draggedIndex = items.indexOf(this.draggedItem);
+    const targetIndex = items.indexOf(targetItem);
+
+    if (draggedIndex > targetIndex) {
+      container.insertBefore(this.draggedItem, targetItem);
+    } else {
+      container.insertBefore(this.draggedItem, targetItem.nextSibling);
+    }
+  }
+
+  handleMultiContainerDragEnter(event) {
     const targetContainer = event.target.closest(DRAGGABLE_CONTAINER);
     const targetItem = event.target.closest('.pb_draggable_item');
 
@@ -126,6 +155,21 @@ export default class PbDraggable extends PbEnhancedElement {
     event.preventDefault();
     event.stopPropagation();
 
+    if (this.hasMultipleContainers) {
+      this.handleMultiContainerDragOver(event);
+    } else {
+      this.handleSingleContainerDragOver(event);
+    }
+  }
+
+  handleSingleContainerDragOver(event) {
+    const container = event.target.closest(DRAGGABLE_CONTAINER);
+    if (container) {
+      container.classList.add("active_container");
+    }
+  }
+
+  handleMultiContainerDragOver(event) {
     let container;
     if (event.target.matches(DRAGGABLE_CONTAINER)) {
       container = event.target;
@@ -152,7 +196,6 @@ export default class PbDraggable extends PbEnhancedElement {
     event.stopPropagation();
 
     let container;
-
     if (event.target.matches(DRAGGABLE_CONTAINER)) {
       container = event.target;
     } else {
@@ -165,7 +208,7 @@ export default class PbDraggable extends PbEnhancedElement {
     this.draggedItem.style.opacity = '1';
 
     // Handle empty containers
-    if (!container.querySelector('.pb_draggable_item')) {
+    if (this.hasMultipleContainers && !container.querySelector('.pb_draggable_item')) {
       container.appendChild(this.draggedItem);
     }
 
@@ -190,7 +233,7 @@ export default class PbDraggable extends PbEnhancedElement {
     this.element.dispatchEvent(customEvent);
 
     this.setState({
-      items: reorderedItems,  // Changed from reorderedItems to items to match setState
+      items: reorderedItems,
       isDragging: "",
       activeContainer: ""
     });
