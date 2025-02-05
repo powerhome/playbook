@@ -48,6 +48,79 @@ const Emptystate = (props: EmptystateProps) => {
 
   const renderContent = () => {
     const layouts = {
+      md: {
+        vertical: (
+          <div {...ariaProps}
+              {...dataProps}
+              className={classes}
+              id={id}
+          >
+            <Flex orientation="column"
+                vertical="center"
+            >
+              <img
+                  alt="test"
+                  src={image}
+                  style={{ width: "100%", maxWidth: "200px", height: "auto" }}
+              />
+              <Title paddingBottom='sm'
+                  size="3"
+                  text={header}
+              />
+              <Body paddingBottom='lg'
+                  text={description}
+              />
+              <Button marginBottom='md'
+                  size="md"
+                  text={primaryButton}
+                  variant="primary"
+                  width="100%"
+              />
+              <Button size="md"
+                  text={linkButton}
+                  variant="link"
+                  width="100%"
+              />
+            </Flex>
+          </div>
+        ),
+        horizontal: (
+          <div
+              {...ariaProps}
+              {...dataProps}
+              className={classes}
+              id={id}
+          >
+            <Flex vertical="center">
+              <img
+                  alt="test"
+                  src={image}
+                  style={{ width: "100%", maxWidth: "200px", height: "auto" }}
+              />
+              <FlexItem paddingLeft="lg">
+                <Title paddingBottom="xs"
+                    size="3"
+                    text={header}
+                />
+                <Body paddingBottom="md"
+                    text={description}
+                />
+                <Button marginBottom="sm"
+                    size="md"
+                    text={primaryButton}
+                    variant="primary"
+                    width="100%"
+                />
+                <Button size="md"
+                    text={linkButton}
+                    variant="link"
+                    width="100%"
+                />
+              </FlexItem >
+            </Flex >
+          </div>
+        ),
+      },
       lg: {
         vertical: (
           <div {...ariaProps}
