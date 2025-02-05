@@ -61,10 +61,11 @@ const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
     <Flex alignItems="center" justify="between">
         {labelLeft}
         <Badge
-          text="Global Prop"
-          margin="xs"
-          variant="primary"
           className="global-prop"
+          dark
+          margin="xs"
+          text="Global Prop"
+          variant="primary"
         />
     </Flex>
   )
