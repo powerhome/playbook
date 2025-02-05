@@ -3,6 +3,9 @@
 module Playbook
   module PbDraggable
     class DraggableContainer < ::Playbook::KitBase
+      prop :tag, type: Playbook::Props::String,
+                 default: "div"
+
       def data
         Hash(prop(:data)).merge(pb_draggable_container: true)
       end
