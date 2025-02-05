@@ -4,7 +4,6 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import Title from '../pb_title/_title'
-import Image from '../pb_image/_image'
 import Body from '../pb_body/_body'
 import Button from '../pb_button/_button'
 import Flex from '../pb_flex/_flex'
@@ -56,24 +55,33 @@ const Emptystate = (props: EmptystateProps) => {
               className={classes}
               id={id}
           >
-            <Image height="auto"
-                url={image}
-                width="80%"
-            />
-            <Title size="1"
-                text={header}
-            />
-            <Body text={description} />
-            <Button size="md"
-                text={primaryButton}
-                variant="primary"
-                width="100%"
-            />
-            <Button size="md"
-                text={linkButton}
-                variant="link"
-                width="100%"
-            />
+            <Flex orientation="column"
+                vertical="center"
+            >
+              <img
+                  alt="test"
+                  src={image}
+                  style={{ width: "100%", maxWidth: "400px", height: "auto" }}
+              />
+              <Title paddingBottom='sm'
+                  size="1"
+                  text={header}
+              />
+              <Body paddingBottom='lg'
+                  text={description}
+              />
+              <Button marginBottom='md'
+                  size="md"
+                  text={primaryButton}
+                  variant="primary"
+                  width="100%"
+              />
+              <Button size="md"
+                  text={linkButton}
+                  variant="link"
+                  width="100%"
+              />
+            </Flex>
           </div>
         ),
         horizontal: (
@@ -84,9 +92,10 @@ const Emptystate = (props: EmptystateProps) => {
               id={id}
           >
             <Flex vertical="center">
-              <Image height="80%"
-                  url={image}
-                  width="auto"
+              <img
+                  alt="test"
+                  src={image}
+                  style={{ width: "100%", maxWidth: "400px", height: "auto" }}
               />
               <FlexItem paddingLeft="lg">
                 <Title paddingBottom="sm"
@@ -113,11 +122,9 @@ const Emptystate = (props: EmptystateProps) => {
         ),
       },
     }
-
     return layouts[size]?.[orientation] || null
   }
-
-  return <div>{renderContent()}</div>
+  return renderContent()
 }
 
 export default Emptystate
