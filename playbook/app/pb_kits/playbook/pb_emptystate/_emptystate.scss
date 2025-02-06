@@ -1,4 +1,9 @@
 .pb_emptystate {
+
+    .sm-state-vertical {
+      width: 100px;
+    }
+
     .md-state-vertical {
       width: 200px;
     }
@@ -7,7 +12,18 @@
       width: 400px;
     }
 
+    .sm-state-horizontal {
+      width: max-content;
+      max-width: 400px;
+    }
+
+    .md-state-horizontal {
+      width: max-content;
+      max-width: 600px;
+    }
+
     .lg-state-horizontal {
       width: max-content;
     }
+
 }

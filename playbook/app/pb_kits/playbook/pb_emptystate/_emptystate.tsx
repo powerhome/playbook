@@ -56,7 +56,7 @@ const Emptystate = (props: EmptystateProps) => {
               className={classes}
               id={id}
           >
-            <Flex className='md-state-vertical'
+            <Flex className='sm-state-vertical'
                 orientation="column"
                 vertical="center"
             >
@@ -93,7 +93,9 @@ const Emptystate = (props: EmptystateProps) => {
               className={classes}
               id={id}
           >
-            <Flex vertical="center">
+            <Flex className='sm-state-horizontal'
+                vertical="center"
+            >
               <img
                   alt="test"
                   src={image}
@@ -167,7 +169,9 @@ const Emptystate = (props: EmptystateProps) => {
               className={classes}
               id={id}
           >
-            <Flex vertical="center">
+            <Flex className='md-state-horizontal'
+                vertical="center"
+            >
               <img
                   alt="test"
                   src={image}
