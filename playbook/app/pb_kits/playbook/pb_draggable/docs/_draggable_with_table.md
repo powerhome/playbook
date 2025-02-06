@@ -1,0 +1,1 @@
+The draggable kit can also be used in conjunction with the table kit to create draggable table rows. To do this, make use of the `tag` prop on the draggable_container to set it to 'tbody' and the same prop on the draggable_item to set that to 'tr'. This will create the functionality seen here. 

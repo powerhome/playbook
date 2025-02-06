@@ -5,6 +5,8 @@ module Playbook
     class DraggableItem < ::Playbook::KitBase
       prop :drag_id, type: Playbook::Props::String,
                      default: ""
+      prop :tag, type: Playbook::Props::String,
+                 default: "div"
       prop :container, type: Playbook::Props::String,
                        default: ""
 

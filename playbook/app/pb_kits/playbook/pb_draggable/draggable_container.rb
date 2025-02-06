@@ -3,6 +3,8 @@
 module Playbook
   module PbDraggable
     class DraggableContainer < ::Playbook::KitBase
+      prop :tag, type: Playbook::Props::String,
+                 default: "div"
       prop :container, type: Playbook::Props::String,
                        default: ""
 
