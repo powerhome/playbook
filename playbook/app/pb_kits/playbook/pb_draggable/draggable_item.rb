@@ -5,6 +5,8 @@ module Playbook
     class DraggableItem < ::Playbook::KitBase
       prop :drag_id, type: Playbook::Props::String,
                      default: ""
+      prop :container, type: Playbook::Props::String,
+                       default: ""
 
       def data
         Hash(prop(:data)).merge(pb_draggable_item: true)
