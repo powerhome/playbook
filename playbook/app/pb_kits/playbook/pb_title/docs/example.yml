@@ -5,6 +5,7 @@ examples:
   - title_colors: Colors
   - title_responsive: Responsive
   - title_truncate: Truncate
+  - title_display_size: Display Size
 
   react:
   - title_default: Default UI
