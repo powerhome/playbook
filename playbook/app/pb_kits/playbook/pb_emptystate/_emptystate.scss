@@ -1,3 +1,13 @@
 .pb_emptystate {
-    width: max-content;
+    .md-state-vertical {
+      width: 200px;
+    }
+
+    .lg-state-vertical {
+      width: 400px;
+    }
+
+    .lg-state-horizontal {
+      width: max-content;
+    }
 }

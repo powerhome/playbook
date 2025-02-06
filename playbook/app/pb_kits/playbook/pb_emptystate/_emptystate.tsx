@@ -6,6 +6,7 @@ import { globalProps } from '../utilities/globalProps'
 import Title from '../pb_title/_title'
 import Body from '../pb_body/_body'
 import Button from '../pb_button/_button'
+import Detail from '../pb_detail/_detail'
 import Flex from '../pb_flex/_flex'
 import FlexItem from '../pb_flex/_flex_item'
 
@@ -48,6 +49,80 @@ const Emptystate = (props: EmptystateProps) => {
 
   const renderContent = () => {
     const layouts = {
+      sm: {
+        vertical: (
+          <div {...ariaProps}
+              {...dataProps}
+              className={classes}
+              id={id}
+          >
+            <Flex className='md-state-vertical'
+                orientation="column"
+                vertical="center"
+            >
+              <img
+                  alt="test"
+                  src={image}
+                  style={{ width: "100%", maxWidth: "100px", height: "auto" }}
+              />
+              <Title paddingBottom='xxs'
+                  size="4"
+                  text={header}
+              />
+              <Detail paddingBottom='sm'
+                  text={description}
+              />
+              <Button marginBottom='xs'
+                  size="sm"
+                  text={primaryButton}
+                  variant="primary"
+                  width="100%"
+              />
+              <Button size="sm"
+                  text={linkButton}
+                  variant="link"
+                  width="100%"
+              />
+            </Flex>
+          </div>
+        ),
+        horizontal: (
+          <div
+              {...ariaProps}
+              {...dataProps}
+              className={classes}
+              id={id}
+          >
+            <Flex vertical="center">
+              <img
+                  alt="test"
+                  src={image}
+                  style={{ width: "100%", maxWidth: "100px", height: "auto" }}
+              />
+              <FlexItem paddingLeft="sm">
+                <Title paddingBottom="xxs"
+                    size="4"
+                    text={header}
+                />
+                <Detail paddingBottom="sm"
+                    text={description}
+                />
+                <Button marginBottom="xs"
+                    size="sm"
+                    text={primaryButton}
+                    variant="primary"
+                    width="100%"
+                />
+                <Button size="sm"
+                    text={linkButton}
+                    variant="link"
+                    width="100%"
+                />
+              </FlexItem >
+            </Flex >
+          </div>
+        ),
+      },
       md: {
         vertical: (
           <div {...ariaProps}
@@ -55,7 +130,8 @@ const Emptystate = (props: EmptystateProps) => {
               className={classes}
               id={id}
           >
-            <Flex orientation="column"
+            <Flex className='md-state-vertical'
+                orientation="column"
                 vertical="center"
             >
               <img
@@ -128,7 +204,8 @@ const Emptystate = (props: EmptystateProps) => {
               className={classes}
               id={id}
           >
-            <Flex orientation="column"
+            <Flex className='lg-state-vertical'
+                orientation="column"
                 vertical="center"
             >
               <img
@@ -164,13 +241,15 @@ const Emptystate = (props: EmptystateProps) => {
               className={classes}
               id={id}
           >
-            <Flex vertical="center">
+            <Flex className='lg-state-horizontal'
+                vertical="center"
+            >
               <img
                   alt="test"
                   src={image}
                   style={{ width: "100%", maxWidth: "400px", height: "auto" }}
               />
-              <FlexItem paddingLeft="lg">
+              <FlexItem paddingLeft="lg" >
                 <Title paddingBottom="sm"
                     size="1"
                     text={header}
