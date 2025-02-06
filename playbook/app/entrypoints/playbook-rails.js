@@ -2,6 +2,10 @@
 import PbTextInput from 'kits/pb_text_input'
 PbTextInput.start()
 
+// Copy Button
+import PbCopyButton from 'kits/pb_copy_button'
+PbCopyButton.start()
+
 // Forms
 import 'kits/pb_form/pb_form_validation'
 import formHelper from 'kits/pb_form/formHelper'

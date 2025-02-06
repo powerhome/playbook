@@ -19,7 +19,9 @@ type LinkProps = {
   icon?: string,
   iconRight?: string,
   id?: string,
+  tabIndex?: number,
   tag?: 'a' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
+  target?: string,
   text?: string,
   underline?: boolean,
 } & GlobalProps
@@ -37,7 +39,9 @@ const Link = (props: LinkProps): React.ReactElement => {
     icon = '',
     iconRight = '',
     id = '',
+    tabIndex,
     tag = 'a',
+    target = '',
     text = '',
     underline = false,
   } = props
@@ -51,6 +55,14 @@ const Link = (props: LinkProps): React.ReactElement => {
     className
   )
   const Tag = tag as keyof JSX.IntrinsicElements
+
+  const getTargetAttribute = () => {
+    if (target && href) {
+      return target
+    }
+
+    return undefined
+  }
 
   const renderContent = () => (
     <>
@@ -87,6 +99,9 @@ const Link = (props: LinkProps): React.ReactElement => {
       <a
           {...commonProps}
           href={href}
+          rel={target !== 'child' ? 'noreferrer' : undefined}
+          tabIndex={tabIndex}
+          target={getTargetAttribute()}
       >
         {renderContent()}
       </a>
@@ -96,6 +111,9 @@ const Link = (props: LinkProps): React.ReactElement => {
       <a
           {...commonProps}
           href={href}
+          rel={target !== 'child' ? 'noreferrer' : undefined}
+          tabIndex={tabIndex}
+          target={getTargetAttribute()}
       >
         <Tag>{renderContent()}</Tag>
       </a>

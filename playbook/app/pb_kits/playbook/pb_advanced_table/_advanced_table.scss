@@ -31,12 +31,12 @@
     width: 100%;
   }
 
-  .row-selection-actions-card {
-    border-bottom-right-radius: 0px !important;
-    border-bottom-left-radius: 0px !important;
-    border-bottom-color: transparent;
-  }
-
+    .row-selection-actions-card {
+      border-bottom-right-radius: 0px !important;
+      border-bottom-left-radius: 0px !important;
+      border-bottom-color: transparent;
+      transition: height 300ms ease;
+    }
   .table-header-cells:first-child {
     min-width: 180px;
   }

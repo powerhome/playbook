@@ -2,7 +2,7 @@
   <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-1", tooltip: "Tooltip for step 1", tooltip_position: "right", step_direction: "horizontal" }) do %>
   step 1
   <% end %>
-  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-2", tooltip: "Tooltip for step 2", step_direction: "horizontal" }) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-2", tooltip: "Tooltip for step 2", tooltip_position: "left", step_direction: "horizontal" }) do %>
   step 2
   <% end %>
   <%= pb_rails("progress_step/progress_step_item", props: {status: "active", classname: "tooltip-trigger-3", tooltip: "Tooltip for step 3", tooltip_position: "left", step_direction: "horizontal" }) do %>
@@ -11,7 +11,7 @@
   <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive", classname: "tooltip-trigger-4", tooltip: "Tooltip for step 4", tooltip_position: "bottom" }) do %>
   step 4
   <% end %>
-  <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive", classname: "tooltip-trigger-5", tooltip: "Tooltip for step 5" }) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive", classname: "tooltip-trigger-5", tooltip: "Tooltip for step 5", tooltip_position: "left" }) do %>
   step 5
   <% end %>
 <% end %>
@@ -19,7 +19,7 @@
 <br /><br />
 
 <%= pb_rails("progress_step", props: {orientation: "vertical"}) do %>
-  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-6", tooltip: "Tooltip step 1", step_direction: "vertical" }) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-6", tooltip: "Tooltip step 1", step_direction: "vertical", tooltip_position: "left" }) do %>
   <% end %>
   <%= pb_rails("progress_step/progress_step_item", props: {status: "active", classname: "tooltip-trigger-7", tooltip: "Tooltip step 2", tooltip_position: "left"}) do %>
   <% end %>
@@ -31,10 +31,10 @@
 
 <br /><br>
 <%= pb_rails("progress_step",props:{ variant:"tracker", icon:true}) do %>
-  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-10", tooltip: "The order has been received", step_direction: "horizontal" , tooltip_position: "right"  }) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete", classname: "tooltip-trigger-10", tooltip: "The order has been received", step_direction: "horizontal" , tooltip_position: "right" }) do %>
       <%= pb_rails("caption", props:{text: "Ordered"})%>
   <% end %>
-  <%= pb_rails("progress_step/progress_step_item", props: {status: "active", classname: "tooltip-trigger-11", tooltip:"Item(s) have been shipped" }) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "active", classname: "tooltip-trigger-11", tooltip:"Item(s) have been shipped", tooltip_position: "right" }) do %>
       <%= pb_rails("caption", props:{text: "Shipped"})%>
   <% end %>
   <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive", classname: "tooltip-trigger-12", tooltip:"This step has not been reached", tooltip_position: "left" }) do %>
@@ -50,7 +50,7 @@
   <%= pb_rails("progress_step/progress_step_item", props: {status: "active", icon: "exclamation-triangle", classname: "tooltip-trigger-14", tooltip: "More details needed before shipment", tooltip_position: "bottom" }) do %>
       <%= pb_rails("caption", props:{text: "Shipped"})%>
   <% end %>
-  <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive", classname: "tooltip-trigger-15", tooltip: "This step is inactive"}) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive", classname: "tooltip-trigger-15", tooltip: "This step is inactive", tooltip_position: "bottom"}) do %>
       <%= pb_rails("caption", props:{text: "Out for Delivery"})%>
   <% end %>
   <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive", classname: "tooltip-trigger-16", tooltip: "Estimated delivery: Jun 27", tooltip_position: "left"}) do %>
