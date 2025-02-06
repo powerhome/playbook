@@ -32,8 +32,51 @@
   }
 
   &[class*=_display] {
-    @include pb_title_display;
+    font-size: clamp(
+      24px, 
+      calc(24px + (128 - 24) * ((100vw - 320px) / (1920 - 320))), 
+      128px
+    );
   }
+
+  &[class*=_dynamic] {
+    &[class*=_25] {
+      font-size: min(2vw, 5rem);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &[class*=_33] {
+      font-size: min(2.5vw, 6rem);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &[class*=_50] {
+      font-size: min(4vw, 10rem);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &[class*=_66] {
+      font-size: min(5vw, 12rem);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &[class*=_75] {
+      font-size: min(6vw, 14rem);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &[class*=_100] {
+      font-size: min(8vw, 16rem);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
 
   @each $size, $size_value in $breakpoints_grid {
     @for $title_size_value from 1 through 4 {
