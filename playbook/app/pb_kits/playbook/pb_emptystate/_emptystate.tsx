@@ -48,6 +48,9 @@ const Emptystate = (props: EmptystateProps) => {
   const classes = classnames(buildCss('pb_emptystate'), globalProps(props), className)
 
   const renderContent = () => {
+    const alignFlex = alignment === 'center' ? 'center' : alignment === "right" ? "bottom" : undefined
+    const alignText = alignment === 'center' ? 'center' : alignment === "right" ? "right" : undefined
+
     const layouts = {
       sm: {
         vertical: (
@@ -58,7 +61,7 @@ const Emptystate = (props: EmptystateProps) => {
           >
             <Flex className='sm-state-vertical'
                 orientation="column"
-                vertical="center"
+                vertical={alignFlex}
             >
               <img
                   alt="test"
@@ -71,6 +74,7 @@ const Emptystate = (props: EmptystateProps) => {
               />
               <Detail paddingBottom='sm'
                   text={description}
+                  textAlign={alignText}
               />
               <Button marginBottom='xs'
                   size="sm"
@@ -94,7 +98,7 @@ const Emptystate = (props: EmptystateProps) => {
               id={id}
           >
             <Flex className='sm-state-horizontal'
-                vertical="center"
+                vertical={alignFlex}
             >
               <img
                   alt="test"
@@ -105,9 +109,11 @@ const Emptystate = (props: EmptystateProps) => {
                 <Title paddingBottom="xxs"
                     size="4"
                     text={header}
+                    textAlign={alignText}
                 />
                 <Detail paddingBottom="sm"
                     text={description}
+                    textAlign={alignText}
                 />
                 <Button marginBottom="xs"
                     size="sm"
@@ -134,7 +140,7 @@ const Emptystate = (props: EmptystateProps) => {
           >
             <Flex className='md-state-vertical'
                 orientation="column"
-                vertical="center"
+                vertical={alignFlex}
             >
               <img
                   alt="test"
@@ -147,6 +153,7 @@ const Emptystate = (props: EmptystateProps) => {
               />
               <Body paddingBottom='lg'
                   text={description}
+                  textAlign={alignText}
               />
               <Button marginBottom='md'
                   size="md"
@@ -170,7 +177,7 @@ const Emptystate = (props: EmptystateProps) => {
               id={id}
           >
             <Flex className='md-state-horizontal'
-                vertical="center"
+                vertical={alignFlex}
             >
               <img
                   alt="test"
@@ -181,9 +188,11 @@ const Emptystate = (props: EmptystateProps) => {
                 <Title paddingBottom="xs"
                     size="3"
                     text={header}
+                    textAlign={alignText}
                 />
                 <Body paddingBottom="md"
                     text={description}
+                    textAlign={alignText}
                 />
                 <Button marginBottom="sm"
                     size="md"
@@ -210,7 +219,7 @@ const Emptystate = (props: EmptystateProps) => {
           >
             <Flex className='lg-state-vertical'
                 orientation="column"
-                vertical="center"
+                vertical={alignFlex}
             >
               <img
                   alt="test"
@@ -223,6 +232,7 @@ const Emptystate = (props: EmptystateProps) => {
               />
               <Body paddingBottom='lg'
                   text={description}
+                  textAlign={alignText}
               />
               <Button marginBottom='md'
                   size="md"
@@ -246,7 +256,7 @@ const Emptystate = (props: EmptystateProps) => {
               id={id}
           >
             <Flex className='lg-state-horizontal'
-                vertical="center"
+                vertical={alignFlex}
             >
               <img
                   alt="test"
@@ -257,9 +267,11 @@ const Emptystate = (props: EmptystateProps) => {
                 <Title paddingBottom="sm"
                     size="1"
                     text={header}
+                    textAlign={alignText}
                 />
                 <Body paddingBottom="lg"
                     text={description}
+                    textAlign={alignText}
                 />
                 <Button marginBottom="md"
                     size="md"
