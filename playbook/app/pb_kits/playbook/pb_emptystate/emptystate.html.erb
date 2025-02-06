@@ -1,12 +1,21 @@
-<!-- Go to pb_content_tag definition in kit_base.rb for usage information. Commented out options are default (showing the default shape), and each can be deleted if not customizing that param. -->
-<!-- If using nonstandard params please un-comment out and replace with your custom params. -->
-<%= pb_content_tag(
-    # :div,
-    # aria: object.aria,
-    # class: object.classname,
-    # data: object.data,
-    # id: object.id,
-    # **combined_html_options
-) do %>
-  <span>EMPTYSTATE CONTENT</span>
+<%= pb_content_tag do %>
+  <% align_flex = case object.alignment
+    when 'center' then 'center'
+    when 'right' then 'end'
+    when 'left' then 'start'
+    else 'start'
+  end %>
+  <% align_text = object.alignment == 'center' ? 'center' : object.alignment == 'right' ? 'right' : 'left' %>
+
+  <% if object.size == 'lg' && object.orientation == 'vertical' %>
+    <%= pb_rails("flex", props: { orientation: "column", vertical: "center", justify: align_flex, classname: 'lg-state-vertical' }) do %>
+      <%= pb_rails("flex", props: { justify: align_flex }) do %>
+        <%= image_tag(object.image, style: "max-width: 400px; height: auto; width: 100%;") %>
+      <% end %>
+      <%= pb_rails("title", props: { text: object.header, color: "success", size: 1, padding_bottom: "sm", text_align: align_flex }) %>
+      <%= pb_rails("body", props: { text: object.description, text_align: align_text, padding_bottom: "lg" }) %>
+      <%= pb_rails("button", props: { text: object.primary_button, margin_bottom: "md", width: "100%" }) %>
+      <%= pb_rails("button", props: { text: object.link_button, variant: "link", width: "100%" }) %>
+    <% end %>
+  <% end %>
 <% end %>
