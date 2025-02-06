@@ -1,7 +1,7 @@
-<%= pb_content_tag do %>
+<%= pb_content_tag(:nav) do %>
   <% if object.title %>
     <%= pb_content_tag do %>
-      <%= pb_content_tag do %>
+      <%= pb_content_tag(:a) do %>
         <%= pb_rails("caption", props: { text: object.title, dark: dark }) %>
       <% end %>
     <% end %>
