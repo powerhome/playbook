@@ -215,11 +215,13 @@
           background-color: $white;
       }
 
-    }
-  }
-  @media only screen and (min-width: $screen-xl-min) {
-    &[class*="advanced-table-responsive-scroll"] {
-      overflow-x: visible;
+      .row-selection-actions-card {
+        border-right-width: 0px;
+        position:sticky;
+        top: 0;
+        left: 0;
+        border-radius: unset;
+      }
     }
   }
 
