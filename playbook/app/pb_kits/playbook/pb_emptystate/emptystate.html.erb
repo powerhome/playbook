@@ -7,12 +7,24 @@
   end %>
   <% align_text = object.alignment == 'center' ? 'center' : object.alignment == 'right' ? 'right' : 'left' %>
 
+   <% if object.size == 'md' && object.orientation == 'vertical' %>
+    <%= pb_rails("flex", props: { orientation: "column", vertical: "center", justify: align_flex, classname: 'md-state-vertical' }) do %>
+      <%= pb_rails("flex", props: { justify: align_flex }) do %>
+        <%= image_tag(object.image, style: "max-width: 200px; height: auto; width: 100%;") %>
+      <% end %>
+      <%= pb_rails("title", props: { text: object.header, size: 3, padding_bottom: "sm", text_align: align_flex }) %>
+      <%= pb_rails("body", props: { text: object.description, text_align: align_text, padding_bottom: "lg" }) %>
+      <%= pb_rails("button", props: { text: object.primary_button, margin_bottom: "md", width: "100%" }) %>
+      <%= pb_rails("button", props: { text: object.link_button, variant: "link", width: "100%" }) %>
+    <% end %>
+  <% end %>
+
   <% if object.size == 'lg' && object.orientation == 'vertical' %>
     <%= pb_rails("flex", props: { orientation: "column", vertical: "center", justify: align_flex, classname: 'lg-state-vertical' }) do %>
       <%= pb_rails("flex", props: { justify: align_flex }) do %>
         <%= image_tag(object.image, style: "max-width: 400px; height: auto; width: 100%;") %>
       <% end %>
-      <%= pb_rails("title", props: { text: object.header, color: "success", size: 1, padding_bottom: "sm", text_align: align_flex }) %>
+      <%= pb_rails("title", props: { text: object.header, size: 1, padding_bottom: "sm", text_align: align_flex }) %>
       <%= pb_rails("body", props: { text: object.description, text_align: align_text, padding_bottom: "lg" }) %>
       <%= pb_rails("button", props: { text: object.primary_button, margin_bottom: "md", width: "100%" }) %>
       <%= pb_rails("button", props: { text: object.link_button, variant: "link", width: "100%" }) %>
