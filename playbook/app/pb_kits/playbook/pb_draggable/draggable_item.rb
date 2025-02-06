@@ -7,6 +7,8 @@ module Playbook
                      default: ""
       prop :tag, type: Playbook::Props::String,
                  default: "div"
+      prop :container, type: Playbook::Props::String,
+                       default: ""
 
       def data
         Hash(prop(:data)).merge(pb_draggable_item: true)
