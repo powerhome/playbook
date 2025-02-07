@@ -1989,6 +1989,13 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@babel/runtime@^7.23.8":
+  version "7.26.7"
+  resolved "https://npm.powerapp.cloud/@babel/runtime/-/runtime-7.26.7.tgz#f4e7fe527cd710f8dc0618610b61b4b060c3c341"
+  integrity sha512-AOPI3D+a8dXnja+iwsUqGRjr1BbZIe771sXdapOtYI531gSqpi92vXivKcq2asu/DFpdl1ceFAKZyRzK2PCVcQ==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
 "@babel/runtime@^7.7.6":
   version "7.24.8"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.24.8.tgz#5d958c3827b13cc6d05e038c07fb2e5e3420d82e"
@@ -3444,10 +3451,22 @@
   dependencies:
     "@tanstack/table-core" "8.20.5"
 
+"@tanstack/react-virtual@^3.12.0":
+  version "3.12.0"
+  resolved "https://npm.powerapp.cloud/@tanstack/react-virtual/-/react-virtual-3.12.0.tgz#85da7a99f3d07e569849a375b018bdaaac6f5233"
+  integrity sha512-6krceiPN07kpxXmU6m8AY7EL0X1gHLu8m3nJdh4phvktzVNxkQfBmSwnRUpoUjGQO1PAn8wSAhYaL8hY1cS1vw==
+  dependencies:
+    "@tanstack/virtual-core" "3.12.0"
+
 "@tanstack/table-core@8.20.5":
   version "8.20.5"
   resolved "https://npm.powerapp.cloud/@tanstack/table-core/-/table-core-8.20.5.tgz#3974f0b090bed11243d4107283824167a395cf1d"
   integrity sha512-P9dF7XbibHph2PFRz8gfBKEXEY/HJPOhym8CHmjF8y3q5mWpKx9xtZapXQUWCgkqvsK0R46Azuz+VaxD4Xl+Tg==
+
+"@tanstack/virtual-core@3.12.0":
+  version "3.12.0"
+  resolved "https://npm.powerapp.cloud/@tanstack/virtual-core/-/virtual-core-3.12.0.tgz#f3de8b824f8c2f8a1bc81df08c796ae71aa9febc"
+  integrity sha512-7mDINtua3v/pOnn6WUmuT9dPXYSO7WidFej7JzoAfqEOcbbpt/iZ1WPqd+eg+FnrL9nUJK8radqj4iAU51Zchg==
 
 "@testing-library/dom@^7.28.1":
   version "7.31.2"
@@ -8704,6 +8723,14 @@ markdown-it@^13.0.1:
     mdurl "^1.0.1"
     uc.micro "^1.0.5"
 
+match-sorter@^8.0.0:
+  version "8.0.0"
+  resolved "https://npm.powerapp.cloud/match-sorter/-/match-sorter-8.0.0.tgz#9120e35ed8aabf45cd40e127b0231f762fb2eec0"
+  integrity sha512-bGJ6Zb+OhzXe+ptP5d80OLVx7AkqfRbtGEh30vNSfjNwllu+hHI+tcbMIT/fbkx/FKN1PmKuDb65+Oofg+XUxw==
+  dependencies:
+    "@babel/runtime" "^7.23.8"
+    remove-accents "0.5.0"
+
 mdurl@^1.0.1:
   version "1.0.1"
   resolved "https://npm.powerapp.cloud/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
@@ -10385,6 +10412,11 @@ regjsparser@^0.9.1:
   integrity sha512-dQUtn90WanSNl+7mQKcXAgZxvUe7Z0SqXlgzv0za4LwiUhyzBC58yQO3liFoUgu8GiJVInAhJjkj1N0EtQ5nkQ==
   dependencies:
     jsesc "~0.5.0"
+
+remove-accents@0.5.0:
+  version "0.5.0"
+  resolved "https://npm.powerapp.cloud/remove-accents/-/remove-accents-0.5.0.tgz#77991f37ba212afba162e375b627631315bed687"
+  integrity sha512-8g3/Otx1eJaVD12e31UbJj1YzdtVvzH85HV7t+9MJYk/u3XmkOUJ5Ys9wQrf9PCPK8+xn4ymzqYCiZl6QWKn+A==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

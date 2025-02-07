@@ -40,6 +40,7 @@ const AdvancedTableDefault = (props) => {
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           tableData={MOCK_DATA}
+          virtualizedRows
           {...props}
       />
     </div>

@@ -44,7 +44,8 @@ export const TableBody = ({
     responsive,
     table,
     selectableRows,
-    hasAnySubRows
+    hasAnySubRows,
+    virtualizer,
   } = useContext(AdvancedTableContext)
 
   const classes = classnames(
@@ -56,12 +57,53 @@ export const TableBody = ({
 
   const columnPinning = table.getState().columnPinning;
 
+  const style = virtualizer ? {
+    height: `${virtualizer.getTotalSize()}px`, //tells scrollbar how big the table is
+    position: 'relative', //needed for absolute positioning of rows
+  } : {}
+
   return (
     <>
       <tbody className={classes} 
           id={id}
+          style={style}
       >
-        {table.getRowModel().rows.map((row: Row<GenericObject>) => {
+        {virtualizer && (
+            virtualizer.getVirtualItems().map(virtualRow => {
+                const row = table.getRowModel().rows[virtualRow.index]
+                return (
+                    <tr
+                        data-index={virtualRow.index} //needed for dynamic row height measurement
+                        key={row.id}
+                        ref={node => virtualizer.measureElement(node)} //measure dynamic row height
+                        style={{
+                            display: 'flex',
+                            position: 'absolute',
+                            transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
+                            width: '100%',
+                        }}
+                    >
+                        {row.getVisibleCells().map(cell => {
+                            return (
+                                <td
+                                    key={cell.id}
+                                    style={{
+                                        display: 'flex',
+                                        width: '100%',
+                                    }}
+                                >
+                                    {flexRender(
+                                        cell.column.columnDef.cell,
+                                        cell.getContext()
+                                    )}
+                                </td>
+                            )
+                        })}
+                    </tr>
+                )
+            })
+        )}
+        {!virtualizer && table.getRowModel().rows.map((row: Row<GenericObject>) => {
           const isExpandable = row.getIsExpanded()
           const isFirstChildofSubrow = row.depth > 0 && row.index === 0
           const rowHasNoChildren = row.original.children && !row.original.children.length ? true : false

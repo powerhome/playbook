@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect, useCallback, useRef } from "react"
 import classnames from "classnames"
 
 import { GenericObject } from "../types"
@@ -14,6 +14,7 @@ import {
   Getter,
   RowSelectionState
 } from "@tanstack/react-table"
+import { useVirtualizer } from '@tanstack/react-virtual'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
 import { globalProps, GlobalProps } from "../utilities/globalProps"
@@ -61,6 +62,7 @@ type AdvancedTableProps = {
   tableProps?: GenericObject
   toggleExpansionIcon?: string | string[]
   onRowSelectionChange?: (arg: RowSelectionState) => void
+  virtualizedRows?: boolean
 } & GlobalProps
 
 const AdvancedTable = (props: AdvancedTableProps) => {
@@ -92,6 +94,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     tableProps,
     toggleExpansionIcon = "arrows-from-line",
     onRowSelectionChange,
+    virtualizedRows = false,
   } = props
 
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(
@@ -230,9 +233,14 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     },
 } : {}
 
+  // Simulating chunked data fetch
+  const fetchSize = 50; // Number of rows per "page"
+  const [fullData] = useState(tableData); // All data from the JSON file
+  const [dataChunck, setDataChunck] = useState(fullData.slice(0, fetchSize)); // Initial chunk
+
 //initialize table
   const table = useReactTable({
-    data: loading ? Array(loadingStateRowCount).fill({}) : tableData,
+    data: loading ? Array(loadingStateRowCount).fill({}) : dataChunck,
     columns,
     onExpandedChange: setExpanded,
     getSubRows: (row: GenericObject) => row.children,
@@ -249,9 +257,52 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   })
 
   const tableRows = table.getRowModel()
+  const parentRef = useRef<HTMLDivElement>(null)
 
   const hasAnySubRows = tableRows.rows.some(row => row.subRows && row.subRows.length > 0);
   const selectedRowsLength = Object.keys(table.getState().rowSelection).length
+
+  // HERE IS THE CODE FOR THE VIRTUALIZED TABLE
+  const [totalDBRowCount] = useState(fullData.length); // Total number of rows
+  const [totalFetched, setTotalFetched] = useState(fetchSize); // Track loaded rows
+  const [isFetching, setIsFetching] = useState(false);
+
+
+  const virtualizerConfig = useVirtualizer({
+    count: tableRows.rows.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 38,
+    overscan: 5,
+  })
+
+  const virtualizer = virtualizedRows ? virtualizerConfig : null
+
+  const fetchNextPage = () => {
+    if (isFetching || totalFetched >= totalDBRowCount) return; // Stop if already fetching or no more data
+  
+    setIsFetching(true);
+    setTimeout(() => { // Simulating an async fetch delay
+      const newFetched = fullData.slice(totalFetched, totalFetched + fetchSize);
+      setDataChunck(prev => [...prev, ...newFetched]); // Append new data
+      setTotalFetched(prev => prev + fetchSize);
+      setIsFetching(false);
+    }, 500); // Simulated delay
+  };
+
+  const fetchMoreOnBottomReached = useCallback((containerRefElement?: HTMLDivElement | null) => {
+    if (containerRefElement) {
+      const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
+      // If user scrolls near bottom, fetch more data
+      if (scrollHeight - scrollTop - clientHeight < 500 && !isFetching && totalFetched < totalDBRowCount) {
+        fetchNextPage();
+      }
+    }
+  }, [fetchNextPage, isFetching, totalFetched, totalDBRowCount]);
+
+  useEffect(() => {
+    fetchMoreOnBottomReached(parentRef.current);
+  }, [fetchMoreOnBottomReached]);
+  // END OF VIRTUALIZED TABLE CODE
 
   useEffect(() => {
     if (onRowSelectionChange) {
@@ -265,7 +316,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     if (rowsCount !== loadingStateRowCount && rowsCount !== 0) {
       setLoadingStateRowCount(rowsCount)
     }
-  }, [tableData, loadingStateRowCount])
+  }, [dataChunck, loadingStateRowCount])
 
   useEffect(() => {
     if (!loading) {
@@ -302,6 +353,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         {...htmlProps}
         className={classes} 
         id={id}
+        onScroll={e => fetchMoreOnBottomReached(e.currentTarget)}
+        ref={parentRef}
+        style={{
+          overflow: 'auto', //our scrollable table container
+          position: 'relative', //needed for sticky header
+          height: '600px', //should be a fixed height
+        }}
     >
       <AdvancedTableContext.Provider
           value={{
@@ -319,7 +377,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             toggleExpansionIcon,
             showActionsBar,
             selectableRows,
-            hasAnySubRows
+            hasAnySubRows,
+            virtualizer,
           }}
       >
         <>
