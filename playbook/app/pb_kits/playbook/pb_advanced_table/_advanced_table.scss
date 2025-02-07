@@ -93,6 +93,43 @@
     color: $primary !important;
   }
 
+  // Sticky Header
+  .sticky-header {
+    thead {
+      z-index: 3 !important;
+    }
+  }
+
+  // Max height overflow - the below prevents expansion from overflowing container at full screen for responsive and nonresponsive tables
+  &.advanced-table-max-height-xs {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-sm {
+    max-height: 480px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-md {
+    max-height: 768px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-lg {
+    max-height: 1024px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-xl {
+    max-height: 1280px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-xxl {
+    max-height: 1440px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-xxxl {
+    max-height: 1920px;
+    overflow-y: auto;
+  }
+  
   // Icons
   .button-icon {
     display: flex;
@@ -214,7 +251,13 @@
       .bg-white td:first-child {
           background-color: $white;
       }
-
+      .sticky-header {
+        thead {
+          th:first-child {
+            box-shadow: 1px 0 10px -2px $border_light !important;
+          }
+        }
+      }
     }
   }
   @media only screen and (min-width: $screen-xl-min) {
@@ -301,6 +344,14 @@
         }
         .bg-white td:first-child {
           background-color: $bg_dark_card;
+        }
+        .sticky-header {
+          thead {
+            th:first-child {
+              background: $bg_dark;
+              box-shadow: 1px 0 10px -2px $border_dark !important;
+            }
+          }
         }
       }
     }

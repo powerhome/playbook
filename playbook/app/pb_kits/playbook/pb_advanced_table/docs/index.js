@@ -19,4 +19,5 @@ export { default as AdvancedTableSelectableRowsNoSubrows } from './_advanced_tab
 export { default as AdvancedTableNoSubrows } from './_advanced_table_no_subrows.jsx'
 export { default as AdvancedTableSelectableRowsHeader } from './_advanced_table_selectable_rows_header.jsx'
 export { default as AdvancedTableSelectableRowsActions } from './_advanced_table_selectable_rows_actions.jsx'
+export { default as AdvancedTableTablePropsStickyHeader } from './_advanced_table_table_props_sticky_header.jsx'
 export { default as AdvancedTableInfiniteScroll } from './_advanced_table_infinite_scroll.jsx'
