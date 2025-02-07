@@ -258,7 +258,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   })
 
   const tableRows = table.getRowModel()
-  const parentRef = useRef<HTMLDivElement>(null)
+  const tableWrapperRef = useRef<HTMLDivElement>(null)
 
   const hasAnySubRows = tableRows.rows.some(row => row.subRows && row.subRows.length > 0);
   const selectedRowsLength = Object.keys(table.getState().rowSelection).length
@@ -268,10 +268,15 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const [totalFetched, setTotalFetched] = useState(fetchSize); // Track loaded rows
   const [isFetching, setIsFetching] = useState(false);
 
+  const tableWrapperStyle = virtualizedRows ?{
+    overflow: 'auto', //our scrollable table container
+    position: 'relative', //needed for sticky header
+    height: '600px', //should be a fixed height
+  } : {}
 
   const virtualizerConfig = useVirtualizer({
     count: tableRows.rows.length,
-    getScrollElement: () => parentRef.current,
+    getScrollElement: () => tableWrapperRef.current,
     estimateSize: () => 38,
     overscan: 5,
   })
@@ -301,8 +306,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   }, [fetchNextPage, isFetching, totalFetched, totalDBRowCount]);
 
   useEffect(() => {
-    fetchMoreOnBottomReached(parentRef.current);
+    fetchMoreOnBottomReached(tableWrapperRef.current);
   }, [fetchMoreOnBottomReached]);
+
+  const tableWrapperOnScroll = virtualizedRows ? (e) => fetchMoreOnBottomReached(e.currentTarget) : undefined
   // END OF VIRTUALIZED TABLE CODE
 
   useEffect(() => {
@@ -368,13 +375,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         {...htmlProps}
         className={classes} 
         id={id}
-        onScroll={e => fetchMoreOnBottomReached(e.currentTarget)}
-        ref={parentRef}
-        style={{
-          overflow: 'auto', //our scrollable table container
-          position: 'relative', //needed for sticky header
-          height: '600px', //should be a fixed height
-        }}
+        onScroll={tableWrapperOnScroll}
+        ref={tableWrapperRef}
+        style={tableWrapperStyle}
     >
       <AdvancedTableContext.Provider
           value={{
