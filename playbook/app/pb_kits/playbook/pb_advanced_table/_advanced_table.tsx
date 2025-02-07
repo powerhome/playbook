@@ -377,7 +377,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         id={id}
         onScroll={tableWrapperOnScroll}
         ref={tableWrapperRef}
-        style={tableWrapperStyle}
+        style={tableWrapperStyle as React.CSSProperties}
     >
       <AdvancedTableContext.Provider
           value={{

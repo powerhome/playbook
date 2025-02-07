@@ -57,7 +57,7 @@ export const TableBody = ({
 
   const columnPinning = table.getState().columnPinning;
 
-  const style = virtualizer ? {
+  const style: React.CSSProperties = virtualizer ? {
     height: `${virtualizer.getTotalSize()}px`, //tells scrollbar how big the table is
     position: 'relative', //needed for absolute positioning of rows
   } : {}
