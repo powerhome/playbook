@@ -1,0 +1,70 @@
+@import "tokens/colors";
+@import "settings/variables";
+@import "tokens/border_radius";
+
+.key-performance-card {
+  .graph-nav {
+    width: 15%;
+    border-right: 1px solid $border_light;
+    min-width: 175px;
+
+    li {
+      border-bottom: 1px solid $border_light;
+      cursor: pointer;
+
+      i { font-style: normal; }
+
+      &.active { border-left: 2px solid $primary; }
+
+      &:last-child { border-bottom: none; }
+    }
+  }
+
+  .graph { width: 85%; }
+}
+
+[class^=pb_layout_kit][class*=_collection] div.layout_body.ticket-body {
+  @media (min-width: $desktop-breakpoint) { grid-template-columns: repeat(5, 1fr); }
+}
+
+[class^=pb_layout_kit][class*=_collection] div.layout_body.pipeline-body {
+  @media (min-width: $desktop-breakpoint) { grid-template-columns: repeat(2, 1fr); }
+}
+
+.ticket-list-header {
+  border-left: 3px solid;
+
+  &.info { border-left-color: $info; }
+  &.primary { border-left-color: $primary; }
+  &.warning { border-left-color: $warning; }
+  &.error { border-left-color: $error; }
+  &.success { border-left-color: $success; }
+}
+
+.pipeline-chart {
+  .line-total {
+    flex: 0;
+    text-align: right;
+    min-width: 50px;
+  }
+}
+
+.ytd-stats {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 1px;
+  background-color: $border-light;
+  height: 100%;
+
+  @media (min-width: $desktop-breakpoint) { grid-template-columns: repeat(2, 1fr); }
+
+  .ytd-stat {
+    background-color: $white;
+
+    i {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

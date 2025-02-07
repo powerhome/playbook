@@ -1,0 +1,36 @@
+<%= pb_rails("dropdown", props: { options: options, cursor: "pointer" }) do %>
+    <%= pb_rails("dropdown/dropdown_trigger") do %>
+      <%= pb_rails("flex", props: { horizontal: "center", vertical: "center"}) do %>
+        <%= pb_rails("avatar", props: {
+            name: "Terry Johnson",
+            size: "sm",
+            image_url: current_user.avatar,
+            margin_left: 'sm'
+          }) %>
+
+          <%= pb_rails("icon", props: { icon: "angle-down", size: "lg", color: "text_lt_light" }) %>
+        <% end %>
+    <% end %>
+    <%= pb_rails("dropdown/dropdown_container", props:{ max_width:"xs" }) do %>
+        <% options.each do |option| %>
+            <%= link_to option[:link] do %>
+              <%= pb_rails("dropdown/dropdown_option", props: {option: option}) do %>
+                <%= pb_rails("flex", props: {
+                  align: "center",
+                  justify: "between",
+                  }) do %>
+                  <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("flex") do %>
+                            <%= pb_rails("icon", props: { icon: option[:icon] }) %>
+                            <%= pb_rails("body", props: { text: option[:label], padding_left:"xs"}) %>
+                        <% end %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                        <%= pb_rails("badge", props: { variant: "primary", text: option[:count]}) %>
+                    <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>

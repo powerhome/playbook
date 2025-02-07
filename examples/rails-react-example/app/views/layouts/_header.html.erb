@@ -1,0 +1,87 @@
+<%
+  options = [
+    {
+      label: "Alerts",
+      value: "Alerts",
+      count: "4",
+      icon: "bell",
+      id: "alerts",
+      link: root_path
+    },
+    {
+      label: "Inbox",
+      value: "Inbox",
+      count: "2",
+      icon: "inbox",
+      id: "inbox",
+      link: root_path
+    }
+  ]
+
+%>
+
+<header>
+  <%= pb_rails("background", props: { background_color: "white" }) do %>
+    <%= pb_rails("flex", props: { horizontal: "center", padding_y: "sm" }) do %>
+      <%= pb_rails("flex/flex_item", props: { classname: "body-container" }) do %>
+        <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
+          <%= pb_rails("flex", props: { horizontal: "center", vertical: "center" }) do %>
+              <%= pb_rails("icon", props: { icon: "burger", size: "2x", margin_right: "xs" }) %>
+            <div>
+              <%= pb_rails("title", props: { text: "BURGERTIME", tag: "h1", size: 2, bold: false,  }) %>
+              <%= pb_rails("caption", props: { text: "INTERNATIONAL", classname: "fw-300" }) %>
+            </div>
+          <% end %>
+
+          <%= pb_rails("flex", props: { horizontal: "center", vertical: "center" }) do %>
+            <div class="desktop-only">
+              <%= link_to 'javascript:void(0)', class: "pb_link_kit_body display_flex align_items_center" do %>
+                <%= pb_rails("icon", props: { icon: "bell", size: "lg", classname: 'fa-regular', font_style: "far" }) %>
+                <%= pb_rails("badge", props: { text: current_user.notifications, variant: "primary", margin_right: "sm", margin_left: "xxs" }) %>
+              <% end %>
+            </div>
+            <div class="desktop-only">
+              <%= link_to 'javascript:void(0)', class: "pb_link_kit_body display_flex align_items_center" do %>
+                <%= pb_rails("icon", props: { icon: "inbox", size: "lg" }) %>
+                <%= pb_rails("badge", props: { text: current_user.inbox, variant: "primary", margin_right: "sm", margin_left: "xxs" }) %>
+              <% end %>
+            </div>
+            <div class="user-nav display_flex align_items_center">
+              <div class="desktop-only">
+                <%= pb_rails("user", props: {
+                  name: "#{current_user.first_name} #{current_user.last_name}" ,
+                  orientation: "horizontal",
+                  align: "right",
+                  avatar: false
+                }) %>
+              </div>
+              <%= render "partials/avatar_nav", options: options %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= pb_rails("section_separator") %>
+
+    <div class="xdesktop-only">
+      <%= pb_rails("flex", props: { horizontal: "center" }) do %>
+        <%= pb_rails("flex/flex_item", props: { classname: "body-container" }) do %>
+          <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
+            <%= pb_rails("nav/item", props: { image_url: "https://upload.wikimedia.org/wikipedia/commons/0/00/Apple_News_icon_%28macOS%29.png", padding: "sm", text: "Dashboard", link: "#", active: true, classname: 'tooltip-dashboard-trigger' }) %>
+            <%= pb_rails("tooltip", props: {
+                trigger_element_selector: ".tooltip-dashboard-trigger",
+                tooltip_id: "dashboard-tooltip",
+                position: 'top'
+              }) do %>
+                  Dashboard
+            <% end %>
+            <%= pb_rails("nav/item", props: { image_url: "https://upload.wikimedia.org/wikipedia/commons/0/00/Apple_News_icon_%28macOS%29.png", padding: "sm", text: "Products", link: "#" }) %>
+            <%= pb_rails("nav/item", props: { image_url: "https://upload.wikimedia.org/wikipedia/commons/0/00/Apple_News_icon_%28macOS%29.png", padding: "sm", text: "In Progress ", link: "#" }) %>
+            <%= pb_rails("nav/item", props: { image_url: "https://upload.wikimedia.org/wikipedia/commons/0/00/Apple_News_icon_%28macOS%29.png", padding: "sm", text: "Settings", link: "#" }) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</header>

@@ -16,6 +16,8 @@
 
 
 // Playbook App Configuration for Font Family
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 $font_family_base: 'Montserrat';
 
 // Enabled Weights in Montserat
@@ -27,7 +29,6 @@ $bolder:        700;
 $boldest:       700;
 $extrabold:     700;
 
-
 @import "reset";
 @import "playbook";
 
@@ -35,3 +36,25 @@ $extrabold:     700;
 // To view all available tokens, visit https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/tokens
 // To see the tokens visually, see our docs here: https://playbook.powerapp.cloud/visual_guidelines
 @import "tokens/spacing";
+@import "tokens/typography";
+@import "settings/**/*";
+@import "layouts/**/*";
+@import "pages/**/*";
+
+
+// Can't get the font_family_base override to work for some reason so this is a quick fix
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+li,
+[class^="pb_caption_kit"],
+[class^="pb_body_kit"],
+.pb_pill_text,
+.pb_card_body_kit {
+ font-family: $font_family_base !important;
+}

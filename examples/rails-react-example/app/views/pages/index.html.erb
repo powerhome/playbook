@@ -1,9 +1,127 @@
-<%# If choosing to use React components in Rails views, the following `react_component` helper is already set up. %>
-<%# Please use the components/App.tsx file to create your React components.%>
-<%= react_component("App") %>
+<% data = [{
+    name: 'Revenue',
+    data: [3134, 4001, 3399, 2000, 3400, 7001,]
+    },
+    # {
+    #   name: 'Orders',
+    #   data: [2134, 3001, 6399, 2000, 9400, 7000]
+    # }
+  ]
+%>
 
 
-<%# If you want to use the Rails components only, you can use the following example: %>
-<%# Line 3 above can be deleted if choosing to use Rails components only. %>
+<%= pb_rails("flex", props: { horizontal: "center" }) do %>
+  <%= pb_rails("flex/flex_item", props: { classname: "body-container", padding_y: 'xl' }) do %>
 
-<%= pb_rails("button", props: { text: "Button Primary", margin_right: "lg" }) %>
+      <div class="pb_md">
+        <%= pb_rails("caption", props: { text: "DASHBOARD", size: 'md', color: "light" }) %>
+        <%= pb_rails("title", props: { text: "Commerce Dashboard", tag: "h2", size: 1, bold: false,  }) %>
+      </div>
+
+
+      <%= pb_rails("card", props: { padding: "none", classname: 'key-performance-card' }) do %>
+        <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
+          <strong>Key Performance Indicators</strong>
+        <% end %>
+
+        <%= pb_rails("section_separator") %>
+
+        <%= pb_rails("card/card_body", props: { padding: "none", classname: 'display_flex' }) do %>
+
+          <%= render 'partials/graph_nav' %>
+
+
+          <div class="graph">
+            <%= pb_rails("line_graph", props: {
+                id: "line-default",
+                gradient: false,
+                chart_data: data,
+                x_axis_categories:['Jan','Feb','Mar','Apr','May','Jun'],
+                height: '300',
+                padding_top: "xl",
+                padding_right: "md"
+
+                # title: 'Solar Employment Growth by Sector, 2010-2016',
+                # subtitle: 'Source: thesolarfoundation.com',
+                # axis_title: 'Number of Employees'
+            }) %>
+          </div>
+
+        <% end %>
+      <% end %>
+
+      <%= pb_rails("caption", props: { text: "THIS WEEKS'S TICKET ESCALATIONS", size: 'md', color: "light", padding_y: 'md', text_align: 'center' }) %>
+
+      <%= pb_rails("layout", props: { layout: "collection", margin_bottom: 'md' }) do %>
+        <%= pb_rails("layout/body", props: { classname: 'align_items_start ticket-body' }) do %>
+          <%= render 'partials/ticket_list', title: 'NEW', color: 'info', tickets: @tickets[:new]  %>
+          <%= render 'partials/ticket_list', title: 'MANAGER FEEDBACK', color: 'primary', tickets: @tickets[:feedback] %>
+          <%= render 'partials/ticket_list', title: 'PROCESSING', color: 'warning', tickets: @tickets[:processing] %>
+          <%= render 'partials/ticket_list', title: 'AWAITING FEEDBACK', color: 'error', tickets: @tickets[:awaiting_feedback] %>
+          <%= render 'partials/ticket_list', title: 'APPROVED', color: 'success', tickets: @tickets[:approved] %>
+        <% end %>
+      <% end %>
+
+      <%= pb_rails("layout", props: { layout: "collection" }) do %>
+        <%= pb_rails("layout/body", props: { classname: "pipeline-body" }) do %>
+          <%= pb_rails("card", props: { padding: "none", classname: "pipeline-chart" }) do %>
+            <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
+              <strong>Pipeline Chart</strong>
+            <% end %>
+
+            <%= pb_rails("section_separator") %>
+
+            <%= pb_rails("list", props: {ordered: false, dark: false, borderless: false}) do %>
+              <% @pipeline_data.each do |line| %>
+                <%= pb_rails("list/item", props: { padding: "sm", classname: "display_flex align_items_center justify_content_space_between" }) do %>
+                  <%= pb_rails("caption", props: { text: line[:title], size: "xs", flex: "2" }) %>
+                  <%= pb_rails("progress_simple", props: { percent: line[:percent], flex: "4" }) %>
+                  <%= pb_rails("caption", props: { text: "#{line[:percent]}%", size: "xs", flex: "0", margin_left: "xs" }) %>
+                  <span class="line-total"><%= number_with_delimiter(line[:total]) %></span>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <%= pb_rails("card", props: { padding: "none" }) do %>
+            <%= pb_rails("card/card_body", props: { padding: "none", classname: "ytd-stats" }) do %>
+              <%= pb_rails("icon_stat_value", props: { icon: "ticket",
+                                                        text: "Tickets (YTD)",
+                                                        size: "lg",
+                                                        value: "1,246",
+                                                        variant:"green",
+                                                        classname: "ytd-stat",
+                                                        padding: "sm"
+              }) %>
+              <%= pb_rails("icon_stat_value", props: { icon: "xmark",
+                                                        text: "Overdue (YTD)",
+                                                        size: "lg",
+                                                        value: "25",
+                                                        variant:"red",
+                                                        classname: "ytd-stat",
+                                                        padding: "sm"
+              }) %>
+              <%= pb_rails("icon_stat_value", props: { icon: "list-check",
+                                                        text: "Closed without action (YTD)",
+                                                        size: "lg",
+                                                        value: "97",
+                                                        variant:"teal",
+                                                        classname: "ytd-stat",
+                                                        padding: "sm"
+              }) %>
+              <%= pb_rails("icon_stat_value", props: { icon: "triangle-exclamation",
+                                                        font_style: "far",
+                                                        text: "Escalated (YTD)",
+                                                        size: "lg",
+                                                        value: "1,246",
+                                                        variant:"yellow",
+                                                        classname: "ytd-stat",
+                                                        padding: "sm"
+              }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+  <% end %>
+<% end %>

@@ -1,0 +1,33 @@
+<%= pb_rails("card", props: { padding: 'none' }) do %>
+  <%= pb_rails("list", props: {ordered: false, dark: false, borderless: false}) do %>
+    <%= pb_rails("list/item", props: { padding: 'sm', classname: "ticket-list-header #{color}" }) do %>
+      <div class="display_flex align_items_center justify_content_space_between width_100_percent">
+        <%= pb_rails("caption", props: { text: title, size: 'md', color: "lighter" }) %>
+        <%= pb_rails("pill", props: { text_transform: "none" , text: tickets.count , variant: color }) %>
+      </div>
+    <% end %>
+    <% tickets.first(6).each do |ticket| %>
+
+        <%= pb_rails("list/item", props: { padding_x: 'sm', padding_y: 'xs', classname: "display_flex align_items_center" }) do %>
+          <%= pb_rails("avatar", props: {
+            # name: "Terry Johnson",
+            size: "xs",
+            image_url: ticket[:avatar],
+          }) %>
+
+          <span class="px_sm width_100_percent"><%= truncate(ticket[:text], 12) %></span>
+          <%= pb_rails("icon", props: { icon: "angle-right", size: "lg", color: "text_lt_light" }) %>
+        <% end %>
+    <% end %>
+
+    <% if tickets.count > 6 %>
+      <%= pb_rails("list/item", props: { padding_x: 'sm', padding_y: 'xs', classname: 'justify_content_center' }) do %>
+        <%= pb_rails("link", props: {
+          text: "Show More",
+          href: "javascript:void(0)",
+          classname: 'bold'
+        }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

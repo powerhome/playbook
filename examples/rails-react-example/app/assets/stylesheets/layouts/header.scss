@@ -1,0 +1,28 @@
+@import "settings/variables";
+
+header {
+  [class*=pb_dropdown] {
+    .dropdown_wrapper {
+      .pb_dropdown_container {
+        width: 250px;
+        right: 0;
+      }
+    }
+  }
+
+  .pb_nav_wrapper {
+    .pb_nav_list_item_link {
+      .pb_nav_list_item_text {
+        display: none;
+
+        @media (min-width: $desktop-breakpoint) { display: inline-block; }
+      }
+
+      .pb_nav_img_wrapper {
+        display: block;
+
+        @media (min-width: $desktop-breakpoint) { display: none; }
+      }
+    }
+  }
+}
