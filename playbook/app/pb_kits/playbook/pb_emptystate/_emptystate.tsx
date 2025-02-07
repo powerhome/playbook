@@ -23,7 +23,6 @@ type EmptystateProps = {
   orientation?: "horizontal" | "vertical",
   primaryButton?: string,
   size?: "sm" | "md" | "lg",
-  text?: string,
 }
 
 const Emptystate = (props: EmptystateProps) => {
@@ -40,7 +39,6 @@ const Emptystate = (props: EmptystateProps) => {
     orientation = 'horizontal',
     primaryButton = '',
     size = "md",
-    text = '',
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -48,249 +46,131 @@ const Emptystate = (props: EmptystateProps) => {
   const classes = classnames(buildCss('pb_emptystate'), globalProps(props), className)
 
   const renderContent = () => {
+    const sizeConfigs = {
+      sm: {
+        vertical: {
+          imageWidth: "100px",
+          titleSize: 4,
+          titlePadding: "xxs",
+          descriptionPadding: "sm",
+          buttonSize: "sm",
+          buttonMargin: "xs",
+          scssClassName: "sm-state-vertical",
+          column: "column",
+        },
+        horizontal: {
+          imageWidth: "100px",
+          titleSize: 4,
+          titlePadding: "xxs",
+          descriptionPadding: "sm",
+          buttonSize: "sm",
+          buttonMargin: "xs",
+          scssClassName: 'sm-state-horizontal',
+          column: "",
+        },
+      },
+      md: {
+        vertical: {
+          imageWidth: "250px",
+          titleSize: 3,
+          titlePadding: "xs",
+          descriptionPadding: "md",
+          buttonSize: "md",
+          buttonMargin: "sm",
+          scssClassName: "md-state-vertical",
+          column: "column",
+        },
+        horizontal: {
+          imageWidth: "250px",
+          titleSize: 3,
+          titlePadding: "xs",
+          descriptionPadding: "md",
+          buttonSize: "md",
+          buttonMargin: "sm",
+          scssClassName: 'md-state-horizontal',
+          column: "",
+        },
+      },
+      lg: {
+        vertical: {
+          imageWidth: "400px",
+          titleSize: 2,
+          titlePadding: "sm",
+          descriptionPadding: "lg",
+          buttonSize: "md",
+          buttonMargin: "md",
+          scssClassName: "lg-state-vertical",
+          column: "column",
+        },
+        horizontal: {
+          imageWidth: "400px",
+          titleSize: 2,
+          titlePadding: "sm",
+          descriptionPadding: "lg",
+          buttonSize: "md",
+          buttonMargin: "md",
+          scssClassName: 'lg-state-horizontal',
+          column: "",
+        },
+      },
+    };
+
+    const configs = sizeConfigs[size]?.[orientation] || sizeConfigs.md[orientation] || sizeConfigs.md.vertical
     const alignFlex = alignment === 'center' ? 'center' : alignment === "right" ? "bottom" : undefined
     const alignText = alignment === 'center' ? 'center' : alignment === "right" ? "right" : undefined
 
-    const layouts = {
-      sm: {
-        vertical: (
-          <div {...ariaProps}
-              {...dataProps}
-              className={classes}
-              id={id}
-          >
-            <Flex className='sm-state-vertical'
-                orientation="column"
-                vertical={alignFlex}
-            >
-              <img
-                  alt="test"
-                  src={image}
-                  style={{ width: "100%", maxWidth: "100px", height: "auto" }}
-              />
-              <Title paddingBottom='xxs'
-                  size="4"
-                  text={header}
-              />
-              <Detail paddingBottom='sm'
+    const layout = (
+      <div {...ariaProps}
+          {...dataProps}
+          className={classes}
+          id={id}
+      >
+        <Flex className={configs.scssClassName}
+            orientation={configs.column}
+            vertical={alignFlex}
+        >
+          <img
+              alt="test"
+              src={image}
+              style={{ width: "100%", maxWidth: configs.imageWidth, height: "auto" }}
+          />
+
+          <FlexItem>
+            <Title paddingBottom={configs.titlePadding}
+                size={configs.titleSize}
+                text={header}
+                textAlign={alignText}
+            />
+
+            {size !== "sm" ? (
+              <Body paddingBottom={configs.descriptionPadding}
                   text={description}
                   textAlign={alignText}
               />
-              <Button marginBottom='xs'
-                  size="sm"
-                  text={primaryButton}
-                  variant="primary"
-                  width="100%"
-              />
-              <Button size="sm"
-                  text={linkButton}
-                  variant="link"
-                  width="100%"
-              />
-            </Flex>
-          </div>
-        ),
-        horizontal: (
-          <div
-              {...ariaProps}
-              {...dataProps}
-              className={classes}
-              id={id}
-          >
-            <Flex className='sm-state-horizontal'
-                vertical={alignFlex}
-            >
-              <img
-                  alt="test"
-                  src={image}
-                  style={{ width: "100%", maxWidth: "100px", height: "auto" }}
-              />
-              <FlexItem paddingLeft="sm">
-                <Title paddingBottom="xxs"
-                    size="4"
-                    text={header}
-                    textAlign={alignText}
-                />
-                <Detail paddingBottom="sm"
-                    text={description}
-                    textAlign={alignText}
-                />
-                <Button marginBottom="xs"
-                    size="sm"
-                    text={primaryButton}
-                    variant="primary"
-                    width="100%"
-                />
-                <Button size="sm"
-                    text={linkButton}
-                    variant="link"
-                    width="100%"
-                />
-              </FlexItem >
-            </Flex >
-          </div>
-        ),
-      },
-      md: {
-        vertical: (
-          <div {...ariaProps}
-              {...dataProps}
-              className={classes}
-              id={id}
-          >
-            <Flex className='md-state-vertical'
-                orientation="column"
-                vertical={alignFlex}
-            >
-              <img
-                  alt="test"
-                  src={image}
-                  style={{ width: "100%", maxWidth: "200px", height: "auto" }}
-              />
-              <Title paddingBottom='sm'
-                  size="3"
-                  text={header}
-              />
-              <Body paddingBottom='lg'
+            ) : (
+              <Detail paddingBottom={configs.descriptionPadding}
                   text={description}
                   textAlign={alignText}
               />
-              <Button marginBottom='md'
-                  size="md"
-                  text={primaryButton}
-                  variant="primary"
-                  width="100%"
-              />
-              <Button size="md"
-                  text={linkButton}
-                  variant="link"
-                  width="100%"
-              />
-            </Flex>
-          </div>
-        ),
-        horizontal: (
-          <div
-              {...ariaProps}
-              {...dataProps}
-              className={classes}
-              id={id}
-          >
-            <Flex className='md-state-horizontal'
-                vertical={alignFlex}
-            >
-              <img
-                  alt="test"
-                  src={image}
-                  style={{ width: "100%", maxWidth: "200px", height: "auto" }}
-              />
-              <FlexItem paddingLeft="lg">
-                <Title paddingBottom="xs"
-                    size="3"
-                    text={header}
-                    textAlign={alignText}
-                />
-                <Body paddingBottom="md"
-                    text={description}
-                    textAlign={alignText}
-                />
-                <Button marginBottom="sm"
-                    size="md"
-                    text={primaryButton}
-                    variant="primary"
-                    width="100%"
-                />
-                <Button size="md"
-                    text={linkButton}
-                    variant="link"
-                    width="100%"
-                />
-              </FlexItem >
-            </Flex >
-          </div>
-        ),
-      },
-      lg: {
-        vertical: (
-          <div {...ariaProps}
-              {...dataProps}
-              className={classes}
-              id={id}
-          >
-            <Flex className='lg-state-vertical'
-                orientation="column"
-                vertical={alignFlex}
-            >
-              <img
-                  alt="test"
-                  src={image}
-                  style={{ width: "100%", maxWidth: "400px", height: "auto" }}
-              />
-              <Title paddingBottom='sm'
-                  size="1"
-                  text={header}
-              />
-              <Body paddingBottom='lg'
-                  text={description}
-                  textAlign={alignText}
-              />
-              <Button marginBottom='md'
-                  size="md"
-                  text={primaryButton}
-                  variant="primary"
-                  width="100%"
-              />
-              <Button size="md"
-                  text={linkButton}
-                  variant="link"
-                  width="100%"
-              />
-            </Flex>
-          </div>
-        ),
-        horizontal: (
-          <div
-              {...ariaProps}
-              {...dataProps}
-              className={classes}
-              id={id}
-          >
-            <Flex className='lg-state-horizontal'
-                vertical={alignFlex}
-            >
-              <img
-                  alt="test"
-                  src={image}
-                  style={{ width: "100%", maxWidth: "400px", height: "auto" }}
-              />
-              <FlexItem paddingLeft="lg" >
-                <Title paddingBottom="sm"
-                    size="1"
-                    text={header}
-                    textAlign={alignText}
-                />
-                <Body paddingBottom="lg"
-                    text={description}
-                    textAlign={alignText}
-                />
-                <Button marginBottom="md"
-                    size="md"
-                    text={primaryButton}
-                    variant="primary"
-                    width="100%"
-                />
-                <Button size="md"
-                    text={linkButton}
-                    variant="link"
-                    width="100%"
-                />
-              </FlexItem >
-            </Flex >
-          </div>
-        ),
-      },
-    }
-    return layouts[size]?.[orientation] || null
+            )}
+
+            <Button
+                marginBottom={configs.buttonMargin}
+                size={configs.buttonSize}
+                text={primaryButton}
+                variant="primary"
+                width="100%"
+            />
+            <Button size={configs.buttonSize}
+                text={linkButton}
+                variant="link"
+                width="100%"
+            />
+          </FlexItem>
+        </Flex>
+      </div>
+    )
+    return layout || null;
   }
   return renderContent()
 }
