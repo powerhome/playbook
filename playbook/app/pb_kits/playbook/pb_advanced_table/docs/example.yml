@@ -13,7 +13,7 @@ examples:
 
 
   react:
-  - advanced_table_default: Default (Required Props)
+  # - advanced_table_default: Default (Required Props)
   # - advanced_table_loading: Loading State
   # - advanced_table_sort: Enable Sorting
   # - advanced_table_sort_control: Sort Control
@@ -34,3 +34,4 @@ examples:
   # - advanced_table_selectable_rows_no_subrows: Selectable Rows (No Subrows)
   # - advanced_table_selectable_rows_actions: Selectable Rows (With Actions)
   # - advanced_table_selectable_rows_header: Selectable Rows (No Actions Bar)
+  - advanced_table_infinite_scroll: Infinite Scroll

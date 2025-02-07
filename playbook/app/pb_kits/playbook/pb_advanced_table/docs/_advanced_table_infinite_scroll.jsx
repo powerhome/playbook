@@ -2,7 +2,7 @@ import React from "react"
 import { AdvancedTable } from "playbook-ui"
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
-const AdvancedTableDefault = (props) => {
+const AdvancedTableInfiniteScroll = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -40,10 +40,11 @@ const AdvancedTableDefault = (props) => {
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           tableData={MOCK_DATA}
+          virtualizedRows
           {...props}
       />
     </div>
   )
 }
 
-export default AdvancedTableDefault
+export default AdvancedTableInfiniteScroll
