@@ -14,26 +14,8 @@
 
         <%= pb_rails("section_separator") %>
 
-        <%= pb_rails("card/card_body", props: { padding: "none", classname: 'display_flex' }) do %>
-          <%= render 'partials/graph_nav' %>
-
-          <div class="graph pt_lg">
-            <%= pb_rails("line_graph", props: {
-                id: "line-default",
-                gradient: false,
-                chart_data: @line_graph_data,
-                x_axis_categories:["Jan","Feb","Mar","Apr","May","Jun"],
-                y_axis_min: 0,
-                y_axis_max: 10000,
-                height: '280',
-                padding_top: "xl",
-                padding_right: "lg",
-                colors: ['data-2', 'data-1', 'data-6', 'data-7', 'data-8', 'data-3'],
-                custom_option: {
-                  "yAxis" => { "tickInterval" => 1000 }
-                }
-            }) %>
-          </div>
+        <%= pb_rails("card/card_body", props: { padding: "none"  }) do %>
+          <%= react_component("GraphDashboard") %>
         <% end %>
       <% end %>
 
