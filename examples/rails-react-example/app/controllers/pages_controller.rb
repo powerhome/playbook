@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def index
     @tickets = set_tickets
     @pipeline_data = set_pipeline_data
+    @line_graph_data = set_line_graph_data
   end
 
   private
@@ -71,6 +72,19 @@ class PagesController < ApplicationController
         percent: 46,
         total: 1098
       }
+    ]
+  end
+
+  def set_line_graph_data
+    [
+      {
+        name: 'Revenue',
+        data: [3134, 4001, 3399, 2000, 3400, 7001,]
+      },
+      # {
+      #   name: 'Orders',
+      #   data: [2134, 3001, 6399, 2000, 9400, 7000]
+      # }
     ]
   end
 end

@@ -2,9 +2,11 @@
 @import "settings/variables";
 @import "tokens/border_radius";
 
+.main-title { font-size: 34px !important; }
+
 .key-performance-card {
   .graph-nav {
-    width: 15%;
+    width: 21%;
     border-right: 1px solid $border_light;
     min-width: 175px;
 
@@ -20,7 +22,7 @@
     }
   }
 
-  .graph { width: 85%; }
+  .graph { width: 79%; }
 }
 
 [class^=pb_layout_kit][class*=_collection] div.layout_body.ticket-body {
@@ -55,16 +57,50 @@
   grid-gap: 1px;
   background-color: $border-light;
   height: 100%;
+  border-radius: $border_radius_sm;
 
   @media (min-width: $desktop-breakpoint) { grid-template-columns: repeat(2, 1fr); }
 
   .ytd-stat {
     background-color: $white;
 
+    &:first-child {
+      border-top-left-radius: calc(#{$border_radius_sm} + 1px);
+      border-top-right-radius: calc(#{$border_radius_sm} + 1px);
+    }
+
+    &:last-child {
+      border-bottom-right-radius: calc(#{$border_radius_sm} + 1px);
+      border-bottom-left-radius: calc(#{$border_radius_sm} + 1px);
+    }
+
+    @media (min-width: $desktop-breakpoint) {
+      &:first-child {
+        border-top-left-radius: calc(#{$border_radius_sm} + 1px) ;
+        border-top-right-radius: 0;
+      }
+
+      &:nth-child(2) { border-top-right-radius: calc(#{$border_radius_sm} + 1px) }
+      &:nth-last-child(2) { border-bottom-left-radius: calc(#{$border_radius_sm} + 1px) }
+
+      &:last-child {
+        border-bottom-right-radius: calc(#{$border_radius_sm} + 1px);
+        border-bottom-left-radius: 0;
+      }
+    }
+
     i {
       display: flex;
       justify-content: center;
       align-items: center;
     }
+  }
+}
+
+.user-circle-icon {
+  i {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
   }
 }

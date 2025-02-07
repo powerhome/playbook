@@ -1,52 +1,39 @@
-<% data = [{
-    name: 'Revenue',
-    data: [3134, 4001, 3399, 2000, 3400, 7001,]
-    },
-    # {
-    #   name: 'Orders',
-    #   data: [2134, 3001, 6399, 2000, 9400, 7000]
-    # }
-  ]
-%>
-
-
 <%= pb_rails("flex", props: { horizontal: "center" }) do %>
   <%= pb_rails("flex/flex_item", props: { classname: "body-container", padding_y: 'xl' }) do %>
 
       <div class="pb_md">
         <%= pb_rails("caption", props: { text: "DASHBOARD", size: 'md', color: "light" }) %>
-        <%= pb_rails("title", props: { text: "Commerce Dashboard", tag: "h2", size: 1, bold: false,  }) %>
+        <%= pb_rails("title", props: { text: "Commerce Dashboard", tag: "h1", bold: false, classname: "main-title"  }) %>
       </div>
 
-
       <%= pb_rails("card", props: { padding: "none", classname: 'key-performance-card' }) do %>
-        <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
+        <%= pb_rails("card/card_body", props: { padding_x: "sm", padding_y: "xs", classname: "display_flex align_items_center justify_content_space_between" }) do %>
           <strong>Key Performance Indicators</strong>
+          <%= pb_rails("icon_circle", props: { icon: "user", variant: "royal", size: "sm", classname: "user-circle-icon" }) %>
         <% end %>
 
         <%= pb_rails("section_separator") %>
 
         <%= pb_rails("card/card_body", props: { padding: "none", classname: 'display_flex' }) do %>
-
           <%= render 'partials/graph_nav' %>
 
-
-          <div class="graph">
+          <div class="graph pt_lg">
             <%= pb_rails("line_graph", props: {
                 id: "line-default",
                 gradient: false,
-                chart_data: data,
-                x_axis_categories:['Jan','Feb','Mar','Apr','May','Jun'],
-                height: '300',
+                chart_data: @line_graph_data,
+                x_axis_categories:["Jan","Feb","Mar","Apr","May","Jun"],
+                y_axis_min: 0,
+                y_axis_max: 10000,
+                height: '280',
                 padding_top: "xl",
-                padding_right: "md"
-
-                # title: 'Solar Employment Growth by Sector, 2010-2016',
-                # subtitle: 'Source: thesolarfoundation.com',
-                # axis_title: 'Number of Employees'
+                padding_right: "lg",
+                colors: ['data-2', 'data-1', 'data-6', 'data-7', 'data-8', 'data-3'],
+                custom_option: {
+                  "yAxis" => { "tickInterval" => 1000 }
+                }
             }) %>
           </div>
-
         <% end %>
       <% end %>
 
@@ -74,7 +61,7 @@
             <%= pb_rails("list", props: {ordered: false, dark: false, borderless: false}) do %>
               <% @pipeline_data.each do |line| %>
                 <%= pb_rails("list/item", props: { padding: "sm", classname: "display_flex align_items_center justify_content_space_between" }) do %>
-                  <%= pb_rails("caption", props: { text: line[:title], size: "xs", flex: "2" }) %>
+                  <%= pb_rails("caption", props: { text: line[:title], size: "xs", flex: "2", margin_right: "sm" }) %>
                   <%= pb_rails("progress_simple", props: { percent: line[:percent], flex: "4" }) %>
                   <%= pb_rails("caption", props: { text: "#{line[:percent]}%", size: "xs", flex: "0", margin_left: "xs" }) %>
                   <span class="line-total"><%= number_with_delimiter(line[:total]) %></span>
@@ -87,7 +74,7 @@
             <%= pb_rails("card/card_body", props: { padding: "none", classname: "ytd-stats" }) do %>
               <%= pb_rails("icon_stat_value", props: { icon: "ticket",
                                                         text: "Tickets (YTD)",
-                                                        size: "lg",
+                                                        size: "md",
                                                         value: "1,246",
                                                         variant:"green",
                                                         classname: "ytd-stat",
@@ -95,7 +82,7 @@
               }) %>
               <%= pb_rails("icon_stat_value", props: { icon: "xmark",
                                                         text: "Overdue (YTD)",
-                                                        size: "lg",
+                                                        size: "md",
                                                         value: "25",
                                                         variant:"red",
                                                         classname: "ytd-stat",
@@ -103,7 +90,7 @@
               }) %>
               <%= pb_rails("icon_stat_value", props: { icon: "list-check",
                                                         text: "Closed without action (YTD)",
-                                                        size: "lg",
+                                                        size: "md",
                                                         value: "97",
                                                         variant:"teal",
                                                         classname: "ytd-stat",
@@ -112,8 +99,8 @@
               <%= pb_rails("icon_stat_value", props: { icon: "triangle-exclamation",
                                                         font_style: "far",
                                                         text: "Escalated (YTD)",
-                                                        size: "lg",
-                                                        value: "1,246",
+                                                        size: "md",
+                                                        value: "896",
                                                         variant:"yellow",
                                                         classname: "ytd-stat",
                                                         padding: "sm"
@@ -122,6 +109,5 @@
           <% end %>
         <% end %>
       <% end %>
-
   <% end %>
 <% end %>

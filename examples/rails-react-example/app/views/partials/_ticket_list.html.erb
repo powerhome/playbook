@@ -8,15 +8,14 @@
     <% end %>
     <% tickets.first(6).each do |ticket| %>
 
-        <%= pb_rails("list/item", props: { padding_x: 'sm', padding_y: 'xs', classname: "display_flex align_items_center" }) do %>
+        <%= pb_rails("list/item", props: { padding_x: 'sm', padding_y: 'xs', classname: "display_flex align_items_center ticket-list-item" }) do %>
           <%= pb_rails("avatar", props: {
-            # name: "Terry Johnson",
             size: "xs",
             image_url: ticket[:avatar],
           }) %>
 
-          <span class="px_sm width_100_percent"><%= truncate(ticket[:text], 12) %></span>
-          <%= pb_rails("icon", props: { icon: "angle-right", size: "lg", color: "text_lt_light" }) %>
+          <span class="pl_xs width_100_percent"><%= truncate(ticket[:text], 12) %></span>
+          <%= pb_rails("icon", props: { icon: "angle-right", size: "sm", color: "text_lt_light" }) %>
         <% end %>
     <% end %>
 

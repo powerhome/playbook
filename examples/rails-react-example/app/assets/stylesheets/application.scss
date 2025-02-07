@@ -55,6 +55,9 @@ li,
 [class^="pb_caption_kit"],
 [class^="pb_body_kit"],
 .pb_pill_text,
-.pb_card_body_kit {
+.pb_card_body_kit,
+text {
  font-family: $font_family_base !important;
 }
+
+text { font-weight: $regular !important; }

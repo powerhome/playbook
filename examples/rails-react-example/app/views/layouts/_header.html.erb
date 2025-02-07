@@ -28,7 +28,7 @@
           <%= pb_rails("flex", props: { horizontal: "center", vertical: "center" }) do %>
               <%= pb_rails("icon", props: { icon: "burger", size: "2x", margin_right: "xs" }) %>
             <div>
-              <%= pb_rails("title", props: { text: "BURGERTIME", tag: "h1", size: 2, bold: false,  }) %>
+              <%= pb_rails("title", props: { text: "BURGERTIME", tag: "h2", size: 2, bold: false, classname: 'logo-text' }) %>
               <%= pb_rails("caption", props: { text: "INTERNATIONAL", classname: "fw-300" }) %>
             </div>
           <% end %>
@@ -36,7 +36,7 @@
           <%= pb_rails("flex", props: { horizontal: "center", vertical: "center" }) do %>
             <div class="desktop-only">
               <%= link_to 'javascript:void(0)', class: "pb_link_kit_body display_flex align_items_center" do %>
-                <%= pb_rails("icon", props: { icon: "bell", size: "lg", classname: 'fa-regular', font_style: "far" }) %>
+                <%= pb_rails("icon", props: { icon: "bell", size: "lg", font_style: "far" }) %>
                 <%= pb_rails("badge", props: { text: current_user.notifications, variant: "primary", margin_right: "sm", margin_left: "xxs" }) %>
               <% end %>
             </div>
