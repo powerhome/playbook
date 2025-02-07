@@ -8,3 +8,5 @@ export { default as FilterMaxWidth } from './_filter_max_width.jsx'
 export { default as FilterMaxHeight } from './_filter_max_height.jsx'
 export { default as FilterPlacement } from './_filter_placement.jsx'
 export { default as FilterPopoverProps } from './_filter_popover_props.jsx'
+export { default as FilterInline } from './_filter_inline.jsx'
+

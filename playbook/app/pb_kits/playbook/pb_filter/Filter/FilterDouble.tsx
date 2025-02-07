@@ -3,6 +3,7 @@ import React from 'react'
 import CurrentFilters, { FilterDescription } from './CurrentFilters'
 import FilterBackground, { FilterBackgroundProps } from './FilterBackground'
 import FiltersPopover from './FiltersPopover'
+import FiltersInline from './FiltersInline'
 import ResultsCount from './ResultsCount'
 import SortMenu, {
   SortingChangeCallback,
@@ -21,6 +22,7 @@ export type FilterDoubleProps = {
   results?: number,
   sortOptions?: SortOptions,
   sortValue?: SortValue[],
+  variant?: "popover" | "inline",
 } & FilterBackgroundProps
 
 const FilterDouble = ({
@@ -35,59 +37,111 @@ const FilterDouble = ({
   minWidth,
   placement,
   popoverProps,
+  inlineProps,
+  variant,
   ...bgProps
-}: FilterDoubleProps): React.ReactElement => (
-  <FilterBackground
-      dark={dark}
-      {...bgProps}
-  >
-    <Flex
-        orientation="row"
-        vertical="center"
-    >
-      <FiltersPopover
+}: FilterDoubleProps): React.ReactElement => {
+  if (variant == "inline") {
+    return (
+      <FilterBackground
           dark={dark}
-          maxHeight={maxHeight}
-          minWidth={minWidth}
-          placement={placement}
-          popoverProps={popoverProps}
+          {...bgProps}
       >
-          {children}
-      </FiltersPopover>
-      <CurrentFilters
+        <Flex
+            orientation="row"
+            vertical="center"
+        >
+          <FiltersInline
+              inlineProps={inlineProps}
+          >
+            {children}
+          </FiltersInline>
+        </Flex>
+        <SectionSeparator dark={dark} />
+        <Flex
+            className="filter-bottom"
+            orientation="row"
+            spacing="between"
+            vertical="center"
+        >
+          <ResultsCount
+              dark={dark}
+              results={results}
+              title
+          />
+          <Flex
+              orientation="row"
+              vertical="center"
+          >
+            <Caption
+                dark={dark}
+                text="sort by:"
+            />
+            <SortMenu
+                dark={dark}
+                onChange={onSortChange}
+                options={sortOptions}
+                value={sortValue}
+            />
+          </Flex>
+        </Flex>
+      </FilterBackground>
+    )
+  } else {
+    return (
+      <FilterBackground
           dark={dark}
-          filters={filters}
-      />
-    </Flex>
-    <SectionSeparator dark={dark} />
-    <Flex
-        className="filter-bottom"
-        orientation="row"
-        spacing="between"
-        vertical="center"
-    >
-      <ResultsCount
-          dark={dark}
-          results={results}
-          title
-      />
-      <Flex
-          orientation="row"
-          vertical="center"
+          {...bgProps}
       >
-        <Caption
-            dark={dark}
-            text="sort by:"
-        />
-        <SortMenu
-            dark={dark}
-            onChange={onSortChange}
-            options={sortOptions}
-            value={sortValue}
-        />
-      </Flex>
-    </Flex>
-  </FilterBackground>
-)
+        <Flex
+            orientation="row"
+            vertical="center"
+        >
+          <FiltersPopover
+              dark={dark}
+              maxHeight={maxHeight}
+              minWidth={minWidth}
+              placement={placement}
+              popoverProps={popoverProps}
+          >
+              {children}
+          </FiltersPopover>
+          <CurrentFilters
+              dark={dark}
+              filters={filters}
+          />
+        </Flex>
+        <SectionSeparator dark={dark} />
+        <Flex
+            className="filter-bottom"
+            orientation="row"
+            spacing="between"
+            vertical="center"
+        >
+          <ResultsCount
+              dark={dark}
+              results={results}
+              title
+          />
+          <Flex
+              orientation="row"
+              vertical="center"
+          >
+            <Caption
+                dark={dark}
+                text="sort by:"
+            />
+            <SortMenu
+                dark={dark}
+                onChange={onSortChange}
+                options={sortOptions}
+                value={sortValue}
+            />
+          </Flex>
+        </Flex>
+      </FilterBackground>
+    )
+  }
+}
 
 export default FilterDouble

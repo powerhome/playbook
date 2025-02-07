@@ -6,20 +6,28 @@ type FilterProps =
   | FilterSingleProps
   | (FilterDoubleProps & {
       double?: boolean,
+      variant?: "popover" | "inline"
     })
 
 const Filter = ({
   double = false,
+  variant = "popover",
   ...templateProps
   }: FilterProps): React.ReactElement => {
   const displayFilter = () => {
     if (double === true) {
       return (
-        <FilterDouble {...templateProps} />
+        <FilterDouble
+            variant={variant}
+            {...templateProps}
+        />
       )
     } else {
       return (
-        <FilterSingle {...templateProps} />
+        <FilterSingle
+            variant={variant}
+            {...templateProps}
+        />
       )
     }
   }
