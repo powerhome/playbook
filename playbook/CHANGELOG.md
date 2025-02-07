@@ -1,5 +1,9 @@
-# 14.12.0
-#### January 24, 2025
+# Table It Like It’s Hot: Row Selection Has Arrived!
+##### January 24, 2025
+
+![selectable-table-release](https://github.com/user-attachments/assets/ce8dbed8-10c2-4535-bb7a-c0d72250ad99)
+
+Selecting rows just got way easier! Our Advanced Table now lets you pick one or many with simple checkboxes. Batch actions? Handled. Less hassle? Guaranteed. Get clicking!
 
 [14.12.0](https://github.com/powerhome/playbook/tree/14.12.0) full list of changes:
 

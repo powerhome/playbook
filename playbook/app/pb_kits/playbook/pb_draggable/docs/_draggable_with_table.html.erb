@@ -1,0 +1,61 @@
+<% initial_items = [
+  {
+    id: "1",
+    title: "Task 1",
+    assignee_name: "Terry Miles",
+    assignee_img: "https://randomuser.me/api/portraits/men/44.jpg",
+  },
+  {
+    id: "2",
+    title: "Task 2",
+    assignee_name: "Sophia Miles",
+    assignee_img: "https://randomuser.me/api/portraits/women/8.jpg",
+  },
+  {
+    id: "3",
+    title: "Task 3",
+    assignee_name: "Alice Jones",
+    assignee_img: "https://randomuser.me/api/portraits/women/10.jpg",
+  },
+  {
+    id: "4",
+    title: "Task 4",
+    assignee_name: "Mike James",
+    assignee_img: "https://randomuser.me/api/portraits/men/8.jpg",
+  },
+  {
+    id: "5",
+    title: "Task 5",
+    assignee_name: "James Guy",
+    assignee_img: "https://randomuser.me/api/portraits/men/18.jpg",
+  }
+] %>
+
+
+
+<%= pb_rails("draggable", props: {initial_items: initial_items}) do %>
+  <%= pb_rails("table", props: { size: "sm", responsive:"none" }) do %>
+    <%= pb_rails("table/table_head") do %>
+      <%= pb_rails("table/table_row") do %>
+        <%= pb_rails("table/table_header", props: { text: "id"}) %>
+        <%= pb_rails("table/table_header", props: { text: "name"}) %>
+        <%= pb_rails("table/table_header", props: { text: "task number"}) %>
+      <% end %>
+    <% end %>
+
+    <%= pb_rails("draggable/draggable_container", props: {tag:"tbody"}) do %>
+      <% initial_items.each do |item| %>
+        <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id], tag:"tr"}) do %>
+          <%= pb_rails("table/table_cell", props: { text: item[:id]}) %>
+          <%= pb_rails("table/table_cell") do %>
+            <%= pb_rails("flex", props:{align:"center"}) do %>
+              <%= pb_rails("avatar", props: {size: "xs", image_url: item[:assignee_img]}) %>
+              <%= pb_rails("body", props: {text: item[:assignee_name], padding_left:"sm"}) %>
+            <% end %>
+          <% end %>
+          <%= pb_rails("table/table_cell", props: { text: item[:title]}) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

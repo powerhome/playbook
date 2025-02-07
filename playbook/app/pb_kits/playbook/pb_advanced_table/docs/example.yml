@@ -22,6 +22,7 @@ examples:
   - advanced_table_collapsible_trail: Collapsible Trail
   - advanced_table_table_options: Table Options
   - advanced_table_table_props: Table Props
+  - advanced_table_table_props_sticky_header: Table Props Sticky Header
   - advanced_table_inline_row_loading: Inline Row Loading
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell: Custom Components for Cells

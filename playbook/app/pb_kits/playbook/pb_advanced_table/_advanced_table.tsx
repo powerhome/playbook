@@ -49,6 +49,7 @@ type AdvancedTableProps = {
   initialLoadingRowsCount?: number
   inlineRowLoading?: boolean
   loading?: boolean | string
+  maxHeight?: "auto" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl"
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
   pagination?: boolean,
@@ -80,6 +81,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     initialLoadingRowsCount = 10,
     inlineRowLoading = false,
     loading,
+    maxHeight,
     onRowToggleClick,
     onToggleExpansionClick,
     pagination = false,
@@ -289,6 +291,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const classes = classnames(
     buildCss("pb_advanced_table"),
     `advanced-table-responsive-${responsive}`,
+    maxHeight ? `advanced-table-max-height-${maxHeight}` : '', // max height as kit prop not global prop to control overflow-y
     globalProps(props),
     className
   )

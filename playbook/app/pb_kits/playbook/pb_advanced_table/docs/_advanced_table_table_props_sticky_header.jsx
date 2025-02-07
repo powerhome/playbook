@@ -2,7 +2,7 @@ import React from "react"
 import { AdvancedTable } from "playbook-ui"
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
-const AdvancedTableTableProps = (props) => {
+const AdvancedTableTablePropsStickyHeader = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -36,7 +36,6 @@ const AdvancedTableTableProps = (props) => {
   ]
 
   const tableProps = {
-    container: false,
     sticky: true
   }
 
@@ -44,7 +43,7 @@ const AdvancedTableTableProps = (props) => {
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
-          responsive="none"
+          maxHeight="xs"
           tableData={MOCK_DATA}
           tableProps={tableProps}
           {...props}
@@ -53,4 +52,4 @@ const AdvancedTableTableProps = (props) => {
   )
 }
 
-export default AdvancedTableTableProps
+export default AdvancedTableTablePropsStickyHeader
