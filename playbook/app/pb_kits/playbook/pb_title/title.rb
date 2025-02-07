@@ -22,7 +22,7 @@ module Playbook
         if is_size_responsive
           generate_classname("pb_title_kit", variant, color, is_bold) + generate_responsive_size_classname
         else
-          generate_classname("pb_title_kit", size, variant, color, is_bold, generate_display_size)
+          generate_classname("pb_title_kit", size, variant, color, is_bold) + generate_display_size
         end
       end
 
