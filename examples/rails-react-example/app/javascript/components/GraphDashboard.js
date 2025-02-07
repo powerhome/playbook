@@ -27,16 +27,19 @@ const GraphDashboard = () => {
             { name: "Canceled", change: "decrease", value: 18 },
             { name: "Repeat Sales" }
           ].map((item) => (
-            <ListItem
-              key={item.name}
-              className={`display_flex justify_content_space_between p_sm ${category === item.name ? "active" : ""}`}
-              onClick={() => {
-                console.log("WTF")
-                setCategory(item.name)
-              }}
-            >
-              <span>{item.name}</span>
-              {item.value && <StatChange change={item.change} value={item.value} />}
+            <ListItem key={item.name } className={`p_sm ${category === item.name ? "active" : ""}`}>
+              <div
+                className="display_flex justify_content_space_between width_100_percent"
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  console.log("Clicked:", item.name);
+                  setCategory(item.name);
+                }}
+              >
+                <span>{item.name}</span>
+                {item.value && <StatChange change={item.change} value={item.value} />}
+              </div>
             </ListItem>
           ))}
         </List>

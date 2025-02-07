@@ -4,7 +4,8 @@ var ReactRailsUJS = require('react_ujs')
 // eslint-disable-next-line react-hooks/rules-of-hooks
 ReactRailsUJS.useContext(componentRequireContext)
 
-// import GraphDashboard from "../components/GraphDashboard"; // Adjust path as needed
+import WebpackerReact from "webpacker-react";
+import GraphDashboard from "../components/GraphDashboard"; // Ensure the path is correct
 
-// ReactRailsUJS.register({ GraphDashboard });
-// registerReactComponent('GraphDashboard', GraphDashboard);
+// Register GraphDashboard with Webpacker-React
+WebpackerReact.setup({ GraphDashboard });
