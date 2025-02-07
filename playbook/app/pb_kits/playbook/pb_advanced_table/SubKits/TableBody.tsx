@@ -69,7 +69,7 @@ export const TableBody = ({
           style={style}
       >
         {virtualizer && (
-            virtualizer.getVirtualItems().map(virtualRow => {
+            virtualizer.getVirtualItems().map((virtualRow: any) => {
                 const row = table.getRowModel().rows[virtualRow.index]
                 return (
                     <tr
@@ -83,7 +83,7 @@ export const TableBody = ({
                             width: '100%',
                         }}
                     >
-                        {row.getVisibleCells().map(cell => {
+                        {row.getVisibleCells().map((cell: any) => {
                             return (
                                 <td
                                     key={cell.id}

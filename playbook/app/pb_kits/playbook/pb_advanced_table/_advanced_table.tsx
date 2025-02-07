@@ -308,8 +308,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   useEffect(() => {
     fetchMoreOnBottomReached(tableWrapperRef.current);
   }, [fetchMoreOnBottomReached]);
-
-  const tableWrapperOnScroll = virtualizedRows ? (e) => fetchMoreOnBottomReached(e.currentTarget) : undefined
   // END OF VIRTUALIZED TABLE CODE
 
   useEffect(() => {
@@ -375,7 +373,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         {...htmlProps}
         className={classes} 
         id={id}
-        onScroll={tableWrapperOnScroll}
+        onScroll={virtualizedRows ? e => fetchMoreOnBottomReached(e.currentTarget) : undefined}
         ref={tableWrapperRef}
         style={tableWrapperStyle as React.CSSProperties}
     >
