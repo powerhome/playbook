@@ -1,25 +1,3 @@
-<%
-  options = [
-    {
-      label: "Alerts",
-      value: "Alerts",
-      count: "4",
-      icon: "bell",
-      id: "alerts",
-      link: root_path
-    },
-    {
-      label: "Inbox",
-      value: "Inbox",
-      count: "2",
-      icon: "inbox",
-      id: "inbox",
-      link: root_path
-    }
-  ]
-
-%>
-
 <header>
   <%= pb_rails("background", props: { background_color: "white" }) do %>
     <%= pb_rails("flex", props: { horizontal: "center", padding_y: "sm" }) do %>
@@ -55,7 +33,7 @@
                   avatar: false
                 }) %>
               </div>
-              <%= render "partials/avatar_nav", options: options %>
+              <%= render "partials/avatar_nav", options: user_nav_options %>
             </div>
           <% end %>
         <% end %>
@@ -68,17 +46,10 @@
       <%= pb_rails("flex", props: { horizontal: "center" }) do %>
         <%= pb_rails("flex/flex_item", props: { classname: "body-container" }) do %>
           <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
-            <%= pb_rails("nav/item", props: { image_url: "https://upload.wikimedia.org/wikipedia/commons/0/00/Apple_News_icon_%28macOS%29.png", padding: "sm", text: "Dashboard", link: "#", active: true, classname: 'tooltip-dashboard-trigger' }) %>
-            <%= pb_rails("tooltip", props: {
-                trigger_element_selector: ".tooltip-dashboard-trigger",
-                tooltip_id: "dashboard-tooltip",
-                position: 'top'
-              }) do %>
-                  Dashboard
-            <% end %>
-            <%= pb_rails("nav/item", props: { image_url: "https://upload.wikimedia.org/wikipedia/commons/0/00/Apple_News_icon_%28macOS%29.png", padding: "sm", text: "Products", link: "#" }) %>
-            <%= pb_rails("nav/item", props: { image_url: "https://upload.wikimedia.org/wikipedia/commons/0/00/Apple_News_icon_%28macOS%29.png", padding: "sm", text: "In Progress ", link: "#" }) %>
-            <%= pb_rails("nav/item", props: { image_url: "https://upload.wikimedia.org/wikipedia/commons/0/00/Apple_News_icon_%28macOS%29.png", padding: "sm", text: "Settings", link: "#" }) %>
+            <%= pb_rails("nav/item", props: { padding: "sm", text: "Dashboard", link: "#", active: true }) %>
+            <%= pb_rails("nav/item", props: { padding: "sm", text: "Products", link: "#" }) %>
+            <%= pb_rails("nav/item", props: { padding: "sm", text: "In Progress ", link: "#" }) %>
+            <%= pb_rails("nav/item", props: { padding: "sm", text: "Settings", link: "#" }) %>
           <% end %>
         <% end %>
       <% end %>

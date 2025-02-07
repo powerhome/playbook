@@ -2,16 +2,14 @@ import React, { useState, useEffect } from "react";
 import { List, ListItem, Caption, LineGraph, StatChange } from "playbook-ui";
 
 const GraphDashboard = () => {
-  // Manage selected category
   const [category, setCategory] = useState("Revenue");
   const [chartData, setChartData] = useState([]);
 
-  // Fetch data whenever category changes
   useEffect(() => {
     fetch(`/graphs?category=${category}`)
       .then(response => response.json())
       .then(data => setChartData(data.chart_data));
-  }, [category]); // Re-fetch when category changes
+  }, [category]);
 
   return (
     <div className="display_flex">
@@ -30,13 +28,7 @@ const GraphDashboard = () => {
             <ListItem key={item.name } className={`p_sm ${category === item.name ? "active" : ""}`}>
               <div
                 className="display_flex justify_content_space_between width_100_percent"
-                onClick={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  console.log("Clicked:", item.name);
-                  setCategory(item.name);
-                }}
-              >
+                onClick={(event) => setCategory(item.name)}>
                 <span>{item.name}</span>
                 {item.value && <StatChange change={item.change} value={item.value} />}
               </div>
@@ -58,7 +50,13 @@ const GraphDashboard = () => {
           paddingTop="xl"
           paddingRight="lg"
           colors={["data-2", "data-1", "data-6", "data-7", "data-8", "data-3"]}
-          customOption={{ yAxis: { tickInterval: 1000 } }}
+          customOption={{
+            yAxis: {
+              min: 0,
+              max: 10000,
+              tickPositions: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000], // 🔥 Force exact positions
+            }
+          }}
         />
       </div>
     </div>

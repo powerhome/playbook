@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+#
 class GraphsController < ApplicationController
   def show
     category = params[:category] || "Revenue"

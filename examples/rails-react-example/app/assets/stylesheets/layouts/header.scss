@@ -12,19 +12,5 @@ header {
     }
   }
 
-  .pb_nav_wrapper {
-    .pb_nav_list_item_link {
-      .pb_nav_list_item_text {
-        display: none;
-
-        @media (min-width: $desktop-breakpoint) { display: inline-block; }
-      }
-
-      .pb_nav_img_wrapper {
-        display: block;
-
-        @media (min-width: $desktop-breakpoint) { display: none; }
-      }
-    }
-  }
+  .pb_nav_wrapper { flex-wrap: wrap; }
 }
