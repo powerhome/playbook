@@ -251,6 +251,17 @@
       .bg-white td:first-child {
           background-color: $white;
       }
+      .row-selection-actions-card {
+        border-right-width: 0px;
+        border-left-width: 0px;
+        position: sticky;
+        top: 0;
+        left: 0;
+        border-radius: unset;
+      }
+      .checkbox-cell {
+        display: table-cell !important;
+      }
       .sticky-header {
         thead {
           th:first-child {
