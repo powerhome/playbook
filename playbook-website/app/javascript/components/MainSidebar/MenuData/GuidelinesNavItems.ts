@@ -1,98 +1,98 @@
 export const VisualGuidelinesItems = [
     {
-        name: "Colors",
-        link: "/visual_guidelines/colors"
+        label: "Colors",
+        value: "/visual_guidelines/colors"
     },
     {
-        name: "Width",
-        link: "/visual_guidelines/width"
+        label: "Width",
+        value: "/visual_guidelines/width"
     },
     {
-        name: "Min Width",
-        link: "/visual_guidelines/min_width"
+        label: "Min Width",
+        value: "/visual_guidelines/min_width"
     },
     {
-        name: "Max Width",
-        link: "/visual_guidelines/max_width"
+        label: "Max Width",
+        value: "/visual_guidelines/max_width"
     },
     {
-        name: "Height",
-        link: "/visual_guidelines/height"
+        label: "Height",
+        value: "/visual_guidelines/height"
     },
     {
-        name: "Min Height",
-        link: "/visual_guidelines/min_height"
+        label: "Min Height",
+        value: "/visual_guidelines/min_height"
     },
     {
-        name : "Max Height",
-        link: "/visual_guidelines/max_height"
+        label : "Max Height",
+        value: "/visual_guidelines/max_height"
     },
     {
-        name: "Position",
-        link: "/visual_guidelines/position"
+        label: "Position",
+        value: "/visual_guidelines/position"
     },
     {
-        name: "Vertical Align",
-        link: "/visual_guidelines/vertical_align"
+        label: "Vertical Align",
+        value: "/visual_guidelines/vertical_align"
     },
     {
-        name: "Z-Index",
-        link: "/visual_guidelines/z_index"
+        label: "Z-Index",
+        value: "/visual_guidelines/z_index"
     },
     {
-        name: "Line Height",
-        link: "/visual_guidelines/line_height"
+        label: "Line Height",
+        value: "/visual_guidelines/line_height"
     },
     {
-        name: "Number Spacing",
-        link: "/visual_guidelines/number_spacing"
+        label: "Number Spacing",
+        value: "/visual_guidelines/number_spacing"
     },
     {
-        name: "Shadows",
-        link: "/visual_guidelines/shadows"
+        label: "Shadows",
+        value: "/visual_guidelines/shadows"
     },
     {
-        name: "Spacing",
-        link: "/visual_guidelines/spacing"
+        label: "Spacing",
+        value: "/visual_guidelines/spacing"
     },
     {
-        name: "Border Radius",
-        link: "/visual_guidelines/border_radius"
+        label: "Border Radius",
+        value: "/visual_guidelines/border_radius"
     },
     {
-        name: "Typography",
-        link: "/visual_guidelines/typography"
+        label: "Typography",
+        value: "/visual_guidelines/typography"
     },
     {
-        name: "Display",
-        link: "/visual_guidelines/display"
+        label: "Display",
+        value: "/visual_guidelines/display"
     },
     {
-        name: "Cursor",
-        link: "/visual_guidelines/cursor"
+        label: "Cursor",
+        value: "/visual_guidelines/cursor"
     },
     {
-        name: "Flex Box",
-        link: "/visual_guidelines/flex_box"
+        label: "Flex Box",
+        value: "/visual_guidelines/flex_box"
     },
     {
-        name: "Hover",
-        link: "/visual_guidelines/hover"
+        label: "Hover",
+        value: "/visual_guidelines/hover"
     },
     {
-        name: "Group Hover",
-        link: "/visual_guidelines/group_hover"
+        label: "Group Hover",
+        value: "/visual_guidelines/group_hover"
     },
     {
-        name: "Text Align",
-        link: "/visual_guidelines/text_align"
+        label: "Text Align",
+        value: "/visual_guidelines/text_align"
     },
     {
-        name: "Overflow",
-        link: "/visual_guidelines/overflow"
+        label: "Overflow",
+        value: "/visual_guidelines/overflow"
     },
     {
-        name: "Truncate",
-        link: "/visual_guidelines/truncate"
+        label: "Truncate",
+        value: "/visual_guidelines/truncate"
     },
   ];
