@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Flex, Table, Body, Avatar, Draggable, DraggableProvider } from "playbook-ui";
+import { Flex, Table, Body, Avatar, DraggableProvider } from "playbook-ui";
 
 // Initial items to be dragged
 const data = [
@@ -55,12 +55,12 @@ const DraggableWithTable = (props) => {
               <Table.Header>{"task number"}</Table.Header>
             </Table.Row>
           </Table.Head>
-          <Draggable.Container tag="tbody">
+          <Table.Body draggableContainer>
             {initialState.map(({ id, task, assignee_name, assignee_img }) => (
-              <Draggable.Item
+              <Table.Row 
                   dragId={id} 
-                  key={id} 
-                  tag="tr"
+                  draggableItem
+                  key={id}
               >
                 <Table.Cell>{id}</Table.Cell>
                 <Table.Cell>
@@ -76,9 +76,9 @@ const DraggableWithTable = (props) => {
                   </Flex>
                 </Table.Cell>
                 <Table.Cell>{task}</Table.Cell>
-              </Draggable.Item>
+              </Table.Row>
             ))}
-          </Draggable.Container>
+          </Table.Body>
         </Table>
     </DraggableProvider>
     </>

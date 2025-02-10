@@ -9,6 +9,7 @@ import {
 import { globalProps } from "../../utilities/globalProps";
 import Collapsible from "../../pb_collapsible/_collapsible";
 import useCollapsible from "../../pb_collapsible/useCollapsible";
+import Draggable from "../../pb_draggable/_draggable";
 
 type TableRowPropTypes = {
   aria?: { [key: string]: string };
@@ -19,6 +20,8 @@ type TableRowPropTypes = {
   collapsibleSideHighlight?: boolean;
   data?: { [key: string]: string };
   dark?: boolean;
+  dragId?: string;
+  draggableItem?: boolean;
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   toggleCellId?: string;
@@ -36,6 +39,8 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
     className,
     data = {},
     dark = false,
+    dragId,
+    draggableItem = false,
     htmlOptions = {},
     id,
     toggleCellId,
@@ -152,15 +157,28 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
           </>
         )
       ) : isTableTag ? (
-        <tr
-            {...ariaProps}
-            {...dataProps}
-            {...htmlProps}
-            className={classes}
-            id={id}
-        >
-          {children}
-        </tr>
+        draggableItem ? (
+          <Draggable.Item
+              {...ariaProps}
+              {...dataProps}
+              {...htmlProps}
+              className={classes}
+              dragId={dragId}
+              tag="tr"
+          >
+            {children}
+          </Draggable.Item>
+        ) : (
+          <tr
+              {...ariaProps}
+              {...dataProps}
+              {...htmlProps}
+              className={classes}
+              id={id}
+          >
+            {children}
+          </tr>
+        )
       ) : (
         <div
             {...ariaProps}

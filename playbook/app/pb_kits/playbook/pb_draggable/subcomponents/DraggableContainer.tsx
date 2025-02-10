@@ -46,7 +46,7 @@ const DraggableContainer = (props: DraggableContainerProps) => {
         className={classes}
         id={id}
         key={container}
-        onDragOver={(e) => handleDragOver(e, container)}
+        onDragOver={(e: Event) => handleDragOver(e, container)}
         onDrop={() => handleDrop(container)}
     >
       {children}
