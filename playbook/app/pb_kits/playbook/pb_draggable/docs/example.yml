@@ -5,7 +5,7 @@ examples:
   - draggable_with_selectable_list: Draggable with SelectableList Kit
   - draggable_with_cards: Draggable with Cards
   - draggable_multiple_containers: Dragging Across Multiple Containers
-  - draggable_with_table: Draggable with Table
+  - draggable_with_table_react: Draggable with Table
 
   rails:
   - draggable_default_rails: Default

@@ -35,7 +35,7 @@ const data = [
       }
 ];
 
-const DraggableWithTable = (props) => {
+const DraggableWithTableReact = (props) => {
   const [initialState, setInitialState] = useState(data);
 
   return (
@@ -86,4 +86,4 @@ const DraggableWithTable = (props) => {
   );
 };
 
-export default DraggableWithTable;
+export default DraggableWithTableReact;
