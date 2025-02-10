@@ -1,4 +1,8 @@
 {
+  "engines": {
+    "node": "20.11.0",
+    "yarn": "1.22.15"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.0",
     "@rails/webpacker": "5.4.4",
