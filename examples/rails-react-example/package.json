@@ -22,9 +22,5 @@
   "license": "ISC",
   "scripts": {
     "watch": "NODE_OPTIONS=--openssl-legacy-provider bin/webpack-dev-server"
-  },
-  "engines": {
-    "node": "20.11.0",
-    "yarn": "1.22.15"
   }
 }
