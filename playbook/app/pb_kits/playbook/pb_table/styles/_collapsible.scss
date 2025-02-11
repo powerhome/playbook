@@ -32,9 +32,14 @@
       }
     }
   }
+  
 
   .collapsible-tr {
     cursor: pointer;
+  }
+
+  .collapsible_cell {
+    cursor: default;
   }
 
   .no-border {

@@ -5,6 +5,7 @@
     data: object.data.merge(id: object.id),  
     id: object.id,
     'data-pb-table-collapsible-wrapper' => true,
+    'data-pb-table-collapsible-cell-id' => object.toggle_cell_id,
     **combined_html_options) do %>
     <%= content.presence %>
   <% end %>

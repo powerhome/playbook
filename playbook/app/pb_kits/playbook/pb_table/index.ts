@@ -2,6 +2,7 @@ import PbEnhancedElement from '../pb_enhanced_element'
 
 const TABLE_WRAPPER_SELECTOR = "[data-pb-table-wrapper]";
 const TABLE_COLLAPSIBLE_WRAPPER_SELECTOR = "[data-pb-table-collapsible-wrapper]";
+const TABLE_COLLAPSIBLE_CELL_SELCTOR = "[data-pb-table-collapsible-cell-id]";
 
 export default class PbTable extends PbEnhancedElement {
   stickyLeftColumns: string[] = [];
@@ -34,6 +35,7 @@ export default class PbTable extends PbEnhancedElement {
     this.initStickyRightColumns();
     this.handleCollapsibleClick();
     this.handleCollapsibleRow();
+    // this.handleCollapsibleIconClick();
   }
 
   initStickyLeftColumns() {
@@ -158,18 +160,54 @@ export default class PbTable extends PbEnhancedElement {
   }
 
   handleCollapsibleClick() {
+    const cells = this.element.querySelectorAll(TABLE_COLLAPSIBLE_CELL_SELCTOR);
     const collapsibleElements = this.element.querySelectorAll(TABLE_COLLAPSIBLE_WRAPPER_SELECTOR);
-    collapsibleElements.forEach((collapsibleElement) => {
-      collapsibleElement.addEventListener('click', (event) => {
-        document.dispatchEvent(new CustomEvent(`collapsed-toggle${(event.currentTarget as HTMLElement).id}`))
 
-        const toggleElements = this.element.querySelectorAll(`.collapsible_border_toggle${(event.currentTarget as HTMLElement).id}`);
-        toggleElements.forEach(element => {
-          element.classList.toggle('no-border');
-          element.classList.toggle('border-active');
+    if (cells.length > 0) {
+      cells.forEach((cell) => {
+        const cellId = cell.dataset.pbTableCollapsibleCellId;
+
+        Array.from(cell.children).forEach((child) => {
+          if (child.id === cellId) {
+            Array.from(cell.children).forEach((innerChild) => {
+              if (innerChild.id === cellId) {
+                Array.from(innerChild.children).forEach((svgChild) => {
+                  svgChild.id = cellId;
+                  Array.from(svgChild.children).forEach((pathChild) => {
+                    pathChild.id = cellId;
+                  });
+                });
+              }
+            });
+          }
         });
+
+        cell.addEventListener('click', (event) => {
+          if (event.target.id) {
+            document.dispatchEvent(new CustomEvent(`collapsed-toggle${(event.currentTarget as HTMLElement).id}`));
+
+            const toggleElements = this.element.querySelectorAll(`.collapsible_border_toggle${(event.currentTarget as HTMLElement).id}`);
+            toggleElements.forEach((element) => {
+              element.classList.toggle('no-border');
+              element.classList.toggle('border-active');
+            });
+          }
+        });
+      });
+
+    } else {
+      collapsibleElements.forEach((collapsibleElement) => {
+        collapsibleElement.addEventListener('click', (event) => {
+          document.dispatchEvent(new CustomEvent(`collapsed-toggle${(event.currentTarget as HTMLElement).id}`))
+
+          const toggleElements = this.element.querySelectorAll(`.collapsible_border_toggle${(event.currentTarget as HTMLElement).id}`);
+          toggleElements.forEach(element => {
+            element.classList.toggle('no-border');
+            element.classList.toggle('border-active');
+          });
+        })
       })
-    })
+    }
   }
 
   handleCollapsibleRow() {
