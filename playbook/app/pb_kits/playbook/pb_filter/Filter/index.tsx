@@ -9,7 +9,11 @@ type FilterProps =
       variant?: "popover" | "inline"
     })
 
-const FilterInputs: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface FilterInputsProps {
+  children: React.ReactChild | React.ReactChild[]
+}
+
+const FilterInputs: React.FC<FilterInputsProps> = ({ children }) => {
   return (
     <>
       {children}
@@ -22,7 +26,7 @@ const Filter = ({
   double = false,
   variant = "popover",
   ...templateProps
-  }: FilterProps & { children?: React.ReactNode }): React.ReactElement => {
+  }: FilterProps & { children?: React.ReactNode | React.ReactChild[] }): React.ReactElement => {
    // Function to check if children contain FilterInputs
   const hasFilterInputs = (children: React.ReactNode): boolean => {
     let found = false;
@@ -41,23 +45,28 @@ const Filter = ({
   }
 
   // Function to find and extract FilterInputs children
-  const extractInputs = (children: React.ReactNode): React.ReactNode => {
-    return Children.map(children, child => {
-      if (!isValidElement(child)) return null;
+  const extractInputs = (children: React.ReactNode): React.ReactChild | React.ReactChild[] => {
+    const extractedChildren = Children.toArray(children).reduce<React.ReactChild[]>((acc, child) => {
+      if (!isValidElement(child)) return acc;
 
       if (child.type === FilterInputs) {
-        return child.props.children;
+        const inputChildren = Children.toArray(child.props.children) as React.ReactChild[];
+        return [...acc, ...inputChildren];
       }
 
       if (child.props && child.props.children) {
-        const extractedChildren = extractInputs(child.props.children);
-        if (extractedChildren) {
-          return extractedChildren;
+        const nestedChildren = extractInputs(child.props.children);
+        if (Array.isArray(nestedChildren)) {
+          return [...acc, ...nestedChildren];
+        } else if (nestedChildren) {
+          return [...acc, nestedChildren];
         }
       }
 
-      return null;
-    });
+      return acc;
+    }, []);
+
+    return extractedChildren.length === 1 ? extractedChildren[0] : extractedChildren;
   }
 
   const displayFilter = () => {
