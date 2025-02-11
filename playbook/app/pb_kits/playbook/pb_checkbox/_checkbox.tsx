@@ -6,15 +6,15 @@ import classnames from 'classnames'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type CheckboxProps = {
-  aria?: { [key: string]: string },
+  aria?: {[key: string]: string},
   checked?: boolean,
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   dark?: boolean,
-  data?: { [key: string]: string },
+  data?: {[key: string]: string},
   disabled?: boolean,
   error?: boolean,
-  htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   indeterminate?: boolean,
   name?: string,
@@ -53,13 +53,12 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
       (ref as React.MutableRefObject<HTMLInputElement | null>).current = el
     }
   }
-
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(
-    buildCss('pb_checkbox_kit', checked ? 'checked' : null, error ? 'error' : null, indeterminate ? 'indeterminate' : null),
+    buildCss('pb_checkbox_kit', checked ? 'checked' : null, error ? 'error' : null, indeterminate? 'indeterminate' : null),
     globalProps(props),
     className
   )
@@ -72,19 +71,20 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   }, [indeterminate, checked])
 
   const checkboxChildren = () => {
-    if (children) return children
+    if (children)
+      return (children)
+    else
     return (
-      <input
-          defaultChecked={checked}
-          disabled={disabled}
-          name={name}
-          onChange={onChange}
-          ref={setRefs}
-          tabIndex={tabIndex}
-          type="checkbox"
-          value={value}
-      />
-    )
+    <input
+        defaultChecked={checked}
+        disabled={disabled}
+        name={name}
+        onChange={onChange}
+        ref={setRefs}
+        tabIndex={tabIndex}
+        type="checkbox"
+        value={value}
+    />)
   }
 
   return (
@@ -95,25 +95,27 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         className={classes}
         id={id}
     >
-      {checkboxChildren()}
+      <>{checkboxChildren()}</>
 
-      {!indeterminate && (
+      {!indeterminate &&
         <span className="pb_checkbox_checkmark">
-          <Icon className="check_icon" 
-              fixedWidth 
+          <Icon
+              className="check_icon"
+              fixedWidth
               icon="check"
           />
         </span>
-      )}
+      }
 
-      {indeterminate && (
+      {indeterminate &&
         <span className="pb_checkbox_indeterminate">
-          <Icon className="indeterminate_icon"
+          <Icon
+              className="indeterminate_icon"
               fixedWidth
               icon="minus"
           />
         </span>
-      )}
+      }
 
       <Body
           className="pb_checkbox_label"
@@ -128,5 +130,4 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
 })
 
 Checkbox.displayName = "Checkbox"
-
 export default Checkbox
