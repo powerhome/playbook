@@ -28,15 +28,18 @@ const CheckboxReactHook = () => {
           paddingRight="lg"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Checkbox text="Small"
+          <Checkbox padding="xs"
+              text="Small"
               {...register("Small")}
           />
           <br />
-          <Checkbox text="Medium"
+          <Checkbox padding="xs"
+              text="Medium"
               {...register("Medium")}
           />
           <br />
-          <Checkbox text="Large"
+          <Checkbox padding="xs"
+              text="Large"
               {...register("Large")}
           />
           <br />
@@ -49,9 +52,15 @@ const CheckboxReactHook = () => {
       <Flex align="start"
           orientation="column"
       >
-        <Body text={`Small: ${submittedData.Small ? "true" : "false"}`} />
-        <Body text={`Medium: ${submittedData.Medium ? "true" : "false"}`} />
-        <Body text={`Large: ${submittedData.Large ? "true" : "false"}`} />
+        <Body padding="xs"
+            text={`Small: ${submittedData.Small ? "true" : "false"}`}
+        />
+        <Body padding="xs"
+            text={`Medium: ${submittedData.Medium ? "true" : "false"}`}
+        />
+        <Body padding="xs"
+            text={`Large: ${submittedData.Large ? "true" : "false"}`}
+        />
       </Flex>
     </Flex>
   )
