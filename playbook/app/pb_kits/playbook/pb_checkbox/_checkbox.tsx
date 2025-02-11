@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, forwardRef } from 'react'
 import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
@@ -6,15 +6,15 @@ import classnames from 'classnames'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type CheckboxProps = {
-  aria?: {[key: string]: string},
+  aria?: { [key: string]: string },
   checked?: boolean,
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   dark?: boolean,
-  data?: {[key: string]: string},
+  data?: { [key: string]: string },
   disabled?: boolean,
   error?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
   id?: string,
   indeterminate?: boolean,
   name?: string,
@@ -24,7 +24,7 @@ type CheckboxProps = {
   value?: string,
 } & GlobalProps
 
-const Checkbox = (props: CheckboxProps): React.ReactElement => {
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const {
     aria = {},
     checked = false,
@@ -44,39 +44,47 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
     value = '',
   } = props
 
-  const checkRef = useRef(null)
+  const internalRef = useRef<HTMLInputElement>(null)
+  const setRefs = (el: HTMLInputElement) => {
+    internalRef.current = el
+    if (typeof ref === 'function') {
+      ref(el)
+    } else if (ref) {
+      (ref as React.MutableRefObject<HTMLInputElement | null>).current = el
+    }
+  }
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(
-    buildCss('pb_checkbox_kit', checked ? 'checked' : null, error ? 'error' : null, indeterminate? 'indeterminate' : null),
+    buildCss('pb_checkbox_kit', checked ? 'checked' : null, error ? 'error' : null, indeterminate ? 'indeterminate' : null),
     globalProps(props),
     className
   )
 
   useEffect(() => {
-    if (checkRef.current) {
-      checkRef.current.checked = checked
-      checkRef.current.indeterminate = indeterminate
+    if (internalRef.current) {
+      internalRef.current.checked = checked
+      internalRef.current.indeterminate = indeterminate
     }
   }, [indeterminate, checked])
 
   const checkboxChildren = () => {
-    if (children)
-      return (children)
-    else
+    if (children) return children
     return (
-    <input
-        defaultChecked={checked}
-        disabled={disabled}
-        name={name}
-        onChange={onChange}
-        ref={checkRef}
-        tabIndex={tabIndex}
-        type="checkbox"
-        value={value}
-    />)
+      <input
+          defaultChecked={checked}
+          disabled={disabled}
+          name={name}
+          onChange={onChange}
+          ref={setRefs}
+          tabIndex={tabIndex}
+          type="checkbox"
+          value={value}
+      />
+    )
   }
 
   return (
@@ -87,27 +95,25 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
         className={classes}
         id={id}
     >
-      <>{checkboxChildren()}</>
+      {checkboxChildren()}
 
-      {!indeterminate &&
+      {!indeterminate && (
         <span className="pb_checkbox_checkmark">
-          <Icon
-              className="check_icon"
-              fixedWidth
+          <Icon className="check_icon" 
+              fixedWidth 
               icon="check"
           />
         </span>
-      }
+      )}
 
-      {indeterminate &&
+      {indeterminate && (
         <span className="pb_checkbox_indeterminate">
-          <Icon
-              className="indeterminate_icon"
+          <Icon className="indeterminate_icon"
               fixedWidth
               icon="minus"
           />
         </span>
-      }
+      )}
 
       <Body
           className="pb_checkbox_label"
@@ -119,6 +125,8 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
       </Body>
     </label>
   )
-}
+})
+
+Checkbox.displayName = "Checkbox"
 
 export default Checkbox
