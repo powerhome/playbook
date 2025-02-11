@@ -1,0 +1,96 @@
+<% checkboxes = [
+  { name: 'Coffee', id: 'coffee', checked: false },
+  { name: 'Ice Cream', id: 'ice-cream', checked: false },
+  { name: 'Chocolate', id: 'chocolate', checked: true }
+] %>
+
+<%= pb_rails("flex", props: { justify: "end", margin_bottom: "sm" }) do %>
+    <%= pb_rails("flex", props: { justify: "end", margin_bottom: "sm" }) do %>
+        <%= pb_rails("button", props: { text: "Delete", id: "delete-button" }) %>
+    <% end %>
+<% end %>
+
+<%= pb_rails("table", props: { size: "sm" }) do %>
+    <%= pb_rails("table/table_head") do %>
+        <%= pb_rails("table/table_row") do %>
+            <%= pb_rails("table/table_header") do %>
+                <%= pb_rails("checkbox", props: {
+                    checked: true,
+                    value: "checkbox-value",
+                    name: "main-checkbox-selectable",
+                    indeterminate: true,
+                    id: "checkbox-selectable"
+                }) %>
+            <% end %>
+            <%= pb_rails("table/table_header", props: { text: "Column 1" }) %>
+            <%= pb_rails("table/table_header", props: { text: "Column 2" }) %>
+            <%= pb_rails("table/table_header", props: { text: "Column 3" }) %>
+            <%= pb_rails("table/table_header", props: { text: "Column 4" }) %>
+            <%= pb_rails("table/table_header", props: { text: "Column 5" }) %>
+        <% end %>
+    <% end %>
+    <%= pb_rails("table/table_body") do %>
+        <% checkboxes.each_with_index do |checkbox, index| %>
+            <%= pb_rails("table/table_row") do %>
+                <%= pb_rails("table/table_cell") do %>
+                    <%= pb_rails("checkbox", props: { checked: checkbox[:checked], id: "#{checkbox[:id]}-selectable-checkbox", name: "#{checkbox[:id]}-selectable-checkbox", on_change: "updateCheckboxes(#{index})", value: "check-box value" }) %>
+                <% end %>
+                <%= pb_rails("table/table_cell") do %>
+                    <%= pb_rails("image", props: { alt: "picture of a misty forest", size: "xs", url: "https://unsplash.it/500/400/?image=634" }) %>
+                <% end %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 2" }) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 3" }) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 4" }) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 5" }) %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mainCheckboxWrapper = document.getElementById('checkbox-selectable');
+        const mainCheckbox = document.getElementsByName("main-checkbox-selectable")[0];
+        const childCheckboxes = document.querySelectorAll('input[type="checkbox"][id$="selectable-checkbox"]');
+        const deleteButton = document.getElementById('delete-button');
+
+        const updateDeleteButton = () => {
+            const anyChecked = Array.from(childCheckboxes).some(checkbox => checkbox.checked);
+            deleteButton.style.display = anyChecked ? 'block' : 'none';
+        };
+    
+        const updateMainCheckbox = () => {
+          // Count the number of checked child checkboxes
+          const checkedCount = Array.from(childCheckboxes).filter(cb => cb.checked).length;
+          // Determine if the main checkbox should be in an indeterminate state
+          const indeterminate = checkedCount > 0 && checkedCount < childCheckboxes.length;
+          
+          // Set the main checkbox states
+          mainCheckbox.indeterminate = indeterminate;
+          mainCheckbox.checked = checkedCount > 0;
+    
+          // Determine the icon class to add and remove based on the number of checked checkboxes
+          const iconClassToAdd = checkedCount === 0 ? 'pb_checkbox_checkmark' : 'pb_checkbox_indeterminate';
+          const iconClassToRemove = checkedCount === 0 ? 'pb_checkbox_indeterminate' : 'pb_checkbox_checkmark';
+          
+          // Add and remove the icon class to the main checkbox wrapper
+          mainCheckboxWrapper.querySelector('[data-pb-checkbox-icon-span]').classList.add(iconClassToAdd);
+          mainCheckboxWrapper.querySelector('[data-pb-checkbox-icon-span]').classList.remove(iconClassToRemove);
+          
+          // Toggle the visibility of the checkbox icon based on the indeterminate state
+          mainCheckboxWrapper.getElementsByClassName("indeterminate_icon")[0].classList.toggle('hidden', !indeterminate);
+          mainCheckboxWrapper.getElementsByClassName("check_icon")[0].classList.toggle('hidden', indeterminate);
+
+          updateDeleteButton();
+        };
+    
+        mainCheckbox.addEventListener('change', function() {
+          childCheckboxes.forEach(cb => cb.checked = this.checked);
+          updateMainCheckbox();
+        });
+    
+        childCheckboxes.forEach(cb => {
+          cb.addEventListener('change', updateMainCheckbox);
+        });
+    });
+</script>
