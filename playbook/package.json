@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "14.12.0",
+  "version": "14.13.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
@@ -36,6 +36,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@popperjs/core": "^2.11.8",
+    "classnames": "2.5.1",
     "flatpickr": "^4.6.13",
     "highcharts": "^11.4.8",
     "highcharts-react-official": "^3.2.1",
@@ -65,7 +66,7 @@
     "@typescript-eslint/parser": "4.33.0",
     "@vitejs/plugin-react": "^4.3.1",
     "axe-core": "4.4.3",
-    "classnames": "^2.2.6",
+    "classnames": "2.5.1",
     "eslint": "6.8.0",
     "eslint-plugin-react": "7.31.1",
     "eslint-plugin-react-hooks": "4.6.0",
