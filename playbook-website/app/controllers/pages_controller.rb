@@ -147,6 +147,7 @@ class PagesController < ApplicationController
   end
 
   def kit_show_react
+    @testing = %w[icon icon_circle icon_stat_value icon_value map rich_text_editor]
     @type = "react"
     render template: "pages/kit_show"
   end
