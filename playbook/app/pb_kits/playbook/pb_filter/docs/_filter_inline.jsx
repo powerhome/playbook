@@ -39,17 +39,20 @@ const FilterInline = (props) => {
           <Filter.Inputs>
             <TextInput
                 label="Full Name"
+                marginRight="xs"
                 placeholder="Enter name"
                 {...props}
             />
             <Select
                 blankSelection="Select One..."
                 label="Territory"
+                marginRight="xs"
                 name="location"
                 options={options}
                 {...props}
             />
             <Flex
+                marginTop="xs"
                 spacing="between"
                 {...props}
             >
@@ -90,17 +93,20 @@ const FilterInline = (props) => {
           <Filter.Inputs>
             <TextInput
                 label="Full Name"
+                marginRight="xs"
                 placeholder="Enter name"
                 {...props}
             />
             <Select
                 blankSelection="Select One..."
                 label="Territory"
+                marginRight="xs"
                 name="location"
                 options={options}
                 {...props}
             />
             <Flex
+                marginTop="xs"
                 spacing="between"
                 {...props}
             >
