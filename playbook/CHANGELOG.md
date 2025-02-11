@@ -18,7 +18,7 @@
 - Convert Kits to Use pb_content_tag (File Upload, Filter, Form Group, and Form Pill) ([\#4153](https://github.com/powerhome/playbook/pull/4153)) ([@kangaree](https://github.com/kangaree))
 - Draggable Kit: Simplified API for Card kit for Rails ([\#4161](https://github.com/powerhome/playbook/pull/4161)) ([@skduncan](https://github.com/skduncan))
 - Advanced Table - Add Responsiveness to Rails kit ([\#4151](https://github.com/powerhome/playbook/pull/4151)) ([@skduncan](https://github.com/skduncan))
-- Date Dark Mode Audit (~[\#4174](https://github.com/powerhome/playbook/pull/4174)) ([@cmhorsey](https://github.com/cmhorsey))
+- Date Dark Mode Audit ([\#4174](https://github.com/powerhome/playbook/pull/4174)) ([@cmhorsey](https://github.com/cmhorsey))
 - Advanced Table Highlight In Rails ([\#4180](https://github.com/powerhome/playbook/pull/4180)) ([@cmhorsey](https://github.com/cmhorsey))
 - Enable Global Props for pb_form_with ([\#4098](https://github.com/powerhome/playbook/pull/4098)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
 - Add Loading State to Rails Advanced Table ([\#4162](https://github.com/powerhome/playbook/pull/4162)) ([@nickamantia](https://github.com/nickamantia))
@@ -26,17 +26,17 @@
 
 **Fixed Bugs:**
 - Selectable Rows Action Bar Responsive ([\#4241](https://github.com/powerhome/playbook/pull/4241)) ([@nidaqg](https://github.com/nidaqg))
-- Mask Use PBenahcnedElement ([\#4201](https://github.com/powerhome/playbook/pull/4201)) ([@markdoeswork](https://github.com/markdoeswork))
+- Mask Use PBEnhancedElement ([\#4201](https://github.com/powerhome/playbook/pull/4201)) ([@markdoeswork](https://github.com/markdoeswork))
 - Home Address with fix ([\#4229](https://github.com/powerhome/playbook/pull/4229)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
 - Lightbox Kit - Nitro Bug ([\#4178](https://github.com/powerhome/playbook/pull/4178)) ([@kangaree](https://github.com/kangaree))
 - Alignment Issue for AdvancedTable with Specific Usecases ([\#4184](https://github.com/powerhome/playbook/pull/4184)) ([@nidaqg](https://github.com/nidaqg))
-- Fix Disabled State for Link Variant for Button (~[\#4190](https://github.com/powerhome/playbook/pull/4190)) ([@markdoeswork](https://github.com/markdoeswork))
+- Fix Disabled State for Link Variant for Button ([\#4190](https://github.com/powerhome/playbook/pull/4190)) ([@markdoeswork](https://github.com/markdoeswork))
 
 
 
 **Improvements:**
-- Bump classnames Version (~[\#4219](https://github.com/powerhome/playbook/pull/4219)) ([@cmhorsey](https://github.com/cmhorsey))
-- PB Website - Search Global Props (~[\#4221](https://github.com/powerhome/playbook/pull/4221)) ([@gabbymassaro](https://github.com/gabbymassaro))
+- Bump classnames Version ([\#4219](https://github.com/powerhome/playbook/pull/4219)) ([@cmhorsey](https://github.com/cmhorsey))
+- PB Website - Search Global Props ([\#4221](https://github.com/powerhome/playbook/pull/4221)) ([@gabbymassaro](https://github.com/gabbymassaro))
 - Update Vite version ([\#4182](https://github.com/powerhome/playbook/pull/4182)) ([@markdoeswork](https://github.com/markdoeswork))
 - Example Repo on Alpha for Free Icons to Work ([\#4209](https://github.com/powerhome/playbook/pull/4209)) ([@nidaqg](https://github.com/nidaqg))
 - Fixed Confirmation Toast - Enable "auto close" for RAILS ([\#4179](https://github.com/powerhome/playbook/pull/4179)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
@@ -46,7 +46,7 @@
 - Update Swift Changelog ([\#4172](https://github.com/powerhome/playbook/pull/4172)) ([@isismsilva](https://github.com/isismsilva))
 
 **New Kit:**
-- Copy Button Kit - React Beta (~[\#4143](https://github.com/powerhome/playbook/pull/4143)) ([@kangaree](https://github.com/kangaree))
+- Copy Button Kit - React Beta ([\#4143](https://github.com/powerhome/playbook/pull/4143)) ([@kangaree](https://github.com/kangaree))
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/14.12.0...14.13.0)
 
