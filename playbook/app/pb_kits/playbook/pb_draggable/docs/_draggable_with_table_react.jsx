@@ -72,6 +72,7 @@ const DraggableWithTableReact = (props) => {
                     <Body 
                         paddingLeft="xxs" 
                         text={assignee_name} 
+                        {...props}
                     />
                   </Flex>
                 </Table.Cell>
