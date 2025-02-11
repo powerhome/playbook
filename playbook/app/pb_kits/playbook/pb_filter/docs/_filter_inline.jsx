@@ -36,34 +36,35 @@ const FilterInline = (props) => {
           {...props}
       >
         <form>
-          <TextInput
-              label="Full Name"
-              placeholder="Enter name"
-              {...props}
-          />
-
-          <Select
-              blankSelection="Select One..."
-              label="Territory"
-              name="location"
-              options={options}
-              {...props}
-          />
-          <Flex
-              spacing="between"
-              {...props}
-          >
-            <Button
-                marginRight="xs"
-                text="Apply"
+          <Filter.Inputs>
+            <TextInput
+                label="Full Name"
+                placeholder="Enter name"
                 {...props}
             />
-            <Button
-                text="Clear"
-                variant="secondary"
+            <Select
+                blankSelection="Select One..."
+                label="Territory"
+                name="location"
+                options={options}
                 {...props}
             />
-          </Flex>
+            <Flex
+                spacing="between"
+                {...props}
+            >
+              <Button
+                  marginRight="xs"
+                  text="Apply"
+                  {...props}
+              />
+              <Button
+                  text="Clear"
+                  variant="secondary"
+                  {...props}
+              />
+            </Flex>
+          </Filter.Inputs>
         </form>
       </Filter>
 
@@ -86,34 +87,35 @@ const FilterInline = (props) => {
           {...props}
       >
         <form>
-          <TextInput
-              label="Full Name"
-              placeholder="Enter name"
-              {...props}
-          />
-
-          <Select
-              blankSelection="Select One..."
-              label="Territory"
-              name="location"
-              options={options}
-              {...props}
-          />
-          <Flex
-              spacing="between"
-              {...props}
-          >
-            <Button
-                marginRight="xs"
-                text="Apply"
+          <Filter.Inputs>
+            <TextInput
+                label="Full Name"
+                placeholder="Enter name"
                 {...props}
             />
-            <Button
-                text="Clear"
-                variant="secondary"
+            <Select
+                blankSelection="Select One..."
+                label="Territory"
+                name="location"
+                options={options}
                 {...props}
             />
-          </Flex>
+            <Flex
+                spacing="between"
+                {...props}
+            >
+              <Button
+                  marginRight="xs"
+                  text="Apply"
+                  {...props}
+              />
+              <Button
+                  text="Clear"
+                  variant="secondary"
+                  {...props}
+              />
+            </Flex>
+          </Filter.Inputs>
         </form>
       </Filter>
     </>
