@@ -63,6 +63,16 @@ const TableBody = (props: TableBodyPropTypes): React.ReactElement => {
             {children}
           </tbody>
         )
+      ) : draggableContainer ? (
+        <Draggable.Container
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
+            id={id}
+        >
+          {children}
+        </Draggable.Container>
       ) : (
         <div
             {...ariaProps}

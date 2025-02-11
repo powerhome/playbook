@@ -179,6 +179,16 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
             {children}
           </tr>
         )
+      ) : draggableItem ? (
+        <Draggable.Item
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
+            dragId={dragId}
+        >
+          {children}
+        </Draggable.Item>
       ) : (
         <div
             {...ariaProps}
