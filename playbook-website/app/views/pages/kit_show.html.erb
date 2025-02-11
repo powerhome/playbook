@@ -132,10 +132,12 @@
   <% if (action_name == "kit_show_rails") %>
     <%= pb_kit(kit: @kit, dark_mode: dark_mode?) %>
   <% elsif (action_name == "kit_show_react") %>
-    <% if @testing.include?(@kit) %>
-      <%= render 'layouts/has_dependencies' %>
+    <% if @dependent_kit.include?(@kit) %>
+      <%= render "layouts/has_dependencies/#{@kit}_dependencies" %>
+      <%= pb_kit(kit: @kit, type: "react", dark_mode: dark_mode?) %>
+    <% else %>
+      <%= pb_kit(kit: @kit, type: "react", dark_mode: dark_mode?) %>
     <% end %>
-    <%= pb_kit(kit: @kit, type: "react", dark_mode: dark_mode?) %>
   <% elsif (action_name == "kit_show_swift") %>
     <%= pb_kit(kit: @kit, type: "swift", dark_mode: dark_mode?, show_code: false) %>
   <% end %>
