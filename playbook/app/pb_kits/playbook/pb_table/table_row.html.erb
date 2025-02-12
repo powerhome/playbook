@@ -18,13 +18,19 @@
     <% end %>  
   </tr>
 <% elsif object.tag == "table" %>
-    <%= content_tag(:tr,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: object.id,
-      **combined_html_options) do %>
-      <%= content.presence %>
+    <% if object.draggable_item %>
+      <%= pb_rails("draggable/draggable_item", props:{ drag_id: object.drag_id, tag: "tr", classname: object.classname, data: object.data }) do %>
+        <%= content.presence %>
+      <% end %>
+    <% else %>
+      <%= content_tag(:tr,
+        aria: object.aria,
+        class: object.classname,
+        data: object.data,
+        id: object.id,
+        **combined_html_options) do %>
+        <%= content.presence %>
+      <% end %>
     <% end %>
 <% else %>
     <%= content_tag(:div,

@@ -17,16 +17,19 @@ type DraggableContainerProps = {
   data?: { [key: string]: string };
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col' | 'tbody',
 };
 
 const DraggableContainer = (props: DraggableContainerProps) => {
-  const { aria = {}, children, className, container, data = {}, htmlOptions = {}, id } = props;
+  const { aria = {}, children, className, container, data = {}, htmlOptions = {}, id, tag="div" } = props;
 
   const { handleDragOver, handleDrop, activeContainer } = DraggableContext();
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
+
+  const Tag: React.ReactElement | any = `${tag}`;
 
   const classes = classnames(
     buildCss("pb_draggable_container"),
@@ -36,18 +39,18 @@ const DraggableContainer = (props: DraggableContainerProps) => {
   );
 
   return (
-    <div
+    <Tag
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
         className={classes}
         id={id}
         key={container}
-        onDragOver={(e) => handleDragOver(e, container)}
+        onDragOver={(e: Event) => handleDragOver(e, container)}
         onDrop={() => handleDrop(container)}
     >
       {children}
-    </div>
+    </Tag>
   );
 };
 
