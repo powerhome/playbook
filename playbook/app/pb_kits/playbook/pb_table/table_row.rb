@@ -13,6 +13,10 @@ module Playbook
       prop :collapsible_content
       prop :collapsible_side_highlight, type: Playbook::Props::Boolean,
                                         default: true
+      prop :draggable_item, type: Playbook::Props::Boolean,
+                            default: false
+      prop :drag_id, type: Playbook::Props::String,
+                     default: nil
 
       def classname
         generate_classname("pb_table_row_kit", side_highlight_class) + tag_class

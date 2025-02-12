@@ -43,9 +43,9 @@
       <% end %>
     <% end %>
 
-    <%= pb_rails("draggable/draggable_container", props: {tag:"tbody"}) do %>
+    <%= pb_rails("table/table_body", props: {draggable_container: true}) do %>
       <% initial_items.each do |item| %>
-        <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id], tag:"tr"}) do %>
+        <%= pb_rails("table/table_row", props:{drag_id: item[:id], draggable_item: true}) do %>
           <%= pb_rails("table/table_cell", props: { text: item[:id]}) %>
           <%= pb_rails("table/table_cell") do %>
             <%= pb_rails("flex", props:{align:"center"}) do %>
