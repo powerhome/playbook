@@ -29,6 +29,7 @@ type DatePickerProps = {
   hideLabel?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
+  initializeOnce?: boolean,
   inLine?: boolean,
   inputAria?: { [key: string]: string },
   inputData?: { [key: string]: string },
@@ -73,6 +74,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     hideLabel = false,
     htmlOptions = {},
     id,
+    initializeOnce = false,
     inLine = false,
     inputAria = {},
     inputData = {},
@@ -134,7 +136,7 @@ useEffect(() => {
     yearRange,
     required: false,
   }, scrollContainer)
-})
+}, initializeOnce ? [] : undefined)
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {
     filteredProps.marginBottom = "sm"
