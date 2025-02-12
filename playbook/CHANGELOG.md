@@ -1,5 +1,9 @@
-# 14.13.0
+# 🛠️ 🐉 Rails Draggable Component Just got an Upgrade!
 ##### February 7, 2025
+
+![draggablebannergif](https://github.com/user-attachments/assets/d7ae72ab-c929-4d2f-b4a4-8422c87c7770)
+
+We’ve just rolled out a fresh update to the Rails draggable component, making it simpler to use and quicker to integrate. With new, clearer doc examples, you’ll be up and running in no time.
 
 [14.13.0](https://github.com/powerhome/playbook/tree/14.13.0) full list of changes:
 
