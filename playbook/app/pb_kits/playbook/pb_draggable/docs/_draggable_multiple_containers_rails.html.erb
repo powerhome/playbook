@@ -1,0 +1,99 @@
+<% containers = [
+  "To Do",
+  "In Progress",
+  "Done"
+] %>
+
+<% items_data = [
+  {
+    id: "11",
+    container: "To Do",
+    title: "Task 1",
+    description: "Bug fixes",
+    assignee_name: "Terry Miles",
+    assignee_img: "https://randomuser.me/api/portraits/men/44.jpg",
+  },
+  {
+    id: "12",
+    container: "To Do",
+    title: "Task 2",
+    description: "Documentation",
+    assignee_name: "Sophia Miles",
+    assignee_img: "https://randomuser.me/api/portraits/women/8.jpg",
+  },
+  {
+    id: "13",
+    container: "In Progress",
+    title: "Task 3",
+    description: "Add a variant",
+    assignee_name: "Alice Jones",
+    assignee_img: "https://randomuser.me/api/portraits/women/10.jpg",
+  },
+  {
+    id: "14",
+    container: "To Do",
+    title: "Task 4",
+    description: "Add jest tests",
+    assignee_name: "Mike James",
+    assignee_img: "https://randomuser.me/api/portraits/men/8.jpg",
+  },
+  {
+    id: "15",
+    container: "Done",
+    title: "Task 5",
+    description: "Alpha testing",
+    assignee_name: "James Guy",
+    assignee_img: "https://randomuser.me/api/portraits/men/18.jpg",
+  },
+  {
+    id: "16",
+    container: "In Progress",
+    title: "Task 6",
+    description: "Release",
+    assignee_name: "Sally Jones",
+    assignee_img: "https://randomuser.me/api/portraits/women/28.jpg",
+  },
+] %>
+
+<%= pb_rails("draggable", props: { initial_items: items_data }) do %>
+  <%= pb_rails("flex", props: { justify_content: "center" }) do %>
+    <% containers.each do |container| %>
+      <%= pb_rails("draggable/draggable_container", props: {
+          container: container,
+          width: "xs",
+          padding: "sm",
+          data: { container: container }
+      }) do %>
+        <%= pb_rails("caption", props: { text_align: "center" }) do %><%= container %><% end %>
+        <%= pb_rails("flex", props: {align_items: "stretch", orientation: "column"}) do %>
+          <% items_data.select { |item| item[:container] == container }.each do |item| %>
+            <%= pb_rails("draggable/draggable_item", props: {
+                container: container,
+                drag_id: item[:id]
+            }) do %>
+              <%= pb_rails("card", props: { margin_bottom: "sm", padding: "sm"}) do %>
+                <%= pb_rails("flex", props: { justify: "between" }) do %>
+                  <%= pb_rails("flex/flex_item") do %>
+                    <%= pb_rails("flex") do %>
+                      <%= pb_rails("avatar", props: {
+                          image_url: item[:assignee_img],
+                          name: item[:assignee_name],
+                          size: "xxs"
+                      }) %>
+                      <%= pb_rails("title", props: {
+                          padding_left: "xs",
+                          size: 4,
+                          text: item[:title]
+                      }) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <%= pb_rails("body", props: { padding_top: "xs", text: item[:description] }) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

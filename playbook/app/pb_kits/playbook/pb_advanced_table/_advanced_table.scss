@@ -31,12 +31,12 @@
     width: 100%;
   }
 
-  .row-selection-actions-card {
-    border-bottom-right-radius: 0px !important;
-    border-bottom-left-radius: 0px !important;
-    border-bottom-color: transparent;
-  }
-
+    .row-selection-actions-card {
+      border-bottom-right-radius: 0px !important;
+      border-bottom-left-radius: 0px !important;
+      border-bottom-color: transparent;
+      transition: height 300ms ease;
+    }
   .table-header-cells:first-child {
     min-width: 180px;
   }
@@ -89,11 +89,47 @@
     }
   }
 
-
   .table-header-cells-active:first-child {
     color: $primary !important;
   }
 
+  // Sticky Header
+  .sticky-header {
+    thead {
+      z-index: 3 !important;
+    }
+  }
+
+  // Max height overflow - the below prevents expansion from overflowing container at full screen for responsive and nonresponsive tables
+  &.advanced-table-max-height-xs {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-sm {
+    max-height: 480px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-md {
+    max-height: 768px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-lg {
+    max-height: 1024px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-xl {
+    max-height: 1280px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-xxl {
+    max-height: 1440px;
+    overflow-y: auto;
+  }
+  &.advanced-table-max-height-xxxl {
+    max-height: 1920px;
+    overflow-y: auto;
+  }
+  
   // Icons
   .button-icon {
     display: flex;
@@ -179,7 +215,7 @@
   }
 
   // Responsive Styles
-  @media only screen and (max-width: $screen-xl-min) {  
+  @media only screen and (max-width: $screen-xl-min) {
     &[class*="advanced-table-responsive-scroll"] {
       border-radius: 4px;
       box-shadow: 1px 0 0 0px $border_light,
@@ -215,7 +251,24 @@
       .bg-white td:first-child {
           background-color: $white;
       }
-      
+      .row-selection-actions-card {
+        border-right-width: 0px;
+        border-left-width: 0px;
+        position: sticky;
+        top: 0;
+        left: 0;
+        border-radius: unset;
+      }
+      .checkbox-cell {
+        display: table-cell !important;
+      }
+      .sticky-header {
+        thead {
+          th:first-child {
+            box-shadow: 1px 0 10px -2px $border_light !important;
+          }
+        }
+      }
     }
   }
   @media only screen and (min-width: $screen-xl-min) {
@@ -302,6 +355,14 @@
         }
         .bg-white td:first-child {
           background-color: $bg_dark_card;
+        }
+        .sticky-header {
+          thead {
+            th:first-child {
+              background: $bg_dark;
+              box-shadow: 1px 0 10px -2px $border_dark !important;
+            }
+          }
         }
       }
     }

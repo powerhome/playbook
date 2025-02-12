@@ -4,7 +4,8 @@ import { Caption, Date as FormattedDate, Title } from 'playbook-ui'
 const DateUnstyled = (props) => {
   return (
     <>
-      <Caption size="xs"
+      <Caption {...props}
+          size="xs"
           text="Basic unstyled example"
       />
       <FormattedDate
@@ -15,10 +16,14 @@ const DateUnstyled = (props) => {
 
       <br />
 
-      <Caption size="xs"
+      <Caption {...props}
+
+          size="xs"
           text="Example with wrapping typography kit"
       />
-      <Title size={1}>
+      <Title {...props}
+          size={1}
+      >
         <FormattedDate
             unstyled
             value={new Date('25 Dec 1995')}
@@ -28,10 +33,13 @@ const DateUnstyled = (props) => {
 
       <br />
 
-      <Caption size="xs"
+      <Caption {...props}
+          size="xs"
           text="Example with icon + subcaption"
       />
-      <Caption size="xs">
+      <Caption {...props}
+          size="xs"
+      >
         <FormattedDate
             showDayOfWeek
             showIcon

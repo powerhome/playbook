@@ -33,3 +33,5 @@ export { default as TableWithCollapsibleWithCustomContent } from './_table_with_
 export { default as TableWithCollapsibleWithNestedTable } from './_table_with_collapsible_with_nested_table.jsx'
 export { default as TableWithCollapsibleWithNestedRows } from './_table_with_collapsible_with_nested_rows.jsx'
 export { default as TableWithCollapsibleWithCustomClick } from './_table_with_collapsible_with_custom_click.jsx'
+export { default as TableWithSelectableRows } from './_table_with_selectable_rows.jsx'
+export { default as TableWithClickableRows } from './_table_with_clickable_rows.jsx'

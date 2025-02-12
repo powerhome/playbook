@@ -23,8 +23,8 @@ export type AvatarProps = {
     variant?: string,
     icon?: string
   },
-  data?: {[key: string]: string},
   dark?: boolean,
+  data?: {[key: string]: string},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   imageAlt?: string,
@@ -71,13 +71,13 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
 
   const canShowImage = imageUrl && !error
 
-  const onlineStatusSize = 
+  const onlineStatusSize =
     ['xxs', 'xs'].includes(size) ? 'sm' :
       ['sm', 'md'].includes(size) ? 'md' :
         ['lg', 'xl'].includes(size) ? 'lg' :
           'sm';
 
-  const onlineStatusPositionProps = (["xxs", "xs", "sm"].includes(size)) ? 
+  const onlineStatusPositionProps = (["xxs", "xs", "sm"].includes(size)) ?
     {
       top: { inset: true, value: "0" },
       right: { inset: false, value: "xxs" }
@@ -96,10 +96,10 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
         id={id}
     >
       {componentOverlay ? (
-        <Flex display="display_inline_block" 
+        <Flex display="display_inline_block"
             position="relative"
         >
-          <div className="avatar_wrapper" 
+          <div className="avatar_wrapper"
               data-initials={initials}
           >
             {canShowImage && (
@@ -115,12 +115,14 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
              <Card
                  borderNone
                  borderRadius="rounded"
+                 dark={dark}
                  padding="none"
                  position="absolute"
                  {...getPlacementProps(componentOverlay.placement, size)}
              >
-    
+
             <Badge
+                dark={dark}
                 rounded
                 text={componentOverlay.text}
                 variant={componentOverlay.variant as "error" | "info" | "neutral" | "primary" | "success" | "warning" | "notification"}
@@ -131,11 +133,13 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
             <Card
                 borderNone
                 borderRadius="rounded"
+                dark={dark}
                 htmlOptions={{style: {padding:"2px"}}}
                 position="absolute"
                 {...getPlacementProps(componentOverlay.placement, size)}
             >
               <IconCircle
+                  dark={dark}
                   icon={componentOverlay.icon}
                   size="xxs"
                   variant={componentOverlay.variant as "default" | "royal" | "blue" | "purple" | "teal" | "red" | "yellow" | "orange" | "green"}
@@ -145,7 +149,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
         </Flex>
       ) : (
         <>
-          <div className="avatar_wrapper" 
+          <div className="avatar_wrapper"
               data-initials={initials}
           >
             {canShowImage && (

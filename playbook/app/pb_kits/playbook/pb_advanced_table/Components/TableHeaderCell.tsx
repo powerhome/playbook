@@ -39,8 +39,15 @@ export const TableHeaderCell = ({
   sortIcon,
   table
 }: TableHeaderCellProps) => {
-  const { sortControl, responsive, selectableRows, hasAnySubRows, showActionsBar } =
-    useContext(AdvancedTableContext);
+  const {
+    sortControl,
+    responsive,
+    selectableRows,
+    hasAnySubRows,
+    showActionsBar,
+    inlineRowLoading,
+    isActionBarVisible,
+  } = useContext(AdvancedTableContext);
 
   type justifyTypes = "none" | "center" | "start" | "end" | "between" | "around" | "evenly"
   
@@ -65,7 +72,7 @@ export const TableHeaderCell = ({
  
 const cellClassName = classnames(
   "table-header-cells",
-  `${showActionsBar && "header-cells-with-actions"}`,
+  `${showActionsBar && isActionBarVisible && "header-cells-with-actions"}`,
   `${isChrome() ? "chrome-styles" : ""}`,
   `${enableSorting ? "table-header-cells-active" : ""}`,
   { "pinned-left": responsive === "scroll" && isPinnedLeft },
@@ -91,7 +98,7 @@ const isToggleExpansionEnabled =
 
   let justifyHeader:justifyTypes;
 
-  if (header?.index === 0 && hasAnySubRows) {
+  if (header?.index === 0 && hasAnySubRows || (header?.index === 0 && inlineRowLoading)) {
     justifyHeader = enableSorting ? "between" : "start";
   } else {
     justifyHeader = isLeafColumn ? "end" : "center";
