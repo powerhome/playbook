@@ -164,7 +164,7 @@ export default class PbTable extends PbEnhancedElement {
 
     if (cells.length > 0) {
       cells.forEach((cell) => {
-        const cellId = cell.dataset.pbTableCollapsibleCellId;
+        const cellId = (cell as HTMLElement).dataset.pbTableCollapsibleCellId;
 
         Array.from(cell.children).forEach((child) => {
           if (child.id === cellId) {
@@ -182,7 +182,7 @@ export default class PbTable extends PbEnhancedElement {
         });
 
         cell.addEventListener('click', (event) => {
-          if (event.target.id) {
+          if ((event.target as HTMLElement).id) {
             document.dispatchEvent(new CustomEvent(`collapsed-toggle${(event.currentTarget as HTMLElement).id}`));
 
             const toggleElements = this.element.querySelectorAll(`.collapsible_border_toggle${(event.currentTarget as HTMLElement).id}`);
