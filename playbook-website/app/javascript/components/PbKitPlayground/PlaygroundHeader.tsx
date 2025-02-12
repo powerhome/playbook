@@ -9,7 +9,7 @@ import {
 import playgroundLogo from '../../images/playground-logo.svg'
 
 const PlaygroundHeader = () => {
-  const handleBackNavigation = (event) => {
+  const handleBackNavigation = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     window.location.href = "https://playbook.powerapp.cloud/"
   };
