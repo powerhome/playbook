@@ -178,6 +178,16 @@
     }
   }
 
+  .fullscreen-icon {
+    @extend .button-icon;
+    @extend %primary-color-pseudo;
+    padding: 2px 0;
+
+    &:focus-visible {
+      border-radius: $border_rad_lighter;
+    }
+  }
+
   // Vertical separator
   .table-header-cells:first-child,
   .table-header-cells-custom:first-child,
@@ -213,6 +223,24 @@
     bottom: 0;
     width: 2px;
   }
+
+  // Fullscreen
+  // .advanced-table-fullscreen {
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100vw !important;
+  //   height: 100vh !important;
+  //   max-width: none !important;
+  //   max-height: none !important;
+  //   margin: 0;
+  //   padding: 1rem;
+  //   background: #fff;
+  //   z-index: 1000;
+  //   display: flex;
+  //   flex-direction: column;
+  //   overflow: hidden;
+  // }
 
   // Responsive Styles
   @media only screen and (max-width: $screen-xl-min) {

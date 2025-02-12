@@ -1,6 +1,7 @@
 import React from "react"
-import { AdvancedTable, Button } from "playbook-ui"
+import { AdvancedTable } from "playbook-ui"
 import MOCK_DATA from "./advanced_table_mock_data.json"
+import PAGINATION_MOCK_DATA from "./advanced_table_pagination_mock_data.json"
 
 const AdvancedTableFullscreen = (props) => {
   const columnDefinitions = [
@@ -35,19 +36,30 @@ const AdvancedTableFullscreen = (props) => {
     },
   ]
 
+  const tableProps = {
+    sticky: true
+  }
+
   return (
     <div>
-      <Button 
-          fixedWidth
-          icon="expand"
-          marginBottom="sm"
-          tabIndex={0}
-          text="Fullscreen"
-          variant="secondary"
-      />
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          fullscreenable
+          responsive="none"
           tableData={MOCK_DATA}
+          tableProps={tableProps}
+          {...props}
+      >
+          <AdvancedTable.Header enableSorting />
+          <AdvancedTable.Body />
+      </AdvancedTable>
+      <AdvancedTable
+          columnDefinitions={columnDefinitions}
+          fullscreenable
+          marginTop="xl"
+          responsive="none"
+          tableData={PAGINATION_MOCK_DATA}
+          tableProps={tableProps}
           {...props}
       >
           <AdvancedTable.Header enableSorting />

@@ -39,7 +39,10 @@ export const TableHeader = ({
     hasAnySubRows,
     showActionsBar,
     selectableRows,
-    responsive
+    responsive,
+    isFullscreen,
+    toggleFullscreen,
+    fullscreenable
   } = useContext(AdvancedTableContext)
 
   const classes = classnames(
@@ -79,14 +82,17 @@ export const TableHeader = ({
                 <TableHeaderCell
                     enableSorting={enableSorting}
                     enableToggleExpansion={enableToggleExpansion}
+                    fullscreenable={fullscreenable}
                     handleExpandOrCollapse={handleExpandOrCollapse}
                     header={header}
                     headerChildren={children}
+                    isFullscreen={isFullscreen}
                     isPinnedLeft={isPinnedLeft}
                     key={`${header.id}-header`}
                     loading={loading}
                     sortIcon={sortIcon}
                     table={table}
+                    toggleFullscreen={toggleFullscreen}
                 />
               )
             })}
