@@ -19,6 +19,11 @@ RSpec.describe Playbook::PbIconButton::IconButton do
       .with_default("default")
       .with_values("default", "link")
   }
+  it {
+    is_expected.to define_enum_prop(:size)
+      .with_default("2x")
+      .with_values("1x", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", "xs", "sm", "lg")
+  }
 
   # Test classname generation
   describe "#classname" do
