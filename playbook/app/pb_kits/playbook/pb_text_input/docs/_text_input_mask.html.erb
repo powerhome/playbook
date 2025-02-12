@@ -27,6 +27,20 @@
     placeholder: "123-45-6789"
   }) %>
 
+  <%= pb_rails("text_input", props: {
+    label: "Credit Card",
+    mask: "credit_card",
+    margin_bottom: "md",
+    placeholder: "1234 5678 9012 3456"
+  }) %>
+
+  <%= pb_rails("text_input", props: {
+    label: "CVV",
+    mask: "cvv",
+    margin_bottom: "md",
+    placeholder: "123"
+  }) %>
+
   <%= pb_rails("title" , props: {
     text: "Hidden Input Under The Hood",
     padding_bottom: "sm"

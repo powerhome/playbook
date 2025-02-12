@@ -7,11 +7,14 @@ import {
 } from "../../utilities/props";
 import { globalProps } from "../../utilities/globalProps";
 
+import Draggable from "../../pb_draggable/_draggable"
+
 type TableBodyPropTypes = {
   aria?: { [key: string]: string };
   children: React.ReactNode[] | React.ReactNode;
   className: string;
   data?: { [key: string]: string };
+  draggableContainer?: boolean;
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   tag?: "table" | "div";
@@ -23,6 +26,7 @@ const TableBody = (props: TableBodyPropTypes): React.ReactElement => {
     children,
     className,
     data = {},
+    draggableContainer = false,
     htmlOptions = {},
     id,
     tag = "table",
@@ -37,7 +41,30 @@ const TableBody = (props: TableBodyPropTypes): React.ReactElement => {
   return (
     <>
       {isTableTag ? (
-        <tbody
+        draggableContainer ? (
+          <Draggable.Container
+              {...ariaProps}
+              {...dataProps}
+              {...htmlProps}
+              className={classes}
+              id={id}
+              tag="tbody"
+          >
+            {children}
+          </Draggable.Container>
+        ) : (
+          <tbody
+              {...ariaProps}
+              {...dataProps}
+              {...htmlProps}
+              className={classes}
+              id={id}
+          >
+            {children}
+          </tbody>
+        )
+      ) : draggableContainer ? (
+        <Draggable.Container
             {...ariaProps}
             {...dataProps}
             {...htmlProps}
@@ -45,7 +72,7 @@ const TableBody = (props: TableBodyPropTypes): React.ReactElement => {
             id={id}
         >
           {children}
-        </tbody>
+        </Draggable.Container>
       ) : (
         <div
             {...ariaProps}
