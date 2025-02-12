@@ -123,7 +123,7 @@ class PagesController < ApplicationController
   def kits
     params[:type] ||= "react"
     @type = params[:type]
-    @users = Array.new(``) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     @table_data = advanced_table_mock_data
   end
 

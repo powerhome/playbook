@@ -35,7 +35,6 @@ export default class PbTable extends PbEnhancedElement {
     this.initStickyRightColumns();
     this.handleCollapsibleClick();
     this.handleCollapsibleRow();
-    // this.handleCollapsibleIconClick();
   }
 
   initStickyLeftColumns() {
