@@ -74,8 +74,11 @@ module PlaybookWebsite
         lexer = Rouge::Lexer.find(language)
 
         lexer = Rouge::Lexers::PlainText.new if lexer.nil?
+        puts "::::::::text #{text}"
+        code = text.gsub(/<!--\s*code-sample-ignore-start\s*-->.*?<!--\s*code-sample-ignore-end\s*-->/m, "")
+        puts "::::::::code #{code}"
 
-        formatter.format(lexer.lex(text))
+        formatter.format(lexer.lex(code))
       end
 
       class HTML < Redcarpet::Render::HTML
