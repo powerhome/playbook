@@ -35,6 +35,7 @@ examples:
     - table_with_collapsible_with_nested_rows_rails: Table with Collapsible with Nested Rows
     - table_with_collapsible_with_nested_table_rails: Table with Collapsible with Nested Table
     - table_with_clickable_rows: Table with Clickable Rows
+    - table_with_selectable_rows: Table with Selectable Rows
 
   react:
     - table_sm: Small
@@ -72,3 +73,4 @@ examples:
     - table_with_collapsible_with_nested_rows: Table with Collapsible with Nested Rows
     - table_with_collapsible_with_nested_table: Table with Collapsible with Nested Table
     - table_with_clickable_rows: Table with Clickable Rows
+    - table_with_selectable_rows: Table with Selectable Rows
