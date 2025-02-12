@@ -4,39 +4,32 @@ import playgroundLogo from '../../images/playground-logo.svg';
 const PlaygroundHeader = () => {
   const handleBackNavigation = (event) => {
     event.preventDefault()
-    // if (window.history.length > 1) {
-    //   window.history.back();
-    // } else {
       window.location.href = "https://playbook.powerapp.cloud/";
-    // }
   }
 
   return (
     <>
-      <Flex orientation="row" justify="between" marginTop='sm' marginBottom='sm'>
+      <Flex orientation="row" justify="between" marginTop='xs' marginBottom='xxs'>
 
-        <Flex orientation="row" vertical="stretch">
-        <FlexItem marginLeft='sm'>
+      <Flex orientation="row" vertical="stretch">
             <button
               onClick={handleBackNavigation}
               style={{ background: 'none', border: 'none', cursor: 'pointer' }}
               aria-label="Go Back"
             >
-              <Icon color="primary" fixedWidth icon="chevron-left" size="2x"  marginTop='xxs'/>
+              <Icon color="primary" fixedWidth icon="chevron-left" size="2x"/>
             </button>
-          <Image
-              marginLeft='sm'
-              position="absolute"
-              url={playgroundLogo}
-          />
             <SectionSeparator
               orientation="vertical"
-              color='primary'
+              inline="flex-container"
             />
+          <Image
+              marginLeft='xs'
+              marginBottom='none'
+              url={playgroundLogo}
+          />
 
-         </FlexItem>
-
-    </Flex>
+      </Flex>
         <FlexItem justify="end">
           <Button marginRight='sm' text="Share"/>
         </FlexItem>
