@@ -2,7 +2,7 @@ import PbEnhancedElement from '../pb_enhanced_element'
 
 const TABLE_WRAPPER_SELECTOR = "[data-pb-table-wrapper]";
 const TABLE_COLLAPSIBLE_WRAPPER_SELECTOR = "[data-pb-table-collapsible-wrapper]";
-const TABLE_COLLAPSIBLE_CELL_SELCTOR = "[data-pb-table-collapsible-cell-id]";
+const TABLE_COLLAPSIBLE_CELL_SELECTOR = "[data-pb-table-collapsible-cell-id]";
 
 export default class PbTable extends PbEnhancedElement {
   stickyLeftColumns: string[] = [];
@@ -159,7 +159,7 @@ export default class PbTable extends PbEnhancedElement {
   }
 
   handleCollapsibleClick() {
-    const cells = this.element.querySelectorAll(TABLE_COLLAPSIBLE_CELL_SELCTOR);
+    const cells = this.element.querySelectorAll(TABLE_COLLAPSIBLE_CELL_SELECTOR);
     const collapsibleElements = this.element.querySelectorAll(TABLE_COLLAPSIBLE_WRAPPER_SELECTOR);
 
     if (cells.length > 0) {
@@ -168,19 +168,14 @@ export default class PbTable extends PbEnhancedElement {
 
         Array.from(cell.children).forEach((child) => {
           if (child.id === cellId) {
-            Array.from(cell.children).forEach((innerChild) => {
-              if (innerChild.id === cellId) {
-                Array.from(innerChild.children).forEach((svgChild) => {
-                  svgChild.id = cellId;
-                  Array.from(svgChild.children).forEach((pathChild) => {
-                    pathChild.id = cellId;
-                  });
-                });
-              }
+            Array.from(child.children).forEach((svgChild) => {
+              svgChild.id = cellId; // Assign cellId to SVG child
+              Array.from(svgChild.children).forEach((pathChild) => {
+                pathChild.id = cellId; // Assign cellId to path child
+              });
             });
           }
         });
-
         cell.addEventListener('click', (event) => {
           if ((event.target as HTMLElement).id) {
             document.dispatchEvent(new CustomEvent(`collapsed-toggle${(event.currentTarget as HTMLElement).id}`));
