@@ -9,30 +9,31 @@ import {
 import playgroundLogo from '../../images/playground-logo.svg'
 
 const PlaygroundHeader = () => {
-  const handleBackNavigation = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    window.location.href = "https://playbook.powerapp.cloud/"
-  };
-
   return (
     <>
       <Flex orientation="row" justify="between" marginTop="xs">
         <Flex orientation="row" vertical="stretch">
-          <button
-            onClick={handleBackNavigation}
-            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-            aria-label="Go Back"
+          <Button
+            link="https://playbook.powerapp.cloud/"
+            variant="link"
+            padding="none"
+            marginRight="sm"
           >
-            <Icon color="primary" fixedWidth icon="chevron-left" marginLeft="sm" size="2x" />
-          </button>
+            <Icon color="primary" fixedWidth icon="chevron-left" size="2x" />
+          </Button>
 
-          <SectionSeparator orientation="vertical" inline="flex-container" />
+          <SectionSeparator orientation="vertical" inline="flex-container" marginX="none" />
 
-          <Image marginLeft="xs" marginBottom="none" url={playgroundLogo} />
+          <Image
+            marginLeft="md"
+            marginBottom="none"
+            url={playgroundLogo}
+            alignSelf="center"
+          />
         </Flex>
 
         <FlexItem justify="end">
-          <Button marginBottom="xs" marginRight="lg" text="Share" />
+          <Button disabled marginBottom="xs" marginRight="lg" text="Share" />
         </FlexItem>
       </Flex>
 
