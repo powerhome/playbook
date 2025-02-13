@@ -1,9 +1,4 @@
-<%= content_tag(:div,
-    aria: object.aria_attributes,
-    id: object.id,
-    data: object.data,
-    class: object.classname,
-    **combined_html_options) do %>
+<%= pb_content_tag do %>
 
     <div class="progress_pills_status">
       <% object.with_status do |status| %>
