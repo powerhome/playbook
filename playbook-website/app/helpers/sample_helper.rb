@@ -19,7 +19,7 @@ module SampleHelper
     sample.exist? ? sample.read : ""
   end
 
-  def get_sample_code_content(sample, type)
+  def get_sample_code_content(sample, type, start_code, end_code)
     case type
     when "rails"
       rouge_type = "erb"
@@ -27,7 +27,18 @@ module SampleHelper
       rouge_type = "react"
     end
     code = get_raw_code(sample, type)
-    raw render_code(code, rouge_type)
+    raw render_code(code, rouge_type, start_code, end_code)
+  end
+
+  def get_sample_code(sample, type, start_code, end_code)
+    case type
+    when "rails"
+      rouge_type = "erb"
+    when "react"
+      rouge_type = "react"
+    end
+    code = get_raw_code(sample, type)
+    raw render_code_with_markers(code, rouge_type, start_code, end_code)
   end
 
   def get_category(sample)

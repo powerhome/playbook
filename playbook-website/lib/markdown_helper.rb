@@ -75,10 +75,23 @@ module PlaybookWebsite
 
         lexer = Rouge::Lexers::PlainText.new if lexer.nil?
         puts "::::::::text #{text}"
-        code = text.gsub(/<!--\s*code-sample-ignore-start\s*-->.*?<!--\s*code-sample-ignore-end\s*-->/m, "")
+        # code = text.gsub(/<!--\s*code-sample-ignore-start\s*-->.*?<!--\s*code-sample-ignore-end\s*-->/m, "")
         puts "::::::::code #{code}"
 
-        formatter.format(lexer.lex(code))
+        formatter.format(lexer.lex(extracted_code))
+      end
+
+      def render_code_with_markers(text, language, start_code, end_code)
+        formatter = Rouge::Formatters::HTML.new(scope: ".highlight")
+        lexer = Rouge::Lexer.find(language)
+
+        lexer = Rouge::Lexers::PlainText.new if lexer.nil?
+
+        regex = /#{Regexp.escape(start_code)}(.*?)#{Regexp.escape(end_code)}/m
+
+        extracted = text =~ regex ? ::Regexp.last_match(1).strip : text
+
+        formatter.format(lexer.lex(extracted))
       end
 
       class HTML < Redcarpet::Render::HTML

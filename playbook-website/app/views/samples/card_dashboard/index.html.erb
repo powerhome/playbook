@@ -69,7 +69,7 @@
 
 
   <%# Completion Chart %>
-
+<!-- completion-chart-code-start -->
     <%= pb_rails("card", props: { padding: "none", border_none: true, shadow: "deeper",margin: "sm" }) do %>
       <%= pb_rails("flex", props: {vertical: "center",spacing: "between"}) do %>
         <%= pb_rails("title", props: { text: "Pipeline Chart", tag: "h4", size: 4, padding: "sm" }) %> 
@@ -98,13 +98,14 @@
             <% end %>
       <% end %>
     <% end %>
-
+<!-- completion-chart-code-end -->
+<pre class="highlight"><%= get_sample_code(@sample, current_sample_type, "<!-- completion-chart-code-start -->", "<!-- completion-chart-code-end -->") %></pre>
  
 
  
 
-  <%# Grid %>
- 
+<%# Grid %>
+<!-- grid-code-start -->
     <%= pb_rails("card", props: { border_none: true, shadow: "deeper",padding:"none", margin: "sm"}) do %>
       <div class="gridone">
         <% ticket_data.each do |ticket|%>
@@ -118,11 +119,12 @@
         <% end %>
       </div>
     <% end %>
-
+<!-- grid-code-end -->
+<pre class="highlight"><%= get_sample_code(@sample, current_sample_type, "<!-- grid-code-start -->", "<!-- grid-code-end -->") %></pre>
 
 
   <%# Bar Graph with Legend %>
-  
+<!-- bar-graph-code-start -->
     <%= pb_rails("card", props: { padding: "none", margin: "sm", border_none: true, shadow: "deeper" }) do %>
 
       <%= pb_rails("flex", props: {vertical: "center",spacing: "between"}) do %>
@@ -167,11 +169,11 @@
         <% end %>
 
     <% end %>
-
-
+<!-- bar-graph-code-end -->
+<pre class="highlight"><%= get_sample_code(@sample, current_sample_type, "<!-- bar-graph-code-start -->", "<!-- bar-graph-code-end -->") %></pre>
 
   <%# Number Grid %>
-
+<!-- pipeline-code-start -->
     <%= pb_rails("card", props: { border_none: true, shadow: "deeper", margin:"sm", padding:"none" }) do %>
       
         <div class="gridtwo">
@@ -197,10 +199,12 @@
         </div>
  
     <% end %>
+<!-- pipeline-code-end -->
+<pre class="highlight"><%= get_sample_code(@sample, current_sample_type, "<!-- pipeline-code-start -->", "<!-- pipeline-code-end -->") %></pre>
 
 
   <%# Gauge With Legend %>
-
+<!-- gauge-code-start -->
     <%= pb_rails("card", props: { padding: "none", border_none: true, shadow: "deeper", margin: "sm" }) do %>
 
      <%= pb_rails("flex", props: {vertical: "center",spacing: "between"}) do %>
@@ -243,6 +247,9 @@
       <% end %>
 
     <% end %>
+<!-- gauge-code-end -->
+<pre class="highlight"><%= get_sample_code(@sample, current_sample_type, "<!-- gauge-code-start -->", "<!-- gauge-code-end -->") %></pre>
+
 <style>
 [class^=grid]{
   display: grid;
