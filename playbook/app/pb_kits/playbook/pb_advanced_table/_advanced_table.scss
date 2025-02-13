@@ -225,22 +225,20 @@
   }
 
   // Fullscreen
-  // .advanced-table-fullscreen {
-  //   position: fixed;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100vw !important;
-  //   height: 100vh !important;
-  //   max-width: none !important;
-  //   max-height: none !important;
-  //   margin: 0;
-  //   padding: 1rem;
-  //   background: #fff;
-  //   z-index: 1000;
-  //   display: flex;
-  //   flex-direction: column;
-  //   overflow: hidden;
-  // }
+  &.advanced-table-fullscreen {
+    background: $border_light;
+    // background: $text_lt_lightter;
+    overflow-y: auto;
+    &.dark {
+      background: $border_dark;
+      // background: $text_dk_lighter;
+    }
+    .pb_table {
+      th, td, div, button {
+        font-size: calc(100%);
+      }
+    }
+  }
 
   // Responsive Styles
   @media only screen and (max-width: $screen-xl-min) {
