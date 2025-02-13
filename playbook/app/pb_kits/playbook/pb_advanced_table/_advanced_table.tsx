@@ -65,6 +65,7 @@ type AdvancedTableProps = {
   onRowSelectionChange?: (arg: RowSelectionState) => void
   fullscreenable?: boolean
   onFullscreenChange?: (isFullscreen: boolean) => void
+  getFullscreenControls?: (controls: { toggleFullscreen: () => void }) => void
 } & GlobalProps
 
 const AdvancedTable = (props: AdvancedTableProps) => {
@@ -99,6 +100,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     onRowSelectionChange,
     fullscreenable = false,
     onFullscreenChange,
+    getFullscreenControls,
   } = props
 
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(
@@ -372,6 +374,12 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }, [handleFullscreenChange])
 
+  useEffect(() => {
+    if (getFullscreenControls) {
+      getFullscreenControls({ toggleFullscreen })
+    }
+  }, [getFullscreenControls, toggleFullscreen])
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -380,7 +388,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     `advanced-table-responsive-${responsive}`,
     maxHeight ? `advanced-table-max-height-${maxHeight}` : '',
     isFullscreen && 'advanced-table-fullscreen',
-    // isFullscreen ? `advanced-table-fullscreen` : '',
+    fullscreenable && 'advanced-table-fullscreenable',
     globalProps(props),
     className
   )
