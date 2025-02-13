@@ -4,13 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('#toggle-button-js').addEventListener('click', (e) => {
     e.preventDefault()
     const codeSample = document.querySelector('#show-code-sample')
-    const sampleToggle = document.querySelector('#sample-card-body')
     if (codeSample.style.display === 'none') {
       codeSample.style.display = 'block'
-      sampleToggle.style.display = 'none'
+      codeSample.scrollIntoView();
     } else {
       codeSample.style.display = 'none'
-      sampleToggle.style.display = 'block'
     }
   })
 
