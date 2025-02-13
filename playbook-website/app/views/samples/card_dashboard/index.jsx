@@ -18,6 +18,7 @@ import {
   SectionSeparator,
   Title,
 } from 'playbook-ui'
+import rawContent from './index.jsx?raw'
 
 ////////////////////////////////////////////////////
 //
@@ -85,12 +86,37 @@ const clientData = {
   ],
 }
 
+const CodeSnippet = ({ source, startMarker, endMarker }) => {
+  let snippet = source
+
+  if (startMarker && endMarker) {
+    // Create a regex that matches code between markers written as JavaScript single-line comments.
+    const regex = new RegExp(
+      `\\/\\/\\s*${startMarker}\\s*\\n([\\s\\S]*?)\\n\\/\\/\\s*${endMarker}`,
+      'm'
+    )
+    const match = regex.exec(source)
+    if (match) {
+      snippet = match[1].trim()
+    }
+  }
+
+  return (
+    <pre style={{ background: '#f5f5f5', padding: '1rem', overflowX: 'auto' }}>
+      <code>{snippet}</code>
+    </pre>
+  )
+}
+
+// const snippet = getCodeSnippet(fileSource, 'grid-code-start', 'grid-code-end')
+
 ////////////////////////////////////////////////////
 //
 // Components
 //
 ////////////////////////////////////////////////////
 
+// fullfillment-chart-start
 const FulfillmentChart = ({ chartData, title }) => (
   <Card
       borderNone
@@ -158,7 +184,10 @@ const FulfillmentChart = ({ chartData, title }) => (
 
   </Card>
 )
+// fullfillment-chart-end
 
+
+// grid-code-start
 const GridRowFill = ({ data }) => (
   <Card.Body padding="none">
     <Flex
@@ -181,7 +210,9 @@ const GridRowFill = ({ data }) => (
     </Flex>
   </Card.Body>
 )
+// grid-code-end
 
+// icon-grid-start
 const IconGrid = ({ gridData }) => (
   <Card
       borderNone
@@ -193,6 +224,7 @@ const IconGrid = ({ gridData }) => (
     <GridRowFill data={gridData.slice(2)} />
   </Card>
 )
+// icon-grid-end
 
 const Legend = ({ name, data }) => {
   name = name.toLowerCase().replace(/\s/g, '-')
@@ -228,6 +260,7 @@ const Legend = ({ name, data }) => {
   )
 }
 
+// gauge-start
 const GaugeLegend = ({ title, data, legendData }) => (
   <Card
       borderNone
@@ -276,7 +309,9 @@ const GaugeLegend = ({ title, data, legendData }) => (
     </Card.Body>
   </Card>
 )
+// gauge-end
 
+// bar-graph-start
 const BarGraphLegend = ({ title, data, legendData }) => (
   <Card
       borderNone
@@ -317,6 +352,7 @@ const BarGraphLegend = ({ title, data, legendData }) => (
 
   </Card>
 )
+// bar-graph-end
 
 const GridBlock = ({ data }) => {
   const unit = data.hasOwnProperty('unit') ? `${data.unit}` : ''
@@ -360,6 +396,7 @@ const GridBlock = ({ data }) => {
   )
 }
 
+// number-grid-start
 const NumberGrid = ({ data }) => {
   return (
     <Card
@@ -385,6 +422,7 @@ const NumberGrid = ({ data }) => {
     </Card>
   )
 }
+// number-grid-end
 
 ////////////////////////////////////////////////////
 //
@@ -398,14 +436,39 @@ const CardDashboard = () => {
     <div id="main-dashboard-content">
 
       <FulfillmentChart {...pipelineData} />
-
+      <CodeSnippet 
+        source={rawContent}
+        startMarker={'fullfillment-chart-start'}
+        endMarker={'fullfillment-chart-end'}
+      />
+  
       <IconGrid {...ticketData} />
+      <CodeSnippet 
+        source={rawContent}
+        startMarker={'icon-grid-start'}
+        endMarker={'icon-grid-end'}
+      />
 
       <BarGraphLegend {...salesReport} />
+      <CodeSnippet 
+        source={rawContent}
+        startMarker={'bar-graph-start'}
+        endMarker={'bar-graph-end'}
+      />
 
       <NumberGrid {...clientData} />
+      <CodeSnippet 
+        source={rawContent}
+        startMarker={'number-grid-start'}
+        endMarker={'number-grid-end'}
+      />
 
       <GaugeLegend {...totalRevenue} />
+      <CodeSnippet 
+        source={rawContent}
+        startMarker={'gauge-start'}
+        endMarker={'gauge-end'}
+      />
 
     </div>
   )
