@@ -879,13 +879,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-  - name: avatar_action_button
-    platforms: *1
-    description:
-    status: stable
-    icons_used: true
-    react_rendered: false
-    enhanced_element_used: false
   - name: multiple_users
     platforms: *1
     description: The multiple users kit is used to show that more than one user is
