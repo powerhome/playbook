@@ -6,6 +6,10 @@ PbTextInput.start()
 import PbCopyButton from 'kits/pb_copy_button'
 PbCopyButton.start()
 
+// Drawer
+import PbDrawer from 'kits/pb_drawer'
+PbDrawer.start()
+
 // Forms
 import 'kits/pb_form/pb_form_validation'
 import formHelper from 'kits/pb_form/formHelper'
@@ -18,10 +22,6 @@ window.datePickerHelper = datePickerHelper
 // Dialog
 import dialogHelper from 'kits/pb_dialog/dialogHelper'
 window.dialogHelper = dialogHelper
-
-// Drawer
-import drawerHelper from 'kits/pb_drawer/index'
-window.drawerHelper = drawerHelper
 
 // Lazy image loading
 import 'lazysizes'
