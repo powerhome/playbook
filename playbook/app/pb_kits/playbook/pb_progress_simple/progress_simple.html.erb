@@ -1,13 +1,6 @@
-<%= content_tag(:div,
-class: object.wrapper_classname,
-style: object.style) do %>
-  <%= content_tag(:div,
-  id: object.id,
-  data: object.data_values,
-  class: object.classname,
-  **combined_html_options) do %>
-    <%= content_tag(:div, "",
-      class: "progress_simple_value",
-      style: object.value_style) %>
+<%= pb_content_tag do %>
+  <%= pb_content_tag do %>
+    <%= pb_content_tag(:div, class: "progress_simple_value", style: object.value_style) do %>
+    <% end %>
   <% end %>
 <% end %>
