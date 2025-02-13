@@ -18,6 +18,7 @@ const PlaygroundHeader = () => {
             variant="link"
             padding="none"
             marginRight="sm"
+            marginLeft="sm"
           >
             <Icon color="primary" fixedWidth icon="chevron-left" size="2x" />
           </Button>
