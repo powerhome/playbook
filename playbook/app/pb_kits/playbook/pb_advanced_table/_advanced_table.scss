@@ -178,6 +178,16 @@
     }
   }
 
+  .fullscreen-icon {
+    @extend .button-icon;
+    @extend %primary-color-pseudo;
+    padding: 2px 0;
+
+    &:focus-visible {
+      border-radius: $border_rad_lighter;
+    }
+  }
+
   // Vertical separator
   .table-header-cells:first-child,
   .table-header-cells-custom:first-child,
@@ -212,6 +222,22 @@
     top: 0;
     bottom: 0;
     width: 2px;
+  }
+
+  // Fullscreen
+  &.advanced-table-fullscreen {
+    background: $border_light;
+    // background: $text_lt_lightter;
+    overflow-y: auto;
+    &.dark {
+      background: $border_dark;
+      // background: $text_dk_lighter;
+    }
+    .pb_table {
+      th, td, div, button {
+        font-size: calc(100%);
+      }
+    }
   }
 
   // Responsive Styles

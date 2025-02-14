@@ -11,6 +11,7 @@ import Checkbox from "../../pb_checkbox/_checkbox"
 
 import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
+import { FullscreenIconButton } from "./FullscreenIconButton"
 
 import { isChrome } from "../Utilities/BrowserCheck"
 
@@ -47,6 +48,9 @@ export const TableHeaderCell = ({
     showActionsBar,
     inlineRowLoading,
     isActionBarVisible,
+    isFullscreen,
+    toggleFullscreen,
+    fullscreenable,
   } = useContext(AdvancedTableContext);
 
   type justifyTypes = "none" | "center" | "start" | "end" | "between" | "around" | "evenly"
@@ -103,6 +107,10 @@ const isToggleExpansionEnabled =
   } else {
     justifyHeader = isLeafColumn ? "end" : "center";
   }
+
+  // Fullscreen Icon
+  const isFirstColumn = header?.index === 0
+  const showFullscreenToggle = isFirstColumn && fullscreenable && !loading
   
   return (
     <th
@@ -176,6 +184,12 @@ const isToggleExpansionEnabled =
                 />
               ))}
           </Flex>
+          {showFullscreenToggle && (
+            <FullscreenIconButton
+                isFullscreen={isFullscreen}
+                onClick={toggleFullscreen}
+            />
+          )}
         </Flex>
       )}
     </th>

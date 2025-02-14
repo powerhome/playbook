@@ -63,6 +63,9 @@ type AdvancedTableProps = {
   tableProps?: GenericObject
   toggleExpansionIcon?: string | string[]
   onRowSelectionChange?: (arg: RowSelectionState) => void
+  fullscreenable?: boolean
+  onFullscreenChange?: (isFullscreen: boolean) => void
+  getFullscreenControls?: (controls: { toggleFullscreen: () => void }) => void
 } & GlobalProps
 
 const AdvancedTable = (props: AdvancedTableProps) => {
@@ -95,6 +98,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     tableProps,
     toggleExpansionIcon = "arrows-from-line",
     onRowSelectionChange,
+    fullscreenable = false,
+    onFullscreenChange,
+    getFullscreenControls,
   } = props
 
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(
@@ -285,17 +291,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     setExpanded(updatedRows)
   }
 
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
-  const htmlProps = buildHtmlProps(htmlOptions)
-  const classes = classnames(
-    buildCss("pb_advanced_table"),
-    `advanced-table-responsive-${responsive}`,
-    maxHeight ? `advanced-table-max-height-${maxHeight}` : '', // max height as kit prop not global prop to control overflow-y
-    globalProps(props),
-    className
-  )
-
   const onPageChange = (page: number) => {
     table.setPageIndex(page - 1)
   }
@@ -314,12 +309,97 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }
   }, [isActionBarVisible]);
 
+  // Fullscreen
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const tableRef = useRef<HTMLDivElement>(null)
+
+  const enterFullscreen = useCallback(async () => {
+    const element = tableRef.current
+    if (!element) return
+  
+    try {
+      if (element.requestFullscreen) {
+        await element.requestFullscreen()
+      } else if ((element as any).webkitRequestFullscreen) {
+        await (element as any).webkitRequestFullscreen()
+      } else if ((element as any).msRequestFullscreen) {
+        await (element as any).msRequestFullscreen()
+      }
+    } catch (error) {
+      console.error('Error attempting to enable fullscreen:', error)
+    }
+  }, [])
+
+  const exitFullscreen = useCallback(async () => {
+    try {
+      if (document.exitFullscreen) {
+        await document.exitFullscreen()
+      } else if (document.webkitExitFullscreen) {
+        await document.webkitExitFullscreen()
+      } else if (document.msExitFullscreen) {
+        await document.msExitFullscreen()
+      }
+    } catch (error) {
+      console.error('Error exiting fullscreen:', error)
+    }
+  }, [])
+
+  const toggleFullscreen = useCallback(() => {
+    if (isFullscreen) {
+      exitFullscreen()
+    } else {
+      enterFullscreen()
+    }
+  }, [isFullscreen, enterFullscreen, exitFullscreen])
+
+  const handleFullscreenChange = useCallback(() => {
+    const isCurrentlyFullscreen = !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.msFullscreenElement
+    )
+    setIsFullscreen(isCurrentlyFullscreen)
+    onFullscreenChange?.(isCurrentlyFullscreen)
+  }, [onFullscreenChange])
+
+  useEffect(() => {
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange)
+    document.addEventListener('msfullscreenchange', handleFullscreenChange)
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange)
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange)
+      document.removeEventListener('msfullscreenchange', handleFullscreenChange)
+    }
+  }, [handleFullscreenChange])
+
+  useEffect(() => {
+    if (getFullscreenControls) {
+      getFullscreenControls({ toggleFullscreen })
+    }
+  }, [getFullscreenControls, toggleFullscreen])
+
+  const ariaProps = buildAriaProps(aria)
+  const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
+  const classes = classnames(
+    buildCss("pb_advanced_table"),
+    `advanced-table-responsive-${responsive}`,
+    maxHeight ? `advanced-table-max-height-${maxHeight}` : '',
+    isFullscreen && 'advanced-table-fullscreen',
+    fullscreenable && 'advanced-table-fullscreenable',
+    globalProps(props),
+    className
+  )
+  
   return (
     <div {...ariaProps} 
         {...dataProps} 
         {...htmlProps}
         className={classes} 
         id={id}
+        ref={tableRef}
     >
       <AdvancedTableContext.Provider
           value={{
@@ -338,7 +418,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             toggleExpansionIcon,
             showActionsBar,
             selectableRows,
-            hasAnySubRows
+            hasAnySubRows,
+            isFullscreen,
+            toggleFullscreen,
+            fullscreenable
           }}
       >
         <>
