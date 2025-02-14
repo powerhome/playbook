@@ -1,0 +1,16 @@
+@import "settings/variables";
+
+header {
+  .logo-text { font-size: 30px !important; }
+
+  [class*=pb_dropdown] {
+    .dropdown_wrapper {
+      .pb_dropdown_container {
+        width: 250px;
+        right: 0;
+      }
+    }
+  }
+
+  .pb_nav_wrapper { flex-wrap: wrap; }
+}

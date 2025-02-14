@@ -1,0 +1,34 @@
+
+<div class="graph-nav">
+  <%= pb_rails("caption", props: { text: "MENU", size: 'md', color: "light", padding_x: 'sm', padding_y: 'xs' }) %>
+
+  <%= pb_rails("list", props: { ordered: false, dark: false, borderless: false }) do %>
+    <%= pb_rails("list/item", props: { classname: "display_flex justify_content_space_between p_sm active" }) do %>
+      <span>Revenue</span>
+      <%= pb_rails("stat_change", props: { change: "increase", value: 25 }) %>
+    <% end %>
+
+    <%= pb_rails("list/item", props: { classname: "display_flex justify_content_space_between p_sm" }) do %>
+      <span>Orders</span>
+      <%= pb_rails("stat_change", props: { change: "decrease", value: 2 }) %>
+    <% end %>
+
+    <%= pb_rails("list/item", props: { classname: "display_flex justify_content_space_between p_sm" }) do %>
+      <span>Profit</span>
+      <%= pb_rails("stat_change", props: { change: "increase", value: 5 }) %>
+    <% end %>
+
+    <%= pb_rails("list/item", props: { classname: "display_flex justify_content_space_between p_sm" }) do %>
+      <span>Average Check</span>
+    <% end %>
+
+    <%= pb_rails("list/item", props: { classname: "display_flex justify_content_space_between p_sm" }) do %>
+      <span>Canceled</span>
+      <%= pb_rails("stat_change", props: { change: "decrease", value: 18 }) %>
+    <% end %>
+
+    <%= pb_rails("list/item", props: { classname: "display_flex justify_content_space_between p_sm" }) do %>
+      <span>Repeat Sales</span>
+    <% end %>
+  <% end %>
+</div>

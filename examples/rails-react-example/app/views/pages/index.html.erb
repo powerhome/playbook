@@ -1,9 +1,95 @@
-<%# If choosing to use React components in Rails views, the following `react_component` helper is already set up. %>
-<%# Please use the components/App.tsx file to create your React components.%>
-<%= react_component("App") %>
+<%= pb_rails("flex", props: { horizontal: "center" }) do %>
+  <%= pb_rails("flex/flex_item", props: { classname: "body-container", padding_y: 'xl' }) do %>
 
+      <div class="pb_md">
+        <%= pb_rails("caption", props: { text: "DASHBOARD", size: 'md', color: "light" }) %>
+        <%= pb_rails("title", props: { text: "Commerce Dashboard", tag: "h1", bold: false, classname: "main-title"  }) %>
+      </div>
 
-<%# If you want to use the Rails components only, you can use the following example: %>
-<%# Line 3 above can be deleted if choosing to use Rails components only. %>
+      <%= pb_rails("card", props: { padding: "none", classname: 'key-performance-card' }) do %>
+        <%= pb_rails("card/card_body", props: { padding_x: "sm", padding_y: "xs", classname: "display_flex align_items_center justify_content_space_between" }) do %>
+          <strong>Key Performance Indicators</strong>
+          <%= pb_rails("icon_circle", props: { icon: "user", variant: "royal", size: "sm", classname: "user-circle-icon" }) %>
+        <% end %>
 
-<%= pb_rails("button", props: { text: "Button Primary", margin_right: "lg" }) %>
+        <%= pb_rails("section_separator") %>
+
+        <%= pb_rails("card/card_body", props: { padding: "none"  }) do %>
+          <%= react_component("GraphDashboard") %>
+        <% end %>
+      <% end %>
+
+      <%= pb_rails("caption", props: { text: "THIS WEEKS'S TICKET ESCALATIONS", size: 'md', color: "light", padding_y: 'md', text_align: 'center' }) %>
+
+      <%= pb_rails("layout", props: { layout: "collection", margin_bottom: 'md' }) do %>
+        <%= pb_rails("layout/body", props: { classname: 'align_items_start ticket-body' }) do %>
+          <%= render 'partials/ticket_list', title: 'NEW', color: 'info', tickets: @tickets[:new]  %>
+          <%= render 'partials/ticket_list', title: 'MANAGER FEEDBACK', color: 'primary', tickets: @tickets[:feedback] %>
+          <%= render 'partials/ticket_list', title: 'PROCESSING', color: 'warning', tickets: @tickets[:processing] %>
+          <%= render 'partials/ticket_list', title: 'AWAITING FEEDBACK', color: 'error', tickets: @tickets[:awaiting_feedback] %>
+          <%= render 'partials/ticket_list', title: 'APPROVED', color: 'success', tickets: @tickets[:approved] %>
+        <% end %>
+      <% end %>
+
+      <%= pb_rails("layout", props: { layout: "collection" }) do %>
+        <%= pb_rails("layout/body", props: { classname: "pipeline-body" }) do %>
+          <%= pb_rails("card", props: { padding: "none", classname: "pipeline-chart" }) do %>
+            <%= pb_rails("card/card_body", props: { padding: "sm" }) do %>
+              <strong>Pipeline Chart</strong>
+            <% end %>
+
+            <%= pb_rails("section_separator") %>
+
+            <%= pb_rails("list", props: {ordered: false, dark: false, borderless: false}) do %>
+              <% @pipeline_data.each do |line| %>
+                <%= pb_rails("list/item", props: { padding: "sm", classname: "display_flex align_items_center justify_content_space_between" }) do %>
+                  <%= pb_rails("caption", props: { text: line[:title], size: "xs", flex: "2", margin_right: "sm" }) %>
+                  <%= pb_rails("progress_simple", props: { percent: line[:percent], flex: "4" }) %>
+                  <%= pb_rails("caption", props: { text: "#{line[:percent]}%", size: "xs", flex: "0", margin_left: "xs" }) %>
+                  <span class="line-total"><%= number_with_delimiter(line[:total]) %></span>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <%= pb_rails("card", props: { padding: "none" }) do %>
+            <%= pb_rails("card/card_body", props: { padding: "none", classname: "ytd-stats" }) do %>
+              <%= pb_rails("icon_stat_value", props: { icon: "ticket",
+                                                        text: "Tickets (YTD)",
+                                                        size: "md",
+                                                        value: "1,246",
+                                                        variant:"green",
+                                                        classname: "ytd-stat",
+                                                        padding: "sm"
+              }) %>
+              <%= pb_rails("icon_stat_value", props: { icon: "xmark",
+                                                        text: "Overdue (YTD)",
+                                                        size: "md",
+                                                        value: "25",
+                                                        variant:"red",
+                                                        classname: "ytd-stat",
+                                                        padding: "sm"
+              }) %>
+              <%= pb_rails("icon_stat_value", props: { icon: "list-check",
+                                                        text: "Closed without action (YTD)",
+                                                        size: "md",
+                                                        value: "97",
+                                                        variant:"teal",
+                                                        classname: "ytd-stat",
+                                                        padding: "sm"
+              }) %>
+              <%= pb_rails("icon_stat_value", props: { icon: "triangle-exclamation",
+                                                        font_style: "far",
+                                                        text: "Escalated (YTD)",
+                                                        size: "md",
+                                                        value: "896",
+                                                        variant:"yellow",
+                                                        classname: "ytd-stat",
+                                                        padding: "sm"
+              }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+  <% end %>
+<% end %>
