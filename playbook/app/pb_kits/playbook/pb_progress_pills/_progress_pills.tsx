@@ -13,6 +13,7 @@ type ProgressPillsProps = {
   className?: string,
   data?: { [key: string]: string },
   dark?: boolean,
+  fullWidthPill?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   steps?: number,
@@ -20,19 +21,19 @@ type ProgressPillsProps = {
   value?: string,
 }
 
-const ProgressPill = ({ active, dark, steps: step }: ProgressPillsProps) => (
+const ProgressPill = ({ active, dark, steps: step, fullWidthPill }: ProgressPillsProps) => (
   <div
       className={`pb_progress_pill${step <= active ? '_active' : '_inactive'}${dark ? ' dark' : ''
-      }`}
+      }${fullWidthPill ? ' full_width_pill' : ''}`}
       key={step}
   />
 )
 
-const showSteps = (steps: number, active: number, dark: boolean) => {
+const showSteps = (steps: number, active: number, dark: boolean, fullWidthPill: boolean) => {
   const items = []
 
   for (let step = 1; step <= steps; step++) {
-    items.push(ProgressPill({ steps: step, active, dark }))
+    items.push(ProgressPill({ steps: step, active, dark, fullWidthPill }))
   }
 
   return items
@@ -44,6 +45,7 @@ const ProgressPills = (props: ProgressPillsProps) => {
     aria = { hidden: 'true' },
     className,
     data = {},
+    fullWidthPill = false,
     htmlOptions = {},
     id,
     steps = 3,
@@ -79,7 +81,7 @@ const ProgressPills = (props: ProgressPillsProps) => {
               text={value}
           />
         </div>}
-      <div className="progress_pills">{showSteps(steps, active, dark)}</div>
+      <div className="progress_pills">{showSteps(steps, active, dark, fullWidthPill)}</div>
     </div>
   )
 }

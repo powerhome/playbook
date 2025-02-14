@@ -30,6 +30,11 @@ RSpec.describe Playbook::PbProgressPills::ProgressPills do
       .with_default(nil)
   }
 
+  it {
+    is_expected.to define_boolean_prop(:full_width_pill)
+      .with_default(false)
+  }
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_progress_pills_kit"

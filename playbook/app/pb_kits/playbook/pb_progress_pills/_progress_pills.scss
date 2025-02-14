@@ -3,7 +3,8 @@
 @import "../tokens/border_radius";
 
 @mixin pb_progress_pill {
-  width: 45px;
+  width: 100%;
+  max-width: 45px;
   height: 4px;
   border-radius: $border_rad_light;
   margin-right: $space_xs;
@@ -26,6 +27,10 @@
 
   [class*=pb_progress_pill] {
     @include pb_progress_pill;
+
+    &.full_width_pill {
+      max-width: none;
+    }
 
     &[class*=_inactive] {
       background-color: $border_light;
