@@ -16,7 +16,7 @@ const TableWithCollapsible = (props) => {
     );
   };
 
-return (
+  return (
       <Table
           size="sm"
           {...props}
