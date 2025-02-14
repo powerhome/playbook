@@ -11,6 +11,7 @@ examples:
   react:
   - checkbox_default: Default
   - checkbox_checked: Load as checked
+  - checkbox_react_hook: React Hook Form
   - checkbox_custom: Custom Checkbox
   - checkbox_error: Default w/ Error
   - checkbox_indeterminate: Indeterminate Checkbox

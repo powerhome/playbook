@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, forwardRef } from 'react'
 import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
@@ -24,7 +24,7 @@ type CheckboxProps = {
   value?: string,
 } & GlobalProps
 
-const Checkbox = (props: CheckboxProps): React.ReactElement => {
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const {
     aria = {},
     checked = false,
@@ -44,7 +44,15 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
     value = '',
   } = props
 
-  const checkRef = useRef(null)
+  const internalRef = useRef<HTMLInputElement>(null)
+  const setRefs = (el: HTMLInputElement) => {
+    internalRef.current = el
+    if (typeof ref === 'function') {
+      ref(el)
+    } else if (ref) {
+      (ref as React.MutableRefObject<HTMLInputElement | null>).current = el
+    }
+  }
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -56,9 +64,9 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
   )
 
   useEffect(() => {
-    if (checkRef.current) {
-      checkRef.current.checked = checked
-      checkRef.current.indeterminate = indeterminate
+    if (internalRef.current) {
+      internalRef.current.checked = checked
+      internalRef.current.indeterminate = indeterminate
     }
   }, [indeterminate, checked])
 
@@ -72,7 +80,7 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
         disabled={disabled}
         name={name}
         onChange={onChange}
-        ref={checkRef}
+        ref={setRefs}
         tabIndex={tabIndex}
         type="checkbox"
         value={value}
@@ -119,6 +127,7 @@ const Checkbox = (props: CheckboxProps): React.ReactElement => {
       </Body>
     </label>
   )
-}
+})
 
+Checkbox.displayName = "Checkbox"
 export default Checkbox

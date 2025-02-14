@@ -106,3 +106,19 @@ test('has disabled attribute', () => {
   const input = kit.querySelector('input')
   expect(input).toHaveAttribute('disabled')
 }) 
+
+test('has ref in the input element', () => {
+  const ref = React.createRef()
+    render(
+      <Checkbox
+          data={{ testid: testId }}
+          name="checkbox-name"
+          ref={ref}
+          text="Checkbox"
+          value="check-box value"
+      />
+  )
+
+  expect(ref.current).not.toBeNull()
+  expect(ref.current?.tagName).toBe('INPUT')
+})
