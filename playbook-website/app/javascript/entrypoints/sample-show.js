@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('#show-code-sample').style.display = 'none'
+
   document.querySelector('#toggle-button-js').addEventListener('click', (e) => {
     e.preventDefault()
-    document.querySelector('.pb--codeCopy').classList.toggle('close')
-  })
-
-  document.addEventListener('click', (e) => {
-    const openDrawer = document.querySelector('.pb--codeCopy')
-    const codeToggle = document.querySelector('#toggle-button-js')
-    if (!(e.target == openDrawer || openDrawer.contains(e.target) || e.target == codeToggle || codeToggle.contains(e.target))) {
-      openDrawer.classList.add('close')
+    const codeSample = document.querySelector('#show-code-sample')
+    if (codeSample.style.display === 'none') {
+      codeSample.style.display = 'block'
+      codeSample.scrollIntoView();
+    } else {
+      codeSample.style.display = 'none'
     }
   })
 
