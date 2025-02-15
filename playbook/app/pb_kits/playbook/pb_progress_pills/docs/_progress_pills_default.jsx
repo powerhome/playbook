@@ -10,6 +10,13 @@ const ProgressPillsDefault = (props) => {
                 steps={3}
                 {...props}
             />
+            <ProgressPills
+                active={9}
+                aria={{ label: '9 out of 18 steps complete' }}
+                marginTop="md"
+                steps={18}
+                {...props}
+            />
         </>
     )
 }
