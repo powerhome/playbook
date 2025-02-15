@@ -33,7 +33,7 @@ module Playbook
                   default: nil
       prop :font_style, type: Playbook::Props::Enum,
                         values: %w[far fas fab fak],
-                        default: "far"
+                        default: "fas"
       prop :spin, type: Playbook::Props::Boolean,
                   default: false
       prop :color, type: Playbook::Props::String
@@ -207,7 +207,7 @@ module Playbook
       end
 
       def font_style_class
-        font_style ? font_style.to_s : "far"
+        font_style ? font_style.to_s : "fas"
       end
 
       def spin_class

@@ -16,7 +16,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-user pb_icon_kit fa-fw far")
+        expect(kit).toHaveClass("fa-user pb_icon_kit fa-fw fas")
     })
 
     test("renders rotate prop", () => {[
@@ -31,7 +31,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass(`fa-user pb_icon_kit fa-fw fa-rotate-${rotateProp} far`)
+        expect(kit).toHaveClass(`fa-user pb_icon_kit fa-fw fa-rotate-${rotateProp} fas`)
 
         cleanup()
     })
@@ -48,7 +48,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-user pb_icon_kit fa-fw fa-flip-horizontal far")
+        expect(kit).toHaveClass("fa-user pb_icon_kit fa-fw fa-flip-horizontal fas")
     })
 
 
@@ -63,7 +63,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-spinner pb_icon_kit fa-fw fa-spin far")
+        expect(kit).toHaveClass("fa-spinner pb_icon_kit fa-fw fa-spin fas")
     })
 
     test("renders pull icon", () => {
@@ -77,7 +77,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-arrow-left pb_icon_kit fa-fw fa-pull-left far")
+        expect(kit).toHaveClass("fa-arrow-left pb_icon_kit fa-fw fa-pull-left fas")
     })
 
     test("renders pull icon", () => {
@@ -91,7 +91,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-arrow-left pb_icon_kit fa-fw fa-pull-left far")
+        expect(kit).toHaveClass("fa-arrow-left pb_icon_kit fa-fw fa-pull-left fas")
     })
 
     test("renders border around icon", () => {
@@ -105,7 +105,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-user pb_icon_kit fa-border fa-fw far")
+        expect(kit).toHaveClass("fa-user pb_icon_kit fa-border fa-fw fas")
     })
 
     test("renders size prop", () => {
@@ -132,7 +132,7 @@ describe("Icon Kit", () => {
             )
     
             const kit = screen.getByTestId(testId)
-            expect(kit).toHaveClass(`pb_icon_kit fa-user fa-fw fa-${sizeProp} far`)
+            expect(kit).toHaveClass(`pb_icon_kit fa-user fa-fw fa-${sizeProp} fas`)
 
             cleanup()
         }) 

@@ -31,7 +31,7 @@ module Playbook
       prop :form, default: nil
       prop :icon_font_family, type: Playbook::Props::Enum,
                               values: %w[far fas fab fak],
-                              default: "far"
+                              default: "fas"
 
       def options
         options = {

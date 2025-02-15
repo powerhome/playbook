@@ -192,7 +192,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     maxDate,
     minDate,
     mode,
-    nextArrow: '<i class="far fa-angle-right"></i>',
+    nextArrow: '<i class="fas fa-angle-right"></i>',
     onOpen: [() => {
       calendarResizer()
       window.addEventListener('resize', calendarResizer)
@@ -213,7 +213,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     plugins: setPlugins(thisRangesEndToday, customQuickPickDates),
     position,
     positionElement: getPositionElement(positionElement),
-    prevArrow: '<i class="far fa-angle-left"></i>',
+    prevArrow: '<i class="fas fa-angle-left"></i>',
     static: staticPosition,
   })
 
