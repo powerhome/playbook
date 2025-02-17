@@ -328,6 +328,11 @@ class PagesController < ApplicationController
     read_kit_file("_#{example}.jsx")
   end
 
+  def tokens
+    @page_title = "Tokens"
+    @show_sidebar = true
+  end
+
   helper_method :get_source
 
 private
