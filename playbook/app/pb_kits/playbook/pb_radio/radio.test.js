@@ -86,3 +86,19 @@ test('has disabled attribute', () => {
   expect(input).toHaveAttribute('disabled')
 })
 
+
+test('has ref in the input element', () => {
+  const ref = React.createRef()
+    render(
+      <Radio
+          data={{ testid: testId }}
+          name="Radio-name"
+          ref={ref}
+          text="Radio"
+          value="radio value"
+      />
+  )
+
+  expect(ref.current).not.toBeNull()
+  expect(ref.current?.tagName).toBe('INPUT')
+})
