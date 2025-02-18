@@ -15,3 +15,15 @@ default
 }) do  %>
 xl
 <% end %>
+
+
+
+<%= pb_rails("button", props: { text: "Open Right", data: {"open-drawer": "drawer-right"} }) %>
+
+<%= pb_rails("drawer", props: { 
+    id:"drawer-right", 
+    size: "md",
+    placement: "right"
+}) do  %>
+right
+<% end %>
