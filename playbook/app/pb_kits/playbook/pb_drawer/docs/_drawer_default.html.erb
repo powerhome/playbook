@@ -3,5 +3,15 @@
 <%= pb_rails("drawer", props: { 
     id:"drawer-1", 
 }) do  %>
-hi
+default
+<% end %>
+
+
+<%= pb_rails("button", props: { text: "Open Drawer", data: {"open-drawer": "drawer-2"} }) %>
+
+<%= pb_rails("drawer", props: { 
+    id:"drawer-2", 
+    size: "xl"
+}) do  %>
+xl
 <% end %>
