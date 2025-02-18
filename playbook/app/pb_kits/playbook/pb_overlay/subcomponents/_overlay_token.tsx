@@ -1,15 +1,15 @@
-import React from 'react'
-import { OverlayChildrenProps } from '../_overlay'
+import React, { useRef, useEffect, useState } from 'react';
+import { OverlayChildrenProps } from '../_overlay';
 
 const previousOverlayDirectionMap: { [key: string]: string } = {
     "x": "left",
     "y": "top",
-}
+};
 
 const subsequentOverlayDirectionMap: { [key: string]: string } = {
     "x": "right",
     "y": "bottom",
-}
+};
 
 const OverlayToken = (props: OverlayChildrenProps) => {
     const {
@@ -17,32 +17,75 @@ const OverlayToken = (props: OverlayChildrenProps) => {
         color,
         position,
         size,
-    } = props
+    } = props;
 
-    const hasSubsequentOverlay = position === "x" || position === "y"
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const [isAtStart, setIsAtStart] = useState(true);
+    const [isAtEnd, setIsAtEnd] = useState(false);
+
+
+    const handleScroll = () => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            const { scrollLeft, scrollWidth, clientWidth } = container;
+            const atStart = scrollLeft === 0;
+            const atEnd = scrollLeft + clientWidth >= scrollWidth - 1; 
+
+            setIsAtStart(atStart);
+            setIsAtEnd(atEnd);
+
+            if (atStart) {
+                console.log('Horizontal scrollbar is at the start');
+            } else if (atEnd) {
+                console.log('Horizontal scrollbar is at the end');
+            }
+        }
+    };
+
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.addEventListener('scroll', handleScroll);
+            handleScroll();
+            return () => {
+                container.removeEventListener('scroll', handleScroll);
+            };
+        }
+    }, []);
+
+    const hasSubsequentOverlay = position === "x" || position === "y";
 
     const getPreviousOverlayDirection = () => {
-        return hasSubsequentOverlay ? previousOverlayDirectionMap[position] : position
-    }
+        return hasSubsequentOverlay ? previousOverlayDirectionMap[position] : position;
+    };
 
     const getSubsequentOverlayDirection = () => {
-        return hasSubsequentOverlay ? subsequentOverlayDirectionMap[position] : position
-    }
+        return hasSubsequentOverlay ? subsequentOverlayDirectionMap[position] : position;
+    };
 
-    const previousOverlayClassName = `overlay_${color}_${getPreviousOverlayDirection()}_${size}`
-    const subsequentOverlayClassName = `overlay_${color}_${getSubsequentOverlayDirection()}_${size}`
+    const previousOverlayClassName = `overlay_${color}_${getPreviousOverlayDirection()}_${size}`;
+    const subsequentOverlayClassName = `overlay_${color}_${getSubsequentOverlayDirection()}_${size}`;
 
     return (
         <>
-            <div className={previousOverlayClassName} />
+        
+            <div className={isAtStart ? '' : previousOverlayClassName} />
 
-            {children}
-
-            { hasSubsequentOverlay &&
-                <div className={subsequentOverlayClassName} />
+    
+            <div
+                ref={scrollContainerRef}
+                style={{
+                    overflowX: 'auto', 
+                    width: '100%',
+                }}
+            >
+                {children}
+            </div>
+            {hasSubsequentOverlay &&
+                <div className={isAtEnd ? '' : subsequentOverlayClassName} />
             }
         </>
-    )
-}
+    );
+};
 
-export default OverlayToken
+export default OverlayToken;
