@@ -28,6 +28,10 @@
   [class*=pb_progress_pill] {
     @include pb_progress_pill;
 
+    &.full_width_pill {
+      max-width: none;
+    }
+
     &[class*=_inactive] {
       background-color: $border_light;
       &.dark {
