@@ -14,9 +14,25 @@ module Playbook
                       default: "floating"
       prop :overlay, type: Playbook::Props::Boolean,
                      default: true
+      prop :border, type: Playbook::Props::Enum,
+                    values: %w[full none right left],
+                    default: "none"
 
       def classname
-        generate_classname("pb_drawer pb_drawer_#{size}_#{placement}")
+        generate_classname("pb_drawer pb_drawer_#{size}_#{placement} #{border_classes}")
+      end
+
+      def border_classes
+        case border
+        when "full"
+          "drawer_border-full"
+        when "right"
+          "drawer_border-right"
+        when "left"
+          "drawer_border-left"
+        else
+          ""
+        end
       end
 
       def overlay_close
