@@ -13,9 +13,14 @@ module Playbook
       prop :collapsible_content
       prop :collapsible_side_highlight, type: Playbook::Props::Boolean,
                                         default: true
+      prop :toggle_cell_id, type: Playbook::Props::String
+      prop :draggable_item, type: Playbook::Props::Boolean,
+                            default: false
+      prop :drag_id, type: Playbook::Props::String,
+                     default: nil
 
       def classname
-        generate_classname("pb_table_row_kit", side_highlight_class) + tag_class
+        generate_classname("pb_table_row_kit", side_highlight_class) + tag_class + collapsible_cell_class
       end
 
       def side_highlight_class
@@ -24,6 +29,14 @@ module Playbook
 
       def tag_class
         " pb_table_tr"
+      end
+
+      def collapsible_cell_class
+        if toggle_cell_id
+          " collapsible_cell"
+        else
+          ""
+        end
       end
     end
   end

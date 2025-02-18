@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect, useCallback, useRef } from "react"
 import classnames from "classnames"
 
 import { GenericObject } from "../types"
@@ -27,6 +27,7 @@ import FlexItem from "../pb_flex/_flex_item"
 import AdvancedTableContext from "./Context/AdvancedTableContext"
 
 import { updateExpandAndCollapseState } from "./Utilities/ExpansionControlHelpers"
+import { showActionBar, hideActionBar } from "./Utilities/ActionBarAnimationHelper"
 
 import { CustomCell } from "./Components/CustomCell"
 import { TableHeader } from "./SubKits/TableHeader"
@@ -48,6 +49,7 @@ type AdvancedTableProps = {
   initialLoadingRowsCount?: number
   inlineRowLoading?: boolean
   loading?: boolean | string
+  maxHeight?: "auto" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl"
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
   pagination?: boolean,
@@ -79,6 +81,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     initialLoadingRowsCount = 10,
     inlineRowLoading = false,
     loading,
+    maxHeight,
     onRowToggleClick,
     onToggleExpansionClick,
     pagination = false,
@@ -288,6 +291,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const classes = classnames(
     buildCss("pb_advanced_table"),
     `advanced-table-responsive-${responsive}`,
+    maxHeight ? `advanced-table-max-height-${maxHeight}` : '', // max height as kit prop not global prop to control overflow-y
     globalProps(props),
     className
   )
@@ -295,6 +299,20 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const onPageChange = (page: number) => {
     table.setPageIndex(page - 1)
   }
+//When to show the actions bar as a whole
+  const isActionBarVisible = selectableRows && showActionsBar && selectedRowsLength > 0
+
+  //Ref and useEffect for animating the actions bar
+  const cardRef = useRef(null);
+  useEffect(() => {
+    if (cardRef.current) {
+      if (isActionBarVisible) {
+        showActionBar(cardRef.current);
+      } else {
+        hideActionBar(cardRef.current);
+      }
+    }
+  }, [isActionBarVisible]);
 
   return (
     <div {...ariaProps} 
@@ -311,6 +329,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             expandedControl,
             handleExpandOrCollapse,
             inlineRowLoading,
+            isActionBarVisible,
             loading,
             responsive,
             setExpanded,
@@ -333,27 +352,24 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                   total={table.getPageCount()}
                   />
           }
-          {
-            selectableRows && showActionsBar && (
-              <Card className="row-selection-actions-card"
-                  padding="xs"
+          <Card
+              borderNone={!isActionBarVisible}
+              className={`${isActionBarVisible && "show-action-card row-selection-actions-card"}`}
+              htmlOptions={{ ref: cardRef as any }}
+              padding={`${isActionBarVisible ? "xs" : "none"}`}
+          >
+            <Flex alignItems="center" 
+                justify="between"
+            >
+              <Caption color="light" 
+                  paddingLeft="xs" 
+                  size="xs"
               >
-                <Flex alignItems="center"
-                    justify="between"
-                >
-                    <Caption color="light"
-                        paddingLeft="xs"
-                        size="xs"
-                    >
-                      {selectedRowsLength} Selected
-                    </Caption>
-                    <FlexItem>
-                    {actions}
-                    </FlexItem>
-                </Flex>
-              </Card>
-            )
-          }
+                {selectedRowsLength} Selected
+              </Caption>
+              <FlexItem>{actions}</FlexItem>
+            </Flex>
+          </Card>
           <Table
               className={`${loading ? "content-loading" : ""}`}
               dark={dark}
