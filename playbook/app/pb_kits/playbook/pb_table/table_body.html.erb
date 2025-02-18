@@ -1,11 +1,17 @@
 <% if object.tag == "table" %>
-    <%= content_tag(:tbody,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: object.id,
-      **combined_html_options) do %>
-      <%= content.presence %>
+    <% if object.draggable_container %>
+      <%= pb_rails("draggable/draggable_container", props: { tag: "tbody", classname: object.classname, data: object.data }) do %>
+        <%= content.presence %>
+      <% end %>
+    <% else %>
+      <%= content_tag(:tbody,
+        aria: object.aria,
+        class: object.classname,
+        data: object.data,
+        id: object.id,
+        **combined_html_options) do %>
+        <%= content.presence %>
+      <% end %>
     <% end %>
 <% else %>
     <%= content_tag(:div,

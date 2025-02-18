@@ -17,6 +17,7 @@ examples:
 
   react:
   - bar_graph_default: Default
+  - bar_graph_pb_styles: Playbook Styles
   - bar_graph_legend: Legend
   - bar_graph_legend_position: Legend Position
   - bar_graph_legend_non_clickable: Legend Non Clickable

@@ -4,13 +4,15 @@
 module Playbook
   module PbTextInput
     class TextInput < Playbook::KitBase
-      VALID_MASKS = %w[currency zipCode postalCode ssn].freeze
+      VALID_MASKS = %w[currency zip_code postal_code ssn credit_card cvv].freeze
 
       MASK_PATTERNS = {
         "currency" => '^\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?$',
         "zip_code" => '\d{5}',
         "postal_code" => '\d{5}-\d{4}',
         "ssn" => '\d{3}-\d{2}-\d{4}',
+        "credit_card" => '\d{4} \d{4} \d{4} \d{4}',
+        "cvv" => '\d{3,4}',
       }.freeze
 
       prop :autocomplete, type: Playbook::Props::Boolean,
@@ -34,7 +36,8 @@ module Playbook
       prop :add_on, type: Playbook::Props::NestedProps,
                     nested_kit: Playbook::PbTextInput::AddOn
 
-      prop :mask, type: Playbook::Props::String,
+      prop :mask, type: Playbook::Props::Enum,
+                  values: ["currency", "zip_code", "postal_code", "ssn", "credit_card", "cvv", nil],
                   default: nil
 
       def classname

@@ -1,3 +1,63 @@
+# 🛠️ 🐉 Rails Draggable Component Just got an Upgrade!
+##### February 7, 2025
+
+![draggablebannergif](https://github.com/user-attachments/assets/d7ae72ab-c929-4d2f-b4a4-8422c87c7770)
+
+We’ve just rolled out a fresh update to the Rails draggable component, making it simpler to use and quicker to integrate. With new, clearer doc examples, you’ll be up and running in no time.
+
+[14.13.0](https://github.com/powerhome/playbook/tree/14.13.0) full list of changes:
+
+**Kit Enhancements:**
+- Implement pb_content_tag ([\#4203](https://github.com/powerhome/playbook/pull/4203)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Advanced Table kit: Address Scss Changes and Add maxHeight Prop ([\#4191](https://github.com/powerhome/playbook/pull/4191)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Draggable Kit with Table Kit ([\#4234](https://github.com/powerhome/playbook/pull/4234)) ([@nidaqg](https://github.com/nidaqg))
+- Draggable kit: Add the "cross-container" Functionality to RAILS Kit ([\#4210](https://github.com/powerhome/playbook/pull/4210)) ([@skduncan](https://github.com/skduncan))
+- Advanced Table: Hide Actions Bar Till Rows are Selected ([\#4211](https://github.com/powerhome/playbook/pull/4211)) ([@nidaqg](https://github.com/nidaqg))
+- Copy Kit - Rails ([\#4175](https://github.com/powerhome/playbook/pull/4175)) ([@markdoeswork](https://github.com/markdoeswork))
+- Link Kit Target Prop ([\#4195](https://github.com/powerhome/playbook/pull/4195)) ([@gabbymassaro](https://github.com/gabbymassaro))
+- Progress Step Kit Tooltips Location Fix ([\#4204](https://github.com/powerhome/playbook/pull/4204)) ([@cmhorsey](https://github.com/cmhorsey))
+- Dark Mode Audit Table ([\#4134](https://github.com/powerhome/playbook/pull/4134)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Enable Lightweight User Names in User Kit ([\#4194](https://github.com/powerhome/playbook/pull/4194)) ([@cmhorsey](https://github.com/cmhorsey))
+- Avatar - Dark Mode Audit ([\#4185](https://github.com/powerhome/playbook/pull/4185)) ([@gabbymassaro](https://github.com/gabbymassaro))
+- Convert Kits to Use pb_content_tag (File Upload, Filter, Form Group, and Form Pill) ([\#4153](https://github.com/powerhome/playbook/pull/4153)) ([@kangaree](https://github.com/kangaree))
+- Draggable Kit: Simplified API for Card kit for Rails ([\#4161](https://github.com/powerhome/playbook/pull/4161)) ([@skduncan](https://github.com/skduncan))
+- Advanced Table - Add Responsiveness to Rails kit ([\#4151](https://github.com/powerhome/playbook/pull/4151)) ([@skduncan](https://github.com/skduncan))
+- Date Dark Mode Audit ([\#4174](https://github.com/powerhome/playbook/pull/4174)) ([@cmhorsey](https://github.com/cmhorsey))
+- Advanced Table Highlight In Rails ([\#4180](https://github.com/powerhome/playbook/pull/4180)) ([@cmhorsey](https://github.com/cmhorsey))
+- Enable Global Props for pb_form_with ([\#4098](https://github.com/powerhome/playbook/pull/4098)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Add Loading State to Rails Advanced Table ([\#4162](https://github.com/powerhome/playbook/pull/4162)) ([@nickamantia](https://github.com/nickamantia))
+
+
+**Fixed Bugs:**
+- Selectable Rows Action Bar Responsive ([\#4241](https://github.com/powerhome/playbook/pull/4241)) ([@nidaqg](https://github.com/nidaqg))
+- Mask Use PBEnhancedElement ([\#4201](https://github.com/powerhome/playbook/pull/4201)) ([@markdoeswork](https://github.com/markdoeswork))
+- Home Address with fix ([\#4229](https://github.com/powerhome/playbook/pull/4229)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Lightbox Kit - Nitro Bug ([\#4178](https://github.com/powerhome/playbook/pull/4178)) ([@kangaree](https://github.com/kangaree))
+- Alignment Issue for AdvancedTable with Specific Usecases ([\#4184](https://github.com/powerhome/playbook/pull/4184)) ([@nidaqg](https://github.com/nidaqg))
+- Fix Disabled State for Link Variant for Button ([\#4190](https://github.com/powerhome/playbook/pull/4190)) ([@markdoeswork](https://github.com/markdoeswork))
+
+
+
+**Improvements:**
+- Bump classnames Version ([\#4219](https://github.com/powerhome/playbook/pull/4219)) ([@cmhorsey](https://github.com/cmhorsey))
+- PB Website - Search Global Props ([\#4221](https://github.com/powerhome/playbook/pull/4221)) ([@gabbymassaro](https://github.com/gabbymassaro))
+- Update Vite version ([\#4182](https://github.com/powerhome/playbook/pull/4182)) ([@markdoeswork](https://github.com/markdoeswork))
+- Example Repo on Alpha for Free Icons to Work ([\#4209](https://github.com/powerhome/playbook/pull/4209)) ([@nidaqg](https://github.com/nidaqg))
+- Fixed Confirmation Toast - Enable "auto close" for RAILS ([\#4179](https://github.com/powerhome/playbook/pull/4179)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Update Example App for Tech Challenges ([\#4192](https://github.com/powerhome/playbook/pull/4192)) ([@nidaqg](https://github.com/nidaqg))
+- Search Results on Playbook Website ([\#4171](https://github.com/powerhome/playbook/pull/4171)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Table kit: Add All Collapsible/Expandable Row Doc Examples ([\#4163](https://github.com/powerhome/playbook/pull/4163)) ([@skduncan](https://github.com/skduncan))
+- Update Swift Changelog ([\#4172](https://github.com/powerhome/playbook/pull/4172)) ([@isismsilva](https://github.com/isismsilva))
+
+**New Kit:**
+- Copy Button Kit - React Beta ([\#4143](https://github.com/powerhome/playbook/pull/4143)) ([@kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.12.0...14.13.0)
+
+
+
+
+
 # Table It Like It’s Hot: Row Selection Has Arrived!
 ##### January 24, 2025
 

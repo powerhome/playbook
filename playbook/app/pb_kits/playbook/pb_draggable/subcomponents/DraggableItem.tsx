@@ -18,10 +18,11 @@ type DraggableItemProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   dragId?: string;
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col' | 'tbody',
 };
 
 const DraggableItem = (props: DraggableItemProps) => {
-  const { aria = {}, children, className, container, data = {}, htmlOptions = {},  id, dragId } = props;
+  const { aria = {}, children, className, container, data = {}, htmlOptions = {},  id, dragId, tag="div" } = props;
 
   const { isDragging, handleDragStart, handleDragEnter, handleDragEnd } =
     DraggableContext();
@@ -30,6 +31,8 @@ const DraggableItem = (props: DraggableItemProps) => {
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
 
+  const Tag: React.ReactElement | any = `${tag}`;
+  
   const classes = classnames(
     buildCss("pb_draggable_item"),
     `${isDragging === dragId ? "is_dragging" : ""}`,
@@ -38,7 +41,7 @@ const DraggableItem = (props: DraggableItemProps) => {
   );
 
   return (
-    <div
+    <Tag
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
@@ -51,7 +54,7 @@ const DraggableItem = (props: DraggableItemProps) => {
         onDragStart={() => handleDragStart(dragId, container)}
     >
       {children}
-    </div>
+    </Tag>
   );
 };
 

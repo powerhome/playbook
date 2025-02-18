@@ -27,6 +27,8 @@ export default class PbTextInput extends PbEnhancedElement {
       ssn: 'ssn',
       postal_code: 'postalCode',
       zip_code: 'zipCode',
+      credit_card: 'creditCard',
+      cvv: 'cvv',
     }[maskType];
 
     if (maskKey && INPUTMASKS[maskKey]) {
@@ -45,6 +47,9 @@ export default class PbTextInput extends PbEnhancedElement {
         case "currency":
           sanitizedInput.value = sanitizeCurrency(formattedValue);
           break;
+        case "credit_card":
+          sanitizedInput.value = sanitizeCreditCard(formattedValue);
+          break;
         default:
           sanitizedInput.value = formattedValue;
       }
@@ -61,6 +66,10 @@ function sanitizeSSN(input) {
 
 function sanitizeCurrency(input) {
   return input.replace(/[$,]/g, "");
+}
+
+function sanitizeCreditCard(input) {
+  return input.replace(/\D/g, ""); 
 }
 
 function setCursorPosition(inputElement, cursorPosition, rawValue, formattedValue) {
