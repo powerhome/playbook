@@ -4,7 +4,6 @@
 export { DraggableProvider} from '../pb_kits/playbook/pb_draggable/context'
 export { default as AdvancedTable} from '../pb_kits/playbook/pb_advanced_table/_advanced_table'
 export { default as Avatar } from '../pb_kits/playbook/pb_avatar/_avatar'
-export { default as AvatarActionButton } from '../pb_kits/playbook/pb_avatar_action_button/_avatar_action_button'
 export { default as Background } from '../pb_kits/playbook/pb_background/_background'
 export { default as Badge } from '../pb_kits/playbook/pb_badge/_badge'
 export { default as BarGraph } from '../pb_kits/playbook/pb_bar_graph/_bar_graph'
