@@ -8,6 +8,7 @@ export default class PbDrawer extends PbEnhancedElement {
   connect() {
     this.handleToggleClick = this.handleToggleClick.bind(this)
     this.handleOutsideClick = this.handleOutsideClick.bind(this)
+    this.handleResize = this.handleResize.bind(this)
 
     this._toggleTriggers = Array.from(document.querySelectorAll("[data-open-drawer]"))
     this._toggleTriggers.forEach(el => {
@@ -18,6 +19,9 @@ export default class PbDrawer extends PbEnhancedElement {
     this._wrappers.forEach(el => {
       el.addEventListener("mousedown", this.handleOutsideClick)
     })
+
+    window.addEventListener("resize", this.handleResize)
+    this.handleResize()
   }
 
   disconnect() {
@@ -27,6 +31,7 @@ export default class PbDrawer extends PbEnhancedElement {
     this._wrappers.forEach(el => {
       el.removeEventListener("mousedown", this.handleOutsideClick)
     })
+    window.removeEventListener("resize", this.handleResize)
   }
 
   getOverlay(wrapper) {
@@ -42,11 +47,12 @@ export default class PbDrawer extends PbEnhancedElement {
     const wrapper = dialog.closest(".pb_drawer_wrapper")
     if (!wrapper) return
 
-    // Toggle based on wrapper's "open" state
     if (wrapper.classList.contains("open")) {
       this.closeDrawer(wrapper, dialog)
+      wrapper.dataset.userClosed = "true"
     } else {
       this.openDrawer(wrapper, dialog)
+      wrapper.dataset.userClosed = "false"
     }
   }
 
@@ -56,12 +62,10 @@ export default class PbDrawer extends PbEnhancedElement {
     const placement = wrapper.dataset.placement
     this.handlePushOpen(behavior, size, placement)
 
-    // Show the wrapper and overlay
     wrapper.style.display = ""
     const overlay = this.getOverlay(wrapper)
     if (overlay) overlay.style.display = ""
     
-    // Mark as open
     wrapper.classList.add("open")
     dialog.classList.add("open")
   }
@@ -70,7 +74,6 @@ export default class PbDrawer extends PbEnhancedElement {
     const behavior = wrapper.dataset.behavior
     this.handlePushClose(behavior)
 
-    // Hide the wrapper and overlay
     wrapper.style.display = "none"
     const overlay = this.getOverlay(wrapper)
     if (overlay) overlay.style.display = "none"
@@ -101,6 +104,35 @@ export default class PbDrawer extends PbEnhancedElement {
       this.closeDrawer(wrapper, dialog)
       event.stopPropagation()
     }
+  }
+
+  handleResize() {
+    const breakpointValues = {
+      none: 0,
+      xs: 575,
+      sm: 768,
+      md: 992,
+      lg: 1200,
+      xl: 1400,
+    }
+
+    this._wrappers.forEach(wrapper => {
+      const bp = wrapper.dataset.breakpoint || "none"
+      if (bp === "none") return
+      const threshold = breakpointValues[bp]
+      if (window.innerWidth >= threshold) {
+        if (wrapper.dataset.userClosed !== "true" && !wrapper.classList.contains("open")) {
+          const dialog = wrapper.querySelector(".pb_drawer")
+          if (dialog) this.openDrawer(wrapper, dialog)
+        }
+      } else {
+        if (wrapper.classList.contains("open")) {
+          const dialog = wrapper.querySelector(".pb_drawer")
+          if (dialog) this.closeDrawer(wrapper, dialog)
+        }
+        wrapper.dataset.userClosed = "false"
+      }
+    })
   }
 
   handlePushOpen(behavior, size, placement) {

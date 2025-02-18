@@ -29,14 +29,15 @@ no overlay
 <% end %>
 
 
-<%= pb_rails("button", props: { text: "Open Right", data: {"open-drawer": "drawer-right"} }) %>
+<%= pb_rails("button", props: { text: "Open xl breakpoint", data: {"open-drawer": "drawer-right"} }) %>
 
 <%= pb_rails("drawer", props: { 
     id:"drawer-right", 
     size: "md",
-    placement: "right"
+    placement: "right",
+    breakpoint: "xl"
 }) do  %>
-right
+xl breakpoint
 <% end %>
 
 
