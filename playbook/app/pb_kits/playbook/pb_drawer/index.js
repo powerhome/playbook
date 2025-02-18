@@ -2,7 +2,7 @@ import PbEnhancedElement from "../pb_enhanced_element"
 
 export default class PbDrawer extends PbEnhancedElement {
   static get selector() {
-    return ".pb_drawer_wrapper_rails"
+    return ".pb_drawer_wrapper"
   }
 
   connect() {
@@ -16,18 +16,21 @@ export default class PbDrawer extends PbEnhancedElement {
       this._loadingButton.addEventListener("click", this.handleLoadingClick)
     }
 
+    // Open triggers can be anywhere, find the nearest drawer
     this._openTriggers = Array.from(document.querySelectorAll("[data-open-drawer]"))
     this._openTriggers.forEach(el => {
       el.addEventListener("click", this.handleOpenClick)
     })
 
+    // Close triggers can be anywhere, find the nearest drawer
     this._closeTriggers = Array.from(document.querySelectorAll("[data-close-drawer]"))
     this._closeTriggers.forEach(el => {
       el.addEventListener("click", this.handleCloseClick)
     })
 
-    this._drawers = Array.from(document.querySelectorAll(".pb_drawer_rails"))
-    this._drawers.forEach(el => {
+    // Bind outside click to the wrapper
+    this._wrappers = Array.from(document.querySelectorAll(".pb_drawer_wrapper"))
+    this._wrappers.forEach(el => {
       el.addEventListener("mousedown", this.handleOutsideClick)
     })
   }
@@ -42,7 +45,7 @@ export default class PbDrawer extends PbEnhancedElement {
     this._closeTriggers.forEach(el => {
       el.removeEventListener("click", this.handleCloseClick)
     })
-    this._drawers.forEach(el => {
+    this._wrappers.forEach(el => {
       el.removeEventListener("mousedown", this.handleOutsideClick)
     })
   }
@@ -63,35 +66,55 @@ export default class PbDrawer extends PbEnhancedElement {
   }
 
   handleOpenClick(event) {
-    const open = event.currentTarget
-    const openTriggerData = open.dataset.openDrawer
-    console.log(open.dataset)
-    const targetdrawer = document.getElementById(openTriggerData)
-    if (targetdrawer.open) return
-    targetdrawer.showModal()
+    const trigger = event.currentTarget
+    // Find the nearest wrapper and dialog
+    const wrapper = trigger.closest(".pb_drawer_wrapper") || document.querySelector(".pb_drawer_wrapper")
+    const dialog = wrapper.querySelector(".pb_drawer")
+
+    if (dialog.open) return
+
+    wrapper.style.display = "block"
+    wrapper.querySelector(".pb_drawer_overlay").style.display = "block"
+    dialog.showModal()
   }
 
   handleCloseClick(event) {
-    const close = event.currentTarget
-    const closeTriggerData = close.dataset.closeDrawer
-    const target = document.getElementById(closeTriggerData)
-    if (target) target.close()
+    const trigger = event.currentTarget
+    // Find the nearest wrapper and dialog
+    const wrapper = trigger.closest(".pb_drawer_wrapper") || document.querySelector(".pb_drawer_wrapper")
+    const dialog = wrapper.querySelector(".pb_drawer")
+
+    if (dialog) {
+      wrapper.style.display = "none"
+      wrapper.querySelector(".pb_drawer_overlay").style.display = "none"
+      dialog.close()
+    }
   }
 
   handleOutsideClick(event) {
-    const drawerElement = event.currentTarget
-    const drawerParentDataset = drawerElement.parentElement.dataset
-    if (drawerParentDataset.overlayClick === "overlay_close") return
+    const wrapper = event.currentTarget
+    const dialog = wrapper.querySelector(".pb_drawer")
+    const overlay = wrapper.querySelector(".pb_drawer_overlay")
 
-    const drawerModal = event.target.getBoundingClientRect()
+    if (wrapper.dataset.overlayClick === "overlay_close" && event.target === overlay) {
+      wrapper.style.display = "none"
+      overlay.style.display = "none"
+      dialog.close()
+      event.stopPropagation()
+      return
+    }
+
+    const dialogRect = dialog.getBoundingClientRect()
     const clickedOutside =
-      event.clientX < drawerModal.left ||
-      event.clientX > drawerModal.right ||
-      event.clientY < drawerModal.top ||
-      event.clientY > drawerModal.bottom
+      event.clientX < dialogRect.left ||
+      event.clientX > dialogRect.right ||
+      event.clientY < dialogRect.top ||
+      event.clientY > dialogRect.bottom
 
     if (clickedOutside) {
-      drawerElement.close()
+      wrapper.style.display = "none"
+      overlay.style.display = "none"
+      dialog.close()
       event.stopPropagation()
     }
   }
