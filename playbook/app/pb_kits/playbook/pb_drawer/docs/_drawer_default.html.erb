@@ -17,6 +17,16 @@ xl
 <% end %>
 
 
+<%= pb_rails("button", props: { text: "No overlay", data: {"open-drawer": "no-overlay-drawer"} }) %>
+
+<%= pb_rails("drawer", props: { 
+    id:"no-overlay-drawer", 
+    size: "md",
+    overlay: false,
+}) do  %>
+no overlay
+<% end %>
+
 
 <%= pb_rails("button", props: { text: "Open Right", data: {"open-drawer": "drawer-right"} }) %>
 

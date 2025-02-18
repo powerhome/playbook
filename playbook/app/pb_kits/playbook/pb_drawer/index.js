@@ -6,18 +6,12 @@ export default class PbDrawer extends PbEnhancedElement {
   }
 
   connect() {
-    this.handleOpenClick = this.handleOpenClick.bind(this)
-    this.handleCloseClick = this.handleCloseClick.bind(this)
+    this.handleToggleClick = this.handleToggleClick.bind(this)
     this.handleOutsideClick = this.handleOutsideClick.bind(this)
 
-    this._openTriggers = Array.from(document.querySelectorAll("[data-open-drawer]"))
-    this._openTriggers.forEach(el => {
-      el.addEventListener("click", this.handleOpenClick)
-    })
-
-    this._closeTriggers = Array.from(document.querySelectorAll("[data-close-drawer]"))
-    this._closeTriggers.forEach(el => {
-      el.addEventListener("click", this.handleCloseClick)
+    this._toggleTriggers = Array.from(document.querySelectorAll("[data-open-drawer]"))
+    this._toggleTriggers.forEach(el => {
+      el.addEventListener("click", this.handleToggleClick)
     })
 
     this._wrappers = Array.from(document.querySelectorAll(".pb_drawer_wrapper"))
@@ -27,18 +21,19 @@ export default class PbDrawer extends PbEnhancedElement {
   }
 
   disconnect() {
-    this._openTriggers.forEach(el => {
-      el.removeEventListener("click", this.handleOpenClick)
-    })
-    this._closeTriggers.forEach(el => {
-      el.removeEventListener("click", this.handleCloseClick)
+    this._toggleTriggers.forEach(el => {
+      el.removeEventListener("click", this.handleToggleClick)
     })
     this._wrappers.forEach(el => {
       el.removeEventListener("mousedown", this.handleOutsideClick)
     })
   }
 
-  handleOpenClick(event) {
+  getOverlay(wrapper) {
+    return wrapper.querySelector(".pb_drawer_overlay") || wrapper.querySelector(".pb_drawer_no_overlay")
+  }
+
+  handleToggleClick(event) {
     const trigger = event.currentTarget
     const drawerId = trigger.dataset.openDrawer
     const dialog = document.getElementById(drawerId)
@@ -46,45 +41,51 @@ export default class PbDrawer extends PbEnhancedElement {
 
     const wrapper = dialog.closest(".pb_drawer_wrapper")
     if (!wrapper) return
-    if (dialog.open) return
 
-    // Check push vs. floating, plus size & placement
+    // Toggle based on wrapper's "open" state
+    if (wrapper.classList.contains("open")) {
+      this.closeDrawer(wrapper, dialog)
+    } else {
+      this.openDrawer(wrapper, dialog)
+    }
+  }
+
+  openDrawer(wrapper, dialog) {
     const behavior = wrapper.dataset.behavior
     const size = wrapper.dataset.size
     const placement = wrapper.dataset.placement
     this.handlePushOpen(behavior, size, placement)
 
+    // Show the wrapper and overlay
     wrapper.style.display = ""
-    wrapper.querySelector(".pb_drawer_overlay").style.display = ""
-    dialog.showModal()
+    const overlay = this.getOverlay(wrapper)
+    if (overlay) overlay.style.display = ""
+    
+    // Mark as open
+    wrapper.classList.add("open")
+    dialog.classList.add("open")
   }
 
-  handleCloseClick(event) {
-    const trigger = event.currentTarget
-    const wrapper = trigger.closest(".pb_drawer_wrapper") || document.querySelector(".pb_drawer_wrapper")
-    const dialog = wrapper.querySelector(".pb_drawer")
-    if (!dialog) return
-
+  closeDrawer(wrapper, dialog) {
     const behavior = wrapper.dataset.behavior
     this.handlePushClose(behavior)
 
+    // Hide the wrapper and overlay
     wrapper.style.display = "none"
-    wrapper.querySelector(".pb_drawer_overlay").style.display = "none"
-    dialog.close()
+    const overlay = this.getOverlay(wrapper)
+    if (overlay) overlay.style.display = "none"
+    
+    wrapper.classList.remove("open")
+    dialog.classList.remove("open")
   }
 
   handleOutsideClick(event) {
     const wrapper = event.currentTarget
     const dialog = wrapper.querySelector(".pb_drawer")
-    const overlay = wrapper.querySelector(".pb_drawer_overlay")
+    const overlay = this.getOverlay(wrapper)
 
     if (wrapper.dataset.overlayClick === "overlay_close" && event.target === overlay) {
-      const behavior = wrapper.dataset.behavior
-      this.handlePushClose(behavior)
-
-      wrapper.style.display = "none"
-      wrapper.querySelector(".pb_drawer_overlay").style.display = "none"
-      dialog.close()
+      this.closeDrawer(wrapper, dialog)
       event.stopPropagation()
       return
     }
@@ -97,12 +98,7 @@ export default class PbDrawer extends PbEnhancedElement {
       event.clientY > dialogRect.bottom
 
     if (clickedOutside) {
-      const behavior = wrapper.dataset.behavior
-      this.handlePushClose(behavior)
-
-      wrapper.style.display = "none"
-      wrapper.querySelector(".pb_drawer_overlay").style.display = "none"
-      dialog.close()
+      this.closeDrawer(wrapper, dialog)
       event.stopPropagation()
     }
   }
@@ -136,7 +132,6 @@ export default class PbDrawer extends PbEnhancedElement {
     const body = document.querySelector("body")
     if (!body) return
 
-    // Just like in React
     if (body.classList.contains("PBDrawer__Body--open")) {
       body.classList.add("PBDrawer__Body--close")
     }

@@ -9,10 +9,11 @@ module Playbook
       prop :placement, type: Playbook::Props::Enum,
                        values: %w[left right],
                        default: "left"
-      prop :should_close_on_overlay_click, type: Playbook::Props::Boolean, default: true
       prop :behavior, type: Playbook::Props::Enum,
                       values: %w[floating push],
                       default: "floating"
+      prop :overlay, type: Playbook::Props::Boolean,
+                     default: true
 
       def classname
         generate_classname("pb_drawer pb_drawer_#{size}_#{placement}")
@@ -23,7 +24,7 @@ module Playbook
       end
 
       def overlay_classes
-        "pb_drawer_overlay drawer_content_#{placement} pb_drawer_overlay_after_open"
+        "pb_drawer_#{overlay ? '' : 'no_'}overlay drawer_content_#{placement} pb_drawer_overlay_after_open #{overlay ? '' : 'no-background'}"
       end
     end
   end
