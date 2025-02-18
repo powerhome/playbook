@@ -27,3 +27,16 @@ xl
 }) do  %>
 right
 <% end %>
+
+
+
+<%= pb_rails("button", props: { text: "Push Right", data: {"open-drawer": "drawer-right-push"} }) %>
+
+<%= pb_rails("drawer", props: { 
+    id:"drawer-right-push", 
+    size: "md",
+    placement: "right",
+    behavior: "push"
+}) do  %>
+right push
+<% end %>

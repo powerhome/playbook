@@ -10,6 +10,9 @@ module Playbook
                        values: %w[left right],
                        default: "left"
       prop :should_close_on_overlay_click, type: Playbook::Props::Boolean, default: true
+      prop :behavior, type: Playbook::Props::Enum,
+                      values: %w[floating push],
+                      default: "floating"
 
       def classname
         generate_classname("pb_drawer pb_drawer_#{size}_#{placement}")

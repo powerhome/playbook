@@ -1,4 +1,10 @@
-<div class="pb_drawer_wrapper" style="display:none;" data-overlay-click= <%= object.overlay_close %> >
+<div class="pb_drawer_wrapper"
+     style="display:none;"
+     data-overlay-click="<%= object.overlay_close %>"
+     data-behavior="<%= object.behavior %>"
+     data-size="<%= object.size %>"
+     data-placement="<%= object.placement %>"
+>
     <div class="<%= overlay_classes %>" style="display:none;"> 
         <%= pb_content_tag do %>
             <%= content %>
