@@ -24,14 +24,12 @@ export default class PbTooltip extends PbEnhancedElement {
         })
       } else {
         trigger.addEventListener('mouseenter', () => {
-          console.log('ENTER')
           this.mouseenterTimeout = setTimeout(() => {
             this.showTooltip(trigger)
             this.checkCloseTooltip(trigger)
           }, TOOLTIP_TIMEOUT)
 
           trigger.addEventListener('mouseleave', () => {
-            console.log('LEAVE')
             clearTimeout(this.mouseenterTimeout)
             setTimeout(() => {
               this.hideTooltip()
@@ -106,25 +104,24 @@ export default class PbTooltip extends PbEnhancedElement {
   }
 
   get triggerElements() {
-    let triggerEl;
+    let triggerEl
 
     if (this.triggerElementId) {
-        triggerEl = document.querySelector(`#${this.triggerElementId} .circle`);
+      triggerEl = document.querySelector(`#${this.triggerElementId}`)
     } else {
-        const selectorIsId = this.triggerElementSelector.includes('#');
-        triggerEl = selectorIsId
-            ? document.querySelector(`${this.triggerElementSelector} .circle`)
-            : document.querySelectorAll(`${this.triggerElementSelector} .circle`);
+      const selectorIsId = this.triggerElementSelector.indexOf('#') > -1
+      triggerEl = selectorIsId
+        ? document.querySelector(`${this.triggerElementSelector}`)
+        : document.querySelectorAll(`${this.triggerElementSelector}`)
     }
 
     if (!triggerEl) {
-        console.error('Tooltip Kit: an invalid or unavailable DOM reference was provided!');
-        return [];
+      console.error('Tooltip Kit: an invalid or unavailable DOM reference was provided!')
+      return []
     }
 
-    if (!triggerEl.length) triggerEl = [triggerEl];
-
-    return (this._triggerElements = this._triggerElements || triggerEl);
+    if (!triggerEl.length) triggerEl = [triggerEl]
+    return (this._triggerElements = this._triggerElements || triggerEl)
   }
 
   get tooltip() {
