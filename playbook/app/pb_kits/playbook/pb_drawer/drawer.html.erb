@@ -1,10 +1,7 @@
-<div class="pb_drawer_wrapper_rails <%= object.full_height_style %>" data-overlay-click= <%= object.overlay_close %> >
-    <%= pb_content_tag(:dialog) do %>
+<div class="pb_drawer_wrapper" style="display:none;" data-overlay-click= <%= object.overlay_close %> >
+    <div class="pb_drawer_overlay" style="display:none;"> 
+        <%= pb_content_tag do %>
             <%= content %>
-    <% end %>
+        <% end %>
+    </div>
 </div>
-
-<%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => drawerHelper())
-    window.addEventListener("turbo:frame-load", () => drawerHelper())
-<% end %>
