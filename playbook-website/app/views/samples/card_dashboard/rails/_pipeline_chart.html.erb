@@ -1,0 +1,29 @@
+<%
+  pipeline_data = [
+      { label: "Add to Cart", percent: 100.0, value: 2577 },
+      { label: "Shopping Cart", percent: 79.0, value: 2023 },
+      { label: "Payment Methods", percent: 59.0, value: 1567 },
+      { label: "Delivery Methods", percent: 56.0, value: 1252 },
+      { label: "Confirm", percent: 49.0, value: 1182 },
+      { label: "Delivery", percent: 46.0, value: 1098 },
+    ]
+%>
+
+        <% pipeline_data.each do |info| %>
+          <%= pb_rails("flex", props: {vertical: "center",spacing: "between", padding: "sm"}) do %>
+            <%= pb_rails("flex/flex_item", props: {fixed_size: "100px"}) do %>
+              <%= pb_rails("caption", props: { text: info[:label], size: 'xs' }) %>
+            <% end %>
+            <%= pb_rails("flex/flex_item", props: {grow:true}) do %>
+              <%= pb_rails("flex", props: {vertical: "center", spacing: "around"}) do %>
+                <%= pb_rails("progress_simple", props: { width: "100px",percent: info[:percent] }) %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("caption", props: { margin_left: "xs", text: "#{info[:percent]}%", size: 'xs' }) %>
+                <% end %>
+              <% end %>
+              <% end %>
+              <%= pb_rails("flex/flex_item") do %>
+                <%= pb_rails("body", props: {text: "#{info[:value]}"}) %>
+                <% end %>
+            <% end %>
+      <% end %>

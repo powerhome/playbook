@@ -50,6 +50,13 @@ module ApplicationHelper
             .present?
   end
 
+  def highlight_code(file_path, language = "erb")
+    code = File.read(file_path)
+    lexer = Rouge::Lexer.find(language) || Rouge::Lexers::PlainText
+    formatter = Rouge::Formatters::HTMLLegacy.new(css_class: "highlight")
+    formatter.format(lexer.lex(code)).html_safe
+  end
+
   def category_has_kits?(category_kits: [], type: "rails")
     display_kits = []
     category_kits.each do |kit|

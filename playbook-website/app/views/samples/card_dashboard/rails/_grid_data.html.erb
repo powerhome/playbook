@@ -1,0 +1,34 @@
+<%
+  grid_data = [
+    { title: "New Clients", value: 35, percent: 11.0, status: "negative" },
+    { title: "Returning Clients", value: 8, percent: 5.0, status: "positive" },
+    { title: "VIP Clients", value: 1, percent: 11.0, status: "negative" },
+    { title: "Orders on Clients", value: 1.44, percent: 5.0, status: "positive" },
+    { title: "Bounce on Clients", value: 30.77, unit: "%", percent: 5.0, status: "positive" },
+    { title: "Days Between Orders", value: 3, percent: 0.0, unit: "days" },
+    { title: "New Orders", value: 26, percent: 11.0, status: "negative" },
+    { title: "Confirmed Orders", value: 15, percent: 11.0, status: "negative" },
+  ]
+%>
+
+<div class="gridtwo">
+        <% grid_data.each do |data| %>
+             <%= pb_rails("background", props: { background_color: "white", padding: "md"}) do %>
+              <%= pb_rails("flex", props: { orientation: "column", wrap: true}) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("caption", props: { text: data[:title] }) %>
+                <% end %>
+                <%= pb_rails("flex/flex_item") do %>
+                  <%= pb_rails("flex") do %>
+                    <%= pb_rails("flex/flex_item") do %>
+                      <%= pb_rails("title", props: { text: "#{data[:value]}#{data.key?(:unit) ? " " + data[:unit] : "" }", tag: "h3", size: 3 }) %>
+                    <% end %>
+                    <%= pb_rails("flex/flex_item") do %>
+                      <%= pb_rails("body", props: { text: "#{sign(data)}#{data[:percent].to_i}%", status: data.key?(:status) ? data[:status] : nil, value: data[:percent], margin_left: "xs" }) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+        <% end %>
+        </div>
