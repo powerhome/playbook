@@ -17,6 +17,9 @@ module Playbook
       prop :border, type: Playbook::Props::Enum,
                     values: %w[full none right left],
                     default: "none"
+      prop :breakpoint, type: Playbook::Props::Enum,
+                        values: %w[none xs sm md lg xl],
+                        default: "none"
 
       def classname
         generate_classname("pb_drawer pb_drawer_#{size}_#{placement} #{border_classes}")
