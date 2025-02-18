@@ -4,11 +4,11 @@ module Playbook
   module PbDrawer
     class Drawer < Playbook::KitBase
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[sm md lg xl status_size content],
+                  values: %w[xs sm md lg xl full],
                   default: "md"
       prop :placement, type: Playbook::Props::Enum,
                        values: %w[left right center],
-                       default: "center"
+                       default: "left"
       prop :should_close_on_overlay_click, type: Playbook::Props::Boolean, default: true
 
       def classname

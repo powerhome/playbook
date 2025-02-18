@@ -67,9 +67,13 @@ export default class PbDrawer extends PbEnhancedElement {
 
   handleOpenClick(event) {
     const trigger = event.currentTarget
-    // Find the nearest wrapper and dialog
-    const wrapper = trigger.closest(".pb_drawer_wrapper") || document.querySelector(".pb_drawer_wrapper")
-    const dialog = wrapper.querySelector(".pb_drawer")
+    const drawerId = trigger.dataset.openDrawer
+    const dialog = document.getElementById(drawerId)
+
+    if (!dialog) return
+
+    const wrapper = dialog.closest(".pb_drawer_wrapper")
+    if (!wrapper) return
 
     if (dialog.open) return
 
