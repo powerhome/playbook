@@ -6,29 +6,19 @@ export default class PbDrawer extends PbEnhancedElement {
   }
 
   connect() {
-    this.handleLoadingClick = this.handleLoadingClick.bind(this)
     this.handleOpenClick = this.handleOpenClick.bind(this)
     this.handleCloseClick = this.handleCloseClick.bind(this)
     this.handleOutsideClick = this.handleOutsideClick.bind(this)
-
-    this._loadingButton = document.querySelector('[data-disable-with="Loading"]')
-    if (this._loadingButton) {
-      this._loadingButton.addEventListener("click", this.handleLoadingClick)
-    }
-
-    // Open triggers can be anywhere, find the nearest drawer
     this._openTriggers = Array.from(document.querySelectorAll("[data-open-drawer]"))
     this._openTriggers.forEach(el => {
       el.addEventListener("click", this.handleOpenClick)
     })
 
-    // Close triggers can be anywhere, find the nearest drawer
     this._closeTriggers = Array.from(document.querySelectorAll("[data-close-drawer]"))
     this._closeTriggers.forEach(el => {
       el.addEventListener("click", this.handleCloseClick)
     })
 
-    // Bind outside click to the wrapper
     this._wrappers = Array.from(document.querySelectorAll(".pb_drawer_wrapper"))
     this._wrappers.forEach(el => {
       el.addEventListener("mousedown", this.handleOutsideClick)
@@ -36,9 +26,6 @@ export default class PbDrawer extends PbEnhancedElement {
   }
 
   disconnect() {
-    if (this._loadingButton) {
-      this._loadingButton.removeEventListener("click", this.handleLoadingClick)
-    }
     this._openTriggers.forEach(el => {
       el.removeEventListener("click", this.handleOpenClick)
     })
@@ -48,21 +35,6 @@ export default class PbDrawer extends PbEnhancedElement {
     this._wrappers.forEach(el => {
       el.removeEventListener("mousedown", this.handleOutsideClick)
     })
-  }
-
-  handleLoadingClick() {
-    const okayLoadingButton = document.querySelector('[data-disable-with="Loading"]')
-    const cancelButton = document.querySelector('[data-disable-cancel-with="Loading"]')
-    let currentClass = okayLoadingButton.className
-    let cancelClass = cancelButton ? cancelButton.className : ""
-    let newClass = currentClass.replace("_enabled", "_disabled_loading")
-    let newCancelClass = cancelClass.replace("_enabled", "_disabled")
-
-    okayLoadingButton.disabled = true
-    if (cancelButton) cancelButton.disabled = true
-
-    okayLoadingButton.className = newClass
-    if (cancelButton) cancelButton.className = newCancelClass
   }
 
   handleOpenClick(event) {
@@ -77,14 +49,13 @@ export default class PbDrawer extends PbEnhancedElement {
 
     if (dialog.open) return
 
-    wrapper.style.display = "block"
-    wrapper.querySelector(".pb_drawer_overlay").style.display = "block"
+    wrapper.style.display = ""  // Remove display style instead of setting to block
+    wrapper.querySelector(".pb_drawer_overlay").style.display = ""  // Remove display style
     dialog.showModal()
   }
 
   handleCloseClick(event) {
     const trigger = event.currentTarget
-    // Find the nearest wrapper and dialog
     const wrapper = trigger.closest(".pb_drawer_wrapper") || document.querySelector(".pb_drawer_wrapper")
     const dialog = wrapper.querySelector(".pb_drawer")
 

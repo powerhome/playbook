@@ -7,7 +7,7 @@ module Playbook
                   values: %w[xs sm md lg xl full],
                   default: "md"
       prop :placement, type: Playbook::Props::Enum,
-                       values: %w[left right center],
+                       values: %w[left right],
                        default: "left"
       prop :should_close_on_overlay_click, type: Playbook::Props::Boolean, default: true
 
@@ -15,16 +15,12 @@ module Playbook
         generate_classname("pb_drawer pb_drawer_#{size}_#{placement}")
       end
 
-      def full_height_style
-        if full_height && size === "xl"
-          "full_height_center"
-        elsif full_height && size != "xl"
-          "full_height_#{placement}"
-        end
-      end
-
       def overlay_close
         !should_close_on_overlay_click ? "overlay_close" : ""
+      end
+
+      def overlay_classes
+        "pb_drawer_overlay drawer_content_#{placement} pb_drawer_overlay_after_open"
       end
     end
   end

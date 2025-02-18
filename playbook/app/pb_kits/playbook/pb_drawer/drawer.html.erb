@@ -1,5 +1,5 @@
 <div class="pb_drawer_wrapper" style="display:none;" data-overlay-click= <%= object.overlay_close %> >
-    <div class="pb_drawer_overlay" style="display:none;"> 
+    <div class="<%= overlay_classes %>" style="display:none;"> 
         <%= pb_content_tag do %>
             <%= content %>
         <% end %>
