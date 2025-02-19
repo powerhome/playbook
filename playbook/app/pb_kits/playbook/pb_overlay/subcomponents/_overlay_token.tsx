@@ -4,12 +4,12 @@ import { OverlayChildrenProps } from '../_overlay';
 const previousOverlayDirectionMap: { [key: string]: string } = {
     "x": "left",
     "y": "top",
-};
+}
 
 const subsequentOverlayDirectionMap: { [key: string]: string } = {
     "x": "right",
     "y": "bottom",
-};
+}
 
 const OverlayToken = (props: OverlayChildrenProps) => {
     const {
@@ -18,7 +18,7 @@ const OverlayToken = (props: OverlayChildrenProps) => {
         dynamic,
         position,
         size,
-    } = props;
+    } = props
 
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [isAtStart, setIsAtStart] = useState(true);
@@ -51,15 +51,15 @@ const OverlayToken = (props: OverlayChildrenProps) => {
     const hasSubsequentOverlay = position === "x" || position === "y";
 
     const getPreviousOverlayDirection = () => {
-        return hasSubsequentOverlay ? previousOverlayDirectionMap[position] : position;
-    };
+        return hasSubsequentOverlay ? previousOverlayDirectionMap[position] : position
+    }
 
     const getSubsequentOverlayDirection = () => {
-        return hasSubsequentOverlay ? subsequentOverlayDirectionMap[position] : position;
-    };
+        return hasSubsequentOverlay ? subsequentOverlayDirectionMap[position] : position
+    }
 
-    const previousOverlayClassName = `overlay_${color}_${getPreviousOverlayDirection()}_${size}`;
-    const subsequentOverlayClassName = `overlay_${color}_${getSubsequentOverlayDirection()}_${size}`;
+    const previousOverlayClassName = `overlay_${color}_${getPreviousOverlayDirection()}_${size}`
+    const subsequentOverlayClassName = `overlay_${color}_${getSubsequentOverlayDirection()}_${size}`
 
     return (
         <>
@@ -80,7 +80,7 @@ const OverlayToken = (props: OverlayChildrenProps) => {
                 <div className={dynamic ? isAtEnd ? '' : subsequentOverlayClassName : subsequentOverlayClassName} />
             }
         </>
-    );
-};
+    )
+}
 
 export default OverlayToken;

@@ -22,7 +22,6 @@ const InlineCardsExample = forwardRef(function InlineCardsExample(ref) {
     )
 })
 
-
 const OverlayVerticalDynamicMultiDirectional = () => (
     <>
         <Overlay
