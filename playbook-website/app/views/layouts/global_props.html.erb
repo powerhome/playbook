@@ -20,7 +20,8 @@
               image_url: @front_matter['header'] || vite_asset_path("images/getting-started.svg"),
               background_repeat: "no-repeat",
               background_size: "contain",
-              background_position: "center"
+              background_position: "center",
+              display: { sm: "none", xs: "none" },
             }) do %>
               <div style="height:250px"></div>
           <% end %>
