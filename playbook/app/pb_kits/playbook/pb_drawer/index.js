@@ -35,6 +35,10 @@ export default class PbDrawer extends PbEnhancedElement {
   }
 
   getOverlay(wrapper) {
+    if (wrapper.id && wrapper.id.startsWith("drawer-wrapper-")) {
+      const overlayId = wrapper.id.replace("drawer-wrapper-", "drawer-overlay-")
+      return document.getElementById(overlayId)
+    }
     return wrapper.querySelector(".pb_drawer_overlay") || wrapper.querySelector(".pb_drawer_no_overlay")
   }
 
@@ -44,15 +48,23 @@ export default class PbDrawer extends PbEnhancedElement {
     const dialog = document.getElementById(drawerId)
     if (!dialog) return
 
-    const wrapper = dialog.closest(".pb_drawer_wrapper")
+    const wrapperId = `drawer-wrapper-${drawerId}`
+    const wrapper = document.getElementById(wrapperId)
     if (!wrapper) return
+
+    // Only process if this instance's element is the target wrapper.
+    if (wrapper !== this.element) return
 
     if (wrapper.classList.contains("open")) {
       this.closeDrawer(wrapper, dialog)
       wrapper.dataset.userClosed = "true"
+      console.log("close")
+      console.log(event)
     } else {
       this.openDrawer(wrapper, dialog)
       wrapper.dataset.userClosed = "false"
+      console.log("open")
+      console.log(event)
     }
   }
 
@@ -62,8 +74,12 @@ export default class PbDrawer extends PbEnhancedElement {
     const placement = wrapper.dataset.placement
     this.handlePushOpen(behavior, size, placement)
 
+    console.log("inopen")
+    console.log(wrapper)
+
     wrapper.style.display = ""
     const overlay = this.getOverlay(wrapper)
+    console.log(overlay)
     if (overlay) overlay.style.display = ""
     
     wrapper.classList.add("open")

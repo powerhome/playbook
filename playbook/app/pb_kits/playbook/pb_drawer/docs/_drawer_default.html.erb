@@ -1,54 +1,20 @@
-<%= pb_rails("button", props: { text: "Open Drawer", data: {"open-drawer": "drawer-1"} }) %>
+<%= pb_rails("flex") do %>
+    <%= pb_rails("button", props: { text: "Open Drawer", margin_right: "sm", data: {"open-drawer": "drawer-1"} }) %>
 
-<%= pb_rails("drawer", props: { 
-    id:"drawer-1", 
-}) do  %>
-default
+    <%= pb_rails("drawer", props: { 
+        id:"drawer-1", 
+    }) do  %>
+        Test me (Left Drawer)
+    <% end %>
+    
+    
+    <%= pb_rails("button", props: { text: "Open Drawer", data: {"open-drawer": "drawer-2"} }) %>
+    
+    <%= pb_rails("drawer", props: { 
+        id:"drawer-2", 
+        placement: "right"
+    }) do  %>
+        Test me (Right Drawer)
+    <% end %>
 <% end %>
 
-
-<%= pb_rails("button", props: { text: "Open Drawer", data: {"open-drawer": "drawer-2"} }) %>
-
-<%= pb_rails("drawer", props: { 
-    id:"drawer-2", 
-    size: "xl"
-}) do  %>
-xl
-<% end %>
-
-
-<%= pb_rails("button", props: { text: "No overlay", data: {"open-drawer": "no-overlay-drawer"} }) %>
-
-<%= pb_rails("drawer", props: { 
-    id:"no-overlay-drawer", 
-    size: "md",
-    overlay: false,
-    border: "right"
-}) do  %>
-no overlay
-<% end %>
-
-
-<%= pb_rails("button", props: { text: "Open xl breakpoint", data: {"open-drawer": "drawer-right"} }) %>
-
-<%= pb_rails("drawer", props: { 
-    id:"drawer-right", 
-    size: "md",
-    placement: "right",
-    breakpoint: "xl"
-}) do  %>
-xl breakpoint
-<% end %>
-
-
-
-<%= pb_rails("button", props: { text: "Push Right", data: {"open-drawer": "drawer-right-push"} }) %>
-
-<%= pb_rails("drawer", props: { 
-    id:"drawer-right-push", 
-    size: "md",
-    placement: "right",
-    behavior: "push"
-}) do  %>
-right push
-<% end %>
