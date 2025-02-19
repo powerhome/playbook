@@ -1,1 +1,1 @@
-Pass the `dynamic` prop to make the overlay render while the scroll bar isnt at ether end on the scrollbar. Additionaly, add a `ref` to the child thats being passed into the Overlay.
+Pass the `dynamic` prop to make the overlay render while the scrollbar isn't at ether end on the scrollbar. Additionaly, add a `ref` to the child thats being passed through the Overlay.
