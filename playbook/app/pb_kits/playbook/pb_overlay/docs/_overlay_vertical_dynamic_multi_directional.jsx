@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import {
     Overlay,
     Card,
@@ -6,12 +6,12 @@ import {
     FlexItem,
 } from 'playbook-ui'
 
-const InlineCardsExample = () => {
+const InlineCardsExample = forwardRef(function InlineCardsExample(ref) {
     return (
         <Flex
             columnGap="lg"
             orientation="row"
-            overflowX="auto"
+            ref={ref} 
         >
             {Array.from({ length: 15 }, (_, index) => (
                 <FlexItem key={index}>
@@ -20,12 +20,14 @@ const InlineCardsExample = () => {
             ))}
         </Flex>
     )
-}
+})
 
-const OverlayMultiDirectional = () => (
+
+const OverlayVerticalDynamicMultiDirectional = () => (
     <>
         <Overlay
             color="card_light"
+            dynamic
             layout={{"x": "xl"}}
         >
             <InlineCardsExample />
@@ -33,4 +35,4 @@ const OverlayMultiDirectional = () => (
     </>
 )
 
-export default OverlayMultiDirectional
+export default OverlayVerticalDynamicMultiDirectional

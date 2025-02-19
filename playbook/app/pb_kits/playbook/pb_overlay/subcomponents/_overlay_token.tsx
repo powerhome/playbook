@@ -15,6 +15,7 @@ const OverlayToken = (props: OverlayChildrenProps) => {
     const {
         children,
         color,
+        dynamic,
         position,
         size,
     } = props;
@@ -33,12 +34,6 @@ const OverlayToken = (props: OverlayChildrenProps) => {
 
             setIsAtStart(atStart);
             setIsAtEnd(atEnd);
-
-            if (atStart) {
-                console.log('Horizontal scrollbar is at the start');
-            } else if (atEnd) {
-                console.log('Horizontal scrollbar is at the end');
-            }
         }
     };
 
@@ -68,21 +63,21 @@ const OverlayToken = (props: OverlayChildrenProps) => {
 
     return (
         <>
-        
-            <div className={isAtStart ? '' : previousOverlayClassName} />
-
-    
-            <div
-                ref={scrollContainerRef}
-                style={{
-                    overflowX: 'auto', 
-                    width: '100%',
-                }}
-            >
-                {children}
-            </div>
+            <div className={dynamic ? isAtStart ? '' : previousOverlayClassName : previousOverlayClassName} />
+            {dynamic ? 
+                <div
+                    ref={scrollContainerRef}
+                    style={{
+                        overflowX: 'auto',     
+                    }}
+                >
+                    {children}
+                </div>
+                : 
+                    children
+                }
             {hasSubsequentOverlay &&
-                <div className={isAtEnd ? '' : subsequentOverlayClassName} />
+                <div className={dynamic ? isAtEnd ? '' : subsequentOverlayClassName : subsequentOverlayClassName} />
             }
         </>
     );
