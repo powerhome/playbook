@@ -134,14 +134,6 @@ body.PBDrawer__Body--close {
   transition: margin-left $animation-duration ease-out, margin-right $animation-duration ease-out;
 }
 
-.pb_drawer_lg_left.pb_drawer {
-  transform: translateX(-100%);
-}
-
-.pb_drawer_lg_right.pb_drawer {
-  transform: translateX(100%);
-}
-
 .pb_drawer.pb_drawer_after_open {
   pointer-events: auto;
   transform: translate3d(0, 0, 0);
