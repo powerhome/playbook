@@ -3,9 +3,11 @@ examples:
   rails:
   - progress_pills_default: Default
   - progress_pills_status: Status
+  - progress_pills_full_width: Full Container Width
 
 
 
   react:
   - progress_pills_default: Default
   - progress_pills_status: Status
+  - progress_pills_full_width: Full Container Width
