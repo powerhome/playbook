@@ -321,6 +321,10 @@ body.PBDrawer__Body--close {
     opacity: 1;
     pointer-events: none;
 
+    & .pb_drawer {
+      pointer-events: auto;
+    }
+
     &_before_close {
       height: 0;
     }
