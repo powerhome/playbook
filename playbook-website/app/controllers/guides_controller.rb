@@ -24,7 +24,7 @@ private
 
   def resolve_layout
     case @parent
-    when "global_props"
+    when "global_props", "tokens"
       "global_props"
     else
       "docs"
