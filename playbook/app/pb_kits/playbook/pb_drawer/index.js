@@ -58,13 +58,9 @@ export default class PbDrawer extends PbEnhancedElement {
     if (wrapper.classList.contains("open")) {
       this.closeDrawer(wrapper, dialog)
       wrapper.dataset.userClosed = "true"
-      console.log("close")
-      console.log(event)
     } else {
       this.openDrawer(wrapper, dialog)
       wrapper.dataset.userClosed = "false"
-      console.log("open")
-      console.log(event)
     }
   }
 
@@ -74,12 +70,8 @@ export default class PbDrawer extends PbEnhancedElement {
     const placement = wrapper.dataset.placement
     this.handlePushOpen(behavior, size, placement)
 
-    console.log("inopen")
-    console.log(wrapper)
-
     wrapper.style.display = ""
     const overlay = this.getOverlay(wrapper)
-    console.log(overlay)
     if (overlay) overlay.style.display = ""
     
     wrapper.classList.add("open")
