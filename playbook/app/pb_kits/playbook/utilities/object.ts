@@ -32,3 +32,5 @@ export const map = (collection, iteratee) => {
 
   return result
 }
+
+export const isString = str => str != null && typeof str.valueOf() === "string";
