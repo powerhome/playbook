@@ -1,5 +1,8 @@
 import React from 'react'
-import { isEmpty, map, omitBy } from 'lodash'
+import { map, omitBy } from 'lodash'
+
+import { isEmpty } from '../../utilities/object'
+
 
 import Body from '../../pb_body/_body'
 import Caption from '../../pb_caption/_caption'
@@ -40,13 +43,13 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps): React.ReactElem
                   className="filter"
                   key={`filter-${name}`}
               >
-                { value === true ? 
+                { value === true ?
                 <Title
                     dark={dark}
                     size={4}
                     tag="h4"
                     text={name}
-                /> : 
+                /> :
                 <div>
                   <Caption
                       dark={dark}
@@ -58,7 +61,7 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps): React.ReactElem
                       tag="h4"
                       text={value}
                   />
-                </div>    
+                </div>
                 }
               </div>
             ))}
