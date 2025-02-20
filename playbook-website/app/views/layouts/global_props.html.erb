@@ -31,6 +31,14 @@
                   <%= pb_rails("background", props: { max_width: 'lg', background_color: "white" }) do %>
                     <div class="markdown_title"><%= @page_title %></div>
                     <%= yield %>
+                    <%= pb_rails("section_separator", props: { margin_y: "xl" }) %>
+                    <%= link_to gh_edit_link(@parent, @page, @link_extension) do %>
+                      <%= pb_rails("caption", props: {
+                        text: "Edit this page",
+                        color: "link",
+                        size: "xs"
+                      }) %>
+                    <% end %>
                   <% end %>
                 <% end %>
               <% end %>
@@ -38,7 +46,6 @@
                 <%= render 'layouts/footer'%>
               <% end %>
           <% end %>
-
         </div>
       <% end %>
     <% end %>
