@@ -6,3 +6,4 @@ examples:
 
   react:
   - icon_button_default: Default
+  - icon_button_sizes: Sizes
