@@ -149,19 +149,30 @@ body.PBDrawer__Body--close {
   animation-duration: $animation-duration;
   outline: none;
 
-  &.pb_drawer_within_element {
+ &.pb_drawer_within_element {
     position: relative;
     width: 100%;
     display: block;
     background-color: $white;
     overflow: hidden;
-    transition: height $animation-duration ease-in-out;
-    height: var(--drawer-height);
+
+    // Use max-height for a smooth accordion-like animation
+    max-height: 0;
+    transition: max-height $animation-duration ease-in-out;
     z-index: 1;
 
-    &.pb_drawer_before_close {
-      height: 0;
+    // This class name is up to you — just be consistent in JS
+    &.open {
+      // Option 1: Use a large fixed max-height to accommodate content
+      // max-height: 1000px; 
+      // Option 2: Let JavaScript set the exact scrollHeight 
+      // so it grows exactly to the content size
+      max-height: 1000px;
     }
+
+    // Remove the old height-based approach:
+    // height: var(--drawer-height);
+    // &.pb_drawer_before_close { height: 0; }
 
     &::before {
       content: '';

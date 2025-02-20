@@ -7,13 +7,15 @@ module Playbook
                   values: %w[xs sm md lg xl full],
                   default: "md"
       prop :placement, type: Playbook::Props::Enum,
-                       values: %w[left right],
+                       values: %w[left right bottom],
                        default: "left"
       prop :behavior, type: Playbook::Props::Enum,
                       values: %w[floating push],
                       default: "floating"
       prop :overlay, type: Playbook::Props::Boolean,
                      default: true
+      prop :within_element, type: Playbook::Props::Boolean,
+                            default: false
       prop :border, type: Playbook::Props::Enum,
                     values: %w[full none right left],
                     default: "none"
@@ -22,7 +24,7 @@ module Playbook
                         default: "none"
 
       def classname
-        generate_classname("pb_drawer pb_drawer_#{size}_#{placement} #{border_classes}")
+        generate_classname("pb_drawer pb_drawer_#{size}_#{placement} #{within_class} #{border_classes}")
       end
 
       def border_classes
@@ -40,6 +42,10 @@ module Playbook
 
       def overlay_close
         !should_close_on_overlay_click ? "overlay_close" : ""
+      end
+
+      def within_class
+        within_element ? "pb_drawer_within_element" : ""
       end
 
       def overlay_classes
