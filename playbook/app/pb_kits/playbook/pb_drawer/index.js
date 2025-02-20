@@ -23,7 +23,7 @@ export default class PbDrawer extends PbEnhancedElement {
 
     // NEW: Grab any within-element drawers that might have a data-breakpoint
     this._withinElementDrawers = Array.from(
-      document.querySelectorAll(".pb_drawer_within_element[data-breakpoint]")
+      document.querySelectorAll(".pb_drawer_within_element_rails[data-breakpoint]")
     )
 
     window.addEventListener("resize", this.handleResize)
@@ -61,7 +61,7 @@ export default class PbDrawer extends PbEnhancedElement {
     if (!dialog) return
 
     // NEW LOGIC: If the dialog is a "within element" variant
-    if (dialog.classList.contains("pb_drawer_within_element")) {
+    if (dialog.classList.contains("pb_drawer_within_element_rails")) {
       // We do NOT rely on a wrapper or overlay.
       if (dialog.classList.contains("open")) {
         this.closeWithinElementDrawer(dialog)
@@ -183,7 +183,7 @@ closeWithinElementDrawer(dialog) {
     const overlay = this.getOverlay(wrapper)
 
     // Only apply the "outside click" logic if it's NOT the "within element" type:
-    if (dialog && dialog.classList.contains("pb_drawer_within_element")) {
+    if (dialog && dialog.classList.contains("pb_drawer_within_element_rails")) {
       // We might skip outside-click close or handle differently.
       return
     }
