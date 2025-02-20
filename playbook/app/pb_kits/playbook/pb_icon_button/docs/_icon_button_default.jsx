@@ -6,6 +6,11 @@ const IconButtonDefault = (props) => (
     <IconButton
         {...props}
     />
+    <IconButton
+        {...props}
+        marginTop="md"
+        variant="link"
+    />
   </div>
 )
 
