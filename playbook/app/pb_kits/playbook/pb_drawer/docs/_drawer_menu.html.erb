@@ -1,7 +1,17 @@
-<%= pb_rails("button", props: { text: "Open Drawer", margin_right: "sm", data: {"open-drawer": "drawer-4"} }) %>
+<%= pb_rails("button", props: { padding: "xs", margin_right: "sm", data: {"open-drawer": "drawer-4"} }) do %>
+    <%= pb_rails("icon", props: { icon: "bars", size: "2x" }) %>
+<% end %>
 
 <%= pb_rails("drawer", props: { 
     id:"drawer-4", 
+    within_element: true,
+    placement: "bottom",
+    breakpoint: "md" 
 }) do  %>
-    Within Element 
+    <%= pb_rails("nav", props: {title: "Menu", link: "#"}) do %>
+        <%= pb_rails("nav/item", props: { text: "Photos", link: "#" }) %>
+        <%= pb_rails("nav/item", props: { text: "Music", link: "#" }) %>
+        <%= pb_rails("nav/item", props: { text: "Video", link: "#", active: true }) %>
+        <%= pb_rails("nav/item", props: { text: "Files", link: "#" }) %>
+    <% end %>
 <% end %>
