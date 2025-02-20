@@ -33,9 +33,14 @@ export const map = (collection, iteratee) => {
   return result
 }
 
-export const isString = str => str != null && typeof str.valueOf() === "string";
+export const isString = str => str != null && typeof str.valueOf() === "string"
 
-export const omitBy = (obj, predicate) =>
-  Object.fromEntries(
-    Object.entries(obj).filter(([key, value]) => !predicate(value, key))
-  )
+export const omitBy = (obj, predicate) => {
+  if (obj === null || typeof obj !== 'object') return {}
+  return Object.keys(obj).reduce((result, key) => {
+    if (!predicate(obj[key], key)) {
+      result[key] = obj[key];
+    }
+    return result;
+  }, {})
+}
