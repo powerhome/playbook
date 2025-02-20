@@ -1,0 +1,1 @@
+Use the Checkbox kit with the Table to achieve the selectable row functionality seen here.
