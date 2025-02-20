@@ -116,7 +116,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   //Create cells for columns, with customization for first column
-  const createCellFunction = (cellAccessors: string[], customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element, index?: number) => {
+  const createCellFunction = (cellAccessors: string[], customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element, isFirstColumn?: boolean) => {
     const columnCells = ({
       row,
       getValue,
@@ -126,7 +126,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     }) => {
       const rowData = row.original
 
-    if (index === 0) {
+    if (isFirstColumn) {
       switch (row.depth) {
         case 0: {
           return (
@@ -164,15 +164,16 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     return columnCells
   }
 
-  const buildColumns = (columnDefinitions: GenericObject[]): any => {
+  const buildColumns = (columnDefinitions: GenericObject[], isRoot= true): any => {
     return (
       columnDefinitions &&
       columnDefinitions.map((column, index) => {
+        const isFirstColumn = isRoot && index === 0; 
         //Checking to see if grouped column or not
         if (column.columns && column.columns.length > 0) {
           return {
             header: column.label || "",
-            columns: buildColumns(column.columns),
+            columns: buildColumns(column.columns, false),
           };
         } else {
           // Define the base column structure
@@ -186,7 +187,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             columnStructure.cell = createCellFunction(
               column.cellAccessors,
               column.customRenderer,
-              index
+              isFirstColumn
             );
           }
 

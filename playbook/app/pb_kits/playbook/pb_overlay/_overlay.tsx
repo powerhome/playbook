@@ -8,6 +8,7 @@ import OverlayToken from './subcomponents/_overlay_token'
 export type OverlayChildrenProps = {
     children: React.ReactNode[] | React.ReactNode,
     color: "card_light" | "bg_light" | "card_dark" | "bg_dark",
+    dynamic?: boolean,
     position: string,
     size: string,
 }
@@ -18,6 +19,7 @@ type OverlayProps = {
     children: React.ReactNode[] | React.ReactNode,
     color: "card_light" | "bg_light" | "card_dark" | "bg_dark",
     data?: { [key: string]: string },
+    dynamic?: false,
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string,
     layout: { [key: string]: string },
@@ -30,6 +32,7 @@ const Overlay = (props: OverlayProps) => {
         children,
         color = "card_light",
         data = {},
+        dynamic = false,
         htmlOptions = {},
         id,
         layout = { "bottom": "full" },
@@ -69,6 +72,7 @@ const Overlay = (props: OverlayProps) => {
                 }) : OverlayToken({
                     children,
                     color,
+                    dynamic: dynamic,
                     position: getPosition(),
                     size: getSize()
                 })

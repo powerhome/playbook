@@ -20,3 +20,4 @@ export { default as AdvancedTableNoSubrows } from './_advanced_table_no_subrows.
 export { default as AdvancedTableSelectableRowsHeader } from './_advanced_table_selectable_rows_header.jsx'
 export { default as AdvancedTableSelectableRowsActions } from './_advanced_table_selectable_rows_actions.jsx'
 export { default as AdvancedTableTablePropsStickyHeader } from './_advanced_table_table_props_sticky_header.jsx'
+export { default as AdvancedTableColumnHeadersCustomCell } from './_advanced_table_column_headers_custom_cell.jsx'
