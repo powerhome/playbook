@@ -45,7 +45,7 @@ module Playbook
       end
 
       def within_class
-        within_element ? "pb_drawer_within_element" : ""
+        within_element ? "pb_drawer_within_element_rails" : ""
       end
 
       def overlay_classes

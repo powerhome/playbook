@@ -149,7 +149,7 @@ body.PBDrawer__Body--close {
   animation-duration: $animation-duration;
   outline: none;
 
- &.pb_drawer_within_element {
+ &.pb_drawer_within_element_rails {
     position: relative;
     width: 100%;
     display: block;
@@ -173,6 +173,32 @@ body.PBDrawer__Body--close {
     // Remove the old height-based approach:
     // height: var(--drawer-height);
     // &.pb_drawer_before_close { height: 0; }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: inherit;
+      z-index: -1;
+    }
+  }
+
+  &.pb_drawer_within_element {
+    position: relative;
+    width: 100%;
+    display: block;
+    background-color: $white;
+    overflow: hidden;
+    transition: height $animation-duration ease-in-out;
+    height: var(--drawer-height);
+    z-index: 1;
+
+    &.pb_drawer_before_close {
+      height: 0;
+    }
 
     &::before {
       content: '';
