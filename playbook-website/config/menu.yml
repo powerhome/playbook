@@ -911,19 +911,3 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-- category: test
-  components:
-    - name: test
-      platforms: react_only
-      status: beta
-      icons_used: false
-      react_rendered: false
-      enhanced_element_used: false
-- category: icon_buttonn
-  components:
-    - name: icon_buttonn
-      platforms: react_only
-      status: beta
-      icons_used: false
-      react_rendered: false
-      enhanced_element_used: false
