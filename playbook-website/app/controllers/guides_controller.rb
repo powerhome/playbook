@@ -32,7 +32,6 @@ private
   end
 
   def set_page_vars
-    puts "params: #{params}"
     @page       = params[:page]
     @parent     = params[:parent]
     search_path = File.join(Rails.root, "/app/views/guides/#{@parent}")
