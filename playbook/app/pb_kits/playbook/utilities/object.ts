@@ -11,3 +11,24 @@ export const get = (obj, path, defaultValue = undefined) => {
   const result = travel(/[,[\]]+?/) || travel(/[,[\].]+?/)
   return result === undefined || result === obj ? defaultValue : result
 }
+
+export const map = (collection, iteratee) => {
+  if (!collection) return []
+
+  const result = [];
+  const isArray = Array.isArray(collection)
+
+  if (isArray) {
+    for (let i = 0; i < collection.length; i++) {
+      result.push(iteratee(collection[i], i, collection))
+    }
+  } else {
+    for (const key in collection) {
+      if (Object.prototype.hasOwnProperty.call(collection, key)) {
+        result.push(iteratee(collection[key], key, collection))
+      }
+    }
+  }
+
+  return result
+}
