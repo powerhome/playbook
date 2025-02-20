@@ -39,8 +39,16 @@ export const omitBy = (obj, predicate) => {
   if (obj === null || typeof obj !== 'object') return {}
   return Object.keys(obj).reduce((result, key) => {
     if (!predicate(obj[key], key)) {
-      result[key] = obj[key];
+      result[key] = obj[key]
     }
-    return result;
+    return result
   }, {})
 }
+
+export const uniqueId = (() => {
+
+  let counter = 0
+
+  return (prefix = '') => `${prefix}${++counter}`
+
+  })()
