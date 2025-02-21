@@ -1,24 +1,25 @@
 /* 🛠️ Any commonly used lodash functions can be added here. 🤙 */
 
-export const isEmpty = obj => [Object, Array].includes((obj || {}).constructor) && !Object.entries((obj || {})).length;
+export const isEmpty = (obj: any) => [Object, Array].includes((obj || {}).constructor) && !Object.entries((obj || {})).length;
 
-export const get = (obj, path, defaultValue = undefined) => {
-  const travel = regexp =>
+export const get = <T, R = any>(obj: T, path: string, defaultValue?: R): R | any => {
+  const travel = (regexp: RegExp): any =>
     String.prototype.split
       .call(path, regexp)
       .filter(Boolean)
-      .reduce((res, key) => (res !== null && res !== undefined ? res[key] : res), obj)
+      .reduce((res: any, key: string) => (res !== null && res !== undefined ? res[key] : res), obj)
   const result = travel(/[,[\]]+?/) || travel(/[,[\].]+?/)
   return result === undefined || result === obj ? defaultValue : result
 }
 
-export const map = (collection, iteratee) => {
+export const map = <T, U>(
+  collection: T[] | Record<string, T> | null | undefined,
+  iteratee: (value: T, key: number | string, collection: T[] | Record<string, T>) => U
+): U[] => {
   if (!collection) return []
 
-  const result = [];
-  const isArray = Array.isArray(collection)
-
-  if (isArray) {
+  const result: U[] = []
+  if (Array.isArray(collection)) {
     for (let i = 0; i < collection.length; i++) {
       result.push(iteratee(collection[i], i, collection))
     }
@@ -29,48 +30,55 @@ export const map = (collection, iteratee) => {
       }
     }
   }
-
   return result
 }
 
-export const isString = str => str != null && typeof str.valueOf() === "string"
+export const isString = (str: unknown): str is string =>
+  str != null && typeof (str as any).valueOf() === "string"
 
-export const omitBy = (obj, predicate) => {
-  if (obj === null || typeof obj !== 'object') return {}
+export const omitBy = <T extends Record<string, any>>(
+  obj: T,
+  predicate: (value: T[keyof T], key: string) => boolean
+): Partial<T> => {
+  if (obj === null || typeof obj !== 'object') return {} as Partial<T>
   return Object.keys(obj).reduce((result, key) => {
-    if (!predicate(obj[key], key)) {
-      result[key] = obj[key]
+    const typedKey = key as keyof T
+    if (!predicate(obj[typedKey], key)) {
+      result[typedKey] = obj[typedKey]
     }
     return result
-  }, {})
+  }, {} as Partial<T>)
 }
 
-export const uniqueId = (() => {
-
+export const uniqueId: (prefix?: string) => string = (() => {
   let counter = 0
-
   return (prefix = '') => `${prefix}${++counter}`
+})()
 
-  })()
+type PlainObject = { [key: string]: any }
 
-const isObject = item => item && typeof item === 'object'
+const isObject = (item: any): item is PlainObject =>
+  item !== null && typeof item === 'object'
 
-export const merge = (target, ...sources) => {
+export const merge = <T extends PlainObject>(
+  target: T,
+  ...sources: PlainObject[]
+): T => {
   if (!sources.length) return target
-  const source = sources.shift()
-
+  const source = sources.shift()!
   if (isObject(target) && isObject(source)) {
-    Object.keys(source).forEach(key => {
-      if (isObject(source[key])) {
-        if (!target[key]) {
-          target[key] = Array.isArray(source[key]) ? [] : {}
+    Object.keys(source).forEach((key: string) => {
+      const typedKey = key as keyof T
+      const srcValue = source[key]
+      if (isObject(srcValue)) {
+        if (!target[typedKey]) {
+          target[typedKey] = (Array.isArray(srcValue) ? [] : {}) as unknown as T[typeof typedKey]
         }
-        merge(target[key], source[key])
+        merge(target[typedKey], srcValue)
       } else {
-        target[key] = source[key]
+        target[typedKey] = srcValue
       }
     })
   }
-
   return merge(target, ...sources)
 }
