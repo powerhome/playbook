@@ -1,3 +1,4 @@
+export { default as Test } from './_test.jsx'
 export { default as FormGroupDefault } from './_form_group_default.jsx'
 export { default as FormGroupButton } from './_form_group_button.jsx'
 export { default as FormGroupFullWidth } from './_form_group_full_width.jsx'
