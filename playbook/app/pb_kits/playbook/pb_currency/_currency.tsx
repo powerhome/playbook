@@ -68,7 +68,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     variantClass = '_bold'
   }
 
-  const [whole, decimal = '00'] = amount?.split('.')
+  const [whole, decimal = '00'] = amount.split('.')
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -111,7 +111,6 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
   const getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null
   const getDecimalValue = abbreviate ? '' : getMatchingDecimalValue
 
-  
   return (
     <div
         {...ariaProps}
