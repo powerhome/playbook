@@ -10,7 +10,8 @@ import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import treemap from 'highcharts/modules/treemap'
-import { merge } from 'lodash'
+import { merge} from '../utilities/object'
+
 
 type TreemapChartProps = {
   chartData: {
@@ -53,7 +54,7 @@ const TreemapChart = ({
   type = "treemap",
   ...props
 }: TreemapChartProps): React.ReactElement => {
-  
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -62,9 +63,9 @@ const TreemapChart = ({
     dark
       ? Highcharts.setOptions(highchartsDarkTheme)
       : Highcharts.setOptions(highchartsTheme);
-  };  
+  };
   treemap(Highcharts)
-  setupTheme();  
+  setupTheme();
 
   const staticOptions = {
     title: {
