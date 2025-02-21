@@ -172,51 +172,45 @@ export default class PbDrawer extends PbEnhancedElement {
       xl: 1400,
     }
 
+    // Process wrappers
     this._wrappers.forEach(wrapper => {
       const bp = wrapper.dataset.breakpoint || "none"
       if (bp === "none") return
 
       const threshold = breakpointValues[bp] || 0
       const dialog = wrapper.querySelector(".pb_drawer")
+      const trigger = dialog ? document.querySelector(`[data-open-drawer="${dialog.id}"]`) : null
+
       if (window.innerWidth >= threshold) {
-        if (wrapper.dataset.manualOpen !== "true" && !wrapper.classList.contains("open")) {
-          if (dialog) this.openDrawer(wrapper, dialog)
-          // Hide the trigger for auto-opened drawers
-          if (dialog) {
-            const trigger = document.querySelector(`[data-open-drawer="${dialog.id}"]`)
-            if (trigger) trigger.style.display = "none"
-          }
+        if (!wrapper.classList.contains("open")) {
+          this.openDrawer(wrapper, dialog)
         }
+        if (trigger) trigger.style.display = "none"
       } else {
+        if (trigger) trigger.style.display = ""
         if (wrapper.classList.contains("open") && wrapper.dataset.manualOpen !== "true") {
-          if (dialog) this.closeDrawer(wrapper, dialog)
-          // Show the trigger when the drawer auto-closes
-          if (dialog) {
-            const trigger = document.querySelector(`[data-open-drawer="${dialog.id}"]`)
-            if (trigger) trigger.style.display = ""
-          }
+          this.closeDrawer(wrapper, dialog)
         }
       }
     })
 
+    // Process within element drawers
     this._withinElementDrawers.forEach(drawer => {
       const bp = drawer.dataset.breakpoint || "none"
       if (bp === "none") return
 
       const threshold = breakpointValues[bp] || 0
+      const trigger = document.querySelector(`[data-open-drawer="${drawer.id}"]`)
+
       if (window.innerWidth >= threshold) {
-        if (drawer.dataset.manualOpen !== "true" && !drawer.classList.contains("open")) {
+        if (!drawer.classList.contains("open")) {
           this.openWithinElementDrawer(drawer)
-          // Hide the trigger for auto-opened drawers
-          const trigger = document.querySelector(`[data-open-drawer="${drawer.id}"]`)
-          if (trigger) trigger.style.display = "none"
         }
+        if (trigger) trigger.style.display = "none"
       } else {
+        if (trigger) trigger.style.display = ""
         if (drawer.classList.contains("open") && drawer.dataset.manualOpen !== "true") {
           this.closeWithinElementDrawer(drawer)
-          // Show the trigger when the drawer auto-closes
-          const trigger = document.querySelector(`[data-open-drawer="${drawer.id}"]`)
-          if (trigger) trigger.style.display = ""
         }
       }
     })
