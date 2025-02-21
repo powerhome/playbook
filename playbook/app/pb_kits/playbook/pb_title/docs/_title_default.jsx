@@ -11,6 +11,12 @@ const TitleDefault = (props) => {
       />
       <br />
       <Title
+          size="display"
+          tag="h1"
+          text="Display Title"
+          {...props}
+      />
+      <Title
           size={1}
           tag="h1"
           text="Title 1"
