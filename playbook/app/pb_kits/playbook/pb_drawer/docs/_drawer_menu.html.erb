@@ -6,12 +6,19 @@
     id:"drawer-4", 
     within_element: true,
     placement: "bottom",
-    breakpoint: "md" 
+    breakpoint: "md",
+    size: "full"
 }) do  %>
-    <%= pb_rails("nav", props: { link: "#"}) do %>
+    <%= pb_rails("nav", props: { display: {xl: "none", lg: "none", md: "none", sm: "block" } }) do %>
         <%= pb_rails("nav/item", props: { text: "Photos", link: "#" }) %>
         <%= pb_rails("nav/item", props: { text: "Music", link: "#" }) %>
         <%= pb_rails("nav/item", props: { text: "Video", link: "#", active: true }) %>
         <%= pb_rails("nav/item", props: { text: "Files", link: "#" }) %>
+    <% end %>
+    <%= pb_rails("nav", props: { display: {md: "block", sm: "none", xs: "none" }, orientation: "horizontal" }) do %>
+        <%= pb_rails("nav/item", props: { text: "About", link: "#" }) %>
+        <%= pb_rails("nav/item", props: { text: "Case Studies", link: "#", active: true }) %>
+        <%= pb_rails("nav/item", props: { text: "Service ", link: "#" }) %>
+        <%= pb_rails("nav/item", props: { text: "Contacts", link: "#" }) %>
     <% end %>
 <% end %>

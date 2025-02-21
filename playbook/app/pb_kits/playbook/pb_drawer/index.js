@@ -55,8 +55,10 @@ export default class PbDrawer extends PbEnhancedElement {
     if (dialog.classList.contains("pb_drawer_within_element_rails")) {
       if (dialog.classList.contains("open")) {
         this.closeWithinElementDrawer(dialog)
+        dialog.dataset.manualOpen = "false"
       } else {
         this.openWithinElementDrawer(dialog)
+        dialog.dataset.manualOpen = "true"
       }
       return
     }
@@ -69,10 +71,10 @@ export default class PbDrawer extends PbEnhancedElement {
 
     if (wrapper.classList.contains("open")) {
       this.closeDrawer(wrapper, dialog)
-      wrapper.dataset.userClosed = "true"
+      wrapper.dataset.manualOpen = "false"
     } else {
       this.openDrawer(wrapper, dialog)
-      wrapper.dataset.userClosed = "false"
+      wrapper.dataset.manualOpen = "true"
     }
   }
 
@@ -124,7 +126,6 @@ export default class PbDrawer extends PbEnhancedElement {
     const behavior = wrapper.dataset.behavior
     this.handlePushClose(behavior)
 
-    console.log(wrapper.classname)
     if (wrapper.className.includes("open")) wrapper.style.display = "none"
     const overlay = this.getOverlay(wrapper)
     if (overlay && wrapper.className.includes("open")) overlay.style.display = "none"
@@ -151,9 +152,9 @@ export default class PbDrawer extends PbEnhancedElement {
     const dialogRect = dialog.getBoundingClientRect()
     const clickedOutside =
       event.clientX < dialogRect.left ||
-        event.clientX > dialogRect.right ||
-        event.clientY < dialogRect.top ||
-        event.clientY > dialogRect.bottom
+      event.clientX > dialogRect.right ||
+      event.clientY < dialogRect.top ||
+      event.clientY > dialogRect.bottom
 
     if (clickedOutside) {
       this.closeDrawer(wrapper, dialog)
@@ -176,17 +177,25 @@ export default class PbDrawer extends PbEnhancedElement {
       if (bp === "none") return
 
       const threshold = breakpointValues[bp] || 0
+      const dialog = wrapper.querySelector(".pb_drawer")
       if (window.innerWidth >= threshold) {
-        if (wrapper.dataset.userClosed !== "true" && !wrapper.classList.contains("open")) {
-          const dialog = wrapper.querySelector(".pb_drawer")
+        if (wrapper.dataset.manualOpen !== "true" && !wrapper.classList.contains("open")) {
           if (dialog) this.openDrawer(wrapper, dialog)
+          // Hide the trigger for auto-opened drawers
+          if (dialog) {
+            const trigger = document.querySelector(`[data-open-drawer="${dialog.id}"]`)
+            if (trigger) trigger.style.display = "none"
+          }
         }
       } else {
-        if (wrapper.classList.contains("open")) {
-          const dialog = wrapper.querySelector(".pb_drawer")
+        if (wrapper.classList.contains("open") && wrapper.dataset.manualOpen !== "true") {
           if (dialog) this.closeDrawer(wrapper, dialog)
+          // Show the trigger when the drawer auto-closes
+          if (dialog) {
+            const trigger = document.querySelector(`[data-open-drawer="${dialog.id}"]`)
+            if (trigger) trigger.style.display = ""
+          }
         }
-        wrapper.dataset.userClosed = "false"
       }
     })
 
@@ -196,14 +205,19 @@ export default class PbDrawer extends PbEnhancedElement {
 
       const threshold = breakpointValues[bp] || 0
       if (window.innerWidth >= threshold) {
-        if (drawer.dataset.userClosed !== "true" && !drawer.classList.contains("open")) {
+        if (drawer.dataset.manualOpen !== "true" && !drawer.classList.contains("open")) {
           this.openWithinElementDrawer(drawer)
+          // Hide the trigger for auto-opened drawers
+          const trigger = document.querySelector(`[data-open-drawer="${drawer.id}"]`)
+          if (trigger) trigger.style.display = "none"
         }
       } else {
-        if (drawer.classList.contains("open")) {
+        if (drawer.classList.contains("open") && drawer.dataset.manualOpen !== "true") {
           this.closeWithinElementDrawer(drawer)
+          // Show the trigger when the drawer auto-closes
+          const trigger = document.querySelector(`[data-open-drawer="${drawer.id}"]`)
+          if (trigger) trigger.style.display = ""
         }
-        drawer.dataset.userClosed = "false"
       }
     })
   }
