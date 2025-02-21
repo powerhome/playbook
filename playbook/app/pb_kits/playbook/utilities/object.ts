@@ -52,3 +52,25 @@ export const uniqueId = (() => {
   return (prefix = '') => `${prefix}${++counter}`
 
   })()
+
+const isObject = item => item && typeof item === 'object'
+
+export const merge = (target, ...sources) => {
+  if (!sources.length) return target
+  const source = sources.shift()
+
+  if (isObject(target) && isObject(source)) {
+    Object.keys(source).forEach(key => {
+      if (isObject(source[key])) {
+        if (!target[key]) {
+          target[key] = Array.isArray(source[key]) ? [] : {}
+        }
+        merge(target[key], source[key])
+      } else {
+        target[key] = source[key]
+      }
+    })
+  }
+
+  return merge(target, ...sources)
+}
