@@ -7,3 +7,4 @@ export { default as CurrencyMatchingDecimals } from './_currency_matching_decima
 export { default as CurrencyUnstyled } from './_currency_unstyled.jsx'
 export { default as CurrencyCommaSeparator } from './_currency_comma_separator.jsx'
 export { default as CurrencyNegative } from './_currency_negative.jsx'
+export { default as CurrencyNullDisplay } from './_currency_null_display.jsx'

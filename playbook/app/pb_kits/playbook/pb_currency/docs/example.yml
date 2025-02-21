@@ -10,6 +10,7 @@ examples:
   - currency_unstyled: Unstyled
   - currency_comma_separator: Comma Separator
   - currency_negative: Negative
+  - currency_null_display: Null Display
   
   react:
   - currency_variants: Variants
@@ -21,6 +22,7 @@ examples:
   - currency_unstyled: Unstyled
   - currency_comma_separator: Comma Separator
   - currency_negative: Negative
+  - currency_null_display: Null Display
 
   swift:
   - currency_size_swift: Size
