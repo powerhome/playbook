@@ -1,15 +1,14 @@
 examples:
 
   react:
-  - phone_number_bug_test: Phone Number Bug Test
-  # - phone_number_input_default: Default
-  # - phone_number_input_preferred_countries: Preferred Countries
-  # - phone_number_input_initial_country: Initial Country
-  # - phone_number_input_only_countries: Limited Countries
-  # - phone_number_input_validation: Form Validation
-  # - phone_number_input_clear_field: Clearing the Input Field
-  # - phone_number_input_access_input_element: Accessing the Input Element
-  # - phone_number_input_format: Format as You Type
+  - phone_number_input_default: Default
+  - phone_number_input_preferred_countries: Preferred Countries
+  - phone_number_input_initial_country: Initial Country
+  - phone_number_input_only_countries: Limited Countries
+  - phone_number_input_validation: Form Validation
+  - phone_number_input_clear_field: Clearing the Input Field
+  - phone_number_input_access_input_element: Accessing the Input Element
+  - phone_number_input_format: Format as You Type
 
   rails:
   - phone_number_input_default: Default
