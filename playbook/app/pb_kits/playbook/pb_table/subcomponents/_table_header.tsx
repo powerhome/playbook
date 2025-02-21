@@ -12,6 +12,7 @@ type TableHeaderPropTypes = {
   children: React.ReactNode[] | React.ReactNode;
   className: string;
   data?: { [key: string]: string };
+  headerStyle?: "default" | "borderless";
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   tag?: "table" | "div";
@@ -24,6 +25,7 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
     children,
     className,
     data = {},
+    headerStyle = "default",
     htmlOptions = {},
     id,
     tag = "table",
@@ -33,7 +35,15 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-  const classes = classnames("pb_table_th", globalProps(props), className);
+  // const classes = classnames("pb_table_th", globalProps(props), className);
+  const classes = classnames(
+    "pb_table_th", 
+    {
+      "pb_table_th_borderless": headerStyle === "borderless",
+    },
+    globalProps(props), 
+    className
+  );
   const isTableTag = tag === "table";
 
   return (

@@ -26,9 +26,12 @@ module Playbook
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[table div],
                  default: "table"
+      prop :header_style, type: Playbook::Props::Enum,
+                          values: %w[default borderless],
+                          default: "default"
 
       def classname
-        generate_classname("pb_table_header_kit", align_class) + tag_class
+        generate_classname("pb_table_header_kit", align_class, header_style_class) + tag_class
       end
 
       def tag_class
@@ -105,6 +108,10 @@ module Playbook
           active_item = item if item[:active] == true
         end
         active_item
+      end
+
+      def header_style_class
+        header_style.present? && header_style != "default" ? "header-borderless" : nil
       end
     end
   end

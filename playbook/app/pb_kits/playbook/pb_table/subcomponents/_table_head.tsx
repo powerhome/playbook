@@ -12,6 +12,7 @@ type TableHeadPropTypes = {
   children: React.ReactNode[] | React.ReactNode;
   className: string;
   data?: { [key: string]: string };
+  headerStyle?: "default" | "borderless";
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   tag?: "table" | "div";
@@ -23,6 +24,7 @@ const TableHead = (props: TableHeadPropTypes): React.ReactElement => {
     children,
     className,
     data = {},
+    headerStyle = "default",
     htmlOptions = {},
     id,
     tag = "table",
@@ -31,8 +33,23 @@ const TableHead = (props: TableHeadPropTypes): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-  const classes = classnames("pb_table_thead", globalProps(props), className);
+  // const classes = classnames("pb_table_thead", globalProps(props), className);
+  const classes = classnames(
+    "pb_table_thead", 
+    {
+      "pb_table_thead_borderless": headerStyle === "borderless",
+    },
+    globalProps(props), 
+    className
+  );
   const isTableTag = tag === "table";
+
+  const childrenWithHeaderStyle = React.Children.map(children, child => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, { headerStyle } as any)
+    }
+    return child
+  })
 
   return (
     <>
@@ -44,7 +61,8 @@ const TableHead = (props: TableHeadPropTypes): React.ReactElement => {
             className={classes}
             id={id}
         >
-          {children}
+          {/* {children} */}
+          {childrenWithHeaderStyle}
         </thead>
       ) : (
         <div
@@ -54,7 +72,8 @@ const TableHead = (props: TableHeadPropTypes): React.ReactElement => {
             className={classes}
             id={id}
         >
-          {children}
+          {/* {children} */}
+          {childrenWithHeaderStyle}
         </div>
       )}
     </>

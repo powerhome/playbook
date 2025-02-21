@@ -1,0 +1,46 @@
+// remove all outward facing borders from header
+.header-borderless > thead,
+.header-borderless > thead > tr,
+.header-borderless > thead > tr > th,
+.header-borderless > .pb_table_thead,
+.header-borderless > .pb_table_thead > .pb_table_tr,
+.header-borderless > .pb_table_thead .pb_table_th {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  background: transparent !important;
+}
+
+// remove bottom border (internal to table) on header cells
+.header-borderless > thead > tr:last-child > th,
+.header-borderless > .pb_table_thead > .pb_table_tr:last-child > .pb_table_th {
+  border-bottom: none !important;
+}
+
+// ?preserves top rounded corners to header - might not be necessary but also could help with color investigation?
+.header-borderless > thead > tr:first-child > th:first-child,
+.header-borderless > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:first-child {
+  border-top-left-radius: $border_radius_md !important;
+}
+
+.header-borderless > thead > tr:first-child > th:last-child,
+.header-borderless > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:last-child {
+  border-top-right-radius: $border_radius_md !important;
+}
+
+// ensures top border is from first row of body to prevent double borders
+.header-borderless > tbody > tr:first-child > td,
+.header-borderless > .pb_table_tbody > .pb_table_tr:first-child > .pb_table_td {
+  border-top: 1px solid $border_light !important;
+}
+
+// curves top corners to ONLY the first and last cells of first body row
+.header-borderless > tbody > tr:first-child > td:first-child,
+.header-borderless > .pb_table_tbody > .pb_table_tr:first-child > .pb_table_td:first-child {
+  border-top-left-radius: $border_radius_md !important;
+}
+
+.header-borderless > tbody > tr:first-child > td:last-child,
+.header-borderless > .pb_table_tbody > .pb_table_tr:first-child > .pb_table_td:last-child {
+  border-top-right-radius: $border_radius_md !important;
+}

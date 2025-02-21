@@ -37,13 +37,16 @@ module Playbook
       prop :outer_padding, type: Playbook::Props::Enum,
                            values: ["none", "xxs", "xs", "sm", "md", "lg", "xl", nil],
                            default: nil
+      prop :header_style, type: Playbook::Props::Enum,
+                          values: %w[default borderless],
+                          default: "default"
 
       def classname
         generate_classname(
           "pb_table", "table-#{size}", single_line_class, dark_class,
           disable_hover_class, container_class, data_table_class, sticky_class, sticky_left_column_class,
           sticky_right_column_class, collapse_class, vertical_border_class, striped_class, outer_padding_class,
-          "table-responsive-#{responsive}", separator: " "
+          "table-responsive-#{responsive}", header_style_class, separator: " "
         )
       end
 
@@ -122,6 +125,10 @@ module Playbook
           space_css_name = outer_padding != "none" ? "space_" : ""
           outer_padding.present? ? "outer_padding_#{space_css_name}#{outer_padding}" : nil
         end
+      end
+
+      def header_style_class
+        header_style.present? && header_style != "default" ? "header-borderless" : nil
       end
     end
   end
