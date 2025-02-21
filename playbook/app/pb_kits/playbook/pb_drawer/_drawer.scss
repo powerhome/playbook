@@ -161,18 +161,9 @@ body.PBDrawer__Body--close {
     transition: max-height $animation-duration ease-in-out;
     z-index: 1;
 
-    // This class name is up to you — just be consistent in JS
     &.open {
-      // Option 1: Use a large fixed max-height to accommodate content
-      // max-height: 1000px; 
-      // Option 2: Let JavaScript set the exact scrollHeight 
-      // so it grows exactly to the content size
       max-height: 1000px;
     }
-
-    // Remove the old height-based approach:
-    // height: var(--drawer-height);
-    // &.pb_drawer_before_close { height: 0; }
 
     &::before {
       content: '';
