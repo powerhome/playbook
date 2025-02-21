@@ -6,7 +6,7 @@ PATH
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
       react-rails (= 2.6.1)
-      view_component (= 2.83.0)
+      view_component (>= 2.83.0, < 3.0)
       webpacker-react (~> 0.3.2)
 
 GEM
