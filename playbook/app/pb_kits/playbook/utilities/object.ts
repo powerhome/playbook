@@ -14,14 +14,13 @@ export const get = <T, R = any>(obj: T, path: string, defaultValue?: R): R | any
 
 export const map = <T, U>(
   collection: T[] | Record<string, T> | null | undefined,
-  iteratee: (value: T, key: number | string, collection: T[] | Record<string, T>) => U
+  iteratee: (value: T, key: string, collection: T[] | Record<string, T>) => U
 ): U[] => {
   if (!collection) return []
-
   const result: U[] = []
   if (Array.isArray(collection)) {
     for (let i = 0; i < collection.length; i++) {
-      result.push(iteratee(collection[i], i, collection))
+      result.push(iteratee(collection[i], String(i), collection))
     }
   } else {
     for (const key in collection) {
@@ -32,6 +31,7 @@ export const map = <T, U>(
   }
   return result
 }
+
 
 export const isString = (str: unknown): str is string =>
   str != null && typeof (str as any).valueOf() === "string"
