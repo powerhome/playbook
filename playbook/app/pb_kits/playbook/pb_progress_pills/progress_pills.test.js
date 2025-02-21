@@ -23,6 +23,20 @@ const ProgressPillsDefault = () => {
     )
 }
 
+const ProgressPillsFullWidth = () => {
+    return (
+        <ProgressPills
+            active={2}
+            aria={{ label: ariaLabel }}
+            data={{ testid: testId }}
+            fullWidthPill
+            steps={3}
+            title={title}
+            value={value}
+        />
+    )
+}
+
 test('should pass data prop', () => {
     render(<ProgressPillsDefault />)
     const kit = screen.getByTestId(testId)
@@ -51,4 +65,15 @@ test('should render value', () => {
     render(<ProgressPillsDefault />)
     const kit = screen.getByText(value)
     expect(kit).toBeInTheDocument()
+})
+
+test('should apply fullWidthPill styling when fullWidthPill prop is true', () => {
+    render(<ProgressPillsFullWidth />)
+    const container = screen.getByTestId(testId)
+    const pillElements = container.querySelectorAll('.full_width_pill')
+  
+    expect(pillElements.length).toBeGreaterThan(0)
+    pillElements.forEach((pill) => {
+        expect(pill).toHaveClass('full_width_pill')
+    })
 })

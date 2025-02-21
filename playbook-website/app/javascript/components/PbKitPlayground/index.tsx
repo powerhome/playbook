@@ -13,7 +13,8 @@ import 'prismjs/components/prism-erb'
 import 'prismjs/plugins/unescaped-markup/prism-unescaped-markup'
 import 'prismjs/themes/prism-okaidia.css'
 
-import { LoadingInline, FixedConfirmationToast } from 'playbook-ui'
+import { LoadingInline, FixedConfirmationToast, Title } from 'playbook-ui'
+import PlaygroundHeader from './PlaygroundHeader'
 
 const PbKitPlayground = () => {
   const [previewData, setPreviewData] = useState(null)
@@ -112,6 +113,8 @@ const PbKitPlayground = () => {
   }
 
   return (
+    <>
+    <PlaygroundHeader/>
     <div className="pbDocPlayground">
       <div className="pbDocPlayground-Editor">
         <Editor
@@ -130,6 +133,7 @@ const PbKitPlayground = () => {
         { showPreview() }
       </div>
     </div>
+    </>
   )
 }
 

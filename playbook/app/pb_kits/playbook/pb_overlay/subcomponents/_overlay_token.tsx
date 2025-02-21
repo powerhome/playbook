@@ -1,5 +1,5 @@
-import React from 'react'
-import { OverlayChildrenProps } from '../_overlay'
+import React, { useRef, useEffect, useState } from 'react';
+import { OverlayChildrenProps } from '../_overlay';
 
 const previousOverlayDirectionMap: { [key: string]: string } = {
     "x": "left",
@@ -15,11 +15,40 @@ const OverlayToken = (props: OverlayChildrenProps) => {
     const {
         children,
         color,
+        dynamic,
         position,
         size,
     } = props
 
-    const hasSubsequentOverlay = position === "x" || position === "y"
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const [isAtStart, setIsAtStart] = useState(true);
+    const [isAtEnd, setIsAtEnd] = useState(false);
+
+
+    const handleScroll = () => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            const { scrollLeft, scrollWidth, clientWidth } = container;
+            const atStart = scrollLeft === 0;
+            const atEnd = scrollLeft + clientWidth >= scrollWidth - 1; 
+
+            setIsAtStart(atStart);
+            setIsAtEnd(atEnd);
+        }
+    };
+
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.addEventListener('scroll', handleScroll);
+            handleScroll();
+            return () => {
+                container.removeEventListener('scroll', handleScroll);
+            };
+        }
+    }, []);
+
+    const hasSubsequentOverlay = position === "x" || position === "y";
 
     const getPreviousOverlayDirection = () => {
         return hasSubsequentOverlay ? previousOverlayDirectionMap[position] : position
@@ -34,15 +63,24 @@ const OverlayToken = (props: OverlayChildrenProps) => {
 
     return (
         <>
-            <div className={previousOverlayClassName} />
-
-            {children}
-
-            { hasSubsequentOverlay &&
-                <div className={subsequentOverlayClassName} />
+            <div className={dynamic ? isAtStart ? '' : previousOverlayClassName : previousOverlayClassName} />
+            {dynamic ? 
+                <div
+                    ref={scrollContainerRef}
+                    style={{
+                        overflowX: 'auto',     
+                    }}
+                >
+                    {children}
+                </div>
+                : 
+                    children
+                }
+            {hasSubsequentOverlay &&
+                <div className={dynamic ? isAtEnd ? '' : subsequentOverlayClassName : subsequentOverlayClassName} />
             }
         </>
     )
 }
 
-export default OverlayToken
+export default OverlayToken;
