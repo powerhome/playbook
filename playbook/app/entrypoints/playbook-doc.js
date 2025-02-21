@@ -49,6 +49,7 @@ import * as Hashtag from 'kits/pb_hashtag/docs'
 import * as Highlight from 'kits/pb_highlight/docs'
 import * as HomeAddressStreet from 'kits/pb_home_address_street/docs'
 import * as Icon from 'kits/pb_icon/docs'
+import * as IconButton from 'kits/pb_icon_button/docs'
 import * as IconCircle from 'kits/pb_icon_circle/docs'
 import * as IconStatValue from 'kits/pb_icon_stat_value/docs'
 import * as IconValue from 'kits/pb_icon_value/docs'
@@ -159,6 +160,7 @@ WebpackerReact.registerComponents({
   ...Highlight,
   ...HomeAddressStreet,
   ...Icon,
+  ...IconButton,
   ...IconCircle,
   ...IconStatValue,
   ...IconValue,
