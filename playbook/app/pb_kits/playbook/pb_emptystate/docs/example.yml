@@ -1,0 +1,10 @@
+examples:
+  
+  rails:
+  - emptystate_default: Default
+  
+  
+  react:
+  - emptystate_default: Default
+  
+  
