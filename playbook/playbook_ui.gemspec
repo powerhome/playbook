@@ -49,4 +49,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rubocop-performance", "~> 1.11.5"
   s.add_development_dependency "tzinfo-data", "1.2018.9"
   s.add_development_dependency "will_paginate", "3.3.1"
+
+  s.add_runtime_dependency "view_component", "2.83.0"
 end
