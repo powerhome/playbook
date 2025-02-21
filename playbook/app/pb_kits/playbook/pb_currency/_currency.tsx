@@ -21,6 +21,7 @@ type CurrencyProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
+  nullDisplay?: string,
   size?: 'sm' | 'md' | 'lg',
   symbol?: string,
   variant?: 'default' | 'light' | 'bold',
@@ -49,6 +50,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     unit,
     className,
     label = '',
+    nullDisplay = '',
     size = 'sm',
     symbol = '$',
     variant = 'default',
@@ -66,7 +68,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     variantClass = '_bold'
   }
 
-  const [whole, decimal = '00'] = amount.split('.')
+  const [whole, decimal = '00'] = amount?.split('.')
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -109,6 +111,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
   const getAbbreviation = abbreviate ? getAbbreviatedValue('unit') : null
   const getDecimalValue = abbreviate ? '' : getMatchingDecimalValue
 
+  
   return (
     <div
         {...ariaProps}
@@ -118,48 +121,62 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
         id={id}
     >
       <Caption dark={dark}>{label}</Caption>
-
+  
       <div className={`pb_currency_wrapper${variantClass || emphasizedClass}`}>
         {unstyled ? (
-          <>
-            <div>{handleNegative}{symbol}</div>
-            <div>{getAmount}</div>
-            <div>
-              {getAbbreviation}
-              {unit ? unit : getDecimalValue}
-            </div>
-          </>
+          nullDisplay && !amount ? (
+            <div>{nullDisplay}</div>
+          ) : (
+            <>
+              <div>{handleNegative}{symbol}</div>
+              <div>{getAmount}</div>
+              <div>
+                {getAbbreviation}
+                {unit ? unit : getDecimalValue}
+              </div>
+            </>
+          )
         ) : (
-          <>
-            <Body
-                className="dollar_sign"
-                color="light"
-                dark={dark}
-            >
-              {handleNegative}{symbol}
-            </Body>
-
+          nullDisplay && !amount ? (
             <Title
                 className="pb_currency_value"
                 dark={dark}
                 size={sizes[size]}
-            >
-              {getAmount}
-            </Title>
-
-            <Body
-                className="unit"
-                color="light"
-                dark={dark}
-            >
-              {getAbbreviation}
-              {unit ? unit : getDecimalValue}
-            </Body>
-          </>
+          >
+            {nullDisplay}
+          </Title>
+          ) : (
+            <>
+              <Body
+                  className="dollar_sign"
+                  color="light"
+                  dark={dark}
+              >
+                {handleNegative}{symbol}
+              </Body>
+      
+              <Title
+                  className="pb_currency_value"
+                  dark={dark}
+                  size={sizes[size]}
+              >
+                {getAmount}
+              </Title>
+      
+              <Body
+                  className="unit"
+                  color="light"
+                  dark={dark}
+              >
+                {getAbbreviation}
+                {unit ? unit : getDecimalValue}
+              </Body>
+            </>
+          )
         )}
       </div>
     </div>
-  )
+  );
 }
 
 export default Currency

@@ -46,6 +46,9 @@ module Playbook
       prop :comma_separator, type: Playbook::Props::Boolean,
                              default: false
 
+      prop :null_display, type: Playbook::Props::String,
+                          required: false
+
       def classname
         generate_classname("pb_currency_kit", align, size, dark_class)
       end
