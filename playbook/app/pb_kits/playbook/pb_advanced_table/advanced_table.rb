@@ -17,13 +17,20 @@ module Playbook
                         default: "scroll"
       prop :table_props, type: Playbook::Props::HashProp,
                          default: {}
+      prop :max_height, type: Playbook::Props::Enum,
+                        values: %w[auto xs sm md lg xl xxl xxxl],
+                        default: "auto"
 
       def classname
-        generate_classname("pb_advanced_table", responsive_classname, separator: " ")
+        generate_classname("pb_advanced_table", responsive_classname, max_height_classname, separator: " ")
       end
 
       def responsive_classname
         responsive == "scroll" ? "advanced-table-responsive-scroll" : "advanced-table-responsive-none"
+      end
+
+      def max_height_classname
+        max_height.present? ? "advanced-table-max-height-#{max_height}" : ""
       end
     end
   end
