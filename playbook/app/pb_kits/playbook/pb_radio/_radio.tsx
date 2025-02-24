@@ -55,9 +55,6 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
     }
   }
 
-  // Since we're using defaultChecked for uncontrolled input,
-  // we no longer need to sync the checked state with useEffect.
-
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
