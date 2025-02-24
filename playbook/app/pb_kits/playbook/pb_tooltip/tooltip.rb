@@ -7,6 +7,8 @@ module Playbook
       prop :trigger_element_selector
       prop :trigger_element_id, deprecated: true
       prop :tooltip_id
+      prop :interaction, type: Playbook::Props::Boolean,
+                         default: false
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
       prop :trigger_method, type: Playbook::Props::Enum,
@@ -25,7 +27,8 @@ module Playbook
           pb_tooltip_trigger_element_id: trigger_element_id,
           pb_tooltip_tooltip_id: tooltip_id,
           pb_tooltip_show_tooltip: true,
-          pb_tooltip_trigger_method: trigger_method
+          pb_tooltip_trigger_method: trigger_method,
+          pb_tooltip_interaction: interaction
         )
       end
 
