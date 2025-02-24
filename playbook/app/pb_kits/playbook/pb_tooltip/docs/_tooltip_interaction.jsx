@@ -13,7 +13,7 @@ const TooltipInteraction = (props) => {
       <Tooltip 
           interaction 
           placement='top' 
-          text="You can copy me"
+          text="You can copy me......................"
           zIndex={10}
           {...props}
       >
