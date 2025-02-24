@@ -27,14 +27,18 @@ export default class PbTooltip extends PbEnhancedElement {
           this.mouseenterTimeout = setTimeout(() => {
             this.showTooltip(trigger)
             this.checkCloseTooltip(trigger)
-          }, this.delayOpen)
+          }, this.delayOpen ?? TOOLTIP_TIMEOUT)
 
-          trigger.addEventListener('mouseleave', () => {
-            clearTimeout(this.mouseenterTimeout)
-            setTimeout(() => {
-              this.hideTooltip()
-            }, this.delayClose)
-          }, { once: true })
+          trigger.addEventListener(
+            'mouseleave',
+            () => {
+              clearTimeout(this.mouseenterTimeout)
+              setTimeout(() => {
+                this.hideTooltip()
+              }, this.delayClose ?? 0)
+            },
+            { once: true }
+          )
         })
 
         this.tooltip.addEventListener('mouseenter', () => {
@@ -89,7 +93,7 @@ export default class PbTooltip extends PbEnhancedElement {
       clearTimeout(this.autoHideTimeout)
       this.autoHideTimeout = setTimeout(() => {
         this.hideTooltip()
-      }, this.delayClose)
+      }, this.delayClose ?? 1000)
     }
   }
 
@@ -100,7 +104,7 @@ export default class PbTooltip extends PbEnhancedElement {
       this.popper.destroy()
       this.tooltip.classList.remove('show')
       this.tooltip.classList.remove('fade_out')
-    }, this.delayClose)
+    }, this.delayClose ?? TOOLTIP_TIMEOUT)
   }
 
   get delayOpen() {
