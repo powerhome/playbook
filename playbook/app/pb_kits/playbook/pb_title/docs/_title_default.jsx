@@ -6,14 +6,8 @@ const TitleDefault = (props) => {
   return (
     <div>
       <Title
+          marginBottom='md'
           text="Default Title"
-          {...props}
-      />
-      <br />
-      <Title
-          size="display"
-          tag="h1"
-          text="Display Title"
           {...props}
       />
       <Title
