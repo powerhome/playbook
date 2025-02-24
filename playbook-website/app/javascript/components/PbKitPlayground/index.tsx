@@ -113,11 +113,11 @@ const PbKitPlayground = () => {
   }
 
   Prism.languages.insertBefore('javascript', 'keyword', {
-    'end-operator': {
+    'end-keyword': {
       pattern: /<%\s*end\s*%>/,
       greedy: true,
       inside: {
-        'delimiter': {
+        'seperator': {
           pattern: /^<%|%>$/,
           alias: 'punctuation'
         },
