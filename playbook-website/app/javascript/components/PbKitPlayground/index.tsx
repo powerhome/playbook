@@ -2,7 +2,6 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react'
-import 'playbook-website/app/javascript/components/PbKitPlayground/highlight.scss'
 
 import Editor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
