@@ -29,7 +29,7 @@ const Test = () => {
         />
       </FormGroup>
     </Card>
-  );
-};
+  )
+}
 
 export default Test;

@@ -55,3 +55,23 @@
     }
   }
 }
+
+@mixin test {
+  &:has(.pb_text_input_kit.error):has(.pb_select_kit_wrapper) {
+    // background: aqua;
+
+    .pb_select {
+      // background: red;
+      margin-top: 27px;
+    }
+
+    .pb_select_kit_wrapper {
+      // background: yellow;
+      padding-top: 0px !important;
+    }
+    .pb_select_kit_caret {
+      // background: green;
+      padding-top: 0px !important;
+    }
+  }
+}
