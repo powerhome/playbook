@@ -140,6 +140,7 @@ const PbKitPlayground = () => {
             style={{
               fontFamily: 'monospace',
               fontSize: 12,
+              caretColor: "white",
             }}
             value={code}
         />
