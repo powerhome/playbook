@@ -3,3 +3,7 @@ examples:
   rails:
   - icon_button_default: Default
   - icon_button_sizes: Sizes
+
+  react:
+  - icon_button_default: Default
+  - icon_button_sizes: Sizes
