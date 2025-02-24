@@ -22,7 +22,7 @@ type TableRowPropTypes = {
   dark?: boolean;
   dragId?: string;
   draggableItem?: boolean;
-  headerStyle?: "default" | "borderless";
+  headerStyle?: "default" | "borderless" | "borderlessNested";
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   toggleCellId?: string;
@@ -91,13 +91,6 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
     }
   };
 
-  const childrenWithHeaderStyle = React.Children.map(children, child => {
-    if (React.isValidElement(child)) {
-      return React.cloneElement(child, { headerStyle } as any);
-    }
-    return child;
-  });
-    
   return (
     <>
       {collapsible ? (
@@ -112,8 +105,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
                 onClick={(e)=>handleRowClick(e)}
                 style={{ cursor: toggleCellId ? "default" : "pointer" }}
             >
-              {/* {children} */}
-              {childrenWithHeaderStyle}
+              {children}
             </tr>
             <tr>
               <Collapsible
@@ -146,8 +138,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
                 onClick={handleRowClick}
                 style={{ cursor: "pointer" }}
             >
-              {/* {children} */}
-              {childrenWithHeaderStyle}
+              {children}
             </div>
             <tr>
               <Collapsible
@@ -180,8 +171,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
               dragId={dragId}
               tag="tr"
           >
-            {/* {children} */}
-            {childrenWithHeaderStyle}
+            {children}
           </Draggable.Item>
         ) : (
           <tr
@@ -191,8 +181,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
               className={classes}
               id={id}
           >
-            {/* {children} */}
-            {childrenWithHeaderStyle}
+            {children}
           </tr>
         )
       ) : draggableItem ? (
@@ -203,8 +192,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
             className={classes}
             dragId={dragId}
         >
-          {/* {children} */}
-          {childrenWithHeaderStyle}
+          {children}
         </Draggable.Item>
       ) : (
         <div
@@ -214,8 +202,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
             className={classes}
             id={id}
         >
-          {/* {children} */}
-          {childrenWithHeaderStyle}
+          {children}
         </div>
       )}
     </>

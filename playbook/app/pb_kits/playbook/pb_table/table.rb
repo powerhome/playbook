@@ -38,7 +38,7 @@ module Playbook
                            values: ["none", "xxs", "xs", "sm", "md", "lg", "xl", nil],
                            default: nil
       prop :header_style, type: Playbook::Props::Enum,
-                          values: %w[default borderless],
+                          values: %w[default borderless borderless_nested],
                           default: "default"
 
       def classname
@@ -128,7 +128,12 @@ module Playbook
       end
 
       def header_style_class
-        header_style.present? && header_style != "default" ? "header-borderless" : nil
+        case header_style
+        when "borderless"
+          "header-borderless"
+        when "borderless_nested"
+          "header-borderless header-borderless-nested"
+        end
       end
     end
   end
