@@ -14,28 +14,24 @@ export const get = <T, R = any>(obj: T, path: string, defaultValue?: R): R | any
 
 export const map = <T, U>(
   collection: T[] | Record<string, T> | null | undefined,
-  iteratee: (
-    value: T extends string | number | boolean | null ? string : T,
-    key: string,
-    collection: T[] | Record<string, T>
-  ) => U
+  iteratee: (value: any, key: string, collection: T[] | Record<string, T>) => U
 ): U[] => {
   if (!collection) return []
-  const coerce = (val: any) =>
-    typeof val === 'string' ||
-    typeof val === 'number' ||
-    typeof val === 'boolean' ||
-    val === null
-      ? String(val)
-      : val
-
+  const coerce = (val: any) => {
+    if (val === true) return val
+    if (
+      typeof val === "number" ||
+      typeof val === "string" ||
+      typeof val === "boolean" ||
+      val === null
+    )
+      return String(val)
+    return val
+  }
   return Array.isArray(collection)
-    ? collection.map((v, i) => iteratee(coerce(v) as any, String(i), collection))
-    : Object.keys(collection).map(key => iteratee(coerce(collection[key]) as any, key, collection))
+    ? collection.map((v, i) => iteratee(coerce(v), String(i), collection))
+    : Object.keys(collection).map(key => iteratee(coerce(collection[key]), key, collection))
 }
-
-
-
 
 export const isString = (str: unknown): str is string =>
   str != null && typeof (str as any).valueOf() === "string"
