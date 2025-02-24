@@ -40,40 +40,28 @@
   }
 
   &[class*=_dynamic] {
-    &[class*=_25] {
+    &[class*=_xs] {
       font-size: min(2vw, 5rem);
-      white-space: nowrap;
-      overflow: hidden;
     }
 
-    &[class*=_33] {
+    &[class*=_sm] {
       font-size: min(2.5vw, 6rem);
-      white-space: nowrap;
-      overflow: hidden;
     }
 
-    &[class*=_50] {
+    &[class*=_md] {
       font-size: min(4vw, 10rem);
-      white-space: nowrap;
-      overflow: hidden;
     }
 
-    &[class*=_66] {
+    &[class*=_lg] {
       font-size: min(5vw, 12rem);
-      white-space: nowrap;
-      overflow: hidden;
     }
 
-    &[class*=_75] {
+    &[class*=_xl] {
       font-size: min(6vw, 14rem);
-      white-space: nowrap;
-      overflow: hidden;
     }
 
-    &[class*=_100] {
+    &[class*=_xxl] {
       font-size: min(8vw, 16rem);
-      white-space: nowrap;
-      overflow: hidden;
     }
   }
 
