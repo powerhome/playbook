@@ -6,45 +6,45 @@ const TitleDisplaySize = (props) => {
   return (
     <div>
       <Title
-          displaySize={25}
+          displaySize="xs"
           tag="h1"
-          text="Display Size 25"
+          text="Display Size xs"
           {...props}
       />
       <Title
-          displaySize={33}
+          displaySize="sm"
           tag="h1"
-          text="Display Size 33"
+          text="Display Size sm"
           {...props}
       />
       <Title
-          displaySize={50}
+          displaySize="md"
           tag="h1"
-          text="Display Size 50"
+          text="Display Size md"
           {...props}
       />
       <Title
-          displaySize={66}
+          displaySize="lg"
           tag="h1"
-          text="Display Size 66"
+          text="Display Size lg"
           {...props}
       />
       <Title
-          displaySize={75}
+          displaySize="xl"
           tag="h1"
-          text="Display Size 75"
+          text="Display Size xl"
           {...props}
       />
       <Title
-          displaySize={100}
+          displaySize="xxl"
           tag="h1"
-          text="Display Size 100"
+          text="Display Size xxl"
           {...props}
       />
       <Title
           size="display"
           tag="h1"
-          text="This is a long title"
+          text="This is a size of display"
           {...props}
       />
     </div>
