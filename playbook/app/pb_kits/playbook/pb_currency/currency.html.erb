@@ -1,3 +1,8 @@
+<%
+  sizes = { lg: 1, md: 3, sm: 4 }
+  size_value = sizes[size.to_sym]
+%>
+
 <%= pb_content_tag do %>
   <%= pb_rails("caption", props: object.caption_props) %>
   <div class=<%= "pb_currency_wrapper#{object.variant_class || object.emphasized_class}" %>>
@@ -11,7 +16,7 @@
       <% end %>
     <% else %>
      <% if object.null_display && object.amount.blank? %>
-        <%= pb_rails("title", props: {text: object.null_display}) %>
+        <%= pb_rails("title", props: object.title_props) %>
       <% else %>
         <%= pb_rails("body", props: object.currency_wrapper_props) do %>
           <%= object.negative_sign %><%= object.symbol %>
