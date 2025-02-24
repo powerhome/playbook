@@ -120,7 +120,6 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
         id={id}
     >
       <Caption dark={dark}>{label}</Caption>
-
       <div className={`pb_currency_wrapper${variantClass || emphasizedClass}`}>
         {unstyled ? (
           nullDisplay && !amount ? (
