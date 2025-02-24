@@ -16,7 +16,7 @@ type TitleProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: SizeType | SizeResponsiveType,
-  displaySize?: 25 | 33 | 50 | 66 | 75 | 100
+  displaySize?: null | "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
   text?: string,
   variant?: null | "link",

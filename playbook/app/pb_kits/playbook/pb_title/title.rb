@@ -16,7 +16,9 @@ module Playbook
                      default: nil,
                      deprecated: true
       prop :bold, type: Playbook::Props::Boolean, default: true
-      prop :display_size, default: nil
+      prop :display_size, type: Playbook::Props::Enum,
+                          values: [nil, "xs", "sm", "md", "lg", "xl", "xxl"],
+                          default: nil
 
       def classname
         if is_size_responsive
