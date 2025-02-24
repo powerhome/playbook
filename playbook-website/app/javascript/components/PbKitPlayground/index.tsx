@@ -123,7 +123,7 @@ const PbKitPlayground = () => {
             onValueChange={(code) => saveCode(code)}
             style={{
               fontFamily: 'monospace',
-              fontSize: 16,
+              fontSize: 12,
             }}
             value={code}
         />
