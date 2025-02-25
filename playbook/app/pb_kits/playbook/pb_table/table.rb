@@ -132,7 +132,7 @@ module Playbook
         when "borderless"
           "header-borderless"
         when "borderless_nested"
-          "header-borderless header-borderless-nested"
+          "header-borderless-nested"
         end
       end
     end

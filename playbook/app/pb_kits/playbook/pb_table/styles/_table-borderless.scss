@@ -10,9 +10,9 @@
   border-right: none !important;
 }
 
-// remove bottom border (internal to table) on header cells
-.header-borderless > thead > tr:last-child > th,
-.header-borderless > .pb_table_thead > .pb_table_tr:last-child > .pb_table_th {
+// remove bottom border (internal to table) on header cells - only light mode needs this redundancy handled likely due to a difference in the base scss and table-dark.scss
+.header-borderless:not(.table-dark) > thead > tr:last-child > th,
+.header-borderless:not(.table-dark) > .pb_table_thead > .pb_table_tr:last-child > .pb_table_th {
   border-bottom: none !important;
 }
 
@@ -34,35 +34,33 @@
 }
 
 // borderless-nested code - this carries over everything for header-borderless
-.header-borderless-nested {
-  & > thead,
-  & > thead > tr,
-  & > thead > tr > th,
-  & > .pb_table_thead,
-  & > .pb_table_thead > .pb_table_tr,
-  & > .pb_table_thead .pb_table_th {
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-  }
-
-  & > thead > tr:last-child > th,
-  & > .pb_table_thead > .pb_table_tr:last-child > .pb_table_th {
-    border-bottom: none !important;
-  }
-  & > tbody > tr:first-child > td,
-  & > .pb_table_tbody > .pb_table_tr:first-child > .pb_table_td {
-    border-top: 1px solid $border_light !important;
-  }
+.header-borderless-nested > thead,
+.header-borderless-nested > thead > tr,
+.header-borderless-nested > thead > tr > th,
+.header-borderless-nested > .pb_table_thead,
+.header-borderless-nested > .pb_table_thead > .pb_table_tr,
+.header-borderless-nested > .pb_table_thead .pb_table_th {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
 }
 
-// this flattens out the top corners of the table header/table-card
+.header-borderless-nested:not(.table-dark) > thead > tr:last-child > th,
+.header-borderless-nested:not(.table-dark) > .pb_table_thead > .pb_table_tr:last-child > .pb_table_th {
+  border-bottom: none !important;
+}
+
 .header-borderless-nested > thead > tr:first-child > th:first-child,
 .header-borderless-nested > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:first-child {
-  border-top-left-radius: 0 !important;
+  border-top-left-radius: $border_radius_md !important;
 }
 
 .header-borderless-nested > thead > tr:first-child > th:last-child,
 .header-borderless-nested > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:last-child {
-  border-top-right-radius: 0 !important;
+  border-top-right-radius: $border_radius_md !important;
+}
+
+.header-borderless-nested > tbody > tr:first-child > td,
+.header-borderless-nested > .pb_table_tbody > .pb_table_tr:first-child > .pb_table_td {
+  border-top: 1px solid $border_light !important;
 }
