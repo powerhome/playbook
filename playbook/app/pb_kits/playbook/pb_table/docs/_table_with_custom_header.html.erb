@@ -1,43 +1,79 @@
-<%= pb_rails("caption", props: { margin_bottom: "md", text: "PB Wrapper Table"}) %>
-<%= pb_rails("card", props: { background: "light" })  do %>
-<%= pb_rails("table", props: { size: "sm", header_style: "borderless" }) do %>
+<%= pb_rails("caption", props: { margin_bottom: "md", text: "PB Wrapper Table borderless no background"}) %>
+<%= pb_rails("table", props: { size: "sm", header_style: "borderless_nested" }) do %>
     <thead>
-      <tr>
-        <th>Column 1</th>
-        <th>Column 2</th>
-        <th>Column 3</th>
-        <th>Column 4</th>
-        <th>Column 5</th>
-      </tr>
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+            <th>Column 4</th>
+            <th>Column 5</th>
+        </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Value 1</td>
-        <td>Value 2</td>
-        <td>Value 3</td>
-        <td>Value 4</td>
-        <td>Value 5</td>
-      </tr>
-      <tr>
-        <td>Value 1</td>
-        <td>Value 2</td>
-        <td>Value 3</td>
-        <td>Value 4</td>
-        <td>Value 5</td>
-      </tr>
-      <tr>
-        <td>Value 1</td>
-        <td>Value 2</td>
-        <td>Value 3</td>
-        <td>Value 4</td>
-        <td>Value 5</td>
-      </tr>
+        <tr>
+            <td>Value 1</td>
+            <td>Value 2</td>
+            <td>Value 3</td>
+            <td>Value 4</td>
+            <td>Value 5</td>
+        </tr>
+        <tr>
+            <td>Value 1</td>
+            <td>Value 2</td>
+            <td>Value 3</td>
+            <td>Value 4</td>
+            <td>Value 5</td>
+        </tr>
+        <tr>
+            <td>Value 1</td>
+            <td>Value 2</td>
+            <td>Value 3</td>
+            <td>Value 4</td>
+            <td>Value 5</td>
+        </tr>
     </tbody>
 <% end %>
+
+<%= pb_rails("caption", props: { margin_y: "md", text: "PB Wrapper Table borderless_nested within Card"}) %>
+<%= pb_rails("card", props: { background: "light" })  do %>
+    <%= pb_rails("table", props: { size: "sm", header_style: "borderless_nested" }) do %>
+        <thead>
+            <%= pb_rails("background", props: { background_color: "light", tag: "tr" }) do %>
+                <th>Column 1</th>
+                <th>Column 2</th>
+                <th>Column 3</th>
+                <th>Column 4</th>
+                <th>Column 5</th>
+            <% end %>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Value 1</td>
+                <td>Value 2</td>
+                <td>Value 3</td>
+                <td>Value 4</td>
+                <td>Value 5</td>
+            </tr>
+            <tr>
+                <td>Value 1</td>
+                <td>Value 2</td>
+                <td>Value 3</td>
+                <td>Value 4</td>
+                <td>Value 5</td>
+            </tr>
+            <tr>
+                <td>Value 1</td>
+                <td>Value 2</td>
+                <td>Value 3</td>
+                <td>Value 4</td>
+                <td>Value 5</td>
+            </tr>
+        </tbody>
+    <% end %>
 <% end %>
  
-<%= pb_rails("caption", props: { margin_y: "md", text: "Subcomponent Table"}) %>
-<%= pb_rails("table", props: { size: "sm", header_style: "borderless" }) do %>
+<%= pb_rails("caption", props: { margin_y: "md", text: "Subcomponent Table borderless no background"}) %>
+<%= pb_rails("table", props: { size: "sm", header_style: "borderless", vertical_border: true }) do %>
     <%= pb_rails("table/table_head") do %>
         <%= pb_rails("table/table_row") do %>
             <%= pb_rails("table/table_header", props: { text: "Column 1"}) %>
@@ -68,6 +104,44 @@
             <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
             <%= pb_rails("table/table_cell", props: { text: "Value 4"}) %>
             <%= pb_rails("table/table_cell", props: { text: "Value 5"}) %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= pb_rails("caption", props: { margin_y: "md", text: "Subcomponent Table borderless_nested within Card"}) %>
+<%= pb_rails("card", props: { background: "light" })  do %>
+    <%= pb_rails("table", props: { size: "sm", header_style: "borderless_nested", vertical_border: true }) do %>
+        <%= pb_rails("table/table_head") do %>
+            <%= pb_rails("background", props: { background_color: "light", tag: "tr" }) do %>
+                <%= pb_rails("table/table_header", props: { text: "Column 1"}) %>
+                <%= pb_rails("table/table_header", props: { text: "Column 2"}) %>
+                <%= pb_rails("table/table_header", props: { text: "Column 3"}) %>
+                <%= pb_rails("table/table_header", props: { text: "Column 4"}) %>
+                <%= pb_rails("table/table_header", props: { text: "Column 5"}) %>       
+            <% end %>
+        <% end %>
+        <%= pb_rails("table/table_body") do %>
+            <%= pb_rails("table/table_row") do %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 4"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 5"}) %>
+            <% end %>
+            <%= pb_rails("table/table_row") do %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 4"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 5"}) %>
+            <% end %>
+            <%= pb_rails("table/table_row") do %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 4"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 5"}) %>
+            <% end %>
         <% end %>
     <% end %>
 <% end %>
