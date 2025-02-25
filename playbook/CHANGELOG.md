@@ -1,3 +1,39 @@
+# 14.14.0
+##### February 21, 2025
+
+[14.14.0](https://github.com/powerhome/playbook/tree/14.14.0) full list of changes:
+
+**Kit Enhancements:**
+- Checkbox Kit: React Hook Form Support ([\#4296](https://github.com/powerhome/playbook/pull/4296)) ([@markdoeswork](https://github.com/markdoeswork))
+- Convert Kits to Use pb_content_tag (Progress Pills, Simple, Step, and Radio Kit) ([\#4275](https://github.com/powerhome/playbook/pull/4275)) ([@cmhorsey](https://github.com/cmhorsey))
+- Overlay Kit: Multi-Directional Overlays Support - React ([\#4284](https://github.com/powerhome/playbook/pull/4284)) ([@nickamantia](https://github.com/nickamantia))
+- Advanced Table Kit: Sticky Header & Responsive Prop Working Together - Rails ([\#4293](https://github.com/powerhome/playbook/pull/4293)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Progress Pill Full Width ([\#4269](https://github.com/powerhome/playbook/pull/4269)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Responsive Progress Pill ([\#4260](https://github.com/powerhome/playbook/pull/4260)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Table Kit: Collapsible Rows with "custom click" for Rails ([\#4263](https://github.com/powerhome/playbook/pull/4263)) ([@nickamantia](https://github.com/nickamantia))
+- Bar Graph: CSS Led ([\#4202](https://github.com/powerhome/playbook/pull/4202)) ([@markdoeswork](https://github.com/markdoeswork))
+- Draggable Kit with Table Kit ([\#4253](https://github.com/powerhome/playbook/pull/4253)) ([@nidaqg](https://github.com/nidaqg))
+- Update pb_content_tags ([\#4217](https://github.com/powerhome/playbook/pull/4217)) ([@cmhorsey](https://github.com/cmhorsey))
+- Rails Text Input Masking: credit_card and cvv ([\#4267](https://github.com/powerhome/playbook/pull/4267)) ([@kangaree](https://github.com/kangaree))
+- Icon Button Sizes ([\#4218](https://github.com/powerhome/playbook/pull/4218)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+
+**Fixed Bugs:**
+- Advanced Table: Multi Column Headers to work with Custom Cells ([\#4292](https://github.com/powerhome/playbook/pull/4292)) ([@nidaqg](https://github.com/nidaqg))
+- React Date Picker - initializeOnce - Reinitialization with Other Inputs Bug ([\#4240](https://github.com/powerhome/playbook/pull/4240)) ([@kangaree](https://github.com/kangaree))
+
+**Improvements:**
+- Update SWIFT_CHANGELOG.md ([\#4294](https://github.com/powerhome/playbook/pull/4294)) ([@isismsilva](https://github.com/isismsilva))
+- Playground: Header Component Redesign ([\#4270](https://github.com/powerhome/playbook/pull/4270)) ([@cmhorsey](https://github.com/cmhorsey))
+- Adding Table Selectable Rows Doc Example ([\#4259](https://github.com/powerhome/playbook/pull/4259)) ([@carloslimasd](https://github.com/carloslimasd))
+- Bump Sass Version ([\#4254](https://github.com/powerhome/playbook/pull/4254)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Table Kit: Clickable Table Rows Doc Example ([\#4252](https://github.com/powerhome/playbook/pull/4252)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Deprecated:**
+- Deprecate Action Avatar Button ([\#4277](https://github.com/powerhome/playbook/pull/4277)) ([@gabbymassaro](https://github.com/gabbymassaro))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.13.0...14.14.0)
+
+
 # 🛠️ 🐉 Rails Draggable Component Just got an Upgrade!
 ##### February 7, 2025
 

@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "14.13.0",
+  "version": "14.14.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
@@ -66,7 +66,7 @@
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "@vitejs/plugin-react": "^4.3.1",
-    "axe-core": "4.4.3",
+    "axe-core": "4.10.2",
     "classnames": "2.5.1",
     "eslint": "6.8.0",
     "eslint-plugin-react": "7.31.1",
