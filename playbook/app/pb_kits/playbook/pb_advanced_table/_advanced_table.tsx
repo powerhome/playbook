@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react"
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react"
 import classnames from "classnames"
 
 import { GenericObject } from "../types"
@@ -14,6 +14,7 @@ import {
   Getter,
   RowSelectionState
 } from "@tanstack/react-table"
+import { useVirtualizer } from '@tanstack/react-virtual'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
 import { globalProps, GlobalProps } from "../utilities/globalProps"
@@ -63,6 +64,7 @@ type AdvancedTableProps = {
   tableProps?: GenericObject
   toggleExpansionIcon?: string | string[]
   onRowSelectionChange?: (arg: RowSelectionState) => void
+  virtualizedRows?: boolean
 } & GlobalProps
 
 const AdvancedTable = (props: AdvancedTableProps) => {
@@ -95,6 +97,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     tableProps,
     toggleExpansionIcon = "arrows-from-line",
     onRowSelectionChange,
+    virtualizedRows = false,
   } = props
 
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(
@@ -147,9 +150,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             <CustomCell
                 customRenderer={customRenderer}
                 onRowToggleClick={onRowToggleClick}
-                row={row} 
+                row={row}
                 selectableRows={selectableRows}
-                value={accessorValue} 
+                value={accessorValue}
             />
           ) : (
             "N/A"
@@ -234,9 +237,19 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     },
 } : {}
 
-//initialize table
+  // Simulating chunked data fetch
+  const fetchSize = 20; // Number of rows per "page"
+  const [fullData] = useState(tableData); // All data from the JSON file
+  const [dataChunk, setDataChunk] = useState(fullData.slice(0, fetchSize)); // Initial chunk
+
+  // Virtualized table state
+  const [totalDBRowCount] = useState(fullData.length); // Total number of rows
+  const [totalFetched, setTotalFetched] = useState(fetchSize); // Track loaded rows
+  const [isFetching, setIsFetching] = useState(false);
+
+  //initialize table
   const table = useReactTable({
-    data: loading ? Array(loadingStateRowCount).fill({}) : tableData,
+    data: loading ? Array(loadingStateRowCount).fill({}) : dataChunk,
     columns,
     onExpandedChange: setExpanded,
     getSubRows: (row: GenericObject) => row.children,
@@ -253,9 +266,117 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   })
 
   const tableRows = table.getRowModel()
+  const tableWrapperRef = useRef<HTMLDivElement>(null)
 
   const hasAnySubRows = tableRows.rows.some(row => row.subRows && row.subRows.length > 0);
   const selectedRowsLength = Object.keys(table.getState().rowSelection).length
+
+  // Generate a flattened set of items for virtualization that includes special components
+  const flattenedItems = useMemo(() => {
+    if (!virtualizedRows) return [];
+
+    const items = [];
+
+    // Process each row and insert special components
+    tableRows.rows.forEach((row) => {
+      // First check if we need a header before this row
+      const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
+      const subRowHeaders = props.tableOptions?.subRowHeaders;
+
+      if (isFirstChildofSubrow && subRowHeaders) {
+        items.push({
+          type: 'header',
+          row: row,
+          id: `header-${row.id}`,
+        });
+      }
+
+      // Add the main row
+      items.push({
+        type: 'row',
+        row: row,
+        id: row.id
+      });
+
+      // Check if we need a loading indicator after this row
+      const isExpandable = row.getIsExpanded();
+      const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
+      const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && 
+        (row.depth < columnDefinitions[0].cellAccessors?.length);
+
+      if (isDataLoading) {
+        items.push({
+          type: 'loading',
+          row: row,
+          id: `loading-${row.id}`
+        });
+      }
+    });
+
+    return items;
+  }, [
+    virtualizedRows,
+    tableRows.rows,
+    props.tableOptions?.subRowHeaders,
+    inlineRowLoading,
+    columnDefinitions
+  ]);
+
+  const tableWrapperStyle = virtualizedRows ? {
+    overflow: 'auto', // scrollable table container
+    position: 'relative', // needed for sticky header
+    height: '600px', // fixed height - adjust as needed
+  } : {}
+
+  // Configure virtualizer to work with our flattened items
+  const virtualizerConfig = useVirtualizer({
+    count: virtualizedRows ? flattenedItems.length : tableRows.rows.length,
+    getScrollElement: () => tableWrapperRef.current,
+    estimateSize: (index) => {
+      // If we're not using virtualizedRows or flattenedItems is empty, just return a default height
+      if (!virtualizedRows || flattenedItems.length === 0) return 50;
+
+      // Use different height estimates based on component type
+      const item = flattenedItems[index];
+      if (!item) return 50; // Default row height
+
+      if (item.type === 'header') return 40; // Header height
+      if (item.type === 'loading') return 30; // Loading indicator height
+      return 50; // Regular row height
+    },
+    overscan: 5,
+    getItemKey: (index) => virtualizedRows ? flattenedItems[index]?.id || index : tableRows.rows[index]?.id || index,
+  })
+
+  const virtualizer = virtualizedRows ? virtualizerConfig : null
+
+  const fetchNextPage = useCallback(() => {
+    if (isFetching || totalFetched >= totalDBRowCount) return; // Stop if already fetching or no more data
+
+    setIsFetching(true);
+
+    // Simulate a network request delay
+    setTimeout(() => {
+      const nextChunk = fullData.slice(totalFetched, totalFetched + fetchSize);
+      setDataChunk(prev => [...prev, ...nextChunk]);
+      setTotalFetched(prev => prev + nextChunk.length);
+      setIsFetching(false);
+    }, 500);
+  }, [isFetching, totalFetched, totalDBRowCount, fullData, fetchSize]);
+
+  const fetchMoreOnBottomReached = useCallback((containerRefElement?: HTMLDivElement | null) => {
+    if (containerRefElement) {
+      const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
+      // If user scrolls near bottom, fetch more data
+      if (scrollHeight - scrollTop - clientHeight < 500 && !isFetching && totalFetched < totalDBRowCount) {
+        fetchNextPage();
+      }
+    }
+  }, [fetchNextPage, isFetching, totalFetched, totalDBRowCount]);
+
+  useEffect(() => {
+    fetchMoreOnBottomReached(tableWrapperRef.current);
+  }, [fetchMoreOnBottomReached]);
 
   useEffect(() => {
     if (onRowSelectionChange) {
@@ -269,7 +390,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     if (rowsCount !== loadingStateRowCount && rowsCount !== 0) {
       setLoadingStateRowCount(rowsCount)
     }
-  }, [tableData, loadingStateRowCount])
+  }, [dataChunk, loadingStateRowCount, table])
 
   useEffect(() => {
     if (!loading) {
@@ -279,7 +400,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
   const handleExpandOrCollapse = async (row: Row<GenericObject>) => {
     onToggleExpansionClick && onToggleExpansionClick(row)
-  
+
     const expandedState = expanded;
     const targetParent = row?.parentId;
     const updatedRows = await updateExpandAndCollapseState(tableRows, expandedState, targetParent)
@@ -300,7 +421,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const onPageChange = (page: number) => {
     table.setPageIndex(page - 1)
   }
-//When to show the actions bar as a whole
+
+  //When to show the actions bar as a whole
   const isActionBarVisible = selectableRows && showActionsBar && selectedRowsLength > 0
 
   //Ref and useEffect for animating the actions bar
@@ -316,11 +438,14 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   }, [isActionBarVisible]);
 
   return (
-    <div {...ariaProps} 
-        {...dataProps} 
+    <div {...ariaProps}
+        {...dataProps}
         {...htmlProps}
-        className={classes} 
+        className={classes}
         id={id}
+        onScroll={virtualizedRows ? e => fetchMoreOnBottomReached(e.currentTarget) : undefined}
+        ref={tableWrapperRef}
+        style={tableWrapperStyle as React.CSSProperties}
     >
       <AdvancedTableContext.Provider
           value={{
@@ -339,7 +464,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             toggleExpansionIcon,
             showActionsBar,
             selectableRows,
-            hasAnySubRows
+            hasAnySubRows,
+            virtualizer,
+            flattenedItems, // Pass the flattened items to context
           }}
       >
         <>
@@ -359,11 +486,11 @@ const AdvancedTable = (props: AdvancedTableProps) => {
               htmlOptions={{ ref: cardRef as any }}
               padding={`${isActionBarVisible ? "xs" : "none"}`}
           >
-            <Flex alignItems="center" 
+            <Flex alignItems="center"
                 justify="between"
             >
-              <Caption color="light" 
-                  paddingLeft="xs" 
+              <Caption color="light"
+                  paddingLeft="xs"
                   size="xs"
               >
                 {selectedRowsLength} Selected
