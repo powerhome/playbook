@@ -15,11 +15,15 @@ $card-border-radius: $border_rad_lightest;
 [class^=pb_layout_kit] {
 
   &[class*=_collection]{
-    div.layout_body{
+
+    &[class*=_row_gap_sm]{
+      background: aqua;
+    }
+
+    div.layout_body {
       display: grid;
       grid-auto-rows: max-content;
       grid-column-gap: $space_sm;
-      grid-row-gap: $space_sm;
       grid-template-columns: repeat(4, 1fr);
 
       @media screen and (max-width: $screen-md-min) {

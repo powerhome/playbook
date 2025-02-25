@@ -15,6 +15,7 @@ type LayoutPropTypes = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   position?: "left" | "right",
   responsive?: boolean,
+  rowGap?: "xs" | "sm" | "md" | "lg" | "xl",
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
   variant?: "light" | "dark" | "gradient",
   transparent?: boolean,
@@ -129,6 +130,7 @@ const Layout = (props: LayoutPropTypes) => {
     htmlOptions = {},
     position = 'left',
     responsive = false,
+    rowGap = '',
     size = 'md',
     layout = 'sidebar',
     variant = 'light',
@@ -141,7 +143,7 @@ const Layout = (props: LayoutPropTypes) => {
 
   const layoutCss =
     layout == 'collection'
-      ? `pb_layout_kit_${layout}`
+      ? buildCss(`pb_layout_kit_${layout}`, `row_gap_${rowGap}`)
       : layout == 'kanban'
         ? `pb_layout_kit_${layout}${responsiveClass}`
         : buildCss(`pb_layout_kit_${layout}`, `size_${size}`, position, variant, {
