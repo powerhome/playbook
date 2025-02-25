@@ -1,6 +1,7 @@
 <%= pb_rails("select", props: {
   label: "Colors",
   name: "test",
+  id: "test-select",
   data: { context_select: true },
   options: [
     { value: "red", value_text: "Red" },
@@ -15,6 +16,7 @@
   <%= pb_rails("typeahead", props: {
   label: "Crayola Crayons",
   name: :test,
+  id: "typeahead-dynamic",
   search_term_minimum_length: 0,
   data: {
     typeahead_dynamic: true,
@@ -25,6 +27,25 @@
 <br><br><br>
 
 <%= javascript_tag defer: "defer" do %>
+    document.addEventListener("DOMContentLoaded", () => {
+        
+      const colorSelect = document.querySelector("#test-select")
+      colorSelect.addEventListener("change", () => {
+        const typeaheadEl = document.querySelector("#typeahead-dynamic")
+
+        const searchInput = typeaheadEl && typeaheadEl.querySelector('input[type="search"]')
+        if (searchInput) {
+            searchInput.value = ""
+        }
+          
+        if (typeaheadEl && typeaheadEl.pbTypeahead) {
+              typeaheadEl.pbTypeahead.resultsCacheClear()
+              typeaheadEl.pbTypeahead.clearResults()
+            }
+      })
+    });
+
+
   document.addEventListener("pb-typeahead-kit-search", function(event) {
     if (!event.target.dataset || !event.target.dataset.typeaheadDynamic) return;
 
