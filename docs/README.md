@@ -1,7 +1,7 @@
 [![npm version](https://badge.fury.io/js/playbook-ui.svg)](https://badge.fury.io/js/playbook-ui)
 [![Gem Version](https://badge.fury.io/rb/playbook_ui.svg)](https://badge.fury.io/rb/playbook_ui)
 
-# Playbook Design System
+# Plabook Design System
 
 Playbook is the first design system built for both Rails & React interfaces. Inspired by [Velocity](https://www.invisionapp.com/inside-design/design-resources/design-system-dashboard-ui-kit/), Playbook takes a modern design approach and applies it in a way that makes it easy to support bleeding edge or legacy systems. Playbook is built & maintained by the User Experience & Development teams at [Power Home Remodeling](https://www.techatpower.com/), the largest home remodeler in the US.
 
