@@ -141,7 +141,6 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 
   &[data-popper-placement="right"] {
     box-shadow: -8px 0 28px 0 $tooltip_shadow;
-    margin: 0 0 0 $space_sm;
     .arrow {
       left: -18px;
       right: auto;
@@ -156,7 +155,6 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 
   &[data-popper-placement="bottom"] {
     box-shadow: 0 -12px 28px 0 $tooltip_shadow;
-    margin: 0 0 0 0;
     .arrow {
       top: -18px;
       margin-bottom: 0;
@@ -169,7 +167,6 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 
   &[data-popper-placement="left"] {
     box-shadow: 8px 0 28px 0 $tooltip_shadow;
-    margin: 0 $space_sm 0 0;
     .arrow {
       margin-bottom: 0;
       right: -18px;
