@@ -16,11 +16,13 @@ $card-border-radius: $border_rad_lightest;
 
   &[class*=_collection]{
 
-    &[class*=_row_gap_sm]{
-      background: aqua;
-    }
-
     div.layout_body {
+
+      &[class*=row_gap_sm]{
+        grid-row-gap: $space_sm;
+        background: aqua;
+      }
+
       display: grid;
       grid-auto-rows: max-content;
       grid-column-gap: $space_sm;

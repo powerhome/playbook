@@ -9,10 +9,9 @@ const LayoutCollection = (props) => {
     <div>
       <Layout
           layout="collection"
-          rowGap="sm"
           {...props}
       >
-        <Layout.Body >
+        <Layout.Body rowGap="sm" >
           <Card>{'Card content'}</Card>
           <Card>{'Card content'}</Card>
           <Card>{'Card content'}</Card>
