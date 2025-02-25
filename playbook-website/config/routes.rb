@@ -52,9 +52,6 @@ Rails.application.routes.draw do
   get "guides/:parent",         to: "guides#md_doc", as: "guides_parent"
   get "guides/:parent/:page",   to: "guides#md_doc", as: "guides_parent_page"
 
-  get "tokens",       to: "pages#tokens"
-  get "global_props", to: "pages#global_props"
-
   # Samples
   get "samples", to: "samples#index"
   get "samples/icons", to: "samples#icons"
