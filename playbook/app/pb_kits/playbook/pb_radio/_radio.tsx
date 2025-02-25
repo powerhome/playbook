@@ -8,7 +8,7 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 type RadioProps = {
   aria?: { [key: string]: string },
   alignment?: string,
-  checked?: boolean,
+  checked?: boolean, // removed default assignment here
   children?: React.ReactChild[] | React.ReactChild,
   customChildren?: boolean,
   className?: string,
@@ -41,7 +41,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   name = 'radio_name',
   text = 'Radio Text',
   value = 'radio_text',
-  checked = false,
+  checked,
   onChange = () => { void 0 },
   ...props
 }, ref) => {
@@ -74,13 +74,15 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
     className
   )
 
+  const checkedProps = checked !== undefined ? { checked } : {}
+
   const displayRadio = (inputProps: any) => {
     if (children && customChildren === false)
       return children
     else
       return (
         <input
-            defaultChecked={checked}
+            {...checkedProps}
             disabled={disabled}
             id={id}
             name={name}
@@ -123,7 +125,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
     >
       <label className={buildCss('pb_radio_kit', alignment)}>
         <input
-            defaultChecked={checked}
+            {...checkedProps}
             disabled={disabled}
             id={id}
             name={name}
