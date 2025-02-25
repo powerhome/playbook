@@ -1,13 +1,11 @@
 import React, { createContext, useRef, useMemo } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
-// This is just a sample - adapt to your actual context structure
-const AdvancedTableContext = createContext({});
+const AdvancedTableContext = createContext<any>({})
 
 export const AdvancedTableProvider = ({ children, ...props }) => {
-  const tableContainerRef = useRef(null);
+  const tableContainerRef = useRef(null)
 
-  // Your table instance and other state...
   const table = props.table;
 
   // Create a flattened data array that includes ALL components for virtualization
@@ -21,7 +19,6 @@ export const AdvancedTableProvider = ({ children, ...props }) => {
 
     // Process each row and insert special components
     table.getRowModel().rows.forEach((row) => {
-      // First check if we need a header before this row
       const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
 
       if (isFirstChildofSubrow && subRowHeaders) {
@@ -32,14 +29,12 @@ export const AdvancedTableProvider = ({ children, ...props }) => {
         });
       }
 
-      // Add the main row
       items.push({
         type: 'row',
         row: row,
         id: row.id
-      });
+      })
 
-      // Check if we need a loading indicator after this row
       const isExpandable = row.getIsExpanded();
       const rowHasNoChildren = row.original.children && !row.original.children.length ? true : false;
       const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && 
@@ -52,7 +47,7 @@ export const AdvancedTableProvider = ({ children, ...props }) => {
           id: `loading-${row.id}`
         });
       }
-    });
+    })
 
     return items;
   }, [
@@ -60,9 +55,9 @@ export const AdvancedTableProvider = ({ children, ...props }) => {
     props.subRowHeaders,
     props.inlineRowLoading,
     props.columnDefinitions,
-  ]);
+  ])
 
-  // Setup virtualizer with our flattened data
+  // Setup virtualizer with flattened data
   const virtualizer = useVirtualizer({
     count: props.enableVirtualization ? flattenedItems.length : 0,
     getScrollElement: () => tableContainerRef.current,
@@ -77,9 +72,8 @@ export const AdvancedTableProvider = ({ children, ...props }) => {
       return 50; // Regular row height
     },
     overscan: 10, // Load more items for smoother scrolling
-    // Add this option to measure the DOM element's height
     getItemKey: (index) => flattenedItems[index]?.id || index,
-  });
+  })
 
   const contextValue = {
     ...props,
@@ -87,13 +81,13 @@ export const AdvancedTableProvider = ({ children, ...props }) => {
     tableContainerRef,
     virtualizer: props.enableVirtualization ? virtualizer : null,
     flattenedItems,
-  };
+  }
 
   return (
     <AdvancedTableContext.Provider value={contextValue}>
       {children}
     </AdvancedTableContext.Provider>
-  );
-};
+  )
+}
 
 export default AdvancedTableContext

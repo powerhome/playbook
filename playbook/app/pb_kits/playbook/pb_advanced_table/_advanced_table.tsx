@@ -279,7 +279,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
     // Process each row and insert special components
     tableRows.rows.forEach((row) => {
-      // First check if we need a header before this row
       const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
       const subRowHeaders = props.tableOptions?.subRowHeaders;
 
@@ -291,14 +290,12 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         });
       }
 
-      // Add the main row
       items.push({
         type: 'row',
         row: row,
         id: row.id
       });
 
-      // Check if we need a loading indicator after this row
       const isExpandable = row.getIsExpanded();
       const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
       const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && 
@@ -333,10 +330,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     count: virtualizedRows ? flattenedItems.length : tableRows.rows.length,
     getScrollElement: () => tableWrapperRef.current,
     estimateSize: (index) => {
-      // If we're not using virtualizedRows or flattenedItems is empty, just return a default height
       if (!virtualizedRows || flattenedItems.length === 0) return 50;
 
-      // Use different height estimates based on component type
       const item = flattenedItems[index];
       if (!item) return 50; // Default row height
 
@@ -422,10 +417,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     table.setPageIndex(page - 1)
   }
 
-  //When to show the actions bar as a whole
   const isActionBarVisible = selectableRows && showActionsBar && selectedRowsLength > 0
 
-  //Ref and useEffect for animating the actions bar
   const cardRef = useRef(null);
   useEffect(() => {
     if (cardRef.current) {

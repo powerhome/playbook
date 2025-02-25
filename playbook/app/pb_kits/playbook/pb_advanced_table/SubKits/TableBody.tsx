@@ -189,7 +189,6 @@ export const TableBody = ({
               };
 
               if (item.type === 'header') {
-                // Render the header
                 return (
                   <tr
                       className="virtualized-table-row"
@@ -211,7 +210,6 @@ export const TableBody = ({
               }
 
               if (item.type === 'row') {
-                // Render the main row
                 const row = item.row;
                 const isExpandable = row.getIsExpanded();
                 const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
