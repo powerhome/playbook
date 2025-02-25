@@ -5,9 +5,9 @@ const TOOLTIP_OFFSET = 20
 const TOOLTIP_TIMEOUT = 250
 const SAFE_ZONE_MARGIN = 1
 
-export default class PbTooltipFLoatingUi extends PbEnhancedElement {
+export default class PbTooltipFloatingUi extends PbEnhancedElement {
   static get selector() {
-    return '[data-pb-tooltip-kit="true"][data-pb-tooltip-interaction="true"]'
+    return '[data-pb-tooltip-kit="true"][data-pb-tooltip-delay-open], [data-pb-tooltip-kit="true"][data-pb-tooltip-delay-close], [data-pb-tooltip-kit="true"][data-pb-tooltip-interaction="true"]'
   }
 
   connect() {
@@ -29,20 +29,34 @@ export default class PbTooltipFLoatingUi extends PbEnhancedElement {
       } else {
         trigger.addEventListener('mouseenter', () => {
           clearSafeZoneListener(this)
+          clearTimeout(this.mouseleaveTimeout)
           this.currentTrigger = trigger
+          const delayOpen = this.delayOpen ? parseInt(this.delayOpen) : TOOLTIP_TIMEOUT
           this.mouseenterTimeout = setTimeout(() => {
             this.showTooltip(trigger)
             if (interactionEnabled) {
               this.checkCloseTooltip(trigger)
             }
-          }, TOOLTIP_TIMEOUT)
+          }, delayOpen)
         })
 
         trigger.addEventListener('mouseleave', () => {
-          if (interactionEnabled) {
-            this.attachSafeZoneListener()
+          clearTimeout(this.mouseenterTimeout)
+          if (this.delayClose) {
+            const delayClose = parseInt(this.delayClose)
+            this.mouseleaveTimeout = setTimeout(() => {
+              if (interactionEnabled) {
+                this.attachSafeZoneListener()
+              } else {
+                this.hideTooltip()
+              }
+            }, delayClose)
           } else {
-            this.hideTooltip()
+            if (interactionEnabled) {
+              this.attachSafeZoneListener()
+            } else {
+              this.hideTooltip()
+            }
           }
         })
 
@@ -212,6 +226,14 @@ export default class PbTooltipFLoatingUi extends PbEnhancedElement {
 
   get tooltipInteraction() {
     return this.element.dataset.pbTooltipInteraction === 'true'
+  }
+  
+  get delayOpen() {
+    return this.element.dataset.pbTooltipDelayOpen
+  }
+  
+  get delayClose() {
+    return this.element.dataset.pbTooltipDelayClose
   }
 }
 

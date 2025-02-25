@@ -11,7 +11,7 @@ const TOOLTIP_TIMEOUT = 250
 
 export default class PbTooltip extends PbEnhancedElement {
   static get selector() {
-    return '[data-pb-tooltip-kit="true"][data-pb-tooltip-interaction="false"]'
+    return '[data-pb-tooltip-kit="true"][data-pb-tooltip-interaction="false"]:not([data-pb-tooltip-delay-open]):not([data-pb-tooltip-delay-close])'
   }
 
   connect() {

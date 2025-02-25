@@ -9,6 +9,8 @@ module Playbook
       prop :tooltip_id
       prop :interaction, type: Playbook::Props::Boolean,
                          default: false
+      prop :delay_open
+      prop :delay_close
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
       prop :trigger_method, type: Playbook::Props::Enum,
@@ -20,7 +22,7 @@ module Playbook
       end
 
       def data
-        Hash(values[:data]).merge(
+        data = Hash(values[:data]).merge(
           pb_tooltip_kit: true,
           pb_tooltip_position: position,
           pb_tooltip_trigger_element_selector: trigger_element_selector,
@@ -30,6 +32,9 @@ module Playbook
           pb_tooltip_trigger_method: trigger_method,
           pb_tooltip_interaction: interaction
         )
+        data = data.merge(pb_tooltip_delay_open: delay_open) if delay_open
+        data = data.merge(pb_tooltip_delay_close: delay_close) if delay_close
+        data
       end
 
     private
