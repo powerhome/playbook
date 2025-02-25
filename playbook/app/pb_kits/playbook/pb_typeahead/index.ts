@@ -87,11 +87,14 @@ export default class PbTypeahead extends PbEnhancedElement {
     const resultOption = (event.target as Element).closest('[data-result-option-item]')
     if (!resultOption) return
 
+    const selectedText = resultOption.textContent.trim()
+
     this._validSelection = true
     this.removeValidationError()
 
+    this.searchInput.value = selectedText
+
     this.resultsCacheClear()
-    this.searchInputClear()
     this.clearResults()
 
     this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-result-option-selected', { bubbles: true, detail: { selected: resultOption, typeahead: this } }))
