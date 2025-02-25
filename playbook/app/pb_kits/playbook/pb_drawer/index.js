@@ -80,11 +80,9 @@ export default class PbDrawer extends PbEnhancedElement {
 
   openWithinElementDrawer(dialog) {
     if (dialog.classList.contains("open")) return
-    dialog.style.maxHeight = "0px"
     dialog.offsetHeight
     dialog.classList.add("open")
-    const finalHeight = dialog.scrollHeight + "px"
-    dialog.style.maxHeight = finalHeight
+    dialog.style.maxHeight = "none" 
     dialog.addEventListener("transitionend", function handleOpenEnd(e) {
       if (e.propertyName === "max-height") {
         dialog.style.maxHeight = "none"
