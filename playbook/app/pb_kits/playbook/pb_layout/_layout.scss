@@ -20,22 +20,34 @@ $card-border-radius: $border_rad_lightest;
 
       &[class*=row_gap_sm]{
         grid-row-gap: $space_sm;
-        background: aqua;
       }
 
       &[class*=row_gap_md]{
         grid-row-gap: $space_md;
-        background: red;
       }
 
       &[class*=row_gap_lg]{
         grid-row-gap: $space_lg;
-        background: black;
       }
 
       &[class*=row_gap_xl]{
         grid-row-gap: $space_xl;
-        background: orange;
+      }
+
+      &[class*=column_gap_sm]{
+        grid-column-gap: $space_sm;
+      }
+
+      &[class*=column_gap_md]{
+        grid-column-gap: $space_md;
+      }
+
+      &[class*=column_gap_lg]{
+        grid-column-gap: $space_lg;
+      }
+
+      &[class*=column_gap_xl]{
+        grid-column-gap: $space_xl;
       }
 
       display: grid;

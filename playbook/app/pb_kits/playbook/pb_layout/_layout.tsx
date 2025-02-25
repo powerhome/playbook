@@ -29,7 +29,8 @@ type LayoutSideProps = {
 type LayoutBodyProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
-  rowGap?: "xs" | "sm" | "md" | "lg" | "xl"
+  rowGap?: "xs" | "sm" | "md" | "lg" | "xl",
+  columnGap?: "xs" | "sm" | "md" | "lg" | "xl",
 } & GlobalProps
 
 type LayoutItemProps = {
@@ -63,12 +64,13 @@ const Side = (props: LayoutSideProps) => {
 
 // Body component
 const Body = (props: LayoutBodyProps) => {
-  const { children, className, rowGap } = props
+  const { children, className, rowGap, columnGap } = props
   const dynamicInlineProps = globalInlineProps(props)
   const rowGapClass = `row_gap_${rowGap}`
+  const columnGapClass = `column_gap_${columnGap}`
   return (
     <div
-        className={classnames('layout_body', globalProps(props), className, rowGapClass)}
+        className={classnames('layout_body', globalProps(props), className, rowGapClass, columnGapClass)}
         style={dynamicInlineProps}
     >
       {children}
