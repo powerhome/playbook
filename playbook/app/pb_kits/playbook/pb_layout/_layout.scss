@@ -45,6 +45,7 @@ $column_gap_class: (
       display: grid;
       grid-auto-rows: max-content;
       grid-column-gap: $space_sm;
+      grid-row-gap: $space_sm;
       grid-template-columns: repeat(4, 1fr);
 
       @media screen and (max-width: $screen-md-min) {
