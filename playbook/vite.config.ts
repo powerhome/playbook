@@ -7,7 +7,7 @@ import typescript from '@rollup/plugin-typescript'
 import consolidate from './app/javascript/rollup/consolidate-plugin';
 import cssUrl from './app/javascript/rollup/css-url-plugin';
 
-const isProduction = (import.meta as any).env.MODE === 'production';
+const isProduction = import.meta.env.MODE === 'production';
 
 export default defineConfig({
   build: {
