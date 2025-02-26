@@ -8,8 +8,6 @@ module Playbook
                    default: "card_light"
       prop :layout, type: Playbook::Props::HashProp,
                     default: { "bottom": "full" }
-      prop :dynamic, type: Playbook::Props::Boolean,
-                     default: false
 
       def classname
         generate_classname("pb_overlay")
