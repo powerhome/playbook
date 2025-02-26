@@ -56,18 +56,38 @@ $number_of_columns_class: (
       @each $key, $value in $number_of_columns_class {
         &[class*=number_of_columns_#{$key}] {
           grid-template-columns: repeat($value, 1fr);
+
+          @media screen and (max-width: $screen-lg-min) {
+
+            @if $value > 6 {
+              grid-template-columns: repeat(5, 1fr);
+            }
+            @if $value <= 5 {
+              grid-template-columns: repeat(4, 1fr);
+            }
+
+            @if $value <= 4 {
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
+
+          @media screen and (max-width: $screen-md-min) {
+            @if $value > 4 {
+              grid-template-columns: repeat(3, 1fr);
+            }
+            @if $value <= 3 {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+
+          @media screen and (max-width: $screen-xs-min) {
+            grid-template-columns: repeat(1, 1fr);
+          }
         }
       }
 
       display: grid;
       grid-auto-rows: max-content;
-
-      @media screen and (max-width: $screen-md-min) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      @media screen and (max-width: $screen-xs-min) {
-        grid-template-columns: repeat(1, 1fr);
-      }
     }
   }
 
