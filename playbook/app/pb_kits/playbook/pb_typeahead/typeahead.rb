@@ -44,6 +44,8 @@ module Playbook
                       default: false
       prop :validation, type: Playbook::Props::HashProp,
                         default: {}
+      prop :clear_on_context_change, type: Playbook::Props::Boolean,
+                                     default: false
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
@@ -58,7 +60,8 @@ module Playbook
         Hash(values[:data]).merge(
           pb_typeahead_kit: true,
           pb_typeahead_kit_search_term_minimum_length: search_term_minimum_length,
-          pb_typeahead_kit_search_debounce_timeout: search_debounce_timeout
+          pb_typeahead_kit_search_debounce_timeout: search_debounce_timeout,
+          pb_typeahead_kit_clear_on_context_change: clear_on_context_change
         )
       end
 

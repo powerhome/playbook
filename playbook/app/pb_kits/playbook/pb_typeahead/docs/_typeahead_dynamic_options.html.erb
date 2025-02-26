@@ -21,31 +21,14 @@
   data: {
     typeahead_dynamic: true,
     search_context_value_selector: "[data-context-select] select"
-    }
+    },
+    clear_on_context_change: true 
   }) %>
 
 <br><br><br>
 
 <%= javascript_tag defer: "defer" do %>
-    document.addEventListener("DOMContentLoaded", () => {
-        
-      const colorSelect = document.querySelector("#test-select")
-      colorSelect.addEventListener("change", () => {
-        const typeaheadEl = document.querySelector("#typeahead-dynamic")
-
-        const searchInput = typeaheadEl && typeaheadEl.querySelector('input[type="search"]')
-        if (searchInput) {
-            searchInput.value = ""
-        }
-          
-        if (typeaheadEl && typeaheadEl.pbTypeahead) {
-              typeaheadEl.pbTypeahead.resultsCacheClear()
-              typeaheadEl.pbTypeahead.clearResults()
-            }
-      })
-    });
-
-
+   
   document.addEventListener("pb-typeahead-kit-search", function(event) {
     if (!event.target.dataset || !event.target.dataset.typeaheadDynamic) return;
 

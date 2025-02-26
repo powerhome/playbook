@@ -20,6 +20,28 @@ export default class PbTypeahead extends PbEnhancedElement {
     this.searchInput.addEventListener('focus', () => this.debouncedSearch())
     this.searchInput.addEventListener('input', () => this.debouncedSearch())
     this.resultsElement.addEventListener('click', (event: MouseEvent) => this.optionSelected(event))
+
+    if (this.clearOnContextChange && this.searchContextElement) {
+      this.searchContextElement.addEventListener('change', () => {
+        this.searchInputClear()
+        this.resultsCacheClear()
+        this.clearResults()
+      })
+    }
+  }
+
+  get searchContextElement() {
+    const selector = this.element.dataset.searchContextValueSelector
+    if (!selector) return null
+
+    const found = this.element.parentNode?.querySelector(selector)
+      || this.element.closest(selector)
+
+    return found || null
+  }
+
+  get clearOnContextChange() {
+    return this.element.dataset.pbTypeaheadKitClearOnContextChange === 'true'
   }
 
   handleKeydown(event: KeyboardEvent) {
