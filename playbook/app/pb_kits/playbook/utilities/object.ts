@@ -15,18 +15,14 @@ export const get = <T, R = any>(obj: T, path: string, defaultValue?: R): R | any
 export const isString = (str: unknown): str is string =>
   str != null && typeof (str as any).valueOf() === "string"
 
-export const omitBy = <T extends Record<string, any>>(
-  obj: T,
-  predicate: (value: T[keyof T], key: string) => boolean
-): Partial<T> => {
-  if (obj === null || typeof obj !== 'object') return {} as Partial<T>
-  return Object.keys(obj).reduce((result, key) => {
-    const typedKey = key as keyof T
-    if (!predicate(obj[typedKey], key)) {
-      result[typedKey] = obj[typedKey]
+export const omitBy = (obj: Record<string, any>, predicate: (value: any, key: string) => boolean) => {
+  if (obj === null || typeof obj !== 'object') return {}
+  return Object.keys(obj).reduce((result: Record<string, any>, key: string) => {
+    if (!predicate(obj[key], key)) {
+      result[key] = obj[key];
     }
-    return result
-  }, {} as Partial<T>)
+    return result;
+  }, {})
 }
 
 export const uniqueId: (prefix?: string) => string = (() => {
