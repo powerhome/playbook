@@ -1,7 +1,7 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 
 const SELECT_WRAPPER_SELECTOR = "[data-pb-select]";
-const SELECT_VALIDITY_MESSAGE_CLASS = ".pb_body_kit_negative";
+const SELECT_VALIDATION_MESSAGE_CLASS = ".pb_body_kit_negative";
 
 export default class PbSelect extends PbEnhancedElement {
   static get selector() {
@@ -9,17 +9,17 @@ export default class PbSelect extends PbEnhancedElement {
   }
 
   connect() {
-    this.setValidityMessage();
+    this.setValidationMessage();
   }
 
-  setValidityMessage() {
-    const validityMessage = this.element.dataset?.validityMessage;
+  setValidationMessage() {
+    const validationMessage = this.element.dataset?.validationMessage;
 
-    if (validityMessage) {
+    if (validationMessage) {
       const selectElement = this.element.querySelector("select");
       const setErrorTextContent = (text, timeout) => {
         setTimeout(() => {
-          const errorMessageElement = this.element.querySelector(SELECT_VALIDITY_MESSAGE_CLASS);
+          const errorMessageElement = this.element.querySelector(SELECT_VALIDATION_MESSAGE_CLASS);
           if (errorMessageElement) {
             errorMessageElement.textContent = text;
           } else {
@@ -30,7 +30,7 @@ export default class PbSelect extends PbEnhancedElement {
 
       selectElement.addEventListener("change", (e) => {
         if (!e.target.checkValidity()) {
-          setErrorTextContent(validityMessage, 300);
+          setErrorTextContent(validationMessage, 300);
         }
       });
     }
