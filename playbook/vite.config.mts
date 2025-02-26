@@ -4,8 +4,8 @@ import RubyPlugin from 'vite-plugin-ruby';
 import react from '@vitejs/plugin-react';
 import copy from 'rollup-plugin-copy';
 import typescript from '@rollup/plugin-typescript';
-import consolidate from './app/javascript/rollup/consolidate-plugin.js';
-import cssUrl from './app/javascript/rollup/css-url-plugin.js';
+import consolidate from './app/javascript/rollup/consolidate-plugin.cjs';
+import cssUrl from './app/javascript/rollup/css-url-plugin.cjs';
 
 const isProduction = import.meta.env.MODE === 'production';
 
