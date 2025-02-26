@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 import classnames from "classnames"
-import { flexRender, Row } from "@tanstack/react-table"
+import { flexRender, Row, Cell } from "@tanstack/react-table"
+import { VirtualItem } from "@tanstack/react-virtual"
 
 import { GenericObject } from "../../types"
 
@@ -92,7 +93,7 @@ export const TableBody = ({
       >
         {!virtualizer ? (
           // Regular non-virtualized table view
-          table.getRowModel().rows.map((row) => {
+          table.getRowModel().rows.map((row: Row<GenericObject>) => {
             const isExpandable = row.getIsExpanded();
             const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
             const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
@@ -131,7 +132,7 @@ export const TableBody = ({
                     </td>
                   )}
 
-                  {row.getVisibleCells().map((cell, i) => {
+                  {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
                     const isPinnedLeft = columnPinning.left.includes(cell.column.id);
                     const isLastCell = cell.column.parent?.columns?.at(-1)?.id === cell.column.id;
 
@@ -175,7 +176,7 @@ export const TableBody = ({
         ) : (
           // Virtualized table implementation
           <>
-            {virtualizer && flattenedItems && virtualizer.getVirtualItems().map((virtualRow) => {
+            {virtualizer && flattenedItems && virtualizer.getVirtualItems().map((virtualRow: VirtualItem) => {
               const item = flattenedItems[virtualRow.index];
               if (!item) return null;
 
@@ -241,7 +242,7 @@ export const TableBody = ({
                       </td>
                     )}
 
-                    {row.getVisibleCells().map((cell, i) => {
+                    {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
                       const isPinnedLeft = columnPinning.left.includes(cell.column.id);
                       const isLastCell = cell.column.parent?.columns?.at(-1)?.id === cell.column.id;
 
