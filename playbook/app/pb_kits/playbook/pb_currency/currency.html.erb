@@ -1,17 +1,24 @@
 <%= pb_content_tag do %>
   <%= pb_rails("caption", props: object.caption_props) %>
-
   <div class=<%= "pb_currency_wrapper#{object.variant_class || object.emphasized_class}" %>>
     <% if object.unstyled %>
-      <div><%= object.negative_sign %><%= object.symbol %></div>
-      <div><%= object.title_props[:text] %></div>
-      <div><%= object.body_props[:text] %></div>
-    <% else %>
-      <%= pb_rails("body", props: object.currency_wrapper_props) do %>
-        <%= object.negative_sign %><%= object.symbol %>
+      <% if object.null_display && object.amount.blank? %>
+        <div><%= object.null_display %></div>
+      <% else %>
+        <div><%= object.negative_sign %><%= object.symbol %></div>
+        <div><%= object.title_props[:text] %></div>
+        <div><%= object.body_props[:text] %></div>
       <% end %>
-      <%= pb_rails("title", props: object.title_props) %>
-      <%= pb_rails("body", props: object.body_props) %>
+    <% else %>
+     <% if object.null_display && object.amount.blank? %>
+        <%= pb_rails("title", props: object.title_props) %>
+      <% else %>
+        <%= pb_rails("body", props: object.currency_wrapper_props) do %>
+          <%= object.negative_sign %><%= object.symbol %>
+        <% end %>
+          <%= pb_rails("title", props: object.title_props) %>
+          <%= pb_rails("body", props: object.body_props) %>
+      <% end %>
     <% end %>
   </div>
 <% end %>
