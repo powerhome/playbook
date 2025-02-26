@@ -249,7 +249,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
   //initialize table
   const table = useReactTable({
-    data: loading ? Array(loadingStateRowCount).fill({}) : dataChunk,
+    data: loading ? Array(loadingStateRowCount).fill({}) : (virtualizedRows ? dataChunk : tableData),
     columns,
     onExpandedChange: setExpanded,
     getSubRows: (row: GenericObject) => row.children,
@@ -389,7 +389,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     if (rowsCount !== loadingStateRowCount && rowsCount !== 0) {
       setLoadingStateRowCount(rowsCount)
     }
-  }, [dataChunk, loadingStateRowCount, table])
+  }, [tableData, loadingStateRowCount])
 
   useEffect(() => {
     if (!loading) {

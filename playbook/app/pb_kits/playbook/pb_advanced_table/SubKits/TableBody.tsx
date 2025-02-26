@@ -65,27 +65,8 @@ export const TableBody = ({
     width: '100%',
   } : {};
 
-  // Additional css for virtualized table
-  const virtualizedCSS = `
-    .virtualized-table-row {
-      display: table !important;
-      table-layout: fixed !important;
-      width: 100% !important;
-    }
-
-    .virtualized-table-row td {
-      display: table-cell !important;
-    }
-
-    /* Ensure the first column has proper width */
-    .virtualized-table-row td:first-child {
-      width: auto !important;
-    }
-  `;
-
   return (
     <>
-      {virtualizer && <style>{virtualizedCSS}</style>}
       <tbody
           className={classes}
           id={id}
