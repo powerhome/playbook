@@ -30,6 +30,12 @@ export default class PbTypeahead extends PbEnhancedElement {
     }
   }
 
+  get optionsByContext() {
+    return this.element.dataset.pbTypeaheadKitOptionsByContext
+      ? JSON.parse(this.element.dataset.pbTypeaheadKitOptionsByContext)
+      : null
+  }
+
   get searchContextElement() {
     const selector = this.element.dataset.searchContextValueSelector
     if (!selector) return null
@@ -62,14 +68,24 @@ export default class PbTypeahead extends PbEnhancedElement {
 
     const searchTerm = this.searchTerm
     const searchContext = this.searchContext
-    const search = {
-      searchingFor: searchTerm,
-      searchingContext: searchContext,
-      setResults: (results: Array<DocumentFragment>) => {
-        this.resultsCacheUpdate(searchTerm, searchContext, results)
-      },
+    if (this.optionsByContext && searchContext) {
+      const contextArray = this.optionsByContext[searchContext] || []
+
+      const docFragments = contextArray.map((obj) => {
+        return document.createTextNode(obj.label || "")
+      })
+
+      this.resultsCacheUpdate(searchTerm, searchContext, docFragments)
+    } else {
+      const search = {
+        searchingFor: searchTerm,
+        searchingContext: searchContext,
+        setResults: (results: Array<DocumentFragment>) => {
+          this.resultsCacheUpdate(searchTerm, searchContext, results)
+        },
+      }
+      this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-search', { bubbles: true, detail: search }))
     }
-    this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-search', { bubbles: true, detail: search }))
   }
 
   resultsCacheUpdate(searchTerm: string, searchContext: string, results: Array<DocumentFragment>) {

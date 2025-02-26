@@ -1,63 +1,35 @@
 <%= pb_rails("select", props: {
-  label: "Colors",
-  name: "test",
-  id: "test-select",
   data: { context_select: true },
+  label: "Choose a Color",
+  name: "color_name",
   options: [
     { value: "red", value_text: "Red" },
-    { value: "orange", value_text: "Orange" },
-    { value: "yellow", value_text: "Yellow" },
-    { value: "green", value_text: "Green" },
     { value: "blue", value_text: "Blue" },
-    { value: "purple", value_text: "Purple" },
-  ]
-  }) %>
+    { value: "green", value_text: "Green" }
+  ],
+}) %>
 
-  <%= pb_rails("typeahead", props: {
-  label: "Crayola Crayons",
-  name: :test,
-  id: "typeahead-dynamic",
-  search_term_minimum_length: 0,
+<%= pb_rails("typeahead", props: {
+  label: "Pick a Shade",
   data: {
-    typeahead_dynamic: true,
     search_context_value_selector: "[data-context-select] select"
-    },
-    clear_on_context_change: true 
-  }) %>
-
-<br><br><br>
-
-<%= javascript_tag defer: "defer" do %>
-   
-  document.addEventListener("pb-typeahead-kit-search", function(event) {
-    if (!event.target.dataset || !event.target.dataset.typeaheadDynamic) return;
-
-    const fuzzyMatch = function(string, term) {
-      const ratio = 0.5;
-      string = string.toLowerCase();
-      const compare = term.toLowerCase();
-      let matches = 0;
-
-      if (string.indexOf(compare) > -1) return true;
-
-      for (let index = 0; index < compare.length; index++) {
-        if (string.indexOf(compare[index]) > -1) {
-          matches += 1
-        } else {
-          matches -=1;
-        }
-      }
-
-      return (matches / string.length >= ratio || term == "")
-    };
-
-    const colors = { red: ["Red", "Scarlet", "Chestnut", "Mahogany"],
-                     orange: ["Orange", "Apricot", "Peach", "Melon", "Burnt Sienna", "Macaroni and Cheese"],
-                     yellow: ["Yellow", "Gold", "Goldenrod", "Canary", "Laser Lemon"],
-                     green: ["Green", "Olive Green", "Granny Smith Apple", "Spring Green", "Sea Green"],
-                     blue: ["Blue", "Cerulean", "Bluetiful", "Sky Blue", "Cadet Blue", "Cornflower"],
-                     purple: ["Violet", "Indigo", "Wisteria", "Purple Mountain Majesty", "Lavender"] };
-
-    event.detail.setResults(colors[event.detail.searchingContext].filter((color) => fuzzyMatch(color, event.detail.searchingFor)).map((color) => document.createTextNode(color)));
-  })
-<% end %>
+  },
+  # minimal: let the kit handle dynamic data
+  options_by_context: {
+    "red":  [
+      { label: "Scarlet", value: "scarlet" },
+      { label: "Mahogany", value: "mahogany" }
+    ],
+    "blue": [
+      { label: "Sky Blue", value: "sky" },
+      { label: "Cerulean", value: "cerulean" }
+    ],
+    "green": [
+      { label: "Emerald", value: "emerald" },
+      { label: "Mint", value: "mint" }
+    ]
+  },
+  # if you also want it to reset on color change
+  clear_on_context_change: true,
+  search_term_minimum_length: 0,
+}) %>
