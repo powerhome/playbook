@@ -21,6 +21,7 @@ module Playbook
       prop :options, type: Playbook::Props::HashArray, required: false, default: []
       prop :show_arrow, type: Playbook::Props::Boolean, default: false
       prop :required, type: Playbook::Props::Boolean, default: false
+      prop :validity_message, type: Playbook::Props::String, default: ""
 
       def classnames
         classname + inline_class + compact_class + show_arrow_class
@@ -86,6 +87,13 @@ module Playbook
 
       def angle_down_path
         "app/pb_kits/playbook/utilities/icons/angle-down.svg"
+      end
+
+      def data_attributes
+        data = attributes[:data] || {}
+        data.merge!("data-pb-select" => true)
+        data.merge!("data-validity-message" => validity_message) if validity_message.present?
+        data
       end
 
     private
