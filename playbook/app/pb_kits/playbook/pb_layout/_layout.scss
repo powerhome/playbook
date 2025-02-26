@@ -24,6 +24,17 @@ $column_gap_class: (
   "xl": $space_xl,
 );
 
+$number_of_columns_class: (
+  "1": 1,
+  "2": 2,
+  "3": 3,
+  "4": 4,
+  "5": 5,
+  "6": 6,
+  "7": 7,
+  nil: 2,
+);
+
 [class^=pb_layout_kit] {
 
   &[class*=_collection]{
@@ -42,11 +53,14 @@ $column_gap_class: (
         }
       }
 
+      @each $key, $value in $number_of_columns_class {
+        &[class*=number_of_columns_#{$key}] {
+          grid-template-columns: repeat($value, 1fr);
+        }
+      }
+
       display: grid;
       grid-auto-rows: max-content;
-      grid-column-gap: $space_sm;
-      grid-row-gap: $space_sm;
-      grid-template-columns: repeat(4, 1fr);
 
       @media screen and (max-width: $screen-md-min) {
         grid-template-columns: repeat(2, 1fr);
