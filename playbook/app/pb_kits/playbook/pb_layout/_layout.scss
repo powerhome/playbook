@@ -10,7 +10,19 @@ $list-header-height: $space_lg;
 $list-footer-height: $space_lg;
 $list-border-radius: $border_rad_lighter;
 $card-border-radius: $border_rad_lightest;
+$row_gap_class: (
+  "sm": $space_sm,
+  "md": $space_md,
+  "lg": $space_lg,
+  "xl": $space_xl,
+);
 
+$column_gap_class: (
+  "sm": $space_sm,
+  "md": $space_md,
+  "lg": $space_lg,
+  "xl": $space_xl,
+);
 
 [class^=pb_layout_kit] {
 
@@ -18,36 +30,16 @@ $card-border-radius: $border_rad_lightest;
 
     div.layout_body {
 
-      &[class*=row_gap_sm]{
-        grid-row-gap: $space_sm;
+      @each $key, $value in $row_gap_class {
+        &[class*=row_gap_#{$key}] {
+          grid-row-gap: #{$value};
+        }
       }
 
-      &[class*=row_gap_md]{
-        grid-row-gap: $space_md;
-      }
-
-      &[class*=row_gap_lg]{
-        grid-row-gap: $space_lg;
-      }
-
-      &[class*=row_gap_xl]{
-        grid-row-gap: $space_xl;
-      }
-
-      &[class*=column_gap_sm]{
-        grid-column-gap: $space_sm;
-      }
-
-      &[class*=column_gap_md]{
-        grid-column-gap: $space_md;
-      }
-
-      &[class*=column_gap_lg]{
-        grid-column-gap: $space_lg;
-      }
-
-      &[class*=column_gap_xl]{
-        grid-column-gap: $space_xl;
+      @each $key, $value in $column_gap_class {
+        &[class*=column_gap_#{$key}] {
+          grid-column-gap: #{$value};
+        }
       }
 
       display: grid;
