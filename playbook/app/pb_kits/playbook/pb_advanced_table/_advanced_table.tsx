@@ -275,7 +275,11 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const flattenedItems = useMemo(() => {
     if (!virtualizedRows) return [];
 
-    const items = [];
+    const items: Array<{
+      type: 'header' | 'row' | 'loading',
+      row: Row<GenericObject>,
+      id: string
+    }> = [];
 
     // Process each row and insert special components
     tableRows.rows.forEach((row) => {

@@ -1,9 +1,21 @@
 import React, { createContext, useRef, useMemo } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
+import { Row } from "@tanstack/react-table";
+import { GenericObject } from "../../types";
+
 const AdvancedTableContext = createContext<any>({})
 
-export const AdvancedTableProvider = ({ children, ...props }) => {
+interface FlattenedItem {
+    type: 'header' | 'row' | 'loading';
+    row: Row<GenericObject>;
+    id: string;
+  }
+
+export const AdvancedTableProvider = ({ children, ...props }: {
+    children: React.ReactNode,
+    [key: string]: any
+  })  => {
   const tableContainerRef = useRef(null)
 
   const table = props.table;
@@ -12,13 +24,13 @@ export const AdvancedTableProvider = ({ children, ...props }) => {
   const flattenedItems = useMemo(() => {
     if (!props.enableVirtualization) return [];
 
-    const items = [];
+    const items: FlattenedItem[] = [];
     const subRowHeaders = props.subRowHeaders;
     const inlineRowLoading = props.inlineRowLoading;
     const columnDefinitions = props.columnDefinitions;
 
     // Process each row and insert special components
-    table.getRowModel().rows.forEach((row) => {
+    table.getRowModel().rows.forEach((row: Row<GenericObject>) => {
       const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
 
       if (isFirstChildofSubrow && subRowHeaders) {
