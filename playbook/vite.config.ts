@@ -6,7 +6,7 @@ import copy from 'rollup-plugin-copy'
 import typescript from '@rollup/plugin-typescript'
 import consolidate from './app/javascript/rollup/consolidate-plugin';
 import cssUrl from './app/javascript/rollup/css-url-plugin';
-// import { env } from 'process';
+import { env } from 'process';
 
 const isProduction = env.NODE_ENV === 'production'
 
