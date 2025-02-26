@@ -29,6 +29,9 @@ type LayoutSideProps = {
 type LayoutBodyProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
+  rowGap?: "xs" | "sm" | "md" | "lg" | "xl",
+  columnGap?: "xs" | "sm" | "md" | "lg" | "xl",
+  numberOfColumns?: string,
 } & GlobalProps
 
 type LayoutItemProps = {
@@ -62,11 +65,14 @@ const Side = (props: LayoutSideProps) => {
 
 // Body component
 const Body = (props: LayoutBodyProps) => {
-  const { children, className } = props
+  const { children, className, rowGap, columnGap, numberOfRows, numberOfColumns } = props
   const dynamicInlineProps = globalInlineProps(props)
+  const rowGapClass = `row_gap_${rowGap}`
+  const columnGapClass = `column_gap_${columnGap}`
+  const numberOfColumnsClass = `number_of_columns_${numberOfColumns}`
   return (
     <div
-        className={classnames('layout_body', globalProps(props), className)}
+        className={classnames('layout_body', globalProps(props), className, rowGapClass, columnGapClass, numberOfColumnsClass)}
         style={dynamicInlineProps}
     >
       {children}
@@ -141,7 +147,7 @@ const Layout = (props: LayoutPropTypes) => {
 
   const layoutCss =
     layout == 'collection'
-      ? `pb_layout_kit_${layout}`
+      ? buildCss(`pb_layout_kit_${layout}`)
       : layout == 'kanban'
         ? `pb_layout_kit_${layout}${responsiveClass}`
         : buildCss(`pb_layout_kit_${layout}`, `size_${size}`, position, variant, {

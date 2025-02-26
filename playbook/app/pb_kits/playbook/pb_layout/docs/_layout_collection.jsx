@@ -11,7 +11,10 @@ const LayoutCollection = (props) => {
           layout="collection"
           {...props}
       >
-        <Layout.Body>
+        <Layout.Body columnGap='sm'
+            numberOfColumns="7"
+            rowGap="lg"
+        >
           <Card>{'Card content'}</Card>
           <Card>{'Card content'}</Card>
           <Card>{'Card content'}</Card>
