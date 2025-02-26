@@ -68,12 +68,20 @@ export default class PbTypeahead extends PbEnhancedElement {
 
     const searchTerm = this.searchTerm
     const searchContext = this.searchContext
+
     if (this.optionsByContext && searchContext) {
       const contextArray = this.optionsByContext[searchContext] || []
 
-      const docFragments = contextArray.map((obj) => {
-        return document.createTextNode(obj.label || "")
+      const filteredResults = contextArray.filter((obj) => {
+        return obj.label
+          && obj.label.toLowerCase().includes(searchTerm.toLowerCase())
       })
+
+       const docFragments = filteredResults.map((obj) => {
+      const frag = document.createDocumentFragment()
+      frag.appendChild(document.createTextNode(obj.label))
+      return frag
+    })
 
       this.resultsCacheUpdate(searchTerm, searchContext, docFragments)
     } else {
