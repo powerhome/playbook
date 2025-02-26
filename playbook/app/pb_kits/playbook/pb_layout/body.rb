@@ -12,9 +12,10 @@ module Playbook
       prop :column_gap, type: Playbook::Props::Enum,
                         values: %w[xs sm md lg xl],
                         default: "md"
+      prop :number_of_columns, type: Playbook::Props::Number
 
       def classname
-        generate_classname("layout_body row_gap_#{row_gap} column_gap_#{column_gap}")
+        generate_classname("layout_body row_gap_#{row_gap} column_gap_#{column_gap} number_of_columns_#{number_of_columns}")
       end
     end
   end
