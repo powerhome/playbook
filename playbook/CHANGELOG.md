@@ -1,5 +1,10 @@
-# 14.14.0
+# 🚀 Smarter Scroll Gradients in Playbook! 🎨
 ##### February 21, 2025
+
+![Overlay-Kit -Graphic](https://github.com/user-attachments/assets/edb55b83-f184-4009-9d27-937c9a0ff457)
+
+We’ve fine-tuned the Overlay Kit to improve the horizontal scrolling experience! Previously, the scroll-end gradient indicators were always visible on both ends, even when users couldn’t scroll left—causing confusion. With the new 'dynamic' prop, gradients now appear only when there’s more content to scroll toward.
+Enjoy the improved clarity! 🚀✨
 
 [14.14.0](https://github.com/powerhome/playbook/tree/14.14.0) full list of changes:
 
