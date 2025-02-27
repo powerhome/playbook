@@ -25,6 +25,7 @@ type TooltipProps = {
   children: JSX.Element,
   data?: { [key: string]: string },
   delay?: number | Partial<{open: number; close: number}>,
+  height?: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
   interaction?: boolean,
@@ -42,6 +43,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     children,
     data = {},
     delay = 0,
+    height,
     htmlOptions = {},
     icon = null,
     interaction = false,
@@ -115,6 +117,18 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     top: "bottom",
   }[placement.split("-")[0]]
 
+  const tooltipSizing = () => {
+    return Object.assign(
+      {},
+      height ? { height: height } : {},
+      // maxHeight ? { maxHeight: maxHeight } : {},
+      // maxWidth ? { maxWidth: maxWidth } : {},
+      // minHeight ? { minHeight: minHeight } : {},
+      // minWidth ? { minWidth: minWidth } : {},
+      // width ? { width: width } : {}
+    );
+};
+
   return (
     <>
       <div
@@ -144,6 +158,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
               ref: refs.setFloating,
               role: "tooltip",
               style: {
+                ...tooltipSizing(),
                 position: strategy,
                 top: y ?? 0,
                 left: x ?? 0,
