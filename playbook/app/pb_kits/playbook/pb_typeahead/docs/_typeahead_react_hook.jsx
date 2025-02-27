@@ -12,19 +12,24 @@ const labels = [
 ]
 
 const TypeaheadReactHook = (props) => {
-  const { register, watch } = useForm()
+  const { register, watch } = useForm({
+    defaultValues: {
+      foobar: [labels[0]],
+    },
+  })
 
-  const selectedBadges = watch('badges')
-
+  const selectedBadges = watch('foobar')
+  console.log("selectedBadges",selectedBadges)
   return (
     <>
       <Typeahead
           defaultValue={[labels[0]]}
+          isMulti
           label="Badges"
           multiKit="badge"
           options={labels}
           {...props}
-          {...register('badges')}
+          {...register('foobar')}
       />
       <p>{`Selected badge: ${selectedBadges}`}</p>
     </>
