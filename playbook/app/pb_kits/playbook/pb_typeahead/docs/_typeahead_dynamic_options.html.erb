@@ -1,0 +1,35 @@
+<%= pb_rails("select", props: {
+  data: { context_select: true },
+  label: "Choose a Color",
+  name: "color_name",
+  options: [
+    { value: "red", value_text: "Red" },
+    { value: "blue", value_text: "Blue" },
+    { value: "green", value_text: "Green" }
+  ],
+}) %>
+
+<%= pb_rails("typeahead", props: {
+  label: "Pick a Shade",
+  data: {
+    search_context_value_selector: "[data-context-select] select"
+  },
+  # minimal: let the kit handle dynamic data
+  options_by_context: {
+    "red":  [
+      { label: "Scarlet", value: "scarlet" },
+      { label: "Mahogany", value: "mahogany" }
+    ],
+    "blue": [
+      { label: "Sky Blue", value: "sky" },
+      { label: "Cerulean", value: "cerulean" }
+    ],
+    "green": [
+      { label: "Emerald", value: "emerald" },
+      { label: "Mint", value: "mint" }
+    ]
+  },
+  # if you also want it to reset on color change
+  clear_on_context_change: true,
+  search_term_minimum_length: 0,
+}) %>
