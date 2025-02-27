@@ -16,7 +16,9 @@
     "maplibre-gl": "^2.4.0",
     "match-sorter": "^8.0.0",
     "playbook-ui": ">= 1",
-    "react-hook-form": "^7.28.1"
+    "react-hook-form": "^7.28.1",
+    "html2pdf.js": "^0.9.2",
+    "pdfjs-dist": "^2.16.105"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.24.8",
