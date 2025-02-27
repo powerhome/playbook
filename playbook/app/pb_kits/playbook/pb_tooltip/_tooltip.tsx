@@ -29,6 +29,10 @@ type TooltipProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
   interaction?: boolean,
+  maxHeight?: string,
+  maxWidth?: string,
+  minHeight?: string,
+  minWidth?: string,
   placement?: Placement,
   position?: "absolute" | "fixed";
   text: string,
@@ -48,6 +52,10 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     htmlOptions = {},
     icon = null,
     interaction = false,
+    maxHeight,
+    maxWidth,
+    minHeight,
+    minWidth,
     placement: preferredPlacement = "top",
     position = "absolute",
     text,
@@ -123,10 +131,10 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     return Object.assign(
       {},
       height ? { height: height } : {},
-      // maxHeight ? { maxHeight: maxHeight } : {},
-      // maxWidth ? { maxWidth: maxWidth } : {},
-      // minHeight ? { minHeight: minHeight } : {},
-      // minWidth ? { minWidth: minWidth } : {},
+      maxHeight ? { maxHeight: maxHeight } : {},
+      maxWidth ? { maxWidth: maxWidth } : {},
+      minHeight ? { minHeight: minHeight } : {},
+      minWidth ? { minWidth: minWidth } : {},
       width ? { width: width } : {}
     );
 };
