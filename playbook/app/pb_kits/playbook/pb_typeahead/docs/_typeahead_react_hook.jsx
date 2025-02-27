@@ -1,37 +1,64 @@
 import React from 'react'
 
-import { Typeahead } from 'playbook-ui'
+import { Typeahead, Title } from 'playbook-ui'
 import { useForm } from 'react-hook-form'
 
-const labels = [
-  { label: 'Verve', value: '1956' },
-  { label: 'Stax', value: '1957' },
-  { label: 'Motown', value: '1959' },
-  { label: 'Kudu', value: '1971' },
-  { label: 'Stones Throw', value: '1996' },
+const languages = [
+  { label: 'JavaScript', value: '1995', category: 'Web Development' },
+  { label: 'Python', value: '1991', category: 'General Purpose' },
+  { label: 'Java', value: '1995', category: 'Enterprise' },
+  { label: 'C++', value: '1985', category: 'Systems Programming' },
+  { label: 'Go', value: '2009', category: 'Systems Programming' },
+  { label: 'Rust', value: '2010', category: 'Systems Programming' },
+  { label: 'Swift', value: '2014', category: 'Mobile Development' },
+  { label: 'Kotlin', value: '2011', category: 'Mobile Development' },
+  { label: 'Ruby', value: '1995', category: 'Web Development' },
+  { label: 'PHP', value: '1995', category: 'Web Development' },
+]
+
+const colors = [
+  { label: 'Orange', value: '#FFA500' },
+  { label: 'Red', value: '#FF0000' },
+  { label: 'Green', value: '#00FF00' },
+  { label: 'Blue', value: '#0000FF' },
 ]
 
 const TypeaheadReactHook = (props) => {
-  const { register, watch } = useForm({
-    defaultValues: {
-      foobar: [labels[0]],
-    },
-  })
+  const { register, watch } = useForm()
 
-  const selectedBadges = watch('foobar')
-  console.log("selectedBadges",selectedBadges)
+  const selectedLanguages = watch('languages')
+  const selectedColor = watch('color')
+
   return (
     <>
       <Typeahead
-          defaultValue={[labels[0]]}
           isMulti
-          label="Badges"
-          multiKit="badge"
-          options={labels}
+          label="Multi Select Languages"
+          multiKit="language"
+          options={languages}
           {...props}
-          {...register('foobar')}
+          {...register('languages')}
       />
-      <p>{`Selected badge: ${selectedBadges}`}</p>
+      <Title 
+          size={4} 
+          text='Selected Languages' 
+      />
+      {selectedLanguages && selectedLanguages.map(language => (
+        <p key={language.label}>{`${language.label} - ${language.value} - ${language.category}`}</p>
+      ))}
+
+      <Typeahead
+          label="Colors"
+          marginTop="lg"
+          options={colors}
+          {...props}
+          {...register('color')}
+      />
+      <Title 
+          size={4} 
+          text='Selected Color' 
+      />
+      <p>{ selectedColor && `${selectedColor.label} - ${selectedColor.value}`}</p>
     </>
   )
 }
