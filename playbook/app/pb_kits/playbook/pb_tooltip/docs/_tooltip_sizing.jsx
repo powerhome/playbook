@@ -14,6 +14,7 @@ const TooltipSizing = (props) => {
           height='100px'
           placement='top'
           text="Whoa. I'm a Tooltip"
+          width='100px'
           zIndex={10}
           {...props}
       >

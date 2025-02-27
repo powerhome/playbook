@@ -32,6 +32,7 @@ type TooltipProps = {
   placement?: Placement,
   position?: "absolute" | "fixed";
   text: string,
+  width: string,
   showTooltip?: boolean,
   forceOpenTooltip?: boolean,
 } & GlobalProps
@@ -51,6 +52,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     position = "absolute",
     text,
     showTooltip = true,
+    width,
     zIndex,
     forceOpenTooltip = false,
     ...rest
@@ -125,7 +127,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
       // maxWidth ? { maxWidth: maxWidth } : {},
       // minHeight ? { minHeight: minHeight } : {},
       // minWidth ? { minWidth: minWidth } : {},
-      // width ? { width: width } : {}
+      width ? { width: width } : {}
     );
 };
 
