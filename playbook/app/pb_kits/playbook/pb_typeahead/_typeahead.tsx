@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
@@ -67,7 +67,6 @@ type TagOnChangeValues = {
  * @constant {React.ReactComponent} Typeahead
  * @param {TypeaheadProps} props - props as described at https://react-select.com/props
  */
-
 const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   async,
   className,
@@ -79,6 +78,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   getOptionValue,
   htmlOptions = {},
   id,
+  name,
   loadOptions = noop,
   marginBottom = "sm",
   pillColor,
@@ -124,7 +124,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   )
 
   const handleOnChange = (_data: SelectValueType, { action, option, removedValue }: TagOnChangeValues) => {
-    console.log('handleOnChange', _data, action, option, removedValue)
+    onChange({ target: { name: name, value: _data } } as unknown as React.ChangeEvent<HTMLInputElement>)
+    
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
       const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option ? option : _data })
@@ -164,7 +165,6 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
           classNamePrefix="typeahead-kit-select"
           error={error}
           onChange={handleOnChange}
-          ref={ref}
           {...selectProps}
       />
     </div>
