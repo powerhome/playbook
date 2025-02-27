@@ -7,10 +7,10 @@ examples:
   - tooltip_show_tooltip: Show Tooltip
 
   react:
-  - tooltip_sizing: Tooltip Sizing
   - tooltip_default_react: Default
   - tooltip_interaction: Content Interaction
   - tooltip_margin: Margin
+  - tooltip_sizing: Tooltip Sizing
   - tooltip_icon: Tooltip with Icon
   - tooltip_delay: Delay
   - tooltip_show_tooltip_react: Show Tooltip
