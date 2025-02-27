@@ -31,12 +31,28 @@
     width: 100%;
   }
 
-    .row-selection-actions-card {
-      border-bottom-right-radius: 0px !important;
-      border-bottom-left-radius: 0px !important;
-      border-bottom-color: transparent;
-      transition: height 300ms ease;
+  // Virtualized table styles
+  .virtualized-table-row {
+    display: table !important;
+    table-layout: fixed !important;
+    width: 100% !important;
+
+    td {
+      display: table-cell !important;
     }
+
+    // Ensure the first column has proper width
+    td:first-child {
+      min-width: 180px;
+    }
+  }
+
+  .row-selection-actions-card {
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-color: transparent;
+    transition: height 300ms ease;
+  }
   .table-header-cells:first-child {
     min-width: 180px;
   }
@@ -87,6 +103,32 @@
         padding-left: 0px;
       }
     }
+
+    // Virtualization specific styles for the table body
+    position: relative;
+
+    // Fix virtualized row borders
+    tr.virtualized-table-row {
+      border-bottom: 1px solid $border_light;
+
+      &.bg-silver {
+        td:first-child {
+          background-color: lighten($silver, $opacity_7);
+        }
+      }
+
+      &.bg-white {
+        td:first-child {
+          background-color: $white;
+        }
+      }
+
+      &.bg-row-selection {
+        td:first-child {
+          background-color: $info_subtle;
+        }
+      }
+    }
   }
 
   .table-header-cells-active:first-child {
@@ -129,7 +171,6 @@
     max-height: 1920px;
     overflow-y: auto;
   }
-  
   // Icons
   .button-icon {
     display: flex;
@@ -251,6 +292,19 @@
       .bg-white td:first-child {
           background-color: $white;
       }
+
+      .virtualized-table-row {
+        &.bg-silver td:first-child {
+          background-color: lighten($silver, $opacity_7);
+        }
+        &.bg-white td:first-child {
+          background-color: $white;
+        }
+        &.bg-row-selection td:first-child {
+          background-color: $info_subtle;
+        }
+      }
+
       .row-selection-actions-card {
         border-right-width: 0px;
         border-left-width: 0px;
@@ -287,6 +341,25 @@
 
     .bg-silver {
       background: $bg_dark;
+    }
+
+    // Dark mode virtualized rows
+    .virtualized-table-row {
+      &.bg-white {
+        background: $bg_dark_card !important;
+
+        td:first-child {
+          background: $bg_dark_card !important;
+        }
+      }
+
+      &.bg-silver {
+        background: $bg_dark;
+
+        td:first-child {
+          background: $bg_dark;
+        }
+      }
     }
 
     .table-header-cells:first-child, td:first-child, .pb_table_td:first-child {
@@ -359,6 +432,17 @@
         .bg-white td:first-child {
           background-color: $bg_dark_card;
         }
+
+        // Dark mode virtualized rows
+        .virtualized-table-row {
+          &.bg-silver td:first-child {
+            background-color: $bg_dark;
+          }
+          &.bg-white td:first-child {
+            background-color: $bg_dark_card;
+          }
+        }
+
         .sticky-header {
           thead {
             th:first-child {
