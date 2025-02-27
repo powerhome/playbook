@@ -22,10 +22,10 @@ const TooltipSizing = (props) => {
     </FlexItem>
     <FlexItem>
       <Tooltip
-          maxHeight='150px'
+          maxHeight='100px'
           placement='top'
-          text="I have a maxHeight of 150px! Here is some more text to show the maxHeight."
-          width='200px'
+          text="I have a maxHeight of 100px! Lorem ipsum dolor sit amet consectetur adipisicing elit."
+          width='250px'
           {...props}
       >
         <Button text="maxHeight"/>
@@ -35,7 +35,7 @@ const TooltipSizing = (props) => {
       <Tooltip
           maxWidth='150px'
           placement='top'
-          text="I have a maxWidth of 150px! Here is some more text to show the maxWidth."
+          text="I have a maxWidth of 150px! Lorem ipsum dolor sit amet consectetur adipisicing elit."
           {...props}
       >
         <Button text="maxWidth"/>
