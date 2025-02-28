@@ -64,6 +64,9 @@ PbDraggable.start()
 import PbOverlay from 'kits/pb_overlay'
 PbOverlay.start()
 
+import PbSelect from 'kits/pb_select'
+PbSelect.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====
