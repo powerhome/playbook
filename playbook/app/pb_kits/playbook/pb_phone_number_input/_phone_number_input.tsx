@@ -245,7 +245,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       countrySearch: false,
       fixDropdownWidth: false,
       formatAsYouType: formatAsYouType,
-      hiddenInput: formHiddenInput ? (telInputName) => ({
+      hiddenInput: formHiddenInput ? (telInputName: string) => ({
         phone: `${telInputName}_full`,
         country: `${telInputName}_country_code`,
       }) : undefined,
