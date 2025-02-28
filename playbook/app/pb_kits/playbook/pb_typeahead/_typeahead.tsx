@@ -129,7 +129,10 @@ const Typeahead = ({
       const searchContextElement = document.getElementById(searchContextSelector)
 
       setContextValue((searchContextElement as HTMLInputElement)?.value)
-      const handleContextChange = (e) => setContextValue(e.target.value)
+      const handleContextChange = (e) => {
+        setContextValue(e.target.value);
+        if (clearOnContextChange) document.dispatchEvent(new CustomEvent(`pb-typeahead-kit-${selectProps.id}:clear`))
+      }
 
       if (searchContextElement) searchContextElement.addEventListener('change', handleContextChange)
 
@@ -137,7 +140,7 @@ const Typeahead = ({
         if (searchContextElement) searchContextElement.removeEventListener('change', handleContextChange)
       }
     }
-  }, [clearOnContextChange, searchContextSelector])
+  }, [searchContextSelector])
 
   const contextArray = optionsByContext[contextValue]
   if (Array.isArray(contextArray) && contextArray.length > 0) {
