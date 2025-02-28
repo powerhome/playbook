@@ -31,13 +31,13 @@ export default class PbTypeahead extends PbEnhancedElement {
   }
 
   get optionsByContext() {
-    return this.element.dataset.pbTypeaheadKitOptionsByContext
-      ? JSON.parse(this.element.dataset.pbTypeaheadKitOptionsByContext)
+    return (this.element as HTMLElement).dataset.pbTypeaheadKitOptionsByContext
+      ? JSON.parse((this.element as HTMLElement).dataset.pbTypeaheadKitOptionsByContext)
       : null
   }
 
   get searchContextElement() {
-    const selector = this.element.dataset.pbTypeaheadKitSearchContextSelector
+    const selector = (this.element as HTMLElement).dataset.pbTypeaheadKitSearchContextSelector
     if (!selector) return null
 
     const found = this.element.parentNode?.querySelector(`#${selector}`)
@@ -47,7 +47,7 @@ export default class PbTypeahead extends PbEnhancedElement {
   }
 
   get clearOnContextChange() {
-    return this.element.dataset.pbTypeaheadKitClearOnContextChange === 'true'
+    return (this.element as HTMLElement).dataset.pbTypeaheadKitClearOnContextChange === 'true'
   }
 
   handleKeydown(event: KeyboardEvent) {
@@ -72,12 +72,12 @@ export default class PbTypeahead extends PbEnhancedElement {
     if (this.optionsByContext && Object.keys(this.optionsByContext).length > 0) {
       const contextArray = this.optionsByContext[searchContext] || []
 
-      const filteredResults = contextArray.filter((obj) => {
+      const filteredResults = contextArray.filter((obj: { label: string, value: string }) => {
         return obj.label
           && obj.label.toLowerCase().includes(searchTerm.toLowerCase())
       })
 
-       const docFragments = filteredResults.map((obj) => {
+       const docFragments = filteredResults.map((obj: { label: string, value: string }) => {
       const frag = document.createDocumentFragment()
       frag.appendChild(document.createTextNode(obj.label))
       return frag
