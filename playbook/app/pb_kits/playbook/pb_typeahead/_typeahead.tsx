@@ -84,7 +84,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   pillColor,
   onChange = () => { void 0 },
   ...props
-}: TypeaheadProps, ref: any) => {
+}: TypeaheadProps) => {
   const selectProps = {
     cacheOptions: true,
     components: {
