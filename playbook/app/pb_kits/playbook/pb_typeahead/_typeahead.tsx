@@ -129,8 +129,9 @@ const Typeahead = ({
       const searchContextElement = document.getElementById(searchContextSelector)
 
       setContextValue((searchContextElement as HTMLInputElement)?.value)
-      const handleContextChange = (e) => {
-        setContextValue(e.target.value);
+      const handleContextChange = (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        setContextValue(target.value);
         if (clearOnContextChange) document.dispatchEvent(new CustomEvent(`pb-typeahead-kit-${selectProps.id}:clear`))
       }
 
