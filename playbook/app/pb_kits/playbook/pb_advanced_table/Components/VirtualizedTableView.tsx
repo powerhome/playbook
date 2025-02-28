@@ -1,10 +1,12 @@
-import React, { useContext } from "react"
+import React, { useContext, useLayoutEffect, useState, useEffect } from "react"
 import classnames from "classnames"
 import { flexRender, Cell } from "@tanstack/react-table"
 import { VirtualItem } from "@tanstack/react-virtual"
 
 import { GenericObject } from "../../types"
+
 import { isChrome } from "../Utilities/BrowserCheck"
+import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -12,7 +14,6 @@ import Checkbox from "../../pb_checkbox/_checkbox"
 import { SubRowHeaderRow } from "../Components/SubRowHeaderRow"
 import { LoadingCell } from "../Components/LoadingCell"
 import { renderCollapsibleTrail } from "../Components/CollapsibleTrail"
-import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
 
 import AdvancedTableContext from "../Context/AdvancedTableContext"
 
@@ -39,6 +40,74 @@ export const VirtualizedTableView = ({
 
   const columnPinning = table.getState().columnPinning || { left: [] };
   const sortingState = JSON.stringify(table.getState().sorting || []);
+
+  // Store column widths extracted from header
+  const [columnWidths, setColumnWidths] = useState<{[key: string]: string}>({});
+
+  // Function to get header cell widths
+  const getHeaderCellWidths = () => {
+    const widths: {[key: string]: string} = {};
+
+    // Get all header cells
+    const headerCells = document.querySelectorAll('.table-header-cells, .table-header-cells-custom');
+
+    // If checkbox is present in header
+    if (selectableRows && !hasAnySubRows && headerCells.length > 0) {
+      widths['checkbox'] = `${headerCells[0].getBoundingClientRect().width}px`;
+    }
+
+    // Process regular header cells
+    table.getFlatHeaders().forEach((header, index) => {
+      // Adjust index if checkbox column exists
+      const headerIndex = (selectableRows && !hasAnySubRows) ? index + 1 : index;
+
+      if (headerCells[headerIndex]) {
+        const width = headerCells[headerIndex].getBoundingClientRect().width;
+        widths[header.id] = `${width}px`;
+      }
+    });
+
+    return widths;
+  };
+
+  // Debounce function to prevent too many updates during resize
+  const debounce = <T extends (...args: any[]) => any>(func: T, wait: number): ((...args: Parameters<T>) => void) => {
+    let timeout: ReturnType<typeof setTimeout>;
+    return function executedFunction(...args: Parameters<T>) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
+
+  // Update column widths when component mounts and when sorting changes
+  useLayoutEffect(() => {
+    // Apply widths after a small delay to ensure header is rendered
+    const timer = setTimeout(() => {
+      setColumnWidths(getHeaderCellWidths());
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [table, selectableRows, hasAnySubRows, sortingState]);
+
+  // Add window resize listener to update widths on window resize
+  useEffect(() => {
+    // Create debounced version of the width measurement function
+    const handleResize = debounce(() => {
+      setColumnWidths(getHeaderCellWidths());
+    }, 150);
+
+    // Add the event listener
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [table, selectableRows, hasAnySubRows]);
 
   // Safety check
   if (!virtualizer || !flattenedItems) {
@@ -130,7 +199,10 @@ export const VirtualizedTableView = ({
             >
               {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
               {selectableRows && !hasAnySubRows && (
-                <td className="checkbox-cell">
+                <td
+                    className="checkbox-cell"
+                    style={{ width: columnWidths['checkbox'] || 'auto' }}
+                >
                   <Checkbox
                       checked={row.getIsSelected()}
                       disabled={!row.getCanSelect()}
@@ -144,6 +216,7 @@ export const VirtualizedTableView = ({
               {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
                 const isPinnedLeft = columnPinning.left.includes(cell.column.id);
                 const isLastCell = cell.column.parent?.columns?.at(-1)?.id === cell.column.id;
+                const cellWidth = columnWidths[cell.column.id] || 'auto';
 
                 return (
                   <td
@@ -155,6 +228,7 @@ export const VirtualizedTableView = ({
                         isLastCell && 'last-cell',
                       )}
                       key={`${cell.id}-data`}
+                      style={{ width: cellWidth }}
                   >
                     {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
                     <span id={`${cell.id}-span`}>
