@@ -46,6 +46,9 @@ module Playbook
       prop :comma_separator, type: Playbook::Props::Boolean,
                              default: false
 
+      prop :null_display, type: Playbook::Props::String,
+                          required: false
+
       def classname
         generate_classname("pb_currency_kit", align, size, dark_class)
       end
@@ -65,10 +68,20 @@ module Playbook
         }
       end
 
+      def title_text
+        if null_display
+          null_display
+        elsif swap_negative
+          absolute_amount(abbr_or_format_amount)
+        else
+          abbr_or_format_amount
+        end
+      end
+
       def title_props
         {
           size: size_value,
-          text: swap_negative ? absolute_amount(abbr_or_format_amount) : abbr_or_format_amount,
+          text: title_text,
           classname: "pb_currency_value",
           dark: dark,
         }
@@ -145,8 +158,10 @@ module Playbook
           1
         when "md"
           3
-        else
+        when "sm"
           4
+        else
+          3
         end
       end
 
