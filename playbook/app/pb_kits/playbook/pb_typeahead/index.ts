@@ -77,13 +77,13 @@ export default class PbTypeahead extends PbEnhancedElement {
           && obj.label.toLowerCase().includes(searchTerm.toLowerCase())
       })
 
-       const docFragments = filteredResults.map((obj: { label: string, value: string }) => {
-      const frag = document.createDocumentFragment()
-      frag.appendChild(document.createTextNode(obj.label))
-      return frag
+       const optionFragments = filteredResults.map((obj: { label: string, value: string }) => {
+      const singleOption = document.createDocumentFragment()
+      singleOption.appendChild(document.createTextNode(obj.label))
+      return singleOption
     })
 
-      this.resultsCacheUpdate(searchTerm, searchContext, docFragments)
+      this.resultsCacheUpdate(searchTerm, searchContext, optionFragments)
     } else {
       const search = {
         searchingFor: searchTerm,

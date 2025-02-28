@@ -45,7 +45,7 @@ module Playbook
       prop :validation, type: Playbook::Props::HashProp,
                         default: {}
       prop :clear_on_context_change, type: Playbook::Props::Boolean,
-                                     default: false
+                                     default: true
       prop :options_by_context, type: Playbook::Props::HashProp,
                                 default: {}
       prop :search_context_selector, type: Playbook::Props::String,
