@@ -1,0 +1,26 @@
+<%= pb_rails("flex", props: { gap: "md", wrap: true }) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("button", props: { text: "With Interaction", id: "tooltip-interaction"}) %>
+
+    <%= pb_rails("tooltip", props: {
+      trigger_element_selector: "#tooltip-interaction",
+      tooltip_id: "tooltip-with-interaction",
+      position: 'top',
+      interaction: true
+    }) do %>
+        You can copy me
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("button", props: { text: "No Interaction", id: "tooltip-no-interaction"}) %>
+
+    <%= pb_rails("tooltip", props: {
+      trigger_element_selector: "#tooltip-no-interaction",
+      tooltip_id: "tooltip-without-interaction",
+      position: 'top',
+    }) do %>
+        I'm just a regular tooltip
+    <% end %>
+  <% end %>
+<% end %>

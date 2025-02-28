@@ -1,0 +1,39 @@
+<%= pb_rails("flex", props: { orientation: "row", gap: "md" }) do %>
+  <%= pb_rails("flex/flex_item", props: {margin_top: "md"}) do %>
+    <%= pb_rails("button", props: {classname: "tooltip-delay", text: "1s delay"}) %>
+  <% end %>
+
+  <%= pb_rails("flex/flex_item", props: {margin_top: "md"}) do %>
+    <%= pb_rails("button", props: {classname: "tooltip-open-delay", text: "Open only"}) %>
+  <% end %>
+
+  <%= pb_rails("flex/flex_item", props: {margin_top: "md"}) do %>
+    <%= pb_rails("button", props: {classname: "tooltip-close-delay", text: "Close only"}) %>
+  <% end %>
+
+  <%= pb_rails("tooltip", props: {
+      trigger_element_selector: ".tooltip-delay",
+      tooltip_id: "delay-tooltip",
+      position: 'top',
+      delay_open: 1000,
+      delay_close: 1000
+    }) do %>
+        1s open/close delay 
+  <% end %>
+  <%= pb_rails("tooltip", props: {
+      trigger_element_selector: ".tooltip-open-delay",
+      tooltip_id: "open-tooltip",
+      position: 'top',
+      delay_open: 1000
+    }) do %>
+        1s open delay 
+  <% end %>
+  <%= pb_rails("tooltip", props: {
+      trigger_element_selector: ".tooltip-close-delay",
+      tooltip_id: "close-tooltip",
+      position: 'top',
+      delay_close: 1000
+    }) do %>
+        1s close delay 
+  <% end %>
+<% end %>
