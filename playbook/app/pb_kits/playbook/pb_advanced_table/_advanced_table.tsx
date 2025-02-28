@@ -16,9 +16,8 @@ import { TableBody } from "./SubKits/TableBody";
 import TablePagination from "./Components/TablePagination";
 import TableActionBar from "./Components/TableActionBar";
 
-// Custom hooks
-import { useTableState } from "./hooks/useTableState";
-import { useTableActions } from "./hooks/useTableActions";
+import { useTableState } from "./Hooks/useTableState";
+import { useTableActions } from "./Hooks/useTableActions";
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
