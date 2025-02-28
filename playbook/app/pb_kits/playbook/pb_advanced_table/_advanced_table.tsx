@@ -1,39 +1,24 @@
-import React, { useState, useEffect, useCallback, useRef, useMemo } from "react"
-import classnames from "classnames"
+import React, { useRef, useEffect } from "react";
+import classnames from "classnames";
 
-import { GenericObject } from "../types"
+import { GenericObject } from "../types";
+import { Row, RowSelectionState } from "@tanstack/react-table";
 
-import {
-  createColumnHelper,
-  getCoreRowModel,
-  getExpandedRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  Row,
-  useReactTable,
-  Getter,
-  RowSelectionState
-} from "@tanstack/react-table"
-import { useVirtualizer } from '@tanstack/react-virtual'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
+import { globalProps, GlobalProps } from "../utilities/globalProps";
 
-import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
-import { globalProps, GlobalProps } from "../utilities/globalProps"
+import Table from "../pb_table/_table";
+import { AdvancedTableProvider } from "./Context/AdvancedTableContext";
+import { getVirtualizedContainerStyles } from "./Utilities/TableContainerStyles";
 
-import Table from "../pb_table/_table"
-import Card from "../pb_card/_card"
-import Caption from "../pb_caption/_caption"
-import Flex from "../pb_flex/_flex"
-import FlexItem from "../pb_flex/_flex_item"
+import { TableHeader } from "./SubKits/TableHeader";
+import { TableBody } from "./SubKits/TableBody";
+import TablePagination from "./Components/TablePagination";
+import TableActionBar from "./Components/TableActionBar";
 
-import AdvancedTableContext from "./Context/AdvancedTableContext"
-
-import { updateExpandAndCollapseState } from "./Utilities/ExpansionControlHelpers"
-import { showActionBar, hideActionBar } from "./Utilities/ActionBarAnimationHelper"
-
-import { CustomCell } from "./Components/CustomCell"
-import { TableHeader } from "./SubKits/TableHeader"
-import { TableBody } from "./SubKits/TableBody"
-import Pagination from "../pb_pagination/_pagination"
+// Custom hooks
+import { useTableState } from "./hooks/useTableState";
+import { useTableActions } from "./hooks/useTableActions";
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
@@ -65,7 +50,7 @@ type AdvancedTableProps = {
   toggleExpansionIcon?: string | string[]
   onRowSelectionChange?: (arg: RowSelectionState) => void
   virtualizedRows?: boolean
-} & GlobalProps
+} & GlobalProps;
 
 const AdvancedTable = (props: AdvancedTableProps) => {
   const {
@@ -98,403 +83,148 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     toggleExpansionIcon = "arrows-from-line",
     onRowSelectionChange,
     virtualizedRows = false,
-  } = props
+  } = props;
 
-  const [loadingStateRowCount, setLoadingStateRowCount] = useState(
-    initialLoadingRowsCount
-  )
+  // Component refs
+  const tableWrapperRef = useRef<HTMLDivElement>(null);
 
-  // Create a local state for expanded and setExpanded if expandedControl not used
-  const [localExpanded, setLocalExpanded] = useState({})
-
-  // Determine whether to use the prop or the local state
-  const expanded = expandedControl ? expandedControl.value : localExpanded
-  const setExpanded = expandedControl
-    ? expandedControl.onChange
-    : setLocalExpanded
-
-  const columnHelper = createColumnHelper()
-
-  //Row Selection
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
-
-  //Create cells for columns, with customization for first column
-  const createCellFunction = (cellAccessors: string[], customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element, isFirstColumn?: boolean) => {
-    const columnCells = ({
-      row,
-      getValue,
-    }: {
-      row: Row<GenericObject>
-      getValue: Getter<string>
-    }) => {
-      const rowData = row.original
-
-    if (isFirstColumn) {
-      switch (row.depth) {
-        case 0: {
-          return (
-                <CustomCell
-                    customRenderer={customRenderer}
-                    getValue={getValue}
-                    onRowToggleClick={onRowToggleClick}
-                    row={row}
-                    selectableRows={selectableRows}
-                />
-          )
-        }
-        default: {
-          // Handle other depths based on cellAccessors
-          const depthAccessor = cellAccessors[row.depth - 1] // Adjust index for depth
-          const accessorValue = rowData[depthAccessor]
-          return accessorValue ? (
-            <CustomCell
-                customRenderer={customRenderer}
-                onRowToggleClick={onRowToggleClick}
-                row={row}
-                selectableRows={selectableRows}
-                value={accessorValue}
-            />
-          ) : (
-            "N/A"
-          )
-        }
-      }
-    }
-    return customRenderer
-    ? customRenderer(row, getValue())
-    : getValue()
-    }
-    return columnCells
-  }
-
-  const buildColumns = (columnDefinitions: GenericObject[], isRoot= true): any => {
-    return (
-      columnDefinitions &&
-      columnDefinitions.map((column, index) => {
-        const isFirstColumn = isRoot && index === 0; 
-        //Checking to see if grouped column or not
-        if (column.columns && column.columns.length > 0) {
-          return {
-            header: column.label || "",
-            columns: buildColumns(column.columns, false),
-          };
-        } else {
-          // Define the base column structure
-          const columnStructure = {
-            ...columnHelper.accessor(column.accessor, {
-              header: column.label || "",
-            }),
-          };
-
-          if (column.cellAccessors || column.customRenderer) {
-            columnStructure.cell = createCellFunction(
-              column.cellAccessors,
-              column.customRenderer,
-              isFirstColumn
-            );
-          }
-
-          return columnStructure;
-        }
-      })
-    );
-  };
-
-  //Create column array in format needed by Tanstack
-  const columns = buildColumns(columnDefinitions);
-
-  //Syntax for sorting Array if we want to manage state ourselves
-  const sorting = [
-    {
-      id: columnDefinitions[0].accessor,
-      desc:
-        sortControl && sortControl.value !== null
-          ? !sortControl.value.desc
-          : false,
-    },
-  ]
-
-  const customState = () => {
-    if (sortControl && selectableRows) {
-      return { state: { expanded, sorting, rowSelection } }
-    } else if (sortControl) {
-      return { state: { expanded, sorting } }
-    } else if (selectableRows) {
-      return { state: { expanded, rowSelection } }
-    } else {
-      return { state: { expanded } }
-    }
-  }
-
-  const paginationInitializer = pagination ? {
-    getPaginationRowModel: getPaginationRowModel(),
-    paginateExpandedRows: false,
-    initialState: {
-        pagination: {
-            pageIndex: paginationProps?.pageIndex ?? 0,
-            pageSize: paginationProps?.pageSize ??  20,
-        },
-    },
-} : {}
-
-  // Simulating chunked data fetch
-  const fetchSize = 20; // Number of rows per "page"
-  const [fullData] = useState(tableData); // All data from the JSON file
-  const [dataChunk, setDataChunk] = useState(fullData.slice(0, fetchSize)); // Initial chunk
-
-  // Virtualized table state
-  const [totalDBRowCount] = useState(fullData.length); // Total number of rows
-  const [totalFetched, setTotalFetched] = useState(fetchSize); // Track loaded rows
-  const [isFetching, setIsFetching] = useState(false);
-
-  //initialize table
-  const table = useReactTable({
-    data: loading ? Array(loadingStateRowCount).fill({}) : (virtualizedRows ? dataChunk : tableData),
-    columns,
-    onExpandedChange: setExpanded,
-    getSubRows: (row: GenericObject) => row.children,
-    getCoreRowModel: getCoreRowModel(),
-    getExpandedRowModel: getExpandedRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    enableSortingRemoval: false,
-    sortDescFirst: true,
-    onRowSelectionChange: setRowSelection,
-    getRowId: selectableRows ? row => row.id : undefined,
-    ...customState(),
-    ...paginationInitializer,
-    ...tableOptions,
-  })
-
-  const tableRows = table.getRowModel()
-  const tableWrapperRef = useRef<HTMLDivElement>(null)
-
-  const hasAnySubRows = tableRows.rows.some(row => row.subRows && row.subRows.length > 0);
-  const selectedRowsLength = Object.keys(table.getState().rowSelection).length
-
-  // Generate a flattened set of items for virtualization that includes special components
-  const flattenedItems = useMemo(() => {
-    if (!virtualizedRows) return [];
-
-    const items: Array<{
-      type: 'header' | 'row' | 'loading',
-      row: Row<GenericObject>,
-      id: string
-    }> = [];
-
-    // Process each row and insert special components
-    tableRows.rows.forEach((row) => {
-      const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
-      const subRowHeaders = props.tableOptions?.subRowHeaders;
-
-      if (isFirstChildofSubrow && subRowHeaders) {
-        items.push({
-          type: 'header',
-          row: row,
-          id: `header-${row.id}`,
-        });
-      }
-
-      items.push({
-        type: 'row',
-        row: row,
-        id: row.id
-      });
-
-      const isExpandable = row.getIsExpanded();
-      const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
-      const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && 
-        (row.depth < columnDefinitions[0].cellAccessors?.length);
-
-      if (isDataLoading) {
-        items.push({
-          type: 'loading',
-          row: row,
-          id: `loading-${row.id}`
-        });
-      }
-    });
-
-    return items;
-  }, [
+  // Initialize table state
+  const {
+    table,
+    expanded,
+    setExpanded,
+    hasAnySubRows,
+    selectedRowsLength,
+    fetchNextPage,
+    updateLoadingStateRowCount,
+    fullData,
+    totalFetched,
+    isFetching
+  } = useTableState({
+    tableData,
+    columnDefinitions,
+    expandedControl,
+    sortControl,
+    onRowToggleClick,
+    selectableRows,
+    initialLoadingRowsCount,
+    loading,
+    pagination,
+    paginationProps,
     virtualizedRows,
-    tableRows.rows,
-    props.tableOptions?.subRowHeaders,
-    inlineRowLoading,
-    columnDefinitions
-  ]);
+    tableOptions,
+    onRowSelectionChange
+  });
 
-  const tableWrapperStyle = virtualizedRows ? {
-    overflow: 'auto', // scrollable table container
-    position: 'relative', // needed for sticky header
-    height: '600px', // fixed height - adjust as needed
-  } : {}
-
-  // Configure virtualizer to work with our flattened items
-  const virtualizerConfig = useVirtualizer({
-    count: virtualizedRows ? flattenedItems.length : tableRows.rows.length,
-    getScrollElement: () => tableWrapperRef.current,
-    estimateSize: (index) => {
-      if (!virtualizedRows || flattenedItems.length === 0) return 50;
-
-      const item = flattenedItems[index];
-      if (!item) return 50; // Default row height
-
-      if (item.type === 'header') return 40; // Header height
-      if (item.type === 'loading') return 30; // Loading indicator height
-      return 50; // Regular row height
-    },
-    overscan: 5,
-    getItemKey: (index) => virtualizedRows ? flattenedItems[index]?.id || index : tableRows.rows[index]?.id || index,
-  })
-
-  const virtualizer = virtualizedRows ? virtualizerConfig : null
-
-  const fetchNextPage = useCallback(() => {
-    if (isFetching || totalFetched >= totalDBRowCount) return; // Stop if already fetching or no more data
-
-    setIsFetching(true);
-
-    // Simulate a network request delay
-    setTimeout(() => {
-      const nextChunk = fullData.slice(totalFetched, totalFetched + fetchSize);
-      setDataChunk(prev => [...prev, ...nextChunk]);
-      setTotalFetched(prev => prev + nextChunk.length);
-      setIsFetching(false);
-    }, 500);
-  }, [isFetching, totalFetched, totalDBRowCount, fullData, fetchSize]);
-
-  const fetchMoreOnBottomReached = useCallback((containerRefElement?: HTMLDivElement | null) => {
-    if (containerRefElement) {
-      const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
-      // If user scrolls near bottom, fetch more data
-      if (scrollHeight - scrollTop - clientHeight < 500 && !isFetching && totalFetched < totalDBRowCount) {
-        fetchNextPage();
-      }
-    }
-  }, [fetchNextPage, isFetching, totalFetched, totalDBRowCount]);
-
-  useEffect(() => {
-    fetchMoreOnBottomReached(tableWrapperRef.current);
-  }, [fetchMoreOnBottomReached]);
-
-  useEffect(() => {
-    if (onRowSelectionChange) {
-      onRowSelectionChange(table.getState().rowSelection)
-    }
-  } , [table.getState().rowSelection, onRowSelectionChange])
+  // Initialize table actions
+  const {
+    handleExpandOrCollapse,
+    onPageChange,
+    fetchMoreOnBottomReached
+  } = useTableActions({
+    table,
+    expanded,
+    setExpanded,
+    onToggleExpansionClick,
+    onRowSelectionChange
+  });
 
   // Set table row count for loading state
-  const updateLoadingStateRowCount = useCallback(() => {
-    const rowsCount = table.getRowModel().rows.length
-    if (rowsCount !== loadingStateRowCount && rowsCount !== 0) {
-      setLoadingStateRowCount(rowsCount)
-    }
-  }, [tableData, loadingStateRowCount])
-
   useEffect(() => {
     if (!loading) {
-      updateLoadingStateRowCount()
+      updateLoadingStateRowCount();
     }
-  }, [loading, updateLoadingStateRowCount])
+  }, [loading, updateLoadingStateRowCount]);
 
-  const handleExpandOrCollapse = async (row: Row<GenericObject>) => {
-    onToggleExpansionClick && onToggleExpansionClick(row)
+  // Check for infinite scroll
+  useEffect(() => {
+    fetchMoreOnBottomReached(
+      tableWrapperRef.current,
+      fetchNextPage,
+      isFetching,
+      totalFetched,
+      fullData.length
+    );
+  }, [fetchMoreOnBottomReached, fetchNextPage, isFetching, totalFetched, fullData.length]);
 
-    const expandedState = expanded;
-    const targetParent = row?.parentId;
-    const updatedRows = await updateExpandAndCollapseState(tableRows, expandedState, targetParent)
-    setExpanded(updatedRows)
-  }
-
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
-  const htmlProps = buildHtmlProps(htmlOptions)
+  // Build CSS classes and props
+  const ariaProps = buildAriaProps(aria);
+  const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_advanced_table"),
     `advanced-table-responsive-${responsive}`,
-    maxHeight ? `advanced-table-max-height-${maxHeight}` : '', // max height as kit prop not global prop to control overflow-y
+    maxHeight ? `advanced-table-max-height-${maxHeight}` : '',
     globalProps(props),
     className
-  )
+  );
 
-  const onPageChange = (page: number) => {
-    table.setPageIndex(page - 1)
-  }
+  // Table wrapper styling with virtualization support
+  const tableWrapperStyle = virtualizedRows
+    ? getVirtualizedContainerStyles(maxHeight)
+    : {};
 
-  const isActionBarVisible = selectableRows && showActionsBar && selectedRowsLength > 0
-
-  const cardRef = useRef(null);
-  useEffect(() => {
-    if (cardRef.current) {
-      if (isActionBarVisible) {
-        showActionBar(cardRef.current);
-      } else {
-        hideActionBar(cardRef.current);
-      }
-    }
-  }, [isActionBarVisible]);
+  // Visibility flag for action bar
+  const isActionBarVisible = selectableRows && showActionsBar && selectedRowsLength > 0;
 
   return (
-    <div {...ariaProps}
+    <div
+        {...ariaProps}
         {...dataProps}
         {...htmlProps}
         className={classes}
         id={id}
-        onScroll={virtualizedRows ? e => fetchMoreOnBottomReached(e.currentTarget) : undefined}
+        onScroll={virtualizedRows ? e => fetchMoreOnBottomReached(
+          e.currentTarget,
+          fetchNextPage,
+          isFetching,
+          totalFetched,
+          fullData.length
+        ) : undefined}
         ref={tableWrapperRef}
         style={tableWrapperStyle as React.CSSProperties}
     >
-      <AdvancedTableContext.Provider
-          value={{
-            columnDefinitions,
-            enableToggleExpansion,
-            expanded,
-            expandedControl,
-            handleExpandOrCollapse,
-            inlineRowLoading,
-            isActionBarVisible,
-            loading,
-            responsive,
-            setExpanded,
-            sortControl,
-            table,
-            toggleExpansionIcon,
-            showActionsBar,
-            selectableRows,
-            hasAnySubRows,
-            virtualizer,
-            flattenedItems, // Pass the flattened items to context
-          }}
+      <AdvancedTableProvider
+          columnDefinitions={columnDefinitions}
+          enableToggleExpansion={enableToggleExpansion}
+          enableVirtualization={virtualizedRows}
+          expanded={expanded}
+          expandedControl={expandedControl}
+          handleExpandOrCollapse={handleExpandOrCollapse}
+          hasAnySubRows={hasAnySubRows}
+          inlineRowLoading={inlineRowLoading}
+          isActionBarVisible={isActionBarVisible}
+          loading={loading}
+          responsive={responsive}
+          selectableRows={selectableRows}
+          setExpanded={setExpanded}
+          showActionsBar={showActionsBar}
+          sortControl={sortControl}
+          subRowHeaders={tableOptions?.subRowHeaders}
+          table={table}
+          tableContainerRef={tableWrapperRef}
+          toggleExpansionIcon={toggleExpansionIcon}
+          virtualizedRows={virtualizedRows}
       >
-        <>
-          {pagination &&
-              <Pagination
-                  current={table.getState().pagination.pageIndex + 1}
-                  key={`pagination-top-${table.getState().pagination.pageIndex + 1}`}
-                  marginBottom="xs"
-                  onChange={onPageChange}
-                  range={paginationProps?.range ? paginationProps?.range : 5}
-                  total={table.getPageCount()}
-                  />
-          }
-          <Card
-              borderNone={!isActionBarVisible}
-              className={`${isActionBarVisible && "show-action-card row-selection-actions-card"}`}
-              htmlOptions={{ ref: cardRef as any }}
-              padding={`${isActionBarVisible ? "xs" : "none"}`}
-          >
-            <Flex alignItems="center"
-                justify="between"
-            >
-              <Caption color="light"
-                  paddingLeft="xs"
-                  size="xs"
-              >
-                {selectedRowsLength} Selected
-              </Caption>
-              <FlexItem>{actions}</FlexItem>
-            </Flex>
-          </Card>
+        <React.Fragment>
+          {/* Top Pagination */}
+          {pagination && (
+            <TablePagination
+                onChange={onPageChange}
+                position="top"
+                range={paginationProps?.range}
+                table={table}
+            />
+          )}
+
+          {/* Selection Action Bar */}
+          <TableActionBar
+              actions={actions}
+              isVisible={isActionBarVisible}
+              selectedCount={selectedRowsLength}
+          />
+
+          {/* Main Table */}
           <Table
               className={`${loading ? "content-loading" : ""}`}
               dark={dark}
@@ -512,23 +242,24 @@ const AdvancedTable = (props: AdvancedTableProps) => {
               </>
             )}
           </Table>
-          {pagination &&
-            <Pagination
-                current={table.getState().pagination.pageIndex + 1}
-                key={`pagination-bottom-${table.getState().pagination.pageIndex + 1}`}
-                marginTop="xs"
+
+          {/* Bottom Pagination */}
+          {pagination && (
+            <TablePagination
                 onChange={onPageChange}
-                range={paginationProps?.range ? paginationProps?.range : 5}
-                total={table.getPageCount()}
+                position="bottom"
+                range={paginationProps?.range}
+                table={table}
             />
-          }
-        </>
-      </AdvancedTableContext.Provider>
+          )}
+        </React.Fragment>
+      </AdvancedTableProvider>
     </div>
-  )
-}
+  );
+};
 
-AdvancedTable.Header = TableHeader
-AdvancedTable.Body = TableBody
+// Re-export sub-components
+AdvancedTable.Header = TableHeader;
+AdvancedTable.Body = TableBody;
 
-export default AdvancedTable
+export default AdvancedTable;
