@@ -1,12 +1,20 @@
-<!-- Go to pb_content_tag definition in kit_base.rb for usage information. Commented out options are default (showing the default shape), and each can be deleted if not customizing that param. -->
-<!-- If using nonstandard params please un-comment out and replace with your custom params. -->
-<%= pb_content_tag(
-    # :div,
-    # aria: object.aria,
-    # class: object.classname,
-    # data: object.data,
-    # id: object.id,
-    # **combined_html_options
-) do %>
-  <span>DRAWER CONTENT</span>
+<% if within_element %>
+    <%= pb_content_tag(:div, data: {breakpoint: object.breakpoint} ) do %>
+        <%= content %>
+    <% end %>
+<% else %>
+    <div class="pb_drawer_wrapper"
+        id="drawer-wrapper-<%= object.id %>"
+        style="display:none;"
+        data-behavior="<%= object.behavior %>"
+        data-size="<%= object.size %>"
+        data-placement="<%= object.placement %>"
+        data-breakpoint="<%= object.breakpoint %>"
+        >
+        <div class="<%= overlay_classes %>" style="display:none;" id="drawer-overlay-<%= object.id %>"> 
+            <%= pb_content_tag do %>
+                <%= content %>
+            <% end %>
+        </div>
+    </div>
 <% end %>
