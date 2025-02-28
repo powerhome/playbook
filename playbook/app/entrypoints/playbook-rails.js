@@ -6,6 +6,10 @@ PbTextInput.start()
 import PbCopyButton from 'kits/pb_copy_button'
 PbCopyButton.start()
 
+// Drawer
+import PbDrawer from 'kits/pb_drawer'
+PbDrawer.start()
+
 // Forms
 import 'kits/pb_form/pb_form_validation'
 import formHelper from 'kits/pb_form/formHelper'
