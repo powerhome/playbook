@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, GlobalProps, globalProps } from '../utilities/globalProps'
 
-type SizeType = 1 | 2 | 3 | 4 | "1" | "2" | "3" | "4" | "display"
+type SizeType = 1 | 2 | 3 | 4 | "1" | "2" | "3" | "4"
 type SizeResponsiveType = {[key: string]: SizeType}
 
 type TitleProps = {
@@ -16,7 +16,6 @@ type TitleProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: SizeType | SizeResponsiveType,
-  displaySize?: null | "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
   text?: string,
   variant?: null | "link",
@@ -33,7 +32,6 @@ const Title = (props: TitleProps): React.ReactElement => {
     htmlOptions = {},
     id,
     size = 3,
-    displaySize = null,
     bold = true,
     tag = 'h3',
     text,
@@ -58,16 +56,9 @@ const Title = (props: TitleProps): React.ReactElement => {
     return css.trim()
   }
 
-  const buildDisplaySize = () => {
-    if (displaySize) {
-      return `pb_title_kit_dynamic_${displaySize}`
-    }
-  }
-
   const classes = classnames(
     buildCss('pb_title_kit', isSizeNumberOrString ? `size_${size}` : "", variant, color, getBold),
     globalProps(props),
-    buildDisplaySize(),
     buildResponsiveSizeCss(),
     className
   )
