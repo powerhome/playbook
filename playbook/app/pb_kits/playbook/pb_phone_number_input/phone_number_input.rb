@@ -23,6 +23,8 @@ module Playbook
                    default: ""
       prop :format_as_you_type, type: Playbook::Props::Boolean,
                                 default: false
+      prop :form_hidden_input, type: Playbook::Props::Boolean,
+                               default: false
 
       def classname
         generate_classname("pb_phone_number_input")
@@ -35,6 +37,7 @@ module Playbook
           disabled: disabled,
           error: error,
           formatAsYouType: format_as_you_type,
+          formHiddenInput: form_hidden_input,
           initialCountry: initial_country,
           label: label,
           name: name,

@@ -36,6 +36,7 @@ type PhoneNumberInputProps = {
   required?: boolean,
   value?: string,
   formatAsYouType?: boolean,
+  formHiddenInput?: boolean,
 }
 
 enum ValidationError {
@@ -89,6 +90,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
     preferredCountries = [],
     value = "",
     formatAsYouType = false,
+    formHiddenInput = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -243,10 +245,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       countrySearch: false,
       fixDropdownWidth: false,
       formatAsYouType: formatAsYouType,
-      hiddenInput: (telInputName) => ({
+      hiddenInput: formHiddenInput ? (telInputName) => ({
         phone: `${telInputName}_full`,
         country: `${telInputName}_country_code`,
-      }),
+      }) : undefined,
     })
 
     itiRef.current = telInputInit;
