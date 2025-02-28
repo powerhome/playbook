@@ -1,7 +1,7 @@
 <%= pb_rails("select", props: {
-  id:"color_context_2",
+  id:"color_context",
   label: "Choose a Color",
-  name: "color_name",
+  name: "color_name_2",
   options: [
     { value: "red", value_text: "Red" },
     { value: "blue", value_text: "Blue" },
@@ -11,8 +11,7 @@
 
 <%= pb_rails("typeahead", props: {
   label: "Pick a Shade",
-  is_multi: false,
-  search_context_selector: "color_context_2",
+  search_context_selector: "color_context",
   options_by_context: {
     "red":  [
       { label: "Scarlet", value: "scarlet" },

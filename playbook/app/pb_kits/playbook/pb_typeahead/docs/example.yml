@@ -12,6 +12,7 @@ examples:
     - typeahead_margin_bottom: Margin Bottom
     - typeahead_with_pills_color: With Pills (Custom Color)
     - typeahead_truncated_text: Truncated Text
+    - typeahead_dynamic_options_pure_rails: Dynamic Options (Pure Rails)
     - typeahead_dynamic_options: Dynamic Options
 
   react:

@@ -37,10 +37,10 @@ export default class PbTypeahead extends PbEnhancedElement {
   }
 
   get searchContextElement() {
-    const selector = this.element.dataset.searchContextValueSelector
+    const selector = this.element.dataset.pbTypeaheadKitSearchContextSelector
     if (!selector) return null
 
-    const found = this.element.parentNode?.querySelector(selector)
+    const found = this.element.parentNode?.querySelector(`#${selector}`)
       || this.element.closest(selector)
 
     return found || null
@@ -69,7 +69,7 @@ export default class PbTypeahead extends PbEnhancedElement {
     const searchTerm = this.searchTerm
     const searchContext = this.searchContext
 
-    if (this.optionsByContext && searchContext) {
+    if (this.optionsByContext && Object.keys(this.optionsByContext).length > 0) {
       const contextArray = this.optionsByContext[searchContext] || []
 
       const filteredResults = contextArray.filter((obj) => {
@@ -222,6 +222,9 @@ export default class PbTypeahead extends PbEnhancedElement {
       this.element.parentNode.querySelector(selector) ||
       this.element.closest(selector)
     ) as HTMLInputElement).value
+    else if (this.searchContextElement) {
+      return (this.searchContextElement as HTMLInputElement).value
+    }
 
     return null
   }
