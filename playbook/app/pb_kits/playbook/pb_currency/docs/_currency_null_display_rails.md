@@ -1,0 +1,1 @@
+To customize how the `amount` field appears when it is empty, use the `null_display` prop and set it to the desired value you want to display.

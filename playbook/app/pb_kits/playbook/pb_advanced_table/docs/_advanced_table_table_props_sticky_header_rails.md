@@ -1,0 +1,3 @@
+Create a sticky header that works for responsive Advanced Tables by setting `sticky: true` via `table_props` and giving the AdvancedTable a `max_height` using our [Max Height](https://playbook.powerapp.cloud/visual_guidelines/max_height) global prop. This behavior requires a `max_height` to work. The header is sticky within the table container, allowing for it to work along with the first column stickiness of a responsive table on smaller screen sizes.
+
+A sticky header on a nonresponsive table is demonstrated in the ["Table Props"](https://playbook.powerapp.cloud/kits/advanced_table#table-props) doc example above.

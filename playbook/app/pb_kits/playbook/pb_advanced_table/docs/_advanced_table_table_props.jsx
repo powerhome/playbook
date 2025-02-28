@@ -44,6 +44,7 @@ const AdvancedTableTableProps = (props) => {
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          responsive="none"
           tableData={MOCK_DATA}
           tableProps={tableProps}
           {...props}

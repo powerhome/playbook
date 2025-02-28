@@ -9,6 +9,8 @@ module Playbook
       prop :steps, type: Playbook::Props::Number,
                    default: 3
       prop :title
+      prop :full_width_pill, type: Playbook::Props::Boolean,
+                             default: false
 
       def classname
         generate_classname("pb_progress_pills_kit")
@@ -24,6 +26,10 @@ module Playbook
 
       def active_step(step)
         step <= active ? "_active" : "_inactive"
+      end
+
+      def make_full_width
+        full_width_pill ? " full_width_pill" : nil
       end
 
       def aria_attributes

@@ -1,0 +1,2 @@
+When using the `collapsible` prop, the default functionality is that the entire Row will be clickable to toggle the Row. To limit the click event to a specific Table Cell, you can use the `toggle_cell_id` prop to pass in the id of the Cell you want to use as the trigger.
+__NOTE__: `toggle_cell_id` and the `id` on the Cell you want to use as the trigger MUST be the same. Please also be aware that you will need to pass in an `id` to any Table Rows you want to be collapsible. Make sure every `id` is unique if you are using multipe collapsibles.

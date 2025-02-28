@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react'
 
 import Editor from 'react-simple-code-editor'
-import { highlight, languages } from 'prismjs/components/prism-core'
+import Prism, { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-markup-templating'
@@ -13,7 +13,8 @@ import 'prismjs/components/prism-erb'
 import 'prismjs/plugins/unescaped-markup/prism-unescaped-markup'
 import 'prismjs/themes/prism-okaidia.css'
 
-import { LoadingInline, FixedConfirmationToast } from 'playbook-ui'
+import { LoadingInline, FixedConfirmationToast, Title } from 'playbook-ui'
+import PlaygroundHeader from './PlaygroundHeader'
 
 const PbKitPlayground = () => {
   const [previewData, setPreviewData] = useState(null)
@@ -111,7 +112,25 @@ const PbKitPlayground = () => {
     }
   }
 
+  Prism.languages.insertBefore('javascript', 'keyword', {
+    'end-keyword': {
+      pattern: /<%\s*end\s*%>/,
+      greedy: true,
+      inside: {
+        'seperator': {
+          pattern: /^<%|%>$/,
+          alias: 'punctuation'
+        },
+        'keyword': {
+          pattern: /\bend\b/
+        }
+      }
+    }
+  })
+
   return (
+    <>
+    <PlaygroundHeader/>
     <div className="pbDocPlayground">
       <div className="pbDocPlayground-Editor">
         <Editor
@@ -120,7 +139,8 @@ const PbKitPlayground = () => {
             onValueChange={(code) => saveCode(code)}
             style={{
               fontFamily: 'monospace',
-              fontSize: 16,
+              fontSize: 12,
+              caretColor: "white",
             }}
             value={code}
         />
@@ -130,6 +150,7 @@ const PbKitPlayground = () => {
         { showPreview() }
       </div>
     </div>
+    </>
   )
 }
 

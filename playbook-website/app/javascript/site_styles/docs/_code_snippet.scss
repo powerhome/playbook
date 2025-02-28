@@ -565,6 +565,9 @@
     textarea {
       outline: 0;
     }
+    pre {
+      color: $text_lt_lighter;
+    }
   }
   &-Preview {
     flex: 1;

@@ -2,6 +2,14 @@
 import PbTextInput from 'kits/pb_text_input'
 PbTextInput.start()
 
+// Copy Button
+import PbCopyButton from 'kits/pb_copy_button'
+PbCopyButton.start()
+
+// Drawer
+import PbDrawer from 'kits/pb_drawer'
+PbDrawer.start()
+
 // Forms
 import 'kits/pb_form/pb_form_validation'
 import formHelper from 'kits/pb_form/formHelper'
@@ -56,6 +64,9 @@ PbRadio.start()
 
 import PbDraggable from 'kits/pb_draggable'
 PbDraggable.start()
+
+import PbSelect from 'kits/pb_select'
+PbSelect.start()
 
 import 'flatpickr'
 

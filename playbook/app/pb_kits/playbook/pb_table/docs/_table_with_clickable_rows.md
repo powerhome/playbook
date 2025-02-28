@@ -1,0 +1,1 @@
+Clickable table rows do not require any additional props. This doc example showcases how to set them up using `html_options`/`htmlOptions` and click events. Using the global prop for cursor to set it to "pointer" is also recommended for better UX.

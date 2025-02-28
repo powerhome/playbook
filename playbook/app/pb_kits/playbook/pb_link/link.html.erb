@@ -9,7 +9,7 @@
 <% end %>
 
 <% if object.tag == "a" %>
-  <%= pb_content_tag(object.tag, { href: object.href }) do %>
+  <%= pb_content_tag(object.tag, { href: object.href, target: object.target }) do %>
     <%= link_content.call %>
   <% end %>
 <% else %>

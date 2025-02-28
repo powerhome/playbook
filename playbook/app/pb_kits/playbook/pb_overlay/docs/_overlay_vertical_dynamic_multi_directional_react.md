@@ -1,0 +1,1 @@
+Pass the `dynamic` prop to make the overlay render while the scrollbar isn't at either end on the scrollbar. You must also add a `ref` to the child that's being passed through the Overlay.
