@@ -40,10 +40,10 @@ export const VirtualizedTableView = ({
 
   const columnPinning = table.getState().columnPinning || { left: [] };
   const sortingState = JSON.stringify(table.getState().sorting || []);
-
+  
   // Store column widths extracted from header
   const [columnWidths, setColumnWidths] = useState<{[key: string]: string}>({});
-
+  
   // Function to get header cell widths
   const getHeaderCellWidths = () => {
     const widths: {[key: string]: string} = {};
@@ -57,7 +57,7 @@ export const VirtualizedTableView = ({
     }
 
     // Process regular header cells
-    table.getFlatHeaders().forEach((header, index) => {
+    table.getFlatHeaders().forEach((header: any, index: number) => {
       // Adjust index if checkbox column exists
       const headerIndex = (selectableRows && !hasAnySubRows) ? index + 1 : index;
 
