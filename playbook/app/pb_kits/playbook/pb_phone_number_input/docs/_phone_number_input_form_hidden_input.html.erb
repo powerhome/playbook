@@ -1,0 +1,11 @@
+<%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
+    <%= pb_rails("phone_number_input", props: { id: "hidden-input", form_hidden_input: true }) %>
+    <%= pb_rails("button", props: {html_type: "submit", text: "Save Phone Number"}) %>
+<% end %>
+
+<%= javascript_tag do %>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('#example-form-hidden-input').addEventListener('submit', function (e) {
+        })
+    })
+<% end %>
