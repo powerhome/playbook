@@ -47,7 +47,7 @@ type TypeaheadProps = {
   name?: string,
   marginBottom?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
-  onChange?: (event: React.FormEvent<HTMLInputElement> | null) => void,
+  onChange?: any,
 } & GlobalProps
 
 export type SelectValueType = {
@@ -82,7 +82,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   loadOptions = noop,
   marginBottom = "sm",
   pillColor,
-  onChange = () => { void 0 },
+  onChange,
   ...props
 }: TypeaheadProps) => {
   const selectProps = {
@@ -124,7 +124,14 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   )
 
   const handleOnChange = (_data: SelectValueType, { action, option, removedValue }: TagOnChangeValues) => {
-    onChange({ target: { name: name, value: _data } } as unknown as React.ChangeEvent<HTMLInputElement>)
+    if (onChange) {
+      const isReactHookForm = onChange.toString().includes("target")
+      if (isReactHookForm) {
+        onChange({ target: { name, value: _data } })
+      } else {
+        onChange(_data)
+      }
+    }
     
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
