@@ -16,26 +16,17 @@ module Playbook
                      default: nil,
                      deprecated: true
       prop :bold, type: Playbook::Props::Boolean, default: true
-      prop :display_size, type: Playbook::Props::Enum,
-                          values: [nil, "xs", "sm", "md", "lg", "xl", "xxl"],
-                          default: nil
 
       def classname
         if is_size_responsive
           generate_classname("pb_title_kit", variant, color, is_bold) + generate_responsive_size_classname
         else
-          generate_classname("pb_title_kit", size, variant, color, is_bold) + generate_display_size
+          generate_classname("pb_title_kit", size, variant, color, is_bold)
         end
       end
 
       def is_bold
         bold ? nil : "thin"
-      end
-
-      def generate_display_size
-        return "" if display_size.nil?
-
-        " pb_title_kit_dynamic_#{display_size}"
       end
 
       def is_size_responsive
