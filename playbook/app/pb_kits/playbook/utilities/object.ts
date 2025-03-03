@@ -15,7 +15,7 @@ export const get = <T, R = any>(obj: T, path: string, defaultValue?: R): R | any
 export const isString = (str: unknown): str is string =>
   str != null && typeof (str as any).valueOf() === "string"
 
-export const uniqueId = (prefix?: string) => string = (() => {
+export const uniqueId: (prefix?: string) => string = (() => {
   let counter = 0
   return (prefix = '') => `${prefix}${++counter}`
 })()
