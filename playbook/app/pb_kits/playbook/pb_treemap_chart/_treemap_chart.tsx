@@ -10,7 +10,7 @@ import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import treemap from 'highcharts/modules/treemap'
-import { merge} from '../utilities/object'
+import { merge } from 'lodash'
 
 
 type TreemapChartProps = {
