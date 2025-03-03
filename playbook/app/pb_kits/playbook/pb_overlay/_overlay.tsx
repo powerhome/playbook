@@ -44,7 +44,7 @@ const Overlay = (props: OverlayProps) => {
 
     const ariaProps = buildAriaProps(aria)
     const dataProps = buildDataProps(data)
-    const classes = classnames(buildCss('pb_overlay'), globalProps(props), className, { 'overlay-hide-scrollbar': scrollBarNone } )
+    const classes = classnames(buildCss('pb_overlay'), { 'overlay-hide-scrollbar': scrollBarNone }, globalProps(props), className )
     const htmlProps = buildHtmlProps(htmlOptions)
     const dynamicInlineProps = globalInlineProps(props)
 
