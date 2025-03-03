@@ -41,29 +41,30 @@
 
   &[class*=_dynamic] {
     &[class*=_xs] {
-      font-size: min(2vw, 5rem);
+      font-size: min(2vw, 80vw / 16); 
     }
-
+  
     &[class*=_sm] {
-      font-size: min(2.5vw, 6rem);
+      font-size: min(2.5vw, 96vw / 16); 
     }
-
+  
     &[class*=_md] {
-      font-size: min(4vw, 10rem);
+      font-size: min(4vw, 160vw / 16);
     }
-
+  
     &[class*=_lg] {
-      font-size: min(5vw, 12rem);
+      font-size: min(5vw, 192vw / 16);
     }
-
+  
     &[class*=_xl] {
-      font-size: min(6vw, 14rem);
+      font-size: min(6vw, 224vw / 16);
     }
-
+  
     &[class*=_xxl] {
-      font-size: min(8vw, 16rem);
+      font-size: min(8vw, 256vw / 16);
     }
   }
+  
 
 
   @each $size, $size_value in $breakpoints_grid {
