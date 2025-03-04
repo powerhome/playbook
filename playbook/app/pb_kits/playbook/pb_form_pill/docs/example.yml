@@ -17,3 +17,4 @@ examples:
   - form_pill_example: Example
   - form_pill_icon: Form Pill Icon
   - form_pill_colors: Form Pill Colors
+  - form_pill_wrapped: Form Pill Wrapped
