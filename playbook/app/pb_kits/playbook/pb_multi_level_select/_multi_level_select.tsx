@@ -37,6 +37,7 @@ type MultiLevelSelectProps = {
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[] | any
   variant?: "multi" | "single"
+  wrapped?: boolean
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
 } & GlobalProps
 
@@ -56,6 +57,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     selectedIds,
     variant = "multi",
     children,
+    wrapped,
     pillColor = "primary"
   } = props
 
@@ -421,10 +423,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           handledropdownItemClick,
           filterItem,
       }}>
-      <div className="wrapper" 
+      <div className="wrapper"
           ref={dropdownRef}
       >
-        <div className="input_wrapper" 
+        <div className="input_wrapper"
             onClick={handleInputWrapperClick}
         >
           <div className="input_inner_container">
@@ -461,6 +463,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                           key={index}
                           onClick={(event: any) => handlePillClose(event, item)}
                           text={item.label}
+                          wrapped={wrapped}
                       />
                     ))
                   : null}
@@ -474,6 +477,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                           key={index}
                           onClick={(event: any) => handlePillClose(event, item)}
                           text={item.label}
+                          wrapped={wrapped}
                       />
                     ))
                   : null}
