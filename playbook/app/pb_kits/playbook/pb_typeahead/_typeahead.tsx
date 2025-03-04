@@ -52,10 +52,9 @@ type TypeaheadProps = {
 
 export type SelectValueType = {
   label: string,
-  wrapped?: string,
+  wrapped?: boolean,
   value: string,
   imageUrl?: string,
-  wrappedd?: string,
   pillColor?: string,
 }
 

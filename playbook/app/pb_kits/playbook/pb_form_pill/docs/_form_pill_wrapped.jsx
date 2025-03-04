@@ -17,7 +17,7 @@ const FormPillWrapped = (props) => {
           isMulti
           label="Wrapped Within Typeahead"
           options={names}
-          wrappedd="wrappedd"
+          wrapped
           {...props}
       />
       <Caption text="Form Pill Wrapped Text"/>

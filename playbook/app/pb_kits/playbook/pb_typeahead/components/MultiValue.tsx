@@ -9,7 +9,6 @@ type Props = {
   data: SelectValueType,
   multiValueTemplate: any,
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
-  wrapped?: string,
   removeProps: any,
   selectProps: any,
 }
@@ -18,10 +17,7 @@ type Props = {
 const MultiValue = (props: Props) => {
   const { removeProps } = props
   const { imageUrl, label } = props.data
-  const { dark, multiKit, pillColor, truncate, wrappedd } = props.selectProps
-  const wrapped = 'wrapped'
-
-  console.log("howdy", wrappedd)
+  const { dark, multiKit, pillColor, truncate, wrapped } = props.selectProps
 
   const formPillProps = {
     marginRight: 'xs',

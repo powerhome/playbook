@@ -22,7 +22,7 @@ type FormPillProps = {
   data?: {[key: string]: string},
   tabIndex?: number,
   icon?: string,
-  wrapped?: string,
+  wrapped?: boolean,
   closeProps?: {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
