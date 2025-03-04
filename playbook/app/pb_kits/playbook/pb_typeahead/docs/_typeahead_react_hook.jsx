@@ -12,7 +12,7 @@ const languages = [
   { label: 'Rust', value: '2010', category: 'Systems Programming' },
   { label: 'Swift', value: '2014', category: 'Mobile Development' },
   { label: 'Kotlin', value: '2011', category: 'Mobile Development' },
-  { label: 'Ruby', value: '1995', category: 'Web Development' },
+  { label: 'Ruby', value: '1995', category: 'General Purpose' },
   { label: 'PHP', value: '1995', category: 'Web Development' },
 ]
 
