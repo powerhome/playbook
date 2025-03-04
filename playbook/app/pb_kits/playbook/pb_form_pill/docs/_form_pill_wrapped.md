@@ -1,0 +1,1 @@
+For Form Pills with longer text, the `wrapped` prop can be used to wrap the label within each Form Pill.
