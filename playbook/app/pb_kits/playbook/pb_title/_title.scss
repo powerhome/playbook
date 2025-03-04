@@ -34,7 +34,7 @@
   &[class*=_display] {
     font-size: clamp(
       24px, 
-      calc(24px + (128 - 24) * ((100vw - 320px) / (1920 - 320))), 
+      calc(24px + 0.053vw * 100),
       128px
     );
   }
