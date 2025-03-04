@@ -15,12 +15,12 @@ const FormPillWrapped = (props) => {
       <Typeahead
           htmlOptions={{ style: { maxWidth: "240px" }}}
           isMulti
-          label="Without Truncation Within Typeahead"
+          label="Wrapped Within Typeahead"
           options={names}
           {...props}
           wrapped
       />
-      <Caption text="Form Pill Without Truncation"/>
+      <Caption text="Form Pill Wrapped Text"/>
       <Card maxWidth="xs">
         <FormPill
             avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
@@ -33,13 +33,13 @@ const FormPillWrapped = (props) => {
             icon="badge-check"
             onClick={() => {alert('Click!')}}
             tabIndex={0}
-            text="icon and a very long tag to show new height"
+            text="icon and a very long tag to show wrapped text"
             wrapped
         />
         <FormPill
             onClick={() => {alert('Click!')}}
             tabIndex={0}
-            text="form pill with a very long tag to show new height"
+            text="form pill with a very long tag to show wrapped text"
             wrapped
         />
       </Card>
