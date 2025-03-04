@@ -6,6 +6,10 @@ PbTextInput.start()
 import PbCopyButton from 'kits/pb_copy_button'
 PbCopyButton.start()
 
+// Drawer
+import PbDrawer from 'kits/pb_drawer'
+PbDrawer.start()
+
 // Forms
 import 'kits/pb_form/pb_form_validation'
 import formHelper from 'kits/pb_form/formHelper'
@@ -30,6 +34,9 @@ PbPopover.start()
 
 import PbTooltip from 'kits/pb_tooltip'
 PbTooltip.start()
+
+import PbTooltipFLoatingUi from 'kits/pb_tooltip/floating_ui'
+PbTooltipFLoatingUi.start()
 
 import PbFixedConfirmationToast from 'kits/pb_fixed_confirmation_toast'
 PbFixedConfirmationToast.start()
@@ -60,6 +67,12 @@ PbRadio.start()
 
 import PbDraggable from 'kits/pb_draggable'
 PbDraggable.start()
+
+import PbOverlay from 'kits/pb_overlay'
+PbOverlay.start()
+
+import PbSelect from 'kits/pb_select'
+PbSelect.start()
 
 import 'flatpickr'
 

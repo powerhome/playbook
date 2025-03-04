@@ -157,6 +157,34 @@ body.PBDrawer__Body--close {
   animation-duration: $animation-duration;
   outline: none;
 
+ &.pb_drawer_within_element_rails {
+    position: relative;
+    width: 100%;
+    display: block;
+    background-color: $white;
+    overflow: hidden;
+
+    // Use max-height for a smooth accordion-like animation
+    max-height: 0;
+    transition: max-height $animation-duration ease-in-out;
+    z-index: 1;
+
+    &.open {
+      max-height: 1000px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: inherit;
+      z-index: -1;
+    }
+  }
+
   &.pb_drawer_within_element {
     position: relative;
     width: 100%;

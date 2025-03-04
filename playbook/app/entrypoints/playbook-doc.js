@@ -6,7 +6,6 @@ import WebpackerReact from 'webpacker-react'
 import 'kits/pb_form/pb_form_validation'
 import * as AdvancedTable from 'kits/pb_advanced_table/docs'
 import * as Avatar from 'kits/pb_avatar/docs'
-import * as AvatarActionButton from 'kits/pb_avatar_action_button/docs'
 import * as Background from 'kits/pb_background/docs'
 import * as Badge from 'kits/pb_badge/docs'
 import * as BarGraphDocs from 'kits/pb_bar_graph/docs'
@@ -50,6 +49,7 @@ import * as Hashtag from 'kits/pb_hashtag/docs'
 import * as Highlight from 'kits/pb_highlight/docs'
 import * as HomeAddressStreet from 'kits/pb_home_address_street/docs'
 import * as Icon from 'kits/pb_icon/docs'
+import * as IconButton from 'kits/pb_icon_button/docs'
 import * as IconCircle from 'kits/pb_icon_circle/docs'
 import * as IconStatValue from 'kits/pb_icon_stat_value/docs'
 import * as IconValue from 'kits/pb_icon_value/docs'
@@ -117,7 +117,6 @@ import * as WeekdayStacked from 'kits/pb_weekday_stacked/docs'
 WebpackerReact.registerComponents({
   ...AdvancedTable,
   ...Avatar,
-  ...AvatarActionButton,
   ...Background,
   ...Badge,
   ...BarGraphDocs,
@@ -161,6 +160,7 @@ WebpackerReact.registerComponents({
   ...Highlight,
   ...HomeAddressStreet,
   ...Icon,
+  ...IconButton,
   ...IconCircle,
   ...IconStatValue,
   ...IconValue,

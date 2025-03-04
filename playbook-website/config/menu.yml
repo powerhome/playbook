@@ -89,7 +89,7 @@ kits:
     react_rendered: false
     enhanced_element_used: false
   - name: icon_button
-    platforms: rails_only
+    platforms: *1
     status: beta
     icons_used: true
     react_rendered: false
@@ -522,7 +522,7 @@ kits:
     status: stable
     icons_used: true
     react_rendered: false
-    enhanced_element_used: false
+    enhanced_element_used: true
   - name: selectable_card
     platforms: *1
     description: Cards for information/content that can be selected. There is design
@@ -687,7 +687,7 @@ kits:
     status: stable
     icons_used: false
     react_rendered: false
-    enhanced_element_used: false
+    enhanced_element_used: true
   - name: draggable
     platforms: *1
     description:
@@ -875,13 +875,6 @@ kits:
       of the user. This kit is normally not used by itself, but rather used within
       other kits. The only time Avatar should be used instead of the User kit is when
       you are not going to display the user's name.
-    status: stable
-    icons_used: true
-    react_rendered: false
-    enhanced_element_used: false
-  - name: avatar_action_button
-    platforms: *1
-    description:
     status: stable
     icons_used: true
     react_rendered: false

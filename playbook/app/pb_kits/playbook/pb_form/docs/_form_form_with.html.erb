@@ -46,6 +46,7 @@
   %>
   <%= form.date_picker :example_date_picker_1, props: { label: true } %>
   <%= form.star_rating_field :example_star_rating, props: { variant: "interactive", label: true } %>
+  <%= form.time_zone_select_field :example_time_zone_select, ActiveSupport::TimeZone.us_zones, { default: "Eastern Time (US & Canada)" }, props: { label: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

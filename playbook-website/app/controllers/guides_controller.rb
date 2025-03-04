@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GuidesController < ApplicationController
-  layout "docs"
+  layout :resolve_layout
   before_action :set_page_vars
   before_action :delete_dark_mode_cookie
 
@@ -21,6 +21,15 @@ class GuidesController < ApplicationController
   end
 
 private
+
+  def resolve_layout
+    case @parent
+    when "global_props", "tokens"
+      "global_props"
+    else
+      "docs"
+    end
+  end
 
   def set_page_vars
     @page       = params[:page]
