@@ -10,9 +10,11 @@ module Playbook
                     default: { "bottom": "full" }
       prop :dynamic, type: Playbook::Props::Boolean,
                      default: false
+      prop :scroll_bar_none, type: Playbook::Props::Boolean,
+                             default: false
 
       def classname
-        generate_classname("pb_overlay")
+        generate_classname("pb_overlay", hide_scroll_bar_class)
       end
 
       def position
@@ -113,6 +115,10 @@ module Playbook
         data.merge!("data-pb-overlay" => true)
         data.merge!("data-overlay-dynamic" => true) if dynamic
         data
+      end
+
+      def hide_scroll_bar_class
+        scroll_bar_none ? " overlay-hide-scrollbar" : ""
       end
     end
   end
