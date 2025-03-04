@@ -11,11 +11,11 @@ examples:
   - form_pill_colors: Form Pill Colors
 
   react:
-  - form_pill_user: Form Pill User
-  - form_pill_size: Form Pill Size
-  - form_pill_truncated_text: Truncated Text
+  # - form_pill_user: Form Pill User
+  # - form_pill_size: Form Pill Size
+  # - form_pill_truncated_text: Truncated Text
   - form_pill_wrapped: Wrapped Text
-  - form_pill_tag: Form Pill Tag
-  - form_pill_example: Example
-  - form_pill_icon: Form Pill Icon
+  # - form_pill_tag: Form Pill Tag
+  # - form_pill_example: Example
+  # - form_pill_icon: Form Pill Icon
   - form_pill_colors: Form Pill Colors

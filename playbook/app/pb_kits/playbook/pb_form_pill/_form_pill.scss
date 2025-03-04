@@ -24,7 +24,7 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
     font-size: $font_small !important;
   }
 
-  &[class*=_wrapped] {
+  &[class*=wrapped] {
     height: max-content;
   }
 

@@ -41,6 +41,7 @@ type TypeaheadProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
+  wrapper?: string,
   loadOptions?: string | Noop,
   getOptionLabel?: string | (() => string),
   getOptionValue?: string | (() => string),
@@ -51,8 +52,10 @@ type TypeaheadProps = {
 
 export type SelectValueType = {
   label: string,
+  wrapped?: string,
   value: string,
   imageUrl?: string,
+  wrappedd?: string,
   pillColor?: string,
 }
 

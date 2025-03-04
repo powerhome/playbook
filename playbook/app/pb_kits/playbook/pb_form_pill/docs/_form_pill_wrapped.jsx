@@ -13,12 +13,12 @@ const FormPillWrapped = (props) => {
   return (
     <>
       <Typeahead
-          htmlOptions={{ style: { maxWidth: "240px" }}}
+          htmlOptions={{ style: { maxWidth: "240px" } }}
           isMulti
           label="Wrapped Within Typeahead"
           options={names}
+          wrappedd="wrappedd"
           {...props}
-          wrapped
       />
       <Caption text="Form Pill Wrapped Text"/>
       <Card maxWidth="xs">

@@ -20,9 +20,9 @@ type FormPillProps = {
   textTransform?: 'none' | 'lowercase',
   color?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
   data?: {[key: string]: string},
-  wrapped?: boolean,
   tabIndex?: number,
   icon?: string,
+  wrapped?: string,
   closeProps?: {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
@@ -39,7 +39,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     onClick = () => undefined,
     avatarUrl,
     closeProps = {},
-    wrapped = "false",
+    wrapped,
     size = '',
     textTransform = 'none',
     color = "primary",
@@ -50,14 +50,15 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
 
   const iconClass = icon ? "_icon" : ""
   const closeIconSize = size === "small" ? "xs" : "sm"
-  const wrappedClass = wrapped ? "_wrapped" : ""
+  const wrappedClass = wrapped ? "wrapped" : ""
 
   const filteredProps: FormPillProps = {...props}
   delete filteredProps.truncate
 
   const css = classnames(
-    `pb_form_pill_kit_${color}${iconClass}${wrappedClass}`,
+    `pb_form_pill_kit_${color}${iconClass}`,
     globalProps(filteredProps),
+    wrappedClass,
     className,
     size === 'small' ? 'small' : null,
     textTransform,
