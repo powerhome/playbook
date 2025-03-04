@@ -1,4 +1,4 @@
-<%= pb_content_tag do %>
+<%= pb_content_tag(:div, class: object.classnames) do %>
   <% if object.label %>
     <label class="pb_select_kit_label" for="<%= object.name %>">
       <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) %>
