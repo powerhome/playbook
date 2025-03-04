@@ -44,6 +44,8 @@ module Playbook
                       default: false
       prop :validation, type: Playbook::Props::HashProp,
                         default: {}
+      prop :wrapped, type: Playbook::Props::Boolean,
+                     default: false
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
@@ -63,7 +65,7 @@ module Playbook
       end
 
       def is_react?
-        pills || !is_multi
+        pills || !is_multi || wrapped
       end
 
       def typeahead_react_options
@@ -85,6 +87,7 @@ module Playbook
           placeholder: placeholder,
           plusIcon: plus_icon,
           truncate: truncate,
+          wrapped: wrapped,
         }
 
         base_options[:getOptionLabel] = get_option_label if get_option_label.present?
