@@ -32,7 +32,7 @@
   }
 
   &[class*=_display] {
-    font-size: clamp(1.25vw, 1.25vw + 5.41vw, 4.67vw);
+    font-size: clamp(24px, calc(1.25vw + 5.3vw), 128px);
   }
 
   &[class*=_dynamic] {
