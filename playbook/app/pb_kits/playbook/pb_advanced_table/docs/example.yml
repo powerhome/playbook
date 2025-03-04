@@ -37,4 +37,3 @@ examples:
   - advanced_table_selectable_rows_no_subrows: Selectable Rows (No Subrows)
   - advanced_table_selectable_rows_actions: Selectable Rows (With Actions)
   - advanced_table_selectable_rows_header: Selectable Rows (No Actions Bar)
-  - advanced_table_infinite_scroll: Infinite Scroll
