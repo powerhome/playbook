@@ -17,31 +17,10 @@ export default class PbDatePicker extends PbEnhancedElement {
     const validationMessage = this.element.dataset?.validationMessage;
     const inputElement = this.element.querySelector("input");
 
-    if (inputElement) {
-      flatpickr(inputElement, {
-        onReady: () => {
-          inputElement.removeAttribute('readonly');
-        },
-      });
-
-      const observer = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
-          if (mutation.type === 'attributes' && mutation.attributeName === 'readonly') {
-            inputElement.removeAttribute('readonly');
-          }
-        }
-      });
-
-      observer.observe(inputElement, {
-        attributes: true,
-      });
-    }
-
     if (validationMessage) {
       const setErrorTextContent = (text, timeout) => {
         setTimeout(() => {
           const errorMessageElement = this.element.querySelector(SELECT_VALIDATION_MESSAGE_CLASS);
-          console.log("errorMessageElement " + errorMessageElement)
           if (errorMessageElement) {
             errorMessageElement.textContent = text;
           } else {
@@ -52,7 +31,6 @@ export default class PbDatePicker extends PbEnhancedElement {
 
       inputElement.addEventListener("change", (e) => {
         if (!e.target.checkValidity()) {
-          console.log("hello")
           setErrorTextContent(validationMessage, 300);
         }
       });
