@@ -2,7 +2,7 @@
   <%= pb_rails("layout", props: { layout: "collection", margin_y: "xl", padding_bottom: "xl" }) do %>
     <%= pb_rails("layout/body") do %>
       <% @navigation[:pages].each do |page_name| %>
-        <%= link_to "/#{page_name[:url]}", class: "display_flex align_items_stretch" do %>
+        <%= link_to "/visual_guidelines/#{page_name[:page_id]}", class: "display_flex align_items_stretch" do %>
           <%= pb_rails("card", props: { padding: "none", hover: { shadow: "deep" }, flex: 1} ) do %>
             <%= pb_rails("background" ) do %>
               <%= pb_rails("flex", props: { justify: "center", padding: "xl"} ) do %>
