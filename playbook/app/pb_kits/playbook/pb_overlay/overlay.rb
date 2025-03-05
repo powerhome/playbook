@@ -8,9 +8,13 @@ module Playbook
                    default: "card_light"
       prop :layout, type: Playbook::Props::HashProp,
                     default: { "bottom": "full" }
+      prop :dynamic, type: Playbook::Props::Boolean,
+                     default: false
+      prop :scroll_bar_none, type: Playbook::Props::Boolean,
+                             default: false
 
       def classname
-        generate_classname("pb_overlay")
+        generate_classname("pb_overlay", hide_scroll_bar_class)
       end
 
       def position
@@ -104,6 +108,17 @@ module Playbook
           "card_dark": "#231E3D",
           "bg_dark": "#0a0527",
         }
+      end
+
+      def data_attributes
+        data ||= {}
+        data.merge!("data-pb-overlay" => true)
+        data.merge!("data-overlay-dynamic" => true) if dynamic
+        data
+      end
+
+      def hide_scroll_bar_class
+        scroll_bar_none ? " overlay-hide-scrollbar" : ""
       end
     end
   end

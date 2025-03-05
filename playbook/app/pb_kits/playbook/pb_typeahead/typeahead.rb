@@ -44,6 +44,12 @@ module Playbook
                       default: false
       prop :validation, type: Playbook::Props::HashProp,
                         default: {}
+      prop :clear_on_context_change, type: Playbook::Props::Boolean,
+                                     default: true
+      prop :options_by_context, type: Playbook::Props::HashProp,
+                                default: {}
+      prop :search_context_selector, type: Playbook::Props::String,
+                                     default: nil
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
@@ -58,7 +64,10 @@ module Playbook
         Hash(values[:data]).merge(
           pb_typeahead_kit: true,
           pb_typeahead_kit_search_term_minimum_length: search_term_minimum_length,
-          pb_typeahead_kit_search_debounce_timeout: search_debounce_timeout
+          pb_typeahead_kit_search_debounce_timeout: search_debounce_timeout,
+          pb_typeahead_kit_clear_on_context_change: clear_on_context_change,
+          pb_typeahead_kit_search_context_selector: search_context_selector,
+          pb_typeahead_kit_options_by_context: options_by_context.to_json
         )
       end
 
@@ -85,6 +94,9 @@ module Playbook
           placeholder: placeholder,
           plusIcon: plus_icon,
           truncate: truncate,
+          searchContextSelector: search_context_selector,
+          optionsByContext: options_by_context,
+          clearOnContextChange: clear_on_context_change,
         }
 
         base_options[:getOptionLabel] = get_option_label if get_option_label.present?

@@ -64,3 +64,15 @@ test('should render children', () => {
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveTextContent(props.children)
 })
+
+test('should add overlay-hide-scrollbar class when scrollBarNone is true', () => {
+    const props = {
+      children,
+      data: { testid: testId },
+      scrollBarNone: true
+    }
+  
+    render(<Overlay {...props} />)
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass('overlay-hide-scrollbar')
+})
