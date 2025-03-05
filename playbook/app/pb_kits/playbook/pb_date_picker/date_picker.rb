@@ -75,6 +75,8 @@ module Playbook
                         default: [1900, 2100]
       prop :custom_event_type, type: Playbook::Props::String,
                                default: ""
+      prop :validation_message, type: Playbook::Props::String,
+                                default: ""
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
