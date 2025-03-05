@@ -69,4 +69,17 @@ $overlay_colors: (
     pointer-events: none;
     z-index: 1;
   }
+  
+  &.overlay-hide-scrollbar {
+    & [class*="overflow_x_auto"],
+    & [class*="overflow_y_auto"],
+    & [class*="overflow_auto"] {
+      &::-webkit-scrollbar {
+        display: none !important;
+      }
+      
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+    }
+  }
 }

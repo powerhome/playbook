@@ -16,12 +16,14 @@ id: object.id,
         <% end %>
 
     <% else %>
-        <div class="<%= previous_overlay_class_name %>"></div>
+        <div class="<%= previous_overlay_class_name %>" data-previous-overlay-classname="<%= previous_overlay_class_name %>"></div>
 
-        <%= content.presence %>
+        <div data-overlay-scroll-element="true">
+            <%= content.presence %>
+        </div>
 
         <% if has_subsequent_overlay %>
-            <div class="<%= subsequent_overlay_class_name %>"></div>
+            <div class="<%= subsequent_overlay_class_name %>" data-subsequent-overlay-classname="<%= subsequent_overlay_class_name %>"></div>
         <% end %>
     <% end %>
 <% end %>

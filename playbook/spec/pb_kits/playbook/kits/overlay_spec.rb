@@ -43,4 +43,13 @@ RSpec.describe Playbook::PbOverlay::Overlay do
       expect(kit.id).to eq(test_id)
     end
   end
+
+  describe "scroll_bar_none prop" do
+    it "adds overlay-hide-scrollbar class when scroll_bar_none true" do
+      props = { scroll_bar_none: true, data: { testid: test_id } }
+      kit = subject.new(props)
+
+      expect(kit.classname).to include("overlay-hide-scrollbar")
+    end
+  end
 end

@@ -522,7 +522,7 @@ kits:
     status: stable
     icons_used: true
     react_rendered: false
-    enhanced_element_used: false
+    enhanced_element_used: true
   - name: selectable_card
     platforms: *1
     description: Cards for information/content that can be selected. There is design
@@ -687,7 +687,7 @@ kits:
     status: stable
     icons_used: false
     react_rendered: false
-    enhanced_element_used: false
+    enhanced_element_used: true
   - name: draggable
     platforms: *1
     description:

@@ -1,0 +1,1 @@
+Pass the `scrollBarNone` prop to hide the scrollbar from view. This is particularly helpful for small containers where the scrollbar may occupy too much space.
