@@ -1,0 +1,45 @@
+<%= pb_rails("select", props: {
+  id:"color_context_2",
+  label: "Choose a Color",
+  name: "color_name",
+  options: [
+    { value: "red", value_text: "Red" },
+    { value: "blue", value_text: "Blue" },
+    { value: "green", value_text: "Green" }
+  ],
+}) %>
+
+<%= pb_rails("typeahead", props: {
+  label: "Pick a Shade",
+  is_multi: false,
+  search_context_selector: "color_context_2",
+  options_by_context: {
+    "red":  [
+      { label: "Scarlet", value: "scarlet" },
+      { label: "Mahogany", value: "mahogany" },
+      { label: "Crimson", value: "crimson" }
+    ],
+    "blue": [
+      { label: "Sky Blue", value: "sky" },
+      { label: "Cerulean", value: "cerulean" },
+      { label: "Navy", value: "navy" }
+    ],
+    "green": [
+      { label: "Emerald", value: "emerald" },
+      { label: "Mint", value: "mint" },
+      { label: "Olive", value: "olive" }
+    ]
+  },
+  id: "typeahead-dynamic-options",
+}) %>
+
+
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("pb-typeahead-kit-typeahead-dynamic-options-result-option-select", function(event) {
+    console.log('Single Option selected')
+    console.dir(event.detail)
+  })
+  document.addEventListener("pb-typeahead-kit-typeahead-dynamic-options-result-clear", function() {
+    console.log('All options cleared')
+  })
+<% end %>
