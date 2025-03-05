@@ -1,5 +1,4 @@
 import PbEnhancedElement from "../pb_enhanced_element";
-import flatpickr from "flatpickr"; // Import flatpickr if used
 
 const DATE_PICKER_WRAPPER_SELECTOR = '[data-pb-date-picker]';
 const SELECT_VALIDATION_MESSAGE_CLASS = '.pb_body_kit_negative';
