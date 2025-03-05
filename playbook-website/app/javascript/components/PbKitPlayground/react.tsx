@@ -9,11 +9,11 @@ import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
 import 'prismjs/themes/prism-okaidia.css'
 
-import { Button, Body } from 'playbook-ui'
+import { Avatar,Badge,Body,Button,Card,Checkbox,Drawer,Dropdown,Icon,Nav,Radio,RichTextEditor, Select,Table,Title,Tooltip } from 'playbook-ui'
 import PlaygroundHeader from './PlaygroundHeader'
 
 // Pre-import allowed components for react-live
-const scope = { React, Button, Body }
+const scope = {  Avatar,Badge,Body,Button,Card,Checkbox,Drawer,Dropdown,Icon,Nav,Radio,RichTextEditor, Select,Table,Title,Tooltip  }
 
 const initialCode = `
   <Button text="Click me" onClick={() => alert("Button clicked!")} />
