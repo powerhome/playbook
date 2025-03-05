@@ -165,6 +165,10 @@ class PagesController < ApplicationController
     handle_kit_collection("react")
   end
 
+  def kit_playground_react
+    render "pages/react_in_react_playground", layout: "layouts/fullscreen"
+  end
+
   def kit_playground_rails
     @kit = "avatar"
     @examples = pb_doc_kit_examples(@kit, "rails")

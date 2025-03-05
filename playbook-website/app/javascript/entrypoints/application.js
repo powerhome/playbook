@@ -23,6 +23,7 @@ import KitDocs from 'components/KitDocs'
 import PbKitReact from 'components/PbKitReact'
 import PbKitFetch from 'components/PbKitFetch'
 import PbKitPlayground from 'components/PbKitPlayground'
+import PbKitPlaygroundReact from 'components/PbKitPlayground/react.tsx'
 import AvailableProps from 'components/AvailableProps'
 import MainSidebar from 'components/MainSidebar'
 import HomepageHero from 'components/HomepageHero'
@@ -69,6 +70,7 @@ WebpackerReact.registerComponents({
   PbKitReact,
   PbKitFetch,
   PbKitPlayground,
+  PbKitPlaygroundReact,
   MainSidebar,
   Website,
   HomepageHero,
