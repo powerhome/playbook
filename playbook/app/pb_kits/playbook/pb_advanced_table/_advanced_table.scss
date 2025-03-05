@@ -139,9 +139,6 @@
       }
     }
 
-    // Virtualization specific styles for the table body
-    position: relative;
-
     // Fix virtualized row borders
     tr.virtualized-table-row {
       border-bottom: 1px solid $border_light;
