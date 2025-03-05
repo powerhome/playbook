@@ -26,6 +26,8 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
 
   &[class*=wrapped] {
     height: max-content;
+    padding-top: $space-xxs;
+    padding-bottom: $space-xxs;
   }
 
   @each $color_name, $color_value in $form_pill_colors {
