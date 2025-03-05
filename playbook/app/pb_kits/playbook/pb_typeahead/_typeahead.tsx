@@ -41,7 +41,6 @@ type TypeaheadProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
-  wrapper?: string,
   loadOptions?: string | Noop,
   getOptionLabel?: string | (() => string),
   getOptionValue?: string | (() => string),
