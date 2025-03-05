@@ -1,0 +1,3 @@
+The dynamic rendering of options for the typeahead can also be achieved with a pure Rails implementation (not react rendered). For this implementation, use all the props as above with the following additions:
+
+- `search_term_minimum_length`: this sets the minimum input in the typeahead needed to display the dropdown. This is set to 3 by default. Set it to 0 for the dropdown to always display when the typeahead is interacted with. 
