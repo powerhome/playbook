@@ -148,7 +148,7 @@ module Playbook
 
     def default_options
       options = {
-        id: id,
+        # id: id,
         data: data,
         class: classname,
         aria: aria,
