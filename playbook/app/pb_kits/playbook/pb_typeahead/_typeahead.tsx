@@ -49,7 +49,7 @@ type TypeaheadProps = {
   marginBottom?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
   onChange?: any,
-  optionsByContext?: Record<string, Array<{ label: string; value?: string }>>,
+  optionsByContext?: Record<string, Array<{ label: string; value?: string }>>
   searchContextSelector?: string,
   clearOnContextChange?: boolean,
 } & GlobalProps
