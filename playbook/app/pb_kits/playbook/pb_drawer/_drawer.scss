@@ -325,7 +325,6 @@ body.PBDrawer__Body--close {
     display: flex;
     background-color: rgba($bg_dark, $opacity_4);
     z-index: $z-index;
-    // opacity: 0;
     animation: overlayFade $animation-duration ease-in-out forwards;
     
     &[class*="_left"]{
