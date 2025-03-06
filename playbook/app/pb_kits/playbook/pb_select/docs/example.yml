@@ -30,6 +30,7 @@ examples:
   - select_inline_show_arrow: Select Inline (Always Show Arrow)
   - select_inline_compact: Select Inline Compact
   - select_multiple: Select Multiple
+  - select_react_hook: React Hook
 
   swift:
   - select_default_swift: Default
