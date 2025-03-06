@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
 import AsyncCreateableSelect from 'react-select/async-creatable'
-import { get, isString, uniqueId } from 'lodash'
+import { get, isString, uniqueId } from '../utilities/object'
+
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import classnames from 'classnames'
 
@@ -45,8 +46,12 @@ type TypeaheadProps = {
   getOptionLabel?: string | (() => string),
   getOptionValue?: string | (() => string),
   name?: string,
+  options?: Array<{ label: string; value?: string }>,
   marginBottom?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
+  optionsByContext?: Record<string, Array<{ label: string; value?: string }>>
+  searchContextSelector?: string,
+  clearOnContextChange?: boolean,
 } & GlobalProps
 
 export type SelectValueType = {
@@ -81,6 +86,9 @@ const Typeahead = ({
   loadOptions = noop,
   marginBottom = "sm",
   pillColor,
+  optionsByContext = {},
+  searchContextSelector,
+  clearOnContextChange = false,
   ...props
 }: TypeaheadProps) => {
   const selectProps = {
@@ -113,6 +121,32 @@ const Typeahead = ({
     onMultiValueClick: (_option: SelectValueType): any => undefined,
     pillColor: pillColor,
     ...props,
+  }
+
+  const [contextValue, setContextValue] = useState("")
+
+  useEffect(() => {
+    if (searchContextSelector) {
+      const searchContextElement = document.getElementById(searchContextSelector)
+
+      setContextValue((searchContextElement as HTMLInputElement)?.value)
+      const handleContextChange = (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        setContextValue(target.value);
+        if (clearOnContextChange) document.dispatchEvent(new CustomEvent(`pb-typeahead-kit-${selectProps.id}:clear`))
+      }
+
+      if (searchContextElement) searchContextElement.addEventListener('change', handleContextChange)
+
+      return () => {
+        if (searchContextElement) searchContextElement.removeEventListener('change', handleContextChange)
+      }
+    }
+  }, [searchContextSelector])
+
+  const contextArray = optionsByContext[contextValue]
+  if (Array.isArray(contextArray) && contextArray.length > 0) {
+    selectProps.options = contextArray
   }
 
   const Tag = (

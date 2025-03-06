@@ -1,42 +1,25 @@
-import React, { useState } from "react";
-import { Button, Drawer, Flex } from "playbook-ui";
+import React from "react"
+import { Button, Body } from "playbook-ui"
 
-const useDrawer = (visible = false) => {
-  const [opened, setOpened] = useState(visible);
-  const toggle = () => setOpened(!opened);
-
-  return [opened, toggle];
-};
-
-const DrawerBreakpoints = () => {
-  const [smallDrawerOpened, toggleSmallDrawer] = useDrawer();
-
+const DrawerMenu = () => {
   return (
     <>
-      <Flex wrap>
-        <Button
-            id="sm"
-            marginRight="md"
-            onClick={toggleSmallDrawer}
-        >
-          {"Will open at small breakpoint"}
-        </Button>
-      </Flex>
-      <Flex>
-        <Drawer
-            behavior={"push"}
-            breakpoint="sm"
-            onClose={toggleSmallDrawer}
-            opened={smallDrawerOpened}
-            overlay={false}
-            placement={"right"}
-            size={"lg"}
-        >
-          Open because small breakpoint 
-        </Drawer>
-      </Flex>
+      <Body>
+        The breakpoint prop determines when the Drawer is always visible. Above
+        the specified breakpoint, the Drawer remains open on the page. Below it,
+        only the trigger element is shown, allowing you to toggle the drawer
+        open and closed. To see this in action, click the button below and
+        resize your window.
+      </Body>
+      <Button
+          link='https://8njdkc.csb.app/'
+          marginTop='md' 
+          newWindow 
+      >
+        Open Doc Example in New Tab
+      </Button>
     </>
-  );
-};
+  )
+}
 
-export default DrawerBreakpoints;
+export default DrawerMenu

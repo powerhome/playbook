@@ -74,6 +74,9 @@ PbOverlay.start()
 import PbSelect from 'kits/pb_select'
 PbSelect.start()
 
+import PbDatePicker from 'kits/pb_date_picker'
+PbDatePicker.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====

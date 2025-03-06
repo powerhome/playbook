@@ -134,6 +134,14 @@ body.PBDrawer__Body--close {
   transition: margin-left $animation-duration ease-out, margin-right $animation-duration ease-out;
 }
 
+.pb_drawer_lg_left .pb_drawer {
+  transform: translateX(-100%);
+}
+
+.pb_drawer_lg_right .pb_drawer {
+  transform: translateX(100%);
+}
+
 .pb_drawer.pb_drawer_after_open {
   pointer-events: auto;
   transform: translate3d(0, 0, 0);
@@ -317,7 +325,6 @@ body.PBDrawer__Body--close {
     display: flex;
     background-color: rgba($bg_dark, $opacity_4);
     z-index: $z-index;
-    opacity: 0;
     animation: overlayFade $animation-duration ease-in-out forwards;
     
     &[class*="_left"]{
@@ -345,12 +352,21 @@ body.PBDrawer__Body--close {
     left: 0;
     right: 0;
     bottom: 0;
+    display: flex;
     z-index: $z-index;
     opacity: 1;
     pointer-events: none;
 
-    & .pb_drawer {
-      pointer-events: auto;
+    &[class*="_right"]{
+      justify-content: flex-end;
+    }
+
+    &[class*="_left"]{
+      justify-content: flex-start;
+    }
+
+    &[class*="_center"]{
+      justify-content: center;
     }
 
     &_before_close {

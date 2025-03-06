@@ -1,0 +1,33 @@
+<%= pb_rails("select", props: {
+  id:"color_context",
+  label: "Choose a Color",
+  name: "color_name_2",
+  options: [
+    { value: "red", value_text: "Red" },
+    { value: "blue", value_text: "Blue" },
+    { value: "green", value_text: "Green" }
+  ],
+}) %>
+
+<%= pb_rails("typeahead", props: {
+  label: "Pick a Shade",
+  search_context_selector: "color_context",
+  options_by_context: {
+    "red":  [
+      { label: "Scarlet", value: "scarlet" },
+      { label: "Mahogany", value: "mahogany" },
+      { label: "Crimson", value: "crimson" }
+    ],
+    "blue": [
+      { label: "Sky Blue", value: "sky" },
+      { label: "Cerulean", value: "cerulean" },
+      { label: "Navy", value: "navy" }
+    ],
+    "green": [
+      { label: "Emerald", value: "emerald" },
+      { label: "Mint", value: "mint" },
+      { label: "Olive", value: "olive" }
+    ]
+  },
+  search_term_minimum_length: 0,
+}) %>

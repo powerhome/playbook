@@ -1,5 +1,5 @@
 import React from 'react'
-import { isEmpty } from 'lodash'
+import { isEmpty } from '../../utilities/object'
 
 import Flex from '../../pb_flex/_flex'
 
@@ -46,7 +46,7 @@ const FilterSingle = ({
           paddingRight="lg"
           vertical="center"
       >
-        { children && 
+        { children &&
           <>
             <FiltersPopover
                 dark={dark}
