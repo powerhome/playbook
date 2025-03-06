@@ -27,6 +27,7 @@ type MultiLevelSelectProps = {
   aria?: { [key: string]: string }
   className?: string
   data?: { [key: string]: string }
+  disabled?: boolean
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string
   inputDisplay?: "pills" | "none"
@@ -45,6 +46,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     aria = {},
     className,
     data = {},
+    disabled = false,
     htmlOptions = {},
     id,
     inputDisplay = "pills",
@@ -292,7 +294,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   const handleInputWrapperClick = (e: any) => {
     if (
       e.target.id === "multiselect_input" ||
-      e.target.classList.contains("pb_form_pill_tag")
+      e.target.classList.contains("pb_form_pill_tag") ||
+      disabled
     ) {
       return;
     }
@@ -431,6 +434,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             {variant === "single" && defaultReturn.length !== 0
               ? defaultReturn.map((selectedItem) => (
                   <input
+                      disabled={disabled}
                       key={selectedItem.id}
                       name={`${name}[]`}
                       type="hidden"
@@ -444,6 +448,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                 {returnAllSelected && returnedArray.length !== 0
                   ? returnedArray.map((item) => (
                       <input
+                          disabled={disabled}
                           key={item.id}
                           name={`${name}[]`}
                           type="hidden"
@@ -489,6 +494,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
             )}
 
             <input
+                disabled={disabled}
                 id="multiselect_input"
                 onChange={(e) => {
                   variant === "single"
