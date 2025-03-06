@@ -165,6 +165,14 @@ class PagesController < ApplicationController
     handle_kit_collection("react")
   end
 
+  def kit_playground_react_simple
+    render "pages/react_simple_in_react_playground", layout: "layouts/fullscreen"
+  end
+
+  def kit_playground_react_monaco
+    render "pages/react_monaco_in_react_playground", layout: "layouts/fullscreen"
+  end
+
   def kit_playground_react
     render "pages/react_in_react_playground", layout: "layouts/fullscreen"
   end

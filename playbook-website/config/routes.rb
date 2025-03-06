@@ -41,7 +41,9 @@ Rails.application.routes.draw do
   get "kits/:name/rails_raw",       to: "pages#rails_raw",            as: "rails_raw"
   get "kit_playground_rails",       to: "pages#kit_playground_rails", as: "kit_playground_rails"
   get "kit_playground_react",       to: "pages#kit_playground_react", as: "kit_playground_react"
-  post "rails_pg_render",           to: "pages#rails_pg_render",      as: "rails_pg_render"
+  get "kit_playground_react_simple",       to: "pages#kit_playground_react_simple", as: "kit_playground_react_simple"
+  get "kit_playground_react_monaco",       to: "pages#kit_playground_react_monaco", as: "kit_playground_react_monaco"
+  post "rails_pg_render", to: "pages#rails_pg_render", as: "rails_pg_render"
 
   # Icon Docs
   get "guides/getting_started/icons/font_awesome", to: "pages#icons_font_awesome"
