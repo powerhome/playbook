@@ -44,6 +44,8 @@ module Playbook
                       default: false
       prop :validation, type: Playbook::Props::HashProp,
                         default: {}
+      prop :wrapped, type: Playbook::Props::Boolean,
+                     default: false
       prop :clear_on_context_change, type: Playbook::Props::Boolean,
                                      default: true
       prop :options_by_context, type: Playbook::Props::HashProp,
@@ -72,7 +74,7 @@ module Playbook
       end
 
       def is_react?
-        pills || !is_multi
+        pills || !is_multi || wrapped
       end
 
       def typeahead_react_options
@@ -94,6 +96,7 @@ module Playbook
           placeholder: placeholder,
           plusIcon: plus_icon,
           truncate: truncate,
+          wrapped: wrapped,
           searchContextSelector: search_context_selector,
           optionsByContext: options_by_context,
           clearOnContextChange: clear_on_context_change,
