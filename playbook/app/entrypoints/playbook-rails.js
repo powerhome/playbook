@@ -21,7 +21,7 @@ window.datePickerHelper = datePickerHelper
 
 // Dialog
 // Three places in Nitro depend on this function inside the window scope.
-// Because of this, we will keep this code until we remove this dependency from Nitro.
+// We will keep this code until we remove this dependency from Nitro.
 import dialogHelper from 'kits/pb_dialog/dialogHelper'
 window.dialogHelper = dialogHelper
 

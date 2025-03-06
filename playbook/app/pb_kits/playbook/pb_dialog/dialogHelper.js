@@ -1,5 +1,5 @@
 // Three places in Nitro depend on this function inside the window scope.
-// Because of this, we will keep this file until we remove this dependency from Nitro.
+// We will keep this file until we remove this dependency from Nitro.
 const dialogHelper = () => {
   const openTrigger = document.querySelectorAll("[data-open-dialog]");
   const closeTrigger = document.querySelectorAll("[data-close-dialog]");
