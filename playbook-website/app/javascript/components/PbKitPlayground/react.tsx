@@ -4,6 +4,9 @@
 import React, { useState } from 'react'
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
 import Prism from 'prismjs'
+if (typeof window !== 'undefined') {
+  window.Prism = Prism
+}
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-jsx'
