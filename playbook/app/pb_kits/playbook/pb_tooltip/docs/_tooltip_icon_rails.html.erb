@@ -1,21 +1,21 @@
 <%= pb_rails "flex", props: { flex_direction: "row", gap: "md", wrap: true } do %>
   <%= pb_rails "button", props: { id: "tool-tip-with-icon-1", text: "Tooltip With Icon" } %>
-  <%= pb_rails "tooltip", props: { trigger_element_id: "tool-tip-with-icon-1", tooltip_id: "tool-tip-with-icon-1", position: "top" } do %>
+  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-with-icon-1", tooltip_id: "tool-tip-with-icon-1", position: "top" } do %>
     <%= pb_rails("icon", props: { icon: "paper-plane", fixed_width: true, color: "white", size: "1x", padding_right: "xxs" }) %>
     Send Email
   <% end %>
   <%= pb_rails "button", props: { id: "tool-tip-with-icon-2", text: "Tooltip With Icon" } %>
-  <%= pb_rails "tooltip", props: { trigger_element_id: "tool-tip-with-icon-2", tooltip_id: "tool-tip-with-icon-2", position: "bottom" } do %>
+  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-with-icon-2", tooltip_id: "tool-tip-with-icon-2", position: "bottom" } do %>
     <%= pb_rails("icon", props: { icon: "paper-plane", fixed_width: true, color: "white", size: "1x", padding_right: "xxs" }) %>
     Send Email
   <% end %>
   <%= pb_rails "button", props: { id: "tool-tip-with-icon-3", text: "Tooltip With Icon" } %>
-  <%= pb_rails "tooltip", props: { trigger_element_id: "tool-tip-with-icon-3", tooltip_id: "tool-tip-with-icon-3", position: "left" } do %>
+  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-with-icon-3", tooltip_id: "tool-tip-with-icon-3", position: "left" } do %>
     <%= pb_rails("icon", props: { icon: "paper-plane", fixed_width: true, color: "white", size: "1x", padding_right: "xxs" }) %>
     Send Email
   <% end %>
   <%= pb_rails "button", props: { id: "tool-tip-with-icon-4", text: "Tooltip With Icon" } %>
-  <%= pb_rails "tooltip", props: { trigger_element_id: "tool-tip-with-icon-4", tooltip_id: "tool-tip-with-icon-4", position: "right" } do %>
+  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-with-icon-4", tooltip_id: "tool-tip-with-icon-4", position: "right" } do %>
     <%= pb_rails("icon", props: { icon: "paper-plane", fixed_width: true, color: "white", size: "1x", padding_right: "xxs" }) %>
     Send Email
   <% end %>
