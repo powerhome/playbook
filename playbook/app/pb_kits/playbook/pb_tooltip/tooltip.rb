@@ -9,6 +9,7 @@ module Playbook
       prop :tooltip_id
       prop :interaction, type: Playbook::Props::Boolean,
                          default: false
+      prop :icon
       prop :delay_open
       prop :delay_close
       prop :dark, type: Playbook::Props::Boolean,
