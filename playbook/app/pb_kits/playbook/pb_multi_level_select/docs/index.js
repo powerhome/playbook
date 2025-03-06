@@ -6,3 +6,4 @@ export { default as MultiLevelSelectSelectedIdsReact } from "./_multi_level_sele
 export { default as MultiLevelSelectColor } from './_multi_level_select_color.jsx'
 export { default as MultiLevelSelectWithChildren } from './_multi_level_select_with_children.jsx'
 export { default as MultiLevelSelectWithChildrenWithRadios } from './_multi_level_select_with_children_with_radios.jsx'
+export { default as MultiLevelSelectDisabled } from './_multi_level_select_disabled.jsx'

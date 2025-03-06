@@ -24,6 +24,8 @@ module Playbook
                         default: "primary"
       prop :wrapped, type: Playbook::Props::Boolean,
                      default: false
+      prop :disabled, type: Playbook::Props::Boolean,
+                      default: false
 
       def classname
         generate_classname("pb_multi_level_select")
@@ -31,6 +33,7 @@ module Playbook
 
       def multi_level_select_options
         {
+          disabled: disabled,
           id: id,
           inputDisplay: input_display,
           name: name,
