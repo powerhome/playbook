@@ -3,14 +3,6 @@
 /* eslint-disable react/no-danger */
 import React, { useState } from 'react'
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
-import Prism from 'prismjs'
-if (typeof window !== 'undefined') {
-  window.Prism = Prism
-}
-import 'prismjs/components/prism-clike'
-import 'prismjs/components/prism-javascript'
-import 'prismjs/components/prism-jsx'
-import 'prismjs/themes/prism-okaidia.css'
 
 import { Avatar, Badge, Body, Button, Card, Checkbox, Drawer, Dropdown, Icon, Nav, Radio, RichTextEditor, Select, Table, Title, Tooltip } from 'playbook-ui'
 import PlaygroundHeader from './PlaygroundHeader'
@@ -36,17 +28,7 @@ const PbKitPlayground = () => {
       <div className="pbDocPlayground">
         <div className="pbDocPlayground-Editor">
           <LiveProvider code={code} scope={scope} noInline={true}>
-            <LiveEditor
-              onChange={setCode}
-              highlight={(code) =>
-                Prism.highlight(
-                  code,
-                  // Fall back to JavaScript if JSX is not defined
-                  Prism.languages.jsx || Prism.languages.js,
-                  'jsx'
-                )
-              }
-            />
+            <LiveEditor onChange={setCode} />
             <LiveError />
           </LiveProvider>
         </div>
