@@ -84,7 +84,7 @@ const Popover = (props: PbPopoverProps) => {
   } = props;
 
   const items = globalProps(props).split(' ')
-  const filteredItems = items.filter(item => !item.includes('min_width'))
+  const filteredItems = items.filter(item => !item.includes('min-width') && !item.includes('width'))
   const filteredGlobalProps = filteredItems.join(' ')
   const popoverSpacing =
     filteredGlobalProps.includes("dark") || !filteredGlobalProps
