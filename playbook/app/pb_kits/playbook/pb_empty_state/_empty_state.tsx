@@ -56,7 +56,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "sm",
           buttonMargin: "xs",
           scssClassName: "sm-state-vertical",
-          column: "column",
+          column: 'column',
         },
         horizontal: {
           imageWidth: "100px",
@@ -66,7 +66,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "sm",
           buttonMargin: "xs",
           scssClassName: 'sm-state-horizontal',
-          column: "",
+          column: undefined,
         },
       },
       md: {
@@ -78,7 +78,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "md",
           buttonMargin: "sm",
           scssClassName: "md-state-vertical",
-          column: "column",
+          column: 'column',
         },
         horizontal: {
           imageWidth: "250px",
@@ -88,7 +88,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "md",
           buttonMargin: "sm",
           scssClassName: 'md-state-horizontal',
-          column: "",
+          column: undefined,
         },
       },
       lg: {
@@ -100,7 +100,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "md",
           buttonMargin: "md",
           scssClassName: "lg-state-vertical",
-          column: "column",
+          column: 'column',
         },
         horizontal: {
           imageWidth: "400px",
@@ -110,7 +110,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "md",
           buttonMargin: "md",
           scssClassName: 'lg-state-horizontal',
-          column: "",
+          column: undefined,
         },
       },
     };
@@ -126,7 +126,7 @@ const EmptyState = (props: EmptyStateProps) => {
           id={id}
       >
         <Flex className={configs.scssClassName}
-            orientation={configs.column}
+            orientation={configs.column as "column" | "row" | undefined}
             vertical={alignFlex}
         >
           <img
@@ -136,32 +136,32 @@ const EmptyState = (props: EmptyStateProps) => {
           />
 
           <FlexItem>
-            <Title paddingBottom={configs.titlePadding}
-                size={configs.titleSize}
+            <Title paddingBottom={configs.titlePadding as 'xxs' | 'xs' | 'sm' | undefined}
+                size={configs.titleSize as 1 | 2 | 3 | 4 | undefined}
                 text={header}
                 textAlign={alignText}
             />
 
             {size !== "sm" ? (
-              <Body paddingBottom={configs.descriptionPadding}
+              <Body paddingBottom={configs.descriptionPadding as "sm" | "md" | "lg" | undefined}
                   text={description}
                   textAlign={alignText}
               />
             ) : (
-              <Detail paddingBottom={configs.descriptionPadding}
+              <Detail paddingBottom={configs.descriptionPadding as "sm" | "md" | "lg" | undefined}
                   text={description}
                   textAlign={alignText}
               />
             )}
 
             <Button
-                marginBottom={configs.buttonMargin}
-                size={configs.buttonSize}
+                marginBottom={configs.buttonMargin as "xs" | "sm" | "md" | undefined}
+                size={configs.buttonSize as "sm" | "md" | undefined}
                 text={primaryButton}
                 variant="primary"
                 width="100%"
             />
-            <Button size={configs.buttonSize}
+            <Button size={configs.buttonSize as "sm" | "md" | undefined}
                 text={linkButton}
                 variant="link"
                 width="100%"
@@ -170,7 +170,7 @@ const EmptyState = (props: EmptyStateProps) => {
         </Flex>
       </div>
     )
-    return layout || null;
+    return layout || undefined;
   }
   return renderContent()
 }
