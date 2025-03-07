@@ -904,3 +904,11 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
+- category: empty_state
+  components:
+    - name: empty_state
+      platforms: react_only
+      status: beta
+      icons_used: false
+      react_rendered: false
+      enhanced_element_used: false
