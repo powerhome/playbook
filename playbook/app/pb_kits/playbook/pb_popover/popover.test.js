@@ -181,7 +181,7 @@ const PopoverTestClicktoClose3 = () => {
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
     const kit = screen.getByText("Click Anywhere");
-    expect(kit).toHaveClass("pb_popover_body max_width_240px overflow_handling");
+    expect(kit).toHaveClass("pb_popover_body p_sm overflow_handling");
   });
 
   test("closes Popover on click anywhere", async () => {
