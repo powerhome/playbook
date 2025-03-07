@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, forwardRef } from "react";
 import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import {
@@ -35,13 +35,14 @@ type MultiLevelSelectProps = {
   name?: string
   returnAllSelected?: boolean
   treeData?: { [key: string]: string; }[] | any
+  onChange?: any
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[] | any
   variant?: "multi" | "single"
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
 } & GlobalProps
 
-const MultiLevelSelect = (props: MultiLevelSelectProps) => {
+const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((props) => {
   const {
     aria = {},
     className,
@@ -54,6 +55,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     name,
     returnAllSelected = false,
     treeData,
+    onChange,
     onSelect = () => null,
     selectedIds,
     variant = "multi",
@@ -285,8 +287,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     // Logic for removing items from returnArray or defaultReturn when pills clicked
     if (returnAllSelected) {
       onSelect(getCheckedItems(updatedTree));
+      onChange({ target: { name, value: getCheckedItems(updatedTree) } });
     } else {
       onSelect(getDefaultCheckedItems(updatedTree));
+      onChange({ target: { name, value: getDefaultCheckedItems(updatedTree) } });
     }
   };
 
@@ -312,8 +316,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const updatedTree = changeItem(filtered[0], check);
     if (returnAllSelected) {
       onSelect(getCheckedItems(updatedTree));
+      onChange({ target: { name, value: getCheckedItems(updatedTree) } });
     } else {
       onSelect(getDefaultCheckedItems(updatedTree));
+      onChange({ target: { name, value: getDefaultCheckedItems(updatedTree) } });
     }
   };
 
@@ -346,6 +352,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setIsDropdownClosed(true);
 
     onSelect(selectedItem);
+    onChange({ target: { name, value: selectedItem } });
   };
 
   // Single select: reset the tree state upon typing
@@ -543,8 +550,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       </MultiLevelSelectContext.Provider>
     </div>
   );
-};
+});
 
+MultiLevelSelect.displayName = "MultiLevelSelect";
 MultiLevelSelect.Options = MultiLevelSelectOptions;
 
 export default MultiLevelSelect;
