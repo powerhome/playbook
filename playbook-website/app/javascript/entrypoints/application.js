@@ -23,6 +23,9 @@ import KitDocs from 'components/KitDocs'
 import PbKitReact from 'components/PbKitReact'
 import PbKitFetch from 'components/PbKitFetch'
 import PbKitPlayground from 'components/PbKitPlayground'
+import PbKitPlaygroundReact from 'components/PbKitPlayground/react.tsx'
+import PbKitPlaygroundReactSimple from 'components/PbKitPlayground/react_simple.tsx'
+import PbKitPlaygroundMonaco from 'components/PbKitPlayground/monaco.tsx'
 import AvailableProps from 'components/AvailableProps'
 import MainSidebar from 'components/MainSidebar'
 import HomepageHero from 'components/HomepageHero'
@@ -69,6 +72,9 @@ WebpackerReact.registerComponents({
   PbKitReact,
   PbKitFetch,
   PbKitPlayground,
+  PbKitPlaygroundReact,
+  PbKitPlaygroundReactSimple,
+  PbKitPlaygroundMonaco,
   MainSidebar,
   Website,
   HomepageHero,
