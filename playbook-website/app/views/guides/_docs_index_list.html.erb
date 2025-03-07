@@ -1,10 +1,17 @@
 <% if @navigation.present? %>
  <% missing_token_pages = ["animation", "opacity", "positioning", "scale", "screen_sizes", "titles", "transition"] %>
+ <% missing_global_pages = ["dark", "html_options", "margin", "padding"] %>
+
   <%= pb_rails("layout", props: { layout: "collection", margin_y: "xl", padding_bottom: "xl" }) do %>
     <%= pb_rails("layout/body") do %>
       <% @navigation[:pages].each do |page_name| %>
-        <% link_path = missing_token_pages.include?(page_name[:page_id]) ? "/guides/tokens/#{page_name[:page_id]}" : "/visual_guidelines/#{page_name[:page_id]}" %>
-
+        <% link_path = if missing_token_pages.include?(page_name[:page_id])
+                         "/guides/tokens/#{page_name[:page_id]}"
+                       elsif missing_global_pages.include?(page_name[:page_id])
+                         "/guides/global_props/#{page_name[:page_id]}"
+                       else
+                         "/visual_guidelines/#{page_name[:page_id]}"
+                       end %>
         <%= link_to link_path, class: "display_flex align_items_stretch" do %>
           <%= pb_rails("card", props: { padding: "none", hover: { shadow: "deep" }, flex: 1 } ) do %>
             <%= pb_rails("background" ) do %>
