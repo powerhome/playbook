@@ -1,5 +1,7 @@
-import React from "react";
-import MultiLevelSelect from "../_multi_level_select";
+import React from "react"
+import MultiLevelSelect from "../_multi_level_select"
+import Title from "../../pb_title/_title"
+import { useForm } from "react-hook-form"
 
 const treeData = [
   {
@@ -67,24 +69,40 @@ const treeData = [
       },
     ],
   },
-];
+]
 
 const MultiLevelSelectReactHook = (props) => {
+  const { register, watch } = useForm()
+  const selectedDepartments = watch("departments")
+  console.log("Selected Departments: ", selectedDepartments)
+
   return (
     <div>
       <MultiLevelSelect
-          id='multiselect-default'
-          onSelect={(selectedNodes) =>
-          console.log(
-            "Selected Items",
-            selectedNodes
-          )
-        }
+          id="multiselect-default"
+          marginBottom="md"
           treeData={treeData}
+          variant="single"
+          {...register("departments")}
           {...props}
       />
+      <Title size="h4">Selected Departments</Title>
+      <ul>
+        {selectedDepartments && selectedDepartments.map((selection) => (
+          <li key={selection.id}>
+            {selection.label}
+            {selection.children && selection.children.length > 0 && (
+              <ul>
+                {selection.children.map((child) => (
+                  <li key={child.id}>{child.label}</li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   )
-};
+}
 
-export default MultiLevelSelectReactHook;
+export default MultiLevelSelectReactHook
