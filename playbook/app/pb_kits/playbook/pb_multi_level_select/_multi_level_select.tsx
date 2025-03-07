@@ -55,7 +55,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     name,
     returnAllSelected = false,
     treeData,
-    onChange,
+    onChange = () => null,
     onSelect = () => null,
     selectedIds,
     variant = "multi",
