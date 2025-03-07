@@ -1,3 +1,29 @@
-.pb_empty_state {
+.pb_emptystate {
+
+  .sm-state-vertical {
+    width: 150px;
+  }
+
+  .md-state-vertical {
+    width: 300px;
+  }
+
+  .lg-state-vertical {
+    width: 450px;
+  }
+
+  .sm-state-horizontal {
+    width: max-content;
+    max-width: 400px;
+  }
+
+  .md-state-horizontal {
+    width: max-content;
+    max-width: 600px;
+  }
+
+  .lg-state-horizontal {
+    width: max-content;
+  }
 
 }
