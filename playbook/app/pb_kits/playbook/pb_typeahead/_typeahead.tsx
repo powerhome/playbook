@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, forwardRef} from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
@@ -49,6 +49,7 @@ type TypeaheadProps = {
   options?: Array<{ label: string; value?: string }>,
   marginBottom?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
+  onChange?: any,
   optionsByContext?: Record<string, Array<{ label: string; value?: string }>>
   searchContextSelector?: string,
   clearOnContextChange?: boolean,
@@ -71,8 +72,7 @@ type TagOnChangeValues = {
  * @constant {React.ReactComponent} Typeahead
  * @param {TypeaheadProps} props - props as described at https://react-select.com/props
  */
-
-const Typeahead = ({
+const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   async,
   className,
   components = {},
@@ -83,9 +83,11 @@ const Typeahead = ({
   getOptionValue,
   htmlOptions = {},
   id,
+  name,
   loadOptions = noop,
   marginBottom = "sm",
   pillColor,
+  onChange,
   optionsByContext = {},
   searchContextSelector,
   clearOnContextChange = false,
@@ -156,6 +158,15 @@ const Typeahead = ({
   )
 
   const handleOnChange = (_data: SelectValueType, { action, option, removedValue }: TagOnChangeValues) => {
+    if (onChange) {
+      const isReactHookForm = onChange.toString().includes("target")
+      if (isReactHookForm) {
+        onChange({ target: { name, value: _data } })
+      } else {
+        onChange(_data)
+      }
+    }
+    
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
       const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option ? option : _data })
@@ -199,10 +210,11 @@ const Typeahead = ({
       />
     </div>
   )
-}
+})
 
 Object.keys(kitComponents).forEach((k) => {
   (Typeahead as GenericObject)[k] = (kitComponents as {[key: string]: unknown})[k]
 })
 
+Typeahead.displayName = 'Typeahead'
 export default Typeahead
