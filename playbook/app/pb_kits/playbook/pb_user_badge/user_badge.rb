@@ -17,7 +17,7 @@ module Playbook
       def display_badge
         @display_badge ||= begin
           badge_path = File.join(
-            File.dirname(self.class.source_location),
+            File.dirname(self.class.instance_method(:display_badge).source_location.first),
             "badges",
             "#{badge}.svg"
           )
