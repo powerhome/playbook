@@ -13,8 +13,8 @@ const DrawerMenu = () => {
     const mediaQuery = window.matchMedia("(max-width: 600px)")
     setIsSmallScreen(mediaQuery.matches)
     const handler = (e) => setIsSmallScreen(e.matches)
-    mediaQuery.addEventListener('change', handler)
-    return () => mediaQuery.removeEventListener('change', handler)
+    mediaQuery.addEventListener("change", handler)
+    return () => mediaQuery.removeEventListener("change", handler)
   }, [])
 
   return (
@@ -27,17 +27,17 @@ const DrawerMenu = () => {
         />
       </Button>
       <Drawer
-          breakpoint="md"
+          breakpoint='md'
           placement='bottom'
           size='full'
           triggerId='menuButton'
           withinElement
       >
-        <Nav 
+        <Nav
             highlight={false}
             link='#'
-            orientation={isSmallScreen ? 'vertical' : 'horizontal'} 
-            padding={isSmallScreen ? 'none' : 'sm'}
+            orientation={isSmallScreen ? "vertical" : "horizontal"}
+            padding={isSmallScreen ? "none" : "sm"}
         >
           <NavItem link='#'
               text='About'

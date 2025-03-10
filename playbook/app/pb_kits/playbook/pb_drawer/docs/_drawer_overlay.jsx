@@ -34,6 +34,7 @@ const DrawerSizes = () => {
           onClose={toggleNoOverlayDrawer}
           opened={openedNoOverlayDrawer}
           overlay={false}
+          placement='right'
           size='lg'
       >
         This is a Drawer with no overlay

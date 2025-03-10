@@ -44,7 +44,7 @@ const DrawerBorders = () => {
           onClose={toggleBRightDrawer}
           opened={openedBRightDrawer}
           overlay={false}
-          placement="left"
+          placement="right"
           size="lg"
       >
         This is a Drawer with border right  
@@ -55,7 +55,7 @@ const DrawerBorders = () => {
           onClose={toggleBLeftDrawer}
           opened={openedBLeftDrawer}
           overlay={false}
-          placement="left"
+          placement="right"
           size="lg"
       >
         This is a Drawer with border left
@@ -66,7 +66,7 @@ const DrawerBorders = () => {
           onClose={toggleBFullDrawer}
           opened={openedBFullDrawer}
           overlay={false}
-          placement="left"
+          placement="right"
           size="lg"
       >
         This is a Drawer with border full

@@ -20,6 +20,34 @@ export default class PbTypeahead extends PbEnhancedElement {
     this.searchInput.addEventListener('focus', () => this.debouncedSearch())
     this.searchInput.addEventListener('input', () => this.debouncedSearch())
     this.resultsElement.addEventListener('click', (event: MouseEvent) => this.optionSelected(event))
+
+    if (this.clearOnContextChange && this.searchContextElement) {
+      this.searchContextElement.addEventListener('change', () => {
+        this.searchInputClear()
+        this.resultsCacheClear()
+        this.clearResults()
+      })
+    }
+  }
+
+  get optionsByContext() {
+    return (this.element as HTMLElement).dataset.pbTypeaheadKitOptionsByContext
+      ? JSON.parse((this.element as HTMLElement).dataset.pbTypeaheadKitOptionsByContext)
+      : null
+  }
+
+  get searchContextElement() {
+    const selector = (this.element as HTMLElement).dataset.pbTypeaheadKitSearchContextSelector
+    if (!selector) return null
+
+    const found = this.element.parentNode?.querySelector(`#${selector}`)
+      || this.element.closest(selector)
+
+    return found || null
+  }
+
+  get clearOnContextChange() {
+    return (this.element as HTMLElement).dataset.pbTypeaheadKitClearOnContextChange === 'true'
   }
 
   handleKeydown(event: KeyboardEvent) {
@@ -40,14 +68,32 @@ export default class PbTypeahead extends PbEnhancedElement {
 
     const searchTerm = this.searchTerm
     const searchContext = this.searchContext
-    const search = {
-      searchingFor: searchTerm,
-      searchingContext: searchContext,
-      setResults: (results: Array<DocumentFragment>) => {
-        this.resultsCacheUpdate(searchTerm, searchContext, results)
-      },
+
+    if (this.optionsByContext && Object.keys(this.optionsByContext).length > 0) {
+      const contextArray = this.optionsByContext[searchContext] || []
+
+      const filteredResults = contextArray.filter((obj: { label: string, value: string }) => {
+        return obj.label
+          && obj.label.toLowerCase().includes(searchTerm.toLowerCase())
+      })
+
+       const optionFragments = filteredResults.map((obj: { label: string, value: string }) => {
+      const singleOption = document.createDocumentFragment()
+      singleOption.appendChild(document.createTextNode(obj.label))
+      return singleOption
+    })
+
+      this.resultsCacheUpdate(searchTerm, searchContext, optionFragments)
+    } else {
+      const search = {
+        searchingFor: searchTerm,
+        searchingContext: searchContext,
+        setResults: (results: Array<DocumentFragment>) => {
+          this.resultsCacheUpdate(searchTerm, searchContext, results)
+        },
+      }
+      this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-search', { bubbles: true, detail: search }))
     }
-    this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-search', { bubbles: true, detail: search }))
   }
 
   resultsCacheUpdate(searchTerm: string, searchContext: string, results: Array<DocumentFragment>) {
@@ -87,11 +133,15 @@ export default class PbTypeahead extends PbEnhancedElement {
     const resultOption = (event.target as Element).closest('[data-result-option-item]')
     if (!resultOption) return
 
+    const selectedText = resultOption.textContent.trim()
+
     this._validSelection = true
     this.removeValidationError()
 
+    if (this.searchContextElement) this.searchInput.value = selectedText
+
     this.resultsCacheClear()
-    this.searchInputClear()
+    if (!this.searchContextElement) this.searchInputClear()
     this.clearResults()
 
     this.element.dispatchEvent(new CustomEvent('pb-typeahead-kit-result-option-selected', { bubbles: true, detail: { selected: resultOption, typeahead: this } }))
@@ -173,6 +223,9 @@ export default class PbTypeahead extends PbEnhancedElement {
       this.element.parentNode.querySelector(selector) ||
       this.element.closest(selector)
     ) as HTMLInputElement).value
+    else if (this.searchContextElement) {
+      return (this.searchContextElement as HTMLInputElement).value
+    }
 
     return null
   }

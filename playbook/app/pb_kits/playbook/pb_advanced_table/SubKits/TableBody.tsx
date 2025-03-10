@@ -1,21 +1,14 @@
 import React, { useContext } from "react"
 import classnames from "classnames"
-import { flexRender, Row } from "@tanstack/react-table"
 
 import { GenericObject } from "../../types"
 
 import { buildCss } from "../../utilities/props"
 import { globalProps } from "../../utilities/globalProps"
-import { isChrome } from "../Utilities/BrowserCheck"
-
-import LoadingInline from "../../pb_loading_inline/_loading_inline"
-import Checkbox from "../../pb_checkbox/_checkbox"
-
-import { SubRowHeaderRow } from "../Components/SubRowHeaderRow"
-import { LoadingCell } from "../Components/LoadingCell"
-import { renderCollapsibleTrail } from "../Components/CollapsibleTrail"
 
 import AdvancedTableContext from "../Context/AdvancedTableContext"
+import { RegularTableView } from "../Components/RegularTableView"
+import { VirtualizedTableView } from "../Components/VirtualizedTableView"
 
 type TableBodyProps = {
   className?: string
@@ -35,17 +28,14 @@ export const TableBody = ({
 }: TableBodyProps) => {
 
   const {
-    columnDefinitions,
-    enableToggleExpansion,
-    handleExpandOrCollapse,
-    isPinnedLeft = false,
-    inlineRowLoading,
-    loading,
     responsive,
-    table,
-    selectableRows,
-    hasAnySubRows
+    isPinnedLeft = false,
+    virtualizer,
+    virtualizedRows,
+    enableVirtualization
   } = useContext(AdvancedTableContext)
+
+  const isVirtualized = virtualizedRows || enableVirtualization;
 
   const classes = classnames(
     buildCss("pb_advanced_table_body"),
@@ -54,93 +44,49 @@ export const TableBody = ({
     className
   )
 
-  const columnPinning = table.getState().columnPinning;
+  // Style for virtualized table container
+  const style: React.CSSProperties = virtualizer ? {
+    height: `${virtualizer.getTotalSize()}px`, // tells scrollbar how big the table is
+    position: 'relative', // needed for absolute positioning of rows
+    width: '100%',
+  } : {};
 
   return (
     <>
-      <tbody className={classes} 
+      <tbody
+          className={classes}
+          data-virtualized={isVirtualized ? 'true' : 'false'}
           id={id}
+          style={style}
       >
-        {table.getRowModel().rows.map((row: Row<GenericObject>) => {
-          const isExpandable = row.getIsExpanded()
-          const isFirstChildofSubrow = row.depth > 0 && row.index === 0
-          const rowHasNoChildren = row.original.children && !row.original.children.length ? true : false
-          const numberOfColumns = table.getAllFlatColumns().length
-          const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && (row.depth < columnDefinitions[0].cellAccessors?.length)
-          const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren))
-          const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white"
-          return (
-            <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
-              {isFirstChildofSubrow && subRowHeaders && (
-                <SubRowHeaderRow
-                    collapsibleTrail={collapsibleTrail}
-                    enableToggleExpansion={enableToggleExpansion}
-                    onClick={handleExpandOrCollapse}
-                    row={row}
-                    subRowHeaders={subRowHeaders}
-                    table={table}
-                />
-              )}
-            <tr
-                className={`${rowColor} ${
-                  row.depth > 0 ? `depth-sub-row-${row.depth}` : ""
-              }`}
-                id={`${row.index}-${row.id}-${row.depth}-row`}
+        {isVirtualized && virtualizer ? (
+          // Virtualized table view
+          <VirtualizedTableView
+              collapsibleTrail={collapsibleTrail}
+              subRowHeaders={subRowHeaders}
+          />
+        ) : (
+          // Regular non-virtualized table view
+          <RegularTableView
+              collapsibleTrail={collapsibleTrail}
+              subRowHeaders={subRowHeaders}
+          />
+        )}
+
+        {/* Fallback for when virtualization should be enabled but virtualizer isn't available */}
+        {isVirtualized && !virtualizer && (
+          <tr>
+            <td
+                colSpan={999}
+                style={{ padding: '10px', textAlign: 'center' }}
             >
-              {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
-              {selectableRows && !hasAnySubRows && (
-                  <td className="checkbox-cell">
-                    <Checkbox
-                        checked={row.getIsSelected()}
-                        disabled={!row.getCanSelect()}
-                        indeterminate={row.getIsSomeSelected()}
-                        name={row.id}
-                        onChange={row.getToggleSelectedHandler()}
-                    />
-                  </td>
-                )}
-              {row.getVisibleCells().map((cell, i) => {
-                const isPinnedLeft = columnPinning.left.includes(cell.column.id)
-                const isLastCell = cell.column.parent?.columns.at(-1)?.id === cell.column.id
-
-                return (
-                  <td
-                      align="right"
-                      className={classnames(
-                        `${cell.id}-cell position_relative`,
-                        isChrome() ? "chrome-styles" : "",
-                        isPinnedLeft && 'pinned-left',
-                        isLastCell && 'last-cell',
-                      )}
-                      key={`${cell.id}-data`}
-                  >
-                    {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
-                    <span id={`${cell.id}-span`}>
-                      {loading ? (
-                        <LoadingCell />
-                      ) : (
-                        flexRender(cell.column.columnDef.cell, cell.getContext())
-                      )}
-                    </span>
-                  </td>
-                )
-              })}
-            </tr>
-
-              {/* Display LoadingInline if Row Data is querying and there are no children already */}
-              {isDataLoading ? (
-                <tr key={`${row.id}-row`}>
-                  <td colSpan={numberOfColumns}
-                      style={{ paddingLeft: `${row.depth === 0 ? 0.5 : (row.depth * 2)}em` }}
-                  >
-                    <LoadingInline />
-                  </td>
-                </tr>
-              ) : null}
-            </React.Fragment>
-          )
-        })}
+              <div>No data to display.</div>
+            </td>
+          </tr>
+        )}
       </tbody>
     </>
-  )
+  );
 }
+
+export default TableBody;

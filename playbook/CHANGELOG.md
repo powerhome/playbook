@@ -1,3 +1,48 @@
+# 14.15.0
+##### March 7, 2025
+
+[14.15.0](https://github.com/powerhome/playbook/tree/14.15.0) full list of changes:
+
+**Kit Enhancements:**
+- Advanced Table Kit: Fixes for React "Endless/Infinite Scroll" + Refactor ([\#4323](https://github.com/powerhome/playbook/pull/4323)) ([@skduncan](https://github.com/skduncan))
+- Form Pill Kit: Create New Wrapped Prop ([\#4354](https://github.com/powerhome/playbook/pull/4354)) ([@gabbymassaro](https://github.com/gabbymassaro))
+- Title Kit: Display Title ([\#4344](https://github.com/powerhome/playbook/pull/4344)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Datepicker Kit: Inline Rails Validation on Forms ([\#4357](https://github.com/powerhome/playbook/pull/4357)) ([@nickamantia](https://github.com/nickamantia))
+- Select, Selectable Card, Selectable Card Icon, Selectable Icon: Update to pb_content_tag ([\#4324](https://github.com/powerhome/playbook/pull/4324)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- Multi Level Select Kit: Create Disabled Prop ([\#4348](https://github.com/powerhome/playbook/pull/4348)) ([@carloslimasd](https://github.com/carloslimasd))
+- Tooltip Kit: Pass Height/Width Global Props To Tooltip - React ([\#4335](https://github.com/powerhome/playbook/pull/4335)) ([@gabbymassaro](https://github.com/gabbymassaro))
+- Radio Kit: Better Support React Hook Form ([\#4282](https://github.com/powerhome/playbook/pull/4282)) [@cmhorsey](https://github.com/cmhorsey))
+- Typeahead Kit: Dynamic Options in Rails ([\#4321](https://github.com/powerhome/playbook/pull/4321)) ([@nidaqg](https://github.com/nidaqg))
+- Overlay Kit: Horizontal Scroll Bar Toggle ([\#4346](https://github.com/powerhome/playbook/pull/4346)) ([@ElisaShapiro](https://github.com/ElisaShapiro))
+- Overlay Kit: Adding Dynamic Prop - Rails ([\#4336](https://github.com/powerhome/playbook/pull/4336)) ([@carloslimasd](https://github.com/carloslimasd))
+- Tooltip Kit: Interaction and Delay Props Using @floating-ui - Rails ([\#4322](https://github.com/powerhome/playbook/pull/4322)) ([@yuriyivanenko](https://github.com/yuriyivanenko), [@markdoeswork](https://github.com/markdoeswork))
+- Select Kit: Adding Inline Validity Message ([\#4327](https://github.com/powerhome/playbook/pull/4327)) ([@carloslimasd](https://github.com/carloslimasd))
+- Currency Kit: Handling of null Values ([\#4303](https://github.com/powerhome/playbook/pull/4303)) ([@nickamantia](https://github.com/nickamantia))
+- Icon Button Kit - React ([\#4298](https://github.com/powerhome/playbook/pull/4298)) ([@kangaree](https://github.com/kangaree))
+- Rails Form Helpers:  Time Zone Select Field ([\#4299](https://github.com/powerhome/playbook/pull/4299)) ([@carloslimasd](https://github.com/carloslimasd))
+
+**Fixed Bugs:**
+- Timeline Kit: Min-Width instead of Fixed Width ([\#4345](https://github.com/powerhome/playbook/pull/4345)) ([@markdoeswork](https://github.com/markdoeswork))
+- Progress Step Kit: Fixes for Tooltip Flickering - Rails ([\#4285](https://github.com/powerhome/playbook/pull/4285)) ([@gabbymassaro](https://github.com/gabbymassaro))
+
+
+**Improvements:**
+- PB Website: Tokens Index Page ([\#4358](https://github.com/powerhome/playbook/pull/4358)) ([@gabbymassaro](https://github.com/gabbymassaro))
+- Drawer Kit: Added Doc Example for Breakpoints ([\#4286](https://github.com/powerhome/playbook/pull/4286)) ([@jasperfurniss](https://github.com/jasperfurniss))
+- Select Kit: Add react-hook-form Doc Example ([\#4347](https://github.com/powerhome/playbook/pull/4347)) ([@kangaree](https://github.com/kangaree))
+- Dependency Removal - Lodash [ 1 of 3] ([\#4300](https://github.com/powerhome/playbook/pull/4300)) ([@cmhorsey](https://github.com/cmhorsey))
+- PB Website: Update CHANGELOG.md for Web ([\#4333](https://github.com/powerhome/playbook/pull/4333)) ([@Amax1296](https://github.com/Amax1296))
+- PB Website: Rails Playground ERB Syntax Highlighting ([\#4312](https://github.com/powerhome/playbook/pull/4312)) ([@gabbymassaro](https://github.com/gabbymassaro))
+- Dependency Update: Bump axe-core to 4.10.2 ([\#4308](https://github.com/powerhome/playbook/pull/4308)) ([@kangaree](https://github.com/kangaree))
+- PB Website: Global Props & Tokens Index Page ([\#4283](https://github.com/powerhome/playbook/pull/4283)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+- PB Website: Rails Playground Editor Enhancements ([\#4297](https://github.com/powerhome/playbook/pull/4297)) ([@yuriyivanenko](https://github.com/yuriyivanenko))
+
+**New Kit:**
+- Drawer Kit - Rails ([\#4278](https://github.com/powerhome/playbook/pull/4278)) ([@markdoeswork](https://github.com/markdoeswork))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.14.0...14.15.0)
+
+
 # 🚀 Smarter Scroll Gradients in Playbook! 🎨
 ##### February 21, 2025
 

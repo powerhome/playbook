@@ -22,6 +22,10 @@ module Playbook
       prop :pill_color, type: Playbook::Props::Enum,
                         values: %w[primary neutral success warning error info data_1 data_2 data_3 data_4 data_5 data_6 data_7 data_8 windows siding roofing doors gutters solar insulation accessories],
                         default: "primary"
+      prop :wrapped, type: Playbook::Props::Boolean,
+                     default: false
+      prop :disabled, type: Playbook::Props::Boolean,
+                      default: false
 
       def classname
         generate_classname("pb_multi_level_select")
@@ -29,6 +33,7 @@ module Playbook
 
       def multi_level_select_options
         {
+          disabled: disabled,
           id: id,
           inputDisplay: input_display,
           name: name,
@@ -38,6 +43,7 @@ module Playbook
           input_name: input_name,
           variant: variant,
           pillColor: pill_color,
+          wrapped: wrapped,
         }
       end
     end

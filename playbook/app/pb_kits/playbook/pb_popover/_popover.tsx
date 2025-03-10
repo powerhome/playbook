@@ -19,7 +19,7 @@ import {
 
 import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
-import { uniqueId } from 'lodash';
+import { uniqueId } from '../utilities/object';
 
 type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth' | 'maxHeight' | 'minHeight'>
 
