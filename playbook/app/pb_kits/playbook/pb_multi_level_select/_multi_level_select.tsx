@@ -23,6 +23,13 @@ import {
   getExpandedItems,
 } from "./_helper_functions";
 
+interface MultiLevelSelectComponent
+  extends React.ForwardRefExoticComponent<
+    MultiLevelSelectProps & React.RefAttributes<HTMLInputElement>
+  > {
+  Options: typeof MultiLevelSelectOptions;
+}
+
 type MultiLevelSelectProps = {
   aria?: { [key: string]: string }
   className?: string
@@ -550,9 +557,9 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
       </MultiLevelSelectContext.Provider>
     </div>
   );
-});
+}) as MultiLevelSelectComponent;
 
 MultiLevelSelect.displayName = "MultiLevelSelect";
-(MultiLevelSelect as any).Options = MultiLevelSelectOptions;
+MultiLevelSelect.Options = MultiLevelSelectOptions;
 
 export default MultiLevelSelect;
