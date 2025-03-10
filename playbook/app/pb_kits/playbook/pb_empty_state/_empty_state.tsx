@@ -140,11 +140,14 @@ const EmptyState = (props: EmptyStateProps) => {
             paddingRight="lg"
             vertical="center"
         >
-          <Image
-              alt="test"
-              htmlOptions={{ width: "100%", maxwidth: configs.imageWidth, height: "auto", alignment: "start" }}
-              url={image}
-          />
+          { image ? (
+            <Image
+                alt="test"
+                htmlOptions={{ width: "100%", maxwidth: configs.imageWidth, height: "auto", alignment: "start" }}
+                url={image}
+            />
+          ) : null }
+
           <FlexItem >
             <Title paddingBottom={configs.titlePadding as 'xxs' | 'xs' | 'sm' | undefined}
                 size={configs.titleSize as 1 | 2 | 3 | 4 | undefined}
@@ -164,20 +167,26 @@ const EmptyState = (props: EmptyStateProps) => {
               />
             )}
 
-            <Button
-                marginBottom={configs.buttonMargin as "xs" | "sm" | "md" | undefined}
-                onClick={onPrimaryButtonClick}
-                size={configs.buttonSize as "sm" | "md" | undefined}
-                text={primaryButton}
-                variant="primary"
-                width="100%"
-            />
-            <Button onClick={onLinkButtonClick}
-                size={configs.buttonSize as "sm" | "md" | undefined}
-                text={linkButton}
-                variant="link"
-                width="100%"
-            />
+            { primaryButton ? (
+                <Button
+                    marginBottom={configs.buttonMargin as "xs" | "sm" | "md" | undefined}
+                    onClick={onPrimaryButtonClick}
+                    size={configs.buttonSize as "sm" | "md" | undefined}
+                    text={primaryButton}
+                    variant="primary"
+                    width="100%"
+                />
+            ) : null }
+
+            { linkButton ? (
+                <Button onClick={onLinkButtonClick}
+                    size={configs.buttonSize as "sm" | "md" | undefined}
+                    text={linkButton}
+                    variant="link"
+                    width="100%"
+                />
+            ) : null }
+
           </FlexItem>
         </Flex>
       </div>
