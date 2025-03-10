@@ -459,6 +459,18 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                     ))
                   : null}
 
+                {!returnAllSelected
+                  ? defaultReturn.map((item) => (
+                      <input
+                          disabled={disabled}
+                          key={item.id} 
+                          name={`${name}[]`}
+                          type="hidden"
+                          value={item.id}
+                      />
+                    ))
+                  : null}
+
                 {returnAllSelected &&
                 returnedArray.length !== 0 &&
                 inputDisplay === "pills"
