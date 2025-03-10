@@ -78,7 +78,7 @@ const EmptyState = (props: EmptyStateProps) => {
       },
       md: {
         vertical: {
-          imageWidth: "250px",
+          imageWidth: "140px",
           titleSize: 3,
           titlePadding: "xs",
           descriptionPadding: "md",
@@ -88,7 +88,7 @@ const EmptyState = (props: EmptyStateProps) => {
           column: "column",
         },
         horizontal: {
-          imageWidth: "250px",
+          imageWidth: "140px",
           titleSize: 3,
           titlePadding: "xs",
           descriptionPadding: "md",
@@ -100,7 +100,7 @@ const EmptyState = (props: EmptyStateProps) => {
       },
       lg: {
         vertical: {
-          imageWidth: "400px",
+          imageWidth: "100%",
           titleSize: 2,
           titlePadding: "sm",
           descriptionPadding: "lg",
@@ -110,7 +110,7 @@ const EmptyState = (props: EmptyStateProps) => {
           column: "column",
         },
         horizontal: {
-          imageWidth: "400px",
+          imageWidth: "100%",
           titleSize: 2,
           titlePadding: "sm",
           descriptionPadding: "lg",
@@ -122,7 +122,7 @@ const EmptyState = (props: EmptyStateProps) => {
       },
     };
 
-    const configs = sizeConfigs[size]?.[orientation] || sizeConfigs.md[orientation] || sizeConfigs.md.vertical
+    const configs = sizeConfigs[size]?.[orientation]
     const alignFlex = alignment === "center" ? "center" : alignment === "right" ? "end" : "start"
     const alignText = alignment === "center" ? "center" : alignment === "right" ? "right" : undefined
 
@@ -136,14 +136,14 @@ const EmptyState = (props: EmptyStateProps) => {
         <Flex align={alignFlex}
             className={configs.scssClassName}
             orientation={configs.column as "column" | "row" | undefined}
-            paddingLeft="lg"
-            paddingRight="lg"
+            paddingLeft="xl"
+            paddingRight="xl"
             vertical="center"
         >
           { image ? (
             <Image
                 alt="test"
-                htmlOptions={{ width: "100%", maxwidth: configs.imageWidth, height: "auto", alignment: "start" }}
+                htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
                 url={image}
             />
           ) : null }

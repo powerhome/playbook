@@ -12,7 +12,7 @@ const EmptyStateAlignment = (props) => (
           header="Title Explains"
           image="https://component.gallery/static/8d36eaa25b6dcb026685101ebc379022/Empty%20state%20icon..svg"
           primaryButton="Next Action"
-          size="sm"
+          size="md"
       />
       <EmptyState
           {...props}
@@ -21,7 +21,7 @@ const EmptyStateAlignment = (props) => (
           header="Title Explains"
           image="https://component.gallery/static/8d36eaa25b6dcb026685101ebc379022/Empty%20state%20icon..svg"
           primaryButton="Next Action"
-          size="sm"
+          size="md"
       />
       <EmptyState
           {...props}
@@ -30,7 +30,7 @@ const EmptyStateAlignment = (props) => (
           header="Title Explains"
           image="https://component.gallery/static/8d36eaa25b6dcb026685101ebc379022/Empty%20state%20icon..svg"
           primaryButton="Next Action"
-          size="sm"
+          size="md"
       />
   </Flex>
 )
