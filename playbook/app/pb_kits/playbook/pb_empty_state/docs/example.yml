@@ -1,7 +1,6 @@
 examples:
-  
-  
+
+
   react:
+  - empty_state_size: Size
   - empty_state_default: Default
-  
-  
