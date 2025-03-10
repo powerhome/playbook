@@ -9,6 +9,7 @@ import Button from '../pb_button/_button'
 import Detail from '../pb_detail/_detail'
 import Flex from '../pb_flex/_flex'
 import FlexItem from '../pb_flex/_flex_item'
+import Image from '../pb_image/_image'
 
 type EmptyStateProps = {
   aria?: { [key: string]: string },
@@ -129,10 +130,10 @@ const EmptyState = (props: EmptyStateProps) => {
             orientation={configs.column as "column" | "row" | undefined}
             vertical={alignFlex}
         >
-          <img
+          <Image
               alt="test"
-              src={image}
-              style={{ width: "100%", maxWidth: configs.imageWidth, height: "auto" }}
+              htmlOptions={{ width: "100%", maxWidth: configs.imageWidth, height: "auto" }}
+              url={image}
           />
 
           <FlexItem>
