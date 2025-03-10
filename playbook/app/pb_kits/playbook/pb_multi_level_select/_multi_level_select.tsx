@@ -35,7 +35,7 @@ type MultiLevelSelectProps = {
   name?: string
   returnAllSelected?: boolean
   treeData?: { [key: string]: string; }[] | any
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (event: { target: { name?: string; value: any } }) => void
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[] | any
   variant?: "multi" | "single"
