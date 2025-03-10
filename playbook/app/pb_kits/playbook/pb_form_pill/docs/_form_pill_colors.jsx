@@ -1,5 +1,7 @@
 import React from 'react'
-import { FormPill, Title } from 'playbook-ui'
+
+import FormPill from '../../pb_form_pill/_form_pill'
+import Title from '../../pb_title/_title'
 
 const FormPillColors = (props) => {
   return (

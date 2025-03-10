@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Flex, Image, Title, Pill } from "playbook-ui";
+import Flex from '../../pb_flex/_flex'
+import Image from '../../pb_image/_image'
+import Title from '../../pb_title/_title'
+import Pill from '../../pb_pill/_pill'
 import Lightbox from "../_lightbox.tsx";
 
 const LightboxCustomHeader = (props) => {

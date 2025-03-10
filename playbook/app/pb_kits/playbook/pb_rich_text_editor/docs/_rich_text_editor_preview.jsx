@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import {
-  Button,
-  Card,
-  RichTextEditor,
-} from 'playbook-ui'
+import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
+import Button from '../../pb_button/_button'
+import Card from '../../pb_card/_card'
 
 const RichTextEditorPreview = (props) => {
   const [showPreview, setShowPreview] = useState(false)

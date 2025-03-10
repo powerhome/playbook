@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-import {Body, Passphrase} from 'playbook-ui'
+import Body from '../../pb_body/_body'
+import Passphrase from '../../pb_passphrase/_passphrase'
 
 const PassphraseConfirmation = (props) => {
   const [input, setInput] = useState('')

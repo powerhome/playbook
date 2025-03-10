@@ -1,5 +1,6 @@
 import React from "react";
-import { Nav, NavItem } from 'playbook-ui'
+import Nav from '../../pb_nav/_nav'
+import NavItem from '../../pb_nav/_item'
 
 const NavWithFontControl = (props) => {
   return (

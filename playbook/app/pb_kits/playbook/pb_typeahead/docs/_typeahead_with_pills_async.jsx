@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 
-import {
-  Caption,
-  Typeahead,
-  User,
-} from 'playbook-ui'
+import Caption from '../../pb_caption/_caption'
+import Typeahead from '../../pb_typeahead/_typeahead'
+import User from '../../pb_user/_user'
 
 /**
  *

@@ -1,14 +1,13 @@
 import React from "react";
-import {
-  Title,
-  Card,
-  Gauge,
-  Flex,
-  FlexItem,
-  SectionSeparator,
-  Body,
-  Caption,
-} from "playbook-ui";
+
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
+import Gauge from '../../pb_gauge/_gauge'
+import Card from '../../pb_card/_card'
+import Caption from '../../pb_caption/_caption'
+import Body from '../../pb_body/_body'
+import SectionSeparator from '../../pb_section_separator/_section_separator'
+import Title from '../../pb_title/_title'
 
 const data = [{ name: "Name", value: 10 }];
 

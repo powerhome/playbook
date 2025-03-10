@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Button, Gauge } from 'playbook-ui'
+
+import Button from '../../pb_button/_button'
+import Gauge from '../../pb_gauge/_gauge'
 
 const GaugeLiveData = (props) => {
   const [value, setValue] = useState(50)

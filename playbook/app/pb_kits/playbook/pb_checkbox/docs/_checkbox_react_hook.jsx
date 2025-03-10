@@ -1,6 +1,9 @@
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import { Button, Checkbox, Flex, Body } from "playbook-ui"
+import Button from '../../pb_button/_button'
+import Checkbox from '../../pb_checkbox/_checkbox'
+import Flex from '../../pb_flex/_flex'
+import Body from '../../pb_body/_body'
 
 const CheckboxReactHook = () => {
   const { register, handleSubmit } = useForm({

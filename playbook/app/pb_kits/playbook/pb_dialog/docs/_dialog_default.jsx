@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Button, Dialog } from 'playbook-ui'
+import Button from '../../pb_button/_button'
+import Dialog from '../../pb_dialog/_dialog'
+
 
 const DialogDefault = () => {
   const [isOpen, setIsOpen] = useState(false)

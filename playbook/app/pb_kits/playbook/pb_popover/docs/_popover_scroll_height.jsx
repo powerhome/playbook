@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import {
-  Body,
-  Button,
-  PbReactPopover,
-  Title,
-} from 'playbook-ui'
+
+import Body from '../../pb_body/_body'
+import Button from '../../pb_button/_button'
+import PbReactPopover from '../../pb_popover/_popover'
+import Title from '../../pb_title/_title'
 
 const PopoverScrollHeight = (props) => {
   const [showPopover, setShowPopover] = useState(false)

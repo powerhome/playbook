@@ -1,5 +1,8 @@
 import React from "react"
-import { Nav, NavItem, useCollapsible } from "playbook-ui"
+
+import Nav from '../../pb_nav/_nav'
+import NavItem from '../../pb_nav/_item'
+import useCollapsible from '../../pb_collapsible/useCollapsible'
 
 const CollapsibleNavCustom = (props) => {
   const navItems = ["Overview", "Albums", "Similar Artists"]

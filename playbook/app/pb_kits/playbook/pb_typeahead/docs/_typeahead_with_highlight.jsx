@@ -4,14 +4,12 @@
 import React, { useState } from 'react'
 import { components } from 'react-select'
 
-import {
-  Avatar,
-  Body,
-  Flex,
-  FlexItem,
-  Title,
-  Typeahead,
-} from 'playbook-ui'
+import Avatar from '../../pb_avatar/_avatar'
+import Body from '../../pb_body/_body'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
+import Title from '../../pb_title/_title'
+import Typeahead from '../../pb_typeahead/_typeahead'
 
 const USERS = [
   {

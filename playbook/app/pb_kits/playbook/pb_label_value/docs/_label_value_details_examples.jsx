@@ -1,5 +1,7 @@
 import React from 'react'
-import { Flex, LabelValue, Title } from 'playbook-ui'
+import Flex from '../../pb_flex/_flex'
+import LabelValue from '../../pb_label_value/_label_value'
+import Title from '../../pb_title/_title'
 
 const LabelValueDetailsExamples = (props) => {
   return (

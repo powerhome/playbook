@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { Flex, Image, Button, Body, FlexItem } from 'playbook-ui'
+
+import Flex from '../../pb_flex/_flex'
+import Image from '../../pb_image/_image'
+import Button from '../../pb_button/_button'
+import Body from '../../pb_body/_body'
+import FlexItem from '../../pb_flex/_flex_item'
 import Lightbox from '../_lightbox.tsx'
 
 const LightboxCurrentPhoto = (props) => {

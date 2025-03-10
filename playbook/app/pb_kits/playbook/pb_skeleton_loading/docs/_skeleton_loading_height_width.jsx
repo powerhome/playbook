@@ -1,6 +1,7 @@
 import React from 'react'
-import { Card, SkeletonLoading } from "playbook-ui"
 
+import SkeletonLoading from '../../pb_skeleton_loading/_skeleton_loading'
+import Card from '../../pb_card/_card'
 
 const SkeletonLoadingHeightWidth = (props) => (
   <div>

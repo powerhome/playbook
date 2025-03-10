@@ -1,5 +1,5 @@
 import React from "react";
-import { GanttChart } from "playbook-ui";
+import GanttChart from '../../pb_gantt_chart/_gantt_chart'
 
 const mockOptions = {
   title: {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { RichTextEditor, Select } from 'playbook-ui'
+import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
+import Select from '../../pb_select/_select'
 import { changelog, release } from './templates.js'
 
 const RichTextEditorTemplates = (props) => {

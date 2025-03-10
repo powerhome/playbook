@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import {
-  Flex,
-  Badge,
-  Title,
-  Icon,
-  Draggable,
-  DraggableProvider,
-  Card,
-  Caption,
-} from "playbook-ui";
+
+import Flex from '../../pb_flex/_flex'
+import Draggable from '../../pb_draggable/_draggable'
+import { DraggableProvider } from '../../pb_draggable/context'
+import Badge from '../../pb_badge/_badge'
+import Title from '../../pb_title/_title'
+import Icon from '../../pb_icon/_icon'
+import Caption from '../../pb_caption/_caption'
+import Card from '../../pb_card/_card'
 
 // Initial items to be dragged
 const data = [

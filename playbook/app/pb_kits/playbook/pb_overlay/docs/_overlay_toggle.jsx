@@ -1,6 +1,9 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useState } from "react";
-import { Overlay, Table, Button } from "playbook-ui";
+
+import Overlay from '../../pb_overlay/_overlay'
+import Button from '../../pb_button/_button'
+import Table from '../../pb_table/_table'
 
 const TableExample = () => {
     return (

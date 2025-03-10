@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Caption, Title, Toggle } from 'playbook-ui'
+import Caption from '../../pb_caption/_caption'
+import Title from '../../pb_title/_title'
+import Toggle from '../../pb_toggle/_toggle'
 
 const ToggleName = () => {
   const [choice, setChoice] = useState(false)

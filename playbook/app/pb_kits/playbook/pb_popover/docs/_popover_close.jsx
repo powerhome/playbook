@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import {
-  Button,
-  Flex,
-  PbReactPopover,
-} from 'playbook-ui'
+
+import Button from '../../pb_button/_button'
+import Flex from '../../pb_flex/_flex'
+import PbReactPopover from '../../pb_popover/_popover'
 
 const PopoverClose = (props) => {
   const [showInsidePopover, setInsideShowPopover] = useState(false)

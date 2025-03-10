@@ -1,5 +1,9 @@
 import React from 'react'
-import { Dropdown, User, Badge, FlexItem } from 'playbook-ui'
+
+import Dropdown from '../../pb_dropdown/_dropdown'
+import Badge from '../../pb_badge/_badge'
+import FlexItem from '../../pb_flex/_flex_item'
+import User from '../../pb_user/_user'
 
 const DropdownWithAutocomplete = (props) => {
 

@@ -1,5 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Map, mapTheme, MapCustomButton } from 'playbook-ui'
+
+import Map from '../../pb_map/_map'
+import mapTheme from '../../pb_map/pbMapTheme'
+import MapCustomButton from '../../pb_map/_map_custom_button'
+
 import maplibregl from 'maplibre-gl'
 
 const MapWithCustomButton = (props) => {

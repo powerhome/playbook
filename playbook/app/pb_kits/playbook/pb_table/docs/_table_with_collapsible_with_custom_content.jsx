@@ -1,5 +1,11 @@
 import React from 'react'
-import { Table, Icon, Card, Body, Image, Flex } from 'playbook-ui'
+
+import Table from '../../pb_table/_table'
+import Icon from '../../pb_icon/_icon'
+import Card from '../../pb_card/_card'
+import Body from '../../pb_body/_body'
+import Image from '../../pb_image/_image'
+import Flex from '../../pb_flex/_flex'
 
 const TableWithCollapsibleWithCustomContent = (props) => {
 

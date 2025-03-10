@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import {
-  Flex,
-  Caption,
-  Card,
-  FlexItem,
-  Badge,
-  Avatar,
-  Title,
-  Body,
-  Draggable,
-  DraggableProvider,
-} from "playbook-ui";
+
+import Flex from '../../pb_flex/_flex'
+import Draggable from '../../pb_draggable/_draggable'
+import { DraggableProvider } from '../../pb_draggable/context'
+import Badge from '../../pb_badge/_badge'
+import Title from '../../pb_title/_title'
+import Caption from '../../pb_caption/_caption'
+import Card from '../../pb_card/_card'
+import FlexItem from '../../pb_flex/_flex_item'
+import Avatar from '../../pb_avatar/_avatar'
+import Body from '../../pb_body/_body'
 
 // Initial groups to drag between
 const containers = ["To Do", "In Progress", "Done"];

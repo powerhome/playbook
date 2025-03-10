@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import {
-  Body,
-  Button,
-  PbReactPopover,
-} from 'playbook-ui'
+
+import Body from '../../pb_body/_body'
+import Button from '../../pb_button/_button'
+import PbReactPopover from '../../pb_popover/_popover'
 
 const PopoverZIndex = (props) => {
   const [showPopover, setShowPopover] = useState(false)

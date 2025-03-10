@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import { Table, Checkbox, Image, Flex, Button } from 'playbook-ui'
+import Table from '../../pb_table/_table'
+import Image from '../../pb_image/_image'
+import Flex from '../../pb_flex/_flex'
+import Checkbox from '../../pb_checkbox/_checkbox'
+import Button from '../../pb_button/_button'
 
 const TableWithSelectableRows = (props) => {
     const [checkboxes, setCheckboxes] = useState([

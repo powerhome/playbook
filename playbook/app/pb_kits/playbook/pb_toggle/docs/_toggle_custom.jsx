@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Toggle } from 'playbook-ui'
+import Toggle from '../../pb_toggle/_toggle'
 
 const ToggleCustom = () => {
   const [choice, setChoice] = useState(false)

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { DraggableProvider, List, ListItem } from "playbook-ui";
+
+import { DraggableProvider } from '../../pb_draggable/context'
+import List from '../../pb_list/_list'
+import ListItem from '../../pb_list/_list_item'
 
 // Initial items to be dragged
 const data = [

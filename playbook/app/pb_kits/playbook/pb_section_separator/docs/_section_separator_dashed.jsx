@@ -1,5 +1,5 @@
 import React from 'react'
-import { SectionSeparator } from 'playbook-ui'
+import SectionSeparator from '../../pb_section_separator/_section_separator'
 
 const SectionSeparatorDashed = (props) => {
     return (

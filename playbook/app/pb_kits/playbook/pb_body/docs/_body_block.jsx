@@ -1,5 +1,5 @@
 import React from 'react'
-import { Body } from 'playbook-ui'
+import Body from "../../pb_body/_body"
 
 const BodyBlock = (props) => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Collapsible } from 'playbook-ui'
+import Collapsible from "../../pb_collapsible/_collapsible"
 
 const CollapsibleColor = (props) => (
   <div>

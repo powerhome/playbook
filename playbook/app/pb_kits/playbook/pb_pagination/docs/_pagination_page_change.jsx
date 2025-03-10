@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Table, Pagination } from 'playbook-ui'
+import Table from '../../pb_table/_table'
+import Pagination from '../../pb_pagination/_pagination'
 
 
 import { data } from "./data";

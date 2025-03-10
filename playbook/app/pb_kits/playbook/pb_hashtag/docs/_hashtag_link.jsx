@@ -1,5 +1,5 @@
 import React from 'react'
-import { Hashtag } from 'playbook-ui'
+import Hashtag from '../../pb_hashtag/_hashtag'
 
 const HashtagLink = (props) => {
   return (

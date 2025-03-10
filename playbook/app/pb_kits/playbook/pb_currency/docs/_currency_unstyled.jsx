@@ -1,5 +1,7 @@
 import React from 'react'
-import { Currency, Title } from 'playbook-ui'
+
+import Currency from '../../pb_currency/_currency'
+import Title from '../../pb_title/_title'
 
 const CurrencyUnstyled = (props) => {
   return (

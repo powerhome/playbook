@@ -1,5 +1,7 @@
 import React, { useRef } from 'react'
-import { Button, PhoneNumberInput } from 'playbook-ui'
+
+import Button from '../../pb_button/_button'
+import PhoneNumberInput from '../../pb_phone_number_input/_phone_number_input'
 
 const PhoneNumberInputClearField = (props) => {
     // 1. Create a ref - this accesses the kit's input element.

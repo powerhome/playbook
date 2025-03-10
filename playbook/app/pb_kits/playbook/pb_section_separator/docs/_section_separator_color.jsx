@@ -1,5 +1,8 @@
 import React from "react"
-import { SectionSeparator, Flex, Detail, Icon } from "playbook-ui"
+import SectionSeparator from '../../pb_section_separator/_section_separator'
+import Flex from '../../pb_flex/_flex'
+import Detail from '../../pb_detail/_detail'
+import Icon from '../../pb_icon/_icon'
 
 const children = (
   <Flex padding="xs">

@@ -1,5 +1,7 @@
 import React from "react"
-import { AdvancedTable, Pill } from "playbook-ui"
+import AdvancedTable from "../../pb_advanced_table/_advanced_table"
+import Pill from "../../pb_pill/_pill"
+
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableColumnHeadersCustomCell = (props) => {

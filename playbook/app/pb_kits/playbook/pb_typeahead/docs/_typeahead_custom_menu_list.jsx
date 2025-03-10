@@ -2,9 +2,7 @@
 
 import React, { useState } from 'react'
 
-import {
-  Button,
-} from 'playbook-ui'
+import Button from '../../pb_button/_button'
 
 import Typeahead from '../_typeahead'
 

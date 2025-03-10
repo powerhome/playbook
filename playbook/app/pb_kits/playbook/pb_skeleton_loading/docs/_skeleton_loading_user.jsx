@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Flex, SkeletonLoading, User } from "playbook-ui";
+
+import Button from '../../pb_button/_button'
+import SkeletonLoading from '../../pb_skeleton_loading/_skeleton_loading'
+import Flex from '../../pb_flex/_flex'
+import User from '../../pb_user/_user'
 
 const SkeletonLoadingUser = (props) => {
   const [isLoading, setIsLoading] = useState(true)

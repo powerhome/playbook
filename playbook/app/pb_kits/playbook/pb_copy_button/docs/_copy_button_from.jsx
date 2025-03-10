@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import { CopyButton, Body, TextInput, Textarea } from 'playbook-ui'
+
+import CopyButton from '../../pb_copy_button/_copy_button'
+import Body from '../../pb_body/_body'
+import TextInput from '../../pb_text_input/_text_input'
+import Textarea from '../../pb_textarea/_textarea'
 
 const CopyButtonFrom = (props) => {
   const [text, setText] = useState("Copy this text input text")

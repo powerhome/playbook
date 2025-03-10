@@ -1,6 +1,7 @@
 import React from 'react'
-import { Card, SkeletonLoading } from "playbook-ui"
 
+import Card from '../../pb_card/_card'
+import SkeletonLoading from '../../pb_skeleton_loading/_skeleton_loading'
 
 const SkeletonLoadingColor = (props) => (
   <div>

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Button, Drawer, Flex } from "playbook-ui";
+
+import Button from '../../pb_button/_button'
+import Drawer from '../../pb_drawer/_drawer'
+import Flex from '../../pb_flex/_flex'
 
 const DrawerBorders = () => {
   // Individual state variables for each drawer size

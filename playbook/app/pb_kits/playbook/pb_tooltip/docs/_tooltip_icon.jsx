@@ -1,5 +1,7 @@
 import React from 'react'
-import { Tooltip, Button, Flex } from 'playbook-ui'
+import Button from '../../pb_button/_button'
+import Tooltip from '../../pb_tooltip/_tooltip'
+import Flex from '../../pb_flex/_flex'
 
 const TooltipIcon = (props) => {
   return (

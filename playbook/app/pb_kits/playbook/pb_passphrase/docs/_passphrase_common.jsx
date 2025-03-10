@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
-import {Body, Caption, Passphrase, ProgressSimple} from 'playbook-ui'
+import Body from '../../pb_body/_body'
+import Passphrase from '../../pb_passphrase/_passphrase'
+import Caption from '../../pb_caption/_caption'
+import ProgressSimple from '../../pb_progress_simple/_progress_simple'
 import zxcvbn from 'zxcvbn'
 
 const PassphraseCommon = (props) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Caption } from 'playbook-ui'
+import Caption from "../../pb_caption/_caption"
 
 const CaptionBlock = (props) => {
   return (

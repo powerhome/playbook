@@ -1,5 +1,5 @@
 import React from 'react'
-import { TimeRangeInline } from 'playbook-ui'
+import TimeRangeInline from '../../pb_time_range_inline/_time_range_inline'
 
 const TimeRangeInlineDefault = (props) => (
   <div>

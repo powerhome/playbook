@@ -1,5 +1,7 @@
 import React from 'react'
-import { Tooltip, Flex, CircleIconButton } from 'playbook-ui'
+import Tooltip from '../../pb_tooltip/_tooltip'
+import Flex from '../../pb_flex/_flex'
+import CircleIconButton from '../../pb_circle_icon_button/_circle_icon_button'
 
 const TooltipMargin = (props) => {
   return (

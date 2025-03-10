@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
-import { Dropdown, User, Flex, FlexItem, Badge, Avatar } from 'playbook-ui'
+
+import Dropdown from '../../pb_dropdown/_dropdown'
+import Badge from '../../pb_badge/_badge'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
+import Avatar from '../../pb_avatar/_avatar'
+import User from '../../pb_user/_user'
 
 const DropdownWithCustomDisplay = (props) => {
   const [selectedOption, setSelectedOption] = useState();

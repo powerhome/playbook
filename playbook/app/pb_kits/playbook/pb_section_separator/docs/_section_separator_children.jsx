@@ -1,5 +1,7 @@
 import React from 'react'
-import { SectionSeparator, Card, Caption } from 'playbook-ui'
+import Card from '../../pb_card/_card'
+import Caption from '../../pb_caption/_caption'
+import SectionSeparator from '../../pb_section_separator/_section_separator'
 
 const children = (
     <Card
