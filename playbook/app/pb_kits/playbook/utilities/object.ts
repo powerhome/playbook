@@ -33,3 +33,22 @@ export const omitBy = (obj: Record<string, any>, predicate: (value: any, key: st
 export const noop = (): void => {
   // empty
 };
+
+export const merge = (...objects: any[]): any => {
+  const isObject = (obj: any): boolean => obj && typeof obj === 'object';
+  const result = {} as any;
+  objects.forEach(obj => {
+    if (isObject(obj)) {
+      Object.keys(obj).forEach(key => {
+        const existingVal = result[key];
+        const newVal = obj[key];
+        if (isObject(existingVal) && isObject(newVal)) {
+          result[key] = merge(existingVal, newVal);
+        } else {
+          result[key] = newVal;
+        }
+      });
+    }
+  });
+  return result;
+}
