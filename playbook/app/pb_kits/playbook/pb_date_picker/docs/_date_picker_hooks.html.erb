@@ -35,3 +35,41 @@
     fp.config.onOpen.push(openHook)
   })
 <% end %>
+
+<%= pb_rails("date_picker", props: {
+  label: "onClose",
+  picker_id: "date-picker-hooks-onclose"
+}) %>
+
+<%= javascript_tag do %>
+  window.addEventListener("DOMContentLoaded", () => {
+    <%# Access flatpickr instance with picker id and assign it a variable %>
+    const fp = document.querySelector("#date-picker-hooks-onclose")._flatpickr
+
+    <%# Define Hook %>
+    const closeHook = () => {
+      alert('calendar closed')
+    }
+    <%# Push one or more hooks to onOpen config array %>
+    fp.config.onClose.push(closeHook)
+  })
+<% end %>
+
+<%= pb_rails("date_picker", props: {
+  label: "onValueUpdate",
+  picker_id: "date-picker-hooks-onvalueupdate"
+}) %>
+
+<%= javascript_tag do %>
+  window.addEventListener("DOMContentLoaded", () => {
+    <%# Access flatpickr instance with picker id and assign it a variable %>
+    const fp = document.querySelector("#date-picker-hooks-onvalueupdate")._flatpickr
+
+    <%# Define Hook %>
+    const closeHook = () => {
+      alert('calendar closed')
+    }
+    <%# Push one or more hooks to onOpen config array %>
+    fp.config.onValueUpdate.push(closeHook)
+  })
+<% end %>
