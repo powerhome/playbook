@@ -1,15 +1,15 @@
 
-import React from 'react'
-import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
-import Title from '../pb_title/_title'
-import Body from '../pb_body/_body'
-import Button from '../pb_button/_button'
-import Detail from '../pb_detail/_detail'
-import Flex from '../pb_flex/_flex'
-import FlexItem from '../pb_flex/_flex_item'
-import Image from '../pb_image/_image'
+import React from "react"
+import classnames from "classnames"
+import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { globalProps } from "../utilities/globalProps"
+import Title from "../pb_title/_title"
+import Body from "../pb_body/_body"
+import Button from "../pb_button/_button"
+import Detail from "../pb_detail/_detail"
+import Flex from "../pb_flex/_flex"
+import FlexItem from "../pb_flex/_flex_item"
+import Image from "../pb_image/_image"
 
 type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
@@ -33,24 +33,24 @@ type EmptyStateProps = {
 const EmptyState = (props: EmptyStateProps) => {
   const {
     aria = {},
-    alignment = 'center',
+    alignment = "center",
     className,
     data = {},
     description,
-    header = '',
+    header = "",
     id,
     image,
     linkButton,
     onLinkButtonClick,
     onPrimaryButtonClick,
-    orientation = 'vertical',
+    orientation = "vertical",
     primaryButton,
     size = "md",
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_empty_state_kit'), globalProps(props), className)
+  const classes = classnames(buildCss("pb_empty_state_kit"), globalProps(props), className)
 
   const renderContent = () => {
     const sizeConfigs = {
@@ -63,7 +63,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "sm",
           buttonMargin: "xs",
           scssClassName: "sm-state-vertical",
-          column: 'column',
+          column: "column",
         },
         horizontal: {
           imageWidth: "100px",
@@ -72,7 +72,7 @@ const EmptyState = (props: EmptyStateProps) => {
           descriptionPadding: "sm",
           buttonSize: "sm",
           buttonMargin: "xs",
-          scssClassName: 'sm-state-horizontal',
+          scssClassName: "sm-state-horizontal",
           column: "",
         },
       },
@@ -85,7 +85,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "md",
           buttonMargin: "sm",
           scssClassName: "md-state-vertical",
-          column: 'column',
+          column: "column",
         },
         horizontal: {
           imageWidth: "250px",
@@ -94,7 +94,7 @@ const EmptyState = (props: EmptyStateProps) => {
           descriptionPadding: "md",
           buttonSize: "md",
           buttonMargin: "sm",
-          scssClassName: 'md-state-horizontal',
+          scssClassName: "md-state-horizontal",
           column: "",
         },
       },
@@ -107,7 +107,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "md",
           buttonMargin: "md",
           scssClassName: "lg-state-vertical",
-          column: 'column',
+          column: "column",
         },
         horizontal: {
           imageWidth: "400px",
@@ -116,15 +116,15 @@ const EmptyState = (props: EmptyStateProps) => {
           descriptionPadding: "lg",
           buttonSize: "md",
           buttonMargin: "md",
-          scssClassName: 'lg-state-horizontal',
+          scssClassName: "lg-state-horizontal",
           column: "",
         },
       },
     };
 
     const configs = sizeConfigs[size]?.[orientation] || sizeConfigs.md[orientation] || sizeConfigs.md.vertical
-    const alignFlex = alignment === 'center' ? 'center' : alignment === "right" ? "end" : "start"
-    const alignText = alignment === 'center' ? 'center' : alignment === "right" ? "right" : undefined
+    const alignFlex = alignment === "center" ? "center" : alignment === "right" ? "end" : "start"
+    const alignText = alignment === "center" ? "center" : alignment === "right" ? "right" : undefined
 
 
     const layout = (
@@ -149,7 +149,7 @@ const EmptyState = (props: EmptyStateProps) => {
           ) : null }
 
           <FlexItem >
-            <Title paddingBottom={configs.titlePadding as 'xxs' | 'xs' | 'sm' | undefined}
+            <Title paddingBottom={configs.titlePadding as "xxs" | "xs" | "sm" | undefined}
                 size={configs.titleSize as 1 | 2 | 3 | 4 | undefined}
                 text={header}
                 textAlign={alignText}
