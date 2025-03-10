@@ -161,13 +161,13 @@
         }
       }
     }
-        td {
-          [class^=pb_text_input_kit] .text_input_wrapper input {
-            padding: 0 $space_xs;
-            font-size: 14px;
-          }
-    
-        }
+    td {
+      [class^=pb_text_input_kit] .text_input_wrapper input {
+        padding: 0 $space_xs;
+        font-size: 14px;
+        text-align: right;
+      }
+    }
   }
 
   .table-header-cells-active:first-child {
