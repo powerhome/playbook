@@ -20,6 +20,8 @@ import datePickerHelper from 'kits/pb_date_picker/date_picker_helper'
 window.datePickerHelper = datePickerHelper
 
 // Dialog
+// Three places in Nitro depend on this function inside the window scope.
+// We will keep this code until we remove this dependency from Nitro.
 import dialogHelper from 'kits/pb_dialog/dialogHelper'
 window.dialogHelper = dialogHelper
 
@@ -73,6 +75,9 @@ PbOverlay.start()
 
 import PbSelect from 'kits/pb_select'
 PbSelect.start()
+
+import PbDialog from 'kits/pb_dialog'
+PbDialog.start()
 
 import PbDatePicker from 'kits/pb_date_picker'
 PbDatePicker.start()
