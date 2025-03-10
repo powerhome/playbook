@@ -1,8 +1,8 @@
 import React from 'react'
-import { EmptyState } from 'playbook-ui'
+import { EmptyState, Flex } from 'playbook-ui'
 
 const EmptyStateOrientation = (props) => (
-  <div>
+  <Flex align="center">
     <EmptyState
         {...props}
         alignment="center"
@@ -13,7 +13,7 @@ const EmptyStateOrientation = (props) => (
         primaryButton="Next Action"
         size="lg"
     />
-  </div>
+  </Flex>
 )
 
 export default EmptyStateOrientation

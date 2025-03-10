@@ -117,8 +117,9 @@ const EmptyState = (props: EmptyStateProps) => {
     };
 
     const configs = sizeConfigs[size]?.[orientation] || sizeConfigs.md[orientation] || sizeConfigs.md.vertical
-    const alignFlex = alignment === 'center' ? 'center' : alignment === "right" ? "bottom" : undefined
+    const alignFlex = alignment === 'center' ? 'center' : alignment === "right" ? "end" : "start"
     const alignText = alignment === 'center' ? 'center' : alignment === "right" ? "right" : undefined
+
 
     const layout = (
       <div {...ariaProps}
@@ -126,17 +127,19 @@ const EmptyState = (props: EmptyStateProps) => {
           className={classes}
           id={id}
       >
-        <Flex className={configs.scssClassName}
+        <Flex align={alignFlex}
+            className={configs.scssClassName}
             orientation={configs.column as "column" | "row" | undefined}
-            vertical={alignFlex}
+            paddingLeft="lg"
+            paddingRight="lg"
+            vertical="center"
         >
           <Image
               alt="test"
-              htmlOptions={{ width: "100%", maxWidth: configs.imageWidth, height: "auto" }}
+              htmlOptions={{ width: "100%", maxWidth: configs.imageWidth, height: "auto", alignment: "start" }}
               url={image}
           />
-
-          <FlexItem>
+          <FlexItem >
             <Title paddingBottom={configs.titlePadding as 'xxs' | 'xs' | 'sm' | undefined}
                 size={configs.titleSize as 1 | 2 | 3 | 4 | undefined}
                 text={header}
