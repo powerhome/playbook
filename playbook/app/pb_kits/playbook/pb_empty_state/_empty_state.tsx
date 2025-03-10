@@ -50,7 +50,7 @@ const EmptyState = (props: EmptyStateProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_emptystate'), globalProps(props), className)
+  const classes = classnames(buildCss('pb_empty_state_kit'), globalProps(props), className)
 
   const renderContent = () => {
     const sizeConfigs = {
@@ -73,7 +73,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "sm",
           buttonMargin: "xs",
           scssClassName: 'sm-state-horizontal',
-          column: undefined,
+          column: "",
         },
       },
       md: {
@@ -95,7 +95,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "md",
           buttonMargin: "sm",
           scssClassName: 'md-state-horizontal',
-          column: undefined,
+          column: "",
         },
       },
       lg: {
@@ -117,7 +117,7 @@ const EmptyState = (props: EmptyStateProps) => {
           buttonSize: "md",
           buttonMargin: "md",
           scssClassName: 'lg-state-horizontal',
-          column: undefined,
+          column: "",
         },
       },
     };
@@ -142,7 +142,7 @@ const EmptyState = (props: EmptyStateProps) => {
         >
           <Image
               alt="test"
-              htmlOptions={{ width: "100%", maxWidth: configs.imageWidth, height: "auto", alignment: "start" }}
+              htmlOptions={{ width: "100%", maxwidth: configs.imageWidth, height: "auto", alignment: "start" }}
               url={image}
           />
           <FlexItem >
@@ -182,7 +182,7 @@ const EmptyState = (props: EmptyStateProps) => {
         </Flex>
       </div>
     )
-    return layout || undefined;
+    return layout
   }
   return renderContent()
 }

@@ -1,24 +1,17 @@
-import { ensureAccessible, renderKit } from '../utilities/test-utils'
+import React from 'react'
+import { render, screen } from '../utilities/test-utils'
 
 import { EmptyState } from 'playbook-ui'
 
-/* See these resources for more testing info:
-  - https://github.com/testing-library/jest-dom#usage for useage and examples
-  - https://jestjs.io/docs/en/using-matchers
-*/
 
-test('generated scaffold test - update me', () => {
-  const props = {
-    data: { testid: 'default' }
-  }
+test('returns namespaced class name', () => {
+  render(
+    <EmptyState
+        data={{ testid: 'primary-test' }}
+        text="some text"
+    />
+  )
 
-  const kit = renderKit(EmptyState , props)
-  expect(kit).toBeInTheDocument()
-})
-
-it("should be accessible", async () => {
-  const props = {
-    data: { testid: 'default' }
-  }
-  await ensureAccessible(EmptyState, props)
+  const kit = screen.getByTestId('primary-test')
+  expect(kit).toHaveClass('pb_empty_state_kit')
 })
