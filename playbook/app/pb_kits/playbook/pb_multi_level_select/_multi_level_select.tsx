@@ -553,6 +553,6 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
 });
 
 MultiLevelSelect.displayName = "MultiLevelSelect";
-MultiLevelSelect.Options = MultiLevelSelectOptions;
+(MultiLevelSelect as any).Options = MultiLevelSelectOptions;
 
 export default MultiLevelSelect;
