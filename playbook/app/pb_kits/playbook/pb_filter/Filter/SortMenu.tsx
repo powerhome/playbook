@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { find, map, partial } from 'lodash'
+import { map, partial } from 'lodash'
+import { find } from  '../../utilities/object'
 
 import Button from '../../pb_button/_button'
 import Icon from '../../pb_icon/_icon'

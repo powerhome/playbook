@@ -81,3 +81,8 @@ export const filter = <T>(array: T[], predicate: any): T[] => {
   const iteratee = createIteratee(predicate);
   return array.filter(iteratee);
 };
+
+export const find = <T>(array: T[], predicate: any): T | undefined => {
+  const iteratee = createIteratee(predicate);
+  return array.find(iteratee);
+};
