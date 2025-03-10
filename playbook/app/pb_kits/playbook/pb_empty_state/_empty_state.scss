@@ -15,15 +15,24 @@
   .sm-state-horizontal {
     width: max-content;
     max-width: 400px;
+    .pb_flex_item_kit {
+      align-self: end;
+    }
   }
 
   .md-state-horizontal {
     width: max-content;
     max-width: 600px;
+    .pb_flex_item_kit {
+      align-self: end;
+    }
   }
 
   .lg-state-horizontal {
     width: max-content;
+    .pb_flex_item_kit {
+      align-self: end;
+    }
   }
 
 }

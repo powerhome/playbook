@@ -40,11 +40,11 @@ const EmptyState = (props: EmptyStateProps) => {
     header = '',
     id,
     image,
-    linkButton = '',
+    linkButton,
     onLinkButtonClick,
     onPrimaryButtonClick,
     orientation = 'vertical',
-    primaryButton = '',
+    primaryButton,
     size = "md",
   } = props
 
