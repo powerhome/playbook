@@ -86,3 +86,20 @@ export const find = <T>(array: T[], predicate: any): T | undefined => {
   const iteratee = createIteratee(predicate);
   return array.find(iteratee);
 };
+
+export const partial = <F extends (...args: unknown[]) => unknown>(
+  fn: F,
+  ...partials: unknown[]
+): ((...args: unknown[]) => ReturnType<F>) => {
+  const placeholder = partial.placeholder;
+  return (...args: unknown[]): ReturnType<F> => {
+    let argIndex = 0;
+    const finalArgs = partials.map(arg =>
+      arg === placeholder ? args[argIndex++] : arg
+    );
+    return fn(...(finalArgs.concat(args.slice(argIndex)) as Parameters<F>));
+  };
+};
+
+partial.placeholder = Symbol();
+export const _ = partial.placeholder;
