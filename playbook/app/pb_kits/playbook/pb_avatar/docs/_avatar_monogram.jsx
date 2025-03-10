@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar } from 'playbook-ui'
+import { default as Avatar } from "../../pb_avatar/_avatar"
 
 const AvatarDefault = (props) => {
   return (

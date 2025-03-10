@@ -1,5 +1,12 @@
 import React from "react"
-import { AdvancedTable, Pill, Body, Flex, Detail, Caption, Badge, Title } from "playbook-ui"
+import { default as AdvancedTable } from "../_advanced_table"
+import { default as Pill } from "../../pb_pill/_pill"
+import { default as Body } from "../../pb_body/_body"
+import { default as Flex } from "../../pb_flex/_flex"
+import { default as Detail } from "../../pb_detail/_detail"
+import { default as Caption } from "../../pb_caption/_caption"
+import { default as Badge } from "../../pb_badge/_badge"
+import { default as Title } from "../../pb_title/_title"
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableCustomCell = (props) => {

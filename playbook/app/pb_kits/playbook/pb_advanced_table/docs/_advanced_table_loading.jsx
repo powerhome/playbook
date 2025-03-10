@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import { AdvancedTable } from "playbook-ui"
-import { Button } from "playbook-ui"
+import { default as AdvancedTable } from "../_advanced_table"
+import { default as Button } from "../../pb_button/_button"
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableLoading = (props) => {

@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Pill } from "playbook-ui";
+import { default as Button } from "../../pb_button/_button"
+import { default as Pill } from "../../pb_pill/_pill"
 
 const ButtonBlockContent = (props) => (
   <div>

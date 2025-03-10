@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconStatValue } from 'playbook-ui'
+import IconStatValue from '../../pb_icon_stat_value/_icon_stat_value'
 
 const IconStatValueDefault = (props) => {
   return (

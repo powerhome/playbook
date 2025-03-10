@@ -1,6 +1,7 @@
 import React from 'react'
-import { Flex, SkeletonLoading } from "playbook-ui"
 
+import Flex from '../../pb_flex/_flex'
+import SkeletonLoading from '../../pb_skeleton_loading/_skeleton_loading'
 
 const SkeletonLoadingBorderRadius = (props) => (
   <Flex justify="evenly">

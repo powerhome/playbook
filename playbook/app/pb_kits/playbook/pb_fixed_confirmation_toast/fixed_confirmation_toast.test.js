@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, waitFor } from '../utilities/test-utils'
 
-import { FixedConfirmationToast } from 'playbook-ui'
+import FixedConfirmationToast from '../../pb_fixed_confirmation_toast/_fixed_confirmation_toast'
 
 beforeEach(() => {
     // Silences error logs within the test suite.

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { render, screen } from '../utilities/test-utils'
-import { Overlay } from 'playbook-ui'
+import Overlay from '../../pb_overlay/_overlay'
 
 const testId = "overlay"
 const children = "This is the Overlay children"

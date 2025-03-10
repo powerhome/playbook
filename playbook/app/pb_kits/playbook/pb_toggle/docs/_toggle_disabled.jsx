@@ -1,5 +1,5 @@
 import React from 'react'
-import { Toggle } from 'playbook-ui'
+import Toggle from '../../pb_toggle/_toggle'
 
 const ToggleDisabled= () => {
   return (

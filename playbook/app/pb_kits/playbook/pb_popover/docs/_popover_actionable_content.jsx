@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import {
-  Body,
-  Button,
-  CircleIconButton,
-  Flex,
-  PbReactPopover,
-} from 'playbook-ui'
+
+import Body from '../../pb_body/_body'
+import Button from '../../pb_button/_button'
+import CircleIconButton from '../../pb_circle_icon_button/_circle_icon_button'
+import Flex from '../../pb_flex/_flex'
+import PbReactPopover from '../../pb_popover/_popover'
 
 const PopoverActionableContent = (props) => {
   const [showPopover, setShowPopover] = useState(false)

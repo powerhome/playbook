@@ -1,5 +1,9 @@
 import React from 'react'
-import { Button, Filter, Flex, Select, TextInput } from 'playbook-ui'
+import Button from '../../pb_button/_button'
+import Filter from '../../pb_filter/_filter'
+import Flex from '../../pb_flex/_flex'
+import Select from '../../pb_select/_select'
+import TextInput from '../../pb_text_input/_text_input'
 
 const FilterMaxHeight = (props) => {
   const options = [

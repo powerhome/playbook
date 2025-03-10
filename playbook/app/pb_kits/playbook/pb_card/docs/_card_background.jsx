@@ -1,6 +1,6 @@
 import React from 'react'
 import Title from '../../pb_title/_title'
-import { Body } from 'playbook-ui'
+import Body from "../../pb_body/_body"
 import Card from '../_card'
 
 const CardBackground = (props) => {

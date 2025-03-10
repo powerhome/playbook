@@ -1,5 +1,5 @@
 import React from "react"
-import { AdvancedTable } from "playbook-ui"
+import { default as AdvancedTable } from "../_advanced_table"
 import { MOCK_DATA_INLINE_LOADING } from "./_mock_data_inline_loading"
 
 const AdvancedTableInlineRowLoading = (props) => {

@@ -1,8 +1,8 @@
 import React from 'react'
-import {
-    Overlay,
-    Table,
-} from 'playbook-ui'
+
+import Overlay from '../../pb_overlay/_overlay'
+import Table from '../../pb_table/_table'
+
 
 const TableExample = () => {
     return (

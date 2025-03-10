@@ -1,6 +1,6 @@
 import React from 'react'
-import { Background } from 'playbook-ui'
-import { Flex } from 'playbook-ui'
+import { default as Background } from "../../pb_background/_background"
+import Flex from "../../pb_flex/_flex"
 
 const BackgroundStatusSubtle = (props) => (
 <Flex

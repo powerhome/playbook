@@ -1,5 +1,7 @@
 import React from 'react'
-import { Tooltip, Flex, FlexItem } from 'playbook-ui';
+import Tooltip from '../../pb_tooltip/_tooltip'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
 
 const TooltipDefaultReact = (props) => {
 

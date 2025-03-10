@@ -1,5 +1,7 @@
 import React, { useRef } from 'react'
-import { Button, Dropdown } from 'playbook-ui'
+
+import Button from '../../pb_button/_button'
+import Dropdown from '../../pb_dropdown/_dropdown'
 
 const options = [
     {

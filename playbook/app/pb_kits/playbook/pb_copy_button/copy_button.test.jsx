@@ -1,5 +1,5 @@
 import React from 'react';
-import { CopyButton } from 'playbook-ui'
+import CopyButton from "../../pb_copy_button/_copy_button"
 import { ensureAccessible, renderKit, render, fireEvent, screen } from '../utilities/test-utils'
 
 const props = {
