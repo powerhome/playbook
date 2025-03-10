@@ -1,6 +1,6 @@
 import { ensureAccessible, renderKit } from '../utilities/test-utils'
 
-import IconButton from '../../pb_icon_button/_icon_button'
+import { IconButton } from 'playbook-ui'
 
 const props = {
   data: { testid: 'default', icon: 'plus' }

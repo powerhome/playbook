@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { ensureAccessible } from '../utilities/test-utils'
-import SkeletonLoading from '../../pb_skeleton_loading/_skeleton_loading'
+import { SkeletonLoading } from 'playbook-ui'
 
 /* See these resources for more testing info:
   - https://github.com/testing-library/jest-dom#usage for useage and examples

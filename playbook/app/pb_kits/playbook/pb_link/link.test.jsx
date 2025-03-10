@@ -1,7 +1,7 @@
 import React from 'react'
 import { ensureAccessible, renderKit, render, screen } from '../utilities/test-utils'
 
-import Link from '../../pb_link/_link'
+import { Link } from 'playbook-ui'
 
 const link = 'https://www.google.com'
 

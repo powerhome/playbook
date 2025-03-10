@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 
-import MultiLevelSelect from '../../pb_multi_level_select/_multi_level_select'
+import { MultiLevelSelect } from 'playbook-ui'
 
 const treeData = {
   label: 'search me',

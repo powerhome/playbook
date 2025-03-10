@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
-import Passphrase from '../../pb_passphrase/_passphrase'
+import { Passphrase } from 'playbook-ui'
 
 const testId = 'text-input1',
   kitClass = 'pb_passphrase'

@@ -1,6 +1,6 @@
 import { renderKit } from '../utilities/test-utils'
 
-import Map from '../../pb_map/_map'
+import { Map } from 'playbook-ui'
 
 /* See these resources for more testing info:
   - https://github.com/testing-library/jest-dom#usage for useage and examples
