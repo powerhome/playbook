@@ -1,5 +1,5 @@
 import React from 'react'
-import { noop } from 'lodash'
+import { noop } from '../../utilities/object' 
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import Image from '../../pb_image/_image'
 

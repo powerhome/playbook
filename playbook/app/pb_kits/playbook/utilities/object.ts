@@ -29,3 +29,7 @@ export const omitBy = (obj: Record<string, any>, predicate: (value: any, key: st
     return result;
   }, {})
 }
+
+export const noop = (): void => {
+  // empty
+};
