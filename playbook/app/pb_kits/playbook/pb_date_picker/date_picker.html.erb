@@ -1,5 +1,8 @@
 <%= pb_content_tag(:div,
-    class: object.classname + object.error_class) do %>
+    class: object.classname + object.error_class,
+    'data-pb-date-picker' => true,
+    'data-validation-message' => object.validation_message,
+      ) do %>
   <div class="input_wrapper">
     <% if content.present? %>
       <%= content %>

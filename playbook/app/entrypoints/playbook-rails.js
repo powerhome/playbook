@@ -76,8 +76,11 @@ PbOverlay.start()
 import PbSelect from 'kits/pb_select'
 PbSelect.start()
 
-import PbDialog from '../pb_kits/playbook/pb_dialog'
+import PbDialog from 'kits/pb_dialog'
 PbDialog.start()
+
+import PbDatePicker from 'kits/pb_date_picker'
+PbDatePicker.start()
 
 import 'flatpickr'
 

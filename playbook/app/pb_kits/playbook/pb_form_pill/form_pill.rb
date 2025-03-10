@@ -16,9 +16,11 @@ module Playbook
                    default: "primary"
       prop :tabindex
       prop :icon
+      prop :wrapped, type: Playbook::Props::Boolean,
+                     default: false
 
       def classname
-        generate_classname("pb_form_pill_kit", color, icon_class, name, text, text_transform)
+        generate_classname("pb_form_pill_kit", color, icon_class, name, text, text_transform, wrapped_class)
       end
 
       def display_text
@@ -35,6 +37,10 @@ module Playbook
 
       def close_icon_size
         size == "small" ? "xs" : "sm"
+      end
+
+      def wrapped_class
+        wrapped ? "wrapped" : nil
       end
     end
   end

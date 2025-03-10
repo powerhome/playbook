@@ -31,6 +31,38 @@
     @include pb_title_thin;
   }
 
+  &[class*=_display] {
+    font-size: clamp(24px, calc(1.25vw + 5.3vw), 128px);
+  }
+
+  &[class*=_dynamic] {
+    &[class*=_xs] {
+      font-size: min(2vw, 80vw / 16); 
+    }
+  
+    &[class*=_sm] {
+      font-size: min(2.5vw, 96vw / 16); 
+    }
+  
+    &[class*=_md] {
+      font-size: min(4vw, 160vw / 16);
+    }
+  
+    &[class*=_lg] {
+      font-size: min(5vw, 192vw / 16);
+    }
+  
+    &[class*=_xl] {
+      font-size: min(6vw, 224vw / 16);
+    }
+  
+    &[class*=_xxl] {
+      font-size: min(8vw, 256vw / 16);
+    }
+  }
+  
+
+
   @each $size, $size_value in $breakpoints_grid {
     @for $title_size_value from 1 through 4 {
       $min_size: map-get($size_value, "min");
