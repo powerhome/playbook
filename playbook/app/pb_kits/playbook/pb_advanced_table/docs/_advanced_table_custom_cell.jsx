@@ -1,12 +1,12 @@
 import React from "react"
-import { default as AdvancedTable } from "../_advanced_table"
-import { default as Pill } from "../../pb_pill/_pill"
-import { default as Body } from "../../pb_body/_body"
-import { default as Flex } from "../../pb_flex/_flex"
-import { default as Detail } from "../../pb_detail/_detail"
-import { default as Caption } from "../../pb_caption/_caption"
-import { default as Badge } from "../../pb_badge/_badge"
-import { default as Title } from "../../pb_title/_title"
+import AdvancedTable from '../../pb_advanced_table/_advanced_table'
+import Pill from "../../pb_pill/_pill"
+import Body from "../../pb_body/_body"
+import Flex from "../../pb_flex/_flex"
+import Detail from "../../pb_detail/_detail"
+import Caption from "../../pb_caption/_caption"
+import Badge from "../../pb_badge/_badge"
+import Title from "../../pb_title/_title"
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableCustomCell = (props) => {

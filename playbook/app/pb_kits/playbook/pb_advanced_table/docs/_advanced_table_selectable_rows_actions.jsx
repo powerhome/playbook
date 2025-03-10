@@ -1,7 +1,7 @@
 import React, {useState} from "react"
-import { default as AdvancedTable } from "../_advanced_table"
-import { default as CircleIconButton } from "../../pb_circle_icon_button/_circle_icon_button"
-import { default as Flex } from "../../pb_flex/_flex"
+import AdvancedTable from '../../pb_advanced_table/_advanced_table'
+import CircleIconButton from "../../pb_circle_icon_button/_circle_icon_button"
+import Flex from "../../pb_flex/_flex"
 import MOCK_DATA from "./advanced_table_mock_data_no_subrows.json"
 
 const AdvancedTableSelectableRowsActions = (props) => {

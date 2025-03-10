@@ -1,5 +1,5 @@
 import React from 'react'
-import { default as Avatar } from "../../pb_avatar/_avatar"
+import Avatar from '../../pb_avatar/_avatar'
 
 const AvatarNoImage = (props) => {
   return (

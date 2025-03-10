@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { default as Button } from "../../pb_button/_button"
-import { default as ButtonToolbar } from "../../pb_button_toolbar/_button_toolbar"
+import Button from '../../pb_button/_button'
+import ButtonToolbar from '../../pb_button_toolbar/_button_toolbar'
 
 const ButtonToolbarDefault = (props) => (
   <div className="pb--doc-demo-row">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { default as Background } from "../../pb_background/_background"
+import Background from '../../pb_background/_background'
 
 const BackgroundWhite = (props) => (
   <div>

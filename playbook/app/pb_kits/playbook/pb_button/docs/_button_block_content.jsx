@@ -1,6 +1,6 @@
 import React from "react";
-import { default as Button } from "../../pb_button/_button"
-import { default as Pill } from "../../pb_pill/_pill"
+import Button from '../../pb_button/_button'
+import Pill from '../../pb_pill/_pill'
 
 const ButtonBlockContent = (props) => (
   <div>
