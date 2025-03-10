@@ -12,6 +12,8 @@ const EmptyStateSize = (props) => (
           header="Title Explains"
           image="https://component.gallery/static/8d36eaa25b6dcb026685101ebc379022/Empty%20state%20icon..svg"
           linkButton="Alt Action"
+          onLinkButtonClick={() => alert("link button clicked!")}
+          onPrimaryButtonClick={() => alert("primary button clicked!")}
           primaryButton="Next Action"
           size="sm"
       />
@@ -22,6 +24,8 @@ const EmptyStateSize = (props) => (
           header="Title Explains"
           image="https://component.gallery/static/8d36eaa25b6dcb026685101ebc379022/Empty%20state%20icon..svg"
           linkButton="Alt Action"
+          onLinkButtonClick={() => alert("link button clicked!")}
+          onPrimaryButtonClick={() => alert("primary button clicked!")}
           primaryButton="Next Action"
           size="lg"
       />

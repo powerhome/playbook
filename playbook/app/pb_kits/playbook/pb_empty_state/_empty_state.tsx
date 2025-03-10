@@ -11,6 +11,8 @@ import Flex from '../pb_flex/_flex'
 import FlexItem from '../pb_flex/_flex_item'
 import Image from '../pb_image/_image'
 
+type EventHandler = (React.MouseEventHandler<HTMLElement>)
+
 type EmptyStateProps = {
   aria?: { [key: string]: string },
   alignment?: "center" | "left" | "right",
@@ -21,6 +23,8 @@ type EmptyStateProps = {
   id?: string,
   image?: string,
   linkButton?: string,
+  onLinkButtonClick?: EventHandler,
+  onPrimaryButtonClick?: EventHandler,
   orientation?: "horizontal" | "vertical",
   primaryButton?: string,
   size?: "sm" | "md" | "lg",
@@ -37,6 +41,8 @@ const EmptyState = (props: EmptyStateProps) => {
     id,
     image,
     linkButton = '',
+    onLinkButtonClick,
+    onPrimaryButtonClick,
     orientation = 'vertical',
     primaryButton = '',
     size = "md",
@@ -160,12 +166,14 @@ const EmptyState = (props: EmptyStateProps) => {
 
             <Button
                 marginBottom={configs.buttonMargin as "xs" | "sm" | "md" | undefined}
+                onClick={onPrimaryButtonClick}
                 size={configs.buttonSize as "sm" | "md" | undefined}
                 text={primaryButton}
                 variant="primary"
                 width="100%"
             />
-            <Button size={configs.buttonSize as "sm" | "md" | undefined}
+            <Button onClick={onLinkButtonClick}
+                size={configs.buttonSize as "sm" | "md" | undefined}
                 text={linkButton}
                 variant="link"
                 width="100%"
