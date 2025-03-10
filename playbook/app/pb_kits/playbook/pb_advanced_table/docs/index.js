@@ -21,3 +21,4 @@ export { default as AdvancedTableSelectableRowsHeader } from './_advanced_table_
 export { default as AdvancedTableSelectableRowsActions } from './_advanced_table_selectable_rows_actions.jsx'
 export { default as AdvancedTableTablePropsStickyHeader } from './_advanced_table_table_props_sticky_header.jsx'
 export { default as AdvancedTableColumnHeadersCustomCell } from './_advanced_table_column_headers_custom_cell.jsx'
+export { default as AdvancedTableInlineEditing } from './_advanced_table_inline_editing.jsx'

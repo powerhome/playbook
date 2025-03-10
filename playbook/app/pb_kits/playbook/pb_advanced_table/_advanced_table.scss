@@ -161,6 +161,13 @@
         }
       }
     }
+        td {
+          [class^=pb_text_input_kit] .text_input_wrapper input {
+            padding: 0 $space_xs;
+            font-size: 14px;
+          }
+    
+        }
   }
 
   .table-header-cells-active:first-child {
