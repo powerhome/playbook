@@ -401,12 +401,12 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
   // Rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: string; }[] | any ) => {
     const hasOptionsChild = React.Children.toArray(props.children).some(
-      (child: any) => child.type === MultiLevelSelect.Options
+      (child) => React.isValidElement(child) && child.type === MultiLevelSelect.Options
     );
 
     if (hasOptionsChild) {
       return React.Children.map(props.children, (child) => {
-        if (child.type === MultiLevelSelect.Options) {
+        if (React.isValidElement(child) && child.type === MultiLevelSelect.Options) {
           return React.cloneElement(child, { items });
         }
         return null;
