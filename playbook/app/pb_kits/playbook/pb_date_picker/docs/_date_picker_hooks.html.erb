@@ -66,10 +66,10 @@
     const fp = document.querySelector("#date-picker-hooks-onvalueupdate")._flatpickr
 
     <%# Define Hook %>
-    const closeHook = () => {
-      alert('calendar closed')
+    const updateHook = () => {
+      alert('calendar value updated')
     }
     <%# Push one or more hooks to onOpen config array %>
-    fp.config.onValueUpdate.push(closeHook)
+    fp.config.onValueUpdate.push(updateHook)
   })
 <% end %>
