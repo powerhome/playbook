@@ -243,7 +243,7 @@ $gap_lg: $height_from_top + $space_lg;
                     }
                     [class=pb_timeline_item_left_block] {
                         margin-bottom: $space_lg;
-                        width: $space_lg;
+                        min-width: $space_lg;
                     }
                     [class=pb_timeline_item_right_block] {
                         @include flex_wrapper(column);
@@ -263,7 +263,7 @@ $gap_lg: $height_from_top + $space_lg;
                     }
                     [class=pb_timeline_item_left_block] {
                         margin-bottom: $space_lg;
-                        width: $space_lg;
+                        min-width: $space_lg;
                     }
                     [class=pb_timeline_item_right_block] {
                         @include flex_wrapper(column);

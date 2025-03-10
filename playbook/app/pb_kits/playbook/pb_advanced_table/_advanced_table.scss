@@ -31,12 +31,46 @@
     width: 100%;
   }
 
-    .row-selection-actions-card {
-      border-bottom-right-radius: 0px !important;
-      border-bottom-left-radius: 0px !important;
-      border-bottom-color: transparent;
-      transition: height 300ms ease;
+  // Virtualized table styles
+  .virtualized-table-row {
+    display: table !important;
+    table-layout: fixed !important;
+    width: 100% !important;
+
+    td {
+      display: table-cell !important;
+      box-sizing: border-box !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+
+    // Ensure the first column has proper width
+    td:first-child {
+      min-width: 180px;
+    }
+
+    // First column (typically the checkbox column)
+    td:first-child.checkbox-cell {
+      width: 40px !important; // Set a fixed width that matches header
+      min-width: 40px !important;
+      box-sizing: border-box !important;
+      text-align: center;
+    }
+
+    // Ensure the first data column has proper alignment with header
+    td:first-of-type:not(.checkbox-cell) {
+      min-width: 180px;
+      text-align: left;
+    }
+  }
+
+  .row-selection-actions-card {
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-color: transparent;
+    transition: height 300ms ease;
+  }
   .table-header-cells:first-child {
     min-width: 180px;
   }
@@ -67,6 +101,23 @@
       border-top-left-radius: 0px !important;
       border-top-right-radius: 0px !important;
     }
+
+    // Set fixed width for header cells to match table body
+    th {
+      box-sizing: border-box !important;
+      // Apply min-width to ensure consistent sizing
+      &.table-header-cells:first-child,
+      &.table-header-cells-custom:first-child {
+        min-width: 180px;
+      }
+
+      // Set fixed width for checkbox column
+      &.table-header-cells-custom {
+        width: 40px !important;
+        min-width: 40px !important;
+        box-sizing: border-box !important;
+      }
+    }
   }
 
   .pb_advanced_table_body {
@@ -85,6 +136,29 @@
       justify-content: center;
       [class^=pb_checkbox_kit] .pb_checkbox_label {
         padding-left: 0px;
+      }
+    }
+
+    // Fix virtualized row borders
+    tr.virtualized-table-row {
+      border-bottom: 1px solid $border_light;
+
+      &.bg-silver {
+        td:first-child {
+          background-color: lighten($silver, $opacity_7);
+        }
+      }
+
+      &.bg-white {
+        td:first-child {
+          background-color: $white;
+        }
+      }
+
+      &.bg-row-selection {
+        td:first-child {
+          background-color: $info_subtle;
+        }
       }
     }
   }
@@ -129,7 +203,6 @@
     max-height: 1920px;
     overflow-y: auto;
   }
-  
   // Icons
   .button-icon {
     display: flex;
@@ -251,6 +324,19 @@
       .bg-white td:first-child {
           background-color: $white;
       }
+
+      .virtualized-table-row {
+        &.bg-silver td:first-child {
+          background-color: lighten($silver, $opacity_7);
+        }
+        &.bg-white td:first-child {
+          background-color: $white;
+        }
+        &.bg-row-selection td:first-child {
+          background-color: $info_subtle;
+        }
+      }
+
       .row-selection-actions-card {
         border-right-width: 0px;
         border-left-width: 0px;
@@ -287,6 +373,25 @@
 
     .bg-silver {
       background: $bg_dark;
+    }
+
+    // Dark mode virtualized rows
+    .virtualized-table-row {
+      &.bg-white {
+        background: $bg_dark_card !important;
+
+        td:first-child {
+          background: $bg_dark_card !important;
+        }
+      }
+
+      &.bg-silver {
+        background: $bg_dark;
+
+        td:first-child {
+          background: $bg_dark;
+        }
+      }
     }
 
     .table-header-cells:first-child, td:first-child, .pb_table_td:first-child {
@@ -359,6 +464,17 @@
         .bg-white td:first-child {
           background-color: $bg_dark_card;
         }
+
+        // Dark mode virtualized rows
+        .virtualized-table-row {
+          &.bg-silver td:first-child {
+            background-color: $bg_dark;
+          }
+          &.bg-white td:first-child {
+            background-color: $bg_dark_card;
+          }
+        }
+
         .sticky-header {
           thead {
             th:first-child {

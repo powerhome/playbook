@@ -11,6 +11,7 @@ export type OverlayChildrenProps = {
     dynamic?: boolean,
     position: string,
     size: string,
+    scrollBarNone?: boolean,
 }
 
 type OverlayProps = {
@@ -23,6 +24,8 @@ type OverlayProps = {
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string,
     layout: { [key: string]: string },
+    scrollBarNone?: boolean,
+    
 }
 
 const Overlay = (props: OverlayProps) => {
@@ -36,11 +39,12 @@ const Overlay = (props: OverlayProps) => {
         htmlOptions = {},
         id,
         layout = { "bottom": "full" },
+        scrollBarNone = false,
     } = props
 
     const ariaProps = buildAriaProps(aria)
     const dataProps = buildDataProps(data)
-    const classes = classnames(buildCss('pb_overlay'), globalProps(props), className)
+    const classes = classnames(buildCss('pb_overlay'), { 'overlay-hide-scrollbar': scrollBarNone }, globalProps(props), className )
     const htmlProps = buildHtmlProps(htmlOptions)
     const dynamicInlineProps = globalInlineProps(props)
 
@@ -68,12 +72,14 @@ const Overlay = (props: OverlayProps) => {
                     children,
                     color,
                     position: getPosition(),
+                    scrollBarNone,
                     size: getSize()
                 }) : OverlayToken({
                     children,
                     color,
                     dynamic: dynamic,
                     position: getPosition(),
+                    scrollBarNone,
                     size: getSize()
                 })
             }

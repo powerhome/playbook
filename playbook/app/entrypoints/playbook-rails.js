@@ -6,6 +6,10 @@ PbTextInput.start()
 import PbCopyButton from 'kits/pb_copy_button'
 PbCopyButton.start()
 
+// Drawer
+import PbDrawer from 'kits/pb_drawer'
+PbDrawer.start()
+
 // Forms
 import 'kits/pb_form/pb_form_validation'
 import formHelper from 'kits/pb_form/formHelper'
@@ -16,6 +20,8 @@ import datePickerHelper from 'kits/pb_date_picker/date_picker_helper'
 window.datePickerHelper = datePickerHelper
 
 // Dialog
+// Three places in Nitro depend on this function inside the window scope.
+// We will keep this code until we remove this dependency from Nitro.
 import dialogHelper from 'kits/pb_dialog/dialogHelper'
 window.dialogHelper = dialogHelper
 
@@ -30,6 +36,9 @@ PbPopover.start()
 
 import PbTooltip from 'kits/pb_tooltip'
 PbTooltip.start()
+
+import PbTooltipFLoatingUi from 'kits/pb_tooltip/floating_ui'
+PbTooltipFLoatingUi.start()
 
 import PbFixedConfirmationToast from 'kits/pb_fixed_confirmation_toast'
 PbFixedConfirmationToast.start()
@@ -60,6 +69,18 @@ PbRadio.start()
 
 import PbDraggable from 'kits/pb_draggable'
 PbDraggable.start()
+
+import PbOverlay from 'kits/pb_overlay'
+PbOverlay.start()
+
+import PbSelect from 'kits/pb_select'
+PbSelect.start()
+
+import PbDialog from 'kits/pb_dialog'
+PbDialog.start()
+
+import PbDatePicker from 'kits/pb_date_picker'
+PbDatePicker.start()
 
 import 'flatpickr'
 

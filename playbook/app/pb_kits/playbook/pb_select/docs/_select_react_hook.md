@@ -1,0 +1,1 @@
+You can pass react-hook-form props to a select kit. You can use `register` which will make the value available for both the form validation and submission. 

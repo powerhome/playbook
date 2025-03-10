@@ -42,6 +42,13 @@
           outline: none;
         }
       }
+
+      &:has(input:disabled) {
+        background-color: shade($white, 5%);
+        box-shadow: none;
+        cursor: default;
+        opacity: 0.5;
+      }
     }
   }
   .dropdown_menu {

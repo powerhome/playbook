@@ -22,6 +22,7 @@ type FormPillProps = {
   data?: {[key: string]: string},
   tabIndex?: number,
   icon?: string,
+  wrapped?: boolean,
   closeProps?: {
     onClick?: React.MouseEventHandler<HTMLSpanElement>,
     onMouseDown?: React.MouseEventHandler<HTMLSpanElement>,
@@ -38,6 +39,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     onClick = () => undefined,
     avatarUrl,
     closeProps = {},
+    wrapped,
     size = '',
     textTransform = 'none',
     color = "primary",
@@ -48,6 +50,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
 
   const iconClass = icon ? "_icon" : ""
   const closeIconSize = size === "small" ? "xs" : "sm"
+  const wrappedClass = wrapped ? "wrapped" : ""
 
   const filteredProps: FormPillProps = {...props}
   delete filteredProps.truncate
@@ -55,6 +58,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
   const css = classnames(
     `pb_form_pill_kit_${color}${iconClass}`,
     globalProps(filteredProps),
+    wrappedClass,
     className,
     size === 'small' ? 'small' : null,
     textTransform,

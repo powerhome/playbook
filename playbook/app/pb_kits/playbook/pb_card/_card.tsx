@@ -1,7 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 
 import React from 'react'
-import { get } from 'lodash'
+import { get } from '../utilities/object'
+
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'

@@ -16,6 +16,7 @@ examples:
   - radio_alignment: Alignment
   - radio_disabled: Disabled
   - radio_custom_children: Custom Children
+  - radio_react_hook: React Hook Form
 
   swift:
   - radio_default_swift: Default

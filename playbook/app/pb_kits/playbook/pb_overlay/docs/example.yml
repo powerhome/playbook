@@ -4,8 +4,11 @@ examples:
   - overlay_multi_directional: Multi-directional
   - overlay_vertical_dynamic_multi_directional: Vertical Dynamic Multi-directional
   - overlay_toggle: Toggle
+  - overlay_hide_scroll_bar: Hide Scroll Bar
 
   rails:
   - overlay_default: Default
   - overlay_multi_directional: Multi-directional
+  - overlay_vertical_dynamic_multi_directional: Vertical Dynamic Multi-directional
   - overlay_toggle: Toggle
+  - overlay_hide_scroll_bar: Hide Scroll Bar

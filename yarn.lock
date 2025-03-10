@@ -2590,6 +2590,14 @@
     "@floating-ui/core" "^1.5.3"
     "@floating-ui/utils" "^0.2.0"
 
+"@floating-ui/dom@^1.6.13":
+  version "1.6.13"
+  resolved "https://npm.powerapp.cloud/@floating-ui/dom/-/dom-1.6.13.tgz#a8a938532aea27a95121ec16e667a7cbe8c59e34"
+  integrity sha512-umqzocjDgNRGTuO7Q8CU32dkHkECqI8ZdMZ5Swb6QAM0t5rnlrN3lGo1hdpscRd3WS8T6DKYK4ephgIH9iRh3w==
+  dependencies:
+    "@floating-ui/core" "^1.6.0"
+    "@floating-ui/utils" "^0.2.9"
+
 "@floating-ui/react-dom@^2.1.2":
   version "2.1.2"
   resolved "https://npm.powerapp.cloud/@floating-ui/react-dom/-/react-dom-2.1.2.tgz#a1349bbf6a0e5cb5ded55d023766f20a4d439a31"
@@ -2615,6 +2623,11 @@
   version "0.2.8"
   resolved "https://npm.powerapp.cloud/@floating-ui/utils/-/utils-0.2.8.tgz#21a907684723bbbaa5f0974cf7730bd797eb8e62"
   integrity sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==
+
+"@floating-ui/utils@^0.2.9":
+  version "0.2.9"
+  resolved "https://npm.powerapp.cloud/@floating-ui/utils/-/utils-0.2.9.tgz#50dea3616bc8191fb8e112283b49eaff03e78429"
+  integrity sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==
 
 "@fortawesome/fontawesome-free@^6.2.1":
   version "6.2.1"
@@ -3540,10 +3553,22 @@
   dependencies:
     "@tanstack/table-core" "8.20.5"
 
+"@tanstack/react-virtual@^3.12.0":
+  version "3.13.0"
+  resolved "https://npm.powerapp.cloud/@tanstack/react-virtual/-/react-virtual-3.13.0.tgz#f50bccdfbb792cb11fdc0342fd3ec6945c730389"
+  integrity sha512-CchF0NlLIowiM2GxtsoKBkXA4uqSnY2KvnXo+kyUFD4a4ll6+J0qzoRsUPMwXV/H26lRsxgJIr/YmjYum2oEjg==
+  dependencies:
+    "@tanstack/virtual-core" "3.13.0"
+
 "@tanstack/table-core@8.20.5":
   version "8.20.5"
   resolved "https://npm.powerapp.cloud/@tanstack/table-core/-/table-core-8.20.5.tgz#3974f0b090bed11243d4107283824167a395cf1d"
   integrity sha512-P9dF7XbibHph2PFRz8gfBKEXEY/HJPOhym8CHmjF8y3q5mWpKx9xtZapXQUWCgkqvsK0R46Azuz+VaxD4Xl+Tg==
+
+"@tanstack/virtual-core@3.13.0":
+  version "3.13.0"
+  resolved "https://npm.powerapp.cloud/@tanstack/virtual-core/-/virtual-core-3.13.0.tgz#8db0ccc9d6c32b6393551a6d19c87dbb259a8828"
+  integrity sha512-NBKJP3OIdmZY3COJdWkSonr50FMVIi+aj5ZJ7hI/DTpEKg2RMfo/KvP8A3B/zOSpMgIe52B5E2yn7rryULzA6g==
 
 "@testing-library/dom@^7.28.1":
   version "7.31.2"
