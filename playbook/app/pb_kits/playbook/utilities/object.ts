@@ -51,4 +51,33 @@ export const merge = (...objects: any[]): any => {
     }
   });
   return result;
-}
+};
+
+const createIteratee = (predicate: any) => {
+  if (typeof predicate === 'function') {
+    return predicate;
+  }
+  if (typeof predicate === 'string') {
+    return (obj: any) => obj[predicate];
+  }
+  if (Array.isArray(predicate)) {
+    const [key, value] = predicate;
+    return (obj: any) => obj[key] === value;
+  }
+  if (typeof predicate === 'object' && predicate !== null) {
+    return (obj: any) => {
+      for (const key in predicate) {
+        if (Object.prototype.hasOwnProperty.call(predicate, key)) {
+          if (obj[key] !== predicate[key]) return false;
+        }
+      }
+      return true;
+    };
+  }
+  return () => false;
+};
+
+export const filter = <T>(array: T[], predicate: any): T[] => {
+  const iteratee = createIteratee(predicate);
+  return array.filter(iteratee);
+};
