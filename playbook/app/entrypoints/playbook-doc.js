@@ -37,6 +37,7 @@ import * as DistributionBarDocs from 'kits/pb_distribution_bar/docs'
 import * as Draggable from 'kits/pb_draggable/docs'
 import * as Drawer from 'kits/pb_drawer/docs'
 import * as Dropdown from 'kits/pb_dropdown/docs'
+import * as EmptyState from 'kits/pb_empty_state/docs'
 import * as FileUpload from 'kits/pb_file_upload/docs'
 import * as Filter from 'kits/pb_filter/docs'
 import * as FixedConfirmationToast from 'kits/pb_fixed_confirmation_toast/docs'
@@ -148,6 +149,7 @@ WebpackerReact.registerComponents({
   ...Draggable,
   ...Drawer,
   ...Dropdown,
+  ...EmptyState,
   ...FileUpload,
   ...Filter,
   ...FixedConfirmationToast,
