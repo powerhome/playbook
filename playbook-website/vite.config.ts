@@ -12,6 +12,12 @@ const config = {
       // Allow serving files from one level up to the project root
       allow: resolve(__dirname, '..'),
     },
+    warmup: {
+      clientFiles: [
+        '../playbook/dist/playbook.css',
+        '../playbook/dist/playbook-doc.js',
+      ]
+    }
   },
   build: {
     manifest: true,
