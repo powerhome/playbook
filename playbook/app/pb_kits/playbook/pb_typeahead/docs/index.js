@@ -13,3 +13,4 @@ export { default as TypeaheadCustomMenuList } from './_typeahead_custom_menu_lis
 export { default as TypeaheadMarginBottom } from './_typeahead_margin_bottom.jsx'
 export { default as TypeaheadWithPillsColor } from './_typeahead_with_pills_color.jsx'
 export { default as TypeaheadTruncatedText } from './_typeahead_truncated_text.jsx'
+export { default as TypeaheadReactHook } from './_typeahead_react_hook.jsx'
