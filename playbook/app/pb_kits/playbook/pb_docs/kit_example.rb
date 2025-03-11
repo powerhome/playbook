@@ -63,6 +63,16 @@ module Playbook
         stringified_code = stringified_code.gsub(/import\s+(\w+)\s+from\s+['"]playbook-ui['"]/) do
           "import { #{::Regexp.last_match(1)} } from 'playbook-ui'"
         end
+        # Combine separate playbook-ui import statements into one
+        imports = stringified_code.scan(/import\s+{([^}]+)}\s+from\s+['"]playbook-ui['"]/)
+        components = imports.flatten.join(", ").split(",").map(&:strip).uniq
+        if components.any?
+          new_import_statement = "import { #{components.join(', ')} } from 'playbook-ui'"
+          stringified_code.gsub!(/import\s+{([^}]+)}\s+from\s+['"]playbook-ui['"]/, "")
+          stringified_code = stringified_code.sub(/import\s+React[\s\S]+?\n/, "\\0\n#{new_import_statement}")
+        end
+        # Replace several empty lines with one empty line
+        stringified_code.gsub!(/\n\s*\n{2,}/, "\n\n")
         stringified_code = dark ? stringified_code.gsub("{...props}", "dark") : stringified_code.gsub(/\s*{...props}\s*\n/, "\n")
         if stringified_code.include?("props: { ")
           stringified_code = stringified_code.gsub("props: {", "props: {dark: true,") if type == "rails" && dark
