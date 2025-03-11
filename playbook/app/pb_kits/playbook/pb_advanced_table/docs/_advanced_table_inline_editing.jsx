@@ -21,6 +21,7 @@ const AdvancedTableInlineEditing = (props) => {
         <input 
             onBlur={handleBlur} 
             onChange={handleChange} 
+            onKeyDown={(e) => e.key === 'Enter' && handleBlur()}
             value={localValue} 
         />
       </TextInput>
