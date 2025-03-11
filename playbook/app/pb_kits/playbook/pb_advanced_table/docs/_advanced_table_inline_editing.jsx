@@ -17,6 +17,7 @@ const AdvancedTableInlineEditing = (props) => {
     return (
       <TextInput inline
           marginBottom="none"
+          {...props}
       >
         <input 
             onBlur={handleBlur} 
