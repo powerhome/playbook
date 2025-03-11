@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AdvancedTable, TextInput } from "playbook-ui";
+import { AdvancedTable, TextInput, Body } from "playbook-ui";
 import MOCK_DATA from "./advanced_table_mock_data.json";
 
 const AdvancedTableInlineEditing = (props) => {
@@ -11,9 +11,9 @@ const AdvancedTableInlineEditing = (props) => {
     const handleChange = (e) => setLocalValue(e.target.value);
 
     const handleBlur = () => {
-      onSave(rowId, localValue);
+      originalValue !== localValue && onSave(rowId, localValue);
     };
-console.log(editedValues)
+
     return (
       <TextInput inline
           marginBottom="none"
@@ -80,6 +80,14 @@ console.log(editedValues)
           tableData={MOCK_DATA}
           {...props}
       />
+      {
+        editedValues && Object.keys(editedValues).length > 0 && (
+          <>
+            <Body marginTop="md">Edited Values by Row Id:</Body>
+            <pre style={{color: 'white'}}>{JSON.stringify(editedValues, null, 2)}</pre>
+          </>
+        )
+      }
     </div>
   );
 };
