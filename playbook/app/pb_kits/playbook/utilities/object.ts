@@ -97,7 +97,7 @@ export const partial = <F extends (...args: unknown[]) => unknown>(
     const finalArgs = partials.map(arg =>
       arg === placeholder ? args[argIndex++] : arg
     );
-    return fn(...(finalArgs.concat(args.slice(argIndex)) as Parameters<F>));
+    return fn(...(finalArgs.concat(args.slice(argIndex)) as Parameters<F>)) as ReturnType<F>;
   };
 };
 
