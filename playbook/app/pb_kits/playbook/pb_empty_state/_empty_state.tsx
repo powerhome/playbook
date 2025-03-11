@@ -10,6 +10,7 @@ import Detail from "../pb_detail/_detail"
 import Flex from "../pb_flex/_flex"
 import FlexItem from "../pb_flex/_flex_item"
 import Image from "../pb_image/_image"
+import { getDefaultImage } from "./docs/default_image/utils"
 
 type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
@@ -21,7 +22,7 @@ type EmptyStateProps = {
   description?: string,
   header?: string,
   id?: string,
-  image?: string,
+  image?: boolean,
   linkButton?: string,
   onLinkButtonClick?: EventHandler,
   onPrimaryButtonClick?: EventHandler,
@@ -125,7 +126,7 @@ const EmptyState = (props: EmptyStateProps) => {
     const configs = sizeConfigs[size]?.[orientation]
     const alignFlex = alignment === "center" ? "center" : alignment === "right" ? "end" : "start"
     const alignText = alignment === "center" ? "center" : alignment === "right" ? "right" : undefined
-
+    const imageSource = getDefaultImage().computer
 
     const layout = (
       <div {...ariaProps}
@@ -140,13 +141,19 @@ const EmptyState = (props: EmptyStateProps) => {
             paddingRight="xl"
             vertical="center"
         >
-          { image ? (
+        {imageSource ? (
+          typeof imageSource === "object" && imageSource.type === "svg" ? (
+            <div style={{ width: configs.imageWidth, height: "auto" }}>
+              {imageSource}
+            </div>
+          ) : (
             <Image
                 alt="test"
                 htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
-                url={image}
+                url={typeof imageSource === "string" ? imageSource : ""}
             />
-          ) : null }
+          )
+        ) : null}
 
           <FlexItem >
             <Title paddingBottom={configs.titlePadding as "xxs" | "xs" | "sm" | undefined}
