@@ -17,7 +17,7 @@ const formatCurrencyDefaultValue = (value: string): string => {
 
     // Parse the numeric value as a float to handle decimals
     const dollars = parseFloat(numericValue)
-    if (isNaN(dollars) || dollars === 0) return ''
+    if (isNaN(dollars)) return ''
 
     // Format as currency
     return new Intl.NumberFormat('en-US', {
@@ -30,10 +30,9 @@ const formatCurrencyDefaultValue = (value: string): string => {
 const formatCurrency = (value: string): string => {
     const numericValue = value.replace(/[^0-9]/g, '').slice(0, 15)
 
-    if (!numericValue) return ''
+    if (!numericValue || numericValue === "00") return ''
 
     const dollars = parseFloat((parseInt(numericValue) / 100).toFixed(2))
-    if (dollars === 0) return ''
 
     return new Intl.NumberFormat('en-US', {
         style: 'currency',
