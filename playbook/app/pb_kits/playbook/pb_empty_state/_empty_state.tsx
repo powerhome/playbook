@@ -1,5 +1,7 @@
 
 import React from "react"
+import type { ReactElement } from "react"
+import ReactDOMServer from "react-dom/server"
 import classnames from "classnames"
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
 import { globalProps } from "../utilities/globalProps"
@@ -40,7 +42,7 @@ const EmptyState = (props: EmptyStateProps) => {
     description,
     header = "",
     id,
-    image,
+    image = false,
     linkButton,
     onLinkButtonClick,
     onPrimaryButtonClick,
@@ -128,6 +130,19 @@ const EmptyState = (props: EmptyStateProps) => {
     const alignText = alignment === "center" ? "center" : alignment === "right" ? "right" : undefined
     const imageSource = getDefaultImage().computer
 
+    const getSvgAsDataUrl = (svgElement: React.ReactElement) => {
+      const svgString = ReactDOMServer.renderToStaticMarkup(svgElement);
+      const base64 = btoa(unescape(encodeURIComponent(svgString)));
+      return `data:image/svg+xml;base64,${base64}`;
+    };
+
+    const imageUrl =
+      typeof imageSource === "object" && imageSource.type === "svg"
+        ? getSvgAsDataUrl(imageSource)
+        : typeof imageSource === "string"
+        ? imageSource
+        : "";
+
     const layout = (
       <div {...ariaProps}
           {...dataProps}
@@ -141,19 +156,14 @@ const EmptyState = (props: EmptyStateProps) => {
             paddingRight="xl"
             vertical="center"
         >
-        {imageSource ? (
-          typeof imageSource === "object" && imageSource.type === "svg" ? (
-            <div style={{ width: configs.imageWidth, height: "auto" }}>
-              {imageSource}
-            </div>
-          ) : (
-            <Image
-                alt="test"
-                htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
-                url={typeof imageSource === "string" ? imageSource : ""}
-            />
-          )
-        ) : null}
+
+        {image && imageUrl && (
+          <Image
+              alt="test"
+              htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
+              url={imageUrl} // Now supports both SVG and normal URLs
+          />
+        )}
 
           <FlexItem >
             <Title paddingBottom={configs.titlePadding as "xxs" | "xs" | "sm" | undefined}
