@@ -49,7 +49,7 @@ const TypeaheadWithPillsAsyncCustomOptions = (props) => {
    * @summary - for doc example purposes only
    */
   const handleOnMultiValueClick = (value) => {
-    alert(`You removed the user: "${value.label}"`)
+    alert(`You added the user: "${value.label}"`)
   }
 
   return (
