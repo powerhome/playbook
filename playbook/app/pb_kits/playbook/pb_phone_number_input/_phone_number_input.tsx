@@ -243,6 +243,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       countrySearch: false,
       fixDropdownWidth: false,
       formatAsYouType: formatAsYouType,
+      hiddenInput: () => ({
+        phone: `${name}_full`,
+        country: `${name}_country_code`,
+      }),
     })
 
     itiRef.current = telInputInit;

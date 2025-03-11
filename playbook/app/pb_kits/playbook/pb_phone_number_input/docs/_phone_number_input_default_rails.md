@@ -1,0 +1,2 @@
+NOTE: Error state is handled by default, validating length (too long or too short) relative to the selected country’s phone format and enforcing numeric-only values for all countries.
+The Phone Number Input kit has two hidden input fields, `{field_name}_full` and `{field_name}_country_code`. The value passed when the form is submitted contains the full phone number including the country code. Read the [intl-tel-input](https://intl-tel-input.com/examples/hidden-input.html) docs for more information.
