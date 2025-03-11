@@ -5,6 +5,7 @@ const PhoneNumberInputDefault = (props) => (
     <>
         <PhoneNumberInput
             id='default'
+            name='default'
             {...props} />
     </>
 )
