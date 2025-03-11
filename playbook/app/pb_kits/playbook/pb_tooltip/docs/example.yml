@@ -4,6 +4,7 @@ examples:
   - tooltip_default: Default
   - tooltip_interaction: Content Interaction
   - tooltip_selectors: Using Common Selectors
+  - tooltip_icon_rails: Tooltip with Icon
   - tooltip_with_icon_circle: Icon Circle Tooltip
   - tooltip_delay_rails: Delay
   - tooltip_show_tooltip: Show Tooltip
