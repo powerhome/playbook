@@ -141,6 +141,8 @@ const PbKitPlayground = () => {
               fontFamily: 'monospace',
               fontSize: 12,
               caretColor: "white",
+              overflow: "scroll",
+              height: "100%",
             }}
             value={code}
         />
