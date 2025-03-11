@@ -1,14 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const viewHeight = window.innerHeight
+  document.querySelector('#show-code-sample').style.display = 'none'
+
   document.querySelector('#toggle-button-js').addEventListener('click', (e) => {
     e.preventDefault()
     document.querySelector('.pb--codeCopy').classList.toggle('close')
-  })
-
-  document.addEventListener('click', (e) => {
-    const openDrawer = document.querySelector('.pb--codeCopy')
-    const codeToggle = document.querySelector('#toggle-button-js')
-    if (!(e.target == openDrawer || openDrawer.contains(e.target) || e.target == codeToggle || codeToggle.contains(e.target))) {
-      openDrawer.classList.add('close')
+  
+    const codeSample = document.querySelector('#show-code-sample')
+    const sampleToggle = document.querySelector('#sample-card-body')
+    if (codeSample.style.display === 'none') {
+      codeSample.style.display = 'block'
+      sampleToggle.style.display = 'none'
+      console.log(viewHeight)
+      document.documentElement.style.height = viewHeight + 'px'
+    } else {
+      codeSample.style.display = 'none'
+      sampleToggle.style.display = 'block'
     }
   })
 
