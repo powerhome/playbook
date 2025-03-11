@@ -85,7 +85,12 @@ const AdvancedTableInlineEditing = (props) => {
       {
         editedValues && Object.keys(editedValues).length > 0 && (
           <>
-            <Body marginTop="md">Edited Values by Row Id:</Body>
+            <Body 
+                marginTop="md"
+                {...props}
+            >
+              Edited Values by Row Id:
+            </Body>
             <pre style={{color: 'white'}}>{JSON.stringify(editedValues, null, 2)}</pre>
           </>
         )
