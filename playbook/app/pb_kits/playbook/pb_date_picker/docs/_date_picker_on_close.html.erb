@@ -1,0 +1,39 @@
+<%= pb_rails("date_picker", props: {
+  label: "Date Picker",
+  picker_id: "date-picker-onclose",
+  margin_bottom: "lg"
+}) %>
+<%= pb_rails("caption", props: { text: "Date Object" }) %>
+<%= pb_rails("body", props: {
+  label: "Date Object",
+  text: "Select Date",
+  margin_bottom: "lg",
+  id: "date-picker-onclose-object",
+}) %>
+<%= pb_rails("caption", props: { text: "Date String" }) %>
+<%= pb_rails("body", props: {
+  label: "Date String",
+  text: "Select Date",
+  margin_bottom: "lg",
+  id: "date-picker-onclose-string",
+}) %>
+
+
+<%= javascript_tag do %>
+  window.addEventListener("DOMContentLoaded", () => {
+    <%# Access flatpickr instance with picker id and assign it a variable %>
+    const fp = document.querySelector("#date-picker-onclose")._flatpickr
+
+    <%# Define Hook %>
+    const closeHook = (selectedDates, dateStr) => {
+      const object = document.querySelector('#date-picker-onclose-object')
+      object.textContent = selectedDates[0] ? selectedDates[0].toString() : ''
+
+      const string = document.querySelector('#date-picker-onclose-string')
+      string.textContent = dateStr
+    }
+    
+    <%# Push one or more hooks to onClose config array %>
+    fp.config.onClose.push(closeHook)
+  })
+<% end %>
