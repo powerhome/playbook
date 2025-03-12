@@ -129,7 +129,7 @@ const PbKitPlayground = () => {
   })
 
   return (
-    <>
+    <div className="pbDocPlayground-Container">
     <PlaygroundHeader/>
     <div className="pbDocPlayground">
       <div className="pbDocPlayground-Editor">
@@ -142,7 +142,7 @@ const PbKitPlayground = () => {
               fontSize: 12,
               caretColor: "white",
               overflow: "visible",
-              height: "100%",
+              minHeight: "100%",
             }}
             value={code}
         />
@@ -152,7 +152,7 @@ const PbKitPlayground = () => {
         { showPreview() }
       </div>
     </div>
-    </>
+    </div>
   )
 }
 
