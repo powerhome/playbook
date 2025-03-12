@@ -10,7 +10,7 @@ const EmptyStateAlignment = (props) => (
           alignment="left"
           description="Body text goes into detail with possible steps for user to take"
           header="Title Explains"
-          image
+          image="default"
           primaryButton="Next Action"
           size="md"
       />
@@ -19,7 +19,7 @@ const EmptyStateAlignment = (props) => (
           alignment="center"
           description="Body text goes into detail with possible steps for user to take"
           header="Title Explains"
-          image
+          image="default"
           primaryButton="Next Action"
           size="md"
       />
@@ -28,7 +28,7 @@ const EmptyStateAlignment = (props) => (
           alignment="right"
           description="Body text goes into detail with possible steps for user to take"
           header="Title Explains"
-          image
+          image="default"
           primaryButton="Next Action"
           size="md"
       />

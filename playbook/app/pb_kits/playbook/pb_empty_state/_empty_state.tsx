@@ -1,6 +1,5 @@
 
 import React from "react"
-import type { ReactElement } from "react"
 import ReactDOMServer from "react-dom/server"
 import classnames from "classnames"
 import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
@@ -24,7 +23,7 @@ type EmptyStateProps = {
   description?: string,
   header?: string,
   id?: string,
-  image?: boolean,
+  image?: string,
   linkButton?: string,
   onLinkButtonClick?: EventHandler,
   onPrimaryButtonClick?: EventHandler,
@@ -42,7 +41,7 @@ const EmptyState = (props: EmptyStateProps) => {
     description,
     header = "",
     id,
-    image = false,
+    image,
     linkButton,
     onLinkButtonClick,
     onPrimaryButtonClick,
@@ -149,11 +148,17 @@ const EmptyState = (props: EmptyStateProps) => {
             vertical="center"
         >
 
-          {image ? (
+          {image && image === 'default' ? (
             <Image
                 alt="test"
                 htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
                 url={getSvgAsDataUrl()}
+            />
+          ) : image && image ? (
+            <Image
+                alt="test"
+                htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
+                url={image}
             />
           ) : null}
 
