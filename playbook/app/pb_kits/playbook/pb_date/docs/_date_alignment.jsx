@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Date as FormattedDate } from '../../pb_date/_date'
+import FormattedDate from '../../pb_date/_date'
 
 const DateAlignment = (props) => {
   return (

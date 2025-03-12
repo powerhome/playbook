@@ -63,6 +63,7 @@ module Playbook
         stringified_code = stringified_code.gsub(/import\s+(\w+)\s+from\s+['"]playbook-ui['"]/) do
           "import { #{::Regexp.last_match(1)} } from 'playbook-ui'"
         end
+        stringified_code = stringified_code.gsub("import { FormattedDate }", "import { Date as FormattedDate }")
         # Combine separate playbook-ui import statements into one
         imports = stringified_code.scan(/^\s*import\s+{([^}]+)}\s+from\s+['"]playbook-ui['"]/)
         components = imports.flatten.join(", ").split(",").map(&:strip).uniq

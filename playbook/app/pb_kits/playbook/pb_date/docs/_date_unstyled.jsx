@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Caption from '../../pb_caption/_caption'
-import { Date as FormattedDate } from '../../pb_date/_date'
+import FormattedDate from '../../pb_date/_date'
 import Title from '../../pb_title/_title'
 
 const DateUnstyled = (props) => {
