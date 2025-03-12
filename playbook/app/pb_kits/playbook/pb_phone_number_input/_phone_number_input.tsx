@@ -23,6 +23,7 @@ type PhoneNumberInputProps = {
   data?: { [key: string]: string },
   disabled?: boolean,
   error?: string,
+  hiddenInputs?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   initialCountry?: string,
@@ -72,6 +73,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
     dark = false,
     data = {},
     disabled = false,
+    hiddenInputs = false,
     htmlOptions = {},
     id = "",
     initialCountry = "",
@@ -243,10 +245,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       countrySearch: false,
       fixDropdownWidth: false,
       formatAsYouType: formatAsYouType,
-      hiddenInput: () => ({
+      hiddenInput: hiddenInputs ? () => ({
         phone: `${name}_full`,
         country: `${name}_country_code`,
-      }),
+      }) : null,
     })
 
     itiRef.current = telInputInit;
