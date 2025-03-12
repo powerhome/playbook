@@ -130,28 +130,28 @@ const PbKitPlayground = () => {
 
   return (
     <div className="pbDocPlayground-Container">
-    <PlaygroundHeader/>
-    <div className="pbDocPlayground">
-      <div className="pbDocPlayground-Editor">
-        <Editor
-            className="language-erb"
-            highlight={(code) => highlight(code, languages.js)}
-            onValueChange={(code) => saveCode(code)}
-            style={{
-              fontFamily: 'monospace',
-              fontSize: 12,
-              caretColor: "white",
-              overflow: "visible",
-              minHeight: "100%",
-            }}
-            value={code}
-        />
-        {throttleFetch}
+      <PlaygroundHeader/>
+      <div className="pbDocPlayground">
+        <div className="pbDocPlayground-Editor">
+          <Editor
+              className="language-erb"
+              highlight={(code) => highlight(code, languages.js)}
+              onValueChange={(code) => saveCode(code)}
+              style={{
+                fontFamily: 'monospace',
+                fontSize: 12,
+                caretColor: "white",
+                overflow: "visible",
+                minHeight: "100%",
+              }}
+              value={code}
+          />
+          {throttleFetch}
+        </div>
+        <div className="pbDocPlayground-Preview">
+          { showPreview() }
+        </div>
       </div>
-      <div className="pbDocPlayground-Preview">
-        { showPreview() }
-      </div>
-    </div>
     </div>
   )
 }
