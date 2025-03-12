@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (codeSample.style.display === 'none') {
       codeSample.style.display = 'block'
       sampleToggle.style.display = 'none'
-      console.log(viewHeight)
       document.documentElement.style.height = viewHeight + 'px'
     } else {
       codeSample.style.display = 'none'
