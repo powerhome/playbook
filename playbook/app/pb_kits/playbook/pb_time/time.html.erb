@@ -1,8 +1,4 @@
-<%= content_tag(:div,
-    id: object.id,
-    data: object.data,
-    class: object.classname,
-    **combined_html_options) do %>
+<%= pb_content_tag do %>
   <%
     # convert deprecated prop values
     size = object.size
@@ -17,7 +13,7 @@
       </span>
     <% end %>
 
-    <%= content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
+    <%= pb_content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
       <span><%= object.format_time_string %></span>
       <% if object.show_timezone %>
         <span><%= object.pb_date_time.to_timezone.upcase %></span>
@@ -31,7 +27,7 @@
       <% end %>
     <% end %>
 
-    <%= content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
+    <%= pb_content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
       <%= pb_rails("body", props: { tag: "span", text: object.format_time_string, classname: "pb_time" }) %>
       <% if object.show_timezone %>
         <%= pb_rails("body", props: { color: "light", tag: "span", text: object.pb_date_time.to_timezone.upcase }) %>
@@ -45,7 +41,7 @@
       <% end %>
     <% end %>
 
-    <%= content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
+    <%= pb_content_tag(:time, datetime: object.pb_date_time.to_iso) do %>
       <%= pb_rails("caption", props: { color: "light", tag: "span", text: object.format_time_string }) do %>
         <%= object.format_time_string %>
         <% if object.show_timezone %>
