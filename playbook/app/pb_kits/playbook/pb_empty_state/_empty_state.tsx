@@ -103,7 +103,7 @@ const EmptyState = (props: EmptyStateProps) => {
       lg: {
         vertical: {
           imageWidth: "100%",
-          titleSize: 2,
+          titleSize: 1,
           titlePadding: "sm",
           descriptionPadding: "lg",
           buttonSize: "md",
