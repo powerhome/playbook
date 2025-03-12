@@ -3,7 +3,7 @@
   data: object.data,
   class: object.classname,
   **combined_html_options) do %>
-  <div class="tooltip_tooltip" id="<%= object.tooltip_id %>" role="tooltip">
+  <div class="tooltip_tooltip" id="<%= object.tooltip_id %>" role="tooltip" style="<%= object.sizing_helper %>">
     <%= content.presence %>
     <div class="arrow" id="<%= object.tooltip_id %>-arrow"></div>
   </div>
