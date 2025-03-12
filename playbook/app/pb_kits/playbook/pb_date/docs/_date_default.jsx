@@ -1,6 +1,6 @@
 import React from 'react'
 
-import FormattedDate from '../../pb_date/_date'
+import { Date as FormattedDate } from '../../pb_date/_date'
 import Caption from '../../pb_caption/_caption'
 import Title from '../../pb_title/_title'
 
