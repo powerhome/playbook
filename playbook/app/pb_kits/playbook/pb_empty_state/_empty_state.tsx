@@ -130,18 +130,10 @@ const EmptyState = (props: EmptyStateProps) => {
     const alignText = alignment === "center" ? "center" : alignment === "right" ? "right" : undefined
     const imageSource = getDefaultImage().computer
 
-    const getSvgAsDataUrl = (svgElement: React.ReactElement) => {
-      const svgString = ReactDOMServer.renderToStaticMarkup(svgElement);
-      const base64 = btoa(unescape(encodeURIComponent(svgString)));
-      return `data:image/svg+xml;base64,${base64}`;
-    };
-
-    const imageUrl =
-      typeof imageSource === "object" && imageSource.type === "svg"
-        ? getSvgAsDataUrl(imageSource)
-        : typeof imageSource === "string"
-        ? imageSource
-        : "";
+    const getSvgAsDataUrl = () => {
+      const svgString = ReactDOMServer.renderToStaticMarkup(imageSource)
+      return `data:image/svg+xml;base64,${window.btoa(svgString)}`
+    }
 
     const layout = (
       <div {...ariaProps}
@@ -157,13 +149,13 @@ const EmptyState = (props: EmptyStateProps) => {
             vertical="center"
         >
 
-        {image && imageUrl && (
-          <Image
-              alt="test"
-              htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
-              url={imageUrl} // Now supports both SVG and normal URLs
-          />
-        )}
+          {image ? (
+            <Image
+                alt="test"
+                htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
+                url={getSvgAsDataUrl()}
+            />
+          ) : null}
 
           <FlexItem >
             <Title paddingBottom={configs.titlePadding as "xxs" | "xs" | "sm" | undefined}
