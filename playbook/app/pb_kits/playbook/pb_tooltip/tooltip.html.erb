@@ -2,7 +2,7 @@
   id: object.id,
   data: object.data,
   class: object.classname,
-  **combined_html_options) do %>
+  **combined_html_options.except(:style)) do %>
   <div class="tooltip_tooltip" id="<%= object.tooltip_id %>" role="tooltip" style="<%= object.sizing_helper %>">
     <%= content.presence %>
     <div class="arrow" id="<%= object.tooltip_id %>-arrow"></div>
