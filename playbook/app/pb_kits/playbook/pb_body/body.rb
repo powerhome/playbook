@@ -18,7 +18,6 @@ module Playbook
                           default: false
       prop :highlighted_text, type: Playbook::Props::Array,
                               default: []
-      prop :test, type: Playbook::Props::String
 
       def classname
         generate_classname("pb_body_kit", color_class, status_class)

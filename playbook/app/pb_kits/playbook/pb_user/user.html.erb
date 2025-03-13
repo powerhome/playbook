@@ -22,7 +22,6 @@
       <% when "detail" %>
         <%= pb_rails("detail", props: { text: object.name, dark: object.dark }) %>
     <% end %>
-
     <% case object.title_type_kit %>
       <% when "body" %>
         <%= pb_rails("body", props: {
@@ -40,7 +39,6 @@
       <% when "detail" %>
         <%= pb_rails("detail", props: { text: "#{object.details}", dark: object.dark }) %>
     <% end %>
-
     <% if content %>
       <%= content.presence %>
     <% else %>
