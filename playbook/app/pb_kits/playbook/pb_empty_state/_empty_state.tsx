@@ -11,7 +11,7 @@ import Detail from "../pb_detail/_detail"
 import Flex from "../pb_flex/_flex"
 import FlexItem from "../pb_flex/_flex_item"
 import Image from "../pb_image/_image"
-import { getDefaultImage } from "./docs/default_image/utils"
+import computer from "./docs/default_image/utils"
 
 type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
@@ -127,10 +127,9 @@ const EmptyState = (props: EmptyStateProps) => {
     const configs = sizeConfigs[size]?.[orientation]
     const alignFlex = alignment === "center" ? "center" : alignment === "right" ? "end" : "start"
     const alignText = alignment === "center" ? "center" : alignment === "right" ? "right" : undefined
-    const imageSource = getDefaultImage().computer
 
     const getSvgAsDataUrl = () => {
-      const svgString = ReactDOMServer.renderToStaticMarkup(imageSource)
+      const svgString = ReactDOMServer.renderToStaticMarkup(computer)
       return `data:image/svg+xml;base64,${window.btoa(svgString)}`
     }
 

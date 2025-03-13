@@ -115,8 +115,4 @@ const computer = (
   </svg>
 )
 
-export const getDefaultImage = () => {
-  return {
-    computer,
-  }
-}
+export default computer
