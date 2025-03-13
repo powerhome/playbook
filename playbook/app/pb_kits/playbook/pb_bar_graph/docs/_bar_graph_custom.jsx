@@ -24,7 +24,7 @@ const renderIcon = (iconName, color) => {
 
 const barGraphOptions = {
   yAxis: {
-    tickInterval: 5,
+    tickInterval: 10,
   },
   xAxis: {
     categories: ['1', '2', '3', '4', '5'],
