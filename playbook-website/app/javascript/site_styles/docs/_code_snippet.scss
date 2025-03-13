@@ -552,16 +552,25 @@
 // New React Based Editor using Prism
 
 .pbDocPlayground {
+  &-Container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
   display: flex;
   width: 100vw;
-  height: 100vh;
+  flex-grow: 1;
+  overflow: hidden;
   &-Editor {
     background: $bg_dark;
     font-weight: $bolder;
     padding-top: $space_lg;
     padding-left: $space_md;
+    padding-right: $space_md;
     flex: 1;
     flex-basis: 50vw;
+    height: 100%;
+    overflow-y: auto;
     textarea {
       outline: 0;
     }
