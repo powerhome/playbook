@@ -16,6 +16,7 @@ RSpec.describe Playbook::PbUser::User do
   }
   it { is_expected.to define_prop(:avatar_url) }
   it { is_expected.to define_prop(:name) }
+  it { is_expected.to define_enum_prop(:name_type_kit).with_default("title").with_values("title", "body", "caption", "detail") }
   it {
     is_expected.to define_enum_prop(:orientation)
       .with_default("horizontal")
@@ -28,6 +29,7 @@ RSpec.describe Playbook::PbUser::User do
   }
   it { is_expected.to define_prop(:subtitle) }
   it { is_expected.to define_prop(:title) }
+  it { is_expected.to define_enum_prop(:title_type_kit).with_default("body").with_values("body", "caption", "detail") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

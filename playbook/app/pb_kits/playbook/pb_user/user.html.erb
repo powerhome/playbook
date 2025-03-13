@@ -12,12 +12,35 @@
     }) %>
   <% end %>
   <%= content_tag(:div, class: "content_wrapper") do %>
-    <%= pb_rails("title", props: { text: object.name, size: object.title_size, dark: object.dark, bold: object.bold }) %>
-    <%= pb_rails("body", props: {
-      text: "#{object.details}",
-      dark: object.dark,
-      color: "light"
-    }) %>
+    <% case object.name_type_kit %>
+      <% when "title" %>
+        <%= pb_rails("title", props: { text: object.name, size: object.name_size, dark: object.dark, bold: object.bold }) %>
+      <% when "body" %>
+        <%= pb_rails("body", props: { text: object.name, dark: object.dark }) %>
+      <% when "caption" %>
+        <%= pb_rails("caption", props: { text: object.name, dark: object.dark, size: object.name_size }) %>
+      <% when "detail" %>
+        <%= pb_rails("detail", props: { text: object.name, dark: object.dark }) %>
+    <% end %>
+
+    <% case object.title_type_kit %>
+      <% when "body" %>
+        <%= pb_rails("body", props: {
+          text: "#{object.details}",
+          dark: object.dark,
+          color: "light"
+        }) %>
+      <% when "caption" %>
+        <%= pb_rails("caption", props: {
+          text: "#{object.details}",
+          dark: object.dark,
+          color: "light",
+          size: object.title_size
+        }) %>
+      <% when "detail" %>
+        <%= pb_rails("detail", props: { text: "#{object.details}", dark: object.dark }) %>
+    <% end %>
+
     <% if content %>
       <%= content.presence %>
     <% else %>
