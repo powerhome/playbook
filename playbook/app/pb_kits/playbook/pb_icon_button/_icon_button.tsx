@@ -49,7 +49,7 @@ const IconButton = (props: IconButtonProps) => {
         id={id}
     >
       <Button
-          borderRadius="lg"
+          borderRadius="xs"
           htmlType={htmlType}
           link={link}
           newWindow={newWindow}
