@@ -130,7 +130,8 @@ const EmptyState = (props: EmptyStateProps) => {
 
     const getSvgAsDataUrl = () => {
       const svgString = ReactDOMServer.renderToStaticMarkup(computer)
-      return `data:image/svg+xml;base64,${window.btoa(svgString)}`
+      const encodedSvg = encodeURIComponent(svgString)
+      return `data:image/svg+xml,${encodedSvg}`
     }
 
     const layout = (
@@ -147,7 +148,7 @@ const EmptyState = (props: EmptyStateProps) => {
             vertical="center"
         >
 
-          {image && image === 'default' ? (
+          { image && image === 'default' ? (
             <Image
                 alt="test"
                 htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
@@ -168,7 +169,7 @@ const EmptyState = (props: EmptyStateProps) => {
                 textAlign={alignText}
             />
 
-            {size !== "sm" ? (
+            { size !== "sm" ? (
               <Body paddingBottom={configs.descriptionPadding as "sm" | "md" | "lg" | undefined}
                   text={description}
                   textAlign={alignText}
