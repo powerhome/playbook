@@ -34,30 +34,29 @@ export const noop = (): void => {
   // empty
 };
 
-export function merge(...objects) {
-  const isPlainObject = (obj) =>
-    obj && typeof obj === 'object' && !Array.isArray(obj);
+export function merge(
+  ...objects: Array<Record<string, unknown> | null | undefined>
+): Record<string, unknown> {
+  const isPlainObject = (obj: unknown): obj is Record<string, unknown> =>
+    !!obj && typeof obj === 'object' && !Array.isArray(obj);
 
-  const result = {};
+  const result: Record<string, unknown> = {};
 
   for (const obj of objects) {
     if (!obj || typeof obj !== 'object') continue;
 
     for (const key of Object.keys(obj)) {
       const oldVal = result[key];
-      const newVal = obj[key];
+      const newVal = (obj as Record<string, unknown>)[key];
 
       if (Array.isArray(oldVal) && Array.isArray(newVal)) {
         result[key] = newVal;
-
       } else if (isPlainObject(oldVal) && isPlainObject(newVal)) {
         result[key] = merge(oldVal, newVal);
-
       } else if (Array.isArray(oldVal) && isPlainObject(newVal)) {
         result[key] = oldVal;
       } else if (isPlainObject(oldVal) && Array.isArray(newVal)) {
         result[key] = oldVal;
-
       } else {
         result[key] = newVal;
       }
