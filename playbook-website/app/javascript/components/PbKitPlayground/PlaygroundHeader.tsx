@@ -11,7 +11,7 @@ import playgroundLogo from '../../images/playground-logo.svg'
 const PlaygroundHeader = () => {
   return (
     <>
-      <Flex orientation="row" justify="between" marginTop="xs">
+      <Flex orientation="row" justify="between" paddingTop="xs">
         <Flex orientation="row" vertical="stretch">
           <Button
             link="https://playbook.powerapp.cloud/"
