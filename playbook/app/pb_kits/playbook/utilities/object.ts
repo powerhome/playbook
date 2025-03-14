@@ -34,26 +34,37 @@ export const noop = (): void => {
   // empty
 };
 
-export const merge = (...objects) => {
-  const isObject = obj => obj && typeof obj === 'object';
+export function merge(...objects) {
+  const isPlainObject = (obj) =>
+    obj && typeof obj === 'object' && !Array.isArray(obj);
+
   const result = {};
-  objects.forEach(obj => {
-    if (isObject(obj)) {
-      Object.keys(obj).forEach(key => {
-        const existingVal = result[key];
-        const newVal = obj[key];
-        if (Array.isArray(newVal)) {
-          result[key] = newVal;
-        } else if (isObject(existingVal) && isObject(newVal) && !Array.isArray(existingVal)) {
-          result[key] = merge(existingVal, newVal);
-        } else {
-          result[key] = newVal;
-        }
-      });
+
+  for (const obj of objects) {
+    if (!obj || typeof obj !== 'object') continue;
+
+    for (const key of Object.keys(obj)) {
+      const oldVal = result[key];
+      const newVal = obj[key];
+
+      if (Array.isArray(oldVal) && Array.isArray(newVal)) {
+        result[key] = newVal;
+
+      } else if (isPlainObject(oldVal) && isPlainObject(newVal)) {
+        result[key] = merge(oldVal, newVal);
+
+      } else if (Array.isArray(oldVal) && isPlainObject(newVal)) {
+        result[key] = oldVal;
+      } else if (isPlainObject(oldVal) && Array.isArray(newVal)) {
+        result[key] = oldVal;
+
+      } else {
+        result[key] = newVal;
+      }
     }
-  });
+  }
   return result;
-};
+}
 
 const createIteratee = (predicate: any) => {
   if (typeof predicate === 'function') {
