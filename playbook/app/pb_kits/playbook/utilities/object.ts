@@ -34,15 +34,17 @@ export const noop = (): void => {
   // empty
 };
 
-export const merge = (...objects: any[]): any => {
-  const isObject = (obj: any): boolean => obj && typeof obj === 'object';
-  const result = {} as any;
+export const merge = (...objects) => {
+  const isObject = obj => obj && typeof obj === 'object';
+  const result = {};
   objects.forEach(obj => {
     if (isObject(obj)) {
       Object.keys(obj).forEach(key => {
         const existingVal = result[key];
         const newVal = obj[key];
-        if (isObject(existingVal) && isObject(newVal)) {
+        if (Array.isArray(newVal)) {
+          result[key] = newVal;
+        } else if (isObject(existingVal) && isObject(newVal) && !Array.isArray(existingVal)) {
           result[key] = merge(existingVal, newVal);
         } else {
           result[key] = newVal;
