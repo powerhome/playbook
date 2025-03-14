@@ -7,6 +7,8 @@ import { GlobalProps, globalProps } from '../utilities/globalProps'
 import Avatar from '../pb_avatar/_avatar'
 import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
+import Caption from '../pb_caption/_caption'
+import Detail from '../pb_detail/_detail'
 
 type UserProps = {
   align?: "left" | "center" | "right",
@@ -20,11 +22,13 @@ type UserProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   name?: string,
+  nameTypeKit?: "title" | "body" | "caption" | "detail"
   orientation?: "horizontal" | "vertical",
   size?: "sm" | "md" | "lg",
   subtitle?: string | Array<Node> | Node,
   territory?: string,
   title?: string,
+  titleTypeKit?: "title" | "body" | "caption" | "detail",
 } & GlobalProps
 
 const User = (props: UserProps): React.ReactElement => {
@@ -40,11 +44,13 @@ const User = (props: UserProps): React.ReactElement => {
     htmlOptions = {},
     id,
     name,
+    nameTypeKit = 'title',
     orientation = 'horizontal',
     size = 'sm',
     subtitle,
     territory = '',
     title = '',
+    titleTypeKit = 'body',
   } = props
 
   const dataProps: {[key: string]: string} = buildDataProps(data)
@@ -58,6 +64,76 @@ const User = (props: UserProps): React.ReactElement => {
   )
 
   const avatarPresent = avatar || avatarUrl
+  const titleText = territory === '' ? title : `${territory} • ${title}`
+
+  const renderNameComponent = () => {
+    switch (nameTypeKit) {
+      case "title":
+        return (
+          <Title
+              bold={bold}
+              dark={dark}
+              size={size === "lg" ? 3 : 4}
+              text={name}
+          />
+        );
+      case "body":
+        return (
+          <Body
+              dark={dark}
+              text={name}
+          />
+        );
+      case "caption":
+        return (
+          <Caption
+              dark={dark}
+              size={size === "sm" ? "xs" : size}
+              text={name}
+          />
+        );
+      case "detail":
+        return (
+          <Detail
+              dark={dark}
+              text={name}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  const renderTitleComponent = () => {
+    switch (titleTypeKit) {
+      case "body":
+        return (
+          <Body
+              color="light"
+              dark={dark}
+              text={titleText}
+              variant={null}
+          />
+        );
+      case "caption":
+        return (
+          <Caption
+              dark={dark}
+              size={size === "sm" ? "xs" : size}
+              text={titleText}
+          />
+        );
+      case "detail":
+        return (
+          <Detail
+              dark={dark}
+              text={titleText}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <div
@@ -76,19 +152,8 @@ const User = (props: UserProps): React.ReactElement => {
         />
       }
       <div className="content_wrapper">
-        <Title
-            bold={bold}
-            dark={dark}
-            size={size == 'lg' ? 3 : 4}
-            text={name}
-        />
-        <Body
-            color="light"
-            dark={dark}
-            variant={null}
-        >
-          {territory === '' ? title : `${territory} • ${title}`}
-        </Body>
+        {renderNameComponent()}
+        {renderTitleComponent()}
         { typeof(subtitle) === 'string' &&
           <Body
               color="light"
