@@ -8,7 +8,7 @@ import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
-import { merge } from 'lodash'
+import { merge } from '../utilities/object' 
 
 type LineGraphProps = {
   align?: "left" | "right" | "center";

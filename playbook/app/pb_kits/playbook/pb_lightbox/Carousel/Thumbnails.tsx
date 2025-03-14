@@ -1,4 +1,4 @@
-import { noop } from 'lodash'
+import { noop } from '../../utilities/object'
 import classnames from 'classnames'
 import React, { useLayoutEffect } from 'react'
 import { useWindowSize } from '../hooks/useWindowSize'

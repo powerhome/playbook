@@ -13,7 +13,7 @@ import typography from "../tokens/exports/_typography.module.scss";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 import { GenericObject } from "../types";
-import { merge } from 'lodash'
+import { merge } from '../utilities/object' 
 
 type GaugeProps = {
   aria: { [key: string]: string };
