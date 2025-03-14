@@ -7,7 +7,7 @@ import Highcharts from "highcharts";
 import { highchartsTheme } from "../pb_dashboard/pbChartsLightTheme";
 import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
-import { merge } from 'lodash'
+import { merge } from '../utilities/object'
 
 import classnames from "classnames";
 
@@ -171,15 +171,6 @@ if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
   useEffect(() => {
     setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
-
-  if (id === 'happiness-dashboard') {
-  console.log('customOptions', customOptions)
-  console.log('staticOptions', staticOptions)
-  console.log('chartData', chartData)
-  console.log('options', options)
-  console.log('setOptions', setOptions)
-  console.log('yarrrrrr')
-  }
 
   return (
     <HighchartsReact
