@@ -9,7 +9,7 @@ const testSubject = 'body'
 
 // %w[block inline_block inline flex inline_flex none]
 test('Global Props: returns proper class name', () => {
-  const propValues = ["block", "inline", "inline_block", "flex", "inline_flex", "none"]
+  const propValues = ["block", "inline", "inline_block", "flex", "inline_flex", "none", "grid" ]
   for(let x = 0, y = propValues.length; x < y; ++x) {
     const testId = `${testSubject}-${propValues[x]}`
     render(

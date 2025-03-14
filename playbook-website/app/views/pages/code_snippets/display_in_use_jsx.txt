@@ -1,4 +1,4 @@
-<Card display="flex">
+<Card display="grid">
   Card content
 <Card/>
 

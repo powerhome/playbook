@@ -18,7 +18,7 @@ module Playbook
       else
         selected_props.each do |k|
           display_value = send(k)
-          css += "display_#{display_value}" if display_values.include? display_value
+          css += "display_#{display_value}" if display_values.include?(display_value)
         end
       end
       css unless css.blank?
@@ -35,7 +35,7 @@ module Playbook
     end
 
     def display_values
-      %w[block inline_block inline flex inline_flex none]
+      %w[block inline_block inline flex inline_flex none grid]
     end
   end
 end

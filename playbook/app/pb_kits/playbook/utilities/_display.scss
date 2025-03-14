@@ -24,13 +24,18 @@
     display: none;
 }
 
+.display_grid {
+    display: grid;
+}
+
 $display_values: (
     none: $display_none,
     flex: $display_flex,
     inline: $display_inline,
     inline_block: $display_inline_block,
     inline_flex: $display_inline_flex,
-    block: $display_block
+    block: $display_block,
+    grid: $display_grid
 );
 
 // using a grid here
