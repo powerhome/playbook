@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 
-import { Caption, Passphrase, ProgressSimple, TextInput} from 'playbook-ui'
+import Passphrase from '../../pb_passphrase/_passphrase'
+import Caption from '../../pb_caption/_caption'
+import ProgressSimple from '../../pb_progress_simple/_progress_simple'
+import TextInput from '../../pb_text_input/_text_input'
+
 import zxcvbn from 'zxcvbn'
 
 const PassphraseStrengthChange = (props) => {

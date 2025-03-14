@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'playbook-ui'
+import Link from '../../pb_link/_link'
 
 const LinkUnderline = (props) => (
   <div>

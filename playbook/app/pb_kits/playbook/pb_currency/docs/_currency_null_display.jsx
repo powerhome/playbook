@@ -1,5 +1,5 @@
 import React from 'react'
-import { Currency } from 'playbook-ui'
+import Currency from "../../pb_currency/_currency"
 
 const CurrencyNullDisplay = (props) => {
   return (

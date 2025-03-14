@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react'
-import { Body, PhoneNumberInput } from 'playbook-ui'
+
+import Body from '../../pb_body/_body'
+import PhoneNumberInput from '../../pb_phone_number_input/_phone_number_input'
 
 const PhoneNumberInputAccessInputElement = (props) => {
     // 1. Create a ref - this accesses the kit's input element.

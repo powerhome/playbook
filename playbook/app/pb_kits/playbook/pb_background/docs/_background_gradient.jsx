@@ -1,5 +1,5 @@
 import React from 'react'
-import { Background } from 'playbook-ui'
+import Background from '../../pb_background/_background'
 
 const BackgroundGradient = (props) => (
   <Background
