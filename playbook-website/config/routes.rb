@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get "changelog/web",            to: "pages#changelog_web"
   get "changelog/swift",          to: "pages#changelog_swift"
   get "changelog/figma",          to: "pages#changelog_figma"
-  get "changelog",                to: redirect("changelog/web")
+  get "drawer_page", to: "pages#drawer_page"
+  get "changelog", to: redirect("changelog/web")
 
   get "changelog/*path", to: redirect("changelog/web")
 
