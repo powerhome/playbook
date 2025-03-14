@@ -1,9 +1,4 @@
-<%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    **combined_html_options) do %>
+<%= pb_content_tag do %>
   <% if enable_drag %>
     <%= pb_rails("draggable", props: {initial_items: object.items}) do %>
       <%= pb_rails("draggable/draggable_container") do %>
