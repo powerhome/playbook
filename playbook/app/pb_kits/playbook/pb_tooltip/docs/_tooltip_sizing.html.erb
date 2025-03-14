@@ -16,7 +16,7 @@
     I have a min_width of 300px!
   <% end %>
   <%= pb_rails "button", props: { id: "tool-tip-sizing-5", text: "min_height" } %>
-  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-sizing-5", tooltip_id: "tool-tip-sizing-5", position: "top", min_height: "300px" } do %>
+  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-sizing-5", tooltip_id: "tool-tip-sizing-5", position: "top", min_height: "300px", height: "200px", html_options: { style: { color: "blue" }} } do %>
     I have a min_height of 300px!
   <% end %>
 <% end %>

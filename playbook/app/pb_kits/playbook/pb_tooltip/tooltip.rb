@@ -27,7 +27,15 @@ module Playbook
         generate_classname("pb_tooltip_kit", dark_class)
       end
 
-      def sizing_helper
+      def remove_height_properties(combined_html_options_style)
+        return nil if combined_html_options_style.nil?
+
+        combined_html_options_style.gsub(/\s*(height|min-height|max-height)\s*:[^;]*;?\s*/, "")
+                                   .strip
+                                   .presence
+      end
+
+      def height_and_width_helper
         out = ""
         out += "width: #{width};" if width.present?
         out += "height: #{height};" if height.present?

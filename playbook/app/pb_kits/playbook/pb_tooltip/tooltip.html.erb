@@ -2,11 +2,9 @@
       id: object.id,
       data: object.data,
       class: object.classname,
-      style: combined_html_options[:style]&.gsub(/min-height:[^;]+;?/, '').gsub(/min-width:[^;]+;?/, '').gsub(/max-height:[^;]+;?/, '').gsub(/max-width:[^;]+;?/, '')&.strip,
-      **combined_html_options.except(:style)) do %>
+      style: remove_height_properties(combined_html_options[:style]) || "") do %>
 
-
-  <div class="tooltip_tooltip" id="<%= object.tooltip_id %>" role="tooltip" style="<%= object.sizing_helper %>">
+  <div class="tooltip_tooltip" id="<%= object.tooltip_id %>" role="tooltip" style="<%= object.height_and_width_helper %>">
     <%= content.presence %>
     <div class="arrow" id="<%= object.tooltip_id %>-arrow"></div>
   </div>
