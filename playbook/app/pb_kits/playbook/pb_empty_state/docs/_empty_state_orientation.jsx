@@ -2,7 +2,9 @@ import React from 'react'
 import { EmptyState, Flex } from 'playbook-ui'
 
 const EmptyStateOrientation = (props) => (
-  <Flex align="center">
+  <Flex align="center"
+      orientation="column"
+  >
     <EmptyState
         {...props}
         alignment="left"
