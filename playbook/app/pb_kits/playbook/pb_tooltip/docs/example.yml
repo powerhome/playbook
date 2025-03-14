@@ -4,7 +4,6 @@ examples:
   - tooltip_default: Default
   - tooltip_interaction: Content Interaction
   - tooltip_selectors: Using Common Selectors
-  - tooltip_margin: Margin
   - tooltip_sizing: Tooltip Sizing
   - tooltip_icon_rails: Tooltip with Icon
   - tooltip_with_icon_circle: Icon Circle Tooltip
