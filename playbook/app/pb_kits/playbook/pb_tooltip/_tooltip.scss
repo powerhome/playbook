@@ -90,7 +90,6 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       margin-bottom: $space_sm;
       color: $white;
       background-color: rgba($black, $opacity_9);
-      // width: 500px; // this is a placeholder for the width of the tooltip
       &.fade_out {
         animation-name: fadeOut;
         animation-duration: 150ms;
