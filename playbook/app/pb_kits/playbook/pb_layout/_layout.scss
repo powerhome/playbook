@@ -10,24 +10,84 @@ $list-header-height: $space_lg;
 $list-footer-height: $space_lg;
 $list-border-radius: $border_rad_lighter;
 $card-border-radius: $border_rad_lightest;
+$row_gap_class: (
+  "sm": $space_sm,
+  "md": $space_md,
+  "lg": $space_lg,
+  "xl": $space_xl,
+);
 
+$column_gap_class: (
+  "sm": $space_sm,
+  "md": $space_md,
+  "lg": $space_lg,
+  "xl": $space_xl,
+);
+
+$number_of_columns_class: (
+  "1": 1,
+  "2": 2,
+  "3": 3,
+  "4": 4,
+  "5": 5,
+  "6": 6,
+  "7": 7,
+  nil: 2,
+);
 
 [class^=pb_layout_kit] {
 
   &[class*=_collection]{
-    div.layout_body{
+
+    div.layout_body {
+
+      @each $key, $value in $row_gap_class {
+        &[class*=row_gap_#{$key}] {
+          grid-row-gap: #{$value};
+        }
+      }
+
+      @each $key, $value in $column_gap_class {
+        &[class*=column_gap_#{$key}] {
+          grid-column-gap: #{$value};
+        }
+      }
+
+      @each $key, $value in $number_of_columns_class {
+        &[class*=number_of_columns_#{$key}] {
+          grid-template-columns: repeat($value, 1fr);
+
+          @media screen and (max-width: $screen-lg-min) {
+
+            @if $value > 6 {
+              grid-template-columns: repeat(5, 1fr);
+            }
+            @if $value <= 5 {
+              grid-template-columns: repeat(4, 1fr);
+            }
+
+            @if $value <= 4 {
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
+
+          @media screen and (max-width: $screen-md-min) {
+            @if $value > 4 {
+              grid-template-columns: repeat(3, 1fr);
+            }
+            @if $value <= 3 {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+
+          @media screen and (max-width: $screen-xs-min) {
+            grid-template-columns: repeat(1, 1fr);
+          }
+        }
+      }
+
       display: grid;
       grid-auto-rows: max-content;
-      grid-column-gap: $space_sm;
-      grid-row-gap: $space_sm;
-      grid-template-columns: repeat(4, 1fr);
-
-      @media screen and (max-width: $screen-md-min) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      @media screen and (max-width: $screen-xs-min) {
-        grid-template-columns: repeat(1, 1fr);
-      }
     }
   }
 
