@@ -24,67 +24,9 @@ const UserFontOptionsName = (props) => {
               align="left"
               avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
               name="Anna Black"
-              nameTypeKit= "caption"
-              orientation="horizontal"
-              size= "md"
-              territory= "PHL"
-              title="Remodeling Consultant"
-              {...props}
-          />
-        </div>
-
-        <div>
-          <User
-              align="left"
-              avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-              name="Anna Black"
               nameTypeKit= "detail"
               orientation="horizontal"
               size= "md"
-              territory= "PHL"
-              title= "Remodeling Consultant"
-              {...props}
-          />
-        </div>
-      </div>
-
-      <div className="pb--doc-demo-row">
-        <div>
-          <User
-              align="center"
-              avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-              name="Anna Black"
-              nameTypeKit= "caption"
-              orientation="horizontal"
-              size= "sm"
-              territory= "PHL"
-              title="Remodeling Consultant"
-              {...props}
-          />
-        </div>
-
-        <div>
-          <User
-              align="left"
-              avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-              name="Anna Black"
-              nameTypeKit= "caption"
-              orientation="horizontal"
-              size= "md"
-              territory= "PHL"
-              title="Remodeling Consultant"
-              {...props}
-          />
-        </div>
-
-        <div>
-          <User
-              align="left"
-              avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
-              name="Anna Black"
-              nameTypeKit= "caption"
-              orientation="horizontal"
-              size= "lg"
               territory= "PHL"
               title= "Remodeling Consultant"
               {...props}
