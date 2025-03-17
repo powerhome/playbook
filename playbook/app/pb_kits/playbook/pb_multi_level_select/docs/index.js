@@ -8,3 +8,4 @@ export { default as MultiLevelSelectWithChildren } from './_multi_level_select_w
 export { default as MultiLevelSelectWithChildrenWithRadios } from './_multi_level_select_with_children_with_radios.jsx'
 export { default as MultiLevelSelectDisabled } from './_multi_level_select_disabled.jsx'
 export { default as MultiLevelSelectReactHook  } from './_multi_level_select_react_hook.jsx'
+export { default as MultiLevelSelectDisabledOptions } from './_multi_level_select_disabled_options.jsx'
