@@ -23,6 +23,7 @@ const treeData = [
             label: "Business Affairs",
             value: "Business Affairs",
             id: "business1",
+            expanded: true,
             disabled: true,
             children: [
               {
