@@ -1,3 +1,3 @@
-For the default variant, disabling the parent item will automatically disable it's children as well. 
+For the `default` variant, disabling the parent item will automatically disable it's children as well. 
 
-If you want to be able to disable a parent WITHOUT disabling it's children, use the returnAllSelected variant.
+If you want to be able to disable a parent WITHOUT disabling it's children, use the `returnAllSelected`/`return_all_selected` variant.

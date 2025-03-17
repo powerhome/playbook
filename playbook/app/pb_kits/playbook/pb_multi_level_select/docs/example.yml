@@ -9,6 +9,9 @@ examples:
   - multi_level_select_color: With Pills (Custom Color)
   - multi_level_select_reset: Reset Selection
   - multi_level_select_disabled: Disabled
+  - multi_level_select_disabled_options: Disabled Options
+  - multi_level_select_disabled_options_parent_default: Disabled Parent Option (Default)
+  - multi_level_select_disabled_options_parent: Disabled Parent Option (Return All Selected)
 
   react:
   - multi_level_select_default: Default
