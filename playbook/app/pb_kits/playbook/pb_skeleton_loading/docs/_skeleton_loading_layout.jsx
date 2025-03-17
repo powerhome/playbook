@@ -1,6 +1,5 @@
 import React from 'react'
-import { SkeletonLoading } from "playbook-ui"
-
+import SkeletonLoading from '../../pb_skeleton_loading/_skeleton_loading'
 
 const SkeletonLoadingLayout = (props) => (
   <div>

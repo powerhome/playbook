@@ -1,5 +1,7 @@
 import React from 'react'
-import { IconButton, Flex } from 'playbook-ui'
+
+import IconButton from '../../pb_icon_button/_icon_button'
+import Flex from '../../pb_flex/_flex'
 
 const IconButtonSizes = (props) => (
   <div>

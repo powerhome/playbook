@@ -1,5 +1,6 @@
 import React from "react"
-import { Button, Body } from "playbook-ui"
+import Button from '../../pb_button/_button'
+import Body from "../../pb_body/_body"
 
 const DrawerMenu = () => {
   return (

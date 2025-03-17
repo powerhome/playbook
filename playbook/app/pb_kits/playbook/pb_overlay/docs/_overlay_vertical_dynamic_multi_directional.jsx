@@ -1,10 +1,8 @@
 import React, { forwardRef } from 'react'
-import {
-    Overlay,
-    Card,
-    Flex,
-    FlexItem,
-} from 'playbook-ui'
+import Overlay from '../../pb_overlay/_overlay'
+import Card from '../../pb_card/_card'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
 
 const InlineCardsExample = forwardRef(function InlineCardsExample(ref) {
     return (

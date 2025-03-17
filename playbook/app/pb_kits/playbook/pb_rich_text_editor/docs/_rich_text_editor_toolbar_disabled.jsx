@@ -1,7 +1,7 @@
 import React from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 
-import { RichTextEditor } from "playbook-ui";
+import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
 
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";

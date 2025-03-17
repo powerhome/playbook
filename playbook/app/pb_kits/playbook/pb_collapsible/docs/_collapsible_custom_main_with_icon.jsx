@@ -1,6 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Collapsible, useCollapsible, Flex, Title, List, ListItem } from 'playbook-ui'
+
+import Collapsible from '../../pb_collapsible/_collapsible'
+import useCollapsible from '../../pb_collapsible/useCollapsible'
+import Flex from '../../pb_flex/_flex'
+import Title from '../../pb_title/_title'
+import List from '../../pb_list/_list'
+import ListItem from '../../pb_list/_list_item'
 
 const CollapsibleCustomMainWithIcon = (props) => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)

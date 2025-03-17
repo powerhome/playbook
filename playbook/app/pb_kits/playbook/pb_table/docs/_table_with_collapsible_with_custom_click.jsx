@@ -1,5 +1,8 @@
 import React from 'react'
-import { Table, Card, Icon, Body } from 'playbook-ui'
+import Table from '../../pb_table/_table'
+import Icon from '../../pb_icon/_icon'
+import Card from '../../pb_card/_card'
+import Body from '../../pb_body/_body'
 
 const TableWithCollapsibleWithCustomClick = (props) => {
 

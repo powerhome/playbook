@@ -1,0 +1,39 @@
+<%= pb_rails("date_picker", props: {
+  label: "Date Picker",
+  picker_id: "date-picker-onchange",
+  margin_bottom: "lg"
+}) %>
+<%= pb_rails("caption", props: { text: "Date Object" }) %>
+<%= pb_rails("body", props: {
+  label: "Date Object",
+  text: "Select Date",
+  margin_bottom: "lg",
+  id: "date-picker-onchange-object",
+}) %>
+<%= pb_rails("caption", props: { text: "Date String" }) %>
+<%= pb_rails("body", props: {
+  label: "Date String",
+  text: "Select Date",
+  margin_bottom: "lg",
+  id: "date-picker-onchange-string",
+}) %>
+
+
+<%= javascript_tag do %>
+  window.addEventListener("DOMContentLoaded", () => {
+    <%# Access flatpickr instance with picker id and assign it a variable %>
+    const fp = document.querySelector("#date-picker-onchange")._flatpickr
+
+    <%# Define Hook %>
+    const changeHook = (selectedDates, dateStr) => {
+      const object = document.querySelector('#date-picker-onchange-object')
+      object.textContent = selectedDates[0] ? selectedDates[0].toString() : ''
+
+      const string = document.querySelector('#date-picker-onchange-string')
+      string.textContent = dateStr
+    }
+    
+    <%# Push one or more hooks to onChange config array %>
+    fp.config.onChange.push(changeHook)
+  })
+<% end %>

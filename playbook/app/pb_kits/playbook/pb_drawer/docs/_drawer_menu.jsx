@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react"
-import { Button, Drawer, Icon, Nav, NavItem } from "playbook-ui"
+
+import Button from '../../pb_button/_button'
+import Drawer from '../../pb_drawer/_drawer'
+import Icon from '../../pb_icon/_icon'
+import Nav from '../../pb_nav/_nav'
+import NavItem from '../../pb_nav/_item'
 
 const DrawerMenu = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
