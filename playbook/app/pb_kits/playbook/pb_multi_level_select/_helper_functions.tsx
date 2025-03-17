@@ -90,7 +90,7 @@ export const getDefaultCheckedItems = (
         if (item.children && item.children.length > 0) {
            // Filter out disabled children (only consider selectable items)
            const selectableChildren = item.children.filter(
-            (child) => !child.disabled
+            (child: { [key: string]: any }) => !child.disabled
           );
           const uncheckedChildren = selectableChildren.filter(
             (child: { [key: string]: any }) => !child.checked
