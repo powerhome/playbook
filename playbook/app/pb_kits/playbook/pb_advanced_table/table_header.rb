@@ -13,6 +13,8 @@ module Playbook
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[none scroll],
                         default: "scroll"
+      prop :selectable_rows, type: Playbook::Props::Boolean,
+                             default: false
 
       def classname
         additional_classes = []
@@ -36,6 +38,36 @@ module Playbook
         max_depth.times { rows << [] }
         process_columns(wrapped_columns, rows, 0, max_depth)
         rows
+      end
+
+      # Selectable Rows No Subrows - checkboxes in their own first cell
+      def render_select_all_header
+        if selectable_rows
+          pb_rails("table/table_header", props: {
+                     classname: "checkbox-cell checkbox-cell-header",
+                   }) do
+            pb_rails("checkbox", props: {
+                       id: "select-all-rows",
+                       name: "select-all-rows",
+                       data: {
+                         action: "click->pb-advanced-table#toggleAllRowSelection",
+                       },
+                     })
+          end
+        end
+      end
+
+      # Selectable Rows w/ Subrows - checkboxes part of toggleable first cell
+      def render_select_all_checkbox
+        if selectable_rows
+          pb_rails("checkbox", props: {
+                     id: "select-all-rows",
+                     name: "select-all-rows",
+                     data: {
+                       action: "click->pb-advanced-table#toggleAllRowSelection",
+                     },
+                   })
+        end
       end
 
     private

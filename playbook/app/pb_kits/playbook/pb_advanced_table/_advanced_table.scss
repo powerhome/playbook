@@ -112,7 +112,8 @@
       }
 
       // Set fixed width for checkbox column
-      &.table-header-cells-custom {
+      &.table-header-cells-custom, 
+      &.checkbox-cell.checkbox-cell-header {
         width: 40px !important;
         min-width: 40px !important;
         box-sizing: border-box !important;
