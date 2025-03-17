@@ -12,7 +12,7 @@
     }) %>
   <% end %>
   <%= content_tag(:div, class: "content_wrapper") do %>
-    <% case object.name_type_kit %>
+    <% case object.name_style %>
       <% when "title" %>
         <%= pb_rails("title", props: { text: object.name, size: object.name_size, dark: object.dark, bold: object.bold }) %>
       <% when "body" %>
@@ -22,7 +22,7 @@
       <% when "detail" %>
         <%= pb_rails("detail", props: { text: object.name, dark: object.dark }) %>
     <% end %>
-    <% case object.title_type_kit %>
+    <% case object.title_style %>
       <% when "body" %>
         <%= pb_rails("body", props: {
           text: "#{object.details}",

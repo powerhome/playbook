@@ -105,7 +105,7 @@ test('name prop adds name text', () => {
   expect(titleElement).toBeInTheDocument()
 })
 
-test('nameTypeKit prop changes the typography kit', () => {
+test('nameStyle prop changes the typography kit', () => {
   const name = 'Anna Black'
   const kitTypes = ['body', 'caption', 'detail']
 
@@ -114,7 +114,7 @@ test('nameTypeKit prop changes the typography kit', () => {
       <User
           data={{ testid: 'test-user-kit' }}
           name={name}
-          nameTypeKit={typeKit}
+          nameStyle={typeKit}
       />
     )
 
@@ -183,7 +183,7 @@ test('title prop adds title text', () => {
   expect(titleElement).toBeInTheDocument()
 })
 
-test('titleTypeKit prop changes the typography kit', () => {
+test('titleStyle prop changes the typography kit', () => {
   const title = 'Remodeling Consultant'
   const kitTypes = ['caption', 'detail']
 
@@ -193,7 +193,7 @@ test('titleTypeKit prop changes the typography kit', () => {
           data={{ testid: 'test-user-kit' }}
           name="Anna Black"
           title={title}
-          titleTypeKit={typeKit}
+          titleStyle={typeKit}
       />
     )
 

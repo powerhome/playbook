@@ -22,13 +22,13 @@ type UserProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   name?: string,
-  nameTypeKit?: "title" | "body" | "caption" | "detail"
+  nameStyle?: "title" | "body" | "caption" | "detail"
   orientation?: "horizontal" | "vertical",
   size?: "sm" | "md" | "lg",
   subtitle?: string | Array<Node> | Node,
   territory?: string,
   title?: string,
-  titleTypeKit?: "title" | "body" | "caption" | "detail",
+  titleStyle?: "title" | "body" | "caption" | "detail",
 } & GlobalProps
 
 const User = (props: UserProps): React.ReactElement => {
@@ -44,13 +44,13 @@ const User = (props: UserProps): React.ReactElement => {
     htmlOptions = {},
     id,
     name,
-    nameTypeKit = 'title',
+    nameStyle = 'title',
     orientation = 'horizontal',
     size = 'sm',
     subtitle,
     territory = '',
     title = '',
-    titleTypeKit = 'body',
+    titleStyle = 'body',
   } = props
 
   const dataProps: {[key: string]: string} = buildDataProps(data)
@@ -67,7 +67,7 @@ const User = (props: UserProps): React.ReactElement => {
   const titleText = territory === '' ? title : `${territory} • ${title}`
 
   const renderNameComponent = () => {
-    switch (nameTypeKit) {
+    switch (nameStyle) {
       case "title":
         return (
           <Title
@@ -105,7 +105,7 @@ const User = (props: UserProps): React.ReactElement => {
   };
 
   const renderTitleComponent = () => {
-    switch (titleTypeKit) {
+    switch (titleStyle) {
       case "body":
         return (
           <Body

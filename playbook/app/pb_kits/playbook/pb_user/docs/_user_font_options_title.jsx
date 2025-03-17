@@ -14,7 +14,7 @@ const UserFontOptionsTitle = (props) => {
               size= "md"
               territory= "PHL"
               title="Remodeling Consultant"
-              titleTypeKit= "caption"
+              titleStyle= "caption"
               {...props}
           />
         </div>
@@ -27,7 +27,7 @@ const UserFontOptionsTitle = (props) => {
               size= "md"
               territory= "PHL"
               title="Remodeling Consultant"
-              titleTypeKit= "detail"
+              titleStyle= "detail"
               {...props}
           />
         </div>
