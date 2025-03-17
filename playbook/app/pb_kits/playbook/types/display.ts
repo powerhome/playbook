@@ -1,4 +1,4 @@
-export type DisplayType = "none" | "flex" | "inline_flex" | "inline" | "inline_block" | "block"
+export type DisplayType = "none" | "flex" | "inline_flex" | "inline" | "inline_block" | "block" | "grid"
 
 export type Display = {
   display?: DisplayType,

@@ -54,7 +54,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
       margin-bottom: 50px;
     }
 
-    &.visible, 
+    &.visible,
     &.show {
       z-index: $z_9;
       padding: $space_xs $space_sm;
@@ -117,7 +117,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
         color: $charcoal;
         background-color: $white;
       }
-      .arrow {        
+      .arrow {
         border-color: $white transparent transparent transparent;
         opacity: $opacity_10;
       }
