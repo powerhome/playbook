@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'playbook-ui'
+import Button from "../../pb_button/_button"
 
 const ButtonIconOptions = (props) => (
     <div>

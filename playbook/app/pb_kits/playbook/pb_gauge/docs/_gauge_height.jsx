@@ -1,5 +1,5 @@
 import React from 'react'
-import { Gauge } from 'playbook-ui'
+import Gauge from '../../pb_gauge/_gauge'
 
 const GaugeHeight = (props) => (
   <div>

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import {
-  Body,
-  Button,
-  Caption,
-  Dialog,
-  Flex,
-  RichTextEditor,
-  Typeahead,
-} from "playbook-ui";
+
+import Body from '../../pb_body/_body'
+import Button from '../../pb_button/_button'
+import Dialog from '../../pb_dialog/_dialog'
+import Flex from '../../pb_flex/_flex'
+import Caption from '../../pb_caption/_caption'
+import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
+import Typeahead from '../../pb_typeahead/_typeahead'
 
 const useDialog = (visible = false) => {
   const [opened, setOpened] = useState(visible);

@@ -1,0 +1,38 @@
+.pb_empty_state_kit {
+
+  .sm-state-vertical {
+    width: 150px;
+  }
+
+  .md-state-vertical {
+    width: 300px;
+  }
+
+  .lg-state-vertical {
+    width: 450px;
+  }
+
+  .sm-state-horizontal {
+    width: max-content;
+    max-width: 400px;
+    .pb_flex_item_kit {
+      align-self: end;
+    }
+  }
+
+  .md-state-horizontal {
+    width: max-content;
+    max-width: 600px;
+    .pb_flex_item_kit {
+      align-self: end;
+    }
+  }
+
+  .lg-state-horizontal {
+    width: max-content;
+    .pb_flex_item_kit {
+      align-self: end;
+    }
+  }
+
+}

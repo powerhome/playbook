@@ -1,5 +1,5 @@
 import React from 'react'
-import { SelectableList } from 'playbook-ui'
+import SelectableList from '../../pb_selectable_list/_selectable_list'
 
 const SelectableListDefault = (props) => {
   return (

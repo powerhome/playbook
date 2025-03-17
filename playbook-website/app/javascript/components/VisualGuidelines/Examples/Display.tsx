@@ -19,9 +19,10 @@ const UTILITY_CLASSES = [
   { size: 'md', media: '@media screen and (max-width: 768px)', class: '.display_md_inline_block', properties: 'display: inline-block !important' },
   { size: 'lg', media: '@media screen and (max-width: 992px)', class: '.display_lg_inline', properties: 'display: inline !important' },
   { size: 'xl', media: '@media screen and (max-width: 1200px)', class: '.display_xl_flex', properties: 'display: flex !important' },
+  { size: 'xl', media: '@media screen and (max-width: 1200px)', class: '.display_xl_grid', properties: 'display: grid !important' },
 ]
 
-const DISPLAY_VALUES = ['inline', 'flex', 'inline_flex', 'inline_block', 'block', 'none']
+const DISPLAY_VALUES = ['inline', 'flex', 'inline_flex', 'inline_block', 'block', 'none', 'grid']
 
 const Display = ({ example }: { example: string }) => (
   <React.Fragment>

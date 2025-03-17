@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Collapsible, useCollapsible, Button } from 'playbook-ui'
+
+import Collapsible from '../../pb_collapsible/_collapsible'
+import useCollapsible from '../../pb_collapsible/useCollapsible'
+import Button from '../../pb_button/_button'
 
 const CollapsibleState = (props) => {
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProgressSimple } from 'playbook-ui'
+import ProgressSimple from '../../pb_progress_simple/_progress_simple'
 
 const ProgressSimpleVariants = () => {
   return (

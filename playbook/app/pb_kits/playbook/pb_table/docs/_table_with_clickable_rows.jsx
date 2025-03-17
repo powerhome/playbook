@@ -1,5 +1,6 @@
 import React from 'react'
-import { Table, Icon } from 'playbook-ui'
+import Table from '../../pb_table/_table'
+import Icon from '../../pb_icon/_icon'
 
 const TableWithClickableRows = (props) => {
 

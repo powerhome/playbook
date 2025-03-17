@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Map, mapTheme } from 'playbook-ui'
+import Map from '../../pb_map/_map'
+import mapTheme from '../../pb_map/pbMapTheme'
 import maplibregl from 'maplibre-gl'
 
 const MapDefault = (props) => {

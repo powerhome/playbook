@@ -1,5 +1,5 @@
 import React from 'react'
-import { Detail } from 'playbook-ui'
+import Detail from '../../pb_detail/_detail'
 
 const DetailColors = (props) => (
   <div>

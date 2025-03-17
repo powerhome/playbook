@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox } from 'playbook-ui'
+import Checkbox from "../../pb_checkbox/_checkbox"
 
 const CheckboxError = (props) => {
   return (

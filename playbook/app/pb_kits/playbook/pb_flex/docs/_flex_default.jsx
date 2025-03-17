@@ -1,5 +1,7 @@
 import React from 'react'
-import { Flex, FlexItem, Title } from  'playbook-ui'
+import Title from '../../pb_title/_title'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
 
 const FlexDefault = (props) => {
   return (
