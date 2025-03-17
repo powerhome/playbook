@@ -1,6 +1,5 @@
 import React from 'react'
-import { map } from 'lodash'
-import { isEmpty, omitBy } from '../../utilities/object'
+import { isEmpty, omitBy, map } from '../../utilities/object'
 
 import Body from '../../pb_body/_body'
 import Caption from '../../pb_caption/_caption'

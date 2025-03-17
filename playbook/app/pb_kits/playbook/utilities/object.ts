@@ -115,3 +115,20 @@ export const partial = <F extends (...args: unknown[]) => unknown>(
 
 partial.placeholder = Symbol();
 export const _ = partial.placeholder;
+
+export const map = <T, U>(
+  collection: T[] | Record<string, T>,
+  iteratee?: ((value: T, index: number | string, collection: T[] | Record<string, T>) => U) | string
+): U[] => {
+  const fn =
+    typeof iteratee === "function"
+      ? iteratee
+      : typeof iteratee === "string"
+      ? (item: T) => (item as any)[iteratee]
+      : (item: T) => item as unknown as U;
+
+  if (Array.isArray(collection)) {
+    return collection.map((value, index) => fn(value, index, collection));
+  }
+  return Object.keys(collection).map(key => fn(collection[key], key, collection));
+};
