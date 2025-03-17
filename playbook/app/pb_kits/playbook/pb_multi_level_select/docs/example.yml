@@ -22,3 +22,5 @@ examples:
   - multi_level_select_with_children_with_radios: Single Select With Children
   - multi_level_select_disabled: Disabled
   - multi_level_select_disabled_options: Disabled Options
+  - multi_level_select_disabled_options_parent_default: Disabled Parent Option (Default)
+  - multi_level_select_disabled_options_parent: Disabled Parent Option (Return All Selected)

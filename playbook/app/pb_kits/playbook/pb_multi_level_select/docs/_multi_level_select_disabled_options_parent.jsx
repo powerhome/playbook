@@ -18,18 +18,17 @@ const treeData = [
             label: "Talent Acquisition",
             value: "Talent Acquisition",
             id: "talent1",
-            disabled: true,
           },
           {
             label: "Business Affairs",
             value: "Business Affairs",
             id: "business1",
+            disabled: true,
             children: [
               {
                 label: "Initiatives",
                 value: "Initiatives",
                 id: "initiative1",
-                disabled: true,
               },
               {
                 label: "Learning & Development",
@@ -59,7 +58,6 @@ const treeData = [
             label: "Customer Service",
             value: "Customer Service",
             id: "customer1",
-            disabled: true,
           },
           {
             label: "Energy",
@@ -72,11 +70,11 @@ const treeData = [
   },
 ];
 
-const MultiLevelSelectDisabledOptions = (props) => {
+const MultiLevelSelectDisabledOptionsParent = (props) => {
   return (
     <div>
       <MultiLevelSelect
-          id='multiselect-disabled-options'
+          id='multiselect-disabled-options-parent'
           onSelect={(selectedNodes) =>
           console.log(
             "Selected Items",
@@ -91,4 +89,4 @@ const MultiLevelSelectDisabledOptions = (props) => {
   )
 };
 
-export default MultiLevelSelectDisabledOptions;
+export default MultiLevelSelectDisabledOptionsParent;
