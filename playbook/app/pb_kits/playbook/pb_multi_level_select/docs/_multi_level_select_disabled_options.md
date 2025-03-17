@@ -1,1 +1,1 @@
-To disable individual items in the treeData, include `disabled:true` within the object on the treeData that you want disabled. See the code snippet below for an example of how to do this.
+individual items can also be disabled by including the `disabled:true` within the object on the treeData for the `returnAllSelected`/`return_all_selected` variant. As noted above, this variant will return data on all checked nodes from the dropdown, irrespective of whether it is a parent or child node.

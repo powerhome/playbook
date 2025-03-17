@@ -11,3 +11,4 @@ export { default as MultiLevelSelectReactHook  } from './_multi_level_select_rea
 export { default as MultiLevelSelectDisabledOptions } from './_multi_level_select_disabled_options.jsx'
 export { default as MultiLevelSelectDisabledOptionsParent } from './_multi_level_select_disabled_options_parent.jsx'
 export { default as MultiLevelSelectDisabledOptionsParentDefault } from './_multi_level_select_disabled_options_parent_default.jsx'
+export { default as MultiLevelSelectDisabledOptionsDefault } from './_multi_level_select_disabled_options_default.jsx'
