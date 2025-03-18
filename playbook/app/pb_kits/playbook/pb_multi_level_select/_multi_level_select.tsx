@@ -9,7 +9,7 @@ import {
 } from "../utilities/props";
 import Icon from "../pb_icon/_icon";
 import FormPill from "../pb_form_pill/_form_pill";
-import { cloneDeep } from "lodash";
+import { cloneDeep } from "../utilities/object";
 import MultiLevelSelectOptions from "./multi_level_select_options";
 import MultiLevelSelectContext from "./context";
 
