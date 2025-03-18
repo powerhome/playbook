@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from 'playbook-ui'
 
-const UserFontOptionsTitle = (props) => {
+const UserFontOptions = (props) => {
   return (
     <div>
       <div className="pb--doc-demo-row">
@@ -10,24 +10,25 @@ const UserFontOptionsTitle = (props) => {
               align="center"
               avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
               name="Anna Black"
+              nameStyle= "body"
               orientation="horizontal"
               size= "md"
               territory= "PHL"
               title="Remodeling Consultant"
-              titleStyle= "caption"
               {...props}
           />
         </div>
+
         <div>
           <User
               align="left"
               avatarUrl="https://randomuser.me/api/portraits/women/44.jpg"
               name="Anna Black"
+              nameStyle= "detail"
               orientation="horizontal"
               size= "md"
               territory= "PHL"
-              title="Remodeling Consultant"
-              titleStyle= "detail"
+              title= "Remodeling Consultant"
               {...props}
           />
         </div>
@@ -36,4 +37,4 @@ const UserFontOptionsTitle = (props) => {
   )
 }
 
-export default UserFontOptionsTitle
+export default UserFontOptions

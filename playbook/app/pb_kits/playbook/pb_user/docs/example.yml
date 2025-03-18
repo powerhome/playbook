@@ -9,8 +9,7 @@ examples:
   - user_vertical_size: Vertical Size
   - user_subtitle: Subtitle
   - user_block_content_subtitle_rails: Block Content Subtitle
-  - user_font_options_name: Font Options - Name
-  - user_font_options_title: Font Options - Title
+  - user_font_options: Font Options
 
   react:
   - user_default: Default
@@ -21,8 +20,7 @@ examples:
   - user_vertical_size: Vertical Size
   - user_subtitle: Subtitle
   - user_block_content_subtitle_react: Block Content Subtitle
-  - user_font_options_name: Font Options - Name
-  - user_font_options_title: Font Options - Title
+  - user_font_options: Font Options
 
   swift:
   - user_horizontal_swift: Horizontal
