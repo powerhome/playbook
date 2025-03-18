@@ -206,11 +206,11 @@ $bracket-line-width: 4px;
       height: 100%;
     }
 
-    .layout_round.eight_games + .layout_round.four_games .layout_item:not(:only-child)::after {
+    .layout_round.eight_games ~ .layout_round.four_games .layout_item:not(:only-child)::after {
       height: 200%;
     }
 
-    .layout_round.four_games + .layout_round.two_games .layout_item:not(:only-child)::after {
+    .layout_round.four_games ~ .layout_round.two_games .layout_item:not(:only-child)::after {
       height: 200%;
     }
 
