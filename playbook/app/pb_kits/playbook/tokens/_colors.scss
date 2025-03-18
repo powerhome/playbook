@@ -33,7 +33,6 @@ $gradient_end:        $royal !default;
 $white:               #FFFFFF !default;
 $silver:              #F3F7FB !default;
 $slate:               #C1CDD6 !default;
-$steel_blue:          #687887 !default;
 $charcoal:            #242B42 !default;
 $black:               #000000 !default;
 
@@ -41,7 +40,6 @@ $interface_colors: (
   white:              $white,
   silver:             $silver,
   slate:              $slate,
-  steel_blue:         $steel_blue,
   charcoal:           $charcoal,
   black:              $black
 );
@@ -128,7 +126,7 @@ $shadow_colors: (
 
 /* Text colors ------------------------*/
 $text_lt_default:     $charcoal !default;
-$text_lt_light:       $steel_blue !default;
+$text_lt_light:       #687887 !default;
 $text_lt_lighter:     $slate !default;
 $text_lt_success_sm:  #157F48 !default;
 $text_dk_default:     $white !default;
