@@ -55,7 +55,9 @@
       &.drop_zone_outline {
         // Don't hide the content, only make it transparent
         // This allows the browser to create a proper drag image
-        opacity: $opacity_5;
+        & > * {
+          opacity: 0;
+        }
 
         // Add outline
         &::before {
