@@ -10,6 +10,7 @@ examples:
   - layout_masonry: Masonry Layout
 
   react:
+  - layout_bracket: Bracket Layout
   - layout_colors: Colors
   - layout_transparent: Transparent
   - layout_sizes: Sizes

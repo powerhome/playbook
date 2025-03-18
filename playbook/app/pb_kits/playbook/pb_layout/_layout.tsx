@@ -18,7 +18,7 @@ type LayoutPropTypes = {
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
   variant?: "light" | "dark" | "gradient",
   transparent?: boolean,
-  layout?: "sidebar" | "collection" | "kanban" | "content" | "masonry",
+  layout?: "sidebar" | "collection" | "kanban" | "content" | "masonry" | "bracket",
 } & GlobalProps
 
 type LayoutSideProps = {
@@ -71,6 +71,47 @@ const Body = (props: LayoutBodyProps) => {
     >
       {children}
     </div>
+  )
+}
+
+// Round component (based off Body)
+const Round = (props: LayoutBodyProps) => {
+  const { children, className } = props
+  const dynamicInlineProps = globalInlineProps(props)
+
+  const numberOfChildren = Array.isArray(children) ? children.length : 0
+
+  const leftConnectors = Array.from({ length: numberOfChildren }, (_, index) => (
+    <div
+        className='left_connector'
+        key={'left_connector' + index}
+    />
+  ));
+
+  const rightConnectors = Array.from({ length: numberOfChildren / 2 }, (_, index) => (
+    <div
+        className='right_connector'
+        key={'right_connector' + index}
+    />
+  ));
+
+  const numberOfGamesClass = numberOfChildren === 8 ? "eight_games" : numberOfChildren === 4 ? "four_games" : numberOfChildren === 2 ? "two_games" : ""
+
+  return (
+    <>
+    <div
+        className={classnames('layout_round', globalProps(props), className, numberOfGamesClass)}
+        style={dynamicInlineProps}
+    >
+      {children}
+    </div>
+    <div className='connector_container'>
+      {leftConnectors}
+    </div>
+    <div className='connector_container'>
+      {rightConnectors}
+    </div>
+    </>
   )
 }
 
@@ -206,5 +247,6 @@ Layout.Body = Body
 Layout.Item = Item
 Layout.Header = Header
 Layout.Footer = Footer
+Layout.Round = Round
 
 export default Layout
