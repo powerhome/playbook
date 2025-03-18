@@ -40,6 +40,7 @@ type MultiLevelSelectProps = {
   inputDisplay?: "pills" | "none"
   inputName?: string
   name?: string
+  required?: boolean
   returnAllSelected?: boolean
   treeData?: { [key: string]: string; }[] | any
   onChange?: (event: { target: { name?: string; value: any } }) => void
@@ -61,6 +62,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     inputDisplay = "pills",
     inputName,
     name,
+    required = false,
     returnAllSelected = false,
     treeData,
     onChange = () => null,
@@ -317,6 +319,15 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
 
   // Main function to handle any click inside dropdown
   const handledropdownItemClick = (e: any, check: boolean) => {
+    // Fires a custom event (`changemultilevelselect`) to notify that the value has changed,
+    // allowing the form to clear any associated error messages
+    document.dispatchEvent(
+      new CustomEvent("changemultilevelselect", {
+        bubbles: true,
+        detail: { value: e.target.parentNode.id },
+      })
+    )
+
     const clickedItem = e.target.parentNode.id;
     // Setting filterItem to "" will clear textinput and clear typeahead
     setFilterItem("");
@@ -453,6 +464,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
                       disabled={disabled}
                       key={selectedItem.id}
                       name={`${name}[]`}
+                      required={required}
                       type="hidden"
                       value={selectedItem.id}
                   />
@@ -467,6 +479,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
                           disabled={disabled}
                           key={item.id}
                           name={`${name}[]`}
+                          required={required}
                           type="hidden"
                           value={item.id}
                       />
@@ -479,6 +492,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
                           disabled={disabled}
                           key={item.id} 
                           name={`${name}[]`}
+                          required={required}
                           type="hidden"
                           value={item.id}
                       />
@@ -539,6 +553,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
                       } selected`
                     : "Start typing..."
                 }
+                required={required}
                 value={singleSelectedItem.value || filterItem}
             />
           </div>
