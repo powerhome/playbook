@@ -6,7 +6,10 @@ import Layout from '../../pb_layout/_layout'
 const LayoutBracket = () => {
   return (
     <div>
-      <Layout layout="bracket">
+      <Layout
+          height="1000px"
+          layout="bracket"
+      >
         <Layout.Round>
             <Layout.Item>
               <Card>Game 1</Card>
