@@ -60,7 +60,7 @@ const DraggableItem = (props: DraggableItemProps) => {
   );
 
   // Custom drag start handler
-  const onDragStart = (e: React.DragEvent) => {
+  const onDragStart = (_: React.DragEvent) => {
     // Call the original handler
     handleDragStart(dragId, container);
 
