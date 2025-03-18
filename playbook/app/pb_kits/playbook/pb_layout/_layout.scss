@@ -10,7 +10,7 @@ $list-header-height: $space_lg;
 $list-footer-height: $space_lg;
 $list-border-radius: $border_rad_lighter;
 $card-border-radius: $border_rad_lightest;
-$bracket-connector-width: 50px;
+$bracket-connector-width: 20px;
 $bracket-line-width: 4px;
 
 
@@ -172,11 +172,13 @@ $bracket-line-width: 4px;
 
   &[class*=_bracket]{
     display: flex;
+    overflow-x: scroll;
 
     div.layout_round {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      flex-grow: 1;
     }
 
     .connector_container {
