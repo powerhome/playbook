@@ -10,6 +10,8 @@ type DraggableProps = {
   className?: string;
   children?: React.ReactNode;
   data?: { [key: string]: string };
+  dropZone?: 'ghost' | 'outline' | 'shadow' | 'line';
+  dropZoneColor?: string; // This will accept color tokens like 'neutral', 'primary', etc.
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
 };
@@ -20,8 +22,10 @@ const Draggable = (props: DraggableProps) => {
     className,
     children,
     data = {},
+    dropZone = 'ghost',
+    dropZoneColor = 'neutral',
     htmlOptions = {},
-    id,
+    id
   } = props;
 
 
@@ -35,14 +39,23 @@ const Draggable = (props: DraggableProps) => {
     className
   );
 
+  // Pass down the dropZone and dropZoneColor props to children
+  const childrenWithProps = React.Children.map(children, child => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, { dropZone, dropZoneColor });
+    }
+    return child;
+  });
+
   return (
-    <div {...ariaProps} 
-        {...dataProps} 
+    <div
+        {...ariaProps}
+        {...dataProps}
         {...htmlProps}
-        className={classes} 
+        className={classes}
         id={id}
     >
-      {children}
+      {childrenWithProps}
     </div>
   );
 };

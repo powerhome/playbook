@@ -1,11 +1,195 @@
 @import "../tokens/colors";
 @import "../tokens/opacity";
 
+// Mixin for color variants
+@mixin drop-zone-colors($property) {
+  &.drop_zone_color_primary { #{$property}: $primary; }
+  &.drop_zone_color_secondary { #{$property}: $secondary; }
+  &.drop_zone_color_tertiary { #{$property}: $tertiary; }
+  &.drop_zone_color_success { #{$property}: $success; }
+  &.drop_zone_color_warning { #{$property}: $warning; }
+  &.drop_zone_color_error { #{$property}: $error; }
+  &.drop_zone_color_info { #{$property}: $info; }
+  &.drop_zone_color_royal { #{$property}: $royal; }
+  &.drop_zone_color_purple { #{$property}: $purple; }
+  &.drop_zone_color_teal { #{$property}: $teal; }
+  &.drop_zone_color_red { #{$property}: $red; }
+  &.drop_zone_color_yellow { #{$property}: $yellow; }
+  &.drop_zone_color_green { #{$property}: $green; }
+  &.drop_zone_color_orange { #{$property}: $orange; }
+}
+
+// Mixin for rgba color variants
+@mixin drop-zone-rgba-colors($property) {
+  &.drop_zone_color_primary { #{$property}: rgba($primary, $opacity_3); }
+  &.drop_zone_color_secondary { #{$property}: rgba($secondary, $opacity_3); }
+  &.drop_zone_color_tertiary { #{$property}: rgba($tertiary, $opacity_3); }
+  &.drop_zone_color_success { #{$property}: rgba($success, $opacity_3); }
+  &.drop_zone_color_warning { #{$property}: rgba($warning, $opacity_3); }
+  &.drop_zone_color_error { #{$property}: rgba($error, $opacity_3); }
+  &.drop_zone_color_info { #{$property}: rgba($info, $opacity_3); }
+  &.drop_zone_color_royal { #{$property}: rgba($royal, $opacity_3); }
+  &.drop_zone_color_purple { #{$property}: rgba($purple, $opacity_3); }
+  &.drop_zone_color_teal { #{$property}: rgba($teal, $opacity_3); }
+  &.drop_zone_color_red { #{$property}: rgba($red, $opacity_3); }
+  &.drop_zone_color_yellow { #{$property}: rgba($yellow, $opacity_3); }
+  &.drop_zone_color_green { #{$property}: rgba($green, $opacity_3); }
+  &.drop_zone_color_orange { #{$property}: rgba($orange, $opacity_3); }
+}
+
 .pb_draggable_container {
-  .is_dragging {
-    opacity: $opacity_4;
+  .pb_draggable_item {
+    &:hover {
+      cursor: grab;
+    }
+
+    &.is_dragging {
+      position: relative;
+
+      // Ghost variant - show the item at 50% opacity. Default behavior.
+      &.drop_zone_ghost {
+        opacity: $opacity_4;
+      }
+
+      // Outline variant
+      &.drop_zone_outline {
+        // Don't hide the content, only make it transparent
+        // This allows the browser to create a proper drag image
+        opacity: $opacity_5;
+
+        // Add outline
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: 2px dashed $neutral;
+          border-radius: $border-radius-sm;
+          box-sizing: border-box;
+          z-index: 10;
+        }
+
+        // Apply color variants to the ::before element
+        &.drop_zone_color_primary::before { border-color: $primary; }
+        &.drop_zone_color_secondary::before { border-color: $secondary; }
+        &.drop_zone_color_tertiary::before { border-color: $tertiary; }
+        &.drop_zone_color_success::before { border-color: $success; }
+        &.drop_zone_color_warning::before { border-color: $warning; }
+        &.drop_zone_color_error::before { border-color: $error; }
+        &.drop_zone_color_info::before { border-color: $info; }
+        &.drop_zone_color_royal::before { border-color: $royal; }
+        &.drop_zone_color_purple::before { border-color: $purple; }
+        &.drop_zone_color_teal::before { border-color: $teal; }
+        &.drop_zone_color_red::before { border-color: $red; }
+        &.drop_zone_color_yellow::before { border-color: $yellow; }
+        &.drop_zone_color_green::before { border-color: $green; }
+        &.drop_zone_color_orange::before { border-color: $orange; }
+      }
+
+      // Shadow variant
+      &.drop_zone_shadow {
+        // Don't hide the content, only make it transparent
+        // This allows the browser to create a proper drag image
+        & > * {
+          opacity: 0;
+        }
+
+        // Add shadow background
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba($neutral, $opacity_5);
+          border-radius: $border-radius-sm;
+          z-index: 10;
+        }
+
+        // Apply rgba color variants to the ::before element
+        &.drop_zone_color_primary::before { background-color: rgba($primary, $opacity_5); }
+        &.drop_zone_color_secondary::before { background-color: rgba($secondary, $opacity_5); }
+        &.drop_zone_color_tertiary::before { background-color: rgba($tertiary, $opacity_5); }
+        &.drop_zone_color_success::before { background-color: rgba($success, $opacity_5); }
+        &.drop_zone_color_warning::before { background-color: rgba($warning, $opacity_5); }
+        &.drop_zone_color_error::before { background-color: rgba($error, $opacity_5); }
+        &.drop_zone_color_info::before { background-color: rgba($info, $opacity_5); }
+        &.drop_zone_color_royal::before { background-color: rgba($royal, $opacity_5); }
+        &.drop_zone_color_purple::before { background-color: rgba($purple, $opacity_5); }
+        &.drop_zone_color_teal::before { background-color: rgba($teal, $opacity_5); }
+        &.drop_zone_color_red::before { background-color: rgba($red, $opacity_5); }
+        &.drop_zone_color_yellow::before { background-color: rgba($yellow, $opacity_5); }
+        &.drop_zone_color_green::before { background-color: rgba($green, $opacity_5); }
+        &.drop_zone_color_orange::before { background-color: rgba($orange, $opacity_5); }
+      }
+
+      // Line variant - vertical by default (for horizontal layouts)
+      &.drop_zone_line {
+        // Keep original height but reduce width
+        width: 10% !important;
+        max-width: 10px !important;
+        position: relative;
+
+        // Hide all content
+        & > * {
+          opacity: 0;
+        }
+
+        // Add vertical line that takes the full height
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 4px;
+          height: 100%;
+          background-color: $neutral;
+          border-radius: 1000px;
+        }
+
+        // Apply color variants to the ::before element
+        &.drop_zone_color_primary::before { background-color: $primary; }
+        &.drop_zone_color_secondary::before { background-color: $secondary; }
+        &.drop_zone_color_tertiary::before { background-color: $tertiary; }
+        &.drop_zone_color_success::before { background-color: $success; }
+        &.drop_zone_color_warning::before { background-color: $warning; }
+        &.drop_zone_color_error::before { background-color: $error; }
+        &.drop_zone_color_info::before { background-color: $info; }
+        &.drop_zone_color_royal::before { background-color: $royal; }
+        &.drop_zone_color_purple::before { background-color: $purple; }
+        &.drop_zone_color_teal::before { background-color: $teal; }
+        &.drop_zone_color_red::before { background-color: $red; }
+        &.drop_zone_color_yellow::before { background-color: $yellow; }
+        &.drop_zone_color_green::before { background-color: $green; }
+        &.drop_zone_color_orange::before { background-color: $orange; }
+      }
+    }
   }
-  .pb_draggable_item:hover {
-    cursor: grab;
+}
+
+// Support for vertical layouts (horizontal line)
+.pb_draggable_container.vertical {
+  .pb_draggable_item {
+    &.is_dragging {
+      // Line variant for vertical layouts (horizontal line)
+      &.drop_zone_line {
+        // Keep original width but reduce height
+        width: 100% !important;
+        max-width: 200px !important;
+        height: 10% !important;
+        max-height: 10px !important;
+
+        // Add horizontal line that takes the full width
+        &::before {
+          width: 100%;
+          height: 4px;
+        }
+
+        // The color variants are already applied from above
+      }
+    }
   }
 }

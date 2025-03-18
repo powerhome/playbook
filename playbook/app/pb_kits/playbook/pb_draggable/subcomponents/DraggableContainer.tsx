@@ -22,18 +22,17 @@ type DraggableContainerProps = {
 
 const DraggableContainer = (props: DraggableContainerProps) => {
   const { aria = {}, children, className, container, data = {}, htmlOptions = {}, id, tag="div" } = props;
-
-  const { handleDragOver, handleDrop, activeContainer } = DraggableContext();
+  const { handleDragOver, handleDrop, activeContainer, dropZoneDirection = 'horizontal' } = DraggableContext();
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-
   const Tag: React.ReactElement | any = `${tag}`;
 
   const classes = classnames(
     buildCss("pb_draggable_container"),
     `${activeContainer === container ? "active" : ""}`,
+    dropZoneDirection === 'vertical' ? 'vertical' : '',
     globalProps(props),
     className
   );

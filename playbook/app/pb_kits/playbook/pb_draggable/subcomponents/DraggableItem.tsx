@@ -22,23 +22,51 @@ type DraggableItemProps = {
 };
 
 const DraggableItem = (props: DraggableItemProps) => {
-  const { aria = {}, children, className, container, data = {}, htmlOptions = {},  id, dragId, tag="div" } = props;
+  const {
+    aria = {},
+    children,
+    className,
+    container,
+    data = {},
+    htmlOptions = {},
+    id,
+    dragId,
+    tag="div"
+  } = props;
 
-  const { isDragging, handleDragStart, handleDragEnter, handleDragEnd } =
-    DraggableContext();
+  const {
+    isDragging,
+    handleDragStart,
+    handleDragEnter,
+    handleDragEnd,
+    dropZone = 'ghost',
+    dropZoneColor = 'neutral'
+  } = DraggableContext();
+
+  const itemRef = React.useRef<HTMLElement>(null);
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-
   const Tag: React.ReactElement | any = `${tag}`;
-  
+
   const classes = classnames(
     buildCss("pb_draggable_item"),
     `${isDragging === dragId ? "is_dragging" : ""}`,
+    isDragging === dragId ? `drop_zone_${dropZone}` : "",
+    isDragging === dragId && dropZone !== 'ghost' ? `drop_zone_color_${dropZoneColor}` : '',
     globalProps(props),
     className
   );
+
+  // Custom drag start handler
+  const onDragStart = (e: React.DragEvent) => {
+    // Call the original handler
+    handleDragStart(dragId, container);
+
+    // For dropZone="ghost", we don't need to do anything special
+    // For other variants, we'll let the CSS handle it
+  };
 
   return (
     <Tag
@@ -51,7 +79,8 @@ const DraggableItem = (props: DraggableItemProps) => {
         key={dragId}
         onDragEnd={() => handleDragEnd()}
         onDragEnter={() => handleDragEnter(dragId, container)}
-        onDragStart={() => handleDragStart(dragId, container)}
+        onDragStart={onDragStart}
+        ref={itemRef}
     >
       {children}
     </Tag>

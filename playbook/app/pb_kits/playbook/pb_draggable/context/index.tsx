@@ -51,15 +51,18 @@ export const DraggableContext = () => {
   return useContext(DragContext);
 };
 
-export const DraggableProvider = ({ 
-  children, 
-  initialItems, 
+export const DraggableProvider = ({
+  children,
+  initialItems,
   onReorder,
-  onDragStart, 
-  onDragEnter, 
-  onDragEnd, 
-  onDrop, 
-  onDragOver 
+  onDragStart,
+  onDragEnter,
+  onDragEnd,
+  onDrop,
+  onDragOver,
+  dropZone = 'ghost',
+  dropZoneColor = 'neutral',
+  dropZoneDirection = 'horizontal'
 }: DraggableProviderType) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -113,12 +116,15 @@ export const DraggableProvider = ({
     dragData: state.dragData,
     isDragging: state.isDragging,
     activeContainer: state.activeContainer,
+    dropZone,
+    dropZoneColor,
+    dropZoneDirection,
     handleDragStart,
     handleDragEnter,
     handleDragEnd,
     handleDrop,
     handleDragOver
-  }), [state]);
+  }), [state, dropZone, dropZoneColor, dropZoneDirection]);
 
   return (
     <DragContext.Provider value={contextValue}>{children}</DragContext.Provider>
