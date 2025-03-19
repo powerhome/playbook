@@ -8,7 +8,7 @@
 %>
 
 <%= pb_rails("typeahead", props: {
-    id: "typeahead-default",
+    id: "typeahead-disabled",
     disabled: true,
     placeholder: "All Colors",
     options: options,
@@ -17,13 +17,3 @@
     is_multi: false
   })
 %>
-
-<%= javascript_tag defer: "defer" do %>
-  document.addEventListener("pb-typeahead-kit-typeahead-default-result-option-select", function(event) {
-    console.log('Single Option selected')
-    console.dir(event.detail)
-  })
-  document.addEventListener("pb-typeahead-kit-typeahead-default-result-clear", function() {
-    console.log('All options cleared')
-  })
-<% end %>
