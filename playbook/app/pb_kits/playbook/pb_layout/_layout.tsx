@@ -92,7 +92,7 @@ const Round = (props: LayoutRoundProps) => {
   const { children, className } = props
   const dynamicInlineProps = globalInlineProps(props)
 
-  const numberOfChildren = Array.isArray(children) ? children.length : 0
+  const numberOfChildren = React.Children.count(children)
 
   const leftConnectors = Array.from({ length: numberOfChildren }, (_, index) => (
     <div
@@ -148,28 +148,33 @@ const Game = (props: LayoutGameProps) => {
   const { children, className } = props
   const dynamicInlineProps = globalInlineProps(props)
 
-  const numberOfChildren = Array.isArray(children) ? children.length : 0
+  const numberOfChildren = React.Children.count(children)
 
-  if (numberOfChildren === 2 && Array.isArray(children)) {
-    return (
-      <div
-          className={classnames('layout_game', globalProps(props), className)}
-          style={dynamicInlineProps}
-      >
-        <Card
-            padding="none"
-            shadow="deep"
+  if (numberOfChildren === 2) {
+    const firstChild = React.Children.toArray(children)[0];
+    const secondChild = React.Children.toArray(children)[1];
+
+    if (React.isValidElement(firstChild) && React.isValidElement(secondChild)) { 
+      return (
+        <div
+            className={classnames('layout_game', globalProps(props), className)}
+            style={dynamicInlineProps}
         >
-          <Card.Body padding="xs">
-            { children[0] }
-          </Card.Body>
-          <SectionSeparator />
-          <Card.Body padding="xs">
-            { children[1] }
-          </Card.Body>
-        </Card>
-      </div>
-    )
+          <Card
+              padding="none"
+              shadow="deep"
+          >
+            <Card.Body padding="xs">
+              { firstChild }
+            </Card.Body>
+            <SectionSeparator />
+            <Card.Body padding="xs">
+              { secondChild }
+            </Card.Body>
+          </Card>
+        </div>
+      )
+    }
   }
 
   if (numberOfChildren >= 1) {
