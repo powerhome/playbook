@@ -1,42 +1,6 @@
 @import "../tokens/colors";
 @import "../tokens/opacity";
 
-// Mixin for color variants
-@mixin drop-zone-colors($property) {
-  &.drop_zone_color_primary { #{$property}: $primary; }
-  &.drop_zone_color_secondary { #{$property}: $secondary; }
-  &.drop_zone_color_tertiary { #{$property}: $tertiary; }
-  &.drop_zone_color_success { #{$property}: $success; }
-  &.drop_zone_color_warning { #{$property}: $warning; }
-  &.drop_zone_color_error { #{$property}: $error; }
-  &.drop_zone_color_info { #{$property}: $info; }
-  &.drop_zone_color_royal { #{$property}: $royal; }
-  &.drop_zone_color_purple { #{$property}: $purple; }
-  &.drop_zone_color_teal { #{$property}: $teal; }
-  &.drop_zone_color_red { #{$property}: $red; }
-  &.drop_zone_color_yellow { #{$property}: $yellow; }
-  &.drop_zone_color_green { #{$property}: $green; }
-  &.drop_zone_color_orange { #{$property}: $orange; }
-}
-
-// Mixin for rgba color variants
-@mixin drop-zone-rgba-colors($property) {
-  &.drop_zone_color_primary { #{$property}: rgba($primary, $opacity_4); }
-  &.drop_zone_color_secondary { #{$property}: rgba($secondary, $opacity_4); }
-  &.drop_zone_color_tertiary { #{$property}: rgba($tertiary, $opacity_4); }
-  &.drop_zone_color_success { #{$property}: rgba($success, $opacity_4); }
-  &.drop_zone_color_warning { #{$property}: rgba($warning, $opacity_4); }
-  &.drop_zone_color_error { #{$property}: rgba($error, $opacity_4); }
-  &.drop_zone_color_info { #{$property}: rgba($info, $opacity_4); }
-  &.drop_zone_color_royal { #{$property}: rgba($royal, $opacity_4); }
-  &.drop_zone_color_purple { #{$property}: rgba($purple, $opacity_4); }
-  &.drop_zone_color_teal { #{$property}: rgba($teal, $opacity_4); }
-  &.drop_zone_color_red { #{$property}: rgba($red, $opacity_4); }
-  &.drop_zone_color_yellow { #{$property}: rgba($yellow, $opacity_4); }
-  &.drop_zone_color_green { #{$property}: rgba($green, $opacity_4); }
-  &.drop_zone_color_orange { #{$property}: rgba($orange, $opacity_4); }
-}
-
 .pb_draggable_container {
   .pb_draggable_item {
     &:hover {
@@ -53,8 +17,10 @@
 
       // Outline variant
       &.drop_zone_outline {
-        // Don't hide the content, only make it transparent
-        // This allows the browser to create a proper drag image
+        // Create a container for the outline
+        position: relative;
+
+        // Make content invisible
         & > * {
           opacity: 0;
         }
@@ -63,14 +29,15 @@
         &::before {
           content: '';
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: 5%;
+          left: 5%;
+          width: 90%;
+          height: 90%;
           border: 2px dashed $neutral;
           border-radius: $border-radius-sm;
           box-sizing: border-box;
           z-index: 10;
+          pointer-events: none;
         }
 
         // Apply color variants to the ::before element
@@ -92,8 +59,10 @@
 
       // Shadow variant
       &.drop_zone_shadow {
-        // Don't hide the content, only make it transparent
-        // This allows the browser to create a proper drag image
+        // Create a container for the shadow
+        position: relative;
+
+        // Make content invisible
         & > * {
           opacity: 0;
         }
@@ -102,45 +71,41 @@
         &::before {
           content: '';
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: 5%;
+          left: 5%;
+          width: 90%;
+          height: 90%;
           background-color: rgba($neutral, $opacity_5);
           border-radius: $border-radius-sm;
           z-index: 10;
+          pointer-events: none;
         }
 
         // Apply rgba color variants to the ::before element
-        &.drop_zone_color_primary::before { background-color: rgba($primary, $opacity_4); }
-        &.drop_zone_color_secondary::before { background-color: rgba($secondary, $opacity_4); }
-        &.drop_zone_color_tertiary::before { background-color: rgba($tertiary, $opacity_4); }
-        &.drop_zone_color_success::before { background-color: rgba($success, $opacity_4); }
-        &.drop_zone_color_warning::before { background-color: rgba($warning, $opacity_4); }
-        &.drop_zone_color_error::before { background-color: rgba($error, $opacity_4); }
-        &.drop_zone_color_info::before { background-color: rgba($info, $opacity_4); }
-        &.drop_zone_color_royal::before { background-color: rgba($royal, $opacity_4); }
-        &.drop_zone_color_purple::before { background-color: rgba($purple, $opacity_4); }
-        &.drop_zone_color_teal::before { background-color: rgba($teal, $opacity_4); }
-        &.drop_zone_color_red::before { background-color: rgba($red, $opacity_4); }
-        &.drop_zone_color_yellow::before { background-color: rgba($yellow, $opacity_4); }
-        &.drop_zone_color_green::before { background-color: rgba($green, $opacity_4); }
-        &.drop_zone_color_orange::before { background-color: rgba($orange, $opacity_4); }
+        &.drop_zone_color_primary::before { background-color: rgba($primary, $opacity_5); }
+        &.drop_zone_color_secondary::before { background-color: rgba($secondary, $opacity_5); }
+        &.drop_zone_color_tertiary::before { background-color: rgba($tertiary, $opacity_5); }
+        &.drop_zone_color_success::before { background-color: rgba($success, $opacity_5); }
+        &.drop_zone_color_warning::before { background-color: rgba($warning, $opacity_5); }
+        &.drop_zone_color_error::before { background-color: rgba($error, $opacity_5); }
+        &.drop_zone_color_info::before { background-color: rgba($info, $opacity_5); }
+        &.drop_zone_color_royal::before { background-color: rgba($royal, $opacity_5); }
+        &.drop_zone_color_purple::before { background-color: rgba($purple, $opacity_5); }
+        &.drop_zone_color_teal::before { background-color: rgba($teal, $opacity_5); }
+        &.drop_zone_color_red::before { background-color: rgba($red, $opacity_5); }
+        &.drop_zone_color_yellow::before { background-color: rgba($yellow, $opacity_5); }
+        &.drop_zone_color_green::before { background-color: rgba($green, $opacity_5); }
+        &.drop_zone_color_orange::before { background-color: rgba($orange, $opacity_5); }
       }
 
-      // Line variant - vertical by default (for horizontal layouts)
+      // Line variant
       &.drop_zone_line {
-        // Keep original height but reduce width
-        width: 10% !important;
-        max-width: 10px !important;
-        position: relative;
-
-        // Hide all content
+        // Hide the original content to show the line
         & > * {
           opacity: 0;
         }
 
-        // Add vertical line that takes the full height
+        // Style for horizontal line (default)
         &::before {
           content: '';
           position: absolute;
@@ -150,9 +115,11 @@
           height: 100%;
           background-color: $neutral;
           border-radius: 1000px;
+          z-index: 10;
+          pointer-events: none;
         }
 
-        // Apply color variants to the ::before element
+        // Apply color variants
         &.drop_zone_color_primary::before { background-color: $primary; }
         &.drop_zone_color_secondary::before { background-color: $secondary; }
         &.drop_zone_color_tertiary::before { background-color: $tertiary; }
@@ -178,19 +145,12 @@
     &.is_dragging {
       // Line variant for vertical layouts (horizontal line)
       &.drop_zone_line {
-        // Keep original width but reduce height
-        width: 100% !important;
-        max-width: 200px !important;
-        height: 10% !important;
-        max-height: 10px !important;
-
-        // Add horizontal line that takes the full width
         &::before {
           width: 100%;
           height: 4px;
+          left: 0;
+          top: 0;
         }
-
-        // The color variants are already applied from above
       }
     }
   }

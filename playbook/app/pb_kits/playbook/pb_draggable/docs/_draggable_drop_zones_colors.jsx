@@ -31,7 +31,7 @@ const dataPurple = [
   },
 ];
 
-const DraggableDropZoneColors = (props) => {
+const DraggableDropZonesColors = (props) => {
   const [initialPrimaryState, setInitialPrimaryState] = useState(dataPrimary);
   const [initialPurpleState, setInitialPurpleState] = useState(dataPurple);
 
@@ -66,7 +66,7 @@ const DraggableDropZoneColors = (props) => {
       Purple
     </Caption>
     <DraggableProvider
-        dropZone="outline"
+        dropZone="line"
         dropZoneColor="purple"
         initialItems={dataPurple}
         onReorder={(items) => setInitialPurpleState(items)}
@@ -91,4 +91,4 @@ const DraggableDropZoneColors = (props) => {
   );
 };
 
-export default DraggableDropZoneColors;
+export default DraggableDropZonesColors;

@@ -40,7 +40,8 @@ const DraggableItem = (props: DraggableItemProps) => {
     handleDragEnter,
     handleDragEnd,
     dropZone = 'ghost',
-    dropZoneColor = 'neutral'
+    dropZoneColor = 'neutral',
+    direction = 'horizontal'
   } = DraggableContext();
 
   const itemRef = React.useRef<HTMLElement>(null);
@@ -59,13 +60,42 @@ const DraggableItem = (props: DraggableItemProps) => {
     className
   );
 
-  // Custom drag start handler
-  const onDragStart = (_: React.DragEvent) => {
+  // Enhanced drag start handler that preserves dimensions
+  const onDragStart = (e: React.DragEvent) => {
+    if (dropZone !== 'ghost' && itemRef.current) {
+      // Create a clone for the drag image
+      const clone = itemRef.current.cloneNode(true) as HTMLElement;
+
+      // Remove any classes that might affect appearance
+      clone.className = clone.className.replace(/drop_zone_[^ ]*/g, '');
+      clone.className = clone.className.replace(/is_dragging/g, '');
+
+      // Get the original dimensions
+      const rect = itemRef.current.getBoundingClientRect();
+
+      // Ensure it's styled properly but invisible on the page
+      clone.style.position = 'fixed';
+      clone.style.top = '-9999px';
+      clone.style.left = '-9999px';
+      clone.style.width = `${rect.width}px`;  // Preserve width
+      clone.style.height = `${rect.height}px`; // Preserve height
+      clone.style.opacity = '1';
+      clone.style.pointerEvents = 'none';
+
+      // Add to document temporarily
+      document.body.appendChild(clone);
+
+      // Set as drag image
+      e.dataTransfer.setDragImage(clone, e.clientX - rect.left, e.clientY - rect.top);
+
+      // Remove after a short delay
+      setTimeout(() => {
+        document.body.removeChild(clone);
+      }, 0);
+    }
+
     // Call the original handler
     handleDragStart(dragId, container);
-
-    // For dropZone="ghost", we don't need to do anything special
-    // For other variants, we'll let the CSS handle it
   };
 
   return (
