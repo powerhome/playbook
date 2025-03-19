@@ -178,82 +178,22 @@ export const map = <T, U>(
   return Object.keys(collection).map(key => fn(collection[key], key, collection))
 }
 
-export const debounce = <F extends (...args: any[]) => any>(
+export function debounce<F extends (...args: any[]) => any>(
   func: F,
-  wait = 0,
-  options: { leading?: boolean; maxWait?: number; trailing?: boolean } = {}
-): F & { cancel: () => void; flush: () => any } => {
-  let timerId: ReturnType<typeof setTimeout> | null = null
-  let lastArgs: any
-  let lastThis: any
-  let lastCallTime = 0
-  let lastInvokeTime = 0
-  let result: any
-
-  const leading = !!options.leading
-  const trailing = options.trailing === undefined ? true : !!options.trailing
-  const maxWait = options.maxWait
-
-  const invoke = (time: number) => {
-    result = func.apply(lastThis, lastArgs)
-    lastInvokeTime = time
-    lastArgs = lastThis = null
-    return result
-  }
-
-  const startTimer = (pendingFunc: () => void, delay: number) => setTimeout(pendingFunc, delay)
-
-  const remainingWait = (time: number) => {
-    const timeSinceLastCall = time - lastCallTime
-    const timeSinceLastInvoke = time - lastInvokeTime
-    const timeWaiting = wait - timeSinceLastCall
-    return maxWait !== undefined ? Math.min(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting
-  }
-
-  const shouldInvoke = (time: number) => {
-    const timeSinceLastCall = time - lastCallTime
-    const timeSinceLastInvoke = time - lastInvokeTime
-    return lastCallTime === 0 ||
-      timeSinceLastCall >= wait ||
-      timeSinceLastCall < 0 ||
-      (maxWait !== undefined && timeSinceLastInvoke >= maxWait)
-  }
-
-  const debounced = (...args: any[]) => {
-    const time = Date.now()
-    lastArgs = args
-    // 'this' is not lexically captured in arrow functions, so if needed, bind explicitly
-    lastThis = this
-    lastCallTime = time
-
-    if (shouldInvoke(time)) {
-      if (timerId === null) {
-        timerId = startTimer(() => {
-          timerId = null
-          invoke(Date.now())
-        }, remainingWait(time))
+  wait: number,
+  immediate?: boolean
+): (...args: Parameters<F>) => void {
+  let timeout: ReturnType<typeof setTimeout> | null;
+  return function(this: any, ...args: any[]) {
+    if (timeout) clearTimeout(timeout);
+    if (immediate && !timeout) {
+      func.apply(this, args);
+    }
+    timeout = setTimeout(() => {
+      timeout = null;
+      if (!immediate) {
+        func.apply(this, args);
       }
-    }
-    return result
-  }
-
-  debounced.cancel = () => {
-    if (timerId !== null) {
-      clearTimeout(timerId)
-    }
-    timerId = null
-    lastArgs = lastThis = null
-    lastCallTime = 0
-  }
-
-  debounced.flush = () => {
-    if (timerId !== null) {
-      clearTimeout(timerId)
-      timerId = null
-      return invoke(Date.now())
-    }
-    return result
-  }
-
-  return debounced as F & { cancel: () => void; flush: () => any }
+    }, wait);
+  };
 }

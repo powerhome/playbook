@@ -1,4 +1,4 @@
-import { isEmpty, get, isString, uniqueId, omitBy, noop, merge, filter, find, partial } from './object';
+import { isEmpty, get, isString, uniqueId, omitBy, noop, merge, filter, find, partial, map, cloneDeep, omit, debounce } from './object';
 
 describe('Lodash functions', () => {
   describe('isEmpty', () => {
@@ -232,6 +232,154 @@ describe('Lodash functions', () => {
       }
       const joinPartial = partial(join, 'a');
       expect(joinPartial('b', 'c')).toBe('a_b_c');
+    });
+  });
+
+  describe('map', () => {
+    test('maps over an array with a function iteratee', () => {
+      const arr = [1, 2, 3];
+      const result = map(arr, (num) => num * 2);
+      expect(result).toEqual([2, 4, 6]);
+    });
+
+    test('maps over an array with a string iteratee', () => {
+      const arr = [{ value: 1 }, { value: 2 }, { value: 3 }];
+      const result = map(arr, 'value');
+      expect(result).toEqual([1, 2, 3]);
+    });
+
+    test('maps over an object with a function iteratee', () => {
+      const obj = { a: 1, b: 2, c: 3 };
+      const result = map(obj, (val, key) => key + val);
+      expect(result.sort()).toEqual(['a1', 'b2', 'c3'].sort());
+    });
+
+    test('maps over an object with a string iteratee', () => {
+      const obj = {
+        one: { num: 1 },
+        two: { num: 2 },
+        three: { num: 3 },
+      };
+      const result = map(obj, 'num');
+      expect(result.sort()).toEqual([1, 2, 3].sort());
+    });
+
+    test('returns original values if no iteratee provided', () => {
+      const arr = [1, 2, 3];
+      const result = map(arr);
+      expect(result).toEqual([1, 2, 3]);
+    });
+  });
+
+  describe('cloneDeep', () => {
+    test('clones primitive values', () => {
+      expect(cloneDeep(42)).toBe(42);
+      expect(cloneDeep('test')).toBe('test');
+      expect(cloneDeep(null)).toBe(null);
+    });
+
+    test('clones arrays deeply', () => {
+      const arr = [1, [2, 3]];
+      const cloned = cloneDeep(arr);
+      expect(cloned).toEqual(arr);
+      cloned[1][0] = 99;
+      expect(arr[1][0]).toBe(2);
+    });
+
+    test('clones objects deeply', () => {
+      const obj = { a: { b: 2 } };
+      const cloned = cloneDeep(obj);
+      expect(cloned).toEqual(obj);
+      cloned.a.b = 99;
+      expect(obj.a.b).toBe(2);
+    });
+
+    test('clones Date objects', () => {
+      const date = new Date();
+      const cloned = cloneDeep(date);
+      expect(cloned).not.toBe(date);
+      expect(cloned.getTime()).toBe(date.getTime());
+    });
+
+    test('clones RegExp objects', () => {
+      const regex = /test/gi;
+      const cloned = cloneDeep(regex);
+      expect(cloned).not.toBe(regex);
+      expect(cloned.source).toBe(regex.source);
+      expect(cloned.flags).toBe(regex.flags);
+    });
+  });
+
+  describe('omit', () => {
+    test('omits specified keys from object', () => {
+      const obj = { a: 1, b: 2, c: 3 };
+      expect(omit(obj, 'a', 'c')).toEqual({ b: 2 });
+    });
+
+    test('supports array of keys to omit', () => {
+      const obj = { a: 1, b: 2, c: 3 };
+      expect(omit(obj, ['b'])).toEqual({ a: 1, c: 3 });
+    });
+
+    test('returns empty object for null or non-object input', () => {
+      expect(omit(null, 'a')).toEqual({});
+      expect(omit("string", 'a')).toEqual({});
+    });
+
+    test('returns original object if no keys match', () => {
+      const obj = { a: 1, b: 2 };
+      expect(omit(obj, 'c')).toEqual({ a: 1, b: 2 });
+    });
+  });
+
+  describe('debounce', () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    test('delays execution until wait time has passed', () => {
+      const func = jest.fn();
+      const debounced = debounce(func, 1000);
+      debounced();
+      expect(func).not.toHaveBeenCalled();
+      jest.advanceTimersByTime(500);
+      expect(func).not.toHaveBeenCalled();
+      jest.advanceTimersByTime(500);
+      expect(func).toHaveBeenCalledTimes(1);
+    });
+
+    test('calls function only once when called repeatedly', () => {
+      const func = jest.fn();
+      const debounced = debounce(func, 1000);
+      debounced();
+      debounced();
+      debounced();
+      jest.advanceTimersByTime(1000);
+      expect(func).toHaveBeenCalledTimes(1);
+    });
+
+    test('immediate option calls function on first call', () => {
+      const func = jest.fn();
+      const debounced = debounce(func, 1000, true);
+      debounced();
+      expect(func).toHaveBeenCalledTimes(1);
+      debounced();
+      debounced();
+      jest.advanceTimersByTime(1000);
+      expect(func).toHaveBeenCalledTimes(1);
+    });
+
+    test('subsequent call after wait period works with immediate option', () => {
+      const func = jest.fn();
+      const debounced = debounce(func, 1000, true);
+      debounced();
+      jest.advanceTimersByTime(1100);
+      debounced();
+      expect(func).toHaveBeenCalledTimes(2);
     });
   });
 });
