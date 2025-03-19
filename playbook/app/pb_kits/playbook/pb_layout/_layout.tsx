@@ -4,6 +4,9 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 
 import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 
+import Card from '../pb_card/_card'
+import SectionSeparator from '../pb_section_separator/_section_separator'
+
 type LayoutPropTypes = {
   aria?: {[key: string]: string},
   children?: React.ReactChild[] | React.ReactChild,
@@ -35,6 +38,16 @@ type LayoutItemProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
   size?: "sm" | "md" | "lg"
+} & GlobalProps
+
+type LayoutGameProps = {
+  children: React.ReactNode[] | React.ReactNode,
+  className?: string,
+} & GlobalProps
+
+type LayoutRoundProps = {
+  children: React.ReactNode[] | React.ReactNode,
+  className?: string,
 } & GlobalProps
 
 type LayoutHeaderProps = {
@@ -75,7 +88,7 @@ const Body = (props: LayoutBodyProps) => {
 }
 
 // Round component (based off Body)
-const Round = (props: LayoutBodyProps) => {
+const Round = (props: LayoutRoundProps) => {
   const { children, className } = props
   const dynamicInlineProps = globalInlineProps(props)
 
@@ -126,6 +139,68 @@ const Item = (props: LayoutItemProps) => {
         style={dynamicInlineProps}
     >
       {children}
+    </div>
+  )
+}
+
+// Game component (modeled after Item)
+const Game = (props: LayoutGameProps) => {
+  const { children, className } = props
+  const dynamicInlineProps = globalInlineProps(props)
+
+  const numberOfChildren = Array.isArray(children) ? children.length : 0
+
+  if (numberOfChildren === 2 && Array.isArray(children)) {
+    return (
+      <div
+          className={classnames('layout_game', globalProps(props), className)}
+          style={dynamicInlineProps}
+      >
+        <Card
+            padding="none"
+            shadow="deep"
+        >
+          <Card.Body padding="xs">
+            { children[0] }
+          </Card.Body>
+          <SectionSeparator />
+          <Card.Body padding="xs">
+            { children[1] }
+          </Card.Body>
+        </Card>
+      </div>
+    )
+  }
+
+  if (numberOfChildren >= 1) {
+    return (
+      <div
+          className={classnames('layout_game', globalProps(props), className)}
+          style={dynamicInlineProps}
+      >
+        {children}
+      </div>
+    )
+  }
+
+  // To be determined...
+  return (
+    <div
+        className={classnames('layout_game', globalProps(props), className)}
+        style={dynamicInlineProps}
+    >
+      <Card
+          padding="none"
+          shadow="deep"
+      >
+        <Card.Body padding="xs">
+          To be determined...
+        </Card.Body>
+        <SectionSeparator />
+        <Card.Body padding="xs">
+          To be determined...
+        </Card.Body>
+      </Card>
     </div>
   )
 }
@@ -248,5 +323,6 @@ Layout.Item = Item
 Layout.Header = Header
 Layout.Footer = Footer
 Layout.Round = Round
+Layout.Game = Game
 
 export default Layout

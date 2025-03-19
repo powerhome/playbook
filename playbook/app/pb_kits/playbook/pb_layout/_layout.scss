@@ -192,11 +192,11 @@ $bracket-line-width: 4px;
       width: $bracket-connector-width;
     }
 
-    .layout_round .layout_item {
+    .layout_round .layout_game {
       position: relative;
     }
 
-    .layout_round .layout_item:not(:only-child)::after {
+    .layout_round .layout_game:not(:only-child)::after {
       content: '';
       position: absolute;
       width: $bracket-line-width;
@@ -204,28 +204,28 @@ $bracket-line-width: 4px;
       background-color: $border_light;
     }
 
-    .layout_round.eight_games .layout_item:not(:only-child)::after {
+    .layout_round.eight_games .layout_game:not(:only-child)::after {
       height: 100%;
     }
 
-    .layout_round.eight_games ~ .layout_round.four_games .layout_item:not(:only-child)::after {
+    .layout_round.eight_games ~ .layout_round.four_games .layout_game:not(:only-child)::after {
       height: 200%;
     }
 
-    .layout_round.four_games ~ .layout_round.two_games .layout_item:not(:only-child)::after {
+    .layout_round.four_games ~ .layout_round.two_games .layout_game:not(:only-child)::after {
       height: 200%;
     }
 
-    .layout_round.eight_games ~ .layout_round.four_games ~ .layout_round.two_games .layout_item:not(:only-child)::after {
+    .layout_round.eight_games ~ .layout_round.four_games ~ .layout_round.two_games .layout_game:not(:only-child)::after {
       height: 400%;
     }
     
-    .layout_round .layout_item:nth-child(even)::after {
+    .layout_round .layout_game:nth-child(even)::after {
       right: -$bracket-connector-width;
       bottom: 50%;
     }
     
-    .layout_round .layout_item:nth-child(odd)::after {
+    .layout_round .layout_game:nth-child(odd)::after {
       right: -$bracket-connector-width;
       top: 50%;
     }
