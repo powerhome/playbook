@@ -9,6 +9,7 @@ examples:
   - multi_level_select_color: With Pills (Custom Color)
   - multi_level_select_reset: Reset Selection
   - multi_level_select_disabled: Disabled
+  - multi_level_select_error: Error
 
   react:
   - multi_level_select_default: Default
@@ -21,3 +22,4 @@ examples:
   - multi_level_select_with_children: Checkboxes With Children
   - multi_level_select_with_children_with_radios: Single Select With Children
   - multi_level_select_disabled: Disabled
+  - multi_level_select_error: Error

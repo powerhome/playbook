@@ -28,6 +28,8 @@ module Playbook
                       default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :error, type: Playbook::Props::String,
+                   default: ""
 
       def classname
         generate_classname("pb_multi_level_select")
@@ -37,6 +39,7 @@ module Playbook
         {
           data: data,
           disabled: disabled,
+          error: error,
           id: id,
           inputDisplay: input_display,
           name: name,

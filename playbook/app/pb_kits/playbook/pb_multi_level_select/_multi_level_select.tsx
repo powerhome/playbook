@@ -9,6 +9,7 @@ import {
 } from "../utilities/props";
 import Icon from "../pb_icon/_icon";
 import FormPill from "../pb_form_pill/_form_pill";
+import Body from "../pb_body/_body";
 import { cloneDeep } from "lodash";
 import MultiLevelSelectOptions from "./multi_level_select_options";
 import MultiLevelSelectContext from "./context";
@@ -35,6 +36,7 @@ type MultiLevelSelectProps = {
   className?: string
   data?: { [key: string]: string }
   disabled?: boolean
+  error?: string
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string
   inputDisplay?: "pills" | "none"
@@ -57,6 +59,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     className,
     data = {},
     disabled = false,
+    error,
     htmlOptions = {},
     id,
     inputDisplay = "pills",
@@ -79,6 +82,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_multi_level_select"),
+    error && "error",
     globalProps(props),
     className
   );
@@ -586,6 +590,13 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
         </div>
       </div>
       </MultiLevelSelectContext.Provider>
+      {error &&
+          <Body
+              dark={props.dark}
+              status="negative"
+              text={error}
+          />
+        }
     </div>
   );
 }) as MultiLevelSelectComponent;
