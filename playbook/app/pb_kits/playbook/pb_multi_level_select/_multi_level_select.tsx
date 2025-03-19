@@ -323,15 +323,6 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
 
   // Main function to handle any click inside dropdown
   const handledropdownItemClick = (e: any, check: boolean) => {
-    // Fires a custom event (`changemultilevelselect`) to notify that the value has changed,
-    // allowing the form to clear any associated error messages
-    document.dispatchEvent(
-      new CustomEvent("changemultilevelselect", {
-        bubbles: true,
-        detail: { value: e.target.parentNode.id },
-      })
-    )
-
     const clickedItem = e.target.parentNode.id;
     // Setting filterItem to "" will clear textinput and clear typeahead
     setFilterItem("");

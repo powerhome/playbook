@@ -13,6 +13,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
 
   connect() {
     this.addEventListeners();
+    this.observeHiddenInputs();
   }
 
   addEventListeners() {
@@ -20,10 +21,6 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
 
     inputElement.addEventListener("invalid", () => {
       this.handleErrorLabel(200);
-    });
-
-    document.addEventListener("changemultilevelselect", (e) => {
-      this.clearError(e);
     });
   }
 
@@ -34,19 +31,35 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
       if (errorLabelElement) {
         errorLabelElement.remove();
         this.element.querySelector(".wrapper").appendChild(errorLabelElement);
-        this.element.querySelector(".input_wrapper").classList.add("error");
+        this.element.classList.add("error");
       } else {
         this.handleErrorLabel(100);
       }
     }, delay);
   }
 
+  observeHiddenInputs() {
+    const container = this.element.querySelector(".input_inner_container");
+    if (!container) return;
+
+    this.mutationObserver = new MutationObserver(() => {
+      const hiddenInputs = container.querySelectorAll('input[type="hidden"]');
+      if (hiddenInputs.length > 0) {
+        // At least one hidden input exists, so clear the error
+        this.clearError();
+      }
+    });
+
+    this.mutationObserver.observe(container, {
+      childList: true,
+    });
+  }
   clearError(e) {
     const errorLabelElement = this.target;
 
     if (errorLabelElement) {
       errorLabelElement.remove();
-      this.element.querySelector(".input_wrapper").classList.remove("error");
+      this.element.classList.remove("error");
       this.element.querySelector("input").value = e.detail.value;
     }
   }

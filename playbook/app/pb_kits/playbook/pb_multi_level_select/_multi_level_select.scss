@@ -54,10 +54,6 @@
         }
       }
 
-      &.error {
-        border-color: $error_dark;
-      }
-
       &:has(input:disabled) {
         background-color: shade($white, 5%);
         box-shadow: none;
